@@ -62,7 +62,7 @@ def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
         'show_premoderation_warning': False
     }
     monkeypatch.setattr(
-        zeit.web.site.view.CommentForm, 'comment_area', comment)
+        zeit.web.core.view_comment.CommentForm, 'comment_area', comment)
     browser = testbrowser('/zeit-online/article/01/comment-form')
     assert len(browser.cssselect('#comment-form')) == 1
 
@@ -70,7 +70,7 @@ def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
 def test_comment_form_should_display_parent_hint(tplbrowser, dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view.CommentForm(article, dummy_request)
+    view = zeit.web.core.view_comment.CommentForm(article, dummy_request)
     view.comment_form = {'show_comment_form': True}
     dummy_request.user = {'ssoid': 123, 'uid': '123', 'name': 'Max'}
     dummy_request.GET['pid'] = '90'
@@ -299,7 +299,7 @@ def test_comment_area_note_should_be_displayed_if_set(
         'show_premoderation_warning': False
     }
     monkeypatch.setattr(
-        zeit.web.site.view.CommentForm, 'comment_form', form)
+        zeit.web.core.view_comment.CommentForm, 'comment_form', form)
     browser = testbrowser('/zeit-online/article/01/comment-form')
     assert browser.cssselect('.comment-section__note div')[0].text == (
         'No community login')

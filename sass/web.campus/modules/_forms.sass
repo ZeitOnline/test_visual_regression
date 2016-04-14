@@ -1,0 +1,44 @@
+// .button
+// 	+zon-button-light
+
+input,
+textarea,
+select
+	background-color: $color-input-bg
+	border: 1px solid $color-input-bg
+	color: $color-input
+	font-size: remify(15px)
+	letter-spacing: $letter-spacing-s
+	padding: remify(10px 20px)
+	&.error
+		background-color: $color-input-bg--error
+		border-color: $color-input-border--error
+		color: $color-input--error
+	&:focus
+		background-color: $color-input-bg--focus
+		border-color: $color-input-border--focus
+		color: $color-input--focus
+
+textarea
+	display: block
+	width: 100%
+	min-height: em(140px)
+	resize: vertical
+
++input-placeholder
+	color: $zco-charcoal
+	opacity: 1
+
+input[type="search"]
+	-webkit-appearance: none
+
+input.button
+	background-color: transparent
+	border: 3px solid $color-community-primary
+	color: $color-community-primary
+	font-weight: bold
+	&:hover,
+	&:focus
+		background-color: $color-community-primary
+		color: #fff
+		cursor: pointer

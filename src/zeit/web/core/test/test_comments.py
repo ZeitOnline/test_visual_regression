@@ -718,9 +718,6 @@ def test_article_view_should_have_short_caching_time_on_unloadable_thread(
         u'zu diesem Artikel konnten nicht geladen werden. Bitte '
         u'entschuldigen Sie diese Störung.')
 
-    browser = testbrowser('/artikel/01/comment-thread')
-    assert browser.headers.get('cache-control') == 'max-age=1'
-
 
 def test_community_maintenance_should_be_created_from_xml():
     xml = lxml.etree.fromstring(
@@ -924,33 +921,6 @@ def test_user_comment_thread_should_have_expected_structure(application):
     assert thread['sort'] == 'DESC'
     assert thread['rows'] == 6
     assert len(thread['comments']) == 6
-
-
-def test_comment_thread_should_utilize_feature_toggles(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find',
-                        {}.get)
-    browser = testbrowser('/zeit-online/article/01')
-    assert len(browser.cssselect(
-            'include[src="http://localhost/'
-            'zeit-online/article/01/comment-thread"]')) == 0
-    assert len(browser.cssselect('.comment-section__head')) == 1
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'comment_thread_via_esi': False}.get)
-    browser = testbrowser('/zeit-online/article/01')
-    assert len(browser.cssselect(
-            'include[src="http://localhost/'
-            'zeit-online/article/01/comment-thread"]')) == 0
-    assert len(browser.cssselect('.comment-section__head')) == 1
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'comment_thread_via_esi': True}.get)
-    browser = testbrowser('/zeit-online/article/01')
-    assert len(browser.cssselect(
-            'include[src="http://localhost/'
-            'zeit-online/article/01/comment-thread"]')) == 1
-    assert len(browser.cssselect('.comment-section__head')) == 0
 
 
 def test_request_thread_should_be_called_only_once_by_article_and_comment_esi(
