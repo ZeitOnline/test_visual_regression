@@ -134,6 +134,8 @@
         :param cleanup: clean svg from fill-attributes
         :param a11y: activate aria-label to read out svg/title/text()
     #}
+    {# workaround for wrong packages comment icons #}
+    {% set package = 'zeit.web.site' if 'zeit.web.core' == package else package %}
     {{ get_svg_from_file(name, className, package, cleanup, a11y) | safe }}
 {%- endmacro %}
 
