@@ -718,9 +718,6 @@ def test_article_view_should_have_short_caching_time_on_unloadable_thread(
         u'zu diesem Artikel konnten nicht geladen werden. Bitte '
         u'entschuldigen Sie diese Störung.')
 
-    browser = testbrowser('/artikel/01/comment-thread')
-    assert browser.headers.get('cache-control') == 'max-age=1'
-
 
 def test_community_maintenance_should_be_created_from_xml():
     xml = lxml.etree.fromstring(
