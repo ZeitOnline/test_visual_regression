@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy:css', 'svg' ],
             development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy:css', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
-            svg: [ 'clean:svg', 'svgmin', 'svgstore', 'grunticon', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
+            svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
             css: [ 'compass:dist', 'compass:amp' ],
             lint: [ 'jshint', 'jscs' ]
         }
@@ -289,61 +289,6 @@ module.exports = function(grunt) {
             }
         },
 
-        grunticon: {
-            options: {
-                loadersnippet: 'grunticon.loader.js',
-                defaultWidth: '100px',
-                defaultHeight: '100px'
-            },
-            magazin: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= svgmin.magazin.dest %>',
-                    src: [ '*.svg' ],
-                    dest: project.codeDir + 'css/icons'
-                }],
-                options: {
-                    datasvgcss: 'magazin.data.svg.css',
-                    datapngcss: 'magazin.data.png.css',
-                    urlpngcss: 'magazin.fallback.css',
-                    previewhtml: 'magazin.preview.html',
-                    pngfolder: 'magazin'
-                }
-            },
-            // this is only needed for the fallback PNGs for svg4everybody
-            // grunticon is not in use here
-            campus: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= svgmin.campus.dest %>',
-                    src: [ '*.svg' ],
-                    dest: project.codeDir + 'css/icons'
-                }],
-                options: {
-                    datasvgcss: 'campus.data.svg.css',
-                    datapngcss: 'campus.data.png.css',
-                    urlpngcss: 'campus.fallback.css',
-                    previewhtml: 'campus.preview.html',
-                    pngfolder: 'campus'
-                }
-            },
-            site: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= svgmin.site.dest %>',
-                    src: [ '*.svg' ],
-                    dest: project.codeDir + 'css/icons'
-                }],
-                options: {
-                    datasvgcss: 'site.data.svg.css',
-                    datapngcss: 'site.data.png.css',
-                    urlpngcss: 'site.fallback.css',
-                    previewhtml: 'site.preview.html',
-                    pngfolder: 'site'
-                }
-            }
-        },
-
         svgstore: {
             options: {
                 prefix: 'svg-', // This will prefix each ID
@@ -455,7 +400,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-grunticon');
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-modernizr-builder');
