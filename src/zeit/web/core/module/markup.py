@@ -19,3 +19,8 @@ class Markup(zeit.web.core.centerpage.Module, list):
     def text(self):
         if self.context.text is not None:
             return self.context.text.strip()
+
+    @zeit.web.reify
+    def alignment(self):
+        if self.context.alignment is not None:
+            return self.context.alignment
