@@ -13,7 +13,6 @@
                     {% endif %}
                 </span>
                 {% if view.comment_area.show_comment_form %}
-                    {# TODO: taugt js-scroll was in Campus? #}
                     <a href="#comment-form" class="comment-section__button js-scroll">
                         Mitdiskutieren
                         {{ lama.use_svg_icon('arrow-right', 'comment-section__icon', request) }}
@@ -32,7 +31,6 @@
         </div>
     </div>
 
-    {# TODO: Was ist das? #}
     {% if view.comment_area.message  %}
         <div class="comment-section__message">
             {{ view.comment_area.message }}
