@@ -8,7 +8,7 @@
 			<a itemprop="url" href="{{ request.route_url('home') }}index" title="Nachrichten auf ZEIT ONLINE" data-id="topnav.2.1..logo">
 				<meta itemprop="name" content="ZEIT ONLINE">
 				<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-					{{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.request, inline=view.inline_svg_icons) }}
+					{{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.package) }}
 					<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
 					<meta itemprop="width" content="565">
 					<meta itemprop="height" content="60">
@@ -18,8 +18,8 @@
 		{% endwith %}
 		<div class="logo_bar__menu">
 			<a href="#primary_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="navigation" aria-expanded="false">
-				{{ lama.use_svg_icon('menu', 'logo_bar__menu-icon logo_bar__menu-icon--burger', view.request, inline=view.inline_svg_icons) }}
-				{{ lama.use_svg_icon('close', 'logo_bar__menu-icon logo_bar__menu-icon--close', view.request, inline=view.inline_svg_icons) }}
+				{{ lama.use_svg_icon('menu', 'logo_bar__menu-icon logo_bar__menu-icon--burger', view.package) }}
+				{{ lama.use_svg_icon('close', 'logo_bar__menu-icon logo_bar__menu-icon--close', view.package) }}
 			</a>
 		</div>
 	</div>

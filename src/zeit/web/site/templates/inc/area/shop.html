@@ -8,7 +8,7 @@
 		<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1"
 		   class="section-heading__title section-heading__title--zeitshop"
 		   data-id="{{ tracking_slug }}.logo">
-		{{ lama.use_svg_icon('logo-zeitshop', 'section-heading__logo--zeitshop', request) }}
+		{{ lama.use_svg_icon('logo-zeitshop', 'section-heading__logo--zeitshop', view.package) }}
 		</a>
 		<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=zumShop&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.link.zeitshop.1"
 		   class="section-heading__link section-heading__link--unpadded section-heading__link--zeitshop"
@@ -30,7 +30,7 @@
 		{% if area.next_page %}
 			<span class="button {{ module_layout }}-group__button {{ module_layout }}-group__button--jsdesktop js-bar-teaser-paginate"
 			      data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
-				{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), request) }}
+				{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), view.package) }}
 				Weitere laden
 			</span>
 		{% endif %}

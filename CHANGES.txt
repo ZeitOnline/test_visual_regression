@@ -14,7 +14,23 @@ Change log for zeit.web
 
 - ZON-2980: Configure rawr return url parameter to work with our SSO
 
+- ZON-2906: Add module headerimage to ZEIT Campus
+
+- ZON-2990: Add image copyrights to ZEIT Campus
+
+- ZON-2522: Introduce comments to ZEIT Campus
+
+- ZON-2961: SVG – back to the roots (render SVGs inline)
+
 - FIX: Support non-ascii uniqueIds (and other bugsnag)
+
+- BUG-396: Enable nextread link and image copyrights
+
+- BUG-377 part 2: Set default sort order to "recent"
+
+- BUG-390: Replace Adtile 1 with amp-ad code
+
+- MAINT: Fix ZEIT Campus column article header image
 
 
 2.71.3 (2016-04-13)

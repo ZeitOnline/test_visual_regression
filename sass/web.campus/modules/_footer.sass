@@ -1,7 +1,6 @@
 $footer-logo-width: 113px
 
 .footer
-	+padded
 	background-color: $primary-color
 	color: #777
 	padding-top: remify(20px)
@@ -15,6 +14,7 @@ $footer-logo-width: 113px
 			color: $nav-color-tools
 
 	&__item
+		margin: 0 $page-padding--small
 		+respond-min($break-desktop-min)
 			margin: 0 auto
 			max-width: $medium-content-width

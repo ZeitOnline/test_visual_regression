@@ -9,10 +9,10 @@ module.exports = function(grunt) {
         codeDir: __dirname + '/src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy', 'svg' ],
+            production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy:css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy:css', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
-            svg: [ 'clean:svg', 'svgmin', 'svgstore', 'grunticon' ],
+            svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
             css: [ 'compass:dist', 'compass:amp' ],
             lint: [ 'jshint', 'jscs' ]
         }
@@ -131,6 +131,24 @@ module.exports = function(grunt) {
                 cwd: project.sourceDir + 'sass',
                 src: 'vendor/*.css',
                 dest: project.codeDir + 'css/'
+            },
+            svg_campus: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.campus/svg/_minified',
+                src: [ '*.svg' ],
+                dest: project.codeDir + 'css/svg/web.campus/'
+            },
+            svg_magazin: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.magazin/svg/_minified',
+                src: [ '*.svg' ],
+                dest: project.codeDir + 'css/svg/web.magazin/'
+            },
+            svg_site: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.site/svg/_minified',
+                src: [ '*.svg' ],
+                dest: project.codeDir + 'css/svg/web.site/'
             }
         },
 
@@ -245,12 +263,6 @@ module.exports = function(grunt) {
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.campus/svg/_minified'
             },
-            campus_framebuilder: {
-                expand: true,
-                cwd: project.sourceDir + 'sass/web.campus/svg-framebuilder',
-                src: [ '*.svg' ],
-                dest: project.sourceDir + 'sass/web.campus/svg-framebuilder/_minified'
-            },
             magazin: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.magazin/svg',
@@ -274,67 +286,6 @@ module.exports = function(grunt) {
                 cwd: project.sourceDir + 'sass/web.site/svg-amp',
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.site/svg-amp/_minified'
-            },
-            framebuilder: {
-                expand: true,
-                cwd: project.sourceDir + 'sass/web.site/svg-framebuilder',
-                src: [ '*.svg' ],
-                dest: project.sourceDir + 'sass/web.site/svg-framebuilder/_minified'
-            }
-        },
-
-        grunticon: {
-            options: {
-                loadersnippet: 'grunticon.loader.js',
-                defaultWidth: '100px',
-                defaultHeight: '100px'
-            },
-            magazin: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= svgmin.magazin.dest %>',
-                    src: [ '*.svg' ],
-                    dest: project.codeDir + 'css/icons'
-                }],
-                options: {
-                    datasvgcss: 'magazin.data.svg.css',
-                    datapngcss: 'magazin.data.png.css',
-                    urlpngcss: 'magazin.fallback.css',
-                    previewhtml: 'magazin.preview.html',
-                    pngfolder: 'magazin'
-                }
-            },
-            // this is only needed for the fallback PNGs for svg4everybody
-            // grunticon is not in use here
-            campus: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= svgmin.campus.dest %>',
-                    src: [ '*.svg' ],
-                    dest: project.codeDir + 'css/icons'
-                }],
-                options: {
-                    datasvgcss: 'campus.data.svg.css',
-                    datapngcss: 'campus.data.png.css',
-                    urlpngcss: 'campus.fallback.css',
-                    previewhtml: 'campus.preview.html',
-                    pngfolder: 'campus'
-                }
-            },
-            site: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= svgmin.site.dest %>',
-                    src: [ '*.svg' ],
-                    dest: project.codeDir + 'css/icons'
-                }],
-                options: {
-                    datasvgcss: 'site.data.svg.css',
-                    datapngcss: 'site.data.png.css',
-                    urlpngcss: 'site.fallback.css',
-                    previewhtml: 'site.preview.html',
-                    pngfolder: 'site'
-                }
             }
         },
 
@@ -360,26 +311,6 @@ module.exports = function(grunt) {
             siteAmp: {
                 src: '<%= svgmin.siteAmp.dest %>/*.svg',
                 dest: project.codeDir + 'css/web.site/amp.svg'
-            },
-            campus: {
-                src: '<%= svgmin.campus.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.campus/icons.svg'
-            },
-            campus_framebuilder: {
-                src: '<%= svgmin.campus_framebuilder.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.campus/framebuilder.svg'
-            },
-            site: {
-                src: '<%= svgmin.site.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.site/icons.svg'
-            },
-            framebuilder: {
-                src: '<%= svgmin.framebuilder.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.site/framebuilder.svg'
-            },
-            magazin: {
-                src: '<%= svgmin.magazin.dest %>/*.svg',
-                dest: project.codeDir + 'css/web.magazin/icons.svg'
             }
         },
 
@@ -469,7 +400,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-grunticon');
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-modernizr-builder');
