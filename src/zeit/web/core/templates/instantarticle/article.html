@@ -77,7 +77,7 @@
             {%- for block in page -%}
                 {% include "zeit.web.core:templates/instantarticle/blocks/{}.html".format(block | block_type) ignore missing %}
                 {# ad after first paragraph #}
-                {% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False and block_length < 0 %}
+                {% if block | block_type == 'paragraph' and ad_displayed == False and block_length < 0 %}
                     {% set ad_displayed = True %}
                     {% include "zeit.web.core:templates/instantarticle/ads/tile_4.html" ignore missing %}
                 {% elif block | block_type == 'paragraph' %}
