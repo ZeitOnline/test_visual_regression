@@ -83,7 +83,7 @@ class RSSLink(object):
     @zeit.web.reify
     def is_ad(self):
         nsmap = dict(
-            dc="http://dublincore.org/documents/dcmi-namespace/")
+            dc="http://purl.org/dc/elements/1.1/")
         dc_type = self.xml.find('dc:type', namespaces=nsmap)
 
         if dc_type is not None and getattr(dc_type, 'text') == 'native-ad':
