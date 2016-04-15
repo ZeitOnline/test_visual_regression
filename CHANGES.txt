@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - BUG-396: Enable nextread link and image copyrights
 
+- BUG-377 part 2: Set default sort order to "recent"
+
 - MAINT: Fix ZEIT Campus column article header image
 
 
