@@ -24,3 +24,17 @@ def test_article_tags_template_renders_rel_attribute(
     tags = browser.cssselect('a.article-tags__link')
     for tag in tags:
         assert tag.get('rel') == 'tag'
+
+
+def test_instantarticle_shows_ad_after_100_words(testbrowser):
+    word_count = 0
+    bro = testbrowser('/instantarticle/zeit-online/article/simple-multipage')
+    blocks = bro.xpath('body/article/*')
+    blocks = blocks[1:]
+    for block in blocks:
+        if block.tag == 'p':
+            words = len(block.text_content().strip().split())
+            word_count = word_count + words
+        if block.tag == 'figure':
+            break
+    assert word_count > 100
