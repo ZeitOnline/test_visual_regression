@@ -147,13 +147,13 @@ def test_article03_has_correct_webtrekk_values(testbrowser):
             'artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=article'
             '&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-trinken&amp;cg6'
             '=weinkolumne&amp;cg7=03&amp;cg8=zeitmz/essenundtrinken/article'
-            '&amp;cg9=2013-07-30&amp;cp1=anne mustermann&amp;cp2=lebensart/'
+            '&amp;cg9=2013-07-30&amp;cp1=anne%20mustermann&amp;cp2=lebensart/'
             'essen-trinken/bild-text&amp;cp3=1/7&amp;cp4=wein;italien;'
-            'toskana;bologna;bozen;florenz;tübingen&amp;cp5=2013-07-30 '
-            '17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8=zede'
-            '&amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;'
-            'cp11=&amp;cp12=desktop'
-            '.site') in browser.contents
+            'toskana;bologna;bozen;florenz;tübingen&amp;cp5=2013-07-30%20'
+            '17%3A20%3A50.176115%2B02%3A00&amp;cp6=4952&amp;cp7=&amp;cp8=zede'
+            '&amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;cp11=&amp;'
+            'cp12=desktop.site&amp;cp13=stationaer&amp;cp15=&amp;'
+            'cp25=original') in browser.contents
 
 
 def test_article03_page2_has_correct_webtrekk_values(testbrowser):
@@ -171,13 +171,13 @@ def test_article03_page2_has_correct_webtrekk_values(testbrowser):
             'zede%7Clocalhost/artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
             '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-'
             'trinken&amp;cg6=weinkolumne&amp;cg7=seite-2&amp;cg8=zeitmz/'
-            'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne '
-            'mustermann&amp;cp2=lebensart/essen-trinken/bild-text&amp;'
-            'cp3=2/7&amp;cp4=wein;italien;toskana;bologna;bozen;florenz;'
-            'tübingen&amp;cp5=2013-07-30 17:20:50.176115+02:00&amp;cp6=4952'
+            'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne%20'
+            'mustermann&amp;cp2=lebensart/essen-trinken/bild-text&amp;cp3=2/7'
+            '&amp;cp4=wein;italien;toskana;bologna;bozen;florenz;tübingen'
+            '&amp;cp5=2013-07-30%2017%3A20%3A50.176115%2B02%3A00&amp;cp6=4952'
             '&amp;cp7=&amp;cp8=zede&amp;cp9=zeitmz/essenundtrinken/article'
-            '&amp;cp10=&amp;cp11=&amp;cp12=desktop'
-            '.site') in browser.contents
+            '&amp;cp10=&amp;cp11=&amp;cp12=desktop.site&amp;cp13=stationaer'
+            '&amp;cp15=&amp;cp25=original') in browser.contents
 
 
 def test_cp_has_correct_webtrekk_values(testbrowser):
@@ -191,8 +191,8 @@ def test_cp_has_correct_webtrekk_values(testbrowser):
     assert '7: "test-cp-zmo",' in browser.contents
     assert '8: "zeitmz/centerpage",' in browser.contents
     assert '9: ""' in browser.contents
-    assert ('wt.pl?p=328,redaktion.lebensart...'
-            'centerpage.zede|localhost/zeit-magazin/test-cp-legacy/test-cp-zmo'
+    assert ('wt.pl?p=328,redaktion.lebensart...centerpage.zede%7C'
+            'localhost/zeit-magazin/test-cp-legacy/test-cp-zmo'
             ',0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;'
             'cg3=lebensart&amp;cg4=zede&amp;cg5=&amp;cg6=&amp;'
             'cg7=test-cp-zmo&amp;cg8=zeitmz/centerpage&amp;'
