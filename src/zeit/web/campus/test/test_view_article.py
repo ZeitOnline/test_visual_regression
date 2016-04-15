@@ -191,3 +191,8 @@ def test_advertorial_marker_is_present(testbrowser):
     assert len(browser.cssselect('.advertorial-marker')) == 1
     assert len(browser.cssselect('.advertorial-marker__title')) == 1
     assert len(browser.cssselect('.advertorial-marker__text')) == 1
+
+
+def test_campus_article_does_not_have_contentad(testbrowser):
+    select = testbrowser('/campus/article/stoa').cssselect
+    assert not select('#iq-artikelanker')
