@@ -1,0 +1,34 @@
+.header-advertorial
+	&__heading
+		+transform(translateY(-50%))
+		position: absolute
+		text-align: center
+		top: 50%
+		width: 100%
+
+	&__kicker
+		color: $color-text--on-dark
+		font-size: em(10px)
+		text-transform: uppercase
+		font-weight: bold
+		letter-spacing: 0.175em
+		display: block
+
+	&__title
+		+font-smoothing
+		@extend %font-beckett
+		font-size: em(19px)
+		color: $white
+		letter-spacing: $letter-spacing-m
+		text-transform: uppercase
+		line-height: 1.2em
+
+	+respond-min($break-tablet-min)
+		&__kicker
+			font-size: em(14px)
+		&__title
+			font-size: em(33px)
+
+.header-image
+	&__media-container
+		+teaser-image-dark-overlay($color: rgba(0, 0, 0, 0.5))
