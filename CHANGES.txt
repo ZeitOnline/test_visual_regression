@@ -32,6 +32,8 @@ Change log for zeit.web
 
 - MAINT: Fix ZEIT Campus column article header image
 
+- ZON-2988: Change STOA from automatic placement to normal article module
+
 
 2.71.3 (2016-04-13)
 -------------------

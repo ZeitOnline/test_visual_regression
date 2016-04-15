@@ -1,0 +1,15 @@
+{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+
+<aside id="stoa-artikelanker" data-meetrics="stoa" data-clicktracking="stoa">
+    <a class="stoa" href="{{ stoa.href }}">
+        <span class="stoa__title">
+            {{ block.text }}
+        </span>
+        <span class="stoa__link">
+            <span class="stoa__button">
+                {{ block.button_text }}
+                {{ lama.use_svg_icon('arrow-right', 'stoa__icon', view.package) }}
+            </span>
+        </span>
+    </a>
+</aside>
