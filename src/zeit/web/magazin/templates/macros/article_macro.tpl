@@ -187,7 +187,7 @@
         {% endif %}" data-video="{{ obj.id }}">
             <div class="video__still">
                 <img class="figure__media" src="{{ obj.video_still| default('http://placehold.it/160x90', true) }}" alt="Video: {{ obj.title }}" title="Video: {{ obj.title }}">
-                <span class="video__button">{{ lama.use_svg_icon('playbutton', 'video__play-icon', request) }}</span>
+                <span class="video__button">{{ lama.use_svg_icon('playbutton', 'video__play-icon', view.package) }}</span>
             </div>
             <figcaption class="figure__caption">
                     {{ obj.description }}
@@ -248,9 +248,9 @@
         <ul class="article-pagination__pager">
             <li class="article-pagination__item">
                 {%- if pagination.prev_page_url -%}
-                    <a class="article-pagination__link" href="{{ pagination.prev_page_url }}">{{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon article-pagination__icon--active', request) }}</a>
+                    <a class="article-pagination__link" href="{{ pagination.prev_page_url }}">{{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon article-pagination__icon--active', view.package) }}</a>
                 {%- else -%}
-                    {{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon', request) }}
+                    {{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon', view.package) }}
                 {%- endif -%}
             </li>
 
@@ -261,9 +261,9 @@
 
             <li class="article-pagination__item">
                 {%- if pagination.next_page_url -%}
-                    <a class="article-pagination__link" href="{{ pagination.next_page_url }}">{{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--active', request) }}</a>
+                    <a class="article-pagination__link" href="{{ pagination.next_page_url }}">{{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--active', view.package) }}</a>
                 {%- else -%}
-                    {{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--next', request) }}
+                    {{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--next', view.package) }}
                 {%- endif -%}
             </li>
         </ul>

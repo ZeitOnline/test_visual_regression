@@ -5,8 +5,8 @@
 
 {% block toc_svg_icon %}
 <span class="article-toc__toggle">
-    {{ lama.use_svg_icon('circle_plus', 'article-toc__toggle-icon article-toc__toggle-icon--plus', request) }}
-    {{ lama.use_svg_icon('circle_minus', 'article-toc__toggle-icon article-toc__toggle-icon--minus', request) }}
+    {{ lama.use_svg_icon('circle_plus', 'article-toc__toggle-icon article-toc__toggle-icon--plus', view.package) }}
+    {{ lama.use_svg_icon('circle_minus', 'article-toc__toggle-icon article-toc__toggle-icon--minus', view.package) }}
 </span>
 {% endblock %}
 

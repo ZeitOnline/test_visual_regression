@@ -117,7 +117,7 @@ def test_comment_sorting_should_work(testbrowser):
     comments = comments_body.cssselect('.comment')
     link = browser.cssselect('.comment-preferences__item')
     assert comments[0].get('id') == 'cid-3'
-    assert link[0].text_content().strip() == u'Älteste zuerst'
+    assert link[0].text_content().strip().split('\t')[-1] == u'Älteste zuerst'
     assert '/zeit-online/article/01#comments' in link[0].get('href')
 
 

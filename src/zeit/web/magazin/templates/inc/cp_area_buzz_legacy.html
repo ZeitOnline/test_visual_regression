@@ -17,7 +17,7 @@ Available attributes:
     {% for service, articles in view.area_buzz %}
     <div class="cp_buzz__service">
         <div class="cp_buzz__header">
-            {{ lama.use_svg_icon('buzz-%s' | format(service), 'cp_buzz__icon', request) }}
+            {{ lama.use_svg_icon('buzz-%s' | format(service), 'cp_buzz__icon', view.package) }}
             {{ captions[service][0] }}
         </div>
         <div class="cp_buzz__service__list">

@@ -34,16 +34,6 @@
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-    <script src="{{ request.asset_host }}/js/vendor/svg4everybody.legacy.js"></script>
-    <script>
-        {# needed for styling SVG in IE8 #}
-        document.createElement( 'svg' );
-        svg4everybody({
-            fallback: function ( src, svg, use ) {
-                return src.replace( /web\.site\/icons\.svg(\?.+)?#svg-(.+)/ , 'icons/site/$2.png$1');
-            }
-        });
-    </script>
     <noscript>
         <link href="{{ request.asset_host }}/css/icons/site.fallback.css" rel="stylesheet">
     </noscript>

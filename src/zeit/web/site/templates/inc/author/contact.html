@@ -7,7 +7,7 @@
     {% if context.twitter %}
     <div class="author-contact__item">
         <a href="https://twitter.com/{{ context.twitter | replace('@', '') }}" class="author-contact__link">
-            {{ lama.use_svg_icon('author-twitter', 'author-contact__icon' | with_mods('twitter'), view.request) }}
+            {{ lama.use_svg_icon('author-twitter', 'author-contact__icon' | with_mods('twitter'), view.package) }}
             <span class="author-contact__text">{{ context.twitter }}</span>
         </a>
     </div>
@@ -16,7 +16,7 @@
     {% if context.facebook %}
     <div class="author-contact__item">
         <a href="https://www.facebook.com/{{ context.facebook }}" class="author-contact__link">
-            {{ lama.use_svg_icon('author-facebook', 'author-contact__icon' | with_mods('facebook'), view.request) }}
+            {{ lama.use_svg_icon('author-facebook', 'author-contact__icon' | with_mods('facebook'), view.package) }}
             <span class="author-contact__text">{{ context.facebook }}</span>
         </a>
     </div>
@@ -25,7 +25,7 @@
     {% if context.instagram %}
     <div class="author-contact__item">
         <a href="https://www.instagram.com/{{ context.instagram }}" class="author-contact__link">
-            {{ lama.use_svg_icon('author-instagram', 'author-contact__icon' | with_mods('instagram'), view.request) }}
+            {{ lama.use_svg_icon('author-instagram', 'author-contact__icon' | with_mods('instagram'), view.package) }}
             <span class="author-contact__text">{{ context.instagram }}</span>
         </a>
     </div>
@@ -34,7 +34,7 @@
     {#% if context.email %}
     <div class="author-contact__item">
         <a href="mailto:{{ context.email }}" class="author-contact__link">
-            {{ lama.use_svg_icon('author-email', 'author-contact__icon' | with_mods('email'), view.request) }}
+            {{ lama.use_svg_icon('author-email', 'author-contact__icon' | with_mods('email'), view.package) }}
             <span class="author-contact__text">{{ context.email }}</span>
         </a>
     </div>

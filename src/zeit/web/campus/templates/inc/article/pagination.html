@@ -13,5 +13,5 @@
 {% block pager_complete_view %}{% endblock %}
 
 {% block pagination_icon %}
-    {{ lama.use_svg_icon('arrow-right', 'article-pagination__icon', request) }}
+    {{ lama.use_svg_icon('arrow-right', 'article-pagination__icon', view.package) }}
 {% endblock %}

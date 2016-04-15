@@ -59,26 +59,6 @@
 
         {# Modernizr -#}
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-        {# SVG for Everybody -#}
-        <script src="{{ request.asset_host }}/js/vendor/svg4everybody.legacy.js"></script>
-        <script>
-            {# needed for styling SVG in IE8 #}
-            document.createElement( 'svg' );
-            svg4everybody({
-                fallback: function ( src, svg, use ) {
-                    return src.replace( /web\.magazin\/icons\.svg(\?.+)?#svg-(.+)/ , 'icons/magazin/$2.png$1');
-                }
-            });
-        </script>
-
-        <script>
-            /* grunticon Stylesheet Loader | https://github.com/filamentgroup/grunticon | (c) 2012 Scott Jehl, Filament Group, Inc. | MIT license. */
-            window.grunticon=function(e){if(e&&3===e.length){var t=window,n=!(!t.document.createElementNS||!t.document.createElementNS("http://www.w3.org/2000/svg","svg").createSVGRect||!document.implementation.hasFeature("http://www.w3.org/TR/SVG11/feature#Image","1.1")||window.opera&&-1===navigator.userAgent.indexOf("Chrome")),o=function(o){var r=t.document.createElement("link"),a=t.document.getElementsByTagName("script")[0];r.rel="stylesheet",r.href=e[o&&n?0:o?1:2],a.parentNode.insertBefore(r,a)},r=new t.Image;r.onerror=function(){o(!1)},r.onload=function(){o(1===r.width&&1===r.height)},r.src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="}};
-            grunticon( [ "{{ request.asset_host }}/css/icons/magazin.data.svg.css", "{{ request.asset_host }}/css/icons/magazin.data.png.css", "{{ request.asset_host }}/css/icons/magazin.fallback.css" ] );
-        </script>
-        <noscript>
-            <link href="{{ request.asset_host }}/css/icons/magazin.fallback.css" rel="stylesheet">
-        </noscript>
 
         {% if toggles('third_party_modules', 'tracking') %}
             <script src="https://script.ioam.de/iam.js"></script>
@@ -151,7 +131,7 @@
                         <div class="main-footer__box">
                             <div class="is-constrained is-centered">
                                 {% block footer_logo %}
-                                    {{ lama.use_svg_icon('logo-zmo-small', 'main-footer__logo', request) }}
+                                    {{ lama.use_svg_icon('logo-zmo-small', 'main-footer__logo', view.package) }}
                                 {% endblock footer_logo %}
                                 <div class="main-footer__links">
                                     <ul>
@@ -199,7 +179,7 @@
         </script>
         <script type="text/javascript" src="{{ request.asset_host }}/js/magazin.js"></script>
         <script type="text/javascript">
-            if( typeof window.sasmobile === 'function' && window.Zeit.isMobileView() ) {
+            if( typeof window.sasmobile === 'function' && window.Zeit.isMobileView() && typeof( iqd ) !== 'undefined' ) {
                 iqd.callAds();
             }
         </script>

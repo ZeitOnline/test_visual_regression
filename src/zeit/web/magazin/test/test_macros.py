@@ -323,7 +323,7 @@ def test_macro_video_should_produce_markup(jinja2_env):
            ' title="Video: title">')
 
     cap = '<figcaption class="figure__caption">test</figcaption>'
-    module = tpl.make_module({'request': mock.Mock()})
+    module = tpl.make_module({'view': mock.Mock()})
     lines = module.video(obj).splitlines()
     output = ''
     for line in lines:
@@ -497,73 +497,6 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
     assert '<a href="http://www.test.de">' in output
 
 
-def test_macro_head_user_is_logged_in_true_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-
-    request = mock.Mock()
-    request.session.user.picture = None
-
-    # no pic: fallback svg is shown
-    lines = tpl.module.head_user_is_logged_in_true(request)
-    doc = lxml.html.fromstring(lines)
-    assert 'main-nav__avatar' in doc.cssselect('svg')[0].attrib['class']
-
-    # pic
-    request = mock.Mock()
-    request.registry.settings.community_host = 'www.zeit.de'
-    request.registry.settings.sso_activate = False
-    request.session.user.picture = (
-        'http://www.zeit.de/community-static/test.jpg')
-    request.session.user.uid = 1
-    request.url = 'test'
-
-    lines = tpl.module.head_user_is_logged_in_true(request)
-    doc = lxml.html.fromstring(lines).cssselect
-
-    assert doc('span .main-nav__avatar')[0].attrib['style'] == (
-        'background-image: url(http://www.zeit.de/community-static/test.jpg)')
-    assert doc('a')[0].attrib['href'] == 'www.zeit.de/user/1'
-    assert doc('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
-    assert doc('a')[1].attrib['href'] == 'www.zeit.de/logout?destination=test'
-    assert doc('a')[1].attrib['id'] == 'hp.zm.topnav.community.logout'
-
-    request = mock.Mock()
-    request.registry.settings.sso_url = 'sso.zeit.de'
-    request.registry.settings.community_host = 'www.zeit.de'
-    request.registry.settings.sso_activate = True
-    request.session.user.uid = 1
-    request.url = 'test_sso'
-
-    lines = tpl.module.head_user_is_logged_in_true(request)
-    doc = lxml.html.fromstring(lines).cssselect
-
-    assert doc('a')[0].attrib['href'] == 'www.zeit.de/user/1'
-    assert doc('a')[1].attrib['href'] == 'sso.zeit.de/abmelden?url=test_sso'
-
-
-def test_macro_head_user_is_logged_in_false_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-
-    request = mock.Mock()
-    request.registry.settings.community_host = 'www.zeit.de'
-    request.registry.settings.sso_url = 'sso.zeit.de'
-    request.url = 'test'
-    request.registry.settings.sso_activate = False
-
-    html = tpl.module.head_user_is_logged_in_false(request)
-    doc = lxml.html.fromstring(html)
-    elem_a = doc.cssselect('a')[0]
-    assert elem_a.attrib['href'] == "www.zeit.de/user/login?destination=test"
-
-    request.registry.settings.sso_activate = True
-    html = tpl.module.head_user_is_logged_in_false(request)
-    doc = lxml.html.fromstring(html)
-    elem_a = doc.cssselect('a')[0]
-    assert elem_a.attrib['href'] == "sso.zeit.de/anmelden?url=test"
-
-
 def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
@@ -613,7 +546,7 @@ def test_macro_copyrights(jinja2_env):
             link=None
         )
     ]
-    module = tpl.make_module({'request': mock.Mock()})
+    module = tpl.make_module({'view': mock.Mock()})
     snippet = lxml.html.fromstring(module.copyrights(copyrights))
 
     assert len(snippet.cssselect('li.copyrights__entry')) == 2, (

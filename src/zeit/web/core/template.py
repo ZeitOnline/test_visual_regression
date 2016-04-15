@@ -4,6 +4,7 @@ import datetime
 import itertools
 import logging
 import mimetypes
+import pkg_resources
 import random
 import re
 import time
@@ -12,6 +13,7 @@ import urllib
 import urlparse
 
 import babel.dates
+import lxml.etree
 import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component
@@ -30,6 +32,8 @@ import zeit.web.core.interfaces
 import zeit.web.core.utils
 
 log = logging.getLogger(__name__)
+
+SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 
 
 @zeit.web.register_global
@@ -918,3 +922,39 @@ def adapt(obj, iface, name=u'', multi=False):
         return zope.component.queryMultiAdapter(obj, iface, name)
     else:
         return zope.component.queryAdapter(obj, iface, name)
+
+
+@SHORT_TERM_CACHE.cache_on_arguments()
+def get_svg_from_file_cached(name, className, package, cleanup, a11y):
+    try:
+        subpath = '.'.join(package.split('.')[1:3])
+    except (AttributeError, TypeError):
+        log.debug('Icon: {} has false package'.format(name))
+        return ''
+    url = pkg_resources.resource_filename(
+        'zeit.web.static', 'css/svg/{}/{}.svg'.format(subpath, name))
+    try:
+        xml = lxml.etree.parse(url)
+    except (IOError, lxml.etree.XMLSyntaxError):
+        return ''
+    try:
+        title = xml.find('{http://www.w3.org/2000/svg}title').text
+    except AttributeError:
+        title = 'Icon'
+    svg = xml.getroot()
+    svg.set('class', 'svg-symbol {}'.format(className))
+    svg.set('preserveAspectRatio', 'xMinYMin meet')
+    if cleanup:
+        lxml.etree.strip_attributes(
+            xml, 'fill', 'fill-opacity', 'stroke', 'stroke-width')
+    if a11y:
+        svg.set('role', 'img')
+        svg.set('aria-label', title)
+    else:
+        svg.set('aria-hidden', 'true')
+    return lxml.etree.tostring(xml)
+
+
+@zeit.web.register_global
+def get_svg_from_file(name, className, package, cleanup, a11y):
+    return get_svg_from_file_cached(name, className, package, cleanup, a11y)
