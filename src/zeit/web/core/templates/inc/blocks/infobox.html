@@ -1,6 +1,6 @@
 {% if block.contents -%}
 {% set id = block.title | attr_safe %}
-<div class="infobox js-infobox" id="{{ id }}" role="application">
+<aside class="infobox js-infobox" id="{{ id }}">
     <div class="infobox__container">
         <div class="infobox__navigation"></div>
         <div class="infobox__content">
@@ -33,5 +33,5 @@
         {% endfor %}
         </div>
     </div>
-</div>
+</aside>
 {%- endif %}
