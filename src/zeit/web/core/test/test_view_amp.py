@@ -98,7 +98,7 @@ def test_amp_article_has_correct_webtrekk_pixel(testbrowser):
     source = browser.cssselect('amp-pixel')[0].attrib.get('src')
     assert source == (
         u'https://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
-        u'redaktion.wirtschaft...article.zede|'
+        u'redaktion.wirtschaft...article.zede%7C'
         u'localhost/zeit-online/article/amp'
         u',0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&cg3=wirtschaft&cg4=zede'
         u'&cg5=&cg6=&cg7=amp&cg8=wirtschaft/article&cg9=2016-01-22'
