@@ -238,7 +238,7 @@
 
 {% macro print_pagination( pagination ) -%}
     {% if pagination.total > 1 %}
-    <nav class="article-pagination is-constrained is-centered" role="navigation" aria-labelledby="pagination-title">
+    <nav class="article-pagination is-constrained is-centered" aria-labelledby="pagination-title">
         <div class="visually-hidden" id="pagination-title">Seitennavigation</div>
         {% if pagination.next_page_title -%}
             <div class="article-pagination__nexttitle">

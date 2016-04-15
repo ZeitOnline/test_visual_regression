@@ -128,7 +128,7 @@
         <div class="page__content">
             {% profile %}
             {% if not view.is_wrapped %}
-            <header class="header" role="banner">
+            <header class="header">
                 {% block navigation %}
                     {%- include "zeit.web.site:templates/inc/navigation/navigation.tpl" ignore missing -%}
                 {% endblock navigation %}
@@ -147,12 +147,12 @@
                 {# mobile ad place 1 #}
                 {{ lama.adplace(view.banner(1), view, mobile=True) }}
             {% endblock adplace_billboard %}
-            <main class="{{ 'main' | with_mods(view.type) }}" id="main" role="main" itemprop="mainContentOfPage">
+            <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
                 {% block main %}{% endblock main %}
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
             {% profile %}
-            <footer class="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
+            <footer class="footer" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
                 {% block footer %}
                     {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
                 {% endblock footer %}

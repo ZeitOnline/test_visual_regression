@@ -43,7 +43,7 @@
 
 	{% if view.nav_show_ressorts %}
 	<div class="main_nav__ressorts" data-dropdown="true">
-		<nav role="navigation" id="primary_nav">
+		<nav id="primary_nav">
 		{%- set navigation = view.navigation -%}
 		{%- set nav_class = 'primary-nav' -%}
 		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}

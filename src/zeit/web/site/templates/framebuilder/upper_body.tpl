@@ -26,7 +26,7 @@
             </div>
         {% endblock adplace_top %}
         <div class="page__content">
-            <header class="header" role="banner">
+            <header class="header">
                 {%- include "zeit.web.site:templates/framebuilder/navigation.tpl" ignore missing -%}
             </header>
             {% block adplace_billboard %}
@@ -35,7 +35,7 @@
                 {# mobile ad place 1 #}
                 {{ lama.adplace(view.banner(1), view, mobile=True) }}
             {% endblock adplace_billboard %}
-            <main class="{{ 'main' | with_mods(view.type) }}" id="main" role="main" itemprop="mainContentOfPage">
+            <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
 
             {%- if view.is_advertorial and view.cap_title %}
                 <div class="advertorial-marker advertorial-marker--single">
