@@ -20,9 +20,13 @@ Change log for zeit.web
 
 - ZON-2522: Introduce comments to ZEIT Campus
 
+- ZON-2961: SVG – back to the roots (render SVGs inline)
+
 - FIX: Support non-ascii uniqueIds (and other bugsnag)
 
 - BUG-396: Enable nextread link and image copyrights
+
+- MAINT: Fix ZEIT Campus column article header image
 
 
 2.71.3 (2016-04-13)
