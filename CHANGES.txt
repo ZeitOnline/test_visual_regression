@@ -28,6 +28,8 @@ Change log for zeit.web
 
 - BUG-377 part 2: Set default sort order to "recent"
 
+- BUG-390: Replace Adtile 1 with amp-ad code
+
 - MAINT: Fix ZEIT Campus column article header image
 
 
