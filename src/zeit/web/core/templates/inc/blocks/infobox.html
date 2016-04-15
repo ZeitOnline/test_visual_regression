@@ -1,6 +1,6 @@
 {% if block.contents -%}
 {% set id = block.title | attr_safe %}
-<aside class="infobox js-infobox" id="{{ id }}" role="application">
+<div class="infobox js-infobox" id="{{ id }}" role="application">
     <div class="infobox__container">
         <div class="infobox__navigation"></div>
         <div class="infobox__content">
@@ -17,7 +17,7 @@
                         {{- title -}}
                     </a>
                 </h3>
-                <article
+                <div
                     class="infobox-tab__panel"
                     id="{{ id }}-{{ loop.index }}-article"
                     role="tabpanel"
@@ -28,10 +28,10 @@
                             "{0}:templates/inc/blocks/{1}.html".format(view.package, type),
                             "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
                     {% endfor %}
-                </article>
+                </div>
             </section>
         {% endfor %}
         </div>
     </div>
-</aside>
+</div>
 {%- endif %}
