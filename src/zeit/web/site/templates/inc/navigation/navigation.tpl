@@ -1,6 +1,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<div class="main_nav">
+<div class="main_nav" id="main_nav">
 	<!-- logo -->
 	<div id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" class="logo_bar">
 		{% with tag_name = 'h1' if view.is_hp else 'div' %}
@@ -17,7 +17,7 @@
 		</{{ tag_name }}>
 		{% endwith %}
 		<div class="logo_bar__menu">
-			<a href="#primary_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="navigation" aria-expanded="false">
+			<a href="#main_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="main_nav" aria-expanded="false">
 				{{ lama.use_svg_icon('menu', 'logo_bar__menu-icon logo_bar__menu-icon--burger', view.package) }}
 				{{ lama.use_svg_icon('close', 'logo_bar__menu-icon logo_bar__menu-icon--close', view.package) }}
 			</a>
