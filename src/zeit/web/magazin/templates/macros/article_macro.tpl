@@ -238,8 +238,8 @@
 
 {% macro print_pagination( pagination ) -%}
     {% if pagination.total > 1 %}
-    <nav class="article-pagination is-constrained is-centered" role="navigation" aria-labeledby="pagination-title">
-        <div class="article-pagination__a11y-title" id="pagination-title">Seitennavigation</div>
+    <nav class="article-pagination is-constrained is-centered" role="navigation" aria-labelledby="pagination-title">
+        <div class="visually-hidden" id="pagination-title">Seitennavigation</div>
         {% if pagination.next_page_title -%}
             <div class="article-pagination__nexttitle">
                 <a href="{{ pagination.next_page_url }}">Auf Seite {{ pagination.current + 1 }} <span class="article-pagination__dash">—</span> {{ pagination.next_page_title }}</a>
