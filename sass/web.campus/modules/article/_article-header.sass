@@ -2,7 +2,7 @@
 	margin: remify(0 0 30px)
 	position: relative
 
-	&--with-image &__headline--default
+	&--default-with-image &__headline
 		margin-top: remify(-66px)
 
 	&__default-image
@@ -64,7 +64,7 @@
 		font-weight: bold
 		letter-spacing: .01em
 		margin-bottom: remify(12px)
-		.article-header--with-image &--default,
+		.article-header--default-with-image &,
 		&--leserartikel
 			+font-smoothing
 			color: #fff
@@ -143,14 +143,15 @@
 			font-size: em(20px)
 			margin-bottom: remify(16px)
 			a
-				border-bottom: 2px solid $color-community-primary
-				+on-interaction
-					border-color: $color-text
-					span[itemprop="name"]
-						color: $color-text
-			span[itemprop="name"]
+				box-shadow: inset 0 -2px 0 currentColor
 				color: $color-community-primary
-				font-weight: normal
+				+on-interaction
+					color: $color-text
+					span[itemprop="name"]
+						color: inherit
+		span[itemprop="name"]
+			color: $color-community-primary
+			font-weight: normal
 	&__leserartikel-wrap
 		+unpadded
 		background-color: $color-community-primary
@@ -164,6 +165,7 @@
 
 .metadata__seperator
 	margin: 0 .25em
+	white-space: normal
 
 
 ////////////
@@ -172,25 +174,24 @@
 
 +respond-min($break-tablet-min)
 	.article-header
-		margin: remify(40px 0)
+		margin: remify(40px auto)
 
-		&--no-image#{&}--default
+		&--default-no-image
 			background-color: $color-background
 			box-shadow: remify(-160px) 0 0 $color-background, remify(160px) 0 0 $color-background
-			margin-left: auto
-			margin-right: auto
 			margin-top: remify(76px)
 			max-width: remify(660px)
 			padding: remify(48px 0)
-		&--no-image &__topic--default
+		&--default-no-image &__topic,
+		&--column-no-image &__topic
 			position: absolute
 			bottom: 100%
-			margin-bottom: -0.6em
-		&--no-image &__byline,
-		&--no-image &__metadata
+			margin-bottom: -0.6em // em intended
+		&--default-no-image &__byline,
+		&--default-no-image &__metadata
 			margin-bottom: 0
 
-		&--with-image &__default-info
+		&--default-with-image &__default-info
 			left: 50%
 			max-width: remify(780px / 2)
 			padding-left: remify(46px)
@@ -208,9 +209,9 @@
 
 		&__headline--default
 			padding: remify(11px $page-padding 24px)
-		&--with-image &__headline--default
+		&--default-with-image &__headline
 			margin-top: remify(-90px)
-		&--no-image &__headline--default
+		&--default-no-image &__headline
 			margin: 0
 			padding: remify(0 0 20px)
 
@@ -257,23 +258,39 @@
 			+justify-content(space-between)
 			+align-items(flex-end)
 			background-color: transparent
-			margin-left: 0
-			margin-right: 0
 		&__column-image
+			margin-right: remify(-20px)
 			position: static
 			width: remify(260px)
 		&__column-wrap
-			margin: remify(50px 0 0 -20px)
+			margin-top: remify(50px)
 			+flex(1 1 50%)
 		&__column-info
 			background-color: $color-article-secondary
 			padding: remify(25px 20px)
 		&__column-details
 			padding-right: 0
+		&--column-no-image &__column-wrap
+			background-color: $color-article-secondary
+			box-shadow: remify(-160px) 0 0 $color-article-secondary, remify(160px) 0 0 $color-article-secondary
+			margin-left: auto
+			margin-right: auto
+			margin-top: remify(33px)
+			max-width: remify(660px)
+			padding-right: remify(160px)
+		&--column-no-image &__column-info
+			padding-left: 0
+			padding-right: 0
+			padding-top: remify(40px)
 
 		&--leserartikel
 			.article-header__byline
 				font-size: em(26px)
+			span[itemprop="name"]
+				// force newline
+				&:before
+					content: ""
+					display: block
 		&__leserartikel-wrap
 			$color-stop: remify(47px)
 			+background-image(linear-gradient(to top, #fff $color-stop, $color-community-primary $color-stop))
@@ -296,12 +313,13 @@
 
 +respond-min($break-desktop-min)
 	.article-header
-		margin: remify(60px 0)
+		margin: remify(60px auto)
 
-		&--no-image#{&}--default
+		&--default-no-image
+			margin-top: remify(76px)
 			padding: remify(58px 0 38px)
 
-		&--with-image &__headline--default
+		&--default-with-image &__headline
 			margin: remify(-190px 0 0)
 			padding-top: remify(110px)
 
@@ -319,10 +337,15 @@
 			font-size: em(32px)
 			padding: remify(9px 23px 2px)
 
+		&__column-wrap
+			margin-top: remify(59px)
 		&__column-image
 			width: remify(320px)
 		&__column-info
 			padding: remify(30px 35px 35px)
+		&--column-no-image &__column-wrap
+			margin-top: remify(40px)
+			padding-right: 0
 
 		&__leserartikel-wrap
 			$color-stop: remify(65px)
