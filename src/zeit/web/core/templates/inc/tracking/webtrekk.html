@@ -130,7 +130,7 @@
             ivw_code,
             pagination,
             view.meta_keywords | join(';') | lower,
-            view.date_last_modified,
+            view.date_last_modified | urlencode,
             view.text_length,
             view.news_source | lower,
             view.product_id | lower,
