@@ -32,10 +32,10 @@
             <link rel="canonical" href="{{ view.canonical_url }}">
         {% endif -%}
         {% if view.prev_page_url -%}
-            <meta rel="prev" href="{{ view.prev_page_url }}">
+            <link rel="prev" href="{{ view.prev_page_url }}">
         {% endif -%}
         {% if view.next_page_url -%}
-            <meta rel="next" href="{{ view.next_page_url }}">
+            <link rel="next" href="{{ view.next_page_url }}">
         {% endif -%}
         {% block css_lte8_link %}
         <!--[if lte IE 8]>
