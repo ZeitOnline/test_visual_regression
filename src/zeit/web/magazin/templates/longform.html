@@ -17,19 +17,19 @@
             <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <div class="main-nav__logo__wrap">
-                    {{- lama.use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', request) -}}
-                    {{- lama.use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', request) -}}
+                    {{- lama.use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', view.package) -}}
+                    {{- lama.use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', view.package) -}}
                 </div>
             </a>
             {% endblock longform_logo %}
             <div class="main-nav__menu">
                 <aside class="main-nav__sharing">
                     <a href="http://twitter.com/home?status={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item" title="Auf Twitter teilen">{{ lama.use_svg_icon('twitter', 'main-nav__sharing-icon', request) }}</a>
+                        target="_blank" class="main-nav__sharing__item" title="Auf Twitter teilen">{{ lama.use_svg_icon('twitter', 'main-nav__sharing-icon', view.package) }}</a>
                     <a href="http://www.facebook.com/sharer/sharer.php?u={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item" title="Auf Facebook teilen">{{ lama.use_svg_icon('facebook', 'main-nav__sharing-icon', request) }}</a>
+                        target="_blank" class="main-nav__sharing__item" title="Auf Facebook teilen">{{ lama.use_svg_icon('facebook', 'main-nav__sharing-icon', view.package) }}</a>
                     <a href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item" title="Auf Google+ teilen">{{ lama.use_svg_icon('google', 'main-nav__sharing-icon', request) }}</a>
+                        target="_blank" class="main-nav__sharing__item" title="Auf Google+ teilen">{{ lama.use_svg_icon('google', 'main-nav__sharing-icon', view.package) }}</a>
                 </aside>
             </div>
         </div>

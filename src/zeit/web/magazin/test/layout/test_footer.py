@@ -2,10 +2,10 @@
 
 
 def test_footer_exists(testbrowser):
-    browser = testbrowser('/artikel/01')
-    assert '<footer class="main-footer">' in browser.contents
+    select = testbrowser('/artikel/01').cssselect
+    assert select('footer.main-footer')
 
 
 def test_footer_has_logo(testbrowser):
-    browser = testbrowser('/artikel/01')
-    assert '<svg class="svg-symbol main-footer__logo' in browser.contents
+    select = testbrowser('/artikel/01').cssselect
+    assert select('svg.svg-symbol.main-footer__logo')

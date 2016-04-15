@@ -2,7 +2,7 @@
 
 <div class="footer__item">
 	<a href="{{ request.route_url('home') }}campus/index">
-		{{- lama.use_svg_icon('logo-zco', 'footer__logo', request, inline=view.inline_svg_icons) -}}
+		{{- lama.use_svg_icon('logo-zco', 'footer__logo', view.package) -}}
 	</a>
 	<div class="footer__links">
 		<strong class="footer__linkitem">Verlag</strong>
@@ -35,4 +35,4 @@
 	</div>
 </div>
 
-
+{% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}

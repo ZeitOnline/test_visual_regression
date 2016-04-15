@@ -1,91 +1,13 @@
-$user-avatar-size: 50px
-%meta-text
-	color: $zon-grey
-	font-size: remify(12px)
-	letter-spacing: $zon-letter-spacing-s
+$comment-color-meta-text: 			$zon-grey
+$comment-color-meta-text-hover:		$zon-dark-grey
+$comment-color-icon-author:			$zon-charcoal
+$comment-color-name-link:			$zon-red
 
+@import "web.core/modules/comments/comment-meta"
+
+// own styles, which differ from core
 .comment-meta
-	position: relative
-	.comment--promoted &
-		padding-top: remify(45px)
-		+respond-min($break-tablet-min)
-			padding-top: 0
-	&__avatar
-		float: left
-		margin-right: remify(15px)
-		margin-top: remify(-5px)
-		img
-			border-radius: 50%
-			display: block
-			height: remify($user-avatar-size)
-			overflow: hidden
-			width: remify($user-avatar-size)
-		+respond-min($break-tablet-min)
-			display: table-cell
-			float: none
-			margin: 0
-			padding-right: remify(15px)
-			vertical-align: middle
-			width: remify($user-avatar-size)
 	&__name
 		font-size: remify(16px)
 		font-weight: bold
 		line-height: 1.2
-		overflow: hidden
-		text-overflow: ellipsis
-		white-space: nowrap
-		a
-			+link
-				color: $zon-red
-			+on-interaction
-				text-decoration: underline
-		.comment--recommended:not(.comment--promoted) &
-			padding-right: remify(60px) // leave room for star
-			+respond-min($break-tablet-min)
-				padding-right: 0
-		+respond-min($break-tablet-min)
-			display: table-cell
-			overflow: visible
-			vertical-align: middle
-			white-space: normal
-			word-break: break-word
-	&__date
-		@extend %meta-text
-		+link
-			color: $zon-grey
-		+on-interaction
-			color: $zon-dark-grey
-	&__badge
-		@extend %meta-text
-		&--promoted,
-		&--recommended
-			position: absolute
-			top: 0
-		&--promoted
-			left: 0
-		&--recommended
-			right: 0
-	&__date,
-	&__badge--promoted,
-	&__badge--recommended
-		+respond-min($break-tablet-min)
-			display: table-cell
-			padding-left: remify(20px)
-			vertical-align: middle
-			width: remify(145px)
-			position: static
-			width: 1%
-			white-space: nowrap
-	&__icon
-		height: remify(16px)
-		margin-right: remify(5px)
-		vertical-align: remify(-3px)
-		width: remify(16px)
-		&--recommended
-			height: remify(18px)
-			width: remify(18px)
-		&--author
-			color: $zon-charcoal
-	+respond-min($break-tablet-min)
-		display: table
-		width: 100%

@@ -11,17 +11,6 @@
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-    {# SVG for Everybody -#}
-    <script src="{{ request.asset_host }}/js/vendor/svg4everybody.legacy.js"></script>
-    <script>
-        {# needed for styling SVG in IE8 #}
-        document.createElement( 'svg' );
-        svg4everybody({
-            fallback: function ( src, svg, use ) {
-                return src.replace( /web\.campus\/icons\.svg(\?.+)?#svg-(.+)/ , 'icons/campus/$2.png$1');
-            }
-        });
-    </script>
     {% if view.framebuilder_requires_ivw %}
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>

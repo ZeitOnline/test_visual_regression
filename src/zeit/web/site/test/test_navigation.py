@@ -149,6 +149,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
+    mock_view.package = 'zeit.web.site'
 
     def route_url(arg):
         return 'http://www.zeit.de/'
@@ -160,7 +161,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     # Logo
     assert html('a[href*="/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]')[0] is not None, (
-                    'Logo link is missing')
+        'Logo link is missing')
 
     # Main menu icon
     assert len(html(u'a[aria-label="Hauptmenü"]')) == 1, (

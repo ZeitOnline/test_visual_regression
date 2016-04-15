@@ -1,0 +1,41 @@
+$comment-color-notice: 			$color-body-text
+$comment-color-header-sub: 		#fff
+$comment-color-head-background:	$color-community-primary
+
+@import "web.core/modules/comments/comment-section"
+
+// own styles, which differ from core
+.comment-section
+	&__button
+		+font-smoothing
+		border: 3px solid #fff
+		color: #fff
+		display: inline-block
+		font-weight: bold
+		padding: remify(6px 8px 6px 12px)
+		+on-interaction
+			border-color: currentColor
+		+respond-min($break-phablet-min)
+			float: right
+			// fake the button to appear in the center of the pink section
+			// (phablet) or on the bottom-line of the big headline (tablet)
+			margin-top: remify(6px)
+
+	&__head
+		background-color: $color-community-primary
+		padding-bottom: em(32px - 6px) // compensate for short-length of font
+	&__head,
+	&__note
+		color: #fff
+	&__headline
+		@extend %font-beckett
+		+font-smoothing
+		font-size: remify(42px)
+		+respond-min($break-tablet-min)
+			font-size: remify(64px)
+		small
+			font-family: $font-tabletgothic
+			font-size: remify(16px)
+			text-transform: initial
+	&__icon
+		@extend %cta-button-icon

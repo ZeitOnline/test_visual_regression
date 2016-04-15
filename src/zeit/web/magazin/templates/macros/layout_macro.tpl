@@ -1,7 +1,5 @@
 {% extends 'zeit.web.core:templates/macros/layout_macro.tpl' %}
 
-{% block svg_asset_dir %}web.magazin{% endblock %}
-
 {% macro breadcrumbs(crumbs) -%}
     <div class="breadcrumbs">
         <div class="breadcrumbs__list is-constrained is-centered">
@@ -48,8 +46,8 @@
             <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
                 <meta itemprop="name" content="Zeit Online">
                 <{{ title_tag }} class="main-nav__logo__wrap">
-                    {{ use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', request) }}
-                    {{ use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', request) }}
+                    {{ use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', view.package) }}
+                    {{ use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', view.package) }}
                 </{{ title_tag }}>
             </a>
             <div class="main-nav__menu">
@@ -81,7 +79,7 @@
                             <a href="{{ request.route_url('home') }}index" id="hp.zm.topnav.links.zon./index">» ZEIT ONLINE</a>
                         </div>
                         <div class="main-nav__section main-nav__service">
-                            <span class="main-nav__section__trigger js-main-nav-section-trigger"><span class="main-nav__section__text">Service</span>{{ use_svg_icon('arrow-down', 'main-nav__icon-arrow-down', view.request) }}</span>
+                            <span class="main-nav__section__trigger js-main-nav-section-trigger"><span class="main-nav__section__text">Service</span>{{ use_svg_icon('arrow-down', 'main-nav__icon-arrow-down', view.package) }}</span>
                             <div class="main-nav__section__content js-main-nav-section-content">
                                 <a href="{{ request.route_url('home') }}campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index">ZEITCampus</a>
                                 <a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index">ZEITGeschichte</a>
@@ -107,35 +105,9 @@
     </nav>
 {%- endmacro %}
 
-{% macro head_user_is_logged_in_true(request)  %}
-    <span class="main-nav__section__trigger js-main-nav-section-trigger">
-        {% if request.session.user.picture %}
-            <span class="main-nav__avatar" style="background-image: url({{ request.session.user.picture }})"></span>
-        {%- else -%}
-            {{ use_svg_icon('avatar-std', 'main-nav__avatar', request) }}
-        {%- endif -%}
-    </span>
-    <div class="main-nav__section__content js-main-nav-section-content">
-        <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}" id="hp.zm.topnav.community.account">Account</a>
-        {% if request.registry.settings.sso_activate %}
-            <a href="{{ request.registry.settings.sso_url }}/abmelden?url={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
-        {% else %}
-            <a href="{{ request.registry.settings.community_host }}/logout?destination={{ request.url }}" id="hp.zm.topnav.community.logout">Logout</a>
-        {% endif %}
-    </div>
-{%- endmacro %}
-
-{% macro head_user_is_logged_in_false(request) -%}
-    {% if request.registry.settings.sso_activate %}
-        <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
-    {% else %}
-        <a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url }}" id="hp.zm.topnav.community.login">Anmelden</a>
-    {% endif %}
-{%- endmacro %}
-
 {% macro copyrights(cr_list) -%}
     <div id="copyrights" class="copyrights">
-        {{ use_svg_icon('copyrights-close', 'js-toggle-copyrights copyrights__close copyrights__close--icon', request) }}
+        {{ use_svg_icon('copyrights-close', 'js-toggle-copyrights copyrights__close copyrights__close--icon', view.package) }}
         <section class="copyrights__wrapper is-centered is-constrained">
             <span class="copyrights__title">Bildrechte auf dieser Seite</span>
             <ul class="copyrights__list">

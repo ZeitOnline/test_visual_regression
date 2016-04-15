@@ -5,7 +5,7 @@
         {% if user.picture %}
             <span class="main-nav__avatar" style="background-image: url({{ user.picture }})"></span>
         {% else %}
-            {{ lama.use_svg_icon('avatar-std', 'main-nav__avatar', request) }}
+            {{ lama.use_svg_icon('avatar-std', 'main-nav__avatar', 'zeit.web.magazin') }}
         {% endif %}
     </span>
     <div class="main-nav__section__content js-main-nav-section-content">

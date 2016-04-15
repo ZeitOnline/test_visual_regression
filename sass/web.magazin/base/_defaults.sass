@@ -23,12 +23,6 @@ a
     +link-colors($color-link--default, $color-link--hover, $color-link--hover, $color-link--default, $color-link--hover)
     text-decoration: none
 
-// only target svg sprites to not destroy interactive/dataviz graphics
-svg use
-    fill: currentColor
-    // see: http://bugs.jquery.com/ticket/11352
-    pointer-events: none
-
 // 'fill: currentColor' does not work on <use> element in IE 9-10
 .svg-symbol
     fill: currentColor
