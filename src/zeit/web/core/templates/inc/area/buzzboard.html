@@ -14,15 +14,17 @@
 
 	<table class="buzzboard__table buzzboard__table--col{{ modules | length }}">
 		<thead>
-			{% for module in modules -%}
-			<th>
-				{% if module.icon %}
-					{% set modifier = module.icon.strip('buzz-') -%}
-					{{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), view.package) }}
-				{% endif %}
-				{{ module.label | safe }}
-			</th>
-			{% endfor %}
+			<tr>
+				{% for module in modules -%}
+				<th>
+					{% if module.icon %}
+						{% set modifier = module.icon.strip('buzz-') -%}
+						{{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), view.package) }}
+					{% endif %}
+					{{ module.label | safe }}
+				</th>
+				{% endfor %}
+			</tr>
 		</thead>
 		<tbody>
 			{% for row in range(3) -%}
