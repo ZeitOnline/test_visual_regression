@@ -184,3 +184,8 @@ def test_article_stoa_block_should_render_expected_structure(testbrowser):
     assert len(select('.stoa__title')) == 1
     assert len(select('.stoa__link')) == 1
     assert len(select('.stoa__button')) == 1
+
+
+def test_campus_article_does_not_have_contentad(testbrowser):
+    select = testbrowser('/campus/article/stoa').cssselect
+    assert not select('#iq-artikelanker')
