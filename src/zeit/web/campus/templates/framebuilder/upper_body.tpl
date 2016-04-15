@@ -1,10 +1,6 @@
 </head>
 <body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}">
 
-    <div class="invisible">
-        {% include "zeit.web.static:css/web.campus/framebuilder.svg" %}
-    </div>
-
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
 

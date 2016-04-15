@@ -8,12 +8,12 @@
     <a href="{{ request.route_url('home') }}index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./index">
         <meta itemprop="name" content="Zeit Online">
         <div class="main-nav__logo__wrap">
-            {{ lama.use_svg_icon('logo-zon-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zon-large', request) }}
-            {{ lama.use_svg_icon('logo-zon-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zon-small', request) }}
+            {{ lama.use_svg_icon('logo-zon-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zon-large', view.package) }}
+            {{ lama.use_svg_icon('logo-zon-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zon-small', view.package) }}
         </div>
     </a>
 {% endblock longform_logo %}
 
 {% block footer_logo %}
-    {{ lama.use_svg_icon('logo-zon-small', 'main-footer__logo main-footer__logo--zon-small', request) }}
+    {{ lama.use_svg_icon('logo-zon-small', 'main-footer__logo main-footer__logo--zon-small', view.package) }}
 {% endblock footer_logo %}

@@ -1,293 +1,32 @@
-$color-comment-author-bg: $zon-lighter-grey
-$color-comment-border: $color-border
+$comment-color-author-bg: $zon-lighter-grey
+$comment-color-border: $color-border
 
-.comment
-	padding: 0 $page-padding
-	border-top: 1px solid $color-comment-border
+$comment-color-body-font: $zon-charcoal
+$comment-color-overlay-count-background: $zon-charcoal
+$comment-color-overlay-cta-font: $zon-dark-grey
+$comment-color-overlay-cta-border: $zon-mid-grey
 
-	&:first-child
-		border-top: none
+$comment-color-moderation-font: $zon-grey
+$comment-color-moderation-link: $zon-red
+$comment-color-moderation-sending-font: $zon-light-grey
 
-	&--author
-		border-top-width: 0
-		background-color: $color-comment-author-bg
+$comment-color-date-link: $zon-grey
+$comment-color-date-link-hover: $zon-dark-grey
+$comment-color-reaction-active: $zon-red
 
-		input, textarea, select
-			background-color: $white
+$comment-color-count-background: $zon-trout
+$comment-color-count-font: $zon-lighter-grey
+$comment-color-cta-font: $zon-grey
+$comment-color-cta-border: $zon-light-grey
 
-	&--author + & // remove border-top of following comment
-		border-top-width: 0
+$comment-color-rewrapper-hover-count-background: $zon-charcoal
+$comment-color-rewrapper-hover-cta-border: $zon-mid-grey
+$comment-color-rewrapper-hover-cta-font: $zon-dark-grey
 
-	&--author + &--author // keep border-top between consecutive author comments
-		border-top-width: 1px
+$comment-color-badge-background: $zon-charcoal
+$comment-color-indented-boxshadow: $zon-lighter-grey
 
-	&--wrapped
-		.comment__body
-			max-height: 7em // em-tentional :D
-			overflow: hidden
-		.comment__reactions
-			display: none
-		.comment-overlay
-			display: block
+$comment-color-placeholder-background: $zon-warm-grey
+$comment-color-placeholder-font: $zon-light-grey
 
-	&__ad
-		background-color: $color-advertising-bg
-		margin: 1px 0 // 1px creates white line between ad and author comments
-		padding: 0
-
-	&__container
-		margin-left: auto
-		margin-right: auto
-		padding-bottom: remify(20px)
-		padding-top: remify(20px)
-		position: relative
-
-		+respond-min($break-phablet-min)
-			padding-bottom: remify(28px)
-			padding-top: remify(28px)
-		+respond-min($break-tablet-min)
-			max-width: remify(660px)
-
-	&__body
-		+default-article-textlink
-		clear: both
-		color: $zon-charcoal
-		font-size: remify(16px)
-		margin-top: remify(18px)
-		margin-bottom: remify(20px)
-
-		& > p
-			margin: 0 0 0.6667em 0
-
-		.moderation
-			color: $zon-grey
-			font-family: $font-franziska
-			font-style: normal
-			&:before
-				@extend %exclamation
-				vertical-align: text-top
-
-	&__reactions
-		+clearfix
-		text-align: right
-
-	&__origin,
-	&__reaction,
-	&__date
-		+link
-			color: $zon-grey
-		+on-interaction
-			color: $zon-dark-grey
-		font-size: remify(13px)
-		letter-spacing: $zon-letter-spacing-s
-
-	&__reaction
-		+inline-block
-		margin-left: remify(18px)
-		&:first-child
-			margin-left: 0
-		&--active
-			+link
-				color: $zon-red
-
-	&__action
-		display: none
-		+respond-min($break-phablet-min)
-			display: inline
-			padding-left: remify(4px)
-
-	&__origin
-		display: block
-		font-size: remify(12px)
-		letter-spacing: $zon-letter-spacing-m
-		margin: remify(4px 0 20px)
-		text-align: left
-		+respond-min($break-tablet-min)
-			float: left
-			margin-bottom: remify(4px)
-
-	&__moderations
-		clear: left
-		float: left
-		list-style: none
-		margin: 0
-		padding: 0
-		text-align: left
-	&__moderation
-		color: $zon-red
-		font-size: remify(15px)
-		letter-spacing: $zon-letter-spacing-s
-		line-height: 2
-		+on-interaction
-			border-bottom: 1px solid currentColor
-
-		&--sending
-			color: $zon-light-grey !important
-
-	&__rewrapper
-		display: block
-		cursor: pointer
-		padding-bottom: remify(28px)
-		&--loading
-			visibility: hidden
-		&:hover
-			.comment__count
-				background-color: $zon-charcoal
-			.comment__cta
-				color: $zon-dark-grey
-				border-bottom: 1px solid $zon-mid-grey
-
-	&__count
-		+border-radius(1em)
-		+transition(background-color .2s)
-		background-color: $zon-trout
-		color: $zon-lighter-grey
-		font-size: remify(11px)
-		margin-right: remify(12px)
-		padding: remify(3px 8px)
-
-	&__cta
-		+transition-property(border-bottom-color, color)
-		+transition-duration(.2s)
-		border-bottom: 1px solid $zon-light-grey
-		color: $zon-grey
-		font-size: remify(15px)
-		letter-spacing: $zon-letter-spacing-s
-
-.comment--indented
-	border-top-width: 0 !important
-	padding: 0
-	+respond-min($break-phablet-min)
-		padding: 0 $page-padding
-
-	.comment__container
-		box-shadow: inset remify(24px) 0 0 0 $zon-lighter-grey
-		padding-left: remify(48px)
-		padding-right: $page-padding
-		border-top: 1px solid $color-comment-border
-		position: relative
-
-		+respond-min($break-phablet-min)
-			box-shadow: none
-			padding-left: remify(80px)
-			padding-right: 0
-		// this :before and :after stuff creates a up-facing triangle
-		// to designate the comment which is replied to
-		// source: http://davidwalsh.name/css-triangles
-		&:before,
-		&:after
-			border-color: transparent
-			border-style: solid
-			border-width: 0 10px 10px
-			content: ' '
-			left: remify(75px)
-			position: absolute
-		&:before
-			border-bottom-color: $color-comment-border
-			top: -10px
-		&:after
-			border-bottom-color: $white
-			top: -9px
-
-	&.comment--author
-		.comment__container
-			border-top-width: 0
-			&:before
-				border-bottom-color: transparent
-			&:after
-				border-bottom-color: $color-comment-author-bg
-
-// remove border-top of comment after author comment
-.comment--author + .comment--indented .comment__container
-	border-top-width: 0
-	&:before
-		border-bottom-color: transparent
-
-// keep border-top between consecutive author comments
-.comment--author + .comment--author.comment--indented .comment__container
-	border-top-width: 1px
-	&:before
-		border-bottom-color: $color-comment-border
-
-.comment--author .comment-overlay
-	+background-image(linear-gradient(0deg, rgba($color-comment-author-bg, 1) 3em, rgba($color-comment-author-bg, 0) 100%))
-
-// comment thread collapsed
-.comment-overlay
-	+background-image(linear-gradient(0deg, rgba($white, 1) 3em, rgba($white, 0) 100%))
-	bottom: 0
-	cursor: pointer
-	display: none
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ) // IE 9 fallback
-	height: 70%
-	left: 0
-	padding-left: remify(48px)
-	position: absolute
-	right: 0
-	+respond-min($break-phablet-min)
-		padding-left: remify(80px)
-	&__wrap
-		bottom: remify(20px)
-		position: absolute
-	&__count
-		@extend .comment__count
-	&__cta
-		@extend .comment__cta
-	&:hover
-		.comment-overlay__count
-			background-color: $zon-charcoal
-		.comment-overlay__cta
-			color: $zon-dark-grey
-			border-bottom: 1px solid $zon-mid-grey
-
-// icons
-.comment__badge
-	+inline-block
-	background-color: $zon-charcoal
-	border-radius: 2px
-	color: $white
-	height: remify(16px)
-	margin-right: remify(6px)
-	vertical-align: text-top
-	width: remify(16px)
-	&--promoted
-		font-size: remify(12px)
-		text-align: center
-
-.comment__icon
-	&-reply
-		width: remify(17px)
-		height: remify(15px)
-	&-report
-		width: remify(14px)
-		height: remify(16px)
-	&-recommend
-		width: remify(17px)
-		height: remify(16px)
-	+respond-min($break-phablet-min)
-		&-reply
-			width: remify(12px)
-			height: remify(10px)
-		&-report
-			width: remify(8px)
-			height: remify(10px)
-		&-recommend
-			width: remify(12px)
-			height: remify(12px)
-	.comment__reaction--sending &
-		+animation(rotate 1s linear infinite)
-
-+keyframes(rotate)
-	from
-		+transform(rotate(0deg))
-	to
-		+transform(rotate(360deg))
-
-.js-comment-placeholder__content
-	//background-color: $zon-warm-grey
-	color: $zon-light-grey
-	height: 150px
-	line-height: 150px
-	text-align: center
-	text-transform: uppercase
-	+animation(0.7s smoothPulse infinite alternate)
+@import "web.core/modules/comments/comment"

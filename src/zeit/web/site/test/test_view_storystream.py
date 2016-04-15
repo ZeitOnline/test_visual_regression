@@ -44,7 +44,7 @@ def test_storystream_teaser_should_show_age_for_new_storystreams(
 
     updated_text = updated[0].text_content().strip()
     # remove multiple whitespace inside the string
-    updated_text = ' '.join(updated_text.split())
+    updated_text = ' '.join(updated_text.split()[1:])
     assert updated_text == 'Aktualisiert vor 1 Tag'
 
 

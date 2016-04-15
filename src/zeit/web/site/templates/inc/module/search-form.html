@@ -5,7 +5,7 @@
 			<label for="query" class="visually-hidden">Suchbegriff</label>
 			<input type="text" name="q" id="query" value="{{ module.query }}" placeholder="Suchbegriff eingeben" class="search-text-input__input" autofocus />
 			<button type="submit" id="search" value="Suchen" class="search-submit">
-				{{ lama.use_svg_icon('search', 'search-submit__icon', view.request) }}
+				{{ lama.use_svg_icon('search', 'search-submit__icon', view.package) }}
 				<span class="search-submit__text">Suchen</span>
 			</button>
 		</div>
@@ -15,7 +15,7 @@
 				<fieldset class="search-range">
 					<legend class="search-range__legend">
 						Datum eingrenzen
-						{{ lama.use_svg_icon('arrow-down', 'search-range__icon', view.request) }}
+						{{ lama.use_svg_icon('arrow-down', 'search-range__icon', view.package) }}
 					</legend>
 					<div class="search-range__extend">
 						{% for id, checked, label in module.mode_choice %}
@@ -29,7 +29,7 @@
 				<fieldset class="search-range">
 					<legend class="search-range__legend">
 						Typ eingrenzen
-						{{ lama.use_svg_icon('arrow-down', 'search-range__icon', view.request) }}
+						{{ lama.use_svg_icon('arrow-down', 'search-range__icon', view.package) }}
 					</legend>
 					<div class="search-range__extend">
 						{% for id, checked, label in module.type_choice %}
@@ -41,7 +41,7 @@
 					</div>
 				</fieldset>
 				<span class="search-options__off">
-					{{ lama.use_svg_icon('close', 'search-options__icon', view.request) }}
+					{{ lama.use_svg_icon('close', 'search-options__icon', view.package) }}
 				</span>
 			</div>
 		</div>

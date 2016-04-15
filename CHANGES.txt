@@ -4,13 +4,29 @@ Change log for zeit.web
 2.72 (unreleased)
 -----------------
 
+- ZON-2906: Style Campus CP-Header Image
+
+- ZON-2907: Add Campus CP-Header Markup
+
 - HOTFIX: Add a bit more teaser margin for zmo-landscape-large
 
 - ZON-2942: Use Core metadata for Campus
 
 - ZON-2980: Configure rawr return url parameter to work with our SSO
 
+- ZON-2906: Add module headerimage to ZEIT Campus
+
+- ZON-2990: Add image copyrights to ZEIT Campus
+
+- ZON-2522: Introduce comments to ZEIT Campus
+
+- ZON-2961: SVG – back to the roots (render SVGs inline)
+
 - FIX: Support non-ascii uniqueIds (and other bugsnag)
+
+- BUG-396: Enable nextread link and image copyrights
+
+- MAINT: Fix ZEIT Campus column article header image
 
 - ZON-2988: Change STOA from automatic placement to normal article module
 

@@ -10,7 +10,7 @@
         {% set row_loop = loop %}
         {% set tracking_slug = '{}.{}.{}.servicebox.{}'.format(region_loop.index, column_loop.index, row_loop.index, service.id) %}
         <a class="servicebox__link" href="{{ service.href }}" data-id="{{ tracking_slug }}">
-            {{ lama.use_svg_icon('servicebox-{}'.format(service.id), 'servicebox__icon servicebox__icon--{}'.format(service.id), request) }}
+            {{ lama.use_svg_icon('servicebox-{}'.format(service.id), 'servicebox__icon servicebox__icon--{}'.format(service.id), view.package) }}
             <span>{{ service.title }}</span>
         </a>
         {% endfor %}

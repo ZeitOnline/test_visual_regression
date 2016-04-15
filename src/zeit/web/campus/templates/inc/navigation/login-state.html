@@ -6,7 +6,7 @@
 			<span class="nav__user-picture" style="background-image: url({{ request.session.user.picture }})"></span>
 		{%- else %}
 			<span class="nav__user-picture nav__user-picture--default">
-				{{ lama.use_svg_icon('avatar', 'nav__user-avatar', request) }}
+				{{ lama.use_svg_icon('avatar', 'nav__user-avatar', 'zeit.web.campus') }}
 			</span>
 		{%- endif %}
 
@@ -17,7 +17,7 @@
 		<li>
 			<a href="{{ logout }}">
 				Abmelden
-				{{ lama.use_svg_icon('login', 'nav__login-icon', request) }}
+				{{ lama.use_svg_icon('login', 'nav__login-icon', 'zeit.web.campus') }}
 			</a>
 		</li>
 	</ul>
@@ -26,7 +26,7 @@
 		Anmelden
 		<span class="nav__login-register">
 			/ Registrieren
-			{{ lama.use_svg_icon('login', 'nav__login-icon', request) }}
+			{{ lama.use_svg_icon('login', 'nav__login-icon', 'zeit.web.campus') }}
 		</span>
 	</a>
 {% endif %}

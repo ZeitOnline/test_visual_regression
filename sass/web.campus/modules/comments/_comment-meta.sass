@@ -1,0 +1,14 @@
+$comment-color-meta-text: 			#707070
+$comment-color-meta-text-hover: 	#444
+$comment-color-icon-author:			#313131
+$comment-color-name-link: 			$color-community-primary
+
+@import "web.core/modules/comments/comment-meta"
+
+// own styles, which differ from core
+.comment-meta
+	&__name
+		@extend %font-beckett
+		color: $color-community-primary
+		font-size: remify(28px)
+		overflow: hidden

@@ -18,7 +18,7 @@
         data-id="{{ tracking_slug }}.paginationbutton"
         class="button printkiosk__button js-bar-teaser-paginate"
         data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
-        {{ lama.use_svg_icon('shuffle', 'printkiosk__shuffle-icon', request) }}
+        {{ lama.use_svg_icon('shuffle', 'printkiosk__shuffle-icon', view.package) }}
         Weitere laden
     </a>
 {% endblock %}

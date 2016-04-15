@@ -20,18 +20,17 @@
     </div>
     {% endblock -%}
 {% else -%}
-    {% set image = get_image(content=view.main_image_block, variant_id='portrait', fallback=False) %}
-    <div class="{{ 'article-header' | with_mods(view.article_layout, 'with-image' if image else 'no-image') }}">
     {% block article_header -%}
-        {% block article_header_image -%}
-            {% if image -%}
-                <div class="article-header__default-image">
-                    <div class="article-header__image">
-                        {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
-                    </div>
+    {% set image = get_image(content=view.main_image_block, variant_id='portrait', fallback=False) -%}
+    {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}
+    <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
+        {% if image -%}
+            <div class="article-header__default-image">
+                <div class="article-header__image">
+                    {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
                 </div>
-            {% endif -%}
-        {% endblock -%}
+            </div>
+        {% endif -%}
 
         {% block article_headline -%}
             <h1 class="{{ 'article-header__headline' | with_mods(view.article_layout) }}" itemprop="headline">
@@ -65,6 +64,6 @@
             </div>
         {% endblock -%}
         </div>
-    {% endblock -%}
     </div>
+    {% endblock -%}
 {% endif %}
