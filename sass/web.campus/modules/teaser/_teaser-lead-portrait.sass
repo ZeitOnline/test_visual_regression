@@ -11,7 +11,7 @@
 
 	&__heading
 		@extend %teaser-heading
-		font-size: em($font-size-42)
+		font-size: remify($font-size-42)
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -62,7 +62,7 @@
 			width: calc((100% - #{$page-padding}) * 2/3) // consider gutter
 
 		&__heading
-			font-size: em($font-size-64)
+			font-size: remify($font-size-64)
 			margin: 0
 			max-width: none
 			padding-right: 0
@@ -76,7 +76,7 @@
 			display: block
 
 		&__text
-			font-size: em($font-size-18)
+			font-size: remify($font-size-18)
 			line-height: (27/18)
 
 +respond-min($break-desktop-min)
@@ -84,4 +84,4 @@
 		&__content
 			top: remify(69px)
 		&__heading
-			font-size: em($font-size-84)
+			font-size: remify($font-size-84)

@@ -43,16 +43,16 @@ $teaser-heading-box-shadow: 0.4em
 	z-index: 1
 
 %teaser-text
-	font-size: em($font-size-16)
+	font-size: remify($font-size-16)
 	line-height: (20/16)
 	margin: 0 0 .5em 0 // em for a reason, so it grows with the breakpoint
 	+respond-min($break-tablet-min)
-		font-size: em($font-size-15)
+		font-size: remify($font-size-15)
 		line-height: (20/15)
 
 %teaser-metadata
 	color: $color-teaser-meta
-	font-size: em($font-size-15)
+	font-size: remify($font-size-15)
 	line-height: (20/15)
 
 %teaser-byline

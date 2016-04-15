@@ -9,7 +9,7 @@
 
 	&__heading
 		@extend %teaser-heading
-		font-size: em($font-size-42)
+		font-size: remify($font-size-42)
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -50,7 +50,7 @@
 			padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
 
 		&__heading
-			font-size: em($font-size-64)
+			font-size: remify($font-size-64)
 			max-width: (780/940) * 100%
 			padding-right: 0
 
@@ -59,7 +59,7 @@
 			float: left
 			width: 50%
 		&__text
-			font-size: em($font-size-18)
+			font-size: remify($font-size-18)
 			line-height: (27/18)
 			margin: 0
 			padding-right: $cp-padding
@@ -69,4 +69,4 @@
 +respond-min($break-desktop-min)
 	.teaser-lead-cinema
 		&__heading
-			font-size: em($font-size-84)
+			font-size: remify($font-size-84)
