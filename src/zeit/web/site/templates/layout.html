@@ -152,7 +152,7 @@
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
             {% profile %}
-            <footer class="footer" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
+            <footer class="footer" itemscope itemtype="http://schema.org/SiteNavigationElement" >
                 {% block footer %}
                     {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
                 {% endblock footer %}
