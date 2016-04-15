@@ -7,6 +7,7 @@
 		width: 100%
 
 	&__kicker
+		+font-smoothing
 		color: $color-text--on-dark
 		font-size: em(10px)
 		text-transform: uppercase
@@ -32,3 +33,6 @@
 .header-image
 	&__media-container
 		+teaser-image-dark-overlay($color: rgba(0, 0, 0, 0.5))
+
+	&:after
+		background-color: $purple
