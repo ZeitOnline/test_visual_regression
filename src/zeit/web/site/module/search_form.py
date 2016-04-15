@@ -90,7 +90,7 @@ class Form(zeit.web.core.centerpage.Module):
         if self.query in (None, lq.any_value()):
             return 'aktuell'
         order = self.request.GET.get('sort')
-        return order in ORDERS and order or 'relevanz'
+        return order if order in ORDERS else 'aktuell'
 
     @zeit.web.reify
     def raw_order(self):
