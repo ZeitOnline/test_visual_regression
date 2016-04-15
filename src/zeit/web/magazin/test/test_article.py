@@ -143,7 +143,7 @@ def test_article03_has_correct_webtrekk_values(testbrowser):
 
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,redaktion'
-            '.lebensart.essen-trinken.weinkolumne.article.zede|localhost/'
+            '.lebensart.essen-trinken.weinkolumne.article.zede%7Clocalhost/'
             'artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=article'
             '&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-trinken&amp;cg6'
             '=weinkolumne&amp;cg7=03&amp;cg8=zeitmz/essenundtrinken/article'
@@ -168,7 +168,7 @@ def test_article03_page2_has_correct_webtrekk_values(testbrowser):
     # noscript
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.'
-            'zede|localhost/artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
+            'zede%7Clocalhost/artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
             '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-'
             'trinken&amp;cg6=weinkolumne&amp;cg7=seite-2&amp;cg8=zeitmz/'
             'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne '
