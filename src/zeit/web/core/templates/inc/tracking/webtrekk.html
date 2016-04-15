@@ -126,7 +126,7 @@
             view.banner_channel | lower,
             date)
         }}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s&cp13=%s&cp15=%s&cp25=%s" | format(
-            view.authors_list | lower | urlencode,
+            view.authors_list | lower,
             ivw_code,
             pagination,
             view.meta_keywords | join(';') | lower,
