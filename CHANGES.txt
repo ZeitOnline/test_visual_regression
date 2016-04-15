@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Support non-ascii uniqueIds (and other bugsnag)
 
+- ZON-2988: Change STOA from automatic placement to normal article module
+
 
 2.71.3 (2016-04-13)
 -------------------
