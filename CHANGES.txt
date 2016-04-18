@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.72 (unreleased)
+2.72 (2016-04-18)
 -----------------
 
 - HOTFIX: Add a bit more teaser margin for zmo-landscape-large
