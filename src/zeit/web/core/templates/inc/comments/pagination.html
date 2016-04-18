@@ -8,7 +8,7 @@
 		{%- set next_label = 'Ältere Kommentare' -%}
 	{%- endif -%}
 <div class="comment-section__item">
-	<div class="pager" role="navigation" aria-labeledby="comments-pagination-title">
+	<nav class="pager" aria-labelledby="comments-pagination-title">
 		<div class="visually-hidden" id="comments-pagination-title">Kommentarseiten</div>
 		{% if pages.current == pages.total %}
 		<a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(url=view.content_url, page=pages.current-1, cid=None) }}#comments">{{ prev_label }}</a>
@@ -28,6 +28,6 @@
 			</li>
 			{% endfor %}
 		</ul>
-	</div>
+	</nav>
 </div>
 {%- endif %}

@@ -1,6 +1,6 @@
 {% import "zeit.web.campus:templates/macros/layout_macro.tpl" as lama %}
 <!DOCTYPE html>
-<html lang="de" class="no-js">
+<html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
 <head>
     <meta charset="utf-8">
     <title>{{ view.pagetitle }}</title>
@@ -64,7 +64,7 @@
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}">
+<body data-page-type="{{ view.type }}">
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
@@ -106,7 +106,7 @@
                 {% block main %}{% endblock main %}
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
-            <footer class="footer" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
+            <footer class="footer" itemscope itemtype="http://schema.org/SiteNavigationElement" >
                 {% block footer %}
                     {%- include "zeit.web.campus:templates/inc/footer.html" -%}
                 {% endblock footer %}
