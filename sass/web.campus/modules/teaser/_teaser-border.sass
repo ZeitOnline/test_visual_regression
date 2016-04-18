@@ -29,7 +29,7 @@
 		$arrow-size: 10px
 		background-color: inherit // needed for the "gap" after the border-arrow
 		border: $border-width solid currentColor
-		font-size: em($font-size-26)
+		+scaled-font(26px, $title-factor)
 		margin: remify(15px)
 		position: relative
 		&:before
@@ -64,7 +64,7 @@
 			padding: 0
 
 		&__heading
-			font-size: em($font-size-36)
+			+scaled-font(36px, $title-factor)
 			margin: remify(20px)
 			&:after
 				$border-width: 4px
@@ -81,5 +81,5 @@
 			height: remify(266px)
 
 		&__heading
-			font-size: em($font-size-42)
+			+scaled-font(42px, $title-factor)
 			margin: remify(25px)

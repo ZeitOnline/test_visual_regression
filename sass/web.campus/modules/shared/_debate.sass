@@ -7,7 +7,7 @@
     &__kicker
         display: block
         font-weight: bold
-        font-size: em($font-size-12)
+        +scaled-font(12px)
         letter-spacing: $letter-spacing-l
         color: $color-community-primary
         text-transform: uppercase
@@ -17,13 +17,13 @@
         display: block
         color: $color-text
         letter-spacing: 1.5px
-        font-size: remify($font-size-28)
+        +scaled-font(28px, $title-factor)
         line-height: 0.95
         padding: remify(10px)
 
     &__text
         color: $grey--mid
-        font-size: remify($font-size-16)
+        +scaled-font(16px)
         line-height: round-to-precision(24/16, $precision: 1)
         a
             color: $color-community-primary
@@ -36,6 +36,6 @@
 
     +respond-min($break-tablet-min)
         &__kicker
-            font-size: em($font-size-14)
+            +scaled-font(14px)
         &__title
-            font-size: em($font-size-42)
+            +scaled-font(42px, $title-factor)

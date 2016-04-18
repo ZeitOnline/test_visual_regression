@@ -21,7 +21,7 @@
 	position: relative
 	&__heading
 		@extend %font-beckett
-		font-size: em($font-size-42)
+		+scaled-font(42px, $title-factor)
 		margin: remify(0 0 24px)
 	&__combined-link
 		display: block
@@ -35,7 +35,7 @@
 		border: 3px solid #fff
 		color: #fff
 		display: inline-block
-		font-size: em($font-size-16)
+		+scaled-font(16px)
 		font-weight: bold
 		letter-spacing: 0.01em
 		margin: remify(0 0 28px)
@@ -66,7 +66,7 @@
 	&__kicker
 		color: #E6EDEE
 		display: block
-		font-size: em($font-size-12)
+		+scaled-font(12px)
 		font-weight: bold
 		letter-spacing: $letter-spacing-l
 		line-heigth: round-to-precision(15/12, $precision: 1)
@@ -76,7 +76,7 @@
 		@extend %font-beckett
 		color: #fff
 		display: block
-		font-size: em($font-size-28)
+		+scaled-font(28px, $title-factor)
 
 +respond-min($break-tablet-min)
 	.teaser-topic
@@ -87,14 +87,14 @@
 		padding: remify(0 30px)
 		width: 58%
 		&__heading
-			font-size: em($font-size-64)
+			+scaled-font(64px, $title-factor)
 	.teaser-topic-list
 		float: right
 		padding: remify(0 30px 0 $cp-padding)
 		width: 42%
 	.teaser-topic-item
 		&__title
-			font-size: em($font-size-26)
+			+scaled-font(26px, $title-factor)
 
 +respond-min($break-desktop-min)
 	.teaser-topic-main

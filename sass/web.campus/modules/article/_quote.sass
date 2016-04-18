@@ -1,13 +1,13 @@
 $quote-padding: 1em
 
 .quote
-	font-size: em($font-size-32)
+	+scaled-font(32px, $title-factor)
 	margin: remify(30px) auto
 	padding: $quote-padding 0
 	position: relative
 	text-align: center
 	+respond-min($break-tablet-min)
-		font-size: em($font-size-64)
+		+scaled-font(64px, $title-factor)
 		margin: remify(40px) auto
 		max-width: remify(820px)
 
@@ -33,7 +33,7 @@ $quote-padding: 1em
 		position: relative
 
 	&__source
-		font-size: remify($font-size-16)
+		+scaled-font-rem(16px)
 		line-height: 1.25
 		margin-top: .66em
 		position: relative
@@ -42,7 +42,7 @@ $quote-padding: 1em
 			margin-right: .25em
 
 		+respond-min($break-tablet-min)
-			font-size: remify($font-size-18)
+			+scaled-font-rem(18px)
 			line-height: 1.33
 
 	&__link

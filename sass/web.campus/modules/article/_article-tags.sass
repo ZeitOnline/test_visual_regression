@@ -2,7 +2,7 @@ $article-tags-margin-right-small: 7px
 $article-tags-margin-right-large: 16px
 
 .article-tags
-	font-size: em($font-size-15)
+	+scaled-font(15px)
 	letter-spacing: $letter-spacing-s
 	margin: remify(0 0 20px)
 	&__title
@@ -26,7 +26,7 @@ $article-tags-margin-right-large: 16px
 +respond-min($break-tablet-min)
 	.article-tags
 		+clearfix
-		font-size: em($font-size-14)
+		+scaled-font(14px)
 		margin-right: remify(-$article-tags-margin-right-large)
 		&__title
 			float: left

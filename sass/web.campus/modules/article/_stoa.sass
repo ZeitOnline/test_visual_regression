@@ -17,7 +17,7 @@
         @extend %font-beckett
         text-transform: uppercase
         letter-spacing: 1.5px
-        font-size: remify($font-size-30) // adapted to handle long words
+        +scaled-font(30px, $title-factor) // adapted to handle long words
         line-height: 1 // adapted to handle long words
         display: block
         padding: remify(20px 30px)

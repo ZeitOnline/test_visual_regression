@@ -38,12 +38,12 @@
 	&__title
 		+font-smoothing
 		@extend %font-beckett
-		font-size: remify($font-size-26)
+		+scaled-font(26px, $title-factor)
 		font-size: 8.75vw
 		+respond-min($break-tablet-min)
-			font-size: remify($font-size-32)
+			+scaled-font(32px, $title-factor)
 		+respond-min($break-desktop-min)
-			font-size: remify($font-size-32)
+			+scaled-font(32px, $title-factor)
 	&__kicker
 		color: #fff
 	&__title
@@ -70,11 +70,11 @@
 	&__text
 		@extend %font-beckett
 		color: $primary-color
-		font-size: remify($font-size-26)
+		+scaled-font(26px, $title-factor)
 		+respond-min($break-tablet-min)
-			font-size: remify($font-size-21)
+			+scaled-font(21px, $title-factor)
 		+respond-min($break-desktop-min)
-			font-size: remify($font-size-28)
+			+scaled-font(28px, $title-factor)
 	&__label
 		@extend %border-box--cta
 		color: $color-community-primary
@@ -116,16 +116,16 @@
 	&__text
 		@extend %font-beckett
 		+font-smoothing
-		font-size: remify($font-size-26)
+		+scaled-font(26px, $title-factor)
 		font-size: 8vw
 		line-height: 1
 		padding: 0.5em 0.5em 0.35em
 		text-align: center
 		+respond-min($break-tablet-min)
 			padding-left: remify(56px + 20px)
-			font-size: remify($font-size-21)
+			+scaled-font(21px, $title-factor)
 			line-height: 2
 			text-align: left
 		+respond-min($break-desktop-min)
-			font-size: remify($font-size-28)
+			+scaled-font(28px, $title-factor)
 			padding-left: remify(80px + 20px)

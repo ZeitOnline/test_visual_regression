@@ -5,7 +5,7 @@
 	padding-bottom: remify(18px)
 	&__kicker
 		color: $color-text--on-dark
-		font-size: remify($font-size-12)
+		+scaled-font(12px)
 		letter-spacing: 0.08em
 		line-height: 1.25
 		padding-bottom: remify(10px)
@@ -13,10 +13,10 @@
 	&__title
 		@extend %font-beckett
 		color: $white
-		font-size: remify($font-size-28)
+		+scaled-font(28px, $title-factor)
 	&__description
 		color: $color-text--on-dark
-		font-size: remify($font-size-15)
+		+scaled-font(15px)
 		letter-spacing: 0.03em
 		line-height: (20/15)
 		// the description gets the padding, because we're not sure it's always there

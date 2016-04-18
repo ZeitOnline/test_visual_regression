@@ -5,7 +5,7 @@
 		+padded
 		@extend %font-beckett
 		color: $color-text
-		font-size: em($font-size-28)
+		+scaled-font(28px, $title-factor)
 		margin: 0 0 -0.6em
 
 	&__list
@@ -29,13 +29,13 @@
 
 	&__title
 		@extend %font-beckett
-		font-size: em($font-size-28)
+		+scaled-font(28px, $title-factor)
 		margin: remify(0 0 9px)
 
 	&__text,
 	&__cta,
 	&__sit-link
-		font-size: em($font-size-16)
+		+scaled-font(16px)
 		line-height: 16/20
 
 	&__text
@@ -67,7 +67,7 @@
 +respond-min($break-tablet-min)
 	.toolbox
 		&__headline
-			font-size: em($font-size-42)
+			+scaled-font(42px, $title-factor)
 
 		&__title
 			min-height: 1.9em // = 2 lines
@@ -91,7 +91,7 @@
 
 		&__text
 			display: block
-			font-size: em($font-size-14)
+			+scaled-font(14px)
 			margin-bottom: remify(30px)
 
 		&__cta
@@ -103,7 +103,7 @@
 +respond-min($break-desktop-min)
 	.toolbox
 		&__headline
-			font-size: em($font-size-64)
+			+scaled-font(64px, $title-factor)
 
 		&__list
 			padding-top: remify(60px)
@@ -113,8 +113,8 @@
 			padding-right: remify(20px)
 
 		&__title
-			font-size: em($font-size-42)
+			+scaled-font(42px, $title-factor)
 
 		&__text
-			font-size: em($font-size-16)
+			+scaled-font(16px)
 			margin-bottom: remify(20px)
