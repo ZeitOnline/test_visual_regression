@@ -8,26 +8,27 @@
 	text-transform: uppercase
 
 .buzzboard
-	+respond-max($break-2)
-		+visuallyhidden
+	display: none
+	+respond-min($break-2)
+		display: block
 	font-family: $font-tabletgothic
 	padding: $compact
 
 	&__headline
 		@extend %buzzboard__heading
-		+no-user-select
-		background-color: $white
+		background-color: $color-page-bg
+		display: table
+		margin: 0 auto
 		padding: 0 $petite
-		display: inline
-
-	&__divider
-		border-bottom: $dblhair solid $black
-		height: $fine
-		text-align: center
-		display: block
+		position: relative
+		z-index: 1
 
 	&__table
-		border-bottom: $dblhair solid $black
+		border-color: #000
+		border-style: solid
+		border-width: 2px 0
+		position: relative
+		top: remify(-14px)
 		width: 100%
 		tbody
 			counter-reset: buzz-board
