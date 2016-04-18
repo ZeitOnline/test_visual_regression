@@ -1,17 +1,10 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
-    <exclude package="zeit.cms.sitecontrol" />
-    <exclude package="zeit.cms.tagging.browser" />
-    <exclude package="zeit.find.browser" />
-    <exclude package="zeit.edit.browser" />
     <include package="zeit.cms" />
 
-    <exclude package="zeit.workflow.browser" />
     <include package="zeit.workflow" />
 
     <include package="zeit.content.advertisement" />
-    <exclude package="zeit.content.article.edit.browser" />
-    <exclude package="zeit.content.article.browser" />
     <include package="zeit.content.article" />
     <include package="zeit.content.dynamicfolder" />
     <include package="zeit.content.image" />
