@@ -1,5 +1,5 @@
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}">
+<body data-page-type="{{ view.type }}">
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}

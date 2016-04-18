@@ -197,8 +197,7 @@ def test_footer_should_have_expected_structure(testbrowser):
 
 def test_article_request_should_have_body_element(testbrowser):
     browser = testbrowser('/artikel/05')
-    assert ('<body itemscope itemtype='
-            '"http://schema.org/WebPage"') in browser.contents
+    assert '<body' in browser.contents
     assert '</body>' in browser.contents
 
 

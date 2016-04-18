@@ -3,7 +3,9 @@
 <!--[if IE 7]> <html lang="de" class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]> <html lang="de" class="no-js lt-ie9"> <![endif]-->
 <!--[if IE 9]> <html lang="de" class="no-js lt-ie10"> <![endif]-->
-<!--[if gt IE 9]><!--> <html lang="de" class="no-js"> <!--<![endif]-->
+<!--[if gt IE 9]><!-->
+<html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
+<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">

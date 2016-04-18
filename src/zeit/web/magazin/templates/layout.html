@@ -4,7 +4,7 @@
 <!--[if IE 8]> <html class="no-js lt-ie10 lt-ie9 ie" lang="de"> <![endif]-->
 <!--[if IE 9]> <html class="no-js lt-ie10 ie" lang="de"> <![endif]-->
 <!--[if gt IE 9]><!-->
-<html class='no-js modern-browser' lang='de'>
+<html class="no-js" lang="de" itemscope itemtype="http://schema.org/WebPage">
 <!--<![endif]-->
     <head>
         <meta charset="utf-8">
@@ -72,7 +72,7 @@
             <script src="//localhost:35729/livereload.js"></script>
         {% endif %}
     </head>
-    <body itemscope itemtype="http://schema.org/WebPage" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
+    <body data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 
         {% include "zeit.web.core:templates/inc/tag-manager.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
