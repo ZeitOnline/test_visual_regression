@@ -380,30 +380,30 @@ def test_article_1_10_produce_no_error(testbrowser):
 
 def test_article_1_10_have_correct_h1(testbrowser):
     browser = testbrowser('/artikel/01')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/02')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/03')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/04')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/05')
-    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1 > .article__head__title')
     browser = testbrowser('/artikel/06')
-    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1 > .article__head__title')
     browser = testbrowser('/artikel/08')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/09')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/10')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
 
 
 def test_header_articles_produce_no_error(testbrowser):
@@ -418,22 +418,22 @@ def test_header_articles_produce_no_error(testbrowser):
 
 def test_header_articles_have_correct_h1(testbrowser):
     browser = testbrowser('/artikel/header1')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/header2')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/header3')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/header4')
-    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1 > .article__head__title')
     browser = testbrowser('/artikel/header5')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/header6')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
 
 
 def test_article_header2_has_correct_subtitle(testbrowser):
@@ -444,7 +444,7 @@ def test_article_header2_has_correct_subtitle(testbrowser):
 
 def test_artikel_header_header1_should_have_correct_header_source(testbrowser):
     browser = testbrowser('/artikel/header1')
-    assert browser.cssselect('h1>.article__head__title')
+    assert browser.cssselect('h1 > .article__head__title')
 
 
 def test_artikel_header_header2_should_have_correct_source(testbrowser):

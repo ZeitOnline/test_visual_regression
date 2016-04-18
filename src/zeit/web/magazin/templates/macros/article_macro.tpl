@@ -10,11 +10,11 @@
 {%- endmacro %}
 
 {% macro supertitle() -%}
-  <div class="article__head__supertitle">{{ view.supertitle }}</div>
+  <span class="article__head__supertitle">{{ view.supertitle }}</span>
 {%- endmacro %}
 
 {% macro title() -%}
-  <div class="article__head__title">{{ view.title }}</div>
+  <span class="article__head__title">{{ view.title }}</span>
 {%- endmacro %}
 
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
