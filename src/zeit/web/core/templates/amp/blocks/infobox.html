@@ -1,6 +1,6 @@
 {% if block.contents -%}
 {% set id = block.title | attr_safe %}
-<div class="infobox" id="{{ id }}" role="application">
+<aside class="infobox" id="{{ id }}">
 	<div class="infobox__container article__item">
 	{% for title, text in block.contents %}
 		<section id="{{ id }}-{{ loop.index }}">
@@ -27,5 +27,5 @@
 		</section>
 	{% endfor %}
 	</div>
-</div>
+</aside>
 {%- endif %}
