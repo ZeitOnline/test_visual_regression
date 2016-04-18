@@ -14,7 +14,7 @@ def is_zco_content(context, request):
 
 class Base(zeit.web.core.view.Base):
 
-    seo_title_default = u'ZEIT Campus | studieren. arbeiten. leben.'
+    seo_title_default = u'ZEIT Campus ONLINE | studieren. arbeiten. leben.'
     pagetitle_suffix = u' | ZEIT Campus'
 
     @zeit.web.reify
