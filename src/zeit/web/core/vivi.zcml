@@ -1,5 +1,16 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
+    <!-- include only those parts of zeit.cms:application.zcml that the vivi
+         *model* code needs, thus saving us lots of zope.* includes -->
+    <include package="zope.component" file="meta.zcml" />
+    <include package="zope.security" file="meta.zcml" />
+    <include package="zope.security" file="permissions.zcml" />
+    <include package="zope.securitypolicy" file="meta.zcml" />
+    <subscriber
+      for="zope.processlifetime.IDatabaseOpened"
+      handler="zope.app.appsetup.bootstrap.bootStrapSubscriber"/>
+
+    <exclude package="grokcore.view" />
     <include package="zeit.cms" />
 
     <include package="zeit.workflow" />
