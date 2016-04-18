@@ -1,16 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.72 (unreleased)
+2.73 (unreleased)
 -----------------
 
-- ZON-2906: Style Campus CP-Header Image
+- Nothing changed yet.
 
-- ZON-2907: Add Campus CP-Header Markup
+
+2.72 (2016-04-18)
+-----------------
 
 - HOTFIX: Add a bit more teaser margin for zmo-landscape-large
 
-- ZON-2942: Use Core metadata for Campus
+- ZON-2499: Campus CP-Header
+
+- ZON-2942: Use ZON/core metadata for dates etc. in Campus
 
 - ZON-2980: Configure rawr return url parameter to work with our SSO
 
@@ -22,9 +26,17 @@ Change log for zeit.web
 
 - ZON-2961: SVG – back to the roots (render SVGs inline)
 
+- ZON-2988: Change STOA from automatic placement to normal article module
+
+- FIX: Use correct xml namespace in zett feed
+
 - FIX: Support non-ascii uniqueIds (and other bugsnag)
 
 - BUG-396: Enable nextread link and image copyrights
+
+- BUG-377 part 2: Set default sort order to "recent"
+
+- BUG-390: Replace Adtile 1 with amp-ad code
 
 - MAINT: Fix ZEIT Campus column article header image
 

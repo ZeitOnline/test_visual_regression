@@ -499,7 +499,7 @@ class CommentForm(zeit.web.core.view.CommentMixin,
     def error(self):
         if 'error' not in self.request.params:
             return
-        return self.request.session.pop(self.request.params['error'])
+        return self.request.session.pop(self.request.params['error'], None)
 
 
 @pyramid.view.view_defaults(

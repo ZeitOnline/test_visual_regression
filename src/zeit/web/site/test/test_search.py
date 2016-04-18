@@ -79,18 +79,25 @@ def test_search_form_should_default_to_recency_sort_order(
     assert search_form.sort_order == 'aktuell'
 
 
+def test_search_form_should_default_to_recency_sort_order_with_query(
+        dummy_request, search_form):
+    dummy_request.GET['q'] = 'foo'
+    dummy_request.GET['sort'] = ''
+    assert search_form.sort_order == 'aktuell'
+
+
 def test_search_form_should_sort_valid_queries_by_relevancy(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
     dummy_request.GET['sort'] = ''
-    assert search_form.sort_order == 'relevanz'
+    assert search_form.sort_order == 'aktuell'
 
 
 def test_search_form_should_ignore_invalid_sort_orders(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
     dummy_request.GET['sort'] = 'pfannkuchen'
-    assert search_form.sort_order == 'relevanz'
+    assert search_form.sort_order == 'aktuell'
 
 
 def test_search_form_should_allow_valid_search_order_aktuell(

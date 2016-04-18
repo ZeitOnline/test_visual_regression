@@ -2,6 +2,7 @@ import mock
 import requests
 import pyramid.testing
 
+import pyramid.testing
 import zeit.cms.interfaces
 import zeit.web.core.view_article
 
