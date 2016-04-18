@@ -62,7 +62,7 @@ def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
 
     markup = ('<div class="breadcrumbs">'
               '<div class="breadcrumbs__list is-constrained is-centered">'
-              '<div class="breadcrumbs__list__item" itemscope="itemscope"'
+              '<div class="breadcrumbs__list__item" itemscope'
               ' itemtype="http://data-vocabulary.org/Breadcrumb">'
               '<a href="link" itemprop="url"><span itemprop="title">text'
               '</span></a></div></div></div>')

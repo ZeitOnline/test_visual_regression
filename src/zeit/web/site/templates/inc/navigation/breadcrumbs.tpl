@@ -9,7 +9,7 @@
         {% else %}
             {% set bcrumb_title = bcrumb_text %}
         {% endif %}
-        <li class="footer-breadcrumbs__item" itemtype="http://data-vocabulary.org/Breadcrumb" itemscope="itemscope">
+        <li class="footer-breadcrumbs__item" itemtype="http://data-vocabulary.org/Breadcrumb" itemscope>
             {% if bcrumb_link is not none %}
             <a class="footer-breadcrumbs__link" itemprop="url" title="{{ bcrumb_title }}" href="{{ bcrumb_link | create_url}}" data-id="footernav.breadcrumbs.1.{{ loop.index }}.{{ bcrumb_text | format_webtrekk }}">
                 <span itemprop="title">{{ bcrumb_text }}</span>

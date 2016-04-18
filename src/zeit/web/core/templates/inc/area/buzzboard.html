@@ -3,47 +3,49 @@
 {% set module_layout = 'buzzboard' %}
 
 {% block before_module_list %}
-	<section class="buzzboard">
-		<span class="buzzboard__divider">
-			<h3 class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</h3>
-		</span>
+    <section class="buzzboard">
+        <span class="buzzboard__divider">
+            <h3 class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</h3>
+        </span>
 {% endblock %}
 
 {% block module_list %}
-	{%- set modules = area.values() | map('get_module') | list %}
+    {%- set modules = area.values() | map('get_module') | list %}
 
-	<table class="buzzboard__table buzzboard__table--col{{ modules | length }}">
-		<thead>
-			{% for module in modules -%}
-			<th>
-				{% if module.icon %}
-					{% set modifier = module.icon.strip('buzz-') -%}
-					{{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), view.package) }}
-				{% endif %}
-				{{ module.label | safe }}
-			</th>
-			{% endfor %}
-		</thead>
-		<tbody>
-			{% for row in range(3) -%}
-			<tr>
-				{% for column in range(modules | length) -%}
-				<td>
-					{%- set module = modules[column] %}
-					{% if row < (module | length) %}
-						{%- set teaser = modules[column][row] %}
-						{%- set layout = module | get_layout %}
-						{%- set journalistic_format = module | get_journalistic_format %}
-						{% include "{}:templates/inc/teaser/buzzboard.tpl".format(view.package) %}
-					{% endif %}
-				</td>
-				{% endfor %}
-			</tr>
-			{% endfor %}
-		</tbody>
-	</table>
+    <table class="buzzboard__table buzzboard__table--col{{ modules | length }}">
+        <thead>
+            <tr>
+                {% for module in modules -%}
+                <th>
+                    {% if module.icon %}
+                        {% set modifier = module.icon.strip('buzz-') -%}
+                        {{ lama.use_svg_icon(module.icon, '%s__icon' | format(module_layout) | with_mods(modifier), view.package) }}
+                    {% endif %}
+                    {{ module.label | safe }}
+                </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in range(3) -%}
+            <tr>
+                {% for column in range(modules | length) -%}
+                <td>
+                    {%- set module = modules[column] %}
+                    {% if row < (module | length) %}
+                        {%- set teaser = modules[column][row] %}
+                        {%- set layout = module | get_layout %}
+                        {%- set journalistic_format = module | get_journalistic_format %}
+                        {% include "{}:templates/inc/teaser/buzzboard.tpl".format(view.package) %}
+                    {% endif %}
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock module_list %}
 
 {% block after_module_list %}
-	</section>
+    </section>
 {% endblock %}

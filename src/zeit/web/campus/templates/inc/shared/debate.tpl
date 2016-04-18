@@ -5,21 +5,23 @@
 {% endblock %}
 
     <div class="debate">
-        <span class="debate__kicker">
-            {% block kicker %}
-                {{ block.title }}
-            {% endblock %}
-        </span>
-        <span class="debate__title">
-            {% block title %}
-                {% if block.contents -%}
-                    {% for title, text in block.contents %}
-                        {{ title }}
-                    {% endfor %}
-                {%- endif %}
-            {% endblock %}
-        </span>
-        <span class="debate__text">
+        <h2 class="debate__heading">
+            <span class="debate__kicker">
+                {% block kicker %}
+                    {{ block.title }}
+                {% endblock %}
+            </span>
+            <span class="debate__title">
+                {% block title %}
+                    {% if block.contents -%}
+                        {% for title, text in block.contents %}
+                            {{ title }}
+                        {% endfor %}
+                    {%- endif %}
+                {% endblock %}
+            </span>
+        </h2>
+        <div class="debate__text">
             {% if block.contents -%}
                 {% block text %}
                     {% for title, text in block.contents %}
@@ -32,7 +34,7 @@
                         {% endfor %}
                 {% endblock %}
             {%- endif %}
-        </span>
+        </div>
         <a class="debate__label" href="{{ adapt(block.context, 'zeit.campus.interfaces.IDebate').action_url }}">
             Mitdiskutieren
         </a>

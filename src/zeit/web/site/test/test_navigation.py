@@ -54,7 +54,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
                     '[data-dropdown="true"]')
                ) == 1, 'just one .main_nav__search w/ data-dropdown=true'
 
-    assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
+    assert len(html('nav#primary_nav ul.primary-nav')) == 1
 
 
 def test_nav_ressorts_should_produce_markup(application, jinja2_env):
