@@ -287,7 +287,7 @@ def test_schema_org_article_mark_up(testbrowser):
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros.'
+    assert person.text == u'© Warner Bros.'
 
     assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
 
