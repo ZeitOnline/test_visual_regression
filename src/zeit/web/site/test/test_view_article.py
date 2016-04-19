@@ -288,7 +288,7 @@ def test_schema_org_article_mark_up(testbrowser):
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros.'
+    assert person.text == u'© Warner Bros.'
 
     assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
 
@@ -952,16 +952,6 @@ def test_article_doesnt_show_modified_date(testbrowser):
 def test_video_in_article_is_there(testbrowser):
     article = testbrowser('/zeit-online/article/zeit')
     assert len(article.cssselect('.video-player__iframe')) == 1
-
-
-def test_advertorial_marker_is_returned_correctly():
-    content = mock.Mock()
-    content.advertisement_title = 'YYY'
-    content.advertisement_text = 'XXX'
-    content.cap_title = 'ZZZ'
-    view = zeit.web.site.view_article.Article(
-        content, pyramid.testing.DummyRequest())
-    assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')
 
 
 def test_advertorial_marker_is_present(testbrowser):

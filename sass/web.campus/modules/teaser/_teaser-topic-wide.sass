@@ -9,7 +9,7 @@
 
 	&__heading
 		@extend %teaser-heading
-		font-size: remify(42px)
+		+scaled-font(42px, $title-factor)
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -51,7 +51,7 @@
 			margin: remify(30px 0 30px -45px)
 
 		&__heading
-			font-size: remify(42px)
+			+scaled-font(42px, $title-factor)
 			margin: remify(0 0 5px)
 			max-width: none
 			padding: 0

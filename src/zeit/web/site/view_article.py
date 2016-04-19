@@ -117,16 +117,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     def has_cardstack(self):
         return len(self.context.xml.xpath('/article/body//cardstack')) > 0
 
-    @zeit.web.reify
-    def advertorial_marker(self):
-        try:
-            return (
-                self.context.advertisement_title,
-                self.context.advertisement_text,
-                self.cap_title)
-        except AttributeError:
-            return None
-
     # Only needed to set tracking code on
     # http://www.zeit.de/newsletter/registriert?nl=premium.
     @zeit.web.reify

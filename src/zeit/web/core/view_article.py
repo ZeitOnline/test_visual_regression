@@ -251,6 +251,16 @@ class Article(zeit.web.core.view.Content):
     def is_amp(self):
         return self.context.is_amp
 
+    @zeit.web.reify
+    def advertorial_marker(self):
+        try:
+            return (
+                self.context.advertisement_title,
+                self.context.advertisement_text,
+                self.cap_title)
+        except AttributeError:
+            return None
+
 
 @view_config(route_name='amp',
              context=zeit.content.article.interfaces.IArticle,

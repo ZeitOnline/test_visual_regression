@@ -13,14 +13,14 @@
 
 	&__title
 		@extend %font-beckett
-		font-size: em(28px)
+		+scaled-font(28px, $title-factor)
 		margin: 0
 
 	&__text
-		font-size: em(16px)
+		+scaled-font(16px)
 		line-height: round-to-precision(20/16, $precision: 2)
 		+respond-min($break-tablet-min)
-			font-size: em(18px)
+			+scaled-font(18px)
 			line-height: round-to-precision(24/18, $precision: 2)
 
 	p, ol, ul

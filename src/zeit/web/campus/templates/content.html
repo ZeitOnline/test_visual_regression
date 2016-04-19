@@ -1,6 +1,7 @@
 {% extends 'zeit.web.campus:templates/layout.html' %}
 
 {% block main %}
+    {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
     <article class="{{ 'article' | with_mods(view.article_layout, view | block_type) }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">

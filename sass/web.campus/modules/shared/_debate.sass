@@ -10,23 +10,23 @@
     &__kicker
         display: block
         font-weight: bold
-        font-size: em(12px)
+        +scaled-font(12px)
         letter-spacing: $letter-spacing-l
         color: $color-community-primary
         text-transform: uppercase
 
     &__title
+        @extend %font-beckett
         display: block
-        font-family: $font-beckett
         color: $color-text
         letter-spacing: 1.5px
-        font-size: remify(28px)
+        +scaled-font(28px, $title-factor)
         line-height: 0.95
         padding: remify(10px)
 
     &__text
         color: $grey--mid
-        font-size: remify(16px)
+        +scaled-font(16px)
         line-height: round-to-precision(24/16, $precision: 1)
         a
             color: $color-community-primary
@@ -39,6 +39,6 @@
 
     +respond-min($break-tablet-min)
         &__kicker
-            font-size: em(14px)
+            +scaled-font(14px)
         &__title
-            font-size: em(42px)
+            +scaled-font(42px, $title-factor)

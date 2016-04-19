@@ -141,3 +141,16 @@ def test_headerimage_has_appropriate_html_structure(testbrowser):
     assert len(header[1].cssselect('.header-image__heading--overlay')) == 0
     assert image.get('data-variant') == 'cinema'
     assert not image.get('data-mobile-variant')
+
+
+def test_adverorial_header_has_appropriate_html_structure(testbrowser):
+    select = testbrowser('/campus/centerpage/advertorial').cssselect
+    assert len(select('.header-image')) == 1
+    assert len(select('.header-advertorial__heading')) == 1
+    assert len(select('.header-advertorial__kicker')) == 1
+    assert len(select('.header-advertorial__title')) == 1
+
+
+def test_adverorial_has_markup_module(testbrowser):
+    select = testbrowser('/campus/centerpage/advertorial').cssselect
+    assert len(select('.markup')) == 1
