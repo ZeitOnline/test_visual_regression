@@ -4,7 +4,7 @@
     <div class="breadcrumbs">
         <div class="breadcrumbs__list is-constrained is-centered">
             {% for crumb in crumbs -%}
-                <div class="breadcrumbs__list__item" itemscope="itemscope" itemtype="http://data-vocabulary.org/Breadcrumb">
+                <div class="breadcrumbs__list__item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
                 {% if crumb[1] != '' -%}
                     <a href="{{crumb[1]}}" itemprop="url"><span itemprop="title">{{crumb[0]}}</span></a>
                 {% else -%}

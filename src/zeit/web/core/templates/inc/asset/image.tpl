@@ -1,7 +1,7 @@
 {% if image and not is_image_expired(image) %}
     {# TRASHME Rather crude bitblt/zci image api switch #}
-    {% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
-    {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}
+    {% set source = (request.image_host + image.path) if image is variant else image | default_image_url | replace(' ', '%20') %}
+    {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source | replace(' ', '%20') %}
 
     <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image"
         {%- if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">

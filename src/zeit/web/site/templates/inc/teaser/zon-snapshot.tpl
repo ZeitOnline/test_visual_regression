@@ -10,6 +10,6 @@
     {{ cp.section_heading(module.title, module.read_more, module.read_more_url, None, tracking_slug + 'gesammelte_momente') }}
     {% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
     <div class="snapshot-caption">
-        {{ image.caption | trim }} {{ cp.image_copyright(image.copyright, 'snapshot-caption') }}</span>
+        {{ image.caption | trim }} {{ cp.image_copyright(image.copyright, 'snapshot-caption') }}
     </div>
 </div>
