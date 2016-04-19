@@ -20,16 +20,6 @@
     {%- endif %}
 {%- endmacro %}
 
-{% macro image_copyright(copyright, blockname) -%}
-    {%- if copyright[0][1] -%}
-        <a class="{{ blockname }}__link" href="{{ copyright[0][1] }}" target="_blank">
-    {%- endif -%}
-            <span class="{{ blockname }}__item">©&nbsp;{{ copyright[0][0] | replace('© ', '') }}</span>
-    {%- if copyright[0][1] -%}
-        </a>
-    {%- endif -%}
-{%- endmacro %}
-
 {% macro section_heading(title, label='', path=None, view=None, tracking_slug=None, unpadded=None) -%}
     <div class="section-heading {% if unpadded %}section-heading--unpadded{% endif %}">
         <h3 class="section-heading__title">{{ title }}</h3>

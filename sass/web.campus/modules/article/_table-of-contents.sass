@@ -1,7 +1,7 @@
 .article-toc
 	color: $color-article-primary
 	&__container
-		font-size: em(14px)
+		+scaled-font(14px)
 		line-height: round-to-precision(20/14)
 		margin-bottom: remify(40px)
 		+respond-min($break-tablet-min)
@@ -12,7 +12,7 @@
 		@extend %font-beckett
 		border-bottom: 3px solid currentColor
 		display: inline-block
-		font-size: remify(32px)
+		+scaled-font-rem(32px, $title-factor)
 		margin: 0
 		position: relative
 		+respond-min($break-tablet-min)
@@ -53,7 +53,7 @@
 		padding: remify(0 0 10px)
 		strong
 			@extend %font-beckett
-			font-size: remify(32px)
+			+scaled-font-rem(32px, $title-factor)
 			float: left
 		span
 			display: block
@@ -67,7 +67,7 @@
 		&--current
 			font-weight: 700
 		&--empty
-			font-size: remify(16px)
+			+scaled-font-rem(16px)
 			margin: remify(-8px 0 2px)
 			padding-left: remify(10px)
 	&__link
@@ -75,7 +75,7 @@
 	&__onesie
 		border-bottom: 1px solid currentColor
 		color: inherit
-		font-size: remify(12px)
+		+scaled-font-rem(12px)
 		letter-spacing: $letter-spacing-l
 		text-transform: uppercase
 

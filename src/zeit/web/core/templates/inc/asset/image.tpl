@@ -1,7 +1,7 @@
 {% if image and not is_image_expired(image) %}
     {# TRASHME Rather crude bitblt/zci image api switch #}
-    {% set source = (request.image_host + image.path) if image is variant else image | default_image_url %}
-    {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source %}
+    {% set source = (request.image_host + image.path) if image is variant else image | default_image_url | replace(' ', '%20') %}
+    {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source | replace(' ', '%20') %}
 
     <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image"
         {%- if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
@@ -18,13 +18,13 @@
         </noscript>
         <!--<![endif]-->
         {% block media_caption -%}
-        <figcaption class="figure__caption {{ media_caption_additional_class }}">
+        <figcaption class="{% block media_caption_class %}figure{% endblock %}__caption {{ media_caption_additional_class }}">
             {%- block media_caption_content %}
                 {%- for name, url, nofollow in image.copyright %}
                     {%- if name | trim | length > 1 %}
-                        <span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
+                        <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
                             {%- if url and not omit_image_links %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif -%}
-                            <span itemprop="name">{{ name }}</span>
+                            <span itemprop="name">©&nbsp;{{ name | replace('©', '') | trim }}</span>
                             {%- if url and not omit_image_links %}</a>{% endif -%}
                         </span>
                     {%- endif %}

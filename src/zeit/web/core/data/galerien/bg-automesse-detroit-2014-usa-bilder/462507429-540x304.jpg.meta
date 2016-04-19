@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <head xmlns:D="DAV:">
 	<attribute ns="DAV:" name="href">/cms/work/kultur/2014-04/fs-shomei-tomatsu-japan-bilder/462507429-540x304.jpg</attribute>
-	<attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;© Xinhua/Zhang Wenkui/Reuters&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;© Xinhua/Zhang Wenkui/Reuters&lt;/unicode&gt; &lt;string&gt;http://www.slomo.de&lt;/string&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
 	<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-04-17T17:32:26.687272+00:00</attribute>
 	<attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.hoehler</attribute>
 	<attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name=&quot;LocalImage&quot; module=&quot;zeit.content.image.image&quot;/&gt; &lt;global name=&quot;IZMOContent&quot; module=&quot;zeit.magazin.interfaces&quot;/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>

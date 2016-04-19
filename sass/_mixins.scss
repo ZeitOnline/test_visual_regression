@@ -512,3 +512,11 @@
 		right: 0;
 	}
 }
+
+@mixin scaled-font($size: 12px, $factor: $font-factor){
+	font-size: em($size * $factor);
+}
+
+@mixin scaled-font-rem($size: 12px, $factor: $font-factor){
+	font-size: remify($size * $factor);
+}

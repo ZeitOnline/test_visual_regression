@@ -1,6 +1,6 @@
 import mock
 import requests
-
+import pyramid.testing
 import zeit.cms.interfaces
 import zeit.web.core.view_article
 
@@ -24,3 +24,13 @@ def test_article_tags_template_renders_rel_attribute(
     tags = browser.cssselect('a.article-tags__link')
     for tag in tags:
         assert tag.get('rel') == 'tag'
+
+
+def test_advertorial_marker_is_returned_correctly():
+    content = mock.Mock()
+    content.advertisement_title = 'YYY'
+    content.advertisement_text = 'XXX'
+    content.cap_title = 'ZZZ'
+    view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
+    assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')

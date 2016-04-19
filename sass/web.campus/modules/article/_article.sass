@@ -41,10 +41,10 @@
 
 	&__subheading
 		@extend %font-beckett
-		font-size: em(26px)
+		+scaled-font(26px, $title-factor)
 		margin: remify(38px auto 12px)
 		+respond-min($break-tablet-min)
-			font-size: em(42px)
+			+scaled-font(42px)
 			margin: remify(60px auto 20px)
 
 .article-page
