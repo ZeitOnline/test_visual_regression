@@ -1,9 +1,30 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
+    <!-- include only those parts of zeit.cms:application.zcml that the vivi
+         *model* code needs, thus saving us lots of zope.* includes -->
+    <include package="zope.component" file="meta.zcml" />
+    <include package="zope.i18n" file="meta.zcml" />
+    <include package="zope.security" file="meta.zcml" />
+    <include package="zope.security" file="permissions.zcml" />
+    <include package="zope.securitypolicy" file="meta.zcml" />
+
+    <include package="zope.annotation" />
+    <include package="zope.component" />
+    <include package="zope.container" />
+    <include package="zope.location" />
+    <include package="zope.securitypolicy" />
+    <include package="zope.traversing" />
+    <include package="zope.generations" file="subscriber.zcml" />
+    <subscriber
+      for="zope.processlifetime.IDatabaseOpened"
+      handler="zope.app.appsetup.bootstrap.bootStrapSubscriber"/>
+    <include package="gocept.lxml" />
+    <include package="zc.sourcefactory" />
+
+    <exclude package="grokcore.view" />
     <include package="zeit.cms" />
 
     <include package="zeit.workflow" />
-
     <include package="zeit.content.advertisement" />
     <include package="zeit.content.article" />
     <include package="zeit.content.dynamicfolder" />
@@ -31,5 +52,6 @@
     <include package="zeit.wysiwyg" />
     <include package="zeit.brightcove" />
     <include package="zeit.vgwort" />
+    <include package="zeit.objectlog" />
 
 </configure>
