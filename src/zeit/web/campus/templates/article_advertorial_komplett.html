@@ -1,0 +1,18 @@
+{% extends "zeit.web.campus:templates/article.html" %}
+
+{% block css_link %}
+    <link href="{{ request.asset_host }}/css/web.campus/advertorial.css" media="screen" rel="stylesheet" type="text/css" />
+{% endblock css_link %}
+
+{% block advertorial_marker %}
+    {% if view.advertorial_marker %}
+    <div class="advertorial-marker">
+        <div class="advertorial-marker__title">{{ view.advertorial_marker[0] }}</div>
+        <div class="advertorial-marker__text">{{ view.advertorial_marker[1] }}</div>
+    </div>
+    {% endif %}
+{% endblock advertorial_marker %}
+
+{% block article_heading -%}
+    {% include ["zeit.web.campus:templates/inc/article-header/advertorial.html"] %}
+{% endblock article_heading -%}
