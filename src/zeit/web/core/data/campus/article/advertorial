@@ -54,7 +54,7 @@
     <attribute name="running-volume" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">ZSF-2015-01</attribute>
     <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
     <attribute name="short_text" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Landschaftsarchitektur im Apfelhain für Studenten: Wir haben die wichtigsten Anlaufstellen gesammelt. (akg)</attribute>
-    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
     <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">OK</attribute>
     <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Uni-Leben</attribute>
     <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">5098</attribute>
