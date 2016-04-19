@@ -953,16 +953,6 @@ def test_video_in_article_is_there(testbrowser):
     assert len(article.cssselect('.video-player__iframe')) == 1
 
 
-def test_advertorial_marker_is_returned_correctly():
-    content = mock.Mock()
-    content.advertisement_title = 'YYY'
-    content.advertisement_text = 'XXX'
-    content.cap_title = 'ZZZ'
-    view = zeit.web.site.view_article.Article(
-        content, pyramid.testing.DummyRequest())
-    assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')
-
-
 def test_advertorial_marker_is_present(testbrowser):
     browser = testbrowser('zeit-online/article/angebot')
     assert len(browser.cssselect('.advertorial-marker')) == 1

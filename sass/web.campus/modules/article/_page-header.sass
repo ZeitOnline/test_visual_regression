@@ -7,7 +7,7 @@
 
 	&__kicker
 		display: block
-		font-size: em(14px)
+		+scaled-font(14px)
 		font-weight: bold
 		letter-spacing: .01em
 		margin-bottom: remify(12px)
@@ -15,10 +15,10 @@
 	&__title
 		@extend %font-beckett
 		display: block
-		font-size: em(48px)
+		+scaled-font(48px, $title-factor)
 
 	&__page-headline
-		font-size: em(17px)
+		+scaled-font(17px)
 		font-weight: bold
 		letter-spacing: $letter-spacing-s
 		line-height: 1.3
@@ -34,15 +34,15 @@
 		margin: remify(40px auto)
 
 		&__kicker
-			font-size: em(16px)
+			+scaled-font(16px)
 			line-height: round-to-precision(18/16, $precision: 1)
 			margin-bottom: remify(16px)
 
 		&__title
-			font-size: em(64px)
+			+scaled-font(64px, $title-factor)
 
 		&__page-headline
-			font-size: em(18px)
+			+scaled-font(18px)
 			line-height: round-to-precision(26/18, $precision: 1)
 			margin-top: remify(16px)
 
