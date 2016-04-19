@@ -10,6 +10,7 @@ import lxml.etree
 import mock
 import pyramid.testing
 import pytest
+import re
 import requests
 import zope.component
 
@@ -1362,7 +1363,7 @@ def test_instantarticle_shows_ad_after_100_words(testbrowser):
     blocks = blocks[1:]
     for block in blocks:
         if block.tag == 'p':
-            words = len(block.text_content().strip().split())
+            words = len(re.findall(r'\S+', block.text_content()))
             word_count = word_count + words
         if block.tag == 'figure':
             assert block.cssselect('iframe[src*="tile-4"]')
