@@ -88,6 +88,8 @@ class Application(object):
         )
 
     def configure_pyramid(self):
+        log.debug('Configuring Pyramid')
+
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
@@ -118,7 +120,6 @@ class Application(object):
         if self.settings.get('zodbconn.uri'):
             self.config.include('pyramid_zodbconn')
 
-        log.debug('Configuring Pyramid')
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('campus_framebuilder', '/campus/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
@@ -203,7 +204,6 @@ class Application(object):
         """Sets up names and filters that will be available for all
         templates.
         """
-        log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
         self.config.add_jinja2_extension(
