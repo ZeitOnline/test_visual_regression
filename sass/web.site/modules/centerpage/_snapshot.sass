@@ -1,21 +1,19 @@
 .snapshot
-	margin-bottom: $twice
-	margin-top: $twice
+	margin: remify(32px 0)
 	position: relative
-	&__media
-		margin: 0 0 remify(14px)
 
-.snapshot-caption
-	color: $zon-charcoal
-	font-size: remify(16px)
-	line-height: 1.35em
-	padding: 0 $page-padding
-	&__link
-		+link
-			color: $zon-mid-grey
-			text-decoration: none
-		+on-interaction
+	&__media
+		margin: 0
+
+	&__caption
+		color: $zon-charcoal
+		font-size: em(16px)
+		line-height: 1.35
+		padding: remify(14px $page-padding 0)
+
+	&__copyright
+		color: $zon-grey
+		a
 			color: inherit
-			text-decoration: underline
-	&__item
-		color: $zon-mid-grey
+			+on-interaction
+				color: $color-link--hover
