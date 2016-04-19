@@ -4,7 +4,10 @@ Change log for zeit.web
 2.73 (unreleased)
 -----------------
 
+- ZON-2920: Add Advertorial Logic and Styles to Campus
+
 - OPS-282: Erase some HTML validation errors
+
 - MAINT: Speed up appserver start by not loading unnecessary zope ZCML
 
 
