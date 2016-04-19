@@ -2,14 +2,16 @@
 {% set template = module | get_layout %}
 {% set id = module.identification %}
 <div class="{{ 'buzz-box' | with_mods(modifier) }} js-accordion" id="{{ id }}">
-	<a class="buzz-box__heading" id="{{ id }}-tab" role="tab" aria-controls="{{ id }}-panel" href="#{{ id }}" data-tracking="....buzz-box__heading.{{ module.header | lower }}|{{view.og_url|replace('http://','')}}#{{ id }}">
-		{{ module.header }}
-	</a>
-	<ol class="buzz-box__teasers" id="{{ id }}-panel" role="tabpanel" aria-labelledby="{{ id }}-tab">
-		{% for teaser in module[:3] -%}
-		<li>
-			{% include "zeit.web.site:templates/inc/teaser/{}.tpl".format(template) %}
-		</li>
-		{%- endfor %}
-	</ol>
+    <a class="buzz-box__heading" id="{{ id }}-tab" role="tab" aria-controls="{{ id }}-panel" href="#{{ id }}" data-tracking="....buzz-box__heading.{{ module.header | lower }}|{{view.og_url|replace('http://','')}}#{{ id }}">
+        {{ module.header }}
+    </a>
+    <div id="{{ id }}-panel" role="tabpanel" aria-labelledby="{{ id }}-tab">
+        <ol class="buzz-box__teasers">
+            {% for teaser in module[:3] -%}
+            <li>
+                {% include "zeit.web.site:templates/inc/teaser/{}.tpl".format(template) %}
+            </li>
+            {%- endfor %}
+        </ol>
+    </div>
 </div>

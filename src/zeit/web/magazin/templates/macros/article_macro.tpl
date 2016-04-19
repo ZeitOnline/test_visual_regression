@@ -10,11 +10,11 @@
 {%- endmacro %}
 
 {% macro supertitle() -%}
-  <div class="article__head__supertitle">{{ view.supertitle }}</div>
+  <span class="article__head__supertitle">{{ view.supertitle }}</span>
 {%- endmacro %}
 
 {% macro title() -%}
-  <div class="article__head__title">{{ view.title }}</div>
+  <span class="article__head__title">{{ view.title }}</span>
 {%- endmacro %}
 
 {% macro subtitle(include_meta=False, with_quotes=False) -%}
@@ -238,8 +238,8 @@
 
 {% macro print_pagination( pagination ) -%}
     {% if pagination.total > 1 %}
-    <nav class="article-pagination is-constrained is-centered" role="navigation" aria-labeledby="pagination-title">
-        <div class="article-pagination__a11y-title" id="pagination-title">Seitennavigation</div>
+    <nav class="article-pagination is-constrained is-centered" aria-labelledby="pagination-title">
+        <div class="visually-hidden" id="pagination-title">Seitennavigation</div>
         {% if pagination.next_page_title -%}
             <div class="article-pagination__nexttitle">
                 <a href="{{ pagination.next_page_url }}">Auf Seite {{ pagination.current + 1 }} <span class="article-pagination__dash">—</span> {{ pagination.next_page_title }}</a>

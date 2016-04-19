@@ -1,6 +1,6 @@
 {% if block.contents -%}
 {% set id = block.title | attr_safe %}
-<aside class="infobox" id="{{ id }}" role="application">
+<aside class="infobox" id="{{ id }}">
 	<div class="infobox__container article__item">
 	{% for title, text in block.contents %}
 		<section id="{{ id }}-{{ loop.index }}">
@@ -15,7 +15,7 @@
 					{{- title -}}
 				</a>
 			</h3>
-			<article
+			<div
 				class="infobox__panel"
 				id="{{ id }}-{{ loop.index }}-article"
 				role="tabpanel"
@@ -23,7 +23,7 @@
 				{% for block in text %}
 					{% include "zeit.web.core:templates/amp/blocks/{}.html".format( block | block_type ) ignore missing %}
 				{% endfor %}
-			</article>
+			</div>
 		</section>
 	{% endfor %}
 	</div>
