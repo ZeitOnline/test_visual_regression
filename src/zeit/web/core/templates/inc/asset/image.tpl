@@ -24,7 +24,7 @@
                     {%- if name | trim | length > 1 %}
                         <span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
                             {%- if url and not omit_image_links %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif -%}
-                            <span itemprop="name">{{ name }}</span>
+                            <span itemprop="name">©&nbsp;{{ name | replace('©', '') | trim }}</span>
                             {%- if url and not omit_image_links %}</a>{% endif -%}
                         </span>
                     {%- endif %}
