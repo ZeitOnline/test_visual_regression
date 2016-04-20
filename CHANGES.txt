@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2975: Add ZEIT Campus page title suffix
 
+- ZON-2986: Activate ad reloading in Campus
+
 - OPS-282: Erase some HTML validation errors
 
 - MAINT: Speed up appserver start by not loading unnecessary zope ZCML
