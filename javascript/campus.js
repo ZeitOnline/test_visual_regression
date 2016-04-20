@@ -15,6 +15,7 @@ require([
     'web.core/zeit',
     'web.core/images',
     'web.core/clicktracking',
+    'web.core/adReload',
     'web.campus/menu',
     'web.core/comments',
     'web.core/articledate'
@@ -22,6 +23,7 @@ require([
     zeit,
     images,
     clicktracking,
+    adReload,
     menu,
     comments,
     articledate
@@ -31,6 +33,7 @@ require([
     images.init();
     menu.init();
     clicktracking.init();
+    adReload.init();
     zeit.clearQueue();
 
     if ( article ) {

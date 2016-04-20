@@ -71,13 +71,14 @@
         </header>
 
         <!-- Article body goes here -->
+        {% set adpara = view.fbia_first_ad_paragraph %}
         {% for page in view.pages %}
-            {% set ad_displayed = False %}
+            {% set page_loop = loop %}
             {%- for block in page -%}
+                {% set block_loop = loop %}
                 {% include "zeit.web.core:templates/instantarticle/blocks/{}.html".format(block | block_type) ignore missing %}
-                {# ad after first paragraph #}
-                {% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False %}
-                    {% set ad_displayed = True %}
+                {# ad after first 100 words, determined by adpara tuple #}
+                {% if adpara != None and page_loop.index0 == adpara[0] and block_loop.index0 == adpara[1] %}
                     {% include "zeit.web.core:templates/instantarticle/ads/tile_4.html" ignore missing %}
                 {% endif %}
                 {# middle ad if more pages #}
