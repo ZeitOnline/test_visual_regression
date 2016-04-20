@@ -160,7 +160,7 @@ def test_campus_teasers_to_leserartikel_have_kicker_modifiers(testbrowser):
     select = testbrowser(
         '/campus/centerpage/teasers-to-leserartikel').cssselect
     assert len(select(
-        '[class^="teaser"][class*="__kicker--leserartikel"]')) == 6
+        '[class^="teaser"][class*="__kicker--leserartikel"]')) == 9
 
     select = testbrowser(
         '/campus/article/simple-with-nextread-leserartikel').cssselect
