@@ -2,3 +2,6 @@
 
 {% set module_layout = 'article-header' %}
 {% set media_caption_additional_class = 'figcaption--hidden' %}
+
+{% block media_block %}{{ super() | with_mods(image.image_pattern) }}{% endblock %}
+{% block media_block_helper %}{{ super() | with_mods(view.article_layout) }}{% endblock %}
