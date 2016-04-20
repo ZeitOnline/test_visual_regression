@@ -1,0 +1,35 @@
+
+%article-interactions__item
+	color: $interaction-color
+	cursor: pointer
+	letter-spacing: 0.04em
+	font-size: remify(14px)
+	+on-interaction
+		color: $interaction-hover-color
+
+.article-interactions
+	margin: remify(20px) auto remify(32px)
+	position: relative
+
+.print-menu
+	display: none
+	&__print,
+	&__pdf
+		@extend %article-interactions__item
+		&:before
+			content: " / "
+			color: $color-separator
+			margin: remify(0 4px)
+	+respond-min($break-desktop-min)
+		display: inline
+
+.sharing-menu
+	font-size: remify(14px)
+	&__items
+		margin: 0
+		padding: 0
+	&__item
+		&--whatsapp
+			+respond-min($break-tablet-min)
+				display: none
+
