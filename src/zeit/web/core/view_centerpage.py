@@ -76,6 +76,16 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         kwargs = {'cp:type': 'cardstack'}
         return bool(zeit.web.core.utils.find_block(self.context, **kwargs))
 
+    @zeit.web.reify
+    def cardstack_head(self):
+        url = super(Centerpage, self).cardstack_head
+        return zeit.web.core.utils.update_query(url, static='true')
+
+    @zeit.web.reify
+    def cardstack_body(self):
+        url = super(Centerpage, self).cardstack_body
+        return zeit.web.core.utils.update_query(url, static='true')
+
 
 @pyramid.view.view_config(
     route_name='json_update_time',

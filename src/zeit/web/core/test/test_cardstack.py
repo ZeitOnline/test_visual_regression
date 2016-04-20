@@ -1,8 +1,10 @@
 import urllib
+import pytest
 
-
-def test_cardstack_should_be_included_on_articles(app_settings, testbrowser):
-    browser = testbrowser('/zeit-online/article/cardstack')
+@pytest.mark.parametrize('path_fragment', ['zeit-online', 'campus'])
+def test_cardstack_should_be_included_on_articles(
+        app_settings, testbrowser, path_fragment):
+    browser = testbrowser('/{}/article/cardstack'.format(path_fragment))
     espi = app_settings['cardstack_backend']
 
     assert browser.document.xpath('head/include/@src')[0] == (
@@ -10,7 +12,8 @@ def test_cardstack_should_be_included_on_articles(app_settings, testbrowser):
 
     assert browser.document.xpath('head/meta[@name="twitter:site"]')
 
-    url = urllib.quote_plus('http://localhost/zeit-online/article/cardstack')
+    url = urllib.quote_plus('http://localhost/{}/article/cardstack'.format(
+        path_fragment))
     assert browser.document.xpath('body//article//include/@src')[0] == (
         '{}/stacks/kekse/esi/body?shareUrl={}'
         '&shareUrlQuerySuffix=stackId%3Dkekse'.format(espi, url))
@@ -64,6 +67,19 @@ def test_cardstack_should_be_included_on_cps(app_settings, testbrowser):
 
     assert browser.document.xpath('body/include/@src')[0] == (
         '{}/stacks/esi/scripts'.format(espi))
+
+    browser = testbrowser('/campus/centerpage/cardstack')
+
+    assert browser.document.xpath('head/include/@src')[0] == (
+        '{}/stacks/esi/head?static=true'.format(espi))
+
+    assert browser.document.xpath('body//main//include/@src')[0] == (
+        '{}/stacks/kekse/esi/body?shareUrlQuerySuffix=stackId%3Dkekse'
+        '&static=true'.format(espi))
+
+    assert browser.document.xpath('body/include/@src')[0] == (
+        '{}/stacks/esi/scripts'.format(espi))
+
 
 
 def test_cardstack_should_honor_cp_stack_id(app_settings, testbrowser):
