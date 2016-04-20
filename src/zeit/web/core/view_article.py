@@ -166,6 +166,10 @@ class Article(zeit.web.core.view.Content):
             log.debug('Object does not exist.')
 
     @zeit.web.reify
+    def has_cardstack(self):
+        return len(self.context.xml.xpath('/article/body//cardstack')) > 0
+
+    @zeit.web.reify
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
