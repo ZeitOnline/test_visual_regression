@@ -7,3 +7,10 @@
                      "zeit.web.core:templates/inc/region/default.html"] ignore missing -%}
     {% endfor %}
 {% endblock %}
+
+{% block meetrics %}
+    {# meetrics should only track the homepage #}
+    {% if view.is_hp %}
+        {{ super() }}
+    {% endif %}
+{% endblock meetrics %}
