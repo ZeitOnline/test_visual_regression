@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+  <head>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Griechenland</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/schlagworte/orte/griechenland/index</topiclink_url_1>
+        <topiclink_label_2>Flüchtlinge</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/schlagworte/themen/fluechtling/index</topiclink_url_2>
+        <topiclink_label_3>Tunesien</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/schlagworte/orte/tunesien/index</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
+    <header_image xsi:nil="true"/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-30T15:14:05.054438+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-09T15:03:34.218852+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-30T15:16:56.121621+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-30T14:13:24.911349+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-06-30T14:12:57.703609+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-06-30T14:12:57.779765+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-30T14:13:07.149702+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.brightcove</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:3986a9c2-154d-4076-97ef-08aca764cb37}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+
+
+<body>
+	<title>ZON-CP mit Teasern auf ZEIT Campus-Artikel</title>
+
+	<!-- Campus Aufmacher -->
+	<cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo">
+		<region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
+			<container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-fullwidth" visible="True">
+				<block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" />
+		</container>
+		</region>
+	</cluster>
+
+
+	<!-- Normales Parkett mit Campus Teasern -->
+	<cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
+		<region visible="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Parkett: Campus">
+			<container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d1">
+				<block href="http://xml.zeit.de/campus/article/leserartikel" />
+			</container>
+			<container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d2">
+				<block href="http://xml.zeit.de/campus/article/03-spartipps" />
+			</container>
+			<container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d3">
+				<block href="http://xml.zeit.de/campus/article/article-with-expired-image" />
+			</container>
+		</region>
+	</cluster>
+
+
+	<!-- Campus Parkett -->
+	<cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet">
+		<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zco-parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/campus/centerpage/index">
+			<referenced_cp>http://xml.zeit.de/campus/index</referenced_cp>
+			<container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
+				<block href="http://xml.zeit.de/artikel/02"/>
+			</container>
+			<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
+				<block href="http://xml.zeit.de/artikel/01"/>
+			</container>
+
+            <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e1">
+                <block href="http://xml.zeit.de/campus/article/leserartikel" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e2">
+                <block href="http://xml.zeit.de/campus/article/03-spartipps" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e3">
+                <block href="http://xml.zeit.de/campus/article/article-with-expired-image" />
+            </container>
+		</region>
+	</cluster>
+
+</body>
+
+</centerpage>

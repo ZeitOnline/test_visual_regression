@@ -23,6 +23,9 @@
     <region kind="parquet" title="ZMO Parquet">
         <area kind="zmo-parquet"/>
     </region>
+    <region kind="parquet" title="ZCO Parquet">
+        <area kind="zco-parquet"/>
+    </region>
     <region kind="parquet" title="Spektrum">
         <area kind="spektrum"/>
     </region>
