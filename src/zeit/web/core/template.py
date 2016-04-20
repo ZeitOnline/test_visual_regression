@@ -925,7 +925,7 @@ def adapt(obj, iface, name=u'', multi=False):
 
 
 @SHORT_TERM_CACHE.cache_on_arguments()
-def get_svg_from_file_cached(name, className, package, cleanup, a11y):
+def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
     try:
         subpath = '.'.join(package.split('.')[1:3])
     except (AttributeError, TypeError):
@@ -942,7 +942,7 @@ def get_svg_from_file_cached(name, className, package, cleanup, a11y):
     except AttributeError:
         title = 'Icon'
     svg = xml.getroot()
-    svg.set('class', 'svg-symbol {}'.format(className))
+    svg.set('class', 'svg-symbol {}'.format(class_name))
     svg.set('preserveAspectRatio', 'xMinYMin meet')
     if cleanup:
         lxml.etree.strip_attributes(
@@ -956,5 +956,5 @@ def get_svg_from_file_cached(name, className, package, cleanup, a11y):
 
 
 @zeit.web.register_global
-def get_svg_from_file(name, className, package, cleanup, a11y):
-    return get_svg_from_file_cached(name, className, package, cleanup, a11y)
+def get_svg_from_file(name, class_name, package, cleanup, a11y):
+    return get_svg_from_file_cached(name, class_name, package, cleanup, a11y)
