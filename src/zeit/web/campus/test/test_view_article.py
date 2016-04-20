@@ -194,3 +194,21 @@ def test_advertorial_marker_is_present(testbrowser):
 def test_campus_article_does_not_have_contentad(testbrowser):
     select = testbrowser('/campus/article/stoa').cssselect
     assert not select('#iq-artikelanker')
+
+
+def test_article_header_default_considers_image_layout(testbrowser):
+    browser = testbrowser('/campus/article/simple')
+    header = browser.cssselect('.article-header--default-no-image')
+    assert len(header) == 1
+
+    browser = testbrowser('/campus/article/common')
+    header = browser.cssselect('.article-header--default-with-image')[0]
+    figure = header.cssselect('.article-header__media--portrait')[0]
+    image = figure.cssselect('img')[0]
+    assert image.get('data-variant') == 'portrait'
+
+    browser = testbrowser('/campus/article/header-image-landscape')
+    header = browser.cssselect('.article-header--default-with-image')[0]
+    figure = header.cssselect('.article-header__media--wide')[0]
+    image = figure.cssselect('img')[0]
+    assert image.get('data-variant') == 'wide'
