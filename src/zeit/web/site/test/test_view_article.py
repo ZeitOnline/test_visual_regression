@@ -10,6 +10,7 @@ import lxml.etree
 import mock
 import pyramid.testing
 import pytest
+import re
 import requests
 import zope.component
 
@@ -287,7 +288,7 @@ def test_schema_org_article_mark_up(testbrowser):
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros.'
+    assert person.text == u'© Warner Bros.'
 
     assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
 
@@ -1343,6 +1344,21 @@ def test_instantarticle_should_render_ads(testbrowser):
         'iframe[src$="/static/latest/html/fbia-ads/tile-5.html"]')) == 1
     assert len(browser.cssselect(
         'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
+
+
+def test_instantarticle_shows_ad_after_100_words(testbrowser):
+    word_count = 0
+    bro = testbrowser('/instantarticle/zeit-online/article/simple-multipage')
+    blocks = bro.xpath('body/article/*')
+    blocks = blocks[1:]
+    for block in blocks:
+        if block.tag == 'p':
+            words = len(re.findall(r'\S+', block.text_content()))
+            word_count = word_count + words
+        if block.tag == 'figure':
+            assert block.cssselect('iframe[src*="tile-4"]')
+            break
+    assert word_count > 100
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):

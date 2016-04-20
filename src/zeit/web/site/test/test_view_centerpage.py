@@ -400,7 +400,7 @@ def test_snapshot_should_display_correct_teaser_title(testbrowser):
 
 def test_snapshot_should_display_correct_image_caption(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
-    caption = browser.cssselect('.snapshot-caption')[0]
+    caption = browser.cssselect('.snapshot__text')[0]
     assert (caption.text.strip() ==
             u'Ford präsentiert auf der Automesse in Detroit'
             u' den neuen Pick-up F-150.')
@@ -408,16 +408,9 @@ def test_snapshot_should_display_correct_image_caption(testbrowser):
 
 def test_snapshot_should_display_copyright_with_nonbreaking_space(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
-    copyright = browser.cssselect('.snapshot-caption__item')[0]
-    assert copyright.text.strip() == u'\xa9\xa0Xinhua/Zhang Wenkui/Reuters'
-
-
-def test_snapshot_should_have_description_text(testbrowser):
-    browser = testbrowser('/zeit-online/teaser-gallery-setup')
-    caption = browser.cssselect('.snapshot-caption')[0]
-    assert (caption.text.strip() ==
-            u'Ford präsentiert auf der Automesse in Detroit'
-            u' den neuen Pick-up F-150.')
+    copyright = browser.cssselect('.snapshot__copyright')[0]
+    assert (copyright.text_content().strip() ==
+            u'\xa9\xa0Xinhua/Zhang Wenkui/Reuters')
 
 
 def test_small_teaser_without_image_has_no_padding_left(
