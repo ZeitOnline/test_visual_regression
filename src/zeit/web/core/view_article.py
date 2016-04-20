@@ -170,6 +170,12 @@ class Article(zeit.web.core.view.Content):
         return len(self.context.xml.xpath('/article/body//cardstack')) > 0
 
     @zeit.web.reify
+    def cardstack_body(self):
+        url = super(Article, self).cardstack_body
+        params = dict(shareUrl=self.canonical_url)
+        return zeit.web.core.utils.update_query(url, **params)
+
+    @zeit.web.reify
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
