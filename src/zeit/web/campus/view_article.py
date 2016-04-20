@@ -18,12 +18,11 @@ import zeit.web.core.view_article
                           renderer='templates/article_advertorial.html')
 @pyramid.view.view_config(name='komplettansicht',
                           renderer='templates/komplett.html')
-@pyramid.view.view_config(custom_predicates=(
-                          zeit.web.campus.view.is_zco_content,
-                          zeit.web.core.view.is_advertorial),
-                          name='komplettansicht',
-                          renderer=(
-                          'templates/article_advertorial_komplett.html'))
+@pyramid.view.view_config(
+    custom_predicates=(zeit.web.campus.view.is_zco_content,
+                       zeit.web.core.view.is_advertorial),
+    name='komplettansicht',
+    renderer='templates/article_advertorial_komplett.html')
 class Article(zeit.web.core.view_article.Article,
               zeit.web.campus.view.Content):
 
@@ -44,11 +43,11 @@ class Article(zeit.web.core.view_article.Article,
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',
                           renderer='templates/article.html')
-@pyramid.view.view_config(name='seite',
-                          custom_predicates=(
-                            zeit.web.campus.view.is_zco_content,
-                            zeit.web.core.view.is_advertorial),
-                          path_info='.*seite-(.*)',
-                          renderer='templates/article_advertorial.html')
+@pyramid.view.view_config(
+    name='seite',
+    custom_predicates=(zeit.web.campus.view.is_zco_content,
+                       zeit.web.core.view.is_advertorial),
+    path_info='.*seite-(.*)',
+    renderer='templates/article_advertorial.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
