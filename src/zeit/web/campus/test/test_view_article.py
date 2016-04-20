@@ -156,12 +156,10 @@ def test_campus_article_renders_video_with_correct_markup(testbrowser):
         'iframe.video-player__iframe[src*="videoId=4193594095001"]')
     assert select(
         '.video-caption > .video-caption__kicker')[0].text == 'Wearables'
-    assert select(
-        '.video-caption > .video-caption__title'
-        )[0].text == 'Verkaufsstart von Apple Watch ohne Warteschlangen'
+    assert select('.video-caption > .video-caption__title')[0].text == (
+        'Verkaufsstart von Apple Watch ohne Warteschlangen')
     assert 'nur auf Vorbestellung ausgegeben wir' in select(
-        '.video-caption > .video-caption__description'
-        )[0].text
+        '.video-caption > .video-caption__description')[0].text
 
 
 def test_nextread_is_present(testbrowser):
