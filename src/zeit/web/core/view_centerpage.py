@@ -77,7 +77,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         return bool(zeit.web.core.utils.find_block(self.context, **kwargs))
 
 
-
 @pyramid.view.view_config(
     route_name='json_update_time',
     renderer='jsonp')
