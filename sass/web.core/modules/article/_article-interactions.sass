@@ -28,8 +28,13 @@
 	&__items
 		margin: 0
 		padding: 0
-	&__item
-		&--whatsapp
-			+respond-min($break-tablet-min)
-				display: none
 
++respond-min($break-tablet-min)
+	.sharing-menu
+		&__item
+			&--whatsapp
+				display: none !important
+
++respond-min($break-desktop-min)
+	.print-menu
+		display: inline

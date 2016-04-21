@@ -6,13 +6,13 @@
 {% endblock %}
 
 {% block fb_icon %}
-    {{ lama.use_svg_icon('facebook', 'sharing-menu__icon', view.package) }}
+    {{ lama.use_svg_icon('fb-40x40', 'sharing-menu__icon', view.package) }}
 {% endblock %}
 
 {% block twitter_icon %}
-    {{ lama.use_svg_icon('zco-twitter', 'sharing-menu__icon', view.package) }}
+    {{ lama.use_svg_icon('twitter-40x40', 'sharing-menu__icon', view.package) }}
 {% endblock %}
 
 {% block wa_icon %}
-    {{ lama.use_svg_icon('zco-wa', 'sharing-menu__icon', view.package) }}
+    {{ lama.use_svg_icon('whatsapp-40x40', 'sharing-menu__icon', view.package) }}
 {% endblock %}
