@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<centerpage type="centerpage" xmlns:esi="http://www.edge-delivery.org/esi/1.0" xmlns:xt="http://namespaces.zeit.de/xtransform/">
+<centerpage type="homepage" xmlns:esi="http://www.edge-delivery.org/esi/1.0" xmlns:xt="http://namespaces.zeit.de/xtransform/">
   <head xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <topiclinks>
       <topiclink>
