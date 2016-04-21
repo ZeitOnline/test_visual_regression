@@ -68,7 +68,7 @@
         id="zon-large"
         title="Großer Teaser"
         image_pattern="zon-large"
-        areas="duo major ranking parquet"
+        areas="duo major ranking parquet zco-parquet"
         />
     <layout
         id="zon-small"

@@ -79,7 +79,7 @@
 
 	<!-- Normales Parkett mit Campus Teasern -->
 	<cluster visible="True" area="id-bdfb0739-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
-		<region visible="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Parkett: Campus">
+		<region visible="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Normales Parkett mit Campus Teasern">
 			<container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d1">
 				<block href="http://xml.zeit.de/campus/article/leserartikel" />
 			</container>
@@ -95,15 +95,8 @@
 
 	<!-- Campus Parkett -->
 	<cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet">
-		<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zco-parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/campus/centerpage/index">
+		<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zco-parquet" title="ZEITMagazin" read_more="ZEIT Campus Online" read_more_url="http://www.zeit.de/campus/centerpage/index">
 			<referenced_cp>http://xml.zeit.de/campus/index</referenced_cp>
-			<container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
-				<block href="http://xml.zeit.de/artikel/02"/>
-			</container>
-			<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
-				<block href="http://xml.zeit.de/artikel/01"/>
-			</container>
-
             <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e1">
                 <block href="http://xml.zeit.de/campus/article/leserartikel" />
             </container>
@@ -111,6 +104,9 @@
                 <block href="http://xml.zeit.de/campus/article/03-spartipps" />
             </container>
             <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e3">
+                <block href="http://xml.zeit.de/campus/article/column" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e4">
                 <block href="http://xml.zeit.de/campus/article/article-with-expired-image" />
             </container>
 		</region>

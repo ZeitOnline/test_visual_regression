@@ -1,13 +1,15 @@
 {% extends "zeit.web.site:templates/inc/area/parquet.html" %}
 
+{% block parquet_meta_more_link_additional_class %}parquet-meta__more-link--zco{% endblock %}
+
 {% block area_title %}
     {% if area.referenced_cp is none %}
         <span class="parquet-meta__title">
             {{ area.title }}
         </span>
     {% else %}
-        <a class="parquet-meta__title parquet-meta__title--zmo" href="{{ area.referenced_cp.uniqueId | create_url }}">
-            {{ lama.use_svg_icon('logo-zmo', 'parquet-meta__logo parquet-meta__logo--zmo', view.package) }}
+        <a class="parquet-meta__title parquet-meta__title--zco" href="{{ area.referenced_cp.uniqueId | create_url }}">
+            {{ lama.use_svg_icon('logo-zco', 'parquet-meta__logo parquet-meta__logo--zco', 'zeit.web.campus') }}
         </a>
     {% endif %}
 {% endblock area_title %}
