@@ -50,7 +50,7 @@
 
 +respond-min($break-tablet-min)
 	.teaser-lead-portrait
-		padding: $page-padding $page-padding*2 $page-padding $page-padding // this is to make the 50% width of the image consider the grid gutter
+		padding: $page-padding ($page-padding+$gutter) $page-padding $page-padding // this is to make the 50% width of the image consider the grid gutter
 		position: relative
 
 		&__media
