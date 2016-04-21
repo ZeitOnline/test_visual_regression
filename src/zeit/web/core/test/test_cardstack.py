@@ -1,6 +1,7 @@
 import urllib
 import pytest
 
+
 @pytest.mark.parametrize('path_fragment', ['zeit-online', 'campus'])
 def test_cardstack_should_be_included_on_articles(
         app_settings, testbrowser, path_fragment):
@@ -79,7 +80,6 @@ def test_cardstack_should_be_included_on_cps(app_settings, testbrowser):
 
     assert browser.document.xpath('body/include/@src')[0] == (
         '{}/stacks/esi/scripts'.format(espi))
-
 
 
 def test_cardstack_should_honor_cp_stack_id(app_settings, testbrowser):
