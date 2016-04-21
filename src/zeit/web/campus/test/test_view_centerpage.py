@@ -154,3 +154,8 @@ def test_advertorial_header_has_appropriate_html_structure(testbrowser):
 def test_advertorial_has_markup_module(testbrowser):
     select = testbrowser('/campus/centerpage/advertorial').cssselect
     assert len(select('.markup')) == 1
+
+
+def test_servicelinks_module_renders_links(testbrowser):
+    select = testbrowser('/campus/centerpage/servicelinks').cssselect
+    assert len(select('#zco-servicebox a.servicebox__link')) == 6
