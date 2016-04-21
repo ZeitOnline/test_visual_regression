@@ -106,13 +106,10 @@
 		> time,
 		> span
 			white-space: nowrap
-		> time:after,
-		> span:after
+		> time:not(:last-child):not(:empty):after,
+		> span:not(:last-child):not(:empty):after
 			content: " / "
 			margin: 0 0.25em
-		> time:last-child:after,
-		> span:last-child:after
-			content: none
 
 
 	// Kolumne
@@ -170,12 +167,16 @@
 	&__leserartikel-image
 		margin-top: remify(32px)
 
-.metadata__seperator
-	margin: 0 .25em
-	white-space: normal
+.metadata
+	&__seperator
+		margin: 0 .25em
+		white-space: normal
 
-.metadata__commentcount
-	@extend %teaser-commentcountlink
+	&__commentcount
+		@extend %commentcount
+
+	&__source a
+		@extend %commentcount
 
 ////////////
 // TABLET //
