@@ -108,8 +108,8 @@
 			white-space: nowrap
 		> time:not(:last-child):not(:empty):after,
 		> span:not(:last-child):not(:empty):after
-			content: " / "
-			margin: 0 0.25em
+			content: " \2014 " // — = em dash
+			margin: 0 .25em
 
 
 	// Kolumne
@@ -121,9 +121,9 @@
 		.article-header__metadata
 			display: inline
 			margin: 0
-		.article-header__byline + .article-header__metadata
-			&:before
-				content: " / "
+		.article-header__byline
+			&:not(:last-child):after
+				content: " \2014 " // — = em dash
 				margin: 0 .25em
 
 	&__column-image
@@ -168,10 +168,6 @@
 		margin-top: remify(32px)
 
 .metadata
-	&__seperator
-		margin: 0 .25em
-		white-space: normal
-
 	&__commentcount
 		@extend %commentcount
 

@@ -970,23 +970,23 @@ def test_canonical_url_should_omit_queries_and_hashes(testbrowser):
 
 def test_zeit_article_has_correct_meta_line(testserver, selenium_driver):
     selenium_driver.get('{}/zeit-online/article/zeit'.format(testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'12. Februar 2015, 4:32 Uhr /'
-                                 u' Editiert am 15. Februar 2015, 18:18 Uhr')
-    assert source.text.strip() == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+    assert dates[0].text == u'12. Februar 2015, 4:32 Uhr'
+    assert dates[1].text == u'Editiert am 15. Februar 2015, 18:18 Uhr'
+    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
 
 
 def test_tgs_article_has_correct_meta_line(testserver, selenium_driver):
     selenium_driver.get(
         '{}/zeit-online/article/tagesspiegel'.format(testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'15. Februar 2015, 0:00 Uhr / Aktualisiert'
-                                 u' am 16. Februar 2015, 11:59 Uhr')
-    assert source.text.strip() == u'Erschienen im Tagesspiegel'
+    assert dates[0].text == u'15. Februar 2015, 0:00 Uhr'
+    assert dates[1].text == u'Aktualisiert am 16. Februar 2015, 11:59 Uhr'
+    assert source.text == u'Erschienen im Tagesspiegel'
 
 
 def test_zon_article_has_correct_meta_line(testserver, selenium_driver):
@@ -1001,22 +1001,22 @@ def test_zon_article_has_correct_meta_line(testserver, selenium_driver):
 def test_freeform_article_has_correct_meta_line(testserver, selenium_driver):
     selenium_driver.get(
         '{}/zeit-online/article/copyrights'.format(testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'15. Februar 2015, 0:00 Uhr / Aktualisiert'
-                                 u' am 16. Februar 2015, 11:59 Uhr')
-    assert source.text.strip() == u'Quelle: ZEIT ONLINE, dpa, Reuters, rav'
+    assert dates[0].text == u'15. Februar 2015, 0:00 Uhr'
+    assert dates[1].text == u'Aktualisiert am 16. Februar 2015, 11:59 Uhr'
+    assert source.text == u'Quelle: ZEIT ONLINE, dpa, Reuters, rav'
 
 
 def test_afp_article_has_correct_meta_line(testserver, selenium_driver):
     selenium_driver.get('{}/zeit-online/article/afp'.format(testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'15. Februar 2015, 0:00 Uhr / Aktualisiert'
-                                 u' am 16. Februar 2015, 11:59 Uhr')
-    assert source.text.strip() == u'Quelle: AFP'
+    assert dates[0].text == u'15. Februar 2015, 0:00 Uhr'
+    assert dates[1].text == u'Aktualisiert am 16. Februar 2015, 11:59 Uhr'
+    assert source.text == u'Quelle: AFP'
 
 
 def test_dpa_article_has_correct_meta_line(testbrowser):
