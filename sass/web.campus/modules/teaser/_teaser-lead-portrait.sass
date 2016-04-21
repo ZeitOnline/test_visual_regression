@@ -18,6 +18,8 @@
 
 	&__kicker
 		@extend %teaser-kicker
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
 
 	&__title
 		@extend %teaser-title
@@ -30,6 +32,10 @@
 
 	&__byline
 		@extend %teaser-byline
+
+	&__commentcount
+		@extend %teaser-commentcountlink
+
 
 +respond-max($break-tablet-min)
 	.teaser-lead-portrait

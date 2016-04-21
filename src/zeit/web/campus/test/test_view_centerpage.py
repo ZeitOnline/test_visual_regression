@@ -159,3 +159,14 @@ def test_advertorial_has_markup_module(testbrowser):
 def test_servicelinks_module_renders_links(testbrowser):
     select = testbrowser('/campus/centerpage/servicelinks').cssselect
     assert len(select('#zco-servicebox a.servicebox__link')) == 6
+
+
+def test_campus_teasers_to_leserartikel_have_kicker_modifiers(testbrowser):
+    select = testbrowser(
+        '/campus/centerpage/teasers-to-leserartikel').cssselect
+    assert len(select(
+        '[class^="teaser"][class*="__kicker--leserartikel"]')) == 9
+
+    select = testbrowser(
+        '/campus/article/simple-with-nextread-leserartikel').cssselect
+    assert len(select('.nextread-teaser__kicker--leserartikel')) == 1
