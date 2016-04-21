@@ -82,7 +82,7 @@ def test_article_pagination(testbrowser):
 
 def test_article_block_citation_should_render_expected_structure(testbrowser):
     browser = testbrowser('/campus/article/citation')
-    assert len(browser.cssselect('.quote')) == 2
+    assert len(browser.cssselect('.quote')) == 3
     assert browser.cssselect('.quote__text')[0].text.startswith(
         u'Es war ein Gedankenanstoß')
     assert browser.cssselect('.quote__source')[0].text_content() == (
@@ -184,6 +184,13 @@ def test_article_stoa_block_should_render_expected_structure(testbrowser):
     assert len(select('.stoa__title')) == 1
     assert len(select('.stoa__link')) == 1
     assert len(select('.stoa__button')) == 1
+
+
+def test_advertorial_marker_is_present(testbrowser):
+    browser = testbrowser('campus/article/advertorial')
+    assert len(browser.cssselect('.advertorial-marker')) == 1
+    assert len(browser.cssselect('.advertorial-marker__title')) == 1
+    assert len(browser.cssselect('.advertorial-marker__text')) == 1
 
 
 def test_campus_article_does_not_have_contentad(testbrowser):

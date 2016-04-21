@@ -251,6 +251,16 @@ class Article(zeit.web.core.view.Content):
     def is_amp(self):
         return self.context.is_amp
 
+    @zeit.web.reify
+    def advertorial_marker(self):
+        try:
+            return (
+                self.context.advertisement_title,
+                self.context.advertisement_text,
+                self.cap_title)
+        except AttributeError:
+            return None
+
 
 @view_config(route_name='amp',
              context=zeit.content.article.interfaces.IArticle,
@@ -287,6 +297,19 @@ class InstantArticle(Article):
         date = self.publish_info.date_last_published
         if date:
             return date.astimezone(self.timezone)
+
+    @zeit.web.reify
+    def fbia_first_ad_paragraph(self, words=100):
+        """Returns tuple with page/block coordinates of first p where an
+        fbia ad is possible. Take this Zuckerberg!"""
+        for p, page in enumerate(self.pages):
+            for b, block in enumerate(page.blocks):
+                if block.model_block.type == 'p':
+                    words = words - len(
+                        re.findall(r'\S+', block.model_block.text))
+                    if words < 0:
+                        return (p, b)
+        return None
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,

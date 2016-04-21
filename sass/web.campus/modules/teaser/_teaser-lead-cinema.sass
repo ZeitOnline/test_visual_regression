@@ -9,13 +9,15 @@
 
 	&__heading
 		@extend %teaser-heading
-		font-size: remify(42px)
+		+scaled-font(42px, $title-factor)
 
 	&__combined-link
 		@extend %teaser-combined-link
 
 	&__kicker
 		@extend %teaser-kicker
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
 
 	&__title
 		@extend %teaser-title
@@ -28,6 +30,10 @@
 
 	&__byline
 		@extend %teaser-byline
+
+	&__commentcount
+		@extend %teaser-commentcountlink
+
 
 +respond-max($break-tablet-min)
 	.teaser-lead-cinema
@@ -50,7 +56,7 @@
 			padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
 
 		&__heading
-			font-size: remify(64px)
+			+scaled-font(64px, $title-factor)
 			max-width: (780/940) * 100%
 			padding-right: 0
 
@@ -59,7 +65,7 @@
 			float: left
 			width: 50%
 		&__text
-			font-size: remify(18px)
+			+scaled-font(18px)
 			line-height: (27/18)
 			margin: 0
 			padding-right: $cp-padding
@@ -69,4 +75,4 @@
 +respond-min($break-desktop-min)
 	.teaser-lead-cinema
 		&__heading
-			font-size: remify(84px)
+			+scaled-font(84px, $title-factor)

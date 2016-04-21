@@ -17,24 +17,26 @@ $teaser-heading-box-shadow: 0.4em
 	padding-right: $teaser-heading-box-shadow
 
 %teaser-combined-link
-	background-color: #fff
+	background-color: $color-page-bg
 	box-decoration-break: clone
 	-webkit-box-decoration-break: clone
-	box-shadow: $teaser-heading-box-shadow 0 0 0 #fff
+	box-shadow: $teaser-heading-box-shadow 0 0 0 $color-page-bg
 	position: relative
 
 %teaser-kicker
-	background-color: #fff
+	background-color: $color-page-bg
 	bottom: 100%
 	color: $zco-accent
-	font-family: $font-tabletgothic
-	font-size: remify(12px)
+	+scaled-font-rem(12px) // has to be rem as base is huge
 	left: 0
 	letter-spacing: 0.08em
 	line-height: 1.25
 	padding: remify(8px 12px 0 0)
 	position: absolute
 	text-transform: uppercase
+
+%teaser-kicker--leserartikel
+	color: $color-community-primary
 
 %teaser-title
 	@extend %font-beckett
@@ -43,18 +45,24 @@ $teaser-heading-box-shadow: 0.4em
 	z-index: 1
 
 %teaser-text
-	font-size: remify(16px)
+	+scaled-font(16px)
 	line-height: (20/16)
 	margin: 0 0 .5em 0 // em for a reason, so it grows with the breakpoint
 	+respond-min($break-tablet-min)
-		font-size: remify(15px)
+		+scaled-font(15px)
 		line-height: (20/15)
 
 %teaser-metadata
 	color: $color-teaser-meta
-	font-size: remify(15px)
+	+scaled-font(15px)
 	line-height: (20/15)
 
 %teaser-byline
 	display: block
 	margin-bottom: remify(8px)
+
+%teaser-commentcountlink
+	color: $zco-charcoal
+	border-bottom: 1px solid rgba($zco-charcoal, .5)
+	+on-interaction
+		border-color: currentColor

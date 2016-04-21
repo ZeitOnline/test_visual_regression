@@ -11,7 +11,7 @@
 			margin-top: remify(-12px)
 
 	&__heading
-		font-size: remify(28px)
+		+scaled-font(28px, $title-factor)
 		line-height: 0
 		margin: remify(12px 0 10px)
 
@@ -20,6 +20,8 @@
 
 	&__kicker
 		@extend %teaser-kicker
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
 
 	&__title
 		@extend %teaser-title
@@ -32,6 +34,9 @@
 
 	&__byline
 		@extend %teaser-byline
+
+	&__commentcount
+		@extend %teaser-commentcountlink
 
 
 +respond-min($break-tablet-min)

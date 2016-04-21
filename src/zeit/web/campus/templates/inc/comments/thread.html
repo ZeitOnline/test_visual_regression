@@ -32,8 +32,8 @@
     </div>
 
     {% if view.comment_area.message  %}
-        <div class="comment-section__message">
-            {{ view.comment_area.message }}
+        <div class="comment-section__item comment-section__message">
+            {{- view.comment_area.message -}}
         </div>
     {% endif %}
 
