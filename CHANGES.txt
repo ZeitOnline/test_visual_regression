@@ -20,6 +20,9 @@ Change log for zeit.web
 
 - ZON-2986: Activate ad reloading in Campus
 
+- ZON-2994: Change servicebox XML format to include actual columns
+  !! production uses /data/servicebox-zon.xml now instead of /data/servicebox.xml !!
+
 - OPS-282: Erase some HTML validation errors
 
 - MAINT: Speed up appserver start by not loading unnecessary zope ZCML
