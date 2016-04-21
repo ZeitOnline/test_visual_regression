@@ -4,6 +4,8 @@ Change log for zeit.web
 2.73 (unreleased)
 -----------------
 
+- ZON-2983: Include meetrics in ZEIT Campus
+
 - ZON-2920: Add Advertorial Logic and Styles to Campus
 
 - ZON-2975: Add ZEIT Campus page title suffix
