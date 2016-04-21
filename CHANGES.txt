@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - BUG-384: Place first ad after min 100 words in facebook instantarticles
 
+- FIX: Transmit email properly to rawr
+
 
 2.72 (2016-04-18)
 -----------------
