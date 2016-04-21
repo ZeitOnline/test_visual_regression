@@ -82,7 +82,7 @@ def test_article_pagination(testbrowser):
 
 def test_article_block_citation_should_render_expected_structure(testbrowser):
     browser = testbrowser('/campus/article/citation')
-    assert len(browser.cssselect('.quote')) == 2
+    assert len(browser.cssselect('.quote')) == 3
     assert browser.cssselect('.quote__text')[0].text.startswith(
         u'Es war ein Gedankenanstoß')
     assert browser.cssselect('.quote__source')[0].text_content() == (

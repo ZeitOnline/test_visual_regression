@@ -4,6 +4,10 @@ Change log for zeit.web
 2.73 (unreleased)
 -----------------
 
+- ZON-2962: Polish ZEIT Campus
+
+- ZON-2983: Include meetrics in ZEIT Campus
+
 - ZON-2920: Add Advertorial Logic and Styles to Campus
 
 - ZON-2975: Add ZEIT Campus page title suffix
@@ -15,6 +19,8 @@ Change log for zeit.web
 - MAINT: Speed up appserver start by not loading unnecessary zope ZCML
 
 - BUG-384: Place first ad after min 100 words in facebook instantarticles
+
+- FIX: Transmit email properly to rawr
 
 
 2.72 (2016-04-18)
