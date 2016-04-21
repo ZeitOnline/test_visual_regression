@@ -1,3 +1,8 @@
+$color-comment-count: inherit !default
+$color-comment-count--hover: inherit !default
+$opacity-comment-count: 0.4 !default
+$opacity-comment-count--hover: 0.8 !default
+
 .skiplink
 	color: green
 	@extend %off-screen
@@ -51,3 +56,24 @@ input[type="search"]
 	margin-right: .375em
 	text-align: center
 	width: 1.125em
+
+%commentcount
+	+transition-property(background-color, color, opacity)
+	+transition-duration(.2s)
+	color: $color-comment-count
+	position: relative
+	white-space: nowrap
+	// paint a "border" with current link color and opacity
+	&:after
+		background-color: currentColor
+		bottom: -1px
+		content: ""
+		height: 1px
+		left: 0
+		opacity: $opacity-comment-count
+		position: absolute
+		width: 100%
+	+on-interaction
+		color: inherit
+		&:after
+			opacity: $opacity-comment-count--hover
