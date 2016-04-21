@@ -1,6 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
+    <rankedTags>
+      <tag type="free" url_value="student" uuid="65f229d9-f0e9-434a-9f40-d541d927a413">Student</tag>
+      <tag score="5" type="topic" url_value="hochschule" uuid="b8bea0ad-05bf-4eee-b35a-6b1fd478d777">Hochschule</tag>
+      <tag score="4" type="free" url_value="auslandssemester" uuid="6430e636-640f-4447-9f42-1116f424a85b">Auslandssemester</tag>
+      <tag score="4" type="free" url_value="bafoeg-antrag" uuid="28f8d6b7-c686-4f2d-9668-409d919caefb">Bafög-Antrag</tag>
+      <tag score="4" type="free" url_value="praktikum" uuid="8e4c75a5-c7ad-4373-b85f-64e124e8c66c">Praktikum</tag>
+      <tag score="4" type="free" url_value="studienfinanzierung" uuid="31ca4410-3061-423d-ac88-253f64cd6ec5">Studienfinanzierung</tag>
+    </rankedTags>
+    <author expires="" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="">
+      <display_name>Anne Mustermann</display_name>
+    </author>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/campus/article/leserartikel" contenttype="article" />
+    </references>
     <topic type="intern" href="http://xml.zeit.de/thema/test">
         <label>Science</label>
     </topic>
@@ -15,11 +29,10 @@
     <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:14.233424+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-04-02T10:01:53.437856+00:00</attribute>
     <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2016-01-10T09:39:17.773713+00:00</attribute>
     <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:18.167553+00:00</attribute>
     <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:17.773713+00:00</attribute>
-    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:16.922711+00:00</attribute>
     <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
     <attribute name="erscheint" ns="http://namespaces.zeit.de/CMS/document">05.05.2015</attribute>
     <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
@@ -45,7 +58,7 @@
     <attribute name="page" ns="http://namespaces.zeit.de/CMS/document">100</attribute>
     <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/article/simple</attribute>
     <attribute name="print-publish" ns="http://namespaces.zeit.de/CMS/document">2015-05-05T06:00:00+00:00</attribute>
-    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZSF</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
     <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT Studienführer</attribute>
     <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">c709ca95afcf4b3e9b68a8aab56db53e</attribute>
     <attribute name="publication-id" ns="http://namespaces.zeit.de/CMS/print">1367935288499</attribute>
@@ -56,7 +69,7 @@
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">ZEIT Studienführer</attribute>
     <attribute name="running-volume" ns="http://namespaces.zeit.de/CMS/workflow">ZSF-2015-01</attribute>
     <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
-    <attribute name="short_text" ns="http://namespaces.zeit.de/CMS/workflow">Landschaftsarchitektur im Apfelhain für Studenten: Wir haben die wichtigsten Anlaufstellen gesammelt. (akg)</attribute>
+    <attribute name="short_text" ns="http://namespaces.zeit.de/CMS/workflow">Hier gibt es Hilfe für Studenten: Wir haben die wichtigsten Anlaufstellen gesammelt. (akg)</attribute>
     <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
     <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">Uni-Leben</attribute>
@@ -68,7 +81,54 @@
     <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:446a4dc8-e536-4c7f-8187-45e443a524be}</attribute>
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">01</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt;
+  &lt;list&gt;
+    &lt;dictionary&gt;
+      &lt;item key="channels"&gt;
+          &lt;string&gt;parse-channel-news&lt;/string&gt;
+      &lt;/item&gt;
+      &lt;item key="enabled"&gt;
+          &lt;false/&gt;
+      &lt;/item&gt;
+      &lt;item key="override_text"&gt;
+          &lt;unicode&gt;Mobile-Text&lt;/unicode&gt;
+      &lt;/item&gt;
+      &lt;item key="type"&gt;
+          &lt;string&gt;parse&lt;/string&gt;
+      &lt;/item&gt;
+    &lt;/dictionary&gt;
+    &lt;dictionary&gt;
+      &lt;item key="enabled"&gt;
+          &lt;false/&gt;
+      &lt;/item&gt;
+      &lt;item key="override_text"&gt;
+          &lt;unicode&gt;FB-ZCO&lt;/unicode&gt;
+      &lt;/item&gt;
+      &lt;item key="account"&gt;
+          &lt;string&gt;fb-campus&lt;/string&gt;
+      &lt;/item&gt;
+      &lt;item key="type"&gt;
+          &lt;string&gt;facebook&lt;/string&gt;
+      &lt;/item&gt;
+    &lt;/dictionary&gt;
+    &lt;dictionary&gt;
+      &lt;item key="enabled"&gt;
+          &lt;false/&gt;
+      &lt;/item&gt;
+      &lt;item key="override_text"&gt;
+          &lt;unicode&gt;Facebook-Text&lt;/unicode&gt;
+      &lt;/item&gt;
+      &lt;item key="account"&gt;
+          &lt;string&gt;fb-test&lt;/string&gt;
+      &lt;/item&gt;
+      &lt;item key="type"&gt;
+          &lt;string&gt;facebook&lt;/string&gt;
+      &lt;/item&gt;
+    &lt;/dictionary&gt;
+  &lt;/list&gt;
+&lt;/pickle&gt;</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+
   &lt;initialized_object&gt;
     &lt;klass&gt;
       &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
@@ -86,8 +146,8 @@
     <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
   </head>
   <body>
-    <supertitle>Spaziergänger</supertitle>
-    <title>Landschaftsarchitektur im Apfelhain</title>
+    <supertitle>Beratung</supertitle>
+    <title>Hier gibt es Hilfe</title>
     <byline>von Anna Bordel</byline>
     <division type="page">
       <p>
@@ -96,35 +156,12 @@
         haben, wie sie ablaufen, wie man sich bewirbt und vieles andere. Über Studiengänge kann man sich vorab auch auf den Websites der Hochschulen informieren. Meist sind
         die einzelnen Studiengänge unter dem Stichwort "Studienangebot" aufgelistet.
       </p>
-      <citation text="Es war ein Gedankenanstoß, aber wir sind schnell auf Widerstand gestoßen." attribution="Ariane Jedlitschka, Kunstschaffende" url="http://www.imdb.com/title/tt0110912/quotes?item=qt0447099"/>
-      <p>
-        Ein Jahr lang hat Herbst, der Landschaftsarchitekt, am &quot;Apfelhain&quot; gearbeitet, einem
-        modernen Grabfeld mit 89 Urnen- und elf Sarggräbern unter sechs Apfelbäumen. &quot;Baumbezogene
-        Grabstätten sprechen die Leute unglaublich an&quot;, sagt er. Fiete Clausen ist sein imaginärer
-        Werbeträger. Wann immer Spaziergänger das Grab entdecken, sollen sie denken: Schön hat der’s!
-        In den nächsten Tagen wird der Kommunikationschef des Friedhofs – auch den gibt es – sogar
-        eine Mitteilung mit spezieller Bibelauslegung verschicken: &quot;Die Anlage ist inspiriert durch
-        den Apfel als christliches Sinnbild der Weisheit und Erkenntnis sowie die östliche
-        Vorstellung, dass der Apfelbaum mit dem Zauber seiner Blüte Schönheit und Frieden
-        transportiert. Darüber hinaus – als Verweis auf die Hoffnung – wird im Eingangsbereich das
-        Luther-Zitat zu lesen sein:
-      </p>
-      <citation text="Auch wenn ich wüsste, dass morgen die Welt zugrunde geht, würde ich heute noch ein Apfelbäumchen pflanzen." attribution="Martin Luther zu Eisleben" layout="wide"/>
-      <p>
-        An einem Dienstagmorgen gleitet ein Bus über die zentrale Friedhofsallee, hinter den Fenstern
-        29 Männer und Frauen, vorwiegend in Rentnerbeige, unterwegs auf einer &quot;Rundfahrt zu besonderen
-        Anlagen&quot;. Vorne am Mikrofon sitzt Anja Wiebke, laut Visitenkarte &quot;Leiterin Marketing und
-        Vertrieb&quot;, erzählt mit Frühstücksfernsehfreundlichkeit von den 212.000 &quot;aktuell aktiven
-        Grabstätten&quot; – und leitet dann über zu den Baumgräbern auf Bl 58, die wie zufällig am Weg
-        liegen und der erste Stopp auf der Tour sind.
-      </p>
-      <citation text="Nukular. Das Wort heißt nu-ku-lar."/>
     </division>
     <subtitle>Studienwahl? Zentrale Studienberatung! Wohnheimszimmer? Studentenwerk! Lernstress? Psychologische Beratung! Wir haben die wichtigsten Anlaufstellen gesammelt.</subtitle>
   </body>
   <teaser>
-    <title>Landschaftsarchitektur im Apfelhain für Studenten</title>
-    <supertitle>Spaziergänger</supertitle>
+    <title>Hier gibt es Hilfe für Studenten</title>
+    <supertitle>Beratung</supertitle>
     <text>Studienwahl? Zentrale Studienberatung! Wohnheimszimmer? Studentenwerk! Lernstress? Psychologische Beratung! Wir haben die wichtigsten Anlaufstellen gesammelt.</text>
   </teaser>
 </article>

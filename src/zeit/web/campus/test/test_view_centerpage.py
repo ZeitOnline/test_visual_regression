@@ -154,3 +154,14 @@ def test_adverorial_header_has_appropriate_html_structure(testbrowser):
 def test_adverorial_has_markup_module(testbrowser):
     select = testbrowser('/campus/centerpage/advertorial').cssselect
     assert len(select('.markup')) == 1
+
+
+def test_campus_teasers_to_leserartikel_have_kicker_modifiers(testbrowser):
+    select = testbrowser(
+        '/campus/centerpage/teasers-to-leserartikel').cssselect
+    assert len(select(
+        '[class^="teaser"][class*="__kicker--leserartikel"]')) == 9
+
+    select = testbrowser(
+        '/campus/article/simple-with-nextread-leserartikel').cssselect
+    assert len(select('.nextread-teaser__kicker--leserartikel')) == 1
