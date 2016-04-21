@@ -55,6 +55,10 @@ $teaser-heading-box-shadow: 0.4em
 	color: $color-teaser-meta
 	+scaled-font(15px)
 	line-height: 1.4
+	> *:not(:last-child):not(:empty):after
+		content: " \2014 " // — = em dash
+		margin: 0 .2em
+		opacity: $color-separator-opacity
 
 %teaser-commentcount
 	@extend %commentcount
