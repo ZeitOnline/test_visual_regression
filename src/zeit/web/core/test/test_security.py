@@ -244,7 +244,7 @@ def test_no_user_rawr_authentication_is_empty(dummy_request):
 def test_rawr_authentication_encodes_json_as_base64(dummy_request):
     dummy_request.user = {
         'ssoid': '123',
-        'email': 'test@example.org',
+        'mail': 'test@example.org',
         'name': 'jrandom',
     }
     stuff = zeit.web.core.security._rawr_authentication(dummy_request)

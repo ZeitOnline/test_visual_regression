@@ -184,7 +184,7 @@ def get_login_state(request):
 def _rawr_authentication(request):
     if request.user:
         rawr_user = {
-            'email': request.user.get('email'),
+            'email': request.user.get('mail'),
             'nickname': request.user.get('name'),
             # meine.zeit.de requires the "AGB" checkbox to be ticked,
             # i.e. users *cannot* register otherwise.
