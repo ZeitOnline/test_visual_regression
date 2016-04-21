@@ -192,7 +192,7 @@ def _rawr_authentication(request):
         }
     else:
         rawr_user = {}
-    rawr_user = json.dumps(rawr_user).encode('base64').strip()
+    rawr_user = json.dumps(rawr_user).encode('base64').replace('\n', '')
     # rawr docs say, "expires after 2 hours" but since we write a new
     # timestamp with each login-state call (roughly every minute), this
     # should not interfere with our own session expiration rules.
