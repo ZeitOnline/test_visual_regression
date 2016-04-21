@@ -3,7 +3,7 @@
 
 <nav class="{{ module.layout.id }}" id="{{ module.layout.id }}">
     {{ cp.section_heading(module.title, unpadded=True) }}
-    {% for service_column in module.service_items %}
+    {% for service_column in module.services %}
     {% set column_loop = loop %}
     <div class="servicebox__column">
         {% for service in service_column %}
