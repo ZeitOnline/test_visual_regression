@@ -21,12 +21,14 @@
     {% endblock -%}
 {% else -%}
     {% block article_header -%}
-    {% set image = get_image(content=view.main_image_block, variant_id='portrait', fallback=False) -%}
+    {% set variant_id = view.main_image_block.layout.variant if view.main_image_block -%}
+    {% set image = get_image(content=view.main_image_block, variant_id=variant_id, fallback=False) -%}
     {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}
     <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
+        <div class="{{ 'article-header__banderole' | with_mods(variant_id) }}">
         {% if image -%}
-            <div class="article-header__default-image">
-                <div class="article-header__image">
+            <div class="{{ 'article-header__default-image' | with_mods(variant_id) }}">
+                <div class="{{ 'article-header__default-image-box' | with_mods(variant_id) }}">
                     {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
                 </div>
             </div>
@@ -43,8 +45,9 @@
                 </span>
             </h1>
         {% endblock -%}
+        </div>
 
-        <div class="article-header__default-info">
+        <div class="{{ 'article-header__default-info' | with_mods(variant_id) }}">
         {% block article_topic-%}
             {% if view.topic_page and view.topic_label %}
             <a class="{{ 'article-header__topic' | with_mods(view.article_layout) }}" href="{{ view.topic_page.uniqueId | create_url }}">{{ view.topic_label }}</a>

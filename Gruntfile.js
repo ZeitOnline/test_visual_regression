@@ -83,6 +83,7 @@ module.exports = function(grunt) {
                 options: {
                     specify: [
                         project.sourceDir + 'sass/**/*.s{a,c}ss',
+                        '!' + project.sourceDir + 'sass/**/advertorial.*',
                         '!' + project.sourceDir + 'sass/**/unresponsive.*',
                         '!' + project.sourceDir + 'sass/**/all-old-ie.*',
                         '!' + project.sourceDir + 'sass/**/ie-navi.*'
