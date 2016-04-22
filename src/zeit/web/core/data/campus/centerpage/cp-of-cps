@@ -109,12 +109,12 @@
     </cluster>
 
     <cluster visible="True" visible_mobile="True" area="id-a5ffaf22-0ddf-442b-97d5-f317ddc57af8" kind="solo" kind_title="Solo-Region">
-          <region visible="True" visible_mobile="True" hide-dupes="True" area="id-a5f43cfa-8a38-4712-bca5-468f1ded1b54" kind="solo">
-            <container cp:type="cpextra" module="zco-link-hp" visible="True" visible_mobile="True" cp:__name__="id-31b80ac7-ad6d-4d96-8600-edba9b61b412">
-              <cp_extra id="zco-link-hp"/>
-            </container>
-          </region>
-        </cluster>
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-a5f43cfa-8a38-4712-bca5-468f1ded1b54" kind="solo">
+        <container cp:type="cpextra" module="zco_link_button" visible="True" visible_mobile="True" cp:__name__="id-31b80ac7-ad6d-4d96-8600-edba9b61b412">
+          <cp_extra id="zco_link_button"/>
+        </container>
+      </region>
+    </cluster>
 
   </body>
 </centerpage>
