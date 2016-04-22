@@ -5,7 +5,7 @@
         id="zco-wide-small"
         title="kleiner Teaser"
         image_pattern="cinema"
-        areas="trio"
+        areas="trio ranking"
         />
     <layout
         id="zco-wide-large"

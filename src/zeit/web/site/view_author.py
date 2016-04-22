@@ -7,6 +7,7 @@ import zope.interface
 import logging
 
 from zeit.web.core.view import is_paginated
+import zeit.web.core.area.ranking
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 
@@ -165,7 +166,7 @@ def create_author_article_area(
     return AuthorArticleRanking(area, favourite_content)
 
 
-class AuthorArticleRanking(zeit.web.site.area.ranking.Ranking):
+class AuthorArticleRanking(zeit.web.core.area.ranking.Ranking):
 
     def __init__(self, context, favourite_content):
         super(AuthorArticleRanking, self).__init__(context)
