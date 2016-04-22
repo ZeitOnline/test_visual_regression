@@ -2,6 +2,11 @@
 	background: rgba($zco-grey, 0.6)
 	padding-bottom: rem(34px)
 	text-align: center
+	+respond-min($break-tablet-min)
+		margin-left: rem(10px)
+		margin-right: rem(10px)
+	+respond-min($break-tablet-min)
+		height: rem(460px)
 	&__link
 		border-bottom: 1px solid rgba($zco-charcoal, 0.5)
 		color: $zco-charcoal
