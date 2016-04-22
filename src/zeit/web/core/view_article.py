@@ -304,7 +304,7 @@ class InstantArticle(Article):
         fbia ad is possible. Take this Zuckerberg!"""
         for p, page in enumerate(self.pages):
             for b, block in enumerate(page.blocks):
-                if block.model_block.type == 'p':
+                if isinstance(block, zeit.web.core.block.Paragraph):
                     words = words - len(
                         re.findall(r'\S+', block.model_block.text))
                     if words < 0:
