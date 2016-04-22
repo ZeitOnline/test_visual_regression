@@ -61,7 +61,7 @@ def test_module_cp_header_is_available(testbrowser):
     browser = testbrowser('/campus/centerpage/cp-of-cps')
     module = browser.cssselect('.cp_header')
     assert len(module) == 1
-    assert module[0].text_content() != u'Themen im Überblick'
+    assert module[0].text_content().strip() == u'Themen im Überblick'
 
 
 def test_module_zco_link_button_is_available(testbrowser):
