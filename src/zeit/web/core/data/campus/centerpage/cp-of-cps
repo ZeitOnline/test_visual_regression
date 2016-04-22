@@ -73,7 +73,7 @@
 
     <cluster visible="True" visible_mobile="True" area="id-a5ffaf22-0ddf-442b-97d5-f317ddc57af7" kind="solo" kind_title="Solo-Region">
       <region visible="True" visible_mobile="True" hide-dupes="True" area="id-a5f43cfa-8a38-4712-bca5-468f1ded1b55" kind="solo">
-        <container cp:type="cpextra" module="cp_header" visible="True" visible_mobile="True" cp:__name__="id-31b80ac7-ad6d-4d96-8600-edba9b61b411" supertitle="Spatzmarke" title="Themen im Überblick">
+        <container cp:type="cpextra" module="cp_header" visible="True" visible_mobile="True" cp:__name__="id-31b80ac7-ad6d-4d96-8600-edba9b61b411" title="Themen im Überblick">
           <cp_extra id="cp_header"/>
         </container>
       </region>
