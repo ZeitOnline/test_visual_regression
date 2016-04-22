@@ -158,7 +158,7 @@ def test_advertorial_has_markup_module(testbrowser):
 
 def test_servicelinks_module_renders_links(testbrowser):
     select = testbrowser('/campus/centerpage/servicelinks').cssselect
-    assert len(select('#zco-servicelinks a.servicebox__link')) == 6
+    assert len(select('.servicelinks a.servicelinks__link')) == 6
 
 
 def test_campus_teasers_to_leserartikel_have_kicker_modifiers(testbrowser):
