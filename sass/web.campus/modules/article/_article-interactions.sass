@@ -4,7 +4,6 @@ $interaction-hover-color: $black
 @import "web.core/modules/article/article-interactions"
 
 .sharing-menu
-	display: table-cell
 	vertical-align: middle
 	&__item
 		display: table-cell
@@ -46,7 +45,9 @@ $interaction-hover-color: $black
 
 +respond-min($break-desktop-min)
 	.print-menu
-		display: table-cell
 		vertical-align: middle
+		&__print
+			&:before
+				content: ""
 
 

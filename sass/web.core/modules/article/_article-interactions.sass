@@ -20,10 +20,9 @@
 			content: " / "
 			color: $color-separator
 			margin: remify(0 4px)
-	+respond-min($break-desktop-min)
-		display: inline
 
 .sharing-menu
+	display: table-cell
 	font-size: remify(14px)
 	&__items
 		margin: 0
@@ -37,4 +36,4 @@
 
 +respond-min($break-desktop-min)
 	.print-menu
-		display: inline
+		display: table-cell
