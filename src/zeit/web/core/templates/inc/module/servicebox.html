@@ -1,9 +1,9 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
-<nav class="servicebox" id="servicebox">
-    {{ cp.section_heading('Service', unpadded=True) }}
-    {% for service_column in module.service_items %}
+<nav class="{{ module.layout.id }}" id="{{ module.layout.id }}">
+    {{ cp.section_heading(module.title, unpadded=True) }}
+    {% for service_column in module.services %}
     {% set column_loop = loop %}
     <div class="servicebox__column">
         {% for service in service_column %}

@@ -156,12 +156,10 @@ def test_campus_article_renders_video_with_correct_markup(testbrowser):
         'iframe.video-player__iframe[src*="videoId=4193594095001"]')
     assert select(
         '.video-caption > .video-caption__kicker')[0].text == 'Wearables'
-    assert select(
-        '.video-caption > .video-caption__title'
-        )[0].text == 'Verkaufsstart von Apple Watch ohne Warteschlangen'
+    assert select('.video-caption > .video-caption__title')[0].text == (
+        'Verkaufsstart von Apple Watch ohne Warteschlangen')
     assert 'nur auf Vorbestellung ausgegeben wir' in select(
-        '.video-caption > .video-caption__description'
-        )[0].text
+        '.video-caption > .video-caption__description')[0].text
 
 
 def test_nextread_is_present(testbrowser):
@@ -204,3 +202,21 @@ def test_article_has_sharing_bar(testbrowser):
     assert len(browser.cssselect('.sharing-menu')) == 1
     assert len(browser.cssselect('.sharing-menu__item')) == 3
     assert len(browser.cssselect('.print-menu')) == 1
+
+
+def test_article_header_default_considers_image_layout(testbrowser):
+    browser = testbrowser('/campus/article/simple')
+    header = browser.cssselect('.article-header--default-no-image')
+    assert len(header) == 1
+
+    browser = testbrowser('/campus/article/common')
+    header = browser.cssselect('.article-header--default-with-image')[0]
+    figure = header.cssselect('.article-header__media--portrait')[0]
+    image = figure.cssselect('img')[0]
+    assert image.get('data-variant') == 'portrait'
+
+    browser = testbrowser('/campus/article/header-image-landscape')
+    header = browser.cssselect('.article-header--default-with-image')[0]
+    figure = header.cssselect('.article-header__media--wide')[0]
+    image = figure.cssselect('img')[0]
+    assert image.get('data-variant') == 'wide'
