@@ -1,0 +1,20 @@
+.frame
+	background-color: rgba($zco-grey, 0.6)
+	color: $white
+	margin: $vertical-space 0
+	padding-bottom: rem(450px)
+	position: relative
+	+respond-min($break-tablet-min)
+		// compensate for $vertical-space
+		padding-bottom: calc(100% - $vertical-space)
+		margin-left: rem(10px)
+		margin-right: rem(10px)
+	&__iframe
+		border: none
+		height: rem(450px)
+		margin: 0
+		position: absolute
+		top: 0
+		width: 100%
+		+respond-min($break-tablet-min)
+			margin: rem(28px)
