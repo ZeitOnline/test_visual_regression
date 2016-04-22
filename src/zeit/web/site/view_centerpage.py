@@ -139,11 +139,6 @@ class Centerpage(
     """Main view class for ZEIT ONLINE centerpages."""
 
     @zeit.web.reify
-    def has_cardstack(self):
-        kwargs = {'cp:type': 'cardstack'}
-        return bool(zeit.web.core.utils.find_block(self.context, **kwargs))
-
-    @zeit.web.reify
     def breadcrumbs(self):
         # No breadcrumbs for homepage
         if self.is_hp:
@@ -237,16 +232,6 @@ class Centerpage(
         elif ranking.current_page > 2:
             return zeit.web.core.template.append_get_params(
                 self.request, p=ranking.current_page - 1)
-
-    @zeit.web.reify
-    def cardstack_head(self):
-        url = super(Centerpage, self).cardstack_head
-        return zeit.web.core.utils.update_query(url, static='true')
-
-    @zeit.web.reify
-    def cardstack_body(self):
-        url = super(Centerpage, self).cardstack_body
-        return zeit.web.core.utils.update_query(url, static='true')
 
 
 @pyramid.view.view_config(

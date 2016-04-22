@@ -63,6 +63,10 @@
     {% if settings('livereload') %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
+
+    {% if view.has_cardstack %}
+        {{ lama.insert_esi(view.cardstack_head, 'Cardstack Ressourcen konnten nicht geladen werden') }}
+    {% endif %}
 </head>
 <body data-page-type="{{ view.type }}">
 
@@ -131,5 +135,8 @@
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
     {%- endif %}
 
+    {% if view.has_cardstack %}
+        {{ lama.insert_esi(view.cardstack_scripts, 'Cardstack konnte nicht eingebunden werden') }}
+    {% endif %}
 </body>
 </html>
