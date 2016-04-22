@@ -422,8 +422,8 @@ class RenderedLegacyArea(zeit.web.core.centerpage.Area):
         lids = [block.layout.id] + area.count * ['zon-parquet-small']
         modules = [zeit.web.core.centerpage.TeaserModule(
             [t], layout=lids.pop(0), parent=self) for t in values]
-        zeit.web.core.centerpage.Area.__init__(
-            self, modules, kind='parquet', is_teaserbar=True)
+        super(RenderedLegacyArea, self).__init__(
+            modules, kind='parquet', is_teaserbar=True)
 
         self.read_more = block.read_more
         self.read_more_url = block.read_more_url

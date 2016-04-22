@@ -28,13 +28,15 @@ log = logging.getLogger(__name__)
 
 
 @zope.interface.implementer(zeit.content.cp.interfaces.IArea)
-class Area(collections.OrderedDict, zeit.content.cp.area.AreaFactory):
+class Area(collections.OrderedDict):
+
+    factory = zeit.content.cp.area.AreaFactory(None)
 
     def __init__(self, arg, **kw):
-        collections.OrderedDict.__init__(
-            self, [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
+        super(Area, self).__init__(
+            [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
         self.kind = kw.pop('kind', 'solo')
-        self.xml = kw.pop('xml', self.get_xml())
+        self.xml = kw.pop('xml', self.factory.get_xml())
         self.automatic = kw.pop('automatic', False)
         self.__parent__ = kw.pop('parent', None)
 
@@ -69,10 +71,9 @@ class Area(collections.OrderedDict, zeit.content.cp.area.AreaFactory):
 
 
 @zope.interface.implementer(zeit.content.cp.interfaces.IRegion)
-class Region(Area, zeit.content.cp.area.RegionFactory):
+class Region(Area):
 
-    def __init__(self, arg, **kw):
-        Area.__init__(self, arg, **kw)
+    factory = zeit.content.cp.area.RegionFactory(None)
 
 
 @zeit.web.register_filter
