@@ -1,0 +1,69 @@
+.servicelinks
+	+clearfix
+	padding: $vertical-space--small $cp-padding
+	&__heading-container
+		background: $color-background--dark
+		height: remify(100px)
+		// list items should be on same base-line as the first line of the
+		// teaser-small-wide__title in the other trio areas
+		margin-bottom: remify(8px)
+		position: relative
+	&__heading
+		@extend %font-beckett
+		+font-smoothing
+		+transform(translate(-50%, -50%))
+		color: $color-text--on-dark
+		font-size: remify(32px)
+		left: 50%
+		margin: 0
+		padding: remify(0 10px)
+		position: absolute
+		text-align: center
+		top: 50%
+		width: 100%
+	&__column
+		float: left
+		list-style: none
+		margin: 0
+		padding: 0
+		width: 100%
+		+respond-min($break-phablet-min)
+			width: 50%
+		+respond-min($break-tablet-min)
+			width: 100%
+		+respond-min($break-desktop-min)
+			width: 50%
+	&__item
+		font-size: remify(16px)
+		line-height: 1.4
+		position: relative
+		margin-top: remify(6px)
+		padding: 0 .7em
+		&:before
+			color: $zco-charcoal
+			content: "\203A"
+			font-size: 1.5em
+			position: absolute
+			left: 0
+			top: remify(-9px)
+	&__link
+		text-decoration: none
+		&:link,
+		&:visited
+			color: $zco-charcoal
+		&:hover,
+		&:active
+			color: $color-tools-text
+
+
++respond-min($break-tablet-min)
+	.servicelinks
+		padding: $vertical-space $cp-padding
+		&__heading-container
+			// same height as the image in teaser-wide-small (trio area)
+			height: auto
+			padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
+		&__heading
+			font-size: remify(42px)
+		&__item
+			font-size: remify(15px)
