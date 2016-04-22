@@ -71,6 +71,14 @@
   </head>
   <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+    <cluster visible="True" visible_mobile="True" area="id-a5ffaf22-0ddf-442b-97d5-f317ddc57af7" kind="solo" kind_title="Solo-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-a5f43cfa-8a38-4712-bca5-468f1ded1b55" kind="solo">
+        <container cp:type="cpextra" module="cp_header" visible="True" visible_mobile="True" cp:__name__="id-31b80ac7-ad6d-4d96-8600-edba9b61b411" supertitle="Spatzmarke" title="Themen im Überblick">
+          <cp_extra id="cp_header"/>
+        </container>
+      </region>
+    </cluster>
+
     <cluster area="id-42a8299d-b569-4c42-b713-db5dbd86a64a" kind="duo">
       <region area="id-42a2899d-b569-4c42-b713-db5dbd86a64b" kind="duo">
         <container cp:type="teaser" module="zco-graphical" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
