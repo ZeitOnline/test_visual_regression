@@ -55,3 +55,18 @@ def test_module_markup_considers_alignment(testbrowser):
     modules = browser.cssselect('.markup')
     for module in modules:
         assert 'markup--center' in module.get('class')
+
+
+def test_module_cp_header_is_available(testbrowser):
+    browser = testbrowser('/campus/centerpage/cp-of-cps')
+    module = browser.cssselect('.cp_header')
+    assert len(module) == 1
+    assert module[0].text_content() != u'Themen im Überblick'
+
+
+def test_module_zco_link_button_is_available(testbrowser):
+    browser = testbrowser('/campus/centerpage/cp-of-cps')
+    module = browser.cssselect('.link_button')
+    assert len(module) == 1
+    module = browser.cssselect('.link_button__link')
+    assert len(module) == 1
