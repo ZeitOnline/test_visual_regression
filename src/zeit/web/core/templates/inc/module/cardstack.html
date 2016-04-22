@@ -3,6 +3,6 @@
 {% if esi_source -%}
 <div class="cardstack">
     {{ lama.insert_esi(esi_source, 'Cardstack konnte nicht geladen werden') }}
-    <a href="{{ esi_source }}">Link zum Kartenspiel</a>
+    <a class="cardstack__link" href="{{ esi_source }}">Link zum Kartenspiel</a>
 </div>
 {% endif -%}
