@@ -1,27 +1,31 @@
 <?xml version="1.0"?>
 <services>
-  <!-- 1. Spalte (von 4) -->
-  <service href="http://community.zeit.de/newsletter" id="newsletter">Newsletter</service>
-  <service href="https://premium.zeit.de/zeit-apps?wt_zmc=fix.int.zonpme.zeitde.servicezeile.premium.text.apps+epaper.apps+epaper&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=servicezeile&amp;utm_content=premium_text_apps+epaper_apps+epaper" id="apps-epaper">Apps &amp; E-Paper</service>
-  <service href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="abo-services">Abo-Services</service>
-  <service href="http://www.zeitakademie.de/?mc=zeitakademie.Footer.Textservice.zeitakademie.textservice.textservice" id="bildung-weiterbildung">ZEIT Akademie</service>
-  <service href="http://marktplatz.zeit.de/kataloge/" id="kataloge">Kataloge</service>
-  <!-- 2. Spalte (von 4) -->
-  <service href="http://studiengaenge.zeit.de/" id="studiengangsuche">Studiengangsuche</service>
-  <service href="http://www.zeit.de/studium/rankings/index" id="uni-rankings">Uni-Rankings</service>
-  <service href="http://marktplatz.zeit.de/veranstaltungen/index" id="kulturangebote">Kulturangebote</service>
-  <service href="https://premium.zeit.de/zeit-audio?wt_zmc=fix.int.zonpme.zeitde.servicezeile.premium.text.audio.audio&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=servicezeile&amp;utm_content=premium_text_audio_audio" id="zeit-audio">ZEIT Audio</service>
-  <service href="http://www.zeit.de/spiele/index" id="spiele">Spiele</service>
-  <!-- 3. Spalte (von 4) -->
-  <service href="http://automarkt.zeit.de/" id="automarkt">Automarkt</service>
-  <service href="http://jobs.zeit.de/" id="jobsuche">Jobsuche</service>
-  <service href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="partnersuche">Partnersuche</service>
-  <service href="http://zeit.immowelt.de/" rel="nofollow" id="immobiliensuche">Immobiliensuche</service>
-  <service href="http://www.bellevue-ferienhaus.de/zeit/" rel="nofollow" id="ferienhaeuser">Ferienhäuser</service>
-  <!-- 4. Spalte (von 4) -->
-  <service href="http://jobs.zeit.de/?wt_zmc=fix.int.zonpmr.zeitde.parkett.zeitstellenmarkt.link.link.x&amp;utm_medium=fix&amp;utm_source=zeitde_zonpmr_int&amp;utm_campaign=parkett&amp;utm_content=zeitstellenmarkt_link_link_x" id="headhunter">ZEIT Stellenmarkt</service>
-  <service href="http://services.zeit.de/toptarif/vergleichsrechner.php" id="tarifvergleiche">Tarifvergleiche</service>
-  <service href="http://marktplatz.zeit.de/urlaubsziele/?wt_mc=zeit_de.intern.serviceservice.zon.urlaubsziele.zeit_blog_urlaubsziele.textservice.textservice" id="urlaubsziele">Urlaubsziele</service>
-  <service href="http://schach.zeit.de/" id="schach">Schach spielen</service>
-  <service href="http://www.zeit.de/angebote/senioren-ratgeber/" id="seniorenratgeber">Senioren-Ratgeber</service>
+  <column>
+    <service href="http://community.zeit.de/newsletter" id="newsletter">Newsletter</service>
+    <service href="https://premium.zeit.de/zeit-apps?wt_zmc=fix.int.zonpme.zeitde.servicezeile.premium.text.apps+epaper.apps+epaper&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=servicezeile&amp;utm_content=premium_text_apps+epaper_apps+epaper" id="apps-epaper">Apps &amp; E-Paper</service>
+    <service href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="abo-services">Abo-Services</service>
+    <service href="http://www.zeitakademie.de/?mc=zeitakademie.Footer.Textservice.zeitakademie.textservice.textservice" id="bildung-weiterbildung">ZEIT Akademie</service>
+    <service href="http://marktplatz.zeit.de/kataloge/" id="kataloge">Kataloge</service>
+  </column>
+  <column>
+    <service href="http://studiengaenge.zeit.de/" id="studiengangsuche">Studiengangsuche</service>
+    <service href="http://www.zeit.de/studium/rankings/index" id="uni-rankings">Uni-Rankings</service>
+    <service href="http://marktplatz.zeit.de/veranstaltungen/index" id="kulturangebote">Kulturangebote</service>
+    <service href="https://premium.zeit.de/zeit-audio?wt_zmc=fix.int.zonpme.zeitde.servicezeile.premium.text.audio.audio&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=servicezeile&amp;utm_content=premium_text_audio_audio" id="zeit-audio">ZEIT Audio</service>
+    <service href="http://www.zeit.de/spiele/index" id="spiele">Spiele</service>
+  </column>
+  <column>
+    <service href="http://automarkt.zeit.de/" id="automarkt">Automarkt</service>
+    <service href="http://jobs.zeit.de/" id="jobsuche">Jobsuche</service>
+    <service href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="partnersuche">Partnersuche</service>
+    <service href="http://zeit.immowelt.de/" rel="nofollow" id="immobiliensuche">Immobiliensuche</service>
+    <service href="http://www.bellevue-ferienhaus.de/zeit/" rel="nofollow" id="ferienhaeuser">Ferienhäuser</service>
+  </column>
+  <column>
+    <service href="http://jobs.zeit.de/?wt_zmc=fix.int.zonpmr.zeitde.parkett.zeitstellenmarkt.link.link.x&amp;utm_medium=fix&amp;utm_source=zeitde_zonpmr_int&amp;utm_campaign=parkett&amp;utm_content=zeitstellenmarkt_link_link_x" id="headhunter">ZEIT Stellenmarkt</service>
+    <service href="http://services.zeit.de/toptarif/vergleichsrechner.php" id="tarifvergleiche">Tarifvergleiche</service>
+    <service href="http://marktplatz.zeit.de/urlaubsziele/?wt_mc=zeit_de.intern.serviceservice.zon.urlaubsziele.zeit_blog_urlaubsziele.textservice.textservice" id="urlaubsziele">Urlaubsziele</service>
+    <service href="http://schach.zeit.de/" id="schach">Schach spielen</service>
+    <service href="http://www.zeit.de/angebote/senioren-ratgeber/" id="seniorenratgeber">Senioren-Ratgeber</service>
+  </column>
 </services>

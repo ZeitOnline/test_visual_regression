@@ -35,6 +35,9 @@ $teaser-heading-box-shadow: 0.4em
 	position: absolute
 	text-transform: uppercase
 
+%teaser-kicker--leserartikel
+	color: $color-community-primary
+
 %teaser-title
 	@extend %font-beckett
 	color: $zco-charcoal
@@ -57,3 +60,9 @@ $teaser-heading-box-shadow: 0.4em
 %teaser-byline
 	display: block
 	margin-bottom: remify(8px)
+
+%teaser-commentcountlink
+	color: $zco-charcoal
+	border-bottom: 1px solid rgba($zco-charcoal, .5)
+	+on-interaction
+		border-color: currentColor

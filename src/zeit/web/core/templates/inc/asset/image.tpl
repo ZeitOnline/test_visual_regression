@@ -24,7 +24,7 @@
                     {%- if name | trim | length > 1 %}
                         <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
                             {%- if url and not omit_image_links %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif -%}
-                            <span itemprop="name">©&nbsp;{{ name | replace('©', '') | trim }}</span>
+                            <span itemprop="name">{{ name | trim | replace('© ', '© ') }}</span>
                             {%- if url and not omit_image_links %}</a>{% endif -%}
                         </span>
                     {%- endif %}

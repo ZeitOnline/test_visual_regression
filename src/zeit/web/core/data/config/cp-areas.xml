@@ -7,6 +7,7 @@
     <area kind="minor">minor</area>
     <area kind="parquet">parquet</area>
     <area kind="zmo-parquet">zmo-parquet</area>
+    <area kind="zco-parquet">zco-parquet</area>
     <area kind="ranking">ranking</area>
     <area kind="overview">overview</area>
     <area kind="newsticker">newsticker</area>

@@ -17,6 +17,11 @@
 			height: remify(20px)
 			max-width: remify(205px)
 			width: 100%
+		&--zco
+			color: $white
+			height: remify(30px)
+			max-width: remify(205px)
+			width: 100%
 		&--zett
 			background-color: $primary-color-zett
 			color: $white
@@ -73,6 +78,13 @@
 		&--zmo
 			padding-bottom: remify(13px) // fix inline bottom gap
 			padding-top: remify(15px)
+			background-color: $primary-color-zmo
+			color: $white
+			&:after
+				color: $zon-light-grey
+		&--zco
+			padding-bottom: remify(6px) // fix inline bottom gap
+			padding-top: remify(17px)
 			background-color: $primary-color-zmo
 			color: $white
 			&:after
@@ -135,6 +147,9 @@
 			+link
 				color: $primary-color-zett
 			display: block
+		&--zco
+			+link
+				color: $kicker-color-campus
 
 .parquet-teasers
 	display: table-cell
