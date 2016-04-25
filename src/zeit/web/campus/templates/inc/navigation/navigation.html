@@ -53,7 +53,7 @@
     <div class="nav__primary">
         <nav class="nav__topics">
             {% require topics = view.context | topic_links -%}
-            <h2 class="nav__topics-title"><a href="#">Themen{#{ topics.title | default('Themen', True) }#}</a></h2>
+            <h2 class="nav__topics-title"><a href="http://www.zeit.de/campus/themen">Themen{#{ topics.title | default('Themen', True) }#}</a></h2>
             <ul class="nav__topics-list">
             {% for label, link in topics %}
                 <li><a href="{{ link }}">{{ label }}</a></li>
@@ -63,11 +63,11 @@
             <a class="nav__topics-link" href="#">Alle Themen</a>
         </nav>
         <nav class="nav__tools">
-            <h2 class="nav__tools-title"><a href="#tools-menu" role="button" aria-controls="tools-menu"><span class="nav__dropdown">Was soll ich studieren?</span></a></h2>
+            <h2 class="nav__tools-title"><a href="http://studienfuehrer-test.zeit.de/artikel/was-soll-ich-studieren.html" role="button" aria-controls="tools-menu"><span class="nav__dropdown">Was soll ich studieren?</span></a></h2>
             <ul class="nav__tools-list">
                 <li><a href="http://studiengaenge.zeit.de/sit">Studium-Interessentest</a></li>
                 <li><a href="http://studiengaenge.zeit.de/studienangebote">Suchmaschine für Studiengänge</a></li>
-                <li><a href="http://ranking.zeit.de/">CHE Hochschulranking</a></li>
+                <li><a href="http://ranking.zeit.de/che2016/de/">CHE Hochschulranking</a></li>
             </ul>
         </nav>
     </div>
