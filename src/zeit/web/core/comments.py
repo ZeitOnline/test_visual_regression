@@ -439,6 +439,8 @@ class Community(grokcore.component.GlobalUtility):
         :param page_size: Number of comments displayed per page
         :rtype: unicode or None
         """
+        if not self.is_healthy():
+            raise CommunityError()
         path = unique_id.replace(zeit.cms.interfaces.ID_NAMESPACE, '/', 1)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         timeout = float(conf.get('community_host_timeout_secs', 0.5))
@@ -486,7 +488,8 @@ class Community(grokcore.component.GlobalUtility):
         :param unique_ids: List of uniqueIds
         :rtype: unicode or None
         """
-
+        if not self.is_healthy():
+            return None
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         timeout = float(conf.get('community_host_timeout_secs', 5))
         uri = '{}/agatho/node-comment-statistics'.format(
@@ -501,7 +504,7 @@ class Community(grokcore.component.GlobalUtility):
         except:
             log.warning(
                 'request_counts received error, ignoring', exc_info=True)
-            return
+            return None
 
 
 class CommunityError(Exception):
