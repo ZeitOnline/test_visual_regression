@@ -57,9 +57,7 @@
                 {% endblock teaser_byline %}
                 {% block teaser_datetime %}
                     {% if not view.is_advertorial %}
-                        <time class="{{ layout }}__datetime js-update-datetime" datetime="{{ teaser | release_date | format_date('iso8601') }}">
-                            {{- teaser | release_date | format_date('short') -}}
-                        </time>
+                        {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
                     {% endif %}
                 {% endblock teaser_datetime %}
                 {% block teaser_commentcount %}
