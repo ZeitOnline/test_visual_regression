@@ -18,6 +18,7 @@ import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component
 
+import zeit.campus.interfaces
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
@@ -26,6 +27,7 @@ import zeit.content.link.interfaces
 import zeit.magazin.interfaces
 
 import zeit.web
+import zeit.web.core.application
 import zeit.web.core.centerpage
 import zeit.web.core.image
 import zeit.web.core.interfaces
@@ -132,6 +134,12 @@ def zmo_content(content):
 def zett_content(content):
     return zeit.content.link.interfaces.ILink.providedBy(
         content) and content.url.startswith('http://ze.tt')
+
+
+@zeit.web.register_test
+def zco_content(content):
+    toggle = zeit.web.core.application.FEATURE_TOGGLES.find('campus_launch')
+    return toggle and zeit.campus.interfaces.IZCOContent.providedBy(content)
 
 
 @zeit.web.register_test
