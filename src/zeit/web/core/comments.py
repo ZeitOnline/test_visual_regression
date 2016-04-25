@@ -178,21 +178,19 @@ class Community(grokcore.component.GlobalUtility):
         elif parent_cid:
             cid = parent_cid
             thread_type = 'sub_thread'
-        thread = self._request_thread(
-            unique_id, thread_type=thread_type, page=page, page_size=page_size,
-            sort=request_sort, cid=cid)
-        if thread is None:
-            return dict()
-
-        if isinstance(thread, dict) and thread.get('request_failed'):
-            raise ThreadNotLoadable()
+        try:
+            thread = self._request_thread(
+                unique_id, thread_type=thread_type, page=page,
+                page_size=page_size, sort=request_sort, cid=cid)
+        except:
+            return None
 
         try:
             document = lxml.etree.fromstring(thread)
         except:
             log.warning(
                 'get_thread input unparseable, ignoring', exc_info=True)
-            raise ThreadNotLoadable()
+            return None
 
         try:
             comment_nid = document.xpath('/comments/nid/text()')[0]
@@ -216,9 +214,8 @@ class Community(grokcore.component.GlobalUtility):
                 page = thread_position / page_size
                 if thread_position % page_size > 0:
                     page = page + 1
-
         except (IndexError, lxml.etree.XMLSyntaxError):
-            raise ThreadNotLoadable()
+            return None
 
         comment_list = list(comment_to_dict(c) for c in comment_list)
 
@@ -290,12 +287,11 @@ class Community(grokcore.component.GlobalUtility):
         return thread
 
     def get_comment(self, unique_id, cid):
-        thread = self._request_thread(unique_id, thread_type='single', cid=cid)
-        if thread is None:
+        try:
+            thread = self._request_thread(
+                unique_id, thread_type='single', cid=cid)
+        except:
             return {}
-        if isinstance(thread, dict) and thread.get('request_failed'):
-            return {}
-
         try:
             document = lxml.etree.fromstring(thread)
         except:
@@ -310,10 +306,9 @@ class Community(grokcore.component.GlobalUtility):
 
     def get_comment_count(self, unique_id):
         # XXX Should we reuse get_comment_counts instead?
-        response = self._request_thread(unique_id, thread_type='meta')
-        # XXX Needs a better error handling protocol, say a custom exception?
-        if not response or (
-                isinstance(response, dict) and response.get('request_failed')):
+        try:
+            response = self._request_thread(unique_id, thread_type='meta')
+        except:
             return 0
         try:
             document = lxml.etree.fromstring(response)
@@ -475,15 +470,15 @@ class Community(grokcore.component.GlobalUtility):
             with zeit.web.core.metrics.timer(
                     'request_thread.community.reponse_time'):
                 response = requests.get(uri, timeout=timeout)
-            if response.status_code == 404:
-                return
-            if (200 <= response.status_code < 300):
-                return response.content
-            return {'request_failed': datetime.datetime.utcnow()}
         except:
             log.warning(
                 'request_thread received error, ignoring', exc_info=True)
-            return {'request_failed': datetime.datetime.utcnow()}
+            raise CommunityError()
+        if response.status_code == 404:
+            raise ThreadNotFound(unique_id)
+        if not (200 <= response.status_code < 300):
+            raise CommunityError()
+        return response.content
 
     def _request_counts(self, *unique_ids):
         """Send a POST request to receive multiple comment counts for a CP.
@@ -509,7 +504,11 @@ class Community(grokcore.component.GlobalUtility):
             return
 
 
-class ThreadNotLoadable(Exception):
+class CommunityError(Exception):
+    pass
+
+
+class ThreadNotFound(Exception):
     pass
 
 
@@ -531,10 +530,10 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
             zeit.web.core.view_comment.invalidate_comment_thread(unique_id)
             thread = get_cacheable_thread(unique_id)
         if thread is not None and thread.get('request_failed'):
-            raise ThreadNotLoadable()
+            return None
 
     if thread is None or thread['comment_count'] == 0:
-        return
+        return None
 
     # We do not want to touch the references of the cached thread
     thread = thread.copy()
@@ -688,24 +687,25 @@ def _derive_maintenance_from_schedule(maintenance):
 @LONG_TERM_CACHE.cache_on_arguments()
 def get_cacheable_thread(unique_id):
     community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    thread = community._request_thread(unique_id)
-    if thread is None:
-        return
-    if isinstance(thread, dict) and thread.get('request_failed'):
-        return thread
+    try:
+        thread = community._request_thread(unique_id)
+    except ThreadNotFound:
+        return None
+    except CommunityError:
+        return {'request_failed': datetime.datetime.utcnow()}
 
     try:
         document = lxml.etree.fromstring(thread)
     except:
         log.warning(
             'get_cacheable_thread input unparseable, ignoring', exc_info=True)
-        return
+        return None
 
     try:
         comment_nid = document.xpath('/comments/nid/text()')[0]
         comment_list = document.xpath('//comment')
     except (IndexError, lxml.etree.XMLSyntaxError):
-        return
+        return None
 
     comment_count = len(comment_list)
     comment_list = list(comment_to_dict(c) for c in comment_list)
@@ -731,7 +731,7 @@ def get_cacheable_thread(unique_id):
             sort='asc',
             nid=comment_nid)
     except (IndexError, AttributeError):
-        return
+        return None
 
 
 def _sort_comments(comments, offset=0):
@@ -777,10 +777,6 @@ class PagesExhaustedError(UserCommentsException):
 
 
 class NoValidComment(UserCommentsException):
-    pass
-
-
-class CommunityNotReachable(UserCommentsException):
     pass
 
 

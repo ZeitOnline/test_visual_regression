@@ -642,11 +642,8 @@ class CommentMixin(object):
         except ValueError:
             return
         cid = self.request.params.get('cid', None)
-        try:
-            return self.community.get_thread(
-                self.context.uniqueId, sort=sort, page=page, cid=cid)
-        except zeit.web.core.comments.ThreadNotLoadable:
-            return
+        return self.community.get_thread(
+            self.context.uniqueId, sort=sort, page=page, cid=cid)
 
     def get_comment(self, cid):
         return self.community.get_comment(self.context.uniqueId, cid)

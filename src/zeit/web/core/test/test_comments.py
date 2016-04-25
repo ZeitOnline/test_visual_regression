@@ -114,12 +114,14 @@ def test_request_thread_should_respond(application, mockserver):
 def test_request_thread_should_respond_for_nonexistent(
         application, mockserver):
     community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    assert community._request_thread('nosuchthread') is None
+    with pytest.raises(zeit.web.core.comments.ThreadNotFound):
+        community._request_thread('nosuchthread')
 
 
 def test_request_thread_should_handle_non_ascii_urls(application, mockserver):
     community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    assert community._request_thread(u'ümläut') is None
+    with pytest.raises(zeit.web.core.comments.ThreadNotFound):
+        community._request_thread(u'ümläut')
 
 
 def test_request_thread_should_fail_on_certain_status_codes(
@@ -131,8 +133,8 @@ def test_request_thread_should_fail_on_certain_status_codes(
     monkeypatch.setattr(requests, 'get', get)
 
     community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    assert 'request_failed' in community._request_thread(
-        'http://community/foo')
+    with pytest.raises(zeit.web.core.comments.CommunityError):
+        community._request_thread('http://community/foo')
 
 
 def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
@@ -142,13 +144,16 @@ def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
     monkeypatch.setattr(requests, 'get', get)
 
     community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    assert 'request_failed' in community._request_thread('some_unique_id')
+    with pytest.raises(zeit.web.core.comments.CommunityError):
+        community._request_thread('some_unique_id')
 
 
 def test_request_thread_mode_should_produce_expected_uris(
         monkeypatch, application):
 
-    request_get = mock.MagicMock(return_value={})
+    response = requests.Response()
+    response.status_code = 200
+    request_get = mock.Mock(return_value=response)
     monkeypatch.setattr(requests, 'get', request_get)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -652,28 +657,27 @@ def test_post_comment_should_not_expose_requests_timeout_exception(
     monkeypatch.setattr(requests, 'post', post)
 
     view = zeit.web.core.view_comment.PostComment(mock.Mock(), dummy_request)
+    monkeypatch.setattr(view, '_ensure_comment_thread', lambda *args: None)
 
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         view.post_comment()
 
 
-def test_get_thread_should_raise_exception_on_unloaded_threads(application,
-                                                               monkeypatch):
+def test_get_thread_should_return_none_on_errors(application, monkeypatch):
 
     def request_thread(unique_id, sort="asc", page=None, cid=None):
         return {'request_failed': datetime.datetime.utcnow()}
     monkeypatch.setattr(
         zeit.web.core.comments.Community, '_request_thread', request_thread)
 
-    with pytest.raises(zeit.web.core.comments.ThreadNotLoadable):
-        zeit.web.core.comments.get_thread('http://unique_id')
+    assert zeit.web.core.comments.get_thread('http://unique_id') is None
 
 
 def test_get_thread_should_invalidate_on_unloaded_threads(application,
                                                           monkeypatch):
 
     def request_thread(unique_id, sort="asc", page=None, cid=None):
-        return {'request_failed': datetime.datetime.utcnow()}
+        raise zeit.web.core.comments.CommunityError()
     monkeypatch.setattr(
         zeit.web.core.comments.Community, '_request_thread', request_thread)
 

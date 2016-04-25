@@ -164,7 +164,7 @@ def test_comment_author_roles_should_be_displayed(testbrowser):
     assert icon_freelancer[0].attrib['title'] == 'Freie Autorin'
 
 
-def test_comments_zon_template_respects_metadata(tplbrowser):
+def test_comments_zon_template_respects_metadata(tplbrowser, monkeypatch):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
 
@@ -172,6 +172,9 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
     request.user = {'ssoid': 123, 'uid': '123', 'name': 'Max'}
     request.params = {'cid': None}
     request.route_url = lambda x: "http://foo/"
+
+    monkeypatch.setattr(
+        zeit.web.core.comments.Community, 'get_comment', lambda *args: {})
 
     view = zeit.web.site.view_article.Article(content, request)
     view.commenting_allowed = False
