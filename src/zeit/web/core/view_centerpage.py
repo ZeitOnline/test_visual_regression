@@ -1,10 +1,12 @@
 import pyramid.view
 import lxml.etree
+import zope.component
 
 import zeit.cms.interfaces
 import zeit.cms.workflow
 import zeit.content.cp.interfaces
 
+import zeit.web.core.interfaces
 import zeit.web.core.view
 
 
@@ -69,7 +71,9 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
     def comment_counts(self):
-        return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self])
+        community = zope.component.getUtility(
+            zeit.web.core.interfaces.ICommunity)
+        return community.get_comment_counts(*[t.uniqueId for t in self])
 
 
 @pyramid.view.view_config(

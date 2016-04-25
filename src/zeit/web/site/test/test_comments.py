@@ -402,12 +402,11 @@ def test_comment_displays_total_reply_count(testbrowser):
 
 
 def test_comment_deeplink_should_have_page_number(application):
-    thread = zeit.web.core.comments.get_paginated_thread(
-        'http://xml.zeit.de/zeit-online/article/01',
-        cid=91)
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    thread = community.get_thread(
+        'http://xml.zeit.de/zeit-online/article/01', cid=91)
     assert int(thread['pages']['current']) == 2
 
-    thread = zeit.web.core.comments.get_paginated_thread(
-        'http://xml.zeit.de/zeit-online/article/01',
-        cid=92)
+    thread = community.get_thread(
+        'http://xml.zeit.de/zeit-online/article/01', cid=92)
     assert int(thread['pages']['current']) == 1

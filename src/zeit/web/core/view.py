@@ -601,8 +601,12 @@ class CommentMixin(object):
         return result
 
     @zeit.web.reify
+    def community(self):
+        return zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+
+    @zeit.web.reify
     def comments_loadable(self):
-        return zeit.web.core.comments.is_community_healthy()
+        return self.community.is_healthy()
 
     @zeit.web.reify
     def community_maintenance(self):
@@ -639,16 +643,13 @@ class CommentMixin(object):
             return
         cid = self.request.params.get('cid', None)
         try:
-            return zeit.web.core.comments.get_paginated_thread(
-                self.context.uniqueId,
-                sort=sort,
-                page=page,
-                cid=cid)
+            return self.community.get_thread(
+                self.context.uniqueId, sort=sort, page=page, cid=cid)
         except zeit.web.core.comments.ThreadNotLoadable:
             return
 
     def get_comment(self, cid):
-        return zeit.web.core.comments.get_comment(self.context.uniqueId, cid)
+        return self.community.get_comment(self.context.uniqueId, cid)
 
     @zeit.web.reify
     def commenting_allowed(self):
@@ -712,7 +713,7 @@ class CommentMixin(object):
 
     @zeit.web.reify
     def comment_count(self):
-        return zeit.web.core.comments.comment_count(self.context.uniqueId)
+        return self.community.get_comment_count(self.context.uniqueId)
 
     @zeit.web.reify
     def comment_area(self):
@@ -930,8 +931,8 @@ class Content(CeleraOneMixin, CommentMixin, Base):
     # XXX Does this really belong on this class?
     @zeit.web.reify('default_term')
     def comment_counts(self):
-        return zeit.web.core.comments.get_counts(
-            [t.uniqueId for t in self.nextread])
+        return self.community.get_comment_counts(
+            *[t.uniqueId for t in self.nextread])
 
 
 @pyramid.view.view_config(route_name='health_check')
@@ -1101,7 +1102,8 @@ def json_comment_count(request):
         article = zeit.content.article.interfaces.IArticle(context, None)
         articles = [article] if article is not None else []
 
-    counts = zeit.web.core.comments.get_counts(*[a.uniqueId for a in articles])
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    counts = community.get_comment_counts(*[a.uniqueId for a in articles])
     comment_count = {}
 
     for article in articles:

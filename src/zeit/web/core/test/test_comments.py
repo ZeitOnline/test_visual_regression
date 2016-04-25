@@ -35,7 +35,7 @@ def test_comment_count_should_handle_invalid_uid_param(testbrowser):
 def test_comment_count_should_return_expected_json_structure_for_cp_id(
         testbrowser, monkeypatch):
     monkeypatch.setattr(
-        zeit.web.core.comments, 'request_counts', lambda *_: """
+        zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
         <node comment_count="125" url="/centerpage/article_image_asset"/>
@@ -56,7 +56,7 @@ def test_comment_count_should_return_expected_json_structure_for_cp_id(
 def test_comment_count_should_return_expected_json_structure_for_article_id(
         testbrowser, monkeypatch):
     monkeypatch.setattr(
-        zeit.web.core.comments, 'request_counts', lambda *_: """
+        zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
         <node comment_count="129" url="/artikel/01"/>
@@ -72,7 +72,7 @@ def test_comment_count_should_return_expected_json_structure_for_article_id(
 def test_comment_count_should_fallback_to_zero_if_count_unavailable(
         testbrowser, monkeypatch):
     monkeypatch.setattr(
-        zeit.web.core.comments, 'request_counts', lambda *_: """
+        zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
         <node comment_count="129" url="/artikel/01"/>
@@ -90,7 +90,7 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
 def test_comment_count_should_be_empty_for_link_object(
         testbrowser, monkeypatch):
     monkeypatch.setattr(
-        zeit.web.core.comments, 'request_counts', lambda *_: """
+        zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
         <node comment_count="129" url="/artikel/01"/>
@@ -106,17 +106,20 @@ def test_comment_count_should_be_empty_for_link_object(
 def test_request_thread_should_respond(application, mockserver):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
-    thread = zeit.web.core.comments.request_thread(unique_id)
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    thread = community._request_thread(unique_id)
     assert lxml.etree.fromstring(thread).xpath('comment_count')[0].text == '41'
 
 
 def test_request_thread_should_respond_for_nonexistent(
         application, mockserver):
-    assert zeit.web.core.comments.request_thread('nosuchthread') is None
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    assert community._request_thread('nosuchthread') is None
 
 
 def test_request_thread_should_handle_non_ascii_urls(application, mockserver):
-    assert zeit.web.core.comments.request_thread(u'ümläut') is None
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    assert community._request_thread(u'ümläut') is None
 
 
 def test_request_thread_should_fail_on_certain_status_codes(
@@ -127,7 +130,8 @@ def test_request_thread_should_fail_on_certain_status_codes(
         return response
     monkeypatch.setattr(requests, 'get', get)
 
-    assert 'request_failed' in zeit.web.core.comments.request_thread(
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    assert 'request_failed' in community._request_thread(
         'http://community/foo')
 
 
@@ -137,8 +141,8 @@ def test_request_thread_should_fail_on_timeouts(application, monkeypatch):
         raise requests.exceptions.Timeout()
     monkeypatch.setattr(requests, 'get', get)
 
-    assert 'request_failed' in zeit.web.core.comments.request_thread(
-        'http://community/foo')
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    assert 'request_failed' in community._request_thread('some_unique_id')
 
 
 def test_request_thread_mode_should_produce_expected_uris(
@@ -149,21 +153,22 @@ def test_request_thread_mode_should_produce_expected_uris(
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     full_thread = '{}/agatho/thread/foo'.format(conf.get('agatho_host', ''))
-    zeit.web.core.comments.request_thread('/foo')
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    community._request_thread('/foo')
 
     request_get.assert_called_with(full_thread, timeout=10.0)
 
     paginated_thread = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''), '?mode=top&page=0&rows=4&order=asc')
 
-    zeit.web.core.comments.request_thread('/foo', thread_type='paginated')
+    community._request_thread('/foo', thread_type='paginated')
 
     request_get.assert_called_with(paginated_thread, timeout=10.0)
 
     paginated_thread = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''), '?mode=top&page=1&rows=10&order=asc')
 
-    zeit.web.core.comments.request_thread(
+    community._request_thread(
         '/foo', thread_type='paginated', page=1, page_size=10)
 
     request_get.assert_called_with(paginated_thread, timeout=10.0)
@@ -171,7 +176,7 @@ def test_request_thread_mode_should_produce_expected_uris(
     deeplink_thread = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''), '?mode=deeplink&cid=1&rows=10&order=asc')
 
-    zeit.web.core.comments.request_thread(
+    community._request_thread(
         '/foo', thread_type='deeplink', cid=1, page_size=10)
 
     request_get.assert_called_with(deeplink_thread, timeout=10.0)
@@ -179,7 +184,7 @@ def test_request_thread_mode_should_produce_expected_uris(
     sub_thread = '{}/agatho/thread/foo{}'.format(
         conf.get('agatho_host', ''), '?mode=sub&cid=10')
 
-    zeit.web.core.comments.request_thread(
+    community._request_thread(
         '/foo', thread_type='sub_thread', cid=10)
 
     request_get.assert_called_with(sub_thread, timeout=10.0)
@@ -189,7 +194,7 @@ def test_request_thread_mode_should_produce_expected_uris(
         '?mode=recommendations&recommendationtype=leser_empfehlung'
         '&page=1&rows=4&order=asc')
 
-    zeit.web.core.comments.request_thread(
+    community._request_thread(
         '/foo', thread_type='recommendation', page=1, page_size=4)
 
     request_get.assert_called_with(recommendation, timeout=10.0)
@@ -199,7 +204,7 @@ def test_request_thread_mode_should_produce_expected_uris(
         '?mode=recommendations&recommendationtype=kommentar_empfohlen'
         '&page=1&rows=4&order=asc')
 
-    zeit.web.core.comments.request_thread(
+    community._request_thread(
         '/foo', thread_type='promotion', page=1, page_size=4)
 
     request_get.assert_called_with(promotion, timeout=10.0)
@@ -209,7 +214,8 @@ def test_comment_to_dict_should_parse_correctly(application):
     unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
                  'wahlbeobachter-portraets')
 
-    thread = zeit.web.core.comments.request_thread(unique_id)
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    thread = community._request_thread(unique_id)
     comment_xml = lxml.etree.fromstring(thread).xpath('//comment')[0]
     comment = zeit.web.core.comments.comment_to_dict(comment_xml)
     assert comment['name'] == 'Skarsgard'
@@ -282,7 +288,7 @@ def test_thread_should_have_valid_page_information(application):
 def test_dict_with_article_paths_and_comment_counts_should_be_created(
         monkeypatch, testbrowser):
     monkeypatch.setattr(
-        zeit.web.core.comments, 'request_counts', lambda *_: """
+        zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
         <node comment_count="125" url="/centerpage/article_image_asset"/>
@@ -657,7 +663,7 @@ def test_get_thread_should_raise_exception_on_unloaded_threads(application,
     def request_thread(unique_id, sort="asc", page=None, cid=None):
         return {'request_failed': datetime.datetime.utcnow()}
     monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+        zeit.web.core.comments.Community, '_request_thread', request_thread)
 
     with pytest.raises(zeit.web.core.comments.ThreadNotLoadable):
         zeit.web.core.comments.get_thread('http://unique_id')
@@ -669,7 +675,7 @@ def test_get_thread_should_invalidate_on_unloaded_threads(application,
     def request_thread(unique_id, sort="asc", page=None, cid=None):
         return {'request_failed': datetime.datetime.utcnow()}
     monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+        zeit.web.core.comments.Community, '_request_thread', request_thread)
 
     try:
         with patch.object(
@@ -688,7 +694,7 @@ def test_get_thread_should_not_invalidate_on_unloaded_threads(application,
     def request_thread(unique_id, sort="asc", page=None, cid=None):
         return {'request_failed': datetime.datetime.utcnow()}
     monkeypatch.setattr(
-        zeit.web.core.comments, 'request_thread', request_thread)
+        zeit.web.core.comments.Community, '_request_thread', request_thread)
 
     try:
         with patch.object(
@@ -710,7 +716,7 @@ def test_article_view_should_have_short_caching_time_on_unloadable_thread(
     assert browser.headers.get('cache-control') == 'max-age=10'
 
     monkeypatch.setattr(
-        zeit.web.core.comments, 'is_community_healthy', lambda: False)
+        zeit.web.core.comments.Community, 'is_healthy', lambda self: False)
     browser = testbrowser('/zeit-online/article/01/comment-thread')
     assert browser.headers.get('cache-control') == 'max-age=1'
     assert browser.cssselect('.comment-section__message')[0].text.strip() == (
@@ -913,7 +919,8 @@ def test_user_comments_should_raise_exception_if_no_cid_given(application):
 def test_user_comment_thread_should_have_expected_structure(application):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
-    thread = zeit.web.core.comments.get_user_comments(author)
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    thread = community.get_user_comments(author)
     assert thread['uid'] == 172432
     assert thread['published_total'] == 570
     assert thread['page'] == 1
@@ -929,8 +936,9 @@ def test_request_thread_should_be_called_only_once_by_article_and_comment_esi(
     # (but not more!!) request to the community (the health check comes on top
     # of that, but it doesn't count since it is memcached).
     # XXX The test should be more precise and catch all community requests.
-    with mock.patch('zeit.web.core.comments.request_thread') as request_thread:
-        request_thread.return_value = None
+    with mock.patch(
+            'zeit.web.core.comments.Community._request_thread') as req_thread:
+        req_thread.return_value = None
         r = requests.get('{}/zeit-online/article/01'.format(testserver.url))
         r.raise_for_status()
-        assert request_thread.call_count == 2
+        assert req_thread.call_count == 2

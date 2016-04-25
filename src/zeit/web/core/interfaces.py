@@ -234,3 +234,26 @@ class IDetailedContentType(zope.interface.Interface):
 
     The format is a dotted string, e.g. 'centerpage.topicpage.person'.
     """
+
+
+class ICommunity(zope.interface.Interface):
+    """Represents the comment system."""
+
+    def get_thread(unique_id, sort='asc', page=0,
+                   cid=None, parent_cid=None, local_offset=0):
+        pass
+
+    def get_comment(unique_id, cid):
+        pass
+
+    def get_comment_count(unique_id):
+        pass
+
+    def get_comment_counts(*unique_ids):
+        pass
+
+    def get_user_comments(author, page=1, rows=6, sort='DESC'):
+        pass
+
+    def is_healthy():
+        pass

@@ -109,7 +109,9 @@ class Author(zeit.web.site.view.Base):
             'author_comment_page_size', '10'))
 
         try:
-            comments = zeit.web.core.comments.get_user_comments(
+            community = zope.component.getUtility(
+                zeit.web.core.interfaces.ICommunity)
+            comments = community.get_user_comments(
                 self.context, page=1, rows=page_size)
             return comments and comments.get('page_total', 0) > 0
         except zeit.web.core.comments.UserCommentsException:
@@ -130,7 +132,9 @@ class Comments(Author):
             'author_comment_page_size', '10'))
 
         try:
-            comments_meta = zeit.web.core.comments.get_user_comments(
+            community = zope.component.getUtility(
+                zeit.web.core.interfaces.ICommunity)
+            comments_meta = community.get_user_comments(
                 self.context, page=page, rows=page_size)
             comments = comments_meta['comments']
             return [UserCommentsArea(
