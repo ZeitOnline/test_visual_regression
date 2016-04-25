@@ -1,10 +1,6 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 {% extends "zeit.web.core:templates/inc/article/sharing-menu-items.tpl" %}
 
-{% block product %}
-    ZEIT Campus
-{% endblock %}
-
 {% block fb_icon %}
     {{ lama.use_svg_icon('fb-40x40', 'sharing-menu__icon', view.package) }}
 {% endblock %}
