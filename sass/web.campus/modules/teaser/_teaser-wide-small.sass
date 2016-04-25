@@ -1,21 +1,18 @@
 .teaser-wide-small
 	@extend %teaser
-	padding: remify(26px) $page-padding--small $page-padding--small
+	padding: $page-padding--small
 
 	&__media
 		@extend %teaser-media
-		display: none
 		padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
-		&--force-mobile
-			display: block
-			margin-top: remify(-12px)
 
 	&__heading
 		+scaled-font(28px, $title-factor)
 		line-height: 0
-		margin: remify(12px 0 10px)
+		margin: remify(0 0 10px)
 
 	&__combined-link
+		display: block
 		position: relative
 
 	&__kicker
@@ -25,6 +22,9 @@
 
 	&__title
 		@extend %teaser-title
+		background-color: $color-page-bg
+		display: block
+		padding-top: remify(12px)
 
 	&__text
 		@extend %teaser-text
@@ -36,9 +36,12 @@
 		@extend %teaser-commentcount
 
 
-+respond-min($break-tablet-min)
-	.teaser-wide-small
+	+respond-max($break-tablet-min)
+		&__media:not(&__media--force-mobile)
+			display: none
+		&__media:not(&__media--force-mobile) + &__heading &__kicker
+			padding: 0
+			position: static
+
+	+respond-min($break-tablet-min)
 		padding: $vertical-space $cp-padding
-		&__media
-			display: block
-			margin-top: 0
