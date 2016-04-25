@@ -1,0 +1,55 @@
+$interaction-color: $color-text--light
+$interaction-hover-color: $black
+
+@import "web.core/modules/article/article-interactions"
+
+.sharing-menu
+	vertical-align: middle
+	&__item
+		display: table-cell
+		vertical-align: top
+	&__link
+		min-width: remify(47px)
+		height: remify(40px)
+		margin-right: remify(1px)
+		text-align: center
+		display: block
+		&--facebook
+			background-color: $color-facebook
+		&--twitter
+			background-color: $color-twitter
+		&--whatsapp
+			background-color: $color-whatsapp
+		+on-interaction
+			opacity: 1
+	&__text
+		@extend %font-beckett
+		+font-smoothing
+		display: none
+	&__icon
+		color: $white
+		height: remify(40px)
+		width: remify(40px)
+
++respond-min($break-tablet-min)
+	.sharing-menu
+		&__text
+			color: $white
+			letter-spacing: em(1.5px)
+			display: inline-block
+			+scaled-font(22px, $title-factor)
+			vertical-align: top
+			margin-top: remify(15px)
+		&__link
+			padding: remify(0 15px 0 5px)
+			margin-right: remify(16px)
+			opacity: 0.8
+
++respond-min($break-desktop-min)
+	.print-menu
+		vertical-align: middle
+		&__print
+			&:before
+				content: ""
+
+
