@@ -71,7 +71,7 @@
 	<cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo">
 		<region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
 			<container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-fullwidth" visible="True">
-				<block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" />
+				<block href="http://xml.zeit.de/campus/article/paginated" />
 		</container>
 		</region>
 	</cluster>
