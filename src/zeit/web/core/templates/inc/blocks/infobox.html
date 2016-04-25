@@ -1,28 +1,29 @@
 {% if block.contents -%}
-{% set id = block.title | attr_safe %}
-<aside class="infobox js-infobox" id="{{ id }}">
+{% set base_id = block.identifier %}
+<aside class="infobox js-infobox" id="{{ base_id }}">
     <div class="infobox__container">
         <h2 class="infobox__title">{{ block.title | default('Information', True) }}</h2>
         <div class="infobox__navigation"></div>
         <div class="infobox__content">
         {% for title, text in block.contents %}
-            <section class="infobox-tab" id="{{ id }}-{{ loop.index }}">
+            {% set tab_id = '%s-%s' | format(base_id, loop.index) %}
+            <section class="infobox-tab">
                 <h3 class="infobox-tab__title" role="presentation">
                     <a
                         class="infobox-tab__link"
-                        id="{{ id }}-{{ loop.index }}-tab"
+                        id="{{ tab_id }}-tab"
                         role="tab"
-                        href="#{{ id }}-{{ loop.index }}"
-                        data-id="{{ id }}-{{ loop.index }}-tab"
-                        aria-controls="{{ id }}-{{ loop.index }}-article">
+                        href="#{{ tab_id }}-tab"
+                        data-id="{{ tab_id }}-tab"
+                        aria-controls="{{ tab_id }}-article">
                         {{- title -}}
                     </a>
                 </h3>
                 <div
                     class="infobox-tab__panel"
-                    id="{{ id }}-{{ loop.index }}-article"
+                    id="{{ tab_id }}-article"
                     role="tabpanel"
-                    aria-labelledby="{{ id }}-{{ loop.index }}-tab">
+                    aria-labelledby="{{ tab_id }}-tab">
                     {% for block in text %}
                         {% set type = block | block_type %}
                         {% include [
