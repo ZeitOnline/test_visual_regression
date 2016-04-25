@@ -52,9 +52,12 @@ $teaser-heading-box-shadow: 0.4em
 		+scaled-font(15px)
 
 %teaser-metadata
-	color: $color-teaser-meta
+	color: $color-text--light
 	+scaled-font(15px)
+	letter-spacing: $letter-spacing-s
 	line-height: 1.4
+	+respond-min($break-tablet-min)
+		+scaled-font(14px)
 	> *:not(:last-child):not(:empty):after
 		content: " \2014 " // — = em dash
 		margin: 0 .2em
