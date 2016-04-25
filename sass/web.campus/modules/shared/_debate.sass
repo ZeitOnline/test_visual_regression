@@ -1,40 +1,45 @@
-
 .debate
-    @extend %border-box
-    margin-top: 2.2em
+	@extend %border-box
+	margin: remify(40px 0)
 
-    &__heading
-        margin: 0
+	&__heading,
+	&__text
+		margin: 0 auto
+		max-width: remify(620px)
 
-    &__kicker
-        display: block
-        font-weight: bold
-        +scaled-font(12px)
-        letter-spacing: $letter-spacing-l
-        color: $color-community-primary
-        text-transform: uppercase
+	&__kicker
+		display: block
+		font-weight: bold
+		+scaled-font(12px)
+		letter-spacing: $letter-spacing-l
+		color: $color-community-primary
+		text-transform: uppercase
 
-    &__title
-        @extend %font-beckett
-        display: block
-        color: $color-text
-        letter-spacing: 1.5px
-        +scaled-font(28px, $title-factor)
-        line-height: 0.95
-        padding: remify(10px)
+	&__title
+		@extend %font-beckett
+		display: block
+		+scaled-font(28px, $title-factor)
+		margin: .6em 0 .3em // em intended
 
-    &__text
-        color: $grey--mid
-        +scaled-font(16px)
-        line-height: round-to-precision(24/16, $precision: 1)
-        a
-            color: $color-community-primary
+	&__text
+		color: $grey--mid
+		+scaled-font(16px)
+		p, ul, ol
+			font-size: inherit
+			line-height: inherit
+		a
+			color: $color-community-primary
 
-    &__label
-        @extend %border-box--cta
+	&__label
+		@extend %border-box--cta
+		+on-interaction
+			color: $color-community-primary
+			text-decoration: underline
 
-    +respond-min($break-tablet-min)
-        &__kicker
-            +scaled-font(14px)
-        &__title
-            +scaled-font(42px, $title-factor)
+	+respond-min($break-tablet-min)
+		padding: remify(32px 16px)
+
+		&__kicker
+			+scaled-font(14px)
+		&__title
+			+scaled-font(42px, $title-factor)
