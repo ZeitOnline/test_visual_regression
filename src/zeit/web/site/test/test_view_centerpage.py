@@ -2149,3 +2149,16 @@ def test_headerimage_has_appropriate_html_structure(testbrowser):
     image = browser.cssselect('.header-image__media-item')[0]
     assert image.get('data-variant') == 'panorama'
     assert image.get('data-mobile-variant') == 'cinema'
+
+
+def test_zco_parquet_has_zco_styles(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/teasers-to-campus')
+    select = browser.cssselect
+
+    assert len(select('.cp-area--zco-parquet')) == 1
+    assert len(select('.parquet-meta__more-link--zco')) == 1
+    assert len(select('.parquet-meta__title--zco')) == 1
+    assert len(select('.parquet-meta__logo--zco')) == 1
+
+    assert len(select(
+        '[class^="teaser"][class*="__kicker--zco-parquet"]')) == 4
