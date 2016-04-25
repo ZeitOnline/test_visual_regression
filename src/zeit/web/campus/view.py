@@ -75,7 +75,7 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
                 ('level3', adc_levels[1] if len(adc_levels) > 1 else ''),
                 ('level4', adc_levels[2] if len(adc_levels) > 2 else ''),
                 ('$autoSizeFrames', True),
-                ('keywords', ''),
+                ('keywords', adc_levels[4] if len(adc_levels) > 4 else ''),
                 ('tma', '')]
 
 
