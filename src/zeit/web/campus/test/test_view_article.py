@@ -196,6 +196,14 @@ def test_campus_article_does_not_have_contentad(testbrowser):
     assert not select('#iq-artikelanker')
 
 
+def test_article_has_sharing_bar(testbrowser):
+    browser = testbrowser('campus/article/paginated')
+    assert len(browser.cssselect('.article-interactions')) == 1
+    assert len(browser.cssselect('.sharing-menu')) == 1
+    assert len(browser.cssselect('.sharing-menu__item')) == 3
+    assert len(browser.cssselect('.print-menu')) == 1
+
+
 def test_article_header_default_considers_image_layout(testbrowser):
     browser = testbrowser('/campus/article/simple')
     header = browser.cssselect('.article-header--default-no-image')
