@@ -29,7 +29,7 @@
                 </ul>
             {% endrequire %}
             {% if area.read_more and area.read_more_url %}
-                <a href="{{ area.read_more_url }}" class="parquet-meta__more-link">
+                <a href="{{ area.read_more_url }}" class="parquet-meta__more-link {% block parquet_meta_more_link_additional_class %}{% endblock %}">
                     {{ area.read_more }}
                 </a>
             {% endif %}
