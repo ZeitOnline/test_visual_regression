@@ -266,7 +266,7 @@ def get_paginated_thread(
             thread_position = int(thread_position[0])
             page = thread_position / page_size
             if thread_position % page_size > 0:
-                page = page+1
+                page = page + 1
 
     except (IndexError, lxml.etree.XMLSyntaxError):
         raise ThreadNotLoadable()
