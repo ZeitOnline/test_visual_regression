@@ -10,7 +10,7 @@
         </a>
     </li>
     <li class="sharing-menu__item sharing-menu__item--whatsapp">
-        <a class="sharing-menu__link sharing-menu__link--whatsapp" href="whatsapp://send?text={{ (view.title + ' - Artikel auf ' + self.product() + ': ' + view.content_url) | urlencode }}" data-id="articlebottom.1.4.social.whatsapp">
+        <a class="sharing-menu__link sharing-menu__link--whatsapp" href="whatsapp://send?text={{ (view.title + ' - Artikel auf ' + self.product() + ': ' + view.content_url) | urlencode }}" data-id="articlebottom.1.3.social.whatsapp">
             {% block wa_icon %}{% endblock %}<span class="sharing-menu__text">WhatsApp</span>
         </a>
     </li>
