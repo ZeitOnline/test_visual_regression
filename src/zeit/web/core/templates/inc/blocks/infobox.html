@@ -2,6 +2,7 @@
 {% set id = block.title | attr_safe %}
 <aside class="infobox js-infobox" id="{{ id }}">
     <div class="infobox__container">
+        <h2 class="infobox__title">{{ block.title | default('Information', True) }}</h2>
         <div class="infobox__navigation"></div>
         <div class="infobox__content">
         {% for title, text in block.contents %}
