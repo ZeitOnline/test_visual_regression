@@ -81,9 +81,9 @@
                         <div class="main-nav__section main-nav__service">
                             <span class="main-nav__section__trigger js-main-nav-section-trigger"><a class="main-nav__section__text" data-id="zmo-topnav.1.3..service">Service</a>{{ use_svg_icon('arrow-down', 'main-nav__icon-arrow-down', view.package) }}</span>
                             <div class="main-nav__section__content js-main-nav-section-content">
-                                <a href="{{ request.route_url('home') }}campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index" data-id="zmo-topnav.1.3.1.zeit campus">ZEITCampus</a>
-                                <a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index" data-id="zmo-topnav.1.3.2.zeit geschichte">ZEITGeschichte</a>
-                                <a href="{{ request.route_url('home') }}wissen/zeit-wissen/index" id="hp.zm.topnav.links.zeitwissen./wissen/zeit-wissen/index" data-id="zmo-topnav.1.3.3.zeit wissen">ZEITWissen</a>
+                                <a href="{{ request.route_url('home') }}campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index" data-id="zmo-topnav.1.3.1.zeitcampus">ZEITCampus</a>
+                                <a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index" data-id="zmo-topnav.1.3.2.zeitgeschichte">ZEITGeschichte</a>
+                                <a href="{{ request.route_url('home') }}wissen/zeit-wissen/index" id="hp.zm.topnav.links.zeitwissen./wissen/zeit-wissen/index" data-id="zmo-topnav.1.3.3.zeitwissen">ZEITWissen</a>
                                 <a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.links.partnersuche./angebote/partnersuche/index" data-id="zmo-topnav.1.3.4.partnersuche">Partnersuche</a>
                                 <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.links.immobilien.//zeit.immowelt.de" data-id="zmo-topnav.1.3.5.immobilien">Immobilien</a>
                                 <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.links.automarkt.//automarkt.zeit.de" data-id="zmo-topnav.1.3.6.automarkt">Automarkt</a>
