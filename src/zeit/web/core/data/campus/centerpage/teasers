@@ -87,7 +87,7 @@
         </container>
       </region>
       <region area="id-41a2899d-b469-4c42-b713-bd5dbd68a64f" kind="trio">
-        <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
+        <container cp:type="teaser" module="zco-wide-small" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b" force_mobile_image="True">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
       </region>
