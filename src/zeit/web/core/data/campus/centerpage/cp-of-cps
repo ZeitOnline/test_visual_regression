@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage type="centerpage" xmlns:esi="http://www.edge-delivery.org/esi/1.0" xmlns:xt="http://namespaces.zeit.de/xtransform/">
+  <head>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Paul Auster</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/dynamic/paul-auster</topiclink_url_1>
+        <topiclink_label_2>Ausdauersport</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/dynamic/ausdauersport</topiclink_url_2>
+        <topiclink_label_3>Bayerische Landesbank</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/dynamic/bayerische-landesbank</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
+    <header_image/>
+    <snapshot/>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2016-01-28T11:13:33.527160+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-10-01T13:15:47.856119+00:00</attribute>
+    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2016-01-28T11:13:44.482757+00:00</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2016-01-28T11:13:44.410000+00:00</attribute>
+    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2016-01-28T11:13:04.298419+00:00</attribute>
+    <attribute name="date_last_pushed" ns="http://namespaces.zeit.de/CMS/workflow">2016-01-28T11:13:41.580202+00:00</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="html-meta-description" ns="http://namespaces.zeit.de/CMS/document">Studieren, Arbeiten und Leben - Aktuelle Informationen und Hintergründe zum Thema Studium und das neue Hochschulranking.</attribute>
+    <attribute name="html-meta-hide-timestamp" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="html-meta-title" ns="http://namespaces.zeit.de/CMS/document">Studium – Hochschulen und Universitäten</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2016-01-28T11:12:36.762580+00:00</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">system.hp-assistent</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/centerpage/index</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Studium</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="tldr_milestone" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:92cd9648-a5f2-46b4-ae2d-0f037b24865e}</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">24</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;ICP2015&quot; module=&quot;zeit.content.cp.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZCOContent&quot; module=&quot;zeit.campus.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
+  </head>
+  <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <cluster visible="True" visible_mobile="True" area="id-a5ffaf22-0ddf-442b-97d5-f317ddc57af7" kind="solo" kind_title="Solo-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-a5f43cfa-8a38-4712-bca5-468f1ded1b55" kind="solo">
+        <container cp:type="cpextra" module="cp_header" visible="True" visible_mobile="True" cp:__name__="id-31b80ac7-ad6d-4d96-8600-edba9b61b411" title="Themen im Überblick">
+          <cp_extra id="cp_header"/>
+        </container>
+      </region>
+    </cluster>
+
+    <cluster area="id-42a8299d-b569-4c42-b713-db5dbd86a64a" kind="duo">
+      <region area="id-42a2899d-b569-4c42-b713-db5dbd86a64b" kind="duo">
+        <container cp:type="teaser" module="zco-graphical" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
+          <block href="http://xml.zeit.de/thema/jurastudium"></block>
+        </container>
+      </region>
+      <region area="id-42a2899d-b569-4c42-b713-db5dbd86a01c" kind="duo">
+        <container cp:type="teaser" module="zco-graphical" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
+          <block href="http://xml.zeit.de/campus/article/leserartikel"></block>
+        </container>
+      </region>
+    </cluster>
+
+    <cluster area="id-43a8299d-b569-4c42-b713-db5dbd86a64a" kind="duo">
+      <region area="id-43a2899d-b569-4c42-b713-db5dbd86a01c" kind="minor">
+        <container cp:type="teaser" module="zco-graphical" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
+          <block href="http://xml.zeit.de/campus/article/paginated"></block>
+        </container>
+      </region>
+      <region area="id-43a2899d-b569-4c42-b713-db5dbd86a64b" kind="major">
+        <container cp:type="teaser" module="zco-graphical" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
+          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+        </container>
+      </region>
+    </cluster>
+
+    <!-- topic graphical -->
+    <cluster area="id-7910e12f-0ac9-40fd-9032-e47c7f8b6893" kind="topic">
+      <region hide-dupes="True" area="id-d2b7846d-31c8-45b4-b2fc-ffdd88723a07" kind="topic-graphical" count="4" automatic="True" automatic_type="centerpage" read_more_url="http://xml.zeit.de/thema/index" read_more="Alle Themen">
+        <referenced_cp>http://xml.zeit.de/campus/centerpage/teaser-graphical</referenced_cp>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-688cf852-e709-432e-a756-edef34a62072" visible_mobile="False"/>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-56eec4bf-a0ce-4831-b349-866b8aa02b3a"/>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-4da54148-b028-40c7-b416-30e9e1e6b710"/>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-a1145c07-85c0-4c92-aced-f63235d0abe8"/>
+      </region>
+    </cluster>
+
+    <cluster visible="True" visible_mobile="True" area="id-a5ffaf22-0ddf-442b-97d5-f317ddc57af8" kind="solo" kind_title="Solo-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-a5f43cfa-8a38-4712-bca5-468f1ded1b54" kind="solo">
+        <container cp:type="cpextra" module="zco_link_button" visible="True" visible_mobile="True" cp:__name__="id-31b80ac7-ad6d-4d96-8600-edba9b61b412">
+          <cp_extra id="zco_link_button"/>
+        </container>
+      </region>
+    </cluster>
+
+  </body>
+</centerpage>
