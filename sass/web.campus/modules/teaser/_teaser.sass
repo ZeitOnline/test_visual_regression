@@ -34,6 +34,11 @@ $teaser-heading-box-shadow: 0.4em
 	padding: remify(8px 12px 0 0)
 	position: absolute
 	text-transform: uppercase
+	// this is a cheap fix for our positioning vs. box-width problem
+	// @see https://www.w3.org/TR/css3-positioning/#containing-block
+	// @read https://zon.slack.com/archives/frontend/p1460390094000013
+	span
+		white-space: nowrap
 
 %teaser-kicker--leserartikel
 	color: $color-community-primary
@@ -67,3 +72,10 @@ $teaser-heading-box-shadow: 0.4em
 
 %teaser-commentcount
 	@extend %commentcount
+
+.series-label,
+.blog-label
+	font-weight: normal
+	&:after
+		content: " \2014 " // — = em dash
+		margin: 0 .25em
