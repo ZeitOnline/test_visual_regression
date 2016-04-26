@@ -14,8 +14,15 @@
    <div class="{{ self.layout() }}__series-label">{{ teaser.serie.serienname }}</div>
 {% endblock %}
 {% block teaser_kicker %}
-    <span class="{{ self.layout() }}__kicker">{{ teaser.teaserSupertitle }}</span>
+    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('zco' if teaser is zco_content) }}">
+        {% block kicker_logo scoped %}
+            {% if teaser is zco_content and area.kind != 'zmo-parquet' %}
+                <span class="{{ self.layout() }}__kicker-logo-divider">{{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', view.package, a11y=False) }}</span>
+            {% endif %}
+        {% endblock %}
+        {{ teaser.teaserSupertitle or teaser.supertitle -}}
+    </span>
 {% endblock %}
 {% block teaser_title %}
-    <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle }}</span>
+    <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
 {% endblock %}
