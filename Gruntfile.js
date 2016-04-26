@@ -433,22 +433,15 @@ module.exports = function(grunt) {
     // Since the watch task doesn't ever finish by design, any task after the watch task won't be ran,
     // which is why the watch task isn't a multitask.
     grunt.registerTask('monitor', function(target) {
-        var config = grunt.config('watch');
+        var config = grunt.config();
 
-        switch (target) {
-            case 'basic':
-                config.compass.tasks = [ 'compass:dev-basic' ];
-                break;
-            case 'all':
-                config.compass.tasks = [ 'compass:dev-all' ];
-                break;
-            case 'amp':
-                config.compass.tasks = [ 'compass:amp' ];
-                break;
+        if ( target in config.compass ) {
+            grunt.log.writeln('Using task compass:' + target);
+            config.watch.compass.tasks = [ 'compass:dev-basic' ];
         }
 
         // grunt.log.writeflags(config);
-        grunt.config('watch', config);
+        grunt.config('watch', config.watch);
         grunt.task.run('watch');
     });
 
