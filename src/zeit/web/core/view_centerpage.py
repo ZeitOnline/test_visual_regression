@@ -103,6 +103,21 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
     def comment_counts(self):
         return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self])
 
+    @zeit.web.reify
+    def has_cardstack(self):
+        kwargs = {'cp:type': 'cardstack'}
+        return bool(zeit.web.core.utils.find_block(self.context, **kwargs))
+
+    @zeit.web.reify
+    def cardstack_head(self):
+        url = super(Centerpage, self).cardstack_head
+        return zeit.web.core.utils.update_query(url, static='true')
+
+    @zeit.web.reify
+    def cardstack_body(self):
+        url = super(Centerpage, self).cardstack_body
+        return zeit.web.core.utils.update_query(url, static='true')
+
 
 class CenterpagePage(object):
 
