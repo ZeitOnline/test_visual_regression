@@ -11,14 +11,14 @@
 	&__container
 		position: relative
 		padding-top: remify(34px)
-		&:before
-			@extend %font-beckett
-			border-bottom: 3px solid currentColor
-			color: $color-article-primary
-			content: "Information"
-			+scaled-font(32px, $title-factor)
-			position: absolute
-			top: -0.46em
+	&__title
+		@extend %font-beckett
+		border-bottom: 3px solid currentColor
+		color: $color-article-primary
+		+scaled-font(32px, $title-factor)
+		margin: 0
+		position: absolute
+		top: -0.46em
 
 	.no-js &__container
 		@extend .article__item
@@ -95,9 +95,8 @@
 
 .article--leserartikel
 	.infobox
-		&__container
-			&:before
-				color: $color-community-primary
+		&__title
+			color: $color-community-primary
 	.infobox-tab
 		&__title
 			color: $color-community-primary
@@ -112,9 +111,9 @@
 
 		&__container
 			padding-top: remify(50px)
-			&:before
-				border-bottom-width: 4px
-				+scaled-font(44px, $title-factor)
+		&__title
+			border-bottom-width: 4px
+			+scaled-font(44px, $title-factor)
 		.js &__container
 			+display-flex()
 			+flex-flow(row wrap)

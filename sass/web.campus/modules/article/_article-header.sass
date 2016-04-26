@@ -10,8 +10,8 @@
 		+padded
 		background-color: $color-background
 		&--portrait
-			background-color: transparent
 			+article-header-banderole(254px)
+			background-color: transparent
 
 	&__default-image
 		margin-bottom: remify(-66px)
@@ -53,7 +53,7 @@
 			opacity: .58
 			margin-right: .5em
 		&--default
-			margin-bottom: remify(10px)
+			margin-bottom: remify(14px)
 		&--column
 			margin: 0
 		&--leserartikel
@@ -89,11 +89,11 @@
 
 	&__byline,
 	&__metadata
-		+scaled-font(15px)
-		line-height: 20px / 15px
+		line-height: 1.4
 		margin-bottom: remify(8px)
 
 	&__byline
+		+scaled-font(15px)
 		span[itemprop="name"]
 			color: $color-text
 			font-weight: bold
@@ -103,16 +103,16 @@
 					color: $color-article-primary
 
 	&__metadata
+		+scaled-font(14px)
+		color: $color-text--light
+		letter-spacing: $letter-spacing-s
 		> time,
 		> span
 			white-space: nowrap
-		> time:after,
-		> span:after
-			content: " / "
-			margin: 0 0.25em
-		> time:last-child:after,
-		> span:last-child:after
-			content: none
+		> time:not(:last-child):not(:empty):after,
+		> span:not(:last-child):not(:empty):after
+			content: " \2014 " // — = em dash
+			margin: 0 .25em
 
 
 	// Kolumne
@@ -122,11 +122,12 @@
 
 		.article-header__byline,
 		.article-header__metadata
+			color: inherit
 			display: inline
 			margin: 0
-		.article-header__byline + .article-header__metadata
-			&:before
-				content: " / "
+		.article-header__byline
+			&:not(:last-child):after
+				content: " \2014 " // — = em dash
 				margin: 0 .25em
 
 	&__column-image
@@ -170,12 +171,16 @@
 	&__leserartikel-image
 		margin-top: remify(32px)
 
-.metadata__seperator
-	margin: 0 .25em
-	white-space: normal
+	+respond-max($break-tablet-min)
+		&__default-info &__byline:first-child
+			margin-top: remify(30px)
 
-.metadata__commentcount
-	@extend %teaser-commentcountlink
+.metadata
+	&__commentcount
+		@extend %commentcount
+
+	&__source a
+		@extend %commentcount
 
 ////////////
 // TABLET //
@@ -351,6 +356,8 @@
 			&--portrait
 				+article-header-banderole(423px)
 				margin: 0
+			&--wide
+				+article-header-banderole(259px)
 
 		&__default-image-box
 			&--portrait

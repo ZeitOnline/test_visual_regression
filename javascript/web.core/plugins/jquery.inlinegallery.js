@@ -111,7 +111,7 @@
                 },
                 setFigCaptionWidth = function( slide ) {
                     var caption = slide.find( '.figure__caption' ),
-                    imageWidth = slide.find( '.figure__media' ).width();
+                    imageWidth = slide.find( 'img' ).width();
 
                     if ( caption.length && imageWidth > 300 && imageWidth < galleryWidth ) {
                         caption.css( 'max-width', imageWidth + 'px' );

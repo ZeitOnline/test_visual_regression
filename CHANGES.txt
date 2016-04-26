@@ -12,6 +12,16 @@ Change log for zeit.web
 
 - ZON-2497: Add missing elements to centerpage of centerpages
 
+- ZON-2943: Move sharing tools to core and include them in Campus articles
+
+- ZON-2896: Add tracking ids to ZMO and ZCO navigation
+
+- ZON-2991: Fix links in ZCO navigation
+
+- MAINT: Adjust tracking IDs in article footer
+
+- BUG-405: Do not use duplicate IDs for infoboxes
+
 
 2.73 (2016-04-21)
 -----------------

@@ -1,7 +1,13 @@
 <time itemprop="datePublished" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="metadata__date
     {%- if view.obfuscated_date %} encoded-date" data-obfuscated="{{ view.obfuscated_date }}{% endif %}">
-    {{ view.date_last_modified | format_date(view.show_date_format) }}
+    {{- view.date_last_modified | format_date(view.show_date_format) -}}
 </time>
+
+{% if view.last_modified_label -%}
+    <time itemprop="dateModified" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="metadata__date">
+        {{- view.last_modified_label -}}
+    </time>
+{% endif -%}
 
 {% if view.source_label -%}
 	<span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">

@@ -253,23 +253,22 @@ def test_campus_print_changed_article_has_correct_meta_line(
         testserver, selenium_driver):
     selenium_driver.get('{}/campus/article/simple_date_print_changed'.format(
         testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'10. Februar 2016, 10:39 Uhr /'
-                                 u' Editiert am 22. Februar 2016, 18:18 Uhr')
-    assert source.text.strip() == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+    assert dates[0].text == u'10. Februar 2016, 10:39 Uhr'
+    assert dates[1].text == u'Editiert am 22. Februar 2016, 18:18 Uhr'
+    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
 
 
 def test_campus_changed_article_has_correct_meta_line(
         testserver, selenium_driver):
     selenium_driver.get('{}/campus/article/simple_date_changed'.format(
         testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
 
-    assert date.text.strip() == (u'10. Januar 2016, 10:39 Uhr /'
-                                 u' Aktualisiert am 10. Februar '
-                                 u'2016, 10:39 Uhr')
+    assert dates[0].text == u'10. Januar 2016, 10:39 Uhr'
+    assert dates[1].text == u'Aktualisiert am 10. Februar 2016, 10:39 Uhr'
 
 
 def test_campus_article_has_correct_meta_line(testserver, selenium_driver):
