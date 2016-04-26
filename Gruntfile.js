@@ -437,7 +437,7 @@ module.exports = function(grunt) {
 
         if ( target in config.compass ) {
             grunt.log.writeln('Using task compass:' + target);
-            config.watch.compass.tasks = [ 'compass:dev-basic' ];
+            config.watch.compass.tasks = [ 'compass:' + target ];
         }
 
         // grunt.log.writeflags(config);
