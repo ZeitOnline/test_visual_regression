@@ -41,12 +41,17 @@ def test_campus_teaser_wide_small_should_not_display_its_image_on_mobile(
     driver = selenium_driver
     driver.set_window_size(320, 480)
     driver.get('%s/campus/centerpage/teaser-wide-small' % testserver.url)
-    teaser_image = driver.find_element_by_class_name(
-        'teaser-wide-small__media-item')
-    assert not teaser_image.is_displayed()
+    teaser_images = driver.find_elements_by_class_name(
+        'teaser-wide-small__media')
+
+    for image in teaser_images:
+        assert ('teaser-wide-small__media--force-mobile' in
+                image.get_attribute('class')) or (
+                    not image.is_displayed())
 
     driver.set_window_size(768, 800)
-    assert teaser_image.is_displayed()
+    for image in teaser_images:
+        assert image.is_displayed()
 
 
 def test_campus_teaser_wide_small_has_correct_structure(testbrowser):
@@ -158,7 +163,7 @@ def test_advertorial_has_markup_module(testbrowser):
 
 def test_servicelinks_module_renders_links(testbrowser):
     select = testbrowser('/campus/centerpage/servicelinks').cssselect
-    assert len(select('#zco-servicelinks a.servicebox__link')) == 6
+    assert len(select('.servicelinks a.servicelinks__link')) == 6
 
 
 def test_campus_teasers_to_leserartikel_have_kicker_modifiers(testbrowser):

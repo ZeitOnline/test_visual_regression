@@ -35,10 +35,6 @@ class Article(zeit.web.core.view_article.Article,
         else:
             return 'default'
 
-    @zeit.web.reify
-    def adcontroller_handle(self):
-        return 'artikel'
-
 
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',

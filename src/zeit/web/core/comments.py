@@ -266,7 +266,7 @@ def get_paginated_thread(
             thread_position = int(thread_position[0])
             page = thread_position / page_size
             if thread_position % page_size > 0:
-                page = page+1
+                page = page + 1
 
     except (IndexError, lxml.etree.XMLSyntaxError):
         raise ThreadNotLoadable()
@@ -320,9 +320,8 @@ def get_paginated_thread(
             origin['replies'].append(sub_comment)
 
     # display comment count
-    thread['headline'] = '{} {}'.format(
-        total_comment_count,
-        'Kommentar' if total_comment_count == 1 else 'Kommentare')
+    thread['headline'] = zeit.web.core.template.pluralize(
+        total_comment_count, '{} Kommentare', '{} Kommentar', '{} Kommentare')
 
     # comments ad place
     thread['ad_place'] = int(page_size / 2 + 1)
@@ -427,9 +426,8 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
             origin['replies'].append(sub_comment)
 
     # display comment count
-    thread['headline'] = '{} {}'.format(
-        total_comment_count,
-        'Kommentar' if total_comment_count == 1 else 'Kommentare')
+    thread['headline'] = zeit.web.core.template.pluralize(
+        total_comment_count, '{} Kommentare', '{} Kommentar', '{} Kommentare')
 
     # comments ad place
     thread['ad_place'] = int(page_size / 2 + 1)
