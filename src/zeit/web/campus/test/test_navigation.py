@@ -1,7 +1,4 @@
 # coding: utf-8
-import mock
-
-import selenium.webdriver
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions
@@ -25,7 +22,7 @@ def test_nav_dropdowns_are_working_as_expected(
     dropdown.click()
     assert flyout.is_displayed()
 
-    #mobile
+    # mobile
     driver.set_window_size(320, 480)
     visible_more = expected_conditions.visibility_of(more)
     show_nav = driver.find_element_by_class_name('header__menu-link')

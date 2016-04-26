@@ -14,6 +14,8 @@ import zeit.content.image.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
+import zeit.web.core.interfaces
+import zeit.web.core.centerpage
 import zeit.web.core.metrics
 
 
@@ -136,16 +138,13 @@ class RSSArea(zeit.content.cp.automatic.AutomaticArea):
     feed_key = NotImplemented
 
     def values(self):
-        import zeit.web.core.interfaces  # Prevent circular imports
-        import zeit.web.site.view_centerpage
-
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get(self.feed_key)
         timeout = conf.get(self.feed_key + u'_timeout', 2)
         values = []
 
         for item in parse_feed(url, self.kind, timeout):
-            module = zeit.web.site.view_centerpage.LegacyModule(
+            module = zeit.web.core.centerpage.TeaserModule(
                 [item], layout=self.module_layout)
             item.__parent__ = self
             module.type = 'teaser'
