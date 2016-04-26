@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-2991: Fix links in ZCO navigation
 
+- ZON-2997: Support pagination for campus centerpages
+
 - MAINT: Adjust tracking IDs in article footer
 
 - BUG-405: Do not use duplicate IDs for infoboxes
