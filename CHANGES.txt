@@ -4,6 +4,8 @@ Change log for zeit.web
 2.74 (unreleased)
 -----------------
 
+- ZON-3003: ZEIT Campus polishing
+
 - ZON-3005: Share date logic for teasers between ZON and ZCO
 
 - ZON-2972: Introduce ZEIT Campus teasers in ZON parquet
