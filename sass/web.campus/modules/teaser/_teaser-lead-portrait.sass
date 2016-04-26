@@ -18,6 +18,8 @@
 
 	&__kicker
 		@extend %teaser-kicker
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
 
 	&__title
 		@extend %teaser-title
@@ -28,8 +30,9 @@
 	&__metadata
 		@extend %teaser-metadata
 
-	&__byline
-		@extend %teaser-byline
+	&__commentcount
+		@extend %teaser-commentcount
+
 
 +respond-max($break-tablet-min)
 	.teaser-lead-portrait
@@ -40,12 +43,11 @@
 			padding-left: $page-padding--small
 		&__text,
 		&__metadata
-			max-width: 95%
 			padding-right: $page-padding--small
 
 +respond-min($break-tablet-min)
 	.teaser-lead-portrait
-		padding: $page-padding $page-padding*2 $page-padding $page-padding // this is to make the 50% width of the image consider the grid gutter
+		padding: $page-padding ($page-padding+$gutter) $page-padding $page-padding // this is to make the 50% width of the image consider the grid gutter
 		position: relative
 
 		&__media
@@ -77,7 +79,14 @@
 
 		&__text
 			+scaled-font(18px)
-			line-height: (27/18)
+
+		&__text,
+		&__metadata
+			max-width: remify(510px)
+			width: 90%
+
+		&__metadata
+			+scaled-font(15px)
 
 +respond-min($break-desktop-min)
 	.teaser-lead-portrait

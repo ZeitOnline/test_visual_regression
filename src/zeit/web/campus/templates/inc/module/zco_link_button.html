@@ -1,0 +1,13 @@
+{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+
+{% set href = '{}campus/index'.format(request.route_url('home')) %}
+{% set tracking_slug = '{}.{}.{}.{}.|{}'.format(region_loop.index, area_loop.index, module_loop.index, module.layout.id, href.replace('http://','')) %}
+
+<nav class="link_button">
+    <a class="link_button__link" href="{{ href }}" data-tracking="{{ tracking_slug }}">
+        <span class="link_button__button">
+            <span class="visually-hidden">Zurück zur </span>Startseite
+            {{ lama.use_svg_icon('arrow-right', 'article-pagination__icon', view.package, a11y=False) }}
+        </span>
+    </a>
+</nav>

@@ -1,31 +1,40 @@
+=article-header-banderole($start)
+	+background-image(linear-gradient(to bottom, transparent remify($start), $color-background remify($start)))
+
 .article-header
 	margin: remify(0 0 30px)
 	position: relative
 
-	&--default-with-image &__headline
-		margin-top: remify(-66px)
+	&__banderole
+		+unpadded
+		+padded
+		background-color: $color-background
+		&--portrait
+			+article-header-banderole(254px)
+			background-color: transparent
 
 	&__default-image
-		margin-top: $page-padding--small
+		margin-bottom: remify(-66px)
+		&--portrait
+			margin-top: remify(14px)
+		&--wide
+			margin-left: -$page-padding--small
+			margin-right: -$page-padding--small
 
-	&__image
-		width: remify(240px)
-		// this is never going to work, keep it for proof of (wrong) concept
-		// position: relative
-		// &:after
-		// 	bottom: 0
-		// 	content: ""
-		// 	height: 100%
-		// 	left: 0
-		// 	position: absolute
-		// 	right: 0
-		// 	top: 0
-		// 	width: 100%
-		// 	+background-image(linear-gradient(to bottom, rgba(0,0,0,0) 70%, rgba(0,0,0,.4) 100%))
+	&__default-image-box
+		&--portrait
+			width: remify(240px)
 
 	&__media
 		height: 0
-		padding-bottom: 100% / 3 * 4 // image variant 'portrait'
+		&--portrait
+			padding-bottom: 100% / 3 * 4 // image variant 'portrait'
+		&--wide
+			padding-bottom: 100% / 16 * 9 // image variant 'wide'
+
+	&__media-container
+		&--default
+			+teaser-image-dark-overlay($color: rgba(0,0,0,.4), $angle: to bottom, $gradient: (rgba(0,0,0,0) 70%, rgba(0,0,0,.4) 100%))
 
 	&__topic
 		@extend %font-beckett
@@ -44,19 +53,18 @@
 			opacity: .58
 			margin-right: .5em
 		&--default
-			margin-bottom: remify(10px)
+			margin-bottom: remify(14px)
 		&--column
 			margin: 0
 		&--leserartikel
 			+order(1)
 
 	&__headline
-		text-transform: uppercase
 		margin: 0
+		text-transform: uppercase
 		&--default
-			+unpadded
-			background-color: $color-background
-			padding: remify(15px $page-padding--small 24px 24px)
+			padding: remify(15px 0 24px 10px)
+			position: relative // for stacking context (z-index)
 
 	&__kicker
 		display: block
@@ -81,11 +89,11 @@
 
 	&__byline,
 	&__metadata
-		+scaled-font(15px)
-		line-height: 20px / 15px
+		line-height: 1.4
 		margin-bottom: remify(8px)
 
 	&__byline
+		+scaled-font(15px)
 		span[itemprop="name"]
 			color: $color-text
 			font-weight: bold
@@ -95,16 +103,16 @@
 					color: $color-article-primary
 
 	&__metadata
+		+scaled-font(14px)
+		color: $color-text--light
+		letter-spacing: $letter-spacing-s
 		> time,
 		> span
 			white-space: nowrap
-		> time:after,
-		> span:after
-			content: " / "
-			margin: 0 0.25em
-		> time:last-child:after,
-		> span:last-child:after
-			content: none
+		> time:not(:last-child):not(:empty):after,
+		> span:not(:last-child):not(:empty):after
+			content: " \2014 " // — = em dash
+			margin: 0 .25em
 
 
 	// Kolumne
@@ -114,11 +122,12 @@
 
 		.article-header__byline,
 		.article-header__metadata
+			color: inherit
 			display: inline
 			margin: 0
-		.article-header__byline + .article-header__metadata
-			&:before
-				content: " / "
+		.article-header__byline
+			&:not(:last-child):after
+				content: " \2014 " // — = em dash
 				margin: 0 .25em
 
 	&__column-image
@@ -137,8 +146,6 @@
 
 	// Leserartikel
 	&--leserartikel
-		.article-header__media
-			padding-bottom: 100% / 16 * 9 // image variant 'wide'
 		.article-header__byline
 			@extend %font-beckett
 			+scaled-font(20px, $title-factor)
@@ -164,10 +171,16 @@
 	&__leserartikel-image
 		margin-top: remify(32px)
 
-.metadata__seperator
-	margin: 0 .25em
-	white-space: normal
+	+respond-max($break-tablet-min)
+		&__default-info &__byline:first-child
+			margin-top: remify(30px)
 
+.metadata
+	&__commentcount
+		@extend %commentcount
+
+	&__source a
+		@extend %commentcount
 
 ////////////
 // TABLET //
@@ -176,6 +189,13 @@
 +respond-min($break-tablet-min)
 	.article-header
 		margin: remify(40px auto)
+
+		&__banderole
+			background-color: transparent
+			&--portrait
+				+article-header-banderole(443px)
+			&--wide
+				+article-header-banderole(180px)
 
 		&--default-no-image
 			background-color: $color-background
@@ -193,27 +213,33 @@
 			margin-bottom: 0
 
 		&--default-with-image &__default-info
-			left: 50%
-			max-width: remify(780px / 2)
-			padding-left: remify(46px)
 			position: absolute
 			top: 0
-			width: 50%
+			&--portrait
+				left: remify(390px)
+				padding-left: remify(30px)
+				+respond-min(em(820px))
+					left: 50%
+			&--wide
+				left: remify(500px)
 
 
 		&__default-image
-			margin: 0 auto
-			max-width: remify(780px)
+			margin: remify(0 0 -90px)
+			&--portrait
+				margin-left: auto
+				margin-right: auto
+				max-width: remify(780px)
 
-		&__image
-			width: 53.33%
+		&__default-image-box
+			&--portrait
+				width: remify(400px)
+			&--wide
+				width: remify(480px)
 
 		&__headline--default
-			padding: remify(11px $page-padding 24px)
-		&--default-with-image &__headline
-			margin-top: remify(-90px)
+			padding: remify(11px 0 24px)
 		&--default-no-image &__headline
-			margin: 0
 			padding: remify(0 0 20px)
 
 		&__kicker,
@@ -320,9 +346,24 @@
 			margin-top: remify(76px)
 			padding: remify(58px 0 38px)
 
-		&--default-with-image &__headline
-			margin: remify(-190px 0 0)
-			padding-top: remify(110px)
+		&--default-with-image &__default-info
+			&--portrait
+				padding-left: remify(90px)
+			&--wide
+				left: remify(640px)
+
+		&__banderole
+			&--portrait
+				+article-header-banderole(423px)
+				margin: 0
+			&--wide
+				+article-header-banderole(259px)
+
+		&__default-image-box
+			&--portrait
+				width: remify(460px)
+			&--wide
+				width: remify(620px)
 
 		&__kicker
 			&--leserartikel

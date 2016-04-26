@@ -184,7 +184,7 @@ def get_login_state(request):
 def _rawr_authentication(request):
     if request.user:
         rawr_user = {
-            'email': request.user.get('email'),
+            'email': request.user.get('mail'),
             'nickname': request.user.get('name'),
             # meine.zeit.de requires the "AGB" checkbox to be ticked,
             # i.e. users *cannot* register otherwise.
@@ -192,7 +192,7 @@ def _rawr_authentication(request):
         }
     else:
         rawr_user = {}
-    rawr_user = json.dumps(rawr_user).encode('base64').strip()
+    rawr_user = json.dumps(rawr_user).encode('base64').replace('\n', '')
     # rawr docs say, "expires after 2 hours" but since we write a new
     # timestamp with each login-state call (roughly every minute), this
     # should not interfere with our own session expiration rules.

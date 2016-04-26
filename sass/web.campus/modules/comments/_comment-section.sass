@@ -27,10 +27,16 @@ $comment-color-head-background:	$color-community-primary
 	&__head,
 	&__note
 		color: #fff
+	&__note &__message
+		color: inherit
+	&__head + &__message
+		padding-bottom: em(16px)
+		padding-top: em(16px)
 	&__headline
 		@extend %font-beckett
 		+font-smoothing
 		font-size: remify(42px)
+		font-weight: normal
 		+respond-min($break-tablet-min)
 			font-size: remify(64px)
 		small

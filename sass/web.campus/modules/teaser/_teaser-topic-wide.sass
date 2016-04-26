@@ -5,7 +5,7 @@
 		display: block
 		width: remify(50px)
 		margin: remify(20px 0 20px $page-padding--small)
-		border-bottom: 3px solid $zco-accent
+		border-bottom: 3px solid $color-article-primary
 
 	&__heading
 		@extend %teaser-heading
@@ -16,7 +16,8 @@
 
 	&__kicker
 		@extend %teaser-kicker
-		min-width: remify(180px)
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
 
 	&__title
 		@extend %teaser-title
@@ -27,8 +28,8 @@
 	&__metadata
 		@extend %teaser-metadata
 
-	&__byline
-		@extend %teaser-byline
+	&__commentcount
+		@extend %teaser-commentcount
 
 +respond-max($break-tablet-min)
 	.teaser-topic-wide
@@ -39,7 +40,6 @@
 			padding-left: $page-padding--small
 		&__text,
 		&__metadata
-			max-width: 95%
 			padding-right: $page-padding--small
 
 

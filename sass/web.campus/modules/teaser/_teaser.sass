@@ -26,7 +26,7 @@ $teaser-heading-box-shadow: 0.4em
 %teaser-kicker
 	background-color: $color-page-bg
 	bottom: 100%
-	color: $zco-accent
+	color: $color-article-primary
 	+scaled-font-rem(12px) // has to be rem as base is huge
 	left: 0
 	letter-spacing: 0.08em
@@ -34,6 +34,14 @@ $teaser-heading-box-shadow: 0.4em
 	padding: remify(8px 12px 0 0)
 	position: absolute
 	text-transform: uppercase
+	// this is a cheap fix for our positioning vs. box-width problem
+	// @see https://www.w3.org/TR/css3-positioning/#containing-block
+	// @read https://zon.slack.com/archives/frontend/p1460390094000013
+	span
+		white-space: nowrap
+
+%teaser-kicker--leserartikel
+	color: $color-community-primary
 
 %teaser-title
 	@extend %font-beckett
@@ -43,17 +51,31 @@ $teaser-heading-box-shadow: 0.4em
 
 %teaser-text
 	+scaled-font(16px)
-	line-height: (20/16)
+	line-height: 1.4
 	margin: 0 0 .5em 0 // em for a reason, so it grows with the breakpoint
 	+respond-min($break-tablet-min)
 		+scaled-font(15px)
-		line-height: (20/15)
 
 %teaser-metadata
-	color: $color-teaser-meta
+	color: $color-text--light
 	+scaled-font(15px)
-	line-height: (20/15)
+	letter-spacing: $letter-spacing-s
+	line-height: 1.4
+	+respond-min($break-tablet-min)
+		+scaled-font(14px)
+	> *:not(:last-child):not(:empty):after
+		content: " \2014 " // — = em dash
+		margin: 0 .2em
+		opacity: $color-separator-opacity
+	time
+		white-space: nowrap
 
-%teaser-byline
-	display: block
-	margin-bottom: remify(8px)
+%teaser-commentcount
+	@extend %commentcount
+
+.series-label,
+.blog-label
+	font-weight: normal
+	&:after
+		content: " \2014 " // — = em dash
+		margin: 0 .25em

@@ -16,8 +16,16 @@
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
-                        <span class="{{ self.layout() }}__kicker">
-                            {{- teaser.teaserSupertitle or teaser.supertitle -}}
+                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
+                            {% block teaser_journalistic_format -%}
+                                {% if teaser.serie and not teaser.serie.column -%}
+                                    <span class="series-label">{{ teaser.serie.serienname }}</span>
+                                {% elif teaser.blog -%}
+                                    <span class="blog-label">{{ teaser.blog.name }}</span>
+                                {%- endif %}
+                            {%- endblock teaser_journalistic_format %}
+
+                            <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
                         </span>
                         {%- if teaser.teaserSupertitle or teaser.supertitle -%}
                             <span class="visually-hidden">: </span>
@@ -49,9 +57,7 @@
                 {% endblock teaser_byline %}
                 {% block teaser_datetime %}
                     {% if not view.is_advertorial %}
-                        <time class="{{ layout }}__datetime js-update-datetime" datetime="{{ teaser | release_date | format_date('iso8601') }}">
-                            {{- teaser | release_date | format_date('short') -}}
-                        </time>
+                        {{ cp.include_teaser_datetime(teaser, self.layout(), area.kind) }}
                     {% endif %}
                 {% endblock teaser_datetime %}
                 {% block teaser_commentcount %}
