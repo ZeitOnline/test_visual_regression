@@ -265,7 +265,9 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                          '#servicebox',
                          '.breaking-news-banner',
                          '.article-lineage',
-                         '.partnerbox'
+                         '.partnerbox',
+                         '.header', // campus navi
+                         '.main-nav' // zmo navi
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],
