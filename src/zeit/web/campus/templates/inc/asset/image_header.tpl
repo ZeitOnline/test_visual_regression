@@ -1,3 +1,3 @@
 {%- extends "zeit.web.core:templates/inc/asset/image.tpl" -%}
 
-{% block media_caption %}{% endblock %}
+{% set media_caption_additional_class = 'figcaption--hidden' %}
