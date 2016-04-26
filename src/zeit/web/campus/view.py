@@ -60,6 +60,7 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
         except TypeError:
             raise pyramid.httpexceptions.HTTPNotFound()
 
+    # TODO: Should be (will be) moved to core, used by ZON+ZCO. (tpuppe!)
     @zeit.web.reify
     def adcontroller_values(self):
 
