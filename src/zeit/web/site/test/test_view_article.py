@@ -406,15 +406,15 @@ def test_article_tags_are_present_and_limited(testbrowser):
 
 def test_infobox_in_article_is_shown(testbrowser):
     select = testbrowser('/zeit-online/article/infoboxartikel').cssselect
-    assert len(select('aside#sauriersindsuper.infobox')) == 1
-    assert len(select('#sauriersindsuper .infobox-tab__title')) == 6
+    assert len(select('aside#info-bonobo.infobox')) == 1
+    assert len(select('#info-bonobo .infobox-tab__title')) == 6
 
 
 def test_infobox_mobile_actions(testserver, selenium_driver, screen_size):
     selenium_driver.set_window_size(screen_size[0], screen_size[1])
     selenium_driver.get('{}/zeit-online/article/infoboxartikel'.format(
         testserver.url))
-    infobox = selenium_driver.find_element_by_id('sauriersindsuper')
+    infobox = selenium_driver.find_element_by_id('info-bonobo')
     tabnavigation = infobox.find_elements_by_class_name('infobox__navigation')
     tabpanels = infobox.find_elements_by_class_name('infobox-tab__panel')
     clicker = infobox.find_elements_by_css_selector(
@@ -446,7 +446,7 @@ def test_infobox_desktop_actions(testserver, selenium_driver, screen_size):
     selenium_driver.set_window_size(screen_size[0], screen_size[1])
     selenium_driver.get('{}/zeit-online/article/infoboxartikel'.format(
         testserver.url))
-    infobox = selenium_driver.find_element_by_id('sauriersindsuper')
+    infobox = selenium_driver.find_element_by_id('info-bonobo')
     tabnavigation = infobox.find_elements_by_class_name(
         'infobox__navigation')[0]
     tabpanels = infobox.find_elements_by_class_name('infobox-tab__panel')
@@ -1213,7 +1213,7 @@ def test_article_lineage_overlapping_with_fullwidth_elements_should_be_hidden(
     except TimeoutException:
         assert False, 'Fixed Lineage not visible after scrolled into view'
 
-    driver.get('%s/zeit-online/article/infoboxartikel#sauriersindsuper' %
+    driver.get('%s/zeit-online/article/infoboxartikel#info-bonobo' %
                testserver.url)
 
     try:
