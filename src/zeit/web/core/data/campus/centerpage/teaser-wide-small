@@ -71,7 +71,7 @@
     <title>wide small</title>
     <cluster area="id-41a2899d-b569-4c42-b713-d5bdbd86a64f" kind="trio" visible="True" visible_mobile="True">
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a64f" kind="trio" visible="True" visible_mobile="True">
-        <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e357dbf3be4b">
+        <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e357dbf3be4b" force_mobile_image="True">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
       </region>

@@ -815,12 +815,8 @@ class Content(CeleraOneMixin, CommentMixin, Base):
     @zeit.web.reify
     def obfuscated_date(self):
         if self.last_modified_label:
-            released = zeit.web.core.template.format_date(
+            date = zeit.web.core.template.format_date(
                 self.date_first_released, 'long')
-            date = (u'{} <span class="metadata__seperator">'
-                    ' / </span> {} ').format(
-                        released,
-                        self.last_modified_label)
             return base64.b64encode(date.encode('latin-1'))
 
     @zeit.web.reify
