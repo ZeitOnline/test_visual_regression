@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/studium/2014-08/box-diese-studenten</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">infobox</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bortels</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-08-25T11:41:27.633943+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ebefca21-c13b-4217-a8a4-c086c65f4dfd}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Infobox" module="zeit.content.infobox.infobox"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-08-25T11:39:13.013725+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-08-25T11:41:27.633943+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-08-25T11:40:34.471142+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-08-25T11:40:27Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">1903</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Mon, 25 Aug 2014 11:40:27 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"66921f-76f-50172a74536b1"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
