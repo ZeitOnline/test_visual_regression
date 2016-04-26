@@ -11,6 +11,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 def test_campus_navigation_should_present_flyout(selenium_driver, testserver):
     driver = selenium_driver
+    # assert desktop breakpoint
+    driver.set_window_size(1024, 768)
     driver.get('%s/campus/index' % testserver.url)
     link = driver.find_element_by_css_selector(
         '.nav__tools-title .nav__dropdown')
@@ -175,3 +177,13 @@ def test_campus_teasers_to_leserartikel_have_kicker_modifiers(testbrowser):
     select = testbrowser(
         '/campus/article/simple-with-nextread-leserartikel').cssselect
     assert len(select('.nextread-teaser__kicker--leserartikel')) == 1
+
+
+def test_campus_cp_page_integration(testbrowser, datasolr):
+    browser = testbrowser('/campus/centerpage/paginierung?p=2')
+    # Curated content is not shown
+    assert 'Ich bin nicht intellektuell' not in browser.contents
+    # Header is kept
+    assert 'class="header-image"' in browser.contents
+    # Ranking is kept
+    assert 'cp-area--ranking' in browser.contents
