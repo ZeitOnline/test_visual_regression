@@ -50,3 +50,7 @@ def test_campus_adcontroller_values_return_values_on_article(application):
     view = view = zeit.web.campus.view_article.Article(
         content, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
+
+def test_campus_adplace7_should_be_placeable_via_cpextra(testbrowser):
+    browser = testbrowser('/campus/centerpage/adplace7')
+    assert len(browser.cssselect('script[id="ad-desktop-7"]')) == 1
