@@ -36,24 +36,19 @@
 	&__item
 		font-size: remify(16px)
 		line-height: 1.4
-		position: relative
 		margin-top: remify(6px)
 		padding: 0 .7em
+	&__link
+		color: $color-text
+		position: relative
+		+on-interaction
+			color: $color-tools-secondary
 		&:before
-			color: $zco-charcoal
 			content: "\203A"
 			font-size: 1.5em
 			position: absolute
-			left: 0
+			left: remify(-10px)
 			top: remify(-9px)
-	&__link
-		text-decoration: none
-		&:link,
-		&:visited
-			color: $zco-charcoal
-		&:hover,
-		&:active
-			color: $color-tools-text
 
 
 +respond-min($break-tablet-min)
