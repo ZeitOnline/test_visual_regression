@@ -515,10 +515,11 @@ def default_image_url(image, image_pattern='default'):
 @zeit.web.register_filter
 def pluralize(num, *forms):
     try:
-        num = '{:,d}'.format(int(num)).replace(',', '.')
+        value = int(num)
+        display = '{:,d}'.format(value).replace(',', '.')
     except ValueError:
-        num = 0
-    return forms[min(len(forms) - 1, num):][0].format(num)
+        display = value = 0
+    return forms[min(len(forms) - 1, value):][0].format(display)
 
 
 @zeit.web.register_filter

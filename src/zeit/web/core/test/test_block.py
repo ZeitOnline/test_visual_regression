@@ -315,13 +315,14 @@ def test_block_infobox_should_contain_expected_structure(tplbrowser):
     view.package = 'zeit.web.site'
     block = mock.Mock()
     block.title = 'Infobox-Titel'
+    block.identifier = 'infobox-file'
     block.contents = (('Infos', 'Hier die Infos über'),)
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/infobox.html', block=block,
         view=view)
     assert browser.cssselect('aside.infobox.js-infobox')
     assert browser.cssselect('aside.infobox.js-infobox')[0].get('id') == (
-        'infoboxtitel')
+        'infobox-file')
 
 
 def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):

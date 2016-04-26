@@ -136,6 +136,13 @@ class Infobox(Block):
         self.layout = model_block.layout
 
     @property
+    def identifier(self):
+        try:
+            return self.context.uniqueId.split('/')[-1]
+        except:
+            return 'infobox'
+
+    @property
     def title(self):
         try:
             return self.context.supertitle
