@@ -2,12 +2,11 @@ import mock
 import lxml.etree
 import zope.component
 
-import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
 
-import zeit.web.site.area.overview
-import zeit.web.site.area.ranking
+import zeit.web.core.area.ranking
 import zeit.web.core.utils
+import zeit.web.site.area.overview
 
 
 def get_area(kind, count):
@@ -36,7 +35,7 @@ def test_overview_area_should_overflow_if_necessary(
     def qs(self, *args):
         self.hits = 3
 
-    monkeypatch.setattr(zeit.web.site.area.ranking.Ranking, '_query_solr', qs)
+    monkeypatch.setattr(zeit.web.core.area.ranking.Ranking, '_query_solr', qs)
 
     area = get_area('overview', 1)
     area._query_solr('', '')
@@ -53,7 +52,7 @@ def test_overview_area_should_respect_sanity_bound(
     def qs(self, *args):
         self.hits = 10
 
-    monkeypatch.setattr(zeit.web.site.area.ranking.Ranking, '_query_solr', qs)
+    monkeypatch.setattr(zeit.web.core.area.ranking.Ranking, '_query_solr', qs)
     monkeypatch.setattr(zeit.web.site.area.overview, 'SANITY_BOUND', 5)
 
     area = get_area('overview', 1)

@@ -113,21 +113,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return [x for x in ([self.ressort.capitalize(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
 
-    @zeit.web.reify
-    def has_cardstack(self):
-        return len(self.context.xml.xpath('/article/body//cardstack')) > 0
-
     # Only needed to set tracking code on
     # http://www.zeit.de/newsletter/registriert?nl=premium.
     @zeit.web.reify
     def newsletter_optin_tracking(self):
         return self.request.GET.get('newsletter-optin', None)
-
-    @zeit.web.reify
-    def cardstack_body(self):
-        url = super(Article, self).cardstack_body
-        params = dict(shareUrl=self.canonical_url)
-        return zeit.web.core.utils.update_query(url, **params)
 
 
 @view_config(name='seite',

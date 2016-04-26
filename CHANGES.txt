@@ -4,6 +4,8 @@ Change log for zeit.web
 2.74 (unreleased)
 -----------------
 
+- ZON-2973: Generalise usage of cardstack in CPs and articles
+
 - ZON-2987: Add servicelinks module to ZEIT Campus
 
 - ZON-3003: ZEIT Campus polishing
@@ -21,6 +23,8 @@ Change log for zeit.web
 - ZON-2896: Add tracking ids to ZMO and ZCO navigation
 
 - ZON-2991: Fix links in ZCO navigation
+
+- ZON-2997: Support pagination for campus centerpages
 
 - MAINT: Adjust tracking IDs in article footer
 
