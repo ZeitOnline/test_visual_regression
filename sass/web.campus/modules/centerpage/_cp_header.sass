@@ -1,0 +1,14 @@
+.cp_header
+	padding: 0 $page-padding--small
+	+respond-min($break-tablet-min)
+		padding: 0 $page-padding
+	&__title
+		@extend %font-beckett
+		+scaled-font(32px, $title-factor)
+		margin: 0
+		padding: 1.25em 0 .85em 0// em used with purpose
+		text-align: center
+		+respond-min($break-tablet-min)
+			+scaled-font(48px, $title-factor)
+		+respond-min($break-desktop-min)
+			+scaled-font(64px, $title-factor)

@@ -4,6 +4,8 @@
 	margin: remify(40px (-$page-padding))
 	overflow: hidden // needed to prevent collapsing margins of .infobox-tab__link and .infobox-tab__panel
 	padding: 0 $page-padding
+	&__title
+		+visuallyhidden
 	.js &__container
 		+respond-min($break-tablet-min)
 			+pie-clearfix

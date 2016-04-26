@@ -68,14 +68,14 @@
         id="zon-large"
         title="Großer Teaser"
         image_pattern="zon-large"
-        areas="duo major ranking parquet"
+        areas="duo major ranking parquet zco-parquet"
         />
     <layout
         id="zon-small"
         title="Kleiner Teaser"
         image_pattern="zon-thumbnail"
-        areas="duo major minor ranking parquet spektrum zett zmo-parquet author-favourite-content author-articles"
-        default="major minor parquet zmo-parquet ranking spektrum zett author-favourite-content author-articles"
+        areas="duo major minor ranking parquet spektrum zett zmo-parquet zco-parquet author-favourite-content author-articles"
+        default="major minor parquet zmo-parquet zco-parquet ranking spektrum zett author-favourite-content author-articles"
         available="zeit.cms.section.interfaces.IZONContent"
         />
     <layout

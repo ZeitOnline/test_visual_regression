@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
+  <supertitle>Diese Studenten</supertitle>
+  <block>
+    <title>Diese … Sondierer</title>
+    <text>
+      <p>Wirtschaftskrisen, hohe Arbeitslosigkeit, Kriege in Afghanistan und im Irak, Super-GAU in Fukushima, Facebook- freunde und so weiter: Bei dieser Prägung kann ja nichts anderes heraus- kommen als eine Generation von Zauderern. Sie wägen ihre Optionen nicht nur sorgfältig ab, sondern halten sie sich bis zuletzt offen. Länger als fünf Jahre blicken sie nicht voraus, oft auch nur bis übernächste Woche. Vor langfristigen Verpflichtungen scheuen sie zurück – so werden Lebens- zu Lebensabschnittsgefährten.</p>
+    </text>
+  </block>
+  <block>
+    <title>Optimierer</title>
+    <text>
+      <p>Um in der unsicheren Welt überhaupt noch Optionen zu haben, werden sie zu Strebern. Da sie sonst wenig optimieren können, optimieren sie sich eben selbst. Ihre Strategie: Bildung, Bildung, Bildung. Dabei geht es ihnen weniger um echtes Wissen als vielmehr um den besten Notendurchschnitt und den höchstmöglichen Abschluss. So hoffen sie ihre Chancen auf dem Arbeitsmarkt zu vergrößern</p>
+    </text>
+  </block>
+  <block>
+    <title>Egotaktiker</title>
+    <text>
+      <p>Wer steht diesen selbstbezogenen Individualisten am nächsten? Natürlich sie selbst! Selbstbewusstsein und Narzissmus steigen, dafür verkümmert ihre Fähigkeit zu lieben. Das zeigen Untersuchungen der Universität Michigan. Die befragten Studenten scheuten sich, aufeinander einzugehen und ihrem Bedürfnis nach Nähe nachzugeben.</p>
+    </text>
+  </block>
+</container>
