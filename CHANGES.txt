@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - BUG-405: Do not use duplicate IDs for infoboxes
 
+- FIX: Fix more Button in mobile navigation and add testing
+
 
 2.73 (2016-04-21)
 -----------------
