@@ -177,3 +177,13 @@ def test_campus_teasers_to_leserartikel_have_kicker_modifiers(testbrowser):
     select = testbrowser(
         '/campus/article/simple-with-nextread-leserartikel').cssselect
     assert len(select('.nextread-teaser__kicker--leserartikel')) == 1
+
+
+def test_campus_cp_page_integration(testbrowser, datasolr):
+    browser = testbrowser('/campus/centerpage/paginierung?p=2')
+    # Curated content is not shown
+    assert 'Ich bin nicht intellektuell' not in browser.contents
+    # Header is kept
+    assert 'class="header-image"' in browser.contents
+    # Ranking is kept
+    assert 'cp-area--ranking' in browser.contents

@@ -1,3 +1,7 @@
+// use same padding as teaser-wide-small, because pager is used below these
+.cp-area--ranking > .pager
+	padding-left: $page-padding--small
+	padding-right: $page-padding--small
 
 +respond-min($break-tablet-min)
 	.cp-region
@@ -18,3 +22,11 @@
 		&--minor
 			float: left
 			width: 33.33%
+		&--ranking
+			margin: 0 auto
+			max-width: $medium-content-width
+
+			// use same padding as teaser-wide-small, because pager is used below these
+			> .pager
+				padding-left: $cp-padding
+				padding-right: $cp-padding
