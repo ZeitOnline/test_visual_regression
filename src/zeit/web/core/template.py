@@ -330,6 +330,9 @@ def get_layout(block, request=None):
                 layout = layout
             elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
                 layout = 'zmo-square'
+            # Targaryens up here
+            elif zeit.campus.interfaces.IZCOContent.providedBy(teaser):
+                layout = 'zco-square'
         # XXX Instead of hard-coding a layout change here, we should make use
         # of z.w.core.centerpage.dispatch_teaser_via_contenttype() and
         # register a specific teaser module for authors.
