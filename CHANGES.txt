@@ -4,7 +4,7 @@ Change log for zeit.web
 2.75 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3025: Change Wording on several places
 
 
 2.74 (2016-04-26)
