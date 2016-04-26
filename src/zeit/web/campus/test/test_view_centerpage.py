@@ -11,6 +11,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 def test_campus_navigation_should_present_flyout(selenium_driver, testserver):
     driver = selenium_driver
+    # assert desktop breakpoint
+    driver.set_window_size(1024, 768)
     driver.get('%s/campus/index' % testserver.url)
     link = driver.find_element_by_css_selector(
         '.nav__tools-title .nav__dropdown')
