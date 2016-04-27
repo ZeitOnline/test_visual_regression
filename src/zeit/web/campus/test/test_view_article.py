@@ -22,7 +22,9 @@ def test_article_pagination_on_single_page(testbrowser):
     assert len(select('.article-pager')) == 0
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
+    link = select('.article-pagination__link')[0].attrib['href']
     assert button.text.strip() == 'Mehr ZEIT Campus'
+    assert 'campus/index' in link
 
 
 def test_article_pagination_on_second_page(testbrowser):
