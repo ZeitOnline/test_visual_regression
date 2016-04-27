@@ -1,3 +1,9 @@
++keyframes(moving-background)
+	0%
+		+transform(translateY(0%))
+	100%
+		+transform(translateY(-23%))
+
 .header-image
 	margin: remify(0 0 10px)
 	position: relative
@@ -17,7 +23,13 @@
 	&__media
 		background-color: $greyish-white
 		height: 0
+		overflow: hidden
 		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+
+	&__media-container
+		&--animated
+			+animation(moving-background 35s ease-in-out infinite alternate)
+			// +animation(moving-background 10s linear 1s forwards)
 
 	&__heading
 		margin: 0
