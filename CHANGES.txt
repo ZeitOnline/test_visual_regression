@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3025: Change Wording on several places
 
+- ZON-2877: Update webtrekk javascript, make it configurable via settings
+
 - MAINT: Unify framebuilder banner_channel for ZON+ZCO
 
 - MAINT: Configure grunt watch task dynamically
