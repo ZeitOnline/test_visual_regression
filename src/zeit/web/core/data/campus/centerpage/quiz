@@ -81,6 +81,18 @@
         </container>
       </region>
     </cluster>
+    <cluster visible="True" area="id-7e329214-665f-457d-a624-94c47850f95e" kind="duo">
+      <region visible="True" hide-dupes="True" area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
+        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+      </region>
+      <region visible="True" hide-dupes="True" area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
+        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+      </region>
+    </cluster>
 
   </body>
   <feed xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></feed>
