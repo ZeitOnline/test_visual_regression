@@ -101,6 +101,16 @@ module.exports = function(grunt) {
                     outputStyle: 'expanded'
                 }
             },
+            'dev-basic': {
+                options: {
+                    specify: [
+                        project.sourceDir + 'sass/**/screen.sass'
+                    ],
+                    sourcemap: true,
+                    environment: 'development',
+                    outputStyle: 'expanded'
+                }
+            },
             amp: {
                 options: {
                     specify: [
@@ -417,6 +427,23 @@ module.exports = function(grunt) {
     grunt.registerTask('svg', project.tasks.svg);
     grunt.registerTask('css', project.tasks.css);
     grunt.registerTask('lint', project.tasks.lint);
+
+    // Change watch task configuration on the fly
+    // Grunt runs tasks in a series, meaning a next task won't start until the previous has finished.
+    // Since the watch task doesn't ever finish by design, any task after the watch task won't be ran,
+    // which is why the watch task isn't a multitask.
+    grunt.registerTask('monitor', function(target) {
+        var config = grunt.config();
+
+        if ( target in config.compass ) {
+            grunt.log.writeln('Using task compass:' + target);
+            config.watch.compass.tasks = [ 'compass:' + target ];
+        }
+
+        // grunt.log.writeflags(config);
+        grunt.config('watch', config.watch);
+        grunt.task.run('watch');
+    });
 
 /*
  * Nice to have. Keep for later use.
