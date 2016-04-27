@@ -4,6 +4,8 @@ Change log for zeit.web
 2.75 (unreleased)
 -----------------
 
+- ZON-3023: Use 1st teaser image as topic teaser image
+
 - ZON-3025: Change Wording on several places
 
 - MAINT: Unify framebuilder banner_channel for ZON+ZCO
@@ -12,8 +14,7 @@ Change log for zeit.web
 
 - FIX: Fix teaser layout, default ZCO article layout
 
-- ZON-3023: Use 1st teaser image as topic teaser image
-
+- FIX: Add new home routes and change pagination
 
 - FIX: Correct link
 
