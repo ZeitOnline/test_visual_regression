@@ -1,11 +1,14 @@
 .header
     &__ad-label
-        display: none
+        color: $dusty-gray
+        font-size: em(9px)
+        letter-spacing: 0.15em
+        margin-left: remify(10px)
+        display: inline-block
+        text-transform: uppercase
 
-    +respond-min($break-tablet-min)
-        &__ad-label
-            color: $dusty-gray
-            font-size: remify(15px)
+        +respond-min(em(350px))
+            font-size: em(15px)
             letter-spacing: $letter-spacing-m
+            text-transform: none
             margin-left: $page-padding
-            display: inline-block
