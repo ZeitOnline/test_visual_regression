@@ -1,14 +1,31 @@
 .cardstack
-	background: rgba($zco-grey, 0.6)
-	padding-bottom: rem(34px)
+	margin: $vertical-space--small 0
 	text-align: center
-	+respond-min($break-tablet-min)
-		margin-left: rem(10px)
-		margin-right: rem(10px)
-	+respond-min($break-tablet-min)
-		height: rem(460px)
+
+	// &__container
+	background-color: $color-background--light
+	padding-bottom: remify(30px)
+
 	&__link
-		border-bottom: 1px solid rgba($zco-charcoal, 0.5)
-		color: $zco-charcoal
+		border-bottom: 1px solid #ddd
+		color: $color-text
+		+on-interaction
+			border-bottom-color: #999
+			color: $color-article-primary
+
+	+respond-min($break-tablet-min)
+		margin: $vertical-space $cp-padding
+
+		// &__container
+		background-color: transparent
+		padding: 0
 		position: relative
-		top: rem(-6px)
+		&:before
+			background-color: $color-background--light
+			content: ""
+			display: block
+			height: 0
+			padding-bottom: 100%
+			position: absolute
+			top: 0
+			width: 100%
