@@ -20,4 +20,6 @@
     Mehr ZEIT Campus
 {% endblock %}
 
-{%block pagination_link %}{{ request.route_url('home-campus') }}index{% endblock %}
+{%- block pagination_link -%}
+    {{ request.route_url('home-campus') }}index
+{%- endblock -%}
