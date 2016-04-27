@@ -48,8 +48,7 @@ def test_campus_teaser_wide_small_should_not_display_its_image_on_mobile(
 
     for image in teaser_images:
         assert ('teaser-wide-small__media--force-mobile' in
-                image.get_attribute('class')) or (
-                    not image.is_displayed())
+                image.get_attribute('class')) or (not image.is_displayed())
 
     driver.set_window_size(768, 800)
     for image in teaser_images:
@@ -126,8 +125,7 @@ def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):
     assert len(select('.teaser-topic-variant .teaser-topic-small')) == 2
     assert (
         'cp-content/ig-2/portrait__612x816' in
-        select( '.teaser-topic-variant__media-item').pop().attrib['src'])
-
+        select('.teaser-topic-variant__media-item').pop().attrib['src'])
 
 
 def test_campus_teaser_debate_has_correct_structure(testbrowser):
