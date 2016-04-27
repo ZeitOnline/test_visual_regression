@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Unify framebuilder banner_channel for ZON+ZCO
 
+- MAINT: Configure grunt watch task dynamically
+
 
 2.74 (2016-04-26)
 -----------------
