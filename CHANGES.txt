@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Fix teaser layout, default ZCO article layout
 
+- ZON-3023: Use 1st teaser image as topic teaser image
+
 
 - FIX: Correct link
 
