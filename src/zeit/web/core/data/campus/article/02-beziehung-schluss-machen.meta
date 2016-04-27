@@ -38,6 +38,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">71ebc95a28c64b0986fb33282c85f37d</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">In der Mensa mit</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned">887a216f-e738-45fb-a83b-a31840fad535 6eab8c5b-feb4-40da-954f-a1e0ebfba867</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">84</attribute>

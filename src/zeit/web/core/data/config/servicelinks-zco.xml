@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<services>
+  <column>
+    <service href="http://marktplatz.zeit.de/urlaubsziele/?wt_mc=zeit_de.intern.serviceservice.zon.urlaubsziele.zeit_blog_urlaubsziele.textservice.textservice" id="urlaubsziele">Urlaubsziele</service>
+    <service href="http://studiengaenge.zeit.de/" id="studiengangsuche">Studienangebote</service>
+    <service href="http://www.zeit.de/angebote/forschungswelten-forschende-fachhochschulen/index" id="fachhochschulen">Forschende Fachhochschulen</service>
+  </column>
+  <column>
+    <service href="http://marktplatz.zeit.de/veranstaltungen/index" id="kulturangebote">Veranstaltungen</service>
+    <service href="http://jobs.zeit.de/?wt_zmc=fix.int.zonpmr.zeitde.parkett.zeitstellenmarkt.link.link.x&amp;utm_medium=fix&amp;utm_source=zeitde_zonpmr_int&amp;utm_campaign=parkett&amp;utm_content=zeitstellenmarkt_link_link_x" id="headhunter">Stellenmarkt</service>
+    <service href="http://studiengaenge.zeit.de/sit" id="interessentest">Studium-Interessentest</service>
+  </column>
+</services>

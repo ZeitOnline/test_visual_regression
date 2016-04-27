@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
+  <supertitle>Diese Studenten</supertitle>
+  <block>
+    <title>Opportunisten</title>
+    <text>
+      <p>Statt eine neue Familie zu gründen, konzentrieren sie sich auf ihre alte: Die Eltern sind ihre wichtigsten Verbündeten beim Versuch, sich in der Welt zu behaupten. Gleich danach kommen die Lehrer, die sie als Garanten für eine erfolgreiche Bildungskarriere ebenfalls umarmen, anstatt sich gegen sie aufzulehnen.</p>
+    </text>
+  </block>
+  <block>
+    <title>Pragmatiker</title>
+    <text>
+      <p>Wie sie in der Schule begonnen haben, so machen sie im Arbeitsleben weiter: Sie versuchen, die Verhältnisse ihren Wünschen anzupassen. Besonders achten sie dabei auf ihren Freizeitausgleich. Sie wissen, dass sie noch lange durchhalten müssen, daher wappnen sie sich frühzeitig gegen Burn-out.</p>
+    </text>
+  </block>
+  <block>
+    <title>Unpolitischen</title>
+    <text>
+      <p>Manche halten das Streben nach mehr Work-Life-Balance bereits für revolutionär, schließlich verändert sich dadurch gerade die Arbeitswelt. Zur politischen Einflussnahme nutzen die Heranwachsenden ihre eigenen Kanäle wie Facebook und Twitter. Manchmal genügt die virtuelle öffentlichkeit jedoch nicht, um Veränderungen zu bewirken. Bei den Entscheidungen zur Mütterrente und zur Rente mit 63, die beide die Zukunft der Jungen maßgeblich beeinflussen werden, blieb der Protest verhalten. Sie glauben einfach daran, dass es immer irgendwie weitergeht.</p>
+    </text>
+  </block>
+</container>

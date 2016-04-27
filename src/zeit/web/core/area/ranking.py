@@ -14,9 +14,7 @@ import zeit.content.cp.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
-import zeit.web.core.block
 import zeit.web.core.interfaces
-import zeit.web.core.date
 import zeit.web.core.metrics
 import zeit.web.core.template
 
@@ -258,26 +256,3 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         pagination = zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages)
         return pagination if pagination is not None else []
-
-
-@zeit.web.register_area('author-list')
-class AuthorList(Ranking):
-
-    FIELDS = Ranking.FIELDS + ' ' + ' '.join([
-        'author_summary_t',
-        'display_name_s',
-    ])
-
-    FIELD_MAP = Ranking.FIELD_MAP + [
-        (u'author_summary_t', 'summary'),
-        (u'display_name_s', 'display_name'),
-    ]
-
-    def document_hook(self, doc):
-        doc = super(AuthorList, self).document_hook(doc)
-        # Prevent proxy exposure for missing fields (e.g. probably the majority
-        # of author objects does not have an image).
-        for key in ['image', 'summary']:
-            if key not in doc:
-                doc[key] = None
-        return doc
