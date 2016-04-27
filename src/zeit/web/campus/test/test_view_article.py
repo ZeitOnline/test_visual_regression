@@ -209,12 +209,21 @@ def test_article_header_default_considers_image_layout(testbrowser):
     header = browser.cssselect('.article-header--default-no-image')
     assert len(header) == 1
 
+    # default layout "large" should use variant 'portrait'
+    browser = testbrowser('/campus/article/paginated')
+    header = browser.cssselect('.article-header--default-with-image')[0]
+    figure = header.cssselect('.article-header__media--portrait')[0]
+    image = figure.cssselect('img')[0]
+    assert image.get('data-variant') == 'portrait'
+
+    # layout "zco-portrait" should use variant 'portrait'
     browser = testbrowser('/campus/article/common')
     header = browser.cssselect('.article-header--default-with-image')[0]
     figure = header.cssselect('.article-header__media--portrait')[0]
     image = figure.cssselect('img')[0]
     assert image.get('data-variant') == 'portrait'
 
+    # layout "zco-wide" should use variant 'wide'
     browser = testbrowser('/campus/article/header-image-landscape')
     header = browser.cssselect('.article-header--default-with-image')[0]
     figure = header.cssselect('.article-header__media--wide')[0]
