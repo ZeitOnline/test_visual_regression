@@ -53,7 +53,7 @@
     <div class="nav__primary">
         <nav class="nav__topics">
             {% require topics = view.context | topic_links -%}
-            <h2 class="nav__topics-title"><a href="http://www.zeit.de/campus/themen" data-id="campus-topnav.2...themen">Themen{#{ topics.title | default('Themen', True) }#}</a></h2>
+            <h2 class="nav__topics-title">Themen{#{ topics.title | default('Themen', True) }#}</h2>
             <ul class="nav__topics-list">
             {% for label, link in topics %}
                 <li><a href="{{ link }}" data-id="campus-topnav.2.{{ loop.index }}..{{ label | lower }}">{{ label }}</a></li>

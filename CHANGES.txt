@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.74 (unreleased)
+2.75 (unreleased)
+-----------------
+
+- ZON-3025: Change Wording on several places
+
+
+2.74 (2016-04-26)
 -----------------
 
 - ZON-2973: Generalise usage of cardstack in CPs and articles
