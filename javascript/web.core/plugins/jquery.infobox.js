@@ -240,7 +240,7 @@
      */
     Infobox.prototype.getSelectedTabByHash = function() {
         if ( location.hash ) {
-            var hashTab = this.tabs.filter( location.hash + '-tab' );
+            var hashTab = this.tabs.filter( location.hash );
 
             if ( hashTab.length ) {
                 return hashTab;

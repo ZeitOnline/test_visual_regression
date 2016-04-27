@@ -813,12 +813,8 @@ class Content(CeleraOneMixin, CommentMixin, Base):
     @zeit.web.reify
     def obfuscated_date(self):
         if self.last_modified_label:
-            released = zeit.web.core.template.format_date(
+            date = zeit.web.core.template.format_date(
                 self.date_first_released, 'long')
-            date = (u'{} <span class="metadata__seperator">'
-                    ' / </span> {} ').format(
-                        released,
-                        self.last_modified_label)
             return base64.b64encode(date.encode('latin-1'))
 
     @zeit.web.reify
@@ -997,6 +993,24 @@ class FrameBuilder(CeleraOneMixin):
     @zeit.web.reify
     def cap_title(self):
         return self.request.GET.get('adlabel') or 'Anzeige'
+
+    @zeit.web.reify
+    def adcontroller_values(self):
+
+        banner_channel = self.request.GET.get('banner_channel', None)
+
+        if not banner_channel:
+            return
+
+        adc_levels = banner_channel.split('/')
+
+        return [('$handle', adc_levels[3] if len(adc_levels) > 3 else ''),
+                ('level2', adc_levels[0] if len(adc_levels) > 0 else ''),
+                ('level3', adc_levels[1] if len(adc_levels) > 1 else ''),
+                ('level4', adc_levels[2] if len(adc_levels) > 2 else ''),
+                ('$autoSizeFrames', True),
+                ('keywords', adc_levels[4] if len(adc_levels) > 4 else ''),
+                ('tma', '')]
 
 
 @pyramid.view.notfound_view_config()

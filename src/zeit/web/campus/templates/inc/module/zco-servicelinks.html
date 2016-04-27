@@ -1,2 +1,17 @@
-{# XXX This is just a stopgap to get _any_ HTML, so we can write a test #}
-{% extends "zeit.web.core:templates/inc/module/servicebox.html" %}
+<aside class="servicelinks">
+    <div class="servicelinks__heading-container">
+        <h3 class="servicelinks__heading">{{ module.title }}</h3>
+    </div>
+    {% for service_column in module.services %}
+        {% set column_loop = loop %}
+        <ul class="servicelinks__column">
+            {% for service in service_column %}
+                {% set row_loop = loop %}
+                {% set tracking_slug = '{}.{}.{}.servicelinks.{}'.format(region_loop.index, column_loop.index, row_loop.index, service.id) %}
+                <li class="servicelinks__item">
+                    <a class="servicelinks__link" href="{{ service.href }}" data-id="{{ tracking_slug }}">{{ service.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+</aside>

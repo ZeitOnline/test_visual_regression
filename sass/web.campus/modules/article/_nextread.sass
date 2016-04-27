@@ -52,12 +52,12 @@
 		+scaled-font(12px)
 		letter-spacing: $letter-spacing-l
 		line-height: round-to-precision(12/13, $precision: 1)
-		margin-bottom: em(8px, 12px)
+		margin-bottom: remify(16px)
 		text-transform: uppercase
 		&--leserartikel
 			color: $color-community-primary
 		+respond-min($break-tablet-min)
-			margin-bottom: em(20px, 12px)
+			margin-bottom: remify(20px)
 
 	&__title
 		@extend %font-beckett

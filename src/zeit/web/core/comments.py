@@ -267,9 +267,8 @@ class Community(grokcore.component.GlobalUtility):
                 origin['replies'].append(sub_comment)
 
         # display comment count
-        thread['headline'] = '{} {}'.format(
-            total_comment_count,
-            'Kommentar' if total_comment_count == 1 else 'Kommentare')
+        thread['headline'] = zeit.web.core.template.pluralize(
+            total_comment_count, '{} Kommentare', '{} Kommentar', '{} Kommentare')
 
         # comments ad place
         thread['ad_place'] = int(page_size / 2 + 1)
@@ -602,9 +601,8 @@ def get_thread(unique_id, sort='asc', page=None, cid=None, invalidate_delta=5):
             origin['replies'].append(sub_comment)
 
     # display comment count
-    thread['headline'] = '{} {}'.format(
-        total_comment_count,
-        'Kommentar' if total_comment_count == 1 else 'Kommentare')
+    thread['headline'] = zeit.web.core.template.pluralize(
+        total_comment_count, '{} Kommentare', '{} Kommentar', '{} Kommentare')
 
     # comments ad place
     thread['ad_place'] = int(page_size / 2 + 1)
