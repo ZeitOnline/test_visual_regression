@@ -10,6 +10,7 @@ Change log for zeit.web
 
 - MAINT: Configure grunt watch task dynamically
 
+- FIX: Fix teaser layout
 
 2.74 (2016-04-26)
 -----------------
