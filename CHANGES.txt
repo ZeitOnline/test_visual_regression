@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.75 (unreleased)
+2.75 (2016-04-27)
 -----------------
 
 - HOTFIX: Make author list work again after area ranking was moved to core
