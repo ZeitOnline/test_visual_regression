@@ -12,8 +12,11 @@ Change log for zeit.web
 
 - FIX: Fix teaser layout, default ZCO article layout
 
+- FIX: Add new home routes and change pagination
 
 - FIX: Correct link
+
+- HOTFIX: Make author list work again after area ranking was moved to core
 
 
 2.74 (2016-04-26)

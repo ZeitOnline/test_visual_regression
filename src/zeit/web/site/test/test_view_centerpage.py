@@ -2162,3 +2162,10 @@ def test_zco_parquet_has_zco_styles(testbrowser):
 
     assert len(select(
         '[class^="teaser"][class*="__kicker--zco-parquet"]')) == 4
+
+
+def test_author_list_should_show_authors(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/autoren/j_random'}]
+    browser = testbrowser('/autoren/register_A')
+    assert len(browser.cssselect('.teaser-small')) == 1
