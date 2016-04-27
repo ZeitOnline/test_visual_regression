@@ -4,28 +4,9 @@
 		margin: $vertical-space $cp-padding
 	&__iframe
 		border: none
-
-.schnusel
-	background-color: rgba($zco-grey, 0.6)
-	color: $white
-	margin: $vertical-space 0
-	padding-bottom: rem(450px)
-	position: relative
-	+respond-min($break-tablet-min)
-		// compensate for $vertical-space
-		padding-bottom: calc(100% - 20px)
-		margin-left: rem(10px)
-		margin-right: rem(10px)
-	&__iframe
-		border: none
-		height: rem(450px)
-		margin: 0
-		position: absolute
-		top: 0
-		width: 100%
 		+respond-min($break-tablet-min)
-			margin: rem(28px)
+			padding: rem(30px) rem(30px) 0
 		+respond-min($break-desktop-min)
 			height: rem(550px)
-			margin: rem(34px)
+			padding: rem(40px) rem(35px) 0
 			width: rem(390px)
