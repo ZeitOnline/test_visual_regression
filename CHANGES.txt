@@ -10,7 +10,8 @@ Change log for zeit.web
 
 - MAINT: Configure grunt watch task dynamically
 
-- FIX: Fix teaser layout
+- FIX: Fix teaser layout, default ZCO article layout
+
 
 2.74 (2016-04-26)
 -----------------
