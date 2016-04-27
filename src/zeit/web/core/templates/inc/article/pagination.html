@@ -11,7 +11,7 @@
             {%- endif %}
         </a>
     {% else %}
-        <a class="article-pagination__link" href="{{ request.route_url('home') }}index" data-id="article-pager....startseite">
+        <a class="article-pagination__link" href="{%block pagination_link %}{{ request.route_url('home') }}index{% endblock %}" data-id="article-pager....startseite">
             <span class="article-pagination__button article-pagination__button--next">
                 {%- block pagination_button %}Startseite{% endblock -%}
                 {{- self.pagination_icon() -}}
