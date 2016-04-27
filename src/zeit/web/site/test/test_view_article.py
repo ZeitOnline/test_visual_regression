@@ -71,6 +71,10 @@ def test_article_types_have_back_to_home_button(testbrowser):
     button = select('.article-pagination .article-pagination__button')
     assert button[0].text == 'Startseite'
 
+    # test link
+    link = select('.article-pagination__link')[0].attrib['href']
+    assert '/index' in link
+
 
 def test_article_pagination(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect

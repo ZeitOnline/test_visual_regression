@@ -12,6 +12,7 @@ Change log for zeit.web
 
 - FIX: Fix teaser layout, default ZCO article layout
 
+- FIX: Add new home routes and change pagination
 
 - FIX: Correct link
 
