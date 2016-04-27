@@ -81,10 +81,6 @@
             <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                 <block href="http://xml.zeit.de/campus/article/paginated" />
             </container>
-            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5b" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
-                <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
-                </block>
-            </container>
             <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d1">
                 <block href="http://xml.zeit.de/campus/article/leserartikel" />
             </container>
@@ -128,9 +124,6 @@
 			<container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d3">
 				<block href="http://xml.zeit.de/campus/article/article-with-expired-image" />
 			</container>
-            <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d5">
-                <block href="http://xml.zeit.de/campus/article/column" />
-            </container>
 		</region>
 	</cluster>
 
@@ -143,12 +136,6 @@
                 <block href="http://xml.zeit.de/campus/article/leserartikel" />
             </container>
             <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e2">
-                <block href="http://xml.zeit.de/campus/article/03-spartipps" />
-            </container>
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e3">
-                <block href="http://xml.zeit.de/campus/article/column" />
-            </container>
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e4">
                 <block href="http://xml.zeit.de/campus/article/article-with-expired-image" />
             </container>
 		</region>
