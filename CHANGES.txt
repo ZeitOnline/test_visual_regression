@@ -4,6 +4,8 @@ Change log for zeit.web
 2.75 (unreleased)
 -----------------
 
+- ZON-3023: Use 1st teaser image as topic teaser image
+
 - ZON-3025: Change Wording on several places
 
 - ZON-2877: Update webtrekk javascript, make it configurable via settings
