@@ -4,25 +4,25 @@ Change log for zeit.web
 2.75 (unreleased)
 -----------------
 
+- HOTFIX: Make author list work again after area ranking was moved to core
+
 - ZON-3023: Use 1st teaser image as topic teaser image
 
 - ZON-3025: Change Wording on several places
 
 - ZON-2877: Update webtrekk javascript, make it configurable via settings
 
+- FIX: Fix teaser layout, default ZCO article layout
+
+- FIX: Add new home routes and change pagination for campus
+
+- FIX: Correct links in campus navigation
+
+- MAINT: Don't try another community request when the health check already failed
+
 - MAINT: Unify framebuilder banner_channel for ZON+ZCO
 
 - MAINT: Configure grunt watch task dynamically
-
-- FIX: Fix teaser layout, default ZCO article layout
-
-- FIX: Add new home routes and change pagination
-
-- FIX: Correct link
-
-- HOTFIX: Make author list work again after area ranking was moved to core
-
-- MAINT: Don't try another community request when the health check already failed
 
 
 2.74 (2016-04-26)
