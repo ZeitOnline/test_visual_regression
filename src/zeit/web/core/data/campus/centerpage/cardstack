@@ -82,10 +82,15 @@
         <container cp:type="cardstack" module="cardstack" visible="True" visible_mobile="True" cp:__name__="id-7f2aab8a-9cb3-4d1f-a25e-b95af573bf1e" card_id="erkaeltung-hausmittel-wirkung"/>
       </region>
     </cluster>
-    <cluster visible="True" area="id-7e329214-665f-457d-a624-94c47850f95d" kind="solo">
-      <region visible="True" hide-dupes="True" area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb7" kind="solo">
+    <cluster area="id-51a8299d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
+      <region area="id-52a2899d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+      </region>
+      <region area="id-53a2899d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
       </region>
     </cluster>
