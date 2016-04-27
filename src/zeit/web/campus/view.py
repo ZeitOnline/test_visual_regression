@@ -60,25 +60,6 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
         except TypeError:
             raise pyramid.httpexceptions.HTTPNotFound()
 
-    # TODO: Should be (will be) moved to core, used by ZON+ZCO. (tpuppe!)
-    @zeit.web.reify
-    def adcontroller_values(self):
-
-        banner_channel = self.request.GET.get('banner_channel', None)
-
-        if not banner_channel:
-            return
-
-        adc_levels = banner_channel.split('/')
-
-        return [('$handle', adc_levels[3] if len(adc_levels) > 3 else ''),
-                ('level2', adc_levels[0] if len(adc_levels) > 0 else ''),
-                ('level3', adc_levels[1] if len(adc_levels) > 1 else ''),
-                ('level4', adc_levels[2] if len(adc_levels) > 2 else ''),
-                ('$autoSizeFrames', True),
-                ('keywords', adc_levels[4] if len(adc_levels) > 4 else ''),
-                ('tma', '')]
-
 
 class Content(Base):
 
