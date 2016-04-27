@@ -268,7 +268,8 @@ class Community(grokcore.component.GlobalUtility):
 
         # display comment count
         thread['headline'] = zeit.web.core.template.pluralize(
-            total_comment_count, '{} Kommentare', '{} Kommentar', '{} Kommentare')
+            total_comment_count,
+            '{} Kommentare', '{} Kommentar', '{} Kommentare')
 
         # comments ad place
         thread['ad_place'] = int(page_size / 2 + 1)
