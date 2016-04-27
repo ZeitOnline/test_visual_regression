@@ -12,6 +12,9 @@ Change log for zeit.web
 
 - FIX: Fix teaser layout
 
+- FIX: Correct link
+
+
 2.74 (2016-04-26)
 -----------------
 
