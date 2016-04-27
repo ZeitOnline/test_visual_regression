@@ -5,8 +5,7 @@ import logging
 import zeit.solr.query
 
 import zeit.web
-import zeit.web.core.date
-import zeit.web.site.area.ranking
+import zeit.web.core.area.ranking
 
 
 log = logging.getLogger(__name__)
@@ -16,7 +15,7 @@ SANITY_BOUND = 500
 
 
 @zeit.web.register_area('overview')
-class Overview(zeit.web.site.area.ranking.Ranking):
+class Overview(zeit.web.core.area.ranking.Ranking):
 
     count = SANITY_BOUND
     sort_order = 'publikation'
