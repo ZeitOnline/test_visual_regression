@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3025: Change Wording on several places
 
+- MAINT: Configure grunt watch task dynamically
+
 
 2.74 (2016-04-26)
 -----------------
