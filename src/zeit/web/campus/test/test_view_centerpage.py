@@ -111,6 +111,9 @@ def test_campus_teaser_topic_has_correct_structure(testbrowser):
     assert len(select('.teaser-topic')) == 1
     assert len(select('.teaser-topic-main')) == 1
     assert len(select('.teaser-topic-item')) == 3
+    assert (
+        'cp-content/ig-1/cinema' in
+        select('.teaser-topic__media-item').pop().attrib['src'])
 
 
 def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):
@@ -121,6 +124,10 @@ def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):
     assert len(select('.teaser-topic-variant__media-container')) == 1
     assert len(select('.teaser-topic-variant .teaser-topic-wide')) == 1
     assert len(select('.teaser-topic-variant .teaser-topic-small')) == 2
+    assert (
+        'cp-content/ig-2/portrait__612x816' in
+        select( '.teaser-topic-variant__media-item').pop().attrib['src'])
+
 
 
 def test_campus_teaser_debate_has_correct_structure(testbrowser):
