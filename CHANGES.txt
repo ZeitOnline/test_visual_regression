@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - HOTFIX: Make author list work again after area ranking was moved to core
 
+- MAINT: Don't try another community request when the health check already failed
+
 
 2.74 (2016-04-26)
 -----------------
