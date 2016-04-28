@@ -44,7 +44,7 @@
     <region kind="topic" title="Thema-Region (Artikel)" available="zeit.campus.interfaces.IZCOContent">
         <area kind="topic-variant"
         apply_teaser_layouts_automatically="true"
-        first_teaser_layout="zco-wide"/>
+        first_teaser_layout="zco-topic-wide"/>
     </region>
     <region kind="topic" title="Thema-Region (Grafische Teaser)" available="zeit.campus.interfaces.IZCOContent">
         <area kind="topic-graphical"/>

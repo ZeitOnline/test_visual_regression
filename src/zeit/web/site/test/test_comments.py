@@ -164,7 +164,7 @@ def test_comment_author_roles_should_be_displayed(testbrowser):
     assert icon_freelancer[0].attrib['title'] == 'Freie Autorin'
 
 
-def test_comments_zon_template_respects_metadata(tplbrowser):
+def test_comments_zon_template_respects_metadata(tplbrowser, monkeypatch):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
 
@@ -172,6 +172,9 @@ def test_comments_zon_template_respects_metadata(tplbrowser):
     request.user = {'ssoid': 123, 'uid': '123', 'name': 'Max'}
     request.params = {'cid': None}
     request.route_url = lambda x: "http://foo/"
+
+    monkeypatch.setattr(
+        zeit.web.core.comments.Community, 'get_comment', lambda *args: {})
 
     view = zeit.web.site.view_article.Article(content, request)
     view.commenting_allowed = False
@@ -402,12 +405,11 @@ def test_comment_displays_total_reply_count(testbrowser):
 
 
 def test_comment_deeplink_should_have_page_number(application):
-    thread = zeit.web.core.comments.get_paginated_thread(
-        'http://xml.zeit.de/zeit-online/article/01',
-        cid=91)
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    thread = community.get_thread(
+        'http://xml.zeit.de/zeit-online/article/01', cid=91)
     assert int(thread['pages']['current']) == 2
 
-    thread = zeit.web.core.comments.get_paginated_thread(
-        'http://xml.zeit.de/zeit-online/article/01',
-        cid=92)
+    thread = community.get_thread(
+        'http://xml.zeit.de/zeit-online/article/01', cid=92)
     assert int(thread['pages']['current']) == 1

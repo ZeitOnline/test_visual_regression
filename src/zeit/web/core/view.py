@@ -601,8 +601,12 @@ class CommentMixin(object):
         return result
 
     @zeit.web.reify
+    def community(self):
+        return zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+
+    @zeit.web.reify
     def comments_loadable(self):
-        return zeit.web.core.comments.is_community_healthy()
+        return self.community.is_healthy()
 
     @zeit.web.reify
     def community_maintenance(self):
@@ -638,17 +642,11 @@ class CommentMixin(object):
         except ValueError:
             return
         cid = self.request.params.get('cid', None)
-        try:
-            return zeit.web.core.comments.get_paginated_thread(
-                self.context.uniqueId,
-                sort=sort,
-                page=page,
-                cid=cid)
-        except zeit.web.core.comments.ThreadNotLoadable:
-            return
+        return self.community.get_thread(
+            self.context.uniqueId, sort=sort, page=page, cid=cid)
 
     def get_comment(self, cid):
-        return zeit.web.core.comments.get_comment(self.context.uniqueId, cid)
+        return self.community.get_comment(self.context.uniqueId, cid)
 
     @zeit.web.reify
     def commenting_allowed(self):
@@ -712,7 +710,7 @@ class CommentMixin(object):
 
     @zeit.web.reify
     def comment_count(self):
-        return zeit.web.core.comments.comment_count(self.context.uniqueId)
+        return self.community.get_comment_count(self.context.uniqueId)
 
     @zeit.web.reify
     def comment_area(self):
@@ -926,8 +924,8 @@ class Content(CeleraOneMixin, CommentMixin, Base):
     # XXX Does this really belong on this class?
     @zeit.web.reify('default_term')
     def comment_counts(self):
-        return zeit.web.core.comments.get_counts(
-            [t.uniqueId for t in self.nextread])
+        return self.community.get_comment_counts(
+            *[t.uniqueId for t in self.nextread])
 
 
 @pyramid.view.view_config(route_name='health_check')
@@ -995,6 +993,24 @@ class FrameBuilder(CeleraOneMixin):
     @zeit.web.reify
     def cap_title(self):
         return self.request.GET.get('adlabel') or 'Anzeige'
+
+    @zeit.web.reify
+    def adcontroller_values(self):
+
+        banner_channel = self.request.GET.get('banner_channel', None)
+
+        if not banner_channel:
+            return
+
+        adc_levels = banner_channel.split('/')
+
+        return [('$handle', adc_levels[3] if len(adc_levels) > 3 else ''),
+                ('level2', adc_levels[0] if len(adc_levels) > 0 else ''),
+                ('level3', adc_levels[1] if len(adc_levels) > 1 else ''),
+                ('level4', adc_levels[2] if len(adc_levels) > 2 else ''),
+                ('$autoSizeFrames', True),
+                ('keywords', adc_levels[4] if len(adc_levels) > 4 else ''),
+                ('tma', '')]
 
 
 @pyramid.view.notfound_view_config()
@@ -1097,7 +1113,8 @@ def json_comment_count(request):
         article = zeit.content.article.interfaces.IArticle(context, None)
         articles = [article] if article is not None else []
 
-    counts = zeit.web.core.comments.get_counts(*[a.uniqueId for a in articles])
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    counts = community.get_comment_counts(*[a.uniqueId for a in articles])
     comment_count = {}
 
     for article in articles:

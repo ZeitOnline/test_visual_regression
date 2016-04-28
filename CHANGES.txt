@@ -1,10 +1,46 @@
 Change log for zeit.web
 =======================
 
-2.75 (unreleased)
+2.77 (unreleased)
 -----------------
 
+- Nothing changed yet.
+
+
+2.76 (2016-04-28)
+-----------------
+
+- ZON-3034: show Anzeige label mobile as well
+
+- ZON-3019: Place adplace7 via cpextra
+
+- ZON-2971: Mark ZEIT Campus teasers on ZON centerpages
+
+- BUG-409: Fix keywords for ZEIT Campus AdController
+
+
+2.75 (2016-04-27)
+-----------------
+
+- HOTFIX: Make author list work again after area ranking was moved to core
+
+- ZON-3023: Use 1st teaser image as topic teaser image
+
 - ZON-3025: Change Wording on several places
+
+- ZON-2877: Update webtrekk javascript, make it configurable via settings
+
+- FIX: Fix teaser layout, default ZCO article layout
+
+- FIX: Add new home routes and change pagination for campus
+
+- FIX: Correct links in campus navigation
+
+- MAINT: Don't try another community request when the health check already failed
+
+- MAINT: Unify framebuilder banner_channel for ZON+ZCO
+
+- MAINT: Configure grunt watch task dynamically
 
 
 2.74 (2016-04-26)
