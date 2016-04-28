@@ -9,6 +9,7 @@ import pyramid.threadlocal
 
 import zeit.cms.interfaces
 import zeit.content.cp.area
+import zeit.content.cp.blocks.automatic
 import zeit.content.cp.blocks.teaser
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
@@ -251,10 +252,7 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
         self.__parent = kw.pop('parent', None)
 
     def __hash__(self):
-        if getattr(self.layout, 'id', None):
-            return hash((self.layout.id, id(self)))
-        else:
-            raise NotImplementedError()
+        return hash((self.layout.id, id(self)))
 
     def __repr__(self):
         return object.__repr__(self)
@@ -289,3 +287,25 @@ def iter_without_fakeentry(self):
         except TypeError:
             continue
 zeit.content.cp.blocks.teaser.TeaserBlock.__iter__ = iter_without_fakeentry
+
+
+# Simply pass through whatever teaser layout is set in XML, ignoring the
+# availability rules.
+def layout_or_fake(instance):
+    result = instance.original_layout(instance)
+    # We still need to return None for __init__, so it sets the default layout.
+    if result or (instance.xml.get('module') in ['teaser', 'auto-teaser']):
+        return result
+    return zeit.content.cp.layout.BlockLayout(
+        id, id, areas=[], image_pattern=id)
+zeit.content.cp.blocks.teaser.TeaserBlock.original_layout = (
+    zeit.content.cp.blocks.teaser.TeaserBlock.layout.__get__)
+zeit.content.cp.blocks.teaser.TeaserBlock.layout = property(
+    layout_or_fake, zeit.content.cp.blocks.teaser.TeaserBlock.layout.__set__)
+zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.original_layout = (
+    zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.layout.__get__)
+zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.layout = property(
+    layout_or_fake,
+    zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.layout.__set__)
+
+zeit.content.cp.layout.BlockLayout.is_allowed = lambda *args, **kw: True
