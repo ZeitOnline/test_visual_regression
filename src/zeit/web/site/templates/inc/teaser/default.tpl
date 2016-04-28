@@ -34,7 +34,7 @@
                                 {% elif teaser is zett_content %}
                                     {{ lama.use_svg_icon('logo-zett-small', self.layout() + '__kicker-logo--zett svg-symbol--hide-ie', view.package, a11y=False) }}
                                 {% elif teaser is zco_content and area.kind != 'zco-parquet' %}
-                                    <span class="{{ '%s__kicker-logo-divider' | format(self.layout()) }}">{{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', view.package, a11y=False) }}</span>
+                                    <span class="{{ '%s__kicker-logo-divider' | format(self.layout()) }}">{{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}</span>
                                 {% elif teaser | is_liveblog %}
                                     <span class="{{ self.layout() }}__kicker-logo--liveblog{% if teaser.liveblog_is_live == False %} {{ self.layout() }}__kicker-logo--liveblog-closed{% endif %}">live</span>
                                 {% endif %}
