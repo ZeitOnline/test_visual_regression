@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.76 (unreleased)
+2.76 (2016-04-28)
 -----------------
 
 - ZON-3034: show Anzeige label mobile as well
