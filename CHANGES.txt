@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3019: Place adplace7 via cpextra
 
+- BUG-409: Fix keywords for ZEIT Campus AdController
+
 
 2.75 (2016-04-27)
 -----------------

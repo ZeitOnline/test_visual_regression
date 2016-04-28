@@ -13,7 +13,7 @@ def test_campus_adcontroller_values_return_values_on_hp(application):
         ('level3', ''),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
     view = zeit.web.campus.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest(path='/campus/index'))
@@ -29,7 +29,7 @@ def test_campus_adcontroller_values_return_values_on_cp(application):
         ('level3', ''),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
     view = zeit.web.campus.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest())
@@ -45,7 +45,7 @@ def test_campus_adcontroller_values_return_values_on_article(application):
         ('level3', 'thema'),
         ('level4', 'bafoeg_antraege_fuer_ue_50'),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
     view = view = zeit.web.campus.view_article.Article(
         content, pyramid.testing.DummyRequest())
