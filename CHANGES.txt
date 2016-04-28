@@ -4,7 +4,7 @@ Change log for zeit.web
 2.76 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-409: Fix keywords for ZEIT Campus AdController
 
 
 2.75 (2016-04-27)
