@@ -18,6 +18,10 @@
       <tag ns11:pytype="str" uuid="887a216f-e738-45fb-a83b-a31840fad535" url_value="" type="free">Partnerschaft</tag>
       <tag type="free" score="3" uuid="6eab8c5b-feb4-40da-954f-a1e0ebfba867" url_value="beziehung">Beziehung</tag>
     </rankedTags>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/campus/image/02-maedchen-koffer-zug/" type="jpg" title="Beziehung: Ich mach jetzt Schluss" alt="Beziehung: Ich mach jetzt Schluss" align="left" publication-date="" expires="">
+      <bu py:pytype="str">Alleine weiter</bu>
+      <copyright py:pytype="str" link="http://www.photocase.de/foto/257994-stock-photo-frau-schoen-ferien-urlaub-reisen-erwachsene-ferne-freiheit">© JoeEsco/photocase.de</copyright>
+    </image>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">2014212</attribute>
