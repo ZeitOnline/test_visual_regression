@@ -4,7 +4,13 @@ Change log for zeit.web
 2.77 (unreleased)
 -----------------
 
+- ZON-3039: Render ZCO column teasers as default in ZON
+
+- ZON-2870: Add login cut marks for framebuilder in campus, too
+
 - ZON-3031: Add advertorial teaser
+
+- MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 
 2.76 (2016-04-28)
