@@ -105,7 +105,11 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     if zeit.web.core.interfaces.IFrontendBlock.providedBy(module):
         layout = module
     else:
-        layout = zeit.content.cp.layout.get_layout(get_layout(module))
+        layout = get_layout(module)
+        if layout == 'hide':
+            layout = None
+        else:
+            layout = zeit.content.cp.layout.get_layout(layout)
 
     if variant_id is None:
         try:
