@@ -7,6 +7,10 @@
     <topic type="intern" href="http://xml.zeit.de/thema/test">
         <label>Science</label>
     </topic>
+    <image base-id="http://xml.zeit.de/campus/image/strumpfhose/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00">
+        <bu>Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
+        <copyright>© Warner Bros.</copyright>
+    </image>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Anne-Kathrin Gerstlauer</attribute>
