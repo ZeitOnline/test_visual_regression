@@ -6,7 +6,9 @@ Change log for zeit.web
 
 - ZON-3019: Place adplace7 via cpextra
 
-- ZON-2971: Mark zco teaser on zon centerpages
+- ZON-2971: Mark ZEIT Campus teasers on ZON centerpages
+
+- BUG-409: Fix keywords for ZEIT Campus AdController
 
 
 2.75 (2016-04-27)
