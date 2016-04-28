@@ -4,7 +4,7 @@ Change log for zeit.web
 2.77 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 
 2.76 (2016-04-28)
