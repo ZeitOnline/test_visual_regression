@@ -4,7 +4,7 @@ Change log for zeit.web
 2.76 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3019: Place adplace7 via cpextra
 
 
 2.75 (2016-04-27)
