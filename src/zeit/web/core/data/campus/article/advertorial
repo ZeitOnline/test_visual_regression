@@ -1,6 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/campus/image/02-maedchen-koffer-zug/" type="jpg" title="Beziehung: Ich mach jetzt Schluss" alt="Beziehung: Ich mach jetzt Schluss" align="left" publication-date="" expires="">
+      <bu py:pytype="str">Alleine weiter</bu>
+      <copyright py:pytype="str" link="http://www.photocase.de/foto/257994-stock-photo-frau-schoen-ferien-urlaub-reisen-erwachsene-ferne-freiheit">© JoeEsco/photocase.de</copyright>
+    </image>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
     <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
     <attribute name="article_id" ns="http://namespaces.zeit.de/CMS/print" xmlns:py="http://codespeak.net/lxml/objectify/pytype">556168</attribute>
