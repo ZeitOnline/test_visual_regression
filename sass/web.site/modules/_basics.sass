@@ -2,25 +2,6 @@ $color-exclamation-background:	$zon-grey
 
 @import "web.core/modules/basics"
 
-%commentcount
-	color: inherit
-	position: relative
-	white-space: nowrap
-	// paint a "border" with current link color and opacity
-	&:after
-		background-color: currentColor
-		bottom: -1px
-		content: ""
-		height: 1px
-		left: 0
-		opacity: .4
-		position: absolute
-		width: 100%
-	+on-interaction
-		color: inherit
-		&:after
-			opacity: .8
-
 %tags
 	border-radius: .3em
 	border: 1px solid $color-border

@@ -26,6 +26,12 @@
      */
     function poll( endpoint, interval, selector ) {
 
+        // If there are no elements on the page, do not poll. This is
+        // important for framebuilder-pages, and might be useful on our CPs.
+        if ( $( selector ).length === 0 ) {
+            return;
+        }
+
         setTimeout(function() {
             // Use page visibility API to skip request if page is hidden
             if ( document.hidden ) {
@@ -44,7 +50,6 @@
                             if ( data.hasOwnProperty( key ) ) {
                                 for ( var id in data[ key ] ) {
                                     if ( data[ key ].hasOwnProperty( id ) ) {
-
                                         $( '[data-unique-id="' + id + '"]' )
                                             .find( selector )
                                             .trigger( 'signals.update', data[ key ][ id ] );

@@ -83,7 +83,8 @@ module.exports = function(grunt) {
                 options: {
                     specify: [
                         project.sourceDir + 'sass/**/*.s{a,c}ss',
-                        '!' + project.sourceDir + 'sass/**/advertorial.*',
+                        // there is still ongoing work pls don't put it in again (as)
+                        // '!' + project.sourceDir + 'sass/**/advertorial.*',
                         '!' + project.sourceDir + 'sass/**/unresponsive.*',
                         '!' + project.sourceDir + 'sass/**/all-old-ie.*',
                         '!' + project.sourceDir + 'sass/**/ie-navi.*'
@@ -95,6 +96,16 @@ module.exports = function(grunt) {
             },
             'dev-all': {
                 options: {
+                    sourcemap: true,
+                    environment: 'development',
+                    outputStyle: 'expanded'
+                }
+            },
+            'dev-basic': {
+                options: {
+                    specify: [
+                        project.sourceDir + 'sass/**/screen.sass'
+                    ],
                     sourcemap: true,
                     environment: 'development',
                     outputStyle: 'expanded'
@@ -416,6 +427,23 @@ module.exports = function(grunt) {
     grunt.registerTask('svg', project.tasks.svg);
     grunt.registerTask('css', project.tasks.css);
     grunt.registerTask('lint', project.tasks.lint);
+
+    // Change watch task configuration on the fly
+    // Grunt runs tasks in a series, meaning a next task won't start until the previous has finished.
+    // Since the watch task doesn't ever finish by design, any task after the watch task won't be ran,
+    // which is why the watch task isn't a multitask.
+    grunt.registerTask('monitor', function(target) {
+        var config = grunt.config();
+
+        if ( target in config.compass ) {
+            grunt.log.writeln('Using task compass:' + target);
+            config.watch.compass.tasks = [ 'compass:' + target ];
+        }
+
+        // grunt.log.writeflags(config);
+        grunt.config('watch', config.watch);
+        grunt.task.run('watch');
+    });
 
 /*
  * Nice to have. Keep for later use.

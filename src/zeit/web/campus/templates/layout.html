@@ -63,6 +63,7 @@
     {% if settings('livereload') %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
+    {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
 </head>
 <body data-page-type="{{ view.type }}">
 
@@ -130,6 +131,6 @@
     {% if view.vgwort_url -%}
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
     {%- endif %}
-
+    {% include "zeit.web.core:templates/inc/cardstack/footer.tpl" %}
 </body>
 </html>

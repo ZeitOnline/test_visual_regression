@@ -1,12 +1,13 @@
+import collections
 import logging
+import uuid
 
 import grokcore.component
-import zope.component
+import zope.interface
 import zope.interface
 import pyramid.threadlocal
 
 import zeit.cms.interfaces
-import zeit.content.author.interfaces
 import zeit.content.cp.area
 import zeit.content.cp.blocks.teaser
 import zeit.content.cp.interfaces
@@ -24,6 +25,55 @@ import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
+
+
+@zope.interface.implementer(zeit.content.cp.interfaces.IArea)
+class Area(collections.OrderedDict):
+
+    factory = zeit.content.cp.area.AreaFactory(None)
+
+    def __init__(self, arg, **kw):
+        super(Area, self).__init__(
+            [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
+        self.kind = kw.pop('kind', 'solo')
+        self.xml = kw.pop('xml', self.factory.get_xml())
+        self.automatic = kw.pop('automatic', False)
+        self.__parent__ = kw.pop('parent', None)
+
+        for key in kw:
+            try:
+                assert not hasattr(self, key)
+                setattr(self, key, kw[key])
+            except:
+                continue
+
+    def append(self, value):
+        self['id-{}'.format(uuid.uuid1())] = value
+
+    def __hash__(self):
+        if self.kind:
+            return hash((self.kind, id(self)))
+        else:
+            raise NotImplementedError()
+
+    def __repr__(self):
+        return object.__repr__(self)
+
+    # XXX This is really crude, but since these Legacy-classes throw away
+    # their vivi-side objects, we can't get to the interfaces anymore,
+    # so a full re-implementation is just plain impossible.
+    # So we hard-code the only use-case that this should ever be called for,
+    # which is ITeaseredContent.
+    def select_modules(self, *interfaces):
+        for module in zeit.content.cp.interfaces.IRenderedArea(self).values():
+            if getattr(module, 'type', None) == 'teaser':
+                yield module
+
+
+@zope.interface.implementer(zeit.content.cp.interfaces.IRegion)
+class Region(Area):
+
+    factory = zeit.content.cp.area.RegionFactory(None)
 
 
 @zeit.web.register_filter
@@ -189,6 +239,25 @@ class Module(object):
         # XXX Yes, yes, it's bad practice. But milking the request object
         #     during traversal is ever so slightly more horrible. (ND)
         return pyramid.threadlocal.get_current_request()
+
+
+@zope.interface.implementer(zeit.web.core.interfaces.IBlock)
+class TeaserModule(Module, zeit.web.core.utils.nslist):
+
+    def __init__(self, arg, **kw):
+        zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
+        self.layout = kw.pop('layout', 'default')
+        self.type = kw.pop('type', 'teaser')
+        self.__parent = kw.pop('parent', None)
+
+    def __hash__(self):
+        if getattr(self.layout, 'id', None):
+            return hash((self.layout.id, id(self)))
+        else:
+            raise NotImplementedError()
+
+    def __repr__(self):
+        return object.__repr__(self)
 
 
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)

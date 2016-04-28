@@ -18,10 +18,6 @@ class Base(zeit.web.core.view.Base):
     pagetitle_suffix = u' | ZEIT Campus'
 
     @zeit.web.reify
-    def adcontroller_handle(self):
-        return ''
-
-    @zeit.web.reify
     def adcontroller_values(self):
         """Fill the adcontroller js object with actual values.
         Output in level strings only allows latin characters, numbers and

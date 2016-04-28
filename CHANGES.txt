@@ -1,14 +1,66 @@
 Change log for zeit.web
 =======================
 
-2.74 (unreleased)
+2.76 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.75 (2016-04-27)
+-----------------
+
+- HOTFIX: Make author list work again after area ranking was moved to core
+
+- ZON-3023: Use 1st teaser image as topic teaser image
+
+- ZON-3025: Change Wording on several places
+
+- ZON-2877: Update webtrekk javascript, make it configurable via settings
+
+- FIX: Fix teaser layout, default ZCO article layout
+
+- FIX: Add new home routes and change pagination for campus
+
+- FIX: Correct links in campus navigation
+
+- MAINT: Don't try another community request when the health check already failed
+
+- MAINT: Unify framebuilder banner_channel for ZON+ZCO
+
+- MAINT: Configure grunt watch task dynamically
+
+
+2.74 (2016-04-26)
+-----------------
+
+- ZON-2973: Generalise usage of cardstack in CPs and articles
+
+- ZON-2987: Add servicelinks module to ZEIT Campus
+
+- ZON-3003: ZEIT Campus polishing
+
+- ZON-3005: Share date logic for teasers between ZON and ZCO
 
 - ZON-2972: Introduce ZEIT Campus teasers in ZON parquet
 
 - ZON-2948: ZEIT Campus article header image landscape
 
 - ZON-2497: Add missing elements to centerpage of centerpages
+
+- ZON-2943: Move sharing tools to core and include them in Campus articles
+
+- ZON-2896: Add tracking ids to ZMO and ZCO navigation
+
+- ZON-2991: Fix links in ZCO navigation
+
+- ZON-2997: Support pagination for campus centerpages
+
+- MAINT: Adjust tracking IDs in article footer
+
+- BUG-405: Do not use duplicate IDs for infoboxes
+
+- FIX: Fix more Button in mobile navigation and add testing
 
 
 2.73 (2016-04-21)

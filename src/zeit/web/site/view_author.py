@@ -7,8 +7,8 @@ import zope.interface
 import logging
 
 from zeit.web.core.view import is_paginated
-from zeit.web.site.view_centerpage import LegacyArea
-from zeit.web.site.view_centerpage import LegacyModule
+import zeit.web.core.area.ranking
+import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 
 log = logging.getLogger(__name__)
@@ -94,10 +94,12 @@ class Author(zeit.web.site.view.Base):
     def area_favourite_content(self):
         modules = []
         for index, content in enumerate(self.context.favourite_content):
-            module = LegacyModule([content], layout='zon-small')
+            module = zeit.web.core.centerpage.TeaserModule(
+                [content], layout='zon-small')
             module.force_mobile_image = not bool(index)
             modules.append(module)
-        return LegacyArea(modules, kind='author-favourite-content')
+        return zeit.web.core.centerpage.Area(
+            modules, kind='author-favourite-content')
 
     @zeit.web.reify
     def area_articles(self):
@@ -109,7 +111,9 @@ class Author(zeit.web.site.view.Base):
             'author_comment_page_size', '10'))
 
         try:
-            comments = zeit.web.core.comments.get_user_comments(
+            community = zope.component.getUtility(
+                zeit.web.core.interfaces.ICommunity)
+            comments = community.get_user_comments(
                 self.context, page=1, rows=page_size)
             return comments and comments.get('page_total', 0) > 0
         except zeit.web.core.comments.UserCommentsException:
@@ -130,11 +134,13 @@ class Comments(Author):
             'author_comment_page_size', '10'))
 
         try:
-            comments_meta = zeit.web.core.comments.get_user_comments(
+            community = zope.component.getUtility(
+                zeit.web.core.interfaces.ICommunity)
+            comments_meta = community.get_user_comments(
                 self.context, page=page, rows=page_size)
             comments = comments_meta['comments']
-            return [UserCommentsArea(
-                [LegacyModule([c], layout='user-comment') for c in comments],
+            return [UserCommentsArea([zeit.web.core.centerpage.TeaserModule(
+                [c], layout='user-comment') for c in comments],
                 comments=comments_meta)]
         except zeit.web.core.comments.PagesExhaustedError:
             raise pyramid.httpexceptions.HTTPNotFound()
@@ -164,7 +170,7 @@ def create_author_article_area(
     return AuthorArticleRanking(area, favourite_content)
 
 
-class AuthorArticleRanking(zeit.web.site.area.ranking.Ranking):
+class AuthorArticleRanking(zeit.web.core.area.ranking.Ranking):
 
     def __init__(self, context, favourite_content):
         super(AuthorArticleRanking, self).__init__(context)
@@ -177,7 +183,7 @@ class AuthorArticleRanking(zeit.web.site.area.ranking.Ranking):
         return self.context._count
 
 
-class UserCommentsArea(LegacyArea):
+class UserCommentsArea(zeit.web.core.centerpage.Area):
 
     zope.interface.implements(zeit.web.core.interfaces.IPagination)
 

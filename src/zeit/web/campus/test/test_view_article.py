@@ -22,7 +22,9 @@ def test_article_pagination_on_single_page(testbrowser):
     assert len(select('.article-pager')) == 0
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Startseite'
+    link = select('.article-pagination__link')[0].attrib['href']
+    assert button.text.strip() == 'Mehr ZEIT Campus'
+    assert 'campus/index' in link
 
 
 def test_article_pagination_on_second_page(testbrowser):
@@ -48,7 +50,7 @@ def test_article_pagination_on_last_paginated_page(testbrowser):
     assert len(select('.article-pager')) == 1
     # assert len(select('.article-toc')) == 1
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Startseite'
+    assert button.text.strip() == 'Mehr ZEIT Campus'
 
 
 def test_article_pagination_on_komplettansicht(testbrowser):
@@ -60,7 +62,7 @@ def test_article_pagination_on_komplettansicht(testbrowser):
     assert len(select('.article-pager')) == 0
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Startseite'
+    assert button.text.strip() == 'Mehr ZEIT Campus'
 
 
 def test_article_pagination(testbrowser):
@@ -196,17 +198,34 @@ def test_campus_article_does_not_have_contentad(testbrowser):
     assert not select('#iq-artikelanker')
 
 
+def test_article_has_sharing_bar(testbrowser):
+    browser = testbrowser('campus/article/paginated')
+    assert len(browser.cssselect('.article-interactions')) == 1
+    assert len(browser.cssselect('.sharing-menu')) == 1
+    assert len(browser.cssselect('.sharing-menu__item')) == 3
+    assert len(browser.cssselect('.print-menu')) == 1
+
+
 def test_article_header_default_considers_image_layout(testbrowser):
     browser = testbrowser('/campus/article/simple')
     header = browser.cssselect('.article-header--default-no-image')
     assert len(header) == 1
 
+    # default layout "large" should use variant 'portrait'
+    browser = testbrowser('/campus/article/paginated')
+    header = browser.cssselect('.article-header--default-with-image')[0]
+    figure = header.cssselect('.article-header__media--portrait')[0]
+    image = figure.cssselect('img')[0]
+    assert image.get('data-variant') == 'portrait'
+
+    # layout "zco-portrait" should use variant 'portrait'
     browser = testbrowser('/campus/article/common')
     header = browser.cssselect('.article-header--default-with-image')[0]
     figure = header.cssselect('.article-header__media--portrait')[0]
     image = figure.cssselect('img')[0]
     assert image.get('data-variant') == 'portrait'
 
+    # layout "zco-wide" should use variant 'wide'
     browser = testbrowser('/campus/article/header-image-landscape')
     header = browser.cssselect('.article-header--default-with-image')[0]
     figure = header.cssselect('.article-header__media--wide')[0]

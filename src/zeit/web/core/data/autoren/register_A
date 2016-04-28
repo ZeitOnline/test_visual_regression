@@ -1,0 +1,66 @@
+<centerpage page="" type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <header_image/>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:03.346120+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:09:09.014473+00:00</attribute>
+    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:08:09.170784+00:00</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2015-03-24T17:09:09.014473+00:00</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:00.932648+00:00</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.bruenjes</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:4c01e23d-0d1b-4237-9684-1df77e22c1e9}</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;ICP2015&quot; module=&quot;zeit.content.cp.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <topiclinks/>
+  </head>
+  <body>
+    <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True" visible_mobile="True">
+      <region area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="query" count="4" hide-dupes="True" kind="author-list" visible="True" visible_mobile="True">
+        <module cp:__name__="id-4a960096-2165-4f32-bdf9-c38a34655c43" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <module cp:__name__="id-aa3d66b6-5a83-4c28-89de-78686d074a62" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <module cp:__name__="id-13b34132-500d-414b-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <module cp:__name__="id-097121c4-65ca-4171-950d-54989b5ed453" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <raw_query>+published:&quot;published&quot; +lastname_alpha:&quot;A&quot; +type:author</raw_query>
+        <page>1</page>
+      </region>
+    </cluster>
+  </body>
+  <feed/>
+</centerpage>

@@ -53,8 +53,12 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                 var control = $( this ),
                     expanded = control.attr( 'aria-expanded' ) === 'true';
 
-                event.preventDefault();
-                toggleElement( control, !expanded );
+                // in mobile view we sometimes want to follow the link
+                if ( !( window.Zeit.isMobileView() && $( this ).data( 'follow-mobile' ) ) ) {
+                    event.preventDefault();
+                    toggleElement( control, !expanded );
+                }
+
             });
 
             // toggle submenu "onFocusOut"
