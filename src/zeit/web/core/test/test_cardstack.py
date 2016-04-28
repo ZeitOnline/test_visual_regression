@@ -75,7 +75,8 @@ def test_cardstack_should_be_included_on_cps(app_settings, testbrowser):
         '{}/stacks/esi/head?static=true'.format(espi))
 
     assert browser.document.xpath('body//main//include/@src')[0] == (
-        '{}/stacks/kekse/esi/body?shareUrlQuerySuffix=stackId%3Dkekse'
+        '{}/stacks/erkaeltung-hausmittel-wirkung/esi/body?'
+        'shareUrlQuerySuffix=stackId%3Derkaeltung-hausmittel-wirkung'
         '&static=true'.format(espi))
 
     assert browser.document.xpath('body/include/@src')[0] == (
