@@ -4,6 +4,8 @@ Change log for zeit.web
 2.76 (unreleased)
 -----------------
 
+- ZON-3034: show Anzeige label mobile as well
+
 - ZON-3019: Place adplace7 via cpextra
 
 - BUG-409: Fix keywords for ZEIT Campus AdController
