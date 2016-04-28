@@ -121,6 +121,7 @@ def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):
     assert len(select('.teaser-topic-variant-main')) == 1
     assert len(select('.teaser-topic-variant-list')) == 1
     assert len(select('.teaser-topic-variant__media-container')) == 1
+    assert len(select('.teaser-topic-variant__media-container a')) == 1
     assert len(select('.teaser-topic-variant .teaser-topic-wide')) == 1
     assert len(select('.teaser-topic-variant .teaser-topic-small')) == 2
     assert (
