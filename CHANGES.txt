@@ -4,6 +4,8 @@ Change log for zeit.web
 2.77 (unreleased)
 -----------------
 
+- ZON-3039: Render ZCO column teasers as default in ZON
+
 - MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 
