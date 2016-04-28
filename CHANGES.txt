@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2870: Add login cut marks for framebuilder in campus, too
 
+- ZON-3031: Add advertorial teaser
+
 - MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 
