@@ -184,6 +184,32 @@
       </region>
     </cluster>
 
+        <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a64x" kind="solo" visible="True" visible_mobile="True">
+      <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64x" kind="solo" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-follow-us" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4x">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link"
+          href="http://xml.zeit.de/campus/article/link-noimage"
+          uniqueId="http://xml.zeit.de/campus/article/link-noimage"
+          year="2016" issue="1" ressort="Studium"
+          contenttype="link" publication-date="" expires=""
+          ns0:href="http://shop.zeit.de/sortiment/die-zeit-magazine/zeit-campus/2531/zeit-campus-2/16-was-wird-aus-mir?c=2834" date-last-modified="2015-02-25T07:29:19+00:00" date-first-released="2015-02-25T07:29:54.791058+00:00" date-last-published="2015-02-25T07:30:19.241979+00:00" last-semantic-change="2015-02-25T07:28:33.069549+00:00" author=""/>
+        </container>
+      </region>
+    </cluster>
+
+      <cluster area="id-41a8299d-b569-4c42-b713-db5dbdgffg86a64x" kind="solo" visible="True" visible_mobile="True">
+      <region area="id-41a2899d-b569-4c42-b713-db5dbdgfgf86a64x" kind="solo" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-follow-us" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4x">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link"
+          href="http://xml.zeit.de/campus/article/link"
+          uniqueId="http://xml.zeit.de/campus/article/link"
+          year="2016" issue="1" ressort="Studium"
+          contenttype="link" publication-date="" expires=""
+          ns0:href="http://shop.zeit.de/sortiment/die-zeit-magazine/zeit-campus/2531/zeit-campus-2/16-was-wird-aus-mir?c=2834" date-last-modified="2015-02-25T07:29:19+00:00" date-first-released="2015-02-25T07:29:54.791058+00:00" date-last-published="2015-02-25T07:30:19.241979+00:00" last-semantic-change="2015-02-25T07:28:33.069549+00:00" author=""/>
+        </container>
+      </region>
+    </cluster>
+
   </body>
   <feed xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></feed>
 </centerpage>
