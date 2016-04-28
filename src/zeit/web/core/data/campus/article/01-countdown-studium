@@ -13,10 +13,6 @@
     </author>
     <references>
     </references>
-    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/campus/image/01-junge-vor-unscharfem-hintergrund/" type="jpg" title="Countdown: Countdown zum Studium" alt="Countdown: Countdown zum Studium" align="left" publication-date="" expires="">
-      <bu py:pytype="str">Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.</bu>
-      <copyright py:pytype="str" link="http://www.photocase.de/fotos/207896">© &lt;&lt;bananarama&gt;&gt;/photocase.de</copyright>
-    </image>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">556771</attribute>
