@@ -192,3 +192,9 @@ def test_campus_cp_page_integration(testbrowser, datasolr):
     assert 'class="header-image"' in browser.contents
     # Ranking is kept
     assert 'cp-area--ranking' in browser.contents
+
+
+def test_campus_advertorial_teaser(testbrowser):
+    select = testbrowser(
+        '/campus/centerpage/teaser-advertorial').cssselect
+    assert len(select('.teaser-wide-small--advertorial')) == 1
