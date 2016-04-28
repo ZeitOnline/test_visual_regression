@@ -1,4 +1,4 @@
-{%- extends "zeit.web.campus:templates/inc/navigation/navigation.tpl" -%}
+{%- extends "zeit.web.campus:templates/inc/navigation/navigation.html" -%}
 
 {%- block login %}
     <!-- start::cut_mark::login -->

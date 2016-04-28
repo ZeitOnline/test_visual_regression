@@ -28,7 +28,7 @@
         <div class="page__content">
             <header class="header">
                 {%- block navigation -%}
-                    {%- include "zeit.web.campus:templates/inc/framebuilder/navigation.html" -%}
+                    {%- include "zeit.web.campus:templates/framebuilder/navigation.tpl" -%}
                 {%- endblock navigation -%}
             </header>
             {% block adplace_billboard %}

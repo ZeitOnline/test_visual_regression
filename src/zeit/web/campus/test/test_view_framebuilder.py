@@ -64,3 +64,8 @@ def test_campus_framebuilder_accepts_banner_channel_parameter(
     assert '' == driver.execute_script('return adcSiteInfo.level4')
     assert 'my,keywords' == driver.execute_script(
         'return adcSiteInfo.keywords')
+
+def test_campus_framebuilder_should_have_login_cut_mark(testbrowser):
+    browser = testbrowser('/campus/framebuilder')
+    assert 'start::cut_mark::login' in browser.contents
+    assert 'end::cut_mark::login' in browser.contents
