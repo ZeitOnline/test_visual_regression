@@ -1,6 +1,7 @@
+{# Quiz module template is used on CPs. (Inside articles, the macro is used.) #}
 <section class="quiz">
     {% if module.title %}
         <h2 class="quiz__title visually-hidden">{{ module.title }}</h2>
     {% endif %}
-    <iframe class="quiz__iframe" src="{{ module.src }}"></iframe>
+    <iframe class="quiz__iframe" src="{{ module.url }}?embedded"></iframe>
 </section>
