@@ -192,3 +192,52 @@ def test_campus_cp_page_integration(testbrowser, datasolr):
     assert 'class="header-image"' in browser.contents
     # Ranking is kept
     assert 'cp-area--ranking' in browser.contents
+
+
+def test_campus_teaser_no_image_fallback_works_as_expected(testbrowser):
+    select = testbrowser('/campus/centerpage/index-noimage').cssselect
+    assert (
+        '/default/teaser_image/' in
+        select('.teaser-lead-portrait__media-item')[0].attrib['src'])
+    assert (
+        '/campus/image/01-junge-vor-unscharfem-hintergrund/' in
+        select('.teaser-lead-portrait__media-item')[1].attrib['src'])
+    assert (
+        '/default/teaser_image/' in
+        select('.teaser-lead-cinema__media-item')[0].attrib['src'])
+    assert (
+        '/campus/image/02-maedchen-koffer-zug/' in
+        select('.teaser-lead-cinema__media-item')[1].attrib['src'])
+    assert (
+        '/default/teaser_image/' in
+        select('.teaser-wide-large__media-item')[0].attrib['src'])
+    assert (
+        '/campus/image/02-maedchen-koffer-zug/' in
+        select('.teaser-wide-large__media-item')[1].attrib['src'])
+    assert (
+        '/default/teaser_image/' in
+        select('.teaser-wide-small__media-item')[0].attrib['src'])
+    assert (
+        '/campus/image/02-maedchen-koffer-zug/' in
+        select('.teaser-wide-small__media-item')[1].attrib['src'])
+    assert (
+        '/default/teaser_image/' in
+        select('.teaser-square__media-item')[0].attrib['src'])
+    assert (
+        '/campus/image/01-junge-vor-unscharfem-hintergrund/' in
+        select('.teaser-square__media-item')[1].attrib['src'])
+    assert (
+        '/default/teaser_image/' in
+        select('.teaser-graphical__media-item')[0].attrib['src'])
+    assert (
+        '/campus/image/01-junge-vor-unscharfem-hintergrund/' in
+        select('.teaser-graphical__media-item')[1].attrib['src'])
+    assert (
+        '/default/teaser_image/' in
+        select('.teaser-topic-variant__media-item')[0].attrib['src'])
+    assert (
+        '/default/teaser_image/' in
+        select('.teaser-topic-small__media-item')[0].attrib['src'])
+    assert (
+        '/campus/image/02-maedchen-koffer-zug/' in
+        select('.teaser-topic-small__media-item')[1].attrib['src'])

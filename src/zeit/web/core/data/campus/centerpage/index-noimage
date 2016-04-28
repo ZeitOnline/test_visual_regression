@@ -73,22 +73,6 @@
   </head>
   <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-        <cluster visible="True" visible_mobile="True" area="id-8458d4a8-7cee-4b15-be25-0e0e36e327cd" kind="solo">
-          <region visible="True" visible_mobile="True" hide-dupes="True" area="id-0b68c298-c9de-4a92-b0f4-d1ac839b2ae9" kind="solo">
-            <container cp:type="headerimage" module="headerimage" visible="True" visible_mobile="True" cp:__name__="id-3e6bf101-bd4b-49a7-a27e-82e2df102cd2" supertitle="Advertorial" title="IWC Schaffhausen">
-
-            </container>
-          </region>
-        </cluster>
-    <cluster area="id-fc1778e9-af6d-454d-b601-1d93126371ec" kind="solo">
-      <region hide-dupes="True" area="id-357c38d5-42cc-4e3f-9f94-c7a375539ac2" kind="solo">
-        <container cp:type="markup" module="markup" cp:__name__="id-7c959f63-b6db-40f1-a124-56eae525577f" align="center">
-          <text>
-            <p>An der Rente doktern Regierungen seit Jahrzehnten herum. Gebracht hat es bislang wenig, das System ist auf Dauer nicht finanzierbar. Fünf Vorschläge für radikale Reformen</p>
-          </text>
-        </container>
-      </region>
-    </cluster>
  <cluster area="id-41a8299d-b569-4c42-b713-db5dbd86a64f" kind="solo" visible="True" visible_mobile="True">
       <region area="id-41a2899d-b569-4c42-b713-db5dbd86a64f" kind="solo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-lead-portrait" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
@@ -129,20 +113,7 @@
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd86a62f" kind="duo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-wide-large" visible="True" visible_mobile="True" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium-noimage" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium-noimage"></block>
-        </container>
-      </region>
-    </cluster>
-
-        <cluster area="id-41a8299d-b569-4c42-b713hghg-d5bdbd86a64f" kind="duo" visible="True" visible_mobile="True">
-      <region area="id-41a2899d-b569-4c42-b713hggh-bd5dbd86a63f" kind="duo" visible="True" visible_mobile="True">
-        <container cp:type="teaser" module="zco-wide-large" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e35d7bf3be4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
-        </container>
-      </region>
-      <region area="id-41a2899d-b569-4c42-b713-bd5dbd86a62f" kind="duo" visible="True" visible_mobile="True">
-        <container cp:type="teaser" module="zco-wide-large" visible="True" visible_mobile="True" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
       </region>
     </cluster>
@@ -155,12 +126,12 @@
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a63f" kind="trio" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium-noimage" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium-noimage"></block>
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a62f" kind="trio" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-wide-small" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be4b">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/03-spartipps" uniqueId="http://xml.zeit.de/campus/article/03-spartipps"></block>
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/03-spartipps"></block>
         </container>
       </region>
     </cluster>
@@ -173,20 +144,7 @@
       </region>
       <region area="id-41a2899d-b569-4c42-b713-db5ddb86a64d" kind="duo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3b4eb">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen-noimage" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen-noimage"></block>
-        </container>
-      </region>
-    </cluster>
-
-        <cluster area="id-41a8299d-b569-4c42-b713-dgffgb5dbd68a64f" kind="duo" visible="True" visible_mobile="True">
-      <region area="id-41a2899d-b569-4c42-b713-db5ddfgfgb86a64e" kind="duo" visible="True" visible_mobile="True">
-        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b75a-e357db3fbe4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
-        </container>
-      </region>
-      <region area="id-41a2899d-b569-4c42-b713-db5ddb86a64d" kind="duo" visible="True" visible_mobile="True">
-        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3b4eb">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
         </container>
       </region>
     </cluster>
@@ -201,7 +159,7 @@
       </region>
       <region area="id-41a2899d-b569-4c42-b713-db5dbd86a01c" kind="trio">
         <container cp:type="teaser" module="zco-graphical" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
-          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen-noimage"></block>
+          <block href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
       </region>
       <region area="id-41a2899d-b569-4c42-b713-db5dbd86a02c" kind="trio">
@@ -211,32 +169,17 @@
       </region>
     </cluster>
 
-        <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924ef86" kind="topic">
-      <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d52" kind="topic" title="Prekariat statt Professur?" supertitle="Promotion" read_more_url="http://xml.zeit.de/zeit-online/index">
-        <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
-        <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e6">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-julia-zange" />
-        </container>
-        <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
-        </container>
-        <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
-          <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
-        </container>
-      </region>
-    </cluster>
-
      <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924ef862" kind="topic">
       <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d522" kind="topic-variant" title="Prekariat statt Professur?" supertitle="Promotion" xread_more_url="http://xml.zeit.de/zeit-online/index">
         <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
         <container cp:type="teaser" module="zco-topic-wide" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72fg1f3bcb4e6">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-julia-zange" />
+          <block href="http://xml.zeit.de/campus/article/01-countdown-studium-noimage" />
+        </container>
+          <container cp:type="teaser" module="zco-topic-small" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
+          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen-noimage" />
         </container>
         <container cp:type="teaser" module="zco-topic-small" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
-        </container>
-        <container cp:type="teaser" module="zco-topic-small" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
-          <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
+          <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" />
         </container>
       </region>
     </cluster>
