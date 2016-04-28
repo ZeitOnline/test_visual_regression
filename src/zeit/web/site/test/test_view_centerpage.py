@@ -2161,7 +2161,7 @@ def test_zco_parquet_has_zco_styles(testbrowser):
     assert len(select('.parquet-meta__logo--zco')) == 1
 
     assert len(select(
-        '[class^="teaser"][class*="__kicker--zco-parquet"]')) == 4
+        '[class^="teaser"][class*="__kicker--zco-parquet"]')) == 2
 
 
 def test_author_list_should_show_authors(testbrowser):

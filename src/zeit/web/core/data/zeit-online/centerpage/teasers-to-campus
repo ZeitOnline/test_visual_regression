@@ -71,10 +71,48 @@
 	<cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo">
 		<region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
 			<container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-fullwidth" visible="True">
-				<block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" />
+				<block href="http://xml.zeit.de/campus/article/paginated" />
 		</container>
 		</region>
 	</cluster>
+
+    <cluster area="feature" visible="True">
+        <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
+            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                <block href="http://xml.zeit.de/campus/article/paginated" />
+            </container>
+            <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d1">
+                <block href="http://xml.zeit.de/campus/article/leserartikel" />
+            </container>
+            <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d5">
+                <block href="http://xml.zeit.de/campus/article/column" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d8">
+                <block href="http://xml.zeit.de/campus/article/column" />
+            </container>
+        </region>
+        <region area="id-da65a250-0482-4ce8-b662-5ca24af05062" visible="True" kind="minor">
+            <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60594" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                <block href="http://xml.zeit.de/campus/article/paginated" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d7">
+                <block href="http://xml.zeit.de/campus/article/column" />
+            </container>
+        </region>
+    </cluster>
+
+    <cluster area="id-7e329214-665f-457d-a624-94c47850f95d">
+        <region area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb7" kind="duo">
+            <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7" cp:type="teaser" module="zon-square">
+                <block href="http://xml.zeit.de/campus/article/paginated" />
+            </container>
+        </region>
+        <region area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87ba" kind="duo">
+            <container cp:__name__="id-908960fb-7e9f-4e5f-bb94-ad0893e6fcf0" cp:type="teaser" module="zon-square">
+                <block href="http://xml.zeit.de/campus/article/paginated" />
+            </container>
+        </region>
+    </cluster>
 
 
 	<!-- Normales Parkett mit Campus Teasern -->
@@ -82,9 +120,6 @@
 		<region visible="True" area="id-1ca0a3c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Normales Parkett mit Campus Teasern">
 			<container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d1">
 				<block href="http://xml.zeit.de/campus/article/leserartikel" />
-			</container>
-			<container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d2">
-				<block href="http://xml.zeit.de/campus/article/03-spartipps" />
 			</container>
 			<container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d3">
 				<block href="http://xml.zeit.de/campus/article/article-with-expired-image" />
@@ -101,12 +136,6 @@
                 <block href="http://xml.zeit.de/campus/article/leserartikel" />
             </container>
             <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e2">
-                <block href="http://xml.zeit.de/campus/article/03-spartipps" />
-            </container>
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e3">
-                <block href="http://xml.zeit.de/campus/article/column" />
-            </container>
-            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e4">
                 <block href="http://xml.zeit.de/campus/article/article-with-expired-image" />
             </container>
 		</region>

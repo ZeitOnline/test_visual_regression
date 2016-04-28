@@ -51,6 +51,9 @@ $layout: ".teaser-square"
 		letter-spacing: $zon-letter-spacing-m
 		line-height: 1.2857
 		margin-bottom: .5em
+		&--zco
+			@extend %teaser-kicker--zco
+			color: #fff
 	&__kicker-logo
 		&--zett
 			@extend %teaser-kicker-logo--zett
@@ -123,6 +126,13 @@ $layout: ".teaser-square"
 		width: em(183px)
 		+old-ie
 			display: block
+
+	&__zco-logo
+		$logo_format: (185/33)
+		height: remify(146px/$logo_format)
+		margin-top: remify(26px)
+		vertical-align: middle
+		width: remify(146px)
 
 	&--graphic
 		#{$layout}__container

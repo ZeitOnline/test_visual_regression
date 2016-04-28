@@ -23,8 +23,8 @@ class Base(zeit.web.core.view.Base):
         Output in level strings only allows latin characters, numbers and
         underscore.
         """
-        keywords = ','.join(self.adwords)
 
+        keywords = 'zeitonline,zeitcampus'
         topiclabel = getattr(self, 'topic_label', '')
         topiclabel = zeit.web.core.template.format_iqd(topiclabel)
 
