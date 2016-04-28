@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3019: Place adplace7 via cpextra
 
+- ZON-2971: Mark zco teaser on zon centerpages
+
 
 2.75 (2016-04-27)
 -----------------
