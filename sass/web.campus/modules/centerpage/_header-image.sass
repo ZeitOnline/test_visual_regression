@@ -1,3 +1,9 @@
++keyframes(moving-background)
+	0%
+		+transform(translateY(0%))
+	100%
+		+transform(translateY(-23%))
+
 .header-image
 	margin: remify(0 0 10px)
 	position: relative
@@ -17,7 +23,13 @@
 	&__media
 		background-color: $greyish-white
 		height: 0
+		overflow: hidden
 		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+
+	&__media-container
+		&--animated
+			+animation(moving-background 35s ease-in-out infinite alternate)
+			// +animation(moving-background 10s linear 1s forwards)
 
 	&__heading
 		margin: 0
@@ -29,6 +41,8 @@
 			+align-items(center)
 			bottom: 0
 			left: 0
+			padding-bottom: 0
+			padding-top: 0
 			position: absolute
 			right: 0
 			top: 0
@@ -53,6 +67,8 @@
 
 		&__heading
 			padding: remify(30px 0 15px)
+			&--overlay
+				padding: remify(0 $page-padding)
 
 		&__kicker
 			+scaled-font(48px, $title-factor)
