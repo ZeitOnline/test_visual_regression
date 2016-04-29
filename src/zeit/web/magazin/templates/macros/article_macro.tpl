@@ -295,6 +295,7 @@
 {% macro meta_author(authors, class="article__head__meta__author", titlecase=True) %}
     {%- if authors -%}
         {%- for author in authors -%}
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
             {%- if titlecase -%}
                 {{ author.prefix | title }}
             {% else %}
@@ -306,6 +307,7 @@
                 <span class="{{ class }}"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
             {%- endif -%}
             {{ author.suffix }}
+            </span>
         {%- endfor -%}
     {%- endif -%}
 {% endmacro %}
