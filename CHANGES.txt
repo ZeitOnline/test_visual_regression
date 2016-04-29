@@ -22,6 +22,10 @@ Change log for zeit.web
 
 - ZON-3052: Resize ZCO kicker logo on ZON topic teaser
 
+- ZON-3051: move print/pdf function to core
+
+- ZON-3054: change navi tracking
+
 - MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 - FIX: Fix navi links
