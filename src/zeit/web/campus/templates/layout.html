@@ -51,6 +51,17 @@
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+    <script>
+        // trigger print dialog after "Artikel drucken" was clicked
+        if ( location.search.indexOf( 'print' ) !== -1 ) {
+            if ( window.addEventListener ) {
+                window.addEventListener( 'load', window.print, false );
+            } else if ( window.attachEvent ) {
+                window.attachEvent( 'onload', window.print );
+            }
+        }
+    </script>
+
     {% if toggles('third_party_modules') %}
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>
