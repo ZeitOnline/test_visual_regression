@@ -23,4 +23,4 @@ class HeaderImage(zeit.web.core.centerpage.Module):
 
     @zeit.web.reify
     def animate(self):
-        return self.context.animate
+        return getattr(self.context, 'animate', False)
