@@ -11,17 +11,23 @@
 {% endblock page_wrap_inner %}
 
 {% block navigation %}
-    <nav id="js-main-nav" class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <nav id="js-main-nav" class="main-nav is-full-width is-compact">
         <div class="main-nav__wrap">
-            {% block longform_logo %}
-            <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
-                <meta itemprop="name" content="Zeit Online">
-                <div class="main-nav__logo__wrap">
-                    {{- lama.use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', view.package) -}}
-                    {{- lama.use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', view.package) -}}
-                </div>
-            </a>
-            {% endblock longform_logo %}
+            <div class="main-nav__logo" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                {% block longform_logo -%}
+                <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index" data-id="zmo-topnav.1.1..logo">
+                    <meta itemprop="name" content="ZEITmagazin">
+                    <div class="main-nav__logo__wrap" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                        {{- lama.use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', view.package) -}}
+                        {{- lama.use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', view.package) -}}
+                        {# The "logo" dimensions must not exceed 600x60 -#}
+                        <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zmo.png">
+                        <meta itemprop="width" content="600">
+                        <meta itemprop="height" content="56">
+                    </div>
+                </a>
+                {% endblock longform_logo -%}
+            </div>
             <div class="main-nav__menu">
                 <aside class="main-nav__sharing">
                     <a href="http://twitter.com/home?status={{request.host}}{{request.path_info}}"
@@ -40,14 +46,15 @@
 {% endblock adplace_billboard %}
 
 {% block content %}
-	<article class="article article--longform" itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemscope>
+	<article class="article article--longform" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
+        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
 		<div class="article__wrap">
 			<div class="article__head-wrap">
 
 				{{ blocks[view.header_elem|block_type](view.header_elem) }}
 
 				<header class="article__title-wrap">
-					<h1>
+					<h1 itemprop="headline">
 						{{ blocks.title() }}
 					</h1>
 					<div class="article__head__meta">

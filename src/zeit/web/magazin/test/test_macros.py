@@ -291,9 +291,12 @@ def test_macro_meta_author_should_produce_html_if_author_exists(
                 'location': ', Bern', 'suffix': 'und'},
                {'prefix': '', 'href': '', 'name': 'Anna', 'location': '',
                 'suffix': ''}]
-    markup = ('Von<a href="www.zeit.de" class="test" itemprop="url"><span '
-              'itemprop="name">Tom</span></a>, Bernund<span class="test">'
-              '<span itemprop="name">Anna</span></span>')
+    markup = (
+        'Von<span itemprop="author" itemscope itemtype="http://schema.org/'
+        'Person"><a href="www.zeit.de" class="test" itemprop="url"><span '
+        'itemprop="name">Tom</span></a>, Bern</span>und<span itemprop="author"'
+        ' itemscope itemtype="http://schema.org/Person"><span class="test">'
+        '<span itemprop="name">Anna</span></span></span>')
     lines = tpl.module.meta_author(authors, test_class).splitlines()
     output = ''
     for line in lines:
@@ -495,38 +498,6 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
         output += line.strip()
 
     assert '<a href="http://www.test.de">' in output
-
-
-def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-
-    request = mock.Mock()
-    view = mock.Mock()
-
-    # logged in
-    request.user = {'ssoid': '12345'}
-    markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
-    logged = 'Account'
-    module = tpl.make_module({'request': request, 'view': view})
-    lines = module.main_nav('true', request).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert markup in output
-
-    # logged out
-    request.user = {}
-    markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
-    unlogged = 'Anmelden'
-    module = tpl.make_module({'request': request, 'view': view})
-    lines = module.main_nav('true', request).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert markup in output
 
 
 def test_macro_copyrights(jinja2_env):

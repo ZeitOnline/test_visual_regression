@@ -30,6 +30,9 @@ Change log for zeit.web
 
 - ZON-3051: move print/pdf function to core
 
+- ZON-3032: Update schema.org publisher microdata
+
+
 2.76 (2016-04-28)
 -----------------
 
