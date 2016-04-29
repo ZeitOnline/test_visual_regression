@@ -41,15 +41,21 @@
 
 {% macro main_nav(is_full_width, request, is_advertorial=False, is_main_h1=True) -%}
     {% set title_tag = 'h1' if is_main_h1 else 'div' %}
-    <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <nav class="main-nav has-hover {% if is_full_width %}is-full-width{% endif %}" id="js-main-nav">
         <div class="main-nav__wrap">
-            <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index" data-id="zmo-topnav.1.1..logo">
-                <meta itemprop="name" content="Zeit Online">
-                <{{ title_tag }} class="main-nav__logo__wrap">
-                    {{ use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', view.package) }}
-                    {{ use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', view.package) }}
-                </{{ title_tag }}>
-            </a>
+            <div class="main-nav__logo" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index" data-id="zmo-topnav.1.1..logo">
+                    <meta itemprop="name" content="ZEITmagazin">
+                    <{{ title_tag }} class="main-nav__logo__wrap" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                        {{ use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', view.package) }}
+                        {{ use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', view.package) }}
+                        {# The "logo" dimensions must not exceed 600x60 -#}
+                        <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zmo.png">
+                        <meta itemprop="width" content="600">
+                        <meta itemprop="height" content="56">
+                    </{{ title_tag }}>
+                </a>
+            </div>
             <div class="main-nav__menu">
                 {% if is_advertorial %}
                     <div class="advertorial-navigation-title">Anzeige</div>
@@ -58,7 +64,7 @@
                 <header class="main-nav__menu__head" id="js-main-nav-trigger">
                     <div class="main-nav__menu__head__hamburger">Menu Öffnen</div>
                 </header>
-                <div class="main-nav__menu__content" id="js-main-nav-content">
+                <div class="main-nav__menu__content" id="js-main-nav-content" itemscope itemtype="http://schema.org/SiteNavigationElement">
                     <div class="main-nav__section main-nav__ressorts">
                         <div class="main-nav__ressort-list">
                             <a href="{{ request.route_url('home') }}zeit-magazin/mode-design/index" data-id="zmo-topnav.2.1..mode design">Mode &amp; Design</a>
