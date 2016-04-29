@@ -48,8 +48,7 @@ def test_campus_teaser_wide_small_should_not_display_its_image_on_mobile(
 
     for image in teaser_images:
         assert ('teaser-wide-small__media--force-mobile' in
-                image.get_attribute('class')) or (
-                    not image.is_displayed())
+                image.get_attribute('class')) or (not image.is_displayed())
 
     driver.set_window_size(768, 800)
     for image in teaser_images:
@@ -111,6 +110,9 @@ def test_campus_teaser_topic_has_correct_structure(testbrowser):
     assert len(select('.teaser-topic')) == 1
     assert len(select('.teaser-topic-main')) == 1
     assert len(select('.teaser-topic-item')) == 3
+    assert (
+        'cp-content/ig-1/cinema' in
+        select('.teaser-topic__media-item').pop().attrib['src'])
 
 
 def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):
@@ -121,6 +123,9 @@ def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):
     assert len(select('.teaser-topic-variant__media-container')) == 1
     assert len(select('.teaser-topic-variant .teaser-topic-wide')) == 1
     assert len(select('.teaser-topic-variant .teaser-topic-small')) == 2
+    assert (
+        'cp-content/ig-2/portrait__612x816' in
+        select('.teaser-topic-variant__media-item').pop().attrib['src'])
 
 
 def test_campus_teaser_debate_has_correct_structure(testbrowser):
@@ -187,3 +192,9 @@ def test_campus_cp_page_integration(testbrowser, datasolr):
     assert 'class="header-image"' in browser.contents
     # Ranking is kept
     assert 'cp-area--ranking' in browser.contents
+
+
+def test_campus_advertorial_teaser(testbrowser):
+    select = testbrowser(
+        '/campus/centerpage/teaser-advertorial').cssselect
+    assert len(select('.teaser-wide-small--advertorial')) == 1
