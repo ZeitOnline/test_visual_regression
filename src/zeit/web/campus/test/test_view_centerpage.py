@@ -151,7 +151,7 @@ def test_headerimage_has_appropriate_html_structure(testbrowser):
     header = browser.cssselect('.header-image')
     image = header[0].cssselect('.header-image__media-item')[0]
     assert len(header[0].cssselect('.header-image__heading--overlay')) == 1
-    assert len(header[1].cssselect('.header-image__heading--overlay')) == 0
+    assert len(header[2].cssselect('.header-image__heading--overlay')) == 0
     assert image.get('data-variant') == 'cinema'
     assert not image.get('data-mobile-variant')
 

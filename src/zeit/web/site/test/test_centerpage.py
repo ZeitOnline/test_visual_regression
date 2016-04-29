@@ -320,3 +320,15 @@ def test_zon_campus_teaser_small_minor_has_campus_signet(testbrowser):
     logo = '.teaser-small-minor__kicker-logo--zco'
     svg = select('{} {}'.format(teaser, logo))
     assert svg[0].xpath('title')[0].text == 'ZEIT Campus'
+
+
+def test_zon_campus_teaser_topic_has_campus_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-campus').cssselect
+    teaser = select('.teaser-topic-item')
+    svg = select('.teaser-topic-item__kicker-logo--zco')
+    # 4 teaser, but only 3 sighnets
+    assert len(teaser) == 3
+    assert len(svg) == 3
+    assert svg[0].xpath('title')[0].text == 'ZEIT Campus'
+    assert svg[1].xpath('title')[0].text == 'ZEIT Campus'
+    assert svg[2].xpath('title')[0].text == 'ZEIT Campus'
