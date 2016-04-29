@@ -84,6 +84,13 @@
         </container>
       </region>
     </cluster>
+    <cluster area="id-393cb458-115d-40fe-b6a1-383a1ed190cc" kind="solo">
+      <region area="id-49097153-445f-42ab-15-c4b81a2ff9b299" kind="solo">
+        <container cp:type="headerimage" module="headerimage" cp:__name__="id-5703525b-6449-45f3-93fb-1b281a9af480" supertitle="Jurastudium" title="Das härteste Studium des Landes" animate="True">
+          <image>http://xml.zeit.de/campus/image/strumpfhose/</image>
+        </container>
+      </region>
+    </cluster>
     <cluster area="id-41a8299d-b569-4c42-b713-d5bdbd86a64f" kind="duo">
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd86a64f" kind="duo">
         <container cp:type="teaser" module="zco-wide-large" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e35d7bf3be4b">
