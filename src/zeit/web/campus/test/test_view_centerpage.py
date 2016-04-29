@@ -248,3 +248,9 @@ def test_campus_teaser_no_image_fallback_works_as_expected(testbrowser):
     assert (
         '/campus/image/cover/' in
         select('.packshot__media-item')[1].attrib['src'])
+
+
+def test_campus_advertorial_teaser(testbrowser):
+    select = testbrowser(
+        '/campus/centerpage/teaser-advertorial').cssselect
+    assert len(select('.teaser-wide-small--advertorial')) == 1
