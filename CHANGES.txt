@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-2504: Add Highlight-Box (Quiz/Cards) to ZEIT Campus
 
+- ZON-3048: change sharing colors
+
 - MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 - FIX: Fix navi links
