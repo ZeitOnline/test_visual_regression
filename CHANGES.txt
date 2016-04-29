@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - FIX: Fix navi links
 
+- ZON-3048: Change sharing bar colors
+
 
 2.76 (2016-04-28)
 -----------------
