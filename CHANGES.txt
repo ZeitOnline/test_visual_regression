@@ -12,7 +12,11 @@ Change log for zeit.web
 
 - ZON-2974: Add ZEIT Campus launch gimmick (animated header image)
 
+- ZON-3033: Introduce Fallback Image for ZCO Teaser
+
 - MAINT: Use any teaser layout that is set in XML, regardless of availability rules
+
+- FIX: Fix navi links
 
 
 2.76 (2016-04-28)
