@@ -40,7 +40,8 @@
 {% endblock adplace_billboard %}
 
 {% block content %}
-	<article class="article article--longform" itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemscope>
+	<article class="article article--longform" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
+        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
 		<div class="article__wrap">
 			<div class="article__head-wrap">
 

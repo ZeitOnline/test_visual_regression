@@ -29,7 +29,8 @@
 {% endblock navigation %}
 
 {% block content %}
-    <article class="article" id="js-article" itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemscope>
+    <article class="article" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
+        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         <div class="article__wrap{% if view.is_wrapped %} article__wrap--is-wrapped{% endif %}">
             {% block article_header %}
                 {% if view.current_page.number == 0 %}
