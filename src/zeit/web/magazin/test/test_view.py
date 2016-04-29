@@ -687,9 +687,9 @@ def test_navigation_should_show_logged_in_user_correctly(
     assert css('.main-nav__avatar')[0].attrib['style'] == (
         'background-image: url(/picture.jpg)')
     assert css('a')[0].attrib['href'] == '/profile'
-    assert css('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
+    assert css('a')[0].attrib['data-id'] == 'zmo-topnav.1.4..account'
     assert css('a')[1].attrib['href'] == '/logout'
-    assert css('a')[1].attrib['id'] == 'hp.zm.topnav.community.logout'
+    assert css('a')[1].attrib['data-id'] == 'zmo-topnav.1.4..logout'
 
 
 def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):

@@ -61,37 +61,37 @@
                 <div class="main-nav__menu__content" id="js-main-nav-content">
                     <div class="main-nav__section main-nav__ressorts">
                         <div class="main-nav__ressort-list">
-                            <a href="{{ request.route_url('home') }}zeit-magazin/mode-design/index" id="hp.zm.topnav.centerpages.mode./zeit-magazin/mode-design/index" data-id="zmo-topnav.2.1..mode design">Mode &amp; Design</a>
-                            <a href="{{ request.route_url('home') }}zeit-magazin/essen-trinken/index" id="hp.zm.topnav.centerpages.essen./zeit-magazin/essen-trinken/index" data-id="zmo-topnav.2.2..essen trinken">Essen &amp; Trinken</a>
-                            <a href="{{ request.route_url('home') }}zeit-magazin/leben/index" id="hp.zm.topnav.centerpages.leben./zeit-magazin/leben/index" data-id="zmo-topnav.2.3..leben">Leben</a>
+                            <a href="{{ request.route_url('home') }}zeit-magazin/mode-design/index" data-id="zmo-topnav.2.1..mode design">Mode &amp; Design</a>
+                            <a href="{{ request.route_url('home') }}zeit-magazin/essen-trinken/index" data-id="zmo-topnav.2.2..essen trinken">Essen &amp; Trinken</a>
+                            <a href="{{ request.route_url('home') }}zeit-magazin/leben/index" data-id="zmo-topnav.2.3..leben">Leben</a>
                         </div>
                     </div>
                     <div class="main-nav__section main-nav__only-small">
-                        <a href="{{ request.route_url('home') }}index" id="hp.zm.topnav.links.zon./index" data-id="zmo-topnav.1.2..zeitonline">» ZEIT ONLINE</a>
+                        <a href="{{ request.route_url('home') }}index" data-id="zmo-topnav.1.2..zeitonline">» ZEIT ONLINE</a>
                     </div>
                     <div class="main-nav__section main-nav__service-primary">
-                        <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" id="hp.zm.topnav.links.abo.//www.zeitabo.de" data-id="zmo-topnav.2.4..abo">Abo</a>
-                        <a href="http://shop.zeit.de/?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" id="hp.zm.topnav.links.shop.//shop.zeit.de" data-id="zmo-topnav.2.5..shop">Shop</a>
-                        <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zmo.fix.dach.text.epaper" id="hp.zm.topnav.links.epaper.//premium.zeit.de" data-id="zmo-topnav.2.6..epaper">ePaper</a>
+                        <a href="http://www.zeitabo.de/?mcwt=2009_07_0002" data-id="zmo-topnav.2.4..abo">Abo</a>
+                        <a href="http://shop.zeit.de/?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header" data-id="zmo-topnav.2.5..shop">Shop</a>
+                        <a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zmo.fix.dach.text.epaper" data-id="zmo-topnav.2.6..epaper">ePaper</a>
                     </div>
                     <div class="main-nav__aside">
                         <div class="main-nav__section main-nav__only-full">
-                            <a href="{{ request.route_url('home') }}index" id="hp.zm.topnav.links.zon./index" data-id="zmo-topnav.1.2..zeitonline">» ZEIT ONLINE</a>
+                            <a href="{{ request.route_url('home') }}index" data-id="zmo-topnav.1.2..zeitonline">» ZEIT ONLINE</a>
                         </div>
                         <div class="main-nav__section main-nav__service">
                             <span class="main-nav__section__trigger js-main-nav-section-trigger"><a class="main-nav__section__text" data-id="zmo-topnav.1.3..service">Service</a>{{ use_svg_icon('arrow-down', 'main-nav__icon-arrow-down', view.package) }}</span>
                             <div class="main-nav__section__content js-main-nav-section-content">
-                                <a href="{{ request.route_url('home') }}campus/index" id="hp.zm.topnav.links.zeitcampus./campus/index" data-id="zmo-topnav.1.3.1.zeitcampus">ZEITCampus</a>
-                                <a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index" id="hp.zm.topnav.links.zeitgeschichte./wissen/zeit-geschichte/index" data-id="zmo-topnav.1.3.2.zeitgeschichte">ZEITGeschichte</a>
-                                <a href="{{ request.route_url('home') }}wissen/zeit-wissen/index" id="hp.zm.topnav.links.zeitwissen./wissen/zeit-wissen/index" data-id="zmo-topnav.1.3.3.zeitwissen">ZEITWissen</a>
-                                <a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="hp.zm.topnav.links.partnersuche./angebote/partnersuche/index" data-id="zmo-topnav.1.3.4.partnersuche">Partnersuche</a>
-                                <a href="http://zeit.immowelt.de/" id="hp.zm.topnav.links.immobilien.//zeit.immowelt.de" data-id="zmo-topnav.1.3.5.immobilien">Immobilien</a>
-                                <a href="http://automarkt.zeit.de/" id="hp.zm.topnav.links.automarkt.//automarkt.zeit.de" data-id="zmo-topnav.1.3.6.automarkt">Automarkt</a>
-                                <a href="http://jobs.zeit.de/" id="hp.zm.topnav.links.jobs.//jobs.zeit.de" data-id="zmo-topnav.1.3.7.jobs">Jobs</a>
-                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zmo.fix.dach.text.apps" id="hp.zm.topnav.links.apps.//premium.zeit.de/abo/appsios" data-id="zmo-topnav.1.3.8.apps">Apps</a>
-                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zmo.fix.dach.text.audio" id="hp.zm.topnav.links.audio.//premium.zeit.de/abo/digitalpaket5" data-id="zmo-topnav.1.3.9.audio">Audio</a>
-                                <a href="{{ request.route_url('home') }}archiv" id="hp.zm.topnav.links.archiv./archiv" data-id="zmo-topnav.1.3.10.archiv">Archiv</a>
-                                <a href="{{ request.route_url('home') }}spiele/index" id="hp.zm.topnav.links.spiele./spiele/index" data-id="zmo-topnav.1.3.11.spiele">Spiele</a>
+                                <a href="{{ request.route_url('home') }}campus/index" data-id="zmo-topnav.1.3.1.zeitcampus">ZEITCampus</a>
+                                <a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index" data-id="zmo-topnav.1.3.2.zeitgeschichte">ZEITGeschichte</a>
+                                <a href="{{ request.route_url('home') }}wissen/zeit-wissen/index" data-id="zmo-topnav.1.3.3.zeitwissen">ZEITWissen</a>
+                                <a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" data-id="zmo-topnav.1.3.4.partnersuche">Partnersuche</a>
+                                <a href="http://zeit.immowelt.de/" data-id="zmo-topnav.1.3.5.immobilien">Immobilien</a>
+                                <a href="http://automarkt.zeit.de/" data-id="zmo-topnav.1.3.6.automarkt">Automarkt</a>
+                                <a href="http://jobs.zeit.de/" data-id="zmo-topnav.1.3.7.jobs">Jobs</a>
+                                <a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zmo.fix.dach.text.apps" data-id="zmo-topnav.1.3.8.apps">Apps</a>
+                                <a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zmo.fix.dach.text.audio" data-id="zmo-topnav.1.3.9.audio">Audio</a>
+                                <a href="{{ request.route_url('home') }}archiv" data-id="zmo-topnav.1.3.10.archiv">Archiv</a>
+                                <a href="{{ request.route_url('home') }}spiele/index" data-id="zmo-topnav.1.3.11.spiele">Spiele</a>
                             </div>
                         </div>
                         <div class="main-nav__section main-nav__community">

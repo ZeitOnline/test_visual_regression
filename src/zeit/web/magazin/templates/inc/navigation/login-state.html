@@ -9,11 +9,11 @@
         {% endif %}
     </span>
     <div class="main-nav__section__content js-main-nav-section-content">
-        <a href="{{ profile }}" id="hp.zm.topnav.community.account">Account</a>
-        <a href="{{ logout }}" id="hp.zm.topnav.community.logout">Logout</a>
+        <a href="{{ profile }}" data-id="zmo-topnav.1.4.1.account">Account</a>
+        <a href="{{ logout }}" data-id="zmo-topnav.1.4.2.logout">Logout</a>
     </div>
 {% else %}
-    <a href="{{ login }}" id="hp.zm.topnav.community.login">Anmelden</a>
+    <a href="{{ login }}" data-id="zmo-topnav.1.4..anmelden">Anmelden</a>
 {% endif %}
 
 {% include "zeit.web.core:templates/inc/inline_js/rawr_sso.tpl" %}
