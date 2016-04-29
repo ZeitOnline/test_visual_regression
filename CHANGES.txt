@@ -28,6 +28,7 @@ Change log for zeit.web
 
 - ZON-3049: Add new button to campus item in main navigation
 
+- ZON-3051: move print/pdf function to core
 
 2.76 (2016-04-28)
 -----------------
