@@ -359,8 +359,13 @@ def test_article_sharing_menu_should_open_and_close(
         'sharing menu should be hidden by default')
 
     sharing_menu_target.click()
-    assert sharing_menu_items.is_displayed(), (
-        'sharing menu should be visible after interaction')
+    # we need to wait for the CSS animation to finish
+    # so the sharing menu is actually visible
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, sharing_menu_selector))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition), (
+            'sharing menu should be visible after interaction')
 
     sharing_menu_target.click()
     # we need to wait for the CSS animation to finish
