@@ -612,7 +612,7 @@ def test_feature_longform_template_should_have_zon_logo_header(testbrowser):
     browser = testbrowser('/feature/feature_longform')
     assert browser.cssselect('.main-nav__brand-logo--zon-large')
 
-    link = browser.cssselect('.main-nav__logo')[0]
+    link = browser.cssselect('.main-nav__logo a')[0]
     assert link.get('href') == 'http://localhost/index'
 
 
@@ -687,9 +687,9 @@ def test_navigation_should_show_logged_in_user_correctly(
     assert css('.main-nav__avatar')[0].attrib['style'] == (
         'background-image: url(/picture.jpg)')
     assert css('a')[0].attrib['href'] == '/profile'
-    assert css('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
+    assert css('a')[0].attrib['data-id'] == 'zmo-topnav.1.4.1.account'
     assert css('a')[1].attrib['href'] == '/logout'
-    assert css('a')[1].attrib['id'] == 'hp.zm.topnav.community.logout'
+    assert css('a')[1].attrib['data-id'] == 'zmo-topnav.1.4.2.logout'
 
 
 def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):
@@ -702,3 +702,24 @@ def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):
 
     css = lxml.html.fromstring(tpl.render(**info)).cssselect
     assert css('a')[0].attrib['href'] == '/login'
+
+
+def test_schema_org_publisher_mark_up(testbrowser):
+    # @see https://developers.google.com/structured-data/rich-snippets/articles
+    # #article_markup_properties
+    browser = testbrowser('/artikel/01')
+    publisher = browser.cssselect('[itemprop="publisher"]')[0]
+    logo = publisher.cssselect('[itemprop="logo"]')[0]
+
+    # check Organization
+    assert publisher.get('itemtype') == 'http://schema.org/Organization'
+    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
+        'ZEITmagazin')
+    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
+        'http://localhost/zeit-magazin/index')
+    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
+    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
+        'http://localhost/static/latest/images/'
+        'structured-data-publisher-logo-zmo.png')
+    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '600'
+    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '56'
