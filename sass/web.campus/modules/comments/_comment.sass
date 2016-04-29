@@ -37,14 +37,16 @@ $comment-color-placeholder-font: $color-text
 // This HTML comes with our zeit.web.site templates which are shared with
 // campus now (via core).
 .pager
-	margin-bottom: remify(20px)
+	margin: remify(16px 0 32px)
 
 .pager__button
 	border: 3px solid currentColor
 	color: $color-article-primary
+	display: inline-block
 	font-size: remify(14px)
 	font-weight: bold
 	letter-spacing: .01em
+	margin: remify(20px 14px 0 0)
 	padding: remify(6px 8px 6px 12px)
 	text-transform: uppercase
 	+on-interaction
@@ -53,6 +55,11 @@ $comment-color-placeholder-font: $color-text
 
 .pager__pages
 	display: inline-block
+	padding: 0
+	margin: 1.25rem 0 0 0
+	font-size: .875rem
+	letter-spacing: .05em
+	line-height: 2
 
 .pager__page
 	color: $color-article-primary
@@ -70,6 +77,3 @@ $comment-color-placeholder-font: $color-text
 		span
 			color: inherit
 			font-weight: bold
-	&:first-child
-		a, span
-			padding-left: 0
