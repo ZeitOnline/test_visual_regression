@@ -605,7 +605,7 @@ def test_header_has_linked_copyright(testbrowser):
 def test_feature_longform_should_have_zon_logo_classes(testbrowser):
     browser = testbrowser('/feature/feature_longform')
     assert browser.cssselect('.main-nav__brand-logo--zon-small')
-    logolink = browser.cssselect('a.main-nav__logo')
+    logolink = browser.cssselect('.main-nav__logo a')
     assert logolink[0].attrib['href'] == 'http://localhost/index'
 
 

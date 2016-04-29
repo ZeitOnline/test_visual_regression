@@ -291,9 +291,12 @@ def test_macro_meta_author_should_produce_html_if_author_exists(
                 'location': ', Bern', 'suffix': 'und'},
                {'prefix': '', 'href': '', 'name': 'Anna', 'location': '',
                 'suffix': ''}]
-    markup = ('Von<a href="www.zeit.de" class="test" itemprop="url"><span '
-              'itemprop="name">Tom</span></a>, Bernund<span class="test">'
-              '<span itemprop="name">Anna</span></span>')
+    markup = (
+        'Von<span itemprop="author" itemscope itemtype="http://schema.org/'
+        'Person"><a href="www.zeit.de" class="test" itemprop="url"><span '
+        'itemprop="name">Tom</span></a>, Bern</span>und<span itemprop="author"'
+        ' itemscope itemtype="http://schema.org/Person"><span class="test">'
+        '<span itemprop="name">Anna</span></span></span>')
     lines = tpl.module.meta_author(authors, test_class).splitlines()
     output = ''
     for line in lines:
