@@ -1,4 +1,8 @@
-{%- extends "zeit.web.core:templates/inc/asset/image.tpl" -%}
+{% if not is_topic_variant %}
+    {%- extends "zeit.web.core:templates/inc/asset/image.tpl" -%}
+{% else %}
+    {%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
+{% endif %}
 
 {% set media_caption_additional_class = 'figcaption--hidden' %}
 

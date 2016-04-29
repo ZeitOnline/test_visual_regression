@@ -1,5 +1,5 @@
 <header class="header-image{% if module.visible_mobile == False %} mobile-hidden{% endif %}">
-    {%- require image = get_image(module, fallback=False, variant_id='cinema') -%}
+    {%- require image = get_image(module, fallback=False, variant_id='wide' if module.animate else 'cinema') -%}
         {%- set module_layout = "header-image" -%}
         {%- include "zeit.web.campus:templates/inc/asset/image_header.tpl" -%}
     {%- endrequire -%}
