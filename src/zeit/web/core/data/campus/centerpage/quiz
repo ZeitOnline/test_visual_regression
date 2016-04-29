@@ -3,12 +3,12 @@
   <head xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <topiclinks>
       <topiclink>
-        <topiclink_label_1>Paul Auster</topiclink_label_1>
-        <topiclink_url_1>http://www.zeit.de/dynamic/paul-auster</topiclink_url_1>
-        <topiclink_label_2>Ausdauersport</topiclink_label_2>
-        <topiclink_url_2>http://www.zeit.de/dynamic/ausdauersport</topiclink_url_2>
-        <topiclink_label_3>Bayerische Landesbank</topiclink_label_3>
-        <topiclink_url_3>http://www.zeit.de/dynamic/bayerische-landesbank</topiclink_url_3>
+        <topiclink_label_1>Eltern und Studenten</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/serie/studenten-und-eltern</topiclink_url_1>
+        <topiclink_label_2>Jurastudium</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/thema/jurastudium</topiclink_url_2>
+        <topiclink_label_3>Uni-Prekariat</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/thema/promotion</topiclink_url_3>
       </topiclink>
     </topiclinks>
     <header_image/>
@@ -28,16 +28,13 @@
     <attribute name="date_last_pushed" ns="http://namespaces.zeit.de/CMS/workflow">2016-01-28T11:13:41.580202+00:00</attribute>
     <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
     <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="html-meta-description" ns="http://namespaces.zeit.de/CMS/document">Studieren, Arbeiten und Leben - Aktuelle Informationen und Hintergründe zum Thema Studium und das neue Hochschulranking.</attribute>
-    <attribute name="html-meta-hide-timestamp" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="html-meta-title" ns="http://namespaces.zeit.de/CMS/document">Studium – Hochschulen und Universitäten</attribute>
     <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2016-01-28T11:12:36.762580+00:00</attribute>
     <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">system.hp-assistent</attribute>
     <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/centerpage/index</attribute>
+    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/index</attribute>
     <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
     <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
@@ -71,7 +68,7 @@
   </head>
   <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <supertitle>ZCO</supertitle>
-    <title>cardstack</title>
+    <title>quiz</title>
     <cluster visible="True" area="id-7e329214-665f-457d-a624-94c47850f95d" kind="duo">
       <region visible="True" hide-dupes="True" area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb7" kind="duo">
         <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
@@ -79,21 +76,24 @@
         </container>
       </region>
       <region visible="True" hide-dupes="True" area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87ba" kind="duo">
-        <container cp:type="cardstack" module="cardstack" visible="True" visible_mobile="True" cp:__name__="id-7f2aab8a-9cb3-4d1f-a25e-b95af573bf1e" card_id="erkaeltung-hausmittel-wirkung"/>
+        <container cp:type="quiz" module="quiz" visible="True" visible_mobile="True" cp:__name__="id-6d45df0c-6340-4e89-9a0a-f84b727d2152">
+          <quiz_id>136</quiz_id>
+        </container>
       </region>
     </cluster>
-    <cluster area="id-51a8299d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
-      <region area="id-52a2899d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
+    <cluster visible="True" area="id-7e329214-665f-457d-a624-94c47850f95e" kind="duo">
+      <region visible="True" hide-dupes="True" area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
         <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
           <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
       </region>
-      <region area="id-53a2899d-b569-4c42-b713-db5dbd86a64f" kind="duo" visible="True" visible_mobile="True">
-        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b">
-          <block contenttype="article" href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" uniqueId="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen"></block>
+      <region visible="True" hide-dupes="True" area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
+        <container cp:type="teaser" module="zco-square" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357db3fbe4b">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/01-countdown-studium" uniqueId="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
         </container>
       </region>
     </cluster>
+
   </body>
   <feed xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></feed>
 </centerpage>
