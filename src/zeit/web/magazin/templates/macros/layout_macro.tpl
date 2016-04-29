@@ -1,22 +1,20 @@
 {% extends 'zeit.web.core:templates/macros/layout_macro.tpl' %}
 
 {% macro breadcrumbs(crumbs) -%}
-    <div class="breadcrumbs">
-        <div class="breadcrumbs__list is-constrained is-centered">
+    <nav class="breadcrumbs">
+        <ul class="breadcrumbs__list is-constrained is-centered" itemscope itemtype="http://schema.org/BreadcrumbList">
             {% for crumb in crumbs -%}
-                <div class="breadcrumbs__list__item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                {% if crumb[1] != '' -%}
-                    <a href="{{crumb[1]}}" itemprop="url"><span itemprop="title">{{crumb[0]}}</span></a>
-                {% else -%}
-                    <span itemprop="title">{{crumb[0]}}</span>
-                {% endif -%}
-                </div>
-                {% if not loop.last -%}
-                &rsaquo;
-                {% endif -%}
+            <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+                {%- if crumb[1] != '' -%}
+                    <a href="{{ crumb[1] }}" itemprop="item"><span itemprop="name">{{ crumb[0] }}</span></a>
+                {%- else -%}
+                    <span itemprop="name">{{ crumb[0] }}</span>
+                {%- endif -%}
+                <meta itemprop="position" content="{{ loop.index }}">
+            </li>
             {% endfor -%}
-        </div>
-    </div>
+        </ul>
+    </nav>
 {%- endmacro %}
 
 {% macro insert_responsive_image(image, image_class, page_type) %}
