@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-3033: Introduce Fallback Image for ZCO Teaser
 
+- ZON-2504: Add Highlight-Box (Quiz/Cards) to ZEIT Campus
+
 - MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 - FIX: Fix navi links
