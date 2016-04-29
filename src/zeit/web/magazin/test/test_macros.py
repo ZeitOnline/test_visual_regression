@@ -500,38 +500,6 @@ def test_macro_insert_responsive_image_should_produce_linked_image(
     assert '<a href="http://www.test.de">' in output
 
 
-def test_macro_main_nav_should_produce_correct_state_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-
-    request = mock.Mock()
-    view = mock.Mock()
-
-    # logged in
-    request.user = {'ssoid': '12345'}
-    markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
-    logged = 'Account'
-    module = tpl.make_module({'request': request, 'view': view})
-    lines = module.main_nav('true', request).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert markup in output
-
-    # logged out
-    request.user = {}
-    markup = '<div class="main-nav__menu__content" id="js-main-nav-content">'
-    unlogged = 'Anmelden'
-    module = tpl.make_module({'request': request, 'view': view})
-    lines = module.main_nav('true', request).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert markup in output
-
-
 def test_macro_copyrights(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/layout_macro.tpl')
