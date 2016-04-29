@@ -16,12 +16,14 @@ $interaction-hover-color: $black
 		display: block
 		&--facebook
 			background-color: $color-facebook
+			+on-interaction
+				background-color: $color-facebook-hover
 		&--twitter
 			background-color: $color-twitter
+			+on-interaction
+				background-color: $color-twitter-hover
 		&--whatsapp
 			background-color: $color-whatsapp
-		+on-interaction
-			opacity: 1
 	&__text
 		@extend %font-beckett
 		+font-smoothing
@@ -43,7 +45,6 @@ $interaction-hover-color: $black
 		&__link
 			padding: remify(0 15px 0 5px)
 			margin-right: remify(16px)
-			opacity: 0.8
 
 +respond-min($break-desktop-min)
 	.print-menu
