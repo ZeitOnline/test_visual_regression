@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - FIX: Fix navi links
 
+- ZON-3049: Add new button to campus item in main navigation
+
 
 2.76 (2016-04-28)
 -----------------

@@ -8,5 +8,6 @@
   <third_party_modules>false</third_party_modules>
   <campus_launch>true</campus_launch>
   <tracking>true</tracking>
+  <campus_new_label>true</campus_new_label>
   <dummy>false</dummy>
 </features>
