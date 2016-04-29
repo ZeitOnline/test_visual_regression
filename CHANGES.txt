@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - ZON-3047: Fix mobile glitches
 
+- ZON-3052: Resize ZCO kicker logo on ZON topic teaser
+
 - MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 - FIX: Fix navi links
