@@ -38,13 +38,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     def comments(self):
         if not self.show_commentthread:
             return
-
-        try:
-            return zeit.web.core.comments.get_thread(
-                self.context.uniqueId, sort='desc')
-        except zeit.web.core.comments.ThreadNotLoadable:
-            self.comments_loadable = False
-            return
+        thread = zeit.web.core.comments.get_thread(
+            self.context.uniqueId, sort='desc')
+        if thread and thread.get('request_failed'):
+            return None
+        return thread
 
     @zeit.web.reify
     def genre(self):

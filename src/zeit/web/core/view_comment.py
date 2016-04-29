@@ -293,13 +293,10 @@ class PostComment(zeit.web.core.view.Base):
             self.community_host, endpoint, path).strip('/')
 
     def _get_recommendations(self, unique_id, pid):
-        try:
-            community = zope.component.getUtility(
-                zeit.web.core.interfaces.ICommunity)
-            thread = community.get_thread(unique_id, cid=pid)
-            comment = thread and thread.get('index', {}).get(pid)
-        except zeit.web.core.comments.ThreadNotLoadable:
-            comment = None
+        community = zope.component.getUtility(
+            zeit.web.core.interfaces.ICommunity)
+        thread = community.get_thread(unique_id, cid=pid)
+        comment = thread and thread.get('index', {}).get(pid)
         if not comment:
             return None, []
         return comment['uid'], filter(None, comment['fans'].split(','))
@@ -544,14 +541,11 @@ class CommentReplies(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
     def comments(self):
         if not self.show_commentthread:
             return
-        try:
-            return self.community.get_thread(
-                self.context.uniqueId,
-                parent_cid=self.parent_cid,
-                page=self.current_page,
-                local_offset=self.local_offset)
-        except zeit.web.core.comments.ThreadNotLoadable:
-            return
+        return self.community.get_thread(
+            self.context.uniqueId,
+            parent_cid=self.parent_cid,
+            page=self.current_page,
+            local_offset=self.local_offset)
 
     @zeit.web.reify
     def replies(self):
