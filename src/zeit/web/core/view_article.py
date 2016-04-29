@@ -271,6 +271,26 @@ class Article(zeit.web.core.view.Content):
         except AttributeError:
             return None
 
+    @zeit.web.reify
+    def pdf_link(self):
+        server = 'http://pdf.zeit.de/'
+        path = '/'.join(self.request.traversed)
+        return server + path + '.pdf'
+
+    @zeit.web.reify
+    def print_link(self):
+        url = self.content_url
+        prefix = '/komplettansicht'
+
+        try:
+            if len(self.pages) == 1:
+                prefix = ''
+        except:
+            pass
+
+        path = prefix + '?print'
+        return url + path
+
 
 @view_config(route_name='amp',
              context=zeit.content.article.interfaces.IArticle,

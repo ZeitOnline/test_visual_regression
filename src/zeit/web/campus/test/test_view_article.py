@@ -231,3 +231,20 @@ def test_article_header_default_considers_image_layout(testbrowser):
     figure = header.cssselect('.article-header__media--wide')[0]
     image = figure.cssselect('img')[0]
     assert image.get('data-variant') == 'wide'
+
+
+def test_article_has_print_pdf_function(testbrowser):
+    browser = testbrowser('/campus/article/debate')
+    print_m = browser.cssselect('.print-menu__print')
+    pdf_m = browser.cssselect('.print-menu__pdf')
+    assert (print_m[0].attrib['href'].endswith(
+        '/campus/article/debate?print'))
+    assert (pdf_m[0].attrib['href'] ==
+            'http://pdf.zeit.de/campus/article/debate.pdf')
+
+
+def test_multi_page_article_has_print_link(testbrowser):
+    browser = testbrowser('/campus/article/paginated')
+    print_m = browser.cssselect('.print-menu__print')
+    assert (print_m[0].attrib['href'].endswith(
+        '/campus/article/paginated/komplettansicht?print'))

@@ -1,0 +1,30 @@
+// Additional styles for campus new campaign
+// remove completely when not needed anymore
+$zco-comm-pri: #e81c72
+.primary-nav__item
+	+respond-min($break-tablet-min)
+		&:hover > .primary-nav__link--new-campus-labeled
+			color: $zco-comm-pri
+
+.primary-nav__link
+	&--new-campus-labeled
+		+on-interaction
+			color: $zco-comm-pri
+		&::before
+			background: $zco-comm-pri
+			border-radius: remify(4px)
+			color: #fff
+			content: "Neu:"
+			font-size: remify(11px)
+			letter-spacing: $zon-letter-spacing-l
+			text-transform: uppercase
+			margin-right: remify(4px)
+			padding: remify(3px 7px)
+			vertical-align: middle
+
+.main_nav [data-feature='dropdown']
+	+respond-min($break-tablet-min)
+		&:hover
+			& > a
+				&:after
+					color: $zon-dark-grey

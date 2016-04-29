@@ -16,13 +16,17 @@ Change log for zeit.web
 
 - ZON-2504: Add Highlight-Box (Quiz/Cards) to ZEIT Campus
 
-- ZON-3048: change sharing colors
+- ZON-3048: Change sharing bar colors
+
+- ZON-3047: Fix mobile glitches
+
+- ZON-3052: Resize ZCO kicker logo on ZON topic teaser
 
 - MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 - FIX: Fix navi links
 
-- ZON-3048: Change sharing bar colors
+- ZON-3049: Add new button to campus item in main navigation
 
 - ZON-3032: Update schema.org publisher microdata
 
