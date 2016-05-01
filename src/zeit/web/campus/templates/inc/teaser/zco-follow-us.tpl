@@ -19,7 +19,7 @@
         <div class="abo-cta">
             <div class="abo-cta__text">Hol’ Dir ZEIT Campus in dein Postfach</div>
             <a class="abo-cta__label" href="http://community.zeit.de/newsletter-signup?nl=campus" data-id="{{ teaser_position }}.solo-teaser-follow-us.newsletter">
-                Abonnieren<span class="visually-hidden"> Sie den ZEIT CAMPUS Newsletter</span>
+                <span class="visually-hidden">Jetzt den ZEIT Campus Newsletter </span>Abonnieren
             </a>
         </div>
         <a class="follow-us" href="https://de-de.facebook.com/zeitcampus" data-id="{{ teaser_position }}.solo-teaser-follow-us.facebook">
