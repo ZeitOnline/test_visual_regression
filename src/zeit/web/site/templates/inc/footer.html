@@ -5,7 +5,8 @@
 {{ lama.use_svg_icon('logo-zon-black', 'footer-brand__logo', view.package) }}
 </a>
 
-{%- include "zeit.web.site:templates/inc/navigation/breadcrumbs.tpl" ignore missing -%}
+{%- include "zeit.web.core:templates/inc/breadcrumbs.html" -%}
+
 <div class="footer-publisher">
     {{ foma.footer_publisher(view) }}
 </div>
