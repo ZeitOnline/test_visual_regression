@@ -55,25 +55,6 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     assert '' == str(tpl.module.subpage_chapter(0, '', '')).strip()
 
 
-def test_macro_breadcrumbs_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-    obj = [('text', 'link')]
-
-    markup = ('<nav class="breadcrumbs">'
-              '<ul class="breadcrumbs__list is-constrained is-centered" '
-              'itemscope itemtype="http://schema.org/BreadcrumbList">'
-              '<li class="breadcrumbs__item" itemprop="itemListElement" '
-              'itemscope itemtype="http://schema.org/ListItem"><a href="link" '
-              'itemprop="item"><span itemprop="name">text</span></a>'
-              '<meta itemprop="position" content="1"></li></ul></nav>')
-    lines = tpl.module.breadcrumbs(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-
 def test_macro_portraitbox_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
