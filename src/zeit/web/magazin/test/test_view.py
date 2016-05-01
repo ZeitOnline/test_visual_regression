@@ -73,7 +73,7 @@ def test_breadcumb_should_produce_expected_data():
         ('This is my title', '')
     ]
 
-    assert article.breadcrumb == crumbs
+    assert article.breadcrumbs == crumbs
 
 
 def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
@@ -93,7 +93,7 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
         ('This is my title', '')
     ]
 
-    assert article.breadcrumb == crumbs
+    assert article.breadcrumbs == crumbs
 
 
 def test_linkreach_property_should_be_set(application):

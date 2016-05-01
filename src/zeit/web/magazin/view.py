@@ -19,7 +19,7 @@ class Base(zeit.web.core.view.Base):
     pagetitle_suffix = u' | ZEITmagazin'
 
     @zeit.web.reify
-    def breadcrumb(self):
+    def breadcrumbs(self):
         crumbs = {
             'start': (
                 'Start',
