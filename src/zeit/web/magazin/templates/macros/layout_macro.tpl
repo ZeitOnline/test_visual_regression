@@ -1,24 +1,5 @@
 {% extends 'zeit.web.core:templates/macros/layout_macro.tpl' %}
 
-{% macro breadcrumbs(crumbs) -%}
-    <div class="breadcrumbs">
-        <div class="breadcrumbs__list is-constrained is-centered">
-            {% for crumb in crumbs -%}
-                <div class="breadcrumbs__list__item" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
-                {% if crumb[1] != '' -%}
-                    <a href="{{crumb[1]}}" itemprop="url"><span itemprop="title">{{crumb[0]}}</span></a>
-                {% else -%}
-                    <span itemprop="title">{{crumb[0]}}</span>
-                {% endif -%}
-                </div>
-                {% if not loop.last -%}
-                &rsaquo;
-                {% endif -%}
-            {% endfor -%}
-        </div>
-    </div>
-{%- endmacro %}
-
 {% macro insert_responsive_image(image, image_class, page_type) %}
     {# TRASHME: I want to be replace by the new snazzy image.tpl #}
     {% if image %}

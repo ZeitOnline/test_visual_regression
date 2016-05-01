@@ -15,15 +15,15 @@ def test_login_state_view_should_deliver_correct_destination(dummy_request):
 
 def test_article_should_have_breadcrumbs(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    breadcrumbs = browser.cssselect('.footer-breadcrumbs__list')
+    breadcrumbs = browser.cssselect('.breadcrumbs__list')
     assert len(breadcrumbs) == 1
 
 
 def test_article_should_have_correct_breadcrumb_structure(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    breadcrumbs_items = browser.cssselect('.footer-breadcrumbs__item')
+    breadcrumbs_items = browser.cssselect('.breadcrumbs__item')
     assert len(breadcrumbs_items) == 3
-    breadcrumbs_links = browser.cssselect('.footer-breadcrumbs__link')
+    breadcrumbs_links = browser.cssselect('.breadcrumbs__link')
     assert len(breadcrumbs_links) == 2
 
 
