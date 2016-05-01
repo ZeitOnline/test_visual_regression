@@ -23,7 +23,8 @@ class Base(zeit.web.core.view.Base):
         crumbs = {
             'start': (
                 'Start',
-                '{}index'.format(self.request.route_url('home'))
+                '{}index'.format(self.request.route_url('home')),
+                'ZEIT ONLINE'
             ),
             'zmo': (
                 'ZEIT Magazin',
