@@ -55,7 +55,7 @@ def test_dict_view_produces_acceptable_return_value():
     assert obj() == {'bar': 1}, 'DictView retains its return value.'
 
 
-def test_breadcumb_should_produce_expected_data():
+def test_breadcrumb_should_produce_expected_data():
     context = mock.Mock()
     context.ressort = 'zeit-magazin'
     context.sub_ressort = 'mode-design'
