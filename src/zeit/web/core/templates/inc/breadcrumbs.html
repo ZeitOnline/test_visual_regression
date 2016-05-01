@@ -1,6 +1,6 @@
 {% if view.breadcrumbs -%}
 <nav class="breadcrumbs">
-    <ul class="breadcrumbs__list" itemscope itemtype="http://schema.org/BreadcrumbList">
+    <ul class="breadcrumbs__list" itemprop="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
     {%- for breadcrumb in view.breadcrumbs -%}
         {%- set text = breadcrumb[0] -%}
         {%- set link = breadcrumb[1] -%}

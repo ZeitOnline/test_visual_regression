@@ -7,13 +7,15 @@
 
 {%- include "zeit.web.core:templates/inc/breadcrumbs.html" -%}
 
-<div class="footer-publisher">
-    {{ foma.footer_publisher(view) }}
-</div>
-<div class="footer-links">
-    {{ foma.footer_links(view) }}
-    {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
-    <div class="footer-links__button">
-        <a href="{{ view.canonical_url if not view.is_wrapped else '#top' }}" class="footer-links__linkbutton js-scroll" title="Zurück nach oben" data-id="footernav.4.1..pfeil">Nach oben</a>
+<div itemscope itemtype="http://schema.org/SiteNavigationElement">
+    <div class="footer-publisher">
+        {{ foma.footer_publisher(view) }}
+    </div>
+    <div class="footer-links">
+        {{ foma.footer_links(view) }}
+        {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
+        <div class="footer-links__button">
+            <a href="{{ view.canonical_url if not view.is_wrapped else '#top' }}" class="footer-links__linkbutton js-scroll" title="Zurück nach oben" data-id="footernav.4.1..pfeil">Nach oben</a>
+        </div>
     </div>
 </div>
