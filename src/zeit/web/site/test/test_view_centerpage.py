@@ -1596,9 +1596,7 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
             '.funktionsbox_studium.che.teaser.button.'
             '&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
-            '&utm_content=che_teaser_button_x#&left_f1=23'
-            '&left_f2=62&left_f3=525&left_f4=363&left_f5=14'
-            '&order=alpha&unionview=table&subfach=' in driver.current_url)
+            '&utm_content=che_teaser_button_x' in driver.current_url)
 
 
 def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
