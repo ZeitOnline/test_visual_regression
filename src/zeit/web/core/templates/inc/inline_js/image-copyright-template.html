@@ -1,6 +1,6 @@
 {% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 <script type="text/template" id="image-copyright-template">
-    <div class="image-copyright-footer" id="bildrechte">
+    <div class="image-copyright-footer" id="bildrechte" data-ct-row="copyrights">
         <div class="image-copyright-footer__container">
             <button class="image-copyright-footer__button js-image-copyright-footer-close" title="schließen">
                 {{ lama.use_svg_icon('close', 'image-copyright-footer__icon', view.package) }}

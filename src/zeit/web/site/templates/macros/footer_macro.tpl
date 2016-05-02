@@ -14,7 +14,7 @@
         <div class="footer-{{ class }}__row{% if publisher and loop.index > 1 %} footer-{{ class }}__row--extra{% endif %}">
         {%- endif %}
 
-            <ul class="footer-{{ class }}__list">
+            <ul class="footer-{{ class }}__list" data-ct-column="{{ loop.index }}">
                 {% if section.text -%}
                 <li class="footer-{{ class }}__item footer-{{ class }}__item--label">
                     {{ section.text }}
@@ -31,7 +31,7 @@
                             </li>
                         {% else %}
                             <li class="footer-{{ class }}__item">
-                                <a class="footer-{{ class }}__link" href="{{ item.href }}" itemprop="url" data-id="{{ item.item_id if item.item_id }}"><span itemprop="name">{{ item.text }}</span></a>
+                                <a class="footer-{{ class }}__link" href="{{ item.href }}" itemprop="url"><span itemprop="name">{{ item.text }}</span></a>
                             </li>
                         {% endif %}
 
@@ -44,8 +44,8 @@
         {%- endif %}
 
         {% if publisher and section.item_id == 'first' %}
-        <div class="footer-{{ class }}__row footer-{{ class }}__row--more">
-            <a href="#" class="footer-{{ class }}__more" data-id="footernav.mehr.1..more">Mehr</a>
+        <div class="footer-{{ class }}__row footer-{{ class }}__row--more" data-ct-column="mehr">
+            <a href="#" class="footer-{{ class }}__more">Mehr</a>
         </div>
         {% endif %}
     {%- endfor %}

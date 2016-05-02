@@ -1,10 +1,8 @@
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
-            <footer class="footer" itemscope itemtype="http://schema.org/SiteNavigationElement" >
-                {% block footer %}
-                    {%- include "zeit.web.campus:templates/inc/footer.html" -%}
-                {% endblock footer %}
-            </footer>
+            {% block footer %}
+                {%- include "zeit.web.campus:templates/inc/footer.html" -%}
+            {% endblock footer %}
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
