@@ -55,14 +55,21 @@ class GalleryImage(zeit.web.core.image.BaseImage):
 @zeit.web.register_global
 def get_gallery_image(module=None, content=None, **kwargs):
     # XXX Re-implement once we have a solution for RepositoryImage variants.
-
     if content is None:
         content = zeit.web.core.template.first_child(module)
-
     if content is None:
-        return
+        return None
 
-    return zeit.web.core.template.first_child(Gallery(content).itervalues())
+    for key in content.keys():
+        try:
+            value = content[key]
+        except:
+            continue
+        else:
+            if value.layout == 'hidden':
+                continue
+            return IGalleryImage(value)
+    return None
 
 
 class Gallery(collections.OrderedDict):
