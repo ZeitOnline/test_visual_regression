@@ -18,7 +18,7 @@
                     {% block teaser_kicker %}
                         <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
                             {% block teaser_journalistic_format -%}
-                                {% if teaser.serie and not teaser.serie.column -%}
+                                {% if teaser.serie -%}
                                     <span class="series-label">{{ teaser.serie.serienname }}</span>
                                 {% elif teaser.blog -%}
                                     <span class="blog-label">{{ teaser.blog.name }}</span>
