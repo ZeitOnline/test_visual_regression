@@ -4,9 +4,14 @@ Change log for zeit.web
 2.79 (unreleased)
 -----------------
 
+- ZON-3062: Change wording of CP button
+
 - FIX: Support non-ascci URLs in "komplettansicht" redirect
 
 - FIX: Clearify vertical alignment of "new" element in nav
+
+- FIX: Fix links in toolbox
+
 
 
 2.78 (2016-05-02)
