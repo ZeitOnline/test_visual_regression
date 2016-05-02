@@ -27,10 +27,35 @@
 
 	&__media
 		height: 0
+		position: relative
 		&--portrait
 			padding-bottom: 100% / 3 * 4 // image variant 'portrait'
 		&--wide
 			padding-bottom: 100% / 16 * 9 // image variant 'wide'
+	&__media:hover &__caption
+		opacity: 1
+	&__media--default &__caption
+		bottom: auto
+		top: 0
+
+	&__caption
+		+scaled-font(12px)
+		+transition(opacity .2s linear)
+		// +background-image(linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)))
+		background: rgba(0, 0, 0, 0.5)
+		bottom: 0
+		color: $color-text--on-dark
+		letter-spacing: $letter-spacing-s
+		opacity: 0
+		padding: remify(6px)
+		position: absolute
+		width: 100%
+	&__copyright
+		color: inherit
+		a
+			color: inherit
+			+on-interaction
+				color: #fff
 
 	&__media-container
 		&--default
@@ -157,9 +182,9 @@
 					color: $color-text
 					span[itemprop="name"]
 						color: inherit
-		span[itemprop="name"]
-			color: $color-community-primary
-			font-weight: normal
+			span[itemprop="name"]
+				color: $color-community-primary
+				font-weight: normal
 	&__leserartikel-wrap
 		+unpadded
 		background-color: $color-community-primary

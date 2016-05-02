@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - MAINT: Update breadcrumb microdata
 
+- FIX: Show copyright for article header image
+
 
 2.77 (2016-04-29)
 -----------------
