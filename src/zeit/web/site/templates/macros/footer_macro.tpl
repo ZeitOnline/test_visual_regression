@@ -26,11 +26,9 @@
 
                         {# "Bildrechte" is not semantically marked, but has a JS Event Trigger #}
                         {% if item.href == '#bildrechte' %}
-                            {% if view.type == 'centerpage' %}
-                                <li class="footer-{{ class }}__item">
-                                    <a class="footer-{{ class }}__link js-image-copyright-footer" href="{{ item.href }}" data-id="{{ item.item_id if item.item_id }}">{{ item.text }}</a>
-                                </li>
-                            {% endif %}
+                            <li class="footer-{{ class }}__item">
+                                <a class="footer-{{ class }}__link js-image-copyright-footer" href="{{ item.href }}">{{ item.text }}</a>
+                            </li>
                         {% else %}
                             <li class="footer-{{ class }}__item">
                                 <a class="footer-{{ class }}__link" href="{{ item.href }}" itemprop="url" data-id="{{ item.item_id if item.item_id }}"><span itemprop="name">{{ item.text }}</span></a>
