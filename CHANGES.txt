@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Support non-ascci URLs in "komplettansicht" redirect
 
+- FIX: Fix links in toolbox
+
 
 2.78 (2016-05-02)
 -----------------
