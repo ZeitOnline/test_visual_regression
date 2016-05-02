@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.78 (unreleased)
+2.78 (2016-05-02)
 -----------------
 
 - MAINT: Update breadcrumb microdata
