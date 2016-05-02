@@ -12,6 +12,7 @@ Change log for zeit.web
 
 - FIX: Fix links in toolbox
 
+- FIX: Fix wording and links
 
 
 2.78 (2016-05-02)
