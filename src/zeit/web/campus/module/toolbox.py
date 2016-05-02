@@ -8,22 +8,36 @@ class Toolbox(zeit.web.core.centerpage.Module):
     def __init__(self, context):
         super(Toolbox, self).__init__(context)
         self.layout = 'toolbox'
-
-        services = zeit.web.campus.module.toolbox.ToolSource(
-            'centerpage-toolbox-source')
+        self.toolbox = TOOL_SOURCE
 
 
 class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
 
     product_configuration = 'zeit.web'
-
-    def __init__(self, config_url):
-        self.config_url = config_url
+    config_url = 'zco-toolbox-source'
 
     def __iter__(self):
         tree = self._get_tree()
-        for column in tree.iterchildren('column'):
-            yield [Service(unicode(service.get('id')),
-                           unicode(service.text.strip()),
-                           unicode(service.get('href')))
-                   for service in column.iterchildren('*')]
+        for node in tree.iterchildren('link'):
+            yield dict(title=unicode(node.get('title')),
+                       href_title=unicode(node.get('href_title')),
+                       text=unicode(node.get('text')),
+                       cta=unicode(node.get('cta')),
+                       href=unicode(node.get('href')))
+
+    @property
+    def footer_text(self):
+        tree = self._get_tree()
+        return tree.get('footer')
+
+    @property
+    def header_text(self):
+        tree = self._get_tree()
+        return tree.get('header')
+
+    @property
+    def footer_link(self):
+        tree = self._get_tree()
+        return tree.get('href')
+
+TOOL_SOURCE = ToolSource()

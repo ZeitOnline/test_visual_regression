@@ -17,6 +17,8 @@ class Base(zeit.web.core.view.Base):
     seo_title_default = u'ZEIT Campus ONLINE | studieren. arbeiten. leben.'
     pagetitle_suffix = u' | ZEIT Campus'
 
+    toolbox = zeit.web.campus.module.toolbox.TOOL_SOURCE
+
     @zeit.web.reify
     def adcontroller_values(self):
         """Fill the adcontroller js object with actual values.
