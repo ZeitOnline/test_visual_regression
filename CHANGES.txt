@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Fix wording and links
 
+- OPS-308: Don't look at ​*all*​ gallery entries just to get the first one
+
 
 2.78 (2016-05-02)
 -----------------
