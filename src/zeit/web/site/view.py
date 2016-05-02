@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+import urllib
 
 import pyramid.httpexceptions
 import pyramid.view
@@ -50,7 +51,11 @@ class Base(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=target_url)
         if self.request.params.get('page') == 'all':
-            target_url = u'{}/komplettansicht'.format(self.content_url)
+            # XXX response.location should urlencode itself, but that's really
+            # hard to do generally (e.g. already urlencoded query parameters),
+            # so we do it from the outside where we still have enough context.
+            target_url = u'{}/komplettansicht'.format(
+                urllib.quote(self.content_url.encode('utf-8'), safe='/:?&='))
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=target_url)
 

@@ -1,10 +1,26 @@
 Change log for zeit.web
 =======================
 
-2.78 (unreleased)
+2.79 (unreleased)
+-----------------
+
+- ZON-3062: Change wording of CP button
+
+- FIX: Support non-ascci URLs in "komplettansicht" redirect
+
+- FIX: Clearify vertical alignment of "new" element in nav
+
+- FIX: Fix links in toolbox
+
+- FIX: Fix wording and links
+
+
+2.78 (2016-05-02)
 -----------------
 
 - MAINT: Update breadcrumb microdata
+
+- FIX: Show copyright for article header image
 
 
 2.77 (2016-04-29)
@@ -28,15 +44,15 @@ Change log for zeit.web
 
 - ZON-3052: Resize ZCO kicker logo on ZON topic teaser
 
-- MAINT: Use any teaser layout that is set in XML, regardless of availability rules
-
-- FIX: Fix navi links
-
 - ZON-3049: Add new button to campus item in main navigation
 
 - ZON-3051: move print/pdf function to core
 
 - ZON-3032: Update schema.org publisher microdata
+
+- ZON-3054: Fix campus navigation links and tracking
+
+- MAINT: Use any teaser layout that is set in XML, regardless of availability rules
 
 
 2.76 (2016-04-28)
