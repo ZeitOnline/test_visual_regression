@@ -281,7 +281,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                         [
                          '.main_nav',
                          '.header__tags',
-                         '.article-interactions',
                          '.article-tags',
                          '.section-heading',
                          '.snapshot__media',
