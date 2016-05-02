@@ -16,6 +16,12 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         main: function( $element ) {
 
+            // in case we are inside a data-ct-area element, this is redundant
+            // e.g. ZEIT Campus sharing links
+            if ( $element.closest( '[data-ct-area]' ).length ) {
+                return;
+            }
+
             // in case we already have a complete ID, we do not need to calculate it
             if ( $element.data( 'id' ) ) {
                 return this.useDataId( $element );
@@ -77,6 +83,36 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         useDataId: function( $element ) {
             var data = [
                 $element.data( 'id' ),
+                $element.attr( 'href' ) // url
+            ];
+            return formatTrackingData( data );
+        },
+        /**
+         * track links inside parents with appropriate data attributes
+         * @param  {object} $element jQuery collection with the link that was clicked
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        useDataArea: function( $element, event ) {
+            var $area = $( event.delegateTarget ),
+                $row = $element.closest( '[data-ct-row]' ),
+                $column = $element.closest( '[data-ct-column]', $row ),
+                column = '',
+                subcolumn = '',
+                data;
+
+            if ( $column.length ) {
+                column = $column.data( 'ct-column' );
+                subcolumn = $column.find( 'a' ).index( $element ) + 1 || 1;
+            } else {
+                column = $row.find( 'a' ).index( $element ) + 1 || 1;
+            }
+
+            data = [
+                $area.data( 'ct-area' ), // verortung
+                $row.data( 'ct-row' ), // reihe
+                column, // spalte
+                subcolumn, // subreihe
+                sanitizeString( $element.data( 'ct-label' ) || $element.text() ), // bezeichner
                 $element.attr( 'href' ) // url
             ];
             return formatTrackingData( data );
@@ -160,7 +196,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
     },
     clickTrack = function( event ) {
-        var trackingData = trackElement[ event.data.funcName ]( $( this ) );
+        var trackingData = trackElement[ event.data.funcName ]( $( this ), event );
 
         if ( debugMode ) {
             event.preventDefault();
@@ -258,6 +294,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                          '.main-nav' // zmo navi
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
+                    ],
+                    useDataArea: [
+                        '[data-ct-area]',
+                        'a:not([data-wt-click])'
                     ],
                     parquetMeta: [
                         '.parquet-meta',
