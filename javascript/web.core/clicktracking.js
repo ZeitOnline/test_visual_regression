@@ -59,7 +59,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             }
 
             data = [
-                getBreakpoint(),
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
                 $area.index() + 1, // area bzw. reihe
                 $area.find( 'article, aside' ).index( $article ) + 1, // module bzw. spalte
@@ -77,7 +76,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         useDataId: function( $element ) {
             var data = [
-                getBreakpoint(),
                 $element.data( 'id' ),
                 $element.attr( 'href' ) // url
             ];
@@ -91,7 +89,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         useDataTracking: function( $element ) {
             var trackingData = $element.data( 'tracking' ).split( '|' ),
                 data = [
-                    getBreakpoint(),
                     trackingData[0],
                     trackingData[1] // url
                 ];
@@ -116,7 +113,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             }
 
             data = [
-                getBreakpoint(),
                 'parquet', // Verortung
                 $element.index( '.parquet-meta a' ) + 1, // Reihe (insgesamt, nicht aktueller Riegel)
                 '1', // Spalte
@@ -139,7 +135,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 currentParagraphNumber = $currentParagraph.prevAll( 'p' ).length + 1,
                 trackType = $element.closest( '[data-clicktracking]' ).data( 'clicktracking' ) || 'intext',
                 data = [
-                    getBreakpoint(),
                     trackType, // [verortung]
                     currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
                     '', // [spalte] leer lassen
@@ -154,7 +149,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         linkInGalleryContent: function( $element, $gallery ) {
             var imgnumber = $gallery.find( '.bx-pager' ).text().split( ' / ' )[0],
                 data = [
-                    getBreakpoint(),
                     'gallery', // [verortung]
                     $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? '1' : '2',
                     $element[ 0 ].className.indexOf( 'links' ) < 0 ? '2' : '1', // [spalte]
@@ -180,7 +174,8 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
     },
     formatTrackingData = function( trackingData ) {
-        var url = trackingData.pop(),
+        var length = trackingData.unshift( Zeit.breakpoint.getTrackingBreakpoint() ),
+            url = trackingData.pop(),
             slug = trackingData.join( '.' );
 
         if ( url ) {
@@ -193,13 +188,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             }
         }
         return slug + '|' + url;
-    },
-    /**
-     * returns the current breakpoint
-     * @return {string}          breakpoint for webtrekk
-     */
-    getBreakpoint = function() {
-        return Zeit.breakpoint.getTrackingBreakpoint();
     },
     /**
      * returns a string that is webtrekk-safe
