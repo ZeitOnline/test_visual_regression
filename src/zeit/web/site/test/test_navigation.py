@@ -216,17 +216,12 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
 def test_footer_should_contain_schema_org_markup(testbrowser):
     browser = testbrowser('/centerpage/zeitonline')
 
-    html = browser.cssselect
-    site_nav_element = html(
-        'footer[itemtype="http://schema.org/SiteNavigationElement"]')
+    site_nav_element = browser.cssselect(
+        'footer *[itemtype="http://schema.org/SiteNavigationElement"]')
     assert len(site_nav_element) == 1
 
-    item_prop_url = html(
-        'footer[itemtype="http://schema.org/SiteNavigationElement"] '
-        'div li a[itemprop="url"]')
-    item_prop_name = html(
-        'footer[itemtype="http://schema.org/SiteNavigationElement"] div li '
-        'a[itemprop="url"] span[itemprop="name"]')
+    item_prop_url = site_nav_element[0].cssselect('li a[itemprop="url"]')
+    item_prop_name = site_nav_element[0].cssselect('li span[itemprop="name"]')
 
     assert len(item_prop_url) > 0
     assert len(item_prop_url) == len(item_prop_name)

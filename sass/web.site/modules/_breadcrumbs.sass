@@ -1,18 +1,18 @@
-.footer-breadcrumbs
+.breadcrumbs
 	border-top: 1px solid $color-border
+
+	&__list
+		margin: 1em 0
+		padding: 0
+
 	&__item
 		color: $zon-mid-grey
 		display: inline
 		letter-spacing: $zon-letter-spacing-s
-		&:after
+		&:not(:last-child):after
 			content: "›"
 			margin-left: .25em
-		&:last-child:after
-			content: none
+
 	&__link
-		list-style: outside none none
-		&:hover, &:link, &:visited
-			color: inherit
-	&__list
-		margin: 1em 0
-		padding: 0
+		color: inherit
+		list-style-type: none

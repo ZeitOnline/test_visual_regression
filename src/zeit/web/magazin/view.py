@@ -19,11 +19,12 @@ class Base(zeit.web.core.view.Base):
     pagetitle_suffix = u' | ZEITmagazin'
 
     @zeit.web.reify
-    def breadcrumb(self):
+    def breadcrumbs(self):
         crumbs = {
             'start': (
                 'Start',
-                '{}index'.format(self.request.route_url('home'))
+                '{}index'.format(self.request.route_url('home')),
+                'ZEIT ONLINE'
             ),
             'zmo': (
                 'ZEIT Magazin',

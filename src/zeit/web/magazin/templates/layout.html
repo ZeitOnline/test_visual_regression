@@ -120,7 +120,7 @@
 
                 {% profile %}
                 {% block breadcrumbs %}
-                    {{ lama.breadcrumbs(view.breadcrumb) }}
+                    {%- include "zeit.web.core:templates/inc/breadcrumbs.html" -%}
                 {% endblock breadcrumbs %}
                 {% endprofile %}
 

@@ -34,3 +34,24 @@ def test_page_should_have_default_pagedescription(dummy_request):
     context.subtitle = None
     view = zeit.web.campus.view_centerpage.Centerpage(context, mock.Mock())
     assert view.pagedescription == zeit.web.campus.view.Base.seo_title_default
+
+
+def test_schema_org_publisher_mark_up(testbrowser):
+    # @see https://developers.google.com/structured-data/rich-snippets/articles
+    # #article_markup_properties
+    browser = testbrowser('/campus/article/simple')
+    publisher = browser.cssselect('[itemprop="publisher"]')[0]
+    logo = publisher.cssselect('[itemprop="logo"]')[0]
+
+    # check Organization
+    assert publisher.get('itemtype') == 'http://schema.org/Organization'
+    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
+        'ZEIT Campus')
+    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
+        'http://localhost/campus/index')
+    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
+    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
+        'http://localhost/static/latest/images/'
+        'structured-data-publisher-logo-zco.png')
+    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '347'
+    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'

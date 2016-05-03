@@ -1591,14 +1591,12 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
     dropdown.find_element_by_xpath(
         "//option[text()='BWL']").click()
     form.submit()
-    assert ('http://ranking.zeit.de/che2015/de/rankingunion/show?'
+    assert ('http://ranking.zeit.de/che2016/de/rankingunion/show?'
             'esb=24&ab=3&hstyp=1&subfach=&wt_zmc=fix.int.zonpmr.zeitde'
             '.funktionsbox_studium.che.teaser.button.'
             '&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
-            '&utm_content=che_teaser_button_x#&left_f1=23'
-            '&left_f2=62&left_f3=525&left_f4=363&left_f5=14'
-            '&order=alpha&unionview=table&subfach=' in driver.current_url)
+            '&utm_content=che_teaser_button_x' in driver.current_url)
 
 
 def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
@@ -1612,7 +1610,7 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
     button = (box.find_element_by_class_name('studiumbox__content--clone')
               .find_element_by_class_name('studiumbox__button'))
     button.click()
-    assert ('http://ranking.zeit.de/che2015/de/faecher'
+    assert ('http://ranking.zeit.de/che2016/de/faecher'
             '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.che.teaser'
             '.button_ohne_fach.x&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'

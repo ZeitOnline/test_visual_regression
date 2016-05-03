@@ -1,6 +1,6 @@
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
-            <footer class="footer" itemscope itemtype="http://schema.org/SiteNavigationElement" >
+            <footer class="footer">
                 {% block footer %}
                     {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
                 {% endblock footer %}

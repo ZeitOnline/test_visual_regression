@@ -22,10 +22,14 @@
 {% else -%}
     {% block article_header -%}
     {# set default variant ID -#}
-    {% set variant_id = 'portrait' -%}
-    {# consider "new" ZCO article image layouts only -#}
-    {% if view.main_image_block and not view.main_image_block.layout.id == 'large' -%}
-        {% set variant_id = view.main_image_block.layout.variant -%}
+    {% set variant_id = None -%}
+    {% if view.main_image_block -%}
+        {# consider "new" ZCO article image layouts only -#}
+        {% if view.main_image_block.layout.id == 'large' -%}
+            {% set variant_id = 'portrait' -%}
+        {% else -%}
+            {% set variant_id = view.main_image_block.layout.variant -%}
+        {% endif -%}
     {% endif -%}
     {% set image = get_image(content=view.main_image_block, variant_id=variant_id, fallback=False) -%}
     {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}

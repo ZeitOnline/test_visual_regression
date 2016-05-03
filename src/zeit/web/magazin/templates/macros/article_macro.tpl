@@ -300,11 +300,13 @@
             {% else %}
                 {{ author.prefix }}
             {% endif %}
+            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
             {%- if author.href -%}
                 <a href="{{ author.href | create_url }}" class="{{ class }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>{{ author.location }}
             {%- else -%}
                 <span class="{{ class }}"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
             {%- endif -%}
+            </span>
             {{ author.suffix }}
         {%- endfor -%}
     {%- endif -%}

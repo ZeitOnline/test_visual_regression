@@ -1,7 +1,35 @@
 Change log for zeit.web
 =======================
 
-2.77 (unreleased)
+2.79 (unreleased)
+-----------------
+
+- ZON-3062: Change wording of CP button
+
+- ZON-3058: Show series name on column teasers
+
+- BUG-411: Make topics available for ZEIT Campus AdController on Centerpages
+
+- FIX: Support non-ascii URLs in "komplettansicht" redirect
+
+- FIX: Clearify vertical alignment of "new" element in nav
+
+- FIX: Fix links in toolbox
+
+- FIX: Fix wording and links
+
+- OPS-308: Don't look at *all* gallery entries just to get the first one
+
+
+2.78 (2016-05-02)
+-----------------
+
+- MAINT: Update breadcrumb microdata
+
+- FIX: Show copyright for article header image
+
+
+2.77 (2016-04-29)
 -----------------
 
 - ZON-3039: Render ZCO column teasers as default in ZON
@@ -22,15 +50,15 @@ Change log for zeit.web
 
 - ZON-3052: Resize ZCO kicker logo on ZON topic teaser
 
+- ZON-3049: Add new button to campus item in main navigation
+
 - ZON-3051: move print/pdf function to core
 
-- ZON-3054: change navi tracking
+- ZON-3032: Update schema.org publisher microdata
+
+- ZON-3054: Fix campus navigation links and tracking
 
 - MAINT: Use any teaser layout that is set in XML, regardless of availability rules
-
-- FIX: Fix navi links
-
-- ZON-3049: Add new button to campus item in main navigation
 
 
 2.76 (2016-04-28)

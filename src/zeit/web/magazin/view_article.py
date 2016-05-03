@@ -98,8 +98,8 @@ class LongformArticle(Article):
                           renderer='templates/feature_longform.html')
 class FeatureLongform(LongformArticle):
     @zeit.web.reify
-    def breadcrumb(self):
-        crumb = super(FeatureLongform, self).breadcrumb
+    def breadcrumbs(self):
+        crumb = super(FeatureLongform, self).breadcrumbs
         items = self.navigation
         crumb_list = crumb[:1]
         if self.ressort in items:

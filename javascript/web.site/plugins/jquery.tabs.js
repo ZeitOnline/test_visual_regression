@@ -10,7 +10,7 @@
             page: '.studiumbox__content',
             input: '.studiumbox__input',
             preventEmpty: 'studiumbox__headline--prevent_empty',
-            mainPage: 'http://ranking.zeit.de/che2015/de/faecher',
+            mainPage: 'http://ranking.zeit.de/che2016/de/faecher',
             //seperate tracking string for fallback as it varies from form inputs
             tracking: '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.che.teaser.button_ohne_fach.x' +
                         '&utm_medium=fix' +
