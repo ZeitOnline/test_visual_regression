@@ -219,7 +219,12 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             // For some links, we want to preserve the GET parameters.
             // Otherwise, remove them!
-            if ( !/\.(social|studiumbox)\./.test( slug ) ) {
+            if ( slug.indexOf( '.social.' ) !== -1 ) {
+                url = $( 'meta[property="og:url"]' );
+                url = url.length ?
+                    url.attr( 'content' ).replace( /http(s)?:\/\//, '' ) :
+                    window.location.host + window.location.pathname;
+            } else if ( slug.indexOf( '.studiumbox.' ) === -1 ) {
                 url = url.split( '?' )[0];
             }
         }
