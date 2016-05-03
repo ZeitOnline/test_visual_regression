@@ -1699,10 +1699,10 @@ def test_imagecopyright_link_is_present_on_centerpages(testbrowser):
     assert len(link) == 1
 
 
-def test_imagecopyright_link_is_not_present_on_articles(testbrowser):
+def test_imagecopyright_link_is_present_on_articles(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     link = browser.cssselect('.footer-links__link.js-image-copyright-footer')
-    assert len(link) == 0
+    assert len(link) == 1
 
 
 def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
