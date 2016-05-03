@@ -55,3 +55,19 @@ def test_campus_adcontroller_values_return_values_on_article(application):
 def test_campus_adplace7_should_be_placeable_via_cpextra(testbrowser):
     browser = testbrowser('/campus/centerpage/adplace7')
     assert len(browser.cssselect('script[id="ad-desktop-7"]')) == 1
+
+
+def test_campus_adcontroller_values_return_values_on_topic_cp(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/centerpage/thema')
+    adcv = [
+        ('$handle', 'index'),
+        ('level2', 'campus'),
+        ('level3', 'thema'),
+        ('level4', 'jurastudium'),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,zeitcampus'),
+        ('tma', '')]
+    view = zeit.web.campus.view_centerpage.Centerpage(
+        content, pyramid.testing.DummyRequest())
+    assert adcv == view.adcontroller_values
