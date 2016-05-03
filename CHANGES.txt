@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - BUG-411: Make topics available for ZEIT Campus AdController on Centerpages
 
+- BUG-415: Only report shared URL for clicktracking
+
 - FIX: Support non-ascii URLs in "komplettansicht" redirect
 
 - FIX: Clearify vertical alignment of "new" element in nav
