@@ -61,6 +61,7 @@
 
 .abo-cta
 	@extend %border-box
+	display: block
 	margin-bottom: $gutter
 	padding: 2em 1em
 	+respond-min($break-tablet-min)
@@ -78,6 +79,10 @@
 			+scaled-font(28px, $title-factor)
 	&__label
 		@extend %border-box--cta
+	+on-interaction
+		border-color: $primary-color
+		.abo-cta__label
+			color: $primary-color
 
 .follow-us
 	background: $color-facebook
