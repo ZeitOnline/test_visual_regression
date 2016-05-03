@@ -9,6 +9,9 @@
       <bu>Wer kann im Examen mit Detailwissen punkten?</bu>
       <copyright link="http://www.photocase.de/foto/1213716-stock-photo-hand-schule-buero-lernen-studium-papier">© willma.../photocase.de</copyright>
     </image>
+    <topic>
+      <label>Jurastudium</label>
+    </topic>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
