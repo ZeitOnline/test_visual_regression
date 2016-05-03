@@ -6,13 +6,19 @@ Change log for zeit.web
 
 - ZON-3062: Change wording of CP button
 
-- FIX: Support non-ascci URLs in "komplettansicht" redirect
+- ZON-3058: Show series name on column teasers
+
+- BUG-411: Make topics available for ZEIT Campus AdController on Centerpages
+
+- FIX: Support non-ascii URLs in "komplettansicht" redirect
 
 - FIX: Clearify vertical alignment of "new" element in nav
 
 - FIX: Fix links in toolbox
 
 - FIX: Fix wording and links
+
+- OPS-308: Don't look at *all* gallery entries just to get the first one
 
 
 2.78 (2016-05-02)
