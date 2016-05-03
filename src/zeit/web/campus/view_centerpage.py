@@ -17,8 +17,7 @@ import zeit.web.core.view_centerpage
     renderer='templates/centerpage.html')
 class Centerpage(
         zeit.web.core.view_centerpage.Centerpage,
-        zeit.web.campus.view.Content,
-        zeit.web.campus.view.Base):
+        zeit.web.campus.view.Content):
     pass
 
 
