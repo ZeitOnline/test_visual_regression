@@ -12,17 +12,14 @@
 	position: relative
 
 .print-menu
-	display: none
-	&__print,
-	&__pdf
+	&__link
 		@extend %article-interactions__item
 		&:before
-			content: " / "
 			color: $color-separator
-			margin: remify(0 4px)
+			content: " / "
+			margin: 0 .25em
 
 .sharing-menu
-	display: table-cell
 	font-size: remify(14px)
 	&__items
 		margin: 0
@@ -34,6 +31,6 @@
 			&--whatsapp
 				display: none !important
 
-+respond-min($break-desktop-min)
++respond-max($break-desktop-min)
 	.print-menu
-		display: table-cell
+		display: none
