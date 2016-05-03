@@ -5,6 +5,7 @@ import zeit.campus.interfaces
 import zeit.web.core.application
 import zeit.web.core.security
 import zeit.web.core.view
+import zeit.web.campus.module.toolbox
 
 
 def is_zco_content(context, request):
@@ -17,6 +18,7 @@ class Base(zeit.web.core.view.Base):
     seo_title_default = u'ZEIT Campus ONLINE | studieren. arbeiten. leben.'
     pagetitle_suffix = u' | ZEIT Campus'
 
+    # make toolbox links available in view
     toolbox = zeit.web.campus.module.toolbox.TOOL_SOURCE
 
     @zeit.web.reify

@@ -4,12 +4,12 @@
     <ul class="toolbox__list">
     {% for link in module.toolbox %}
         <li class="toolbox__item">
-            <a href="{{ link.href }}" class="toolbox__link" title="{{ link.href_title }}">
+            <a href="{{ link.href }}" class="toolbox__link" title="{{ link.title_flyout }}">
                 <h3 class="toolbox__title">{{ link.title }}</h3>
                 <p class="toolbox__text">
                     {{ link.text }}
                 </p>
-                <strong class="toolbox__cta">Zum Test</strong>
+                <strong class="toolbox__cta">{{ link.cta }}</strong>
                 {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
             </a>
         </li>

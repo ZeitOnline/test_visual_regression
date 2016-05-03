@@ -20,15 +20,12 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
         tree = self._get_tree()
         for node in tree.iterchildren('link'):
             yield dict(title=unicode(node.get('title')),
-                       href_title=unicode(node.get('href_title')),
+                       title_flyout=unicode(node.get('title_flyout')),
                        text=unicode(node.get('text')),
                        cta=unicode(node.get('cta')),
+                       cta_flyout=unicode(node.get('cta_flyout')),
+                       tracking=unicode(node.get('tracking')),
                        href=unicode(node.get('href')))
-
-    @property
-    def footer_text(self):
-        tree = self._get_tree()
-        return tree.get('footer')
 
     @property
     def header_text(self):
@@ -36,8 +33,18 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
         return tree.get('header')
 
     @property
+    def footer_text(self):
+        tree = self._get_tree()
+        return tree.get('footer')
+
+    @property
     def footer_link(self):
         tree = self._get_tree()
         return tree.get('href')
+
+    @property
+    def footer_tracking(self):
+        tree = self._get_tree()
+        return tree.get('tracking')
 
 TOOL_SOURCE = ToolSource()
