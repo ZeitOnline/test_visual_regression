@@ -1,4 +1,4 @@
-$comment-color-notice: 			$color-body-text
+$comment-color-notice: 			#fff
 $comment-color-header-sub: 		#fff
 $comment-color-head-background:	$color-community-primary
 
@@ -29,6 +29,11 @@ $comment-color-head-background:	$color-community-primary
 		color: #fff
 	&__note &__message
 		color: inherit
+	&__note &__notice
+		+default-article-textlink($color: $comment-color-notice, $hover: $comment-color-notice, $border-color: rgba(#fff, 0.5), $border-color--hover: $comment-color-notice)
+		&:before
+			background-color: #fff
+			color: #444
 	&__head + &__message
 		padding-bottom: em(16px)
 		padding-top: em(16px)
