@@ -68,6 +68,6 @@ def test_campus_adcontroller_values_return_values_on_topic_cp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
-    view = view = zeit.web.campus.view_centerpage.Centerpage(
+    view = zeit.web.campus.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
