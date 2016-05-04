@@ -35,6 +35,7 @@ class IRanking(zeit.content.cp.interfaces.IArea):
 
 
 @zeit.web.register_area('ranking')
+@zeit.web.register_area('zco-ranking')
 class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     zope.interface.implements(

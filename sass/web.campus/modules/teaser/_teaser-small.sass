@@ -1,0 +1,44 @@
+.teaser-small
+	@extend %teaser
+	+clearfix
+	padding: $page-padding--small
+
+	&__media
+		@extend %teaser-media
+		display: none
+
+	&__heading
+		+scaled-font(28px, $title-factor)
+		line-height: 0
+		margin: remify(0 0 10px)
+
+	&__kicker
+		@extend %teaser-kicker
+		display: block
+		padding: remify(0 0 10px)
+		position: static
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
+
+	&__title
+		@extend %teaser-title
+
+	&__text
+		@extend %teaser-text
+
+	&__metadata
+		@extend %teaser-metadata
+
+	&__commentcount
+		@extend %teaser-commentcount
+
+	+respond-min($break-tablet-min)
+		padding: $vertical-space $cp-padding
+
+		&__media
+			display: block
+			float: left
+			padding-bottom: remify(200px) / 16 * 9 // image variant 'wide' (16:9)
+			width: remify(200px)
+			height: remify(113px)
+			margin-right: $page-padding--small
