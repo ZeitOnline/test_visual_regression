@@ -1,6 +1,7 @@
-$comment-color-notice: 			#fff
-$comment-color-header-sub: 		#fff
-$comment-color-head-background:	$color-community-primary
+$comment-color-notice:          #707070
+$comment-color-header-sub:      #fff
+$comment-color-head-background: $color-community-primary
+$comment-color-head-color:      #fff
 
 @import "web.core/modules/comments/comment-section"
 
@@ -20,15 +21,12 @@ $comment-color-head-background:	$color-community-primary
 			margin-top: remify(6px)
 
 	&__head
-		background-color: $color-community-primary
 		padding-bottom: em(32px - 6px) // compensate for short-length of font
-	&__head,
-	&__note
-		color: #fff
 	&__note &__message
 		color: inherit
 	&__note &__notice
-		+default-article-textlink($color: $comment-color-notice, $hover: $comment-color-notice, $border-color: rgba(#fff, 0.5), $border-color--hover: $comment-color-notice)
+		+default-article-textlink($color: inherit, $hover: inherit, $border-color: rgba($comment-color-head-color, 0.5), $border-color--hover: currentColor)
+		color: inherit
 		&:before
 			background-color: #fff
 			color: #444
