@@ -26,6 +26,8 @@ Change log for zeit.web
 
 - MAINT: Restrict framebuilder page_slice param to valid values
 
+- MAINT: Add Config for Toolbox and Flyout
+
 
 2.78 (2016-05-02)
 -----------------
