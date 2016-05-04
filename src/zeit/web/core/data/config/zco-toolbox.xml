@@ -1,0 +1,29 @@
+<toolbox_links href="http://studiengaenge.zeit.de/artikel/was-soll-ich-studieren.html" header="Was soll ich studieren?" footer="Was soll ich studieren?" tracking="campus-topnav.2.5..was soll ich studieren">
+    <link
+        title="Welches Studium passt zu mir?"
+        title_flyout="Studium-Interessentest"
+        href="http://studiengaenge.zeit.de/sit"
+        cta="Zum Test"
+        cta_flyout="Test starten"
+        tracking="campus-topnav.2.5.1.studium-interessentest"
+        text="Interessen entdecken mit dem Studium-Interessentest (SIT)">
+    </link>
+    <link
+        title="Wo kann ich studieren?"
+        title_flyout="Suchmaschine für Studiengänge"
+        href="http://studiengaenge.zeit.de"
+        cta="Zur Suche"
+        cta_flyout="Zur Suche"
+        tracking="campus-topnav.2.5.2.suchmaschine-fuer-studiengaenge"
+        text="Überblick verschaffen mit der Suchmaschine für Studiengänge">
+    </link>
+    <link
+        title="Welche Uni ist die Beste für mich?"
+        title_flyout="CHE Hochschulranking"
+        href="http://ranking.zeit.de/che2016/de/"
+        cta="Zum Ranking"
+        cta_flyout="Alle Ergebnisse"
+        tracking="campus-topnav.2.5.3.che-hochschulranking"
+        text="Universitäten vergleichen mit dem CHE Hochschulranking">
+    </link>
+</toolbox_links>

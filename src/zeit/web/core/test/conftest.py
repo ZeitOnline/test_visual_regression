@@ -167,6 +167,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/servicebox.xml'),
         'vivi_zeit.web_zco-servicelinks-source': (
             'egg://zeit.web.core/data/config/servicelinks-zco.xml'),
+        'vivi_zeit.web_zco-toolbox-source': (
+            'egg://zeit.web.core/data/config/zco-toolbox.xml'),
         'vivi_zeit.content.gallery_gallery-types-url': (
             'egg://zeit.web.core/data/config/gallery-types.xml'),
         'vivi_zeit.web_series-source': (
