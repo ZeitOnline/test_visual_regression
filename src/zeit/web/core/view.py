@@ -964,7 +964,15 @@ class FrameBuilder(CeleraOneMixin):
 
     @zeit.web.reify
     def page_slice(self):
-        return self.request.GET.get('page_slice', None)
+        requested_slice = self.request.GET.get('page_slice', None)
+        if requested_slice:
+            if requested_slice not in [
+                    'html_head', 'upper_body', 'lower_body']:
+                raise pyramid.httpexceptions.HTTPBadRequest(
+                    title='Bad page_slice given',
+                    explanation='''The page_slice parameter only accepts these
+                        values: "html_head", "upper_body", "lower_body"''')
+        return requested_slice
 
     @zeit.web.reify
     def desktop_only(self):
