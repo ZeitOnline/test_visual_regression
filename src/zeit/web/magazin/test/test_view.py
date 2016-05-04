@@ -187,7 +187,7 @@ def test_footer_should_have_expected_structure(testbrowser):
     footer = browser.cssselect('footer.main-footer')[0]
     logo = footer.cssselect('svg.main-footer__logo')
     assert len(logo) == 1
-    linklists = footer.cssselect('ul')
+    linklists = footer.cssselect('.main-footer__links ul')
     assert len(linklists) == 2
     list_top = linklists[0]
     list_bottom = linklists[1]

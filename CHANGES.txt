@@ -8,7 +8,11 @@ Change log for zeit.web
 
 - ZON-3058: Show series name on column teasers
 
+- ZON-3055: Add clicktracking for ZMO + ZCO footer
+
 - BUG-411: Make topics available for ZEIT Campus AdController on Centerpages
+
+- BUG-415: Only report shared URL for clicktracking
 
 - FIX: Support non-ascii URLs in "komplettansicht" redirect
 
@@ -19,6 +23,8 @@ Change log for zeit.web
 - FIX: Fix wording and links
 
 - OPS-308: Don't look at *all* gallery entries just to get the first one
+
+- MAINT: Restrict framebuilder page_slice param to valid values
 
 
 2.78 (2016-05-02)
