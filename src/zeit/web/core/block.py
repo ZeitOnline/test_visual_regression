@@ -790,7 +790,10 @@ class BreakingNews(object):
         bn_banner = zeit.content.article.edit.interfaces.IBreakingNewsBody(
             bn_banner_content)
         self.uniqueId = bn_banner.article_id
-        bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId)
+        bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId, None)
+        if bn_article is None:
+            self.published = False
+            return
         bd_date = zeit.cms.workflow.interfaces.IPublishInfo(
             bn_article).date_first_released
         if bd_date:
