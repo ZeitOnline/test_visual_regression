@@ -8,13 +8,11 @@ $comment-color-head-background:	$color-community-primary
 .comment-section
 	&__button
 		+font-smoothing
-		border: 3px solid #fff
+		border: 3px solid currentColor
 		color: #fff
 		display: inline-block
 		font-weight: bold
 		padding: remify(6px 8px 6px 12px)
-		+on-interaction
-			border-color: currentColor
 		+respond-min($break-phablet-min)
 			float: right
 			// fake the button to appear in the center of the pink section
