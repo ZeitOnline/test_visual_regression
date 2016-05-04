@@ -4,17 +4,10 @@
 	background-color: $color-background--light
 	padding-bottom: remify(30px)
 
-	&__link
-		border-bottom: 1px solid #ddd
-		color: $color-text
-		+on-interaction
-			border-bottom-color: #999
-			color: $color-article-primary
-
 	+respond-min($break-tablet-min)
 		margin: $vertical-space $cp-padding
 		background-color: transparent
-		padding: 0
+		padding: $vertical-space/2 0 0 0
 		position: relative
 		&:before
 			background-color: $color-background--light
