@@ -24,6 +24,8 @@ Change log for zeit.web
 
 - OPS-308: Don't look at *all* gallery entries just to get the first one
 
+- MAINT: Restrict framebuilder page_slice param to valid values
+
 
 2.78 (2016-05-02)
 -----------------
