@@ -1,248 +1,248 @@
 .article
-    margin: remify(0 0 40px)
-    padding: remify(0 $page-padding)
-    &__item
-        margin-left: auto
-        margin-right: auto
-        max-width: remify(660px)
-        &--float,
-        &--wide
-            max-width: remify(820px)
-        &--large
-            margin-left: -$page-padding
-            margin-right: -$page-padding
-            max-width: none
-    &__footer
-        border-top: 2px solid $color-border
-        margin: remify(20px auto 32px)
-        padding: remify(20px 0 0)
-    &__button
-        +zon-button-inky($margin: remify(50px 0 0))
-        &:after
-            // @see: https://github.com/sass/sass/issues/659
-            content: #{"\"\\203A\""} // Single Right-pointing Angle Quotation Mark
-            padding-left: .5em
-            font-size: 1rem
-            line-height: 1
+	+padded
+	margin: remify(0 0 40px)
+	&__item
+		margin-left: auto
+		margin-right: auto
+		max-width: remify(660px)
+		&--float,
+		&--wide
+			max-width: remify(820px)
+		&--large
+			+unpadded
+			max-width: none
+	&__footer
+		border-top: 2px solid $color-border
+		margin: remify(20px auto 32px)
+		padding: remify(20px 0 0)
+	&__button
+		+zon-button-inky($margin: remify(50px 0 0))
+		&:after
+			// @see: https://github.com/sass/sass/issues/659
+			content: #{"\"\\203A\""} // Single Right-pointing Angle Quotation Mark
+			padding-left: .5em
+			font-size: 1rem
+			line-height: 1
 
 %caption
-    color: #444
-    font-family: $font-franziska
-    font-size: em(15px)
-    font-style: italic
-    padding: remify(10px 0)
+	color: #444
+	font-family: $copytext-font-family
+	font-size: em(15px)
+	font-style: $caption-font-style
+	padding: remify(10px 0)
 
 .figure
-    &__caption
-        @extend %caption
-    &__copyright
-        color: $grey
-        a
-            color: inherit
-            +on-interaction
-                color: $color-link--hover
-    &--large
-        margin: remify(28px auto 40px)
-        max-width: remify(820px)
-        +respond-min($break-desktop-min)
-            margin-top: remify(40px)
-        .figure__caption
-            margin-left: auto
-            margin-right: auto
-            max-width: remify(660px)
-            padding-left: $page-padding
-            padding-right: $page-padding
+	&__caption
+		@extend %caption
+	&__copyright
+		color: $grey
+		a
+			color: inherit
+			+on-interaction
+				color: $color-link--hover
+	&--large
+		margin: remify(28px auto 40px)
+		max-width: remify(820px)
+		+respond-min($break-desktop-min)
+			margin-top: remify(40px)
+		.figure__caption
+			background-color: $caption-background-color
+			margin: 0 auto
+			max-width: $caption-max-width
+			padding: $page-padding--small
 
 .video
-    &__caption
-        @extend %caption
+	&__caption
+		@extend %caption
 
 .headline
-    font-size: 1em
-    margin: remify(24px 0)
-    &__kicker
-        color: $color-kicker
-        display: block
-        font-size: em(14px)
-        letter-spacing: $zon-letter-spacing-m
-        padding-bottom: remify(17px)
-    &__title
-        color: $color-headline
-        display: block
-        font-size: em(30px)
-        line-height: 1.2
+	font-size: 1em
+	margin: remify(24px 0)
+	&__kicker
+		color: $color-kicker
+		display: block
+		font-size: em(14px)
+		letter-spacing: $zon-letter-spacing-m
+		padding-bottom: remify(17px)
+	&__title
+		color: $color-headline
+		display: block
+		font-size: em(30px)
+		line-height: 1.2
 
 .summary,
 .byline
-    color: $color-summary
-    font-size: em(18px)
-    line-height: 1.4
-    margin-bottom: remify(20px)
-    +respond-min($break-tablet-min)
-        line-height: 1.5
-    +respond-min($break-desktop-min)
-        font-size: em(20px)
+	color: $color-summary
+	font-size: $copytext-font-size
+	line-height: 1.4
+	margin-bottom: remify(20px)
+	+respond-min($break-tablet-min)
+		line-height: 1.5
+	+respond-min($break-desktop-min)
+		font-size: em(20px)
 
 .byline
-    margin-bottom: remify(30px)
-    a
-        color: inherit
-        +on-interaction
-            color: $color-link--hover
-    span[itemprop="name"]
-        font-weight: bold
+	margin-bottom: remify(30px)
+	a
+		color: inherit
+		+on-interaction
+			color: $color-link--hover
+	span[itemprop="name"]
+		font-weight: bold
 
 
 .metadata
-    color: $color-metadata
-    font-size: em(14px)
-    letter-spacing: $zon-letter-spacing-s
-    margin-bottom: remify(40px)
-    time:empty
-        display: none
-    > time,
-    > span
-        white-space: nowrap
-    > time:after,
-    > span:after
-        color: $color-separator
-        content: " / "
-        margin: 0 .25em
-    > time:last-child:after,
-    > span:last-child:after
-        content: none
-    &__source a
-        color: inherit
-        border-bottom: 1px solid rgba($zon-grey, .4)
-        +on-interaction
-            color: inherit
-            border-bottom-color: rgba($zon-grey, .8)
+	color: $color-metadata
+	font-size: em(14px)
+	letter-spacing: $zon-letter-spacing-s
+	margin-bottom: remify(40px)
+	time:empty
+		display: none
+	> time,
+	> span
+		white-space: nowrap
+	> time:after,
+	> span:after
+		color: $color-separator
+		content: " / "
+		margin: 0 .25em
+	> time:last-child:after,
+	> span:last-child:after
+		content: none
+	&__source a
+		color: inherit
+		border-bottom: 1px solid rgba($zon-grey, .4)
+		+on-interaction
+			color: inherit
+			border-bottom-color: rgba($zon-grey, .8)
 
 .list,
 .paragraph,
 .portraitbox
-    +default-article-textlink
+	+default-article-textlink
 
 .list,
 .paragraph
-    font-family: $font-franziska
-    font-size: remify(18px)
-    line-height: 1.4
-    margin-bottom: .6em
-    margin-top: 0
+	font-family: $copytext-font-family
+	font-size: $copytext-font-size
+	line-height: 1.4
+	margin-bottom: .6em
+	margin-top: 0
 
-    +respond-min($break-tablet-min)
-        line-height: 1.5
+	+respond-min($break-tablet-min)
+		line-height: 1.5
 
-    +respond-min($break-desktop-min)
-        font-size: remify(20px)
+	+respond-min($break-desktop-min)
+		font-size: remify(20px)
 
 .intertitle
-    font-size: em(20px)
-    line-height: normal
-    margin-bottom: .5em
-    margin-top: 1.4em
-    +respond-min($break-desktop-min)
-        font-size: remify(24px)
+	font-size: em(20px)
+	line-height: normal
+	margin-bottom: .5em
+	margin-top: 1.4em
+	+respond-min($break-desktop-min)
+		font-size: remify(24px)
 
 .quote,
 .portraitbox,
 .figure--float
-    margin: remify(40px) auto
-    max-width: remify(660px)
-    width: 90%
+	margin: remify(40px) auto
+	max-width: remify(660px)
+	width: 90%
 
 .quote
-    +respond-min($break-tablet-min)
-        margin-left: 0
-        margin-right: 0
-        max-width: remify(560px)
-        width: 72%
-    &__text
-        font-size: em(17px)
-        font-weight: bold
-        letter-spacing: $zon-letter-spacing-s
-        line-height: 1.3
-        margin: 0
-        &:before
-            // @see: https://github.com/sass/sass/issues/659
-            content: #{"\"\\00BB\""} // Right-Pointing Double Angle Quotation Mark
-        &:after
-            content: #{"\"\\00AB\""} // Left-Pointing Double Angle Quotation Mark
-    &__source
-        color: $zon-grey
-        font-family: $font-franziska
-        font-size: em(15px)
-        font-style: italic
-        line-height: 1.5
-        margin-top: remify(14px)
-        &:before
-            // @see: https://github.com/sass/sass/issues/659
-            // @see: https://github.com/sass/sass/issues/659
-            content: #{"\"\\2014\""} // Em Dash
-    &__link
-        color: inherit
-        +on-interaction
-            color: $color-link--hover
+	+respond-min($break-tablet-min)
+		margin-left: 0
+		margin-right: 0
+		max-width: remify(560px)
+		width: 72%
+	&__text
+		font-size: em(17px)
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.3
+		margin: 0
+		&:before
+			// @see: https://github.com/sass/sass/issues/659
+			content: #{"\"\\00BB\""} // Right-Pointing Double Angle Quotation Mark
+		&:after
+			content: #{"\"\\00AB\""} // Left-Pointing Double Angle Quotation Mark
+	&__source
+		color: $zon-grey
+		font-family: $copytext-font-family
+		font-size: em(15px)
+		font-style: italic
+		line-height: 1.5
+		margin-top: remify(14px)
+		&:before
+			// @see: https://github.com/sass/sass/issues/659
+			// @see: https://github.com/sass/sass/issues/659
+			content: #{"\"\\2014\""} // Em Dash
+	&__link
+		color: inherit
+		+on-interaction
+			color: $color-link--hover
 
 .portraitbox,
 .figure--float
-    +respond-min($break-tablet-min)
-        float: left
-        margin: remify(16px 24px 16px 0)
-        min-width: remify(205px)
-        width: 26.83%
+	+respond-min($break-tablet-min)
+		float: left
+		margin: remify(16px 24px 16px 0)
+		min-width: remify(205px)
+		width: 26.83%
 
 .portraitbox
-    font-size: em(14px)
-    &__heading
-        color: $primary-color
-        font-weight: bold
-        letter-spacing: $zon-letter-spacing-l
-        text-transform: uppercase
-    &__body
-        color: $zon-grey
-        letter-spacing: $zon-letter-spacing-s
+	font-size: em(14px)
+	&__heading
+		color: $primary-color
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-l
+		text-transform: uppercase
+	&__body
+		color: $zon-grey
+		letter-spacing: $zon-letter-spacing-s
 
 .infobox
-    background: $zon-lighter-grey
-    margin: remify(40px (-$page-padding))
-    overflow: hidden // needed to prevent collapsing margins of .infobox__link and .infobox__panel
-    padding: 0 $page-padding
-    section
-        border-bottom: 1px solid #ccc
-        &:last-of-type
-            border: none
-    &__title
-        margin: 0
-        text-transform: uppercase
-    &__link
-        color: $color-headline
-        display: block
-        font-size: em(14px)
-        font-weight: bold
-        letter-spacing: $zon-letter-spacing-l
-        line-height: 1.3
-        margin: remify(14px 0)
-        +on-interaction
-            color: $color-headline
-    &__panel
-        margin: remify(14px 0 28px)
-        p,
-        li,
-        td
-            color: #444
-            font-family: $font-tabletgothic
-            font-size: em(15px)
-            line-height: 1.4
-            margin: 0 0 .6em
-            +respond-min($break-tablet-min)
-                font-size: em(16px)
-        figure
-            margin: remify(32px) 0
-        .figure__caption
-            font-size: em(15px)
-            line-height: 1.4
-            margin: remify(8px 0 0)
-        img
-            max-width: 100%
+	+unpadded
+	+padded
+	background: $zon-lighter-grey
+	margin-bottom: remify(40px)
+	margin-top: remify(40px)
+	overflow: hidden // needed to prevent collapsing margins of .infobox__link and .infobox__panel
+	section
+		border-bottom: 1px solid #ccc
+		&:last-of-type
+			border: none
+	&__title
+		margin: 0
+		text-transform: uppercase
+	&__link
+		color: $color-headline
+		display: block
+		font-size: em(14px)
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-l
+		line-height: 1.3
+		margin: remify(14px 0)
+		+on-interaction
+			color: $color-headline
+	&__panel
+		margin: remify(14px 0 28px)
+		p,
+		li,
+		td
+			color: #444
+			font-family: $font-tabletgothic
+			font-size: em(15px)
+			line-height: 1.4
+			margin: 0 0 .6em
+			+respond-min($break-tablet-min)
+				font-size: em(16px)
+		figure
+			margin: remify(32px) 0
+		.figure__caption
+			font-size: em(15px)
+			line-height: 1.4
+			margin: remify(8px 0 0)
+		img
+			max-width: 100%
