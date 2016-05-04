@@ -15,8 +15,8 @@
   <layout id="float-square" display_mode="float" variant_name="square">Quadrat 1:1 umfließend</layout>
 
   <!-- ZCO article-headers -->
-  <layout id="zco-wide" variant_name="wide">Standard 16:9</layout>
-  <layout id="zco-portrait" variant_name="portrait">Porträt 3:4</layout>
+  <layout id="zco-wide" display_mode="large" variant_name="wide">Standard 16:9</layout>
+  <layout id="zco-portrait" display_mode="large" variant_name="portrait">Porträt 3:4</layout>
 
   <!-- ZMO article-headers -->
   <layout id="zmo-wide-header" variant_name="wide" available="zeit.magazin.interfaces.IZMOContent">Artikelkopf Standard 16:9</layout>

@@ -69,7 +69,9 @@
 		{% block main %}
 			{% block content %}
 			<article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article">
-				{% include "zeit.web.core:templates/amp/article/publisher.html" %}
+				{% include [
+                    "{}:templates/amp/article/publisher.html".format(view.package),
+                    "zeit.web.core:templates/amp/article/publisher.html"] %}
 				<meta itemprop="mainEntityOfPage" content="{{ view.content_url }}">
 				<header class="article__header article__item">
 					<h1 class="headline" itemprop="headline">

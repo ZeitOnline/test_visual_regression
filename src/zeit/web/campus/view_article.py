@@ -47,3 +47,9 @@ class Article(zeit.web.core.view_article.Article,
     renderer='templates/article_advertorial.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
+
+
+@pyramid.view.view_config(route_name='amp',
+                          renderer='templates/amp/article.html')
+class AcceleratedMobilePageArticle(Article):
+    pass

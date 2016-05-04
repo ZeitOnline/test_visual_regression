@@ -1,127 +1,131 @@
 .nextread
-    margin: 0 auto
-    max-width: remify(820px)
-    &__link
-        display: block
-    &__lead
-        color: $color-text
-        font-size: em(15px)
-        font-weight: 700
-        letter-spacing: $zon-letter-spacing-m
-        text-transform: uppercase
-        padding: remify(24px $page-padding 15px)
-    &__container
-        padding: remify(12px $page-padding 32px)
-    figure
-        background-color: #444
-        color: #fff
-        height: 0
-        margin: 0
-        padding-bottom: 100% / 7 * 3 // image variant 'cinema'
-    &__heading
-        font-size: 1em
-        margin: 0 0 remify(10px)
-    &__kicker
-        display: block
-        color: $color-kicker
-        font-size: em(13px)
-        font-weight: bold
-        letter-spacing: $zon-letter-spacing-m
-        line-height: 1.2
-        margin-bottom: remify(4px)
-    &__title
-        display: block
-        color: $color-headline
-        font-size: em(20px)
-        font-weight: bold
-        letter-spacing: $zon-letter-spacing-s
-        line-height: 1.2
-    &__metadata
-        color: $color-metadata
-        font-size: em(14px)
-        line-height: 1.4
-        letter-spacing: $zon-letter-spacing-s
-        > time:empty
-            display: none
-        > time,
-        > span
-            white-space: nowrap
-        > time:after,
-        > span:after
-            content: " / "
-            margin: 0 .25em
-            opacity: $color-separator-opacity
-        > time:last-child:after,
-        > span:last-child:after
-            content: none
+	margin: 0 auto
+	max-width: remify(820px)
+	&__link
+		display: block
+	&__lead
+		+padded
+		color: $color-text
+		font-size: em(15px)
+		font-weight: 700
+		letter-spacing: $zon-letter-spacing-m
+		text-transform: uppercase
+		padding-bottom: remify(15px)
+		padding-top: remify(24px)
+	&__container
+		+padded
+		padding-bottom: remify(32px)
+		padding-top: remify(12px)
+	figure
+		background-color: #444
+		color: #fff
+		height: 0
+		margin: 0
+		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+	&__heading
+		font-size: 1em
+		margin: 0 0 remify(10px)
+	&__kicker
+		display: block
+		color: $color-kicker
+		font-size: em(13px)
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-m
+		line-height: 1.2
+		margin-bottom: remify(4px)
+	&__title
+		display: block
+		color: $color-headline
+		font-size: em(20px)
+		font-weight: bold
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.2
+	&__metadata
+		color: $color-metadata
+		font-size: em(14px)
+		line-height: 1.4
+		letter-spacing: $zon-letter-spacing-s
+		> time:empty
+			display: none
+		> time,
+		> span
+			white-space: nowrap
+		> time:after,
+		> span:after
+			content: " / "
+			margin: 0 .25em
+			opacity: $color-separator-opacity
+		> time:last-child:after,
+		> span:last-child:after
+			content: none
 
-    &--with-image &__container
-        padding-bottom: remify(32px)
+	&--with-image &__container
+		padding-bottom: remify(32px)
 
-    &--no-image
-        +font-smoothing
-        background: #444
-        .nextread__lead
-            color: #eee
-        .nextread__kicker
-            color: #999
-        .nextread__title
-            color: #fff
-        .nextread__metadata
-            color: #999
+	&--no-image
+		+font-smoothing
+		background: #444
+		.nextread__lead
+			color: #eee
+		.nextread__kicker
+			color: #999
+		.nextread__title
+			color: #fff
+		.nextread__metadata
+			color: #999
 
 +respond-min($break-tablet-min)
-    .nextread
-        &__link
-            position: relative
-            z-index: 1 // needed for the link to work with absolute positioned child nodes
-        &__lead,
-        &__container
-            padding-left: 0
-            padding-right: 0
-            width: remify(660px)
-            margin: 0 auto
-        &__lead
-            position: relative
-            &:after
-                border-bottom: 1px solid rgba($white, .5)
-                top: remify(55px)
-                content: ""
-                left: 0
-                position: absolute
-                width: 10%
-        &__container
-            margin-top: remify(27px)
-        figure
-            +teaser-image-dark-overlay($angle: 0deg)
-        &__heading
-            margin-bottom: remify(16px)
-        &__title
-            font-size: em(28px)
-            line-height: 1.12
-            width: 72%
-            +respond-min($break-desktop-min)
-                font-size: em(34px)
-                line-height: 1.2
+	.nextread
+		&__link
+			position: relative
+			z-index: 1 // needed for the link to work with absolute positioned child nodes
+		&__lead,
+		&__container
+			padding-left: 0
+			padding-right: 0
+			width: remify(660px)
+			margin: 0 auto
+		&__lead
+			position: relative
+			&:after
+				border-bottom: 1px solid rgba($white, .5)
+				top: remify(55px)
+				content: ""
+				left: 0
+				position: absolute
+				width: 10%
+		&__container
+			margin-top: remify(27px)
+		figure
+			+teaser-image-dark-overlay($angle: 0deg)
+		&__heading
+			margin-bottom: remify(16px)
+		&__title
+			font-size: em(28px)
+			line-height: 1.12
+			width: 72%
+			+respond-min($break-desktop-min)
+				font-size: em(34px)
+				line-height: 1.2
 
-        &--with-image
-            +font-smoothing
-            +teaser-image-text-shadow
-            color: $white
-            .nextread__lead,
-            .nextread__container
-                position: absolute
-                left: 50%
-                margin-left: remify(-330px)
-                padding-bottom: remify(64px)
-            .nextread__lead
-                color: $white
-                top: 0
-                z-index: 2
-            .nextread__container
-                bottom: 0
-            .nextread__title
-                color: $white
-            .nextread__kicker,
-            .nextread__metadata
-                color: $zon-lighter-grey
+		&--with-image
+			+font-smoothing
+			+teaser-image-text-shadow
+			color: $white
+			.nextread__lead,
+			.nextread__container
+				position: absolute
+				left: 50%
+				margin-left: remify(-330px)
+				padding-bottom: remify(64px)
+			.nextread__lead
+				color: $white
+				top: 0
+				z-index: 2
+			.nextread__container
+				bottom: 0
+			.nextread__title
+				color: $white
+			.nextread__kicker,
+			.nextread__metadata
+				color: $zon-lighter-grey
