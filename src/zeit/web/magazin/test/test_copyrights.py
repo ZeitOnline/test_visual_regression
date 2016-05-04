@@ -13,7 +13,8 @@ def test_copyright_entries_are_rendered_correcly(selenium_driver, testserver):
     # copyright text itself
     copyright_label = driver.find_element_by_css_selector(
         '.image-copyright-footer__item > span').text
-    assert u'© Karl Lagerfeld' in copyright_label
+    assert copyright_label.startswith(u'©')
+    assert copyright_label.endswith(u'Karl Lagerfeld')
     # linked copyrights
     copyright_link = driver.find_element_by_css_selector(
         '.image-copyright-footer__item > a').get_attribute('href')
