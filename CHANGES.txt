@@ -4,6 +4,8 @@ Change log for zeit.web
 2.79 (unreleased)
 -----------------
 
+- ZON-3061: Polishing ZEIT Campus
+
 - ZON-3062: Change wording of CP button
 
 - ZON-3058: Show series name on column teasers
