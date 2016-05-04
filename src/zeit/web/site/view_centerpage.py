@@ -233,12 +233,12 @@ class Storystream(Centerpage):
                     # object into the module?
                     teaser = zeit.web.core.template.first_child(module)
                     if ((oldest_atom is None) or
-                            (teaser.tldr_date is not None and
+                            (teaser and teaser.tldr_date is not None and
                                 oldest_atom > teaser.tldr_date)):
                         oldest_atom = teaser.tldr_date
 
                     if ((latest_atom is None) or
-                            (teaser.tldr_date is not None and
+                            (teaser and teaser.tldr_date is not None and
                                 latest_atom < teaser.tldr_date)):
                         latest_atom = teaser.tldr_date
 

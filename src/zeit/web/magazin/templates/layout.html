@@ -119,26 +119,26 @@
                 </main>
 
                 {% profile %}
-                {% block breadcrumbs %}
-                    {%- include "zeit.web.core:templates/inc/breadcrumbs.html" -%}
-                {% endblock breadcrumbs %}
-                {% endprofile %}
-
-                {% profile %}
                 {% block footer %}
-                    <footer class="main-footer">
+                    <footer class="main-footer" data-ct-area="zmo-footernav">
+                        {% block breadcrumbs -%}
+                            {%- include "zeit.web.core:templates/inc/breadcrumbs.html" -%}
+                        {%- endblock breadcrumbs %}
+
                         <div class="main-footer__box">
                             <div class="is-constrained is-centered">
-                                {% block footer_logo %}
-                                    {{ lama.use_svg_icon('logo-zmo-small', 'main-footer__logo', view.package) }}
-                                {% endblock footer_logo %}
+                                {% block footer_logo -%}
+                                    <a href="{{ request.route_url('home') }}zeit-magazin/index" data-ct-row="logo" data-ct-label="logo">
+                                        {{- lama.use_svg_icon('logo-zmo-small', 'main-footer__logo', view.package) -}}
+                                    </a>
+                                {%- endblock footer_logo %}
                                 <div class="main-footer__links">
-                                    <ul>
+                                    <ul data-ct-row="1">
                                         <li>VERLAG</li>
                                         <li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</a></li>
                                         <li><a href="http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">Rechte &amp; Lizenzen</a></li>
                                     </ul>
-                                    <ul>
+                                    <ul data-ct-row="2">
                                         <li><a class="js-image-copyright-footer" href="#bildrechte">Bildrechte</a></li>
                                         <li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>
                                         <li><a href="http://www.iqm.de/digital/nutzungsbasierte-onlinewerbung/">Cookies</a></li>

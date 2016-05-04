@@ -4,6 +4,7 @@ $interaction-hover-color: $black
 @import "web.core/modules/article/article-interactions"
 
 .sharing-menu
+	display: table-cell
 	vertical-align: middle
 	&__item
 		display: table-cell
@@ -27,7 +28,11 @@ $interaction-hover-color: $black
 	&__text
 		@extend %font-beckett
 		+font-smoothing
+		+scaled-font(22px, $title-factor)
+		color: $white
 		display: none
+		margin-top: remify(12px)
+		vertical-align: top
 	&__icon
 		color: $white
 		height: remify(40px)
@@ -36,21 +41,15 @@ $interaction-hover-color: $black
 +respond-min($break-tablet-min)
 	.sharing-menu
 		&__text
-			color: $white
-			letter-spacing: em(1.5px)
 			display: inline-block
-			+scaled-font(22px, $title-factor)
-			vertical-align: top
-			margin-top: remify(15px)
 		&__link
 			padding: remify(0 15px 0 5px)
 			margin-right: remify(16px)
 
 +respond-min($break-desktop-min)
 	.print-menu
+		display: table-cell
 		vertical-align: middle
-		&__print
-			&:before
-				content: ""
-
-
+		&__link
+			&:first-child:before
+				content: none
