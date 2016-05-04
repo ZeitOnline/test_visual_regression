@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.79 (unreleased)
+2.79 (2016-05-04)
 -----------------
 
 - ZON-3061: Polishing ZEIT Campus
