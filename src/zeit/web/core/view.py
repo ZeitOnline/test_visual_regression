@@ -516,6 +516,36 @@ class Base(object):
         url = conf.get('cardstack_backend', '').rstrip('/')
         return url + u'/stacks/esi/scripts'
 
+    @zeit.web.reify
+    def breadcrumbs(self):
+        return []
+
+    def breadcrumbs_by_title(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        breadcrumbs.extend([(
+            self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
+        return breadcrumbs
+
+    def breadcrumbs_by_navigation(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        for segment in (self.ressort, self.sub_ressort):
+            if segment == u'reisen':
+                segment = u'reise'
+            elif segment == u'studium':
+                segment = u'campus'
+            try:
+                nav_item = zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
+                    segment]
+                if nav_item['text'] == 'Campus':
+                    nav_item['text'] = 'ZEIT Campus'
+                breadcrumbs.extend([(nav_item['text'], nav_item['link'])])
+            except KeyError:
+                # Segment is no longer part of the navigation
+                next
+        return breadcrumbs
+
 
 class CeleraOneMixin(object):
 

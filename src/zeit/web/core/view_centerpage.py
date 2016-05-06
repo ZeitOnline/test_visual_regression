@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import pyramid.view
 import lxml.etree
 import zope.component
@@ -39,6 +40,67 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
                         area):
                     if zeit.web.core.view.known_content(teaser):
                         yield teaser
+
+    @zeit.web.reify
+    def breadcrumbs(self):
+        # No breadcrumbs for homepage
+        if self.is_hp:
+            return []
+
+        # Default breadcrumbs
+        breadcrumbs = super(Centerpage, self).breadcrumbs
+
+        # Search forms
+        if zeit.web.core.utils.find_block(
+                self.context, module='search-form') is not None:
+            try:
+                breadcrumbs.extend([(u'Suchergebnisse für "{}"'.format(
+                    self.request.GET['q']), None)])
+            except KeyError:
+                pass
+            return breadcrumbs
+        # "Angebote" and "Administratives"
+        if self.ressort in ('angebote', 'administratives', 'news'):
+            # Hamburg news
+            if self.ressort == 'news' and self.sub_ressort == 'hamburg':
+                nav_item = zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
+                    self.sub_ressort]
+                breadcrumbs.extend([(nav_item['text'], nav_item['link'])])
+                breadcrumbs.extend([('Aktuell', None)])
+                return breadcrumbs
+            html_title = zeit.seo.interfaces.ISEO(self.context).html_title
+            if html_title is not None:
+                breadcrumbs.extend([(html_title, None)])
+            else:
+                return self.breadcrumbs_by_navigation(breadcrumbs)
+        # Video CP
+        elif self.ressort == 'video':
+            breadcrumbs.extend([('Video', self.context.uniqueId)])
+        # Topicpage
+        elif self.context.type == 'topicpage':
+            self.breadcrumbs_by_navigation(breadcrumbs)
+            breadcrumbs.extend([(
+                u'Thema: {}'.format(self.context.title), None)])
+        # Archive year index
+        elif self.context.type == 'archive-print-year':
+            breadcrumbs.extend([
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
+                ("Jahrgang: {}".format(self.context.year), None)])
+        # Archive volume index
+        elif self.context.type == 'archive-print-volume':
+            breadcrumbs.extend([
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
+                ("Jahrgang {}".format(self.context.year),
+                    'http://xml.zeit.de/{}/index'.format(self.context.year)),
+                ("Ausgabe: {0:02d}".format(self.context.volume or 0), None)])
+        # Dynamic folder
+        elif zeit.content.dynamicfolder.interfaces.\
+                IRepositoryDynamicFolder.providedBy(self.context.__parent__):
+            breadcrumbs.extend([(self.title, None)])
+        else:
+            return self.breadcrumbs_by_navigation(breadcrumbs)
+
+        return breadcrumbs
 
     @zeit.web.reify
     def canonical_url(self):
