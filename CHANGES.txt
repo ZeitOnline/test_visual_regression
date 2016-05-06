@@ -4,7 +4,8 @@ Change log for zeit.web
 2.80 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Have bugsnag group UndefinedErrors by object and attribute
+  name instead of the (unhelpful because constant) source code location
 
 
 2.79 (2016-05-04)
