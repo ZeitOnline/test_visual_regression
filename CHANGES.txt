@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-3055: Add clicktracking for ZMO + ZCO footer
 
+- ZON-3059: Add clicktracking for ZCO sharing button
+
 - ZON-3030: Enable Accelerated Mobile Pages (AMP) for ZEIT Campus and ZEITmagazin
 
 - BUG-411: Make topics available for ZEIT Campus AdController on Centerpages
