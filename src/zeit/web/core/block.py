@@ -785,7 +785,6 @@ class BreakingNews(object):
                 bn_banner_content):
             self.published = False
             return
-        raise RuntimeError('provoked')
         self.published = zeit.cms.workflow.interfaces.IPublishInfo(
             bn_banner_content).published
         bn_banner = zeit.content.article.edit.interfaces.IBreakingNewsBody(
