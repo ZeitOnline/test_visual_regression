@@ -67,8 +67,7 @@ def test_breadcrumb_should_produce_expected_data():
     article = zeit.web.magazin.view_article.Article(context, request)
 
     crumbs = [
-        ('Start', 'http://foo.bar/index', 'ZEIT ONLINE'),
-        ('ZEIT Magazin', 'http://foo.bar/zeit-magazin/index'),
+        ('ZEITmagazin', 'http://foo.bar/zeit-magazin/index'),
         ('Mode & Design', 'http://foo.bar/zeit-magazin/mode-design/index'),
         ('This is my title', '')
     ]
@@ -81,6 +80,7 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     context.ressort = 'zeit-magazin'
     context.sub_ressort = 'lebensartx'
     context.title = 'This is my title'
+    context.current_page = mock.Mock()
 
     request = mock.Mock()
     request.route_url.return_value = 'http://foo.bar/'
@@ -88,8 +88,7 @@ def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
     article = zeit.web.magazin.view_article.Article(context, request)
 
     crumbs = [
-        ('Start', 'http://foo.bar/index', 'ZEIT ONLINE'),
-        ('ZEIT Magazin', 'http://foo.bar/zeit-magazin/index'),
+        ('ZEITmagazin', 'http://foo.bar/zeit-magazin/index'),
         ('This is my title', '')
     ]
 

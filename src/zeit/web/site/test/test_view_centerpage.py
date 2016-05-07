@@ -1071,8 +1071,7 @@ def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
         zeit.web.site.view_centerpage.Centerpage, u'ressort', u'moep')
     view = zeit.web.site.view_centerpage.Centerpage(
         context, pyramid.testing.DummyRequest())
-    assert view.breadcrumbs == [
-        ('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
+    assert view.breadcrumbs == []
 
 
 def test_homepage_should_have_no_breadcrumbs(
