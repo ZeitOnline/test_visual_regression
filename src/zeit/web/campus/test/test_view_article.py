@@ -260,3 +260,18 @@ def test_breadcrumbs_for_article(dummy_request):
     ]
 
     assert view.breadcrumbs == breadcrumbs
+
+
+def test_breadcrumbs_for_paginated_article_page(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/paginated')
+    request = dummy_request
+    view = zeit.web.campus.view_article.ArticlePage(context, request)
+    view.request.path_info = u'campus/article/paginated/seite-3'
+
+    breadcrumbs = [
+        ('ZEIT Campus', 'http://xml.zeit.de/campus/index'),
+        (u'Die dritte Seite', u'http://xml.zeit.de/campus/article/paginated')
+    ]
+
+    assert view.breadcrumbs == breadcrumbs
