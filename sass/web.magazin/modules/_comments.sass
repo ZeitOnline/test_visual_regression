@@ -51,7 +51,7 @@
     font-size: em(11px)
     font-weight: bold
 
-$comments-min-width: remify($comments__break-outside) - $max-page-width
+$comments-min-width: remify($comments__break-outside - em($max-page-width))
 
 .comments
     +unpadded

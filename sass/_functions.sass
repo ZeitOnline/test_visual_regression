@@ -19,6 +19,9 @@
 		@else if ($unit == unit($context)) // conversion to em
 			$list: append($list, $value / $context + 0em)
 
+		@else if ($unit == 'rem') // transliterate to em
+			$list: append($list, $value / 1rem + 0em)
+
 		@else
 			$base: unit($context)
 			@warn "Incompatible units: '#{$unit}' and '#{$base}'"
