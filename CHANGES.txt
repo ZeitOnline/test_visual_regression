@@ -1,7 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.79 (unreleased)
+2.80 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.79.1 (2016-05-09)
+-------------------
+
+- MAINT: Have bugsnag group UndefinedErrors by object and attribute
+  name instead of the (unhelpful because constant) source code location
+
+
+2.79 (2016-05-04)
 -----------------
 
 - ZON-3061: Polishing ZEIT Campus
@@ -11,6 +24,10 @@ Change log for zeit.web
 - ZON-3058: Show series name on column teasers
 
 - ZON-3055: Add clicktracking for ZMO + ZCO footer
+
+- ZON-3059: Add clicktracking for ZCO sharing button
+
+- ZON-3030: Enable Accelerated Mobile Pages (AMP) for ZEIT Campus and ZEITmagazin
 
 - BUG-411: Make topics available for ZEIT Campus AdController on Centerpages
 

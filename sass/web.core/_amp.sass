@@ -24,6 +24,13 @@ $color-headline: $color-text !default
 $color-summary: #444 !default
 $color-metadata: $zon-grey !default
 
+$copytext-font-family: $font-franziska !default
+$copytext-font-size: remify(18px) !default
+
+$caption-background-color: transparent !default
+$caption-font-style: italic !default
+$caption-max-width: remify(660px) !default
+
 // FONTS //////////////////////////////////////////////////
 
 @import "amp/amp-fonts"
@@ -31,44 +38,44 @@ $color-metadata: $zon-grey !default
 // GLOBAL //////////////////////////////////////////////////
 
 body
-    background-color: $color-page-bg
-    color: $color-text
-    font-family: $font-tabletgothic
-    font-size: $base-font-size
-    line-height: $base-line-height
+	background-color: $color-page-bg
+	color: $color-text
+	font-family: $base-font-family
+	font-size: $base-font-size
+	line-height: $base-line-height
 
 a
-    color: $color-link--default
-    text-decoration: none
-    +on-interaction
-        color: $color-link--hover
+	color: $color-link--default
+	text-decoration: none
+	+on-interaction
+		color: $color-link--hover
 
 figure
-    margin: 0
+	margin: 0
 
 h1,h2,h3,h4,h5,h6
-    font-size: 1em
+	font-size: 1em
 
 .visually-hidden
-    +visuallyhidden
+	+visuallyhidden
 
 %label
-    color: $zon-mid-grey
-    display: block
-    font-family: $font-tabletgothic
-    font-size: em(9px)
-    letter-spacing: .15em
-    line-height: 1
-    margin-bottom: remify(10px)
-    text-align: right
-    text-transform: uppercase
+	color: $zon-mid-grey
+	display: block
+	font-family: $font-tabletgothic
+	font-size: em(9px)
+	letter-spacing: .15em
+	line-height: 1
+	margin-bottom: remify(10px)
+	text-align: right
+	text-transform: uppercase
 
 .symbols
-    display: none
+	display: none
 
 svg use
-    fill: currentColor
-    pointer-events: none
+	fill: currentColor
+	pointer-events: none
 
 // MODULES //////////////////////////////////////////////////
 

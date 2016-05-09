@@ -42,3 +42,12 @@
     font-weight: normal;
     font-style: italic;
 }
+@font-face {
+    font-family: "BeckettLight";
+    src: url('/static/latest/fonts/beckett/Beckett-Light.eot');
+    src: url('/static/latest/fonts/beckett/Beckett-Light.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/beckett/Beckett-Light.woff2') format('woff2'),
+         url('/static/latest/fonts/beckett/Beckett-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

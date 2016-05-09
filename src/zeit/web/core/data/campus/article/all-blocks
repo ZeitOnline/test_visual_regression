@@ -48,7 +48,7 @@
     <attribute name="importsource" ns="http://namespaces.zeit.de/CMS/workflow">k4</attribute>
     <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="ipad_template" ns="http://namespaces.zeit.de/CMS/workflow"/>
-    <attribute name="is_amp" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="is_amp" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="is_instant_article" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="jobname" ns="http://namespaces.zeit.de/CMS/document">Bachelor_HILFE</attribute>
