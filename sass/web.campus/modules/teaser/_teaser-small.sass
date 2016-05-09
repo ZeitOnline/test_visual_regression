@@ -1,10 +1,10 @@
 .teaser-small
 	@extend %teaser
-	+clearfix
 	padding: $page-padding--small
 
 	&__media
 		@extend %teaser-media
+		background-color: transparent
 		display: none
 
 	&__heading
@@ -36,9 +36,16 @@
 		padding: $vertical-space $cp-padding
 
 		&__media
+			display: table-cell
+
+		&__media-container
 			display: block
-			float: left
 			padding-bottom: remify(200px) / 16 * 9 // image variant 'wide' (16:9)
 			width: remify(200px)
 			height: remify(113px)
-			margin-right: $page-padding--small
+			margin-right: $page-padding
+
+		&__content
+			display: table-cell
+			vertical-align: top
+

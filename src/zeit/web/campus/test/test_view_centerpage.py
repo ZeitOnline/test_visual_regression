@@ -4,6 +4,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
+import zope.component
+import zeit.solr.interfaces
+
 # import zeit.cms.interfaces
 
 # import zeit.web.core.interfaces
@@ -254,3 +257,14 @@ def test_campus_advertorial_teaser(testbrowser):
     select = testbrowser(
         '/campus/centerpage/teaser-advertorial').cssselect
     assert len(select('.teaser-wide-small--advertorial')) == 1
+
+
+def test_paginated_cp_has_correct_teaser_structure(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/01'}]
+    browser = testbrowser('/campus/centerpage/paginierung?p=2')
+    teaser = browser.cssselect('.teaser-small')[0]
+    image = teaser.cssselect('.teaser-small__media-item')[0]
+    assert len(teaser.cssselect('.teaser-small__media')) == 1
+    assert len(teaser.cssselect('.teaser-small__content')) == 1
+    assert image.get('data-variant') == 'wide'
