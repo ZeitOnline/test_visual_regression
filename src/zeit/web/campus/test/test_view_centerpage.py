@@ -195,7 +195,7 @@ def test_campus_cp_page_integration(testbrowser, datasolr):
     # Header is kept
     assert 'class="header-image"' in browser.contents
     # Ranking is kept
-    assert 'cp-area--ranking' in browser.contents
+    assert 'cp-area--zco-ranking' in browser.contents
 
 
 def test_campus_teaser_no_image_fallback_works_as_expected(testbrowser):
