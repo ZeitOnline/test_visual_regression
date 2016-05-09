@@ -26,22 +26,19 @@ class Base(zeit.web.core.view.Base):
         navigation = {
             'zeit-magazin': (
                 'ZEITmagazin',
-                '{}zeit-magazin/index'.format(self.request.route_url('home'))
+                'http://xml.zeit.de/zeit-magazin/index'
             ),
             'leben': (
                 'Leben',
-                '{}zeit-magazin/leben/index'.format(
-                    self.request.route_url('home'))
+                'http://xml.zeit.de/zeit-magazin/leben/index'
             ),
             'mode-design': (
                 'Mode & Design',
-                '{}zeit-magazin/mode-design/index'.format(
-                    self.request.route_url('home'))
+                'http://xml.zeit.de/zeit-magazin/mode-design/index'
             ),
             'essen-trinken': (
                 'Essen & Trinken',
-                '{}zeit-magazin/essen-trinken/index'.format(
-                    self.request.route_url('home'))
+                'http://xml.zeit.de/zeit-magazin/essen-trinken/index'
             )
         }
         for segment in (self.ressort, self.sub_ressort):
