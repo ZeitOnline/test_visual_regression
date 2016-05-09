@@ -1063,7 +1063,7 @@ def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
         assert not slides[3].is_displayed()
 
 
-def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
+def test_non_navigation_centerpage_should_have_no_breadcrumbs(
         application, monkeypatch):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
@@ -1086,7 +1086,7 @@ def test_breadcrumbs_should_handle_non_ascii(application, monkeypatch):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
     monkeypatch.setattr(
-        zeit.content.cp.centerpage.CenterPage, u'title', u'umläut')
+        zeit.content.cp.centerpage.CenterPage, u'supertitle', u'umläut')
     monkeypatch.setattr(
         zeit.content.cp.centerpage.CenterPage, u'type', u'topicpage')
     view = zeit.web.site.view_centerpage.Centerpage(

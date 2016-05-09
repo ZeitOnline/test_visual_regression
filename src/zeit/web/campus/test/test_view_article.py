@@ -247,3 +247,16 @@ def test_multi_page_article_has_print_link(testbrowser):
     links = browser.cssselect('.print-menu__link')
     assert (links[0].attrib['href'].endswith(
         '/campus/article/paginated/komplettansicht?print'))
+
+
+def test_breadcrumbs_for_article(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/simple')
+    view = zeit.web.campus.view_article.Article(context, dummy_request)
+
+    breadcrumbs = [
+        ('ZEIT Campus', 'http://xml.zeit.de/campus/index'),
+        (u'Beratung: Hier gibt es Hilfe', None)
+    ]
+
+    assert view.breadcrumbs == breadcrumbs
