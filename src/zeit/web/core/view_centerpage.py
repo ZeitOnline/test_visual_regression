@@ -80,7 +80,7 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         elif self.context.type == 'topicpage':
             self.breadcrumbs_by_navigation(breadcrumbs)
             breadcrumbs.extend([(
-                u'Thema: {}'.format(self.context.title), None)])
+                u'Thema: {}'.format(self.supertitle), None)])
         # Archive year index
         elif self.context.type == 'archive-print-year':
             breadcrumbs.extend([
