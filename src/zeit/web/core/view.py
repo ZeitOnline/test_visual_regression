@@ -12,6 +12,7 @@ import bugsnag
 import pyramid.response
 import pyramid.settings
 import pyramid.view
+import pyramid.httpexceptions
 import werkzeug.http
 import zope.component
 
