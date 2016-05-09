@@ -227,13 +227,6 @@ def test_column_should_not_have_header_image(testbrowser):
     assert '<div class="article__column__headerimage">' not in browser.contents
 
 
-def test_health_check_should_response_and_have_status_200(testbrowser):
-    browser = testbrowser('/health_check')
-    assert browser.headers['Content-Length'] == '2'
-    resp = zeit.web.core.view.health_check('request')
-    assert resp.status_code == 200
-
-
 def test_a_404_request_should_be_from_zon_main_page(testbrowser):
     browser = testbrowser()
     browser.handleErrors = False

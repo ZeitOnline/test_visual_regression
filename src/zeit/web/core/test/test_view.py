@@ -713,3 +713,19 @@ def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
     assert tags[5] == 'Studienfinanzierung'
     assert 'Hier gibt es Hilfe' == driver.execute_script(
         "return rawrConfig.locationMetaData.meta.description")
+
+
+def test_health_check_should_response_and_have_status_200(testbrowser):
+    browser = testbrowser('/health_check')
+    assert browser.headers['Content-Length'] == '2'
+    resp = zeit.web.core.view.health_check('request')
+    assert resp.status_code == 200
+
+
+def test_health_check_should_fail_if_repository_does_not_exist(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['vivi_zeit.connector_repository-path'] = '/i_do_not_exist'
+
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        zeit.web.core.view.health_check('request')
+
