@@ -7,8 +7,7 @@
     {% block teaser_attributes %}{% endblock %}>
 
     {% block teaser_media %}{% endblock %}
-
-        <span class="{{ self.layout() }}__content">
+    {% block teaser_content %}
         {% block teaser_heading %}
             <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
                 {% block teaser_link %}
@@ -70,6 +69,5 @@
             </div>
             {% endblock teaser_metadata_default %}
         {% endblock teaser_container %}
-        </span>
-
+    {% endblock teaser_content %}
 </article>
