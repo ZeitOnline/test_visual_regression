@@ -1,15 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <references>
-        <reference
-            xmlns:py="http://codespeak.net/lxml/objectify/pytype"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            type="advertisement"
-            contenttype="advertisement"
-            module="advertisement"
-            href="http://xml.zeit.de/angebote/verlagsnextread/jobs" />
-    </references>
   </head>
   <body>
     <supertitle>Refinanzierung</supertitle>

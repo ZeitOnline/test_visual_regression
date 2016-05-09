@@ -268,3 +268,37 @@ def test_paginated_cp_has_correct_teaser_structure(testbrowser):
     assert len(teaser.cssselect('.teaser-small__media')) == 1
     assert len(teaser.cssselect('.teaser-small__content')) == 1
     assert image.get('data-variant') == 'wide'
+
+
+def test_campus_toolbox_has_correct_links(testbrowser):
+    select = testbrowser('/campus/centerpage/cp-extra-tool-box').cssselect
+    assert ('http://studiengaenge.zeit.de/sit' in
+            select('.toolbox__link')[0].attrib['href'])
+    assert ('http://studiengaenge.zeit.de' in
+            select('.toolbox__link')[1].attrib['href'])
+    assert ('http://ranking.zeit.de/che2016/de/' in
+            select('.toolbox__link')[2].attrib['href'])
+
+
+def test_campus_flyout_has_correct_links(selenium_driver, testserver):
+    driver = selenium_driver
+    # assert desktop breakpoint
+    driver.set_window_size(1024, 768)
+    driver.get('%s/campus/index' % testserver.url)
+    link = driver.find_element_by_css_selector(
+        '.nav__tools-title .nav__dropdown')
+    link.click()
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CLASS_NAME, 'nav-flyout')))
+    except TimeoutException:
+        assert False, 'Navigation flyout not visible within 5 seconds'
+    else:
+        links = driver.find_elements_by_class_name('nav-flyout__link')
+        assert ('http://studiengaenge.zeit.de/sit'
+                in links[0].get_attribute('href'))
+        assert ('http://studiengaenge.zeit.de'
+                in links[1].get_attribute('href'))
+        assert ('http://ranking.zeit.de/che2016/de/'
+                in links[2].get_attribute('href'))

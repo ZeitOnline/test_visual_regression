@@ -1,28 +1,30 @@
 .breaking-news-banner
-    &__link
-        background: #ffe246
-        color: $black
-        display: block
-        font-size: remify(14px)
-        letter-spacing: $zon-letter-spacing-m
-        padding: remify(15px) $page-padding
-        text-align: center
-    &__label
-        text-transform: uppercase
-    &__time
-        padding-left: remify(4px)
-        text-transform: uppercase
-    &__title
-        display: block
-        font-size: remify(16px)
-        letter-spacing: $zon-letter-spacing-s
-        +respond-min($break-tablet-min)
-            display: inline
-            &:before
-                border-top: 1px solid #d7b636
-                content: ""
-                display: inline-block
-                height: 1px
-                vertical-align: middle
-                width: 40px
-                margin: remify(0 10px 0 5px)
+	&__link
+		+padded
+		background: #ffe246
+		color: $black
+		display: block
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-m
+		padding-bottom: remify(15px)
+		padding-top: remify(15px)
+		text-align: center
+	&__label
+		text-transform: uppercase
+	&__time
+		padding-left: remify(4px)
+		text-transform: uppercase
+	&__title
+		display: block
+		font-size: remify(16px)
+		letter-spacing: $zon-letter-spacing-s
+		+respond-min($break-tablet-min)
+			display: inline
+			&:before
+				border-top: 1px solid #d7b636
+				content: ""
+				display: inline-block
+				height: 1px
+				vertical-align: middle
+				width: 40px
+				margin: remify(0 10px 0 5px)

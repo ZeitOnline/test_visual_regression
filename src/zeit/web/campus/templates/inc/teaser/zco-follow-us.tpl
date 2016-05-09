@@ -16,12 +16,12 @@
         </a>
     </div>
     <div class="{{ self.layout() }}__actions">
-        <div class="abo-cta">
+        <a class="abo-cta" href="http://community.zeit.de/newsletter-signup?nl=campus" data-id="{{ teaser_position }}.solo-teaser-follow-us.newsletter">
             <div class="abo-cta__text">Hol’ Dir ZEIT Campus in dein Postfach</div>
-            <a class="abo-cta__label" href="http://community.zeit.de/newsletter-signup?nl=campus" data-id="{{ teaser_position }}.solo-teaser-follow-us.newsletter">
+            <span class="abo-cta__label">
                 <span class="visually-hidden">Jetzt den ZEIT Campus Newsletter </span>Abonnieren
-            </a>
-        </div>
+            </span>
+        </a>
         <a class="follow-us" href="https://de-de.facebook.com/zeitcampus" data-id="{{ teaser_position }}.solo-teaser-follow-us.facebook">
             <div class="follow-us__logo">{{ lama.use_svg_icon('facebook', 'follow-us__facebook', view.package) }}</div>
             <div class="follow-us__text">Folgt uns unauffällig</div>

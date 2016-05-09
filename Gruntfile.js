@@ -274,6 +274,12 @@ module.exports = function(grunt) {
                 src: [ '*.svg' ],
                 dest: project.sourceDir + 'sass/web.campus/svg/_minified'
             },
+            campusAmp: {
+                expand: true,
+                cwd: project.sourceDir + 'sass/web.campus/svg-amp',
+                src: [ '*.svg' ],
+                dest: project.sourceDir + 'sass/web.campus/svg-amp/_minified'
+            },
             magazin: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.magazin/svg',
@@ -314,6 +320,10 @@ module.exports = function(grunt) {
                     indent_size: 1,
                     indent_char: '  '
                 }
+            },
+            campusAmp: {
+                src: '<%= svgmin.campusAmp.dest %>/*.svg',
+                dest: project.codeDir + 'css/web.campus/amp.svg'
             },
             magazinAmp: {
                 src: '<%= svgmin.magazinAmp.dest %>/*.svg',

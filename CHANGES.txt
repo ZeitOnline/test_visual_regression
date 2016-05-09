@@ -1,14 +1,33 @@
 Change log for zeit.web
 =======================
 
-2.79 (unreleased)
+2.80 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.79.1 (2016-05-09)
+-------------------
+
+- MAINT: Have bugsnag group UndefinedErrors by object and attribute
+  name instead of the (unhelpful because constant) source code location
+
+
+2.79 (2016-05-04)
+-----------------
+
+- ZON-3061: Polishing ZEIT Campus
 
 - ZON-3062: Change wording of CP button
 
 - ZON-3058: Show series name on column teasers
 
 - ZON-3055: Add clicktracking for ZMO + ZCO footer
+
+- ZON-3059: Add clicktracking for ZCO sharing button
+
+- ZON-3030: Enable Accelerated Mobile Pages (AMP) for ZEIT Campus and ZEITmagazin
 
 - BUG-411: Make topics available for ZEIT Campus AdController on Centerpages
 
@@ -25,6 +44,8 @@ Change log for zeit.web
 - OPS-308: Don't look at *all* gallery entries just to get the first one
 
 - MAINT: Restrict framebuilder page_slice param to valid values
+
+- MAINT: Add Config for Toolbox and Flyout
 
 
 2.78 (2016-05-02)

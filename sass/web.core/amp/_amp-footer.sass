@@ -1,39 +1,41 @@
 .footer
-    margin-top: remify(70px)
-    text-align: center
+	margin-top: remify(70px)
+	text-align: center
 
-    &__logo
-        color: $color-footer-logo
-        display: block
-        height: $logo-height
-        margin: remify(20px) auto
-        width: $logo-width
+	&__logo
+		color: $color-footer-logo
+		display: block
+		height: $logo-height
+		margin: remify(20px) auto
+		width: $logo-width
 
-    &__navigation
-        background-color: $color-footer-bg
-        color: $color-footer
-        font-size: em(14px)
-        font-weight: bold
-        padding: remify(20px $page-padding)
-        ul, li
-            margin: 0
-            padding: 0
-            list-style: none
-        li
-            display: inline-block
-            &:after
-                // @see: https://github.com/sass/sass/issues/659
-                content: #{"\" \\2022 \""} // Bullet
-                margin: 0 .2em
-            &:last-child:after
-                content: none
-        a
-            color: inherit
-            +on-interaction
-                color: $black
+	&__navigation
+		+padded
+		background-color: $color-footer-bg
+		color: $color-footer
+		font-size: em(14px)
+		font-weight: bold
+		padding-bottom: remify(20px)
+		padding-top: remify(20px)
+		ul, li
+			margin: 0
+			padding: 0
+			list-style: none
+		li
+			display: inline-block
+			&:after
+				// @see: https://github.com/sass/sass/issues/659
+				content: #{"\" \\2022 \""} // Bullet
+				margin: 0 .2em
+			&:last-child:after
+				content: none
+		a
+			color: inherit
+			+on-interaction
+				color: $black
 
-    &__finish
-        background-color: $primary-color
-        padding: remify(18px) 0
-    &__button
-        +zon-button-dark
+	&__finish
+		background-color: $primary-color
+		padding: remify(18px) 0
+	&__button
+		+zon-button-dark
