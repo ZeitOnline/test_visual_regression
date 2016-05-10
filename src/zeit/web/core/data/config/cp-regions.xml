@@ -32,6 +32,9 @@
     <region kind="solo" title="Ranking">
         <area kind="ranking"/>
     </region>
+    <region kind="solo" title="ZCO Ranking">
+        <area kind="zco-ranking"/>
+    </region>
     <region kind="solo" title="Overview">
         <area kind="overview"/>
     </region>

@@ -4,6 +4,8 @@ Change log for zeit.web
 2.80 (unreleased)
 -----------------
 
+- ZON-3057: Add new Ranking Area and Teaser Format for paginated ZCO CPs
+
 - OPS-335: Improve health check (configurable via `health_check_with_fs`)
 
 - FIX: Be defensive about missing community maintenance config file
