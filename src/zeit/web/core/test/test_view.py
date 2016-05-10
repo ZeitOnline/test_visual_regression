@@ -729,3 +729,15 @@ def test_health_check_should_fail_if_repository_does_not_exist(testbrowser):
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         zeit.web.core.view.health_check('request')
 
+
+def test_health_check_with_fs_should_be_configurable(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['vivi_zeit.connector_repository-path'] = '/i_do_not_exist'
+    conf['health_check_with_fs'] = False
+
+    resp = zeit.web.core.view.health_check('request')
+    assert resp.status_code == 200
+
+    conf['health_check_with_fs'] = True
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        zeit.web.core.view.health_check('request')

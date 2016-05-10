@@ -940,6 +940,10 @@ def health_check(request):
     """
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    if not conf.get('health_check_with_fs', False):
+        return pyramid.response.Response('OK', 200)
+
     path = urlparse.urlparse(
         zeit.web.core.application.maybe_convert_egg_url(
             conf.get(
@@ -947,6 +951,7 @@ def health_check(request):
                 'file:///var/cms/work/')))
     if not os.path.exists(getattr(path, 'path', '/var/cms/work/')):
         raise pyramid.httpexceptions.HTTPInternalServerError()
+
     return pyramid.response.Response('OK', 200)
 
 
