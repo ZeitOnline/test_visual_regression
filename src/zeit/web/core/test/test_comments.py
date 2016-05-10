@@ -843,6 +843,14 @@ def test_community_maintenance_should_be_created_from_config(application):
     assert maintenance['text_active'] == 'text_active'
 
 
+def test_community_maintenance_should_be_disabled_for_invalid_url(application):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['community_maintenance'] = 'http://xml.zeit.de/nonexistent'
+    maintenance = zeit.web.core.comments.community_maintenance()
+    assert not maintenance['active']
+    assert maintenance['text_active'].startswith(u'Aufgrund')
+
+
 @pytest.mark.parametrize("header, state, status_code", [
     ({'x-premoderation': 'true'}, True, 202),
     ({'x-premoderation': 'false'}, False, 200),
