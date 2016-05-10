@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Be defensive about missing community maintenance config file
 
+- FIX: Make square teaser fully clickable again
+
 
 2.79.1 (2016-05-09)
 -------------------
