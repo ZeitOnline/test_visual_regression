@@ -138,6 +138,8 @@ class Comments(Author):
                 zeit.web.core.interfaces.ICommunity)
             comments_meta = community.get_user_comments(
                 self.context, page=page, rows=page_size)
+            if comments_meta is None:
+                return [UserCommentsArea([])]
             comments = comments_meta['comments']
             return [UserCommentsArea([zeit.web.core.centerpage.TeaserModule(
                 [c], layout='user-comment') for c in comments],

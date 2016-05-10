@@ -12,6 +12,7 @@ import bugsnag
 import pyramid.response
 import pyramid.settings
 import pyramid.view
+import pyramid.httpexceptions
 import werkzeug.http
 import zope.component
 
@@ -960,6 +961,27 @@ class Content(CeleraOneMixin, CommentMixin, Base):
 
 @pyramid.view.view_config(route_name='health_check')
 def health_check(request):
+    """ View callable to perform a health a check by checking,
+        if the configured repository path exists.
+
+        :type arg1: pyramid request object
+        :return: Response indicating, if check was successful or not
+        :rtype: pyramid.response.Response
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    if not conf.get('health_check_with_fs', False):
+        return pyramid.response.Response('OK', 200)
+
+    path = urlparse.urlparse(
+        zeit.web.core.application.maybe_convert_egg_url(
+            conf.get(
+                'vivi_zeit.connector_repository-path',
+                'file:///var/cms/work/')))
+    if not os.path.exists(getattr(path, 'path', '/var/cms/work/')):
+        raise pyramid.httpexceptions.HTTPInternalServerError()
+
     return pyramid.response.Response('OK', 200)
 
 
