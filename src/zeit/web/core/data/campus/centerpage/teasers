@@ -174,7 +174,7 @@
           <block href="http://xml.zeit.de/campus/article/01-countdown-studium" />
         </container>
         <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
-          <block href="http://xml.zeit.de/campus/article/leserartikel" />
+          <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
         </container>
       </region>
     </cluster>
@@ -187,10 +187,30 @@
           <block href="http://xml.zeit.de/campus/article/02-beziehung-schluss-machen" />
         </container>
         <container cp:type="teaser" module="zco-topic-small" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bce7b4">
-          <block href="http://xml.zeit.de/campus/article/03-spartipps" />
+          <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
         </container>
         <container cp:type="teaser" module="zco-topic-small" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bce8b4">
           <block href="http://xml.zeit.de/campus/article/leserartikel" />
+        </container>
+      </region>
+    </cluster>
+
+    <!-- topic graphical -->
+    <cluster area="id-7910e12f-0ac9-40fd-9032-e47c7f8b6893" kind="topic">
+      <region hide-dupes="True" area="id-d2b7846d-31c8-45b4-b2fc-ffdd88723a07" kind="topic-graphical" count="4" automatic="True" automatic_type="centerpage" read_more_url="http://xml.zeit.de/thema/index" read_more="Alle Themen">
+        <referenced_cp>http://xml.zeit.de/zeit-online/basic-teasers-setup</referenced_cp>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-688cf852-e709-432e-a756-edef34a62072" visible_mobile="False"/>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-56eec4bf-a0ce-4831-b349-866b8aa02b3a"/>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-4da54148-b028-40c7-b416-30e9e1e6b710"/>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-a1145c07-85c0-4c92-aced-f63235d0abe8"/>
+      </region>
+    </cluster>
+
+    <!-- toolbox -->
+    <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="solo">
+      <region area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="solo">
+        <container cp:type="cpextra" module="zco-tool-box" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a007">
+          <cp_extra id="zco-tool-box"/>
         </container>
       </region>
     </cluster>
