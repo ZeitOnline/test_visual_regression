@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - OPS-335: Improve health check (configurable via `health_check_with_fs`)
 
+- MAINT: Add ZEIT Campus breadcrumbs
+
 - FIX: Be defensive about missing community maintenance config file
 
 - FIX: Make square teaser fully clickable again

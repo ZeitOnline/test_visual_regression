@@ -11,6 +11,8 @@ import zeit.solr.interfaces
 
 # import zeit.web.core.interfaces
 
+import zeit.web.campus.view_centerpage
+
 
 def test_campus_navigation_should_present_flyout(selenium_driver, testserver):
     driver = selenium_driver
@@ -302,3 +304,36 @@ def test_campus_flyout_has_correct_links(selenium_driver, testserver):
                 in links[1].get_attribute('href'))
         assert ('http://ranking.zeit.de/che2016/de/'
                 in links[2].get_attribute('href'))
+
+
+def test_breadcrumbs_for_homepage(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/index')
+    view = zeit.web.campus.view_centerpage.Centerpage(context, dummy_request)
+
+    assert view.breadcrumbs == []
+
+
+def test_breadcrumbs_for_centerpage(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/centerpage/index')
+    view = zeit.web.campus.view_centerpage.Centerpage(context, dummy_request)
+
+    breadcrumbs = [
+        ('ZEIT Campus', 'http://xml.zeit.de/campus/index')
+    ]
+
+    assert view.breadcrumbs == breadcrumbs
+
+
+def test_breadcrumbs_for_topicpage(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/centerpage/thema')
+    view = zeit.web.campus.view_centerpage.Centerpage(context, dummy_request)
+
+    breadcrumbs = [
+        ('ZEIT Campus', 'http://xml.zeit.de/campus/index'),
+        (u'Thema: Jurastudium', None)
+    ]
+
+    assert view.breadcrumbs == breadcrumbs

@@ -71,9 +71,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Karriere</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">ZEIT MAGAZIN
-      Campus</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Campus</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZTCS-2016-01</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Kennen Sie diese 10 Geräte? Glückwunsch, dann sind Sie hiermit offiziell cool. (tgr)</attribute>
