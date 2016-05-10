@@ -645,11 +645,11 @@ def _community_maintenance_cache(unique_id=None):
                         u'Verständnis.')
     }
 
-    if unique_id:
-        xml = zeit.cms.interfaces.ICMSContent(unique_id).xml
-        maintenance = _maintenance_from_xml(xml, maintenance)
-
-    return maintenance
+    content = zeit.cms.interfaces.ICMSContent(unique_id, None)
+    if content is None:
+        return maintenance
+    else:
+        return _maintenance_from_xml(content.xml, maintenance)
 
 
 def _maintenance_from_xml(xml, maintenance):
