@@ -14,7 +14,6 @@ import zeit.web.core.interfaces
 import zeit.web.magazin.view
 import zeit.web.magazin.view_article
 import zeit.web.magazin.view_centerpage
-import zeit.web.site.view
 import zeit.web.site.view_article
 import zeit.web.site.view_centerpage
 
