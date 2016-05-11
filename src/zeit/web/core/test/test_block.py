@@ -305,6 +305,7 @@ def test_block_image_should_contain_expected_structure(tplbrowser):
     block.href = 'http://images.zeit.de/image.jpg'
     block.figure_mods = ('wide', 'rimless', 'apart')
     block.copyright = (('Andreas Gursky', 'http://www.example.com', False),)
+    block.ratio = 1
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/image.html', block=block)
     assert browser.cssselect('img.article__media-item')
