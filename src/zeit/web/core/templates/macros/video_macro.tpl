@@ -24,6 +24,7 @@
             data-embed="{{ brightcove_embed }}"
             data-video-id="{{ videoId }}"
             class="video-js video-player__videotag"
+            preload="none"
             controls></video>
             <script src="{{ brightcove_host }}/{{ brightcove_account }}/{{ brightcove_player }}_{{ brightcove_embed }}/index.min.js"></script>
     {% endif %}
