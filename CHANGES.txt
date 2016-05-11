@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2659: Use HTML5 video player for inline videos
 
+- BUG-417: Exclude Campus articles from article lineage
+
 
 2.80 (2016-05-11)
 -----------------
