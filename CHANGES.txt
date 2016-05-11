@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.80 (unreleased)
+2.80 (2016-05-11)
 -----------------
 
 - ZON-3057: Add new Ranking Area and Teaser Format for paginated ZCO CPs
