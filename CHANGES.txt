@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - MAINT: Add ZEIT Campus breadcrumbs
 
+- MAINT: Check community health directly (without varnish)
+
 - FIX: Be defensive about missing community maintenance config file
 
 - FIX: Make square teaser fully clickable again
