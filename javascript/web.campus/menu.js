@@ -57,6 +57,8 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                 if ( !( window.Zeit.isMobileView() && $( this ).data( 'follow-mobile' ) ) ) {
                     event.preventDefault();
                     toggleElement( control, !expanded );
+                } else {
+                    $( this ).data( 'id',  $( this ).data( 'id' ).replace( '.open', '' ) );
                 }
 
             });
