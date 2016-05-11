@@ -4,7 +4,7 @@ Change log for zeit.web
 2.80 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2659: Use HTML5 video player for inline videos
 
 
 2.79.1 (2016-05-09)
