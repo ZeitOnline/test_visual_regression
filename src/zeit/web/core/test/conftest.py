@@ -77,7 +77,7 @@ def app_settings(mockserver):
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
         'comment_page_size': '4',
-        'community_host': 'http://localhost:6551',
+        'community_host': mockserver.url + '/comments',
         'community_static_host': 'http://static_community/foo',
         'community_maintenance': (
             'http://xml.zeit.de/config/community_maintenance.xml'),
