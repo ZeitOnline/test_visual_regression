@@ -759,7 +759,7 @@ def find_nextread_folder(ressort, subressort):
 
 
 def contains_nextreads(folder):
-    if not folder:
+    if not zeit.cms.repository.interfaces.IFolder.providedBy(folder):
         return False
     nextread_foldername = zope.component.getUtility(
         zeit.web.core.interfaces.ISettings).get(
