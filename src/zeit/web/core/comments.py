@@ -419,7 +419,9 @@ class Community(grokcore.component.GlobalUtility):
     def is_healthy(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         timeout = float(conf.get('community_host_timeout_secs', 0.5))
-        uri = '{}/agatho/health_check'.format(conf.get('agatho_host', ''))
+        # Don't use agatho_host, since varnish caches that for 12h, which is
+        # not helpful for the health check.
+        uri = '{}/agatho/health_check'.format(conf.get('community_host', ''))
         try:
             with zeit.web.core.metrics.timer(
                     'health_check.community.reponse_time'):
@@ -645,11 +647,11 @@ def _community_maintenance_cache(unique_id=None):
                         u'Verständnis.')
     }
 
-    if unique_id:
-        xml = zeit.cms.interfaces.ICMSContent(unique_id).xml
-        maintenance = _maintenance_from_xml(xml, maintenance)
-
-    return maintenance
+    content = zeit.cms.interfaces.ICMSContent(unique_id, None)
+    if content is None:
+        return maintenance
+    else:
+        return _maintenance_from_xml(content.xml, maintenance)
 
 
 def _maintenance_from_xml(xml, maintenance):

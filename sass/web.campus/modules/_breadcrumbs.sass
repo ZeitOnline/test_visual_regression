@@ -1,7 +1,7 @@
 .breadcrumbs
 	+padded
-	border-bottom: 1px solid $grey--dark
-	+respond-max($nav__break__full-menu)
+	border-bottom: 1px solid $footer-color-border
+	+respond-max($break-tablet-min)
 		display: none
 
 	&__list
@@ -9,8 +9,8 @@
 		letter-spacing: $letter-spacing-s
 		list-style-type: none
 		margin: 0 auto
-		max-width: remify($article-content-max-width)
-		padding: remify(8px 0)
+		max-width: $medium-content-width
+		padding: remify(10px 0)
 
 	&__item
 		display: inline
@@ -22,4 +22,3 @@
 
 	&__link
 		color: inherit
-		+animated-interaction($grey)

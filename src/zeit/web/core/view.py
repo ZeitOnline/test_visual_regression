@@ -12,6 +12,7 @@ import bugsnag
 import pyramid.response
 import pyramid.settings
 import pyramid.view
+import pyramid.httpexceptions
 import werkzeug.http
 import zope.component
 
@@ -516,6 +517,36 @@ class Base(object):
         url = conf.get('cardstack_backend', '').rstrip('/')
         return url + u'/stacks/esi/scripts'
 
+    @zeit.web.reify
+    def breadcrumbs(self):
+        return []
+
+    def breadcrumbs_by_title(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        breadcrumbs.extend([(
+            self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
+        return breadcrumbs
+
+    def breadcrumbs_by_navigation(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        for segment in (self.ressort, self.sub_ressort):
+            if segment == u'reisen':
+                segment = u'reise'
+            elif segment == u'studium':
+                segment = u'campus'
+            try:
+                nav_item = zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
+                    segment]
+                if nav_item['text'] == 'Campus':
+                    nav_item['text'] = 'ZEIT Campus'
+                breadcrumbs.extend([(nav_item['text'], nav_item['link'])])
+            except KeyError:
+                # Segment is no longer part of the navigation
+                next
+        return breadcrumbs
+
 
 class CeleraOneMixin(object):
 
@@ -930,6 +961,27 @@ class Content(CeleraOneMixin, CommentMixin, Base):
 
 @pyramid.view.view_config(route_name='health_check')
 def health_check(request):
+    """ View callable to perform a health a check by checking,
+        if the configured repository path exists.
+
+        :type arg1: pyramid request object
+        :return: Response indicating, if check was successful or not
+        :rtype: pyramid.response.Response
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    if not conf.get('health_check_with_fs', False):
+        return pyramid.response.Response('OK', 200)
+
+    path = urlparse.urlparse(
+        zeit.web.core.application.maybe_convert_egg_url(
+            conf.get(
+                'vivi_zeit.connector_repository-path',
+                'file:///var/cms/work/')))
+    if not os.path.exists(getattr(path, 'path', '/var/cms/work/')):
+        raise pyramid.httpexceptions.HTTPInternalServerError()
+
     return pyramid.response.Response('OK', 200)
 
 

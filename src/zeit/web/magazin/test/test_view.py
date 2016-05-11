@@ -55,42 +55,31 @@ def test_dict_view_produces_acceptable_return_value():
     assert obj() == {'bar': 1}, 'DictView retains its return value.'
 
 
-def test_breadcrumb_should_produce_expected_data():
-    context = mock.Mock()
-    context.ressort = 'zeit-magazin'
-    context.sub_ressort = 'mode-design'
-    context.title = 'This is my title'
+def test_breadcrumbs_should_produce_expected_data(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
 
-    request = mock.Mock()
-    request.route_url.return_value = 'http://foo.bar/'
-
-    article = zeit.web.magazin.view_article.Article(context, request)
+    article = zeit.web.magazin.view_article.Article(context, dummy_request)
 
     crumbs = [
-        ('Start', 'http://foo.bar/index', 'ZEIT ONLINE'),
-        ('ZEIT Magazin', 'http://foo.bar/zeit-magazin/index'),
-        ('Mode & Design', 'http://foo.bar/zeit-magazin/mode-design/index'),
-        ('This is my title', '')
+        ('ZEITmagazin', 'http://xml.zeit.de/zeit-magazin/index'),
+        ('Essen & Trinken',
+         'http://xml.zeit.de/zeit-magazin/essen-trinken/index'),
+        ('Kolumne Die Ausleser: Der Chianti hat eine zweite Chance verdient',
+         None)
     ]
 
     assert article.breadcrumbs == crumbs
 
 
-def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
-    context = mock.Mock()
-    context.ressort = 'zeit-magazin'
-    context.sub_ressort = 'lebensartx'
-    context.title = 'This is my title'
+def test_breadcrumbs_should_be_shorter_if_ressort_or_sub_ressort_is_unknown(
+        dummy_request):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/04')
 
-    request = mock.Mock()
-    request.route_url.return_value = 'http://foo.bar/'
-
-    article = zeit.web.magazin.view_article.Article(context, request)
+    article = zeit.web.magazin.view_article.Article(context, dummy_request)
 
     crumbs = [
-        ('Start', 'http://foo.bar/index', 'ZEIT ONLINE'),
-        ('ZEIT Magazin', 'http://foo.bar/zeit-magazin/index'),
-        ('This is my title', '')
+        ('ZEITmagazin', 'http://xml.zeit.de/zeit-magazin/index'),
+        ('SEO title', None)
     ]
 
     assert article.breadcrumbs == crumbs
@@ -225,13 +214,6 @@ def test_column_should_have_header_image(testbrowser):
 def test_column_should_not_have_header_image(testbrowser):
     browser = testbrowser('/artikel/standardkolumne-ohne-bild-beispiel')
     assert '<div class="article__column__headerimage">' not in browser.contents
-
-
-def test_health_check_should_response_and_have_status_200(testbrowser):
-    browser = testbrowser('/health_check')
-    assert browser.headers['Content-Length'] == '2'
-    resp = zeit.web.core.view.health_check('request')
-    assert resp.status_code == 200
 
 
 def test_a_404_request_should_be_from_zon_main_page(testbrowser):

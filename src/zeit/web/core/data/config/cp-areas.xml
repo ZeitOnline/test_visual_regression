@@ -9,6 +9,7 @@
     <area kind="zmo-parquet">zmo-parquet</area>
     <area kind="zco-parquet">zco-parquet</area>
     <area kind="ranking">ranking</area>
+    <area kind="zco-ranking">zco-ranking</area>
     <area kind="overview">overview</area>
     <area kind="newsticker">newsticker</area>
     <area kind="topic">topic</area>
