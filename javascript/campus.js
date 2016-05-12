@@ -16,7 +16,7 @@ require([
     'web.core/images',
     'web.core/clicktracking',
     'web.core/adReload',
-    'web.campus/menu',
+    'web.core/menu',
     'web.core/comments',
     'web.core/articledate'
 ], function(
