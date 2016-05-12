@@ -960,7 +960,7 @@ def test_article_doesnt_show_modified_date(testbrowser):
 
 def test_video_in_article_is_there(testbrowser):
     article = testbrowser('/zeit-online/article/zeit')
-    assert len(article.cssselect('.video-player__iframe')) == 1
+    assert len(article.cssselect('.video-player__videotag')) == 1
 
 
 def test_advertorial_marker_is_present(testbrowser):

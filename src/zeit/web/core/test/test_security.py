@@ -174,13 +174,12 @@ def test_unreachable_community_counts_as_logged_in_but_marks_session_invalid(
 def test_session_with_uid_0_marks_session_invalid(dummy_request, monkeypatch):
     dummy_request.cookies['my_sso_cookie'] = 'present'
     monkeypatch.setattr(
-        zeit.web.core.security, 'get_user_info_from_sso_cookie',
-        lambda *args: {'id': '123'})
-    dummy_request.session['user'] = {
-        'ssoid': '123',
-        'uid': 0,
-    }
-    assert dummy_request.user['ssoid']
+        zeit.web.core.security, 'get_user_info',
+        lambda *args: {
+            'ssoid': '123',
+            'uid': 0,
+        })
+    assert dummy_request.user['ssoid'] == '123'
     assert dummy_request.user['should_invalidate']
 
 
