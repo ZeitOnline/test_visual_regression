@@ -22,12 +22,6 @@
 {% endif %}
 {%- endblock %}
 
-{% block navigation %}
-    {% if not view.is_wrapped %}
-    {{ lama.main_nav(view.context.main_nav_full_width, request, is_main_h1=False) }}
-    {% endif %}
-{% endblock navigation %}
-
 {% block content %}
     <article class="article" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
