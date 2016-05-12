@@ -10,28 +10,6 @@
 		overflow: hidden
 		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
 
-
-.teaser-topic-variant-main
-	+transform(translateX(-50%))
-	left: 50%
-	position: absolute
-	top: 0
-
-	&__heading
-		@extend %font-beckett
-		+font-smoothing
-		background-color: $color-background--dark
-		color: $white
-		display: inline-block
-		+scaled-font(26px, $title-factor)
-		margin: 0
-		padding: remify(10px 15px)
-
-	&__kicker
-		color: $white
-		vertical-align: sub
-
-
 +respond-min($break-tablet-min)
 	.teaser-topic-variant
 		margin: $page-padding
@@ -46,19 +24,3 @@
 		padding: remify(20px) 0 0 $cp-padding
 		float: right
 		width: 50%
-
-	.teaser-topic-variant-main
-		+transform(none)
-		position: static
-		margin-left: remify(-40px)
-
-		&__heading
-			+scaled-font(36px, $title-factor)
-			padding: remify(8px 20px)
-
-+respond-min($break-desktop-min)
-	.teaser-topic-variant-main
-		margin-left: remify(-45px)
-
-		&__heading
-			padding: remify(14px 25px)

@@ -1,8 +1,7 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% block image_variant %}cinema{% endblock %}
-{% block is_topic_variant %}{% endblock %}
-{% set is_topic_variant = self.is_topic_variant() %}
+{% set is_topic_variant = (area.kind == 'topic-variant') %}
 
 {% block module_list %}
     <section class="{% block topic_class %}teaser-topic{% endblock %}">
@@ -20,17 +19,11 @@
             {% set href = teaser | create_url | append_campaign_params %}
             {% include "zeit.web.core:templates/inc/asset/image_topic_teaser.tpl" %}
 
-            {% set topic_layout = self.topic_class() + '-main' %}
-
             {% if not is_topic_variant %}
                 {% include "zeit.web.core:templates/inc/teaser/topic-main.tpl" %}
             {% endif %}
 
             <div class="{{ self.topic_class() }}-list">
-                {% if is_topic_variant %}
-                    {% include "zeit.web.core:templates/inc/teaser/topic-main.tpl" %}
-                {% endif %}
-
                 {% for module in area.values()[0:3] -%}
                     {% set teaser = module | first_child %}
                     {% set layout = module | get_layout %}

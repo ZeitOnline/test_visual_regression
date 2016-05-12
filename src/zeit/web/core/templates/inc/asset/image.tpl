@@ -1,10 +1,20 @@
 {% if image and not is_image_expired(image) %}
+    {%- set width = 820 %}
+    {%- set height = (width / image.ratio) | int %}
+
     {# TRASHME Rather crude bitblt/zci image api switch #}
-    {% set source = (request.image_host + image.path) if image is variant else image | default_image_url | replace(' ', '%20') %}
-    {% set fallback_source = (request.image_host + image.fallback_path) if image is variant else source | replace(' ', '%20') %}
+    {%- if image is variant %}
+        {%- set source = request.image_host + image.path | replace(' ', '%20') %}
+        {%- set fallback_source = request.image_host + image.fallback_path | replace(' ', '%20') -%}
+        {%- set url = "%s__%sx%s" | format(source, width, height) %}
+    {%- else %}
+        {%- set source = image | default_image_url | replace(' ', '%20') -%}
+        {%- set fallback_source = source -%}
+        {%- set url = source %}
+    {%- endif %}
 
     <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image"
-        {%- if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
+        {%- if image_itemprop %} itemprop="{{ image_itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
         <!--[if gt IE 8]><!-->
         <noscript data-src="{{ fallback_source }}">
         <!--<![endif]-->
@@ -17,6 +27,9 @@
         <!--[if gt IE 8]><!-->
         </noscript>
         <!--<![endif]-->
+        <meta itemprop="url" content="{{ url }}">
+        <meta itemprop="width" content="{{ width }}">
+        <meta itemprop="height" content="{{ height }}">
         {% block media_caption -%}
         <figcaption class="{% block media_caption_class %}figure{% endblock %}__caption {{ media_caption_additional_class }}">
             {%- block media_caption_content %}

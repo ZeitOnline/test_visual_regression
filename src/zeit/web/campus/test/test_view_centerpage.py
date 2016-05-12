@@ -121,14 +121,14 @@ def test_campus_teaser_topic_has_correct_structure(testbrowser):
 
 
 def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):
-    select = testbrowser('/campus/centerpage/teaser-topic-variant').cssselect
-    assert len(select('.teaser-topic-variant')) == 1
-    assert len(select('.teaser-topic-variant-main')) == 1
+    browser = testbrowser('/campus/centerpage/teaser-topic-variant')
+    select = browser.cssselect('.teaser-topic-variant')[0].cssselect
     assert len(select('.teaser-topic-variant-list')) == 1
     assert len(select('.teaser-topic-variant__media-container')) == 1
     assert len(select('.teaser-topic-variant__media-container a')) == 1
-    assert len(select('.teaser-topic-variant .teaser-topic-wide')) == 1
-    assert len(select('.teaser-topic-variant .teaser-topic-small')) == 2
+    assert len(select('.teaser-topic-wide')) == 1
+    assert len(select('.teaser-topic-wide__topic-button')) == 1
+    assert len(select('.teaser-topic-small')) == 2
     assert (
         'cp-content/ig-2/portrait__612x816' in
         select('.teaser-topic-variant__media-item').pop().attrib['src'])

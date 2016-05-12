@@ -2,7 +2,7 @@
 {% set image = get_image(content=block, variant_id="wide", fallback=False) or block %}
 {% set href = image.href %}
 
-{% block itemprop %}{{ { 'itemprop': block.itemprop } | xmlattr }}{% endblock %}
+{% block itemprop %} itemprop="image"{% endblock %}
 
 {% block image %}
 	<div class="{{ 'article__item' | with_mods(block.layout.display_mode if block and block.layout) }}">
