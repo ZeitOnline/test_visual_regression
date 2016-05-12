@@ -1,4 +1,4 @@
-hange log for zeit.web
+Change log for zeit.web
 =======================
 
 2.81 (unreleased)
