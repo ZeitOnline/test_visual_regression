@@ -1,7 +1,7 @@
 {% import "zeit.web.campus:templates/macros/layout_macro.tpl" as lama %}
-<div class="header__brand">
+<div class="header__brand" data-ct-row="lead">
     <div class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <a itemprop="url" href="{{ request.route_url('home') }}campus/index" data-id="campus-topnav.1.1..logo">
+        <a itemprop="url" href="{{ request.route_url('home') }}campus/index" data-ct-label="logo">
             <meta itemprop="name" content="ZEIT Campus">
             <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
                 {{ lama.use_svg_icon('logo-zco', 'header__logo', view.package) }}
@@ -16,34 +16,34 @@
         <span class="header__ad-label">{{ view.cap_title | default('Anzeige') }}</span>
         {% endif %}
     </div>
-    <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü">
+    <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü" data-ct-label="menu">
         {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.package) }}
         {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.package) }}
     </a>
 </div>
 
-<div class="nav" id="navigation">
+<div class="nav" id="navigation" data-ct-row="1">
     <div class="nav__home">
-        <h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index" data-id="campus-topnav.1.2..zeitonline">ZEIT ONLINE</a></h2>
+        <h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
     </div>
     <nav class="nav__sales">
-        <a href="http://www.zeitabo.de/" data-id="campus-topnav.1.3..abo">Abo</a>
+        <a href="http://www.zeitabo.de/">Abo</a>
     </nav>
     <nav class="nav__more">
-        <a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu" data-id="campus-topnav.1.4..mehr"><span class="nav__dropdown">Mehr</span></a>
-        <ul class="nav__more-list" id="more-menu" aria-hidden="true">
-            <li><a href="{{ request.route_url('home') }}wissen/zeit-wissen/index" data-id="campus-topnav.1.4.1.zeitwissen">ZEITWissen</a></li>
-            <li><a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index" data-id="campus-topnav.1.4.2.zeitgeschichte">ZEITGeschichte</a></li>
-            <li><a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" data-id="campus-topnav.1.4.3.partnersuche">Partnersuche</a></li>
-            <li><a href="http://zeit.immowelt.de/" data-id="campus-topnav.1.4.4.immobilien">Immobilien</a></li>
-            <li><a href="http://automarkt.zeit.de/" data-id="campus-topnav.1.4.5.automarkt">Automarkt</a></li>
-            <li><a href="http://jobs.zeit.de/" data-id="campus-topnav.1.4.6.jobs">Jobs</a></li>
-            <li><a href="https://premium.zeit.de/zeit-apps?wt_zmc=fix.int.zonpme.zco.dach.premium.text.apps.apps&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_apps_apps" data-id="campus-topnav.1.4.7.apps">Apps</a></li>
-            <li><a href="https://premium.zeit.de/zeit-audio?wt_zmc=fix.int.zonpme.zco.dach.premium.text.audio.audio&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_audio_audio" data-id="campus-topnav.1.4.8.audio">Audio</a></li>
-            <li><a href="{{ request.route_url('home') }}archiv" data-id="campus-topnav.1.4.9.archiv">Archiv</a></li>
-            <li><a href="{{ request.route_url('home') }}spiele/index" data-id="campus-topnav.1.4.10.spiele">Spiele</a></li>
-            <li><a href="http://shop.zeit.de/" data-id="campus-topnav.1.4.11.shop">Shop</a></li>
-            <li><a href="https://premium.zeit.de/?wt_zmc=fix.int.zonpme.zco.dach.premium.text.epaper.epaper&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_epaper_epaper" data-id="campus-topnav.1.4.12.epaper">ePaper</a></li>
+        <a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></a>
+        <ul class="nav__more-list" id="more-menu" aria-hidden="true" data-ct-column>
+            <li><a href="{{ request.route_url('home') }}wissen/zeit-wissen/index">ZEITWissen</a></li>
+            <li><a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index">ZEITGeschichte</a></li>
+            <li><a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID">Partnersuche</a></li>
+            <li><a href="http://zeit.immowelt.de/">Immobilien</a></li>
+            <li><a href="http://automarkt.zeit.de/">Automarkt</a></li>
+            <li><a href="http://jobs.zeit.de/">Jobs</a></li>
+            <li><a href="https://premium.zeit.de/zeit-apps?wt_zmc=fix.int.zonpme.zco.dach.premium.text.apps.apps&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_apps_apps">Apps</a></li>
+            <li><a href="https://premium.zeit.de/zeit-audio?wt_zmc=fix.int.zonpme.zco.dach.premium.text.audio.audio&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_audio_audio">Audio</a></li>
+            <li><a href="{{ request.route_url('home') }}archiv">Archiv</a></li>
+            <li><a href="{{ request.route_url('home') }}spiele/index">Spiele</a></li>
+            <li><a href="http://shop.zeit.de/">Shop</a></li>
+            <li><a href="https://premium.zeit.de/?wt_zmc=fix.int.zonpme.zco.dach.premium.text.epaper.epaper&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_epaper_epaper">ePaper</a></li>
         </ul>
     </nav>
     <div class="nav__login">
@@ -52,24 +52,24 @@
             {{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
         {% endblock login %}
     </div>
-    <div class="nav__primary">
+    <div class="nav__primary" data-ct-row="2">
         <nav class="nav__topics">
             {% require topics = view.context | topic_links -%}
             <span class="nav__topics-title">Themen{#{ topics.title | default('Themen', True) }#}</span>
             <ul class="nav__topics-list">
             {% for label, link in topics %}
-                <li><a href="{{ link }}" data-id="campus-topnav.2.{{ loop.index }}..{{ label | lower }}">{{ label }}</a></li>
+                <li><a href="{{ link }}">{{ label }}</a></li>
             {% endfor %}
             </ul>
             {% endrequire -%}
-            <a class="nav__topics-link" href="http://www.zeit.de/campus/themen" data-id="campus-topnav.2.4..alle themen">Alle Themen</a>
+            <a class="nav__topics-link" href="{{ request.route_url('home') }}campus/themen">Alle Themen</a>
         </nav>
         <nav class="nav__tools">
-            <p class="nav__tools-title"><a href="http://studiengaenge.zeit.de/artikel/was-soll-ich-studieren.html" data-id="campus-topnav.2.5.was-soll-ich-studieren.open" role="button" aria-controls="tools-menu" data-follow-mobile="true"><span class="nav__dropdown">Was soll ich studieren?</span></a></p>
-            <ul class="nav__tools-list">
-                <li><a href="http://studiengaenge.zeit.de/sit" data-id="campus-topnav.2.5.1.studium interessentest">Studium-Interessentest</a></li>
-                <li><a href="http://studiengaenge.zeit.de/" data-id="campus-topnav.2.5.2.suchmaschine für studiengänge">Suchmaschine für Studiengänge</a></li>
-                <li><a href="http://ranking.zeit.de/che2016/de/" data-id="campus-topnav.2.5.3.che hochschulranking">CHE Hochschulranking</a></li>
+            <p class="nav__tools-title"><a href="http://studiengaenge.zeit.de/artikel/was-soll-ich-studieren.html" role="button" aria-controls="tools-menu" data-follow-mobile="true"><span class="nav__dropdown">Was soll ich studieren?</span></a></p>
+            <ul class="nav__tools-list" data-ct-column>
+                <li><a href="http://studiengaenge.zeit.de/sit">Studium-Interessentest</a></li>
+                <li><a href="http://studiengaenge.zeit.de/">Suchmaschine für Studiengänge</a></li>
+                <li><a href="http://ranking.zeit.de/che2016/de/">CHE Hochschulranking</a></li>
             </ul>
         </nav>
     </div>

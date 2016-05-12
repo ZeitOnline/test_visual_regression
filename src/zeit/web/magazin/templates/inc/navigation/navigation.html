@@ -1,10 +1,10 @@
 {% import "zeit.web.campus:templates/macros/layout_macro.tpl" as lama %}
 
-<header class="header">
-    <div class="header__brand">
+<header class="header" data-ct-area="zmo-topnav">
+    <div class="header__brand" data-ct-row="lead">
         {% with tag_name = 'h1' if view.is_hp else 'div' -%}
         <{{ tag_name }} class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-            <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index">
+            <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index" data-ct-label="logo">
                 <meta itemprop="name" content="ZEITmagazin">
                 <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
                     {{ lama.use_svg_icon('logo-zmo-large', 'header__logo', view.package) }}
@@ -20,19 +20,19 @@
             {% endif %}
         </{{ tag_name }}>
         {% endwith -%}
-        <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü">
+        <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü" data-ct-label="menu">
             {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.package) }}
             {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.package) }}
         </a>
     </div>
 
-    <div class="nav" id="navigation">
+    <div class="nav" id="navigation" data-ct-row="1">
         <div class="nav__home">
             <h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
         </div>
         <nav class="nav__service">
             <a class="nav__service-title" href="#service-menu" role="button" aria-controls="service-menu"><span class="nav__dropdown">Service</span></a>
-            <ul class="nav__service-list" id="service-menu" aria-hidden="true">
+            <ul class="nav__service-list" id="service-menu" aria-hidden="true" data-ct-column>
                 <li><a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index">ZEITGeschichte</a></li>
                 <li><a href="{{ request.route_url('home') }}wissen/zeit-wissen/index">ZEITWissen</a></li>
                 <li><a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID">Partnersuche</a></li>
@@ -51,14 +51,14 @@
                 {{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
             {% endblock login %}
         </div>
-        <nav class="nav__ressorts">
+        <nav class="nav__ressorts" data-ct-row="2">
             <ul class="nav__ressorts-list" itemscope itemtype="http://schema.org/SiteNavigationElement">
                 <li><a href="{{ request.route_url('home') }}zeit-magazin/mode-design/index">Mode &amp; Design</a></li>
                 <li><a href="{{ request.route_url('home') }}zeit-magazin/essen-trinken/index">Essen &amp; Trinken</a></li>
                 <li><a href="{{ request.route_url('home') }}zeit-magazin/leben/index">Leben</a></li>
             </ul>
         </nav>
-        <nav class="nav__sales">
+        <nav class="nav__sales" data-ct-row="2">
             <ul class="nav__sales-list">
                 <li><a href="http://www.zeitabo.de/?mcwt=2009_07_0002">Abo</a></li>
                 <li><a href="http://shop.zeit.de/?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header">Shop</a></li>

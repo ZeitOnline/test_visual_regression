@@ -1,17 +1,15 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 
 <aside class="nav-flyout">
-	<ul class="nav-flyout__list">
+    <ul class="nav-flyout__list" data-ct-row="3">
         {% for link in view.toolbox %}
             <li class="nav-flyout__item">
-                <a href="{{ link.href }}" class="nav-flyout__link" title="{{ link.title_flyout }}" data-id="{{ link.tracking }}">
+                <a href="{{ link.href }}" class="nav-flyout__link" title="{{ link.title_flyout }}">
                     <p class="nav-flyout__headline">{{ link.title_flyout }}</p>
                     <p class="nav-flyout__text">{{ link.cta_flyout }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</p>
                 </a>
             </li>
         {% endfor %}
-	</ul>
-	<a href="{{ view.toolbox.footer_link }}" class="nav-flyout__sit-link" data-id="{{ view.toolbox.footer_tracking }}">{{ view.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</a>
+    </ul>
+    <a href="{{ view.toolbox.footer_link }}" class="nav-flyout__sit-link" data-ct-row="4">{{ view.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</a>
 </aside>
-
-

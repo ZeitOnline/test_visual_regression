@@ -37,10 +37,10 @@ require([
     photocluster
 ) {
     images.init();
+    menu.init();
     clicktracking.init();
     adReload.init();
     errors.init();
-    menu.init();
     tabs.init();
     comments.init();
     sharing.init();

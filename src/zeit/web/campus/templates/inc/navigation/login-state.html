@@ -1,32 +1,32 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 
 {% if user %}
-	<a class="nav__login-title" href="{{ profile }}" role="button" aria-controls="user-menu" aria-label="Account" id="login-state" data-id="campus-topnav.1.5..avatar" data-sso-id="{{ user.ssoid }}">
+	<a class="nav__login-title" href="{{ profile }}" role="button" aria-controls="user-menu" aria-label="Account" id="login-state" data-ct-label="avatar" data-sso-id="{{ user.ssoid }}">
 		{% if user.picture -%}
 			<span class="nav__user-picture" style="background-image: url({{ request.session.user.picture }})"></span>
 		{%- else %}
 			<span class="nav__user-picture nav__user-picture--default">
-				{{ lama.use_svg_icon('avatar', 'nav__user-avatar', 'zeit.web.campus') }}
+				{{ lama.use_svg_icon('avatar', 'nav__user-avatar', view.package) }}
 			</span>
 		{%- endif %}
 
 		<span class="nav__user-name">{{ user.name or 'Angemeldet' }}</span>
 	</a>
-	<ul class="nav__login-list" id="user-menu" aria-hidden="true">
-		<li><a href="{{ profile }}" data-id="campus-topnav.1.5.1.account">Account</a></li>
+	<ul class="nav__login-list" id="user-menu" aria-hidden="true" data-ct-column>
+		<li><a href="{{ profile }}">Account</a></li>
 		<li>
-			<a href="{{ logout }}" data-id="campus-topnav.1.5.2.abmelden">
+			<a href="{{ logout }}">
 				Abmelden
-				{{ lama.use_svg_icon('login', 'nav__login-icon', 'zeit.web.campus') }}
+				{{ lama.use_svg_icon('login', 'nav__login-icon', view.package) }}
 			</a>
 		</li>
 	</ul>
 {% else %}
-	<a href="{{ login }}" class="nav__login-link" data-id="campus-topnav.1.5..anmelden">
+	<a href="{{ login }}" class="nav__login-link">
 		Anmelden
 		<span class="nav__login-register">
 			/ Registrieren
-			{{ lama.use_svg_icon('login', 'nav__login-icon', 'zeit.web.campus') }}
+			{{ lama.use_svg_icon('login', 'nav__login-icon', view.package) }}
 		</span>
 	</a>
 {% endif %}
