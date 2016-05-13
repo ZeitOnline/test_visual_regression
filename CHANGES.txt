@@ -4,6 +4,8 @@ Change log for zeit.web
 2.81 (unreleased)
 -----------------
 
+- ZON-3072: Change ZEIT Campus flyout and toolbox clicktracking identifier
+
 - ZON-3056: Add microdata for ZEIT Campus teasers
 
 - ZON-2659: Use HTML5 video player for inline videos
