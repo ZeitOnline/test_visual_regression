@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - MAINT: Clean up ZMO templates
 
+- MAINT: Transmit correct client IP address to bugsnag
+
 
 2.80 (2016-05-11)
 -----------------
