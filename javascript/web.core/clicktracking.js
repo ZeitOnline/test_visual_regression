@@ -67,7 +67,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             data = [
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
                 $area.index() + 1, // area bzw. reihe
-                $area.find( 'article, aside' ).index( $article ), // module bzw. spalte
+                $area.find( 'article, aside' ).index( $article ) + 1, // module bzw. spalte
                 teasertype, // subreihe
                 type, // bezeichner (image, button, text)
                 href // url
