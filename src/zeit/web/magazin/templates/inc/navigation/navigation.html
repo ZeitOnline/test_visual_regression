@@ -15,11 +15,13 @@
                 </span>
             </a>
 
-            {% if view.is_advertorial %}
-            <span class="header__ad-label">{{ view.cap_title | default('Anzeige') }}</span>
-            {% endif %}
         </{{ tag_name }}>
         {% endwith -%}
+
+        {% if view.is_advertorial -%}
+            <span class="header__ad-label">{{ view.cap_title | default('Anzeige') }}</span>
+        {% endif -%}
+
         <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü" data-ct-label="menu">
             {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.package) }}
             {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.package) }}

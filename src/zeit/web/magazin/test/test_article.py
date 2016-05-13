@@ -637,10 +637,9 @@ def test_article_view_has_no_leadtime_if_the_attribute_is_missing(application):
 
 def test_advertorial_article_shows_advertorial_marker(testbrowser):
     browser = testbrowser('/artikel/advertorial')
-    assert browser.cssselect(
-        '.advertorial-navigation-title')[0].text == 'Anzeige'
+    assert browser.cssselect('.header__ad-label')[0].text == 'Anzeige'
     browser = testbrowser('/artikel/01')
-    assert not browser.cssselect('.advertorial-navigation-title')
+    assert not browser.cssselect('.header__ad-label')
 
 
 def test_articles_should_have_exact_one_h1(testbrowser):
