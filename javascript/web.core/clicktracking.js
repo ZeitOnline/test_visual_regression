@@ -45,7 +45,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 modulerow = '',
                 teasertype = '',
                 element = $element.get( 0 ),
-                $article = $element.closest( 'article, aside, .toolbox__item' ),
+                $article = $element.closest( 'article, aside' ),
                 $area = $element.closest( '.cp-area' ),
                 articleClasses = $article.get( 0 ).className.split( ' ' );
 
@@ -65,12 +65,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 href = $element.attr( 'href' );
             }
 
-            modulerow = $area.find( 'article, aside, .toolbox__item' ).index( $article );
-
             data = [
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
                 $area.index() + 1, // area bzw. reihe
-                $article.hasClass( 'toolbox__item' ) ? modulerow : modulerow + 1, // module bzw. spalte
+                $area.find( 'article, aside' ).index( $article ), // module bzw. spalte
                 teasertype, // subreihe
                 type, // bezeichner (image, button, text)
                 href // url

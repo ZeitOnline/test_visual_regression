@@ -5,7 +5,7 @@
     <ul class="toolbox__list">
     {% for link in module.toolbox %}
         <li class="toolbox__item">
-            <a href="{{ link.href }}" class="toolbox__link" title="{{ link.title_flyout }}">
+            <a href="{{ link.href }}" class="toolbox__link" title="{{ link.title_flyout }}" data-id="{{ '%s.%s.%s' | format(region_loop.index, 1, loop.index) }}.toolbox.text">
                 <h3 class="toolbox__title">{{ link.title }}</h3>
                 <p class="toolbox__text">
                     {{ link.text }}
