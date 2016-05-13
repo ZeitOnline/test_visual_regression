@@ -52,8 +52,6 @@ def test_banner_should_not_be_displayed_on_disabled_article(testbrowser):
     browser = testbrowser('/artikel/nobanner')
     # no desktop ads
     assert not browser.cssselect('div[class*="ad-tile_"]')
-    # no mobile ad script
-    assert not browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
 
 
 def test_banner_should_not_be_displayed_on_disabled_cp(testbrowser):
@@ -61,8 +59,6 @@ def test_banner_should_not_be_displayed_on_disabled_cp(testbrowser):
     browser = testbrowser('/centerpage/index-without-ads')
     # no desktop ads
     assert not browser.cssselect('div[class*="ad-tile_"]')
-    # no mobile ad script
-    assert not browser.cssselect('script[src*="js/libs/iqd/sasmobile.js"]')
 
 
 def test_banner_view_should_be_displayed_on_pages(testbrowser):

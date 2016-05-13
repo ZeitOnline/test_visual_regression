@@ -178,11 +178,6 @@
             var require = { baseUrl: '{{ request.asset_host }}/js/' };
         </script>
         <script type="text/javascript" src="{{ request.asset_host }}/js/magazin.js"></script>
-        <script type="text/javascript">
-            if( typeof window.sasmobile === 'function' && window.Zeit.isMobileView() && typeof( iqd ) !== 'undefined' ) {
-                iqd.callAds();
-            }
-        </script>
 
         {% if view.vgwort_url %}
         <!--start: vgwort-->
