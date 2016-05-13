@@ -1,4 +1,4 @@
-{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
 {% if user %}
 	<a class="nav__login-title" href="{{ profile }}" role="button" aria-controls="user-menu" aria-label="Account" id="login-state" data-ct-label="avatar" data-sso-id="{{ user.ssoid }}">
@@ -6,7 +6,7 @@
 			<span class="nav__user-picture" style="background-image: url({{ request.session.user.picture }})"></span>
 		{%- else %}
 			<span class="nav__user-picture nav__user-picture--default">
-				{{ lama.use_svg_icon('avatar', 'nav__user-avatar', view.package) }}
+				{{ lama.use_svg_icon('avatar', 'nav__user-avatar', 'zeit.web.campus') }}
 			</span>
 		{%- endif %}
 
@@ -17,7 +17,7 @@
 		<li>
 			<a href="{{ logout }}">
 				Abmelden
-				{{ lama.use_svg_icon('login', 'nav__login-icon', view.package) }}
+				{{ lama.use_svg_icon('login', 'nav__login-icon', 'zeit.web.campus') }}
 			</a>
 		</li>
 	</ul>
@@ -26,7 +26,7 @@
 		Anmelden
 		<span class="nav__login-register">
 			/ Registrieren
-			{{ lama.use_svg_icon('login', 'nav__login-icon', view.package) }}
+			{{ lama.use_svg_icon('login', 'nav__login-icon', 'zeit.web.campus') }}
 		</span>
 	</a>
 {% endif %}

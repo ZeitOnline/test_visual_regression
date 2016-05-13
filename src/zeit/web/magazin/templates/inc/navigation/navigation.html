@@ -47,7 +47,7 @@
         </nav>
         <div class="nav__login">
             {% block login %}
-                {%- set esi_source = '{}login-state?for=campus&context-uri={}'.format(request.route_url('home'), request.url) -%}
+                {%- set esi_source = '{}login-state?for=magazin&context-uri={}'.format(request.route_url('home'), request.url) -%}
                 {{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
             {% endblock login %}
         </div>
