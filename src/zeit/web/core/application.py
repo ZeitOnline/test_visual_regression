@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import ast
 import logging
 import os.path
@@ -5,7 +7,6 @@ import re
 import urlparse
 
 import bugsnag
-import bugsnag.wsgi.middleware
 import jinja2
 import jinja2.ext
 import pkg_resources
@@ -34,6 +35,7 @@ import zeit.connector
 
 import zeit.web
 import zeit.web.core
+import zeit.web.core.bugsnag
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
@@ -66,7 +68,7 @@ class Application(object):
         self.configure()
         app = self.config.make_wsgi_app()
         # TODO: Try to move bugsnag middleware config to web.ini
-        return bugsnag.wsgi.middleware.BugsnagMiddleware(app)
+        return zeit.web.core.bugsnag.BugsnagMiddleware(app)
 
     def load_sso_key(self, keyfile):
         if keyfile:

@@ -98,11 +98,11 @@
 
                 {% profile %}
 
-                {% block navigation -%}
-                    {% if not view.is_wrapped -%}
+                {% if not view.is_wrapped -%}
+                    {% block navigation -%}
                         {%- include "zeit.web.magazin:templates/inc/navigation/navigation.html" -%}
-                    {%- endif %}
-                {%- endblock navigation %}
+                    {%- endblock navigation %}
+                {%- endif %}
 
                 {% block adplace_billboard %}
                     {{ lama.adplace(view.banner(3), view) }}
@@ -178,11 +178,6 @@
             var require = { baseUrl: '{{ request.asset_host }}/js/' };
         </script>
         <script type="text/javascript" src="{{ request.asset_host }}/js/magazin.js"></script>
-        <script type="text/javascript">
-            if( typeof window.sasmobile === 'function' && window.Zeit.isMobileView() && typeof( iqd ) !== 'undefined' ) {
-                iqd.callAds();
-            }
-        </script>
 
         {% if view.vgwort_url %}
         <!--start: vgwort-->
