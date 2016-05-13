@@ -9,5 +9,6 @@
   <campus_launch>true</campus_launch>
   <tracking>true</tracking>
   <campus_new_label>true</campus_new_label>
+  <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
   <dummy>false</dummy>
 </features>

@@ -77,13 +77,14 @@ def app_settings(mockserver):
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
         'comment_page_size': '4',
-        'community_host': 'http://localhost:6551',
+        'community_host': mockserver.url + '/comments',
         'community_static_host': 'http://static_community/foo',
         'community_maintenance': (
             'http://xml.zeit.de/config/community_maintenance.xml'),
         'agatho_host': mockserver.url + '/comments',
         'linkreach_host': mockserver.url + '/linkreach/api',
         'app_servers': '',
+        'health_check_with_fs': True,
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
         'spektrum_img_host': mockserver.url + '/spektrum',

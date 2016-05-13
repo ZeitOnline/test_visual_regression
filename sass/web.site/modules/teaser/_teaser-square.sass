@@ -24,7 +24,7 @@ $layout: ".teaser-square"
 		top: 0
 		width: 100%
 		height: 100%
-	&__media-container
+	&__media-link
 		+teaser-image-dark-overlay($angle: 0deg)
 	&__container
 		position: absolute
@@ -140,7 +140,7 @@ $layout: ".teaser-square"
 			padding-right: $page-padding
 			text-align: center
 
-		#{$layout}__media-container
+		#{$layout}__media-link
 			+teaser-image-dark-overlay($angle: 0deg, $gradient: (rgba(0, 15, 20, 0.8), rgba(0, 15, 20, 0.1)))
 
 		#{$layout}__series-label,

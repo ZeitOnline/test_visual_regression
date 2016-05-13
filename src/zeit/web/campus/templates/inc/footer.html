@@ -1,7 +1,10 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 
 <footer class="footer" data-ct-area="campus-footernav">
-    <div class="footer__item" itemscope itemtype="http://schema.org/SiteNavigationElement">
+    {% block breadcrumbs -%}
+        {%- include "zeit.web.core:templates/inc/breadcrumbs.html" -%}
+    {%- endblock breadcrumbs %}
+    <div class="footer__navigation footer__item" itemscope itemtype="http://schema.org/SiteNavigationElement">
         <a href="{{ request.route_url('home') }}campus/index" data-ct-row="logo" data-ct-label="logo">
             {{- lama.use_svg_icon('logo-zco', 'footer__logo', view.package) -}}
         </a>

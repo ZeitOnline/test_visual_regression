@@ -71,7 +71,7 @@
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Deutschland</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Campus</attribute>
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">ZEIT Studienführer</attribute>
     <attribute name="running-volume" ns="http://namespaces.zeit.de/CMS/workflow">ZSF-2015-01</attribute>
     <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
