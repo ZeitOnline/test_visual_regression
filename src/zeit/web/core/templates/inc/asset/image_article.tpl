@@ -2,6 +2,7 @@
 
 {% set module_layout = 'article' %}
 {% set href = image.href %}
+{% set image_itemprop = 'image' %}
 
 {% set media_block_additional_class = 'article__item' | with_mods(*image.figure_mods) %}
 
