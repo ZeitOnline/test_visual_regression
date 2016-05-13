@@ -7,13 +7,17 @@
 				padding-right: remify(15px)
 
 .newsteaser
-	font-size: remify(14px)
-	padding-bottom: $cp-padding
+	font-size: remify(15px)
+	padding-bottom: remify(5px)
+	line-height: remify(20px)
 
 	&__time
-		width: remify(60px)
-		display: inline-block
+		min-width: remify(50px)
+		display: table-cell
 		color: $zon-mid-grey
+		letter-spacing: $zon-letter-spacing-s
+	&__text
+		display: table-cell
 	&__kicker
 		color: $color-text-highlighted
 		font-weight: bold
@@ -22,6 +26,7 @@
 		margin: 0 remify(5px)
 	&__product
 		color: $zon-light-grey
+		font-size: 0.85em
 		white-space: nowrap
 		&:before
 			content: "\2014"
