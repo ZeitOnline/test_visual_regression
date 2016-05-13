@@ -8,23 +8,24 @@
 
 .newsteaser
 	font-size: remify(14px)
+	padding-bottom: $cp-padding
 
 	&__time
-		display: table-cell
-		width: remify(36px)
-	&__text
-		display: table-cell
-		padding-left: remify(10px)
+		width: remify(60px)
+		display: inline-block
+		color: $zon-mid-grey
 	&__kicker
 		color: $color-text-highlighted
 		font-weight: bold
 		letter-spacing: $zon-letter-spacing-m
 	&__title
-		padding-right: remify(5px)
+		margin: 0 remify(5px)
 	&__product
-		color: $zon-mid-grey
-		font-size: remify(12px)
+		color: $zon-light-grey
 		white-space: nowrap
+		&:before
+			content: "\2014"
+			margin-right: remify(5px)
 	&__ad
 		background-color: $color-advertising-bg
 		margin: remify(15px 0)
@@ -34,3 +35,8 @@
 		.ad-mobile--4
 			background-color: inherit
 			padding: remify(30px 0)
+
+	+respond-min($break-tablet-min)
+		max-width: remify(800px)
+		margin-left: auto
+		margin-right: auto
