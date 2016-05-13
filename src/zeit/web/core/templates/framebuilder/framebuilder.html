@@ -1,9 +1,11 @@
 {% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 
+{% set framebuilder_variant = 'minimal' if view.framebuilder_is_minimal else 'default' %}
+
 {% if not view.page_slice %}
-    {% include "{}:templates/framebuilder/html_head.tpl".format(view.package) %}
-    {% include "{}:templates/framebuilder/upper_body.tpl".format(view.package) %}
-    {% include "{}:templates/framebuilder/lower_body.tpl".format(view.package) %}
+    {% include "{}:templates/framebuilder/{}/html_head.tpl".format(view.package, framebuilder_variant) %}
+    {% include "{}:templates/framebuilder/{}/upper_body.tpl".format(view.package, framebuilder_variant) %}
+    {% include "{}:templates/framebuilder/{}/lower_body.tpl".format(view.package, framebuilder_variant) %}
 {% else %}
-    {% include "{}:templates/framebuilder/{}.tpl".format(view.package, view.page_slice) %}
+    {% include "{}:templates/framebuilder/{}/{}.tpl".format(view.package, framebuilder_variant, view.page_slice) %}
 {% endif %}

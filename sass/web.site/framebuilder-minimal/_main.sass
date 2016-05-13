@@ -1,0 +1,8 @@
+.main
+	padding: $vertical-space $page-padding--small
+	overflow: hidden // prevent android from wrong zooming
+	// TODO: Brauchen/Wollen wir Old-IE Sachen im neuen Frame?
+	+old-ie
+		width: $break-desktop-min
+	+respond-min($break-tablet-min)
+		padding: $vertical-space 0

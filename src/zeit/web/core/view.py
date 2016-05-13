@@ -1007,6 +1007,14 @@ class FrameBuilder(CeleraOneMixin):
     inline_svg_icons = True
 
     @zeit.web.reify
+    def framebuilder_is_minimal(self):
+        return 'minimal' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_width(self):
+        return self.request.GET.get('width', None)
+
+    @zeit.web.reify
     def advertising_enabled(self):
         return self.banner_channel is not None
 
@@ -1071,6 +1079,19 @@ class FrameBuilder(CeleraOneMixin):
                 ('$autoSizeFrames', True),
                 ('keywords', adc_levels[4] if len(adc_levels) > 4 else ''),
                 ('tma', '')]
+
+    # Inside the Framebuilder, we only want to see the first footer navigation
+    @zeit.web.reify
+    def navigation_footer_publisher(self):
+
+        # TODO: super() ausführen (statt deren Code zu kopieren),
+        # wenn nicht im Minimal Framebuilder. Oder das im Template regeln
+        # statt hier in der View ?
+        src = zeit.web.core.navigation.NAVIGATION_FOOTER_PUBLISHER_SOURCE
+        if self.framebuilder_is_minimal:
+            print('TODO: just use the first item. Make it work.')
+            # return src.navigation.items()[0]
+        return src.navigation
 
 
 @pyramid.view.notfound_view_config()
