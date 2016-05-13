@@ -98,11 +98,11 @@
 
                 {% profile %}
 
-                {% block navigation %}
-                    {% if not view.is_wrapped %}
-                    {{ lama.main_nav(view.context.main_nav_full_width, request) }}
-                    {% endif %}
-                {% endblock navigation %}
+                {% if not view.is_wrapped %}
+                    {% block navigation %}
+                        {{ lama.main_nav(view.context.main_nav_full_width, request) }}
+                    {% endblock navigation %}
+                {% endif %}
 
                 {% block adplace_billboard %}
                     {{ lama.adplace(view.banner(3), view) }}
