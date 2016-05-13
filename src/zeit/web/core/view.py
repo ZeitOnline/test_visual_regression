@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
 import base64
 import datetime
 import logging
@@ -917,6 +919,8 @@ class Content(CeleraOneMixin, CommentMixin, Base):
                     lq.field('uniqueId', self.context.uniqueId)),
                 lq.not_(
                     lq.field('ressort', 'zeit-magazin')),
+                lq.not_(
+                    lq.field('ressort', 'Campus')),
                 lq.text_range('channels', None, None),
                 lq.field_raw(
                     'product_id', lq.or_(

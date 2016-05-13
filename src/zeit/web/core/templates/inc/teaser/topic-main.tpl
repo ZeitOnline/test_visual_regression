@@ -7,21 +7,21 @@
 	{% set readmore_url = ref_cp.uniqueId | create_url %}
 {% endif %}
 
-{% block layout %}{{ topic_layout }}{% endblock %}
+{% block layout %}teaser-topic-main{% endblock %}
 {% block teaser_journalistic_format %}{% endblock %}
 
 {% block teaser_link %}
 	{% if readmore_url %}
 	<a class="{{ self.layout() }}__combined-link" title="{{ topic_supertitle }} - {{ area.title }}" href="{{ readmore_url }}">
 		<span class="{{ self.layout() }}__kicker">{{ topic_supertitle }}</span>
-		{%- if topic_supertitle and not is_topic_variant %}<span class="visually-hidden">: </span>{% endif %}
-		{%- if not is_topic_variant %}<span class="{{ self.layout() }}__title">{{ area.title }}</span>{% endif %}
+		{%- if topic_supertitle %}<span class="visually-hidden">: </span>{% endif %}
+		<span class="{{ self.layout() }}__title">{{ area.title }}</span>
 	</a>
 	 {% endif %}
 {% endblock %}
 
 {% block teaser_media_position_after_title %}
-	{% if readmore_url and not is_topic_variant %}
+	{% if readmore_url %}
 	<a href="{{ readmore_url }}" class="{{ self.layout() }}__button">
 		{{ area.read_more | default('Alles zum Thema', true) }}
 	</a>

@@ -4,7 +4,15 @@ Change log for zeit.web
 2.81 (unreleased)
 -----------------
 
+- ZON-3056: Add microdata for ZEIT Campus teasers
+
 - ZON-2659: Use HTML5 video player for inline videos
+
+- BUG-417: Exclude Campus articles from article lineage
+
+- MAINT: Clean up ZMO templates
+
+- MAINT: Transmit correct client IP address to bugsnag
 
 
 2.80 (2016-05-11)
