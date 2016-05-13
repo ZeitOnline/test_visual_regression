@@ -42,7 +42,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             var data = [],
                 href,
                 type = 'text',
-                modulerow = '',
                 teasertype = '',
                 element = $element.get( 0 ),
                 $article = $element.closest( 'article, aside' ),
