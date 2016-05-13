@@ -172,6 +172,7 @@
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/celera_one.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
 
         <script type="text/javascript">
             var require = { baseUrl: '{{ request.asset_host }}/js/' };
@@ -182,14 +183,6 @@
                 iqd.callAds();
             }
         </script>
-
-        <!-- handler for wrapper app modifications -->
-        {# TODO: delete else branch after app relaunch #}
-        {% if view.is_wrapped %}
-            {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
-        {% else %}
-            {{lama.wrapper_handling( view )}}
-        {% endif %}
 
         {% if view.vgwort_url %}
         <!--start: vgwort-->
