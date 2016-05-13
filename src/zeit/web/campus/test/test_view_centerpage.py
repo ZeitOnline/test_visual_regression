@@ -69,7 +69,7 @@ def test_campus_teaser_wide_small_has_correct_structure(testbrowser):
     assert len(select('.teaser-wide-small__content')) == 0
 
     byline = select('.teaser-wide-small__byline')[2]
-    byline_text = re.sub(' +', ' ', byline.text.strip())
+    byline_text = re.sub('\s+', ' ', byline.text_content().strip())
     assert byline_text == 'Von Viola Diem'
 
 

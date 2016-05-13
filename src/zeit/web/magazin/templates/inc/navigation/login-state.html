@@ -1,7 +1,7 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama %}
 
 {% if user %}
-    <span class="main-nav__section__trigger js-main-nav-section-trigger">
+    <span class="main-nav__section__trigger js-main-nav-section-trigger" id="login-state" data-sso-id="{{ user.ssoid }}">
         {% if user.picture %}
             <span class="main-nav__avatar" style="background-image: url({{ user.picture }})"></span>
         {% else %}
