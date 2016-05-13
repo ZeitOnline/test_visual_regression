@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-417: Exclude Campus articles from article lineage
 
+- MAINT: Clean up ZMO templates
+
 
 2.80 (2016-05-11)
 -----------------
