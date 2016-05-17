@@ -4,7 +4,7 @@
     <ul class="toolbox__list">
     {% for link in module.toolbox %}
         <li class="toolbox__item">
-            <a href="{{ link.href }}" class="toolbox__link" title="{{ link.title_flyout }}">
+            <a href="{{ link.href }}" class="toolbox__link" title="{{ link.title_flyout }}" data-id="{{ '%s.%s.%s' | format(region_loop.index, 1, loop.index) }}.toolbox.text">
                 <h3 class="toolbox__title">{{ link.title }}</h3>
                 <p class="toolbox__text">
                     {{ link.text }}
@@ -16,6 +16,6 @@
     {% endfor %}
     </ul>
     <div class="toolbox__footer">
-        <a href="{{ module.toolbox.footer_link }}" class="toolbox__sit-link">{{ module.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
+        <a href="{{ module.toolbox.footer_link }}" class="toolbox__sit-link" data-id="'{}.2.1.toolbox__footer.text'.format(region_loop.index)">{{ module.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
     </div>
 </aside>
