@@ -291,7 +291,7 @@ def substring_from(string, find):
 
 
 @zeit.web.register_filter
-def get_layout(block, request=None):
+def get_layout(block):
     # Calculating the layout of a cp block can be slightly more expensive in
     # zeit.web, since we do lookups in some vocabularies, to change the layout,
     # that was originally set for the block.
@@ -300,8 +300,7 @@ def get_layout(block, request=None):
 
     # XXX This filter is in desperate need of a major overhaul!
 
-    request = request or pyramid.threadlocal.get_current_request()
-
+    request = pyramid.threadlocal.get_current_request()
     try:
         key = request and hash(block)
     except (NotImplementedError, TypeError), e:

@@ -12,6 +12,7 @@ import lxml.etree
 import lxml.html
 import lxml.objectify
 import mock
+import pyramid.threadlocal
 import pytest
 import venusian
 import webob.multidict
@@ -213,7 +214,9 @@ def test_zon_large_teaser_mapping_is_working_as_expected(application):
     assert teaser == 'zon-large'
 
 
-def test_teaser_layout_should_be_cached_per_unique_id(application):
+def test_teaser_layout_should_be_cached_per_unique_id(application, request):
+    request.addfinalizer(pyramid.threadlocal.manager.clear)
+
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'zon-small'
@@ -221,20 +224,23 @@ def test_teaser_layout_should_be_cached_per_unique_id(application):
 
     request = mock.Mock()
     request.teaser_layout = {}
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    pyramid.threadlocal.manager.push({'request': request})
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
     assert request.teaser_layout[42] == 'zon-small'
 
     request = mock.Mock()
     request.teaser_layout.get = mock.Mock(return_value='zon-small')
+    pyramid.threadlocal.manager.push({'request': request})
 
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
     request.teaser_layout.get.assert_called_with(42, None)
 
 
 def test_get_layout_should_deal_with_all_sort_of_unset_params(
-        application):
+        application, request):
+    request.addfinalizer(pyramid.threadlocal.manager.clear)
 
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
@@ -242,18 +248,20 @@ def test_get_layout_should_deal_with_all_sort_of_unset_params(
 
     request = mock.Mock()
     request.teaser_layout = None
+    pyramid.threadlocal.manager.push({'request': request})
 
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
     request = mock.Mock()
     request.teaser_layout = {}
+    pyramid.threadlocal.manager.push({'request': request})
     block.uniqueId = None
 
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
 
