@@ -1,31 +1,24 @@
 import grokcore.component
-import zope.component
 
 import zeit.content.cp.interfaces
 
+import zeit.web.core.block
 import zeit.web.core.centerpage
-
-
-# Since we register for 'teaser', we can implicitly assume that context
-# provides zeit.content.cp.interfaces.ITeaserBlock, since 'teaser' is its
-# context.type.
-@zeit.web.register_module('teaser')
-def dispatch_teaser_via_contenttype(context):
-    try:
-        teaser = list(context)[0]
-    except (IndexError, TypeError):
-        return context
-
-    return zope.component.getMultiAdapter(
-        (context, teaser), zeit.web.core.interfaces.IBlock)
+import zeit.web.core.interfaces
+import zeit.web.core.module.teaser
 
 
 @grokcore.component.adapter(
     zeit.content.cp.interfaces.ITeaserBlock,
-    zeit.cms.interfaces.ICMSContent)
-@grokcore.component.implementer(zeit.web.core.interfaces.IBlock)
-def default_teaser(block, content):
-    return block
+    zeit.content.author.interfaces.IAuthor)
+class AuthorTeaserBlock(zeit.web.core.module.teaser.LayoutOverrideTeaserBlock):
+
+    @property
+    def layout(self):
+        if (self.xml.get('module') == 'zon-small'
+                and self.__parent__.kind in ['duo', 'minor']):
+            self.override_layout_id = 'zon-author'
+        return super(AuthorTeaserBlock, self).layout
 
 
 @grokcore.component.adapter(
