@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - BUG-417: Exclude Campus articles from article lineage
 
+- MAINT: Transmit separate SSO register URL to rawr
+
 - MAINT: Clean up ZMO templates
 
 - MAINT: Transmit correct client IP address to bugsnag
