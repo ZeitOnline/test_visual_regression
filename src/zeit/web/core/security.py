@@ -170,6 +170,8 @@ def get_login_state(request):
 
     info['login'] = u'{}/anmelden?url={}'.format(
         settings['sso_url'], destination)
+    info['register'] = u'{}/registrieren?url={}'.format(
+        settings['sso_url'], destination)
     info['logout'] = u'{}/abmelden?url={}'.format(
         settings['sso_url'], destination)
 
