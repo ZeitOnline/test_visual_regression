@@ -388,18 +388,28 @@ def test_teaser_layout_for_empty_block_should_be_set_to_hide(application):
 def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/feature/feature_longform')
-    block = mock.Mock()
-    block.layout.id = 'zon-square'
-    block.__parent__ = mock.Mock()
-    block.__parent__.kind = 'major'
-    block.__iter__ = lambda _: iter([article])
-    layout = zeit.web.core.template.get_layout(block)
-    assert layout == 'zon-square'
+    cp = zeit.content.cp.centerpage.CenterPage()
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'
+    block = area.create_item('teaser')
+    block.layout = zeit.content.cp.layout.get_layout('zon-square')
+    block.append(article)
 
+    module = zeit.web.core.template.get_module(block)
+    assert module.layout.id == 'zon-square'
+
+    block.remove(article)
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    block.__iter__ = lambda _: iter([article])
-    layout = zeit.web.core.template.get_layout(block)
-    assert layout == 'zmo-square'
+    block.append(article)
+    module = zeit.web.core.template.get_module(block)
+    assert module.layout.id == 'zmo-square'
+
+    block.remove(article)
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/simple')
+    block.append(article)
+    module = zeit.web.core.template.get_module(block)
+    assert module.layout.id == 'zco-square'
 
 
 def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
