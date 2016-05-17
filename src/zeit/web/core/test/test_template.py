@@ -244,7 +244,6 @@ def test_get_layout_should_deal_with_all_sort_of_unset_params(
     block.layout.id = 'zon-small'
 
     request = pyramid.testing.DummyRequest()
-    request._cache_get_layout = None
     pyramid.threadlocal.manager.push({'request': request})
 
     teaser = zeit.web.core.template.get_layout(block)
@@ -253,7 +252,7 @@ def test_get_layout_should_deal_with_all_sort_of_unset_params(
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
-    request._cache_get_layout = {}
+    request._cache_get_layout.clear()
     block.uniqueId = None
 
     teaser = zeit.web.core.template.get_layout(block)
