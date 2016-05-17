@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - ZON-2659: Use HTML5 video player for inline videos
 
+- ZON-2756: Add webtrekk customer ID to ZMO
+
 - BUG-417: Exclude Campus articles from article lineage
 
 - MAINT: Clean up ZMO templates
