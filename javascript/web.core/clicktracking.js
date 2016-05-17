@@ -97,6 +97,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 $row = $element.closest( '[data-ct-row]' ),
                 row = $row.data( 'ct-row' ),
                 $column = $element.closest( '[data-ct-column]', $row ),
+                url = $element.attr( 'href' ),
                 column = '',
                 subcolumn = '',
                 $needle = $element,
@@ -120,6 +121,13 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     $area.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
             }
 
+            if ( $element.attr( 'aria-controls' ) ) {
+                // special treatment for one ZEIT Campus menu link >:(
+                if ( !( Zeit.isMobileView() && $element.data( 'follow-mobile' ) ) ) {
+                    url = '#' + $element.attr( 'aria-controls' );
+                }
+            }
+
             data = [
                 $area.data( 'ct-area' ), // verortung
                 row, // reihe
@@ -130,7 +138,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     $.trim( $element.contents().first().text() ) ||
                     $element.children().first().text() ||
                     $element.text() ), // bezeichner
-                $element.attr( 'href' ) // url
+                url // url
             ];
             return formatTrackingData( data );
         },
