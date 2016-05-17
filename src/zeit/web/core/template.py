@@ -306,24 +306,24 @@ def get_layout(block):
             layout = layout_id
         else:
             layout = 'hide'
-    else:
-        layout = layout_id
-        if layout == 'zon-square':
-            # ToDo: Remove when Longform will be generally used on www.zeit.de
-            if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
-                layout = layout
-            elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
-                layout = 'zmo-square'
-            # Targaryens up here
-            elif zeit.campus.interfaces.IZCOContent.providedBy(teaser):
-                layout = 'zco-square'
-        # XXX Instead of hard-coding a layout change here, we should make use
-        # of z.w.core.centerpage.dispatch_teaser_via_contenttype() and
-        # register a specific teaser module for authors.
-        elif (zeit.content.author.interfaces.IAuthor.providedBy(teaser) and
-                layout == 'zon-small' and
-                block.__parent__.kind in ['duo', 'minor']):
-            layout = 'zon-author'
+
+    layout = layout_id
+    if layout == 'zon-square':
+        # ToDo: Remove when Longform will be generally used on www.zeit.de
+        if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
+            layout = layout
+        elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
+            layout = 'zmo-square'
+        # Targaryens up here
+        elif zeit.campus.interfaces.IZCOContent.providedBy(teaser):
+            layout = 'zco-square'
+    # XXX Instead of hard-coding a layout change here, we should make use
+    # of z.w.core.centerpage.dispatch_teaser_via_contenttype() and
+    # register a specific teaser module for authors.
+    elif (zeit.content.author.interfaces.IAuthor.providedBy(teaser) and
+            layout == 'zon-small' and
+            block.__parent__.kind in ['duo', 'minor']):
+        layout = 'zon-author'
 
     layout = zeit.web.core.centerpage.TEASER_MAPPING.get(layout, layout)
 
