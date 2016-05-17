@@ -222,20 +222,17 @@ def test_teaser_layout_should_be_cached_per_unique_id(application, request):
     block.layout.id = 'zon-small'
     block.__hash__ = lambda _: 42
 
-    request = mock.Mock()
-    request.teaser_layout = {}
+    request = pyramid.testing.DummyRequest()
+    request._cache_get_layout = {}
     pyramid.threadlocal.manager.push({'request': request})
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
-    assert request.teaser_layout[42] == 'zon-small'
+    key = hash((block,))
+    assert request._cache_get_layout[key] == 'zon-small'
 
-    request = mock.Mock()
-    request.teaser_layout.get = mock.Mock(return_value='zon-small')
-    pyramid.threadlocal.manager.push({'request': request})
-
+    request._cache_get_layout = {key: 'zon-large'}
     teaser = zeit.web.core.template.get_layout(block)
-    assert teaser == 'zon-small'
-    request.teaser_layout.get.assert_called_with(42, None)
+    assert teaser == 'zon-large'
 
 
 def test_get_layout_should_deal_with_all_sort_of_unset_params(
@@ -246,8 +243,8 @@ def test_get_layout_should_deal_with_all_sort_of_unset_params(
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'zon-small'
 
-    request = mock.Mock()
-    request.teaser_layout = None
+    request = pyramid.testing.DummyRequest()
+    request._cache_get_layout = None
     pyramid.threadlocal.manager.push({'request': request})
 
     teaser = zeit.web.core.template.get_layout(block)
@@ -256,9 +253,7 @@ def test_get_layout_should_deal_with_all_sort_of_unset_params(
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
-    request = mock.Mock()
-    request.teaser_layout = {}
-    pyramid.threadlocal.manager.push({'request': request})
+    request._cache_get_layout = {}
     block.uniqueId = None
 
     teaser = zeit.web.core.template.get_layout(block)
