@@ -1,7 +1,19 @@
 Change log for zeit.web
 =======================
 
-2.81 (unreleased)
+2.82 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.81.1 (2016-05-17)
+-------------------
+
+- MAINT: Transmit separate SSO register URL to rawr
+
+
+2.81 (2016-05-17)
 -----------------
 
 - ZON-3072: Change ZEIT Campus flyout and toolbox clicktracking identifier
@@ -9,6 +21,8 @@ Change log for zeit.web
 - ZON-3056: Add microdata for ZEIT Campus teasers
 
 - ZON-2659: Use HTML5 video player for inline videos
+
+- ZON-2756: Add webtrekk customer ID to ZMO
 
 - BUG-417: Exclude Campus articles from article lineage
 
