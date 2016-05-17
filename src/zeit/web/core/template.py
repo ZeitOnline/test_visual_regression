@@ -298,25 +298,25 @@ def substring_from(string, find):
 @zeit.web.register_filter
 @zeit.web.cache_on_request
 def get_layout(block):
-    # XXX This filter is in desperate need of a major overhaul!
     try:
-        layout_id = block.layout.id
+        layout = block.layout.id
     except (AttributeError, TypeError):
-        layout_id = 'hide'
+        return 'hide'
 
-    try:
-        teaser = list(block)[0]
-    except (IndexError, TypeError):
-        if not zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
-            layout = layout_id
-        else:
-            layout = 'hide'
+    if zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
+        try:
+            teaser = list(block)[0]
+        except IndexError:
+            return 'hide'
+    else:
+        # XXX Is running all blocks through the "layout" mechanism (which
+        # actually is teaser-specific in zeit.content.cp) really a good idea?
+        teaser = None
 
-    layout = layout_id
     if layout == 'zon-square':
         # ToDo: Remove when Longform will be generally used on www.zeit.de
         if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
-            layout = layout
+            pass
         elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
             layout = 'zmo-square'
         # Targaryens up here
