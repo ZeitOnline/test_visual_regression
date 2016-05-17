@@ -231,6 +231,9 @@ module.exports = function(grunt) {
                     },
                     {
                         name: 'site'
+                    },
+                    {
+                        name: 'site-framebuilder-minimal'
                     }
                 ]
             },
