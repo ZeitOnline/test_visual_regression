@@ -4,7 +4,7 @@ Change log for zeit.web
 2.82 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Transmit separate SSO register URL to rawr
 
 
 2.81 (2016-05-17)
@@ -17,8 +17,6 @@ Change log for zeit.web
 - ZON-2659: Use HTML5 video player for inline videos
 
 - BUG-417: Exclude Campus articles from article lineage
-
-- MAINT: Transmit separate SSO register URL to rawr
 
 - MAINT: Clean up ZMO templates
 
