@@ -291,28 +291,9 @@ def substring_from(string, find):
 
 
 @zeit.web.register_filter
+@zeit.web.cache_on_request
 def get_layout(block):
-    # Calculating the layout of a cp block can be slightly more expensive in
-    # zeit.web, since we do lookups in some vocabularies, to change the layout,
-    # that was originally set for the block.
-    # Since we might lookup a layout more than once per request, we can cache
-    # it in the request object.
-
     # XXX This filter is in desperate need of a major overhaul!
-
-    request = pyramid.threadlocal.get_current_request()
-    try:
-        key = request and hash(block)
-    except (NotImplementedError, TypeError), e:
-        log.debug('Cannot cache {} layout: {}'.format(type(block), e))
-        key = None
-
-    if key:
-        request.teaser_layout = getattr(request, 'teaser_layout', None) or {}
-        layout = request.teaser_layout.get(key, None)
-        if layout:
-            return layout
-
     try:
         layout_id = block.layout.id
     except (AttributeError, TypeError):
@@ -345,9 +326,6 @@ def get_layout(block):
             layout = 'zon-author'
 
     layout = zeit.web.core.centerpage.TEASER_MAPPING.get(layout, layout)
-
-    if key:
-        request.teaser_layout[key] = layout
 
     return layout
 

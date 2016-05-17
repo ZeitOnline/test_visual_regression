@@ -6,6 +6,7 @@ import types
 
 from dogpile.cache.api import NO_VALUE
 import pyramid_dogpile_cache2.cache
+import pyramid.threadlocal
 import venusian
 import zope.component
 
@@ -295,3 +296,34 @@ def register_area(name):
                             zeit.content.cp.interfaces.IRenderedArea, name)
         return cls
     return registrator
+
+
+def cache_on_request(func):
+    """Function decorator that caches the function result in a dictionary on
+    the pyramid request (attribute is named `_cache_<name>` with the function
+    name or the given `cache_name`).
+
+    Note: Only functions without keyword arguments are supported at the moment.
+    """
+    cache_attribute = '_cache_{}'.format(func.__name__)
+
+    def cached(*args):  # XXX Should we support **kw (if possible)?
+        request = pyramid.threadlocal.get_current_request()
+        if not request:
+            return func(*args)
+
+        try:
+            key = hash(args)
+        except (NotImplementedError, TypeError), e:
+            log.debug(
+                'Cannot cache {} for {}: {}'.format(cache_attribute, args, e))
+            return func(*args)
+        cache = getattr(request, cache_attribute, {})
+
+        if key in cache:
+            return cache[key]
+        result = func(*args)
+        cache[key] = result
+        setattr(request, cache_attribute, cache)
+        return result
+    return cached
