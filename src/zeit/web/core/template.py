@@ -325,8 +325,7 @@ def get_layout(block):
             block.__parent__.kind in ['duo', 'minor']):
         layout = 'zon-author'
 
-    layout = zeit.web.core.centerpage.TEASER_MAPPING.get(layout, layout)
-
+    layout = zeit.web.core.centerpage.LEGACY_TEASER_MAPPING.get(layout, layout)
     return layout
 
 
