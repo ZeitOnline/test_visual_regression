@@ -16,7 +16,7 @@ $nav-color-border: #444
 
 .header
 	background-color: $primary-color
-	color: #fff
+	color: #ccc
 	position: relative
 
 	&__bar,
@@ -65,7 +65,7 @@ $nav-color-border: #444
 .nav
 	@extend %nav-font-l
 	+flex-flow(column nowrap)
-	// +font-smoothing
+	+font-smoothing
 	display: none
 	line-height: remify(50px)
 
@@ -130,12 +130,6 @@ $nav-color-border: #444
 		text-overflow: ellipsis
 		white-space: nowrap
 
-	// RESSORTS
-	&__ressorts
-
-	// SALES
-	&__sales
-
 	&__home-title
 		font-size: inherit
 		font-weight: normal
@@ -143,6 +137,12 @@ $nav-color-border: #444
 
 
 +respond-max($break-tablet-min)
+	.header
+		// make more room for menu icon
+		&__logo
+			height: remify(24px)
+			width: remify(256px)
+
 	.nav
 		// item order
 		&__login
