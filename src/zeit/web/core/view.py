@@ -1084,19 +1084,6 @@ class FrameBuilder(CeleraOneMixin):
                 ('keywords', adc_levels[4] if len(adc_levels) > 4 else ''),
                 ('tma', '')]
 
-    # Inside the Framebuilder, we only want to see the first footer navigation
-    @zeit.web.reify
-    def navigation_footer_publisher(self):
-
-        # TODO: super() ausführen (statt deren Code zu kopieren),
-        # wenn nicht im Minimal Framebuilder. Oder das im Template regeln
-        # statt hier in der View ?
-        src = zeit.web.core.navigation.NAVIGATION_FOOTER_PUBLISHER_SOURCE
-        if self.framebuilder_is_minimal:
-            print('TODO: just use the first item. Make it work.')
-            # return src.navigation.items()[0]
-        return src.navigation
-
 
 @pyramid.view.notfound_view_config()
 def not_found(request):

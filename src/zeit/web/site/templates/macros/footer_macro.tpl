@@ -7,7 +7,14 @@
 {%- endmacro %}
 
 {% macro build_footer_bar(view, navigation, class, publisher=False) -%}
-    {% for section in navigation.values() -%}
+
+    {% if view.framebuilder_is_minimal and publisher %}
+        {% set navsections = navigation.values()[:1] %}
+    {% else %}
+        {% set navsections = navigation.values() %}
+    {% endif %}
+
+    {% for section in navsections -%}
         {% set row_loop = loop %}
 
         {% if (loop.index == 1) or (publisher and loop.index % 2 == 0) or (not publisher and loop.index % 2 == 1) -%}
