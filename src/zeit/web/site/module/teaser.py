@@ -15,8 +15,8 @@ class AuthorTeaserBlock(zeit.web.core.module.teaser.LayoutOverrideTeaserBlock):
 
     @property
     def layout(self):
-        if (self.xml.get('module') == 'zon-small'
-                and self.__parent__.kind in ['duo', 'minor']):
+        if (self.xml.get('module') == 'zon-small' and
+                self.__parent__.kind in ['duo', 'minor']):
             self.override_layout_id = 'zon-author'
         return super(AuthorTeaserBlock, self).layout
 
