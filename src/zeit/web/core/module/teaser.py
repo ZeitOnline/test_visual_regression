@@ -52,6 +52,17 @@ def dispatch_teaser_via_contenttype(context):
 @grokcore.component.adapter(
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.cms.interfaces.ICMSContent)
-@grokcore.component.implementer(zeit.web.core.interfaces.IBlock)
-def default_teaser(block, content):
-    return block
+class TeaserBlock(LayoutOverrideTeaserBlock):
+
+    @property
+    def layout(self):
+        # XXX This special case doesn't really belong here, but we have no
+        # interface to help us register a separate adapter.
+        if not (zeit.content.cp.interfaces.IStoryStream.providedBy(
+                zeit.content.cp.interfaces.ICenterPage(self))):
+            return super(TeaserBlock, self).layout
+        if (zeit.cms.content.interfaces.ICommonMetadata.providedBy(
+                self._v_first_content)
+                and self._v_first_content.tldr_milestone):
+            self.override_layout_id = 'zon-milestone'
+        return super(TeaserBlock, self).layout
