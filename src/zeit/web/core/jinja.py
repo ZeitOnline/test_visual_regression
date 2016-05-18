@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import StringIO
 import cProfile
 import datetime
@@ -83,6 +85,7 @@ class Environment(jinja2.environment.Environment):
             exc_info = sys.exc_info()
         if issubclass(exc_info[0], pyramid.httpexceptions.HTTPException):
             raise exc_info[0], exc_info[1], exc_info[2]
+
         global _make_traceback
         if _make_traceback is None:
             from jinja2.debug import make_traceback as _make_traceback
@@ -96,7 +99,16 @@ class Environment(jinja2.environment.Environment):
         except:
             pass
         log.error('Error rendering %s', path, exc_info=exc_info)
-        bugsnag.notify(exc_info[1], traceback=exc_info[2], context=path)
+
+        group_by = None
+        if exc_info[0] is jinja2.exceptions.UndefinedError:
+            # The default group_by is the source code location, but for
+            # UndefinedError that's always jinja2.Environment.getattr, which
+            # doesn't tell us anything useful.
+            group_by = exc_info[1].args[0]
+        bugsnag.notify(exc_info[1], traceback=exc_info[2], context=path,
+                       grouping_hash=group_by)
+
         return getattr(self.undefined(), '__html__', lambda: '')()
 
     def __getsth__(self, func, obj, name):

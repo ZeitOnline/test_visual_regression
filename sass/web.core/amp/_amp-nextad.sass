@@ -1,118 +1,120 @@
 .nextad
-    margin: remify(40px 0)
+	margin: remify(40px 0)
 
-    &__label
-        @extend %label
-        margin-right: $page-padding
+	&__label
+		@extend %label
+		margin-right: $page-padding
 
-    &__container
-        border-width: 1px 0
-        border-color: $color-border
-        border-style: solid
-        text-align: center
+	&__container
+		border-width: 1px 0
+		border-color: $color-border
+		border-style: solid
+		text-align: center
 
-    &__lead
-        margin: 0 auto
-        max-width: remify(660px)
-        padding: remify(20px $page-padding)
-        text-align: left
+	&__lead
+		+padded
+		margin: 0 auto
+		max-width: remify(660px)
+		padding-bottom: remify(20px)
+		padding-top: remify(20px)
+		text-align: left
 
-    &__title,
-    &__text
-        letter-spacing: $zon-letter-spacing-s
-        line-height: 1.125
+	&__title,
+	&__text
+		letter-spacing: $zon-letter-spacing-s
+		line-height: 1.125
 
-    &__title
-        color: $color-headline
-        font-size: remify(20px)
-        margin: 0
+	&__title
+		color: $color-headline
+		font-size: remify(20px)
+		margin: 0
 
-    &__text
-        color: $zon-dark-grey
-        font-size: remify(15px)
-        margin: .5em 0 0
+	&__text
+		color: $zon-dark-grey
+		font-size: remify(15px)
+		margin: .5em 0 0
 
-    figure
-        background-color: $color-advertising-bg
+	figure
+		background-color: $color-advertising-bg
 
-    .figure__link
-        display: block
-        height: remify(150px)
-        margin: 0 auto
-        width: remify(225px)
+	.figure__link
+		display: block
+		height: remify(150px)
+		margin: 0 auto
+		width: remify(225px)
 
-    &__button
-        +zon-button-colored($margin: remify(20px 0 40px))
-        opacity: 0.8
-        &:hover
-            opacity: 1.0
-        // style attribute is not allowed for AMP - so we have to fake it
-        &#{&}--168750
-            background-color: #168750 // Stellenmarkt
-        &#{&}--a60e00
-            background-color: #a60e00 // Studium
-        &#{&}--c27800
-            background-color: #c27800 // Reise
-        &#{&}--d11c08
-            background-color: #d11c08 // Shop
-        &#{&}--eb5e00
-            background-color: #eb5e00 // Automarkt
-        &#{&}--e6a800
-            background-color: #e6a800 // Immobilien
-        &#{&}--800015
-            background-color: #800015 // Partnersuche
-        &#{&}--40120d
-            background-color: #40120d // Misc1
-        &#{&}--3a43a6
-            background-color: #3a43a6 // Misc2
-        &#{&}--42661f
-            background-color: #42661f // Misc3
+	&__button
+		+zon-button-colored($margin: remify(20px 0 40px))
+		opacity: 0.8
+		&:hover
+			opacity: 1.0
+		// style attribute is not allowed for AMP - so we have to fake it
+		&#{&}--168750
+			background-color: #168750 // Stellenmarkt
+		&#{&}--a60e00
+			background-color: #a60e00 // Studium
+		&#{&}--c27800
+			background-color: #c27800 // Reise
+		&#{&}--d11c08
+			background-color: #d11c08 // Shop
+		&#{&}--eb5e00
+			background-color: #eb5e00 // Automarkt
+		&#{&}--e6a800
+			background-color: #e6a800 // Immobilien
+		&#{&}--800015
+			background-color: #800015 // Partnersuche
+		&#{&}--40120d
+			background-color: #40120d // Misc1
+		&#{&}--3a43a6
+			background-color: #3a43a6 // Misc2
+		&#{&}--42661f
+			background-color: #42661f // Misc3
 
 +respond-min($break-tablet-min)
-    .nextad
-        background-color: $color-advertising-bg
-        margin: 0 auto
-        max-width: remify(820px)
-        position: relative
+	.nextad
+		background-color: $color-advertising-bg
+		margin: 0 auto
+		max-width: remify(820px)
+		position: relative
 
-        &__label
-            background: rgba(255, 255, 255, 0.8)
-            margin: 0
-            padding: remify(8px)
-            position: absolute
-            right: 0
-            top: 0
-            z-index: 2
+		&__label
+			background: rgba(255, 255, 255, 0.8)
+			margin: 0
+			padding: remify(8px)
+			position: absolute
+			right: 0
+			top: 0
+			z-index: 2
 
-        &__container
-            +display-flex()
-            +flex-flow(column wrap)
-            +align-items(flex-start)
-            +align-content(space-between)
-            +justify-content(center)
-            margin: 0 auto
-            max-height: remify(210px)
-            max-width: remify(660px)
-            border: none
+		&__container
+			+display-flex()
+			+flex-flow(column wrap)
+			+align-items(flex-start)
+			+align-content(space-between)
+			+justify-content(center)
+			margin: 0 auto
+			max-height: remify(210px)
+			max-width: remify(660px)
+			border: none
 
-        &__lead
-            margin: 0
-            padding: remify(20px 0 0)
-            width: remify(330px)
+		&__lead
+			margin: 0
+			padding: remify(20px 0 0)
+			width: remify(330px)
 
-        &__title
-            font-size: remify(24px)
+		&__title
+			font-size: remify(24px)
 
-        &__text
-            font-size: remify(16px)
+		&__text
+			font-size: remify(16px)
 
-        .figure
-            +order(2)
+		.figure
+			+order(2)
 
-        .figure__link
-            height: remify(210px)
-            margin: 0
-            width: remify(315px)
+		.figure__link
+			height: remify(210px)
+			margin: 0
+			width: remify(315px)
 
-        &__button
-            margin: remify(20px 0)
+		&__button
+			margin: remify(20px 0)

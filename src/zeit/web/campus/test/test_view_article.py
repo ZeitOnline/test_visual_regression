@@ -235,16 +235,43 @@ def test_article_header_default_considers_image_layout(testbrowser):
 
 def test_article_has_print_pdf_function(testbrowser):
     browser = testbrowser('/campus/article/debate')
-    print_m = browser.cssselect('.print-menu__print')
-    pdf_m = browser.cssselect('.print-menu__pdf')
-    assert (print_m[0].attrib['href'].endswith(
+    links = browser.cssselect('.print-menu__link')
+    assert (links[0].attrib['href'].endswith(
         '/campus/article/debate?print'))
-    assert (pdf_m[0].attrib['href'] ==
+    assert (links[1].attrib['href'] ==
             'http://pdf.zeit.de/campus/article/debate.pdf')
 
 
 def test_multi_page_article_has_print_link(testbrowser):
     browser = testbrowser('/campus/article/paginated')
-    print_m = browser.cssselect('.print-menu__print')
-    assert (print_m[0].attrib['href'].endswith(
+    links = browser.cssselect('.print-menu__link')
+    assert (links[0].attrib['href'].endswith(
         '/campus/article/paginated/komplettansicht?print'))
+
+
+def test_breadcrumbs_for_article(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/simple')
+    view = zeit.web.campus.view_article.Article(context, dummy_request)
+
+    breadcrumbs = [
+        ('ZEIT Campus', 'http://xml.zeit.de/campus/index'),
+        (u'Beratung: Hier gibt es Hilfe', None)
+    ]
+
+    assert view.breadcrumbs == breadcrumbs
+
+
+def test_breadcrumbs_for_paginated_article_page(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/paginated')
+    request = dummy_request
+    view = zeit.web.campus.view_article.ArticlePage(context, request)
+    view.request.path_info = u'campus/article/paginated/seite-3'
+
+    breadcrumbs = [
+        ('ZEIT Campus', 'http://xml.zeit.de/campus/index'),
+        (u'Die dritte Seite', u'http://xml.zeit.de/campus/article/paginated')
+    ]
+
+    assert view.breadcrumbs == breadcrumbs

@@ -116,3 +116,8 @@
 			color: inherit
 			+on-interaction
 				color: $color-link--hover
+
+// Brightcove styling makes the video small. We need to enforce the size
+.article .video-player .video-js
+	width: 100% !important
+	height: auto !important

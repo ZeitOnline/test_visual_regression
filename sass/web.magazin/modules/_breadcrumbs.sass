@@ -1,14 +1,12 @@
 .breadcrumbs
 	+padded
-	background-color: $grey--mid-dark
 	border-bottom: 1px solid $grey--dark
-	color: $grey
-	font-family: $font-tabletgothic
-	+respond-max($nav__break__full-menu)
+	+respond-max($break-tablet-min)
 		display: none
 
 	&__list
 		font-size: em(12px)
+		letter-spacing: $letter-spacing-s
 		list-style-type: none
 		margin: 0 auto
 		max-width: remify($article-content-max-width)

@@ -98,11 +98,11 @@
 
                 {% profile %}
 
-                {% block navigation %}
-                    {% if not view.is_wrapped %}
-                    {{ lama.main_nav(view.context.main_nav_full_width, request) }}
-                    {% endif %}
-                {% endblock navigation %}
+                {% if not view.is_wrapped %}
+                    {% block navigation %}
+                        {{ lama.main_nav(view.context.main_nav_full_width, request) }}
+                    {% endblock navigation %}
+                {% endif %}
 
                 {% block adplace_billboard %}
                     {{ lama.adplace(view.banner(3), view) }}
@@ -119,26 +119,26 @@
                 </main>
 
                 {% profile %}
-                {% block breadcrumbs %}
-                    {%- include "zeit.web.core:templates/inc/breadcrumbs.html" -%}
-                {% endblock breadcrumbs %}
-                {% endprofile %}
-
-                {% profile %}
                 {% block footer %}
-                    <footer class="main-footer">
+                    <footer class="main-footer" data-ct-area="zmo-footernav">
+                        {% block breadcrumbs -%}
+                            {%- include "zeit.web.core:templates/inc/breadcrumbs.html" -%}
+                        {%- endblock breadcrumbs %}
+
                         <div class="main-footer__box">
                             <div class="is-constrained is-centered">
-                                {% block footer_logo %}
-                                    {{ lama.use_svg_icon('logo-zmo-small', 'main-footer__logo', view.package) }}
-                                {% endblock footer_logo %}
+                                {% block footer_logo -%}
+                                    <a href="{{ request.route_url('home') }}zeit-magazin/index" data-ct-row="logo" data-ct-label="logo">
+                                        {{- lama.use_svg_icon('logo-zmo-small', 'main-footer__logo', view.package) -}}
+                                    </a>
+                                {%- endblock footer_logo %}
                                 <div class="main-footer__links">
-                                    <ul>
+                                    <ul data-ct-row="1">
                                         <li>VERLAG</li>
                                         <li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">Mediadaten</a></li>
                                         <li><a href="http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">Rechte &amp; Lizenzen</a></li>
                                     </ul>
-                                    <ul>
+                                    <ul data-ct-row="2">
                                         <li><a class="js-image-copyright-footer" href="#bildrechte">Bildrechte</a></li>
                                         <li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>
                                         <li><a href="http://www.iqm.de/digital/nutzungsbasierte-onlinewerbung/">Cookies</a></li>
@@ -172,24 +172,12 @@
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/celera_one.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
 
         <script type="text/javascript">
             var require = { baseUrl: '{{ request.asset_host }}/js/' };
         </script>
         <script type="text/javascript" src="{{ request.asset_host }}/js/magazin.js"></script>
-        <script type="text/javascript">
-            if( typeof window.sasmobile === 'function' && window.Zeit.isMobileView() && typeof( iqd ) !== 'undefined' ) {
-                iqd.callAds();
-            }
-        </script>
-
-        <!-- handler for wrapper app modifications -->
-        {# TODO: delete else branch after app relaunch #}
-        {% if view.is_wrapped %}
-            {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
-        {% else %}
-            {{lama.wrapper_handling( view )}}
-        {% endif %}
 
         {% if view.vgwort_url %}
         <!--start: vgwort-->

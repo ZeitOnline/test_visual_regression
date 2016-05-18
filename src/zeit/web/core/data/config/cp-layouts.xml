@@ -62,6 +62,12 @@
         image_pattern="portrait"
         areas="solo"
         />
+    <layout
+        id="zco-small"
+        title="kleiner Teaser Suchergebnis"
+        image_pattern="wide"
+        areas="zco-ranking"
+        />
 
     <!-- Teaser formats for new ZON-Centerpages -->
     <layout

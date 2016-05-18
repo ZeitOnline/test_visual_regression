@@ -960,7 +960,7 @@ def test_article_doesnt_show_modified_date(testbrowser):
 
 def test_video_in_article_is_there(testbrowser):
     article = testbrowser('/zeit-online/article/zeit')
-    assert len(article.cssselect('.video-player__iframe')) == 1
+    assert len(article.cssselect('.video-player__videotag')) == 1
 
 
 def test_advertorial_marker_is_present(testbrowser):
@@ -1095,18 +1095,17 @@ def test_missing_keyword_links_are_replaced(testbrowser):
 
 def test_article_has_print_pdf_function(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    print_m = browser.cssselect('.print-menu__print')
-    pdf_m = browser.cssselect('.print-menu__pdf')
-    assert (print_m[0].attrib['href'].endswith(
+    links = browser.cssselect('.print-menu__link')
+    assert (links[0].attrib['href'].endswith(
         '/zeit-online/article/01?print'))
-    assert (pdf_m[0].attrib['href'] ==
+    assert (links[1].attrib['href'] ==
             'http://pdf.zeit.de/zeit-online/article/01.pdf')
 
 
 def test_multi_page_article_has_print_link(testbrowser):
     browser = testbrowser('/zeit-online/article/tagesspiegel')
-    print_m = browser.cssselect('.print-menu__print')
-    assert (print_m[0].attrib['href'].endswith(
+    links = browser.cssselect('.print-menu__link')
+    assert (links[0].attrib['href'].endswith(
         '/zeit-online/article/tagesspiegel/komplettansicht?print'))
 
 

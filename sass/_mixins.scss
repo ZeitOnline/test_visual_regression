@@ -17,7 +17,7 @@
                                 $hover: $color-link--hover,
                                 $border-color: rgba($color-link--default, 0.5),
                                 $border-color--hover: rgba($color-link--hover, 0.5),
-                                $style: false) {
+                                $style: $copytext-link-style) {
 	@if $style == 'zco' {
 		$border-color: #ddd;
 		$border-color--hover: #999;

@@ -60,7 +60,7 @@ def test_amp_contains_required_microdata(testbrowser):
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros.'
+    assert person.text == u'© Warner Bros.'
 
     assert date_published.get('datetime') == '2016-01-22T11:55:46+01:00'
     assert date_modified.get('datetime') == '2016-01-22T11:55:46+01:00'

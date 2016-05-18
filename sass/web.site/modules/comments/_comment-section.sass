@@ -1,6 +1,7 @@
-$comment-color-notice: 			$zon-grey
-$comment-color-header-sub: 		$zon-mid-grey
+$comment-color-notice:          $zon-grey
+$comment-color-header-sub:      $zon-mid-grey
 $comment-color-head-background: $zon-lighter-grey
+$comment-color-head-color:      $color-text
 
 @import "web.core/modules/comments/comment-section"
 
@@ -20,3 +21,5 @@ $comment-color-head-background: $zon-lighter-grey
 		font-size: remify(18px)
 		+respond-min($break-phablet-min)
 			font-size: remify(20px)
+	&__body + &__note
+		border-top: 1px solid $color-border

@@ -1,39 +1,21 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 <aside class="toolbox">
-    <h2 class="toolbox__headline">Was soll ich studieren?</h2>
+    <h2 class="toolbox__headline">{{ module.toolbox.header_text }}</h2>
     <ul class="toolbox__list">
+    {% for link in module.toolbox %}
         <li class="toolbox__item">
-            <a href="http://studiengaenge.zeit.de/sit" class="toolbox__link" title="Studium-Interessentest">
-                <h3 class="toolbox__title">Welches Studium passt zu mir?</h3>
+            <a href="{{ link.href }}" class="toolbox__link" title="{{ link.title_flyout }}" data-id="{{ '%s.%s.%s' | format(region_loop.index, 1, loop.index) }}.toolbox.text">
+                <h3 class="toolbox__title">{{ link.title }}</h3>
                 <p class="toolbox__text">
-                    Interessen entdecken mit dem Studium-Interessentest (SIT)
+                    {{ link.text }}
                 </p>
-                <strong class="toolbox__cta">Zum Test</strong>
+                <strong class="toolbox__cta">{{ link.cta }}</strong>
                 {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
             </a>
         </li>
-        <li class="toolbox__item">
-            <a href="http://studiengaenge.zeit.de" class="toolbox__link" title="Suchmaschine für Studiengänge">
-                <h3 class="toolbox__title">Wo kann ich studieren?</h3>
-                <p class="toolbox__text">
-                    Überblick verschaffen mit der Suchmaschine für Studiengänge
-                </p>
-                <strong class="toolbox__cta">Zur Suche</strong>
-                {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
-            </a>
-        </li>
-        <li class="toolbox__item">
-            <a href="http://ranking.zeit.de/che2016/de/" class="toolbox__link" title="CHE Hochschulranking">
-                <h3 class="toolbox__title">Welche Uni ist die Beste für mich?</h3>
-                <p class="toolbox__text">
-                    Universitäten vergleichen mit dem CHE Hochschulranking
-                </p>
-                <strong class="toolbox__cta">Zum Ranking</strong>
-                {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
-            </a>
-        </li>
+    {% endfor %}
     </ul>
     <div class="toolbox__footer">
-        <a href="http://studiengaenge.zeit.de/artikel/was-soll-ich-studieren.html" class="toolbox__sit-link">Was soll ich studieren? {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
+        <a href="{{ module.toolbox.footer_link }}" class="toolbox__sit-link" data-id="'{}.2.1.toolbox__footer.text'.format(region_loop.index)">{{ module.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
     </div>
 </aside>

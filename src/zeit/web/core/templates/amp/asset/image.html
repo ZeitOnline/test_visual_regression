@@ -51,7 +51,7 @@
 				{% for name, url, nofollow in image.copyright %}
 				<span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
 					{% if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}">{% endif %}
-					{% if name | trim | length > 1 %}<span itemprop="name">{{ name }}</span>{% endif %}
+					{% if name | trim | length > 1 %}<span itemprop="name">{{ name | trim | replace('© ', '© ') }}</span>{% endif %}
 					{% if url %}</a>{% endif %}
 				</span>
 				{% endfor %}

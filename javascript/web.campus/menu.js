@@ -3,7 +3,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
-define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
+define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit ) {
 
     var visibleSubmenu;
 
@@ -54,9 +54,11 @@ define([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
                     expanded = control.attr( 'aria-expanded' ) === 'true';
 
                 // in mobile view we sometimes want to follow the link
-                if ( !( window.Zeit.isMobileView() && $( this ).data( 'follow-mobile' ) ) ) {
+                if ( !( Zeit.isMobileView() && control.data( 'follow-mobile' ) ) ) {
                     event.preventDefault();
                     toggleElement( control, !expanded );
+                } else {
+                    control.data( 'id',  control.data( 'id' ).replace( '.open', '' ) );
                 }
 
             });

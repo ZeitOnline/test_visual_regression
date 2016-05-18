@@ -7,6 +7,7 @@ window.rawrConfig.sso = function() {
     this.name = "ZEIT ONLINE";
     this.icon = "http://images.zeit.de/static/img/favicon.ico";
     this.loginUrl = "{{ login }}";
+    this.registerUrl = "{{ register }}";
     this.logoutUrl = "{{ logout }}";
     this.rawrReturnUrlParameter = "url";
 };

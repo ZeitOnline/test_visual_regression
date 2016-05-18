@@ -1063,7 +1063,7 @@ def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
         assert not slides[3].is_displayed()
 
 
-def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
+def test_non_navigation_centerpage_should_have_no_breadcrumbs(
         application, monkeypatch):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
@@ -1071,8 +1071,7 @@ def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
         zeit.web.site.view_centerpage.Centerpage, u'ressort', u'moep')
     view = zeit.web.site.view_centerpage.Centerpage(
         context, pyramid.testing.DummyRequest())
-    assert view.breadcrumbs == [
-        ('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
+    assert view.breadcrumbs == []
 
 
 def test_homepage_should_have_no_breadcrumbs(
@@ -1087,7 +1086,7 @@ def test_breadcrumbs_should_handle_non_ascii(application, monkeypatch):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
     monkeypatch.setattr(
-        zeit.content.cp.centerpage.CenterPage, u'title', u'umläut')
+        zeit.content.cp.centerpage.CenterPage, u'supertitle', u'umläut')
     monkeypatch.setattr(
         zeit.content.cp.centerpage.CenterPage, u'type', u'topicpage')
     view = zeit.web.site.view_centerpage.Centerpage(
@@ -1699,10 +1698,10 @@ def test_imagecopyright_link_is_present_on_centerpages(testbrowser):
     assert len(link) == 1
 
 
-def test_imagecopyright_link_is_not_present_on_articles(testbrowser):
+def test_imagecopyright_link_is_present_on_articles(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     link = browser.cssselect('.footer-links__link.js-image-copyright-footer')
-    assert len(link) == 0
+    assert len(link) == 1
 
 
 def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):

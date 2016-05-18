@@ -56,13 +56,19 @@
 	&__arrow
 		height: remify(15px)
 		margin-right: remify(3px)
-		vertical-align: middle
+		vertical-align: remify(-2px)
 		width: remify(20px)
 
 .abo-cta
 	@extend %border-box
+	border-color: currentColor
+	color: $color-community-primary
+	display: block
 	margin-bottom: $gutter
 	padding: 2em 1em
+	+on-interaction
+		color: $primary-color
+
 	+respond-min($break-tablet-min)
 		margin-bottom: 0
 		padding: 1.8em 1em
@@ -78,6 +84,7 @@
 			+scaled-font(28px, $title-factor)
 	&__label
 		@extend %border-box--cta
+		color: currentColor
 
 .follow-us
 	background: $color-facebook

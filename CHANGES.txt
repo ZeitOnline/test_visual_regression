@@ -1,14 +1,77 @@
 Change log for zeit.web
 =======================
 
-2.79 (unreleased)
+2.82 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.81.1 (2016-05-17)
+-------------------
+
+- MAINT: Transmit separate SSO register URL to rawr
+
+
+2.81 (2016-05-17)
+-----------------
+
+- ZON-3072: Change ZEIT Campus flyout and toolbox clicktracking identifier
+
+- ZON-3056: Add microdata for ZEIT Campus teasers
+
+- ZON-2659: Use HTML5 video player for inline videos
+
+- ZON-2756: Add webtrekk customer ID to ZMO
+
+- BUG-417: Exclude Campus articles from article lineage
+
+- MAINT: Clean up ZMO templates
+
+- MAINT: Transmit correct client IP address to bugsnag
+
+
+2.80 (2016-05-11)
+-----------------
+
+- ZON-3057: Add new Ranking Area and Teaser Format for paginated ZCO CPs
+
+- OPS-335: Improve health check (configurable via `health_check_with_fs`)
+
+- MAINT: Add ZEIT Campus breadcrumbs
+
+- MAINT: Check community health directly (without varnish)
+
+- FIX: Be defensive about missing community maintenance config file
+
+- FIX: Make square teaser fully clickable again
+
+
+2.79.1 (2016-05-09)
+-------------------
+
+- MAINT: Have bugsnag group UndefinedErrors by object and attribute
+  name instead of the (unhelpful because constant) source code location
+
+
+2.79 (2016-05-04)
+-----------------
+
+- ZON-3061: Polishing ZEIT Campus
 
 - ZON-3062: Change wording of CP button
 
 - ZON-3058: Show series name on column teasers
 
+- ZON-3055: Add clicktracking for ZMO + ZCO footer
+
+- ZON-3059: Add clicktracking for ZCO sharing button
+
+- ZON-3030: Enable Accelerated Mobile Pages (AMP) for ZEIT Campus and ZEITmagazin
+
 - BUG-411: Make topics available for ZEIT Campus AdController on Centerpages
+
+- BUG-415: Only report shared URL for clicktracking
 
 - FIX: Support non-ascii URLs in "komplettansicht" redirect
 
@@ -19,6 +82,10 @@ Change log for zeit.web
 - FIX: Fix wording and links
 
 - OPS-308: Don't look at *all* gallery entries just to get the first one
+
+- MAINT: Restrict framebuilder page_slice param to valid values
+
+- MAINT: Add Config for Toolbox and Flyout
 
 
 2.78 (2016-05-02)

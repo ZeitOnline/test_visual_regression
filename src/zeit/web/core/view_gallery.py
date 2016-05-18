@@ -20,9 +20,16 @@ class Gallery(zeit.web.core.view.Content):
         return zeit.web.core.gallery.standalone(self.context)
 
     @zeit.web.reify
-    def galleryText(self):
+    def galleryText(self):  # NOQA
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
 
     @zeit.web.reify
     def banner_type(self):
         return 'article'
+
+    @zeit.web.reify
+    def breadcrumbs(self):
+        breadcrumbs = super(Gallery, self).breadcrumbs
+        self.breadcrumbs_by_navigation(breadcrumbs)
+        self.breadcrumbs_by_title(breadcrumbs)
+        return breadcrumbs

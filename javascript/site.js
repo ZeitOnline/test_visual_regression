@@ -120,7 +120,6 @@ require([
         $( '.storystream-markup__content--first' ).longTextWrapper();
         $( '.jobbox--animate' ).animateJobs();
         $( '.js-tabs' ).tabs();
-        $( '.js-image-copyright-footer' ).imageCopyrightFooter();
         $( '.partner__action' ).boxDropdown();
 
     } else if ( article.length ) {
@@ -139,6 +138,7 @@ require([
     // more ("non critical") global stuff
     $( '.footer-publisher__more' ).extendFooter();
     $( '.js-scroll' ).animateScroll();
+    $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     // search
     $( '.search-form' ).searchTools();
 });

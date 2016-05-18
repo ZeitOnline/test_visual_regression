@@ -309,8 +309,9 @@ def test_dict_with_article_paths_and_comment_counts_should_be_created(
 
 def test_rewrite_comments_url_should_rewrite_to_static_host(application):
     import zeit.web.core.comments
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     url = zeit.web.core.comments.rewrite_picture_url(
-        'http://localhost:6551/baaa')
+        conf['community_host'] + '/baaa')
     assert url == 'http://static_community/foo/baaa'
 
 
@@ -841,6 +842,14 @@ def test_community_maintenance_should_be_created_from_config(application):
     maintenance = zeit.web.core.comments.community_maintenance()
     assert maintenance['active'] is False
     assert maintenance['text_active'] == 'text_active'
+
+
+def test_community_maintenance_should_be_disabled_for_invalid_url(application):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['community_maintenance'] = 'http://xml.zeit.de/nonexistent'
+    maintenance = zeit.web.core.comments.community_maintenance()
+    assert not maintenance['active']
+    assert maintenance['text_active'].startswith(u'Aufgrund')
 
 
 @pytest.mark.parametrize("header, state, status_code", [

@@ -48,8 +48,6 @@ class Article(zeit.web.core.view.Content):
     def main_image_block(self):
         img = zeit.web.core.interfaces.IFrontendBlock(
             self.context.main_image_block, None)
-        if img is not None:
-            img.itemprop = 'image'
         return img
 
     @zeit.web.reify
@@ -290,6 +288,40 @@ class Article(zeit.web.core.view.Content):
 
         path = prefix + '?print'
         return url + path
+
+    @zeit.web.reify
+    def breadcrumbs(self):
+        breadcrumbs = super(Article, self).breadcrumbs
+        # News
+        if self.ressort == 'news':
+            breadcrumbs.append(('News', 'http://xml.zeit.de/news/index'))
+            self.breadcrumbs_by_title(breadcrumbs)
+            return breadcrumbs
+        # Archive article
+        if self.product_id in ('ZEI', 'ZEAR'):
+            breadcrumbs.append(
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'))
+            # Beware, we have some pretty messy archive data...
+            try:
+                breadcrumbs.extend([
+                    ("Jahrgang {}".format(self.context.year),
+                        'http://xml.zeit.de/{}/index'.format(
+                            self.context.year)),
+                    ("Ausgabe: {0:02d}".format(self.context.volume),
+                        'http://xml.zeit.de/{0}/{1:02d}/index'.format(
+                            self.context.year, self.context.volume))])
+                self.breadcrumbs_by_title(breadcrumbs)
+                return breadcrumbs
+            except ValueError:
+                return self.breadcrumbs_by_title(breadcrumbs)
+        # Ordinary articles
+        self.breadcrumbs_by_navigation(breadcrumbs)
+        page_teaser = self.current_page.teaser
+        if len(page_teaser) > 0:
+            breadcrumbs.extend([(page_teaser, self.context.uniqueId)])
+        else:
+            self.breadcrumbs_by_title(breadcrumbs)
+        return breadcrumbs
 
 
 @view_config(route_name='amp',
