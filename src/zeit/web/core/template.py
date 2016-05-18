@@ -290,8 +290,8 @@ def substring_from(string, find):
     return string.split(find)[-1]
 
 
-@zeit.web.register_filter
 @zeit.web.cache_on_request
+@zeit.web.register_filter
 def get_layout(block):
     try:
         layout = block.layout.id
