@@ -62,7 +62,7 @@ class TeaserBlock(LayoutOverrideTeaserBlock):
                 zeit.content.cp.interfaces.ICenterPage(self))):
             return super(TeaserBlock, self).layout
         if (zeit.cms.content.interfaces.ICommonMetadata.providedBy(
-                self._v_first_content)
-                and self._v_first_content.tldr_milestone):
+                self._v_first_content) and
+                self._v_first_content.tldr_milestone):
             self.override_layout_id = 'zon-milestone'
         return super(TeaserBlock, self).layout
