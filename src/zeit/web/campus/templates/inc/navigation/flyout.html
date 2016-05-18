@@ -1,7 +1,7 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 
-<aside class="nav-flyout">
-    <ul class="nav-flyout__list" data-ct-row="3">
+<aside class="nav-flyout" data-ct-row="2" data-ct-column="5">
+    <ul class="nav-flyout__list">
         {% for link in view.toolbox %}
             <li class="nav-flyout__item">
                 <a href="{{ link.href }}" class="nav-flyout__link" title="{{ link.title_flyout }}">
@@ -11,5 +11,5 @@
             </li>
         {% endfor %}
     </ul>
-    <a href="{{ view.toolbox.footer_link }}" class="nav-flyout__sit-link" data-ct-row="4">{{ view.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</a>
+    <a href="{{ view.toolbox.footer_link }}" class="nav-flyout__sit-link">{{ view.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</a>
 </aside>
