@@ -34,12 +34,6 @@
         var hasTouch = Modernizr.touchevents || location.search === '?touch',
             options = $.extend({
                 onSlideAfter: function() {
-                    // integrate tracking - maybe redundant with new ad-reloading?
-                    if ( Zeit.view.ressort === 'zeit-magazin' ) {
-                        Zeit.clickCount.webtrekk( 'hp.zm.slidegallery.showslide.' );
-                        Zeit.clickCount.ga( 'hp.zm.slidegallery.showslide.' );
-                    }
-
                     // add ad-reloading capability
                     var prefix = Zeit.view.ressort === 'zeit-magazin' ? 'zmo-' : '';
                     $( window ).trigger( 'interaction.adreload.z', [ prefix + 'gallery', 'interaction' ] );
