@@ -1,9 +1,14 @@
 {% if area.pagination %}
 <div class="pager{{ area_pager_modifier }}">
+    {% if area_pager_show_current %}
+        <span class="pager__current">
+            {{ area.current_page }}
+        </span>
+    {% endif %}
     {% if area.current_page == area.total_pages %}
-    <a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(p=area.current_page-1) }}">Vorherige Seite</a>
+        <a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(p=area.current_page-1) }}">{{ area_pager_label_pre or 'Vorherige Seite' }}</a>
     {% else %}
-    <a class="pager__button pager__button--next" href="{{ view.request | append_get_params(p=area.current_page+1) }}">Nächste Seite</a>
+        <a class="pager__button pager__button--next" href="{{ view.request | append_get_params(p=area.current_page+1) }}">{{ area_pager_label_next or 'Nächste Seite' }}</a>
     {% endif %}
     <ul class="pager__pages">
         {% for num in area.pagination %}

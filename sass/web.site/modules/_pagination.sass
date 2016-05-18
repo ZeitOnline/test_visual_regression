@@ -92,6 +92,18 @@
 		max-width: remify(760px)
 		margin: remify(16px auto 32px)
 
+	&--overview
+		border-style: solid
+		border-width: 0 0 1px
+		border-color: $color-separator
+
+		.pager__pages
+			display: none
+
+		.pager__button
+			margin: remify(0 14px 20px 0)
+
+
 +respond-min($break-tablet-min)
 	.article-pagination
 		&__link
@@ -119,3 +131,15 @@
 		&__page
 			a, span
 				padding: 0 1.2em
+
+		&--overview
+			max-width: remify(800px)
+			margin-left: auto
+			margin-right: auto
+			border-width: 1px 0
+
+			.pager__pages
+				display: inline-block
+
+			.pager__button
+				margin: remify(20px 14px 20px 0)
