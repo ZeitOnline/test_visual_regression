@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.82 (unreleased)
+2.82 (2016-05-19)
 -----------------
 
 - FIX: Fix tracking toolbox
