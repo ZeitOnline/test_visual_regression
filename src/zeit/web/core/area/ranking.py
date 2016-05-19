@@ -222,10 +222,13 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return 0
         return self.context._count
 
+    def _page(self):
+        return int(self.request.GET['p'])
+
     @zeit.web.reify
     def page(self):
         try:
-            page = int(self.request.GET['p'])
+            page = self._page()
             assert page > 0
             if page == 1:
                 raise pyramid.httpexceptions.HTTPMovedPermanently(

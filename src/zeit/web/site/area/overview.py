@@ -1,5 +1,6 @@
 import copy
 import datetime
+import dateutil
 import logging
 
 import zeit.solr.query
@@ -50,3 +51,15 @@ class Overview(zeit.web.core.area.ranking.Ranking):
         query = zeit.find.search.query(filter_terms=[
             zeit.solr.query.field_raw('published', 'published*')])
         return zeit.solr.query.and_(query, range_)
+
+    def _page(self):
+        return self.date_to_page(dateutil.parser.parse(
+            self.request.GET['date']))
+
+    def date_to_page(self, date):
+        today = datetime.datetime.today().replace(
+            hour=0, minute=0, second=0, microsecond=0)
+        return (today-date).days + 1
+
+    def page_to_date(self, page):
+        pass
