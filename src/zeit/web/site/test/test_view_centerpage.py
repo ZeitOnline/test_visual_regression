@@ -851,6 +851,14 @@ def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
         teaser[0].cssselect('a .newsteaser__text .newsteaser__product')) == 1
 
 
+def test_newspage_has_expected_elements(testbrowser, datasolr):
+    browser = testbrowser('/news/index')
+    area = browser.cssselect('.cp-area--overview')[0]
+    assert len(area.cssselect('.pager--overview')) == 1
+    assert len(area.cssselect('.pager__current')) == 1
+    assert len(area.cssselect('.newsteaser')) > 1
+
+
 def test_servicebox_present_in_wide_breakpoints(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver

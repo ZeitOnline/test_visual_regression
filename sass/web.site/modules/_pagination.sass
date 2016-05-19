@@ -66,7 +66,8 @@
 				padding-left: .5em
 				font-size: 1rem
 				line-height: 1
-	&__pages
+	&__pages,
+	&__current
 		+inline-block
 		font-size: remify(14px)
 		letter-spacing: $zon-letter-spacing-m
@@ -87,6 +88,8 @@
 		a, span
 			+inline-block
 			padding: 0 .7em
+	&__current
+		margin-right: remify(30px)
 
 	&--author-list
 		max-width: remify(760px)
