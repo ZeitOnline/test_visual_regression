@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import math
 
@@ -224,6 +225,20 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     def _page(self):
         return int(self.request.GET['p'])
+
+    @zeit.web.reify
+    def pagination_info(self):
+        return {
+            'previous_label': u'Vorherige Seite',
+            'previous_param': dict(p=self.current_page-1),
+            'next_label': u'Nächste Seite',
+            'next_param': dict(p=self.current_page+1)}
+
+    def page_info(self, page_nr):
+        return {
+            'page_label': page_nr,
+            'remove_get_param': 'p',
+            'append_get_param': dict(p=page_nr)}
 
     @zeit.web.reify
     def page(self):

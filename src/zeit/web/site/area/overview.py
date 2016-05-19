@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import copy
 import datetime
 import dateutil
@@ -12,7 +13,7 @@ import zeit.web.core.area.ranking
 log = logging.getLogger(__name__)
 
 
-SANITY_BOUND = 500
+SANITY_BOUND = 10
 
 
 @zeit.web.register_area('overview')
@@ -52,6 +53,40 @@ class Overview(zeit.web.core.area.ranking.Ranking):
             zeit.solr.query.field_raw('published', 'published*')])
         return zeit.solr.query.and_(query, range_)
 
+    @zeit.web.reify
+    def pagination_info(self):
+        today = today = datetime.datetime.today().replace(
+            hour=0, minute=0, second=0, microsecond=0)
+
+        previous_day = (today+datetime.timedelta(
+            days=self.current_page)).strftime("%Y-%m-%d")
+        next_day = (today-datetime.timedelta(
+            days=self.current_page)).strftime("%Y-%m-%d")
+        return {
+            'previous_label': u'Vorheriger Tag',
+            'previous_param': dict(date=previous_day),
+            'next_label': u'Nächster Tag',
+            'next_param': dict(date=next_day)}
+
+    def page_info(self, page_nr):
+        if not page_nr:
+            page_nr = 1
+        today = today = datetime.datetime.today().replace(
+            hour=0, minute=0, second=0, microsecond=0)
+
+        date = today - datetime.timedelta(days=(page_nr-1))
+
+        date_label = date.strftime("%d.%m")
+        date_param = date.strftime("%Y-%m-%d")
+
+        if page_nr == 1:
+            date_label = date.strftime("%d.%m.%Y")
+
+        return {
+            'page_label': date_label,
+            'remove_get_param': 'date',
+            'append_get_param': dict(date=date_param)}
+
     def _page(self):
         return self.date_to_page(dateutil.parser.parse(
             self.request.GET['date']))
@@ -60,6 +95,3 @@ class Overview(zeit.web.core.area.ranking.Ranking):
         today = datetime.datetime.today().replace(
             hour=0, minute=0, second=0, microsecond=0)
         return (today-date).days + 1
-
-    def page_to_date(self, page):
-        pass
