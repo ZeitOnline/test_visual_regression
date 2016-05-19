@@ -2,29 +2,7 @@
 <script type="text/javascript">
     {# XXX: Please, only set variables in jinja where absolutely needed. #}
 
-    {% set serie = view.serie | replace(' ', '') | lower %}
-
-    {% if view.is_breaking or view.is_push_news -%}
-        {% set push = 'wichtigenachrichten.push' if view.is_push_news else 'eilmeldung.push' %}
-    {% else %}
-        {% set push = '' -%}
-    {% endif -%}
-
-    {% if view.date_first_released -%}
-        {% set date = view.date_first_released | format_date('short_num') -%}
-    {% else %}
-        {% set date = '' -%}
-    {% endif -%}
-
-    {% if view.pagination -%}
-        {% set pagination = '{}/{}'.format('all' if view.is_all_pages_view else view.pagination.current, view.pagination.total) -%}
-    {% else -%}
-        {% set pagination = '1/1' -%}
-    {% endif -%}
-
-    {# https://sites.google.com/a/apps.zeit.de/verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs #}
-    {% set wt_kennung = ['redaktion', view.ressort, view.sub_ressort, serie, view.type, view.product_id] | map('format_webtrekk') | join('.') %}
-    {% set ivw_code = '%s%sbild-text' | format(view.ressort | lower + '/' if view.ressort, view.sub_ressort | lower + '/' if view.sub_ressort) %}
+    {% set wt_kennung = view.webtrekk.identifier %}
 
     {% if view.framebuilder_requires_webtrekk %}
         var Z_WT_KENNUNG = "{{ wt_kennung }}|" + window.location.hostname + window.location.pathname;
@@ -42,52 +20,42 @@
         var wt = new webtrekkV3(webtrekk);
         wt.cookie = "1";
         wt.contentGroup = {
-            1: "redaktion", // Zuordnung/Bereich
-            2: "{{ view.tracking_type | lower }}", // Kategorie/Pagetype
-            3: "{{ view.ressort | lower }}", // Ressort
-            4: "{{ view.product_id | lower }}", // Online/Sourcetype
-            5: "{{ view.sub_ressort | lower }}", // Subressort
-            6: "{{ serie }}", // Cluster
-            {% if view.framebuilder_requires_webtrekk -%}
-            7: window.location.hostname + window.location.pathname, // doc-path
-            {% else -%}
-            7: "{{ request.path_info | substring_from('/') }}", // doc-path
-            {% endif -%}
-            8: "{{ view.banner_channel | lower }}", // Banner-Channel
-            9: "{{ date }}" // Veröffentlichungsdatum
+            {% for key in view.webtrekk.contentGroup -%}
+                {% if key == 'cg7' and view.framebuilder_requires_webtrekk -%}
+                    7: window.location.hostname + window.location.pathname
+                {%- else -%}
+                    {{ key | replace('cg', '') | int }}: "{{ view.webtrekk.contentGroup[key] }}"
+                {%- endif %}
+                {%- if not loop.last %},{% endif %}
+
+            {% endfor -%}
         };
 
         wt.customParameter = {
-            1: "{{ view.authors_list | lower }}", // Autor
-            2: "{{ ivw_code }}", // IVW-Code
-            3: "{{ pagination }}", // Seite
-            4: "{{ view.meta_keywords | join(';') | lower if view.ressort | lower != 'homepage'}}", // Schlagworte
-            5: "{{ view.date_last_modified }}", // Last published
-            6: "{{ view.text_length }}", // Textlänge
-            7: "{{ view.news_source | lower }}", // Quelle
-            8: "{{ view.product_id | lower }}", // Product-Id
-            9: "{{ view.banner_channel | lower }}", // Banner-Channel
-            10: "{{ 'yes' if view.context.advertising_enabled else 'no' }}", // Banner aktiv?
-            11: "", // Fehler
-            12: window.Zeit.getSiteParam("site"),
-            13: window.Zeit.breakpoint.getTrackingBreakpoint(),
-            14: "{{ 'alt' if 'zeitmz' in view.banner_channel | default('', True) else 'neu'  }}",
-            15: "{{ push }}", // Eilmeldungen
-            25: "original", // Plattform
-            26: "{{ 'centerpage.framebuilder' if view.framebuilder_requires_webtrekk else view.detailed_content_type }}" // Inhaltlicher Pagetype
+            {% for key in view.webtrekk.customParameter -%}
+                {% if key == 'cp12' -%}
+                    12: window.Zeit.getSiteParam("site")
+                {%- elif key == 'cp13' -%}
+                    13: window.Zeit.breakpoint.getTrackingBreakpoint()
+                {%- else -%}
+                    {{ key | replace('cp', '') | int }}: "{{ view.webtrekk.customParameter[key] }}"
+                {%- endif %}
+                {%- if not loop.last %},{% endif %}
+
+            {% endfor -%}
         };
 
-        {% if view.is_wrapped %}
+        {% if view.is_wrapped -%}
         wt.customSessionParameter = {
             1: window.Zeit.wrapped.client
         };
-        {% endif %}
+        {%- endif %}
 
-        {% if view.newsletter_optin_tracking %}
+        {% if view.newsletter_optin_tracking -%}
         wt.customEcommerceParameter = {
             8: '{{ view.newsletter_optin_tracking | format_webtrekk }}'
         };
-        {% endif %}
+        {%- endif %}
 
         var ls = document.getElementById('login-state'),
             ssoId;
@@ -113,34 +81,11 @@
 </script>
 <noscript>
     <div>
-        <img alt="" width="1" height="1" src="{{ "%s,%s,0,0,0,0,0,0,0,0&cg1=%s&cg2=%s&cg3=%s&cg4=%s&cg5=%s&cg6=%s&cg7=%s&cg8=%s&cg9=%s" | format(
+        <img alt="" width="1" height="1" src="{{ "%s,%s,0,0,0,0,0,0,0,0" | format(
             "http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328",
-            wt_kennung + ('|' | urlencode) + view.content_url.replace('http://', ''),
-            "redaktion",
-            view.tracking_type | lower,
-            view.ressort | lower,
-            view.product_id | lower,
-            view.sub_ressort | lower,
-            serie,
-            request.path_info | substring_from('/'),
-            view.banner_channel | lower,
-            date)
-        }}{{ "&cp1=%s&cp2=%s&cp3=%s&cp4=%s&cp5=%s&cp6=%s&cp7=%s&cp8=%s&cp9=%s&cp10=%s&cp11=%s&cp12=%s&cp13=%s&cp15=%s&cp25=%s" | format(
-            view.authors_list | lower,
-            ivw_code,
-            pagination,
-            view.meta_keywords | join(';') | lower,
-            view.date_last_modified,
-            view.text_length,
-            view.news_source | lower,
-            view.product_id | lower,
-            view.banner_channel | lower,
-            "",
-            "",
-            "desktop.site",
-            "stationaer",
-            push,
-            "original")
-        }}" />
+            wt_kennung ~ ('|' | urlencode) ~ view.content_url.replace('http://', '')
+        ) }}&amp;
+        {{- view.webtrekk.contentGroup | urlencode -}}&amp;
+        {{- view.webtrekk.customParameter | urlencode -}}" />
     </div>
 </noscript>
