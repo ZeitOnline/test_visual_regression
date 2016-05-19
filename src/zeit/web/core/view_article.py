@@ -209,6 +209,7 @@ class Article(zeit.web.core.view.Content):
         if self.authors:
             return u';'.join([
                 rt['name'] for rt in self.authors if rt.get('name')])
+        return ''
 
     @zeit.web.reify
     def linkreach(self):
@@ -359,6 +360,16 @@ class InstantArticle(Article):
         date = self.publish_info.date_last_published
         if date:
             return date.astimezone(self.timezone)
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(Article, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp25': 'instant article'  # Plattform
+        })
+
+        return webtrekk
 
     @zeit.web.reify
     def fbia_first_ad_paragraph(self, words=100):

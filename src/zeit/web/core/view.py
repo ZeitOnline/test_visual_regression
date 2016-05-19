@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 
 import base64
+import collections
 import datetime
 import logging
 import lxml.etree
@@ -548,6 +549,80 @@ class Base(object):
                 # Segment is no longer part of the navigation
                 next
         return breadcrumbs
+
+    @zeit.web.reify
+    def webtrekk(self):
+        ivw_code = [self.ressort, self.sub_ressort, 'bild-text']
+        pagination = '1/1'
+
+        if getattr(self, 'pagination', None):
+            if getattr(self, 'is_all_pages_view', False):
+                page = 'all'
+            else:
+                page = self.pagination.get('current')
+            pagination = '{}/{}'.format(page, self.pagination.get('total'))
+
+        if getattr(self, 'is_push_news', False):
+            push = 'wichtigenachrichten.push'
+        elif getattr(self, 'is_breaking', False):
+            push = 'eilmeldung.push'
+        else:
+            push = ''
+
+        if getattr(self, 'framebuilder_requires_webtrekk', False):
+            pagetype = 'centerpage.framebuilder'
+        else:
+            pagetype = self.detailed_content_type
+
+        content_group = collections.OrderedDict([
+            ('cg1', 'redaktion'),  # Zuordnung/Bereich
+            ('cg2', getattr(self, 'tracking_type', '').lower()),  # Kategorie
+            ('cg3', self.ressort.lower()),  # Ressort
+            ('cg4', self.product_id.lower()),  # Online/Sourcetype
+            ('cg5', self.sub_ressort.lower()),  # Subressort
+            ('cg6', self.serie.replace(' ', '').lower()),  # Cluster
+            # @TODO substring_from('/')
+            ('cg7', self.request.path_info),  # doc-path
+            ('cg8', self.banner_channel.lower()),  # Banner-Channel
+            ('cg9', zeit.web.core.template.format_date(
+                self.date_first_released,
+                'short_num'))  # Veröffentlichungsdatum
+        ])
+
+        custom_parameter = collections.OrderedDict([
+            ('cp1', getattr(self, 'authors_list', '').lower()),  # Autor
+            ('cp2', '/'.join([x for x in ivw_code if x]).lower()),  # IVW-Code
+            ('cp3', pagination),  # Seitenanzahl
+            # @TODO not on homepage?
+            ('cp4', ';'.join(self.meta_keywords).lower()),  # Schlagworte
+            ('cp5', self.date_last_modified),  # Last Published
+            ('cp6', getattr(self, 'text_length', '')),  # Textlänge
+            ('cp7', getattr(self, 'news_source', '').lower()),  # Quelle
+            ('cp8', self.product_id.lower()),  # Product-ID
+            ('cp9', self.banner_channel.lower()),  # Banner-Channel
+            # Banner aktiv
+            ('cp10', 'yes' if self.context.advertising_enabled else 'no'),
+            ('cp11', ''),  # Fehlermeldung
+            ('cp12', 'desktop.site'),  # Seitenversion Endgerät
+            ('cp13', 'stationaer'),  # Breakpoint
+            ('cp14', 'neu'),  # Beta-Variante @TODO ok?
+            ('cp15', push),  # Push und Eilmeldungen
+            ('cp25', 'original'),  # Plattform
+            ('cp26', pagetype),  # inhaltlicher Pagetype
+            ('cp27', '')  # Asset
+        ])
+
+        # @see https://sites.google.com/a/apps.zeit.de/
+        # verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs
+        identifier = '.'.join(map(zeit.web.core.template.format_webtrekk, [
+            'redaktion', self.ressort, self.sub_ressort,
+            self.serie.replace(' ', ''), self.type, self.product_id]))
+
+        return {
+            'identifier': identifier,
+            'contentGroup': content_group,
+            'customParameter': custom_parameter
+        }
 
 
 class CeleraOneMixin(object):
