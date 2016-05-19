@@ -16,6 +16,6 @@
     {% endfor %}
     </ul>
     <div class="toolbox__footer">
-        <a href="{{ module.toolbox.footer_link }}" class="toolbox__sit-link" data-id="'{}.2.1.toolbox__footer.text'.format(region_loop.index)">{{ module.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
+        <a href="{{ module.toolbox.footer_link }}" class="toolbox__sit-link" data-id="{{ '{}.2.1.toolbox__footer.text'.format(region_loop.index) }}">{{ module.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
     </div>
 </aside>
