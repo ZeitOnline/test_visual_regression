@@ -224,6 +224,8 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         return self.context._count
 
     def _page(self):
+        # We might calculate the page from a different
+        # GET param, e.g. date in zeit.web.site.area.overwiew
         return int(self.request.GET['p'])
 
     @zeit.web.reify
