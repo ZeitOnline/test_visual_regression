@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 import logging
 import re
@@ -323,6 +324,25 @@ class Article(zeit.web.core.view.Content):
         else:
             self.breadcrumbs_by_title(breadcrumbs)
         return breadcrumbs
+
+
+class AcceleratedMobilePageArticle(Article):
+
+    @zeit.web.reify
+    def meta_robots(self):
+        return super(Article, self).meta_robots.replace(',noarchive', '')
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(Article, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp12': 'mobile.site',  # Seitenversion Endgerät
+            'cp13': 'mobile',  # Breakpoint
+            'cp25': 'amp'  # Plattform
+        })
+
+        return webtrekk
 
 
 @view_config(route_name='amp',
