@@ -17,8 +17,8 @@
     {% endif -%}
 
     {% if view.pagination -%}
-        {% set pagination = view.pagination.current ~'/'~ view.pagination.total -%}
-    {% else %}
+        {% set pagination = '{}/{}'.format('all' if view.is_all_pages_view else view.pagination.current, view.pagination.total) -%}
+    {% else -%}
         {% set pagination = '1/1' -%}
     {% endif -%}
 
