@@ -66,8 +66,7 @@
 				padding-left: .5em
 				font-size: 1rem
 				line-height: 1
-	&__pages,
-	&__current
+	&__pages
 		+inline-block
 		font-size: remify(14px)
 		letter-spacing: $zon-letter-spacing-m
@@ -89,8 +88,9 @@
 			+inline-block
 			padding: 0 .7em
 	&__current
-		margin-right: remify(30px)
-		color: $zon-charcoal
+		+inline-block
+		font-size: remify(14px)
+		letter-spacing: $zon-letter-spacing-m
 		font-weight: bold
 
 	&--author-list
@@ -148,6 +148,3 @@
 
 			.pager__pages
 				display: inline-block
-
-			.pager__button
-				margin: remify(20px 14px 20px 0)
