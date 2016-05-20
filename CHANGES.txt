@@ -4,7 +4,7 @@ Change log for zeit.web
 2.84 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Escape double quotes in CeleraOne script function arguments
 
 
 2.83 (2016-05-20)
