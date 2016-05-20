@@ -7,12 +7,6 @@ Change log for zeit.web
 - FIX: Remove advertorial kicker prefix
 
 
-2.82.1 (2016-05-19)
--------------------
-
-- Nothing changed yet.
-
-
 2.82 (2016-05-19)
 -----------------
 
