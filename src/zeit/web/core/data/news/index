@@ -54,7 +54,7 @@
   </head>
   <body>
     <title>Aktuelle Schlagzeilen</title>
-    <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa252" title="Schlagzeilen">
+    <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa252" kind="solo" title="Schlagzeilen">
       <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e" kind="solo" visible="True">
         <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526" cp:type="cpextra" module="centerpage-header">
           <cp_extra id="centerpage-header"/>
