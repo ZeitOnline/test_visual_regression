@@ -87,20 +87,22 @@
 		a, span
 			+inline-block
 			padding: 0 .7em
-	&__current
-		+inline-block
-		font-size: remify(14px)
-		letter-spacing: $zon-letter-spacing-m
-		font-weight: bold
 
 	&--overview
 		border-style: solid
 		border-width: 0 0 1px
 		border-color: $zon-lighter-grey
-		margin-top: 0
 
-		.pager__pages
-			display: none
+		+respond-max($break-tablet-min)
+			.pager__pages
+				margin-top: 0
+
+			.pager__page
+				display: none
+				&:before
+					content: none
+				&--current
+					display: inline-block
 
 		.pager__button
 			margin: remify(0 14px 20px 0)
@@ -133,14 +135,5 @@
 		&__page
 			a, span
 				padding: 0 1.2em
-		&__current
-			display: none
-
 		&--overview
-			max-width: remify(800px)
-			margin-left: auto
-			margin-right: auto
 			border-width: 1px 0
-
-			.pager__pages
-				display: inline-block

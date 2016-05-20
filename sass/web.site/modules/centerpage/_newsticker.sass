@@ -9,15 +9,19 @@
 .newsteaser
 	font-size: remify(15px)
 	padding-bottom: remify(5px)
-	line-height: remify(20px)
+	line-height: 1.33
 
 	&__time
-		min-width: remify(50px)
-		display: table-cell
+		float: left
 		color: $zon-mid-grey
 		letter-spacing: $zon-letter-spacing-s
 	&__text
-		display: table-cell
+		margin-left: remify(64px)
+	&__heading
+		display: inline
+		font-size: 1em
+		font-weight: normal
+		margin: 0
 	&__kicker
 		color: $color-text-highlighted
 		font-weight: bold
@@ -40,8 +44,3 @@
 		.ad-mobile--4
 			background-color: inherit
 			padding: remify(30px 0)
-
-	+respond-min($break-tablet-min)
-		max-width: remify(800px)
-		margin-left: auto
-		margin-right: auto
