@@ -211,3 +211,17 @@ class UserCommentsArea(zeit.web.core.centerpage.Area):
         pagination = zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages)
         return pagination if pagination is not None else []
+
+    @zeit.web.reify
+    def pagination_info(self):
+        return {
+            'previous_label': u'Vorherige Seite',
+            'previous_param': dict(p=self.current_page-1),
+            'next_label': u'Nächste Seite',
+            'next_param': dict(p=self.current_page+1)}
+
+    def page_info(self, page_nr):
+        return {
+            'page_label': page_nr,
+            'remove_get_param': 'p',
+            'append_get_param': dict(p=page_nr)}

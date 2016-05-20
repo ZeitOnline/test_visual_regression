@@ -93,12 +93,14 @@ class Overview(zeit.web.core.area.ranking.Ranking):
 
         date_label = date.strftime("%d.%m")
         date_param = date.strftime("%Y-%m-%d")
+        date_year = date.strftime("%Y")
 
         if page_nr == 1:
             date_label = date.strftime("%d.%m.%Y")
 
         return {
             'page_label': date_label,
+            'year': date_year,
             'remove_get_param': 'date',
             'append_get_param': dict(date=date_param)}
 
