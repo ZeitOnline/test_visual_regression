@@ -51,7 +51,7 @@
 
 
 .pager
-	margin: remify(16px 0 32px)
+	margin: remify(16px auto 32px)
 	&__button
 		+zon-button-inky($margin: remify(20px 14px 0 0))
 		&--previous
@@ -87,10 +87,6 @@
 		a, span
 			+inline-block
 			padding: 0 .7em
-
-	&--author-list
-		max-width: remify(760px)
-		margin: remify(16px auto 32px)
 
 +respond-min($break-tablet-min)
 	.article-pagination

@@ -63,9 +63,9 @@
 		padding: 0
 		position: relative
 	&--newsticker,
+	&--author-list,
 	&--ranking
-		padding-left: $page-padding
-		padding-right: $page-padding
+		padding: 0 $page-padding--small
 
 	&--buzzboard
 		display: none
@@ -81,12 +81,16 @@
 
 	+respond-min($break-areas)
 		float: left
+		&--author-list,
 		&--ranking
 			clear: both
 			float: none
-			max-width: remify(680px) // + 2 * $cp-padding
-			margin-left: auto
-			margin-right: auto
+			margin: 0 auto
+			padding: 0 $page-padding
+		&--author-list
+			max-width: remify(760px) + 2 * $page-padding
+		&--ranking
+			max-width: $medium-content-width + 2 * $page-padding
 		&--major
 			width: 66.66%
 		&--duo
