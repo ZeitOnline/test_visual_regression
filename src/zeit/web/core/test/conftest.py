@@ -624,6 +624,9 @@ def clock(monkeypatch):
             return cls.frozen
 
         @classmethod
+        def today(cls, tz=None):
+            return Freeze.now(tz)
+        @classmethod
         def delta(cls, timedelta=None, **kwargs):
             """ Moves time fwd/bwd by the delta"""
             if not timedelta:
