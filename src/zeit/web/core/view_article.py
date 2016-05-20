@@ -325,6 +325,20 @@ class Article(zeit.web.core.view.Content):
             self.breadcrumbs_by_title(breadcrumbs)
         return breadcrumbs
 
+    @zeit.web.reify
+    def webtrekk_assets(self):
+        assets = []
+        p = 0
+        for nr, page in enumerate(self.pages, start=1):
+            for block in page:
+                block_type = zeit.web.core.template.block_type(block)
+                if block_type == 'paragraph':
+                    p += 1
+                if block_type in ['cardstack', 'inlinegallery', 'liveblog',
+                                  'quiz', 'video']:
+                    assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
+        return assets
+
 
 class AcceleratedMobilePageArticle(Article):
 
