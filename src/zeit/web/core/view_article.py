@@ -330,11 +330,12 @@ class AcceleratedMobilePageArticle(Article):
 
     @zeit.web.reify
     def meta_robots(self):
-        return super(Article, self).meta_robots.replace(',noarchive', '')
+        return super(AcceleratedMobilePageArticle,
+                     self).meta_robots.replace(',noarchive', '')
 
     @zeit.web.reify
     def webtrekk(self):
-        webtrekk = super(Article, self).webtrekk
+        webtrekk = super(AcceleratedMobilePageArticle, self).webtrekk
 
         webtrekk['customParameter'].update({
             'cp12': 'mobile.site',  # Seitenversion Endgerät
