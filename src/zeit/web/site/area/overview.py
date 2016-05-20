@@ -62,12 +62,12 @@ class Overview(zeit.web.core.area.ranking.Ranking):
     @zeit.web.reify
     def total_pages(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        total_pages = conf.get('total_news_pages', 30)
+        total_pages = conf.get('total_news_pages', '30')
 
         if total_pages == 'all':
             return super(Overview, self).total_pages
         else:
-            return int(conf.get('total_news_pages'))
+            return int(total_pages)
 
     @zeit.web.reify
     def _today(self):

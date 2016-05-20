@@ -73,6 +73,22 @@ def test_overview_area_clone_factory_should_set_proper_attributes():
     assert all(len(c.__name__) == 36 for c in clones)
 
 
+def test_overview_should_get_total_pages_from_config(application):
+    area = get_area()
+    assert area.total_pages == 30
+
+
+def test_overview_should_have_page_info(application, clock):
+    clock.freeze(zeit.web.core.date.parse_date(
+        '2016-05-10T1:23:59.780412+00:00'))
+    area = get_area()
+    pi = area.page_info(1)
+    assert pi['page_label'] == '10.5.2016'
+    assert pi['year'] == '2016'
+    assert pi['remove_get_param'] == 'date'
+    assert pi['append_get_param']['date'] == '2016-05-10'
+
+
 def test_default_teaser_should_not_expose_ranking_area_proxies(
         testbrowser, datasolr, monkeypatch):
     log = mock.Mock()
