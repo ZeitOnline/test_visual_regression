@@ -90,6 +90,8 @@
 			padding: 0 .7em
 	&__current
 		margin-right: remify(30px)
+		color: $zon-charcoal
+		font-weight: bold
 
 	&--author-list
 		max-width: remify(760px)
@@ -98,7 +100,8 @@
 	&--overview
 		border-style: solid
 		border-width: 0 0 1px
-		border-color: $color-separator
+		border-color: $zon-lighter-grey
+		margin-top: 0
 
 		.pager__pages
 			display: none
@@ -134,6 +137,8 @@
 		&__page
 			a, span
 				padding: 0 1.2em
+		&__current
+			display: none
 
 		&--overview
 			max-width: remify(800px)

@@ -63,9 +63,9 @@ class Overview(zeit.web.core.area.ranking.Ranking):
         next_day = (today-datetime.timedelta(
             days=self.current_page)).strftime("%Y-%m-%d")
         return {
-            'previous_label': u'Vorheriger Tag',
+            'previous_label': u'Nächster Tag',
             'previous_param': dict(date=previous_day),
-            'next_label': u'Nächster Tag',
+            'next_label': u'Vorheriger Tag',
             'next_param': dict(date=next_day)}
 
     def page_info(self, page_nr):
@@ -79,8 +79,10 @@ class Overview(zeit.web.core.area.ranking.Ranking):
         date_label = date.strftime("%d.%m")
         date_param = date.strftime("%Y-%m-%d")
 
-        if page_nr == 1:
-            date_label = date.strftime("%d.%m.%Y")
+        if (page_nr == self.total_pages or
+            page_nr == self.current_page or
+                date_label == "31.12"):
+                    date_label = date.strftime("%d.%m.%Y")
 
         return {
             'page_label': date_label,
