@@ -233,7 +233,6 @@ class IPagination(zope.interface.Interface):
         """Get information of the page items in the pagination object."""
 
 
-
 class IDetailedContentType(zope.interface.Interface):
     """Returns more detailed content type information, not just
     article/centerpage/etc. but also the CP-Type or Article-Template etc.

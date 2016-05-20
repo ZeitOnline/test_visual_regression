@@ -232,9 +232,9 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def pagination_info(self):
         return {
             'previous_label': u'Vorherige Seite',
-            'previous_param': dict(p=self.current_page-1),
+            'previous_param': dict(p=self.current_page - 1),
             'next_label': u'Nächste Seite',
-            'next_param': dict(p=self.current_page+1)}
+            'next_param': dict(p=self.current_page + 1)}
 
     def page_info(self, page_nr):
         return {
@@ -269,12 +269,10 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                        (len(self.uids_above) > 0))
         return 0
 
-
     @zeit.web.reify
     def _pagination(self):
         return zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages)
-
 
     @zeit.web.reify
     def pagination(self):
