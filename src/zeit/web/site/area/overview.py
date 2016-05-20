@@ -95,7 +95,10 @@ class Overview(zeit.web.core.area.ranking.Ranking):
         date_param = date.strftime("%Y-%m-%d")
         date_year = date.strftime("%Y")
 
-        if page_nr == 1:
+        if page_nr == 1 or (
+                page_nr == self.total_pages or
+                page_nr == self.current_page or
+                date_label == "31.12"):
             date_label = date.strftime("%d.%m.%Y")
 
         return {
@@ -107,6 +110,11 @@ class Overview(zeit.web.core.area.ranking.Ranking):
     def _page(self):
         return self.date_to_page(dateutil.parser.parse(
             self.request.GET['date']))
+
+    @zeit.web.reify
+    def _pagination(self):
+        return zeit.web.core.template.calculate_pagination(
+            self.current_page, self.total_pages, slots=6)
 
     def date_to_page(self, date):
         return (self._today-date).days + 1

@@ -269,10 +269,16 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                        (len(self.uids_above) > 0))
         return 0
 
+
+    @zeit.web.reify
+    def _pagination(self):
+        return zeit.web.core.template.calculate_pagination(
+            self.current_page, self.total_pages)
+
+
     @zeit.web.reify
     def pagination(self):
         if self.page > self.total_pages:
             return []
-        pagination = zeit.web.core.template.calculate_pagination(
-            self.current_page, self.total_pages)
+        pagination = self._pagination
         return pagination if pagination is not None else []
