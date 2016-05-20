@@ -581,8 +581,7 @@ class Base(object):
             ('cg4', self.product_id.lower()),  # Online/Sourcetype
             ('cg5', self.sub_ressort.lower()),  # Subressort
             ('cg6', self.serie.replace(' ', '').lower()),  # Cluster
-            # @TODO substring_from('/')
-            ('cg7', self.request.path_info),  # doc-path
+            ('cg7', self.request.path_info.split('/')[-1]),  # doc-path
             ('cg8', self.banner_channel.lower()),  # Banner-Channel
             ('cg9', zeit.web.core.template.format_date(
                 self.date_first_released,
@@ -593,7 +592,6 @@ class Base(object):
             ('cp1', getattr(self, 'authors_list', '').lower()),  # Autor
             ('cp2', '/'.join([x for x in ivw_code if x]).lower()),  # IVW-Code
             ('cp3', pagination),  # Seitenanzahl
-            # @TODO not on homepage?
             ('cp4', ';'.join(self.meta_keywords).lower()),  # Schlagworte
             ('cp5', self.date_last_modified),  # Last Published
             ('cp6', getattr(self, 'text_length', '')),  # Textlänge
@@ -605,7 +603,7 @@ class Base(object):
             ('cp11', ''),  # Fehlermeldung
             ('cp12', 'desktop.site'),  # Seitenversion Endgerät
             ('cp13', 'stationaer'),  # Breakpoint
-            ('cp14', 'neu'),  # Beta-Variante @TODO ok?
+            ('cp14', 'friedbert'),  # Beta-Variante
             ('cp15', push),  # Push und Eilmeldungen
             ('cp25', 'original'),  # Plattform
             ('cp26', pagetype),  # inhaltlicher Pagetype
