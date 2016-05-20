@@ -5,11 +5,16 @@
         <time class="newsteaser__time">
             {{ teaser | mod_date | format_date(pattern='HH:mm') }}
         </time>
-        <span class="newsteaser__text">
-            <span class="newsteaser__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
-            <span class="newsteaser__title">{{ teaser.teaserTitle or teaser.title }}</span>
+        <div class="newsteaser__text">
+            <h2 class="newsteaser__heading">
+                <span class="newsteaser__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+                {%- if teaser.teaserSupertitle or teaser.supertitle -%}
+                    <span class="visually-hidden">: </span>
+                {% endif -%}
+                <span class="newsteaser__title">{{ teaser.teaserTitle or teaser.title }}</span>
+            </h2>
             <span class="newsteaser__product">{{ teaser.product.title }}</span>
-        </span>
+        </div>
     </a>
 </article>
 
