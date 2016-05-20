@@ -855,7 +855,6 @@ def test_newspage_has_expected_elements(testbrowser, datasolr):
     browser = testbrowser('/news/index')
     area = browser.cssselect('.cp-area--overview')[0]
     assert len(area.cssselect('.pager--overview')) == 1
-    assert len(area.cssselect('.pager__current')) == 1
     assert len(area.cssselect('.newsteaser')) > 1
 
 
