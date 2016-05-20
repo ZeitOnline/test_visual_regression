@@ -1,16 +1,14 @@
 {% if area.pagination %}
 <div class="{{ 'pager' | with_mods(area.kind) }}">
-    {% set pagination_info = area.pagination_info %}
-    {% if area.current_page == area.total_pages %}
-        <a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(**pagination_info.previous_param) }}">{{ pagination_info.previous_label }}</a>
-    {% else %}
-        <a class="pager__button pager__button--next" href="{{ view.request | append_get_params(**pagination_info.next_param) }}">{{ pagination_info.next_label }}</a>
-    {% endif %}
-    {% if area_pager_show_current %}
-        <span class="pager__current">
-            {{ area.page_info(area.current_page).page_label }}
-        </span>
-    {% endif %}
+    {% if area.current_page == area.total_pages -%}
+        <a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(**area.pagination_info.previous_param) }}">
+            {{- area.pagination_info.previous_label -}}
+        </a>
+    {% else -%}
+        <a class="pager__button pager__button--next" href="{{ view.request | append_get_params(**area.pagination_info.next_param) }}">
+            {{- area.pagination_info.next_label -}}
+        </a>
+    {% endif -%}
     <ul class="pager__pages">
         {% for num in area.pagination %}
         {% set page_info = area.page_info(num) %}

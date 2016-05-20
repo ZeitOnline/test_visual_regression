@@ -2,8 +2,6 @@
 
 {% block before_module_list %}
     {% if area.pagination %}
-        {% set area_pager_modifier = " pager--overview" %}
-        {% set area_pager_show_current = True %}
         {% include "zeit.web.site:templates/inc/pagination.tpl" %}
     {% endif %}
 {% endblock %}
