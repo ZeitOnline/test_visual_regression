@@ -596,7 +596,7 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def c1_client(self):
-        return [(k, u'"{}"'.format(v)) for k, v in {
+        return [(k, u'"{}"'.format(v.replace('"', r'\"'))) for k, v in {
             'set_channel': self._c1_channel,
             'set_sub_channel': self._c1_sub_channel,
             'set_cms_id': self._c1_cms_id,
