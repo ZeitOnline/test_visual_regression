@@ -28,7 +28,7 @@
         {% endblock adplace_top %}
         <div class="page__content" {% if view.framebuilder_width %} style="margin: 0 auto; max-width:{{ view.framebuilder_width }};"{% endif %}>
             <header class="header">
-                <div class="main_nav" id="main_nav">
+                <div class="{{ 'main_nav' | with_mods('has-login' if view.framebuilder_has_login) }}" id="main_nav">
                     <!-- logo -->
                     <div id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" class="logo_bar">
                         <div class="logo_bar__brand" itemprop="brand">
@@ -43,6 +43,14 @@
                             </a>
                         </div>
                     </div>
+
+                    {% if view.framebuilder_has_login %}
+                        <div class="login">
+                            <!-- start::cut_mark::login -->
+                                <a href="{{ login }}">Anmelden</a>
+                            <!-- end::cut_mark::login -->
+                        </div>
+                    {% endif %}
                 </div>
             </header>
             {% block adplace_billboard %}

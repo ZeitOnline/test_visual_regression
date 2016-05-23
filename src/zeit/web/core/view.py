@@ -1019,6 +1019,10 @@ class FrameBuilder(CeleraOneMixin):
         return self.request.GET.get('width', None)
 
     @zeit.web.reify
+    def framebuilder_has_login(self):
+        return 'login' in self.request.GET
+
+    @zeit.web.reify
     def advertising_enabled(self):
         return self.banner_channel is not None
 
