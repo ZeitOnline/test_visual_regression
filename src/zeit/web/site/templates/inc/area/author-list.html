@@ -1,13 +1,8 @@
 {% extends "zeit.web.core:templates/inc/area/ranking.html" %}
 
 {% block before_module_list %}<ul class="author-list">{% endblock before_module_list %}
-{% block area_pager_modifier %}pager--author-list{% endblock %}
 {% block after_module_list %}
     </ul>
 
-    {# no super(), because we need to put the modifier inside #}
-    {% set area_pager_modifier = " pager--author-list" %}
-    {% if area.pagination %}
-        {% include "zeit.web.site:templates/inc/pagination.tpl" %}
-    {% endif %}
+    {{ super() }}
 {% endblock after_module_list %}
