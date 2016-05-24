@@ -14,7 +14,7 @@
         </div>
         <div class="footer-links" data-ct-row="bottom">
             {{ foma.footer_links(view) }}
-            {% if not view.is_framebuilder %}
+            {% if view is not framebuilder %}
                 {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
             {% endif %}
             <div class="footer-links__button" data-ct-column="3">

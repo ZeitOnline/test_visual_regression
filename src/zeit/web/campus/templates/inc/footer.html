@@ -18,7 +18,7 @@
             </a>
         </div>
         <div class="footer__links" data-ct-row="2">
-            {% if not view.is_framebuilder %}
+            {% if view is not framebuilder %}
                 <a class="footer__link js-image-copyright-footer" href="#bildrechte">
                     Bildrechte
                 </a>
@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    {% if not view.is_framebuilder %}
+    {% if view is not framebuilder %}
         {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
     {% endif %}
 </footer>

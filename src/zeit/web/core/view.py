@@ -1011,10 +1011,6 @@ class FrameBuilder(CeleraOneMixin):
     inline_svg_icons = True
 
     @zeit.web.reify
-    def is_framebuilder(self):
-        return True
-
-    @zeit.web.reify
     def framebuilder_is_minimal(self):
         return 'minimal' in self.request.GET
 

@@ -156,6 +156,11 @@ def leserartikel(context):
     return getattr(context, 'genre', None) and context.genre == 'leserartikel'
 
 
+@zeit.web.register_test
+def framebuilder(view):
+    return isinstance(view, zeit.web.core.view.FrameBuilder)
+
+
 @zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block
