@@ -1,6 +1,9 @@
 {% if image and not is_image_expired(image) %}
     {%- set width = 820 %}
-    {%- set height = (width / image.ratio) | int %}
+    {%- set height = 460 %}
+    {%- if image.ratio %}
+        {%- set height = (width / image.ratio) | int %}
+    {%- endif %}
 
     {# TRASHME Rather crude bitblt/zci image api switch #}
     {%- if image is variant %}
