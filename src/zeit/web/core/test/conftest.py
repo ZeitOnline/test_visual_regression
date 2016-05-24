@@ -5,7 +5,6 @@ import json
 import logging
 import os.path
 import pkg_resources
-import re
 import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
@@ -622,6 +621,10 @@ def clock(monkeypatch):
                 else:
                     return cls.frozen.astimezone(tz)
             return cls.frozen
+
+        @classmethod
+        def today(cls, tz=None):
+            return Freeze.now(tz)
 
         @classmethod
         def delta(cls, timedelta=None, **kwargs):

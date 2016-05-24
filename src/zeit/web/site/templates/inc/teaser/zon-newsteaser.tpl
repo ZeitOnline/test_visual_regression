@@ -1,16 +1,21 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 <article class="newsteaser">
-    <time class="newsteaser__time">
-        {{ teaser | mod_date | format_date(pattern='HH:mm') }}
-    </time>
-    <div class="newsteaser__text">
-        <a class="newsteaser__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
-            <span class="newsteaser__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
-            <span class="newsteaser__title">{{ teaser.teaserTitle or teaser.title }}</span>
-        </a>
-        <span class="newsteaser__product">{{ teaser.product.title }}</span>
-    </div>
+    <a class="newsteaser__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
+        <time class="newsteaser__time">
+            {{ teaser | mod_date | format_date(pattern='HH:mm') }}
+        </time>
+        <div class="newsteaser__text">
+            <h2 class="newsteaser__heading">
+                <span class="newsteaser__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+                {%- if teaser.teaserSupertitle or teaser.supertitle -%}
+                    <span class="visually-hidden">: </span>
+                {% endif -%}
+                <span class="newsteaser__title">{{ teaser.teaserTitle or teaser.title }}</span>
+            </h2>
+            <span class="newsteaser__product">{{ teaser.product.title }}</span>
+        </div>
+    </a>
 </article>
 
 {# only include ads on /news/index page, NOT on home page #}
