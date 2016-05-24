@@ -4,6 +4,8 @@ Change log for zeit.web
 2.84 (unreleased)
 -----------------
 
+- HOTFIX: Be defensive about missing meta files for article images
+
 - ZON-1934: Polish news teaser and render news page
 
 - FIX: Escape double quotes in CeleraOne script function arguments
