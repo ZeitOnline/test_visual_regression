@@ -14,9 +14,7 @@ $primary-color: $zon-charcoal
 $logo-width: remify(231px)
 $logo-height: remify(26px)
 
-// TODO: Logogrößen alle hier festlegen, ggf auch per Berechnung mit Ratio
-
-// @import "modules/breakpoints-to-js"
+@import "modules/breakpoints-to-js"
 @import "modules/defaults"
 @import "modules/basics"
 @import "modules/fonts"
@@ -26,16 +24,4 @@ $logo-height: remify(26px)
 @import "framebuilder-minimal/header"
 
 @import "modules/footer"
-
-// TODO: MOVE TO MODULE
-
-.footer
-	margin: $vertical-space 0
-
-.footer-publisher
-	+respond-min($break-tablet-min)
-		padding-bottom: 0
-
-.footer-brand__logo
-	height: em(24px)
-	width: em(226px)
+@import "framebuilder-minimal/footer"
