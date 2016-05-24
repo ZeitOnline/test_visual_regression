@@ -275,3 +275,11 @@ def test_breadcrumbs_for_paginated_article_page(dummy_request):
     ]
 
     assert view.breadcrumbs == breadcrumbs
+
+
+def test_article_contains_webtrekk_parameter_asset(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/cardstack')
+    view = zeit.web.campus.view_article.Article(context, dummy_request)
+
+    assert view.webtrekk['customParameter']['cp27'] == 'cardstack.2/seite-1'

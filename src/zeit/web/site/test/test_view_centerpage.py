@@ -2166,3 +2166,11 @@ def test_author_list_should_show_authors(testbrowser):
     solr.results = [{'uniqueId': 'http://xml.zeit.de/autoren/j_random'}]
     browser = testbrowser('/autoren/register_A')
     assert len(browser.cssselect('.teaser-small')) == 1
+
+
+def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/cardstack')
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+
+    assert '27: "cardstack.1.2.4;quiz.2.2.2"' in script.text_content().strip()
