@@ -1,16 +1,18 @@
 Change log for zeit.web
 =======================
 
-2.83 (unreleased)
+2.84 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-1934: Polish news teaser and render news page
+
+- FIX: Escape double quotes in CeleraOne script function arguments
 
 
-2.82.1 (2016-05-19)
--------------------
+2.83 (2016-05-20)
+-----------------
 
-- Nothing changed yet.
+- FIX: Remove advertorial kicker prefix
 
 
 2.82 (2016-05-19)
