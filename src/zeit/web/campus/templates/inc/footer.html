@@ -18,9 +18,11 @@
             </a>
         </div>
         <div class="footer__links" data-ct-row="2">
-            <a class="footer__link js-image-copyright-footer" href="#bildrechte">
-                Bildrechte
-            </a>
+            {% if not view.is_framebuilder %}
+                <a class="footer__link js-image-copyright-footer" href="#bildrechte">
+                    Bildrechte
+                </a>
+            {% endif %}
             <a class="footer__link" href="{{ request.route_url('home') }}hilfe/datenschutz" itemprop="url">
                 <span itemprop="name">Datenschutz</span>
             </a>
@@ -39,5 +41,7 @@
         </div>
     </div>
 
-    {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
+    {% if not view.is_framebuilder %}
+        {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
+    {% endif %}
 </footer>
