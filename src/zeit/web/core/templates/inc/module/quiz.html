@@ -1,7 +1,8 @@
 {# Quiz module template is used on CPs. (Inside articles, the macro is used.) #}
-<section class="frame">
-    {% if module.title %}
-        <h2 class="frame__title visually-hidden">{{ module.title }}</h2>
-    {% endif %}
-    <iframe class="frame__iframe" src="{{ module.url }}?embedded"></iframe>
+{{ view.append_to_webtrekk_assets(['quiz', region_loop.index, area_loop.index, module_loop.index] | join('.')) }}
+<section class="{% block layout %}frame{% endblock %}">
+    {% if module.title -%}
+        <h2 class="{{ self.layout() }}__title visually-hidden">{{ module.title }}</h2>
+    {% endif -%}
+    <iframe class="{{ self.layout() }}__iframe" src="{{ module.url }}?embedded"></iframe>
 </section>
