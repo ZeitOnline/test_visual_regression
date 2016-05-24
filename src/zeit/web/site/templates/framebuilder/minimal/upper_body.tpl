@@ -60,11 +60,3 @@
                 {{ lama.adplace(view.banner(1), view, mobile=True) }}
             {% endblock adplace_billboard %}
             <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
-
-            {%- if view.is_advertorial and view.cap_title %}
-                <div class="advertorial-marker advertorial-marker--single">
-                    <div class="advertorial-marker__label advertorial-marker__label--single">{{ view.cap_title }}</div>
-                </div>
-            {% endif %}
-
-<div style="background-color:#D8D8D8;color:#A8A8A8;height:325px;line-height:325px;text-align:center;">TODO: REMOVE DUMMY BOX</div>
