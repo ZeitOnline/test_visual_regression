@@ -14,18 +14,6 @@
     {% endblock skiplink %}
 
     <div class="page">
-        {% block adplace_top %}
-            <div id="iqd_mainAd" >
-                <div id="iqd_align_Ad">
-                    <div id="iqd_topAd">
-                        {{ lama.adplace(view.banner(1), view) }}
-                        <div id="iqd_rightAd">
-                            {{ lama.adplace(view.banner(2), view) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {% endblock adplace_top %}
         <div class="page__content" {% if view.framebuilder_width %} style="margin: 0 auto; max-width:{{ view.framebuilder_width }};"{% endif %}>
             <header class="header">
                 <div class="{{ 'main_nav' | with_mods('has-login' if view.framebuilder_has_login) }}" id="main_nav">
