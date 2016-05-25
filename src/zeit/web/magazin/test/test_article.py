@@ -655,11 +655,17 @@ def test_header_has_linked_copyright(testbrowser):
         '<a href="http://foo.de" target="_blank">©foo' in output
 
 
-def test_feature_longform_should_have_zon_logo_classes(testbrowser):
+def test_feature_longform_should_have_zon_logo_header(testbrowser):
     browser = testbrowser('/feature/feature_longform')
-    assert browser.cssselect('.main-nav__brand-logo--zon-small')
-    logolink = browser.cssselect('.main-nav__logo a')
-    assert logolink[0].attrib['href'] == 'http://localhost/index'
+    assert browser.cssselect('.header__logo--zon')
+
+    link = browser.cssselect('.header__publisher a')[0]
+    assert link.get('href') == 'http://localhost/index'
+
+
+def test_feature_longform_should_have_zon_logo_footer(testbrowser):
+    browser = testbrowser('/feature/feature_longform')
+    assert browser.cssselect('.main-footer__logo--zon-small')
 
 
 def test_feature_longform_should_have_zonish_title(testbrowser):
@@ -690,10 +696,9 @@ def test_article_view_has_no_leadtime_if_the_attribute_is_missing(application):
 
 def test_advertorial_article_shows_advertorial_marker(testbrowser):
     browser = testbrowser('/artikel/advertorial')
-    assert browser.cssselect(
-        '.advertorial-navigation-title')[0].text == 'Anzeige'
+    assert browser.cssselect('.header__ad-label')[0].text == 'Anzeige'
     browser = testbrowser('/artikel/01')
-    assert not browser.cssselect('.advertorial-navigation-title')
+    assert not browser.cssselect('.header__ad-label')
 
 
 def test_articles_should_have_exact_one_h1(testbrowser):

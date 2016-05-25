@@ -162,8 +162,8 @@ def test_dynamic_centerpage_collection_should_output_teasers(
 
 def test_dynamic_centerpage_should_be_paginatable(testbrowser, datasolr):
     browser = testbrowser('/dynamic/angela-merkel?p=2')
-    text = browser.cssselect('.pager__page.pager__page--current span')[0].text
-    assert text == '2'
+    current = browser.cssselect('.pager__page--current')[0]
+    assert current.text_content().strip() == '2'
 
 
 def test_pagination_should_be_validated(testbrowser):
