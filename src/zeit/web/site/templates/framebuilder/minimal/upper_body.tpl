@@ -9,9 +9,9 @@
         {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
     {% endif %}
 
-    {% block skiplink %}
-    <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
-    {% endblock skiplink %}
+    {% block skiplink -%}
+        <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
+    {%- endblock skiplink %}
 
     <div class="page">
         <div class="page__content" {% if view.framebuilder_width %} style="margin: 0 auto; max-width:{{ view.framebuilder_width }};"{% endif %}>

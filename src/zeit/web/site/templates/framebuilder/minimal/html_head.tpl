@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 
-    {% block css_link %}
+    {% block css_link -%}
         <link href="{{ request.asset_host }}/css/web.site/framebuilder-minimal.css" media="screen" rel="stylesheet" type="text/css">
-    {% endblock css_link %}
+    {%- endblock css_link %}
 
     {% include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing %}
 

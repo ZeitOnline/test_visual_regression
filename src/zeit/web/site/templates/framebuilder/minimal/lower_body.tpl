@@ -1,8 +1,8 @@
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
-            {% block footer %}
+            {% block footer -%}
                 {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
-            {% endblock footer %}
+            {%- endblock footer %}
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
