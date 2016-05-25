@@ -96,7 +96,6 @@
         updateSignals: function() {
 
             if ( !Zeit.isMobileView() ) {
-
                 poll( options.timeEndpoint, 1000 * 60, '.js-update-datetime' );
                 poll( options.commentsEndpoint, 1000 * 20, '.js-update-commentcount' );
 
@@ -105,9 +104,7 @@
                  * @event  signals.update
                  */
                 $( '.js-update-datetime, .js-update-commentcount' ).on( 'signals.update', textAnimation );
-
             }
-
         }
     });
 
