@@ -3,17 +3,18 @@ $interaction-hover-color: $black
 
 @import "web.core/modules/article/article-interactions"
 
+.article-interactions
+	+display-flex
+	line-height: remify(40px)
+
 .sharing-menu
-	display: table-cell
-	vertical-align: middle
+
 	&__item
-		display: table-cell
-		vertical-align: top
-	&__link
-		min-width: remify(47px)
-		height: remify(40px)
+		float: left
 		margin-right: remify(1px)
-		text-align: center
+
+	&__link
+		+clearfix
 		display: block
 		&--facebook
 			background-color: $color-facebook
@@ -25,31 +26,40 @@ $interaction-hover-color: $black
 				background-color: $color-twitter-hover
 		&--whatsapp
 			background-color: $color-whatsapp
+
 	&__text
 		@extend %font-beckett
 		+font-smoothing
 		+scaled-font(22px, $title-factor)
 		color: $white
 		display: none
-		margin-top: remify(12px)
-		vertical-align: top
+		padding-right: remify(15px)
+
 	&__icon
 		color: $white
-		height: remify(40px)
-		width: remify(40px)
+		float: left
+		height: remify(22px)
+		margin: remify(9px 12px)
+		width: remify(22px)
+
+.print-menu
+	margin-left: remify(6px)
+
+	&__link
+		&:not(:last-child):after
+			color: $color-separator
+			content: " / "
+			margin: 0 .25em
 
 +respond-min($break-tablet-min)
 	.sharing-menu
-		&__text
-			display: inline-block
-		&__link
-			padding: remify(0 15px 0 5px)
-			margin-right: remify(16px)
+		&__item
+			margin-right: remify(10px)
 
-+respond-min($break-desktop-min)
-	.print-menu
-		display: table-cell
-		vertical-align: middle
-		&__link
-			&:first-child:before
-				content: none
+		&__icon
+			height: remify(26px)
+			margin: remify(7px 10px)
+			width: remify(26px)
+
+		&__text
+			display: inline
