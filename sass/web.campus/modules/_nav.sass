@@ -91,6 +91,7 @@ $nav-color-border: #444
 
 	&:target,
 	&[aria-hidden="false"]
+		display: block // IE no-flexbox fallback
 		+display-flex
 
 	a
@@ -292,6 +293,8 @@ $nav-color-border: #444
 
 	.nav
 		@extend %nav-tablet-font-m
+		display: table // IE no-flexbox fallback
+		width: 100% // needed for IE no-flexbox fallback
 		+display-flex
 		+flex-flow(row wrap)
 
@@ -415,3 +418,45 @@ $nav-color-border: #444
 			li
 				&:nth-child(n+3)
 					display: inline-block
+
+
+//*************
+// NO FLEXBOX *
+//*************
+
++respond-min($break-tablet-min)
+	// no JS variant
+	// These styles must not harm the default styles!
+	// Note that float, clear and vertical-align have no effect on a flex item.
+	.no-js
+		.nav
+			&__home,
+			&__sales,
+			&__more,
+			&__login
+				float: right
+
+			&__primary
+				clear: right
+
+	.no-flexbox
+		.nav
+			&__home,
+			&__sales,
+			&__more,
+			&__login
+				display: table-cell
+
+			&__home
+				width: 90%
+
+			&__primary
+				display: table-row
+
+			&__tools
+				// bottom: 0
+				position: absolute
+				right: 10px
+
+			&__dropdown
+				white-space: nowrap
