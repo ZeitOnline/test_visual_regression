@@ -1102,6 +1102,18 @@ class FrameBuilder(CeleraOneMixin):
     inline_svg_icons = True
 
     @zeit.web.reify
+    def framebuilder_is_minimal(self):
+        return 'minimal' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_width(self):
+        return self.request.GET.get('width', None)
+
+    @zeit.web.reify
+    def framebuilder_has_login(self):
+        return 'login' in self.request.GET
+
+    @zeit.web.reify
     def advertising_enabled(self):
         return self.banner_channel is not None
 
