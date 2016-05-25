@@ -1,0 +1,34 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
+
+{% if user %}
+	<a class="nav__login-title" href="{{ profile }}" role="button" aria-controls="user-menu" aria-label="Account" id="login-state" data-ct-label="avatar" data-follow-mobile="true" data-sso-id="{{ user.ssoid }}">
+		{% if user.picture -%}
+			<span class="nav__user-picture" style="background-image: url({{ user.picture }})"></span>
+		{%- else %}
+			<span class="nav__user-picture nav__user-picture--default">
+				{{ lama.use_svg_icon('avatar', 'nav__user-avatar', package) }}
+			</span>
+		{%- endif %}
+
+		<span class="nav__user-name">{{ user.name or 'Angemeldet' }}</span>
+	</a>
+	<ul class="nav__login-list" id="user-menu" aria-hidden="true" data-ct-column>
+		<li><a href="{{ profile }}">Account</a></li>
+		<li>
+			<a href="{{ logout }}">
+				Abmelden
+				{{ lama.use_svg_icon('login', 'nav__login-icon', package) }}
+			</a>
+		</li>
+	</ul>
+{% else %}
+	<a href="{{ login }}" class="nav__login-link">
+		Anmelden
+		<span class="nav__login-register">
+			/ Registrieren
+			{{ lama.use_svg_icon('login', 'nav__login-icon', package) }}
+		</span>
+	</a>
+{% endif %}
+
+{% include "zeit.web.core:templates/inc/inline_js/rawr_sso.tpl" %}
