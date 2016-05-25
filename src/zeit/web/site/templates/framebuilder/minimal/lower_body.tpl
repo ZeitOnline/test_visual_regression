@@ -9,10 +9,6 @@
     {% if view.framebuilder_requires_webtrekk %}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
     {% endif %}
-    <script>
-        var require = { baseUrl: '{{ request.asset_host }}/js/' };
-    </script>
 
-    <script src="{{ request.asset_host }}/js/site-framebuilder-minimal.js"></script>
 </body>
 </html>
