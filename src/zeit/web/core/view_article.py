@@ -31,13 +31,11 @@ class Article(zeit.web.core.view.Content):
 
     advertising_enabled = True
     is_longform = False
-    main_nav_full_width = False
     page_nr = 1
 
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
         self.context.advertising_enabled = self.banner_on
-        self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
         # throw 404 for 'komplettansicht' if there's just one article page

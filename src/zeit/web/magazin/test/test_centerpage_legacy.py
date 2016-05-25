@@ -298,10 +298,10 @@ def test_cp_informatives_should_have_no_blocks(application):
 
 def test_wrapped_features_are_triggered(testbrowser):
     browser = testbrowser('/zeit-magazin/index')
-    assert browser.cssselect('nav.main-nav')
+    assert browser.cssselect('header.header')
 
     browser = testbrowser('/zeit-magazin/index?app-content')
-    assert not browser.cssselect('nav.main-nav')
+    assert not browser.cssselect('header.header')
     assert browser.cssselect('body[data-is-wrapped="true"]')
 
 

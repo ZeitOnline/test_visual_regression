@@ -95,25 +95,50 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         useDataArea: function( $element, event ) {
             var $area = $( event.delegateTarget ),
                 $row = $element.closest( '[data-ct-row]' ),
+                row = $row.data( 'ct-row' ),
                 $column = $element.closest( '[data-ct-column]', $row ),
+                url = $element.attr( 'href' ),
                 column = '',
                 subcolumn = '',
+                $needle = $element,
                 data;
 
             if ( $column.length ) {
-                column = $column.data( 'ct-column' );
+                // use data-ct-column value or inherit parent value if none set
+                if ( $column.data( 'ct-column' ).length !== 0 ) { // include any numbers and strings
+                    column = $column.data( 'ct-column' );
+                } else {
+                    $needle = $column.parent().find( 'a' ).first();
+                }
+
                 subcolumn = $column.find( 'a' ).index( $element ) + 1 || 1;
-            } else {
-                column = $row.find( 'a' ).index( $element ) + 1 || 1;
+            }
+
+            if ( column === '' ) {
+                // column = $row.find( 'a' ).not( $row.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
+                // needed, if there are more containers with the same row value
+                column = $area.find( '[data-ct-row="' + row + '"] a' ).not(
+                    $area.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
+            }
+
+            if ( $element.attr( 'aria-controls' ) ) {
+                // special treatment for one ZEIT Campus menu link >:(
+                if ( !( Zeit.isMobileView() && $element.data( 'follow-mobile' ) ) ) {
+                    url = '#' + $element.attr( 'aria-controls' );
+                }
             }
 
             data = [
                 $area.data( 'ct-area' ), // verortung
-                $row.data( 'ct-row' ), // reihe
+                row, // reihe
                 column, // spalte
                 subcolumn, // subreihe
-                sanitizeString( $element.data( 'ct-label' ) || $element.text() ), // bezeichner
-                $element.attr( 'href' ) // url
+                sanitizeString(
+                    $element.data( 'ct-label' ) ||
+                    $.trim( $element.contents().first().text() ) ||
+                    $element.children().first().text() ||
+                    $element.text() ), // bezeichner
+                url // url
             ];
             return formatTrackingData( data );
         },
@@ -291,9 +316,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                          '#servicebox',
                          '.breaking-news-banner',
                          '.article-lineage',
-                         '.partnerbox',
-                         '.header', // campus navi
-                         '.main-nav' // zmo navi
+                         '.partnerbox'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],

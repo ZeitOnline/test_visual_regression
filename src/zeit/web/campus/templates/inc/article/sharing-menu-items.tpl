@@ -4,15 +4,15 @@
 {% block publisher %}ZEIT Campus ONLINE{% endblock %}
 
 {% block fb_icon %}
-    {{ lama.use_svg_icon('fb-40x40', 'sharing-menu__icon', view.package) }}
+    {{ lama.use_svg_icon('sharing-facebook', 'sharing-menu__icon', view.package) }}
 {% endblock %}
 
 {% block twitter_icon %}
-    {{ lama.use_svg_icon('twitter-40x40', 'sharing-menu__icon', view.package) }}
+    {{ lama.use_svg_icon('sharing-twitter', 'sharing-menu__icon', view.package) }}
 {% endblock %}
 
 {% block wa_icon %}
-    {{ lama.use_svg_icon('whatsapp-40x40', 'sharing-menu__icon', view.package) }}
+    {{ lama.use_svg_icon('sharing-whatsapp', 'sharing-menu__icon', view.package) }}
 {% endblock %}
 
 {% block mail %}{% endblock %}
