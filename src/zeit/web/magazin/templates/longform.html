@@ -6,40 +6,34 @@
 {% block adplace_top %}
 {% endblock adplace_top %}
 
-{% block page_wrap_inner %}
-	<div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
-{% endblock page_wrap_inner %}
+{% block page_content_additional_class %}page__content--longform{% endblock %}
 
 {% block navigation %}
-    <nav id="js-main-nav" class="main-nav is-full-width is-compact">
-        <div class="main-nav__wrap">
-            <div class="main-nav__logo" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-                {% block longform_logo -%}
-                <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index" data-id="zmo-topnav.1.1..logo">
-                    <meta itemprop="name" content="ZEITmagazin">
-                    <div class="main-nav__logo__wrap" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-                        {{- lama.use_svg_icon('logo-zmo-large', 'main-nav__brand-logo main-nav__brand-logo--large main-nav__brand-logo--zmo-large', view.package) -}}
-                        {{- lama.use_svg_icon('logo-zmo-small', 'main-nav__brand-logo main-nav__brand-logo--small main-nav__brand-logo--zmo-small', view.package) -}}
-                        {# The "logo" dimensions must not exceed 600x60 -#}
-                        <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zmo.png">
-                        <meta itemprop="width" content="600">
-                        <meta itemprop="height" content="56">
-                    </div>
-                </a>
-                {% endblock longform_logo -%}
-            </div>
-            <div class="main-nav__menu">
-                <aside class="main-nav__sharing">
-                    <a href="http://twitter.com/home?status={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item" title="Auf Twitter teilen">{{ lama.use_svg_icon('twitter', 'main-nav__sharing-icon', view.package) }}</a>
-                    <a href="http://www.facebook.com/sharer/sharer.php?u={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item" title="Auf Facebook teilen">{{ lama.use_svg_icon('facebook', 'main-nav__sharing-icon', view.package) }}</a>
-                    <a href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item" title="Auf Google+ teilen">{{ lama.use_svg_icon('google', 'main-nav__sharing-icon', view.package) }}</a>
-                </aside>
-            </div>
+<header class="header" data-ct-area="zmo-topnav">
+    <div class="header__bar">
+        <div class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" data-ct-row="lead">
+            {% block longform_logo -%}
+            <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index" data-ct-label="logo">
+                <meta itemprop="name" content="ZEITmagazin">
+                <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                    {{ lama.use_svg_icon('logo-zmo-large', 'header__logo', view.package) }}
+                    {# The "logo" dimensions must not exceed 600x60 -#}
+                    <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zmo.png">
+                    <meta itemprop="width" content="600">
+                    <meta itemprop="height" content="56">
+                </span>
+            </a>
+            {% endblock longform_logo -%}
         </div>
-    </nav>
+
+        <aside class="header__sharing" data-ct-row="social">
+            <a href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via=ZEITmagazin&amp;url={{ view.content_url | urlencode }}"
+                target="_blank" class="header__link" title="Auf Twitter teilen" data-ct-label="twitter">{{ lama.use_svg_icon('twitter', 'header__sharing-icon', view.package) }}</a>
+            <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url | urlencode }}"
+                target="_blank" class="header__link" title="Auf Facebook teilen" data-ct-label="facebook">{{ lama.use_svg_icon('facebook', 'header__sharing-icon', view.package) }}</a>
+        </aside>
+    </div>
+</header>
 {% endblock navigation %}
 
 {% block adplace_billboard %}

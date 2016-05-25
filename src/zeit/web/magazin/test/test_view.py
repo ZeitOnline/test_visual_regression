@@ -590,19 +590,6 @@ def test_http_header_should_contain_version(testserver):
     assert pkg_version == head_version
 
 
-def test_feature_longform_template_should_have_zon_logo_header(testbrowser):
-    browser = testbrowser('/feature/feature_longform')
-    assert browser.cssselect('.main-nav__brand-logo--zon-large')
-
-    link = browser.cssselect('.main-nav__logo a')[0]
-    assert link.get('href') == 'http://localhost/index'
-
-
-def test_feature_longform_template_should_have_zon_logo_footer(testbrowser):
-    browser = testbrowser('/feature/feature_longform')
-    assert browser.cssselect('.main-footer__logo--zon-small')
-
-
 def test_advertorial_is_advertorial(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/advertorial')
@@ -659,19 +646,18 @@ def test_navigation_should_show_logged_in_user_correctly(
     # no pic
     css = lxml.html.fromstring(
         tpl.render(request=dummy_request, **info)).cssselect
-    assert 'main-nav__avatar' in css('svg')[0].attrib['class']
+    assert 'nav__user-avatar' in css('svg')[0].attrib['class']
 
     # pic
     info['user']['picture'] = '/picture.jpg'
 
     css = lxml.html.fromstring(
         tpl.render(request=dummy_request, **info)).cssselect
-    assert css('.main-nav__avatar')[0].attrib['style'] == (
+    assert css('.nav__user-picture')[0].attrib['style'] == (
         'background-image: url(/picture.jpg)')
-    assert css('a')[0].attrib['href'] == '/profile'
-    assert css('a')[0].attrib['data-id'] == 'zmo-topnav.1.4.1.account'
-    assert css('a')[1].attrib['href'] == '/logout'
-    assert css('a')[1].attrib['data-id'] == 'zmo-topnav.1.4.2.logout'
+    links = css('#user-menu a')
+    assert links[0].attrib['href'] == '/profile'
+    assert links[1].attrib['href'] == '/logout'
 
 
 def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):

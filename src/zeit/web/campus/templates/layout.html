@@ -103,7 +103,7 @@
 
         <div class="page__content">
             {% if not view.is_wrapped %}
-            <header class="header">
+            <header class="header" data-ct-area="campus-topnav">
                 {%- block navigation -%}
                     {%- include "zeit.web.campus:templates/inc/navigation/navigation.html" -%}
                 {%- endblock navigation -%}

@@ -9,6 +9,7 @@
     "test/touchevents",
     "test/video",
     "test/svg",
+    "test/css/flexbox",
     "test/css/transforms",
     "test/css/transforms3d",
     "test/css/transformstylepreserve3d",
