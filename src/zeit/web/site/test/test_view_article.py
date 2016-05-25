@@ -1418,3 +1418,11 @@ def test_no_webtrekk_ecommerce_without_newsletter_optin(testbrowser):
     browser = testbrowser(
         '/zeit-online/article/simple')
     assert 'wt.customEcommerceParameter' not in browser.contents
+
+
+def test_article_contains_webtrekk_parameter_asset(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/cardstack')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+
+    assert view.webtrekk['customParameter']['cp27'] == 'cardstack.2/seite-1'

@@ -128,7 +128,8 @@ class PhotoclusterArticle(Article):
 
 @pyramid.view.view_config(route_name='amp',
                           renderer='templates/amp/article.html')
-class AcceleratedMobilePageArticle(Article):
+class AcceleratedMobilePageArticle(
+        zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
     pass
 
 

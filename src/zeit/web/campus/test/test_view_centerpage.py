@@ -337,3 +337,11 @@ def test_breadcrumbs_for_topicpage(dummy_request):
     ]
 
     assert view.breadcrumbs == breadcrumbs
+
+
+def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+    browser = testbrowser('/campus/centerpage/cardstack')
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+
+    assert '27: "cardstack.1.2.1"' in script.text_content().strip()

@@ -288,7 +288,7 @@ def application_session(app_settings, request):
     ZODB_LAYER.setUp()
     request.addfinalizer(ZODB_LAYER.tearDown)
     wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(
-        app, secret='time')
+        app, secret='time', limit_to_application_url=True)
     wsgi.zeit_app = factory
     return wsgi
 
@@ -366,7 +366,7 @@ def debug_application(app_settings, request):
     app_settings['jinja2.show_exceptions'] = False
     return repoze.bitblt.processor.ImageTransformationMiddleware(
         zeit.web.core.application.Application()({}, **app_settings),
-        secret='time'
+        secret='time', limit_to_application_url=True
     )
 
 

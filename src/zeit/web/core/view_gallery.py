@@ -33,3 +33,7 @@ class Gallery(zeit.web.core.view.Content):
         self.breadcrumbs_by_navigation(breadcrumbs)
         self.breadcrumbs_by_title(breadcrumbs)
         return breadcrumbs
+
+    @zeit.web.reify
+    def webtrekk_assets(self):
+        return ['gallery.0/seite-1']

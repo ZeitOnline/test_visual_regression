@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 import logging
 import re
@@ -207,6 +208,7 @@ class Article(zeit.web.core.view.Content):
         if self.authors:
             return u';'.join([
                 rt['name'] for rt in self.authors if rt.get('name')])
+        return ''
 
     @zeit.web.reify
     def linkreach(self):
@@ -321,6 +323,40 @@ class Article(zeit.web.core.view.Content):
             self.breadcrumbs_by_title(breadcrumbs)
         return breadcrumbs
 
+    @zeit.web.reify
+    def webtrekk_assets(self):
+        assets = []
+        p = 0
+        for nr, page in enumerate(self.pages, start=1):
+            for block in page:
+                block_type = zeit.web.core.template.block_type(block)
+                if block_type == 'paragraph':
+                    p += 1
+                if block_type in ['cardstack', 'inlinegallery', 'liveblog',
+                                  'quiz', 'video']:
+                    assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
+        return assets
+
+
+class AcceleratedMobilePageArticle(Article):
+
+    @zeit.web.reify
+    def meta_robots(self):
+        return super(AcceleratedMobilePageArticle,
+                     self).meta_robots.replace(',noarchive', '')
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(AcceleratedMobilePageArticle, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp12': 'mobile.site',  # Seitenversion Endgerät
+            'cp13': 'mobile',  # Breakpoint
+            'cp25': 'amp'  # Plattform
+        })
+
+        return webtrekk
+
 
 @view_config(route_name='amp',
              context=zeit.content.article.interfaces.IArticle,
@@ -357,6 +393,16 @@ class InstantArticle(Article):
         date = self.publish_info.date_last_published
         if date:
             return date.astimezone(self.timezone)
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(Article, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp25': 'instant article'  # Plattform
+        })
+
+        return webtrekk
 
     @zeit.web.reify
     def fbia_first_ad_paragraph(self, words=100):
