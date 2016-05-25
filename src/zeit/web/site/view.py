@@ -149,4 +149,4 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
 
     @zeit.web.reify
     def ressort(self):
-        return self.request.GET.get('ressort', None)
+        return self.request.GET.get('ressort', '')

@@ -75,6 +75,10 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
         return self.context.subtitle or self.context.teaserText
 
     @zeit.web.reify
+    def webtrekk_assets(self):
+        return ['video.0/seite-1']
+
+    @zeit.web.reify
     def slug(self):
         return self.get_slug(self)
 

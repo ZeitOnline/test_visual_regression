@@ -56,12 +56,16 @@ def test_framebuilder_can_contain_webtrekk(testbrowser):
 
 def test_framebuilder_sets_webtrekk_values_differently(testbrowser):
     browser = testbrowser('/framebuilder?webtrekk')
-    assert ('var Z_WT_KENNUNG = "redaktion.None...centerpage.zede|" + '
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+    webtrekk_config = script.text_content().strip()
+
+    assert ('var Z_WT_KENNUNG = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
-            'window.location.pathname;') in browser.contents
+            'window.location.pathname;') in webtrekk_config
     assert ('7: window.location.hostname + '
-            'window.location.pathname,') in browser.contents
-    assert '26: "centerpage.framebuilder"' in browser.contents
+            'window.location.pathname,') in webtrekk_config
+    assert '26: "centerpage.framebuilder"' in webtrekk_config
 
 
 def test_framebuilder_contains_no_ivw(testbrowser):
