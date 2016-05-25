@@ -4,6 +4,8 @@ Change log for zeit.web
 2.84 (unreleased)
 -----------------
 
+- ZON-3046: use update signals on desktop only
+
 - MAINT: Update ZMO header and navigation
 
 
