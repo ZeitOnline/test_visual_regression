@@ -4,6 +4,8 @@ Change log for zeit.web
 2.84 (unreleased)
 -----------------
 
+- ZON-2638: Introduce minimal version of ZON framebuilder
+
 - MAINT: Update ZMO header and navigation
 
 
