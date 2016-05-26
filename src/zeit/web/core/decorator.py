@@ -1,7 +1,7 @@
+import functools
 import hashlib
 import logging
 import sys
-import traceback
 import types
 
 from dogpile.cache.api import NO_VALUE
@@ -23,32 +23,6 @@ __all__ = [
 
 
 log = logging.getLogger(__name__)
-
-
-def safeguard(*args, **kw):
-    """Try to execute jinja environment modifier code and intercept potential
-    exceptions. If execution is intercept, return a jinja.Undefined object.
-
-    :internal:
-    """
-    try:
-        return globals()['func'](*args, **kw)
-    except Exception:
-        logger(*sys.exc_info())
-        return globals()['undefined']()
-
-
-def logger(exc, val, tb):
-    """Log an exception that occoured during a jinja env modifier to
-    the error level of this module's logger. Strips off the uppermost
-    entry of the traceback.
-
-    :internal:
-    """
-    log.error(u''.join(
-        ['Traceback (most recent call last):\n'] +
-        traceback.format_list(traceback.extract_tb(tb)[1:]) +
-        [exc.__name__, ': ', unicode(val)]))
 
 
 def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
@@ -76,18 +50,27 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
                 return
 
             if isinstance(scanner.env, zeit.web.core.jinja.Environment):
-                fn = types.FunctionType(
-                    safeguard.func_code, obj.func_globals.copy(),
-                    obj.func_name, obj.func_defaults, obj.func_closure)
+                fn = obj
 
-                fn.func_globals.update({
-                    'func': obj, 'logger': logger, 'sys': sys,
-                    'undefined': zeit.web.core.jinja.Undefined})
+                @functools.wraps(fn)
+                def safeguard(*args, **kw):
+                    """Try to execute jinja environment modifier code and
+                    intercept potential exceptions. If execution is intercept,
+                    return a jinja.Undefined object.
 
-                fn.__doc__ = obj.__doc__
+                    :internal:
+                    """
+                    try:
+                        return fn(*args, **kw)
+                    except Exception:
+                        log.error('Error in jinja modifier %s', func.__name__,
+                                  exc_info=True)
+                        return zeit.web.core.jinja.Undefined()
+                # Unfortunately, wraps doesn't preserve argument defaults
+                safeguard.func_defaults = fn.func_defaults
 
-                setattr(sys.modules[obj.__module__], obj.func_name, fn)
-                obj = fn
+                setattr(sys.modules[fn.__module__], fn.__name__, safeguard)
+                obj = safeguard
 
             if marker and isinstance(obj, types.FunctionType):
                 setattr(obj, marker, True)
