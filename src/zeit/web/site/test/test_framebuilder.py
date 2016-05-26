@@ -228,7 +228,7 @@ def test_framebuilder_minimal_can_contain_webtrekk(testbrowser):
 
 def test_framebuilder_minimal_sets_webtrekk_values_differently(testbrowser):
     browser = testbrowser('/framebuilder?minimal&webtrekk')
-    assert ('var Z_WT_KENNUNG = "redaktion.None...centerpage.zede|" + '
+    assert ('var Z_WT_KENNUNG = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
             'window.location.pathname;') in browser.contents
     assert ('7: window.location.hostname + '
