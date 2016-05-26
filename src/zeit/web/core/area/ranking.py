@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import logging
 import math
 
@@ -222,10 +223,29 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return 0
         return self.context._count
 
+    def _page(self):
+        # We might calculate the page from a different
+        # GET param, e.g. date in zeit.web.site.area.overwiew
+        return int(self.request.GET['p'])
+
+    @zeit.web.reify
+    def pagination_info(self):
+        return {
+            'previous_label': u'Vorherige Seite',
+            'previous_param': dict(p=self.current_page - 1),
+            'next_label': u'Nächste Seite',
+            'next_param': dict(p=self.current_page + 1)}
+
+    def page_info(self, page_nr):
+        return {
+            'page_label': page_nr,
+            'remove_get_param': 'p',
+            'append_get_param': dict(p=page_nr)}
+
     @zeit.web.reify
     def page(self):
         try:
-            page = int(self.request.GET['p'])
+            page = self._page()
             assert page > 0
             if page == 1:
                 raise pyramid.httpexceptions.HTTPMovedPermanently(
@@ -250,9 +270,13 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         return 0
 
     @zeit.web.reify
+    def _pagination(self):
+        return zeit.web.core.template.calculate_pagination(
+            self.current_page, self.total_pages)
+
+    @zeit.web.reify
     def pagination(self):
         if self.page > self.total_pages:
             return []
-        pagination = zeit.web.core.template.calculate_pagination(
-            self.current_page, self.total_pages)
+        pagination = self._pagination
         return pagination if pagination is not None else []

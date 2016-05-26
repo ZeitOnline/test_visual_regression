@@ -12,6 +12,7 @@
     {% block skiplink %}
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
     {% endblock skiplink %}
+
     <div class="page">
         {% block adplace_top %}
             <div id="iqd_mainAd" >
@@ -27,7 +28,7 @@
         {% endblock adplace_top %}
         <div class="page__content">
             <header class="header">
-                {%- include "zeit.web.site:templates/framebuilder/navigation.tpl" ignore missing -%}
+                {%- include "zeit.web.site:templates/framebuilder/default/navigation.tpl" ignore missing -%}
             </header>
             {% block adplace_billboard %}
                 {# desktop ad place 3 #}

@@ -16,8 +16,8 @@ require([
     'web.core/images',
     'web.core/clicktracking',
     'web.core/adReload',
+    'web.core/menu',
     'web.magazin/errors',
-    'web.magazin/main-nav',
     'web.magazin/tabs',
     'web.magazin/comments',
     'web.magazin/sharing',
@@ -28,8 +28,8 @@ require([
     images,
     clicktracking,
     adReload,
+    menu,
     errors,
-    nav,
     tabs,
     comments,
     sharing,
@@ -37,10 +37,10 @@ require([
     photocluster
 ) {
     images.init();
+    menu.init();
     clicktracking.init();
     adReload.init();
     errors.init();
-    nav.init();
     tabs.init();
     comments.init();
     sharing.init();

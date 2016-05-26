@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+  <head>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Apple</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/thema/apple</topiclink_url_1>
+        <topiclink_label_2>Facebook</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/thema/facebook</topiclink_url_2>
+        <topiclink_label_3>NSA-Affäre</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/schlagworte/themen/ueberwachung/index</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
+    <header_image xsi:nil="true"/>
+    <snapshot xsi:nil="true"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-05-18T07:18:12.817173+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-10-01T16:05:16.978521+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-05-18T07:18:21.659341+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-05-18T07:18:21.591973+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-02-24T09:41:31.784222+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-05-18T07:18:18.671727+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-02-24T09:41:15.865604+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.beuth</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/digital/index-2.cp2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:620cd171-f31d-49b7-aaba-c4270c7f7b39}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">24</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Digital</supertitle>
+    <title>Alles digital</title>
+    <subtitle>Internet, Schönes wie Kritisches zur Netzkultur, und ganz viel zum Spielen.</subtitle>
+    <cluster visible="True" visible_mobile="True" area="id-525cdf87-4922-4abc-8ee3-dfd94e9ecbbe" kind="duo" kind_title="Standard-Region">
+      <region area="lead" visible="True" hide-dupes="True" count="7" automatic="True" visible_mobile="True" title="Alles digital" supertitle="Digital" read_more_url="http://www.zeit.de/digital/index">
+        <referenced_cp>http://xml.zeit.de/campus/index</referenced_cp>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-782d4e82-a4da-47af-b709-7e8fa633cc61"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f68c4b0d-0636-422d-9145-7610206a3c3f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-bed37c06-d1b3-4f8a-8731-7e5d3840671c"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-c5daec8e-14a9-41e8-8fbe-d775b29aec32"/>
+      </region>
+      <region area="informatives" visible="True" hide-dupes="True" visible_mobile="True">
+        <container cp:type="cpextra" module="mostread" visible="True" cp:__name__="id-0ddb312c-d233-4686-9a26-a8773f5452bc" visible_mobile="True">
+          <cp_extra id="mostread"/>
+        </container>
+        <container cp:type="cpextra" module="mostcommented" visible="True" cp:__name__="id-96da648a-6031-4865-bf94-fed03dc81d9d" visible_mobile="True">
+          <cp_extra id="mostcommented"/>
+        </container>
+        <container cp:type="cpextra" module="mostshared" visible="True" visible_mobile="True" cp:__name__="id-186c997d-d66a-4b15-9b78-f714e576cdb7">
+          <cp_extra id="mostshared"/>
+        </container>
+        <container cp:type="cardstack" module="cardstack" visible="True" visible_mobile="True" cp:__name__="id-4cb185cf-54cc-4b62-a2cf-889de0bab84c" card_id="erkaeltung-hausmittel-wirkung" is_advertorial="False"/>
+      </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-a4a5e901-21f9-4caf-9a8a-050c97ca4ce9" kind="duo" kind_title="Standard-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-756aba5e-94bf-40c5-ae57-b27b327f6e67" kind="major" count="6" automatic="True" title="Alles digital" supertitle="Digital" read_more_url="http://www.zeit.de/digital/index">
+        <referenced_cp>http://xml.zeit.de/zeit-online/journalistic-formats</referenced_cp>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-c8a77627-0a68-41a0-a815-6c47423be87f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-74e44fb5-af56-4579-9e28-7b6cdd50441b"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-45aebe8e-c18c-43b5-ba82-9bb93ea891a6"/>
+      </region>
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-b1000a45-ec2a-4e26-85f3-ecb673852217" kind="minor">
+        <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-98428572-6d70-4e3b-b689-972d7125fe17">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-02"/>
+        </container>
+        <container cp:type="quiz" module="quiz" visible="True" visible_mobile="True" cp:__name__="id-644797c8-8b4b-48d7-8b5a-2412da300b89">
+          <quiz_id>136</quiz_id>
+        </container>
+      </region>
+    </cluster>
+  </body>
+  <feed/>
+  <teaser>
+    <title>Alles digital</title>
+    <text>Internet, Schönes wie Kritisches zur Netzkultur, und ganz viel zum Spielen.</text>
+  </teaser>
+</centerpage>

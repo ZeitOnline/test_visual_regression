@@ -81,11 +81,9 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
 
 @view_config(route_name='amp',
              renderer='templates/amp/article.html')
-class AcceleratedMobilePageArticle(Article):
-
-    @zeit.web.reify
-    def meta_robots(self):
-        return super(Article, self).meta_robots.replace(',noarchive', '')
+class AcceleratedMobilePageArticle(
+        zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
+    pass
 
 
 def is_breaking_news(context, request):

@@ -6,6 +6,7 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8">
+    <title>ZEIT ONLINE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     {% block css_lte_8_link %}

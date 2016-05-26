@@ -1,33 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ZMO">
   <head>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Beziehungskolumne</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/serie/beziehungen</topiclink_url_1>
+        <topiclink_label_2>Gesellschaftskritik</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/serie/gesellschaftskritik</topiclink_url_2>
+        <topiclink_label_3>Magnum-Fotos</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/serie/magnum</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
     <header_image xsi:nil="true"/>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-01-13T09:07:31.879322+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-05-23T13:18:18.411020+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-04-12T05:43:00.090162+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-05-23T13:18:32.361487+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-05-23T13:18:32.208980+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-05-23T10:14:06.113344+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-05-23T10:14:34.506167+00:00</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">ZEITmagazin ONLINE ist die emotionale Seite von ZEIT ONLINE. Hier finden Sie tagesaktuellen Magazinjournalismus zu Mode &amp; Design, Essen &amp; Trinken und Leben.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">ZEITmagazin ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-01-13T09:05:04.854071+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.szuppa</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-05-23T10:09:04.160241+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.strothjohann</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/zeit-magazin/index-neu</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEITmagazin</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:83ef8f0a-2e70-4255-8370-782c2dd8a740}</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">2</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">ZMO</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:4f50f6f5-e0e2-4574-a88c-e08848cdff5f}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">16</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
@@ -44,190 +66,126 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-01-13T09:21:36.263169+00:00</attribute>
   </head>
   <body>
-    <supertitle>Test CP</supertitle>
-    <title>Test CP</title>
-    <subtitle>Das ist meine Test CP.</subtitle>
-
+    <title>Homepage ZEITmagazin ONLINE</title>
     <cluster area="id-SOLO6a3c9692-f2bd-4234-8890-a84f1924ef843" visible="True" kind="solo">
       <region area="id-SOLO74baeca3-7dbb-437d-8e70-3a3d079d69d49" visible="True" kind="solo">
         <container cp:type="teaser" module="zmo-leader-fullwidth" cp:__name__="id-6b5d10f3-3009-4b7b-a164-484511f502e8">
-          <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" uniqueId="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-            <supertitle py:pytype="str">Kochen</supertitle>
-            <teaser_supertitle py:pytype="str">Kochen</teaser_supertitle>
-            <title py:pytype="str">Probier's mal mit Gemütlichkeit</title>
-            <text py:pytype="str">"Beach body" – auch dieses Jahr leider wieder ohne uns. Wir braten Lammkoteletts, essen jede Menge Kartoffeln und zum Abschluss Zuckersüßes.</text>
-            <description py:pytype="str">"Beach body" – auch dieses Jahr leider wieder ohne uns. Wir braten Lammkoteletts, essen jede Menge Kartoffeln und zum Abschluss Zuckersüßes.</description>
-            <byline py:pytype="str">von Elisabeth Raether</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/lamm-aubergine/" type="jpg" alt="Lammkoteletts mit Auberginenmus" align="left" publication-date="" expires="2014-05-17T07:59:27+00:00">
-              <bu py:pytype="str">Der Frühling ist ein schöner Anlass, endlich mal wieder viel zu essen</bu>
-              <copyright py:pytype="str">© Andreas Lux</copyright>
-            </image>
-            <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
-              <display_name py:pytype="str">Elisabeth Raether</display_name>
-            </author>
-          </block>
+          <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm"/>
         </container>
-        </region>
+      </region>
     </cluster>
 
-        <cluster area="id-SOLO6a3c9692-f2bd-4234-8890-a84f192fs4ef843" visible="True" kind="solo">
+    <cluster area="id-SOLO6a3c9692-f2bd-4234-8890-a84f192fs4ef843" visible="True" kind="solo">
       <region area="id-SOLO74baeca3-7dbb-437d-8e70-3a3d079d69fd49" visible="True" kind="solo">
         <container cp:type="teaser" module="zmo-leader-fullwidth-light" cp:__name__="id-6b5d10f3-3009-4b7b-a164-484511f502e8">
-          <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" uniqueId="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-            <supertitle py:pytype="str">Kochen</supertitle>
-            <teaser_supertitle py:pytype="str">Kochen</teaser_supertitle>
-            <title py:pytype="str">Probier's mal mit Gemütlichkeit</title>
-            <text py:pytype="str">"Beach body" – auch dieses Jahr leider wieder ohne uns. Wir braten Lammkoteletts, essen jede Menge Kartoffeln und zum Abschluss Zuckersüßes.</text>
-            <description py:pytype="str">"Beach body" – auch dieses Jahr leider wieder ohne uns. Wir braten Lammkoteletts, essen jede Menge Kartoffeln und zum Abschluss Zuckersüßes.</description>
-            <byline py:pytype="str">von Elisabeth Raether</byline>
-            <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/lamm-aubergine/" type="jpg" alt="Lammkoteletts mit Auberginenmus" align="left" publication-date="" expires="2014-05-17T07:59:27+00:00">
-              <bu py:pytype="str">Der Frühling ist ein schöner Anlass, endlich mal wieder viel zu essen</bu>
-              <copyright py:pytype="str">© Andreas Lux</copyright>
-            </image>
-            <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
-              <display_name py:pytype="str">Elisabeth Raether</display_name>
-            </author>
-          </block>
+          <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" />
         </container>
-        </region>
+      </region>
     </cluster>
 
     <cluster area="id-DUO6a3c9692-f2bd-4234-8890-a84f1924ef83" visible="True" kind="duo">
-        <region area="id-MAJOR74baeca3-7dbb-437d-8e70-3a3d07969d49" visible="True" kind="major">
-            <container cp:type="teaser" module="zmo-square-large" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805MAJOR">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-square-large-light" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c80f5MAJOR">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-landscape-large" cp:__name__="id-48962e5e-cdbe-4148-a12c-17724cd0e96bMAJOR">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-landscape-large-photo" cp:__name__="id-eae7c703-98e9-491a-a30d-c1c5cebd2371AAAAAMAJOR">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-cc6bbea3-1337-42f5-8fe1-01c9c4476600MAJOR">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-landscape-small" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHH">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-cc6bbea3-1337-42f5-8fe1-01c9c4476600MAJOR">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-landscape-small" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHH">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-upright-large" hide-dupes="True" visible="True" cp:__name__="id-3d2116f6-96dd-4556-81f7-d7d0a40435e5YYYYYMAJOR">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-              </block>
-            </container>
-        </region>
+      <region area="id-MAJOR74baeca3-7dbb-437d-8e70-3a3d07969d49" visible="True" kind="major">
+        <container cp:type="teaser" module="zmo-square-large" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805MAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" />
+        </container>
+        <container cp:type="teaser" module="zmo-square-large-light" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c80f5MAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" />
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-large" cp:__name__="id-48962e5e-cdbe-4148-a12c-17724cd0e96bMAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" />
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-large-photo" cp:__name__="id-eae7c703-98e9-491a-a30d-c1c5cebd2371AAAAAMAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" />
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-cc6bbea3-1337-42f5-8fe1-01c9c4476600MAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" />
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-small" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHH">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" />
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-cc6bbea3-1337-42f5-8fe1-01c9c4476600MAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" />
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-small" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHH">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" />
+        </container>
+        <container cp:type="teaser" module="zmo-upright-large" hide-dupes="True" visible="True" cp:__name__="id-3d2116f6-96dd-4556-81f7-d7d0a40435e5YYYYYMAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" />
+        </container>
+      </region>
 
-        <region area="id-MINOR6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" kind="minor">
-            <container cp:type="teaser" module="zmo-card-picture" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardp">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-card-flip-read" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardfr">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-card-flip" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardf">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-card-citation" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardc">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-gallery-upright" hide-dupes="True" visible="True" cp:__name__="id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9dKKKKK">
-              <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" uniqueId="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-print-cover" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358839389d9eLLLL">
-              <block href="http://xml.zeit.de/artikel/02" uniqueId="http://xml.zeit.de/artikel/02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-landscape-small" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHH">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-SOLOedc55a53-7cab-4bbc-a31d-1cf20afe5d9dKKKKKMAJOR">
-              <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" uniqueId="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-print-cover" hide-dupes="True" visible="True" cp:__name__="id-SOLO1e28ba2e-17a6-490f-91da-358839389d9eLLLLMAJOR">
-              <block href="http://xml.zeit.de/artikel/02" uniqueId="http://xml.zeit.de/artikel/02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
-              </block>
-            </container>
-        </region>
+      <region area="id-MINOR6dd22838-9f14-4294-a96d-3e2fa1a7bc91" visible="True" kind="minor">
+        <container cp:type="teaser" module="zmo-card-picture" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardp">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen"/>
+        </container>
+        <container cp:type="teaser" module="zmo-card-flip-read" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardfr">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen"/>
+        </container>
+        <container cp:type="teaser" module="zmo-card-flip" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardf">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen"/>
+        </container>
+        <container cp:type="teaser" module="zmo-card-citation" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardc">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen"/>
+        </container>
+        <container cp:type="teaser" module="zmo-gallery-upright" hide-dupes="True" visible="True" cp:__name__="id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9dKKKKK">
+          <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm"/>
+        </container>
+        <container cp:type="teaser" module="zmo-print-cover" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358839389d9eLLLL">
+          <block href="http://xml.zeit.de/artikel/02"/>
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-small" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHH">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen"/>
+        </container>
+        <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-SOLOedc55a53-7cab-4bbc-a31d-1cf20afe5d9dKKKKKMAJOR">
+          <block href="http://xml.zeit.de/zeit-magazin/article/essen-geniessen-spargel-lamm"/>
+        </container>
+        <container cp:type="teaser" module="zmo-print-cover" hide-dupes="True" visible="True" cp:__name__="id-SOLO1e28ba2e-17a6-490f-91da-358839389d9eLLLLMAJOR">
+          <block href="http://xml.zeit.de/artikel/02"/>
+        </container>
+      </region>
     </cluster>
 
-
-      <cluster area="id-TRIO6a3c9692-f2bd-4234-8890-a84f1924ef83" visible="True" kind="trio">
-        <region area="id-TRIO74baeca3-7dbb-437d-8e70-3a3d07969d49" visible="True" kind="trio">
-            <container cp:type="teaser" module="zmo-card-citation" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardc">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-             <container cp:type="teaser" module="zmo-card-flip-read" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardfr">
-              <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-24T15:07:32+00:00" date-first-released="2014-04-24T10:28:28.444312+00:00" date-last-published="2014-04-24T10:28:28.444312+00:00" last-semantic-change="2014-04-24T15:07:31.405668+00:00">
-              </block>
-            </container>
-            <container cp:type="teaser" module="zmo-card-picture" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-09aa41eaa7c2" background_color="e7ec5c">
-              <block href="http://xml.zeit.de/zeit-magazin/article/martenstein-transparenz-test" uniqueId="http://xml.zeit.de/zeit-magazin/article/martenstein-transparenz-test" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Maria Exner" date-last-modified="2014-05-05T09:37:35+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-05-05T09:37:21.413549+00:00">
-              </block>
-            </container>
-        </region>
+    <cluster area="id-TRIO6a3c9692-f2bd-4234-8890-a84f1924ef83" visible="True" kind="trio">
+      <region area="id-TRIO74baeca3-7dbb-437d-8e70-3a3d07969d49" visible="True" kind="trio">
+        <container cp:type="teaser" module="zmo-card-citation" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardc">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen"/>
+        </container>
+        <container cp:type="teaser" module="zmo-card-flip-read" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardfr">
+          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen"/>
+        </container>
+        <container cp:type="teaser" module="zmo-card-picture" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-09aa41eaa7c2" background_color="e7ec5c">
+          <block href="http://xml.zeit.de/zeit-magazin/article/martenstein-transparenz-test"/>
+        </container>
+      </region>
     </cluster>
 
     <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924dfgdef8g3" visible="True" kind="trio">
-        <region area="id-74baeca3-7dbb-437d-8e70fdfd-3a3gfhd0796d9d49" visible="True" kind="trio" title="Wo die schönen Dinge Wohnen" teaserText="Wie es kam, dass in München eine goldene Generation von Industriedesignern heranwuchs.">
-          <container cp:type="teaser" module="zmo-mtb-square" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805MAJOR">
-            <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
-              </block>
-          </container>
-           <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9dfd986de804bdHHHHfsHcardcMAJOR">
-             <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
-              </block>
-           </container>
-           <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-0fdsfsdfg9aa41eaa7c2">
-             <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
-              </block>
-           </container>
-           <container cp:type="teaser" module="zmo-mtb-square" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805MAJOR">
-            <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
-              </block>
-          </container>
-           <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9dfd986de804bdHHHHfsHcardcMAJOR">
-             <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
-              </block>
-           </container>
-           <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-0fdsfsdfg9aa41eaa7c2">
-             <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
-              </block>
-           </container>
-        </region>
+      <region area="id-74baeca3-7dbb-437d-8e70fdfd-3a3gfhd0796d9d49" visible="True" kind="trio" title="Wo die schönen Dinge Wohnen" teaserText="Wie es kam, dass in München eine goldene Generation von Industriedesignern heranwuchs.">
+      <container cp:type="teaser" module="zmo-mtb-square" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805MAJOR">
+        <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat"/>
+      </container>
+       <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9dfd986de804bdHHHHfsHcardcMAJOR">
+         <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat"/>
+       </container>
+       <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-0fdsfsdfg9aa41eaa7c2">
+         <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat"/>
+       </container>
+       <container cp:type="teaser" module="zmo-mtb-square" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805MAJOR">
+        <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat"/>
+      </container>
+       <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9dfd986de804bdHHHHfsHcardcMAJOR">
+         <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat"/>
+       </container>
+       <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-381c8f6a-dc39-40e3-a919-0fdsfsdfg9aa41eaa7c2">
+         <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat"/>
+       </container>
+      </region>
     </cluster>
-
   </body>
   <feed/>
   <teaser>
-    <title>Test CP</title>
-    <text>Das ist meine Test CP.</text>
+    <title>Homepage ZEITmagazin ONLINE</title>
   </teaser>
 </centerpage>

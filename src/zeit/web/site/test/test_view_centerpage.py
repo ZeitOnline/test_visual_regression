@@ -844,11 +844,18 @@ def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
     assert len(teaser) == 8
     assert len(teaser[0].cssselect('time')) == 1
     assert len(
-        teaser[0].cssselect('.newsteaser__text a .newsteaser__kicker')) == 1
+        teaser[0].cssselect('a .newsteaser__text .newsteaser__kicker')) == 1
     assert len(
-        teaser[0].cssselect('.newsteaser__text a .newsteaser__title')) == 1
+        teaser[0].cssselect('a .newsteaser__text .newsteaser__title')) == 1
     assert len(
-        teaser[0].cssselect('.newsteaser__text .newsteaser__product')) == 1
+        teaser[0].cssselect('a .newsteaser__text .newsteaser__product')) == 1
+
+
+def test_newspage_has_expected_elements(testbrowser, datasolr):
+    browser = testbrowser('/news/index')
+    area = browser.cssselect('.cp-area--overview')[0]
+    assert len(area.cssselect('.pager--overview')) == 1
+    assert len(area.cssselect('.newsteaser')) > 1
 
 
 def test_servicebox_present_in_wide_breakpoints(
@@ -2166,3 +2173,11 @@ def test_author_list_should_show_authors(testbrowser):
     solr.results = [{'uniqueId': 'http://xml.zeit.de/autoren/j_random'}]
     browser = testbrowser('/autoren/register_A')
     assert len(browser.cssselect('.teaser-small')) == 1
+
+
+def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/cardstack')
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+
+    assert '27: "cardstack.1.2.4;quiz.2.2.2"' in script.text_content().strip()

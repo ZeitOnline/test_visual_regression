@@ -65,7 +65,6 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
                           renderer='templates/longform.html')
 class LongformArticle(Article):
 
-    main_nav_full_width = True
     is_longform = True
     pagetitle_suffix = u' | ZEIT ONLINE'
 
@@ -129,7 +128,8 @@ class PhotoclusterArticle(Article):
 
 @pyramid.view.view_config(route_name='amp',
                           renderer='templates/amp/article.html')
-class AcceleratedMobilePageArticle(Article):
+class AcceleratedMobilePageArticle(
+        zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
     pass
 
 
