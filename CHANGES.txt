@@ -4,6 +4,8 @@ Change log for zeit.web
 2.84 (unreleased)
 -----------------
 
+- MAINT: Add Tonic-Magazin and Edition F to noindex list
+
 - ZON-2638: Introduce minimal version of ZON framebuilder
 
 - ZON-3046: use update signals on desktop only
