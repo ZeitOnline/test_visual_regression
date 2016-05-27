@@ -66,3 +66,9 @@ def test_storystream_contains_structured_data(testbrowser):
         'Zacharias Zacharakis')
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
         'http://localhost/autoren/Z/Zacharias_Zacharakis/index.xml')
+
+
+def test_storystream_should_get_layout_from_context(testbrowser):
+    # Milestone teasers are represented as <article/> instead of <div/>
+    browser = testbrowser('/zeit-online/storystream/dummy')
+    assert len(browser.cssselect('article.storystream-atom')) == 2
