@@ -1,0 +1,6 @@
+<display-modes>
+  <!--  "large" is the default, must not use available  -->
+  <display-mode id="large">groß</display-mode>
+  <display-mode id="float">umfließend</display-mode>
+  <display-mode id="column-width">spaltenbreit</display-mode>
+</display-modes>

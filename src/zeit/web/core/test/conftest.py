@@ -122,8 +122,16 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/scales.xml'),
         'vivi_zeit.content.article_genre-url': (
             'egg://zeit.web.core/data/config/article-genres.xml'),
-        'vivi_zeit.content.article_image-layout-source': (
-            'egg://zeit.web.core/data/config/article-image-layouts.xml'),
+        'vivi_zeit.content.article_image-display-mode-source': (
+            'egg://zeit.web.core/data/config/article-image-display-modes.xml'),
+        'vivi_zeit.content.article_legacy-display-mode-source': (
+            'egg://zeit.web.core/data/config/article-legacy-display-modes.xml'
+        ),
+        'vivi_zeit.content.article_image-variant-name-source': (
+            'egg://zeit.web.core/data/config/article-image-variant-names.xml'),
+        'vivi_zeit.content.article_legacy-variant-name-source': (
+            'egg://zeit.web.core/data/config/article-legacy-variant-names.xml'
+        ),
         'vivi_zeit.content.article_video-layout-source': (
             'egg://zeit.web.core/data/config/article-video-layouts.xml'),
         'vivi_zeit.content.article_htmlblock-layout-source': (

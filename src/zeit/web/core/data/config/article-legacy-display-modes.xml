@@ -1,0 +1,13 @@
+<legacy-display-modes>
+  <legacy-mapping layout="column-width" display_mode="column-width" />
+  <legacy-mapping layout="column-width-original" display_mode="column-width" />
+  <legacy-mapping layout="column-width-portrait" display_mode="column-width" />
+  <legacy-mapping layout="column-width-square" display_mode="column-width" />
+  <legacy-mapping layout="float-portrait" display_mode="float" />
+  <legacy-mapping layout="float-square" display_mode="float" />
+  <legacy-mapping layout="large" display_mode="large" />
+  <legacy-mapping layout="portrait" display_mode="float" />
+  <legacy-mapping layout="small" display_mode="float" />
+  <legacy-mapping layout="zco-portrait" display_mode="large" />
+  <legacy-mapping layout="zco-wide" display_mode="large" />
+</legacy-display-modes>
