@@ -243,14 +243,10 @@ class Quiz(Block):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class Image(zeit.web.core.image.BaseImage):
 
-    DEFAULT_VARIANT = 'wide'
-
     def __new__(cls, model_block):
         if getattr(model_block, 'is_empty', False):
             return
-        # XXX Should we use an actual attribute of ImageLayout instead of
-        # a heuristic look at its ID?
-        if not cls.wanted_layout(getattr(model_block.layout, 'id', None)):
+        if not cls.wanted_variant(model_block.variant_name):
             return
 
         target = None
@@ -262,8 +258,7 @@ class Image(zeit.web.core.image.BaseImage):
             pass  # Unresolveable uniqueId
 
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
-            variant = getattr(model_block.layout, 'variant', None) or (
-                cls.DEFAULT_VARIANT)
+            variant = model_block.variant_name
             try:
                 target = referenced[variant]
                 group = referenced
@@ -293,15 +288,16 @@ class Image(zeit.web.core.image.BaseImage):
         return instance
 
     @classmethod
-    def wanted_layout(cls, layout):
-        return 'header' not in (layout or '')
+    def wanted_variant(cls, variant_name):
+        # currently broken since `header` is no longer part of the name
+        return 'header' not in (variant_name or '')
 
     def __init__(self, model_block):
         self.layout = layout = model_block.layout
 
-        if layout.display_mode == 'large':
+        if model_block.display_mode == 'large':
             self.figure_mods = ('wide', 'rimless', 'apart')
-        elif layout.display_mode == 'float':
+        elif model_block.display_mode == 'float':
             self.figure_mods = ('marginalia',)
         else:
             self.figure_mods = ()
@@ -339,8 +335,9 @@ class BlockImages(object):
 class HeaderImage(Image):
 
     @classmethod
-    def wanted_layout(cls, layout):
-        return 'header' in (layout or '')
+    def wanted_variant(cls, variant_name):
+        # currently broken since `header` is no longer part of the name
+        return 'header' in (variant_name or '')
 
 
 class HeaderImageStandard(HeaderImage):
