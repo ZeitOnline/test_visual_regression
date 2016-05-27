@@ -36,7 +36,7 @@ class Overview(zeit.web.core.area.ranking.Ranking):
             yield clone
 
     def _query_solr(self, query, sort_order):
-        query = self._build_query()
+        query = zeit.solr.query.and_(query, self._build_query())
         result = super(Overview, self)._query_solr(query, sort_order)
         values = self.context.values()
         length = len(values)
@@ -48,16 +48,14 @@ class Overview(zeit.web.core.area.ranking.Ranking):
 
     def _build_query(self):
         offset = datetime.timedelta(days=self.current_page - 1)
-        today = datetime.date.today() + offset
+        today = datetime.date.today() - offset
         tomorrow = today + datetime.timedelta(days=1)
         range_ = zeit.solr.query.datetime_range(
             'date_first_released',
             datetime.datetime.combine(today, datetime.time()),
             datetime.datetime.combine(tomorrow, datetime.time()))
-        query = zeit.find.search.query(filter_terms=[
-            zeit.solr.query.field_raw('published', 'published*')])
 
-        return zeit.solr.query.and_(query, range_)
+        return range_
 
     @zeit.web.reify
     def total_pages(self):
