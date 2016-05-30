@@ -4,7 +4,7 @@ Change log for zeit.web
 2.85 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Provide fallback date and hide copyright on Storystreams
 
 
 2.84 (2016-05-30)
