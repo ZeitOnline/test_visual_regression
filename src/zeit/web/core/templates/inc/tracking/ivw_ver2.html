@@ -7,7 +7,11 @@
             "st" : "zeitonl",
             "cp" : "{{ view.ressort if view.ressort else 'administratives' }}/{% if view.sub_ressort %}{{ view.sub_ressort }}/{% endif %}bild-text",
             "sv" : "{% if view.is_hp %}ke{% else %}i2{% endif %}", // 'mo' on mobile, see below
+            {% if view is framebuilder -%}
+            "co" : "URL: " + window.location.host + window.location.pathname
+            {%- else -%}
             "co" : "URL: {{ request.path_info }}"
+            {%- endif -%}
         };
 
     {# in our Wrapper-Apps: always use the 'Angebotskennung' for the 'MEW' (mobile enabled website) -#}
