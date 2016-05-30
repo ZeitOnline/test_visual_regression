@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.84 (unreleased)
+2.84 (2016-05-30)
 -----------------
 
 - ZON-2638: Introduce minimal version of ZON framebuilder
