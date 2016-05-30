@@ -4,17 +4,17 @@ Change log for zeit.web
 2.84 (unreleased)
 -----------------
 
-- MAINT: Add Tonic-Magazin and Edition F to noindex list
-
 - ZON-2638: Introduce minimal version of ZON framebuilder
 
-- ZON-3046: use update signals on desktop only
+- ZON-2532: Determine milestone layout from tldr_milestone setting on teasered article
+
+- ZON-3046: Use update signals on desktop only
 
 - ZON-3071: Track page assets in webtrekk
 
 - MAINT: Update ZMO header and navigation
 
-- ZON-2532: Determine milestone layout from tldr_milestone setting on teasered article
+- MAINT: Add Tonic-Magazin and Edition F to noindex list
 
 
 2.83.1 (2016-05-24)
