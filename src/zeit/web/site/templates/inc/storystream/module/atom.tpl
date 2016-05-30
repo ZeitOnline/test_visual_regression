@@ -5,7 +5,7 @@
 		<div class="{{ blockname }}__content">
 			<div class="{{ blockname }}__header">
 				<span class="{{ '{}__date'.format(blockname) | with_mods(atom_modifier) }}">
-					{{ atom.tldr_date | format_date(None, 'dd.MM.yy') }}
+					{{ ( atom.tldr_date or ( atom | release_date ) ) | format_date(None, 'dd.MM.yy') }}
 				</span>
 				{% block atom_title -%}
 					<h2 class="{{ blockname }}__title">{{ atom.tldr_title or atom.teaserTitle or atom.title }}</h2>
