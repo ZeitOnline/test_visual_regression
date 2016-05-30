@@ -48,7 +48,7 @@ class Overview(zeit.web.core.area.ranking.Ranking):
 
     def _build_query(self):
         offset = datetime.timedelta(days=self.current_page - 1)
-        today = datetime.date.today() - offset
+        today = self._today - offset
         tomorrow = today + datetime.timedelta(days=1)
         range_ = zeit.solr.query.datetime_range(
             'date_first_released',
