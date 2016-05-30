@@ -19,6 +19,7 @@
 				{% if image %}
 					{% set href = atom.uniqueId | create_url %}
 					{% set module_layout = blockname %}
+                    {% set media_caption_additional_class = 'figcaption--hidden' %}
 					{% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
 				{% endif %}
 			</div>
