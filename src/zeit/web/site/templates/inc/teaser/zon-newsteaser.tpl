@@ -7,8 +7,8 @@
         </time>
         <div class="newsteaser__text">
             <h2 class="newsteaser__heading">
-                <span class="newsteaser__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
                 {%- if teaser.teaserSupertitle or teaser.supertitle -%}
+                    <span class="newsteaser__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
                     <span class="visually-hidden">: </span>
                 {% endif -%}
                 <span class="newsteaser__title">{{ teaser.teaserTitle or teaser.title }}</span>
