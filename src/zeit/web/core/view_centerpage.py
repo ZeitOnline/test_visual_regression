@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import pyramid.view
 import lxml.etree
+import urlparse
+import urllib
 import zope.component
 
 import zeit.cms.interfaces
@@ -105,13 +107,22 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
     @zeit.web.reify
     def canonical_url(self):
         ranking = self.area_ranking
+        url = super(Centerpage, self).canonical_url
 
-        if ranking.current_page == 1:
+        if ranking and ranking.current_page == 1:
             remove_param = ranking.page_info(1)['remove_get_param']
             return zeit.web.core.template.remove_get_params(
-                self.request.url, remove_param)
+                url, remove_param)
 
-        return self.request.url
+        if ranking and ranking.current_page > 1:
+            get_param = ranking.page_info(
+                ranking.current_page)['append_get_param']
+
+            scheme, netloc, path, query, frag = urlparse.urlsplit(url)
+            return '{}://{}{}?{}'.format(
+                scheme, netloc, path, urllib.urlencode(get_param.items()))
+
+        return url
 
     @zeit.web.reify
     def area_ranking(self):
