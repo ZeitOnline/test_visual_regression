@@ -54,7 +54,13 @@
 
         {% if publisher and section.item_id == 'first' %}
         <div class="footer-{{ class }}__row footer-{{ class }}__row--more" data-ct-column="mehr">
-            <a href="#" class="footer-{{ class }}__more"{% if view is framebuilder %} onclick="document.querySelectorAll('.footer-links__row')[0].style.display='block';this.parentNode.style.display='none';return false;"{%endif%}>Mehr</a>
+            <a href="#" class="footer-{{ class }}__more"
+                {%- if view is framebuilder and view.framebuilder_is_minimal %} onclick="
+                document.querySelector('.footer-links__row').style.display='block';
+                this.parentNode.style.display='none';
+                return false;"
+                {%- endif -%}
+                >Mehr</a>
         </div>
         {% endif %}
     {%- endfor %}
