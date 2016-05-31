@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
 
+- FIX: Constrain footer inline script to minimal framebuilder
+
 
 2.84 (2016-05-30)
 -----------------
