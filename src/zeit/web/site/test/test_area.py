@@ -2,12 +2,11 @@ import mock
 import lxml.etree
 import zope.component
 
-import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
 
-import zeit.web.site.area.overview
-import zeit.web.site.area.ranking
+import zeit.web.core.area.ranking
 import zeit.web.core.utils
+import zeit.web.site.area.overview
 
 
 def get_area(kind, count):
@@ -36,7 +35,7 @@ def test_overview_area_should_overflow_if_necessary(
     def qs(self, *args):
         self.hits = 3
 
-    monkeypatch.setattr(zeit.web.site.area.ranking.Ranking, '_query_solr', qs)
+    monkeypatch.setattr(zeit.web.core.area.ranking.Ranking, '_query_solr', qs)
 
     area = get_area('overview', 1)
     area._query_solr('', '')
@@ -53,7 +52,7 @@ def test_overview_area_should_respect_sanity_bound(
     def qs(self, *args):
         self.hits = 10
 
-    monkeypatch.setattr(zeit.web.site.area.ranking.Ranking, '_query_solr', qs)
+    monkeypatch.setattr(zeit.web.core.area.ranking.Ranking, '_query_solr', qs)
     monkeypatch.setattr(zeit.web.site.area.overview, 'SANITY_BOUND', 5)
 
     area = get_area('overview', 1)
@@ -74,6 +73,27 @@ def test_overview_area_clone_factory_should_set_proper_attributes():
     assert all(len(c.__name__) == 36 for c in clones)
 
 
+def test_overview_should_get_total_pages_from_config(application):
+    area = get_area('overview', 1)
+    assert area.total_pages == 30
+
+
+def test_overview_should_have_page_info(application, clock, dummy_request):
+    clock.freeze(zeit.web.core.date.parse_date(
+        '2016-05-10T1:23:59.780412+00:00'))
+    area = get_area('overview', 1)
+    area.request = dummy_request
+    pi = area.page_info(1)
+    assert pi['page_label'] == '10.05.2016'
+    assert pi['remove_get_param'] == 'date'
+    assert pi['append_get_param']['date'] == '2016-05-10'
+
+    pi = area.page_info(2)
+    assert pi['page_label'] == '09.05'
+    assert pi['remove_get_param'] == 'date'
+    assert pi['append_get_param']['date'] == '2016-05-09'
+
+
 def test_default_teaser_should_not_expose_ranking_area_proxies(
         testbrowser, datasolr, monkeypatch):
     log = mock.Mock()
@@ -83,11 +103,3 @@ def test_default_teaser_should_not_expose_ranking_area_proxies(
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 10
 
     assert all('ProxyExposed' not in a[0][0] for a in log.debug.call_args_list)
-
-
-def test_get_area_should_recognize_zmo_parquet(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/journalistic-formats-zmo')
-    area = zeit.web.core.utils.find_block(
-        context, 'area', area='id-c52657e6-7494-46d9-86d4-90a88775090c')
-    assert zeit.web.core.centerpage.get_area(area).kind == 'zmo-parquet'

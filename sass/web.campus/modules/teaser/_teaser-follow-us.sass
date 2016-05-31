@@ -1,0 +1,136 @@
+.teaser-follow-us
+	+padded
+	padding-bottom: $gutter
+	padding-top: $gutter
+	+respond-min($break-tablet-min)
+		+display-flex()
+		+justify-content(space-between)
+	&__actions
+		padding-bottom: 20px
+		padding-top: 20px
+		+respond-min($break-tablet-min)
+			padding-bottom: 0
+			padding-top: 0
+			position: relative
+			width: 49%
+	&__packshot
+		+respond-min($break-tablet-min)
+			width: 49%
+
+.packshot
+	+unpadded
+	+display-flex
+	background: $primary-color
+	+respond-min($break-tablet-min)
+		margin-left: 0
+		margin-right: 0
+	&__media
+		width: 30%
+		+respond-min($break-tablet-min)
+			width: remify(120px)
+		+respond-min($break-desktop-min)
+			width: remify(160px)
+	&__content
+		+display-flex
+		+flex-direction(column)
+		padding: remify(15px) remify(20px)
+	&__kicker,
+	&__title
+		+font-smoothing
+		@extend %font-beckett
+		+scaled-font(26px, $title-factor)
+		font-size: 8.75vw
+		+respond-min($break-tablet-min)
+			+scaled-font(32px, $title-factor)
+		+respond-min($break-desktop-min)
+			+scaled-font(32px, $title-factor)
+	&__kicker
+		color: #fff
+	&__title
+		+flex-grow(1)
+		color: $color-tools-primary
+	&__cta
+		+font-smoothing
+		color: #fff
+		font-weight: bold
+	&__arrow
+		height: remify(15px)
+		margin-right: remify(3px)
+		vertical-align: remify(-2px)
+		width: remify(20px)
+
+.abo-cta
+	@extend %border-box
+	border-color: currentColor
+	color: $color-community-primary
+	display: block
+	margin-bottom: $gutter
+	padding: 2em 1em
+	+on-interaction
+		color: $primary-color
+
+	+respond-min($break-tablet-min)
+		margin-bottom: 0
+		padding: 1.8em 1em
+	+respond-min($break-desktop-min)
+		padding: 2.2em 1em
+	&__text
+		@extend %font-beckett
+		color: $primary-color
+		+scaled-font(26px, $title-factor)
+		+respond-min($break-tablet-min)
+			+scaled-font(21px, $title-factor)
+		+respond-min($break-desktop-min)
+			+scaled-font(28px, $title-factor)
+	&__label
+		@extend %border-box--cta
+		color: currentColor
+
+.follow-us
+	background: $color-facebook
+	display: block
+	color: #fff
+	+on-interaction
+		color: #fff
+	+respond-min($break-tablet-min)
+		bottom: 0px
+		height: remify(56px)
+		position: absolute
+		width: 100%
+	+respond-min($break-desktop-min)
+		height: remify(80px)
+	&__logo
+		display: none
+		+respond-min($break-tablet-min)
+			+align-items(center)
+			+display-flex()
+			+justify-content(center)
+			background: rgba(#000, 0.3)
+			height: remify(56px)
+			position: absolute
+			left: 0
+			top: 0
+			width: remify(56px)
+			+respond-min($break-desktop-min)
+				height: remify(80px)
+				width: remify(80px)
+	&__facebook
+		+respond-min($break-tablet-min)
+			height: remify(28px)
+			width: remify(28px)
+	&__text
+		@extend %font-beckett
+		+font-smoothing
+		+scaled-font(26px, $title-factor)
+		font-size: 8vw
+		line-height: 1
+		padding: 0.5em 0.5em 0.35em
+		text-align: center
+		+respond-min($break-tablet-min)
+			padding-left: remify(56px + 20px)
+			+scaled-font(21px, $title-factor)
+			line-height: 2
+			text-align: left
+		+respond-min($break-desktop-min)
+			+scaled-font(28px, $title-factor)
+			padding-left: remify(80px + 20px)

@@ -11,14 +11,23 @@
 
 @import "advertorial/modules/advertorial-title"
 
-.advertorial-navigation-title
-    +inline-block
-    +no-user-select
-    color: #f2e7cb
-    float: left
-    font-family: $font-tabletgothic
-    margin: $dblhair 0 0 $small
-    letter-spacing: 1px
-    text-transform: uppercase
-    +respond-min($nav__break__full-menu)
-        font-size: $font-ml
+.header__ad-label
+	bottom: remify(-24px)
+	color: $dusty-gray
+	font-size: em(9px)
+	letter-spacing: 1px
+	line-height: normal
+	position: absolute
+	right: $page-padding--small
+	text-transform: uppercase
+	+respond-min($break-phablet-min)
+		border-left: 1px solid $nav-color-border
+		color: #f2e7cb
+		float: left
+		font-size: em(16px)
+		line-height: inherit
+		margin-left: remify(16px)
+		padding-left: remify(16px)
+		position: static
+	+respond-min($break-tablet-min)
+		font-size: em(18px)

@@ -1,58 +1,15 @@
+$comment-color-notice:          $zon-grey
+$comment-color-header-sub:      $zon-mid-grey
+$comment-color-head-background: $zon-lighter-grey
+$comment-color-head-color:      $color-text
+
+@import "web.core/modules/comments/comment-section"
+
+// own styles, which differ from core
 .comment-section
-	margin: 0 (-$page-padding)
-	+respond-min($break-tablet-min)
-		border-top: 1px solid $color-border
-	&__item
-		margin-left: auto
-		margin-right: auto
-		padding: 0 $page-padding
-		+respond-min($break-tablet-min)
-			max-width: remify(700px) // 660px + 2*$page-padding
-	&__head,
-	&__note
-		background-color: $zon-lighter-grey
-	&__note
-		padding-bottom: em(16px)
-		padding-top: em(16px)
 	&__head
-		padding-bottom: em(32px)
-		padding-top: em(32px)
-		text-align: center
-		+respond-min($break-phablet-min)
-			+clearfix
-			text-align: inherit
 		+respond-min($break-tablet-min)
 			background-color: transparent
-	&__message
-		color: $color-text-highlighted
-	&__notice
-		+default-article-textlink($color: $zon-grey)
-		color: $zon-grey
-		&:before
-			@extend %exclamation
-	&__note + &__form
-		border-top: 0
-	&__body + &__note
-		border-top: 1px solid $color-border
-	&__head &__message
-		clear: both
-		padding-top: em(32px)
-		text-align: left
-	&__headline
-		display: block
-		font-size: remify(18px)
-		font-weight: bold
-		margin-bottom: .5em
-		+respond-min($break-phablet-min)
-			float: left
-			font-size: remify(20px)
-			margin-bottom: 0
-		small
-			color: $zon-mid-grey
-			display: block
-			font-size: remify(12px)
-			font-weight: normal
-			letter-spacing: $zon-letter-spacing-m
 	&__button
 		white-space: nowrap
 		+respond-min($break-phablet-min)
@@ -60,12 +17,9 @@
 		&:after
 			content: "\25B8" // ▸ = Black right-pointing small triangle
 			margin-left: 3px
-	&__form
+	&__headline
+		font-size: remify(18px)
+		+respond-min($break-phablet-min)
+			font-size: remify(20px)
+	&__body + &__note
 		border-top: 1px solid $color-border
-
-		.comment-section__notice,
-		.comment-form__cancel--hidden
-			display: none
-
-.no-js .comment-section__link-autoupdate
-	display: none

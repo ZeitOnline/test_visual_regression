@@ -7,10 +7,14 @@
     <area kind="minor">minor</area>
     <area kind="parquet">parquet</area>
     <area kind="zmo-parquet">zmo-parquet</area>
+    <area kind="zco-parquet">zco-parquet</area>
     <area kind="ranking">ranking</area>
+    <area kind="zco-ranking">zco-ranking</area>
     <area kind="overview">overview</area>
     <area kind="newsticker">newsticker</area>
     <area kind="topic">topic</area>
+    <area kind="topic-variant">topic-variant</area>
+    <area kind="topic-graphical">topic-graphical</area>
     <area kind="gallery">gallery</area>
     <area kind="spektrum">spektrum</area>
     <area kind="buzzboard">buzzboard</area>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/test/moritz/testbild/zco-topic-101.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; dummy data&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImage" module="zeit.content.image.image"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:fe120525-9341-4551-8cd1-17af5f3a9d4e}</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-03-31T08:25:57Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">163000</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 31 Mar 2016 08:25:57 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"ef72dc-27cb8-52f5402ff1fbe"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">image/jpeg</attribute>
+</head>

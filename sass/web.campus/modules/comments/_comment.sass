@@ -1,0 +1,79 @@
+$comment-color-author-bg: $zco-grey
+$comment-color-border: $color-separator
+
+$comment-color-body-font: $zco-charcoal
+$comment-color-overlay-count-background: $color-article-primary
+$comment-color-overlay-cta-font: $zco-charcoal
+$comment-color-overlay-cta-border: #999
+
+$comment-color-moderation-font: #707070
+$comment-color-moderation-link: #b91109 //$zon-red
+$comment-color-moderation-sending-font: #CCC //$zon-light-grey
+
+$comment-color-date-link: #707070 //$zon-grey
+$comment-color-date-link-hover: #444 //$zon-dark-grey
+$comment-color-reaction-active: $color-community-primary
+
+$comment-color-count-background: $color-article-primary
+$comment-color-count-font: #EEE //$zon-lighter-grey
+$comment-color-cta-font: $color-article-primary //statt $zon-grey
+$comment-color-cta-border: #CCC //$zon-light-grey
+
+$comment-color-rewrapper-hover-count-background: $color-article-primary
+$comment-color-rewrapper-hover-cta-border: #999 //statt $zon-mid-grey
+$comment-color-rewrapper-hover-cta-font: $zco-charcoal //statt $zon-dark-grey
+
+$comment-color-badge-background: $zco-charcoal
+$comment-color-indented-boxshadow: $zco-grey
+
+$comment-color-placeholder-background: $zco-grey
+$comment-color-placeholder-font: $color-text
+
+@import "web.core/modules/comments/comment"
+
+// own styles, which differ from core
+
+
+// This HTML comes with our zeit.web.site templates which are shared with
+// campus now (via core).
+.pager
+	margin: remify(16px 0 32px)
+
+.pager__button
+	border: 3px solid currentColor
+	color: $color-article-primary
+	display: inline-block
+	font-size: remify(14px)
+	font-weight: bold
+	letter-spacing: .01em
+	margin: remify(20px 14px 0 0)
+	padding: remify(6px 8px 6px 12px)
+	text-transform: uppercase
+	+on-interaction
+		border-color: currentColor
+		color: $color-text
+
+.pager__pages
+	display: inline-block
+	padding: 0
+	margin: 1.25rem 0 0 0
+	font-size: .875rem
+	letter-spacing: .05em
+	line-height: 2
+
+.pager__page
+	color: $color-article-primary
+	letter-spacing: $letter-spacing-m
+	display: inline-block
+	& + &:before
+		color: $color-separator
+		content: "/"
+	a, span
+		padding: 0 1em
+		display: inline-block
+	span
+		color: $color-separator // for "..."
+	&--current
+		span
+			color: inherit
+			font-weight: bold

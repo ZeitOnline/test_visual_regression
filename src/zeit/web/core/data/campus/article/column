@@ -7,6 +7,10 @@
     <topic type="intern" href="http://xml.zeit.de/thema/test">
         <label>Science</label>
     </topic>
+    <image base-id="http://xml.zeit.de/campus/image/strumpfhose/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00">
+        <bu>Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
+        <copyright>© Warner Bros.</copyright>
+    </image>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Anne-Kathrin Gerstlauer</attribute>
@@ -102,4 +106,9 @@
       <p>Recusandae tempore facilis soluta praesentium quod perferendis ratione ipsum. Impedit tempora aperiam, doloribus suscipit quod deserunt dicta reiciendis praesentium assumenda nesciunt qui aut id blanditiis eum rem error!</p>
     </division>
   </body>
+  <teaser>
+    <supertitle>Chat</supertitle>
+    <title>Wir rauchen nicht, wir tippen.</title>
+    <text>Sommerregen ist sehr gefährlich. Die Gedanken waren beim vorletzten Wochenende. Bin gerutscht, gefallen, wieder aufgestanden. Die Rechtskolumne </text>
+  </teaser>
 </article>

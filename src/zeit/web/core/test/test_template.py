@@ -5,11 +5,14 @@ import os
 import sys
 import time
 
+import dogpile.cache.region
 import gocept.httpserverlayer.static
 import jinja2
+import lxml.etree
 import lxml.html
 import lxml.objectify
 import mock
+import pyramid.threadlocal
 import pytest
 import venusian
 import webob.multidict
@@ -71,7 +74,7 @@ def test_get_teaser_image(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
     assert isinstance(image, zeit.web.core.image.TeaserImage), (
@@ -80,7 +83,7 @@ def test_get_teaser_image(testserver):
 
     teaser = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de'
-        '/zeit-magazin/test-cp/kochen-wuerzen-veganer-kuchen'
+        '/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen'
     )
 
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
@@ -93,7 +96,7 @@ def test_get_teaser_image_should_set_image_pattern(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
     assert image.image_pattern == 'zmo-large'
@@ -103,7 +106,7 @@ def test_get_teaser_image_should_utilize_unique_id(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     unique_id = 'http://xml.zeit.de/centerpage/katzencontent/'
     image = zeit.web.core.template.get_teaser_image(
@@ -117,7 +120,7 @@ def test_get_teaser_image_should_catch_fictitious_unique_id(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_video_asset_2'
+        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
     unique_id = 'http://xml.zeit.de/moep/moepmoep/moep'
     image = zeit.web.core.template.get_teaser_image(
@@ -173,14 +176,14 @@ def test_get_teaser_image_should_determine_mimetype_autonomously(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-card-flip-flip'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp/card-flip-flip'
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/card-flip-flip'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
     assert image.uniqueId.split('.')[-1] == 'png'
 
     teaser_block.layout.image_pattern = 'zmo-card-picture'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp/card-picture'
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/card-picture'
     )
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
     assert image.uniqueId.split('.')[-1] == 'jpg'
@@ -211,47 +214,48 @@ def test_zon_large_teaser_mapping_is_working_as_expected(application):
     assert teaser == 'zon-large'
 
 
-def test_teaser_layout_should_be_cached_per_unique_id(application):
+def test_teaser_layout_should_be_cached_per_unique_id(application, request):
+    request.addfinalizer(pyramid.threadlocal.manager.clear)
+
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'zon-small'
     block.__hash__ = lambda _: 42
 
-    request = mock.Mock()
-    request.teaser_layout = {}
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    request = pyramid.testing.DummyRequest()
+    request._cache_get_layout = {}
+    pyramid.threadlocal.manager.push({'request': request})
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
-    assert request.teaser_layout[42] == 'zon-small'
+    key = hash((block,))
+    assert request._cache_get_layout[key] == 'zon-small'
 
-    request = mock.Mock()
-    request.teaser_layout.get = mock.Mock(return_value='zon-small')
-
-    teaser = zeit.web.core.template.get_layout(block, request=request)
-    assert teaser == 'zon-small'
-    request.teaser_layout.get.assert_called_with(42, None)
+    request._cache_get_layout = {key: 'zon-large'}
+    teaser = zeit.web.core.template.get_layout(block)
+    assert teaser == 'zon-large'
 
 
 def test_get_layout_should_deal_with_all_sort_of_unset_params(
-        application):
+        application, request):
+    request.addfinalizer(pyramid.threadlocal.manager.clear)
 
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'zon-small'
 
-    request = mock.Mock()
-    request.teaser_layout = None
+    request = pyramid.testing.DummyRequest()
+    pyramid.threadlocal.manager.push({'request': request})
 
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
-    request = mock.Mock()
-    request.teaser_layout = {}
+    request._cache_get_layout.clear()
     block.uniqueId = None
 
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
 
@@ -384,18 +388,28 @@ def test_teaser_layout_for_empty_block_should_be_set_to_hide(application):
 def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/feature/feature_longform')
-    block = mock.Mock()
-    block.layout.id = 'zon-square'
-    block.__parent__ = mock.Mock()
-    block.__parent__.kind = 'major'
-    block.__iter__ = lambda _: iter([article])
-    layout = zeit.web.core.template.get_layout(block)
-    assert layout == 'zon-square'
+    cp = zeit.content.cp.centerpage.CenterPage()
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'
+    block = area.create_item('teaser')
+    block.layout = zeit.content.cp.layout.get_layout('zon-square')
+    block.append(article)
 
+    module = zeit.web.core.template.get_module(block)
+    assert module.layout.id == 'zon-square'
+
+    block.remove(article)
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    block.__iter__ = lambda _: iter([article])
-    layout = zeit.web.core.template.get_layout(block)
-    assert layout == 'zmo-square'
+    block.append(article)
+    module = zeit.web.core.template.get_module(block)
+    assert module.layout.id == 'zmo-square'
+
+    block.remove(article)
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/simple')
+    block.append(article)
+    module = zeit.web.core.template.get_module(block)
+    assert module.layout.id == 'zco-square'
 
 
 def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
@@ -671,3 +685,52 @@ def test_existing_image_should_preserve_pattern_order(
 def test_join_if_exists_should_should_filter_none():
     assert zeit.web.core.template.join_if_exists(
         ['honey', None, 'flash'], '-') == 'honey-flash'
+
+
+def test_get_svg_from_file_should_return_svg(application):
+    name = 'reload'
+    className = 'reload-test'
+    package = 'zeit.web.site'
+    cleanup = True
+    a11y = True
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, className, package, cleanup, a11y)
+    assert '<svg xmlns="http://www.w3.org/2000/svg"' in svg
+    assert 'width="14" height="13" viewBox="0 0 14 13"' in svg
+    assert 'class="svg-symbol reload-test"' in svg
+    assert 'role="img"' in svg
+    assert 'aria-label="Neu laden"' in svg
+
+
+def test_get_svg_from_file_should_return_no_a11y_svg(application):
+    name = 'reload'
+    className = 'reload-test'
+    package = 'zeit.web.site'
+    a11y = False
+    cleanup = True
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, className, package, cleanup, a11y)
+    assert 'aria-hidden="true"' in svg
+    assert 'aria-label="Neu laden"' not in svg
+
+
+def test_get_svg_from_file_should_return_unclean_svg(application):
+    name = 'reload'
+    className = 'reload-test'
+    package = 'zeit.web.site'
+    a11y = False
+    cleanup = False
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, className, package, cleanup, a11y)
+    assert 'fill="#444' in svg
+
+
+def test_get_svg_without_package_should_be_empty_str(application):
+    name = 'reload'
+    className = 'reload-test'
+    a11y = False
+    cleanup = True
+    package = ''
+    svg = zeit.web.core.template.get_svg_from_file(
+        name, className, package, cleanup, a11y)
+    assert svg == ''

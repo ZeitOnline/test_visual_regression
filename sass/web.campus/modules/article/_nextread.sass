@@ -11,7 +11,7 @@
 		padding-top: remify(60px)
 	&__lead
 		@extend %font-beckett
-		font-size: remify(26px)
+		+scaled-font(26px, $title-factor)
 		margin: 0
 		position: absolute
 		top: remify(-8px)
@@ -44,27 +44,28 @@
 		+respond-min($break-tablet-min)
 			+align-self(center)
 			padding: remify(20px)
+			z-index: 1 // Fix for ie11@win8.1
 	&__heading
 		margin: remify(0 0 4px)
 	&__kicker
 		color: $color-article-primary
 		display: block
-		font-size: remify(12px)
+		+scaled-font(12px)
 		letter-spacing: $letter-spacing-l
 		line-height: round-to-precision(12/13, $precision: 1)
-		margin-bottom: em(8px, 12px)
+		margin-bottom: remify(16px)
 		text-transform: uppercase
 		&--leserartikel
 			color: $color-community-primary
 		+respond-min($break-tablet-min)
-			margin-bottom: em(20px, 12px)
+			margin-bottom: remify(20px)
 
 	&__title
 		@extend %font-beckett
 		color: $color-text
-		font-size: remify(26px)
+		+scaled-font(26px, $title-factor)
 		+respond-min($break-tablet-min)
-			font-size: remify(64px)
+			+scaled-font(64px, $title-factor)
 
 	&__metadata
 		@extend %teaser-metadata

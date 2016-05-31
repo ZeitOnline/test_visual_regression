@@ -1,0 +1,8 @@
+<div class="{{ 'markup' | with_mods(module.alignment) }}">
+    {% if module.title -%}
+    <h2 class="markup__title">{{ module.title }}</h2>
+    {% endif -%}
+    <div class="markup__text">
+        {{- module.text | safe -}}
+    </div>
+</div>

@@ -54,7 +54,7 @@ def test_nav_markup_should_match_css_selectors(application, jinja2_env):
                     '[data-dropdown="true"]')
                ) == 1, 'just one .main_nav__search w/ data-dropdown=true'
 
-    assert len(html('nav[role="navigation"] ul.primary-nav')) == 1
+    assert len(html('nav#primary_nav ul.primary-nav')) == 1
 
 
 def test_nav_ressorts_should_produce_markup(application, jinja2_env):
@@ -149,6 +149,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/navigation/navigation.tpl')
     mock_view = mock.MagicMock()
+    mock_view.package = 'zeit.web.site'
 
     def route_url(arg):
         return 'http://www.zeit.de/'
@@ -160,7 +161,7 @@ def test_nav_contains_essential_elements(application, jinja2_env):
     # Logo
     assert html('a[href*="/index"]'
                 '[title="Nachrichten auf ZEIT ONLINE"]')[0] is not None, (
-                    'Logo link is missing')
+        'Logo link is missing')
 
     # Main menu icon
     assert len(html(u'a[aria-label="Hauptmenü"]')) == 1, (
@@ -215,17 +216,12 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
 def test_footer_should_contain_schema_org_markup(testbrowser):
     browser = testbrowser('/centerpage/zeitonline')
 
-    html = browser.cssselect
-    site_nav_element = html(
-        'footer[itemtype="http://schema.org/SiteNavigationElement"]')
+    site_nav_element = browser.cssselect(
+        'footer *[itemtype="http://schema.org/SiteNavigationElement"]')
     assert len(site_nav_element) == 1
 
-    item_prop_url = html(
-        'footer[itemtype="http://schema.org/SiteNavigationElement"] '
-        'div li a[itemprop="url"]')
-    item_prop_name = html(
-        'footer[itemtype="http://schema.org/SiteNavigationElement"] div li '
-        'a[itemprop="url"] span[itemprop="name"]')
+    item_prop_url = site_nav_element[0].cssselect('li a[itemprop="url"]')
+    item_prop_name = site_nav_element[0].cssselect('li span[itemprop="name"]')
 
     assert len(item_prop_url) > 0
     assert len(item_prop_url) == len(item_prop_name)

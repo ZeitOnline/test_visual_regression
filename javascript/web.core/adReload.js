@@ -166,6 +166,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
     return {
         init: function() {
+            log( 'debug-adreload started' );
             // load configuration
             var inits = loadConfig();
             inits.done( function() {

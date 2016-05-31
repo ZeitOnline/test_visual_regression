@@ -1,17 +1,31 @@
 <configure xmlns="http://namespaces.zope.org/zope">
 
-    <exclude package="zeit.cms.sitecontrol" />
-    <exclude package="zeit.cms.tagging.browser" />
-    <exclude package="zeit.find.browser" />
-    <exclude package="zeit.edit.browser" />
+    <!-- include only those parts of zeit.cms:application.zcml that the vivi
+         *model* code needs, thus saving us lots of zope.* includes -->
+    <include package="zope.component" file="meta.zcml" />
+    <include package="zope.i18n" file="meta.zcml" />
+    <include package="zope.security" file="meta.zcml" />
+    <include package="zope.security" file="permissions.zcml" />
+    <include package="zope.securitypolicy" file="meta.zcml" />
+
+    <include package="zope.annotation" />
+    <include package="zope.component" />
+    <include package="zope.container" />
+    <include package="zope.location" />
+    <include package="zope.securitypolicy" />
+    <include package="zope.traversing" />
+    <include package="zope.generations" file="subscriber.zcml" />
+    <subscriber
+      for="zope.processlifetime.IDatabaseOpened"
+      handler="zope.app.appsetup.bootstrap.bootStrapSubscriber"/>
+    <include package="gocept.lxml" />
+    <include package="zc.sourcefactory" />
+
+    <exclude package="grokcore.view" />
     <include package="zeit.cms" />
 
-    <exclude package="zeit.workflow.browser" />
     <include package="zeit.workflow" />
-
     <include package="zeit.content.advertisement" />
-    <exclude package="zeit.content.article.edit.browser" />
-    <exclude package="zeit.content.article.browser" />
     <include package="zeit.content.article" />
     <include package="zeit.content.dynamicfolder" />
     <include package="zeit.content.image" />
@@ -24,17 +38,20 @@
     <include package="zeit.content.portraitbox" />
     <include package="zeit.content.video" />
     <include package="zeit.content.rawxml" />
-    <exclude package="zeit.content.cp.browser" />
     <include package="zeit.content.cp" />
     <include package="zeit.intrafind" />
     <include package="zeit.magazin" />
     <include package="zeit.campus" />
     <include package="zeit.newsletter" />
     <include package="zeit.push" />
-    <include package="zeit.solr" />
+    <!-- XXX Something about including the whole zeit.solr package is slow,
+         and since we don't need it, we gain ~2s startup performance here -->
+    <!-- <include package="zeit.solr" /> -->
+    <utility factory="zeit.solr.connection.solr_connection_factory" />
     <include package="zeit.seo" />
     <include package="zeit.wysiwyg" />
     <include package="zeit.brightcove" />
     <include package="zeit.vgwort" />
+    <include package="zeit.objectlog" />
 
 </configure>

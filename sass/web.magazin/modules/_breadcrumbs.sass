@@ -1,22 +1,25 @@
 .breadcrumbs
-    font-family: $font-tabletgothic
-    padding: $thin $small
-    +padded
-    background-color: $grey--mid-dark
-    border-bottom: 1px solid $grey--dark
-    +respond-max($nav__break__full-menu)
-        display: none
+	+padded
+	border-bottom: 1px solid $grey--dark
+	+respond-max($break-tablet-min)
+		display: none
 
-.breadcrumbs__list
-    color: $grey
-    font-size: $font-xs
-    vertical-align: top
-    a
-        color: $grey
-        +animated-interaction($grey)
+	&__list
+		font-size: em(12px)
+		letter-spacing: $letter-spacing-s
+		list-style-type: none
+		margin: 0 auto
+		max-width: remify($article-content-max-width)
+		padding: remify(8px 0)
 
-.breadcrumbs__list__item
-    display: inline
-    margin: 0 $thin
-    &:first-child
-        margin-left: 0
+	&__item
+		display: inline
+		margin: 0
+		padding: 0
+		&:not(:last-child):after
+			content: " › "
+			margin: 0 .5em
+
+	&__link
+		color: inherit
+		+animated-interaction($grey)

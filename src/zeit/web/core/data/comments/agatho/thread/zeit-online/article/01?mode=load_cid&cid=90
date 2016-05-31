@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comments url="/content/zwei-baguettes-und-ein-zimmer-bitte">
+ <last_comment_timestamp/>
+ <last_comment_name/>
+ <last_comment_uid/>
+ <comment_count/>
+ <comments_count_toplevel/>
+ <comments_count_recommendations_editors/>
+ <comments_count_recommendations_readers/>
+ <nid>3</nid>
+ <comment id="cid-90">
+  <inreply to="cid-3"/>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>44</minute>
+  </date>
+  <created>1457527440</created>
+  <changed>1457957171</changed>
+  <homepage></homepage>
+  <subject>[empty]</subject>
+  <token>8k5wu6djiYkkbZtjhAPV8X4Z8wMmuzbqV54yrQe7av4</token>
+  <content>&lt;p&gt;die allererste Antwort&lt;/p&gt;
+</content>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <path>/content/zwei-baguettes-und-ein-zimmer-bitte</path>
+ <source>http://localhost:9090/zeit-online/article/02</source>
+</comments>
+

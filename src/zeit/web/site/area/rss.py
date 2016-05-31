@@ -14,6 +14,8 @@ import zeit.content.image.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
+import zeit.web.core.interfaces
+import zeit.web.core.centerpage
 import zeit.web.core.metrics
 
 
@@ -80,6 +82,16 @@ class RSSLink(object):
         if enclosure is not None:
             return enclosure.attrib.get('url')
 
+    @zeit.web.reify
+    def is_ad(self):
+        nsmap = dict(
+            dc="http://purl.org/dc/elements/1.1/")
+        dc_type = self.xml.find('dc:type', namespaces=nsmap)
+
+        if dc_type is not None and getattr(dc_type, 'text') == 'native-ad':
+            return True
+        return False
+
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(IRSSLink)
@@ -93,6 +105,8 @@ def rsslink_to_imagegroup(context):
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(IRSSLink)
 class RSSImages(object):
+
+    fill_color = None
 
     def __init__(self, context):
         self.context = context
@@ -124,16 +138,13 @@ class RSSArea(zeit.content.cp.automatic.AutomaticArea):
     feed_key = NotImplemented
 
     def values(self):
-        import zeit.web.core.interfaces  # Prevent circular imports
-        import zeit.web.site.view_centerpage
-
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = conf.get(self.feed_key)
         timeout = conf.get(self.feed_key + u'_timeout', 2)
         values = []
 
         for item in parse_feed(url, self.kind, timeout):
-            module = zeit.web.site.view_centerpage.LegacyModule(
+            module = zeit.web.core.centerpage.TeaserModule(
                 [item], layout=self.module_layout)
             item.__parent__ = self
             module.type = 'teaser'

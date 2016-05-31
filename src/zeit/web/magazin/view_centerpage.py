@@ -44,21 +44,12 @@ class CenterpageLegacy(zeit.web.core.view_centerpage.Centerpage,
             except:
                 continue
 
-    def register_copyrights(self, container):
-        """Registers all teaser image copyrights found in the container."""
-        for t in zeit.web.core.interfaces.ITeaserSequence(container, []):
-            try:
-                self._copyrights.setdefault(t.image.image_group, t.image)
-            except AttributeError:
-                continue
-        return container
-
     @zeit.web.reify
     def monothematic_block(self):
         try:
             mtb_teaserbar = self.context['teaser-mosaic'].values()[0]
             if mtb_teaserbar.layout.id == 'zmo-mtb':
-                return self.register_copyrights(mtb_teaserbar)
+                return mtb_teaserbar
         except IndexError:
             return
 
@@ -67,7 +58,7 @@ class CenterpageLegacy(zeit.web.core.view_centerpage.Centerpage,
         try:
             zmo_teaserbar = self.context['teaser-mosaic'].values()[1]
             if zmo_teaserbar.layout.id == 'zmo-teaser-bar':
-                return self.register_copyrights(zmo_teaserbar)
+                return zmo_teaserbar
         except IndexError:
             return
 
@@ -80,40 +71,38 @@ class CenterpageLegacy(zeit.web.core.view_centerpage.Centerpage,
                     teaser_list.remove(teaser)
             except AttributeError:
                 continue
-        return self.register_copyrights(teaser_list)
+        return teaser_list
 
     @zeit.web.reify
     def area_lead_1(self):
-        separated = self.insert_seperator('before', self.area_lead)
-        return self.register_copyrights(separated or self.area_lead)
+        return self.insert_seperator('before', self.area_lead) or (
+            self.area_lead)
 
     @zeit.web.reify
     def area_lead_2(self):
-        separated = self.insert_seperator('after', self.area_lead)
-        return self.register_copyrights(separated)
+        return self.insert_seperator('after', self.area_lead)
 
     @zeit.web.reify
     def area_lead_full_teaser(self):
         for teaser_block in self.context.values()[0]["lead"].values():
             try:
                 if 'zmo-leader-fullwidth' in teaser_block.layout.id:
-                    return self.register_copyrights(teaser_block)
+                    return teaser_block
             except AttributeError:
                 continue
 
     @zeit.web.reify
     def area_informatives(self):
-        return self.context.values()[0]["informatives"].values()
+        return self.context.values()[0]['informatives'].values()
 
     @zeit.web.reify
     def area_informatives_1(self):
-        separated = self.insert_seperator('before', self.area_informatives)
-        return self.register_copyrights(separated or self.area_informatives)
+        return self.insert_seperator('before', self.area_informatives) or (
+            self.area_informatives)
 
     @zeit.web.reify
     def area_informatives_2(self):
-        separated = self.insert_seperator('after', self.area_informatives)
-        return self.register_copyrights(separated)
+        return self.insert_seperator('after', self.area_informatives)
 
     @zeit.web.reify
     def area_buzz(self):
@@ -125,30 +114,8 @@ class CenterpageLegacy(zeit.web.core.view_centerpage.Centerpage,
             ('comments', conn.get_comments(section='zeit-magazin')))
 
     @zeit.web.reify
-    def copyrights(self):
-        teaser_list = []
-        for teaser in self._copyrights.itervalues():
-            if not len(teaser.copyright) or len(teaser.copyright[0][0]) <= 1:
-                # Drop teaser if no copyright text is assigned.
-                continue
-            teaser_list.append(
-                dict(
-                    label=teaser.copyright[0][0],
-                    image=zeit.web.core.template.create_url(
-                        None, teaser.src, self.request),
-                    link=teaser.copyright[0][1],
-                    nofollow=teaser.copyright[0][2]
-                )
-            )
-        return sorted(teaser_list, key=lambda k: k['label'])
-
-    @zeit.web.reify
     def is_advertorial(self):
         return zeit.web.core.view.is_advertorial(self.context, self.request)
-
-    @zeit.web.reify
-    def is_hp(self):
-        return self.context.type == 'ZMO'
 
 
 @view_config(context=zeit.content.cp.interfaces.ICP2015,
@@ -160,4 +127,7 @@ class CenterpageLegacy(zeit.web.core.view_centerpage.Centerpage,
              renderer='templates/centerpage.html')
 class Centerpage(zeit.web.core.view_centerpage.Centerpage,
                  zeit.web.magazin.view.Base):
-    pass
+
+    @zeit.web.reify
+    def is_hp(self):
+        return self.context.type == 'ZMO'

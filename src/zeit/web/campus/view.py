@@ -5,6 +5,7 @@ import zeit.campus.interfaces
 import zeit.web.core.application
 import zeit.web.core.security
 import zeit.web.core.view
+import zeit.web.campus.module.toolbox
 
 
 def is_zco_content(context, request):
@@ -14,9 +15,11 @@ def is_zco_content(context, request):
 
 class Base(zeit.web.core.view.Base):
 
-    @zeit.web.reify
-    def adcontroller_handle(self):
-        return ''
+    seo_title_default = u'ZEIT Campus ONLINE | studieren. arbeiten. leben.'
+    pagetitle_suffix = u' | ZEIT Campus'
+
+    # make toolbox links available in view
+    toolbox = zeit.web.campus.module.toolbox.TOOL_SOURCE
 
     @zeit.web.reify
     def adcontroller_values(self):
@@ -24,8 +27,8 @@ class Base(zeit.web.core.view.Base):
         Output in level strings only allows latin characters, numbers and
         underscore.
         """
-        keywords = ','.join(self.adwords)
 
+        keywords = 'zeitonline,zeitcampus'
         topiclabel = getattr(self, 'topic_label', '')
         topiclabel = zeit.web.core.template.format_iqd(topiclabel)
 

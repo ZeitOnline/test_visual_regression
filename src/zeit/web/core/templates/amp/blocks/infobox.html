@@ -1,31 +1,32 @@
 {% if block.contents -%}
-{% set id = block.title | attr_safe %}
-<aside class="infobox" id="{{ id }}" role="application">
-	<div class="infobox__container article__item">
-	{% for title, text in block.contents %}
-		<section id="{{ id }}-{{ loop.index }}">
-			<h3 class="infobox__title" role="presentation">
-				<a
-					class="infobox__link"
-					id="{{ id }}-{{ loop.index }}-tab"
-					role="tab"
-					href="#{{ id }}-{{ loop.index }}"
-					data-id="{{ id }}-{{ loop.index }}-tab"
-					aria-controls="{{ id }}-{{ loop.index }}-article">
-					{{- title -}}
-				</a>
-			</h3>
-			<article
-				class="infobox__panel"
-				id="{{ id }}-{{ loop.index }}-article"
-				role="tabpanel"
-				aria-labelledby="{{ id }}-{{ loop.index }}-tab">
-				{% for block in text %}
-					{% include "zeit.web.core:templates/amp/blocks/{}.html".format( block | block_type ) ignore missing %}
-				{% endfor %}
-			</article>
-		</section>
-	{% endfor %}
-	</div>
+{% set base_id = block.identifier %}
+<aside class="infobox" id="{{ base_id }}">
+    <div class="infobox__container article__item">
+    {% for title, text in block.contents %}
+        {% set tab_id = '%s-%s' | format(base_id, loop.index) %}
+        <section>
+            <h3 class="infobox__title" role="presentation">
+                <a
+                    class="infobox__link"
+                    id="{{ tab_id }}-tab"
+                    role="tab"
+                    href="#{{ tab_id }}-tab"
+                    data-id="{{ tab_id }}-tab"
+                    aria-controls="{{ tab_id }}-article">
+                    {{- title -}}
+                </a>
+            </h3>
+            <div
+                class="infobox__panel"
+                id="{{ tab_id }}-article"
+                role="tabpanel"
+                aria-labelledby="{{ tab_id }}-tab">
+                {% for block in text %}
+                    {% include "zeit.web.core:templates/amp/blocks/{}.html".format( block | block_type ) ignore missing %}
+                {% endfor %}
+            </div>
+        </section>
+    {% endfor %}
+    </div>
 </aside>
 {%- endif %}

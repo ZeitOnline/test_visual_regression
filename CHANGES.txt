@@ -1,10 +1,431 @@
 Change log for zeit.web
 =======================
 
-2.66 (unreleased)
+2.85 (unreleased)
+-----------------
+
+- FIX: Provide fallback date and hide copyright on Storystreams
+
+- FIX: Escape double quotes in CeleraOne script function arguments
+
+- BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
+
+
+2.84 (2016-05-30)
+-----------------
+
+- ZON-2638: Introduce minimal version of ZON framebuilder
+
+- ZON-2532: Determine milestone layout from tldr_milestone setting on teasered article
+
+- ZON-3046: Use update signals on desktop only
+
+- ZON-3071: Track page assets in webtrekk
+
+- MAINT: Update ZMO header and navigation
+
+- MAINT: Add Tonic-Magazin and Edition F to noindex list
+
+
+2.83.1 (2016-05-24)
+-------------------
+
+- HOTFIX: Be defensive about missing meta files for article images
+
+- ZON-1934: Polish news teaser and render news page
+
+
+2.83 (2016-05-20)
+-----------------
+
+- FIX: Remove advertorial kicker prefix
+
+
+2.82 (2016-05-19)
+-----------------
+
+- FIX: Fix tracking toolbox
+
+- MAINT: Validate sharing menu
+
+
+2.81.1 (2016-05-17)
+-------------------
+
+- MAINT: Transmit separate SSO register URL to rawr
+
+
+2.81 (2016-05-17)
+-----------------
+
+- ZON-3072: Change ZEIT Campus flyout and toolbox clicktracking identifier
+
+- ZON-3056: Add microdata for ZEIT Campus teasers
+
+- ZON-2659: Use HTML5 video player for inline videos
+
+- ZON-2756: Add webtrekk customer ID to ZMO
+
+- BUG-417: Exclude Campus articles from article lineage
+
+- MAINT: Clean up ZMO templates
+
+- MAINT: Transmit correct client IP address to bugsnag
+
+
+2.80 (2016-05-11)
+-----------------
+
+- ZON-3057: Add new Ranking Area and Teaser Format for paginated ZCO CPs
+
+- OPS-335: Improve health check (configurable via `health_check_with_fs`)
+
+- MAINT: Add ZEIT Campus breadcrumbs
+
+- MAINT: Check community health directly (without varnish)
+
+- FIX: Be defensive about missing community maintenance config file
+
+- FIX: Make square teaser fully clickable again
+
+
+2.79.1 (2016-05-09)
+-------------------
+
+- MAINT: Have bugsnag group UndefinedErrors by object and attribute
+  name instead of the (unhelpful because constant) source code location
+
+
+2.79 (2016-05-04)
+-----------------
+
+- ZON-3061: Polishing ZEIT Campus
+
+- ZON-3062: Change wording of CP button
+
+- ZON-3058: Show series name on column teasers
+
+- ZON-3055: Add clicktracking for ZMO + ZCO footer
+
+- ZON-3059: Add clicktracking for ZCO sharing button
+
+- ZON-3030: Enable Accelerated Mobile Pages (AMP) for ZEIT Campus and ZEITmagazin
+
+- BUG-411: Make topics available for ZEIT Campus AdController on Centerpages
+
+- BUG-415: Only report shared URL for clicktracking
+
+- FIX: Support non-ascii URLs in "komplettansicht" redirect
+
+- FIX: Clearify vertical alignment of "new" element in nav
+
+- FIX: Fix links in toolbox
+
+- FIX: Fix wording and links
+
+- OPS-308: Don't look at *all* gallery entries just to get the first one
+
+- MAINT: Restrict framebuilder page_slice param to valid values
+
+- MAINT: Add Config for Toolbox and Flyout
+
+
+2.78 (2016-05-02)
+-----------------
+
+- MAINT: Update breadcrumb microdata
+
+- FIX: Show copyright for article header image
+
+
+2.77 (2016-04-29)
+-----------------
+
+- ZON-3039: Render ZCO column teasers as default in ZON
+
+- ZON-2870: Add login cut marks for framebuilder in campus, too
+
+- ZON-3031: Add advertorial teaser
+
+- ZON-2974: Add ZEIT Campus launch gimmick (animated header image)
+
+- ZON-3033: Introduce Fallback Image for ZCO Teaser
+
+- ZON-2504: Add Highlight-Box (Quiz/Cards) to ZEIT Campus
+
+- ZON-3048: Change sharing bar colors
+
+- ZON-3047: Fix mobile glitches
+
+- ZON-3052: Resize ZCO kicker logo on ZON topic teaser
+
+- ZON-3049: Add new button to campus item in main navigation
+
+- ZON-3051: move print/pdf function to core
+
+- ZON-3032: Update schema.org publisher microdata
+
+- ZON-3054: Fix campus navigation links and tracking
+
+- MAINT: Use any teaser layout that is set in XML, regardless of availability rules
+
+
+2.76 (2016-04-28)
+-----------------
+
+- ZON-3034: show Anzeige label mobile as well
+
+- ZON-3019: Place adplace7 via cpextra
+
+- ZON-2971: Mark ZEIT Campus teasers on ZON centerpages
+
+- BUG-409: Fix keywords for ZEIT Campus AdController
+
+
+2.75 (2016-04-27)
+-----------------
+
+- HOTFIX: Make author list work again after area ranking was moved to core
+
+- ZON-3023: Use 1st teaser image as topic teaser image
+
+- ZON-3025: Change Wording on several places
+
+- ZON-2877: Update webtrekk javascript, make it configurable via settings
+
+- FIX: Fix teaser layout, default ZCO article layout
+
+- FIX: Add new home routes and change pagination for campus
+
+- FIX: Correct links in campus navigation
+
+- MAINT: Don't try another community request when the health check already failed
+
+- MAINT: Unify framebuilder banner_channel for ZON+ZCO
+
+- MAINT: Configure grunt watch task dynamically
+
+
+2.74 (2016-04-26)
+-----------------
+
+- ZON-2973: Generalise usage of cardstack in CPs and articles
+
+- ZON-2987: Add servicelinks module to ZEIT Campus
+
+- ZON-3003: ZEIT Campus polishing
+
+- ZON-3005: Share date logic for teasers between ZON and ZCO
+
+- ZON-2972: Introduce ZEIT Campus teasers in ZON parquet
+
+- ZON-2948: ZEIT Campus article header image landscape
+
+- ZON-2497: Add missing elements to centerpage of centerpages
+
+- ZON-2943: Move sharing tools to core and include them in Campus articles
+
+- ZON-2896: Add tracking ids to ZMO and ZCO navigation
+
+- ZON-2991: Fix links in ZCO navigation
+
+- ZON-2997: Support pagination for campus centerpages
+
+- MAINT: Adjust tracking IDs in article footer
+
+- BUG-405: Do not use duplicate IDs for infoboxes
+
+- FIX: Fix more Button in mobile navigation and add testing
+
+
+2.73 (2016-04-21)
+-----------------
+
+- ZON-2962: Polish ZEIT Campus
+
+- ZON-2983: Include meetrics in ZEIT Campus
+
+- ZON-2920: Add Advertorial Logic and Styles to Campus
+
+- ZON-2975: Add ZEIT Campus page title suffix
+
+- ZON-2986: Activate ad reloading in Campus
+
+- ZON-2994: Change servicebox XML format to include actual columns
+  !! production uses /data/servicebox-zon.xml now instead of /data/servicebox.xml !!
+
+- OPS-282: Erase some HTML validation errors
+
+- MAINT: Speed up appserver start by not loading unnecessary zope ZCML
+
+- BUG-384: Place first ad after min 100 words in facebook instantarticles
+
+- FIX: Transmit email properly to rawr
+
+
+2.72 (2016-04-18)
+-----------------
+
+- HOTFIX: Add a bit more teaser margin for zmo-landscape-large
+
+- ZON-2499: Campus CP-Header
+
+- ZON-2942: Use ZON/core metadata for dates etc. in Campus
+
+- ZON-2980: Configure rawr return url parameter to work with our SSO
+
+- ZON-2906: Add module headerimage to ZEIT Campus
+
+- ZON-2990: Add image copyrights to ZEIT Campus
+
+- ZON-2522: Introduce comments to ZEIT Campus
+
+- ZON-2961: SVG – back to the roots (render SVGs inline)
+
+- ZON-2988: Change STOA from automatic placement to normal article module
+
+- FIX: Use correct xml namespace in zett feed
+
+- FIX: Support non-ascii uniqueIds (and other bugsnag)
+
+- BUG-396: Enable nextread link and image copyrights
+
+- BUG-377 part 2: Set default sort order to "recent"
+
+- BUG-390: Replace Adtile 1 with amp-ad code
+
+- MAINT: Fix ZEIT Campus column article header image
+
+
+2.71.3 (2016-04-13)
+-------------------
+
+- HOTFIX: Make ranking areas work again on dynamic centerpages
+
+- MAINT: Fix pysolr error handling of non-ascii server responses
+
+
+2.71.2 (2016-04-12)
+-------------------
+
+- HOTFIX: Add a bit more teaser margin
+
+- HOTFIX: Add more space to ZMO comment counter
+
+- HOTFIX: Make images in parquet feeds (spektrum, zett) work again
+
+- HOTFIX: Make old-style <intial> paragraphs work again
+
+- BUG-377: Ensure correct sort order for search result area
+
+- FIX: Handle non-ascii author email addresses
+
+- MAINT: Send per-request memory delta to statsd
+
+- MAINT: Polish topic teaser variant
+
+
+2.71.1 (2016-04-11)
+-------------------
+
+- HOTFIX: Include ad-tile in ZMO minor
+
+
+2.71 (2016-04-11)
+-----------------
+
+- ZON-1626: Update ZMO-CPs to the z.c.cp-3.x data model,
+            update CSS and templates to the ZON best practises
+
+- ZON-2878: Allow specifying a background color for teaser images with
+            transparent backgrounds
+
+
+2.70 (2016-04-11)
+-----------------
+
+- FIX: Handle non-ascii usernames in nojs comment form
+
+- BUG-346: Limit the number of items in jobbox
+
+- BUG-385: Consider paragraph length when inserting ads
+
+- ZON-2494: Implement stoa in-article-block
+
+- ZON-2870: Implement login cut mark for framebuilder
+
+- ZON-2651: Include SSO information in the JS rawr config object
+
+- ZON-2890: Add packshot with follow-us button and subscription box
+
+- ZON-2930: Add separate feed `rss-socialflow-facebook-zco`
+
+- ZON-2913: Display ads in ZETT parquet
+
+- ZON-2946: Hide infobox tab counter for single tabs
+
+- FIX: Be more defensive in several places (Bugsnag)
+
+
+2.69 (2016-04-04)
+-----------------
+
+- MAINT: Add a11y to table of contents
+
+- ZON-2893: Support all content blocks in ZEIT Campus articles
+
+- ZON-2776: Implement 2nd version of ZCO topic teaser and refactor standard
+  topic teaser
+
+- ZON-2889: Add new graphical topic teaser
+
+
+2.68 (2016-03-31)
+-----------------
+
+- ZON-2522: Move comments to core
+
+- MAINT: Use trio area consistently
+
+- MAINT: Fix Campus teaser headlines + padding
+
+- FIX: Fix subcomment counting
+
+- FIX: Fix subcomment deeplinks
+
+
+2.67 (2016-03-30)
+-----------------
+
+- BUG-381: Use empty pixel instead of ZON-Logo in AMP-Ads
+
+- BUG-379: Framebuilder: Set Webtrekk params via JS
+
+
+2.66.2 (2016-03-24)
+-------------------
+
+- HOTFIX: Use correct agatho API call for recommendations
+
+- HOTFIX: Calculate current page for deeplink
+
+
+2.66.1 (2016-03-24)
+-------------------
+
+- HOTFIX: Fix comment numbering in pagination
+
+- HOTFIX: Use fallback for C1 setting to avoid script syntax error
+
+
+2.66 (2016-03-23)
 -----------------
 
 - HOTFIX: Make comment thread work again on video pages
+
+- ZON-2908: Load comment replies via Ajax request
+
+- ZON-2909: Load paginated thread from community
 
 - ZON-2492: Nextread without image
 
@@ -13,6 +434,14 @@ Change log for zeit.web
 - BUG-378: Remove microdata for AMP nextread
 
 - BUG-380: Harmonize publisher nextread tracking code
+
+- MAINT: Make image_prefix and friends runtime-configurable
+
+
+2.65.1 (2016-03-23)
+-------------------
+
+- HOTFIX: Fix comment pagination links
 
 
 2.65 (2016-03-21)
@@ -90,6 +519,22 @@ Change log for zeit.web
 
 2.62 (2016-03-04)
 -----------------
+
+- MAINT: Refactor ZMO nextread
+
+- MAINT: Deprecate ZMO copyrights mechanics in favour of js solution
+
+- FIX: Add margin to major/ minor area
+
+- ZON-2785: Relaunch ZMO CPs:
+  * New teaser structure for ZMO
+  * Cleanup teaser types
+  * Cleanup test data
+  * Style new trio area
+  * Rework Monothematic block
+  * Introduce new test pages for teasers
+  * Use Standart image template in ZMO
+  * Move copyright logic to core and use it in ZMO
 
 - ZON-2433: Improve sharing logic of cardstacks
 
@@ -254,6 +699,16 @@ Change log for zeit.web
 2.56 (2016-02-17)
 -----------------
 
+- ZON-2710: Use external SVG sprite in ZMO
+
+- ZON-2753: ZMO clicktracking for teaser
+
+- ZON-2558: ZMO teaser layout 'card' in 3 variations
+
+- ZON-2557: ZMO teaser layout 'upright' formerly known as 'gallery-upright'
+
+- ZON-2556: ZMO teaser layout 'print-cover'
+
 - ZON-2507: Implement zeit campus groundwork (behind a feature toggle)
 
 - ZON-2806: Add product.title as author fallback to AMPages
@@ -294,11 +749,11 @@ Change log for zeit.web
 
 - ZON-2602: Add Nextread and Verlags-Nextread to AMPages
 
-- ZON-2710: Use external SVG sprite in ZMO
-
 - ZON-2732: Move celeraone device detection header setting to varnish
 
 - ZON-2536: Move generic image assets to core module
+
+- ZON-2552: Refactored fullwidth teaser
 
 - ZON-2692: Add instantarticle author fallback and local image captions
 

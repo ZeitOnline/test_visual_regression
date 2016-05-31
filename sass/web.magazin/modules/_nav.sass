@@ -1,465 +1,368 @@
-// variables
-$nav__row-height--px: 50px
-$nav__row-height: em($nav__row-height--px)
-$nav__break__full-menu: em(768px)
-
-$nav__logo-zmo-small-width: 38px
-$nav__logo-zmo-small-height: 20px
-$nav__logo-zmo-large-width: 262px
-$nav__logo-zmo-large-height: 25px
-
-$nav__logo-zon-small-width: 25px
-$nav__logo-zon-small-height: 25px
-$nav__logo-zon-large-width: 236px
-$nav__logo-zon-large-height: 25px
-
-$nav__service-primary-full-width: 200px
-$nav__background-color: $grey--mid-dark
-$nav__border-color: $grey--mid
-$nav__section-border: 1px solid $nav__border-color
-$icon-avatar-std-size: em(32px)
-
-
-.main-nav
-    font-family: $font-tabletgothic
-    line-height: $nav__row-height--px
-    width: 100%
-    max-width: $max-page-width
-    margin: 0 auto
-    color: $white
-    background-color: $nav__background-color
-    &.is-full-width
-        max-width: none
-        z-index: 100000 // absurd high z-index to overrule ads and such
-    &.is-compact
-        .no-touch &
-            position: fixed
-            left: 0
-            top: 0
-            ~ .main
-                margin-top: $nav__row-height
-    +respond-min($nav__break__full-menu)
-        height: em($nav__row-height--px * 2 + 1)
-        &.is-compact
-            height: auto
-    a
-        +link-colors($white, $white, $white, $white, $white)
-
-
-.main-nav__logo
-    float: left
-
-
-.main-nav__logo__wrap
-    margin: 0
-    font-size: 1em
-    width: $nav__row-height
-    height: $nav__row-height
-    border-right: $nav__section-border
-    +box-sizing(content-box)
-    text-align: center
-    +respond-min($nav__break__full-menu)
-        padding: 0 1em
-        width: auto
-
-// declare logo styles "desktop first" to get them IE<9 safe
-.main-nav__logo__img
-    +hide-text
-    +background-size(contain)
-    background-position: 50% 50%
-    display: inline-block
-    vertical-align: middle
-
-    // small logo initials
-
-    &.icon-logo-zon-small,
-    &.icon-logo-zmo-small
-        display: none
-        +respond-max($nav__break__full-menu)
-            display: inline-block
-
-    &.icon-logo-zon-small
-        width: $nav__logo-zon-small-width
-        height: $nav__logo-zon-small-height
-
-    &.icon-logo-zmo-small
-        width: $nav__logo-zmo-small-width
-        height: $nav__logo-zmo-small-height
-
-    // large logo
-
-    &.icon-logo-zon-large,
-    &.icon-logo-zmo-large
-        +respond-max($nav__break__full-menu)
-            display: none
-
-    &.icon-logo-zon-large
-        width: $nav__logo-zon-large-width
-        height: $nav__logo-zon-large-height
-
-    &.icon-logo-zmo-large
-        width: $nav__logo-zmo-large-width
-        height: $nav__logo-zmo-large-height
-
-
-.main-nav__menu
-    overflow: hidden
-    height: $nav__row-height // needed?
-
-
-.main-nav__menu__head
-    text-align: right
-    padding: 0 $small
-    cursor: pointer
-    +respond-min($nav__break__full-menu)
-        display: none
-
-
-// .main-nav__menu__head__headline
-//     +inline-block
-//     +no-user-select
-//     font-size: $font-s
-//     letter-spacing: 1px
-//     float: left
-
-
-.main-nav__menu__head__hamburger
-    +inline-block(middle)
-    text-indent: -119999px
-    text-align: left
-    width: 25px
-    height: 3px
-    background-color: $white
-    position: relative
-    &:before, &:after
-        position: absolute
-        width: 100%
-        content: ''
-        display: block
-        border-top: 3px solid $white
-    &:before
-        top: -8px
-    &:after
-        bottom: -8px
-
-
-.main-nav__menu__content
-    display: none
-    position: absolute
-    left: 0
-    padding-left: $nav__row-height + em(1px)
-    z-index: 5
-    width: 100%
-    &.is-open
-        display: block
-    +respond-min($nav__break__full-menu)
-        display: block
-        position: static
-
-
-.main-nav__section
-    background-color: $nav__background-color
-    border-top: 2px solid $nav__border-color
-    padding: 0 em(26px)
-    +respond-min($nav__break__full-menu)
-        border: none
-        padding: 0
-    a
-        font-size: $font-s
-        letter-spacing: 1px
-
-.main-nav__section__trigger
-    +no-user-select
-    cursor: pointer
-    display: block
-
-.main-nav__section__text
-    font-size: $font-s
-    letter-spacing: 1px
-
-.main-nav__section__content
-    display: none
-    background-color: $nav__background-color
-    &.is-open
-        display: block
-    a
-        display: block
-
-
-//*****************
-// DESKTOP STYLES *
-//*****************
-
-+respond-min($nav__break__full-menu)
-    .main-nav__section__content
-        position: absolute
-        right: 0
-        top: 100%
-        top: -webkit-calc(100% + 1px)
-        top: -moz-calc(100% + 1px)
-        top: calc(100% + 1px)
-        z-index: 10
-        padding: $tiny em(26px)
-        line-height: 3
-
-    .has-hover
-        .main-nav__service,
-        .main-nav__search,
-        .main-nav__community
-            .main-nav__section__trigger:hover + .main-nav__section__content,
-            .main-nav__section__content:hover
-                display: block
-
-    .has-hover .main-nav__service:hover,
-    .has-hover .main-nav__community:hover,
-    .main-nav__service.has-open-menu,
-    .main-nav__community.has-open-menu
-        border-bottom: 1px solid $nav__background-color
-        z-index: 3
-
-    .main-nav__service,
-    .main-nav__community
-        .main-nav__section__content
-            &:before, &:after
-                position: absolute
-                content: ''
-                height: $nav__row-height
-                top: 0
-                pointer-events: none
-            &:before
-                +background-image(linear-gradient(to left, rgba($black, 0.6), rgba($black, 0)))
-                right: 100%
-                width: 80px
-    .main-nav__service
-        .main-nav__section__content
-            &:after
-                +background-image(linear-gradient(to right, rgba($black, 0.6), rgba($black, 0)))
-                left: 100%
-                width: 80px
-            width: em(300px)
-
-    .main-nav__wrap
-        max-width: $max-page-width
-        margin: 0 auto
-        position: relative
-        .is-full-width &
-            max-width: $max-longform-width - $page-padding*2
-            +box-shadow(0 -1px 0 1px $grey--mid)
-
-    .main-nav__aside
-        position: absolute
-        top: 0
-        right: 0
-        .main-nav__section
-            float: left
-            position: relative
-            padding: 0 em(16px)
-            & + .main-nav__section
-                border-left: $nav__section-border
-
-
-
-//***********
-// RESSORTS *
-//***********
-
-+respond-max($nav__break__full-menu)
-    .main-nav__ressorts
-        padding-top: $tiny
-        padding-bottom: $tiny
-        line-height: 3
-        a
-            display: block
-
-+respond-min($nav__break__full-menu)
-    .main-nav__ressorts
-        border-top: $nav__section-border
-        position: absolute
-        top: $nav__row-height
-        left: 0
-        overflow: hidden
-        width: 100%
-        z-index: 2
-        padding-right: $nav__service-primary-full-width
-        white-space: nowrap
-        a
-            +inline-block
-            margin-right: $small
-            &:link
-                color: $greyish-white
-            &:hover, &:active
-                color: white
-            &:last-child
-                margin-right: 0
-    .main-nav__ressorts__slider
-        position: relative
-        height: $nav__row-height
-        margin-left: $small
-        overflow: hidden
-        .no-js &
-            overflow: auto
-            overflow-x: auto
-            overflow-y: hidden
-        .has-topic-slider &
-            padding-right: $small*3
-            overflow: hidden
-            &:after
-                content: ''
-                position: absolute
-                height: 100%
-                width: $small*3
-                background-color: $nav__background-color
-                z-index: 5
-                right: 0
-    .main-nav__ressorts__slider-strip
-        +transition(left 0.2s)
-        position: absolute
-        left: 0
-        height: 100%
-
-
-.main-nav__ressorts__slider-arrow--left,
-.main-nav__ressorts__slider-arrow--right
-    width: $small
-    height: $nav__row-height
-    position: absolute
-    z-index: 10
-    background-position: center center
-    display: none
-    cursor: pointer
-    .has-topic-slider &
-        +respond-min($nav__break__full-menu)
-            display: block
-    &.is-inactive
-        opacity: 0.5
-        cursor: default
-
-
-.main-nav__ressorts__slider-arrow--left
-    right: $small
-.main-nav__ressorts__slider-arrow--right
-    right: 0
-
-
-//****************
-// PRIMARY LINKS *
-//****************
-
-.main-nav__service-primary
-    border-top: none
-    padding: 0
-    a
-        border-top: 2px solid $nav__border-color
-        display: block
-        padding: 0 em(26px)
-    +respond-min($nav__break__full-menu)
-        position: absolute
-        top: $nav__row-height--px + 1px
-        right: 0
-        height: $nav__row-height
-        z-index: 3
-        text-align: right
-        a
-            border-top: none
-            display: inline
-            padding: 0
-            margin-right: $small
-
-
-.main-nav__only-small
-    +respond-min($nav__break__full-menu)
-        display: none
-
-.main-nav__only-full
-    +respond-max($nav__break__full-menu)
-        display: none
-
-
-//****************
-// SERVICE LINKS *
-//****************
-
-.main-nav__service
-    a
-        +inline-block
-        vertical-align: top
-        width: 48%
-        &:nth-child(2n)
-            padding-left: $small
-    .main-nav__section__trigger
-        padding-right: em(26px)
-        background-position: right center
-    +respond-max($nav__break__full-menu)
-        .main-nav__section__trigger
-            background: none
-
-
-//*********
-// SEARCH *
-//*********
-
-.main-nav__search
-    input
-        font-size: $font-s
-        vertical-align: middle
-        border: none
-        padding: 0 $thin
-        height: $nav__row-height - $thin
-    input[type=text]
-        color: $white
-        background-color: $grey--mid
-    input[type=submit]
-        color: $white
-        background-color: $grey
-        padding: 0 $small
-    +respond-min($nav__break__full-menu)
-        &.has-open-menu
-            border-left: none
-        .main-nav__section__content
-            top: 0
-            right: 100%
-            white-space: nowrap
-            line-height: inherit
-            padding: 0
-        .main-nav__section__trigger
-            +hide-text
-            background-position: center center
-            width: em(18px)
-    +respond-max($nav__break__full-menu)
-        .main-nav__section__trigger
-            background: none
-
-
-//************
-// COMMUNITY *
-//************
-
-.main-nav__community__icon
-    +inline-block
-    vertical-align: middle
-    width: $icon-avatar-std-size
-    height: $icon-avatar-std-size
-    background-repeat: no-repeat
-    background-position: 50% 38% // golden ratio for portrait pictures
-    +background-size(cover)
-    +border-radius(50%)
-
+$nav-color-border: #444
+
+=nav-font-m()
+	font-size: remify(14px)
+	letter-spacing: .08em
+
+=nav-font-l()
+	font-size: remify(16px)
+	letter-spacing: .05em
+
+%nav-font-m
+	+nav-font-m
+
+%nav-font-l
+	+nav-font-l
+
+.header
+	background-color: $primary-color
+	color: #ccc
+	position: relative
+
+	&__bar,
+	&__brand
+		+clearfix
+		color: #fff
+		line-height: remify(50px)
+		padding: remify(0 $page-padding--small)
+		a
+			color: inherit
+	&__bar
+		box-shadow: 0 -1px 0 1px $nav-color-border
+		height: remify(50px)
+		margin: 0 auto
+		max-width: $max-longform-width
+		padding: remify(0 0 0 $page-padding--small)
+
+	&__publisher
+		float: left
+		margin: 0
+
+	&__logo
+		display: block
+		height: remify(25px)
+		margin-top: remify(13px)
+		width: remify(262px)
+
+	&__menu-icon
+		vertical-align: middle
+		&--menu
+			height: remify(14px)
+			width: remify(20px)
+		&--close
+			height: remify(20px)
+			width: remify(20px)
+			display: none
+
+	&__menu-link
+		float: right
+		&[aria-expanded="true"]
+			.header__menu-icon--close
+				display: inline
+			.header__menu-icon--menu
+				display: none
+
+.nav
+	@extend %nav-font-l
+	+flex-flow(column nowrap)
+	+font-smoothing
+	display: none
+	line-height: remify(50px)
+
+	&:target,
+	&[aria-hidden="false"]
+		display: block // IE no-flexbox fallback
+		+display-flex
+
+	a
+		color: inherit
+		display: block
+		+on-interaction
+			color: #fff
+
+	ul
+		list-style: none
+		margin: 0
+		padding: 0
+
+	li
+		display: block
+		margin: 0
+		padding: 0
+
+	// ZEIT ONLINE
+	&__home-title
+		a
+			&:before
+				content: "\203A"
+				font-size: 1.5em
+				line-height: normal
+				margin-right: .2em
+
+	// LOGIN
+	&__login
+		@extend %nav-font-m
+		min-width: remify(50px)
+	&__login-link
+		text-align: right
+	&__login-icon
+		height: remify(18px)
+		width: remify(18px)
+		vertical-align: remify(-3px)
+	&__user-picture
+		background-color: #eee
+		background-position: center
+		background-repeat: no-repeat
+		background-size: contain
+		border-radius: 50%
+		display: block
+		height: remify(30px)
+		margin: remify(10px 0)
+		width: remify(30px)
+	&__user-avatar
+		color: #ababab
+		height: 100%
+		width: 100%
+	&__user-name
+		@extend %nav-font-l
+		display: block
+		font-weight: bold
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
+
+	&__home-title
+		font-size: inherit
+		font-weight: normal
+		margin: 0
+
+
++respond-max($break-tablet-min)
+	.header
+		// make more room for menu icon
+		&__logo
+			height: remify(24px)
+			width: remify(256px)
+
+	.nav
+		// item order
+		&__login
+			+order(1)
+		&__ressorts
+			+order(2)
+		&__home
+			+order(3)
+		&__sales
+			+order(4)
+		&__service
+			+order(5)
+
+		// style für mobile menu item
+		&__login,
+		&__ressorts,
+		&__home a,
+		&__sales a,
+		&__service
+			border-top: 1px solid $nav-color-border
+			padding: 0 $page-padding--small
+
+		// service
+		&__service-list
+			+clearfix
+			display: none
+			&[aria-hidden="false"]
+				display: block
+			li
+				float: left
+				width: 50%
+
+		&__login
+			line-height: remify(60px)
+		&__login-title
+			float: left
+			width: 66%
+		&__login-list
+			float: right
+			li:first-child
+				display: none
+		&__user-picture
+			float: left
+			height: remify(40px)
+			margin-right: remify(8px)
+			width: remify(40px)
+			&--default
+				display: none
+
+
++respond-min($break-tablet-min)
+	%nav-tablet-font-m
+		+nav-font-m
+
+	.header
+		&__brand
+			padding: remify(0 16px)
+			position: absolute
+
+		&__menu-link
+			display: none
+
+	.nav
+		@extend %nav-tablet-font-m
+		display: table // IE no-flexbox fallback
+		width: 100% // needed for IE no-flexbox fallback
+		+display-flex
+		+flex-flow(row wrap)
+
+		// ZEIT ONLINE
+		&__home
+			+flex(1 1 50%)
+			text-align: right
+			border-width: 0 1px 1px 0
+			border-style: solid
+			border-color: $nav-color-border
+		&__home-title
+			a
+				display: inline-block
+				padding: remify(0 24px)
+
+		// SALES + SERVICE
+		&__sales,
+		&__service
+			+flex(0 1 auto)
+			border-width: 0 1px 1px 0
+			border-style: solid
+			border-color: $nav-color-border
+
+		// dropdown menues
+		&__service-list,
+		&__login-list
+			background-color: $primary-color
+			border-color: $nav-color-border
+			border-style: solid
+			border-width: 0 1px 1px
+			display: none
+			line-height: remify(39px)
+			position: absolute
+			z-index: 2 // fix visible arrow and lead-teaser headline
+			&[aria-hidden="false"]
+				display: block
+			a
+				border-top: 1px solid $nav-color-border
+				min-width: remify(150px)
+				padding: remify(0 16px)
+		&__login-list
+			right: 0
+
+		&__sales a
+			padding: remify(0 20px)
+
+		&__login-title,
+		&__service-title
+			padding: remify(0 16px)
+			&[aria-expanded="true"]
+				.nav__dropdown:after
+					+transform(rotate(-90deg) scale(2))
+
+		// LOGIN
+		&__login
+			+flex(0 1 auto)
+			border-bottom: 1px solid $nav-color-border
+			padding: remify(0 16px) // needed here for "Anmeldung nicht möglich"
+		&__login-title
+			padding: 0 // override dropdown standard for "Anmeldung nicht möglich" case
+		&__login-link
+			display: block
+		&__login-register,
+		&__login-icon,
+		&__user-name
+			display: none
+
+		&__ressorts
+			+flex(1 1 50%)
+
+		&__ressorts,
+		&__sales
+			padding: remify(0 8px)
+			li
+				float: left
+			a
+				padding: remify(0 8px)
+
+		&__dropdown
+			&:after
+				+transform(rotate(90deg) scale(2))
+				+transform-origin(40% 60%)
+				+transition(transform .1s ease-out)
+				content: "\203A"
+				display: inline-block
+				line-height: 1
+				margin-left: remify(16px)
 
 //***********
 // LONGFORM *
 //***********
 
-.main-nav__sharing
-    float: right
+.header__sharing
+	display: none
+	float: right
+	+respond-min($break-phablet-min)
+		display: block
 
-.main-nav__sharing__item
-    +hide-text
-    float: left
-    width: $nav__row-height
-    height: $nav__row-height
-    border-left: $nav__section-border
-    +box-sizing(content-box)
-    background-position: center center
-    +transition(background-color)
-    +on-interaction
-        background-color: $grey--mid
+.header__link
+	float: left
+	width: remify(50px)
+	border-left: 1px solid $nav-color-border
+	text-align: center
+	+on-interaction
+		background-color: $grey--mid
+
+.header__sharing-icon
+	color: $white
+	vertical-align: middle
+	&--facebook
+		height: em(19px)
+		width: em(10px)
+	&--twitter
+		height: em(17px)
+		width: em(20px)
+
+
+//*************
+// NO FLEXBOX *
+//*************
+
++respond-min($break-tablet-min)
+	// no JS variant
+	// These styles must not harm the default styles!
+	// Note that float, clear and vertical-align have no effect on a flex item.
+	.no-js
+		.nav
+			&__home,
+			&__service,
+			&__login
+				float: right
+
+			&__ressorts
+				clear: right
+
+	// modernizr variant
+	.no-flexbox
+		.nav
+			&__home,
+			&__service,
+			&__login
+				display: table-cell
+
+			&__dropdown
+				white-space: nowrap
+
+			&__home
+				width: 90%
+
+			&__ressorts
+				display: table-row
+
+			&__sales
+				bottom: 0
+				position: absolute
+				right: 0

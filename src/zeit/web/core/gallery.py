@@ -49,21 +49,27 @@ class GalleryImage(zeit.web.core.image.BaseImage):
         fix_ml = zeit.web.core.utils.fix_misrepresented_latin
         self.copyright = list((fix_ml(i[0]),) + i[1:] for i in meta.copyrights)
         self.alt = meta.alt
-        self.align = meta.alignment
         self.caption = item.caption
 
 
 @zeit.web.register_global
 def get_gallery_image(module=None, content=None, **kwargs):
     # XXX Re-implement once we have a solution for RepositoryImage variants.
-
     if content is None:
         content = zeit.web.core.template.first_child(module)
-
     if content is None:
-        return
+        return None
 
-    return zeit.web.core.template.first_child(Gallery(content).itervalues())
+    for key in content.keys():
+        try:
+            value = content[key]
+        except:
+            continue
+        else:
+            if value.layout == 'hidden':
+                continue
+            return IGalleryImage(value)
+    return None
 
 
 class Gallery(collections.OrderedDict):

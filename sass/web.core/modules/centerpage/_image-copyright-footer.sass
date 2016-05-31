@@ -1,0 +1,52 @@
+.image-copyright-footer
+	background-color: $zon-dark-grey
+	color: $zon-mid-grey
+	font-size: remify(14px)
+	display: none
+	margin-top: remify(20px)
+	&__container
+		+clearfix
+		+padded
+		padding-bottom: remify(20px)
+		padding-top: remify(20px)
+		text-align: left
+	&__headline
+		+font-smoothing
+		color: $zon-seashell
+		margin: 0
+		font-size: remify(16px)
+	&__button
+		background-color: transparent
+		border: 0
+		float: right
+		padding: 0
+		&:hover
+			color: $zon-light-grey
+	&__icon
+		height: remify(18px)
+		width: remify(18px)
+	&__items
+		list-style: none
+		margin: 0
+		padding: 0
+	&__item
+		+clearfix
+		margin-top: remify(20px)
+		&-image
+			background-color: $zon-charcoal // support column author images
+			float: left
+			margin-right: remify(20px)
+			width: 30%
+		a
+			color: inherit
+			border-bottom: 1px solid currentColor
+			&:hover
+				color: $zon-light-grey
+
++respond-min($break-tablet-min)
+	.image-copyright-footer
+		&__items
+			+display-flex()
+			+flex-wrap(wrap)
+		&__item
+			+flex(0 1 50%)

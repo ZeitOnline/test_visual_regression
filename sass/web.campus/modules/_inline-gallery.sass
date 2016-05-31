@@ -12,28 +12,17 @@ $break-gallery-min: em(576px)
 		@extend .gallery-container
 
 .gallery-slides
-	.figure__media
-		width: auto
+	.gallery__media-item
+		margin: 0 auto
 		max-height: 620px
-		margin: 0 auto
+		width: auto
 	.figure__caption
-		background-color: $color-background--light
-		color: #444
-		font-family: $font-tabletgothic
-		font-size: em(15px)
-		line-height: round-to-precision(20/15, $precision: 1)
 		margin: 0 auto
-		max-width: none
-		padding: remify(20px $page-padding--small)
-		+respond-min($break-tablet-min)
-			padding: remify(20px $page-padding)
 	.figure__index
 		font-weight: bold
 		font-size: 0.8666em // uses em by intention
 		letter-spacing: $letter-spacing-l
 		margin-right: .25em
-	.figure__copyright
-		color: $color-text--light
 
 // appear just after bxSlider initialisation
 // needed for "static" galleries
@@ -93,7 +82,7 @@ $break-gallery-min: em(576px)
 	text-indent: -9999px
 	width: $gallery-dots-diameter
 	+on-interaction
-		background-color: $color-article-secondary
+		background-color: $color-article-primary
 
 .bx-prev,
 .bx-next
@@ -177,7 +166,7 @@ $break-gallery-min: em(576px)
 		&:last-child
 			.figure__caption
 				margin-bottom: $vertical-space
-	.figure__media
+	.gallery__media-item
 		max-width: 100%
 	.figure__caption
 		max-width: 100%

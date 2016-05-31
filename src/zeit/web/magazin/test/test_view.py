@@ -55,45 +55,34 @@ def test_dict_view_produces_acceptable_return_value():
     assert obj() == {'bar': 1}, 'DictView retains its return value.'
 
 
-def test_breadcumb_should_produce_expected_data():
-    context = mock.Mock()
-    context.ressort = 'zeit-magazin'
-    context.sub_ressort = 'mode-design'
-    context.title = 'This is my title'
+def test_breadcrumbs_should_produce_expected_data(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
 
-    request = mock.Mock()
-    request.route_url.return_value = 'http://foo.bar/'
-
-    article = zeit.web.magazin.view_article.Article(context, request)
+    article = zeit.web.magazin.view_article.Article(context, dummy_request)
 
     crumbs = [
-        ('Start', 'http://foo.bar/index'),
-        ('ZEIT Magazin', 'http://foo.bar/zeit-magazin/index'),
-        ('Mode & Design', 'http://foo.bar/zeit-magazin/mode-design/index'),
-        ('This is my title', '')
+        ('ZEITmagazin', 'http://xml.zeit.de/zeit-magazin/index'),
+        ('Essen & Trinken',
+         'http://xml.zeit.de/zeit-magazin/essen-trinken/index'),
+        ('Kolumne Die Ausleser: Der Chianti hat eine zweite Chance verdient',
+         None)
     ]
 
-    assert article.breadcrumb == crumbs
+    assert article.breadcrumbs == crumbs
 
 
-def test_breadcrumb_should_be_shorter_if_ressort_or_sub_ressort_is_unknown():
-    context = mock.Mock()
-    context.ressort = 'zeit-magazin'
-    context.sub_ressort = 'lebensartx'
-    context.title = 'This is my title'
+def test_breadcrumbs_should_be_shorter_if_ressort_or_sub_ressort_is_unknown(
+        dummy_request):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/04')
 
-    request = mock.Mock()
-    request.route_url.return_value = 'http://foo.bar/'
-
-    article = zeit.web.magazin.view_article.Article(context, request)
+    article = zeit.web.magazin.view_article.Article(context, dummy_request)
 
     crumbs = [
-        ('Start', 'http://foo.bar/index'),
-        ('ZEIT Magazin', 'http://foo.bar/zeit-magazin/index'),
-        ('This is my title', '')
+        ('ZEITmagazin', 'http://xml.zeit.de/zeit-magazin/index'),
+        ('SEO title', None)
     ]
 
-    assert article.breadcrumb == crumbs
+    assert article.breadcrumbs == crumbs
 
 
 def test_linkreach_property_should_be_set(application):
@@ -182,39 +171,22 @@ def test_image_view_returns_image_data_for_filesystem_connector(testserver):
     assert r.text.startswith(u'\ufffd\ufffd\ufffd\ufffd\x00')
 
 
-def test_footer_should_have_expected_markup(testbrowser):
+def test_footer_should_have_expected_structure(testbrowser):
     browser = testbrowser('/artikel/01')
-    elem = browser.cssselect('footer.main-footer')[0]
-    # assert normal markup
-    expect = '<footer class="main-footer">'\
-        '<div class="main-footer__box is-constrained is-centered">'\
-        '<div class="main-footer__logo icon-logo-zmo-small"></div>'\
-        '<div class="main-footer__links"><div><ul><li>VERLAG</li>'\
-        '<li><a href="http://www.zeit-verlagsgruppe.de/anzeigen/">'\
-        'Mediadaten</a></li><li><a href="http://www.zeit-verlagsgruppe.de'\
-        '/marken-und-produkte/geschaeftskunden/artikel-nachrucke/">'\
-        'Rechte &amp; Lizenzen</a></li>'\
-        '</ul></div><div><ul><li><a class="js-toggle-copyrights">'\
-        'Bildrechte</a></li>'\
-        '<li><a href="{0}/hilfe/datenschutz">'\
-        'Datenschutz</a></li>'\
-        '<li><a href='\
-        '"http://www.iqm.de/digital/nutzungsbasierte-onlinewerbung/"'\
-        '>Cookies</a></li>'\
-        '<li><a href="{0}/administratives/'\
-        'agb-kommentare-artikel">AGB</a></li>'\
-        '<li><a href="{0}/impressum/index">Impressum</a></li>'\
-        '<li><a href="{0}/hilfe/hilfe">Hilfe/ Kontakt</a></li>'\
-        '</ul></div></div></div></footer>'.format('http://localhost')
-    got = [s.strip() for s in lxml.html.tostring(elem).splitlines()]
-    got = "".join(got)
-    assert expect == got
+    footer = browser.cssselect('footer.main-footer')[0]
+    logo = footer.cssselect('svg.main-footer__logo')
+    assert len(logo) == 1
+    linklists = footer.cssselect('.main-footer__links ul')
+    assert len(linklists) == 2
+    list_top = linklists[0]
+    list_bottom = linklists[1]
+    assert len(list_top.cssselect('li')) == 3
+    assert len(list_bottom.cssselect('li')) == 6
 
 
 def test_article_request_should_have_body_element(testbrowser):
     browser = testbrowser('/artikel/05')
-    assert ('<body itemscope itemtype='
-            '"http://schema.org/WebPage"') in browser.contents
+    assert '<body' in browser.contents
     assert '</body>' in browser.contents
 
 
@@ -242,13 +214,6 @@ def test_column_should_have_header_image(testbrowser):
 def test_column_should_not_have_header_image(testbrowser):
     browser = testbrowser('/artikel/standardkolumne-ohne-bild-beispiel')
     assert '<div class="article__column__headerimage">' not in browser.contents
-
-
-def test_health_check_should_response_and_have_status_200(testbrowser):
-    browser = testbrowser('/health_check')
-    assert browser.headers['Content-Length'] == '2'
-    resp = zeit.web.core.view.health_check('request')
-    assert resp.status_code == 200
 
 
 def test_a_404_request_should_be_from_zon_main_page(testbrowser):
@@ -625,36 +590,6 @@ def test_http_header_should_contain_version(testserver):
     assert pkg_version == head_version
 
 
-def test_feature_longform_template_should_have_zon_logo_header(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/feature_longform.html')
-
-    # jinja2 has a blocks attribute which generates a stream,
-    # if called with context. We can use it with a html parser.
-    ctx, request = (mock.Mock(),) * 2
-    # It seems jinja evaluates {{request.route_url('home')}} not like
-    # getattr(ctx.resolve('request'), 'route_url')('home'), but more like
-    # ctx.call('request.route_url', 'home')
-    ctx.call.return_value = 'http://foo.bar/'
-
-    html_str = ' '.join(list(tpl.blocks['longform_logo'](ctx)))
-    html = lxml.html.fromstring(html_str)
-    elem = html.cssselect('.main-nav__logo__img.icon-logo-zon-large')[0]
-    assert elem.text == 'ZEIT ONLINE'
-    assert elem.get('title') == 'ZEIT ONLINE'
-
-    elem = html.cssselect('.main-nav__logo')[0]
-    assert elem.get('href') == 'http://foo.bar/index'
-
-
-def test_feature_longform_template_should_have_zon_logo_footer(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/feature_longform.html')
-    html_str = " ".join(list(tpl.blocks['footer_logo']({})))
-    html = lxml.html.fromstring(html_str)
-    assert len(html.cssselect('.main-footer__logo.icon-logo-zon-small')) == 1
-
-
 def test_advertorial_is_advertorial(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/centerpage/advertorial')
@@ -698,7 +633,8 @@ def test_ressort_literally_returns_correct_ressort(application):
     assert article_view.ressort_literally == 'Leben'
 
 
-def test_navigation_should_show_logged_in_user_correctly(jinja2_env):
+def test_navigation_should_show_logged_in_user_correctly(
+        jinja2_env, dummy_request):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/inc/navigation/login-state.html')
 
@@ -708,20 +644,20 @@ def test_navigation_should_show_logged_in_user_correctly(jinja2_env):
             'user': {'picture': None}}
 
     # no pic
-    css = lxml.html.fromstring(tpl.render(**info)).cssselect
-    assert css('span')[1].attrib['class'] == (
-        'main-nav__community__icon icon-avatar-std')
+    css = lxml.html.fromstring(
+        tpl.render(request=dummy_request, **info)).cssselect
+    assert 'nav__user-avatar' in css('svg')[0].attrib['class']
 
     # pic
     info['user']['picture'] = '/picture.jpg'
 
-    css = lxml.html.fromstring(tpl.render(**info)).cssselect
-    assert css('span .main-nav__community__icon')[0].attrib['style'] == (
+    css = lxml.html.fromstring(
+        tpl.render(request=dummy_request, **info)).cssselect
+    assert css('.nav__user-picture')[0].attrib['style'] == (
         'background-image: url(/picture.jpg)')
-    assert css('a')[0].attrib['href'] == '/profile'
-    assert css('a')[0].attrib['id'] == 'hp.zm.topnav.community.account'
-    assert css('a')[1].attrib['href'] == '/logout'
-    assert css('a')[1].attrib['id'] == 'hp.zm.topnav.community.logout'
+    links = css('#user-menu a')
+    assert links[0].attrib['href'] == '/profile'
+    assert links[1].attrib['href'] == '/logout'
 
 
 def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):
@@ -734,3 +670,24 @@ def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):
 
     css = lxml.html.fromstring(tpl.render(**info)).cssselect
     assert css('a')[0].attrib['href'] == '/login'
+
+
+def test_schema_org_publisher_mark_up(testbrowser):
+    # @see https://developers.google.com/structured-data/rich-snippets/articles
+    # #article_markup_properties
+    browser = testbrowser('/artikel/01')
+    publisher = browser.cssselect('[itemprop="publisher"]')[0]
+    logo = publisher.cssselect('[itemprop="logo"]')[0]
+
+    # check Organization
+    assert publisher.get('itemtype') == 'http://schema.org/Organization'
+    assert publisher.cssselect('[itemprop="name"]')[0].get('content') == (
+        'ZEITmagazin')
+    assert publisher.cssselect('[itemprop="url"]')[0].get('href') == (
+        'http://localhost/zeit-magazin/index')
+    assert logo.get('itemtype') == 'http://schema.org/ImageObject'
+    assert logo.cssselect('[itemprop="url"]')[0].get('content') == (
+        'http://localhost/static/latest/images/'
+        'structured-data-publisher-logo-zmo.png')
+    assert logo.cssselect('[itemprop="width"]')[0].get('content') == '600'
+    assert logo.cssselect('[itemprop="height"]')[0].get('content') == '56'

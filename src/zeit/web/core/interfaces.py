@@ -115,21 +115,6 @@ class INextread(IFrontendBlock):
     """Nextread teaser block must be similar to zeit.content.cp.TeaserBlock"""
 
 
-class ITeaser(zope.interface.Interface):
-
-    image = zope.interface.Attribute('image')
-    gallery = zope.interface.Attribute('gallery')
-    video = zope.interface.Attribute('video')
-    context = zope.interface.Attribute('context')
-
-
-class ITeaserSequence(zope.interface.Interface):
-
-    context = zope.interface.Attribute('context')
-    sequence = zope.interface.Attribute('sequence')
-    refs = zope.interface.Attribute('refs')
-
-
 class ISettings(pyramid.interfaces.ISettings):
     """Dictionary of application configuration settings.
 
@@ -241,6 +226,11 @@ class IPagination(zope.interface.Interface):
     total_page = zope.interface.Attribute(
         'Number of pages available.')
     pagination = zope.interface.Attribute('A list of page numbers.')
+    pagination_info = zope.interface.Attribute(
+        'Some metada, such as label for pages or buttons in the pagination')
+
+    def page_info(page_nr):
+        """Get information of the page items in the pagination object."""
 
 
 class IDetailedContentType(zope.interface.Interface):
@@ -249,3 +239,26 @@ class IDetailedContentType(zope.interface.Interface):
 
     The format is a dotted string, e.g. 'centerpage.topicpage.person'.
     """
+
+
+class ICommunity(zope.interface.Interface):
+    """Represents the comment system."""
+
+    def get_thread(unique_id, sort='asc', page=0,
+                   cid=None, parent_cid=None, local_offset=0):
+        pass
+
+    def get_comment(unique_id, cid):
+        pass
+
+    def get_comment_count(unique_id):
+        pass
+
+    def get_comment_counts(*unique_ids):
+        pass
+
+    def get_user_comments(author, page=1, rows=6, sort='DESC'):
+        pass
+
+    def is_healthy():
+        pass

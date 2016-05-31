@@ -1,8 +1,32 @@
-.cp-area
-	+pie-clearfix
+// use same padding as teaser-wide-small, because pager is used below these
+.cp-area--zco-ranking > .pager
+	padding-left: $page-padding--small
+	padding-right: $page-padding--small
 
 +respond-min($break-tablet-min)
-	.cp-area
+	.cp-region
+		+pie-clearfix
+
 		&--duo,
 		&--trio
-			padding: $cp-padding
+			padding: 0 $cp-padding
+
+	.cp-area
+		&--major
+			float: left
+			width: 66.66%
+		&--duo
+			float: left
+			width: 50%
+		&--trio,
+		&--minor
+			float: left
+			width: 33.33%
+		&--zco-ranking
+			margin: 0 auto
+			max-width: $medium-content-width
+
+			// use same padding as teaser-wide-small, because pager is used below these
+			> .pager
+				padding-left: $cp-padding
+				padding-right: $cp-padding

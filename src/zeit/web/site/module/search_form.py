@@ -2,17 +2,10 @@ import collections
 import logging
 
 from zeit.solr import query as lq
-import zeit.cms.content.property
-import zeit.content.cp.automatic
-import zeit.content.cp.interfaces
 import zeit.find.daterange
-import zeit.find.search
-import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.centerpage
-import zeit.web.core.template
-import zeit.web.site.area.ranking
 
 
 log = logging.getLogger(__name__)
@@ -90,7 +83,7 @@ class Form(zeit.web.core.centerpage.Module):
         if self.query in (None, lq.any_value()):
             return 'aktuell'
         order = self.request.GET.get('sort')
-        return order in ORDERS and order or 'relevanz'
+        return order if order in ORDERS else 'aktuell'
 
     @zeit.web.reify
     def raw_order(self):

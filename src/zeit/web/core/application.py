@@ -1,3 +1,5 @@
+from __future__ import absolute_import
+
 import ast
 import logging
 import os.path
@@ -5,7 +7,6 @@ import re
 import urlparse
 
 import bugsnag
-import bugsnag.wsgi.middleware
 import jinja2
 import jinja2.ext
 import pkg_resources
@@ -34,6 +35,7 @@ import zeit.connector
 
 import zeit.web
 import zeit.web.core
+import zeit.web.core.bugsnag
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
@@ -66,7 +68,7 @@ class Application(object):
         self.configure()
         app = self.config.make_wsgi_app()
         # TODO: Try to move bugsnag middleware config to web.ini
-        return bugsnag.wsgi.middleware.BugsnagMiddleware(app)
+        return zeit.web.core.bugsnag.BugsnagMiddleware(app)
 
     def load_sso_key(self, keyfile):
         if keyfile:
@@ -88,6 +90,8 @@ class Application(object):
         )
 
     def configure_pyramid(self):
+        log.debug('Configuring Pyramid')
+
         registry = pyramid.registry.Registry(
             bases=(zope.component.getGlobalSiteManager(),))
 
@@ -118,7 +122,6 @@ class Application(object):
         if self.settings.get('zodbconn.uri'):
             self.config.include('pyramid_zodbconn')
 
-        log.debug('Configuring Pyramid')
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('campus_framebuilder', '/campus/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
@@ -136,6 +139,8 @@ class Application(object):
             '/-comments/invalidate_maintenance')
         config.add_route('newsfeed', '/newsfeed/*traverse')
         config.add_route('home', '/')
+        config.add_route('home-campus', '/campus/')
+        config.add_route('home-zmo', '/zeit-magazin/')
         config.add_route('login_state', '/login-state')
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-image', '/spektrum-image/*path')
@@ -203,7 +208,6 @@ class Application(object):
         """Sets up names and filters that will be available for all
         templates.
         """
-        log.debug('Configuring Jinja')
         self.config.include('pyramid_jinja2')
         self.config.add_renderer('.html', pyramid_jinja2.renderer_factory)
         self.config.add_jinja2_extension(
@@ -293,7 +297,7 @@ class Application(object):
         """Local development environments use an overrides zcml to allow
         us to mock external dependencies or tweak the zope product config.
         """
-        if self.settings.get('dev_environment'):
+        if self.settings.get('mock_solr'):
             zope.configuration.xmlconfig.includeOverrides(
                 context, package=zeit.web.core, file='overrides.zcml')
 
@@ -385,8 +389,9 @@ def join_url_path(base, path):
 
 def configure_host(key):
     def wrapped(request):
-        prefix = request.registry.settings.get(key + '_prefix', '')
-        version = request.registry.settings.get('version', 'latest')
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        prefix = conf.get(key + '_prefix', '')
+        version = conf.get('version', 'latest')
         prefix = prefix.format(version=version)
         if not prefix.startswith('http'):
             prefix = join_url_path(
@@ -505,10 +510,13 @@ zeit.cms.repository.folder.Folder.__parent__ = property(
 requests.sessions.get_netrc_auth = lambda *args, **kw: None
 
 
-# Allow pysolr error handling to deal with non-ascii HTML error pages
+# Allow pysolr error handling to deal with non-ascii HTML error pages,
+# see <https://bugs.python.org/issue11033>.
 def scrape_response_nonascii(self, headers, response):
     if isinstance(response, str):
         response = response.decode('utf-8')
+    if isinstance(response, unicode):
+        response = response.encode('ascii', errors='ignore')
     return original_scrape_response(self, headers, response)
 original_scrape_response = pysolr.Solr._scrape_response
 pysolr.Solr._scrape_response = scrape_response_nonascii

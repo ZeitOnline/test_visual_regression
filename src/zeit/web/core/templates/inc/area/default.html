@@ -6,12 +6,15 @@
     {% block before_module_list %}{% endblock %}
     {% block module_list %}
         {% for module in area.values() | map('get_module') -%}
+            {# XXX Is using the rather teaser-specific mechanisms of first_child
+               and get_layout for all modules really such a good idea? #}
             {% set teaser = module | first_child %}
             {% set layout = module | get_layout %}
             {% set journalistic_format = module | get_journalistic_format %}
 
             {# ZON-2011: if there is no author image on columns, render as default teaser #}
-            {% if journalistic_format == 'column' and not get_column_image(teaser) %}
+            {# ZON-3039: if teaser is zco content, render as default teaser #}
+            {% if journalistic_format == 'column' and (not get_column_image(teaser) or teaser is zco_content) %}
                 {% set journalistic_format = None %}
             {% endif %}
 

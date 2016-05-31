@@ -16,6 +16,12 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         main: function( $element ) {
 
+            // in case we are inside a data-ct-area element, this is redundant
+            // e.g. ZEIT Campus sharing links
+            if ( $element.closest( '[data-ct-area]' ).length ) {
+                return;
+            }
+
             // in case we already have a complete ID, we do not need to calculate it
             if ( $element.data( 'id' ) ) {
                 return this.useDataId( $element );
@@ -59,7 +65,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             }
 
             data = [
-                getBreakpoint(),
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. verortung
                 $area.index() + 1, // area bzw. reihe
                 $area.find( 'article, aside' ).index( $article ) + 1, // module bzw. spalte
@@ -77,9 +82,63 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         useDataId: function( $element ) {
             var data = [
-                getBreakpoint(),
                 $element.data( 'id' ),
                 $element.attr( 'href' ) // url
+            ];
+            return formatTrackingData( data );
+        },
+        /**
+         * track links inside parents with appropriate data attributes
+         * @param  {object} $element jQuery collection with the link that was clicked
+         * @return {string}          formatted linkId-string for webtrekk call
+         */
+        useDataArea: function( $element, event ) {
+            var $area = $( event.delegateTarget ),
+                $row = $element.closest( '[data-ct-row]' ),
+                row = $row.data( 'ct-row' ),
+                $column = $element.closest( '[data-ct-column]', $row ),
+                url = $element.attr( 'href' ),
+                column = '',
+                subcolumn = '',
+                $needle = $element,
+                data;
+
+            if ( $column.length ) {
+                // use data-ct-column value or inherit parent value if none set
+                if ( $column.data( 'ct-column' ).length !== 0 ) { // include any numbers and strings
+                    column = $column.data( 'ct-column' );
+                } else {
+                    $needle = $column.parent().find( 'a' ).first();
+                }
+
+                subcolumn = $column.find( 'a' ).index( $element ) + 1 || 1;
+            }
+
+            if ( column === '' ) {
+                // column = $row.find( 'a' ).not( $row.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
+                // needed, if there are more containers with the same row value
+                column = $area.find( '[data-ct-row="' + row + '"] a' ).not(
+                    $area.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
+            }
+
+            if ( $element.attr( 'aria-controls' ) ) {
+                // special treatment for one ZEIT Campus menu link >:(
+                if ( !( Zeit.isMobileView() && $element.data( 'follow-mobile' ) ) ) {
+                    url = '#' + $element.attr( 'aria-controls' );
+                }
+            }
+
+            data = [
+                $area.data( 'ct-area' ), // verortung
+                row, // reihe
+                column, // spalte
+                subcolumn, // subreihe
+                sanitizeString(
+                    $element.data( 'ct-label' ) ||
+                    $.trim( $element.contents().first().text() ) ||
+                    $element.children().first().text() ||
+                    $element.text() ), // bezeichner
+                url // url
             ];
             return formatTrackingData( data );
         },
@@ -91,7 +150,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         useDataTracking: function( $element ) {
             var trackingData = $element.data( 'tracking' ).split( '|' ),
                 data = [
-                    getBreakpoint(),
                     trackingData[0],
                     trackingData[1] // url
                 ];
@@ -116,7 +174,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             }
 
             data = [
-                getBreakpoint(),
                 'parquet', // Verortung
                 $element.index( '.parquet-meta a' ) + 1, // Reihe (insgesamt, nicht aktueller Riegel)
                 '1', // Spalte
@@ -134,13 +191,12 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         linkInArticleContent: function( $element, $page ) {
-            var $allParagraphsOnPage = $page.children( 'p' ),
-                $currentParagraph = $element.closest( 'p' ),
+            var $currentParagraph =  $element.closest( 'p, [data-clicktracking]', $page ),
                 currentPageNumber = $page.data( 'page-number' ) || 0,
-                currentParagraphNumber = $allParagraphsOnPage.index( $currentParagraph ) + 1,
+                currentParagraphNumber = $currentParagraph.prevAll( 'p' ).length + 1,
+                trackType = $element.closest( '[data-clicktracking]' ).data( 'clicktracking' ) || 'intext',
                 data = [
-                    getBreakpoint(),
-                    'intext', // [verortung] Immer (intext)
+                    trackType, // [verortung]
                     currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
                     '', // [spalte] leer lassen
                     '', // [subreihe] leer lassen
@@ -154,7 +210,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         linkInGalleryContent: function( $element, $gallery ) {
             var imgnumber = $gallery.find( '.bx-pager' ).text().split( ' / ' )[0],
                 data = [
-                    getBreakpoint(),
                     'gallery', // [verortung]
                     $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? '1' : '2',
                     $element[ 0 ].className.indexOf( 'links' ) < 0 ? '2' : '1', // [spalte]
@@ -166,7 +221,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
     },
     clickTrack = function( event ) {
-        var trackingData = trackElement[ event.data.funcName ]( $( this ) );
+        var trackingData = trackElement[ event.data.funcName ]( $( this ), event );
 
         if ( debugMode ) {
             event.preventDefault();
@@ -180,7 +235,8 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
     },
     formatTrackingData = function( trackingData ) {
-        var url = trackingData.pop(),
+        var length = trackingData.unshift( Zeit.breakpoint.getTrackingBreakpoint() ),
+            url = trackingData.pop(),
             slug = trackingData.join( '.' );
 
         if ( url ) {
@@ -188,18 +244,16 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             // For some links, we want to preserve the GET parameters.
             // Otherwise, remove them!
-            if ( !/\.(social|studiumbox)\./.test( slug ) ) {
+            if ( slug.indexOf( '.social.' ) !== -1 ) {
+                url = $( 'meta[property="og:url"]' );
+                url = url.length ?
+                    url.attr( 'content' ).replace( /http(s)?:\/\//, '' ) :
+                    window.location.host + window.location.pathname;
+            } else if ( slug.indexOf( '.studiumbox.' ) === -1 ) {
                 url = url.split( '?' )[0];
             }
         }
         return slug + '|' + url;
-    },
-    /**
-     * returns the current breakpoint
-     * @return {string}          breakpoint for webtrekk
-     */
-    getBreakpoint = function() {
-        return Zeit.breakpoint.getTrackingBreakpoint();
     },
     /**
      * returns a string that is webtrekk-safe
@@ -229,7 +283,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             .replace( /^_|_$/g, '' );
     },
 
-    debugMode = document.location.search.indexOf( 'webtrekk-clicktracking-debug' ) > -1;
+    debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
 
     return {
         init: function() {
@@ -257,9 +311,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                         [
                          '.main_nav',
                          '.header__tags',
-                         '.footer',
-                         '.article-interactions',
-                         '.article-tags',
                          '.section-heading',
                          '.snapshot__media',
                          '#servicebox',
@@ -268,6 +319,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                          '.partnerbox'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
+                    ],
+                    useDataArea: [
+                        '[data-ct-area]',
+                        'a:not([data-wt-click])'
                     ],
                     parquetMeta: [
                         '.parquet-meta',

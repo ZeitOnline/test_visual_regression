@@ -2,7 +2,7 @@
 $gutter:				remify(20px)
 $page-padding:			remify(20px)
 $page-padding--small:	remify(14px)
-$cp-padding:			remify(10px)
+$cp-padding:			$gutter / 2
 $vertical-space:		remify(20px)
 $vertical-space--small:	remify(14px)
 
@@ -11,23 +11,23 @@ $vertical-space--small:	remify(14px)
 // semantic colors
 $primary-color: #252525
 $zco-charcoal: #313131
-$zco-accent: #005AFF
+$zco-grey: #e6edee
 
 $color-article-primary: #005aff
-$color-article-secondary: #f8e71c
+$color-article-secondary: #f6e518
 $color-topics-primary: $color-article-primary // was #943fff
 $color-topics-secondary: $color-article-secondary // was #ffa500
 $color-tools-primary: #1cdcb5
 $color-tools-secondary: #f54a2b
-$color-community-primary: #f55697
+$color-community-primary: #e81c72
 $color-community-secondary: #00e6e6
 $color-body-bg: #ddd
 $color-body-text: #333
-$color-background: #e6edee
-$color-background--light: #f0f4f5
+$color-background: $zco-grey !default
+$color-background--light: #f0f4f5 // ~ rgba($zco-grey, 0.6)
 $color-background--dark: #252525
-$color-page-bg: #fff
-$color-text: #313131
+$color-page-bg: #fff !default
+$color-text: $zco-charcoal
 $color-text--light: #707070
 $color-text-highlighted: #f00
 $color-text--on-dark: #eee
@@ -36,17 +36,24 @@ $color-link--visited: $color-article-primary
 $color-link--hover: $color-text
 $color-link--active: $color-text
 $color-link--focus: $color-text
-$color-input: #0f0
-$color-input-bg: #0f0
-$color-input-border: #0f0
-$color-input--focus: #0f0
-$color-input-bg--focus: #0f0
-$color-input-border--focus: #0f0
-$color-input--error: #0f0
-$color-input-bg--error: #0f0
-$color-input-border--error: #0f0
+$color-input: $zco-charcoal
+$color-input-bg: $zco-grey
+$color-input-border: #ddd
+$color-input--focus: $zco-charcoal
+$color-input-bg--focus: $zco-grey
+$color-input-border--focus: #ddd
+$color-input--error: $color-text-highlighted
+$color-input-bg--error: $zco-grey
+$color-input-border--error: $color-text-highlighted
 $color-border: #ddd
-$color-tools-bg: #1cdcb5
-$color-tools-text: #f54a2b
-$color-teaser-meta: #707070
+$color-separator-opacity: .5
 $color-separator: #ccc
+$color-facebook: #3b5998
+$footer-color-border: #444
+
+// font zoom sizes
+$font-factor: 1 !default
+$title-factor: 1 !default
+
+// default article link style
+$copytext-link-style: 'zco'

@@ -1,0 +1,85 @@
+.teaser-border
+	margin: $page-padding--small $page-padding--small $vertical-space
+
+	&__container
+		padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
+		position: relative
+
+	&__link
+		+display-flex
+		+font-smoothing
+		background-color: $color-topics-primary
+		bottom: 0
+		color: #fff
+		left: 0
+		position: absolute
+		right: 0
+		top: 0
+		+on-interaction
+			background-color: $color-background--dark
+			color: $color-topics-secondary
+
+	&__heading
+		@extend %font-beckett
+		+display-flex
+		+justify-content(center)
+		+align-items(center)
+		+flex(1 1 auto)
+		$border-width: 3px
+		$arrow-size: 10px
+		background-color: inherit // needed for the "gap" after the border-arrow
+		border: $border-width solid currentColor
+		+scaled-font(26px, $title-factor)
+		margin: remify(15px)
+		position: relative
+		&:before
+			background-color: inherit
+			bottom: -$border-width
+			content: ""
+			height: $border-width
+			left: calc(50% - 9px)
+			position: absolute
+			width: 18px
+		&:after
+			+transform(rotate(45deg))
+			border-color: currentColor
+			border-style: solid
+			border-width: $border-width $border-width 0 0
+			content: ""
+			height: remify($arrow-size)
+			bottom: remify($arrow-size/2 + $border-width) * -1
+			position: absolute
+			left: calc(50% - #{$arrow-size + $border-width + 9px})
+			width: remify($arrow-size)
+
+	// TABLET
+	+respond-min($break-tablet-min)
+		margin: 0
+		padding: $cp-padding
+
+		&__container
+			height: remify(200px)
+			height: 26vw
+			max-height: remify(266px)
+			padding: 0
+
+		&__heading
+			+scaled-font(36px, $title-factor)
+			margin: remify(20px)
+			&:after
+				$border-width: 3px
+				$arrow-size: 12px
+				height: remify($arrow-size)
+				bottom: remify($arrow-size/2 + $border-width) * -1
+				left: calc(50% - #{$arrow-size + $border-width + 9px})
+				width: remify($arrow-size)
+
+	// DESKTOP
+	+respond-min($break-desktop-min)
+
+		&__container
+			height: remify(266px)
+
+		&__heading
+			+scaled-font(42px, $title-factor)
+			margin: remify(25px)

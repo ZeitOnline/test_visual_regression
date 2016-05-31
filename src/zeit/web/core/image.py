@@ -50,7 +50,6 @@ class BaseImage(object):
 class Image(BaseImage):
 
     def __init__(self, image):
-        self.align = None
         self.image = image
         self.image_pattern = 'default'
         self.layout = ''
@@ -76,7 +75,6 @@ class Image(BaseImage):
 class TeaserImage(BaseImage):
 
     def __init__(self, group, image):
-        self.align = None
         self.image = image
         self.image_group = group.uniqueId
         self.image_pattern = 'default'
@@ -103,7 +101,11 @@ class VariantImage(object):
 
         self.group = zeit.content.image.interfaces.IImageGroup(variant)
         self.image_group = self.group.uniqueId
-        self.path = self.group.variant_url(self.image_pattern)
+        self.path = self.group.variant_url(
+            self.image_pattern,
+            # XXX Slightly kludgy: fill_color is not a property of Variant but
+            # only transported through there by z.w.core.template.get_variant.
+            fill_color=getattr(variant, 'fill_color', None))
         self.fallback_path = self.group.variant_url(
             self.image_pattern,
             variant.fallback_width,

@@ -1,8 +1,9 @@
 {% extends 'zeit.web.campus:templates/layout.html' %}
 
 {% block main %}
+    {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
-    <article class="{{ 'article' | with_mods(view.article_layout, view | block_type) }}" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
+    <article class="{{ 'article' | with_mods(view.article_layout, view | block_type) }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         {% block article_heading -%}
             {% include ["zeit.web.campus:templates/inc/article-header/{}.html".format(view.article_layout),
@@ -18,7 +19,15 @@
         </div>
         {% endblock article_body %}
         {% block article_footer %}
-        <footer class="article-footer article__item">
+        <footer class="article-footer article__item" data-ct-area="articlebottom">
+            {% block article_interactions %}
+            <div class="article-interactions">
+                {% include "zeit.web.campus:templates/inc/article/sharing-menu.tpl" %}
+                {% block print %}
+                {% endblock %}
+            </div>
+            {% endblock %}
+
             {% block article_tags %}
                 {% include "zeit.web.core:templates/inc/article/tags.html" %}
             {% endblock %}
@@ -32,5 +41,11 @@
             {% include "zeit.web.campus:templates/inc/article/nextread.html" %}
         {% endif %}
     {% endblock %}
+
+    {% block comments %}
+        {% profile %}
+            {% include "zeit.web.core:templates/inc/article/comments.html" %}
+        {% endprofile %}
+    {% endblock comments %}
 
 {% endblock main %}

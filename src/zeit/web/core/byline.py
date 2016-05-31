@@ -168,3 +168,11 @@ class ProxyByline(Byline):
             self.from_()
             authors = tuple(('text', a) for a in authors)
             self.append(('enum', authors))
+
+
+@grokcore.component.adapter(
+    zeit.web.core.utils.ILazyProxy, name='author')
+@grokcore.component.implementer(IByline)
+class ProxyAuthorByline(ProxyByline, StructuredDataByline):
+
+    pass

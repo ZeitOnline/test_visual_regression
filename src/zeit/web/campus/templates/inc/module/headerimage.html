@@ -1,0 +1,18 @@
+<header class="header-image{% if module.visible_mobile == False %} mobile-hidden{% endif %}">
+    {%- require image = get_image(module, fallback=False, variant_id='wide' if module.animate else 'cinema') -%}
+        {%- set module_layout = "header-image" -%}
+        {%- include "zeit.web.campus:templates/inc/asset/image_header.tpl" -%}
+    {%- endrequire -%}
+
+    {% if view.is_advertorial %}
+    <div class="header-advertorial__heading">
+        <span class="header-advertorial__kicker">{{ module.supertitle }}</span>
+        <span class="header-advertorial__title">{{ module.title }}</span>
+    </div>
+    {% else %}
+    <h1 class="{{ 'header-image__heading' | with_mods('overlay' if image) }}">
+        <span class="header-image__kicker">{{ module.supertitle }}</span>
+    </h1>
+    {% endif %}
+</header>
+

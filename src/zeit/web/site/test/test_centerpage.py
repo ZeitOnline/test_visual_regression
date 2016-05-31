@@ -162,8 +162,8 @@ def test_dynamic_centerpage_collection_should_output_teasers(
 
 def test_dynamic_centerpage_should_be_paginatable(testbrowser, datasolr):
     browser = testbrowser('/dynamic/angela-merkel?p=2')
-    text = browser.cssselect('.pager__page.pager__page--current span')[0].text
-    assert text == '2'
+    current = browser.cssselect('.pager__page--current')[0]
+    assert current.text_content().strip() == '2'
 
 
 def test_pagination_should_be_validated(testbrowser):
@@ -269,3 +269,66 @@ def test_hp_shows_popover(selenium_driver, testserver):
     assert wrap.is_displayed()
     assert bg.is_displayed()
     assert box.is_displayed()
+
+
+def test_zon_campus_teaser_fullwidth_has_campus_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-campus').cssselect
+    svg = select('.teaser-fullwidth .teaser-fullwidth__kicker-logo--zco')
+    assert svg[0].xpath('title')[0].text == 'ZEIT Campus'
+
+
+def test_zon_campus_teaser_large_has_campus_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-campus').cssselect
+    teaser = select('.teaser-large')
+    svg = select('.teaser-large .teaser-large__kicker-logo--zco')
+    # 4 teaser, but only 3 sighnets
+    assert len(teaser) == 4
+    assert len(svg) == 3
+    # main
+    assert svg[0].xpath('title')[0].text == 'ZEIT Campus'
+    # column
+    assert svg[1].xpath('title')[0].text == 'ZEIT Campus'
+    # parquet
+    assert svg[2].xpath('title')[0].text == 'ZEIT Campus'
+
+
+def test_zon_campus_teaser_small_has_campus_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-campus').cssselect
+    teaser = select('.teaser-small')
+    svg = select('.teaser-small .teaser-small__kicker-logo--zco')
+    # 4 teaser, but only 3 sighnets
+    assert len(teaser) == 4
+    assert len(svg) == 3
+    # main
+    assert svg[0].xpath('title')[0].text == 'ZEIT Campus'
+    # column
+    assert svg[1].xpath('title')[0].text == 'ZEIT Campus'
+    # parquet
+    assert svg[2].xpath('title')[0].text == 'ZEIT Campus'
+
+
+def test_zon_campus_teaser_column_has_default_layout(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-campus').cssselect
+    assert len(select('.teaser-large-column')) == 0
+    assert len(select('.teaser-small-column')) == 0
+    assert len(select('.teaser-minor-column')) == 0
+
+
+def test_zon_campus_teaser_small_minor_has_campus_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-campus').cssselect
+    teaser = '.teaser-small-minor'
+    logo = '.teaser-small-minor__kicker-logo--zco'
+    svg = select('{} {}'.format(teaser, logo))
+    assert svg[0].xpath('title')[0].text == 'ZEIT Campus'
+
+
+def test_zon_campus_teaser_topic_has_campus_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-campus').cssselect
+    teaser = select('.teaser-topic-item')
+    svg = select('.teaser-topic-item__kicker-logo--zco')
+    # 4 teaser, but only 3 sighnets
+    assert len(teaser) == 3
+    assert len(svg) == 3
+    assert svg[0].xpath('title')[0].text == 'ZEIT Campus'
+    assert svg[1].xpath('title')[0].text == 'ZEIT Campus'
+    assert svg[2].xpath('title')[0].text == 'ZEIT Campus'

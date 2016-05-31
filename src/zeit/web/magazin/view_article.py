@@ -38,23 +38,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     def comments(self):
         if not self.show_commentthread:
             return
-
-        try:
-            return zeit.web.core.comments.get_thread(
-                self.context.uniqueId, sort='desc')
-        except zeit.web.core.comments.ThreadNotLoadable:
-            self.comments_loadable = False
-            return
-
-    @zeit.web.reify
-    def nextread(self):
-        nextread = super(Article, self).nextread
-        # XXX Ugly hack to register CRs.
-        if nextread.layout.id != 'minimal':
-            for i in zeit.web.core.interfaces.ITeaserSequence(nextread):
-                i.image and self._copyrights.setdefault(
-                    i.image.image_group, i.image)
-        return nextread
+        thread = zeit.web.core.comments.get_thread(
+            self.context.uniqueId, sort='desc')
+        if thread and thread.get('request_failed'):
+            return None
+        return thread
 
     @zeit.web.reify
     def genre(self):
@@ -77,7 +65,6 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
                           renderer='templates/longform.html')
 class LongformArticle(Article):
 
-    main_nav_full_width = True
     is_longform = True
     pagetitle_suffix = u' | ZEIT ONLINE'
 
@@ -85,10 +72,7 @@ class LongformArticle(Article):
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            img = self._create_obj(zeit.web.core.block.HeaderImage, obj)
-            if img:
-                self._copyrights.setdefault(img.uniqueId, img)
-            return img
+            return self._create_obj(zeit.web.core.block.HeaderImage, obj)
 
     @zeit.web.reify
     def adwords(self):
@@ -112,24 +96,7 @@ class LongformArticle(Article):
 @pyramid.view.view_config(context=zeit.web.core.article.IFeatureLongform,
                           renderer='templates/feature_longform.html')
 class FeatureLongform(LongformArticle):
-    @zeit.web.reify
-    def breadcrumb(self):
-        crumb = super(FeatureLongform, self).breadcrumb
-        items = self.navigation
-        crumb_list = crumb[:1]
-        if self.ressort in items:
-            item = items[self.ressort]
-            href = zeit.web.core.template.create_url(
-                None, item.href, self.request)
-            crumb_list.append((item.text, href))
-        if self.sub_ressort in items:
-            item = items[self.sub_ressort]
-            href = zeit.web.core.template.create_url(
-                None, item.href, self.request)
-            crumb_list.append((item.text, href))
-        if self.title:
-            crumb_list.append((self.title, ''))
-        return crumb_list
+    pass
 
 
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle,
@@ -161,7 +128,8 @@ class PhotoclusterArticle(Article):
 
 @pyramid.view.view_config(route_name='amp',
                           renderer='templates/amp/article.html')
-class AcceleratedMobilePageArticle(Article):
+class AcceleratedMobilePageArticle(
+        zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
     pass
 
 

@@ -13,22 +13,16 @@ def test_video_html(selenium_driver, testserver):
     driver.get('%s/artikel/01' % testserver.url)
     for video in driver.find_elements_by_tag_name('figure'):
         if video.get_attribute("data-video"):
-            still = video.find_element_by_tag_name("div")
+            still = video.find_element_by_class_name("video__still")
             img = video.find_element_by_tag_name("img")
-            but = video.find_element_by_tag_name("span")
-            cap = video.find_element_by_tag_name("figcaption")
+            button = video.find_element_by_css_selector(".video__button")
+            caption = video.find_element_by_tag_name("figcaption")
             # before click
-            assert 'video__still' == unicode(still.get_attribute("class"))
+            assert still.tag_name == 'div'
             assert 'figure__media' == unicode(img.get_attribute("class"))
-            assert 'figure__caption' == unicode(cap.get_attribute("class"))
-            try:
-                assert 'video__button' == unicode(
-                    but.get_attribute("class"))
-            except:
-                assert 'video__button icon-playbutton' == unicode(
-                    but.get_attribute("class"))
+            assert 'figure__caption' == unicode(caption.get_attribute("class"))
             # after click
-            img.click()
+            button.click()
             wrap = video.find_element_by_class_name("video__wrapper")
             try:
                 wrap.find_element_by_tag_name("object")

@@ -5,11 +5,13 @@
 	{%- if class == 'primary-nav' %} itemscope itemtype="http://schema.org/SiteNavigationElement"{% endif %}>
 {% for section in items.values() %}
 	{% set id = section.item_id | pop_from_dotted_name -%}
+    {% set section_id = id if id else section.item_id %}
 	<li class="{{ class }}__item
 		{%- if section.label %} {{ class }}__item--has-label{% endif %}" data-id="{{ id if id else section.item_id }}"
 		{%- if section | length %} data-feature="dropdown"{% endif %}
 		{%- if section.label %} data-label="{{ section.label }}"{% endif %}>
-		<a class="{{ class }}__link{% if id in (view.ressort, view.sub_ressort) %} {{ class }}__link--current{% endif %}"
+		<a class="{{ class }}__link{% if id in (view.ressort, view.sub_ressort) %} {{ class }}__link--current{% endif %}{%-
+        if toggles('campus_new_label') and section_id == 'campus' %} {{ class }}__link--new-campus-labeled{% endif %}"
 			href="{{ section.href | create_url }}"
 			data-id="{{ section.item_id }}"
 			{%- if site_navigation_element %} itemprop="url"{% endif %}>

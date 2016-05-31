@@ -400,7 +400,7 @@ def test_snapshot_should_display_correct_teaser_title(testbrowser):
 
 def test_snapshot_should_display_correct_image_caption(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
-    caption = browser.cssselect('.snapshot-caption')[0]
+    caption = browser.cssselect('.snapshot__text')[0]
     assert (caption.text.strip() ==
             u'Ford präsentiert auf der Automesse in Detroit'
             u' den neuen Pick-up F-150.')
@@ -408,16 +408,9 @@ def test_snapshot_should_display_correct_image_caption(testbrowser):
 
 def test_snapshot_should_display_copyright_with_nonbreaking_space(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
-    copyright = browser.cssselect('.snapshot-caption__item')[0]
-    assert copyright.text.strip() == u'\xa9\xa0Xinhua/Zhang Wenkui/Reuters'
-
-
-def test_snapshot_should_have_description_text(testbrowser):
-    browser = testbrowser('/zeit-online/teaser-gallery-setup')
-    caption = browser.cssselect('.snapshot-caption')[0]
-    assert (caption.text.strip() ==
-            u'Ford präsentiert auf der Automesse in Detroit'
-            u' den neuen Pick-up F-150.')
+    copyright = browser.cssselect('.snapshot__copyright')[0]
+    assert (copyright.text_content().strip() ==
+            u'\xa9\xa0Xinhua/Zhang Wenkui/Reuters')
 
 
 def test_small_teaser_without_image_has_no_padding_left(
@@ -566,7 +559,7 @@ def test_module_printbox_should_contain_teaser_image(
     assert isinstance(printbox.image, zeit.content.image.image.RepositoryImage)
 
 
-def test_homepage_indentifies_itself_as_homepage(testserver):
+def test_homepage_identifies_itself_as_homepage(testserver):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     request = pyramid.testing.DummyRequest()
@@ -851,11 +844,18 @@ def test_newsticker_should_have_expected_dom(testbrowser, datasolr):
     assert len(teaser) == 8
     assert len(teaser[0].cssselect('time')) == 1
     assert len(
-        teaser[0].cssselect('.newsteaser__text a .newsteaser__kicker')) == 1
+        teaser[0].cssselect('a .newsteaser__text .newsteaser__kicker')) == 1
     assert len(
-        teaser[0].cssselect('.newsteaser__text a .newsteaser__title')) == 1
+        teaser[0].cssselect('a .newsteaser__text .newsteaser__title')) == 1
     assert len(
-        teaser[0].cssselect('.newsteaser__text .newsteaser__product')) == 1
+        teaser[0].cssselect('a .newsteaser__text .newsteaser__product')) == 1
+
+
+def test_newspage_has_expected_elements(testbrowser, datasolr):
+    browser = testbrowser('/news/index')
+    area = browser.cssselect('.cp-area--overview')[0]
+    assert len(area.cssselect('.pager--overview')) == 1
+    assert len(area.cssselect('.newsteaser')) > 1
 
 
 def test_servicebox_present_in_wide_breakpoints(
@@ -1070,7 +1070,7 @@ def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
         assert not slides[3].is_displayed()
 
 
-def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
+def test_non_navigation_centerpage_should_have_no_breadcrumbs(
         application, monkeypatch):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
@@ -1078,8 +1078,7 @@ def test_non_navigation_centerpage_should_have_minimal_breadcrumbs(
         zeit.web.site.view_centerpage.Centerpage, u'ressort', u'moep')
     view = zeit.web.site.view_centerpage.Centerpage(
         context, pyramid.testing.DummyRequest())
-    assert view.breadcrumbs == [
-        ('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
+    assert view.breadcrumbs == []
 
 
 def test_homepage_should_have_no_breadcrumbs(
@@ -1094,7 +1093,7 @@ def test_breadcrumbs_should_handle_non_ascii(application, monkeypatch):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
     monkeypatch.setattr(
-        zeit.content.cp.centerpage.CenterPage, u'title', u'umläut')
+        zeit.content.cp.centerpage.CenterPage, u'supertitle', u'umläut')
     monkeypatch.setattr(
         zeit.content.cp.centerpage.CenterPage, u'type', u'topicpage')
     view = zeit.web.site.view_centerpage.Centerpage(
@@ -1598,14 +1597,12 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
     dropdown.find_element_by_xpath(
         "//option[text()='BWL']").click()
     form.submit()
-    assert ('http://ranking.zeit.de/che2015/de/rankingunion/show?'
+    assert ('http://ranking.zeit.de/che2016/de/rankingunion/show?'
             'esb=24&ab=3&hstyp=1&subfach=&wt_zmc=fix.int.zonpmr.zeitde'
             '.funktionsbox_studium.che.teaser.button.'
             '&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
-            '&utm_content=che_teaser_button_x#&left_f1=23'
-            '&left_f2=62&left_f3=525&left_f4=363&left_f5=14'
-            '&order=alpha&unionview=table&subfach=' in driver.current_url)
+            '&utm_content=che_teaser_button_x' in driver.current_url)
 
 
 def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
@@ -1619,7 +1616,7 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
     button = (box.find_element_by_class_name('studiumbox__content--clone')
               .find_element_by_class_name('studiumbox__button'))
     button.click()
-    assert ('http://ranking.zeit.de/che2015/de/faecher'
+    assert ('http://ranking.zeit.de/che2016/de/faecher'
             '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.che.teaser'
             '.button_ohne_fach.x&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
@@ -1677,6 +1674,15 @@ def test_zett_parquet_should_link_to_zett(testbrowser):
             '&utm_source=zon') == link_more.attrib['href']
 
 
+def test_zett_parquet_should_have_ads(testbrowser):
+    browser = testbrowser('/zeit-online/parquet-feeds')
+    ad = browser.cssselect(
+        'article[data-unique-id="http://ze.tt/wichtiges-vom-'
+        'wochenende-update-32/"] .teaser-small__label')[0]
+
+    assert ad.text == 'Anzeige'
+
+
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
@@ -1699,10 +1705,10 @@ def test_imagecopyright_link_is_present_on_centerpages(testbrowser):
     assert len(link) == 1
 
 
-def test_imagecopyright_link_is_not_present_on_articles(testbrowser):
+def test_imagecopyright_link_is_present_on_articles(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     link = browser.cssselect('.footer-links__link.js-image-copyright-footer')
-    assert len(link) == 0
+    assert len(link) == 1
 
 
 def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
@@ -1742,23 +1748,23 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats-zmo')
 
     teaser_fullwidth_logo = browser.cssselect(
-        '.teaser-fullwidth__kicker-logo--zmo')[0]
+        '.teaser-fullwidth__kicker-logo--zmo')
     teaser_classic_logo = browser.cssselect(
-        '.teaser-classic__kicker-logo--zmo')[0]
+        '.teaser-classic__kicker-logo--zmo')
     teaser_large_logo = browser.cssselect(
-        '.teaser-large__kicker-logo--zmo')[0]
+        '.teaser-large__kicker-logo--zmo')
     teaser_small_logo = browser.cssselect(
-        '.teaser-small__kicker-logo--zmo')[0]
+        '.teaser-small__kicker-logo--zmo')
     teaser_small_minor_logo = browser.cssselect(
-        '.teaser-small-minor__kicker-logo--zmo')[0]
+        '.teaser-small-minor__kicker-logo--zmo')
     teaser_kicker_zmo_parquet = browser.cssselect(
         '.teaser-small__kicker--zmo-parquet svg')
 
     assert len(teaser_fullwidth_logo) == 1
     assert len(teaser_classic_logo) == 1
-    assert len(teaser_large_logo) == 1
-    assert len(teaser_small_logo) == 1
-    assert len(teaser_small_minor_logo) == 1
+    assert len(teaser_large_logo) == 2
+    assert len(teaser_small_logo) == 4
+    assert len(teaser_small_minor_logo) == 2
     # assert there is no kicker logo when in zmo parquet
     assert len(teaser_kicker_zmo_parquet) == 0
 
@@ -1799,24 +1805,24 @@ def test_zett_teaser_kicker_should_contain_logo(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats-zett')
 
     teaser_fullwidth_logo = browser.cssselect(
-        '.teaser-fullwidth__kicker-logo--zett')[0]
+        '.teaser-fullwidth__kicker-logo--zett')
     teaser_classic_logo = browser.cssselect(
-        '.teaser-classic__kicker-logo--zett')[0]
+        '.teaser-classic__kicker-logo--zett')
     teaser_large_logo = browser.cssselect(
-        '.teaser-large__kicker-logo--zett')[0]
+        '.teaser-large__kicker-logo--zett')
     teaser_small_logo = browser.cssselect(
-        '.teaser-small__kicker-logo--zett')[0]
+        '.teaser-small__kicker-logo--zett')
     teaser_small_minor_logo = browser.cssselect(
-        '.teaser-small-minor__kicker-logo--zett')[0]
+        '.teaser-small-minor__kicker-logo--zett')
     teaser_square_logo = browser.cssselect(
-        '.teaser-square__kicker-logo--zett')[0]
+        '.teaser-square__kicker-logo--zett')
 
     assert len(teaser_fullwidth_logo) == 1
     assert len(teaser_classic_logo) == 1
-    assert len(teaser_large_logo) == 1
-    assert len(teaser_small_logo) == 1
-    assert len(teaser_small_minor_logo) == 1
-    assert len(teaser_square_logo) == 1
+    assert len(teaser_large_logo) == 2
+    assert len(teaser_small_logo) == 4
+    assert len(teaser_small_minor_logo) == 2
+    assert len(teaser_square_logo) == 2
 
 
 def test_zett_teaser_kicker_should_have_zett_modifier(testbrowser, testserver):
@@ -2140,3 +2146,38 @@ def test_dynamic_cps_show_detect_videos_with_ivideo_interface(
 def test_teaser_classic_should_not_have_gradient_overlay(testbrowser):
     browser = testbrowser('/zeit-online/classic-teaser')
     assert len(browser.cssselect('a.teaser-fullwidth__media-link')) == 0
+
+
+def test_headerimage_has_appropriate_html_structure(testbrowser):
+    browser = testbrowser('/zeit-online/index-with-image')
+    image = browser.cssselect('.header-image__media-item')[0]
+    assert image.get('data-variant') == 'panorama'
+    assert image.get('data-mobile-variant') == 'cinema'
+
+
+def test_zco_parquet_has_zco_styles(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/teasers-to-campus')
+    select = browser.cssselect
+
+    assert len(select('.cp-area--zco-parquet')) == 1
+    assert len(select('.parquet-meta__more-link--zco')) == 1
+    assert len(select('.parquet-meta__title--zco')) == 1
+    assert len(select('.parquet-meta__logo--zco')) == 1
+
+    assert len(select(
+        '[class^="teaser"][class*="__kicker--zco-parquet"]')) == 2
+
+
+def test_author_list_should_show_authors(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/autoren/j_random'}]
+    browser = testbrowser('/autoren/register_A')
+    assert len(browser.cssselect('.teaser-small')) == 1
+
+
+def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/cardstack')
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+
+    assert '27: "cardstack.1.2.4;quiz.2.2.2"' in script.text_content().strip()

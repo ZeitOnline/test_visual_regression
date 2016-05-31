@@ -22,7 +22,9 @@ def test_article_pagination_on_single_page(testbrowser):
     assert len(select('.article-pager')) == 0
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Startseite'
+    link = select('.article-pagination__link')[0].attrib['href']
+    assert button.text.strip() == 'Mehr ZEIT Campus'
+    assert 'campus/index' in link
 
 
 def test_article_pagination_on_second_page(testbrowser):
@@ -48,7 +50,7 @@ def test_article_pagination_on_last_paginated_page(testbrowser):
     assert len(select('.article-pager')) == 1
     # assert len(select('.article-toc')) == 1
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Startseite'
+    assert button.text.strip() == 'Mehr ZEIT Campus'
 
 
 def test_article_pagination_on_komplettansicht(testbrowser):
@@ -60,7 +62,7 @@ def test_article_pagination_on_komplettansicht(testbrowser):
     assert len(select('.article-pager')) == 0
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
-    assert button.text.strip() == 'Startseite'
+    assert button.text.strip() == 'Mehr ZEIT Campus'
 
 
 def test_article_pagination(testbrowser):
@@ -82,7 +84,7 @@ def test_article_pagination(testbrowser):
 
 def test_article_block_citation_should_render_expected_structure(testbrowser):
     browser = testbrowser('/campus/article/citation')
-    assert len(browser.cssselect('.quote')) == 2
+    assert len(browser.cssselect('.quote')) == 3
     assert browser.cssselect('.quote__text')[0].text.startswith(
         u'Es war ein Gedankenanstoß')
     assert browser.cssselect('.quote__source')[0].text_content() == (
@@ -147,34 +149,6 @@ def test_article_tags_are_present(testbrowser):
         assert tag.get('rel') == 'tag'
 
 
-def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/campus/article/simple' % testserver.url)
-
-    assert '/campus/article/simple' == driver.execute_script(
-        "return RawrConfig.location_metadata.article_id")
-    assert '2016-02-10T10:39:16+01:00' == driver.execute_script(
-        "return RawrConfig.location_metadata.published")
-    assert 'Hier gibt es Hilfe' == driver.execute_script(
-        "return RawrConfig.location_metadata.description")
-    assert ['Studium', 'Uni-Leben'] == driver.execute_script(
-        "return RawrConfig.location_metadata.channels")
-    assert ['studium', 'uni-leben'] == driver.execute_script(
-        "return RawrConfig.location_metadata.ressorts")
-    tags = driver.execute_script(
-        "return RawrConfig.location_metadata.tags")
-    assert tags[0] == 'Student'
-    assert tags[3] == u'Bafög-Antrag'
-    assert tags[5] == 'Studienfinanzierung'
-    assert 'Hier gibt es Hilfe' == driver.execute_script(
-        "return RawrConfig.location_metadata.meta.description")
-
-
-def test_rawr_config_should_not_exist_on_centerpage(testbrowser):
-    browser = testbrowser('/campus/centerpage/index')
-    assert 'RawrConfig' not in browser.contents
-
-
 def test_campus_article_renders_video_with_correct_markup(testbrowser):
     bro = testbrowser('/campus/article/video')
     select = bro.cssselect
@@ -184,12 +158,10 @@ def test_campus_article_renders_video_with_correct_markup(testbrowser):
         'iframe.video-player__iframe[src*="videoId=4193594095001"]')
     assert select(
         '.video-caption > .video-caption__kicker')[0].text == 'Wearables'
-    assert select(
-        '.video-caption > .video-caption__title'
-        )[0].text == 'Verkaufsstart von Apple Watch ohne Warteschlangen'
+    assert select('.video-caption > .video-caption__title')[0].text == (
+        'Verkaufsstart von Apple Watch ohne Warteschlangen')
     assert 'nur auf Vorbestellung ausgegeben wir' in select(
-        '.video-caption > .video-caption__description'
-        )[0].text
+        '.video-caption > .video-caption__description')[0].text
 
 
 def test_nextread_is_present(testbrowser):
@@ -204,3 +176,110 @@ def test_article_debate_block_should_render_expected_structure(testbrowser):
     assert len(select('.debate__title')) == 1
     assert len(select('.debate__text')) == 1
     assert len(select('.debate__label')) == 1
+
+
+def test_article_stoa_block_should_render_expected_structure(testbrowser):
+    select = testbrowser('/campus/article/stoa').cssselect
+    assert len(select('.stoa')) == 1
+    assert len(select('.stoa__title')) == 1
+    assert len(select('.stoa__link')) == 1
+    assert len(select('.stoa__button')) == 1
+
+
+def test_advertorial_marker_is_present(testbrowser):
+    browser = testbrowser('campus/article/advertorial')
+    assert len(browser.cssselect('.advertorial-marker')) == 1
+    assert len(browser.cssselect('.advertorial-marker__title')) == 1
+    assert len(browser.cssselect('.advertorial-marker__text')) == 1
+
+
+def test_campus_article_does_not_have_contentad(testbrowser):
+    select = testbrowser('/campus/article/stoa').cssselect
+    assert not select('#iq-artikelanker')
+
+
+def test_article_has_sharing_bar(testbrowser):
+    browser = testbrowser('campus/article/paginated')
+    assert len(browser.cssselect('.article-interactions')) == 1
+    assert len(browser.cssselect('.sharing-menu')) == 1
+    assert len(browser.cssselect('.sharing-menu__item')) == 3
+    assert len(browser.cssselect('.print-menu')) == 1
+
+
+def test_article_header_default_considers_image_layout(testbrowser):
+    browser = testbrowser('/campus/article/simple')
+    header = browser.cssselect('.article-header--default-no-image')
+    assert len(header) == 1
+
+    # default layout "large" should use variant 'portrait'
+    browser = testbrowser('/campus/article/paginated')
+    header = browser.cssselect('.article-header--default-with-image')[0]
+    figure = header.cssselect('.article-header__media--portrait')[0]
+    image = figure.cssselect('img')[0]
+    assert image.get('data-variant') == 'portrait'
+
+    # layout "zco-portrait" should use variant 'portrait'
+    browser = testbrowser('/campus/article/common')
+    header = browser.cssselect('.article-header--default-with-image')[0]
+    figure = header.cssselect('.article-header__media--portrait')[0]
+    image = figure.cssselect('img')[0]
+    assert image.get('data-variant') == 'portrait'
+
+    # layout "zco-wide" should use variant 'wide'
+    browser = testbrowser('/campus/article/header-image-landscape')
+    header = browser.cssselect('.article-header--default-with-image')[0]
+    figure = header.cssselect('.article-header__media--wide')[0]
+    image = figure.cssselect('img')[0]
+    assert image.get('data-variant') == 'wide'
+
+
+def test_article_has_print_pdf_function(testbrowser):
+    browser = testbrowser('/campus/article/debate')
+    links = browser.cssselect('.print-menu__link')
+    assert (links[0].attrib['href'].endswith(
+        '/campus/article/debate?print'))
+    assert (links[1].attrib['href'] ==
+            'http://pdf.zeit.de/campus/article/debate.pdf')
+
+
+def test_multi_page_article_has_print_link(testbrowser):
+    browser = testbrowser('/campus/article/paginated')
+    links = browser.cssselect('.print-menu__link')
+    assert (links[0].attrib['href'].endswith(
+        '/campus/article/paginated/komplettansicht?print'))
+
+
+def test_breadcrumbs_for_article(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/simple')
+    view = zeit.web.campus.view_article.Article(context, dummy_request)
+
+    breadcrumbs = [
+        ('ZEIT Campus', 'http://xml.zeit.de/campus/index'),
+        (u'Beratung: Hier gibt es Hilfe', None)
+    ]
+
+    assert view.breadcrumbs == breadcrumbs
+
+
+def test_breadcrumbs_for_paginated_article_page(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/paginated')
+    request = dummy_request
+    view = zeit.web.campus.view_article.ArticlePage(context, request)
+    view.request.path_info = u'campus/article/paginated/seite-3'
+
+    breadcrumbs = [
+        ('ZEIT Campus', 'http://xml.zeit.de/campus/index'),
+        (u'Die dritte Seite', u'http://xml.zeit.de/campus/article/paginated')
+    ]
+
+    assert view.breadcrumbs == breadcrumbs
+
+
+def test_article_contains_webtrekk_parameter_asset(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/cardstack')
+    view = zeit.web.campus.view_article.Article(context, dummy_request)
+
+    assert view.webtrekk['customParameter']['cp27'] == 'cardstack.2/seite-1'

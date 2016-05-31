@@ -14,7 +14,6 @@ import zeit.web.core.interfaces
 import zeit.web.magazin.view
 import zeit.web.magazin.view_article
 import zeit.web.magazin.view_centerpage
-import zeit.web.site.view
 import zeit.web.site.view_article
 import zeit.web.site.view_centerpage
 
@@ -221,8 +220,9 @@ def test_c1_include_script_should_define_a_timeout_param(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     inline = u''.join(browser.xpath('//script/text()'))
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    assert 'url: "{}/tracking/tracking.js",\n\t\ttimeout: 2000,'.format(
+    assert 'url: "{}/tracking/tracking.js",\n'.format(
         conf.get('c1_prefix')) in inline
+    assert 'timeout: 2000,\n' in inline
 
 
 def test_inline_gallery_should_be_contained_in_body(application):
@@ -460,18 +460,26 @@ def test_banner_advertorial_extrarulez(mock_ad_view):
 
 def test_centerpage_should_have_manual_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/index')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         context, pyramid.testing.DummyRequest())
-    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE'
+    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE | ZEITmagazin'
 
 
 def test_centerpage_should_have_generated_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/lebensart-3')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         context, pyramid.testing.DummyRequest())
-    assert view.pagetitle == u'ZMO CP: ZMO | ZEITmagazin'
+    assert view.pagetitle == u'My Test SEO - ZEITmagazin ONLINE | ZEITmagazin'
+
+
+def test_centerpage_should_have_subtitle_seo_pagedesciption(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
+    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
+        context, pyramid.testing.DummyRequest())
+    assert 'My Test SEO - ZEITmagazin ONLINE' in view.pagedescription
 
 
 def test_article_should_have_postfixed_seo_pagetitle(application):
@@ -493,19 +501,11 @@ def test_homepage_should_have_unpostfixed_seo_pagetitle(application):
 
 def test_centerpage_should_have_manual_seo_pagedescription(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/index')
+        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/index')
     view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
         context, pyramid.testing.DummyRequest())
     assert view.pagedescription == (u'My Test SEO - ZEITmagazin ONLINE ist '
                                     'die emotionale Seite von ZEIT ONLINE.')
-
-
-def test_centerpage_should_have_subtitle_seo_pagedesciption(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/lebensart-3')
-    view = zeit.web.magazin.view_centerpage.CenterpageLegacy(
-        context, pyramid.testing.DummyRequest())
-    assert view.pagedescription == u'ZMO CP'
 
 
 def test_centerpage_should_have_default_seo_pagedescription(application):
@@ -689,3 +689,54 @@ def test_amp_article_should_have_amp_link(application):
     view = zeit.web.site.view_article.Article(
         context, pyramid.testing.DummyRequest())
     assert view.is_amp
+
+
+def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/campus/article/simple_date_changed' % testserver.url)
+
+    assert '/campus/article/simple_date_changed' == driver.execute_script(
+        "return rawrConfig.locationMetaData.article_id")
+    assert '2016-02-10T10:39:16+01:00' == driver.execute_script(
+        "return rawrConfig.locationMetaData.published")
+    assert 'Hier gibt es Hilfe' == driver.execute_script(
+        "return rawrConfig.locationMetaData.description")
+    assert ['Studium', 'Uni-Leben'] == driver.execute_script(
+        "return rawrConfig.locationMetaData.channels")
+    assert ['studium', 'uni-leben'] == driver.execute_script(
+        "return rawrConfig.locationMetaData.ressorts")
+    tags = driver.execute_script(
+        "return rawrConfig.locationMetaData.tags")
+    assert tags[0] == 'Student'
+    assert tags[3] == u'Bafög-Antrag'
+    assert tags[5] == 'Studienfinanzierung'
+    assert 'Hier gibt es Hilfe' == driver.execute_script(
+        "return rawrConfig.locationMetaData.meta.description")
+
+
+def test_health_check_should_response_and_have_status_200(testbrowser):
+    browser = testbrowser('/health_check')
+    assert browser.headers['Content-Length'] == '2'
+    resp = zeit.web.core.view.health_check('request')
+    assert resp.status_code == 200
+
+
+def test_health_check_should_fail_if_repository_does_not_exist(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['vivi_zeit.connector_repository-path'] = '/i_do_not_exist'
+
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        zeit.web.core.view.health_check('request')
+
+
+def test_health_check_with_fs_should_be_configurable(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['vivi_zeit.connector_repository-path'] = '/i_do_not_exist'
+    conf['health_check_with_fs'] = False
+
+    resp = zeit.web.core.view.health_check('request')
+    assert resp.status_code == 200
+
+    conf['health_check_with_fs'] = True
+    with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
+        zeit.web.core.view.health_check('request')

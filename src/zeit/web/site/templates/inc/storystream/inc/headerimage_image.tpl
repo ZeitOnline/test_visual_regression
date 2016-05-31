@@ -1,5 +1,6 @@
 {%- extends "zeit.web.core:templates/inc/asset/image.tpl" -%}
 
+{% set media_caption_additional_class = 'figcaption--hidden' %}
 {% block media_block_additional_data_attributes %}
     {% set mobile_image = get_image(module, teaser, variant_id='wide') %}
     {% if mobile_image %}

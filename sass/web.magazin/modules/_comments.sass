@@ -44,15 +44,14 @@
         margin-right: 0
         display: block
     .show-comments &
-        color: transparent
-        background-position: center center
+        display: none
 
 .article__comments-trigger__text
     font-family: $font-tabletgothic
     font-size: em(11px)
     font-weight: bold
 
-$comments-min-width: $comments__break-outside - $max-page-width
+$comments-min-width: remify($comments__break-outside - em($max-page-width))
 
 .comments
     +unpadded
@@ -75,7 +74,7 @@ $comments-min-width: $comments__break-outside - $max-page-width
     +respond-min($comments__break-outside)
         top: 0px
         right: auto
-        left: em(980px) - $page-padding
+        left: remify(980px) - $page-padding
         border-left: 1px dotted $grey--light
         width: $comments-min-width
     &.show-older-trigger
@@ -154,13 +153,6 @@ $comments-min-width: $comments__break-outside - $max-page-width
     background-color: rgba($white, 0.7)
     text-align: center
     .button
-        +inline-block
-        +background-size(20%)
-        background-position: 10px center
-        text-align: center
-        cursor: pointer
-        width: auto
-        padding-left: 40px
         z-index: 4
         margin-top: em(25px)
 
@@ -170,6 +162,12 @@ $comments-min-width: $comments__break-outside - $max-page-width
 .comments__button__newer
     top: 0
 
+.comments__icon
+    width: remify(22px)
+    height: remify(10px)
+    margin-right: $fine
+    &--newer
+        margin-bottom: 0.13em
 
 .comment
     margin-top: $large
@@ -222,20 +220,21 @@ $comments-min-width: $comments__break-outside - $max-page-width
     font-size: $font-m
 
 
-.comment__tools
+.comment__toolbox
     text-align: right
     padding-right: $fine
     margin-bottom: $compact
 
-.comment__tools__icon
-    +inline-block
-    +hide-text
+.comment__tool
     cursor: pointer
+    color: #ababab
     margin-left: $small
+    .no-touch &:hover
+        color: #787878
+
+.comment__tool-icon
     width: 20px
     height: 20px
-    .no-touch &:hover
-        background-position: 0px -20px
 
 .comment__form--login
     text-align: center
@@ -280,15 +279,18 @@ $comments-min-width: $comments__break-outside - $max-page-width
 .comment__form__success
     text-align: center
     padding: $large 0 $large - $medium
-    .comment__icon--40
+    .comment__check-icon
         margin-bottom: $compact
 
 .comment__form__success__text
     color: $charcoal
     font-size: $font-ml
 
-.comment__icon--40
+.comment__check-icon
     +inline-block
+    background-color: #64B892
+    color: $white
+    border-radius: 50%
     width: em(40px)
     height: em(40px)
 
@@ -303,7 +305,7 @@ $comments-min-width: $comments__break-outside - $max-page-width
             visibility: visible
         +respond-min($comments__break-outside)
             +transform(scale(1))
-    .page-wrap--inner
+    .page__content
         +respond-min($comments__break-outside)
             left: 0
             margin-left: 0

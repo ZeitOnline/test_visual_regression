@@ -1,80 +1,3 @@
-{% macro wrapper_handling( obj ) -%}
-
-<!-- wrapper handling -->
-<script type="text/javascript">
-
-    //reads cookie
-    function getCookie( c_name ) {
-        var c_value = document.cookie;
-        var c_start = c_value.indexOf(' ' + c_name + '=');
-
-        if ( c_start === -1 ) {
-            c_start = c_value.indexOf(c_name + '=');
-        }
-        if ( c_start === -1 ) {
-            c_value = null;
-        } else {
-            c_start = c_value.indexOf( '=', c_start ) + 1;
-            var c_end = c_value.indexOf( ';', c_start );
-            if ( c_end === -1 ) {
-              c_end = c_value.length;
-            }
-            c_value = unescape( c_value.substring( c_start,c_end ));
-        }
-        return c_value;
-    }
-
-    // build global wrapper object which will be called from within webview
-    // most of the functions here are provided by sevenval
-    // as the wrapper app will call them with the wrapper namespace
-    // be very careful with renaming, function names have to stick like this
-    window.wrapper = {
-        // provide ressort
-        getRessort: function() {
-            return "{{ view.ressort_literally }}"
-        },
-        // hide zmo navi header
-        hideZMOHeader: function( $nav ){
-            $nav.setAttribute("style","display: none");
-        },
-        //set margin for native bar
-        setHeaderMargin: function( _density_independant_pixels ) {
-
-            var spacerId = 'wrapper_spacer_header',
-                $nav = document.getElementById( 'js-main-nav' ),
-                $page = document.getElementById( 'js-page-wrap-inner' ),
-                $spacer = document.getElementById( spacerId );
-
-            this.hideZMOHeader( $nav );
-
-            // default: no cookie present and no change requested
-            var hm = 0;
-
-            // user has already set header margin
-            if (getCookie( 'zeitwrapper_hm' )) {
-                hm = getCookie( 'zeitwrapper_hm' );
-            }
-
-            // user requested a change header margin
-            if (_density_independant_pixels !== null && typeof(_density_independant_pixels) !== 'object' ) {
-                hm = _density_independant_pixels;
-            }
-
-            if ( ! $spacer ) {
-                // prepare spacer
-                $spacer = document.createElement( 'header' );
-                $spacer.setAttribute( 'id', spacerId);
-                $page.insertBefore( $spacer, $nav );
-            }
-
-            // set and save settings if in valid scope
-            $spacer.setAttribute( 'style', 'height:' + hm + 'px' );
-            document.cookie = 'zeitwrapper_hm=' + hm +'; expires=Thu, 31 Dec 2099 23:59:59 UTC; path=/';
-        }
-    };
-</script>
-{% endmacro %}
-
 {% macro adplace_adctrl(banner, view, mobile) -%}
     {{ caller() }}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
@@ -125,24 +48,22 @@
     {% endif -%}
 {%- endmacro %}
 
-{% macro content_ad_article(view) -%}
-    {% if view.context.advertising_enabled -%}
-    <div id="iq-artikelanker"></div>
-    {% endif -%}
-{%- endmacro %}
-
-{% macro use_svg_icon(name, class, request, inline=False) -%}
-    <svg class="svg-symbol {{ class }}" role="img" aria-labelledby="title">
-        {% if inline %}
-            <use xlink:href="#svg-{{ name }}"></use>
-        {% else %}
-            <use xlink:href="{{ request.asset_host }}/css/{% block svg_asset_dir %}web.site{% endblock %}/icons.svg#svg-{{ name }}"></use>
-        {% endif %}
-    </svg>
+{% macro use_svg_icon(name, className, package, cleanup=True, a11y=True) -%}
+    {#
+        Generates in SVG, from minified svg file on disk, cleaned and a11y'd
+        :param name: name of the svg file, w/o extension
+        :param className: additional class to 'svg-symbol' (which is standard)
+        :param package: the actual zeit.package i.e. zeit.web.site
+        :param cleanup: clean svg from fill-attributes
+        :param a11y: activate aria-label to read out svg/title/text()
+    #}
+    {# workaround for wrong packages comment icons #}
+    {% set package = 'zeit.web.site' if 'zeit.web.core' == package else package %}
+    {{ get_svg_from_file(name, className, package, cleanup, a11y) | safe }}
 {%- endmacro %}
 
 {% macro insert_esi(src, error_text='') %}
-    {% if settings('dev_environment') %}
+    {% if settings('use_wesgi') %}
         <!-- [esi-debug] src="{{ src | safe }}" error_text="{{ error_text }}" -->
         <esi:include src="{{ src | safe }}" onerror="continue" />
     {% else %}

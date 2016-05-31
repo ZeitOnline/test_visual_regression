@@ -1,38 +1,47 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
 
-<div class="footer__item">
-	<a href="{{ request.route_url('home') }}campus/index">
-		{{- lama.use_svg_icon('logo-zco', 'footer__logo', request, inline=view.inline_svg_icons) -}}
-	</a>
-	<div class="footer__links">
-		<strong class="footer__linkitem">Verlag</strong>
-		<a class="footer__link" href="http://www.zeit-verlagsgruppe.de/anzeigen/" itemprop="url">
-			<span itemprop="name">Mediadaten</span>
-		</a>
-		<a class="footer__link" href="http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/" itemprop="url">
-			<span itemprop="name">Rechte & Lizenzen</span>
-		</a>
-	</div>
-	<div class="footer__links">
-		<a class="footer__link js-image-copyright-footer" href="#bildrechte">
-			<span itemprop="name">Bildrechte</span>
-		</a>
-		<a class="footer__link" href="{{ request.route_url('home') }}hilfe/datenschutz" itemprop="url">
-			<span itemprop="name">Datenschutz</span>
-		</a>
-		<a class="footer__link" href="http://www.iqm.de/Medien/Online/nutzungsbasierte_onlinewerbung.html" itemprop="url">
-			<span itemprop="name">Cookies</span>
-		</a>
-		<a class="footer__link" href="{{ request.route_url('home') }}administratives/agb-kommentare-artikel" itemprop="url">
-			<span itemprop="name">AGB</span>
-		</a>
-		<a class="footer__link" href="{{ request.route_url('home') }}impressum/index" itemprop="url">
-			<span itemprop="name">Impressum</span>
-		</a>
-		<a class="footer__link" href="{{ request.route_url('home') }}hilfe/hilfe" itemprop="url">
-			<span itemprop="name">Hilfe/ Kontakt</span>
-		</a>
-	</div>
-</div>
+<footer class="footer" data-ct-area="campus-footernav">
+    {% block breadcrumbs -%}
+        {%- include "zeit.web.core:templates/inc/breadcrumbs.html" -%}
+    {%- endblock breadcrumbs %}
+    <div class="footer__navigation footer__item" itemscope itemtype="http://schema.org/SiteNavigationElement">
+        <a href="{{ request.route_url('home') }}campus/index" data-ct-row="logo" data-ct-label="logo">
+            {{- lama.use_svg_icon('logo-zco', 'footer__logo', view.package) -}}
+        </a>
+        <div class="footer__links" data-ct-row="1">
+            <strong class="footer__linkitem">Verlag</strong>
+            <a class="footer__link" href="http://www.zeit-verlagsgruppe.de/anzeigen/" itemprop="url">
+                <span itemprop="name">Mediadaten</span>
+            </a>
+            <a class="footer__link" href="http://www.zeit-verlagsgruppe.de/marken-und-produkte/geschaeftskunden/artikel-nachrucke/" itemprop="url">
+                <span itemprop="name">Rechte & Lizenzen</span>
+            </a>
+        </div>
+        <div class="footer__links" data-ct-row="2">
+            {% if view is not framebuilder %}
+                <a class="footer__link js-image-copyright-footer" href="#bildrechte">
+                    Bildrechte
+                </a>
+            {% endif %}
+            <a class="footer__link" href="{{ request.route_url('home') }}hilfe/datenschutz" itemprop="url">
+                <span itemprop="name">Datenschutz</span>
+            </a>
+            <a class="footer__link" href="http://www.iqm.de/digital/nutzungsbasierte-onlinewerbung/" itemprop="url">
+                <span itemprop="name">Cookies</span>
+            </a>
+            <a class="footer__link" href="{{ request.route_url('home') }}administratives/agb-kommentare-artikel" itemprop="url">
+                <span itemprop="name">AGB</span>
+            </a>
+            <a class="footer__link" href="{{ request.route_url('home') }}impressum/index" itemprop="url">
+                <span itemprop="name">Impressum</span>
+            </a>
+            <a class="footer__link" href="{{ request.route_url('home') }}hilfe/hilfe" itemprop="url">
+                <span itemprop="name">Hilfe/ Kontakt</span>
+            </a>
+        </div>
+    </div>
 
-
+    {% if view is not framebuilder %}
+        {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
+    {% endif %}
+</footer>

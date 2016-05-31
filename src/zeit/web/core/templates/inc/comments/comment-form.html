@@ -1,0 +1,144 @@
+{% set pid = view.request.GET['pid'] | d(None) %}
+{%- if pid -%}
+    {% set comment = view.get_comment(pid|int) | d(None) %}
+{%- endif %}
+{% if comment %}
+    {% set submit_value = 'Antworten' %}
+    {% set placeholder = 'Ihre Antwort auf Kommentar "%s..." von %s' | format(comment.text_stripped[:10], comment.name) %}
+    {% set class = '' %}
+{% else %}
+    {% set submit_value = 'Kommentar senden' %}
+
+    {% if request.user and not request.user.name %}
+        {% set submit_value = 'Absenden' %}
+    {% endif %}
+
+    {% set placeholder = 'Ihr Kommentar' %}
+    {% set class = 'comment-form__cancel--hidden' %}
+{% endif %}
+
+{% if view.comment_form.note %}
+    <div class="comment-section__note">
+        <div class="comment-section__message comment-section__item">{{ view.comment_form.note }}</div>
+    </div>
+{% elif view.comment_form.user_blocked or view.comment_form.show_premoderation_warning %}
+    <div class="comment-section__note">
+        <div class="comment-section__notice comment-section__item">
+        {% if view.comment_form.user_blocked %}
+            Die Kommentarfunktion wurde für Ihr Benutzerprofil gesperrt.
+        {% elif view.comment_form.show_premoderation_warning %}
+            Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
+            oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
+        {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+<div class="comment-section__form comment-section__item">
+{%- if request.user %}
+    {% set is_mod = 'admin-tech' in request.user.roles or 'admin-editor' in request.user.roles %}
+    {%- block comment_form %}
+    <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
+        {%- if is_mod %} data-mod="mod"{% endif %}>
+        {% if view.comment_form.show_comment_form -%}
+        <div class="comment-form__text comment-form__text--metadata">
+            {% if request.user.picture %}
+                <img class="comment-form__avatar" alt="Avatarbild von {{ request.user.name }}" src="{{ request.user.picture }}">
+            {% endif %}
+            {% if not request.user.name %}
+                Angemeldet, noch kein Benutzername
+                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
+                (Profil bearbeiten)
+                 </a>
+            {% else %}
+                Angemeldet als
+                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
+                    {{ request.user.name }}
+                </a>
+            {% endif %}
+            <span class="comment-form__charcount">
+                <span class="js-count-formchars"></span> 1500 Zeichen
+            </span>
+        </div>
+            {% if request.registry.settings.sso_activate and not request.user.name %}
+            <div class="comment-form__sso-username">
+                <p class="comment-form__hint{% if view.error and not view.error.error == 'username_exists_or_invalid' %} comment-form__hint--error{% endif %}">
+                    Sie haben noch keinen Benutzernamen. Dieser wird einmalig festgelegt und ist öffentlich sichtbar.
+                </p>
+                <input class="comment-form__input" placeholder="Ihr neuer Benutzername" type="text" name="username" {% if view.error.user_name %}value="{{ view.error.user_name }}"{% endif %}>
+                {% if view.error.error == 'username_exists_or_invalid' %}
+                    <div class='comment-form__error'>Benutzername ist bereits vergeben oder enthält ungültige Zeichen.</div>
+                {% endif %}
+            </div>
+            {% endif %}
+        <textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500">
+            {%- if view.error and view.error.comment %}{{ view.error.comment }}{% endif -%}
+        </textarea>
+            {% if view.comment_form.show_premoderation_warning %}
+            {# hidden in comment form, just visible in (cloned) reply form #}
+            <p class="comment-form__text comment-section__notice">
+                Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
+                oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
+            </p>
+            {% endif %}
+        <p class="comment-form__actions">
+            <input type="hidden" name="action" value="comment">
+            <input type="hidden" name="pid" value="{{ pid }}">
+            <a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
+            <input class="button" type="submit" value="{{ submit_value }}" />
+        </p>
+        {%- endif %}
+    </form>
+    {%- endblock %}
+{%- elif view.comment_form.show_comment_form %}
+    <form class="comment-login" id="comment-form">
+        <p>
+            Bitte melden Sie sich an, um zu kommentieren.
+        </p>
+        {% if request.registry.settings.sso_activate %}
+            <a class="button" href="{{
+                        request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
+                Anmelden
+            </a>
+            <a class="button" href="{{
+                        request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
+            Registrieren
+            </a>
+                {% else %}
+            <a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ view.content_url | e }}">
+                Anmelden
+            </a>
+            <a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ view.content_url | e }}">
+                Registrieren
+            </a>
+        {% endif %}
+    </form>
+{%- endif %}
+</div>
+
+<script type="text/template" id="js-report-comment-template">
+{%- if request.user %}
+    {% include "zeit.web.core:templates/inc/comments/report-comment-form.html" %}
+{%- else %}
+    <form class="comment-login">
+        <p>
+            Bitte melden Sie sich an, um diesen Kommentar zu melden.
+        </p>
+        {% if request.registry.settings.sso_activate %}
+            <a class="button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
+                Anmelden
+            </a>
+            <a class="button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
+                Registrieren
+            </a>
+                {% else %}
+            <a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ view.content_url | e }}">
+                Anmelden
+            </a>
+            <a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ view.content_url | e }}">
+                Registrieren
+            </a>
+        {% endif %}
+    </form>
+{%- endif %}
+</script>

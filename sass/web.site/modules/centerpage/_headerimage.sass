@@ -1,42 +1,42 @@
 .header-image
-	+transform-style(preserve-3d)
-	margin: 0
+	background-color: #33333A
+	color: #fff
+	height: 0
+	overflow: hidden // for overflowing image content on image variant switch
+	padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 	position: relative
 	&__media
-		background-color: rgb(0, 15, 20) // placeholder for image, same as default for +teaser-image-dark-overlay
-		height: 0
 		margin: 0
-		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
-		+respond-min($break-tablet-min)
-			padding-bottom: 100% / 7 * 2 // image variant 'panorama'
 	&__media-container
 		+teaser-image-dark-overlay($angle: 0deg)
 	&__heading
 		+transform(translateY(-50%))
-		font-size: 1rem
+		font-size: 1em
 		margin: 0
+		padding: remify(0 $page-padding)
 		position: absolute
+		text-align: center
 		top: 50%
 		width: 100%
-		z-index: 1
-	&__kicker,
-	&__title
-		display: block
-		text-align: center
 	&__kicker
 		color: $zon-lighter-grey
+		display: block
 		font-size: remify(14px)
 		font-weight: 400
 		letter-spacing: 0.125em
-		margin-bottom: 0.2em
+		margin-bottom: 0.4em
 		text-transform: uppercase
-		+respond-min($break-tablet-min)
-			font-size: remify(16px)
 	&__title
 		+font-smoothing
-		color: $white
+		display: block
 		font-size: remify(18px)
 		font-weight: 700
+		line-height: 1.25
 		letter-spacing: $zon-letter-spacing-m
-		+respond-min($break-tablet-min)
+
+	+respond-min($break-tablet-min)
+		padding-bottom: 100% / 7 * 2 // image variant 'panorama'
+		&__kicker
+			font-size: remify(16px)
+		&__title
 			font-size: remify(36px)

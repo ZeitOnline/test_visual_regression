@@ -1,10 +1,14 @@
+# -*- coding: utf-8 -*-
 import pyramid.view
 import lxml.etree
+import zope.component
 
 import zeit.cms.interfaces
 import zeit.cms.workflow
 import zeit.content.cp.interfaces
 
+import zeit.web.core.interfaces
+import zeit.web.core.centerpage
 import zeit.web.core.view
 
 
@@ -14,7 +18,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     def __init__(self, *args, **kwargs):
         super(Centerpage, self).__init__(*args, **kwargs)
-        self._copyrights = {}
         self.context.advertising_enabled = self.banner_on
 
         # Most of our resources will be purged from now on. We test this new
@@ -39,12 +42,103 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
                         yield teaser
 
     @zeit.web.reify
+    def breadcrumbs(self):
+        # No breadcrumbs for homepage
+        if self.is_hp:
+            return []
+
+        # Default breadcrumbs
+        breadcrumbs = super(Centerpage, self).breadcrumbs
+
+        # Search forms
+        if zeit.web.core.utils.find_block(
+                self.context, module='search-form') is not None:
+            try:
+                breadcrumbs.extend([(u'Suchergebnisse für "{}"'.format(
+                    self.request.GET['q']), None)])
+            except KeyError:
+                pass
+            return breadcrumbs
+        # "Angebote" and "Administratives"
+        if self.ressort in ('angebote', 'administratives', 'news'):
+            # Hamburg news
+            if self.ressort == 'news' and self.sub_ressort == 'hamburg':
+                nav_item = zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
+                    self.sub_ressort]
+                breadcrumbs.extend([(nav_item['text'], nav_item['link'])])
+                breadcrumbs.extend([('Aktuell', None)])
+                return breadcrumbs
+            html_title = zeit.seo.interfaces.ISEO(self.context).html_title
+            if html_title is not None:
+                breadcrumbs.extend([(html_title, None)])
+            else:
+                return self.breadcrumbs_by_navigation(breadcrumbs)
+        # Video CP
+        elif self.ressort == 'video':
+            breadcrumbs.extend([('Video', self.context.uniqueId)])
+        # Topicpage
+        elif self.context.type == 'topicpage':
+            self.breadcrumbs_by_navigation(breadcrumbs)
+            breadcrumbs.extend([(
+                u'Thema: {}'.format(self.supertitle), None)])
+        # Archive year index
+        elif self.context.type == 'archive-print-year':
+            breadcrumbs.extend([
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
+                ("Jahrgang: {}".format(self.context.year), None)])
+        # Archive volume index
+        elif self.context.type == 'archive-print-volume':
+            breadcrumbs.extend([
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
+                ("Jahrgang {}".format(self.context.year),
+                    'http://xml.zeit.de/{}/index'.format(self.context.year)),
+                ("Ausgabe: {0:02d}".format(self.context.volume or 0), None)])
+        # Dynamic folder
+        elif zeit.content.dynamicfolder.interfaces.\
+                IRepositoryDynamicFolder.providedBy(self.context.__parent__):
+            breadcrumbs.extend([(self.title, None)])
+        else:
+            return self.breadcrumbs_by_navigation(breadcrumbs)
+
+        return breadcrumbs
+
+    @zeit.web.reify
     def canonical_url(self):
         url = super(Centerpage, self).canonical_url.replace(
             'index.cp2015', 'index')  # XXX: remove soon (aps)
         page = self.request.params.get('p', None)
         param_str = '?p=' + page if page and page != '1' else ''
         return url + param_str
+
+    @zeit.web.reify
+    def area_ranking(self):
+        for region in self.regions:
+            for area in region.values():
+                if zeit.web.core.interfaces.IPagination.providedBy(area):
+                    return area
+        return None
+
+    @zeit.web.reify
+    def next_page_url(self):
+        ranking = self.area_ranking
+        if ranking is None:
+            return None
+        if ranking.current_page < len(ranking.pagination):
+            return zeit.web.core.template.append_get_params(
+                self.request, p=ranking.current_page + 1)
+
+    @zeit.web.reify
+    def prev_page_url(self):
+        ranking = self.area_ranking
+        if ranking is None:
+            return None
+        # suppress page param for page 1
+        if ranking.current_page == 2:
+            return zeit.web.core.template.remove_get_params(
+                self.request.url, 'p')
+        elif ranking.current_page > 2:
+            return zeit.web.core.template.append_get_params(
+                self.request, p=ranking.current_page - 1)
 
     @zeit.web.reify
     def is_hp(self):
@@ -70,7 +164,71 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
     def comment_counts(self):
-        return zeit.web.core.comments.get_counts(*[t.uniqueId for t in self])
+        community = zope.component.getUtility(
+            zeit.web.core.interfaces.ICommunity)
+        return community.get_comment_counts(*[t.uniqueId for t in self])
+
+    @zeit.web.reify
+    def has_cardstack(self):
+        kwargs = {'cp:type': 'cardstack'}
+        return bool(zeit.web.core.utils.find_block(self.context, **kwargs))
+
+    @zeit.web.reify
+    def cardstack_head(self):
+        url = super(Centerpage, self).cardstack_head
+        return zeit.web.core.utils.update_query(url, static='true')
+
+    @zeit.web.reify
+    def cardstack_body(self):
+        url = super(Centerpage, self).cardstack_body
+        return zeit.web.core.utils.update_query(url, static='true')
+
+
+class CenterpagePage(object):
+
+    @zeit.web.reify
+    def regions(self):
+        if self.area_ranking is None:
+            # A paginatable centerpage needs a ranking area.
+            raise pyramid.httpexceptions.HTTPNotFound(
+                'This centerpage is not paginatable.')
+
+        values = self.context.values()
+        if len(values) == 0:
+            return []
+
+        # Reconstruct a paginated cp with optional header and ranking area.
+        regions = [zeit.web.core.centerpage.Region(
+            [zeit.web.core.centerpage.IRendered(self.area_ranking)])]
+
+        # We keep any areas of the first region that contain at least one kind
+        # of preserve-worthy module.
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        preserved_areas = []
+        for mod in conf.get('cp_preserve_modules_on_pagination', '').split():
+            module = zeit.web.core.utils.find_block(values[0], module=mod)
+            if module:
+                area = module.__parent__
+                if area not in preserved_areas:
+                    preserved_areas.append(
+                        zeit.web.core.centerpage.IRendered(area))
+
+        if preserved_areas:
+            regions.insert(0, zeit.web.core.centerpage.Region(preserved_areas))
+
+        return regions
+
+    @zeit.web.reify
+    def area_ranking(self):
+        # Prevent infloop with our tweaked self.regions
+        # XXX Is there a better factoring than copy&paste?
+        regions = [zeit.web.core.centerpage.IRendered(x)
+                   for x in self.context.values()]
+        for region in regions:
+            for area in region.values():
+                if zeit.web.core.interfaces.IPagination.providedBy(area):
+                    return area
+        return None
 
 
 @pyramid.view.view_config(

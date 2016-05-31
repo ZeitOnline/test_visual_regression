@@ -19,9 +19,9 @@ require([
     'web.core/adReload',
     'web.core/overscrolling.js',
     'web.site/video/videoStage',
-    'web.site/articledate',
+    'web.core/articledate',
     'web.site/articlesharing',
-    'web.site/comments',
+    'web.core/comments',
     'web.site/adblockCount.js'
 ], function(
     zeit,
@@ -75,16 +75,16 @@ require([
     'web.core/plugins/jquery.picturefill',
     'web.core/plugins/jquery.referrerCount',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
-    'web.core/plugins/jquery.toggleOnClick',
+    'web.core/plugins/jquery.toggleRegions',
+    'web.core/plugins/jquery.countFormchars',
+    'web.core/plugins/jquery.imageCopyrightFooter',
     'web.site/plugins/jquery.accordion',
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.animateJobs',
     'web.site/plugins/jquery.autoclick',
-    'web.site/plugins/jquery.countFormchars',
     'web.site/plugins/jquery.extendfooter',
     'web.site/plugins/jquery.fixPosition',
     'web.site/plugins/jquery.hpOverlay',
-    'web.site/plugins/jquery.imageCopyrightFooter',
     'web.site/plugins/jquery.liveblog',
     'web.site/plugins/jquery.searchTools',
     'web.site/plugins/jquery.selectNav',
@@ -120,7 +120,6 @@ require([
         $( '.storystream-markup__content--first' ).longTextWrapper();
         $( '.jobbox--animate' ).animateJobs();
         $( '.js-tabs' ).tabs();
-        $( '.js-image-copyright-footer' ).imageCopyrightFooter();
         $( '.partner__action' ).boxDropdown();
 
     } else if ( article.length ) {
@@ -128,7 +127,7 @@ require([
         article.find( '.js-gallery' ).inlinegallery();
         article.find( '.js-infobox' ).infobox();
         article.find( '.liveblog' ).liveblog();
-        article.find( '.article-toc' ).toggleOnClick();
+        article.find( '.article-toc' ).toggleRegions();
         $.picturefill();
         $( '.comment-section' ).countFormchars();
         $( '.js-fix-position' ).fixPosition();
@@ -139,6 +138,7 @@ require([
     // more ("non critical") global stuff
     $( '.footer-publisher__more' ).extendFooter();
     $( '.js-scroll' ).animateScroll();
+    $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     // search
     $( '.search-form' ).searchTools();
 });

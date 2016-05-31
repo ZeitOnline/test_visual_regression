@@ -13,13 +13,13 @@
     margin: 0 0-$hair $large
     display: inline-block
     vertical-align: top
-    +respond-max($break-2) 
+    +respond-max($break-2)
         width: 100%
 
 .product__image
-    margin: 0 auto $medium
-    max-width: ($medium-content-width/2)-(2*$medium)
-    +respond-max($break-2) 
+    margin: remify(0 auto 36px)
+    max-width: ($medium-content-width/2) - (remify(72px))
+    +respond-max($break-2)
         max-width: 90%
 
 .product__caption

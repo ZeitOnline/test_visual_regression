@@ -1,0 +1,13 @@
+{%- extends "zeit.web.core:templates/inc/comments/comment-form.html" -%}
+
+{%- block comment_form %}
+	{%- if comment %}
+	{% include "zeit.web.core:templates/inc/comments/report-comment-form.html" %}
+
+	<div style="display: none">
+	{{ super() }}
+	</div>
+	{%- else %}
+	{{ super() }}
+	{%- endif %}
+{%- endblock %}

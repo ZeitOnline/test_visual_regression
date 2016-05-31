@@ -66,6 +66,11 @@
 				color: $zon_lighter_grey
 				letter-spacing: 0.08em
 				line-height: 1.5
+		&--zco
+			@extend %teaser-kicker--zco
+			font-size: remify(13px)
+	&__kicker-logo-divider
+		@extend %teaser-kicker-logo-divider
 	&__kicker-logo
 		&--zmo
 			@extend %teaser-kicker-logo--zmo
@@ -83,6 +88,11 @@
 			@extend %teaser-kicker-logo--liveblog
 		&--liveblog-closed
 			@extend %teaser-kicker-logo--liveblog-closed
+		&--zco
+			$logo_format: (185/33)
+			height: remify(15px)
+			vertical-align: middle
+			width: remify(15px*$logo_format)
 	&__title
 		@extend %teaser-title
 		font-size: em(24px)

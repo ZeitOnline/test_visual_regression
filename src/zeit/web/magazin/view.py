@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 
 import pyramid.view
@@ -18,42 +19,34 @@ class Base(zeit.web.core.view.Base):
         u'ZEITmagazin ONLINE - Mode & Design, Essen & Trinken, Leben')
     pagetitle_suffix = u' | ZEITmagazin'
 
-    @zeit.web.reify
-    def breadcrumb(self):
-        crumbs = {
-            'start': (
-                'Start',
-                '{}index'.format(self.request.route_url('home'))
-            ),
-            'zmo': (
-                'ZEIT Magazin',
-                '{}zeit-magazin/index'.format(self.request.route_url('home'))
+    def breadcrumbs_by_navigation(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        breadcrumbs = super(Base, self).breadcrumbs_by_navigation(breadcrumbs)
+        navigation = {
+            'zeit-magazin': (
+                'ZEITmagazin',
+                'http://xml.zeit.de/zeit-magazin/index'
             ),
             'leben': (
                 'Leben',
-                '{}zeit-magazin/leben/index'.format(
-                    self.request.route_url('home'))
+                'http://xml.zeit.de/zeit-magazin/leben/index'
             ),
             'mode-design': (
                 'Mode & Design',
-                '{}zeit-magazin/mode-design/index'.format(
-                    self.request.route_url('home'))
+                'http://xml.zeit.de/zeit-magazin/mode-design/index'
             ),
             'essen-trinken': (
                 'Essen & Trinken',
-                '{}zeit-magazin/essen-trinken/index'.format(
-                    self.request.route_url('home'))
+                'http://xml.zeit.de/zeit-magazin/essen-trinken/index'
             )
         }
-        crumb_list = [crumbs['start']]
-        crumb_list.append(crumbs['zmo'])
-        if self.context.ressort in crumbs:
-            crumb_list.append(crumbs[self.context.ressort])
-        if self.context.sub_ressort in crumbs:
-            crumb_list.append(crumbs[self.context.sub_ressort])
-        if self.title:
-            crumb_list.append((self.title, ''))
-        return crumb_list
+        for segment in (self.ressort, self.sub_ressort):
+            if segment == u'lebensart':
+                segment = u'zeit-magazin'
+            if segment in navigation:
+                breadcrumbs.append(navigation[segment])
+        return breadcrumbs
 
     @zeit.web.reify
     def ressort_literally(self):

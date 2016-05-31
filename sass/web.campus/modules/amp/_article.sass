@@ -1,0 +1,39 @@
+%font-beckett
+	font-family: $font-beckett
+	font-weight: normal
+	letter-spacing: 1.5px // pixel value by intention
+	line-height: .95
+	font-variant-numeric: proportional-nums
+	padding-top: .25em
+	text-transform: uppercase
+
+.headline
+	&__kicker
+		letter-spacing: .01em
+		text-transform: uppercase
+	&__title
+		@extend %font-beckett
+		font-size: em(48px)
+		word-wrap: break-word
+
+.intertitle
+	@extend %font-beckett
+	font-size: em(26px)
+
+.nextread
+	&__kicker
+		font-size: em(12px)
+		letter-spacing: $letter-spacing-l
+		text-transform: uppercase
+	&__title
+		@extend %font-beckett
+		font-size: em(26px)
+
+.quote
+	&__text
+		@extend %font-beckett
+		font-size: em(32px)
+
+.paragraph
+	em
+		font-family: $font-franziska

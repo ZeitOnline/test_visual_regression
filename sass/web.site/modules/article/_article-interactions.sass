@@ -1,32 +1,22 @@
-%article-interactions__item
-	color: $zon-grey
-	cursor: pointer
-	letter-spacing: 0.04em
-	font-size: remify(14px)
-	+on-interaction
-		color: $zon-dark-grey
+$interaction-color: $zon-grey
+$interaction-hover-color: $zon-dark-grey
 
-.article-interactions
-	margin: $vertical-space auto remify(32px)
-	position: relative
+@import "web.core/modules/article/article-interactions"
 
 .print-menu
 	position: absolute
 	top: 0
 	left: remify(55px)
-	display: none
-	&__print,
-	&__pdf
-		@extend %article-interactions__item
+
+	&__link
 		&:before
-			content: " / "
 			color: $color-separator
-			margin: remify(0 4px)
-	+respond-min($break-desktop-min)
-		display: inline
+			content: " / "
+			margin: 0 .25em
 
 .sharing-menu
-	font-size: remify(14px)
+	display: inline
+
 	&__title
 		@extend %article-interactions__item
 		&:after
@@ -37,21 +27,15 @@
 		+transition-duration(0.5s)
 		+transition-timing-function(ease)
 		max-height: 0 // animated
-		margin: 0 // animated
 		overflow: hidden // needed for animation
-		padding: 0
 	&__item
-		+inline-block
-		&:before
+		float: left
+		&:not(:last-child):after
 			content: "/"
 			color: $color-separator
 			margin: remify(0 8px)
-		&:first-child:before
-			content: none
-		&--whatsapp
-			+respond-min($break-tablet-min)
-				display: none
 	&__link
+		font-size: em(14px)
 		font-weight: bold
 		line-height: 2.0
 		+on-interaction

@@ -8,12 +8,12 @@ def test_campus_adcontroller_values_return_values_on_hp(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/index')
     adcv = [
-        ('$handle', 'index'),
+        ('$handle', 'homepage'),
         ('level2', 'campus'),
         ('level3', ''),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
     view = zeit.web.campus.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest(path='/campus/index'))
@@ -24,12 +24,12 @@ def test_campus_adcontroller_values_return_values_on_cp(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/index')
     adcv = [
-        ('$handle', 'centerpage'),
+        ('$handle', 'index'),
         ('level2', 'campus'),
         ('level3', ''),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
     view = zeit.web.campus.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest())
@@ -45,8 +45,29 @@ def test_campus_adcontroller_values_return_values_on_article(application):
         ('level3', 'thema'),
         ('level4', 'bafoeg_antraege_fuer_ue_50'),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
     view = view = zeit.web.campus.view_article.Article(
+        content, pyramid.testing.DummyRequest())
+    assert adcv == view.adcontroller_values
+
+
+def test_campus_adplace7_should_be_placeable_via_cpextra(testbrowser):
+    browser = testbrowser('/campus/centerpage/adplace7')
+    assert len(browser.cssselect('script[id="ad-desktop-7"]')) == 1
+
+
+def test_campus_adcontroller_values_return_values_on_topic_cp(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/centerpage/thema')
+    adcv = [
+        ('$handle', 'index'),
+        ('level2', 'campus'),
+        ('level3', 'thema'),
+        ('level4', 'jurastudium'),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,zeitcampus'),
+        ('tma', '')]
+    view = zeit.web.campus.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values

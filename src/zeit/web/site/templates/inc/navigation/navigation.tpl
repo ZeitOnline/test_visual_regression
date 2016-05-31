@@ -1,6 +1,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<div class="main_nav">
+<div class="main_nav" id="main_nav">
 	<!-- logo -->
 	<div id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" class="logo_bar">
 		{% with tag_name = 'h1' if view.is_hp else 'div' %}
@@ -8,7 +8,7 @@
 			<a itemprop="url" href="{{ request.route_url('home') }}index" title="Nachrichten auf ZEIT ONLINE" data-id="topnav.2.1..logo">
 				<meta itemprop="name" content="ZEIT ONLINE">
 				<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-					{{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.request, inline=view.inline_svg_icons) }}
+					{{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.package) }}
 					<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
 					<meta itemprop="width" content="565">
 					<meta itemprop="height" content="60">
@@ -17,9 +17,9 @@
 		</{{ tag_name }}>
 		{% endwith %}
 		<div class="logo_bar__menu">
-			<a href="#primary_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="navigation" aria-expanded="false">
-				{{ lama.use_svg_icon('menu', 'logo_bar__menu-icon logo_bar__menu-icon--burger', view.request, inline=view.inline_svg_icons) }}
-				{{ lama.use_svg_icon('close', 'logo_bar__menu-icon logo_bar__menu-icon--close', view.request, inline=view.inline_svg_icons) }}
+			<a href="#main_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="main_nav" aria-expanded="false">
+				{{ lama.use_svg_icon('menu', 'logo_bar__menu-icon logo_bar__menu-icon--burger', view.package) }}
+				{{ lama.use_svg_icon('close', 'logo_bar__menu-icon logo_bar__menu-icon--close', view.package) }}
 			</a>
 		</div>
 	</div>
@@ -34,13 +34,16 @@
 	{% endblock special_teaser %}
 
 	<!-- wrap start -->
-	<div class="main_nav__community" data-dropdown="true">
-		{% set esi_source = '{}login-state?for=site&context-uri={}'.format(request.route_url('home'), request.url) %}
-		{{ lama.insert_esi(esi_source, 'Anmeldung nicht möglich') }}
-	</div>
+    <div class="main_nav__community" data-dropdown="true">
+        {% block login %}
+            {% set esi_source = '{}login-state?for=site&context-uri={}'.format(request.route_url('home'), request.url) %}
+            {{ lama.insert_esi(esi_source, 'Anmeldung nicht möglich') }}
+        {% endblock login %}
+    </div>
+
 	{% if view.nav_show_ressorts %}
 	<div class="main_nav__ressorts" data-dropdown="true">
-		<nav role="navigation" id="primary_nav">
+		<nav id="primary_nav">
 		{%- set navigation = view.navigation -%}
 		{%- set nav_class = 'primary-nav' -%}
 		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}

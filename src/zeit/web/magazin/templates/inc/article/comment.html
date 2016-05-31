@@ -1,3 +1,5 @@
+{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
+
 <article class="comment{% if comment.is_reply and not comment.is_promoted %} is-indented{% endif %}"{% if not comment.is_promoted %} id="cid-{{ comment.cid }}"{% endif %}>
 	<div class="comment__head">
 		{% if comment.img_url -%}
@@ -14,8 +16,8 @@
 	<div class="comment__body">
 		{{ comment.text | safe }}
 	</div>
-	<aside class="comment__tools">
-		<a class="comment__tools__icon icon-comment-reply js-reply-to-comment" data-cid="{{ comment.cid }}" title="Auf Kommentar antworten">Auf Kommentar antworten</a>
-		<a class="comment__tools__icon icon-comment-report js-report-comment" data-cid="{{ comment.cid }}" title="Kommentar melden">Kommentar melden</a>
+	<aside class="comment__toolbox">
+		<a class="comment__tool js-reply-to-comment" data-cid="{{ comment.cid }}" title="Auf Kommentar antworten">{{ lama.use_svg_icon('comment-reply', 'comment__tool-icon', view.package) }}</a>
+		<a class="comment__tool js-report-comment" data-cid="{{ comment.cid }}" title="Kommentar melden">{{ lama.use_svg_icon('comment-report', 'comment__tool-icon', view.package) }}</a>
 	</aside>
 </article>

@@ -1,63 +1,54 @@
 $pagination-icon-width: 21px
 $pagination-icon-height: 32px
 
-%pager
-    +inline-block
-    line-height: $pagination-icon-height
-    margin: 0 $small
-    padding: 0
-    min-width: $pagination-icon-width
-    min-height: $pagination-icon-height
-    text-align: center
-    color: $grey--mid
-
-.article__pagination
+.article-pagination
     font-family: $font-tabletgothic
     margin-bottom: $twice
 
-.article__pagination__nexttitle
-    font-weight: bold
-    color: $grey--dark
-    text-align: center
-    a
-        +link-colors($grey--dark, $grey--dark, $grey--dark, $grey--dark, $grey--dark)
+    &__nexttitle
+        font-weight: bold
+        color: $grey--dark
+        text-align: center
+        a
+            +link-colors($grey--dark, $grey--dark, $grey--dark, $grey--dark, $grey--dark)
 
-.article__pagination__dash
-    color: $charcoal
+    &__dash
+        color: $charcoal
 
-.article__pager
-    list-style: none
-    text-align: center
-    margin: $twice 0 0
-    padding: 0
+    &__pager
+        list-style: none
+        text-align: center
+        margin: $twice 0 0
+        padding: 0
 
-.article__pager__number
-    @extend %pager
-    a
-        font-size: $font-s
-        display: block
+    &__item
+        display: inline-block
+        line-height: $pagination-icon-height
+        margin: 0 $small
+        padding: 0
+        min-width: $pagination-icon-width
         color: $grey--mid
+        vertical-align: middle
+
+    &__link
+        font-size: $font-s
         +link
             color: $grey--mid
-
-        &.is-current
-            cursor: default
-            color: $charcoal
-        &:not(.is-current)
-            +on-interaction
-                font-weight: bold
-
-.article__pager__prev,
-.article__pager__next
-    @extend %pager
-    a,
-    span
-        display: block
-        text-indent: -50000em
-        background-color: $grey--light
-    a
         +on-interaction
-            background-color: $grey--dark
-            background-position: 0% 100%
-    &.is-inactive
+            font-weight: bold
+        &--current
+            cursor: default
+            font-weight: bold
+
+    &__icon
+        display: block
+        color: $grey--mid
+        background-color: $grey--light
+        width: $pagination-icon-width
+        height: $pagination-icon-height
         opacity: .4
+        &--active
+            opacity: 1
+            +on-interaction
+                color: $white
+                background-color: $grey--dark

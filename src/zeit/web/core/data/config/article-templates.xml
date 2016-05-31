@@ -19,7 +19,7 @@
     <title>Pro und Kontra</title>
   </template>
 
-  <template name="zon-topic" available="zeit.cms.section.interfaces.IZONContent">
+  <template name="topic" available="zeit.cms.section.interfaces.IZONContent">
     <title>Themenartikel</title>
   </template>
   -->

@@ -122,13 +122,13 @@
     <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924ef86" kind="topic">
       <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d52" kind="topic" title="Dossierteaser Titel" supertitle="Dossier" xread_more_url="http://xml.zeit.de/zeit-online/index">
         <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
-        <container cp:type="teaser" module="zon-topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e6">
+        <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e6">
           <block href="http://xml.zeit.de/artikel/02"/>
         </container>
-        <container cp:type="teaser" module="zon-topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
+        <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
           <block href="http://xml.zeit.de/artikel/01"/>
         </container>
-        <container cp:type="teaser" module="zon-topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
+        <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
           <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
         </container>
       </region>
@@ -168,7 +168,7 @@
 
     <!-- ZMO Parkett -->
   <cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet" title="Parkett">
-    <region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
+    <region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zmo-parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
       <referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
       <container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
         <block href="http://xml.zeit.de/artikel/02"/>

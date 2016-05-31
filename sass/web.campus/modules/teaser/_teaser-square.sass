@@ -3,25 +3,23 @@
 	padding: $page-padding--small
 
 	&__media
-		background-color: $greyish-white
-		height: 0
+		@extend %teaser-media
 		padding-bottom: 100% // image variant 'square', ratio 1:1
 
 	&__heading
 		@extend %teaser-heading
-		margin: remify(-10px 0 10px)
+		+scaled-font(32px, $title-factor)
 
 	&__combined-link
 		@extend %teaser-combined-link
-		box-shadow: 10px -12px 0 10px $white
 
 	&__kicker
 		@extend %teaser-kicker
-		top: remify(-34px)
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
 
 	&__title
 		@extend %teaser-title
-		font-size: remify(32px)
 
 	&__text
 		@extend %teaser-text
@@ -29,22 +27,17 @@
 	&__metadata
 		@extend %teaser-metadata
 
-	&__byline
-		@extend %teaser-byline
+	&__commentcount
+		@extend %teaser-commentcount
 
 
 +respond-min($break-tablet-min)
 	.teaser-square
-		border: none
-		float: left
-		padding: $cp-padding
-		width: 50%
+		padding: $vertical-space $cp-padding
 		&__heading
-			margin-top: remify(-14px)
-		&__combined-link
-			box-shadow: 10px -18px 0 10px $white
-		&__title
-			font-size: remify(42px)
+			+scaled-font(42px, $title-factor)
+			padding-right: 0
+		&__heading,
 		&__text,
 		&__metadata
 			width: 90%

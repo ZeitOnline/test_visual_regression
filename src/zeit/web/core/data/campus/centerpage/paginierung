@@ -1,0 +1,97 @@
+<centerpage page="" type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <header_image/>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:03.346120+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:09:09.014473+00:00</attribute>
+    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:08:09.170784+00:00</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2015-03-24T17:09:09.014473+00:00</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:00.932648+00:00</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.bruenjes</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;ICP2015&quot; module=&quot;zeit.content.cp.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZCOContent&quot; module=&quot;zeit.campus.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
+    <attribute name="html-meta-title" ns="http://namespaces.zeit.de/CMS/document">Umbrien - News und Infos | ZEIT ONLINE</attribute>
+    <attribute name="html-meta-description" ns="http://namespaces.zeit.de/CMS/document">Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu Umbrien.</attribute>
+    <topiclinks/>
+  </head>
+  <body>
+    <title>Schlagwort Umbrien</title>
+      <region visible="True" visible_mobile="True" area="id-c80297d3-5680-4259-aa90-9e828f7d2d3e" kind="solo" kind_title="Solo-Region">
+      <area visible="True" visible_mobile="True" hide-dupes="True" area="id-24f9af13-ba8a-4cdc-9e5d-4961e1dd464f" kind="solo">
+        <module cp:type="headerimage" module="headerimage" visible="True" visible_mobile="True" cp:__name__="id-6a1f4359-85a3-4a18-986f-2be47536bf15" supertitle="Griechenland" title="Das linke Experiment">
+          <image>
+          http://xml.zeit.de/politik/ausland/2015-08/griechenland-themenseite/
+          </image>
+        </module>
+      </area>
+    </region>
+    <region visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
+      <area visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
+        <container cp:type="teaser" module="zco-square" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a">
+          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs"></block>
+        </container>
+      </area>
+      <area visible="True" area="id-bb856af5-0ad1-4849-b2f3-43fb635f4fc6" kind="duo">
+        <container cp:type="teaser" module="zco-square" visible="True" hide-dupes="True" cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e">
+          <block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" uniqueId="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview"></block>
+        </container>
+      </area>
+    </region>
+    <region area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True" visible_mobile="True">
+      <area area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="query" count="10" hide-dupes="True" kind="zco-ranking" visible="True" visible_mobile="True">
+        <module cp:__name__="id-167b003d-0199-4cc5-831e-c1eaac5f925c" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <module cp:__name__="id-4a960096-2165-4f23-bdf9-c38a34655c43" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <module cp:__name__="id-aa3d66b6-5a83-4c28-98de-78686d074a62" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <module cp:__name__="id-13b34132-500d-41b4-b565-2e29f7f9840f" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <module cp:__name__="id-097121c4-56ca-4711-950d-54989b5ed453" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <module cp:__name__="id-167b003d-0199-4cc8-531e-c1eaac5f925c" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <module cp:__name__="id-4a960096-2165-4f32-bdf9-c38a34655c43" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <module cp:__name__="id-aa3d66b6-5a83-4c28-89de-78686d074a62" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <module cp:__name__="id-13b34132-500d-414b-b565-2e29f7f9840f" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <module cp:__name__="id-097121c4-65ca-4171-950d-54989b5ed453" cp:type="auto-teaser" module="zco-small" visible="True"/>
+        <raw_query>published:&quot;published&quot; AND keywords:&quot;umbrien&quot;</raw_query>
+        <page>1</page>
+      </area>
+    </region>
+  </body>
+  <feed/>
+</centerpage>

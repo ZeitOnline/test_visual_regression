@@ -11,14 +11,14 @@
 	&__container
 		position: relative
 		padding-top: remify(34px)
-		&:before
-			@extend %font-beckett
-			border-bottom: 3px solid currentColor
-			color: $color-article-primary
-			content: "Information"
-			font-size: em(32px)
-			position: absolute
-			top: -0.46em
+	&__title
+		@extend %font-beckett
+		border-bottom: 3px solid currentColor
+		color: $color-article-primary
+		+scaled-font(32px, $title-factor)
+		margin: 0
+		position: absolute
+		top: -0.46em
 
 	.no-js &__container
 		@extend .article__item
@@ -29,10 +29,16 @@
 	border-top: 1px solid #ccc
 	&:first-child
 		border: none
+	// hide tab counter for single tabs in accordion (mobile view)
+	&:only-child &__link:before
+		content: none
+	// hide tab counter for single tabs in tablist (stationary view)
+	&__title:only-child &__link:before
+		content: none
+
 	&__title
 		color: $color-article-primary
-		font-family: $font-tabletgothic
-		font-size: em(13px)
+		+scaled-font(13px)
 		font-weight: normal
 		letter-spacing: $letter-spacing-l
 		line-height: round-to-precision(19/13, $precision: 1)
@@ -59,14 +65,13 @@
 			counter-increment: infobox-list
 			font-weight: normal
 		.js &:after
-			position: absolute
-			content: ""
 			background-color: $color-article-primary
-		.js &:after
+			content: ""
 			height: remify(13px)
+			position: absolute
 			right: remify(5px)
-			width: remify(3px)
 			top: remify(18px)
+			width: remify(3px)
 		&[aria-expanded="true"]
 			color: $color-text
 			font-weight: bold
@@ -82,8 +87,7 @@
 		li,
 		td
 			color: #444
-			font-family: $font-tabletgothic
-			font-size: em(14px)
+			+scaled-font(14px)
 			line-height: round-to-precision(21/14, $precision: 1)
 			margin: 0 0 .6em
 		img
@@ -91,9 +95,8 @@
 
 .article--leserartikel
 	.infobox
-		&__container
-			&:before
-				color: $color-community-primary
+		&__title
+			color: $color-community-primary
 	.infobox-tab
 		&__title
 			color: $color-community-primary
@@ -108,9 +111,9 @@
 
 		&__container
 			padding-top: remify(50px)
-			&:before
-				border-bottom-width: 4px
-				font-size: em(44px)
+		&__title
+			border-bottom-width: 4px
+			+scaled-font(44px, $title-factor)
 		.js &__container
 			+display-flex()
 			+flex-flow(row wrap)
@@ -131,7 +134,7 @@
 			display: none
 
 		&__title
-			font-size: em(15px)
+			+scaled-font(15px)
 			line-height: round-to-precision(20/15, $precision: 1)
 			.js &:before
 				content: none
@@ -145,5 +148,5 @@
 			margin-bottom: remify(40px)
 			padding-top: remify(8px)
 			p, li, td
-				font-size: em(16px)
+				+scaled-font(16px)
 				line-height: round-to-precision(24/16, $precision: 1)

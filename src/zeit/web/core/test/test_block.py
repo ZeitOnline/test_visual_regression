@@ -305,6 +305,7 @@ def test_block_image_should_contain_expected_structure(tplbrowser):
     block.href = 'http://images.zeit.de/image.jpg'
     block.figure_mods = ('wide', 'rimless', 'apart')
     block.copyright = (('Andreas Gursky', 'http://www.example.com', False),)
+    block.ratio = 1
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/image.html', block=block)
     assert browser.cssselect('img.article__media-item')
@@ -315,19 +316,19 @@ def test_block_infobox_should_contain_expected_structure(tplbrowser):
     view.package = 'zeit.web.site'
     block = mock.Mock()
     block.title = 'Infobox-Titel'
+    block.identifier = 'infobox-file'
     block.contents = (('Infos', 'Hier die Infos über'),)
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/infobox.html', block=block,
         view=view)
     assert browser.cssselect('aside.infobox.js-infobox')
     assert browser.cssselect('aside.infobox.js-infobox')[0].get('id') == (
-        'infoboxtitel')
+        'infobox-file')
 
 
 def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
     view.package = 'zeit.web.site'
-    block = mock.Mock()
     block = {}
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block,
@@ -382,7 +383,7 @@ def test_block_portraitbox_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/portraitbox.html', block=block)
     assert browser.cssselect(
-        'figure.portraitbox.article__item.article__item--marginalia')
+        '.portraitbox.article__item.article__item--marginalia')
 
 
 def test_block_quiz_should_contain_expected_structure(tplbrowser):
@@ -469,3 +470,26 @@ def test_find_nextread_from_correct_ressort_if_subressort_has_same_name(
 def test_find_nextread_does_not_break_on_umlauts(application):
     # Assert nothing raised
     zeit.web.core.block.find_nextread_folder(u'Deutschländ', u'Datenschütz')
+
+
+def test_paragraph_should_have_expected_length():
+    model_block = mock.Mock()
+    model_block.xml = lxml.etree.fromstring(u'<p>foo <b>baa</b></p>')
+    p = zeit.web.core.block.Paragraph(model_block)
+    assert len(p) == 7
+
+    model_block = mock.Mock()
+    model_block.xml = lxml.etree.fromstring(u'<p>ü</p>')
+    p = zeit.web.core.block.Paragraph(model_block)
+    assert len(p) == 1
+
+    model_block = mock.Mock()
+    model_block.xml = lxml.etree.fromstring(u'<p></p>')
+    p = zeit.web.core.block.Paragraph(model_block)
+    assert len(p) == 0
+
+    model_block = mock.Mock()
+    model_block.xml = lxml.etree.fromstring(
+        u'<p><strong><em>foo</em></strong></p>')
+    p = zeit.web.core.block.Paragraph(model_block)
+    assert len(p) == 3

@@ -1,3 +1,8 @@
+$color-comment-count: inherit !default
+$color-comment-count--hover: inherit !default
+$opacity-comment-count: 0.4 !default
+$opacity-comment-count--hover: 0.8 !default
+
 .skiplink
 	color: green
 	@extend %off-screen
@@ -22,3 +27,53 @@ input[type="search"]
 	#main
 		.mobile-hidden
 			display: none
+
+// animation: loading indicator for areas (images, comments)
++keyframes(smoothPulse)
+	to
+		background-color: rgba(#eee, 0.6)
+
+%label
+	color: $dusty-gray
+	display: block
+	font-family: $font-tabletgothic
+	font-size: em(9px)
+	letter-spacing: .15em
+	line-height: 1
+	margin-bottom: remify(10px)
+	text-align: right
+	text-transform: uppercase
+
+%exclamation
+	background-color: $color-exclamation-background
+	border-radius: 50%
+	color: #fff
+	content: "!"
+	display: inline-block
+	font-size: 0.8125em
+	height: 1.125em
+	line-height: 1
+	margin-right: .375em
+	text-align: center
+	width: 1.125em
+
+%commentcount
+	+transition-property(background-color, color, opacity)
+	+transition-duration(.2s)
+	color: $color-comment-count
+	position: relative
+	white-space: nowrap
+	// paint a "border" with current link color and opacity
+	&:after
+		background-color: currentColor
+		bottom: -1px
+		content: ""
+		height: 1px
+		left: 0
+		opacity: $opacity-comment-count
+		position: absolute
+		width: 100%
+	+on-interaction
+		color: $color-comment-count--hover
+		&:after
+			opacity: $opacity-comment-count--hover

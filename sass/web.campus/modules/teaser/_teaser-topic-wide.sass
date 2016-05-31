@@ -1,0 +1,93 @@
+.teaser-topic-wide
+
+	&:after
+		content: ''
+		display: block
+		width: remify(50px)
+		margin: remify(20px 0 20px $page-padding--small)
+		border-bottom: 3px solid $color-article-primary
+
+	&__topic-button
+		+font-smoothing
+		+scaled-font(26px, $title-factor)
+		+transform(translateX(-50%))
+		@extend %font-beckett
+		background-color: $color-background--dark
+		color: $white
+		display: inline-block
+		left: 50%
+		margin: 0
+		padding: remify(15px 15px 10px)
+		position: absolute
+		top: 0
+		+on-interaction
+			color: $color-topics-secondary
+
+	&__heading
+		@extend %teaser-heading
+		+scaled-font(42px, $title-factor)
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		@extend %teaser-kicker
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
+
+	&__title
+		@extend %teaser-title
+
+	&__text
+		@extend %teaser-text
+
+	&__metadata
+		@extend %teaser-metadata
+
+	&__commentcount
+		@extend %teaser-commentcount
+
++respond-max($break-tablet-min)
+	.teaser-topic-wide
+		&__combined-link,
+		&__kicker,
+		&__text,
+		&__metadata
+			padding-left: $page-padding--small
+		&__text,
+		&__metadata
+			padding-right: $page-padding--small
+
+
++respond-min($break-tablet-min)
+	.teaser-topic-wide
+
+		&:after
+			margin: remify(30px 0 30px -45px)
+
+		&__topic-button
+			+scaled-font(36px, $title-factor)
+			+transform(none)
+			margin-left: remify(-40px)
+			padding: remify(16px 20px 8px)
+			position: static
+
+		&__heading
+			+scaled-font(42px, $title-factor)
+			margin: remify(20px 0 5px)
+			max-width: none
+			padding: 0
+
+		&__kicker
+			display: block
+			padding: remify(0 0 15px)
+			position: static
+
++respond-min($break-desktop-min)
+	.teaser-topic-wide
+		&:after
+			margin: remify(40px 0 40px -45px)
+
+		&__topic-button
+			margin-left: remify(-45px)
+			padding: remify(22px 25px 14px)

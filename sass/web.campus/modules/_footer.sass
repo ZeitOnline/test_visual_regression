@@ -1,10 +1,9 @@
 $footer-logo-width: 113px
 
 .footer
-	+padded
 	background-color: $primary-color
 	color: #777
-	padding-top: remify(20px)
+	margin-top: remify(60px)
 	padding-bottom: remify(20px)
 	+respond-min($break-tablet-min)
 		padding-bottom: remify(40px)
@@ -14,8 +13,12 @@ $footer-logo-width: 113px
 		+on-interaction
 			color: $nav-color-tools
 
+	&__navigation
+		padding-top: remify(20px)
+
 	&__item
-		+respond-min($break-desktop-min)
+		margin: 0 $page-padding--small
+		+respond-min($break-tablet-min)
 			margin: 0 auto
 			max-width: $medium-content-width
 
@@ -28,7 +31,7 @@ $footer-logo-width: 113px
 			margin-top: remify(5px)
 
 	&__links
-		border-bottom: 1px solid #444
+		border-bottom: 1px solid $footer-color-border
 		padding-bottom: remify(8px)
 		padding-top: remify(4px)
 		&:first-child
@@ -38,7 +41,7 @@ $footer-logo-width: 113px
 			padding-bottom: 0
 		+respond-min($break-tablet-min)
 			border-bottom: none
-			border-left: 1px solid #444
+			border-left: 1px solid $footer-color-border
 			margin-left: remify($footer-logo-width+20px)
 			padding-bottom: 0
 			padding-left: remify(20px)

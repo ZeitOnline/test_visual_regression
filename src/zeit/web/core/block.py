@@ -41,9 +41,22 @@ class Block(object):
 class Paragraph(Block):
 
     def __init__(self, model_block):
+        self.model_block = model_block
         self.html = _inline_html(model_block.xml)
 
+    def __len__(self):
+        try:
+            xslt_result = _inline_html(
+                self.model_block.xml, elements=['p', 'initial'])
+            text = u''.join(xslt_result.xpath('//text()'))
+            return len(text.replace('\n', '').strip())
+        except:
+            return 0
+
     def __str__(self):
+        return unicode(self.html)
+
+    def __unicode__(self):
         return unicode(self.html)
 
 
@@ -121,6 +134,13 @@ class Infobox(Block):
     def __init__(self, model_block):
         self.context = model_block.references
         self.layout = model_block.layout
+
+    @property
+    def identifier(self):
+        try:
+            return self.context.uniqueId.split('/')[-1]
+        except:
+            return 'infobox'
 
     @property
     def title(self):
@@ -306,6 +326,8 @@ class Image(zeit.web.core.image.BaseImage):
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(Image)
 class BlockImages(object):
+
+    fill_color = None
 
     def __init__(self, context):
         self.context = context
@@ -737,7 +759,7 @@ def find_nextread_folder(ressort, subressort):
 
 
 def contains_nextreads(folder):
-    if not folder:
+    if not zeit.cms.repository.interfaces.IFolder.providedBy(folder):
         return False
     nextread_foldername = zope.component.getUtility(
         zeit.web.core.interfaces.ISettings).get(
@@ -758,6 +780,9 @@ class BreakingNews(object):
         try:
             bn_banner_content = zeit.cms.interfaces.ICMSContent(bn_path)
         except TypeError:
+            bn_banner_content = None
+        if not zeit.content.article.interfaces.IArticle.providedBy(
+                bn_banner_content):
             self.published = False
             return
         self.published = zeit.cms.workflow.interfaces.IPublishInfo(
@@ -765,7 +790,10 @@ class BreakingNews(object):
         bn_banner = zeit.content.article.edit.interfaces.IBreakingNewsBody(
             bn_banner_content)
         self.uniqueId = bn_banner.article_id
-        bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId)
+        bn_article = zeit.cms.interfaces.ICMSContent(self.uniqueId, None)
+        if bn_article is None:
+            self.published = False
+            return
         bd_date = zeit.cms.workflow.interfaces.IPublishInfo(
             bn_article).date_first_released
         if bd_date:

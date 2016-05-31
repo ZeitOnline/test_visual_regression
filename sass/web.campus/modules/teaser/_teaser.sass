@@ -1,46 +1,81 @@
+$teaser-heading-box-shadow: 0.4em
+
 %teaser
 	border-bottom: 1px solid $color-border
+	+respond-min($break-tablet-min)
+		border-bottom: 0
+
+%teaser-media
+	background-color: $greyish-white
+	color: $color-text // force alt text being readable
+	height: 0
 
 %teaser-heading
-	position: relative
+	line-height: 0
+	margin: -0.4em 0 remify(10px)
 	max-width: 95%
+	padding-right: $teaser-heading-box-shadow
 
 %teaser-combined-link
-	background-color: $white
+	background-color: $color-page-bg
 	box-decoration-break: clone
+	-webkit-box-decoration-break: clone
+	box-shadow: $teaser-heading-box-shadow 0 0 0 $color-page-bg
+	position: relative
 
 %teaser-kicker
-	background-color: $white
-	color: $zco-accent
-	font-family: $font-tabletgothic
-	font-size: remify(12px)
+	background-color: $color-page-bg
+	bottom: 100%
+	color: $color-article-primary
+	+scaled-font-rem(12px) // has to be rem as base is huge
+	left: 0
 	letter-spacing: 0.08em
 	line-height: 1.25
-	padding: remify(6px 13px 0 0)
+	padding: remify(8px 12px 0 0)
 	position: absolute
 	text-transform: uppercase
+	// this is a cheap fix for our positioning vs. box-width problem
+	// @see https://www.w3.org/TR/css3-positioning/#containing-block
+	// @read https://zon.slack.com/archives/frontend/p1460390094000013
+	span
+		white-space: nowrap
+
+%teaser-kicker--leserartikel
+	color: $color-community-primary
 
 %teaser-title
 	@extend %font-beckett
-	background-color: transparent
 	color: $zco-charcoal
-	position: relative
+	position: relative // for stacking context
+	z-index: 1
 
 %teaser-text
-	color: $zco-charcoal
-	font-family: $font-tabletgothic
-	font-size: remify(16px)
-	line-height: 1.25
-	margin: 0 0 0.5em 0 // em for a reason, so it grows with the breakpoint
+	+scaled-font(16px)
+	line-height: 1.4
+	margin: 0 0 .5em 0 // em for a reason, so it grows with the breakpoint
 	+respond-min($break-tablet-min)
-		font-size: remify(15px)
-		line-height: (20/15)
+		+scaled-font(15px)
 
 %teaser-metadata
-	color: $color-teaser-meta
-	font-size: remify(15px)
-	line-height: (20/15)
+	color: $color-text--light
+	+scaled-font(15px)
+	letter-spacing: $letter-spacing-s
+	line-height: 1.4
+	+respond-min($break-tablet-min)
+		+scaled-font(14px)
+	> *:not(:last-child):not(:empty):after
+		content: " \2014 " // — = em dash
+		margin: 0 .2em
+		opacity: $color-separator-opacity
+	time
+		white-space: nowrap
 
-%teaser-byline
-	display: block
-	margin-bottom: remify(8px)
+%teaser-commentcount
+	@extend %commentcount
+
+.series-label,
+.blog-label
+	font-weight: normal
+	&:after
+		content: " \2014 " // — = em dash
+		margin: 0 .25em

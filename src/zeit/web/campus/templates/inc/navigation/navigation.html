@@ -1,10 +1,10 @@
 {% import "zeit.web.campus:templates/macros/layout_macro.tpl" as lama %}
-<div class="header__brand">
+<div class="header__brand" data-ct-row="lead">
     <div class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-        <a itemprop="url" href="{{ request.route_url('home') }}campus/index">
-            <meta itemprop="name" content="ZEIT CAMPUS Online">
+        <a itemprop="url" href="{{ request.route_url('home') }}campus/index" data-ct-label="logo">
+            <meta itemprop="name" content="ZEIT Campus">
             <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-                {{ lama.use_svg_icon('logo-zco', 'header__logo', request, inline=view.inline_svg_icons) }}
+                {{ lama.use_svg_icon('logo-zco', 'header__logo', view.package) }}
                 {# The "logo" dimensions must not exceed 600x60 -#}
                 <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zco.png">
                 <meta itemprop="width" content="347">
@@ -12,13 +12,16 @@
             </span>
         </a>
     </div>
-    <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü">
-        {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', request, inline=view.inline_svg_icons) }}
-        {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', request, inline=view.inline_svg_icons) }}
+    {% if view.is_advertorial -%}
+    <span class="header__ad-label">{{ view.cap_title | default('Anzeige') }}</span>
+    {% endif -%}
+    <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü" data-ct-label="menu">
+        {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.package) }}
+        {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.package) }}
     </a>
 </div>
 
-<div class="nav" id="navigation">
+<div class="nav" id="navigation" data-ct-row="1">
     <div class="nav__home">
         <h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
     </div>
@@ -27,43 +30,45 @@
     </nav>
     <nav class="nav__more">
         <a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></a>
-        <ul class="nav__more-list" id="more-menu" aria-hidden="true">
+        <ul class="nav__more-list" id="more-menu" aria-hidden="true" data-ct-column>
             <li><a href="{{ request.route_url('home') }}wissen/zeit-wissen/index">ZEITWissen</a></li>
             <li><a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index">ZEITGeschichte</a></li>
             <li><a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID">Partnersuche</a></li>
             <li><a href="http://zeit.immowelt.de/">Immobilien</a></li>
             <li><a href="http://automarkt.zeit.de/">Automarkt</a></li>
             <li><a href="http://jobs.zeit.de/">Jobs</a></li>
-            <li><a href="https://premium.zeit.de/abo/appsios?wt_mc=pm.intern.fix.zco.fix.dach.text.apps">Apps</a></li>
-            <li><a href="https://premium.zeit.de/abo/digitalpaket5?wt_mc=pm.intern.fix.zco.fix.dach.text.audio">Audio</a></li>
+            <li><a href="https://premium.zeit.de/zeit-apps?wt_zmc=fix.int.zonpme.zco.dach.premium.text.apps.apps&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_apps_apps">Apps</a></li>
+            <li><a href="https://premium.zeit.de/zeit-audio?wt_zmc=fix.int.zonpme.zco.dach.premium.text.audio.audio&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_audio_audio">Audio</a></li>
             <li><a href="{{ request.route_url('home') }}archiv">Archiv</a></li>
             <li><a href="{{ request.route_url('home') }}spiele/index">Spiele</a></li>
             <li><a href="http://shop.zeit.de/">Shop</a></li>
-            <li><a href="https://premium.zeit.de/">ePaper</a></li>
+            <li><a href="https://premium.zeit.de/?wt_zmc=fix.int.zonpme.zco.dach.premium.text.epaper.epaper&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_epaper_epaper">ePaper</a></li>
         </ul>
     </nav>
     <div class="nav__login">
-        {%- set esi_source = '{}login-state?for=campus&context-uri={}'.format(request.route_url('home'), request.url) -%}
-        {{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
+        {% block login %}
+            {%- set esi_source = '{}login-state?for=campus&context-uri={}'.format(request.route_url('home'), request.url) -%}
+            {{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
+        {% endblock login %}
     </div>
-    <div class="nav__primary">
+    <div class="nav__primary" data-ct-row="2">
         <nav class="nav__topics">
             {% require topics = view.context | topic_links -%}
-            <h2 class="nav__topics-title"><a href="#">Themen{#{ topics.title | default('Themen', True) }#}</a></h2>
+            <span class="nav__topics-title">Themen{#{ topics.title | default('Themen', True) }#}</span>
             <ul class="nav__topics-list">
             {% for label, link in topics %}
                 <li><a href="{{ link }}">{{ label }}</a></li>
             {% endfor %}
             </ul>
             {% endrequire -%}
-            <a class="nav__topics-link" href="#">Alle Themen</a>
+            <a class="nav__topics-link" href="{{ request.route_url('home') }}campus/themen">Alle Themen</a>
         </nav>
         <nav class="nav__tools">
-            <h2 class="nav__tools-title"><a href="#tools-menu" role="button" aria-controls="tools-menu"><span class="nav__dropdown">Was soll ich studieren?</span></a></h2>
-            <ul class="nav__tools-list">
+            <p class="nav__tools-title"><a href="http://studiengaenge.zeit.de/artikel/was-soll-ich-studieren.html" role="button" aria-controls="tools-menu" data-follow-mobile="true"><span class="nav__dropdown">Was soll ich studieren?</span></a></p>
+            <ul class="nav__tools-list" data-ct-column>
                 <li><a href="http://studiengaenge.zeit.de/sit">Studium-Interessentest</a></li>
-                <li><a href="http://studiengaenge.zeit.de/studienangebote">Suchmaschine für Studiengänge</a></li>
-                <li><a href="http://ranking.zeit.de/">CHE Hochschulranking</a></li>
+                <li><a href="http://studiengaenge.zeit.de/">Suchmaschine für Studiengänge</a></li>
+                <li><a href="http://ranking.zeit.de/che2016/de/">CHE Hochschulranking</a></li>
             </ul>
         </nav>
     </div>

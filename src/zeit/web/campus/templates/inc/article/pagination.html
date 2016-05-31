@@ -13,5 +13,13 @@
 {% block pager_complete_view %}{% endblock %}
 
 {% block pagination_icon %}
-    {{ lama.use_svg_icon('arrow-right', 'article-pagination__icon', request) }}
+    {{ lama.use_svg_icon('arrow-right', 'article-pagination__icon', view.package) }}
 {% endblock %}
+
+{% block pagination_button %}
+    Mehr ZEIT Campus
+{% endblock %}
+
+{%- block pagination_link -%}
+    {{ request.route_url('home-campus') }}index
+{%- endblock -%}

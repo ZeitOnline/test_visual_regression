@@ -1,0 +1,18 @@
+<article class="{% block layout %}nextread-base{% endblock %}">
+	<a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}">
+		{% block teaser_image -%}
+			{% require image = get_image(module, teaser, fallback=True, variant_id="super") -%}
+				{%- set media_caption_additional_class = 'figcaption--hidden' -%}
+				{%- set module_layout = self.layout() -%}
+				{%- set omit_image_links = True -%}
+				{%- include "zeit.web.core:templates/inc/asset/image.tpl" -%}
+			{%- endrequire %}
+		{%- endblock %}
+
+		<h2 class="{{ self.layout() }}__heading">
+			<span class="{{ self.layout() }}__kicker">{{ teaser.supertitle }}</span>
+			{%- if teaser.title %}<span class="visually-hidden">: </span>{% endif -%}
+			<span class="{{ self.layout() }}__title">{{ teaser.title }}</span>
+		</h2>
+	</a>
+</article>

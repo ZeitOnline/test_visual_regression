@@ -1,0 +1,26 @@
+.teaser-topic-variant
+	@extend %teaser
+	+clearfix
+	position: relative
+	padding: remify(25px 0 $page-padding--small) // use padding to center label vertically
+	margin-top: $page-padding--small // use margin to adjust teaser in cp design
+
+	&__media
+		@extend %teaser-media
+		overflow: hidden
+		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
+
++respond-min($break-tablet-min)
+	.teaser-topic-variant
+		margin: $page-padding
+		padding: 0
+		&__media
+			width: 50%
+			width: calc(50% - #{$cp-padding})
+			float: left
+			padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
+
+	.teaser-topic-variant-list
+		padding: remify(20px) 0 0 $cp-padding
+		float: right
+		width: 50%

@@ -2,6 +2,7 @@
     font-family: "TabletGothic";
     src: url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.eot');
     src: url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.woff2') format('woff2'),
          url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.woff') format('woff'),
          url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.ttf') format('truetype'),
          url('/static/latest/fonts/tabletgothic/TabletGothic-Regular.svg#TabletGothic') format('svg');
@@ -10,8 +11,20 @@
 }
 @font-face {
     font-family: "TabletGothic";
+    src: url('/static/latest/fonts/tabletgothic/TabletGothic-Italic.eot');
+    src: url('/static/latest/fonts/tabletgothic/TabletGothic-Italic.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Italic.woff2') format('woff2'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Italic.woff') format('woff'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Italic.ttf') format('truetype'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Italic.svg#TabletGothic-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
+@font-face {
+    font-family: "TabletGothic";
     src: url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.eot');
     src: url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.woff2') format('woff2'),
          url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.woff') format('woff'),
          url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.ttf') format('truetype'),
          url('/static/latest/fonts/tabletgothic/TabletGothic-Bold.svg#TabletGothic-Bold') format('svg');
@@ -41,4 +54,13 @@
          url('/static/latest/fonts/franziska/FranziskaWebPro-Italic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
+}
+@font-face {
+    font-family: "BeckettLight";
+    src: url('/static/latest/fonts/beckett/Beckett-Light.eot');
+    src: url('/static/latest/fonts/beckett/Beckett-Light.eot?#iefix') format('embedded-opentype'),
+         url('/static/latest/fonts/beckett/Beckett-Light.woff2') format('woff2'),
+         url('/static/latest/fonts/beckett/Beckett-Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }

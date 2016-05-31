@@ -35,6 +35,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.pilath</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Studium generale</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2015-05-05T06:00:00+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZSF</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Im Mai m&#xFC;ssen sich die ersten bewerben, im Juli endet die Frist. Unser Countdown f&#xFC;r Abiturienten (akg)</attribute>

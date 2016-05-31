@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comments url="/content/zwei-baguettes-und-ein-zimmer-bitte">
+ <last_comment_timestamp>1457953126</last_comment_timestamp>
+ <last_comment_name></last_comment_name>
+ <last_comment_uid>2</last_comment_uid>
+ <comment_count>35</comment_count>
+ <comments_count_toplevel>29</comments_count_toplevel>
+ <comments_count_recommendations_editors>1</comments_count_recommendations_editors>
+ <comments_count_recommendations_readers>1</comments_count_recommendations_readers>
+ <nid>3</nid>
+ <thread_position>5</thread_position>
+ <comment id="cid-3">
+  <subject>[empty]</subject>
+  <date>
+   <year>2015</year>
+   <month>10</month>
+   <day>14</day>
+   <hour>13</hour>
+   <minute>38</minute>
+  </date>
+  <created>1444829933</created>
+  <changed>1444829933</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;xyz&lt;/p&gt;
+</content>
+  <token>VSsguVsWRUYvdwF5qMEKn4a9-F7v70bE4bWoaEocr1A</token>
+<flagged type="moderieren" userid="0"/>
+	  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-90">
+  <inreply to="cid-3"/>
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>44</minute>
+  </date>
+  <created>1457527440</created>
+  <changed>1457957171</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort die allererste Antwort&lt;/p&gt;
+</content>
+  <token>8k5wu6djiYkkbZtjhAPV8X4Z8wMmuzbqV54yrQe7av4</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-91">
+  <inreply to="cid-3"/>
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>09</day>
+   <hour>12</hour>
+   <minute>46</minute>
+  </date>
+  <created>1457527564</created>
+  <changed>1457527564</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;die zweite antwort&lt;/p&gt;
+</content>
+  <token>nG-7ltkYq6mzcqduyPXysThwn6KuPG724FAbnqPf3Mk</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <comment id="cid-92">
+  <inreply to="cid-3"/>
+  <subject>[empty]</subject>
+  <date>
+   <year>2016</year>
+   <month>03</month>
+   <day>14</day>
+   <hour>10</hour>
+   <minute>13</minute>
+  </date>
+  <created>1457950381</created>
+  <changed>1457950381</changed>
+  <homepage></homepage>
+  <content>&lt;p&gt;noch eine Antwort&lt;/p&gt;
+</content>
+  <token>QKN2xm_iKwlgdSluFw5Y911uXmQSiNWPG4hhvJXpW7o</token>
+  <author id="uid-2" url="/users/test_user" roles="admin-editor,admin-marketing,admin-tech">
+   <name>test_user</name>
+  </author>
+ </comment>
+ <path>/content/zwei-baguettes-und-ein-zimmer-bitte</path>
+ <source>http://localhost:9090/zeit-online/article/02</source>
+</comments>
+

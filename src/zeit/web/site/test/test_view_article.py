@@ -10,6 +10,7 @@ import lxml.etree
 import mock
 import pyramid.testing
 import pytest
+import re
 import requests
 import zope.component
 
@@ -70,6 +71,10 @@ def test_article_types_have_back_to_home_button(testbrowser):
     button = select('.article-pagination .article-pagination__button')
     assert button[0].text == 'Startseite'
 
+    # test link
+    link = select('.article-pagination__link')[0].attrib['href']
+    assert '/index' in link
+
 
 def test_article_pagination(testbrowser):
     select = testbrowser('/zeit-online/article/zeit').cssselect
@@ -111,25 +116,37 @@ def test_article_toc_has_mobile_functionality(testserver, selenium_driver):
     selenium_driver.get('{}/zeit-online/article/zeit'.format(testserver.url))
 
     toc_box = selenium_driver.find_element_by_css_selector('.article-toc')
-    toc_index = toc_box.find_element_by_css_selector('.article-toc__headline')
+    toc_button = toc_box.find_element_by_css_selector('.article-toc__headline')
     toc_onesie = toc_box.find_element_by_css_selector('.article-toc__onesie')
     toc_list = toc_box.find_element_by_css_selector('.article-toc__list')
 
     # before click
-    assert not toc_list.is_displayed()
-
-    # after click
-    toc_index.click()
-    assert toc_index.is_displayed()
-    assert '--active' in toc_index.get_attribute('class')
-
-    # after second click
-    toc_index.click()
     condition = expected_conditions.invisibility_of_element_located((
         By.CSS_SELECTOR, '.article-toc__list'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
-    assert '--active' not in toc_index.get_attribute('class')
+    assert toc_button.get_attribute('role') == 'button'
+    assert toc_list.get_attribute('role') == 'region'
+    assert toc_button.get_attribute('aria-expanded') == 'false'
+    assert toc_list.get_attribute('aria-hidden') == 'true'
+
+    # after click
+    toc_button.click()
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '.article-toc__list'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+    assert toc_button.get_attribute('aria-expanded') == 'true'
+    assert toc_list.get_attribute('aria-hidden') == 'false'
+
+    # after second click
+    toc_button.click()
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '.article-toc__list'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+    assert toc_button.get_attribute('aria-expanded') == 'false'
+    assert toc_list.get_attribute('aria-hidden') == 'true'
 
     # click on onesie
     toc_onesie.click()
@@ -275,7 +292,7 @@ def test_schema_org_article_mark_up(testbrowser):
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros.'
+    assert person.text == u'© Warner Bros.'
 
     assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
 
@@ -313,18 +330,6 @@ def test_other_page_types_should_not_designate_meta_pagination(testbrowser):
     assert not browser.xpath('//head/link[@rel="next"]')
 
 
-def test_article_meta_should_show_comment_count(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
-    count = browser.cssselect('.metadata__commentcount')[0].text
-    assert count == '42 Kommentare'
-
-
-def test_article_meta_should_omit_comment_count_if_no_comments_present(
-        testbrowser):
-    browser = testbrowser('/zeit-online/article/simple')
-    assert len(browser.cssselect('.metadata__commentcount')) == 0
-
-
 def test_article_obfuscated_source_without_date_print_published():
     content = mock.Mock()
     content.product.label = content.product.title = 'DIE ZEIT'
@@ -354,8 +359,13 @@ def test_article_sharing_menu_should_open_and_close(
         'sharing menu should be hidden by default')
 
     sharing_menu_target.click()
-    assert sharing_menu_items.is_displayed(), (
-        'sharing menu should be visible after interaction')
+    # we need to wait for the CSS animation to finish
+    # so the sharing menu is actually visible
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, sharing_menu_selector))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition), (
+            'sharing menu should be visible after interaction')
 
     sharing_menu_target.click()
     # we need to wait for the CSS animation to finish
@@ -405,15 +415,15 @@ def test_article_tags_are_present_and_limited(testbrowser):
 
 def test_infobox_in_article_is_shown(testbrowser):
     select = testbrowser('/zeit-online/article/infoboxartikel').cssselect
-    assert len(select('aside#sauriersindsuper.infobox')) == 1
-    assert len(select('#sauriersindsuper .infobox-tab__title')) == 6
+    assert len(select('aside#info-bonobo.infobox')) == 1
+    assert len(select('#info-bonobo .infobox-tab__title')) == 6
 
 
 def test_infobox_mobile_actions(testserver, selenium_driver, screen_size):
     selenium_driver.set_window_size(screen_size[0], screen_size[1])
     selenium_driver.get('{}/zeit-online/article/infoboxartikel'.format(
         testserver.url))
-    infobox = selenium_driver.find_element_by_id('sauriersindsuper')
+    infobox = selenium_driver.find_element_by_id('info-bonobo')
     tabnavigation = infobox.find_elements_by_class_name('infobox__navigation')
     tabpanels = infobox.find_elements_by_class_name('infobox-tab__panel')
     clicker = infobox.find_elements_by_css_selector(
@@ -445,7 +455,7 @@ def test_infobox_desktop_actions(testserver, selenium_driver, screen_size):
     selenium_driver.set_window_size(screen_size[0], screen_size[1])
     selenium_driver.get('{}/zeit-online/article/infoboxartikel'.format(
         testserver.url))
-    infobox = selenium_driver.find_element_by_id('sauriersindsuper')
+    infobox = selenium_driver.find_element_by_id('info-bonobo')
     tabnavigation = infobox.find_elements_by_class_name(
         'infobox__navigation')[0]
     tabpanels = infobox.find_elements_by_class_name('infobox-tab__panel')
@@ -950,17 +960,7 @@ def test_article_doesnt_show_modified_date(testbrowser):
 
 def test_video_in_article_is_there(testbrowser):
     article = testbrowser('/zeit-online/article/zeit')
-    assert len(article.cssselect('.video-player__iframe')) == 1
-
-
-def test_advertorial_marker_is_returned_correctly():
-    content = mock.Mock()
-    content.advertisement_title = 'YYY'
-    content.advertisement_text = 'XXX'
-    content.cap_title = 'ZZZ'
-    view = zeit.web.site.view_article.Article(
-        content, pyramid.testing.DummyRequest())
-    assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')
+    assert len(article.cssselect('.video-player__videotag')) == 1
 
 
 def test_advertorial_marker_is_present(testbrowser):
@@ -979,23 +979,23 @@ def test_canonical_url_should_omit_queries_and_hashes(testbrowser):
 
 def test_zeit_article_has_correct_meta_line(testserver, selenium_driver):
     selenium_driver.get('{}/zeit-online/article/zeit'.format(testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'12. Februar 2015, 4:32 Uhr /'
-                                 u' Editiert am 15. Februar 2015, 18:18 Uhr')
-    assert source.text.strip() == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+    assert dates[0].text == u'12. Februar 2015, 4:32 Uhr'
+    assert dates[1].text == u'Editiert am 15. Februar 2015, 18:18 Uhr'
+    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
 
 
 def test_tgs_article_has_correct_meta_line(testserver, selenium_driver):
     selenium_driver.get(
         '{}/zeit-online/article/tagesspiegel'.format(testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'15. Februar 2015, 0:00 Uhr / Aktualisiert'
-                                 u' am 16. Februar 2015, 11:59 Uhr')
-    assert source.text.strip() == u'Erschienen im Tagesspiegel'
+    assert dates[0].text == u'15. Februar 2015, 0:00 Uhr'
+    assert dates[1].text == u'Aktualisiert am 16. Februar 2015, 11:59 Uhr'
+    assert source.text == u'Erschienen im Tagesspiegel'
 
 
 def test_zon_article_has_correct_meta_line(testserver, selenium_driver):
@@ -1010,22 +1010,22 @@ def test_zon_article_has_correct_meta_line(testserver, selenium_driver):
 def test_freeform_article_has_correct_meta_line(testserver, selenium_driver):
     selenium_driver.get(
         '{}/zeit-online/article/copyrights'.format(testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'15. Februar 2015, 0:00 Uhr / Aktualisiert'
-                                 u' am 16. Februar 2015, 11:59 Uhr')
-    assert source.text.strip() == u'Quelle: ZEIT ONLINE, dpa, Reuters, rav'
+    assert dates[0].text == u'15. Februar 2015, 0:00 Uhr'
+    assert dates[1].text == u'Aktualisiert am 16. Februar 2015, 11:59 Uhr'
+    assert source.text == u'Quelle: ZEIT ONLINE, dpa, Reuters, rav'
 
 
 def test_afp_article_has_correct_meta_line(testserver, selenium_driver):
     selenium_driver.get('{}/zeit-online/article/afp'.format(testserver.url))
-    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
     source = selenium_driver.find_element_by_css_selector('.metadata__source')
 
-    assert date.text.strip() == (u'15. Februar 2015, 0:00 Uhr / Aktualisiert'
-                                 u' am 16. Februar 2015, 11:59 Uhr')
-    assert source.text.strip() == u'Quelle: AFP'
+    assert dates[0].text == u'15. Februar 2015, 0:00 Uhr'
+    assert dates[1].text == u'Aktualisiert am 16. Februar 2015, 11:59 Uhr'
+    assert source.text == u'Quelle: AFP'
 
 
 def test_dpa_article_has_correct_meta_line(testbrowser):
@@ -1095,18 +1095,17 @@ def test_missing_keyword_links_are_replaced(testbrowser):
 
 def test_article_has_print_pdf_function(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    print_m = browser.cssselect('.print-menu__print')
-    pdf_m = browser.cssselect('.print-menu__pdf')
-    assert (print_m[0].attrib['href'].endswith(
+    links = browser.cssselect('.print-menu__link')
+    assert (links[0].attrib['href'].endswith(
         '/zeit-online/article/01?print'))
-    assert (pdf_m[0].attrib['href'] ==
+    assert (links[1].attrib['href'] ==
             'http://pdf.zeit.de/zeit-online/article/01.pdf')
 
 
 def test_multi_page_article_has_print_link(testbrowser):
     browser = testbrowser('/zeit-online/article/tagesspiegel')
-    print_m = browser.cssselect('.print-menu__print')
-    assert (print_m[0].attrib['href'].endswith(
+    links = browser.cssselect('.print-menu__link')
+    assert (links[0].attrib['href'].endswith(
         '/zeit-online/article/tagesspiegel/komplettansicht?print'))
 
 
@@ -1222,7 +1221,7 @@ def test_article_lineage_overlapping_with_fullwidth_elements_should_be_hidden(
     except TimeoutException:
         assert False, 'Fixed Lineage not visible after scrolled into view'
 
-    driver.get('%s/zeit-online/article/infoboxartikel#sauriersindsuper' %
+    driver.get('%s/zeit-online/article/infoboxartikel#info-bonobo' %
                testserver.url)
 
     try:
@@ -1355,6 +1354,21 @@ def test_instantarticle_should_render_ads(testbrowser):
         'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
 
 
+def test_instantarticle_shows_ad_after_100_words(testbrowser):
+    word_count = 0
+    bro = testbrowser('/instantarticle/zeit-online/article/simple-multipage')
+    blocks = bro.xpath('body/article/*')
+    blocks = blocks[1:]
+    for block in blocks:
+        if block.tag == 'p':
+            words = len(re.findall(r'\S+', block.text_content()))
+            word_count = word_count + words
+        if block.tag == 'figure':
+            assert block.cssselect('iframe[src*="tile-4"]')
+            break
+    assert word_count > 100
+
+
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
     assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
@@ -1404,3 +1418,11 @@ def test_no_webtrekk_ecommerce_without_newsletter_optin(testbrowser):
     browser = testbrowser(
         '/zeit-online/article/simple')
     assert 'wt.customEcommerceParameter' not in browser.contents
+
+
+def test_article_contains_webtrekk_parameter_asset(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/cardstack')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+
+    assert view.webtrekk['customParameter']['cp27'] == 'cardstack.2/seite-1'

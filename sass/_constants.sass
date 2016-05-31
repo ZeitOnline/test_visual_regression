@@ -113,11 +113,13 @@ $greyish-white:  #e9e9e9 !default
 
 // social
 $color-facebook:  #3b5998 !default
-$color-twitter:   #55acee !default
+$color-twitter:   #4099ff !default
 $color-google:    #dd4b39 !default
-$color-whatsapp:  #4dc247 !default
+$color-whatsapp:  #25d366 !default
 $color-linkedin:  #0077b5 !default
 $color-pinterest: #bd081c !default
+$color-facebook-hover:  #254280 !default
+$color-twitter-hover:   #227DE6 !default
 
 // named colors, see http://chir.ag/projects/name-that-color/
 $cararra:       #f0eeec
@@ -125,7 +127,6 @@ $trout:         #535560
 $concrete:      #f2f2f2
 $dusty-gray:    #999
 $silver:        #ccc
-$whitesmoke:    #f5f5f5
 
 // semantic colors
 $color-page-bg:         $white !default
@@ -139,12 +140,12 @@ $color-advertising-bg:  $concrete !default
 $color-border:          $silver !default
 
 // content lengths
-$medium-content-width:  em(660px) !default
-$max-page-width:        em(980px) !default
-$max-longform-width:   em(1364px) !default
+$medium-content-width:  remify(660px) !default
+$max-page-width:        remify(980px) !default
+$max-longform-width:    remify(1364px) !default
 
 // layout
-$gutter: em(20px) !default
+$gutter: remify(20px) !default
 $page-padding: $gutter !default
 $page-padding--small: $gutter*0.75 !default
 
@@ -157,3 +158,31 @@ $break-page-padding: $break-tablet-min !default
 
 // *ad* breakpoint
 $break-mobile-ad-width: em(768px) !default
+
+// for comments
+$comments__break-overlap:  em(768px)
+$comments__break-outside: em(1360px) // 1280px | 1360px | 1440px
+
+// element sizes
+$stamp-width: em(240px)
+
+// font families
+$font-franziska: "FranziskaWebPro", $serif-fallbacks !default
+$font-tabletgothic: "TabletGothic", $sans-fallbacks !default
+$font-tiemann: "TiemannLight", $serif-fallbacks
+
+//------ Sitewide Modules ---------//
+// This vars are used by modules in web.core,
+// but come originally from web.site
+$zon-charcoal: #313131 !default
+$zon-grey: #707070 !default
+$zon-dark-grey: #444  !default
+$zon-light-grey: #CCC !default
+$zon-mid-grey: #999 !default
+$zon-seashell: #f1f1f1 !default
+
+$color-separator-opacity: .5
+$color-separator: rgba($zon-grey, $color-separator-opacity)
+
+// default article link style
+$copytext-link-style: 'zon'

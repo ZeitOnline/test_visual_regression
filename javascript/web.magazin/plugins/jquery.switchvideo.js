@@ -71,7 +71,7 @@
 			//add play button to image
 			addButton: function( that ){
 				if( el.id ){
-					$( that ).find( '.video__button' ).addClass( 'icon-playbutton' );
+					$( that ).find( '.video__button' ).css('display', 'inline-block');
 				}
 			},
 			id: false

@@ -3,7 +3,7 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-(function( $, window, document ) {
+(function( $, window, document, Zeit ) {
 
     var options = {
             inEffect: { opacity: 0 },
@@ -26,6 +26,12 @@
      */
     function poll( endpoint, interval, selector ) {
 
+        // If there are no elements on the page, do not poll. This is
+        // important for framebuilder-pages, and might be useful on our CPs.
+        if ( $( selector ).length === 0 ) {
+            return;
+        }
+
         setTimeout(function() {
             // Use page visibility API to skip request if page is hidden
             if ( document.hidden ) {
@@ -44,7 +50,6 @@
                             if ( data.hasOwnProperty( key ) ) {
                                 for ( var id in data[ key ] ) {
                                     if ( data[ key ].hasOwnProperty( id ) ) {
-
                                         $( '[data-unique-id="' + id + '"]' )
                                             .find( selector )
                                             .trigger( 'signals.update', data[ key ][ id ] );
@@ -89,15 +94,18 @@
          * @category Function
          */
         updateSignals: function() {
-            poll( options.timeEndpoint, 1000 * 60, '.js-update-datetime' );
-            poll( options.commentsEndpoint, 1000 * 20, '.js-update-commentcount' );
 
-            /**
-             * bind event on diverse elements
-             * @event  signals.update
-             */
-            $( '.js-update-datetime, .js-update-commentcount' ).on( 'signals.update', textAnimation );
+            if ( !Zeit.isMobileView() ) {
+                poll( options.timeEndpoint, 1000 * 60, '.js-update-datetime' );
+                poll( options.commentsEndpoint, 1000 * 20, '.js-update-commentcount' );
+
+                /**
+                 * bind event on diverse elements
+                 * @event  signals.update
+                 */
+                $( '.js-update-datetime, .js-update-commentcount' ).on( 'signals.update', textAnimation );
+            }
         }
     });
 
-})( jQuery, window, document );
+})( jQuery, window, document, window.Zeit );

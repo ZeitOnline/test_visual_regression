@@ -56,88 +56,15 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return "zeit.web.site:templates/article.html"
 
     @zeit.web.reify
-    def pdf_link(self):
-        server = 'http://pdf.zeit.de/'
-        path = '/'.join(self.request.traversed)
-        return server + path + '.pdf'
-
-    @zeit.web.reify
-    def print_link(self):
-        url = self.content_url
-        prefix = '/komplettansicht'
-
-        try:
-            if len(self.pages) == 1:
-                prefix = ''
-        except:
-            pass
-
-        path = prefix + '?print'
-        return url + path
-
-    @zeit.web.reify
-    def breadcrumbs(self):
-        breadcrumbs = super(Article, self).breadcrumbs
-        # News
-        if self.ressort == 'news':
-            breadcrumbs.extend([('News', 'http://xml.zeit.de/news/index')])
-            self.breadcrumbs_by_title(breadcrumbs)
-            return breadcrumbs
-        # Archive article
-        if self.product_id in ('ZEI', 'ZEAR'):
-            # Beware, we have some pretty messy archive data...
-            try:
-                breadcrumbs.extend([
-                    ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'),
-                    ("Jahrgang {}".format(self.context.year),
-                        'http://xml.zeit.de/{}/index'.format(
-                            self.context.year)),
-                    ("Ausgabe: {0:02d}".format(self.context.volume),
-                        'http://xml.zeit.de/{0}/{1:02d}/index'.format(
-                            self.context.year, self.context.volume))])
-                self.breadcrumbs_by_title(breadcrumbs)
-                return breadcrumbs
-            except ValueError:
-                return self.breadcrumbs_by_title(breadcrumbs)
-        # Ordinary articles
-        self.breadcrumbs_by_navigation(breadcrumbs)
-        page_teaser = self.current_page.teaser
-        if len(page_teaser) > 0:
-            breadcrumbs.extend([(page_teaser, self.context.uniqueId)])
-        else:
-            self.breadcrumbs_by_title(breadcrumbs)
-        return breadcrumbs
-
-    @zeit.web.reify
     def meta_keywords(self):
         return [x for x in ([self.ressort.capitalize(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
-
-    @zeit.web.reify
-    def has_cardstack(self):
-        return len(self.context.xml.xpath('/article/body//cardstack')) > 0
-
-    @zeit.web.reify
-    def advertorial_marker(self):
-        try:
-            return (
-                self.context.advertisement_title,
-                self.context.advertisement_text,
-                self.cap_title)
-        except AttributeError:
-            return None
 
     # Only needed to set tracking code on
     # http://www.zeit.de/newsletter/registriert?nl=premium.
     @zeit.web.reify
     def newsletter_optin_tracking(self):
         return self.request.GET.get('newsletter-optin', None)
-
-    @zeit.web.reify
-    def cardstack_body(self):
-        url = super(Article, self).cardstack_body
-        params = dict(shareUrl=self.canonical_url)
-        return zeit.web.core.utils.update_query(url, **params)
 
 
 @view_config(name='seite',
@@ -154,11 +81,9 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
 
 @view_config(route_name='amp',
              renderer='templates/amp/article.html')
-class AcceleratedMobilePageArticle(Article):
-
-    @zeit.web.reify
-    def meta_robots(self):
-        return super(Article, self).meta_robots.replace(',noarchive', '')
+class AcceleratedMobilePageArticle(
+        zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
+    pass
 
 
 def is_breaking_news(context, request):

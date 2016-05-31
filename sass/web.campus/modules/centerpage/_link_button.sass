@@ -1,0 +1,26 @@
+.link_button
+	clear: both
+	color: $color-article-primary
+	+scaled-font(14px)
+	&__link
+		@extend %cta-button-link
+	&__button
+		@extend %cta-button-box
+		+respond-max($break-tablet-min)
+			+font-smoothing
+			color: #fff
+			display: block
+			text-align: center
+
++respond-min($break-tablet-min)
+	.link_button
+		margin-bottom: remify(60px)
+		margin-top: remify(60px)
+		text-align: center
+		&__link
+			background-color: transparent
+			display: inline
+			margin: 0
+		&__button
+			border: 3px solid currentColor
+			padding: remify(6px 8px 6px 12px)

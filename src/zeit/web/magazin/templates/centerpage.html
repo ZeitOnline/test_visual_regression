@@ -8,6 +8,8 @@ Available attributes:
 #}
 {% extends "zeit.web.magazin:templates/layout.html" %}
 
+{% block page_content_additional_class %}for-centerpage{% endblock %}
+
 {% block content %}
     {% for region in view.regions %}
         {% set region_loop = loop %}

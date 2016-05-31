@@ -4,6 +4,7 @@ import datetime
 import itertools
 import logging
 import mimetypes
+import pkg_resources
 import random
 import re
 import time
@@ -12,10 +13,12 @@ import urllib
 import urlparse
 
 import babel.dates
+import lxml.etree
 import pyramid.threadlocal
 import repoze.bitblt.transform
 import zope.component
 
+import zeit.campus.interfaces
 import zeit.cms.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
@@ -24,6 +27,7 @@ import zeit.content.link.interfaces
 import zeit.magazin.interfaces
 
 import zeit.web
+import zeit.web.core.application
 import zeit.web.core.centerpage
 import zeit.web.core.image
 import zeit.web.core.interfaces
@@ -31,9 +35,11 @@ import zeit.web.core.utils
 
 log = logging.getLogger(__name__)
 
+SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
+
 
 @zeit.web.register_global
-def get_variant(group, variant_id):
+def get_variant(group, variant_id, fill_color=None):
     try:
         variant = zeit.web.core.image.VARIANT_SOURCE.factory.find(
             group, variant_id)
@@ -43,15 +49,19 @@ def get_variant(group, variant_id):
         log.debug(u'No {} variant for {}'.format(variant_id, group.uniqueId))
     else:
         variant.__parent__ = group
+        variant.fill_color = fill_color
         try:
             return zeit.web.core.interfaces.ITeaserImage(variant)
         except TypeError:
             return None
 
 
+FROM_CONTENT = object()
+
+
 @zeit.web.register_global
 def get_image(module=None, content=None, fallback=True, variant_id=None,
-              default='default'):
+              default='default', fill_color=FROM_CONTENT):
     """Universal image retrieval function to be used in templates.
 
     :param module: Module to extract a content and layout from
@@ -60,15 +70,23 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     :param variant_id: Override for automatic variant determination
     :param default: If variant_id is None, specify a default for automatic
                     variant determination
+    :param fill_color: For images with transparent background, fill with
+                       the given color (None: keep transparent, FROM_CONTENT:
+                       determine color from IImages(content))
     """
 
     if content is None:
         content = first_child(module)
 
     try:
-        group = zeit.content.image.interfaces.IImages(content).image
+        img = zeit.content.image.interfaces.IImages(content)
+        group = img.image
+        if fill_color is FROM_CONTENT:
+            fill_color = img.fill_color
     except (TypeError, AttributeError):
         group = None
+        if fill_color is FROM_CONTENT:
+            fill_color = None
 
     try:
         if group is None:
@@ -87,7 +105,11 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     if zeit.web.core.interfaces.IFrontendBlock.providedBy(module):
         layout = module
     else:
-        layout = zeit.content.cp.layout.get_layout(get_layout(module))
+        layout = get_layout(module)
+        if layout == 'hide':
+            layout = None
+        else:
+            layout = zeit.content.cp.layout.get_layout(layout)
 
     if variant_id is None:
         try:
@@ -95,7 +117,7 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
         except AttributeError:
             variant_id = default
 
-    return get_variant(group, variant_id)
+    return get_variant(group, variant_id, fill_color=fill_color)
 
 
 @zeit.web.register_test
@@ -119,6 +141,12 @@ def zett_content(content):
 
 
 @zeit.web.register_test
+def zco_content(content):
+    toggle = zeit.web.core.application.FEATURE_TOGGLES.find('campus_launch')
+    return toggle and zeit.campus.interfaces.IZCOContent.providedBy(content)
+
+
+@zeit.web.register_test
 def column(context):
     return context.serie and context.serie.column
 
@@ -126,6 +154,11 @@ def column(context):
 @zeit.web.register_test
 def leserartikel(context):
     return getattr(context, 'genre', None) and context.genre == 'leserartikel'
+
+
+@zeit.web.register_test
+def framebuilder(view):
+    return isinstance(view, zeit.web.core.view.FrameBuilder)
 
 
 @zeit.web.register_filter
@@ -263,62 +296,16 @@ def substring_from(string, find):
 
 
 @zeit.web.register_filter
-def get_layout(block, request=None):
-    # Calculating the layout of a cp block can be slightly more expensive in
-    # zeit.web, since we do lookups in some vocabularies, to change the layout,
-    # that was originally set for the block.
-    # Since we might lookup a layout more than once per request, we can cache
-    # it in the request object.
-
-    # XXX This filter is in desperate need of a major overhaul!
-
-    request = request or pyramid.threadlocal.get_current_request()
-
+@zeit.web.cache_on_request
+def get_layout(block):
     try:
-        key = request and hash(block)
-    except (NotImplementedError, TypeError), e:
-        log.debug('Cannot cache {} layout: {}'.format(type(block), e))
-        key = None
-
-    if key:
-        request.teaser_layout = getattr(request, 'teaser_layout', None) or {}
-        layout = request.teaser_layout.get(key, None)
-        if layout:
-            return layout
-
-    try:
-        layout_id = block.layout.id
+        layout = block.layout.id
     except (AttributeError, TypeError):
-        layout_id = 'hide'
-
-    try:
-        teaser = list(block)[0]
-    except (IndexError, TypeError):
-        if not zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
-            layout = layout_id
-        else:
-            layout = 'hide'
-    else:
-        layout = layout_id
-        if layout == 'zon-square':
-            # ToDo: Remove when Longform will be generally used on www.zeit.de
-            if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
-                layout = layout
-            elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
-                layout = 'zmo-square'
-        # XXX Instead of hard-coding a layout change here, we should make use
-        # of z.w.core.centerpage.dispatch_teaser_via_contenttype() and
-        # register a specific teaser module for authors.
-        elif (zeit.content.author.interfaces.IAuthor.providedBy(teaser) and
-                layout == 'zon-small' and
-                block.__parent__.kind in ['duo', 'minor']):
-            layout = 'zon-author'
-
-    layout = zeit.web.core.centerpage.TEASER_MAPPING.get(layout, layout)
-
-    if key:
-        request.teaser_layout[key] = layout
-
+        return 'hide'
+    if zeit.content.cp.interfaces.ITeaserBlock.providedBy(
+            block) and not len(block):
+        return 'hide'
+    layout = zeit.web.core.centerpage.LEGACY_TEASER_MAPPING.get(layout, layout)
     return layout
 
 
@@ -444,9 +431,9 @@ scales = {
     'zon-article-large': (820, 462),
     'zon-printbox': (320, 234),
     'zon-printbox-wide': (320, 148),
-    'zon-topic': (980, 418),
     'zon-column': (300, 400),
     'zon-square': (460, 460),
+    'topic': (980, 418),
     'brightcove-still': (580, 326),
     'brightcove-thumbnail': (120, 67),
     'spektrum': (220, 124)
@@ -491,10 +478,11 @@ def default_image_url(image, image_pattern='default'):
 @zeit.web.register_filter
 def pluralize(num, *forms):
     try:
-        num = '{:,d}'.format(int(num)).replace(',', '.')
+        value = int(num)
+        display = '{:,d}'.format(value).replace(',', '.')
     except ValueError:
-        num = 0
-    return forms[min(len(forms) - 1, num):][0].format(num)
+        display = value = 0
+    return forms[min(len(forms) - 1, value):][0].format(display)
 
 
 @zeit.web.register_filter
@@ -581,7 +569,7 @@ def get_image_pattern(teaser_layout, orig_image_pattern):
         layout_image['zon-column'].extend(layout_image['leader'])
         layout_image['zon-square'].extend(layout_image['leader'])
         layout_image['zon-blog'].extend(layout_image['leader'])
-        layout_image['zon-topic'].extend(layout_image['leader-fullwidth'])
+        layout_image['topic'].extend(layout_image['leader-fullwidth'])
     except KeyError, e:
         log.warn("Layouts for '%s' could not be extended: %s not found",
                  teaser_layout, e)
@@ -600,7 +588,7 @@ def _existing_image(image_group, patterns, ext):
 
 
 @zeit.web.register_global
-def get_column_image(content):
+def get_column_image(content, variant_id='original'):
     # XXX: Could be transformed to a more generally useful get_author
     try:
         author = content.authorships[0].target
@@ -609,7 +597,8 @@ def get_column_image(content):
     # XXX This should use a different variant, but author images currently do
     # not have a consistent ratio and framing of the portrayed person. So we
     # need to crop the lower part of the image using CSS, ignoring the ratio.
-    return get_image(content=author, variant_id='original', fallback=False)
+    return get_image(content=author, variant_id=variant_id, fallback=False,
+                     fill_color=None)
 
 
 @zeit.web.register_global
@@ -666,15 +655,6 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
         (asset, image), zeit.web.core.interfaces.ITeaserImage)
     teaser_image.image_pattern = image_pattern
     return teaser_image
-
-
-@zeit.web.register_filter
-def get_repository_image(image):
-    # TRASHME: Should be solved by using get_image on fullgraphical teaser
-    base_image = zeit.web.core.image.BaseImage()
-    base_image.image = image
-    base_image.uniqueId = image.uniqueId
-    return base_image
 
 
 @zeit.web.register_filter
@@ -756,10 +736,10 @@ def format_iqd(string):
 
 
 @zeit.web.register_global
-def settings(key):
+def settings(key, default=None):
     """Returns the configuration value for a provided key"""
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return conf.get(key)
+    return conf.get(key, default)
 
 
 @zeit.web.register_global
@@ -914,3 +894,39 @@ def adapt(obj, iface, name=u'', multi=False):
         return zope.component.queryMultiAdapter(obj, iface, name)
     else:
         return zope.component.queryAdapter(obj, iface, name)
+
+
+@SHORT_TERM_CACHE.cache_on_arguments()
+def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
+    try:
+        subpath = '.'.join(package.split('.')[1:3])
+    except (AttributeError, TypeError):
+        log.debug('Icon: {} has false package'.format(name))
+        return ''
+    url = pkg_resources.resource_filename(
+        'zeit.web.static', 'css/svg/{}/{}.svg'.format(subpath, name))
+    try:
+        xml = lxml.etree.parse(url)
+    except (IOError, lxml.etree.XMLSyntaxError):
+        return ''
+    try:
+        title = xml.find('{http://www.w3.org/2000/svg}title').text
+    except AttributeError:
+        title = 'Icon'
+    svg = xml.getroot()
+    svg.set('class', 'svg-symbol {}'.format(class_name))
+    svg.set('preserveAspectRatio', 'xMinYMin meet')
+    if cleanup:
+        lxml.etree.strip_attributes(
+            xml, 'fill', 'fill-opacity', 'stroke', 'stroke-width')
+    if a11y:
+        svg.set('role', 'img')
+        svg.set('aria-label', title)
+    else:
+        svg.set('aria-hidden', 'true')
+    return lxml.etree.tostring(xml)
+
+
+@zeit.web.register_global
+def get_svg_from_file(name, class_name, package, cleanup, a11y):
+    return get_svg_from_file_cached(name, class_name, package, cleanup, a11y)

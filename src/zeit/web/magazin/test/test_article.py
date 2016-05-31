@@ -109,107 +109,160 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
 
 def test_article03_has_correct_webtrekk_values(testbrowser):
     browser = testbrowser('/artikel/03')
+    source = browser.cssselect(
+        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+    webtrekk_config = script.text_content().strip()
 
-    # content _group
-    assert '1: "redaktion",' in browser.contents
-    assert '2: "article",' in browser.contents
-    assert '3: "lebensart",' in browser.contents
-    assert '4: "zede",' in browser.contents
-    assert '5: "essen-trinken",' in browser.contents
-    assert '6: "weinkolumne",' in browser.contents
-    assert '7: "03",' in browser.contents
-    assert '8: "zeitmz/essenundtrinken/article",' in browser.contents
-    assert '9: "2013-07-30"' in browser.contents
+    # content group
+    assert '1: "redaktion",' in webtrekk_config
+    assert '2: "article",' in webtrekk_config
+    assert '3: "lebensart",' in webtrekk_config
+    assert '4: "zede",' in webtrekk_config
+    assert '5: "essen-trinken",' in webtrekk_config
+    assert '6: "weinkolumne",' in webtrekk_config
+    assert '7: "03",' in webtrekk_config
+    assert '8: "zeitmz/essenundtrinken/article",' in webtrekk_config
+    assert '9: "2013-07-30"' in webtrekk_config
 
     # custom parameter
-    assert '1: "anne mustermann",' in browser.contents
-    assert '2: "lebensart/essen-trinken/bild-text",' in browser.contents
-    assert '3: "1/7",' in browser.contents
-    assert '4: "wein;italien;toskana;bologna;bozen;florenz;tübingen",' \
-        in browser.contents
-    assert '5: "2013-07-30 17:20:50.176115+02:00",' in browser.contents
-    assert '6: "4952",' in browser.contents
-    assert '7: "",' in browser.contents
-    assert '8: "zede",' in browser.contents
-    assert '9: "zeitmz/essenundtrinken/article",' in browser.contents
-    assert '10: "yes",' or '10: "",' in browser.contents
-    assert '11: "",' in browser.contents
-    assert '12: window.Zeit.getSiteParam("site"),' in browser.contents
+    assert '1: "anne mustermann",' in webtrekk_config
+    assert '2: "lebensart/essen-trinken/bild-text",' in webtrekk_config
+    assert '3: "1/7",' in webtrekk_config
+    assert u'4: "wein;italien;toskana;bologna;bozen;florenz;tübingen",' \
+        in webtrekk_config
+    assert '5: "2013-07-30 17:20:50.176115+02:00",' in webtrekk_config
+    assert '6: "4952",' in webtrekk_config
+    assert '7: "",' in webtrekk_config
+    assert '8: "zede",' in webtrekk_config
+    assert '9: "zeitmz/essenundtrinken/article",' in webtrekk_config
+    assert '10: "yes",' or '10: "",' in webtrekk_config
+    assert '11: "",' in webtrekk_config
+    assert '12: window.Zeit.getSiteParam("site"),' in webtrekk_config
     assert '13: window.Zeit.breakpoint.getTrackingBreakpoint(),' \
-        in browser.contents
-    assert '14: "alt"' in browser.contents
-    assert '15: ""' in browser.contents
-    assert '25: "original"' in browser.contents
+        in webtrekk_config
+    assert '14: "friedbert"' in webtrekk_config
+    assert '15: ""' in webtrekk_config
+    assert '25: "original"' in webtrekk_config
 
     # noscript string
-    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,redaktion'
-            '.lebensart.essen-trinken.weinkolumne.article.zede|localhost/'
-            'artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=article'
-            '&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-trinken&amp;cg6'
-            '=weinkolumne&amp;cg7=03&amp;cg8=zeitmz/essenundtrinken/article'
-            '&amp;cg9=2013-07-30&amp;cp1=anne mustermann&amp;cp2=lebensart/'
-            'essen-trinken/bild-text&amp;cp3=1/7&amp;cp4=wein;italien;'
-            'toskana;bologna;bozen;florenz;tübingen&amp;cp5=2013-07-30 '
-            '17:20:50.176115+02:00&amp;cp6=4952&amp;cp7=&amp;cp8=zede'
-            '&amp;cp9=zeitmz/essenundtrinken/article&amp;cp10=&amp;'
-            'cp11=&amp;cp12=desktop'
-            '.site') in browser.contents
+    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
+            'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
+            'localhost/artikel/03,0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&'
+            'cg3=lebensart&cg4=zede&cg5=essen-trinken&cg6=weinkolumne&cg7=03&'
+            'cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
+            'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&cp3=1/7'
+            '&cp4=wein%3Bitalien%3Btoskana%3Bbologna%3Bbozen%3Bflorenz%3B'
+            't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
+            'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
+            'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
+            'cp15=&cp25=original&cp26=article&cp27=') in source
 
 
 def test_article03_page2_has_correct_webtrekk_values(testbrowser):
     browser = testbrowser('/artikel/03/seite-2')
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+    webtrekk_config = script.text_content().strip()
+    source = browser.cssselect(
+        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
 
-    # content _group
-    assert '7: "seite-2",' in browser.contents
+    # content group
+    assert '7: "seite-2",' in webtrekk_config
 
     # custom parameter
-    assert '3: "2/7",' in browser.contents
+    assert '3: "2/7",' in webtrekk_config
 
     # noscript
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
-            'redaktion.lebensart.essen-trinken.weinkolumne.article.'
-            'zede|localhost/artikel/03,0,0,0,0,0,0,0,0&amp;cg1=redaktion'
-            '&amp;cg2=article&amp;cg3=lebensart&amp;cg4=zede&amp;cg5=essen-'
-            'trinken&amp;cg6=weinkolumne&amp;cg7=seite-2&amp;cg8=zeitmz/'
-            'essenundtrinken/article&amp;cg9=2013-07-30&amp;cp1=anne '
-            'mustermann&amp;cp2=lebensart/essen-trinken/bild-text&amp;'
-            'cp3=2/7&amp;cp4=wein;italien;toskana;bologna;bozen;florenz;'
-            'tübingen&amp;cp5=2013-07-30 17:20:50.176115+02:00&amp;cp6=4952'
-            '&amp;cp7=&amp;cp8=zede&amp;cp9=zeitmz/essenundtrinken/article'
-            '&amp;cp10=&amp;cp11=&amp;cp12=desktop'
-            '.site') in browser.contents
+            'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
+            'localhost/artikel/03,0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&'
+            'cg3=lebensart&cg4=zede&cg5=essen-trinken&cg6=weinkolumne&'
+            'cg7=seite-2&cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
+            'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&cp3=2/7'
+            '&cp4=wein%3Bitalien%3Btoskana%3Bbologna%3Bbozen%3Bflorenz%3B'
+            't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
+            'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
+            'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
+            'cp15=&cp25=original&cp26=article&cp27=') in source
 
 
 def test_cp_has_correct_webtrekk_values(testbrowser):
-    browser = testbrowser('/zeit-magazin/test-cp/test-cp-zmo')
-    assert '1: "redaktion",' in browser.contents
-    assert '2: "centerpage",' in browser.contents
-    assert '3: "lebensart",' in browser.contents
-    assert '4: "zede",' in browser.contents
-    assert '5: "",' in browser.contents
-    assert '6: "",' in browser.contents
-    assert '7: "test-cp-zmo",' in browser.contents
-    assert '8: "zeitmz/centerpage",' in browser.contents
-    assert '9: ""' in browser.contents
-    assert ('wt.pl?p=328,redaktion.lebensart...'
-            'centerpage.zede|localhost/zeit-magazin/test-cp/test-cp-zmo,'
-            '0,0,0,0,0,0,0,0&amp;cg1=redaktion&amp;cg2=centerpage&amp;'
-            'cg3=lebensart&amp;cg4=zede&amp;cg5=&amp;cg6=&amp;'
-            'cg7=test-cp-zmo&amp;cg8=zeitmz/centerpage&amp;'
-            'cg9=') in browser.contents
-    assert '26: "centerpage.centerpage"' in browser.contents
+    browser = testbrowser('/zeit-magazin/index')
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+    webtrekk_config = script.text_content().strip()
+    source = browser.cssselect(
+        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+
+    # content group
+    assert '1: "redaktion",' in webtrekk_config
+    assert '2: "centerpage",' in webtrekk_config
+    assert '3: "zeit-magazin",' in webtrekk_config
+    assert '4: "zmlb",' in webtrekk_config
+    assert '5: "",' in webtrekk_config
+    assert '6: "",' in webtrekk_config
+    assert '7: "index",' in webtrekk_config
+    assert '8: "zeitmz/centerpage",' in webtrekk_config
+    assert '9: "2016-04-12"' in webtrekk_config
+
+    # custom parameter
+    assert '1: "",' in webtrekk_config
+    assert '2: "zeit-magazin/bild-text",' in webtrekk_config
+    assert '3: "1/1",' in webtrekk_config
+    assert '4: "zeit-magazin",' in webtrekk_config
+    assert '5: "2016-05-23 12:14:06.113344+02:00",' in webtrekk_config
+    assert '6: "",' in webtrekk_config
+    assert '7: "",' in webtrekk_config
+    assert '8: "zmlb",' in webtrekk_config
+    assert '9: "zeitmz/centerpage",' in webtrekk_config
+    assert '10: "yes",' in webtrekk_config
+    assert '11: "",' in webtrekk_config
+    assert '12: window.Zeit.getSiteParam("site"),' in webtrekk_config
+    assert '13: window.Zeit.breakpoint.getTrackingBreakpoint(),' \
+        in webtrekk_config
+    assert '14: "friedbert",' in webtrekk_config
+    assert '15: "",' in webtrekk_config
+    assert '25: "original",' in webtrekk_config
+    assert '26: "centerpage.ZMO",' in webtrekk_config
+    assert '27: ""' in webtrekk_config
+
+    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=328,'
+            'redaktion.zeit-magazin...centerpage.zmlb%7C'
+            'localhost/zeit-magazin/index,0,0,0,0,0,0,0,0&cg1=redaktion&'
+            'cg2=centerpage&cg3=zeit-magazin&cg4=zmlb&cg5=&cg6=&cg7=index&'
+            'cg8=zeitmz/centerpage&cg9=2016-04-12&cp1=&'
+            'cp2=zeit-magazin/bild-text&cp3=1/1&cp4=zeit-magazin&'
+            'cp5=2016-05-23+12%3A14%3A06.113344%2B02%3A00&cp6=&cp7=&cp8=zmlb&'
+            'cp9=zeitmz/centerpage&cp10=yes&cp11=&cp12=desktop.site&'
+            'cp13=stationaer&cp14=friedbert&cp15=&cp25=original&'
+            'cp26=centerpage.ZMO&cp27=') in source
 
 
 def test_webtrekk_series_tag_is_set_corectly(testbrowser):
     browser = testbrowser('/artikel/06')
-    assert '6: "tödlichekeime",' in browser.contents
-    assert ('redaktion.zeit-magazin..toedlichekeime.'
-            'article.zei|localhost/artikel/06') in browser.contents
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+    webtrekk_config = script.text_content().strip()
+    source = browser.cssselect(
+        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+
+    assert ('var Z_WT_KENNUNG = "redaktion.zeit-magazin..toedlichekeime'
+            '.article.zei|localhost/artikel/06";') in webtrekk_config
+    assert u'6: "tödlichekeime",' in webtrekk_config
+
+    assert ('redaktion.zeit-magazin..toedlichekeime.article.zei%7C'
+            'localhost/artikel/06,0,0,0,0,0,0,0,0') in source
 
 
 def test_webtrekk_has_session_parameter(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index?app-content')
-    assert '1: window.Zeit.wrapped.client' in browser.contents
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+    webtrekk_config = script.text_content().strip()
+
+    assert '1: window.Zeit.wrapped.client' in webtrekk_config
 
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')
@@ -380,30 +433,30 @@ def test_article_1_10_produce_no_error(testbrowser):
 
 def test_article_1_10_have_correct_h1(testbrowser):
     browser = testbrowser('/artikel/01')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/02')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/03')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/04')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/05')
-    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1 > .article__head__title')
     browser = testbrowser('/artikel/06')
-    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1 > .article__head__title')
     browser = testbrowser('/artikel/08')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/09')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/10')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
 
 
 def test_header_articles_produce_no_error(testbrowser):
@@ -418,22 +471,22 @@ def test_header_articles_produce_no_error(testbrowser):
 
 def test_header_articles_have_correct_h1(testbrowser):
     browser = testbrowser('/artikel/header1')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/header2')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/header3')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/header4')
-    assert browser.cssselect('h1>div.article__head__title')
+    assert browser.cssselect('h1 > .article__head__title')
     browser = testbrowser('/artikel/header5')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
     browser = testbrowser('/artikel/header6')
-    assert browser.cssselect('h1>div.article__head__title')
-    assert browser.cssselect('h1>div.article__head__supertitle')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
 
 
 def test_article_header2_has_correct_subtitle(testbrowser):
@@ -444,7 +497,7 @@ def test_article_header2_has_correct_subtitle(testbrowser):
 
 def test_artikel_header_header1_should_have_correct_header_source(testbrowser):
     browser = testbrowser('/artikel/header1')
-    assert browser.cssselect('h1>.article__head__title')
+    assert browser.cssselect('h1 > .article__head__title')
 
 
 def test_artikel_header_header2_should_have_correct_source(testbrowser):
@@ -520,27 +573,12 @@ def test_nextread_teaser_block_teasers_is_accessable(application):
         'Nextread block should expose its teasers via index.'
 
 
-def test_nextread_base_layout_has_image_element_if_available(testbrowser):
+def test_nextread_base_layout_has_expected_structure(testbrowser):
     browser = testbrowser('/artikel/09')
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert len(nextread.cssselect('img')) == 1, \
-        'There should be exactly one image tag in a "base" nextread teaser.'
-    browser = testbrowser('/artikel/10')
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert len(nextread.cssselect('img')) == 1, \
-        'The nextread of "Artikel 10" has no teaser image asset.'
-
-
-def test_nextread_maximal_layout_has_image_background_if_available(
-        testbrowser):
-    browser = testbrowser('/artikel/08')
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert 'background-image' in nextread.attrib.get('style'), \
-        'The teaser image should be set as a background for "maximal" teasers.'
-    browser = testbrowser('/artikel/03')
-    nextread = browser.cssselect('div.article__nextread__body')[0]
-    assert 'background-image' in nextread.attrib.get('style'), \
-        'The nextread of "Artikel 03" has no teaser image asset.'
+    nextread = browser.cssselect('.nextread-base')[0]
+    assert len(nextread.cssselect('a')) == 1
+    assert len(nextread.cssselect('.nextread-base__media')) == 1
+    assert len(nextread.cssselect('.nextread-base__heading')) == 1
 
 
 def test_nextread_should_fallback_to_default_layout(application):
@@ -593,7 +631,7 @@ def test_article_has_linked_copyright(testbrowser):
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
-    assert '<span class="figure__copyright">' \
+    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
         '<a href="http://foo.de" target="_blank">' \
         '© Reuters/Alessandro Bianchi' in output
 
@@ -603,7 +641,7 @@ def test_longform_has_linked_copyright(testbrowser):
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
-    assert '<span class="figure__copyright">' \
+    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
         '<a href="http://foo.de" target="_blank">' \
         '© Johannes Eisele/AFP/Getty Images' in output
 
@@ -613,15 +651,21 @@ def test_header_has_linked_copyright(testbrowser):
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
-    assert '<span class="figure__copyright">' \
+    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
         '<a href="http://foo.de" target="_blank">©foo' in output
 
 
-def test_feature_longform_should_have_zon_logo_classes(testbrowser):
+def test_feature_longform_should_have_zon_logo_header(testbrowser):
     browser = testbrowser('/feature/feature_longform')
-    assert browser.cssselect('.main-nav__logo__img.icon-logo-zon-small')
-    logolink = browser.cssselect('a.main-nav__logo')
-    assert logolink[0].attrib['href'] == 'http://localhost/index'
+    assert browser.cssselect('.header__logo--zon')
+
+    link = browser.cssselect('.header__publisher a')[0]
+    assert link.get('href') == 'http://localhost/index'
+
+
+def test_feature_longform_should_have_zon_logo_footer(testbrowser):
+    browser = testbrowser('/feature/feature_longform')
+    assert browser.cssselect('.main-footer__logo--zon-small')
 
 
 def test_feature_longform_should_have_zonish_title(testbrowser):
@@ -652,10 +696,9 @@ def test_article_view_has_no_leadtime_if_the_attribute_is_missing(application):
 
 def test_advertorial_article_shows_advertorial_marker(testbrowser):
     browser = testbrowser('/artikel/advertorial')
-    assert browser.cssselect(
-        '.advertorial-navigation-title')[0].text == 'Anzeige'
+    assert browser.cssselect('.header__ad-label')[0].text == 'Anzeige'
     browser = testbrowser('/artikel/01')
-    assert not browser.cssselect('.advertorial-navigation-title')
+    assert not browser.cssselect('.header__ad-label')
 
 
 def test_articles_should_have_exact_one_h1(testbrowser):

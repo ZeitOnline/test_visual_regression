@@ -101,15 +101,6 @@
         }
     };
 
-    {#
-    // Alias for Meetrics. Has been added with v2.44 as fallback.
-    // TODO: remove as soon as Meetrics uses Zeit.isMobileView().
-    #}
-    window.ZMO = {
-        isMobileView: function() { return Zeit.isMobileView(); }
-    };
-
-
 {%- if view.context.advertising_enabled %}
     {%- if view.banner_toggles('viewport_zoom') == 'tablet' %}
     {# /* ZON style: set viewport for tablets */ #}

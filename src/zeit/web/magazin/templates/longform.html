@@ -1,53 +1,54 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context%}
-{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context%}
+{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
+{% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 {% import 'zeit.web.magazin:templates/article.html' as article with context %}
 
 {% block adplace_top %}
 {% endblock adplace_top %}
 
-{% block page_wrap_inner %}
-	<div class="page-wrap--inner for-longform" id="js-page-wrap-inner">
-{% endblock page_wrap_inner %}
+{% block page_content_additional_class %}page__content--longform{% endblock %}
 
 {% block navigation %}
-    <nav id="js-main-nav" class="main-nav is-full-width is-compact" itemscope itemtype="http://schema.org/SiteNavigationElement">
-        <div class="main-nav__wrap">
-            {% block longform_logo %}
-            <a href="{{ request.route_url('home') }}zeit-magazin/index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./zeit-magazin/index">
-                <meta itemprop="name" content="Zeit Online">
-                <div class="main-nav__logo__wrap">
-                    <span class="main-nav__logo__img icon-logo-zmo-large" itemprop="logo" title="ZEITmagazin">ZEITmagazin ONLINE</span>
-                    <span class="main-nav__logo__img icon-logo-zmo-small"></span>
-                </div>
+<header class="header" data-ct-area="zmo-topnav">
+    <div class="header__bar">
+        <div class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" data-ct-row="lead">
+            {% block longform_logo -%}
+            <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index" data-ct-label="logo">
+                <meta itemprop="name" content="ZEITmagazin">
+                <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                    {{ lama.use_svg_icon('logo-zmo-large', 'header__logo', view.package) }}
+                    {# The "logo" dimensions must not exceed 600x60 -#}
+                    <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zmo.png">
+                    <meta itemprop="width" content="600">
+                    <meta itemprop="height" content="56">
+                </span>
             </a>
-            {% endblock longform_logo %}
-            <div class="main-nav__menu">
-                <aside class="main-nav__sharing">
-                    <a href="http://twitter.com/home?status={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item icon-twitter" title="Auf Twitter teilen">Auf Twitter teilen</a>
-                    <a href="http://www.facebook.com/sharer/sharer.php?u={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item icon-facebook" title="Auf Facebook teilen">Auf Facebook teilen</a>
-                    <a href="https://plus.google.com/share?url={{request.host}}{{request.path_info}}"
-                        target="_blank" class="main-nav__sharing__item icon-google" title="Auf Google+ teilen">Auf Google+ teilen</a>
-                </aside>
-            </div>
+            {% endblock longform_logo -%}
         </div>
-    </nav>
+
+        <aside class="header__sharing" data-ct-row="social">
+            <a href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via=ZEITmagazin&amp;url={{ view.content_url | urlencode }}"
+                target="_blank" class="header__link" title="Auf Twitter teilen" data-ct-label="twitter">{{ lama.use_svg_icon('twitter', 'header__sharing-icon', view.package) }}</a>
+            <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url | urlencode }}"
+                target="_blank" class="header__link" title="Auf Facebook teilen" data-ct-label="facebook">{{ lama.use_svg_icon('facebook', 'header__sharing-icon', view.package) }}</a>
+        </aside>
+    </div>
+</header>
 {% endblock navigation %}
 
 {% block adplace_billboard %}
 {% endblock adplace_billboard %}
 
 {% block content %}
-	<article class="article article--longform" itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemscope>
+	<article class="article article--longform" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
+        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
 		<div class="article__wrap">
 			<div class="article__head-wrap">
 
 				{{ blocks[view.header_elem|block_type](view.header_elem) }}
 
 				<header class="article__title-wrap">
-					<h1>
+					<h1 itemprop="headline">
 						{{ blocks.title() }}
 					</h1>
 					<div class="article__head__meta">

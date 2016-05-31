@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import mock
 import zope.component
 
 import zeit.web.core.interfaces
@@ -15,19 +14,6 @@ def test_adplace_middle_mobile_dont_produces_html(jinja2_env):
     assert '' == output
 
 
-def test_content_ad_place_produces_html(application, jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.core:templates/macros/layout_macro.tpl')
-    elem = '<div id="iq-artikelanker"></div>'
-    view = mock.Mock()
-    view.context.advertising_enabled = True
-    lines = tpl.module.content_ad_article(view).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert elem in output
-
-
 def test_esi_macro_should_produce_directive_depending_on_environment(
         jinja2_env):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -36,7 +22,7 @@ def test_esi_macro_should_produce_directive_depending_on_environment(
     source = 'http://foo.com/bar'
     error_text = 'esi failed'
 
-    conf['dev_environment'] = True
+    conf['use_wesgi'] = True
 
     html_for_wesgi = ('<!-- [esi-debug] src="{0}" error_text="" -->'
                       '<esi:include src="{0}" onerror="continue" />'
@@ -47,7 +33,7 @@ def test_esi_macro_should_produce_directive_depending_on_environment(
         wesgi_string += line.strip()
     assert wesgi_string == html_for_wesgi
 
-    conf['dev_environment'] = False
+    conf['use_wesgi'] = False
 
     html_for_varnish = ('<esi:remove>'
                         '<!-- [esi-debug] src="{0}" error_text="{1}" -->'

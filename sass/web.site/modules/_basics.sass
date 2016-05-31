@@ -1,34 +1,6 @@
+$color-exclamation-background:	$zon-grey
+
 @import "web.core/modules/basics"
-
-%label
-	color: $zon-mid-grey
-	display: block
-	font-family: $font-tabletgothic
-	font-size: em(9px)
-	letter-spacing: .15em
-	line-height: 1
-	margin-bottom: remify(10px)
-	text-align: right
-	text-transform: uppercase
-
-%commentcount
-	color: inherit
-	position: relative
-	white-space: nowrap
-	// paint a "border" with current link color and opacity
-	&:after
-		background-color: currentColor
-		bottom: -1px
-		content: ""
-		height: 1px
-		left: 0
-		opacity: .4
-		position: absolute
-		width: 100%
-	+on-interaction
-		color: inherit
-		&:after
-			opacity: .8
 
 %tags
 	border-radius: .3em
@@ -45,19 +17,6 @@
 		background-color: $zon-lighter-grey
 		border-color: $zon-mid-grey
 		color: inherit
-
-%exclamation
-	background-color: $zon-grey
-	border-radius: 50%
-	color: $white
-	content: "!"
-	display: inline-block
-	font-size: 0.8125em
-	height: 1.125em
-	line-height: 1
-	margin-right: .375em
-	text-align: center
-	width: 1.125em
 
 // scales images as used in columns
 %square-item

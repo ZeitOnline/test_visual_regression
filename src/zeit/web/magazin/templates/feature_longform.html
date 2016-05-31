@@ -5,15 +5,18 @@
 {%- endblock sharing_meta %}
 
 {% block longform_logo %}
-    <a href="{{ request.route_url('home') }}index" class="main-nav__logo" itemscope itemtype="http://schema.org/Organization" id="hp.zm.topnav.logo./index">
-        <meta itemprop="name" content="Zeit Online">
-        <div class="main-nav__logo__wrap">
-            <span class="main-nav__logo__img icon-logo-zon-large" itemprop="logo" title="ZEIT ONLINE">ZEIT ONLINE</span>
-            <span class="main-nav__logo__img icon-logo-zon-small"></span>
-        </div>
+    <a itemprop="url" href="{{ request.route_url('home') }}index" data-ct-label="logo">
+        <meta itemprop="name" content="ZEIT ONLINE">
+        <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+            {{ lama.use_svg_icon('logo-zon-large', 'header__logo header__logo--zon', view.package) }}
+            {# The "logo" dimensions must not exceed 600x60 -#}
+            <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
+            <meta itemprop="width" content="565">
+            <meta itemprop="height" content="60">
+        </span>
     </a>
 {% endblock longform_logo %}
 
 {% block footer_logo %}
-    <div class="main-footer__logo icon-logo-zon-small"></div>
+    {{ lama.use_svg_icon('logo-zon-small', 'main-footer__logo main-footer__logo--zon-small', view.package) }}
 {% endblock footer_logo %}

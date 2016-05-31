@@ -96,12 +96,21 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
         # driver.save_screenshot(
         #    "/tmp/test_buttons_should_be_visible_on_tap_mobile.png")
         figselector = ".js-gallery .slide:not(.bx-clone)"
-        figure = driver.find_element_by_css_selector(figselector)
-        figure.click()
-        bigbuttonprev = driver.find_element_by_css_selector(".bx-overlay-prev")
-        bigbuttonnext = driver.find_element_by_css_selector(".bx-overlay-next")
-        assert bigbuttonprev.is_displayed()
-        assert bigbuttonnext.is_displayed()
+        # Try to avoid WebDriverException: Element is not clickable.
+        # Other element would receive the click: <div class="bx-zone-next">
+        try:
+            WebDriverWait(driver, 1).until(
+                expected_conditions.invisibility_of_element_located(
+                    (By.CLASS_NAME, 'bx-zone-next')))
+        except TimeoutException:
+            assert False, 'Slide must be clickable'
+        else:
+            figure = driver.find_element_by_css_selector(figselector)
+            figure.click()
+            big_prev = driver.find_element_by_css_selector(".bx-overlay-prev")
+            big_next = driver.find_element_by_css_selector(".bx-overlay-next")
+            assert big_prev.is_displayed()
+            assert big_next.is_displayed()
 
 
 def test_gallery_with_supertitle_has_html_title(testbrowser):

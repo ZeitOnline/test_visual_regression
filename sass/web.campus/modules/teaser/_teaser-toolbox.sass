@@ -1,11 +1,11 @@
 .toolbox
-	margin: remify(20px 0 0)
+	margin: remify(20px 0 $vertical-space--small)
 
 	&__headline
 		+padded
 		@extend %font-beckett
 		color: $color-text
-		font-size: em(28px)
+		+scaled-font(28px, $title-factor)
 		margin: 0 0 -0.6em
 
 	&__list
@@ -29,14 +29,14 @@
 
 	&__title
 		@extend %font-beckett
-		font-size: em(28px)
+		+scaled-font(28px, $title-factor)
 		margin: remify(0 0 9px)
 
 	&__text,
 	&__cta,
 	&__sit-link
-		font-size: em(16px)
-		line-height: 16/20
+		+scaled-font(16px)
+		line-height: (20/16)
 
 	&__text
 		display: inline
@@ -60,14 +60,16 @@
 
 	&__arrow
 		height: remify(15px)
-		width: remify(20px)
 		margin-left: remify(4px)
 		vertical-align: remify(-2px)
+		width: remify(20px)
 
 +respond-min($break-tablet-min)
 	.toolbox
+		margin-bottom: $vertical-space
+
 		&__headline
-			font-size: em(42px)
+			+scaled-font(42px, $title-factor)
 
 		&__title
 			min-height: 1.9em // = 2 lines
@@ -91,7 +93,7 @@
 
 		&__text
 			display: block
-			font-size: em(14px)
+			+scaled-font(14px)
 			margin-bottom: remify(30px)
 
 		&__cta
@@ -103,7 +105,7 @@
 +respond-min($break-desktop-min)
 	.toolbox
 		&__headline
-			font-size: em(64px)
+			+scaled-font(64px, $title-factor)
 
 		&__list
 			padding-top: remify(60px)
@@ -113,8 +115,8 @@
 			padding-right: remify(20px)
 
 		&__title
-			font-size: em(42px)
+			+scaled-font(42px, $title-factor)
 
 		&__text
-			font-size: em(16px)
+			+scaled-font(16px)
 			margin-bottom: remify(20px)

@@ -1,0 +1,10 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
+{% set esi_source = (view.cardstack_body | replace('__STACK__', '{}')).format(module.id, module.id | urlencode) %}
+{% if esi_source -%}
+    {% block cardstack -%}
+        {{- lama.insert_esi(esi_source, 'Cardstack konnte nicht geladen werden') -}}
+        {% if region_loop -%}
+            {{- view.append_to_webtrekk_assets(['cardstack', region_loop.index, area_loop.index, module_loop.index] | join('.')) -}}
+        {% endif -%}
+    {% endblock -%}
+{% endif -%}

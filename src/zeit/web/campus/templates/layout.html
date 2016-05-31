@@ -1,6 +1,6 @@
 {% import "zeit.web.campus:templates/macros/layout_macro.tpl" as lama %}
 <!DOCTYPE html>
-<html lang="de" class="no-js">
+<html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
 <head>
     <meta charset="utf-8">
     <title>{{ view.pagetitle }}</title>
@@ -40,7 +40,10 @@
     <link rel="dns-prefetch" href="//partner.googleadservices.com">
     <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
-    <link href="{{ request.asset_host }}/css/web.campus/screen.css" media="all" rel="stylesheet" type="text/css">
+
+    {% block css_link %}
+        <link href="{{ request.asset_host }}/css/web.campus/screen.css" media="all" rel="stylesheet" type="text/css">
+    {% endblock css_link %}
 
     {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
@@ -48,17 +51,17 @@
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-    {# SVG for Everybody -#}
-    <script src="{{ request.asset_host }}/js/vendor/svg4everybody.legacy.js"></script>
     <script>
-        {# needed for styling SVG in IE8 #}
-        document.createElement( 'svg' );
-        svg4everybody({
-            fallback: function ( src, svg, use ) {
-                return src.replace( /web\.campus\/icons\.svg(\?.+)?#svg-(.+)/ , 'icons/campus/$2.png$1');
+        // trigger print dialog after "Artikel drucken" was clicked
+        if ( location.search.indexOf( 'print' ) !== -1 ) {
+            if ( window.addEventListener ) {
+                window.addEventListener( 'load', window.print, false );
+            } else if ( window.attachEvent ) {
+                window.attachEvent( 'onload', window.print );
             }
-        });
+        }
     </script>
+
     {% if toggles('third_party_modules') %}
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>
@@ -67,11 +70,14 @@
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
-    {% if settings('dev_environment') %}
+    {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
+    {% if settings('livereload') %}
         <script src="//localhost:35729/livereload.js"></script>
     {% endif %}
+
+    {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
 </head>
-<body itemscope itemtype="http://schema.org/WebPage" data-page-type="{{ view.type }}">
+<body data-page-type="{{ view.type }}">
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
@@ -97,7 +103,7 @@
 
         <div class="page__content">
             {% if not view.is_wrapped %}
-            <header class="header">
+            <header class="header" data-ct-area="campus-topnav">
                 {%- block navigation -%}
                     {%- include "zeit.web.campus:templates/inc/navigation/navigation.html" -%}
                 {%- endblock navigation -%}
@@ -113,11 +119,9 @@
                 {% block main %}{% endblock main %}
                 {{ lama.adplace(view.banner(8), view, mobile=True) }}
             </main>
-            <footer class="footer" itemscope="itemscope" itemtype="http://schema.org/SiteNavigationElement" >
-                {% block footer %}
-                    {%- include "zeit.web.campus:templates/inc/footer.html" -%}
-                {% endblock footer %}
-            </footer>
+            {% block footer %}
+                {%- include "zeit.web.campus:templates/inc/footer.html" -%}
+            {% endblock footer %}
         </div>
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
@@ -125,8 +129,9 @@
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
     {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
-
-    {% block rawr_config %}{% endblock%}
+    {% block meetrics %}
+        {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
+    {% endblock %}
 
     <script>
         var require = { baseUrl: '{{ request.asset_host }}/js/' };
@@ -136,6 +141,6 @@
     {% if view.vgwort_url -%}
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
     {%- endif %}
-
+    {% include "zeit.web.core:templates/inc/cardstack/footer.tpl" %}
 </body>
 </html>

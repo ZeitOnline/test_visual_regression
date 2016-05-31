@@ -2,12 +2,8 @@
 	// min-height: 1px // see http://davidwalsh.name/empty-width
 	img
 		width: 100%
-	a
-		display: block // adjust focus outline to match image dimensions
-
-+keyframes(smoothPulse)
-	to
-		background-color: rgba(#eee, 0.6)
+	& > div > a
+		display: block // adjust focus outline to match image dimensions - without ruining linked copyright holders in caption
 
 .image--processing
 	+animation(1s smoothPulse infinite alternate)

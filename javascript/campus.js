@@ -15,17 +15,31 @@ require([
     'web.core/zeit',
     'web.core/images',
     'web.core/clicktracking',
-    'web.campus/menu'
+    'web.core/adReload',
+    'web.core/menu',
+    'web.core/comments',
+    'web.core/articledate'
 ], function(
     zeit,
     images,
     clicktracking,
-    menu
+    adReload,
+    menu,
+    comments,
+    articledate
 ) {
+    var article = document.getElementById( 'js-article' );
+
     images.init();
     menu.init();
     clicktracking.init();
+    adReload.init();
     zeit.clearQueue();
+
+    if ( article ) {
+        comments.init();
+        articledate.init();
+    }
 });
 
 // add required jQuery plugins
@@ -36,10 +50,12 @@ require([
     'velocity.ui',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.core/plugins/jquery.animatescroll',
-    'web.core/plugins/jquery.toggleOnClick',
+    'web.core/plugins/jquery.toggleRegions',
     'web.core/plugins/jquery.infobox',
     'web.core/plugins/jquery.inlinegallery',
-    'web.core/plugins/jquery.referrerCount'
+    'web.core/plugins/jquery.imageCopyrightFooter',
+    'web.core/plugins/jquery.referrerCount',
+    'web.core/plugins/jquery.countFormchars'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         main = $( '#main' );
@@ -50,13 +66,14 @@ require([
     switch ( pageType ) {
         case 'article':
             main.find( '.js-infobox' ).infobox();
-            main.find( '.article-toc' ).toggleOnClick({
-                toggleElement: '.article-toc__seperator'
-            });
+            main.find( '.article-toc' ).toggleRegions();
+            main.find( '.comment-section' ).countFormchars();
 
         /* falls through */
         case 'gallery':
             main.find( '.js-gallery' ).inlinegallery();
     }
+
+    $( '.js-image-copyright-footer' ).imageCopyrightFooter();
 
 });

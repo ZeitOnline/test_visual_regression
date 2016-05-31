@@ -8,3 +8,10 @@
         <span class="visually-hidden">:</span>
     {% endif %}
 {% endblock %}
+
+
+{% block teaser_label %}
+    {% if module[0].is_ad %}
+        <span class="{{ self.layout() }}__label">Anzeige</span>
+    {% endif %}
+{% endblock %}

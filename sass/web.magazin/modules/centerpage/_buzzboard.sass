@@ -1,0 +1,82 @@
+//styles for buzz area within cp
+
+%buzzboard__heading
+	font-size: $font-ml
+	font-weight: bold
+	letter-spacing: $hair
+	text-align: center
+	text-transform: uppercase
+
+.buzzboard
+	display: none
+	+respond-min($break-2)
+		display: block
+	font-family: $font-tabletgothic
+	padding: $compact
+
+	&__headline
+		@extend %buzzboard__heading
+		background-color: $color-page-bg
+		display: table
+		margin: 0 auto
+		padding: 0 $petite
+		position: relative
+		z-index: 1
+
+	&__table
+		border-color: #000
+		border-style: solid
+		border-width: 2px 0
+		position: relative
+		top: remify(-14px)
+		width: 100%
+		tbody
+			counter-reset: buzz-board
+		th
+			@extend %buzzboard__heading
+			width: 33%
+			padding: $big 0
+		tr
+			vertical-align: top
+			counter-increment: buzz-board
+
+	&__container
+		min-height: remify(69px)
+		margin-bottom: $compact
+		padding: 0 $fine 0 $medium
+		position: relative
+		word-wrap: break-word
+		span
+			margin: $micro 0
+		&:before
+			font-family: $font-tiemann
+			content: counter(buzz-board)
+			font-size: $font-xxxl
+			position: absolute
+			left: 0
+			line-height: 1em
+
+	&__heading
+		font-size: 1em
+		font-weight: normal
+		margin: 0
+		a
+			+link-colors($black, $black, $black, $black, $black)
+
+	&__kicker
+		display: block
+		font-size: $font-s
+		letter-spacing: $hair
+
+	&__title
+		font-weight: bold
+
+	&__metadata
+		color: $grey
+		font-size: $font-s
+
+	&__icon
+		margin-right: $fine
+		height: remify(36px)
+		width: remify(36px)
+		vertical-align: middle

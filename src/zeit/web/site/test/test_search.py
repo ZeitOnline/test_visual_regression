@@ -79,18 +79,25 @@ def test_search_form_should_default_to_recency_sort_order(
     assert search_form.sort_order == 'aktuell'
 
 
+def test_search_form_should_default_to_recency_sort_order_with_query(
+        dummy_request, search_form):
+    dummy_request.GET['q'] = 'foo'
+    dummy_request.GET['sort'] = ''
+    assert search_form.sort_order == 'aktuell'
+
+
 def test_search_form_should_sort_valid_queries_by_relevancy(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
     dummy_request.GET['sort'] = ''
-    assert search_form.sort_order == 'relevanz'
+    assert search_form.sort_order == 'aktuell'
 
 
 def test_search_form_should_ignore_invalid_sort_orders(
         dummy_request, search_form):
     dummy_request.GET['q'] = 'pfannkuchen'
     dummy_request.GET['sort'] = 'pfannkuchen'
-    assert search_form.sort_order == 'relevanz'
+    assert search_form.sort_order == 'aktuell'
 
 
 def test_search_form_should_allow_valid_search_order_aktuell(
@@ -155,6 +162,32 @@ def test_search_form_should_create_valid_type_restricted_query(
         'NOT expires:[* TO NOW]')
 
 
+def test_search_area_should_delegate_sort_order_to_search_form(
+        search_form, search_area, dummy_request):
+    dummy_request.GET['q'] = 'irgendetwas'
+    dummy_request.GET['sort'] = 'publikation'
+    assert search_area.sort_order == 'publikation'
+    orders = zeit.web.site.module.search_form.ORDERS
+    assert search_area.raw_order == orders['publikation']
+
+
+def test_ranking_area_should_use_default_order_when_no_search_form(
+        application):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    area = zeit.web.core.centerpage.get_area(zeit.web.core.utils.find_block(
+        cp, attrib='area', kind='ranking'))
+    assert area.raw_order == zeit.content.cp.interfaces.IArea[
+        'raw_order'].default
+
+
+def test_ranking_area_should_use_its_own_query_when_no_search_form(
+        application):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
+    area = zeit.web.core.centerpage.get_area(zeit.web.core.utils.find_block(
+        cp, attrib='area', kind='ranking'))
+    assert 'umbrien' in area.raw_query
+
+
 def test_search_area_should_produce_valid_set_of_search_results(search_area):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'foo://zeit.de'}]
@@ -203,3 +236,43 @@ def test_successful_search_result_should_render_in_browser(
         testbrowser, datasolr):
     browser = testbrowser('/suche/index')
     assert browser.cssselect('.cp-area--ranking .teaser-small')
+
+
+def test_campus_print_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple_date_print'.format(
+        testserver.url))
+    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+    source = selenium_driver.find_element_by_css_selector('.metadata__source')
+
+    assert date.text.strip() == (u'10. Januar 2016')
+    assert source.text.strip() == u'DIE ZEIT Nr. 1/2015, 5. Mai 2015'
+
+
+def test_campus_print_changed_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple_date_print_changed'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+    source = selenium_driver.find_element_by_css_selector('.metadata__source')
+
+    assert dates[0].text == u'10. Februar 2016, 10:39 Uhr'
+    assert dates[1].text == u'Editiert am 22. Februar 2016, 18:18 Uhr'
+    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+
+
+def test_campus_changed_article_has_correct_meta_line(
+        testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple_date_changed'.format(
+        testserver.url))
+    dates = selenium_driver.find_elements_by_css_selector('.metadata__date')
+
+    assert dates[0].text == u'10. Januar 2016, 10:39 Uhr'
+    assert dates[1].text == u'Aktualisiert am 10. Februar 2016, 10:39 Uhr'
+
+
+def test_campus_article_has_correct_meta_line(testserver, selenium_driver):
+    selenium_driver.get('{}/campus/article/simple'.format(testserver.url))
+    date = selenium_driver.find_element_by_css_selector('.metadata__date')
+
+    assert date.text.strip() == (u'10. Januar 2016, 10:39 Uhr')

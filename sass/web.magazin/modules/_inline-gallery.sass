@@ -9,10 +9,10 @@ $gallery-dots-diameter: 8px
 		margin: 0
 		padding: 0
 		clear: none
-	.figure__media
-		width: auto
-		max-height: 620px
+	.gallery__media-item
 		margin: 0 auto
+		max-height: 620px
+		width: auto
 	.figure__caption
 		color: $grey--mid
 		margin: $small auto 0
@@ -109,7 +109,8 @@ $gallery-dots-diameter: 8px
 .bx-arrow-icon
 	display: block
 	height: remify(15px)
-	width: remify(15px)
+	margin: 0 auto
+	width: auto
 
 .bx-overlay-prev,
 .bx-overlay-next
@@ -126,7 +127,7 @@ $gallery-dots-diameter: 8px
 		width: $gallery-button-radius * 2
 		.bx-arrow-icon
 			height: remify(30px)
-			width: remify(30px)
+			width: auto
 
 .bx-overlay-prev
 	left: em(10px)
@@ -175,11 +176,13 @@ $gallery-dots-diameter: 8px
 		&:last-child
 			.figure__caption
 				margin-bottom: remify(18px)
-	.figure__media
+
+	.gallery__media-item
 		max-width: 100%
 	.figure__caption
 		max-width: 100%
 		width: remify(580px)
 		margin-bottom: remify(36px)
+
 	.figure__copyright
 		display: block

@@ -44,7 +44,7 @@ def test_storystream_teaser_should_show_age_for_new_storystreams(
 
     updated_text = updated[0].text_content().strip()
     # remove multiple whitespace inside the string
-    updated_text = ' '.join(updated_text.split())
+    updated_text = ' '.join(updated_text.split()[1:])
     assert updated_text == 'Aktualisiert vor 1 Tag'
 
 
@@ -66,3 +66,9 @@ def test_storystream_contains_structured_data(testbrowser):
         'Zacharias Zacharakis')
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
         'http://localhost/autoren/Z/Zacharias_Zacharakis/index.xml')
+
+
+def test_storystream_should_get_layout_from_context(testbrowser):
+    # Milestone teasers are represented as <article/> instead of <div/>
+    browser = testbrowser('/zeit-online/storystream/dummy')
+    assert len(browser.cssselect('article.storystream-atom')) == 2

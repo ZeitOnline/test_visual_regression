@@ -1,8 +1,11 @@
-import requests
+import json
 
 import jwt
 import mock
+import pyramid.interfaces
 import pytest
+import requests
+import zope.component
 
 from zeit.web.core.comments import get_thread
 from zeit.web.core.security import get_user_info
@@ -171,13 +174,12 @@ def test_unreachable_community_counts_as_logged_in_but_marks_session_invalid(
 def test_session_with_uid_0_marks_session_invalid(dummy_request, monkeypatch):
     dummy_request.cookies['my_sso_cookie'] = 'present'
     monkeypatch.setattr(
-        zeit.web.core.security, 'get_user_info_from_sso_cookie',
-        lambda *args: {'id': '123'})
-    dummy_request.session['user'] = {
-        'ssoid': '123',
-        'uid': 0,
-    }
-    assert dummy_request.user['ssoid']
+        zeit.web.core.security, 'get_user_info',
+        lambda *args: {
+            'ssoid': '123',
+            'uid': 0,
+        })
+    assert dummy_request.user['ssoid'] == '123'
     assert dummy_request.user['should_invalidate']
 
 
@@ -222,3 +224,46 @@ def test_get_user_info_replaces_community_host(
     dummy_request.registry.settings['community_host'] = server.url
     user_info = get_user_info(dummy_request)
     assert user_info['picture'] == 'http://static_community/foo/picture.png'
+
+
+def test_rawr_config_should_contain_login_url(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    assert driver.execute_script('return rawrConfig.loginUrl') is None
+    driver.execute_script('rawrConfig.sso()')
+    assert 'http://my_sso/anmelden' in driver.execute_script(
+        'return rawrConfig.loginUrl')
+
+
+def test_rawr_config_should_contain_user_data_as_base64_encoded_json(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    # add_cookie() only works for the domain of the last get(), sigh.
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    driver.add_cookie({
+        'name': 'my_sso_cookie',
+        'value': 'just be present',
+    })
+    with mock.patch('zeit.web.core.security.get_user_info') as get_user:
+        get_user.return_value = {
+            'ssoid': '123',
+            'mail': 'test@example.org',
+            'name': 'jrandom',
+        }
+        driver.get('%s/zeit-online/article/01' % testserver.url)
+    driver.execute_script('rawrConfig.sso()')
+    stuff = driver.execute_script('return rawrConfig.remote_auth').split(', ')
+    rawr_user, rawr_signature, timestamp = stuff
+    data = json.loads(rawr_user.decode('base64'))
+    assert data == {'email': 'test@example.org', 'nickname': 'jrandom',
+                    'tos_accepted': True}
+    # I guess testing the signature would mean copying the production code
+    # to the test code, which doesn't tell us anything, so we rely on
+    # manual integration tests with the actual rawr system for that.
+
+
+def test_no_user_rawr_authentication_is_empty(dummy_request):
+    stuff = zeit.web.core.security._rawr_authentication(dummy_request)
+    rawr_user, rawr_signature, timestamp = stuff
+    data = json.loads(rawr_user.decode('base64'))
+    assert data == {}

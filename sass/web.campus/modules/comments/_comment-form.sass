@@ -1,0 +1,18 @@
+$comment-color-form-text:			#707070
+$comment-color-form-user-link:		$zco-charcoal
+$comment-color-form-cancel-link: 	#707070
+
+@import "web.core/modules/comments/comment-form"
+
+.comment-login
+	padding-bottom: remify(40px)
+	.button
+		border: 3px solid currentColor
+		color: $color-article-primary
+		font-size: remify(14px)
+		font-weight: bold
+		letter-spacing: .01em
+		padding: remify(6px 8px 6px 12px)
+		+on-interaction
+			border-color: currentColor
+			color: $color-text

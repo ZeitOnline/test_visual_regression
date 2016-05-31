@@ -1,31 +1,21 @@
 .article-pagination
+	@extend %cta-button
 	clear: both
 	color: $color-article-primary
-	font-size: remify(14px)
+	+scaled-font(14px)
 	&--leserartikel
 		color: $color-community-primary
-	a
-		color: inherit
-		+on-interaction
-			color: $color-text
 	&__link
-		background-color: currentColor
-		display: block
-		font-weight: bold
-		letter-spacing: .01em
-		margin: 0 (-$page-padding--small)
-		text-transform: uppercase
+		@extend %cta-button-link
 	&__button
-		padding: remify(14px)
+		@extend %cta-button-box
 		+respond-max($break-tablet-min)
 			+font-smoothing
 			color: #fff
 			display: block
 			text-align: center
 	&__icon
-		height: remify(10px)
-		margin-left: .5em
-		width: remify(14px)
+		@extend %cta-button-icon
 	&__nexttitle
 		display: none
 

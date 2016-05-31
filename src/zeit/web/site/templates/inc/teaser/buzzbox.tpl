@@ -6,7 +6,7 @@
 
 {% block teaser_container %}
     <span class="{{ self.layout() }}__metadata">
-        {{ lama.use_svg_icon(module.icon, self.layout() + '__icon', request) }}
+        {{ lama.use_svg_icon(module.icon, self.layout() + '__icon', view.package) }}
         {{ (teaser.score * module.score_factor) | round | pluralize(*module.score_pattern) }}
     </span>
 {% endblock %}

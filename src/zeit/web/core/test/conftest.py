@@ -75,19 +75,15 @@ def app_settings(mockserver):
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
-        'asset_prefix': '/static/latest',
-        'image_prefix': '',
-        'jsconf_prefix': '/jsconf',
-        'fbia_prefix': '/fbia',
-        'c1_prefix': '/jsconf',
         'comment_page_size': '4',
-        'community_host': 'http://localhost:6551',
+        'community_host': mockserver.url + '/comments',
         'community_static_host': 'http://static_community/foo',
         'community_maintenance': (
             'http://xml.zeit.de/config/community_maintenance.xml'),
         'agatho_host': mockserver.url + '/comments',
         'linkreach_host': mockserver.url + '/linkreach/api',
         'app_servers': '',
+        'health_check_with_fs': True,
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
         'spektrum_img_host': mockserver.url + '/spektrum',
@@ -134,6 +130,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
         'vivi_zeit.content.article_template-source': (
             'egg://zeit.web.core/data/config/article-templates.xml'),
+        'vivi_zeit.campus_article-stoa-source': (
+            'egg://zeit.web.core/data/config/article-stoa.xml'),
         'vivi_zeit.magazin_article-related-layout-source': (
             'egg://zeit.web.core/data/config/article-related-layouts.xml'),
         'vivi_zeit.content.cp_block-layout-source': (
@@ -167,6 +165,10 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/navigation-footer-links.xml'),
         'vivi_zeit.web_servicebox-source': (
             'egg://zeit.web.core/data/config/servicebox.xml'),
+        'vivi_zeit.web_zco-servicelinks-source': (
+            'egg://zeit.web.core/data/config/servicelinks-zco.xml'),
+        'vivi_zeit.web_zco-toolbox-source': (
+            'egg://zeit.web.core/data/config/zco-toolbox.xml'),
         'vivi_zeit.content.gallery_gallery-types-url': (
             'egg://zeit.web.core/data/config/gallery-types.xml'),
         'vivi_zeit.web_series-source': (
@@ -183,6 +185,7 @@ def app_settings(mockserver):
             'egg://zeit.push.tests/fixtures/facebook-accounts.xml'),
         'vivi_zeit.push_facebook-main-account': 'fb-test',
         'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
+        'vivi_zeit.push_facebook-campus-account': 'fb-campus',
         'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
         'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
         'vivi_zeit.brightcove_read-token': 'foo',
@@ -202,10 +205,13 @@ def app_settings(mockserver):
         'sso_activate': '',
         'sso_url': 'http://my_sso',
         'sso_cookie': 'my_sso_cookie',
+        'sso_rawr_secret': 'my_rawr_secret',
         'jinja2.show_exceptions': True,
         'jinja2.environment': 'jinja2.environment.Environment',
         'jinja2.enable_profiler': False,
-        'dev_environment': True,
+        'use_wesgi': True,
+        'mock_solr': True,
+        'is_admin': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
         'vivi_zeit.web_runtime-settings-source': (
@@ -282,7 +288,7 @@ def application_session(app_settings, request):
     ZODB_LAYER.setUp()
     request.addfinalizer(ZODB_LAYER.tearDown)
     wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(
-        app, secret='time')
+        app, secret='time', limit_to_application_url=True)
     wsgi.zeit_app = factory
     return wsgi
 
@@ -360,7 +366,7 @@ def debug_application(app_settings, request):
     app_settings['jinja2.show_exceptions'] = False
     return repoze.bitblt.processor.ImageTransformationMiddleware(
         zeit.web.core.application.Application()({}, **app_settings),
-        secret='time'
+        secret='time', limit_to_application_url=True
     )
 
 
@@ -433,6 +439,11 @@ def sleep_tween(handler, registry):
 class StaticViewMaybeReplaceHostURL(pyramid.static.static_view):
 
     def __call__(self, context, request):
+        # XXX Should we make the query string behaviour configurable and use
+        # a separate mockserver fixture for agatho instead?
+        if (request.environ['PATH_INFO'].startswith('/comments') and
+                request.query_string):
+            request.environ['PATH_INFO'] += u'?' + request.query_string
         response = super(StaticViewMaybeReplaceHostURL, self).__call__(
             context, request)
         if response.content_type in ['application/xml']:
@@ -610,6 +621,10 @@ def clock(monkeypatch):
                 else:
                     return cls.frozen.astimezone(tz)
             return cls.frozen
+
+        @classmethod
+        def today(cls, tz=None):
+            return Freeze.now(tz)
 
         @classmethod
         def delta(cls, timedelta=None, **kwargs):

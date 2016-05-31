@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+import urllib
 
 import pyramid.httpexceptions
 import pyramid.view
@@ -50,7 +51,11 @@ class Base(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=target_url)
         if self.request.params.get('page') == 'all':
-            target_url = "{}/komplettansicht".format(self.content_url)
+            # XXX response.location should urlencode itself, but that's really
+            # hard to do generally (e.g. already urlencoded query parameters),
+            # so we do it from the outside where we still have enough context.
+            target_url = u'{}/komplettansicht'.format(
+                urllib.quote(self.content_url.encode('utf-8'), safe='/:?&='))
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=target_url)
 
@@ -59,32 +64,6 @@ class Base(zeit.web.core.view.Base):
             'viewport_zoom': 'tablet',
         }
         return cases.get(name, None)
-
-    @zeit.web.reify
-    def breadcrumbs(self):
-        return [('Start', 'http://xml.zeit.de/index', 'ZEIT ONLINE')]
-
-    def breadcrumbs_by_title(self, breadcrumbs=None):
-        if breadcrumbs is None:
-            breadcrumbs = []
-        breadcrumbs.extend([(
-            self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
-        return breadcrumbs
-
-    def breadcrumbs_by_navigation(self, breadcrumbs=None):
-        if breadcrumbs is None:
-            breadcrumbs = []
-        for segment in (self.ressort, self.sub_ressort):
-            if segment == u'reisen':
-                segment = u'reise'
-            try:
-                nav_item = zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
-                    segment]
-                breadcrumbs.extend([(nav_item['text'], nav_item['link'])])
-            except KeyError:
-                # Segment is no longer be part of the navigation
-                next
-        return breadcrumbs
 
     @zeit.web.reify
     def meta_robots(self):
@@ -100,7 +79,8 @@ class Base(zeit.web.core.view.Base):
             path('/templates') or \
             path('/autoren/register') or \
             self.shared_cardstack_id or \
-                self.product_id in ('TGS', 'HaBl', 'WIWO', 'GOLEM'):
+                self.product_id in ('TGS', 'HaBl', 'WIWO', 'GOLEM',
+                                    'tonic-magazin', 'edition-f'):
             return 'noindex,follow,noodp,noydir,noarchive'
 
         return super(Base, self).meta_robots
@@ -154,32 +134,6 @@ def schlagworte(request):
             request.matchdict['item'].lower()).encode('utf-8'))
 
 
-# XXX We should be a little more specific here, ie ICommentableContent
-@pyramid.view.view_defaults(
-    custom_predicates=(is_zon_content,),
-    containment=zeit.cms.content.interfaces.ICommonMetadata)
-@pyramid.view.view_config(
-    name='comment-form',
-    renderer='templates/inc/comments/comment-form.html')
-@pyramid.view.view_config(
-    name='report-form',
-    renderer='templates/inc/comments/report-form.html')
-class CommentForm(zeit.web.core.view.CommentMixin,
-                  zeit.web.core.view.Base):
-
-    def __call__(self):
-        result = super(CommentForm, self).__call__()
-        # Never ever ever ever cache comment forms
-        self.request.response.cache_expires(0)
-        return result
-
-    @zeit.web.reify
-    def error(self):
-        if 'error' not in self.request.params:
-            return
-        return self.request.session.pop(self.request.params['error'])
-
-
 @pyramid.view.view_config(
     route_name='framebuilder',
     renderer='templates/framebuilder/framebuilder.html')
@@ -196,4 +150,4 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
 
     @zeit.web.reify
     def ressort(self):
-        return self.request.GET.get('ressort', None)
+        return self.request.GET.get('ressort', '')

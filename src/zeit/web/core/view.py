@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
+from __future__ import absolute_import
+
 import base64
+import collections
 import datetime
 import logging
 import lxml.etree
@@ -12,6 +15,7 @@ import bugsnag
 import pyramid.response
 import pyramid.settings
 import pyramid.view
+import pyramid.httpexceptions
 import werkzeug.http
 import zope.component
 
@@ -115,6 +119,7 @@ class Base(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
+        self._webtrekk_assets = []
 
     @zeit.web.reify
     def vgwort_url(self):
@@ -154,7 +159,7 @@ class Base(object):
     @zeit.web.reify
     def cap_title(self):
         if not self.context.cap_title:
-            return ''
+            return 'Anzeige'
         return self.context.cap_title.title()
 
     @zeit.web.reify
@@ -401,7 +406,7 @@ class Base(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         try:
             return ('ZONApp' in self.request.headers.get('user-agent', '') or (
-                conf.get('dev_environment') and
+                conf.get('is_admin') and
                     'app-content' in self.request.query_string))
         except (AttributeError, TypeError):
             return False
@@ -516,6 +521,125 @@ class Base(object):
         url = conf.get('cardstack_backend', '').rstrip('/')
         return url + u'/stacks/esi/scripts'
 
+    @zeit.web.reify
+    def breadcrumbs(self):
+        return []
+
+    def breadcrumbs_by_title(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        breadcrumbs.extend([(
+            self.pagetitle.replace(self.pagetitle_suffix, ''), None)])
+        return breadcrumbs
+
+    def breadcrumbs_by_navigation(self, breadcrumbs=None):
+        if breadcrumbs is None:
+            breadcrumbs = []
+        for segment in (self.ressort, self.sub_ressort):
+            if segment == u'reisen':
+                segment = u'reise'
+            elif segment == u'studium':
+                segment = u'campus'
+            try:
+                nav_item = zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
+                    segment]
+                if nav_item['text'] == 'Campus':
+                    nav_item['text'] = 'ZEIT Campus'
+                breadcrumbs.extend([(nav_item['text'], nav_item['link'])])
+            except KeyError:
+                # Segment is no longer part of the navigation
+                next
+        return breadcrumbs
+
+    @zeit.web.reify
+    def webtrekk(self):
+
+        def get_param(key):
+            value = getattr(self, key, False)
+            return value.lower() if value else ''
+
+        ivw_code = [self.ressort, self.sub_ressort, 'bild-text']
+        pagination = '1/1'
+        banner_on = 'no'
+        # beware of None
+        product_id = get_param('product_id')
+
+        if getattr(self, 'pagination', None):
+            if getattr(self, 'is_all_pages_view', False):
+                page = 'all'
+            else:
+                page = self.pagination.get('current')
+            pagination = '{}/{}'.format(page, self.pagination.get('total'))
+
+        if getattr(self.context, 'advertising_enabled', False):
+            banner_on = 'yes'
+
+        if getattr(self, 'is_push_news', False):
+            push = 'wichtigenachrichten.push'
+        elif getattr(self, 'is_breaking', False):
+            push = 'eilmeldung.push'
+        else:
+            push = ''
+
+        if getattr(self, 'framebuilder_requires_webtrekk', False):
+            pagetype = 'centerpage.framebuilder'
+        else:
+            pagetype = self.detailed_content_type
+
+        content_group = collections.OrderedDict([
+            ('cg1', 'redaktion'),  # Zuordnung/Bereich
+            ('cg2', get_param('tracking_type')),  # Kategorie
+            ('cg3', get_param('ressort')),  # Ressort
+            ('cg4', product_id),  # Online/Sourcetype
+            ('cg5', self.sub_ressort.lower()),  # Subressort
+            ('cg6', self.serie.replace(' ', '').lower()),  # Cluster
+            ('cg7', self.request.path_info.split('/')[-1]),  # doc-path
+            ('cg8', get_param('banner_channel')),  # Banner-Channel
+            ('cg9', zeit.web.core.template.format_date(
+                self.date_first_released,
+                'short_num'))  # Veröffentlichungsdatum
+        ])
+
+        custom_parameter = collections.OrderedDict([
+            ('cp1', get_param('authors_list')),  # Autor
+            ('cp2', '/'.join([x for x in ivw_code if x]).lower()),  # IVW-Code
+            ('cp3', pagination),  # Seitenanzahl
+            ('cp4', ';'.join(self.meta_keywords).lower()),  # Schlagworte
+            ('cp5', self.date_last_modified),  # Last Published
+            ('cp6', getattr(self, 'text_length', '')),  # Textlänge
+            ('cp7', get_param('news_source')),  # Quelle
+            ('cp8', product_id),  # Product-ID
+            ('cp9', get_param('banner_channel')),  # Banner-Channel
+            ('cp10', banner_on),  # Banner aktiv
+            ('cp11', ''),  # Fehlermeldung
+            ('cp12', 'desktop.site'),  # Seitenversion Endgerät
+            ('cp13', 'stationaer'),  # Breakpoint
+            ('cp14', 'friedbert'),  # Beta-Variante
+            ('cp15', push),  # Push und Eilmeldungen
+            ('cp25', 'original'),  # Plattform
+            ('cp26', pagetype),  # inhaltlicher Pagetype
+            ('cp27', ';'.join(self.webtrekk_assets))  # Asset
+        ])
+
+        # @see https://sites.google.com/a/apps.zeit.de/
+        # verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs
+        identifier = '.'.join(map(zeit.web.core.template.format_webtrekk, [
+            'redaktion', self.ressort, self.sub_ressort,
+            self.serie.replace(' ', ''), self.type, product_id]))
+
+        return {
+            'identifier': identifier,
+            'contentGroup': content_group,
+            'customParameter': custom_parameter
+        }
+
+    @zeit.web.reify
+    def webtrekk_assets(self):
+        return self._webtrekk_assets
+
+    def append_to_webtrekk_assets(self, value):
+        self._webtrekk_assets.append(value)
+
 
 class CeleraOneMixin(object):
 
@@ -563,7 +687,7 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def c1_client(self):
-        return [(k, u'"{}"'.format(v)) for k, v in {
+        return [(k, u'"{}"'.format(v.replace('"', r'\"'))) for k, v in {
             'set_channel': self._c1_channel,
             'set_sub_channel': self._c1_sub_channel,
             'set_cms_id': self._c1_cms_id,
@@ -601,12 +725,35 @@ class CommentMixin(object):
         return result
 
     @zeit.web.reify
+    def community(self):
+        return zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+
+    @zeit.web.reify
     def comments_loadable(self):
-        return zeit.web.core.comments.is_community_healthy()
+        return self.community.is_healthy()
 
     @zeit.web.reify
     def community_maintenance(self):
         return zeit.web.core.comments.community_maintenance()
+
+    def show_replies(self, parent):
+        # The request is a comment permalink, so we need to show the
+        # replies of the permalinked comment's root comment.
+        try:
+            cid = int(self.request.GET['cid'])
+        except (KeyError, ValueError):
+            return False
+        if not self.comments:
+            return False
+
+        permalinked = self.comments['index'].get(cid, {})
+        if not permalinked.get('is_reply'):
+            return False
+        try:
+            root = self.comments['comments'][permalinked.get('root_index') - 1]
+            return root['cid'] == parent['cid']
+        except IndexError:
+            return False
 
     @zeit.web.reify
     def comments(self):
@@ -614,22 +761,19 @@ class CommentMixin(object):
             return
 
         sort = self.request.params.get('sort', 'asc')
-        page = self.request.params.get('page', 1)
-        cid = self.request.params.get('cid', None)
         try:
-            return zeit.web.core.comments.get_thread(
-                self.context.uniqueId,
-                sort=sort,
-                page=page,
-                cid=cid)
-        except zeit.web.core.comments.ThreadNotLoadable:
+            page = int(self.request.params.get('page', 1))
+        except ValueError:
             return
+        cid = self.request.params.get('cid', None)
+        return self.community.get_thread(
+            self.context.uniqueId, sort=sort, page=page, cid=cid)
 
     def get_comment(self, cid):
-        return zeit.web.core.comments.get_comment(self.context.uniqueId, cid)
+        return self.community.get_comment(self.context.uniqueId, cid)
 
     @zeit.web.reify
-    def comments_allowed(self):
+    def commenting_allowed(self):
         return self.context.commentsAllowed and self.show_commentthread
 
     @zeit.web.reify
@@ -659,7 +803,7 @@ class CommentMixin(object):
                        u'Die Kommentare zu diesem Artikel konnten '
                        u'nicht geladen werden. Bitte entschuldigen Sie '
                        u'diese Störung.')
-        elif not self.comments_allowed:
+        elif not self.commenting_allowed:
             message = (u'Der Kommentarbereich dieses Artikels ist geschlossen.'
                        u' Wir bitten um Ihr Verständnis.')
             note = message
@@ -678,20 +822,23 @@ class CommentMixin(object):
             # For not authenticated users this means "show_login_prompt".
             'show_comment_form': (
                 not self.community_maintenance['active'] and
-                self.comments_allowed and self.comments_loadable and
+                self.commenting_allowed and self.comments_loadable and
                 ((not user_blocked and valid_community_login) or
                  not authenticated)),
             'note': note,
             'message': message,
             'user_blocked': user_blocked,
             'show_premoderation_warning': premoderation and (
-                self.comments_allowed and not user_blocked)
+                self.commenting_allowed and not user_blocked)
         }
+
+    @zeit.web.reify
+    def comment_count(self):
+        return self.community.get_comment_count(self.context.uniqueId)
 
     @zeit.web.reify
     def comment_area(self):
         result = {
-            'show': (self.comments_allowed or bool(self.comments)),
             'show_comments': not self.community_maintenance['active'] and (
                 self.comments_loadable and bool(self.comments)),
             'no_comments': (not self.comments and self.comments_loadable),
@@ -790,12 +937,8 @@ class Content(CeleraOneMixin, CommentMixin, Base):
     @zeit.web.reify
     def obfuscated_date(self):
         if self.last_modified_label:
-            released = zeit.web.core.template.format_date(
+            date = zeit.web.core.template.format_date(
                 self.date_first_released, 'long')
-            date = (u'{} <span class="metadata__seperator">'
-                    ' / </span> {} ').format(
-                        released,
-                        self.last_modified_label)
             return base64.b64encode(date.encode('latin-1'))
 
     @zeit.web.reify
@@ -867,6 +1010,8 @@ class Content(CeleraOneMixin, CommentMixin, Base):
                     lq.field('uniqueId', self.context.uniqueId)),
                 lq.not_(
                     lq.field('ressort', 'zeit-magazin')),
+                lq.not_(
+                    lq.field('ressort', 'Campus')),
                 lq.text_range('channels', None, None),
                 lq.field_raw(
                     'product_id', lq.or_(
@@ -905,12 +1050,33 @@ class Content(CeleraOneMixin, CommentMixin, Base):
     # XXX Does this really belong on this class?
     @zeit.web.reify('default_term')
     def comment_counts(self):
-        return zeit.web.core.comments.get_counts(
-            [t.uniqueId for t in self.nextread])
+        return self.community.get_comment_counts(
+            *[t.uniqueId for t in self.nextread])
 
 
 @pyramid.view.view_config(route_name='health_check')
 def health_check(request):
+    """ View callable to perform a health a check by checking,
+        if the configured repository path exists.
+
+        :type arg1: pyramid request object
+        :return: Response indicating, if check was successful or not
+        :rtype: pyramid.response.Response
+    """
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    if not conf.get('health_check_with_fs', False):
+        return pyramid.response.Response('OK', 200)
+
+    path = urlparse.urlparse(
+        zeit.web.core.application.maybe_convert_egg_url(
+            conf.get(
+                'vivi_zeit.connector_repository-path',
+                'file:///var/cms/work/')))
+    if not os.path.exists(getattr(path, 'path', '/var/cms/work/')):
+        raise pyramid.httpexceptions.HTTPInternalServerError()
+
     return pyramid.response.Response('OK', 200)
 
 
@@ -936,6 +1102,18 @@ class FrameBuilder(CeleraOneMixin):
     inline_svg_icons = True
 
     @zeit.web.reify
+    def framebuilder_is_minimal(self):
+        return 'minimal' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_width(self):
+        return self.request.GET.get('width', None)
+
+    @zeit.web.reify
+    def framebuilder_has_login(self):
+        return 'login' in self.request.GET
+
+    @zeit.web.reify
     def advertising_enabled(self):
         return self.banner_channel is not None
 
@@ -945,7 +1123,15 @@ class FrameBuilder(CeleraOneMixin):
 
     @zeit.web.reify
     def page_slice(self):
-        return self.request.GET.get('page_slice', None)
+        requested_slice = self.request.GET.get('page_slice', None)
+        if requested_slice:
+            if requested_slice not in [
+                    'html_head', 'upper_body', 'lower_body']:
+                raise pyramid.httpexceptions.HTTPBadRequest(
+                    title='Bad page_slice given',
+                    explanation='''The page_slice parameter only accepts these
+                        values: "html_head", "upper_body", "lower_body"''')
+        return requested_slice
 
     @zeit.web.reify
     def desktop_only(self):
@@ -974,6 +1160,24 @@ class FrameBuilder(CeleraOneMixin):
     @zeit.web.reify
     def cap_title(self):
         return self.request.GET.get('adlabel') or 'Anzeige'
+
+    @zeit.web.reify
+    def adcontroller_values(self):
+
+        banner_channel = self.request.GET.get('banner_channel', None)
+
+        if not banner_channel:
+            return
+
+        adc_levels = banner_channel.split('/')
+
+        return [('$handle', adc_levels[3] if len(adc_levels) > 3 else ''),
+                ('level2', adc_levels[0] if len(adc_levels) > 0 else ''),
+                ('level3', adc_levels[1] if len(adc_levels) > 1 else ''),
+                ('level4', adc_levels[2] if len(adc_levels) > 2 else ''),
+                ('$autoSizeFrames', True),
+                ('keywords', adc_levels[4] if len(adc_levels) > 4 else ''),
+                ('tma', '')]
 
 
 @pyramid.view.notfound_view_config()
@@ -1076,7 +1280,8 @@ def json_comment_count(request):
         article = zeit.content.article.interfaces.IArticle(context, None)
         articles = [article] if article is not None else []
 
-    counts = zeit.web.core.comments.get_counts(*[a.uniqueId for a in articles])
+    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
+    counts = community.get_comment_counts(*[a.uniqueId for a in articles])
     comment_count = {}
 
     for article in articles:

@@ -1,0 +1,20 @@
+.cardstack
+	margin: $vertical-space--small 0
+	text-align: center
+	background-color: $color-background--light
+	padding-bottom: remify(30px)
+
+	+respond-min($break-tablet-min)
+		margin: $vertical-space $cp-padding
+		background-color: transparent
+		padding: $vertical-space/2 0 0 0
+		position: relative
+		&:before
+			background-color: $color-background--light
+			content: ""
+			display: block
+			height: 0
+			padding-bottom: 100%
+			position: absolute
+			top: 0
+			width: 100%

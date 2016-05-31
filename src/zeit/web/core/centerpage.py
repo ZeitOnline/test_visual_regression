@@ -1,13 +1,15 @@
+import collections
 import logging
+import uuid
 
 import grokcore.component
-import zope.component
+import zope.interface
 import zope.interface
 import pyramid.threadlocal
 
 import zeit.cms.interfaces
-import zeit.content.author.interfaces
 import zeit.content.cp.area
+import zeit.content.cp.blocks.automatic
 import zeit.content.cp.blocks.teaser
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
@@ -24,6 +26,55 @@ import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
+
+
+@zope.interface.implementer(zeit.content.cp.interfaces.IArea)
+class Area(collections.OrderedDict):
+
+    factory = zeit.content.cp.area.AreaFactory(None)
+
+    def __init__(self, arg, **kw):
+        super(Area, self).__init__(
+            [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
+        self.kind = kw.pop('kind', 'solo')
+        self.xml = kw.pop('xml', self.factory.get_xml())
+        self.automatic = kw.pop('automatic', False)
+        self.__parent__ = kw.pop('parent', None)
+
+        for key in kw:
+            try:
+                assert not hasattr(self, key)
+                setattr(self, key, kw[key])
+            except:
+                continue
+
+    def append(self, value):
+        self['id-{}'.format(uuid.uuid1())] = value
+
+    def __hash__(self):
+        if self.kind:
+            return hash((self.kind, id(self)))
+        else:
+            raise NotImplementedError()
+
+    def __repr__(self):
+        return object.__repr__(self)
+
+    # XXX This is really crude, but since these Legacy-classes throw away
+    # their vivi-side objects, we can't get to the interfaces anymore,
+    # so a full re-implementation is just plain impossible.
+    # So we hard-code the only use-case that this should ever be called for,
+    # which is ITeaseredContent.
+    def select_modules(self, *interfaces):
+        for module in zeit.content.cp.interfaces.IRenderedArea(self).values():
+            if getattr(module, 'type', None) == 'teaser':
+                yield module
+
+
+@zope.interface.implementer(zeit.content.cp.interfaces.IRegion)
+class Region(Area):
+
+    factory = zeit.content.cp.area.RegionFactory(None)
 
 
 @zeit.web.register_filter
@@ -84,11 +135,6 @@ def get_image_asset(teaser):
 
 @zeit.web.register_filter
 def get_area(area):
-    if zeit.content.cp.interfaces.IArea.providedBy(area) and (
-            zeit.magazin.interfaces.IZMOContent.providedBy(
-                area.referenced_cp)):
-        area.kind = 'zmo-parquet'
-
     return zeit.web.core.utils.get_named_adapter(
         area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
 
@@ -121,7 +167,7 @@ def cache_values_area(context):
     return context
 
 
-class TeaserMapping(zeit.web.core.utils.frozendict):
+class LegacyTeaserMapping(zeit.web.core.utils.frozendict):
 
     _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama',
                           'parquet-large', 'zon-parquet-large'],
@@ -135,100 +181,10 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
 
     def __init__(self, *args, **kw):
         # Flattens and reverses _map, so we can easily lookup a layout.
-        super(TeaserMapping, self).__init__(
+        super(LegacyTeaserMapping, self).__init__(
             x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
 
-TEASER_MAPPING = TeaserMapping()
-
-
-class TeaserSequence(object):
-
-    def __init__(self, context):
-        self.context = context
-        self.sequence = []
-        self.refs = []
-
-    def __contains__(self, item):
-        return item in self.sequence
-
-    def __iter__(self):
-        return iter(self.sequence)
-
-    def __len__(self):
-        return len(self.sequence)
-
-    def __setitem__(self, key, value):
-        index = self.sequence.index(key)
-        self.refs[index][key] = value
-
-    def __getitem__(self, key):
-        return self.sequence[key]
-
-    def __delitem__(self, key):
-        del self.sequence[key]
-
-    def __repr__(self):
-        return object.__repr__(self)
-
-    def _resolve_child(self, item):
-        try:
-            sub_seq = zeit.web.core.interfaces.ITeaserSequence(item)
-            self.sequence += sub_seq.sequence
-            self.refs += sub_seq.refs
-            return
-        except TypeError:
-            pass
-        try:
-            self.sequence.append(zeit.web.core.centerpage.Teaser(
-                self.context, item))
-            self.refs.append(self.context)
-        except TypeError:
-            pass
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(list)
-class TeaserList(TeaserSequence):
-
-    def __init__(self, context):
-        super(TeaserList, self).__init__(context)
-        for item in iter(context):
-            self._resolve_child(item)
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock)
-class TeaserBlock(TeaserList):
-
-    pass
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(dict)
-class TeaserDict(TeaserSequence):
-
-    def __init__(self, context):
-        super(TeaserDict, self).__init__(context)
-        for item in context.itervalues():
-            self._resolve_child(item)
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(zeit.content.cp.interfaces.IArea)
-class Area(TeaserDict):
-
-    pass
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaser)
-@grokcore.component.adapter(TeaserSequence, zeit.cms.interfaces.ICMSContent)
-class Teaser(object):
-
-    def __init__(self, block, context):
-        self.video = None
-        self.gallery = None
-        self.image = zeit.web.core.template.get_teaser_image(block, context)
-        self.context = context
+LEGACY_TEASER_MAPPING = LegacyTeaserMapping()
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
@@ -244,12 +200,6 @@ class TopicLink(zeit.web.core.utils.nslist):
             link = getattr(self.context, 'topiclink_url_%s' % i, None)
             if label is not None and link is not None:
                 self.append((label, link))
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserSequence)
-@grokcore.component.adapter(zeit.web.core.interfaces.INextread)
-class Nextread(TeaserBlock):
-    pass
 
 
 @zeit.web.register_module(u'')
@@ -292,6 +242,22 @@ class Module(object):
         return pyramid.threadlocal.get_current_request()
 
 
+@zope.interface.implementer(zeit.web.core.interfaces.IBlock)
+class TeaserModule(Module, zeit.web.core.utils.nslist):
+
+    def __init__(self, arg, **kw):
+        zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
+        self.layout = kw.pop('layout', 'default')
+        self.type = kw.pop('type', 'teaser')
+        self.__parent = kw.pop('parent', None)
+
+    def __hash__(self):
+        return hash((self.layout.id, id(self)))
+
+    def __repr__(self):
+        return object.__repr__(self)
+
+
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 @grokcore.component.implementer(zeit.web.core.interfaces.IDetailedContentType)
 def cp_detailed_content_type(context):
@@ -321,3 +287,25 @@ def iter_without_fakeentry(self):
         except TypeError:
             continue
 zeit.content.cp.blocks.teaser.TeaserBlock.__iter__ = iter_without_fakeentry
+
+
+# Simply pass through whatever teaser layout is set in XML, ignoring the
+# availability rules.
+def layout_or_fake(instance):
+    result = instance.original_layout(instance)
+    # We still need to return None for __init__, so it sets the default layout.
+    if result or (instance.xml.get('module') in ['teaser', 'auto-teaser']):
+        return result
+    return zeit.content.cp.layout.BlockLayout(
+        id, id, areas=[], image_pattern=id)
+zeit.content.cp.blocks.teaser.TeaserBlock.original_layout = (
+    zeit.content.cp.blocks.teaser.TeaserBlock.layout.__get__)
+zeit.content.cp.blocks.teaser.TeaserBlock.layout = property(
+    layout_or_fake, zeit.content.cp.blocks.teaser.TeaserBlock.layout.__set__)
+zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.original_layout = (
+    zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.layout.__get__)
+zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.layout = property(
+    layout_or_fake,
+    zeit.content.cp.blocks.automatic.AutomaticTeaserBlock.layout.__set__)
+
+zeit.content.cp.layout.BlockLayout.is_allowed = lambda *args, **kw: True

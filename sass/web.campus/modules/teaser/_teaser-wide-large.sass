@@ -3,26 +3,23 @@
 	padding: $page-padding--small
 
 	&__media
-		background-color: $greyish-white
-		height: 0
+		@extend %teaser-media
 		padding-bottom: 100% / 7 * 3 // image variant 'cinema', ratio 7:3
 
 	&__heading
 		@extend %teaser-heading
-		margin: remify(0 0 10px)
+		+scaled-font(28px, $title-factor)
 
 	&__combined-link
 		@extend %teaser-combined-link
 
 	&__kicker
 		@extend %teaser-kicker
-		top: remify(-18px)
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
 
 	&__title
 		@extend %teaser-title
-		display: block
-		font-size: remify(28px)
-		padding-top: remify(16px)
 
 	&__text
 		@extend %teaser-text
@@ -30,25 +27,24 @@
 	&__metadata
 		@extend %teaser-metadata
 
-	&__byline
-		@extend %teaser-byline
+	&__commentcount
+		@extend %teaser-commentcount
+
+
++respond-max($break-tablet-min)
+	.teaser-wide-large
+		&__heading
+			margin-top: 0.46em
+			max-width: none
 
 
 +respond-min($break-tablet-min)
 	.teaser-wide-large
-		border: none
-		float: left
-		padding: $cp-padding
-		width: 50%
+		padding: $vertical-space $cp-padding
 		&__heading
-			margin-top: remify(-14px)
-		&__combined-link
-			box-shadow: 10px -18px 0 10px $white
-		&__kicker
-			top: remify(-34px)
-		&__title
-			display: inline
-			font-size: remify(42px)
+			+scaled-font(42px, $title-factor)
+			padding-right: 0
+		&__heading,
 		&__text,
 		&__metadata
 			width: 90%

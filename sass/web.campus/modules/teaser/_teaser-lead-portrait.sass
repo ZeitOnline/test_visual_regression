@@ -2,26 +2,27 @@
 	@extend %teaser
 
 	&__media
-		background-color: $greyish-white
-		height: 0
+		@extend %teaser-media
+		overflow: hidden
 		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
+
+	&__content
+		padding: 0 0 $page-padding--small
 
 	&__heading
 		@extend %teaser-heading
-		margin: remify(0 0 10px)
+		+scaled-font(42px, $title-factor)
 
 	&__combined-link
 		@extend %teaser-combined-link
 
 	&__kicker
 		@extend %teaser-kicker
-		top: remify(-20px)
+		&--leserartikel
+			@extend %teaser-kicker--leserartikel
 
 	&__title
 		@extend %teaser-title
-		display: block
-		font-size: remify(42px)
-		padding-top: remify(16px)
 
 	&__text
 		@extend %teaser-text
@@ -29,50 +30,67 @@
 	&__metadata
 		@extend %teaser-metadata
 
-	&__byline
-		@extend %teaser-byline
+	&__commentcount
+		@extend %teaser-commentcount
+
 
 +respond-max($break-tablet-min)
 	.teaser-lead-portrait
+		&__combined-link,
 		&__kicker,
-		&__title,
 		&__text,
 		&__metadata
-			padding-left: remify($page-padding--small)
+			padding-left: $page-padding--small
 		&__text,
 		&__metadata
-			max-width: 95%
-			padding-right: remify($page-padding--small)
+			padding-right: $page-padding--small
 
 +respond-min($break-tablet-min)
 	.teaser-lead-portrait
-		border: none
-		margin: $cp-padding*2
+		padding: $page-padding ($page-padding+$gutter) $page-padding $page-padding // this is to make the 50% width of the image consider the grid gutter
 		position: relative
+
 		&__media
 			width: 50%
 			padding-bottom: 50% / 3 * 4 // image variant 'portrait' (3:4), refers to half-width
+
 		&__content
-			background: $white
-			left: 33.333% // 4/12 according to Screendesign
-			margin-top: 0
-			padding: remify(18px 0 35px 30px) // top: 30, but font has 12px padding(?)
+			background: $color-page-bg
+			padding: remify(26px $page-padding 35px 30px)
 			position: absolute
+			right: 0
 			top: remify(65px)
+			width: 66.66%
+			width: calc((100% - #{$page-padding}) * 2/3) // consider gutter
+
+		&__heading
+			+scaled-font(64px, $title-factor)
+			margin: 0
+			max-width: none
+			padding-right: 0
+
 		&__kicker
-			position: relative
-			top: 0
+			display: block
+			padding: remify(0 0 15px)
+			position: static
+
 		&__title
-			font-size: remify(64px)
-			letter-spacing: remify(1.5px)
-			max-width: remify(780px)
+			display: block
+
 		&__text
-			font-size: remify(18px)
-			line-height: (24/18)
+			+scaled-font(18px)
+
+		&__text,
+		&__metadata
+			max-width: remify(510px)
+			width: 90%
+
+		&__metadata
+			+scaled-font(15px)
 
 +respond-min($break-desktop-min)
 	.teaser-lead-portrait
 		&__content
 			top: remify(69px)
-		&__title
-			font-size: remify(84px)
+		&__heading
+			+scaled-font(84px, $title-factor)

@@ -1,0 +1,48 @@
+$comment-color-notice:          #707070
+$comment-color-header-sub:      #fff
+$comment-color-head-background: $color-community-primary
+$comment-color-head-color:      #fff
+
+@import "web.core/modules/comments/comment-section"
+
+// own styles, which differ from core
+.comment-section
+	&__button
+		+font-smoothing
+		border: 3px solid currentColor
+		color: #fff
+		display: inline-block
+		font-weight: bold
+		padding: remify(6px 8px 6px 12px)
+		+respond-min($break-phablet-min)
+			float: right
+			// fake the button to appear in the center of the pink section
+			// (phablet) or on the bottom-line of the big headline (tablet)
+			margin-top: remify(6px)
+
+	&__head
+		padding-bottom: em(32px - 6px) // compensate for short-length of font
+	&__note &__message
+		color: inherit
+	&__note &__notice
+		+default-article-textlink($color: inherit, $hover: inherit, $border-color: rgba($comment-color-head-color, 0.5), $border-color--hover: currentColor)
+		color: inherit
+		&:before
+			background-color: #fff
+			color: #444
+	&__head + &__message
+		padding-bottom: em(16px)
+		padding-top: em(16px)
+	&__headline
+		@extend %font-beckett
+		+font-smoothing
+		font-size: remify(42px)
+		font-weight: normal
+		+respond-min($break-tablet-min)
+			font-size: remify(64px)
+		small
+			font-family: $font-tabletgothic
+			font-size: remify(16px)
+			text-transform: initial
+	&__icon
+		@extend %cta-button-icon

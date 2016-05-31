@@ -17,12 +17,14 @@
     <span class="login-state-mobile__name">{{ user.name | default('Angemeldet', true) }}</span>
     <a href="{{ logout }}" class="login-state-mobile__logoff">
         Abmelden
-        {{ lama.use_svg_icon('navigation-login', 'login-state-mobile__icon', request) }}
+        {{ lama.use_svg_icon('navigation-login', 'login-state-mobile__icon', 'zeit.web.site') }}
     </a>
 </div>
 {% else %}
 <a href="{{ login }}" class="user-link">
-    {{ lama.use_svg_icon('navigation-login', 'main_nav__community__icon', request) }}
+    {{ lama.use_svg_icon('navigation-login', 'main_nav__community__icon', 'zeit.web.site') }}
     Anmelden
 </a>
 {% endif %}
+
+{% include "zeit.web.core:templates/inc/inline_js/rawr_sso.tpl" %}

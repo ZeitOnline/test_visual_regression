@@ -1,5 +1,5 @@
+# -*- coding: utf-8 -*-
 import datetime
-import itertools
 import logging
 import re
 
@@ -32,14 +32,11 @@ class Article(zeit.web.core.view.Content):
 
     advertising_enabled = True
     is_longform = False
-    main_nav_full_width = False
     page_nr = 1
 
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
-        self._copyrights = {}
         self.context.advertising_enabled = self.banner_on
-        self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
         # throw 404 for 'komplettansicht' if there's just one article page
@@ -50,12 +47,6 @@ class Article(zeit.web.core.view.Content):
     def main_image_block(self):
         img = zeit.web.core.interfaces.IFrontendBlock(
             self.context.main_image_block, None)
-        if img is not None:
-            img.itemprop = 'image'
-        try:
-            self._copyrights.setdefault(img.uniqueId, img)
-        except AttributeError:
-            pass
         return img
 
     @zeit.web.reify
@@ -172,16 +163,20 @@ class Article(zeit.web.core.view.Content):
             log.debug('Object does not exist.')
 
     @zeit.web.reify
+    def has_cardstack(self):
+        return len(self.context.xml.xpath('/article/body//cardstack')) > 0
+
+    @zeit.web.reify
+    def cardstack_body(self):
+        url = super(Article, self).cardstack_body
+        params = dict(shareUrl=self.canonical_url)
+        return zeit.web.core.utils.update_query(url, **params)
+
+    @zeit.web.reify
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            img = zeit.web.core.block.HeaderImageStandard(obj)
-            if img:
-                try:
-                    self._copyrights.setdefault(img.uniqueId, img)
-                except AttributeError:
-                    pass
-            return img
+            return zeit.web.core.block.HeaderImageStandard(obj)
 
     @zeit.web.reify
     def header_video(self):
@@ -213,6 +208,7 @@ class Article(zeit.web.core.view.Content):
         if self.authors:
             return u';'.join([
                 rt['name'] for rt in self.authors if rt.get('name')])
+        return ''
 
     @zeit.web.reify
     def linkreach(self):
@@ -263,26 +259,103 @@ class Article(zeit.web.core.view.Content):
     def is_amp(self):
         return self.context.is_amp
 
-    @property
-    def copyrights(self):
-        for i in (self.is_longform and itertools.chain(*self.pages) or
-                  self.current_page):
-            if hasattr(i, 'copyright') and hasattr(i, 'uniqueId'):
-                self._copyrights.setdefault(i.uniqueId, i)
+    @zeit.web.reify
+    def advertorial_marker(self):
+        try:
+            return (
+                self.context.advertisement_title,
+                self.context.advertisement_text,
+                self.cap_title)
+        except AttributeError:
+            return None
 
-        cr_list = []
-        for i in self._copyrights.itervalues():
-            if i.copyright and len(i.copyright[0][0]) > 1:
-                cr_list.append(
-                    dict(
-                        label=i.copyright[0][0],
-                        image=zeit.web.core.template.create_url(
-                            None, i.src, self.request),
-                        link=i.copyright[0][1],
-                        nofollow=i.copyright[0][2]
-                    )
-                )
-        return sorted(cr_list, key=lambda k: k['label'])
+    @zeit.web.reify
+    def pdf_link(self):
+        server = 'http://pdf.zeit.de/'
+        path = '/'.join(self.request.traversed)
+        return server + path + '.pdf'
+
+    @zeit.web.reify
+    def print_link(self):
+        url = self.content_url
+        prefix = '/komplettansicht'
+
+        try:
+            if len(self.pages) == 1:
+                prefix = ''
+        except:
+            pass
+
+        path = prefix + '?print'
+        return url + path
+
+    @zeit.web.reify
+    def breadcrumbs(self):
+        breadcrumbs = super(Article, self).breadcrumbs
+        # News
+        if self.ressort == 'news':
+            breadcrumbs.append(('News', 'http://xml.zeit.de/news/index'))
+            self.breadcrumbs_by_title(breadcrumbs)
+            return breadcrumbs
+        # Archive article
+        if self.product_id in ('ZEI', 'ZEAR'):
+            breadcrumbs.append(
+                ('DIE ZEIT Archiv', 'http://xml.zeit.de/archiv'))
+            # Beware, we have some pretty messy archive data...
+            try:
+                breadcrumbs.extend([
+                    ("Jahrgang {}".format(self.context.year),
+                        'http://xml.zeit.de/{}/index'.format(
+                            self.context.year)),
+                    ("Ausgabe: {0:02d}".format(self.context.volume),
+                        'http://xml.zeit.de/{0}/{1:02d}/index'.format(
+                            self.context.year, self.context.volume))])
+                self.breadcrumbs_by_title(breadcrumbs)
+                return breadcrumbs
+            except ValueError:
+                return self.breadcrumbs_by_title(breadcrumbs)
+        # Ordinary articles
+        self.breadcrumbs_by_navigation(breadcrumbs)
+        page_teaser = self.current_page.teaser
+        if len(page_teaser) > 0:
+            breadcrumbs.extend([(page_teaser, self.context.uniqueId)])
+        else:
+            self.breadcrumbs_by_title(breadcrumbs)
+        return breadcrumbs
+
+    @zeit.web.reify
+    def webtrekk_assets(self):
+        assets = []
+        p = 0
+        for nr, page in enumerate(self.pages, start=1):
+            for block in page:
+                block_type = zeit.web.core.template.block_type(block)
+                if block_type == 'paragraph':
+                    p += 1
+                if block_type in ['cardstack', 'inlinegallery', 'liveblog',
+                                  'quiz', 'video']:
+                    assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
+        return assets
+
+
+class AcceleratedMobilePageArticle(Article):
+
+    @zeit.web.reify
+    def meta_robots(self):
+        return super(AcceleratedMobilePageArticle,
+                     self).meta_robots.replace(',noarchive', '')
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(AcceleratedMobilePageArticle, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp12': 'mobile.site',  # Seitenversion Endgerät
+            'cp13': 'mobile',  # Breakpoint
+            'cp25': 'amp'  # Plattform
+        })
+
+        return webtrekk
 
 
 @view_config(route_name='amp',
@@ -320,6 +393,29 @@ class InstantArticle(Article):
         date = self.publish_info.date_last_published
         if date:
             return date.astimezone(self.timezone)
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(Article, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp25': 'instant article'  # Plattform
+        })
+
+        return webtrekk
+
+    @zeit.web.reify
+    def fbia_first_ad_paragraph(self, words=100):
+        """Returns tuple with page/block coordinates of first p where an
+        fbia ad is possible. Take this Zuckerberg!"""
+        for p, page in enumerate(self.pages):
+            for b, block in enumerate(page.blocks):
+                if isinstance(block, zeit.web.core.block.Paragraph):
+                    words = words - len(
+                        re.findall(r'\S+', block.model_block.text))
+                    if words < 0:
+                        return (p, b)
+        return None
 
 
 @view_config(context=zeit.content.article.interfaces.IArticle,
