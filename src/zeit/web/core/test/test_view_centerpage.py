@@ -195,7 +195,7 @@ def test_transparent_image_renders_fill_color_for_teaserlayouts(testbrowser):
 
 
 def test_next_page_url_should_be_set_on_page_based_paginated_centerpages(
-    application, dummy_request):
+        application, dummy_request):
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
@@ -208,7 +208,7 @@ def test_next_page_url_should_be_set_on_page_based_paginated_centerpages(
 
 
 def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
-    application, dummy_request):
+        application, dummy_request):
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
@@ -232,7 +232,7 @@ def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
 
 
 def test_next_page_url_should_be_set_on_date_based_paginated_centerpages(
-    clock, application, dummy_request):
+        clock, application, dummy_request):
 
     clock.freeze(zeit.web.core.date.parse_date(
         '2016-05-10T1:23:59.780412+00:00'))
@@ -243,7 +243,7 @@ def test_next_page_url_should_be_set_on_date_based_paginated_centerpages(
 
 
 def test_prev_page_url_should_be_set_on_date_based_paginated_centerpages(
-    clock, application, dummy_request):
+        clock, application, dummy_request):
 
     clock.freeze(zeit.web.core.date.parse_date(
         '2016-05-10T1:23:59.780412+00:00'))
