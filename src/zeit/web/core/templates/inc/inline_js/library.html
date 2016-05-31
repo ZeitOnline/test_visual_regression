@@ -43,7 +43,7 @@
             }
             return 'desktop.' + text;
         },
-        {% if toggles('tracking') and settings('c1_prefix') and view.c1_client %}
+        {% if toggles('tracking') and settings('c1_prefix') and view.c1_client -%}
         getCeleraOneOrigin: function() {
             if ( this.isMobileView() ) {
                 if ( this.is_wrapped ) {
