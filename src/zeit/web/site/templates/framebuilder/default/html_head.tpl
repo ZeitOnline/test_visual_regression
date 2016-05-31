@@ -35,9 +35,6 @@
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-    <noscript>
-        <link href="{{ request.asset_host }}/css/icons/site.fallback.css" rel="stylesheet">
-    </noscript>
     {% if view.framebuilder_requires_ivw %}
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>
