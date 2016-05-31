@@ -14,12 +14,14 @@
         {% with %}
             {% set teaser = module.videos[0] %}
             {% include "zeit.web.site:templates/inc/teaser/video-large.tpl" %}
+            {{- view.append_to_webtrekk_assets(['video', region_loop.index, 1, 1] | join('.')) -}}
         {% endwith %}
     </div>
     <div class="video-stage-secondary">
         <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
         {% for teaser in module.videos[1:4] %}
             {% include "zeit.web.site:templates/inc/teaser/video-small.tpl" %}
+            {{- view.append_to_webtrekk_assets(['video', region_loop.index, 2, loop.index] | join('.')) -}}
         {% endfor %}
     </div>
     <footer class="video-stage-footer">

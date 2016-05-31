@@ -1,3 +1,3 @@
-<span class="sharing-menu">
+<div class="sharing-menu">
 	{% include "zeit.web.campus:templates/inc/article/sharing-menu-items.tpl" %}
-</span>
+</div>

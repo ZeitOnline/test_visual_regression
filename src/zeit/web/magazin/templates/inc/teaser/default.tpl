@@ -14,15 +14,6 @@ Default teaser template to inherit from.
          data-clicktracking="{{ area.kind }}"
          {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
 
-    {% block comments %}
-        {% if view.comment_counts[teaser.uniqueId] -%}
-        <a href="{{ teaser | create_url }}#show_comments" class="cp_comment__counter">
-            {{- lama.use_svg_icon('comments-count', 'cp_comment__icon', view.package) -}}
-            <span class="cp_comment__count">{{ view.comment_counts[teaser.uniqueId] }}</span>
-        </a>
-        {%- endif %}
-    {% endblock %}
-
     {% if video -%}
         {# call video asset #}
             {% set href = teaser | create_url %}
@@ -37,6 +28,14 @@ Default teaser template to inherit from.
         {% endblock %}
     {%- endif %}
 
+    {% block comments %}
+        {% if view.comment_counts[teaser.uniqueId] -%}
+        <a href="{{ teaser | create_url }}#show_comments" class="cp_comment__counter">
+            {{- lama.use_svg_icon('comments-count', 'cp_comment__icon', view.package) -}}
+            <span class="cp_comment__count">{{ view.comment_counts[teaser.uniqueId] }}</span>
+        </a>
+        {%- endif %}
+    {% endblock %}
 
     <a href="{{ teaser | create_url }}" class="{{ self.layout() }}__text">
         {% block icon %}{% endblock %}

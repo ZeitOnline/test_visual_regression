@@ -77,7 +77,7 @@
         {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
 
-        <div class="page-wrap">
+        <div class="page">
 
         {% block adplace_top %}
             <div id="iqd_mainAd" >
@@ -92,17 +92,17 @@
             </div>
         {% endblock adplace_top %}
 
-        {% block page_wrap_inner %}
-            <div class="page-wrap--inner" id="js-page-wrap-inner">
-        {% endblock page_wrap_inner %}
+
+            <div class="page__content {% block page_content_additional_class %}{% endblock %}" id="js-page-wrap-inner">
+
 
                 {% profile %}
 
-                {% if not view.is_wrapped %}
-                    {% block navigation %}
-                        {{ lama.main_nav(view.context.main_nav_full_width, request) }}
-                    {% endblock navigation %}
-                {% endif %}
+                {% if not view.is_wrapped -%}
+                    {% block navigation -%}
+                        {%- include "zeit.web.magazin:templates/inc/navigation/navigation.html" -%}
+                    {%- endblock navigation %}
+                {%- endif %}
 
                 {% block adplace_billboard %}
                     {{ lama.adplace(view.banner(3), view) }}

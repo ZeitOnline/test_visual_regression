@@ -1,9 +1,8 @@
 
 %article-interactions__item
 	color: $interaction-color
-	cursor: pointer
+	font-size: em(14px)
 	letter-spacing: 0.04em
-	font-size: remify(14px)
 	+on-interaction
 		color: $interaction-hover-color
 
@@ -14,14 +13,10 @@
 .print-menu
 	&__link
 		@extend %article-interactions__item
-		&:before
-			color: $color-separator
-			content: " / "
-			margin: 0 .25em
 
 .sharing-menu
-	font-size: remify(14px)
 	&__items
+		list-style-type: none
 		margin: 0
 		padding: 0
 
@@ -29,7 +24,7 @@
 	.sharing-menu
 		&__item
 			&--whatsapp
-				display: none !important
+				display: none
 
 +respond-max($break-desktop-min)
 	.print-menu

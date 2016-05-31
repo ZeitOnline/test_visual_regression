@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 
 import base64
+import collections
 import datetime
 import logging
 import lxml.etree
@@ -118,6 +119,7 @@ class Base(object):
     def __init__(self, context, request):
         self.context = context
         self.request = request
+        self._webtrekk_assets = []
 
     @zeit.web.reify
     def vgwort_url(self):
@@ -548,6 +550,95 @@ class Base(object):
                 # Segment is no longer part of the navigation
                 next
         return breadcrumbs
+
+    @zeit.web.reify
+    def webtrekk(self):
+
+        def get_param(key):
+            value = getattr(self, key, False)
+            return value.lower() if value else ''
+
+        ivw_code = [self.ressort, self.sub_ressort, 'bild-text']
+        pagination = '1/1'
+        banner_on = 'no'
+        # beware of None
+        product_id = get_param('product_id')
+
+        if getattr(self, 'pagination', None):
+            if getattr(self, 'is_all_pages_view', False):
+                page = 'all'
+            else:
+                page = self.pagination.get('current')
+            pagination = '{}/{}'.format(page, self.pagination.get('total'))
+
+        if getattr(self.context, 'advertising_enabled', False):
+            banner_on = 'yes'
+
+        if getattr(self, 'is_push_news', False):
+            push = 'wichtigenachrichten.push'
+        elif getattr(self, 'is_breaking', False):
+            push = 'eilmeldung.push'
+        else:
+            push = ''
+
+        if getattr(self, 'framebuilder_requires_webtrekk', False):
+            pagetype = 'centerpage.framebuilder'
+        else:
+            pagetype = self.detailed_content_type
+
+        content_group = collections.OrderedDict([
+            ('cg1', 'redaktion'),  # Zuordnung/Bereich
+            ('cg2', get_param('tracking_type')),  # Kategorie
+            ('cg3', get_param('ressort')),  # Ressort
+            ('cg4', product_id),  # Online/Sourcetype
+            ('cg5', self.sub_ressort.lower()),  # Subressort
+            ('cg6', self.serie.replace(' ', '').lower()),  # Cluster
+            ('cg7', self.request.path_info.split('/')[-1]),  # doc-path
+            ('cg8', get_param('banner_channel')),  # Banner-Channel
+            ('cg9', zeit.web.core.template.format_date(
+                self.date_first_released,
+                'short_num'))  # Veröffentlichungsdatum
+        ])
+
+        custom_parameter = collections.OrderedDict([
+            ('cp1', get_param('authors_list')),  # Autor
+            ('cp2', '/'.join([x for x in ivw_code if x]).lower()),  # IVW-Code
+            ('cp3', pagination),  # Seitenanzahl
+            ('cp4', ';'.join(self.meta_keywords).lower()),  # Schlagworte
+            ('cp5', self.date_last_modified),  # Last Published
+            ('cp6', getattr(self, 'text_length', '')),  # Textlänge
+            ('cp7', get_param('news_source')),  # Quelle
+            ('cp8', product_id),  # Product-ID
+            ('cp9', get_param('banner_channel')),  # Banner-Channel
+            ('cp10', banner_on),  # Banner aktiv
+            ('cp11', ''),  # Fehlermeldung
+            ('cp12', 'desktop.site'),  # Seitenversion Endgerät
+            ('cp13', 'stationaer'),  # Breakpoint
+            ('cp14', 'friedbert'),  # Beta-Variante
+            ('cp15', push),  # Push und Eilmeldungen
+            ('cp25', 'original'),  # Plattform
+            ('cp26', pagetype),  # inhaltlicher Pagetype
+            ('cp27', ';'.join(self.webtrekk_assets))  # Asset
+        ])
+
+        # @see https://sites.google.com/a/apps.zeit.de/
+        # verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs
+        identifier = '.'.join(map(zeit.web.core.template.format_webtrekk, [
+            'redaktion', self.ressort, self.sub_ressort,
+            self.serie.replace(' ', ''), self.type, product_id]))
+
+        return {
+            'identifier': identifier,
+            'contentGroup': content_group,
+            'customParameter': custom_parameter
+        }
+
+    @zeit.web.reify
+    def webtrekk_assets(self):
+        return self._webtrekk_assets
+
+    def append_to_webtrekk_assets(self, value):
+        self._webtrekk_assets.append(value)
 
 
 class CeleraOneMixin(object):
@@ -1009,6 +1100,18 @@ class service_unavailable(object):  # NOQA
 class FrameBuilder(CeleraOneMixin):
 
     inline_svg_icons = True
+
+    @zeit.web.reify
+    def framebuilder_is_minimal(self):
+        return 'minimal' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_width(self):
+        return self.request.GET.get('width', None)
+
+    @zeit.web.reify
+    def framebuilder_has_login(self):
+        return 'login' in self.request.GET
 
     @zeit.web.reify
     def advertising_enabled(self):

@@ -14,9 +14,11 @@
         </div>
         <div class="footer-links" data-ct-row="bottom">
             {{ foma.footer_links(view) }}
-            {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
+            {% if view is not framebuilder %}
+                {% include "zeit.web.core:templates/inc/inline_js/image-copyright-template.html" %}
+            {% endif %}
             <div class="footer-links__button" data-ct-column="3">
-                <a href="{{ view.canonical_url if not view.is_wrapped else '#top' }}" class="footer-links__linkbutton js-scroll" title="Zurück nach oben">Nach oben</a>
+                <a href="{{ view.canonical_url if not (view.is_wrapped or view is framebuilder) else '#top' }}" class="footer-links__linkbutton js-scroll" title="Zurück nach oben">Nach oben</a>
             </div>
         </div>
     </div>
