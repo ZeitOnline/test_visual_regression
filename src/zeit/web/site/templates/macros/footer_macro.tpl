@@ -8,7 +8,7 @@
 
 {% macro build_footer_bar(view, navigation, class, publisher=False) -%}
 
-    {% if view.framebuilder_is_minimal and publisher %}
+    {% if  view is framebuilder and view.framebuilder_is_minimal and publisher %}
         {% set navsections = navigation.values()[:1] %}
     {% else %}
         {% set navsections = navigation.values() %}
