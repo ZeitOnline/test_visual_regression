@@ -36,7 +36,7 @@ class Overview(zeit.web.core.area.ranking.Ranking):
             yield clone
 
     def _query_solr(self, query, sort_order):
-        query = zeit.solr.query.and_(query, self._build_query())
+        query = zeit.solr.query.and_(query, self._range_query())
         result = super(Overview, self)._query_solr(query, sort_order)
         values = self.context.values()
         length = len(values)
@@ -46,7 +46,7 @@ class Overview(zeit.web.core.area.ranking.Ranking):
                 self.context.add(clone)
         return result
 
-    def _build_query(self):
+    def _range_query(self):
         offset = datetime.timedelta(days=self.current_page - 1)
         today = self._today - offset
         tomorrow = today + datetime.timedelta(days=1)

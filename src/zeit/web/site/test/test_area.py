@@ -36,21 +36,21 @@ def test_overview_area_should_produce_correct_ranges(
     area = get_area('overview', 20)
     area.request = dummy_request
 
-    assert area._build_query() == (
+    assert area._range_query() == (
         'date_first_released:[2016-05-10T00:00:00Z '
         'TO 2016-05-11T00:00:00Z]')
 
     dummy_request.GET['date'] = '2016-05-09'
     area = get_area('overview', 20)
 
-    assert area._build_query() == (
+    assert area._range_query() == (
         'date_first_released:[2016-05-09T00:00:00Z '
         'TO 2016-05-10T00:00:00Z]')
 
     dummy_request.GET['date'] = '2016-05-08'
     area = get_area('overview', 20)
 
-    assert area._build_query() == (
+    assert area._range_query() == (
         'date_first_released:[2016-05-08T00:00:00Z '
         'TO 2016-05-09T00:00:00Z]')
 
