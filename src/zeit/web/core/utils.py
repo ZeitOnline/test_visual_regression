@@ -387,6 +387,15 @@ class LazyProxy(object):
     def __conform__(self, iface):
         return LazyProxy(self.__proxy__, self.__istack__ + [iface])
 
+    # Proxy special ICommonMetadata attributes. (XXX copy&paste)
+    @property
+    def product(self):
+        source = zeit.cms.content.interfaces.ICommonMetadata[
+            'product'].source(self)
+        for value in source:
+            if value.id == self.__proxy__.get('product_id'):
+                return value
+
     # Proxy zeit.content.image.interfaces.IImages. Since we bypass ZCA
     # in __conform__ above, we cannot use an adapter to do this. ;-)
     @property

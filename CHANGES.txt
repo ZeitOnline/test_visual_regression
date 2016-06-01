@@ -4,13 +4,15 @@ Change log for zeit.web
 2.85 (unreleased)
 -----------------
 
+- BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
+
 - FIX: Provide fallback date and hide copyright on Storystreams
 
 - FIX: Escape double quotes in CeleraOne script function arguments
 
-- BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
-
 - FIX: Constrain footer inline script to minimal framebuilder
+
+- MAINT: Have LazyProxy resolve product_id string to product object
 
 
 2.84 (2016-05-30)
