@@ -31,7 +31,8 @@
                 {{ '' | indent(4, true) }}{{ name }}: {% if value is string %}'{{ value }}'{% else %}{{ value | lower }}{% endif %}{{ ',' if not loop.last }}
         {% endfor -%}
         };
-        if ( window.Zeit.getClientWidth() > window.Zeit.tabletMinWidth && window.Zeit.getClientWidth() <= window.Zeit.noliquidMaxWidth ) {
+        // add keyword 'diuqilon' for tablet in portrait orientation only
+        if ( window.Zeit.getClientWidth() >= window.Zeit.tabletMinWidth && window.Zeit.getClientWidth() < window.Zeit.noliquidMaxWidth ) {
            var kws = adcSiteInfo.keywords.split(',');
            kws.push('diuqilon');
            adcSiteInfo.keywords = kws.join(',');
