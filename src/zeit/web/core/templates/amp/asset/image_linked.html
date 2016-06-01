@@ -1,11 +1,11 @@
 {% extends "zeit.web.core:templates/amp/asset/image.html" %}
 
 {% block media %}
-	{% if href -%}
-		<a class="figure__link" title="{{ image.title }}" href="{{ href }}">
-	{%- endif %}
-	{{ super() }}
-	{% if href -%}
-		</a>
-	{%- endif %}
+    {% if href -%}
+        <a class="figure__link" title="{{ image.title }}" href="{{ href }}">
+    {%- endif %}
+    {{ super() }}
+    {% if href -%}
+        </a>
+    {%- endif %}
 {% endblock %}

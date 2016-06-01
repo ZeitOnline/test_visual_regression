@@ -5,7 +5,7 @@
 {% block itemprop %} itemprop="image"{% endblock %}
 
 {% block image %}
-	<div class="{{ 'article__item' | with_mods(block.layout.display_mode if block and block.layout) }}">
-		{{ super() }}
-	</div>
+    <div class="{{ 'article__item' | with_mods(block.layout.display_mode if block and block.layout) }}">
+        {{ super() }}
+    </div>
 {% endblock %}
