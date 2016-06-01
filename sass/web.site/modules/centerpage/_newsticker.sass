@@ -1,10 +1,5 @@
-+respond-min($break-tablet-min)
-	.newsticker
-		&__column
-			float: left
-			width: 50%
-			&:nth-last-child(even)
-				padding-right: remify(15px)
+$margin-ad: - $page-padding--small
+$margin-ad-tablet: -($max-page-width - $max-overview-width) / 2
 
 .newsteaser
 	font-size: remify(15px)
@@ -36,10 +31,23 @@
 			margin-right: remify(5px)
 	&__ad
 		background-color: $color-advertising-bg
-		margin: remify(15px 0)
+		margin: remify(15px) $margin-ad
 		padding: 0
 		.ad-desktop--7,
 		.ad-desktop--8,
 		.ad-mobile--4
 			background-color: inherit
 			padding: remify(30px 0)
+
++respond-min($break-tablet-min)
+	.newsticker
+		&__column
+			float: left
+			width: 50%
+			&:nth-last-child(even)
+				padding-right: remify(15px)
+
+	.newsteaser
+		&__ad
+			margin: remify(15px) $margin-ad-tablet
+
