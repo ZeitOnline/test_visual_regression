@@ -7,7 +7,7 @@
 	{%- if comment.is_author %} comment--author{% endif %}
 	{%- if comment.is_promoted %} comment--promoted{% endif %}
 	{%- if comment.recommendations %} comment--recommended{% endif %}
-	{%- if comment.img_url %} comment--avatar{% endif %}">
+	{%- if comment.img_url %} comment--avatar{% endif %}" data-ct-row="{{ comment.shown_num }}">
 	<div class="comment__container">
 		<div class="comment-meta">
 			{% if comment.img_url %}

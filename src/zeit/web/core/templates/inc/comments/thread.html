@@ -2,7 +2,7 @@
 
 {% block comment_section_head %}
     <h3 class="visually-hidden">Kommentare</h3>
-    <div class="comment-section__head comment-section__item">
+    <div class="comment-section__head comment-section__item" data-ct-area="comment_header">
     {% if view.comment_area.show_comments %}
     	<span class="comment-section__headline">
     		{{ view.comments.headline }}
@@ -10,11 +10,11 @@
     		<small>{{ view.comments.pages.title }}</small>
     		{% endif %}
     	</span>
-    	{% if view.comment_area.show_comment_form %}
-        	<a href="#comment-form" class="comment-section__button button js-scroll">
+
+        	<a href="#comment-form" class="comment-section__button button js-scroll" data-ct-row="1">
         		Kommentieren
         	</a>
-    	{% endif %}
+
     {% elif view.comment_area.no_comments %}
     	<span class="comment-section__headline">
     		<span class="nowrap">Noch keine Kommentare.</span>
@@ -35,8 +35,8 @@
 {% endblock %}
 
 {% if view.comment_area.show_comments %}
-<div class="comment-preferences">
-	<div class="comment-preferences__container">
+<div class="comment-preferences" data-ct-area="comment_header">
+	<div class="comment-preferences__container" data-ct-row="2">
 		{# funky future feature?
 		<a class="comment-preferences__item nowrap" href="{{ request.content_url }}#comments">
 			{{ lama.use_svg_icon('spinner', 'comment-preferences__icon comment-preferences__icon--spinner', view.package) }}
