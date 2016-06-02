@@ -367,24 +367,11 @@ def redirect_amp_disabled(context, request):
     raise pyramid.httpexceptions.HTTPFound(url)
 
 
-class FacebookInstantArticle(Article):
-
-    @zeit.web.reify
-    def webtrekk(self):
-        webtrekk = super(FacebookInstantArticle, self).webtrekk
-
-        webtrekk['customParameter'].update({
-            'cp25': 'instant article'  # Plattform
-        })
-
-        return webtrekk
-
-
 @view_defaults(context=zeit.content.article.interfaces.IArticle)
 @view_config(route_name='instantarticle')
 @view_config(route_name='instantarticle-item',
              wrapper='instantarticle-item')
-class InstantArticle(FacebookInstantArticle):
+class InstantArticle(Article):
 
     def __call__(self):
         try:
@@ -424,7 +411,7 @@ class InstantArticle(FacebookInstantArticle):
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='instantarticle-item',
              renderer='string')
-class InstantArticleItem(FacebookInstantArticle):
+class InstantArticleItem(Article):
 
     def __call__(self):
         if not getattr(self.request, 'wrapped_response', None) or (
@@ -470,8 +457,17 @@ class InstantArticleItem(FacebookInstantArticle):
 @view_config(context=zeit.content.article.interfaces.IArticle,
              route_name='fbia',
              renderer='templates/instantarticle/tracking.html')
-class InstantArticleTracking(FacebookInstantArticle):
-    pass
+class InstantArticleTracking(Article):
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(InstantArticleTracking, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp25': 'instant article'  # Plattform
+        })
+
+        return webtrekk
 
 
 class ArticlePage(Article):
