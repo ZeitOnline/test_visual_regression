@@ -395,16 +395,6 @@ class InstantArticle(Article):
             return date.astimezone(self.timezone)
 
     @zeit.web.reify
-    def webtrekk(self):
-        webtrekk = super(Article, self).webtrekk
-
-        webtrekk['customParameter'].update({
-            'cp25': 'instant article'  # Plattform
-        })
-
-        return webtrekk
-
-    @zeit.web.reify
     def fbia_first_ad_paragraph(self, words=100):
         """Returns tuple with page/block coordinates of first p where an
         fbia ad is possible. Take this Zuckerberg!"""
@@ -468,7 +458,16 @@ class InstantArticleItem(Article):
              route_name='fbia',
              renderer='templates/instantarticle/tracking.html')
 class InstantArticleTracking(Article):
-    pass
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(InstantArticleTracking, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp25': 'instant article'  # Plattform
+        })
+
+        return webtrekk
 
 
 class ArticlePage(Article):
