@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-422: Fix margin of adplace 7 on centerpages
 
+- BUG-362: Prevent reloading hell on overscrolling
+
 - FIX: Provide fallback date and hide copyright on Storystreams
 
 - FIX: Escape double quotes in CeleraOne script function arguments
