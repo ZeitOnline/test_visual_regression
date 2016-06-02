@@ -367,11 +367,24 @@ def redirect_amp_disabled(context, request):
     raise pyramid.httpexceptions.HTTPFound(url)
 
 
+class FacebookInstantArticle(Article):
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(FacebookInstantArticle, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp25': 'instant article'  # Plattform
+        })
+
+        return webtrekk
+
+
 @view_defaults(context=zeit.content.article.interfaces.IArticle)
 @view_config(route_name='instantarticle')
 @view_config(route_name='instantarticle-item',
              wrapper='instantarticle-item')
-class InstantArticle(Article):
+class InstantArticle(FacebookInstantArticle):
 
     def __call__(self):
         try:
@@ -395,16 +408,6 @@ class InstantArticle(Article):
             return date.astimezone(self.timezone)
 
     @zeit.web.reify
-    def webtrekk(self):
-        webtrekk = super(Article, self).webtrekk
-
-        webtrekk['customParameter'].update({
-            'cp25': 'instant article'  # Plattform
-        })
-
-        return webtrekk
-
-    @zeit.web.reify
     def fbia_first_ad_paragraph(self, words=100):
         """Returns tuple with page/block coordinates of first p where an
         fbia ad is possible. Take this Zuckerberg!"""
@@ -421,7 +424,7 @@ class InstantArticle(Article):
 @view_config(context=zeit.content.article.interfaces.IArticle,
              name='instantarticle-item',
              renderer='string')
-class InstantArticleItem(Article):
+class InstantArticleItem(FacebookInstantArticle):
 
     def __call__(self):
         if not getattr(self.request, 'wrapped_response', None) or (
@@ -467,7 +470,7 @@ class InstantArticleItem(Article):
 @view_config(context=zeit.content.article.interfaces.IArticle,
              route_name='fbia',
              renderer='templates/instantarticle/tracking.html')
-class InstantArticleTracking(Article):
+class InstantArticleTracking(FacebookInstantArticle):
     pass
 
 
