@@ -1,5 +1,6 @@
-import urllib
 import pytest
+import urllib
+import urlparse
 
 
 @pytest.mark.parametrize('path_fragment', ['zeit-online', 'campus'])
@@ -13,11 +14,16 @@ def test_cardstack_should_be_included_on_articles(
 
     assert browser.document.xpath('head/meta[@name="twitter:site"]')
 
-    url = urllib.quote_plus('http://localhost/{}/article/cardstack'.format(
-        path_fragment))
-    assert browser.document.xpath('body//article//include/@src')[0] == (
-        '{}/stacks/kekse/esi/body?shareUrl={}'
-        '&shareUrlQuerySuffix=stackId%3Dkekse'.format(espi, url))
+    src = browser.document.xpath('body//article//include/@src')[0]
+    parts = urlparse.urlparse(src)
+    query = urlparse.parse_qs(parts.query)
+    assert 'http://' + parts.netloc + parts.path == (
+        '{}/stacks/kekse/esi/body'.format(espi))
+    assert query == {
+        'shareUrlQuerySuffix': ['stackId=kekse'],
+        'shareUrl': ['http://localhost/{}/article/cardstack'.format(
+            path_fragment)]
+    }
 
     assert browser.document.xpath('body/include/@src')[0] == (
         '{}/stacks/esi/scripts'.format(espi))
@@ -32,10 +38,15 @@ def test_cardstack_should_honor_article_stack_id(app_settings, testbrowser):
 
     assert not browser.document.xpath('head/meta[@name="twitter:site"]')
 
-    url = urllib.quote_plus('http://localhost/zeit-online/article/cardstack')
-    assert browser.document.xpath('body//article//include/@src')[0] == (
-        '{}/stacks/kekse/esi/body?shareUrl={}'
-        '&shareUrlQuerySuffix=stackId%3Dkekse'.format(espi, url))
+    src = browser.document.xpath('body//article//include/@src')[0]
+    parts = urlparse.urlparse(src)
+    query = urlparse.parse_qs(parts.query)
+    assert 'http://' + parts.netloc + parts.path == (
+        '{}/stacks/kekse/esi/body'.format(espi))
+    assert query == {
+        'shareUrlQuerySuffix': ['stackId=kekse'],
+        'shareUrl': ['http://localhost/zeit-online/article/cardstack'],
+    }
 
     assert browser.document.xpath('body/include/@src')[0] == (
         '{}/stacks/esi/scripts'.format(espi))
