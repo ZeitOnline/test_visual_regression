@@ -196,12 +196,12 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
     @zeit.web.reify
     def cardstack_head(self):
         url = super(Centerpage, self).cardstack_head
-        return zeit.web.core.utils.update_query(url, static='true')
+        return zeit.web.core.utils.update_get_params(url, static='true')
 
     @zeit.web.reify
     def cardstack_body(self):
         url = super(Centerpage, self).cardstack_body
-        return zeit.web.core.utils.update_query(url, static='true')
+        return zeit.web.core.utils.update_get_params(url, static='true')
 
 
 class CenterpagePage(object):

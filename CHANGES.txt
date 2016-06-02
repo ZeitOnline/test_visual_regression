@@ -4,7 +4,19 @@ Change log for zeit.web
 2.85 (unreleased)
 -----------------
 
+- BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
+
+- BUG-422: Fix margin of adplace 7 on centerpages
+
 - FIX: Provide fallback date and hide copyright on Storystreams
+
+- FIX: Escape double quotes in CeleraOne script function arguments
+
+- FIX: Constrain footer inline script to minimal framebuilder
+
+- FIX: Set "platform" webtrekk parameter (cp25) for facebook instant articles
+
+- MAINT: Have LazyProxy resolve product_id string to product object
 
 
 2.84 (2016-05-30)
@@ -29,8 +41,6 @@ Change log for zeit.web
 - HOTFIX: Be defensive about missing meta files for article images
 
 - ZON-1934: Polish news teaser and render news page
-
-- FIX: Escape double quotes in CeleraOne script function arguments
 
 
 2.83 (2016-05-20)

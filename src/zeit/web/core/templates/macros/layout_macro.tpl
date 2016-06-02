@@ -1,17 +1,17 @@
 {% macro adplace_adctrl(banner, view, mobile) -%}
     {{ caller() }}
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
-    {% set operator = '<' if mobile else '>=' %}
+    {% set operator = '' if mobile else '!' %}
     {% set type = 'mobile' if mobile else 'desktop' %}
     {% set scriptname = 'ad-%s-%s' | format(type, banner.tile) %}
     <div>
         <script type="text/javascript" id="{{ scriptname }}">
             if (
                 typeof AdController !== 'undefined'
-                {% if type == 'desktop' and banner.tile == 2 %}
+                {% if type == 'desktop' and banner.tile == 2 -%}
                 && window.Zeit.getClientWidth() > window.Zeit.sideAdMinWidth
-                {% endif %}
-                && window.Zeit.getClientWidth() {{ operator | safe }} window.Zeit.tabletMinWidth
+                {% endif -%}
+                && {{ operator | safe }}window.Zeit.isMobileView()
                 ) {
                 if( ! document.getElementById( "iqadtile{{ banner.tile }}" ) ) {
                     var elem = document.createElement('div');

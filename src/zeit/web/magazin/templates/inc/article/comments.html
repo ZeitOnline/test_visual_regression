@@ -1,164 +1,164 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 {% if view.linkreach or view.commenting_allowed or view.comments %}
-	<div class="article__socialbox" id="js-social-services">
-	{% if view.linkreach %}
-		<div class="article__sharing">
-		{% if view.linkreach.total >= 10 %}
-			<div class="article__sharing__item article__sharing__sum js-toggle-sharing">
-				<span class="article__sharing__total">{{ view.linkreach.total | unitize(0) }}</span>
-				<span class="article__sharing__unit">{{ view.linkreach.total | unitize(1) }}</span>
-			</div>
-		{% endif %}
-			<div class="article__sharing__services blind">
-				<a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
-					{{ lama.use_svg_icon('sharebox-facebook', 'article__sharing-icon', view.package) }}
-					<span class="article__sharing__services__text">{{ view.linkreach.facebook.total | unitize }}</span>
-				</a>
-				<a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_int&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
-					{{ lama.use_svg_icon('sharebox-google', 'article__sharing-icon', view.package) }}
-					<span class="article__sharing__services__text">{{ view.linkreach.googleplus.total | unitize }}</span>
-			   </a>
-			</div>
-			<div class="article__sharing__item">
-				<a class="article__sharing__link js-toggle-sharing" title="Teilen">
-					{{ lama.use_svg_icon('sharebox-share', 'article__sharing-icon article__sharing-icon--open-close', view.package) -}}
-					{{ lama.use_svg_icon('sharebox-close', 'article__sharing-icon article__sharing-icon--open-close article__sharing-icon--close',view.package) -}}
-					Teilen
-				</a>
-			</div>
-		</div>
-	{% endif %}
+    <div class="article__socialbox" id="js-social-services">
+    {% if view.linkreach %}
+        <div class="article__sharing">
+        {% if view.linkreach.total >= 10 %}
+            <div class="article__sharing__item article__sharing__sum js-toggle-sharing">
+                <span class="article__sharing__total">{{ view.linkreach.total | unitize(0) }}</span>
+                <span class="article__sharing__unit">{{ view.linkreach.total | unitize(1) }}</span>
+            </div>
+        {% endif %}
+            <div class="article__sharing__services blind">
+                <a href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_ext&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
+                    {{ lama.use_svg_icon('sharebox-facebook', 'article__sharing-icon', view.package) }}
+                    <span class="article__sharing__services__text">{{ view.linkreach.facebook.total | unitize }}</span>
+                </a>
+                <a href="https://plus.google.com/share?url={{ view.content_url + '?wt_zmc=sm.ext.zonaudev.gplus.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=gplus_zonaudev_ext&utm_campaign=gplus_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}" target="_blank" class="article__sharing__item">
+                    {{ lama.use_svg_icon('sharebox-google', 'article__sharing-icon', view.package) }}
+                    <span class="article__sharing__services__text">{{ view.linkreach.googleplus.total | unitize }}</span>
+               </a>
+            </div>
+            <div class="article__sharing__item">
+                <a class="article__sharing__link js-toggle-sharing" title="Teilen">
+                    {{ lama.use_svg_icon('sharebox-share', 'article__sharing-icon article__sharing-icon--open-close', view.package) -}}
+                    {{ lama.use_svg_icon('sharebox-close', 'article__sharing-icon article__sharing-icon--open-close article__sharing-icon--close',view.package) -}}
+                    Teilen
+                </a>
+            </div>
+        </div>
+    {% endif %}
 
-	{% if view.commenting_allowed or view.comments %}
-		<div class="article__comments-trigger">
-			<a class="article__comments-trigger__link js-comments-trigger">
-				{{ lama.use_svg_icon('sharebox-close', 'article__sharing-icon article__sharing-icon--comment-close', view.package) -}}
-				<span class="article__comments-trigger__count">{{ view.comments.comment_count | default(0) }}</span>
-				<span class="article__comments-trigger__text">{% if view.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
-			</a>
-		</div>
-	{% endif %}
-	</div>
+    {% if view.commenting_allowed or view.comments %}
+        <div class="article__comments-trigger">
+            <a class="article__comments-trigger__link js-comments-trigger">
+                {{ lama.use_svg_icon('sharebox-close', 'article__sharing-icon article__sharing-icon--comment-close', view.package) -}}
+                <span class="article__comments-trigger__count">{{ view.comments.comment_count | default(0) }}</span>
+                <span class="article__comments-trigger__text">{% if view.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
+            </a>
+        </div>
+    {% endif %}
+    </div>
 {% endif %}
 
 {% if view.commenting_allowed or view.comments %}
-	<section class="comments" id="js-comments">
-		<div class="comments__head" id="js-comments-head">
-		{% if view.commenting_allowed %}
-			{% if request.user -%}
-			<form method="POST" class="comment__form js-submit-comment" id="js-comments-form">
-				{% if not request.session.user.name %}
-					<p class="comments__hint">
-						Sie haben noch keinen Benutzernamen. Dieser wird einmalig festgelegt und ist öffentlich sichtbar.
-					</p>
-					<p>
-						<input name="username" placeholder="Ihr neuer Benutzername" class="comments__input js-required">
-					</p>
-				{% endif %}
-				<p>
-					<textarea name="comment" placeholder="Ihr Kommentar" class="js-required" maxlength="1500"></textarea>
-					<input type="hidden" name="action" value="comment">
-					<input type="hidden" name="pid" value="">
-				</p>
-				<div class="comment__form__note comment__form__note--casual">
-				{% if request.session.user.name %}
-					angemeldet als <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">{{ request.session.user.name|e }}</a>
-				</div>
-				<div class="comment__form__actions">
-					<input type="submit" class="button" value="Kommentieren" disabled />
-				</div>
-				{% else %}
-					angemeldet, <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">kein Benutzername</a>
-				</div>
-				<div class="comment__form__actions">
-					<input type="submit" class="button" value="Absenden" disabled />
-				</div>
-				{% endif %}
-			</form>
-			{% else -%}
-			<form class="comment__form comment__form--login" id="js-comments-form">
-				<div class="comment__form__wrap">
-					<div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
-				</div>
-				<a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ request.url|e }}" class="button">Anmelden</a>
-				<a href="{{ request.registry.settings.sso_url }}/registrieren?url={{ request.url|e }}" class="button">Registrieren</a>
-			</form>
-			{% endif %}
-		{% endif %}
-		</div>
-		<div class="tabs has-2">
-			<div class="tabs__head" id="js-comments-tabs-head">
-				<a href="#tab1" class="tabs__head__tab is-active">Alle</a>
-				<a href="#tab2" class="tabs__head__tab">Ausgewählte</a>
-			</div>
-			<div class="comments__body" id="js-comments-body">
-				<div class="tabs__content is-active">
-					<div class="comments__list" id="tab1">
-						{# parse comments #}
-						{% for comment in view.comments.comments %}
-							{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
+    <section class="comments" id="js-comments">
+        <div class="comments__head" id="js-comments-head">
+        {% if view.commenting_allowed %}
+            {% if request.user -%}
+            <form method="POST" class="comment__form js-submit-comment" id="js-comments-form">
+                {% if not request.session.user.name %}
+                    <p class="comments__hint">
+                        Sie haben noch keinen Benutzernamen. Dieser wird einmalig festgelegt und ist öffentlich sichtbar.
+                    </p>
+                    <p>
+                        <input name="username" placeholder="Ihr neuer Benutzername" class="comments__input js-required">
+                    </p>
+                {% endif %}
+                <p>
+                    <textarea name="comment" placeholder="Ihr Kommentar" class="js-required" maxlength="1500"></textarea>
+                    <input type="hidden" name="action" value="comment">
+                    <input type="hidden" name="pid" value="">
+                </p>
+                <div class="comment__form__note comment__form__note--casual">
+                {% if request.session.user.name %}
+                    angemeldet als <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">{{ request.session.user.name|e }}</a>
+                </div>
+                <div class="comment__form__actions">
+                    <input type="submit" class="button" value="Kommentieren" disabled />
+                </div>
+                {% else %}
+                    angemeldet, <a href="{{ request.registry.settings.community_host }}/user/{{ request.session.user.uid }}">kein Benutzername</a>
+                </div>
+                <div class="comment__form__actions">
+                    <input type="submit" class="button" value="Absenden" disabled />
+                </div>
+                {% endif %}
+            </form>
+            {% else -%}
+            <form class="comment__form comment__form--login" id="js-comments-form">
+                <div class="comment__form__wrap">
+                    <div class="comment__form__note">Bitte melden Sie sich an, um zu kommentieren.</div>
+                </div>
+                <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ request.url|e }}" class="button">Anmelden</a>
+                <a href="{{ request.registry.settings.sso_url }}/registrieren?url={{ request.url|e }}" class="button">Registrieren</a>
+            </form>
+            {% endif %}
+        {% endif %}
+        </div>
+        <div class="tabs has-2">
+            <div class="tabs__head" id="js-comments-tabs-head">
+                <a href="#tab1" class="tabs__head__tab is-active">Alle</a>
+                <a href="#tab2" class="tabs__head__tab">Ausgewählte</a>
+            </div>
+            <div class="comments__body" id="js-comments-body">
+                <div class="tabs__content is-active">
+                    <div class="comments__list" id="tab1">
+                        {# parse comments #}
+                        {% for comment in view.comments.comments %}
+                            {% include "zeit.web.magazin:templates/inc/article/comment.html" %}
 
-							{# parse comment replies #}
-							{% for comment in comment.replies %}
-								{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
-							{% endfor %}
-						{% endfor %}
-					</div>
-				</div>
-				<div class="tabs__content">
-					<div class="comments__list" id="tab2">
-						{# parse comments #}
-						{% for comment in view.comments.comments %}
-							{% if comment.is_promoted -%}
-								{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
-							{%- endif %}
+                            {# parse comment replies #}
+                            {% for comment in comment.replies %}
+                                {% include "zeit.web.magazin:templates/inc/article/comment.html" %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="tabs__content">
+                    <div class="comments__list" id="tab2">
+                        {# parse comments #}
+                        {% for comment in view.comments.comments %}
+                            {% if comment.is_promoted -%}
+                                {% include "zeit.web.magazin:templates/inc/article/comment.html" %}
+                            {%- endif %}
 
-							{# parse comment replies #}
-							{% for comment in comment.replies %}
-								{% if comment.is_promoted -%}
-									{% include "zeit.web.magazin:templates/inc/article/comment.html" %}
-								{%- endif %}
-							{% endfor %}
-						{% endfor %}
-					</div>
-				</div>
-				<div class="comments__button__newer" id="js-comments-button-up">
-					<div class="button js-scroll-comments" data-direction="up">{{ lama.use_svg_icon('comments-newer', 'comments__icon comments__icon--newer', view.package) }}Neuere</div>
-				</div>
-			</div>
-		</div>
-		<div class="comments__button__older" id="js-comments-button-down">
-			<div class="button js-scroll-comments" data-direction="down">{{ lama.use_svg_icon('comments-older', 'comments__icon comments__icon--older', view.package) }}Ältere</div>
-		</div>
-		<script type="text/template" id="js-report-success-template">
-			<div class="comment__form__success">
-				{{ lama.use_svg_icon('check-comment-sent', 'comment__check-icon', view.package) }}
-				<div class="comment__form__success__text">Danke! Ihre Meldung wird an die Redaktion weitergeleitet.</div>
-			</div>
-		</script>
-		<script type="text/template" id="js-report-comment-template">
-			{% if request.user -%}
-			<form method="POST" class="comment__form">
-				<p><textarea name="comment" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
-				<p class="comment__form__text">
-					Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="{{ request.route_url('home') }}administratives/2010-03/netiquette">Netiquette</a> zu melden.
-					Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
-				</p>
-				<p class="comment__form__actions">
-					<input type="hidden" name="action" value="report">
-					<input type="hidden" name="pid" value="">
-					<a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
-				</p>
-			</form>
-			{% else -%}
-			<form class="comment__form comment__form--login">
-				<div class="comment__form__wrap">
-					<div class="comment__form__note">Bitte melden Sie sich an, um diesen Kommentar zu melden.</div>
-				</div>
-				<a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}" class="button">Anmelden</a>
-				<a href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}" class="button">Registrieren</a>
-			</form>
-			{% endif -%}
-		</script>
-	</section>
+                            {# parse comment replies #}
+                            {% for comment in comment.replies %}
+                                {% if comment.is_promoted -%}
+                                    {% include "zeit.web.magazin:templates/inc/article/comment.html" %}
+                                {%- endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="comments__button__newer" id="js-comments-button-up">
+                    <div class="button js-scroll-comments" data-direction="up">{{ lama.use_svg_icon('comments-newer', 'comments__icon comments__icon--newer', view.package) }}Neuere</div>
+                </div>
+            </div>
+        </div>
+        <div class="comments__button__older" id="js-comments-button-down">
+            <div class="button js-scroll-comments" data-direction="down">{{ lama.use_svg_icon('comments-older', 'comments__icon comments__icon--older', view.package) }}Ältere</div>
+        </div>
+        <script type="text/template" id="js-report-success-template">
+            <div class="comment__form__success">
+                {{ lama.use_svg_icon('check-comment-sent', 'comment__check-icon', view.package) }}
+                <div class="comment__form__success__text">Danke! Ihre Meldung wird an die Redaktion weitergeleitet.</div>
+            </div>
+        </script>
+        <script type="text/template" id="js-report-comment-template">
+            {% if request.user -%}
+            <form method="POST" class="comment__form">
+                <p><textarea name="comment" placeholder="Warum halten Sie diesen Kommentar für bedenklich?" class="js-required"></textarea></p>
+                <p class="comment__form__text">
+                    Nutzen Sie dieses Fenster, um Verstöße gegen die <a target="_blank" href="{{ request.route_url('home') }}administratives/2010-03/netiquette">Netiquette</a> zu melden.
+                    Wenn Sie einem Kommentar inhaltlich widersprechen möchten, <a href="#js-comments-form" class="js-scroll">nutzen Sie das Kommentarformular</a> und beteiligen Sie sich an der Diskussion.
+                </p>
+                <p class="comment__form__actions">
+                    <input type="hidden" name="action" value="report">
+                    <input type="hidden" name="pid" value="">
+                    <a href="#" class="js-cancel-report">Abbrechen</a><button disabled="disabled" class="button js-submit-report" type="button">Abschicken</button>
+                </p>
+            </form>
+            {% else -%}
+            <form class="comment__form comment__form--login">
+                <div class="comment__form__wrap">
+                    <div class="comment__form__note">Bitte melden Sie sich an, um diesen Kommentar zu melden.</div>
+                </div>
+                <a href="{{ request.registry.settings.community_host }}/user/login?destination={{ request.url|e }}" class="button">Anmelden</a>
+                <a href="{{ request.registry.settings.community_host }}/user/register?destination={{ request.url|e }}" class="button">Registrieren</a>
+            </form>
+            {% endif -%}
+        </script>
+    </section>
 {%- endif %}
