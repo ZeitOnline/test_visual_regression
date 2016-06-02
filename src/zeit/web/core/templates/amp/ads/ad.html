@@ -1,10 +1,10 @@
 {% if toggles('amp_advertising') -%}
 <div class="advertising advertising--place-{{ tile_number | default(4) }}">
-	<amp-iframe width="320" height="320"
-		sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
-		frameborder="0"
-		src="https://ssl.zeit.de/www.zeit.de/static/amp-ads/tile-{{ tile_number | default(4) }}.html">
-			<amp-img layout="fill" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" placeholder></amp-img>
-	</amp-iframe>
+    <amp-iframe width="320" height="320"
+        sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
+        frameborder="0"
+        src="https://ssl.zeit.de/www.zeit.de/static/amp-ads/tile-{{ tile_number | default(4) }}.html">
+            <amp-img layout="fill" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" placeholder></amp-img>
+    </amp-iframe>
 </div>
 {% endif -%}

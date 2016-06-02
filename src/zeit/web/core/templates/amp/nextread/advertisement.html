@@ -2,15 +2,15 @@
 {% set image = get_image(module, teaser, variant_id='super', fallback=False) %}
 {% set href = teaser.url %}
 <aside class="nextad">
-	<span class="nextad__label">{{ {'publisher': 'Verlagsangebot', 'advertisement': 'Anzeige'}.get(teaser.supertitle) }}</span>
-	<div class="nextad__container">
-		<div class="nextad__lead">
-			<h2 class="nextad__title">{{ teaser.title }}</h2>
-			<p class="nextad__text">{{ teaser.text }}</p>
-		</div>
-		{% include "zeit.web.core:templates/amp/asset/image_nextad.html" %}
-		<a class="{{ 'nextad__button' | with_mods(teaser.button_color | lower) }}" title="{{ teaser.title }}: {{ teaser.text }}" href="{{ teaser.url }}">
-			{{ teaser.button_text }}
-		</a>
-	</div>
+    <span class="nextad__label">{{ {'publisher': 'Verlagsangebot', 'advertisement': 'Anzeige'}.get(teaser.supertitle) }}</span>
+    <div class="nextad__container">
+        <div class="nextad__lead">
+            <h2 class="nextad__title">{{ teaser.title }}</h2>
+            <p class="nextad__text">{{ teaser.text }}</p>
+        </div>
+        {% include "zeit.web.core:templates/amp/asset/image_nextad.html" %}
+        <a class="{{ 'nextad__button' | with_mods(teaser.button_color | lower) }}" title="{{ teaser.title }}: {{ teaser.text }}" href="{{ teaser.url }}">
+            {{ teaser.button_text }}
+        </a>
+    </div>
 </aside>

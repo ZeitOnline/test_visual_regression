@@ -1,18 +1,18 @@
 <div class="video article__item" itemscope itemtype="http://schema.org/VideoObject">
-	<amp-brightcove
-		data-account="18140073001"
-		data-player-id="c09a3b98-8829-47a5-b93b-c3cca8a4b5e9"
-		data-embed="default"
-		data-video-id="{{ block.id }}"
-		layout="responsive"
-		width="640" height="360">
-	</amp-brightcove>
-	<figcaption class="video__caption">
-		<span class="video__pagetitle" itemprop="name">{{ [block.supertitle, block.title] | join_if_exists(' - ') }}</span>
-		<span class="video__description" itemprop="description">{{ block.description }}</span>
-	</figcaption>
-	<meta itemprop="thumbnailUrl" content="{{ block.video_still }}">
-	<meta itemprop="uploadDate" content="{{ view.date_last_modified | format_date('iso8601') }}">
-	<meta itemprop="contentUrl" content="{{ block.highest_rendition }}">
+    <amp-brightcove
+        data-account="18140073001"
+        data-player-id="c09a3b98-8829-47a5-b93b-c3cca8a4b5e9"
+        data-embed="default"
+        data-video-id="{{ block.id }}"
+        layout="responsive"
+        width="640" height="360">
+    </amp-brightcove>
+    <figcaption class="video__caption">
+        <span class="video__pagetitle" itemprop="name">{{ [block.supertitle, block.title] | join_if_exists(' - ') }}</span>
+        <span class="video__description" itemprop="description">{{ block.description }}</span>
+    </figcaption>
+    <meta itemprop="thumbnailUrl" content="{{ block.video_still }}">
+    <meta itemprop="uploadDate" content="{{ view.date_last_modified | format_date('iso8601') }}">
+    <meta itemprop="contentUrl" content="{{ block.highest_rendition }}">
 </div>
 
