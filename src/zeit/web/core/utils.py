@@ -104,14 +104,6 @@ def remove_get_params(url, *args):
             scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
 
 
-def update_query(url, **params):
-    # XXX: Please remove me soon! (RD, 2016-06-01)
-    log.warn(
-        "'update_query' is deprecated and will "
-        "be replaced by 'add_get_params'")
-    return add_get_params(url, **params)
-
-
 def update_path(url, *segments):
     """Safely update a URL's path preserving all other parts of the URL.
 
