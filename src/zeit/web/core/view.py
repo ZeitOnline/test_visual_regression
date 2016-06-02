@@ -1146,6 +1146,10 @@ class FrameBuilder(CeleraOneMixin):
         return 'ivw' in self.request.GET
 
     @zeit.web.reify
+    def framebuilder_requires_meetrics(self):
+        return 'meetrics' in self.request.GET
+
+    @zeit.web.reify
     def nav_show_ressorts(self):
         return 'hide_ressorts' not in self.request.GET
 
