@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
 
+- BUG-422: Fix margin of adplace 7 on centerpages
+
 - FIX: Provide fallback date and hide copyright on Storystreams
 
 - FIX: Escape double quotes in CeleraOne script function arguments
