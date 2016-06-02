@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import pyramid.view
 import lxml.etree
-import urlparse
 import urllib
 import zope.component
 
@@ -12,6 +11,7 @@ import zeit.content.cp.interfaces
 import zeit.web.core.interfaces
 import zeit.web.core.centerpage
 import zeit.web.core.view
+import zeit.web.core.utils
 
 
 class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
@@ -117,10 +117,7 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         if ranking and ranking.current_page > 1:
             get_param = ranking.page_info(
                 ranking.current_page)['append_get_param']
-
-            scheme, netloc, path, query, frag = urlparse.urlsplit(url)
-            return '{}://{}{}?{}'.format(
-                scheme, netloc, path, urllib.urlencode(get_param.items()))
+            return zeit.web.core.utils.add_get_params(url, **get_param)
 
         return url
 
