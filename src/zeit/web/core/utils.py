@@ -5,6 +5,7 @@ import os.path
 import pkg_resources
 import random
 import re
+import itertools
 import urllib
 import urlparse
 
@@ -13,6 +14,7 @@ import peak.util.proxies
 import pysolr
 import zope.component
 
+import zeit.web.core
 import zeit.cms.content.interfaces
 import zeit.cms.content.sources
 import zeit.cms.interfaces
@@ -47,7 +49,7 @@ def to_int(val, pattern=re.compile(r'[^\d.]+')):
     return int(pattern.sub('', '0' + str(val)))
 
 
-def update_query(url, **params):
+def update_get_params(url, **params):
     """Safely update a URL's query parameters, overwriting and sorting
     existing entries while preserving all other parts of the URL.
 
@@ -61,6 +63,53 @@ def update_query(url, **params):
     query = collections.OrderedDict(sorted(combined.items()))
     parts[4] = urllib.urlencode(query, doseq=True)
     return urlparse.urlunparse(parts)
+
+def add_get_params(url, **kw):
+    """Add parameters to a URL, while preserving all other parts of the URL.
+    Main difference to update_get_params is, that existing parameters
+    will _not_ be overwriteen.
+
+    :param url: Uniform resource locator
+    :param params: New query parameters
+    :rtype: unicode
+    """
+
+    parts = list(urlparse.urlparse(url))
+    query = dict(urlparse.parse_qs(parts[4]))
+    params = [(k, v) for k, v in itertools.chain(
+              (i for i in query.iteritems() if i[0] not in kw),
+              (i for i in kw.iteritems() if i[1] is not None))]
+    parts[4] = urllib.urlencode(params,doseq=True)
+    return urlparse.urlunparse(parts)
+
+
+
+def remove_get_params(url, *args):
+    """Remove all URL's query parameters specified by args,
+    while preserving all other parts of the URL.
+
+    :param url: Uniform resource locator
+    :param params: query parameter keys to be deleted
+    :rtype: unicode
+    """
+    scheme, netloc, path, query, frag = urlparse.urlsplit(url)
+    query_p = urlparse.parse_qs(query)
+    for arg in args:
+        query_p.pop(arg, None)
+    if len(query_p) == 0:
+        return '{}://{}{}'.format(
+            scheme, netloc, path)
+    else:
+        return '{}://{}{}?{}'.format(
+            scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
+
+
+def update_query(url, **params):
+    # XXX: Please remove me soon! (RD, 2016-06-01)
+    log.warn(
+        "'update_query' is deprecated and will "
+        "be replaced by 'add_get_params'")
+    return add_get_params(url, **params)
 
 
 def update_path(url, *segments):

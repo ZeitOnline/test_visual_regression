@@ -16,8 +16,8 @@ def test_cardstack_should_be_included_on_articles(
     url = urllib.quote_plus('http://localhost/{}/article/cardstack'.format(
         path_fragment))
     assert browser.document.xpath('body//article//include/@src')[0] == (
-        '{}/stacks/kekse/esi/body?shareUrl={}'
-        '&shareUrlQuerySuffix=stackId%3Dkekse'.format(espi, url))
+        '{}/stacks/kekse/esi/body?shareUrlQuerySuffix=stackId%3Dkekse'
+        '&shareUrl={}'.format(espi, url))
 
     assert browser.document.xpath('body/include/@src')[0] == (
         '{}/stacks/esi/scripts'.format(espi))
@@ -34,8 +34,8 @@ def test_cardstack_should_honor_article_stack_id(app_settings, testbrowser):
 
     url = urllib.quote_plus('http://localhost/zeit-online/article/cardstack')
     assert browser.document.xpath('body//article//include/@src')[0] == (
-        '{}/stacks/kekse/esi/body?shareUrl={}'
-        '&shareUrlQuerySuffix=stackId%3Dkekse'.format(espi, url))
+        '{}/stacks/kekse/esi/body?shareUrlQuerySuffix=stackId%3Dkekse'
+        '&shareUrl={}'.format(espi, url))
 
     assert browser.document.xpath('body/include/@src')[0] == (
         '{}/stacks/esi/scripts'.format(espi))
