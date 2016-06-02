@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Constrain footer inline script to minimal framebuilder
 
+- FIX: Set "platform" webtrekk parameter (cp25) for facebook instant articles
+
 - MAINT: Have LazyProxy resolve product_id string to product object
 
 
