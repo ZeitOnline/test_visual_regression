@@ -383,14 +383,6 @@ def test_online_article_has_last_changed_date(selenium_driver, testserver):
         '17:59 UHR' in meta_date.text
 
 
-def test_product_page_has_last_changed_date(selenium_driver, testserver):
-    # product pages should include the last semantic change date
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/produkte/katzen-cafe-london' % testserver.url)
-    meta_date = driver.find_element_by_class_name("article__head__meta__date")
-    assert 'ZULETZT AKTUALISIERT AM 31. JULI 2014, 22:21 UHR' in meta_date.text
-
-
 def test_gallery_has_last_changed_date(selenium_driver, testserver):
     # galleries should include the last semantic change date
     driver = selenium_driver

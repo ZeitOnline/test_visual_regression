@@ -10,9 +10,3 @@ import zeit.web.magazin.view
              renderer='templates/gallery.html')
 class Gallery(zeit.web.core.view_gallery.Gallery, zeit.web.magazin.view.Base):
     advertising_enabled = True
-
-
-@view_config(context=zeit.web.core.gallery.IProductGallery,
-             renderer='templates/product.html')
-class ProductGallery(Gallery):
-    pass
