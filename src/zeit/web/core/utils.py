@@ -64,6 +64,7 @@ def update_get_params(url, **params):
     parts[4] = urllib.urlencode(query, doseq=True)
     return urlparse.urlunparse(parts)
 
+
 def add_get_params(url, **kw):
     """Add parameters to a URL, while preserving all other parts of the URL.
     Main difference to update_get_params is, that existing parameters
@@ -79,9 +80,8 @@ def add_get_params(url, **kw):
     params = [(k, v) for k, v in itertools.chain(
               (i for i in query.iteritems() if i[0] not in kw),
               (i for i in kw.iteritems() if i[1] is not None))]
-    parts[4] = urllib.urlencode(params,doseq=True)
+    parts[4] = urllib.urlencode(params, doseq=True)
     return urlparse.urlunparse(parts)
-
 
 
 def remove_get_params(url, *args):
