@@ -827,44 +827,13 @@ def calculate_pagination(current_page, total_pages, slots=7):
 
 @zeit.web.register_filter
 def append_get_params(request, **kw):
-    # XXX Should we rather get the request automatically (as a ctxfilter)?
-    # Usage then would be `{{ url | append_get_params(foo='bar') }}`.
-    base_url = kw.pop('url', request.path_url)
-
-    # Append GET parameters that are not reset
-    # by setting the param value to None explicitly.
-    def encode(value):
-        return unicode(value).encode('utf-8')
-
-    params = [(encode(k), encode(v)) for k, v in itertools.chain(
-              (i for i in request.GET.iteritems() if i[0] not in kw),
-              (i for i in kw.iteritems() if i[1] is not None))]
-
-    if params == []:
-        return base_url
-    return u'{}?{}'.format(base_url, urllib.urlencode(params))
+    url = kw.pop('url', request.url)
+    return zeit.web.core.utils.add_get_params(url, **kw)
 
 
 @zeit.web.register_filter
 def remove_get_params(url, *args):
-    # ToDo: This should be used in templates,
-    # if append_get_params gets refactored.
-    # It'd be more useful to use these functions on URL and not request level
-    # This way we could say sth. like
-    # `request | make_url() |
-    #  append_get_params(foo='ba', ba='batz') | remove_get_params('foobar')`
-    # and vice versa.
-
-    scheme, netloc, path, query, frag = urlparse.urlsplit(url)
-    query_p = urlparse.parse_qs(query)
-    for arg in args:
-        query_p.pop(arg, None)
-    if len(query_p) == 0:
-        return '{}://{}{}'.format(
-            scheme, netloc, path)
-    else:
-        return '{}://{}{}?{}'.format(
-            scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
+    return zeit.web.core.utils.remove_get_params(url, *args)
 
 
 @zeit.web.register_filter
