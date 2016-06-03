@@ -4,6 +4,8 @@ Change log for zeit.web
 2.85 (unreleased)
 -----------------
 
+- ZON-1934: polishing Schlagzeilenseite
+
 - BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
 
 - BUG-422: Fix margin of adplace 7 on centerpages
