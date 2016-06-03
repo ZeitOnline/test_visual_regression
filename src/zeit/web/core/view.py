@@ -390,7 +390,7 @@ class Base(object):
         if self.ranked_tags:
             result = [x.label for x in self.ranked_tags]
         else:
-            result = [self.ressort, self.sub_ressort]
+            result = [self.ressort.title(), self.sub_ressort.title()]
         return [x for x in result if x]
 
     @zeit.web.reify
