@@ -170,7 +170,7 @@ class Article(zeit.web.core.view.Content):
     def cardstack_body(self):
         url = super(Article, self).cardstack_body
         params = dict(shareUrl=self.canonical_url)
-        return zeit.web.core.utils.update_query(url, **params)
+        return zeit.web.core.utils.update_get_params(url, **params)
 
     @zeit.web.reify
     def header_img(self):
