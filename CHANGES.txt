@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - MAINT: Have LazyProxy resolve product_id string to product object
 
+- MAINT: Add meetrics to framebuilder
+
 
 2.84 (2016-05-30)
 -----------------
