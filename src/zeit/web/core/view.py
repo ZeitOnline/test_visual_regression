@@ -52,6 +52,10 @@ def is_advertorial(context, request):
 
 
 def is_paginated(context, request):
+    # XXX: We need some form of IPagination to evaluate wheter or not a context
+    # is paginated. This is, however, not possible at the moment, because the
+    # current evaluation of IPagination of an area level is not efficient.
+    # (RD, 2015-06-02)
     try:
         return int(request.GET['p']) > 1
     except (KeyError, ValueError):
