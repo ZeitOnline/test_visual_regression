@@ -22,6 +22,8 @@ Change log for zeit.web
 
 - MAINT: Have LazyProxy resolve product_id string to product object
 
+- MAINT: Remove support for ZMO product galleries (they were never used)
+
 - MAINT: Add meetrics to framebuilder
 
 

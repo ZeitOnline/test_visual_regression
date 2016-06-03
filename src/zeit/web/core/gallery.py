@@ -12,17 +12,8 @@ import zeit.web.core.block
 import zeit.web.core.template
 import zeit.web.core.utils
 
-# Custom interface classes to destinguish between regular galleries (inline
-# or standalone) and product galleries.
-
 
 class IGallery(zope.interface.Interface):
-
-    iterkeys = zope.interface.Attribute('iterkeys')
-    itervalues = zope.interface.Attribute('itervalues')
-
-
-class IProductGallery(zope.interface.Interface):
     pass
 
 
