@@ -56,12 +56,16 @@ def test_framebuilder_can_contain_webtrekk(testbrowser):
 
 def test_framebuilder_sets_webtrekk_values_differently(testbrowser):
     browser = testbrowser('/framebuilder?webtrekk')
-    assert ('var Z_WT_KENNUNG = "redaktion.None...centerpage.zede|" + '
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+    webtrekk_config = script.text_content().strip()
+
+    assert ('var Z_WT_KENNUNG = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
-            'window.location.pathname;') in browser.contents
+            'window.location.pathname;') in webtrekk_config
     assert ('7: window.location.hostname + '
-            'window.location.pathname,') in browser.contents
-    assert '26: "centerpage.framebuilder"' in browser.contents
+            'window.location.pathname,') in webtrekk_config
+    assert '26: "centerpage.framebuilder"' in webtrekk_config
 
 
 def test_framebuilder_contains_no_ivw(testbrowser):
@@ -76,6 +80,20 @@ def test_framebuilder_can_contain_ivw(testbrowser):
         'script[src="https://script.ioam.de/iam.js"]')
     assert len(ivw_script) == 1
     assert 'var iam_data = {' in browser.contents
+
+
+def test_framebuilder_contains_no_meetrics(testbrowser):
+    browser = testbrowser('/framebuilder')
+    meetrics_script = browser.cssselect(
+        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+    assert len(meetrics_script) == 0
+
+
+def test_framebuilder_can_contain_meetrics(testbrowser):
+    browser = testbrowser('/framebuilder?meetrics')
+    meetrics_script = browser.cssselect(
+        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+    assert len(meetrics_script) == 1
 
 
 def test_framebuilder_should_show_ressort_nav_by_default(testbrowser):
@@ -177,6 +195,137 @@ def test_framebuilder_accepts_banner_channel_parameter(
         'return adcSiteInfo.keywords')
 
     driver.get('{}/framebuilder?banner_channel={}'.format(
+        testserver.url, '///homepage/my,keywords'))
+    assert 'homepage' == driver.execute_script('return adcSiteInfo.$handle')
+    assert '' == driver.execute_script('return adcSiteInfo.level2')
+    assert '' == driver.execute_script('return adcSiteInfo.level3')
+    assert '' == driver.execute_script('return adcSiteInfo.level4')
+    assert 'my,keywords' == driver.execute_script(
+        'return adcSiteInfo.keywords')
+
+
+# ----------- MINIMAL FRAMEBUILDER -----------------------------------------
+def test_framebuilder_minimal_should_slice_page_on_request(testbrowser):
+    full_page = testbrowser('/framebuilder?minimal').contents
+
+    head = testbrowser('/framebuilder?minimal&page_slice=html_head').contents
+    assert not testbrowser.cssselect('body')
+    assert head in full_page
+
+    upper_body = testbrowser(
+        '/framebuilder?minimal&page_slice=upper_body').contents
+    assert not testbrowser.cssselect('head')
+
+    sanitized = upper_body.replace(
+        '?minimal&page_slice=upper_body', '').strip()
+    assert '</body>' not in sanitized
+    assert sanitized in full_page
+
+    lower_body = testbrowser(
+        '/framebuilder?minimal&page_slice=lower_body').contents
+    assert not testbrowser.cssselect('head')
+    assert '</body>' in lower_body
+    assert lower_body.strip() in full_page
+
+
+def test_framebuilder_minimal_contains_no_webtrekk(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert 'webtrekk' not in browser.contents
+
+
+def test_framebuilder_minimal_can_contain_webtrekk(testbrowser):
+    browser = testbrowser('/framebuilder?minimal&webtrekk')
+    webtrekk_script = browser.cssselect(
+        'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
+    assert len(webtrekk_script) == 1
+
+
+def test_framebuilder_minimal_sets_webtrekk_values_differently(testbrowser):
+    browser = testbrowser('/framebuilder?minimal&webtrekk')
+    assert ('var Z_WT_KENNUNG = "redaktion....centerpage.zede|" + '
+            'window.location.hostname + '
+            'window.location.pathname;') in browser.contents
+    assert ('7: window.location.hostname + '
+            'window.location.pathname,') in browser.contents
+    assert '26: "centerpage.framebuilder"' in browser.contents
+
+
+def test_framebuilder_minimal_contains_no_ivw(testbrowser):
+    browser = testbrowser('/framebuilder?minimal')
+    assert 'iam.js' not in browser.contents
+    assert 'iam_data' not in browser.contents
+
+
+def test_framebuilder_minimal_can_contain_ivw(testbrowser):
+    browser = testbrowser('/framebuilder?minimal&ivw')
+    ivw_script = browser.cssselect(
+        'script[src="https://script.ioam.de/iam.js"]')
+    assert len(ivw_script) == 1
+    assert 'var iam_data = {' in browser.contents
+
+
+# TODO
+def test_framebuilder_minimal_should_have_login_cut_mark(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert 'start::cut_mark::login' in browser.contents
+    assert 'end::cut_mark::login' in browser.contents
+
+
+def test_framebuilder_minimal_accepts_banner_channel_parameter(
+        selenium_driver, testserver, monkeypatch):
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'iqd': True}.get)
+    driver = selenium_driver
+
+    # avoid "diuquilon", which is added by JS for specific screen sizes
+    driver.set_window_size(1200, 800)
+
+    driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
+        testserver.url, 'one/two/three/homepage'))
+    assert 'homepage' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'one' == driver.execute_script('return adcSiteInfo.level2')
+    assert 'two' == driver.execute_script('return adcSiteInfo.level3')
+    assert 'three' == driver.execute_script('return adcSiteInfo.level4')
+    assert '' == driver.execute_script('return adcSiteInfo.keywords')
+
+    driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
+        testserver.url, 'oans/zwoa//index'))
+    assert 'index' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'oans' == driver.execute_script('return adcSiteInfo.level2')
+    assert 'zwoa' == driver.execute_script('return adcSiteInfo.level3')
+    assert '' == driver.execute_script('return adcSiteInfo.level4')
+    assert '' == driver.execute_script('return adcSiteInfo.keywords')
+
+    driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
+        testserver.url, 'eins'))
+    assert '' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'eins' == driver.execute_script('return adcSiteInfo.level2')
+    assert '' == driver.execute_script('return adcSiteInfo.level3')
+    assert '' == driver.execute_script('return adcSiteInfo.level4')
+    assert '' == driver.execute_script('return adcSiteInfo.keywords')
+
+    driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
+        testserver.url, '///artikel'))
+    assert 'artikel' == driver.execute_script('return adcSiteInfo.$handle')
+    assert '' == driver.execute_script('return adcSiteInfo.level2')
+    assert '' == driver.execute_script('return adcSiteInfo.level3')
+    assert '' == driver.execute_script('return adcSiteInfo.level4')
+    assert '' == driver.execute_script('return adcSiteInfo.keywords')
+
+    driver.get('{}/framebuilder?minimal'.format(testserver.url))
+    assert 'undefined' == driver.execute_script('return typeof adcSiteInfo')
+
+    driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
+        testserver.url, 'one/two/three/four/my,keywords,in,channel'))
+    assert 'four' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'one' == driver.execute_script('return adcSiteInfo.level2')
+    assert 'two' == driver.execute_script('return adcSiteInfo.level3')
+    assert 'three' == driver.execute_script('return adcSiteInfo.level4')
+    assert 'my,keywords,in,channel' == driver.execute_script(
+        'return adcSiteInfo.keywords')
+
+    driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
         testserver.url, '///homepage/my,keywords'))
     assert 'homepage' == driver.execute_script('return adcSiteInfo.$handle')
     assert '' == driver.execute_script('return adcSiteInfo.level2')

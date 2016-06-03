@@ -1,15 +1,13 @@
 .header
 	&__ad-label
 		color: $dusty-gray
+		float: left
 		font-size: em(9px)
 		letter-spacing: 0.15em
 		margin-left: remify(10px)
-		display: inline-block
 		text-transform: uppercase
 		+respond-min(em(350px))
 			font-size: em(15px)
 			letter-spacing: $letter-spacing-m
+			margin-left: remify(20px)
 			text-transform: none
-			margin-left: $page-padding
-		+respond-max(em(350px))
-			transform: translateY(-3px)

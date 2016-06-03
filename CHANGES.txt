@@ -1,10 +1,68 @@
 Change log for zeit.web
 =======================
 
-2.82 (unreleased)
+2.85 (unreleased)
+-----------------
+
+- BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
+
+- BUG-422: Fix margin of adplace 7 on centerpages
+
+- BUG-362: Prevent reloading hell on overscrolling
+
+- BUG-410: Report if config loading in adReload failed
+
+- FIX: Provide fallback date and hide copyright on Storystreams
+
+- FIX: Escape double quotes in CeleraOne script function arguments
+
+- FIX: Constrain footer inline script to minimal framebuilder
+
+- FIX: Set "platform" webtrekk parameter (cp25) for facebook instant articles
+
+- MAINT: Have LazyProxy resolve product_id string to product object
+
+- MAINT: Remove support for ZMO product galleries (they were never used)
+
+- MAINT: Add meetrics to framebuilder
+
+
+2.84 (2016-05-30)
+-----------------
+
+- ZON-2638: Introduce minimal version of ZON framebuilder
+
+- ZON-2532: Determine milestone layout from tldr_milestone setting on teasered article
+
+- ZON-3046: Use update signals on desktop only
+
+- ZON-3071: Track page assets in webtrekk
+
+- MAINT: Update ZMO header and navigation
+
+- MAINT: Add Tonic-Magazin and Edition F to noindex list
+
+
+2.83.1 (2016-05-24)
+-------------------
+
+- HOTFIX: Be defensive about missing meta files for article images
+
+- ZON-1934: Polish news teaser and render news page
+
+
+2.83 (2016-05-20)
+-----------------
+
+- FIX: Remove advertorial kicker prefix
+
+
+2.82 (2016-05-19)
 -----------------
 
 - FIX: Fix tracking toolbox
+
+- MAINT: Validate sharing menu
 
 
 2.81.1 (2016-05-17)

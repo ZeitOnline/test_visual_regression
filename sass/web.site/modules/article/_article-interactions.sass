@@ -8,7 +8,15 @@ $interaction-hover-color: $zon-dark-grey
 	top: 0
 	left: remify(55px)
 
+	&__link
+		&:before
+			color: $color-separator
+			content: " / "
+			margin: 0 .25em
+
 .sharing-menu
+	display: inline
+
 	&__title
 		@extend %article-interactions__item
 		&:after
@@ -21,14 +29,13 @@ $interaction-hover-color: $zon-dark-grey
 		max-height: 0 // animated
 		overflow: hidden // needed for animation
 	&__item
-		+inline-block
-		&:before
+		float: left
+		&:not(:last-child):after
 			content: "/"
 			color: $color-separator
 			margin: remify(0 8px)
-		&:first-child:before
-			content: none
 	&__link
+		font-size: em(14px)
 		font-weight: bold
 		line-height: 2.0
 		+on-interaction

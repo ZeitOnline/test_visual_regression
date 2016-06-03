@@ -7,7 +7,14 @@
 {%- endmacro %}
 
 {% macro build_footer_bar(view, navigation, class, publisher=False) -%}
-    {% for section in navigation.values() -%}
+
+    {% if  view is framebuilder and view.framebuilder_is_minimal and publisher %}
+        {% set navsections = navigation.values()[:1] %}
+    {% else %}
+        {% set navsections = navigation.values() %}
+    {% endif %}
+
+    {% for section in navsections -%}
         {% set row_loop = loop %}
 
         {% if (loop.index == 1) or (publisher and loop.index % 2 == 0) or (not publisher and loop.index % 2 == 1) -%}
@@ -26,9 +33,11 @@
 
                         {# "Bildrechte" is not semantically marked, but has a JS Event Trigger #}
                         {% if item.href == '#bildrechte' %}
-                            <li class="footer-{{ class }}__item">
-                                <a class="footer-{{ class }}__link js-image-copyright-footer" href="{{ item.href }}">{{ item.text }}</a>
-                            </li>
+                            {% if view is not framebuilder %}
+                                <li class="footer-{{ class }}__item">
+                                    <a class="footer-{{ class }}__link js-image-copyright-footer" href="{{ item.href }}">{{ item.text }}</a>
+                                </li>
+                            {% endif %}
                         {% else %}
                             <li class="footer-{{ class }}__item">
                                 <a class="footer-{{ class }}__link" href="{{ item.href }}" itemprop="url"><span itemprop="name">{{ item.text }}</span></a>
@@ -45,7 +54,13 @@
 
         {% if publisher and section.item_id == 'first' %}
         <div class="footer-{{ class }}__row footer-{{ class }}__row--more" data-ct-column="mehr">
-            <a href="#" class="footer-{{ class }}__more">Mehr</a>
+            <a href="#" class="footer-{{ class }}__more"
+                {%- if view is framebuilder and view.framebuilder_is_minimal %} onclick="
+                document.querySelector('.footer-links__row').style.display='block';
+                this.parentNode.style.display='none';
+                return false;"
+                {%- endif -%}
+                >Mehr</a>
         </div>
         {% endif %}
     {%- endfor %}

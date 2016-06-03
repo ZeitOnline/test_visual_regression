@@ -51,7 +51,7 @@
 
 
 .pager
-	margin: remify(16px 0 32px)
+	margin: remify(16px auto 32px)
 	&__button
 		+zon-button-inky($margin: remify(20px 14px 0 0))
 		&--previous
@@ -88,9 +88,25 @@
 			+inline-block
 			padding: 0 .7em
 
-	&--author-list
-		max-width: remify(760px)
-		margin: remify(16px auto 32px)
+	&--overview
+		border-style: solid
+		border-width: 0 0 1px
+		border-color: $zon-lighter-grey
+
+		+respond-max($break-tablet-min)
+			.pager__pages
+				margin-top: 0
+
+			.pager__page
+				display: none
+				&:before
+					content: none
+				&--current
+					display: inline-block
+
+		.pager__button
+			margin: remify(0 14px 20px 0)
+
 
 +respond-min($break-tablet-min)
 	.article-pagination
@@ -119,3 +135,5 @@
 		&__page
 			a, span
 				padding: 0 1.2em
+		&--overview
+			border-width: 1px 0

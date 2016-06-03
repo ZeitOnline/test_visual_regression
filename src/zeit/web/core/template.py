@@ -156,6 +156,11 @@ def leserartikel(context):
     return getattr(context, 'genre', None) and context.genre == 'leserartikel'
 
 
+@zeit.web.register_test
+def framebuilder(view):
+    return isinstance(view, zeit.web.core.view.FrameBuilder)
+
+
 @zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block
@@ -291,65 +296,16 @@ def substring_from(string, find):
 
 
 @zeit.web.register_filter
-def get_layout(block, request=None):
-    # Calculating the layout of a cp block can be slightly more expensive in
-    # zeit.web, since we do lookups in some vocabularies, to change the layout,
-    # that was originally set for the block.
-    # Since we might lookup a layout more than once per request, we can cache
-    # it in the request object.
-
-    # XXX This filter is in desperate need of a major overhaul!
-
-    request = request or pyramid.threadlocal.get_current_request()
-
+@zeit.web.cache_on_request
+def get_layout(block):
     try:
-        key = request and hash(block)
-    except (NotImplementedError, TypeError), e:
-        log.debug('Cannot cache {} layout: {}'.format(type(block), e))
-        key = None
-
-    if key:
-        request.teaser_layout = getattr(request, 'teaser_layout', None) or {}
-        layout = request.teaser_layout.get(key, None)
-        if layout:
-            return layout
-
-    try:
-        layout_id = block.layout.id
+        layout = block.layout.id
     except (AttributeError, TypeError):
-        layout_id = 'hide'
-
-    try:
-        teaser = list(block)[0]
-    except (IndexError, TypeError):
-        if not zeit.content.cp.interfaces.ITeaserBlock.providedBy(block):
-            layout = layout_id
-        else:
-            layout = 'hide'
-    else:
-        layout = layout_id
-        if layout == 'zon-square':
-            # ToDo: Remove when Longform will be generally used on www.zeit.de
-            if urlparse.urlparse(teaser.uniqueId).path.startswith('/feature/'):
-                layout = layout
-            elif zeit.magazin.interfaces.IZMOContent.providedBy(teaser):
-                layout = 'zmo-square'
-            # Targaryens up here
-            elif zeit.campus.interfaces.IZCOContent.providedBy(teaser):
-                layout = 'zco-square'
-        # XXX Instead of hard-coding a layout change here, we should make use
-        # of z.w.core.centerpage.dispatch_teaser_via_contenttype() and
-        # register a specific teaser module for authors.
-        elif (zeit.content.author.interfaces.IAuthor.providedBy(teaser) and
-                layout == 'zon-small' and
-                block.__parent__.kind in ['duo', 'minor']):
-            layout = 'zon-author'
-
-    layout = zeit.web.core.centerpage.TEASER_MAPPING.get(layout, layout)
-
-    if key:
-        request.teaser_layout[key] = layout
-
+        return 'hide'
+    if zeit.content.cp.interfaces.ITeaserBlock.providedBy(
+            block) and not len(block):
+        return 'hide'
+    layout = zeit.web.core.centerpage.LEGACY_TEASER_MAPPING.get(layout, layout)
     return layout
 
 
@@ -871,44 +827,13 @@ def calculate_pagination(current_page, total_pages, slots=7):
 
 @zeit.web.register_filter
 def append_get_params(request, **kw):
-    # XXX Should we rather get the request automatically (as a ctxfilter)?
-    # Usage then would be `{{ url | append_get_params(foo='bar') }}`.
-    base_url = kw.pop('url', request.path_url)
-
-    # Append GET parameters that are not reset
-    # by setting the param value to None explicitly.
-    def encode(value):
-        return unicode(value).encode('utf-8')
-
-    params = [(encode(k), encode(v)) for k, v in itertools.chain(
-              (i for i in request.GET.iteritems() if i[0] not in kw),
-              (i for i in kw.iteritems() if i[1] is not None))]
-
-    if params == []:
-        return base_url
-    return u'{}?{}'.format(base_url, urllib.urlencode(params))
+    url = kw.pop('url', request.url)
+    return zeit.web.core.utils.add_get_params(url, **kw)
 
 
 @zeit.web.register_filter
 def remove_get_params(url, *args):
-    # ToDo: This should be used in templates,
-    # if append_get_params gets refactored.
-    # It'd be more useful to use these functions on URL and not request level
-    # This way we could say sth. like
-    # `request | make_url() |
-    #  append_get_params(foo='ba', ba='batz') | remove_get_params('foobar')`
-    # and vice versa.
-
-    scheme, netloc, path, query, frag = urlparse.urlsplit(url)
-    query_p = urlparse.parse_qs(query)
-    for arg in args:
-        query_p.pop(arg, None)
-    if len(query_p) == 0:
-        return '{}://{}{}'.format(
-            scheme, netloc, path)
-    else:
-        return '{}://{}{}?{}'.format(
-            scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
+    return zeit.web.core.utils.remove_get_params(url, *args)
 
 
 @zeit.web.register_filter

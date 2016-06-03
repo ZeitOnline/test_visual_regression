@@ -226,6 +226,11 @@ class IPagination(zope.interface.Interface):
     total_page = zope.interface.Attribute(
         'Number of pages available.')
     pagination = zope.interface.Attribute('A list of page numbers.')
+    pagination_info = zope.interface.Attribute(
+        'Some metada, such as label for pages or buttons in the pagination')
+
+    def page_info(page_nr):
+        """Get information of the page items in the pagination object."""
 
 
 class IDetailedContentType(zope.interface.Interface):

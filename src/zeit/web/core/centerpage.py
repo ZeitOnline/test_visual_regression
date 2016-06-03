@@ -167,7 +167,7 @@ def cache_values_area(context):
     return context
 
 
-class TeaserMapping(zeit.web.core.utils.frozendict):
+class LegacyTeaserMapping(zeit.web.core.utils.frozendict):
 
     _map = {'zon-large': ['leader', 'leader-two-columns', 'leader-panorama',
                           'parquet-large', 'zon-parquet-large'],
@@ -181,10 +181,10 @@ class TeaserMapping(zeit.web.core.utils.frozendict):
 
     def __init__(self, *args, **kw):
         # Flattens and reverses _map, so we can easily lookup a layout.
-        super(TeaserMapping, self).__init__(
+        super(LegacyTeaserMapping, self).__init__(
             x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
 
-TEASER_MAPPING = TeaserMapping()
+LEGACY_TEASER_MAPPING = LegacyTeaserMapping()
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)

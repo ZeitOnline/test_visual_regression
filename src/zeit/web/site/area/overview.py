@@ -1,6 +1,9 @@
+# -*- coding: utf-8 -*-
 import copy
 import datetime
+import dateutil
 import logging
+import zope.component
 
 import zeit.solr.query
 
@@ -20,6 +23,10 @@ class Overview(zeit.web.core.area.ranking.Ranking):
     count = SANITY_BOUND
     sort_order = 'publikation'
 
+    @zeit.web.reify
+    def start(self):
+        return 0
+
     @staticmethod
     def clone_factory(jango, count):
         for _ in range(count):
@@ -29,7 +36,7 @@ class Overview(zeit.web.core.area.ranking.Ranking):
             yield clone
 
     def _query_solr(self, query, sort_order):
-        query = self._build_query()
+        query = zeit.solr.query.and_(query, self._range_query())
         result = super(Overview, self)._query_solr(query, sort_order)
         values = self.context.values()
         length = len(values)
@@ -39,14 +46,70 @@ class Overview(zeit.web.core.area.ranking.Ranking):
                 self.context.add(clone)
         return result
 
-    def _build_query(self):
+    def _range_query(self):
         offset = datetime.timedelta(days=self.current_page - 1)
-        today = datetime.date.today() + offset
+        today = self._today - offset
         tomorrow = today + datetime.timedelta(days=1)
         range_ = zeit.solr.query.datetime_range(
             'date_first_released',
             datetime.datetime.combine(today, datetime.time()),
             datetime.datetime.combine(tomorrow, datetime.time()))
-        query = zeit.find.search.query(filter_terms=[
-            zeit.solr.query.field_raw('published', 'published*')])
-        return zeit.solr.query.and_(query, range_)
+
+        return range_
+
+    @zeit.web.reify
+    def total_pages(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        total_pages = conf.get('total_news_pages', '30')
+
+        if total_pages == 'all':
+            return super(Overview, self).total_pages
+        else:
+            return int(total_pages)
+
+    @zeit.web.reify
+    def _today(self):
+        return datetime.datetime.today().replace(
+            hour=0, minute=0, second=0, microsecond=0)
+
+    @zeit.web.reify
+    def pagination_info(self):
+        previous_day = (self._today+datetime.timedelta(
+            days=self.current_page)).strftime("%Y-%m-%d")
+        next_day = (self._today-datetime.timedelta(
+            days=self.current_page)).strftime("%Y-%m-%d")
+        return {
+            'previous_label': u'Nächster Tag',
+            'previous_param': dict(date=previous_day),
+            'next_label': u'Vorheriger Tag',
+            'next_param': dict(date=next_day)}
+
+    def page_info(self, page_nr):
+        if not page_nr:
+            page_nr = 1
+        date = self._today - datetime.timedelta(days=(page_nr-1))
+
+        date_label = date.strftime("%d.%m")
+        date_param = date.strftime("%Y-%m-%d")
+
+        if (page_nr == self.total_pages or
+            page_nr == self.current_page or
+                date_label == "31.12"):
+                    date_label = date.strftime("%d.%m.%Y")
+
+        return {
+            'page_label': date_label,
+            'remove_get_param': 'date',
+            'append_get_param': dict(date=date_param)}
+
+    def _page(self):
+        return self.date_to_page(dateutil.parser.parse(
+            self.request.GET['date']))
+
+    @zeit.web.reify
+    def _pagination(self):
+        return zeit.web.core.template.calculate_pagination(
+            self.current_page, self.total_pages, slots=6)
+
+    def date_to_page(self, date):
+        return (self._today-date).days + 1

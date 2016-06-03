@@ -1390,6 +1390,11 @@ def test_fbia_article_contains_meta_robots(testbrowser):
     assert '<meta name="robots" content="noindex, follow">' in browser.contents
 
 
+def test_fbia_article_contains_correct_webtrekk_platform(testbrowser):
+    browser = testbrowser('/fbia/zeit-online/article/simple')
+    assert '25: "instant article"' in browser.contents
+
+
 def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     amp_link = browser.cssselect('link[rel=amphtml]')
@@ -1418,3 +1423,11 @@ def test_no_webtrekk_ecommerce_without_newsletter_optin(testbrowser):
     browser = testbrowser(
         '/zeit-online/article/simple')
     assert 'wt.customEcommerceParameter' not in browser.contents
+
+
+def test_article_contains_webtrekk_parameter_asset(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/cardstack')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+
+    assert view.webtrekk['customParameter']['cp27'] == 'cardstack.2/seite-1'

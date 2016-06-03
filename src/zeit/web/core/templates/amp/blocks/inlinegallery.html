@@ -1,10 +1,10 @@
 <div class="gallery">
-	<div class="article__item">
-		<amp-carousel width="660" height="440" controls type="slides" loop layout="responsive">
-		{% for slide in block.itervalues() -%}
-			{% set image = get_image(content=slide, variant_id="wide", fallback=False) or slide %}
-			{% include 'zeit.web.core:templates/amp/asset/image.html' %}
-		{%- endfor %}
-		</amp-carousel>
-	</div>
+    <div class="article__item">
+        <amp-carousel width="660" height="440" controls type="slides" loop layout="responsive">
+        {% for slide in block.itervalues() -%}
+            {% set image = get_image(content=slide, variant_id="wide", fallback=False) or slide %}
+            {% include 'zeit.web.core:templates/amp/asset/image.html' %}
+        {%- endfor %}
+        </amp-carousel>
+    </div>
 </div>

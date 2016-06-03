@@ -1,5 +1,4 @@
 <gallery-types>
 <type name="standalone">eigenständig</type>
 <type name="inline">inline</type>
-<type name="zmo-product" available="zeit.magazin.interfaces.IZMOContent">ZMO-Produkt</type>
 </gallery-types>

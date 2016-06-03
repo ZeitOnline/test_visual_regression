@@ -149,6 +149,7 @@ def test_author_contact_should_be_fully_rendered(testbrowser):
 def test_author_should_have_user_comments(testbrowser, clock):
     clock.freeze(datetime.datetime(2015, 12, 9))
     browser = testbrowser('/autoren/author3/kommentare')
+
     comments = browser.cssselect('.user-comment')
 
     # comment *without* title

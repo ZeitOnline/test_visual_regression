@@ -16,9 +16,10 @@
 		margin: 0
 
 	&__item
-		display: block
-		margin: 0
 		background-color: $white
+		display: block
+		float: left // IE no-flexbox fallback. Note that float has no effect on a flex item.
+		margin: 0
 		width: 32%
 		+on-interaction
 			+transform(translateY(-5px))
@@ -35,6 +36,7 @@
 			padding: remify(21px 20px 22px)
 
 	&__list
+		+pie-clearfix // needed for IE no-flexbox fallback
 		+display-flex()
 		+justify-content(space-between)
 		list-style: none

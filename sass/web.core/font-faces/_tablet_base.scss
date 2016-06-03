@@ -1,12 +1,22 @@
 // Tablet Gothic
 @include font-face("TabletGothic", font-files(
+    "tabletgothic/TabletGothic-Regular.woff2",
     "tabletgothic/TabletGothic-Regular.woff",
     "tabletgothic/TabletGothic-Regular.ttf",
     "tabletgothic/TabletGothic-Regular.svg#TabletGothic"
  ), "tabletgothic/TabletGothic-Regular.eot", normal, normal);
 
+// Tablet Gothic Italic
+@include font-face("TabletGothic", font-files(
+    "tabletgothic/TabletGothic-Italic.woff2",
+    "tabletgothic/TabletGothic-Italic.woff",
+    "tabletgothic/TabletGothic-Italic.ttf",
+    "tabletgothic/TabletGothic-Italic.svg#TabletGothic-Italic"
+ ), "tabletgothic/TabletGothic-Italic.eot", normal, italic);
+
 // Tablet Gothic Bold
 @include font-face("TabletGothic", font-files(
+    "tabletgothic/TabletGothic-Bold.woff2",
     "tabletgothic/TabletGothic-Bold.woff",
     "tabletgothic/TabletGothic-Bold.ttf",
     "tabletgothic/TabletGothic-Bold.svg#TabletGothic-Bold"

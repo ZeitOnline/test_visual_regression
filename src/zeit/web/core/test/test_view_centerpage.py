@@ -1,4 +1,3 @@
-import datetime
 import pytest
 import requests
 import zope.component
@@ -193,3 +192,65 @@ def test_transparent_image_renders_fill_color_for_teaserlayouts(testbrowser):
         browser.cssselect('.teaser-large img')[0].attrib['data-src'])
     assert 'ccddee' in (
         browser.cssselect('.teaser-small-minor img')[0].attrib['data-src'])
+
+
+def test_next_page_url_should_be_set_on_page_based_paginated_centerpages(
+        application, dummy_request):
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/artikel/01'} for i in range(12)]
+
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.next_page_url == 'http://example.com?p=2'
+
+
+def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
+        application, dummy_request):
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/artikel/01'} for i in range(12)]
+
+    dummy_request.GET['p'] = '2'
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.prev_page_url == 'http://example.com'
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/artikel/01'} for i in range(22)]
+
+    dummy_request.GET['p'] = '3'
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.prev_page_url == 'http://example.com?p=2'
+
+
+def test_next_page_url_should_be_set_on_date_based_paginated_centerpages(
+        clock, application, dummy_request):
+
+    clock.freeze(zeit.web.core.date.parse_date(
+        '2016-05-10T1:23:59.780412+00:00'))
+
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/news/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.next_page_url == 'http://example.com?date=2016-05-09'
+
+
+def test_prev_page_url_should_be_set_on_date_based_paginated_centerpages(
+        clock, application, dummy_request):
+
+    clock.freeze(zeit.web.core.date.parse_date(
+        '2016-05-10T1:23:59.780412+00:00'))
+
+    dummy_request.GET['date'] = '2016-05-09'
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/news/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.prev_page_url == 'http://example.com'
+
+    dummy_request.GET['date'] = '2016-05-08'
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/news/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.prev_page_url == 'http://example.com?date=2016-05-09'

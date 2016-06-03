@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 import logging
 import re
@@ -31,13 +32,11 @@ class Article(zeit.web.core.view.Content):
 
     advertising_enabled = True
     is_longform = False
-    main_nav_full_width = False
     page_nr = 1
 
     def __init__(self, *args, **kwargs):
         super(Article, self).__init__(*args, **kwargs)
         self.context.advertising_enabled = self.banner_on
-        self.context.main_nav_full_width = self.main_nav_full_width
         self.context.is_longform = self.is_longform
         self.context.current_year = datetime.date.today().year
         # throw 404 for 'komplettansicht' if there's just one article page
@@ -171,7 +170,7 @@ class Article(zeit.web.core.view.Content):
     def cardstack_body(self):
         url = super(Article, self).cardstack_body
         params = dict(shareUrl=self.canonical_url)
-        return zeit.web.core.utils.update_query(url, **params)
+        return zeit.web.core.utils.update_get_params(url, **params)
 
     @zeit.web.reify
     def header_img(self):
@@ -209,6 +208,7 @@ class Article(zeit.web.core.view.Content):
         if self.authors:
             return u';'.join([
                 rt['name'] for rt in self.authors if rt.get('name')])
+        return ''
 
     @zeit.web.reify
     def linkreach(self):
@@ -323,6 +323,40 @@ class Article(zeit.web.core.view.Content):
             self.breadcrumbs_by_title(breadcrumbs)
         return breadcrumbs
 
+    @zeit.web.reify
+    def webtrekk_assets(self):
+        assets = []
+        p = 0
+        for nr, page in enumerate(self.pages, start=1):
+            for block in page:
+                block_type = zeit.web.core.template.block_type(block)
+                if block_type == 'paragraph':
+                    p += 1
+                if block_type in ['cardstack', 'inlinegallery', 'liveblog',
+                                  'quiz', 'video']:
+                    assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
+        return assets
+
+
+class AcceleratedMobilePageArticle(Article):
+
+    @zeit.web.reify
+    def meta_robots(self):
+        return super(AcceleratedMobilePageArticle,
+                     self).meta_robots.replace(',noarchive', '')
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(AcceleratedMobilePageArticle, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp12': 'mobile.site',  # Seitenversion Endgerät
+            'cp13': 'mobile',  # Breakpoint
+            'cp25': 'amp'  # Plattform
+        })
+
+        return webtrekk
+
 
 @view_config(route_name='amp',
              context=zeit.content.article.interfaces.IArticle,
@@ -424,7 +458,16 @@ class InstantArticleItem(Article):
              route_name='fbia',
              renderer='templates/instantarticle/tracking.html')
 class InstantArticleTracking(Article):
-    pass
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(InstantArticleTracking, self).webtrekk
+
+        webtrekk['customParameter'].update({
+            'cp25': 'instant article'  # Plattform
+        })
+
+        return webtrekk
 
 
 class ArticlePage(Article):

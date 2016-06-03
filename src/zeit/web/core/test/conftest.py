@@ -5,7 +5,6 @@ import json
 import logging
 import os.path
 import pkg_resources
-import re
 import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
@@ -289,7 +288,7 @@ def application_session(app_settings, request):
     ZODB_LAYER.setUp()
     request.addfinalizer(ZODB_LAYER.tearDown)
     wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(
-        app, secret='time')
+        app, secret='time', limit_to_application_url=True)
     wsgi.zeit_app = factory
     return wsgi
 
@@ -367,7 +366,7 @@ def debug_application(app_settings, request):
     app_settings['jinja2.show_exceptions'] = False
     return repoze.bitblt.processor.ImageTransformationMiddleware(
         zeit.web.core.application.Application()({}, **app_settings),
-        secret='time'
+        secret='time', limit_to_application_url=True
     )
 
 
@@ -622,6 +621,10 @@ def clock(monkeypatch):
                 else:
                     return cls.frozen.astimezone(tz)
             return cls.frozen
+
+        @classmethod
+        def today(cls, tz=None):
+            return Freeze.now(tz)
 
         @classmethod
         def delta(cls, timedelta=None, **kwargs):

@@ -18,7 +18,7 @@
     "grunt-grunticon": "^2.2.2",
     "grunt-jscs": "^2.5.0",
     "grunt-jsdoc": "~1.1.0",
-    "grunt-modernizr-builder": "^0.1.7",
+    "grunt-modernizr-builder": "^0.1.9",
     "grunt-sftp-deploy": "~0.2.4",
     "grunt-svgmin": "^3.1.0",
     "grunt-svgstore": "^0.5.0",

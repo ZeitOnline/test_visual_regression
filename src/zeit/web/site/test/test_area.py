@@ -29,6 +29,32 @@ def test_overview_area_should_have_a_sanity_bound_count(application):
     assert area.count == zeit.web.site.area.overview.SANITY_BOUND
 
 
+def test_overview_area_should_produce_correct_ranges(
+        clock, application, dummy_request):
+    clock.freeze(zeit.web.core.date.parse_date(
+        '2016-05-10T1:23:59.780412+00:00'))
+    area = get_area('overview', 20)
+    area.request = dummy_request
+
+    assert area._range_query() == (
+        'date_first_released:[2016-05-10T00:00:00Z '
+        'TO 2016-05-11T00:00:00Z]')
+
+    dummy_request.GET['date'] = '2016-05-09'
+    area = get_area('overview', 20)
+
+    assert area._range_query() == (
+        'date_first_released:[2016-05-09T00:00:00Z '
+        'TO 2016-05-10T00:00:00Z]')
+
+    dummy_request.GET['date'] = '2016-05-08'
+    area = get_area('overview', 20)
+
+    assert area._range_query() == (
+        'date_first_released:[2016-05-08T00:00:00Z '
+        'TO 2016-05-09T00:00:00Z]')
+
+
 def test_overview_area_should_overflow_if_necessary(
         application, dummy_request, monkeypatch):
 
@@ -71,6 +97,27 @@ def test_overview_area_clone_factory_should_set_proper_attributes():
     assert all(c.xml is Foo.xml for c in clones)
     assert all(c.__parent__ is Foo.__parent__ for c in clones)
     assert all(len(c.__name__) == 36 for c in clones)
+
+
+def test_overview_should_get_total_pages_from_config(application):
+    area = get_area('overview', 1)
+    assert area.total_pages == 30
+
+
+def test_overview_should_have_page_info(application, clock, dummy_request):
+    clock.freeze(zeit.web.core.date.parse_date(
+        '2016-05-10T1:23:59.780412+00:00'))
+    area = get_area('overview', 1)
+    area.request = dummy_request
+    pi = area.page_info(1)
+    assert pi['page_label'] == '10.05.2016'
+    assert pi['remove_get_param'] == 'date'
+    assert pi['append_get_param']['date'] == '2016-05-10'
+
+    pi = area.page_info(2)
+    assert pi['page_label'] == '09.05'
+    assert pi['remove_get_param'] == 'date'
+    assert pi['append_get_param']['date'] == '2016-05-09'
 
 
 def test_default_teaser_should_not_expose_ranking_area_proxies(
