@@ -560,7 +560,7 @@ def test_format_iqd_returns_safe_text(application):
 
 def test_filter_append_get_params_should_create_params():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
+    request.url = 'http://example.com'
     request.GET = {}
     get_params = {'newparam': 'foo'}
     assert 'http://example.com?newparam=foo' == (
@@ -569,8 +569,7 @@ def test_filter_append_get_params_should_create_params():
 
 def test_filter_append_get_params_should_append_params():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = {u'key1': u'1'}
+    request.url = 'http://example.com?key1=1'
     get_params = {'newparam': 'foo'}
     assert 'http://example.com?key1=1&newparam=foo' == (
         zeit.web.core.template.append_get_params(request, **get_params))
@@ -578,9 +577,7 @@ def test_filter_append_get_params_should_append_params():
 
 def test_filter_append_get_params_should_keep_not_overridden_params():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = webob.multidict.MultiDict(
-        [(u'key1', u'1'), (u'key1', u'2')])
+    request.url = 'http://example.com?key1=1&key1=2'
     get_params = {'newparam': 'foo'}
     assert 'http://example.com?key1=1&key1=2&newparam=foo' == (
         zeit.web.core.template.append_get_params(request, **get_params))
@@ -588,8 +585,7 @@ def test_filter_append_get_params_should_keep_not_overridden_params():
 
 def test_filter_append_get_params_should_reset_params():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = {u'key1': u'1', u'key2': u'2'}
+    request.url = 'http://example.com?key1=1&key2=2'
     get_params = {u'key1': None}
     assert 'http://example.com?key2=2' == (
         zeit.web.core.template.append_get_params(request, **get_params))
@@ -597,8 +593,7 @@ def test_filter_append_get_params_should_reset_params():
 
 def test_filter_append_get_params_should_accept_unicode():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = {u'sören_mag': u'käse'}
+    request.url = 'http://example.com?s%C3%B6ren_mag=k%C3%A4se'
     assert u'http://example.com?s%C3%B6ren_mag=k%C3%A4se' == (
         zeit.web.core.template.append_get_params(request))
 
