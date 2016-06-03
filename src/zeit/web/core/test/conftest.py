@@ -216,6 +216,9 @@ def app_settings(mockserver):
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
         'vivi_zeit.web_runtime-settings-source': (
             'egg://zeit.web.core/data/config/zeitweb-settings.xml'),
+        # this relies on the existing alias to the current script
+        # http://scripts.zeit.de/static/js/webtrekk/webtrekk_v3.js
+        'webtrekk_version': '3',
     }
 
 
