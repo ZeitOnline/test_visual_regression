@@ -111,7 +111,7 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
         if ranking and ranking.current_page == 1:
             remove_param = ranking.page_info(1)['remove_get_param']
-            return zeit.web.core.template.remove_get_params(
+            return zeit.web.core.utils.remove_get_params(
                 url, remove_param)
 
         if ranking and ranking.current_page > 1:
@@ -137,8 +137,8 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         if ranking.current_page < len(ranking.pagination):
             get_param = ranking.page_info(
                 ranking.current_page + 1)['append_get_param']
-            return zeit.web.core.template.append_get_params(
-                self.request, **get_param)
+            return zeit.web.core.utils.add_get_params(
+                self.request.url, **get_param)
 
     @zeit.web.reify
     def prev_page_url(self):
@@ -149,13 +149,13 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         if ranking.current_page == 2:
             remove_param = ranking.page_info(
                 ranking.current_page)['remove_get_param']
-            return zeit.web.core.template.remove_get_params(
+            return zeit.web.core.utils.remove_get_params(
                 self.request.url, remove_param)
         elif ranking.current_page > 2:
             get_param = ranking.page_info(
                 ranking.current_page - 1)['append_get_param']
-            return zeit.web.core.template.append_get_params(
-                self.request, **get_param)
+            return zeit.web.core.utils.add_get_params(
+                self.request.url, **get_param)
 
     @zeit.web.reify
     def is_hp(self):
