@@ -1122,6 +1122,10 @@ class FrameBuilder(CeleraOneMixin):
         return self.request.GET.get('banner_channel', None)
 
     @zeit.web.reify
+    def ressort(self):
+        return self.request.GET.get('ressort', '')
+
+    @zeit.web.reify
     def page_slice(self):
         requested_slice = self.request.GET.get('page_slice', None)
         if requested_slice:
