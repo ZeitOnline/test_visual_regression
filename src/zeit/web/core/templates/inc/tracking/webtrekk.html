@@ -4,7 +4,7 @@
 
     {% set wt_kennung = view.webtrekk.identifier %}
 
-    {% if view.framebuilder_requires_webtrekk %}
+    {% if view is framebuilder %}
         var Z_WT_KENNUNG = "{{ wt_kennung }}|" + window.location.hostname + window.location.pathname;
     {% else %}
         var Z_WT_KENNUNG = "{{ wt_kennung + '|' + view.content_url.replace('http://', '') }}";
@@ -21,7 +21,7 @@
         wt.cookie = "1";
         wt.contentGroup = {
             {% for key in view.webtrekk.contentGroup -%}
-                {% if key == 'cg7' and view.framebuilder_requires_webtrekk -%}
+                {% if key == 'cg7' and view is framebuilder -%}
                     7: window.location.hostname + window.location.pathname
                 {%- else -%}
                     {{ key | replace('cg', '') | int }}: "{{ view.webtrekk.contentGroup[key] }}"
