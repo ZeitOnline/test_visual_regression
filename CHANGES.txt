@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-362: Prevent reloading hell on overscrolling
 
+- BUG-410: Report if config loading in adReload failed
+
 - FIX: Provide fallback date and hide copyright on Storystreams
 
 - FIX: Escape double quotes in CeleraOne script function arguments
