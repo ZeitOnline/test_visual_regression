@@ -14,6 +14,10 @@ Change log for zeit.web
 
 - BUG-410: Report if config loading in adReload failed
 
+- FIX: Fix clicktracking label for whatsapp sharing link
+
+- FIX: Remove "no-js" class from minimal framebuilder (freed of modernizr)
+
 - FIX: Provide fallback date and hide copyright on Storystreams
 
 - FIX: Escape double quotes in CeleraOne script function arguments
