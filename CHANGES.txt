@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - BUG-410: Report if config loading in adReload failed
 
+- FIX: Underline links inside ZMO articles
+
 - FIX: Provide fallback date and hide copyright on Storystreams
 
 - FIX: Escape double quotes in CeleraOne script function arguments
