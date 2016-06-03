@@ -1,8 +1,8 @@
 {% require topics = view.context | topic_links %}
 <div class="author-topics">
-	<h2 class="author__subheadline">Schwerpunkte</h2>
-	{% for label, link in topics %}
-	<a href="{{ link }}" class="author-topics__tag" data-id="author.author-topic.{{ loop.index }}..{{ label | format_webtrekk }}">{{ label }}</a>
-	{% endfor %}
+    <h2 class="author__subheadline">Schwerpunkte</h2>
+    {% for label, link in topics %}
+    <a href="{{ link }}" class="author-topics__tag" data-id="author.author-topic.{{ loop.index }}..{{ label | format_webtrekk }}">{{ label }}</a>
+    {% endfor %}
 </div>
 {% endrequire %}

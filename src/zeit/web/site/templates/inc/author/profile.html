@@ -1,12 +1,12 @@
 <div class="author__item">
-	<div class="author-profile">
-		{% if view.context | topic_links or view.context.biography | trim %}
-		<div class="author-profile__intro">
-			{% include "zeit.web.site:templates/inc/author/topics.html" %}
-			{% include "zeit.web.site:templates/inc/author/bio.html" %}
-		</div>
-		{% endif %}
-		{% include "zeit.web.site:templates/inc/author/contact.html" %}
-		{% include "zeit.web.site:templates/inc/author/questions.html" %}
-	</div>
+    <div class="author-profile">
+        {% if view.context | topic_links or view.context.biography | trim %}
+        <div class="author-profile__intro">
+            {% include "zeit.web.site:templates/inc/author/topics.html" %}
+            {% include "zeit.web.site:templates/inc/author/bio.html" %}
+        </div>
+        {% endif %}
+        {% include "zeit.web.site:templates/inc/author/contact.html" %}
+        {% include "zeit.web.site:templates/inc/author/questions.html" %}
+    </div>
 </div>
