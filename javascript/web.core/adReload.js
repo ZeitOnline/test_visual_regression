@@ -176,6 +176,9 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 // listen to window.messages for channel interactions
                 $( window ).on( 'message', message );
             });
+            inits.fail( function( jqXHR, textStatus, errorThrown ) {
+                log( 'error', errorThrown );
+            });
             // on page unload unbind all at unload to prevent memory leaks
             $( window ).on( 'unload', function( event ) {
                 $( window ).off( 'adreload' );

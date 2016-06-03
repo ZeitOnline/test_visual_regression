@@ -116,15 +116,8 @@ class Article(Traversable):
 class Gallery(Traversable):
 
     def __call__(self, tdict):
-        metadata = zeit.content.gallery.interfaces.IGalleryMetadata(
-            self.context)
-
-        if metadata.type == 'zmo-product':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.gallery.IProductGallery)
-        else:
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.gallery.IGallery)
+        zope.interface.alsoProvides(
+            self.context, zeit.web.core.gallery.IGallery)
 
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
