@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - BUG-410: Report if config loading in adReload failed
 
+- FIX: Underline links inside ZMO articles
+
 - FIX: Fix clicktracking label for whatsapp sharing link
 
 - FIX: Remove "no-js" class from minimal framebuilder (freed of modernizr)
