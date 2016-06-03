@@ -4,6 +4,8 @@ Change log for zeit.web
 2.85 (unreleased)
 -----------------
 
+- ZON-1934: polishing Schlagzeilenseite
+
 - BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
 
 - BUG-422: Fix margin of adplace 7 on centerpages
@@ -14,6 +16,10 @@ Change log for zeit.web
 
 - FIX: Underline links inside ZMO articles
 
+- FIX: Fix clicktracking label for whatsapp sharing link
+
+- FIX: Remove "no-js" class from minimal framebuilder (freed of modernizr)
+
 - FIX: Provide fallback date and hide copyright on Storystreams
 
 - FIX: Escape double quotes in CeleraOne script function arguments
@@ -23,6 +29,8 @@ Change log for zeit.web
 - FIX: Set "platform" webtrekk parameter (cp25) for facebook instant articles
 
 - MAINT: Have LazyProxy resolve product_id string to product object
+
+- MAINT: Remove support for ZMO product galleries (they were never used)
 
 - MAINT: Add meetrics to framebuilder
 
