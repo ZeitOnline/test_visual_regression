@@ -1123,7 +1123,7 @@ class FrameBuilder(CeleraOneMixin):
 
     @zeit.web.reify
     def ressort(self):
-        return self.request.GET.get('ressort', '')
+        return self.request.GET.get('ressort', '').lower()
 
     @zeit.web.reify
     def page_slice(self):
