@@ -5,11 +5,11 @@
 
     {% set wt_kennung = view.webtrekk.identifier %}
 
-    {% if view.framebuilder_requires_webtrekk %}
+    {% if view is framebuilder -%}
         var Z_WT_KENNUNG = "{{ wt_kennung }}|" + window.location.hostname + window.location.pathname;
-    {% else %}
+    {% else -%}
         var Z_WT_KENNUNG = "{{ wt_kennung + '|' + view.content_url.replace('http://', '') }}";
-    {% endif %}
+    {% endif -%}
 
     var webtrekk = {
         linkTrack : "standard",
@@ -22,7 +22,7 @@
         wt.cookie = "1";
         wt.contentGroup = {
             {% for key in view.webtrekk.contentGroup -%}
-                {% if key == 'cg7' and view.framebuilder_requires_webtrekk -%}
+                {% if key == 'cg7' and view is framebuilder -%}
                     7: window.location.pathname.split('/').pop()
                 {%- else -%}
                     {{ key | replace('cg', '') | int }}: "{{ view.webtrekk.contentGroup[key] }}"
@@ -68,6 +68,7 @@
             }
         }
 
+        {% if view is not framebuilder -%}
         if ( window.location.href.indexOf('/suche/') > -1 && typeof Z_WT_KENNUNG !== 'undefined' ) {
             if ( document.getElementById('search-area-has-hits') ) {
                 Z_WT_KENNUNG = Z_WT_KENNUNG.replace('/index', '/treffer');
@@ -75,6 +76,7 @@
                 Z_WT_KENNUNG = Z_WT_KENNUNG.replace('/index', '/keine_treffer');
             }
         }
+        {%- endif %}
 
         wt.contentId = Z_WT_KENNUNG;
         wt.sendinfo();
