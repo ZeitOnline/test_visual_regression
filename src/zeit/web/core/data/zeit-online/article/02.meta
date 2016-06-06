@@ -51,6 +51,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-12-05T17:12:24.668544+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on">2014-12-13T00:51:38.353076+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="storystreams">griechenland-krise</attribute>
   <attribute ns="DAV:" name="resourcetype"/>
   <attribute ns="DAV:" name="creationdate">2014-12-09T09:32:11Z</attribute>
   <attribute ns="DAV:" name="getcontentlength">19673</attribute>

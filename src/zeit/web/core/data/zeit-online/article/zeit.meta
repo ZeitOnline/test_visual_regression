@@ -80,6 +80,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="storystreams">griechenland-krise</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2015-02-12T03:30:27+00:00</attribute>

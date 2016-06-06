@@ -31,6 +31,17 @@
     {% include "zeit.web.site:templates/inc/article/pagination.tpl" %}
 {% endblock article_pagination %}
 
+{% block article_storystreamteaser %}
+    {% if view.storystream %}
+        <pre style="background:#c0ff33;">{{ view.storystream.title }}</pre>
+        <ul>
+        {% for atom in view.storystream_items %}
+            <li>{{ atom.tldr_title }} ({{ atom.uniqueId }}) {% if atom == view.context %}!!!!!!{%endif%}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
 {% block veeseo_div %}
     <div class="RA2VW2"></div>
 {% endblock %}
