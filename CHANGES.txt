@@ -28,6 +28,8 @@ Change log for zeit.web
 
 - FIX: Set "platform" webtrekk parameter (cp25) for facebook instant articles
 
+- FIX: Fix framebuilder ressort and keywords
+
 - MAINT: Have LazyProxy resolve product_id string to product object
 
 - MAINT: Remove support for ZMO product galleries (they were never used)

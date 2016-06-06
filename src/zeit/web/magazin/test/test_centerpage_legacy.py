@@ -30,8 +30,8 @@ def monkeyreq(monkeypatch):
 def test_centerpage_should_have_default_keywords(testbrowser):
     # Default means ressort and sub ressort respectively
     browser = testbrowser('/centerpage/lebensart-2')
-    assert '<meta name="keywords" content="Lebensart, mode-design">' in (
-        browser.contents)
+    keywords = browser.cssselect('meta[name="keywords"]')[0]
+    assert keywords.get('content') == 'Lebensart, Mode-Design'
 
 
 def test_centerpage_should_have_page_meta_keywords(testbrowser):

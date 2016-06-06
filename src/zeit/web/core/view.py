@@ -394,7 +394,7 @@ class Base(object):
         if self.ranked_tags:
             result = [x.label for x in self.ranked_tags]
         else:
-            result = [self.context.ressort, self.context.sub_ressort]
+            result = [self.ressort.title(), self.sub_ressort.title()]
         return [x for x in result if x]
 
     @zeit.web.reify
@@ -1124,6 +1124,10 @@ class FrameBuilder(CeleraOneMixin):
     @zeit.web.reify
     def banner_channel(self):
         return self.request.GET.get('banner_channel', None)
+
+    @zeit.web.reify
+    def ressort(self):
+        return self.request.GET.get('ressort', '').lower()
 
     @zeit.web.reify
     def page_slice(self):
