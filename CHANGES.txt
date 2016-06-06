@@ -32,6 +32,8 @@ Change log for zeit.web
 
 - MAINT: Remove support for ZMO product galleries (they were never used)
 
+- MAINT: Use correct webtrekk version number in noscript tag
+
 - MAINT: Add meetrics to framebuilder
 
 
