@@ -17,7 +17,7 @@
             }
         },
         {% if view.is_wrapped -%}
-        is_wrapped: true,
+        isWrapped: true,
         wrapped: {
             client: /Android/i.test(navigator.userAgent) ? 'android' : 'ios',
             ivwclient: /Android/i.test(navigator.userAgent) ? 'aadzeion' : 'appzeion'
@@ -36,7 +36,7 @@
         getSiteParam: function( text ) {
             text = text || '';
             if ( this.isMobileView() ) {
-                if ( this.is_wrapped ) {
+                if ( this.isWrapped ) {
                     return 'mobile.app.' + this.wrapped.client;
                 }
                 return 'mobile.' + text;
@@ -46,7 +46,7 @@
         {% if toggles('tracking') and settings('c1_prefix') and view.c1_client -%}
         getCeleraOneOrigin: function() {
             if ( this.isMobileView() ) {
-                if ( this.is_wrapped ) {
+                if ( this.isWrapped ) {
                     return 'app';
                 }
                 return 'mobile';
