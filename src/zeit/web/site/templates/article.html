@@ -16,7 +16,7 @@
 {% block article_heading %}
     {% if view.has_series_attached %}
         <div class="article-series">
-            {% require image = get_image(view, view.series, default='panorama') -%}
+            {% require image = get_image(view, view.series, variant_id='panorama', fallback=False) -%}
                 {% set module_layout = "article-series" %}
                 {% set media_caption_additional_class = 'figcaption--hidden' %}
                 {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
