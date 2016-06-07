@@ -33,12 +33,39 @@
 
 {% block article_storystreamteaser %}
     {% if view.storystream %}
-        <pre style="background:#c0ff33;">{{ view.storystream.title }}</pre>
-        <ul>
-        {% for atom in view.storystream_items %}
-            <li>{{ atom.tldr_title }} ({{ atom.uniqueId }}) {% if atom == view.context %}!!!!!!{%endif%}</li>
-        {% endfor %}
-        </ul>
+
+        {% set blockname = 'storystream-in-article' %}
+
+        {# TODO: div or article or aside ? #}
+        <aside class="{{ blockname }}">
+            <div class="{{ blockname }}__container {{ blockname }}__container--header">
+                <div class="{{ blockname }}__content {{ blockname }}__content--header">
+                    <h2 class="{{ blockname }}__headline">
+                        <span class="{{ blockname }}__headline-kicker">Im Überblick</span>
+                        <span class="visually-hidden">:</span>
+                        <span class="{{ blockname }}__headline-title">{{ view.storystream.title }}</span>
+                    </h2>
+                </div>
+            </div>
+            <div class="{{ blockname }}__container">
+                <div class="{{ blockname }}__content">
+                    <ul class="{{ blockname }}__list">
+                        {% for atom in view.storystream_items %}
+                            {% if atom == view.context %}
+                                <li class="{{ blockname }}__listitem {{ blockname }}__listitem--current">
+                                    {{ atom.tldr_title }}</a>
+                                </li>
+                            {% else %}
+                                <li class="{{ blockname }}__listitem">
+                                <a href="{{ atom.uniqueId | create_url }}" class="{{ blockname }}__link">{{ atom.tldr_title }}
+                                </a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <a class="button" href="{{ view.storystream.uniqueId | create_url }}">zum Überblick</a>
+            </div>
+        </aside>
     {% endif %}
 {% endblock %}
 

@@ -1,0 +1,72 @@
+.storystream-in-article
+	margin: 0 (-$page-padding)
+
+	&__container
+		padding: 0 $page-padding--small
+		&--header
+			background: $zon-lighter-grey
+			padding-top: $vertical-space
+
+	&__content
+		margin: 0 auto
+		position: relative
+		border-left: 1px $zon-mid-grey solid
+		padding: 0 $page-padding--small
+		width: 100%
+		+respond-min($break-tablet-min)
+			max-width: remify(660px)
+			padding: 0 $page-padding
+		// &:after
+		// 	content: ''
+		// 	position: absolute
+		// 	width: 1px
+		// 	height: 100%
+		// 	background-color: $zon-mid-grey
+		// 	left: -$page-padding--small
+		// 	top: 0
+		// 	z-index: 1
+		&--header
+			padding-bottom: $vertical-space
+
+	&__list
+		list-style: none
+		margin: 0 0 $vertical-space 0
+		padding: $vertical-space 0 0
+	&__listitem
+		color: $zon-mid-grey
+		font-weight: bold
+		font-size: remify(16px)
+		line-height: round-to-precision(20/16, $precision: 1)
+		position: relative
+		//&:before
+			//+make-a-circle($color: $zon-dark-grey, $radius: 9px, $border-width: 4px)
+			//left: -(1.5*$page-padding--small)
+	&__link
+		// TODO: interaction-Mixin
+		color: $zon-dark-grey
+
+	&__headline
+		position: relative
+		margin: 0
+		//&:before
+			//+make-a-circle($color: $zon-lighter-grey, $radius: 9px, $border-color: $zon-mid-grey, $border-width: 1px)
+			//left: -(1.5*$page-padding--small)
+
+	&__headline-kicker
+		color: $zon-grey
+		display: block
+		font-family: $font-tabletgothic
+		font-size: remify(14px)
+		font-weight: normal
+		letter-spacing: $letter-spacing-m
+		line-height: round-to-precision(18/14, $precision: 1)
+		text-transform: uppercase
+
+	&__headline-title
+		color: $zon-dark-grey
+		display: block
+		font-family: $font-franziska
+		font-size: remify(20px)
+		font-style: italic
+		letter-spacing: $letter-spacing-s
+		line-height: round-to-precision(24/20, $precision: 1)
