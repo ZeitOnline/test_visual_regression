@@ -33,15 +33,14 @@
         isMobileView: function() {
             return this.getClientWidth() < this.tabletMinWidth;
         },
-        getSiteParam: function( text ) {
-            text = text || '';
+        getSiteParam: function() {
             if ( this.isMobileView() ) {
                 if ( this.isWrapped ) {
                     return 'mobile.app.' + this.wrapped.client;
                 }
-                return 'mobile.' + text;
+                return 'mobile.site';
             }
-            return 'desktop.' + text;
+            return 'desktop.site';
         },
         {% if toggles('tracking') and settings('c1_prefix') and view.c1_client -%}
         getCeleraOneOrigin: function() {
