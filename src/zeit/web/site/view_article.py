@@ -57,7 +57,8 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def embed_header(self):
-        return zeit.content.article.edit.interfaces.IHeaderArea(article).module
+        return zeit.content.article.edit.interfaces.IHeaderArea(
+            self.context).module
 
     @zeit.web.reify
     def meta_keywords(self):

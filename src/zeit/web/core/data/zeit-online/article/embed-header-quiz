@@ -1,0 +1,73 @@
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:cp="http://namespaces.zeit.de/CMS/cp">
+<head>
+<header>
+<quiz quiz_id="103" adreload_enabled="True"/>
+</header>
+<image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/leben/2016-02/tobias-rehberger-afrika-cluster-teaser-2/" type="jpg" title="Rehberger Teaser" publication-date="" expires="">
+<bu/>
+<copyright>© Tobias Rehberger</copyright>
+</image>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Digital Games</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-06-03T08:47:46.448463+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-06-01T14:50:33.130329+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-06-03T08:47:52.077667+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-06-03T08:47:52.022330+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-06-01T14:50:29.927270+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-06-03T08:42:07.522603+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+<attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-06-01T14:47:14.055411+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.strothjohann</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">
+http://xml.zeit.de/digital/games/2016-06/8768dfd0-a93e-43c3-a942-b4cdd9d6e163.tmp
+</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">public-32</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Games</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">129</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9f77d4bc-0df3-466e-bcdd-faf8c27d399c}</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">
+<pickle> <initialized_object> <klass> <global name="Provides" module="zope.interface.declarations"/> </klass> <arguments> <tuple> <global name="Article" module="zeit.content.article.article"/> <global name="Interface" module="zope.interface"/> <global name="IZONContent" module="zeit.cms.section.interfaces"/> <global name="IZONArticle" module="zeit.content.article.interfaces"/> </tuple> </arguments> </initialized_object> </pickle>
+</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">index,follow,noodp,noydir,noarchive</attribute>
+</head>
+<body>
+<supertitle>Embed Templates</supertitle>
+<title>Hello Artikel Header</title>
+<subtitle>
+Das ist der erste Artikel mit einem Embed-Header! Wow. Bin gespannt, was das Frontend macht...
+</subtitle>
+<division type="page">
+<image layout="large" is_empty="True"/>
+</division>
+</body>
+</article>

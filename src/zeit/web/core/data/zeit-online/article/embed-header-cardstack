@@ -1,8 +1,7 @@
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:cp="http://namespaces.zeit.de/CMS/cp">
 <head>
 <header>
-<cardstack is_advertorial="False" card_id="207"/>
-<cardstack card_id="328" is_advertorial="False"/>
+<cardstack cp:__name__="id-a5873350-202c-4705-91ec-e601eccc239e" card_id="272" is_advertorial="False"/>
 </header>
 <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/leben/2016-02/tobias-rehberger-afrika-cluster-teaser-2/" type="jpg" title="Rehberger Teaser" publication-date="" expires="">
 <bu/>
