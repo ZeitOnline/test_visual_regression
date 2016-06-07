@@ -164,7 +164,8 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def has_cardstack(self):
-        return len(self.context.xml.xpath('/article/body//cardstack')) > 0
+        return (self.context.xml.xpath('/article/body//cardstack') or
+                self.context.xml.xpath('/article/head/header/cardstack'))
 
     @zeit.web.reify
     def cardstack_body(self):
