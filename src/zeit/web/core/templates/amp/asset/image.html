@@ -14,14 +14,14 @@
 		{% set widths = [] %}
 	{%- endif %}
 
-	{%- if block and block.layout and block.layout.display_mode == 'large' %}
+	{%- if block and block.display_mode == 'large' %}
 		{% set sizes = '(min-width: 820px) 820px, 100vw' %}
 	{%- else %}
 		{% set sizes = '' %}
 	{%- endif %}
 
 	{% block image %}
-		<figure class="{{ 'figure' | with_mods(block.layout.display_mode if block and block.layout) }}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
+		<figure class="{{ 'figure' | with_mods(block.display_mode if block) }}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
 			{% block media -%}
 			<amp-img
 				src="{{ src }}"

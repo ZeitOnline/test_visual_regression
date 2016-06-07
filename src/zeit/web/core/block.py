@@ -293,8 +293,8 @@ class Image(zeit.web.core.image.BaseImage):
         return 'header' not in (variant_name or '')
 
     def __init__(self, model_block):
-        self.layout = layout = model_block.layout
-
+        self.variant_name = model_block.variant_name
+        self.display_mode = model_block.display_mode
         if model_block.display_mode == 'large':
             self.figure_mods = ('wide', 'rimless', 'apart')
         elif model_block.display_mode == 'float':
