@@ -1441,6 +1441,13 @@ def test_article_in_series_has_banner(testbrowser):
     title = browser.cssselect('.article-series__title')[0].text.strip()
     assert title == '70 Jahre DIE ZEIT'
 
+    browser = testbrowser('/zeit-online/article/02')
+
+    assert len(browser.cssselect('.article-series')) == 1
+
+    title = browser.cssselect('.article-series__title')[0].text.strip()
+    assert title == 'Geschafft!'
+
 
 def test_article_in_series_has_banner_image(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
@@ -1448,8 +1455,14 @@ def test_article_in_series_has_banner_image(testbrowser):
     assert len(browser.cssselect('.article-series__media')) == 1
 
 
-def test_article_without_series_has_no_banner(testbrowser):
+def test_article_in_series_has_no_fallback_image(testbrowser):
     browser = testbrowser('/zeit-online/article/02')
+
+    assert len(browser.cssselect('.article-series__media')) == 0
+
+
+def test_article_without_series_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
 
     assert len(browser.cssselect('.article-series')) == 0
 
