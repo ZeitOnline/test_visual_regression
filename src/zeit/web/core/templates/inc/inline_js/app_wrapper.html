@@ -1,10 +1,10 @@
 {# special javascript treatment for wrapper apps #}
-{% if view.is_wrapped %}
+{% if view.is_wrapped or view is framebuilder %}
 <script>
     window.wrapper = {
         // provide ressort if questioned
         getRessort: function() {
-            return "{{ view.ressort_literally }}"
+            return "{{ view.ressort_literally }}";
         }
     };
 </script>

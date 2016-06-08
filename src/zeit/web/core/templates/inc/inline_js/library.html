@@ -16,13 +16,15 @@
                 return this[key] ? this[key] : '';
             }
         },
-        {% if view.is_wrapped -%}
-        isWrapped: true,
+        {% if view is framebuilder -%}
+        isWrapped: navigator.userAgent.indexOf('ZONApp') > -1,
+        {% else -%}
+        isWrapped: {{ 'true' if view.is_wrapped else 'false' }},
+        {% endif -%}
         wrapped: {
             client: /Android/i.test(navigator.userAgent) ? 'android' : 'ios',
             ivwclient: /Android/i.test(navigator.userAgent) ? 'aadzeion' : 'appzeion'
         },
-        {% endif -%}
         tabletMinWidth: 768,
         sideAdMinWidth: 998,
         noliquidMaxWidth: 1024,

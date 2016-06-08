@@ -262,6 +262,13 @@ def test_framebuilder_minimal_can_contain_ivw(testbrowser):
     assert 'var iam_data = {' in browser.contents
 
 
+def test_framebuilder_contains_data_for_wrapper_app(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert 'window.wrapper' in browser.contents
+    assert ("isWrapped: navigator.userAgent.indexOf('ZONApp') > -1,"
+            in browser.cssselect('head')[0].text_content())
+
+
 # TODO
 def test_framebuilder_minimal_should_have_login_cut_mark(testbrowser):
     browser = testbrowser('/framebuilder')
