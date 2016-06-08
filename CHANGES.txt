@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.85 (unreleased)
+2.85 (2016-06-08)
 -----------------
 
 - ZON-1934: polishing Schlagzeilenseite
