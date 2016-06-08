@@ -1229,6 +1229,8 @@ def test_wrapped_features_are_triggered(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index?app-content')
     assert not browser.cssselect('header.header')
     assert browser.cssselect('body[data-is-wrapped="true"]')
+    assert 'window.wrapper' in browser.contents
+    assert 'isWrapped: true,' in browser.cssselect('head')[0].text_content()
 
 
 def test_advertorial_page_has_advertorial_label(testbrowser):

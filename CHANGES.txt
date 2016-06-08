@@ -4,11 +4,13 @@ Change log for zeit.web
 2.86 (unreleased)
 -----------------
 
-- ZON-3092: Add preconnect links
-
 - ZON-2039: Add series banner for articles
 
+- ZON-3092: Add preconnect links
+
 - FIX: Naming things (Zeit.isMobileView)
+
+- FIX: Enable wrapper support for framebuilder
 
 
 2.85 (2016-06-08)
