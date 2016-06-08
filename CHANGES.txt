@@ -4,7 +4,9 @@ Change log for zeit.web
 2.86 (unreleased)
 -----------------
 
-- Fix: Naming things (Zeit.isMobileView)
+- FIX: Naming things (Zeit.isMobileView)
+
+- FIX: Enable wrapper support for framebuilder
 
 - ZON-2039: Add series banner for articles
 
