@@ -12,6 +12,7 @@
     {% if view.framebuilder_requires_meetrics %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
     {% endif %}
+    {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
 
     <script>
         var require = { baseUrl: '{{ request.asset_host }}/js/' };
