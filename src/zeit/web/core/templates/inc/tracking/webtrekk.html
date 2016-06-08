@@ -35,7 +35,7 @@
         wt.customParameter = {
             {% for key in view.webtrekk.customParameter -%}
                 {% if key == 'cp12' -%}
-                    12: window.Zeit.getSiteParam("site")
+                    12: window.Zeit.getSiteParam()
                 {%- elif key == 'cp13' -%}
                     13: window.Zeit.breakpoint.getTrackingBreakpoint()
                 {%- else -%}

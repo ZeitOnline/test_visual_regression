@@ -4,7 +4,7 @@ Change log for zeit.web
 2.86 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Fix: Naming things (Zeit.isMobileView)
 
 
 2.85 (2016-06-08)

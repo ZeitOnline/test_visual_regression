@@ -26,7 +26,7 @@
         wt.customParameter = {
             {% for key in view.webtrekk.customParameter -%}
                 {% if key == 'cp12' -%}
-                    12: window.FBIA.getSiteParam("site")
+                    12: window.FBIA.getSiteParam()
                 {%- elif key == 'cp13' -%}
                     13: window.FBIA.getTrackingBreakpointAlike()
                 {%- else -%}
