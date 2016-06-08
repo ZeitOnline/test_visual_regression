@@ -1,8 +1,9 @@
 {# XXX: Please, only set variables in jinja where absolutely needed. #}
 {% set wt_kennung = view.webtrekk.identifier %}
 
-<amp-pixel src="{{ "%s,%s,0,0,0,0,0,0,0,0" | format(
-    "https://zeit01.webtrekk.net/981949533494636/wt.pl?p=328",
+<amp-pixel src="{{ "%s?p=%s,%s,0,0,0,0,0,0,0,0" | format(
+    "https://zeit01.webtrekk.net/981949533494636/wt.pl",
+    settings('webtrekk_version', 3).replace('.', ''),
     wt_kennung ~ ('|' | urlencode) ~ view.content_url.replace('http://', '')
     ) }}&amp;
     {{- view.webtrekk.contentGroup | urlencode -}}&amp;

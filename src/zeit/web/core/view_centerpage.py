@@ -170,8 +170,9 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
     def meta_robots(self):
+        ranking = self.area_ranking
         # Prevent continuation pages from being indexed
-        if zeit.web.core.view.is_paginated(self.context, self.request):
+        if ranking is not None and ranking.current_page > 1:
             return 'noindex,follow,noodp,noydir,noarchive'
         return super(Centerpage, self).meta_robots
 

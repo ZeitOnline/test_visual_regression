@@ -1,21 +1,26 @@
 <?xml version="1.0"?>
 <areas>
-    <area kind="solo">solo</area>
-    <area kind="duo">duo</area>
-    <area kind="trio">trio</area>
-    <area kind="major">major</area>
-    <area kind="minor">minor</area>
-    <area kind="parquet">parquet</area>
-    <area kind="zmo-parquet">zmo-parquet</area>
-    <area kind="zco-parquet">zco-parquet</area>
-    <area kind="ranking">ranking</area>
-    <area kind="zco-ranking">zco-ranking</area>
-    <area kind="overview">overview</area>
-    <area kind="newsticker">newsticker</area>
-    <area kind="topic">topic</area>
-    <area kind="topic-variant">topic-variant</area>
-    <area kind="topic-graphical">topic-graphical</area>
-    <area kind="gallery">gallery</area>
-    <area kind="spektrum">spektrum</area>
-    <area kind="buzzboard">buzzboard</area>
+    <area kind="solo" title="Solo-Fläche">solo</area>
+    <area kind="topic" title="Thema-Fläche (Dossier)">topic</area>
+    <area kind="topic-variant" title="Thema-Fläche (Artikel)" apply_teaser_layouts_automatically="true" first_teaser_layout="zco-topic-wide" available="zeit.campus.interfaces.IZCOContent">topic-variant</area>
+    <area kind="topic-graphical" title="Thema-Fläche (Cluster)" available="zeit.campus.interfaces.IZCOContent">topic-graphical</area>
+    <area kind="duo" title="Duo-Fläche">duo</area>
+    <area kind="trio" title="Trio-Fläche">trio</area>
+    <area kind="major" title="Major-Fläche">major</area>
+    <area kind="minor" title="Minor-Fläche">minor</area>
+    <area kind="parquet" title="Parkett-Fläche">parquet</area>
+    <area kind="zmo-parquet" title="ZEITmagazin Parkett" available="zeit.web.core.interfaces.IInternalUse">zmo-parquet</area>
+    <area kind="zco-parquet" title="ZEIT Campus Parkett" available="zeit.web.core.interfaces.IInternalUse">zco-parquet</area>
+    <area kind="spektrum" title="Spektrum Parkett" available="zeit.web.core.interfaces.IInternalUse">spektrum</area>
+    <area kind="zett" title="ze.tt Parkett" available="zeit.web.core.interfaces.IInternalUse">zett</area>
+    <area kind="storystream" title="Storystream-Fläche">storystream</area>
+    <area kind="gallery" title="Fotostrecken-Fläche">gallery</area>
+    <area kind="newsticker" title="Schlagzeilen-Fläche">newsticker</area>
+    <area kind="ranking" title="Simple-Fläche" available="zeit.cms.section.interfaces.IZONContent">ranking</area>
+    <area kind="zco-ranking" title="Simple-Fläche" available="zeit.campus.interfaces.IZCOContent">zco-ranking</area>
+    <area kind="shop" available="zeit.web.core.interfaces.IInternalUse">overview</area>
+    <area kind="buzzboard" title="Buzz-Board" available="zeit.web.core.interfaces.IInternalUse">buzzboard</area>
+    <area kind="author-favourite-content" available="zeit.content.dynamicfolder.interfaces.IVirtualContent">author-favourite-content</area>
+    <area kind="author-articles" available="zeit.content.dynamicfolder.interfaces.IVirtualContent">author-articles</area>
+    <area kind="author-list" available="zeit.content.dynamicfolder.interfaces.IVirtualContent">author-list</area>
 </areas>

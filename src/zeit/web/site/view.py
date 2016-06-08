@@ -147,7 +147,3 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
             self.context.advertising_enabled = self.banner_on
         except TypeError:
             raise pyramid.httpexceptions.HTTPNotFound()
-
-    @zeit.web.reify
-    def ressort(self):
-        return self.request.GET.get('ressort', '')

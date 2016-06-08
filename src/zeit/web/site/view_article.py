@@ -64,7 +64,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def meta_keywords(self):
-        return [x for x in ([self.ressort.capitalize(), self.supertitle] +
+        return [x for x in ([self.ressort.title(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
 
     # Only needed to set tracking code on

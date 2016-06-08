@@ -1,47 +1,52 @@
-<?xml version="1.0"?>
 <regions>
-    <region kind="empty" title="Empty"/>
-    <region kind="solo" title="Solo">
+    <region kind="empty" title="Leere Region" available="zeit.web.core.interfaces.IInternalUse"/>
+    <region kind="solo" title="Solo-Region">
         <area kind="solo"/>
     </region>
-    <region kind="duo" title="Duo">
+    <region kind="duo" title="Duo-Region" type="!storystream">
         <area kind="duo"/>
         <area kind="duo"/>
     </region>
-    <region kind="trio" title="Trio">
+    <region kind="trio" title="Trio-Region" type="!storystream" available="zeit.campus.interfaces.IZCOContent">
         <area kind="trio"/>
         <area kind="trio"/>
         <area kind="trio"/>
     </region>
-    <region kind="duo" title="Multi">
+    <region kind="trio" title="Trio-Region" type="!storystream" available="zeit.magazin.interfaces.IZMOContent">
+        <area kind="trio"/>
+    </region>
+    <region kind="duo" title="Standard-Region" type="!storystream">
         <area kind="major"/>
         <area kind="minor"/>
     </region>
-    <region kind="parquet" title="Parquet">
+    <region kind="parquet" title="Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="parquet"/>
     </region>
-    <region kind="parquet" title="ZMO Parquet">
+    <region kind="parquet" title="ZEITmagazin Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="zmo-parquet"/>
     </region>
-    <region kind="parquet" title="ZCO Parquet">
+    <region kind="parquet" title="ZEIT Campus Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="zco-parquet"/>
     </region>
-    <region kind="parquet" title="Spektrum">
+    <region kind="parquet" title="Spektrum Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="spektrum"/>
     </region>
-    <region kind="solo" title="Ranking">
+    <region kind="parquet" title="ZE.TT Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
+        <area kind="zett"/>
+    </region>
+    <region kind="solo" title="Simple-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="ranking"/>
     </region>
-    <region kind="solo" title="ZCO Ranking">
+    <region kind="solo" title="Simple-Region" type="!storystream" available="zeit.campus.interfaces.IZCOContent">
         <area kind="zco-ranking"/>
     </region>
-    <region kind="solo" title="Overview">
+    <region kind="solo" title="Jahresuberblick" available="zeit.web.core.interfaces.IInternalUse" type="!storystream">
         <area kind="overview"/>
     </region>
-    <region kind="solo" title="Schlagzeilen">
+    <region kind="solo" title="Schlagzeilen-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="newsticker"/>
     </region>
-    <region kind="topic" title="Thema-Region (Dossier)">
+    <region kind="topic" title="Thema-Region (Dossier)" type="!storystream">
         <area kind="topic"/>
     </region>
     <region kind="topic" title="Thema-Region (Artikel)" available="zeit.campus.interfaces.IZCOContent">
@@ -49,19 +54,22 @@
         apply_teaser_layouts_automatically="true"
         first_teaser_layout="zco-topic-wide"/>
     </region>
-    <region kind="topic" title="Thema-Region (Grafische Teaser)" available="zeit.campus.interfaces.IZCOContent">
+    <region kind="topic" title="Thema-Region (Cluster)" available="zeit.campus.interfaces.IZCOContent">
         <area kind="topic-graphical"/>
     </region>
-    <region kind="gallery" title="ZEIT Shop">
+    <region kind="gallery" title="Shop-Bühne" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="shop"/>
     </region>
-    <region kind="gallery" title="ZEIT Printbanderole">
+    <region kind="gallery" title="ZEIT Printbanderole" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="printkiosk"/>
     </region>
-    <region kind="gallery" title="Galerie">
+    <region kind="gallery" title="Fotostrecken-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="gallery"/>
     </region>
-    <region kind="solo" title="Buzz-Board">
+    <region kind="storystream" title="Storystream" type="storystream">
+        <area kind="storystream"/>
+    </region>
+    <region kind="solo" title="Buzz-Board" type="!storystream">
         <area kind="buzzboard"/>
     </region>
 </regions>
