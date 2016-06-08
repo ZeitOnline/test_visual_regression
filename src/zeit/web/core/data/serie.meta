@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute name="href" ns="DAV:">/cms/work/serie/</attribute>
+  <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-05-22T11:30:32.302013+00:00</attribute>
+  <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-05-22T11:29:37.352932+00:00</attribute>
+  <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">dynamic-collection</attribute>
+  <attribute name="config_file" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/serie/config.xml</attribute>
+  <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.drebenstedt</attribute>
+  <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;LocalDynamicFolder&quot; module=&quot;zeit.content.dynamicfolder.folder&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:47d7fa2d-8350-412b-a11b-09252bf282fe}</attribute>
+  <attribute name="resourcetype" ns="DAV:"/>
+  <attribute name="creationdate" ns="DAV:">2015-05-22T11:28:16Z</attribute>
+  <attribute name="getlastmodified" ns="DAV:">Fri, 22 May 2015 11:28:16 GMT</attribute>
+  <attribute name="getetag" ns="DAV:">&quot;18d3fa-1000-516a9f4db4c1b&quot;</attribute>
+  <attribute name="supportedlock" ns="DAV:"/>
+  <attribute name="lockdiscovery" ns="DAV:"/>
+  <attribute name="getcontenttype" ns="DAV:">httpd/unix-directory</attribute>
+</head>
