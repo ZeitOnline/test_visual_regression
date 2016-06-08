@@ -55,6 +55,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">70 Jahre DIE ZEIT</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-27T17:11:30.179510+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on">2014-12-13T00:51:38.353076+00:00</attribute>

@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.85 (unreleased)
+2.86 (unreleased)
+-----------------
+
+- Fix: Naming things (Zeit.isMobileView)
+
+
+2.85 (2016-06-08)
 -----------------
 
 - ZON-1934: polishing Schlagzeilenseite
@@ -29,6 +35,8 @@ Change log for zeit.web
 - FIX: Set "platform" webtrekk parameter (cp25) for facebook instant articles
 
 - FIX: Fix framebuilder ressort and keywords
+
+- FIX: Use cinema variant for storystream header
 
 - MAINT: Have LazyProxy resolve product_id string to product object
 

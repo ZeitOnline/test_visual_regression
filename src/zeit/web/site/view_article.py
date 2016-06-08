@@ -88,6 +88,20 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         else:
             return atoms[pos - 1:pos + 2]
 
+    @zeit.web.reify
+    def has_series_attached(self):
+        return getattr(self.context, 'serie', None)
+
+    @zeit.web.reify
+    def series(self):
+        settings = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings
+        )
+
+        uid = u'{}/{}'.format(settings.series_prefix, self.context.serie.url)
+
+        return zeit.cms.interfaces.ICMSContent(uid, None)
+
 
 @view_config(name='seite',
              path_info='.*seite-(.*)',
