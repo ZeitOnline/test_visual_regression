@@ -14,9 +14,8 @@
                 isMobileView: function() {
                     return this.getClientWidth() < this.tabletMinWidth;
                 },
-                getSiteParam: function( text ) {
-                    text = text || '';
-                    return this.isMobileView() ? 'mobile.' + text : 'desktop.' + text;
+                getSiteParam: function() {
+                    return this.isMobileView() ? 'mobile.site' : 'desktop.site';
                 },
                 getTrackingBreakpointAlike: function() {
                     var width = this.getClientWidth(),

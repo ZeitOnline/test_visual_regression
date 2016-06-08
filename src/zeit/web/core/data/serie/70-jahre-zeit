@@ -1,0 +1,442 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+  <head>
+    <header_image xsi:nil="true"/>
+    <topiclinks>
+        </topiclinks>
+    <image base-id="http://xml.zeit.de/campus/image/jura-staatsexamen-abschaffen/" type="jpg" align="left" publication-date="" expires="">
+      <bu xsi:nil="true"/>
+      <copyright py:pytype="str">© Lêmrich für DIE ZEIT</copyright>
+    </image>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-02-19T16:11:51.838306+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-02-14T23:30:03.414101+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-02-22T09:31:31.116140+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-02-19T08:38:41.362016+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-02-19T08:38:50.099520+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">2016 feiert DIE ZEIT ihren 70. Geburtstag. Hier finden Sie alle Informationen zu dem Jubiläum</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">noindex, follow, noodp, noydir, noarchive</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Serie: 70 Jahre DIE ZEIT</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.miklis</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">1415833311</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2016-02-14T23:30:00+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Administratives</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>70 Jahre DIE ZEIT</title>
+    <supertitle>Serie</supertitle>
+    <subtitle>Am 21. Februar 1946 – vor rund 70 Jahren – erschien die erste Ausgabe der ZEIT. Wir feiern das Jubiläum mit einem Schwerpunkt auf ZEIT ONLINE. Alle Texte finden Sie hier.</subtitle>
+    <cluster visible="True" visible_mobile="True" area="id-7d1d495f-eae0-48e2-97c7-2ccd75f877ed" kind="solo" kind_title="Solo-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-193ed253-b0b0-46fb-8adc-3d2f1f38937f" kind="solo">
+        <container cp:type="headerimage" module="headerimage" visible="True" visible_mobile="True" cp:__name__="id-1ebe970c-626c-46f3-be30-8ef090217c97" supertitle="Serie" title="70 Jahre DIE ZEIT">
+          <image>http://xml.zeit.de/campus/image/jura-studium-fleiss/</image>
+        </container>
+      </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-e0cc9091-c9ab-4743-b245-4eb0639a7f7d" kind="duo" kind_title="Standard-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-58da8352-2821-4e06-8a46-7c67f1302349" kind="major" count="25" automatic="True" automatic_type="query">
+        <raw_query>published:"published" AND serie:"70 Jahre ZEIT"</raw_query>
+        <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-55f556e7-4e4e-44a7-80c1-ccbf7035756f">
+          <text>
+            <ul>
+              <li>Am 21. Februar 1946 – vor rund 70 Jahren – erschien die erste Ausgabe der ZEIT. Wir feiern das Jubiläum mit einer Sonderausgabe und einem Schwerpunkt auf ZEIT ONLINE.</li>
+              <li>Auf ZEIT und ZEIT ONLINE schreiben Autoren über die ZEIT-Geschichte ihres Lebens. Alle Texte finden Sie auf dieser Seite.</li>
+            </ul>
+          </text>
+        </container>
+        <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-7e5dca83-a7d9-417c-b5b1-1ddafb65d6eb">
+          <block href="http://xml.zeit.de/2016/08/journalismus-medien-zeit-geburtstag-giovanni-di-lorenzo" uniqueId="http://xml.zeit.de/2016/08/journalismus-medien-zeit-geburtstag-giovanni-di-lorenzo" year="2016" issue="8" ressort="Politik" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:26:00+00:00" expires="" date-last-modified="2016-02-17T10:16:14+00:00" date-first-released="2016-02-14T23:26:54.199918+00:00" date-last-published="2016-02-17T10:16:13.488972+00:00" last-semantic-change="2016-02-15T10:38:00.732201+00:00" author="Giovanni di Lorenzo">
+            <supertitle py:pytype="str">Journalismus</supertitle>
+            <title py:pytype="str">Die Welt ein bisschen erträglicher machen</title>
+            <text py:pytype="str">Seit 70 Jahren gibt es DIE ZEIT, nur acht Seiten hatte die erste Ausgabe im Februar 1946. Welche Menschen und Überzeugungen prägen die Zeitung heute?</text>
+            <description py:pytype="str">Seit 70 Jahren gibt es DIE ZEIT, nur acht Seiten hatte die erste Ausgabe im Februar 1946. Welche Menschen und Überzeugungen prägen die Zeitung heute?</description>
+            <byline py:pytype="str">von Giovanni di Lorenzo</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/politik/2016-02/journalismus-giovanni-di-lorenzo/" type="jpg" title="Journalismus" align="left" publication-date="" expires="">
+              <bu py:pytype="str">Jeden Donnerstag trifft sich die Redaktion zur Blattkritik. Hier am 11. Februar im 6. Stock
+des Helmut Schmidt Hauses. Das Berliner Büro ist per Video zugeschaltet</bu>
+              <copyright py:pytype="str" link="http://www.willing-holtz.de/">© Willing–Holtz für DIE ZEIT</copyright>
+            </image>
+            <author href="http://xml.zeit.de/autoren/L/Giovanni_di_Lorenzo/index.xml" publication-date="" expires="">
+              <display_name py:pytype="str">Giovanni di Lorenzo</display_name>
+            </author>
+          </block>
+        </container>
+        <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-d0fe4c5a-7627-4a29-bc7d-683450e6db72">
+          <block href="http://xml.zeit.de/2016/08/zeit-empfang-hamburg-sekretaerinnen-gespraech" uniqueId="http://xml.zeit.de/2016/08/zeit-empfang-hamburg-sekretaerinnen-gespraech" year="2016" issue="8" ressort="Kultur" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:26:00+00:00" expires="" genre="interview" date-last-modified="2016-02-15T12:45:10+00:00" date-first-released="2016-02-14T23:26:15.780385+00:00" date-last-published="2016-02-15T07:57:55.099808+00:00" last-semantic-change="2016-02-15T06:00:00+00:00" author="Moritz von Uslar">
+            <supertitle py:pytype="str">Medienhaus</supertitle>
+            <title py:pytype="str">"Manchmal kippt es ins Verrückte"</title>
+            <text py:pytype="str">Die Damen vom ZEIT-Empfang haben viel erlebt. Ein Gespräch über schreiende Leser, Contenance im Chaos und eine unechte Tochter von Helmut Schmidt.</text>
+            <description py:pytype="str">Die Damen vom ZEIT-Empfang haben viel erlebt. Ein Gespräch über schreiende Leser, Contenance im Chaos und eine unechte Tochter von Helmut Schmidt.</description>
+            <byline py:pytype="str">von Moritz von Uslar</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/kultur/2016-02/zeit-empfang-hamburg-sekretaerinnen-gespraech/" type="jpg" title="Empfang" align="left" publication-date="" expires="">
+              <bu py:pytype="str">Und immer höflich bleiben: Ingrid Neumann, Iris Barth und Renate Matthey am Empfang der ZEIT</bu>
+              <copyright py:pytype="str">© Vera Tammen für DIE ZEIT</copyright>
+            </image>
+            <author href="http://xml.zeit.de/autoren/U/Moritz_Uslarvon/index" publication-date="" expires="">
+              <display_name py:pytype="str">Moritz von Uslar</display_name>
+            </author>
+          </block>
+        </container>
+        <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-72bce636-e680-43d6-9708-ef57d06e2908">
+          <block href="http://xml.zeit.de/2016/08/dieter-von-holtzbrinck-verleger-die-zeit-helmut-schmidt" uniqueId="http://xml.zeit.de/2016/08/dieter-von-holtzbrinck-verleger-die-zeit-helmut-schmidt" year="2016" issue="8" ressort="Wirtschaft" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:24:00+00:00" expires="" genre="interview" date-last-modified="2016-02-15T07:58:53+00:00" date-first-released="2016-02-14T23:24:12.160320+00:00" date-last-published="2016-02-15T07:58:52.860266+00:00" last-semantic-change="2016-02-15T06:00:00+00:00" author="Sabine Rückert;Stefan Willeke">
+            <supertitle py:pytype="str">Dieter von Holtzbrinck</supertitle>
+            <title py:pytype="str">"Helmut Schmidt hat mich gegrillt"</title>
+            <text py:pytype="str">Dieter von Holtzbrinck ist seit 20 Jahren Verleger der ZEIT. Im Interview spricht er über das anfängliche Misstrauen der Redakteure und seine Scheu vor Öffentlichkeit.</text>
+            <description py:pytype="str">Dieter von Holtzbrinck ist seit 20 Jahren Verleger der ZEIT. Im Interview spricht er über das anfängliche Misstrauen der Redakteure und seine Scheu vor Öffentlichkeit.</description>
+            <byline py:pytype="str">von Sabine Rückert,  Stefan Willeke</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/wirtschaft/2016-02/dieter-von-holtzbrinck-verleger-die-zeit-2/" type="jpg" title="Holtzbrinck" align="left" publication-date="" expires="">
+              <bu py:pytype="str">ZEIT-Verleger Dieter von Holtzbrinck</bu>
+              <copyright py:pytype="str">© Markus Hintzen für DIE ZEIT </copyright>
+            </image>
+            <author href="http://xml.zeit.de/autoren/R/Sabine_Rueckert/index.xml" publication-date="" expires="">
+              <display_name py:pytype="str">Sabine Rückert</display_name>
+            </author>
+            <author href="http://xml.zeit.de/autoren/W/Stefan_Willeke/index.xml" publication-date="" expires="">
+              <display_name py:pytype="str">Stefan Willeke</display_name>
+            </author>
+          </block>
+        </container>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-59ce6df3-d152-4611-8dcd-6253195c4da2"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5794fa30-385c-4e5a-a71d-992605b87402"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-d58e3298-8804-4b4f-b376-ec12b3fb0a8d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-bbff570a-0fb8-4b54-8545-5592b64aa69d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-b91d9792-2225-4f27-9c5a-cd74ff5efdfb"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-58bd8a00-0ae4-41ac-8575-bcc13e035128"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-e8ec7eff-dcd0-4876-a1fd-2c2b9d03fe05"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-cf20a026-6e9e-457f-8cc2-8a2e62d979ef"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-9e6b6810-5c92-4df3-8b8b-a01d837c4349"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-b8aab68a-8b9c-4ce9-9b06-39180420fe18"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-36bdeebb-6f80-406e-95bc-de3d237d6cee"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-8665ec2e-b669-48fb-aae5-7c1a6558a881"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-d7f677f0-dc90-492c-af39-09cb59579cf4"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f1e245e1-54ae-4491-a6e6-7cb9f1fd53bf"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-1299d443-5085-41f6-99ee-7d5cb0923d90"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-2d3e604f-7a94-44da-8ab8-79747af3018b"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5780d13d-2315-4971-889e-4e14916e2e15"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-7c4db09e-3552-49d6-8cef-34f49514aef6"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-437578fd-e44f-46f1-a95d-21fe058df1a5"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-564d9e09-e2ff-45c6-bb28-66dabab5a477"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-6fc5f4ea-3c63-4b18-8270-ba3f9a9d7b5d"/>
+      </region>
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-8a2f6b95-f878-46fb-ae2d-9c7bbaea14fd" kind="minor">
+        <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-c304ef44-12a2-4f87-bf01-5448607b990b">
+          <block href="http://xml.zeit.de/1946/01/unsere-aufgabe" uniqueId="http://xml.zeit.de/1946/01/unsere-aufgabe" year="1946" issue="1" ressort="Politik" contenttype="article" publication-date="2016-02-14T23:18:00+00:00" expires="" date-last-modified="2016-02-17T10:16:17+00:00" date-first-released="1946-02-21T06:00:00+00:00" date-last-published="2016-02-17T10:16:16.261815+00:00" last-semantic-change="1946-02-21T06:00:00+00:00" serie="70 Jahre ZEIT">
+            <supertitle py:pytype="str">Journalismus</supertitle>
+            <title py:pytype="str">"Wir können nur hoffen, ein kleines Licht anzuzünden"</title>
+            <text py:pytype="str">Aufbau einer freien Presse, Kampf gegen Propaganda: Vor genau 70 Jahren formulierte die Redaktion der ZEIT ihre Aufgabe. Lesen Sie das Dokument im Wortlaut.  </text>
+            <description py:pytype="str">Aufbau einer freien Presse, Kampf gegen Propaganda: Vor genau 70 Jahren formulierte die Redaktion der ZEIT ihre Aufgabe. Lesen Sie das Dokument im Wortlaut.  </description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/gesellschaft/2016-02/die-zeit-1946-editorial/" type="jpg" title="Editorial" alt=" DIE ZEIT 1946: Unsere Aufgabe" align="left" publication-date="" expires="">
+              <bu py:pytype="str">Berlin im Mai 1946</bu>
+              <copyright py:pytype="str">© Fred Ramage//Keystone/Getty Images</copyright>
+            </image>
+          </block>
+        </container>
+        <container cp:type="cpextra" module="printbox" visible="True" visible_mobile="True" cp:__name__="id-a03f0d1f-f1d8-441f-8bf3-706f67dcd0e4">
+          <cp_extra id="printbox"/>
+        </container>
+      </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-0f325699-d6fb-4278-bfc9-5606ddac0a46" kind="duo" kind_title="Duo-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-f579d723-6f01-496e-9f27-425acc68bbdf" kind="duo">
+        <container cp:type="teaser" module="zon-square" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-c0a1b7ed-8de6-4fc0-af29-a231638441b4">
+          <block href="http://xml.zeit.de/2016/08/sos-kinderdorf-byumba-ruanda-spenden-zeit-leser" uniqueId="http://xml.zeit.de/2016/08/sos-kinderdorf-byumba-ruanda-spenden-zeit-leser" year="2016" issue="8" ressort="Entdecken" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:22:00+00:00" expires="" date-last-modified="2016-02-15T17:58:00+00:00" date-first-released="2016-02-14T23:22:08.245998+00:00" date-last-published="2016-02-15T17:57:59.995970+00:00" last-semantic-change="2016-02-15T17:42:53.177150+00:00" author="Wolfgang Lechner">
+            <supertitle py:pytype="str">SOS-Kinderdorf</supertitle>
+            <title py:pytype="str">Vestines Lächeln</title>
+            <text py:pytype="str">1994 verlor Vestine ihre Eltern im ruandischen Bürgerkrieg. Sie fand ein neues Zuhause in einem Kinderdorf, erbaut mit Spenden von ZEIT-Lesern. Was ist aus ihr geworden?</text>
+            <description py:pytype="str">1994 verlor Vestine ihre Eltern im ruandischen Bürgerkrieg. Sie fand ein neues Zuhause in einem Kinderdorf, erbaut mit Spenden von ZEIT-Lesern. Was ist aus ihr geworden?</description>
+            <byline py:pytype="str">von Wolfgang Lechner</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/entdecken/2016-02/sos-kinderdorf-byumba-ruanda-spenden-kinder/" type="jpg" align="left" publication-date="" expires="">
+              <bu py:pytype="str">In Byumba leben die Kinder in einer Pflegefamilie und gehen zur Schule</bu>
+              <copyright py:pytype="str" link="http://www.anna-lechner.com/de/index.htm">© ﻿﻿Anna Lechner</copyright>
+            </image>
+            <author href="http://xml.zeit.de/autoren/L/Wolfgang_Lechner/index.xml" publication-date="" expires="">
+              <display_name py:pytype="str">Wolfgang Lechner</display_name>
+            </author>
+          </block>
+        </container>
+      </region>
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-7d17c6c6-ede4-4333-b80f-b6cc7ff83a9a" kind="duo">
+        <container cp:type="teaser" module="zon-square" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-964a0fb8-5301-4c80-8ca3-8b1e99d5b9fe">
+          <block href="http://xml.zeit.de/2016/08/zeit-online-frueher-hamburg-anfang-berlin-umzug" uniqueId="http://xml.zeit.de/2016/08/zeit-online-frueher-hamburg-anfang-berlin-umzug" year="2016" issue="8" ressort="Kultur" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:20:00+00:00" expires="" date-last-modified="2016-02-19T17:32:28+00:00" date-first-released="2016-02-14T23:20:07.637681+00:00" date-last-published="2016-02-17T10:16:05.509753+00:00" last-semantic-change="2016-02-17T09:31:02.044361+00:00" author="David Hugendick">
+            <supertitle py:pytype="str">Journalismus</supertitle>
+            <title py:pytype="str">Wir Kellerkinder</title>
+            <text py:pytype="str">Na, wie viele Klicks? Und können Sie uns mal mit dem Internet helfen? Auch im vom Jetzt getriebenen Onlinejournalismus gibt es ein Früher, in dem alles wilder war.</text>
+            <description py:pytype="str">Na, wie viele Klicks? Und können Sie uns mal mit dem Internet helfen? Auch im vom Jetzt getriebenen Onlinejournalismus gibt es ein Früher, in dem alles wilder war.</description>
+            <byline py:pytype="str">von David Hugendick</byline>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/kultur/2016-02/zeit-kellerkinder-70-jahre-jubilaeum/" type="jpg" title="Kellerkinder" align="left" publication-date="" expires="">
+              <bu xsi:nil="true"/>
+              <copyright py:pytype="str" link="http://www.photocase.de/">© complize/photocase.de</copyright>
+            </image>
+            <author href="http://xml.zeit.de/autoren/H/David_Hugendick/index.xml" publication-date="" expires="">
+              <display_name py:pytype="str">David Hugendick</display_name>
+            </author>
+          </block>
+        </container>
+      </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-3dafb2bf-953c-4a32-89d2-c9bba45ab050" kind="duo" kind_title="Standard-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-be2e0857-6a9e-49d9-88c5-a78a531d12b7" kind="major">
+        <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-e2c477d9-4e65-44e1-89b2-8522e36c84b8">
+          <block href="http://xml.zeit.de/1946/01/rueckkehr-nach-deutschland" uniqueId="http://xml.zeit.de/1946/01/rueckkehr-nach-deutschland" year="1946" issue="1" ressort="Politik" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:34:00+00:00" expires="" date-last-modified="2016-02-16T17:05:36+00:00" date-first-released="1946-02-21T06:00:00+00:00" date-last-published="2016-02-16T17:05:35.652034+00:00" last-semantic-change="1946-02-21T06:00:00+00:00">
+            <supertitle py:pytype="str">Kriegsrückkehrer</supertitle>
+            <title py:pytype="str">"Die Straßen waren tot"</title>
+            <text py:pytype="str">Eine der ersten Reportagen der ZEIT: Der Heimkehrer Diether Burdenski beschreibt vor 70 Jahren, wie er aus Südamerika ins zerstörte Deutschland zurückkehrt. </text>
+            <description py:pytype="str">Eine der ersten Reportagen der ZEIT: Der Heimkehrer Diether Burdenski beschreibt vor 70 Jahren, wie er aus Südamerika ins zerstörte Deutschland zurückkehrt. </description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/politik/deutschland/2016-02/zweiter-weltkrieg-deutschland-dresden/" type="jpg" title="Dresden" alt="Zweiter Weltkrieg: Rückkehr nach Deutschland" align="left" publication-date="" expires="">
+              <bu py:pytype="str">Die Johannstraße in Dresden im März 1946</bu>
+              <copyright py:pytype="str">© Fred Ramage//Keystone/Getty Images</copyright>
+            </image>
+          </block>
+        </container>
+        <container cp:type="teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-cf1c2bed-fea5-48b8-9ea7-b2db6ca4b5ce">
+          <block href="http://xml.zeit.de/1946/01/duerfen-wir-hoffen" uniqueId="http://xml.zeit.de/1946/01/duerfen-wir-hoffen" year="1946" issue="1" ressort="Politik" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:32:00+00:00" expires="" date-last-modified="2016-02-16T17:07:01+00:00" date-first-released="1946-02-21T06:00:00+00:00" date-last-published="2016-02-16T17:07:00.888531+00:00" last-semantic-change="1946-02-21T06:00:00+00:00">
+            <supertitle py:pytype="str">Nachkriegsdeutschland</supertitle>
+            <title py:pytype="str">"Rings um uns liegt eine Welt in Trümmern"</title>
+            <text py:pytype="str">Dürfen wir hoffen? Das fragte die ZEIT vor 70 Jahren in ihrer ersten Ausgabe – und beschrieb in einem Essay die Gemütslage im zerstörten Nachkriegsdeutschland. </text>
+            <description py:pytype="str">Dürfen wir hoffen? Das fragte die ZEIT vor 70 Jahren in ihrer ersten Ausgabe – und beschrieb in einem Essay die Gemütslage im zerstörten Nachkriegsdeutschland. </description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/politik/deutschland/2016-02/nachkriegsdeutschland-zerstoerung-truemmer/" type="jpg" title="Nachkriegsdeutschland" alt="Nachkriegsdeutschland: Dürfen wir hoffen" align="left" publication-date="" expires="">
+              <bu py:pytype="str">Schulkinder im Jahr 1946 in Düsseldorf</bu>
+              <copyright py:pytype="str">© Fred Ramage//Keystone/Getty Images</copyright>
+            </image>
+          </block>
+        </container>
+      </region>
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-8ec33a8b-5876-431f-9172-923b45beb1f8" kind="minor"/>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-3d960783-4f11-4ec5-9006-fb3a89ab2a0d" kind="solo" kind_title="Simple-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-74ca0250-6332-4ea0-a944-053ed85a4a9f" kind="ranking" count="25" automatic="True" automatic_type="query">
+        <raw_query>published:"published" AND serie:"70 Jahre ZEIT"</raw_query>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-6aaf7c36-e8c8-475f-8872-2f67323c6fa8"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-b45ec6da-4eba-4003-a21b-db9d31fda507"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-893c8643-d9ba-422c-ab08-74a79513a811"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5e5ff5d1-bddf-46c0-a72e-2f19731f56d4"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-53656ad7-7a05-408d-b205-3dc4044f5bed"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-d6485e12-5621-4048-8033-b559ecae6ce8"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f13f0354-d9fd-4ea3-b888-3c70c30749bd"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-4e0627f8-b54a-4302-8ab5-4ee523e5a910"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-a9141c04-921d-40dc-ab83-bd06be110b01"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-272ea9b2-eba7-451b-a4f2-2a7397f043c5"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-166aea3f-100e-49e8-b48c-1ba371cf3660"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-2e62eb1a-b269-4a51-8fde-f9c61b635c64"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-536fdc3e-1fd8-4365-80c0-6489f696a173"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f6c12784-1839-4f9c-bf7b-598ebaa203fc"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-53f9be6e-4c29-47ea-8cc2-4597edbaff54"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-c162bade-88bf-4437-bfc0-57f3528563d5"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-0147e8db-1b8f-4c6c-acb9-ea9ef060cf96"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-59ca8286-9534-4109-b4e9-29906a3cad23"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-537ffdf6-4eab-4fc6-b956-137daaed3c8d"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-2fe9a24c-ef46-4773-b5bd-eff2dda7dbf8"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-97cb5e99-02ba-4845-aff4-41cd68a8547f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-ea57f74c-30c2-4f80-ad7c-20d772a3288f"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f6e80832-982e-4975-90c7-84a7825da353"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-647ee13c-1fed-446a-a771-75bfe6097e4b"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-c59b17fd-9c3f-4e31-8617-ed86f559ac9a"/>
+      </region>
+    </cluster>
+  </body>
+  <feed>
+    <reference type="intern" href="http://xml.zeit.de/2016/08/generationswechsel-die-zeit-diskussion-sexismus-redaktion-streitgespraech" year="2016" issue="8" ressort="Kultur" serie="70 Jahre ZEIT" contenttype="article" publication-date="" expires="" genre="interview" author="Sabine Rückert;Stefan Willeke">
+      <supertitle py:pytype="str">Medienwandel</supertitle>
+      <title py:pytype="str">"Lügenpresse? Pfeift doch drauf!"</title>
+      <text py:pytype="str">Dürfen Journalisten Politik machen? Anlässlich des ZEIT-Jubiläums streiten Theo Sommer und Charlotte Parnack über Transparenz, Grapscher im Büro und den Medienwandel.</text>
+      <description py:pytype="str">Dürfen Journalisten Politik machen? Anlässlich des ZEIT-Jubiläums streiten Theo Sommer und Charlotte Parnack über Transparenz, Grapscher im Büro und den Medienwandel.</description>
+      <byline py:pytype="str">von Sabine Rückert,  Stefan Willeke</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/kultur/2016-02/sommer-parnack/" type="jpg" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Charlotte Parnack ist seit zwei Jahren bei der ZEIT. Theo Sommer kennt die Geschichten und Gerüchte, die von den alten Zeiten handeln.</bu>
+        <copyright py:pytype="str">© Markus Tedeskino für DIE ZEIT</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/R/Sabine_Rueckert/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Sabine Rückert</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/W/Stefan_Willeke/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Stefan Willeke</display_name>
+      </author>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/zeit-magazin/2016/08/tagebuch-eintraege-nachkriegszeit-jugendliche" year="2016" issue="8" ressort="zeit-magazin" serie="70 Jahre ZEIT" contenttype="article" publication-date="" expires="" author="Anna Kemper">
+      <supertitle py:pytype="str">Tagebücher</supertitle>
+      <title py:pytype="str">"Mich packt eine Sehnsucht nach Leben"</title>
+      <text py:pytype="str">Wie haben junge Deutsche nach dem Kriegsende 1945 die ersten Monate im Frieden erlebt? Ihre Tagebücher erzählen von einer Zeit voller Ängste, Hoffnungen und Geheimnisse.</text>
+      <description py:pytype="str">Wie haben junge Deutsche nach dem Kriegsende 1945 die ersten Monate im Frieden erlebt? Ihre Tagebücher erzählen von einer Zeit voller Ängste, Hoffnungen und Geheimnisse.</description>
+      <byline py:pytype="str">von Anna Kemper</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/zeit-magazin/2016/08/nachkriegszeit-tagebuch-taenzer/" type="jpg" align="left" publication-date="" expires="2016-05-19T13:27:30+00:00">
+        <bu py:pytype="str">"Von da an tanzten wir jeden Tanz zusammen, er nicht einmal mit einem anderen Mädchen und ich kein Mal mit einem anderen Ami"</bu>
+        <copyright py:pytype="str">© Rune Fisker</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/K/Anna_Kemper/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Anna Kemper</display_name>
+      </author>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/1946/01/duerfen-wir-hoffen" year="1946" issue="1" ressort="Politik" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:32:00+00:00" expires="">
+      <supertitle py:pytype="str">Nachkriegsdeutschland</supertitle>
+      <title py:pytype="str">"Rings um uns liegt eine Welt in Trümmern"</title>
+      <text py:pytype="str">Dürfen wir hoffen? Das fragte die ZEIT vor 70 Jahren in ihrer ersten Ausgabe – und beschrieb in einem Essay die Gemütslage im zerstörten Nachkriegsdeutschland. </text>
+      <description py:pytype="str">Dürfen wir hoffen? Das fragte die ZEIT vor 70 Jahren in ihrer ersten Ausgabe – und beschrieb in einem Essay die Gemütslage im zerstörten Nachkriegsdeutschland. </description>
+      <byline xsi:nil="true"/>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/politik/deutschland/2016-02/nachkriegsdeutschland-zerstoerung-truemmer/" type="jpg" title="Nachkriegsdeutschland" alt="Nachkriegsdeutschland: Dürfen wir hoffen" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Schulkinder im Jahr 1946 in Düsseldorf</bu>
+        <copyright py:pytype="str">© Fred Ramage//Keystone/Getty Images</copyright>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/1946/01/rueckkehr-nach-deutschland" year="1946" issue="1" ressort="Politik" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:34:00+00:00" expires="">
+      <supertitle py:pytype="str">Kriegsrückkehrer</supertitle>
+      <title py:pytype="str">"Die Straßen waren tot"</title>
+      <text py:pytype="str">Eine der ersten Reportagen der ZEIT: Der Heimkehrer Diether Burdenski beschreibt vor 70 Jahren, wie er aus Südamerika ins zerstörte Deutschland zurückkehrt. </text>
+      <description py:pytype="str">Eine der ersten Reportagen der ZEIT: Der Heimkehrer Diether Burdenski beschreibt vor 70 Jahren, wie er aus Südamerika ins zerstörte Deutschland zurückkehrt. </description>
+      <byline xsi:nil="true"/>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/politik/deutschland/2016-02/zweiter-weltkrieg-deutschland-dresden/" type="jpg" title="Dresden" alt="Zweiter Weltkrieg: Rückkehr nach Deutschland" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Die Johannstraße in Dresden im März 1946</bu>
+        <copyright py:pytype="str">© Fred Ramage//Keystone/Getty Images</copyright>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/2016/08/zeit-online-frueher-hamburg-anfang-berlin-umzug" year="2016" issue="8" ressort="Kultur" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:20:00+00:00" expires="" author="David Hugendick">
+      <supertitle py:pytype="str">Journalismus</supertitle>
+      <title py:pytype="str">Wir Kellerkinder</title>
+      <text py:pytype="str">Na, wie viele Klicks? Und können Sie uns mal mit dem Internet helfen? Auch im vom Jetzt getriebenen Onlinejournalismus gibt es ein Früher, in dem alles wilder war.</text>
+      <description py:pytype="str">Na, wie viele Klicks? Und können Sie uns mal mit dem Internet helfen? Auch im vom Jetzt getriebenen Onlinejournalismus gibt es ein Früher, in dem alles wilder war.</description>
+      <byline py:pytype="str">von David Hugendick</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/kultur/2016-02/zeit-kellerkinder-70-jahre-jubilaeum/" type="jpg" title="Kellerkinder" align="left" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+        <copyright py:pytype="str" link="http://www.photocase.de/">© complize/photocase.de</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/H/David_Hugendick/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">David Hugendick</display_name>
+      </author>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/2016/08/sos-kinderdorf-byumba-ruanda-spenden-zeit-leser" year="2016" issue="8" ressort="Entdecken" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:22:00+00:00" expires="" author="Wolfgang Lechner">
+      <supertitle py:pytype="str">SOS-Kinderdorf</supertitle>
+      <title py:pytype="str">Vestines Lächeln</title>
+      <text py:pytype="str">1994 verlor Vestine ihre Eltern im ruandischen Bürgerkrieg. Sie fand ein neues Zuhause in einem Kinderdorf, erbaut mit Spenden von ZEIT-Lesern. Was ist aus ihr geworden?</text>
+      <description py:pytype="str">1994 verlor Vestine ihre Eltern im ruandischen Bürgerkrieg. Sie fand ein neues Zuhause in einem Kinderdorf, erbaut mit Spenden von ZEIT-Lesern. Was ist aus ihr geworden?</description>
+      <byline py:pytype="str">von Wolfgang Lechner</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/entdecken/2016-02/sos-kinderdorf-byumba-ruanda-spenden-kinder/" type="jpg" align="left" publication-date="" expires="">
+        <bu py:pytype="str">In Byumba leben die Kinder in einer Pflegefamilie und gehen zur Schule</bu>
+        <copyright py:pytype="str" link="http://www.anna-lechner.com/de/index.htm">© ﻿﻿Anna Lechner</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/L/Wolfgang_Lechner/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Wolfgang Lechner</display_name>
+      </author>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/1946/01/unsere-aufgabe" year="1946" issue="1" ressort="Politik" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:18:00+00:00" expires="">
+      <supertitle py:pytype="str">Journalismus</supertitle>
+      <title py:pytype="str">"Wir können nur hoffen, ein kleines Licht anzuzünden"</title>
+      <text py:pytype="str">Aufbau einer freien Presse, Kampf gegen Propaganda: Vor genau 70 Jahren formulierte die Redaktion der ZEIT ihre Aufgabe. Lesen Sie das Dokument im Wortlaut.  </text>
+      <description py:pytype="str">Aufbau einer freien Presse, Kampf gegen Propaganda: Vor genau 70 Jahren formulierte die Redaktion der ZEIT ihre Aufgabe. Lesen Sie das Dokument im Wortlaut.  </description>
+      <byline xsi:nil="true"/>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/gesellschaft/2016-02/die-zeit-1946-editorial/" type="jpg" title="Editorial" alt=" DIE ZEIT 1946: Unsere Aufgabe" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Berlin im Mai 1946</bu>
+        <copyright py:pytype="str">© Fred Ramage//Keystone/Getty Images</copyright>
+      </image>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/2016/08/dieter-von-holtzbrinck-verleger-die-zeit-helmut-schmidt" year="2016" issue="8" ressort="Wirtschaft" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:24:00+00:00" expires="" genre="interview" author="Sabine Rückert;Stefan Willeke">
+      <supertitle py:pytype="str">Dieter von Holtzbrinck</supertitle>
+      <title py:pytype="str">"Helmut Schmidt hat mich gegrillt"</title>
+      <text py:pytype="str">Dieter von Holtzbrinck ist seit 20 Jahren Verleger der ZEIT. Im Interview spricht er über das anfängliche Misstrauen der Redakteure und seine Scheu vor Öffentlichkeit.</text>
+      <description py:pytype="str">Dieter von Holtzbrinck ist seit 20 Jahren Verleger der ZEIT. Im Interview spricht er über das anfängliche Misstrauen der Redakteure und seine Scheu vor Öffentlichkeit.</description>
+      <byline py:pytype="str">von Sabine Rückert,  Stefan Willeke</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/wirtschaft/2016-02/dieter-von-holtzbrinck-verleger-die-zeit-2/" type="jpg" title="Holtzbrinck" align="left" publication-date="" expires="">
+        <bu py:pytype="str">ZEIT-Verleger Dieter von Holtzbrinck</bu>
+        <copyright py:pytype="str">© Markus Hintzen für DIE ZEIT </copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/R/Sabine_Rueckert/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Sabine Rückert</display_name>
+      </author>
+      <author href="http://xml.zeit.de/autoren/W/Stefan_Willeke/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Stefan Willeke</display_name>
+      </author>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/2016/08/zeit-empfang-hamburg-sekretaerinnen-gespraech" year="2016" issue="8" ressort="Kultur" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:26:00+00:00" expires="" genre="interview" author="Moritz von Uslar">
+      <supertitle py:pytype="str">Medienhaus</supertitle>
+      <title py:pytype="str">"Manchmal kippt es ins Verrückte"</title>
+      <text py:pytype="str">Die Damen vom ZEIT-Empfang haben viel erlebt. Ein Gespräch über schreiende Leser, Contenance im Chaos und eine unechte Tochter von Helmut Schmidt.</text>
+      <description py:pytype="str">Die Damen vom ZEIT-Empfang haben viel erlebt. Ein Gespräch über schreiende Leser, Contenance im Chaos und eine unechte Tochter von Helmut Schmidt.</description>
+      <byline py:pytype="str">von Moritz von Uslar</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/kultur/2016-02/zeit-empfang-hamburg-sekretaerinnen-gespraech/" type="jpg" title="Empfang" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Und immer höflich bleiben: Ingrid Neumann, Iris Barth und Renate Matthey am Empfang der ZEIT</bu>
+        <copyright py:pytype="str">© Vera Tammen für DIE ZEIT</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/U/Moritz_Uslarvon/index" publication-date="" expires="">
+        <display_name py:pytype="str">Moritz von Uslar</display_name>
+      </author>
+    </reference>
+    <reference type="intern" href="http://xml.zeit.de/2016/08/journalismus-medien-zeit-geburtstag-giovanni-di-lorenzo" year="2016" issue="8" ressort="Politik" serie="70 Jahre ZEIT" contenttype="article" publication-date="2016-02-14T23:26:00+00:00" expires="" author="Giovanni di Lorenzo">
+      <supertitle py:pytype="str">Journalismus</supertitle>
+      <title py:pytype="str">Die Welt ein bisschen erträglicher machen</title>
+      <text py:pytype="str">Seit 70 Jahren gibt es DIE ZEIT, nur acht Seiten hatte die erste Ausgabe im Februar 1946. Welche Menschen und Überzeugungen prägen die Zeitung heute?</text>
+      <description py:pytype="str">Seit 70 Jahren gibt es DIE ZEIT, nur acht Seiten hatte die erste Ausgabe im Februar 1946. Welche Menschen und Überzeugungen prägen die Zeitung heute?</description>
+      <byline py:pytype="str">von Giovanni di Lorenzo</byline>
+      <breadcrumb_title xsi:nil="true"/>
+      <image base-id="http://xml.zeit.de/politik/2016-02/journalismus-giovanni-di-lorenzo/" type="jpg" title="Journalismus" align="left" publication-date="" expires="">
+        <bu py:pytype="str">Jeden Donnerstag trifft sich die Redaktion zur Blattkritik. Hier am 11. Februar im 6. Stock
+des Helmut Schmidt Hauses. Das Berliner Büro ist per Video zugeschaltet</bu>
+        <copyright py:pytype="str" link="http://www.willing-holtz.de/">© Willing–Holtz für DIE ZEIT</copyright>
+      </image>
+      <author href="http://xml.zeit.de/autoren/L/Giovanni_di_Lorenzo/index.xml" publication-date="" expires="">
+        <display_name py:pytype="str">Giovanni di Lorenzo</display_name>
+      </author>
+    </reference>
+  </feed>
+  <teaser>
+    <title>70 Jahre DIE ZEIT</title>
+    <text>Am 21. Februar 1946 – vor rund 70 Jahren – erschien die erste Ausgabe der ZEIT. Wir feiern das Jubiläum mit einem Schwerpunkt auf ZEIT ONLINE. Alle Texte finden Sie hier.</text>
+  </teaser>
+</centerpage>

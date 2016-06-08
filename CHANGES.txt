@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - ZON-3135: Implement Embed Article Header Object
 
+- ZON-2039: Add series banner for articles
+
+- FIX: Naming things (Zeit.isMobileView)
+
 
 2.85 (2016-06-08)
 -----------------

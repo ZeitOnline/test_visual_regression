@@ -139,7 +139,7 @@ def test_article03_has_correct_webtrekk_values(testbrowser):
     assert '9: "zeitmz/essenundtrinken/article",' in webtrekk_config
     assert '10: "yes",' or '10: "",' in webtrekk_config
     assert '11: "",' in webtrekk_config
-    assert '12: window.Zeit.getSiteParam("site"),' in webtrekk_config
+    assert '12: window.Zeit.getSiteParam(),' in webtrekk_config
     assert '13: window.Zeit.breakpoint.getTrackingBreakpoint(),' \
         in webtrekk_config
     assert '14: "friedbert"' in webtrekk_config
@@ -219,7 +219,7 @@ def test_cp_has_correct_webtrekk_values(testbrowser):
     assert '9: "zeitmz/centerpage",' in webtrekk_config
     assert '10: "yes",' in webtrekk_config
     assert '11: "",' in webtrekk_config
-    assert '12: window.Zeit.getSiteParam("site"),' in webtrekk_config
+    assert '12: window.Zeit.getSiteParam(),' in webtrekk_config
     assert '13: window.Zeit.breakpoint.getTrackingBreakpoint(),' \
         in webtrekk_config
     assert '14: "friedbert",' in webtrekk_config

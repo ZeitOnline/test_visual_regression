@@ -73,6 +73,20 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     def newsletter_optin_tracking(self):
         return self.request.GET.get('newsletter-optin', None)
 
+    @zeit.web.reify
+    def has_series_attached(self):
+        return getattr(self.context, 'serie', None)
+
+    @zeit.web.reify
+    def series(self):
+        settings = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings
+        )
+
+        uid = u'{}/{}'.format(settings.series_prefix, self.context.serie.url)
+
+        return zeit.cms.interfaces.ICMSContent(uid, None)
+
 
 @view_config(name='seite',
              path_info='.*seite-(.*)',
