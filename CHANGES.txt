@@ -30,6 +30,8 @@ Change log for zeit.web
 
 - FIX: Fix framebuilder ressort and keywords
 
+- FIX: Use cinema variant for storystream header
+
 - MAINT: Have LazyProxy resolve product_id string to product object
 
 - MAINT: Remove support for ZMO product galleries (they were never used)
