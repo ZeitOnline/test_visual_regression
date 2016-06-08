@@ -52,6 +52,7 @@
                     <ul class="{{ blockname }}__list">
                         {% for atom in view.storystream_items %}
                             {% if atom == view.context %}
+                                <li class="{{ blockname }}__listcaption">Dieser Artikel</li>
                                 <li class="{{ blockname }}__listitem {{ blockname }}__listitem--current">
                                     {{ atom.tldr_title }}</a>
                                 </li>
