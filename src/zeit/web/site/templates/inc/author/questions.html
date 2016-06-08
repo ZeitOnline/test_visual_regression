@@ -1,12 +1,12 @@
 {% set questions = context.bio_questions.values() | rejectattr('answer', 'none') | list %}
 {% if questions | length %}
-	<hr class="author-separator">
-	<div class="author-questions">
-	{% for question in questions %}
-		<h3 class="author-questions__title">{{ question.title }}</h3>
-		<p class="author-questions__text">
-			{{ question.answer }}
-		</p>
-	{% endfor %}
-	</div>
+    <hr class="author-separator">
+    <div class="author-questions">
+    {% for question in questions %}
+        <h3 class="author-questions__title">{{ question.title }}</h3>
+        <p class="author-questions__text">
+            {{ question.answer }}
+        </p>
+    {% endfor %}
+    </div>
 {% endif %}

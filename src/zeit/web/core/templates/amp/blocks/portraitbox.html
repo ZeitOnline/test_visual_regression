@@ -1,12 +1,12 @@
 {% if block.name -%}
-	<div class="article__item article__item--wide">
-		<aside class="portraitbox">
-			<div class="portraitbox__heading">
-				{{ block.name }}
-			</div>
-			<div class="portraitbox__body">
-				{{ block.text | safe }}
-			</div>
-		</aside>
-	</div>
+    <div class="article__item article__item--wide">
+        <aside class="portraitbox">
+            <div class="portraitbox__heading">
+                {{ block.name }}
+            </div>
+            <div class="portraitbox__body">
+                {{ block.text | safe }}
+            </div>
+        </aside>
+    </div>
 {%- endif %}

@@ -43,7 +43,7 @@
             }
             return 'desktop.' + text;
         },
-        {% if toggles('tracking') and settings('c1_prefix') and view.c1_client %}
+        {% if toggles('tracking') and settings('c1_prefix') and view.c1_client -%}
         getCeleraOneOrigin: function() {
             if ( this.isMobileView() ) {
                 if ( this.is_wrapped ) {
@@ -100,15 +100,6 @@
             this.queue.push( arguments );
         }
     };
-
-    {#
-    // Alias for Meetrics. Has been added with v2.44 as fallback.
-    // TODO: remove as soon as Meetrics uses Zeit.isMobileView().
-    #}
-    window.ZMO = {
-        isMobileView: function() { return Zeit.isMobileView(); }
-    };
-
 
 {%- if view.context.advertising_enabled %}
     {%- if view.banner_toggles('viewport_zoom') == 'tablet' %}

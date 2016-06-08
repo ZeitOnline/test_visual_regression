@@ -1,6 +1,6 @@
 {% if module %}
-	{% set teaser = module | first_child %}
-	{% include
-	    ["zeit.web.core:templates/amp/nextread/{}.html".format(teaser | block_type),
-	     "zeit.web.core:templates/amp/nextread/nextread.html"] %}
+    {% set teaser = module | first_child %}
+    {% include
+        ["zeit.web.core:templates/amp/nextread/{}.html".format(teaser | block_type),
+         "zeit.web.core:templates/amp/nextread/nextread.html"] %}
 {% endif %}

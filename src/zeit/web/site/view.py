@@ -79,7 +79,8 @@ class Base(zeit.web.core.view.Base):
             path('/templates') or \
             path('/autoren/register') or \
             self.shared_cardstack_id or \
-                self.product_id in ('TGS', 'HaBl', 'WIWO', 'GOLEM'):
+                self.product_id in ('TGS', 'HaBl', 'WIWO', 'GOLEM',
+                                    'tonic-magazin', 'edition-f'):
             return 'noindex,follow,noodp,noydir,noarchive'
 
         return super(Base, self).meta_robots
@@ -146,7 +147,3 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
             self.context.advertising_enabled = self.banner_on
         except TypeError:
             raise pyramid.httpexceptions.HTTPNotFound()
-
-    @zeit.web.reify
-    def ressort(self):
-        return self.request.GET.get('ressort', '')

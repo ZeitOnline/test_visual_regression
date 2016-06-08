@@ -9,6 +9,9 @@
     {% if view.framebuilder_requires_webtrekk %}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
     {% endif %}
+    {% if view.framebuilder_requires_meetrics %}
+        {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
+    {% endif %}
     <script>
         var require = { baseUrl: '{{ request.asset_host }}/js/' };
     </script>

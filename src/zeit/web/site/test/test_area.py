@@ -29,6 +29,32 @@ def test_overview_area_should_have_a_sanity_bound_count(application):
     assert area.count == zeit.web.site.area.overview.SANITY_BOUND
 
 
+def test_overview_area_should_produce_correct_ranges(
+        clock, application, dummy_request):
+    clock.freeze(zeit.web.core.date.parse_date(
+        '2016-05-10T1:23:59.780412+00:00'))
+    area = get_area('overview', 20)
+    area.request = dummy_request
+
+    assert area._range_query() == (
+        'date_first_released:[2016-05-10T00:00:00Z '
+        'TO 2016-05-11T00:00:00Z]')
+
+    dummy_request.GET['date'] = '2016-05-09'
+    area = get_area('overview', 20)
+
+    assert area._range_query() == (
+        'date_first_released:[2016-05-09T00:00:00Z '
+        'TO 2016-05-10T00:00:00Z]')
+
+    dummy_request.GET['date'] = '2016-05-08'
+    area = get_area('overview', 20)
+
+    assert area._range_query() == (
+        'date_first_released:[2016-05-08T00:00:00Z '
+        'TO 2016-05-09T00:00:00Z]')
+
+
 def test_overview_area_should_overflow_if_necessary(
         application, dummy_request, monkeypatch):
 
