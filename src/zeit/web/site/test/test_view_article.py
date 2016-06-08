@@ -1431,3 +1431,55 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
     view = zeit.web.site.view_article.Article(context, dummy_request)
 
     assert view.webtrekk['customParameter']['cp27'] == 'cardstack.2/seite-1'
+
+
+def test_article_in_series_has_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+
+    assert len(browser.cssselect('.article-series')) == 1
+
+    title = browser.cssselect('.article-series__title')[0].text.strip()
+    assert title == '70 Jahre DIE ZEIT'
+
+    browser = testbrowser('/zeit-online/article/02')
+
+    assert len(browser.cssselect('.article-series')) == 1
+
+    title = browser.cssselect('.article-series__title')[0].text.strip()
+    assert title == 'Geschafft!'
+
+
+def test_article_in_series_has_banner_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+
+    assert len(browser.cssselect('.article-series__media')) == 1
+
+
+def test_article_in_series_has_correct_link(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+
+    url = browser.cssselect('.article-series__heading')[0].attrib['href']
+    assert url.endswith('/serie/70-jahre-zeit')
+
+    browser = testbrowser('/zeit-online/article/02')
+
+    url = browser.cssselect('.article-series__heading')[0].attrib['href']
+    assert url.endswith('/serie/geschafft')
+
+
+def test_article_in_series_has_no_fallback_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/02')
+
+    assert len(browser.cssselect('.article-series__media')) == 0
+
+
+def test_article_without_series_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_article_in_series_with_column_attribute_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/fischer')
+
+    assert len(browser.cssselect('.article-series')) == 0
