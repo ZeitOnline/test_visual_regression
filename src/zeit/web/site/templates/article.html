@@ -73,12 +73,23 @@
                 <div class="{{ blockname }}__content">
                     <ul class="{{ blockname }}__list">
                         {% for atom in view.storystream_items %}
+
                             {% if atom == view.context %}
                                 <li class="{{ blockname }}__listcaption">Dieser Artikel</li>
                                 <li class="{{ blockname }}__listitem {{ blockname }}__listitem--current">
                                     {{ atom.tldr_title }}</a>
                                 </li>
+
+                                {% if not loop.last %}
+                                    <li class="{{ blockname }}__listcaption">zuvor</li>
+                                {% endif %}
+
                             {% else %}
+
+                                {% if loop.first %}
+                                    <li class="{{ blockname }}__listcaption">danach</li>
+                                {% endif %}
+
                                 <li class="{{ blockname }}__listitem">
                                 <a href="{{ atom.uniqueId | create_url }}" class="{{ blockname }}__link">{{ atom.tldr_title }}
                                 </a></li>
