@@ -10,21 +10,19 @@
 	&__content
 		margin: 0 auto
 		position: relative
-		border-left: 1px $zon-mid-grey solid
 		padding: 0 $page-padding--small
 		width: 100%
 		+respond-min($break-tablet-min)
 			max-width: remify(660px)
 			padding: 0 $page-padding
-		// &:after
-		// 	content: ''
-		// 	position: absolute
-		// 	width: 1px
-		// 	height: 100%
-		// 	background-color: $zon-mid-grey
-		// 	left: -$page-padding--small
-		// 	top: 0
-		// 	z-index: 1
+		&:after
+			content: ''
+			position: absolute
+			width: 1px
+			height: 100%
+			background-color: $zon-mid-grey
+			left: 0
+			top: remify(4px)
 		&--header
 			padding-bottom: $vertical-space
 
@@ -33,31 +31,45 @@
 		margin: 0 0 $vertical-space 0
 		padding: $vertical-space 0 0
 	&__listcaption
-		color: $zon-mid-grey
+		color: $zon-dark-grey
 		font-size: remify(12px)
 		letter-spacing: $letter-spacing-l
 		line-height: round-to-precision(20/12, $precision: 1)
 		margin-bottom: remify(2px)
 		text-transform: uppercase
+		&--current
+			color: $zon-mid-grey
+
 	&__listitem
-		color: $zon-mid-grey
+		color: $zon-dark-grey
 		font-weight: bold
 		font-size: remify(16px)
 		line-height: round-to-precision(20/16, $precision: 1)
 		position: relative
-		//&:before
-			//+make-a-circle($color: $zon-dark-grey, $radius: 9px, $border-width: 4px)
-			//left: -(1.5*$page-padding--small)
+		&:before
+			+make-a-circle($color: currentColor, $radius: 9px, $border-width: 4px)
+			left: -($page-padding--small + remify(8px))
+			top: remify(1px)
+			z-index: 1
+		+respond-min($break-tablet-min)
+			&:before
+				left: -($page-padding + remify(8px))
+		&--current
+			color: $zon-mid-grey
 	&__link
-		// TODO: interaction-Mixin
-		color: $zon-dark-grey
+		color: currentColor
 
 	&__headline
 		position: relative
 		margin: 0
-		//&:before
-			//+make-a-circle($color: $zon-lighter-grey, $radius: 9px, $border-color: $zon-mid-grey, $border-width: 1px)
-			//left: -(1.5*$page-padding--small)
+		&:before
+			+make-a-circle($color: $zon-lighter-grey, $radius: 9px, $border-color: $zon-mid-grey, $border-width: 1px)
+			left: -($page-padding--small + remify(5px))
+			top: remify(3px)
+			z-index: 1
+		+respond-min($break-tablet-min)
+			&:before
+				left: -($page-padding + remify(5px))
 
 	&__headline-kicker
 		color: $zon-grey
@@ -77,3 +89,10 @@
 		font-style: italic
 		letter-spacing: $letter-spacing-s
 		line-height: round-to-precision(24/20, $precision: 1)
+
+
+.storystream-in-article__listitem + .storystream-in-article__listitem
+	margin-top: remify(10px)
+
+.storystream-in-article__listitem + .storystream-in-article__listcaption
+	margin-top: remify(18px)
