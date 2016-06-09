@@ -6,6 +6,6 @@
             request.GET.get('wt_kennung') ~ ('|' | urlencode) ~ request.GET.get('content_url').replace('http://', '')
         ) }}&amp;
         {{- request.GET.get('content_group') -}}&amp;
-        {{- request.GET.get('custom_parameter') -}}&amp;cd={{ user.ssoid }}" />
+        {{- request.GET.get('custom_parameter') -}}" />
     </div>
 </noscript>
