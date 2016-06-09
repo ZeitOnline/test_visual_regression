@@ -1348,3 +1348,12 @@ def view_xml(context, request):
             content_type='text/xml')
     except TypeError:
         return
+
+
+@pyramid.view.view_config(
+    route_name='login_state',
+    renderer='templates/inc/login-state-footer.html',
+    request_param='for=footer',
+    http_cache=60)
+def login_state_footer(request):
+    return zeit.web.core.security.get_login_state(request)

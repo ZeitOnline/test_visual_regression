@@ -107,8 +107,8 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
             'pixel for IVW not in DOM')
 
 
-def test_article03_has_correct_webtrekk_values(testbrowser):
-    browser = testbrowser('/artikel/03')
+def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
+    browser = httpbrowser(testserver.url + '/artikel/03')
     source = browser.cssselect(
         'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
     script = browser.cssselect(
@@ -146,10 +146,12 @@ def test_article03_has_correct_webtrekk_values(testbrowser):
     assert '15: ""' in webtrekk_config
     assert '25: "original"' in webtrekk_config
 
+    print source
+
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
-            'localhost/artikel/03,0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&'
+            '{}/artikel/03,0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&'
             'cg3=lebensart&cg4=zede&cg5=essen-trinken&cg6=weinkolumne&cg7=03&'
             'cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
             'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&cp3=1/7'
@@ -157,11 +159,12 @@ def test_article03_has_correct_webtrekk_values(testbrowser):
             't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
-            'cp15=&cp25=original&cp26=article&cp27=') in source
+            'cp15=&cp25=original&cp26=article&cp27='.format(
+                testserver.url.replace('http://', ''))) in source
 
 
-def test_article03_page2_has_correct_webtrekk_values(testbrowser):
-    browser = testbrowser('/artikel/03/seite-2')
+def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
+    browser = httpbrowser(testserver.url + '/artikel/03/seite-2')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
@@ -177,7 +180,7 @@ def test_article03_page2_has_correct_webtrekk_values(testbrowser):
     # noscript
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
-            'localhost/artikel/03,0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&'
+            '{}/artikel/03,0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&'
             'cg3=lebensart&cg4=zede&cg5=essen-trinken&cg6=weinkolumne&'
             'cg7=seite-2&cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
             'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&cp3=2/7'
@@ -185,11 +188,12 @@ def test_article03_page2_has_correct_webtrekk_values(testbrowser):
             't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
-            'cp15=&cp25=original&cp26=article&cp27=') in source
+            'cp15=&cp25=original&cp26=article&cp27='.format(
+                testserver.url.replace('http://', ''))) in source
 
 
-def test_cp_has_correct_webtrekk_values(testbrowser):
-    browser = testbrowser('/zeit-magazin/index')
+def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
+    browser = httpbrowser(testserver.url + '/zeit-magazin/index')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
@@ -230,30 +234,32 @@ def test_cp_has_correct_webtrekk_values(testbrowser):
 
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
             'redaktion.zeit-magazin...centerpage.zmlb%7C'
-            'localhost/zeit-magazin/index,0,0,0,0,0,0,0,0&cg1=redaktion&'
+            '{}/zeit-magazin/index,0,0,0,0,0,0,0,0&cg1=redaktion&'
             'cg2=centerpage&cg3=zeit-magazin&cg4=zmlb&cg5=&cg6=&cg7=index&'
             'cg8=zeitmz/centerpage&cg9=2016-04-12&cp1=&'
             'cp2=zeit-magazin/bild-text&cp3=1/1&cp4=zeit-magazin&'
             'cp5=2016-05-23+12%3A14%3A06.113344%2B02%3A00&cp6=&cp7=&cp8=zmlb&'
             'cp9=zeitmz/centerpage&cp10=yes&cp11=&cp12=desktop.site&'
             'cp13=stationaer&cp14=friedbert&cp15=&cp25=original&'
-            'cp26=centerpage.ZMO&cp27=') in source
+            'cp26=centerpage.ZMO&cp27='.format(
+                testserver.url.replace('http://', ''))) in source
 
 
-def test_webtrekk_series_tag_is_set_corectly(testbrowser):
-    browser = testbrowser('/artikel/06')
+def test_webtrekk_series_tag_is_set_corectly(testserver, httpbrowser):
+    browser = httpbrowser(testserver.url + '/artikel/06')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
         'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
 
+    host = testserver.url.replace('http://', '')
     assert ('var Z_WT_KENNUNG = "redaktion.zeit-magazin..toedlichekeime'
-            '.article.zei|localhost/artikel/06";') in webtrekk_config
+            '.article.zei|{}/artikel/06";'.format(host)) in webtrekk_config
     assert u'6: "tödlichekeime",' in webtrekk_config
 
     assert ('redaktion.zeit-magazin..toedlichekeime.article.zei%7C'
-            'localhost/artikel/06,0,0,0,0,0,0,0,0') in source
+            '{}/artikel/06,0,0,0,0,0,0,0,0'.format(host)) in source
 
 
 def test_webtrekk_has_session_parameter(testbrowser):
