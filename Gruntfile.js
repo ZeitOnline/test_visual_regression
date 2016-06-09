@@ -10,10 +10,10 @@ module.exports = function(grunt) {
         rubyVersion: '1.9.3',
         tasks: {
             production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy:css', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy:css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-miminal', 'sass:dev-basic', 'postcss:dev', 'copy:css', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
-            css: [ 'compass:dist', 'compass:amp' ],
+            css: [ 'sass:dist', 'sass:amp', 'postcss:dist' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
@@ -30,10 +30,26 @@ module.exports = function(grunt) {
         }
     });
 
+    // Autoprefixer
+    var autoprefixer = require('autoprefixer')({
+        browsers: [
+            'Chrome >= 35',
+            'Firefox >= 38',
+            'Edge >= 12',
+            'Explorer >= 9',
+            'iOS >= 8',
+            'Safari >= 8',
+            'Android 2.3',
+            'Android >= 4',
+            'Opera >= 12'
+        ]
+    });
+
     // configuration
     grunt.initConfig({
 
         // read from package.json
+        project: project,
         pkg: grunt.file.readJSON('package.json'),
 
         auto_install: {
@@ -64,73 +80,80 @@ module.exports = function(grunt) {
         },
 
         // compile sass code
-        compass: {
-            // general options
+        sass: {
             options: {
-                assetCacheBuster: false,
-                bundleExec: false,
-                cssDir: project.codeDir + 'css',
-                fontsDir: project.codeDir + 'fonts',
-                httpFontsPath: '../../../latest/fonts',
-                httpPath: '/',
-                imagesPath: project.codeDir + 'img',
-                javascriptsPath: project.codeDir + 'js',
-                sassDir: project.sourceDir + 'sass',
-                sassPath: path.resolve(project.sourceDir + 'sass'),
-                raw: 'preferred_syntax=:sass\n'
+                sourceMap: true,
+                includePaths: [
+                    path.resolve(project.sourceDir + 'sass')
+                ]
             },
-            dev: {
-                options: {
-                    specify: [
-                        project.sourceDir + 'sass/**/*.s{a,c}ss',
-                        // there is still ongoing work pls don't put it in again (as)
-                        // '!' + project.sourceDir + 'sass/**/advertorial.*',
-                        '!' + project.sourceDir + 'sass/**/unresponsive.*',
-                        '!' + project.sourceDir + 'sass/**/all-old-ie.*',
-                        '!' + project.sourceDir + 'sass/**/ie-navi.*'
-                    ],
-                    sourcemap: true,
-                    environment: 'development',
-                    outputStyle: 'expanded'
-                }
-            },
-            'dev-all': {
-                options: {
-                    sourcemap: true,
-                    environment: 'development',
-                    outputStyle: 'expanded'
+            'dev-miminal': {
+                files: {
+                    '<%= project.codeDir %>css/web.campus/screen.css': '<%= project.sourceDir %>sass/web.campus/screen.sass',
+                    'src/zeit/web/static/css/web.magazin/screen.css': 'sass/web.magazin/screen.sass',
+                    'src/zeit/web/static/css/web.site/screen.css': 'sass/web.site/screen.sass'
                 }
             },
             'dev-basic': {
-                options: {
-                    specify: [
-                        project.sourceDir + 'sass/**/screen.sass'
-                    ],
-                    sourcemap: true,
-                    environment: 'development',
-                    outputStyle: 'expanded'
+                files: {
+                    'src/zeit/web/static/css/web.campus/advertorial.css': 'sass/web.campus/advertorial.sass',
+                    'src/zeit/web/static/css/web.magazin/advertorial.css': 'sass/web.magazin/advertorial.sass',
+                    'src/zeit/web/static/css/web.site/advertorial.css': 'sass/web.site/advertorial.sass',
+                    'src/zeit/web/static/css/web.campus/amp.css': 'sass/web.campus/amp.sass',
+                    'src/zeit/web/static/css/web.magazin/amp.css': 'sass/web.magazin/amp.sass',
+                    'src/zeit/web/static/css/web.site/amp.css': 'sass/web.site/amp.sass',
+                    'src/zeit/web/static/css/web.site/framebuilder-minimal.css': 'sass/web.site/framebuilder-minimal.sass',
+                    'src/zeit/web/static/css/web.site/video-player.css': 'sass/web.site/video-player.sass'
                 }
             },
-            amp: {
-                options: {
-                    specify: [
-                        project.sourceDir + 'sass/**/amp.s{a,c}ss'
-                    ],
-                    force: true,
-                    environment: 'production',
-                    outputStyle: 'compact'
+            'dev-all': {
+                files: {
+                    'src/zeit/web/static/css/web.magazin/all-old-ie.css': 'sass/web.magazin/all-old-ie.sass',
+                    'src/zeit/web/static/css/web.site/all-old-ie.css': 'sass/web.site/all-old-ie.sass',
+                    'src/zeit/web/static/css/web.site/ie-navi.css': 'sass/web.site/ie-navi.sass',
+                    'src/zeit/web/static/css/web.site/unresponsive.css': 'sass/web.site/unresponsive.sass'
                 }
+            },
+            'amp': {
+                files: {
+                    'src/zeit/web/static/css/web.campus/amp.css': 'sass/web.campus/amp.sass',
+                    'src/zeit/web/static/css/web.magazin/amp.css': 'sass/web.magazin/amp.sass',
+                    'src/zeit/web/static/css/web.site/amp.css': 'sass/web.site/amp.sass',
+                }
+            },
+            'dist': {
+                files: {
+                    '<%= project.codeDir %>css/web.campus/advertorial.css': '<%= project.sourceDir %>sass/web.campus/advertorial.sass',
+                    '<%= project.codeDir %>css/web.magazin/advertorial.css': '<%= project.sourceDir %>sass/web.magazin/advertorial.sass',
+                    '<%= project.codeDir %>css/web.site/advertorial.css': '<%= project.sourceDir %>sass/web.site/advertorial.sass',
+                    '<%= project.codeDir %>css/web.magazin/all-old-ie.css': '<%= project.sourceDir %>sass/web.magazin/all-old-ie.sass',
+                    '<%= project.codeDir %>css/web.site/all-old-ie.css': '<%= project.sourceDir %>sass/web.site/all-old-ie.sass',
+                    '<%= project.codeDir %>css/web.campus/amp.css': '<%= project.sourceDir %>sass/web.campus/amp.sass',
+                    '<%= project.codeDir %>css/web.magazin/amp.css': '<%= project.sourceDir %>sass/web.magazin/amp.sass',
+                    '<%= project.codeDir %>css/web.site/amp.css': '<%= project.sourceDir %>sass/web.site/amp.sass',
+                    '<%= project.codeDir %>css/web.site/framebuilder-minimal.css': '<%= project.sourceDir %>sass/web.site/framebuilder-minimal.sass',
+                    '<%= project.codeDir %>css/web.site/ie-navi.css': '<%= project.sourceDir %>sass/web.site/ie-navi.sass',
+                    '<%= project.codeDir %>css/web.campus/screen.css': '<%= project.sourceDir %>sass/web.campus/screen.sass',
+                    '<%= project.codeDir %>css/web.magazin/screen.css': '<%= project.sourceDir %>sass/web.magazin/screen.sass',
+                    '<%= project.codeDir %>css/web.site/screen.css': '<%= project.sourceDir %>sass/web.site/screen.sass',
+                    '<%= project.codeDir %>css/web.site/unresponsive.css': '<%= project.sourceDir %>sass/web.site/unresponsive.sass',
+                    '<%= project.codeDir %>css/web.site/video-player.css': '<%= project.sourceDir %>sass/web.site/video-player.sass'
+                }
+            }
+        },
+
+        postcss: {
+            options: {
+                processors: [autoprefixer]
+            },
+            dev: {
+                src: '<%= project.codeDir %>css/**/*.css'
             },
             dist: {
                 options: {
-                    specify: [
-                        project.sourceDir + 'sass/**/*.s{a,c}ss',
-                        '!' + project.sourceDir + 'sass/**/amp.s{a,c}ss'
-                    ],
-                    force: true,
-                    environment: 'production',
-                    outputStyle: 'compressed'
-                }
+                    processors: [autoprefixer, require('cssnano')]
+                },
+                src: '<%= project.codeDir %>css/**/*.css'
             }
         },
 
@@ -359,9 +382,9 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            compass: {
-                files: [ '<%= compass.options.sassDir %>' + '/**/*.s{a,c}ss' ],
-                tasks: [ 'compass:dev' ],
+            sass: {
+                files: [ 'sass/**/*.s{a,c}ss' ],
+                tasks: [ 'sass:dev-minimal', 'postcss:dist' ],
                 options: {
                     interrupt: true,
                     // needed to call `grunt watch` from outside zeit.web
@@ -387,9 +410,9 @@ module.exports = function(grunt) {
             livereload: {
                 // This target doesn't run any tasks
                 // But when a file in `dist/css/*` is edited it will trigger the live reload
-                // So when compass compiles the files, it will only trigger live reload on
+                // So when sass compiles the files, it will only trigger live reload on
                 // the css files and not on the scss files
-                files: [ '<%= compass.options.cssDir %>' + '/**/*.css' ],
+                files: [ 'src/zeit/web/static/css/**/*.css' ],
                 options: {
                     livereload: true
                 }
@@ -416,7 +439,6 @@ module.exports = function(grunt) {
     // load node modules
     grunt.loadNpmTasks('grunt-auto-install');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
@@ -424,7 +446,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-modernizr-builder');
+    grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-sftp-deploy');
+    grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-svgstore');
     grunt.loadNpmTasks('main-bower-files');
@@ -445,9 +469,9 @@ module.exports = function(grunt) {
     grunt.registerTask('monitor', function(target) {
         var config = grunt.config();
 
-        if ( target in config.compass ) {
-            grunt.log.writeln('Using task compass:' + target);
-            config.watch.compass.tasks = [ 'compass:' + target ];
+        if ( target in config.sass ) {
+            grunt.log.writeln('Using task sass:' + target);
+            config.watch.sass.tasks = [ 'sass:' + target ];
         }
 
         // grunt.log.writeflags(config);

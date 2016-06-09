@@ -5,22 +5,4 @@ $inline-block-support-threshold: 100 !default
 // Disable legacy support for has-layout
 $has-layout-support-threshold: 100 !default
 
-@import compass
-
-// ---------- Configure compass ----------
-// browsers() = android, android-chrome, android-firefox, blackberry, chrome, firefox, ie, ie-mobile, ios-safari, opera, opera-mini, opera-mobile, safari
-// $supported-browsers: reject(browsers(), opera-mini, android)
-@if compass-env() == "development"
-    $debug-browser-support: true
-    $debug-configuration: true
-
-// Compass Background Size
-$background-size-threshold: 0.1
-// Compass Images
-$svg-gradient-shim-threshold: 100 // Disable SVG gradient support in Opera and IE9
-// Compass Inline Block
-$inline-block-alignment: none
-// Compass Border Radius
-$border-radius-threshold: 100 // Disable prefixed border-radius support
-// Compass Box Shadow
-$box-shadow-support-threshold: 100 // Disable prefixed support for box-shadow
+$base-font-size: 16px !default
