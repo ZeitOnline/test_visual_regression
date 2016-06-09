@@ -1,3 +1,42 @@
+.storystream-in-article-teaser
+	display: none
+	margin: remify(40px) (-$page-padding)
+
+	+respond-min($break-tablet-min)
+		display: block
+
+	&__container
+		padding: 0 $page-padding--small
+		background: $zon-lighter-grey
+
+	&__content
+		border-left: 1px $zon-mid-grey solid
+		font-family: $font-tabletgothic
+		margin: 0 auto
+		padding: $vertical-space $page-padding
+		width: 100%
+		max-width: remify(660px)
+		+default-article-textlink($color: $zon-dark-grey, $hover: $zon-dark-grey, $border-color: rgba(68, 68, 68, 0.4), $border-color--hover: rgba(68, 68, 68, 1))
+
+	&__kicker
+		color: $zon-grey
+		font-size: remify(14px)
+		font-weight: normal
+		letter-spacing: $letter-spacing-m
+		line-height: round-to-precision(16/14, $precision: 1)
+		text-transform: uppercase
+		position: relative
+		margin-right: remify(18px)
+		&:before
+			+make-a-circle($color: $zon-lighter-grey, $radius: 9px, $border-color: $zon-mid-grey, $border-width: 1px)
+			left: -($page-padding + remify(6px))
+			top: remify(3px)
+
+	&__link
+		letter-spacing: $letter-spacing-s
+
+
+
 .storystream-in-article
 	margin: 0 (-$page-padding)
 
@@ -43,6 +82,8 @@
 		text-transform: uppercase
 		&--current
 			color: $zon-mid-grey
+		+respond-min($break-tablet-min)
+			margin-bottom: remify(2px)
 
 	&__listitem
 		color: $zon-dark-grey
@@ -104,6 +145,10 @@
 
 .storystream-in-article__listitem + .storystream-in-article__listitem
 	margin-top: remify(10px)
+	+respond-min($break-tablet-min)
+		margin-top: remify(14px)
 
 .storystream-in-article__listitem + .storystream-in-article__listcaption
 	margin-top: remify(18px)
+	+respond-min($break-tablet-min)
+		margin-top: remify(20px)

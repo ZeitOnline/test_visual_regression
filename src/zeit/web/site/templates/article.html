@@ -53,13 +53,32 @@
     {% include "zeit.web.site:templates/inc/article/pagination.tpl" %}
 {% endblock article_pagination %}
 
+
+{% block article_storystreamteaser_teaser %}
+    {% if view.storystream %}
+
+        {% set blockname = 'storystream-in-article-teaser' %}
+
+        {# TODO: div or article or aside ? #}
+        <aside class="{{ blockname }}">
+            <div class="{{ blockname }}__container">
+                <div class="{{ blockname }}__content">
+                    <span class="{{ blockname }}__kicker">Im Überblick</span>
+                    <a href="#zeitleiste" class="{{ blockname }}__link"> Zeitleiste anzeigen</a>
+                    </h2>
+                </div>
+            </div>
+        </aside>
+    {% endif %}
+{% endblock article_storystreamteaser_teaser %}
+
 {% block article_storystreamteaser %}
     {% if view.storystream %}
 
         {% set blockname = 'storystream-in-article' %}
 
         {# TODO: div or article or aside ? #}
-        <aside class="{{ blockname }}">
+        <aside class="{{ blockname }}" id="zeitleiste">
             <div class="{{ blockname }}__container {{ blockname }}__container--header">
                 <div class="{{ blockname }}__content {{ blockname }}__content--header {{ blockname }}__content--with-border">
                     <h2 class="{{ blockname }}__headline">
