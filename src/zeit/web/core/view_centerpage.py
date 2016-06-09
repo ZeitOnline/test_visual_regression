@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import pyramid.view
 import lxml.etree
+import urllib
 import zope.component
 
 import zeit.cms.interfaces
@@ -10,6 +11,7 @@ import zeit.content.cp.interfaces
 import zeit.web.core.interfaces
 import zeit.web.core.centerpage
 import zeit.web.core.view
+import zeit.web.core.utils
 
 
 class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
@@ -104,11 +106,20 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
     def canonical_url(self):
-        url = super(Centerpage, self).canonical_url.replace(
-            'index.cp2015', 'index')  # XXX: remove soon (aps)
-        page = self.request.params.get('p', None)
-        param_str = '?p=' + page if page and page != '1' else ''
-        return url + param_str
+        ranking = self.area_ranking
+        url = super(Centerpage, self).canonical_url
+
+        if ranking and ranking.current_page == 1:
+            remove_param = ranking.page_info(1)['remove_get_param']
+            return zeit.web.core.utils.remove_get_params(
+                url, remove_param)
+
+        if ranking and ranking.current_page > 1:
+            get_param = ranking.page_info(
+                ranking.current_page)['append_get_param']
+            return zeit.web.core.utils.add_get_params(url, **get_param)
+
+        return url
 
     @zeit.web.reify
     def area_ranking(self):
@@ -124,8 +135,10 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         if ranking is None:
             return None
         if ranking.current_page < len(ranking.pagination):
-            return zeit.web.core.template.append_get_params(
-                self.request, p=ranking.current_page + 1)
+            get_param = ranking.page_info(
+                ranking.current_page + 1)['append_get_param']
+            return zeit.web.core.utils.add_get_params(
+                self.request.url, **get_param)
 
     @zeit.web.reify
     def prev_page_url(self):
@@ -134,11 +147,15 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
             return None
         # suppress page param for page 1
         if ranking.current_page == 2:
-            return zeit.web.core.template.remove_get_params(
-                self.request.url, 'p')
+            remove_param = ranking.page_info(
+                ranking.current_page)['remove_get_param']
+            return zeit.web.core.utils.remove_get_params(
+                self.request.url, remove_param)
         elif ranking.current_page > 2:
-            return zeit.web.core.template.append_get_params(
-                self.request, p=ranking.current_page - 1)
+            get_param = ranking.page_info(
+                ranking.current_page - 1)['append_get_param']
+            return zeit.web.core.utils.add_get_params(
+                self.request.url, **get_param)
 
     @zeit.web.reify
     def is_hp(self):
@@ -153,8 +170,9 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
     def meta_robots(self):
+        ranking = self.area_ranking
         # Prevent continuation pages from being indexed
-        if zeit.web.core.view.is_paginated(self.context, self.request):
+        if ranking is not None and ranking.current_page > 1:
             return 'noindex,follow,noodp,noydir,noarchive'
         return super(Centerpage, self).meta_robots
 
@@ -176,12 +194,12 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
     @zeit.web.reify
     def cardstack_head(self):
         url = super(Centerpage, self).cardstack_head
-        return zeit.web.core.utils.update_query(url, static='true')
+        return zeit.web.core.utils.update_get_params(url, static='true')
 
     @zeit.web.reify
     def cardstack_body(self):
         url = super(Centerpage, self).cardstack_body
-        return zeit.web.core.utils.update_query(url, static='true')
+        return zeit.web.core.utils.update_get_params(url, static='true')
 
 
 class CenterpagePage(object):

@@ -45,36 +45,6 @@ class Centerpage(
     def ressort(self):
         return 'homepage' if self.is_hp else super(Centerpage, self).ressort
 
-    @zeit.web.reify
-    def area_ranking(self):
-        for region in self.regions:
-            for area in region.values():
-                if zeit.web.core.interfaces.IPagination.providedBy(area):
-                    return area
-        return None
-
-    @zeit.web.reify
-    def next_page_url(self):
-        ranking = self.area_ranking
-        if ranking is None:
-            return None
-        if ranking.current_page < len(ranking.pagination):
-            return zeit.web.core.template.append_get_params(
-                self.request, p=ranking.current_page + 1)
-
-    @zeit.web.reify
-    def prev_page_url(self):
-        ranking = self.area_ranking
-        if ranking is None:
-            return None
-        # suppress page param for page 1
-        if ranking.current_page == 2:
-            return zeit.web.core.template.remove_get_params(
-                self.request.url, 'p')
-        elif ranking.current_page > 2:
-            return zeit.web.core.template.append_get_params(
-                self.request, p=ranking.current_page - 1)
-
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ICP2015,

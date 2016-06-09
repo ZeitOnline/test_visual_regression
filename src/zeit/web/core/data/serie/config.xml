@@ -1,0 +1,8 @@
+<dynamic-cp-config>
+    <head>
+        <cp_template>http://xml.zeit.de/serie/template.xml</cp_template>
+    </head>
+    <body key="@url">
+        <include href="http://xml.zeit.de/config/series.xml" xpointer="//series"/>
+    </body>
+</dynamic-cp-config>
