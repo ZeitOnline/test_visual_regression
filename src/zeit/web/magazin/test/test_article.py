@@ -146,8 +146,6 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '15: ""' in webtrekk_config
     assert '25: "original"' in webtrekk_config
 
-    print source
-
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
@@ -269,6 +267,20 @@ def test_webtrekk_has_session_parameter(testbrowser):
     webtrekk_config = script.text_content().strip()
 
     assert '1: window.Zeit.wrapped.client' in webtrekk_config
+
+
+def test_webtrekk_noscript_contains_user_info(testserver, httpbrowser):
+    with mock.patch('zeit.web.core.security.get_user_info') as get_user:
+        get_user.return_value = {
+            'ssoid': '123',
+            'mail': 'test@example.org',
+            'name': 'jrandom',
+        }
+        browser = httpbrowser(testserver.url + '/artikel/03',
+                              cookies={'my_sso_cookie': 'just_be_present'})
+        webtrekk = browser.cssselect(
+            'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+        assert 'cd=123' in webtrekk
 
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')

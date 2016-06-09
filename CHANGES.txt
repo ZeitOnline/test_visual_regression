@@ -4,7 +4,7 @@ Change log for zeit.web
 2.87 (unreleased)
 -----------------
 
-- FIX: Add Customer Id again
+- FIX: Actually add user id to webtrekk noscript
 
 
 2.86 (2016-06-09)
