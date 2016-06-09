@@ -61,7 +61,7 @@
         {# TODO: div or article or aside ? #}
         <aside class="{{ blockname }}">
             <div class="{{ blockname }}__container {{ blockname }}__container--header">
-                <div class="{{ blockname }}__content {{ blockname }}__content--header">
+                <div class="{{ blockname }}__content {{ blockname }}__content--header {{ blockname }}__content--with-border">
                     <h2 class="{{ blockname }}__headline">
                         <span class="{{ blockname }}__headline-kicker">Im Überblick</span>
                         <span class="visually-hidden">:</span>
@@ -70,7 +70,7 @@
                 </div>
             </div>
             <div class="{{ blockname }}__container">
-                <div class="{{ blockname }}__content">
+                <div class="{{ blockname }}__content {{ blockname }}__content--with-border">
                     <ul class="{{ blockname }}__list">
                         {% for atom in view.storystream_items %}
 
@@ -97,7 +97,9 @@
                         {% endfor %}
                     </ul>
                 </div>
-                <a class="button" href="{{ view.storystream.uniqueId | create_url }}">zum Überblick</a>
+                <div class="{{ blockname }}__content {{ blockname }}__content--footer">
+                    <a class="button" href="{{ view.storystream.uniqueId | create_url }}">zum Live-Dossier</a>
+                </div>
             </div>
         </aside>
     {% endif %}

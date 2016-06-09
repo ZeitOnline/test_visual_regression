@@ -15,21 +15,25 @@
 		+respond-min($break-tablet-min)
 			max-width: remify(660px)
 			padding: 0 $page-padding
-		&:after
-			content: ''
-			position: absolute
-			width: 1px
-			height: 100%
-			background-color: $zon-mid-grey
-			left: 0
-			top: remify(4px)
 		&--header
 			padding-bottom: $vertical-space
+		&--footer
+			padding: remify(25px) 0 $vertical-space
+		&--with-border
+			&:after
+				content: ''
+				position: absolute
+				width: 1px
+				height: 100%
+				background-color: $zon-mid-grey
+				left: 0
+				top: remify(4px)
 
 	&__list
 		list-style: none
-		margin: 0 0 $vertical-space 0
+		margin: 0
 		padding: $vertical-space 0 0
+
 	&__listcaption
 		color: $zon-dark-grey
 		font-size: remify(12px)
@@ -56,8 +60,12 @@
 				left: -($page-padding + remify(8px))
 		&--current
 			color: $zon-mid-grey
+		&:last-child
+			padding-bottom: remify(11px)
+
 	&__link
 		color: currentColor
+		+animated-interaction($color: $zon-dark-grey)
 
 	&__headline
 		position: relative
@@ -89,6 +97,9 @@
 		font-style: italic
 		letter-spacing: $letter-spacing-s
 		line-height: round-to-precision(24/20, $precision: 1)
+		+respond-min($break-tablet-min)
+			font-size: remify(24px)
+			line-height: round-to-precision(29/24, $precision: 1)
 
 
 .storystream-in-article__listitem + .storystream-in-article__listitem
