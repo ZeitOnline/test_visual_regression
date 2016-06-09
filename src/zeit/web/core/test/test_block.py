@@ -88,17 +88,19 @@ def test_header_video_should_not_be_created_if_layout_doesnt_fit(application):
     assert h_video is None
 
 
-def test_header_image_should_be_created_if_layout_is_zmo_header():
+def test_header_image_should_be_created_if_display_mode_is_header():
     model_block = mock.Mock()
-    model_block.layout.id = 'zmo-xl-header'
+    model_block.display_mode = 'header'
+    model_block.variant_name = 'original'
     model_block.is_empty = False
     h_image = zeit.web.core.block.HeaderImage(model_block)
     assert type(h_image) == zeit.web.core.block.HeaderImage
 
 
-def test_header_image_should_not_be_created_if_layout_does_not_fit():
+def test_header_image_should_not_be_created_if_display_mode_is_not_header():
     model_block = mock.Mock()
-    model_block.layout.id = 'zmo-medium-center'
+    model_block.display_mode = 'column-width'
+    model_block.variant_name = 'wide'
     model_block.is_empty = False
 
     h_image = zeit.web.core.block.HeaderImage(model_block)
@@ -114,7 +116,6 @@ def test_image_should_be_none_if_is_empty_is_true():
 
 def test_image_should_be_fail_if_is_empty_doesnot_exist():
     model_block = mock.Mock()
-    model_block.layout.id = 'zmo-xl-header'
     image = zeit.web.core.block.Image(model_block)
     assert image is None
 

@@ -8,6 +8,16 @@
   <legacy-mapping layout="large" display_mode="large" />
   <legacy-mapping layout="portrait" display_mode="float" />
   <legacy-mapping layout="small" display_mode="float" />
+
   <legacy-mapping layout="zco-portrait" display_mode="large" />
   <legacy-mapping layout="zco-wide" display_mode="large" />
+
+  <legacy-mapping layout="zmo-wide-header" display_mode="header" />
+  <legacy-mapping layout="zmo-super-header" display_mode="header" />
+  <legacy-mapping layout="zmo-standard-header" display_mode="header" />
+  <legacy-mapping layout="zmo-square-header" display_mode="header" />
+  <legacy-mapping layout="zmo-tile-header" display_mode="header" />
+  <legacy-mapping layout="zmo-portrait-header" display_mode="header" />
+  <legacy-mapping layout="zmo-narrow-header" display_mode="header" />
+  <legacy-mapping layout="zmo-xl-header" display_mode="header" />
 </legacy-display-modes>

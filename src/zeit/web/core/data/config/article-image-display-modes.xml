@@ -3,4 +3,6 @@
   <display-mode id="large">groß</display-mode>
   <display-mode id="float">umfließend</display-mode>
   <display-mode id="column-width">spaltenbreit</display-mode>
+
+  <display-mode id="header" available="zeit.magazin.interfaces.IZMOContent">Artikelkopf</display-mode>
 </display-modes>

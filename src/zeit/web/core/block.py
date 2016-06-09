@@ -246,7 +246,7 @@ class Image(zeit.web.core.image.BaseImage):
     def __new__(cls, model_block):
         if getattr(model_block, 'is_empty', False):
             return
-        if not cls.wanted_variant(model_block.variant_name):
+        if not cls.wanted_display_mode(model_block.display_mode):
             return
 
         target = None
@@ -288,9 +288,9 @@ class Image(zeit.web.core.image.BaseImage):
         return instance
 
     @classmethod
-    def wanted_variant(cls, variant_name):
-        # currently broken since `header` is no longer part of the name
-        return 'header' not in (variant_name or '')
+    def wanted_display_mode(cls, display_mode):
+        """Skip images that are marked as header images via display mode."""
+        return 'header' not in (display_mode or '')
 
     def __init__(self, model_block):
         self.variant_name = model_block.variant_name
@@ -335,9 +335,9 @@ class BlockImages(object):
 class HeaderImage(Image):
 
     @classmethod
-    def wanted_variant(cls, variant_name):
-        # currently broken since `header` is no longer part of the name
-        return 'header' in (variant_name or '')
+    def wanted_display_mode(cls, display_mode):
+        """Only accept header images that are marked via their display mode."""
+        return 'header' in (display_mode or '')
 
 
 class HeaderImageStandard(HeaderImage):
