@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Enable wrapper support for framebuilder
 
+- ZON-2818: Introduce login-state-footer ESI
+
 
 2.85 (2016-06-08)
 -----------------
