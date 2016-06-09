@@ -293,6 +293,9 @@ class Image(zeit.web.core.image.BaseImage):
         return 'header' not in (display_mode or '')
 
     def __init__(self, model_block):
+        # `legacy_layout` is required for bw compat of the ZCO default variant,
+        # which is `portrait` rather the usual `wide`.
+        self.legacy_layout = model_block.xml.get('layout', None)
         self.variant_name = model_block.variant_name
         self.display_mode = model_block.display_mode
         if model_block.display_mode == 'large':

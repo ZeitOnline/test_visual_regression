@@ -180,7 +180,7 @@ def test_image_should_not_break_on_missing_image(application):
     model_block.display_mode = 'large'
     model_block.variant_name = 'default'
     model_block.is_empty = False
-    model_block.xml = None
+    model_block.xml = lxml.etree.fromstring('<image/>')
     model_block.references.target = zeit.content.image.imagegroup.ImageGroup()
     # We use an otherwise empty folder to simulate missing master image.
     model_block.references.target.uniqueId = 'http://xml.zeit.de/news'
@@ -196,7 +196,7 @@ def test_image_should_use_variant_given_on_layout(application):
     model_block.display_mode = 'column-width'
     model_block.variant_name = 'original'
     model_block.is_empty = False
-    model_block.xml = None
+    model_block.xml = lxml.etree.fromstring('<image/>')
     model_block.references.target = image
     image = zeit.web.core.block.Image(model_block)
     assert 'original' == image.image.__name__
