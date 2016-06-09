@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.86 (unreleased)
+2.86 (2016-06-09)
 -----------------
 
 - ZON-3135: Implement Embed Article Header Object
