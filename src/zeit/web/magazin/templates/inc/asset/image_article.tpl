@@ -5,15 +5,11 @@
 
 {% block media_block -%}
 {{ {'large': 'figure-full-width',
-    'zmo-large-center': 'figure-full-width',
-    'zmo-medium-left': 'figure-horizontal',
-    'zmo-medium-right': 'figure-horizontal--right',
-    'zmo-medium-center': 'figure is-constrained is-centered',
-    'zmo-small-left': 'figure-stamp',
-    'zmo-small-left-original': 'figure-stamp',
-    'zmo-small-right': 'figure-stamp--right',
-    'zmo-small-right-original': 'figure-stamp--right'}.get(
-        obj.layout.id, 'figure-stamp') }}
+    'column-width': 'figure is-constrained is-centered',
+    'medium-float-left': 'figure-horizontal',
+    'medium-float-right': 'figure-horizontal--right',
+    'small-float-right': 'figure-stamp--right'}.get(
+        obj.display_mode, 'figure-stamp') }}
 {%- endblock %}
 
 {% block media_block_helper -%}
