@@ -16,9 +16,10 @@ $user-picture-diameter: remify(45px)
 
 $icon-color: $zon-dark-grey
 $icon-color--hover: $zon-charcoal
+$nav-link-color: $black
+$nav-link-color--hover: $zon-dark-grey
 
 // basic style for nav box
-// important is important here, as we have to overwrite js toggling
 .main_nav
 	+display-flex()
 	+flex-wrap(wrap)
@@ -33,11 +34,6 @@ $icon-color--hover: $zon-charcoal
 		*[data-dropdown="true"]
 			display: block
 
-%main_nav_icons
-	+background-size(contain)
-	background-position: 50% 50%
-	display: block
-
 %main_nav_links
 	display: inline-block
 	letter-spacing: 1px
@@ -50,12 +46,12 @@ $icon-color--hover: $zon-charcoal
 			margin-right: $little
 	width: 100%
 	a
-		color: $black
+		color: $nav-link-color
+		+on-interaction
+			color: $nav-link-color--hover
 	+respond-min($break-tablet-min)
-		width: auto
 		font-size: remify(10px)
 		text-transform: uppercase
-		color: $zon-grey
 
 //box 1: logo
 .logo_bar
@@ -118,7 +114,6 @@ $icon-color--hover: $zon-charcoal
 		+remove_nav_bar_style($width: auto)
 		+order(30)
 		+flex(0 0 auto)
-		color: $zon-grey
 		font-size: remify(10px)
 		line-height: $zon-bar-height-phablet
 		min-width: remify(80px) // fallback for failing esi include
@@ -132,9 +127,10 @@ $icon-color--hover: $zon-charcoal
 			text-align: left
 
 .user-link
+	color: $nav-link-color
+	+on-interaction
+		color: $nav-link-color--hover
 	+respond-min($break-tablet-min)
-		+inline-block
-		+link-colors($black, $zon-dark-grey, $zon-dark-grey, $black, $zon-dark-grey)
 		margin-right: remify(5px)
 
 .main_nav__community__icon
@@ -323,8 +319,10 @@ $icon-color--hover: $zon-charcoal
 		+inline-block
 		margin-right: remify(10px)
 	&__name
+		color: $nav-link-color
 		font-weight: 700
-		+link-colors($black, $black, $black, $black, $black)
+		+on-interaction
+			color: $nav-link-color--hover
 
 .login-state-mobile
 	+display-flex()
@@ -341,7 +339,9 @@ $icon-color--hover: $zon-charcoal
 		margin: remify(0 0 -2px 8px)
 	&__logoff
 		white-space: nowrap
-		+link-colors($zon-grey, $zon-grey, $zon-grey, $zon-grey, $zon-grey)
+		color: $nav-link-color
+		+on-interaction
+			color: $nav-link-color--hover
 	&__name
 		font-weight: 700
 		line-height: normal
@@ -387,17 +387,18 @@ $icon-color--hover: $zon-charcoal
 
 
 .primary-nav__link
+	color: inherit
 	display: inline-block
-	&:link, &:visited
+	+on-interaction
 		color: inherit
+	+respond-min($break-tablet-min)
+		&:focus,
+		&:hover,
+		&--current
+			box-shadow: inset 0 -3px 0 0 $color-border
 
 .primary-nav__link--current
 	font-weight: bold
-
-.primary-nav__link:hover,
-.primary-nav__link--current
-	+respond-min($break-tablet-min)
-		box-shadow: inset 0 -3px 0 0 $color-border
 
 
 .primary-nav__item--featured
@@ -414,6 +415,7 @@ $icon-color--hover: $zon-charcoal
 		border-radius: 3px
 		+transition(background-color .15s linear)
 		padding: 0 $fine
+		&:focus,
 		&:hover
 			box-shadow: none
 			background-color: $zon-grey
