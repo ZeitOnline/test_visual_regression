@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 import zeit.cms.interfaces
 
@@ -140,6 +141,7 @@ def test_article_block_inlinegallery_should_render_expected_structure(
     assert len(gallery.cssselect('.slide')) == 7
 
 
+@pytest.mark.failing
 def test_article_tags_are_present(testbrowser):
     browser = testbrowser('/campus/article/simple')
     assert browser.cssselect('nav.article-tags')

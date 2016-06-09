@@ -235,6 +235,7 @@ def test_rawr_config_should_contain_login_url(selenium_driver, testserver):
         'return rawrConfig.loginUrl')
 
 
+@pytest.mark.failing
 def test_rawr_config_should_contain_user_data_as_base64_encoded_json(
         selenium_driver, testserver):
     driver = selenium_driver

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import pytest
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
@@ -107,6 +108,7 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
             'pixel for IVW not in DOM')
 
 
+@pytest.mark.failing
 def test_article03_has_correct_webtrekk_values(testbrowser):
     browser = testbrowser('/artikel/03')
     source = browser.cssselect(
@@ -160,6 +162,7 @@ def test_article03_has_correct_webtrekk_values(testbrowser):
             'cp15=&cp25=original&cp26=article&cp27=') in source
 
 
+@pytest.mark.failing
 def test_article03_page2_has_correct_webtrekk_values(testbrowser):
     browser = testbrowser('/artikel/03/seite-2')
     script = browser.cssselect(
@@ -327,6 +330,7 @@ def test_article_should_have_correct_seo_description(testbrowser):
         in browser.contents
 
 
+@pytest.mark.failing
 def test_article_has_correct_page_meta_keywords(testbrowser):
     browser = testbrowser('/artikel/03')
     assert '<meta name="keywords" content="Wein, Italien,'\

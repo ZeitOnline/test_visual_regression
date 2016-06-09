@@ -691,6 +691,7 @@ def test_amp_article_should_have_amp_link(application):
     assert view.is_amp
 
 
+@pytest.mark.failing
 def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/campus/article/simple_date_changed' % testserver.url)

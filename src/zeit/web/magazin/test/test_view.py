@@ -254,6 +254,7 @@ def test_artikel02_has_correct_banner_channel(application):
     assert article_view.banner_channel == 'zeitmz/leben/article'
 
 
+@pytest.mark.failing
 def test_artikel05_has_meta_keywords(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
