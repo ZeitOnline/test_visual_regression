@@ -3,15 +3,15 @@
 This is the nextread area at the bottom of an article.
 
 Available attributes:
-	zeit.web.magazin.view_article.Article as view
+    zeit.web.magazin.view_article.Article as view
 #}
 <aside class="nextread is-centered">
-	<div class="nextread__lead">Lesen Sie jetzt</div>
-	{%- set module = view.nextread -%}
-	{% if module is iterable -%}
-		{% for teaser in module -%}
-			{% include ['zeit.web.magazin:templates/inc/article/nextread/{}.html'.format(module.layout.id),
-						'zeit.web.magazin:templates/inc/article/nextread/base.html'] -%}
-		{% endfor -%}
-	{% endif -%}
+    <div class="nextread__lead">Lesen Sie jetzt</div>
+    {%- set module = view.nextread -%}
+    {% if module is iterable -%}
+        {% for teaser in module -%}
+            {% include ['zeit.web.magazin:templates/inc/article/nextread/{}.html'.format(module.layout.id),
+                        'zeit.web.magazin:templates/inc/article/nextread/base.html'] -%}
+        {% endfor -%}
+    {% endif -%}
 </aside>

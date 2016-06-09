@@ -1392,6 +1392,11 @@ def test_fbia_article_contains_meta_robots(testbrowser):
     assert '<meta name="robots" content="noindex, follow">' in browser.contents
 
 
+def test_fbia_article_contains_correct_webtrekk_platform(testbrowser):
+    browser = testbrowser('/fbia/zeit-online/article/simple')
+    assert '25: "instant article"' in browser.contents
+
+
 def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     amp_link = browser.cssselect('link[rel=amphtml]')
@@ -1428,3 +1433,55 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
     view = zeit.web.site.view_article.Article(context, dummy_request)
 
     assert view.webtrekk['customParameter']['cp27'] == 'cardstack.2/seite-1'
+
+
+def test_article_in_series_has_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+
+    assert len(browser.cssselect('.article-series')) == 1
+
+    title = browser.cssselect('.article-series__title')[0].text.strip()
+    assert title == '70 Jahre DIE ZEIT'
+
+    browser = testbrowser('/zeit-online/article/02')
+
+    assert len(browser.cssselect('.article-series')) == 1
+
+    title = browser.cssselect('.article-series__title')[0].text.strip()
+    assert title == 'Geschafft!'
+
+
+def test_article_in_series_has_banner_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+
+    assert len(browser.cssselect('.article-series__media')) == 1
+
+
+def test_article_in_series_has_correct_link(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+
+    url = browser.cssselect('.article-series__heading')[0].attrib['href']
+    assert url.endswith('/serie/70-jahre-zeit')
+
+    browser = testbrowser('/zeit-online/article/02')
+
+    url = browser.cssselect('.article-series__heading')[0].attrib['href']
+    assert url.endswith('/serie/geschafft')
+
+
+def test_article_in_series_has_no_fallback_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/02')
+
+    assert len(browser.cssselect('.article-series__media')) == 0
+
+
+def test_article_without_series_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_article_in_series_with_column_attribute_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/fischer')
+
+    assert len(browser.cssselect('.article-series')) == 0

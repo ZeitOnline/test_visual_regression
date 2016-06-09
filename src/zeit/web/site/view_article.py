@@ -57,7 +57,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def meta_keywords(self):
-        return [x for x in ([self.ressort.capitalize(), self.supertitle] +
+        return [x for x in ([self.ressort.title(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
 
     # Only needed to set tracking code on
@@ -65,6 +65,20 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def newsletter_optin_tracking(self):
         return self.request.GET.get('newsletter-optin', None)
+
+    @zeit.web.reify
+    def has_series_attached(self):
+        return getattr(self.context, 'serie', None)
+
+    @zeit.web.reify
+    def series(self):
+        settings = zope.component.getUtility(
+            zeit.web.core.interfaces.ISettings
+        )
+
+        uid = u'{}/{}'.format(settings.series_prefix, self.context.serie.url)
+
+        return zeit.cms.interfaces.ICMSContent(uid, None)
 
 
 @view_config(name='seite',

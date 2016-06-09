@@ -1,23 +1,23 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 <article class="comment{% if comment.is_reply and not comment.is_promoted %} is-indented{% endif %}"{% if not comment.is_promoted %} id="cid-{{ comment.cid }}"{% endif %}>
-	<div class="comment__head">
-		{% if comment.img_url -%}
-		<span class="comment__head__avatar" style="background-image: url('{{ comment.img_url }}')"></span>
-		{% endif -%}
-		<div class="comment__head__meta">
-			<a class="comment__head__meta__name" href="{{ comment.userprofile_url }}">{{ comment.name|e }}</a>
-			<a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not comment.is_promoted %} js-scroll{% endif %}">{{ comment.created | format_comment_date }}</a>
-			{% if comment.role -%}
-			<div class="comment__head__meta__label">{{ comment.role }}</div>
-			{% endif -%}
-		</div>
-	</div>
-	<div class="comment__body">
-		{{ comment.text | safe }}
-	</div>
-	<aside class="comment__toolbox">
-		<a class="comment__tool js-reply-to-comment" data-cid="{{ comment.cid }}" title="Auf Kommentar antworten">{{ lama.use_svg_icon('comment-reply', 'comment__tool-icon', view.package) }}</a>
-		<a class="comment__tool js-report-comment" data-cid="{{ comment.cid }}" title="Kommentar melden">{{ lama.use_svg_icon('comment-report', 'comment__tool-icon', view.package) }}</a>
-	</aside>
+    <div class="comment__head">
+        {% if comment.img_url -%}
+        <span class="comment__head__avatar" style="background-image: url('{{ comment.img_url }}')"></span>
+        {% endif -%}
+        <div class="comment__head__meta">
+            <a class="comment__head__meta__name" href="{{ comment.userprofile_url }}">{{ comment.name|e }}</a>
+            <a href="#cid-{{ comment.cid }}" class="comment__head__meta__date{% if not comment.is_promoted %} js-scroll{% endif %}">{{ comment.created | format_comment_date }}</a>
+            {% if comment.role -%}
+            <div class="comment__head__meta__label">{{ comment.role }}</div>
+            {% endif -%}
+        </div>
+    </div>
+    <div class="comment__body">
+        {{ comment.text | safe }}
+    </div>
+    <aside class="comment__toolbox">
+        <a class="comment__tool js-reply-to-comment" data-cid="{{ comment.cid }}" title="Auf Kommentar antworten">{{ lama.use_svg_icon('comment-reply', 'comment__tool-icon', view.package) }}</a>
+        <a class="comment__tool js-report-comment" data-cid="{{ comment.cid }}" title="Kommentar melden">{{ lama.use_svg_icon('comment-report', 'comment__tool-icon', view.package) }}</a>
+    </aside>
 </article>

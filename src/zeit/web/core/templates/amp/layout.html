@@ -1,226 +1,226 @@
 <!doctype html>
 <html ⚡ lang="de" itemscope itemtype="http://schema.org/WebPage">
 <head>
-	<meta charset="utf-8">
-	<title>{{ view.pagetitle }}</title>
-	<meta name="description" content="{{ view.pagedescription }}">
-	{% if view.meta_keywords -%}
-		<meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
-	{% endif -%}
-	<meta name="robots" content="{{ view.meta_robots }}">
-	<meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
-	<link rel="canonical" href="{{ view.content_url }}">
-	{% if view.syndication_source -%}
-		<link rel="syndication-source" href="{{ view.syndication_source }}">
-	{% endif -%}
-	{%- include "zeit.web.core:templates/inc/meta/date.html" %}
-	{%- block sharing_meta %}
-		{%- include "zeit.web.core:templates/inc/meta/sharing.html" -%}
-	{% endblock sharing_meta %}
-	<style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
-	{% block style %}
-		{%- include "zeit.web.core:templates/amp/style.html" %}
-	{% endblock style %}
-	<script async src="https://cdn.ampproject.org/v0.js"></script>
-	{% if toggles('amp_advertising') -%}
-	<script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
-	{% endif -%}
-	<script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>
-	<script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
-	<script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <meta charset="utf-8">
+    <title>{{ view.pagetitle }}</title>
+    <meta name="description" content="{{ view.pagedescription }}">
+    {% if view.meta_keywords -%}
+        <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
+    {% endif -%}
+    <meta name="robots" content="{{ view.meta_robots }}">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <link rel="canonical" href="{{ view.content_url }}">
+    {% if view.syndication_source -%}
+        <link rel="syndication-source" href="{{ view.syndication_source }}">
+    {% endif -%}
+    {%- include "zeit.web.core:templates/inc/meta/date.html" %}
+    {%- block sharing_meta %}
+        {%- include "zeit.web.core:templates/inc/meta/sharing.html" -%}
+    {% endblock sharing_meta %}
+    <style>body {opacity: 0}</style><noscript><style>body {opacity: 1}</style></noscript>
+    {% block style %}
+        {%- include "zeit.web.core:templates/amp/style.html" %}
+    {% endblock style %}
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    {% if toggles('amp_advertising') -%}
+    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
+    {% endif -%}
+    <script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
 </head>
 
 <body>
-	<div class="symbols">
-		{% block symbols %}
-			{%- include "zeit.web.static:css/web.site/amp.svg" -%}
-		{% endblock symbols %}
-	</div>
+    <div class="symbols">
+        {% block symbols %}
+            {%- include "zeit.web.static:css/web.site/amp.svg" -%}
+        {% endblock symbols %}
+    </div>
 
-	{%- include "zeit.web.core:templates/amp/tracking/ivw.html" -%}
+    {%- include "zeit.web.core:templates/amp/tracking/ivw.html" -%}
 
-	<div class="content" id="top">
-		<header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-			{% block logo %}
-			<div class="article__item article__item--wide">
-				<a itemprop="url" href="{{ request.route_url('home') }}index">
-					<meta itemprop="name" content="ZEIT ONLINE">
-					<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-						<svg class="header__logo">
-							<use xlink:href="#svg-logo-zon"/>
-						</svg>
-						{# The "logo" dimensions must not exceed 600x60 -#}
-						<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
-						<meta itemprop="width" content="565">
-						<meta itemprop="height" content="60">
-					</span>
-				</a>
-			</div>
-			{% endblock logo %}
-		</header>
+    <div class="content" id="top">
+        <header class="header" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+            {% block logo %}
+            <div class="article__item article__item--wide">
+                <a itemprop="url" href="{{ request.route_url('home') }}index">
+                    <meta itemprop="name" content="ZEIT ONLINE">
+                    <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                        <svg class="header__logo">
+                            <use xlink:href="#svg-logo-zon"/>
+                        </svg>
+                        {# The "logo" dimensions must not exceed 600x60 -#}
+                        <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
+                        <meta itemprop="width" content="565">
+                        <meta itemprop="height" content="60">
+                    </span>
+                </a>
+            </div>
+            {% endblock logo %}
+        </header>
 
-		{% block breaking_news %}
-			{% include "zeit.web.site:templates/inc/breaking_news.tpl" %}
-		{% endblock breaking_news %}
+        {% block breaking_news %}
+            {% include "zeit.web.site:templates/inc/breaking_news.tpl" %}
+        {% endblock breaking_news %}
 
-		{% include "zeit.web.core:templates/amp/ads/tile_1.html" ignore missing %}
+        {% include "zeit.web.core:templates/amp/ads/tile_1.html" ignore missing %}
 
-		<main itemprop="mainContentOfPage">
-		{% block main %}
-			{% block content %}
-			<article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article">
-				{% include [
+        <main itemprop="mainContentOfPage">
+        {% block main %}
+            {% block content %}
+            <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article">
+                {% include [
                     "{}:templates/amp/article/publisher.html".format(view.package),
                     "zeit.web.core:templates/amp/article/publisher.html"] %}
-				<meta itemprop="mainEntityOfPage" content="{{ view.content_url }}">
-				<header class="article__header article__item">
-					<h1 class="headline" itemprop="headline">
-						<span class="headline__kicker">
-							{%- if view.context is column -%}
-								{{- '%s / ' | format(view.serie) -}}
-							{%- endif -%}
-							{{- view.supertitle -}}
-						</span>
-						{%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
-						<span class="headline__title">
-							{{- view.title -}}
-						</span>
-					</h1>
-					<div class="summary" itemprop="description">
-						{{ view.subtitle }}
-					</div>
-					{% set byline = view.context | get_byline('main') -%}
-					{% if byline | length -%}
-					<div class="byline">
-						{% include 'zeit.web.core:templates/inc/meta/byline.html' %}
-					</div>
-					{% else -%}
-					<span itemprop="author" itemscope itemtype="http://schema.org/Person">
-						<meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
-					</span>
-					{% endif -%}
-					<div class="metadata">
-						{% include "zeit.web.core:templates/amp/article/metadata.html" %}
-					</div>
-				</header>
+                <meta itemprop="mainEntityOfPage" content="{{ view.content_url }}">
+                <header class="article__header article__item">
+                    <h1 class="headline" itemprop="headline">
+                        <span class="headline__kicker">
+                            {%- if view.context is column -%}
+                                {{- '%s / ' | format(view.serie) -}}
+                            {%- endif -%}
+                            {{- view.supertitle -}}
+                        </span>
+                        {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
+                        <span class="headline__title">
+                            {{- view.title -}}
+                        </span>
+                    </h1>
+                    <div class="summary" itemprop="description">
+                        {{ view.subtitle }}
+                    </div>
+                    {% set byline = view.context | get_byline('main') -%}
+                    {% if byline | length -%}
+                    <div class="byline">
+                        {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
+                    </div>
+                    {% else -%}
+                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                        <meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
+                    </span>
+                    {% endif -%}
+                    <div class="metadata">
+                        {% include "zeit.web.core:templates/amp/article/metadata.html" %}
+                    </div>
+                </header>
 
-				{% block article_body %}
-				<div class="article__body" itemprop="articleBody">
-					{% block article_main_image %}
-						{% set block = view.main_image_block %}
-						{% include "zeit.web.core:templates/amp/asset/image_article.html" %}
-					{% endblock article_main_image %}
+                {% block article_body %}
+                <div class="article__body" itemprop="articleBody">
+                    {% block article_main_image %}
+                        {% set block = view.main_image_block %}
+                        {% include "zeit.web.core:templates/amp/asset/image_article.html" %}
+                    {% endblock article_main_image %}
 
-					{% block article_pages %}
-						{% for page in view.pages %}
-							<section>
-							{% if not loop.first %}
-								<h3 class="intertitle article__item">{{ page.teaser }}</h3>
-							{% endif %}
-							{% set ad_displayed = False %}
-							{% for block in page %}
-								{% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
-								{% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False %}
-									{% set ad_displayed = True %}
-									{% include "zeit.web.core:templates/amp/ads/tile_4.html" ignore missing %}
-								{% endif %}
-							{% endfor %}
-							</section>
-						{% endfor %}
-					{% endblock article_pages %}
-				</div>
-				{% endblock article_body %}
+                    {% block article_pages %}
+                        {% for page in view.pages %}
+                            <section>
+                            {% if not loop.first %}
+                                <h3 class="intertitle article__item">{{ page.teaser }}</h3>
+                            {% endif %}
+                            {% set ad_displayed = False %}
+                            {% for block in page %}
+                                {% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
+                                {% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False %}
+                                    {% set ad_displayed = True %}
+                                    {% include "zeit.web.core:templates/amp/ads/tile_4.html" ignore missing %}
+                                {% endif %}
+                            {% endfor %}
+                            </section>
+                        {% endfor %}
+                    {% endblock article_pages %}
+                </div>
+                {% endblock article_body %}
 
-				<div class="article__item">
-					<a href="{{ request.route_url('home') }}index">
-						<span class="article__button">Startseite</span>
-					</a>
-				</div>
+                <div class="article__item">
+                    <a href="{{ request.route_url('home') }}index">
+                        <span class="article__button">Startseite</span>
+                    </a>
+                </div>
 
-				<footer class="article__footer article__item">
-					<nav class="article-sharing">
-						<h4 class="article-sharing__title">Teilen</h4>
-						<ul class="article-sharing__list">
-							<li class="article-sharing__item">
-								<a class="article-sharing__link article-sharing__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.int.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_int&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}">Facebook</a>
-							</li>
-							<li class="article-sharing__item">
-								<a class="article-sharing__link article-sharing__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via=zeitonline&amp;url={{ view.content_url + '?wt_zmc=sm.int.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_int&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}">Twitter</a>
-							</li>
-							<li class="article-sharing__item article-sharing__item--whatsapp">
-								<a class="article-sharing__link article-sharing__link--whatsapp" href="whatsapp://send?text={{ (view.title + ' - Artikel auf ZEIT ONLINE: ' + view.content_url) | urlencode }}">WhatsApp</a>
-							</li>
-							<li class="article-sharing__item">
-								<a class="article-sharing__link article-sharing__link--mail" href="mailto:?subject={{ (view.title + ' - Artikel auf ZEIT ONLINE') | urlencode }}&amp;body={{ ('Artikel auf ZEIT ONLINE lesen: ' + view.content_url + '?wt_zmc=sm.ext.zonaudev.mail.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=mail_zonaudev_ext&utm_campaign=mail_referrer&utm_content=zeitde_dskshare_link_x') | urlencode }}">Mail</a>
-							</li>
-						</ul>
-					</nav>
+                <footer class="article__footer article__item">
+                    <nav class="article-sharing">
+                        <h4 class="article-sharing__title">Teilen</h4>
+                        <ul class="article-sharing__list">
+                            <li class="article-sharing__item">
+                                <a class="article-sharing__link article-sharing__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_ext&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}">Facebook</a>
+                            </li>
+                            <li class="article-sharing__item">
+                                <a class="article-sharing__link article-sharing__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via=zeitonline&amp;url={{ view.content_url + '?wt_zmc=sm.ext.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_ext&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}">Twitter</a>
+                            </li>
+                            <li class="article-sharing__item article-sharing__item--whatsapp">
+                                <a class="article-sharing__link article-sharing__link--whatsapp" href="whatsapp://send?text={{ (view.title + ' - Artikel auf ZEIT ONLINE: ' + view.content_url) | urlencode }}">WhatsApp</a>
+                            </li>
+                            <li class="article-sharing__item">
+                                <a class="article-sharing__link article-sharing__link--mail" href="mailto:?subject={{ (view.title + ' - Artikel auf ZEIT ONLINE') | urlencode }}&amp;body={{ ('Artikel auf ZEIT ONLINE lesen: ' + view.content_url + '?wt_zmc=sm.ext.zonaudev.mail.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=mail_zonaudev_ext&utm_campaign=mail_referrer&utm_content=zeitde_dskshare_link_x') | urlencode }}">Mail</a>
+                            </li>
+                        </ul>
+                    </nav>
 
-				{% if view.ranked_tags | length %}
-					<nav class="article-tags">
-						<h4 class="article-tags__title">Schlagworte</h4>
-						<ul class="article-tags__list" itemprop="keywords">
-						{% for tag in view.ranked_tags[:6] -%}
-							{% if tag.url_value %}
-								<li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link">{{ tag.label }}</a>
-								{%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
-								</li>
-							{% else %}
-								<li><span class="article-tags__link">{{ tag.label }}</span>
-								{%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
-								</li>
-							{% endif %}
-						{% endfor -%}
-						</ul>
-					</nav>
-				{% endif %}
+                {% if view.ranked_tags | length %}
+                    <nav class="article-tags">
+                        <h4 class="article-tags__title">Schlagworte</h4>
+                        <ul class="article-tags__list" itemprop="keywords">
+                        {% for tag in view.ranked_tags[:6] -%}
+                            {% if tag.url_value %}
+                                <li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link">{{ tag.label }}</a>
+                                {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
+                                </li>
+                            {% else %}
+                                <li><span class="article-tags__link">{{ tag.label }}</span>
+                                {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
+                                </li>
+                            {% endif %}
+                        {% endfor -%}
+                        </ul>
+                    </nav>
+                {% endif %}
 
-				</footer>
+                </footer>
 
-			</article>
-			{% endblock %}
+            </article>
+            {% endblock %}
 
-			{% block nextread %}
-				{% set module = view.nextread %}
-				{% include "zeit.web.core:templates/amp/nextread/default.html" %}
-			{% endblock %}
+            {% block nextread %}
+                {% set module = view.nextread %}
+                {% include "zeit.web.core:templates/amp/nextread/default.html" %}
+            {% endblock %}
 
-			{% block nextread_ad %}
-				{% set module = view.nextread_ad %}
-				{% include "zeit.web.core:templates/amp/nextread/default.html" %}
-			{% endblock %}
+            {% block nextread_ad %}
+                {% set module = view.nextread_ad %}
+                {% include "zeit.web.core:templates/amp/nextread/default.html" %}
+            {% endblock %}
 
-			{% block footer_ad %}
-				{% include "zeit.web.core:templates/amp/ads/tile_8.html" ignore missing %}
-			{% endblock footer_ad %}
-		{% endblock main %}
-		</main>
+            {% block footer_ad %}
+                {% include "zeit.web.core:templates/amp/ads/tile_8.html" ignore missing %}
+            {% endblock footer_ad %}
+        {% endblock main %}
+        </main>
 
-		<footer class="footer">
-			{% block footer_logo %}
-				<a href="{{ request.route_url('home') }}">
-					<svg class="footer__logo">
-						<use xlink:href="#svg-logo-zon"/>
-					</svg>
-				</a>
-			{% endblock footer_logo %}
-			<nav class="footer__navigation">
-				<ul>
-					<li><a href="{{ request.route_url('home') }}impressum/index">Impressum</a></li>
-					<li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>
-				</ul>
-			</nav>
-			{% block footer_button %}
-			<div class="footer__finish">
-				<a class="footer__button" href="#top" title="Zurück nach oben">Nach Oben</a>
-			</div>
-			{% endblock footer_button %}
-		</footer>
+        <footer class="footer">
+            {% block footer_logo %}
+                <a href="{{ request.route_url('home') }}">
+                    <svg class="footer__logo">
+                        <use xlink:href="#svg-logo-zon"/>
+                    </svg>
+                </a>
+            {% endblock footer_logo %}
+            <nav class="footer__navigation">
+                <ul>
+                    <li><a href="{{ request.route_url('home') }}impressum/index">Impressum</a></li>
+                    <li><a href="{{ request.route_url('home') }}hilfe/datenschutz">Datenschutz</a></li>
+                </ul>
+            </nav>
+            {% block footer_button %}
+            <div class="footer__finish">
+                <a class="footer__button" href="#top" title="Zurück nach oben">Nach Oben</a>
+            </div>
+            {% endblock footer_button %}
+        </footer>
 
-		{% include "zeit.web.core:templates/inc/tracking/webtrekk_amp.html" %}
-		<amp-pixel src="https://ssl.zeit.de/cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;r=DOCUMENT_REFERRER&amp;rand=RANDOM"></amp-pixel>
+        {% include "zeit.web.core:templates/inc/tracking/webtrekk_amp.html" %}
+        <amp-pixel src="https://ssl.zeit.de/cc.zeit.de/cc.gif?banner-channel={{ view.banner_channel | urlencode -}}&amp;r=DOCUMENT_REFERRER&amp;rand=RANDOM"></amp-pixel>
 
-	</div>
+    </div>
 </body>
 
 </html>

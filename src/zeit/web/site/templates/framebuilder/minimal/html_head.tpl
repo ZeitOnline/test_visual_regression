@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
+<html lang="de" itemscope itemtype="http://schema.org/WebPage">
 <head>
     <meta charset="utf-8">
     <title>ZEIT ONLINE</title>

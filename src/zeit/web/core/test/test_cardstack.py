@@ -1,5 +1,9 @@
-import urllib
+import urlparse
+
 import pytest
+import zope.component
+
+import zeit.web.core.interfaces
 
 
 @pytest.mark.parametrize('path_fragment', ['zeit-online', 'campus'])
@@ -13,11 +17,16 @@ def test_cardstack_should_be_included_on_articles(
 
     assert browser.document.xpath('head/meta[@name="twitter:site"]')
 
-    url = urllib.quote_plus('http://localhost/{}/article/cardstack'.format(
-        path_fragment))
-    assert browser.document.xpath('body//article//include/@src')[0] == (
-        '{}/stacks/kekse/esi/body?shareUrl={}'
-        '&shareUrlQuerySuffix=stackId%3Dkekse'.format(espi, url))
+    src = browser.document.xpath('body//article//include/@src')[0]
+    parts = urlparse.urlparse(src)
+    query = urlparse.parse_qs(parts.query)
+    assert 'http://' + parts.netloc + parts.path == (
+        '{}/stacks/kekse/esi/body'.format(espi))
+    assert query == {
+        'shareUrlQuerySuffix': ['stackId=kekse'],
+        'shareUrl': ['http://localhost/{}/article/cardstack'.format(
+            path_fragment)]
+    }
 
     assert browser.document.xpath('body/include/@src')[0] == (
         '{}/stacks/esi/scripts'.format(espi))
@@ -32,27 +41,35 @@ def test_cardstack_should_honor_article_stack_id(app_settings, testbrowser):
 
     assert not browser.document.xpath('head/meta[@name="twitter:site"]')
 
-    url = urllib.quote_plus('http://localhost/zeit-online/article/cardstack')
-    assert browser.document.xpath('body//article//include/@src')[0] == (
-        '{}/stacks/kekse/esi/body?shareUrl={}'
-        '&shareUrlQuerySuffix=stackId%3Dkekse'.format(espi, url))
+    src = browser.document.xpath('body//article//include/@src')[0]
+    parts = urlparse.urlparse(src)
+    query = urlparse.parse_qs(parts.query)
+    assert 'http://' + parts.netloc + parts.path == (
+        '{}/stacks/kekse/esi/body'.format(espi))
+    assert query == {
+        'shareUrlQuerySuffix': ['stackId=kekse'],
+        'shareUrl': ['http://localhost/zeit-online/article/cardstack'],
+    }
 
     assert browser.document.xpath('body/include/@src')[0] == (
         '{}/stacks/esi/scripts'.format(espi))
 
 
-def test_missing_cardstacks_should_not_be_included(app_settings, testbrowser):
+def test_missing_cardstacks_should_not_be_included(testbrowser):
     article = testbrowser('/zeit-online/article/01').document
 
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     assert not article.xpath('head/include/@src')
     assert not article.xpath('body//article//include/@src')
-    assert not article.xpath('body/include/@src')
+    assert not article.xpath(
+        'body/include[contains(@src, "%s")]' % settings['cardstack_backend'])
 
     cp = testbrowser('/zeit-online/slenderized-centerpage').document
 
     assert not cp.xpath('head/include/@src')
     assert not cp.xpath('body//main//include/@src')
-    assert not cp.xpath('body/include/@src')
+    assert not cp.xpath(
+        'body/include[contains(@src, "%s")]' % settings['cardstack_backend'])
 
 
 def test_cardstack_should_be_included_on_cps(app_settings, testbrowser):

@@ -307,7 +307,7 @@
                 <span class="{{ class }}"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
             {%- endif -%}
             </span>
-            {{ author.suffix }}
+            {{- author.suffix -}}
         {%- endfor -%}
     {%- endif -%}
 {% endmacro %}

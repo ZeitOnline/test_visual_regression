@@ -12,6 +12,7 @@ import lxml.etree
 import lxml.html
 import lxml.objectify
 import mock
+import pyramid.threadlocal
 import pytest
 import venusian
 import webob.multidict
@@ -213,47 +214,48 @@ def test_zon_large_teaser_mapping_is_working_as_expected(application):
     assert teaser == 'zon-large'
 
 
-def test_teaser_layout_should_be_cached_per_unique_id(application):
+def test_teaser_layout_should_be_cached_per_unique_id(application, request):
+    request.addfinalizer(pyramid.threadlocal.manager.clear)
+
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'zon-small'
     block.__hash__ = lambda _: 42
 
-    request = mock.Mock()
-    request.teaser_layout = {}
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    request = pyramid.testing.DummyRequest()
+    request._cache_get_layout = {}
+    pyramid.threadlocal.manager.push({'request': request})
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
-    assert request.teaser_layout[42] == 'zon-small'
+    key = hash((block,))
+    assert request._cache_get_layout[key] == 'zon-small'
 
-    request = mock.Mock()
-    request.teaser_layout.get = mock.Mock(return_value='zon-small')
-
-    teaser = zeit.web.core.template.get_layout(block, request=request)
-    assert teaser == 'zon-small'
-    request.teaser_layout.get.assert_called_with(42, None)
+    request._cache_get_layout = {key: 'zon-large'}
+    teaser = zeit.web.core.template.get_layout(block)
+    assert teaser == 'zon-large'
 
 
 def test_get_layout_should_deal_with_all_sort_of_unset_params(
-        application):
+        application, request):
+    request.addfinalizer(pyramid.threadlocal.manager.clear)
 
     block = mock.Mock()
     block.__iter__ = lambda _: iter(['article'])
     block.layout.id = 'zon-small'
 
-    request = mock.Mock()
-    request.teaser_layout = None
+    request = pyramid.testing.DummyRequest()
+    pyramid.threadlocal.manager.push({'request': request})
 
     teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
-    request = mock.Mock()
-    request.teaser_layout = {}
+    request._cache_get_layout.clear()
     block.uniqueId = None
 
-    teaser = zeit.web.core.template.get_layout(block, request=request)
+    teaser = zeit.web.core.template.get_layout(block)
     assert teaser == 'zon-small'
 
 
@@ -386,18 +388,28 @@ def test_teaser_layout_for_empty_block_should_be_set_to_hide(application):
 def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/feature/feature_longform')
-    block = mock.Mock()
-    block.layout.id = 'zon-square'
-    block.__parent__ = mock.Mock()
-    block.__parent__.kind = 'major'
-    block.__iter__ = lambda _: iter([article])
-    layout = zeit.web.core.template.get_layout(block)
-    assert layout == 'zon-square'
+    cp = zeit.content.cp.centerpage.CenterPage()
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'
+    block = area.create_item('teaser')
+    block.layout = zeit.content.cp.layout.get_layout('zon-square')
+    block.append(article)
 
+    module = zeit.web.core.template.get_module(block)
+    assert module.layout.id == 'zon-square'
+
+    block.remove(article)
     article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    block.__iter__ = lambda _: iter([article])
-    layout = zeit.web.core.template.get_layout(block)
-    assert layout == 'zmo-square'
+    block.append(article)
+    module = zeit.web.core.template.get_module(block)
+    assert module.layout.id == 'zmo-square'
+
+    block.remove(article)
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/simple')
+    block.append(article)
+    module = zeit.web.core.template.get_module(block)
+    assert module.layout.id == 'zco-square'
 
 
 def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
@@ -548,7 +560,7 @@ def test_format_iqd_returns_safe_text(application):
 
 def test_filter_append_get_params_should_create_params():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
+    request.url = 'http://example.com'
     request.GET = {}
     get_params = {'newparam': 'foo'}
     assert 'http://example.com?newparam=foo' == (
@@ -557,8 +569,7 @@ def test_filter_append_get_params_should_create_params():
 
 def test_filter_append_get_params_should_append_params():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = {u'key1': u'1'}
+    request.url = 'http://example.com?key1=1'
     get_params = {'newparam': 'foo'}
     assert 'http://example.com?key1=1&newparam=foo' == (
         zeit.web.core.template.append_get_params(request, **get_params))
@@ -566,9 +577,7 @@ def test_filter_append_get_params_should_append_params():
 
 def test_filter_append_get_params_should_keep_not_overridden_params():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = webob.multidict.MultiDict(
-        [(u'key1', u'1'), (u'key1', u'2')])
+    request.url = 'http://example.com?key1=1&key1=2'
     get_params = {'newparam': 'foo'}
     assert 'http://example.com?key1=1&key1=2&newparam=foo' == (
         zeit.web.core.template.append_get_params(request, **get_params))
@@ -576,8 +585,7 @@ def test_filter_append_get_params_should_keep_not_overridden_params():
 
 def test_filter_append_get_params_should_reset_params():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = {u'key1': u'1', u'key2': u'2'}
+    request.url = 'http://example.com?key1=1&key2=2'
     get_params = {u'key1': None}
     assert 'http://example.com?key2=2' == (
         zeit.web.core.template.append_get_params(request, **get_params))
@@ -585,8 +593,7 @@ def test_filter_append_get_params_should_reset_params():
 
 def test_filter_append_get_params_should_accept_unicode():
     request = mock.Mock()
-    request.path_url = 'http://example.com'
-    request.GET = {u'sören_mag': u'käse'}
+    request.url = 'http://example.com?s%C3%B6ren_mag=k%C3%A4se'
     assert u'http://example.com?s%C3%B6ren_mag=k%C3%A4se' == (
         zeit.web.core.template.append_get_params(request))
 

@@ -54,6 +54,7 @@
     <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Kultur</attribute>
     <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">yes</attribute>
+    <attribute name="serie" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Geschafft!</attribute>
     <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
     <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">OK</attribute>
     <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Film</attribute>
