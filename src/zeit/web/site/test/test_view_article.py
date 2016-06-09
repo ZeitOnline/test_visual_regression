@@ -401,7 +401,6 @@ def test_article_sharing_links_should_be_url_encoded(testbrowser):
     assert len(spacey_sharing_links) == 0
 
 
-@pytest.mark.failing
 def test_article_tags_are_present_and_limited(testbrowser):
     browser = testbrowser('/zeit-online/article/tags')
     tags = browser.cssselect('.article-tags')
@@ -1088,7 +1087,6 @@ def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
     assert 'article__item--wide' in figure.get('class')
 
 
-@pytest.mark.failing
 def test_missing_keyword_links_are_replaced(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     keyword = browser.cssselect('.article-tags__link')[0]

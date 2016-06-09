@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import lxml.etree
-import pytest
 
 import zeit.web.core.application
 
@@ -94,7 +93,6 @@ def test_amp_has_correct_canonical_url(testbrowser):
         'http://localhost/zeit-online/article/amp')
 
 
-@pytest.mark.failing
 def test_amp_article_has_correct_webtrekk_pixel(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     source = browser.cssselect('amp-pixel')[0].attrib.get('src')
@@ -123,7 +121,6 @@ def test_amp_article_contains_sharing_links(testbrowser):
     assert ('url=' + canonical) in links[1].get('href')
 
 
-@pytest.mark.failing
 def test_amp_article_shows_tags_correctly(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     tags = browser.cssselect('.article-tags')[0]

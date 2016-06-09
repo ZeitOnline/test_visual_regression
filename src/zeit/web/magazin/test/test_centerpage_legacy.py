@@ -34,7 +34,6 @@ def test_centerpage_should_have_default_keywords(testbrowser):
     assert keywords.get('content') == 'Lebensart, Mode-Design'
 
 
-@pytest.mark.failing
 def test_centerpage_should_have_page_meta_keywords(testbrowser):
     browser = testbrowser('/centerpage/lebensart')
     assert '<meta name="keywords" content="Pinguin">' in (
