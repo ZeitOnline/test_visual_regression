@@ -1,0 +1,361 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis" publication-date="" expires="">
+      <display_name py:pytype="str">Zacharias Zacharakis</display_name>
+    </author>
+    <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/cp-content/kolumne-julia-zange" />
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/simple" year="2014" issue="47" ressort="Wissen" serie="Global Drug Survey" contenttype="article" publication-date="" expires="" author="Theodor Schaarschmidt">
+        <supertitle py:pytype="str">Crystal Meth</supertitle>
+        <title py:pytype="str">"Die einfache Herstellung macht den Stoff unkontrollierbar"</title>
+        <text py:pytype="str">Mit Crystal Meth putschten schon die Nazis Soldaten auf. Hat die Droge nun ein Revival? Der Psychiater Leo Hermle behandelt Süchtige. Er weiß, wie riskant der Stoff ist.</text>
+        <description py:pytype="str">Mit Crystal Meth putschten schon die Nazis Soldaten auf. Hat die Droge nun ein Revival? Der Psychiater Leo Hermle behandelt Süchtige. Er weiß, wie riskant der Stoff ist.</description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/wissen/gesundheit/2014-11/crystal-meth/" type="jpg" title="Crystal Meth: &quot;Die einfache Herstellung macht den Stoff unkontrollierbar&quot;" alt="Crystal Meth: &quot;Die einfache Herstellung macht den Stoff unkontrollierbar&quot;" align="left" publication-date="" expires="2015-02-18T11:51:17+00:00">
+          <bu py:pytype="str">Sichergestelltes N-Methylamphetamin: In Tütchen abgepacktes Crystal Meth</bu>
+          <copyright py:pytype="str">© Arno Burgi/dpa</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/S/Theodor_Schaarschmidt/index" publication-date="" expires="">
+          <display_name py:pytype="str">Theodor Schaarschmidt</display_name>
+        </author>
+      </reference>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/leben/2014-07/crystal-meth-leipzig" year="2014" issue="28" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Carolin Würfel">
+        <supertitle py:pytype="str">Crystal Meth</supertitle>
+        <title py:pytype="str">Freitags ist immer alles mega</title>
+        <text py:pytype="str">Nele hat gerade Abitur gemacht, wohnt im Einfamilienhaus ihrer Eltern – und nimmt jedes Wochenende Crystal Meth. Eine Geschichte von leeren Tagen und langen Nächten.</text>
+        <description py:pytype="str">Nele hat gerade Abitur gemacht, wohnt im Einfamilienhaus ihrer Eltern – und nimmt jedes Wochenende Crystal Meth. Eine Geschichte von leeren Tagen und langen Nächten.</description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/zeit-magazin/leben/2014-07/crystal-meth-teaser/" type="jpg" alt="Crystal Meth" align="left" publication-date="" expires="">
+          <bu py:pytype="str">Crystal Meth</bu>
+          <copyright py:pytype="str">© David Ebener/DPA</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/W/Carolin_Wuerfel/index" publication-date="" expires="">
+          <display_name py:pytype="str">Carolin Würfel</display_name>
+        </author>
+      </reference>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wissen/gesundheit/2014-07/drogen-crystal-meth-wirkung" year="2014" issue="28" ressort="Wissen" serie="Global Drug Survey" contenttype="article" publication-date="" expires="" author="Philipp Woldin">
+        <supertitle py:pytype="str">Drogen</supertitle>
+        <title py:pytype="str">Crystal Meth, die Zeitgeistdroge</title>
+        <text py:pytype="str">Schneller Spaß, schnelle Abhängigkeit: Crystal Meth ist keine Modedroge, die Menschen nehmen das künstliche Mittel seit über 100 Jahren. Zeit, mit den Mythen aufzuräumen.</text>
+        <description py:pytype="str">Schneller Spaß, schnelle Abhängigkeit: Crystal Meth ist keine Modedroge, die Menschen nehmen das künstliche Mittel seit über 100 Jahren. Zeit, mit den Mythen aufzuräumen.</description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/wissen/2014-07/crystal-meth/" type="jpg" title="Drogen: Crystal Meth, die Zeitgeistdroge" alt="Drogen: Crystal Meth, die Zeitgeistdroge" align="left" publication-date="" expires="2014-12-03T16:21:00+00:00">
+          <bu py:pytype="str">Crystal Meth hat gewöhnlich die Form grober Kristalle, die an Eis erinnern. Es wird hauptsächlich geraucht.</bu>
+          <copyright py:pytype="str">© Robin Nelson/dpa</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/W/Philipp_Woldin/index" publication-date="" expires="">
+          <display_name py:pytype="str">Philipp Woldin</display_name>
+        </author>
+      </reference>
+    </references>
+    <rankedTags xmlns:ns11="http://codespeak.net/lxml/objectify/pytype">
+      <tag ns11:pytype="str" uuid="da57cca8-1341-4de4-9a46-5490c2870bbf" url_value="drogensucht" type="free">Drogensucht</tag>
+      <tag ns11:pytype="str" uuid="d7c822dc-5db9-47e8-9b14-d0098930f069" url_value="drogenkonsum" type="free">Drogenkonsum</tag>
+    </rankedTags>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" alt="Crystal Meth: Nacy braucht was Schnelles" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00">
+      <bu py:pytype="str">Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
+      <copyright py:pytype="str" link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
+    </image>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">10492218</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Dorit Kowitz</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">Politik</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-02-15T21:10:22.809426+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-02-12T03:32:17.547937+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-02-15T21:10:25.448237+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-02-15T21:11:25.258822+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-02-15T17:18:50.700365+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-02-15T17:18:53.040833+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">29.01.2015</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2015-05-Crystal</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.aufmacher</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">Crystal</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-02-15T17:18:24.806063+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.wittmann</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Als Nancy mit 22 von ihrem damals 21-jährigen Freund M. schwanger wurde, hörten beide sofort mit allem auf: den Kippen, dem Kiffen, dem Crystal. Es fiel ihnen noch leicht. Als ihre Tochter ein Jahr alt war, begann Nancy aber etwas zu fehlen. Nur auf Familie machen, fand sie, das passte nicht zu ihr. So nahm sie wieder ab und zu etwas Crystal und langweilte sich nicht mehr. "Es gab mir das Gefühl", sagt Nancy, "noch was vom Leben zu haben. Das war nur für mich." (ft)</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="origname">Crystal</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">13</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/2015/05/Crystal</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2015-01-29T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">41b7eb498ee744f3a56c73567395a9ec</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2015-02-12T03:30:27+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Gesellschaft</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">Dossier</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2015-05</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Tagsüber Kinder und Haushalt, nachts der Rausch: Nancy nahm Crytal Meth, 14 Jahre lang. (ft)</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">34159</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:6ef59e37-385a-46c0-ac5b-8acf2f3fc951}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">05</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Griechenland-Krise</supertitle>
+    <title>Ein lautes Nein aus Griechenland</title>
+    <subtitle>Die Griechen stellen Europa mit ihrem klaren Votum gegen die Sparpolitik vor die Wahl: Verbessert die Bedingungen oder schmeißt uns aus dem Euro, mit allen Konsequenzen.</subtitle>
+    <byline>Ein Kommentar von Zacharias Zacharakis, Athen</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" alt="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00" layout="large" is_empty="False" title_local="Crystal Meth: Nancy braucht was Schnelles" alt_local="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" title="Crystal Meth: Nancy braucht was Schnelles">
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
+      </image>
+      <p>Sie sagt, stolz noch immer, dass ihr niemand etwas angemerkt hat, die
+      Lehrer ihrer Kinder nicht, ihre Eltern nicht, die Vermieter nicht. Nur ihre Große, die damals
+      sieben, acht, neun Jahre alt war, hat etwas mitbekommen. Aber das erfuhr Nancy Schmidt erst,
+      als es zu spät war.</p>
+      <p>Nancy hatte tatsächlich ein geregeltes Leben, auf gewisse Weise. Jeden Tag weckte sie pünktlich ihre beiden Kinder, machte ihnen Frühstück und brachte sie zur Schule. Zurück zu Hause, kiffte sie, zum Runterkommen. Geschlafen hatte sie nie viel, das ging nicht gut, wenn man druff war.</p>
+      <p>An den Vormittagen versuchte sie, alles Notwendige zu erledigen, Einkaufen, Amtswege, Arztbesuche. Jeweils am Abend zuvor hatte sie sich an die Tür ihrer Parterrewohnung Zettel geklebt, auf die sie geschrieben hatte, was zu tun oder besorgen wäre. Sie vergaß trotzdem jeden Tag etwas davon. Oft dachte sie nicht mal dran, ihre Cola zu trinken, obwohl sie sich die Flasche Stunden zuvor extra auf den Tisch gestellt hatte. Auch darin glichen sich die Tage. "Konzentration", sagt sie, "ist ein großes Problem, wenn du druff bist."</p>
+      <p>Aber das Geschäft hat sie auf die Reihe gekriegt. Es war nicht schwer. Denn die Kunden kamen zu ihr.</p>
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" src="http://xml.zeit.de/zeit-online/image/zeitcover/zeitcover-05-360x260.jpg" type="jpg" align="left" href="http://services.zeit.de/ausgabenseite/?wt_zmc=fix.int.zonpme.zeitde.artikelbox.ausgseite.bildtext.cover.cover&amp;amp;utm_medium=fix&amp;amp;utm_source=zeitde_zonpme_int&amp;amp;utm_campaign=artikelbox&amp;amp;utm_content=ausgseite_bildtext_cover_cover" publication-date="" expires="" layout="small" is_empty="False" set-manually="True">
+        <bu py:pytype="str">Dieser Artikel stammt aus der ZEIT No 5 vom 29.1.2015.</bu>
+        <copyright py:pytype="str" link="http://services.zeit.de/ausgabenseite/?wt_zmc=fix.int.zonpme.zeitde.artikelbox.ausgseite.bildtext.text.text&amp;amp;utm_medium=fix&amp;amp;utm_source=zeitde_zonpme_int&amp;amp;utm_campaign=artikelbox&amp;amp;utm_content=ausgseite_bildtext_text_text">Hier können Sie die aktuelle Ausgabe lesen.</copyright>
+      </image>
+      <p>In den letzten fünf Monaten vor der Festnahme verkaufte Nancy das Zeug selbst. Die Kunden wussten, wann die Kinder aus dem Haus waren, viele der Kunden waren ja selbst gerade erst dem Schulalter entwachsen. Also riefen sie Nancy vormittags an, oder sie kamen gleich vorbei. Einige wollten nur Stoff für eine Nase voll; 0,1 bis 0,3 Gramm, die Nancy für 10 bis 30 Euro verkaufte. Manche kauften auf Vorrat und wollten ein halbes Gramm, einige ein ganzes.</p>
+      <p>Die Ware hatte Nancy in Kommission von Sandra, die im selben Haus wohnte. Sandra bekam auch die Einnahmen. Dafür konnte Nancy umsonst ihr Gramm pro Woche haben. Das klappte ganz gut, sieht man einmal davon ab, dass Nancys Nase in den letzten Wochen vor der Festnahme arg zugeschwollen war. Und dass die Polizei ihre Handytelefonate mitgehört hatte. Aber das wusste sie ja nicht.</p>
+      <p>Am Nachmittag holte Nancy die Tochter und den Sohn aus dem Hort. Sie schaute, dass die beiden ihre Hausaufgaben erledigten, ließ sie spielen, machte Abendbrot.</p>
+      <p>Wenn es draußen dunkel wurde, trudelten in dem kleinen, gelb verklinkerten Mietshaus in  Gera-Zwötzen ihre Freunde ein. Die meisten waren gleichzeitig Kunden. Sobald die Kinder im Bett waren, hackte Nancy mit ihrer Krankenkassenkarte die Kristalle zu Pulver, schob sich daraus auf dem Couchtisch eine Linie zurecht und rotzte sie weg durch einen gerollten Geldschein.</p>
+      <p>Nancy fand, dass sie auf diese Weise noch etwas vom Tag hatte. Nämlich die Nacht. Sie brauchte dafür nur "was Schnelles". So nennen sie Crystal Meth in Gera.</p>
+      <p>
+        <em>Nancy, wie ist das, wenn man das Zeug nimmt?</em>
+      </p>
+      <p>
+        <em>"Man zieht’s durch die Nase. Und da läuft schon so ein schönes Tränchen an einem Auge
+        runter. Dann geht’s gleich auch los. Hinten an der Kehle ein komischer Geschmack, so total
+        bitter. Und dann fängste an mit Schwitzen. So ein kalter Schweiß kommt dann. Überall. Der
+        bricht am ganzen Körper aus. Ich hatte immer ein kleines Handtuch da liegen, für die Hände.
+        Schon deswegen hab ich drauf geachtet, dass die Kinder nicht in der Nähe sind. Ich wollte
+        keinen berühren."</em>
+      </p>
+      <p>
+        <em>Aber das klingt doch unangenehm: bitter, kalter Schweiß, überall?</em>
+      </p>
+      <p>
+        <em>"Ich fand’s aber angenehm! Allein für das Tränchen hatte es sich schon gelohnt."</em>
+      </p>
+      <p>
+        <em>Und das ist alles?</em>
+      </p>
+      <p>
+        <em>"Na ja, es löst Glücksgefühle aus. Da könntste Bäume ausreißen. Man ist auf jeden Fall
+        leistungsfähiger. Solange es noch wirkt, jedenfalls. Am Ende hat’s bei mir nicht mehr so
+        gewirkt. Ich konnte zuletzt sogar auf Droge essen."</em>
+      </p>
+      <p>Nancy ist jetzt 35 und sieht auch ungefähr so alt aus. Das dürfte nach
+      allem, was vorher über Crystal Meth zu erfahren war, gar nicht sein. Das Rauschgift
+      Methamphetamin, das man in seiner kristallinen Form schnupfen und aufgelöst spritzen oder
+      schlucken kann, soll Gehirnzellen schneller zerstören als viele andere Drogen; die Sucht
+      danach soll den Körper rasend altern lassen.</p>
+      <p>
+        Nancy hat 14 Jahre lang Crystal genommen. Sie müsste wie eine verlebte Frau von Mitte 50 aussehen, zahnlos, die Gesichtshaut zerfurcht, von Wunden zerfressen. Man kennt diese Vorher-nachher-Fotos aus den USA,
+        <em><a class="" href="http://www.facesofmeth.us/main.htm" target="_blank">The Faces of Meth</a>,</em>
+        die Gesichter von Crystal. Ein Sheriff aus Multnomah County in Oregon hat sie 2004 veröffentlicht, um in den Schulen seiner Gegend vor der Droge zu warnen. Die Süchtigen von den Polizeifotos hatten bloß ein paar Jahre Meth-Konsum hinter sich. Sie sahen aus wie Zombies in Horrorfilmen. Durch das Internet kennt sie die ganze Welt.
+      </p>
+      <p>Doch irgendwie scheinen die Bilder nicht abzuschrecken. Es probieren ständig mehr Deutsche Crystal. 2.746 Konsumenten erwischte die Polizei im Jahr 2013 das erste Mal mit der Droge, im Jahr davor waren es 2.556 neue Auffällige, 2011 nur 1.693. Womöglich bilden die Fotos und Nachrichten nur einen Teil der Wirklichkeit ab. Bloß, welchen lassen sie dann weg?</p>
+    </division>
+    <caption>Nancy Schmidt auf einem Feld hinter ihrer Wohnung in Münchenbernsdorf. Die Kleinstadt
+      mit 3000 Einwohnern liegt zwischen Gera und Jena. Hier gibt es viel Natur – und viel
+      Langeweile</caption>
+    <caption>Ein Foto aus der Zeit, als Nancy regelmäßig Crystal Meth nahm. "Es gab mir das Gefühl,
+      noch was vom Leben zu haben", sagt sie. Mehr als Familie, Arbeit, Haushalt</caption>
+    <caption>In Tschechien, gleich hinter der Grenze, gibt es Zigaretten und billige Klamotten.
+      Nancys Freundin Sandra wusste, wo es auch Crystal Meth gab. Ihre Kinder nahm Sandra zur
+      Tarnung mit auf Shoppingtour</caption>
+    <image-credits>Fotos: Milos Djuric für DIE ZEIT; [M] Tobias Kruse/Ostkreuz (Crystal
+      Meth)</image-credits>
+    <image-credits>Fotos (Ausschnitte): Milos Djuric für DIE ZEIT (S.14); Sean Gallup/Getty Images
+      (S.15); Tobias Kruse/Ostkreuz (Crystal Meth)</image-credits>
+    <supertitle>Crystal Meth</supertitle>
+    <division type="page" teaser="Der Horror von Crystal wurzelt in der Normalität">
+      <p>Nancys Haut ist an diesem Tag vom Sonnenstudio gereizt; sie hat ein paar Minuten zu lange auf der Bank gelegen. Ansonsten scheint alles in Ordnung zu sein. "Aber", sagt Nancy, "das mit den Zähnen stimmt."</p>
+      <p>Ihre waren total kaputt. In den Jahren auf Droge hatte sie wie alle Meth-Süchtigen zu wenig getrunken und oft tagelang nichts gegessen. Methamphetamin unterdrückt den Durst, den Appetit, den Schmerz. Durch den Mangel an Nährstoffen und Flüssigkeit faulen die Zähne und lockern sich. Außerdem knirschen Crystal-Konsumenten oft.</p>
+      <p>Aber Nancy hat sich die Zähne machen lassen, mit Kronen und einer Teilprothese. Es sieht gelungen aus. Allein die Zuzahlung muss ein Vermögen gekostet haben. "Nee", sagt Nancy, "ich bin doch Hartzer. Das hat komplett die Kasse übernommen."</p>
+      <p>Man kann manche Spuren verwischen, die die Droge im Körper hinterlässt, und der Sozialstaat zahlt. Das ist schon ein Hinweis darauf, warum Crystal nicht den Schrecken entfaltet, wie es einst das Heroin tat, in den achtziger Jahren, als plötzlich lauter Jugendliche aus gutem Hause mit leerem Blick, lahmer Zunge und Wundgeschwüren an zerstochenen Armen die Bahnhofsvorplätze in Frankfurt, Zürich und West-Berlin belagerten.</p>
+      <p>Nancy Schmidt aus Münchenbernsdorf dagegen verschwindet in ihrer Normalität wie ihr Name in der Masse. Sie misst 1,60 Meter, wirkt zierlich und zäh zugleich, trägt das dunkel gefärbte Haar halblang gestuft, hat hellbraun-grüne Augen, schmale Lippen mit Piercing und eine tiefe Stimme, mit der sie das Ostthüringer Sächsisch ihrer Heimat spricht.</p>
+      <p>In ihrem Bemühen, nichts zu beschönigen, verwendet Nancy gern grobe Wörter: "wegrotzen", "anscheißen", "abpissen", das aber auf freundliche Art. Sie sagt, sie sei immer das schwarze Schaf der Familie gewesen. "Ich war schon als Kind abenteuerlustig. Ich zog lieber mit den Kerlen um die Häuser, statt Hausaufgaben zu machen." Sie sei ganz anders als die vier Jahre jüngere Schwester, die ein Leben führe, in dem alles seinen Gang gehe, "schön in Reihenfolge: Ausbildung, Arbeit, Kind, und jetzt baut sie ein Haus".</p>
+      <p>Es ist Nancys Versuch, zu erklären, wie ihr das passieren konnte, wo sie doch ein fröhliches Mädchen war in ihrem Dorf und ihre Familie es nicht schlecht getroffen hatte, verglichen mit anderen in der Thüringer Provinz der Nachwendezeit. Sie hatte eine friedliche Kindheit auf dem mütterlichen Bauernhof nahe der kleinen Großstadt Gera, mit vielen Tieren und mit Eltern, die beide aus der Landwirtschaft kamen, aber nach der Wende noch einmal neu Fuß fassen konnten, die Mutter bei einem Bestatter, der Vater in einem Abrissunternehmen. Die Schule war Nancy nie wichtig. Trotzdem: Als sie "aus Faulheit" nur ein Hauptschulzeugnis erreicht hatte, holte sie schnell in Gera den Realschulabschluss nach.</p>
+      <p>Vor einem Jahr stand in den Zeitungen: "Die Horrordroge erreicht Berlin." Das las sich, als stünde eine feindliche Armee vor der Hauptstadt und als bemerkte man erst jetzt, dass an den Rändern des Landes schon lange Krieg herrschte. Dass eine harte Droge erst die Dörfer erobert und dann in der Großstadt ankommt, ist: bemerkenswert. Dass es in Berlin verboten zugeht mit Rauschgiften, gilt ja als gesetzt. Aber auf dem Land, hinterm Wald?</p>
+      <p>Etwas einen Horror zu nennen erklärt da nicht viel. Es ist bloß ein
+      Reflex: Ein beängstigendes Phänomen wird zum Dämon erklärt und erscheint dadurch wie losgelöst
+      von der breiten Gesellschaft. Diejenigen, die dem Dämon anheimgefallen sind, werden so zu
+      Aussätzigen, die das Publikum aus sicherem Abstand betrachten kann mit einem wohligen Schauer
+      ob der eigenen Unversehrtheit.</p>
+      <p>Der Horror von Crystal besteht allerdings darin, dass er in der Normalität wurzelt. Er gedeiht in der Kleinstadt, blüht auf dem Land, wächst in der Provinz, bevorzugt nahe der Grenze zu Tschechien, wo die Droge hergestellt wird. Seit Jahren werden fast alle größeren Crystal-Funde im Südosten Deutschlands gemacht, am Rand von Bayern, Sachsen und Thüringen und in Südbrandenburg. Dort sucht die Polizei mit Sondereinheiten am gründlichsten. Dort sitzen die meisten Täter und Süchtigen – was in der Regel ein- und dasselbe ist.</p>
+      <p>Nancy, die Abenteuerlustige, ist nicht weit gekommen. Seit ihrem Prozess wohnt sie wieder nahe dem Hof der Eltern, in der sehr kleinen Kleinstadt Münchenbernsdorf, Kreis Greiz, gut 3.000 Einwohner. Es sind nur 15 Kilometer bis nach Gera, wo sie der Droge verfiel. In Münchenbernsdorf hat Nancy eine geräumige Dreizimmerwohnung gefunden, die sie mit dem Wohngeld des Staates bezahlt. Auf hellem Laminat stehen helle Möbel, eine moderne Couch, die sie nachts zum Schlafen nutzt. Hauptsache, sagt sie, die Kinder hätten je ein Zimmer. Ein bisschen Kunsthandwerkliches ist hier und da drapiert auf Borden vor Wänden in warmen Farben. Dazu Familienfotos, Kinderzeichnungen, Gebasteltes. Weil es keinen Balkon gibt, raucht Nancy nur in der Küche und lüftet danach, der Kinder wegen.</p>
+      <p>Jeden Moment kommen sie nach Hause. Nancy hat einen weiteren Tag bei der Tafel der Geraer Armenspeisung hinter sich. Mittlerweile arbeitet sie da ehrenamtlich. Zuvor hatte sie bei der Tafel Arbeitsstunden abgeleistet, zu denen man sie vor Jahren verurteilt hatte, wegen unerlaubten Drogenbesitzes und wegen eines Blechschadens, den sie an einem parkenden Auto verursacht hatte. Sie konnte die Strafen nicht zahlen. Kleinigkeiten sind das im Vergleich zu dem, was 2012 kam: elf Wochen Untersuchungshaft und ein Prozess vorm Landgericht.</p>
+      <p>Es klingelt, Nancys Mutter bringt die Kinder. Sie waren nach der Schule bei Oma auf dem Hof, weil heute Schlachttag ist. Nancys Neunjähriger will gleich zu seinem Cousin verschwinden, der im selben Haus wohnt. Aber Nancy hält ihn an, vorher seine Schulsachen in Ordnung zu bringen. Die Zwölfjährige kommt müde zu ihrer Mutter schmusen. Sie war fünf Tage lang auf Klassenfahrt. "Das ging ja jeden Tag bis in die Puppen", sagt Nancy amüsiert zu ihr. "Ich hab doch im Handy bei WhatsApp gesehen, bis wann ihr online wart."</p>
+      <p>Offensichtlich ist das ein belebtes Familiennest, aber auch eine Trutzburg der Verlässlichkeit, in der sich Nancy vor sich selbst verschanzt. Sie weiß, wie gefährdet sie ist, rückfällig zu werden. Sie sagt: "Ich brauche immer mal ’nen Kick. So ein Stino-Leben", sie weist mit der Hand kurz, fast scheu in ihre ordentliche Wohnung, "wollte ich nie führen."</p>
+      <p>Stino: stinknormal, abstinent, langweilig. Das Leben, eingezwängt zwischen Hügeln und Straße, zwischen Familie und Arbeit, zwischen Tag und Nacht, erfüllt Nancy nicht: morgens mit dem Bus zum Job nach Gera, nachmittags nach der Schule die Kinder umsorgen. "Und dann", sagt Nancy, "bringste sie ins Bett und kannst selber ooch nich mehr lange die Augen offen halten. Dann schläfste vorm Fernseher ein, und das war’s. Das kann’s nich sein."</p>
+      <p>Nancy war vor anderthalb Jahren einen ganzen Sommer lang zur Therapie in Römhild, in einer schönen Klinik aus der Kaiserzeit hinterm Thüringer Wald. Sie sagt, es war herrlich, "noch mal so wie große Ferien. Wir konnten raus und alles, nachts schwimmen gehen und so."</p>
+      <p>Römhild ist ein Zauberberg gegen den Horror. Nahe Bayern, wo man schon Fränkisch spricht, stehen am Hang im lichten Wald die Villen einer 1902 als Lungenheilanstalt gegründeten Klinik. Statt wegen Schwindsucht kommen die Patienten heute wegen ihrer Drogenabhängigkeit. Sie können ihre Kinder mitbringen und sogar Hunde. Für die Kinder gibt es Erzieherinnen, für die Hunde Zwinger.</p>
+      <p>In Römhild lernte Nancy, zu verstehen, dass ihr zum Glück etwas fehlt, das nicht verboten ist und abhängig macht. Sie weiß nur noch nicht, was das sein könnte.</p>
+    </division>
+    <division type="page" teaser="Man wird schlank und lüstern">
+      <p>Crystal Meth manipuliert das Belohnungszentrum im Hirn. Wer es nimmt,
+      fühlt jene berauschende Stärke, Geistesgegenwart und Euphorie, die der Organismus
+      normalerweise nur dann über Botenstoffe und Hormone bereitstellt, wenn etwas Schönes,
+      Aufregendes passiert: ein Sieg im Sport, ein Erfolg im Job, eine bestandene Prüfung, eine
+      frische Liebe. Crystal liefert den Lohn ohne Leistung.</p>
+      <p>Bisher hält vor allem die Angst vorm Gefängnis Nancy davon ab, wieder Crystal Meth zu nehmen. Sie will nicht enden wie Sandra, ihre frühere Nachbarin und Freundin, die ihr damals die Drogen zum Verkauf zugeteilt hatte.</p>
+      <p>Sandra wurde Anfang 2013 im selben Prozess wie sie verurteilt, aber nicht nur zu einer Bewährungsstrafe wie Nancy, sondern zu drei Jahren und sechs Monaten Haft. Zwei Jahre davon muss Sandra im Maßregelvollzug in Hildburghausen verbringen, in einer psychiatrischen Klinik mit Gittern.</p>
+      <p>Sandra ist 34 und hat drei Kinder, eine zwölfjährige Tochter und zwei kleine Söhne, drei und zwei Jahre alt. Die Väter sind fort, die Kinder erzieht jetzt die 56-jährige Oma.</p>
+      <p>Sandra sieht die Kinder höchstens alle zwei Wochen, weil die Fahrt nach Hildburghausen teuer ist, jedes Mal Benzin für 370 Kilometer. Es darf immer nur ein Kind zu Sandra in einen verglasten Besucherraum mit Spielzeug. Der Dreijährige rastet jedes Mal aus, weil Sandra nicht einfach wieder mit ihm nach Hause fährt. Die große Tochter ist sowieso in psychologischer Behandlung.</p>
+      <p>Es ist ein Desaster, dem Nancy nur knapp entgangen ist.</p>
+      <p>Ihre gemeinsame Zeit auf Crystal begann 2010 in Gera-Zwötzen, in dem kleinen, gelb verklinkerten Mietshaus. Dorthin war Nancy nach der Trennung von ihrem Freund gezogen, zusammen mit den Kindern. Im selben Haus lebte Sandras Mutter, und Sandra kam häufig zu Besuch. Mit ihrem Freund und ihrer Tochter wohnte Sandra in Frankfurt am Main, sie arbeitete als Altenpflegerin. Ihr Freund hatte ihr "Pep" angeboten, ein aufputschendes Amphetamin wie Speed, chemisch verwandt mit Crystal, aber angeblich nicht so verheerend in seiner Wirkung.</p>
+      <p>Sandra, die schon 28 war und vorher nie Drogen probiert hatte, noch nicht mal Alkohol mochte, fand Gefallen daran. Denn sie nahm ab, erst recht, als sie bei ihren Besuchen in Gera noch Crystal schniefte. Mühelos kam sie von 75 auf 58 Kilogramm. Sie war begeistert. Ihrer Freundin Nancy erzählte sie, wie hemmungslos ihr Sex nun sei.</p>
+      <p>Schlank und lüstern werden, wach und unternehmungslustig sein: Der Ruf eilt Crystal erfolgreicher voraus als alle Schreckensbilder von Pickeln, Falten und ausgefallenen Zähnen.</p>
+      <p>Die Beziehung ging trotzdem kaputt. Sandra verlor ihren Job, weil sie dauernd verschlief. Bald hatte sie wieder ein Zimmer bei ihren Eltern in Gera-Zwötzen. Hier gab es kein Pep, aber bei Nancy Crystal.</p>
+      <p>Gera-Zwötzen, sagt Nancy, sei ein übles Viertel. In Zwötzen würde praktisch jeder "kiffen oder rotzen oder beides". In dem ehemaligen Industriearbeiterstadtteil liegt der Anteil der Arbeitslosen unter den 25- bis 50-Jährigen bei 76 Prozent.</p>
+      <p>Die jungen Frauen entglitten nun gemeinsam im Rausch ihrer kleinen, engen Welt. So wurden sie Teil des Übels, beide Ende 20, beide arbeitslos, alleinerziehend und süchtig danach, dass etwas passiert in ihrem Leben.</p>
+      <p>Nirgends speist sich die Sehnsucht nach einem anderen, aufregenderen Dasein als dem eigenen so ergiebig wie aus der Langeweile der kleinen Stadt. Wer sich in der Provinz nicht zufriedengibt mit dem, was das Leben für ihn bereithält, und gleichzeitig nie gelernt hat, wie man die Welt erobert mit Ideen, Ehrgeiz, Mut, gerät leicht in Versuchung. Die Elterngeneration  betäubte sich noch mit Alkohol, so wie Nancys und Sandras leibliche Väter es taten (weswegen ihre Mütter die Väter rauswarfen). Sandra und Nancy schnieften Crystal.</p>
+      <p>Nancy weiß noch, dass sie 15 war, als sie anfing zu kiffen, bald täglich ein Gramm Haschisch. Sie weiß aber nicht mehr, ob sie als Teenager jemals von einem Beruf geträumt hat oder von einem fernen Land. "Eher nicht", sagt sie.</p>
+      <p>Sie hatte sich nie um eine Lehrstelle bemüht. Schnell genug Geld zu verdienen schien ihr der Schlüssel zur Freiheit zu sein. Sie wollte zu Hause raus, um dem Dauerstreit mit dem Vater zu entgehen, der ihre Jugend geprägt hatte. Erst mit 18 erfuhr sie durch Zufall, dass dieser Mann in Wahrheit gar nicht ihr leiblicher Vater war, denn: Sie sollte für einen Wildfremden, der an den Folgen seiner Alkoholsucht gestorben war, die Bestattungskosten übernehmen. Weil sie, teilten die Ämter mit, seine Tochter sei.</p>
+      <infobox is_empty="False" href="http://xml.zeit.de/infoboxen/crystal-meth" publication-date="" expires=""/>
+      <p>Etwa zur selben Zeit, 1998, wurde ihr in einem Club das erste Mal Crystal angeboten, kostenlos. Sie hatte keine Angst und fand die Wirkung  erstaunlich: diese gute Laune, diese unbändige Energie, die Munterkeit! Wie andere Alkohol tranken, rotzte Nancy nun eine weg – aber immer nur am Wochenende. Die Woche über arbeitete sie in einem Fotolabor oder in einer Porzellanmanufaktur.</p>
+      <p>
+        <em>Was, Nancy, das geht mit Crystal, tagelang nichts nehmen, sondern nur mal am Wochenende?</em>
+      </p>
+      <p>
+        <em>"Ja, das geht. Bei mir ging es zehn Jahre lang, bis 2008. Bis mich mein Ex verlassen
+        hat."</em>
+      </p>
+      <p>Man kann Crystal Meth dosieren. Auch das ist Teil der Wahrheit, die nicht zu den furchtbaren Bildern passt. Viele nehmen Crystal Meth erst mal zu sich wie andere Bier oder Alcopops, ein- bis zweimal die Woche. Ärzte geben zu, dass manche Konsumenten es jahrelang so handhaben. Die meisten aber, warnen sie, wollten schnell mehr.</p>
+      <p>Methamphetamin gilt in der Grenzregion zu Tschechien schon seit Mitte der neunziger Jahre als Partydroge, die man wie Ecstasy mal nehmen kann, aber nicht zwingend immer häufiger nehmen muss. Und Crystal ist billig. Je näher man der tschechischen Grenze kommt, desto kürzer sind die Transportwege, desto preiswerter wird der Stoff. Einen Jugendlichen im Erzgebirge oder in der Oberpfalz kostet der Rausch anfangs nur so viel wie ein Cocktail. Aber die Wirkung hält viel länger an, 24 Stunden und mehr. Meth ist damit vielleicht die erste harte Droge, die sich jeder leisten kann. Das macht sie so gefährlich attraktiv.</p>
+      <p>
+        <em>Wenn man tagelang nicht schlafen, nicht trinken, nicht essen will, Nancy, was macht man
+        da eigentlich die ganze Zeit?</em>
+      </p>
+      <p>
+        <em>"Och", sagt Nancy, "ich hatte immer was zu tun. Jeder hat immer genug zu tun, wenn er
+        druff ist."</em>
+      </p>
+    </division>
+    <division type="page" teaser="Aus dem abenteuerlustigen Mädchen vom Dorf wurde ein Junkie">
+      <p>Einmal, 2004 war das, da glaubte Nancy, sie habe einen Pickel im Gesicht. Als sie sich genauer betrachtete, sah sie unzählige. Sie nahm eine Pinzette und drückte so lange an ihrer Haut herum, bis sie fand, dass es jetzt gut war. Am nächsten Morgen sah sie aus wie eine Pockenkranke. Nancy sagt: "So kommen die berühmten Fotos zustande. Wenn du auf Crystal bist, siehst du Sachen, wo gar keine sind."</p>
+      <p>Die Droge schärft die Wahrnehmung bis zum Irrsinn. Handys, Computer oder Fahrräder werden akribisch zerlegt, aber nie wieder zusammengebaut. Während Nancy in ihrer Küche Kaffee aufsetzt, zeigt sie auf einen billigen Beistelltisch an der Wand. Die Tischplatte ist mit kleinen roten, blauen und gelben Quadraten in der Größe von Mosaikfliesen beklebt. In ihren endlosen Nächten damals hatte Nancy diese winzigen Vierecke aus Folie zurechtgeschnitten, Stück für Stück. Und wehe, eines war nicht symmetrisch.</p>
+      <p>Als Nancy mit 22 von ihrem damals 21-jährigen Freund M. schwanger wurde, hörten beide sofort mit allem auf: den Kippen, dem Kiffen, dem Crystal. Es fiel ihnen noch leicht. Als ihre Tochter ein Jahr alt war, begann Nancy aber etwas zu fehlen. Nur auf Familie machen, fand sie, das passte nicht zu ihr. So nahm sie wieder ab und zu etwas Crystal und langweilte sich nicht mehr. "Es gab mir das Gefühl", sagt Nancy, "noch was vom Leben zu haben. Das war nur für mich."</p>
+      <p>
+        Sie sah zu, dass sie wieder arbeiten ging, im Fotolabor und zur Saisonarbeit in der Porzellanmanufaktur. Familie, Arbeit, Haushalt: Nancy führte das stinknormale Leben, das sie nicht haben wollte. Aber am Wochenende rotzten sie und M. eine weg, machten die Nacht durch, immer zu Hause, immer im Wohnzimmer, immer mit Kumpels, denen auch nichts Besseres einfiel. Konzerte, Kino, Clubs, Autos, Sport, Lernen, Musik, Karriere machen, die Welt retten oder um sie herumjetten – all das vermissten sie nicht, brauchten sie nicht. Sie guckten mal Videos, oft spielten sie am Computer
+        <em>World of Warcraft,</em>
+        meist quatschten sie endlos. Nancy weiß nicht mehr, worüber.
+      </p>
+      <p>Als Nancy 2004, mit 25 Jahren, wieder schwanger wurde, schwor sich das Paar, jetzt "für immer aufzuhören mit dem Scheiß". Nancy ging in Erziehungsurlaub, M. ging auf dem Bau arbeiten.</p>
+      <p>Auch nach der Geburt des Jungen 2005 bemühte Nancy sich, auf dem Arbeitsmarkt etwas wert zu bleiben. Für einen Imbiss fuhr sie Essen auf Baustellen aus. Sie machte einen Gabelstaplerschein. Doch als das Baby ein paar Monate alt war, keimte wieder das Gefühl in ihr, etwas zu verpassen. Sie überlegte aber nicht, was sie mit ihrem Leben anfangen könnte, damit sich die Leere füllte. Sie überlegte, wie sie so Crystal nehmen könnte, dass es ihr Freund nicht merkt. Erst nahm sie es darum heimlich tagsüber, während er arbeiten war. Dann überredete sie auch ihn wieder. Sie sagte: "Da kannste ooch beim Zocken länger durchhalten!"</p>
+      <p>Doch es ging etwas kaputt zwischen ihnen. Sie redeten kaum mehr miteinander. M. verschwand jeden Tag nach der Arbeit an seinen Computer zum Onlinespielen. Nancy hing nachts mit den Freunden im Wohnzimmer ab. Auch sonst lief nichts.</p>
+      <p>
+        <em>Aber Sandra hat doch extra Crystal genommen, um guten Sex zu haben, oder, Nancy?</em>
+      </p>
+      <p>
+        <em>"Ja, bei uns ham’s manche nur deswegen genommen, damit sie stundenlang konnten. Aber bei
+        mir war es das Gegenteil. Wenn ich druff war, konnte ich alles Mögliche machen, aber nicht
+        das."</em>
+      </p>
+      <p>2008 zog der Vater ihrer Kinder aus und hörte wirklich von einem Tag auf den anderen auf mit dem Scheiß. Nancy dachte, sie komme ohne ihn klar. Stattdessen, sagt sie, "ging’s bei mir bergab". Sie brauchte jetzt fast täglich etwas. Aus dem abenteuerlustigen Mädchen vom Dorf mit  ordentlichem Schulabschluss, das noch immer Arbeit gefunden und Geld verdient hatte, wurde ein Junkie. Sie pumpte sich Geld für die Droge oder zählte darauf, dass ihr jemand eine Line ausgab. Man erwischte sie bekifft am Steuer. Sie verlor den Führerschein und den Job beim Imbiss. Sie hatte Schulden.</p>
+      <p>Da kam es ihr gelegen, dass Sandra, ihre neue Freundin, diesen Plan hatte.</p>
+      <p>Nachdem Sandra ganz aus Frankfurt zurückgekehrt war und 2011 ein zweites Kind bekommen hatte, beschloss sie, den Bausparvertrag ihrer großen Tochter aufzulösen. Mit dem Startkapital wollte sie fortan selbst Crystal auf dem Vietnamesenmarkt in Tschechien einkaufen. Denn statt 100 Euro kostete das Gramm hinter der Grenze nur 23.</p>
+      <p>Wo sie hinfahren musste, wusste Sandra. Für solche Drogentouren hatte sie
+      ihrer Dealerin in den Monaten davor oft ihren VW Polo geliehen. Ein paarmal hatte Sandra sie
+      auch begleitet.</p>
+      <p>Aber jetzt wollte Sandra die Dealerin umgehen. Und Nancy, so der Plan, sollte den Stoff in Gera weiterverkaufen. Denn sie hatte die Kunden ja an der Hand: die jungen Leute, die jeden Abend zu ihr kamen, wenn die Kinder im Bett waren.</p>
+      <p>Auf einer der ersten Touren im Herbst 2011 fuhr Nancy mit Sandra mit. 95 Kilometer ging es über die Landstraße von Zwötzen durchs Vogtland nach Johanngeorgenstadt im Erzgebirge, dann nach Potůčky, in die Grenzstadt auf der tschechischen Seite. Die 920 Euro hatte Sandra abgezählt dabei. Hinter dem ersten Kreisel von Potůčky hielt sie kurz am Straßenrand vor einer dieser Buden eines vietnamesischen Händlers, der offiziell Zigaretten verkauft und inoffiziell Crystal, das seine Landsleute illegal im tschechischen Hinterland herstellen.</p>
+      <p>Sandra ließ das Fenster herunter, nickte dem Mann erkennend zu. Sie sagte "wie immer" und ließ sich vier Stangen Zigaretten reinreichen, zur Tarnung. Dann suchte sie sich einen Parkplatz. Die beiden Frauen stiegen aus und kauften an ein paar bunten Ständen Kinderkleidung ein, auch zur Tarnung. Auf dem Rückweg hielt Sandra noch mal an der Zigarettenbude und verschwand darin, sie stopfte sich ein Päckchen mit 40 Gramm Crystal in den Hosenbund, bezahlte die 920 Euro. Dann fuhren sie heim.</p>
+      <p>Zu Hause ließ sich Nancy nie mehr als fünf Gramm von Sandra zuteilen, eins für sich und vier zum Weiterverkauf. Nancy wollte nicht mehr in ihrer Wohnung haben. "Sonst", sagt sie, "wäre ich total abgegangen."</p>
+      <p>So ging das monatelang. Sandra kaufte in Tschechien ein, Nancy vertrieb die Ware von ihrem Wohnzimmer aus. Beide nahmen täglich selbst was. Am Ende, sagt Nancy, habe es gar nicht mehr recht gewirkt. Sie sei im Nachhinein ganz froh, dass der Sache ein Ende mit Schrecken gesetzt wurde.</p>
+      <p>Am 20. April 2012 hielt die Bundespolizei Sandra in Johanngeorgenstadt an. Sie hatte nicht Nancy dabei, dafür aber ihr Baby, ihre damals neunjährige Tochter und deren gleichaltrige Freundin. Sie wähnte sich getarnt. Doch die Zöllner wussten von der Kriminalpolizei aus Gera, dass sie nur gründlich genug suchen mussten. Denn Sandra hatte sich am Handy stets unverblümt mit Nancy über ihre Einkaufspläne, die Reiseroute und die Qualität des Crystals unterhalten. Die Zöllner fanden den Stoff unter Sandras Hosenbund.</p>
+      <p>"Die Sandra ist eigentlich eine ganz Liebe, fast Naive", sagt Nancy. "Aber ich habe ihr immer gesagt: Wenn sie dich kriegen, dann singst du." So kam es. Die Polizisten versprachen Sandra, dass sie schnell wieder zu ihren Kindern könne, wenn sie nur umfassend aussagen würde. Sie glaubte das und redete wie ein Wasserfall, von ihrer Dealerin und von Nancy, von monatlichen Fahrten und 40-Gramm-Tüten, vom VW Polo und von den Verstecken, von den Kunden in Gera. Sie nannte Summen, Mengen, Namen, Orte, Daten, von denen die Polizisten bis dahin keinen Schimmer hatten.</p>
+      <p>Zu ihren Kindern kam sie deshalb nicht.</p>
+      <p>Ein paar Wochen nachdem Sandras Aussagen ausgewertet worden waren, holten die Polizisten auch Nancy ab und schlossen sie in einer Zelle in der Greizer Straße in Gera ein.</p>
+    </division>
+    <division type="page">
+      <p>Es war der erste Tag seit vier Jahren, an dem sie kein Crystal nahm, und der erste seit 17 Jahren, ohne zu kiffen. Nancy zitterte, fror, schwitzte. Sie erbrach sich, sie schlief nicht, sie klapperte. Sie hatte Panikattacken. Nur der Schließer bekam das mit. Sie sagt: "Vielleicht war das gar nicht schlecht. So bleibt es in Erinnerung." Dabei sind sich nicht mal spezialisierte Mediziner sicher, welche Gefahren der kalte Entzug von Methamphetamin birgt und ob man ihn ohne Aufsicht geschehen lassen darf.</p>
+      <p>Am nächsten Tag unterschrieb Nancy eine Vollmacht, die es ihren Eltern
+      erlaubte, ihre Kinder zu betreuen. Die Kinder sehen durfte sie nicht. Ihr stand ein Telefonat
+      zu. Sie entschied sich dafür, ihre Schwester anzurufen, und nannte ihr den Namen des Anwalts,
+      den Drogenfreunde ihr vorsorglich empfohlen hatten.</p>
+      <p>Dann steckte man Nancy, von einst knapp 60 Kilogramm ausgezehrt auf 45, mit Fuß- und Handfesseln in einen Gefangenentransporter nach Chemnitz und brachte sie ins dortige Frauengefängnis. Sie verschlief Pfingsten und die ganze Woche danach. Kein Arzt schaute nach ihr, keine Psychologin. Der Anwalt beantragte ihre Haftprüfung, dann war wochenlang Funkstille. Nancy sagt: "Man hätte mich genauso gut in einer Tierklinik einliefern können. Im Knast gibt’s ja nicht mal anständiges Fernsehen. Nur ARD und ZDF, da vergeht doch die Zeit nicht!"</p>
+      <p>Nach vier Wochen U-Haft kam Nancy unter Auflagen frei. Ihre Mutter holte sie ab. Sie umarmten sich lange, das erste Mal seit Jahren. Die Mutter habe ihr keine Vorwürfe gemacht, sagt Nancy, aber immer wieder gefragt: Warum hast du nichts gesagt?</p>
+      <p>Nancys Eltern hatten keine Ahnung von ihrer Sucht, trotzdem haben sie in der Not alles richtig gemacht. Sie holten die Enkel zu sich aufs Dorf, kümmerten sich bei den Ämtern um die Sozialleistungen für Nancy und beim Anwalt um das Juristische. Das stinknormale, kleinbürgerliche Familienleben, vor dem sie fliehen wollte, fing Nancy in diesen Monaten auf wie ein Netz.</p>
+      <p>Den zehnten Geburtstag ihrer Tochter verschlief Nancy in der Zelle. Dem Mädchen musste sie ausreden, dass es schuld sei an der Verhaftung. Das Kind hatte sich die Schuld gegeben, weil es mitbekommen, aber niemandem gesagt hatte, dass die Mutter immer so was Komisches nahm. Als Nancy in der Nacht ihrer Heimkehr mit ihren beiden Kindern im Bett lag, versprach sie ihnen, sie werde sie niemals wieder allein lassen.</p>
+      <p>Sechs Tage später saß sie wieder in U-Haft. Ihr Speicheltest war positiv, obwohl sie keine Drogen genommen hatte. Natürlich glaubte ihr das niemand, außer der Familie. Im Gefängnis, diesmal in Dresden, lernte sie eine inhaftierte Polizistin kennen, die gedealt hatte wie sie. Von ihr erfuhr Nancy, dass eine Blutuntersuchung Pflicht gewesen wäre. Erst fünf Wochen später kam heraus, dass der Drogentest fehlerhaft gewesen war. Nancy war clean und blieb es. Versprach vor Gericht, eine Langzeittherapie für Suchtkranke zu machen. Auch deshalb fällte das Gericht ein mildes Urteil: vier Jahre auf Bewährung und 200 Arbeitsstunden. Im Sommer 2013 kam Nancy in die Klinik für Suchtkranke in Römhild.</p>
+      <p>Ralf Schlößer leitet sie. Der Medizinprofessor hat sich letztes Jahr diese Studie angesehen, die die Bundesregierung bezahlt hat. Sie besagt, dass Crystal eine Zeitgeistdroge zur Leistungssteigerung sei, etwa um gut durchs Abitur zu kommen oder im anspruchsvollen Job durchzuhalten. Oder eben beim Sex. So haben es Wissenschaftler in Hamburg <a class="" href="http://drogenbeauftragte.de/fileadmin/dateien-dba/Presse/Downloads/ATS-Bericht_final.pdf" target="_blank">anhand einer Stichprobe von 400 Konsumenten</a> der Droge erforscht. Viele Medien sprangen darauf an, es klang so einleuchtend: Sex, Leistungsdruck, Bildung – die kranke Droge zur krankhaft ehrgeizigen Gesellschaft!</p>
+      <p>Schlößer wundern die Ergebnisse, sehr. Sie haben <a class="" href="http://www.zeit.de/wissen/gesundheit/2014-07/drogen-crystal-meth-wirkung" target="_blank">gar nichts mit seiner Realität in Südthüringen zu tun,</a> nichts mit der in der Oberpfalz, in Franken, in Sachsen, Südbrandenburg. Alltäglich sind hier die Nancys und Sandras und ihre Drogenfreunde, junge Männer ohne Arbeit, oft ohne Ausbildung, immer ohne einen Plan davon, welche Kicks das Leben bereithält jenseits der Droge.</p>
+      <p>Die meisten, die wegen "moderner Drogen" in Römhild sind, haben Crystal Meth genommen, viele noch anderes dazu: Alkohol, Cannabis, LSD, Ecstasy.</p>
+      <p>
+        Fast alle Patienten sind unter 30. Sehr junge, zum Teil zu braun gesonnte Männer mit aufgepumpten Muskeln trollen da übermütig übers Gelände. Schlößer sagt, der Kult um den Körper spiele eine große Rolle bei Crystal-Konsumenten, die
+        <em>Faces of Meth</em>
+        werde man hier nicht finden, aber sicher auch keine Workaholics.
+      </p>
+      <p>"Abitur?", fragt eine Staatsanwältin in Gera belustigt. "Sorry, aber das hatte bei uns noch keiner!" Eigentlich empfange nahezu jeder Tatverdächtige in Drogenstrafverfahren staatliche Hilfe. "Mit Crystal ist es einfach so", sagt sie: "Das wird hier als relativ <a class="" href="http://www.zeit.de/zeit-magazin/leben/2015-01/tatort-crystal-meth-kiel-kritikerspiegel" target="_blank">billige Möglichkeit angesehen, einen draufzumachen</a>, weil ansonsten in den Käffern tote Hose ist."</p>
+      <p>Die U-Haft ist nun zweieinhalb Jahre her. Nancy hat inzwischen versucht,
+      Altenpflegerin zu werden, ein Gutachter hielt sie für geeignet. Aber ihre Arbeitsvermittlerin
+      war dagegen. Weil sie dann ja mit Medikamenten zu tun hätte. Ein Jahr lang hat sie an den
+      Treffen einer "Intensivaktivierungsgruppe" für Langzeitarbeitslose teilgenommen. Dort sollte
+      sie lernen, womit sie nie Schwierigkeiten hatte: ihren Alltag zu regeln. In zwei Wochen ist
+      diese Maßnahme zu Ende. Was danach kommt, weiß sie noch nicht. Um etwas zu tun zu haben,
+      bleibt sie erst mal als Ehrenamtliche bei der Tafel der Armenspeisung. Ihr Exfreund, der Vater
+      ihrer Kinder, clean seit sieben Jahren, lebt um die Ecke. Er hat die Kinder jedes zweite
+      Wochenende. Man verstehe sich besser denn je, sagt Nancy. Mit Sandra hat sie nichts mehr zu
+      tun; im Maßregelvollzug sind Handys verboten. Nancy vermisst Sandra ein bisschen, aber sie
+      meidet den Kontakt zu Freunden von damals.</p>
+      <p>Sie weiß, dass es in Münchenbernsdorf inzwischen auch was Schnelles gibt. Längst hat die Droge den Weg in die sehr kleine Kleinstadt geschafft. Es würde Nancy einen Anruf kosten oder ein paar Minuten zu Fuß. Aber sie will nicht, sie ist neu verliebt, sie sagt: "Nee, ich hatte meine Drogenzeit. Das ist vorbei!" Sie sagt es, wie andere von ihrer Discozeit reden, die schon ein paar Jahre her ist.</p>
+      <p>Ein andermal aber, bei Kaffee und Kuchen in ihrer Dreizimmerwohnung, sagt sie: "Ich kann mir nicht vorstellen, dass ich mein Leben lang clean bleibe. Ich will mich nicht in das Muster pressen lassen, in das mich die Gesellschaft haben will, brav arbeiten, Mutter, Hausfrau sein." Nancy kennt sich.</p>
+    </division>
+
+  </body>
+  <teaser>
+    <title>Ein lautes Nein aus Griechenland</title>
+    <text>Die Griechen stellen Europa mit ihrem klaren Votum gegen die Sparpolitik vor die Wahl: Verbessert die Bedingungen oder schmeißt uns aus dem Euro, mit allen Konsequenzen.</text>
+    <supertitle>Eurokrise</supertitle>
+  </teaser>
+</article>

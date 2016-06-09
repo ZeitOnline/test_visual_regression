@@ -89,14 +89,14 @@
 	</region>
 	<region visible="True" visible_mobile="True" area="id-31cf839f-c587-4b18-9084-1cc457ab02a0" kind="storystream" kind_title="Storystream">
 		<area visible="True" visible_mobile="True" hide-dupes="True" area="id-c847b3f5-a566-4536-8341-aa73472392ba" kind="storystream">
-			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5a7a3f3c-d507-473e-831e-6a3b3bf63b12">
-				<block href="http://xml.zeit.de/zeit-online/article/zeit" uniqueId="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
+			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" cp:__name__="id-5a7a3f3c-d507-473e-831e-6a3b3bf63b12">
+				<block href="http://xml.zeit.de/zeit-online/article/zeit" uniqueId="http://xml.zeit.de/zeit-online/storystream/articles/griechenland-referendum-oxi-kommentar" contenttype="article" />
 			</module>
-			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5a7a3f3c-d507-473e-831e-6c3d3bf63b12">
-				<block uniqueId="http://xml.zeit.de/zeit-online/article/01" contenttype="article" />
+			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" cp:__name__="id-5a7a3f3c-d507-473e-831e-6c3d3bf63b12">
+				<block uniqueId="http://xml.zeit.de/zeit-online/storystream/articles/grexit-griechenland-euro-zone" contenttype="article" />
 			</module>
-			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-5a7a3f3c-d507-473e-831e-6e3f3bf64b12">
-				<block uniqueId="http://xml.zeit.de/zeit-online/article/02" contenttype="article" />
+			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" cp:__name__="id-5a7a3f3c-d507-473e-831e-6e3f3bf64b12">
+				<block uniqueId="http://xml.zeit.de/zeit-online/storystream/articles/syriza-tsipras-parlamentswahl" contenttype="article" />
 			</module>
 		</area>
 	</region>

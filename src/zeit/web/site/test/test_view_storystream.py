@@ -11,7 +11,7 @@ def test_storystream_page_should_render_scope(testbrowser):
     browser = testbrowser('/zeit-online/storystream/dummy')
     scope = browser.cssselect('.storystream-scope__dates')
     scope_text = scope[0].text_content().strip()
-    assert scope_text == '25. Januar 2015 bis 19. September 2015'
+    assert scope_text == '25. Januar 2015 bis 5. Juli 2015'
 
 
 def test_storystream_page_should_render_label(testbrowser):

@@ -52,7 +52,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Geschafft!</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on">2014-12-13T00:51:38.353076+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="storystreams">griechenland-krise</attribute>
   <attribute ns="DAV:" name="resourcetype"/>
   <attribute ns="DAV:" name="creationdate">2014-12-09T09:32:11Z</attribute>
   <attribute ns="DAV:" name="getcontentlength">19673</attribute>
@@ -61,10 +60,4 @@
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
   <attribute ns="DAV:" name="supportedlock"> </attribute>
   <attribute ns="DAV:" name="lockdiscovery"/>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_date">2015-01-25T11:00:00+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">yes</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_text">
-  Erstmals seit Ende der Diktatur 1974 in Griechenland gewinnt eine andere als die beiden etablierten Parteien die Parlamentswahl: Das Linksbündnis Syriza und ihr Anführer Alexis Tsipras übernehmen die Macht. An diesen Wahlsieg knüpfen nicht nur viele Griechen ihre Hoffnung auf ein Ende der Krise, selbst in der EU verspricht sich so mancher nun mehr Reformbereitschaft vor allem in der Korruptionsfrage.
-  </attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_title">Syriza und Tsipras gewinnen die Parlamentswahl</attribute>
 </head>
