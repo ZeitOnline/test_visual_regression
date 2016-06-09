@@ -80,6 +80,8 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return ()
         atoms = list(zeit.content.cp.interfaces.ICMSContentIterable(
             storystream_cp))
+        if self.context not in atoms:
+            return atoms[:3]
         pos = atoms.index(self.context)
         if pos == 0:
             return atoms[:3]
