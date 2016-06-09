@@ -14,6 +14,9 @@ Change log for zeit.web
 
 - ZON-2818: Introduce new login-state-footer ESI
 
+- ZON-2927: Split image layout into separate attributes to avoid combinatorial
+  explosion.
+
 
 2.85 (2016-06-08)
 -----------------
