@@ -8,7 +8,9 @@ Change log for zeit.web
 
 - ZON-3092: Add preconnect links
 
-- FIX: Naming things (Zeit.isMobileView)
+- FIX: Align ZON video stage logo
+
+- FIX: Naming things (Zeit.isWrapped)
 
 - FIX: Enable wrapper support for framebuilder
 
