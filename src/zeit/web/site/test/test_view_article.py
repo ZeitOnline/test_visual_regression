@@ -1451,19 +1451,11 @@ def test_article_has_quiz_header_embed(testbrowser):
     assert len(embed.cssselect('.quiz')) == 1
 
 
-def test_article_has_cardstack_header_embed(testserver, selenium_driver):
-    selenium_driver.get(
-        '{}/zeit-online/article/embed-header-cardstack'.format(testserver.url))
-    embed = selenium_driver.find_element_by_css_selector(
-        '.article-heading__embed')
-    card = embed.find_element_by_css_selector('.stack')
-    assert card.is_displayed()
-
-
 def test_article_has_raw_header_embed(testbrowser):
     browser = testbrowser('/zeit-online/article/embed-header-raw')
     embed = browser.cssselect('.article-heading__embed')[0]
     assert len(embed.cssselect('.raw')) == 1
+
 
 def test_article_in_series_has_banner(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
