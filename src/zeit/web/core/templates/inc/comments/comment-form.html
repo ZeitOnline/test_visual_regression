@@ -34,11 +34,11 @@
     </div>
 {% endif %}
 
-<div class="comment-section__form comment-section__item">
+<div class="comment-section__form comment-section__item" data-ct-area="comment_form">
 {%- if request.user %}
     {% set is_mod = 'admin-tech' in request.user.roles or 'admin-editor' in request.user.roles %}
     {%- block comment_form %}
-    <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
+    <form class="comment-form js-submit-comment" data-ct-row="1" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
         {%- if is_mod %} data-mod="mod"{% endif %}>
         {% if view.comment_form.show_comment_form -%}
         <div class="comment-form__text comment-form__text--metadata">
@@ -87,7 +87,7 @@
             <a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
             <input class="button" type="submit" value="{{ submit_value }}" />
         </p>
-        {%- endif %}
+        {% endif %}
     </form>
     {%- endblock %}
 {%- elif view.comment_form.show_comment_form %}

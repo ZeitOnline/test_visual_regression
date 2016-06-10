@@ -12,7 +12,7 @@
 #}
 {% if view.show_commentthread %}
 {% include "zeit.web.core:templates/inc/comments/premoderation.html" %}
-<section class="comment-section" id="comments" data-ct-area="comment">
+<section class="comment-section" id="comments">
     {% set query = '?' + request.query_string if request.query_string else '' %}
     {{ lama.insert_esi('%s/comment-thread%s' | format(view.content_url, query), 'Ein technischer Fehler ist aufgetreten. Der Kommentarbereich konnte nicht geladen werden. Bitte entschuldigen Sie diese Störung.') }}
 

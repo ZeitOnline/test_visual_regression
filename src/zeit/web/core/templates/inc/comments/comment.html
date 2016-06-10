@@ -7,7 +7,7 @@
 	{%- if comment.is_author %} comment--author{% endif %}
 	{%- if comment.is_promoted %} comment--promoted{% endif %}
 	{%- if comment.recommendations %} comment--recommended{% endif %}
-	{%- if comment.img_url %} comment--avatar{% endif %}" data-ct-row="{{ comment.shown_num }}">
+	{%- if comment.img_url %} comment--avatar{% endif %}" data-ct-row="{{ comment.shown_num | comment_tracking_row }}" data-ct-column="{{ comment.shown_num | comment_tracking_col }}">
 	<div class="comment__container">
 		<div class="comment-meta">
 			{% if comment.img_url %}

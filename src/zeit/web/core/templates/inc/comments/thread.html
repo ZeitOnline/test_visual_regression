@@ -10,11 +10,11 @@
     		<small>{{ view.comments.pages.title }}</small>
     		{% endif %}
     	</span>
-
+        {% if view.comment_area.show_comment_form %}
         	<a href="#comment-form" class="comment-section__button button js-scroll" data-ct-row="1">
         		Kommentieren
         	</a>
-
+        {% endif %}
     {% elif view.comment_area.no_comments %}
     	<span class="comment-section__headline">
     		<span class="nowrap">Noch keine Kommentare.</span>
@@ -74,7 +74,7 @@
 	</div>
 </div>
 
-<div class="comment-section__body" id="js-comments-body">
+<div class="comment-section__body" id="js-comments-body" data-ct-area="comment">
 
 	{# Show ads before the n-th comment, or before the last comment if there are less than n #}
 	{% for comment in view.comments.comments %}

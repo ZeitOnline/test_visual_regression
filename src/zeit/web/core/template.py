@@ -384,6 +384,22 @@ def is_liveblog(context):
         context) and context.template == 'zon-liveblog'
 
 
+@zeit.web.register_filter
+def comment_tracking_row(context):
+    try:
+        return context.split('.', 1)[0]
+    except:
+        return ''
+
+
+@zeit.web.register_filter
+def comment_tracking_col(context):
+    try:
+        return context.split('.', 1)[1]
+    except:
+        return 0
+
+
 # TRASHME: Definition of default images sizes for bitblt images
 scales = {
     'default': (200, 300),
