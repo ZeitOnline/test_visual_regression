@@ -18,7 +18,7 @@ $opacity-comment-count--hover: 0.8 !default
 
 // override normalize.css
 input[type="search"]
-	+box-sizing(border-box)
+	box-sizing: border-box
 
 // visually hidden construct, which I properly didn't hated enough to prevent us from it
 // a region, area or teaser can be set to be not `visible_mobile`. If so, it's hidden on
@@ -29,7 +29,7 @@ input[type="search"]
 			display: none
 
 // animation: loading indicator for areas (images, comments)
-+keyframes(smoothPulse)
+@keyframes smoothPulse
 	to
 		background-color: rgba(#eee, 0.6)
 
@@ -58,8 +58,8 @@ input[type="search"]
 	width: 1.125em
 
 %commentcount
-	+transition-property(background-color, color, opacity)
-	+transition-duration(.2s)
+	transition-property: background-color, color, opacity
+	transition-duration: .2s
 	color: $color-comment-count
 	position: relative
 	white-space: nowrap

@@ -1,8 +1,26 @@
 // Regular
-@include font-face("FranziskaWebPro", font-files("franziska/FranziskaWebPro.woff"), "franziska/FranziskaWebPro.eot", normal, normal);
+@font-face {
+    font-family: "FranziskaWebPro";
+    src: url('../../../latest/fonts/franziska/FranziskaWebPro.eot?#iefix') format('embedded-opentype'),
+         url('../../../latest/fonts/franziska/FranziskaWebPro.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 // Demibold
-@include font-face("FranziskaWebPro", font-files("franziska/FranziskaWebPro-Demibold.woff"), "franziska/FranziskaWebPro-Demibold.eot", bold, normal);
+@font-face {
+    font-family: "FranziskaWebPro";
+    src: url('../../../latest/fonts/franziska/FranziskaWebPro-Demibold.eot?#iefix') format('embedded-opentype'),
+         url('../../../latest/fonts/franziska/FranziskaWebPro-Demibold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
 
 // Italic
-@include font-face("FranziskaWebPro", font-files("franziska/FranziskaWebPro-Italic.woff"), "franziska/FranziskaWebPro-Italic.eot", normal, italic);
+@font-face {
+    font-family: "FranziskaWebPro";
+    src: url('../../../latest/fonts/franziska/FranziskaWebPro-Italic.eot?#iefix') format('embedded-opentype'),
+         url('../../../latest/fonts/franziska/FranziskaWebPro-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+}

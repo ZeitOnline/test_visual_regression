@@ -4,11 +4,11 @@
 
     &__inner
         +respond-min($break-tablet-min)
-            +display-flex()
-            +justify-content(space-between)
-            +align-items(center)
+           	display: flex
+            justify-content: space-between
+            align-items: center
             &:only-child
-                +justify-content(center)
+                justify-content: center
                 .author-header__text
                     max-width: 80%
                     text-align: center
@@ -18,9 +18,9 @@
         margin: auto
         padding-top: remify(10px)
         +respond-min($break-tablet-min)
-            +align-self(flex-end)
-            +flex(0 0 auto)
-            +order(2)
+            align-self: flex-end
+            flex: 0 0 auto
+            order: 2
             width: remify(200px)
             margin: 0
 
@@ -34,8 +34,8 @@
         padding: remify(24px $page-padding)
         text-align: center
         +respond-min($break-tablet-min)
-            +flex(0 0 auto)
-            +order(1)
+            flex: 0 0 auto
+            order: 1
             background-color: transparent
             border-bottom: none
             max-width: 60%

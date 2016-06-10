@@ -1,8 +1,8 @@
-+keyframes(moving-background)
+@keyframes moving-background
 	0%
-		+transform(translateY(0%))
+		transform: translateY(0%)
 	100%
-		+transform(translateY(-23%))
+		transform: translateY(-23%)
 
 .header-image
 	margin: remify(0 0 10px)
@@ -28,17 +28,17 @@
 
 	&__media-container
 		&--animated
-			+animation(moving-background 35s ease-in-out infinite alternate)
-			// +animation(moving-background 10s linear 1s forwards)
+			animation: moving-background 35s ease-in-out infinite alternate
+			// animation: moving-background 10s linear 1s forwards
 
 	&__heading
 		margin: 0
 		padding: remify(35px $page-padding--small 5px)
 		text-align: center
 		&--overlay
-			+display-flex()
-			+justify-content(center)
-			+align-items(center)
+			display: flex
+			justify-content: center
+			align-items: center
 			bottom: 0
 			left: 0
 			padding-bottom: 0

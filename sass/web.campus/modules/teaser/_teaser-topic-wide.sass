@@ -10,7 +10,7 @@
 	&__topic-button
 		+font-smoothing
 		+scaled-font(26px, $title-factor)
-		+transform(translateX(-50%))
+		transform: translateX(-50%)
 		@extend %font-beckett
 		background-color: $color-background--dark
 		color: $white
@@ -67,7 +67,7 @@
 
 		&__topic-button
 			+scaled-font(36px, $title-factor)
-			+transform(none)
+			transform: none
 			margin-left: remify(-40px)
 			padding: remify(16px 20px 8px)
 			position: static

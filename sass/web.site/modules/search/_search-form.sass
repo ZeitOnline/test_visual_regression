@@ -10,7 +10,7 @@ $dropdown-width: remify(160px)
 			max-width: em(660px)
 
 .search-text-input
-	+display-flex
+	display: flex
 	font-size: remify(14px)
 	&__input
 		background-color: $white
@@ -20,7 +20,7 @@ $dropdown-width: remify(160px)
 		border-width: 1px 0 1px 1px
 		outline: none // readd in :focus for a11y
 		padding: remify(10px)
-		+flex-grow(1)
+		flex-grow: 1
 		&:focus,
 		&:hover,
 		&:focus+.search-submit,
@@ -59,7 +59,7 @@ $dropdown-width: remify(160px)
 	color: $zon-grey
 	&__on
 		display: none
-		+transition(max-height .3s ease-in-out)
+		transition: max-height .3s ease-in-out
 		.js &
 			cursor: pointer
 			display: block
@@ -70,7 +70,7 @@ $dropdown-width: remify(160px)
 				display: none
 	&__container
 		overflow: hidden
-		+transition(max-height .3s ease-in-out)
+		transition: max-height .3s ease-in-out
 		.js &
 			max-height: 0
 			+respond-min($break-tablet-min)
@@ -118,7 +118,7 @@ $dropdown-width: remify(160px)
 		height: remify(6px)
 		margin-top: remify(6px)
 		width: remify(8px)
-		+transition(transform .3s)
+		transition: transform .3s
 	&__extend
 		background: lighten($zon-warm-grey, 5%)
 		border-width: 0px 1px
@@ -128,7 +128,7 @@ $dropdown-width: remify(160px)
 		font-size: remify(11px)
 		line-height: 2
 		overflow: hidden
-		+transition(max-height .3s)
+		transition: max-height .3s
 		.js &
 			max-height: 0
 			position: absolute
@@ -147,6 +147,6 @@ $dropdown-width: remify(160px)
 		.search-range__legend
 			border-radius: remify(4px 4px 0 0)
 		.search-range__icon
-			+transform(rotate(180deg))
+			transform: rotate(180deg)
 		.search-range__extend
 			max-height: em(320px)

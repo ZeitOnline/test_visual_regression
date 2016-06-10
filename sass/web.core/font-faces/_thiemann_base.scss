@@ -1,7 +1,11 @@
 @import url("//fast.fonts.net/t/1.css?apiType=css&projectid=0a8d11d9-451b-49e9-be87-907f2c9fce50");
 
-@include font-face("TiemannLight", font-files(
-    "tiemann/c7659183-7f28-487e-8d4b-67f757a06277.woff",
-    "tiemann/be3b1b77-240a-4933-98a4-d1d7ac15f2bc.ttf",
-    "tiemann/4c801026-a348-401d-90e4-a393a8582f4d.svg#4c801026-a348-401d-90e4-a393a8582f4d"
- ), "tiemann/37b87ecf-65a3-4817-bb70-883cf6db3669.eot", normal, normal);
+@font-face {
+	font-family: "TiemannLight";
+	src: url('../../../latest/fonts/tiemann/37b87ecf-65a3-4817-bb70-883cf6db3669.eot?#iefix') format('embedded-opentype'),
+	     url('../../../latest/fonts/tiemann/c7659183-7f28-487e-8d4b-67f757a06277.woff') format('woff'),
+	     url('../../../latest/fonts/tiemann/be3b1b77-240a-4933-98a4-d1d7ac15f2bc.ttf') format('truetype'),
+	     url('../../../latest/fonts/tiemann/4c801026-a348-401d-90e4-a393a8582f4d.svg#4c801026-a348-401d-90e4-a393a8582f4d') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}

@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         rubyVersion: '1.9.3',
         tasks: {
             production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy:css', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-miminal', 'sass:dev-basic', 'postcss:dev', 'copy:css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-minimal', 'sass:dev-basic', 'postcss:dev', 'copy:css', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
             css: [ 'sass:dist', 'sass:amp', 'postcss:dist' ],
@@ -20,18 +20,9 @@ module.exports = function(grunt) {
 
     var path = require('path');
 
-    // checking ruby version, printing a hint if not standard version
-    var sys = require('sys');
-    var exec = require('child_process').exec;
-    var child;
-    child = exec('ruby --version', function(error, stdout, stderr) {
-        if ( stdout.indexOf(project.rubyVersion) < 0 ) {
-            grunt.log.writeln('You are using Ruby ' + stdout);
-        }
-    });
-
     // Autoprefixer
     var autoprefixer = require('autoprefixer')({
+        remove: false,
         browsers: [
             'Chrome >= 35',
             'Firefox >= 38',
@@ -87,38 +78,38 @@ module.exports = function(grunt) {
                     path.resolve(project.sourceDir + 'sass')
                 ]
             },
-            'dev-miminal': {
+            'dev-minimal': {
                 files: {
                     '<%= project.codeDir %>css/web.campus/screen.css': '<%= project.sourceDir %>sass/web.campus/screen.sass',
-                    'src/zeit/web/static/css/web.magazin/screen.css': 'sass/web.magazin/screen.sass',
-                    'src/zeit/web/static/css/web.site/screen.css': 'sass/web.site/screen.sass'
+                    '<%= project.codeDir %>css/web.magazin/screen.css': '<%= project.sourceDir %>sass/web.magazin/screen.sass',
+                    '<%= project.codeDir %>css/web.site/screen.css': '<%= project.sourceDir %>sass/web.site/screen.sass'
                 }
             },
             'dev-basic': {
                 files: {
-                    'src/zeit/web/static/css/web.campus/advertorial.css': 'sass/web.campus/advertorial.sass',
-                    'src/zeit/web/static/css/web.magazin/advertorial.css': 'sass/web.magazin/advertorial.sass',
-                    'src/zeit/web/static/css/web.site/advertorial.css': 'sass/web.site/advertorial.sass',
-                    'src/zeit/web/static/css/web.campus/amp.css': 'sass/web.campus/amp.sass',
-                    'src/zeit/web/static/css/web.magazin/amp.css': 'sass/web.magazin/amp.sass',
-                    'src/zeit/web/static/css/web.site/amp.css': 'sass/web.site/amp.sass',
-                    'src/zeit/web/static/css/web.site/framebuilder-minimal.css': 'sass/web.site/framebuilder-minimal.sass',
-                    'src/zeit/web/static/css/web.site/video-player.css': 'sass/web.site/video-player.sass'
+                    '<%= project.codeDir %>css/web.campus/advertorial.css': '<%= project.sourceDir %>sass/web.campus/advertorial.sass',
+                    '<%= project.codeDir %>css/web.magazin/advertorial.css': '<%= project.sourceDir %>sass/web.magazin/advertorial.sass',
+                    '<%= project.codeDir %>css/web.site/advertorial.css': '<%= project.sourceDir %>sass/web.site/advertorial.sass',
+                    '<%= project.codeDir %>css/web.campus/amp.css': '<%= project.sourceDir %>sass/web.campus/amp.sass',
+                    '<%= project.codeDir %>css/web.magazin/amp.css': '<%= project.sourceDir %>sass/web.magazin/amp.sass',
+                    '<%= project.codeDir %>css/web.site/amp.css': '<%= project.sourceDir %>sass/web.site/amp.sass',
+                    '<%= project.codeDir %>css/web.site/framebuilder-minimal.css': '<%= project.sourceDir %>sass/web.site/framebuilder-minimal.sass',
+                    '<%= project.codeDir %>css/web.site/video-player.css': '<%= project.sourceDir %>sass/web.site/video-player.sass'
                 }
             },
             'dev-all': {
                 files: {
-                    'src/zeit/web/static/css/web.magazin/all-old-ie.css': 'sass/web.magazin/all-old-ie.sass',
-                    'src/zeit/web/static/css/web.site/all-old-ie.css': 'sass/web.site/all-old-ie.sass',
-                    'src/zeit/web/static/css/web.site/ie-navi.css': 'sass/web.site/ie-navi.sass',
-                    'src/zeit/web/static/css/web.site/unresponsive.css': 'sass/web.site/unresponsive.sass'
+                    '<%= project.codeDir %>css/web.magazin/all-old-ie.css': '<%= project.sourceDir %>sass/web.magazin/all-old-ie.sass',
+                    '<%= project.codeDir %>css/web.site/all-old-ie.css': '<%= project.sourceDir %>sass/web.site/all-old-ie.sass',
+                    '<%= project.codeDir %>css/web.site/ie-navi.css': '<%= project.sourceDir %>sass/web.site/ie-navi.sass',
+                    '<%= project.codeDir %>css/web.site/unresponsive.css': '<%= project.sourceDir %>sass/web.site/unresponsive.sass'
                 }
             },
             'amp': {
                 files: {
-                    'src/zeit/web/static/css/web.campus/amp.css': 'sass/web.campus/amp.sass',
-                    'src/zeit/web/static/css/web.magazin/amp.css': 'sass/web.magazin/amp.sass',
-                    'src/zeit/web/static/css/web.site/amp.css': 'sass/web.site/amp.sass',
+                    '<%= project.codeDir %>css/web.campus/amp.css': '<%= project.sourceDir %>sass/web.campus/amp.sass',
+                    '<%= project.codeDir %>css/web.magazin/amp.css': '<%= project.sourceDir %>sass/web.magazin/amp.sass',
+                    '<%= project.codeDir %>css/web.site/amp.css': '<%= project.sourceDir %>sass/web.site/amp.sass',
                 }
             },
             'dist': {
@@ -384,7 +375,7 @@ module.exports = function(grunt) {
             },
             sass: {
                 files: [ 'sass/**/*.s{a,c}ss' ],
-                tasks: [ 'sass:dev-minimal', 'postcss:dist' ],
+                tasks: [ 'sass:dev-minimal', 'newer:postcss:dist' ],
                 options: {
                     interrupt: true,
                     // needed to call `grunt watch` from outside zeit.web
@@ -446,6 +437,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-modernizr-builder');
+    grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-postcss');
     grunt.loadNpmTasks('grunt-sftp-deploy');
     grunt.loadNpmTasks('grunt-sass');
