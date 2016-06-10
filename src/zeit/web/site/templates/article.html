@@ -55,74 +55,11 @@
 
 
 {% block article_storystreamteaser_teaser %}
-    {% if view.storystream %}
-
-        {% set blockname = 'storystream-in-article-teaser' %}
-
-        {# TODO: div or article or aside ? #}
-        <aside class="{{ blockname }} hide-lineage">
-            <div class="{{ blockname }}__container">
-                <div class="{{ blockname }}__content">
-                    <span class="{{ blockname }}__kicker">Im Überblick</span>
-                    <a href="#zeitleiste" class="{{ blockname }}__link"> Zeitleiste anzeigen</a>
-                    </h2>
-                </div>
-            </div>
-        </aside>
-    {% endif %}
+    {% include "zeit.web.site:templates/inc/article/storystreamteaser/article_storystreamteaser_teaser.tpl" %}
 {% endblock article_storystreamteaser_teaser %}
 
 {% block article_storystreamteaser %}
-    {% if view.storystream %}
-
-        {% set blockname = 'storystream-in-article' %}
-
-        {# TODO: div or article or aside ? #}
-        <aside class="{{ blockname }} hide-lineage" id="zeitleiste">
-            <div class="{{ blockname }}__container {{ blockname }}__container--header">
-                <div class="{{ blockname }}__content {{ blockname }}__content--header {{ blockname }}__content--with-border">
-                    <h2 class="{{ blockname }}__headline">
-                        <span class="{{ blockname }}__headline-kicker">Im Überblick</span>
-                        <span class="visually-hidden">:</span>
-                        <span class="{{ blockname }}__headline-title">{{ view.storystream.title }}</span>
-                    </h2>
-                </div>
-            </div>
-            <div class="{{ blockname }}__container">
-                <div class="{{ blockname }}__content {{ blockname }}__content--with-border">
-                    <ul class="{{ blockname }}__list">
-                        {% for atom in view.storystream_items %}
-
-                            {% if atom == view.context %}
-                                <li class="{{ blockname }}__listcaption {{ blockname }}__listcaption--current">Dieser Artikel</li>
-                                <li class="{{ blockname }}__listitem {{ blockname }}__listitem--current">
-                                    {{ atom.tldr_title or atom.teaserTitle or atom.title }}</a>
-                                </li>
-
-                                {% if not loop.last %}
-                                    <li class="{{ blockname }}__listcaption">zuvor</li>
-                                {% endif %}
-
-                            {% else %}
-
-                                {% if loop.first %}
-                                    <li class="{{ blockname }}__listcaption">danach</li>
-                                {% endif %}
-
-                                <li class="{{ blockname }}__listitem">
-                                <a href="{{ atom.uniqueId | create_url }}" class="{{ blockname }}__link">{{ atom.tldr_title or atom.title
- or atom.teaserTitle or atom.title }}
-                                </a></li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="{{ blockname }}__content {{ blockname }}__content--footer">
-                    <a class="button" href="{{ view.storystream.uniqueId | create_url }}">zum Live-Dossier</a>
-                </div>
-            </div>
-        </aside>
-    {% endif %}
+    {% include "zeit.web.site:templates/inc/article/storystreamteaser/article_storystreamteaser.tpl" %}
 {% endblock %}
 
 {% block veeseo_div %}
