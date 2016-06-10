@@ -77,7 +77,7 @@ def test_storystream_should_get_layout_from_context(testbrowser):
 def test_storystream_in_article_should_have_correct_order(testbrowser):
     url1 = '/zeit-online/storystream/articles/griechenland-referendum-oxi'
     browser = testbrowser(url1)
-    assert len(browser.cssselect('.storystream-in-article__list a')) == 3
+    assert len(browser.cssselect('.storystream-in-article a')) == 3
     itemlist = browser.cssselect('.storystream-in-article__list')
     items = itemlist[0].getchildren()
     assert len(items) == 5
@@ -86,7 +86,7 @@ def test_storystream_in_article_should_have_correct_order(testbrowser):
 
     url2 = '/zeit-online/storystream/articles/grexit-griechenland-euro-zone'
     browser = testbrowser(url2)
-    assert len(browser.cssselect('.storystream-in-article__list a')) == 3
+    assert len(browser.cssselect('.storystream-in-article a')) == 3
     itemlist = browser.cssselect('.storystream-in-article__list')
     items = itemlist[0].getchildren()
     assert len(items) == 6
@@ -96,7 +96,7 @@ def test_storystream_in_article_should_have_correct_order(testbrowser):
 
     url3 = '/zeit-online/storystream/articles/syriza-tsipras-parlamentswahl'
     browser = testbrowser(url3)
-    assert len(browser.cssselect('.storystream-in-article__list a')) == 3
+    assert len(browser.cssselect('.storystream-in-article a')) == 3
     itemlist = browser.cssselect('.storystream-in-article__list')
     items = itemlist[0].getchildren()
     assert len(items) == 5
