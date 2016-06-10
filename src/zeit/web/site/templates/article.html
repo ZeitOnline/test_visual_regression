@@ -60,7 +60,7 @@
         {% set blockname = 'storystream-in-article-teaser' %}
 
         {# TODO: div or article or aside ? #}
-        <aside class="{{ blockname }}">
+        <aside class="{{ blockname }} hide-lineage">
             <div class="{{ blockname }}__container">
                 <div class="{{ blockname }}__content">
                     <span class="{{ blockname }}__kicker">Im Überblick</span>
@@ -78,7 +78,7 @@
         {% set blockname = 'storystream-in-article' %}
 
         {# TODO: div or article or aside ? #}
-        <aside class="{{ blockname }}" id="zeitleiste">
+        <aside class="{{ blockname }} hide-lineage" id="zeitleiste">
             <div class="{{ blockname }}__container {{ blockname }}__container--header">
                 <div class="{{ blockname }}__content {{ blockname }}__content--header {{ blockname }}__content--with-border">
                     <h2 class="{{ blockname }}__headline">
