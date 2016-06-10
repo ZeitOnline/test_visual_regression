@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Actually add user id to webtrekk noscript
 
+- FIX: Handle non-ascii URLs in remove_get_params
+
 
 2.86 (2016-06-09)
 -----------------
