@@ -34,7 +34,7 @@
                             {% endif %}
 
                             <li class="{{ blockname }}__listitem">
-                            <a href="{{ atom.uniqueId | create_url }}" class="{{ blockname }}__link">{{ atom.tldr_title or atom.title
+                            <a href="{{ atom.uniqueId | create_url }}" class="{{ blockname }}__link" data-id="article-storystreamteaser.bottom.link..">{{ atom.tldr_title or atom.title
 or atom.teaserTitle or atom.title }}
                             </a></li>
                         {% endif %}
@@ -42,7 +42,7 @@ or atom.teaserTitle or atom.title }}
                 </ul>
             </div>
             <div class="{{ blockname }}__content {{ blockname }}__content--footer">
-                <a class="button" href="{{ view.storystream.uniqueId | create_url }}">zum Live-Dossier</a>
+                <a class="button" href="{{ view.storystream.uniqueId | create_url }}" data-id="article-storystreamteaser.bottom.button..">zum Live-Dossier</a>
             </div>
         </div>
     </aside>
