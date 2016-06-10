@@ -95,7 +95,7 @@ def test_report_form_should_be_rendered(testbrowser):
 
 def test_comment_form_should_be_rendered_through_esi(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    assert len(browser.cssselect('include')) == 3
+    assert browser.xpath('//include[contains(@src, "/comment-form")]')
 
 
 def test_comment_pagination_should_work(testbrowser):

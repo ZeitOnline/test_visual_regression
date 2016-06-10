@@ -56,6 +56,13 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return "zeit.web.site:templates/article.html"
 
     @zeit.web.reify
+    def embed_header(self):
+        embed_header = zeit.content.article.edit.interfaces.IHeaderArea(
+            self.context).module
+        if embed_header:
+            return zeit.web.core.interfaces.IFrontendBlock(embed_header)
+
+    @zeit.web.reify
     def meta_keywords(self):
         return [x for x in ([self.ressort.title(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
@@ -96,12 +103,9 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def series(self):
-        settings = zope.component.getUtility(
-            zeit.web.core.interfaces.ISettings
-        )
-
-        uid = u'{}/{}'.format(settings.series_prefix, self.context.serie.url)
-
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        uid = u'{}/{}'.format(
+            conf.get('series_prefix', ''), self.context.serie.url)
         return zeit.cms.interfaces.ICMSContent(uid, None)
 
 

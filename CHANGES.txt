@@ -1,14 +1,31 @@
 Change log for zeit.web
 =======================
 
-2.86 (unreleased)
+2.87 (unreleased)
 -----------------
+
+- FIX: Temporary delete user id again
+
+- FIX: Actually add user id to webtrekk noscript
+
+- FIX: Handle non-ascii URLs in remove_get_params
+
+
+2.86 (2016-06-09)
+-----------------
+
+- ZON-3135: Implement Embed Article Header Object
 
 - ZON-2039: Add series banner for articles
 
 - ZON-3092: Add preconnect links
 
-- FIX: Naming things (Zeit.isMobileView)
+- ZON-2818: Introduce login-state-footer ESI,
+  containing webtrekk-noscript with user information
+
+- FIX: Align ZON video stage logo
+
+- FIX: Naming things (Zeit.isWrapped)
 
 - FIX: Enable wrapper support for framebuilder
 
