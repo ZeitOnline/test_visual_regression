@@ -1435,25 +1435,25 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
 
 def test_article_has_image_header_embed(testbrowser):
     browser = testbrowser('/zeit-online/article/embed-header-image')
-    embed = browser.cssselect('.article-heading__embed')[0]
+    embed = browser.cssselect('.article-embed')[0]
     assert len(embed.cssselect('.article__media-item')) == 1
 
 
 def test_article_has_video_header_embed(testbrowser):
     browser = testbrowser('/zeit-online/article/embed-header-video')
-    embed = browser.cssselect('.article-heading__embed')[0]
+    embed = browser.cssselect('.article-embed')[0]
     assert len(embed.cssselect('.video-player')) == 1
 
 
 def test_article_has_quiz_header_embed(testbrowser):
     browser = testbrowser('/zeit-online/article/embed-header-quiz')
-    embed = browser.cssselect('.article-heading__embed')[0]
+    embed = browser.cssselect('.article-embed')[0]
     assert len(embed.cssselect('.quiz')) == 1
 
 
 def test_article_has_raw_header_embed(testbrowser):
     browser = testbrowser('/zeit-online/article/embed-header-raw')
-    embed = browser.cssselect('.article-heading__embed')[0]
+    embed = browser.cssselect('.article-embed')[0]
     assert len(embed.cssselect('.raw')) == 1
 
 
