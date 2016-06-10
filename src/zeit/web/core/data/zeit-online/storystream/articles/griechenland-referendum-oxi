@@ -56,7 +56,7 @@
       <tag ns11:pytype="str" uuid="da57cca8-1341-4de4-9a46-5490c2870bbf" url_value="drogensucht" type="free">Drogensucht</tag>
       <tag ns11:pytype="str" uuid="d7c822dc-5db9-47e8-9b14-d0098930f069" url_value="drogenkonsum" type="free">Drogenkonsum</tag>
     </rankedTags>
-    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" alt="Crystal Meth: Nacy braucht was Schnelles" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00">
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" alt="Crystal Meth: Nacy braucht was Schnelles" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00">
       <bu py:pytype="str">Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
       <copyright py:pytype="str" link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
     </image>
@@ -147,7 +147,7 @@
     <subtitle>Die Griechen stellen Europa mit ihrem klaren Votum gegen die Sparpolitik vor die Wahl: Verbessert die Bedingungen oder schmeißt uns aus dem Euro, mit allen Konsequenzen.</subtitle>
     <byline>Ein Kommentar von Zacharias Zacharakis, Athen</byline>
     <division type="page">
-      <image base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" alt="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00" layout="large" is_empty="False" title_local="Crystal Meth: Nancy braucht was Schnelles" alt_local="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" title="Crystal Meth: Nancy braucht was Schnelles">
+      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" alt="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00" layout="large" is_empty="False" title_local="Crystal Meth: Nancy braucht was Schnelles" alt_local="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" title="Crystal Meth: Nancy braucht was Schnelles">
         <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
         <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
       </image>
