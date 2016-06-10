@@ -4,8 +4,6 @@ Change log for zeit.web
 2.87 (unreleased)
 -----------------
 
-- FIX: Temporary delete user id again
-
 - FIX: Actually add user id to webtrekk noscript
 
 - FIX: Handle non-ascii URLs in remove_get_params
