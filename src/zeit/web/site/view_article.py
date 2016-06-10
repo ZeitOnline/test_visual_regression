@@ -79,12 +79,9 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def series(self):
-        settings = zope.component.getUtility(
-            zeit.web.core.interfaces.ISettings
-        )
-
-        uid = u'{}/{}'.format(settings.series_prefix, self.context.serie.url)
-
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        uid = u'{}/{}'.format(
+            conf.get('series_prefix', ''), self.context.serie.url)
         return zeit.cms.interfaces.ICMSContent(uid, None)
 
 
