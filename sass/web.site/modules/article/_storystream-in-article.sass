@@ -9,7 +9,7 @@ $timeline-padding: remify(24px)
 	display: none
 	font-size: remify(14px)
 	line-height: round-to-precision(18/14, $precision: 1)
-	margin: remify(40px) (-$page-padding)
+	margin: remify(60px) (-$page-padding)
 	padding: 0 $page-padding
 
 	+respond-min($break-tablet-min)
@@ -40,7 +40,10 @@ $timeline-padding: remify(24px)
 
 
 .storystream-in-article
-	margin: 0 (-$page-padding)
+	margin: remify(50px) (-$page-padding)
+	+respond-min($break-tablet-min)
+		margin-bottom: remify(60px)
+		margin-top: remify(60px)
 
 	&__container
 		padding: 0 $page-padding--small
@@ -58,7 +61,7 @@ $timeline-padding: remify(24px)
 		&--header
 			padding-bottom: $vertical-space
 		&--footer
-			padding: remify(25px) 0 $vertical-space
+			padding: remify(24px 0 0)
 		&--with-border
 			border-left: 1px $timeline-line-color solid
 
