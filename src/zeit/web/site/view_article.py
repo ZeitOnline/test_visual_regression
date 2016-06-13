@@ -74,6 +74,30 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return self.request.GET.get('newsletter-optin', None)
 
     @zeit.web.reify
+    def storystream(self):
+        if self.context.storystreams:
+            return self.context.storystreams[0].references
+        else:
+            return None
+
+    @zeit.web.reify
+    def storystream_items(self):
+        storystream_cp = self.storystream
+        if not storystream_cp:
+            return ()
+        atoms = list(zeit.content.cp.interfaces.ICMSContentIterable(
+            storystream_cp))
+        if self.context not in atoms:
+            return atoms[:3]
+        pos = atoms.index(self.context)
+        if pos == 0:
+            return atoms[:3]
+        elif pos == len(atoms) - 1:
+            return atoms[-3:]
+        else:
+            return atoms[pos - 1:pos + 2]
+
+    @zeit.web.reify
     def has_series_attached(self):
         return getattr(self.context, 'serie', None)
 

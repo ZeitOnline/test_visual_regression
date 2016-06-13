@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
   <attribute ns="DAV:" name="href">/cms/work/kultur/film/2014-12/hobbit-monumentalfilm</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-05-27T09:24:56.823418+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-05-27T17:11:30.179510+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-12-05T17:11:30.179510+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">5010</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
@@ -24,7 +23,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.lavrov</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:21da7127-f585-49ed-b4c6-200c7a1f7fea}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">5dc3d7bc15ba46ca934f0eb82951d22b</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
@@ -37,14 +36,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-12-09T09:32:11.239437+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-  <rankedTags>
-      <tag url_value="" uuid="df4baf1f-9491-4dbb-80c2-f8762bf3f2fe" score="4" type="free">Wein</tag>
-      <tag url_value="italien" uuid="fb4f1490-b187-4073-a51f-02bf101a354d" score="3" type="Location">Italien</tag>
-      <tag url_value="toskana" uuid="96aed46d-4a4d-4815-afe6-7f9ba73914ed" score="2" type="Location">Toskana</tag>
-      <tag url_value="bologna" uuid="48e46d3d-cb20-4c65-8000-5d7bab864110" score="1" type="Location">Bologna</tag>
-      <tag url_value="bozen" uuid="4620a5e7-9e11-4c07-8b4f-7114b66ab7c9" score="1" type="Location">Bozen</tag>
-      <tag url_value="florenz" uuid="96be130a-ad9e-4770-90e0-5a98158df58b" score="1" type="Location">Florenz</tag>
-  </rankedTags>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="rankedTags">FilmPeter JacksonNeuseelandSteven SpielbergChristopher NolanRidley Scott</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-12-09T09:32:11.073684+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
@@ -52,18 +44,17 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-12-09T09:24:56.823418+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Kultur</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Film</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-27T17:11:30.179510+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-12-05T17:12:24.668544+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on">2014-12-13T00:51:38.353076+00:00</attribute>
-  <attribute ns="DAV:" name="resourcetype"/>
-  <attribute ns="DAV:" name="creationdate">2014-12-09T09:32:11Z</attribute>
-  <attribute ns="DAV:" name="getcontentlength">19673</attribute>
-  <attribute ns="DAV:" name="getlastmodified">Tue, 09 Dec 2014 09:32:11 GMT</attribute>
-  <attribute ns="DAV:" name="getetag">"12a4da2-4cd9-509c537b3ffb2"</attribute>
-  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
-  <attribute ns="DAV:" name="supportedlock"> </attribute>
-  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_date">2015-06-17T11:00:00+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_text">
+  Wie wird in den anderen europäischen Ländern über die Griechenland-Krise diskutiert? Es zeigt sich ein durchaus uneinheitliches Bild: In Frankreich interessieren sich nur wenige für die Debatte. Dagegen sind viele Slowenen verärgert über Griechenland. In Spanien und Italien zeigt man sich eher solidarisch, in Irland streng.
+  </attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="storystreams">griechenland-krise</attribute>
 </head>

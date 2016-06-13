@@ -71,12 +71,18 @@
         <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
             {% block article_main_image %}
             {% endblock article_main_image %}
+
+            {% block article_storystreamteaser_teaser %}{% endblock %}
+
             {% block article_pages %}
                 <!-- Here goes the content for a page -->
             {% endblock article_pages %}
             {% block article_pagination %}
                 <!-- Here goes the pagination -->
             {% endblock article_pagination %}
+
+            {% block article_storystreamteaser %}{% endblock %}
+
         </div>
         {% endblock article_body %}
     {% endprofile %}
@@ -88,8 +94,10 @@
 
     {% endblock content %}
 
+
     {% block article_footer %}
     <div class="article-footer article__item" data-ct-area="articlebottom">
+
         {% block article_interactions %}
         <div class="article-interactions">
             {% include "zeit.web.site:templates/inc/article/sharing-menu.tpl" %}

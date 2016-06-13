@@ -4,6 +4,8 @@ Change log for zeit.web
 2.87 (unreleased)
 -----------------
 
+- ZON-1985: Implement storystream teaser in article
+
 - FIX: Actually add user id to webtrekk noscript
 
 - FIX: Handle non-ascii URLs in remove_get_params
