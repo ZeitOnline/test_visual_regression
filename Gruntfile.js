@@ -10,10 +10,10 @@ module.exports = function(grunt) {
         rubyVersion: '1.9.3',
         tasks: {
             production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy:css', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-minimal', 'sass:dev-basic', 'postcss:dev', 'copy:css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-minimal', 'sass:dev-basic', 'postcss:dist', 'postcss:old-ie', 'copy:css', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
-            css: [ 'sass:dist', 'sass:amp', 'postcss:dist' ],
+            css: [ 'sass:dist', 'sass:amp', 'postcss:dist', 'postcss:old-ie' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
@@ -25,14 +25,20 @@ module.exports = function(grunt) {
         remove: false,
         browsers: [
             'Chrome >= 35',
-            'Firefox >= 38',
+            'Firefox >= 30',
             'Edge >= 12',
             'Explorer >= 9',
-            'iOS >= 8',
+            'iOS >= 7',
             'Safari >= 8',
             'Android 2.3',
             'Android >= 4',
             'Opera >= 12'
+        ]
+    });
+    var autoprefixerOldIe = require('autoprefixer')({
+        remove: false,
+        browsers: [
+            'Explorer <= 8'
         ]
     });
 
@@ -73,7 +79,7 @@ module.exports = function(grunt) {
         // compile sass code
         sass: {
             options: {
-                sourceMap: true,
+                sourceComments: true,
                 includePaths: [
                     path.resolve(project.sourceDir + 'sass')
                 ]
@@ -106,6 +112,10 @@ module.exports = function(grunt) {
                 }
             },
             'amp': {
+                options: {
+                    sourceComments: false,
+                    outputStyle: 'compressed'
+                },
                 files: {
                     '<%= project.codeDir %>css/web.campus/amp.css': '<%= project.sourceDir %>sass/web.campus/amp.sass',
                     '<%= project.codeDir %>css/web.magazin/amp.css': '<%= project.sourceDir %>sass/web.magazin/amp.sass',
@@ -113,6 +123,10 @@ module.exports = function(grunt) {
                 }
             },
             'dist': {
+                options: {
+                    sourceComments: false,
+                    outputStyle: 'compressed'
+                },
                 files: {
                     '<%= project.codeDir %>css/web.campus/advertorial.css': '<%= project.sourceDir %>sass/web.campus/advertorial.sass',
                     '<%= project.codeDir %>css/web.magazin/advertorial.css': '<%= project.sourceDir %>sass/web.magazin/advertorial.sass',
@@ -133,18 +147,26 @@ module.exports = function(grunt) {
             }
         },
 
+        // PostCSS
         postcss: {
-            options: {
-                processors: [autoprefixer]
-            },
-            dev: {
-                src: '<%= project.codeDir %>css/**/*.css'
-            },
             dist: {
                 options: {
-                    processors: [autoprefixer, require('cssnano')]
+                    processors: [autoprefixer]
                 },
-                src: '<%= project.codeDir %>css/**/*.css'
+                src: [
+                    '<%= project.codeDir %>css/**/*.css',
+                    '!<%= project.codeDir %>css/**/all-old-ie.css',
+                    '!<%= project.codeDir %>css/**/ie-navi.css'
+                ]
+            },
+            'old-ie': {
+                options: {
+                    processors: [autoprefixerOldIe]
+                },
+                src: [
+                    '<%= project.codeDir %>css/**/all-old-ie.css',
+                    '<%= project.codeDir %>css/**/ie-navi.css'
+                ]
             }
         },
 
