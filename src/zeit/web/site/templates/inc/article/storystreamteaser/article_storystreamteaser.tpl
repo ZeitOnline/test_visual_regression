@@ -6,9 +6,8 @@
         <div class="{{ blockname }}__container {{ blockname }}__container--header">
             <div class="{{ blockname }}__content {{ blockname }}__content--header {{ blockname }}__content--with-border">
                 <h2 class="{{ blockname }}__headline">
-                    <span class="{{ blockname }}__headline-kicker">Im Überblick</span>
-                    <span class="visually-hidden">:</span>
-                    <span class="{{ blockname }}__headline-title">{{ view.storystream.title }}</span>
+                    <span class="{{ blockname }}__kicker">Im Überblick</span><span class="visually-hidden">: </span>
+                    <span class="{{ blockname }}__title">{{ view.storystream.title }}</span>
                 </h2>
             </div>
         </div>
