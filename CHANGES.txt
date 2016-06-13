@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Handle non-ascii URLs in remove_get_params
 
+- BUG-430: Report embedded header asset to webtrekk
+
 
 2.86 (2016-06-09)
 -----------------
