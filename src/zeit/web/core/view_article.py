@@ -327,6 +327,12 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def webtrekk_assets(self):
         assets = []
+        embed = getattr(self, 'embed_header', None)
+
+        if embed:
+            block_type = zeit.web.core.template.block_type(embed)
+            assets.append('{}.header/seite-1'.format(block_type))
+
         p = 0
         for nr, page in enumerate(self.pages, start=1):
             for block in page:
