@@ -110,8 +110,9 @@
 		+animated-interaction($color: $zon-dark-grey)
 
 	&__headline
-		position: relative
+		font-weight: normal
 		margin: 0
+		position: relative
 		&:before
 			+make-a-circle($color: $zon-lighter-grey, $radius: 9px, $border-color: $zon-mid-grey, $border-width: 1px)
 			left: -($page-padding--small + remify(5px))
@@ -125,7 +126,6 @@
 		color: $zon-grey
 		display: block
 		font-size: remify(14px)
-		font-weight: normal
 		letter-spacing: $letter-spacing-m
 		line-height: round-to-precision(18/14, $precision: 1)
 		text-transform: uppercase
