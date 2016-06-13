@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-430: Report embedded header asset to webtrekk
 
+- BUG-428: Recognize campus infoboxes properly
+
 
 2.86 (2016-06-09)
 -----------------
