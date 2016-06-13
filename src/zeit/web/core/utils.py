@@ -97,10 +97,10 @@ def remove_get_params(url, *args):
     for arg in args:
         query_p.pop(arg, None)
     if len(query_p) == 0:
-        return '{}://{}{}'.format(
+        return u'{}://{}{}'.format(
             scheme, netloc, path)
     else:
-        return '{}://{}{}?{}'.format(
+        return u'{}://{}{}?{}'.format(
             scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
 
 
