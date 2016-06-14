@@ -654,6 +654,8 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_channel(self):
+        if self.is_hp:
+            return 'homepage'
         if getattr(self.context, 'ressort', None) is not None:
             return self.context.ressort.lower()
 

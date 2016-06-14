@@ -225,6 +225,12 @@ def test_c1_include_script_should_define_a_timeout_param(testbrowser):
     assert 'timeout: 2000,\n' in inline
 
 
+def test_c1_correct_ressort_on_homepage(testbrowser):
+    browser = testbrowser('/index')
+
+    assert 'cre_client.set_channel( "homepage" );' in (browser.contents)
+
+
 def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
