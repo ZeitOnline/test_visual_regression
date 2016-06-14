@@ -11,7 +11,7 @@ def test_storystream_page_should_render_scope(testbrowser):
     browser = testbrowser('/zeit-online/storystream/dummy')
     scope = browser.cssselect('.storystream-scope__dates')
     scope_text = scope[0].text_content().strip()
-    assert scope_text == '25. Januar 2015 bis 19. September 2015'
+    assert scope_text == '25. Januar 2015 bis 5. Juli 2015'
 
 
 def test_storystream_page_should_render_label(testbrowser):
@@ -72,3 +72,51 @@ def test_storystream_should_get_layout_from_context(testbrowser):
     # Milestone teasers are represented as <article/> instead of <div/>
     browser = testbrowser('/zeit-online/storystream/dummy')
     assert len(browser.cssselect('article.storystream-atom')) == 2
+
+
+def test_storystream_in_article_should_have_correct_order(testbrowser):
+    url1 = '/zeit-online/storystream/articles/griechenland-referendum-oxi'
+    browser = testbrowser(url1)
+    assert len(browser.cssselect('.storystream-in-article a')) == 3
+    itemlist = browser.cssselect('.storystream-in-article__list')
+    items = itemlist[0].getchildren()
+    assert len(items) == 5
+    assert items[0].text == 'Dieser Artikel'
+    assert items[2].text == 'zuvor'
+
+    url2 = '/zeit-online/storystream/articles/grexit-griechenland-euro-zone'
+    browser = testbrowser(url2)
+    assert len(browser.cssselect('.storystream-in-article a')) == 3
+    itemlist = browser.cssselect('.storystream-in-article__list')
+    items = itemlist[0].getchildren()
+    assert len(items) == 6
+    assert items[0].text == 'danach'
+    assert items[2].text == 'Dieser Artikel'
+    assert items[4].text == 'zuvor'
+
+    url3 = '/zeit-online/storystream/articles/syriza-tsipras-parlamentswahl'
+    browser = testbrowser(url3)
+    assert len(browser.cssselect('.storystream-in-article a')) == 3
+    itemlist = browser.cssselect('.storystream-in-article__list')
+    items = itemlist[0].getchildren()
+    assert len(items) == 5
+    assert items[0].text == 'danach'
+    assert items[3].text == 'Dieser Artikel'
+
+
+def test_storystream_in_article_should_show_no_teaser_on_mobile(
+        selenium_driver, testserver):
+    url = '/zeit-online/storystream/articles/griechenland-referendum-oxi'
+    driver = selenium_driver
+    driver.get('{}{}'.format(testserver.url, url))
+
+    small_teaser = driver.find_element_by_css_selector(
+        '.storystream-in-article-teaser')
+
+    driver.set_window_size(320, 480)
+    assert not small_teaser.is_displayed(), (
+        'Small teaser for storystream teaser should be hidden on mobile.')
+
+    driver.set_window_size(980, 1024)
+    assert small_teaser.is_displayed(), (
+        'Small teaser for storystream teaser should be visible on desktop.')

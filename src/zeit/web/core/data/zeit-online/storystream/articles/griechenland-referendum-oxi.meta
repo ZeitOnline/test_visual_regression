@@ -52,6 +52,12 @@
       </rankedTags>
     </rankedTags>
   </attribute>
+
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_date">2015-07-05T07:40:50+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_text">Die Griechen haben Europa im Referendum mit ihrem klaren Votum gegen die Sparpolitik vor die Wahl gestellt: Verbessert die Bedingungen oder schmeißt uns aus dem Euro, mit allen Konsequenzen. Ein Kommentar von Zacharias Zacharakis</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_title">Ein lautes Nein aus Griechenland</attribute>
+
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -87,4 +93,5 @@
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
   <attribute ns="DAV:" name="supportedlock"> </attribute>
   <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="storystreams">griechenland-krise</attribute>
 </head>
