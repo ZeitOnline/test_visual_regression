@@ -19,9 +19,10 @@
     "grunt-jscs": "^2.5.0",
     "grunt-jsdoc": "~1.1.0",
     "grunt-modernizr-builder": "^0.1.9",
+    "grunt-newer": "^1.2.0",
     "grunt-postcss": "^0.8.0",
-    "grunt-sftp-deploy": "~0.2.4",
     "grunt-sass": "^1.2.0",
+    "grunt-sftp-deploy": "~0.2.4",
     "grunt-svgmin": "^3.1.0",
     "grunt-svgstore": "^0.5.0",
     "main-bower-files": "^2.11.1"
