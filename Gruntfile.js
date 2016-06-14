@@ -460,8 +460,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-modernizr-builder');
     grunt.loadNpmTasks('grunt-newer');
     grunt.loadNpmTasks('grunt-postcss');
-    grunt.loadNpmTasks('grunt-sftp-deploy');
     grunt.loadNpmTasks('grunt-sass');
+    grunt.loadNpmTasks('grunt-sftp-deploy');
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-svgstore');
     grunt.loadNpmTasks('main-bower-files');
