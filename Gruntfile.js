@@ -9,11 +9,11 @@ module.exports = function(grunt) {
         codeDir: __dirname + '/src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy:css', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-minimal', 'sass:dev-basic', 'postcss:dist', 'postcss:old-ie', 'copy:css', 'svg' ],
+            production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-all', 'postcss:dist', 'postcss:old-ie', 'copy:css', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
-            css: [ 'sass:dist', 'sass:amp', 'postcss:dist', 'postcss:old-ie' ],
+            css: [ 'sass:dist', 'postcss:dist', 'postcss:old-ie', 'copy:css' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
@@ -80,70 +80,69 @@ module.exports = function(grunt) {
         sass: {
             options: {
                 sourceComments: true,
+                outputStyle: 'expanded',
                 includePaths: [
                     path.resolve(project.sourceDir + 'sass')
                 ]
             },
             'dev-minimal': {
-                files: {
-                    '<%= project.codeDir %>css/web.campus/screen.css': '<%= project.sourceDir %>sass/web.campus/screen.sass',
-                    '<%= project.codeDir %>css/web.magazin/screen.css': '<%= project.sourceDir %>sass/web.magazin/screen.sass',
-                    '<%= project.codeDir %>css/web.site/screen.css': '<%= project.sourceDir %>sass/web.site/screen.sass'
-                }
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [ '**/screen.sass' ],
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
             },
             'dev-basic': {
-                files: {
-                    '<%= project.codeDir %>css/web.campus/advertorial.css': '<%= project.sourceDir %>sass/web.campus/advertorial.sass',
-                    '<%= project.codeDir %>css/web.magazin/advertorial.css': '<%= project.sourceDir %>sass/web.magazin/advertorial.sass',
-                    '<%= project.codeDir %>css/web.site/advertorial.css': '<%= project.sourceDir %>sass/web.site/advertorial.sass',
-                    '<%= project.codeDir %>css/web.campus/amp.css': '<%= project.sourceDir %>sass/web.campus/amp.sass',
-                    '<%= project.codeDir %>css/web.magazin/amp.css': '<%= project.sourceDir %>sass/web.magazin/amp.sass',
-                    '<%= project.codeDir %>css/web.site/amp.css': '<%= project.sourceDir %>sass/web.site/amp.sass',
-                    '<%= project.codeDir %>css/web.site/framebuilder-minimal.css': '<%= project.sourceDir %>sass/web.site/framebuilder-minimal.sass',
-                    '<%= project.codeDir %>css/web.site/video-player.css': '<%= project.sourceDir %>sass/web.site/video-player.sass'
-                }
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [
+                        '**/screen.sass',
+                        '**/amp.sass'
+                    ],
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
             },
             'dev-all': {
-                files: {
-                    '<%= project.codeDir %>css/web.magazin/all-old-ie.css': '<%= project.sourceDir %>sass/web.magazin/all-old-ie.sass',
-                    '<%= project.codeDir %>css/web.site/all-old-ie.css': '<%= project.sourceDir %>sass/web.site/all-old-ie.sass',
-                    '<%= project.codeDir %>css/web.site/ie-navi.css': '<%= project.sourceDir %>sass/web.site/ie-navi.sass',
-                    '<%= project.codeDir %>css/web.site/unresponsive.css': '<%= project.sourceDir %>sass/web.site/unresponsive.sass'
-                }
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [ '**/*.s{a,c}ss' ],
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
             },
+            // this was needed in the beginning of AMP
+            // because the CSS with output style 'compressed' damaged the @font-face declarations somehow
+            // this seems to be fixed now
             'amp': {
                 options: {
                     sourceComments: false,
-                    outputStyle: 'compressed'
+                    outputStyle: 'compact'
                 },
-                files: {
-                    '<%= project.codeDir %>css/web.campus/amp.css': '<%= project.sourceDir %>sass/web.campus/amp.sass',
-                    '<%= project.codeDir %>css/web.magazin/amp.css': '<%= project.sourceDir %>sass/web.magazin/amp.sass',
-                    '<%= project.codeDir %>css/web.site/amp.css': '<%= project.sourceDir %>sass/web.site/amp.sass',
-                }
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [ '**/amp.sass' ],
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
             },
             'dist': {
                 options: {
                     sourceComments: false,
                     outputStyle: 'compressed'
                 },
-                files: {
-                    '<%= project.codeDir %>css/web.campus/advertorial.css': '<%= project.sourceDir %>sass/web.campus/advertorial.sass',
-                    '<%= project.codeDir %>css/web.magazin/advertorial.css': '<%= project.sourceDir %>sass/web.magazin/advertorial.sass',
-                    '<%= project.codeDir %>css/web.site/advertorial.css': '<%= project.sourceDir %>sass/web.site/advertorial.sass',
-                    '<%= project.codeDir %>css/web.magazin/all-old-ie.css': '<%= project.sourceDir %>sass/web.magazin/all-old-ie.sass',
-                    '<%= project.codeDir %>css/web.site/all-old-ie.css': '<%= project.sourceDir %>sass/web.site/all-old-ie.sass',
-                    '<%= project.codeDir %>css/web.campus/amp.css': '<%= project.sourceDir %>sass/web.campus/amp.sass',
-                    '<%= project.codeDir %>css/web.magazin/amp.css': '<%= project.sourceDir %>sass/web.magazin/amp.sass',
-                    '<%= project.codeDir %>css/web.site/amp.css': '<%= project.sourceDir %>sass/web.site/amp.sass',
-                    '<%= project.codeDir %>css/web.site/framebuilder-minimal.css': '<%= project.sourceDir %>sass/web.site/framebuilder-minimal.sass',
-                    '<%= project.codeDir %>css/web.site/ie-navi.css': '<%= project.sourceDir %>sass/web.site/ie-navi.sass',
-                    '<%= project.codeDir %>css/web.campus/screen.css': '<%= project.sourceDir %>sass/web.campus/screen.sass',
-                    '<%= project.codeDir %>css/web.magazin/screen.css': '<%= project.sourceDir %>sass/web.magazin/screen.sass',
-                    '<%= project.codeDir %>css/web.site/screen.css': '<%= project.sourceDir %>sass/web.site/screen.sass',
-                    '<%= project.codeDir %>css/web.site/unresponsive.css': '<%= project.sourceDir %>sass/web.site/unresponsive.sass',
-                    '<%= project.codeDir %>css/web.site/video-player.css': '<%= project.sourceDir %>sass/web.site/video-player.sass'
-                }
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [ '**/*.s{a,c}ss' ], // , '!**/amp.sass' @see comment above
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
             }
         },
 
@@ -397,7 +396,7 @@ module.exports = function(grunt) {
             },
             sass: {
                 files: [ 'sass/**/*.s{a,c}ss' ],
-                tasks: [ 'sass:dev-minimal', 'newer:postcss:dist' ],
+                tasks: [ 'sass:dev-basic', 'newer:postcss:dist' ],
                 options: {
                     interrupt: true,
                     // needed to call `grunt watch` from outside zeit.web
