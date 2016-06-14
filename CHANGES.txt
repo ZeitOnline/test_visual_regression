@@ -1,8 +1,45 @@
 Change log for zeit.web
 =======================
 
-2.85 (unreleased)
+2.87 (unreleased)
 -----------------
+
+- ZON-1985: Implement storystream teaser in article
+
+- FIX: Actually add user id to webtrekk noscript
+
+- FIX: Handle non-ascii URLs in remove_get_params
+
+- BUG-430: Report embedded header asset to webtrekk
+
+- BUG-428: Recognize campus infoboxes properly
+
+- MAINT: Only collect production and preview errors in bugsnag
+
+
+2.86 (2016-06-09)
+-----------------
+
+- ZON-3135: Implement Embed Article Header Object
+
+- ZON-2039: Add series banner for articles
+
+- ZON-3092: Add preconnect links
+
+- ZON-2818: Introduce login-state-footer ESI,
+  containing webtrekk-noscript with user information
+
+- FIX: Align ZON video stage logo
+
+- FIX: Naming things (Zeit.isWrapped)
+
+- FIX: Enable wrapper support for framebuilder
+
+
+2.85 (2016-06-08)
+-----------------
+
+- ZON-1934: polishing Schlagzeilenseite
 
 - BUG-423: Add AdController keyword 'diuqilon' for tablet in portrait mode only
 
@@ -12,6 +49,12 @@ Change log for zeit.web
 
 - BUG-410: Report if config loading in adReload failed
 
+- FIX: Underline links inside ZMO articles
+
+- FIX: Fix clicktracking label for whatsapp sharing link
+
+- FIX: Remove "no-js" class from minimal framebuilder (freed of modernizr)
+
 - FIX: Provide fallback date and hide copyright on Storystreams
 
 - FIX: Escape double quotes in CeleraOne script function arguments
@@ -20,9 +63,15 @@ Change log for zeit.web
 
 - FIX: Set "platform" webtrekk parameter (cp25) for facebook instant articles
 
+- FIX: Fix framebuilder ressort and keywords
+
+- FIX: Use cinema variant for storystream header
+
 - MAINT: Have LazyProxy resolve product_id string to product object
 
 - MAINT: Remove support for ZMO product galleries (they were never used)
+
+- MAINT: Use correct webtrekk version number in noscript tag
 
 - MAINT: Add meetrics to framebuilder
 

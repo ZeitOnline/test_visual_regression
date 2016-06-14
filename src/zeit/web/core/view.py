@@ -52,6 +52,10 @@ def is_advertorial(context, request):
 
 
 def is_paginated(context, request):
+    # XXX: We need some form of IPagination to evaluate wheter or not a context
+    # is paginated. This is, however, not possible at the moment, because the
+    # current evaluation of IPagination of an area level is not efficient.
+    # (RD, 2015-06-02)
     try:
         return int(request.GET['p']) > 1
     except (KeyError, ValueError):
@@ -390,7 +394,7 @@ class Base(object):
         if self.ranked_tags:
             result = [x.label for x in self.ranked_tags]
         else:
-            result = [self.context.ressort, self.context.sub_ressort]
+            result = [self.ressort.title(), self.sub_ressort.title()]
         return [x for x in result if x]
 
     @zeit.web.reify
@@ -1122,6 +1126,10 @@ class FrameBuilder(CeleraOneMixin):
         return self.request.GET.get('banner_channel', None)
 
     @zeit.web.reify
+    def ressort(self):
+        return self.request.GET.get('ressort', '').lower()
+
+    @zeit.web.reify
     def page_slice(self):
         requested_slice = self.request.GET.get('page_slice', None)
         if requested_slice:
@@ -1168,12 +1176,10 @@ class FrameBuilder(CeleraOneMixin):
     @zeit.web.reify
     def adcontroller_values(self):
 
-        banner_channel = self.request.GET.get('banner_channel', None)
-
-        if not banner_channel:
+        if not self.banner_channel:
             return
 
-        adc_levels = banner_channel.split('/')
+        adc_levels = self.banner_channel.split('/')
 
         return [('$handle', adc_levels[3] if len(adc_levels) > 3 else ''),
                 ('level2', adc_levels[0] if len(adc_levels) > 0 else ''),
@@ -1342,3 +1348,12 @@ def view_xml(context, request):
             content_type='text/xml')
     except TypeError:
         return
+
+
+@pyramid.view.view_config(
+    route_name='login_state',
+    renderer='templates/inc/login-state-footer.html',
+    request_param='for=footer',
+    http_cache=60)
+def login_state_footer(request):
+    return zeit.web.core.security.get_login_state(request)

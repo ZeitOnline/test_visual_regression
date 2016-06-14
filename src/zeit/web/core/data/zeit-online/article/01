@@ -48,6 +48,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">70 Jahre DIE ZEIT</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Film</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">5010</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>

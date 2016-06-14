@@ -63,8 +63,7 @@ def test_framebuilder_sets_webtrekk_values_differently(testbrowser):
     assert ('var Z_WT_KENNUNG = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
             'window.location.pathname;') in webtrekk_config
-    assert ('7: window.location.hostname + '
-            'window.location.pathname,') in webtrekk_config
+    assert ("7: window.location.pathname.split('/').pop()") in webtrekk_config
     assert '26: "centerpage.framebuilder"' in webtrekk_config
 
 
@@ -245,8 +244,7 @@ def test_framebuilder_minimal_sets_webtrekk_values_differently(testbrowser):
     assert ('var Z_WT_KENNUNG = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
             'window.location.pathname;') in browser.contents
-    assert ('7: window.location.hostname + '
-            'window.location.pathname,') in browser.contents
+    assert ("7: window.location.pathname.split('/').pop()") in browser.contents
     assert '26: "centerpage.framebuilder"' in browser.contents
 
 
@@ -262,6 +260,13 @@ def test_framebuilder_minimal_can_contain_ivw(testbrowser):
         'script[src="https://script.ioam.de/iam.js"]')
     assert len(ivw_script) == 1
     assert 'var iam_data = {' in browser.contents
+
+
+def test_framebuilder_contains_data_for_wrapper_app(testbrowser):
+    browser = testbrowser('/framebuilder')
+    assert 'window.wrapper' in browser.contents
+    assert ("isWrapped: navigator.userAgent.indexOf('ZONApp') > -1,"
+            in browser.cssselect('head')[0].text_content())
 
 
 # TODO

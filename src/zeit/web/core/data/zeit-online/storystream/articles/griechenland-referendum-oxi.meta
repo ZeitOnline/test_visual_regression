@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-online/article/zeit</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;true/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;true/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;unicode&gt;zeitonline_pol&lt;/unicode&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;true/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-02-15T17:18:53.040833+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2015-05-Crystal</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">34159</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">41b7eb498ee744f3a56c73567395a9ec</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-02-12T03:32:17.547937+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">29.01.2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/2015/05/Crystal</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-02-15T17:18:50.700365+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-02-15T21:10:25.448237+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.aufmacher</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Gesellschaft</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2015-01-29T06:00:00+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned">da57cca8-1341-4de4-9a46-5490c2870bbf d7c822dc-5db9-47e8-9b14-d0098930f069</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">6951cd01cd144aee8614d7a60931b57f</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">Crystal</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Dorit Kowitz</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-02-15T21:11:25.258822+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-02-15T17:18:24.806063+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">Crystal</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-02-15T21:10:25.876626+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.wittmann</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+  <attribute>
+    <rankedTags ns="http://namespaces.zeit.de/CMS/tagging">
+      <rankedTags>
+        <tag>Drogensucht</tag>
+        <tag>Drogenkonsum</tag>
+      </rankedTags>
+    </rankedTags>
+  </attribute>
+
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_date">2015-07-05T07:40:50+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_text">Die Griechen haben Europa im Referendum mit ihrem klaren Votum gegen die Sparpolitik vor die Wahl gestellt: Verbessert die Bedingungen oder schmeißt uns aus dem Euro, mit allen Konsequenzen. Ein Kommentar von Zacharias Zacharakis</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_title">Ein lautes Nein aus Griechenland</attribute>
+
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">13</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">05</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">10492218</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Dossier</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Als Nancy mit 22 von ihrem damals 21-j&#xE4;hrigen Freund M. schwanger wurde, h&#xF6;rten beide sofort mit allem auf: den Kippen, dem Kiffen, dem Crystal. Es fiel ihnen noch leicht. Als ihre Tochter ein Jahr alt war, begann Nancy aber etwas zu fehlen. Nur auf Familie machen, fand sie, das passte nicht zu ihr. So nahm sie wieder ab und zu etwas Crystal und langweilte sich nicht mehr. "Es gab mir das Gef&#xFC;hl", sagt Nancy, "noch was vom Leben zu haben. Das war nur f&#xFC;r mich." (ft)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2015-05</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Politik</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2015-02-12T03:30:27+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Tags&#xFC;ber Kinder und Haushalt, nachts der Rausch: Nancy nahm Crytal Meth, 14 Jahre lang. (ft)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:6ef59e37-385a-46c0-ac5b-8acf2f3fc951}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2015-02-15T21:10:26Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">57620</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Sun, 15 Feb 2015 21:10:26 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e39af1-e114-50f26e607d5b5"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="storystreams">griechenland-krise</attribute>
+</head>

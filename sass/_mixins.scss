@@ -203,13 +203,16 @@
 	}
 }
 
-@mixin animated-interaction($color: $color-link--hover) {
-	@include transition(border-color 0.2s);
+@mixin animated-interaction($color: $color-link--hover, $border-color: false) {
+	@if $border-color == false {
+		$border-color: $color;
+	}
+	@include transition-property(border-bottom-color, color);
+	@include transition-duration(0.2s);
 	border-bottom: 1px solid transparent;
-	border-bottom: 1px solid rgba($color, 0);
 	@include on-interaction {
 		color: $color;
-		border-color: $color;
+		border-color: $border-color;
 	}
 }
 
