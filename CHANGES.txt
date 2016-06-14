@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.87 (unreleased)
+2.87 (2016-06-14)
 -----------------
 
 - ZON-1985: Implement storystream teaser in article
