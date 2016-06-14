@@ -142,8 +142,8 @@ def test_campus_teaser_debate_has_correct_structure(testbrowser):
     assert len(select('.debate__title')) == 1
     assert len(select('.debate__text')) == 1
     assert len(select('.debate__label')) == 1
-    assert (select('.debate__kicker')[0].text_content().strip()
-            == 'Das steht zur Debatte')
+    assert (select('.debate__kicker')[0].text_content().strip() ==
+            'Das steht zur Debatte')
 
 
 def test_campus_toolbox_exists(testbrowser):
