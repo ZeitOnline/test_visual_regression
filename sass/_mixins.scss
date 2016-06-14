@@ -584,19 +584,6 @@ $inline-block-alignment: none !default;
 	@include has-layout;
 }
 
-@mixin legacy-pie-clearfix {
-	&:after {
-		content: "\0020";
-		display: block;
-		height: 0;
-		clear: both;
-		overflow: hidden;
-		visibility: hidden;
-	}
-
-	@include has-layout;
-}
-
 @mixin pie-clearfix {
 	&:after {
 		content: "";
