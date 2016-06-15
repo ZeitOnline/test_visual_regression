@@ -93,7 +93,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         useDataArea: function( $element, event ) {
-
             var $area = $( event.delegateTarget ),
                 $row = $element.closest( '[data-ct-row]' ),
                 row = $row.data( 'ct-row' ),
