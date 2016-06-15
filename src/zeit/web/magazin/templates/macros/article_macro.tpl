@@ -161,12 +161,6 @@
     {% include "zeit.web.magazin:templates/inc/asset/image_article.tpl" with context %}
 {%- endmacro %}
 
-{% macro headerimage(obj) -%}
-    <div class="scaled-image is-pixelperfect article__head-image">
-        {{ lama.insert_responsive_image(obj) }}
-    </div>{{ obj.caption | safe }}{{ obj.copyright }}
-{%- endmacro %}
-
 {% macro video(obj) -%}
     {% if obj.id and 'header' not in obj.format | default('') -%}
         <figure class="

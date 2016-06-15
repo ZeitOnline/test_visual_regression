@@ -45,8 +45,11 @@
         <div class="article__wrap">
             <div class="article__head-wrap">
 
-                {{ blocks[view.header_elem|block_type](view.header_elem) }}
-
+                {% if view.header_elem %}
+                <div class="scaled-image is-pixelperfect article__head-image">
+                    {{ lama.insert_responsive_image(view.header_elem) }}
+                </div>{{ view.header_elem.caption | safe }}{{ view.header_elem.copyright }}
+                {% endif %}
                 <header class="article__title-wrap">
                     <h1 itemprop="headline">
                         {{ blocks.title() }}
