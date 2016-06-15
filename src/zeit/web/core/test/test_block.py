@@ -68,25 +68,6 @@ def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
     assert hasattr(video, 'video_still')
 
 
-def test_header_image_should_be_created_if_display_mode_is_header():
-    model_block = mock.Mock()
-    model_block.display_mode = 'header'
-    model_block.variant_name = 'original'
-    model_block.is_empty = False
-    h_image = zeit.web.core.block.HeaderImage(model_block)
-    assert type(h_image) == zeit.web.core.block.HeaderImage
-
-
-def test_header_image_should_not_be_created_if_display_mode_is_not_header():
-    model_block = mock.Mock()
-    model_block.display_mode = 'column-width'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-
-    h_image = zeit.web.core.block.HeaderImage(model_block)
-    assert h_image is None
-
-
 def test_image_should_be_none_if_is_empty_is_true():
     model_block = mock.Mock()
     model_block.is_empty = True

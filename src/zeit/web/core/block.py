@@ -333,20 +333,6 @@ class BlockImages(object):
         self.image = context.group
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
-class HeaderImage(Image):
-
-    @classmethod
-    def wanted_display_mode(cls, display_mode):
-        """Only accept header images that are marked via their display mode."""
-        return 'header' in (display_mode or '')
-
-
-class HeaderImageStandard(HeaderImage):
-    pass
-
-
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IIntertitle)
 class Intertitle(Block):
