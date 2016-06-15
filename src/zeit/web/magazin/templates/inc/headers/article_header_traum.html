@@ -9,7 +9,9 @@
             </h1>
             {{ blocks.subtitle() }}
         </div>
-        {{ blocks[view.header_elem|block_type](view.header_elem) }}
+        <div class="article__head__image">
+            {{ blocks[view.header_elem|block_type](view.header_elem) }}
+        </div>
         <span class="article__head__meta-wrap is-constrained">
             <span class="article__head__meta">
                 <div class="article__head__meta__offset">

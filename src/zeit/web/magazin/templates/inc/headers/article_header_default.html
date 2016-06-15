@@ -6,7 +6,9 @@
             {{ blocks.supertitle() }}
             {{ blocks.title() }}
         </h1>
-        {{ blocks[view.header_elem|block_type](view.header_elem) }}
+        <div class="article__head__image">
+            {{ blocks[view.header_elem|block_type](view.header_elem) }}
+        </div>
         {{ blocks.subtitle(include_meta=True) }}
         <span class="article__head__meta-wrap">
             <span class="article__head__meta">

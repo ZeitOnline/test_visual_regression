@@ -6,6 +6,7 @@
 {% block media_block -%}
 {{ {'large': 'figure-full-width',
     'column-width': 'figure is-constrained is-centered',
+    'header': 'figure-header',
     'medium-float-left': 'figure-horizontal',
     'medium-float-right': 'figure-horizontal--right',
     'small-float-right': 'figure-stamp--right'}.get(

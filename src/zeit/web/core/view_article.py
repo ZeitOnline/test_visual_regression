@@ -10,9 +10,6 @@ import zope.component
 
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.author.interfaces
-import zeit.magazin.interfaces
-
 
 from zeit.web.site.view_feed import (
     CONTENT_MAKER, ELEMENT_MAKER,
@@ -22,7 +19,6 @@ import zeit.web.core.article
 import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.view
-import zeit.web.magazin.view
 
 
 log = logging.getLogger(__name__)
@@ -152,11 +148,6 @@ class Article(zeit.web.core.view.Content):
         return self.source_url
 
     @zeit.web.reify
-    def first_body_obj(self):
-        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        return body.values().pop(0) if len(body.values()) > 0 else None
-
-    @zeit.web.reify
     def has_cardstack(self):
         return (self.context.xml.xpath('/article/body//cardstack') or
                 self.context.xml.xpath('/article/head/header/cardstack'))
@@ -168,21 +159,18 @@ class Article(zeit.web.core.view.Content):
         return zeit.web.core.utils.update_get_params(url, **params)
 
     @zeit.web.reify
-    def header_img(self):
-        obj = self.first_body_obj
-        if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            return zeit.web.core.block.HeaderImageStandard(obj)
-
-    @zeit.web.reify
-    def header_video(self):
-        obj = self.first_body_obj
-        if (zeit.content.article.edit.interfaces.IVideo.providedBy(
-                obj) and 'header' in (obj.layout or '')):
-            return zeit.web.core.interfaces.IFrontendBlock(obj)
+    def first_body_obj(self):
+        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
+        return body.values().pop(0) if len(body.values()) > 0 else None
 
     @zeit.web.reify
     def header_elem(self):
-        return self.header_video or self.header_img
+        obj = self.first_body_obj
+        if ((zeit.content.article.edit.interfaces.IVideo.providedBy(
+                obj) and 'header' in (obj.layout or '')) or
+            (zeit.content.article.edit.interfaces.IImage.providedBy(
+                obj) and 'header' in (obj.display_mode or ''))):
+            return zeit.web.core.interfaces.IFrontendBlock(obj, None)
 
     @zeit.web.reify
     def resource_url(self):
