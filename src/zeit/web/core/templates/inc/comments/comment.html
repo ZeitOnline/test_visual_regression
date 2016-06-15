@@ -23,7 +23,7 @@
 				{% endif %}
 				<a href="{{ comment.userprofile_url }}">{{ comment.name }}</a>
 			</div>
-			<a  class="comment-meta__date" href="{{ view.content_url + '?cid={0}#cid-{0}'.format(comment.cid) }}">
+			<a  class="comment-meta__date" data-ct-label="datum" href="{{ view.content_url + '?cid={0}#cid-{0}'.format(comment.cid) }}">
 				#{{ comment.shown_num }} &nbsp;—&nbsp; {{ comment.created | format_comment_date }}
 			</a>
 

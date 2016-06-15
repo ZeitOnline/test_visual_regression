@@ -38,10 +38,10 @@
 {%- if request.user %}
     {% set is_mod = 'admin-tech' in request.user.roles or 'admin-editor' in request.user.roles %}
     {%- block comment_form %}
-    <form class="comment-form js-submit-comment" data-ct-row="1" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
+    <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
         {%- if is_mod %} data-mod="mod"{% endif %}>
-        {% if view.comment_form.show_comment_form -%}
-        <div class="comment-form__text comment-form__text--metadata">
+         {% if view.comment_form.show_comment_form -%}
+        <div class="comment-form__text comment-form__text--metadata" data-ct-row="1">
             {% if request.user.picture %}
                 <img class="comment-form__avatar" alt="Avatarbild von {{ request.user.name }}" src="{{ request.user.picture }}">
             {% endif %}
@@ -81,13 +81,13 @@
                 oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
             </p>
             {% endif %}
-        <p class="comment-form__actions">
+        <p class="comment-form__actions" data-ct-row="2">
             <input type="hidden" name="action" value="comment">
             <input type="hidden" name="pid" value="{{ pid }}">
             <a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
             <input class="button" type="submit" value="{{ submit_value }}" />
         </p>
-        {% endif %}
+    {% endif %}
     </form>
     {%- endblock %}
 {%- elif view.comment_form.show_comment_form %}

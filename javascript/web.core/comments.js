@@ -404,10 +404,10 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         var $rootComment = $firstReply.prev( '.comment' ),
             rewrapperId = $firstReply.data( 'rewrapper-id' ),
             rewrapper = '' +
-            '<div id="' + rewrapperId + '" class="comment__rewrapper comment__rewrapper--loading js-hide-replies">' +
+            '<a id="' + rewrapperId + '" class="comment__rewrapper comment__rewrapper--loading js-hide-replies">' +
                 '<span class="comment__count"></span>\n' +
                 '<span class="comment__cta">Antworten verbergen</span>\n' +
-            '</div>\n';
+            '</a>\n';
 
         $firstReply.find( '.comment__container' ).prepend( rewrapper );
     },
@@ -462,10 +462,10 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             overlayHTML = '' +
                 '<div class="comment-overlay js-load-comment-replies" ' +
                     'data-url="' + replyLoadUrl + '" data-fallbackurl="' + replyLoadUrl + '">\n' +
-                    '<div class="comment-overlay__wrap">\n' +
+                    '<a class="comment-overlay__wrap" href="#" data-ct-label="weitere_antworten">\n' +
                         '<span class="comment-overlay__count">+ ' + replyCountInteger + '</span>\n' +
                         '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
-                    '</div>\n' +
+                    '</a>\n' +
                 '</div>\n';
 
             $answers.eq( 0 )
