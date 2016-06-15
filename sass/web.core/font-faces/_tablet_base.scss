@@ -1,23 +1,38 @@
 // Tablet Gothic
-@include font-face("TabletGothic", font-files(
-    "tabletgothic/TabletGothic-Regular.woff2",
-    "tabletgothic/TabletGothic-Regular.woff",
-    "tabletgothic/TabletGothic-Regular.ttf",
-    "tabletgothic/TabletGothic-Regular.svg#TabletGothic"
- ), "tabletgothic/TabletGothic-Regular.eot", normal, normal);
+@font-face {
+    font-family: "TabletGothic";
+    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.eot');
+    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.eot?#iefix') format('embedded-opentype'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.woff2') format('woff2'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.woff') format('woff'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.ttf') format('truetype'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.svg#TabletGothic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 // Tablet Gothic Italic
-@include font-face("TabletGothic", font-files(
-    "tabletgothic/TabletGothic-Italic.woff2",
-    "tabletgothic/TabletGothic-Italic.woff",
-    "tabletgothic/TabletGothic-Italic.ttf",
-    "tabletgothic/TabletGothic-Italic.svg#TabletGothic-Italic"
- ), "tabletgothic/TabletGothic-Italic.eot", normal, italic);
+@font-face {
+    font-family: "TabletGothic";
+    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.eot');
+    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.eot?#iefix') format('embedded-opentype'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.woff2') format('woff2'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.woff') format('woff'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.ttf') format('truetype'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.svg#TabletGothic-Italic') format('svg');
+    font-weight: normal;
+    font-style: italic;
+}
 
 // Tablet Gothic Bold
-@include font-face("TabletGothic", font-files(
-    "tabletgothic/TabletGothic-Bold.woff2",
-    "tabletgothic/TabletGothic-Bold.woff",
-    "tabletgothic/TabletGothic-Bold.ttf",
-    "tabletgothic/TabletGothic-Bold.svg#TabletGothic-Bold"
- ), "tabletgothic/TabletGothic-Bold.eot", bold, normal);
+@font-face {
+    font-family: "TabletGothic";
+    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.eot');
+    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.eot?#iefix') format('embedded-opentype'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.woff2') format('woff2'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.woff') format('woff'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.ttf') format('truetype'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.svg#TabletGothic-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+}

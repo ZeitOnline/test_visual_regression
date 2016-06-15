@@ -2,10 +2,10 @@
 	list-style: none
 	margin: 0
 	padding: 0
-	@include columns(344px 2)
-	@include column-gap(40px)
+	columns: 344px 2
+	column-gap: 40px
 	&__item
-		@include break-inside(avoid)
+		break-inside: avoid
 		page-break-inside: avoid
 		border-bottom: 1px solid #eee
 		// avoid collapsing of margins, which happens sometimes(!) for image items on top right position

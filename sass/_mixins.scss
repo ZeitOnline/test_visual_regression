@@ -23,8 +23,8 @@
 		$border-color--hover: #999;
 	}
 	a {
-		@include transition-property(border-bottom-color, color);
-		@include transition-duration(0.2s);
+		transition-property: border-bottom-color, color;
+		transition-duration: 0.2s;
 		border-bottom: 1px solid $border-color;
 		color: $color;
 		&:focus,
@@ -48,7 +48,7 @@
 		right: 0;
 		top: 0;
 		width: 100%;
-		@include background-image(linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length));
+		background-image: linear-gradient($direction, rgba($color, $alpha_start) 0%, rgba($color, $alpha_stop) $length);
 	}
 }
 
@@ -67,7 +67,7 @@
 		right: 0;
 		top: 0;
 		width: 100%;
-		@include background-image(linear-gradient($angle, $gradient));
+		background-image: linear-gradient($angle, $gradient);
 	}
 }
 
@@ -85,7 +85,7 @@
 		z-index: 1;
 		background-color: $color;
 		opacity: 0;
-		@include transition(opacity .2s ease-in-out);
+		transition: opacity .2s ease-in-out;
 	}
 	&:hover:before {
 		opacity: 1;
@@ -207,8 +207,8 @@
 	@if $border-color == false {
 		$border-color: $color;
 	}
-	@include transition-property(border-bottom-color, color);
-	@include transition-duration(0.2s);
+	transition-property: border-bottom-color, color;
+	transition-duration: 0.2s;
 	border-bottom: 1px solid transparent;
 	@include on-interaction {
 		color: $color;
@@ -225,19 +225,19 @@
 			margin-left: remify(1px);
 			position: relative;
 			top: remify(2px);
-			@include transform(rotate(-45deg));
-			@include transform-origin(50% 50%);
+			transform: rotate(-45deg);
+			transform-origin: 50% 50%;
 		}
 		@else {
-			@include transform(rotate(-180deg));
+			transform: rotate(-180deg);
 		}
 	}
 	@else {
 		content: "▾";
 		display: inline-block; // needed for working transformation
 		margin: remify(0 0 0 3px);
-		@include transition(transform .5s);
-		@include transform-origin(50% 55%);
+		transition: transform .5s;
+		transform-origin: 50% 55%;
 	}
 }
 
@@ -298,7 +298,7 @@
 	padding: $padding;
 	text-align: center;
 	text-transform: uppercase;
-	@include transition(all 0.15s ease-in-out);
+	transition: all 0.15s ease-in-out;
 	&:visited {
 		color: $visited-color;
 	}
@@ -421,9 +421,9 @@
 // @output styles for the element, the parent (@-rooted) and the hover state
 @mixin transition-on-parent-hover($parent, $trans: ()) {
 	$element: &;
-	$default-transition: ("property": opacity, "duration": 0.5s, "delay": 0, "timing": ease-in-out);
+	$default-transition: ("property": opacity, "duration": 0.5s, "delay": 0s, "timing": ease-in-out);
 	$transition: map_merge($default-transition, $trans);
-	@include transition(map-get($transition, "property") map-get($transition, "duration") map-get($transition, "delay") map-get($transition, "timing"));
+	transition: map-get($transition, "property") map-get($transition, "duration") map-get($transition, "delay") map-get($transition, "timing");
 	@at-root #{$parent} {
 		&:hover {
 			#{$element} {
@@ -487,8 +487,8 @@
 	}
 
 	&:before {
-		@include transition-duration(.2s);
-		@include transition-property(border-bottom-color, color);
+		transition-duration: .2s;
+		transition-property: border-bottom-color, color;
 		border-bottom: 1px solid rgba($color-link--default, .5);
 		bottom: 0;
 		color: $linkColor;
@@ -506,7 +506,7 @@
 	}
 
 	&:after {
-		@include background-image(linear-gradient(0deg, rgba($bgColor, 1) 1.5em, rgba($bgColor, 0) 100%));
+		background-image: linear-gradient(0deg, rgba($bgColor, 1) 1.5em, rgba($bgColor, 0) 100%);
 		bottom: 0;
 		content: "";
 		height: $paraLines * 1.5 * em(20px);
@@ -522,4 +522,74 @@
 
 @mixin scaled-font-rem($size: 12px, $factor: $font-factor){
 	font-size: remify($size * $factor);
+}
+
+@mixin link-colors($normal, $hover: false, $active: false, $visited: false, $focus: false) {
+	color: $normal;
+
+	@if $visited {
+		&:visited {
+			color: $visited;
+		}
+	}
+
+	@if $focus {
+		&:focus {
+			color: $focus;
+		}
+	}
+
+	@if $hover {
+		&:hover {
+			color: $hover;
+		}
+	}
+
+	@if $active {
+		&:active {
+			color: $active;
+		}
+	}
+}
+
+$inline-block-alignment: none !default;
+@mixin inline-block($alignment: $inline-block-alignment, $ie-alignment: auto) {
+	// standard
+	display: inline-block;
+
+	@if $alignment and $alignment != none {
+		vertical-align: $alignment;
+	}
+
+	// legacy IE support
+	@if $old-ie and $old-ie == true {
+		@if $ie-alignment and $ie-alignment != none {
+			*vertical-align: $ie-alignment;
+		}
+
+		*zoom: 1;
+		*display: inline;
+	}
+}
+
+@mixin has-layout {
+	@if $old-ie and $old-ie == true {
+		*zoom: 1;
+	}
+}
+
+@mixin clearfix {
+	overflow: hidden;
+
+	@include has-layout;
+}
+
+@mixin pie-clearfix {
+	&:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+	@include has-layout;
 }

@@ -70,7 +70,7 @@ $comments-min-width: remify($comments__break-outside - em($max-page-width))
         height: 100%
         background-color: $white
     +respond-min-max($comments__break-overlap, $comments__break-outside)
-        +box-shadow
+        box-shadow: 0px 0px 5px #333
     +respond-min($comments__break-outside)
         top: 0px
         right: auto
@@ -89,18 +89,18 @@ $comments-min-width: remify($comments__break-outside - em($max-page-width))
             margin-bottom: 0
 
 .comments--animated
-    +transition-property(transform, opacity, visibility)
-    +transition-duration(0) // duration for "disappear"
-    +transition-timing-function(ease-in-out)
-    +transform-origin(left top)
+    transition-property: transform, opacity, visibility
+    transition-duration: 0 // duration for "disappear"
+    transition-timing-function: ease-in-out
+    transform-origin: left top
     +respond-min($comments__break-overlap)
         display: block // needed for working transition
         opacity: 0
         visibility: hidden
     +respond-min-max($comments__break-overlap, $comments__break-outside)
-        +transform(translateX(-100px))
+        transform: translateX(-100px)
     +respond-min($comments__break-outside)
-        +transform(scale(0))
+        transform: scale(0)
 
 .comments__head
     +padded
@@ -111,7 +111,7 @@ $comments-min-width: remify($comments__break-outside - em($max-page-width))
     color: #b91109
 
 .comments__error
-    +transition(opacity .3s, visibility .3s)
+    transition: opacity .3s, visibility .3s
     color: #b91109
     opacity: 0
     padding-top: .5em
@@ -131,7 +131,7 @@ $comments-min-width: remify($comments__break-outside - em($max-page-width))
 .comments__list
     +respond-max($comments__break-overlap)
         top: 0px !important
-    +transition(top 1s)
+    transition: top 1s
     +padded
     padding-bottom: $large
     position: relative
@@ -187,13 +187,13 @@ $comments-min-width: remify($comments__break-outside - em($max-page-width))
 
 .comment__head__avatar
     +inline-block
-    +border-radius(50%)
+    border-radius: 50%
     width: em(40px)
     height: em(40px)
     margin-right: $thin
     background-position: 50% 38% // golden ratio
     background-repeat: no-repeat
-    +background-size(cover)
+    background-size: cover
 
 .comment__head__meta
     +inline-block
@@ -298,13 +298,13 @@ $comments-min-width: remify($comments__break-outside - em($max-page-width))
     .comments
         display: block
     .comments--animated
-        +transition-duration(.25s) // duration for "appear"
+        transition-duration: .25s // duration for "appear"
         +respond-min($comments__break-overlap)
-            +transform(translateX(0))
+            transform: translateX(0)
             opacity: 1
             visibility: visible
         +respond-min($comments__break-outside)
-            +transform(scale(1))
+            transform: scale(1)
     .page__content
         +respond-min($comments__break-outside)
             left: 0
@@ -312,7 +312,7 @@ $comments-min-width: remify($comments__break-outside - em($max-page-width))
             z-index: 2000
 
 #iqd_mainAd
-    +transition(all 1s)
+    transition: all 1s
 
 .show-comments #iqd_align_Ad
     +respond-min($comments__break-outside)

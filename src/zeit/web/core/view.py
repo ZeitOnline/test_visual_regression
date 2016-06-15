@@ -654,13 +654,11 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_channel(self):
-        if getattr(self.context, 'ressort', None) is not None:
-            return self.context.ressort.lower()
+        return getattr(self, 'ressort', None)
 
     @zeit.web.reify
     def _c1_sub_channel(self):
-        if getattr(self.context, 'sub_ressort', None) is not None:
-            return self.context.sub_ressort.lower()
+        return getattr(self, 'sub_ressort', None)
 
     @zeit.web.reify
     def _c1_cms_id(self):
