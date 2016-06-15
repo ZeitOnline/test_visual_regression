@@ -64,7 +64,7 @@ $nav-color-border: #444
 
 .nav
 	@extend %nav-font-l
-	+flex-flow(column nowrap)
+	flex-flow: column nowrap
 	+font-smoothing
 	display: none
 	line-height: remify(50px)
@@ -72,7 +72,7 @@ $nav-color-border: #444
 	&:target,
 	&[aria-hidden="false"]
 		display: block // IE no-flexbox fallback
-		+display-flex
+		display: flex
 
 	a
 		color: inherit
@@ -147,15 +147,15 @@ $nav-color-border: #444
 	.nav
 		// item order
 		&__login
-			+order(1)
+			order: 1
 		&__ressorts
-			+order(2)
+			order: 2
 		&__home
-			+order(3)
+			order: 3
 		&__sales
-			+order(4)
+			order: 4
 		&__service
-			+order(5)
+			order: 5
 
 		// style für mobile menu item
 		&__login,
@@ -210,12 +210,12 @@ $nav-color-border: #444
 		@extend %nav-tablet-font-m
 		display: table // IE no-flexbox fallback
 		width: 100% // needed for IE no-flexbox fallback
-		+display-flex
-		+flex-flow(row wrap)
+		display: flex
+		flex-flow: row wrap
 
 		// ZEIT ONLINE
 		&__home
-			+flex(1 1 50%)
+			flex: 1 1 50%
 			text-align: right
 			border-width: 0 1px 1px 0
 			border-style: solid
@@ -228,7 +228,7 @@ $nav-color-border: #444
 		// SALES + SERVICE
 		&__sales,
 		&__service
-			+flex(0 1 auto)
+			flex: 0 1 auto
 			border-width: 0 1px 1px 0
 			border-style: solid
 			border-color: $nav-color-border
@@ -261,11 +261,11 @@ $nav-color-border: #444
 			padding: remify(0 16px)
 			&[aria-expanded="true"]
 				.nav__dropdown:after
-					+transform(rotate(-90deg) scale(2))
+					transform: rotate(-90deg) scale(2)
 
 		// LOGIN
 		&__login
-			+flex(0 1 auto)
+			flex: 0 1 auto
 			border-bottom: 1px solid $nav-color-border
 			padding: remify(0 16px) // needed here for "Anmeldung nicht möglich"
 		&__login-title
@@ -278,7 +278,7 @@ $nav-color-border: #444
 			display: none
 
 		&__ressorts
-			+flex(1 1 50%)
+			flex: 1 1 50%
 
 		&__ressorts,
 		&__sales
@@ -290,9 +290,9 @@ $nav-color-border: #444
 
 		&__dropdown
 			&:after
-				+transform(rotate(90deg) scale(2))
-				+transform-origin(40% 60%)
-				+transition(transform .1s ease-out)
+				transform: rotate(90deg) scale(2)
+				transform-origin: 40% 60%
+				transition: transform .1s ease-out
 				content: "\203A"
 				display: inline-block
 				line-height: 1

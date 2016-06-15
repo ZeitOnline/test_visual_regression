@@ -53,6 +53,15 @@
     {% include "zeit.web.site:templates/inc/article/pagination.tpl" %}
 {% endblock article_pagination %}
 
+
+{% block article_storystreamteaser_teaser %}
+    {% include "zeit.web.site:templates/inc/article/storystreamteaser/article_storystreamteaser_teaser.tpl" %}
+{% endblock article_storystreamteaser_teaser %}
+
+{% block article_storystreamteaser %}
+    {% include "zeit.web.site:templates/inc/article/storystreamteaser/article_storystreamteaser.tpl" %}
+{% endblock %}
+
 {% block veeseo_div %}
     <div class="RA2VW2"></div>
 {% endblock %}

@@ -1,0 +1,142 @@
+$timeline-line-color: $zon-light-grey
+$timeline-circle-color: $zon-mid-grey
+$timeline-background-color: $zon-lighter-grey
+$timeline-padding--small: $page-padding--small
+$timeline-padding: remify(24px)
+
+.storystream-in-article-teaser
+	background-color: $timeline-background-color
+	display: none
+	font-size: remify(14px)
+	line-height: round-to-precision(18/14, $precision: 1)
+	margin: remify(60px) (-$page-padding)
+	padding: 0 $page-padding
+
+	+respond-min($break-tablet-min)
+		display: block
+
+	&__content
+		border-left: 1px $timeline-line-color solid
+		margin: 0 auto
+		max-width: remify(660px)
+		padding: remify(16px 0 16px 14px)
+		+default-article-textlink($color: $zon-dark-grey, $hover: $zon-dark-grey, $border-color: rgba($zon-dark-grey, 0.4), $border-color--hover: rgba($zon-dark-grey, 1))
+
+	&__kicker
+		color: $zon-grey
+		letter-spacing: $letter-spacing-m
+		margin-right: remify(18px)
+		position: relative
+		text-transform: uppercase
+		&:before
+			+make-a-circle($color: $timeline-background-color, $radius: 9px, $border-color: $timeline-circle-color, $border-width: 1px)
+			box-shadow: 0 0 0 3px $timeline-background-color
+			left: remify(-20px)
+			top: remify(3px)
+
+	&__link
+		letter-spacing: $letter-spacing-s
+
+
+
+.storystream-in-article
+	margin: remify(50px) (-$page-padding)
+	+respond-min($break-tablet-min)
+		margin-bottom: remify(60px)
+		margin-top: remify(60px)
+
+	&__container
+		padding: 0 $page-padding--small
+		&--header
+			background-color: $timeline-background-color
+			padding-top: $vertical-space
+
+	&__content
+		margin: 0 auto
+		padding-left: $timeline-padding--small
+		position: relative
+		+respond-min($break-tablet-min)
+			max-width: remify(660px)
+			padding-left: $timeline-padding
+		&--header
+			padding-bottom: $vertical-space
+		&--footer
+			padding: remify(24px 0 0)
+		&--with-border
+			border-left: 1px $timeline-line-color solid
+
+	&__list
+		list-style: none
+		margin: 0
+		padding: remify(1px 0) // needed to prevent collapsing margins, too
+
+	&__listcaption
+		color: $zon-dark-grey
+		font-size: remify(12px)
+		letter-spacing: $letter-spacing-l
+		line-height: round-to-precision(20/12, $precision: 1)
+		margin-top: remify(24px)
+		text-transform: uppercase
+		&--current
+			color: $zon-mid-grey
+		&:first-child
+			margin-top: remify(20px)
+
+	&__listitem
+		color: $zon-dark-grey
+		font-size: remify(16px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-s
+		line-height: round-to-precision(20/16, $precision: 1)
+		margin: remify(8px 0 16px)
+		position: relative
+		&:before
+			+make-a-circle($color: currentColor, $radius: 9px, $border-width: 4px)
+			left: -($timeline-padding--small + remify(9px))
+			top: remify(3px)
+			+respond-min($break-tablet-min)
+				left: -($timeline-padding + remify(9px))
+		&--current
+			color: $zon-mid-grey
+			&:before
+				background-color: $zon-light-grey
+		&:last-child
+			margin-bottom: remify(10px)
+		+respond-min($break-tablet-min)
+			margin-bottom: remify(20px)
+
+	&__link
+		color: currentColor
+		+animated-interaction($color: currentColor, $border-color: rgba($zon-dark-grey, 0.5))
+
+	&__headline
+		font-weight: normal
+		margin: 0
+		position: relative
+		&:before
+			+make-a-circle($color: $timeline-background-color, $radius: 9px, $border-color: $timeline-circle-color, $border-width: 1px)
+			box-shadow: 0 0 0 3px $timeline-background-color
+			left: -($timeline-padding--small + remify(6px))
+			top: remify(3px)
+			+respond-min($break-tablet-min)
+				left: -($timeline-padding + remify(6px))
+
+	&__kicker
+		color: $zon-grey
+		display: block
+		font-size: remify(14px)
+		letter-spacing: $letter-spacing-m
+		line-height: round-to-precision(18/14, $precision: 1)
+		text-transform: uppercase
+
+	&__title
+		color: $zon-dark-grey
+		display: block
+		font-family: $font-franziska
+		font-size: remify(20px)
+		font-style: italic
+		letter-spacing: $letter-spacing-s
+		line-height: round-to-precision(24/20, $precision: 1)
+		margin-top: 0.25em // uses em by intention
+		+respond-min($break-tablet-min)
+			font-size: remify(24px)

@@ -18,9 +18,9 @@ $minor-width: 35%
         padding: 0
         position: relative
     &--trio
-        +display-flex
-        +flex-wrap(wrap)
-        +justify-content(space-between)
+        display: flex
+        flex-wrap: wrap
+        justify-content: space-between
         margin: 0 auto remify($compact--px) auto
 
         // +respond-min-max($break-1, $break-3)
@@ -29,7 +29,7 @@ $minor-width: 35%
         //     width: 3*$mtb-teaser-width + 2*$big
 
         +respond-min-max($break-1, $break-3)
-            +justify-content(space-around) // centers the last teaser for uneven teaser counts
+            justify-content: space-around // centers the last teaser for uneven teaser counts
             width: remify( 2*$trio-teaser-width + 2*$compact--px )
 
         +respond-min($break-3)
@@ -46,9 +46,9 @@ $minor-width: 35%
 
     +respond-min($break-2)
         &--major
-            +display-flex
-            +flex-wrap(wrap)
-            +justify-content(space-between)
+            display: flex
+            flex-wrap: wrap
+            justify-content: space-between
             float: left
             padding: remify(0 $compact--px 0 $compact--px)
             width: $major-width

@@ -85,7 +85,8 @@ class Application(object):
             api_key=self.settings.get('bugsnag_token'),
             project_root=pkg_resources.get_distribution('zeit.web').location,
             app_version=self.settings.get('version'),
-            notify_release_stages=['devel', 'staging', 'production'],
+            # Bugsnag UI displays the first letter, so "preview" is unhelpful.
+            notify_release_stages=['vorschau', 'production'],
             release_stage=self.settings.get('environment', 'dev')
         )
 
