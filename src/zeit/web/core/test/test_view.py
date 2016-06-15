@@ -226,7 +226,7 @@ def test_c1_include_script_should_define_a_timeout_param(testbrowser):
 
 
 def test_c1_correct_ressort_on_homepage(testbrowser):
-    browser = testbrowser('/index')
+    browser = testbrowser('/zeit-online/slenderized-index')
 
     assert 'cre_client.set_channel( "homepage" );' in (browser.contents)
 
