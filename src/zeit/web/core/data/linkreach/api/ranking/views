@@ -1,5 +1,20 @@
 [
     {
+        "location": "/politik/deutschland/2015-09/fluechtlinge-bundesregierung-milliardenpaket",
+        "score": 69167,
+        "uniqueId": "http://xml.zeit.de/zeit-online/article/fischer",
+        "ressort": "politik",
+        "sub_ressort": "deutschland",
+        "date_first_released": "2015-09-07T01:29:23Z",
+        "product_id": "ZEDE",
+        "supertitle": "Asylbewerber",
+        "title": "Koalition beschließt Milliardenpaket für Flüchtlingshilfe",
+        "subtitle": "Die Bundesregierung stellt sechs Milliarden Euro für die Versorgung von Asylbewerbern bereit. Zudem präsentiert sie einen Plan, der Fehlanreize beseitigen soll.",
+        "channels": ["Politik Deutschland"],
+        "fetchedAt": 1441589401554,
+        "timestamp": 1441589363000
+    },
+    {
         "location": "/politik/deutschland/2015-09/muenchen-fluechtlinge-unterstuetzung-verteilung",
         "score": 73147,
         "uniqueId": "http://xml.zeit.de/zeit-online/cp-content/article-01",
@@ -13,21 +28,6 @@
         "channels": ["Politik Deutschland"],
         "fetchedAt": 1441553041418,
         "timestamp": 1441553009000
-    },
-    {
-        "location": "/politik/deutschland/2015-09/fluechtlinge-bundesregierung-milliardenpaket",
-        "score": 69167,
-        "uniqueId": "http://xml.zeit.de/zeit-online/cp-content/kolumne",
-        "ressort": "politik",
-        "sub_ressort": "deutschland",
-        "date_first_released": "2015-09-07T01:29:23Z",
-        "product_id": "ZEDE",
-        "supertitle": "Asylbewerber",
-        "title": "Koalition beschließt Milliardenpaket für Flüchtlingshilfe",
-        "subtitle": "Die Bundesregierung stellt sechs Milliarden Euro für die Versorgung von Asylbewerbern bereit. Zudem präsentiert sie einen Plan, der Fehlanreize beseitigen soll.",
-        "channels": ["Politik Deutschland"],
-        "fetchedAt": 1441589401554,
-        "timestamp": 1441589363000
     },
     {
         "location": "/gesellschaft/zeitgeschehen/2015-09/fluchthilfe-fluechtlinge-wien-budapest-auto-konvoi",
