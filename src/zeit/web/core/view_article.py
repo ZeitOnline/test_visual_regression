@@ -156,12 +156,6 @@ class Article(zeit.web.core.view.Content):
         body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
         return body.values().pop(0) if len(body.values()) > 0 else None
 
-    def _create_obj(self, _cls, obj):
-        try:
-            return _cls(obj)
-        except OSError:
-            log.debug('Object does not exist.')
-
     @zeit.web.reify
     def has_cardstack(self):
         return (self.context.xml.xpath('/article/body//cardstack') or
@@ -183,7 +177,7 @@ class Article(zeit.web.core.view.Content):
     def header_video(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IVideo.providedBy(obj):
-            return self._create_obj(zeit.web.core.block.HeaderVideo, obj)
+            return zeit.web.core.block.HeaderVideo(obj)
 
     @zeit.web.reify
     def header_elem(self):

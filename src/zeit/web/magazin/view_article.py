@@ -72,7 +72,7 @@ class LongformArticle(Article):
     def header_img(self):
         obj = self.first_body_obj
         if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            return self._create_obj(zeit.web.core.block.HeaderImage, obj)
+            return zeit.web.core.block.HeaderImage(obj)
 
     @zeit.web.reify
     def adwords(self):
