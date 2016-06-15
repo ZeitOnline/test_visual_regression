@@ -153,8 +153,7 @@ def test_header_elem_should_be_video_if_there_is_a_header_video(application):
     xml = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(xml)
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert isinstance(
-        article_view.header_elem, zeit.web.core.block.HeaderVideo)
+    assert isinstance(article_view.header_elem, zeit.web.core.block.Video)
 
 
 def test_header_image_should_be_none_if_adapted_as_regular_image(application):

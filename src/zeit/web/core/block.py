@@ -384,7 +384,9 @@ class Citation(Block):
         self.layout = model_block.layout
 
 
-class BaseVideo(Block):
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
+class Video(Block):
 
     def __init__(self, model_block):
         video = None
@@ -409,32 +411,6 @@ class BaseVideo(Block):
             return getattr(high, 'url', '')
         else:
             logging.exception('No video renditions set.')
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
-class Video(BaseVideo):
-
-    def __new__(cls, model_block):
-        if 'header' in (model_block.layout or ''):
-            return
-        return super(Video, cls).__new__(cls, model_block)
-
-    def __init__(self, model_block):
-        super(Video, self).__init__(model_block)
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
-class HeaderVideo(BaseVideo):
-
-    def __new__(cls, model_block):
-        if 'header' not in (model_block.layout or ''):
-            return
-        return super(HeaderVideo, cls).__new__(cls, model_block)
-
-    def __init__(self, model_block):
-        super(HeaderVideo, self).__init__(model_block)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)

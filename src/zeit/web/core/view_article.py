@@ -176,8 +176,9 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def header_video(self):
         obj = self.first_body_obj
-        if zeit.content.article.edit.interfaces.IVideo.providedBy(obj):
-            return zeit.web.core.block.HeaderVideo(obj)
+        if (zeit.content.article.edit.interfaces.IVideo.providedBy(
+                obj) and 'header' in (obj.layout or '')):
+            return zeit.web.core.interfaces.IFrontendBlock(obj)
 
     @zeit.web.reify
     def header_elem(self):

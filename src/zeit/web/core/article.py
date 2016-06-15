@@ -169,6 +169,13 @@ def pages_of_article(context):
             del blocks[0]
     except IndexError:
         pass
+    # delete block that should be in z.c.article.edit.interfaces.IHeader
+    try:
+        if (zeit.content.article.edit.interfaces.IVideo.providedBy(
+                blocks[0]) and 'header' in (blocks[0].layout or '')):
+            del blocks[0]
+    except IndexError:
+        pass
     for block in blocks:
         if zeit.content.article.edit.interfaces.IDivision.providedBy(block):
             page = Page(block)
