@@ -40,47 +40,47 @@
 {% endblock adplace_billboard %}
 
 {% block content %}
-	<article class="article article--longform" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
+    <article class="article article--longform" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
-		<div class="article__wrap">
-			<div class="article__head-wrap">
+        <div class="article__wrap">
+            <div class="article__head-wrap">
 
-				{{ blocks[view.header_elem|block_type](view.header_elem) }}
+                {{ blocks[view.header_elem|block_type](view.header_elem) }}
 
-				<header class="article__title-wrap">
-					<h1 itemprop="headline">
-						{{ blocks.title() }}
-					</h1>
-					<div class="article__head__meta">
-						{% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
-						{{ blocks.meta_author(view.authors) }}
-					</div>
-				</header>
-			</div>
+                <header class="article__title-wrap">
+                    <h1 itemprop="headline">
+                        {{ blocks.title() }}
+                    </h1>
+                    <div class="article__head__meta">
+                        {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
+                        {{ blocks.meta_author(view.authors) }}
+                    </div>
+                </header>
+            </div>
 
-			<div class="article__body">
-				<!-- block for Teaser -->
-				<section class="article__page">
-					<div class="article__page-wrap">
-						{{ blocks.subtitle() }}
-					</div>
-				</section>
+            <div class="article__body">
+                <!-- block for Teaser -->
+                <section class="article__page">
+                    <div class="article__page-wrap">
+                        {{ blocks.subtitle() }}
+                    </div>
+                </section>
 
-				{{ lama.adplace(view.banner(3), view) }}
+                {{ lama.adplace(view.banner(3), view) }}
 
-				{% for page in view.pages %}
-				<section class="article__page">
-					<div class="article__page-wrap">
-						{{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
-						{{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
+                {% for page in view.pages %}
+                <section class="article__page">
+                    <div class="article__page-wrap">
+                        {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
+                        {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
 
-						{{ article.render_page(page) }}
-					</div>
-				</section>
-				{% endfor %}
-			</div>
-		</div>
-	</article>
+                        {{ article.render_page(page) }}
+                    </div>
+                </section>
+                {% endfor %}
+            </div>
+        </div>
+    </article>
 {% endblock content %}
 
 {% block adplace_floor %}
