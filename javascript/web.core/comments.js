@@ -404,7 +404,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         var $rootComment = $firstReply.prev( '.comment' ),
             rewrapperId = $firstReply.data( 'rewrapper-id' ),
             rewrapper = '' +
-            '<a id="' + rewrapperId + '" class="comment__rewrapper comment__rewrapper--loading js-hide-replies">' +
+            '<a id="' + rewrapperId + '" href="#" class="comment__rewrapper comment__rewrapper--loading js-hide-replies">' +
                 '<span class="comment__count"></span>\n' +
                 '<span class="comment__cta">Antworten verbergen</span>\n' +
             '</a>\n';
