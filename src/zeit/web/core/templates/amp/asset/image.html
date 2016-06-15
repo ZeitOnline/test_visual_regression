@@ -21,7 +21,7 @@
     {%- endif %}
 
     {% block image %}
-        <figure class="{{ 'figure' | with_mods(block.display_mode) }}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
+        <figure class="{{ 'figure' | with_mods(block.display_mode if block) }}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
             {% block media -%}
             <amp-img
                 src="{{ src }}"
