@@ -21,8 +21,8 @@ $nav-link-color--hover: $zon-dark-grey
 
 // basic style for nav box
 .main_nav
-	+display-flex()
-	+flex-wrap(wrap)
+	display: flex
+	flex-wrap: wrap
 	width: 100%
 	@supports not (flex-wrap: wrap)
 		display: inline-block
@@ -56,12 +56,12 @@ $nav-link-color--hover: $zon-dark-grey
 //box 1: logo
 .logo_bar
 	+add_nav_bar_style($zon-bar-height-phablet)
-	+display-flex()
-	+justify-content(space-between)
-	+order(10)
+	display: flex
+	justify-content: space-between
+	order: 10
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: $zon-logo-width)
-		+order(40)
+		order: 40
 		margin: $petite 0
 
 	&__brand
@@ -107,13 +107,13 @@ $nav-link-color--hover: $zon-dark-grey
 //box 2: community
 .main_nav__community
 	+add_nav_bar_style(auto)
-	+order(20)
+	order: 20
 	letter-spacing: 1px
 	padding: remify(20px)
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: auto)
-		+order(30)
-		+flex(0 0 auto)
+		order: 30
+		flex: 0 0 auto
 		font-size: remify(10px)
 		line-height: $zon-bar-height-phablet
 		min-width: remify(80px) // fallback for failing esi include
@@ -143,9 +143,9 @@ $nav-link-color--hover: $zon-dark-grey
 //box 3: ressorts
 .main_nav__ressorts
 	width: 100%
-	+order(30)
+	order: 30
 	+respond-min($break-tablet-min)
-		+order(60)
+		order: 60
 
 // box 4: classifieds
 .main_nav__classifieds
@@ -153,13 +153,13 @@ $nav-link-color--hover: $zon-dark-grey
 	+add_nav_bar_style(auto)
 	padding-left: $petite
 	line-height: $zon-classifieds-height
-	+order(50)
+	order: 50
 	& [data-feature='dropdown']
 		display: none
 	& > ul
-		+display-flex()
-		+flex-wrap(wrap)
-		+justify-content(space-between)
+		display: flex
+		flex-wrap: wrap
+		justify-content: space-between
 		& > li
 			width: 50%
 			margin: 0
@@ -167,8 +167,8 @@ $nav-link-color--hover: $zon-dark-grey
 				width: 33%
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: auto)
-		+order(10)
-		+flex(2 0 35%)
+		order: 10
+		flex: 2 0 35%
 		& > ul
 			margin-right: $petite
 			display: inline-block
@@ -185,7 +185,9 @@ $nav-link-color--hover: $zon-dark-grey
 	+respond-max($break-tablet-min)
 		ul
 			li
-				+ellipsis()
+				white-space: nowrap
+				overflow: hidden
+				text-overflow: ellipsis
 
 
 // box 5: services
@@ -193,11 +195,11 @@ $nav-link-color--hover: $zon-dark-grey
 	@extend %main_nav_links
 	+add_nav_bar_style($zon-bar-height-phablet,true)
 	line-height: $zon-bar-height-phablet
-	+order(40)
+	order: 40
 	padding-left: 0
 	ul
-		+display-flex()
-		+justify-content(space-between)
+		display: flex
+		justify-content: space-between
 		text-align: center
 		height: em($zon-bar-height-phablet-px - 1)
 		li
@@ -210,8 +212,8 @@ $nav-link-color--hover: $zon-dark-grey
 				border-right: 1px solid $color-border
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style($width: auto)
-		+order(20)
-		+flex(0 0 auto)
+		order: 20
+		flex: 0 0 auto
 		text-align: right
 		padding-left: auto
 		& > ul
@@ -228,10 +230,10 @@ $nav-link-color--hover: $zon-dark-grey
 //box 6: search
 .main_nav__search
 	+add_nav_bar_style($zon-search-bar-height-phablet)
-	+order(60)
+	order: 60
 	+respond-min($break-tablet-min)
 		+remove_nav_bar_style()
-		+order(50)
+		order: 50
 		margin: $petite 0 0 0
 		line-height: $zon-search-square-size
 		overflow: hidden
@@ -261,15 +263,15 @@ $nav-link-color--hover: $zon-dark-grey
 	+respond-min($break-tablet-min)
 		width: $zon-search-width
 		visibility: hidden
-		+transition(transform .2s ease-out, visibility .2s)
-		+transform(translateX($zon-search-width))
+		transition: transform .2s ease-out, visibility .2s
+		transform: translateX($zon-search-width)
 	+respond-min($break-desktop-min)
 		visibility: visible
-		+transform(none)
+		transform: none
 
 .search__input--visible
 	visibility: visible
-	+transform(translateX(0))
+	transform: translateX(0)
 	& + .search__button
 		border-radius: 0 $micro $micro 0
 
@@ -308,8 +310,8 @@ $nav-link-color--hover: $zon-dark-grey
 	display: none
 	+respond-min($break-tablet-min)
 		display: inline
-		+order(45)
-		+flex-grow(1)
+		order: 45
+		flex-grow: 1
 		margin: $petite
 
 
@@ -325,9 +327,9 @@ $nav-link-color--hover: $zon-dark-grey
 			color: $nav-link-color--hover
 
 .login-state-mobile
-	+display-flex()
-	+justify-content(space-between)
-	+align-items(center)
+	display: flex
+	justify-content: space-between
+	align-items: center
 	&__avatar
 		border-radius: 50%
 		height: $user-picture-diameter
@@ -348,14 +350,14 @@ $nav-link-color--hover: $zon-dark-grey
 		max-height: $user-picture-diameter
 		overflow: hidden
 		text-overflow: ellipsis
-		+flex-grow(1)
+		flex-grow: 1
 	+respond-min($break-tablet-min)
 		display: none
 
 /* primary navigation (ressorts and stuff) */
 
 .primary-nav
-	+columns(2)
+	columns: 2
 	+pie-clearfix
 	font-size: $font-m
 	letter-spacing: $zon-letter-spacing-m
@@ -363,9 +365,9 @@ $nav-link-color--hover: $zon-dark-grey
 	padding: 0 0 0 $petite
 
 	+respond-min($break-phablet-min)
-		+columns(3)
+		columns: 3
 	+respond-min($break-tablet-min)
-		+columns(auto)
+		columns: auto
 		border-bottom: 1px solid $color-border
 		display: block
 		font-size: $font-s
@@ -413,7 +415,7 @@ $nav-link-color--hover: $zon-dark-grey
 		color: $white
 		background-color: $zon-dark-grey
 		border-radius: 3px
-		+transition(background-color .15s linear)
+		transition: background-color .15s linear
 		padding: 0 $fine
 		&:focus,
 		&:hover

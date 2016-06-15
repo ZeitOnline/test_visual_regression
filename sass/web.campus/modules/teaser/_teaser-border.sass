@@ -6,7 +6,7 @@
 		position: relative
 
 	&__link
-		+display-flex
+		display: flex
 		+font-smoothing
 		background-color: $color-topics-primary
 		bottom: 0
@@ -21,10 +21,10 @@
 
 	&__heading
 		@extend %font-beckett
-		+display-flex
-		+justify-content(center)
-		+align-items(center)
-		+flex(1 1 auto)
+		display: flex
+		justify-content: center
+		align-items: center
+		flex: 1 1 auto
 		$border-width: 3px
 		$arrow-size: 10px
 		background-color: inherit // needed for the "gap" after the border-arrow
@@ -41,7 +41,7 @@
 			position: absolute
 			width: 18px
 		&:after
-			+transform(rotate(45deg))
+			transform: rotate(45deg)
 			border-color: currentColor
 			border-style: solid
 			border-width: $border-width $border-width 0 0

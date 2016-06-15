@@ -116,7 +116,7 @@
 		vertical-align: middle
 		width: remify(ceil(14px*$logo_format))
 	&--liveblog
-		+background-image(linear-gradient(to top, $zon-red, #d41910))
+		background-image: linear-gradient(to top, $zon-red, #d41910)
 		background-color: $zon-red
 		border-radius: remify(3px)
 		color: $white
@@ -129,7 +129,7 @@
 		text-transform: uppercase
 		vertical-align: 1px
 		&:before
-			+animation(live-blog-indicator-animation 2s infinite)
+			animation: live-blog-indicator-animation 2s infinite
 			background-color: $zon-lighter-grey
 			border-radius: 50%
 			content: ""
@@ -138,10 +138,10 @@
 			margin-right: remify(4px)
 			width: remify(8px)
 		&-closed
-			+background-image(linear-gradient(to top, #494b52, $trout))
+			background-image: linear-gradient(to top, #494b52, $trout)
 			background-color: $trout
 			&:before
-				+animation(none)
+				animation: none
 
 %teaser-combined-link
 	color: inherit

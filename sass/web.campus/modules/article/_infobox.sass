@@ -115,9 +115,9 @@
 			border-bottom-width: 4px
 			+scaled-font(44px, $title-factor)
 		.js &__container
-			+display-flex()
-			+flex-flow(row wrap)
-			+justify-content(space-between)
+			display: flex
+			flex-flow: row wrap
+			justify-content: space-between
 			margin: 0 auto
 			max-width: remify(820px)
 		.js &__navigation
@@ -125,7 +125,7 @@
 			margin: remify(0 20px 40px 0)
 			width: remify(240px)
 		.js &__content
-			+flex(1 1 50%)
+			flex: 1 1 50%
 
 	.infobox-tab
 		.js &
