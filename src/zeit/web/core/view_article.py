@@ -153,18 +153,10 @@ class Article(zeit.web.core.view.Content):
         return zeit.web.core.utils.update_get_params(url, **params)
 
     @zeit.web.reify
-    def first_body_obj(self):
-        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        return body.values().pop(0) if len(body.values()) > 0 else None
-
-    @zeit.web.reify
     def header_elem(self):
-        obj = self.first_body_obj
-        if ((zeit.content.article.edit.interfaces.IVideo.providedBy(
-                obj) and 'header' in (obj.layout or '')) or
-            (zeit.content.article.edit.interfaces.IImage.providedBy(
-                obj) and obj.display_mode != 'float')):
-            return zeit.web.core.interfaces.IFrontendBlock(obj, None)
+        return zeit.web.core.interfaces.IFrontendBlock(
+            zeit.content.article.edit.interfaces.IHeaderArea(
+                self.context).module, None)
 
     @zeit.web.reify
     def resource_url(self):
@@ -295,13 +287,15 @@ class Article(zeit.web.core.view.Content):
             self.breadcrumbs_by_title(breadcrumbs)
         return breadcrumbs
 
+    WEBTREKK_ASSETS = (
+        'cardstack', 'inlinegallery', 'liveblog', 'quiz', 'raw', 'video')
+
     @zeit.web.reify
     def webtrekk_assets(self):
         assets = []
-        embed = getattr(self, 'embed_header', None)
 
-        if embed:
-            block_type = zeit.web.core.template.block_type(embed)
+        block_type = zeit.web.core.template.block_type(self.header_elem)
+        if block_type in self.WEBTREKK_ASSETS:
             assets.append('{}.header/seite-1'.format(block_type))
 
         p = 0
@@ -310,8 +304,7 @@ class Article(zeit.web.core.view.Content):
                 block_type = zeit.web.core.template.block_type(block)
                 if block_type == 'paragraph':
                     p += 1
-                if block_type in ['cardstack', 'inlinegallery', 'liveblog',
-                                  'quiz', 'video']:
+                if block_type in self.WEBTREKK_ASSETS:
                     assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
         return assets
 

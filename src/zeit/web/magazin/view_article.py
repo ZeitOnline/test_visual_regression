@@ -69,12 +69,6 @@ class LongformArticle(Article):
     pagetitle_suffix = u' | ZEIT ONLINE'
 
     @zeit.web.reify
-    def header_elem(self):
-        obj = self.first_body_obj
-        if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            return zeit.web.core.interfaces.IFrontendBlock(obj, None)
-
-    @zeit.web.reify
     def adwords(self):
         keywords = super(LongformArticle, self).adwords
         keywords.extend(['longform', 'noiqdband'])

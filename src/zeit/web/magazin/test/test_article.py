@@ -19,6 +19,7 @@ import pytest
 def test_ipages_contains_blocks(application):
     xml = StringIO("""\
 <article>
+  <head/>
   <body>
     <division type="page">
       <p>foo bar</p>

@@ -163,13 +163,10 @@ def pages_of_article(context):
     page = Page(first_division)
     pages.append(page)
     blocks = body.values()
-    # Delete blocks that should be in z.c.article.edit.interfaces.IHeader.
-    # XXX Inverse of z.w.core.view_article.Article.header_elem, refactor!
+
+    header = zeit.content.article.edit.interfaces.IHeaderArea(context)
     try:
-        if ((zeit.content.article.edit.interfaces.IImage.providedBy(
-                blocks[0]) and blocks[0].display_mode != 'float') or
-            (zeit.content.article.edit.interfaces.IVideo.providedBy(
-                blocks[0]) and 'header' in (blocks[0].layout or ''))):
+        if blocks[0] == header.module:
             del blocks[0]
     except IndexError:
         pass
