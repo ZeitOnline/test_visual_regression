@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "freewall": "1.0.5",
-    "jquery": "1.12.0",
+    "freewall": "1.0.6",
+    "jquery": "1.12.4",
     "jquery.inview": "1.1.2",
-    "normalize.css": "3.0.3",
+    "normalize.css": "4.1.1",
     "picturefill": "3.0.2",
-    "requirejs": "2.1.22",
+    "requirejs": "2.2.0",
     "sjcl": "1.0.3",
     "svg4everybody": "2.0.3",
     "velocity": "1.2.3"
