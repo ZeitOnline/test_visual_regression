@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - MAINT: Replace compass with libsass and autoprefixer
 
+- MAINT: Update bower components
+
 
 2.87 (2016-06-14)
 -----------------
