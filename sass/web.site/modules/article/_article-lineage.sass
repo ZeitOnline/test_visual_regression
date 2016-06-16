@@ -8,7 +8,7 @@ $article-lineage-transition-duration: .4s
 	white-space: nowrap
 
 .article-lineage
-	+transition(opacity .5s)
+	transition: opacity .5s
 	display: none
 	margin: 0 (-$page-padding)
 	max-width: remify(980px)
@@ -25,7 +25,7 @@ $article-lineage-transition-duration: .4s
 	+old-ie
 		display: none
 	&--hidden
-		+transition-duration(90ms) // used to fade it out quickly
+		transition-duration: 90ms // used to fade it out quickly
 		pointer-events: none // it's invisible - make it unclickable too
 	&--absolute,
 	&--fixed
@@ -35,7 +35,7 @@ $article-lineage-transition-duration: .4s
 		top: auto
 
 .al-link
-	+transition(max-width $article-lineage-transition-duration ease-out, box-shadow .1s ($article-lineage-transition-duration - 0.1s)) // remove box-shadow at transition end
+	transition: max-width $article-lineage-transition-duration ease-out, box-shadow .1s ($article-lineage-transition-duration - 0.1s) // remove box-shadow at transition end
 	background: $zon-lighter-grey
 	box-shadow: none
 	color: $zon-charcoal
@@ -49,7 +49,7 @@ $article-lineage-transition-duration: .4s
 		right: 0
 	&:focus,
 	&:hover
-		+transition-delay(0s) // needed to show box-shadow at transition start
+		transition-delay: 0s // needed to show box-shadow at transition start
 		box-shadow: 0px 1px 3px $zon-mid-grey
 		color: $zon-charcoal
 		max-width: em(820px)
@@ -67,7 +67,7 @@ $article-lineage-transition-duration: .4s
 			float: right
 
 .al-text
-	+transition(opacity $article-lineage-transition-duration)
+	transition: opacity $article-lineage-transition-duration
 	display: block
 	opacity: 0
 	overflow: hidden

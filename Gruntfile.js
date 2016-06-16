@@ -9,31 +9,44 @@ module.exports = function(grunt) {
         codeDir: __dirname + '/src/zeit/web/static/',
         rubyVersion: '1.9.3',
         tasks: {
-            production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'copy:css', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'compass:dev', 'copy:css', 'svg' ],
+            production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-all', 'postcss:dist', 'postcss:old-ie', 'copy:css', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
-            css: [ 'compass:dist', 'compass:amp' ],
+            css: [ 'sass:dist', 'postcss:dist', 'postcss:old-ie', 'copy:css' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
 
     var path = require('path');
 
-    // checking ruby version, printing a hint if not standard version
-    var sys = require('sys');
-    var exec = require('child_process').exec;
-    var child;
-    child = exec('ruby --version', function(error, stdout, stderr) {
-        if ( stdout.indexOf(project.rubyVersion) < 0 ) {
-            grunt.log.writeln('You are using Ruby ' + stdout);
-        }
+    // Autoprefixer
+    var autoprefixer = require('autoprefixer')({
+        remove: false,
+        browsers: [
+            'Chrome >= 35',
+            'Firefox >= 30',
+            'Edge >= 12',
+            'Explorer >= 9',
+            'iOS >= 7',
+            'Safari >= 8',
+            'Android 2.3',
+            'Android >= 4',
+            'Opera >= 12'
+        ]
+    });
+    var autoprefixerOldIe = require('autoprefixer')({
+        remove: false,
+        browsers: [
+            'Explorer <= 8'
+        ]
     });
 
     // configuration
     grunt.initConfig({
 
         // read from package.json
+        project: project,
         pkg: grunt.file.readJSON('package.json'),
 
         auto_install: {
@@ -64,73 +77,95 @@ module.exports = function(grunt) {
         },
 
         // compile sass code
-        compass: {
-            // general options
+        sass: {
             options: {
-                assetCacheBuster: false,
-                bundleExec: false,
-                cssDir: project.codeDir + 'css',
-                fontsDir: project.codeDir + 'fonts',
-                httpFontsPath: '../../../latest/fonts',
-                httpPath: '/',
-                imagesPath: project.codeDir + 'img',
-                javascriptsPath: project.codeDir + 'js',
-                sassDir: project.sourceDir + 'sass',
-                sassPath: path.resolve(project.sourceDir + 'sass'),
-                raw: 'preferred_syntax=:sass\n'
+                sourceComments: true,
+                outputStyle: 'expanded',
+                includePaths: [
+                    path.resolve(project.sourceDir + 'sass')
+                ]
             },
-            dev: {
-                options: {
-                    specify: [
-                        project.sourceDir + 'sass/**/*.s{a,c}ss',
-                        // there is still ongoing work pls don't put it in again (as)
-                        // '!' + project.sourceDir + 'sass/**/advertorial.*',
-                        '!' + project.sourceDir + 'sass/**/unresponsive.*',
-                        '!' + project.sourceDir + 'sass/**/all-old-ie.*',
-                        '!' + project.sourceDir + 'sass/**/ie-navi.*'
-                    ],
-                    sourcemap: true,
-                    environment: 'development',
-                    outputStyle: 'expanded'
-                }
-            },
-            'dev-all': {
-                options: {
-                    sourcemap: true,
-                    environment: 'development',
-                    outputStyle: 'expanded'
-                }
+            'dev-minimal': {
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [ '**/screen.sass' ],
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
             },
             'dev-basic': {
-                options: {
-                    specify: [
-                        project.sourceDir + 'sass/**/screen.sass'
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [
+                        '**/screen.sass',
+                        '**/amp.sass'
                     ],
-                    sourcemap: true,
-                    environment: 'development',
-                    outputStyle: 'expanded'
-                }
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
             },
-            amp: {
+            'dev-all': {
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [ '**/*.s{a,c}ss' ],
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
+            },
+            // this was needed in the beginning of AMP
+            // because the CSS with output style 'compressed' damaged the @font-face declarations somehow
+            // this seems to be fixed now
+            'amp': {
                 options: {
-                    specify: [
-                        project.sourceDir + 'sass/**/amp.s{a,c}ss'
-                    ],
-                    force: true,
-                    environment: 'production',
+                    sourceComments: false,
                     outputStyle: 'compact'
-                }
+                },
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [ '**/amp.sass' ],
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
             },
+            'dist': {
+                options: {
+                    sourceComments: false,
+                    outputStyle: 'compressed'
+                },
+                files: [{
+                    expand: true,
+                    cwd: project.sourceDir + 'sass',
+                    src: [ '**/*.s{a,c}ss' ], // , '!**/amp.sass' @see comment above
+                    dest: project.codeDir + 'css',
+                    ext: '.css'
+                }]
+            }
+        },
+
+        // PostCSS
+        postcss: {
             dist: {
                 options: {
-                    specify: [
-                        project.sourceDir + 'sass/**/*.s{a,c}ss',
-                        '!' + project.sourceDir + 'sass/**/amp.s{a,c}ss'
-                    ],
-                    force: true,
-                    environment: 'production',
-                    outputStyle: 'compressed'
-                }
+                    processors: [autoprefixer]
+                },
+                src: [
+                    '<%= project.codeDir %>css/**/*.css',
+                    '!<%= project.codeDir %>css/**/all-old-ie.css',
+                    '!<%= project.codeDir %>css/**/ie-navi.css'
+                ]
+            },
+            'old-ie': {
+                options: {
+                    processors: [autoprefixerOldIe]
+                },
+                src: [
+                    '<%= project.codeDir %>css/**/all-old-ie.css',
+                    '<%= project.codeDir %>css/**/ie-navi.css'
+                ]
             }
         },
 
@@ -359,9 +394,9 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            compass: {
-                files: [ '<%= compass.options.sassDir %>' + '/**/*.s{a,c}ss' ],
-                tasks: [ 'compass:dev' ],
+            sass: {
+                files: [ 'sass/**/*.s{a,c}ss' ],
+                tasks: [ 'sass:dev-basic', 'newer:postcss:dist' ],
                 options: {
                     interrupt: true,
                     // needed to call `grunt watch` from outside zeit.web
@@ -387,9 +422,9 @@ module.exports = function(grunt) {
             livereload: {
                 // This target doesn't run any tasks
                 // But when a file in `dist/css/*` is edited it will trigger the live reload
-                // So when compass compiles the files, it will only trigger live reload on
+                // So when sass compiles the files, it will only trigger live reload on
                 // the css files and not on the scss files
-                files: [ '<%= compass.options.cssDir %>' + '/**/*.css' ],
+                files: [ 'src/zeit/web/static/css/**/*.css' ],
                 options: {
                     livereload: true
                 }
@@ -416,7 +451,6 @@ module.exports = function(grunt) {
     // load node modules
     grunt.loadNpmTasks('grunt-auto-install');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-compass');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
@@ -424,6 +458,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-jscs');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-modernizr-builder');
+    grunt.loadNpmTasks('grunt-newer');
+    grunt.loadNpmTasks('grunt-postcss');
+    grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-sftp-deploy');
     grunt.loadNpmTasks('grunt-svgmin');
     grunt.loadNpmTasks('grunt-svgstore');
@@ -445,9 +482,9 @@ module.exports = function(grunt) {
     grunt.registerTask('monitor', function(target) {
         var config = grunt.config();
 
-        if ( target in config.compass ) {
-            grunt.log.writeln('Using task compass:' + target);
-            config.watch.compass.tasks = [ 'compass:' + target ];
+        if ( target in config.sass ) {
+            grunt.log.writeln('Using task sass:' + target);
+            config.watch.sass.tasks = [ 'sass:' + target ];
         }
 
         // grunt.log.writeflags(config);

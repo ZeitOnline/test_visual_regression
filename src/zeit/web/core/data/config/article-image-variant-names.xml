@@ -1,0 +1,13 @@
+<variant-names>
+  <!--  "wide" is the default, must not use available  -->
+  <variant-name id="wide">Standard 16:9</variant-name>
+  <variant-name id="original">Original</variant-name>
+  <variant-name id="portrait">Porträt 3:4</variant-name>
+  <variant-name id="square">Quadrat 1:1</variant-name>
+
+  <!--  ZMO article-headers  -->
+  <variant-name id="super" available="zeit.magazin.interfaces.IZMOContent">Klassisch 3:2</variant-name>
+  <variant-name id="standard" available="zeit.magazin.interfaces.IZMOContent">Kompakt 4:3</variant-name>
+  <variant-name id="tile" available="zeit.magazin.interfaces.IZMOContent">Kachel 4:5</variant-name>
+  <variant-name id="narrow" available="zeit.magazin.interfaces.IZMOContent">Hochkant 2:3</variant-name>
+</variant-names>

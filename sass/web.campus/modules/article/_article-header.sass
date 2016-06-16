@@ -1,5 +1,5 @@
 =article-header-banderole($start)
-	+background-image(linear-gradient(to bottom, transparent remify($start), $color-background remify($start)))
+	background-image: linear-gradient(to bottom, transparent remify($start), $color-background remify($start))
 
 .article-header
 	margin: remify(0 0 30px)
@@ -40,7 +40,7 @@
 
 	&__caption
 		+scaled-font(12px)
-		+transition(opacity .2s linear)
+		transition: opacity .2s linear
 		// +background-image(linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0)))
 		background: rgba(0, 0, 0, 0.5)
 		bottom: 0
@@ -82,7 +82,7 @@
 		&--column
 			margin: 0
 		&--leserartikel
-			+order(1)
+			order: 1
 
 	&__headline
 		margin: 0
@@ -156,7 +156,7 @@
 				margin: 0 .25em
 
 	&__column-image
-		+background-image(linear-gradient(to top, #003fb4, $color-article-primary))
+		background-image: linear-gradient(to top, #003fb4, $color-article-primary)
 		bottom: remify(52px)
 		overflow: hidden
 		position: absolute
@@ -191,8 +191,8 @@
 		margin-bottom: remify(20px)
 		padding: $page-padding--small $page-padding--small 0
 	&__leserartikel-headline
-		+display-flex()
-		+flex-flow(column nowrap)
+		display: flex
+		flex-flow: column nowrap
 	&__leserartikel-image
 		margin-top: remify(32px)
 
@@ -306,9 +306,9 @@
 				margin-right: remify(20px)
 
 		&--column
-			+display-flex()
-			+justify-content(space-between)
-			+align-items(flex-end)
+			display: flex
+			justify-content: space-between
+			align-items: flex-end
 			background-color: transparent
 		&__column-image
 			margin-right: remify(-20px)
@@ -316,7 +316,7 @@
 			width: remify(260px)
 		&__column-wrap
 			margin-top: remify(50px)
-			+flex(1 1 50%)
+			flex: 1 1 50%
 		&__column-info
 			background-color: $color-article-secondary
 			padding: remify(25px 20px)
@@ -345,17 +345,17 @@
 					display: block
 		&__leserartikel-wrap
 			$color-stop: remify(47px)
-			+background-image(linear-gradient(to top, #fff $color-stop, $color-community-primary $color-stop))
+			background-image: linear-gradient(to top, #fff $color-stop, $color-community-primary $color-stop)
 			margin: remify(0 0 30px)
 			padding: remify(30px 30px 0)
 		&__leserartikel-headline
 			display: block
 		&__leserartikel-info
-			+display-flex()
+			display: flex
 		&__leserartikel-image
 			$leserartikel-image-width: remify(400px)
-			+order(-1)
-			+flex(1 0 $leserartikel-image-width)
+			order: -1
+			flex: 1 0 $leserartikel-image-width
 			margin: remify(0 20px 0 0)
 			width: $leserartikel-image-width
 
@@ -416,6 +416,6 @@
 
 		&__leserartikel-wrap
 			$color-stop: remify(65px)
-			+background-image(linear-gradient(to top, #fff $color-stop, $color-community-primary $color-stop))
+			background-image: linear-gradient(to top, #fff $color-stop, $color-community-primary $color-stop)
 			margin-bottom: remify(40px)
 			padding-top: remify(40px)

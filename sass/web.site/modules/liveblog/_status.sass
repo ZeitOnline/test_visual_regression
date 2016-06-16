@@ -1,12 +1,12 @@
 $live-blog-indicator-diameter: 10px
 
-+keyframes(live-blog-indicator-animation)
+@keyframes live-blog-indicator-animation
     0%
-        +opacity(1)
+        opacity: 1
     80%
-        +opacity(1)
+        opacity: 1
     90%
-        +opacity(0)
+        opacity: 0
 
 
 .liveblog-status
@@ -33,7 +33,7 @@ $live-blog-indicator-diameter: 10px
     &__label--live
         background-color: $zon-red
         &:before
-            +animation(live-blog-indicator-animation 2s infinite)
+            animation: live-blog-indicator-animation 2s infinite
 
     &__label,
     &__meta
