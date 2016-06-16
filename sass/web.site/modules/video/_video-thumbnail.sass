@@ -18,17 +18,17 @@
 	&__media-container
 		overflow: hidden
 	&__media-item
-		+transform(scale(1))
+		transform: scale(1)
 		+transition-on-parent-hover('.video-small__combined-link', (property: transform))
-			+transform(scale(1.05))
+			transform: scale(1.05)
 	&--large
 		&:after
-			+background-image(linear-gradient(to top, rgba($black, 1) 0%, rgba($black, 0.2) 45%, rgba($black, 0)))
+			background-image: linear-gradient(to top, rgba($black, 1) 0%, rgba($black, 0.2) 45%, rgba($black, 0))
 			+respond-min($break-tablet-min)
-				+background-image(linear-gradient(15deg, rgba($black, 0.5) 0%, rgba($black, 0.05) 60%))
+				background-image: linear-gradient(15deg, rgba($black, 0.5) 0%, rgba($black, 0.05) 60%)
 	&--small
 		&:after
-			+background-image(linear-gradient(to bottom, rgba($black, 0.3) 0%, rgba($black, 0.8) 100%))
+			background-image: linear-gradient(to bottom, rgba($black, 0.3) 0%, rgba($black, 0.8) 100%)
 			+transition-on-parent-hover('.video-small__combined-link')
 				opacity: .5
 

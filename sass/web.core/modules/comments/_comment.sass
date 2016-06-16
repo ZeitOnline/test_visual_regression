@@ -139,8 +139,8 @@
 
 	// TODO: redundant mit dem Overlay Wrapper Count Zeugs???
 	&__count
-		+border-radius(1em)
-		+transition(background-color .2s)
+		border-radius: 1em
+		transition: background-color .2s
 		background-color: $comment-color-count-background
 		color: $comment-color-count-font
 		font-size: remify(11px)
@@ -148,8 +148,8 @@
 		padding: remify(3px 8px)
 
 	&__cta
-		+transition-property(border-bottom-color, color)
-		+transition-duration(.2s)
+		transition-property: border-bottom-color, color
+		transition-duration: .2s
 		border-bottom: 1px solid $comment-color-cta-border
 		color: $comment-color-cta-font
 		font-size: remify(15px)
@@ -211,11 +211,11 @@
 		border-bottom-color: $comment-color-border
 
 .comment--author .comment-overlay
-	+background-image(linear-gradient(0deg, rgba($comment-color-author-bg, 1) 3em, rgba($comment-color-author-bg, 0) 100%))
+	background-image: linear-gradient(0deg, rgba($comment-color-author-bg, 1) 3em, rgba($comment-color-author-bg, 0) 100%)
 
 // comment thread collapsed
 .comment-overlay
-	+background-image(linear-gradient(0deg, rgba(#fff, 1) 3em, rgba(#fff, 0) 100%))
+	background-image: linear-gradient(0deg, rgba(#fff, 1) 3em, rgba(#fff, 0) 100%)
 	bottom: 0
 	cursor: pointer
 	display: none
@@ -278,13 +278,13 @@
 			width: remify(12px)
 			height: remify(12px)
 	.comment__reaction--sending &
-		+animation(rotate 1s linear infinite)
+		animation: rotate 1s linear infinite
 
-+keyframes(rotate)
+@keyframes rotate
 	from
-		+transform(rotate(0deg))
+		transform: rotate(0deg)
 	to
-		+transform(rotate(360deg))
+		transform: rotate(360deg)
 
 .js-comment-placeholder__content
 	background-color: $comment-color-placeholder-background
@@ -293,4 +293,4 @@
 	line-height: 150px
 	text-align: center
 	text-transform: uppercase
-	+animation(0.7s smoothPulse infinite alternate)
+	animation: 0.7s smoothPulse infinite alternate

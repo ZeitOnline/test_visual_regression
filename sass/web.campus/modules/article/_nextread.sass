@@ -16,7 +16,7 @@
 		position: absolute
 		top: remify(-8px)
 		+respond-min($break-tablet-min)
-			+transform(translateX(-50%))
+			transform: translateX(-50%)
 			left: 50%
 			width: remify(660px)
 
@@ -27,22 +27,22 @@
 	margin: 0 auto
 	max-width: remify(820px)
 	&__link
-		+display-flex()
+		display: flex
 	&__media
-		+flex(0 0 auto)
+		flex: 0 0 auto
 		overflow: hidden
 		width: remify($small-image-width)
 		+respond-min($break-tablet-min)
-			+align-self(center)
+			align-self: center
 			height: remify($large-image-width / $ratio)
 			margin-right: remify(-40px)
 			width: remify($large-image-width)
 	&__container
-		+flex(1 1 auto)
+		flex: 1 1 auto
 		background: $white
 		padding: remify(12px)
 		+respond-min($break-tablet-min)
-			+align-self(center)
+			align-self: center
 			padding: remify(20px)
 			z-index: 1 // Fix for ie11@win8.1
 	&__heading

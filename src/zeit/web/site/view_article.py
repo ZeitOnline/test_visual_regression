@@ -56,6 +56,13 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return "zeit.web.site:templates/article.html"
 
     @zeit.web.reify
+    def embed_header(self):
+        embed_header = zeit.content.article.edit.interfaces.IHeaderArea(
+            self.context).module
+        if embed_header:
+            return zeit.web.core.interfaces.IFrontendBlock(embed_header)
+
+    @zeit.web.reify
     def meta_keywords(self):
         return [x for x in ([self.ressort.title(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
@@ -65,6 +72,41 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     @zeit.web.reify
     def newsletter_optin_tracking(self):
         return self.request.GET.get('newsletter-optin', None)
+
+    @zeit.web.reify
+    def storystream(self):
+        if self.context.storystreams:
+            return self.context.storystreams[0].references
+        else:
+            return None
+
+    @zeit.web.reify
+    def storystream_items(self):
+        storystream_cp = self.storystream
+        if not storystream_cp:
+            return ()
+        atoms = list(zeit.content.cp.interfaces.ICMSContentIterable(
+            storystream_cp))
+        if self.context not in atoms:
+            return atoms[:3]
+        pos = atoms.index(self.context)
+        if pos == 0:
+            return atoms[:3]
+        elif pos == len(atoms) - 1:
+            return atoms[-3:]
+        else:
+            return atoms[pos - 1:pos + 2]
+
+    @zeit.web.reify
+    def has_series_attached(self):
+        return getattr(self.context, 'serie', None)
+
+    @zeit.web.reify
+    def series(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        uid = u'{}/{}'.format(
+            conf.get('series_prefix', ''), self.context.serie.url)
+        return zeit.cms.interfaces.ICMSContent(uid, None)
 
 
 @view_config(name='seite',

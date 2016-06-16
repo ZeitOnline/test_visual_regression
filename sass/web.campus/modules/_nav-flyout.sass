@@ -22,7 +22,7 @@
 		margin: 0
 		width: 32%
 		+on-interaction
-			+transform(translateY(-5px))
+			transform: translateY(-5px)
 			box-shadow: 0px 11px 0px -6px rgba(0, 0, 0, .1)
 
 	&__link
@@ -37,8 +37,8 @@
 
 	&__list
 		+pie-clearfix // needed for IE no-flexbox fallback
-		+display-flex()
-		+justify-content(space-between)
+		display: flex
+		justify-content: space-between
 		list-style: none
 		margin: 0
 		padding: remify(20px)

@@ -23,6 +23,7 @@ import pyramid_dogpile_cache2
 import pysolr
 import pytest
 import repoze.bitblt.processor
+import requests
 import selenium.webdriver
 import selenium.webdriver.firefox.firefox_binary
 import transaction
@@ -196,6 +197,8 @@ def app_settings(mockserver):
         'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
         'vivi_zeit.content.video_source-serie': (
             'egg://zeit.web.core/data/config/video-serie.xml'),
+        'vivi_zeit.cms_source-storystreams': (
+            'egg://zeit.web.core/data/config/storystreams.xml'),
         'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
         'vivi_zeit.solr_solr-url': 'http://mock.solr',
         'vivi_zeit.content.cp_cp-types-url': (
@@ -666,6 +669,12 @@ def tplbrowser(jinja2_env):
     return TemplateBrowser(jinja2_env)
 
 
+@pytest.fixture
+def httpbrowser(testserver):
+    """HTTP-level test browser"""
+    return HttpBrowser()
+
+
 class TestApp(webtest.TestApp):
 
     def get_json(self, url, params=None, headers=None, *args, **kw):
@@ -749,6 +758,13 @@ class TemplateBrowser(BaseBrowser):
     def open(self, uri, **kw):
         kw = zeit.web.core.utils.defaultdict(mock.Mock, **kw)
         self.contents = self.env.get_template(uri).render(**kw)
+
+
+class HttpBrowser(BaseBrowser):
+
+    def open(self, uri, **kw):
+        r = requests.get(uri, **kw)
+        self.contents = r.text
 
 
 class MockSolr(object):

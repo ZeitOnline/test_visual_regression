@@ -1,0 +1,54 @@
+.article-series
+	background: #333338
+	height: remify(80px)
+	margin-left: -$page-padding
+	margin-right: -$page-padding
+	position: relative
+
+.article-series__media
+	height: remify(80px)
+	position: relative
+
+.article-series__media-container
+	&:after
+		background-color: rgba(0, 0, 0, 0.5)
+		bottom: 0
+		content: ' '
+		left: 0
+		position: absolute
+		right: 0
+		top: 0
+
+.article-series__heading
+	bottom: 0
+	left: 0
+	position: absolute
+	right: 0
+	text-align: center
+	top: 0
+
+.article-series__inner-heading
+	transform: translateY(-50%)
+	padding-left: $page-padding
+	padding-right: $page-padding
+	position: absolute
+	top: 50%
+	width: 100%
+
+.article-series__kicker
+	color: $zon-lighter-grey
+	display: block
+	font-size: remify(12px)
+	letter-spacing: 0.125em
+	line-height: 1.25
+	margin-bottom: remify(4px)
+	text-transform: uppercase
+
+.article-series__title
+	+font-smoothing()
+	color: #fff
+	display: block
+	font-size: remify(18px)
+	font-weight: bold
+	letter-spacing: 0.05em
+	line-height: 1.25

@@ -654,13 +654,11 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_channel(self):
-        if getattr(self.context, 'ressort', None) is not None:
-            return self.context.ressort.lower()
+        return getattr(self, 'ressort', None)
 
     @zeit.web.reify
     def _c1_sub_channel(self):
-        if getattr(self.context, 'sub_ressort', None) is not None:
-            return self.context.sub_ressort.lower()
+        return getattr(self, 'sub_ressort', None)
 
     @zeit.web.reify
     def _c1_cms_id(self):
@@ -1348,3 +1346,12 @@ def view_xml(context, request):
             content_type='text/xml')
     except TypeError:
         return
+
+
+@pyramid.view.view_config(
+    route_name='login_state',
+    renderer='templates/inc/login-state-footer.html',
+    request_param='for=footer',
+    http_cache=60)
+def login_state_footer(request):
+    return zeit.web.core.security.get_login_state(request)

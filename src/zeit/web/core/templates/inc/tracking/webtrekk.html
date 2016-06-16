@@ -35,7 +35,7 @@
         wt.customParameter = {
             {% for key in view.webtrekk.customParameter -%}
                 {% if key == 'cp12' -%}
-                    12: window.Zeit.getSiteParam("site")
+                    12: window.Zeit.getSiteParam()
                 {%- elif key == 'cp13' -%}
                     13: window.Zeit.breakpoint.getTrackingBreakpoint()
                 {%- else -%}
@@ -82,14 +82,3 @@
         wt.sendinfo();
     }
 </script>
-<noscript>
-    <div>
-        <img alt="" width="1" height="1" src="{{ "%s?p=%s,%s,0,0,0,0,0,0,0,0" | format(
-            "http://zeit01.webtrekk.net/981949533494636/wt.pl",
-            settings('webtrekk_version', 3).replace('.', ''),
-            wt_kennung ~ ('|' | urlencode) ~ view.content_url.replace('http://', '')
-        ) }}&amp;
-        {{- view.webtrekk.contentGroup | urlencode -}}&amp;
-        {{- view.webtrekk.customParameter | urlencode -}}" />
-    </div>
-</noscript>

@@ -52,14 +52,6 @@
       </rankedTags>
     </rankedTags>
   </attribute>
-
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_date">2015-09-19T07:40:50+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">yes</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_text">
-  War es das mit Griechenlands linker Regierung? Zuletzt ist Alexis Tsipras in den Umfragen eingebrochen. Aber schon in den anderen beiden nationalen Abstimmungen dieses Jahres hat der Syriza-Chef in der letzten Phase viele Unentschlossene an sich binden können.
-  </attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_title">Tsipras stemmt sich gegen den Negativtrend, tldr erzwungen zweizeilig</attribute>
-
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>

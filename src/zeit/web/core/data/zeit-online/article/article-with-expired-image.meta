@@ -66,10 +66,4 @@
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
   <attribute ns="DAV:" name="supportedlock"> </attribute>
   <attribute ns="DAV:" name="lockdiscovery"/>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_date">2015-07-16T11:00:00+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_text">
-  Alexis Tsipras bringt das dritte Hilfspaket durch das Athener Parlament und nimmt dafür den Zerfall seiner Partei in Kauf. Erstmals in seiner Regierungszeit kommt es auch auf den Straßen zu gewalttätigen Protesten gegen seine Politik.
-  </attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_title">Griechisches Parlament stimmt Reformplan zu</attribute>
 </head>
