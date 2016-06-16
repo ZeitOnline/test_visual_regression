@@ -600,7 +600,7 @@ def test_nextread_should_fallback_to_default_layout(application):
 
 def test_article_with_images_should_render_image_container(testbrowser):
     browser = testbrowser('/artikel/03')
-    assert browser.cssselect('div.article__body > figure.figure-stamp')
+    assert browser.cssselect('div.article__page figure.figure-stamp')
 
 
 def test_article_without_images_should_not_render_image_container(testbrowser):

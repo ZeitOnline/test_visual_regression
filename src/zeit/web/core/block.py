@@ -246,8 +246,6 @@ class Image(zeit.web.core.image.BaseImage):
     def __new__(cls, model_block):
         if getattr(model_block, 'is_empty', False):
             return
-        if not cls.wanted_display_mode(model_block.display_mode):
-            return
 
         target = None
         referenced = None
@@ -286,11 +284,6 @@ class Image(zeit.web.core.image.BaseImage):
             instance.attr_alt = model_block.references.alt
 
         return instance
-
-    @classmethod
-    def wanted_display_mode(cls, display_mode):
-        """Skip images that are marked as header images via display mode."""
-        return 'header' not in (display_mode or '')
 
     def __init__(self, model_block):
         # `legacy_layout` is required for bw compat of the ZCO default variant,

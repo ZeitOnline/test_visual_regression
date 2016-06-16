@@ -40,12 +40,6 @@ class Article(zeit.web.core.view.Content):
             raise pyramid.httpexceptions.HTTPNotFound()
 
     @zeit.web.reify
-    def main_image_block(self):
-        img = zeit.web.core.interfaces.IFrontendBlock(
-            self.context.main_image_block, None)
-        return img
-
-    @zeit.web.reify
     def template(self):
         return self.context.template or 'default'
 
@@ -169,7 +163,7 @@ class Article(zeit.web.core.view.Content):
         if ((zeit.content.article.edit.interfaces.IVideo.providedBy(
                 obj) and 'header' in (obj.layout or '')) or
             (zeit.content.article.edit.interfaces.IImage.providedBy(
-                obj) and 'header' in (obj.display_mode or ''))):
+                obj) and obj.display_mode != 'float')):
             return zeit.web.core.interfaces.IFrontendBlock(obj, None)
 
     @zeit.web.reify

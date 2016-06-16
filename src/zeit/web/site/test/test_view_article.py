@@ -675,7 +675,7 @@ def test_article_column_pages_should_render_correctly(testbrowser):
 
 def test_article_should_show_main_image_from_imagegroup(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    images = browser.cssselect('.article-body img')
+    images = browser.cssselect('.article__item img')
     assert 'filmstill-hobbit-schlacht-fuenf-hee' in images[0].get('src')
 
 
@@ -1082,7 +1082,7 @@ def test_breaking_news_should_have_their_own_sharing_image_if_present(
 
 def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
-    main_image = browser.cssselect('.article-body img')[0]
+    main_image = browser.cssselect('.article__item img')[0]
     figure = main_image.xpath('./ancestor::figure')[0]
     assert 'article__item--wide' in figure.get('class')
 

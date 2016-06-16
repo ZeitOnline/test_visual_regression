@@ -163,16 +163,13 @@ def pages_of_article(context):
     page = Page(first_division)
     pages.append(page)
     blocks = body.values()
-    # delete article image. it resides in its own property 'main_image_block'
+    # Delete blocks that should be in z.c.article.edit.interfaces.IHeader.
+    # XXX Inverse of z.w.core.view_article.Article.header_elem, refactor!
     try:
-        if zeit.content.article.edit.interfaces.IImage.providedBy(blocks[0]):
-            del blocks[0]
-    except IndexError:
-        pass
-    # delete block that should be in z.c.article.edit.interfaces.IHeader
-    try:
-        if (zeit.content.article.edit.interfaces.IVideo.providedBy(
-                blocks[0]) and 'header' in (blocks[0].layout or '')):
+        if ((zeit.content.article.edit.interfaces.IImage.providedBy(
+                blocks[0]) and blocks[0].display_mode != 'float') or
+            (zeit.content.article.edit.interfaces.IVideo.providedBy(
+                blocks[0]) and 'header' in (blocks[0].layout or ''))):
             del blocks[0]
     except IndexError:
         pass

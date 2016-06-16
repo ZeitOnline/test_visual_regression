@@ -51,7 +51,7 @@
                   - image shall be 2048x2048 pixels
                   - image will be cropped to 4:3
              -->
-            {% require image_block = view.main_image_block,
+            {% require image_block = view.header_elem if is_instance(view.header_elem, 'zeit.web.core.block.Image') else None,
                            variant = get_variant(view.context.main_image.target, 'square') %}
                 <figure>
                     <img src="{{ request.image_host + variant.path + '__2048x2048' }}" />

@@ -7,7 +7,9 @@
             {{ blocks.title() }}
         </h1>
         <div class="article__head__image">
-            {{ blocks[view.header_elem|block_type](view.header_elem) }}
+            {% if view.page_nr == 1 %}
+                {{ blocks[view.header_elem|block_type](view.header_elem) }}
+            {% endif %}
         </div>
         {{ blocks.subtitle(include_meta=True) }}
         <span class="article__head__meta-wrap">
