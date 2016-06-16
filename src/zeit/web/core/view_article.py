@@ -153,7 +153,7 @@ class Article(zeit.web.core.view.Content):
         return zeit.web.core.utils.update_get_params(url, **params)
 
     @zeit.web.reify
-    def header_elem(self):
+    def header_module(self):
         return zeit.web.core.interfaces.IFrontendBlock(
             zeit.content.article.edit.interfaces.IHeaderArea(
                 self.context).module, None)
@@ -294,7 +294,7 @@ class Article(zeit.web.core.view.Content):
     def webtrekk_assets(self):
         assets = []
 
-        block_type = zeit.web.core.template.block_type(self.header_elem)
+        block_type = zeit.web.core.template.block_type(self.header_module)
         if block_type in self.WEBTREKK_ASSETS:
             assets.append('{}.header/seite-1'.format(block_type))
 

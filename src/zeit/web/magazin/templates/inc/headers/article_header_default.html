@@ -8,7 +8,7 @@
         </h1>
         <div class="article__head__image">
             {% if view.page_nr == 1 %}
-                {{ blocks[view.header_elem|block_type](view.header_elem) }}
+                {{ blocks[view.header_module|block_type](view.header_module) }}
             {% endif %}
         </div>
         {{ blocks.subtitle(include_meta=True) }}

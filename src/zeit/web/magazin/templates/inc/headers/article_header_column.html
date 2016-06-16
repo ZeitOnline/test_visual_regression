@@ -10,10 +10,10 @@
             <div class="article__column__author">
                 {{ blocks.meta_author(view.authors) }}
             </div>
-            {% if view.header_elem %}
+            {% if view.header_module %}
                 <div class="article__column__headerimage">
                     <div class="article__head__image">
-                       {{ blocks[view.header_elem|block_type](view.header_elem) }}
+                       {{ blocks[view.header_module|block_type](view.header_module) }}
                     </div>
                 </div>
             {% endif %}

@@ -103,11 +103,11 @@ def test_linkreach_property_should_fetch_correct_data(application):
     assert article_view.linkreach['total'] == 92
 
 
-def test_header_elem_should_be_first_image_of_content_blocks(application):
+def test_header_module_should_be_first_image_of_content_blocks(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
-    assert article_view.header_elem.src == url
+    assert article_view.header_module.src == url
 
 
 def test_article_should_have_author_box(application):
@@ -123,7 +123,7 @@ def test_article_should_have_author_box(application):
 def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.header_elem is None
+    assert article_view.header_module is None
 
 
 def test_header_video_should_be_first_video_of_content_blocks(application):
@@ -133,26 +133,26 @@ def test_header_video_should_be_first_video_of_content_blocks(application):
     url = ('http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/'
            '3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights'
            '--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4')
-    assert article_view.header_elem.highest_rendition == url
+    assert article_view.header_module.highest_rendition == url
 
 
 def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.header_elem is None
+    assert article_view.header_module is None
 
 
-def test_header_elem_should_be_image_if_there_is_an_image(application):
+def test_header_module_should_be_image_if_there_is_an_image(application):
     context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert isinstance(article_view.header_elem, zeit.web.core.block.Image)
+    assert isinstance(article_view.header_module, zeit.web.core.block.Image)
 
 
-def test_header_elem_should_be_video_if_there_is_a_video(application):
+def test_header_module_should_be_video_if_there_is_a_video(application):
     xml = 'http://xml.zeit.de/artikel/header_video'
     context = zeit.cms.interfaces.ICMSContent(xml)
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert isinstance(article_view.header_elem, zeit.web.core.block.Video)
+    assert isinstance(article_view.header_module, zeit.web.core.block.Video)
 
 
 def test_image_view_returns_image_data_for_filesystem_connector(testserver):

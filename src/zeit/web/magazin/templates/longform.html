@@ -45,10 +45,10 @@
         <div class="article__wrap">
             <div class="article__head-wrap">
 
-                {% if view.header_elem %}
+                {% if view.header_module %}
                 <div class="scaled-image is-pixelperfect article__head-image">
-                    {{ lama.insert_responsive_image(view.header_elem) }}
-                </div>{{ view.header_elem.caption | safe }}{{ view.header_elem.copyright }}
+                    {{ lama.insert_responsive_image(view.header_module) }}
+                </div>{{ view.header_module.caption | safe }}{{ view.header_module.copyright }}
                 {% endif %}
                 <header class="article__title-wrap">
                     <h1 itemprop="headline">

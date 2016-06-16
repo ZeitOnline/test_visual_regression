@@ -1,5 +1,5 @@
-{% if view.header_elem and view.page_nr == 1 %}
-    {% set block = view.header_elem -%}
+{% if view.header_module and view.page_nr == 1 %}
+    {% set block = view.header_module -%}
     {% set type = block | block_type -%}
     {% include [
         "{0}:templates/inc/blocks/{1}_{2}.html".format(view.package, type, block.layout),
