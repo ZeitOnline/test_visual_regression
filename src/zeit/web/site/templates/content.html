@@ -10,68 +10,14 @@
     <article class="article article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
     {% profile %}
-        {% block article_heading %}
-            <div class="article__item">
-                {% block embed_header -%}
-                    {% if view.embed_header -%}
-                        <div class="article-embed">
-                            {% set block = view.embed_header -%}
-                            {% set type = block | block_type -%}
-                            {% include [
-                                "{0}:templates/inc/blocks/{1}_{2}.html".format(view.package, type, block.layout),
-                                "{0}:templates/inc/blocks/{1}.html".format(view.package, type),
-                                "zeit.web.core:templates/inc/blocks/{0}_{1}.html".format(type, block.layout),
-                                "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing -%}
-                        </div>
-                    {%- endif %}
-                {%- endblock embed_header %}
-                {% set headertag = 'div' if view.pagination and view.pagination.current > 1 and view.current_page.teaser else 'h1' %}
-                <{{ headertag }} class="article-heading" itemprop="headline">
-                    <span class="article-heading__kicker">
-                        {%- if view.context is column -%}
-                            {{- view.serie + ' / ' -}}
-                        {%- endif -%}
-                        {{- view.supertitle -}}
-                    </span>
-                    {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
-                    <span class="article-heading__title">
-                        {{- view.title -}}
-                    </span>
-                </{{ headertag }}>
-            </div>
-        {% endblock article_heading %}
-        {% block article_meta %}
-            <div class="article__item">
-            {% if view.pagination and view.pagination.current > 1 %}
-                <div class="article__page-teaser">
-                    Seite {{ view.pagination.current }}/{{ view.pagination.total }}
-                    {%- if view.current_page.teaser -%}
-                        : <h1>{{ view.current_page.teaser }}</h1>
-                    {% endif %}
-                </div>
-            {% else %}
-                <div class="summary" itemprop="description">
-                    {{ view.subtitle }}
-                </div>
-                {%- set byline = view.context | get_byline('main') %}
-                {% if byline | length -%}
-                <div class="byline">
-                    {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
-                </div>
-                {% endif -%}
-                <div class="metadata">
-                    {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
-                </div>
-            {% endif %}
-            </div>
-        {% endblock article_meta %}
+        {% block article_head %}
+            {% include ["zeit.web.site:templates/inc/article-header/{}.html".format(view.header_layout),
+                        "zeit.web.site:templates/inc/article-header/default.html"] %}
+        {% endblock article_head %}
     {% endprofile %}
     {% profile %}
         {% block article_body %}
         <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
-            {% block article_main_image %}
-            {% endblock article_main_image %}
-
             {% block article_storystreamteaser_teaser %}{% endblock %}
 
             {% block article_pages %}

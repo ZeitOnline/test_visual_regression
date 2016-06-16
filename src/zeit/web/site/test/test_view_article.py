@@ -1429,38 +1429,27 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/cardstack')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-
     assert view.webtrekk['customParameter']['cp27'] == 'cardstack.2/seite-1'
-
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/embed-header-image')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-
-    assert view.webtrekk['customParameter']['cp27'] == 'image.header/seite-1'
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/embed-header-video')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-
     assert view.webtrekk['customParameter']['cp27'] == 'video.header/seite-1'
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/embed-header-quiz')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-
     assert view.webtrekk['customParameter']['cp27'] == 'quiz.header/seite-1'
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/embed-header-cardstack')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-
     assert view.webtrekk['customParameter']['cp27'] == (
         'cardstack.header/seite-1')
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/embed-header-raw')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-
     assert view.webtrekk['customParameter']['cp27'] == 'raw.header/seite-1'
 
 
