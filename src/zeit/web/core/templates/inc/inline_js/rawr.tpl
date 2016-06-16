@@ -7,7 +7,7 @@ window.rawrConfig = {
     locationMetaData: {
         'article_id': '{{ view.content_path }}',
         'published': '{{ view.date_last_published_semantic | format_date('iso8601') }}',
-        'description': '{{ view.title }}',
+        'description': '{{ view.title | replace("\'", "\\\'") | safe }}',
         'channels': [{% if view.context.channels and view.context.channels[0] and view.context.channels[0] | length > 0 -%}
             '{{ view.context.channels[0] | map('trim') | join(string_joiner) }}'
             {%- endif %}],
@@ -16,7 +16,7 @@ window.rawrConfig = {
             '{{ view.ranked_tags | join(string_joiner, attribute='label') }}'
             {%- endif %}],
         'meta': {
-            'description': '{{ view.title }}'
+            'description': '{{ view.title | replace("\'", "\\\'") | safe }}'
         }
     }
 {% endif %}
