@@ -1,0 +1,30 @@
+<legacy-variant-names>
+  <legacy-mapping layout="column-width" variant_name="wide" />
+  <legacy-mapping layout="column-width-original" variant_name="original" />
+  <legacy-mapping layout="column-width-portrait" variant_name="portrait" />
+  <legacy-mapping layout="column-width-square" variant_name="square" />
+  <legacy-mapping layout="float-portrait" variant_name="portrait" />
+  <legacy-mapping layout="float-square" variant_name="square" />
+  <legacy-mapping layout="large" variant_name="wide" />
+  <legacy-mapping layout="portrait" variant_name="original" />
+  <legacy-mapping layout="small" variant_name="wide" />
+  <legacy-mapping layout="zco-portrait" variant_name="portrait" />
+  <legacy-mapping layout="zco-wide" variant_name="wide" />
+  <legacy-mapping layout="zmo-large-center" variant_name="wide" />
+  <legacy-mapping layout="zmo-medium-center" variant_name="wide" />
+  <legacy-mapping layout="zmo-medium-left" variant_name="wide" />
+  <legacy-mapping layout="zmo-medium-right" variant_name="wide" />
+  <legacy-mapping layout="zmo-narrow-header" variant_name="narrow" />
+  <legacy-mapping layout="zmo-portrait-header" variant_name="portrait" />
+  <legacy-mapping layout="zmo-small-left" variant_name="portrait" />
+  <legacy-mapping layout="zmo-small-left-original" variant_name="original" />
+  <legacy-mapping layout="zmo-small-right" variant_name="portrait" />
+  <legacy-mapping layout="zmo-small-right-original" variant_name="original" />
+  <legacy-mapping layout="zmo-square-header" variant_name="square" />
+  <legacy-mapping layout="zmo-standard-header" variant_name="standard" />
+  <legacy-mapping layout="zmo-super-header" variant_name="super" />
+  <legacy-mapping layout="zmo-tile-header" variant_name="tile" />
+  <legacy-mapping layout="zmo-wide-header" variant_name="wide" />
+  <legacy-mapping layout="zmo-xl" variant_name="super" />
+  <legacy-mapping layout="zmo-xl-header" variant_name="original" />
+</legacy-variant-names>
