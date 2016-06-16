@@ -33,13 +33,7 @@
                             "pageCategory{{ key | replace('cg', '') | int }}": "{{ view.webtrekk.contentGroup[key] }}",
                         {% endfor -%}
                         {% for key in view.webtrekk.customParameter -%}
-                            {% if key == 'cp12' -%}
-                                "pageParameter12": "mobile.site"
-                            {%- elif key == 'cp13' -%}
-                                "pageParameter13": "amp"
-                            {%- else -%}
-                                "pageParameter{{ key | replace('cp', '') | int }}": "{{ view.webtrekk.customParameter[key] }}"
-                            {%- endif %}
+                            "pageParameter{{ key | replace('cp', '') | int }}": "{{ view.webtrekk.customParameter[key] }}"
                             {%- if not loop.last %},{% endif %}
 
                         {% endfor -%}
