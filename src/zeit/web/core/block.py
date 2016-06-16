@@ -315,6 +315,14 @@ class Image(zeit.web.core.image.BaseImage):
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
 
+class HeaderImage(Image):
+    """This is a special case used directly (not via adapter) by
+    z.w.magazin.view_article.Article.header_module so we can adjust the
+    rendering of a header image module according to the article.header_layout
+    setting.
+    """
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(Image)
 class BlockImages(object):

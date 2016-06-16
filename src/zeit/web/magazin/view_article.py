@@ -10,10 +10,8 @@ import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.interfaces
-import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.core.view_article
-import zeit.web.core.view_comment
 
 import zeit.web.magazin.view
 
@@ -52,6 +50,15 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
             prefix = 'eine'
         if self.context.genre:
             return prefix + ' ' + self.context.genre.title()
+
+    @zeit.web.reify
+    def header_module(self):
+        block = zeit.content.article.edit.interfaces.IHeaderArea(
+            self.context).module
+        if zeit.content.article.edit.interfaces.IImage.providedBy(block):
+            return zeit.web.core.block.HeaderImage(block)
+        else:
+            return zeit.web.core.interfaces.IFrontendBlock(block, None)
 
 
 @pyramid.view.view_config(name='seite',
