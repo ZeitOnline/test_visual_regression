@@ -110,9 +110,9 @@ def test_amp_article_has_valid_webtrekk_json(testbrowser):
     )
 
     page_vars = webtrekk['triggers']['trackPageview']['vars']
-    assert page_vars['pageParameter12'] == "mobile.site"
-    assert page_vars['pageParameter13'] == "amp"
-    assert page_vars['pageParameter25'] == "amp"
+    assert page_vars['cp12'] == "mobile.site"
+    assert page_vars['cp13'] == "amp"
+    assert page_vars['cp25'] == "amp"
 
 
 def test_amp_article_contains_sharing_links(testbrowser):
