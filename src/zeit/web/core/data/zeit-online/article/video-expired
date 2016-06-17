@@ -70,12 +70,11 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <supertitle>Tennis</supertitle>
-    <title>Williams wackelt weiter, steht aber im Viertelfinale</title>
-    <byline>SID</byline>
+    <supertitle>Testdaten</supertitle>
+    <title>Artikel mit abgelaufenem Video</title>
     <division type="page">
-      <p>Paris (SID) - Top-Favoritin Serena Williams aus den USA quält sich weiter durch die French Open in Paris. Im Achtelfinale gewann sie gegen ihre Landsfrau Sloane Stephens nach einer erneut durchwachsenen Vorstellung auch das dritte Match nacheinander nur in drei Sätzen. Nach genau zwei Stunden verwandelte Williams ihren ersten Matchball zum 1:6, 7:5, 6:3.</p>
-      <p>Im Viertelfinale am Mittwoch trifft die 19-malige Grand-Slam-Siegerin auf die Italienerin Sara Errani, die Julia Görges (Bad Oldesloe) mit 6:2, 6:2 als letzte Deutsche aus dem Turnier geworfen hatte. Die Weltranglistenerste Williams hat das zweite Grand-Slam-Turnier des Jahres im Stade Roland Garros zweimal (2002 und 2013) gewonnen.</p>
+      <p>In diesem Artikel ist ein Video eingebundes, welches Expired ist. Deswegen wird es nicht angezeigt.</p>
+      <p>Falls man doch ein Video sieht, ist etwas kaputt.</p>
       <video format="large" is_empty="True" href="http://xml.zeit.de/zeit-online/video/3537342483002" expires=""/>
     </division>
   </body>
