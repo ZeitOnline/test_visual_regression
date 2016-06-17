@@ -109,13 +109,13 @@
                 var that = this;
 
                 // cancel button
-                $( document ).on( 'click.hpoverlay', '.overlay__button', function( event ) {
+                $( document ).on( 'click.hpoverlay', '.overlay__text-button', function( event ) {
                     event.preventDefault();
                     that.cancel();
                 } );
 
                 // reload
-                $( document ).on( 'click.hpoverlay', '.overlay, .overlay__text-button', function( event ) {
+                $( document ).on( 'click.hpoverlay', '.overlay, .overlay__button', function( event ) {
                     event.preventDefault();
                     that.reload();
                 } );
@@ -123,7 +123,7 @@
                 // escape key
                 $( window ).on( 'keyup.hpoverlay', function( event ) {
                     if ( event.which === 27 ) {
-                        that.reload();
+                        that.cancel();
                     }
                 } );
 
