@@ -88,17 +88,19 @@ def test_header_video_should_not_be_created_if_layout_doesnt_fit(application):
     assert h_video is None
 
 
-def test_header_image_should_be_created_if_layout_is_zmo_header():
+def test_header_image_should_be_created_if_display_mode_is_header():
     model_block = mock.Mock()
-    model_block.layout.id = 'zmo-xl-header'
+    model_block.display_mode = 'header'
+    model_block.variant_name = 'original'
     model_block.is_empty = False
     h_image = zeit.web.core.block.HeaderImage(model_block)
     assert type(h_image) == zeit.web.core.block.HeaderImage
 
 
-def test_header_image_should_not_be_created_if_layout_does_not_fit():
+def test_header_image_should_not_be_created_if_display_mode_is_not_header():
     model_block = mock.Mock()
-    model_block.layout.id = 'zmo-medium-center'
+    model_block.display_mode = 'column-width'
+    model_block.variant_name = 'wide'
     model_block.is_empty = False
 
     h_image = zeit.web.core.block.HeaderImage(model_block)
@@ -107,7 +109,6 @@ def test_header_image_should_not_be_created_if_layout_does_not_fit():
 
 def test_image_should_be_none_if_is_empty_is_true():
     model_block = mock.Mock()
-    model_block.layout.id = 'zmo-medium-center'
     model_block.is_empty = True
     image = zeit.web.core.block.Image(model_block)
     assert image is None
@@ -115,14 +116,14 @@ def test_image_should_be_none_if_is_empty_is_true():
 
 def test_image_should_be_fail_if_is_empty_doesnot_exist():
     model_block = mock.Mock()
-    model_block.layout.id = 'zmo-xl-header'
     image = zeit.web.core.block.Image(model_block)
     assert image is None
 
 
 def test_image_should_decode_html_entities_in_caption():
     model_block = mock.Mock()
-    model_block.layout.id = 'large'
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
     model_block.is_empty = False
     xml = ('<image base-id="http://xml.zeit.de/foo">'
            '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
@@ -135,7 +136,8 @@ def test_image_should_decode_html_entities_in_caption():
 
 def test_image_should_not_break_on_missing_caption():
     model_block = mock.Mock()
-    model_block.layout.id = 'large'
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
     model_block.is_empty = False
     xml = ('<image base-id="http://xml.zeit.de/foo">'
            '<copyright>© Justin Lane / dpa</copyright>'
@@ -147,7 +149,8 @@ def test_image_should_not_break_on_missing_caption():
 
 def test_image_should_not_break_on_empty_caption():
     model_block = mock.Mock()
-    model_block.layout.id = 'large'
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
     model_block.is_empty = False
     xml = ('<image base-id="http://xml.zeit.de/foo">'
            '<bu></bu>'
@@ -160,7 +163,8 @@ def test_image_should_not_break_on_empty_caption():
 
 def test_image_should_not_break_on_whitespace_caption():
     model_block = mock.Mock()
-    model_block.layout.id = 'large'
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
     model_block.is_empty = False
     xml = ('<image base-id="http://xml.zeit.de/foo">'
            '<bu> </bu>'
@@ -173,10 +177,10 @@ def test_image_should_not_break_on_whitespace_caption():
 
 def test_image_should_not_break_on_missing_image(application):
     model_block = mock.Mock()
-    model_block.layout.id = 'large'
-    model_block.layout.variant = 'default'
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'default'
     model_block.is_empty = False
-    model_block.xml = None
+    model_block.xml = lxml.etree.fromstring('<image/>')
     model_block.references.target = zeit.content.image.imagegroup.ImageGroup()
     # We use an otherwise empty folder to simulate missing master image.
     model_block.references.target.uniqueId = 'http://xml.zeit.de/news'
@@ -189,10 +193,10 @@ def test_image_should_use_variant_given_on_layout(application):
         'http://xml.zeit.de/zeit-online/image'
         '/filmstill-hobbit-schlacht-fuenf-hee/')
     model_block = mock.Mock()
-    model_block.layout.id = 'column-width-original'
-    model_block.layout.variant = 'original'
+    model_block.display_mode = 'column-width'
+    model_block.variant_name = 'original'
     model_block.is_empty = False
-    model_block.xml = None
+    model_block.xml = lxml.etree.fromstring('<image/>')
     model_block.references.target = image
     image = zeit.web.core.block.Image(model_block)
     assert 'original' == image.image.__name__
@@ -200,7 +204,8 @@ def test_image_should_use_variant_given_on_layout(application):
 
 def test_image_should_be_none_if_expired():
     model_block = mock.Mock()
-    model_block.layout.id = 'large'
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
     model_block.is_empty = False
     with mock.patch('zeit.web.core.image.is_image_expired') as expired:
         expired.return_value = True
