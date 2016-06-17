@@ -574,6 +574,10 @@ class Base(object):
             else:
                 page = self.pagination.get('current')
             pagination = '{}/{}'.format(page, self.pagination.get('total'))
+        elif getattr(self, 'area_ranking', None):
+            if self.area_ranking.pagination:
+                pagination = '{}/{}'.format(self.area_ranking.current_page,
+                                            self.area_ranking.total_pages)
 
         if getattr(self.context, 'advertising_enabled', False):
             banner_on = 'yes'
