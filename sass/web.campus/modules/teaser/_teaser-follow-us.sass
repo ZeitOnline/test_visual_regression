@@ -3,8 +3,8 @@
 	padding-bottom: $gutter
 	padding-top: $gutter
 	+respond-min($break-tablet-min)
-		+display-flex()
-		+justify-content(space-between)
+		display: flex
+		justify-content: space-between
 	&__actions
 		padding-bottom: 20px
 		padding-top: 20px
@@ -19,7 +19,7 @@
 
 .packshot
 	+unpadded
-	+display-flex
+	display: flex
 	background: $primary-color
 	+respond-min($break-tablet-min)
 		margin-left: 0
@@ -31,8 +31,8 @@
 		+respond-min($break-desktop-min)
 			width: remify(160px)
 	&__content
-		+display-flex
-		+flex-direction(column)
+		display: flex
+		flex-direction: column
 		padding: remify(15px) remify(20px)
 	&__kicker,
 	&__title
@@ -47,7 +47,7 @@
 	&__kicker
 		color: #fff
 	&__title
-		+flex-grow(1)
+		flex-grow: 1
 		color: $color-tools-primary
 	&__cta
 		+font-smoothing
@@ -102,9 +102,9 @@
 	&__logo
 		display: none
 		+respond-min($break-tablet-min)
-			+align-items(center)
-			+display-flex()
-			+justify-content(center)
+			align-items: center
+			display: flex
+			justify-content: center
 			background: rgba(#000, 0.3)
 			height: remify(56px)
 			position: absolute

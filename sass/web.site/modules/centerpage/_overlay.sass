@@ -15,7 +15,7 @@
 	overflow: hidden
 	background: $color-overlay
 	z-index: 99998
-	+opacity(0.7)
+	opacity: 0.7
 
 .lightbox
 	display: none
@@ -27,7 +27,7 @@
 	right: 5%
 	z-index: 99999
 	border-radius: remify(3px)
-	+single-box-shadow(0px,2px,10px,0px,rgba(0,0,0,0.2))
+	box-shadow: 0 2px 10px 0 rgba(0,0,0,.2)
 
 	+respond-min($break-tablet-min)
 		top: 30%

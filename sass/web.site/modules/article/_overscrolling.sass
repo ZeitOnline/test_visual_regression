@@ -16,7 +16,7 @@
         padding: 0
         position: absolute
         top: 25px
-        @include transform(translateX(-50%))
+        transform: translateX(-50%)
         &:after
             color: $white
             content: "Zur Startseite"
@@ -31,7 +31,7 @@
             text-transform: uppercase
             top: 50%
             width: 130px
-            @include transform(translate(-50%, -50%))
+            transform: translate(-50%, -50%)
         &--fixed
             bottom: 25px
             position: fixed
@@ -46,7 +46,7 @@
         stroke-dashoffset: 0
         stroke-width: 2px
         stroke: $zon-lighter-grey
-        @include transition(stroke-dashoffset .1s linear)
+        transition: stroke-dashoffset .1s linear
     &__bar
         stroke-dashoffset: 458.672px
         stroke-width: 3px

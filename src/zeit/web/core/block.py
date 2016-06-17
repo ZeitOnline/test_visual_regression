@@ -243,14 +243,10 @@ class Quiz(Block):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class Image(zeit.web.core.image.BaseImage):
 
-    DEFAULT_VARIANT = 'wide'
-
     def __new__(cls, model_block):
         if getattr(model_block, 'is_empty', False):
             return
-        # XXX Should we use an actual attribute of ImageLayout instead of
-        # a heuristic look at its ID?
-        if not cls.wanted_layout(getattr(model_block.layout, 'id', None)):
+        if not cls.wanted_display_mode(model_block.display_mode):
             return
 
         target = None
@@ -262,8 +258,7 @@ class Image(zeit.web.core.image.BaseImage):
             pass  # Unresolveable uniqueId
 
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
-            variant = getattr(model_block.layout, 'variant', None) or (
-                cls.DEFAULT_VARIANT)
+            variant = model_block.variant_name
             try:
                 target = referenced[variant]
                 group = referenced
@@ -293,15 +288,19 @@ class Image(zeit.web.core.image.BaseImage):
         return instance
 
     @classmethod
-    def wanted_layout(cls, layout):
-        return 'header' not in (layout or '')
+    def wanted_display_mode(cls, display_mode):
+        """Skip images that are marked as header images via display mode."""
+        return 'header' not in (display_mode or '')
 
     def __init__(self, model_block):
-        self.layout = layout = model_block.layout
-
-        if layout.display_mode == 'large':
+        # `legacy_layout` is required for bw compat of the ZCO default variant,
+        # which is `portrait` rather the usual `wide`.
+        self.legacy_layout = model_block.xml.get('layout', None)
+        self.variant_name = model_block.variant_name
+        self.display_mode = model_block.display_mode
+        if model_block.display_mode == 'large':
             self.figure_mods = ('wide', 'rimless', 'apart')
-        elif layout.display_mode == 'float':
+        elif model_block.display_mode == 'float':
             self.figure_mods = ('marginalia',)
         else:
             self.figure_mods = ()
@@ -339,8 +338,9 @@ class BlockImages(object):
 class HeaderImage(Image):
 
     @classmethod
-    def wanted_layout(cls, layout):
-        return 'header' in (layout or '')
+    def wanted_display_mode(cls, display_mode):
+        """Only accept header images that are marked via their display mode."""
+        return 'header' in (display_mode or '')
 
 
 class HeaderImageStandard(HeaderImage):

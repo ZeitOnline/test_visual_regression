@@ -18,12 +18,12 @@ $card-rotate-y: -180deg
 	padding-bottom: 150%
 	position: relative
 	text-align: center
-	+perspective(1000px)
+	perspective: 1000px
 
 	&.js-flipped .card--front
-		+transform(rotateY(0deg + $card-rotate-y))
+		transform: rotateY(0deg + $card-rotate-y)
 	&.js-flipped .card--back
-		+transform(rotateY(180deg + $card-rotate-y))
+		transform: rotateY(180deg + $card-rotate-y)
 	&.js-slid .card__slide
 		bottom: 0
 
@@ -55,17 +55,17 @@ $card-rotate-y: -180deg
 
 .card--front,
 .card--back
-	+transition(transform 0.5s)
-	+transform-style(preserve-3d)
-	+backface-visibility(hidden)
+	transition: transform 0.5s
+	transform-style: preserve-3d
+	backface-visibility: hidden
 
 .card--front
 	z-index: 2
-	+transform(rotateY(0deg))
+	transform: rotateY(0deg)
 
 .card--back
 	z-index: 1
-	+transform(rotateY(180deg))
+	transform: rotateY(180deg)
 
 .card__slider
 	overflow: hidden
@@ -74,7 +74,7 @@ $card-rotate-y: -180deg
 	z-index: 3
 	background-color: rgba(0, 0, 0, 0.7)
 	bottom: 100%
-	+transition(bottom 0.4s)
+	transition: bottom 0.4s
 
 .card__media
 	margin: 0 auto

@@ -87,11 +87,11 @@
 			z-index: 2
 
 		&__container
-			+display-flex()
-			+flex-flow(column wrap)
-			+align-items(flex-start)
-			+align-content(space-between)
-			+justify-content(center)
+			display: flex
+			flex-flow: column wrap
+			align-items: flex-start
+			align-content: space-between
+			justify-content: center
 			margin: 0 auto
 			max-height: remify(210px)
 			max-width: remify(660px)
@@ -109,7 +109,7 @@
 			font-size: remify(16px)
 
 		.figure
-			+order(2)
+			order: 2
 
 		.figure__link
 			height: remify(210px)
