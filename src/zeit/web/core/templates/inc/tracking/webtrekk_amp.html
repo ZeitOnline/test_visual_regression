@@ -16,7 +16,7 @@
             },
             "requests": {
                 "trackURL": "https://${trackDomain}/${trackId}/wt",
-                "parameterPrefix": "?p={{ settings('webtrekk_version', 3).replace('.', '') }},${contentId},1,${screenWidth}x${screenHeight},${screenColorDepth},0,${timestamp},${documentReferrer},${availableScreenWidth}x${availableScreenHeight},0&tz=${timezone}&eid=${clientId(amp-wt3-eid)}&la=${browserLanguage}",
+                "parameterPrefix": "?p={{ settings('webtrekk_version', 3).replace('.', '') }},${contentId},1,${screenWidth}x${screenHeight},${screenColorDepth},0,${timestamp},${documentReferrer},0,0&tz=${timezone}&eid=${clientId(amp-wt3-eid)}&la=${browserLanguage}",
                 "parameterSuffix": "&pu=${canonicalUrl}",
                 "pageParameter": "
                 {%- for key in view.webtrekk.customParameter -%}
