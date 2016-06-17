@@ -122,7 +122,7 @@
 
                 // escape key
                 $( window ).on( 'keyup.hpoverlay', function( event ) {
-                    if ( event.keyCode === 27 ) {
+                    if ( event.which === 27 ) {
                         that.reload();
                     }
                 } );
