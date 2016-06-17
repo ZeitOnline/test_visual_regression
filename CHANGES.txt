@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3108: Return correct ressort for CeleraOne
 
+- ZON-2256: Track comment actions
+
 - MAINT: Replace compass with libsass and autoprefixer
 
 
