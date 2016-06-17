@@ -47,12 +47,12 @@
             {% endif %}
             {% if not request.user.name %}
                 Angemeldet, noch kein Benutzername
-                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
+                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user" data-ct-label="username">
                 (Profil bearbeiten)
                  </a>
             {% else %}
                 Angemeldet als
-                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
+                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user" data-ct-label="username">
                     {{ request.user.name }}
                 </a>
             {% endif %}
