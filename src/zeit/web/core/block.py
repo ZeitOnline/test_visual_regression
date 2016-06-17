@@ -401,6 +401,7 @@ class BaseVideo(Block):
         self.description = video.subtitle
         self.id = video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
+        self.expires = video.expires
 
     @property
     def highest_rendition(self):

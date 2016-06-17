@@ -1,11 +1,10 @@
 {% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 
 {#
-    The block is always a video object. In case it is broken or no longer
-    available, properties are simply missing. So we cannot check explicitly
-    for expiration :-(
+    The block is always a video object. In case it is broken, properties are
+    simply missing. Workaround: check if the used property (id) exists.
 #}
-{% if block.id %}
+{% if block.id and not (block | is_expired) %}
 <figure class="article__item article__item--wide article__item--rimless article__item--apart">
     {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}
     {% if toggles('zon_inline_video_via_html5') %}
