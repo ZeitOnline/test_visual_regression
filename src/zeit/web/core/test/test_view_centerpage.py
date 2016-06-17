@@ -254,3 +254,16 @@ def test_prev_page_url_should_be_set_on_date_based_paginated_centerpages(
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/news/index')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
     assert view.prev_page_url == 'http://example.com?date=2016-05-09'
+
+
+def test_dynamic_centerpage_contains_webtrekk_pagenumber(
+        application, dummy_request):
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/artikel/01'} for i in range(22)]
+
+    dummy_request.GET['p'] = '2'
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.webtrekk['customParameter'].get('cp3') == '2/3'
