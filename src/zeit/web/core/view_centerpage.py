@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import pyramid.view
 import lxml.etree
-import urllib
 import zope.component
 
 import zeit.cms.interfaces
