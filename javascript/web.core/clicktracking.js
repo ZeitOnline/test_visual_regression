@@ -322,7 +322,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     ],
                     useDataArea: [
                         '[data-ct-area]',
-                        'a:not([data-wt-click])'
+                        [
+                        'a:not([data-wt-click])',
+                        'input[type="submit"]'
+                        ].join()
                     ],
                     parquetMeta: [
                         '.parquet-meta',

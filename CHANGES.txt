@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2927: Split Image.layout into display_mode and variant_name
 
+- ZON-2256: Track comment actions
+
 - MAINT: Replace compass with libsass and autoprefixer
 
 - MAINT: Update bower components

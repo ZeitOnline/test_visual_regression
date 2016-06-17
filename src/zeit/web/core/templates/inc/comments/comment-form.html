@@ -34,25 +34,25 @@
     </div>
 {% endif %}
 
-<div class="comment-section__form comment-section__item">
+<div class="comment-section__form comment-section__item" data-ct-area="comment_form">
 {%- if request.user %}
     {% set is_mod = 'admin-tech' in request.user.roles or 'admin-editor' in request.user.roles %}
     {%- block comment_form %}
     <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
         {%- if is_mod %} data-mod="mod"{% endif %}>
-        {% if view.comment_form.show_comment_form -%}
-        <div class="comment-form__text comment-form__text--metadata">
+         {% if view.comment_form.show_comment_form -%}
+        <div class="comment-form__text comment-form__text--metadata" data-ct-row="1">
             {% if request.user.picture %}
                 <img class="comment-form__avatar" alt="Avatarbild von {{ request.user.name }}" src="{{ request.user.picture }}">
             {% endif %}
             {% if not request.user.name %}
                 Angemeldet, noch kein Benutzername
-                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
+                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user" data-ct-label="username">
                 (Profil bearbeiten)
                  </a>
             {% else %}
                 Angemeldet als
-                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user">
+                <a class="comment-form__username" href="{{ request.registry.settings.community_host }}/user" data-ct-label="username">
                     {{ request.user.name }}
                 </a>
             {% endif %}
@@ -81,17 +81,17 @@
                 oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
             </p>
             {% endif %}
-        <p class="comment-form__actions">
+        <p class="comment-form__actions" data-ct-row="2">
             <input type="hidden" name="action" value="comment">
             <input type="hidden" name="pid" value="{{ pid }}">
             <a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
-            <input class="button" type="submit" value="{{ submit_value }}" />
+            <input class="button" type="submit" value="{{ submit_value }}" data-ct-label="kommentar_senden" />
         </p>
-        {%- endif %}
+    {% endif %}
     </form>
     {%- endblock %}
 {%- elif view.comment_form.show_comment_form %}
-    <form class="comment-login" id="comment-form">
+    <form class="comment-login" id="comment-form" data-ct-row="1">
         <p>
             Bitte melden Sie sich an, um zu kommentieren.
         </p>
