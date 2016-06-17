@@ -199,11 +199,14 @@ def test_next_page_url_should_be_set_on_page_based_paginated_centerpages(
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
-        {'uniqueId': 'http://xml.zeit.de/artikel/01'} for i in range(12)]
+        {'uniqueId': 'http://xml.zeit.de/artikel/01'} for i in range(82)]
 
+    # make sure that it's beyond our default pager slot size
+    # which is set in zeit.web.core.template.calculate_pagination
+    dummy_request.GET['p'] = '8'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
-    assert view.next_page_url == 'http://example.com?p=2'
+    assert view.next_page_url == 'http://example.com?p=9'
 
 
 def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
