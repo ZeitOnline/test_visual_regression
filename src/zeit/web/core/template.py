@@ -11,6 +11,7 @@ import time
 import types
 import urllib
 import urlparse
+import pytz
 
 import babel.dates
 import lxml.etree
@@ -915,3 +916,16 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
 @zeit.web.register_global
 def get_svg_from_file(name, class_name, package, cleanup, a11y):
     return get_svg_from_file_cached(name, class_name, package, cleanup, a11y)
+
+
+@zeit.web.register_filter
+def is_expired(context):
+    if not hasattr(context, 'expires'):
+        return False
+    if context.expires is None:
+        return False
+    if not isinstance(context.expires, datetime.datetime):
+        return False
+
+    now = datetime.datetime.now(pytz.UTC)
+    return context.expires < now
