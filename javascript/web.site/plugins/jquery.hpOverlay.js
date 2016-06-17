@@ -30,27 +30,38 @@
         },
         // define overlay object
         overlay = {
+            wrapper: null,
+            page: null,
             activeElement: null,
             initialized: false,
             timer: false,
             timestamp: null,
             visible: false,
             show: function() {
-                // show overlay
-                var wrapper = $( '#overlay-wrapper' );
+                if ( this.wrapper.not( ':visible' ) ) {
+                    // show wrapper
+                    this.wrapper.show();
+                    this.wrapper.removeAttr( 'aria-hidden' );
 
-                if ( wrapper.not( ':visible' ) ) {
-                    wrapper.show();
-                    // fake "appear" event
-                    wrapper.find( '.overlay-tracker' ).trigger( 'click' );
+                    // hide page body for a11y users
+                    this.page.attr( 'aria-hidden', 'true' );
+
+                    // trigger fake "appear" event
+                    $( '#overlay-tracker' ).trigger( 'click' );
                 }
 
+                // set state
                 this.visible = true;
-                // save focused element
+
+                // save last focused element
                 this.activeElement = document.activeElement;
-                wrapper.find( '.overlay' ).fadeIn();
-                wrapper.find( '.lightbox' ).show();
-                wrapper.find( 'button' ).focus();
+
+                // fade everything in
+                this.wrapper.find( '.overlay' ).fadeIn();
+                this.wrapper.find( '.overlay__dialog' ).show();
+                this.wrapper.find( '.overlay__button' ).focus();
+
+                // bind events
                 this.bindEvents();
 
                 $( document ).off( '.modal' );
@@ -58,16 +69,30 @@
             cancel: function() {
                 // action when cancel was clicked
                 window.clearTimeout( this.timer );
-                $( '.lightbox' ).hide();
-                $( '.overlay' ).hide();
-                $( '#overlay-wrapper' ).hide();
+
+                // hide content
+                this.wrapper.find( '.overlay, .overlay__dialog' ).hide();
+
+                // show wrapper
+                this.wrapper.hide();
+                this.wrapper.attr( 'aria-hidden', 'true' );
+
+                // show page body for a11y users
+                this.page.removeAttr( 'aria-hidden' );
+
+                // set state
                 this.visible = false;
+
+                // write cookie
                 Zeit.cookieCreate( 'overlaycanceled', 'canceled', options.cookieTimeInDays, '' );
 
                 // restore last focused element
                 if ( this.activeElement ) {
                     this.activeElement.focus();
                 }
+
+                // unbind events
+                this.unbindEvents();
 
                 this.log( 'Refresh page cancelled' );
             },
@@ -80,29 +105,40 @@
                     return;
                 }
 
-                // bind events for lightbox
+                // proxy current context
                 var that = this;
 
                 // cancel button
-                $( '.lightbox-cancel' ).on( 'click', function( event ) {
+                $( document ).on( 'click.hpoverlay', '.overlay__button', function( event ) {
                     event.preventDefault();
                     that.cancel();
-                });
+                } );
 
                 // reload
-                $( '.overlay, .lightbox-button' ).on( 'click', function( event ) {
+                $( document ).on( 'click.hpoverlay', '.overlay, .overlay__text-button', function( event ) {
                     event.preventDefault();
                     that.reload();
-                });
+                } );
 
                 // escape key
-                $( window ).on( 'keyup', function( event ) {
+                $( window ).on( 'keyup.hpoverlay', function( event ) {
                     if ( event.keyCode === 27 ) {
                         that.reload();
                     }
-                });
+                } );
+
+                // focus
+                $( document ).on( 'focus.hpoverlay', 'body', function( event ) {
+                    if ( that.visible && that.wrapper.find( event.target ).length === 0 ) {
+                        that.wrapper.find( '.overlay__button' ).focus();
+                    }
+                } );
 
                 this.initialized = true;
+            },
+            unbindEvents: function() {
+                $( window ).off( '.hpoverlay' );
+                $( document ).off( '.hpoverlay' );
             },
             bindResetEvents: function() {
                 // bind events to reset timer, need to debounce at least scroll and mousemove event
@@ -187,6 +223,10 @@
             }
 
             var cookie = Zeit.cookieRead( 'overlaycanceled' );
+
+            // Setup elements
+            overlay.wrapper = $( '#overlay-wrapper' );
+            overlay.page = $( 'body > .page' );
 
             if ( options.force ) {
                 overlay.show();
