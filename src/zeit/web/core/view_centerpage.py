@@ -133,7 +133,7 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         ranking = self.area_ranking
         if ranking is None:
             return None
-        if ranking.current_page < len(ranking.pagination):
+        if ranking.current_page < ranking.total_pages:
             get_param = ranking.page_info(
                 ranking.current_page + 1)['append_get_param']
             return zeit.web.core.utils.add_get_params(
