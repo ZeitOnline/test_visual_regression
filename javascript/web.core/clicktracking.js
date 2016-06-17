@@ -321,8 +321,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                         'a[data-id]:not([data-wt-click])'
                     ],
                     useDataArea: [
-                        '[data-ct-area]',
-                        'a:not([data-wt-click])'
+                        [
+                            '[data-ct-area] a:not([data-wt-click])',
+                            'form input[type="submit"]'
+                        ].join()
                     ],
                     parquetMeta: [
                         '.parquet-meta',

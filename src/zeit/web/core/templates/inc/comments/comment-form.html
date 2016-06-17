@@ -85,7 +85,7 @@
             <input type="hidden" name="action" value="comment">
             <input type="hidden" name="pid" value="{{ pid }}">
             <a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
-            <input class="button" type="submit" value="{{ submit_value }}" />
+            <input class="button" type="submit" value="{{ submit_value }}" data-ct-label="kommentar_senden" />
         </p>
     {% endif %}
     </form>
