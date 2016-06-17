@@ -358,8 +358,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                             premoderation.find( '.show-set-user' ).hide();
                         }
                         premoderation.children( '.overlay' ).show();
-                        premoderation.children( '.lightbox' ).show();
-                        premoderation.find( '.lightbox-button' ).on( 'click', function() {
+                        premoderation.children( '.overlay__dialog' ).show();
+                        premoderation.find( '.overlay__button' ).on( 'click', function() {
                             premoderation.detach();
                             if ( response.response.setUser ) {
                                 window.location.hash = '#comment-form';
