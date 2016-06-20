@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2256: Track comment actions
 
+- BUG-432: Set webtrekk pagenumber for paginated centerpages
+
 - MAINT: Replace compass with libsass and autoprefixer
 
 - MAINT: Update bower components
