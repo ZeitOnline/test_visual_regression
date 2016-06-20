@@ -2,11 +2,13 @@
 
 <div class="article__head-wrap">
     <header class="article__head article__head--stamp is-constrained">
-        <div class="article__head__stamp-wrap">
-            <div class="article__head__image">
-                {{ blocks[view.header_module|block_type](view.header_module) }}
+        {% if view.header_module %}
+            <div class="article__head__stamp-wrap">
+                <div class="article__head__image">
+                    {{ blocks[view.header_module|block_type](view.header_module) }}
+                </div>
             </div>
-        </div>
+        {% endif %}
         <h1 itemprop="headline">
             {{ blocks.supertitle() }}
             {{ blocks.title() }}
