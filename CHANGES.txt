@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-2345: Do not show expired videos
 
+- ZON-3088: Restructure article header module handling
+
 - BUG-432: Set webtrekk pagenumber for paginated centerpages
 
 - OPS-267: Move normalize.css inline into CSS

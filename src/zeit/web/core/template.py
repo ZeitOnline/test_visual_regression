@@ -868,6 +868,17 @@ def provides(obj, iface):
     return iface.providedBy(obj)
 
 
+# I'd rather use the spelling `isinstance`, but that would clobber it for this
+# module, so that's a no-go.
+@zeit.web.register_global
+def is_instance(obj, cls):
+    try:
+        cls = pyramid.path.DottedNameResolver().resolve(cls)
+    except ValueError:
+        return False
+    return isinstance(obj, cls)
+
+
 @zeit.web.register_global
 def get_random_number(length):
     return random.randint(0, 10 ** length)

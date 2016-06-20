@@ -10,10 +10,8 @@ import zeit.web
 import zeit.web.core.article
 import zeit.web.core.comments
 import zeit.web.core.interfaces
-import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.core.view_article
-import zeit.web.core.view_comment
 
 import zeit.web.magazin.view
 
@@ -53,6 +51,17 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
         if self.context.genre:
             return prefix + ' ' + self.context.genre.title()
 
+    @zeit.web.reify
+    def header_module(self):
+        block = zeit.content.article.edit.interfaces.IHeaderArea(
+            self.context).module
+        if zeit.content.article.edit.interfaces.IImage.providedBy(block):
+            return zeit.web.core.block.HeaderImage(block)
+        elif zeit.content.article.edit.interfaces.IVideo.providedBy(block):
+            return zeit.web.core.block.HeaderVideo(block)
+        else:
+            return zeit.web.core.interfaces.IFrontendBlock(block, None)
+
 
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',
@@ -67,12 +76,6 @@ class LongformArticle(Article):
 
     is_longform = True
     pagetitle_suffix = u' | ZEIT ONLINE'
-
-    @zeit.web.reify
-    def header_img(self):
-        obj = self.first_body_obj
-        if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            return self._create_obj(zeit.web.core.block.HeaderImage, obj)
 
     @zeit.web.reify
     def adwords(self):

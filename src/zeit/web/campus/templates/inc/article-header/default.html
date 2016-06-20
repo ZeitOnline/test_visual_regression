@@ -23,15 +23,15 @@
     {% block article_header -%}
     {# set default variant ID -#}
     {% set variant_id = None -%}
-    {% if view.main_image_block -%}
+    {% if is_instance(view.header_module, 'zeit.web.core.block.Image') -%}
         {# consider "new" ZCO article image layouts only -#}
-        {% if view.main_image_block.legacy_layout == 'large' -%}
+        {% if view.header_module.legacy_layout == 'large' -%}
             {% set variant_id = 'portrait' -%}
         {% else -%}
-            {% set variant_id = view.main_image_block.variant_name -%}
+            {% set variant_id = view.header_module.variant_name -%}
         {% endif -%}
     {% endif -%}
-    {% set image = get_image(content=view.main_image_block, variant_id=variant_id, fallback=False) -%}
+    {% set image = get_image(content=view.header_module, variant_id=variant_id, fallback=False) -%}
     {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}
     <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
         <div class="{{ 'article-header__banderole' | with_mods(variant_id) }}">

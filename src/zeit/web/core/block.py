@@ -247,8 +247,6 @@ class Image(zeit.web.core.image.BaseImage):
     def __new__(cls, model_block):
         if getattr(model_block, 'is_empty', False):
             return
-        if not cls.wanted_display_mode(model_block.display_mode):
-            return
 
         target = None
         referenced = None
@@ -288,11 +286,6 @@ class Image(zeit.web.core.image.BaseImage):
 
         return instance
 
-    @classmethod
-    def wanted_display_mode(cls, display_mode):
-        """Skip images that are marked as header images via display mode."""
-        return 'header' not in (display_mode or '')
-
     def __init__(self, model_block):
         # `legacy_layout` is required for bw compat of the ZCO default variant,
         # which is `portrait` rather the usual `wide`.
@@ -323,6 +316,14 @@ class Image(zeit.web.core.image.BaseImage):
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
 
+class HeaderImage(Image):
+    """This is a special case used directly (not via adapter) by
+    z.w.magazin.view_article.Article.header_module so we can adjust the
+    rendering of a header image module according to the article.header_layout
+    setting.
+    """
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(Image)
 class BlockImages(object):
@@ -332,20 +333,6 @@ class BlockImages(object):
     def __init__(self, context):
         self.context = context
         self.image = context.group
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
-class HeaderImage(Image):
-
-    @classmethod
-    def wanted_display_mode(cls, display_mode):
-        """Only accept header images that are marked via their display mode."""
-        return 'header' in (display_mode or '')
-
-
-class HeaderImageStandard(HeaderImage):
-    pass
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -385,7 +372,9 @@ class Citation(Block):
         self.layout = model_block.layout
 
 
-class BaseVideo(Block):
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
+class Video(Block):
 
     def __init__(self, model_block):
         self.video = getattr(model_block, 'video', None)
@@ -408,30 +397,11 @@ class BaseVideo(Block):
             logging.exception('No video renditions set.')
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
-class Video(BaseVideo):
-
-    def __new__(cls, model_block):
-        if 'header' in (model_block.layout or ''):
-            return
-        return super(Video, cls).__new__(cls, model_block)
-
-    def __init__(self, model_block):
-        super(Video, self).__init__(model_block)
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
-class HeaderVideo(BaseVideo):
-
-    def __new__(cls, model_block):
-        if 'header' not in (model_block.layout or ''):
-            return
-        return super(HeaderVideo, cls).__new__(cls, model_block)
-
-    def __init__(self, model_block):
-        super(HeaderVideo, self).__init__(model_block)
+class HeaderVideo(Video):
+    """This is a special case used directly (not via adapter) by
+    z.w.magazin.view_article.Article.header_module because videos in ZMO
+    headers need rather different markup.
+    """
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
