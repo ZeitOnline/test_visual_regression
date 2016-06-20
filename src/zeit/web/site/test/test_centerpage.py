@@ -256,7 +256,7 @@ def test_hp_hides_popover_per_default(selenium_driver, testserver):
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
-    box = driver.find_elements_by_css_selector(".lightbox")[0]
+    box = driver.find_elements_by_css_selector(".overlay__dialog")[0]
 
     assert not wrap.is_displayed()
     assert not bg.is_displayed()
@@ -271,7 +271,7 @@ def test_hp_shows_popover(selenium_driver, testserver):
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
-    box = driver.find_elements_by_css_selector(".lightbox")[0]
+    box = driver.find_elements_by_css_selector(".overlay__dialog")[0]
 
     assert wrap.is_displayed()
     assert bg.is_displayed()
