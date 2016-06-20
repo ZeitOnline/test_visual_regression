@@ -186,12 +186,6 @@ class Article(zeit.web.core.view.Content):
             return self._create_obj(zeit.web.core.block.HeaderVideo, obj)
 
     @zeit.web.reify
-    def first_img(self):
-        obj = self.first_body_obj
-        if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            return self._create_obj(zeit.web.core.block.Image, obj)
-
-    @zeit.web.reify
     def header_elem(self):
         return self.header_video or self.header_img
 
@@ -358,7 +352,7 @@ class AcceleratedMobilePageArticle(Article):
 
         webtrekk['customParameter'].update({
             'cp12': 'mobile.site',  # Seitenversion Endgerät
-            'cp13': 'mobile',  # Breakpoint
+            'cp13': 'amp',  # Breakpoint
             'cp25': 'amp'  # Plattform
         })
 

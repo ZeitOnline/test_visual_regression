@@ -6,7 +6,7 @@
 
 {% set media_block_additional_class = 'article__item' | with_mods(*image.figure_mods) %}
 
-{% set media_caption_additional_class = 'figure__caption--marginalia' if image.layout == 'small' else '' %}
+{% set media_caption_additional_class = 'figure__caption--marginalia' if image.display_mode == 'float' else '' %}
 
 {% block media_caption_content %}
     <span class="figure__text" itemprop="caption">{{ image.caption }}</span>

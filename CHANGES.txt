@@ -6,7 +6,13 @@ Change log for zeit.web
 
 - ZON-3108: Return correct ressort for CeleraOne
 
+- ZON-2927: Split Image.layout into display_mode and variant_name
+
+- ZON-2256: Track comment actions
+
 - MAINT: Replace compass with libsass and autoprefixer
+
+- MAINT: Update bower components
 
 
 2.87 (2016-06-14)

@@ -25,10 +25,10 @@
     {% set variant_id = None -%}
     {% if view.main_image_block -%}
         {# consider "new" ZCO article image layouts only -#}
-        {% if view.main_image_block.layout.id == 'large' -%}
+        {% if view.main_image_block.legacy_layout == 'large' -%}
             {% set variant_id = 'portrait' -%}
         {% else -%}
-            {% set variant_id = view.main_image_block.layout.variant -%}
+            {% set variant_id = view.main_image_block.variant_name -%}
         {% endif -%}
     {% endif -%}
     {% set image = get_image(content=view.main_image_block, variant_id=variant_id, fallback=False) -%}
