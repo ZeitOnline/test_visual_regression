@@ -207,7 +207,7 @@ def test_image_should_be_none_if_expired():
     model_block.display_mode = 'large'
     model_block.variant_name = 'wide'
     model_block.is_empty = False
-    with mock.patch('zeit.web.core.image.is_image_expired') as expired:
+    with mock.patch('zeit.web.core.template.expired') as expired:
         expired.return_value = True
         image = zeit.web.core.block.Image(model_block)
         assert image is None

@@ -10,6 +10,7 @@ import zeit.content.video.interfaces
 
 import zeit.web
 import zeit.web.core.date
+import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.site.view
 
@@ -29,7 +30,7 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
     def __init__(self, *args, **kwargs):
         super(Video, self).__init__(*args, **kwargs)
 
-        if zeit.web.core.template.is_expired(self.context):
+        if zeit.web.core.template.expired(self.context):
             location = '{}video/index'.format(self.request.route_url('home'))
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=location)

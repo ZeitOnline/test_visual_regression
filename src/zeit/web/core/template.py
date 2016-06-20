@@ -474,7 +474,7 @@ def default_image_url(image, image_pattern='default'):
 
         if getattr(image, 'uniqueId', None) is None:
             return
-        if zeit.web.core.image.is_image_expired(image):
+        if expired(image):
             return
 
         scheme, netloc, path, query, fragment = urlparse.urlsplit(
@@ -657,7 +657,7 @@ def get_teaser_image(teaser_block, teaser, unique_id=None):
     if image is None:
         image_pattern = teaser_block.layout.image_pattern
         image, _ = _existing_image(asset, [image_pattern], ext)
-    if zeit.web.core.image.is_image_expired(image):
+    if expired(image):
         return None
 
     if image is None:
@@ -918,14 +918,9 @@ def get_svg_from_file(name, class_name, package, cleanup, a11y):
     return get_svg_from_file_cached(name, class_name, package, cleanup, a11y)
 
 
-@zeit.web.register_filter
-def is_expired(context):
-    if not hasattr(context, 'expires'):
+@zeit.web.register_test
+def expired(content):
+    info = zeit.web.core.interfaces.IExpiration(content, None)
+    if info is None:
         return False
-    if context.expires is None:
-        return False
-    if not isinstance(context.expires, datetime.datetime):
-        return False
-
-    now = datetime.datetime.now(pytz.UTC)
-    return context.expires < now
+    return info.is_expired

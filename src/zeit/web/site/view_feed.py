@@ -11,7 +11,6 @@ import urlparse
 
 import pyramid.view
 import lxml.etree
-import lxml.objectify
 
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
@@ -19,7 +18,7 @@ import zeit.cms.interfaces
 import zeit.push.interfaces
 
 import zeit.web
-import zeit.web.core.cache
+import zeit.web.core.cachingtime
 import zeit.web.core.template
 import zeit.web.site.view
 
@@ -183,7 +182,7 @@ class Newsfeed(Base):
                             teaser_image):
                         variant = images.image.variant_url('wide', 148, 84)
 
-                if variant and not zeit.web.core.image.is_image_expired(
+                if variant and not zeit.web.core.template.expired(
                         teaser_image):
                     description = (
                         u'<a href="{}"><img style="float:left; '
