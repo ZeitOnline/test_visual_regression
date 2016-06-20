@@ -1,7 +1,7 @@
 {% set image = get_image(module, teaser, fallback=False) %}
 {% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
 {% set module_layout = self.layout() %}
-{% set modifier = '--with-image' if image and not is_image_expired(image) else '--no-image' %}
+{% set modifier = '--with-image' if image and not image is expired else '--no-image' %}
 <article id="{{ module_layout }}"
          class="{% block layout %}nextread{% endblock %} {{ module_layout }}{{ modifier }}">
     <a class="{{ module_layout }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="articlebottom.editorial-nextread...area" itemprop="relatedLink">

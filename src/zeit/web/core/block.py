@@ -26,6 +26,7 @@ import zeit.web.core.cache
 import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
+import zeit.web.core.template
 
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
@@ -267,7 +268,7 @@ class Image(zeit.web.core.image.BaseImage):
             target = referenced
             group = None
 
-        if zeit.web.core.image.is_image_expired(target):
+        if zeit.web.core.template.expired(target):
             target = None
 
         if not target:
@@ -376,19 +377,15 @@ class Citation(Block):
 class Video(Block):
 
     def __init__(self, model_block):
-        video = None
-        try:
-            video = getattr(model_block, 'video')
-        except:
-            pass
-        if not zeit.content.video.interfaces.IVideo.providedBy(video):
+        self.video = getattr(model_block, 'video', None)
+        if not zeit.content.video.interfaces.IVideo.providedBy(self.video):
             return
-        self.renditions = video.renditions
-        self.video_still = video.video_still
-        self.title = video.title
-        self.supertitle = video.supertitle
-        self.description = video.subtitle
-        self.id = video.uniqueId.split('/')[-1]  # XXX ugly
+        self.renditions = self.video.renditions
+        self.video_still = self.video.video_still
+        self.title = self.video.title
+        self.supertitle = self.video.supertitle
+        self.description = self.video.subtitle
+        self.id = self.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
 
     @property
@@ -450,7 +447,7 @@ class NewsletterTeaser(Block):
         image = images.image if images is not None else None
         if not zeit.content.image.interfaces.IImageGroup.providedBy(image):
             return
-        if zeit.web.core.image.is_image_expired(image):
+        if zeit.web.core.template.expired(image):
             return
         # XXX We should not hardcode the host, but newsletter is rendered on
         # friedbert-preview, which can't use `image_host`. Should we introduce

@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<video xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <head>
+    <renditions>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319236001_thegreatrabbit-1280-720-h264.mp4" frame_width="720" video_duration="436118"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319165001_thegreatrabbit-1280-720-h264.mp4" frame_width="400" video_duration="436118"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319186001_thegreatrabbit-1280-720-h264.mp4" frame_width="1280" video_duration="436118"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319240001_thegreatrabbit-1280-720-h264.mp4" frame_width="640" video_duration="436118"/>
+      <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319666001_thegreatrabbit-1280-720-h264.mp4" frame_width="480" video_duration="436118"/>
+    </renditions>
+    <references/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-01-22T09:34:15.548884+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-01-22T08:34:43+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-01-22T09:34:16.145850+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-01-22T09:35:16.103266+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-01-22T09:27:01.865619+00:00</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="flv_url">http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319165001_thegreatrabbit-1280-720-h264.mp4</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/brightcove" name="id">3537342483001</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-01-22T09:26:56+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.brightcove</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="thumbnail">http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3339/18140073001_4004249823001_Bildschirmfoto-2015-01-22-um-09-27-07.jpg?pubId=18140073001</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">video</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:c3e9bcb2-27bd-4003-9c8f-9a480776b042}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="video_still">http://brightcove.vo.llnwd.net/v1/unsecured/media/18140073001/201501/3653/18140073001_4004353973001_Bildschirmfoto-2015-01-22-um-09-27-07.jpg?pubId=18140073001</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Video" module="zeit.content.video.video"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <subtitle>Er ist so groß wie ein siebenjähriges Kind und lernt noch: Myon ist Teil eines Musikprojektes an der Komischen Oper Berlin. Sein Konstrukteur will einen Roboter bauen, der wie ein Mensch funktioniert.</subtitle>
+    <title>Abgelaufenes Video</title>
+    <supertitle>Testdaten</supertitle>
+  </body>
+  <teaser>
+    <text>Er ist so groß wie ein siebenjähriges Kind und lernt noch: Myon ist Teil eines Musikprojektes an der Komischen Oper Berlin. Sein Konstrukteur will einen Roboter bauen, der wie ein Mensch funktioniert.</text>
+  </teaser>
+</video>

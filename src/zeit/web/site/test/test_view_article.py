@@ -1527,3 +1527,10 @@ def test_article_in_series_with_column_attribute_has_no_banner(testbrowser):
     browser = testbrowser('/zeit-online/article/fischer')
 
     assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_article_should_not_render_expired_video(testbrowser):
+    browser = testbrowser('/zeit-online/article/video-expired')
+    articlepage = browser.cssselect('.article-page')
+    articleitems = articlepage[0].getchildren()
+    assert len(articleitems) == 2
