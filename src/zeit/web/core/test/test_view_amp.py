@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import lxml.etree
-
+import json
 import zeit.web.core.application
 
 
@@ -93,21 +93,26 @@ def test_amp_has_correct_canonical_url(testbrowser):
         'http://localhost/zeit-online/article/amp')
 
 
-def test_amp_article_has_correct_webtrekk_pixel(testbrowser):
+def test_amp_article_has_valid_webtrekk_json(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
-    source = browser.cssselect('amp-pixel')[0].attrib.get('src')
-    assert source == (
-        'https://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
-        'redaktion.wirtschaft...article.zede%7Clocalhost/zeit-online/article/'
-        'amp,0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&cg3=wirtschaft&cg4=zede'
-        '&cg5=&cg6=&cg7=amp&cg8=wirtschaft/article&cg9=2016-01-22&'
-        'cp1=jochen+wegner&cp2=wirtschaft/bild-text&cp3=1/2&cp4=wirtschaft%3B'
-        'fl%C3%BCchtlinge%3Bfl%C3%BCchtling%3Bweltwirtschaftsforum+davos%3B'
-        'arbeitsmarkt%3Bmigration%3Beurop%C3%A4ische+union&'
-        'cp5=2016-01-22+11%3A55%3A46.556878%2B01%3A00&cp6=7583&cp7=&cp8=zede&'
-        'cp9=wirtschaft/article&cp10=yes&cp11=&cp12=mobile.site&cp13=mobile&'
-        'cp14=friedbert&cp15=&cp25=amp&cp26=article&'
-        'cp27=video.3/seite-1%3Bvideo.5/seite-1')
+    json_source = browser.cssselect(
+        'amp-analytics[type="webtrekk"] script'
+    )[0].text
+
+    try:
+        webtrekk = json.loads(json_source)
+        assert True
+    except ValueError:
+        assert False
+
+    assert webtrekk['vars']['contentId'] == (
+        "redaktion.wirtschaft...article.zede|localhost/zeit-online/article/amp"
+    )
+
+    page_vars = webtrekk['triggers']['trackPageview']['vars']
+    assert page_vars['cp12'] == "mobile.site"
+    assert page_vars['cp13'] == "amp"
+    assert page_vars['cp25'] == "amp"
 
 
 def test_amp_article_contains_sharing_links(testbrowser):
