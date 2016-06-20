@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - OPS-267: Move normalize.css inline into CSS
 
+- OPS-285: Refactor overlays
+
 - MAINT: Replace compass with libsass and autoprefixer
 
 - MAINT: Update bower components
