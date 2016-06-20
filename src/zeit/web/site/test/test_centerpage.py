@@ -32,7 +32,7 @@ def test_buzz_mostread_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--mostread .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--mostread .teaser-buzz__title')
-    assert kicker and u'Asylbewerber' in kicker[1].text
+    assert kicker and u'Flüchtlinge' in kicker[1].text
     assert titles and u'Fluchthilfe ganz privat' in titles[2].text
 
 
@@ -84,6 +84,13 @@ def test_buzzboard_renders(testbrowser):
     assert len(board) == 1
     images = board[0].cssselect('.teaser-buzzboard__media')
     assert len(images) == 4
+
+
+def test_buzzboard_renders_column_teaser(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    assert len(browser.cssselect('.teaser-buzzboard__media--column')) == 1
+    assert len(browser.cssselect(
+        '.teaser-buzzboard__media-container--column')) == 1
 
 
 def test_tile7_is_rendered_on_correct_position(testbrowser):

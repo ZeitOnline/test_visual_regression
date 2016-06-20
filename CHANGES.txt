@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2256: Track comment actions
 
+- ZON-2751: Style column teaser in buzzboard
+
 - OPS-267: Move normalize.css inline into CSS
 
 - MAINT: Replace compass with libsass and autoprefixer
