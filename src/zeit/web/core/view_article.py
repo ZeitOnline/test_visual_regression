@@ -352,7 +352,7 @@ class AcceleratedMobilePageArticle(Article):
 
         webtrekk['customParameter'].update({
             'cp12': 'mobile.site',  # Seitenversion Endgerät
-            'cp13': 'mobile',  # Breakpoint
+            'cp13': 'amp',  # Breakpoint
             'cp25': 'amp'  # Plattform
         })
 
