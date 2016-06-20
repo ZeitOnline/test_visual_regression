@@ -66,13 +66,6 @@ module.exports = function(grunt) {
                     filter: '**/*.js',
                     paths: project.sourceDir
                 }
-            },
-            css: {
-                dest: project.sourceDir + 'sass/vendor',
-                options: {
-                    filter: '**/*.css',
-                    paths: project.sourceDir
-                }
             }
         },
 
@@ -82,7 +75,8 @@ module.exports = function(grunt) {
                 sourceComments: true,
                 outputStyle: 'expanded',
                 includePaths: [
-                    path.resolve(project.sourceDir + 'sass')
+                    path.resolve(project.sourceDir + 'sass'),
+                    path.resolve(project.sourceDir + 'bower_components')
                 ]
             },
             'dev-minimal': {
