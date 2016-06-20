@@ -46,10 +46,18 @@
             <div class="article__head-wrap">
 
                 {% if view.header_module %}
-                <div class="scaled-image is-pixelperfect article__head-image">
-                    {{ lama.insert_responsive_image(view.header_module) }}
-                </div>{{ view.header_module.caption | safe }}{{ view.header_module.copyright }}
+                    {# longforms do have a special headerimage (which has the same name as article headerimages) #}
+
+                    {% set block_type = view.header_module|block_type %}
+                    {% if block_type == 'headerimage' %}
+                        <div class="scaled-image is-pixelperfect article__head-image">
+                            {{ lama.insert_responsive_image(view.header_module) }}
+                        </div>{{ view.header_module.caption | safe }}{{ view.header_module.copyright }}
+                    {% else %}
+                        {{ blocks[view.header_module|block_type](view.header_module) }}
+                    {% endif %}
                 {% endif %}
+
                 <header class="article__title-wrap">
                     <h1 itemprop="headline">
                         {{ blocks.title() }}

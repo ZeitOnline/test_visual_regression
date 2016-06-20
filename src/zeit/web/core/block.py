@@ -397,6 +397,13 @@ class Video(Block):
             logging.exception('No video renditions set.')
 
 
+class HeaderVideo(Video):
+    """This is a special case used directly (not via adapter) by
+    z.w.magazin.view_article.Article.header_module because videos in ZMO
+    headers need rather different markup.
+    """
+
+
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IGallery)
 def inlinegallery(context):

@@ -57,6 +57,8 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
             self.context).module
         if zeit.content.article.edit.interfaces.IImage.providedBy(block):
             return zeit.web.core.block.HeaderImage(block)
+        elif zeit.content.article.edit.interfaces.IVideo.providedBy(block):
+            return zeit.web.core.block.HeaderVideo(block)
         else:
             return zeit.web.core.interfaces.IFrontendBlock(block, None)
 
