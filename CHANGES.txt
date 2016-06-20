@@ -8,6 +8,14 @@ Change log for zeit.web
 
 - ZON-2927: Split Image.layout into display_mode and variant_name
 
+- ZON-2256: Track comment actions
+
+- ZON-2751: Style column teaser in buzzboard
+
+- OPS-267: Move normalize.css inline into CSS
+
+- OPS-285: Refactor overlays
+
 - MAINT: Replace compass with libsass and autoprefixer
 
 - MAINT: Update bower components

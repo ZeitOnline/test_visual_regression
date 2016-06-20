@@ -7,7 +7,13 @@
 {% block teaser_media_position_before_title %}
     {% if row == 0 %}
         {% set module_layout = self.layout() %}
-        {% include "zeit.web.site:templates/inc/asset/image_buzzboard.tpl" ignore missing %}
+        {% if teaser is column %}
+            {% set media_block_additional_class = 'teaser-buzzboard__media--column' %}
+            {% set media_container_additional_class = 'teaser-buzzboard__media-container--column' %}
+            {% include "zeit.web.site:templates/inc/asset/image_zon-column.tpl" %}
+        {% else %}
+            {% include "zeit.web.site:templates/inc/asset/image_buzzboard.tpl" ignore missing %}
+        {% endif %}
     {% endif %}
 {% endblock %}
 

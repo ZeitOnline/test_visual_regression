@@ -3,6 +3,12 @@
 		@extend %teaser-media
 		height: 0
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
+		&--column
+			background-color: $zon-warm-grey
+			overflow: hidden
+	&__media-container--column
+		margin: remify(8px 16px 0)
+		width: 50%
 	&__media-item
 		@extend %teaser-media-item !optional
 	&__heading
