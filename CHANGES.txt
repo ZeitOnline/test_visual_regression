@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2751: Style column teaser in buzzboard
 
+- ZON-2345: Do not show expired videos
+
 - BUG-432: Set webtrekk pagenumber for paginated centerpages
 
 - OPS-267: Move normalize.css inline into CSS

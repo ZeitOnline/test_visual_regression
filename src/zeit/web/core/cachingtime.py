@@ -40,7 +40,8 @@ def caching_time_gallery(context):
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
 @grokcore.component.adapter(zeit.content.image.interfaces.IImage)
 def caching_time_image(context):
-    expires = zeit.web.core.image.image_expires(context)
+    expires = zeit.web.core.interfaces.IExpiration(context, None)
+    expires = expires and expires.seconds
     if expires is not None:
         return max(expires, 0)
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -64,7 +65,8 @@ def caching_time_feed(context):
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
 @grokcore.component.adapter(zeit.content.image.image.TemporaryImage)
 def caching_time_external(context):
-    expires = zeit.web.core.image.image_expires(context)
+    expires = zeit.web.core.interfaces.IExpiration(context, None)
+    expires = expires and expires.seconds
     if expires is not None:
         return max(expires, 0)
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)

@@ -306,7 +306,7 @@ def test_wrapped_features_are_triggered(testbrowser):
 
 
 def test_cp_does_not_render_image_if_expired(testbrowser):
-    with mock.patch('zeit.web.core.image.is_image_expired') as expired:
-        expired.return_value = True
+    with mock.patch(
+            'zeit.web.core.image.ImageExpiration.is_expired', new=True):
         browser = testbrowser('/centerpage/lebensart')
     assert not browser.cssselect('.cp_leader__asset--dark')
