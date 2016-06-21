@@ -88,8 +88,8 @@ def _paragraphs_by_length(paragraphs, sufficient_length=10):
     previous_length = 0
     filtered_paragraphs = []
     for p in paragraphs:
-        if len(p)+previous_length <= sufficient_length:
-            previous_length = len(p)+previous_length
+        if len(p) + previous_length <= sufficient_length:
+            previous_length = len(p) + previous_length
         else:
             filtered_paragraphs.append(p)
             previous_length = 0
