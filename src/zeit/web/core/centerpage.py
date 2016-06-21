@@ -261,7 +261,10 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 @grokcore.component.implementer(zeit.web.core.interfaces.IDetailedContentType)
 def cp_detailed_content_type(context):
-    result = 'centerpage.{}'.format(context.type)
+    subtyp = context.type
+    if zeit.web.core.view.is_advertorial(context, None):
+        subtyp = 'advertorial'
+    result = 'centerpage.{}'.format(subtyp)
     seo = zeit.seo.interfaces.ISEO(context)
     if seo.keyword_entity_type:
         result += '.' + seo.keyword_entity_type.lower()
