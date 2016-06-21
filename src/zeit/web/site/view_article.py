@@ -52,17 +52,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return self.resource_url
 
     @zeit.web.reify
-    def extend_from_template(self):
-        return "zeit.web.site:templates/article.html"
-
-    @zeit.web.reify
-    def embed_header(self):
-        embed_header = zeit.content.article.edit.interfaces.IHeaderArea(
-            self.context).module
-        if embed_header:
-            return zeit.web.core.interfaces.IFrontendBlock(embed_header)
-
-    @zeit.web.reify
     def meta_keywords(self):
         return [x for x in ([self.ressort.title(), self.supertitle] +
                 super(Article, self).meta_keywords) if x]
@@ -144,7 +133,8 @@ def is_breaking_news(context, request):
                                 is_breaking_news),
              renderer='templates/article_breaking.html')
 class BreakingNews(Article):
-    pass
+
+    header_layout = 'breaking'
 
 
 def is_column_article(context, request):
@@ -163,7 +153,7 @@ def has_author_image(context, request):
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
                                 is_column_article,
                                 has_author_image),
-             renderer='templates/column.html')
+             renderer='templates/article.html')
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
                                 is_column_article,
                                 has_author_image),
@@ -171,9 +161,7 @@ def has_author_image(context, request):
              renderer='templates/komplett.html')
 class ColumnArticle(Article):
 
-    @zeit.web.reify
-    def extend_from_template(self):
-        return "zeit.web.site:templates/column.html"
+    header_layout = 'column'
 
     @zeit.web.reify
     def author_img(self):
@@ -191,7 +179,7 @@ class ColumnArticle(Article):
                                 is_column_article,
                                 has_author_image),
              path_info='.*seite-(.*)',
-             renderer='templates/column.html')
+             renderer='templates/article.html')
 class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
     pass
 
@@ -199,6 +187,8 @@ class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
 @view_config(context=zeit.web.core.article.ILiveblogArticle,
              renderer='templates/liveblog.html')
 class LiveblogArticle(Article):
+
+    header_layout = 'liveblog'
 
     def __init__(self, *args, **kwargs):
         super(LiveblogArticle, self).__init__(*args, **kwargs)

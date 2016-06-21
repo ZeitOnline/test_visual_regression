@@ -156,21 +156,14 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro headerimagestandard(obj) -%}
-    <div class="article__head__image">
-        {% include "zeit.web.magazin:templates/inc/article/header-image.html" with context %}
-    </div>
-{%- endmacro %}
-
 {% macro image(obj, loop) %}
     {# BBB Wrap the article image in a macro until we have block templates in ZMO #}
     {% include "zeit.web.magazin:templates/inc/asset/image_article.tpl" with context %}
 {%- endmacro %}
 
-{% macro headerimage(obj) -%}
-    <div class="scaled-image is-pixelperfect article__head-image">
-        {{ lama.insert_responsive_image(obj) }}
-    </div>{{ obj.caption | safe }}{{ obj.copyright }}
+{% macro headerimage(obj, loop) %}
+    {# BBB Wrap the article image in a macro until we have block templates in ZMO #}
+    {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" with context %}
 {%- endmacro %}
 
 {% macro video(obj) -%}

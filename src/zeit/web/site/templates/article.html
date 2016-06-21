@@ -13,41 +13,12 @@
 {% endif %}
 {%- endblock %}
 
-{% block article_heading %}
-    {% if view.has_series_attached %}
-        <div class="article-series">
-            {% require image = get_image(view, view.series, variant_id='panorama', fallback=False) -%}
-                {% set module_layout = "article-series" %}
-                {% set media_caption_additional_class = 'figcaption--hidden' %}
-                {% set media_block_additional_class = 'is-pixelperfect' -%}
-                {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
-            {%- endrequire -%}
-
-            <a href="{{ view.series | create_url }}" class="article-series__heading" itemprop="isPartOf">
-                <div class="article-series__inner-heading">
-                    <span class="article-series__kicker">Aus der Serie</span><span class="visually-hidden">: </span>
-                    <span class="article-series__title">{{ view.serie }}</span>
-                </div>
-            </a>
-        </div>
-    {% endif %}
-
-    {{ super() }}
-{% endblock article_heading %}
-
 {% block article_pages %}
     <section class="article-page" data-page-number="{{ view.current_page.number + 1 }}">
         {%- set page = view.current_page -%}
         {%- include "zeit.web.core:templates/inc/article/page.html" -%}
     </section>
 {% endblock article_pages %}
-
-{% block article_main_image %}
-    {% if view.page_nr == 1 %}
-        {% set image = view.main_image_block %}
-        {% include "zeit.web.core:templates/inc/asset/image_article.tpl" %}
-    {% endif %}
-{% endblock article_main_image %}
 
 {% block article_pagination %}
     {% include "zeit.web.site:templates/inc/article/pagination.tpl" %}
@@ -69,4 +40,3 @@
 {% block print %}
     {% include "zeit.web.core:templates/inc/article/print.tpl" %}
 {% endblock %}
-

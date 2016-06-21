@@ -1,9 +1,5 @@
 {% extends "zeit.web.magazin:templates/article.html" %}
 {% block article_pages %}
-    {% block article_main_image %}
-        {% set obj = view.main_image_block %}
-        {% include "zeit.web.magazin:templates/inc/asset/image_article.tpl" with context %}
-    {% endblock article_main_image %}
     {% for page in view.pages %}
         <div class="article__page">
             {{ render_page(page) }}

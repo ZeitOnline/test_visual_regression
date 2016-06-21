@@ -10,6 +10,9 @@
     <header name="zon-article-large">
       <title>Großes Bild</title>
     </header>
+    <header name="embed">
+      <title>Embed-Header</title>
+    </header>
   </template>
   <template name="zon-liveblog" available="zeit.cms.section.interfaces.IZONContent">
     <title>Liveblog</title>

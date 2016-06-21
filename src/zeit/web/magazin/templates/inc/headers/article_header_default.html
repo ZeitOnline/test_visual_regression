@@ -6,7 +6,11 @@
             {{ blocks.supertitle() }}
             {{ blocks.title() }}
         </h1>
-        {{ blocks[view.header_elem|block_type](view.header_elem) }}
+        {% if view.page_nr == 1 and view.header_module %}
+            <div class="article__head__image">
+                {{ blocks[view.header_module|block_type](view.header_module) }}
+            </div>
+        {% endif %}
         {{ blocks.subtitle(include_meta=True) }}
         <span class="article__head__meta-wrap">
             <span class="article__head__meta">

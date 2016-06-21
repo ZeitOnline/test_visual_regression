@@ -26,6 +26,7 @@ import zeit.web.core.cache
 import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
+import zeit.web.core.template
 
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
@@ -246,8 +247,6 @@ class Image(zeit.web.core.image.BaseImage):
     def __new__(cls, model_block):
         if getattr(model_block, 'is_empty', False):
             return
-        if not cls.wanted_display_mode(model_block.display_mode):
-            return
 
         target = None
         referenced = None
@@ -269,7 +268,7 @@ class Image(zeit.web.core.image.BaseImage):
             target = referenced
             group = None
 
-        if zeit.web.core.image.is_image_expired(target):
+        if zeit.web.core.template.expired(target):
             target = None
 
         if not target:
@@ -286,11 +285,6 @@ class Image(zeit.web.core.image.BaseImage):
             instance.attr_alt = model_block.references.alt
 
         return instance
-
-    @classmethod
-    def wanted_display_mode(cls, display_mode):
-        """Skip images that are marked as header images via display mode."""
-        return 'header' not in (display_mode or '')
 
     def __init__(self, model_block):
         # `legacy_layout` is required for bw compat of the ZCO default variant,
@@ -322,6 +316,14 @@ class Image(zeit.web.core.image.BaseImage):
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
 
+class HeaderImage(Image):
+    """This is a special case used directly (not via adapter) by
+    z.w.magazin.view_article.Article.header_module so we can adjust the
+    rendering of a header image module according to the article.header_layout
+    setting.
+    """
+
+
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(Image)
 class BlockImages(object):
@@ -331,20 +333,6 @@ class BlockImages(object):
     def __init__(self, context):
         self.context = context
         self.image = context.group
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
-class HeaderImage(Image):
-
-    @classmethod
-    def wanted_display_mode(cls, display_mode):
-        """Only accept header images that are marked via their display mode."""
-        return 'header' in (display_mode or '')
-
-
-class HeaderImageStandard(HeaderImage):
-    pass
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -384,22 +372,20 @@ class Citation(Block):
         self.layout = model_block.layout
 
 
-class BaseVideo(Block):
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
+class Video(Block):
 
     def __init__(self, model_block):
-        video = None
-        try:
-            video = getattr(model_block, 'video')
-        except:
-            pass
-        if not zeit.content.video.interfaces.IVideo.providedBy(video):
+        self.video = getattr(model_block, 'video', None)
+        if not zeit.content.video.interfaces.IVideo.providedBy(self.video):
             return
-        self.renditions = video.renditions
-        self.video_still = video.video_still
-        self.title = video.title
-        self.supertitle = video.supertitle
-        self.description = video.subtitle
-        self.id = video.uniqueId.split('/')[-1]  # XXX ugly
+        self.renditions = self.video.renditions
+        self.video_still = self.video.video_still
+        self.title = self.video.title
+        self.supertitle = self.video.supertitle
+        self.description = self.video.subtitle
+        self.id = self.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
 
     @property
@@ -411,30 +397,11 @@ class BaseVideo(Block):
             logging.exception('No video renditions set.')
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
-class Video(BaseVideo):
-
-    def __new__(cls, model_block):
-        if 'header' in (model_block.layout or ''):
-            return
-        return super(Video, cls).__new__(cls, model_block)
-
-    def __init__(self, model_block):
-        super(Video, self).__init__(model_block)
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendHeaderBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
-class HeaderVideo(BaseVideo):
-
-    def __new__(cls, model_block):
-        if 'header' not in (model_block.layout or ''):
-            return
-        return super(HeaderVideo, cls).__new__(cls, model_block)
-
-    def __init__(self, model_block):
-        super(HeaderVideo, self).__init__(model_block)
+class HeaderVideo(Video):
+    """This is a special case used directly (not via adapter) by
+    z.w.magazin.view_article.Article.header_module because videos in ZMO
+    headers need rather different markup.
+    """
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -487,7 +454,7 @@ class NewsletterTeaser(Block):
         image = images.image if images is not None else None
         if not zeit.content.image.interfaces.IImageGroup.providedBy(image):
             return
-        if zeit.web.core.image.is_image_expired(image):
+        if zeit.web.core.template.expired(image):
             return
         # XXX We should not hardcode the host, but newsletter is rendered on
         # friedbert-preview, which can't use `image_host`. Should we introduce

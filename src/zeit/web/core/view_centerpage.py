@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import pyramid.view
 import lxml.etree
-import urllib
 import zope.component
 
 import zeit.cms.interfaces
@@ -134,7 +133,7 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         ranking = self.area_ranking
         if ranking is None:
             return None
-        if ranking.current_page < len(ranking.pagination):
+        if ranking.current_page < ranking.total_pages:
             get_param = ranking.page_info(
                 ranking.current_page + 1)['append_get_param']
             return zeit.web.core.utils.add_get_params(
@@ -179,6 +178,22 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
     @zeit.web.reify
     def tracking_type(self):
         return type(self.context).__name__.title()
+
+    @zeit.web.reify
+    def pagination(self):
+        if self.area_ranking is None:
+            return {}
+        # Return as many of the same keys in
+        # z.w.core.view_article.Article.pagination as make sense here. (Only
+        # used by z.w.core.view.Base.webtrekk at the moment.)
+        return {
+            'current': self.area_ranking.current_page,
+            'total': self.area_ranking.total_pages,
+            'pager': self.area_ranking._pagination,
+            'content_url': self.content_url,
+            'next_page_url': self.next_page_url,
+            'prev_page_url': self.prev_page_url,
+        }
 
     @zeit.web.reify
     def comment_counts(self):

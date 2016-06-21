@@ -265,34 +265,36 @@ def localimage_to_imagetransform(image):
     return zeit.content.image.transform.ImageTransform(image)
 
 
-# XXX Should this be a method of Image/ImageGroup?
-def image_expires(image):
-    """Returns number of seconds relative to now when the given image, or the
-    image group it belongs to, will no longer be published.
-    """
+class ImageExpiration(grokcore.component.Adapter):
 
-    if zeit.content.image.interfaces.IImage.providedBy(image):
-        group = image.__parent__
-    elif isinstance(image, VariantImage):
-        group = image.group
-    else:
-        group = image
+    grokcore.component.context(zeit.content.image.interfaces.IImageGroup)
+    grokcore.component.implements(zeit.web.core.interfaces.IExpiration)
 
-    if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
-        return None
-
-    workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
-    if workflow.released_to:
+    @property
+    def seconds(self):
+        workflow = zeit.cms.workflow.interfaces.IPublishInfo(self.context)
+        if not workflow.released_to:
+            return None
         now = datetime.datetime.now(pytz.UTC)
         return int((workflow.released_to - now).total_seconds())
 
+    @property
+    def is_expired(self):
+        if self.seconds is None:
+            return False
+        return self.seconds < 0
 
-@zeit.web.register_global
-def is_image_expired(image):
-    expires = image_expires(image)
-    if expires is None:
-        return False
-    return (expires < 0)
+
+@grokcore.component.adapter(zeit.content.image.interfaces.IImage)
+@grokcore.component.implementer(zeit.web.core.interfaces.IExpiration)
+def single_image_expiration(context):
+    return zeit.web.core.interfaces.IExpiration(context.__parent__, None)
+
+
+@grokcore.component.adapter(VariantImage)
+@grokcore.component.implementer(zeit.web.core.interfaces.IExpiration)
+def variant_image_expiration(context):
+    return zeit.web.core.interfaces.IExpiration(context.group, None)
 
 
 class ScaleSource(zeit.imp.source.ScaleSource):
