@@ -377,7 +377,7 @@ def test_default_teaser_should_return_default_teaser_image(
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
 
     teaser_block = cp_context[0][0][0]
-    article = 'http://xml.zeit.de/artikel/artikel-ohne-assets'
+    article = 'http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets'
     article_context = zeit.cms.interfaces.ICMSContent(article)
     teaser_img = zeit.web.core.template.get_image(
         teaser_block, article_context)

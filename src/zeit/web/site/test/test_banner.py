@@ -11,7 +11,7 @@ import zeit.web.site
 
 def test_banner_toggles_viewport_zoom(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/zeitonline')
+        'http://xml.zeit.de/zeit-online/zeitonline')
     view = zeit.web.site.view_centerpage.Centerpage(
         context, pyramid.testing.DummyRequest())
     assert view.banner_toggles('viewport_zoom') == 'tablet'

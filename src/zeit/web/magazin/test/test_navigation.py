@@ -14,7 +14,7 @@ def screen_size(request):
 
 
 def test_longform_navigation(testbrowser):
-    browser = testbrowser('/artikel/05')
+    browser = testbrowser('/zeit-magazin/article/05')
     header = browser.cssselect('.header')
 
     # there's exactly one navigation
@@ -41,7 +41,7 @@ def test_main_navigation(selenium_driver, testserver, screen_size):
     small_screen = screen_size[2]
     driver.set_window_size(screen_size[0], screen_size[1])
 
-    driver.get('%s/artikel/01' % testserver.url)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
 
     header = driver.find_element_by_class_name('header')
     menu_icon = header.find_element_by_class_name('header__menu-link')

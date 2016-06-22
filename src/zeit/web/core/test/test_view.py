@@ -101,7 +101,7 @@ def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
 def test_json_delta_time_from_unique_id_should_return_http_error_on_article(
         testbrowser):
     with pytest.raises(urllib2.HTTPError) as error:
-        testbrowser('/json/delta_time?unique_id=http://xml.zeit.de/artikel/01')
+        testbrowser('/json/delta_time?unique_id=http://xml.zeit.de/zeit-magazin/article/01')
     assert error.value.getcode() == 400
 
 
@@ -136,7 +136,7 @@ def test_c1_channel_should_correspond_to_context_sub_ressort(
         application, dummy_request):
 
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/artikel/01')
+        'http://xml.zeit.de/zeit-magazin/article/01')
     view = zeit.web.core.view.Content(context, dummy_request)
     assert dict(view.c1_header).get('C1-Track-Sub-Channel') == 'mode-design'
     assert dict(view.c1_client).get('set_sub_channel') == '"mode-design"'
@@ -183,7 +183,7 @@ def test_c1_doc_type_should_be_included_in_cre_client(
 def test_c1_heading_and_kicker_should_be_properly_escaped(
         application, dummy_request):
 
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/04')
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/04')
     view = zeit.web.core.view.Content(context, dummy_request)
     assert dict(view.c1_header).get('C1-Track-Heading') == (
         u'Kann Leipzig Hypezig berleben')
@@ -232,14 +232,14 @@ def test_c1_correct_ressort_on_homepage(testbrowser):
 
 
 def test_inline_gallery_should_be_contained_in_body(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     assert isinstance(
         body.values()[-1], zeit.content.article.edit.reference.Gallery)
 
 
 def test_inline_gallery_should_have_images(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     gallery = zeit.web.core.interfaces.IFrontendBlock(body.values()[-1])
     assert all(
@@ -490,7 +490,7 @@ def test_centerpage_should_have_subtitle_seo_pagedesciption(application):
 
 def test_article_should_have_postfixed_seo_pagetitle(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/artikel/06')
+        'http://xml.zeit.de/zeit-magazin/article/06')
     view = zeit.web.magazin.view_article.Article(
         context, pyramid.testing.DummyRequest())
     assert view.pagetitle == (u'Friedhof Hamburg-Ohlsdorf: '

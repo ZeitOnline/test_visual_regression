@@ -265,7 +265,7 @@ def test_campus_advertorial_teaser(testbrowser):
 
 def test_paginated_cp_has_correct_teaser_structure(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/artikel/01'}]
+    solr.results = [{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}]
     browser = testbrowser('/campus/centerpage/paginierung?p=2')
     teaser = browser.cssselect('.teaser-small')[0]
     image = teaser.cssselect('.teaser-small__media-item')[0]

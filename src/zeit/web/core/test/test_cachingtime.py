@@ -9,9 +9,9 @@ import zeit.web.core.interfaces
 
 @pytest.mark.parametrize(
     'content', [
-        ('http://xml.zeit.de/artikel/01', 10),
+        ('http://xml.zeit.de/zeit-magazin/article/01', 10),
         ('http://xml.zeit.de/autoren/anne_mustermann', 5),
-        ('http://xml.zeit.de/centerpage/index', 20),
+        ('http://xml.zeit.de/zeit-magazin/centerpage/index', 20),
         ('http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer', 40),
     ])
 def test_caching_time_should_be_set_per_content_object(application, content):

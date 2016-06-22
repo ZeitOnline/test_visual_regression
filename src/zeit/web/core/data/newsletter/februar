@@ -8,11 +8,11 @@
         <title>Politik</title>
       </head>
       <container cp:type="teaser" module="teaser">
-        <block href="http://xml.zeit.de/artikel/01">
+        <block href="http://xml.zeit.de/zeit-magazin/article/01">
         </block>
       </container>
       <container cp:type="teaser" module="teaser">
-        <block href="http://xml.zeit.de/artikel/02">
+        <block href="http://xml.zeit.de/zeit-magazin/article/02">
         </block>
       </container>
     </region>

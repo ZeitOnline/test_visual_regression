@@ -1,9 +1,4 @@
-
-{% if provides (view.context,'zeit.content.cp.interfaces.ICP2009') %}
-    {% extends "zeit.web.magazin:templates/{}_legacy.html".format(view.type) %}
-{% else %}
-    {% extends "zeit.web.magazin:templates/{}.html".format(view.type) %}
-{% endif %}
+{% extends "zeit.web.magazin:templates/{}.html".format(view.type) %}
 
 {% block css_link %}
 <!--[if gt IE 8]><!-->

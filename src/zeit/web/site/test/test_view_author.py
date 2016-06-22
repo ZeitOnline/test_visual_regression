@@ -75,12 +75,12 @@ def test_author_page_should_hide_favourite_content_on_further_pages(
     settings['author_articles_page_size'] = 4
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
-        {'uniqueId': 'http://xml.zeit.de/artikel/01'},
-        {'uniqueId': 'http://xml.zeit.de/artikel/02'},
-        {'uniqueId': 'http://xml.zeit.de/artikel/03'},
-        {'uniqueId': 'http://xml.zeit.de/artikel/04'},
-        {'uniqueId': 'http://xml.zeit.de/artikel/05'},
-        {'uniqueId': 'http://xml.zeit.de/artikel/06'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/03'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/04'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/05'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/06'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01'},
         {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02'}]
     # we have 8 solr hits + 3 favorite articles

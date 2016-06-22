@@ -83,7 +83,7 @@ def test_get_teaser_image(testserver):
 
     teaser = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de'
-        '/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen'
+        '/zeit-magazin/article/kochen-wuerzen-veganer-kuchen'
     )
 
     image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
@@ -108,11 +108,11 @@ def test_get_teaser_image_should_utilize_unique_id(testserver):
     teaser = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     )
-    unique_id = 'http://xml.zeit.de/centerpage/katzencontent/'
+    unique_id = 'http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/'
     image = zeit.web.core.template.get_teaser_image(
         teaser_block, teaser, unique_id=unique_id)
     assert image.uniqueId == (
-        'http://xml.zeit.de/centerpage/'
+        'http://xml.zeit.de/zeit-magazin/centerpage/'
         'katzencontent/katzencontent-zmo-large.jpg')
 
 
@@ -132,7 +132,7 @@ def test_get_teaser_image_should_utilize_fallback_image(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/artikel/artikel-ohne-assets'
+        'http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets'
     )
     image = zeit.web.core.template.get_teaser_image(
         teaser_block, teaser)
@@ -145,7 +145,7 @@ def test_get_teaser_image_should_render_fallback_for_broken_image(testserver):
     teaser_block = mock.MagicMock()
     teaser_block.layout.image_pattern = 'zmo-large'
     teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_with_broken_image_asset'
+        'http://xml.zeit.de/zeit-magazin/centerpage/article_with_broken_image_asset'
     )
     image = zeit.web.core.template.get_teaser_image(
         teaser_block, teaser)
@@ -399,7 +399,7 @@ def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
     assert module.layout.id == 'zon-square'
 
     block.remove(article)
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
     block.append(article)
     module = zeit.web.core.template.get_module(block)
     assert module.layout.id == 'zmo-square'
@@ -414,7 +414,7 @@ def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
 
 def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
         application, monkeypatch):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/04')
+    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/04')
     monkeypatch.setattr(zeit.content.cp.interfaces,
                         'ICenterPage', lambda *_: article)
     block = mock.MagicMock()

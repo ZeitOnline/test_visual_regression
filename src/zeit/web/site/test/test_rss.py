@@ -128,17 +128,17 @@ def test_spektrum_area_should_render_empty_if_feed_unavailable(
 
 
 def test_rss_feed_of_cp_has_requested_format(testserver):
-    feed_path = '/centerpage/index/rss-spektrum-flavoured'
+    feed_path = '/zeit-magazin/centerpage/index/rss-spektrum-flavoured'
     res = requests.get(
         testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
     assert res.headers['Content-Type'].startswith('application/rss+xml')
     feed = res.text
     assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
-    assert '<link>http://www.zeit.de/centerpage/article_image_asset?' in feed
+    assert '<link>http://www.zeit.de/zeit-magazin/centerpage/article_image_asset?' in feed
     assert ('wt_zmc=koop.ext.zonaudev.spektrumde.feed.'
             'article-image-asset.bildtext.link.x' in feed)
     assert re.search(
-        '<enclosure.*url="http://newsfeed.zeit.de/centerpage/katzencontent/',
+        '<enclosure.*url="http://newsfeed.zeit.de/zeit-magazin/centerpage/katzencontent/',
         feed)
 
 

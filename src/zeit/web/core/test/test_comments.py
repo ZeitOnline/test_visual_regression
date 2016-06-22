@@ -38,7 +38,7 @@ def test_comment_count_should_return_expected_json_structure_for_cp_id(
         zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
-        <node comment_count="125" url="/centerpage/article_image_asset"/>
+        <node comment_count="125" url="/zeit-magazin/centerpage/article_image_asset"/>
         <node comment_count="103" url="/zeit-online/cp-content/article-01"/>
         <node comment_count="291" url="/zeit-online/cp-content/article-02"/>
     </nodes>""")
@@ -49,7 +49,7 @@ def test_comment_count_should_return_expected_json_structure_for_cp_id(
     assert 'comment_count' in browser.json
     cc = browser.json['comment_count']
     assert cc[NS + 'zeit-online/cp-content/article-01'] == '103 Kommentare'
-    assert cc[NS + 'centerpage/article_image_asset'] == '125 Kommentare'
+    assert cc[NS + 'zeit-magazin/centerpage/article_image_asset'] == '125 Kommentare'
     assert cc[NS + 'zeit-online/cp-content/article-02'] == '291 Kommentare'
 
 
@@ -59,14 +59,14 @@ def test_comment_count_should_return_expected_json_structure_for_article_id(
         zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
-        <node comment_count="129" url="/artikel/01"/>
+        <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id=' + NS + 'artikel/01')
+    browser = testbrowser('/json/comment_count?unique_id=' + NS + 'zeit-magazin/article/01')
 
     assert 'comment_count' in browser.json
     cc = browser.json['comment_count']
-    assert cc[NS + 'artikel/01'] == '129 Kommentare'
+    assert cc[NS + 'zeit-magazin/article/01'] == '129 Kommentare'
 
 
 def test_comment_count_should_fallback_to_zero_if_count_unavailable(
@@ -75,7 +75,7 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
         zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
-        <node comment_count="129" url="/artikel/01"/>
+        <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
     browser = testbrowser('/json/comment_count?unique_id=' +
@@ -93,7 +93,7 @@ def test_comment_count_should_be_empty_for_link_object(
         zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
-        <node comment_count="129" url="/artikel/01"/>
+        <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
     browser = testbrowser('/json/comment_count?unique_id=' +
@@ -296,15 +296,15 @@ def test_dict_with_article_paths_and_comment_counts_should_be_created(
         zeit.web.core.comments.Community, '_request_counts', lambda *_: """
     <?xml version="1.0" encoding="UTF-8"?>
     <nodes>
-        <node comment_count="125" url="/centerpage/article_image_asset"/>
+        <node comment_count="125" url="/zeit-magazin/centerpage/article_image_asset"/>
     </nodes>""")
 
     browser = testbrowser('/json/comment_count?unique_id=' +
-                          NS + 'centerpage/article_image_asset')
+                          NS + 'zeit-magazin/centerpage/article_image_asset')
 
     assert 'comment_count' in browser.json
     cc = browser.json['comment_count']
-    assert cc[NS + 'centerpage/article_image_asset'] == '125 Kommentare'
+    assert cc[NS + 'zeit-magazin/centerpage/article_image_asset'] == '125 Kommentare'
 
 
 def test_rewrite_comments_url_should_rewrite_to_static_host(application):
@@ -649,7 +649,7 @@ def test_post_comment_should_not_expose_requests_timeout_exception(
 
     dummy_request.method = 'POST'
     dummy_request.POST = dummy_request.params = {
-        'path': 'artikel/01', 'action': 'comment', 'comment': ' '}
+        'path': 'zeit-magazin/article/01', 'action': 'comment', 'comment': ' '}
     dummy_request.user = {'ssoid': '123', 'uid': '123', 'name': 'foo'}
 
     def post(url, **kw):
@@ -881,7 +881,7 @@ def test_user_comment_should_have_expected_structure(application):
             <title>[empty]</title>
             <description>&lt;p&gt;Ich praezisiere.&lt;/p&gt;</description>
             <pubDate>2015-11-17T10:39:50+00:00</pubDate>
-            <cms_uniqueId>http://www.zeit.de/artikel/01</cms_uniqueId>
+            <cms_uniqueId>http://www.zeit.de/zeit-magazin/article/01</cms_uniqueId>
         </item>"""
 
     xml = lxml.etree.fromstring(xml_str)
@@ -893,7 +893,7 @@ def test_user_comment_should_have_expected_structure(application):
     assert comment.uniqueId == 'http://community.zeit.de/comment/1'
     assert comment.title == '[empty]'
     assert comment.referenced_content.uniqueId == (
-        'http://xml.zeit.de/artikel/01')
+        'http://xml.zeit.de/zeit-magazin/article/01')
 
     xml_str = """
         <item>

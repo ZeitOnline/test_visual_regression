@@ -107,13 +107,13 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
-    teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/centerpage/index')
+    teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/centerpage/index')
     teaser.teaserSupertitle = 'teaserSupertitle'
     teaser.teaserTitle = 'teaserTitle'
     teaser.teaserText = 'teaserText'
     view = mock.Mock()
-    view.comment_counts = {'http://xml.zeit.de/artikel/01': 129}
+    view.comment_counts = {'http://xml.zeit.de/zeit-magazin/article/01': 129}
     view.context = cp
     view.request.route_url.return_value = '/'
 
@@ -132,7 +132,7 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     assert len(html('article.teaser h2.teaser__heading')) == 1
 
     link = html('a.teaser__combined-link')[0]
-    assert link.attrib['href'] == '/artikel/01'
+    assert link.attrib['href'] == '/zeit-magazin/article/01'
     assert link.attrib['title'] == 'teaserSupertitle - teaserTitle'
 
     link_kicker = html('a.teaser__combined-link span.teaser__kicker')[0]
@@ -901,7 +901,7 @@ def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
-    browser = testbrowser('/centerpage/zeitonline')
+    browser = testbrowser('/zeit-online/zeitonline')
     assert browser.cssselect('.buzz-box')
     assert len(browser.cssselect('.buzz-box__teasers article')) == 3
 

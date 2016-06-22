@@ -10,7 +10,7 @@ from zeit.web.core.block import Video
 
 def test_video_html(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/01' % testserver.url)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
     for video in driver.find_elements_by_tag_name('figure'):
         if video.get_attribute("data-video"):
             still = video.find_element_by_class_name("video__still")

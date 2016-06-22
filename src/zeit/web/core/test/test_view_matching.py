@@ -11,7 +11,7 @@ def test_custom_predicate_should_only_match_website_content(application):
     pviews = pyramid.scripts.pviews.PViewsCommand([])
     registry = application.zeit_app.config.registry
 
-    request = pyramid.request.Request.blank('/centerpage/zeitonline')
+    request = pyramid.request.Request.blank('/zeit-online/zeitonline')
     request.registry = registry
     views = pviews._find_view(request).views
 
@@ -27,19 +27,19 @@ def test_custom_predicate_should_only_match_website_content(application):
         'ZON view is not matching for ZON content')
 
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/zeitonline')
+        'http://xml.zeit.de/zeit-online/zeitonline')
     request = mock.Mock()
     assert view_wrapper.__predicates__[0](context, request), (
         'The predicate does not work for ZON content')
 
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/index')
+        'http://xml.zeit.de/zeit-magazin/centerpage/index')
     assert view_wrapper.__predicates__[0](context, request) is False, (
         'The predicate should not work for ZMO Content')
 
     # TODO: has to be adapted (as)
     # context = zeit.cms.interfaces.ICMSContent(
-    #     'http://xml.zeit.de/centerpage/zmo_zon_matching')
+    #     'http://xml.zeit.de/zeit-magazin/centerpage/zmo_zon_matching')
     # assert view_wrapper.__predicates__[0](context, request) is False, (
     #     'The predicate should not work for ZMO Content, even if '
     #     'rebrush_website_content is set to True.')
@@ -48,7 +48,7 @@ def test_custom_predicate_should_only_match_website_content(application):
 def test_custom_predicate_should_only_match_zmo_content(application):
     pviews = pyramid.scripts.pviews.PViewsCommand([])
     registry = application.zeit_app.config.registry
-    request = pyramid.request.Request.blank('/centerpage/index')
+    request = pyramid.request.Request.blank('/zeit-online/zeitonline')
     request.registry = registry
     views = pviews._find_view(request).views
 
@@ -56,7 +56,7 @@ def test_custom_predicate_should_only_match_zmo_content(application):
     def zmo_view(pviews):
         for view in pviews:
             if view[1].__dict__['__original_view__'] == (
-                    zeit.web.magazin.view_centerpage.CenterpageLegacy):
+                    zeit.web.magazin.view_centerpage.Centerpage):
                 return view[1]
 
     view_wrapper = zmo_view(views)
@@ -64,18 +64,18 @@ def test_custom_predicate_should_only_match_zmo_content(application):
         'ZMO view is not matching for ZMO content')
 
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/index')
+        'http://xml.zeit.de/zeit-magazin/centerpage/index')
     request = mock.Mock()
     assert view_wrapper.__predicates__[0](context, request), (
         'The predicate does not work for ZMO content')
 
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/zeitonline')
+        'http://xml.zeit.de/zeit-online/zeitonline')
     assert view_wrapper.__predicates__[0](context, request) is False, (
         'The predicate should not work for ZON Content')
 
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/zmo_zon_matching')
+        'http://xml.zeit.de/zeit-magazin/centerpage/zmo_zon_matching')
     assert view_wrapper.__predicates__[0](context, request) is False, (
         'The predicate should not work for ZMO Content, if '
         'rebrush_website_content is set to True.')

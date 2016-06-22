@@ -145,7 +145,7 @@ def test_unreachable_agatho_should_not_produce_error():
     mocked_request = mock.MagicMock()
     mocked_request.registry.settings['agatho_host'] = (
         'http://thisurlshouldnotexist.moep/')
-    assert get_thread('http://xml.zeit.de/artikel/01', mocked_request) is None
+    assert get_thread('http://xml.zeit.de/zeit-magazin/article/01', mocked_request) is None
 
 
 def test_unreachable_community_should_not_produce_error(dummy_request):
@@ -187,7 +187,7 @@ def test_session_with_uid_0_marks_session_invalid(dummy_request, monkeypatch):
 def test_malformed_agatho_response_should_not_produce_error(http_testserver):
     mocked_request = mock.MagicMock()
     mocked_request.registry.settings['agatho_host'] = http_testserver.url
-    assert get_thread('http://xml.zeit.de/artikel/01', mocked_request) is None
+    assert get_thread('http://xml.zeit.de/zeit-magazin/article/01', mocked_request) is None
 
 
 @pytest.mark.xfail(reason='Testing broken dependencies is an unsolved issue.')

@@ -136,7 +136,7 @@ def test_failsafe_rendering(markup, assertion, kw):
 
 
 def test_url_path_not_found_should_render_404(testserver):
-    resp = requests.get('%s/centerpage/lifestyle' % testserver.url)
+    resp = requests.get('%s/zeit-magazin/centerpage/lifestyle' % testserver.url)
     assert u'Dokument nicht gefunden' in resp.text
 
 

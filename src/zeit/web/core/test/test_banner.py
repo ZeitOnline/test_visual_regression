@@ -91,7 +91,7 @@ def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
         'third_party_modules': True}.get)
 
     # test article with xml banner is missing
-    browser = testbrowser('/artikel/10')
+    browser = testbrowser('/zeit-magazin/article/10')
     # desktop ads
     assert browser.cssselect('script[id^="ad-desktop-"]')
 

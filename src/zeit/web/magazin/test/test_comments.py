@@ -6,7 +6,7 @@ import zeit.cms.interfaces
 
 
 def test_comments_template_respects_metadata(jinja2_env, testserver):
-    url = 'http://xml.zeit.de/artikel/01'
+    url = 'http://xml.zeit.de/zeit-magazin/article/01'
     comments = jinja2_env.get_template(
         'zeit.web.magazin:templates/inc/article/comments.html')
     content = zeit.cms.interfaces.ICMSContent(url)
@@ -41,7 +41,7 @@ def test_comments_template_respects_metadata(jinja2_env, testserver):
 def test_comments_and_replies_do_appear(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/01' % testserver.url)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
     button = driver.find_element_by_class_name('js-comments-trigger')
     button.click()
     comments = driver.find_elements_by_class_name('comment')
