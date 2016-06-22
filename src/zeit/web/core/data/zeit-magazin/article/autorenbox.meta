@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:">
+    <attribute name="href" ns="DAV:">/cms/work/digital/datenschutz/2014-04/big-data-schwangerschaft-verheimlichen</attribute>
+    <attribute name="private_token" ns="http://namespaces.zeit.de/CMS/vgwort">665977106af74a1b9bb11fdecaf9c68a</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Patrick Beuth</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2014-04-29T11:00:55.287082+00:00</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name=&quot;Article&quot; module=&quot;zeit.content.article.article&quot;/&gt; &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt; &lt;global name=&quot;IZMOContent&quot; module=&quot;zeit.magazin.interfaces&quot;/&gt; &lt;global name=&quot;IZMOArticle&quot; module=&quot;zeit.magazin.interfaces&quot;/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2014-04-29T10:59:55.520768+00:00</attribute>
+    <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="pinned" ns="http://namespaces.zeit.de/CMS/tagging"/>
+    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2014-04-29T11:00:01.354143+00:00</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2014-04-29T11:00:55.287082+00:00</attribute>
+    <rankedTags ns="">
+        <tag>Schwangerschaft</tag>
+        <tag>Konsumverhalten</tag>
+        <tag>Werbung</tag>
+        <tag>Tracking</tag>
+        <tag>Facebook</tag>
+        <tag>Behörde</tag>
+        <tag>Minnesota</tag>
+        <tag>USA</tag>
+        <tag>New York</tag>
+    </rankedTags>
+    <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">Datenschutz</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">article</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">17</attribute>
+    <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.pilath</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Digital</attribute>
+    <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">63cc544733f847bb833abb1329f4cc28</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="reported_error" ns="http://namespaces.zeit.de/CMS/vgwort"/>
+    <attribute name="reported_on" ns="http://namespaces.zeit.de/CMS/vgwort"/>
+    <attribute name="disabled" ns="http://namespaces.zeit.de/CMS/tagging"/>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:1755bdd9-7d0a-4bb4-a633-753d698fcd4b}</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-04-29T10:59:53.055515+00:00</attribute>
+    <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document">3618</attribute>
+    <attribute name="resourcetype" ns="DAV:"/>
+    <attribute name="creationdate" ns="DAV:">2014-04-29T10:59:55Z</attribute>
+    <attribute name="getcontentlength" ns="DAV:">15189</attribute>
+    <attribute name="getlastmodified" ns="DAV:">Tue, 29 Apr 2014 10:59:55 GMT</attribute>
+    <attribute name="getetag" ns="DAV:">&quot;13034a9-3b55-4f82c55065fad&quot;</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="supportedlock" ns="DAV:"/>
+    <attribute name="lockdiscovery" ns="DAV:"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">
+&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <rankedTags ns="">
+        <tag>Schwangerschaft</tag>
+        <tag>Konsumverhalten</tag>
+        <tag>Werbung</tag>
+        <tag>Tracking</tag>
+        <tag>Facebook</tag>
+        <tag>Behörde</tag>
+        <tag>Minnesota</tag>
+        <tag>USA</tag>
+        <tag>New York</tag>
+    </rankedTags>
+</head>

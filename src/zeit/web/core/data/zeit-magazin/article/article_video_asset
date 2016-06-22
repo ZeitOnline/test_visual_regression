@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+    <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
       <bu py:pytype="str">Die ist der image sub text</bu>
       <copyright link="http://foo.de">©foo</copyright>
     </image>
@@ -59,7 +59,7 @@
     <title>Article Video Asset</title>
     <subtitle>subtitle - article video asset</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="large" is_empty="False">
+      <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="large" is_empty="False">
         <bu py:pytype="str">Die ist der image sub text</bu>
         <copyright link="http://foo.de">©foo</copyright>
       </image>

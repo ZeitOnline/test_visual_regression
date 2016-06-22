@@ -75,7 +75,7 @@
     <cluster area="id-SOLO6a3c9962-f2bd-2434-8890-a84f1924ef843" visible="True" kind="solo">
       <region area="id-SOLO74baeca3-7dbb-437d-87e0-3a3d079d69d49" visible="True" kind="solo">
         <container cp:type="teaser" module="zmo-leader-fullwidth" hide-dupes="True" visible="True" cp:__name__="id-3d2116f6-96dd-4556-81f7-d7d0a40435e5">
-          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/article/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
           </block>
         </container>
       </region>

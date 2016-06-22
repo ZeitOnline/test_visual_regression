@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/centerpage/katzencontent/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">katzencontent.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-23T08:23:18.838431+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Katze!</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Die ist der image sub text </attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:fe0f4d26-5c16-4664-bd84-b40d2e900134}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">Die ist der Alttest</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9;foo&lt;/unicode&gt; &lt;string&gt;http://foo.de&lt;/string&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="links_to">http://links.to</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-04-23T08:27:08Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 23 Apr 2014 08:27:08 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"5c579b-1000-4f7b17f8d34df"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>

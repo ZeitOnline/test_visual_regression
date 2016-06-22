@@ -38,7 +38,7 @@
       &lt;tuple&gt;
         &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
         &lt;global name="Interface" module="zope.interface"/&gt;
-        &lt;global name="ICP2009" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
         &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
@@ -49,7 +49,7 @@
     <cluster area="feature">
       <region area="lead">
         <container cp:__name__="id-97939c48-0751-49f4-8fe8-c8e874e93017" cp:type="teaser" module="zmo-upright-large">
-           <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+           <block href="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
             <badges>
               <badge py:pytype="str">audio</badge>
               <badge py:pytype="str">gallery</badge>
@@ -64,14 +64,14 @@
             <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
             <byline xsi:nil="true"/>
             <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text </bu>
               <copyright link="http://foo.de">©foo</copyright>
             </image>
           </block>
         </container>
         <container cp:__name__="id-1b1c3838-0478-4463-b8e4-a5ab4da202c7" cp:type="teaser" module="zmo-upright-large">
-          <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
             <badges>
               <badge py:pytype="str">audio</badge>
               <badge py:pytype="str">gallery</badge>
@@ -86,14 +86,14 @@
             <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
             <byline xsi:nil="true"/>
             <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text </bu>
               <copyright link="http://foo.de">©foo</copyright>
             </image>
           </block>
         </container>
         <container cp:__name__="id-97939c48-0751-49f4-8fe8-c8e874e93018" cp:type="teaser" module="zmo-square-large">
-           <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+           <block href="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
             <badges>
               <badge py:pytype="str">audio</badge>
               <badge py:pytype="str">gallery</badge>
@@ -108,14 +108,14 @@
             <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
             <byline xsi:nil="true"/>
             <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text </bu>
               <copyright link="http://foo.de">©foo</copyright>
             </image>
           </block>
         </container>
         <container cp:__name__="id-1b1c3838-0478-4463-b8e4-a5ab4da202c8" cp:type="teaser" module="zmo-square-large-light">
-          <block href="http://xml.zeit.de/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
             <badges>
               <badge py:pytype="str">audio</badge>
               <badge py:pytype="str">gallery</badge>
@@ -130,7 +130,7 @@
             <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
             <byline xsi:nil="true"/>
             <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text </bu>
               <copyright link="http://foo.de">©foo</copyright>
             </image>

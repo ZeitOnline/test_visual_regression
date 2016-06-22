@@ -1,0 +1,454 @@
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+    <head>
+        <author href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
+            <display_name>Fabian Lange</display_name>
+        </author>
+        <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
+            <display_name>Cornelius Lange</display_name>
+        </author>
+        <references>
+            <reference layout="minimal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2012-03/link-serie-weinkolumne-lange" year="2012" issue="11" ressort="Lebensart" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/serie/weinkolumne">
+                <supertitle>Die Ausleser </supertitle>
+                <title>Alle Folgen der Weinkolumne von Fabian und Cornelius Lange</title>
+                <text>Fabian und Cornelius Lange sind immer auf der Suche nach ultimativen Weinen. In der Kolumne "Die Ausleser" schreiben sie über Entdeckungen und Trends in aller Welt. </text>
+                <description>Fabian und Cornelius Lange sind immer auf der Suche nach ultimativen Weinen. In der Kolumne "Die Ausleser" schreiben sie über Entdeckungen und Trends in aller Welt. </description>
+                <byline/>
+                <image align="left" base-id="http://xml.zeit.de/lebensart/essen-trinken/2012-03/tesaer-weinkolumne-lange/" type="jpg" publication-date="" expires="">
+                    <bu/>
+                    <copyright>© Bernd Jonkmanns</copyright>
+                </image>
+            </reference>
+            <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2013/30/kunstmarkt-weinauktionen" year="2013" issue="30" ressort="Lebensart" author="Gero von Randow" contenttype="article" publication-date="2013-07-25T02:58:54+00:00" expires="">
+                <supertitle>Weinauktionen</supertitle>
+                <title>Aus dem Keller des Élyséepalasts</title>
+                <text>Bei Weinauktionen werden Millionen umgesetzt. Private Liebhaber können aber auch erschwingliche Schätze ersteigern. Gero von Randow über ein erlesenes Sammelgebiet </text>
+                <description>Bei Weinauktionen werden Millionen umgesetzt. Private Liebhaber können aber auch erschwingliche Schätze ersteigern. Gero von Randow über ein erlesenes Sammelgebiet </description>
+                <byline/>
+                <image align="left" base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-07/teaser-weinauktion/" type="jpg" publication-date="" expires="">
+                    <bu>Diese Weine aus dem Élyséepalast kamen Ende Mai unter den Hammer: Magnumflasche 1981er Pauillac Chateau Lafite, ein 1985er Chateau d'Yquem und ein 1982er Chateau La Mission Haut Brion Graves (von links nach rechts)</bu>
+                    <copyright>© Eric Feferberg/AFP/Getty Images</copyright>
+                </image>
+            </reference>
+        </references>
+        <image align="left" base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-07/teaser-chianti/" type="jpg" publication-date="" expires="">
+            <bu>Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant L'e'Maiala in Florenz </bu>
+            <copyright>© Reuters/Alessandro Bianchi</copyright>
+        </image>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Fabian Lange;Cornelius Lange</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-08-06T09:45:23.855752+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-07-30T15:20:50.176115+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-08-06T09:46:23.626917+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-07-30T15:19:57.331279+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">maximal</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+        <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-07-30T15:19:43.217623+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.exner</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">c315938e26a4447880a29d39ce710b8a</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Weinkolumne</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">essen-trinken</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">4952</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:186ac8ad-a034-4f18-9b0b-dcf885df777b}</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+      &lt;initialized_object&gt;
+        &lt;klass&gt;
+          &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+        &lt;/klass&gt;
+        &lt;arguments&gt;
+          &lt;tuple&gt;
+            &lt;global name="Article" module="zeit.content.article.article"/&gt;
+            &lt;global name="Interface" module="zope.interface"/&gt;
+            &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+            &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+          &lt;/tuple&gt;
+        &lt;/arguments&gt;
+      &lt;/initialized_object&gt;
+    &lt;/pickle&gt;</attribute>
+        <nextread>
+          <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/article/01" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
+            <supertitle>Flüchtlinge</supertitle>
+            <teaser_supertitle xsi:nil="true"/>
+            <title xsi:nil="true"/>
+            <text xsi:nil="true"/>
+            <description xsi:nil="true"/>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
+              <display_name>Carolin Emcke</display_name>
+              <location>Eisenhüttenstadt</location>
+            </author>
+          </reference>
+        </nextread>
+    </head>
+    <body>
+        <supertitle>Kolumne Die Ausleser</supertitle>
+        <title>Der Chianti hat eine zweite Chance verdient</title>
+        <subtitle>Erst Heilsbringer, dann Massenware: Der Chianti ist tief gefallen. Doch engagierte Winzer retten dem Wein in der Bastflasche die Ehre. </subtitle>
+        <division type="page">
+            <image align="left"
+            src="http://xml.zeit.de/exampleimages/artikel/03/01.jpg"
+            href="http://www.test.de" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+                <bu>Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant L'e'Maiala in Florenz </bu>
+                <copyright link="http://foo.de">© Reuters/Alessandro Bianchi</copyright>
+            </image>
+            <p>Es waren die Jahre nach 1968. Eine Karawane von klapprigen R4s, Enten und VW-Bussen überquerte die Alpen bei <entity idref="Bozen" entity_type="Location" url_value="orte/bozen">Bozen</entity> und ergoss sich hinter <entity idref="Bologna" entity_type="Location" url_value="orte/bologna">Bologna</entity> ratternd und klappernd in das toskanische Hügelland. An den Lenkrädern saßen diskussionsgestählte Studenten mit Vollbärten und Gesellschaftswissenschaftlerinnen, die <a href="http://www.zeit.de/lebensart/mode/2013-06/ausstellung-lingerie-francaise-dessous" target="_blank" class="">dem verpönten BH</a> für immer abgeschworen hatten. <br/>
+        </p>
+        <p>Sie kamen aus Berlin, Frankfurt, <entity idref="T%C3%BCbingen" entity_type="Location" url_value="orte/tuebingen">Tübingen</entity>. Sie öffneten die Autotüren und setzten ihre Sandalen auf <a href="http://www.zeit.de/2012/43/Italien-Toskana-Fattoria-di-Tatti" target="_blank" class="">unberührte toskanische Erde</a>. Und sie fanden: einen Dreiviertelliter Chianti in einer bauchigen Glasflasche, liebevoll eingeflochten in ungebleichten Bast &#8211; die Urflasche! Um die Flasche herum versammelten sich glückliche Einheimische, die von Fernsehen, BILD und Coca-Cola verschont geblieben waren. Ihre Flasche nannten sie seit Jahrhunderten "Fiasco". Die <a href="http://www.zeit.de/2004/39/W-Psychologie" target="_blank" class="">Flasche und ihr Inhalt</a> galten den Weinpilgern, fortan als Ausdruck unverfälschter Kultur und größter Naturnähe. Glückliche, verarmte Kommunisten, Dauersonnenschein und dieser Rotwein &#8211; das gelobte Land! <entity idref="Italien" entity_type="Location" url_value="orte/italien">Italien</entity> war also entdeckt. </p>
+        <p>Der Rest dieser Geschichte ist Geschichte. Die Toskana-Pioniere luden sich für die Rückfahrt ihre Enten und Käfer bis zum Achsbruch voll und sorgten zu Hause in Deutschland für den beispiellosen Siegeszug des Chianti. Die leeren Bastflaschen ließen sich so hervorragend als stimmungsvolle Kerzenhalter verwenden, dass die Stearin-Industrie eigens dafür die Tropfkerze entwickelte. Um viele Weine ranken sich schräge Mythen. Aber die Rezeption des wichtigsten Weins der <entity idref="Toskana" entity_type="Location" url_value="orte/toskana">Toskana</entity> in Deutschland sucht ihresgleichen. Die Geschichte des Chianti erzählt von der Sehnsucht nach Wärme, nach <em>dolce far niente</em> und einem Leben jenseits vermuffter Konventionen.</p>
+        <p>Seit damals hat sich vieles verändert. Aus dem bäuerlichen Tisch- und Tageswein, bei dem sich niemand viel gedacht hat, wurde ein Exportschlager, der in Massen produziert werden musste und in den 1970er Jahren immer dünner wurde. Das blieb nicht ohne Folgen: Als Erstes flüchteten jene masochistisch veranlagten Weintrinker, die einem Rotwein nur dann trauen, wenn sich Gerbstoff und Säure an der Schmerzgrenze bewegen, da das als untrüglicher Beweis für die Ehrlichkeit des Flascheninhalts gilt. Sie sagten <em>ciao! </em>zum Chianti und <em>bienvenue!</em> zum Vin de Pays aus Frankreichs Süden. Und dann gingen auch noch die hartnäckigen Fans der Italianitá von der Fahne, die den <a href="http://www.zeit.de/lebensart/essen-trinken/2011-03/weinkolumne-soldera" target="_blank" class="">Brunello</a> aus dem Süden der Toskana entdeckten. So verschwanden die Bastflaschen nach und nach aus den Regalen deutscher Weinhändler und der Chianti von den Weinkarten aller besseren <a href="http://www.zeit.de/schlagworte/themen/restaurant/index" class="">Restaurants</a>. </p>
+        <infobox href="http://xml.zeit.de/angebote/studie/info-wein" publication-date="" expires="">
+            <container xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
+                <supertitle>Weinkolumne - Die Ausleser</supertitle>
+                <block>
+                    <title>Der Wein </title>
+                    <text>
+                        <p>
+                            <em>
+                                <em>
+                                <a href="http://www.ruffino.com/index.php/en/">Ruffino</a>: </em>Chianti Superiore </em>
+                                <em>2011 <br/>
+                            </em>
+                            <em>
+                            <em>Ca. 15 Euro</em>
+                        </em>
+                    </p>
+                    <p>Rein äußerlich erinnert dieser toskanische Glücksspender an die gute alte Fiasco-Zeit. Die bauchige Façon der 1-Liter-Flasche mit dem eleganten Schwung lässt Erinnerungen an vergangene Zeiten wach werden. Zu Ruffino gehören mehrere Weingüter in der Toskana, Umbrien und im Friaul mit rund 600 Hektar Rebfläche. Das Haus fertigt seine Chiantis ganz nach dem Geschmack internationaler Rotweinfreunde: saftig, rund, dunkelfarbig und ausgewogen (Ruffino sollte man übrigens nicht mit der Herkunftsbezeichnung Chianti Rùfina verwechseln!). Da steht nichts über, da stört nichts, der Chianti läuft rund und ohne Widerstand über die Zunge. 75 Prozent Sangiovese sorgen für ein gutes Drehmoment, allerdings lässt der Wein ein wenig von der typischen Fruchtsäure und vom kernigen Gerbstoffgerüst dieser Rebsorte vermissen. Dieser Chianti Ruffino lässt sich ohne Probleme auch als Solist wegzischen &#8211; ohne die begleitenden Kohlenhydrate einer Ribollita oder einer Pizzetta di patate con prosciutto.</p>
+                    <p>
+                        <em>
+                            <a href="http://www.lecinciole.it/italiano/azienda.html">Podere "Le Cinciole"</a>: Chianti Classico 2010<br/>
+                            <a href="http://www.superiore.de/Wein/Toskana-Chianti/Le-Cinciole/">Ca. 15 Euro</a>
+                            <br/>
+                        </em>
+                    </p>
+                    <p>Wer die klare Kante sucht, bitte hier entlang: Dieser Rote stammt aus der Werkstatt von Luca Orsini und dem Herzen der Anbauzone Chianti Classico. 90 Prozent Sangiovese-Anteil und zehn Prozent Canaiolo Nero geben Orsinis Wein ausreichend Kontur. Die Reben wachsen auf dem harten Kalkmergel (Galestro genannt), der sich im Untergrund der Höhenlagen rund um das Dorf Panzano befindet. Dort pustet der Wind den Reben kräftig um die Ohren, sorgt für kühle Nächte und damit für eine späte Reifezeit. Der <em>Chianti Classico</em> von Le Cinciole hat nur große, alte Eichenfässer gesehen, kein <a href="http://www.zeit.de/lebensart/essen-trinken/2013-02/weinkolumne-weinfass-barrique-holzaroma">Barrique</a>. Das Resultat: ein transparentes Rubin, reichlich Gerbstoff im Tank, eine markante Säurestruktur und eine vielschichtige Aromatik aus Nadelholz, Veilchen, Laub und Preiselbeeren und natürlich den typisch herben Kakaonoten im Finale. Ein Wein mit Krallen, der kräftigen Gerichten den richtigen Grip bietet.</p>
+                </text>
+            </block>
+            <block>
+                <title>Die Autoren</title>
+                <text>
+                    <image align="left" src="http://xml.zeit.de/lebensart/essen-trinken/2012-03/tesaer-weinkolumne-lange/tesaer-weinkolumne-lange-180x101.jpg" type="jpg" publication-date="" expires="" layout="small">
+                        <bu/>
+                        <copyright>© Bernd Jonkmanns</copyright>
+                    </image>
+                    <p>
+                        <a target="_blank" href="http://www.lange2.de">Fabian und Cornelius Lange</a> sind immer auf der Suche nach ultimativen Weinen. In der Kolumne <a target="_blank" href="http://www.zeit.de/serie/weinkolumne">"Die Ausleser"</a> schreiben sie über Entdeckungen und Begegnungen in aller Welt, singen ebenso inbrünstig ein Loblied auf die Segnungen der Globalisierung wie sie die Qualität eines regionalen Weins aus der Literflasche beschwören. Mehr über die beiden Autoren erfahren Sie <a target="_blank" href="http://www.lange2.de">hier</a>.</p>
+                        </text>
+                    </block>
+                    <block>
+                    <title>Die Weinempfehlungen im Überblick</title>
+                    <text>
+                    <p>
+                        <strong>Diese Weine haben "Die Ausleser" bisher besprochen:</strong>
+                    </p>
+                    <p>
+                        <em>
+                            <a href="http://www.weingut-sauer.com" target="_blank">Weingut Heiner Sauer</a>: Silvaner 2011 in der Literflasche</em>
+                            <br/>
+                        <em>6 Flaschen, 33 Euro</em>
+                        <br/>Die einfachen Dinge sind manchmal besonders kompliziert. Guten Literwein zu finden zum Beispiel &#8211; eine Paradedisziplin für Silvaner, der immerhin auf Platz drei der weißen Sorten Deutschlands rangiert. Im Bioweingut Heiner Sauer in der südlichen Pfalz pendelt er sich genau auf dem Mittelweg ein, als gut gemachter, klassischer Stoff. Und 2011 war ein perfektes Jahr für diese Sorte. Sauers Interpretation in der Literflasche wächst auf Lösslehmböden und ist ein herrlich fettes Teil, cremig, weich und mit sanfter Säure. Der eigentliche Hattrick aber ist, dass Heiner Sauer seinen Biowein in großen, klassischen Holzfässern reifen lässt. Das bekommt dem Wein sehr gut, schleift ihn, feilt ihn, macht ihn rund. Mit feinen Kräuternoten, reifen Apfelnoten und einem satten Mundgefühl streichelt er nur so am Zäpfchen vorbei. Und das mit rund 11 Prozent Alkohol. Sauers Silvaner ist garantiert nichts für Angeber und Weinwichtigtuer, sondern einfach nur für Menschen, die gern Wein trinken. Mit der Betonung auf trinken.</p>
+                            <p>
+                            <em>
+                                <a href="http://www.weingut-sauer.com " target="_blank">Johner Estate</a>: Sauvignon Blanc Gladstone </em>
+                            <em>2011</em>
+                            <br/>
+                            <em> Ca. 5 Euro<br/>
+                        </em>
+                    </p>
+                    <p>Sauvignon Blanc, der in Kurzform einfach nur Sauvignon genannt wird, ist neben Pinot Noir (Spätburgunder) die Rebsorte Neuseelands und als Beitrag der Insel zur modernen Weinwelt nicht mehr wegzudenken. Ein guter, expressiver Sauvignon braucht zwei Lesedurchgänge: früh, um die Frische und Säure zu konservieren, und spät, um die reifen Aromen der Exotik einzufangen. Auf dem <a target="_blank" href="http://johner-estate.com/de">Weingut Johner</a> entsteht so ein opulenter, ausladender, enorm dichter Weißwein, der vor Kraft kaum laufen kann. Dabei gibt die frische Fruchtsäure dem Wein die nötige Abwechslung. Frischer Ziegenkäse, Rote Beete, Le-Puy-Linsen, bestes Olivenöl und Estragon sind die kulinarischen Mitspieler dieser großartigen Rebsorte.</p>
+                    <p>
+                        <a target="_blank" href="http://www.gute-weine.de/italien/piemont/bartolo-mascarello.html">
+                            <em>Bartolo Mascarello</em>
+                        </a>
+                        <em>: Barolo 2005 DOCG<br/>Ca. 65 Euro</em>
+                        <br/>Eine Weinlegende braucht viel Aufmerksamkeit, vor allem wenn es sich, wie in diesem Fall, um einen traditionellen Barolo handelt, der zu einhundert Prozent aus der Rebsorte Nebbiolo hergestellt wird. Die hat eine dünne Schale und somit wenig Farbstoffe, dafür aber eine imposante Menge an Gerbstoffen. Mascarellos 2005er Barolo aus dem letzten Lebensjahr des Kultwinzers lässt sich noch auftreiben. Aber aufgepasst! Einen halben Tag vorher dekantieren ist ein Muss, erst dann entwickeln sich die Aromen und bilden einen Gegenpol zu den enormen Tanninen. Ein Muss ist auch das richtige Essen. In Rotwein geschmorter Rinderbraten, Beinscheiben. Steinpilze oder Polentaschnitten mit geschmortem Radicchio-Gemüse und Olivenöl &#8211; Hauptsache, die Gerbstoffe können so richtig andocken. Der teurere 2007er von Bartolos Tochter Teresa ist wegen des Jahrgangs runder, voller und reifer, braucht aber auch Zeit und das passende Essen.</p>
+                            <p>
+                            <em>
+                                <a target="_blank" href="http://www.tsantali.de">Privatkellerei Tsantali</a>: <a target="_blank" href="http://www.wsag.de/shop/index_mykonos.php">Metochi Chromitsa 2007</a>
+                                </em>
+                                <em>&amp; <a href="http://www.wsag.de/shop/index_mykonos.php" target="_blank">Premium-Cuvée Mount Athos Abaton 2006</a>
+                            </em>
+                            <br/>
+                            <em> Ca. 12,50 Euro bzw. 18 Euro</em>
+                        </p>
+                    <p>Heiliger Bimbam, was für ein Wein! Die Hälfte steuert die alte <a href="http://www.zeit.de/lebensart/essen-trinken/2010-09/weinkolumne-biowein" target="_blank">autochthone Rebsorte</a>  Limnio bei, den Rest teilen sich Cabernet und Merlot &#8211; alle ökologisch  erzeugt. Limnio ist schon in der Antike von Polidefkis, Homer und  Aristoteles erwähnt worden und wächst seit langem rund ums Kloster. Die  Sorte steuert herbe Kraft, Kräuteraromen und fruchtige Säure bei &#8211; das  gibt dem Wein die nötige Statur. Die beiden internationalen Zutaten  liefern wiederum fruchtige Cassis- und Pflaumenaromen. So beschreitet  der Tsantali einen ganz eigenen Weg und zeigt, wie großartig Wein aus  Griechenland sein kann: Herbe Frucht in der Nase, voller Kraft und dem  Duft des Südens. Vital, ungezähmt und mit erdigem Grundton liefert der  Chromitsa reichlich reife Früchte, Pfeffer, Lorbeer. Der Wein bleibt im  Mund richtig schön aktiv und verabschiedet sich ganz langsam mit einem  salzigen Finish.</p>
+                    <p>Der Premium-Cuvée Mount Athos Abaton reift ebenfalls in der  Klosterkellerei. Hier dominieren Cabernet und Merlot, Limnio macht nur  30 Prozent aus. Der 2006er Abaton reift zu hundert Prozent in neuen  Barriques und ist daher weicher und offener als der Metochi Chromitsa.  In der Nase ist Minze spürbar, reife, zum Teil getrocknete Früchte. Im  Mund setzt der Abaton eine Oktave tiefer an, bietet eine schöne reife  Süße im Aroma. Vanille und Holz sind spürbar und ein attraktiver,  geschliffener Gerbstoff. Alles zusammen mündet in einem schokoladigen  Finale.</p>
+                    <p>
+                        <em>
+                            <a href="http://www.weingut-am-stein.de" target="_blank">Weingut am Stein Ludwig Knol</a>l: Würzburger Stein Silvaner trocken 2011 &amp; <em>Würzburger Innere Leiste Scheurebe </em>
+                        <em>2011</em>
+                        <br/>Ab Weingut ca. 9,50 Euro </em>
+                        </p>
+                        <p>
+                        <em>
+                            <a href="http://www.august-kesseler.de" target="_blank">Weingut August Kesseler</a>: Lorcher Kapellenberg Riesling Kabinett trocken 2011<br/>
+                        </em>
+                        <em>Ab Weingut ca. 15 Euro</em>
+                    </p>
+                    <p>
+                        <em>
+                            <a href="http://www.weingut-minges.com" target="_blank">Weingut Theo Minges</a>: </em>
+                        <em>Pfalz Muskateller trocken </em>
+                        <em>2011 <br/>
+                    </em>
+                    <em>Ab Weingut 7,80 Euro<br/>
+                </em>
+            </p>
+            <p>
+                <a href="http://www.kruger-rumpf.com" target="_blank">
+                    <em>Weingut Kruger-Rumpf:</em>
+                    <em>
+                    </em>
+                </a>
+                <em>
+                    </em>    Münsterer Pittersberg Riesling trocken <em>2011<br/>Ab Weingut ca. 12 Eur</em>
+                </p>
+                <p>
+                <em>
+                    <a target="_blank" href="http://www.weingut-matthiasmueller.de/">Weingut Matthias Müller</a>: <em>Bopparder Hamm Ohlenberg Riesling Spätlese trocken</em>
+                </em>
+                <em>
+                <em> 2011 &amp; </em>
+            </em>
+            <em>Bopparder Hamm Mandelstein Riesling Auslese </em>
+            <em>2011</em>
+            <br/>
+            <em> Ab Weingut ca. 10 Euro bzw. 14 Euro  </em>
+        </p>
+        <p>
+            <em>
+                <a target="_blank" href="http://www.weingutdrwagner.de/">Weingut Dr. Heinz Wagner</a>:</em>
+            <em> Saar Riesling trocken</em>
+            <em> 2011</em> &amp;<em> Saarburger Kupp "Alte Reben" Riesling Spätlese trocken</em>
+                <span style="font-style: italic;">
+                </span>
+                <em>2011</em> &amp;<em> Saarburger Rausch "Josef Heinrich" Riesling Spätlese "feinherb"</em>
+                <span style="font-style: italic;">
+                </span>
+            <em>2011</em>
+            <br/>
+            <em>Ab Weingut 8 Euro bzw. 14 Euro<br/>
+        </em>
+    </p>
+    <p>
+        <a target="_blank" href="http://www.brueder-dr-becker.de/">
+            <em>Weingut Brüder Dr. Becker</em>
+        </a>
+        <em>: Ludwigshöher Silvaner (Ortswein) trocken 2011</em>
+        <br/>
+        <em> Ab Weingut ca. 10,50 Euro</em>
+    </p>
+    <p>
+        <em>
+            <a href="http://www.moric.at/" target="_blank">Weingut Moric</a>: <a href="http://www.weinhalle.de/blaufrankisch-moric-reserve-3.html" target="_blank">Blaufränkisch "Reserve" 2009</a>
+            </em>
+            <br/>
+        <em>Ca. 25 Euro</em>
+    </p>
+    <p>Der erste Schluck kommt so normal daher, dass es fast irritiert: kein  Holz, kein Rumtopf, kein Rauch, einfach nur Frucht. Pur, geläutert,  schlicht, schön, groß. So soll es sein, denn diese Frucht rekelt sich  beinahe im Glas, ist saftig, lustvoll und macht Durst auf mehr. Der  Winzer wirft dem Wein keine Holzknüppel zwischen die Beine, denn Morics  Reserve läuft und läuft und läuft. Feine Kirschfrucht, kultivierte,  runde Gerbstoffe, immer offen, elegant und zugänglich mit einer dezenten  Portion Kakao am Ende. Ein moderner, ernsthafter Rotwein. <em>
+        <br/>
+    </em>
+</p>
+<p>
+    <em>
+        <a href="http://www.trapl.com/" target="_blank">Weingut Trapl</a>: <a href="http://www.rotweissrot.de/oesterreich-wein/carnuntum/weingut_trapl/blaufraenkisch_spitzerberg_2009" target="_blank">Blaufränkisch Spitzerberg</a>
+        </em>
+        <a href="http://www.rotweissrot.de/oesterreich-wein/carnuntum/weingut_trapl/blaufraenkisch_spitzerberg_2009" target="_blank">
+        <em> 2009</em>
+    </a>
+    <br/>
+    <em>Ca. 33 Euro</em>
+</p>
+<p>Auch dieser Blaufränker hat vor allem Kirsche an Bord, aber auch  Brombeere. Beides wird nur ganz zurückhaltend vom Holz flankiert, statt  dass es die Frucht mundtot macht. Dafür hat der Spitzerberg eine feine  Frische mit einem Hauch Citrus und eine Idee Minze auf Lager, die den  Wein am Gaumen in angenehme Schwingungen versetzt. Das ist klasse  gemacht, ein Rotwein, der die Zukunft einläutet.</p>
+<p>
+    <em>
+        <a target="_blank" href="http://www.neckenmarkt.at/">Winzerkeller Neckenmarkt</a>: Blaufränkisch Hochberg, Mittelburgenland DAC 2009 </em>
+        <br/>
+    <em>Ca. 8 Euro</em>
+</p>
+<p>Das hier ist eine Entdeckung von der Vievinum &#8211; so was läuft außer  Konkurrenz. Ist er den Juroren zu "einfach"? Zu sehr Blaufränkisch? Wir  wissen es nicht, raten aber trotzdem dazu. So muss Blaufränkisch sein:  Voller Frucht, saftig, rund und voll. Dabei reif und mit fein  geschliffenen Gerbstoffen. Hier haben die Genossen aus dem Burgenland  ganze Arbeit geleistet.</p>
+<p>
+    <em>
+        <a href="http://www.umathum.at/">Weingut Umathum</a>: Zweigelt 2010</em>
+        <br/>
+    <em>Ca. 10 Euro</em>
+</p>
+<p>Herrlich knackiger Bursche, voll und prall im Glas. Eine Frucht zum  draufbeißen, reinbeißen, aussaugen. Saftig pralle Schwarzkirschen,  feinkörnige Gerbstoffe und angenehm pfeffrig. Rundum rund und voll mit  allem was ein perfekter Zweigelt so braucht. Holz zählt jedenfalls nicht  dazu.</p>
+<p>
+    <a target="_blank" href="http://www.atamisque.com/">
+        <em>Bodega Atamisque</em>
+    </a>
+    <em>: </em>
+    <a target="_blank" href="http://www.rindchen.de/?typ=S&amp;seite=weine&amp;volltext=atamisque">
+        <em>Pinot Noir "Catalpa" 2010</em>
+    </a>
+    <em>
+        <br/>Ca. 11 Euro<br/>
+    </em>
+</p>
+<p>
+    <a target="_blank" href="http://www.atamisque.com/">
+        <em>Bodega Atamisque:</em>
+    </a>
+    <em>
+    </em>
+    <a target="_blank" href="http://www.rindchen.de/?typ=S&amp;seite=weine&amp;volltext=atamisque">
+        <em>Malbec "Catalpa" 2010</em>
+    </a>
+    <em>
+        <br/>
+    </em>
+    <em>Ca. 11 Euro</em>
+</p>
+<p>Ohne Malbec wäre Argentinien nicht Argentinien. Die ursprünglich aus  dem Bordeaux stammende Sorte wächst dort auf 24.000 Hektar Rebfläche.  Bei Atamisque entsteht aus den Trauben ein kraftvolles Urgestein, das  nach einem Mund voll reifer Beeren schmeckt, mit prägnanten aber runden  Gerbstoffen. Ideal zum draußen trinken, denn dieser opulente Malbec kann  sich auch gegen ein laues Lüftchen behaupten. Wird zu zwei Dritteln im  Stahltank ausgebaut und stammt von Rebstöcken, die bis zu 80 Jahre alt  sind.</p>
+<p>
+    <a target="_blank" href="http://www.atamisque.com/">
+        <em>Bodega Atamisque:</em>
+    </a>
+    <em>
+    </em>
+    <a target="_blank" href="http://www.rindchen.de/?typ=S&amp;seite=weine&amp;volltext=atamisque">
+        <em>Cabernet Sauvignon "Atamisque" 2008</em>
+    </a>
+    <br/>
+    <em>Ca. 16 Euro</em>
+</p>
+<p>Herrlich knackiger Bursche, voll und prall im Glas. Eine Frucht zum  Draufbeißen, Reinbeißen, Aussaugen. Saftig pralle Schwarzkirschen,  feinkörnige Gerbstoffe und angenehm pfeffrig. Rundum rund und voll mit  allem, was ein perfekter Zweigelt so braucht. Holz zählt jedenfalls  nicht dazu.</p>
+<p>
+    <em>ACDC Sauvignon Blanc: Hells Bells, Marlbourough, New Zealand <br/>ca. 12 Euro</em>
+</p>
+<p>Metallisch-kühler Duft nach Salbei, frisch geschnittenem Gras und  Holunderblüten. Reichlich grüne Paprika klingelt in der Nase. Im Mund  versteckt sich die Frucht, läutet gar nicht laut, sondern klingt eher  leise an. Keine Exotik oder Maracuja, dafür aber eine Spur salzig. Die  Macher der Höllenglocken haben sich für den grünen, vegetabilen Stil des  Sauvignon Blancs, für den die <a href="http://www.zeit.de/lebensart/essen-trinken/2012-04/weinkolumne-sauvignon-blanc-johner" target="_blank">Weine aus Neuseeland</a> berühmt sind, entschieden &#8211; und zeigen kein Fitzelchen Gerbstoffe. Eichenholzfrei schlägt der <em>Hells Bells</em> glockenrein am Gaumen. Kein großer Stoff, aber gute Standardware.</p>
+<p>
+    <em>ACDC Shiraz: Back in Black, Barossa Valley, Australia<br/>ca. 12 Euro<br/>
+</em>
+</p>
+<p>Zwei schwere Jungs, Angus und Malcom Young bedienen bei AC/DC die  Gitarren. Beim Wein der Brüder ist eher Volksmusik angesagt: Im Duft  reife Himbeeren, hochreife Pflaumen, Trockenobst und eine Prise  schwarzer Pfeffer &#8211; alles, was ein Schlager heute so braucht. Im Mund  machen sich dann Nelke, Piment, eine Spur Teerpflaster, Zimt und wieder  vollreife Himbeeren bemerkbar, neben einem Hauch grasiger Noten. Runde  Gerbstoffe ohne Ecken und Kanten oder jegliche Disharmonien machen den <em>Back in Black</em> zu einem <em>Everybody's Darling</em>. Der Florian Silbereisen unter den Shiraz.</p>
+<p>
+<a target="_blank" href="http://www.champagne-bereche-et-fils.com/home_uk/index2.html">Champagne Bérèche et Fils: <em>Reflet d&#8217; Antan</em>
+    </a>
+    <br/>
+    <em>Ca. 69 Euro<br/>
+    </em>
+    </p>
+<p>Feine goldene Farbe, extrem zurückhaltende Perlage. Im Mund sahniges  Mousseux mit appetitlicher Säure, feinem Apfelaroma und einem Anflug von  Anis, frischem Tabak und geröstetem Sesam. Statt frischer Frucht wird  dieser kräftige Champagner durch intensive, anhaltende Kräuternoten,  Malzaromen und einer mineralischen Kreide-Spur über die Zunge gelenkt.  Ein sehr nachhaltiges Geschmackserlebnis, das die Tür in eine neue  Champagner-Dimension eleganter Reife und Intensität aufstößt. Ideal auch  zum Essen: Atlantikfisch mit Noilly-Prat, geräucherter Forelle, Hahn  mit Creme-Frâiche-Sauce oder Pilz-Risottos.</p>
+<p>
+<a href="http://www.champagnebilliot.fr/" target="_blank">Champagne H. Billiot</a>: <em>Cuvée Laetitia</em>
+<br/>
+<em>Ca. 60 Euro</em>
+</p>
+<p>Dunkles Strohgelb, seidiger Auftritt, sehr sahniges Mousseux.  Entwickelt sich ruhig im Mund. Getrocknete Rosenblätter, gebratener  Apfel und Orangenschalen klingen in der Nase an mit einer Spur Safran.  Der Wein hat auch feine Krallen, mit denen er sich am Gaumen bemerkbar  macht und ihn dadurch zum Essen prädestinieren. Langes Finale mit  überraschend lebendigem Nachklang. Ein großer Champagner.</p>
+<p>
+<a target="_blank" href="http://www.bardong.de/?page_id=13">Sektkellerei Bardong: </a>
+<em>
+    <a target="_blank" href="http://www.bardong.de/?page_id=13">Erbacher Honigberg 2007, Riesling Sekt, Rheingau b.A. brut</a>
+    <br/>Ca. 15 Euro<br/>
+    <br/>
+    </em>Frischer Rieslingduft im Glas, mit feiner Perlage. Im Mund zündet  der Honigberg nach fünf Jahren Hefelager eine goldene Brilliantrakete:  Apfel- und reifer Birnenduft machen Druck am Gaumen, der Sekt hat einen  wunderbar nachhaltigen Schaum und verbindet viel saftige Frische und  ausgependelte Reife. So herrlich kann perlender Riesling sein: fordernd,  opulent und elegant.</p>
+    <p>
+    <a target="_blank" href="http://www.vindemio.com/">Domaine Vindemio</a>: <em>Côtes de Ventoux AOC "Regain Rouge", 2011</em>
+    <br/>
+<em>Ca. 8 Euro</em>
+<br/>
+<br/>Das hier ist ein wildes Tier mit weichem Pelz: ungezähmt, ungezügelt und  mit Krallen! Intensive, schokoladige Düfte, Thymianblüten und  ätherische Noten liegen über einem See aus roten Früchten. Mit jedem  Schluck geht es tiefer in unbekannte Regionen, in die das Licht immer  diffuser hineinfällt. Der geschmackliche Raum ist erfüllt von lebendigen  Aromen, die sich wellenartig ausbreiten und voller Intensität  nachklingen. Das wahrhaft Große am <em>Regain</em> (70 Prozent Grenache,  30 Prozent Syrah) ist seine unglaubliche Frische &#8211; trotz des  Alkoholgehalts von 14 Prozent und dank der Tatsache, dass der Wein nie  ein Barrique gesehen hat. Das ist nicht modern und nicht antiquiert,  sondern zukunftsweisend.</p>
+    <p>
+    <em>
+        <a href="http://www.vinizecchini.it/schede/amarone.php" target="_blank">Cantina Zecchini</a>:  Amarone "Valpantena" Valpolicella 2009<br/>Ca. 25 Euro<br/>
+        </em>
+        </p>
+    <p>Der Amarone Valpolicella 2009er "Valpantena" von der Cantina Zecchini  hat moderate 15 Prozent Alkohol und ist noch verschlossen im Duft, gibt  aber im Geschmack Eisen, etwas Blut, Sandelholz, getrocknete  Rosenblätter und Assamtee mit Kandis preis. Der Wein hat mittelkörniges  Tannin, kaum Holz und bleibt dank fruchtiger Säure voller Dynamik und  bleibt im Mund schwebend. Vor allem aber ist er eines: wunderbar frisch!</p>
+    <p>
+    <em>
+        <a href="http://www.vignetivillabella.com/" target="_blank">Vigneti Villabella</a>: Amarone delle Valpolicella Classico 2009<br/>Ca. 20 Euro<br/>
+        </em>
+        </p>
+    <p>Das Weingut Villabella liefert mit seinem 2009er Amarone delle  Valpolicella Classico, der inTausend-Liter-Fässern reift, den Beweis,  dass es auch anders als breit, schwarz und stark geht. Der Wein hat  vergleichsweise moderate 15 Prozent Alkohol, aber genug Kraft und eine  fein ausgependelte Säure. Trockenfrüchte und Unterholzaromen neben  Kakaonoten bringen einen klar auf der fruchtigen Seite verorteten  Amarone &#8211; in der Nase wie im Geschmack.</p>
+    <p>
+    <em>
+        <a href="http://www.torredorti.com/" target="_blank">Cantina Torre d&#8217;Orti</a>: Amarone della Valpolicella 2008<br/>
+        </em>
+        <a href="http://www.bremer-weinkolleg.de" target="_blank">
+        <em>Ca. 28 Euro</em>
+        </a>
+        </p>
+    <p>Ein Paradoxon löst gekonnt die Cantina Torre d&#8217;Orti. Das Weingut  wurde erst im Jahr 2000 gegründet. Doch der 2008er Amarone della  Valpolicella bringt schlappe 17,5 Prozent Alkohol auf die Waage. Seine  unglaublich reife volle Nase liefert reichlich Lack-Aromen und  Trockenfrüchte rund um Rosinen und Pflaumen. Im Mund liefert er ein  opulentes Spiel und bringt reifen Gerbstoff mit. Paradox aber  erstaunlich wahr: Trotz massiven Alkohols ist dieser Amarone ein  belebender Wein.</p>
+    <p>
+    <em>
+        <a href="http://www.terredileone.it/amarone.html" target="_blank">Cantina Terre di Leone</a>: Amarone 2007<br/>Preis auf Anfrage<br/>
+        </em>
+        </p>
+    <p>Dass es auch ganz anders geht, zeigt die Cantina Terre di Leone. Auf  den vulkanischen Böden wachsen die Weine in bis zu 450 Metern Höhe und  profitieren dort von der Kühle der Nacht. Das bringt reichlich  Fruchtaroma und belebende Fruchtsäure. Der 2007er Amarone mit seinen  16,5 Prozent ist ein extrem feiner Wein mit reifen, gut ausgependelten  Gerbstoffen, die beleben statt Sand ins Aromen-Getriebe zu werfen. In  der Nase liefert er Thymianöl und flüchtige Noten. Dabei bleibt dieser  Spitzen-Amarone vielschichtig und dynamisch. Großes Amarone-Kino.</p>
+    <p>Alle Folgen der Weinkolumne finden Sie <a href="http://www.zeit.de/serie/weinkolumne" target="_blank">hier</a>
+    </p>
+    </text>
+    </block>
+    </container>
+    </infobox>
+<p>Doch in den 1980er Jahren zogen die Winzer im Chianti Classico, dem Kerngebiet der Region zwischen <entity idref="Florenz" entity_type="Location" url_value="orte/florenz">Florenz</entity> und Siena, die Notbremse und begannen rigoros auf Qualität zu setzen. Sie verbannten den bis dahin erlaubten Zusatz von Weißwein aus den Produktionsregeln des Konsortiums und schrieben vor, dass ausschließlich rote Trauben für Chianti Classico verwenden werden dürfen. Als sichtbares Zeichen der neuen Qualitätsoffensive klebten sie ihren Chiantis den <a href="http://www.chianticlassico.com/" class="">Gallo Nero</a>, den schwarzen Hahn, als Siegel auf den Flaschenhals. Und um Verwechslungen mit dem dünnen, sauren Bauernwein gänzlich zu vermeiden, entsorgten die Gallo-Nero-Winzer auch noch die vertraute, bauchige, bastumhüllte Fiasco und füllten ihren reformierten Wein stattdessen in schicke Bordeauxflaschen. </p>
+<p>Doch in den 1980er Jahren zogen die Winzer im Chianti Classico, dem Kerngebiet der Region zwischen <entity idref="Florenz" entity_type="Location" url_value="orte/florenz">Florenz</entity> und Siena, die Notbremse und begannen rigoros auf Qualität zu setzen. Sie verbannten den bis dahin erlaubten Zusatz von Weißwein aus den Produktionsregeln des Konsortiums und schrieben vor, dass ausschließlich rote Trauben für Chianti Classico verwenden werden dürfen. Als sichtbares Zeichen der neuen Qualitätsoffensive klebten sie ihren Chiantis den <a href="http://www.chianticlassico.com/" class="">Gallo Nero</a>, den schwarzen Hahn, als Siegel auf den Flaschenhals. Und um Verwechslungen mit dem dünnen, sauren Bauernwein gänzlich zu vermeiden, entsorgten die Gallo-Nero-Winzer auch noch die vertraute, bauchige, bastumhüllte Fiasco und füllten ihren reformierten Wein stattdessen in schicke Bordeauxflaschen. </p>
+<p>Doch in den 1980er Jahren zogen die Winzer im Chianti Classico, dem Kerngebiet der Region zwischen <entity idref="Florenz" entity_type="Location" url_value="orte/florenz">Florenz</entity> und Siena, die Notbremse und begannen rigoros auf Qualität zu setzen. Sie verbannten den bis dahin erlaubten Zusatz von Weißwein aus den Produktionsregeln des Konsortiums und schrieben vor, dass ausschließlich rote Trauben für Chianti Classico verwenden werden dürfen. Als sichtbares Zeichen der neuen Qualitätsoffensive klebten sie ihren Chiantis den <a href="http://www.chianticlassico.com/" class="">Gallo Nero</a>, den schwarzen Hahn, als Siegel auf den Flaschenhals. Und um Verwechslungen mit dem dünnen, sauren Bauernwein gänzlich zu vermeiden, entsorgten die Gallo-Nero-Winzer auch noch die vertraute, bauchige, bastumhüllte Fiasco und füllten ihren reformierten Wein stattdessen in schicke Bordeauxflaschen. </p>
+<p>Doch in den 1980er Jahren zogen die Winzer im Chianti Classico, dem Kerngebiet der Region zwischen <entity idref="Florenz" entity_type="Location" url_value="orte/florenz">Florenz</entity> und Siena, die Notbremse und begannen rigoros auf Qualität zu setzen. Sie verbannten den bis dahin erlaubten Zusatz von Weißwein aus den Produktionsregeln des Konsortiums und schrieben vor, dass ausschließlich rote Trauben für Chianti Classico verwenden werden dürfen. Als sichtbares Zeichen der neuen Qualitätsoffensive klebten sie ihren Chiantis den <a href="http://www.chianticlassico.com/" class="">Gallo Nero</a>, den schwarzen Hahn, als Siegel auf den Flaschenhals. Und um Verwechslungen mit dem dünnen, sauren Bauernwein gänzlich zu vermeiden, entsorgten die Gallo-Nero-Winzer auch noch die vertraute, bauchige, bastumhüllte Fiasco und füllten ihren reformierten Wein stattdessen in schicke Bordeauxflaschen. </p>
+<p>Doch in den 1980er Jahren zogen die Winzer im Chianti Classico, dem Kerngebiet der Region zwischen <entity idref="Florenz" entity_type="Location" url_value="orte/florenz">Florenz</entity> und Siena, die Notbremse und begannen rigoros auf Qualität zu setzen. Sie verbannten den bis dahin erlaubten Zusatz von Weißwein aus den Produktionsregeln des Konsortiums und schrieben vor, dass ausschließlich rote Trauben für Chianti Classico verwenden werden dürfen. Als sichtbares Zeichen der neuen Qualitätsoffensive klebten sie ihren Chiantis den <a href="http://www.chianticlassico.com/" class="">Gallo Nero</a>, den schwarzen Hahn, als Siegel auf den Flaschenhals. Und um Verwechslungen mit dem dünnen, sauren Bauernwein gänzlich zu vermeiden, entsorgten die Gallo-Nero-Winzer auch noch die vertraute, bauchige, bastumhüllte Fiasco und füllten ihren reformierten Wein stattdessen in schicke Bordeauxflaschen. </p>
+</division>
+<division type="page" teaser="Sogar die runde Flasche kommt zurück">
+<p>Was den Inhalt angeht, spielt beim Chianti die Rebsorte Sangiovese die Hauptrolle. Eine wundervolle Traube, die allerdings auch eine zickige Diva sein kann. In manchen Jahren reift sie nur aus, wenn man ihr bis weit in den Oktober hinein Zeit dafür lässt. Mitunter ist der Sangiovese deshalb ein richtig herber Brocken, hart und unnachgiebig, das Gegenteil eines gefälligen Schmeichelweins. Manche Winzer mischen den Sangiovese mit 25 Prozent bekannten Weichmachern wie Merlot, Cabernet Sauvignon oder Syrah, doch rauben diese Transfusionen dem Chianti seine eigentliche Stärke. Mit seiner direkten und kernigen Art passt der Sangiovese perfekt zu den aromatischen Gerichten der bäuerlichen Küche der Toskana, er flankiert das Säuerliche reifer Tomaten und veredelt den Geschmack von Bohnen und Speck. </p>
+</division>
+<division type="page" teaser="Sogar die eckige Flasche kommt zurück">
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+</division>
+<division type="page" teaser="Sogar die eckige Flasche kommt zurück">
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+</division>
+<division type="page" teaser="Sogar die eckige Flasche kommt zurück">
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+</division>
+<division type="page" teaser="Sogar die eckige Flasche kommt zurück">
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+</division>
+<division type="page" teaser="Sogar die eckige Flasche kommt zurück">
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+<p>So geht es Stück für Stück bergauf mit Italiens wichtigstem Wein. So sehr, dass es heute tatsächlich wieder Winzer gibt, die sich trauen, ihren Chianti in die gute alte Fiasco-Flasche zu füllen &#8211; der einst wichtigsten Botschafterin der Region, deren Bast nie etwas anderes war als ein Schutz der empfindlichen Flaschen vor Glasbruch. Um einige Mythen ärmer und durch Enttäuschungen gereift, hat die wundervolle Freundschaft zwischen den Deutschen und dem Chianti ein Comeback wirklich verdient. </p>
+</division>
+</body>
+<teaser>
+<supertitle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+<title>Der Chianti hat eine zweite Chance verdient</title>
+<text>Erst Heilsbringer, dann Massenware: Der Chianti ist tief gefallen. Doch engagierte Winzer retten dem Wein in der Bastflasche die Ehre. </text>
+</teaser>
+</article>

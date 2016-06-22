@@ -5,7 +5,7 @@
     <tag url_value="facebook" uuid="ddd1c7c5-1864-4642-818c-c153a2c9ebe5" score="4" type="Organization">Facebook</tag>
     <tag type="free" url_value="katzen" uuid="c62c0ec4-4710-4c45-a41f-837f390f75a9" ns10:pytype="str">Katzen</tag>
   </rankedTags>
-  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat</attribute>
+  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/article/gesellschaftskritik-grumpy-cat</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:289c6f07-710e-42f3-85ad-398a6d08f927}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>

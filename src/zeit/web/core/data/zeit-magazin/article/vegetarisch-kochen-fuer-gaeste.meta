@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:">
-  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste</attribute>
+  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/article/vegetarisch-kochen-fuer-gaeste</attribute>
   <rankedTags ns="">
     <tag>Kochen</tag>
     <tag>Kochrezept</tag>

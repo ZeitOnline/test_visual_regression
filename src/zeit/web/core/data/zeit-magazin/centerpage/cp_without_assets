@@ -1,0 +1,195 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+  <head>
+    <header_image xsi:nil="true"/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-04-23T08:28:26.649500+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-04-23T08:29:57.161354+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:55b36707-1d57-42e9-8e23-1aded6280e9f}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2009" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <cluster area="feature">
+      <region area="lead">
+        <container cp:type="teaser" module="zmo-square-large" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+            <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
+            <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
+            <title py:pytype="str">Article Image Asset Titel</title>
+            <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
+            <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/does_not_exist/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+              <bu py:pytype="str">Die ist der image sub text </bu>
+              <copyright link="http://foo.de">©foo</copyright>
+            </image>
+            <badges>
+              <badge py:pytype="str">audio</badge>
+              <badge py:pytype="str">gallery</badge>
+              <badge py:pytype="str">infographic</badge>
+              <badge py:pytype="str">map</badge>
+              <badge py:pytype="str">video</badge>
+            </badges>
+          </block>
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+            <badges>
+              <badge py:pytype="str">audio</badge>
+              <badge py:pytype="str">gallery</badge>
+              <badge py:pytype="str">infographic</badge>
+              <badge py:pytype="str">map</badge>
+              <badge py:pytype="str">video</badge>
+            </badges>
+            <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
+            <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
+            <title py:pytype="str">Article Image Asset Titel</title>
+            <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
+            <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/does_not_exist/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+              <bu py:pytype="str">Die ist der image sub text </bu>
+              <copyright link="http://foo.de">©foo</copyright>
+            </image>
+          </block>
+        </container>
+        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-e5fec0f8-772a-42dc-8f8a-ab1559b814f5">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+            <badges>
+              <badge py:pytype="str">audio</badge>
+              <badge py:pytype="str">gallery</badge>
+              <badge py:pytype="str">infographic</badge>
+              <badge py:pytype="str">map</badge>
+              <badge py:pytype="str">video</badge>
+            </badges>
+            <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
+            <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
+            <title py:pytype="str">Article Image Asset Titel</title>
+            <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
+            <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/does_not_exist/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+              <bu py:pytype="str">Die ist der image sub text </bu>
+              <copyright link="http://foo.de">©foo</copyright>
+            </image>
+          </block>
+        </container>
+      </region>
+      <region area="informatives">
+        <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+            <badges>
+              <badge py:pytype="str">audio</badge>
+              <badge py:pytype="str">gallery</badge>
+              <badge py:pytype="str">infographic</badge>
+              <badge py:pytype="str">map</badge>
+              <badge py:pytype="str">video</badge>
+            </badges>
+            <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
+            <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
+            <title py:pytype="str">Article Image Asset Titel</title>
+            <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
+            <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/does_not_exist/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+              <bu py:pytype="str">Die ist der image sub text </bu>
+              <copyright link="http://foo.de">©foo</copyright>
+            </image>
+          </block>
+        </container>
+        <container cp:type="teaser" module="zmo-product-square" hide-dupes="True" visible="True" cp:__name__="id-f97095a8-6424-47b0-ba51-cfb9596a936a">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+            <badges>
+              <badge py:pytype="str">audio</badge>
+              <badge py:pytype="str">gallery</badge>
+              <badge py:pytype="str">infographic</badge>
+              <badge py:pytype="str">map</badge>
+              <badge py:pytype="str">video</badge>
+            </badges>
+            <supertitle py:pytype="str">Article Image Asset Sptzmarke</supertitle>
+            <teaser_supertitle py:pytype="str">Article Image Asset Spitzmarke</teaser_supertitle>
+            <title py:pytype="str">Article Image Asset Titel</title>
+            <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
+            <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/does_not_exist/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+              <bu py:pytype="str">Die ist der image sub text </bu>
+              <copyright link="http://foo.de">©foo</copyright>
+            </image>
+          </block>
+        </container>
+        <container cp:type="teaser" module="zmo-print-cover" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358839389d9e">
+          <block href="http://xml.zeit.de/zeit-magazin/article/02" uniqueId="http://xml.zeit.de/zeit-magazin/article/02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00">
+            <badges>
+              <badge py:pytype="str">audio</badge>
+              <badge py:pytype="str">gallery</badge>
+              <badge py:pytype="str">infographic</badge>
+              <badge py:pytype="str">map</badge>
+              <badge py:pytype="str">video</badge>
+            </badges>
+            <supertitle py:pytype="str">ZEITmagazin</supertitle>
+            <teaser_supertitle py:pytype="str">ZEITmagazin</teaser_supertitle>
+            <title py:pytype="str">Das neue Heft - im Video durchgeblättert</title>
+            <text py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</text>
+            <description py:pytype="str">Dies könnte z.B. lorem ipsum sein. Oder was anderes nicht ganz so langweiliges, zum Katzenbild passen.</description>
+            <byline xsi:nil="true"/>
+            <breadcrumb_title xsi:nil="true"/>
+            <image base-id="http://xml.zeit.de/exampleimages/artikel/02/heft/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+              <bu py:pytype="str">Die ist der image sub text </bu>
+              <copyright link="http://foo.de">©foo</copyright>
+            </image>
+          </block>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="teaser-mosaic"/>
+    <supertitle>ZMO CP</supertitle>
+    <title>ZMO</title>
+    <subtitle>ZMO CP</subtitle>
+  </body>
+  <feed/>
+  <teaser>
+    <title>ZMO</title>
+    <text>ZMO CP</text>
+  </teaser>
+</centerpage>
