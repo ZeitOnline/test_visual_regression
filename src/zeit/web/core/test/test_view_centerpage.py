@@ -157,7 +157,8 @@ def test_ranking_pagination_should_not_find_out_of_scope_page(testserver):
 def test_ranking_pagination_should_omit_default_page_param(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/{:0>2d}'.format(i % 10 + 1)}
+        {'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/{:0>2d}'
+                      .format(i % 10 + 1))}
         for i in range(12)]
     browser = testbrowser('/thema/test?p=2')
     prev = browser.cssselect('head link[rel="prev"]')[0]
@@ -199,7 +200,8 @@ def test_next_page_url_should_be_set_on_page_based_paginated_centerpages(
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'} for i in range(12)]
+        {'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/01'}
+            for i in range(12))]
 
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
@@ -211,7 +213,8 @@ def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'} for i in range(12)]
+        {'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/01'}
+            for i in range(12))]
 
     dummy_request.GET['p'] = '2'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
@@ -220,7 +223,8 @@ def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'} for i in range(22)]
+        {'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/01'}
+            for i in range(22))]
 
     dummy_request.GET['p'] = '3'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')

@@ -9,7 +9,8 @@ import zeit.web.magazin.view_gallery
 
 
 def test_banner_channel_for_article(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/01')
     view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert view.banner_channel == 'zeitmz/modeunddesign/article'
 
@@ -22,7 +23,8 @@ def test_banner_channel_for_gallery(application):
 
 
 def test_banner_channel_for_longform(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/05')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/05')
     view = zeit.web.magazin.view_article.LongformArticle(context, mock.Mock())
     assert view.banner_channel == 'zeitmz/longform'
 

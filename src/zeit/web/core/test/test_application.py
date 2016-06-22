@@ -51,7 +51,8 @@ def test_malformed_view_spec_should_produce_404_page(testserver):
 def test_page_zero_should_redirect_to_article_base(testserver):
     resp = requests.get('%s/zeit-magazin/article/03/seite-0' % testserver.url,
                         allow_redirects=False)
-    assert resp.headers['location'] == '%s/zeit-magazin/article/03' % testserver.url
+    assert(resp.headers['location'] ==
+           '%s/zeit-magazin/article/03' % testserver.url)
     assert resp.status_code == 301
 
 
@@ -77,23 +78,28 @@ def test_single_page_article_should_error_on_all_pages_view(testserver):
 
 
 def test_malformed_paginaton_should_redirect_to_article_base(testserver):
-    resp = requests.get('%s/zeit-magazin/article/03/seite-abc' % testserver.url,
+    resp = requests.get('%s/zeit-magazin/article/03/seite-abc'
+                        % testserver.url,
                         allow_redirects=False)
-    assert resp.headers['location'] == '%s/zeit-magazin/article/03' % testserver.url
+    assert(resp.headers['location'] ==
+           '%s/zeit-magazin/article/03' % testserver.url)
     assert resp.status_code == 301
 
 
 def test_missing_pagination_spec_should_redirect_to_article_base(testserver):
     resp = requests.get('%s/zeit-magazin/article/03/seite-' % testserver.url,
                         allow_redirects=False)
-    assert resp.headers['location'] == '%s/zeit-magazin/article/03' % testserver.url
+    assert(resp.headers['location']
+           == '%s/zeit-magazin/article/03' % testserver.url)
     assert resp.status_code == 301
 
 
 def test_salvageable_pagination_should_redirect_to_article_page(testserver):
-    resp = requests.get('%s/zeit-magazin/article/03/seite-7.html' % testserver.url,
+    resp = requests.get('%s/zeit-magazin/article/03/seite-7.html'
+                        % testserver.url,
                         allow_redirects=False)
-    assert resp.headers['location'] == '%s/zeit-magazin/article/03/seite-7' % testserver.url
+    assert(resp.headers['location']
+           == '%s/zeit-magazin/article/03/seite-7' % testserver.url)
     assert resp.status_code == 301
 
 
@@ -118,7 +124,8 @@ def test_vgwort_pixel_should_be_present(testbrowser):
 
 
 def test_content_should_have_marker_interface(application):
-    content = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/01')
     assert zeit.web.core.interfaces.IInternalUse.providedBy(content)
 
 

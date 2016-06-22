@@ -203,7 +203,8 @@ def test_empty_search_result_should_produce_zero_hit_counter(search_area):
 def test_successful_search_result_should_produce_nonzero_hit_counter(
         search_area):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/0%s' % i}
+    solr.results = [{'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/0%s'
+                                  % i)}
                     for i in range(1, 74)]
     assert search_area.hits == 73
 
@@ -223,7 +224,8 @@ def get_result_dict(unique_id):
 
 def test_successful_search_result_should_produce_valid_resultset(search_area):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/0%s' % i}
+    solr.results = [{'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/0%s'
+                                  % i)}
                     for i in range(1, 9)]
     assert len([a for b in search_area.values() for a in b if b]) == 8
     solr.results = [{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}]

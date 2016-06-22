@@ -74,8 +74,8 @@ def test_socialflow_feed_contains_social_fields(testserver):
     assert res.headers['Content-Type'].startswith('application/rss+xml')
     feed = res.text
     assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
-    assert ('<link>http://www.zeit.de/zeit-magazin/centerpage/article_image_asset</link>'
-            in feed)
+    assert ('<link>http://www.zeit.de/zeit-magazin/'
+            'centerpage/article_image_asset</link>' in feed)
     assert '<content:encoded>Twitter-Text' in feed
     assert '<content:encoded>Facebook-Text' not in feed
 
@@ -118,13 +118,15 @@ def test_socialflow_feed_contains_social_fields(testserver):
 
 def test_instant_article_feed_should_be_rendered(testserver):
     res = requests.get(
-        '{}/zeit-magazin/centerpage/index/rss-instantarticle'.format(testserver.url),
+        '{}/zeit-magazin/centerpage/index/rss-instantarticle'
+        .format(testserver.url),
         headers={'Host': 'newsfeed.zeit.de'})
     parser = lxml.etree.XMLParser(strip_cdata=False)
     xml = lxml.etree.fromstring(res.content, parser)
     source = xml.xpath('./channel/*[local-name()="include"]/@src')[0]
     assert source == ('http://www.zeit.de/'
-                      'instantarticle-item/zeit-magazin/centerpage/article_image_asset')
+                      'instantarticle-item/zeit-magazin/'
+                      'centerpage/article_image_asset')
 
 
 def test_roost_feed_contains_mobile_override_text(testserver):
@@ -136,8 +138,8 @@ def test_roost_feed_contains_mobile_override_text(testserver):
     assert res.headers['Content-Type'].startswith('application/rss+xml')
     feed = res.text
     assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
-    assert ('<link>http://www.zeit.de/zeit-magazin/centerpage/article_image_asset</link>'
-            in feed)
+    assert ('<link>http://www.zeit.de/zeit-magazin/'
+            'centerpage/article_image_asset</link>' in feed)
     assert '<title>Article Image Asset Sptzmarke</title>' in feed
     assert '<content:encoded>Mobile-Text' in feed
 

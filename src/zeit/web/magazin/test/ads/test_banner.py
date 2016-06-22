@@ -9,19 +9,22 @@ import zeit.web.magazin
 
 
 def test_banner_view_should_return_place_if_tile_present(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/02')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert isinstance(article_view.banner(1), zeit.web.core.banner.Place)
 
 
 def test_banner_view_should_return_none_if_tile_is_not_present(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/02')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.banner(999) is None
 
 
 def test_banner_toggles_viewport_zoom(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/02')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/02')
     view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert view.banner_toggles('viewport_zoom') == 'tablet-landscape'
 
@@ -33,7 +36,8 @@ def test_banner_should_fallback_on_not_registered_banner_types(application):
         def type(self):
             return 'moep'
 
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/02')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/02')
     moep_view = Moep(context, mock.MagicMock(return_value=''))
     expected = getattr(
         zeit.web.core.banner.IQD_MOBILE_IDS_SOURCE.ids[context.sub_ressort],

@@ -107,8 +107,10 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.site:templates/inc/teaser/default.tpl')
 
-    teaser = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/centerpage/index')
+    teaser = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/01')
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/centerpage/index')
     teaser.teaserSupertitle = 'teaserSupertitle'
     teaser.teaserTitle = 'teaserTitle'
     teaser.teaserText = 'teaserText'

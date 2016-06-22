@@ -101,7 +101,8 @@ def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
 def test_json_delta_time_from_unique_id_should_return_http_error_on_article(
         testbrowser):
     with pytest.raises(urllib2.HTTPError) as error:
-        testbrowser('/json/delta_time?unique_id=http://xml.zeit.de/zeit-magazin/article/01')
+        testbrowser('/json/delta_time?unique_id='
+                    'http://xml.zeit.de/zeit-magazin/article/01')
     assert error.value.getcode() == 400
 
 
@@ -183,7 +184,8 @@ def test_c1_doc_type_should_be_included_in_cre_client(
 def test_c1_heading_and_kicker_should_be_properly_escaped(
         application, dummy_request):
 
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/04')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/04')
     view = zeit.web.core.view.Content(context, dummy_request)
     assert dict(view.c1_header).get('C1-Track-Heading') == (
         u'Kann Leipzig Hypezig berleben')
@@ -232,14 +234,16 @@ def test_c1_correct_ressort_on_homepage(testbrowser):
 
 
 def test_inline_gallery_should_be_contained_in_body(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     assert isinstance(
         body.values()[-1], zeit.content.article.edit.reference.Gallery)
 
 
 def test_inline_gallery_should_have_images(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     gallery = zeit.web.core.interfaces.IFrontendBlock(body.values()[-1])
     assert all(
@@ -336,10 +340,10 @@ def test_banner_channel_mapping_should_apply_first_rule(mock_ad_view):
 def test_banner_channel_mapping_should_apply_second_rule(mock_ad_view):
     assert mock_ad_view(
         'centerpage', 'angebote', '', serienname='meh').banner_channel == (
-        'adv/angebote/centerpage')
+            'adv/angebote/centerpage')
     assert mock_ad_view(
         'centerpage', 'angebote', '', adv_title='Foo Bar').banner_channel == (
-        'adv/foobar/centerpage')
+            'adv/foobar/centerpage')
     assert mock_ad_view(
         'centerpage', 'angebote', '',
         banner_id='mcs/xx/yy').banner_channel == ('mcs/xx/yy/centerpage')
@@ -349,7 +353,7 @@ def test_banner_channel_mapping_by_path_info(mock_ad_view):
     assert mock_ad_view(
         'centerpage', '', '',
         path_info='/serie/krimizeit-bestenliste').banner_channel == (
-        'literatur/krimi-bestenliste/centerpage')
+            'literatur/krimi-bestenliste/centerpage')
 
 
 def test_banner_channel_mapping_should_apply_third_rule(mock_ad_view):

@@ -18,7 +18,8 @@ def test_inline_gallery_is_there(testbrowser):
 
 
 def test_nonexistent_gallery_is_ignored(testbrowser, workingcopy):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/article/01')
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/01')
     with checked_out(article) as co:
         co.xml.body.division.gallery.set('href', 'http://xml.zeit.de/invalid')
     browser = testbrowser('/zeit-magazin/article/01')
