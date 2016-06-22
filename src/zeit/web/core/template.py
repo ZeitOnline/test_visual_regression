@@ -1,9 +1,7 @@
 # coding: utf8
 import collections
 import datetime
-import itertools
 import logging
-import mimetypes
 import pkg_resources
 import random
 import re
@@ -11,7 +9,6 @@ import time
 import types
 import urllib
 import urlparse
-import pytz
 
 import babel.dates
 import lxml.etree
@@ -550,61 +547,6 @@ def macro(context, macro_name, *args, **kwargs):
 
 
 @zeit.web.register_global
-def get_teaser_template(block_layout,
-                        content_type,
-                        asset,
-                        prefix='zeit.web.magazin:templates/inc/teaser/teaser_',
-                        suffix='.html',
-                        separator='_'):
-    types = (block_layout, content_type, asset)
-    default = ('default',)
-
-    def iterable(t):
-        return isinstance(t, tuple) or isinstance(t, list)
-
-    zipped = (t + default if iterable(t) else (t,) + default for t in types)
-
-    combinations = [t for t in itertools.product(*zipped)]
-    return map(lambda x: '%s%s%s' % (prefix, separator.join(x), suffix),
-               combinations)
-
-
-@zeit.web.register_global
-def get_image_pattern(teaser_layout, orig_image_pattern):
-    # TRASHME: This is solved by legacy variant image configuration
-    layout = zeit.content.cp.layout.TEASERBLOCK_LAYOUTS
-    layout_image = {block.id: [block.image_pattern] for block in
-                    list(layout(None)) if block.image_pattern}
-    try:
-        layout_image['zon-small'].extend(layout_image['leader'])
-        layout_image['zon-parquet-small'].extend(layout_image['leader'])
-        layout_image['zon-parquet-large'].extend(layout_image['leader'])
-        layout_image['zon-fullwidth'].extend(layout_image['leader-fullwidth'])
-        layout_image['zon-classic'].extend(layout_image['leader-fullwidth'])
-        layout_image['zon-large'].extend(layout_image['leader'])
-        layout_image['zon-series'].extend(layout_image['leader'])
-        layout_image['zon-column'].extend(layout_image['leader'])
-        layout_image['zon-square'].extend(layout_image['leader'])
-        layout_image['zon-blog'].extend(layout_image['leader'])
-        layout_image['topic'].extend(layout_image['leader-fullwidth'])
-    except KeyError, e:
-        log.warn("Layouts for '%s' could not be extended: %s not found",
-                 teaser_layout, e)
-
-    return layout_image.get(teaser_layout, [orig_image_pattern])
-
-
-def _existing_image(image_group, patterns, ext):
-    # TRASHME: Only needed by deprecated get_teaser_image function
-    filenames = image_group.keys()
-    for pattern in patterns:
-        for name in filenames:
-            if name.endswith('{}.{}'.format(pattern, ext)):
-                return image_group[name], pattern
-    return None, None
-
-
-@zeit.web.register_global
 def get_column_image(content, variant_id='original'):
     # XXX: Could be transformed to a more generally useful get_author
     try:
@@ -616,62 +558,6 @@ def get_column_image(content, variant_id='original'):
     # need to crop the lower part of the image using CSS, ignoring the ratio.
     return get_image(content=author, variant_id=variant_id, fallback=False,
                      fill_color=None)
-
-
-@zeit.web.register_global
-def get_teaser_image(teaser_block, teaser, unique_id=None):
-    # TRASHME: Deprecated for zci images in favour of get_image
-    import zeit.web.core.centerpage
-
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    default_id = conf.get('default_teaser_images')
-
-    if unique_id:
-        try:
-            asset = zeit.cms.interfaces.ICMSContent(unique_id)
-        except TypeError:
-            return
-    else:
-        asset = zeit.web.core.centerpage.get_image_asset(teaser)
-
-    # If the asset is not an image group, restart with default image.
-    if not zeit.content.image.interfaces.IImageGroup.providedBy(asset):
-        return get_teaser_image(teaser_block, teaser, unique_id=default_id)
-
-    # If imagegroup has no images, return default image
-    if len(asset) == 0:
-        return get_teaser_image(teaser_block, teaser, unique_id=default_id)
-
-    try:
-        image_patterns = get_image_pattern(
-            get_layout(teaser_block), teaser_block.layout.image_pattern)
-    except AttributeError:
-        return
-
-    # We assume all images in a group have the same mimetype.
-    sample_image = u'{}{}'.format(asset.uniqueId, asset.keys()[0])
-    ext = {'image/jpeg': 'jpg', 'image/jpg': 'jpg', 'image/png': 'png'}.get(
-        mimetypes.guess_type(sample_image)[0], 'jpg')
-
-    image, image_pattern = _existing_image(asset, image_patterns, ext)
-    if image is None:
-        image_pattern = teaser_block.layout.image_pattern
-        image, _ = _existing_image(asset, [image_pattern], ext)
-    if expired(image):
-        return None
-
-    if image is None:
-        log.debug('Cannot retrieve teaser image {} for {}'.format(
-            image_pattern, unique_id or asset.uniqueId))
-        # Don't fallback when a unique_id is given explicitly in order to
-        # prevent infinite recursion.
-        if not unique_id:
-            return get_teaser_image(teaser_block, teaser, unique_id=default_id)
-
-    teaser_image = zope.component.getMultiAdapter(
-        (asset, image), zeit.web.core.interfaces.ITeaserImage)
-    teaser_image.image_pattern = image_pattern
-    return teaser_image
 
 
 @zeit.web.register_filter
