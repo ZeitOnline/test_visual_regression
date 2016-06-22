@@ -4,7 +4,6 @@ from mock import Mock
 from zeit.content.video.video import VideoRendition
 import zeit.cms.interfaces
 
-from zeit.web.core.block import HeaderVideo
 from zeit.web.core.block import Video
 
 
@@ -58,20 +57,3 @@ def test_video_source_should_be_highest_rendition_url(application):
     model_block.video.renditions = ()
     video = Video(model_block)
     assert video.highest_rendition is None
-
-
-def test_header_video_should_be_created_if_layout_is_zmo_header(application):
-    model_block = Mock()
-    model_block.layout = 'zmo-xl-header'
-    model_block.video = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/video/3537342483001')
-    h_video = HeaderVideo(model_block)
-    assert type(h_video) == HeaderVideo
-    assert h_video.format == 'zmo-xl-header'
-
-    model_block = Mock()
-    model_block.layout = 'zmo-small-left'
-    model_block.video.uniqueId = 'foo'
-
-    h_video = HeaderVideo(model_block)
-    assert h_video is None

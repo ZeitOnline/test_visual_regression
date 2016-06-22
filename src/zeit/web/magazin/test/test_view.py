@@ -10,11 +10,12 @@ import pyramid.testing
 import pytest
 import requests
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
+import zeit.content.article.edit.interfaces
 import zeit.content.article.edit.reference
 
 import zeit.web.core
-import zeit.web.core.gallery
 import zeit.web.core.view
 import zeit.web.magazin.view_article
 
@@ -108,12 +109,11 @@ def test_linkreach_property_should_fetch_correct_data(application):
     assert article_view.linkreach['total'] == 92
 
 
-def test_header_img_should_be_first_image_of_content_blocks(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/05')
+def test_header_module_should_be_first_image_of_content_blocks(application):
+    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
-    assert article_view.header_img.src == url
+    assert article_view.header_module.src == url
 
 
 def test_article_should_have_author_box(application):
@@ -126,13 +126,6 @@ def test_article_should_have_author_box(application):
         zeit.content.article.edit.reference.Portraitbox))
 
 
-def test_header_img_should_be_none_if_we_have_a_wrong_layout(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.header_img is None
-
-
 def test_header_video_should_be_first_video_of_content_blocks(application):
     vid_url = 'http://xml.zeit.de/zeit-magazin/article/header_video'
     context = zeit.cms.interfaces.ICMSContent(vid_url)
@@ -140,37 +133,33 @@ def test_header_video_should_be_first_video_of_content_blocks(application):
     url = ('http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/'
            '3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights'
            '--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4')
-    assert article_view.header_video.highest_rendition == url
+    assert article_view.header_module.highest_rendition == url
 
 
-def test_header_video_should_be_none_if_we_have_a_wrong_layout(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/01')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.header_video is None
-
-
-def test_header_elem_should_be_img_if_there_is_a_header_img(application):
+def test_header_module_should_be_image_if_there_is_an_image(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert isinstance(article_view.header_elem, (
-        zeit.web.core.block.HeaderImageStandard))
+    assert isinstance(article_view.header_module, zeit.web.core.block.Image)
 
 
 def test_header_elem_should_be_video_if_there_is_a_header_video(application):
     xml = 'http://xml.zeit.de/zeit-magazin/article/header_video'
     context = zeit.cms.interfaces.ICMSContent(xml)
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert isinstance(
-        article_view.header_elem, zeit.web.core.block.HeaderVideo)
+    assert isinstance(article_view.header_module, zeit.web.core.block.Video)
 
 
-def test_header_image_should_be_none_if_adapted_as_regular_image(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/05')
-    body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    assert zeit.web.core.block.Image(body.values()[0]) is None
+def test_header_video_should_be_none_if_we_have_a_wrong_layout(
+        application, workingcopy):
+    id = 'http://xml.zeit.de/zeit-magazin/article/header_video'
+    context = zeit.cms.interfaces.ICMSContent(id)
+    with checked_out(context) as co:
+        body = zeit.content.article.edit.interfaces.IEditableBody(co)
+        body.values()[0].layout = u'large'
+    context = zeit.cms.interfaces.ICMSContent(id)
+    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert article_view.header_module is None
 
 
 def test_image_view_returns_image_data_for_filesystem_connector(testserver):

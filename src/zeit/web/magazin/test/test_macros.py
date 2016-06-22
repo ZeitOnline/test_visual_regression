@@ -222,33 +222,6 @@ def test_image_template_should_designate_correct_layouts(testbrowser):
     assert fullwidth.attrib['data-variant'] == 'wide'
 
 
-def test_macro_headerimage_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    obj = mock.Mock()
-    obj.caption = 'test'
-    obj.copyright = 'test'
-    obj.src = 'test.gif'
-    obj.ratio = 1
-    obj.alt = "test"
-    obj.title = "test"
-
-    lines = tpl.module.headerimage(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    start = ('<div class="scaled-image is-pixelperfect article__head-image">'
-             '<!--[if gt IE 8]><!--><noscript')
-    middle = ('><!--<![endif]-->'
-              '<img alt="test" title="test" class=" figure__media" src="')
-    end = '--></noscript><!--<![endif]--></div>testtest'
-
-    assert output.startswith(start)
-    assert middle in output
-    assert output.endswith(end)
-
-
 def test_image_macro_should_not_autoescape_markup(testbrowser):
     browser = testbrowser('/feature/feature_longform')
     text = browser.cssselect('.figure-stamp--right .figure__text')[0]

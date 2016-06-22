@@ -18,7 +18,6 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-04-24T11:35:17.319612+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-04-24T11:36:17.274790+00:00</attribute>
     <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="expires">2016-04-24T04:00:00+00:00</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="flv_url">http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201504/2409/18140073001_4193657875001_4193594095001.mp4</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/brightcove" name="id">4193594095001</attribute>

@@ -1,7 +1,20 @@
 Change log for zeit.web
 =======================
 
-2.88 (unreleased)
+2.88.2 (unreleased)
+-------------------
+
+- Nothing changed yet.
+
+
+2.88.1 (2016-06-22)
+-------------------
+
+- HOTFIX: Display article image again for `text-only` ZMO header
+  (which should probably be called `image-at-bottom` instead)
+
+
+2.88 (2016-06-21)
 -----------------
 
 - ZON-3108: Return correct ressort for CeleraOne
@@ -9,6 +22,18 @@ Change log for zeit.web
 - ZON-2927: Split Image.layout into display_mode and variant_name
 
 - ZON-2256: Track comment actions
+
+- ZON-2751: Style column teaser in buzzboard
+
+- ZON-2345: Do not show expired videos
+
+- ZON-3088: Restructure article header module handling
+
+- BUG-432: Set webtrekk pagenumber for paginated centerpages
+
+- OPS-267: Move normalize.css inline into CSS
+
+- OPS-285: Refactor overlays
 
 - MAINT: Replace compass with libsass and autoprefixer
 

@@ -19,6 +19,7 @@ import pytest
 def test_ipages_contains_blocks(application):
     xml = StringIO("""\
 <article>
+  <head/>
   <body>
     <division type="page">
       <p>foo bar</p>
@@ -624,8 +625,8 @@ def test_nextread_should_fallback_to_default_layout(application):
 
 
 def test_article_with_images_should_render_image_container(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/03')
-    assert browser.cssselect('div.article__body > figure.figure-stamp')
+    browser = testbrowser('/artikel/03')
+    assert browser.cssselect('div.article__page figure.figure-stamp')
 
 
 def test_article_without_images_should_not_render_image_container(testbrowser):

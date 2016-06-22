@@ -163,9 +163,10 @@ def pages_of_article(context):
     page = Page(first_division)
     pages.append(page)
     blocks = body.values()
-    # delete article image. it resides in its own property 'main_image_block'
+
+    header = zeit.content.article.edit.interfaces.IHeaderArea(context)
     try:
-        if zeit.content.article.edit.interfaces.IImage.providedBy(blocks[0]):
+        if blocks[0] == header.module:
             del blocks[0]
     except IndexError:
         pass

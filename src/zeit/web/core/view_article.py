@@ -10,9 +10,6 @@ import zope.component
 
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
-import zeit.content.author.interfaces
-import zeit.magazin.interfaces
-
 
 from zeit.web.site.view_feed import (
     CONTENT_MAKER, ELEMENT_MAKER,
@@ -22,7 +19,6 @@ import zeit.web.core.article
 import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.view
-import zeit.web.magazin.view
 
 
 log = logging.getLogger(__name__)
@@ -42,12 +38,6 @@ class Article(zeit.web.core.view.Content):
         # throw 404 for 'komplettansicht' if there's just one article page
         if self.is_all_pages_view and len(self.pages) == 1:
             raise pyramid.httpexceptions.HTTPNotFound()
-
-    @zeit.web.reify
-    def main_image_block(self):
-        img = zeit.web.core.interfaces.IFrontendBlock(
-            self.context.main_image_block, None)
-        return img
 
     @zeit.web.reify
     def template(self):
@@ -152,17 +142,6 @@ class Article(zeit.web.core.view.Content):
         return self.source_url
 
     @zeit.web.reify
-    def first_body_obj(self):
-        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        return body.values().pop(0) if len(body.values()) > 0 else None
-
-    def _create_obj(self, _cls, obj):
-        try:
-            return _cls(obj)
-        except OSError:
-            log.debug('Object does not exist.')
-
-    @zeit.web.reify
     def has_cardstack(self):
         return (self.context.xml.xpath('/article/body//cardstack') or
                 self.context.xml.xpath('/article/head/header/cardstack'))
@@ -174,20 +153,10 @@ class Article(zeit.web.core.view.Content):
         return zeit.web.core.utils.update_get_params(url, **params)
 
     @zeit.web.reify
-    def header_img(self):
-        obj = self.first_body_obj
-        if zeit.content.article.edit.interfaces.IImage.providedBy(obj):
-            return zeit.web.core.block.HeaderImageStandard(obj)
-
-    @zeit.web.reify
-    def header_video(self):
-        obj = self.first_body_obj
-        if zeit.content.article.edit.interfaces.IVideo.providedBy(obj):
-            return self._create_obj(zeit.web.core.block.HeaderVideo, obj)
-
-    @zeit.web.reify
-    def header_elem(self):
-        return self.header_video or self.header_img
+    def header_module(self):
+        return zeit.web.core.interfaces.IFrontendBlock(
+            zeit.content.article.edit.interfaces.IHeaderArea(
+                self.context).module, None)
 
     @zeit.web.reify
     def resource_url(self):
@@ -318,13 +287,15 @@ class Article(zeit.web.core.view.Content):
             self.breadcrumbs_by_title(breadcrumbs)
         return breadcrumbs
 
+    WEBTREKK_ASSETS = (
+        'cardstack', 'inlinegallery', 'liveblog', 'quiz', 'raw', 'video')
+
     @zeit.web.reify
     def webtrekk_assets(self):
         assets = []
-        embed = getattr(self, 'embed_header', None)
 
-        if embed:
-            block_type = zeit.web.core.template.block_type(embed)
+        block_type = zeit.web.core.template.block_type(self.header_module)
+        if block_type in self.WEBTREKK_ASSETS:
             assets.append('{}.header/seite-1'.format(block_type))
 
         p = 0
@@ -333,8 +304,7 @@ class Article(zeit.web.core.view.Content):
                 block_type = zeit.web.core.template.block_type(block)
                 if block_type == 'paragraph':
                     p += 1
-                if block_type in ['cardstack', 'inlinegallery', 'liveblog',
-                                  'quiz', 'video']:
+                if block_type in self.WEBTREKK_ASSETS:
                     assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
         return assets
 
@@ -352,7 +322,7 @@ class AcceleratedMobilePageArticle(Article):
 
         webtrekk['customParameter'].update({
             'cp12': 'mobile.site',  # Seitenversion Endgerät
-            'cp13': 'mobile',  # Breakpoint
+            'cp13': 'amp',  # Breakpoint
             'cp25': 'amp'  # Plattform
         })
 

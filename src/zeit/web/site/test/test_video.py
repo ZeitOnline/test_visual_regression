@@ -225,3 +225,12 @@ def test_video_should_not_break_on_missing_still_image(
         testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.content.video.video.Video, 'video_still', None)
     testbrowser('/zeit-online/video/3537342483001')
+
+
+def test_expired_video_should_trigger_redirect(testserver):
+    resp = requests.get(
+        '%s/zeit-online/video/3537342483002' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 301
+    assert (resp.headers['location'] == (
+            '%s/video/index' % testserver.url))

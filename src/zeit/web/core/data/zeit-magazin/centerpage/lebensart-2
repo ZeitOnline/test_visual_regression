@@ -39,7 +39,7 @@
       &lt;tuple&gt;
         &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
         &lt;global name="Interface" module="zope.interface"/&gt;
-        &lt;global name="ICP2009" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
         &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
