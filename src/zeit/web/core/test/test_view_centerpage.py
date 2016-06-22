@@ -215,9 +215,8 @@ def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
         application, dummy_request):
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
-        {'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/01'}
-            for i in range(12))]
+    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                    for i in range(12)])
 
     dummy_request.GET['p'] = '2'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
@@ -225,9 +224,8 @@ def test_prev_page_url_should_be_set_on_page_based_paginated_centerpages(
     assert view.prev_page_url == 'http://example.com'
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
-        {'uniqueId': ('http://xml.zeit.de/zeit-magazin/article/01'}
-            for i in range(22))]
+    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                    for i in range(22)])
 
     dummy_request.GET['p'] = '3'
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')

@@ -89,8 +89,8 @@ def test_malformed_paginaton_should_redirect_to_article_base(testserver):
 def test_missing_pagination_spec_should_redirect_to_article_base(testserver):
     resp = requests.get('%s/zeit-magazin/article/03/seite-' % testserver.url,
                         allow_redirects=False)
-    assert(resp.headers['location']
-           == '%s/zeit-magazin/article/03' % testserver.url)
+    assert(resp.headers['location'] == '%s/zeit-magazin'
+           '/article/03' % testserver.url)
     assert resp.status_code == 301
 
 
@@ -98,8 +98,8 @@ def test_salvageable_pagination_should_redirect_to_article_page(testserver):
     resp = requests.get('%s/zeit-magazin/article/03/seite-7.html'
                         % testserver.url,
                         allow_redirects=False)
-    assert(resp.headers['location']
-           == '%s/zeit-magazin/article/03/seite-7' % testserver.url)
+    assert(resp.headers['location'] == '%s/zeit-magazin/'
+           'article/03/seite-7' % testserver.url)
     assert resp.status_code == 301
 
 

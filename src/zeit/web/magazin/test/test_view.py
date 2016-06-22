@@ -110,7 +110,8 @@ def test_linkreach_property_should_fetch_correct_data(application):
 
 
 def test_header_module_should_be_first_image_of_content_blocks(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/05')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
     assert article_view.header_module.src == url
@@ -523,8 +524,8 @@ def test_pagination_next_page_url_is_working(application):
     view.request.traversed = (u'zeit-magazin/article', u'03')
     view.request.route_url.return_value = '/'
 
-    assert(view.pagination['next_page_url']
-           == '/zeit-magazin/article/03/seite-2')
+    assert(view.pagination['next_page_url'] == '/zeit-magazin/'
+           'article/03/seite-2')
 
 
 def test_pagination_next_page_url_on_last_page_is_none(application):

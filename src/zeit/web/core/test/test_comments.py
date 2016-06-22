@@ -50,8 +50,8 @@ def test_comment_count_should_return_expected_json_structure_for_cp_id(
     assert 'comment_count' in browser.json
     cc = browser.json['comment_count']
     assert cc[NS + 'zeit-online/cp-content/article-01'] == '103 Kommentare'
-    assert(cc[NS + 'zeit-magazin/centerpage/article_image_asset']
-           == '125 Kommentare')
+    assert(cc[NS + 'zeit-magazin/'
+           'centerpage/article_image_asset'] == '125 Kommentare')
     assert cc[NS + 'zeit-online/cp-content/article-02'] == '291 Kommentare'
 
 
@@ -64,8 +64,8 @@ def test_comment_count_should_return_expected_json_structure_for_article_id(
         <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id='
-                          + NS + 'zeit-magazin/article/01')
+    browser = testbrowser('/json/comment_count'
+                          '?unique_id=' + NS + 'zeit-magazin/article/01')
 
     assert 'comment_count' in browser.json
     cc = browser.json['comment_count']
@@ -308,8 +308,8 @@ def test_dict_with_article_paths_and_comment_counts_should_be_created(
 
     assert 'comment_count' in browser.json
     cc = browser.json['comment_count']
-    assert(cc[NS + 'zeit-magazin/centerpage/article_image_asset']
-           == '125 Kommentare')
+    assert(cc[NS + 'zeit-magazin/'
+           'centerpage/article_image_asset'] == '125 Kommentare')
 
 
 def test_rewrite_comments_url_should_rewrite_to_static_host(application):
@@ -881,14 +881,13 @@ def test_post_comment_should_have_correct_premoderation_states(
 
 def test_user_comment_should_have_expected_structure(application):
     xml_str = """
-        <item>
-            <cid>1</cid>
-            <title>[empty]</title>
-            <description>&lt;p&gt;Ich praezisiere.&lt;/p&gt;</description>
-            <pubDate>2015-11-17T10:39:50+00:00</pubDate>
-            <cms_uniqueId>http://www.zeit.de/zeit-magazin/article/01
-            </cms_uniqueId>
-        </item>"""
+<item>
+    <cid>1</cid>
+    <title>[empty]</title>
+    <description>&lt;p&gt;Ich praezisiere.&lt;/p&gt;</description>
+    <pubDate>2015-11-17T10:39:50+00:00</pubDate>
+    <cms_uniqueId>http://www.zeit.de/zeit-magazin/article/01</cms_uniqueId>
+</item>"""
 
     xml = lxml.etree.fromstring(xml_str)
     comment = zeit.web.core.comments.UserComment(xml)
