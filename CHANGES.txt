@@ -4,7 +4,8 @@ Change log for zeit.web
 2.89 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Display article image again for `text-only` ZMO header
+  (which should probably be called `image-at-bottom` instead)
 
 
 2.88 (2016-06-21)
