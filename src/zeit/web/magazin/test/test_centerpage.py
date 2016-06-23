@@ -3,6 +3,7 @@ import re
 
 import mock
 import pytest
+import pyramid.threadlocal
 
 import zeit.cms.interfaces
 
