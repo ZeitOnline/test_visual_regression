@@ -41,9 +41,21 @@ class Centerpage(
         zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
     """Main view class for ZEIT ONLINE centerpages."""
 
+    _buzzboard_images = {}
+
     @zeit.web.reify
     def ressort(self):
         return 'homepage' if self.is_hp else super(Centerpage, self).ressort
+
+    def buzzboard_images(self, image=None):
+        # Stores images of buzzboards to avoid duplicate images #ZON-3147
+
+        # The list we return shall not include the current image but still be
+        # added to the registered images.
+        registered_images = self._buzzboard_images.copy()
+        if image is not None and image not in self._buzzboard_images.keys():
+            self._buzzboard_images.update({image: True})
+        return registered_images
 
 
 @pyramid.view.view_config(
