@@ -86,6 +86,12 @@ def test_buzzboard_renders(testbrowser):
     assert len(images) == 4
 
 
+def test_buzzboard_should_avoid_same_teaser_image_twice(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    area = browser.cssselect('.cp-area--buzzboard')[0]
+    assert len(area.cssselect('.teaser-buzzboard__media')) == 3
+
+
 def test_tile7_is_rendered_on_correct_position(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     tile7_on_first_position = browser.cssselect(
