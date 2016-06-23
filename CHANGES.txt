@@ -4,6 +4,8 @@ Change log for zeit.web
 2.88.2 (unreleased)
 -------------------
 
+- HOTFIX: Remove duplicate article image from liveblog header
+
 - ZON-3111: Add link to digital subscription into user nav
 
 - MAINT: Drop orphaned image retrieval functions
