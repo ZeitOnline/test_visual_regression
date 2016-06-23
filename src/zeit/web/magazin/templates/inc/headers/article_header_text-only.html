@@ -1,6 +1,6 @@
 {% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context%}
 
-<div class="article__head-wrap">
+<div class="article__head-wrap article__head-wrap--text-only">
     <header class="article__head article__head--text-only">
         <h1 itemprop="headline">
             {{ blocks.supertitle() }}
@@ -19,4 +19,7 @@
             </span>
         </span>
     </header>
+    {% if view.page_nr == 1 and view.header_module %}
+        {{ blocks[view.header_module|block_type](view.header_module) }}
+    {% endif %}
 </div>

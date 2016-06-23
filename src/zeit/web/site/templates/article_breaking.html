@@ -5,9 +5,3 @@
 		<strong class="breaking-news-banner__label">Eilmeldung</strong> <span class="breaking-news-banner__time">{{ view.date_first_released | format_date('time_only') }}</span>
 	</div>
 {% endblock breaking_news %}
-
-{% block article_heading %}
-	<div class="breaking-news-heading">
-		{{ super() }}
-	</div>
-{% endblock article_heading %}

@@ -76,6 +76,15 @@ class IPages(zope.interface.common.sequence.IReadSequence):
     """
 
 
+class IExpiration(zope.interface.Interface):
+
+    seconds = zope.interface.Attribute(
+        'The number of seconds relative to now when the content object '
+        ' will no longer be published')
+
+    is_expired = zope.interface.Attribute('boolean')
+
+
 class IPage(zope.interface.Interface):
     """A page offers list-access to the blocks (zeit.edit.interfaces.IBlock)
     contained in it.

@@ -1,10 +1,82 @@
 {# XXX: Please, only set variables in jinja where absolutely needed. #}
 {% set wt_kennung = view.webtrekk.identifier %}
 
-<amp-pixel src="{{ "%s?p=%s,%s,0,0,0,0,0,0,0,0" | format(
-    "https://zeit01.webtrekk.net/981949533494636/wt.pl",
-    settings('webtrekk_version', 3).replace('.', ''),
-    wt_kennung ~ ('|' | urlencode) ~ view.content_url.replace('http://', '')
-    ) }}&amp;
-    {{- view.webtrekk.contentGroup | urlencode -}}&amp;
-    {{- view.webtrekk.customParameter | urlencode -}}"></amp-pixel>
+<amp-analytics type="webtrekk">
+    <script type="application/json">
+        {
+            "transport": {
+                "beacon": false,
+                "xhrpost": false,
+                "image": true
+            },
+            "vars": {
+                "trackDomain": "zeit01.webtrekk.net",
+                "trackId": "981949533494636",
+                "contentId": "{{ wt_kennung + '|' + view.content_url.replace('http://', '') }}"
+            },
+            "requests": {
+                "trackURL": "https://${trackDomain}/${trackId}/wt",
+                "parameterPrefix": "?p={{ settings('webtrekk_version', 3).replace('.', '') }},${contentId},1,${screenWidth}x${screenHeight},${screenColorDepth},0,${timestamp},${documentReferrer},0,0&tz=${timezone}&eid=${clientId(amp-wt3-eid)}&la=${browserLanguage}",
+                "parameterSuffix": "&pu=${canonicalUrl}",
+                "pageParameter": "
+                {%- for key in view.webtrekk.customParameter -%}
+                    &{{ key }}=${{ '{' ~ key ~ '}' }}
+                {%- endfor %}",
+                "pageCategories": "{%- for key in view.webtrekk.contentGroup -%}
+                    &{{ key }}=${{ '{' ~ key ~ '}' }}
+                {%- endfor %}",
+                "actionParameter": "&ck1=${actionParameter1}&ck2=${actionParameter2}&ck3=${actionParameter3}&ck4=${actionParameter4}&ck5=${actionParameter5}&ck10=${actionParameter10}",
+                "pageview": "${trackURL}${parameterPrefix}${pageParameter}${pageCategories}${parameterSuffix}",
+                "event": "${trackURL}${parameterPrefix}&ct=${actionName}${actionParameter}${parameterSuffix}"
+            },
+            "triggers": {
+                "trackPageview": {
+                    "on": "visible",
+                    "request": "pageview",
+                    "vars": {
+                        {% for key in view.webtrekk.contentGroup -%}
+                            "{{ key }}": "{{ view.webtrekk.contentGroup[key] }}",
+                        {% endfor -%}
+                        {% for key in view.webtrekk.customParameter -%}
+                            "{{ key }}": "{{ view.webtrekk.customParameter[key] }}"
+                            {%- if not loop.last %},{% endif %}
+
+                        {% endfor -%}
+                    }
+                },
+                "trackLogoClick": {
+                    "on": "click",
+                    "selector": "#publisher a",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.topnav.1.1..logo|www.zeit.de/index"
+                    }
+                },
+                "trackImprimtClick": {
+                    "on": "click",
+                    "selector": ".footer__navigation li:nth-child(1) a",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.footernav.2.1..impressum|www.zeit.de/impressum/index"
+                    }
+                },
+                "trackPrivacyClick": {
+                    "on": "click",
+                    "selector": ".footer__navigation li:nth-child(2) a",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.footernav.2.2..datenschutz|www.zeit.de/help/datenschutz"
+                    }
+                },
+                "trackTopClick": {
+                    "on": "click",
+                    "selector": ".footer__button",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.footernav.4.1..pfeil"
+                    }
+                }
+            }
+        }
+    </script>
+</amp-analytics>

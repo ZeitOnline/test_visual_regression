@@ -11,7 +11,6 @@ import zeit.content.gallery.gallery
 import zeit.cms.syndication.feed
 
 from zeit.web.core.template import default_image_url
-from zeit.web.core.template import get_teaser_template
 import zeit.web.core.centerpage
 import zeit.web.magazin.view_centerpage
 
@@ -49,41 +48,6 @@ def test_centerpage_should_have_page_meta_robots_information(testbrowser):
     browser = testbrowser('/zeit-magazin/index')
     meta_robots = browser.document.xpath('//meta[@name="robots"]/@content')
     assert 'index,follow,noodp,noydir,noarchive' in meta_robots
-
-
-def test_get_teaser_template_should_produce_correct_combinations():
-    templates_path = 'zeit.web.magazin:templates/inc/teaser/'
-    should = [
-        templates_path + 'teaser_lead_article_video.html',
-        templates_path + 'teaser_lead_article_default.html',
-        templates_path + 'teaser_lead_default_video.html',
-        templates_path + 'teaser_lead_default_default.html',
-        templates_path + 'teaser_default_article_video.html',
-        templates_path + 'teaser_default_article_default.html',
-        templates_path + 'teaser_default_default_video.html',
-        templates_path + 'teaser_default_default_default.html']
-    result = get_teaser_template('lead', 'article', 'video')
-    assert result == should
-    should = [
-        templates_path + 'teaser_lead_article_video.html',
-        templates_path + 'teaser_lead_article_gallery.html',
-        templates_path + 'teaser_lead_article_imagegroup.html',
-        templates_path + 'teaser_lead_article_default.html',
-        templates_path + 'teaser_lead_default_video.html',
-        templates_path + 'teaser_lead_default_gallery.html',
-        templates_path + 'teaser_lead_default_imagegroup.html',
-        templates_path + 'teaser_lead_default_default.html',
-        templates_path + 'teaser_default_article_video.html',
-        templates_path + 'teaser_default_article_gallery.html',
-        templates_path + 'teaser_default_article_imagegroup.html',
-        templates_path + 'teaser_default_article_default.html',
-        templates_path + 'teaser_default_default_video.html',
-        templates_path + 'teaser_default_default_gallery.html',
-        templates_path + 'teaser_default_default_imagegroup.html',
-        templates_path + 'teaser_default_default_default.html']
-    assets = ('video', 'gallery', 'imagegroup')
-    result = get_teaser_template('lead', 'article', assets)
-    assert result == should
 
 
 def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(application):
@@ -306,7 +270,7 @@ def test_wrapped_features_are_triggered(testbrowser):
 
 
 def test_cp_does_not_render_image_if_expired(testbrowser):
-    with mock.patch('zeit.web.core.image.is_image_expired') as expired:
-        expired.return_value = True
+    with mock.patch(
+            'zeit.web.core.image.ImageExpiration.is_expired', new=True):
         browser = testbrowser('/centerpage/lebensart')
     assert not browser.cssselect('.cp_leader__asset--dark')

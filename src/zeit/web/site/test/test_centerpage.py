@@ -32,7 +32,7 @@ def test_buzz_mostread_should_output_correct_titles(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     kicker = browser.cssselect('.buzz-box--mostread .teaser-buzz__kicker')
     titles = browser.cssselect('.buzz-box--mostread .teaser-buzz__title')
-    assert kicker and u'Asylbewerber' in kicker[1].text
+    assert kicker and u'Flüchtlinge' in kicker[1].text
     assert titles and u'Fluchthilfe ganz privat' in titles[2].text
 
 
@@ -90,6 +90,13 @@ def test_buzzboard_should_avoid_same_teaser_image_twice(testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
     area = browser.cssselect('.cp-area--buzzboard')[0]
     assert len(area.cssselect('.teaser-buzzboard__media')) == 3
+
+
+def test_buzzboard_renders_column_teaser(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    assert len(browser.cssselect('.teaser-buzzboard__media--column')) == 1
+    assert len(browser.cssselect(
+        '.teaser-buzzboard__media-container--column')) == 1
 
 
 def test_tile7_is_rendered_on_correct_position(testbrowser):
@@ -255,7 +262,7 @@ def test_hp_hides_popover_per_default(selenium_driver, testserver):
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
-    box = driver.find_elements_by_css_selector(".lightbox")[0]
+    box = driver.find_elements_by_css_selector(".overlay__dialog")[0]
 
     assert not wrap.is_displayed()
     assert not bg.is_displayed()
@@ -270,7 +277,7 @@ def test_hp_shows_popover(selenium_driver, testserver):
 
     wrap = driver.find_elements_by_css_selector("#overlay-wrapper")[0]
     bg = driver.find_elements_by_css_selector(".overlay")[0]
-    box = driver.find_elements_by_css_selector(".lightbox")[0]
+    box = driver.find_elements_by_css_selector(".overlay__dialog")[0]
 
     assert wrap.is_displayed()
     assert bg.is_displayed()

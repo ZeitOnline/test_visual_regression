@@ -1,12 +1,12 @@
 <script id="premoderation-template" type="text/template">
 	<div id="premoderation-box">
 		<div class="overlay"></div>
-		<div class="lightbox" role="dialog" aria-labelledby="refreshbox-title" aria-describedby="refreshbox-text">
-			<div class="lightbox-content">
-				<span class="lightbox-content__headline">
+		<div class="overlay__dialog" role="dialog" aria-labelledby="refreshbox-title" aria-describedby="refreshbox-text">
+			<div class="overlay__content" role="document">
+				<span class="overlay__headline">
 					Ihr Kommentar wird bald freigeschaltet!
 				</span>
-				<span class="lightbox-content__text">
+				<span class="overlay__text">
 					<span class="show-set-user">Ihr Benutzername
 					<strong>{0}</strong> wurde angelegt.<br></span>
 					Die ersten Kommentare neuer Benutzer prüfen wir vorübergehend, bevor wir sie
@@ -16,7 +16,7 @@
 					sich bitte an <a href="mailto:community@zeit.de">community@zeit.de</a>.
 					Vielen Dank für Ihre Geduld.
 				</span>
-				<button type="button" class="lightbox-button">
+				<button type="button" class="overlay__button">
 					OK
 				</button>
 			</div>

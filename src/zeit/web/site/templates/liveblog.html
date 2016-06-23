@@ -4,27 +4,5 @@
 	{%- include "zeit.web.site:templates/inc/liveblog/status.tpl" -%}
 {% endblock %}
 
-{% block article_heading %}
-	<div class="article__item">
-		<div class="article-heading article-heading--liveblog">
-			<div class="article-heading__image">
-				{%- include "zeit.web.site:templates/inc/liveblog/header-image.tpl" -%}
-			</div>
-			<h1 class="article-heading__headline" itemprop="headline">
-				<span class="article-heading__kicker">
-					{{- view.supertitle -}}
-				</span>
-				{%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
-				<span class="article-heading__title">
-					{{- view.title -}}
-				</span>
-			</h1>
-		</div>
-	</div>
-{% endblock article_heading %}
-
-{% block article_main_image %}
-{% endblock article_main_image %}
-
 {% block print %}
 {% endblock %}

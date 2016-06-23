@@ -10,8 +10,7 @@
 		{%- if section.label %} {{ class }}__item--has-label{% endif %}" data-id="{{ id if id else section.item_id }}"
 		{%- if section | length %} data-feature="dropdown"{% endif %}
 		{%- if section.label %} data-label="{{ section.label }}"{% endif %}>
-		<a class="{{ class }}__link{% if id in (view.ressort, view.sub_ressort) %} {{ class }}__link--current{% endif %}{%-
-        if toggles('campus_new_label') and section_id == 'campus' %} {{ class }}__link--new-campus-labeled{% endif %}"
+		<a class="{{ class }}__link{% if id in (view.ressort, view.sub_ressort) %} {{ class }}__link--current{% endif %}"
 			href="{{ section.href | create_url }}"
 			data-id="{{ section.item_id }}"
 			{%- if site_navigation_element %} itemprop="url"{% endif %}>

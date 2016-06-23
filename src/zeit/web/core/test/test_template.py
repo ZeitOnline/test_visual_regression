@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 import datetime
-import itertools
 import os
 import sys
 import time
 
-import dogpile.cache.region
 import gocept.httpserverlayer.static
 import jinja2
 import lxml.etree
@@ -15,7 +13,6 @@ import mock
 import pyramid.threadlocal
 import pytest
 import venusian
-import webob.multidict
 import zope.component
 
 import zeit.cms.interfaces
@@ -70,90 +67,6 @@ def test_no_url_configured_yields_error_message():
     assert 'load_template_from_dav_url' in source
 
 
-def test_get_teaser_image(testserver):
-    teaser_block = mock.MagicMock()
-    teaser_block.layout.image_pattern = 'zmo-large'
-    teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
-    )
-    image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert isinstance(image, zeit.web.core.image.TeaserImage), (
-        'Article with video asset should produce a teaser image.')
-    assert 'katzencontent-zmo-large.jpg' in image.src
-
-    teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de'
-        '/zeit-magazin/test-cp-legacy/kochen-wuerzen-veganer-kuchen'
-    )
-
-    image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert isinstance(image, zeit.web.core.image.TeaserImage), (
-        'Article with image asset should produce a teaser image.')
-    assert 'frau-isst-suppe-2-zmo-large.jpg' in image.src
-
-
-def test_get_teaser_image_should_set_image_pattern(testserver):
-    teaser_block = mock.MagicMock()
-    teaser_block.layout.image_pattern = 'zmo-large'
-    teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
-    )
-    image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert image.image_pattern == 'zmo-large'
-
-
-def test_get_teaser_image_should_utilize_unique_id(testserver):
-    teaser_block = mock.MagicMock()
-    teaser_block.layout.image_pattern = 'zmo-large'
-    teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
-    )
-    unique_id = 'http://xml.zeit.de/centerpage/katzencontent/'
-    image = zeit.web.core.template.get_teaser_image(
-        teaser_block, teaser, unique_id=unique_id)
-    assert image.uniqueId == (
-        'http://xml.zeit.de/centerpage/'
-        'katzencontent/katzencontent-zmo-large.jpg')
-
-
-def test_get_teaser_image_should_catch_fictitious_unique_id(testserver):
-    teaser_block = mock.MagicMock()
-    teaser_block.layout.image_pattern = 'zmo-large'
-    teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
-    )
-    unique_id = 'http://xml.zeit.de/moep/moepmoep/moep'
-    image = zeit.web.core.template.get_teaser_image(
-        teaser_block, teaser, unique_id=unique_id)
-    assert image is None
-
-
-def test_get_teaser_image_should_utilize_fallback_image(testserver):
-    teaser_block = mock.MagicMock()
-    teaser_block.layout.image_pattern = 'zmo-large'
-    teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/artikel/artikel-ohne-assets'
-    )
-    image = zeit.web.core.template.get_teaser_image(
-        teaser_block, teaser)
-    assert image.uniqueId == (
-        'http://xml.zeit.de/zeit-magazin/'
-        'default/teaser_image/teaser_image-zmo-large.jpg')
-
-
-def test_get_teaser_image_should_render_fallback_for_broken_image(testserver):
-    teaser_block = mock.MagicMock()
-    teaser_block.layout.image_pattern = 'zmo-large'
-    teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/article_with_broken_image_asset'
-    )
-    image = zeit.web.core.template.get_teaser_image(
-        teaser_block, teaser)
-    assert image.uniqueId == (
-        'http://xml.zeit.de/zeit-magazin/'
-        'default/teaser_image/teaser_image-zmo-large.jpg')
-
-
 def test_jinja_env_registrator_registers_only_after_scanning(testserver):
     jinja = mock.Mock()
     jinja.foo = {}
@@ -170,23 +83,6 @@ def test_jinja_env_registrator_registers_only_after_scanning(testserver):
 
     assert do_foo() == 42
     assert 'do_foo' in jinja.foo
-
-
-def test_get_teaser_image_should_determine_mimetype_autonomously(testserver):
-    teaser_block = mock.MagicMock()
-    teaser_block.layout.image_pattern = 'zmo-card-flip-flip'
-    teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/card-flip-flip'
-    )
-    image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert image.uniqueId.split('.')[-1] == 'png'
-
-    teaser_block.layout.image_pattern = 'zmo-card-picture'
-    teaser = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/test-cp-legacy/card-picture'
-    )
-    image = zeit.web.core.template.get_teaser_image(teaser_block, teaser)
-    assert image.uniqueId.split('.')[-1] == 'jpg'
 
 
 def test_filter_strftime_works_as_expected():
@@ -426,19 +322,6 @@ def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
     assert layout == 'zmo-square-large'
 
 
-def test_function_get_image_pattern_is_working_as_expected(application):
-    # Existing formats
-    teaser = zeit.web.core.template.get_image_pattern('zon-large', 'default')
-    assert teaser == ['zon-large', '540x304']
-    teaser = zeit.web.core.template.get_image_pattern('zon-small', 'default')
-    assert teaser == ['zon-thumbnail', '540x304']
-
-    # Non existing format, returns default
-    teaser = zeit.web.core.template.get_image_pattern(
-        'zon-large-none', 'default')
-    assert teaser == ['default']
-
-
 def test_visual_profiler_should_not_interfere_with_rendering_if_disabled(
         testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
@@ -660,21 +543,6 @@ def test_remove_get_params_should_remove_get_params():
     url = zeit.web.core.template.remove_get_params(url, 'batz')
 
     assert url == "http://example.org/foo/baa?foo=ba"
-
-
-@pytest.mark.parametrize('patterns', itertools.permutations(
-                         ['540x304', '368x220', '148x84']))
-def test_existing_image_should_preserve_pattern_order(
-        patterns, application, monkeypatch):
-    group = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/')
-    monkeypatch.setattr(
-        group, 'keys',
-        lambda: [u'schoppenstube-540x304.jpg', u'schoppenstube-148x84.jpg'])
-    image, pattern = zeit.web.core.template._existing_image(
-        group, patterns, 'jpg')
-    expected_pattern = (lambda x: x.remove('368x220') or x)(list(patterns))[0]
-    assert pattern == expected_pattern
 
 
 def test_join_if_exists_should_should_filter_none():

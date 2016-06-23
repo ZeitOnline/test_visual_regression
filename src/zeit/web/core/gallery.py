@@ -27,7 +27,7 @@ class GalleryImage(zeit.web.core.image.BaseImage):
 
     def __init__(self, item):
         self.layout = item.layout or 'large'
-        self.image_pattern = 'zon-large'
+        self.image_pattern = 'original'
         self.title = item.title
         self.text = item.text
 
