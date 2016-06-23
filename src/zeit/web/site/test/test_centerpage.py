@@ -82,8 +82,6 @@ def test_buzzboard_renders(testbrowser):
     assert len(area) == 1
     board = area[0].cssselect('.buzzboard__table')
     assert len(board) == 1
-    images = board[0].cssselect('.teaser-buzzboard__media')
-    assert len(images) == 4
 
 
 def test_buzzboard_should_avoid_same_teaser_image_twice(testbrowser):
