@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 import re
 
+from zope.component import getMultiAdapter
 import mock
 import pytest
 import pyramid.threadlocal
 
 import zeit.cms.interfaces
 
+from zeit.web.core.template import default_image_url
 import zeit.web.core.utils
 import zeit.web.core.template
 

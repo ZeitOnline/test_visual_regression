@@ -48,7 +48,7 @@ def test_custom_predicate_should_only_match_website_content(application):
 def test_custom_predicate_should_only_match_zmo_content(application):
     pviews = pyramid.scripts.pviews.PViewsCommand([])
     registry = application.zeit_app.config.registry
-    request = pyramid.request.Request.blank('/zeit-online/zeitonline')
+    request = pyramid.request.Request.blank('/zeit-magazin/centerpage/index')
     request.registry = registry
     views = pviews._find_view(request).views
 
