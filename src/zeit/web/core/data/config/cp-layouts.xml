@@ -73,13 +73,13 @@
     <layout
         id="zon-large"
         title="Großer Teaser"
-        image_pattern="zon-large"
+        image_pattern="wide"
         areas="duo major ranking parquet zco-parquet"
         />
     <layout
         id="zon-small"
         title="Kleiner Teaser"
-        image_pattern="zon-thumbnail"
+        image_pattern="wide"
         areas="duo major minor ranking parquet spektrum zett zmo-parquet zco-parquet author-favourite-content author-articles author-list"
         default="major minor parquet zmo-parquet zco-parquet ranking spektrum zett author-favourite-content author-articles author-list"
         available="zeit.cms.section.interfaces.IZONContent"
@@ -87,7 +87,7 @@
     <layout
         id="zon-square"
         title="Grafischer Teaser"
-        image_pattern="zon-square"
+        image_pattern="square"
         areas="duo minor"
         default="duo"
         />
@@ -101,60 +101,60 @@
     <layout
         id="zon-shop"
         title="ZEIT Shop Produkt Teaser"
-        image_pattern="zon-thumbnail"
+        image_pattern="wide"
         areas="shop"
         default="shop"
         />
     <layout
         id="zon-printkiosk"
         title="ZEIT Printbanderole Produkt Teaser"
-        image_pattern="zon-thumbnail"
+        image_pattern="wide"
         areas="printkiosk"
         default="printkiosk"
         />
     <layout
         id="zon-inhouse"
         title="Verlagsangebot"
-        image_pattern="zon-thumbnail"
+        image_pattern="wide"
         areas="solo duo major minor ranking parquet"
         />
     <layout
         id="zon-ad"
         title="Anzeige"
-        image_pattern="zon-thumbnail"
+        image_pattern="wide"
         areas="solo duo major minor ranking parquet"
         />
     <layout
         id="zon-snapshot"
         title="Galerieteaser Momentaufnahme"
-        image_pattern="zon-large"
+        image_pattern="wide"
         areas="solo"
         />
     <!-- formally known as zon-fullwidth-onimage/zon-fullwidth -->
     <layout
         id="zon-fullwidth"
         title="Vollbreiter Aufmacher Text auf Bild"
-        image_pattern="zon-fullwidth"
+        image_pattern="cinema"
         areas="solo major"
         default="solo"
         />
     <layout
         id="zon-classic"
         title="Vollbreiter Aufmacher klassisch"
-        image_pattern="zon-fullwidth"
+        image_pattern="cinema"
         areas="solo"
         />
      <layout
         id="zon-parquet-large"
         title="Rebrush 2014: Parkett – großer Teaser"
-        image_pattern="zon-large"
+        image_pattern="wide"
         image_positions="true"
         areas="parquet"
         />
     <layout
         id="zon-parquet-small"
         title="Rebrush 2014: Parkett – kleiner Teaser"
-        image_pattern="zon-thumbnail"
+        image_pattern="wide"
         image_positions="true"
         areas="parquet"
         />
@@ -169,7 +169,7 @@
     <layout
         id="zon-column"
         title="Kolumnenteaser"
-        image_pattern="zon-thumbnail"
+        image_pattern="wide"
         image_positions="true"
         areas="solo major minor ranking parquet"
         />
@@ -177,7 +177,7 @@
     <layout
         id="zon-blog"
         title="Blogteaser"
-        image_pattern="zon-thumbnail"
+        image_pattern="wide"
         image_positions="true"
         areas="solo major minor ranking parquet"
         />
@@ -185,7 +185,7 @@
     <layout
         id="zon-series"
         title="Serienteaser"
-        image_pattern="zon-thumbnail"
+        image_pattern="wide"
         image_positions="true"
         areas="solo major minor ranking parquet"
         />
@@ -200,13 +200,13 @@
     <layout
         id="zon-milestone"
         title="Milestone"
-        image_pattern="zon-large"
+        image_pattern="wide"
         areas="storystream"
         type="storystream"/>
     <layout
         id="zon-feature"
         title="Grafischer Teaser"
-        image_pattern="zon-large"
+        image_pattern="wide"
         areas="storystream"
         type="storystream"/>
     <!-- Shared teaser formats -->

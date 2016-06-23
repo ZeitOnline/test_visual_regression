@@ -447,41 +447,6 @@ def test_centerpage_should_have_page_meta_robots_information(testbrowser):
     assert 'index,follow,noodp,noydir,noarchive' in meta_robots
 
 
-def test_get_teaser_template_should_produce_correct_combinations():
-    templates_path = 'zeit.web.magazin:templates/inc/teaser/'
-    should = [
-        templates_path + 'teaser_lead_article_video.html',
-        templates_path + 'teaser_lead_article_default.html',
-        templates_path + 'teaser_lead_default_video.html',
-        templates_path + 'teaser_lead_default_default.html',
-        templates_path + 'teaser_default_article_video.html',
-        templates_path + 'teaser_default_article_default.html',
-        templates_path + 'teaser_default_default_video.html',
-        templates_path + 'teaser_default_default_default.html']
-    result = get_teaser_template('lead', 'article', 'video')
-    assert result == should
-    should = [
-        templates_path + 'teaser_lead_article_video.html',
-        templates_path + 'teaser_lead_article_gallery.html',
-        templates_path + 'teaser_lead_article_imagegroup.html',
-        templates_path + 'teaser_lead_article_default.html',
-        templates_path + 'teaser_lead_default_video.html',
-        templates_path + 'teaser_lead_default_gallery.html',
-        templates_path + 'teaser_lead_default_imagegroup.html',
-        templates_path + 'teaser_lead_default_default.html',
-        templates_path + 'teaser_default_article_video.html',
-        templates_path + 'teaser_default_article_gallery.html',
-        templates_path + 'teaser_default_article_imagegroup.html',
-        templates_path + 'teaser_default_article_default.html',
-        templates_path + 'teaser_default_default_video.html',
-        templates_path + 'teaser_default_default_gallery.html',
-        templates_path + 'teaser_default_default_imagegroup.html',
-        templates_path + 'teaser_default_default_default.html']
-    assets = ('video', 'gallery', 'imagegroup')
-    result = get_teaser_template('lead', 'article', assets)
-    assert result == should
-
-
 def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(application):
     article = ('http://xml.zeit.de/zeit-magazin/'
                'centerpage/article_gallery_asset')

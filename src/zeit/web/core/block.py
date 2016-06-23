@@ -658,7 +658,7 @@ class Nextread(zeit.web.core.utils.nslist):
 @grokcore.component.adapter(zeit.magazin.interfaces.IZMOContent)
 class ZMONextread(Nextread):
 
-    image_pattern = 'zmo-nextread'
+    image_pattern = 'super'
 
     def __init__(self, context):
         nxr = zeit.magazin.interfaces.INextRead(context, None)
@@ -670,7 +670,7 @@ class ZMONextread(Nextread):
 @grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
 class ZONNextread(Nextread):
 
-    image_pattern = '940x400'
+    image_pattern = 'cinema'
 
     def __init__(self, context):
         rel = zeit.cms.related.interfaces.IRelatedContent(context, None)
@@ -683,7 +683,7 @@ class ZONNextread(Nextread):
     zeit.cms.interfaces.ICMSContent, name="advertisement")
 class AdvertisementNextread(Nextread):
 
-    image_pattern = '940x400'
+    image_pattern = 'cinema'
     layout_id = 'advertisement'
 
     def __init__(self, context):

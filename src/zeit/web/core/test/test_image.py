@@ -95,7 +95,7 @@ def test_brightcove_images_should_set_cache_headers(testserver):
 
 def test_native_images_should_set_cache_headers(testserver):
     resp = requests.get(
-        '{}/zeit-online/cp-content/ig-1/ig-1-zon-fullwidth.jpg'.format(
+        '{}/zeit-online/cp-content/ig-1/back.jpg'.format(
             testserver.url))
     settings = zope.component.queryUtility(zeit.web.core.interfaces.ISettings)
     assert resp.headers.get('Cache-Control') == 'max-age={}'.format(
