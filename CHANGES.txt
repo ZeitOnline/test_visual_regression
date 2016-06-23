@@ -4,7 +4,9 @@ Change log for zeit.web
 2.88.2 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- MAINT: Drop orphaned image retrieval functions
+
+- MAINT: Use current variant ids in several places
 
 
 2.88.1 (2016-06-22)
