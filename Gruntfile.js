@@ -42,6 +42,9 @@ module.exports = function(grunt) {
         ]
     });
 
+    // PostCSS normalize charset
+    var postcssNormalizeCharset = require('postcss-normalize-charset');
+
     // configuration
     grunt.initConfig({
 
@@ -144,7 +147,7 @@ module.exports = function(grunt) {
         postcss: {
             dist: {
                 options: {
-                    processors: [autoprefixer]
+                    processors: [autoprefixer, postcssNormalizeCharset]
                 },
                 src: [
                     '<%= project.codeDir %>css/**/*.css',
@@ -154,7 +157,7 @@ module.exports = function(grunt) {
             },
             'old-ie': {
                 options: {
-                    processors: [autoprefixerOldIe]
+                    processors: [autoprefixerOldIe, postcssNormalizeCharset]
                 },
                 src: [
                     '<%= project.codeDir %>css/**/all-old-ie.css',
