@@ -160,7 +160,7 @@ def test_image_should_use_variant_given_on_layout(application):
     model_block.xml = lxml.etree.fromstring('<image/>')
     model_block.references.target = image
     image = zeit.web.core.block.Image(model_block)
-    assert 'original' == image.image.__name__
+    assert 'original' == image.image.variant
 
 
 def test_image_should_be_none_if_expired():
