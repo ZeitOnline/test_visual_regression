@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - FIX: Fix footer styles
 
+- FIX: Fix CSS charset
+
 - MAINT: Adapt printbox styles
 
 
