@@ -42,7 +42,9 @@ module.exports = function(grunt) {
         ]
     });
 
-    // PostCSS normalize charset
+    // PostCSS normalize charset. RubySass and Libsass fail at preserving
+    // '@charset "UTF-8"' at the beginning of CSS files, so we need to
+    // add it later. https://github.com/ZeitOnline/zeit.web/pull/1870
     var postcssNormalizeCharset = require('postcss-normalize-charset');
 
     // configuration
