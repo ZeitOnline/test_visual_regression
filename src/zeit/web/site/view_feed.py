@@ -121,7 +121,7 @@ class Newsfeed(Base):
         root = E.rss(version='2.0')
         channel = E.channel(
             E.title(self.pagetitle),
-            E.link(self.request.route_url('home')),
+            E.link('http://www.zeit.de%s' % self.request.path),
             E.description(self.pagedescription),
             E.language('de-de'),
             E.copyright(
@@ -138,7 +138,7 @@ class Newsfeed(Base):
                 E.url(('http://images.zeit.de/bilder/elemente_01_'
                        '06/logos/homepage_top.gif')),
                 E.title(self.pagetitle),
-                E.link(self.request.route_url('home'))
+                E.link('http://www.zeit.de%s' % self.request.path)
             )
         )
         root.append(channel)

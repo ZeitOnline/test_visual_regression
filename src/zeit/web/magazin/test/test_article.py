@@ -146,6 +146,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '14: "friedbert"' in webtrekk_config
     assert '15: ""' in webtrekk_config
     assert '25: "original"' in webtrekk_config
+    assert '26: "article.column"' in webtrekk_config
 
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
@@ -159,7 +160,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
             't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
-            'cp15=&cp25=original&cp26=article&cp27='.format(
+            'cp15=&cp25=original&cp26=article.column&cp27='.format(
                 testserver.url.replace('http://', ''))) in source
 
 
@@ -189,7 +190,7 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
             't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
-            'cp15=&cp25=original&cp26=article&cp27='.format(
+            'cp15=&cp25=original&cp26=article.column&cp27='.format(
                 testserver.url.replace('http://', ''))) in source
 
 

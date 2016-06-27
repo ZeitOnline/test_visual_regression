@@ -272,3 +272,18 @@ def test_dynamic_centerpage_contains_webtrekk_pagenumber(
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/thema/test')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
     assert view.webtrekk['customParameter'].get('cp3') == '2/3'
+
+
+def test_advertorial_cp_contains_correct_webtrekk_param(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/advertorial-index')
+    view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp26'] == 'centerpage.advertorial'
+
+
+def test_materialized_serie_cp_contains_correct_webtrekk_param(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/serie/70-jahre-zeit')
+    view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
+    assert view.webtrekk['customParameter'][
+        'cp26'] == 'centerpage.ins_serienseite'
