@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.89 (unreleased)
+2.89 (2016-06-27)
 -----------------
 
 - HOTFIX: Remove duplicate article image from column header
