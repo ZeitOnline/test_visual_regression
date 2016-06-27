@@ -4,7 +4,11 @@ Change log for zeit.web
 2.89 (unreleased)
 -----------------
 
+- ZON-2724: Define custom parameters for different page types (Webtrekk)
+
 - FIX: Fix footer styles
+
+- FIX: Fix CSS charset
 
 - MAINT: Adapt printbox styles
 

@@ -88,8 +88,8 @@ def _paragraphs_by_length(paragraphs, sufficient_length=10):
     previous_length = 0
     filtered_paragraphs = []
     for p in paragraphs:
-        if len(p)+previous_length <= sufficient_length:
-            previous_length = len(p)+previous_length
+        if len(p) + previous_length <= sufficient_length:
+            previous_length = len(p) + previous_length
         else:
             filtered_paragraphs.append(p)
             previous_length = 0
@@ -305,8 +305,22 @@ RESSORTFOLDER_SOURCE = RessortFolderSource()
 
 @grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
 @grokcore.component.implementer(zeit.web.core.interfaces.IDetailedContentType)
-def content_type(context):
+def cms_content_type(context):
     typ = zeit.cms.interfaces.ITypeDeclaration(context, None)
     if typ is None:
         return 'unknown'
     return typ.type_identifier
+
+
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(zeit.web.core.interfaces.IDetailedContentType)
+def content_type(context):
+    typ = cms_content_type(context)
+    subtyp = 'article'
+    if zeit.web.core.view.is_advertorial(context, None):
+        subtyp = 'advertorial'
+    elif getattr(context, 'serie', None):
+        subtyp = "serie"
+        if context.serie.column:
+            subtyp = "column"
+    return '{}.{}'.format(typ, subtyp)
