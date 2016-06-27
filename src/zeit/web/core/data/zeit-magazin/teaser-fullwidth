@@ -108,7 +108,7 @@
             <description py:pytype="str">Es leben die Skispringenden Sportredakteure!</description>
             <byline xsi:nil="true"/>
             <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text</bu>
               <copyright link="http://foo.de">©foo</copyright>
             </image>
@@ -141,7 +141,7 @@
             <description py:pytype="str">Es leben die Skispringenden Sportredakteure!</description>
             <byline xsi:nil="true"/>
             <breadcrumb_title xsi:nil="true"/>
-            <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+            <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
               <bu py:pytype="str">Die ist der image sub text</bu>
               <copyright link="http://foo.de">©foo</copyright>
             </image>

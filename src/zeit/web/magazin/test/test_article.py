@@ -39,7 +39,7 @@ def test_ipages_contains_blocks(application):
 
 
 def test_article_has_valid_twitter_meta_tags(testbrowser):
-    browser = testbrowser('/artikel/01')
+    browser = testbrowser('/zeit-magazin/article/01')
     assert (
         '<meta name="twitter:card" content="summary_large_image">'
         in browser.contents)
@@ -57,7 +57,7 @@ def test_article_has_valid_twitter_meta_tags(testbrowser):
 
 
 def test_article_has_valid_facebook_meta_tags(testbrowser):
-    browser = testbrowser('/artikel/01')
+    browser = testbrowser('/zeit-magazin/article/01')
     select = browser.cssselect
     assert '<meta property="og:site_name" '\
         'content="ZEITmagazin">' in browser.contents
@@ -80,7 +80,7 @@ def test_article_has_valid_facebook_meta_tags(testbrowser):
 
 @pytest.mark.xfail(reason='tracking scripts & pixels may timeout')
 def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
-    selenium_driver.get('%s/artikel/05' % testserver.url)
+    selenium_driver.get('%s/zeit-magazin/article/05' % testserver.url)
 
     def locate_by_selector(xp):
         return WebDriverWait(selenium_driver, 10).until(
@@ -109,7 +109,7 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
 
 
 def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
-    browser = httpbrowser(testserver.url + '/artikel/03')
+    browser = httpbrowser(testserver.url + '/zeit-magazin/article/03')
     source = browser.cssselect(
         'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
     script = browser.cssselect(
@@ -151,7 +151,8 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
     # noscript string
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
-            '{}/artikel/03,0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&'
+            '{}/zeit-magazin/article/03,0,0,0,0,0,0,0,0&'
+            'cg1=redaktion&cg2=article&'
             'cg3=lebensart&cg4=zede&cg5=essen-trinken&cg6=weinkolumne&cg7=03&'
             'cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
             'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&cp3=1/7'
@@ -164,7 +165,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
 
 
 def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
-    browser = httpbrowser(testserver.url + '/artikel/03/seite-2')
+    browser = httpbrowser(testserver.url + '/zeit-magazin/article/03/seite-2')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
@@ -180,7 +181,8 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
     # noscript
     assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
-            '{}/artikel/03,0,0,0,0,0,0,0,0&cg1=redaktion&cg2=article&'
+            '{}/zeit-magazin/article/03,0,0,0,0,0,0,0,0&'
+            'cg1=redaktion&cg2=article&'
             'cg3=lebensart&cg4=zede&cg5=essen-trinken&cg6=weinkolumne&'
             'cg7=seite-2&cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
             'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&cp3=2/7'
@@ -246,7 +248,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
 
 
 def test_webtrekk_series_tag_is_set_corectly(testserver, httpbrowser):
-    browser = httpbrowser(testserver.url + '/artikel/06')
+    browser = httpbrowser(testserver.url + '/zeit-magazin/article/06')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
@@ -255,11 +257,13 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, httpbrowser):
 
     host = testserver.url.replace('http://', '')
     assert ('var Z_WT_KENNUNG = "redaktion.zeit-magazin..toedlichekeime'
-            '.article.zei|{}/artikel/06";'.format(host)) in webtrekk_config
+            '.article.zei|{}/zeit-magazin/article/06";'
+            .format(host)) in webtrekk_config
     assert u'6: "tödlichekeime",' in webtrekk_config
 
     assert ('redaktion.zeit-magazin..toedlichekeime.article.zei%7C'
-            '{}/artikel/06,0,0,0,0,0,0,0,0'.format(host)) in source
+            '{}/zeit-magazin/article/06,0,0,0,0,0,0,0,0'
+            .format(host)) in source
 
 
 def test_webtrekk_has_session_parameter(testbrowser):
@@ -278,7 +282,7 @@ def test_webtrekk_noscript_contains_user_info(testserver, httpbrowser):
             'mail': 'test@example.org',
             'name': 'jrandom',
         }
-        browser = httpbrowser(testserver.url + '/artikel/03',
+        browser = httpbrowser(testserver.url + '/zeit-magazin/article/03',
                               cookies={'my_sso_cookie': 'just_be_present'})
         webtrekk = browser.cssselect(
             'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
@@ -296,44 +300,44 @@ def test_ivw_tracking_for_mobile_and_desktop_and_wrapper(
 
     # ipad landscape
     driver.set_window_size(1024, 768)
-    driver.get('%s/artikel/03' % testserver.url)
+    driver.get('%s/zeit-magazin/article/03' % testserver.url)
     content = driver.execute_script("return iam_data.st")
     assert content == "zeitonl"
 
     # Wrapper-Apps must always be the »MEW-Angebotskennung« mobzeit
     # we simulate this via the get-param 'appcontent' instead of user-agent
-    driver.get('%s/artikel/02?app-content=true' % testserver.url)
+    driver.get('%s/zeit-magazin/article/02?app-content=true' % testserver.url)
     content = driver.execute_script("return iam_data.st")
     assert content == "mobzeit"
 
     # ipad portrait and smaller
     driver.set_window_size(766, 1024)
-    driver.get('%s/artikel/01' % testserver.url)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
     content = driver.execute_script("return iam_data.st")
     assert content == "mobzeit"
 
 
 def test_article_has_correct_page_title(testbrowser):
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     assert '<title>Kolumne Die Ausleser:'\
         ' Der Chianti hat eine'\
         ' zweite Chance verdient' in browser.contents
 
 
 def test_article_without_supertitle_has_correct_page_title(testbrowser):
-    browser = testbrowser('/artikel/03a')
+    browser = testbrowser('/zeit-magazin/article/03a')
     assert '<title>'\
         'Der Chianti hat eine'\
         ' zweite Chance verdient | ZEITmagazin' in browser.contents
 
 
 def test_article_should_have_correct_seo_title(testbrowser):
-    browser = testbrowser('/artikel/04')
+    browser = testbrowser('/zeit-magazin/article/04')
     assert '<title>SEO title | ZEITmagazin</title>' in browser.contents
 
 
 def test_article_has_correct_page_meta_description(testbrowser):
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     assert '<meta name="description" '\
         'content="Erst Heilsbringer, dann Massenware:'\
         ' Der Chianti ist tief gefallen. Doch'\
@@ -342,62 +346,62 @@ def test_article_has_correct_page_meta_description(testbrowser):
 
 
 def test_article_should_have_correct_seo_description(testbrowser):
-    browser = testbrowser('/artikel/04')
+    browser = testbrowser('/zeit-magazin/article/04')
     assert '<meta name="description" content="SEO description">' \
         in browser.contents
 
 
 def test_article_has_correct_page_meta_keywords(testbrowser):
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     assert '<meta name="keywords" content="Wein, Italien,'\
         ' Toskana, Bologna, Bozen, Florenz, Tübingen">' in browser.contents
 
 
 def test_article08_has_correct_date(testbrowser):
     # not updated print article
-    browser = testbrowser('/artikel/08')
+    browser = testbrowser('/zeit-magazin/article/08')
     date = browser.cssselect('.article__head__meta__date')[0].text
     assert date.strip() == '19. Februar 2014'
 
 
 def test_article09_has_correct_date(testbrowser):
     # updated print article
-    browser = testbrowser('/artikel/09')
+    browser = testbrowser('/zeit-magazin/article/09')
     date = browser.cssselect('.article__head__meta__date')[0].text
     assert date.strip() == u'4. März 2014, 14:35 Uhr'
 
 
 def test_article03_has_correct_date(testbrowser):
     # not updated online article
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     date = browser.cssselect('.article__head__meta__date')[0].text
     assert date.strip() == '30. Juli 2013, 17:20 Uhr'
 
 
 def test_article10_has_correct_date(testbrowser):
     # updated online article
-    browser = testbrowser('/artikel/10')
+    browser = testbrowser('/zeit-magazin/article/10')
     date = browser.cssselect('.article__head__meta__date')[0].text
     assert date.strip() == '20. Februar 2014, 17:59 Uhr'
 
 
 def test_article05_has_correct_date(testbrowser):
     # longform
-    browser = testbrowser('/artikel/05')
+    browser = testbrowser('/zeit-magazin/article/05')
     date = browser.cssselect('.article__head__meta__date')[0].text
     assert date.strip() == '3. November 2013'
 
 
 def test_print_article_has_no_last_changed_date(testbrowser):
     # print articles should omit the last semantic change date
-    article = testbrowser('/artikel/01').contents
+    article = testbrowser('/zeit-magazin/article/01').contents
     assert '26. September 2013<span>editiert' not in article
 
 
 def test_online_article_has_last_changed_date(selenium_driver, testserver):
     # online articles should include the last semantic change date
     driver = selenium_driver
-    driver.get('%s/artikel/10' % testserver.url)
+    driver.get('%s/zeit-magazin/article/10' % testserver.url)
     meta_date = driver.find_element_by_class_name("article__head__meta__date")
     assert 'ZULETZT AKTUALISIERT AM 20. FEBRUAR 2014, '\
         '17:59 UHR' in meta_date.text
@@ -413,143 +417,160 @@ def test_gallery_has_last_changed_date(selenium_driver, testserver):
 
 def test_article03_has_no_source(testbrowser):
     # zon source
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     assert 'article__head__meta__source' not in browser.contents
 
 
 def test_article10_has_correct_online_source(testbrowser):
     # online source
-    browser = testbrowser('/artikel/10')
+    browser = testbrowser('/zeit-magazin/article/10')
     meta_source = browser.cssselect('span.article__head__meta__source')[0]
     assert 'Erschienen bei golem.de' in meta_source.text_content()
 
 
 def test_article08_has_correct_print_source(testbrowser):
     # print source
-    browser = testbrowser('/artikel/08')
+    browser = testbrowser('/zeit-magazin/article/08')
     meta_source = browser.cssselect('span.article__head__meta__source')[0]
     assert u'DIE ZEIT Nr. 26/2008' in meta_source.text_content()
 
 
 def test_article_1_10_produce_no_error(testbrowser):
-    assert testbrowser('/artikel/01').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/02').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/03').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/04').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/05').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/06').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/08').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/09').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/10').cssselect('div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/01').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/02').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/03').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/04').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/05').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/06').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/08').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/09').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/10').cssselect(
+        'div.article__wrap')
 
 
 def test_article_1_10_have_correct_h1(testbrowser):
-    browser = testbrowser('/artikel/01')
+    browser = testbrowser('/zeit-magazin/article/01')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/02')
+    browser = testbrowser('/zeit-magazin/article/02')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/04')
+    browser = testbrowser('/zeit-magazin/article/04')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/05')
+    browser = testbrowser('/zeit-magazin/article/05')
     assert browser.cssselect('h1 > .article__head__title')
-    browser = testbrowser('/artikel/06')
+    browser = testbrowser('/zeit-magazin/article/06')
     assert browser.cssselect('h1 > .article__head__title')
-    browser = testbrowser('/artikel/08')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/09')
+    browser = testbrowser('/zeit-magazin/article/08')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/10')
+    browser = testbrowser('/zeit-magazin/article/09')
+    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
+    browser = testbrowser('/zeit-magazin/article/10')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
 
 
 def test_header_articles_produce_no_error(testbrowser):
-    assert testbrowser('/artikel/header1').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/header2').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/header3').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/header4').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/header5').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/header5-2').cssselect('div.article__wrap')
-    assert testbrowser('/artikel/header6').cssselect('div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/header1').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/header2').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/header3').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/header4').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/header5').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/header5-2').cssselect(
+        'div.article__wrap')
+    assert testbrowser('/zeit-magazin/article/header6').cssselect(
+        'div.article__wrap')
 
 
 def test_header_articles_have_correct_h1(testbrowser):
-    browser = testbrowser('/artikel/header1')
+    browser = testbrowser('/zeit-magazin/article/header1')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/header2')
+    browser = testbrowser('/zeit-magazin/article/header2')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/header3')
+    browser = testbrowser('/zeit-magazin/article/header3')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/header4')
+    browser = testbrowser('/zeit-magazin/article/header4')
     assert browser.cssselect('h1 > .article__head__title')
-    browser = testbrowser('/artikel/header5')
+    browser = testbrowser('/zeit-magazin/article/header5')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/artikel/header6')
+    browser = testbrowser('/zeit-magazin/article/header6')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
 
 
 def test_article_header2_has_correct_subtitle(testbrowser):
-    browser = testbrowser('/artikel/header2')
+    browser = testbrowser('/zeit-magazin/article/header2')
     assert 'Wie viele Flüchtlingskinder bin '\
         'ich eine Suchende, Getriebene.' in browser.contents
 
 
 def test_artikel_header_header1_should_have_correct_header_source(testbrowser):
-    browser = testbrowser('/artikel/header1')
+    browser = testbrowser('/zeit-magazin/article/header1')
     assert browser.cssselect('h1 > .article__head__title')
 
 
 def test_artikel_header_header2_should_have_correct_source(testbrowser):
-    browser = testbrowser('/artikel/header2')
+    browser = testbrowser('/zeit-magazin/article/header2')
     assert browser.cssselect('header.article__head.article__head--traum')
 
 
 def test_artikel_header_header3_should_have_correct_source(testbrowser):
-    browser = testbrowser('/artikel/header3')
+    browser = testbrowser('/zeit-magazin/article/header3')
     assert browser.cssselect('header.article__head.article__head--text-only')
 
 
 def test_artikel_header_header4_should_have_correct_source(testbrowser):
-    browser = testbrowser('/artikel/header4')
+    browser = testbrowser('/zeit-magazin/article/header4')
     assert browser.cssselect(
         'header.article__head.article__head--stamp.is-constrained')
 
 
 def test_artikel_header_header5_should_have_correct_source(testbrowser):
-    browser = testbrowser('/artikel/header5')
+    browser = testbrowser('/zeit-magazin/article/header5')
     assert browser.cssselect('header.article__head.article__head--leinwand')
 
 
 def test_artikel_header_header6_should_have_correct_source(testbrowser):
-    browser = testbrowser('/artikel/header6')
+    browser = testbrowser('/zeit-magazin/article/header6')
     assert browser.cssselect('header.article__head.article__head--mode')
 
 
 def test_artikel_header_standardkolumne_should_have_correct_src(testbrowser):
-    browser = testbrowser('/artikel/standardkolumne-beispiel')
+    browser = testbrowser('/zeit-magazin/article/standardkolumne-beispiel')
     assert browser.cssselect('header.article__head.article__head--column')
 
 
 def test_artikel_header_sequelpage_should_have_correct_source(testbrowser):
-    browser = testbrowser('/artikel/03/seite-2')
+    browser = testbrowser('/zeit-magazin/article/03/seite-2')
     assert browser.cssselect('header.article__head.article__head--sequel')
 
 
 def test_nextread_teaser_block_has_teasers_available(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/09')
     nextread = zeit.web.core.interfaces.INextread(context)
     assert hasattr(nextread, '__iter__'), 'Nextread block should be iterable.'
     assert len(nextread) == 1, '"Artikel 09" has exactly one nextread.'
@@ -561,23 +582,26 @@ def test_nextread_teaser_block_has_teasers_available(application):
 
 
 def test_nextread_teaser_blocks_has_correct_layout_id(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/09')
     nextread = zeit.web.core.interfaces.INextread(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 09" has a base nextread layout.'
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/03')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/03')
     nextread = zeit.web.core.interfaces.INextread(context)
     assert nextread.layout.id == 'maximal', \
         '"Artikel 03" has a maximal nextread layout.'
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/artikel/01')
+        'http://xml.zeit.de/zeit-magazin/article/01')
     nextread = zeit.web.core.interfaces.INextread(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 01" has no nextread layout, should fallback to base.'
 
 
 def test_nextread_teaser_block_teasers_is_accessable(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/09')
     nextread = zeit.web.core.interfaces.INextread(context)
     assert all(teaser for teaser in nextread), \
         'Nextread block should iterate over its teasers.'
@@ -586,7 +610,7 @@ def test_nextread_teaser_block_teasers_is_accessable(application):
 
 
 def test_nextread_base_layout_has_expected_structure(testbrowser):
-    browser = testbrowser('/artikel/09')
+    browser = testbrowser('/zeit-magazin/article/09')
     nextread = browser.cssselect('.nextread-base')[0]
     assert len(nextread.cssselect('a')) == 1
     assert len(nextread.cssselect('.nextread-base__media')) == 1
@@ -594,30 +618,31 @@ def test_nextread_base_layout_has_expected_structure(testbrowser):
 
 
 def test_nextread_should_fallback_to_default_layout(application):
-    context = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/02')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/02')
     nextread = zeit.web.core.interfaces.INextread(context)
     assert nextread.layout.id == 'base', \
         '"Artikel 02" has invalid nextread layout, should fallback to base.'
 
 
 def test_article_with_images_should_render_image_container(testbrowser):
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     assert browser.cssselect('div.article__page figure.figure-stamp')
 
 
 def test_article_without_images_should_not_render_image_container(testbrowser):
-    browser = testbrowser('/artikel/artikel-ohne-assets')
+    browser = testbrowser('/zeit-magazin/article/artikel-ohne-assets')
     assert not browser.cssselect('div.article__page figure.figure-stamp')
 
 
 def test_article_with_fictitious_imgs_should_not_render_img_container(
         testbrowser):
-    browser = testbrowser('/artikel/artikel-mit-fiktiven-assets')
+    browser = testbrowser('/zeit-magazin/article/artikel-mit-fiktiven-assets')
     assert not browser.cssselect('div.article__page figure.figure-stamp')
 
 
 def test_article03_has_linked_image(testbrowser):
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     assert browser.xpath('//a[@href="http://www.test.de"]/img')
     alt = browser.xpath('//a[@href="http://www.test.de"]/img/@alt')[0]
     assert alt.startswith('Immer noch die besten Botschafterinnen der Region')
@@ -627,19 +652,19 @@ def test_article03_has_linked_image(testbrowser):
                     reason="We need a way to mock liveblog in tests")
 def test_article02_uses_esi(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/02')
+    driver.get('%s/zeit-magazin/article/02')
     blog = WebDriverWait(driver, 15).until(
         EC.presence_of_element_located((By.ID, "livedesk-root")))
     assert blog.is_displayed(), 'ESI Liveblog not displayed'
 
 
 def test_article02_should_have_esi_include(testbrowser):
-    browser = testbrowser('/artikel/02')
+    browser = testbrowser('/zeit-magazin/article/02')
     assert len(browser.cssselect('main include')) == 1
 
 
 def test_article_has_linked_copyright(testbrowser):
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
@@ -649,7 +674,7 @@ def test_article_has_linked_copyright(testbrowser):
 
 
 def test_longform_has_linked_copyright(testbrowser):
-    browser = testbrowser('/artikel/05')
+    browser = testbrowser('/zeit-magazin/article/05')
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
@@ -659,7 +684,7 @@ def test_longform_has_linked_copyright(testbrowser):
 
 
 def test_header_has_linked_copyright(testbrowser):
-    browser = testbrowser('/artikel/header1')
+    browser = testbrowser('/zeit-magazin/article/header1')
     output = ""
     for line in browser.contents.splitlines():
         output += line.strip()
@@ -693,46 +718,54 @@ def test_feature_longform_should_have_zon_twittername(testbrowser):
 
 
 def test_article_view_has_leadtime_set_if_article_provides_it(application):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/10')
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/10')
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     assert view.leadtime.start
     assert view.leadtime.end
 
 
 def test_article_view_has_no_leadtime_if_the_attribute_is_missing(application):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/09')
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/09')
     view = zeit.web.magazin.view_article.Article(article, mock.Mock())
     assert view.leadtime.start is None
     assert view.leadtime.end is None
 
 
 def test_advertorial_article_shows_advertorial_marker(testbrowser):
-    browser = testbrowser('/artikel/advertorial')
+    browser = testbrowser('/zeit-magazin/article/advertorial')
     assert browser.cssselect('.header__ad-label')[0].text == 'Anzeige'
-    browser = testbrowser('/artikel/01')
+    browser = testbrowser('/zeit-magazin/article/01')
     assert not browser.cssselect('.header__ad-label')
 
 
 def test_articles_should_have_exact_one_h1(testbrowser):
-    assert len(testbrowser('/artikel/01').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/02').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/03').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/04').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/05').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/07').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/08').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/09').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/10').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/header1').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/header2').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/header3').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/header4').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/header5').cssselect('h1')) == 1
-    assert len(testbrowser('/artikel/header6').cssselect('h1')) == 1
+    assert len(testbrowser('/zeit-magazin/article/01').cssselect('h1')) == 1
+    assert len(testbrowser('/zeit-magazin/article/02').cssselect('h1')) == 1
+    assert len(testbrowser('/zeit-magazin/article/03').cssselect('h1')) == 1
+    assert len(testbrowser('/zeit-magazin/article/04').cssselect('h1')) == 1
+    assert len(testbrowser('/zeit-magazin/article/05').cssselect('h1')) == 1
+    assert len(testbrowser('/zeit-magazin/article/07').cssselect('h1')) == 1
+    assert len(testbrowser('/zeit-magazin/article/08').cssselect('h1')) == 1
+    assert len(testbrowser('/zeit-magazin/article/09').cssselect('h1')) == 1
+    assert len(testbrowser('/zeit-magazin/article/10').cssselect('h1')) == 1
+    assert len(testbrowser(
+               '/zeit-magazin/article/header1').cssselect('h1')) == 1
+    assert len(testbrowser(
+               '/zeit-magazin/article/header2').cssselect('h1')) == 1
+    assert len(testbrowser(
+               '/zeit-magazin/article/header3').cssselect('h1')) == 1
+    assert len(testbrowser(
+               '/zeit-magazin/article/header4').cssselect('h1')) == 1
+    assert len(testbrowser(
+               '/zeit-magazin/article/header5').cssselect('h1')) == 1
+    assert len(testbrowser(
+               '/zeit-magazin/article/header6').cssselect('h1')) == 1
 
 
 def test_longform_should_have_exact_one_h1(testbrowser):
-    browser = testbrowser('/artikel/06')
+    browser = testbrowser('/zeit-magazin/article/06')
     h1s = browser.cssselect('h1')
     assert len(h1s) == 1
 
@@ -753,13 +786,14 @@ def test_article_first_page_must_have_no_image_as_first_block(application):
 
 def test_zmo_should_not_render_advertisement_nextread(
         testbrowser, workingcopy):
-    # /artikel/10 has ressort 'Wirtschaft' which has ad-nextread content.
-    browser = testbrowser('/artikel/10')
+    # /zeit-magazin/article/10 has ressort 'Wirtschaft'
+    # which has ad-nextread content.
+    browser = testbrowser('/zeit-magazin/article/10')
     assert len(browser.cssselect('.nextread-advertisement')) == 0
 
 
 def test_article_contains_zeit_clickcounter(testbrowser):
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
     assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
             "zeitmz/essenundtrinken/article") in browser.contents

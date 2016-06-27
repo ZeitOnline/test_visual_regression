@@ -214,7 +214,7 @@ def test_nav_should_contain_schema_org_markup(application, jinja2_env):
 
 
 def test_footer_should_contain_schema_org_markup(testbrowser):
-    browser = testbrowser('/centerpage/zeitonline')
+    browser = testbrowser('/zeit-online/zeitonline')
 
     site_nav_element = browser.cssselect(
         'footer *[itemtype="http://schema.org/SiteNavigationElement"]')
@@ -230,7 +230,7 @@ def test_footer_should_contain_schema_org_markup(testbrowser):
 # integration testing
 
 def test_cp_should_have_valid_main_nav_structure(testbrowser):
-    browser = testbrowser('/centerpage/zeitonline')
+    browser = testbrowser('/zeit-online/zeitonline')
     html = browser.cssselect
 
     assert len(html('.main_nav')) == 1, 'Main navigation must be present'
@@ -243,7 +243,7 @@ def test_cp_should_have_valid_main_nav_structure(testbrowser):
 
 
 def test_cp_should_have_valid_services_structure(testbrowser):
-    browser = testbrowser('/centerpage/zeitonline')
+    browser = testbrowser('/zeit-online/zeitonline')
     html = browser.cssselect
 
     assert len(html('li[data-id="epaper"]')) == 1, (
@@ -257,7 +257,7 @@ def test_cp_should_have_valid_services_structure(testbrowser):
 
 
 def test_cp_should_have_valid_classifieds_structure(testbrowser):
-    browser = testbrowser('/centerpage/zeitonline')
+    browser = testbrowser('/zeit-online/zeitonline')
     html = browser.cssselect
 
     assert len(html('li[data-id="abo"] > a')) == 1, (
@@ -281,7 +281,7 @@ def test_cp_should_have_valid_classifieds_structure(testbrowser):
 
 
 def test_cp_has_valid_burger_structure(testbrowser):
-    browser = testbrowser('/centerpage/zeitonline')
+    browser = testbrowser('/zeit-online/zeitonline')
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
     assert len(html('svg.logo_bar__menu-icon--burger')) == 1, (
@@ -291,7 +291,7 @@ def test_cp_has_valid_burger_structure(testbrowser):
 
 
 def test_cp_has_valid_search_structure(testbrowser):
-    browser = testbrowser('/centerpage/zeitonline')
+    browser = testbrowser('/zeit-online/zeitonline')
     html_str = browser.contents
     html = lxml.html.fromstring(html_str).cssselect
     assert len(html('form.search'
@@ -384,7 +384,7 @@ def test_nav_search_is_working_as_expected(
     driver = selenium_driver
     screen_width = screen_size[0]
     driver.set_window_size(screen_size[0], screen_size[1])
-    driver.get('%s/centerpage/zeitonline' % testserver.url)
+    driver.get('%s/zeit-online/zeitonline' % testserver.url)
 
     driver.execute_script(
         "document.querySelector('.main_nav__search form').action = \
@@ -453,14 +453,14 @@ def test_nav_search_is_working_as_expected(
     search__input.send_keys('test')
     search__button.click()
 
-    assert driver.current_url.endswith('/centerpage/zeitonline?q=test')
+    assert driver.current_url.endswith('/zeit-online/zeitonline?q=test')
 
 
 def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
 
     driver = selenium_driver
     driver.set_window_size(320, 480)
-    driver.get('%s/centerpage/zeitonline' % testserver.url)
+    driver.get('%s/zeit-online/zeitonline' % testserver.url)
 
     logo_bar__menu = driver.find_element_by_class_name('logo_bar__menu')
     menu_link = logo_bar__menu.find_element_by_tag_name('a')
@@ -540,7 +540,7 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 
     driver = selenium_driver
     actions = selenium.webdriver.ActionChains(driver)
-    driver.get('%s/centerpage/zeitonline' % testserver.url)
+    driver.get('%s/zeit-online/zeitonline' % testserver.url)
 
     # mobile
     driver.set_window_size(320, 480)
@@ -581,7 +581,7 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
 
     driver = selenium_driver
-    driver.get('%s/centerpage/zeitonline' % testserver.url)
+    driver.get('%s/zeit-online/zeitonline' % testserver.url)
 
     zmo_button = driver.find_element_by_class_name(
         'primary-nav__item--featured')

@@ -8,8 +8,8 @@ import zeit.newsletter.interfaces
 def test_renders_image(application):
     b = zope.testbrowser.wsgi.Browser(wsgi_app=application)
     b.open('http://localhost/newsletter/februar')
-    assert 'http://www.zeit.de/artikel/01' in b.contents
-    assert 'http://www.zeit.de/artikel/02' in b.contents
+    assert 'http://www.zeit.de/zeit-magazin/article/01' in b.contents
+    assert 'http://www.zeit.de/zeit-magazin/article/02' in b.contents
     assert ('http://www.zeit.de/exampleimages/artikel/01'
             '/schoppenstube/wide__148x84' in b.contents)
 
@@ -17,7 +17,7 @@ def test_renders_image(application):
 def test_renders_videos(application):
     b = zope.testbrowser.wsgi.Browser(wsgi_app=application)
     b.open('http://localhost/newsletter/februar')
-    assert 'http://www.zeit.de/artikel/01' in b.contents
+    assert 'http://www.zeit.de/zeit-magazin/article/01' in b.contents
     assert 'Skispringen' in b.contents
 
 

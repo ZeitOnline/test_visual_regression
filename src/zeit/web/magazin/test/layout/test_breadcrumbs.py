@@ -3,7 +3,7 @@
 
 def test_breadcrumbs_should_produce_markup(testbrowser):
     # @see https://developers.google.com/structured-data/breadcrumbs
-    browser = testbrowser('/artikel/03')
+    browser = testbrowser('/zeit-magazin/article/03')
     breadcrumb = browser.cssselect('[itemprop="breadcrumb"]')[0]
     elements = breadcrumb.cssselect('[itemprop="itemListElement"]')
     items = breadcrumb.cssselect('[itemprop="item"]')

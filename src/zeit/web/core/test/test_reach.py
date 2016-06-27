@@ -66,7 +66,7 @@ def test_non_ascii_url_fails_gracefully(application):
 
 def test_buzz_module_should_extract_ressort_from_centerpage(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/centerpage/zeitonline')
+        'http://xml.zeit.de/zeit-online/zeitonline')
     module = zeit.web.site.module.buzzbox.Buzzbox(context)
     assert module.ressort == 'administratives'
 

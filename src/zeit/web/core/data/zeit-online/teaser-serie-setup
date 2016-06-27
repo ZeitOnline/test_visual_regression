@@ -81,12 +81,12 @@
           <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne" />
         </container>
         <container cp:type="teaser" module="zon-small" cp:__name__="id-8d8caa23-ae05-4e60-9572-20ca379a8e11">
-          <block href="http://xml.zeit.de/artikel/03a" />
+          <block href="http://xml.zeit.de/zeit-magazin/article/03a" />
         </container>
       </region>
       <region area="id-603026e2-3724-4c9f-bfe6-eb915b35888a" kind="minor">
         <container cp:type="teaser" module="zon-small" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
-          <block href="http://xml.zeit.de/centerpage/article_image_asset" />
+          <block href="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" />
         </container>
         <container cp:type="teaser" module="zon-small" cp:__name__="id-f97095a8-6424-47b0-ba51-cfb9596a936a">
           <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />

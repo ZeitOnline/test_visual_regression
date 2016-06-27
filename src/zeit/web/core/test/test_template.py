@@ -295,7 +295,8 @@ def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
     assert module.layout.id == 'zon-square'
 
     block.remove(article)
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/01')
     block.append(article)
     module = zeit.web.core.template.get_module(block)
     assert module.layout.id == 'zmo-square'
@@ -310,7 +311,8 @@ def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
 
 def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
         application, monkeypatch):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/04')
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/04')
     monkeypatch.setattr(zeit.content.cp.interfaces,
                         'ICenterPage', lambda *_: article)
     block = mock.MagicMock()

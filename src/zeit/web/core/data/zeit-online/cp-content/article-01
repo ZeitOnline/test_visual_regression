@@ -79,7 +79,7 @@
     <title>Article Image Asset</title>
     <subtitle>subtitle - article image asset</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="large" is_empty="False">
+      <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="large" is_empty="False">
         <bu py:pytype="str">Die ist der image sub text</bu>
         <copyright link="http://foo.de">©foo</copyright>
       </image>

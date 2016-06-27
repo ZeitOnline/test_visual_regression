@@ -9,7 +9,8 @@ import zeit.web.core.byline
 
 
 def test_article_byline_should_be_represented_as_a_nested_tuple(application):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/08')
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/08')
     byline = zeit.web.core.byline.get_byline(article)
     assert byline.context == article
     assert byline == [

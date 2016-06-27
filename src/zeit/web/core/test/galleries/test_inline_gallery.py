@@ -13,21 +13,22 @@ import zeit.cms.interfaces
 
 
 def test_inline_gallery_is_there(testbrowser):
-    browser = testbrowser('/artikel/01')
+    browser = testbrowser('/zeit-magazin/article/01')
     assert '<div class="inline-gallery"' in browser.contents
 
 
 def test_nonexistent_gallery_is_ignored(testbrowser, workingcopy):
-    article = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/artikel/01')
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/01')
     with checked_out(article) as co:
         co.xml.body.division.gallery.set('href', 'http://xml.zeit.de/invalid')
-    browser = testbrowser('/artikel/01')
+    browser = testbrowser('/zeit-magazin/article/01')
     assert '<div class="inline-gallery"' not in browser.contents
 
 
 def test_inline_gallery_buttons(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/01' % testserver.url)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
     try:
         cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
@@ -60,14 +61,14 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
 
 
 def test_inline_gallery_uses_responsive_images_with_ratio(testbrowser):
-    browser = testbrowser('/artikel/01')
+    browser = testbrowser('/zeit-magazin/article/01')
     image = browser.cssselect('.inline-gallery .slide')[0]
     assert 'data-ratio="1.77914110429"' in lxml.etree.tostring(image)
 
 
 def test_photocluster_has_expected_markup(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/cluster-beispiel' % testserver.url)
+    driver.get('%s/zeit-magazin/article/cluster-beispiel' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".photocluster")
     assert len(wrap) != 0
     for element in wrap:
@@ -81,7 +82,7 @@ def test_photocluster_has_expected_markup(selenium_driver, testserver):
 
 def test_photocluster_has_expected_content(selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/artikel/cluster-beispiel' % testserver.url)
+    driver.get('%s/zeit-magazin/article/cluster-beispiel' % testserver.url)
     wrap = driver.find_elements_by_css_selector(".photocluster")
     assert len(wrap) != 0
     for element in wrap:

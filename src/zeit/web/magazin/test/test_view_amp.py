@@ -2,19 +2,19 @@
 
 
 def test_amp_view_should_have_expected_structure(testbrowser):
-    browser = testbrowser('/amp/artikel/01')
+    browser = testbrowser('/amp/zeit-magazin/article/01')
     link = browser.cssselect('head link[rel="canonical"]')[0]
     article = browser.cssselect('article.article')[0]
     image = article.cssselect('figure.figure')[0]
 
     assert ('<html ⚡ lang="de" itemscope '
             'itemtype="http://schema.org/WebPage">') in browser.contents
-    assert link.get('href') == 'http://localhost/artikel/01'
+    assert link.get('href') == 'http://localhost/zeit-magazin/article/01'
     assert 'figure--large' in image.get('class')
 
 
 def test_amp_contains_required_microdata(testbrowser):
-    browser = testbrowser('/amp/artikel/01')
+    browser = testbrowser('/amp/zeit-magazin/article/01')
     publisher = browser.document.get_element_by_id('publisher')
     logo = publisher.cssselect('[itemprop="logo"]')[0]
 
@@ -44,7 +44,7 @@ def test_amp_contains_required_microdata(testbrowser):
     # check Article
     assert article.get('itemtype') == 'http://schema.org/Article'
     assert main_entity_of_page.get('content') == (
-        'http://localhost/artikel/01')
+        'http://localhost/zeit-magazin/article/01')
     text = headline.text_content().strip()
     assert text == u'Gentrifizierung: Mei, is des traurig!'
     assert len(description.text_content().strip())

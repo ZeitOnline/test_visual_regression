@@ -1,12 +1,27 @@
 # -*- coding: utf-8 -*-
 import re
 
+from zope.component import getMultiAdapter
 import mock
+import pytest
+import pyramid.threadlocal
 
 import zeit.cms.interfaces
 
+from zeit.web.core.template import default_image_url
 import zeit.web.core.utils
 import zeit.web.core.template
+
+
+@pytest.fixture
+def monkeyreq(monkeypatch):
+    def request():
+        m = mock.Mock()
+        m.route_url = lambda x: "http://example.com/"
+        m.image_host = 'http://example.com'
+        return m
+
+    monkeypatch.setattr(pyramid.threadlocal, "get_current_request", request)
 
 
 def test_cp_should_have_buzz_module(testbrowser):
@@ -377,7 +392,7 @@ def test_default_teaser_should_return_default_teaser_image(
     cp_context = zeit.cms.interfaces.ICMSContent(cp)
 
     teaser_block = cp_context[0][0][0]
-    article = 'http://xml.zeit.de/artikel/artikel-ohne-assets'
+    article = 'http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets'
     article_context = zeit.cms.interfaces.ICMSContent(article)
     teaser_img = zeit.web.core.template.get_image(
         teaser_block, article_context)
@@ -408,3 +423,141 @@ def test_card_background_setting_on_teaser_overrides_article_setting(
     card = browser.cssselect(
         '.teaser-card[data-unique-id$=martenstein-portraitformat] .card')[0]
     assert 'a1f88c' in card.attrib['style']
+
+
+def test_centerpage_should_have_default_keywords(testbrowser):
+    # Default means ressort and sub ressort respectively
+    browser = testbrowser('/zeit-magazin/centerpage/lebensart-2')
+    keywords = browser.cssselect('meta[name="keywords"]')[0]
+    assert keywords.get('content') == 'Lebensart, Mode-Design'
+
+
+def test_centerpage_should_have_page_meta_keywords(testbrowser):
+    browser = testbrowser('/zeit-magazin/centerpage/lebensart')
+    assert '<meta name="keywords" content="Pinguin">' in (
+        browser.contents)
+
+
+def test_centerpage_should_have_page_meta_robots_information(testbrowser):
+    # SEO robots information is given
+    browser = testbrowser('/zeit-magazin/centerpage/lebensart')
+    meta_robots = browser.document.xpath('//meta[@name="robots"]/@content')
+    assert 'my, personal, seo, robots, information' in meta_robots
+    # No SEO robots information is given
+    browser = testbrowser('/zeit-magazin/index')
+    meta_robots = browser.document.xpath('//meta[@name="robots"]/@content')
+    assert 'index,follow,noodp,noydir,noarchive' in meta_robots
+
+
+def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(application):
+    article = ('http://xml.zeit.de/zeit-magazin/'
+               'centerpage/article_gallery_asset')
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.web.core.centerpage.auto_select_asset(context)
+    assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
+
+
+def test_autoselected_asset_from_cp_teaser_should_be_an_image(application):
+    article = ('http://xml.zeit.de/zeit-magazin/'
+               'centerpage/article_image_asset')
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.web.core.centerpage.auto_select_asset(context)
+    assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
+
+
+def test_autoselected_asset_from_cp_teaser_should_be_a_video(application):
+    article = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.web.core.centerpage.auto_select_asset(context)
+    assert isinstance(asset, zeit.content.video.video.Video)
+
+
+def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(application):
+    url = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset_list'
+    context = zeit.cms.interfaces.ICMSContent(url)
+    asset = zeit.web.core.centerpage.auto_select_asset(context)
+    assert isinstance(asset[0], zeit.content.video.video.Video)
+    assert isinstance(asset[1], zeit.content.video.video.Video)
+
+
+def test_get_image_asset_should_return_image_asset(application):
+    article = ('http://xml.zeit.de/zeit-magazin/'
+               'centerpage/article_image_asset')
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.web.core.centerpage.get_image_asset(context)
+    assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
+
+
+def test_get_gallery_asset_should_return_gallery_asset(application):
+    article = ('http://xml.zeit.de/zeit-magazin/'
+               'centerpage/article_gallery_asset')
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.web.core.centerpage.get_gallery_asset(context)
+    assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
+
+
+def test_get_video_asset_should_return_video_asset(application):
+    article = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
+    context = zeit.cms.interfaces.ICMSContent(article)
+    asset = zeit.web.core.centerpage.get_video_asset(
+        context)
+    assert isinstance(asset, zeit.content.video.video.Video)
+
+
+def test_default_image_url_should_return_default_image_size(
+        application, monkeyreq):
+    image_id = ('http://xml.zeit.de/zeit-magazin/'
+                'centerpage/katzencontent/katzencontent-180x101.jpg')
+    image = zeit.cms.interfaces.ICMSContent(image_id)
+    image_url = default_image_url(image)
+    assert re.search(
+        'http://example.com/zeit-magazin/centerpage/katzencontent/'
+        'bitblt-.*-.*/katzencontent-180x101.jpg',
+        image_url)
+
+
+def test_default_image_url_should_return_available_image_size(
+        application, monkeyreq):
+    image_id = ('http://xml.zeit.de/zeit-magazin/'
+                'centerpage/katzencontent/katzencontent-180x101.jpg')
+    image = zeit.cms.interfaces.ICMSContent(image_id)
+    image_url = default_image_url(image)
+    assert re.search(
+        'http://example.com/zeit-magazin/'
+        'centerpage/katzencontent/'
+        'bitblt-.*-.*/katzencontent-180x101.jpg',
+        image_url)
+
+
+def test_default_image_url_should_return_none_when_no_unique_id_is_given(
+        application, monkeyreq):
+    assert default_image_url(mock.Mock()) is None
+
+
+def test_teaser_image_should_be_created_from_image_group_and_image(
+        application):
+    import zeit.cms.interfaces
+    img = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/'
+                                          'centerpage/'
+                                          'katzencontent/katzencontent'
+                                          '-148x84.jpg')
+    imgrp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/zeit-magazin/'
+                                            'centerpage/'
+                                            'katzencontent/')
+    teaser_image = getMultiAdapter(
+        (imgrp, img),
+        zeit.web.core.interfaces.ITeaserImage)
+
+    assert teaser_image.caption == 'Die ist der image sub text '
+    assert teaser_image.src == img.uniqueId
+    assert teaser_image.alt == 'Die ist der Alttest'
+    assert teaser_image.title == 'Katze!'
+
+
+def test_wrapped_features_are_triggered(testbrowser):
+    browser = testbrowser('/zeit-magazin/index')
+    assert browser.cssselect('header.header')
+
+    browser = testbrowser('/zeit-magazin/index?app-content')
+    assert not browser.cssselect('header.header')
+    assert browser.cssselect('body[data-is-wrapped="true"]')

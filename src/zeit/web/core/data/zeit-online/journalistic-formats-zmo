@@ -69,7 +69,7 @@
     <cluster area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo" title="Aufmacher">
       <region area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
         <container cp:type="teaser" module="zon-fullwidth" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead1c">
-      <block href="http://xml.zeit.de/artikel/02"/>
+      <block href="http://xml.zeit.de/zeit-magazin/article/02"/>
     </container>
       </region>
     </cluster>
@@ -78,7 +78,7 @@
     <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" kind="solo" title="AufmacherClassic">
       <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" kind="solo">
         <container cp:type="teaser" module="zon-classic" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead2c">
-      <block href="http://xml.zeit.de/artikel/02"/>
+      <block href="http://xml.zeit.de/zeit-magazin/article/02"/>
     </container>
       </region>
     </cluster>
@@ -92,7 +92,7 @@
     </container>
 
     <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead4c">
-      <block href="http://xml.zeit.de/artikel/02"/>
+      <block href="http://xml.zeit.de/zeit-magazin/article/02"/>
     </container>
 
     <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-8f488152572a">
@@ -100,7 +100,7 @@
     </container>
 
      <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead5f">
-      <block href="http://xml.zeit.de/artikel/01"/>
+      <block href="http://xml.zeit.de/zeit-magazin/article/01"/>
     </container>
 
       </region>
@@ -112,7 +112,7 @@
     </container>
 
     <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead8f">
-      <block href="http://xml.zeit.de/artikel/01"/>
+      <block href="http://xml.zeit.de/zeit-magazin/article/01"/>
     </container>
 
       </region>
@@ -123,10 +123,10 @@
       <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d52" kind="topic" title="Dossierteaser Titel" supertitle="Dossier" xread_more_url="http://xml.zeit.de/zeit-online/index">
         <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
         <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e6">
-          <block href="http://xml.zeit.de/artikel/02"/>
+          <block href="http://xml.zeit.de/zeit-magazin/article/02"/>
         </container>
         <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
-          <block href="http://xml.zeit.de/artikel/01"/>
+          <block href="http://xml.zeit.de/zeit-magazin/article/01"/>
         </container>
         <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
           <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
@@ -153,15 +153,15 @@
       <region area="id-1ac0ac50-fe94-4431-baac-435cc2a934dd" kind="parquet" title="Parkett: ZMO-Teaser">
 
     <container cp:type="teaser" module="zon-large" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
-      <block href="http://xml.zeit.de/artikel/02"/>
+      <block href="http://xml.zeit.de/zeit-magazin/article/02"/>
     </container>
 
         <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
-      <block href="http://xml.zeit.de/artikel/02"/>
+      <block href="http://xml.zeit.de/zeit-magazin/article/02"/>
     </container>
 
     <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b">
-      <block href="http://xml.zeit.de/artikel/01"/>
+      <block href="http://xml.zeit.de/zeit-magazin/article/01"/>
     </container>
       </region>
     </cluster>
@@ -171,10 +171,10 @@
     <region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zmo-parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
       <referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
       <container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
-        <block href="http://xml.zeit.de/artikel/02"/>
+        <block href="http://xml.zeit.de/zeit-magazin/article/02"/>
       </container>
       <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
-        <block href="http://xml.zeit.de/artikel/01"/>
+        <block href="http://xml.zeit.de/zeit-magazin/article/01"/>
       </container>
     </region>
   </cluster>

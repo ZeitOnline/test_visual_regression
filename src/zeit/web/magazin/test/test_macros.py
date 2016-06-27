@@ -190,7 +190,7 @@ def test_macro_advertising_should_produce_script(jinja2_env):
 
 def test_image_template_should_produce_figure_markup(tplbrowser):
     block = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/artikel/01').main_image_block
+        'http://xml.zeit.de/zeit-magazin/article/01').main_image_block
     image = zeit.web.core.interfaces.IFrontendBlock(block)
     image.href = 'http://localhost/foo'
     browser = tplbrowser(
@@ -203,7 +203,7 @@ def test_image_template_should_produce_figure_markup(tplbrowser):
 
 def test_image_template_should_produce_copyright_caption(tplbrowser):
     block = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/artikel/01').main_image_block
+        'http://xml.zeit.de/zeit-magazin/article/01').main_image_block
     image = zeit.web.core.interfaces.IFrontendBlock(block)
     browser = tplbrowser(
         'zeit.web.magazin:templates/inc/asset/image_article.tpl', obj=image)
@@ -485,16 +485,6 @@ def test_macro_copyrights(jinja2_env):
     assert not snippet.cssselect(
         'li.copyrights__entry:nth-child(2) .copyrights__label a'), (
             'The second entry should not produce a link element.')
-
-
-def test_macro_include_cp_ad_produces_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/centerpage_macro.tpl')
-    lines = tpl.module.include_cp_ad().splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert '<div class="cp_button--ad">' in output
 
 
 def test_macro_liveblog_produces_html(application, jinja2_env):

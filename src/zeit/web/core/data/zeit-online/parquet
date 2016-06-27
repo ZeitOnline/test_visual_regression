@@ -115,10 +115,10 @@
 			<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zmo-parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
 				<referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
-					<block href="http://xml.zeit.de/artikel/02"/>
+					<block href="http://xml.zeit.de/zeit-magazin/article/02"/>
 				</container>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
-					<block href="http://xml.zeit.de/artikel/02"/>
+					<block href="http://xml.zeit.de/zeit-magazin/article/02"/>
 				</container>
 			</region>
 		</cluster>

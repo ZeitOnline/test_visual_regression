@@ -75,7 +75,7 @@
       </region>
       <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d51" kind="minor">
         <container cp:type="teaser" module="zon-small" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
-          <block href="http://xml.zeit.de/centerpage/article_image_asset" />
+          <block href="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" />
         </container>
       </region>
     </cluster>
@@ -104,7 +104,7 @@
       </region>
       <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d51" kind="minor">
         <container cp:type="teaser" module="zon-small" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
-          <block href="http://xml.zeit.de/centerpage/article_image_asset" />
+          <block href="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" />
         </container>
       </region>
     </cluster>

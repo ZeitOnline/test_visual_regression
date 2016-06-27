@@ -36,7 +36,7 @@
       &lt;tuple&gt;
         &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
         &lt;global name="Interface" module="zope.interface"/&gt;
-        &lt;global name="ICP2009" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
         &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
@@ -47,7 +47,7 @@
     <cluster area="feature">
       <region area="lead">
         <container cp:type="teaser" module="zmo-leader-fullwidth-light" cp:__name__="id-6b5d10f3-3009-4b7b-a164-484511f502e8">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen</supertitle>
             <teaser_supertitle py:pytype="str">Kochen</teaser_supertitle>
             <title py:pytype="str">Probier's mal mit Gemütlichkeit</title>
@@ -65,7 +65,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-eae7c703-98e9-491a-a30d-c1c5cebd2371">
-          <block href="http://xml.zeit.de/artikel/artikel-mit-unvollstaendigen-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-unvollstaendigen-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-mit-unvollstaendigen-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-mit-unvollstaendigen-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
             <supertitle py:pytype="str">Kochen mit Freunden</supertitle>
             <teaser_supertitle py:pytype="str">Raffiniert kochen</teaser_supertitle>
             <title py:pytype="str">Die perfekte Illusion</title>
@@ -83,7 +83,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen für Gäste</supertitle>
             <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
             <title py:pytype="str">Heimlich vegetarisch</title>
@@ -101,7 +101,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805">
-          <block href="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen für Gäste</supertitle>
             <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
             <title py:pytype="str">Heimlich vegetarisch</title>
@@ -119,7 +119,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-eae7c703-98e9-491a-a30d-c1c5cebd2371">
-          <block href="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
             <supertitle py:pytype="str">Kochen mit Freunden</supertitle>
             <teaser_supertitle py:pytype="str">Raffiniert kochen</teaser_supertitle>
             <title py:pytype="str">Die perfekte Illusion</title>
@@ -140,7 +140,7 @@
            <cp_extra id="zmo-seperator-for-cps"/>
          </container>
         <container cp:type="teaser" module="zmo-landscape-large" cp:__name__="id-cc6bbea3-1337-42f5-8fe1-01c9c4476600">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
             <supertitle py:pytype="str">Serie Gesellschaftskritik</supertitle>
             <teaser_supertitle py:pytype="str">Serie Gesellschaftskritik</teaser_supertitle>
             <title py:pytype="str">Über schlechte Laune</title>
@@ -158,7 +158,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805">
-          <block href="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen für Gäste</supertitle>
             <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
             <title py:pytype="str">Heimlich vegetarisch</title>
@@ -176,7 +176,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-48962e5e-cdbe-4148-a12c-17724cd0e96b">
-          <block href="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/artikel/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-mit-fiktiven-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-mit-fiktiven-assets" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Liebeskolumne</supertitle>
             <teaser_supertitle py:pytype="str">Liebeskolumne</teaser_supertitle>
             <title py:pytype="str">Ist sie zu rational?</title>
@@ -194,13 +194,13 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-48962e5x-cdbx-414x-a12x-17724cd0e96x">
-          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="20" ressort="Kultur" author="Jan Freitag" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" date-last-modified="2014-05-12T17:43:39+00:00" date-first-released="2014-05-12T17:44:38.819643+00:00" date-last-published="2014-05-12T17:44:38.819643+00:00" last-semantic-change="2014-05-12T17:43:20.853704+00:00">
+          <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2014" issue="20" ressort="Kultur" author="Jan Freitag" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" date-last-modified="2014-05-12T17:43:39+00:00" date-first-released="2014-05-12T17:44:38.819643+00:00" date-last-published="2014-05-12T17:44:38.819643+00:00" last-semantic-change="2014-05-12T17:43:20.853704+00:00">
           </block>
         </container>
       </region>
       <region area="informatives">
         <container cp:type="teaser" module="zmo-landscape-small" hide-dupes="True" visible="True" cp:__name__="id-3d2116f6-96dd-4556-81f7-d7d0a40435e5">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Liebeskolumne</supertitle>
             <teaser_supertitle py:pytype="str">Liebeskolumne</teaser_supertitle>
             <title py:pytype="str">Ist sie zu rational?</title>
@@ -218,7 +218,7 @@
           </block>
         </container>
         <container cp:type="teaser" module="zmo-landscape-small" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bd">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
             <supertitle py:pytype="str">Kochen mit Freunden</supertitle>
             <teaser_supertitle py:pytype="str">Raffiniert kochen</teaser_supertitle>
             <title py:pytype="str">Die perfekte Illusion</title>
@@ -239,7 +239,7 @@
            <cp_extra id="zmo-seperator-for-cps"/>
          </container>
         <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-edc55a53-7cab-4bbc-a31d-1cf20afe5d9d">
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:11:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen</supertitle>
             <teaser_supertitle py:pytype="str">Kochen</teaser_supertitle>
             <title py:pytype="str">Probier's mal mit Gemütlichkeit</title>
@@ -257,7 +257,7 @@
           </block>
         </container>
          <container cp:type="teaser" module="zmo-landscape-small" hide-dupes="True" visible="True" cp:__name__="id-3d2116f6-96dd-4556-81f7-d7d0a40435e5">
-          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/article/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Liebeskolumne</supertitle>
             <teaser_supertitle py:pytype="str">Liebeskolumne</teaser_supertitle>
             <title py:pytype="str">Ist sie zu rational?</title>
@@ -279,7 +279,7 @@
     <cluster area="teaser-mosaic">
       <region cp:type="teaser-bar" module="zmo-cluster" area="teaser-row-full" cp:__name__="id-0f67f534-56f7-4d74-95a4-1698e9a2c43d">
         <container cp:type="teaser" module="zmo-mtb-square" hide-dupes="True" visible="True" cp:__name__="id-789d5cb9-dcfc-4949-b54e-e113cfa1b486">
-          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/vegetarisch-kochen-fuer-gaeste" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/vegetarisch-kochen-fuer-gaeste" uniqueId="http://xml.zeit.de/zeit-magazin/article/vegetarisch-kochen-fuer-gaeste" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:10:28+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Kochen für Gäste</supertitle>
             <teaser_supertitle py:pytype="str">Kochen für Gäste</teaser_supertitle>
             <title py:pytype="str">Heimlich vegetarisch</title>
@@ -295,7 +295,7 @@
               <display_name py:pytype="str">Elisabeth Raether</display_name>
             </author>
           </block>
-          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/gesellschaftskritik-grumpy-cat" uniqueId="http://xml.zeit.de/zeit-magazin/article/gesellschaftskritik-grumpy-cat" year="2014" issue="17" ressort="Digital" author="Christine Meffert" contenttype="article" publication-date="" expires="" genre="glosse" date-last-modified="2014-04-17T10:49:45+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T10:49:25.197602+00:00">
             <supertitle py:pytype="str">Serie Gesellschaftskritik</supertitle>
             <teaser_supertitle py:pytype="str">Serie Gesellschaftskritik</teaser_supertitle>
             <title py:pytype="str">Über schlechte Laune</title>
@@ -327,7 +327,7 @@
               <display_name py:pytype="str">Elisabeth Raether</display_name>
             </author>
           </block>
-          <block href="http://xml.zeit.de/artikel/artikel-ohne-assets" uniqueId="http://xml.zeit.de/artikel/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" uniqueId="http://xml.zeit.de/zeit-magazin/article/artikel-ohne-assets" year="2014" issue="17" ressort="Lebensart" author="Elisabeth Raether" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-17T16:50:22+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-17T16:32:21.713556+00:00">
             <supertitle py:pytype="str">Kochen mit Freunden</supertitle>
             <teaser_supertitle py:pytype="str">Raffiniert kochen</teaser_supertitle>
             <title py:pytype="str">Die perfekte Illusion</title>
@@ -343,7 +343,7 @@
               <display_name py:pytype="str">Elisabeth Raether</display_name>
             </author>
           </block>
-          <block href="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/test-cp-legacy/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
+          <block href="http://xml.zeit.de/zeit-magazin/article/liebeskolumne-rationalitaet-emotionen" uniqueId="http://xml.zeit.de/zeit-magazin/article/liebeskolumne-rationalitaet-emotionen" year="2014" issue="17" ressort="Lebensart" author="Wolfgang Schmidbauer" contenttype="article" publication-date="" expires="" date-last-modified="2014-04-15T10:13:32+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-04-16T06:00:00+00:00">
             <supertitle py:pytype="str">Liebeskolumne</supertitle>
             <teaser_supertitle py:pytype="str">Liebeskolumne</teaser_supertitle>
             <title py:pytype="str">Ist sie zu rational?</title>
