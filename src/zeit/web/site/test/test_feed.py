@@ -34,6 +34,25 @@ def test_newsfeed_should_render_some_rss(testserver):
 
     xml = lxml.etree.fromstring(res.content)
     assert xml.tag == 'rss'
+    assert xml.find('channel').find('link').text == 'http://www.zeit.de/index'
+    assert (
+        xml.find('channel').find('image').find('link').text ==
+        'http://www.zeit.de/index')
+
+
+def test_newsfeed_should_render_some_rss_cp(testserver):
+    res = requests.get(
+        '%s/campus/feedindex' % testserver.url,
+        headers={'Host': 'newsfeed.zeit.de'})
+
+    xml = lxml.etree.fromstring(res.content)
+    assert xml.tag == 'rss'
+    assert (
+        xml.find('channel').find('link').text ==
+        'http://www.zeit.de/campus/feedindex')
+    assert (
+        xml.find('channel').find('image').find('link').text ==
+        'http://www.zeit.de/campus/feedindex')
 
 
 def test_newsfeed_should_have_custom_max_age_header(testserver):
