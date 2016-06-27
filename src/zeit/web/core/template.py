@@ -121,7 +121,8 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
 @zeit.web.register_test
 def variant(image):
     # TRASHME: Jinja test to distinguish between bitblt/zci images.
-    return isinstance(image, zeit.web.core.image.VariantImage)
+    return isinstance(image, zeit.web.core.image.VariantImage) or isinstance(
+        getattr(image, 'image', None), zeit.web.core.image.VariantImage)
 
 
 @zeit.web.register_test

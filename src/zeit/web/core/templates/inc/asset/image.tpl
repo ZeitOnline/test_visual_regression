@@ -7,8 +7,8 @@
 
     {# TRASHME Rather crude bitblt/zci image api switch #}
     {%- if image is variant %}
-        {%- set source = request.image_host + image.path | replace(' ', '%20') %}
-        {%- set fallback_source = request.image_host + image.fallback_path | replace(' ', '%20') -%}
+        {%- set source = request.image_host + image.path | replace(' ', '%20') -%}
+        {%- set fallback_source = request.image_host + image.fallback_path | replace(' ', '%20') %}
         {%- set url = "%s__%sx%s" | format(source, width, height) %}
     {%- else %}
         {%- set source = image | default_image_url | replace(' ', '%20') -%}

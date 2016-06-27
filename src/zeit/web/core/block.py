@@ -242,7 +242,7 @@ class Quiz(Block):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
-class Image(zeit.web.core.image.BaseImage):
+class Image(Block):
 
     def __new__(cls, model_block):
         if getattr(model_block, 'is_empty', False):
@@ -255,14 +255,12 @@ class Image(zeit.web.core.image.BaseImage):
                 referenced = model_block.references.target
         except TypeError:
             pass  # Unresolveable uniqueId
-
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
-            variant = model_block.variant_name
-            try:
-                target = referenced[variant]
+            target = zeit.web.core.template.get_variant(
+                referenced, model_block.variant_name)
+            if target is not None:
                 group = referenced
-            except KeyError:
-                target = None
+            else:
                 group = None
         else:
             target = referenced
@@ -273,12 +271,16 @@ class Image(zeit.web.core.image.BaseImage):
 
         if not target:
             return
-
         instance = super(Image, cls).__new__(cls, model_block)
         instance.image = target
         instance.group = group
-        instance.src = instance.image.uniqueId
-        instance.uniqueId = instance.image.uniqueId
+        if isinstance(target, zeit.web.core.image.VariantImage):
+            instance.path = target.path
+            instance.fallback_path = target.fallback_path
+        else:
+            instance.ratio = target.ratio
+            instance.src = target.uniqueId
+            instance.uniqueId = target.uniqueId
         if model_block.references.title:
             instance.attr_title = model_block.references.title
         if model_block.references.alt:
