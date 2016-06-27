@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2724: Define custom parameters for different page types (Webtrekk)
 
+- BUG-436: Fix link element url in feed
+
 - FIX: Fix footer styles
 
 - FIX: Fix CSS charset
