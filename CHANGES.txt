@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2724: Define custom parameters for different page types (Webtrekk)
 
+- ZON-3100: Don't materialize image variants during article rendering
+
 - BUG-436: Fix link element url in feed
 
 - FIX: Fix footer styles
