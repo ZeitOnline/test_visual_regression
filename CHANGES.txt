@@ -4,6 +4,8 @@ Change log for zeit.web
 2.89 (unreleased)
 -----------------
 
+- HOTFIX: Remove duplicate article image from column header
+
 - ZON-2724: Define custom parameters for different page types (Webtrekk)
 
 - ZON-3100: Don't materialize image variants during article rendering
