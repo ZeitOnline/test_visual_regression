@@ -278,7 +278,6 @@ class Image(Block):
             instance.path = target.path
             instance.fallback_path = target.fallback_path
         else:
-            instance.ratio = target.ratio
             instance.src = target.uniqueId
             instance.uniqueId = target.uniqueId
         if model_block.references.title:
@@ -316,6 +315,10 @@ class Image(Block):
             if cr is not None:
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
+
+    @property
+    def ratio(self):
+        return self.image.ratio
 
 
 class HeaderImage(Image):

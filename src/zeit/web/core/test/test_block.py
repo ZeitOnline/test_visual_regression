@@ -174,6 +174,19 @@ def test_image_should_be_none_if_expired():
         assert image is None
 
 
+def test_image_should_pass_through_ratio(application):
+    image = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/image'
+        '/filmstill-hobbit-schlacht-fuenf-hee/')
+    model_block = mock.Mock()
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
+    model_block.is_empty = False
+    model_block.references.target = image
+    image = zeit.web.core.block.Image(model_block)
+    assert round(1.77 - image.ratio, 1) == 0
+
+
 def test_module_class_should_hash_as_expected():
     context = mock.Mock()
     context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}
