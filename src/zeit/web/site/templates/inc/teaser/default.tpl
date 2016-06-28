@@ -80,7 +80,7 @@
                 {% endblock teaser_datetime %}
                 {% block teaser_commentcount %}
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
-                    {% if comments %}
+                    {% if comments and teaser.commentSectionEnable %}
                         {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
                         <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser | create_url }}#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
                     {% endif %}
