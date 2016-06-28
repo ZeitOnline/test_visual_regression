@@ -402,59 +402,6 @@ def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
     assert tpl.module.no_block('') == ''
 
 
-def test_macro_insert_responsive_image_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-    image = mock.Mock()
-    image.alt = 'ALT'
-    image.title = 'TITLE'
-    image.src = 'SRC'
-
-    lines = tpl.module.insert_responsive_image(image).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert '<!--[if gt IE 8]><!-->' in output
-    assert '<img alt="ALT"' in output
-    assert 'title="TITLE"' in output
-    assert '<!--<![endif]-->' in output
-
-
-def test_macro_insert_responsive_image_should_produce_alternative_markup(
-        jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-    image = mock.Mock()
-    image.alt = 'ALT'
-    image.title = 'TITLE'
-    image.src = 'SRC'
-
-    lines = tpl.module.insert_responsive_image(image, 'CLASS').splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert 'class="CLASS figure__media' in output
-
-
-def test_macro_insert_responsive_image_should_produce_linked_image(
-        jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-    image = mock.Mock()
-    image.href = 'http://www.test.de'
-    page_type = 'article'
-
-    lines = tpl.module.insert_responsive_image(
-        image, '', page_type).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-
-    assert '<a href="http://www.test.de">' in output
-
-
 def test_macro_copyrights(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/layout_macro.tpl')

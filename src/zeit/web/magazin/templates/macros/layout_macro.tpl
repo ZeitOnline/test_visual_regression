@@ -1,25 +1,5 @@
 {% extends 'zeit.web.core:templates/macros/layout_macro.tpl' %}
 
-{% macro insert_responsive_image(image, image_class, page_type) %}
-    {# TRASHME: I want to be replace by the new snazzy image.tpl #}
-    {% if image %}
-        {% set source = image | default_image_url %}
-        <!--[if gt IE 8]><!-->
-            <noscript data-src="{{ source }}">
-        <!--<![endif]-->
-        {% if page_type == 'article' and image.href %}
-            <a href="{{ image.href }}">
-        {% endif %}
-                <img alt="{{ image.alt }}"{% if image.title %} title="{{ image.title }}"{% endif %} class="{{ image_class | default('', true) }} figure__media" src="{{ source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}"{% if image.itemprop %} itemprop="{{ image.itemprop }}"{% endif %}>
-        {% if page_type == 'article' and image.href %}
-            </a>
-        {% endif %}
-        <!--[if gt IE 8]><!-->
-            </noscript>
-        <!--<![endif]-->
-    {% endif %}
-{% endmacro %}
-
 {% macro copyrights(cr_list) -%}
     <div id="copyrights" class="copyrights">
         {{ use_svg_icon('copyrights-close', 'js-toggle-copyrights copyrights__close copyrights__close--icon', view.package) }}
