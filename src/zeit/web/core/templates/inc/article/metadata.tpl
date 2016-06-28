@@ -19,7 +19,7 @@
 	</span>
 {% endif -%}
 
-{% if view.comment_count %}
+{% if view.comment_count and view.show_commentthread %}
 	{#
 		span wrapper to prevent the :after-slash from being underlined
 		(which would happen if a was the child which gets a slash as :after-content)
