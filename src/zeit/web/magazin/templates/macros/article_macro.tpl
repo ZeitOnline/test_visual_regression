@@ -271,8 +271,7 @@
         {% for obj in block.itervalues() -%}
             <div class="photocluster__item">
                 <div class="scaled-image">
-                    {# XXX The naming is not great. #}
-                    {% include "zeit.web.magazin:templates/inc/asset/image_article_longform.tpl" %}
+                    {% include "zeit.web.magazin:templates/inc/asset/image_photocluster.tpl" %}
                 </div>
             </div>
         {%- endfor %}
