@@ -264,14 +264,15 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro photocluster(obj) %}
+{% macro photocluster(block) %}
 <div class="photocluster__wrap">
     <div class="photocluster">
-    {% if obj %}
-        {% for entry in obj.itervalues() -%}
+    {% if block %}
+        {% for obj in block.itervalues() -%}
             <div class="photocluster__item">
                 <div class="scaled-image">
-                    {{ lama.insert_responsive_image(entry) }}
+                    {# XXX The naming is not great. #}
+                    {% include "zeit.web.magazin:templates/inc/asset/image_article_longform.tpl" %}
                 </div>
             </div>
         {%- endfor %}
@@ -279,7 +280,7 @@
     </div>
     <div class="photocluster__caption is-constrained is-centered">
         <div class="photocluster__caption__text">
-            {{ obj.galleryText | safe }}
+            {{ block.galleryText | safe }}
         </div>
     </div>
 </div>

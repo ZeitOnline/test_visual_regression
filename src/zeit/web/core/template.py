@@ -462,8 +462,8 @@ def default_image_url(image, image_pattern='default'):
         image_pattern = getattr(image, 'image_pattern', image_pattern)
         if image_pattern != 'default':
             width, height = scales.get(image_pattern, (640, 480))
-        elif hasattr(image, 'layout'):
-            width, height = scales.get(image.layout, (640, 480))
+        elif hasattr(image, 'legacy_layout'):
+            width, height = scales.get(image.legacy_layout, (640, 480))
         else:
             width, height = scales.get(image_pattern, (640, 480))
         # TODO: use secret from settings?

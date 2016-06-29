@@ -200,7 +200,7 @@ def test_artikel05_should_have_header_image(testbrowser):
     assert '<div class="article__head-wrap">' in browser.contents
     assert ('<div class="scaled-image is-pixelperfect'
             ' article__head-image">') in browser.contents
-    assert 'class=" figure__media' in browser.contents
+    assert 'class="figure-longform' in browser.contents
 
 
 def test_column_should_have_header_image(testbrowser):

@@ -11,6 +11,8 @@ Change log for zeit.web
 
 - FIX: Pass proper 'published' date to rawr
 
+- FIX: Make image groups work in longform header again
+
 
 2.89.1 (2016-06-27)
 -------------------
