@@ -4,6 +4,9 @@ Change log for zeit.web
 2.90 (unreleased)
 -----------------
 
+- BUG-444: Do not show commentcount on articles and teasers with a
+  disabled comment thread
+
 - FIX: Adjust breakpoint for ZMO sharing links visibility
 
 - FIX: Pass proper 'published' date to rawr

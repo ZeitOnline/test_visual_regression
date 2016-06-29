@@ -2184,3 +2184,17 @@ def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
 
     assert '27: "cardstack.1.2.4;quiz.2.2.2"' in script.text_content().strip()
+
+
+def test_comment_count_in_teaser_not_shown_when_comments_disabled(
+        testbrowser, workingcopy):
+    id = 'http://xml.zeit.de/zeit-online/article/01'
+    article = zeit.cms.interfaces.ICMSContent(id)
+    with zeit.cms.checkout.helper.checked_out(article) as co:
+        co.commentSectionEnable = False
+    with mock.patch(
+            'zeit.web.core.comments.Community.get_comment_counts') as counts:
+        counts.return_value = {id: 35}
+        browser = testbrowser('/zeit-online/classic-teaser')
+    assert not browser.cssselect(
+        'article[data-unique-id="{}"] .teaser-small__commentcount'.format(id))

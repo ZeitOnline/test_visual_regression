@@ -21,7 +21,7 @@
                 </span>
                 {% endif %}
                 {{ cp.include_teaser_datetime(teaser, module_layout, module_layout) }}
-                {% if comments %}
+                {% if comments and teaser.commentSectionEnable %}
                     <span class="{{ module_layout }}__commentcount">
                         {{ comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') }}
                     </span>
