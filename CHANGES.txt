@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.90 (unreleased)
+2.90 (2016-06-29)
 -----------------
 
 - BUG-444: Do not show commentcount on articles and teasers with a
