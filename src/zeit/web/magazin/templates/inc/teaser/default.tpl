@@ -29,10 +29,11 @@ Default teaser template to inherit from.
     {%- endif %}
 
     {% block comments %}
-        {% if view.comment_counts[teaser.uniqueId] -%}
+        {% set comments = view.comment_counts[teaser.uniqueId] %}
+        {% if comments and teaser.commentSectionEnable -%}
         <a href="{{ teaser | create_url }}#show_comments" class="cp_comment__counter">
             {{- lama.use_svg_icon('comments-count', 'cp_comment__icon', view.package) -}}
-            <span class="cp_comment__count">{{ view.comment_counts[teaser.uniqueId] }}</span>
+            <span class="cp_comment__count">{{ comments }}</span>
         </a>
         {%- endif %}
     {% endblock %}
