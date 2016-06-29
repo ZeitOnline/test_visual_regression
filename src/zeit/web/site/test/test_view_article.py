@@ -1549,3 +1549,26 @@ def test_article_should_not_render_expired_video(testbrowser):
     articlepage = browser.cssselect('.article-page')
     articleitems = articlepage[0].getchildren()
     assert len(articleitems) == 2
+
+
+def test_comment_count_in_metadata_not_shown_when_comments_disabled(
+        testbrowser, workingcopy):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    with zeit.cms.checkout.helper.checked_out(article) as co:
+        co.commentSectionEnable = False
+    browser = testbrowser('/zeit-online/article/01')
+    assert not browser.cssselect('.metadata__commentcount')
+
+
+def test_comment_count_in_nextread_not_shown_when_comments_disabled(
+        testbrowser, workingcopy):
+    id = 'http://xml.zeit.de/zeit-online/article/01'
+    article = zeit.cms.interfaces.ICMSContent(id)
+    with zeit.cms.checkout.helper.checked_out(article) as co:
+        co.commentSectionEnable = False
+    with mock.patch(
+            'zeit.web.core.comments.Community.get_comment_counts') as counts:
+        counts.return_value = {id: 35}
+        browser = testbrowser('/zeit-online/article/02')
+    assert not browser.cssselect('.nextread__commentcount')
