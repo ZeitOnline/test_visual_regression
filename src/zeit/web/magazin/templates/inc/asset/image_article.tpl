@@ -21,7 +21,7 @@ figure__media
 {%- endblock %}
 
 {% block media_caption -%}
-    <figcaption class="figure__caption">
+    <figcaption class="figure__caption {{ media_caption_additional_class }}">
         {% if image.caption %}
         <span class="figure__text">{{ image.caption | safe }}</span>
         {% endif %}

@@ -50,7 +50,7 @@
 
                     {% set block_type = view.header_module|block_type %}
                     {% if block_type == 'headerimage' %}
-                        <div class="scaled-image is-pixelperfect article__head-image">
+                        <div class="article__head-image">
                             {% set obj = view.header_module%}
                             {% include "zeit.web.magazin:templates/inc/asset/image_article_longform.tpl" %}
                         </div>
