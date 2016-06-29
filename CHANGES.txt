@@ -4,7 +4,7 @@ Change log for zeit.web
 2.91 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Adjust breakpoint for ZMO sharing links visibility [RELOADED]
 
 
 2.90 (2016-06-29)
