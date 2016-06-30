@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3147: Remove buzzboard image duplicates
 
+- BUG-446: Show fallback image for expired campus teaser images
+
 
 2.90.1 (2016-06-29)
 -------------------

@@ -105,6 +105,14 @@
       </region>
     </cluster>
 
+    <cluster area="id-41a8299d-b569-4c42-b713-dbjhhj5dbd86a64f2ex" kind="solo" visible="True" visible_mobile="True">
+      <region area="id-41a2899d-b569-4c42-b713-db5dbd8jhhj6a64f2exd" kind="solo" visible="True" visible_mobile="True">
+        <container cp:type="teaser" module="zco-lead-cinema" visible="True" visible_mobile="True" cp:__name__="id-d4e5b15a-245d-4c6f-b57a-e357dbf3be4b2exp">
+          <block contenttype="article" href="http://xml.zeit.de/campus/article/article-with-expired-image" uniqueId="http://xml.zeit.de/campus/article/article-with-expired-image"></block>
+        </container>
+      </region>
+    </cluster>
+
     <cluster area="id-41a8299d-b569-4c42-b713-d5bdbd86a64f" kind="duo" visible="True" visible_mobile="True">
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd86a63f" kind="duo" visible="True" visible_mobile="True">
         <container cp:type="teaser" module="zco-wide-large" visible="True" visible_mobile="True" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e35d7bf3be4b">
