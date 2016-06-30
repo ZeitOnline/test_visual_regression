@@ -84,10 +84,19 @@ def test_buzzboard_renders(testbrowser):
     assert len(board) == 1
 
 
-def test_buzzboard_should_avoid_same_teaser_image_twice(testbrowser):
+def test_buzzboard_should_avoid_same_teaser_image_twice(
+        testbrowser, monkeypatch):
+
+    # Make most shared equal to most read to provide column image testing.
+    def social_ranking(self, **kw):
+        return self._get_ranking('views', **kw)
+
+    monkeypatch.setattr(
+        zeit.web.core.reach.Reach, 'get_social', social_ranking)
+
     browser = testbrowser('/zeit-online/buzz-box')
     area = browser.cssselect('.cp-area--buzzboard')[0]
-    assert len(area.cssselect('.teaser-buzzboard__media')) == 3
+    assert len(area.cssselect('.teaser-buzzboard__media')) == 2
 
 
 def test_buzzboard_renders_column_teaser(testbrowser):
