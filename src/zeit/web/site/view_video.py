@@ -89,6 +89,10 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
     def slug(self):
         return self.get_slug(self)
 
+    @zeit.web.reify
+    def product_id(self):
+        return super(Video, self).product_id or 'zede'
+
     @staticmethod
     def get_slug(self):
         titles = (t for t in (self.supertitle, self.title) if t)
