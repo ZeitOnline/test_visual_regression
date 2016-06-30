@@ -41,7 +41,9 @@ class Centerpage(
         zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
     """Main view class for ZEIT ONLINE centerpages."""
 
-    _buzzboard_images = {}
+    def __init__(self, *args, **kwargs):
+        self._buzzboard_images = {}
+        super(Centerpage, self).__init__(*args, **kwargs)
 
     @zeit.web.reify
     def ressort(self):
