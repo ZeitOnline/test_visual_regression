@@ -4,7 +4,7 @@ Change log for zeit.web
 2.91 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3147: Remove buzzboard image duplicates
 
 
 2.90.1 (2016-06-29)
