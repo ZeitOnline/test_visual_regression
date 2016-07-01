@@ -234,3 +234,10 @@ def test_expired_video_should_trigger_redirect(testserver):
     assert resp.status_code == 301
     assert (resp.headers['location'] == (
             '%s/video/index' % testserver.url))
+
+
+def test_video_has_default_product_id(application, dummy_request):
+    video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
+    view = zeit.web.site.view_video.Video(video, dummy_request)
+    assert view.product_id == 'zede'
