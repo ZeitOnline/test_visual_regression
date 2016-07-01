@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-446: Show fallback image for expired campus teaser images
 
+- BUG-374: Add default product_id for video pages
+
 - FIX: Be defensive when counting paragraphs for fbia ads
 
 
