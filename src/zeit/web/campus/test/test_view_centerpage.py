@@ -218,6 +218,9 @@ def test_campus_teaser_no_image_fallback_works_as_expected(testbrowser):
         select('.teaser-lead-cinema__media-item')[1].attrib['src'])
     assert (
         '/default/teaser_image/' in
+        select('.teaser-lead-cinema__media-item')[2].attrib['src'])
+    assert (
+        '/default/teaser_image/' in
         select('.teaser-wide-large__media-item')[0].attrib['src'])
     assert (
         '/campus/image/02-maedchen-koffer-zug/' in

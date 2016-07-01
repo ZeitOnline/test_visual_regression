@@ -58,7 +58,8 @@ FROM_CONTENT = object()
 
 
 @zeit.web.register_global
-def get_image(module=None, content=None, fallback=True, variant_id=None,
+def get_image(module=None, content=None, fallback=True,
+              fallback_expired=False, variant_id=None,
               default='default', fill_color=FROM_CONTENT):
     """Universal image retrieval function to be used in templates.
 
@@ -92,10 +93,17 @@ def get_image(module=None, content=None, fallback=True, variant_id=None,
     except (TypeError, AttributeError):
         pass
 
+    use_fallback = False
     if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
         if not fallback:
             return None
+        use_fallback = True
+    elif expired(group):
+        if not fallback_expired:
+            return None
+        use_fallback = True
 
+    if use_fallback:
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         default_id = conf.get('default_teaser_images')
         group = zeit.cms.interfaces.ICMSContent(default_id, None)
