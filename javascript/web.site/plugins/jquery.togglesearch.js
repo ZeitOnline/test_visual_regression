@@ -65,7 +65,7 @@
                 });
 
                 // event to reset clickable state when resized
-                $( window ).on( 'resize', this.resetInput );
+                $( window ).on( 'resize', $.debounce( resetInput, 300 ) );
             }
         };
 
