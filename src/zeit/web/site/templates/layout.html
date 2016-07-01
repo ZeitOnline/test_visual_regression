@@ -131,7 +131,7 @@
         <div class="page__content">
             {% profile %}
             {% if not view.is_wrapped %}
-            <header class="header">
+            <header class="header" data-ct-area="topnav">
                 {% block navigation %}
                     {%- include "zeit.web.site:templates/inc/navigation/navigation.tpl" ignore missing -%}
                 {% endblock navigation %}
