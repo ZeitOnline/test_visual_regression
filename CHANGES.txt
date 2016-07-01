@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-446: Show fallback image for expired campus teaser images
 
+- FIX: Be defensive when counting paragraphs for fbia ads
+
 
 2.90.1 (2016-06-29)
 -------------------
