@@ -483,7 +483,7 @@ module.exports = function(grunt) {
 
         if ( target in config.sass ) {
             grunt.log.writeln('Using task sass:' + target);
-            config.watch.sass.tasks = [ 'sass:' + target ];
+            config.watch.sass.tasks = [ 'sass:' + target, 'newer:postcss:dist' ];
         }
 
         // grunt.log.writeflags(config);
