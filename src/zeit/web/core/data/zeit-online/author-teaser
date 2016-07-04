@@ -94,7 +94,7 @@
         </container>
       </region>
     </cluster>
-    <cluster area="id-d102845f-8aa2-4305-a731-81efaf03919f">
+    <cluster area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
       <region area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
         <container cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e9" cp:type="teaser" module="zon-small">
           <block href="http://xml.zeit.de/autoren/F/Thomas_Fischer/index" />

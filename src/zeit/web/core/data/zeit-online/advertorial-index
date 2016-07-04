@@ -89,8 +89,8 @@
                 </container>
             </region>
         </cluster>
-        <cluster visible="True" area="gnnpf" title="Servicebox">
-            <region visible="True" area="grrrmmmpf" kind="solo" title="Servicebox">
+        <cluster area="id-19e29491-d40f-4033-a07f-52b752b8b2da" kind="solo" title="Service-Box" visible="True">
+            <region area="id-13ae5250-58f2-4d47-8fe9-5c24164389e5" kind="solo" visible="True">
                 <container cp:__name__="huwaaaaa" cp:type="cpextra" module="servicebox" visible="True">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="servicebox" />
                 </container>

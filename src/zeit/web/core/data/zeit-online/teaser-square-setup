@@ -64,14 +64,14 @@
     </head>
     <body>
         <title>Grafischer Teaser</title>
-        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3">
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" kind="solo">
             <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" kind="solo">
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" module="zon-fullwidth">
                     <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" />
                 </container>
             </region>
         </cluster>
-        <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f">
+        <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
             <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" kind="major">
                 <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" module="zon-small">
                     <block href="http://xml.zeit.de/zeit-online/article/01" />
@@ -89,7 +89,7 @@
                 </container>
             </region>
         </cluster>
-        <cluster area="id-d102845f-8aa2-4305-a731-81efaf03919f">
+        <cluster area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
             <region area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
                 <container cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
@@ -101,7 +101,7 @@
                 </container>
             </region>
         </cluster>
-        <cluster area="id-7e329214-665f-457d-a624-94c47850f95d">
+        <cluster area="id-7e329214-665f-457d-a624-94c47850f95d" kind="duo">
             <region area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb7" kind="duo">
                 <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-julia-zange" />
@@ -113,7 +113,7 @@
                 </container>
             </region>
         </cluster>
-        <cluster area="id-7e329214-665f-457d-a624-94c47850f956">
+        <cluster area="id-7e329214-665f-457d-a624-94c47850f956" kind="duo">
             <region area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
                 <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b8" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/feature/feature_longform" />
