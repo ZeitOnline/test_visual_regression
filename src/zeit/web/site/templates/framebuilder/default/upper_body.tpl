@@ -27,7 +27,7 @@
             </div>
         {% endblock adplace_top %}
         <div class="page__content">
-            <header class="header">
+            <header class="header" data-ct-area="topnav">
                 {%- include "zeit.web.site:templates/framebuilder/default/navigation.tpl" ignore missing -%}
             </header>
             {% block adplace_billboard %}

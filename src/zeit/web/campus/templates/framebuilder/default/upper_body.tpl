@@ -26,7 +26,7 @@
         {% endblock adplace_top %}
 
         <div class="page__content">
-            <header class="header">
+            <header class="header" data-ct-area="campus-topnav">
                 {%- block navigation -%}
                     {%- include "zeit.web.campus:templates/framebuilder/default/navigation.tpl" -%}
                 {%- endblock navigation -%}
