@@ -1,5 +1,5 @@
 </head>
-<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
+<body>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 
