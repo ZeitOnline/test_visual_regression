@@ -153,8 +153,7 @@ module.exports = function(grunt) {
                 },
                 src: [
                     '<%= project.codeDir %>css/**/*.css',
-                    '!<%= project.codeDir %>css/**/all-old-ie.css',
-                    '!<%= project.codeDir %>css/**/ie-navi.css'
+                    '!<%= project.codeDir %>css/**/all-old-ie.css'
                 ]
             },
             'old-ie': {
@@ -162,8 +161,7 @@ module.exports = function(grunt) {
                     processors: [autoprefixerOldIe, postcssNormalizeCharset]
                 },
                 src: [
-                    '<%= project.codeDir %>css/**/all-old-ie.css',
-                    '<%= project.codeDir %>css/**/ie-navi.css'
+                    '<%= project.codeDir %>css/**/all-old-ie.css'
                 ]
             }
         },
