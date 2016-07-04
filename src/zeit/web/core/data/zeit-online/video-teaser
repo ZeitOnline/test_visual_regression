@@ -65,7 +65,7 @@
 <body>
     <title>Video-Teaser</title>
 
-    <cluster area="id-a2dff7f3-9172-4a6f-b88d-143fdfc5cff7" visible="True">
+    <cluster area="id-a2dff7f3-9172-4a6f-b88d-143fdfc5cff7" visible="True" kind="solo">
         <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
             <container cp:__name__="id-0e4c344a-813a-2816-95a7-2affe49167fe" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
                 <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />
@@ -73,7 +73,7 @@
         </region>
     </cluster>
 
-    <cluster area="id-a2dff7f3-9876-4a6f-b88d-143fdfc5cff7" visible="True">
+    <cluster area="id-a2dff7f3-9876-4a6f-b88d-143fdfc5cff7" visible="True" kind="solo">
         <region area="id-8152c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
             <container cp:__name__="id-0e4c715a-813a-2816-95a7-2affe49167fe" cp:type="teaser" hide-dupes="True" module="zon-classic" visible="True">
                 <block contenttype="video" uniqueId="http://xml.zeit.de/video/2014-01/1953013471001" />

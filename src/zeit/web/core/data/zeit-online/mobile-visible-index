@@ -64,7 +64,7 @@
     </head>
     <body>
         <title>Mobile visible</title>
-        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True" visible_mobile="False">
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True" kind="solo" visible_mobile="False">
             <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
@@ -134,7 +134,7 @@
                 </container>
             </region>
         </cluster>
-        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff4" visible="True">
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff4" visible="True" kind="duo">
             <region area="id-c1a352a2-5e54-4ab1-86f3-bbf565666083" visible="True" kind="duo">
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
@@ -148,8 +148,8 @@
                 </container>
             </region>
         </cluster>
-        <cluster visible="True" area="gnnpf" title="Servicebox">
-            <region visible="True" area="grrrmmmpf" kind="solo" title="Servicebox">
+        <cluster area="id-19e29491-d40f-4033-a07f-52b752b8b2da" kind="solo" title="Service-Box" visible="True">
+            <region area="id-13ae5250-58f2-4d47-8fe9-5c24164389e5" kind="solo" visible="True">
                 <container cp:__name__="huwaaaaa" cp:type="cpextra" module="servicebox" visible="True">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="servicebox" />
                 </container>

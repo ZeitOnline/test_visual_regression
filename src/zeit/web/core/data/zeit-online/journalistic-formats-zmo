@@ -135,7 +135,7 @@
     </cluster>
 
     <!-- Square -->
-    <cluster area="id-7e329214-665f-457d-a624-94c47850f956">
+    <cluster area="id-7e329214-665f-457d-a624-94c47850f956" kind="duo">
         <region area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
             <container cp:type="teaser" module="zon-square" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152572a">
         <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
