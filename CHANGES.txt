@@ -80,6 +80,8 @@ Change log for zeit.web
 2.88 (2016-06-21)
 -----------------
 
+- ZON-3142: Use amp-analytics for webtrekk in AMPs
+
 - ZON-3108: Return correct ressort for CeleraOne
 
 - ZON-2927: Split Image.layout into display_mode and variant_name
