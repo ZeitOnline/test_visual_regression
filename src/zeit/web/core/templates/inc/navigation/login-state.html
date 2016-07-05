@@ -1,7 +1,7 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
 {% if user %}
-	<a class="nav__login-title" href="{{ profile }}" role="button" aria-controls="user-menu" aria-label="Account" id="login-state" data-ct-label="avatar" data-follow-mobile="true" data-sso-id="{{ user.ssoid }}">
+	<a class="nav__login-title" href="{{ profile }}" role="button" aria-controls="user-menu" aria-label="Account" id="login-state" data-ct-label="user-menu" data-follow-mobile="true" data-sso-id="{{ user.ssoid }}">
 		{% if user.picture -%}
 			<span class="nav__user-picture" style="background-image: url({{ user.picture }})"></span>
 		{%- else %}
