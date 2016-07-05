@@ -1,67 +1,68 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<div class="main_nav" id="main_nav">
-	<!-- logo -->
-	<div id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization" class="logo_bar">
-		{% with tag_name = 'h1' if view.is_hp else 'div' %}
-		<{{ tag_name }} class="logo_bar__brand" itemprop="brand">
-			<a itemprop="url" href="{{ request.route_url('home') }}index" title="Nachrichten auf ZEIT ONLINE" data-id="topnav.2.1..logo">
-				<meta itemprop="name" content="ZEIT ONLINE">
-				<span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-					{{ lama.use_svg_icon('logo-zon-black', 'logo_bar__brand-logo', view.package) }}
-					<meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
-					<meta itemprop="width" content="565">
-					<meta itemprop="height" content="60">
-				</span>
-			</a>
-		</{{ tag_name }}>
-		{% endwith %}
-		<div class="logo_bar__menu">
-			<a href="#main_nav" title="Hauptmenü" aria-label="Hauptmenü" role="button" aria-controls="main_nav" aria-expanded="false">
-				{{ lama.use_svg_icon('menu', 'logo_bar__menu-icon logo_bar__menu-icon--burger', view.package) }}
-				{{ lama.use_svg_icon('close', 'logo_bar__menu-icon logo_bar__menu-icon--close', view.package) }}
-			</a>
-		</div>
-	</div>
+<div class="header__brand" data-ct-row="lead">
+    {% with tag_name = 'h1' if view.is_hp else 'div' -%}
+    <{{ tag_name }} class="header__publisher" id="publisher" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+        <a itemprop="url" href="{{ request.route_url('home') }}index" title="Nachrichten auf ZEIT ONLINE" data-ct-label="logo">
+            <meta itemprop="name" content="ZEIT ONLINE">
+            <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                {{ lama.use_svg_icon('logo-zon-black', 'header__logo', view.package) }}
+                {# The "logo" dimensions must not exceed 600x60 -#}
+                <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png">
+                <meta itemprop="width" content="565">
+                <meta itemprop="height" content="60">
+            </span>
+        </a>
+    </{{ tag_name }}>
+    {% endwith -%}
 
-	<!-- special teaser -->
-	{% block special_teaser %}
-		{% if view.is_advertorial %}
-		<div class="main_nav__ad-label advertorial__ad-label">{{ view.cap_title | default('Anzeige') }}</div>
-		{% else %}
-		<div class="main_nav__teaser">{# planned special teaser #}</div>
-		{% endif %}
-	{% endblock special_teaser %}
+    <!-- special teaser -->
+    {% block special_teaser -%}
+        {% if view.is_advertorial -%}
+        <div class="header__ad-label">{{ view.cap_title | default('Anzeige') }}</div>
+        {%- else -%}
+        <div class="header__teaser">{# planned special teaser #}</div>
+        {%- endif %}
+    {%- endblock special_teaser %}
 
-	<!-- wrap start -->
-    <div class="main_nav__community" data-dropdown="true">
+    <a class="header__menu-link" href="#navigation" role="button" aria-controls="navigation" aria-label="Menü" data-ct-label="menu">
+        {{ lama.use_svg_icon('menu', 'header__menu-icon header__menu-icon--menu', view.package) }}
+        {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.package) }}
+    </a>
+</div>
+
+<div class="nav" id="navigation">
+    <nav class="nav__classifieds" data-ct-row="classifieds">
+        {%- set navigation = view.navigation_classifieds -%}
+        {%- set nav_class = 'nav__classifieds' -%}
+        {%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
+    </nav>
+
+    <nav class="nav__services" data-ct-row="services">
+        {%- set navigation = view.navigation_services -%}
+        {%- set nav_class = 'nav__services' -%}
+        {%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
+    </nav>
+
+    <div class="nav__login" data-ct-row="usermenu">
         {% block login %}
             {% set esi_source = '{}login-state?for=site&context-uri={}'.format(request.route_url('home'), request.url) %}
             {{ lama.insert_esi(esi_source, 'Anmeldung nicht möglich') }}
         {% endblock login %}
     </div>
 
-	{% if view.nav_show_ressorts %}
-	<div class="main_nav__ressorts" data-dropdown="true">
-		<nav id="primary_nav">
-		{%- set navigation = view.navigation -%}
-		{%- set nav_class = 'primary-nav' -%}
-		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
-		</nav>
-	</div>
-	{% endif %}
-	<div class="main_nav__services" data-dropdown="true">
-		{%- set navigation = view.navigation_services -%}
-		{%- set nav_class = 'primary-nav-services' -%}
-		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
-	</div>
-	<div class="main_nav__classifieds" data-dropdown="true">
-		{%- set navigation = view.navigation_classifieds -%}
-		{%- set nav_class = 'main-nav-classifieds' -%}
-		{%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
-	</div>
-	{% if view.nav_show_search %}
-	<div class="main_nav__search" data-dropdown="true">{% include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" %}</div>
-	{% endif %}
-	<!-- wrap end -->
+    <div class="nav__search" data-ct-row="search">
+        {%- if view.nav_show_search -%}
+            {%- include "zeit.web.site:templates/inc/navigation/navigation-search.tpl" -%}
+        {%- endif -%}
+    </div>
+
+{% if view.nav_show_ressorts %}
+    <nav class="nav__ressorts" itemscope itemtype="http://schema.org/SiteNavigationElement" data-ct-row="mainnav">
+        {%- set navigation = view.navigation -%}
+        {%- set nav_class = 'nav__ressorts' -%}
+        {%- set site_navigation_element = True -%}
+        {%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
+    </nav>
+{% endif %}
 </div>

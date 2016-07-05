@@ -2,7 +2,8 @@
  * @fileOverview jQuery Plugin to adapt the primary navigation to limited horizontal space
  * @author arne.seemann@zeit.de
  * @author anika.szuppa@zeit.de
- * @version  0.1
+ * @author moritz.stoltenburg@zeit.de
+ * @version  0.2
  */
 (function( $ ) {
     /**
@@ -29,78 +30,71 @@
     */
     $.fn.adaptToSpace = function() {
 
-        var el = {
-            $nav: false,
-            $feature: false,
-            $items: false,
-            $html: false,
-            $moreList: false,
-            $moreListItems: false,
-            init: function( $that ) {
+        function Container( element ) {
+            this.node = element;
+            this.element = $( element );
+            this.featured = this.element.find( '.nav__ressorts-item--featured' );
+            this.labeled = this.element.find( '.nav__ressorts-item--has-label' );
+            this.moreList = $( '#more-ressorts' );
+            this.items = this.element.children()
+                .not( '.nav__ressorts-item--has-dropdown' )
+                .not( this.labeled )
+                .not( this.featured );
+            this.clones = this.items.clone();
 
-                //set globals
-                this.$nav = $that;
-                this.$items = el.$nav.children( '.primary-nav__item' ).
-                    not( '*[data-id="more-dropdown"]' ).
-                    not( '.primary-nav__item--has-label' ).
-                    not( '.primary-nav__item--featured' );
-                this.$feature = el.$nav.find( '.primary-nav__item--featured' );
+            this.init();
+        }
 
-                this.$moreList = el.$nav.find( '.primary-nav__item[data-id="more-dropdown"]' );
-                this.$moreListItems = el.$moreList.find( '.dropdown > .dropdown__item' );
+        Container.prototype = {
+            init: function() {
+                var self = this;
 
-                this.toggleNavItems();
-                this.$nav.removeClass( 'primary-nav--js-no-overflow' );
+                // copy all items to more list
+                this.moreList
+                    .append( this.clones )
+                    .append( this.labeled );
 
-                //make adaption on resize possible, too
-                $( window ).on( 'resize', function() {
-                    el.toggleNavItems();
-                });
+                this.adapt();
+
+                // trigger adaption on resize
+                $( window ).on( 'resize', $.debounce( function() {
+                    self.adapt();
+                }, 100 ));
             },
-            toggleNavItems: function() {
+            adapt: function() {
+                var parent = this.element.parent();
 
-                // make sure to *not* fire on mobile
-                if ( el.isDesktop() && el.$nav ) {
-                    var navWidth = 0,
-                        threshold = el.getAvailableWidth();
+                this.items.show();
 
-                    // shall the item be displayed?
-                    el.$items.each(function() {
-                        var $navItem = $( this ),
-                            itemId = $navItem.data( 'id' ),
-                            $dropdownItem = el.$moreListItems.filter( '[data-id="' + itemId + '"]' );
+                // do not adapt space on mobile
+                if ( this.isDesktop() ) {
+                    parent.removeClass( 'nav__ressorts--fitted' );
+                    this.clones.hide();
 
-                        navWidth += $navItem.outerWidth();
+                    var maxWidth = parent.width(),
+                        index;
 
-                        if ( navWidth < threshold ) {
-                            $navItem.show();
-                            $dropdownItem.hide();
+                    for ( index = this.items.length; index--; ) {
+                        if ( this.node.scrollWidth > maxWidth ) {
+                            this.items.eq( index ).hide();
+                            this.clones.eq( index ).show();
                         } else {
-                            $navItem.hide();
-                            $dropdownItem.show();
+                            break;
                         }
-                    });
-                } else {
-                    // show all top sections on mobile
-                    el.$items.show();
+                    }
+
+                    parent.addClass( 'nav__ressorts--fitted' );
                 }
             },
             isDesktop: function() {
-                // check that some "mobile only"-divs aren't visible
-                return ( $( '.main_nav .logo_bar__menu' ).is( ':hidden' ) );
-            },
-            getAvailableWidth: function() {
-                //get size available in navi
-                var featureWidth = el.$feature.outerWidth( true ),
-                    moreWidth = el.$moreList.outerWidth( true ),
-                    tolerance = el.$nav.outerWidth() * 0.01;
-                return ( el.$nav.width() - featureWidth - moreWidth - tolerance );
+                // check that some "desktop only" elements are visible
+                return this.element.find( '.nav__ressorts-item--more' ).is( ':visible' );
             }
         };
 
-        //run through nav element and return object
+        // run through collection and return object
         return this.each( function() {
-            el.init( $( this ) );
+            new Container( this );
         });
 
     };

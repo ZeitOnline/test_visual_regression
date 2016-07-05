@@ -9,7 +9,7 @@ $zon-search-square-size: remify(35px)
 	padding: remify(16px 0)
 	+respond-min($break-tablet-min)
 		float: right
-		padding: remify(20px 0 0)
+		padding: remify(22px 0 0)
 
 .search__input
 	background-color: $white
@@ -20,6 +20,7 @@ $zon-search-square-size: remify(35px)
 	float: left
 	font-size: $font-m
 	height: $zon-search-square-size
+	line-height: normal // IE 11 fix
 	padding: 0 0 0 $fine
 	width: 85%
 	width: calc(100% - #{$zon-search-square-size})
