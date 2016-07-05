@@ -159,8 +159,8 @@ def test_headerimage_has_appropriate_html_structure(testbrowser):
     image = header[0].cssselect('.header-image__media-item')[0]
     assert len(header[0].cssselect('.header-image__heading--overlay')) == 1
     assert len(header[2].cssselect('.header-image__heading--overlay')) == 0
-    assert image.get('data-variant') == 'cinema'
-    assert not image.get('data-mobile-variant')
+    assert image.get('data-ratio') == '2.33333333333'  # variant=cinema
+    assert not image.get('data-mobile-ratio')
 
 
 def test_advertorial_header_has_appropriate_html_structure(testbrowser):
@@ -274,7 +274,7 @@ def test_paginated_cp_has_correct_teaser_structure(testbrowser):
     image = teaser.cssselect('.teaser-small__media-item')[0]
     assert len(teaser.cssselect('.teaser-small__media')) == 1
     assert len(teaser.cssselect('.teaser-small__content')) == 1
-    assert image.get('data-variant') == 'wide'
+    assert image.get('data-ratio') == '1.77777777778'
 
 
 def test_campus_toolbox_has_correct_links(testbrowser):

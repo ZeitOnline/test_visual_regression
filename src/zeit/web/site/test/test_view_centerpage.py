@@ -185,7 +185,6 @@ def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
         testbrowser):
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     img = browser.cssselect('.teaser-fullwidth__media-item')[0]
-    assert img.attrib['data-mobile-variant'] == 'wide'
     assert img.attrib['data-mobile-ratio'].startswith('1.77')
     assert 'cp-content/ig-1/wide' in img.attrib['data-mobile-src']
 
@@ -2154,8 +2153,8 @@ def test_teaser_classic_should_not_have_gradient_overlay(testbrowser):
 def test_headerimage_has_appropriate_html_structure(testbrowser):
     browser = testbrowser('/zeit-online/index-with-image')
     image = browser.cssselect('.header-image__media-item')[0]
-    assert image.get('data-variant') == 'panorama'
-    assert image.get('data-mobile-variant') == 'cinema'
+    assert image.get('data-ratio') == '3.5'  # varian=panorama
+    assert image.get('data-mobile-ratio') == '2.33333333333'  # variant=cinema
 
 
 def test_zco_parquet_has_zco_styles(testbrowser):
