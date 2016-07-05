@@ -23,7 +23,7 @@
         <!--<![endif]-->
             <div class="{% block media_block_helper %}{{ module_layout }}__media-container{% endblock %} {{ media_container_additional_class }}">
                 {% block media_block_wrapper %}
-                <img class="{% block media_block_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.alt }}" src="{{ fallback_source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}" data-variant="{{ image.image_pattern }}" {% block media_block_additional_data_attributes %}{% endblock %}>
+                <img class="{% block media_block_item %}{{ module_layout }}__media-item{% endblock %}" alt="{{ image.alt }}" src="{{ fallback_source }}" data-src="{{ source }}" data-ratio="{{ image.ratio }}" {% block media_block_additional_data_attributes %}{% endblock %}>
                 {% endblock %}
                 {{ media_container_after }}
             </div>
