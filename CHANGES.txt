@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Be defensive when counting paragraphs for fbia ads
 
+- FIX: Fix image tests and clean up templates: use ratio instead of variant
+
 
 2.90.1 (2016-06-29)
 -------------------
