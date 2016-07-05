@@ -1237,7 +1237,7 @@ def test_wrapped_features_are_triggered(testbrowser):
 
 def test_advertorial_page_has_advertorial_label(testbrowser):
     browser = testbrowser('/zeit-online/advertorial-index')
-    assert browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
+    assert browser.cssselect('.header__ad-label')
 
 
 def test_standard_teasers_have_meetrics_attribute(testbrowser):

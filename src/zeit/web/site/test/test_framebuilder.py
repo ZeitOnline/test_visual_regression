@@ -97,22 +97,22 @@ def test_framebuilder_can_contain_meetrics(testbrowser):
 
 def test_framebuilder_should_show_ressort_nav_by_default(testbrowser):
     browser = testbrowser('/framebuilder')
-    assert browser.cssselect('.main_nav__ressorts')
+    assert browser.cssselect('.nav__ressorts')
 
 
 def test_framebuilder_can_disable_ressort(testbrowser):
     browser = testbrowser('/framebuilder?hide_ressorts')
-    assert not browser.cssselect('.main_nav__ressorts')
+    assert not browser.cssselect('.nav__ressorts')
 
 
-def test_framebuilder_should_show_search_nav_by_default(testbrowser):
+def test_framebuilder_should_show_search_form_by_default(testbrowser):
     browser = testbrowser('/framebuilder')
-    assert browser.cssselect('.main_nav__search')
+    assert browser.cssselect('.nav .search')
 
 
-def test_framebuilder_can_disable_search(testbrowser):
+def test_framebuilder_can_omit_search_form(testbrowser):
     browser = testbrowser('/framebuilder?hide_search')
-    assert not browser.cssselect('.main_nav__search')
+    assert not browser.cssselect('.nav .search')
 
 
 def test_framebuilder_displays_no_adlabel_by_default(testbrowser):
@@ -124,7 +124,7 @@ def test_framebuilder_displays_no_adlabel_by_default(testbrowser):
 def test_framebuilder_displays_adlabel_if_requested(testbrowser):
     browser = testbrowser('/framebuilder?adlabel=sch%C3%B6nes%20Wurstbrot')
     # desktop:
-    adlabel = browser.cssselect('.main_nav__ad-label.advertorial__ad-label')
+    adlabel = browser.cssselect('.header__ad-label')
     assert len(adlabel) == 1
     assert adlabel[0].text.strip() == u'schönes Wurstbrot'
     # mobile:

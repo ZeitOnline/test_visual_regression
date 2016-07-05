@@ -84,8 +84,8 @@ def test_keyword_redirect_should_handle_unicode(testserver):
 
 def test_main_nav_should_render_labels(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
-    dropdown_label = browser.cssselect('.primary-nav *[data-label]')
-    assert len(dropdown_label) == 6  # three elements two times
+    dropdown_label = browser.cssselect('.nav__ressorts-list *[data-label]')
+    assert len(dropdown_label) == 3
     assert dropdown_label[0].attrib['data-label'] == 'Anzeige'
     assert dropdown_label[1].attrib['data-label'] == 'Anzeigen'
 
