@@ -35,7 +35,8 @@ class Area(collections.OrderedDict):
 
     def __init__(self, arg, **kw):
         super(Area, self).__init__(
-            [('id-{}'.format(uuid.uuid1()), v) for v in arg if v])
+            [('id-{}'.format(uuid.uuid1()),
+              zeit.web.core.template.get_module(v)) for v in arg if v])
         self.kind = kw.pop('kind', 'solo')
         self.xml = kw.pop('xml', self.factory.get_xml())
         self.automatic = kw.pop('automatic', False)
@@ -162,7 +163,8 @@ class RenderedRegion(zeit.content.cp.area.Region):
 def cache_values_area(context):
     def cached_values(self):
         return self._v_values
-    context._v_values = context.values()
+    context._v_values = [zeit.web.core.template.get_module(x)
+                         for x in context.values()]
     context.values = cached_values.__get__(context)
     return context
 
@@ -217,6 +219,8 @@ class Module(object):
             self.layout = context.cpextra
         elif zeit.edit.interfaces.IBlock.providedBy(context):
             self.layout = context.type
+        # XXX Should we proxy through anything we don't have to context?
+        self.type = context.type
 
     def __hash__(self):
         return self.context.xml.attrib.get(

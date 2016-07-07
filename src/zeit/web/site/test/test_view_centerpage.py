@@ -1981,7 +1981,9 @@ def test_centerpage_page_should_reconstruct_multiple_modules(
     view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
     assert len(view.regions) == 2
     assert view.regions[0].values()[0].values()[0].supertitle == 'Griechenland'
-    assert view.regions[0].values()[0].values()[1].cpextra == 'search-form'
+    assert isinstance(
+        view.regions[0].values()[0].values()[1],
+        zeit.web.site.module.search_form.Form)
 
 
 def test_centerpage_page_should_reconstruct_multiple_areas(
@@ -1996,7 +1998,9 @@ def test_centerpage_page_should_reconstruct_multiple_areas(
     view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
     assert len(view.regions) == 2
     assert view.regions[0].values()[0].values()[0].supertitle == 'Griechenland'
-    assert view.regions[0].values()[1].values()[0].cpextra == 'search-form'
+    assert isinstance(
+        view.regions[0].values()[1].values()[0],
+        zeit.web.site.module.search_form.Form)
 
 
 def test_centerpage_page_should_require_ranking(application, dummy_request):

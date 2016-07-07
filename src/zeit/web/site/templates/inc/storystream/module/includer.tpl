@@ -1,5 +1,4 @@
 {% set module_type = module.type %}
-{% set module = module | get_module %}
 
 {# get_layout is expensive (does its comment say). So we only use it if needed. #}
 {% if module_type == 'teaser' %}
