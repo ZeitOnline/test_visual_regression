@@ -9,6 +9,13 @@ Change log for zeit.web
 - ZON-2762: Refactor ZON navigation
 
 
+2.91.1 (2016-07-07)
+-------------------
+
+- ZON-3147: Back out "Remove buzzboard image duplicates"
+  (There was a veto and the story will need to be rethought completely)
+
+
 2.91 (2016-07-07)
 -----------------
 
