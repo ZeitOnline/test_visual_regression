@@ -16,6 +16,12 @@
   </template>
   <template name="zon-liveblog" available="zeit.cms.section.interfaces.IZONContent">
     <title>Liveblog</title>
+    <header name="liveblog">
+      <title>Standard</title>
+    </header>
+    <header name="liveblog-closed">
+      <title>Offline</title>
+    </header>
   </template>
   <!-- not yet in use
   <template name="zon-debate" available="zeit.cms.section.interfaces.IZONContent">
