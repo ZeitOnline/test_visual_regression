@@ -695,7 +695,8 @@ def test_navigation_should_show_logged_in_user_correctly(
         'background-image: url(/picture.jpg)')
     links = css('#user-menu a')
     assert links[0].attrib['href'] == '/profile'
-    assert links[1].attrib['href'] == '/logout'
+    assert links[1].attrib['href'] == '/abo'
+    assert links[2].attrib['href'] == '/logout'
 
 
 def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):

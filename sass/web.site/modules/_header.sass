@@ -1,31 +1,95 @@
 .header
-    +respond-min($break-tablet-min)
-        padding: $fine $petite 0
+	background-color: #fff
+	color: #000
+	position: relative
 
-.header__metadata
-    +clearfix
-    color: $zon-dark-grey
-    display: none
-    font-size: remify(11px)
-    letter-spacing: $zon-letter-spacing-l
-    line-height: 1rem
-    margin: remify(12px 0 7px)
-    text-transform: uppercase
-    &:empty
-        display: none
-    +respond-min($break-tablet-min)
-        display: block
+	&__brand
+		+clearfix
+		border-bottom: 1px solid $color-border
+		line-height: remify(54px)
+		padding: remify(0 0 0 $page-padding--small)
 
-.header__tags
-    display: inline-block
+	&__publisher,
+	&__teaser
+		float: left
+		margin: 0
 
-.header__tags__label
-    font-weight: bold
-    padding-right: 1em
+	&__logo
+		color: $color-zon-logo
+		height: remify(26px)
+		width: remify(231px)
+		vertical-align: middle
 
-.header__tags__link
-    @extend %tags
+	&__teaser
+		display: none
+		margin-left: remify(20px)
 
-.header__date
-    float: right
-    padding-top: 5px
+	&__menu-icon
+		height: remify(18px)
+		width: remify(18px)
+		vertical-align: remify(-3px)
+		&--close
+			display: none
+
+	&__menu-link
+		border-left: 1px solid $color-border
+		color: $zon-charcoal
+		float: right
+		padding: remify(0 18px)
+		+on-interaction
+			color: $zon-dark-grey
+		&[aria-expanded="true"]
+			.header__menu-icon--close
+				display: inline
+			.header__menu-icon--menu
+				display: none
+
+	&__metadata
+		+clearfix
+		color: $zon-dark-grey
+		display: none
+		font-size: em(11px)
+		letter-spacing: $letter-spacing-l
+		line-height: 1rem
+		margin: remify(12px 0 7px)
+		text-transform: uppercase
+
+	&__tags
+		display: inline-block
+
+	&__tags__label
+		font-weight: bold
+		padding-right: 1em
+
+	&__tags__link
+		@extend %tags
+
+	&__date
+		float: right
+		padding-top: 5px
+
+
+	+respond-min($break-tablet-min)
+		padding: remify(10px $page-padding 0)
+
+		&__brand
+			border-bottom: 0
+			line-height: inherit
+			padding: 0
+			position: absolute
+			top: remify(64px)
+
+		&__logo
+			height: remify(38px)
+			width: remify(347px)
+
+		&__teaser
+			display: block
+
+		&__menu-link
+			display: none
+
+		&__metadata
+			display: block
+			&:empty
+				display: none

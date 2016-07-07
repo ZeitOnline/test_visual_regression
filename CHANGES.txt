@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3170: Introduce automatic webtrekk testing
 
+- ZON-2762: Refactor ZON navigation
+
 
 2.91 (2016-07-07)
 -----------------

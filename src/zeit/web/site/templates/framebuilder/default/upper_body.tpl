@@ -1,5 +1,5 @@
 </head>
-<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
+<body>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 
@@ -27,7 +27,7 @@
             </div>
         {% endblock adplace_top %}
         <div class="page__content">
-            <header class="header">
+            <header class="header" data-ct-area="topnav">
                 {%- include "zeit.web.site:templates/framebuilder/default/navigation.tpl" ignore missing -%}
             </header>
             {% block adplace_billboard %}

@@ -1,46 +1,39 @@
 {% set items = navigation %}
 {% set class = nav_class %}
-{% set site_navigation_element = True if (class == 'primary-nav' or site_navigation_element) else False %}
-<ul class="{{ class }}{% if class == 'primary-nav' %} primary-nav--js-no-overflow{% endif %}"
-	{%- if class == 'primary-nav' %} itemscope itemtype="http://schema.org/SiteNavigationElement"{% endif %}>
-{% for section in items.values() %}
-	{% set id = section.item_id | pop_from_dotted_name -%}
-    {% set section_id = id if id else section.item_id %}
-	<li class="{{ class }}__item
-		{%- if section.label %} {{ class }}__item--has-label{% endif %}" data-id="{{ id if id else section.item_id }}"
-		{%- if section | length %} data-feature="dropdown"{% endif %}
-		{%- if section.label %} data-label="{{ section.label }}"{% endif %}>
-		<a class="{{ class }}__link{% if id in (view.ressort, view.sub_ressort) %} {{ class }}__link--current{% endif %}"
-			href="{{ section.href | create_url }}"
-			data-id="{{ section.item_id }}"
-			{%- if site_navigation_element %} itemprop="url"{% endif %}>
-			{%- if site_navigation_element -%}
-				<span itemprop="name">{{ section.text }}</span>
-			{%- else -%}
-				{{- section.text -}}
-			{%- endif -%}
-		</a>
-	{% if section | length -%}
-		{%- set navigation = section -%}
-		{%- set nav_class = "dropdown" -%}
-		{% include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" %}
-	{%- endif -%}
-	</li>
+<ul class="{{ class }}-list"{% if nav_id %} id="{{ nav_id }}" aria-hidden="true" data-ct-column{% endif %}>
+{% for item in items.values() %}
+    {% set id = item.item_id | pop_from_dotted_name -%}
+    <li {%- if item.label %} class="{{ class }}-item--has-label" data-label="{{ item.label }}"{% endif %}
+        {%- if item | length %} class="{{ class }}-item--has-dropdown"{% endif %}>
+        <a href="{{ item.href | create_url }}"
+            {%- if id in (view.ressort, view.sub_ressort) %} class="{{ class }}-link--current"{% endif %}
+            {%- if item | length %} role="button" aria-controls="{{ item.text | lower }}" data-follow-mobile="true"{% endif %}
+            {%- if site_navigation_element %} itemprop="url"{% endif %}>
+            {%- if site_navigation_element -%}
+                <span itemprop="name">{{ item.text }}</span>
+            {%- else -%}
+                {{- item.text -}}
+            {%- endif -%}
+        </a>
+    {% if item | length -%}
+        {%- set navigation = item -%}
+        {%- set nav_class = "nav__dropdown" -%}
+        {%- set nav_id = item.text | lower -%}
+        {% include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" %}
+    {%- endif -%}
+    </li>
 {% endfor %}
 
-{% if class == 'primary-nav' %}
-	{# copy all nav-sections to more-dropdown as well #}
-	<li class="{{ class }}__item" data-id="more-dropdown" data-feature="dropdown">
-		<a class="{{ class }}__link" href="#">mehr</a>
-		{%- set navigation = items -%}
-		{%- set nav_class = "dropdown" -%}
-		{%- set site_navigation_element = False -%}
-		{% include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" %}
-	</li>
-	<li class="{{ class }}__item {{ class }}__item--featured">
-		<a class="{{ class }}__link" itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index" data-id="topnav.mainnav.14..zeitmagazin">
-			<span itemprop="name">ZEITmagazin</span>
-		</a>
-	</li>
+{% if class == 'nav__ressorts' %}
+    <li class="{{ class }}-item--more {{ class }}-item--has-dropdown">
+        <a href="#more-ressorts" role="button" aria-controls="more-ressorts" data-follow-mobile="true">mehr</a>
+        <ul class="nav__dropdown-list" id="more-ressorts" aria-hidden="true" data-ct-column>
+        </ul>
+    </li>
+    <li class="{{ class }}-item--featured">
+        <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index">
+            <span itemprop="name">ZEITmagazin</span>
+        </a>
+    </li>
 {% endif %}
 </ul>

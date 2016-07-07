@@ -1,24 +1,24 @@
 .header
-	border-bottom: 1px #ccc solid
+	border-bottom: 1px solid $color-border
 	padding: $vertical-space $page-padding--small
 	+respond-min($break-tablet-min)
 		padding: $vertical-space 0
 
-.logo_bar__brand-logo
+.header__logo
 	color: $color-zon-logo
 	display: block
 	height: em(25px)
 	margin: 0 auto
-	width: em(235px)
+	width: em(231px)
 	+respond-min($break-tablet-min)
 		height: em(35px)
 		width: em(330px)
 
-.main_nav--has-login
+.header--has-login
 	+clearfix
-	.logo_bar
+	.header__logo
 		float: left
-	.login
+	.header__login
 		float: right
 		+respond-min($break-tablet-min)
 			line-height: em(35px)
