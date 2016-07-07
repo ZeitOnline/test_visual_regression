@@ -2,18 +2,10 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <author href="http://xml.zeit.de/autoren/F/Oliver_Fritsch/index.xml" publication-date="" expires="">
-      <image base-id="http://xml.zeit.de/autoren/F/Oliver_Fritsch/oliver-fritsch/" type="" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright>© Jakob Börner</copyright>
-      </image>
       <display_name>Oliver Fritsch</display_name>
     </author>
     <author href="http://xml.zeit.de/autoren/S/Christian_Spiller/index.xml" publication-date="" expires="">
       <display_name>Christian Spiller</display_name>
-      <image base-id="http://xml.zeit.de/autoren/S/Christian_Spiller/christian-spiller/" type="" publication-date="" expires="">
-        <bu xsi:nil="true"/>
-        <copyright>© Jakob Börner</copyright>
-      </image>
     </author>
     <image base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" align="left" publication-date="2016-01-29T13:23:00+00:00" expires="">
       <bu>Wolfgang Niersbach und ein sehr spezieller Freund</bu>
