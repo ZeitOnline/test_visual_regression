@@ -141,9 +141,6 @@
 				</container>
 			</region>
 		</cluster>
-		<cluster area="id-e2f9e2c4-2700-4c62-8701-9f914e653435" kind="parquet" title="Parkett">
-			<region hide-dupes="True" area="id-663bd0f8-dab4-4388-97d4-e83a9d1774eb" kind="spektrum" title="Spektrum"/>
-		</cluster>
 		<cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet" title="Parkett">
 			<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zmo-parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
 				<referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>

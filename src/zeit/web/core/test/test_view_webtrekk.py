@@ -34,6 +34,15 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     driver.get('%s/zeit-online/webtrekk-test-setup#debug-clicktracking'
                % testserver.url)
 
+    # prevent testfail at first run
+    presence_cp = expected_conditions.presence_of_element_located(
+        (By.CLASS_NAME, 'main--centerpage'))
+
+    try:
+        WebDriverWait(driver, 3).until(presence_cp)
+    except TimeoutException:
+        assert False, 'Article must be visible'
+
     # mobile
     driver.set_window_size(400, 800)
 
@@ -183,13 +192,14 @@ def test_article_elements_provide_expected_id_for_webtrekk(
     driver.get('%s/campus/article/paginated#debug-clicktracking'
                % testserver.url)
 
+    # prevent testfail at first run
     presence_art = expected_conditions.presence_of_element_located(
         (By.CLASS_NAME, 'main--article'))
 
     try:
         WebDriverWait(driver, 3).until(presence_art)
     except TimeoutException:
-        assert False, 'Paragraph must be visible'
+        assert False, 'Article must be visible'
 
     # don't test mobile and phablet here as some elements
     # aren't visible and we test the principle anyway
