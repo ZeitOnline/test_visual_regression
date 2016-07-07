@@ -45,7 +45,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_layout(self):
-        return self.context.header_layout or 'default'
+        return self.context.header_layout or None
 
     @zeit.web.reify
     def pages(self):

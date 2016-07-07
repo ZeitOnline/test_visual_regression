@@ -35,6 +35,13 @@ class Article(zeit.web.core.view_article.Article,
         else:
             return 'default'
 
+    @zeit.web.reify
+    def header_layout(self):
+        if self.article_layout == 'default':
+            return self.context.header_layout or 'default'
+        else:
+            return self.article_layout
+
 
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',
