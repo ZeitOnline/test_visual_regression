@@ -87,6 +87,21 @@
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
                 </container>
+                <container cp:type="cpextra" module="mosttrending" visible="True" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a007">
+					<cp_extra id="mosttrending"/>
+				</container>
+				<container cp:type="cpextra" module="mostread" visible="True" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a003">
+					<cp_extra id="mostread"/>
+				</container>
+				<container cp:type="cpextra" module="mostcommented" visible="True" visible_mobile="True" cp:__name__="id-a067d15a-9fa8-4730-9c0f-56b406b586d6">
+					<cp_extra id="mostcommented"/>
+				</container>
+				<container cp:type="cpextra" module="mostshared" visible="True" visible_mobile="True" cp:__name__="id-c7d8c767-9f68-4a29-8ce9-2cf09a68340a">
+					<cp_extra id="mostshared"/>
+				</container>
+				<container cp:type="teaser" module="zon-square" visible="True" cp:__name__="id-23e82f2a-bebc-4fe8-b053-941b31d31e2d">
+					<block href="http://xml.zeit.de/zeit-online/gallery/biga_1" />
+				</container>
             </region>
         </cluster>
 		<cluster area="id-9e096c63-ca17-45f8-832c-867a6ad78505" kind="parquet" title="Parkett">
@@ -137,6 +152,22 @@
 				</container>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
 					<block href="http://xml.zeit.de/zeit-magazin/article/02"/>
+				</container>
+			</region>
+		</cluster>
+		<cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082chh" kind="solo">
+			<region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cffgfg" kind="buzzboard" title="Buzz-Board Galore">
+				<container cp:type="cpextra" module="mosttrending" visible="True" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a007">
+					<cp_extra id="mosttrending"/>
+				</container>
+				<container cp:type="cpextra" module="mostshared" visible="True" visible_mobile="True" cp:__name__="id-c7d8c767-9f68-4a29-8ce9-2cf09a68340a">
+					<cp_extra id="mostshared"/>
+				</container>
+				<container cp:type="cpextra" module="mostcommented" visible="True" visible_mobile="True" cp:__name__="id-a067d15a-9fa8-4730-9c0f-56b406b586d6">
+					<cp_extra id="mostcommented"/>
+				</container>
+				<container cp:type="cpextra" module="mostread" visible="True" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a003">
+					<cp_extra id="mostread"/>
 				</container>
 			</region>
 		</cluster>
