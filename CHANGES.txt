@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.91 (unreleased)
+2.92 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.91 (2016-07-07)
 -----------------
 
 - ZON-3147: Remove buzzboard image duplicates
@@ -9,6 +15,8 @@ Change log for zeit.web
 - BUG-446: Show fallback image for expired campus teaser images
 
 - BUG-374: Add default product_id for video pages
+
+- BUG-443: Fix navigation dropdown overlay over .video-player container
 
 - FIX: Be defensive when counting paragraphs for fbia ads
 
