@@ -41,7 +41,7 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     try:
         WebDriverWait(driver, 3).until(presence_cp)
     except TimeoutException:
-        assert False, 'Article must be visible'
+        assert False, 'CP must be visible'
 
     # mobile
     driver.set_window_size(400, 800)
