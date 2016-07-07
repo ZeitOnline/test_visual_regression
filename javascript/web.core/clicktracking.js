@@ -227,6 +227,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             event.preventDefault();
             event.stopImmediatePropagation();
             console.debug( trackingData );
+            window.trackingData = trackingData;
         } else if ( trackingData ) {
             window.wt.sendinfo({
                 linkId: trackingData,
