@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-374: Add default product_id for video pages
 
+- BUG-443: Fix navigation dropdown overlay over .video-player container
+
 - FIX: Be defensive when counting paragraphs for fbia ads
 
 - FIX: Fix image tests and clean up templates: use ratio instead of variant
