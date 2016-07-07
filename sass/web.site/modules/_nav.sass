@@ -27,6 +27,11 @@
 		padding: 0
 		position: relative
 
+	// this is legacy protection and will be obsolete as soon as navigation-classifieds.xml was updated
+	&__classifieds-list
+		> li:nth-child(n+6)
+			display: none
+
 	&__ressorts-item--featured
 		a
 			background-color: $zon-dark-grey
@@ -109,7 +114,7 @@
 
 		// hide "more" link and show children
 		&__classifieds-list
-			> li:last-child
+			.nav__classifieds-item--has-dropdown
 				width: 100%
 			a[role="button"]
 				display: none
@@ -184,11 +189,6 @@
 		// align left @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
 		&__classifieds
 			margin-right: auto
-		// this is legacy protection and will be obsolete as soon as navigation-classifieds.xml was updated
-		&__classifieds-list
-			> li:nth-child(n+6)
-				display: none
-
 		&__search,
 		&__ressorts
 			flex: 1 1 100%
