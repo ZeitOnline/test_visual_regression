@@ -353,3 +353,13 @@ def test_zon_campus_teaser_topic_has_campus_signet(testbrowser):
     assert svg[0].xpath('title')[0].text == 'ZEIT Campus'
     assert svg[1].xpath('title')[0].text == 'ZEIT Campus'
     assert svg[2].xpath('title')[0].text == 'ZEIT Campus'
+
+
+def test_liveblog_teaser_respects_liveblog_status(testbrowser):
+    browser = testbrowser('zeit-online/centerpage/liveblog')
+    main = browser.cssselect('main.main')[0]
+    liveblog = main.cssselect('span[class*="__kicker-logo--liveblog"]')
+    offline = main.cssselect('span[class*="__kicker-logo--liveblog-closed"]')
+
+    assert len(liveblog) == 17
+    assert len(offline) == 8

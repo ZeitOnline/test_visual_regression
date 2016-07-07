@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
+      <display_name>Heike Jahberg</display_name>
+    </author>
+    <rankedTags>
+      <tag type="Location" url_value="frankreich" uuid="f4b4f50b-6597-4ab4-8e8e-5d262d3680a5">Frankreich</tag>
+      <tag type="Organization" url_value="islamischer-staat" uuid="9f2b559c-beff-47bf-89d1-123e5bd50543">Islamischer Staat</tag>
+      <tag type="free" url_value="islamistischer-terrorismus" uuid="61165263-e6bf-4ae8-8379-3fa013811b45">Islamistischer Terrorismus</tag>
+      <tag type="free" score="3" uuid="a1dfa082-6171-4848-afbe-897d8729131f" url_value="pariser">Paris</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="">
+      <bu>Trauer in New York</bu>
+      <copyright>© Lucas Jackson/Reuters</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Politik Ausland</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE, dpa, AFP, Reuters, AP, KNA</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-11-23T15:03:26.517491+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-11-13T22:58:50.812017+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-11-23T15:03:29.256720+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-11-23T15:03:29.017526+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-11-16T08:51:21.559117+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-11-19T13:35:55.008201+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-11-16T08:51:03.280472+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.lavrov</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">"Wir wissen, dass Operationen vorbereitet wurden und noch vorbereitet werden, nicht nur gegen Frankreich, sondern auch gegen andere europäische Länder", sagt der französische Manuel Valls. Unser Liveblog (sah)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/gesellschaft/zeitgeschehen/2015-11/a75d522f-f0f4-41c7-9bbe-b7bda85ec677.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">a0fd7753bf7a4833be480ee24d6d1ce3</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Frankreichs Premierminister warnt vor Anschlägen in anderen europäischen Staaten. Unser Liveblog (sah)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Ausland</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-liveblog</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">1495</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:1504f1f2-a411-42d4-b678-b5843d027fcf}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">46</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Terror in Paris</supertitle>
+    <title>IS bereitet weitere Anschläge in Europa vor</title>
+    <subtitle>Nach Angaben des französischen Premiers wurden die Anschläge von Syrien aus organisiert. Der IS bereite weitere Attentate vor. Das Live-Blog vom Wochenende zum Nachlesen</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="" layout="large" is_empty="False">
+        <bu>Trauer in New York</bu>
+        <copyright>© Lucas Jackson/Reuters</copyright>
+      </image>
+      <ul>
+        <li>
+          <strong>
+            <i>Dieses Liveblog ist geschlossen. </i>
+            <i>Alle Berichte, Analysen, Kommentare und Fotostrecken zu den <a class="" href="http://www.zeit.de/thema/anschlaege-in-paris" target="_blank">Anschlägen in Paris finden Sie </a><a class="" href="http://www.zeit.de/thema/anschlaege-in-paris" target="_blank">auf unserer Themenseite</a>.</i>
+          </strong>
+        </li>
+        <li>
+          <em>Die Polizei fahndet nach einem flüchtigen Attentäter. Der zur internationalen Fahndung ausgeschriebene Abdeslam Saleh könnte sich nach Spanien abgesetzt haben.</em>
+        </li>
+        <li>
+          <em>Laut Frankreichs Premierminister wurden die Attentate aus Syrien geplant. Weitere Anschläge in europäischen Städten drohten.</em>
+        </li>
+        <li>
+          <em>Bei den sechs Anschlägen <a class="" href="http://www.zeit.de/gesellschaft/zeitgeschehen/2015-11/paris-ueberblick-anschlaege" target="_blank">in Paris am Freitag</a> sind mindestens 129 Menschen ums Leben gekommen, darunter ein Deutscher. Mehr als 350 Menschen wurden verletzt, davon viele schwer.</em>
+        </li>
+        <li>
+          <em>Sieben Attentäter sind tot, sechs sprengten sich selbst in die Luft, einer wurde von der Polizei erschossen. In der Nähe eines Attentäters ist ein syrischer Pass gefunden worden.</em>
+        </li>
+        <li>
+          <em>Ein 29-jähriger Franzose ist als erster der sieben Attentäter identifiziert worden, zwei weitere lebten zuletzt im Großraum Brüssel.</em>
+        </li>
+        <li>
+          <em>Präsident Hollande macht die Terrormiliz "<a class="" href="http://www.zeit.de/thema/islamischer-staat-terror" target="_blank">Islamischer Staat</a>" für die Anschläge verantwortlich, der IS hat dies in einer bisher nicht vollständig verifizierbaren Stellungnahme bestätigt. Der Präsident sagte, Frankreich sei "im Krieg". Französische Kampfjets zerstörten zwei IS-Lager im syrischen Rakka.</em>
+        </li>
+      </ul>
+      <liveblog blogID="216"/>
+    </division>
+  </body>
+  <teaser>
+    <title>Valls warnt vor weiteren Anschlägen in Europa</title>
+    <supertitle>Terror in Paris</supertitle>
+    <text>Nach Angaben des französischen Premiers wurden die Anschläge von Syrien aus organisiert. Der IS bereite weitere Attentate vor. Das Live-Blog vom Wochenende zum Nachlesen</text>
+  </teaser>
+</article>
