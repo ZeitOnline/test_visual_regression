@@ -215,11 +215,11 @@ def test_image_template_should_produce_copyright_caption(tplbrowser):
 def test_image_template_should_designate_correct_layouts(testbrowser):
     browser = testbrowser('/zeit-magazin/article/inline-imagegroup')
     header = browser.cssselect('figure.figure-header img')[0]
-    assert header.attrib['data-variant'] == 'original'
+    assert header.attrib['data-ratio'] == '1.77858439201'  # variant=original
     stamp = browser.cssselect('figure.figure-stamp--right img')[0]
-    assert stamp.attrib['data-variant'] == 'portrait'
+    assert stamp.attrib['data-ratio'] == '0.75'  # variant=portrait
     fullwidth = browser.cssselect('figure.figure-full-width img')[0]
-    assert fullwidth.attrib['data-variant'] == 'wide'
+    assert fullwidth.attrib['data-ratio'] == '1.77777777778'  # variant=wide
 
 
 def test_image_macro_should_not_autoescape_markup(testbrowser):

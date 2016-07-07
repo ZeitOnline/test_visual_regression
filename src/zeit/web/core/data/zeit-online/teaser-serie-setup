@@ -63,7 +63,7 @@
   </head>
 
   <body>
-    <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f">
+    <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
       <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" kind="major">
         <container cp:type="teaser" module="zon-large" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
           <block href="http://xml.zeit.de/zeit-online/cp-content/article-01" />

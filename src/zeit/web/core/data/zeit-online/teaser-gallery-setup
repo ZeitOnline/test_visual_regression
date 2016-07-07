@@ -64,7 +64,7 @@
     </head>
     <body>
         <title>Galerie Teaser</title>
-        <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f">
+        <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
             <region visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
                 <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-c55fb03955d2">
                     <block href="http://xml.zeit.de/zeit-online/gallery/weltall" uniqueId="http://xml.zeit.de/zeit-online/gallery/weltall" year="2015" issue="7" ressort="zeit-magazin" contenttype="gallery"></block>
