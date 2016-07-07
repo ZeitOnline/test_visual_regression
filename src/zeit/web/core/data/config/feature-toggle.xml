@@ -10,5 +10,7 @@
   <tracking>true</tracking>
   <campus_new_label>true</campus_new_label>
   <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
+  <acquisition_status_ivw>true</acquisition_status_ivw>
+  <acquisition_status_webtrekk>true</acquisition_status_webtrekk>
   <dummy>false</dummy>
 </features>
