@@ -241,27 +241,6 @@
 	}
 }
 
-// mixins for navigation/header
-
-@mixin add_nav_bar_style($height, $double: false) {
-	border-bottom: 1px solid $color-border;
-	height: $height;
-	padding-left: $fine;
-	width: 100%;
-	@if $double {
-		border-top: 1px solid $color-border;
-	}
-}
-
-@mixin remove_nav_bar_style($width: auto) {
-	border: 0;
-	height: auto;
-	padding-left: 0;
-	width: $width;
-}
-
-// END: mixins for navigation/header
-
 @mixin transform-origin($value...) {
 	-webkit-transform-origin: $value;
 	   -moz-transform-origin: $value;

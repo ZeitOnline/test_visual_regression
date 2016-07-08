@@ -4,7 +4,18 @@ Change log for zeit.web
 2.92 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3170: Introduce automatic webtrekk testing
+
+- ZON-2762: Refactor ZON navigation
+
+- ZON-2966: Get liveblog status through ReSTful API
+
+
+2.91.1 (2016-07-07)
+-------------------
+
+- ZON-3147: Back out "Remove buzzboard image duplicates"
+  (There was a veto and the story will need to be rethought completely)
 
 
 2.91 (2016-07-07)

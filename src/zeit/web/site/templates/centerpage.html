@@ -3,10 +3,10 @@
 {% block metadata %}
     <div class="header__metadata">
     {%- require topics = view.is_hp and view.context | topic_links -%}
-        <div class="header__tags">
+        <div class="header__tags" data-ct-row="article-tag">
             <span class="header__tags__label">{{ topics.title }}</span>
             {% for label, link in topics %}
-            <a href="{{ link }}" class="header__tags__link" data-id="topnav.article-tag.{{ loop.index }}..{{ label | format_webtrekk }}">{{ label }}</a>
+            <a href="{{ link }}" class="header__tags__link">{{ label }}</a>
             {% endfor %}
         </div>
     {%- endrequire -%}
