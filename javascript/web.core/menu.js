@@ -46,19 +46,37 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     }
 
     return {
-        init: function() {
-            var menu = $( 'header.header' );
+        init: function( options ) {
+            var menu = $( 'header.header' ),
+                defaults = {
+                    followMobile: 'default'
+                },
+                settings = $.extend( {}, defaults, options );
 
-            menu.on( 'click', '*[aria-controls]', function( event ) {
+            menu.on( 'click', '*[aria-controls]', function( event, triggered ) {
                 var control = $( this ),
-                    expanded = control.attr( 'aria-expanded' ) === 'true';
+                    expanded = control.attr( 'aria-expanded' ) === 'true',
+                    followMobile = control.data( 'follow-mobile' );
 
                 // in mobile view we sometimes want to follow the link
-                if ( !( Zeit.isMobileView() && control.data( 'follow-mobile' ) ) ) {
+                if ( followMobile && Zeit.isMobileView() ) {
+                    // if the event was only triggered by jQuery, raise a native event now
+                    if ( triggered ) {
+                        event.stopImmediatePropagation();
+                        this.click();
+                    }
+                }
+                // in desktop view we sometimes want to follow the link, too
+                // but only if this is not a keyboard event
+                else if ( followMobile && settings.followMobile === 'always' && !triggered ) {
+                    // never follow anchor links
+                    if ( this.hash && this.hash.charAt( 0 ) === '#' ) {
+                        event.preventDefault();
+                    }
+                } else {
                     event.preventDefault();
                     toggleElement( control, !expanded );
                 }
-
             });
 
             // toggle submenu "onFocusOut"
@@ -86,7 +104,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                     case 13: // [RETURN]
                     case 32: // [SPACE]
                         event.preventDefault();
-                        event.target.click();
+                        $( event.target ).trigger( 'click', true );
                         break;
                 }
             });

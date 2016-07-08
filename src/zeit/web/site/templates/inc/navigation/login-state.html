@@ -1,31 +1,3 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% extends "zeit.web.core:templates/inc/navigation/login-state.html" %}
 
-{% if user %}
-<div class="login-state" data-feature="dropdown" id="login-state" data-sso-id="{{ user.ssoid }}">
-    <a href="{{ profile }}" class="login-state__name">{{ user.name | default('Angemeldet', true) }}</a>
-    <ul class="dropdown">
-        <li class="dropdown__item">
-            <a href="{{ profile }}" class="dropdown__link">Profil</a>
-            <a href="{{ settings('premium_host', '') }}/abo" class="dropdown__link">Digital-Abo</a>
-            <a href="{{ logout }}" class="dropdown__link">Abmelden</a>
-        </li>
-    </ul>
-</div>
-<div class="login-state-mobile">
-    {% if user.picture -%}
-        <img class="login-state-mobile__avatar" alt="Avatarbild von {{ user.name }}" src="{{ user.picture }}">
-    {% endif %}
-    <span class="login-state-mobile__name">{{ user.name | default('Angemeldet', true) }}</span>
-    <a href="{{ logout }}" class="login-state-mobile__logoff">
-        Abmelden
-        {{ lama.use_svg_icon('navigation-login', 'login-state-mobile__icon', 'zeit.web.site') }}
-    </a>
-</div>
-{% else %}
-<a href="{{ login }}" class="user-link">
-    {{ lama.use_svg_icon('navigation-login', 'main_nav__community__icon', 'zeit.web.site') }}
-    Anmelden
-</a>
-{% endif %}
-
-{% include "zeit.web.core:templates/inc/inline_js/rawr_sso.tpl" %}
+{% set package = 'zeit.web.site' %}

@@ -10,7 +10,7 @@
         {% if teaser is column %}
             {% set media_block_additional_class = 'teaser-buzzboard__media--column' %}
             {% set media_container_additional_class = 'teaser-buzzboard__media-container--column' %}
-            {% include "zeit.web.site:templates/inc/asset/image_buzzboard-column.tpl" %}
+            {% include "zeit.web.site:templates/inc/asset/image_zon-column.tpl" %}
         {% else %}
             {% include "zeit.web.site:templates/inc/asset/image_buzzboard.tpl" ignore missing %}
         {% endif %}

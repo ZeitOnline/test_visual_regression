@@ -25,12 +25,6 @@
     <!--<![endif]-->
     {% endblock css_link %}
 
-    {% block css_lte9_navi_link %}
-    <!--[if lte IE 9]>
-        <link href="{{ request.asset_host }}/css/web.site/ie-navi.css" media="screen" rel="stylesheet" type="text/css">
-    <![endif]-->
-    {% endblock css_lte9_navi_link %}
-
     {% include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing %}
 
     {# Modernizr -#}
