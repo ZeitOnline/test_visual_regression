@@ -133,7 +133,6 @@ def get_image_asset(teaser):
         return
 
 
-@zeit.web.register_filter
 def get_area(area):
     return zeit.web.core.utils.get_named_adapter(
         area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
