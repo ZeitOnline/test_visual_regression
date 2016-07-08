@@ -36,7 +36,7 @@
                                 {% elif teaser is zco_content and area.kind != 'zco-parquet' %}
                                     <span class="{{ '%s__kicker-logo-divider' | format(self.layout()) }}">{{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}</span>
                                 {% elif teaser is liveblog %}
-                                    <span class="{{ '%s__kicker-logo' | format(self.layout()) | with_mods('liveblog', 'liveblog-closed' if module.liveblog and not module.liveblog.is_live) }}">live</span>
+                                    <span class="{{ '%s__kicker-logo' | format(self.layout()) | with_mods('liveblog', 'liveblog-closed' if module.liveblog and not module.liveblog.is_live) }}"><span class="visually-hidden">(</span>live<span class="visually-hidden">)</span></span>
                                 {% endif %}
                             {% endblock %}
                             {{ teaser.teaserSupertitle or teaser.supertitle -}}
