@@ -223,12 +223,19 @@ def test_block_liveblog_instance_causing_timeouts(
         key_mangler=pyramid_dogpile_cache2.cache.sha1_mangle_key).configure(
             'dogpile.cache.null')
     monkeypatch.setattr(pyramid_dogpile_cache2, 'CACHE_REGIONS', new_cache)
+
     model_block = mock.Mock()
     model_block.blog_id = '158'
     liveblog = zeit.web.core.block.Liveblog(model_block)
     assert liveblog.id == '158'
     assert liveblog.last_modified.isoformat() == (
         '2015-03-20T12:26:00+01:00')
+
+    model_block = mock.Mock()
+    model_block.blog_id = '213-259'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    assert liveblog.id == '213'
+    assert liveblog.is_live
 
     model_block = mock.Mock()
     model_block.blog_id = '166-201'
