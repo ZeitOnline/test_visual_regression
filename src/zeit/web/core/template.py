@@ -579,23 +579,6 @@ def get_image_group(asset):
 
 
 @zeit.web.register_filter
-def get_module(module, name=None):
-    if zeit.web.core.interfaces.IBlock.providedBy(module):
-        return module
-    elif zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(module):
-        return module
-    elif zeit.content.cp.interfaces.ICPExtraBlock.providedBy(module):
-        name = 'cpextra'
-    elif zeit.edit.interfaces.IBlock.providedBy(module):
-        name = 'type'
-    else:
-        return module
-
-    return zeit.web.core.utils.get_named_adapter(
-        module, zeit.web.core.interfaces.IBlock, name)
-
-
-@zeit.web.register_filter
 def attr_safe(string):
     """Return an attribute safe version of string"""
     if isinstance(string, basestring):

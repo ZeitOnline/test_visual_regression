@@ -5,7 +5,6 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
-import lxml.etree
 import lxml.html
 import mock
 import pyramid.httpexceptions
@@ -18,7 +17,7 @@ from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.centerpage
 
 import zeit.web.core.centerpage
-import zeit.web.core.interfaces
+import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.site.module.playlist
 import zeit.web.site.view_centerpage
@@ -556,7 +555,7 @@ def test_module_printbox_should_contain_teaser_image(
         'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, dummy_request)
-    printbox = zeit.web.core.template.get_module(view.module_printbox)
+    printbox = zeit.web.core.centerpage.get_module(view.module_printbox)
     assert isinstance(printbox.image, zeit.content.image.image.RepositoryImage)
 
 

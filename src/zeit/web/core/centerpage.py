@@ -35,8 +35,7 @@ class Area(collections.OrderedDict):
 
     def __init__(self, arg, **kw):
         super(Area, self).__init__(
-            [('id-{}'.format(uuid.uuid1()),
-              zeit.web.core.template.get_module(v)) for v in arg if v])
+            [('id-{}'.format(uuid.uuid1()), get_module(v)) for v in arg if v])
         self.kind = kw.pop('kind', 'solo')
         self.xml = kw.pop('xml', self.factory.get_xml())
         self.automatic = kw.pop('automatic', False)
@@ -140,6 +139,22 @@ def get_area(area):
         area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
 
 
+def get_module(module):
+    if zeit.web.core.interfaces.IBlock.providedBy(module):
+        return module
+    elif zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(module):
+        return module
+    elif zeit.content.cp.interfaces.ICPExtraBlock.providedBy(module):
+        name = 'cpextra'
+    elif zeit.edit.interfaces.IBlock.providedBy(module):
+        name = 'type'
+    else:
+        return module
+
+    return zeit.web.core.utils.get_named_adapter(
+        module, zeit.web.core.interfaces.IBlock, name)
+
+
 class IRendered(zope.interface.Interface):
     """Calculates values() only once."""
 
@@ -163,8 +178,7 @@ class RenderedRegion(zeit.content.cp.area.Region):
 def cache_values_area(context):
     def cached_values(self):
         return self._v_values
-    context._v_values = [zeit.web.core.template.get_module(x)
-                         for x in context.values()]
+    context._v_values = [get_module(x) for x in context.values()]
     context.values = cached_values.__get__(context)
     return context
 
