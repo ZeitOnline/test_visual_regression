@@ -154,6 +154,12 @@ def zco_content(content):
 
 
 @zeit.web.register_test
+def liveblog(context):
+    return zeit.content.article.interfaces.IArticle.providedBy(
+        context) and context.template == 'zon-liveblog'
+
+
+@zeit.web.register_test
 def column(context):
     return context.serie and context.serie.column
 
@@ -383,12 +389,6 @@ def is_gallery(context):
 @zeit.web.register_filter
 def is_video(context):
     return zeit.content.video.interfaces.IVideo.providedBy(context)
-
-
-@zeit.web.register_filter
-def is_liveblog(context):
-    return zeit.content.article.interfaces.IArticle.providedBy(
-        context) and context.template == 'zon-liveblog'
 
 
 @zeit.web.register_filter

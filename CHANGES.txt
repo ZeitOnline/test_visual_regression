@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2966: Get liveblog status through ReSTful API
 
+- ZON-2967: Liveblog teaser indicates liveblog status, with override
+
 
 2.91.1 (2016-07-07)
 -------------------
