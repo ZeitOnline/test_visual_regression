@@ -437,11 +437,21 @@ class Video(Block):
             logging.exception('No video renditions set.')
 
 
+@grokcore.component.adapter(
+    zeit.content.article.edit.interfaces.IVideo,
+    zeit.content.article.edit.interfaces.IHeaderArea
+)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class HeaderVideo(Video):
     """This is a special case used directly (not via adapter) by
     z.w.magazin.view_article.Article.header_module because videos in ZMO
     headers need rather different markup.
     """
+
+    block_type = 'video'
+
+    def __init__(self, model_block, header):
+        super(HeaderVideo, self).__init__(model_block)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
