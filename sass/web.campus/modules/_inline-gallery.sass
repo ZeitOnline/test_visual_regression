@@ -55,10 +55,10 @@ $break-gallery-min: em(576px)
 		@extend %font-beckett
 		bottom: 0
 		color: #fff
-		font-size: em(26px)
+		+scaled-font(26px, $title-factor)
 		height: $gallery-button-radius--small
 		left: 0
-		line-height: $gallery-button-radius--small
+		line-height: $gallery-button-radius--small !important
 		margin: auto
 		position: absolute
 		right: 0
@@ -89,7 +89,7 @@ $break-gallery-min: em(576px)
 	background-color: $primary-color
 	color: inherit
 	float: left
-	font-size: em(16px)
+	+scaled-font(16px)
 	height: $gallery-button-radius--small
 	line-height: $gallery-button-radius--small
 	width: $gallery-button-radius--small
