@@ -326,12 +326,42 @@ class Image(Block):
         return self.image.ratio
 
 
+@grokcore.component.adapter(
+    zeit.content.article.edit.interfaces.IImage,
+    zeit.content.article.edit.interfaces.IHeaderArea
+)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class HeaderImage(Image):
     """This is a special case used directly (not via adapter) by
     z.w.magazin.view_article.Article.header_module so we can adjust the
     rendering of a header image module according to the article.header_layout
     setting.
     """
+
+    block_type = 'image'
+
+    def __new__(cls, model_block, header):
+        return super(HeaderImage, cls).__new__(cls, model_block)
+
+    def __init__(self, model_block, header):
+        super(HeaderImage, self).__init__(model_block)
+        article_supertitle = None
+        article_title = None
+        try:
+            article_supertitle = zeit.content.article.interfaces.IArticle(
+                model_block).supertitle
+            article_title = zeit.content.article.interfaces.IArticle(
+                model_block).title
+        except:
+            pass
+
+        if not self.caption and article_supertitle and article_title:
+            self.title = u'{}: {}'.format(article_supertitle, article_title)
+
+        if article_supertitle and self.caption:
+            self.alt = u'{}: {}'.format(article_supertitle, self.caption)
+        elif article_supertitle and article_title:
+            self.alt = u'{}: {}'.format(article_supertitle, article_title)
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
