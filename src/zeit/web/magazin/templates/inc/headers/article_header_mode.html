@@ -4,7 +4,7 @@
     <header class="article__head article__head--mode">
         {% if view.header_module %}
             <div class="article__head__image">
-                {{ blocks[view.header_module|block_type](view.header_module) }}
+                {{ blocks['headerimage'](view.header_module) }}
             </div>
         {% endif %}
         <div class="wrap">
