@@ -187,8 +187,10 @@ def block_type(obj):
         return 'no_block'
     elif isinstance(obj, list) or isinstance(obj, tuple):
         return obj.__class__(block_type(o) for o in obj)
+    elif getattr(obj, 'block_type', None):
+        return obj.block_type
     else:
-        return getattr(obj, '__block__', type(obj).__name__.lower())
+        return type(obj).__name__.lower()
 
 
 @zeit.web.register_ctxfilter
