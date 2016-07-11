@@ -32,15 +32,10 @@ class Article(zeit.web.core.view_article.Article,
             return 'column'
         elif zeit.web.core.template.leserartikel(self.context):
             return 'leserartikel'
+        elif self.context.header_layout:
+            return self.context.header_layout
         else:
             return 'default'
-
-    @zeit.web.reify
-    def header_layout(self):
-        if self.article_layout == 'default':
-            return self.context.header_layout or 'default'
-        else:
-            return self.article_layout
 
 
 @pyramid.view.view_config(name='seite',

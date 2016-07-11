@@ -21,9 +21,6 @@
     {% endblock -%}
 {% else -%}
 
-    {% block article_header_embed -%}
-    {% endblock -%}
-
     {% block article_header -%}
     {# set default variant ID -#}
     {% set variant_id = None -%}
@@ -36,12 +33,12 @@
         {% endif -%}
     {% endif -%}
     {% set image = get_image(content=view.header_module, variant_id=variant_id, fallback=False) -%}
-    {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image and not self.article_header_embed() else 'no-image') -%}
+    {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}
     <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
         <div class="{{ 'article-header__banderole' | with_mods(variant_id) }}">
 
             {# if we have an embed header we don't want an image or a modifier here #}
-            {% if image and not self.article_header_embed() -%}
+            {% if image -%}
                 <div class="{{ 'article-header__default-image' | with_mods(variant_id) }}">
                     <div class="{{ 'article-header__default-image-box' | with_mods(variant_id) }}">
                         {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
