@@ -51,17 +51,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
         if self.context.genre:
             return prefix + ' ' + self.context.genre.title()
 
-    @zeit.web.reify
-    def header_module(self):
-        block = zeit.content.article.edit.interfaces.IHeaderArea(
-            self.context).module
-        if zeit.content.article.edit.interfaces.IImage.providedBy(block):
-            return zeit.web.core.block.HeaderImage(block)
-        elif zeit.content.article.edit.interfaces.IVideo.providedBy(block):
-            return zeit.web.core.block.HeaderVideo(block)
-        else:
-            return zeit.web.core.interfaces.IFrontendBlock(block, None)
-
 
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',
