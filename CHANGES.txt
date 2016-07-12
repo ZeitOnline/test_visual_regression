@@ -6,6 +6,10 @@ Change log for zeit.web
 
 - BUG-455: Add advertorial font size factor to inline gallery
 
+- BUG-456: Fix rendering for full article view in advertorials
+
+- FIX: Add new fallback font for advertorials
+
 - ZON-3170: Introduce automatic webtrekk testing
 
 - ZON-2762: Refactor ZON navigation
