@@ -10,14 +10,7 @@
 	position: relative
 
 .article-series__media-container
-	&:after
-		background-color: rgba(0, 0, 0, 0.5)
-		bottom: 0
-		content: ' '
-		left: 0
-		position: absolute
-		right: 0
-		top: 0
+	+plain-transparent-overlay()
 
 .article-series__heading
 	bottom: 0
