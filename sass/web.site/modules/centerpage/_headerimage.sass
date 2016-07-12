@@ -2,13 +2,22 @@
 	background-color: $color-dark-background
 	color: #fff
 	height: 0
-	overflow: hidden // for overflowing image content on image variant switch
-	padding-bottom: 100% / 7 * 3 // image variant 'cinema'
+	overflow: hidden // for overflowing image content on window resize and image variant switch
+	padding-bottom: remify(160px)
 	position: relative
 	&__media
-		margin: 0
+		&.is-pixelperfect
+			// stretch to fit
+			height: 100%
+			position: absolute
+			width: 100%
+			img
+				min-height: 100%
+				min-width: 100%
+				width: auto
 	&__media-container
 		+plain-transparent-overlay()
+		height: 100%
 	&__heading
 		transform: translateY(-50%)
 		font-size: 1em
@@ -21,7 +30,7 @@
 	&__kicker
 		color: $zon-lighter-grey
 		display: block
-		font-size: remify(14px)
+		font-size: em(14px)
 		font-weight: 400
 		letter-spacing: 0.125em
 		margin-bottom: 0.4em
@@ -29,14 +38,28 @@
 	&__title
 		+font-smoothing
 		display: block
-		font-size: remify(18px)
+		font-size: em(18px)
 		font-weight: 700
 		line-height: 1.25
 		letter-spacing: $zon-letter-spacing-m
 
 	+respond-min($break-tablet-min)
 		padding-bottom: 100% / 7 * 2 // image variant 'panorama'
+		&--overlain
+			padding-bottom: remify(280px)
+			margin-bottom: remify(-80px)
+		&--overlain &__heading
+			top: remify(100px)
+		&--overlain &__media-container
+			height: remify(280px)
+		&__media-container
+			height: 100%
 		&__kicker
-			font-size: remify(16px)
+			font-size: em(16px)
 		&__title
-			font-size: remify(36px)
+			font-size: em(30px)
+
+	+respond-min($break-desktop-min)
+		&__title
+			font-size: em(36px)
+
