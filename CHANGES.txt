@@ -4,6 +4,8 @@ Change log for zeit.web
 2.92 (unreleased)
 -----------------
 
+- BUG-455: Add advertorial font size factor to inline gallery
+
 - BUG-456: Fix rendering for full article view in advertorials
 
 - BUG-454: Fix campus banner channel
