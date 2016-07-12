@@ -4,6 +4,8 @@ Change log for zeit.web
 2.92 (unreleased)
 -----------------
 
+- BUG-456: Fix rendering for full article view in advertorials
+
 - FIX: Add new fallback font for advertorials
 
 - ZON-3170: Introduce automatic webtrekk testing
