@@ -40,8 +40,8 @@
     <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/centerpage/index</attribute>
-    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ADV</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">Advertorial</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Angebote</attribute>
