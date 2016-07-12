@@ -5,7 +5,6 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 import zope.component
-import pyramid.testing
 import zeit.solr.interfaces
 
 # import zeit.cms.interfaces
