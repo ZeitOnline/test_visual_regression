@@ -5,6 +5,7 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 import zope.component
+import pyramid.testing
 import zeit.solr.interfaces
 
 # import zeit.cms.interfaces
@@ -350,3 +351,19 @@ def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
 
     assert '27: "cardstack.1.2.1"' in script.text_content().strip()
+
+
+def test_overridden_adcontroller_values(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/centerpage/advertorial-with-banner-id')
+    adcv = [
+        ('$handle', 'adv_index'),
+        ('level2', 'campus'),
+        ('level3', 'angebote'),
+        ('level4', '100tage'),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,zeitcampus'),
+        ('tma', '')]
+    view = zeit.web.campus.view_centerpage.Centerpage(
+        cp, pyramid.testing.DummyRequest())
+    assert adcv == view.adcontroller_values
