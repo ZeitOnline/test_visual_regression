@@ -353,7 +353,7 @@ def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
     assert '27: "cardstack.1.2.1"' in script.text_content().strip()
 
 
-def test_overridden_adcontroller_values(application):
+def test_overridden_adcontroller_values(application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/advertorial-with-banner-id')
     adcv = [
@@ -364,6 +364,5 @@ def test_overridden_adcontroller_values(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
-    view = zeit.web.campus.view_centerpage.Centerpage(
-        cp, pyramid.testing.DummyRequest())
+    view = zeit.web.campus.view_centerpage.Centerpage(cp, dummy_request)
     assert adcv == view.adcontroller_values
