@@ -37,7 +37,7 @@ class Base(zeit.web.core.view.Base):
             adv_title = self.context.advertisement_title or self.ressort
             return u'{}/{}/{}'.format(
                 'campus',
-                'angbeote',
+                'angebote',
                 "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower())
         # the big rest, for now
         topiclabel = getattr(self, 'topic_label', '')
