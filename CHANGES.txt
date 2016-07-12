@@ -4,6 +4,8 @@ Change log for zeit.web
 2.92 (unreleased)
 -----------------
 
+- FIX: Add new fallback font for advertorials
+
 - ZON-3170: Introduce automatic webtrekk testing
 
 - ZON-2762: Refactor ZON navigation
