@@ -1,3 +1,5 @@
+import re
+
 import pyramid.view
 
 import zeit.campus.interfaces
@@ -22,23 +24,28 @@ class Base(zeit.web.core.view.Base):
     toolbox = zeit.web.campus.module.toolbox.TOOL_SOURCE
 
     @zeit.web.reify
-    def adcontroller_values(self):
-        """Fill the adcontroller js object with actual values.
-        Output in level strings only allows latin characters, numbers and
-        underscore.
-        """
+    def adwords(self):
+        return ['zeitonline', 'zeitcampus']
 
-        keywords = 'zeitonline,zeitcampus'
+    @zeit.web.reify
+    def banner_channel(self):
+        # manually banner_id rules first
+        if self.context.banner_id is not None:
+            return u'{}/{}'.format(self.context.banner_id, self.banner_type)
+        # special handling for advertorials
+        if self.ressort == 'angebote':
+            adv_title = self.context.advertisement_title or self.ressort
+            return u'{}/{}/{}'.format(
+                'campus',
+                'angebote',
+                "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower())
+        # the big rest, for now
         topiclabel = getattr(self, 'topic_label', '')
         topiclabel = zeit.web.core.template.format_iqd(topiclabel)
-
-        return [('$handle', self.adcontroller_handle),
-                ('level2', 'campus'),
-                ('level3', 'thema' if topiclabel else ''),
-                ('level4', topiclabel or ''),
-                ('$autoSizeFrames', True),
-                ('keywords', keywords),
-                ('tma', '')]
+        return u'{}/{}/{}'.format(
+            'campus',
+            'thema' if topiclabel else '',
+            topiclabel or '')
 
 
 @pyramid.view.view_config(
