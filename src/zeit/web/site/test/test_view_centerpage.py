@@ -2159,11 +2159,15 @@ def test_headerimage_has_appropriate_html_structure(testbrowser):
 
 def test_dynamic_page_has_correct_structure(testbrowser):
     select = testbrowser('/serie/alpha-centauri').cssselect
+    title = select('head title')[0]
+    headline = select('.header-image h1')[0]
 
     assert len(select('.cp-region--solo')) == 2
     assert len(select('.cp-area--solo')) == 1
     assert len(select('.cp-area--ranking')) == 1
     assert len(select('.header-image.header-image--overlain')) == 1
+    assert title.text.startswith('Serie alpha-Centauri')
+    assert headline.text_content().strip() == 'Serie: alpha-Centauri'
 
 
 def test_headerimage_is_overlain_on_dynamic_page(testbrowser):
