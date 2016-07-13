@@ -271,3 +271,7 @@ class ICommunity(zope.interface.Interface):
 
     def is_healthy():
         pass
+
+
+class ILiveblogInfo(zope.interface.Interface):
+    """Returns liveblog metadata."""

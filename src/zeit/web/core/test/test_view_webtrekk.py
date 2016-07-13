@@ -144,20 +144,20 @@ def test_buzzboard_provides_expected_webtrekk_strings(
 @pytest.mark.parametrize(
     'navi', [
         # classifieds
-        ('.main-nav-classifieds__item a',
+        ('.nav__classifieds a',
          'topnav.classifieds.1..abo'),
         # services
-        ('.primary-nav-services__link',
-         'topnav.services.1..epaper'),
+        ('.nav__services a',
+         'topnav.services.1..e_paper'),
         # logo
-        ('.logo_bar__brand a',
-         'topnav.2.1..logo'),
+        ('.header__brand a',
+         'topnav.lead.1..logo'),
         # primary-nav
-        ('.primary-nav__link',
+        ('.nav__ressorts a',
          'topnav.mainnav.1..politik'),
         # tags
-        ('.header__tags__link',
-         'topnav.article-tag.1..griechenland-krise')
+        ('.header__tags a',
+         'topnav.article-tag.1..griechenland_krise')
     ])
 def test_navi_provides_expected_webtrekk_strings(
         selenium_driver, testserver, navi):

@@ -13,38 +13,23 @@
     <link href="http://jobs.zeit.de/" id="topnav.classifieds.4..jobs">Jobs</link>
   </section>
   <section>
-    <link href="#" id="topnav.classifieds.5..mehr">mehr</link>
+    <link href="#more-classifieds" id="topnav.classifieds.5..more-classifieds">mehr</link>
     <sub_sections>
       <sub_section>
-            <link href="http://marktplatz.zeit.de/urlaubsziele/?wt_mc=zeit_de.intern.serviceservice.zon.urlaubsziele.zeit_blog_urlaubsziele.textservice.textservice" id="topnav.classifieds.5.1.urlaubsziele" rel="nofollow">Urlaubsziele</link>
-        </sub_section>
-        <sub_section>
-            <link href="http://marktplatz.zeit.de/kulturveranstaltungen/" id="topnav.classifieds.5.2.kulturveranstaltungen">Kulturveranstaltungen</link>
-        </sub_section>
-        <sub_section>
-            <link href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="topnav.classifieds.5.3.partnersuche">Partnersuche</link>
-        </sub_section>
-        <sub_section>
-            <link href="http://zeit.immowelt.de/" id="topnav.classifieds.5.4.immobilien" rel="nofollow">Immobilien</link>
-        </sub_section>
-        <sub_section>
-            <link href="http://automarkt.zeit.de/" id="topnav.classifieds.5.5.automarkt">Automarkt</link>
-        </sub_section>
+        <link href="http://marktplatz.zeit.de/urlaubsziele/?wt_mc=zeit_de.intern.serviceservice.zon.urlaubsziele.zeit_blog_urlaubsziele.textservice.textservice" id="topnav.classifieds.5.1.urlaubsziele" rel="nofollow">Urlaubsziele</link>
+      </sub_section>
+      <sub_section>
+        <link href="http://marktplatz.zeit.de/kulturveranstaltungen/" id="topnav.classifieds.5.2.kulturveranstaltungen">Kulturveranstaltungen</link>
+      </sub_section>
+      <sub_section>
+        <link href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="topnav.classifieds.5.3.partnersuche">Partnersuche</link>
+      </sub_section>
+      <sub_section>
+        <link href="http://zeit.immowelt.de/" id="topnav.classifieds.5.4.immobilien" rel="nofollow">Immobilien</link>
+      </sub_section>
+      <sub_section>
+        <link href="http://automarkt.zeit.de/" id="topnav.classifieds.5.5.automarkt">Automarkt</link>
+      </sub_section>
     </sub_sections>
-  </section>
-  <section>
-    <link href="http://marktplatz.zeit.de/urlaubsziele/?wt_mc=zeit_de.intern.serviceservice.zon.urlaubsziele.zeit_blog_urlaubsziele.textservice.textservice" id="topnav.classifieds.5..urlaubsziele" rel="nofollow">Urlaubsziele</link>
-  </section>
-  <section>
-    <link href="http://marktplatz.zeit.de/veranstaltungen/index" id="topnav.classifieds.6..kulturveranstaltungen">Kulturveranstaltungen</link>
-  </section>
-  <section>
-    <link href="http://www.zeit.de/angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID" id="topnav.classifieds.7..partnersuche">Partnersuche</link>
-  </section>
-  <section>
-    <link href="http://zeit.immowelt.de/" id="topnav.classifieds.8..immobilien" rel="nofollow">Immobilien</link>
-  </section>
-  <section>
-    <link href="http://automarkt.zeit.de/" id="topnav.classifieds.9..automarkt">Automarkt</link>
   </section>
 </navigation>

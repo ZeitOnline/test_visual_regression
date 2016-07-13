@@ -17,6 +17,7 @@ require([
     'web.core/clicktracking',
     'web.core/triggeredEventTracking',
     'web.core/adReload',
+    'web.core/menu',
     'web.core/overscrolling.js',
     'web.site/video/videoStage',
     'web.core/articledate',
@@ -29,6 +30,7 @@ require([
     clicktracking,
     triggeredEventTracking,
     adReload,
+    menu,
     overscrolling,
     videoStage,
     articledate,
@@ -39,6 +41,7 @@ require([
     var article = document.getElementById( 'js-article' );
 
     images.init();
+    menu.init({ followMobile: 'always' });
     clicktracking.init();
     triggeredEventTracking.init();
     adReload.init();
@@ -91,7 +94,6 @@ require([
     'web.site/plugins/jquery.paginateTeasers',
     'web.site/plugins/jquery.longTextWrapper',
     'web.site/plugins/jquery.tabs',
-    'web.site/plugins/jquery.togglenavi',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
     'web.site/plugins/jquery.partnerDropdown'
@@ -102,9 +104,8 @@ require([
 
     $( window ).referrerCount();
     // global and "above the fold"
-    $( '.main_nav__search' ).toggleSearch();
-    $( '.logo_bar__menu' ).toggleNavi();
-    $( '.primary-nav' ).adaptToSpace();
+    $( '.nav__search' ).toggleSearch();
+    $( '.nav__ressorts-list' ).adaptToSpace();
 
     if ( pageType === 'centerpage' ) {
         // homepage

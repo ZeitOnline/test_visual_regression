@@ -1,517 +1,371 @@
-//sizes
-$zon-logo-width: em(347px)
-$zon-logo-height: em(38px)
-$zon-logo-width-small: em(231px)
-$zon-logo-height-small: em(26px)
-$zon-search-bar-height-phablet: em(70px)
-$zon-search-bar-width: em(250px) // is this still correct? It's more than used
-$zon-classifieds-width: em(120px)
-$zon-classifieds-height: em(50px)
-$zon-classifieds-width-phablet: em(180px)
-$zon-search-width: em(120px)
-$zon-search-square-size: remify(35px)
-$login-icon-width: remify(18px)
-$login-icon-height: remify(18px)
-$user-picture-diameter: remify(45px)
+.nav
+	display: none
+	flex-flow: column nowrap
+	font-size: em(16px)
+	letter-spacing: $letter-spacing-m
+	line-height: remify(50px)
 
-$icon-color: $zon-dark-grey
-$icon-color--hover: $zon-charcoal
-$nav-link-color: $black
-$nav-link-color--hover: $zon-dark-grey
+	&:target,
+	&[aria-hidden="false"]
+		display: block // IE no-flexbox fallback
+		display: flex
 
-// basic style for nav box
-.main_nav
-	display: flex
-	flex-wrap: wrap
-	width: 100%
-	@supports not (flex-wrap: wrap)
-		display: inline-block
-	*[data-dropdown="true"]
-		display: none
-		+respond-min($break-tablet-min)
-			display: inline-block
-	&--open
-		*[data-dropdown="true"]
-			display: block
+	a
+		color: inherit
+		display: block
+		+on-interaction
+			color: $zon-dark-grey
 
-%main_nav_links
-	display: inline-block
-	letter-spacing: 1px
 	ul
 		list-style: none
+		margin: 0
 		padding: 0
-		margin: 0
-		li
-			display: inline-block
-			margin-right: $little
-	width: 100%
-	a
-		color: $nav-link-color
-		+on-interaction
-			color: $nav-link-color--hover
-	+respond-min($break-tablet-min)
-		font-size: remify(10px)
-		text-transform: uppercase
 
-//box 1: logo
-.logo_bar
-	+add_nav_bar_style($zon-bar-height-phablet)
-	display: flex
-	justify-content: space-between
-	order: 10
-	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: $zon-logo-width)
-		order: 40
-		margin: $petite 0
-
-	&__brand
-		font-size: inherit
+	li
+		float: left
 		margin: 0
+		padding: 0
 		position: relative
 
-	&__brand-logo
-		color: $color-zon-logo
-		display: block
-		height: $zon-logo-height-small
-		margin: em(13px) 0 0 0
-		width: $zon-logo-width-small
-		+respond-min($break-tablet-min)
-			height: $zon-logo-height
-			margin: 0
-			width: $zon-logo-width
-
-	&__menu
-		border-left: 1px solid $color-border
-		display: inline-block
-		width: $zon-bar-height-phablet
-		+respond-min($break-tablet-min)
+	// this is legacy protection and will be obsolete as soon as navigation-classifieds.xml was updated
+	&__classifieds-list
+		> li:nth-child(n+6)
 			display: none
+
+	&__ressorts-item--featured
 		a
-			color: $icon-color
+			background-color: $zon-dark-grey
+			border-radius: 3px
+			color: #fff
+			display: inline-block
+			line-height: 2
+			padding: remify(0 8px)
+			transition: background-color .15s linear
 			+on-interaction
-				color: $icon-color--hover
+				background-color: $zon-grey
+				color: #fff
 
-	&__menu-icon
-		display: block
-		height: remify(18px)
-		margin: remify( (($zon-bar-height-phablet-px - 18px) / 2) ) auto 0
-		width: remify(18px)
-		&--burger
-			.main_nav--open &
-				display: none
-		&--close
-			display: none
-			.main_nav--open &
-				display: block
+	// hide advertorial links on mobile and in 1st level navigation
+	&__ressorts-item--has-label,
+	// hide more ressorts link, enable for script enabled desktop view only
+	&__ressorts-item--more
+		display: none
 
-//box 2: community
-.main_nav__community
-	+add_nav_bar_style(auto)
-	order: 20
-	letter-spacing: 1px
-	padding: remify(20px)
-	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: auto)
-		order: 30
-		flex: 0 0 auto
-		font-size: remify(10px)
-		line-height: $zon-bar-height-phablet
-		min-width: remify(80px) // fallback for failing esi include
-		padding: 0
+	// LOGIN
+	&__login
+		// min-width: remify(80px)
+	&__login-link
 		text-align: right
-		text-transform: uppercase
-		ul
-			list-style: none
-			margin: 0
-			padding: 0
-			text-align: left
+	&__login-icon
+		height: remify(18px)
+		width: remify(18px)
+		vertical-align: remify(-3px)
+	&__user-picture
+		background-color: #eee
+		background-position: center
+		background-repeat: no-repeat
+		background-size: contain
+		border-radius: 50%
+		display: block
+		float: left
+		height: remify(40px)
+		margin: remify(10px 8px 10px 0)
+		width: remify(40px)
+		&--default
+			display: none
+	&__user-avatar
+		color: #ababab
+		height: 100%
+		width: 100%
+	&__user-name
+		font-weight: bold
 
-.user-link
-	color: $nav-link-color
-	+on-interaction
-		color: $nav-link-color--hover
-	+respond-min($break-tablet-min)
-		margin-right: remify(5px)
-
-.main_nav__community__icon
-	width: $login-icon-width
-	height: $login-icon-height
-	margin: remify(0 8px -2px 0)
-	+respond-min($break-tablet-min)
-		display: none
-
-//box 3: ressorts
-.main_nav__ressorts
-	width: 100%
-	order: 30
-	+respond-min($break-tablet-min)
-		order: 60
-
-// box 4: classifieds
-.main_nav__classifieds
-	@extend %main_nav_links
-	+add_nav_bar_style(auto)
-	padding-left: $petite
-	line-height: $zon-classifieds-height
-	order: 50
-	& [data-feature='dropdown']
-		display: none
-	& > ul
-		display: flex
-		flex-wrap: wrap
-		justify-content: space-between
-		& > li
-			width: 50%
-			margin: 0
-			+respond-min($break-phablet-min)
-				width: 33%
-	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: auto)
-		order: 10
-		flex: 2 0 35%
-		& > ul
-			margin-right: $petite
-			display: inline-block
-			& > li
-				width: auto
-				margin-right: $little
-				&:nth-child(n+6)
-					display: none
-		& [data-feature='dropdown']
-			display: inline-block
-
-	// sry for that, ellipsis was destroying the dropdown
-	// on desktop, rework when polish mobile nav (as)
 	+respond-max($break-tablet-min)
-		ul
+		// item order
+		&__login
+			order: 1
+		&__ressorts
+			order: 2
+		&__services
+			order: 3
+		&__classifieds
+			order: 4
+		&__search
+			order: 5
+
+		&__login,
+		&__ressorts,
+		&__classifieds,
+		&__search
+			border-bottom: 1px solid $color-border
+			padding: 0 $page-padding--small
+
+		&__ressorts,
+		&__classifieds
+			padding-bottom: remify(6px)
+			padding-top: remify(6px)
 			li
-				white-space: nowrap
+				line-height: 2.625
+				width: 33.33%
+			a
 				overflow: hidden
 				text-overflow: ellipsis
-
-
-// box 5: services
-.main_nav__services
-	@extend %main_nav_links
-	+add_nav_bar_style($zon-bar-height-phablet,true)
-	line-height: $zon-bar-height-phablet
-	order: 40
-	padding-left: 0
-	ul
-		display: flex
-		justify-content: space-between
-		text-align: center
-		height: em($zon-bar-height-phablet-px - 1)
-		li
-			width: 33%
-			margin-right: 0
-			&:nth-child(n+4)
-				display: none
-			&:nth-child(2)
-				border-left: 1px solid $color-border
-				border-right: 1px solid $color-border
-	+respond-min($break-tablet-min)
-		+remove_nav_bar_style($width: auto)
-		order: 20
-		flex: 0 0 auto
-		text-align: right
-		padding-left: auto
-		& > ul
-			margin-right: $petite
-			display: inline-block
-			& > li
-				width: auto
-				margin-right: $little
-				&:nth-child(n+4)
-					display: inline-block
-				&:nth-child(2)
-					border: none
-
-//box 6: search
-.main_nav__search
-	+add_nav_bar_style($zon-search-bar-height-phablet)
-	order: 60
-	+respond-min($break-tablet-min)
-		+remove_nav_bar_style()
-		order: 50
-		margin: $petite 0 0 0
-		line-height: $zon-search-square-size
-		overflow: hidden
-	+respond-min($break-desktop-min)
-		width: $zon-search-bar-width
-
-.search
-	padding-top: em(17px)
-	+respond-min($break-tablet-min)
-		padding-top: 0
-		float: right
-
-.search__input
-	background-color: $white
-	border-radius: $micro 0 0 $micro
-	border: 1px solid $color-border
-	border-right: none
-	color: $zon-grey
-	float: left
-	font-size: $font-m
-	height: $zon-search-square-size
-	padding: 0 0 0 $fine
-	width: 70%
-	&:focus
-		outline-width: 0
-		color: $zon-dark-grey
-	+respond-min($break-tablet-min)
-		width: $zon-search-width
-		visibility: hidden
-		transition: transform .2s ease-out, visibility .2s
-		transform: translateX($zon-search-width)
-	+respond-min($break-desktop-min)
-		visibility: visible
-		transform: none
-
-.search__input--visible
-	visibility: visible
-	transform: translateX(0)
-	& + .search__button
-		border-radius: 0 $micro $micro 0
-
-.search__button
-	background-color: $white
-	border-radius: 0 $micro $micro 0
-	border: 1px solid $color-border
-	display: inline-block
-	float: left
-	height: $zon-search-square-size
-	position: relative // needed for the transition
-	width: $zon-search-square-size
-	color: $icon-color
-	+on-interaction
-		background-color: $zon-lighter-grey
-		color: $icon-color--hover
-		outline-width: 0
-	+respond-min($break-tablet-min)
-		border-radius: $micro
-		box-shadow: $micro 0 0 #fff // this is here to hide the underlying search input border
-		vertical-align: bottom
-	+respond-min($break-desktop-min)
-		border-radius: 0 $micro $micro 0
-
-.search__icon
-	width: remify(16px)
-	height: remify(16px)
-	position: absolute
-	top: 50%
-	left: 50%
-	margin: remify(-8px 0 0 -8px)
-
-
-//box 9: special teaser
-.main_nav__teaser
-	display: none
-	+respond-min($break-tablet-min)
-		display: inline
-		order: 45
-		flex-grow: 1
-		margin: $petite
-
-
-.login-state
-	display: none
-	+respond-min($break-tablet-min)
-		+inline-block
-		margin-right: remify(10px)
-	&__name
-		color: $nav-link-color
-		font-weight: 700
-		+on-interaction
-			color: $nav-link-color--hover
-
-.login-state-mobile
-	display: flex
-	justify-content: space-between
-	align-items: center
-	&__avatar
-		border-radius: 50%
-		height: $user-picture-diameter
-		margin-right: em(10px)
-		width: $user-picture-diameter
-	&__icon
-		width: $login-icon-width
-		height: $login-icon-height
-		margin: remify(0 0 -2px 8px)
-	&__logoff
-		white-space: nowrap
-		color: $nav-link-color
-		+on-interaction
-			color: $nav-link-color--hover
-	&__name
-		font-weight: 700
-		line-height: normal
-		max-height: $user-picture-diameter
-		overflow: hidden
-		text-overflow: ellipsis
-		flex-grow: 1
-	+respond-min($break-tablet-min)
-		display: none
-
-/* primary navigation (ressorts and stuff) */
-
-.primary-nav
-	columns: 2
-	+pie-clearfix
-	font-size: $font-m
-	letter-spacing: $zon-letter-spacing-m
-	margin: .5em 0 0
-	padding: 0 0 0 $petite
-
-	+respond-min($break-phablet-min)
-		columns: 3
-	+respond-min($break-tablet-min)
-		columns: auto
-		border-bottom: 1px solid $color-border
-		display: block
-		font-size: $font-s
-		padding: 0
-	[data-id='more-dropdown']
-		display: none
-		+respond-min($break-tablet-min)
-			display: block
-
-.primary-nav__item
-	color: $black
-	display: block // needed for css columns
-	line-height: 2.5714
-	&--has-label
-		display: none // hide on mobile
-	+respond-min($break-tablet-min)
-		float: left
-		padding-right: $little
-
-
-.primary-nav__link
-	color: inherit
-	display: inline-block
-	+on-interaction
-		color: inherit
-	+respond-min($break-tablet-min)
-		&:focus,
-		&:hover,
-		&--current
-			box-shadow: inset 0 -3px 0 0 $color-border
-
-.primary-nav__link--current
-	font-weight: bold
-
-
-.primary-nav__item--featured
-	line-height: 2.0625
-	+respond-min($break-tablet-min)
-		font-size: $font-s
-		float: right
-		margin-top: $tiny
-		padding-right: 0
-
-	.primary-nav__link
-		color: $white
-		background-color: $zon-dark-grey
-		border-radius: 3px
-		transition: background-color .15s linear
-		padding: 0 $fine
-		&:focus,
-		&:hover
-			box-shadow: none
-			background-color: $zon-grey
-
-
-
-/* Module: Dropdown */
-
-.main_nav [data-feature='dropdown']
-	position: relative
-	+respond-min($break-tablet-min)
-		& > a:after
-			+drop_icon()
-		&:hover
-			& > a
-				box-shadow: none
-				&:after
-					+drop_icon($open: true, $cross: false)
-			& > .dropdown
-				display: block
-				z-index: 2
-
-// the dropdown is only present on tablet and desktop
-// therefore all styling is scoped in a media query
-.dropdown
-	display: none
-	+respond-min($break-tablet-min)
-		box-shadow: 0 $micro $thin rgba(0,0,0,0.05)
-		background: $white
-		border: 1px solid $color-border
-		left: -$fine
-		min-width: remify(154px)
-		padding-left: 0
-		position: absolute
-		&__item
-			display: block // get rid of bullet points
-			width: 100%
-			& > .dropdown__link
-				color: $black
-				display: block
-				width: 100%
-				padding: 0 $fine 0 $fine
 				white-space: nowrap
-				&:after
-					content: ""
-					margin-left: 0
-				&:hover,
-				&--current
-					background-color: $gainsboro
-			&--has-label
-				background-color: #FAFAF3
-				border-top: 1px solid $color-border
-				&:before
-					color: $zon-mid-grey
-					content: "Anzeige" // fallback imcabable browsers
-					content: attr(data-label)
-					display: block
-					font-family: $font-tabletgothic
-					font-size: em(9px)
-					letter-spacing: .15em
-					line-height: 1
-					margin: remify(0 0 0 10px)
-					padding: remify(8px 0 0)
-					text-align: left
-					text-transform: uppercase
-				& + &
-					border-top: none
-					&:before
-						display: none
 
-		// dropdowns can contain dropdowns
-		.dropdown
-			box-shadow: none
-			border: none
-			display: block
-			left: 0
-			position: relative
-			.dropdown__link
-				padding-left: $petite
-.dropdown__label
-	@extend %label
-	margin: remify(0 0 -4px)
-	padding: remify(8px 0 0)
-	text-align: left
+		// hide "more" link and show children
+		&__classifieds-list
+			.nav__classifieds-item--has-dropdown
+				width: 100%
+			a[role="button"]
+				display: none
 
-.js .primary-nav--js-no-overflow
+		&__ressorts
+			.nav__dropdown-list
+				display: none
+		&__ressorts-item--featured
+			a
+				vertical-align: remify(-10px)
+
+		&__services
+			border-bottom: 1px solid $color-border
+			li
+				width: 33.33%
+				text-align: center
+				&:not(:first-child)
+					border-left: 1px solid $color-border
+				&:last-child
+					display: none
+
+		&__login
+			line-height: remify(60px)
+		&__login-title
+			float: left
+			max-width: 66%
+			overflow: hidden
+			text-overflow: ellipsis
+			white-space: nowrap
+		&__login-list
+			float: right
+			font-size: remify(14px)
+			letter-spacing: .08em
+			li:not(:last-child)
+				display: none
+
+	+respond-max($break-phablet-min)
+		&__ressorts,
+		&__classifieds
+			li
+				width: 50%
+
 	+respond-min($break-tablet-min)
-		max-height: $medium
-		overflow: hidden
+		display: block // IE no-flexbox fallback
+		// width: 100% // needed for IE no-flexbox fallback
+		display: flex
+		flex-flow: row wrap
+		// justify-content: flex-end // carefull, this seems to affect ressorts overflow direction
 
-.no-js .primary-nav [data-id='more-dropdown']
-	display: none
+		a
+			white-space: nowrap
+			&[aria-controls]:after
+				+drop_icon()
+			&[aria-expanded="true"]:after
+				+drop_icon($open: true, $cross: false)
 
-/* END: Module: Dropdown */
+		&__classifieds,
+		&__services,
+		&__login
+			font-size: remify(10px)
+			letter-spacing: 1px
+			text-transform: uppercase
+			line-height: remify(32px)
+
+		&__classifieds-list,
+		&__services-list
+			& > li
+				margin-right: remify(12px)
+				&:last-child
+					margin-right: remify(20px)
+
+		// align left @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
+		&__classifieds
+			margin-right: auto
+		&__search,
+		&__ressorts
+			flex: 1 1 100%
+
+		&__search
+			height: remify(86px)
+
+		&__ressorts
+			border-bottom: 1px solid $color-border
+			li
+				font-size: remify(14px)
+				line-height: remify(36px)
+			a
+				&:hover,
+				&:focus,
+				&.nav__ressorts-link--current
+					box-shadow: inset 0 -3px 0 0 $color-border
+			a[aria-controls]
+				&:hover,
+				&:focus
+					box-shadow: none
+
+		&__ressorts-list
+			> li
+				padding-right: remify(11px)
+
+		.js &__ressorts
+			overflow: hidden
+			&--fitted
+				overflow: visible
+		.js &__ressorts-list
+			display: flex
+			> li
+				flex: 0 0 auto
+		.js &__ressorts-item--more
+			display: list-item
+		.js &__ressorts-item--featured
+			margin-left: auto // align right @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
+
+		&__dropdown-item--has-label,
+		&__ressorts-item--has-label
+			background-color: #FAFAF3
+			border-top: 1px solid $color-border
+			&:before
+				color: $zon-mid-grey
+				content: "Anzeige" // fallback incapable browsers
+				content: attr(data-label)
+				display: block
+				font-size: remify(9px)
+				letter-spacing: .15em
+				line-height: 1
+				margin: remify(0 0 0 10px)
+				padding: remify(8px 0 0)
+				text-align: left
+				text-transform: uppercase
+			& + &
+				border-top: none
+				&:before
+					display: none
+
+		&__ressorts-link--current
+			font-weight: bold
+
+		&__ressorts-item--featured
+			a
+				+on-interaction
+					box-shadow: none
+
+		// dropdown menues
+		&__dropdown-list,
+		&__login-list
+			background-color: #fff
+			border: 1px solid $color-border
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05)
+			display: none
+			left: remify(-11px)
+			min-width: remify(154px)
+			position: absolute
+			z-index: 3 // fix visible arrow and lead-teaser headline
+			li:hover &,
+			&[aria-hidden="false"]
+				display: block
+			a
+				padding: remify(0 10px)
+				white-space: nowrap
+				&:hover,
+				&:focus,
+				&.nav__dropdown-link--current
+					background-color: $gainsboro
+					box-shadow: none
+			li
+				display: block
+				float: none
+
+		& li:hover a[aria-controls]:after,
+		&__login:hover a[aria-controls]:after
+			+drop_icon($open: true, $cross: false)
+			box-shadow: none
+		&__login:hover &__login-list
+			display: block
+
+		// LOGIN
+		&__login
+			position: relative
+		&__login-register,
+		&__login-icon,
+		&__user-picture
+			display: none
+		&__user-name
+			text-align: right
+
+		li.nav__ressorts-item--featured
+			float: right
+			font-size: remify(12px)
+			padding-right: 0
+
+	+respond-min-max($break-tablet-min, $break-desktop-min)
+		&__login-list
+			left: auto
+			right: remify(-10px)
 
 
-/* END: primary navigation */
+//*************
+// NO FLEXBOX *
+//*************
+
+.no-flexbox
+	.nav
+		&__classifieds,
+		&__services,
+		&__login,
+		&__search,
+		&__ressorts
+			+pie-clearfix
+
++respond-min($break-tablet-min)
+	// no JS variant (without JS, modernizr does not add the "no-flexbox" class)
+	// These styles must not harm the default styles!
+	// Note that float, clear and vertical-align have no effect on a flex item.
+	.no-js
+		.nav
+			&__classifieds,
+			&__services
+				float: left
+			&__login
+				float: right
+
+			&__search,
+			&__ressorts
+				clear: both
+				width: 100%
+
+			&__ressorts
+				+pie-clearfix
+
+	.no-flexbox
+		.nav
+			&__classifieds,
+			&__services
+				float: left
+			&__login
+				float: right
+
+			&__search,
+			&__ressorts
+				clear: both
+				display: block // needed for IE8
+				width: 100%
+
+			&__ressorts-list
+				display: table
+				min-width: 100%
+				white-space: nowrap
+				> li
+					display: table-cell
+					float: none
+
+			li.nav__ressorts-item--featured
+				text-align: right
+				width: 50%

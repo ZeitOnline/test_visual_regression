@@ -16,6 +16,7 @@
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
     <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner_id">campus/angebote/100tage</attribute>
     <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="cap_title">ANZEIGE</attribute>

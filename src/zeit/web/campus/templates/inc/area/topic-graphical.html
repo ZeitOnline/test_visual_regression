@@ -5,7 +5,7 @@
 {% block module_list %}
     {% if area.values() | length > 0 %}
     <div class="topic-graphical">
-        {% for module in area.values()[0:4] -%}
+        {% for module in area.values()[0:4] | map('get_module') -%}
             {% set teaser = module | first_child %}
             {% include "zeit.web.campus:templates/inc/teaser/zco-graphical.tpl" %}
         {% endfor %}
