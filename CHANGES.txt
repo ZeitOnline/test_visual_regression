@@ -1,14 +1,14 @@
-Change log for zeit.web
+  Change log for zeit.web
 =======================
 
-2.93 (unreleased)
+2.92.1 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- Fix release
 
 
 2.92 (2016-07-12)
------------------
+  -----------------
 
 - BUG-455: Add advertorial font size factor to inline gallery
 
