@@ -2197,3 +2197,11 @@ def test_comment_count_in_teaser_not_shown_when_comments_disabled(
         browser = testbrowser('/zeit-online/classic-teaser')
     assert not browser.cssselect(
         'article[data-unique-id="{}"] .teaser-small__commentcount'.format(id))
+
+def test_teaser_link_title_should_match_kicker_and_headline(testbrowser):
+    browser = testbrowser('/index')
+    media_link_title = browser.cssselect(
+        'article.teaser-small .teaser-small__media-link')[0].get('title')
+    combined_link_title = browser.cssselect(
+        'article.teaser-small .teaser-small__combined-link')[0].get('title')
+    assert media_link_title == combined_link_title
