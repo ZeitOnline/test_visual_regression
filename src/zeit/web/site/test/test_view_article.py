@@ -628,6 +628,12 @@ def test_article_column_author_image_should_be_present(testbrowser):
     src = img[0].get('src')
     assert src != "" and ratio != ""
 
+def test_article_column_author_link_should_inherit_image_title_from_default_template(testbrowser):
+    browser = testbrowser('/zeit-online/cp-content/kolumne')
+    links = browser.cssselect('.column-heading__author a')
+    title = links[0].get('title')
+    assert title == "Katze!"
+
 
 def test_article_should_not_break_on_author_without_image(
         testbrowser, workingcopy):
