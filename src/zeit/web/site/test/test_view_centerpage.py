@@ -2157,6 +2157,46 @@ def test_headerimage_has_appropriate_html_structure(testbrowser):
     assert image.get('data-mobile-ratio') == '2.33333333333'  # variant=cinema
 
 
+def test_dynamic_page_has_correct_structure(testbrowser):
+    select = testbrowser('/serie/alpha-centauri').cssselect
+
+    assert len(select('.cp-region--solo')) == 2
+    assert len(select('.cp-area--solo')) == 1
+    assert len(select('.cp-area--ranking')) == 1
+    assert len(select('.header-image.header-image--overlain')) == 1
+
+
+def test_headerimage_is_overlain_on_dynamic_page(testbrowser):
+    browser = testbrowser('/serie/alpha-centauri')
+    module = browser.cssselect('.header-image')[0]
+    assert 'header-image--overlain' in module.get('class')
+
+
+def test_headerimage_is_overlain_on_materialized_simple_page(testbrowser):
+    browser = testbrowser('/serie/tontraeger')
+    module = browser.cssselect('.header-image')[0]
+    assert 'header-image--overlain' in module.get('class')
+
+
+def test_headerimage_is_overlain_on_materialized_page_with_markdown(
+        testbrowser):
+    browser = testbrowser('/serie/app-kritik')
+    module = browser.cssselect('.header-image')[0]
+    assert 'header-image--overlain' in module.get('class')
+
+
+def test_headerimage_is_not_overlain_on_materialized_curated_page(testbrowser):
+    browser = testbrowser('/serie/70-jahre-zeit')
+    module = browser.cssselect('.header-image')[0]
+    assert 'header-image--overlain' not in module.get('class')
+
+
+def test_headerimage_is_overlain_on_materialized_following_page(testbrowser):
+    browser = testbrowser('/serie/70-jahre-zeit?p=2')
+    module = browser.cssselect('.header-image')[0]
+    assert 'header-image--overlain' in module.get('class')
+
+
 def test_zco_parquet_has_zco_styles(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/teasers-to-campus')
     select = browser.cssselect
