@@ -25,11 +25,6 @@
 		&--portrait
 			width: remify(240px)
 
-	&__default-info
-		&--embed
-			.article-header__metadata
-				padding: $page-padding--small 0
-
 	&__media
 		height: 0
 		position: relative
@@ -224,6 +219,9 @@
 			padding: 0
 			&:before
 				background-color: transparent
+	&__embed-info
+		.article-header__metadata
+			padding: $page-padding--small 0
 
 .metadata
 	&__commentcount

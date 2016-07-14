@@ -291,7 +291,7 @@ def test_article_header_embed_quiz_has_correct_markup(testbrowser):
     quiz = header.cssselect('.quiz')
     topic = header.cssselect('.article-header__topic--embed')
     headline = header.cssselect('.article-header__headline--embed')
-    info = header.cssselect('.article-header__default-info--embed')
+    info = header.cssselect('.article-header__embed-info')
 
     assert len(header) > 1
     assert len(quiz) == 1
