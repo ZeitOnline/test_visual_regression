@@ -110,9 +110,8 @@
 
 {% macro subpage_head(number, subtitle, class) -%}
     {% if subtitle %}
-        <div class="{{ class }}">
-            <a name="kapitel{{ number }}"></a>
-            {{ number }} &mdash; {{ subtitle }}
+        <div class="{{ class }}" id="kapitel{{ number }}">
+            {{- number }} &mdash; {{ subtitle -}}
         </div>
     {% endif %}
 {%- endmacro %}
