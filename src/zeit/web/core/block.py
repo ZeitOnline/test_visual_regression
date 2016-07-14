@@ -185,6 +185,7 @@ class Liveblog(Block):
         except ValueError:
             self.id = self.blog_id
 
+        # set last_modified
         url = '{}/Blog/{}/Post/Published'
         content = self.get_restful(url.format(self.status_url, self.id))
 
@@ -192,22 +193,26 @@ class Liveblog(Block):
                 content['PostList']) and 'href' in content['PostList'][0]):
             href = content['PostList'][0]['href']
             content = self.get_restful(self.prepare_ref(href))
-            if content:
-                tz = babel.dates.get_timezone('Europe/Berlin')
-                utc = babel.dates.get_timezone('UTC')
-                date_format = '%d.%m.%y %H:%M'
-                if '/' in content['PublishedOn']:
-                    date_format = '%m/%d/%y %I:%M %p'
-                elif '-' in content['PublishedOn']:
-                    date_format = '%Y-%m-%dT%H:%M:%SZ'
-                self.last_modified = datetime.datetime.strptime(
-                    content['PublishedOn'], date_format).replace(
-                        tzinfo=utc).astimezone(tz)
-                delta = datetime.datetime.now(
-                    self.last_modified.tzinfo) - self.last_modified
-                # considered live if last post was within given timedelta
-                if delta < datetime.timedelta(hours=6):
-                    self.is_live = True
+            if content and 'PublishedOn' in content:
+                self.last_modified = self.format_date(content['PublishedOn'])
+
+        # set is_live
+        url = '{}/Blog/{}'
+        content = self.get_restful(url.format(self.status_url, self.id))
+
+        if content and 'ClosedOn' not in content:
+            self.is_live = True
+
+    def format_date(self, date):
+        tz = babel.dates.get_timezone('Europe/Berlin')
+        utc = babel.dates.get_timezone('UTC')
+        date_format = '%d.%m.%y %H:%M'
+        if '/' in date:
+            date_format = '%m/%d/%y %I:%M %p'
+        elif '-' in date:
+            date_format = '%Y-%m-%dT%H:%M:%SZ'
+        return datetime.datetime.strptime(
+            date, date_format).replace(tzinfo=utc).astimezone(tz)
 
     def prepare_ref(self, url):
         return 'http:{}'.format(url).replace(

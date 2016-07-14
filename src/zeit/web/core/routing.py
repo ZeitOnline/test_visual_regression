@@ -101,7 +101,7 @@ class Article(Traversable):
         elif self.context.template == 'column':
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.IColumnArticle)
-        elif zeit.web.core.template.is_liveblog(self.context):
+        elif zeit.web.core.template.liveblog(self.context):
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.ILiveblogArticle)
         elif self.context.template == 'photocluster':

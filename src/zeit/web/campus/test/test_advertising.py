@@ -47,8 +47,40 @@ def test_campus_adcontroller_values_return_values_on_article(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
-    view = view = zeit.web.campus.view_article.Article(
+    view = zeit.web.campus.view_article.Article(
         content, pyramid.testing.DummyRequest())
+    assert adcv == view.adcontroller_values
+
+
+def test_campus_adcontroller_values_return_values_on_advertorial_article(
+        application, dummy_request):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/advertorial')
+    adcv = [
+        ('$handle', 'adv_artikel'),
+        ('level2', u'campus'),
+        ('level3', u'angebote'),
+        ('level4', u'iwcschaffhausen'),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,zeitcampus'),
+        ('tma', '')]
+    view = zeit.web.campus.view_article.Article(content, dummy_request)
+    assert adcv == view.adcontroller_values
+
+
+def test_campus_adcontroller_values_return_values_on_advertorial_cp(
+        application, dummy_request):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/centerpage/advertorial')
+    adcv = [
+        ('$handle', 'adv_index'),
+        ('level2', u'campus'),
+        ('level3', u'angebote'),
+        ('level4', u'buchtipp'),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,zeitcampus'),
+        ('tma', '')]
+    view = zeit.web.campus.view_article.Article(content, dummy_request)
     assert adcv == view.adcontroller_values
 
 
