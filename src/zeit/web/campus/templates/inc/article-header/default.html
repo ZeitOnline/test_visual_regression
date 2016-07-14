@@ -20,7 +20,6 @@
     </div>
     {% endblock -%}
 {% else -%}
-
     {% block article_header -%}
     {# set default variant ID -#}
     {% set variant_id = None -%}
@@ -36,15 +35,13 @@
     {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}
     <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
         <div class="{{ 'article-header__banderole' | with_mods(variant_id) }}">
-
-            {# if we have an embed header we don't want an image or a modifier here #}
-            {% if image -%}
-                <div class="{{ 'article-header__default-image' | with_mods(variant_id) }}">
-                    <div class="{{ 'article-header__default-image-box' | with_mods(variant_id) }}">
-                        {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
-                    </div>
+        {% if image -%}
+            <div class="{{ 'article-header__default-image' | with_mods(variant_id) }}">
+                <div class="{{ 'article-header__default-image-box' | with_mods(variant_id) }}">
+                    {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
                 </div>
-            {% endif -%}
+            </div>
+        {% endif -%}
 
         {% block article_headline -%}
             <h1 class="{{ 'article-header__headline' | with_mods(view.article_layout) }}" itemprop="headline">
