@@ -58,9 +58,9 @@ def test_campus_adcontroller_values_return_values_on_advertorial_article(
         'http://xml.zeit.de/campus/article/advertorial')
     adcv = [
         ('$handle', 'adv_artikel'),
-        ('level2', u'campus'),
-        ('level3', u'angebote'),
-        ('level4', u'iwcschaffhausen'),
+        ('level2', u'adv'),
+        ('level3', u'iwcschaffhausen'),
+        ('level4', ''),
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
@@ -74,9 +74,9 @@ def test_campus_adcontroller_values_return_values_on_advertorial_cp(
         'http://xml.zeit.de/campus/centerpage/advertorial')
     adcv = [
         ('$handle', 'adv_index'),
-        ('level2', u'campus'),
-        ('level3', u'angebote'),
-        ('level4', u'buchtipp'),
+        ('level2', u'adv'),
+        ('level3', u'buchtipp'),
+        ('level4', ''),
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
