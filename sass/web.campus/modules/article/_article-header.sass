@@ -12,6 +12,10 @@
 		&--portrait
 			+article-header-banderole(254px)
 			background-color: transparent
+		&--embed
+			background-color: transparent
+			display: flex
+			flex-flow: column nowrap
 
 	&__default-image
 		margin-bottom: remify(-66px)
@@ -24,6 +28,11 @@
 	&__default-image-box
 		&--portrait
 			width: remify(240px)
+
+	&__default-info
+		&--embed
+			.article-header__metadata
+				padding: $page-padding--small 0
 
 	&__media
 		height: 0
@@ -81,7 +90,8 @@
 			margin-bottom: remify(14px)
 		&--column
 			margin: 0
-		&--leserartikel
+		&--leserartikel,
+		&--embed
 			order: 1
 
 	&__headline
@@ -111,6 +121,9 @@
 			color: $color-article-primary
 		&--leserartikel
 			padding-bottom: $page-padding--small
+		&--embed
+			+scaled-font(42px, $title-factor)
+			color: $color-article-primary
 
 	&__byline,
 	&__metadata
@@ -138,7 +151,6 @@
 		> span:not(:last-child):not(:empty):after
 			content: " \2014 " // — = em dash
 			margin: 0 .25em
-
 
 	// Kolumne
 	&--column
@@ -200,6 +212,24 @@
 		&__default-info &__byline:first-child
 			margin-top: remify(30px)
 
+	// Embed Header
+	&--embed
+		background-color: $zco-grey
+		margin-left: -$page-padding--small
+		margin-right: -$page-padding--small
+		padding: $page-padding--small
+		padding-bottom: 0
+		// display background color for quiz
+		.quiz.article__item--apart
+			margin-top: 0
+			padding-top: $page-padding--small * 2
+		// remove background color and padding from cardstack
+		.cardstack
+			background-color: transparent
+			padding: 0
+			&:before
+				background-color: transparent
+
 .metadata
 	&__commentcount
 		@extend %commentcount
@@ -221,8 +251,11 @@
 				+article-header-banderole(443px)
 			&--wide
 				+article-header-banderole(180px)
+			&--embed
+				display: block
 
-		&--default-no-image
+		&--default-no-image,
+		&--embed
 			background-color: $color-background
 			box-shadow: remify(-160px) 0 0 $color-background, remify(160px) 0 0 $color-background
 			margin-top: remify(76px)
@@ -234,6 +267,7 @@
 			bottom: 100%
 			margin-bottom: -0.6em // em intended
 		&--default-no-image &__byline,
+		&--embed &__byline,
 		&--default-no-image &__metadata
 			margin-bottom: 0
 
@@ -279,6 +313,8 @@
 			margin-bottom: remify(24px)
 			&--leserartikel
 				line-height: remify(49px)
+			&--embed
+				line-height: remify(60px)
 
 		&__title
 			+scaled-font(112px, $title-factor)
@@ -288,6 +324,8 @@
 			&--leserartikel
 				+scaled-font(82px)
 				padding-bottom: 0
+			&--embed
+				+scaled-font(82px)
 
 		&__topic
 			display: inline-block
@@ -301,10 +339,12 @@
 			&--column
 				bottom: 100%
 				position: absolute
-			&--leserartikel
+			&--leserartikel,
+			&--embed
 				float: left
 				margin-right: remify(20px)
 
+		// Kolumne
 		&--column
 			display: flex
 			justify-content: space-between
@@ -335,6 +375,7 @@
 			padding-right: 0
 			padding-top: remify(40px)
 
+		// Leserartikel
 		&--leserartikel
 			.article-header__byline
 				+scaled-font(26px, $title-factor)
@@ -358,6 +399,15 @@
 			flex: 1 0 $leserartikel-image-width
 			margin: remify(0 20px 0 0)
 			width: $leserartikel-image-width
+
+		// Embed Header
+		&--embed
+			// to show background color
+			margin: remify(0 auto 40px)
+			padding-top: remify(40px)
+			.article-header__metadata
+				padding: 0
+
 
 /////////////
 // DESKTOP //
@@ -419,3 +469,9 @@
 			background-image: linear-gradient(to top, #fff $color-stop, $color-community-primary $color-stop)
 			margin-bottom: remify(40px)
 			padding-top: remify(40px)
+
+		// Embed Header
+		&--embed
+			// to show background color
+			margin: remify(0 auto 60px)
+			padding-top: remify(60px)

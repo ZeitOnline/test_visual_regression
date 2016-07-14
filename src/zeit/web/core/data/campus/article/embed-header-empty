@@ -1,8 +1,6 @@
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:cp="http://namespaces.zeit.de/CMS/cp">
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
   <head>
-  <header>
-<cardstack cp:__name__="id-a5873350-202c-4705-91ec-e601eccc239e" card_id="272" is_advertorial="False"/>
-  </header>
     <rankedTags>
       <tag type="free" url_value="student" uuid="65f229d9-f0e9-434a-9f40-d541d927a413">Student</tag>
       <tag score="5" type="topic" url_value="hochschule" uuid="b8bea0ad-05bf-4eee-b35a-6b1fd478d777">Hochschule</tag>

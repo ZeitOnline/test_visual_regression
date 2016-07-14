@@ -1,58 +1,20 @@
 {% extends 'zeit.web.campus:templates/inc/article-header/default.html' %}
 
 {% block article_header -%}
-
-    <div class="article-embed">
-        {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
-    </div>
-
-    {# set default variant ID -#}
-    {% set variant_id = None -%}
-    {% if is_instance(view.header_module, 'zeit.web.core.block.Image') -%}
-        {# consider "new" ZCO article image layouts only -#}
-        {% if view.header_module.legacy_layout == 'large' -%}
-            {% set variant_id = 'portrait' -%}
-        {% else -%}
-            {% set variant_id = view.header_module.variant_name -%}
-        {% endif -%}
-    {% endif -%}
-    {% set image = get_image(content=view.header_module, variant_id=variant_id, fallback=False) -%}
-    {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image and not self.article_header_embed() else 'no-image') -%}
-    <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
-        <div class="{{ 'article-header__banderole' | with_mods(variant_id) }}">
-
-        {% block article_headline -%}
-            <h1 class="{{ 'article-header__headline' | with_mods(view.article_layout) }}" itemprop="headline">
-                <span class="{{ 'article-header__kicker' | with_mods(view.article_layout) }}">
-                    {{- view.supertitle -}}
-                </span>
-                {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
-                <span class="{{ 'article-header__title' | with_mods(view.article_layout) }}">
-                    {{- view.title -}}
-                </span>
-            </h1>
-        {% endblock -%}
+    <div class="{{ 'article-header' | with_mods(view.article_layout) }}">
+        <div class="article-header__embed">
+            {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
         </div>
 
-        <div class="{{ 'article-header__default-info' | with_mods(variant_id) }}">
-        {% block article_topic-%}
-            {% if view.topic_page and view.topic_label %}
-            <a class="{{ 'article-header__topic' | with_mods(view.article_layout) }}" href="{{ view.topic_page.uniqueId | create_url }}">{{ view.topic_label }}</a>
-            {% endif %}
-        {% endblock -%}
-        {% block article_byline -%}
-            {% set byline = view.context | get_byline('main') -%}
-            {% if byline | length -%}
-            <div class="article-header__byline">
-                {%- include 'zeit.web.core:templates/inc/meta/byline.html' -%}
+        <div class="{{ 'article-header__banderole' | with_mods(view.article_layout) }} article__item">
+            {{ self.article_topic() }}
+            {{ self.article_headline() }}
+
+            <div class="{{ 'article-header__default-info' | with_mods(view.article_layout) }}">
+                {{ self.article_byline() }}
+                {{ self.article_metadata() }}
             </div>
-            {% endif -%}
-        {% endblock -%}
-        {% block article_metadata -%}
-            <div class="article-header__metadata">
-                {%- include "zeit.web.core:templates/inc/article/metadata.tpl" -%}
-            </div>
-        {% endblock -%}
         </div>
+
     </div>
-    {% endblock -%}
+{% endblock -%}
