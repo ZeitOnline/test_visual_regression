@@ -213,6 +213,7 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.author_biography-questions':
             'egg://zeit.web.core/data/config/author-biography-questions.xml',
+        'vivi_zeit.cms_celery-config': '/dev/null',
         'sso_activate': '',
         'sso_url': 'http://my_sso',
         'sso_cookie': 'my_sso_cookie',
