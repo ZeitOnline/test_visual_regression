@@ -750,3 +750,38 @@ def test_health_check_with_fs_should_be_configurable(testbrowser):
     conf['health_check_with_fs'] = True
     with pytest.raises(pyramid.httpexceptions.HTTPInternalServerError):
         zeit.web.core.view.health_check('request')
+
+
+def test_reader_revenue_status_should_be_sent_to_webtrekk(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp28'] == 'free'
+
+
+def test_reader_revenue_status_should_utilize_feature_toggle(
+        dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'acquisition_status_webtrekk': False}.get)
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert 'cp28' not in view.webtrekk['customParameter'].keys()
+
+
+def test_reader_revenue_status_should_default_to_free_for_ZEDE(
+        dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp28'] == 'free'
+
+
+def test_reader_revenue_status_should_default_to_registration_for_ZEI(
+        dummy_request, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, 'product_id', 'ZEI')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp28'] == 'registration'
