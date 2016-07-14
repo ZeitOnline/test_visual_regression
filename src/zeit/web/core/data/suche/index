@@ -59,7 +59,7 @@
         <container cp:type="cpextra" module="search-form" visible="True" cp:__name__="id-5edb2b47-9405-457f-ad9d-188a464927c5" visible_mobile="True"/>
       </region>
     </cluster>
-    <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa257" title="Suchergebnisse">
+    <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa257" kind="solo" title="Suchergebnisse">
       <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc7" kind="ranking" title="Ergebnisse" count="10" automatic="True">
         <query>
           <condition type="Channel" py:pytype="str">News</condition>

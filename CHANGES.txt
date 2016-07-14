@@ -4,7 +4,7 @@ Change log for zeit.web
 2.93 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-2734: Update header for series, topics and dynamic pages
 
 
 2.92.1 (2016-07-13)
