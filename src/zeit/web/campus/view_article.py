@@ -32,7 +32,7 @@ class Article(zeit.web.core.view_article.Article,
             return 'column'
         elif zeit.web.core.template.leserartikel(self.context):
             return 'leserartikel'
-        elif self.header_layout:
+        elif self.header_layout != 'default':
             return self.header_layout
         else:
             return 'default'
