@@ -194,6 +194,16 @@ class Base(object):
         # third: do the mapping
         mappings = zeit.web.core.banner.BANNER_ID_MAPPINGS_SOURCE
 
+        # execption: campus pages
+        if self.package == 'zeit.campus':
+            topiclabel = getattr(self, 'topic_label', '')
+            topiclabel = zeit.web.core.template.format_iqd(topiclabel)
+            return u'{}/{}/{}/{}'.format(
+                'campus',
+                'thema' if topiclabel else '',
+                topiclabel or '',
+                self.banner_type)
+
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
                 # change ressort but leave subressort intact
