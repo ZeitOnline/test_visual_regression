@@ -290,11 +290,7 @@ class Base(object):
 
     @zeit.web.reify
     def adwords(self):
-        keywords = ['zeitonline']
-        # TODO: End discrepancy between testing and live ressorts!
-        if self.ressort in ['zeit-magazin', 'lebensart']:
-            keywords.append('zeitmz')
-        return keywords
+        return ['zeitonline']
 
     def banner(self, tile):
         try:
