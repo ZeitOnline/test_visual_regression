@@ -626,7 +626,12 @@ class Base(object):
         ])
 
         if zeit.web.core.template.toggles('acquisition_status_webtrekk'):
-            acquisition = getattr(self.context, 'acquisition', 'registration')
+            acquisition = getattr(self.context, 'acquisition', None)
+            if acquisition is None:
+                if self.product_id == u'ZEDE':
+                    acquisition = 'free'
+                else:
+                    acquisition = 'registration'
             custom_parameter.update({'cp28': acquisition})
 
         # @see https://sites.google.com/a/apps.zeit.de/
