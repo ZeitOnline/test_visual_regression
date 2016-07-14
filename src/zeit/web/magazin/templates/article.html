@@ -46,17 +46,6 @@
                             {{ blocks.print_pagination( view.pagination ) }}
                         {% endif %}
                     {% endblock article_pagination %}
-
-                    {# commented ou as not mvp, has to be reworked after first launch (as) #}
-                    {#% if view.ranked_tags %}
-                    <div class="article__tags is-constrained is-centered">
-                        <span class="article__tags__title">Tags</span>
-                        {% for tag in view.ranked_tags -%}
-                            <a href="#{{ tag.url_value }}">{{ tag.label }}</a>
-                            {%- if not loop.last %},{% endif %}
-                        {% endfor -%}
-                    </div>
-                    {% endif %#}
                 </div>
 
                 {% block article_footer %}
