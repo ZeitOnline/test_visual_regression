@@ -6,14 +6,12 @@
             {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
         </div>
 
-        <div class="{{ 'article-header__banderole' | with_mods(view.article_layout) }} article__item">
-            {{ self.article_topic() }}
-            {{ self.article_headline() }}
+        {{ self.article_topic() }}
+        {{ self.article_headline() }}
 
-            <div class="{{ 'article-header__default-info' | with_mods(view.article_layout) }}">
-                {{ self.article_byline() }}
-                {{ self.article_metadata() }}
-            </div>
+        <div class="{{ 'article-header__default-info' | with_mods(view.article_layout) }}">
+            {{ self.article_byline() }}
+            {{ self.article_metadata() }}
         </div>
 
     </div>

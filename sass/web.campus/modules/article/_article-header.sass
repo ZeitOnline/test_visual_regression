@@ -12,10 +12,6 @@
 		&--portrait
 			+article-header-banderole(254px)
 			background-color: transparent
-		&--embed
-			background-color: transparent
-			display: flex
-			flex-flow: column nowrap
 
 	&__default-image
 		margin-bottom: remify(-66px)
@@ -219,10 +215,14 @@
 		margin-right: -$page-padding--small
 		padding: $page-padding--small
 		padding-bottom: 0
+		display: flex
+		flex-flow: column nowrap
+
 		// display background color for quiz
 		.quiz.article__item--apart
 			margin-top: 0
 			padding-top: $page-padding--small * 2
+
 		// remove background color and padding from cardstack
 		.cardstack
 			background-color: transparent
@@ -251,8 +251,6 @@
 				+article-header-banderole(443px)
 			&--wide
 				+article-header-banderole(180px)
-			&--embed
-				display: block
 
 		&--default-no-image,
 		&--embed
@@ -402,6 +400,8 @@
 
 		// Embed Header
 		&--embed
+			display: block
+
 			// to show background color
 			margin: remify(0 auto 40px)
 			padding-top: remify(40px)
