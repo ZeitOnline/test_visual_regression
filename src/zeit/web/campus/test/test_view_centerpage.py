@@ -365,3 +365,13 @@ def test_overridden_adcontroller_values(application, dummy_request):
         ('tma', '')]
     view = zeit.web.campus.view_centerpage.Centerpage(cp, dummy_request)
     assert adcv == view.adcontroller_values
+
+
+def test_teaser_topic_link_title_should_match_kicker_and_headline(testbrowser):
+    browser = testbrowser('/campus/centerpage/teaser-topic-variant')
+    media_link_title = browser.cssselect(
+        '.teaser-topic-variant__media-container a')[0].get('title')
+    combined_link_title = browser.cssselect(
+        '.teaser-topic-variant-list article:nth-child(1)'
+        ' a[class$="__combined-link"]')[0].get('title')
+    assert media_link_title == combined_link_title

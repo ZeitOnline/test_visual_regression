@@ -8,3 +8,4 @@
     <span class="{{ module_layout }}__text" itemprop="caption">{{ image.caption | trim }}</span>
     {{ super() }}
 {% endblock %}
+{% block media_link_title %}Fotografie - Gesammelte Momente{% endblock %}

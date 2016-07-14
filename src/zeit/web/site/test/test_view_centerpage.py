@@ -393,6 +393,13 @@ def test_snapshot_should_show_first_gallery_image(testbrowser):
     assert image.attrib['src'].endswith('462507429-540x304.jpg')
 
 
+def test_snapshot_media_link_should_have_title(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    media_link_title = browser.cssselect(
+        '.snapshot__media-container a')[0].get('title')
+    assert media_link_title == "Fotografie - Gesammelte Momente"
+
+
 def test_snapshot_should_display_correct_teaser_title(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     title = browser.cssselect('.snapshot .section-heading__title')[0]
@@ -905,6 +912,22 @@ def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
     browser = testbrowser('/zeit-online/zeitonline')
     assert browser.cssselect('.buzz-box')
     assert len(browser.cssselect('.buzz-box__teasers article')) == 3
+
+
+def test_teaser_buzzbox_link_title_should_match_kicker_and_headline(
+        testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    media_link_titles = []
+    combined_link_titles = []
+    figure_links = browser.cssselect(
+        '.teaser-buzzboard__media a:not([itemprop="url"])')
+    heading_links = browser.cssselect(
+        '.teaser-buzzboard__media ~ .teaser-buzzboard__container a ')
+    for link in figure_links:
+        media_link_titles.append(link.get('title'))
+    for link in heading_links:
+        combined_link_titles.append(link.get('title'))
+    assert media_link_titles == combined_link_titles
 
 
 def test_centerpage_square_teaser_has_pixelperfect_image(testbrowser):
