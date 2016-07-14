@@ -53,7 +53,7 @@
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
     <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
     <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">no</attribute>
-    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Studium</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">Angebote</attribute>
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print" xmlns:py="http://codespeak.net/lxml/objectify/pytype">ZEIT Studienführer</attribute>
     <attribute name="running-volume" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">ZSF-2015-01</attribute>
     <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">yes</attribute>
