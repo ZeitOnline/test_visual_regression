@@ -4,7 +4,8 @@ import zeit.cms.interfaces
 import zeit.web.core.interfaces
 
 
-def test_campus_adcontroller_values_return_values_on_hp(application):
+def test_campus_adcontroller_values_return_values_on_hp(
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/index')
     adcv = [
@@ -15,8 +16,7 @@ def test_campus_adcontroller_values_return_values_on_hp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
-    view = zeit.web.campus.view_centerpage.Centerpage(
-        content, pyramid.testing.DummyRequest(path='/campus/index'))
+    view = zeit.web.campus.view_centerpage.Centerpage(content, dummy_request)
     assert adcv == view.adcontroller_values
 
 
@@ -39,12 +39,12 @@ def test_campus_adcontroller_values_return_values_on_cp(
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
-    view = zeit.web.campus.view_centerpage.Centerpage(
-        content, pyramid.testing.DummyRequest())
+    view = zeit.web.campus.view_centerpage.Centerpage(content, dummy_request)
     assert adcv == view.adcontroller_values
 
 
-def test_campus_adcontroller_values_return_values_on_article(application):
+def test_campus_adcontroller_values_return_values_on_article(
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/adcontroller')
     adcv = [
@@ -55,8 +55,7 @@ def test_campus_adcontroller_values_return_values_on_article(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
-    view = zeit.web.campus.view_article.Article(
-        content, pyramid.testing.DummyRequest())
+    view = zeit.web.campus.view_article.Article(content, dummy_request)
     assert adcv == view.adcontroller_values
 
 
@@ -97,7 +96,8 @@ def test_campus_adplace7_should_be_placeable_via_cpextra(testbrowser):
     assert len(browser.cssselect('script[id="ad-desktop-7"]')) == 1
 
 
-def test_campus_adcontroller_values_return_values_on_topic_cp(application):
+def test_campus_adcontroller_values_return_values_on_topic_cp(
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/thema')
     adcv = [
@@ -108,6 +108,5 @@ def test_campus_adcontroller_values_return_values_on_topic_cp(application):
         ('$autoSizeFrames', True),
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
-    view = zeit.web.campus.view_centerpage.Centerpage(
-        content, pyramid.testing.DummyRequest())
+    view = zeit.web.campus.view_centerpage.Centerpage(content, dummy_request)
     assert adcv == view.adcontroller_values
