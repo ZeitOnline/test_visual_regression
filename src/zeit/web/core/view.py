@@ -190,7 +190,7 @@ class Base(object):
                 "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower(),
                 self.banner_type)
         # execption: campus pages
-        if self.package == 'zeit.campus':
+        if self.package == 'zeit.web.campus':
             topiclabel = getattr(self, 'topic_label', '')
             topiclabel = zeit.web.core.template.format_iqd(topiclabel)
             return u'{}/{}/{}/{}'.format(
