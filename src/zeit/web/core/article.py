@@ -324,3 +324,37 @@ def content_type(context):
         if context.serie.column:
             subtyp = "column"
     return '{}.{}'.format(typ, subtyp)
+
+
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(zeit.web.core.interfaces.ILiveblogInfo)
+class LiveblogInfo(object):
+
+    def __init__(self, context):
+        self.context = context
+
+    @zeit.web.reify
+    def liveblog(self):
+        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
+        for block in body.values():
+            if zeit.content.article.edit.interfaces.ILiveblog.providedBy(
+                    block):
+                return zeit.web.core.interfaces.IFrontendBlock(block)
+
+    @property
+    def is_live(self):
+        if self.context.header_layout == 'liveblog-closed':
+            return False
+        elif self.liveblog:
+            return self.liveblog.is_live
+
+    @property
+    def is_slow(self):
+        if self.liveblog:
+            return (self.liveblog.is_live and
+                    self.context.header_layout == 'liveblog-closed')
+
+    @property
+    def last_modified(self):
+        if self.liveblog:
+            return self.liveblog.last_modified

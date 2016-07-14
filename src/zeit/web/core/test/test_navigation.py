@@ -49,7 +49,7 @@ def test_navigation_source_should_be_parsed(application):
 
 def test_navigation_classifieds_source_should_be_parsed(application):
     navigation = zeit.web.core.navigation.NAVIGATION_CLASSIFIEDS_SOURCE
-    assert len(navigation.navigation) == 10
+    assert len(navigation.navigation) == 5
 
 
 def test_navigation_services_source_should_be_parsed(application):

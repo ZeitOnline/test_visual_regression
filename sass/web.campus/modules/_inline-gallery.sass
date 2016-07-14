@@ -1,9 +1,3 @@
-$gallery-button-radius--small: remify(40px)
-$gallery-button-radius--large: remify(68px)
-$gallery-pager-width: remify(60px)
-$gallery-dots-diameter: 8px
-$break-gallery-min: em(576px)
-
 .inline-gallery
 	@extend .gallery
 	clear: both // to prevent collisions with in-article ads
@@ -55,7 +49,7 @@ $break-gallery-min: em(576px)
 		@extend %font-beckett
 		bottom: 0
 		color: #fff
-		font-size: em(26px)
+		+scaled-font(26px, $title-factor)
 		height: $gallery-button-radius--small
 		left: 0
 		line-height: $gallery-button-radius--small
@@ -89,7 +83,7 @@ $break-gallery-min: em(576px)
 	background-color: $primary-color
 	color: inherit
 	float: left
-	font-size: em(16px)
+	+scaled-font(16px)
 	height: $gallery-button-radius--small
 	line-height: $gallery-button-radius--small
 	width: $gallery-button-radius--small

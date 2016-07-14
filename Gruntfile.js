@@ -153,8 +153,7 @@ module.exports = function(grunt) {
                 },
                 src: [
                     '<%= project.codeDir %>css/**/*.css',
-                    '!<%= project.codeDir %>css/**/all-old-ie.css',
-                    '!<%= project.codeDir %>css/**/ie-navi.css'
+                    '!<%= project.codeDir %>css/**/all-old-ie.css'
                 ]
             },
             'old-ie': {
@@ -162,8 +161,7 @@ module.exports = function(grunt) {
                     processors: [autoprefixerOldIe, postcssNormalizeCharset]
                 },
                 src: [
-                    '<%= project.codeDir %>css/**/all-old-ie.css',
-                    '<%= project.codeDir %>css/**/ie-navi.css'
+                    '<%= project.codeDir %>css/**/all-old-ie.css'
                 ]
             }
         },
@@ -483,7 +481,7 @@ module.exports = function(grunt) {
 
         if ( target in config.sass ) {
             grunt.log.writeln('Using task sass:' + target);
-            config.watch.sass.tasks = [ 'sass:' + target ];
+            config.watch.sass.tasks = [ 'sass:' + target, 'newer:postcss:dist' ];
         }
 
         // grunt.log.writeflags(config);

@@ -1,0 +1,57 @@
+{
+  "Id": "213",
+  "IsLive": "False",
+  "Description": "<span class=\"placeholder\">and some description</span>",
+  "EmbedConfig": "{\"theme\":\"zeit\",\"FrontendServer\":\"//zeit.superdesk.pro\",\"MediaImage\":\"\",\"MediaToggle\":false,\"MediaUrl\":\"//\",\"UserComments\":false,\"EmbedSwitch\":false}",
+  "Title": "DFB und Fifa in der Krise",
+  "CreatedOn": "29.10.15 09:24",
+  "UpdatedOn": "26.02.16 12:34",
+  "Creator": {
+    "href": "//zeit.superdesk.pro/resources/HR/User/11",
+    "Id": "11"
+  },
+  "Language": {
+    "href": "//zeit.superdesk.pro/resources/Localization/Language/2",
+    "Id": "2"
+  },
+  "Type": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/BlogType/1",
+    "Id": "1"
+  },
+  "Post": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Post/"
+  },
+  "PostPublished": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Post/Published"
+  },
+  "PostUnpublished": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Post/Unpublished"
+  },
+  "PostComment": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Post/Comment"
+  },
+  "Collaborator": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Collaborator/"
+  },
+  "CollaboratorPotential": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Collaborator/Potential"
+  },
+  "Sync": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Sync/"
+  },
+  "Configuration": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Configuration/"
+  },
+  "CommentPost": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Comment/Post/"
+  },
+  "Source": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Source/"
+  },
+  "Seo": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/Seo/"
+  },
+  "BlogMedia": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/213/BlogMedia/"
+  }
+}

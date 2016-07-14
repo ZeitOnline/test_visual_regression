@@ -82,21 +82,8 @@ def test_buzzboard_renders(testbrowser):
     assert len(area) == 1
     board = area[0].cssselect('.buzzboard__table')
     assert len(board) == 1
-
-
-def test_buzzboard_should_avoid_same_teaser_image_twice(
-        testbrowser, monkeypatch):
-
-    # Make most shared equal to most read to provide column image testing.
-    def social_ranking(self, **kw):
-        return self._get_ranking('views', **kw)
-
-    monkeypatch.setattr(
-        zeit.web.core.reach.Reach, 'get_social', social_ranking)
-
-    browser = testbrowser('/zeit-online/buzz-box')
-    area = browser.cssselect('.cp-area--buzzboard')[0]
-    assert len(area.cssselect('.teaser-buzzboard__media')) == 2
+    images = board[0].cssselect('.teaser-buzzboard__media')
+    assert len(images) == 4
 
 
 def test_buzzboard_renders_column_teaser(testbrowser):
@@ -353,3 +340,13 @@ def test_zon_campus_teaser_topic_has_campus_signet(testbrowser):
     assert svg[0].xpath('title')[0].text == 'ZEIT Campus'
     assert svg[1].xpath('title')[0].text == 'ZEIT Campus'
     assert svg[2].xpath('title')[0].text == 'ZEIT Campus'
+
+
+def test_liveblog_teaser_respects_liveblog_status(testbrowser):
+    browser = testbrowser('zeit-online/centerpage/liveblog')
+    main = browser.cssselect('main.main')[0]
+    liveblog = main.cssselect('span[class*="__kicker-logo--liveblog"]')
+    offline = main.cssselect('span[class*="__kicker-logo--liveblog-closed"]')
+
+    assert len(liveblog) == 17
+    assert len(offline) == 8

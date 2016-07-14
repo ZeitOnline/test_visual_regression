@@ -1,0 +1,57 @@
+{
+  "Id": "216",
+  "IsLive": "False",
+  "Description": "",
+  "Title": "Anschläge Paris",
+  "ClosedOn": "17.11.15 21:44",
+  "CreatedOn": "13.11.15 22:37",
+  "UpdatedOn": "16.11.15 11:32",
+  "Creator": {
+    "href": "//zeit.superdesk.pro/resources/HR/User/27",
+    "Id": "27"
+  },
+  "Language": {
+    "href": "//zeit.superdesk.pro/resources/Localization/Language/2",
+    "Id": "2"
+  },
+  "Type": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/BlogType/1",
+    "Id": "1"
+  },
+  "Post": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Post/"
+  },
+  "PostPublished": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Post/Published"
+  },
+  "PostUnpublished": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Post/Unpublished"
+  },
+  "PostComment": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Post/Comment"
+  },
+  "Collaborator": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Collaborator/"
+  },
+  "CollaboratorPotential": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Collaborator/Potential"
+  },
+  "Sync": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Sync/"
+  },
+  "Configuration": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Configuration/"
+  },
+  "CommentPost": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Comment/Post/"
+  },
+  "Source": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Source/"
+  },
+  "Seo": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/Seo/"
+  },
+  "BlogMedia": {
+    "href": "//zeit.superdesk.pro/resources/LiveDesk/Blog/216/BlogMedia/"
+  }
+}

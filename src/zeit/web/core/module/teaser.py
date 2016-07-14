@@ -5,6 +5,7 @@ import zeit.content.cp.interfaces
 
 import zeit.web
 import zeit.web.core.interfaces
+import zeit.web.core.template
 
 
 class LayoutOverrideTeaserBlock(zeit.content.cp.blocks.teaser.TeaserBlock,
@@ -66,3 +67,15 @@ class TeaserBlock(LayoutOverrideTeaserBlock):
                 self._v_first_content.tldr_milestone):
             self.override_layout_id = 'zon-milestone'
         return super(TeaserBlock, self).layout
+
+
+@grokcore.component.adapter(
+    zeit.content.cp.interfaces.ITeaserBlock,
+    zeit.content.article.interfaces.IArticle)
+class ArticleTeaserBlock(TeaserBlock):
+
+    @property
+    def liveblog(self):
+        if zeit.web.core.template.liveblog(self._v_first_content):
+            return zeit.web.core.interfaces.ILiveblogInfo(
+                self._v_first_content)
