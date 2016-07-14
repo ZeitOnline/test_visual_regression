@@ -20,7 +20,15 @@ def test_campus_adcontroller_values_return_values_on_hp(application):
     assert adcv == view.adcontroller_values
 
 
-def test_campus_adcontroller_values_return_values_on_cp(application):
+def test_campus_hp_banner_channel_is_correct(application, dummy_request):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/index')
+    view = zeit.web.campus.view_centerpage.Centerpage(content, dummy_request)
+    assert 'centerpage' in view.banner_channel
+
+
+def test_campus_adcontroller_values_return_values_on_cp(
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/index')
     adcv = [
