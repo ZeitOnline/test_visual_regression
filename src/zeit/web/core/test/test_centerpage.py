@@ -34,19 +34,19 @@ def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
     block.layout = zeit.content.cp.layout.get_layout('zon-square')
     block.append(article)
 
-    module = zeit.web.core.template.get_module(block)
+    module = zeit.web.core.centerpage.get_module(block)
     assert module.layout.id == 'zon-square'
 
     block.remove(article)
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
     block.append(article)
-    module = zeit.web.core.template.get_module(block)
+    module = zeit.web.core.centerpage.get_module(block)
     assert module.layout.id == 'zmo-square'
 
     block.remove(article)
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/simple')
     block.append(article)
-    module = zeit.web.core.template.get_module(block)
+    module = zeit.web.core.centerpage.get_module(block)
     assert module.layout.id == 'zco-square'
