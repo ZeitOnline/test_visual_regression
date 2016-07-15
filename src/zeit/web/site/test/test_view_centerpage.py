@@ -397,7 +397,7 @@ def test_snapshot_media_link_should_have_title(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     media_link_title = browser.cssselect(
         '.snapshot__media-container a')[0].get('title')
-    assert media_link_title == "Fotografie - Gesammelte Momente"
+    assert media_link_title == 'Automesse Detroit - Von Krise keine Spur mehr'
 
 
 def test_snapshot_should_display_correct_teaser_title(testbrowser):
