@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dynamic-cp-config>
+  <head>
+    <cp_template>http://xml.zeit.de/thema/template.xml</cp_template>
+  </head>
+  <body key="@url_value">
+    <include href="http://xml.zeit.de/config/whitelist.xml" xpointer="//tag"/>
+  </body>
+</dynamic-cp-config>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="topicpage">
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="keywordpage">
   <head>
     <header_image/>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -21,8 +21,7 @@
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Administratives</attribute>
     <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
     <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
-    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">topicpage</attribute>
-    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">keywordpage</attribute>
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">01</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
@@ -41,21 +40,22 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
     <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Test-Thema - News und Infos</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu dem Thema Test-Thema.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">{{ text }} - News und Infos</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu {{ 'dem Thema ' if type in ('Organization', 'Subject') else '' }}{{ text }}.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="seo-keyword-entity-type">{{ type }}</attribute>
     <topiclinks>
         </topiclinks>
   </head>
   <body>
-    <title>Test-Thema</title>
+    <title>{{ text }}</title>
     <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True" visible_mobile="True" kind_title="Solo-Region">
       <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e" kind="solo" visible="True" visible_mobile="True">
-        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526" cp:type="headerimage" module="headerimage" supertitle="" title="Test-Thema">
+        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526" cp:type="headerimage" module="headerimage" supertitle="" title="{{ text }}">
         </container>
       </region>
     </cluster>
     <cluster area="id-c993c09c-2a27-4aa8-87da-fecaf8797606" kind="solo" visible="True" visible_mobile="True" kind_title="Simple-Region">
-      <region area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="query" count="10" hide-dupes="True" kind="ranking" visible="True">
+      <region area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="query" count="25" hide-dupes="True" kind="ranking" visible="True">
         <container cp:__name__="id-a620cc6b-00e4-4635-a808-a31c8dbdb7f4" cp:type="auto-teaser" module="zon-small" visible="True"/>
         <container cp:__name__="id-b895d982-47ab-401f-9b70-6aeeb46cb46a" cp:type="auto-teaser" module="zon-small" visible="True"/>
         <container cp:__name__="id-b8d31e52-feb1-476d-96c3-2be2af811318" cp:type="auto-teaser" module="zon-small" visible="True"/>
@@ -66,9 +66,22 @@
         <container cp:__name__="id-2a6c6406-c3c9-4b44-b7ec-a2bb8bb1dfd8" cp:type="auto-teaser" module="zon-small" visible="True"/>
         <container cp:__name__="id-31dfdd6a-9aa4-4c27-840a-141bb5e65680" cp:type="auto-teaser" module="zon-small" visible="True"/>
         <container cp:__name__="id-a0a325d8-d633-45ed-9f46-d2409d9889ae" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <query>
-          <condition type="Channel" py:pytype="str">News</condition>
-        </query>
+        <container cp:__name__="id-5129568e-7c60-4365-9517-94322a762ad1" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-1317838a-b955-4e79-9944-815d30796c54" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-0af7b0b2-a4e1-49af-8049-03c23bded2a7" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-d7067f7f-4cd1-43c3-b501-15560f840dec" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-050b94e6-3877-4afd-9cbd-42813e5a6aa6" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-20cf41bd-40ae-4f21-9054-ca46ff4fff51" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-dd30550b-7860-446b-8870-32c02d118370" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-9fb4da47-0a1a-4124-b24d-4c1bf6491a78" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-c4118b57-92cc-4cd0-871f-80ff30e7558e" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-767e07d7-1b26-4474-9a7d-3cd185877ba6" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-cfdada23-84da-4ef4-9ec7-1c400281cd5c" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-bf82f79f-f427-433b-a708-9544cccd355b" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-5372229a-2f6f-48a6-b3e4-c156cf090348" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-1ed30880-bba1-4679-925c-1942ee92f795" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-adf3fcd0-c794-45e2-af87-707c2cb9099c" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <raw_query>+published:"published" +keywords:"{{text}}" +type:(quiz OR article OR gallery OR video) -product_id:(News OR afp OR SID OR ADV) -ressort:(Administratives OR News OR Aktuelles) -expires:[* TO NOW]</raw_query>
       </region>
     </cluster>
   </body>

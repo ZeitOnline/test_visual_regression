@@ -281,9 +281,31 @@ def test_advertorial_cp_contains_correct_webtrekk_param(dummy_request):
     assert view.webtrekk['customParameter']['cp26'] == 'centerpage.advertorial'
 
 
-def test_materialized_serie_cp_contains_correct_webtrekk_param(dummy_request):
+def test_materialized_series_cp_contains_correct_webtrekk_param(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/serie/70-jahre-zeit')
     view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
     assert view.webtrekk['customParameter'][
         'cp26'] == 'centerpage.ins_serienseite'
+
+
+def test_dynamic_series_cp_contains_correct_webtrekk_param(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/serie/alpha-centauri')
+    view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp26'] == 'centerpage.serienseite'
+
+
+def test_materialized_topic_cp_contains_correct_webtrekk_param(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/thema/jurastudium')
+    view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp26'] == 'centerpage.topicpage'
+
+
+def test_dynamic_topic_cp_contains_correct_webtrekk_param(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/thema/berlin')
+    view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
+    assert view.webtrekk['customParameter'][
+        'cp26'] == 'centerpage.keywordpage.location'
