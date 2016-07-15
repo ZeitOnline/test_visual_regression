@@ -283,3 +283,9 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
     view = zeit.web.campus.view_article.Article(context, dummy_request)
 
     assert view.webtrekk['customParameter']['cp27'] == 'cardstack.2/seite-1'
+
+
+def test_cardstack_block_produces_correct_html(testbrowser):
+    browser = testbrowser('/campus/article/cardstack')
+    block = browser.cssselect('main article .cardstack')
+    assert len(block) == 1
