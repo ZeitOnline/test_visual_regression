@@ -4,7 +4,11 @@ Change log for zeit.web
 2.93 (unreleased)
 -----------------
 
+- BUG-463: Fix broken banner_channel on campus centerpages
+
 - MAINT: Move get_module from template to a higher abstraction level
+
+- ZON-2734: Update header for series, topics and dynamic pages
 
 
 2.92.1 (2016-07-13)
