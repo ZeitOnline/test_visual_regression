@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/thema/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.drebenstedt</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:3901e59f-f172-4790-bd6c-bdb4f43fdbb8}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-04T13:12:55.018266+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="LocalDynamicFolder" module="zeit.content.dynamicfolder.folder"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">dynamic-collection</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-04T13:13:15.433849+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="config_file">http://xml.zeit.de/thema/config.xml</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-07-08T08:51:49Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 08 Jul 2016 08:51:49 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e741c8-5000-5371be9ccdb02"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>

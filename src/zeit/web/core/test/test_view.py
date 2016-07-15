@@ -41,6 +41,11 @@ def mock_ad_view(application):
             self.request = request
             self.context = context
 
+            # fake zeit.web.magazin.view.Base property
+            # this starts to get kind of overmocked ... [ms]
+            if self.ressort == 'zeit-magazin':
+                self.adwords = ['zeitonline', 'zeitmz']
+
     return MockAdView
 
 

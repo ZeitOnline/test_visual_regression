@@ -66,6 +66,10 @@ class Base(zeit.web.core.view.Base):
         return cases.get(name, None)
 
     @zeit.web.reify
+    def adwords(self):
+        return ['zeitonline', 'zeitmz']
+
+    @zeit.web.reify
     def adcontroller_handle(self):
         if self.is_hp:
             return 'zm_index'

@@ -1,4 +1,4 @@
-<div class="{{ 'markup' | with_mods(module.alignment) }}">
+<div class="{{ 'markup' | with_mods(module.alignment, area.kind) }}">
     {% if module.title -%}
     <h2 class="markup__title">{{ module.title }}</h2>
     {% endif -%}

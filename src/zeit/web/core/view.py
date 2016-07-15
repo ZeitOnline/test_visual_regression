@@ -179,21 +179,27 @@ class Base(object):
         # manually banner_id rules first
         if self.context.banner_id is not None:
             return u'{}/{}'.format(self.context.banner_id, self.banner_type)
-        # the famous 'entdecken/reisen' case, limited until 01/2016
-        # return for all ressort 'entdecken' old code 'reisen'
-        # there's always a first and a half rule
+        # execption: 'reisen' now is 'entdecken'
         if self.ressort == 'entdecken':
             return u'reisen/{}'.format(self.banner_type)
-        # second rule: angebote are mapped with two levels
-        if self.ressort == 'angebote':
+        # exeption: angebote are mapped with two levels
+        if self.is_advertorial or self.ressort == 'angebote':
             adv_title = self.context.advertisement_title or self.ressort
             return u'{}/{}/{}'.format(
                 'adv',
                 "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower(),
                 self.banner_type)
-        # third: do the mapping
+        # execption: campus pages
+        if self.package == 'zeit.web.campus':
+            topiclabel = getattr(self, 'topic_label', '')
+            topiclabel = zeit.web.core.template.format_iqd(topiclabel)
+            return u'{}/{}/{}/{}'.format(
+                'campus',
+                'thema' if topiclabel else '',
+                topiclabel or '',
+                self.banner_type)
+        # mapping by config
         mappings = zeit.web.core.banner.BANNER_ID_MAPPINGS_SOURCE
-
         for mapping in mappings:
             if getattr(self, mapping['target'], None) == mapping['value']:
                 # change ressort but leave subressort intact
@@ -204,7 +210,7 @@ class Base(object):
                 else:
                     return u'{}/{}'.format(mapping['banner_code'],
                                            self.banner_type)
-        # subressort?
+        # subressort and ressort ?
         if self.sub_ressort != '' and self.ressort != '':
             return u'{}/{}/{}'.format(self.ressort,
                                       self.sub_ressort, self.banner_type)
@@ -280,11 +286,7 @@ class Base(object):
 
     @zeit.web.reify
     def adwords(self):
-        keywords = ['zeitonline']
-        # TODO: End discrepancy between testing and live ressorts!
-        if self.ressort in ['zeit-magazin', 'lebensart']:
-            keywords.append('zeitmz')
-        return keywords
+        return ['zeitonline']
 
     def banner(self, tile):
         try:
