@@ -36,14 +36,16 @@ Default teaser template to inherit from.
         {%- endif %}
     {% endblock %}
 
-    <a href="{{ teaser | create_url }}" class="{{ self.layout() }}__text">
+    <a href="{{ teaser | create_url }}" class="{{ self.layout() }}__text" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}">
         {% block icon %}{% endblock %}
         <h2>
-            {% block teaser_kicker %}
-            <span class="{{ self.layout() }}__kicker">
-                {{- teaser.teaserSupertitle or teaser.supertitle -}}
-            </span>
-            {% endblock %}
+            {% block teaser_kicker -%}
+                <span class="{{ self.layout() }}__kicker">
+                    {{- teaser.teaserSupertitle or teaser.supertitle -}}
+                </span>
+                {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">: </span>{% endif %}
+            {%- endblock %}
+
             <span class="{{ self.layout() }}__title">
                 {{- teaser.teaserTitle or teaser.title -}}
             </span>
