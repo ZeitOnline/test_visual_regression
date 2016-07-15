@@ -21,10 +21,8 @@ Default teaser template to inherit from.
     {%- elif image -%}
         {# call image asset #}
         {% block teaser_image scoped %}
-            {% set media_caption_additional_class = 'figcaption--hidden' %}
             {% set module_layout = self.layout() %}
-            {% set href = teaser | create_url %}
-            {% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
+            {% include "zeit.web.magazin:templates/inc/asset/image_teaser.tpl" %}
         {% endblock %}
     {%- endif %}
 
