@@ -4,6 +4,8 @@ Change log for zeit.web
 2.93 (unreleased)
 -----------------
 
+- BUG-464: Remove advertorial kicker mark in campus
+
 - BUG-463: Fix broken banner_channel on campus centerpages
 
 - ZON-2734: Update header for series, topics and dynamic pages
