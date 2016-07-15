@@ -372,6 +372,5 @@ def test_teaser_topic_link_title_should_match_kicker_and_headline(testbrowser):
     media_link_title = browser.cssselect(
         '.teaser-topic-variant__media-container a')[0].get('title')
     combined_link_title = browser.cssselect(
-        '.teaser-topic-variant-list article:nth-child(1)'
-        ' a[class$="__combined-link"]')[0].get('title')
+        '.teaser-topic-wide__combined-link')[0].get('title')
     assert media_link_title == combined_link_title

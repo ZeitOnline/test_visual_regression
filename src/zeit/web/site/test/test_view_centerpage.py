@@ -917,17 +917,14 @@ def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
 def test_teaser_buzzbox_link_title_should_match_kicker_and_headline(
         testbrowser):
     browser = testbrowser('/zeit-online/buzz-box')
-    media_link_titles = []
-    combined_link_titles = []
-    figure_links = browser.cssselect(
-        '.teaser-buzzboard__media a:not([itemprop="url"])')
+    figure_links = browser.cssselect('.teaser-buzzboard__media-container a')
     heading_links = browser.cssselect(
         '.teaser-buzzboard__media ~ .teaser-buzzboard__container a ')
-    for link in figure_links:
-        media_link_titles.append(link.get('title'))
-    for link in heading_links:
-        combined_link_titles.append(link.get('title'))
-    assert media_link_titles == combined_link_titles
+
+    assert len(figure_links) == len(heading_links)
+
+    for index, link in enumerate(figure_links):
+        assert link.get('title') == heading_links[index].get('title')
 
 
 def test_centerpage_square_teaser_has_pixelperfect_image(testbrowser):
@@ -2225,10 +2222,6 @@ def test_comment_count_in_teaser_not_shown_when_comments_disabled(
 def test_teaser_link_title_should_match_kicker_and_headline(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     articles = browser.cssselect('article')
-    media_link_titles = []
-    combined_link_titles = []
     for article in articles:
         links = article.cssselect('a:not([itemprop="url"])')
-        media_link_titles.append(links[0].get('title'))
-        combined_link_titles.append(links[1].get('title'))
-    assert media_link_titles == combined_link_titles
+        assert links[0].get('title') == links[1].get('title')
