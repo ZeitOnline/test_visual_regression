@@ -14,6 +14,7 @@ import requests
 import zope.component
 
 from zeit.cms.checkout.helper import checked_out
+import zeit.cms.interfaces
 import zeit.content.cp.centerpage
 
 import zeit.web.core.centerpage
@@ -491,8 +492,9 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
 
 
 def test_playlist_video_series_should_be_available(application):
-    playlist = zeit.web.site.module.playlist.Playlist(
-        pyramid.testing.DummyRequest())
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/playlist/36516804001')
+    playlist = zeit.web.site.module.playlist.Playlist(content)
     assert len(playlist.video_series_list) == 24
 
 
