@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block module_list %}
-    {%- set modules = area.values() | map('get_module') | list %}
+    {%- set modules = area.values() %}
 
     <table class="buzzboard__table buzzboard__table--col{{ modules | length }}">
         <thead>

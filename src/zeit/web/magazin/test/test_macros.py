@@ -121,8 +121,7 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
     css_class = 'article__subpage-head'
 
     # assert normal markup
-    markup = ('<div class="%s">'
-              '<a name="kapitel1"></a>1 &mdash; Title</div>' % css_class)
+    markup = '<div class="%s" id="kapitel1">1 &mdash; Title</div>' % css_class
     lines = tpl.module.subpage_head(1, 'Title', css_class).splitlines()
     output = ''
     for line in lines:

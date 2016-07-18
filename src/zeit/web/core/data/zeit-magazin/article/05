@@ -5,9 +5,14 @@
             <display_name>Henning Sußebach</display_name>
         </author>
         <rankedTags xmlns:ns12="http://codespeak.net/lxml/objectify/pytype">
-            <tag type="free" uuid="7d5e3177-92bc-448b-927b-cd366faab64b">Sterben</tag>
-            <tag type="free" uuid="37d972d8-d308-4ba9-bfb6-5f710db7bb19">Tod</tag>
-            <tag type="free" uuid="6795b610-bb8b-4dc5-9c5f-153165fff1c0">Bestattung</tag>
+            <tag uuid="7d5e3177-92bc-448b-927b-cd366faab64b" type="free">Sterben</tag>
+            <tag uuid="37d972d8-d308-4ba9-bfb6-5f710db7bb19" type="free">Tod</tag>
+            <tag uuid="6795b610-bb8b-4dc5-9c5f-153165fff1c0" type="free">Bestattung</tag>
+            <tag uuid="480d85d4-ba2e-41a8-b334-11d744946060" url_value="app" type="free">App</tag>
+            <tag uuid="1c47d701-cb9a-413e-9d52-c8e243c56de1" url_value="smartphone" type="free">Smartphone</tag>
+            <tag uuid="4c3e65fb-b811-4d72-8ec6-2b68dc7bca2c" url_value="psychologie" type="free">Psychologie</tag>
+            <tag uuid="0a659c46-55b5-45be-a6fa-8d23b0edb9bd" url_value="computerspiel" type="topic">Computerspiel</tag>
+            <tag uuid="b534b567-453d-475d-973a-2ff60b573852" url_value="videospiel" type="free">Videospiel</tag>
         </rankedTags>
         <references>
             <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2013/42/bestattungsunternehmen-serway" year="2013" issue="42" ressort="Karriere" author="Christine Böhringer " contenttype="article" publication-date="" expires="">

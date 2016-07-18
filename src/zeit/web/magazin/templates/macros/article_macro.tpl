@@ -88,7 +88,7 @@
 
 {% macro subpage_index(pages, subtitle, number, index_class, active_class) -%}
     {% if subtitle %}
-        <div class="{{ index_class }} figure-stamp">
+    <div class="{{ index_class }} figure-stamp">
         <div class="article__subpage-index__title">&uuml;bersicht</div>
         <ol>
             {% for page in pages if page.teaser %}
@@ -110,9 +110,8 @@
 
 {% macro subpage_head(number, subtitle, class) -%}
     {% if subtitle %}
-        <div class="{{ class }}">
-            <a name="kapitel{{ number }}"></a>
-            {{ number }} &mdash; {{ subtitle }}
+        <div class="{{ class }}" id="kapitel{{ number }}">
+            {{- number }} &mdash; {{ subtitle -}}
         </div>
     {% endif %}
 {%- endmacro %}
