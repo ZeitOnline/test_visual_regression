@@ -81,7 +81,54 @@
     <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:446a4dc8-e536-4c7f-8187-45e443a524be}</attribute>
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">01</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt;
+  &lt;list&gt;
+    &lt;dictionary&gt;
+      &lt;item key="channels"&gt;
+          &lt;string&gt;parse-channel-news&lt;/string&gt;
+      &lt;/item&gt;
+      &lt;item key="enabled"&gt;
+          &lt;false/&gt;
+      &lt;/item&gt;
+      &lt;item key="override_text"&gt;
+          &lt;unicode&gt;Mobile-Text&lt;/unicode&gt;
+      &lt;/item&gt;
+      &lt;item key="type"&gt;
+          &lt;string&gt;parse&lt;/string&gt;
+      &lt;/item&gt;
+    &lt;/dictionary&gt;
+    &lt;dictionary&gt;
+      &lt;item key="enabled"&gt;
+          &lt;false/&gt;
+      &lt;/item&gt;
+      &lt;item key="override_text"&gt;
+          &lt;unicode&gt;FB-ZCO&lt;/unicode&gt;
+      &lt;/item&gt;
+      &lt;item key="account"&gt;
+          &lt;string&gt;fb-campus&lt;/string&gt;
+      &lt;/item&gt;
+      &lt;item key="type"&gt;
+          &lt;string&gt;facebook&lt;/string&gt;
+      &lt;/item&gt;
+    &lt;/dictionary&gt;
+    &lt;dictionary&gt;
+      &lt;item key="enabled"&gt;
+          &lt;false/&gt;
+      &lt;/item&gt;
+      &lt;item key="override_text"&gt;
+          &lt;unicode&gt;Facebook-Text&lt;/unicode&gt;
+      &lt;/item&gt;
+      &lt;item key="account"&gt;
+          &lt;string&gt;fb-test&lt;/string&gt;
+      &lt;/item&gt;
+      &lt;item key="type"&gt;
+          &lt;string&gt;facebook&lt;/string&gt;
+      &lt;/item&gt;
+    &lt;/dictionary&gt;
+  &lt;/list&gt;
+&lt;/pickle&gt;</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+
   &lt;initialized_object&gt;
     &lt;klass&gt;
       &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
