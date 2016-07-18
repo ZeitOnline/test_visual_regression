@@ -261,9 +261,9 @@ def test_artikel02_has_correct_banner_channel(application):
     assert article_view.banner_channel == 'zeitmz/leben/article'
 
 
-def test_artikel05_has_meta_keywords(application):
+def test_artikel06_has_meta_keywords(application):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/05')
+        'http://xml.zeit.de/zeit-magazin/article/06')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.meta_keywords == ['Sterben', 'Tod', 'Bestattung']
 

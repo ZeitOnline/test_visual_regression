@@ -9,7 +9,6 @@ $longform-header-min-height: 400px
 $longform-header-max-height: 1400px
 
 .article--longform
-  padding: 0
   max-width: none
 
   .article__head__title
@@ -37,14 +36,13 @@ $longform-header-max-height: 1400px
         font-size: $font-xl
 
   .article__head-wrap
-    position: relative
-    overflow: hidden
-    padding-top: 0
-    margin-top: 0
     +fake-box-shadow-inset($black)
-    min-height: em($longform-header-min-height)
-    max-height: em($longform-header-max-height)
+    +unpadded
     height: em(400px)
+    max-height: em($longform-header-max-height)
+    min-height: em($longform-header-min-height)
+    overflow: hidden
+    position: relative
     +respond-min-h(em(500px))
       height: em(500px) - em($longform-header-offset)
     +respond-min-h(em(550px))
@@ -239,20 +237,15 @@ $longform-header-max-height: 1400px
         padding-right: 0
 
   .article__page
-    padding-top: $small
-    padding-bottom: $small
     background-color: $color-page-bg
-    +respond-min($break-1)
-      padding-top: $medium
-      padding-bottom: $medium
-    &:first-child
-      .article__page-wrap
-        margin-bottom: 0
-
-  .article__page-wrap
-    +padded
+    margin: remify(28px auto 82px)
     max-width: $max-longform-width
-    margin: $fine auto $medium
+    &:first-child
+      margin-bottom: remify(46px)
+    +respond-min($break-1)
+      margin: remify(46px auto 118px)
+      &:first-child
+        margin-bottom: remify(82px)
 
   .quote--wide
     +respond-min($break-3)
@@ -262,6 +255,7 @@ $longform-header-max-height: 1400px
     margin-left: auto
     margin-right: auto
 
+  .article__item,
   .is-constrained
     max-width: remify($longform-content-max-width)
     +respond-min($break-3)
