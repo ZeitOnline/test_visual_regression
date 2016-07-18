@@ -95,6 +95,12 @@
 			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" cp:__name__="id-5a7a3f3c-d507-473e-831e-6c3d3bf63b12">
 				<block uniqueId="http://xml.zeit.de/zeit-online/storystream/articles/grexit-griechenland-euro-zone" contenttype="article" />
 			</module>
+			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" cp:__name__="id-5a7a3f3c-d507-473e-831e-6e3f3bf64b43">
+				<block uniqueId="http://xml.zeit.de/zeit-online/article/article_with_broken_image_asset" contenttype="article" />
+			</module>
+			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" cp:__name__="id-5a7a3f3c-d507-473e-831e-6e3f3bf64b42">
+				<block uniqueId="http://xml.zeit.de/zeit-online/article/article-with-expired-image" contenttype="article" />
+			</module>
 			<module cp:type="teaser" module="zon-tldr" visible="True" visible_mobile="True" cp:__name__="id-5a7a3f3c-d507-473e-831e-6e3f3bf64b12">
 				<block uniqueId="http://xml.zeit.de/zeit-online/storystream/articles/syriza-tsipras-parlamentswahl" contenttype="article" />
 			</module>
