@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - BUG-462: Add missing data attributes for storystream teaser
 
+- ZON-1578: Show keywords in mobile navigation
+
 - ZON-2734: Update header for series, topics and dynamic pages
 
 - ZON-2864: Add keywords for ZMO articles and galleries
