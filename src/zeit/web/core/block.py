@@ -300,6 +300,8 @@ class Image(Block):
         self.display_mode = model_block.display_mode
         if model_block.display_mode == 'large':
             self.figure_mods = ('wide', 'rimless', 'apart')
+        elif model_block.display_mode == 'column-width':
+            self.figure_mods = ('rimless', 'apart')
         elif model_block.display_mode == 'float':
             self.figure_mods = ('marginalia',)
         else:

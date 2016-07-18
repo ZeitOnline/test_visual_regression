@@ -16,6 +16,8 @@
 
     {%- if block and block.display_mode == 'large' %}
         {% set sizes = '(min-width: 820px) 820px, 100vw' %}
+    {%- elif block and block.display_mode == 'column-width' %}
+        {% set sizes = '(min-width: 660px) 660px, 100vw' %}
     {%- else %}
         {% set sizes = '' %}
     {%- endif %}
