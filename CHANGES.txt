@@ -4,6 +4,8 @@ Change log for zeit.web
 2.93 (unreleased)
 -----------------
 
+- BUG-453: Fix cardstacks in ZEIT Campus articles
+
 - BUG-452: Don't show fallback images for storystream atoms
 
 - BUG-445: Use teaser headline in teaser image link title
