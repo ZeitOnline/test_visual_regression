@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-2734: Update header for series, topics and dynamic pages
 
+- FIX: Don't show kicker markup if there's no kicker
+
 
 2.92.1 (2016-07-13)
 -------------------
