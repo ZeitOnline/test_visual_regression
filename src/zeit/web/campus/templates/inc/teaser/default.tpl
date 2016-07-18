@@ -26,10 +26,8 @@
                                         <span class="blog-label">{{ teaser.blog.name }}</span>
                                     {%- endif %}
                                 {%- endblock teaser_journalistic_format %}
-
-                                <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
-                            </span>
-                            <span class="visually-hidden">: </span>
+                                {# There must be no whitespace between kicker and : (for Google(News) representation) #}
+                                <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span></span><span class="visually-hidden">: </span>
                         {%- endif %}
                     {% endblock %}
                     {% block teaser_title %}
