@@ -4,7 +4,6 @@ import uuid
 
 import grokcore.component
 import zope.interface
-import zope.interface
 import pyramid.threadlocal
 
 import zeit.cms.interfaces
