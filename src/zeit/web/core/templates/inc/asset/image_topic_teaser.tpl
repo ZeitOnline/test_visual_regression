@@ -8,6 +8,8 @@
 
 {% block media_block %}{{ super() }} is-pixelperfect{% endblock %}
 
+{% block media_link_title %}{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}{% endblock %}
+
 {% block media_block_additional_data_attributes %}
     {%- set mobile_image = get_image(module, teaser, variant_id='wide') %}
     {%- if mobile_image %}

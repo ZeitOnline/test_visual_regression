@@ -2,6 +2,25 @@
 <gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <image-folder>http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/</image-folder>
+    <badges>
+      <badge>gallery</badge>
+    </badges>
+    <rankedTags>
+      <tag url_value="automesse" uuid="1d43af80-7ff9-4049-9c15-53dfcf04b59a" score="4" type="free">Automesse</tag>
+      <tag url_value="detroit" uuid="c3dd54c6-b89a-4535-acb8-aae973bc3739" score="4" type="free">Detroit</tag>
+      <tag url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="4" type="Location">USA</tag>
+      <tag type="topic" url_value="" uuid="e5571755-59eb-4f5c-b152-d098209668e4">Fracking</tag>
+      <tag url_value="ford" uuid="a95c03af-b4b9-450d-9cc7-7e573546ec93" score="7" type="Organization">Ford</tag>
+      <tag url_value="chevrolet" uuid="f2ebddc3-7cb6-4d30-a31f-1c0b8c8816ba" score="4" type="Organization">Chevrolet</tag>
+      <tag url_value="chrysler" uuid="82e21a6a-6404-44bf-8a96-219b430c4422" score="7" type="Organization">Chrysler</tag>
+      <tag url_value="bmw" uuid="1e55c281-bbd2-47d6-9796-6189073198b0" score="7" type="Organization">BMW</tag>
+      <tag url_value="audi" uuid="d6cbe6e1-15b3-4b11-8348-98573b1f8c5f" score="6" type="Organization">Audi</tag>
+      <tag url_value="mercedes-benz" uuid="1a8da8ed-dfa4-443c-9da4-2549e821332c" score="5" type="Organization">Mercedes-Benz</tag>
+      <tag url_value="alfa-romeo" uuid="86063fb1-8254-4cf1-9e99-6ff246b925bd" score="4" type="Organization">Alfa Romeo</tag>
+      <tag url_value="facelift" uuid="939576b3-bf9a-474d-af61-d3521c71dd49" score="4" type="free">Facelift</tag>
+      <tag url_value="lancia" uuid="1c286f02-8fb1-4640-9dfb-cb5b39a38e06" score="4" type="Organization">Lancia</tag>
+      <tag url_value="europa" uuid="1c8b0c32-1a49-4370-9818-7af636e4b30b" score="1" type="Location">Europa</tag>
+    </rankedTags>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
@@ -279,7 +298,8 @@
     <text xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
   </body>
   <teaser>
-    <title>Automesse Detroit 2014 US-Hersteller</title>
+    <title>Von Krise keine Spur mehr</title>
+    <supertitle>Automesse Detroit</supertitle>
     <text>
         Pick-Ups und PS-starke Sportwagen: Die Autoshow in Detroit lässt vergangen geglaubte Glanzzeiten aufleben. Neue Ölquellen auf US-Territorium machen der Branche Mut.
     </text>

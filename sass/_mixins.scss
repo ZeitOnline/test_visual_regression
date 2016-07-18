@@ -36,6 +36,19 @@
 	}
 }
 
+@mixin plain-transparent-overlay($color: #000, $alpha: 0.3) {
+	position: relative;
+	&:after {
+		background-color: rgba($color, $alpha);
+		bottom: 0;
+		content: "";
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+}
+
 @mixin fake-box-shadow-inset($color: $black, $alpha_start: 0.7, $alpha_stop: 0, $direction: to top, $length: 60%) {
 	background-color: $color;
 	position: relative;

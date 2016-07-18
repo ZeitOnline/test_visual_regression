@@ -81,7 +81,7 @@
         <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
             <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
                 <container cp:type="teaser" module="zon-snapshot" visible="True" visible_mobile="True" cp:__name__="id-56b7a0a7-9c6e-49f5-af55-81540881d87a" supertitle="Markenspitz" title="Momentaufnahme" read_more="Gesammelte Momente" read_more_url="http://www.zeit.de/kultur/2012-03/fs-momente" force_mobile_image="True">
-                    <block href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" uniqueId="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2012" issue="11" ressort="Kultur" contenttype="gallery" publication-date="" expires="" ></block>
+                    <block href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa"/>
                 </container>
             </region>
         </cluster>

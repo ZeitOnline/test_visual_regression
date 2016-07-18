@@ -350,3 +350,27 @@ def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
 
     assert '27: "cardstack.1.2.1"' in script.text_content().strip()
+
+
+def test_overridden_adcontroller_values(application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/centerpage/advertorial-with-banner-id')
+    adcv = [
+        ('$handle', 'adv_index'),
+        ('level2', 'campus'),
+        ('level3', 'angebote'),
+        ('level4', '100tage'),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,zeitcampus'),
+        ('tma', '')]
+    view = zeit.web.campus.view_centerpage.Centerpage(cp, dummy_request)
+    assert adcv == view.adcontroller_values
+
+
+def test_teaser_topic_link_title_should_match_kicker_and_headline(testbrowser):
+    browser = testbrowser('/campus/centerpage/teaser-topic-variant')
+    media_link_title = browser.cssselect(
+        '.teaser-topic-variant__media-container a')[0].get('title')
+    combined_link_title = browser.cssselect(
+        '.teaser-topic-wide__combined-link')[0].get('title')
+    assert media_link_title == combined_link_title

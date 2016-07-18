@@ -1,3 +1,5 @@
+import re
+
 import pyramid.view
 
 import zeit.campus.interfaces
@@ -22,23 +24,8 @@ class Base(zeit.web.core.view.Base):
     toolbox = zeit.web.campus.module.toolbox.TOOL_SOURCE
 
     @zeit.web.reify
-    def adcontroller_values(self):
-        """Fill the adcontroller js object with actual values.
-        Output in level strings only allows latin characters, numbers and
-        underscore.
-        """
-
-        keywords = 'zeitonline,zeitcampus'
-        topiclabel = getattr(self, 'topic_label', '')
-        topiclabel = zeit.web.core.template.format_iqd(topiclabel)
-
-        return [('$handle', self.adcontroller_handle),
-                ('level2', 'campus'),
-                ('level3', 'thema' if topiclabel else ''),
-                ('level4', topiclabel or ''),
-                ('$autoSizeFrames', True),
-                ('keywords', keywords),
-                ('tma', '')]
+    def adwords(self):
+        return ['zeitonline', 'zeitcampus']
 
 
 @pyramid.view.view_config(
