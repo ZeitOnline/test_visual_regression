@@ -5,7 +5,6 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
-import lxml.etree
 import lxml.html
 import mock
 import pyramid.httpexceptions
@@ -15,10 +14,11 @@ import requests
 import zope.component
 
 from zeit.cms.checkout.helper import checked_out
+import zeit.cms.interfaces
 import zeit.content.cp.centerpage
 
 import zeit.web.core.centerpage
-import zeit.web.core.interfaces
+import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.site.module.playlist
 import zeit.web.site.view_centerpage
@@ -499,8 +499,9 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
 
 
 def test_playlist_video_series_should_be_available(application):
-    playlist = zeit.web.site.module.playlist.Playlist(
-        pyramid.testing.DummyRequest())
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/playlist/36516804001')
+    playlist = zeit.web.site.module.playlist.Playlist(content)
     assert len(playlist.video_series_list) == 24
 
 
@@ -563,7 +564,7 @@ def test_module_printbox_should_contain_teaser_image(
         'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, dummy_request)
-    printbox = zeit.web.core.template.get_module(view.module_printbox)
+    printbox = zeit.web.core.centerpage.get_module(view.module_printbox)
     assert isinstance(printbox.image, zeit.content.image.image.RepositoryImage)
 
 
@@ -2011,7 +2012,9 @@ def test_centerpage_page_should_reconstruct_multiple_modules(
     view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
     assert len(view.regions) == 2
     assert view.regions[0].values()[0].values()[0].supertitle == 'Griechenland'
-    assert view.regions[0].values()[0].values()[1].cpextra == 'search-form'
+    assert isinstance(
+        view.regions[0].values()[0].values()[1],
+        zeit.web.site.module.search_form.Form)
 
 
 def test_centerpage_page_should_reconstruct_multiple_areas(
@@ -2026,7 +2029,9 @@ def test_centerpage_page_should_reconstruct_multiple_areas(
     view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
     assert len(view.regions) == 2
     assert view.regions[0].values()[0].values()[0].supertitle == 'Griechenland'
-    assert view.regions[0].values()[1].values()[0].cpextra == 'search-form'
+    assert isinstance(
+        view.regions[0].values()[1].values()[0],
+        zeit.web.site.module.search_form.Form)
 
 
 def test_centerpage_page_should_require_ranking(application, dummy_request):

@@ -18,6 +18,9 @@ Change log for zeit.web
 
 - FIX: Don't show kicker markup if there's no kicker
 
+- MAINT: Move get_module from template to a higher abstraction level
+
+
 
 2.92.1 (2016-07-13)
 -------------------

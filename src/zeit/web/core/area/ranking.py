@@ -15,6 +15,7 @@ import zeit.content.cp.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
+import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
 import zeit.web.core.template
@@ -86,7 +87,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         centerpage = zeit.content.cp.interfaces.ICenterPage(context)
         module = zeit.web.core.utils.find_block(
             centerpage, module='search-form')
-        self.search_form = zeit.web.core.template.get_module(module)
+        self.search_form = zeit.web.core.centerpage.get_module(module)
 
     def values(self):
         return self._values
