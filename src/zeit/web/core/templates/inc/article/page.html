@@ -2,7 +2,7 @@
 {% block before_page %}{% endblock %}
 {% for block in page %}
     {% set type = block | block_type %}
-    {% if not (contents_printed or view.is_all_pages_view) and type in ['paragraph'] %}
+    {% if not (contents_printed or view.is_all_pages_view) and type in ['paragraph', 'unorderedlist', 'orderedlist'] %}
         {% block table_of_contents %}
             {% include [
                 "{0}:templates/inc/article/table-of-contents.html".format(view.package),
