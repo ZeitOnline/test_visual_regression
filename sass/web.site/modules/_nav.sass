@@ -80,9 +80,6 @@
 	&__user-name
 		font-weight: bold
 
-	&__metadata
-		display: block
-
 	&__tags
 		a
 			display: inline-block
@@ -112,6 +109,9 @@
 		&__search
 			border-bottom: 1px solid $color-border
 			padding: 0 $page-padding--small
+
+		&__metadata
+			padding: remify(12px 5px 10px $page-padding--small)
 
 		&__ressorts,
 		&__classifieds
@@ -165,16 +165,17 @@
 				display: none
 
 		&__metadata
-			line-height: 2.5
+			line-height: 1.5
 
 		&__label
 			display: block
+			margin-bottom: remify(10px)
 
 		&__tag
 			border-radius: 4px
 			font-size: remify(14px)
-			line-height: 2.4
 			margin-bottom: remify(10px)
+			padding: remify(8px 14px)
 
 		&__date
 			display: none
