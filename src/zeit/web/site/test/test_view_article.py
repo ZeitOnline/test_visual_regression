@@ -1510,8 +1510,11 @@ def test_article_in_series_has_banner(testbrowser):
 
 def test_article_in_series_has_banner_image(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
+    figure = browser.cssselect('.article-series__media')
+    image = figure[0].cssselect('img')[0]
 
-    assert len(browser.cssselect('.article-series__media')) == 1
+    assert len(figure) == 1
+    assert image.get('data-ratio') == '10.0'
 
 
 def test_article_in_series_has_correct_link(testbrowser):
