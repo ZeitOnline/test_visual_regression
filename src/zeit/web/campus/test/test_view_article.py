@@ -287,13 +287,13 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
 
 def test_article_header_embed_quiz_has_correct_markup(testbrowser):
     browser = testbrowser('/campus/article/embed-header-quiz')
-    header = browser.cssselect('.article-header--embed')[0]
-    quiz = header.cssselect('.quiz')
-    topic = header.cssselect('.article-header__topic--embed')
-    headline = header.cssselect('.article-header__headline--embed')
-    info = header.cssselect('.article-header__embed-info')
+    header = browser.cssselect('.article-header--embed')
+    quiz = header[0].cssselect('.quiz')
+    topic = header[0].cssselect('.article-header__topic--embed')
+    headline = header[0].cssselect('.article-header__headline--embed')
+    info = header[0].cssselect('.article-header__embed-info')
 
-    assert len(header) > 1
+    assert len(header) == 1
     assert len(quiz) == 1
     assert len(topic) == 1
     assert len(headline) == 1
@@ -302,10 +302,9 @@ def test_article_header_embed_quiz_has_correct_markup(testbrowser):
 
 def test_article_header_embed_cardstack_has_cardstack(testbrowser):
     browser = testbrowser('/campus/article/embed-header-cardstack')
-    header = browser.cssselect('.article-header--embed')[0]
-    cardstack = header.cssselect('.cardstack')
-
-    assert len(header) > 1
+    header = browser.cssselect('.article-header--embed')
+    cardstack = header[0].cssselect('.cardstack')
+    assert len(header) == 1
     assert len(cardstack) == 1
 
 
