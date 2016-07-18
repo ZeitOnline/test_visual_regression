@@ -80,20 +80,33 @@
 	&__user-name
 		font-weight: bold
 
+	&__metadata
+		display: block
+
+	&__tags
+		a
+			display: inline-block
+
+	&__tag
+		@extend %tags
+
 	+respond-max($break-tablet-min)
 		// item order
 		&__login
 			order: 1
-		&__ressorts
+		&__metadata
 			order: 2
-		&__services
+		&__ressorts
 			order: 3
-		&__classifieds
+		&__services
 			order: 4
-		&__search
+		&__classifieds
 			order: 5
+		&__search
+			order: 6
 
 		&__login,
+		&__metadata,
 		&__ressorts,
 		&__classifieds,
 		&__search
@@ -150,6 +163,21 @@
 			letter-spacing: .08em
 			li:not(:last-child)
 				display: none
+
+		&__metadata
+			line-height: 2.5
+
+		&__label
+			display: block
+
+		&__tag
+			border-radius: 4px
+			font-size: remify(14px)
+			line-height: 2.4
+			margin-bottom: remify(10px)
+
+		&__date
+			display: none
 
 	+respond-max($break-phablet-min)
 		&__ressorts,
@@ -304,6 +332,28 @@
 			float: right
 			font-size: remify(12px)
 			padding-right: 0
+
+		// Tags and date
+		&__metadata
+			+clearfix
+			color: $zon-dark-grey
+			font-size: em(11px)
+			letter-spacing: $letter-spacing-l
+			line-height: 1rem
+			margin: remify(12px 0 7px)
+			text-transform: uppercase
+			width: 100%
+
+		&__tags
+			display: inline-block
+
+		&__label
+			font-weight: bold
+			padding-right: 1em
+
+		&__date
+			float: right
+			padding-top: 5px
 
 	+respond-min-max($break-tablet-min, $break-desktop-min)
 		&__login-list
