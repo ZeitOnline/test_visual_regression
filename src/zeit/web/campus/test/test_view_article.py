@@ -307,3 +307,9 @@ def test_article_header_embed_cardstack_has_cardstack(testbrowser):
 
     assert len(header) > 1
     assert len(cardstack) == 1
+
+
+def test_cardstack_block_produces_correct_html(testbrowser):
+    browser = testbrowser('/campus/article/cardstack')
+    block = browser.cssselect('main article .cardstack')
+    assert len(block) == 1

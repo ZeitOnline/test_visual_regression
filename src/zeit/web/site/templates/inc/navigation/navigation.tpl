@@ -65,4 +65,24 @@
         {%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
     </nav>
 {% endif %}
+
+{%- if view.is_hp -%}
+    <div class="nav__metadata">
+        {%- require topics = view.is_hp and view.context | topic_links -%}
+            <div class="nav__tags" data-ct-row="article-tag">
+                <span class="nav__label">{{ topics.title }}</span>
+                {% for label, link in topics %}
+                    <a href="{{ link }}" class="nav__tag">{{ label }}</a>
+                {% endfor %}
+            </div>
+        {%- endrequire -%}
+        {% set date = view.date_last_modified | format_timedelta(hours=3) %}
+        {% if date %}
+            <div class="nav__date">
+                <time datetime="{{ view.date_last_modified | format_date('iso8601') }}">Aktualisiert {{ date }}</time>
+            </div>
+        {% endif %}
+    </div>
+{%- endif -%}
+
 </div>
