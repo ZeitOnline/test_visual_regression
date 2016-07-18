@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <head xmlns:D="DAV:">
+    <rankedTags>
+        <tag uuid="2f9ad0b0-934d-4f25-9a21-772601da1d9c" url_value="sommer" type="free">Sommer</tag>
+        <tag uuid="62f6421f-84e1-4087-b817-6c609bda692d" url_value="schwimmen" type="free">Schwimmen</tag>
+        <tag uuid="6d6ef81f-f874-497c-b50d-e9d929697309" url_value="bademode" type="free">Bademode</tag>
+        <tag uuid="56cf8f50-d499-4703-81b8-a0a16293d39d" url_value="bikini" type="free">Bikini</tag>
+    </rankedTags>
     <attribute name="href" ns="DAV:">/cms/work/digital/2014-04/fs-desktop-schreibtisch-computer</attribute>
     <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2014-04-05T06:35:09.303935+00:00</attribute>

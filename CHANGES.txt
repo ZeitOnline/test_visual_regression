@@ -10,7 +10,18 @@ Change log for zeit.web
 
 - BUG-463: Fix broken banner_channel on campus centerpages
 
+- BUG-461: Show table of contents before lists
+
+- BUG-462: Add missing data attributes for storystream teaser
+
 - ZON-2734: Update header for series, topics and dynamic pages
+
+- ZON-2864: Add keywords for ZMO articles and galleries
+
+- FIX: Don't show kicker markup if there's no kicker
+
+- MAINT: Move get_module from template to a higher abstraction level
+
 
 
 2.92.1 (2016-07-13)
