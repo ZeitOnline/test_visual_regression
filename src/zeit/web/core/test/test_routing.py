@@ -79,7 +79,7 @@ def test_dynamic_folder_traversal_should_allow_for_ranking_pagination(
         view_name='adel-tawil',
         request=dummy_request)
 
-    area = tdict['context'].values()[0].values()[1]
+    area = tdict['context'].values()[1].values()[0]
     assert zeit.web.core.centerpage.get_area(area).page == 2
 
 
