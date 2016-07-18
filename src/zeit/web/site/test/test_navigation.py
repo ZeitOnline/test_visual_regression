@@ -23,7 +23,7 @@ def test_nav_markup_should_match_css_selectors(tplbrowser, dummy_request):
 
     assert len(html('.header__brand')) == 1
     assert len(html('.nav')) == 1
-    assert len(html('.nav > *')) == 5, 'we expect five elements within .nav'
+    assert len(html('.nav > *')) == 6, 'we expect six elements within .nav'
     assert len(html('.header__publisher')) == 1
     assert len(html('.header__menu-link')) == 1
     assert len(html('.header__teaser')) == 1
@@ -31,6 +31,7 @@ def test_nav_markup_should_match_css_selectors(tplbrowser, dummy_request):
     assert len(html('.nav__services')) == 1
     assert len(html('.nav__classifieds')) == 1
     assert len(html('.nav__search')) == 1
+    assert len(html('.nav__metadata')) == 1
     assert len(html('ul.nav__ressorts-list')) == 1
 
 
@@ -248,8 +249,7 @@ def test_zon_main_nav_has_correct_structure(
     nav_ressorts = nav.find_element_by_class_name('nav__ressorts')
     nav_services = nav.find_element_by_class_name('nav__services')
     nav_classifieds = nav.find_element_by_class_name('nav__classifieds')
-    header_tags = header.find_element_by_class_name('header__tags')
-    header_metadata = header.find_element_by_class_name('header__metadata')
+    nav_metadata = header.find_element_by_class_name('nav__metadata')
 
     # header is visible in all sizes
     assert header.is_displayed()
@@ -261,10 +261,6 @@ def test_zon_main_nav_has_correct_structure(
         assert not nav.is_displayed()
         # burger menu is visible
         assert menu_link.is_displayed()
-        # tags are hidden
-        assert header_tags.is_displayed() is False
-        # date bar is hidden
-        assert header_metadata.is_displayed() is False
     else:
         # main navigation is visible in desktop mode
         assert nav.is_displayed()
@@ -278,6 +274,8 @@ def test_zon_main_nav_has_correct_structure(
         assert nav_services.is_displayed()
         # classifieds bar is visible in desktop mode
         assert nav_classifieds.is_displayed()
+        # metadata bar is visible in desktop mode
+        assert nav_metadata.is_displayed()
 
     if screen_width == 768:
         # test search input is hidden in tablet mode

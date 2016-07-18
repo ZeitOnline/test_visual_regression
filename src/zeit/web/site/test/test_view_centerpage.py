@@ -628,17 +628,17 @@ def test_gallery_teaser_should_contain_supertitle(testbrowser):
     assert 'Desktop-Bilder' in kicker.text_content()
 
 
-def test_centerpage_should_have_header_tags(testbrowser):
+def test_homepage_should_have_nav_tags(testbrowser):
     browser = testbrowser('/zeit-online/index')
-    html = lxml.html.fromstring(browser.contents).cssselect
 
-    assert len(html('.header__tags')) == 1
-    assert html('.header__tags__label')[0].text == 'Schwerpunkte'
+    assert browser.cssselect('.nav__tags')
+    assert browser.cssselect('.nav__label')[0].text == 'Schwerpunkte'
 
-    assert len(html('.header__tags__link')) == 3
-    assert html('.header__tags__link')[0].get('href').endswith(
+    tags = browser.cssselect('.nav__tag')
+    assert len(tags) == 3
+    assert tags[0].get('href').endswith(
         '/schlagworte/organisationen/islamischer-staat/index')
-    assert html('.header__tags__link')[0].text == 'Islamischer Staat'
+    assert tags[0].text == 'Islamischer Staat'
 
 
 def test_new_centerpage_renders(testserver):
