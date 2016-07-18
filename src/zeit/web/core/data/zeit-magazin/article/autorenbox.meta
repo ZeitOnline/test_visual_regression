@@ -21,16 +21,16 @@
     <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2014-04-29T11:00:55.287082+00:00</attribute>
-    <rankedTags ns="">
-        <tag>Schwangerschaft</tag>
-        <tag>Konsumverhalten</tag>
-        <tag>Werbung</tag>
-        <tag>Tracking</tag>
-        <tag>Facebook</tag>
-        <tag>Behörde</tag>
-        <tag>Minnesota</tag>
-        <tag>USA</tag>
-        <tag>New York</tag>
+    <rankedTags>
+        <tag score="6" type="free" url_value="schwangerschaft" uuid="7ffb773a-933c-4942-98a3-718bb525dea2">Schwangerschaft</tag>
+        <tag score="4" type="free" url_value="konsumverhalten" uuid="30e4c626-4e3c-46c1-b0a8-d81a3fb4f7f2">Konsumverhalten</tag>
+        <tag score="4" type="free" url_value="werbung" uuid="2eb26582-91ca-4874-bb9e-8b65822f6a58">Werbung</tag>
+        <tag score="3" type="free" url_value="tracking" uuid="a15f7abb-f97e-4902-a4f3-d4c5b370d76b">Tracking</tag>
+        <tag score="4" type="Organization" url_value="facebook" uuid="ddd1c7c5-1864-4642-818c-c153a2c9ebe5">Facebook</tag>
+        <tag score="4" type="free" url_value="behoerde" uuid="115d43b1-a4fb-45e0-b077-32eb5446d700">Behörde</tag>
+        <tag score="4" type="free" url_value="minnesota" uuid="48a40e5f-4fe3-4de8-b1f8-a19ae70b26e3">Minnesota</tag>
+        <tag score="3" type="Location" url_value="usa" uuid="7d8274b9-2499-460e-a0e1-3d569e365304">USA</tag>
+        <tag score="1" type="Location" url_value="new-york" uuid="cbe42c41-4c60-4ece-a03b-c1b57abfb4a9">New York</tag>
     </rankedTags>
     <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">Datenschutz</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>

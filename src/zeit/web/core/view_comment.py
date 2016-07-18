@@ -468,11 +468,9 @@ class RecommendCommentResource(PostCommentResource):
         self.request_method = 'GET'
 
 
-def is_zon_or_zco_content(request, context):
-    return (
-        zeit.web.site.view.is_zon_content(request, context)) or (
-        zeit.web.campus.view.is_zco_content(request, context)
-        )
+def is_zon_or_zco_content(context, request):
+    return (zeit.web.site.view.is_zon_content(context, request) or
+            zeit.web.campus.view.is_zco_content(context, request))
 
 
 # XXX We should be a little more specific here, ie ICommentableContent

@@ -17,7 +17,7 @@ def search_form(application, dummy_request):
         'http://xml.zeit.de/suche/index')
     block = zeit.web.core.utils.find_block(
         context, module='search-form')
-    return zeit.web.core.template.get_module(block)
+    return zeit.web.core.centerpage.get_module(block)
 
 
 @pytest.fixture

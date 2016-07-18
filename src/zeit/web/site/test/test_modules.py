@@ -5,8 +5,7 @@ import zeit.cms.interfaces
 import zeit.content.cp.centerpage
 import zeit.content.image.interfaces
 
-import zeit.web.site.module.headerimage
-import zeit.web.site.module.xml
+import zeit.web.core.centerpage
 import zeit.web.core.utils
 
 
@@ -16,7 +15,7 @@ def headerimage(application):
         'http://xml.zeit.de/zeit-online/index-with-image')
     block = zeit.web.core.utils.find_block(
         context, module='headerimage')
-    return zeit.web.core.template.get_module(block)
+    return zeit.web.core.centerpage.get_module(block)
 
 
 def test_headerimage_should_have_supertitle(headerimage):
@@ -45,7 +44,7 @@ def rawXml(application):
         'http://xml.zeit.de/zeit-online/index-with-image')
     block = zeit.web.core.utils.find_block(
         context, module='xml')
-    return zeit.web.core.template.get_module(block)
+    return zeit.web.core.centerpage.get_module(block)
 
 
 def test_raw_xml_contains_html(rawXml):
@@ -66,6 +65,6 @@ def test_raw_xml_supports_multiple_nodes(application):
     # calibrated test content.
     block.xml.raw.append(lxml.objectify.XML('<p>asdf1</p>'))
     block.xml.raw.append(lxml.objectify.XML('<div>asdf2</div>'))
-    module = zeit.web.core.template.get_module(block)
+    module = zeit.web.core.centerpage.get_module(block)
     assert 'asdf1' in module.xml
     assert 'asdf2' in module.xml

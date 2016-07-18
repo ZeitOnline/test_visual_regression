@@ -1572,3 +1572,26 @@ def test_comment_count_in_nextread_not_shown_when_comments_disabled(
         counts.return_value = {id: 35}
         browser = testbrowser('/zeit-online/article/02')
     assert not browser.cssselect('.nextread__commentcount')
+
+
+def test_article_toc_is_printed_before_paragraphs_and_lists(testbrowser):
+    browser = testbrowser('/zeit-online/article/paginated')
+    page = browser.cssselect('.article-page')[0]
+    first_child = page.cssselect('*:first-child')[0]
+
+    assert 'article-toc' in first_child.get('class')
+    assert page.cssselect('.article-toc + p.paragraph')
+
+    browser = testbrowser('/zeit-online/article/paginated/seite-2')
+    page = browser.cssselect('.article-page')[0]
+    first_child = page.cssselect('*:first-child')[0]
+
+    assert 'article-toc' in first_child.get('class')
+    assert page.cssselect('.article-toc + ul.list')
+
+    browser = testbrowser('/zeit-online/article/paginated/seite-3')
+    page = browser.cssselect('.article-page')[0]
+    first_child = page.cssselect('*:first-child')[0]
+
+    assert 'article-toc' in first_child.get('class')
+    assert page.cssselect('.article-toc + ol.list')
