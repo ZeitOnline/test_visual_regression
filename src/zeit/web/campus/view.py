@@ -27,26 +27,6 @@ class Base(zeit.web.core.view.Base):
     def adwords(self):
         return ['zeitonline', 'zeitcampus']
 
-    @zeit.web.reify
-    def banner_channel(self):
-        # manually banner_id rules first
-        if self.context.banner_id is not None:
-            return u'{}/{}'.format(self.context.banner_id, self.banner_type)
-        # special handling for advertorials
-        if self.ressort == 'angebote':
-            adv_title = self.context.advertisement_title or self.ressort
-            return u'{}/{}/{}'.format(
-                'campus',
-                'angebote',
-                "".join(re.findall(r"[A-Za-z0-9_]*", adv_title)).lower())
-        # the big rest, for now
-        topiclabel = getattr(self, 'topic_label', '')
-        topiclabel = zeit.web.core.template.format_iqd(topiclabel)
-        return u'{}/{}/{}'.format(
-            'campus',
-            'thema' if topiclabel else '',
-            topiclabel or '')
-
 
 @pyramid.view.view_config(
     route_name='login_state',

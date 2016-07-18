@@ -99,7 +99,12 @@ class LongformArticle(Article):
 @pyramid.view.view_config(context=zeit.web.core.article.IFeatureLongform,
                           renderer='templates/feature_longform.html')
 class FeatureLongform(LongformArticle):
-    pass
+
+    @zeit.web.reify
+    def adwords(self):
+        keywords = super(FeatureLongform, self).adwords
+        keywords.remove('zeitmz')
+        return keywords
 
 
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle,
