@@ -8,6 +8,7 @@
 		&--float,
 		&--wide
 			max-width: remify(820px)
+		&--column-width,
 		&--large
 			+unpadded
 			max-width: none
@@ -40,9 +41,10 @@
 			color: inherit
 			+on-interaction
 				color: $color-link--hover
+	&--column-width,
 	&--large
 		margin: remify(28px auto 40px)
-		max-width: remify(820px)
+		max-width: remify(660px)
 		+respond-min($break-desktop-min)
 			margin-top: remify(40px)
 		.figure__caption
@@ -50,6 +52,8 @@
 			margin: 0 auto
 			max-width: $caption-max-width
 			padding: $page-padding--small
+	&--large
+		max-width: remify(820px)
 
 .video
 	&__caption
