@@ -67,6 +67,7 @@
 {% endif %}
 
 {%- if view.is_hp -%}
+    {% block metadata %}
     <div class="nav__metadata">
         {%- require topics = view.is_hp and view.context | topic_links -%}
             <div class="nav__tags" data-ct-row="article-tag">
@@ -83,6 +84,7 @@
             </div>
         {% endif %}
     </div>
+    {% endblock metadata %}
 {%- endif -%}
 
 </div>

@@ -548,14 +548,14 @@ def test_nav_hp_contains_relative_date(jinja2_env):
         return datetime.datetime.now() - datetime.timedelta(**kwargs)
 
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/centerpage.html')
+        'zeit.web.site:templates/inc/navigation/navigation.tpl')
     view = mock.Mock()
     view.is_hp = True
     view.date_last_modified = now(hours=1)
     lines = tpl.blocks['metadata'](tpl.new_context({'view': view}))
     html_str = ' '.join(lines).strip()
     html = lxml.html.fromstring(html_str)
-    header_date = html.cssselect('.header__date')
+    header_date = html.cssselect('.nav__date')
 
     assert len(header_date) == 1
     assert header_date[0].text_content().strip() == 'Aktualisiert vor 1 Stunde'
@@ -564,6 +564,6 @@ def test_nav_hp_contains_relative_date(jinja2_env):
     lines = tpl.blocks['metadata'](tpl.new_context({'view': view}))
     html_str = ' '.join(lines).strip()
     html = lxml.html.fromstring(html_str)
-    header_date = html.cssselect('.header__date')
+    header_date = html.cssselect('.nav__date')
 
     assert len(header_date) == 0
