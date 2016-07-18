@@ -231,8 +231,6 @@ class Module(object):
             self.layout = context.cpextra
         elif zeit.edit.interfaces.IBlock.providedBy(context):
             self.layout = context.type
-        # XXX Should we proxy through anything we don't have to context?
-        self.type = context.type
 
     def __hash__(self):
         return self.context.xml.attrib.get(
