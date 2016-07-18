@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block module_list %}
-    {% for column in area.values() | map('get_module') | slice(2) -%}
+    {% for column in area.values() | slice(2) -%}
         <div class="newsticker__column">
             {% for module in column %}
                 {% set teaser = module | first_child %}

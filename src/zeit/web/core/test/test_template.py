@@ -281,34 +281,6 @@ def test_teaser_layout_for_empty_block_should_be_set_to_hide(application):
     assert teaser == 'hide'
 
 
-def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/feature/feature_longform')
-    cp = zeit.content.cp.centerpage.CenterPage()
-    area = cp.body.create_item('region').create_item('area')
-    area.kind = 'duo'
-    block = area.create_item('teaser')
-    block.layout = zeit.content.cp.layout.get_layout('zon-square')
-    block.append(article)
-
-    module = zeit.web.core.template.get_module(block)
-    assert module.layout.id == 'zon-square'
-
-    block.remove(article)
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/01')
-    block.append(article)
-    module = zeit.web.core.template.get_module(block)
-    assert module.layout.id == 'zmo-square'
-
-    block.remove(article)
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/campus/article/simple')
-    block.append(article)
-    module = zeit.web.core.template.get_module(block)
-    assert module.layout.id == 'zco-square'
-
-
 def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
         application, monkeypatch):
     article = zeit.cms.interfaces.ICMSContent(
@@ -481,24 +453,6 @@ def test_filter_append_get_params_should_accept_unicode():
     request.url = 'http://example.com?s%C3%B6ren_mag=k%C3%A4se'
     assert u'http://example.com?s%C3%B6ren_mag=k%C3%A4se' == (
         zeit.web.core.template.append_get_params(request))
-
-
-def test_get_module_filter_should_correctly_extract_cpextra_id(application):
-    block = object()
-    assert zeit.web.core.template.get_module(block) is block
-
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
-    block = zeit.web.core.utils.find_block(cp, module='search-form')
-
-    block.cpextra = 'n/a'
-    module = zeit.web.core.template.get_module(block)
-    assert isinstance(module, zeit.web.core.centerpage.Module)
-    assert module.layout.id == 'n/a'
-
-    block.cpextra = 'search-form'
-    module = zeit.web.core.template.get_module(block)
-    assert isinstance(module, zeit.web.site.module.search_form.Form)
-    assert module.layout.id == 'search-form'
 
 
 def test_pagination_calculation_should_deliver_valid_output():
