@@ -73,24 +73,28 @@
             <div class="article__body">
                 <!-- block for Teaser -->
                 <section class="article__page">
-                    <div class="article__page-wrap">
-                        {{ blocks.subtitle() }}
-                    </div>
+                    {{ blocks.subtitle() }}
                 </section>
 
                 {{ lama.adplace(view.banner(3), view) }}
 
                 {% for page in view.pages %}
                 <section class="article__page">
-                    <div class="article__page-wrap">
-                        {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
-                        {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
+                    {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
+                    {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
 
-                        {{ article.render_page(page) }}
-                    </div>
+                    {{ article.render_page(page) }}
                 </section>
                 {% endfor %}
             </div>
+
+            {% block article_footer %}
+            <div class="article__footer article__item" data-ct-area="articlebottom">
+                {% block article_tags %}
+                    {% include "zeit.web.core:templates/inc/article/tags.html" %}
+                {% endblock %}
+            </div>
+            {% endblock %}
         </div>
     </article>
 {% endblock content %}

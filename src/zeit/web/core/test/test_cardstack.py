@@ -21,9 +21,9 @@ def test_cardstack_should_be_included_on_articles(
     parts = urlparse.urlparse(src)
     query = urlparse.parse_qs(parts.query)
     assert 'http://' + parts.netloc + parts.path == (
-        '{}/stacks/kekse/esi/body'.format(espi))
+        '{}/stacks/erkaeltung-hausmittel-wirkung/esi/body'.format(espi))
     assert query == {
-        'shareUrlQuerySuffix': ['stackId=kekse'],
+        'shareUrlQuerySuffix': ['stackId=erkaeltung-hausmittel-wirkung'],
         'shareUrl': ['http://localhost/{}/article/cardstack'.format(
             path_fragment)]
     }
@@ -32,12 +32,16 @@ def test_cardstack_should_be_included_on_articles(
         '{}/stacks/esi/scripts'.format(espi))
 
 
+# We test nothing with using the same stackId as query parameter
+# like stated in the page XML, do we?
+# @pytest.mark.xfail(reason='Maybe this never worked')
 def test_cardstack_should_honor_article_stack_id(app_settings, testbrowser):
-    browser = testbrowser('/zeit-online/article/cardstack?stackId=kekse')
+    browser = testbrowser(
+        '/zeit-online/article/cardstack?stackId=erkaeltung-hausmittel-wirkung')
     espi = app_settings['cardstack_backend']
 
     assert browser.document.xpath('head/include/@src')[0] == (
-        '{}/stacks/kekse/esi/head'.format(espi))
+        '{}/stacks/erkaeltung-hausmittel-wirkung/esi/head'.format(espi))
 
     assert not browser.document.xpath('head/meta[@name="twitter:site"]')
 
@@ -45,9 +49,9 @@ def test_cardstack_should_honor_article_stack_id(app_settings, testbrowser):
     parts = urlparse.urlparse(src)
     query = urlparse.parse_qs(parts.query)
     assert 'http://' + parts.netloc + parts.path == (
-        '{}/stacks/kekse/esi/body'.format(espi))
+        '{}/stacks/erkaeltung-hausmittel-wirkung/esi/body'.format(espi))
     assert query == {
-        'shareUrlQuerySuffix': ['stackId=kekse'],
+        'shareUrlQuerySuffix': ['stackId=erkaeltung-hausmittel-wirkung'],
         'shareUrl': ['http://localhost/zeit-online/article/cardstack'],
     }
 
