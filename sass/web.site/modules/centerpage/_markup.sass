@@ -24,7 +24,7 @@ $markup-list-offset: em(18px)
 .markup
 	@extend %teaser
 	border-bottom-width: 1px
-	+respond-min($break-desktop-min)
+	+respond-min($break-tablet-min)
 		border-bottom-width: 0
 	+default-article-textlink
 	&__title
@@ -38,3 +38,33 @@ $markup-list-offset: em(18px)
 			line-height: 1.5
 	ul
 		@extend %markup-ul
+
+	&--left
+		text-align: left
+	&--center
+		text-align: center
+	&--right
+		text-align: right
+
+	&--solo
+		margin: 0 auto
+		padding: $vertical-space $page-padding--small
+		p
+			margin: 0.7em 0
+		+respond-min($break-areas)
+			background-color: $color-page-bg
+			border-bottom-width: 2px // solid $zon-lighter-grey
+			box-shadow: remify(-60px) 0 0 $color-page-bg, remify(60px) 0 0 $color-page-bg
+			margin: 0 auto
+			max-width: $medium-content-width
+			padding: $vertical-space 0
+			position: relative // give stacking context to align above the headerimage
+
+	&--solo &__text
+		font-family: $font-franziska
+		font-size: em(17px)
+		line-height: 1.3
+
+		+respond-min($break-tablet-min)
+			font-size: em(20px)
+			line-height: 1.4
