@@ -9,8 +9,6 @@ Teaser template for fullwidth lead teaser
 {% block comments %}{% endblock %}
 
 {% block teaser_image scoped %}
-    {% set media_caption_additional_class = 'figcaption--hidden' %}
     {% set module_layout = self.layout() %}
-    {% set href = teaser | create_url %}
     {% include "zeit.web.magazin:templates/inc/asset/image-fullwidth.tpl" %}
 {% endblock %}
