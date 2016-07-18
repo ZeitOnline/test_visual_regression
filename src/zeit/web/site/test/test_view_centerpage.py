@@ -393,6 +393,13 @@ def test_snapshot_should_show_first_gallery_image(testbrowser):
     assert image.attrib['src'].endswith('462507429-540x304.jpg')
 
 
+def test_snapshot_media_link_should_have_title(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    media_link_title = browser.cssselect(
+        '.snapshot__media-container a')[0].get('title')
+    assert media_link_title == 'Automesse Detroit - Von Krise keine Spur mehr'
+
+
 def test_snapshot_should_display_correct_teaser_title(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     title = browser.cssselect('.snapshot .section-heading__title')[0]
@@ -905,6 +912,19 @@ def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
     browser = testbrowser('/zeit-online/zeitonline')
     assert browser.cssselect('.buzz-box')
     assert len(browser.cssselect('.buzz-box__teasers article')) == 3
+
+
+def test_teaser_buzzbox_link_title_should_match_kicker_and_headline(
+        testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    figure_links = browser.cssselect('.teaser-buzzboard__media-container a')
+    heading_links = browser.cssselect(
+        '.teaser-buzzboard__media ~ .teaser-buzzboard__container a ')
+
+    assert len(figure_links) == len(heading_links)
+
+    for index, link in enumerate(figure_links):
+        assert link.get('title') == heading_links[index].get('title')
 
 
 def test_centerpage_square_teaser_has_pixelperfect_image(testbrowser):
@@ -2251,3 +2271,11 @@ def test_comment_count_in_teaser_not_shown_when_comments_disabled(
         browser = testbrowser('/zeit-online/classic-teaser')
     assert not browser.cssselect(
         'article[data-unique-id="{}"] .teaser-small__commentcount'.format(id))
+
+
+def test_teaser_link_title_should_match_kicker_and_headline(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    articles = browser.cssselect('article')
+    for article in articles:
+        links = article.cssselect('a:not([itemprop="url"])')
+        assert links[0].get('title') == links[1].get('title')
