@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import lxml
 import pytest
 import mock
 
@@ -541,27 +540,25 @@ def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
         testserver.url), 'zmo hp wasnt called correctly'
 
 
-def test_nav_hp_contains_relative_date(jinja2_env):
+def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
     def now(**kwargs):
         return datetime.datetime.now() - datetime.timedelta(**kwargs)
 
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/navigation/navigation.tpl')
-    view = mock.Mock()
+    view = mock.MagicMock()
     view.is_hp = True
     view.date_last_modified = now(hours=1)
-    lines = tpl.blocks['metadata'](tpl.new_context({'view': view}))
-    html_str = ' '.join(lines).strip()
-    html = lxml.html.fromstring(html_str)
-    header_date = html.cssselect('.nav__date')
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/navigation/navigation.tpl',
+        view=view, request=dummy_request)
+    header_date = browser.cssselect('.nav__date')
 
     assert len(header_date) == 1
     assert header_date[0].text_content().strip() == 'Aktualisiert vor 1 Stunde'
 
     view.date_last_modified = now(hours=3)
-    lines = tpl.blocks['metadata'](tpl.new_context({'view': view}))
-    html_str = ' '.join(lines).strip()
-    html = lxml.html.fromstring(html_str)
-    header_date = html.cssselect('.nav__date')
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/navigation/navigation.tpl',
+        view=view, request=dummy_request)
+    header_date = browser.cssselect('.nav__date')
 
     assert len(header_date) == 0
