@@ -441,7 +441,7 @@ def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
     assert not nav_search.is_displayed(), 'Search must be hidden'
 
     for link in advertorial_links:
-        assert not link.is_displayed(), 'Advertorial link must be visible'
+        assert not link.is_displayed(), 'Advertorial link must be hidden'
 
 
 def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
