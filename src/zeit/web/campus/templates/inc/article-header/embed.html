@@ -5,13 +5,13 @@
         <div class="article-header__embed">
             {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
         </div>
-
-        {{ self.article_topic() }}
-        {{ self.article_headline() }}
-
-        <div class="article-header__embed-info">
-            {{ self.article_byline() }}
-            {{ self.article_metadata() }}
+        <div class="article-header__embed-container">
+            {{ self.article_topic() }}
+            {{ self.article_headline() }}
+            <div class="article-header__embed-info">
+                {{ self.article_byline() }}
+                {{ self.article_metadata() }}
+            </div>
         </div>
     </div>
 {% endblock -%}

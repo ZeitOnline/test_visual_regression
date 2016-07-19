@@ -210,8 +210,6 @@
 		margin-right: -$page-padding--small
 		padding: $page-padding--small
 		padding-bottom: 0
-		display: flex
-		flex-flow: column nowrap
 
 		// remove background color and padding from cardstack
 		.cardstack
@@ -219,6 +217,9 @@
 			padding: 0
 			&:before
 				background-color: transparent
+	&__embed-container
+		display: flex
+		flex-flow: column nowrap
 	&__embed-info
 		.article-header__metadata
 			padding: $page-padding--small 0
@@ -244,13 +245,13 @@
 				+article-header-banderole(443px)
 			&--wide
 				+article-header-banderole(180px)
-
-		&--default-no-image,
-		&--embed
+		&--default-no-image
 			background-color: $color-background
 			box-shadow: remify(-160px) 0 0 $color-background, remify(160px) 0 0 $color-background
-			margin-top: remify(76px)
 			max-width: remify(660px)
+		&--default-no-image,
+		&--embed
+			margin-top: remify(76px)
 			padding: remify(48px 0)
 		&--default-no-image &__topic,
 		&--column-no-image &__topic
@@ -394,13 +395,17 @@
 		// Embed Header
 		&--embed
 			display: block
-
 			// to show background color
 			margin: remify(0 auto 40px)
 			padding-top: remify(40px)
 			.article-header__metadata
 				padding: 0
 
+		&__embed-container
+			display: block
+			margin-left: auto
+			margin-right: auto
+			max-width: remify(660px)
 
 /////////////
 // DESKTOP //
