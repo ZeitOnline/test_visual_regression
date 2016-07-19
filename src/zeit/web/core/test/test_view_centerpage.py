@@ -309,3 +309,11 @@ def test_dynamic_topic_cp_contains_correct_webtrekk_param(dummy_request):
     view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
     assert view.webtrekk['customParameter'][
         'cp26'] == 'centerpage.keywordpage.location'
+
+
+def test_invisible_region_should_not_be_rendered(application, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/invisible-teaser')
+    view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
+    # one region less then introduced
+    assert len(view.regions) < len(context.values())
