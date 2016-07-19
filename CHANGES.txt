@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.93 (unreleased)
+2.93 (2016-07-19)
 -----------------
 
 - BUG-453: Fix cardstacks in ZEIT Campus articles
