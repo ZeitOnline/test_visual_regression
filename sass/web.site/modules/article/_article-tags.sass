@@ -8,6 +8,9 @@ $article-tags-margin-right-large: 16px
 	&__title
 		color: $zon-dark-grey
 		margin: remify(0 0 4px)
+		&--video
+			color: $zon-mid-grey
+			margin-top: remify(50px)
 	&__list
 		+clearfix
 		list-style-type: none
@@ -25,6 +28,12 @@ $article-tags-margin-right-large: 16px
 		display: block
 		margin: remify(7px $article-tags-margin-right-small 0 0)
 		padding: remify(4px 12px 5px)
+		&--video
+			background-color: $zon-dark-slate-grey
+			+link
+				color: $zon-mid-grey
+			+on-interaction
+				color: $zon-light-grey
 
 +respond-min($break-tablet-min)
 	.article-tags
