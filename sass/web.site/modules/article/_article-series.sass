@@ -7,7 +7,13 @@
 
 .article-series__media
 	height: remify(80px)
+	overflow: hidden
 	position: relative
+	&.is-pixelperfect
+		img
+			min-height: 100%
+			min-width: 100%
+			width: auto
 
 .article-series__media-container
 	+plain-transparent-overlay()
@@ -21,11 +27,11 @@
 	top: 0
 
 .article-series__inner-heading
-	transform: translateY(-50%)
 	padding-left: $page-padding
 	padding-right: $page-padding
 	position: absolute
 	top: 50%
+	transform: translateY(-50%)
 	width: 100%
 
 .article-series__kicker
