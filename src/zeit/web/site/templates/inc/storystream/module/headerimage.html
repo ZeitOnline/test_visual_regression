@@ -6,7 +6,7 @@
     {% set image = get_image(module, variant_id='cinema') %}
     {# we need to explecitly pass the layout aka block class name #}
     {% set module_layout = blockname %}
-    {% include "zeit.web.site:templates/inc/storystream/inc/headerimage_image.tpl" ignore missing %}
+    {% include "zeit.web.site:templates/inc/storystream/asset/headerimage_image.tpl" %}
 
     <div class="{{ blockname }}__wrapper">
         <div class="{{ blockname }}__container">

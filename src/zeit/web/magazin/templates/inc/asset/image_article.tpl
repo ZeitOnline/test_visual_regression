@@ -2,6 +2,7 @@
 
 {% set image = obj %}
 {% set href = image.href %}
+{% set image_itemprop = 'image' %}
 
 {% block media_block -%}
 {{ {'large': 'figure-full-width',

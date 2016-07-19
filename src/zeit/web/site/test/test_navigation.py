@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import datetime
-import lxml
 import pytest
 import mock
 
@@ -23,7 +22,7 @@ def test_nav_markup_should_match_css_selectors(tplbrowser, dummy_request):
 
     assert len(html('.header__brand')) == 1
     assert len(html('.nav')) == 1
-    assert len(html('.nav > *')) == 5, 'we expect five elements within .nav'
+    assert len(html('.nav > *')) == 6, 'we expect six elements within .nav'
     assert len(html('.header__publisher')) == 1
     assert len(html('.header__menu-link')) == 1
     assert len(html('.header__teaser')) == 1
@@ -31,6 +30,7 @@ def test_nav_markup_should_match_css_selectors(tplbrowser, dummy_request):
     assert len(html('.nav__services')) == 1
     assert len(html('.nav__classifieds')) == 1
     assert len(html('.nav__search')) == 1
+    assert len(html('.nav__metadata')) == 1
     assert len(html('ul.nav__ressorts-list')) == 1
 
 
@@ -248,8 +248,7 @@ def test_zon_main_nav_has_correct_structure(
     nav_ressorts = nav.find_element_by_class_name('nav__ressorts')
     nav_services = nav.find_element_by_class_name('nav__services')
     nav_classifieds = nav.find_element_by_class_name('nav__classifieds')
-    header_tags = header.find_element_by_class_name('header__tags')
-    header_metadata = header.find_element_by_class_name('header__metadata')
+    nav_metadata = header.find_element_by_class_name('nav__metadata')
 
     # header is visible in all sizes
     assert header.is_displayed()
@@ -261,10 +260,6 @@ def test_zon_main_nav_has_correct_structure(
         assert not nav.is_displayed()
         # burger menu is visible
         assert menu_link.is_displayed()
-        # tags are hidden
-        assert header_tags.is_displayed() is False
-        # date bar is hidden
-        assert header_metadata.is_displayed() is False
     else:
         # main navigation is visible in desktop mode
         assert nav.is_displayed()
@@ -278,6 +273,8 @@ def test_zon_main_nav_has_correct_structure(
         assert nav_services.is_displayed()
         # classifieds bar is visible in desktop mode
         assert nav_classifieds.is_displayed()
+        # metadata bar is visible in desktop mode
+        assert nav_metadata.is_displayed()
 
     if screen_width == 768:
         # test search input is hidden in tablet mode
@@ -543,27 +540,25 @@ def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
         testserver.url), 'zmo hp wasnt called correctly'
 
 
-def test_nav_hp_contains_relative_date(jinja2_env):
+def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
     def now(**kwargs):
         return datetime.datetime.now() - datetime.timedelta(**kwargs)
 
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/centerpage.html')
-    view = mock.Mock()
+    view = mock.MagicMock()
     view.is_hp = True
     view.date_last_modified = now(hours=1)
-    lines = tpl.blocks['metadata'](tpl.new_context({'view': view}))
-    html_str = ' '.join(lines).strip()
-    html = lxml.html.fromstring(html_str)
-    header_date = html.cssselect('.header__date')
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/navigation/navigation.tpl',
+        view=view, request=dummy_request)
+    header_date = browser.cssselect('.nav__date')
 
     assert len(header_date) == 1
     assert header_date[0].text_content().strip() == 'Aktualisiert vor 1 Stunde'
 
     view.date_last_modified = now(hours=3)
-    lines = tpl.blocks['metadata'](tpl.new_context({'view': view}))
-    html_str = ' '.join(lines).strip()
-    html = lxml.html.fromstring(html_str)
-    header_date = html.cssselect('.header__date')
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/navigation/navigation.tpl',
+        view=view, request=dummy_request)
+    header_date = browser.cssselect('.nav__date')
 
     assert len(header_date) == 0

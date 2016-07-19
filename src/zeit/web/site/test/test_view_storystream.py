@@ -71,7 +71,7 @@ def test_storystream_contains_structured_data(testbrowser):
 def test_storystream_should_get_layout_from_context(testbrowser):
     # Milestone teasers are represented as <article/> instead of <div/>
     browser = testbrowser('/zeit-online/storystream/dummy')
-    assert len(browser.cssselect('article.storystream-atom')) == 2
+    assert len(browser.cssselect('article.storystream-atom')) == 4
 
 
 def test_storystream_in_article_should_have_correct_order(testbrowser):
@@ -120,3 +120,12 @@ def test_storystream_in_article_should_show_no_teaser_on_mobile(
     driver.set_window_size(980, 1024)
     assert small_teaser.is_displayed(), (
         'Small teaser for storystream teaser should be visible on desktop.')
+
+
+def test_storystream_atom_should_show_no_fallback_image(testbrowser):
+    browser = testbrowser('/zeit-online/storystream/dummy')
+    teaser = browser.cssselect('article.storystream-atom')
+    images = browser.cssselect('article.storystream-atom img')
+
+    assert len(teaser) == 4
+    assert len(images) == 1

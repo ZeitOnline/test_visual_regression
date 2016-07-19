@@ -374,3 +374,9 @@ def test_teaser_topic_link_title_should_match_kicker_and_headline(testbrowser):
     combined_link_title = browser.cssselect(
         '.teaser-topic-wide__combined-link')[0].get('title')
     assert media_link_title == combined_link_title
+
+
+def test_cardstack_teaser_produces_correct_html(testbrowser):
+    browser = testbrowser('/campus/centerpage/cardstack')
+    teaser = browser.cssselect('.cp-cardstack')
+    assert len(teaser) == 1
