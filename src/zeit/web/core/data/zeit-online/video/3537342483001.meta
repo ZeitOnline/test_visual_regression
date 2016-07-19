@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <rankedTags>
+    <tag url_value="motorrad" uuid="1d43af80-7ff9-4049-9c15-53dfcf04b59a" score="4" type="free">Motorrad</tag>
+    <tag url_value="fotografie" uuid="c3dd54c6-b89a-4535-acb8-aae973bc3739" score="3" type="free">Fotografie</tag>
+    <tag url_value="nordamerika" uuid="7d8274b9-2499-460e-a0e1-3d569e365304" score="2" type="Location">Nordamerika</tag>
+    <tag url_value="natur" uuid="1c8b0c32-1a49-4370-9818-7af636e4b30b" score="1" type="free">Natur</tag>
+  </rankedTags>
   <attribute ns="DAV:" name="href">/cms/work/kultur/film/2014-12/hobbit-monumentalfilm</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
