@@ -40,7 +40,10 @@
                 .not( '.nav__ressorts-item--has-dropdown' )
                 .not( this.labeled )
                 .not( this.featured );
-            this.clones = this.items.clone();
+            this.clonedItems = this.items.clone();
+            this.clonedLabels = this.labeled.clone()
+                .addClass( 'nav__dropdown-item--has-label' )
+                .removeClass( 'nav__ressorts-item--has-label' );
 
             this.init();
         }
@@ -49,10 +52,13 @@
             init: function() {
                 var self = this;
 
+                // move advertorials to end of list
+                this.element
+                    .append( this.labeled );
                 // copy all items to more list
                 this.moreList
-                    .append( this.clones )
-                    .append( this.labeled );
+                    .append( this.clonedItems )
+                    .append( this.clonedLabels );
 
                 this.adapt();
 
@@ -69,7 +75,7 @@
                 // do not adapt space on mobile
                 if ( this.isDesktop() ) {
                     parent.removeClass( 'nav__ressorts--fitted' );
-                    this.clones.hide();
+                    this.clonedItems.hide();
 
                     var maxWidth = parent.width(),
                         index;
@@ -77,7 +83,7 @@
                     for ( index = this.items.length; index--; ) {
                         if ( this.node.scrollWidth > maxWidth ) {
                             this.items.eq( index ).hide();
-                            this.clones.eq( index ).show();
+                            this.clonedItems.eq( index ).show();
                         } else {
                             break;
                         }
