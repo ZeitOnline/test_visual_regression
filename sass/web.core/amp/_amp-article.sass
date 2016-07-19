@@ -8,7 +8,6 @@
 		&--float,
 		&--wide
 			max-width: remify(820px)
-		&--column-width,
 		&--large
 			+unpadded
 			max-width: none
@@ -30,7 +29,11 @@
 	font-family: $copytext-font-family
 	font-size: em(15px)
 	font-style: $caption-font-style
-	padding: remify(10px 0)
+	@if $caption-background-color != transparent
+		background-color: $caption-background-color
+		padding: $page-padding--small
+	@else
+		padding: remify(12px 0 0)
 
 .figure
 	&__caption
@@ -47,15 +50,16 @@
 		max-width: remify(660px)
 		+respond-min($break-desktop-min)
 			margin-top: remify(40px)
-		.figure__caption
-			background-color: $caption-background-color
-			margin: 0 auto
-			max-width: $caption-max-width
-			padding: $page-padding--small
 	&--large
 		max-width: remify(820px)
+		.figure__caption
+			margin: 0 auto
+			max-width: $caption-max-width
+			padding-left: $page-padding--small
+			padding-right: $page-padding--small
 
 .video
+	margin: remify(28px auto 40px)
 	&__caption
 		@extend %caption
 
