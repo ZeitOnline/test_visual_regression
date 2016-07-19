@@ -246,7 +246,7 @@ def test_video_has_default_product_id(application, dummy_request):
 def test_video_page_has_proper_article_tags(testbrowser):
     browser = testbrowser('/zeit-online/video/3537342483001')
     taglist = browser.cssselect('.article-tags')
-    taglinks = browser.cssselect(('.article-tags li a'))
+    taglinks = browser.cssselect('.article-tags li a')
     assert len(taglist) > 0
     for taglink in taglinks:
         assert taglink.get('class').endswith('--video')
