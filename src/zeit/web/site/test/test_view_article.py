@@ -1092,7 +1092,7 @@ def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
     figure = article.cssselect('figure[itemprop="image"]')[0]
     classname = figure.get('class')
     assert 'article__item--wide' not in classname
-    assert 'article__item--rimless' in classname
+    assert 'article__item--rimless' not in classname
     assert 'article__item--apart' in classname
 
 
