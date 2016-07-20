@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - BUG-421: Show fill_color for proxy content
 
+- ZON-2863: Show tags in video pages
+
 
 2.93 (2016-07-19)
 -----------------
