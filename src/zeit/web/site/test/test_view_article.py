@@ -1087,6 +1087,14 @@ def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
     figure = main_image.xpath('./ancestor::figure')[0]
     assert 'article__item--wide' in figure.get('class')
 
+    browser = testbrowser('/zeit-online/article/image-column-width')
+    article = browser.cssselect('main article')[0]
+    figure = article.cssselect('figure[itemprop="image"]')[0]
+    classname = figure.get('class')
+    assert 'article__item--wide' not in classname
+    assert 'article__item--rimless' not in classname
+    assert 'article__item--apart' in classname
+
 
 def test_missing_keyword_links_are_replaced(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
