@@ -2284,3 +2284,17 @@ def test_teaser_link_title_should_match_kicker_and_headline(testbrowser):
     for article in articles:
         links = article.cssselect('a:not([itemprop="url"])')
         assert links[0].get('title') == links[1].get('title')
+
+
+def test_dynamic_cps_consider_teaser_image_fill_color(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
+        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
+                           'harald-martenstein-wideformat')],
+        'image-fill-color': [u'A3E6BB']}]
+
+    browser = testbrowser('/serie/martenstein')
+    image = browser.cssselect('.cp-area--ranking article img')[0]
+
+    assert 'A3E6BB' in image.attrib['data-src']

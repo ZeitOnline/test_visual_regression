@@ -249,11 +249,15 @@ def test_zon_main_nav_has_correct_structure(
     nav_services = nav.find_element_by_class_name('nav__services')
     nav_classifieds = nav.find_element_by_class_name('nav__classifieds')
     nav_metadata = header.find_element_by_class_name('nav__metadata')
+    advertorial_links = nav_ressorts.find_elements_by_class_name(
+        'nav__ressorts-item--has-label')
 
     # header is visible in all sizes
     assert header.is_displayed()
     # logo is visible in all sizes
     assert logo.is_displayed()
+    # test advertorial links are present
+    assert len(advertorial_links)
 
     if small_screen:
         # main navigation is hidden
@@ -279,6 +283,10 @@ def test_zon_main_nav_has_correct_structure(
     if screen_width == 768:
         # test search input is hidden in tablet mode
         assert search_input.is_displayed() is False
+
+    # test advertorial links are hidden by default
+    for link in advertorial_links:
+        assert not link.is_displayed(), 'Advertorial link must be hidden'
 
 
 def test_nav_search_is_working_as_expected(
@@ -367,7 +375,7 @@ def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
 
     driver = selenium_driver
     driver.set_window_size(320, 480)
-    driver.get('%s/zeit-online/zeitonline' % testserver.url)
+    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
 
     menu_link = driver.find_element_by_class_name('header__menu-link')
     icon_burger = menu_link.find_element_by_class_name(
@@ -376,34 +384,41 @@ def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
         'header__menu-icon--close')
 
     nav = driver.find_element_by_class_name('nav')
-    nav_login = driver.find_element_by_class_name('nav__login')
-    nav_ressorts = driver.find_element_by_class_name('nav__ressorts')
-    nav_services = driver.find_element_by_class_name('nav__services')
-    nav_classifieds = driver.find_element_by_class_name('nav__classifieds')
-    nav_search = driver.find_element_by_class_name('nav__search')
+    nav_login = nav.find_element_by_class_name('nav__login')
+    nav_ressorts = nav.find_element_by_class_name('nav__ressorts')
+    nav_services = nav.find_element_by_class_name('nav__services')
+    nav_classifieds = nav.find_element_by_class_name('nav__classifieds')
+    nav_search = nav.find_element_by_class_name('nav__search')
+    nav_metadata = nav.find_element_by_class_name('nav__metadata')
+    advertorial_links = nav_ressorts.find_elements_by_class_name(
+        'nav__ressorts-item--has-label')
+
+    # test advertorial links are present
+    assert len(advertorial_links)
 
     # test main elements are displayed
-    assert menu_link.is_displayed(), 'menu button is not displayed'
-    assert icon_burger.is_displayed(), 'Burger Icon is not displayed'
+    assert menu_link.is_displayed(), 'Menu button must be visible'
+    assert icon_burger.is_displayed(), 'Burger icon must be visible'
 
     menu_link.click()
     # wait for animation
     try:
         WebDriverWait(driver, 1).until(expected_conditions.visibility_of(nav))
+        WebDriverWait(driver, 1).until(expected_conditions.visibility_of(
+            nav_services))
     except TimeoutException:
         assert False, 'Navigation must be visible'
 
     # test element states after menu button is clicked
-    assert nav_login.is_displayed(), (
-        'Community bar is not displayed')
-    assert nav_ressorts.is_displayed(), (
-        'Ressort bar is not displayed')
-    assert nav_services.is_displayed(), (
-        'Services bar is not displayed')
-    assert nav_classifieds.is_displayed(), (
-        'Classifieds bar is not displayed')
-    assert nav_search.is_displayed(), (
-        'Search bar is not displayed')
+    assert nav_login.is_displayed(), 'Community must be visible'
+    assert nav_metadata.is_displayed(), 'Keywords must be visible'
+    assert nav_ressorts.is_displayed(), 'Ressorts must be visible'
+    assert nav_services.is_displayed(), 'Services must be visible'
+    assert nav_classifieds.is_displayed(), 'Classifieds must be visible'
+    assert nav_search.is_displayed(), 'Search must be visible'
+
+    for link in advertorial_links:
+        assert link.is_displayed(), 'Advertorial link must be visible'
 
     # test close button is displayed
     assert icon_close.is_displayed(), 'Closing Icon is not displayed'
@@ -418,40 +433,15 @@ def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
         assert False, 'Navigation must be hidden'
 
     # test element states after menu button is clicked again
-    assert nav_login.is_displayed() is False, (
-        'Community bar is displayed')
-    assert nav_ressorts.is_displayed() is False, (
-        'Ressorts bar is displayed')
-    assert nav_services.is_displayed() is False, (
-        'Services bar is displayed')
-    assert nav_classifieds.is_displayed() is False, (
-        'Classifieds bar is displayed')
-    assert nav_search.is_displayed() is False, (
-        'Search bar is displayed')
+    assert not nav_login.is_displayed(), 'Community must be hidden'
+    assert not nav_metadata.is_displayed(), 'Keywords must be hidden'
+    assert not nav_ressorts.is_displayed(), 'Ressorts must be hidden'
+    assert not nav_services.is_displayed(), 'Services must be hidden'
+    assert not nav_classifieds.is_displayed(), 'Classifieds must be hidden'
+    assert not nav_search.is_displayed(), 'Search must be hidden'
 
-
-def test_advertorial_nav_links_hidden_mobile(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.set_window_size(320, 480)
-    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
-
-    menu_link = driver.find_element_by_class_name('header__menu-link')
-    nav = driver.find_element_by_class_name('nav')
-    nav_ressorts = driver.find_element_by_class_name('nav__ressorts')
-    adv_links = nav_ressorts.find_elements_by_class_name(
-        'nav__ressorts-item--has-label')
-
-    menu_link.click()
-    # wait for animation
-    try:
-        WebDriverWait(driver, 1).until(expected_conditions.visibility_of(nav))
-    except TimeoutException:
-        assert False, 'Navigation must be visible'
-
-    # test navigation is display, advertorials not
-    assert nav_ressorts.is_displayed(), 'Ressort bar is not displayed'
-    assert len(adv_links) == 2, 'advertorial links missing'
-    assert not adv_links[0].is_displayed(), 'advertorial links are displayed'
+    for link in advertorial_links:
+        assert not link.is_displayed(), 'Advertorial link must be hidden'
 
 
 def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):

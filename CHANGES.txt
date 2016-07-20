@@ -1,7 +1,21 @@
 Change log for zeit.web
 =======================
 
-2.93 (unreleased)
+2.94 (unreleased)
+-----------------
+
+- ZON-3151: Implement Campus Embed Header
+
+- BUG-434: Use image variant `stripe` for article series banderole
+
+- ZON-3193: Show advertorial links in mobile navigation
+
+- BUG-421: Show fill_color for proxy content
+
+- ZON-2863: Show tags in video pages
+
+
+2.93 (2016-07-19)
 -----------------
 
 - BUG-453: Fix cardstacks in ZEIT Campus articles

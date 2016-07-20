@@ -449,7 +449,9 @@ class LazyProxy(object):
     # Proxy zeit.content.image.interfaces.IImages
     @property
     def fill_color(self):
-        return self.__proxy__.get('image-fill-color', None)
+        fill_color = self.__proxy__.get('image-fill-color', [])
+        if fill_color:
+            return fill_color[0]
 
     # Proxy zeit.content.link.interfaces.ILink.blog.
     # (Note: templates try to access this directly without adapting first.)

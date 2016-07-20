@@ -1,0 +1,17 @@
+{% extends 'zeit.web.campus:templates/inc/article-header/default.html' %}
+
+{% block article_header -%}
+    <div class="{{ 'article-header' | with_mods(view.article_layout) }}">
+        <div class="article-header__embed">
+            {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
+        </div>
+        <div class="article-header__embed-container article__item">
+            {{ self.article_topic() }}
+            {{ self.article_headline() }}
+            <div class="article-header__embed-info">
+                {{ self.article_byline() }}
+                {{ self.article_metadata() }}
+            </div>
+        </div>
+    </div>
+{% endblock -%}

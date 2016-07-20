@@ -4,7 +4,7 @@
 		line-height: 1.5
 		padding-left: $page-padding
 		padding-right: $page-padding
-		padding-top: $page-padding
+		padding-top: remify(20px)
 		+respond-min($break-tablet-min)
 			margin-left: auto
 			margin-right: auto
@@ -15,9 +15,7 @@
 		@extend %teaser-title
 		display: block
 		font-size: remify(17px)
-		padding-bottom: remify(16px)
+		margin-bottom: remify(16px)
 	&__description
 		@extend %figure-caption
 		display: block
-		margin-left: 0
-		margin-right: 0

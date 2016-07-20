@@ -4,14 +4,8 @@
 	font-style: italic
 	font-weight: normal // needed for e.g. liveblog header image
 	line-height: 1.5
-	margin: remify(8px $page-padding 0)
+	margin: remify(8px auto 0)
 	color: $zon-dark-grey
-	&--marginalia
-		margin: remify(12px 0 0)
-	+respond-min($break-tablet-min)
-		max-width: remify(660px)
-		margin-left: auto
-		margin-right: auto
 	+respond-min($break-desktop-min)
 		font-size: remify(16px)
 
@@ -108,6 +102,21 @@
 
 	&__caption
 		@extend %figure-caption
+
+		&--marginalia
+			margin-top: remify(12px)
+
+		.article__item--rimless &
+			padding-left: $page-padding
+			padding-right: $page-padding
+			+respond-min($break-tablet-min)
+				padding-left: 0
+				padding-right: 0
+
+		+respond-min($break-tablet-min)
+			margin-left: auto
+			margin-right: auto
+			max-width: remify(660px)
 
 
 	&__copyright
