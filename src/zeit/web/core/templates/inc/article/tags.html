@@ -1,5 +1,5 @@
 {% if view.ranked_tags | length %}
-<nav class="article-tags">
+<nav class="{{ 'article-tags' | with_mods(tag_modifier) }}">
     <h4 class="{{ 'article-tags__title' | with_mods(tag_modifier) }}">Schlagworte</h4>
     <ul class="article-tags__list" itemprop="keywords" data-ct-row="article-tag">
     {%- for tag in view.ranked_tags[:6] -%}
