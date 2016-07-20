@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-3193: Show advertorial links in mobile navigation
 
+- ZON-2863: Show tags in video pages
+
 
 2.93 (2016-07-19)
 -----------------
