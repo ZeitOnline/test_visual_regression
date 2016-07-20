@@ -45,11 +45,27 @@
 				background-color: $zon-grey
 				color: #fff
 
-	// hide advertorial links on mobile and in 1st level navigation
+	// hide advertorial links in 1st level navigation, enable for mobile view only
 	&__ressorts-item--has-label,
 	// hide more ressorts link, enable for script enabled desktop view only
 	&__ressorts-item--more
 		display: none
+
+	// basic advertorial styles
+	&__dropdown-item--has-label,
+	&__ressorts-item--has-label
+		&:before
+			color: $zon-mid-grey
+			content: "Anzeige" // fallback incapable browsers
+			content: attr(data-label)
+			display: block
+			font-size: remify(9px)
+			letter-spacing: .15em
+			line-height: 1
+			margin: remify(10px 0 0 10px)
+			text-transform: uppercase
+		// & + &:before
+		// 	content: none
 
 	// LOGIN
 	&__login
@@ -115,10 +131,10 @@
 
 		&__ressorts,
 		&__classifieds
+			line-height: 2.625
 			padding-bottom: remify(6px)
 			padding-top: remify(6px)
 			li
-				line-height: 2.625
 				width: 33.33%
 			a
 				overflow: hidden
@@ -138,6 +154,18 @@
 		&__ressorts-item--featured
 			a
 				vertical-align: remify(-10px)
+		&__ressorts-item--has-label
+			clear: left
+			display: list-item
+			line-height: 2
+			& + &
+				clear: none
+			&:before
+				content: "Anzeige" // override any plural form used in desktop view
+				margin: 0
+			// specificity hack
+			@at-root li#{&}
+				margin: remify(16px 0 0)
 
 		&__services
 			border-bottom: 1px solid $color-border
@@ -227,9 +255,8 @@
 
 		&__ressorts
 			border-bottom: 1px solid $color-border
-			li
-				font-size: remify(14px)
-				line-height: remify(36px)
+			font-size: remify(14px)
+			line-height: remify(36px)
 			a
 				&:hover,
 				&:focus,
@@ -257,26 +284,13 @@
 		.js &__ressorts-item--featured
 			margin-left: auto // align right @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
 
-		&__dropdown-item--has-label,
-		&__ressorts-item--has-label
+		&__dropdown-item--has-label
 			background-color: #FAFAF3
 			border-top: 1px solid $color-border
-			&:before
-				color: $zon-mid-grey
-				content: "Anzeige" // fallback incapable browsers
-				content: attr(data-label)
-				display: block
-				font-size: remify(9px)
-				letter-spacing: .15em
-				line-height: 1
-				margin: remify(0 0 0 10px)
-				padding: remify(8px 0 0)
-				text-align: left
-				text-transform: uppercase
 			& + &
 				border-top: none
 				&:before
-					display: none
+					content: none
 
 		&__ressorts-link--current
 			font-weight: bold

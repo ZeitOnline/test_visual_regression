@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-434: Use image variant `stripe` for article series banderole
 
+- ZON-3193: Show advertorial links in mobile navigation
+
 
 2.93 (2016-07-19)
 -----------------
