@@ -9,8 +9,9 @@ import pyramid.threadlocal
 import zeit.cms.interfaces
 
 from zeit.web.core.template import default_image_url
-import zeit.web.core.utils
+import zeit.web.core.centerpage
 import zeit.web.core.template
+import zeit.web.core.utils
 
 
 @pytest.fixture
@@ -36,7 +37,7 @@ def test_get_reaches_from_centerpage_view(application):
         'http://xml.zeit.de/zeit-magazin/buzz')
     block = zeit.web.core.utils.find_block(
         cp, module='zmo-mostread')
-    buzz = zeit.web.core.template.get_module(block).reach
+    buzz = zeit.web.core.centerpage.get_module(block).reach
 
     buzz_views = buzz.get_views(section='zeit-magazin')[1].score
     buzz_facebook = buzz.get_social(

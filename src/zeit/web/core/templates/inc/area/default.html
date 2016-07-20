@@ -5,7 +5,7 @@
     {% profile %}
     {% block before_module_list %}{% endblock %}
     {% block module_list %}
-        {% for module in area.values() | map('get_module') -%}
+        {% for module in area.values() -%}
             {# XXX Is using the rather teaser-specific mechanisms of first_child
                and get_layout for all modules really such a good idea? #}
             {% set teaser = module | first_child %}

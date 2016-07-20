@@ -15,7 +15,7 @@
 				<p class="{{ '{}__description'.format(blockname) | with_mods(atom_modifier) }}">
 					{{ atom.tldr_text or atom.teaserText }}&nbsp;<a class="{{ blockname }}__link" href="{{ atom.uniqueId | create_url }}">mehr lesen</a>
 				</p>
-				{% set image = get_image(module) %}
+				{% set image = get_image(module, fallback=False) %}
 				{% if image and atom is not column %}
 					{% set href = atom.uniqueId | create_url %}
 					{% set module_layout = blockname %}

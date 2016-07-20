@@ -17,19 +17,17 @@
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url | append_campaign_params }}" itemprop="mainEntityOfPage">
                     {% block teaser_kicker %}
-                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
-                            {% block teaser_journalistic_format -%}
-                                {% if teaser.serie -%}
-                                    <span class="series-label">{{ teaser.serie.serienname }}</span>
-                                {% elif teaser.blog -%}
-                                    <span class="blog-label">{{ teaser.blog.name }}</span>
-                                {%- endif %}
-                            {%- endblock teaser_journalistic_format %}
-
-                            <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
-                        </span>
-                        {%- if teaser.teaserSupertitle or teaser.supertitle -%}
-                            <span class="visually-hidden">: </span>
+                        {% if teaser.teaserSupertitle or teaser.supertitle %}
+                            <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
+                                {% block teaser_journalistic_format -%}
+                                    {% if teaser.serie -%}
+                                        <span class="series-label">{{ teaser.serie.serienname }}</span>
+                                    {% elif teaser.blog -%}
+                                        <span class="blog-label">{{ teaser.blog.name }}</span>
+                                    {%- endif %}
+                                {%- endblock teaser_journalistic_format %}
+                                {# There must be no whitespace between kicker and : (for Google(News) representation) #}
+                                <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span></span><span class="visually-hidden">: </span>
                         {%- endif %}
                     {% endblock %}
                     {% block teaser_title %}

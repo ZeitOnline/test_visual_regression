@@ -1,27 +1,5 @@
 {% extends "zeit.web.site:templates/layout.html" %}
 
-{% block metadata %}
-    <div class="header__metadata">
-    {%- require topics = view.is_hp and view.context | topic_links -%}
-        <div class="header__tags" data-ct-row="article-tag">
-            <span class="header__tags__label">{{ topics.title }}</span>
-            {% for label, link in topics %}
-            <a href="{{ link }}" class="header__tags__link">{{ label }}</a>
-            {% endfor %}
-        </div>
-    {%- endrequire -%}
-
-    {%- if view.is_hp -%}
-        {% set date = view.date_last_modified | format_timedelta(hours=3) %}
-        {% if date %}
-        <div class="header__date">
-            <time datetime="{{ view.date_last_modified | format_date('iso8601') }}">Aktualisiert {{ date }}</time>
-        </div>
-        {% endif %}
-    {%- endif -%}
-    </div>
-{% endblock metadata %}
-
 {% block main %}
     {% for region in view.regions %}
         {% set region_loop = loop %}

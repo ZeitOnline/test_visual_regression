@@ -1,3 +1,4 @@
 {% set module = block %}
-{% include ["{}:templates/inc/module/cardstack.html".format(view.package),
-            "zeit.web.core:templates/inc/module/cardstack.html"] %}
+<div class="cardstack article__item article__item--apart">
+    {% include "zeit.web.core:templates/inc/module/cardstack.html" %}
+</div>
