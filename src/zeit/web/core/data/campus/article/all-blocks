@@ -120,6 +120,8 @@
         <copyright link="http://foo.de">©foo</copyright>
       </image>
       <p>Obcaecati praesentium labore doloribus iusto eum accusantium delectus cupiditate quaerat error, placeat, sapiente rem. Soluta natus dolore reiciendis ratione quod.</p>
+      <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" align="left" layout="column-width"></image>
+      <p>Similique saepe accusantium officia asperiores quo velit aliquam nobis accusamus placeat quibusdam iste, sit debitis perferendis inventore tenetur fugit molestias delectus ex recusandae porro.</p>
       <infobox href="http://xml.zeit.de/zeit-online/article/info-bonobo" is_empty="False" />
       <p>Consectetur repellendus asperiores, nemo saepe quia excepturi quod nihil at dolorem nam commodi molestiae delectus molestias.</p>
       <gallery href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" contenttype="gallery"></gallery>

@@ -30,18 +30,9 @@
 				min-width: 100%
 				width: auto
 	&__media-container
-		background-color: $color-video-background
+		+plain-transparent-overlay($alpha: 0.5)
+		background-color: $color-dark-background
 		height: 100%
-		&:after
-			background-color: rgba(0, 0, 0, .5)
-			bottom: 0
-			content: ''
-			left: 0
-			min-height: 100%
-			min-width: 100%
-			position: absolute
-			right: 0
-			top: 0
 
 .teaser-topic-main
 	position: relative

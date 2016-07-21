@@ -365,3 +365,18 @@ def test_overridden_adcontroller_values(application, dummy_request):
         ('tma', '')]
     view = zeit.web.campus.view_centerpage.Centerpage(cp, dummy_request)
     assert adcv == view.adcontroller_values
+
+
+def test_teaser_topic_link_title_should_match_kicker_and_headline(testbrowser):
+    browser = testbrowser('/campus/centerpage/teaser-topic-variant')
+    media_link_title = browser.cssselect(
+        '.teaser-topic-variant__media-container a')[0].get('title')
+    combined_link_title = browser.cssselect(
+        '.teaser-topic-wide__combined-link')[0].get('title')
+    assert media_link_title == combined_link_title
+
+
+def test_cardstack_teaser_produces_correct_html(testbrowser):
+    browser = testbrowser('/campus/centerpage/cardstack')
+    teaser = browser.cssselect('.cp-cardstack')
+    assert len(teaser) == 1

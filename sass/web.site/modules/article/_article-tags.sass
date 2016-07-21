@@ -5,9 +5,13 @@ $article-tags-margin-right-large: 16px
 	font-size: em(15px)
 	letter-spacing: $zon-letter-spacing-s
 	margin: $vertical-space auto remify(32px)
+	&--video
+		margin: remify(50px) auto remify(50px)
 	&__title
 		color: $zon-dark-grey
 		margin: remify(0 0 4px)
+		&--video
+			color: $zon-mid-grey
 	&__list
 		+clearfix
 		list-style-type: none
@@ -25,6 +29,13 @@ $article-tags-margin-right-large: 16px
 		display: block
 		margin: remify(7px $article-tags-margin-right-small 0 0)
 		padding: remify(4px 12px 5px)
+		&--video
+			background-color: #FFF
+			background-color: rgba(255, 255, 255, 0.1)
+			+link
+				color: $zon-mid-grey
+			+on-interaction
+				color: $zon-light-grey
 
 +respond-min($break-tablet-min)
 	.article-tags

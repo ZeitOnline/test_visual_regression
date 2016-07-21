@@ -800,3 +800,33 @@ def test_article_contains_zeit_clickcounter(testbrowser):
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=zeitmz/essenundtrinken/article'
             ) in counter[0].get('src')
+
+
+def test_article_tags_are_present_and_limited_in_article(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/03')
+    tags = browser.cssselect('.article-tags')
+    links = tags[0].cssselect('a[rel="tag"]')
+
+    assert len(tags) == 1
+    assert len(tags[0].find_class('article-tags__title')) == 1
+    assert len(links) == 6
+
+
+def test_article_tags_are_present_and_limited_in_gallery(testbrowser):
+    browser = testbrowser('/galerien/bg-automesse-detroit-2014-usa')
+    tags = browser.cssselect('.article-tags')
+    links = tags[0].cssselect('a[rel="tag"]')
+
+    assert len(tags) == 1
+    assert len(tags[0].find_class('article-tags__title')) == 1
+    assert len(links) == 6
+
+
+def test_article_tags_are_present_and_limited_in_longform(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/05')
+    tags = browser.cssselect('.article-tags')
+    links = tags[0].cssselect('a[rel="tag"]')
+
+    assert len(tags) == 1
+    assert len(tags[0].find_class('article-tags__title')) == 1
+    assert len(links) == 6

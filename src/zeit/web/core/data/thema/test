@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="keywordpage">
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="topicpage">
   <head>
     <header_image/>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -21,7 +21,7 @@
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Administratives</attribute>
     <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
     <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
-    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">keywordpage</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">topicpage</attribute>
     <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">01</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
@@ -48,12 +48,13 @@
   </head>
   <body>
     <title>Test-Thema</title>
-    <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True">
-      <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e" kind="solo" visible="True">
-        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526" cp:type="cpextra" module="centerpage-header">
-          <cp_extra id="centerpage-header"/>
+    <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True" visible_mobile="True" kind_title="Solo-Region">
+      <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e" kind="solo" visible="True" visible_mobile="True">
+        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526" cp:type="headerimage" module="headerimage" supertitle="" title="Test-Thema">
         </container>
       </region>
+    </cluster>
+    <cluster area="id-c993c09c-2a27-4aa8-87da-fecaf8797606" kind="solo" visible="True" visible_mobile="True" kind_title="Simple-Region">
       <region area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="query" count="10" hide-dupes="True" kind="ranking" visible="True">
         <container cp:__name__="id-a620cc6b-00e4-4635-a808-a31c8dbdb7f4" cp:type="auto-teaser" module="zon-small" visible="True"/>
         <container cp:__name__="id-b895d982-47ab-401f-9b70-6aeeb46cb46a" cp:type="auto-teaser" module="zon-small" visible="True"/>

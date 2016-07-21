@@ -51,14 +51,17 @@
 	+respond-min($break-1)
 		font-size: em(30px)
 
-.x-subheadline
-	border-bottom: 1px solid $grey--light
+.x-subheadline,
+.x-subheadline--borderless
 	font-size: em(18px)
 	margin-bottom: .5em
 	margin-top: .5em
-	padding-bottom: .5rem
 	+respond-min($break-3)
 		font-size: em(20px)
+
+.x-subheadline
+	border-bottom: 1px solid $grey--light
+	padding-bottom: .5rem
 
 .x-copytext,
 .x-copytext--size

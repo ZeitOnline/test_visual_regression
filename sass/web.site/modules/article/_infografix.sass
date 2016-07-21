@@ -48,14 +48,17 @@
 	+respond-min($break-desktop-min)
 		font-size: em(24px)
 
-.x-subheadline
-	border-bottom: 1px solid $color-border
+.x-subheadline,
+.x-subheadline--borderless
 	font-size: em(18px)
 	margin-bottom: .5rem
 	margin-top: .5rem
-	padding-bottom: .5rem
 	+respond-min($break-desktop-min)
 		font-size: em(20px)
+
+.x-subheadline
+	border-bottom: 1px solid $color-border
+	padding-bottom: .5rem
 
 .x-copytext,
 .x-copytext--size

@@ -156,7 +156,7 @@ def test_buzzboard_provides_expected_webtrekk_strings(
         ('.nav__ressorts a',
          'topnav.mainnav.1..politik'),
         # tags
-        ('.header__tags a',
+        ('*[data-ct-row="article-tag"] a',
          'topnav.article-tag.1..griechenland_krise')
     ])
 def test_navi_provides_expected_webtrekk_strings(
