@@ -167,7 +167,8 @@ class RenderedRegion(zeit.content.cp.area.Region):
     def values(self):
         if not hasattr(self, '_v_values'):
             self._v_values = [IRendered(get_area(x))
-                              for x in super(RenderedRegion, self).values()]
+                              for x in super(RenderedRegion, self).values()
+                              if getattr(x, 'visible', True)]
         return self._v_values
 
 
