@@ -44,30 +44,6 @@
 			.header__menu-icon--menu
 				display: none
 
-	&__metadata
-		+clearfix
-		color: $zon-dark-grey
-		display: none
-		font-size: em(11px)
-		letter-spacing: $letter-spacing-l
-		line-height: 1rem
-		margin: remify(12px 0 7px)
-		text-transform: uppercase
-
-	&__tags
-		display: inline-block
-
-	&__tags__label
-		font-weight: bold
-		padding-right: 1em
-
-	&__tags__link
-		@extend %tags
-
-	&__date
-		float: right
-		padding-top: 5px
-
 
 	+respond-min($break-tablet-min)
 		padding: remify(10px $page-padding 0)
@@ -88,8 +64,3 @@
 
 		&__menu-link
 			display: none
-
-		&__metadata
-			display: block
-			&:empty
-				display: none

@@ -1,8 +1,26 @@
 Change log for zeit.web
 =======================
 
-2.93 (unreleased)
+2.94 (unreleased)
 -----------------
+
+- BUG-421: Show fill_color for proxy content
+
+- BUG-434: Use image variant `stripe` for article series banderole
+
+- BUG-460: Fix unclickable video thumbnail and unstoppable video in video stage
+
+- ZON-2863: Show tags in video pages
+
+- ZON-3151: Implement Campus Embed Header
+
+- ZON-3193: Show advertorial links in mobile navigation
+
+
+2.93 (2016-07-19)
+-----------------
+
+- BUG-453: Fix cardstacks in ZEIT Campus articles
 
 - BUG-452: Don't show fallback images for storystream atoms
 
@@ -15,6 +33,8 @@ Change log for zeit.web
 - BUG-461: Show table of contents before lists
 
 - BUG-462: Add missing data attributes for storystream teaser
+
+- ZON-1578: Show keywords in mobile navigation
 
 - ZON-2734: Update header for series, topics and dynamic pages
 

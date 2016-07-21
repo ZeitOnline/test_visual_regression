@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <header/>
+    <author href="http://xml.zeit.de/autoren/B/Patrick_Beuth/index" publication-date="" expires="">
+      <display_name>Patrick Beuth</display_name>
+    </author>
+    <image base-id="http://xml.zeit.de/digital/mobil/2016-07/nexar-dashcam-app-iphone-kennzeichen-datenbank-bild/" type="jpg" title="Nexar" alt="Screenshot aus der Nexar-App" publication-date="" expires="">
+      <bu>Screenshot aus der Nexar-App</bu>
+      <copyright>© Nexar</copyright>
+    </image>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/digital/datenschutz/2014-08/dashcam-auto-kamera-datenschutz" contenttype="article"/>
+    </references>
+    <rankedTags>
+      <tag url_value="app" uuid="480d85d4-ba2e-41a8-b334-11d744946060" score="4" type="free">App</tag>
+      <tag url_value="video" uuid="71b2ddbc-8a58-4b7a-8d1b-b0e4185e8e68" score="4" type="free">Video</tag>
+      <tag url_value="auto" uuid="c43f68cc-9bb8-4474-9976-26ecd1078861" score="4" type="free">Auto</tag>
+      <tag url_value="autofahrer" uuid="05d3d93c-98ef-43f0-93fd-55c5b5779b10" score="4" type="free">Autofahrer</tag>
+      <tag url_value="privatsphaere" uuid="831496e7-59c4-4284-a147-2761c11217ff" score="4" type="free">Privatsphäre</tag>
+      <tag url_value="iphone" uuid="4f3088cc-1307-49eb-b42f-e837de99e465" score="4" type="free">iPhone</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Patrick Beuth</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Digital Mobil</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-07-13T10:16:33.402901+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-07-13T10:16:36.004532+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-07-13T10:16:36.156975+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-07-13T10:16:36.004532+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-07-13T10:16:35.123606+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-07-13T10:16:31.923556+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.havertz</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/digital/mobil/2016-07/cb6a0422-d0b1-44c4-a25d-8db3ea3a8d41.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">f96c996129864037bbec04db051c3c3e</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Dashcam-App Nexar: Wer rücksichtslos fährt, landet in der Arschloch-Datenbank. (pb)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Mobil</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">4129</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:7288ddab-33b6-43c5-888f-ac55fb363882}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">29</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Nexar</supertitle>
+    <title>Dashcam für Denunzianten</title>
+    <subtitle>Wer rücksichtslos fährt, wird gemeldet und landet in einer öffentlichen Datenbank: So wollen die Entwickler der Dashcam-App Nexar den Straßenverkehr sicherer machen.</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" title="Screenshot aus der Nexar-App" alt="Nexar: Screenshot aus der Nexar-App" publication-date="" expires="" layout="column-width" is_empty="False" alt_local="Nexar: Screenshot aus der Nexar-App" title_local="Screenshot aus der Nexar-App">
+        <bu>Screenshot aus der Nexar-App</bu>
+        <copyright>© Nexar</copyright>
+      </image>
+      <p>Das Arschloch in dem schwarzen Benz hat mich geschnitten!
+Hab ich alles auf Video! Der landet direkt in der öffentlichen Arschloch-Datenbank. <br/></p>
+      <p>Klingt nach einem attraktiven Konzept für eine App, nicht
+wahr? Andere Autofahrer filmen, samt Nummernschild, und wenn sie schlecht
+fahren, wird das für alle in einer Datenbank vermerkt. Taucht das Auto woanders
+auf, werden alle in der Nähe gewarnt.
+
+</p>
+      <p>Das wird, etwas vereinfacht, das Prinzip von <a href="https://www.getnexar.com/" target="_blank">Nexar</a>. Das gleichnamige Unternehmen hat
+gerade <a class="" href="http://www.geektime.com/2016/06/15/israeli-nexar-raises-10-5-million-series-a-to-keep-terrible-drivers-in-check/" target="_blank">gut zehn Millionen US-Dollar Wagniskapital bekommen</a>, weil einigen
+Investoren die Mischung aus Dashcam und Denunziantentum erfolgversprechend
+scheint. <br/></p>
+      <intertitle>iPhone-Sensoren registrieren Vollbremsungen<br/></intertitle>
+      <p>Bisher ist Nexar nur eine kostenlose iOS-App für US-Nutzer.
+Mit ihr wird das iPhone zur Dashcam, es filmt also die Straße vom
+Armaturenbrett aus. Registriert die App über die Sensoren im Smartphone, dass
+der Fahrer scharf bremst oder gar einen Unfall hat, schneidet sie aus den
+vergangenen 20 und den folgenden 20 Sekunden automatisch ein Video (ohne Ton)
+zusammen und lädt es über die Mobilfunkverbindung umgehend auf die
+Nexar-Server. Alternativ können Fahrer den Vorgang selbst auslösen, durch ein
+gesprochenes "Hey Nexar" oder durch die Berührung des
+iPhone-Displays. </p>
+      <p>Die Aufzeichnungen sollen helfen, nach Unfällen gegenüber
+Versicherungen oder auch in Gerichtsprozessen die Schuldfrage zu klären. Aber
+das ist nur der erste Schritt.</p>
+      <p>In einigen Monaten, <a href="http://www.heise.de/tr/artikel/Vorsicht-schlechter-Fahrer-3254812.html" target="_blank">schreibt
+<em>Technology Review</em></a>, soll aus Nexar
+ein Echtzeit-Warnsystem werden, und aus den Videos eine Datenbank für alle
+Nexar-Nutzer. Nexar-Mitgründer und CEO Eran Shir <a href="https://www.getnexar.com/the-road-ahead/" target="_blank">will</a> Fahrer "warnen,
+wenn Sie sich einer gefährlichen Kreuzung nähern, oder Schlaglöchern. Wir
+wollen Sie darauf aufmerksam machen, wenn fünf Autos vor Ihnen jemand scharf
+bremst, so dass Sie rechtzeitig die Spur wechseln können. Wir wollen Sie warnen,
+wenn Sie neben einem Auto fahren, dessen Fahrer jemand anderes zuvor als
+rücksichtslos wahrgenommen hat."</p>
+      <rawtext>
+        <text_reference type="intern" href="http://xml.zeit.de/embed/rawr/auto/auto-rawr-default" publication-date="" expires=""/>
+      </rawtext>
+      <p>Für Letzteres wird die App die Kennzeichen jener Autos
+anzeigen, die sie bei einem Zwischenfall aufnehmen konnte. Der Nutzer wählt
+dann jenes Nummernschild aus, das er melden will.</p>
+      <intertitle>"Objektive Analyse" der Dashcam-Videos<br/></intertitle>
+      <p>In einer E-Mail an ZEIT ONLINE schreibt Shir, dass Fahrer
+beziehungsweise Autos einen Score, eine Punktwertung bekommen sollen,
+"basierend allein auf der objektiven Analyse von Nexar-Videos und anderen
+harten Daten, die wir sammeln". Die Objektivität sollen Software und
+Angestellte sicherstellen. Subjektives Feedback der Nutzer würde nicht in die
+Wertung einfließen.</p>
+      <p>Nach US-Recht ist es zulässig, die
+Nummernschilder anderer Autos zu filmen. Shir sagte <em>Technology Review</em>: "Wenn wir Ihnen sagen, dieses Auto ist in
+unseren Augen gefährlich, ist unserer Meinung nach das richtige Gleichgewicht
+zwischen einem öffentlichen Gut und Privatsphäre erreicht. Wir wollen definitiv
+nicht wissen, woher Sie kommen und wohin Sie fahren."</p>
+      <p>In Deutschland steht dem der <a href="https://www.gesetze-im-internet.de/bdsg_1990/__6b.html" target="_blank">Paragraf 6b des
+Bundesdatenschutzgesetzes</a> entgegen, der für "die Beobachtung
+öffentlich zugänglicher Räume mit optisch-elektronischen Einrichtungen"
+enge Grenzen setzt. Die bisherige Rechtsprechung zum Einsatz von Dashcams und
+zur Verwertung der Aufnahmen ist jedoch uneinheitlich. <a href="http://www.zeit.de/mobilitaet/2016-03/dashcam-autofahrer-gericht-beweis" target="_blank">Als
+Beweismittel nach Unfällen werden</a> die Videos mal zugelassen, mal nicht. <br/></p>
+      <p>Eran Shir ist sich dessen bewusst. Er weist aber auf ein <a href="http://www.olg-stuttgart.de/pb/,Lde/Startseite/Medien/_Dashcam_-Aufnahmen+koennen+zur+Verfolgung+schwerwiegender+Verkehrs-ordnungswidrigkeiten+grundsaetzlich+verwertet+werden/?LISTPAGE=1178164" target="_blank">Urteil
+des Oberlandesgerichts Stuttgart</a> aus dem Mai dieses Jahres hin, nach dem
+zumindest nichts gegen die Verwertung von Dashcam-Aufnahmen bei der Verfolgung
+von "schwerwiegenden Verkehrsordnungswidrigkeiten" spricht. Die
+Veröffentlichung solcher Videos im Internet ist jedoch <a href="http://www.zeit.de/digital/datenschutz/2014-08/dashcam-auto-kamera-datenschutz" target="_blank">nicht
+erlaubt</a> und <a href="http://www.zeit.de/mobilitaet/2014-10/dashcam-bussgeld" target="_blank">kann
+sogar richtig teuer werden</a>.</p>
+      <p>Shir glaubt trotzdem, dass sich in Deutschland "etwas
+ändert". Sein Unternehmen werde jedenfalls in jedem Land, in dem seine App
+auf den Markt kommt, "natürlich nur jene Funktionen anbieten, die legal
+und angemessen sind".</p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Nexar</supertitle>
+    <title>Dashcam für Denunzianten</title>
+    <text>Wer rücksichtslos fährt, wird gemeldet und landet in einer öffentlichen Datenbank: So wollen die Entwickler der Dashcam-App Nexar den Straßenverkehr sicherer machen.</text>
+  </teaser>
+</article>

@@ -50,6 +50,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         'date_first_released',
         'date_last_published',
         'image-base-id',
+        'image-fill-color',
         'last-semantic-change',
         'lead_candidate',
         'product_id',

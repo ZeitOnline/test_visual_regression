@@ -629,17 +629,17 @@ def test_gallery_teaser_should_contain_supertitle(testbrowser):
     assert 'Desktop-Bilder' in kicker.text_content()
 
 
-def test_centerpage_should_have_header_tags(testbrowser):
+def test_homepage_should_have_nav_tags(testbrowser):
     browser = testbrowser('/zeit-online/index')
-    html = lxml.html.fromstring(browser.contents).cssselect
 
-    assert len(html('.header__tags')) == 1
-    assert html('.header__tags__label')[0].text == 'Schwerpunkte'
+    assert browser.cssselect('.nav__tags')
+    assert browser.cssselect('.nav__label')[0].text == 'Schwerpunkte'
 
-    assert len(html('.header__tags__link')) == 3
-    assert html('.header__tags__link')[0].get('href').endswith(
+    tags = browser.cssselect('.nav__tag')
+    assert len(tags) == 3
+    assert tags[0].get('href').endswith(
         '/schlagworte/organisationen/islamischer-staat/index')
-    assert html('.header__tags__link')[0].text == 'Islamischer Staat'
+    assert tags[0].text == 'Islamischer Staat'
 
 
 def test_new_centerpage_renders(testserver):
@@ -2284,3 +2284,17 @@ def test_teaser_link_title_should_match_kicker_and_headline(testbrowser):
     for article in articles:
         links = article.cssselect('a:not([itemprop="url"])')
         assert links[0].get('title') == links[1].get('title')
+
+
+def test_dynamic_cps_consider_teaser_image_fill_color(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
+        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
+                           'harald-martenstein-wideformat')],
+        'image-fill-color': [u'A3E6BB']}]
+
+    browser = testbrowser('/serie/martenstein')
+    image = browser.cssselect('.cp-area--ranking article img')[0]
+
+    assert 'A3E6BB' in image.attrib['data-src']

@@ -9,13 +9,9 @@
       <tag score="4" type="free" url_value="praktikum" uuid="8e4c75a5-c7ad-4373-b85f-64e124e8c66c">Praktikum</tag>
       <tag score="4" type="free" url_value="studienfinanzierung" uuid="31ca4410-3061-423d-ac88-253f64cd6ec5">Studienfinanzierung</tag>
     </rankedTags>
-    <author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="" expires="">
-      <display_name>Wenke Husmann</display_name>
+    <author expires="" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="">
+      <display_name>Anne Mustermann</display_name>
     </author>
-    <image base-id="http://xml.zeit.de/campus/image/strumpfhose/" type="jpg" align="left" publication-date="" expires="">
-      <bu>Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
-      <copyright>© Warner Bros.</copyright>
-    </image>
     <references>
     </references>
     <topic type="intern" href="http://xml.zeit.de/thema/test">
@@ -24,20 +20,18 @@
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="article_id" ns="http://namespaces.zeit.de/CMS/print">556168</attribute>
-    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Wenke Husmann</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Anna Bordel</attribute>
     <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="channels" ns="http://namespaces.zeit.de/CMS/document">Studium Uni-Leben</attribute>
-    <attribute name="genre" ns="http://namespaces.zeit.de/CMS/document">glosse</attribute>
     <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
     <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:14.233424+00:00</attribute>
-    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2016-02-09T07:36:17.773713+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-04-02T10:01:53.437856+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2016-01-10T09:39:17.773713+00:00</attribute>
     <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:18.167553+00:00</attribute>
     <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:17.773713+00:00</attribute>
-    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:16.922711+00:00</attribute>
     <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
     <attribute name="erscheint" ns="http://namespaces.zeit.de/CMS/document">05.05.2015</attribute>
     <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
@@ -48,7 +42,7 @@
     <attribute name="importsource" ns="http://namespaces.zeit.de/CMS/workflow">k4</attribute>
     <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="ipad_template" ns="http://namespaces.zeit.de/CMS/workflow"/>
-    <attribute name="is_amp" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_amp" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="is_instant_article" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="jobname" ns="http://namespaces.zeit.de/CMS/document">Bachelor_HILFE</attribute>
@@ -63,7 +57,7 @@
     <attribute name="page" ns="http://namespaces.zeit.de/CMS/document">100</attribute>
     <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/article/simple</attribute>
     <attribute name="print-publish" ns="http://namespaces.zeit.de/CMS/document">2015-05-05T06:00:00+00:00</attribute>
-    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZSF</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
     <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT Studienführer</attribute>
     <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">c709ca95afcf4b3e9b68a8aab56db53e</attribute>
     <attribute name="publication-id" ns="http://namespaces.zeit.de/CMS/print">1367935288499</attribute>
@@ -104,54 +98,17 @@
     <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
   </head>
   <body>
-    <supertitle>"Der Hobbit"</supertitle>
-    <title>Geht's noch größer? </title>
-    <subtitle>Der letzte Herr-der-Ringe-Hobbit-Teil läuft an. Er ist wieder ein bisschen bombastischer. Was, fragt sich der ermattende Kinobesucher, kommt eigentlich noch auf uns zu?</subtitle>
-    <division xmlns:ns0="http://namespaces.zeit.de/CMS/cp" type="page">
-      <image base-id="http://xml.zeit.de/campus/image/strumpfhose/" type="jpg" align="left" publication-date="" expires="" layout="large" is_empty="False" title="Handlung" alt="Kultur">
-        <bu>Bernie Sanders kommt Hillary Clinton gefährlich nahe. Wenn der Sozialist sie weiter bedrängt, könnte sie nach links ausscheren.</bu>
-        <copyright>© Warner Bros.</copyright>
-      </image>
-      <p>Ducimus eligendi, modi ut temporibus reprehenderit vitae eos laudantium consectetur distinctio architecto.</p>
-      <intertitle>Intertitle</intertitle>
-      <p>Quam minima assumenda quos, nobis asperiores sed, totam similique incidunt, ratione dolorum a suscipit obcaecati officiis!</p>
-      <image base-id="http://xml.zeit.de/campus/image/01-junge-vor-unscharfem-hintergrund" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
-        <bu>Die ist der image sub text</bu>
-        <copyright link="http://foo.de">©foo</copyright>
-      </image>
-      <p>Obcaecati praesentium labore doloribus iusto eum accusantium delectus cupiditate quaerat error, placeat, sapiente rem. Soluta natus dolore reiciendis ratione quod.</p>
-      <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" align="left" layout="column-width"></image>
-      <p>Similique saepe accusantium officia asperiores quo velit aliquam nobis accusamus placeat quibusdam iste, sit debitis perferendis inventore tenetur fugit molestias delectus ex recusandae porro.</p>
-      <infobox href="http://xml.zeit.de/zeit-online/article/info-bonobo" is_empty="False" />
-      <p>Consectetur repellendus asperiores, nemo saepe quia excepturi quod nihil at dolorem nam commodi molestiae delectus molestias.</p>
-      <gallery href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" contenttype="gallery"></gallery>
-      <p>Dolorem molestiae optio ipsa, animi, unde omnis neque numquam temporibus sint incidunt?</p>
-      <ol>
-        <li>Explicabo sit quam ipsam, consectetur accusamus, quas rerum adipisci obcaecati!</li>
-        <li>Nostrum et sit rerum eligendi! Error ipsum reiciendis suscipit voluptas?</li>
-        <li>Fuga hic, deserunt autem voluptates repellat beatae incidunt eveniet unde.</li>
-      </ol>
-      <p>In est fuga, a tempore cumque modi sapiente ipsa, non recusandae rerum ut nobis quaerat at inventore delectus aperiam quam placeat voluptatem ab quis.</p>
-      <quiz quiz_id="103" adreload_enabled="True"/>
-      <quiz quiz_id="104" adreload_enabled="False"/>
-      <p>Aspernatur aperiam, delectus, aliquam cupiditate quisquam ullam excepturi, necessitatibus hic iure qui, blanditiis iste reiciendis magni.</p>
-      <raw alldevices="true">
-        <hr/>
-        <h2>R.A.W.</h2>
-        <hr/>
-      </raw>
-      <ul>
-        <li>Quod odit ut esse aliquam voluptates quasi id.</li>
-        <li>Pariatur iure commodi, accusantium alias blanditiis cupiditate assumenda.</li>
-        <li>Atque totam dolores inventore iusto, doloribus libero exercitationem.</li>
-      </ul>
-      <video format="large" is_empty="True" href="http://xml.zeit.de/campus/video/4193594095001" expires="2016-08-06T04:00:00+00:00" />
-      <p>Harum voluptas explicabo, laborum, perferendis praesentium dolorem.</p>
-      <citation text="Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time!" attribution="Jules Winnfield" url="http://www.imdb.com/title/tt0110912/quotes?item=qt0447099"/>
-      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/administratives/autoreninfos/wenke-husmann-info" publication-date="" expires=""/>
-      <p>Veniam unde itaque necessitatibus voluptates dolores voluptas pariatur fugiat molestias! At, assumenda fuga doloremque recusandae!</p>
-      <p>Veritatis doloribus, laudantium sequi error similique suscipit aperiam quod beatae doloremque tempora perferendis eligendi rem ea laboriosam eos temporibus reiciendis omnis amet expedita cumque. Accusamus maxime iure voluptatum magni in numquam debitis voluptatibus, nulla!</p>
-      <liveblog blogID="158"/>
+    <supertitle>Beratung</supertitle>
+    <title>Hier gibt es Hilfe</title>
+    <byline>von Anna Bordel</byline>
+    <division type="page">
+      <p>
+        An jeder Hochschule gibt es eine Zentrale Studienberatung. Dort können sich Schüler auch beraten lassen, wenn sie noch nicht sicher sind, ob sie überhaupt an dieser
+        Hochschule studieren wollen. Man vereinbart online oder telefonisch einen Termin und bekommt dann alle Infos zum Studium: mögliche Studiengänge, was diese für Inhalte
+        haben, wie sie ablaufen, wie man sich bewirbt und vieles andere. Über Studiengänge kann man sich vorab auch auf den Websites der Hochschulen informieren. Meist sind
+        die einzelnen Studiengänge unter dem Stichwort "Studienangebot" aufgelistet.
+      </p>
+      <quiz quiz_id="136" adreload_enabled="True"/>
     </division>
     <subtitle>Studienwahl? Zentrale Studienberatung! Wohnheimszimmer? Studentenwerk! Lernstress? Psychologische Beratung! Wir haben die wichtigsten Anlaufstellen gesammelt.</subtitle>
   </body>
