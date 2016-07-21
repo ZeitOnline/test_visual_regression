@@ -160,7 +160,9 @@ def test_c1_cms_id_should_correspond_to_context_uuid(
 
 
 def test_c1_content_id_should_correspond_to_traversal_path(
-        testbrowser, dummy_request):
+        testbrowser, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True, 'iqd': True, 'third_party_modules': True}.get)
 
     browser = testbrowser('/zeit-online/article/01?page=2')
     assert browser.headers['C1-Track-Content-ID'] == '/zeit-online/article/01'
@@ -211,7 +213,10 @@ def test_c1_service_id_should_be_included_in_tracking_parameters(
 
 
 def test_c1_origin_should_trigger_js_call_for_cre_client(
-        testbrowser, dummy_request):
+        testbrowser, dummy_request, monkeypatch):
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True, 'iqd': True, 'third_party_modules': True}.get)
 
     browser = testbrowser('/zeit-online/article/simple')
     assert 'cre_client.set_origin( window.Zeit.getCeleraOneOrigin() );' in (
@@ -223,7 +228,10 @@ def test_text_file_content_should_be_rendered(testbrowser):
     assert browser.contents == 'zeit.web\n'
 
 
-def test_c1_include_script_should_define_a_timeout_param(testbrowser):
+def test_c1_include_script_should_define_a_timeout_param(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True, 'third_party_modules': True}.get)
     browser = testbrowser('/zeit-online/article/simple')
     inline = u''.join(browser.xpath('//script/text()'))
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -232,7 +240,9 @@ def test_c1_include_script_should_define_a_timeout_param(testbrowser):
     assert 'timeout: 2000,\n' in inline
 
 
-def test_c1_correct_ressort_on_homepage(testbrowser):
+def test_c1_correct_ressort_on_homepage(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True, 'iqd': True, 'third_party_modules': True}.get)
     browser = testbrowser('/zeit-online/slenderized-index')
 
     assert 'cre_client.set_channel( "homepage" );' in (browser.contents)
