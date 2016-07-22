@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-2691: Add header image alt attribute
 
+- MAINT: Add infografix styles for ZEIT Campus
+
 
 2.93.1 (2016-07-22)
 -------------------
