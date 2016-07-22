@@ -17,7 +17,7 @@
         {% set image = get_image(module, default='cinema') %}
         {# we need to explicitly pass the layout aka block class name #}
         {% set module_layout = blockname %}
-        {% include "zeit.web.site:templates/inc/storystream/inc/headerimage_image.tpl" ignore missing %}
+        {% include "zeit.web.site:templates/inc/storystream/asset/headerimage_image.tpl" %}
 
         <div class="{{ '{}__headercontent'.format(blockname) | with_mods(blockname_modifier) }}">
             <a class="{{ blockname }}__link" href="{{ target_url }}">

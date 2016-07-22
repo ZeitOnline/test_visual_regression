@@ -4,11 +4,13 @@
   <fbia_advertising>true</fbia_advertising>
   <article_lineage>true</article_lineage>
   <instantarticle_interrupts>true</instantarticle_interrupts>
-  <iqd>true</iqd>
+  <iqd>false</iqd>
   <third_party_modules>false</third_party_modules>
   <campus_launch>true</campus_launch>
-  <tracking>true</tracking>
+  <tracking>false</tracking>
   <campus_new_label>true</campus_new_label>
   <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
+  <acquisition_status_ivw>true</acquisition_status_ivw>
+  <acquisition_status_webtrekk>true</acquisition_status_webtrekk>
   <dummy>false</dummy>
 </features>

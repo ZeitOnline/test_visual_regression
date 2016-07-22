@@ -102,6 +102,8 @@ def app_settings(mockserver):
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
         'vivi_zeit.cms_keyword-configuration': (
             'egg://zeit.cms.tagging.tests/keywords_config.xml'),
+        'vivi_zeit.cms_source-acquisition': (
+            'egg://zeit.cms.content/acquisition.xml'),
         'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
         'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
         'vivi_zeit.cms_source-keyword': (
@@ -213,6 +215,7 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.author_biography-questions':
             'egg://zeit.web.core/data/config/author-biography-questions.xml',
+        'vivi_zeit.cms_celery-config': '/dev/null',
         'sso_activate': '',
         'sso_url': 'http://my_sso',
         'sso_cookie': 'my_sso_cookie',

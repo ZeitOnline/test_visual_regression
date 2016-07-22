@@ -81,6 +81,58 @@ def test_image_should_be_fail_if_is_empty_doesnot_exist():
     assert image is None
 
 
+def test_image_should_render_supertitle_and_caption_in_alt_tag():
+    model_block = mock.Mock()
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
+    model_block.is_empty = False
+    header = mock.Mock()
+    xml = ('<image base-id="http://xml.zeit.de/foo">'
+           '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
+           '<copyright>© Justin Lane / dpa</copyright>'
+           '</image>')
+    model_block.xml = lxml.etree.fromstring(xml)
+    with mock.patch(
+            'zeit.content.article.interfaces.IArticle') as article:
+        article(model_block).supertitle = u'New York'
+        article(model_block).title = u'Standard & Poor´s'
+        image = zeit.web.core.block.HeaderImage(model_block, header)
+    assert image.alt == u'New York: Standard & Poor´s Zentrale in New York'
+
+
+def test_image_should_render_caption_in_alt_tag():
+    model_block = mock.Mock()
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
+    model_block.is_empty = False
+    header = mock.Mock()
+    xml = ('<image base-id="http://xml.zeit.de/foo">'
+           '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
+           '<copyright>© Justin Lane / dpa</copyright>'
+           '</image>')
+    model_block.xml = lxml.etree.fromstring(xml)
+    image = zeit.web.core.block.HeaderImage(model_block, header)
+    assert image.alt == u'Standard & Poor´s Zentrale in New York'
+
+
+def test_image_should_render_supertitle_and_title_in_alt_tag():
+    model_block = mock.Mock()
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
+    model_block.is_empty = False
+    header = mock.Mock()
+    xml = ('<image base-id="http://xml.zeit.de/foo">'
+           '<copyright>© Justin Lane / dpa</copyright>'
+           '</image>')
+    model_block.xml = lxml.etree.fromstring(xml)
+    with mock.patch(
+            'zeit.content.article.interfaces.IArticle') as article:
+        article(model_block).supertitle = u'New York'
+        article(model_block).title = u'Standard & Poor´s'
+        image = zeit.web.core.block.HeaderImage(model_block, header)
+    assert image.alt == u'New York: Standard & Poor´s'
+
+
 def test_image_should_decode_html_entities_in_caption():
     model_block = mock.Mock()
     model_block.display_mode = 'large'

@@ -154,9 +154,17 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_module(self):
-        return zeit.web.core.interfaces.IFrontendBlock(
-            zeit.content.article.edit.interfaces.IHeaderArea(
-                self.context).module, None)
+        header = zeit.content.article.edit.interfaces.IHeaderArea(
+            self.context)
+        # XXX The header image still belongs to the body,
+        # so we cannot use block.__parent__
+        block = header.module
+        try:
+            return zope.component.getMultiAdapter(
+                (block, header),
+                zeit.web.core.interfaces.IFrontendBlock)
+        except LookupError:
+            return zeit.web.core.interfaces.IFrontendBlock(block, None)
 
     @zeit.web.reify
     def resource_url(self):
