@@ -1,6 +1,12 @@
 Change log for zeit.web
 =======================
 
+2.93.1 (unreleased)
+-------------------
+
+- BUG-468: Fix storystream teaser image
+
+
 2.93 (2016-07-19)
 -----------------
 
