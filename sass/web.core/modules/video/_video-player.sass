@@ -2,14 +2,8 @@
 // This is used for video stages ("Videoriegel" on home page),
 // video single pages and inline videos in articles.
 .video-player
+	padding-bottom: 100% / 16 * 9
 	position: relative
-	// Both, .video-player and .dropdown, have `position` attributes assigned, hence .video-player
-	// needs to be explicitly layered behind dropdown since it's called afterwards in the markup
-	z-index: 1
-	&:after
-		content: ''
-		display: block
-		padding-top: 56.25% // 16:9
 	&__iframe,
 	&__videotag
 		border: none
@@ -20,4 +14,5 @@
 		right: 0
 		top: 0
 		width: 100%
-		z-index: 4
+		// z-index is still needed to get "above" the video-thumbnail::after gradient on CP video stage
+		z-index: 1
