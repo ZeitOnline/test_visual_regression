@@ -18,6 +18,8 @@ Change log for zeit.web
 
 - ZON-3193: Show advertorial links in mobile navigation
 
+- ZON-2691: Add header image alt attribute
+
 
 2.93 (2016-07-19)
 -----------------
