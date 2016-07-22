@@ -65,7 +65,6 @@
     <body>
         <title>CP-Editor 0.4</title>
 
-        <!-- cluster invisible -->
         <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="False" kind="solo">
             <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
@@ -81,8 +80,6 @@
                     </block>
                 </container>
             </region>
-
-            <!-- region invisible -->
             <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" visible="False" kind="minor">
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008"></block>
@@ -93,7 +90,6 @@
 
         <cluster area="id-19e29491-d40f-4033-a07f-52b752b8b2da" kind="solo" title="Service-Box" visible="True">
             <region area="id-13ae5250-58f2-4d47-8fe9-5c24164389e5" kind="solo" visible="True">
-                <!-- container invisible -->
                 <container cp:__name__="huwaaaaa" cp:type="cpextra" module="servicebox" visible="False">
                     <cp_extra for="zeit.content.cp.interfaces.IArea" id="servicebox" />
                 </container>
