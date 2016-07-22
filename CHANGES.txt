@@ -10,13 +10,16 @@ Change log for zeit.web
 
 - BUG-460: Fix unclickable video thumbnail and unstoppable video in video stage
 
-- BUG-468: Fix storystream teaser image
-
 - ZON-2863: Show tags in video pages
 
 - ZON-3151: Implement Campus Embed Header
 
 - ZON-3193: Show advertorial links in mobile navigation
+
+2.93.1 (2016-07-22)
+-------------------
+
+- BUG-468: Fix storystream teaser image
 
 
 2.93 (2016-07-19)
