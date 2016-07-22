@@ -209,7 +209,7 @@ def test_column_should_have_header_image(testbrowser):
     assert browser.cssselect('div.article__column__headerimage')
     assert browser.cssselect('figure.scaled-image')
     image = browser.cssselect('img.figure__media')[0]
-    assert image.attrib['alt'] == 'Die ist der image sub text'
+    assert image.attrib['alt'] == 'Liebeskolumne: Die ist der image sub text'
 
 
 def test_column_should_not_have_header_image(testbrowser):
