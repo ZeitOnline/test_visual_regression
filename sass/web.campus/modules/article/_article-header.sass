@@ -208,6 +208,8 @@
 	// Embed Header
 	&--embed
 		padding-top: 1px // prevent collapsing margin of child elements
+	&__embed
+		margin: remify(24px auto)
 	&__embed-container
 		display: flex
 		flex-flow: column nowrap
@@ -385,7 +387,8 @@
 			margin-right: -$page-padding
 			margin-top: 0
 			padding-bottom: remify(20px)
-
+		&__embed
+			margin: remify(40px auto)
 		&__embed-container
 			display: block
 
