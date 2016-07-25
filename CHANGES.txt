@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.94 (unreleased)
+2.94 (2016-07-25)
 -----------------
 
 - BUG-421: Show fill_color for proxy content
