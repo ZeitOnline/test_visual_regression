@@ -138,9 +138,6 @@ def get_area(area):
 
 
 def get_module(module):
-    # if a module is not visible do nothing
-    if not getattr(module, 'visible', True):
-        return
     if zeit.web.core.interfaces.IBlock.providedBy(module):
         return module
     elif zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(module):
