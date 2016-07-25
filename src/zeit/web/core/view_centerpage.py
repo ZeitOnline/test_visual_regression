@@ -32,7 +32,7 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         :rtype: list
         """
         return [zeit.web.core.centerpage.IRendered(x)
-                for x in self.context.values() if getattr(x, 'visible', True)]
+                for x in self.context.values() if x.visible]
 
     def __iter__(self):
         for region in self.regions:

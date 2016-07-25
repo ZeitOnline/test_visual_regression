@@ -168,7 +168,7 @@ class RenderedRegion(zeit.content.cp.area.Region):
         if not hasattr(self, '_v_values'):
             self._v_values = [IRendered(get_area(x))
                               for x in super(RenderedRegion, self).values()
-                              if getattr(x, 'visible', True)]
+                              if x.visible]
         return self._v_values
 
 
@@ -177,7 +177,9 @@ class RenderedRegion(zeit.content.cp.area.Region):
 def cache_values_area(context):
     def cached_values(self):
         return self._v_values
-    context._v_values = [get_module(x) for x in context.values()]
+    context._v_values = [get_module(x)
+                         for x in context.values()
+                         if x.visible]
     context.values = cached_values.__get__(context)
     return context
 
