@@ -259,6 +259,10 @@ class Module(object):
         #     during traversal is ever so slightly more horrible. (ND)
         return pyramid.threadlocal.get_current_request()
 
+    @zeit.web.reify
+    def visible(self):
+        return getattr(self.context, 'visible', True)
+
 
 @zope.interface.implementer(zeit.web.core.interfaces.IBlock)
 class TeaserModule(Module, zeit.web.core.utils.nslist):
