@@ -14,13 +14,122 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         uid = $commentForm.attr( 'data-uid' ),
         slideDuration = 300,
         inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
-        sendurl = window.location.href,
+        sendurl = window.location.href;
+
+    /**
+     * comments.js: toggle recommendation link
+     * @function toggleRecommendationLink
+     * @param  {object} link    jQuery object
+     */
+    function toggleRecommendationLink( link ) {
+        var label;
+
+        if ( link.hasClass( 'comment__reaction--active' )) {
+            label = 'Empfehlen';
+        } else {
+            label = 'Empfohlen';
+        }
+
+        link.toggleClass( 'comment__reaction--active' )
+            .find( '.comment__action' ).attr( 'title', label ).html( label );
+    }
+
+    /**
+     * comments.js: hide other forms
+     * @function hideOtherForms
+     */
+    function hideOtherForms() {
+        $commentsBody
+            .find( 'form' )
+            .filter( ':visible' )
+            .velocity( 'slideUp', slideDuration );
+    }
+
+    /**
+     * comments.js: show form
+     * @function showForm
+     * @param  {object} form    jQuery object
+     * @param  {object} comment jQuery object
+     */
+    function showForm( form, comment ) {
+        var animation = 'slideUp';
+
+        if ( form.is( ':hidden' ) ) {
+            hideOtherForms();
+            animation = 'slideDown';
+        }
+
+        form.velocity( animation, slideDuration, function() {
+            form.find( 'textarea' ).focus();
+        });
+    }
+
+    /**
+     * comments.js: enable form submit button
+     * @function enableForm
+     * @param  {object} e event object
+     */
+    function enableForm() {
+        var blank = /^\s*$/.test( this.value );
+
+        $( this.form ).find( '.button' ).prop( 'disabled', blank );
+    }
+
+    function addModeration() {
+        var $comment = $( this ),
+            promoted = $comment.find( '.comment-meta__badge--promoted' ).length,
+            action = promoted ? 'demote' : 'promote',
+            actionLabel = promoted ? 'Redaktionsempfehlung entfernen' : 'Redaktionsempfehlung',
+            cid = this.id.substr( 4 ),
+            modHTML = '' +
+            '<ul class="comment__moderations">' +
+                '<li>' +
+                    '<a class="comment__moderation" href="%ch%/comment/edit/%cid%">' +
+                        'Kommentar bearbeiten' +
+                    '</a>' +
+                '</li>' +
+                '<li>' +
+                    '<a class="comment__moderation js-promote-comment" data-action="%action%" data-cid="%cid%" href="#' + this.id + '">' +
+                        actionLabel +
+                    '</a>' +
+                '</li>' +
+            '</ul>';
+
+        modHTML = modHTML.replace( /%cid%/g, cid )
+            .replace( '%action%', action )
+            .replace( '%ch%', Zeit.communityHost );
+        $comment.find( '.comment__reactions' )
+            .append( modHTML );
+    }
+
+    function adjustRecommendationLinks() {
+
+        if ( uid ) {
+            // highlight recommended comments for logged in user
+            $commentsBody.find( '.js-recommend-comment' ).each( function() {
+                if ( uid === this.getAttribute( 'data-uid' ) ) {
+                    // hide recommendation link for user's own comments
+                    this.style.display = 'none';
+                } else {
+                    // highlight recommended comments for logged in user
+                    var fans = this.getAttribute( 'data-fans' );
+
+                    fans = fans.length ? fans.split( ',' ) : [];
+
+                    if ( fans.indexOf( uid ) !== -1 ) {
+                        toggleRecommendationLink( $( this ) );
+                    }
+                }
+            });
+        }
+
+    }
 
     /**
      * comments.js: reply to comment
      * @function replyToComment
      */
-    replyToComment = function( e ) {
+    function replyToComment( e ) {
         var cid  = this.getAttribute( 'data-cid' ),
             comment = $( this ).closest( '.comment__container' ),
             form = comment.find( '.js-reply-form' );
@@ -42,24 +151,24 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         }
 
         showForm( form, comment );
-    },
+    }
 
     /**
      * comments.js: cancel reply to comment
      * @function cancelReply
      * @param  {object} e event object
      */
-    cancelReply = function( e ) {
+    function cancelReply( e ) {
         e.preventDefault();
 
         $( this ).closest( '.js-reply-form' ).velocity( 'slideUp', slideDuration );
-    },
+    }
 
     /**
      * comments.js: report comment
      * @function reportComment
      */
-    reportComment = function( e ) {
+    function reportComment( e ) {
         var cid  = this.getAttribute( 'data-cid' ),
             comment = $( this ).closest( '.comment__container' ),
             form = comment.find( '.js-report-form' ),
@@ -80,13 +189,13 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         }
 
         showForm( form, comment );
-    },
+    }
 
     /**
      * comments.js: recommend comment
      * @function recommendComment
      */
-    recommendComment = function( e ) {
+    function recommendComment( e ) {
         var cid  = this.getAttribute( 'data-cid' ),
             link = $( this ),
             comment = link.closest( '.comment__container' ),
@@ -145,9 +254,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             }
         });
 
-    },
+    }
 
-    promoteComment = function( e ) {
+    function promoteComment( e ) {
         var link = $( this ),
             action = link.data( 'action' ),
             cid  = link.data( 'cid' ),
@@ -194,62 +303,25 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         .fail( function() {
             link.text( failText );
         });
-    },
-
-    /**
-     * comments.js: toggle recommendation link
-     * @function toggleRecommendationLink
-     * @param  {object} link    jQuery object
-     */
-    toggleRecommendationLink = function( link ) {
-        var label;
-
-        if ( link.hasClass( 'comment__reaction--active' )) {
-            label = 'Empfehlen';
-        } else {
-            label = 'Empfohlen';
-        }
-
-        link.toggleClass( 'comment__reaction--active' )
-            .find( '.comment__action' ).attr( 'title', label ).html( label );
-    },
-
-    /**
-     * comments.js: show form
-     * @function showForm
-     * @param  {object} form    jQuery object
-     * @param  {object} comment jQuery object
-     */
-    showForm = function( form, comment ) {
-        var animation = 'slideUp';
-
-        if ( form.is( ':hidden' ) ) {
-            hideOtherForms();
-            animation = 'slideDown';
-        }
-
-        form.velocity( animation, slideDuration, function() {
-            form.find( 'textarea' ).focus();
-        });
-    },
+    }
 
     /**
      * comments.js: cancel report
      * @function cancelReport
      * @param  {object} e event object
      */
-    cancelReport = function( e ) {
+    function cancelReport( e ) {
         e.preventDefault();
 
         $( this ).closest( '.js-report-form' ).velocity( 'slideUp', slideDuration );
-    },
+    }
 
     /**
      * comments.js: submit report
      * @function submitReport
      * @param  {object} e event object
      */
-    submitReport = function( e ) {
+    function submitReport( e ) {
         e.preventDefault();
 
         var form = this.form,
@@ -291,14 +363,14 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 }
             }
         });
-    },
+    }
 
     /**
      * comments.js: submit comment
      * @function submitComment
      * @param  {object} e event object
      */
-    submitComment = function( e ) {
+    function submitComment( e ) {
         e.preventDefault();
 
         var $form = $( this ),
@@ -376,31 +448,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 }
             }
         });
-    },
+    }
 
-    /**
-     * comments.js: enable form submit button
-     * @function enableForm
-     * @param  {object} e event object
-     */
-    enableForm = function() {
-        var blank = /^\s*$/.test( this.value );
-
-        $( this.form ).find( '.button' ).prop( 'disabled', blank );
-    },
-
-    /**
-     * comments.js: hide other forms
-     * @function hideOtherForms
-     */
-    hideOtherForms = function() {
-        $commentsBody
-            .find( 'form' )
-            .filter( ':visible' )
-            .velocity( 'slideUp', slideDuration );
-    },
-
-    putRewrapperOnReplies = function( $firstReply ) {
+    function putRewrapperOnReplies( $firstReply ) {
         var $rootComment = $firstReply.prev( '.comment' ),
             rewrapperId = $firstReply.data( 'rewrapper-id' ),
             rewrapper = '' +
@@ -411,9 +461,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             '</a>\n';
 
         $firstReply.find( '.comment__container' ).prepend( rewrapper );
-    },
+    }
 
-    updateRewrapperOnReplies = function( $firstReply ) {
+    function updateRewrapperOnReplies( $firstReply ) {
         var $rootComment = $firstReply.prev( '.comment' ),
             rewrapperId = $firstReply.data( 'rewrapper-id' ),
             $answers = $rootComment.nextUntil( '.js-comment-toplevel', '.comment--indented' ),
@@ -422,9 +472,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $rewrapper.find( '.comment__count' ).eq( 0 ).text( '− ' + $answers.length );
         $rewrapper.removeClass( 'comment__rewrapper--loading' );
 
-    },
+    }
 
-    wrapReplies = function() {
+    function wrapReplies() {
         // TODO: Target + Deeplinks testen
         var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
             $target;
@@ -479,9 +529,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
             $replyLinkContainer.remove();
         });
-    },
+    }
 
-    coverReply = function( $firstReply, replyCount ) {
+    function coverReply( $firstReply, replyCount ) {
         var overlayHTML = '' +
             '<div class="comment-overlay">\n' +
                 '<div class="comment-overlay__wrap">\n' +
@@ -493,9 +543,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $firstReply.addClass( 'comment--wrapped' )
             .find( '.comment__body' )
             .append( overlayHTML );
-    },
+    }
 
-    loadReplies = function( e ) {
+    function loadReplies( e ) {
         var $wrapped = $( this ),
             url = $wrapped.data( 'url' ),
             fallbackUrl = $wrapped.data( 'fallbackurl' ),
@@ -547,9 +597,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             $firstReply.after( placeholderHTML );
         }
 
-    },
+    }
 
-    showReplies = function( e ) {
+    function showReplies( e ) {
         var $wrapped = $( this ).closest( '.comment' ),
             selector = '#' + $wrapped.data( 'rewrapper-id' ),
             $link = $( selector ),
@@ -568,9 +618,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             }
         } );
 
-    },
+    }
 
-    hideReplies = function( e ) {
+    function hideReplies( e ) {
         var $root = $( this ).velocity( 'slideUp' ).closest( '.comment' ),
             $answers = $root.nextUntil( '.js-comment-toplevel', '.comment--indented' );
 
@@ -582,72 +632,22 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 $answers.slice( 5 ).hide();
             }
         } );
-    },
+    }
 
-    addModeration = function() {
-        var $comment = $( this ),
-            promoted = $comment.find( '.comment-meta__badge--promoted' ).length,
-            action = promoted ? 'demote' : 'promote',
-            actionLabel = promoted ? 'Redaktionsempfehlung entfernen' : 'Redaktionsempfehlung',
-            cid = this.id.substr( 4 ),
-            modHTML = '' +
-            '<ul class="comment__moderations">' +
-                '<li>' +
-                    '<a class="comment__moderation" href="%ch%/comment/edit/%cid%">' +
-                        'Kommentar bearbeiten' +
-                    '</a>' +
-                '</li>' +
-                '<li>' +
-                    '<a class="comment__moderation js-promote-comment" data-action="%action%" data-cid="%cid%" href="#' + this.id + '">' +
-                        actionLabel +
-                    '</a>' +
-                '</li>' +
-            '</ul>';
-
-        modHTML = modHTML.replace( /%cid%/g, cid )
-            .replace( '%action%', action )
-            .replace( '%ch%', Zeit.communityHost );
-        $comment.find( '.comment__reactions' )
-            .append( modHTML );
-    },
-
-    jumpToComment = function() {
+    function jumpToComment() {
         var comment = $( this.hash );
 
         if ( comment.length ) {
             comment.scrollIntoView();
             return false;
         }
-    },
-
-    adjustRecommendationLinks = function() {
-
-        if ( uid ) {
-            // highlight recommended comments for logged in user
-            $commentsBody.find( '.js-recommend-comment' ).each( function() {
-                if ( uid === this.getAttribute( 'data-uid' ) ) {
-                    // hide recommendation link for user's own comments
-                    this.style.display = 'none';
-                } else {
-                    // highlight recommended comments for logged in user
-                    var fans = this.getAttribute( 'data-fans' );
-
-                    fans = fans.length ? fans.split( ',' ) : [];
-
-                    if ( fans.indexOf( uid ) !== -1 ) {
-                        toggleRecommendationLink( $( this ) );
-                    }
-                }
-            });
-        }
-
-    },
+    }
 
     /**
      * comments.js: initialize
      * @function init
      */
-    init = function() {
+    function init() {
 
         if ( !$comments.length ) {
             return;
@@ -681,7 +681,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $comments.on( inputEvent, '.js-required', enableForm );
 
         $commentsBody.on( 'click', '.js-load-comment-replies', loadReplies );
-    };
+    }
 
     return {
         init: init
