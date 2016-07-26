@@ -156,6 +156,10 @@ def app_settings(mockserver):
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.cp_cp-feed-max-items': '30',
+        'vivi_zeit.content.image_viewport-source': (
+            'egg://zeit.web.core/data/config/image-viewports.xml'),
+        'vivi_zeit.content.image_display-type-source': (
+            'egg://zeit.web.core/data/config/image-display-types.xml'),
         'vivi_zeit.content.image_variant-source': (
             'egg://zeit.web.core/data/config/image-variants.xml'),
         'vivi_zeit.content.image_legacy-variant-source': (
