@@ -7,6 +7,12 @@ Change log for zeit.web
 - Nothing changed yet.
 
 
+2.94.1 (2016-07-26)
+-------------------
+
+- HOTFIX: Do not return empty string for `fill_color` property in solr results
+
+
 2.94 (2016-07-25)
 -----------------
 

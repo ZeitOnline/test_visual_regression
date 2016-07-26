@@ -2292,9 +2292,15 @@ def test_dynamic_cps_consider_teaser_image_fill_color(testbrowser):
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
         'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
                            'harald-martenstein-wideformat')],
-        'image-fill-color': [u'A3E6BB']}]
+        'image-fill-color': [u'A3E6BB']}, {
+        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
+        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
+                           'harald-martenstein-wideformat')],
+        'image-fill-color': [u'']}]
 
     browser = testbrowser('/serie/martenstein')
-    image = browser.cssselect('.cp-area--ranking article img')[0]
+    image1 = browser.cssselect('.cp-area--ranking article img')[0]
+    image2 = browser.cssselect('.cp-area--ranking article img')[1]
 
-    assert 'A3E6BB' in image.attrib['data-src']
+    assert image1.attrib['data-src'].endswith('__A3E6BB')
+    assert not image2.attrib['data-src'].endswith('__')
