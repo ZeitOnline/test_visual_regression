@@ -45,7 +45,7 @@
             {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
         </div>
     {%- endif %}
-{%- endmacro %}
+{%- endmacro %}x
 
 {% macro paragraph(html) -%}
     <p class="is-constrained is-centered">

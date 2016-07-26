@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+    <head>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">1094383</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Marie Schmidt</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-08T09:25:41.497174+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">26.09.2013</attribute>
+        <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2013-40-Gentrifizierung-Mnchen</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.default</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">Gentrifizierung M�nchen</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-10-08T09:25:41.176681+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.weihser</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">Gentrifizierung M�nchen</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">64</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1d19d1df864c492188198be0291ff993</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2013-10-03T03:11:20+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Testserie</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">mode-design</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Feuilleton</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2013-40</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">9017</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:a798c5df-ee19-42aa-b8a5-2afa05ea3506}</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">40</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+      &lt;initialized_object&gt;
+        &lt;klass&gt;
+          &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+        &lt;/klass&gt;
+        &lt;arguments&gt;
+          &lt;tuple&gt;
+            &lt;global name="Article" module="zeit.content.article.article"/&gt;
+            &lt;global name="Interface" module="zope.interface"/&gt;
+            &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+            &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+          &lt;/tuple&gt;
+        &lt;/arguments&gt;
+      &lt;/initialized_object&gt;
+    &lt;/pickle&gt;</attribute>
+    </head>
+    <body>
+        <supertitle>Gentrifizierung</supertitle>
+        <title>Mei, is des traurig!</title>
+        <subtitle>Die Münchner Schoppenstube hat dichtgemacht. Was erzählt uns das über die Gentrifizierung? Ein Erklärungsversuch.</subtitle>
+        <byline>von  Marie Schmidt</byline>
+        <division type="page">
+            <intertitle>Die Käufer spekulieren auf den kommenden Boom</intertitle>
+            <image align="left" src="http://xml.zeit.de/exampleimages/artikel/04/03.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+                <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
+                <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
+                </image>
+            <p>Die Nacht, die in der Fraunhofer Schoppenstube jahrzehntelang besungen wurde, indem sie nämlich nicht allein zum Schlafen da ist, hat sich dann doch verzogen.</p>
+            <p>Die Nacht, die in der Fraunhofer Schoppenstube jahrzehntelang besungen
+          wurde, indem sie nämlich nicht allein zum Schlafen da ist, hat sich dann doch verzogen.</p>
+          <raw alldevices="true">
+            <hr/>
+            <h2>R.A.W.</h2>
+            <hr/>
+          </raw>
+          <ul>
+            <li>Quod odit ut esse aliquam voluptates quasi id.</li>
+            <li>Pariatur iure commodi, accusantium alias blanditiis cupiditate assumenda.</li>
+            <li>Atque totam dolores inventore iusto, doloribus libero exercitationem.</li>
+          </ul>
+          <ol>
+            <li>Quod odit ut esse aliquam voluptates quasi id.</li>
+            <li>Pariatur iure commodi, accusantium alias blanditiis cupiditate assumenda.</li>
+            <li>Atque totam dolores inventore iusto, doloribus libero exercitationem.</li>
+          </ol>
+          <video format="large" is_empty="True" href="http://xml.zeit.de/campus/video/4193594095001" expires="2016-08-06T04:00:00+00:00" />
+          <p>Den Titel der Armutshauptstadt hat Leipzig vor Kurzem an Dortmund abgegeben, in der Liste der am meisten von Armut bedrohten Großstädte steht die Messestadt jetzt auf Rang zwei. Viele Menschen in der Stadt leben nicht freiwillig am Existenzminimum, sie haben sich nicht bewusst dafür entschieden, mit sehr wenig Geld auszukommen. Aber es gibt auch jene, die sich diese Stadt zum Leben aussuchen, weil sie bei 80 Euro Miete mit 200 Euro Einkommen zur Sicherung ihrer Existenz hinkommen. Wo geht das noch? Wo kann man ein bisschen arbeiten, um jede Menge zu leben?  <br/></p>
+          <image align="left" src="http://xml.zeit.de/exampleimages/artikel/04/04.jpg"  type="jpg" publication-date="" expires="" layout="zmo-medium-center" is_empty="False">
+            <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
+            <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
+          </image>
+          <citation text="Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time!" attribution="Jules Winnfield" url="http://www.imdb.com/title/tt0110912/quotes?item=qt0447099" layout="short"/>
+          <p>In vielen der neu renovierten Häuser mit ihren meist aufwändig sanierten Wohnungen beträgt die Nettokaltmiete pro Quadratmeter bei Neuvermietungen mittlerweile 7,50 Euro oder mehr, hat Dieter Rink, Stadtsoziologe am UFZ Leipzig, beobachtet. Viele von Leipzigs Wächterhäusern, ein <a href="http://www.zeit.de/lebensart/2012-11/zwischennutzung-stadtentwicklung-prinzessinnengaerten" target="_blank" class="">Vorzeige-Konzept der Zwischennutzung</a> für sanierungsbedürftige Bauten, bei dem die Mieter einen geringen Obolus zahlen und dafür die Räumlichkeiten in Eigenarbeit renovieren, werden nach der privaten Instandsetzung teurer weitervermietet. <a href="http://www.querbeet-leipzig.de/" target="_blank" class="">Queerbeet</a>, ein Verein für städtisches Gemeinschaftsgärtnern, musste jüngst seinen Garten im Leipziger Westen aufgeben. Die Bagger sind bereits angerückt, eine neue Kita soll gebaut werden.  </p>
+          <citation text="Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time!" attribution="Jules Winnfield" url="http://www.imdb.com/title/tt0110912/quotes?item=qt0447099" layout="wide"/>
+          <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/administratives/autoreninfos/wenke-husmann-info" publication-date="" expires=""/>
+          <p>Veritatis doloribus, laudantium sequi error similique suscipit aperiam quod beatae doloremque tempora perferendis eligendi rem ea laboriosam eos temporibus reiciendis omnis amet expedita cumque. Accusamus maxime iure voluptatum magni in numquam debitis voluptatibus, nulla!</p>
+      </division>
+      <division xmlns:ns0="http://namespaces.zeit.de/CMS/cp" ns0:__name__="id-678ba457-741c-4c5f-8cde-535405cd0654" type="page" teaser="&quot;Ich möchte Weiblichkeit behaupten&quot;">
+        <liveblog ns0:__name__="id-b79786c1-9be1-4000-b4c2-1b0ad83411ca" blogID="100"/>
+      </division>
+    </body>
+</article>
