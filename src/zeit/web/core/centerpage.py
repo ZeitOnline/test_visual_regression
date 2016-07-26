@@ -266,6 +266,8 @@ class Module(object):
 @zope.interface.implementer(zeit.web.core.interfaces.IBlock)
 class TeaserModule(Module, zeit.web.core.utils.nslist):
 
+    visible = True
+
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
         self.layout = kw.pop('layout', 'default')
