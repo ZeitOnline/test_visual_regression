@@ -13,16 +13,13 @@ require([ 'vendor/require' ], function() {});
 // require anonymous AMD modules here
 require([
     'web.core/menu',
-    'web.core/clicktracking',
-    'web.core/adReload'
+    'web.core/clicktracking'
 ], function(
     menu,
-    clicktracking,
-    adReload
+    clicktracking
 ) {
     menu.init();
     clicktracking.init();
-    adReload.init();
 });
 
 // remove jQuery from global scope
