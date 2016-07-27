@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1978: Hide regions, areas and modules
 
+- BUG-471: make iframes scroll on iOS
+
 
 2.94.1 (2016-07-26)
 -------------------
