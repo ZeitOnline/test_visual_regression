@@ -47,13 +47,17 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
         prevbutton.click()
         # test overlay buttons
         overlaynext = driver.find_element_by_css_selector(onextselector)
-        script = 'return $(".bx-overlay-next").css("opacity")'
+        script = ('return window.getComputedStyle('
+                  'document.querySelector(".bx-overlay-next")'
+                  ').getPropertyValue("opacity")')
         elem_opacity = driver.execute_script(script)
         overlayprev = driver.find_element_by_css_selector(onextselector)
         assert overlaynext
         assert overlayprev
         overlaynext.click()
-        script = 'return $(".bx-overlay-next").css("opacity")'
+        script = ('return window.getComputedStyle('
+                  'document.querySelector(".bx-overlay-next")'
+                  ').getPropertyValue("opacity")')
         elem_opacity_later = driver.execute_script(script)
         overlayprev.click()
         # opacity should have changed
