@@ -784,7 +784,7 @@ def test_reader_revenue_status_should_utilize_feature_toggle(
     assert 'cp28' not in view.webtrekk['customParameter'].keys()
 
 
-def test_reader_revenue_status_should_default_to_free_for_ZEDE(
+def test_reader_revenue_status_should_default_to_free_for_zede(
         dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/02')
@@ -792,7 +792,7 @@ def test_reader_revenue_status_should_default_to_free_for_ZEDE(
     assert view.webtrekk['customParameter']['cp28'] == 'free'
 
 
-def test_reader_revenue_status_should_default_to_registration_for_ZEI(
+def test_reader_revenue_status_should_default_to_registration_for_zei(
         dummy_request, monkeypatch):
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, 'product_id', 'ZEI')
