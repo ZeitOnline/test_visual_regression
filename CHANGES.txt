@@ -1,7 +1,19 @@
 Change log for zeit.web
 =======================
 
-2.94 (unreleased)
+2.95 (unreleased)
+-----------------
+
+- ZON-1978: Hide regions, areas and modules
+
+
+2.94.1 (2016-07-26)
+-------------------
+
+- HOTFIX: Do not return empty string for `fill_color` property in solr results
+
+
+2.94 (2016-07-25)
 -----------------
 
 - BUG-421: Show fill_color for proxy content

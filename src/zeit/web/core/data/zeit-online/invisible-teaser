@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <head>
+        <header_image/>
+        <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+        <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:03.346120+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:09:09.014473+00:00</attribute>
+        <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:08:09.170784+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2015-03-24T17:09:09.014473+00:00</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:00.932648+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.bruenjes</attribute>
+        <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+        <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+        <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+        <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+        <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
+        <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;ICP2015&quot; module=&quot;zeit.content.cp.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+        <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
+        <topiclinks>
+            <topiclink_title>Schwerpunkte</topiclink_title>
+            <topiclink>
+                <topiclink_label_1>Islamischer Staat</topiclink_label_1>
+                <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
+                <topiclink_label_2>Bundeswehr</topiclink_label_2>
+                <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
+                <topiclink_label_3>Hongkong</topiclink_label_3>
+                <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
+            </topiclink>
+        </topiclinks>
+    </head>
+    <body>
+        <title>CP-Editor 0.4</title>
+
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="False" kind="solo">
+            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
+                <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008"></block>
+                </container>
+            </region>
+        </cluster>
+
+        <cluster area="feature" visible="True">
+            <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
+                <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008">
+                    </block>
+                </container>
+            </region>
+            <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" visible="False" kind="minor">
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/01" year="2008"></block>
+                </container>
+            </region>
+
+        </cluster>
+
+        <cluster area="id-19e29491-d40f-4033-a07f-52b752b8b2da" kind="solo" title="Service-Box" visible="True">
+            <region area="id-13ae5250-58f2-4d47-8fe9-5c24164389e5" kind="solo" visible="True">
+                <container cp:__name__="huwaaaaa" cp:type="cpextra" module="servicebox" visible="False">
+                    <cp_extra for="zeit.content.cp.interfaces.IArea" id="servicebox" />
+                </container>
+            </region>
+        </cluster>
+    </body>
+    <feed/>
+    <teaser>
+        <title>CP-Editor 0.4</title>
+    </teaser>
+</centerpage>
