@@ -46,6 +46,14 @@ define( function() {
                 }
             },
             clearQueue: function() {
+                // fix for external jQuery Plugins (e.g. Datenjornalismus)
+                // remove as soon as we find something better
+                if ( this.queue.length ) {
+                    require([ 'jquery' ], function( $ ) {
+                        window.jQuery = window.$ = $;
+                    });
+                }
+
                 for ( var i = 0, l = this.queue.length; i < l; i++ ) {
                     require.apply( window, this.queue[i] );
                 }
