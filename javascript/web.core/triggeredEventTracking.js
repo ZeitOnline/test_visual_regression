@@ -80,20 +80,26 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
         var messageData,
             messageSender,
-            $videoArticle,
-            videoSeries = '', // no series info here. simply send an empty string
-            videoProvider = '',
+            $container,
             videoSize = '',
+            videoSeries = '',
+            videoProvider = '',
+            videoPageUrl = window.location.host + window.location.pathname,
             data,
+            videoData,
             trackingData;
 
         // we blindly assume that there is only one player on the page. ...
         // If in the future we have multiple video players, the ID would need
         // to be sent inside the postMessage. That way we could find the video.
-        $videoArticle = $( '.video-player' );
-        if ( $videoArticle.length > 0 ) {
-            videoProvider = $videoArticle.data( 'video-provider' ) || '';
-            videoSize = $videoArticle.data( 'video-size' ) || '';
+        $container = $( '.video-player' ).closest( 'article, figure[data-video-provider]' );
+
+        if ( $container.length ) {
+            videoData = $container.data();
+            videoSize = videoData.videoSize;
+            videoSeries = videoData.videoSeries;
+            videoProvider = videoData.videoProvider;
+            videoPageUrl = videoData.videoPageUrl || window.location.host + window.location.pathname;
         }
 
         data = [
@@ -103,7 +109,7 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
             videoProvider,
             '', // origin (zdf/reuters)
             eventString,
-            window.location.host + window.location.pathname
+            videoPageUrl
         ];
 
         trackingData = Clicktracking.formatTrackingData( data );
@@ -116,6 +122,7 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
         if ( debugMode ) {
             console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
             console.log( trackingData );
+            window.trackingData = trackingData;
         }
     };
 
