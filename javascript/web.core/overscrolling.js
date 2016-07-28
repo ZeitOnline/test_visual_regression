@@ -42,6 +42,33 @@ define( [
         });
         $( window ).trigger( 'overscroll', { 'action': type } );
     },
+    animateCircle = function( $element, p ) {
+        var r = $element.attr( 'r' ),
+            c = Math.PI * ( r * 2 ),
+            pct;
+        if ( p > 100 ) { p = 100; }
+        if ( p < 0 ) { p = 0; }
+        pct = ( ( 100 - p ) / 100 ) * c;
+        $element.css({ strokeDashoffset: pct });
+    },
+    animateCircleByScroll = function() {
+        var windowBottom = $( window ).scrollTop() + $( window ).height(),
+            elementOffset = $( config.overscrollElement ).offset().top,
+            elementHeight = $( config.overscrollElement ).height(),
+            partOfWay = parseInt( ( windowBottom - elementOffset )  * 100 / elementHeight ),
+            $progressElement = $( config.progressElementBar ),
+            indicatorOffset = $( config.overscrollElement ).offset().top + $( config.overscrollElement + '_indicator' ).height() + 25 + 25;
+        if ( windowBottom >= elementOffset ) {
+            animateCircle( $progressElement, partOfWay );
+        } else {
+            animateCircle( $progressElement, 0 );
+        }
+        if ( windowBottom > indicatorOffset ) {
+            $( config.overscrollElement + '_indicator' ).addClass( 'overscrolling__indicator--fixed' );
+        } else {
+            $( config.overscrollElement + '_indicator' ).removeClass( 'overscrolling__indicator--fixed' );
+        }
+    },
     loadElements = function( options ) {
         // first untie the trigger event
         $( config.triggerElement ).off( 'inview' );
@@ -119,33 +146,6 @@ define( [
                 }
             }
         }, 25 ));
-    },
-    animateCircle = function( $element, p ) {
-        var r = $element.attr( 'r' ),
-            c = Math.PI * ( r * 2 ),
-            pct;
-        if ( p > 100 ) { p = 100; }
-        if ( p < 0 ) { p = 0; }
-        pct = ( ( 100 - p ) / 100 ) * c;
-        $element.css({ strokeDashoffset: pct });
-    },
-    animateCircleByScroll = function() {
-        var windowBottom = $( window ).scrollTop() + $( window ).height(),
-            elementOffset = $( config.overscrollElement ).offset().top,
-            elementHeight = $( config.overscrollElement ).height(),
-            partOfWay = parseInt( ( windowBottom - elementOffset )  * 100 / elementHeight ),
-            $progressElement = $( config.progressElementBar ),
-            indicatorOffset = $( config.overscrollElement ).offset().top + $( config.overscrollElement + '_indicator' ).height() + 25 + 25;
-        if ( windowBottom >= elementOffset ) {
-            animateCircle( $progressElement, partOfWay );
-        } else {
-            animateCircle( $progressElement, 0 );
-        }
-        if ( windowBottom > indicatorOffset ) {
-            $( config.overscrollElement + '_indicator' ).addClass( 'overscrolling__indicator--fixed' );
-        } else {
-            $( config.overscrollElement + '_indicator' ).removeClass( 'overscrolling__indicator--fixed' );
-        }
     };
 
     return {
@@ -159,9 +159,12 @@ define( [
                 if ( 'scrollRestoration' in history ) {
                     history.scrollRestoration = 'manual';
                     var scrollPos = $( config.triggerElement ).position().top - $( window ).height();
-                    $( 'html' ).velocity( 'scroll', { offset: scrollPos, mobileHA: false, complete: function() {
-                        history.pushState( '', document.title, window.location.pathname + window.location.search );
-                    } } );
+                    $( 'html' ).velocity( 'scroll', {
+                        offset: scrollPos,
+                        mobileHA: false,
+                        complete: function() {
+                            history.pushState( '', document.title, window.location.pathname + window.location.search );
+                        } } );
                 } else {
                     if ( debug ) { console.debug( 'exiting to prevent reload hell' ); }
                     return;
