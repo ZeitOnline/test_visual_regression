@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import pyramid.testing
 import pytest
 import re
 
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import InvalidSwitchToTargetException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -219,3 +219,114 @@ def test_article_elements_provide_expected_id_for_webtrekk(
     article_el.click()
     track_str = driver.execute_script("return window.trackingData")
     assert('stationaer.' + article[1] in track_str)
+
+
+def test_video_stage_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}?triggered-event-tracking-debug'
+    driver = selenium_driver
+    driver.set_window_size(980, 800)
+    driver.get(url.format('/zeit-online/video-stage'))
+
+    link = driver.find_element_by_class_name('video-large__combined-link')
+    link.click()
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.frame_to_be_available_and_switch_to_it(
+                (By.CLASS_NAME, 'video-player__iframe')))
+    except (TimeoutException, InvalidSwitchToTargetException):
+        assert False, 'iframe must be available'
+
+    driver.switch_to.default_content()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.video.large.alternative_nobelpreistraeger.brightcove..')
+    assert tracking_data.endswith((
+        '/video/2014-01/1953013471001/'
+        'foto-momente-die-stille-schoenheit-der-polarlichter'))
+
+
+def test_video_block_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}?triggered-event-tracking-debug'
+    driver = selenium_driver
+    driver.set_window_size(980, 800)
+
+    # test ZON article
+    driver.get(url.format('/zeit-online/article/zeit'))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.element_to_be_clickable(
+                (By.CLASS_NAME, 'vjs-big-play-button')))
+    except TimeoutException:
+        assert False, 'Play button must be clickable'
+
+    button = driver.find_element_by_class_name('vjs-big-play-button')
+    button.click()
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.invisibility_of_element_located(
+                (By.CLASS_NAME, 'vjs-big-play-button')))
+    except TimeoutException:
+        assert False, 'Play button must be hidden (video must be playing)'
+
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.video.large..brightcove..')
+    assert tracking_data.endswith((
+        '/video/2014-01/3035864892001/reporter-on-ice-zeit-online-'
+        'sportreporter-christian-spiller-uebt-skispringen'))
+
+    # test Campus article
+    driver.get(url.format('/campus/article/video'))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.element_to_be_clickable(
+                (By.CLASS_NAME, 'vjs-big-play-button')))
+    except TimeoutException:
+        assert False, 'Play button must be clickable'
+
+    button = driver.find_element_by_class_name('vjs-big-play-button')
+    button.click()
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.invisibility_of_element_located(
+                (By.CLASS_NAME, 'vjs-big-play-button')))
+    except TimeoutException:
+        assert False, 'Play button must be hidden (video must be playing)'
+
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.video.large..brightcove..')
+    assert tracking_data.endswith((
+        '/video/2014-01/3035864892001/reporter-on-ice-zeit-online-'
+        'sportreporter-christian-spiller-uebt-skispringen'))
+
+
+def test_video_page_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}?triggered-event-tracking-debug'
+    driver = selenium_driver
+    driver.set_window_size(980, 800)
+    driver.get(url.format(('/video/2014-01/1953013471001/motorraeder-foto-'
+                           'momente-die-stille-schoenheit-der-polarlichter')))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.frame_to_be_available_and_switch_to_it(
+                (By.CLASS_NAME, 'video-player__iframe')))
+    except (TimeoutException, InvalidSwitchToTargetException):
+        assert False, 'iframe must be available'
+
+    driver.switch_to.default_content()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.video.large.alternative_nobelpreistraeger.brightcove..')
+    assert tracking_data.endswith((
+        '/video/2014-01/1953013471001/'
+        'motorraeder-foto-momente-die-stille-schoenheit-der-polarlichter'))
