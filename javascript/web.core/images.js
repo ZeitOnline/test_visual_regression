@@ -18,6 +18,19 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
         isMobile, isDesktop, $triggerRegion;
 
     /**
+     * images.js: mimic ECMAScript 6 String.prototype.endsWith()
+     * @function stringEndsWith
+     * @param  {string} subjectString   haystack
+     * @param  {string} searchString    needle
+     */
+    function stringEndsWith( subjectString, searchString ) {
+        var position = subjectString.length - searchString.length,
+            index = subjectString.indexOf( searchString, position );
+
+        return index !== -1 && index === position;
+    }
+
+    /**
      * images.js: create prefix
      * @function prefix
      * @param  {integer} width width of image
@@ -171,19 +184,6 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
     }
 
     /**
-     * images.js: mimic ECMAScript 6 String.prototype.endsWith()
-     * @function stringEndsWith
-     * @param  {string} subjectString   haystack
-     * @param  {string} searchString    needle
-     */
-    function stringEndsWith( subjectString, searchString ) {
-        var position = subjectString.length - searchString.length,
-            index = subjectString.indexOf( searchString, position );
-
-        return index !== -1 && index === position;
-    }
-
-    /**
      * images.js: show one image by replaceing the src
      * @function showImage
      * @param  {object} $img jquery object with image
@@ -203,6 +203,37 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
                     .removeAttr( 'width' )
                     .removeAttr( 'height' );
             });
+    }
+
+    /**
+     * images.js: prepare one image for loading and/or lazy loading
+     * @function prepareImage
+     * @param  {object} $img           jquery object with img
+     * @param  {Boolean} markLazyImages differ between direct and lazy loaded images
+     * @return {object}                jquery object with img
+     */
+    function prepareImage( $img, markLazyImages ) {
+        var imgData;
+        // remove possible fallback source information
+        $img.removeAttr( 'data-dev-null' );
+        imgData = getImageData( $img );
+        $img
+            .attr( 'width', imgData.width )
+            .attr( 'height', imgData.height )
+            .data( 'source', imgData.source )
+            .data( 'processed', true );
+        // add blank.gif (really, it is) to prevent rendering of broken image icon, if there's no src
+        $img.attr( 'src', function() {
+            return $( this ).attr( 'src' ) || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+        });
+        // add event triggering to tell the world
+        $img.on( 'load', function( e ) {
+            $img.trigger( 'scaling_ready' );
+        });
+        if ( markLazyImages && $img.closest( '.cp-region' ).data( 'lazy' ) === true ) {
+            $img.data( 'tolazyload', true );
+        }
+        return $img;
     }
 
     /**
@@ -264,37 +295,6 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
         if ( inview.length > 0 ) {
             showImages( inview );
         }
-    }
-
-    /**
-     * images.js: prepare one image for loading and/or lazy loading
-     * @function prepareImage
-     * @param  {object} $img           jquery object with img
-     * @param  {Boolean} markLazyImages differ between direct and lazy loaded images
-     * @return {object}                jquery object with img
-     */
-    function prepareImage( $img, markLazyImages ) {
-        var imgData;
-        // remove possible fallback source information
-        $img.removeAttr( 'data-dev-null' );
-        imgData = getImageData( $img );
-        $img
-            .attr( 'width', imgData.width )
-            .attr( 'height', imgData.height )
-            .data( 'source', imgData.source )
-            .data( 'processed', true );
-        // add blank.gif (really, it is) to prevent rendering of broken image icon, if there's no src
-        $img.attr( 'src', function() {
-            return $( this ).attr( 'src' ) || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
-        });
-        // add event triggering to tell the world
-        $img.on( 'load', function( e ) {
-            $img.trigger( 'scaling_ready' );
-        });
-        if ( markLazyImages && $img.closest( '.cp-region' ).data( 'lazy' ) === true ) {
-            $img.data( 'tolazyload', true );
-        }
-        return $img;
     }
 
     /**
