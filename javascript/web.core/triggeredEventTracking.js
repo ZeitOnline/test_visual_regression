@@ -55,38 +55,18 @@ What does this script do?
    tracking. This could be generalized in the future, if/as needed.
 
 ----------------------------------------------------------------------------- */
-define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
+define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
     var EXPECTED_NAME = 'zonTriggeredEventTracking',
         debugMode,
 
         // encapsulate the functions into groups to make the code more readable (hopefully)
         _functions = {
-            helpers: {},
             sendTracking: {},
             handleSpecificPlugin: {},
             dispatch: {}
         },
         init;
-
-    /* -------------------------------------------------------------------------
-    Helper functions for transforming data
-    ------------------------------------------------------------------------- */
-    _functions.helpers.formatWebtrekkTrackingData = function( trackingData ) {
-        var url = trackingData.pop(),
-            slug = trackingData.join( '.' );
-
-        if ( url ) {
-            url = url.replace( /http(s)?:\/\//, '' );
-
-            // For some links, we want to preserve the GET parameters.
-            // Otherwise, remove them!
-            if ( !/\.(social|studiumbox)\./.test( slug ) ) {
-                url = url.split( '?' )[0];
-            }
-        }
-        return slug + '|' + url;
-    };
 
     /* -------------------------------------------------------------------------
     Tracking functions which trigger the actual tracking
@@ -117,7 +97,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
 
         data = [
-            Zeit.breakpoint.getTrackingBreakpoint(),
             'video',
             videoSize,
             videoSeries,
@@ -127,7 +106,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             window.location.host + window.location.pathname
         ];
 
-        trackingData = _functions.helpers.formatWebtrekkTrackingData( data );
+        trackingData = Clicktracking.formatTrackingData( data );
 
         window.wt.sendinfo({
             linkId: trackingData,
