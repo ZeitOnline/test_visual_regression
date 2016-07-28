@@ -309,3 +309,39 @@ def test_dynamic_topic_cp_contains_correct_webtrekk_param(dummy_request):
     view = zeit.web.site.view_centerpage.Centerpage(context, dummy_request)
     assert view.webtrekk['customParameter'][
         'cp26'] == 'centerpage.keywordpage.location'
+
+
+def test_invisible_region_should_not_be_rendered(application, testbrowser):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/invisible-teaser')
+    xml = context.xml
+    visible = len(xml.xpath('//cluster')) - len(xml.xpath(
+        '//cluster[@visible="False"]'))
+    browser = testbrowser('/zeit-online/invisible-teaser')
+    assert len(browser.cssselect('.cp-region')) == visible
+
+
+def test_invisible_area_should_not_be_rendered(application, testbrowser):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/invisible-teaser')
+    xml = context.xml
+
+    visible = len(
+        xml.xpath('//cluster[@visible="True"]/region')) - len(
+        xml.xpath('//region[@visible="False"]'))
+
+    browser = testbrowser('/zeit-online/invisible-teaser')
+    assert len(browser.cssselect('.cp-area')) == visible
+
+
+def test_invisible_module_should_not_be_rendered(application, testbrowser):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/invisible-teaser')
+    xml = context.xml
+    path = '//cluster[@visible="True"]/region[@visible="True"]/container'
+    visible = len(
+        xml.xpath(path)) - len(
+        xml.xpath('//container[@visible="False"]'))
+
+    browser = testbrowser('/zeit-online/invisible-teaser')
+    assert len(browser.cssselect('.cp-area > *')) == visible
