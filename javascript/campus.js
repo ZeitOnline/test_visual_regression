@@ -15,6 +15,7 @@ require([
     'web.core/zeit',
     'web.core/images',
     'web.core/clicktracking',
+    'web.core/triggeredEventTracking',
     'web.core/adReload',
     'web.core/menu',
     'web.core/comments',
@@ -23,6 +24,7 @@ require([
     zeit,
     images,
     clicktracking,
+    triggeredEventTracking,
     adReload,
     menu,
     comments,
@@ -33,6 +35,7 @@ require([
     images.init();
     menu.init();
     clicktracking.init();
+    triggeredEventTracking.init();
     adReload.init();
     zeit.clearQueue();
 
