@@ -365,12 +365,6 @@ def test_debug_breaking_news_default(testbrowser):
     assert not browser.cssselect('.breaking-news-banner')
 
 
-def test_attr_safe_returns_safe_text(application):
-    text = u'10 Saurier sind super % auf Zack'
-    target = 'sauriersindsuperaufzack'
-    assert zeit.web.core.template.attr_safe(text) == target
-
-
 def test_format_webtrekk_returns_safe_text(application):
     text = u'Studium'
     target = 'studium'
