@@ -223,7 +223,7 @@ def test_article_elements_provide_expected_id_for_webtrekk(
 
 def test_video_stage_provides_expected_webtrekk_string(
         selenium_driver, testserver):
-    url = testserver.url + '{}?triggered-event-tracking-debug'
+    url = testserver.url + '{}#debug-clicktracking'
     driver = selenium_driver
     driver.set_window_size(980, 800)
     driver.get(url.format('/zeit-online/video-stage'))
@@ -249,7 +249,7 @@ def test_video_stage_provides_expected_webtrekk_string(
 
 def test_video_block_provides_expected_webtrekk_string(
         selenium_driver, testserver):
-    url = testserver.url + '{}?triggered-event-tracking-debug'
+    url = testserver.url + '{}#debug-clicktracking'
     driver = selenium_driver
     driver.set_window_size(980, 800)
 
@@ -310,7 +310,7 @@ def test_video_block_provides_expected_webtrekk_string(
 
 def test_video_page_provides_expected_webtrekk_string(
         selenium_driver, testserver):
-    url = testserver.url + '{}?triggered-event-tracking-debug'
+    url = testserver.url + '{}#debug-clicktracking'
     driver = selenium_driver
     driver.set_window_size(980, 800)
     driver.get(url.format(('/video/2014-01/1953013471001/motorraeder-foto-'

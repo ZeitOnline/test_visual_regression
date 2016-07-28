@@ -224,7 +224,7 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
     ------------------------------------------------------------------------- */
     init = function() {
 
-        debugMode = document.location.search.indexOf( 'triggered-event-tracking-debug' ) > -1;
+        debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
 
         $( window ).on( 'message', function( event ) {
             _functions.dispatch.dispatchAllMessages( event );
