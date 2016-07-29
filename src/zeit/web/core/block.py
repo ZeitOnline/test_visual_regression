@@ -285,10 +285,6 @@ class Image(Block):
         else:
             instance.src = target.uniqueId
             instance.uniqueId = target.uniqueId
-        if model_block.references.title:
-            instance.attr_title = model_block.references.title
-        if model_block.references.alt:
-            instance.attr_alt = model_block.references.alt
 
         return instance
 
