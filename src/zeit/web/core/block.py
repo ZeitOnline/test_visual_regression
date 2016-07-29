@@ -253,32 +253,27 @@ class Image(Block):
         if getattr(model_block, 'is_empty', False):
             return
 
-        target = None
         referenced = None
         try:
             if model_block.references:
                 referenced = model_block.references.target
         except TypeError:
             pass  # Unresolveable uniqueId
+
+        target = None
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
             target = zeit.web.core.template.get_variant(
                 referenced, model_block.variant_name)
-            if target is not None:
-                group = referenced
-            else:
-                group = None
         else:
             target = referenced
-            group = None
 
         if zeit.web.core.template.expired(target):
             target = None
-
         if not target:
             return
+
         instance = super(Image, cls).__new__(cls, model_block)
         instance.image = target
-        instance.group = group
         if isinstance(target, zeit.web.core.image.VariantImage):
             instance.path = target.path
             instance.fallback_path = target.fallback_path
