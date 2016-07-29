@@ -4,6 +4,59 @@
  * @version  0.1
  */
 define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
+
+    var debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
+
+    function formatTrackingData( trackingData ) {
+        var length = trackingData.unshift( Zeit.breakpoint.getTrackingBreakpoint() ),
+            url = trackingData.pop(),
+            slug = trackingData.join( '.' );
+
+        if ( url ) {
+            url = url.replace( /http(s)?:\/\//, '' );
+
+            // For some links, we want to preserve the GET parameters.
+            // Otherwise, remove them!
+            if ( slug.indexOf( '.social.' ) !== -1 ) {
+                url = $( 'meta[property="og:url"]' );
+                url = url.length ?
+                    url.attr( 'content' ).replace( /http(s)?:\/\//, '' ) :
+                    window.location.host + window.location.pathname;
+            } else if ( slug.indexOf( '.studiumbox.' ) === -1 ) {
+                url = url.split( '?' )[0];
+            }
+        }
+        return slug + '|' + url;
+    }
+
+    /**
+     * returns a string that is webtrekk-safe
+     * This code does the same as format_webtrekk in template-py
+     * @param  {string}     string from
+     * @return {string}     lowercase string that only contains alphanumeric characters and underscore
+     */
+    function sanitizeString( str ) {
+        var map = {
+                'ä': 'ae',
+                'ö': 'oe',
+                'ü': 'ue',
+                'á': 'a',
+                'à': 'a',
+                'é': 'e',
+                'è': 'e',
+                'ß': 'ss'
+            },
+            transliterate = function( m ) {
+                return map[m] || '_';
+            };
+
+        return str
+            .toLowerCase()
+            .replace( /\W/g, transliterate )
+            .replace( /_+/g, '_' )
+            .replace( /^_|_$/g, '' );
+    }
+
     /**
      * trackElement - collection of the different functions to gather the needed info to track smth
      * @type {Object}
@@ -234,57 +287,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 sendOnUnload: 1
             });
         }
-    },
-    formatTrackingData = function( trackingData ) {
-        var length = trackingData.unshift( Zeit.breakpoint.getTrackingBreakpoint() ),
-            url = trackingData.pop(),
-            slug = trackingData.join( '.' );
-
-        if ( url ) {
-            url = url.replace( /http(s)?:\/\//, '' );
-
-            // For some links, we want to preserve the GET parameters.
-            // Otherwise, remove them!
-            if ( slug.indexOf( '.social.' ) !== -1 ) {
-                url = $( 'meta[property="og:url"]' );
-                url = url.length ?
-                    url.attr( 'content' ).replace( /http(s)?:\/\//, '' ) :
-                    window.location.host + window.location.pathname;
-            } else if ( slug.indexOf( '.studiumbox.' ) === -1 ) {
-                url = url.split( '?' )[0];
-            }
-        }
-        return slug + '|' + url;
-    },
-    /**
-     * returns a string that is webtrekk-safe
-     * This code does the same as format_webtrekk in template-py
-     * @param  {string}     string from
-     * @return {string}     lowercase string that only contains alphanumeric characters and underscore
-     */
-    sanitizeString = function( str ) {
-        var map = {
-                'ä': 'ae',
-                'ö': 'oe',
-                'ü': 'ue',
-                'á': 'a',
-                'à': 'a',
-                'é': 'e',
-                'è': 'e',
-                'ß': 'ss'
-            },
-            transliterate = function( m ) {
-                return map[m] || '_';
-            };
-
-        return str
-            .toLowerCase()
-            .replace( /\W/g, transliterate )
-            .replace( /_+/g, '_' )
-            .replace( /^_|_$/g, '' );
-    },
-
-    debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
+    };
 
     return {
         init: function() {

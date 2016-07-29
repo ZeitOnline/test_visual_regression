@@ -31,29 +31,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         return $.inArray( event.originalEvent.origin, configuredOrigin ) > -1;
     },
     /**
-     * check timer and click interval
-     * @param  {object} myconfig configuration section read from json before
-     * @return {bool}
-     */
-    checkClickCount = function( myconfig ) {
-        // do we need a timer?
-        if ( typeof myconfig.time !== 'undefined' && myconfig.time > 0 ) {
-            var now = $.now();
-
-            if ( timer[ myconfig.name ] > now ) {
-                // do not count if timer is set in the future
-                return false;
-            } else {
-                // set timer
-                timer[ myconfig.name ] = now + myconfig.time;
-                // extra
-                return clickCount( myconfig );
-            }
-        } else {
-            return clickCount( myconfig );
-        }
-    },
-    /**
      * check against the interaction interval
      * @param  {object} myconfig configuration section read from json before
      * @return {bool}
@@ -80,6 +57,29 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
 
         return false;
+    },
+    /**
+     * check timer and click interval
+     * @param  {object} myconfig configuration section read from json before
+     * @return {bool}
+     */
+    checkClickCount = function( myconfig ) {
+        // do we need a timer?
+        if ( typeof myconfig.time !== 'undefined' && myconfig.time > 0 ) {
+            var now = $.now();
+
+            if ( timer[ myconfig.name ] > now ) {
+                // do not count if timer is set in the future
+                return false;
+            } else {
+                // set timer
+                timer[ myconfig.name ] = now + myconfig.time;
+                // extra
+                return clickCount( myconfig );
+            }
+        } else {
+            return clickCount( myconfig );
+        }
     },
     /**
      * load configuration from json file
