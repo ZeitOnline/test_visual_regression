@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-1978: Hide regions, areas and modules
 
+- ZON-3198: Remove jQuery from global scope and add slim variant for framebuilder
+
 
 2.94.1 (2016-07-26)
 -------------------
