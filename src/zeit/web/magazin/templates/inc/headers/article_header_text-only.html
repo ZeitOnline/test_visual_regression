@@ -20,6 +20,6 @@
         </span>
     </header>
     {% if view.page_nr == 1 and view.header_module %}
-        {{ blocks[view.header_module|block_type](view.header_module) }}
+        {{ blocks['headerimage'](view.header_module) }}
     {% endif %}
 </div>

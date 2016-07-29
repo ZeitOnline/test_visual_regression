@@ -1,7 +1,19 @@
 Change log for zeit.web
 =======================
 
-2.94 (unreleased)
+2.95 (unreleased)
+-----------------
+
+- ZON-1978: Hide regions, areas and modules
+
+
+2.94.1 (2016-07-26)
+-------------------
+
+- HOTFIX: Do not return empty string for `fill_color` property in solr results
+
+
+2.94 (2016-07-25)
 -----------------
 
 - BUG-421: Show fill_color for proxy content
@@ -15,6 +27,16 @@ Change log for zeit.web
 - ZON-3151: Implement Campus Embed Header
 
 - ZON-3193: Show advertorial links in mobile navigation
+
+- ZON-2691: Add header image alt attribute
+
+- MAINT: Add infografix styles for ZEIT Campus
+
+
+2.93.1 (2016-07-22)
+-------------------
+
+- BUG-468: Fix storystream teaser image
 
 
 2.93 (2016-07-19)
@@ -43,7 +65,6 @@ Change log for zeit.web
 - FIX: Don't show kicker markup if there's no kicker
 
 - MAINT: Move get_module from template to a higher abstraction level
-
 
 
 2.92.1 (2016-07-13)
