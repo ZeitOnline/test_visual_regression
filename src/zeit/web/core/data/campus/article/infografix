@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <header/>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/campus/article/simple"/>
+    </references>
+    <author href="http://xml.zeit.de/autoren/P/Laurie_Penny/index" publication-date="" expires="">
+      <display_name>Laurie Penny</display_name>
+    </author>
+    <topic type="intern" href="http://xml.zeit.de/thema/test">
+      <label>Jung und links</label>
+    </topic>
+    <rankedTags>
+      <tag type="Person" score="7" uuid="0a85567b-bcb5-44f7-8d64-218ebc7a3d33" url_value="david-cameron">David Cameron</tag>
+      <tag type="free" score="4" uuid="15179ac7-2be0-42c7-8981-efcedabc450c" url_value="neoliberalismus">Neoliberalismus</tag>
+      <tag type="free" score="4" uuid="d7603a3f-246c-4d7e-b731-21cc19dd05c2" url_value="opium">Opium</tag>
+      <tag type="free" score="4" uuid="21dfdf92-5b97-4d90-bb34-920ebb47810e" url_value="wellness">Wellness</tag>
+      <tag type="free" score="4" uuid="078cc9e0-5750-47d4-9e34-a6ce7e7d312b" url_value="yoga">Yoga</tag>
+      <tag type="Location" score="3" uuid="4cdeaa2c-2b71-4e66-8e01-d55fc7e3faf6" url_value="bangladesch">Bangladesch</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/campus/image/testbild/" type="jpg" title="Laurie Penny: Die Wohlfühl-Lüge" alt="Laurie Penny: Die Wohlfühl-Lüge" publication-date="" expires="">
+      <bu/>
+      <copyright link="https://www.eyeem.com/p/70999386">© @dunyque/EyeEm</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Laurie Penny</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Campus</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-07-20T06:50:12.985814+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-07-19T14:10:34.687527+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-07-20T06:50:18.377030+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-07-20T06:50:17.934164+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-07-19T14:10:33.994049+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-07-20T06:38:28.058589+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-07-19T14:09:49.276406+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.gerstlauer</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/campus/2016-07/3efe6bda-15b1-4074-9fda-b63cd6460bab.tmp;http://xml.zeit.de/campus/2016-07/links-laurie-penny</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">12258ce832e14cf1a7b67e1e0a1d7361</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Campus</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Jung und links</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Denk positiv, trink Smoothies, mach Yoga, während der Planet brennt. @pennyred über die "Wohlfühl-Ideologie" (akg)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">14406</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:628bfa9a-7fa0-48e0-80f0-bf7611c22c53}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">30</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZCOArticle" module="zeit.campus.interfaces"/&gt;
+        &lt;global name="IZCOContent" module="zeit.campus.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Test</supertitle>
+    <title>Infografix styles</title>
+    <subtitle>Denk positiv, trink Smoothies und mach Yoga, während der Planet brennt. Wenn du dich schlecht fühlst, bist du das Problem. Kann diese Wellness-Ideologie schaden? Ja.</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/campus/image/testbild/" type="jpg" title="Laurie Penny: Die Wohlfühl-Lüge" alt="Laurie Penny: Die Wohlfühl-Lüge" publication-date="" expires="" layout="zco-wide" is_empty="False">
+        <bu/>
+        <copyright link="https://www.eyeem.com/p/70999386">© @dunyque/EyeEm</copyright>
+      </image>
+      <p>Der späte Kapitalismus ist wie die Liebe deines Lebens: Er sieht um einiges weniger trostlos aus, wenn du ihn durch einen Instagram-Filter betrachtest.</p>
+      <raw alldevices="true">
+        <div class="article__item x-spacing">
+          <h1 class="x-headline">.x-headline</h1>
+          <h3 class="x-subheadline">.x-subheadline</h3>
+          <p class="x-copytext">.x-copytext minima provident quas neque fugiat harum quo atque magni, mollitia delectus tempore ea culpa facere hic assumenda, ducimus reiciendis enim, quis inventore optio fuga!</p>
+          <div class="x-footer">
+            .x-footer
+            <span class="x-copyright">.x-copyright</span>
+          </div>
+          <div class="x-caption">.x-caption</div>
+          <div class="x-caption--sans">.x-caption--sans</div>
+          <div class="x-caption--serif">.x-caption--serif</div>
+        </div>
+      </raw>
+      <raw alldevices="true">
+        <style type="text/css">
+          .x-content-column,
+          .x-fullwidth,
+          .x-fullwidth--tablet,
+          .x-fullwidth--phablet,
+          .x-fullwidth--mobile { padding:1em; background-color:#ddd; }
+          hr { border-width: 1px 0 0; border-color: #ddd; border-style: solid; }
+        </style>
+        <div class="x-content-column x-spacing" style="background-color:#edd;">
+          <code>x-content-column</code>
+          <p><em>Immer</em> Textspaltenbreite</p>
+        </div>
+        <div class="x-fullwidth x-spacing" style="background-color:#ded;">
+          <code>x-fullwidth</code>
+          <p><em>Immer</em> bis zum Rand</p>
+        </div>
+        <div class="x-fullwidth--tablet x-spacing" style="background-color:#dde;">
+          <code>x-fullwidth--tablet</code>
+          <p>Bis zum Rand, wenn schmaler als 768 px</p>
+        </div>
+        <div class="x-fullwidth--phablet x-spacing" style="background-color:#eed;">
+          <code>x-fullwidth--phablet</code>
+          <p>Bis zum Rand, wenn schmaler als 520 px</p>
+        </div>
+        <div class="x-fullwidth--mobile x-spacing" style="background-color:#ede;">
+          <code>x-fullwidth--mobile</code>
+          <p>Bis zum Rand, wenn schmaler als 480 px</p>
+        </div>
+        <div class="x-content-column x-fullwidth--phablet x-spacing" style="background-color:#dee;">
+          <code>x-content-column x-fullwidth--phablet</code>
+          <p>
+            Bis zum Rand, wenn schmaler als 520 px<br/>
+            Textspaltenbreite, wenn 520 px und breiter
+          </p>
+        </div>
+        <hr/>
+        <div class="x-content-column x-spacing" style="background-color:#ddd;">
+          <code>x-spacing</code>
+          <p>Normaler vertikaler Abstand, wie bei Bildern und so</p>
+        </div>
+        <hr/>
+        <div class="x-content-column x-spacing--large" style="background-color:#ddd;">
+          <code>x-spacing--large</code>
+          <p>Doppelter vertikaler Abstand</p>
+        </div>
+        <hr/>
+        <div class="x-content-column x-spacing--paragraph" style="background-color:#ddd;">
+          <code>x-spacing--paragraph</code>
+          <p>Absatzabstand</p>
+        </div>
+        <hr/>
+      </raw>
+    </division>
+  </body>
+  <teaser>
+    <title>Die Wohlfühl-Lüge</title>
+    <supertitle>Laurie Penny</supertitle>
+    <text>Denk positiv, trink Smoothies und mach Yoga, während der Planet brennt. Wenn du dich schlecht fühlst, bist du das Problem. Kann diese Wellness-Ideologie schaden? Ja.</text>
+  </teaser>
+</article>

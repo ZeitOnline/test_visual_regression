@@ -167,7 +167,8 @@ class RenderedRegion(zeit.content.cp.area.Region):
     def values(self):
         if not hasattr(self, '_v_values'):
             self._v_values = [IRendered(get_area(x))
-                              for x in super(RenderedRegion, self).values()]
+                              for x in super(RenderedRegion, self).values()
+                              if x.visible]
         return self._v_values
 
 
@@ -176,7 +177,9 @@ class RenderedRegion(zeit.content.cp.area.Region):
 def cache_values_area(context):
     def cached_values(self):
         return self._v_values
-    context._v_values = [get_module(x) for x in context.values()]
+    context._v_values = [get_module(x)
+                         for x in context.values()
+                         if x.visible]
     context.values = cached_values.__get__(context)
     return context
 
@@ -255,9 +258,15 @@ class Module(object):
         #     during traversal is ever so slightly more horrible. (ND)
         return pyramid.threadlocal.get_current_request()
 
+    @zeit.web.reify
+    def visible(self):
+        return getattr(self.context, 'visible', True)
+
 
 @zope.interface.implementer(zeit.web.core.interfaces.IBlock)
 class TeaserModule(Module, zeit.web.core.utils.nslist):
+
+    visible = True
 
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])

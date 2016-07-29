@@ -54,6 +54,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         'last-semantic-change',
         'lead_candidate',
         'product_id',
+        'show_commentthread',
         'serie',
         'supertitle',
         'teaser_text',
@@ -64,6 +65,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     FIELD_MAP = [
         (u'authors', u'authorships'),
+        (u'show_commentthread', u'commentSectionEnable'),
         (u'supertitle', u'teaserSupertitle'),
         (u'teaser_text', u'teaserText'),
         (u'title', u'teaserTitle'),
@@ -195,6 +197,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
                     'video_2': None})
 
         doc.setdefault('lead_candidate', False)
+        doc.setdefault('commentSectionEnable', True)
 
         return doc
 
