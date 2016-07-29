@@ -173,7 +173,8 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
             token = prefix( width, height );
             source = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
         } else {
-            source = source + '__' + width + 'x' + height;
+            source += '__' + width + 'x' + height;
+            source += isMobile ? '__mobile' : '__desktop';
         }
 
         return {

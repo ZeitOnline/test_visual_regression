@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-3198: Remove jQuery from global scope and add slim variant for framebuilder
 
+- ZON-3171: Add target viewport (mobile / desktop) to image URLs
+
 
 2.94.1 (2016-07-26)
 -------------------
