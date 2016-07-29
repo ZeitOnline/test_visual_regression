@@ -3,7 +3,7 @@
 <article class="newsteaser">
     <a class="newsteaser__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
         <time class="newsteaser__time">
-            {{ teaser | mod_date | format_date(pattern='HH:mm') }}
+            {{ teaser | mod_date | format_date(pattern='HH:mm', type='switch_to_date') }}
         </time>
         <div class="newsteaser__text">
             <h2 class="newsteaser__heading">

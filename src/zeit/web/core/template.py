@@ -271,6 +271,10 @@ def format_date(date, type='short', pattern=None):
         text = babel.dates.format_timedelta(delta, threshold=1,
                                             add_direction=True, locale="de_DE")
         return text[:1].lower() + text[1:] if text else ''
+    elif type == 'switch_to_date':
+        delta = date - datetime.datetime.now(date.tzinfo)
+        if delta.days <= int(-1):
+            pattern = 'd. MMM'
     if pattern is None:
         pattern = formats[type]
     # adjust UTC dates to local time
