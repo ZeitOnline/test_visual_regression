@@ -46,6 +46,11 @@ define( function() {
                 }
             },
             clearQueue: function() {
+                // ensure this extended window.Zeit
+                if ( typeof this.queue !== 'object' ) {
+                    return;
+                }
+
                 // fix for external jQuery Plugins (e.g. Datenjornalismus)
                 // remove as soon as we find something better
                 if ( this.queue.length ) {
