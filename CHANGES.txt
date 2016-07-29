@@ -4,6 +4,10 @@ Change log for zeit.web
 2.95 (unreleased)
 -----------------
 
+- BUG-469: Scale down ad place 1 and use iframe in AMPs
+
+- BUG-476: Label ads in AMPs
+
 - ZON-1978: Hide regions, areas and modules
 
 - ZON-3171: Add target viewport (mobile / desktop) to image URLs
