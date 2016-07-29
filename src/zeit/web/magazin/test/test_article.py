@@ -830,3 +830,12 @@ def test_article_tags_are_present_and_limited_in_longform(testbrowser):
     assert len(tags) == 1
     assert len(tags[0].find_class('article-tags__title')) == 1
     assert len(links) == 6
+
+
+def test_infographics_should_display_header_above_image(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/infographic')
+    items = list(browser.xpath('//figure')[0].iterchildren())
+    assert 'Die Entschlackung' == items[0].text
+    assert (
+        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        items[1].text)

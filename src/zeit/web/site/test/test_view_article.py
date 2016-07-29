@@ -1606,3 +1606,28 @@ def test_article_toc_is_printed_before_paragraphs_and_lists(testbrowser):
 
     assert 'article-toc' in first_child.get('class')
     assert page.cssselect('.article-toc + ol.list')
+
+
+def test_infographics_should_display_header_above_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/infographic')
+    items = list(browser.xpath('//figure')[0].iterchildren())
+    assert 'Die Entschlackung' == items[0].text
+    assert (
+        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        items[1].text)
+
+
+def test_infographics_should_display_origin_instead_of_caption(testbrowser):
+    browser = testbrowser('/zeit-online/article/infographic')
+    assert (
+        ['Quelle: Statistisches Bundesamt'] ==
+        browser.xpath('//figure[1]/figcaption/*[1]/text()'))
+
+
+def test_infographics_should_use_customized_css_classes(testbrowser):
+    browser = testbrowser('/zeit-online/article/infographic')
+    assert 'x-caption--sans' in browser.contents
+    assert 'x-copyright' in browser.contents
+    assert 'x-copytext' in browser.contents
+    assert 'x-footer' in browser.contents
+    assert 'x-subheadline' in browser.contents

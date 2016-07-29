@@ -14,6 +14,7 @@ import urlparse
 import zope.component
 import zope.interface
 
+from zeit.content.image.interfaces import INFOGRAPHIC_DISPLAY_TYPE
 import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
@@ -261,9 +262,13 @@ class Image(Block):
             pass  # Unresolveable uniqueId
 
         target = None
+        block_type = None
+        variant = model_block.variant_name
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
-            target = zeit.web.core.template.get_variant(
-                referenced, model_block.variant_name)
+            if referenced.display_type == INFOGRAPHIC_DISPLAY_TYPE:
+                block_type = 'image_infographic'
+                variant = 'original'
+            target = zeit.web.core.template.get_variant(referenced, variant)
         else:
             target = referenced
 
@@ -274,6 +279,12 @@ class Image(Block):
 
         instance = super(Image, cls).__new__(cls, model_block)
         instance.image = target
+        instance.variant_name = variant
+        instance.meta = zeit.content.image.interfaces.IImageMetadata(
+            model_block.references.target, None)
+        if block_type:
+            instance.block_type = block_type
+
         if isinstance(target, zeit.web.core.image.VariantImage):
             instance.path = target.path
             instance.fallback_path = target.fallback_path
@@ -287,7 +298,6 @@ class Image(Block):
         # `legacy_layout` is required for bw compat of the ZCO default variant,
         # which is `portrait` rather the usual `wide`.
         self.legacy_layout = model_block.xml.get('layout', None)
-        self.variant_name = model_block.variant_name
         self.display_mode = model_block.display_mode
         if model_block.display_mode == 'large':
             self.figure_mods = ('wide', 'rimless', 'apart')
