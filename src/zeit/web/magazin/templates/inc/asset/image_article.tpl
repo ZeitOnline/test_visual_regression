@@ -3,6 +3,7 @@
 {% set image = obj %}
 {% set href = image.href %}
 {% set image_itemprop = 'image' %}
+{% set footer_has_border = True if (image.meta.origin and image.copyright) else False %}
 
 {% block media_block -%}
 {{ {'large': 'figure-full-width',
