@@ -21,13 +21,89 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
         paginated = false,
         cache = {},
         inputEvent = ('oninput' in document.createElement('input')) ? 'input' : 'keypress',
-        sendurl = window.location.href;
+        sendurl = window.location.href,
+        toggleComments;
+
+    /**
+     * comments.js: get cached values
+     * @function getCachedValue
+     * @param  {string} key
+     * @return {object}
+     */
+    function getCachedValue(key) {
+        if (key in cache) {
+            return cache[key];
+        }
+
+        switch (key) {
+            case 'buttonUpHeight':
+            case 'commentsHeight':
+            case 'commentsTop':
+            case 'commentsBottom':
+            case 'visibleTop':
+            case 'visibleBottom':
+                var $buttonUp   = $('#js-comments-button-up'),
+                    $buttonDown = $('#js-comments-button-down');
+
+                cache.buttonUpHeight = $buttonUp.height();
+                cache.commentsHeight = $comments.height() - $commentsBody.position().top;
+                cache.commentsTop    = $commentsBody.offset().top;
+                cache.commentsBottom = cache.commentsTop + cache.commentsHeight;
+                cache.visibleTop     = cache.commentsTop + cache.buttonUpHeight;
+                cache.visibleBottom  = cache.commentsTop + cache.commentsHeight - $buttonDown.height();
+                break;
+
+            case 'clientWidth':
+                cache.clientWidth = document.documentElement.clientWidth || document.body.clientWidth || $(document).width();
+                break;
+
+            case 'clientHeight':
+                cache.clientHeight = document.documentElement.clientHeight || document.body.clientHeight || $(window).height();
+                break;
+
+            case 'commentsCss':
+                cache.commentsCss = $comments.css(['top', 'position']);
+                break;
+        }
+
+        if (key in cache) {
+            return cache[key];
+        }
+
+        return null;
+    }
+
+    /**
+     * comments.js: get hidden property
+     * @function getHiddenProperty
+     * @param  {object} element
+     * @param  {string} property
+     * @return {integer}
+     */
+    function getHiddenProperty(element, property) {
+        element.css('display', 'block');
+        var value = element.prop(property);
+        element.css('display', '');
+
+        return value;
+    }
+
+    /**
+     * comments.js: set current offset
+     * @function setCurrentOffset
+     * @param  {integer} offset
+     */
+    function setCurrentOffset(offset) {
+        offset = Math.round(offset);
+        $commentsActiveList.css('top', offset);
+        currentOffset = offset;
+    }
 
     /**
      * comments.js: handles comment pagination
      * @function calculatePagination
      */
-    var calculatePagination = function() {
+    function calculatePagination() {
         var commentsCss = getCachedValue('commentsCss');
 
         $comments.removeClass('show-newer-trigger show-older-trigger');
@@ -48,54 +124,18 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
 
             paginated = true;
         }
-    };
+    }
 
     /**
-     * comments.js: reply to comment
-     * @function replyToComment
+     * comments.js: hide other forms
+     * @function hideOtherForms
      */
-    var replyToComment = function() {
-        var cid  = this.getAttribute('data-cid'),
-            comment = $(this).closest('article'),
-            form = comment.find('.js-reply-form');
-
-        if ( !form.length ) {
-            form = $('#js-comments-form')
-                .clone()
-                .removeAttr('id')
-                .addClass('js-reply-form')
-                .css('display', 'none')
-                .appendTo(comment);
-            form.find('input[type="submit"]').prop('disabled', true);
-            form.find('input[name="pid"]').val(cid);
-        }
-
-        showForm(form, comment);
-    };
-
-    /**
-     * comments.js: report comment
-     * @function reportComment
-     */
-    var reportComment = function() {
-        var cid  = this.getAttribute('data-cid'),
-            comment = $(this).closest('article'),
-            form = comment.find('.js-report-form'),
-            template;
-
-        if ( !form.length ) {
-            template = $( '#js-report-comment-template' ).html();
-            form = $( template )
-                .removeAttr( 'id' )
-                .addClass( 'js-report-form' )
-                .css( 'display', 'none' )
-                .appendTo( comment );
-            form.find( 'input[type="submit"]' ).prop( 'disabled', true );
-            form.find( 'input[name="pid"]' ).val( cid );
-        }
-
-        showForm(form, comment);
-    };
+    function hideOtherForms() {
+        $commentsBody
+            .find( 'form' )
+            .filter( ':visible' )
+            .velocity( 'slideUp', slideDuration );
+    }
 
     /**
      * comments.js: show form
@@ -103,7 +143,7 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
      * @param  {object} form    jQuery object
      * @param  {object} comment jQuery object
      */
-    var showForm = function(form, comment) {
+    function showForm(form, comment) {
         var animation = 'slideUp',
             checkHeight = false;
 
@@ -127,25 +167,129 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
 
             form.find( 'textarea' ).focus();
         });
+    }
+
+    /**
+     * comments.js: close comments on <ESCAPE>
+     * @function escapeComments
+     * @param  {object} e event object
+     */
+    function escapeComments(e) {
+        // do nothing if there is another key involved
+        if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) { return; }
+
+        if (e.keyCode === DOM_VK_ESCAPE) {
+            toggleComments();
+        }
+    }
+
+    /**
+     * comments.js: close comments on click outside the comments section
+     * @function hideComments
+     * @param  {object} e event object
+     */
+    function hideComments(e) {
+        var $target = $(e.target),
+            triggerClick = $target.closest('.js-comments-trigger').length,
+            commentsClick = $target.closest('#js-comments').length;
+
+        if (!triggerClick && !commentsClick) {
+            toggleComments();
+        }
+    }
+
+    /**
+     * comments.js: toggle comments
+     * @function toggleComments
+     */
+    toggleComments = function(e) {
+
+        if ( e ) {
+            e.preventDefault();
+        }
+
+        var $body = $(document.body);
+
+        $body.toggleClass('show-comments');
+
+        // attach event handler function on page, but only for devices without touch support
+        // we can not check reliably for real mouse events here, because e.g. Mobile Safari emulates mouse events
+        if ( !Modernizr.touchevents ) {
+            // and only if comments are shown
+            if ($body.hasClass('show-comments')) {
+                $page.on('mousedown', hideComments);
+                $(window).on('keydown', escapeComments);
+            } else {
+                $page.off('mousedown', hideComments);
+                $(window).off('keydown', escapeComments);
+            }
+        }
     };
+
+    /**
+     * comments.js: reply to comment
+     * @function replyToComment
+     */
+    function replyToComment() {
+        var cid  = this.getAttribute('data-cid'),
+            comment = $(this).closest('article'),
+            form = comment.find('.js-reply-form');
+
+        if ( !form.length ) {
+            form = $('#js-comments-form')
+                .clone()
+                .removeAttr('id')
+                .addClass('js-reply-form')
+                .css('display', 'none')
+                .appendTo(comment);
+            form.find('input[type="submit"]').prop('disabled', true);
+            form.find('input[name="pid"]').val(cid);
+        }
+
+        showForm(form, comment);
+    }
+
+    /**
+     * comments.js: report comment
+     * @function reportComment
+     */
+    function reportComment() {
+        var cid  = this.getAttribute('data-cid'),
+            comment = $(this).closest('article'),
+            form = comment.find('.js-report-form'),
+            template;
+
+        if ( !form.length ) {
+            template = $( '#js-report-comment-template' ).html();
+            form = $( template )
+                .removeAttr( 'id' )
+                .addClass( 'js-report-form' )
+                .css( 'display', 'none' )
+                .appendTo( comment );
+            form.find( 'input[type="submit"]' ).prop( 'disabled', true );
+            form.find( 'input[name="pid"]' ).val( cid );
+        }
+
+        showForm(form, comment);
+    }
 
     /**
      * comments.js: cancel report
      * @function cancelReport
      * @param  {object} e event object
      */
-    var cancelReport = function(e) {
+    function cancelReport(e) {
         e.preventDefault();
 
         $( this ).closest( '.js-report-form' ).velocity( 'slideUp', slideDuration );
-    };
+    }
 
     /**
      * comments.js: submit report
      * @function submitReport
      * @param  {object} e event object
      */
-    var submitReport = function(e) {
+    function submitReport(e) {
         e.preventDefault();
 
         var form = this.form,
@@ -187,14 +331,14 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
                 }
             }
         });
-    };
+    }
 
     /**
      * comments.js: submit comment
      * @function submitComment
      * @param  {object} e event object
      */
-    var submitComment = function( e ) {
+    function submitComment( e ) {
         e.preventDefault();
 
         var $form = $( this ),
@@ -252,14 +396,14 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
                 }
             }
         });
-    };
+    }
 
     /**
      * comments.js: enable form submit button
      * @function enableForm
      * @param  {object} e event object
      */
-    var enableForm = function() {
+    function enableForm() {
         var $form = $( this.form ),
             blank;
 
@@ -268,41 +412,13 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
         });
 
         $form.find( '.button' ).prop( 'disabled', blank.length !== 0 );
-    };
-
-    /**
-     * comments.js: toggle comments
-     * @function toggleComments
-     */
-    var toggleComments = function(e) {
-
-        if ( e ) {
-            e.preventDefault();
-        }
-
-        var $body = $(document.body);
-
-        $body.toggleClass('show-comments');
-
-        // attach event handler function on page, but only for devices without touch support
-        // we can not check reliably for real mouse events here, because e.g. Mobile Safari emulates mouse events
-        if ( !Modernizr.touchevents ) {
-            // and only if comments are shown
-            if ($body.hasClass('show-comments')) {
-                $page.on('mousedown', hideComments);
-                $(window).on('keydown', escapeComments);
-            } else {
-                $page.off('mousedown', hideComments);
-                $(window).off('keydown', escapeComments);
-            }
-        }
-    };
+    }
 
     /**
      * comments.js: initialize layout
      * @function initLayout
      */
-    var initLayout = function() {
+    function initLayout() {
         var commentsCss = getCachedValue('commentsCss');
 
         if (commentsCss.top === '0px') {
@@ -318,7 +434,7 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
 
         // calculate if we need pagination
         calculatePagination();
-    };
+    }
 
     /**
      * comments.js: update layout
@@ -333,40 +449,11 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
     }, 250); // Maximum run of once per 250 milliseconds
 
     /**
-     * comments.js: close comments on click outside the comments section
-     * @function hideComments
-     * @param  {object} e event object
-     */
-    var hideComments = function(e) {
-        var $target = $(e.target),
-            triggerClick = $target.closest('.js-comments-trigger').length,
-            commentsClick = $target.closest('#js-comments').length;
-
-        if (!triggerClick && !commentsClick) {
-            toggleComments();
-        }
-    };
-
-    /**
-     * comments.js: close comments on <ESCAPE>
-     * @function escapeComments
-     * @param  {object} e event object
-     */
-    var escapeComments = function(e) {
-        // do nothing if there is another key involved
-        if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) { return; }
-
-        if (e.keyCode === DOM_VK_ESCAPE) {
-            toggleComments();
-        }
-    };
-
-    /**
      * comments.js: scroll comments list
      * @function scrollComments
      * @param  {object} e event object
      */
-    var scrollComments = function(e) {
+    function scrollComments(e) {
         var direction      = e.target.getAttribute('data-direction'),
             clientHeight   = getCachedValue('clientHeight'),
             windowTop      = $(window).scrollTop(),
@@ -434,7 +521,7 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
         }
 
         setCurrentOffset(newOffset);
-    };
+    }
 
     /**
      * comments.js: ensure visibility of linked comment
@@ -442,7 +529,7 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
      * @param  {object} e      event object
      * @param  {boolean} onload
      */
-    var showComment = function(e, onload) {
+    function showComment(e, onload) {
         var anchor = window.location.hash.slice(1); // remove '#'
 
             if (/^cid-\d/.test(anchor)) {
@@ -484,101 +571,13 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
                     }
                 }
             }
-    };
-
-    //helper functions
-
-    /**
-     * comments.js: get cached values
-     * @function getCachedValue
-     * @param  {string} key
-     * @return {object}
-     */
-    var getCachedValue = function(key) {
-        if (key in cache) {
-            return cache[key];
-        }
-
-        switch (key) {
-            case 'buttonUpHeight':
-            case 'commentsHeight':
-            case 'commentsTop':
-            case 'commentsBottom':
-            case 'visibleTop':
-            case 'visibleBottom':
-                var $buttonUp   = $('#js-comments-button-up'),
-                    $buttonDown = $('#js-comments-button-down');
-
-                cache.buttonUpHeight = $buttonUp.height();
-                cache.commentsHeight = $comments.height() - $commentsBody.position().top;
-                cache.commentsTop    = $commentsBody.offset().top;
-                cache.commentsBottom = cache.commentsTop + cache.commentsHeight;
-                cache.visibleTop     = cache.commentsTop + cache.buttonUpHeight;
-                cache.visibleBottom  = cache.commentsTop + cache.commentsHeight - $buttonDown.height();
-                break;
-
-            case 'clientWidth':
-                cache.clientWidth = document.documentElement.clientWidth || document.body.clientWidth || $(document).width();
-                break;
-
-            case 'clientHeight':
-                cache.clientHeight = document.documentElement.clientHeight || document.body.clientHeight || $(window).height();
-                break;
-
-            case 'commentsCss':
-                cache.commentsCss = $comments.css(['top', 'position']);
-                break;
-        }
-
-        if (key in cache) {
-            return cache[key];
-        }
-
-        return null;
-    };
-
-    /**
-     * comments.js: get hidden property
-     * @function getHiddenProperty
-     * @param  {object} element
-     * @param  {string} property
-     * @return {integer}
-     */
-    var getHiddenProperty = function(element, property) {
-        element.css('display', 'block');
-        var value = element.prop(property);
-        element.css('display', '');
-
-        return value;
-    };
-
-    /**
-     * comments.js: set current offset
-     * @function setCurrentOffset
-     * @param  {integer} offset
-     */
-    var setCurrentOffset = function(offset) {
-        offset = Math.round(offset);
-        $commentsActiveList.css('top', offset);
-        currentOffset = offset;
-    };
-
-    /**
-     * comments.js: hide other forms
-     * @function hideOtherForms
-     */
-    var hideOtherForms = function() {
-        $commentsBody
-            .find( 'form' )
-            .filter( ':visible' )
-            .velocity( 'slideUp', slideDuration );
-    };
+    }
 
     /**
      * comments.js: initialize
      * @function init
      */
-    var init = function() {
+    function init() {
 
         if ( !$comments.length ) {
             return;
@@ -627,7 +626,7 @@ define([ 'jquery', 'velocity.ui', 'modernizr', 'jquery.debounce', 'web.magazin/t
             calculatePagination();
         });
 
-    };
+    }
 
     return {
         init: init

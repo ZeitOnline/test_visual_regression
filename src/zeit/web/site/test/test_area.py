@@ -125,6 +125,10 @@ def test_default_teaser_should_not_expose_ranking_area_proxies(
     log = mock.Mock()
     monkeypatch.setattr(zeit.web.core.utils, 'log', log)
 
+    monkeypatch.setattr(
+        zeit.web.core.comments.Community, 'get_comment_counts',
+        lambda *args: {x: 1 for x in args})
+
     browser = testbrowser('/dynamic/paul-auster')
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 10
 

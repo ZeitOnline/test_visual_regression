@@ -33,11 +33,6 @@
                 var $input = $( that ).find( '.search__input' ),
                     $button = $( that ).find( '.search__button' );
 
-                function showInput() {
-                    $input.addClass( 'search__input--visible' );
-                    $( document ).on( 'click', resetInput );
-                }
-
                 function resetInput( e ) {
                     var searchClick = $( e.target ).closest( '.search__input' ).length;
 
@@ -46,6 +41,11 @@
                         $input.removeClass( 'search__input--visible' );
                         $( document ).off( 'click', resetInput );
                     }
+                }
+
+                function showInput() {
+                    $input.addClass( 'search__input--visible' );
+                    $( document ).on( 'click', resetInput );
                 }
 
                 // event for pressed search button
