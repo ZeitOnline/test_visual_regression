@@ -1619,9 +1619,9 @@ def test_infographics_should_display_header_above_image(testbrowser):
 
 def test_infographics_should_display_origin_instead_of_caption(testbrowser):
     browser = testbrowser('/zeit-online/article/infographic')
-    assert (
-        ['Quelle: Statistisches Bundesamt'] ==
-        browser.xpath('//figure[1]/figcaption/*[1]/text()'))
+    figure = browser.xpath('//figure')[0]
+    caption = figure.xpath('figcaption/*')[0]
+    assert 'Quelle: Statistisches Bundesamt' == caption.text
 
 
 def test_infographics_should_use_customized_css_classes(testbrowser):
