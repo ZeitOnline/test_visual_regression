@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-476: Label ads in AMPs
 
+- BUG-471: make iframes scroll on iOS
+
 - ZON-1978: Hide regions, areas and modules
 
 - ZON-3171: Add target viewport (mobile / desktop) to image URLs
