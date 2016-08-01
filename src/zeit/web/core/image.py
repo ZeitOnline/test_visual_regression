@@ -45,7 +45,7 @@ class BaseImage(object):
             return
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 @grokcore.component.adapter(zeit.content.image.interfaces.IImage)
 class Image(BaseImage):
 
@@ -69,7 +69,7 @@ class Image(BaseImage):
             self.title = meta.title
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 @grokcore.component.adapter(zeit.content.image.interfaces.IImageGroup,
                             zeit.content.image.interfaces.IImage)
 class TeaserImage(BaseImage):
@@ -90,7 +90,7 @@ class TeaserImage(BaseImage):
             self.title = meta.title
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.ITeaserImage)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 @grokcore.component.adapter(zeit.content.image.interfaces.IVariant)
 class VariantImage(object):
 

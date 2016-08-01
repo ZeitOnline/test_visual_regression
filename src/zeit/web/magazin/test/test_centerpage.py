@@ -397,7 +397,7 @@ def test_default_teaser_should_return_default_teaser_image(
     article_context = zeit.cms.interfaces.ICMSContent(article)
     teaser_img = zeit.web.core.template.get_image(
         teaser_block, article_context)
-    assert zeit.web.core.interfaces.ITeaserImage.providedBy(teaser_img)
+    assert zeit.web.core.interfaces.IImage.providedBy(teaser_img)
 
 
 def test_zmo_homepage_identifies_itself_as_homepage(testserver):
@@ -547,7 +547,7 @@ def test_teaser_image_should_be_created_from_image_group_and_image(
                                             'katzencontent/')
     teaser_image = getMultiAdapter(
         (imgrp, img),
-        zeit.web.core.interfaces.ITeaserImage)
+        zeit.web.core.interfaces.IImage)
 
     assert teaser_image.caption == 'Die ist der image sub text '
     assert teaser_image.src == img.uniqueId

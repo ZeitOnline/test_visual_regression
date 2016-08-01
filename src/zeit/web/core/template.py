@@ -49,7 +49,7 @@ def get_variant(group, variant_id, fill_color=None):
         variant.__parent__ = group
         variant.fill_color = fill_color
         try:
-            return zeit.web.core.interfaces.ITeaserImage(variant)
+            return zeit.web.core.interfaces.IImage(variant)
         except TypeError:
             return None
 
@@ -569,15 +569,6 @@ def get_column_image(content, variant_id='original'):
     # need to crop the lower part of the image using CSS, ignoring the ratio.
     return get_image(content=author, variant_id=variant_id, fallback=False,
                      fill_color=None)
-
-
-@zeit.web.register_filter
-def get_image_group(asset):
-    # TRASHME: Should be solved by using get_image on video modules
-    try:
-        return zeit.content.image.interfaces.IImageGroup(asset)
-    except TypeError:
-        return
 
 
 @zeit.web.register_filter
