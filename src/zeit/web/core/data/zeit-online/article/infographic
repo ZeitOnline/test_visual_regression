@@ -60,7 +60,7 @@
     <subtitle/>
     <division type="page">
       <p>Achtung jetzt kommt ein Karton.</p>
-      <image base-id="http://xml.zeit.de/zeit-online/image/bertelsmann-infographic/" type="png" origin="Statistisches Bundesamt" title="Die Entschlackung" alt="Das Wachstum von Bertelsmann" publication-date="" expires="" display_mode="large" variant_name="wide" is_empty="False">
+      <image base-id="http://xml.zeit.de/zeit-online/image/bertelsmann-infographic/" type="png" title="Die Entschlackung" alt="Das Wachstum von Bertelsmann" publication-date="" expires="" display_mode="large" variant_name="wide" is_empty="False">
         <bu py:pytype="str">Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)</bu>
         <copyright py:pytype="str" link="http://www.example.com">© ZEIT-GRAFIK</copyright>
       </image>
