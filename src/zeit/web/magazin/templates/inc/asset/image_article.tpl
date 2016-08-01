@@ -23,20 +23,22 @@ figure__media
 {%- endblock %}
 
 {% block media_caption -%}
-    <figcaption class="figure__caption {{ media_caption_additional_class }}">
-        {% if image.meta and image.meta.origin %}
+    <figcaption class="{% block media_caption_class %}figure{% endblock %}__caption {{ media_caption_additional_class }}">
+        {% if image.meta and image.meta.origin  %}
         <span class="x-caption--sans">Quelle: {{ image.meta.origin }}</span>
         {% elif image.caption %}
         <span class="figure__text">{{ image.caption | safe }}</span>
         {% endif %}
         {% if image.copyright | count and image.copyright[0][0] != '©' %}
-        <span class="figure__copyright" itemprop="copyrightHolder">
+        <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder">
             {% if image.copyright[0][1] %}
-            <a href="{{ image.copyright[0][1] }}" target="_blank">
-            {% endif %}
-                {{ image.copyright[0][0] }}
-            {% if image.copyright[0][1] %}
-            </a>
+            <span class="{% block media_copyright_class %}{% endblock %}" itemprop="name">
+                <a href="{{ image.copyright[0][1] }}" target="_blank">
+                {%- endif -%}
+                    {{ image.copyright[0][0] }}
+                {%- if image.copyright[0][1] -%}
+                </a>
+            </span>
             {% endif %}
         </span>
         {% endif %}
