@@ -572,15 +572,6 @@ def get_column_image(content, variant_id='original'):
 
 
 @zeit.web.register_filter
-def get_image_group(asset):
-    # TRASHME: Should be solved by using get_image on video modules
-    try:
-        return zeit.content.image.interfaces.IImageGroup(asset)
-    except TypeError:
-        return
-
-
-@zeit.web.register_filter
 def attr_safe(string):
     """Return an attribute safe version of string"""
     if isinstance(string, basestring):
