@@ -295,6 +295,7 @@ class Image(Block):
         return instance
 
     def __init__(self, model_block):
+        self.model_block = model_block
         # `legacy_layout` is required for bw compat of the ZCO default variant,
         # which is `portrait` rather the usual `wide`.
         self.legacy_layout = model_block.xml.get('layout', None)
@@ -375,7 +376,7 @@ class BlockImages(object):
 
     def __init__(self, context):
         self.context = context
-        self.image = context.group
+        self.image = context.model_block.references.target
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
