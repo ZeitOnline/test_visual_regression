@@ -60,9 +60,21 @@ http://xml.zeit.de/digital/games/2016-06/8768dfd0-a93e-43c3-a942-b4cdd9d6e163.tm
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9f77d4bc-0df3-466e-bcdd-faf8c27d399c}</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">
-<pickle> <initialized_object> <klass> <global name="Provides" module="zope.interface.declarations"/> </klass> <arguments> <tuple> <global name="Article" module="zeit.content.article.article"/> <global name="Interface" module="zope.interface"/> <global name="IZONContent" module="zeit.cms.section.interfaces"/> <global name="IZONArticle" module="zeit.content.article.interfaces"/> </tuple> </arguments> </initialized_object> </pickle>
-</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">index,follow,noodp,noydir,noarchive</attribute>
 </head>
 <body>
