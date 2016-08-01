@@ -49,7 +49,7 @@ def get_variant(group, variant_id, fill_color=None):
         variant.__parent__ = group
         variant.fill_color = fill_color
         try:
-            return zeit.web.core.interfaces.ITeaserImage(variant)
+            return zeit.web.core.interfaces.IImage(variant)
         except TypeError:
             return None
 
