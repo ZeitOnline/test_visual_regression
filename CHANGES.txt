@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.95 (unreleased)
+2.95 (2016-08-01)
 -----------------
 
 - HOTFIX: Preserve querystrings while redirecting videos
