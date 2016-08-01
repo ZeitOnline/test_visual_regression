@@ -39,6 +39,8 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
         if 'X-SEO-Slug' in self.request.headers and (
                 self.request.headers['X-SEO-Slug'] != self.slug):
             location = '{}/{}'.format(self.content_url, self.slug)
+            if self.request.query_string:
+                location = '{}?{}'.format(location, self.request.query_string)
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=location)
 
