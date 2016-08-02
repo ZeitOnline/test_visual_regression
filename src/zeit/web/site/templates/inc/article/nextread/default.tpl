@@ -1,4 +1,4 @@
-{% set image = get_image(module, teaser, fallback=False) %}
+{% set image = get_image(module, fallback=False) %}
 {% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
 {% set module_layout = self.layout() %}
 {% set modifier = '--with-image' if image and not image is expired else '--no-image' %}

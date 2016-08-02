@@ -1,5 +1,5 @@
 {# AMP nextread #}
-{% set image = get_image(module, teaser, fallback=False) %}
+{% set image = get_image(module, fallback=False) %}
 {% set modifier = 'with-image' if image and not image is expired else 'no-image' %}
 <aside class="nextread nextread--{{ modifier }}">
     <a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}">
