@@ -119,7 +119,7 @@ class VariantImage(object):
             self.title = meta.title
 
 
-class LocalImage(object):
+class RemoteImage(object):
 
     KiB = 1024
     DOWNLOAD_CHUNK_SIZE = 2 * KiB
@@ -184,11 +184,11 @@ class LocalImage(object):
         return (0, 0)
 
 
-class LocalImageGroup(zeit.content.image.imagegroup.ImageGroup,
+class RemoteImageGroup(zeit.content.image.imagegroup.ImageGroup,
                       zeit.web.core.utils.nsdict):
 
     def __init__(self, context):
-        super(LocalImageGroup, self).__init__()
+        super(RemoteImageGroup, self).__init__()
         self.context = context
 
     def __getitem__(self, key):
@@ -227,7 +227,7 @@ class LocalImageGroup(zeit.content.image.imagegroup.ImageGroup,
     @zeit.web.reify
     def master_image(self):
         try:
-            image = LocalImage(self.image_url)
+            image = RemoteImage(self.image_url)
         except TypeError:
             return None
         image.src = self.image_url
@@ -241,8 +241,8 @@ class LocalImageGroup(zeit.content.image.imagegroup.ImageGroup,
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageMetadata)
-@grokcore.component.adapter(LocalImageGroup)
-class LocalImageMetaData(object):
+@grokcore.component.adapter(RemoteImageGroup)
+class RemoteImageMetaData(object):
 
     def __init__(self, group):
         for field in zeit.content.image.interfaces.IImageMetadata:
@@ -254,14 +254,14 @@ class LocalImageMetaData(object):
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IMasterImage)
-@grokcore.component.adapter(LocalImageGroup)
-def localimagegroup_to_masterimage(group):
+@grokcore.component.adapter(RemoteImageGroup)
+def remoteimagegroup_to_masterimage(group):
     return group.master_image
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.ITransform)
-@grokcore.component.adapter(LocalImage)
-def localimage_to_imagetransform(image):
+@grokcore.component.adapter(RemoteImage)
+def remoteimage_to_imagetransform(image):
     return zeit.content.image.transform.ImageTransform(image)
 
 

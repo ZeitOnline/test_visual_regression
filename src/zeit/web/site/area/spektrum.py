@@ -15,7 +15,7 @@ log = logging.getLogger(__name__)
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.web.site.area.rss.IRSSLink, name='spektrum')
-class ImageGroup(zeit.web.core.image.LocalImageGroup):
+class ImageGroup(zeit.web.core.image.RemoteImageGroup):
 
     def __init__(self, context):
         super(ImageGroup, self).__init__(context)
