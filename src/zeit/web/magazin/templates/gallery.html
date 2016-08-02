@@ -15,7 +15,7 @@
     {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     <div class="article__page gallery__info">
         <div class="gallery__description">
-            {{ view.galleryText|safe }}
+            {{ view.html | safe }}
         </div>
         <div class="article__head__meta">
             {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}

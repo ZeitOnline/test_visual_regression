@@ -117,7 +117,7 @@ class reify(object):  # NOQA
     """Inspired by `pyramid.decorator.reify` and `beaker.cache.cache_region`.
 
     With this property descriptor you can decorate zero-argument methods
-    of view classes, that will become cached read-only attributes.
+    of view classes, that will become cached read/write attributes.
 
     The first-level cache will hold the result for the scope of the current
     request only.
@@ -203,6 +203,10 @@ class reify(object):  # NOQA
             cache.set(g_key, value)  # Write to global cache
 
         return value
+
+    def __set__(self, inst, value):
+        l_key = self._local_key(inst)
+        setattr(inst, l_key, value)
 
     def _global_key(self, inst):
         try:

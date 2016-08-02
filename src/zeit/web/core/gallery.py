@@ -83,7 +83,7 @@ class Gallery(collections.OrderedDict):
         return object.__repr__(self)
 
     @property
-    def galleryText(self):  # NOQA
+    def html(self):
         return zeit.wysiwyg.interfaces.IHTMLContent(
             self.context).html
 

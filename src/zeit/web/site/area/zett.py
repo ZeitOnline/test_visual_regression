@@ -1,6 +1,7 @@
 import logging
 
 import grokcore.component
+import zope.component
 
 import zeit.content.image.interfaces
 
@@ -18,8 +19,9 @@ class ImageGroup(zeit.web.core.image.LocalImageGroup):
     def __init__(self, context):
         super(ImageGroup, self).__init__(context)
         self.image_url = context.image_url
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         self.uniqueId = u'http://xml.zeit.de/zett-image{}'.format(
-            context.image_url.replace(u'http://ze.tt', u''))
+            context.image_url.replace(conf.get('zett_img_host'), u''))
 
 
 @grokcore.component.implementer(zeit.web.site.area.rss.IRSSLink)

@@ -121,7 +121,7 @@ def test_variant_image_should_provide_desired_attributes(application):
         'http://xml.zeit.de/zeit-online/cp-content/ig-4')
     meta = zeit.content.image.interfaces.IImageMetadata(group)
     variant = group.get_variant_by_key('default')
-    img = zeit.web.core.interfaces.ITeaserImage(variant)
+    img = zeit.web.core.interfaces.IImage(variant)
 
     assert img.alt == meta.alt
     assert img.title == meta.title
@@ -138,7 +138,7 @@ def test_variant_jinja_test_should_recognize_variants(application):
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/ig-4')
     variant = group.get_variant_by_key('default')
-    img = zeit.web.core.interfaces.ITeaserImage(variant)
+    img = zeit.web.core.interfaces.IImage(variant)
 
     assert zeit.web.core.template.variant(img) is True
 
@@ -411,7 +411,7 @@ def test_variant_getter_should_output_variant_teaser_image(application):
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/ig-1')
     variant = zeit.web.core.template.get_variant(group, 'cinema')
-    assert zeit.web.core.interfaces.ITeaserImage.providedBy(variant)
+    assert zeit.web.core.interfaces.IImage.providedBy(variant)
 
 
 def test_variant_getter_should_set_appropriate_parent_attribute(application):
