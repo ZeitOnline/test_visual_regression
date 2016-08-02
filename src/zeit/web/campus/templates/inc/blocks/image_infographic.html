@@ -17,7 +17,7 @@
 
 {% block media_caption_above %}
     <h3 class="x-subheadline{{ '' if image.caption else '--borderless' }}" itemprop="name">{{ image.meta.title }}</h3>
-    <p class="x-caption" itemprop="caption">{{ image.caption }}</p>
+    <p class="x-copytext" itemprop="caption">{{ image.caption }}</p>
 {% endblock %}
 
 {% block media_caption_content %}
