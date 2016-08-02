@@ -4,7 +4,7 @@ Change log for zeit.web
 2.96 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Combine image fallback and fallback_expired into one condition
 
 
 2.95 (2016-08-01)
