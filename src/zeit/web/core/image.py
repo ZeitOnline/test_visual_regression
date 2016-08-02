@@ -185,7 +185,7 @@ class RemoteImage(object):
 
 
 class RemoteImageGroup(zeit.content.image.imagegroup.ImageGroup,
-                      zeit.web.core.utils.nsdict):
+                       zeit.web.core.utils.nsdict):
 
     def __init__(self, context):
         super(RemoteImageGroup, self).__init__()
