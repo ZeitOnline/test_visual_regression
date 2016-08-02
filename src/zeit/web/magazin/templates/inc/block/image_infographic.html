@@ -1,6 +1,7 @@
 {% extends "zeit.web.magazin:templates/inc/asset/image_article.tpl"%}
 {% from 'zeit.web.magazin:templates/inc/asset/image_article.tpl' import footer_has_border with context %}
 {% set media_caption_additional_class = 'x-footer' ~ ( '' if footer_has_border else '--borderless') %}
+{% set media_block_additional_class = 'infographic' %}
 
 {% block media_caption_class %}infographic{% endblock %}
 {% block media_copyright_class %}x-copyright x-caption--sans{% endblock %}

@@ -8,7 +8,7 @@
 {% block media_caption_class %}infographic{% endblock %}
 {% block media_copyright_class %}x-copyright x-caption--sans{% endblock %}
 
-{% set media_block_additional_class = 'article__item' | with_mods(*image.figure_mods) %}
+{% set media_block_additional_class = 'infographic' %}
 
 {% set media_caption_additional_class = 'x-footer'
     ~ ('' if image.copyright and image.meta.origin else '--borderless')
