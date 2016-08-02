@@ -1,9 +1,8 @@
 {% set image = get_image(module, fallback=False) %}
 {% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
 {% set module_layout = self.layout() %}
-{% set modifier = '--with-image' if image and not image is expired else '--no-image' %}
 <article id="{{ module_layout }}"
-         class="{% block layout %}nextread{% endblock %} {{ module_layout }}{{ modifier }}">
+         class="{% block layout %}nextread{% endblock %} {{ module_layout }}{{ '--with-image' if image else '--no-image' }}">
     <a class="{{ module_layout }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="articlebottom.editorial-nextread...area" itemprop="relatedLink">
         <div class="{{ module_layout }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
         {% include "zeit.web.core:templates/inc/asset/image_nextread.tpl" %}
