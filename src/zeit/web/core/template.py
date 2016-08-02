@@ -58,17 +58,14 @@ FROM_CONTENT = object()
 
 
 @zeit.web.register_global
-def get_image(module=None, content=None, fallback=True,
-              fallback_expired=False, variant_id=None,
-              default='default', fill_color=FROM_CONTENT):
+def get_image(module=None, content=None, fallback=True, variant_id=None,
+              fill_color=FROM_CONTENT):
     """Universal image retrieval function to be used in templates.
 
     :param module: Module to extract a content and layout from
     :param content: Override to provide different content with image reference
     :param fallback: Specify whether missing images should render a fallback
     :param variant_id: Override for automatic variant determination
-    :param default: If variant_id is None, specify a default for automatic
-                    variant determination
     :param fill_color: For images with transparent background, fill with
                        the given color (None: keep transparent, FROM_CONTENT:
                        determine color from IImages(content))
@@ -99,7 +96,7 @@ def get_image(module=None, content=None, fallback=True,
             return None
         use_fallback = True
     elif expired(group):
-        if not fallback_expired:
+        if not fallback:
             return None
         use_fallback = True
 
@@ -121,7 +118,7 @@ def get_image(module=None, content=None, fallback=True,
         try:
             variant_id = layout.image_pattern
         except AttributeError:
-            variant_id = default
+            variant_id = 'default'
 
     return get_variant(group, variant_id, fill_color=fill_color)
 
