@@ -60,7 +60,7 @@
       </region>
     </cluster>
     <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa257" kind="solo" title="Suchergebnisse">
-      <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc7" kind="ranking" title="Ergebnisse" count="10" automatic="True">
+      <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc7" kind="ranking" title="Ergebnisse" count="10" automatic="True" automatic_type="channel">
         <query>
           <condition type="Channel" py:pytype="str">News</condition>
         </query>

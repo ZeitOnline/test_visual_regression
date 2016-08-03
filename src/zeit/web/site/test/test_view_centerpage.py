@@ -2098,7 +2098,7 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 5
-    assert area.filter_query == (
+    assert area._content_query.filter_query == (
         'NOT (uniqueId:"http://xml.zeit.de/zeit-magazin/leben/2015-02/'
         'magdalena-ruecken-fs" OR uniqueId:"http://xml.zeit.de/zeit-magazin/'
         'mode-design/2014-05/karl-lagerfeld-interview")')
@@ -2113,7 +2113,7 @@ def test_ranking_area_should_not_offset_resultset_on_materialized_cp(
     area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 4
-    assert area.filter_query == '*:*'
+    assert area._content_query.filter_query == '*:*'
 
 
 @pytest.mark.parametrize('params, page', ([{'p': '2'}, 2], [{}, 1]))
