@@ -39,6 +39,7 @@
   <setting name="jsconf_prefix" xsi:type="xsd:string">/jsconf</setting>
   <setting name="fbia_prefix" xsi:type="xsd:string">/fbia</setting>
   <setting name="c1_prefix" xsi:type="xsd:string">/jsconf</setting>
-  <setting name="webtrekk_version" xsi:type="xsd:string">4.3.1</setting>
   <setting name="series_prefix" xsi:type="xsd:string">http://xml.zeit.de/serie</setting>
+
+  <setting name="webtrekk_version" xsi:type="xsd:string">4.3.1</setting>
 </settings>
