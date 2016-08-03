@@ -23,6 +23,3 @@
     {% endif %}
     {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" ignore missing %}
 {% endblock %}
-
-
-
