@@ -839,3 +839,9 @@ def test_infographics_should_display_header_above_image(testbrowser):
     assert (
         'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
         items[1].text)
+
+
+# TODO: Add `test_infographics_should_render_border_styles_conditionally` ?
+# There has been no real point in adapting the test only
+# to work with ZMO macros. Check, if this test is needed here, after ZMO
+# template-macros have been switched to blocks (OPS-386).
