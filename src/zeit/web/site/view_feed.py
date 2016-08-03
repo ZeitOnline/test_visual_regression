@@ -10,7 +10,6 @@ import urllib
 import urlparse
 
 import pyramid.view
-import lxml.builder
 import lxml.etree
 
 import zeit.content.cp.interfaces
@@ -93,6 +92,8 @@ def join_queries(url, join_query):
 
 
 class Base(zeit.web.core.view.Base):
+
+    allowed_on_hosts = ['newsfeed']
 
     @property
     def items(self):
