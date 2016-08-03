@@ -5,6 +5,8 @@ import zeit.cms.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
+import zeit.content.image.image
+import zeit.content.image.interfaces
 
 import zeit.web.core.image
 

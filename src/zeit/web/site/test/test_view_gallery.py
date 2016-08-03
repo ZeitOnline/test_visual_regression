@@ -31,6 +31,12 @@ def test_zon_gallery_should_display_a_gallery(testbrowser):
     assert len(select('.gallery')) == 1
 
 
+def test_gallery_should_respect_image_only_layout(testbrowser):
+    browser = testbrowser('/zeit-online/gallery/biga_1')
+    image_only = browser.cssselect('.gallery__media')[2]
+    assert len(image_only.cssselect('.figure__text')) == 0
+
+
 def test_zon_gallery_uses_svg_icons(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/gallery/biga_1' % testserver.url)

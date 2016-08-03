@@ -98,8 +98,8 @@ class IPage(zope.interface.Interface):
         """Iterate over our blocks"""
 
 
-class ITeaserImage(zope.interface.Interface):
-    """A Teaser Image"""
+class IImage(zope.interface.Interface):
+    """A universal interface for zeit.web images"""
 
 
 class IPlace(zope.interface.Interface):

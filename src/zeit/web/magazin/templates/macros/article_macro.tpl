@@ -278,7 +278,7 @@
     </div>
     <div class="photocluster__caption is-constrained is-centered">
         <div class="photocluster__caption__text">
-            {{ block.galleryText | safe }}
+            {{ block.html | safe }}
         </div>
     </div>
 </div>

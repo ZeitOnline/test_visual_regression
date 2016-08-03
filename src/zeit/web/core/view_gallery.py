@@ -20,7 +20,7 @@ class Gallery(zeit.web.core.view.Content):
         return zeit.web.core.gallery.standalone(self.context)
 
     @zeit.web.reify
-    def galleryText(self):  # NOQA
+    def html(self):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
 
     @zeit.web.reify

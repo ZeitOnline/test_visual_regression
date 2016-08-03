@@ -98,7 +98,7 @@
                     <copyright py:pytype="str">©</copyright>
                     </thumbnail>
                 </block>
-                <block name="03-desktop-schreibtisch-computer-digital.jpg">
+                <block layout="image-only" name="03-desktop-schreibtisch-computer-digital.jpg">
                     <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
                     <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Tim Raue ist Sternekoch, mag diese Galaxie und Musik von Satie.</caption>
                     <image align="left" expires="" publication-date="" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/03-desktop-schreibtisch-computer-digital.jpg" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

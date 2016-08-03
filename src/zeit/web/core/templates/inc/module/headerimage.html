@@ -1,7 +1,7 @@
 <header class="header-image
     {%- if view.area_ranking and (view.area_ranking.current_page > 1 or not view.area_ranking.uids_above | length) %} header-image--overlain{% endif %}
     {%- if module.visible_mobile == False %} mobile-hidden{% endif %}">
-{% require image = get_image(module, fallback=False, default='panorama') -%}
+{% require image = get_image(module, fallback=False, variant_id='panorama') -%}
     {% include "zeit.web.core:templates/inc/asset/image_header.tpl" %}
 {%- endrequire -%}
 

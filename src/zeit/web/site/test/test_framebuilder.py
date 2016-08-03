@@ -338,3 +338,9 @@ def test_framebuilder_minimal_accepts_banner_channel_parameter(
     assert '' == driver.execute_script('return adcSiteInfo.level4')
     assert 'my,keywords' == driver.execute_script(
         'return adcSiteInfo.keywords')
+
+
+def test_framebuilder_loads_slimmed_script_file(testbrowser):
+    browser = testbrowser('/framebuilder')
+    scripts = browser.cssselect('body script')
+    assert scripts[-1].get('src').endswith('/js/web.site/frame.js')
