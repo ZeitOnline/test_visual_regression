@@ -356,6 +356,14 @@
     />
 
     <layout
+        id="zmo-square"
+        title="ZMO Quadrat"
+        image_pattern="square"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
+    />
+
+    <layout
         id="zmo-square-large"
         title="ZMO großes Quadrat"
         image_pattern="square"

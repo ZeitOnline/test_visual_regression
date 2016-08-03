@@ -102,6 +102,9 @@ require([
         isHp = document.body.getAttribute( 'data-is-hp' ),
         article = $( '#js-article' );
 
+    // remove jQuery from global scope
+    $.noConflict( true );
+
     $( window ).referrerCount();
     // global and "above the fold"
     $( '.nav__search' ).toggleSearch();

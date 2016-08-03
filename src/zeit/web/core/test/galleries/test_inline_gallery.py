@@ -5,7 +5,7 @@ import lxml
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 from zeit.cms.checkout.helper import checked_out
@@ -30,8 +30,9 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-magazin/article/01' % testserver.url)
     try:
-        cond = EC.presence_of_element_located((By.CLASS_NAME, "bx-wrapper"))
-        WebDriverWait(driver, 10).until(cond)
+        WebDriverWait(driver, 10).until(
+            expected_conditions.presence_of_element_located(
+                (By.CLASS_NAME, "bx-wrapper")))
     except TimeoutException:
         assert False, 'Timeout gallery script'
     else:
@@ -47,13 +48,17 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
         prevbutton.click()
         # test overlay buttons
         overlaynext = driver.find_element_by_css_selector(onextselector)
-        script = 'return $(".bx-overlay-next").css("opacity")'
+        script = ('return window.getComputedStyle('
+                  'document.querySelector(".bx-overlay-next")'
+                  ').getPropertyValue("opacity")')
         elem_opacity = driver.execute_script(script)
         overlayprev = driver.find_element_by_css_selector(onextselector)
         assert overlaynext
         assert overlayprev
         overlaynext.click()
-        script = 'return $(".bx-overlay-next").css("opacity")'
+        script = ('return window.getComputedStyle('
+                  'document.querySelector(".bx-overlay-next")'
+                  ').getPropertyValue("opacity")')
         elem_opacity_later = driver.execute_script(script)
         overlayprev.click()
         # opacity should have changed
