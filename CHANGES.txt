@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - ZON-1978: Hide regions, areas and modules
 
+- ZON-3198: Remove jQuery from global scope and add slim variant for framebuilder
+
 - ZON-3171: Add target viewport (mobile / desktop) to image URLs
 
 
