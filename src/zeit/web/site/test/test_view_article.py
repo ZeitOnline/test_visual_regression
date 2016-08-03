@@ -1631,3 +1631,41 @@ def test_infographics_should_use_customized_css_classes(testbrowser):
     assert 'x-copytext' in browser.contents
     assert 'x-footer' in browser.contents
     assert 'x-subheadline' in browser.contents
+
+
+def test_infographics_should_render_border_styles_conditionally(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.core:templates/inc/blocks/image_infographic.html')
+    image = mock.Mock()
+    image.ratio = 1
+
+    # all border styles present
+
+    image.meta.origin = True
+    image.copyright = ('FOO', 'BAR', 'BAZ')
+    image.caption = True
+    html_str = tpl.render(block=image)
+    assert '--borderless' not in html_str
+
+    # borderless subheadline
+
+    image.caption = False
+    html_str = tpl.render(block=image)
+    html = lxml.html.fromstring(html_str)
+    subheadline = html.cssselect('[class*="x-subheadline"]')
+    assert '--borderless' in subheadline[0].get('class')
+
+    # borderless footer
+
+    image.copyright = ''
+    html_str = tpl.render(block=image)
+    html = lxml.html.fromstring(html_str)
+    footer = html.cssselect('[class*="x-footer"]')
+    assert '--borderless' in footer[0].get('class')
+
+    image.copyright = ('FOO', 'BAR', 'BAZ')
+    image.meta.origin = False
+    html_str = tpl.render(block=image)
+    html = lxml.html.fromstring(html_str)
+    footer = html.cssselect('[class*="x-footer"]')
+    assert '--borderless' in footer[0].get('class')
