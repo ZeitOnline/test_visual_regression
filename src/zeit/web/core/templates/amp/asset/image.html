@@ -1,4 +1,4 @@
-{% if image and not image is expired %}
+{% if image %}
 
     {%- set width = 820 %}
     {%- set height = (width / image.ratio) | int %}

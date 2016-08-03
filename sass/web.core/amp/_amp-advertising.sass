@@ -7,7 +7,18 @@
 	amp-iframe
 		display: block
 		margin: 0 auto
+	&:before
+		@extend %label
+		+padded
+		content: '\2003 Anzeige'
+		margin-left: auto
+		margin-right: auto
+		max-width: remify(660px)
+		padding-top: em(5px)
+		padding-bottom: em(5px)
+		text-align: left
 	&--place-4
 		margin-bottom: remify(40px)
 		margin-top: remify(40px)
-
+		&:before
+			padding: em(5px 0)

@@ -680,10 +680,6 @@ class Nextread(zeit.web.core.utils.nslist):
         super(Nextread, self).__init__(*args)
         self.context = context
 
-    @property
-    def teasers(self):
-        raise NotImplementedError()
-
     @zeit.web.reify
     def layout_id(self):
         # Select layout id from a list of possible values, default to 'base'.

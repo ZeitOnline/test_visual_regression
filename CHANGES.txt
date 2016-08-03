@@ -1,8 +1,22 @@
 Change log for zeit.web
 =======================
 
-2.95 (unreleased)
+2.96 (unreleased)
 -----------------
+
+- MAINT: Combine image fallback and fallback_expired into one condition
+
+
+2.95 (2016-08-01)
+-----------------
+
+- HOTFIX: Preserve querystrings while redirecting videos
+
+- BUG-469: Scale down ad place 1 and use iframe in AMPs
+
+- BUG-476: Label ads in AMPs
+
+- BUG-471: make iframes scroll on iOS
 
 - ZON-1978: Hide regions, areas and modules
 

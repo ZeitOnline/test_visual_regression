@@ -1,6 +1,6 @@
 {%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
 
-{% set image = get_image(module, teaser, fallback=fallback_image, fallback_expired=fallback_expired) %}
+{% set image = get_image(module, fallback=fallback_image) %}
 {% set href = teaser | create_url | append_campaign_params %}
 {% set media_caption_additional_class = 'figcaption--hidden' %}
 

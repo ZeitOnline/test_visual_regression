@@ -1,12 +1,11 @@
 <div class="author-header">
     <div class="author-header__inner author__item">
-        {% if view.author_img -%}
+        {% require image = view.author_img -%}
         <div class="author-header__image">
-            {% set image = view.author_img %}
             {% set module_layout = 'author-header' %}
             {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
         </div>
-        {% endif -%}
+        {% endrequire -%}
         <div class="author-header__text" itemscope itemtype="http://schema.org/Person" itemprop="author">
             <h1 class="author-header__name" itemprop="name">
                 {{- context.display_name -}}

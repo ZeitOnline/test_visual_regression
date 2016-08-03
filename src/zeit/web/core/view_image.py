@@ -98,7 +98,6 @@ class Brightcove(Image):
 class RSSImage(Image):
 
     remote_host = ''
-    ig_class = zeit.web.core.image.LocalImageGroup
 
     def __init__(self, context, request):
         super(RSSImage, self).__init__(context, request)
@@ -111,7 +110,7 @@ class RSSImage(Image):
         path = '/'.join(segments[:-1]).encode('utf-8')
         image_url = '{}/{}'.format(self.remote_host, path)
 
-        group = zeit.web.core.image.LocalImageGroup(context)
+        group = zeit.web.core.image.RemoteImageGroup(context)
         group.image_url = image_url
         try:
             self.context = group[variant]
@@ -128,11 +127,9 @@ class RSSImage(Image):
 class Spektrum(RSSImage):
 
     host_key = 'spektrum_img_host'
-    ig_class = zeit.web.site.area.spektrum.ImageGroup
 
 
 @view_config(route_name='zett-image')
 class Zett(RSSImage):
 
     host_key = 'zett_img_host'
-    ig_class = zeit.web.site.area.zett.ImageGroup
