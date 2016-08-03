@@ -256,10 +256,16 @@ module.exports = function(grunt) {
                 dir: project.codeDir + 'js',
                 modules: [
                     {
+                        name: 'web.campus/frame'
+                    },
+                    {
                         name: 'campus'
                     },
                     {
                         name: 'magazin'
+                    },
+                    {
+                        name: 'web.site/frame'
                     },
                     {
                         name: 'site'

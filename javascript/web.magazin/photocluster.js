@@ -18,6 +18,13 @@ define([ 'jquery' ], function( $ ) {
         if ($cluster.length) {
             var $photos = $cluster.children();
             var classes = ['size-s', 'size-m', 'size-l'];
+            var noGlobal = ( window.jQuery !== $ );
+
+            // hack for old library freewall.js
+            // make sure that jQuery is in the global scope
+            if ( noGlobal ) {
+                window.jQuery = window.$ = $;
+            }
 
             // run through all photo boxes
             $photos.each(function(idx, photo){
@@ -32,6 +39,11 @@ define([ 'jquery' ], function( $ ) {
             require( [
                 'freewall'
             ], function( freewall ) {
+                // remove jQuery from global scope again
+                if ( noGlobal ) {
+                    $.noConflict( true );
+                }
+
                 var wall = new freewall('.photocluster');
                 wall.reset({
                     selector: '.photocluster__item',

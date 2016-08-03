@@ -359,8 +359,10 @@ def test_small_teaser_should_have_responsive_layout(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
 
-    width_script = 'return $(".teaser-small__media").first().width()'
-    width = driver.execute_script(width_script)
+    script = ('var width = window.getComputedStyle('
+              'document.querySelector(".teaser-small__media-container")'
+              ').getPropertyValue("width"); return parseInt(width, 10);')
+    width = driver.execute_script(script)
 
     img_box = driver.find_elements_by_class_name('teaser-small__media')[0]
 
@@ -380,7 +382,9 @@ def test_snapshot_morelink_text_icon_switch(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/teaser-gallery-setup' % testserver.url)
     linkdisplay = driver.execute_script(
-        "return $('.snapshot .section-heading__text').eq(0).css('display')")
+        'return window.getComputedStyle('
+        'document.querySelector(".snapshot .section-heading__text")'
+        ').getPropertyValue("display")')
     if screen_size[0] == 320:
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:

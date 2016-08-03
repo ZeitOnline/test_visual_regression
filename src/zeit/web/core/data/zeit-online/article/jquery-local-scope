@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <keywordset>
+      <keyword src="manual">Arbeit</keyword>
+      <keyword src="manual">Bundesgerichte</keyword>
+      <keyword src="manual">Streiks</keyword>
+      <keyword src="manual">Luftverkehr</keyword>
+      <keyword src="manual">Deutschland</keyword>
+    </keywordset>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-07-26T14:30:06+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-07-26T14:30:06+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-07-26T14:30:15.917453+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-07-26T14:30:15.264449+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-07-27T14:30:08.176721+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="fixture">/infoline/wirtschaft/</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-07-26T14:30:06+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.newspublish</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn-newsml-dpa-com-20090101-160726-99-824155</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-version">1469543127000</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">0150b388e06e4438b14d20ddf1a6f176</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">News</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Flughafenstreik rechtswidrig - Gewerkschaft muss zahlen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:0c32d8c4-cd87-4625-bfbd-54eb5d315f65}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">1900</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Arbeit</supertitle>
+    <title>Flughafenstreik rechtswidrig</title>
+    <byline>Von Simone Rothe, dpa</byline>
+    <division type="page">
+      <p>Erfurt (dpa) - "Sie sind doch die, die immer streiken?" - diese Frage hört Matthias Maas, Chef der kleinen Gewerkschaft der Flugsicherung (GdF), häufiger. An diesem Dienstag kassierte die kleine Lotsengewerkschaft mit ihren knapp 4000 Mitgliedern eine teure Niederlage vor dem Bundesarbeitsgericht (BAG) in Erfurt.</p>
+      <p>Die höchsten deutschen Arbeitsrichter warfen der Gewerkschaft vor, bei einem Arbeitskampf der Vorfeldlotsen in Frankfurt im Jahr 2012 mit einzelnen Forderungen gegen die Friedenspflicht verstoßen zu haben. Sie werteten den gesamten Arbeitskampf damit als rechtswidrig. Damit wird Schadenersatz an den Flughafenbetreiber Fraport fällig.</p>
+      <raw alldevices="true">
+        <pre class="article__item" id="test-debug"></pre>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script>
+          var out = document.getElementById('test-debug');
+              out.textContent = 'jQuery ($) version: ' + $.fn.jquery + '\n';
+
+          window.onload = function() {
+              out.textContent += 'jQuery ($) onload: ' + $.fn.jquery
+          }
+        </script>
+      </raw>
+    </division>
+  </body>
+</article>
