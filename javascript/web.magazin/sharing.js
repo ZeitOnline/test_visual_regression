@@ -6,7 +6,7 @@
  * sharing.js: module for sharing
  * @module sharing
  */
-define(['jquery'], function() {
+define([ 'jquery' ], function( $ ) {
 
     var $socialServices = $('#js-social-services');
 
