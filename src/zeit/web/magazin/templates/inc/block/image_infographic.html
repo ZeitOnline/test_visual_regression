@@ -2,9 +2,9 @@
 {% from 'zeit.web.magazin:templates/inc/asset/image_article.tpl' import footer_has_border with context %}
 {% set media_caption_additional_class = 'x-footer' ~ ( '' if footer_has_border else '--borderless') %}
 {% set media_block_additional_class = 'infographic' %}
+{% set media_copyright_class='x-copyright x-caption--sans' %}
 
 {% block media_caption_class %}infographic{% endblock %}
-{% block media_copyright_class %}x-copyright x-caption--sans{% endblock %}
 {% block media_caption_above %}
     <h3 class="x-subheadline{{ '' if image.caption else '--borderless' }}" itemprop="name">{{ image.meta.title }}</h3>
     <p class="x-copytext" itemprop="caption">{{ image.caption }}</p>

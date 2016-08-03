@@ -33,13 +33,11 @@ figure__media
         {% if image.copyright | count and image.copyright[0][0] != '©' %}
         <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder">
             {% if image.copyright[0][1] %}
-            <span class="{% block media_copyright_class %}{% endblock %}" itemprop="name">
-                <a href="{{ image.copyright[0][1] }}" target="_blank">
-                {%- endif -%}
-                    {{ image.copyright[0][0] }}
-                {%- if image.copyright[0][1] -%}
-                </a>
-            </span>
+            <a href="{{ image.copyright[0][1] }}" target="_blank">
+            {%- endif -%}
+                {{ image.copyright[0][0] }}
+            {%- if image.copyright[0][1] -%}
+            </a>
             {% endif %}
         </span>
         {% endif %}
