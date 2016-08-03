@@ -1114,6 +1114,12 @@ class FrameBuilder(CeleraOneMixin):
 
     inline_svg_icons = True
 
+    def __call__(self):
+        resp = super(FrameBuilder, self).__call__()
+        if self.framebuilder_requires_ssl:
+            self.request.asset_host = self.request.framebuilder_ssl_asset_host
+        return resp
+
     @zeit.web.reify
     def framebuilder_is_minimal(self):
         return 'minimal' in self.request.GET
@@ -1181,6 +1187,10 @@ class FrameBuilder(CeleraOneMixin):
     @zeit.web.reify
     def cap_title(self):
         return self.request.GET.get('adlabel') or 'Anzeige'
+
+    @zeit.web.reify
+    def framebuilder_requires_ssl(self):
+        return 'useSSL' in self.request.GET
 
     @zeit.web.reify
     def adcontroller_values(self):
