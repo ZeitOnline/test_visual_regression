@@ -70,3 +70,9 @@ def test_campus_framebuilder_should_have_login_cut_mark(testbrowser):
     browser = testbrowser('/campus/framebuilder')
     assert 'start::cut_mark::login' in browser.contents
     assert 'end::cut_mark::login' in browser.contents
+
+
+def test_campus_framebuilder_loads_slimmed_script_file(testbrowser):
+    browser = testbrowser('/campus/framebuilder')
+    scripts = browser.cssselect('body script')
+    assert scripts[-1].get('src').endswith('/js/web.campus/frame.js')

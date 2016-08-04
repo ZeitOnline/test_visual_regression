@@ -84,7 +84,7 @@ def test_ad_tile2_not_ommitted_in_landscape(
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/zeit-magazin/article/01' % testserver.url)
-    script = 'return $(".ad-tile_2").find("script").size()'
+    script = 'return document.querySelectorAll(".ad-tile_2 script").length'
     scripts = driver.execute_script(script)
     assert scripts > 1
 

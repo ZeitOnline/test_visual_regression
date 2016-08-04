@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <header/>
+    <author href="http://xml.zeit.de/autoren/J/Luisa_Jacobs/index" publication-date="" expires="">
+      <display_name>Luisa Jacobs</display_name>
+    </author>
+    <references>
+    </references>
+    <topic type="intern" href="http://xml.zeit.de/thema/test">
+      <label>Liebe und Sex</label>
+    </topic>
+    <rankedTags>
+      <tag uuid="6eab8c5b-feb4-40da-954f-a1e0ebfba867" url_value="beziehung" type="free">Beziehung</tag>
+      <tag uuid="e0d5b438-f10f-4eb2-8a5b-fd6a34227200" url_value="freundschaft" type="free">Freundschaft</tag>
+      <tag uuid="077698c6-6744-438d-bfb0-56c484b35eb0" url_value="onlinedating" type="free">Onlinedating</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Luisa Jacobs</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Campus</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-07-26T18:14:30.527787+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-07-26T17:00:29.776905+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-07-26T18:14:32.550556+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-07-26T18:14:32.341290+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-07-26T17:00:29.138152+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-07-26T17:00:47.815061+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-07-26T17:00:24.223599+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.hoehler</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/campus/2016-07/48e24a79-7bbd-4279-8425-77ca43c2585e.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">14c5dee83ebd42c59c53cef3a5bdc4c1</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Campus</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Früher: Bin mal Zigaretten holen. Heute: Whatsapp-Nachrichten werden gelesen, aber nie beantwortet. #Ghosting (akg)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">8992</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:b9669a04-8e15-4f53-bec3-62a52ddaac28}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">31</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZCOArticle" module="zeit.campus.interfaces"/&gt;
+        &lt;global name="IZCOContent" module="zeit.campus.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Ghosting</supertitle>
+    <title>Sie ist weg</title>
+    <subtitle>Früher: Bin mal eben Zigaretten holen. Heute: WhatsApp-Nachrichten werden gelesen, aber nie beantwortet. Eine Betroffene und ein Ghost über das Ende ohne Abschied</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" align="left" layout="large" is_empty="False" title="Titel" alt="Alternative"></image>
+      <p>
+        An jeder Hochschule gibt es eine Zentrale Studienberatung. Dort können sich Schüler auch beraten lassen, wenn sie noch nicht sicher sind, ob sie überhaupt an dieser
+        Hochschule studieren wollen. Man vereinbart online oder telefonisch einen Termin und bekommt dann alle Infos zum Studium: mögliche Studiengänge, was diese für Inhalte
+        haben, wie sie ablaufen, wie man sich bewirbt und vieles andere. Über Studiengänge kann man sich vorab auch auf den Websites der Hochschulen informieren. Meist sind
+        die einzelnen Studiengänge unter dem Stichwort "Studienangebot" aufgelistet.
+      </p>
+      <gallery href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" contenttype="gallery"></gallery>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum, harum eligendi facere magnam, sapiente veritatis, ullam aliquid facilis temporibus porro aperiam, mollitia sequi dolores cumque cupiditate! Ducimus fugiat, beatae nemo earum, reiciendis ratione odio voluptates maxime. Ipsa reprehenderit, rerum voluptates neque tempore?
+      </p>
+      <raw alldevices="true">
+        <pre class="article__item" id="test-debug"></pre>
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script>
+          var out = document.getElementById('test-debug');
+              out.textContent = 'jQuery ($) version: ' + $.fn.jquery + '\n';
+
+          window.onload = function() {
+              out.textContent += 'jQuery ($) onload: ' + $.fn.jquery
+          }
+        </script>
+      </raw>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Ghosting</supertitle>
+    <text>Früher: Bin mal eben Zigaretten holen. Heute: WhatsApp-Nachrichten werden gelesen, aber nie beantwortet. Eine Betroffene und ein Ghost über das Ende ohne Abschied</text>
+    <title>Sie ist weg</title>
+  </teaser>
+</article>

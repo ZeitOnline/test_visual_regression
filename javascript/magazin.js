@@ -10,6 +10,14 @@ define( 'modernizr', [], window.Modernizr );
 // include requirejs and config first, including path and shim config
 require([ 'vendor/require', 'config' ], function() {});
 
+// require jQuery and remove it from global scope
+// any subsequent call for jQuery gets that one
+// needs to happen before photocluster.js is loaded to enable asynchronous loading of outdated library freewall.js
+// Velocity is searching for jQuery, so it must be loaded in the same scope initially
+require([ 'jquery', 'velocity.ui' ], function( $, Velocity ) {
+    $.noConflict( true );
+});
+
 // require anonymous AMD modules here
 require([
     'web.core/zeit',
