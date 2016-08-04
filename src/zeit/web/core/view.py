@@ -1116,6 +1116,9 @@ class FrameBuilder(CeleraOneMixin):
 
     def __call__(self):
         resp = super(FrameBuilder, self).__call__()
+        # as long as we use the dirty ssl.zeit.de/* thing
+        # we can only hack it into the asset pipeline
+        # and hope for the best. We'll need https://www.zeit.de!
         if self.framebuilder_requires_ssl:
             self.request.asset_host = self.request.framebuilder_ssl_asset_host
         return resp
