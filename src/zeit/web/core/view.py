@@ -1137,7 +1137,8 @@ class FrameBuilder(CeleraOneMixin):
 
     @zeit.web.reify
     def advertising_enabled(self):
-        return self.banner_channel is not None
+        return self.banner_channel is not None and not(
+            self.framebuilder_requires_ssl)
 
     @zeit.web.reify
     def banner_channel(self):
