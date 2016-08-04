@@ -2309,12 +2309,14 @@ def test_dynamic_cps_consider_teaser_image_fill_color(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
-        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                           'harald-martenstein-wideformat')],
+        'image-base-id': [
+            (u'http://xml.zeit.de/zeit-magazin/images/'
+                'harald-martenstein-wideformat')],
         'image-fill-color': [u'A3E6BB']}, {
             'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
-            'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-            'harald-martenstein-wideformat')],
+            'image-base-id': [
+                (u'http://xml.zeit.de/zeit-magazin/images/'
+                    'harald-martenstein-wideformat')],
             'image-fill-color': [u'']}]
 
     browser = testbrowser('/serie/martenstein')
