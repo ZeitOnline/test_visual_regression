@@ -232,6 +232,8 @@ BLACKLIST = BlacklistSource()(None)
 @zope.interface.implementer(pyramid.interfaces.IRoutesMapper)
 class RoutesMapper(pyramid.urldispatch.RoutesMapper):
 
+    SKIP_BLACKLIST_ON_HOSTS = ['newsfeed', 'xml']
+
     def __call__(self, request):
         # Duplicated from super class (sigh).
         try:
@@ -247,8 +249,12 @@ class RoutesMapper(pyramid.urldispatch.RoutesMapper):
         # the blacklist matching in the Route.match() method) -- then we
         # wouldn't need to touch RoutesMapper at all. However, Pyramid's
         # configurator doesn't allow that easily.
-        if not request.headers.get('Host', '').startswith('newsfeed') and (
-                BLACKLIST.matches(path)):
+        if self.should_apply_blacklist(request) and BLACKLIST.matches(path):
             return {'route': self.routes['blacklist'], 'match': {}}
 
         return super(RoutesMapper, self).__call__(request)
+
+    def should_apply_blacklist(self, request):
+        host = request.headers.get('Host', '')
+        return not any(
+            [host.startswith(x) for x in self.SKIP_BLACKLIST_ON_HOSTS])
