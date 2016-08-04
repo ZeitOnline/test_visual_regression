@@ -262,15 +262,13 @@ class RenderedLegacyArea(zeit.web.core.centerpage.Area):
         area.count = int(block.xml.get('display_amount', 3))
         uid = unicode(block.xml.find('./referenced_cp'))
         area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
+        area.automatic_type = 'centerpage'
         auto = zeit.content.cp.interfaces.IRenderedArea(area)
-        # XXX We really should call auto.values() here instead of private API.
-        auto._v_try_to_retrieve_content = True
-        auto._v_retrieved_content = 0
-        values = auto._query_centerpage()[:area.count]
+        content = auto._content_query()
 
         lids = [block.layout.id] + area.count * ['zon-parquet-small']
         modules = [zeit.web.core.centerpage.TeaserModule(
-            [t], layout=lids.pop(0), parent=self) for t in values]
+            [t], layout=lids.pop(0), parent=self) for t in content]
         super(RenderedLegacyArea, self).__init__(
             modules, kind='parquet', is_teaserbar=True)
 
