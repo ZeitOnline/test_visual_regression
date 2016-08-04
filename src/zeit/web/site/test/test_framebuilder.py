@@ -84,14 +84,14 @@ def test_framebuilder_can_contain_ivw(testbrowser):
 def test_framebuilder_contains_no_meetrics(testbrowser):
     browser = testbrowser('/framebuilder')
     meetrics_script = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics_script) == 0
 
 
 def test_framebuilder_can_contain_meetrics(testbrowser):
     browser = testbrowser('/framebuilder?meetrics')
     meetrics_script = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics_script) == 1
 
 
