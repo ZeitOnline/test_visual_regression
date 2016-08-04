@@ -82,6 +82,19 @@
 			border-width: 1px 0
 			margin-bottom: -1px
 			margin-top: -1px
+	&--keywordpage,
+	&--topicpage
+		&:before,
+		&:after
+			content: ''
+			display: inline-block
+			width: 100%
+	&--keywordpage, &--topicpage
+		&:before
+			border-top: 1px solid $color-border;
+	&--keywordpage, &--topicpage
+		&:after
+			border-bottom: 1px solid $color-border;
 
 	+respond-min($break-areas)
 		float: left
@@ -97,7 +110,7 @@
 			max-width: $max-author-list-width + 2 * $page-padding
 		&--overview
 			max-width: $max-overview-width + 2 * $page-padding
-		&--ranking
+		&--ranking, &--keywordpage, &--topicpage
 			$max-ranking-width: $medium-content-width + 2 * $page-padding
 			$ranking-box-shadow-width: (remify(780px) - $max-ranking-width) / 2
 			background-color: $color-page-bg

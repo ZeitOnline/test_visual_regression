@@ -1,7 +1,11 @@
 {% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 {% import '{}:templates/macros/centerpage_macro.tpl'.format(view.package) as cp %}
 
-<div class="{{ 'cp-area' | with_mods(area.kind) }}{% if area.visible_mobile == False %} mobile-hidden{% endif %}">
+{% if ('keywordpage' or 'topicpage') in view.context.type and 'newsticker' in area.kind %}
+    {% set newsticker_modifier = view.context.type %}
+{% endif %}
+
+<div class="{{ 'cp-area' | with_mods(area.kind, newsticker_modifier) }}{% if area.visible_mobile == False %} mobile-hidden{% endif %}">
     {% profile %}
     {% block before_module_list %}{% endblock %}
     {% block module_list %}
