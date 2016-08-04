@@ -669,7 +669,7 @@ def test_article_has_linked_copyright(testbrowser):
     for line in browser.contents.splitlines():
         output += line.strip()
     assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" target="_blank">' \
+        '<a href="http://foo.de" class="" target="_blank">' \
         '© Reuters/Alessandro Bianchi' in output
 
 
@@ -679,7 +679,7 @@ def test_longform_has_linked_copyright(testbrowser):
     for line in browser.contents.splitlines():
         output += line.strip()
     assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" target="_blank">' \
+        '<a href="http://foo.de" class="" target="_blank">' \
         '© Johannes Eisele/AFP/Getty Images' in output
 
 
@@ -689,7 +689,7 @@ def test_header_has_linked_copyright(testbrowser):
     for line in browser.contents.splitlines():
         output += line.strip()
     assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" target="_blank">©foo' in output
+        '<a href="http://foo.de" class="" target="_blank">©foo' in output
 
 
 def test_feature_longform_should_have_zon_logo_header(testbrowser):
