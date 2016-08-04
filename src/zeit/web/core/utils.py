@@ -413,6 +413,11 @@ class LazyProxy(object):
     def __len__(self):
         return len(self.__origin__)
 
+    def __bool__(self):
+        return bool(self.__origin__)
+
+    __nonzero__ = __bool__
+
     def __iter__(self):
         try:
             return iter(self.__origin__)

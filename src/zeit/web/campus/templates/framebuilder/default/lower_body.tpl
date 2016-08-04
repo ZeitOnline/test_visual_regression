@@ -17,7 +17,7 @@
     <script>
         var require = { baseUrl: '{{ request.asset_host }}/js/' };
     </script>
-    <script src="{{ request.asset_host }}/js/campus.js"></script>
+    <script src="{{ request.asset_host }}/js/web.campus/frame.js"></script>
 
 </body>
 </html>

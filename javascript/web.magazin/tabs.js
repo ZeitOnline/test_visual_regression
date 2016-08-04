@@ -6,7 +6,7 @@
  * tabs.js: module for tabs
  * @module tabs
  */
-define(['jquery'], function() {
+define([ 'jquery' ], function( $ ) {
   /**
   * tabs.js: initialize tabs
   * @function init

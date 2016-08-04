@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import pyramid.testing
 import pytest
 import re
 

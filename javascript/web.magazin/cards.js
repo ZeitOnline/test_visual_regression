@@ -6,7 +6,7 @@
  * cards.js: module for flipping cards
  * @module cards
  */
-define(['jquery'], function() {
+define([ 'jquery' ], function( $ ) {
 
     /**
      * cards.js: flip card

@@ -3,7 +3,18 @@
  * @author moritz.stoltenburg@zeit.de
  * @version 0.1
  */
-(function( $ ) {
+(function( factory ) {
+    if ( typeof define === 'function' && define.amd ) {
+        // AMD
+        define( [ 'jquery' ], factory );
+    } else if ( typeof exports === 'object' ) {
+        // Node, CommonJS
+        module.exports = factory( require( 'jquery' ) );
+    } else {
+        // Browser globals
+        factory( jQuery );
+    }
+}(function( $ ) {
     /**
      * @see https://github.com/yckart/jquery.base64.js
      * Based upon: https://gist.github.com/Yaffle/1284012
@@ -81,4 +92,4 @@
         });
     };
 
-})( jQuery );
+}));

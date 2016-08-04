@@ -1,14 +1,28 @@
 Change log for zeit.web
 =======================
 
-2.95 (unreleased)
+2.96 (unreleased)
 -----------------
+
+- MAINT: Combine image fallback and fallback_expired into one condition
+
+- ZON-3078: Enforce mobile image for first zett parquet teaser
+
+
+2.95 (2016-08-01)
+-----------------
+
+- HOTFIX: Preserve querystrings while redirecting videos
 
 - BUG-469: Scale down ad place 1 and use iframe in AMPs
 
 - BUG-476: Label ads in AMPs
 
+- BUG-471: make iframes scroll on iOS
+
 - ZON-1978: Hide regions, areas and modules
+
+- ZON-3198: Remove jQuery from global scope and add slim variant for framebuilder
 
 - ZON-3171: Add target viewport (mobile / desktop) to image URLs
 

@@ -1,7 +1,7 @@
 <article class="{% block layout %}nextread-base{% endblock %}">
     <a title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}">
         {% block teaser_image -%}
-            {% require image = get_image(module, teaser, fallback=True, variant_id="super") -%}
+            {% require image = get_image(module, variant_id="super") -%}
                 {%- set media_caption_additional_class = 'figcaption--hidden' -%}
                 {%- set module_layout = self.layout() -%}
                 {%- set omit_image_links = True -%}
