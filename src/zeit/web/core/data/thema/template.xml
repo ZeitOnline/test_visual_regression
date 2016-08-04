@@ -85,7 +85,7 @@
       </region>
     </cluster>
     <cluster visible="True" area="id-d976a64d-1589-4b49-a153-12bdcdf94d1e" kind="solo">
-        <region visible="True" hide-dupes="True" kind="newsticker" area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" count="8" automatic="True" automatic_type="query" title="Schlagzeilen">
+        <region visible="True" hide-dupes="True" kind="newsticker" area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" count="8" automatic="True" automatic_type="query" title="Schlagzeilen zum Thema">
           <raw_query>merkel</raw_query>
           <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
           <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-396f44ea-f59b-46d7-adc1-856964e221a2"/>
