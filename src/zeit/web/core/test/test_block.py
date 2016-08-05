@@ -215,6 +215,19 @@ def test_image_should_use_variant_given_on_layout(application):
     assert 'original' == image.image.variant
 
 
+def test_image_should_use_variant_original_if_infographic(application):
+    image = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/image/bertelsmann-infographic/')
+    model_block = mock.Mock()
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
+    model_block.is_empty = False
+    model_block.xml = lxml.etree.fromstring('<image/>')
+    model_block.references.target = image
+    image = zeit.web.core.block.Image(model_block)
+    assert 'original' == image.image.variant
+
+
 def test_image_should_be_none_if_expired():
     model_block = mock.Mock()
     model_block.display_mode = 'large'
