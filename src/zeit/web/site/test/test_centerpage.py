@@ -13,6 +13,11 @@ import zeit.solr.interfaces
 
 import zeit.web.site.view_centerpage
 
+import babel
+from datetime import datetime
+from datetime import timedelta
+from zeit.web.core.template import format_date
+
 
 def get_num(x):
     return int(''.join(char for char in x.strip() if char.isdigit()))
@@ -350,3 +355,17 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
 
     assert len(liveblog) == 17
     assert len(offline) == 8
+
+
+def test_format_date_returns_expected_value():
+    tz = babel.dates.get_timezone('Europe/Berlin')
+    now = datetime.now(tz)
+    before = now - timedelta(hours=5)
+    yesterday = now - timedelta(days=1)
+
+    assert 'Heute, ' + str(before.strftime('%H:%M'))\
+        == format_date(before, type="switch_from_hours_to_date")
+
+    day = str(yesterday.strftime('%d'))
+    assert day.lstrip('0') + '. ' + str(yesterday.strftime('%m. %Y')) \
+        == format_date(yesterday, type="switch_from_hours_to_date")
