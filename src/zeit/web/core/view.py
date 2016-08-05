@@ -1133,7 +1133,11 @@ class FrameBuilder(CeleraOneMixin):
         # we can only hack it into the asset pipeline
         # and hope for the best. We'll need https://www.zeit.de!
         if self.framebuilder_requires_ssl:
-            self.request.asset_host = self.request.framebuilder_ssl_asset_host
+            try:
+                self.request.asset_host = (
+                    self.request.framebuilder_ssl_asset_host)
+            except AttributeError:
+                pass
         return resp
 
     @zeit.web.reify
