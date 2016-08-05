@@ -4,6 +4,7 @@
 {% if ('keywordpage' or 'topicpage') in view.context.type and 'newsticker' in area.kind %}
     {% set newsticker_modifier = view.context.type %}
 {% endif %}
+{% set is_kw_tp_page = True if ('keywordpage' or 'topicpage') in view.context.type else False %}
 
 <div class="{{ 'cp-area' | with_mods(area.kind, newsticker_modifier) }}{% if area.visible_mobile == False %} mobile-hidden{% endif %}">
     {% profile %}
