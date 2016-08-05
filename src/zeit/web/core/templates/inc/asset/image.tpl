@@ -18,6 +18,7 @@
 
     <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image"
         {%- if image_itemprop %} itemprop="{{ image_itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
+        {% block media_caption_above %}{% endblock %}
         <!--[if gt IE 8]><!-->
         <noscript data-src="{{ fallback_source }}">
         <!--<![endif]-->
@@ -40,7 +41,7 @@
                     {%- if name | trim | length > 1 %}
                         <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
                             {%- if url and not omit_image_links %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif -%}
-                            <span itemprop="name">{{ name | trim | replace('© ', '© ') }}</span>
+                            <span class="{% block media_copyright_class %}{% endblock %}" itemprop="name">{{ name | trim | replace('© ', '© ') }}</span>
                             {%- if url and not omit_image_links %}</a>{% endif -%}
                         </span>
                     {%- endif %}
