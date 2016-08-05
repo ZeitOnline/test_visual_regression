@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-3099: Render xml.zeit.de
 
+- ZON-3197: SSL version of framebuilder
+
 - MAINT: Combine image fallback and fallback_expired into one condition
 
 

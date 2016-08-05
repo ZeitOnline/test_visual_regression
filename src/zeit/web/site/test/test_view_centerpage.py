@@ -1067,14 +1067,14 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
 def test_homepage_should_have_proper_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     meetrics = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
 def test_centerpage_must_not_have_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 0
 
 

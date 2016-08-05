@@ -682,7 +682,7 @@ def test_article_should_show_main_image_from_imagegroup(testbrowser):
 def test_article_should_have_proper_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     meetrics = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
