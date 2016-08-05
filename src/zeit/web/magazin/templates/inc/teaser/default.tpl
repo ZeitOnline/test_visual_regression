@@ -5,7 +5,7 @@ Default teaser template to inherit from.
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 {%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{%- set image = get_image(module, teaser, fallback=True) %}
+{%- set image = get_image(module) %}
 {%- set video = teaser | get_video_asset %}
 {%- set area = area if area else '' %} {# TODO: remove as soon as we have access to real area data (AS)#}
 

@@ -784,7 +784,7 @@ def test_reader_revenue_status_should_utilize_feature_toggle(
     assert 'cp28' not in view.webtrekk['customParameter'].keys()
 
 
-def test_reader_revenue_status_should_default_to_free_for_ZEDE(
+def test_reader_revenue_status_should_default_to_free_for_zede(
         dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/02')
@@ -792,7 +792,7 @@ def test_reader_revenue_status_should_default_to_free_for_ZEDE(
     assert view.webtrekk['customParameter']['cp28'] == 'free'
 
 
-def test_reader_revenue_status_should_default_to_registration_for_ZEI(
+def test_reader_revenue_status_should_default_to_registration_for_zei(
         dummy_request, monkeypatch):
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, 'product_id', 'ZEI')
@@ -800,3 +800,46 @@ def test_reader_revenue_status_should_default_to_registration_for_ZEI(
         'http://xml.zeit.de/zeit-online/article/02')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp28'] == 'registration'
+
+
+def test_jquery_not_overwritten(testserver, selenium_driver):
+    script = 'return jQuery.fn.jquery'
+
+    # ZON article
+    selenium_driver.get(
+        '{}/zeit-online/article/jquery-local-scope'.format(testserver.url))
+    assert '2.2.4' == selenium_driver.execute_script(script)
+
+    # ZMO article
+    selenium_driver.get(
+        '{}/zeit-magazin/article/jquery-local-scope'.format(testserver.url))
+    assert '2.2.4' == selenium_driver.execute_script(script)
+
+    # ZCO article
+    selenium_driver.get(
+        '{}/campus/article/jquery-local-scope'.format(testserver.url))
+    assert '2.2.4' == selenium_driver.execute_script(script)
+
+
+def test_jquery_not_in_window_scope(testserver, selenium_driver):
+    script = 'return typeof window.jQuery'
+
+    # ZON article
+    selenium_driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    assert 'undefined' == selenium_driver.execute_script(script)
+
+    # ZMO article
+    selenium_driver.get('{}/zeit-magazin/article/10'.format(testserver.url))
+    assert 'undefined' == selenium_driver.execute_script(script)
+
+    # ZCO article
+    selenium_driver.get('{}/campus/article/simple'.format(testserver.url))
+    assert 'undefined' == selenium_driver.execute_script(script)
+
+    # ZON Framebuilder
+    selenium_driver.get('{}/framebuilder'.format(testserver.url))
+    assert 'undefined' == selenium_driver.execute_script(script)
+
+    # ZCO Framebuilder
+    selenium_driver.get('{}/campus/framebuilder'.format(testserver.url))
+    assert 'undefined' == selenium_driver.execute_script(script)

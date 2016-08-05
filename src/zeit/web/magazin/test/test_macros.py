@@ -401,38 +401,6 @@ def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
     assert tpl.module.no_block('') == ''
 
 
-def test_macro_copyrights(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-    copyrights = [
-        dict(
-            image=('http://localhost:9090/exampleimages/'
-                   'artikel/mode.jpg'),
-            label='Lorem ipsum Cillum laborum cupidatat officia.',
-            link='http://www.zeit.de'
-        ),
-        dict(
-            image=('http://localhost:9090/exampleimages/'
-                   'artikel/briefmarke.jpg'),
-            label='Lorem ipsum Ut dolor quis pariatur occaecat.',
-            link=None
-        )
-    ]
-    module = tpl.make_module({'view': mock.Mock()})
-    snippet = lxml.html.fromstring(module.copyrights(copyrights))
-
-    assert len(snippet.cssselect('li.copyrights__entry')) == 2, (
-        'Two copyright entries should be contained in the list.')
-
-    assert snippet.cssselect(
-        'li.copyrights__entry:nth-child(1) .copyrights__label a'), (
-            'The first entry should produce a link element.')
-
-    assert not snippet.cssselect(
-        'li.copyrights__entry:nth-child(2) .copyrights__label a'), (
-            'The second entry should not produce a link element.')
-
-
 def test_macro_liveblog_produces_html(application, jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')

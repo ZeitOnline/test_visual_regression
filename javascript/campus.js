@@ -63,6 +63,9 @@ require([
     var pageType = document.body.getAttribute( 'data-page-type' ),
         main = $( '#main' );
 
+    // remove jQuery from global scope
+    $.noConflict( true );
+
     $( window ).referrerCount();
     $( '.js-scroll' ).animateScroll();
 

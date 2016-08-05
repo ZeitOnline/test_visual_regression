@@ -359,8 +359,10 @@ def test_small_teaser_should_have_responsive_layout(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
 
-    width_script = 'return $(".teaser-small__media").first().width()'
-    width = driver.execute_script(width_script)
+    script = ('var width = window.getComputedStyle('
+              'document.querySelector(".teaser-small__media-container")'
+              ').getPropertyValue("width"); return parseInt(width, 10);')
+    width = driver.execute_script(script)
 
     img_box = driver.find_elements_by_class_name('teaser-small__media')[0]
 
@@ -380,7 +382,9 @@ def test_snapshot_morelink_text_icon_switch(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/teaser-gallery-setup' % testserver.url)
     linkdisplay = driver.execute_script(
-        "return $('.snapshot .section-heading__text').eq(0).css('display')")
+        'return window.getComputedStyle('
+        'document.querySelector(".snapshot .section-heading__text")'
+        ').getPropertyValue("display")')
     if screen_size[0] == 320:
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:
@@ -1716,6 +1720,21 @@ def test_zett_parquet_should_have_ads(testbrowser):
     assert ad.text == 'Anzeige'
 
 
+def test_zett_parquet_first_teaser_shows_mobile_image(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/zeit-online/parquet-feeds' % testserver.url)
+
+    # set to mobile and test
+    driver.set_window_size(400, 800)
+    zett_area = driver.find_element_by_css_selector('.cp-area--zett')
+    assert(len(zett_area.find_elements_by_css_selector(
+           '.teaser-small__media--force-mobile')) == 1)
+
+    # reset size
+    driver.set_window_size(980, 800)
+
+
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
@@ -2290,13 +2309,15 @@ def test_dynamic_cps_consider_teaser_image_fill_color(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
-        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                           'harald-martenstein-wideformat')],
+        'image-base-id': [
+            (u'http://xml.zeit.de/zeit-magazin/images/'
+                'harald-martenstein-wideformat')],
         'image-fill-color': [u'A3E6BB']}, {
-        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
-        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                           'harald-martenstein-wideformat')],
-        'image-fill-color': [u'']}]
+            'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
+            'image-base-id': [
+                (u'http://xml.zeit.de/zeit-magazin/images/'
+                    'harald-martenstein-wideformat')],
+            'image-fill-color': [u'']}]
 
     browser = testbrowser('/serie/martenstein')
     image1 = browser.cssselect('.cp-area--ranking article img')[0]

@@ -15,7 +15,7 @@
         {% if view.iso_duration %}
             <meta itemprop="duration" content="{{ view.iso_duration }}">
         {% endif %}
-        {% require image = get_image(view, view.context, default='wide', fallback=False) %}
+        {% require image = get_image(view, view.context, variant_id="wide", fallback=False) %}
             <meta itemprop="thumbnailUrl" content="{{ request.image_host + image.path }}">
         {% endrequire %}
 
