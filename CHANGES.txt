@@ -4,9 +4,13 @@ Change log for zeit.web
 2.96 (unreleased)
 -----------------
 
-- MAINT: Combine image fallback and fallback_expired into one condition
+- ZON-3171: Render different metadata for infographic-images ff.
 
 - ZON-3078: Enforce mobile image for first zett parquet teaser
+
+- ZON-3099: Render xml.zeit.de
+
+- MAINT: Combine image fallback and fallback_expired into one condition
 
 
 2.95 (2016-08-01)

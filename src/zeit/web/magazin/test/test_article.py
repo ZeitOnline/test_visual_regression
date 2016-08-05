@@ -669,7 +669,7 @@ def test_article_has_linked_copyright(testbrowser):
     for line in browser.contents.splitlines():
         output += line.strip()
     assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" target="_blank">' \
+        '<a href="http://foo.de" class="" target="_blank">' \
         '© Reuters/Alessandro Bianchi' in output
 
 
@@ -679,7 +679,7 @@ def test_longform_has_linked_copyright(testbrowser):
     for line in browser.contents.splitlines():
         output += line.strip()
     assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" target="_blank">' \
+        '<a href="http://foo.de" class="" target="_blank">' \
         '© Johannes Eisele/AFP/Getty Images' in output
 
 
@@ -689,7 +689,7 @@ def test_header_has_linked_copyright(testbrowser):
     for line in browser.contents.splitlines():
         output += line.strip()
     assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" target="_blank">©foo' in output
+        '<a href="http://foo.de" class="" target="_blank">©foo' in output
 
 
 def test_feature_longform_should_have_zon_logo_header(testbrowser):
@@ -830,3 +830,18 @@ def test_article_tags_are_present_and_limited_in_longform(testbrowser):
     assert len(tags) == 1
     assert len(tags[0].find_class('article-tags__title')) == 1
     assert len(links) == 6
+
+
+def test_infographics_should_display_header_above_image(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/infographic')
+    items = list(browser.xpath('//figure')[0].iterchildren())
+    assert 'Die Entschlackung' == items[0].text
+    assert (
+        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        items[1].text)
+
+
+# TODO: Add `test_infographics_should_render_border_styles_conditionally` ?
+# There has been no real point in adapting the test only
+# to work with ZMO macros. Check, if this test is needed here, after ZMO
+# template-macros have been switched to blocks (OPS-386).

@@ -88,18 +88,19 @@ class Base(object):
     seo_title_default = u''
     pagetitle_suffix = u''
     inline_svg_icons = False
+    host_check_required_on = ['newsfeed', 'xml']
 
     def __call__(self):
         # to avoid circular imports
         import zeit.web.site.view_feed
 
         # XXX: Since we do not have a configuration based on containments
-        # for our views, this is necessary to control, that only explicitly
-        # configured views, will render an RSS feed on newsfeed.zeit.de
-        # host header (RD, 2015-09)
-        host = self.request.headers.get('host', '')
-        if re.match('newsfeed(\.staging)?\.zeit\.de', host) and not (
-                issubclass(type(self), zeit.web.site.view_feed.Base)):
+        # for our views, the "function view_is_forbidden_by_host" is necessary
+        # to control, that only explicitly configured views with the attribute
+        # allowed_on_hosts, will render e.g. an RSS feed on newsfeed.zeit.de
+        # host header (RD, 2015-09; updated by TK, 2016-06)
+
+        if not self.is_allowed_on_host(self.request.headers.get('host')):
             raise pyramid.httpexceptions.HTTPNotFound()
 
         redirect_on_trailing_slash(self.request)
@@ -125,6 +126,16 @@ class Base(object):
         self.request = request
         self._webtrekk_assets = []
 
+    def is_allowed_on_host(self, host):
+        allowed_on_hosts = getattr(self, 'allowed_on_hosts', None)
+        if host and any([h in host for h in self.host_check_required_on]):
+            if allowed_on_hosts and any(
+                [re.match('{}(\.staging)?\.zeit\.de'.format(x), host)
+                    for x in allowed_on_hosts]):
+                    return True
+            return False
+        return True
+
     @zeit.web.reify
     def vgwort_url(self):
         token = zeit.vgwort.interfaces.IToken(self.context).public_token
@@ -136,6 +147,8 @@ class Base(object):
     def type(self):
         return type(self.context).__name__.lower()
 
+    # XXX Base View should not depend on ICommonMetadata
+    # Throws an error if resssort, sub_ressort, cap_title ... is None
     @zeit.web.reify
     def ressort(self):
         if self.context.ressort:
@@ -1330,47 +1343,6 @@ def json_comment_count(request):
     renderer='string')
 def view_textcontent(context, request):
     return context.text
-
-
-@pyramid.view.view_config(
-    context=zeit.cms.content.interfaces.IXMLContent,
-    route_name='xml',
-    custom_predicates=(zeit.web.core.is_admin,))
-def view_xml(context, request):
-    xml = context.xml
-    filter_xslt = lxml.etree.XML("""
-        <xsl:stylesheet version="1.0"
-            xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-            <xsl:output method="xml"
-                        omit-xml-declaration="yes" />
-            <xsl:template match="*|@*|text()">
-                <xsl:copy>
-                    <xsl:apply-templates select="*|@*|text()" />
-                </xsl:copy>
-            </xsl:template>
-            <xsl:template match="cluster">
-                <region>
-                    <xsl:apply-templates select="*|@*|text()" />
-                </region>
-            </xsl:template>
-            <xsl:template match="region">
-                <area>
-                    <xsl:apply-templates select="*|@*|text()" />
-                </area>
-            </xsl:template>
-            <xsl:template match="container">
-                <module>
-                    <xsl:apply-templates select="*|@*|text()" />
-                </module>
-            </xsl:template>
-        </xsl:stylesheet>""")
-    try:
-        transform = lxml.etree.XSLT(filter_xslt)
-        return pyramid.response.Response(
-            str(transform(xml)),
-            content_type='text/xml')
-    except TypeError:
-        return
 
 
 @pyramid.view.view_config(
