@@ -4,6 +4,8 @@ Change log for zeit.web
 2.96 (unreleased)
 -----------------
 
+- ZON-3171: Render different metadata for infographic-images ff.
+
 - ZON-3078: Enforce mobile image for first zett parquet teaser
 
 - ZON-3099: Render xml.zeit.de
