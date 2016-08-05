@@ -284,14 +284,3 @@ def json_update_time(request):
         dlps = dlp = None
     request.response.cache_expires(5)
     return {'last_published': dlp, 'last_published_semantic': dlps}
-
-
-@pyramid.view.view_config(
-    context=zeit.content.cp.interfaces.ICenterPage,
-    name='xml',
-    renderer='string')
-class XMLView(zeit.web.core.view.Base):
-
-    def __call__(self):
-        xml = zeit.content.cp.interfaces.IRenderedXML(self.context)
-        return lxml.etree.tostring(xml, pretty_print=True)

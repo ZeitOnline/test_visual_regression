@@ -104,7 +104,7 @@ def test_routesmapper_should_make_friedbert_surrender_to_blacklisted_routes(
 def test_routesmapper_should_make_friedbert_unblacklist_newsfeed_host(
         testserver):
     resp = requests.get(testserver.url + '/angebote/printkiosk/index',
-                        headers={'Host': 'newsfeed.localhost:port'})
+                        headers={'Host': 'newsfeed.zeit.de'})
     assert 'X-Render-With' not in resp.headers
 
 

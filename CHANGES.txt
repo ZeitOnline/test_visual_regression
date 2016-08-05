@@ -4,6 +4,10 @@ Change log for zeit.web
 2.96 (unreleased)
 -----------------
 
+- ZON-3078: Enforce mobile image for first zett parquet teaser
+
+- ZON-3099: Render xml.zeit.de
+
 - MAINT: Combine image fallback and fallback_expired into one condition
 
 
