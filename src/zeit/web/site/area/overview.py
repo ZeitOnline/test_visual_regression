@@ -91,6 +91,11 @@ class DateContentQuery(zeit.web.core.area.ranking.SolrContentQuery):
 
     grokcore.component.context(Overview)
 
+    def __init__(self, context):
+        super(DateContentQuery, self).__init__(context)
+        self.query_string = zeit.solr.query.and_(
+            self.query_string, self._range_query())
+
     def __call__(self):
         result = super(DateContentQuery, self).__call__()
         self._fill_up_blocks_to_match_total_hits()
@@ -115,10 +120,6 @@ class DateContentQuery(zeit.web.core.area.ranking.SolrContentQuery):
             xml.attrib.pop('{http://namespaces.zeit.de/CMS/cp}__name__', None)
             clone = type(jango)(jango.__parent__, xml)
             yield clone
-
-    def _query_solr(self, query, sort_order):
-        query = zeit.solr.query.and_(query, self._range_query())
-        return super(DateContentQuery, self)._query_solr(query, sort_order)
 
     def _range_query(self):
         offset = datetime.timedelta(days=self.context.current_page - 1)
