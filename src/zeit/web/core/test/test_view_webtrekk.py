@@ -223,10 +223,12 @@ def test_article_elements_provide_expected_id_for_webtrekk(
 
 def test_video_stage_provides_expected_webtrekk_string(
         selenium_driver, testserver):
-    url = testserver.url + '{}#debug-clicktracking'
+
     driver = selenium_driver
+    driver.get('%s/zeit-online/video-stage'
+               '#debug-clicktracking' % testserver.url)
     driver.set_window_size(980, 800)
-    driver.get(url.format('/zeit-online/video-stage'))
+    driver.implicitly_wait(10)  # seconds
 
     link = driver.find_element_by_class_name('video-large__combined-link')
     link.click()
@@ -249,12 +251,13 @@ def test_video_stage_provides_expected_webtrekk_string(
 
 def test_video_block_provides_expected_webtrekk_string(
         selenium_driver, testserver):
-    url = testserver.url + '{}#debug-clicktracking'
     driver = selenium_driver
+    driver.get('%s/zeit-online/article/zeit'
+               '#debug-clicktracking' % testserver.url)
     driver.set_window_size(980, 800)
+    driver.implicitly_wait(15)  # seconds
 
     # test ZON article
-    driver.get(url.format('/zeit-online/article/zeit'))
 
     try:
         WebDriverWait(driver, 3).until(
@@ -264,6 +267,7 @@ def test_video_block_provides_expected_webtrekk_string(
         assert False, 'Play button must be clickable'
 
     button = driver.find_element_by_class_name('vjs-big-play-button')
+    assert button
     button.click()
 
     try:
@@ -281,7 +285,9 @@ def test_video_block_provides_expected_webtrekk_string(
         'sportreporter-christian-spiller-uebt-skispringen'))
 
     # test Campus article
-    driver.get(url.format('/campus/article/video'))
+    driver.get('%s/campus/article/video'
+               '#debug-clicktracking' % testserver.url)
+    driver.implicitly_wait(10)  # seconds
 
     try:
         WebDriverWait(driver, 3).until(
@@ -291,6 +297,7 @@ def test_video_block_provides_expected_webtrekk_string(
         assert False, 'Play button must be clickable'
 
     button = driver.find_element_by_class_name('vjs-big-play-button')
+    assert button
     button.click()
 
     try:
@@ -310,20 +317,15 @@ def test_video_block_provides_expected_webtrekk_string(
 
 def test_video_page_provides_expected_webtrekk_string(
         selenium_driver, testserver):
-    url = testserver.url + '{}#debug-clicktracking'
     driver = selenium_driver
+    driver.get('%s/video/2014-01/1953013471001/motorraeder-foto-momente-die-'
+               'stille-schoenheit-der-polarlichter'
+               '#debug-clicktracking' % testserver.url)
     driver.set_window_size(980, 800)
-    driver.get(url.format(('/video/2014-01/1953013471001/motorraeder-foto-'
-                           'momente-die-stille-schoenheit-der-polarlichter')))
+    driver.implicitly_wait(10)  # seconds
 
-    try:
-        WebDriverWait(driver, 3).until(
-            expected_conditions.frame_to_be_available_and_switch_to_it(
-                (By.CLASS_NAME, 'video-player__iframe')))
-    except (TimeoutException, InvalidSwitchToTargetException):
-        assert False, 'iframe must be available'
+    assert driver.find_element_by_class_name('video-player__iframe')
 
-    driver.switch_to.default_content()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
         'stationaer.video.large.alternative_nobelpreistraeger.brightcove..')
