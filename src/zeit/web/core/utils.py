@@ -9,17 +9,20 @@ import itertools
 import urllib
 import urlparse
 
+import grokcore.component
 import jinja2
 import peak.util.proxies
 import pysolr
 import zope.component
 
-import zeit.web.core
 import zeit.cms.content.interfaces
 import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.solr.interfaces
+import zeit.retresco.connection
+import zeit.retresco.convert
+import zeit.retresco.interfaces
 
 
 log = logging.getLogger(__name__)
@@ -548,3 +551,42 @@ class DataSolr(RandomContent):
 
     def update_raw(self, xml, **kw):
         pass
+
+
+@zope.interface.implementer(zeit.retresco.interfaces.ITMS)
+class DataTMS(zeit.retresco.connection.TMS, RandomContent):
+    """Fake TMS implementation that is used for local development."""
+
+    ITEMS_PER_PAGE = 25
+
+    def __init__(self):
+        self._response = {}
+
+    def _request(self, request, **kw):
+        return self._response
+
+    def get_topicpage_documents(self, id, page=1):
+        log.debug('Mocking TMS request %s, page=%s', id, page)
+        result = []
+        for content in self._get_content():
+            data = zeit.retresco.interfaces.ITMSRepresentation(content)()
+            if data is not None:
+                result.append(data)
+        self._response = {
+            'num_found': len(result),
+            'docs': random.sample(
+                result, min(self.ITEMS_PER_PAGE, len(result))),
+        }
+        result = super(DataTMS, self).get_topicpage_documents(id, page)
+        self._response = {}
+        return result
+
+
+class CMSSearch(zeit.retresco.convert.Converter):
+
+    interface = zeit.cms.interfaces.ICMSContent
+    grokcore.component.name('zeit.find')
+
+    def __call__(self):
+        # Disable vivi-specific Converter, as it does not work without Zope.
+        return {}
