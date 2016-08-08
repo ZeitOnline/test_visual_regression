@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.96 (unreleased)
+2.97 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+2.96 (2016-08-08)
 -----------------
 
 - ZON-3171: Render different metadata for infographic-images ff.
@@ -9,6 +15,8 @@ Change log for zeit.web
 - ZON-3078: Enforce mobile image for first zett parquet teaser
 
 - ZON-3099: Render xml.zeit.de
+
+- ZON-3197: SSL version of framebuilder
 
 - MAINT: Combine image fallback and fallback_expired into one condition
 
