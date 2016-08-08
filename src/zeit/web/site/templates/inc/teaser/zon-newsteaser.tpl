@@ -3,9 +3,9 @@
 <article class="newsteaser">
     <a class="newsteaser__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
         <time class="newsteaser__time">
-           {{ teaser | mod_date | format_date(pattern='HH:mm', type='switch_from_hours_to_date' if ('keywordpage','topicpage' in context) else '') }}
+           {{ teaser | mod_date | format_date(pattern='HH:mm', type='switch_from_hours_to_date' if ('keywordpage' or 'topicpage') in context else '') }}
         </time>
-        <div class="{{ 'newsteaser__text' | with_mods('kw-tp-page' if 'keywordpage','topicpage' in context) }}">
+        <div class="{{ 'newsteaser__text' | with_mods('kw-tp-page' if ('keywordpage' or 'topicpage') in context) }}">
             <h2 class="newsteaser__heading">
                 {%- if teaser.teaserSupertitle or teaser.supertitle -%}
                     <span class="newsteaser__kicker">
