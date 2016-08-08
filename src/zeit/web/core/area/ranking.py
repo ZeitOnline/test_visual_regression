@@ -139,10 +139,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             except (KeyError, UnicodeEncodeError, ValueError):
                 continue
 
-        serie = doc.get('serie', None)
-        source = zeit.cms.content.interfaces.ICommonMetadata['serie'].source
-        doc['serie'] = source.factory.values.get(serie, None)
-
         # XXX These asset badges and classification flags are not indexed
         #     in Solr, so we lie about them.
         doc.update({'gallery': None,
