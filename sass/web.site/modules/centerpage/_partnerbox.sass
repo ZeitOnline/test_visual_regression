@@ -1,5 +1,4 @@
 $bg_img--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freisteller'
-$bg_img--reisen: 'http://www.zeit.de/angebote/reisen/reisebox-image'
 
 .partnerbox
 	margin: $vertical-space 0
@@ -130,19 +129,16 @@ $bg_img--reisen: 'http://www.zeit.de/angebote/reisen/reisebox-image'
 				color: $zon-grey
 
 			&__action
-				+respond-min($break-desktop-min)
+				+respond-min($break-phablet-min)
 					width: 60%
+					display: table-cell
+					vertical-align: top
+					padding: remify(25px)
 
+			&__dropdown-intro,
 			&__intro
-				padding: remify(10px 0 0 0)
-
-			&__intro-img
-				display: block
-				height: remify(140px)
-				padding:
-				background: $zon_lighter_grey url($bg_img--reisen) no-repeat center
-				background-size: cover
-				margin: remify(0 25px)
-				+respond-min($break-desktop-min)
-					margin: 0
+				padding: remify(0 0 20px 0)
+				+respond-min($break-phablet-min)
+					display: table-cell
+					vertical-align: top
 
