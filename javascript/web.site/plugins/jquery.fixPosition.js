@@ -41,7 +41,8 @@
             '.zg-grafik--default-margin',
             '.zon-grafik',
             '.zon-grafik--map',
-            'picture'
+            'picture',
+            '.infographic'
         ];
         this.threshold = 40;
         this.initialMarginLeft = parseInt( this.element.css( 'margin-left' ) );
