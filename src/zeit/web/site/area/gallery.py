@@ -6,7 +6,10 @@ import zeit.content.cp.automatic
 
 @zeit.web.register_area('gallery')
 class Gallery(zeit.content.cp.automatic.AutomaticArea):
-    pass
+    """An automatic area that offers pagination via a single "more" button
+    that cycles through all available teasers (and starts from the beginning
+    after reaching the end).
+    """
 
 
 class CyclicalContentQuery(zeit.content.cp.automatic.CenterpageContentQuery):

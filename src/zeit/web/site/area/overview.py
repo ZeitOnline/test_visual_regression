@@ -21,6 +21,13 @@ SANITY_BOUND = 500
 
 @zeit.web.register_area('overview')
 class Overview(zeit.web.core.area.ranking.Ranking):
+    """An automatic area that performs pagination for entire days, i.e.
+    one day is one page.
+
+    This means that the `count` of auto-teaser blocks is irrelevant here,
+    in fact usually only one block is configured, and the area fills itself
+    with as many blocks as there are results for that day.
+    """
 
     count = SANITY_BOUND
     sort_order = 'publikation'

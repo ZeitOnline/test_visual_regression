@@ -33,6 +33,17 @@ class IRanking(zeit.content.cp.interfaces.IArea):
 
 @zeit.web.register_area('ranking')
 class Ranking(zeit.content.cp.automatic.AutomaticArea):
+    """An automatic area that provides solr-based pagination of results.
+
+    Optionally supports a `search-form` cpextra so the query can be entered
+    by the user instead of reading it from the area.
+
+    Supports manual content on the first page, and then automatic content on
+    the following pages: On the first page, if there are manual teasers,
+    Ranking claims to have count=0 (so it is effectively hidden), and on the
+    following pages, zeit.web.core.view_centerpage.CenterpagePage hides most
+    other areas/modules except for the Ranking area.
+    """
 
     zope.interface.implements(
         IRanking,
