@@ -4,9 +4,11 @@ Change log for zeit.web
 2.97 (unreleased)
 -----------------
 
-- FIX: Small fixes to ZON-3221
-
 - BUG-478: Show label on zco text-only advertorial teaser
+
+- FIX: Small styling fixes to ZON-3221
+
+- FIX: Do not show image on column nextread
 
 
 2.96 (2016-08-08)
