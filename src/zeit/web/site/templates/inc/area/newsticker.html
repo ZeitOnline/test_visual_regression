@@ -1,6 +1,6 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
-{% set link_path = '' if ('keywordpage','topicpage' in context) else 'news/index' %}
+{% set link_path = False if ('keywordpage' or 'topicpage') in context else 'news/index' %}
 
 {% block before_module_list %}
     {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, 'newsteaser', 'alle_schlagzeilen') %}
