@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-478: Show label on zco text-only advertorial teaser
 
+- ZON-3099: Make xml.zeit.de routing work
+
 - FIX: Small styling fixes to ZON-3221
 
 - FIX: Do not show image on column nextread
