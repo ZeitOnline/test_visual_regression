@@ -27,7 +27,9 @@ class CyclicalContentQuery(zeit.content.cp.automatic.CenterpageContentQuery):
                 content = next(teasered)
             except StopIteration:
                 teasered = zeit.content.cp.interfaces.ITeaseredContent(
-                    self.context.referenced_cp, iter([]))
+                    self.context.referenced_cp, None)
+                if teasered is None:
+                    break
                 continue
 
             if self.context.hide_dupes and content in self.existing_teasers:
