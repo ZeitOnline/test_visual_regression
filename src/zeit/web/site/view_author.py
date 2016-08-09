@@ -176,12 +176,12 @@ class AuthorArticleRanking(zeit.web.core.area.ranking.Ranking):
 
     def __init__(self, context, favourite_content):
         super(AuthorArticleRanking, self).__init__(context)
-        self.uids_above = [x.uniqueId for x in favourite_content]
+        self.existing_uids = [x.uniqueId for x in favourite_content]
 
     @zeit.web.reify
     def count(self):
         if self.page == 1:
-            return self.context._count - len(self.uids_above)
+            return self.context._count - len(self.existing_uids)
         return self.context._count
 
 

@@ -109,7 +109,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return self.search_form.sort_order
 
     @zeit.web.reify('default_term')
-    def uids_above(self):
+    def existing_uids(self):
         if not self.hide_dupes:
             return zeit.web.dont_cache([])
         return [x.uniqueId for x in self._content_query.existing_teasers
@@ -158,11 +158,12 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     @zeit.web.reify
     def start(self):
-        return self.count * max(self.page - 1 - (len(self.uids_above) > 0), 0)
+        return self.count * max(
+            self.page - 1 - (len(self.existing_uids) > 0), 0)
 
     @zeit.web.reify
     def count(self):
-        if self.page == 1 and len(self.uids_above) > 0:
+        if self.page == 1 and len(self.existing_uids) > 0:
             return 0
         return self.context._count
 
@@ -209,7 +210,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         count = self.context._count
         if self.hits > 0 < count:
             return int(math.ceil(float(self.hits) / float(count)) +
-                       (len(self.uids_above) > 0))
+                       (len(self.existing_uids) > 0))
         return 0
 
     @zeit.web.reify
