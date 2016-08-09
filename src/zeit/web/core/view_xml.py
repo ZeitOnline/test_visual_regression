@@ -1,22 +1,22 @@
 from pyramid.response import FileIter
 from pyramid.response import Response
-from zeit.connector.interfaces import IResource
 import lxml.etree
 import lxml.objectify
 import magic
 import pyramid.view
+
+from zeit.connector.interfaces import IResource
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
+import zeit.cms.repository.interfaces
+import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
+import zeit.content.video.interfaces
+import zeit.web.core.article
+import zeit.web.core.gallery
+import zeit.web.core.view
 
 
-@pyramid.view.view_defaults(
-    context=zeit.cms.content.interfaces.IXMLContent,
-    renderer='string')
-@pyramid.view.view_config(
-    route_name='xml')
-@pyramid.view.view_config(
-    header='host:xml(\.staging)?\.zeit\.de')
 class XMLContent(zeit.web.core.view.Base):
 
     allowed_on_hosts = ['xml']
@@ -29,8 +29,10 @@ class XMLContent(zeit.web.core.view.Base):
         self._include_liveblogs()
         self._set_meta_robots()
         self._set_mobile_alternative()
+        lxml.objectify.deannotate(
+            self.xml, pytype=True, xsi=True, xsi_nil=True)
         return lxml.etree.tostring(
-            self.deannotate(self.xml), pretty_print=True, xml_declaration=True,
+            self.xml, pretty_print=True, xml_declaration=True,
             # XXX A sin we inherited from XSLT.
             encoding='iso-8859-1')
 
@@ -82,33 +84,73 @@ class XMLContent(zeit.web.core.view.Base):
     def xml(self):
         return self.context.xml
 
-    def deannotate(self, xml):
-        lxml.objectify.deannotate(
-            xml, pytype=True, xsi=True, xsi_nil=True)
-        return xml
 
-
-@pyramid.view.view_defaults(
-    context=zeit.content.cp.interfaces.ICenterPage,
-    renderer='string')
-@pyramid.view.view_config(
-    route_name='xml')
-@pyramid.view.view_config(
-    header='host:xml(\.staging)?\.zeit\.de')
-class Centerpage(XMLContent):
+class Centerpage(object):
 
     @property
     def xml(self):
         return zeit.content.cp.interfaces.IRenderedXML(self.context)
 
 
+# NOTE: Pyramid route specififity is an obscure topic. We try to configure
+#       the XML routes as specific as our HTML ones with dummy predicates (ND)
+
+
+@pyramid.view.view_defaults(
+    header='host:xml(\.staging)?\.zeit\.de',
+    custom_predicates=(lambda *_: True,),
+    renderer='string',
+    request_method='GET')
+@pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
+@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+class HostHeaderContent(XMLContent):
+    pass
+
+
+@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
+@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2009)
+@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2015)
+class HostHeaderCP(Centerpage, HostHeaderContent):
+    pass
+
+
+@pyramid.view.view_defaults(
+    route_name='xml',
+    custom_predicates=(lambda *_: True,),
+    renderer='string',
+    request_method='GET')
+@pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
+@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
+@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
+@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+class RouteNameContent(XMLContent):
+    pass
+
+
+@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
+@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2009)
+@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2015)
+class RouteNameCP(Centerpage, RouteNameContent):
+    pass
+
+
 @pyramid.view.view_defaults(
     context=zeit.cms.repository.interfaces.IDAVContent,
-    renderer='string')
-@pyramid.view.view_config(
-    route_name='xml')
-@pyramid.view.view_config(
-    header='host:xml(\.staging)?\.zeit\.de')
+    custom_predicates=(lambda *_: True,),
+    renderer='string',
+    request_method='GET')
+@pyramid.view.view_config(route_name='xml')
+@pyramid.view.view_config(header='host:xml(\.staging)?\.zeit\.de')
 class NonXMLContent(zeit.web.core.view.Base):
 
     allowed_on_hosts = ['xml']

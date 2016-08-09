@@ -300,14 +300,6 @@ class Image(Block):
         # which is `portrait` rather the usual `wide`.
         self.legacy_layout = model_block.xml.get('layout', None)
         self.display_mode = model_block.display_mode
-        if model_block.display_mode == 'large':
-            self.figure_mods = ('wide', 'rimless', 'apart')
-        elif model_block.display_mode == 'column-width':
-            self.figure_mods = ('apart',)
-        elif model_block.display_mode == 'float':
-            self.figure_mods = ('marginalia',)
-        else:
-            self.figure_mods = ()
 
         # TODO: don't use XML but adapt an Image and use it's metadata
         if model_block.xml is not None:
@@ -329,6 +321,16 @@ class Image(Block):
     def ratio(self):
         return self.image.ratio
 
+    FIGURE_MODS = {
+        'large': ('wide', 'rimless', 'apart'),
+        'column-width': ('apart',),
+        'float': ('marginalia',),
+    }
+
+    @property
+    def figure_mods(self):
+        return self.FIGURE_MODS.get(self.display_mode, ())
+
 
 @grokcore.component.adapter(
     zeit.content.article.edit.interfaces.IImage,
@@ -349,6 +351,12 @@ class HeaderImage(Image):
 
     def __init__(self, model_block, header):
         super(HeaderImage, self).__init__(model_block)
+        # XXX Header images should not use `display_mode` at all, they should
+        # depend on article.header_layout instead. But since we mostly reuse
+        # the normal image templates for the header image, we pretend a fixed
+        # display_mode accordingly.
+        self.display_mode = 'large'
+
         article_supertitle = None
         article_title = None
         try:
