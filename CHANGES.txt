@@ -4,13 +4,13 @@ Change log for zeit.web
 2.97 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Set display_mode=large for article header images
 
 
 2.96 (2016-08-08)
 -----------------
 
-- ZON-3171: Render different metadata for infographic-images ff.
+- ZON-3171: Render different metadata for infographic-images
 
 - ZON-3078: Enforce mobile image for first zett parquet teaser
 
