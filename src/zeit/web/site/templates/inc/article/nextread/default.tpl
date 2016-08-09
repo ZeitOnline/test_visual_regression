@@ -2,10 +2,12 @@
 {% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
 {% set module_layout = self.layout() %}
 <article id="{{ module_layout }}"
-         class="{% block layout %}nextread{% endblock %} {{ module_layout }}{{ '--with-image' if image else '--no-image' }}">
+         class="{% block layout %}nextread{% endblock %} {{ module_layout }}{{ '--with-image' if (image and teaser is not column) else '--no-image' }}">
     <a class="{{ module_layout }}__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser.uniqueId | create_url }}" data-id="articlebottom.editorial-nextread...area" itemprop="relatedLink">
         <div class="{{ module_layout }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
-        {% include "zeit.web.core:templates/inc/asset/image_nextread.tpl" %}
+        {% if teaser is not column %}
+            {% include "zeit.web.core:templates/inc/asset/image_nextread.tpl" %}
+        {% endif %}
         <div class="{{ module_layout }}__container">
             <h2 class="{{ module_layout }}__heading">
                 <span class="{{ module_layout }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
