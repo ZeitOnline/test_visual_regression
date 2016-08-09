@@ -357,7 +357,7 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
     assert len(offline) == 8
 
 
-def test_format_date_returns_expected_value():
+def test_format_date_returns_expected_value_in_newsbox():
     tz = babel.dates.get_timezone('Europe/Berlin')
     now = datetime.now(tz)
     before = now - timedelta(hours=5)
@@ -369,3 +369,23 @@ def test_format_date_returns_expected_value():
     day = str(yesterday.strftime('%d'))
     assert day.lstrip('0') + '. ' + str(yesterday.strftime('%m. %Y')) \
         == format_date(yesterday, type="switch_from_hours_to_date")
+
+    assert str(yesterday.strftime('%H:%M'))\
+        == format_date(yesterday, pattern="HH:mm")
+
+
+def test_newsbox_renders_correctly_on_homepage(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index-with-newsbox')
+    wrapper = browser.cssselect('.newsticker__column')
+    assert len(wrapper) == 2
+
+
+def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
+    browser = testbrowser('/thema/oper')
+    wrapper = browser.cssselect('.newsticker__single')
+    newsbox = browser.cssselect('.cp-area--newsticker.cp-area--keywordpage')
+    linktext = browser.cssselect('.newsteaser__text--kw-tp-page')
+    assert len(wrapper) == 1
+    assert len(newsbox) == 1
+    assert len(linktext) >= 1
+
