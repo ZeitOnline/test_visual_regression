@@ -8,17 +8,25 @@ import sys
 import zeit.web.core
 
 
-def test_xml_renders(testserver):
+def test_xml_renders_with_host_header(testserver):
     res = requests.get(
-        '%s/xml/zeit-online/index' % testserver.url,
+        '%s/zeit-online/index' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
-
     assert res.status_code == 200
 
     res = requests.get(
-        '%s/xml/zeit-magazin/centerpage/index' % testserver.url,
+        '%s/zeit-magazin/centerpage/index' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
+    assert res.status_code == 200
 
+
+def test_xml_renders_with_route_name(testserver):
+    res = requests.get(
+        '%s/xml/zeit-online/index' % testserver.url)
+    assert res.status_code == 200
+
+    res = requests.get(
+        '%s/xml/zeit-magazin/centerpage/index' % testserver.url)
     assert res.status_code == 200
 
 
@@ -32,14 +40,14 @@ def test_xml_renders_iso_8859_1(testserver):
     encoding = m.id_buffer(blob)
     assert encoding == 'utf-8'
     res = requests.get(
-        '%s/xml/zeit-online/article/01' % testserver.url,
+        '%s/zeit-online/article/01' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
     assert res.encoding == 'iso-8859-1'
 
 
 def test_xml_renders_unicode_as_codepoints(testserver):
     res = requests.get(
-        '%s/xml/zeit-magazin/article/03' % testserver.url,
+        '%s/zeit-magazin/article/03' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
     assert (
         '<title>Aus dem Keller des \xc9lys\xe9epalasts</title>' in res.content)
@@ -47,7 +55,7 @@ def test_xml_renders_unicode_as_codepoints(testserver):
 
 def test_xml_renders_article_as_expected(testserver):
     res = requests.get(
-        '%s/xml/zeit-online/article/01' % testserver.url,
+        '%s/zeit-online/article/01' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
 
     doc = {
@@ -63,14 +71,14 @@ def test_xml_renders_article_as_expected(testserver):
 def test_xml_renders_article_with_xml_content_view(testserver):
     with mock.patch('zeit.web.core.view_xml.XMLContent.__call__') as view:
         requests.get(
-            '%s/xml/zeit-online/article/01' % testserver.url,
+            '%s/zeit-online/article/01' % testserver.url,
             headers={'Host': 'xml.zeit.de'})
     assert view.called
 
 
 def test_xml_renders_centerpage_as_expected(testserver):
     res = requests.get(
-        '%s/xml/zeit-magazin/centerpage/index' % testserver.url,
+        '%s/zeit-magazin/centerpage/index' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
 
     doc = {
@@ -86,14 +94,14 @@ def test_xml_renders_centerpage_as_expected(testserver):
 def test_xml_renders_centerpage_with_centerpage_view(testserver):
     with mock.patch('zeit.web.core.view_xml.Centerpage.__call__') as view:
         requests.get(
-            '%s/xml/zeit-magazin/centerpage/index' % testserver.url,
+            '%s/zeit-magazin/centerpage/index' % testserver.url,
             headers={'Host': 'xml.zeit.de'})
     assert view.called
 
 
 def test_xml_renders_article_with_meta_robots(testserver):
     res = requests.get(
-        '%s/xml/zeit-online/article/01' % testserver.url,
+        '%s/zeit-online/article/01' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
 
     doc = {
@@ -111,7 +119,7 @@ def test_xml_renders_article_with_meta_robots(testserver):
 
 def test_xml_renders_centerpage_with_mobile_alternative(testserver):
     res = requests.get(
-        '%s/xml/angebote/leseperlen' % testserver.url,
+        '%s/angebote/leseperlen' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
 
     assert 'x-mobilealternative' in res.headers.keys()
@@ -121,7 +129,7 @@ def test_xml_renders_centerpage_with_mobile_alternative(testserver):
 
 def test_xml_renders_image(testserver):
     res = requests.get(
-        '%s/xml/davcontent/bild.jpg' % testserver.url,
+        '%s/davcontent/bild.jpg' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
 
     assert res.headers['content-type'] == 'image/jpeg'
@@ -130,7 +138,7 @@ def test_xml_renders_image(testserver):
 
 def test_xml_renders_text(testserver):
     res = requests.get(
-        '%s/xml/davcontent/text' % testserver.url,
+        '%s/davcontent/text' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
 
     assert res.headers['content-type'] == 'text/plain; charset=UTF-8'
@@ -140,14 +148,14 @@ def test_xml_renders_text(testserver):
 def test_xml_renders_non_xml_content_view(testserver):
     with mock.patch('zeit.web.core.view_xml.NonXMLContent.__call__') as view:
         requests.get(
-            '%s/xml/davcontent/text' % testserver.url,
+            '%s/davcontent/text' % testserver.url,
             headers={'Host': 'xml.zeit.de'})
     assert view.called
 
 
 def test_xml_infobox_include(testserver):
     res = requests.get(
-        '%s/xml/campus/article/infobox' % testserver.url,
+        '%s/campus/article/infobox' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
     xml = lxml.etree.fromstring(res.content)
     assert (xml.xpath('//infobox')[0].get('href') ==
@@ -162,8 +170,8 @@ def test_xml_infobox_include(testserver):
 
 def test_xml_liveblog_include(testserver):
     res = requests.get(
-        '%s/xml/zeit-online/liveblog/champions-league' % testserver.url,
-        headers={'Host': 'xml.zeit.de'})
+        '%s/zeit-online/liveblog/champions-league' % testserver.url,
+        headers={'host': 'xml.zeit.de'})
     xml = lxml.etree.fromstring(res.content)
     assert xml.xpath('//div[@data-type="esi-content"]')
     assert xml.xpath('//*[name()="esi:include"]')
