@@ -4,13 +4,21 @@ Change log for zeit.web
 2.97 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Set display_mode=large for article header images
+
+- BUG-478: Show label on zco text-only advertorial teaser
+
+- ZON-3099: Make xml.zeit.de routing work
+
+- FIX: Small styling fixes to ZON-3221
+
+- FIX: Do not show image on column nextread
 
 
 2.96 (2016-08-08)
 -----------------
 
-- ZON-3171: Render different metadata for infographic-images ff.
+- ZON-3171: Render different metadata for infographic-images
 
 - ZON-3078: Enforce mobile image for first zett parquet teaser
 

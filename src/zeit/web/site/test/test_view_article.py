@@ -1382,6 +1382,16 @@ def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
     assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
     assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
+    assert len(browser.cssselect('.nextread figure')) == 0
+    assert len(browser.cssselect('.nextread image')) == 0
+
+
+def test_zon_nextread_teaser_must_not_show_image_for_column(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-column')
+    assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
+    assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
+    assert len(browser.cssselect('.nextread figure')) == 0
+    assert len(browser.cssselect('.nextread image')) == 0
 
 
 def test_article_contains_zeit_clickcounter(testbrowser):
