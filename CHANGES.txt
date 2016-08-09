@@ -6,6 +6,14 @@ Change log for zeit.web
 
 - HOTFIX: Set display_mode=large for article header images
 
+- BUG-478: Show label on zco text-only advertorial teaser
+
+- ZON-3099: Make xml.zeit.de routing work
+
+- FIX: Small styling fixes to ZON-3221
+
+- FIX: Do not show image on column nextread
+
 
 2.96 (2016-08-08)
 -----------------
