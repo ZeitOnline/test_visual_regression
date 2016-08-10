@@ -107,8 +107,8 @@
                 {% block article_body %}
                 <div class="article__body" itemprop="articleBody">
                     {% block article_main_image %}
-                        {% set block = view.header_module if is_instance(view.header_module, 'zeit.web.core.block.Image') else None %}
-                        {% include "zeit.web.core:templates/amp/asset/image_article.html" %}
+                        {% set block = view.header_module %}
+                        {% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
                     {% endblock article_main_image %}
 
                     {% block article_pages %}

@@ -22,7 +22,6 @@ import pyramid.testing
 import pyramid_dogpile_cache2
 import pysolr
 import pytest
-import repoze.bitblt.processor
 import requests
 import selenium.webdriver
 import selenium.webdriver.firefox.firefox_binary
@@ -308,10 +307,8 @@ def application_session(app_settings, request):
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
     request.addfinalizer(ZODB_LAYER.tearDown)
-    wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(
-        app, secret='time', limit_to_application_url=True)
-    wsgi.zeit_app = factory
-    return wsgi
+    app.zeit_app = factory
+    return app
 
 
 @pytest.fixture
@@ -385,10 +382,7 @@ def debug_application(app_settings, request):
     app_settings = app_settings.copy()
     app_settings['jinja2.environment'] = 'zeit.web.core.jinja.Environment'
     app_settings['jinja2.show_exceptions'] = False
-    return repoze.bitblt.processor.ImageTransformationMiddleware(
-        zeit.web.core.application.Application()({}, **app_settings),
-        secret='time', limit_to_application_url=True
-    )
+    return zeit.web.core.application.Application()({}, **app_settings)
 
 
 @pytest.fixture

@@ -1,6 +1,6 @@
 {% if view.has_series_attached %}
     <div class="article-series">
-        {% require image = get_image(view, view.series, variant_id='stripe', fallback=False) -%}
+        {% require image = get_image(view.series, variant_id='stripe', fallback=False) -%}
             {% set module_layout = "article-series" %}
             {% set media_caption_additional_class = 'figcaption--hidden' %}
             {% set media_block_additional_class = 'is-pixelperfect' -%}

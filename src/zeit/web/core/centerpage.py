@@ -76,17 +76,8 @@ class Region(Area):
     factory = zeit.content.cp.area.RegionFactory(None)
 
 
-@zeit.web.register_filter
-def auto_select_asset(teaser):
-    for getter in (get_video_asset, get_gallery_asset, get_image_asset):
-        asset = getter(teaser)
-        if asset:
-            return asset
-    log.debug('No assets for %s' % teaser.uniqueId)
-
-
-@zeit.web.register_filter
-def get_video_asset(teaser):
+@zeit.web.register_global
+def get_video(context):
 
     def get_video_source(self):
         try:
@@ -99,7 +90,7 @@ def get_video_asset(teaser):
             return self.flv_url
 
     try:
-        asset = zeit.content.video.interfaces.IVideoAsset(teaser)
+        asset = zeit.content.video.interfaces.IVideoAsset(context)
         primary = asset.video
         secondary = asset.video_2
     except TypeError:
@@ -115,23 +106,14 @@ def get_video_asset(teaser):
     return primary
 
 
-@zeit.web.register_filter
-def get_gallery_asset(teaser):
-    try:
-        return zeit.content.gallery.interfaces.IGalleryReference(
-            teaser).gallery
-    except (TypeError, AttributeError):
-        return
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock)
+def images_from_teaserblock(context):
+    for teaser in context:
+        return zeit.content.image.interfaces.IImages(teaser)
 
 
 @zeit.web.register_filter
-def get_image_asset(teaser):
-    try:
-        return zeit.content.image.interfaces.IImages(teaser).image
-    except (TypeError, AttributeError):
-        return
-
-
 def get_area(area):
     return zeit.web.core.utils.get_named_adapter(
         area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
@@ -279,6 +261,13 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
 
     def __repr__(self):
         return object.__repr__(self)
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(TeaserModule)
+def images_from_teasermodule(context):
+    for teaser in context:
+        return zeit.content.image.interfaces.IImages(teaser)
 
 
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)

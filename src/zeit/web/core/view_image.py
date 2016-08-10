@@ -79,6 +79,20 @@ class Image(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
 
 
+@view_config(context=zeit.content.image.interfaces.IImage,
+             name='imagegroup')
+class LocalImage(Image):
+
+    def __init__(self, context, request):
+        super(LocalImage, self).__init__(context, request)
+        group = zeit.content.image.interfaces.IImageGroup(self.context)
+        variant = request.path_info.rsplit('/', 1).pop()
+        try:
+            self.context = group[variant]
+        except Exception, err:
+            raise pyramid.httpexceptions.HTTPNotFound(err.message)
+
+
 @view_config(context=zeit.content.video.interfaces.IVideo,
              name='imagegroup')
 class Brightcove(Image):
@@ -98,6 +112,7 @@ class Brightcove(Image):
 class RSSImage(Image):
 
     remote_host = ''
+    ig_class = zeit.web.core.image.RemoteImageGroup
 
     def __init__(self, context, request):
         super(RSSImage, self).__init__(context, request)
@@ -107,11 +122,11 @@ class RSSImage(Image):
             raise pyramid.httpexceptions.HTTPNotFound()
 
         file_name, variant = segments[-2:]
-        path = '/'.join(segments[:-1]).encode('utf-8')
-        image_url = '{}/{}'.format(self.remote_host, path)
+        path = u'/'.join(segments[:-1])
+        image_url = u'{}/{}'.format(self.remote_host, path)
 
-        group = zeit.web.core.image.RemoteImageGroup(context)
-        group.image_url = image_url
+        context.image_url = image_url
+        group = self.ig_class(context)
         try:
             self.context = group[variant]
         except Exception, err:
@@ -127,9 +142,11 @@ class RSSImage(Image):
 class Spektrum(RSSImage):
 
     host_key = 'spektrum_img_host'
+    ig_class = zeit.web.site.area.spektrum.ImageGroup
 
 
 @view_config(route_name='zett-image')
 class Zett(RSSImage):
 
     host_key = 'zett_img_host'
+    ig_class = zeit.web.site.area.zett.ImageGroup

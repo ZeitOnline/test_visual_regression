@@ -9,6 +9,7 @@ import pyramid_dogpile_cache2.cache
 import pyramid.threadlocal
 import venusian
 import zope.component
+import zope.interface
 
 import zeit.content.cp.interfaces
 import zeit.edit.interfaces
@@ -265,6 +266,9 @@ def register_module(name):
     import zeit.web.core.interfaces
 
     def registrator(cls):
+        if not isinstance(cls, types.FunctionType):
+            zope.interface.declarations.classImplements(
+                cls, zeit.web.core.interfaces.IBlock)
         gsm = zope.component.getGlobalSiteManager()
         gsm.registerAdapter(cls, (zeit.edit.interfaces.IBlock,),
                             zeit.web.core.interfaces.IBlock, name)

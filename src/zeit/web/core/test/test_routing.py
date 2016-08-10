@@ -123,12 +123,6 @@ def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
         testbrowser('/angebote/autosuche/foo/bar/wide__123x456')
     assert info.value.getcode() == 404
 
-    with pytest.raises(urllib2.HTTPError) as info:
-        # This is not quite accurate: Pyramid never sees `bitblt` in the URL,
-        # since the bitblt middleware filters those segments beforehand.
-        testbrowser('/meine-autoren/foo/bar/bitblt-123x456-asdf/zon-column')
-    assert info.value.getcode() == 404
-
 
 @pytest.mark.parametrize('path, moved', [
     ('', '/index'),

@@ -76,13 +76,6 @@ class Author(zeit.web.site.view.Base):
         return {}
 
     @zeit.web.reify
-    def author_img(self):
-        # XXX This should use a different variant, see
-        # z.w.core.template.get_column_image for details.
-        return zeit.web.core.template.get_image(
-            content=self.context, variant_id='original', fallback=False)
-
-    @zeit.web.reify
     def tab_areas(self):
         if is_paginated(self.context, self.request) or (
                 len(self.area_favourite_content) == 0):
@@ -216,9 +209,9 @@ class UserCommentsArea(zeit.web.core.centerpage.Area):
     def pagination_info(self):
         return {
             'previous_label': u'Vorherige Seite',
-            'previous_param': dict(p=self.current_page-1),
+            'previous_param': dict(p=self.current_page - 1),
             'next_label': u'Nächste Seite',
-            'next_param': dict(p=self.current_page+1)}
+            'next_param': dict(p=self.current_page + 1)}
 
     def page_info(self, page_nr):
         return {

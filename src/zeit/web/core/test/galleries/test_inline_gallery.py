@@ -71,18 +71,12 @@ def test_inline_gallery_uses_responsive_images_with_ratio(testbrowser):
     assert 'data-ratio="1.77914110429"' in lxml.etree.tostring(image)
 
 
-def test_photocluster_has_expected_markup(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/article/cluster-beispiel' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".photocluster")
-    assert len(wrap) != 0
-    for element in wrap:
-        img_wrap = element.find_elements_by_css_selector(
-            ".photocluster__item")
-        imgs = element.find_elements_by_tag_name(
-            "img")
-        assert len(img_wrap) == 7
-        assert len(imgs) == 7
+def test_photocluster_has_expected_markup(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/cluster-beispiel')
+    img_wrap = browser.cssselect(".photocluster .photocluster__item")
+    imgs = browser.cssselect(".photocluster img")
+    assert len(img_wrap) == 7
+    assert len(imgs) == 7
 
 
 def test_photocluster_has_expected_content(selenium_driver, testserver):
@@ -95,12 +89,10 @@ def test_photocluster_has_expected_content(selenium_driver, testserver):
         # first image
         assert re.search('http://.*/galerien/' +
                          'bg-automesse-detroit-2014-usa-bilder/' +
-                         'bitblt-.*/' +
-                         '462507429-540x304.jpg',
+                         '462507429.jpg/imagegroup/original__.*',
                          imgs[0].get_attribute("src"))
         # last image
         assert re.search('http://.*/galerien/' +
                          'bg-automesse-detroit-2014-usa-bilder/' +
-                         'bitblt-.*/' +
-                         'Audi_allroad-540x304.jpg',
+                         'VW_Dune-540x304.jpg/imagegroup/original__.*',
                          imgs[6].get_attribute("src"))

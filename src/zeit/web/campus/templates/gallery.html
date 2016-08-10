@@ -1,16 +1,16 @@
 {% extends "zeit.web.campus:templates/content.html" %}
 
 {% block article_pages %}
+    {% set gallery = view.gallery %}
     <div class="article-page">
         <p class="article__summary article__item" itemprop="description">
             {{- view.subtitle -}}
         </p>
-        {% set images = view.images %}
         {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     </div>
     <div class="article-page">
         <div class="gallery__description article__item">
-            {{ view.html | safe }}
+            {{ gallery.html | safe }}
         </div>
     </div>
 {% endblock article_pages %}

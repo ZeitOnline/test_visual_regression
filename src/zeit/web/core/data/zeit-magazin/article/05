@@ -124,7 +124,7 @@
         <subtitle>Gestorben wird immer. Aber nicht mehr genug. Deutschland schrumpft. Viele Bürger lassen lieber ihre Asche verstreuen, als ein Grab zu kaufen.</subtitle>
         <byline>von Henning Sußebach</byline>
         <division type="page">
-            <image src="http://xml.zeit.de/exampleimages/artikel/05/01.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl-header" is_empty="False" alt="My 05 alt attribute" title="my 05 title attribute">
+            <image src="http://xml.zeit.de/zeit-magazin/images/local/01.jpg" type="jpg" publication-date="" expires="" layout="zmo-xl-header" is_empty="False" alt="My 05 alt attribute" title="my 05 title attribute">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright link="http://foo.de">© Johannes Eisele/AFP/Getty Images</copyright>
             </image>

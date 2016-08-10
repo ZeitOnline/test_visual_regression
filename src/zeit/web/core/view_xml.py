@@ -11,9 +11,9 @@ import zeit.cms.interfaces
 import zeit.cms.repository.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
+import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
 import zeit.web.core.article
-import zeit.web.core.gallery
 import zeit.web.core.view
 
 
@@ -108,7 +108,7 @@ class Centerpage(object):
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 class HostHeaderContent(XMLContent):
     pass
 
@@ -132,7 +132,7 @@ class HostHeaderCP(Centerpage, HostHeaderContent):
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 class RouteNameContent(XMLContent):
     pass
 

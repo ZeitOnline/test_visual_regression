@@ -1,6 +1,6 @@
 <div class="author-header">
     <div class="author-header__inner author__item">
-        {% require image = view.author_img -%}
+        {% require image = get_image(view.context, fallback=False) -%}
         <div class="author-header__image">
             {% set module_layout = 'author-header' %}
             {% include "zeit.web.core:templates/inc/asset/image.tpl" %}

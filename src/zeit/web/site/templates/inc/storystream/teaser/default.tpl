@@ -15,14 +15,17 @@
 				<p class="{{ '{}__description'.format(blockname) | with_mods(atom_modifier) }}">
 					{{ atom.tldr_text or atom.teaserText }}&nbsp;<a class="{{ blockname }}__link" href="{{ atom.uniqueId | create_url }}">mehr lesen</a>
 				</p>
-				{% set image = get_image(module, fallback=False) %}
-				{% if image and atom is not column %}
-					{% set href = atom.uniqueId | create_url %}
-					{% set module_layout = blockname %}
-                    {% set media_caption_additional_class = 'figcaption--hidden' %}
-					{% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
-				{% endif %}
+				{% block teaser_media_position_after_title %}
+					{% set image = get_image(module, fallback=False) %}
+					{% if image and atom is not column %}
+						{% set href = atom.uniqueId | create_url %}
+						{% set module_layout = blockname %}
+						{% set media_caption_additional_class = 'figcaption--hidden' %}
+						{% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
+					{% endif %}
+				{% endblock %}
 			</div>
 		</div>
 	</div>
 </{{ atom_tag or 'div' }}>
+

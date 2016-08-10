@@ -1303,7 +1303,7 @@ def test_instantarticle_representation_should_have_correct_content(
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
     assert 'Bernie Sanders' in bro.cssselect('figcaption')[0].text
-    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
+    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
 
 
 def test_instantarticle_item_should_wrap_correct_article_in_cdata(testbrowser):
@@ -1651,8 +1651,8 @@ def test_infographics_should_render_border_styles_conditionally(jinja2_env):
 
     # all border styles present
 
-    image.meta.origin = True
-    image.copyright = ('FOO', 'BAR', 'BAZ')
+    image.origin = True
+    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
     image.caption = True
     html_str = tpl.render(block=image)
     assert '--borderless' not in html_str
@@ -1667,14 +1667,14 @@ def test_infographics_should_render_border_styles_conditionally(jinja2_env):
 
     # borderless footer
 
-    image.copyright = ''
+    image.copyrights = ()
     html_str = tpl.render(block=image)
     html = lxml.html.fromstring(html_str)
     footer = html.cssselect('[class*="x-footer"]')
     assert '--borderless' in footer[0].get('class')
 
-    image.copyright = ('FOO', 'BAR', 'BAZ')
-    image.meta.origin = False
+    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
+    image.origin = False
     html_str = tpl.render(block=image)
     html = lxml.html.fromstring(html_str)
     footer = html.cssselect('[class*="x-footer"]')

@@ -17,12 +17,6 @@ class IFrontendBlock(zope.interface.Interface):
         'String that modifies how this block is to be displayed')
 
 
-class IFrontendHeaderBlock(zope.interface.Interface):
-    """A HeaderBlock identifies elements that appear only in headers of
-    the content.
-    """
-
-
 class IDeltaTime(zope.interface.Interface):
     """A date that has been processed through babel which is actually used
     for delta time representations.
@@ -100,6 +94,21 @@ class IPage(zope.interface.Interface):
 
 class IImage(zope.interface.Interface):
     """A universal interface for zeit.web images"""
+
+    alt = zope.interface.Attribute('Alt title of the image')
+    caption = zope.interface.Attribute('Caption of the image')
+    copyrights = zope.interface.Attribute('Copyrights of the image')
+    fill_color = zope.interface.Attribute('Effective background fill color')
+    group = zope.interface.Attribute('Imagegroup the image is based on')
+    href = zope.interface.Attribute('Href attribute of the image')
+    layout = zope.interface.Attribute('Image layout')
+    path = zope.interface.Attribute('Absolute path to the image')
+    fallback_path = zope.interface.Attribute('Sized fallback path')
+    fallback_height = zope.interface.Attribute('Sized height of the variant')
+    fallback_width = zope.interface.Attribute('Sized width of the variant')
+    ratio = zope.interface.Attribute('Ratio of the image variant')
+    title = zope.interface.Attribute('Title of the image')
+    variant_id = zope.interface.Attribute('Pattern or variant ID')
 
 
 class IPlace(zope.interface.Interface):
@@ -217,10 +226,6 @@ class IMetrics(zope.interface.Interface):
 
     def gauge(identifier=None):
         """Returns a ``statsd.Gauge``."""
-
-
-class ISharingImage(zope.interface.Interface):
-    """Adapts ICMSContent to an IImageGroup to be used for sharing purposes"""
 
 
 class IPagination(zope.interface.Interface):

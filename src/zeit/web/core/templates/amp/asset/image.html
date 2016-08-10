@@ -1,57 +1,31 @@
 {% if image %}
-
-    {%- set width = 820 %}
-    {%- set height = (width / image.ratio) | int %}
-
-    {# TRASHME Rather crude bitblt/zci image api switch #}
-    {%- if image is variant %}
-        {% set source = request.image_host + image.path | replace(' ', '%20') %}
-        {% set src = "%s__%sx%s" | format(source, width, height) %}
-        {% set widths = [320, 480, 660, 820] %}
-    {%- else %}
-        {% set source = image | default_image_url | replace(' ', '%20') %}
-        {% set src = source %}
-        {% set widths = [] %}
-    {%- endif %}
-
-    {%- if block and block.display_mode == 'large' %}
-        {% set sizes = '(min-width: 820px) 820px, 100vw' %}
-    {%- else %}
-        {% set sizes = '' %}
-    {%- endif %}
-
     {% block image %}
         <figure class="{{ 'figure' | with_mods(block.display_mode if block) }}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
             {% block media -%}
             <amp-img
-                src="{{ src }}"
-                {% if widths | length -%}
-                srcset="{% for w in widths %}{{ "%s__%sx%s %sw" | format(source, w, (w / image.ratio) | int, w) }}{{ ", " if not loop.last }}{% endfor %}"
-                {% endif -%}
+                src="{{ request.image_host + image.fallback_path }}"
+                srcset="{% for w in [320, 480, 660, 822] %}{{ '%s%s__%sx%s %sw' | format(request.image_host, image.path, w, (w / image.ratio) | int, w) }}{{ ', ' if not loop.last }}{% endfor %}"
                 alt="{{ image.alt }}"
-                width="{{ width }}"
-                height="{{ height }}"
-                {% if sizes -%}
-                sizes="{{ sizes }}"
+                width="{{ image.fallback_width }}"
+                height="{{ image.fallback_height }}"
+                {% if block and block.display_mode == 'large' -%}
+                sizes="(min-width: 820px) 820px, 100vw"
                 {% endif -%}
                 layout="responsive"
-                attribution="
-                {%- for name, url, nofollow in image.copyright -%}
-                    {%- if name | trim | length > 1 %}{{ name | trim }}{% endif -%}
-                {%- endfor %}"
+                attribution="{{ image.copyrights | map('first') | join(, ) }}"
                 itemprop="contentUrl"></amp-img>
             {% endblock media -%}
-            <meta itemprop="url" content="{{ src }}">
-            <meta itemprop="width" content="{{ width }}">
-            <meta itemprop="height" content="{{ height }}">
+            <meta itemprop="url" content="{{ request.image_host + image.fallback_path }}">
+            <meta itemprop="width" content="{{ image.fallback_width }}">
+            <meta itemprop="height" content="{{ image.fallback_height }}">
 
             {% block caption %}
             <figcaption class="figure__caption">
                 <span class="figure__text" itemprop="caption">{{ image.caption }}</span>
-                {% for name, url, nofollow in image.copyright %}
+                {% for name, url, nofollow in image.copyrights %}
                 <span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
                     {% if url %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}">{% endif %}
-                    {% if name | trim | length > 1 %}<span itemprop="name">{{ name | trim | replace('© ', '© ') }}</span>{% endif %}
+                    <span itemprop="name">{{ name }}</span>
                     {% if url %}</a>{% endif %}
                 </span>
                 {% endfor %}
@@ -59,5 +33,4 @@
             {% endblock caption %}
         </figure>
     {% endblock %}
-
 {% endif %}

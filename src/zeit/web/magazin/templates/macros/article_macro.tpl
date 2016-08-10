@@ -271,7 +271,7 @@
 <div class="photocluster__wrap">
     <div class="photocluster">
     {% if block %}
-        {% for obj in block.itervalues() -%}
+        {% for obj in block -%}
             <div class="photocluster__item">
                 <div class="scaled-image">
                     {% include "zeit.web.magazin:templates/inc/asset/image_photocluster.tpl" %}

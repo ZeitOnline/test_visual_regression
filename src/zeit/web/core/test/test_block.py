@@ -71,14 +71,15 @@ def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
 def test_image_should_be_none_if_is_empty_is_true():
     model_block = mock.Mock()
     model_block.is_empty = True
-    image = zeit.web.core.block.Image(model_block)
-    assert image is None
+    image_block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.image.FrontendBlockImage(image_block)
+    assert bool(image) is False
 
 
 def test_image_should_be_fail_if_is_empty_doesnot_exist():
     model_block = mock.Mock()
     image = zeit.web.core.block.Image(model_block)
-    assert image is None
+    assert bool(image) is False
 
 
 def test_image_should_render_supertitle_and_caption_in_alt_tag():
@@ -197,8 +198,9 @@ def test_image_should_not_break_on_missing_image(application):
     model_block.references.target = zeit.content.image.imagegroup.ImageGroup()
     # We use an otherwise empty folder to simulate missing master image.
     model_block.references.target.uniqueId = 'http://xml.zeit.de/news'
-    image = zeit.web.core.block.Image(model_block)
-    assert image is None
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.template.get_image(block, fallback=False)
+    assert not image
 
 
 def test_image_should_use_variant_given_on_layout(application):
@@ -211,8 +213,9 @@ def test_image_should_use_variant_given_on_layout(application):
     model_block.is_empty = False
     model_block.xml = lxml.etree.fromstring('<image/>')
     model_block.references.target = image
-    image = zeit.web.core.block.Image(model_block)
-    assert 'original' == image.image.variant
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.template.get_image(block, fallback=False)
+    assert image.variant_id == 'original'
 
 
 def test_image_should_use_variant_original_if_infographic(application):
@@ -248,7 +251,8 @@ def test_image_should_pass_through_ratio(application):
     model_block.variant_name = 'wide'
     model_block.is_empty = False
     model_block.references.target = image
-    image = zeit.web.core.block.Image(model_block)
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.template.get_image(block, fallback=False)
     assert round(1.77 - image.ratio, 1) == 0
 
 
@@ -351,14 +355,16 @@ def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
     assert browser.cssselect('div#iq-artikelanker')
 
 
-def test_block_image_should_contain_expected_structure(tplbrowser):
+def test_block_image_should_contain_expected_structure(
+        tplbrowser, dummy_request):
     block = mock.Mock()
     block.href = 'http://images.zeit.de/image.jpg'
     block.figure_mods = ('wide', 'rimless', 'apart')
-    block.copyright = (('Andreas Gursky', 'http://www.example.com', False),)
+    block.copyrights = (('Andreas Gursky', 'http://www.example.com', False),)
     block.ratio = 1
     browser = tplbrowser(
-        'zeit.web.core:templates/inc/blocks/image.html', block=block)
+        'zeit.web.core:templates/inc/blocks/image.html',
+        block=block, request=dummy_request)
     assert browser.cssselect('img.article__media-item')
 
 
@@ -382,7 +388,7 @@ def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
     view.package = 'zeit.web.site'
     block = {}
     browser = tplbrowser(
-        'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block,
+        'zeit.web.core:templates/inc/blocks/gallery.html', block=block,
         view=view)
     assert browser.cssselect('div.inline-gallery')
 

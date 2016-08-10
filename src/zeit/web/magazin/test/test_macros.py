@@ -187,28 +187,31 @@ def test_macro_advertising_should_produce_script(jinja2_env):
     assert '' == tpl.module.advertising(ad_inactive)
 
 
-def test_image_template_should_produce_figure_markup(tplbrowser):
+def test_image_template_should_produce_figure_markup(
+        tplbrowser, dummy_request):
     block = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01').main_image_block
     image = zeit.web.core.interfaces.IFrontendBlock(block)
-    image.href = 'http://localhost/foo'
     browser = tplbrowser(
-        'zeit.web.magazin:templates/inc/asset/image_article.tpl', obj=image)
+        'zeit.web.magazin:templates/inc/asset/image_article.tpl',
+        obj=image, request=dummy_request)
     assert browser.cssselect('figure.figure-full-width')
     assert browser.cssselect('img.figure__media')
     assert browser.cssselect('span.figure__copyright')
-    assert browser.cssselect('a')[0].attrib['href'] == 'http://localhost/foo'
+    assert browser.cssselect('a')[0].attrib['href'] == 'http://links.to'
 
 
-def test_image_template_should_produce_copyright_caption(tplbrowser):
+def test_image_template_should_produce_copyright_caption(
+        tplbrowser, dummy_request):
     block = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01').main_image_block
     image = zeit.web.core.interfaces.IFrontendBlock(block)
     browser = tplbrowser(
-        'zeit.web.magazin:templates/inc/asset/image_article.tpl', obj=image)
+        'zeit.web.magazin:templates/inc/asset/image_article.tpl',
+        obj=image, request=dummy_request)
     copyright = browser.cssselect('.figure__copyright a')[0]
-    assert copyright.attrib['href'] == 'http://foo.de'
-    assert copyright.text.strip() == u'© Andreas Gebert/dpa'
+    assert copyright.attrib['href'] == 'http://foo.com'
+    assert copyright.text_content() == u'© Andreas Gebert/dpa'
 
 
 def test_image_template_should_designate_correct_layouts(testbrowser):
