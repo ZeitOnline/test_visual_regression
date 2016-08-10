@@ -12,7 +12,7 @@
 
 {% set media_caption_additional_class = 'x-footer'
     ~ ('' if image.copyright and image.meta.origin else '--borderless')
-    ~ (' figure__caption--marginalia' if image.display_mode == 'float' else '')
+    ~ (' figure__caption--marginalia' if block.display_mode == 'float' else '')
 %}
 
 {% block media_caption_above %}
