@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-3099: Make xml.zeit.de routing work
 
+- BUG-372: Track video page URL for video player events
+
 - FIX: Small styling fixes to ZON-3221
 
 - FIX: Do not show image on column nextread
