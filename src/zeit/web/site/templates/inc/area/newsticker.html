@@ -1,10 +1,8 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
-{% set link_path = False if ('keywordpage' or 'topicpage') in cp_type else 'news/index' %}
-
 {% block before_module_list %}
     {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, 'newsteaser', 'alle_schlagzeilen') %}
-    {{ cp.section_heading(area.title, 'Alle Schlagzeilen', link_path , view, tracking_slug, unpadded=True) }}
+    {{ cp.section_heading(area.title, 'Alle Schlagzeilen', 'news/index' , view, tracking_slug, unpadded=True, has_link=False if ('keywordpage' or 'topicpage') in cp_type else True) }}
 {% endblock %}
 
 {% block module_list %}
