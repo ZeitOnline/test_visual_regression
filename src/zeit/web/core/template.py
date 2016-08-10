@@ -575,14 +575,6 @@ def get_column_image(content, variant_id='original'):
 
 
 @zeit.web.register_filter
-def attr_safe(string):
-    """Return an attribute safe version of string"""
-    if isinstance(string, basestring):
-        return re.sub('[^a-zA-Z]', '', string).lower()
-    return string
-
-
-@zeit.web.register_filter
 def format_webtrekk(string):
     """Returns a string that is webtrekk-safe.
     This code does the same as sanitizeString in clicktracking.js
