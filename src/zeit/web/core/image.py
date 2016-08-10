@@ -126,7 +126,7 @@ class RemoteImage(object):
 
     def __init__(self, url):
         if not isinstance(url, basestring):
-            raise TypeError('Local image URL needs to be string formatted')
+            raise TypeError('Remote image URL needs to be string formatted')
         self.url = url
         self.mimeType = 'image/jpeg'
         self.format = 'jpeg'

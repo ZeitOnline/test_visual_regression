@@ -7,6 +7,12 @@ Change log for zeit.web
 - Nothing changed yet.
 
 
+2.97.1 (2016-08-10)
+-------------------
+
+- HOTFIX: Fix teaser images in playlist module
+
+
 2.97 (2016-08-10)
 -----------------
 
