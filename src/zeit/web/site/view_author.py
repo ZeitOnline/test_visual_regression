@@ -216,9 +216,9 @@ class UserCommentsArea(zeit.web.core.centerpage.Area):
     def pagination_info(self):
         return {
             'previous_label': u'Vorherige Seite',
-            'previous_param': dict(p=self.current_page-1),
+            'previous_param': dict(p=self.current_page - 1),
             'next_label': u'Nächste Seite',
-            'next_param': dict(p=self.current_page+1)}
+            'next_param': dict(p=self.current_page + 1)}
 
     def page_info(self, page_nr):
         return {

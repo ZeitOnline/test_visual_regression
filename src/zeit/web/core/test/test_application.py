@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 import mock
-import plone.testing.zca
-import pyramid.interfaces
-import pyramid.testing
-import pytest
 import requests
 import zope.component
 
