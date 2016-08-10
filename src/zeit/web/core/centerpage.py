@@ -76,8 +76,8 @@ class Region(Area):
     factory = zeit.content.cp.area.RegionFactory(None)
 
 
-@zeit.web.register_filter
-def get_video_asset(teaser):
+@zeit.web.register_global
+def get_video(context):
 
     def get_video_source(self):
         try:
@@ -90,7 +90,7 @@ def get_video_asset(teaser):
             return self.flv_url
 
     try:
-        asset = zeit.content.video.interfaces.IVideoAsset(teaser)
+        asset = zeit.content.video.interfaces.IVideoAsset(context)
         primary = asset.video
         secondary = asset.video_2
     except TypeError:

@@ -450,11 +450,10 @@ def test_centerpage_should_have_page_meta_robots_information(testbrowser):
     assert 'index,follow,noodp,noydir,noarchive' in meta_robots
 
 
-def test_get_video_asset_should_return_video_asset(application):
+def test_get_video_should_return_video_asset(application):
     article = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.web.core.centerpage.get_video_asset(
-        context)
+    asset = zeit.web.core.centerpage.get_video(context)
     assert isinstance(asset, zeit.content.video.video.Video)
 
 
