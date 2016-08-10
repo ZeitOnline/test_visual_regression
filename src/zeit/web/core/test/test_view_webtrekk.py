@@ -221,6 +221,7 @@ def test_article_elements_provide_expected_id_for_webtrekk(
     assert('stationaer.' + article[1] in track_str)
 
 
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
 def test_video_stage_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     url = testserver.url + '{}#debug-clicktracking'
@@ -247,6 +248,7 @@ def test_video_stage_provides_expected_webtrekk_string(
         'foto-momente-die-stille-schoenheit-der-polarlichter'))
 
 
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
 def test_video_block_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     url = testserver.url + '{}#debug-clicktracking'
@@ -308,6 +310,7 @@ def test_video_block_provides_expected_webtrekk_string(
         'sportreporter-christian-spiller-uebt-skispringen'))
 
 
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
 def test_video_page_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     url = testserver.url + '{}#debug-clicktracking'
