@@ -1,6 +1,6 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
-{% set link_path = False if ('keywordpage' or 'topicpage') in context else 'news/index' %}
+{% set link_path = False if ('keywordpage' or 'topicpage') in cp_type else 'news/index' %}
 
 {% block before_module_list %}
     {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, 'newsteaser', 'alle_schlagzeilen') %}
@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block module_list %}
-    {% if ('keywordpage' or 'topicpage') in context %}
+    {% if ('keywordpage' or 'topicpage') in cp_type %}
         <div class="newsticker__single">
             {% for module in area.values() %}
                 {% set teaser = module | first_child %}

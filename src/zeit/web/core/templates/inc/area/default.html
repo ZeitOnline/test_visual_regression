@@ -1,8 +1,8 @@
 {% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 {% import '{}:templates/macros/centerpage_macro.tpl'.format(view.package) as cp %}
 
-{% set context = view.context.type if view.context.type else '' %}
-{% set newsticker_bem_modifier = context if ('keywordpage' or 'topicpage') in context and 'newsticker' in area.kind %}
+{% set cp_type = view.context.type if view.context.type else '' %}
+{% set newsticker_bem_modifier = cp_type if ('keywordpage' or 'topicpage') in cp_type and 'newsticker' in area.kind %}
 
 <div class="{{ 'cp-area' | with_mods(area.kind, newsticker_bem_modifier) }}{% if area.visible_mobile == False %} mobile-hidden{% endif %}">
     {% profile %}
