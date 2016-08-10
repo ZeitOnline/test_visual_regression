@@ -682,7 +682,7 @@ def test_article_should_show_main_image_from_imagegroup(testbrowser):
 def test_article_should_have_proper_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     meetrics = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
@@ -1382,6 +1382,16 @@ def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
     assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
     assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
+    assert len(browser.cssselect('.nextread figure')) == 0
+    assert len(browser.cssselect('.nextread image')) == 0
+
+
+def test_zon_nextread_teaser_must_not_show_image_for_column(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-column')
+    assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
+    assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
+    assert len(browser.cssselect('.nextread figure')) == 0
+    assert len(browser.cssselect('.nextread image')) == 0
 
 
 def test_article_contains_zeit_clickcounter(testbrowser):
@@ -1606,3 +1616,66 @@ def test_article_toc_is_printed_before_paragraphs_and_lists(testbrowser):
 
     assert 'article-toc' in first_child.get('class')
     assert page.cssselect('.article-toc + ol.list')
+
+
+def test_infographics_should_display_header_above_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/infographic')
+    items = list(browser.xpath('//figure')[0].iterchildren())
+    assert 'Die Entschlackung' == items[0].text
+    assert (
+        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        items[1].text)
+
+
+def test_infographics_should_display_origin_instead_of_caption(testbrowser):
+    browser = testbrowser('/zeit-online/article/infographic')
+    figure = browser.xpath('//figure')[0]
+    caption = figure.xpath('figcaption/*')[0]
+    assert 'Quelle: Statistisches Bundesamt' == caption.text
+
+
+def test_infographics_should_use_customized_css_classes(testbrowser):
+    browser = testbrowser('/zeit-online/article/infographic')
+    assert 'x-caption--sans' in browser.contents
+    assert 'x-copyright' in browser.contents
+    assert 'x-copytext' in browser.contents
+    assert 'x-footer' in browser.contents
+    assert 'x-subheadline' in browser.contents
+
+
+def test_infographics_should_render_border_styles_conditionally(jinja2_env):
+    tpl = jinja2_env.get_template(
+        'zeit.web.core:templates/inc/blocks/image_infographic.html')
+    image = mock.Mock()
+    image.ratio = 1
+
+    # all border styles present
+
+    image.meta.origin = True
+    image.copyright = ('FOO', 'BAR', 'BAZ')
+    image.caption = True
+    html_str = tpl.render(block=image)
+    assert '--borderless' not in html_str
+
+    # borderless subheadline
+
+    image.caption = False
+    html_str = tpl.render(block=image)
+    html = lxml.html.fromstring(html_str)
+    subheadline = html.cssselect('[class*="x-subheadline"]')
+    assert '--borderless' in subheadline[0].get('class')
+
+    # borderless footer
+
+    image.copyright = ''
+    html_str = tpl.render(block=image)
+    html = lxml.html.fromstring(html_str)
+    footer = html.cssselect('[class*="x-footer"]')
+    assert '--borderless' in footer[0].get('class')
+
+    image.copyright = ('FOO', 'BAR', 'BAZ')
+    image.meta.origin = False
+    html_str = tpl.render(block=image)
+    html = lxml.html.fromstring(html_str)
+    footer = html.cssselect('[class*="x-footer"]')
+    assert '--borderless' in footer[0].get('class')

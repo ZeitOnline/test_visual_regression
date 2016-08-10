@@ -1,0 +1,9 @@
+<div class="article__item x-spacing" py:pytype="str">
+          <picture class="x-picturefill">
+            <source srcset="http://interactive.zeit.de/2016/alkohol-stimmung/alkohol-stimmung_spirituosen-breit.jpg 1x, http://interactive.zeit.de/2016/alkohol-stimmung/alkohol-stimmung-r_spirituosen-breit.jpg 2x" media="(min-width: 768px)"/>
+            <img class="zg-infografik-picture" srcset="http://interactive.zeit.de/2016/alkohol-stimmung/alkohol-stimmung_spirituosen-schmal.jpg 1x, http://interactive.zeit.de/2016/alkohol-stimmung/alkohol-stimmung-r_spirituosen-schmal.jpg 2x" alt="…"/>
+          </picture>
+          <p class="x-footer"><span class="x-copyright">© ZEIT ONLINE</span>
+Quelle: <a href="http://www.globaldrugsurvey.com/">Global Drug Survey 2016</a>
+</p>
+        </div>
