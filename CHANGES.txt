@@ -1,8 +1,44 @@
 Change log for zeit.web
 =======================
 
-2.96 (unreleased)
+2.98 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+2.97.1 (2016-08-10)
+-------------------
+
+- HOTFIX: Fix teaser images in playlist module
+
+
+2.97 (2016-08-10)
+-----------------
+
+- HOTFIX: Set display_mode=large for article header images
+
+- BUG-478: Show label on zco text-only advertorial teaser
+
+- ZON-3099: Make xml.zeit.de routing work
+
+- BUG-372: Track video page URL for video player events
+
+- FIX: Small styling fixes to ZON-3221
+
+- FIX: Do not show image on column nextread
+
+
+2.96 (2016-08-08)
+-----------------
+
+- ZON-3171: Render different metadata for infographic-images
+
+- ZON-3078: Enforce mobile image for first zett parquet teaser
+
+- ZON-3099: Render xml.zeit.de
+
+- ZON-3197: SSL version of framebuilder
 
 - MAINT: Combine image fallback and fallback_expired into one condition
 

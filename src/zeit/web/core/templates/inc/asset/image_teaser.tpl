@@ -6,7 +6,6 @@
 
 {% block media_link_title %}{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}{% endblock %}
 
-{% if module.force_mobile_image %}
+{% if module.force_mobile_image or force_mobile_image %}
     {%- set media_block_additional_class = '{}__media--force-mobile'.format(module_layout) %}
 {% endif %}
-

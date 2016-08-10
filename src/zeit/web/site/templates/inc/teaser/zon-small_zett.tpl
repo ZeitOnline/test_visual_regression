@@ -9,9 +9,17 @@
     {% endif %}
 {% endblock %}
 
-
 {% block teaser_label %}
     {% if module[0].is_ad %}
         <span class="{{ self.layout() }}__label">Anzeige</span>
     {% endif %}
+{% endblock %}
+
+{% block teaser_media_position_before_title %}
+    {% set module_layout = self.layout() %}
+    {# forces mobile image for first zett teaser #}
+    {% if loop.index == 1 and module[0].is_ad == False %}
+        {% set force_mobile_image = True %}
+    {% endif %}
+    {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" ignore missing %}
 {% endblock %}

@@ -94,6 +94,8 @@ def join_queries(url, join_query):
 
 class Base(zeit.web.core.view.Base):
 
+    allowed_on_hosts = ['newsfeed']
+
     @property
     def items(self):
         return zeit.content.cp.interfaces.ITeaseredContent(self.context)

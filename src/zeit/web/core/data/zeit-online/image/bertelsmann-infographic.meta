@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-online/image/bertelsmann-infographic/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-07-20T12:04:53.537150+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">Das Wachstum von Bertelsmann</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="origin">Statistisches Bundesamt</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="retract_job_id">1900835152</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">bertelsmann-geschaefte.png</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-07-20T12:04:53.537150+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Die Entschlackung</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="display_type">infographic</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-07-20T12:04:53.537150+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; ZEIT-GRAFIK&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-07-20T12:04:53.537150+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:4a04c43b-1d0e-4eeb-b8ad-ff93040866ed}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-07-20T12:04:53.537150+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-07-20T12:04:53.537150+00:00</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 20 Jul 2016 12:04:53 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e16177-1111-5067b48196f92"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>

@@ -14,6 +14,7 @@ import urlparse
 import zope.component
 import zope.interface
 
+from zeit.content.image.interfaces import INFOGRAPHIC_DISPLAY_TYPE
 import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
@@ -253,59 +254,52 @@ class Image(Block):
         if getattr(model_block, 'is_empty', False):
             return
 
-        target = None
         referenced = None
         try:
             if model_block.references:
                 referenced = model_block.references.target
         except TypeError:
             pass  # Unresolveable uniqueId
+
+        target = None
+        block_type = None
+        variant = model_block.variant_name
         if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
-            target = zeit.web.core.template.get_variant(
-                referenced, model_block.variant_name)
-            if target is not None:
-                group = referenced
-            else:
-                group = None
+            if referenced.display_type == INFOGRAPHIC_DISPLAY_TYPE:
+                block_type = 'image_infographic'
+                variant = 'original'
+            target = zeit.web.core.template.get_variant(referenced, variant)
         else:
             target = referenced
-            group = None
 
         if zeit.web.core.template.expired(target):
             target = None
-
         if not target:
             return
+
         instance = super(Image, cls).__new__(cls, model_block)
         instance.image = target
-        instance.group = group
+        instance.variant_name = variant
+        instance.meta = zeit.content.image.interfaces.IImageMetadata(
+            model_block.references.target, None)
+        if block_type:
+            instance.block_type = block_type
+
         if isinstance(target, zeit.web.core.image.VariantImage):
             instance.path = target.path
             instance.fallback_path = target.fallback_path
         else:
             instance.src = target.uniqueId
             instance.uniqueId = target.uniqueId
-        if model_block.references.title:
-            instance.attr_title = model_block.references.title
-        if model_block.references.alt:
-            instance.attr_alt = model_block.references.alt
 
         return instance
 
     def __init__(self, model_block):
+        self.model_block = model_block
         # `legacy_layout` is required for bw compat of the ZCO default variant,
         # which is `portrait` rather the usual `wide`.
         self.legacy_layout = model_block.xml.get('layout', None)
-        self.variant_name = model_block.variant_name
         self.display_mode = model_block.display_mode
-        if model_block.display_mode == 'large':
-            self.figure_mods = ('wide', 'rimless', 'apart')
-        elif model_block.display_mode == 'column-width':
-            self.figure_mods = ('apart',)
-        elif model_block.display_mode == 'float':
-            self.figure_mods = ('marginalia',)
-        else:
-            self.figure_mods = ()
 
         # TODO: don't use XML but adapt an Image and use it's metadata
         if model_block.xml is not None:
@@ -327,6 +321,16 @@ class Image(Block):
     def ratio(self):
         return self.image.ratio
 
+    FIGURE_MODS = {
+        'large': ('wide', 'rimless', 'apart'),
+        'column-width': ('apart',),
+        'float': ('marginalia',),
+    }
+
+    @property
+    def figure_mods(self):
+        return self.FIGURE_MODS.get(self.display_mode, ())
+
 
 @grokcore.component.adapter(
     zeit.content.article.edit.interfaces.IImage,
@@ -334,11 +338,6 @@ class Image(Block):
 )
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class HeaderImage(Image):
-    """This is a special case used directly (not via adapter) by
-    z.w.magazin.view_article.Article.header_module so we can adjust the
-    rendering of a header image module according to the article.header_layout
-    setting.
-    """
 
     block_type = 'image'
 
@@ -347,6 +346,12 @@ class HeaderImage(Image):
 
     def __init__(self, model_block, header):
         super(HeaderImage, self).__init__(model_block)
+        # XXX Header images should not use `display_mode` at all, they should
+        # depend on article.header_layout instead. But since we mostly reuse
+        # the normal image templates for the header image, we pretend a fixed
+        # display_mode accordingly.
+        self.display_mode = 'large'
+
         article_supertitle = None
         article_title = None
         try:
@@ -374,7 +379,7 @@ class BlockImages(object):
 
     def __init__(self, context):
         self.context = context
-        self.image = context.group
+        self.image = context.model_block.references.target
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -445,10 +450,6 @@ class Video(Block):
 )
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class HeaderVideo(Video):
-    """This is a special case used directly (not via adapter) by
-    z.w.magazin.view_article.Article.header_module because videos in ZMO
-    headers need rather different markup.
-    """
 
     block_type = 'video'
 

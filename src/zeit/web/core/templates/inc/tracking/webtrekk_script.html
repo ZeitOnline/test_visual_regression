@@ -1,1 +1,2 @@
-<script src="http://scripts.zeit.de/static/js/webtrekk/webtrekk_v{{ settings('webtrekk_version') }}.js"></script>
+{% set script_path = 'https://ssl.zeit.de/www.zeit.de/static/js' if view.framebuilder_requires_ssl else 'http://scripts.zeit.de/static/js' %}
+<script src="{{ script_path }}/webtrekk/webtrekk_v{{ settings('webtrekk_version') }}.js"></script>

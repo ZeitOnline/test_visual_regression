@@ -290,6 +290,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     };
 
     return {
+        formatTrackingData: formatTrackingData,
         init: function() {
             if ( typeof Zeit === 'undefined' || ( typeof window.wt === 'undefined' && !debugMode ) ) {
                 return;
