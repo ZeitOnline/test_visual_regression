@@ -45,7 +45,6 @@ setup(
         'pyramid_zodbconn',
         'python-statsd',
         'pytz',
-        'repoze.bitblt',
         'requests',
         'requests-file',
         'setuptools',
