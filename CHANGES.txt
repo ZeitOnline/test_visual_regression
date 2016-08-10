@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.97 (unreleased)
+2.97 (2016-08-10)
 -----------------
 
 - HOTFIX: Set display_mode=large for article header images
