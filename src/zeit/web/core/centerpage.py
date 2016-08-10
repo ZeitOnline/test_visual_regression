@@ -77,15 +77,6 @@ class Region(Area):
 
 
 @zeit.web.register_filter
-def auto_select_asset(teaser):
-    for getter in (get_video_asset, get_gallery_asset, get_image_asset):
-        asset = getter(teaser)
-        if asset:
-            return asset
-    log.debug('No assets for %s' % teaser.uniqueId)
-
-
-@zeit.web.register_filter
 def get_video_asset(teaser):
 
     def get_video_source(self):
@@ -113,23 +104,6 @@ def get_video_asset(teaser):
         return [primary, secondary]
 
     return primary
-
-
-@zeit.web.register_filter
-def get_gallery_asset(teaser):
-    try:
-        return zeit.content.gallery.interfaces.IGalleryReference(
-            teaser).gallery
-    except (TypeError, AttributeError):
-        return
-
-
-@zeit.web.register_filter
-def get_image_asset(teaser):
-    try:
-        return zeit.content.image.interfaces.IImages(teaser).image
-    except (TypeError, AttributeError):
-        return
 
 
 def get_area(area):
