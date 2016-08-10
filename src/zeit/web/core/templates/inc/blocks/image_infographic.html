@@ -22,7 +22,7 @@
 
 {% block media_caption_content %}
     {%- if image.meta.origin -%}
-    <span class="x-caption--sans">Quelle: {{ image.meta.origin }}</span>
+        <span class="x-caption--sans">Quelle: {{ image.meta.origin }}</span>
     {%- endif -%}
     {{ super() }}
 {% endblock %}

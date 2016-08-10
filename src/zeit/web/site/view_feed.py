@@ -10,6 +10,7 @@ import urllib
 import urlparse
 
 import pyramid.view
+import lxml.builder
 import lxml.etree
 
 import zeit.content.cp.interfaces

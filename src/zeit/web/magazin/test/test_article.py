@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
 import mock
+import pytest
 
 import zeit.content.article.article
 import zeit.cms.interfaces
@@ -12,8 +13,6 @@ import zeit.cms.interfaces
 import zeit.web.core.application
 import zeit.web.core.interfaces
 import zeit.web.magazin.view_article
-
-import pytest
 
 
 def test_ipages_contains_blocks(application):

@@ -9,4 +9,3 @@
 {% if module.force_mobile_image or force_mobile_image %}
     {%- set media_block_additional_class = '{}__media--force-mobile'.format(module_layout) %}
 {% endif %}
-
