@@ -515,6 +515,20 @@ def test_videostage_should_have_right_video_count(testbrowser):
     assert len(videos) == 4, 'We expect 4 videos in video-stage'
 
 
+def test_videostage_should_have_correct_images(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
+    video_images = browser.cssselect('#video-stage img')
+    assert len(video_images) == 4
+    vi0 = video_images[0].attrib.get('src')
+    assert '/video/2014-01/1953013471001/imagegroup/' in vi0
+    vi1 = video_images[1].attrib.get('src')
+    assert '/video/2014-01/3035864892001/imagegroup/' in vi1
+    vi2 = video_images[2].attrib.get('src')
+    assert '/zeit-online/video/3537342483001/imagegroup/' in vi2
+    vi3 = video_images[3].attrib.get('src')
+    assert '/video/2014-01/3089721834001/imagegroup/' in vi3
+
+
 def test_videostage_videos_should_have_video_ids(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     videos = browser.cssselect('#video-stage article')
