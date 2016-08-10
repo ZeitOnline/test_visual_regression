@@ -4,7 +4,7 @@ Change log for zeit.web
 2.98 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Fix teaser images in playlist module
 
 
 2.97 (2016-08-10)
