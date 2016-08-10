@@ -1643,39 +1643,34 @@ def test_infographics_should_use_customized_css_classes(testbrowser):
     assert 'x-subheadline' in browser.contents
 
 
-def test_infographics_should_render_border_styles_conditionally(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.core:templates/inc/blocks/image_infographic.html')
-    image = mock.Mock()
+def test_infographics_should_render_border_styles_conditionally(tplbrowser):
+    template = 'zeit.web.core:templates/inc/blocks/image_infographic.html'
+    image = zeit.web.core.image.Image(mock.Mock())
     image.ratio = 1
 
     # all border styles present
-
     image.origin = True
     image.copyrights = (('FOO', 'BAR', 'BAZ'),)
     image.caption = True
-    html_str = tpl.render(block=image)
-    assert '--borderless' not in html_str
+    browser = tplbrowser(template, block=image)
+    assert not browser.cssselect('.x-footer--borderless')
+    assert not browser.cssselect('.x-subheadline--borderless')
 
     # borderless subheadline
-
     image.caption = False
-    html_str = tpl.render(block=image)
-    html = lxml.html.fromstring(html_str)
-    subheadline = html.cssselect('[class*="x-subheadline"]')
-    assert '--borderless' in subheadline[0].get('class')
+    browser = tplbrowser(template, block=image)
+    assert not browser.cssselect('.x-footer--borderless')
+    assert browser.cssselect('.x-subheadline--borderless')
 
     # borderless footer
-
     image.copyrights = ()
-    html_str = tpl.render(block=image)
-    html = lxml.html.fromstring(html_str)
-    footer = html.cssselect('[class*="x-footer"]')
-    assert '--borderless' in footer[0].get('class')
+    browser = tplbrowser(template, block=image)
+    assert browser.cssselect('.x-footer--borderless')
+    assert not browser.cssselect('.x-subheadline--borderless')
 
+    # no border styles present
     image.copyrights = (('FOO', 'BAR', 'BAZ'),)
     image.origin = False
-    html_str = tpl.render(block=image)
-    html = lxml.html.fromstring(html_str)
-    footer = html.cssselect('[class*="x-footer"]')
-    assert '--borderless' in footer[0].get('class')
+    browser = tplbrowser(template, block=image)
+    assert not browser.cssselect('.x-footer--borderless')
+    assert not browser.cssselect('.x-subheadline--borderless')

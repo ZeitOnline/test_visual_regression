@@ -23,7 +23,7 @@ def test_nonexistent_gallery_is_ignored(testbrowser, workingcopy):
     with checked_out(article) as co:
         co.xml.body.division.gallery.set('href', 'http://xml.zeit.de/invalid')
     browser = testbrowser('/zeit-magazin/article/01')
-    assert '<div class="inline-gallery"' not in browser.contents
+    assert not browser.cssselect('div.inline-gallery')
 
 
 def test_inline_gallery_buttons(selenium_driver, testserver):
