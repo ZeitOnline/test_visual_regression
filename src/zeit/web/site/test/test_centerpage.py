@@ -377,7 +377,9 @@ def test_format_date_returns_expected_value_in_newsbox():
 def test_newsbox_renders_correctly_on_homepage(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index-with-newsbox')
     wrapper = browser.cssselect('.newsticker__column')
+    section_heading_link = browser.cssselect('.section-heading__link')
     assert len(wrapper) == 2
+    assert len(section_heading_link) == 1
 
 
 def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
@@ -385,7 +387,8 @@ def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
     wrapper = browser.cssselect('.newsticker__single')
     newsbox = browser.cssselect('.cp-area--newsticker.cp-area--keywordpage')
     linktext = browser.cssselect('.newsteaser__text--kw-tp-page')
+    section_heading_link = browser.cssselect('.section-heading__link')
     assert len(wrapper) == 1
     assert len(newsbox) == 1
     assert len(linktext) >= 1
-
+    assert len(section_heading_link) == 0
