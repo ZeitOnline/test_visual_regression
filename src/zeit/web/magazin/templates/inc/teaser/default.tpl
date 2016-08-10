@@ -7,7 +7,6 @@ Default teaser template to inherit from.
 
 {%- set image = get_image(module) %}
 {%- set video = get_video(teaser) %}
-{%- set area = area if area else '' %} {# TODO: remove as soon as we have access to real area data (AS)#}
 
 <article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
