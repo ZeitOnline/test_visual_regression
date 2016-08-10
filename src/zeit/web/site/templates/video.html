@@ -3,7 +3,7 @@
 
 {% block content %}
     <article class="article article--video" id="js-article"
-        {% if view.serie %} data-video-series="{{ view.serie | attr_safe }}"{% endif %}
+        {% if view.serie %} data-video-series="{{ view.serie | format_webtrekk }}"{% endif %}
         data-video-provider="brightcove"
         data-video-size="large"
         data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}"

@@ -1,16 +1,24 @@
 {% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 
 {% if block.video and not block.video is expired %}
-<figure class="article__item article__item--wide article__item--rimless article__item--apart">
+<figure class="article__item article__item--wide article__item--rimless article__item--apart"
+    {%- if block.video.serie and block.video.serie.serienname %} data-video-series="{{ block.video.serie.serienname | format_webtrekk }}"{% endif %}
+    data-video-size="large"
+    data-video-provider="brightcove"
+    data-video-page-url="{{ block.video | create_url }}">
     {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}
     {% if toggles('zon_inline_video_via_html5') %}
         {{ vima.brightcove_video_tag(block.id, iframe=False, brightcove_player=playerId) }}
     {% else %}
         {{ vima.brightcove_video_tag(block.id, iframe=True, brightcove_player=playerId) }}
     {% endif %}
+
+    {% block video_caption -%}
     <figcaption class="video-figure__caption">
         <span class="video-figure__pagetitle">{{ [block.supertitle, block.title] | join_if_exists(' - ') }}</span>
         <span class="video-figure__description">{{ block.description }}</span>
     </figcaption>
+    {%- endblock %}
+
 </figure>
 {% endif %}
