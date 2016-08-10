@@ -265,18 +265,22 @@ class Image(Block):
         # which is `portrait` rather the usual `wide`.
         self.legacy_layout = context.xml.get('layout', None)
 
+    FIGURE_MODS = {
+        'large': ('wide', 'rimless', 'apart'),
+        'column-width': ('apart',),
+        'float': ('marginalia',),
+    }
+
     @property
     def figure_mods(self):
-        return {
-            'large': ('wide', 'rimless', 'apart'),
-            'column-width': ('apart',),
-            'float': ('marginalia',)
-        }.get(self.context.display_mode, ())
+        return self.FIGURE_MODS.get(self.display_mode, ())
 
 
+@grokcore.component.adapter(
+    zeit.content.article.edit.interfaces.IImage,
+    zeit.content.article.edit.interfaces.IHeaderArea
+)
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage,
-                            zeit.content.article.edit.interfaces.IHeaderArea)
 class HeaderImage(Image):
 
     block_type = 'image'
@@ -376,9 +380,11 @@ class Video(Block):
             logging.exception('No video renditions set.')
 
 
+@grokcore.component.adapter(
+    zeit.content.article.edit.interfaces.IVideo,
+    zeit.content.article.edit.interfaces.IHeaderArea
+)
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
-@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo,
-                            zeit.content.article.edit.interfaces.IHeaderArea)
 class HeaderVideo(Video):
 
     block_type = 'video'
@@ -439,7 +445,7 @@ class NewsletterTeaser(Block):
 
     @property
     def image(self):
-        raise Exception('TODO: Migrate to zwc.image.Image')
+        # TODO: Migrate to zwc.image.Image
         images = zeit.content.image.interfaces.IImages(
             self.context.reference, None)
         image = images.image if images is not None else None
@@ -489,7 +495,7 @@ class NewsletterAdvertisement(Block):
 
     @property
     def image(self):
-        raise Exception('TODO: Migrate to zwc.image.Image')
+        # TODO: Migrate to zwc.image.Image
         return self.context.image.uniqueId.replace(
             'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
 

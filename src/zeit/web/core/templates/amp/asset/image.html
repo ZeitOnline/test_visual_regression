@@ -12,7 +12,7 @@
                 sizes="(min-width: 820px) 820px, 100vw"
                 {% endif -%}
                 layout="responsive"
-                attribution="{{ image.copyrights | map('first') | join(, ) }}"
+                attribution="{{ image.copyrights | map('first') | join(', ') }}"
                 itemprop="contentUrl"></amp-img>
             {% endblock media -%}
             <meta itemprop="url" content="{{ request.image_host + image.fallback_path }}">
