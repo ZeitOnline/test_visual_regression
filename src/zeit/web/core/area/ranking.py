@@ -50,41 +50,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         zeit.web.core.interfaces.IPagination
     )
 
-    FIELDS = ' '.join([
-        'authors',
-        'date-last-modified',
-        'date_first_released',
-        'date_last_published',
-        'image-base-id',
-        'image-fill-color',
-        'last-semantic-change',
-        'lead_candidate',
-        'product_id',
-        'show_commentthread',
-        'serie',
-        'supertitle',
-        'teaser_text',
-        'title',
-        'type',
-        'uniqueId',
-    ])
-
-    FIELD_MAP = [
-        (u'authors', u'authorships'),
-        (u'show_commentthread', u'commentSectionEnable'),
-        (u'supertitle', u'teaserSupertitle'),
-        (u'teaser_text', u'teaserText'),
-        (u'title', u'teaserTitle'),
-    ]
-
-    DATE_MAP = [
-        (u'date-last-modified', u'date_last_modified'),
-        (u'date_first_released', u'date_first_released'),
-        (u'last-semantic-change', u'last_semantic_change'),
-        (u'date_last_published', u'date_last_published'),
-        (u'date_last_published', u'date_last_published_semantic'),
-    ]
-
     def __init__(self, context):
         super(Ranking, self).__init__(context)
         self.request = pyramid.threadlocal.get_current_request()
@@ -125,32 +90,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return zeit.web.dont_cache([])
         return [x.uniqueId for x in self._content_query.existing_teasers
                 if hasattr(x, 'uniqueId')]
-
-    def document_hook(self, doc):
-        for source, target in self.FIELD_MAP:
-            try:
-                doc[target] = doc[source]
-            except KeyError:
-                continue
-
-        for source, target in self.DATE_MAP:
-            try:
-                doc[target] = zc.iso8601.parse.datetimetz(str(doc[source]))
-            except (KeyError, UnicodeEncodeError, ValueError):
-                continue
-
-        # XXX These asset badges and classification flags are not indexed
-        #     in Solr, so we lie about them.
-        doc.update({'gallery': None,
-                    'genre': None,
-                    'template': None,
-                    'video': None,
-                    'video_2': None})
-
-        doc.setdefault('lead_candidate', False)
-        doc.setdefault('commentSectionEnable', True)
-
-        return doc
 
     @zeit.web.reify
     def query_string(self):
@@ -240,10 +179,63 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery):
 
     grokcore.component.context(Ranking)
 
-    @property
-    def FIELDS(self):
-        return self.context.FIELDS
+    FIELD_MAP = {
+        'authors': 'authorships',
+        'date-last-modified': 'date_last_modified',
+        'date_first_released': '',
+        'date_last_published': '',
+        'date_last_published_semantic': 'date_last_published_semantic',
+        'image-base-id': '',
+        'image-fill-color': '',
+        'last-semantic-change': 'last_semantic_change',
+        'lead_candidate': '',
+        'product_id': '',
+        'serie': '',
+        'show_commentthread': 'commentSectionEnable',
+        'supertitle': 'teaserSupertitle',
+        'teaser_text': 'teaserText',
+        'title': 'teaserTitle',
+        'type': '',
+        'uniqueId': '',
+    }
 
-    def _resolve(self, solr_result):
-        doc = self.context.document_hook(solr_result)
-        return zeit.cms.interfaces.ICMSContent(doc, None)
+    DATE_FIELDS = [
+        'date_last_modified',
+        'date_first_released',
+        'last_semantic_change',
+        'date_last_published',
+        'date_last_published_semantic',
+    ]
+
+    @zeit.web.reify
+    def FIELDS(self):
+        return ' '.join(self.FIELD_MAP.keys())
+
+    def _convert(self, doc):
+        for source, target in self.FIELD_MAP.items():
+            try:
+                doc[target] = doc[source]
+            except KeyError:
+                continue
+
+        for key in self.DATE_FIELDS:
+            try:
+                doc[key] = zc.iso8601.parse.datetimetz(str(doc[key]))
+            except (KeyError, UnicodeEncodeError, ValueError):
+                continue
+
+        # XXX These asset badges and classification flags are not indexed
+        #     in Solr, so we lie about them.
+        doc.update({'gallery': None,
+                    'genre': None,
+                    'template': None,
+                    'video': None,
+                    'video_2': None})
+
+        doc.setdefault('lead_candidate', False)
+        doc.setdefault('commentSectionEnable', True)
+
+        return doc
+
+    def _resolve(self, doc):
+        return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)

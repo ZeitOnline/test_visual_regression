@@ -1,25 +1,28 @@
+import grokcore.component
+
 import zeit.web
 import zeit.web.core.area.ranking
 
 
 @zeit.web.register_area('author-list')
 class AuthorList(zeit.web.core.area.ranking.Ranking):
+    pass
 
-    FIELDS = zeit.web.core.area.ranking.Ranking.FIELDS + ' ' + ' '.join([
-        'author_summary_t',
-        'display_name_s',
-    ])
 
-    FIELD_MAP = zeit.web.core.area.ranking.Ranking.FIELD_MAP + [
-        (u'author_summary_t', 'summary'),
-        (u'display_name_s', 'display_name'),
-    ]
+class SolrContentQuery(zeit.web.core.area.ranking.SolrContentQuery):
 
-    def document_hook(self, doc):
-        doc = super(AuthorList, self).document_hook(doc)
+    grokcore.component.context(AuthorList)
+
+    FIELD_MAP = zeit.web.core.area.ranking.SolrContentQuery.FIELD_MAP.copy()
+    FIELD_MAP.update({
+        'author_summary_t': 'summary',
+        'display_name_s': 'display_name',
+    })
+
+    def _convert(self, doc):
+        doc = super(SolrContentQuery, self)._convert(doc)
         # Prevent proxy exposure for missing fields (e.g. probably the majority
         # of author objects does not have an image).
         for key in ['image', 'summary']:
-            if key not in doc:
-                doc[key] = None
+            doc.setdefault(key, None)
         return doc
