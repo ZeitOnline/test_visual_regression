@@ -1,3 +1,4 @@
+{% extends 'zeit.web.core:templates/inc/teaser/default.tpl' %}
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
@@ -28,6 +29,7 @@
                    href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
                         <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content) }}">
+                            {{ super() }}
                             {% block kicker_logo scoped %}
                                 {% if teaser is zmo_content %}
                                     {{ lama.use_svg_icon('logo-zmo-zm', self.layout() + '__kicker-logo--zmo svg-symbol--hide-ie', view.package, a11y=False) }}
