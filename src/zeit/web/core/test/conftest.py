@@ -5,6 +5,7 @@ import json
 import logging
 import os.path
 import pkg_resources
+import re
 import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
@@ -761,12 +762,20 @@ class WsgiBrowser(BaseBrowser, zope.testbrowser.wsgi.Browser):
 
 class TemplateBrowser(BaseBrowser):
 
+    _looks_like_full_html_unicode = re.compile(
+        unicode(r'^\s*<(?:html|!doctype)'), re.I).match
+    # lxml, y u no make this public?
+
     def __init__(self, environ):
         self.env = environ
 
     def open(self, uri, **kw):
         kw = zeit.web.core.utils.defaultdict(mock.Mock, **kw)
-        self.contents = self.env.get_template(uri).render(**kw)
+        html = self.env.get_template(uri).render(**kw)
+        if not self._looks_like_full_html_unicode(html):
+            html = ('<html xmlns:esi="http://www.edge-delivery.org/esi/1.0">'
+                    '<body>%s</body></html>') % html
+        self.contents = html
 
 
 class HttpBrowser(BaseBrowser):

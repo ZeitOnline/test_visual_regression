@@ -45,6 +45,8 @@ def sanitize_copyrights(func):
 
 class Image(object):
 
+    grokcore.component.implements(zeit.web.core.interfaces.IImage)
+
     def __init__(self, context):
         self.context = context
 

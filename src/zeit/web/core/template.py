@@ -54,8 +54,13 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
     """
 
     try:
-        image = zope.component.getAdapter(
-            context, zeit.web.core.interfaces.IImage, name)
+        if name == u'':
+            # For unnamed adapters we can rely on zope interface mechanics
+            # to determine whether our context already provides IImage.
+            image = zeit.web.core.interfaces.IImage(context)
+        else:
+            image = zope.component.getAdapter(
+                context, zeit.web.core.interfaces.IImage, name)
     except (zope.component.ComponentLookupError, TypeError):
         image = None
 

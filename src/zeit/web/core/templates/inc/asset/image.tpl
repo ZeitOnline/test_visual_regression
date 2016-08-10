@@ -3,7 +3,7 @@
         {%- if image_itemprop %} itemprop="{{ image_itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
         {% block media_caption_above %}{% endblock %}
         <!--[if gt IE 8]><!-->
-        <noscript data-src="{{ fallback_source }}">
+        <noscript data-src="{{ request.image_host + image.fallback_path }}">
         <!--<![endif]-->
             <div class="{% block media_block_helper %}{{ module_layout }}__media-container{% endblock %} {{ media_container_additional_class }}">
                 {% block media_block_wrapper %}

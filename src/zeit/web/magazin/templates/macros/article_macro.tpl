@@ -308,8 +308,8 @@
     {%- endif -%}
 {% endmacro %}
 
-{% macro inlinegallery(block) -%}
-    {% include 'zeit.web.core:templates/inc/blocks/inlinegallery.html' %}
+{% macro gallery(block) -%}
+    {% include 'zeit.web.core:templates/inc/blocks/gallery.html' %}
 {%- endmacro %}
 
 {% macro no_block(block) %}{% endmacro %}

@@ -1643,34 +1643,35 @@ def test_infographics_should_use_customized_css_classes(testbrowser):
     assert 'x-subheadline' in browser.contents
 
 
-def test_infographics_should_render_border_styles_conditionally(tplbrowser):
+def test_infographics_should_render_border_styles_conditionally(
+        tplbrowser, dummy_request):
     template = 'zeit.web.core:templates/inc/blocks/image_infographic.html'
     image = zeit.web.core.image.Image(mock.Mock())
     image.ratio = 1
+    image.group = mock.Mock()
+    image.group.variant_url.return_value = '/foo'
 
     # all border styles present
     image.origin = True
     image.copyrights = (('FOO', 'BAR', 'BAZ'),)
     image.caption = True
-    browser = tplbrowser(template, block=image)
+    browser = tplbrowser(template, block=image, request=dummy_request)
     assert not browser.cssselect('.x-footer--borderless')
     assert not browser.cssselect('.x-subheadline--borderless')
 
     # borderless subheadline
     image.caption = False
-    browser = tplbrowser(template, block=image)
-    assert not browser.cssselect('.x-footer--borderless')
+    browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.x-subheadline--borderless')
 
     # borderless footer
     image.copyrights = ()
-    browser = tplbrowser(template, block=image)
+    browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.x-footer--borderless')
-    assert not browser.cssselect('.x-subheadline--borderless')
 
     # no border styles present
     image.copyrights = (('FOO', 'BAR', 'BAZ'),)
     image.origin = False
-    browser = tplbrowser(template, block=image)
-    assert not browser.cssselect('.x-footer--borderless')
-    assert not browser.cssselect('.x-subheadline--borderless')
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert browser.cssselect('.x-footer--borderless')
+    assert browser.cssselect('.x-subheadline--borderless')
