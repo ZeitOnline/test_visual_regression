@@ -9,25 +9,18 @@ $bg_img--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freistelle
 
 .partner
 	background-color: $color-advertising-bg
-	padding-bottom: remify(20px)
 	position: relative
 	min-height: remify(140px)
-	+respond-min($break-desktop-min)
-		padding-bottom: 0
 
 	&__action
 		padding: remify(0 25px)
-		+respond-min($break-desktop-min)
-			display: table-cell
-			vertical-align: top
-			width: 55%
-			padding: remify(25px)
 
 	&__kicker
 		height: remify(72px)
 		text-align: left
 		background-color: $zon-lighter-grey
-		color: $white
+		color: $zon-charcoal
+		border-bottom: 1px solid $gainsboro
 
 	&__kicker-text
 		font-size: em(18px)
@@ -36,10 +29,13 @@ $bg_img--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freistelle
 		display: table-cell
 		vertical-align: middle
 		height: remify(72px)
-		padding-left: remify(25px)
+		+respond-min($break-phablet-min)
+			padding-left: 15px
 
-	&__button
-		display: inline-block
+	&__kicker-img
+		display: table-cell
+		height: remify(72px)
+		width: remify(130px)
 
 	&__button-text
 		+zon-button-colored($base-color: #168750, $margin: remify(14px 6px 14px 0))
@@ -54,13 +50,19 @@ $bg_img--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freistelle
 	&__dropdown-option
 		line-height: 35px
 
+	&__dropdown-title
+		display: block
+		font-weight: 700
+		color: $zon-charcoal
+		font-size: em(18px)
+		padding-bottom: remify(15px)
+
 	&__dropdown-intro,
 	&__intro
 		color: $zon-grey
 		font-size: em(14px)
 		line-height: em(25px)
 		letter-spacing: $letter-spacing-s
-		padding: remify(10px 0)
 		display: block
 		+respond-min($break-desktop-min)
 			display: table-cell
@@ -69,11 +71,15 @@ $bg_img--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freistelle
 	&__intro
 		padding: remify(25px)
 
+	&__dropdown-intro
+		padding: remify(10px 0)
+
 	&__link
 		display: block
 		letter-spacing: $letter-spacing-s
 		font-size: em(15px)
 		line-height: em(23px)
+		padding-bottom: remify(20px)
 		+respond-min($break-phablet-min)
 			display: inline-block
 			margin-left: remify(20px)
@@ -88,37 +94,40 @@ $bg_img--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freistelle
 	/* modifier */
 	&--jobs
 		.partner
-			&__kicker
-				color: $zon-charcoal
-				border-bottom: 1px solid $gainsboro
+			&__action
+				+respond-min($break-desktop-min)
+					width: 55%
+					display: table-cell
+					vertical-align: top
+					padding: remify(25px)
+
+			&__dropdown-intro
+				display: none
 
 			&__kicker-img
-				display: table-cell
-				height: remify(72px)
-				width: remify(130px)
 				background: $zon_lighter_grey url($bg_img--jobs) no-repeat right
 				background-size: cover
-
-			&__kicker-text
-				padding-left: 0
-				+respond-min($break-phablet-min)
-					padding-left: 15px
 
 	&--reisen
 		.partner
 			&__kicker
-				height: 0
+				display: none
 
 			&__button-text
 				+zon-button-colored($base-color: #c27800, $margin: remify(14px 6px 14px 0))
 
 			&__link
+				text-align: right
+				padding: remify(20px 0)
 				+respond-min($break-phablet-min)
-					display: block
+					text-align: left
 					position: absolute
-					margin-top: 0
-					bottom: remify(10px)
+					bottom: remify(5px)
 					left: 0
+					padding: 0
+					margin-left: remify(10px)
+				+respond-min($break-desktop-min)
+					margin-left: remify(20px)
 
 			&__link-icon
 				color: $zon-grey
@@ -130,15 +139,20 @@ $bg_img--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freistelle
 
 			&__action
 				+respond-min($break-phablet-min)
-					width: 60%
+					width: 65%
 					display: table-cell
 					vertical-align: top
-					padding: remify(25px)
+					padding-top: remify(25px)
 
 			&__dropdown-intro,
 			&__intro
-				padding: remify(0 0 20px 0)
+				padding: remify(0 0 15px 0)
 				+respond-min($break-phablet-min)
 					display: table-cell
-					vertical-align: top
+
+			&__intro
+				+respond-min($break-tablet-min)
+					padding-top: remify(25px)
+				+respond-min($break-desktop-min)
+					padding-top: 0
 

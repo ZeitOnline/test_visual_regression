@@ -3,15 +3,12 @@
 {% block modifier %}reisen{% endblock %}
 
 
-{% block intro_title %}
-<span class="partner__intro-title">Finden Sie hier Ihre Traumreise!</span>
+{% block intro %}
+    {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" ignore missing %}
 {% endblock %}
 
-{% block intro %}
-    {#<span class="partner__intro-img"></span>#}
-
-        {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" ignore missing %}
-
+{% block dropdown_title %}
+    <span class="partner__dropdown-title">Finden Sie hier Ihre Traumreise!</span>
 {% endblock %}
 
 {% block dropdown_intro %}Entdecken Sie einzigartige ZEIT-Reisen das ganze Jahr in über 60 faszinierende Länder dieser Erde!{% endblock %}
