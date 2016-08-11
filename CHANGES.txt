@@ -4,6 +4,26 @@ Change log for zeit.web
 2.98 (unreleased)
 -----------------
 
+- Nothing changed yet.
+
+
+2.97.4 (2016-08-11)
+-------------------
+
+- HOTFIX: Fix typo in VariantImage code
+
+- BUG-490: delete special font settings for advertorial teaser
+
+
+2.97.3 (2016-08-11)
+-------------------
+
+- FIX: Determine ratio according to viewport for the "original" variant
+
+
+2.97.2 (2016-08-11)
+-------------------
+
 - FIX: Apply display_mode settings to infographic images too
 
 - FIX: Be defensive about resolving infoboxes on xml.zeit.de

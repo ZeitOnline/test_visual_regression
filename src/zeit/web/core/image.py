@@ -127,9 +127,27 @@ class Image(object):
     def layout(self):
         return
 
+    def _ratio_for_viewport(self, viewport):
+        if self.group is not None:
+            image = self.group.master_image_for_viewport(viewport)
+            if image is None:
+                return
+            width, height = image.getImageSize()
+            return float(width) / float(height)
+
     @zeit.web.reify
     def ratio(self):
-        return self._variant.ratio
+        if self._variant.ratio is not None:
+            return self._variant.ratio
+        else:
+            return self._ratio_for_viewport('desktop')
+
+    @zeit.web.reify
+    def mobile_ratio(self):
+        if self._variant.ratio is None:
+            mobile_ratio = self._ratio_for_viewport('mobile')
+            if round(abs(mobile_ratio - self.ratio), 3) != 0:
+                return mobile_ratio
 
     @zeit.web.reify
     def fallback_width(self):

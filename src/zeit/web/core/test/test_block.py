@@ -258,6 +258,21 @@ def test_image_should_pass_through_ratio(application):
     block = zeit.web.core.block.Image(model_block)
     image = zeit.web.core.interfaces.IImage(block)
     assert round(1.77 - image.ratio, 1) == 0
+    assert not image.mobile_ratio
+
+
+def test_image_should_set_mobile_ratio_for_variant_original(application):
+    image = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/image/bertelsmann-infographic/')
+    model_block = mock.Mock()
+    model_block.display_mode = 'large'
+    model_block.variant_name = 'wide'
+    model_block.is_empty = False
+    model_block.xml = lxml.etree.fromstring('<image/>')
+    model_block.references.target = image
+    image = zeit.web.core.block.Image(model_block)
+    assert round(0.80 - image.ratio, 1) == 0
+    assert round(1.62 - image.mobile_ratio, 1) == 0
 
 
 def test_module_class_should_hash_as_expected():
