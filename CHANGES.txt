@@ -4,6 +4,8 @@ Change log for zeit.web
 2.98 (unreleased)
 -----------------
 
+- HOTFIX: Fix typo in VariantImage code
+
 - BUG-490: delete special font settings for advertorial teaser
 
 

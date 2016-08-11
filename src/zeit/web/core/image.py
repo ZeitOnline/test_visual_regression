@@ -106,7 +106,7 @@ class VariantImage(object):
                 # No master image found to determine ratio from.
                 return None
             mobile_ratio = cls._ratio_from_master_image(group, 'mobile')
-            if not cls.float_equals(mobile_ratio, cls.ratio):
+            if not cls.float_equals(mobile_ratio, instance.ratio):
                 instance.mobile_ratio = mobile_ratio
         return instance
 
