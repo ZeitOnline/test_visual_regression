@@ -75,6 +75,14 @@
                     "vars": {
                         "actionName": "amp.footernav.bottom.3.1.nach_oben|${canonicalUrl}"
                     }
+                },
+                "trackBackToHomepageClick": {
+                    "on": "click",
+                    "selector": ".article__item a[href='{{ request.route_url('home') }}index']",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.article-pager....startseite|www.zeit.de/index"
+                    }
                 }
             }
         }
