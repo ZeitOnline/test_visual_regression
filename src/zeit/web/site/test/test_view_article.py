@@ -1650,6 +1650,7 @@ def test_infographics_should_render_border_styles_conditionally(
     image.ratio = 1
     image.group = mock.Mock()
     image.group.variant_url.return_value = '/foo'
+    image.figure_mods = ('FOO', 'BAR', 'BAZ')
 
     # all border styles present
     image.origin = True

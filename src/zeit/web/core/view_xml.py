@@ -1,3 +1,5 @@
+import logging
+
 from pyramid.response import FileIter
 from pyramid.response import Response
 import lxml.etree
@@ -15,6 +17,9 @@ import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
 import zeit.web.core.article
 import zeit.web.core.view
+
+
+log = logging.getLogger(__name__)
 
 
 class XMLContent(zeit.web.core.view.Base):
@@ -38,7 +43,11 @@ class XMLContent(zeit.web.core.view.Base):
 
     def _include_infoboxes(self):
         for infobox in self.xml.xpath('/article/body/division/infobox'):
-            box = zeit.cms.interfaces.ICMSContent(infobox.get('href'))
+            box = zeit.cms.interfaces.ICMSContent(infobox.get('href'), None)
+            if box is None:
+                log.info(
+                    'Cannot resolve infobox %s, ignored.', infobox.get('href'))
+                continue
             lxml.objectify.SubElement(infobox, 'container')
             infobox.container = box.xml
             infobox.set(

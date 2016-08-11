@@ -4,16 +4,15 @@
 {% set module_layout = 'article' %}
 {% set href = image.href %}
 {% set image_itemprop = 'image' %}
-
-{% block media_caption_class %}infographic{% endblock %}
-{% block media_copyright_class %}x-copyright x-caption--sans{% endblock %}
-
-{% set media_block_additional_class = 'infographic' %}
+{% set media_block_additional_class = 'article__item' | with_mods(*block.figure_mods) ~ (' infographic x-spacing') %}
 
 {% set media_caption_additional_class = 'x-footer'
     ~ ('--borderless' if not image.origin or not image.copyrights)
     ~ (' figure__caption--marginalia' if block.display_mode == 'float')
 %}
+
+{% block media_caption_class %}infographic{% endblock %}
+{% block media_copyright_class %}x-copyright x-caption--sans{% endblock %}
 
 {% block media_caption_above %}
     <h3 class="x-subheadline{{ '--borderless' if not image.caption }}" itemprop="name">{{ image.title }}</h3>

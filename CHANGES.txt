@@ -4,7 +4,9 @@ Change log for zeit.web
 2.98 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Apply display_mode settings to infographic images too
+
+- FIX: Be defensive about resolving infoboxes on xml.zeit.de
 
 
 2.97.1 (2016-08-10)
