@@ -55,38 +55,18 @@ What does this script do?
    tracking. This could be generalized in the future, if/as needed.
 
 ----------------------------------------------------------------------------- */
-define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
+define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
     var EXPECTED_NAME = 'zonTriggeredEventTracking',
         debugMode,
 
         // encapsulate the functions into groups to make the code more readable (hopefully)
         _functions = {
-            helpers: {},
             sendTracking: {},
             handleSpecificPlugin: {},
             dispatch: {}
         },
         init;
-
-    /* -------------------------------------------------------------------------
-    Helper functions for transforming data
-    ------------------------------------------------------------------------- */
-    _functions.helpers.formatWebtrekkTrackingData = function( trackingData ) {
-        var url = trackingData.pop(),
-            slug = trackingData.join( '.' );
-
-        if ( url ) {
-            url = url.replace( /http(s)?:\/\//, '' );
-
-            // For some links, we want to preserve the GET parameters.
-            // Otherwise, remove them!
-            if ( !/\.(social|studiumbox)\./.test( slug ) ) {
-                url = url.split( '?' )[0];
-            }
-        }
-        return slug + '|' + url;
-    };
 
     /* -------------------------------------------------------------------------
     Tracking functions which trigger the actual tracking
@@ -100,34 +80,39 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
         var messageData,
             messageSender,
-            $videoArticle,
-            videoSeries = '', // no series info here. simply send an empty string
-            videoProvider = '',
+            $container,
             videoSize = '',
+            videoSeries = '',
+            videoProvider = '',
+            videoPageUrl = window.location.host + window.location.pathname,
             data,
+            videoData,
             trackingData;
 
         // we blindly assume that there is only one player on the page. ...
         // If in the future we have multiple video players, the ID would need
         // to be sent inside the postMessage. That way we could find the video.
-        $videoArticle = $( '.video-player' );
-        if ( $videoArticle.length > 0 ) {
-            videoProvider = $videoArticle.data( 'video-provider' ) || '';
-            videoSize = $videoArticle.data( 'video-size' ) || '';
+        $container = $( '.video-player' ).closest( 'article, figure[data-video-provider]' );
+
+        if ( $container.length ) {
+            videoData = $container.data();
+            videoSize = videoData.videoSize;
+            videoSeries = videoData.videoSeries;
+            videoProvider = videoData.videoProvider;
+            videoPageUrl = videoData.videoPageUrl || window.location.host + window.location.pathname;
         }
 
         data = [
-            Zeit.breakpoint.getTrackingBreakpoint(),
             'video',
             videoSize,
             videoSeries,
             videoProvider,
             '', // origin (zdf/reuters)
             eventString,
-            window.location.host + window.location.pathname
+            videoPageUrl
         ];
 
-        trackingData = _functions.helpers.formatWebtrekkTrackingData( data );
+        trackingData = Clicktracking.formatTrackingData( data );
 
         window.wt.sendinfo({
             linkId: trackingData,
@@ -137,6 +122,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         if ( debugMode ) {
             console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
             console.log( trackingData );
+            window.trackingData = trackingData;
         }
     };
 
@@ -238,7 +224,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     ------------------------------------------------------------------------- */
     init = function() {
 
-        debugMode = document.location.search.indexOf( 'triggered-event-tracking-debug' ) > -1;
+        debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
 
         $( window ).on( 'message', function( event ) {
             _functions.dispatch.dispatchAllMessages( event );

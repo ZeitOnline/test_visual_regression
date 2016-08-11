@@ -11,7 +11,6 @@ import zeit.cms.content.interfaces
 import zeit.cms.interfaces
 
 import zeit.web.campus.view
-import zeit.web.core.gallery
 import zeit.web.core.security
 import zeit.web.core.view
 import zeit.web.magazin.view
