@@ -4,7 +4,7 @@ Change log for zeit.web
 2.98 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Apply display_mode settings to infographic images too
 
 
 2.97.1 (2016-08-10)

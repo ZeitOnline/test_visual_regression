@@ -1648,6 +1648,7 @@ def test_infographics_should_render_border_styles_conditionally(jinja2_env):
         'zeit.web.core:templates/inc/blocks/image_infographic.html')
     image = mock.Mock()
     image.ratio = 1
+    image.figure_mods = ('FOO', 'BAR', 'BAZ')
 
     # all border styles present
 
