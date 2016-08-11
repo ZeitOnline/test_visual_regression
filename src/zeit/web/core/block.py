@@ -317,9 +317,15 @@ class Image(Block):
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
+    # TRASHME when ZON-1586 lands
     @property
     def ratio(self):
         return self.image.ratio
+
+    # TRASHME when ZON-1586 lands
+    @property
+    def mobile_ratio(self):
+        return self.image.mobile_ratio
 
     FIGURE_MODS = {
         'large': ('wide', 'rimless', 'apart'),
