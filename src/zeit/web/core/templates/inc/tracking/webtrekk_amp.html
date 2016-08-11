@@ -107,6 +107,14 @@
                     "vars": {
                         "actionName": "amp.footernav.logo.1..logo|www.zeit.de/index"
                     }
+                },
+                "trackFacebookClick": {
+                    "on": "click",
+                    "selector": ".article-sharing__link--facebook",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.social.1..facebook|${canonicalUrl}"
+                    }
                 }
             }
         }
