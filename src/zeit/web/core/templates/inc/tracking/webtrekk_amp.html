@@ -115,6 +115,14 @@
                     "vars": {
                         "actionName": "amp.articlebottom.social.1..facebook|${canonicalUrl}"
                     }
+                },
+                "trackTwitterClick": {
+                    "on": "click",
+                    "selector": ".article-sharing__link--twitter",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.social.2..twitter|${canonicalUrl}"
+                    }
                 }
             }
         }
