@@ -166,6 +166,15 @@
                         "actionName": "amp.articlebottom.article-tag.....|#",
                         "comment": "amp.articlebottom.article-tag.[nummer]..[link_text]|[Ziel-URL]"
                     }
+                },
+                "trackInTextLinkClick": {
+                    "on": "click",
+                    "selector": ".article__body a",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.intext.....|#",
+                        "comment": "amp.intext....[link_text]|#"
+                    }
                 }
             }
         }
