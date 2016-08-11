@@ -120,7 +120,7 @@ def test_variant_image_should_provide_desired_attributes(application):
     group = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/cp-content/ig-4')
     meta = zeit.content.image.interfaces.IImageMetadata(group)
-    variant = group.get_variant_by_key('default')
+    variant = group.get_variant_by_key('wide')
     img = zeit.web.core.interfaces.IImage(variant)
 
     assert img.alt == meta.alt
@@ -129,7 +129,7 @@ def test_variant_image_should_provide_desired_attributes(application):
     assert img.copyright == meta.copyrights
     assert img.image_pattern == img.variant == variant.name
     assert img.ratio == variant.ratio
-    assert img.path == '/zeit-online/cp-content/ig-4/default'
+    assert img.path == '/zeit-online/cp-content/ig-4/wide'
 
 
 def test_variant_jinja_test_should_recognize_variants(application):

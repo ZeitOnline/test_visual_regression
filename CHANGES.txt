@@ -1,10 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.97.3 (unreleased)
+2.98 (unreleased)
+-----------------
+
+- BUG-490: delete special font settings for advertorial teaser
+
+
+2.97.3 (2016-08-11)
 -------------------
 
-- Nothing changed yet.
+- FIX: Determine ratio according to viewport for the "original" variant
 
 
 2.97.2 (2016-08-11)
