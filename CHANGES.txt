@@ -1,10 +1,16 @@
 Change log for zeit.web
 =======================
 
-2.97.3 (unreleased)
--------------------
+2.98 (unreleased)
+-----------------
 
 - Nothing changed yet.
+
+
+2.97.3 (2016-08-11)
+-------------------
+
+- FIX: Determine ratio according to viewport for the "original" variant
 
 
 2.97.2 (2016-08-11)
