@@ -139,6 +139,15 @@
                     "vars": {
                         "actionName": "amp.articlebottom.social.4..mail|${canonicalUrl}"
                     }
+                },
+                "trackAuthorClick": {
+                    "on": "click",
+                    "selector": ".byline a",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.0.0.0.article.text|#",
+                        "comment": "amp.0.0.0.article.text|[Ziel-URL]"
+                    }
                 }
             }
         }
