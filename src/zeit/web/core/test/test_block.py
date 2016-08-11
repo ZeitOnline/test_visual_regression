@@ -68,15 +68,15 @@ def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
     assert hasattr(video, 'video_still')
 
 
-def test_image_should_be_none_if_is_empty_is_true():
+def test_image_should_evaluate_to_false_if_is_empty_flag_is_set(application):
     model_block = mock.Mock()
-    model_block.is_empty = True
-    image_block = zeit.web.core.block.Image(model_block)
-    image = zeit.web.core.image.FrontendBlockImage(image_block)
-    assert bool(image) is False
+    model_block.context.is_empty = True
+    zeit.web.core.block.BlockImages(model_block)
+    assert False
+    # TODO: Rewrite with real data
 
 
-def test_image_should_be_fail_if_is_empty_doesnot_exist():
+def test_image_should_be_fail_if_is_empty_doesnot_exist(application):
     model_block = mock.Mock()
     image = zeit.web.core.block.Image(model_block)
     assert bool(image) is False
@@ -134,7 +134,7 @@ def test_image_should_render_supertitle_and_title_in_alt_tag():
     assert image.alt == u'New York: Standard & Poor´s'
 
 
-def test_image_should_decode_html_entities_in_caption():
+def test_image_should_decode_html_entities_in_caption(application):
     model_block = mock.Mock()
     model_block.display_mode = 'large'
     model_block.variant_name = 'wide'
@@ -144,11 +144,12 @@ def test_image_should_decode_html_entities_in_caption():
            '<copyright>© Justin Lane / dpa</copyright>'
            '</image>')
     model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.Image(model_block)
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.interfaces.IImage(block)
     assert image.caption == u'Standard & Poor´s Zentrale in New York'
 
 
-def test_image_should_not_break_on_missing_caption():
+def test_image_should_not_break_on_missing_caption(application):
     model_block = mock.Mock()
     model_block.display_mode = 'large'
     model_block.variant_name = 'wide'
@@ -157,11 +158,12 @@ def test_image_should_not_break_on_missing_caption():
            '<copyright>© Justin Lane / dpa</copyright>'
            '</image>')
     model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.Image(model_block)
-    assert image.caption == ''
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.interfaces.IImage(block)
+    assert image.caption is None
 
 
-def test_image_should_not_break_on_empty_caption():
+def test_image_should_not_break_on_empty_caption(application):
     model_block = mock.Mock()
     model_block.display_mode = 'large'
     model_block.variant_name = 'wide'
@@ -171,11 +173,12 @@ def test_image_should_not_break_on_empty_caption():
            '<copyright>© Justin Lane / dpa</copyright>'
            '</image>')
     model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.Image(model_block)
-    assert image.caption == ''
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.interfaces.IImage(block)
+    assert image.caption is None
 
 
-def test_image_should_not_break_on_whitespace_caption():
+def test_image_should_not_break_on_whitespace_caption(application):
     model_block = mock.Mock()
     model_block.display_mode = 'large'
     model_block.variant_name = 'wide'
@@ -185,8 +188,9 @@ def test_image_should_not_break_on_whitespace_caption():
            '<copyright>© Justin Lane / dpa</copyright>'
            '</image>')
     model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.Image(model_block)
-    assert image.caption == ''
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.interfaces.IImage(block)
+    assert image.caption is None
 
 
 def test_image_should_not_break_on_missing_image(application):
@@ -199,7 +203,7 @@ def test_image_should_not_break_on_missing_image(application):
     # We use an otherwise empty folder to simulate missing master image.
     model_block.references.target.uniqueId = 'http://xml.zeit.de/news'
     block = zeit.web.core.block.Image(model_block)
-    image = zeit.web.core.template.get_image(block, fallback=False)
+    image = zeit.web.core.interfaces.IImage(block)
     assert not image
 
 
@@ -214,7 +218,7 @@ def test_image_should_use_variant_given_on_layout(application):
     model_block.xml = lxml.etree.fromstring('<image/>')
     model_block.references.target = image
     block = zeit.web.core.block.Image(model_block)
-    image = zeit.web.core.template.get_image(block, fallback=False)
+    image = zeit.web.core.interfaces.IImage(block)
     assert image.variant_id == 'original'
 
 
@@ -231,7 +235,7 @@ def test_image_should_use_variant_original_if_infographic(application):
     assert 'original' == image.image.variant
 
 
-def test_image_should_be_none_if_expired():
+def test_image_should_be_none_if_expired(application):
     model_block = mock.Mock()
     model_block.display_mode = 'large'
     model_block.variant_name = 'wide'
@@ -252,7 +256,7 @@ def test_image_should_pass_through_ratio(application):
     model_block.is_empty = False
     model_block.references.target = image
     block = zeit.web.core.block.Image(model_block)
-    image = zeit.web.core.template.get_image(block, fallback=False)
+    image = zeit.web.core.interfaces.IImage(block)
     assert round(1.77 - image.ratio, 1) == 0
 
 

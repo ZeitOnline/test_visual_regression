@@ -253,13 +253,14 @@ class Image(Block):
         self.display_mode = context.display_mode
         self.block_type = 'image'
         self.variant_name = context.variant_name
-
-        image = zeit.content.image.interfaces.IImages(self).image
-        if zeit.content.image.interfaces.IImageGroup.providedBy(image):
+        try:
+            image = zeit.content.image.interfaces.IImages(self).image
             if image.display_type == (
                     zeit.content.image.interfaces.INFOGRAPHIC_DISPLAY_TYPE):
                 self.block_type = 'image_infographic'
                 self.variant_name = 'original'
+        except:
+            pass
 
         # `legacy_layout` is required for bw compat of the ZCO default variant,
         # which is `portrait` rather the usual `wide`.
