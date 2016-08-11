@@ -4,7 +4,7 @@ Change log for zeit.web
 2.98 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-490: delete special font settings for advertorial teaser
 
 
 2.97.3 (2016-08-11)
