@@ -4,10 +4,7 @@
 <aside class="partnerbox">
     <span class="partnerbox__label">Verlagsangebot</span>
     <div class="partner partner--{% block modifier %}{% endblock %}">
-        <div class="partner__kicker">
-            <span class="partner__kicker-img"></span>
-            <span class="partner__kicker-text">{% block kicker_text %}{% endblock %}</span>
-        </div>
+        {% block kicker %}{% endblock %}
         <div class="partner__intro">
             {% block intro %}{% endblock %}
         </div>

@@ -1,7 +1,12 @@
 {%- extends "zeit.web.site:templates/inc/module/partnerbox.html" -%}
 
 {% block modifier %}jobs{% endblock %}
-{% block kicker_text %}Der Stellenmarkt der ZEIT{% endblock %}
+{% block kicker %}
+    <div class="partner__kicker">
+        <span class="partner__kicker-img"></span>
+        <span class="partner__kicker-text">Der Stellenmarkt der ZEIT</span>
+    </div>
+{% endblock %}
 
 {% block intro %}Starten Sie jetzt die Jobsuche und entdecken Sie passende Stellenangebote mit Perspektive.{% endblock %}
 
