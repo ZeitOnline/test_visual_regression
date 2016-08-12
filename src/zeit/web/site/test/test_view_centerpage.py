@@ -1458,19 +1458,19 @@ def test_partnerbox_jobs_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.partner__action'))
     assert len(box.cssselect('.partner__intro'))
     assert len(box.cssselect('.partner--jobs'))
-    assert len(box.cssselect('.p-kicker__img'))
-    assert len(box.cssselect('.p-kicker__text'))
-    assert len(box.cssselect('.pa-dropdown'))
-    assert len(box.cssselect('.pa-button'))
-    assert len(box.cssselect('.pa-link'))
-    assert len(box.cssselect('.pa-dropdown__option')) == 9
+    assert len(box.cssselect('.partner__kicker-img'))
+    assert len(box.cssselect('.partner__kicker-text'))
+    assert len(box.cssselect('.partner__dropdown'))
+    assert len(box.cssselect('.partner__button'))
+    assert len(box.cssselect('.partner__link'))
+    assert len(box.cssselect('.partner__dropdown-option')) == 9
 
 
 def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
-    dropdown = driver.find_elements_by_class_name('pa-dropdown')[0]
-    button = driver.find_elements_by_class_name('pa-button__text')[0]
+    dropdown = driver.find_elements_by_class_name('partner__dropdown')[0]
+    button = driver.find_elements_by_class_name('partner__button-text')[0]
 
     # test without selecting anything
     button.click()
@@ -1479,8 +1479,8 @@ def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
 
     # test with selected dropdown
     driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
-    dropdown = driver.find_elements_by_class_name('pa-dropdown')[0]
-    button = driver.find_elements_by_class_name('pa-button__text')[0]
+    dropdown = driver.find_elements_by_class_name('partner__dropdown')[0]
+    button = driver.find_elements_by_class_name('partner__button-text')[0]
 
     dropdown.find_element_by_xpath(
         "//option[text()='Kunst & Kultur']").click()
@@ -1496,22 +1496,21 @@ def test_partnerbox_reisen_is_displayed_correctly(testbrowser):
     box = browser.cssselect('.partnerbox')[0]
     assert len(box.cssselect('.partnerbox__label'))
     assert len(box.cssselect('.partner__action'))
-    assert len(box.cssselect('.partner__intro'))
     assert len(box.cssselect('.partner--reisen'))
-    assert len(box.cssselect('.p-kicker__img'))
-    assert len(box.cssselect('.p-kicker__text'))
-    assert len(box.cssselect('.pa-dropdown'))
-    assert len(box.cssselect('.pa-button'))
-    assert len(box.cssselect('.pa-link'))
-    assert len(box.cssselect('.pa-link__icon'))
-    assert len(box.cssselect('.pa-dropdown__option')) == 18
+    assert len(box.cssselect('.partner__dropdown'))
+    assert len(box.cssselect('.partner__dropdown-intro'))
+    assert len(box.cssselect('.partner__dropdown-title'))
+    assert len(box.cssselect('.partner__button'))
+    assert len(box.cssselect('.partner__link'))
+    assert len(box.cssselect('.partner__link-icon'))
+    assert len(box.cssselect('.partner__dropdown-option')) == 18
 
 
 @pytest.mark.xfail(reason='Last test fails on jenkins for unknown reason')
 def test_partnerbox_reisen_dropdown_works(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/partnerbox-reisen' % testserver.url)
-    button = driver.find_element_by_class_name('pa-button__text')
+    button = driver.find_element_by_class_name('partner__button-text')
 
     # test without selecting anything
     button.click()
@@ -1520,8 +1519,8 @@ def test_partnerbox_reisen_dropdown_works(selenium_driver, testserver):
 
     # test with selected dropdown
     driver.get('%s/zeit-online/partnerbox-reisen' % testserver.url)
-    dropdown = driver.find_element_by_class_name('pa-dropdown')
-    button = driver.find_element_by_class_name('pa-button__text')
+    dropdown = driver.find_element_by_class_name('partner__dropdown')
+    button = driver.find_element_by_class_name('partner__button-text')
 
     dropdown.find_element_by_xpath(
         "//option[text()='Kulturreisen']").click()
