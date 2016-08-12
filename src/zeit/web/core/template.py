@@ -139,6 +139,25 @@ def zmo_content(content):
 
 
 @zeit.web.register_test
+def zplus_content(content):
+    # Filter everything but articles
+    if not zeit.content.article.interfaces.IArticle.providedBy(content):
+        return False
+
+    # Use Acquisition attribute
+    acquisition = content.acquisition
+    if acquisition is not None:
+        return False if acquisition == 'free' else True
+
+    # Fallback
+    product_id = getattr(content, 'product_id', None)
+    if product_id == u'ZEDE':
+        return False
+    else:
+        return True
+
+
+@zeit.web.register_test
 def zett_content(content):
     return zeit.content.link.interfaces.ILink.providedBy(
         content) and content.url.startswith('http://ze.tt')
