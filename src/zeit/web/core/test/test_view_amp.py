@@ -115,6 +115,36 @@ def test_amp_article_has_valid_webtrekk_json(testbrowser):
     assert page_vars['cp25'] == "amp"
 
 
+def test_amp_article_has_valid_webtrekk_click_json(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    json_source = browser.cssselect(
+        'amp-analytics[type="webtrekk"] script'
+    )[0].text
+
+    try:
+        webtrekk = json.loads(json_source)
+        assert True
+    except ValueError:
+        assert False
+
+    assert 'trackLogoClick' in webtrekk['triggers']
+    assert 'trackImprimtClick' in webtrekk['triggers']
+    assert 'trackPrivacyClick' in webtrekk['triggers']
+    assert 'trackTopClick' in webtrekk['triggers']
+    assert 'trackBackToHomepageClick' in webtrekk['triggers']
+    assert 'trackNextAdButtonClick' in webtrekk['triggers']
+    assert 'trackNextAdImageClick' in webtrekk['triggers']
+    assert 'trackFooterLogoClick' in webtrekk['triggers']
+    assert 'trackFacebookClick' in webtrekk['triggers']
+    assert 'trackTwitterClick' in webtrekk['triggers']
+    assert 'trackWhatsAppClick' in webtrekk['triggers']
+    assert 'trackMailClick' in webtrekk['triggers']
+    assert 'trackAuthorClick' in webtrekk['triggers']
+    assert 'trackNextReadClick' in webtrekk['triggers']
+    assert 'trackKeywordsClick' in webtrekk['triggers']
+    assert 'trackInTextLinkClick' in webtrekk['triggers']
+
+
 def test_amp_article_contains_sharing_links(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     canonical = browser.cssselect('link[rel="canonical"]')[0].get('href')
