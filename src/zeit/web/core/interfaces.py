@@ -17,12 +17,6 @@ class IFrontendBlock(zope.interface.Interface):
         'String that modifies how this block is to be displayed')
 
 
-class IFrontendHeaderBlock(zope.interface.Interface):
-    """A HeaderBlock identifies elements that appear only in headers of
-    the content.
-    """
-
-
 class IDeltaTime(zope.interface.Interface):
     """A date that has been processed through babel which is actually used
     for delta time representations.

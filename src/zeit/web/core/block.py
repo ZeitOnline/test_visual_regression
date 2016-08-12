@@ -317,9 +317,15 @@ class Image(Block):
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
+    # TRASHME when ZON-1586 lands
     @property
     def ratio(self):
         return self.image.ratio
+
+    # TRASHME when ZON-1586 lands
+    @property
+    def mobile_ratio(self):
+        return self.image.mobile_ratio
 
     FIGURE_MODS = {
         'large': ('wide', 'rimless', 'apart'),
@@ -338,11 +344,6 @@ class Image(Block):
 )
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class HeaderImage(Image):
-    """This is a special case used directly (not via adapter) by
-    z.w.magazin.view_article.Article.header_module so we can adjust the
-    rendering of a header image module according to the article.header_layout
-    setting.
-    """
 
     block_type = 'image'
 
@@ -455,10 +456,6 @@ class Video(Block):
 )
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class HeaderVideo(Video):
-    """This is a special case used directly (not via adapter) by
-    z.w.magazin.view_article.Article.header_module because videos in ZMO
-    headers need rather different markup.
-    """
 
     block_type = 'video'
 

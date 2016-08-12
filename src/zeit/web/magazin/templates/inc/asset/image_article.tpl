@@ -6,6 +6,7 @@
 {% if image.meta %}
     {% set footer_has_border = True if (image.meta.origin and image.copyright) else False %}
 {% endif %}
+
 {% block media_block -%}
 {{ {'large': 'figure-full-width',
     'column-width': 'figure is-constrained is-centered',
