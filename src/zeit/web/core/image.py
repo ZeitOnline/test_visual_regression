@@ -137,17 +137,17 @@ class Image(object):
 
     @zeit.web.reify
     def ratio(self):
-        if self._variant.ratio is not None:
-            return self._variant.ratio
-        else:
+        if self._variant.ratio is None:
             return self._ratio_for_viewport('desktop')
+        else:
+            return self._variant.ratio
 
     @zeit.web.reify
     def mobile_ratio(self):
         if self._variant.ratio is None:
-            mobile_ratio = self._ratio_for_viewport('mobile')
-            if round(abs(mobile_ratio - self.ratio), 3) != 0:
-                return mobile_ratio
+            mobile = self._ratio_for_viewport('mobile')
+            if mobile and self.ratio and round(abs(mobile - self.ratio), 3):
+                return mobile
 
     @zeit.web.reify
     def fallback_width(self):
