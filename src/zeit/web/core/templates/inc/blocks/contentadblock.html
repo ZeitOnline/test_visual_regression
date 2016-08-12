@@ -1,11 +1,11 @@
 {% if view.context.advertising_enabled -%}
-    {# Check for "zmo_content" and "page" is needed, because ZMO macro structure uses this
+    {# Check for "page" is needed, because ZMO macro structure uses this
        template, but has no page var. This can be removed as soon as ZMO
        uses templates for article rendering.
     #}
-    {% if (view.context is zmo_content) or
-          (view.is_all_pages_view and page and page.number == 0) or
-          (not view.is_all_pages_view) %}
+    {% if view.is_all_pages_view and page and page.number > 0 %}
+        {# On komplettansicht, do not show more than one iq-artikelanker #}
+    {% else %}
         <div id="iq-artikelanker"></div>
     {% endif %}
 {% endif %}
