@@ -94,11 +94,25 @@ class TeaserImage(BaseImage):
 @grokcore.component.adapter(zeit.content.image.interfaces.IVariant)
 class VariantImage(object):
 
+    mobile_ratio = None
+
+    def __new__(cls, variant):
+        instance = super(VariantImage, cls).__new__(cls, variant)
+        instance.ratio = variant.ratio
+        if instance.ratio is None:
+            group = zeit.content.image.interfaces.IImageGroup(variant)
+            instance.ratio = cls._ratio_from_master_image(group, 'desktop')
+            if instance.ratio is None:
+                # No master image found to determine ratio from.
+                return None
+            mobile_ratio = cls._ratio_from_master_image(group, 'mobile')
+            if not cls.float_equals(mobile_ratio, instance.ratio):
+                instance.mobile_ratio = mobile_ratio
+        return instance
+
     def __init__(self, variant):
         self.image_pattern = variant.name
-        self.ratio = variant.ratio
         self.variant = variant.legacy_name or variant.name
-
         self.group = zeit.content.image.interfaces.IImageGroup(variant)
         self.image_group = self.group.uniqueId
         self.path = self.group.variant_url(
@@ -117,6 +131,18 @@ class VariantImage(object):
             self.caption = meta.caption
             self.copyright = meta.copyrights
             self.title = meta.title
+
+    @staticmethod
+    def _ratio_from_master_image(group, viewport):
+        image = group.master_image_for_viewport(viewport)
+        if image is None:
+            return None
+        width, height = image.getImageSize()
+        return float(width) / float(height)
+
+    @staticmethod
+    def float_equals(a, b, ndigits=3):
+        return round(abs(a - b), ndigits) == 0
 
 
 class RemoteImage(object):
