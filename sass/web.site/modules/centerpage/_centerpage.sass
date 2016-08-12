@@ -82,39 +82,34 @@
 			border-width: 1px 0
 			margin-bottom: -1px
 			margin-top: -1px
-	&--keywordpage,
-	&--topicpage
-		&:before,
-		&:after
-			content: ''
-			display: inline-block
-			width: 100%
-	&--keywordpage,
-	&--topicpage
-		&:before
-			border-top: 1px solid $color-border
-	&--keywordpage,
-	&--topicpage
-		&:after
-			border-bottom: 1px solid $color-border
+
+	&--newsticker-on-keywordpage,
+	&--newsticker-on-topicpage
+		+pie-clearfix
+		border-bottom: 1px solid $color-border
+		border-top: 1px solid $color-border
+		padding: remify(20px) $page-padding
 
 	+respond-min($break-areas)
 		float: left
 		&--author-list,
 		&--newsticker,
 		&--overview,
-		&--ranking
+		&--ranking,
 			clear: both
 			float: none
 			margin: 0 auto
 			padding: 0 $page-padding
+		&--newsticker-on-keywordpage,
+		&--newsticker-on-topicpage
+			padding: remify(20px) $page-padding
 		&--author-list
 			max-width: $max-author-list-width + 2 * $page-padding
 		&--overview
 			max-width: $max-overview-width + 2 * $page-padding
 		&--ranking,
-		&--keywordpage,
-		&--topicpage
+		&--newsticker-on-keywordpage,
+		&--newsticker-on-topicpage
 			$max-ranking-width: $medium-content-width + 2 * $page-padding
 			$ranking-box-shadow-width: (remify(780px) - $max-ranking-width) / 2
 			background-color: $color-page-bg
