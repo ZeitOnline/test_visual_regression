@@ -4,7 +4,7 @@ Change log for zeit.web
 2.98 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3214: Restyle reisebox and bemify general partnerbox markup
 
 
 2.97.4 (2016-08-11)
