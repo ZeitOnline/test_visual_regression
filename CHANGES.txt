@@ -62,6 +62,8 @@ Change log for zeit.web
 
 - ZON-3197: SSL version of framebuilder
 
+- ZON-3238: Add advertorials from submenues to mobile navigation
+
 - MAINT: Combine image fallback and fallback_expired into one condition
 
 
