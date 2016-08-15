@@ -147,7 +147,7 @@
     </cluster>
     <cluster area="teaser-mosaic">
       <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-495cc770-6752-4dd0-b3a2-add506de398a">
-        <container cp:type="teaser" module="parquet-large" hide-dupes="True" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5b9" title="ZEIT ONLINE Startseite" read_more="mehr ZEIT ONLINE Startseite" read_more_url="http://www.zeit.de/index" display-amount="3" suppress-image-positions="3,4,5,6">
+        <container cp:type="teaser" module="parquet-large" hide-dupes="False" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5b9" title="ZEIT ONLINE Startseite" read_more="mehr ZEIT ONLINE Startseite" read_more_url="http://www.zeit.de/index" display-amount="3" suppress-image-positions="3,4,5,6">
           <referenced_cp>http://xml.zeit.de/zeit-online/parquet-teaser-setup</referenced_cp>
           <autopilot>true</autopilot>
           <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="/var/cms/work/index.lead" parse="xml" xpointer="xpointer(/channel/container/block)">
@@ -161,7 +161,7 @@
         </container>
       </region>
       <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-495cc770-6752-4dd0-b3a2-add506de398b">
-        <container cp:type="teaser" module="parquet-regular" hide-dupes="True" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5c0" title="ZEIT ONLINE" read_more="mehr von ZEIT ONLINE" read_more_url="http://www.zeit.de/index" display-amount="2" suppress-image-positions="3,4,5,6">
+        <container cp:type="teaser" module="parquet-regular" hide-dupes="False" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5c0" title="ZEIT ONLINE" read_more="mehr von ZEIT ONLINE" read_more_url="http://www.zeit.de/index" display-amount="2" suppress-image-positions="3,4,5,6">
           <referenced_cp>http://xml.zeit.de/zeit-online/main-teaser-setup</referenced_cp>
           <autopilot>true</autopilot>
           <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="/var/cms/work/index.lead" parse="xml" xpointer="xpointer(/channel/container/block)">
@@ -178,7 +178,7 @@
         <container cp:type="placeholder" module="placeholder" cp:__name__="id-5b0d52bd-4beb-4602-b68a-6f00bdcb23c8"/>
       </region>
       <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-a95cc770-6752-4dd0-b3a2-add506de398b">
-        <container cp:type="teaser" module="parquet-regular" hide-dupes="True" visible="True" cp:__name__="id-a0ce34da-bf9c-4203-8fc4-d4eb42f3e5c0" title="Serien Teaser" read_more="mehr Serien Teaser" read_more_url="http://www.zeit.de/index" display-amount="5" suppress-image-positions="1">
+        <container cp:type="teaser" module="parquet-regular" hide-dupes="False" visible="True" cp:__name__="id-a0ce34da-bf9c-4203-8fc4-d4eb42f3e5c0" title="Serien Teaser" read_more="mehr Serien Teaser" read_more_url="http://www.zeit.de/index" display-amount="5" suppress-image-positions="1">
           <referenced_cp>http://xml.zeit.de/zeit-online/teaser-serie-setup</referenced_cp>
           <autopilot>true</autopilot>
           <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="/var/cms/work/index.lead" parse="xml" xpointer="xpointer(/channel/container/block)">

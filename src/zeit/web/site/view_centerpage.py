@@ -263,6 +263,7 @@ class RenderedLegacyArea(zeit.web.core.centerpage.Area):
         uid = unicode(block.xml.find('./referenced_cp'))
         area.referenced_cp = zeit.cms.interfaces.ICMSContent(uid, None)
         area.automatic_type = 'centerpage'
+        area.hide_dupes = (block.xml.get('hide-dupes') == 'True')
         auto = zeit.content.cp.interfaces.IRenderedArea(area)
         content = auto._content_query()
 

@@ -451,7 +451,7 @@ def test_parquet_regions_should_have_one_area_each(application):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, pyramid.testing.DummyRequest())
-    assert all([len(region) == 1 for region in view.region_list_parquet])
+    assert [1, 1, 1] == [len(region) for region in view.region_list_parquet]
 
 
 def test_parquet_region_areas_should_have_multiple_modules_each(application):
