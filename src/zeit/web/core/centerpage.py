@@ -109,9 +109,12 @@ def get_video(context):
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock)
 def images_from_teaserblock(context):
-    for teaser in context:
-        return zope.component.queryAdapter(
-            context, zeit.content.image.interfaces.IImages)
+    try:
+        content = list(context)[0]
+    except IndexError:
+        raise zope.component.interfaces.ComponentLookupError(
+            'Could not adapt', context, zeit.web.core.interfaces.IImage)
+    return zeit.content.image.interfaces.IImages(content, None)
 
 
 @zeit.web.register_filter
@@ -232,8 +235,9 @@ class Module(object):
 
     @layout.setter
     def layout(self, value):
-        self._layout = zeit.content.cp.layout.BlockLayout(
-            value, value, areas=[], image_pattern=value)
+        self._layout = zeit.content.cp.layout.get_layout(value) or (
+            zeit.content.cp.layout.BlockLayout(
+                value, value, areas=[], image_pattern=value))
 
     @property
     def request(self):
@@ -267,8 +271,12 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(TeaserModule)
 def images_from_teasermodule(context):
-    for teaser in context:
-        return zeit.content.image.interfaces.IImages(teaser)
+    try:
+        content = list(context)[0]
+    except IndexError:
+        raise zope.component.interfaces.ComponentLookupError(
+            'Could not adapt', context, zeit.content.image.interfaces.IImages)
+    return zeit.content.image.interfaces.IImages(content, None)
 
 
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)

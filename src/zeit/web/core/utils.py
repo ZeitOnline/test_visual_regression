@@ -486,10 +486,15 @@ class LazyProxy(object):
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(ILazyProxy)
-def images_from_lazyproxy(context):
+class LazyProxyImages(object):
     # XXX Hacky hack to allow lazy IImages lookup through z.c.queryAdapter
     # return context.__conform__(zeit.content.image.interfaces.IImages)
-    return context
+    def __init__(self, context):
+        raise Exception('TRASHME')
+        self.context = context
+        # TODO: Migrate image and fill_color properties to this class
+        self.image = context.image
+        self.fill_color = context.fill_color
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()

@@ -46,10 +46,10 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
     :param fill_color:  Fill images with transparent background with color
                             True    Determine automatically
                             False   Keep background transparent
-                            'red'   Red
-                            '00F'   Blue
+                            'red'   Red fill color
+                            '00F'   Blue fill color
     :param name:        If image extraction for a context type is overloaded,
-                        use default u'' or request named adapter like 'sharing'
+                        use default u'' or choose named adapter like 'sharing'
     :rtype:             zeit.web.core.interfaces.IImage
     """
 
@@ -59,12 +59,16 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
             # to determine whether our context already provides IImage.
             image = zeit.web.core.interfaces.IImage(context)
         else:
+            # For named adapters we have no chance of verifying the name
+            # requirement without a component lookup.
             image = zope.component.getAdapter(
                 context, zeit.web.core.interfaces.IImage, name)
     except (zope.component.ComponentLookupError, TypeError):
         image = None
 
-    if not image or expired(image):
+    if not bool(image) or expired(image):
+        # To clarify, that we do not only want to test against None but also
+        # for invalid images, we cast to boolean.
         if not fallback:
             return None
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -73,9 +77,11 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
         if image is None:
             image = zeit.web.core.interfaces.IImage(context, None)
         else:
+            # If we managed to create a (broken) image earlier, we can reuse
+            # it to maintain its settings (ie. variant).
             image.group = context
 
-    if not image:
+    if not bool(image):
         return None
 
     if not fill_color:

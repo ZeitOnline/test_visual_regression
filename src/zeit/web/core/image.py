@@ -57,8 +57,7 @@ class Image(object):
 
     @zeit.web.reify
     def _images(self):
-        return zope.component.queryAdapter(
-            self.context, zeit.content.image.interfaces.IImages)
+        return zeit.content.image.interfaces.IImages(self.context, None)
 
     @zeit.web.reify
     def _variant(self):
@@ -289,6 +288,13 @@ def image_from_teaser_block_content(context):
     return image_from_block_content(context)
 
 
+@grokcore.component.adapter(zeit.web.core.centerpage.TeaserModule,
+                            name=u'')
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+def image_from_teaser_module_content(context):
+    return image_from_block_content(context)
+
+
 @grokcore.component.adapter(zeit.web.core.block.Image)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 class BlockImage(Image):
@@ -408,7 +414,7 @@ class SyntheticImageGroup(zeit.content.image.imagegroup.ImageGroup,
         return int(bool(self.master_image))
 
     def __contains__(self, key):
-        # Synthetic image groups *only* contain master images.
+        # Synthetic image groups *only* contain one master image.
         return False
 
     def keys(self):
@@ -419,6 +425,8 @@ class SyntheticImageGroup(zeit.content.image.imagegroup.ImageGroup,
         raise NotImplementedError
 
 
+# NOTE: Maybe we want to determine whether our lonesome image is actually
+#       contained in a group and then return that instead of synthesizing one.
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.image.interfaces.IImage)
 class LocalImageGroup(SyntheticImageGroup):

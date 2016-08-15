@@ -61,7 +61,7 @@ setup(
         'zeit.content.cp>=3.10.0.dev0',
         'zeit.content.dynamicfolder',
         'zeit.content.gallery',
-        'zeit.content.image>=2.15.0.dev0',
+        'zeit.content.image>=2.15.2.dev0',
         'zeit.content.infobox',
         'zeit.content.link',
         'zeit.content.portraitbox',
