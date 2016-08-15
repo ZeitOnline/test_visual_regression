@@ -1,5 +1,3 @@
-import zeit.content.cp.interfaces
-
 import zeit.web
 
 

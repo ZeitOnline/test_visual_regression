@@ -1,3 +1,4 @@
+import grokcore.component
 import pyramid.threadlocal
 
 import zeit.content.cp.automatic
@@ -5,33 +6,41 @@ import zeit.content.cp.automatic
 
 @zeit.web.register_area('gallery')
 class Gallery(zeit.content.cp.automatic.AutomaticArea):
+    """An automatic area that offers pagination via a single "more" button
+    that cycles through all available teasers (and starts from the beginning
+    after reaching the end).
+    """
 
-    def __init__(self, context):
-        super(Gallery, self).__init__(context)
-        request = pyramid.threadlocal.get_current_request()
-        self.skip_until = self.next_page = request.GET.get('p', None)
 
-    def _extract_newest(self, content, predicate=None):
-        # Deduplicate automatic gallery area for pagination.
-        #
+class CyclicalContentQuery(zeit.content.cp.automatic.CenterpageContentQuery):
+
+    grokcore.component.context(Gallery)
+
+    def __call__(self):
         # Since we don't know which teasers on previous pages may have been
         # duplicates, we need to burn through all previous pages and consume
         # enough valid teasers of the content slice.
+        request = pyramid.threadlocal.get_current_request()
+        skip_until = request.GET.get('p', None)
 
-        while self.skip_until:
-            if len(content) == 0:
-                more_content = self._retrieve_content()
-                if more_content:
-                    content[:] = more_content
-            teaser = super(Gallery, self)._extract_newest(content, predicate)
-            if teaser is None or teaser.uniqueId == self.skip_until:
-                self.skip_until = None
+        result = []
+        teasered = iter([])
+        while len(result) <= self.rows:
+            try:
+                content = next(teasered)
+            except StopIteration:
+                teasered = zeit.content.cp.interfaces.ITeaseredContent(
+                    self.context.referenced_cp, None)
+                if teasered is None:
+                    break
+                continue
 
-        teaser = super(Gallery, self)._extract_newest(content, predicate)
-        if teaser:
-            self.next_page = teaser.uniqueId
-            return teaser
-        else:
-            self._v_retrieved_content = 0
-            self._v_try_to_retrieve_content = True
-            return super(Gallery, self)._extract_newest(content, predicate)
+            if self.context.hide_dupes and content in self.existing_teasers:
+                continue
+            if content.uniqueId == skip_until:
+                skip_until = False
+                continue  # Skip until and including
+            if skip_until:
+                continue
+            result.append(content)
+        return result

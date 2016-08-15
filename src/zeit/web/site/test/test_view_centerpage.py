@@ -451,7 +451,7 @@ def test_parquet_regions_should_have_one_area_each(application):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, pyramid.testing.DummyRequest())
-    assert all([len(region) == 1 for region in view.region_list_parquet])
+    assert [1, 1, 1] == [len(region) for region in view.region_list_parquet]
 
 
 def test_parquet_region_areas_should_have_multiple_modules_each(application):
@@ -2084,21 +2084,23 @@ def test_centerpage_page_integration(testbrowser, datasolr):
     assert 'cp-area--ranking' in browser.contents
 
 
-def test_ranking_area_should_determine_uids_above(application, dummy_request):
+def test_ranking_area_should_determine_existing_uids(
+        application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
     area = zeit.web.core.centerpage.get_area(context)
-    assert area.uids_above == ['http://xml.zeit.de/zeit-magazin/leben/2015-02/'
-                               'magdalena-ruecken-fs',
-                               'http://xml.zeit.de/zeit-magazin/mode-design/'
-                               '2014-05/karl-lagerfeld-interview']
+    assert area.existing_uids == [
+        'http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs',
+        'http://xml.zeit.de/zeit-magazin/mode-design'
+        '/2014-05/karl-lagerfeld-interview',
+    ]
 
 
 def test_ranking_should_detect_empty_precedence(application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
     area = zeit.web.core.centerpage.get_area(context)
-    assert area.uids_above == []
+    assert area.existing_uids == []
 
 
 def test_ranking_ara_should_offset_resultset_on_materialized_cp(
@@ -2111,7 +2113,7 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 5
-    assert area.filter_query == (
+    assert area._content_query.filter_query == (
         'NOT (uniqueId:"http://xml.zeit.de/zeit-magazin/leben/2015-02/'
         'magdalena-ruecken-fs" OR uniqueId:"http://xml.zeit.de/zeit-magazin/'
         'mode-design/2014-05/karl-lagerfeld-interview")')
@@ -2126,7 +2128,7 @@ def test_ranking_area_should_not_offset_resultset_on_materialized_cp(
     area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 4
-    assert area.filter_query == '*:*'
+    assert area._content_query.filter_query == '*:*'
 
 
 @pytest.mark.parametrize('params, page', ([{'p': '2'}, 2], [{}, 1]))
