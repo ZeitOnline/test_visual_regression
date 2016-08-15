@@ -31,12 +31,12 @@
         var el = {
             bindDropboxEvents: function( that ) {
 
-                var $dropdown = $( that ).find( '.pa-dropdown' ),
-                    $button = $( that ).find( '.pa-button__text' ),
+                var $dropdown = $( that ).find( '.partner__dropdown' ),
+                    $button = $( that ).find( '.partner__button-text' ),
                     tracking = $dropdown.data( 'tracklink' );
 
                 $dropdown.on( 'change', function( event ) {
-                    var link = $dropdown.find( '.pa-dropdown__option:selected' ).attr( 'value' );
+                    var link = $dropdown.find( '.partner__dropdown-option:selected' ).attr( 'value' );
                     if ( link ) {
                         $button.attr( 'href', link + tracking );
                     }

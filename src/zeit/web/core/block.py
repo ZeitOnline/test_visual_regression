@@ -300,14 +300,6 @@ class Image(Block):
         # which is `portrait` rather the usual `wide`.
         self.legacy_layout = model_block.xml.get('layout', None)
         self.display_mode = model_block.display_mode
-        if model_block.display_mode == 'large':
-            self.figure_mods = ('wide', 'rimless', 'apart')
-        elif model_block.display_mode == 'column-width':
-            self.figure_mods = ('apart',)
-        elif model_block.display_mode == 'float':
-            self.figure_mods = ('marginalia',)
-        else:
-            self.figure_mods = ()
 
         # TODO: don't use XML but adapt an Image and use it's metadata
         if model_block.xml is not None:
@@ -325,9 +317,25 @@ class Image(Block):
                 rel = cr.attrib.get('rel', '') == 'nofollow'
                 self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
 
+    # TRASHME when ZON-1586 lands
     @property
     def ratio(self):
         return self.image.ratio
+
+    # TRASHME when ZON-1586 lands
+    @property
+    def mobile_ratio(self):
+        return self.image.mobile_ratio
+
+    FIGURE_MODS = {
+        'large': ('wide', 'rimless', 'apart'),
+        'column-width': ('apart',),
+        'float': ('marginalia',),
+    }
+
+    @property
+    def figure_mods(self):
+        return self.FIGURE_MODS.get(self.display_mode, ())
 
 
 @grokcore.component.adapter(
@@ -336,11 +344,6 @@ class Image(Block):
 )
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class HeaderImage(Image):
-    """This is a special case used directly (not via adapter) by
-    z.w.magazin.view_article.Article.header_module so we can adjust the
-    rendering of a header image module according to the article.header_layout
-    setting.
-    """
 
     block_type = 'image'
 
@@ -349,6 +352,12 @@ class HeaderImage(Image):
 
     def __init__(self, model_block, header):
         super(HeaderImage, self).__init__(model_block)
+        # XXX Header images should not use `display_mode` at all, they should
+        # depend on article.header_layout instead. But since we mostly reuse
+        # the normal image templates for the header image, we pretend a fixed
+        # display_mode accordingly.
+        self.display_mode = 'large'
+
         article_supertitle = None
         article_title = None
         try:
@@ -447,10 +456,6 @@ class Video(Block):
 )
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class HeaderVideo(Video):
-    """This is a special case used directly (not via adapter) by
-    z.w.magazin.view_article.Article.header_module because videos in ZMO
-    headers need rather different markup.
-    """
 
     block_type = 'video'
 

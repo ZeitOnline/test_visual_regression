@@ -450,58 +450,10 @@ def test_centerpage_should_have_page_meta_robots_information(testbrowser):
     assert 'index,follow,noodp,noydir,noarchive' in meta_robots
 
 
-def test_autoselected_asset_from_cp_teaser_should_be_a_gallery(application):
-    article = ('http://xml.zeit.de/zeit-magazin/'
-               'centerpage/article_gallery_asset')
-    context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.web.core.centerpage.auto_select_asset(context)
-    assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
-
-
-def test_autoselected_asset_from_cp_teaser_should_be_an_image(application):
-    article = ('http://xml.zeit.de/zeit-magazin/'
-               'centerpage/article_image_asset')
-    context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.web.core.centerpage.auto_select_asset(context)
-    assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
-
-
-def test_autoselected_asset_from_cp_teaser_should_be_a_video(application):
+def test_get_video_should_return_video_asset(application):
     article = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
     context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.web.core.centerpage.auto_select_asset(context)
-    assert isinstance(asset, zeit.content.video.video.Video)
-
-
-def test_autoselected_asset_from_cp_teaser_should_be_a_video_list(application):
-    url = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset_list'
-    context = zeit.cms.interfaces.ICMSContent(url)
-    asset = zeit.web.core.centerpage.auto_select_asset(context)
-    assert isinstance(asset[0], zeit.content.video.video.Video)
-    assert isinstance(asset[1], zeit.content.video.video.Video)
-
-
-def test_get_image_asset_should_return_image_asset(application):
-    article = ('http://xml.zeit.de/zeit-magazin/'
-               'centerpage/article_image_asset')
-    context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.web.core.centerpage.get_image_asset(context)
-    assert isinstance(asset, zeit.content.image.imagegroup.ImageGroup)
-
-
-def test_get_gallery_asset_should_return_gallery_asset(application):
-    article = ('http://xml.zeit.de/zeit-magazin/'
-               'centerpage/article_gallery_asset')
-    context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.web.core.centerpage.get_gallery_asset(context)
-    assert isinstance(asset, zeit.content.gallery.gallery.Gallery)
-
-
-def test_get_video_asset_should_return_video_asset(application):
-    article = 'http://xml.zeit.de/zeit-magazin/article/article_video_asset'
-    context = zeit.cms.interfaces.ICMSContent(article)
-    asset = zeit.web.core.centerpage.get_video_asset(
-        context)
+    asset = zeit.web.core.centerpage.get_video(context)
     assert isinstance(asset, zeit.content.video.video.Video)
 
 

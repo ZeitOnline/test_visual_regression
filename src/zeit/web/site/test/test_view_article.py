@@ -1382,6 +1382,16 @@ def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
     assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
     assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
+    assert len(browser.cssselect('.nextread figure')) == 0
+    assert len(browser.cssselect('.nextread image')) == 0
+
+
+def test_zon_nextread_teaser_must_not_show_image_for_column(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-column')
+    assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
+    assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
+    assert len(browser.cssselect('.nextread figure')) == 0
+    assert len(browser.cssselect('.nextread image')) == 0
 
 
 def test_article_contains_zeit_clickcounter(testbrowser):
@@ -1638,6 +1648,7 @@ def test_infographics_should_render_border_styles_conditionally(jinja2_env):
         'zeit.web.core:templates/inc/blocks/image_infographic.html')
     image = mock.Mock()
     image.ratio = 1
+    image.figure_mods = ('FOO', 'BAR', 'BAZ')
 
     # all border styles present
 
@@ -1669,3 +1680,19 @@ def test_infographics_should_render_border_styles_conditionally(jinja2_env):
     html = lxml.html.fromstring(html_str)
     footer = html.cssselect('[class*="x-footer"]')
     assert '--borderless' in footer[0].get('class')
+
+
+def test_contentad_is_rendered_once_on_article_pages(testbrowser):
+    selector = '#iq-artikelanker'
+
+    browser = testbrowser('/zeit-online/article/infoboxartikel')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-3')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    assert len(browser.cssselect(selector)) == 1

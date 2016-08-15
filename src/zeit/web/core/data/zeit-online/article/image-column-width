@@ -87,10 +87,6 @@
     <title>Dashcam für Denunzianten</title>
     <subtitle>Wer rücksichtslos fährt, wird gemeldet und landet in einer öffentlichen Datenbank: So wollen die Entwickler der Dashcam-App Nexar den Straßenverkehr sicherer machen.</subtitle>
     <division type="page">
-      <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" title="Screenshot aus der Nexar-App" alt="Nexar: Screenshot aus der Nexar-App" publication-date="" expires="" layout="column-width" is_empty="False" alt_local="Nexar: Screenshot aus der Nexar-App" title_local="Screenshot aus der Nexar-App">
-        <bu>Screenshot aus der Nexar-App</bu>
-        <copyright>© Nexar</copyright>
-      </image>
       <p>Das Arschloch in dem schwarzen Benz hat mich geschnitten!
 Hab ich alles auf Video! Der landet direkt in der öffentlichen Arschloch-Datenbank. <br/></p>
       <p>Klingt nach einem attraktiven Konzept für eine App, nicht
@@ -104,6 +100,10 @@ gerade <a class="" href="http://www.geektime.com/2016/06/15/israeli-nexar-raises
 Investoren die Mischung aus Dashcam und Denunziantentum erfolgversprechend
 scheint. <br/></p>
       <intertitle>iPhone-Sensoren registrieren Vollbremsungen<br/></intertitle>
+      <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" title="Screenshot aus der Nexar-App" alt="Nexar: Screenshot aus der Nexar-App" publication-date="" expires="" layout="column-width" is_empty="False" alt_local="Nexar: Screenshot aus der Nexar-App" title_local="Screenshot aus der Nexar-App">
+        <bu>Screenshot aus der Nexar-App</bu>
+        <copyright>© Nexar</copyright>
+      </image>
       <p>Bisher ist Nexar nur eine kostenlose iOS-App für US-Nutzer.
 Mit ihr wird das iPhone zur Dashcam, es filmt also die Straße vom
 Armaturenbrett aus. Registriert die App über die Sensoren im Smartphone, dass
