@@ -12,9 +12,12 @@ import zeit.cms.content.interfaces
 import zeit.cms.interfaces
 import zeit.cms.repository.interfaces
 import zeit.content.article.interfaces
+import zeit.content.author.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
+import zeit.content.link.interfaces
 import zeit.content.video.interfaces
+
 import zeit.web.core.article
 import zeit.web.core.view
 
@@ -112,6 +115,8 @@ class Centerpage(object):
     request_method='GET')
 @pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.author.interfaces.IAuthor)
+@pyramid.view.view_config(context=zeit.content.link.interfaces.ILink)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 @pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
@@ -136,6 +141,8 @@ class HostHeaderCP(Centerpage, HostHeaderContent):
     request_method='GET')
 @pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(context=zeit.content.author.interfaces.IAuthor)
+@pyramid.view.view_config(context=zeit.content.link.interfaces.ILink)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 @pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
