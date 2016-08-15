@@ -30,17 +30,13 @@ log = logging.getLogger(__name__)
 CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
-def sanitize_copyrights(func):
-    def wrapper(self):
-        copyrights = []
-        for text, uri, nf in (func(self) or ()):
-            text = zeit.web.core.utils.fix_misrepresented_latin(
-                text).replace(u'© ', u'© ').strip()
-            if text == u'©':
-                continue
-            copyrights.append((text, uri, nf))
-        return tuple(copyrights)
-    return wrapper
+def trashprop(key):
+    def fget(self):
+        raise Exception('TRASHGET', key)
+
+    def fset(self, val):
+        raise Exception('TRASHSET', key)
+    return property(fget, fset)
 
 
 class Image(object):
@@ -70,7 +66,8 @@ class Image(object):
             variant = VARIANT_SOURCE.factory.find(
                 self.group, self.variant_id)
         except KeyError:
-            variant = VARIANT_SOURCE.factory.DEFAULT_VARIANT
+            variant = VARIANT_SOURCE.factory.find(
+                self.group, self.variant_id)
         variant.__parent__ = self.group
         return variant
 
@@ -86,12 +83,16 @@ class Image(object):
             return self._meta.title
 
     @zeit.web.reify
-    @sanitize_copyrights
     def copyrights(self):
+        copyrights = []
         if self._meta and self._meta.copyrights:
-            return self._meta.copyrights
-        else:
-            return ()
+            for text, uri, nf in self._meta.copyrights:
+                text = zeit.web.core.utils.fix_misrepresented_latin(
+                    text).replace(u'© ', u'© ').strip()
+                if text == u'©':
+                    continue
+                copyrights.append((text, uri, nf))
+        return tuple(copyrights)
 
     @zeit.web.reify
     def alt(self):
@@ -121,11 +122,11 @@ class Image(object):
     @zeit.web.reify
     def variant_id(self):
         # This should actually be called variant_name, but raisins. (ND)
-        return VARIANT_SOURCE.factory.DEFAULT_VARIANT.name
+        return VARIANT_SOURCE.factory.DEFAULT_NAME
 
     @zeit.web.reify
     def layout(self):
-        return
+        raise Exception('TRASHME', 'layout')
 
     def _ratio_for_viewport(self, viewport):
         if self.group is not None:
@@ -222,18 +223,14 @@ class GalleryEntryImage(Image):
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 class AuthorImage(Image):
 
-    @zeit.web.reify
-    def variant_id(self):
-        # XXX This should use a different variant, but author images currently
-        # do not have a consistent ratio and framing of the portrayed person.
-        # So we need to crop the lower part of the image using CSS, ignoring
-        # the ratio.
-        return 'original'
+    # XXX This should use a different variant, but author images currently
+    # do not have a consistent ratio and framing of the portrayed person.
+    # So we need to crop the lower part of the image using CSS, ignoring
+    # the ratio.
+    variant_id = 'original'
 
-    @zeit.web.reify
-    def fill_color(self):
-        # Author images shall not be filled with color.
-        return
+    # Author images shall not be filled with color.
+    fill_color = None
 
 
 @grokcore.component.adapter(zeit.web.core.interfaces.INextread)
@@ -272,8 +269,7 @@ def image_from_block_content(context):
         raise zope.component.interfaces.ComponentLookupError(
             'Could not adapt as content', context,
             zeit.web.core.interfaces.IImage)
-    image = zope.component.queryAdapter(
-        content, zeit.web.core.interfaces.IImage)
+    image = zeit.web.core.interfaces.IImage(content, None)
     if image is not None:
         image.variant_id = context.layout.image_pattern
     return image
@@ -511,14 +507,11 @@ class RemoteImageGroup(SyntheticImageGroup,
         except TypeError:
             return
 
-        def fget(self):
-            raise Exception('TRASHME', 'image.src')
-
         # image.src = self.image_url  # TRASHME if you can
-        image.src = property(fget)
-        image.mimeType = 'image/jpeg'
-        # image.variant_id = 'wide-large'  # TRASHME if you can
-        image.variant_id = property(fget)
+        image.src = trashprop('RemoteImageGroup.imagesrc')
+        # image.mimeType = 'image/jpeg'
+        image.mimeType = trashprop('RemoteImageGroup.mime')
+        image.variant_id = trashprop('RemoteImageGroup.variant_id')
         return image
 
 
@@ -585,6 +578,7 @@ def web_image_expiration(context):
 
 class VariantSource(zeit.content.image.variant.VariantSource):
 
+    DEFAULT_NAME = 'original'
     product_configuration = 'zeit.content.image'
     config_url = 'variant-source'
 
@@ -608,20 +602,6 @@ class VariantSource(zeit.content.image.variant.VariantSource):
     def _get_mapping(self):
         return {k['old']: k['new'] for k in
                 zeit.content.image.variant.LEGACY_VARIANT_SOURCE(None)}
-
-    @property
-    def DEFAULT_VARIANT(self):  # NOQA
-        if not hasattr(self, '_default_variant'):
-            try:
-                default = self.find(
-                    None, zeit.content.image.variant.Variant.DEFAULT_NAME)
-            except KeyError:
-                default = zeit.content.image.variant.Variant(
-                    name='original', aspect_ratio='original')
-            finally:
-                setattr(self, '_default_variant', default)
-
-        return self._default_variant
 
 
 VARIANT_SOURCE = VariantSource()

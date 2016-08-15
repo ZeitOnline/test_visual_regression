@@ -1649,6 +1649,7 @@ def test_infographics_should_render_border_styles_conditionally(
     image = zeit.web.core.image.Image(mock.Mock())
     image.ratio = 1
     image.group = mock.Mock()
+    image.group.master_image_for_viewport.return_value = None
     image.group.variant_url.return_value = '/foo'
     image.figure_mods = ('FOO', 'BAR', 'BAZ')
 

@@ -340,15 +340,14 @@ class SpektrumFeed(Base):
                     last_published_semantic(content))),
                 E.guid(content.uniqueId, isPermaLink='false'),
             )
-            image = zeit.web.core.template.get_image(
-                content, variant_id='wide', fallback=False)
+            image = zeit.web.core.template.get_image(content, fallback=False)
             if image:
-                if image is not None:
-                    item.append(E.enclosure(
-                        url='{}{}__220x124'.format(
-                            self.request.image_host, image.path),
-                        length=str(image.size),
-                        type=image.mimeType))
+                variant = image.group['super']
+                item.append(E.enclosure(
+                    url='{}{}__180x120'.format(
+                        self.request.image_host, image.path),
+                    length='10240',  # ¯\_(ツ)_/¯
+                    type=variant.mimeType))
             channel.append(item)
         return root
 

@@ -488,7 +488,8 @@ class LazyProxy(object):
 @grokcore.component.adapter(ILazyProxy)
 def images_from_lazyproxy(context):
     # XXX Hacky hack to allow lazy IImages lookup through z.c.queryAdapter
-    return context.__conform__(zeit.content.image.interfaces.IImages)
+    # return context.__conform__(zeit.content.image.interfaces.IImages)
+    return context
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()

@@ -195,7 +195,7 @@ def test_comments_zon_template_respects_metadata(tplbrowser, monkeypatch):
     view.show_commentthread = False
     comments = tplbrowser('zeit.web.core:templates/inc/article/comments.html',
                           view=view, request=request)
-    assert comments.contents.strip() == '', (
+    assert comments.xpath('//body/*') == [], (
         'comment section template must return an empty document')
 
 

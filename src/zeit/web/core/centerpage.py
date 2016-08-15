@@ -110,7 +110,8 @@ def get_video(context):
 @grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock)
 def images_from_teaserblock(context):
     for teaser in context:
-        return zeit.content.image.interfaces.IImages(teaser)
+        return zope.component.queryAdapter(
+            context, zeit.content.image.interfaces.IImages)
 
 
 @zeit.web.register_filter
