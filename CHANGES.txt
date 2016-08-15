@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - FIX: Tweak padding for infographic images
 
+- FIX: Make xml.zeit.de routing work for author and link objects
+
 
 2.97.4 (2016-08-11)
 -------------------
