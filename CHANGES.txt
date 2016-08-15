@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-3227: Update to IContentQuery API to prepare for Retresco
 
+- FIX: Tweak padding for infographic images
+
 
 2.97.4 (2016-08-11)
 -------------------
