@@ -58,7 +58,7 @@ setup(
         'zeit.content.advertisement',
         'zeit.content.article>=3.18.0.dev0',
         'zeit.content.author>=2.6.0.dev0',
-        'zeit.content.cp>=3.5.4.dev0',
+        'zeit.content.cp>=3.10.0.dev0',
         'zeit.content.dynamicfolder',
         'zeit.content.gallery',
         'zeit.content.image>=2.15.0.dev0',

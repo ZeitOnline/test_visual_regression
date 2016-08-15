@@ -60,7 +60,7 @@
           <cp_extra id="centerpage-header"/>
         </container>
       </region>
-      <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc2" kind="overview" title="Ergebnisse" count="1" automatic="True">
+      <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc2" kind="overview" title="Ergebnisse" count="1" automatic="True" automatic_type="query">
         <raw_query>(product_id:(ZEDE OR TGS OR News OR SID OR afp) OR (+product_id:ZEI +breaking_news:true)) +type:article +published:published</raw_query>
         <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="ca89bdc0-2691-40d9-8743-63ccac2266cd"/>
       </region>

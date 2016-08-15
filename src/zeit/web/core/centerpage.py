@@ -17,7 +17,7 @@ import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 import zeit.edit.interfaces
 
-import zeit.find.search
+import zeit.solr.connection
 
 import zeit.web
 import zeit.web.core.interfaces
@@ -289,8 +289,8 @@ def search_with_timing_metrics(*args, **kw):
     with zeit.web.core.metrics.timer(
             'zeit.web.site.area.default.solr.reponse_time'):
         return original_search(*args, **kw)
-original_search = zeit.find.search.search
-zeit.find.search.search = search_with_timing_metrics
+original_search = zeit.solr.connection.SolrConnection.search
+zeit.solr.connection.SolrConnection.search = search_with_timing_metrics
 
 
 # We can't do anything with non-existent content (as opposed to vivi where

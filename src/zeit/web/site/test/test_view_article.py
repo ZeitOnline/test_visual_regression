@@ -1677,3 +1677,19 @@ def test_infographics_should_render_border_styles_conditionally(
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.x-footer--borderless')
     assert browser.cssselect('.x-subheadline--borderless')
+
+
+def test_contentad_is_rendered_once_on_article_pages(testbrowser):
+    selector = '#iq-artikelanker'
+
+    browser = testbrowser('/zeit-online/article/infoboxartikel')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-3')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    assert len(browser.cssselect(selector)) == 1
