@@ -212,11 +212,8 @@ class Converter(object):
     def _set_defaults(self, doc):
         # XXX These asset badges and classification flags are not indexed
         #     in Solr, so we lie about them.
-        doc.update({'gallery': None,
-                    'genre': None,
-                    'template': None,
-                    'video': None,
-                    'video_2': None})
+        for name in ['gallery', 'genre', 'template', 'video', 'video_2']:
+            doc.setdefault(name, None)
         doc.setdefault('lead_candidate', False)
         doc.setdefault('commentSectionEnable', True)
         return doc
@@ -233,8 +230,8 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'date_first_released': '',
         'date_last_published': '',
         'date_last_published_semantic': 'date_last_published_semantic',
-        'image-base-id': '',
-        'image-fill-color': '',
+        'image-base-id': 'teaser_image',
+        'image-fill-color': 'teaser_image_fill_color',
         'last-semantic-change': 'last_semantic_change',
         'lead_candidate': '',
         'product_id': '',
@@ -243,12 +240,36 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'supertitle': 'teaserSupertitle',
         'teaser_text': 'teaserText',
         'title': 'teaserTitle',
-        'type': '',
+        'type': 'doc_type',
         'uniqueId': '',
     }
 
     @zeit.web.reify
     def FIELDS(self):
         return ' '.join(self.FIELD_MAP.keys())
+
+    def _resolve(self, doc):
+        return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
+
+
+class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
+                      Converter):
+
+    grokcore.component.context(Ranking)
+
+    # XXX Can we generate this from zeit.retresco.convert somehow?
+    FIELD_MAP = {
+        'authors': 'authorships',
+        'date_last_semantic_change': 'last_semantic_change',
+        'allow_comments': 'commentsAllowed',
+        'show_comments': 'commentSectionEnable',
+        'print_ressort': 'printRessort',
+        'teaser_text': 'teaserText',
+        'teaser_title': 'teaserTitle',
+        'teaser_supertitle': 'teaserSupertitle',
+        'article_genre': 'genre',
+        'article_template': 'template',
+    }
+
     def _resolve(self, doc):
         return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)

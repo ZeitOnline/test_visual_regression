@@ -339,8 +339,8 @@ class LazyProxy(object):
         object.__setattr__(self, '__proxy__', context)
 
         # Let ourselves be treated like the actual content type we proxy for.
-        if 'type' in self.__proxy__:
-            type_id = self.__proxy__['type']
+        if 'doc_type' in self.__proxy__:
+            type_id = self.__proxy__['doc_type']
             # BBB for really old video objects that were indexed differently.
             if type_id == 'zeit.brightcove.interfaces.IVideo':
                 type_id = 'video'
@@ -455,18 +455,17 @@ class LazyProxy(object):
     # in __conform__ above, we cannot use an adapter to do this. ;-)
     @property
     def image(self):
-        image_ids = self.__proxy__.get('image-base-id', [])
-        if not image_ids:
+        image_id = self.__proxy__.get('teaser_image')
+        if not image_id:
             raise AttributeError('image')
-        return zeit.cms.interfaces.ICMSContent(image_ids[0], None)
+        return zeit.cms.interfaces.ICMSContent(image_id, None)
 
     # Proxy zeit.content.image.interfaces.IImages
     @property
     def fill_color(self):
-        fill_color = self.__proxy__.get('image-fill-color', [])
-
-        if fill_color and fill_color[0]:
-            return fill_color[0]
+        fill_color = self.__proxy__.get('teaser_image_fill_color')
+        if fill_color:
+            return fill_color
 
     # Proxy zeit.content.link.interfaces.ILink.blog.
     # (Note: templates try to access this directly without adapting first.)
