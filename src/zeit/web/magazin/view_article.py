@@ -114,11 +114,10 @@ class PhotoclusterArticle(Article):
 
     def __init__(self, context, request):
         super(PhotoclusterArticle, self).__init__(context, request)
-        cls = type('Photocluster', (zeit.web.core.block.Gallery,), {})
         for page in self.pages:
-            for index in range(len(page)):
-                if isinstance(page[index], zeit.web.core.block.Gallery):
-                    page[index] = cls(page[index].context)
+            for block in page:
+                if isinstance(block, zeit.web.core.block.Gallery):
+                    block.block_type = 'photocluster'
 
 
 @pyramid.view.view_config(route_name='amp',
