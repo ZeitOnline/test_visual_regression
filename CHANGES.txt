@@ -4,6 +4,8 @@ Change log for zeit.web
 2.98 (unreleased)
 -----------------
 
+- BUG-477: Keep sort parameter in comment pagination #1951 
+
 - ZON-3214: Restyle reisebox and bemify general partnerbox markup
 
 - ZON-3227: Update to IContentQuery API to prepare for Retresco

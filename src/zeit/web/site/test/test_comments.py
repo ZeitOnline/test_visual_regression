@@ -275,6 +275,13 @@ def test_comment_pagination_should_link_to_article(testbrowser):
         'http://localhost/zeit-online/article/01?page=2#comments')
 
 
+def test_comment_sorted_pagination_should_link_to_article(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/comment-thread?sort=desc')
+    link = browser.cssselect('.pager__page a')[0]
+    assert link.get('href') == (
+        'http://localhost/zeit-online/article/01?sort=desc&page=2#comments')
+
+
 def test_comment_action_recommend_should_redirect_to_login(testserver):
     path = '/zeit-online/article/01?action=recommend&pid=2968470'
     url = testserver.url + path
