@@ -142,7 +142,8 @@ def test_amp_article_has_valid_webtrekk_click_json(testbrowser):
     assert 'trackAuthorClick' in webtrekk['triggers']
     assert 'trackNextReadClick' in webtrekk['triggers']
     assert 'trackKeywordsClick' in webtrekk['triggers']
-    assert 'trackInTextLinkClick' in webtrekk['triggers']
+    assert 'trackLocalInTextLinkClick' in webtrekk['triggers']
+    assert 'trackExternInTextLinkClick' in webtrekk['triggers']
 
 
 def test_amp_article_contains_sharing_links(testbrowser):
