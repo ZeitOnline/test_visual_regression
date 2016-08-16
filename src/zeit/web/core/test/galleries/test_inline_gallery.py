@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-import re
-
-import lxml
-
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
@@ -68,7 +64,7 @@ def test_inline_gallery_buttons(selenium_driver, testserver):
 def test_inline_gallery_uses_responsive_images_with_ratio(testbrowser):
     browser = testbrowser('/zeit-magazin/article/01')
     image = browser.cssselect('.inline-gallery .slide')[0]
-    assert 'data-ratio="1.77914110429"' in lxml.etree.tostring(image)
+    assert image.xpath('.//@data-ratio')[0] == '1.77914110429'
 
 
 def test_photocluster_has_expected_markup(testbrowser):
@@ -79,20 +75,13 @@ def test_photocluster_has_expected_markup(testbrowser):
     assert len(imgs) == 7
 
 
-def test_photocluster_has_expected_content(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/article/cluster-beispiel' % testserver.url)
-    wrap = driver.find_elements_by_css_selector(".photocluster")
-    assert len(wrap) != 0
-    for element in wrap:
-        imgs = element.find_elements_by_tag_name("img")
-        # first image
-        assert re.search('http://.*/galerien/' +
-                         'bg-automesse-detroit-2014-usa-bilder/' +
-                         '462507429-540x304.jpg/imagegroup/original__.*',
-                         imgs[0].get_attribute("src"))
-        # last image
-        assert re.search('http://.*/galerien/' +
-                         'bg-automesse-detroit-2014-usa-bilder/' +
-                         'VW_Dune-540x304.jpg/imagegroup/original__.*',
-                         imgs[6].get_attribute("src"))
+def test_photocluster_has_expected_content(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/cluster-beispiel')
+    images = browser.cssselect(".photocluster__media-item")
+
+    assert images[0].attrib['src'].endswith(
+        '/galerien/bg-automesse-detroit-2014-usa-bilder/'
+        '462507429-540x304.jpg/imagegroup/original')
+    assert images[5].attrib['src'].endswith(
+        '/galerien/bg-automesse-detroit-2014-usa-bilder/'
+        'VW_Dune-540x304.jpg/imagegroup/original')
