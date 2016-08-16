@@ -4,13 +4,13 @@ Change log for zeit.web
 2.99 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-496: Fix search options stacking order
 
 
 2.98 (2016-08-16)
 -----------------
 
-- BUG-477: Keep sort parameter in comment pagination #1951 
+- BUG-477: Keep sort parameter in comment pagination #1951
 
 - ZON-3214: Restyle reisebox and bemify general partnerbox markup
 
