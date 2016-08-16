@@ -4,6 +4,8 @@ Change log for zeit.web
 2.99 (unreleased)
 -----------------
 
+- FIX: Include AdReload in framebuilder JS
+
 - BUG-496: Fix search options stacking order
 
 
