@@ -89,7 +89,7 @@ def test_photocluster_has_expected_content(selenium_driver, testserver):
         # first image
         assert re.search('http://.*/galerien/' +
                          'bg-automesse-detroit-2014-usa-bilder/' +
-                         '462507429.jpg/imagegroup/original__.*',
+                         '462507429-540x304.jpg/imagegroup/original__.*',
                          imgs[0].get_attribute("src"))
         # last image
         assert re.search('http://.*/galerien/' +
