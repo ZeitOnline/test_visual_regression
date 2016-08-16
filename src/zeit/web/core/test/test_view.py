@@ -847,5 +847,5 @@ def test_jquery_not_in_window_scope(testserver, selenium_driver):
 
 def test_webtrekk_tracking_id_is_defined(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
-    assert 'window.webtrekkConfig.trackId = "981949533494636";' in (
+    assert 'window.webtrekkConfig.trackId = "674229970930653";' in (
         browser.contents)

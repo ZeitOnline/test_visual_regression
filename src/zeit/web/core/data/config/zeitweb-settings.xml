@@ -44,5 +44,5 @@
   <setting name="framebuilder_ssl_asset_prefix" xsi:type="xsd:string">https://ssl.zeit.de/www.zeit.de/static/latest</setting>
 
   <setting name="webtrekk_version" xsi:type="xsd:string">4.3.1</setting>
-  <setting name="webtrekk_id" xsi:type="xsd:string">981949533494636</setting>
+  <setting name="webtrekk_id" xsi:type="xsd:string">674229970930653</setting>
 </settings>
