@@ -24,6 +24,7 @@ import zeit.web
 import zeit.web.core.cache
 import zeit.web.core.block
 import zeit.web.core.metrics
+import zeit.web.core.template
 
 
 log = logging.getLogger(__name__)
@@ -184,7 +185,7 @@ def image_for_gallery(context):
         except:
             continue
         else:
-            if entry.layout == 'hidden' or entry.is_crop_of is not None:
+            if zeit.web.core.template.hidden_slide(entry):
                 continue
             return zeit.web.core.interfaces.IImage(entry)
 
