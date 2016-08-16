@@ -15,7 +15,7 @@
 
 {%- macro linked_author(obj) %}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <a href="{{ obj.uniqueId | create_url }}" itemprop="url">
+        <a href="{{ obj.uniqueId | create_url }}" itemprop="url"{% if view.is_amp %} data-vars-url="{{ obj.uniqueId | create_url }}"{% endif %}>
             <span itemprop="name">
                 {{- obj.display_name -}}
     </span></a></span>
