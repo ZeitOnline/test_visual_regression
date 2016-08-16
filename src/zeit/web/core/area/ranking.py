@@ -175,7 +175,55 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         return pagination if pagination is not None else []
 
 
-class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery):
+class Converter(object):
+
+    def _convert(self, doc):
+        doc = self._convert_names(doc)
+        doc = self._convert_dates(doc)
+        doc = self._set_defaults(doc)
+        return doc
+
+    FIELD_MAP = NotImplemented
+
+    def _convert_names(self, doc):
+        for source, target in self.FIELD_MAP.items():
+            try:
+                doc[target] = doc[source]
+            except KeyError:
+                continue
+        return doc
+
+    DATE_FIELDS = [
+        'date_last_modified',
+        'date_first_released',
+        'last_semantic_change',
+        'date_last_published',
+        'date_last_published_semantic',
+    ]
+
+    def _convert_dates(self, doc):
+        for key in self.DATE_FIELDS:
+            try:
+                doc[key] = zc.iso8601.parse.datetimetz(str(doc[key]))
+            except (KeyError, UnicodeEncodeError, ValueError):
+                continue
+        return doc
+
+    def _set_defaults(self, doc):
+        # XXX These asset badges and classification flags are not indexed
+        #     in Solr, so we lie about them.
+        doc.update({'gallery': None,
+                    'genre': None,
+                    'template': None,
+                    'video': None,
+                    'video_2': None})
+        doc.setdefault('lead_candidate', False)
+        doc.setdefault('commentSectionEnable', True)
+        return doc
+
+
+class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
+                       Converter):
 
     grokcore.component.context(Ranking)
 
@@ -199,43 +247,8 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery):
         'uniqueId': '',
     }
 
-    DATE_FIELDS = [
-        'date_last_modified',
-        'date_first_released',
-        'last_semantic_change',
-        'date_last_published',
-        'date_last_published_semantic',
-    ]
-
     @zeit.web.reify
     def FIELDS(self):
         return ' '.join(self.FIELD_MAP.keys())
-
-    def _convert(self, doc):
-        for source, target in self.FIELD_MAP.items():
-            try:
-                doc[target] = doc[source]
-            except KeyError:
-                continue
-
-        for key in self.DATE_FIELDS:
-            try:
-                doc[key] = zc.iso8601.parse.datetimetz(str(doc[key]))
-            except (KeyError, UnicodeEncodeError, ValueError):
-                continue
-
-        # XXX These asset badges and classification flags are not indexed
-        #     in Solr, so we lie about them.
-        doc.update({'gallery': None,
-                    'genre': None,
-                    'template': None,
-                    'video': None,
-                    'video_2': None})
-
-        doc.setdefault('lead_candidate', False)
-        doc.setdefault('commentSectionEnable', True)
-
-        return doc
-
     def _resolve(self, doc):
         return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
