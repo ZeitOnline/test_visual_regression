@@ -572,27 +572,31 @@ class DataSolr(RandomContent):
 class DataTMS(zeit.retresco.connection.TMS, RandomContent):
     """Fake TMS implementation that is used for local development."""
 
-    ITEMS_PER_PAGE = 25
-
     def __init__(self):
         self._response = {}
 
     def _request(self, request, **kw):
         return self._response
 
-    def get_topicpage_documents(self, id, page=1):
-        log.debug('Mocking TMS request %s, page=%s', id, page)
+    def get_topicpage_documents(self, id, start=0, rows=25):
+        log.debug(
+            'Mocking TMS request id=%s, start=%s, rows=%s', id, start, rows)
         result = []
         for content in self._get_content():
             data = zeit.retresco.interfaces.ITMSRepresentation(content)()
             if data is not None:
+                # Ensure we always have an image
+                data['payload'].setdefault(
+                    'teaser_image',
+                    'http://xml.zeit.de/zeit-online/'
+                    'image/filmstill-hobbit-schlacht-fuenf-hee/')
                 result.append(data)
         self._response = {
             'num_found': len(result),
             'docs': random.sample(
-                result, min(self.ITEMS_PER_PAGE, len(result))),
+                result, min(rows, len(result))),
         }
-        result = super(DataTMS, self).get_topicpage_documents(id, page)
+        result = super(DataTMS, self).get_topicpage_documents(id, start, rows)
         self._response = {}
         return result
 
