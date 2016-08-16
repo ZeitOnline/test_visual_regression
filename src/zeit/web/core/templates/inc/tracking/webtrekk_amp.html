@@ -11,7 +11,7 @@
             },
             "vars": {
                 "trackDomain": "zeit01.webtrekk.net",
-                "trackId": "981949533494636",
+                "trackId": "{{ settings('webtrekk_id') }}",
                 "contentId": "{{ wt_kennung + '|' + view.content_url.replace('http://', '') }}"
             },
             "requests": {
