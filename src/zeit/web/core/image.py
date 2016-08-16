@@ -198,7 +198,7 @@ def image_for_gallery(context):
         except:
             continue
         else:
-            if entry.layout == 'hidden':
+            if entry.layout == 'hidden' or entry.is_crop_of is not None:
                 continue
             return zeit.web.core.interfaces.IImage(entry)
 
@@ -327,7 +327,8 @@ class HeaderBlockImage(BlockImage):
 
     def __init__(self, context):
         super(HeaderBlockImage, self).__init__(context)
-        article = zeit.content.article.interfaces.IArticle(context, None)
+        article = zeit.content.article.interfaces.IArticle(
+            self.context.context, None)
         if article is not None:
             self._a_supertitle = article.supertitle
             self._a_title = article.title
@@ -337,19 +338,29 @@ class HeaderBlockImage(BlockImage):
 
     @zeit.web.reify
     def title(self):
-        if not self.caption and self._a_supertitle and self._a_title:
+        title = super(HeaderBlockImage, self).title
+        if title:
+            return title
+        elif self.caption:
+            return self.caption
+        elif self._a_supertitle and self._a_title:
             return u'{}: {}'.format(self._a_supertitle, self._a_title)
-        else:
-            return super(HeaderBlockImage, self).title
+        elif self._a_title:
+            return self._a_title
 
     @zeit.web.reify
     def alt(self):
-        if self._a_supertitle and self.caption:
+        alt = super(HeaderBlockImage, self).alt
+        if alt:
+            return alt
+        elif self._a_supertitle and self.caption:
             return u'{}: {}'.format(self._a_supertitle, self.caption)
+        elif self.caption:
+            return self.caption
         elif self._a_supertitle and self._a_title:
             return u'{}: {}'.format(self._a_supertitle, self._a_title)
-        else:
-            return super(HeaderBlockImage, self).alt
+        elif self._a_title:
+            return self._a_title
 
 
 @grokcore.component.adapter(zeit.cms.content.interfaces.ICommonMetadata,

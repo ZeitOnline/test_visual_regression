@@ -1,7 +1,7 @@
 <div class="gallery">
     <div class="article__item">
         <amp-carousel width="660" height="440" controls type="slides" loop layout="responsive">
-        {% for entry in block | reject("hidden") %}
+        {% for entry in block | reject("hidden_slide") %}
             {% set image = get_image(entry, variant_id="wide", fallback=False) %}
             {% include 'zeit.web.core:templates/amp/asset/image.html' %}
         {%- endfor %}

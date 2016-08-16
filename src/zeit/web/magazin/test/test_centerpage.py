@@ -125,7 +125,7 @@ def test_teaser_upright_has_correct_markup(testbrowser):
     icon = element[0].cssselect('.teaser-upright__gallery-icon')
     img = element[0].cssselect('img')[0]
     assert len(text_wrap) != 0
-    assert len(link_wrap) == 2
+    assert len(link_wrap) == 3
     assert len(icon) == 1
     assert '/exampleimages/artikel/01/schoppenstube/tile__' in img.get('src')
 

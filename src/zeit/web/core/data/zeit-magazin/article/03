@@ -111,7 +111,7 @@
         <division type="page">
             <image align="left"
             src="http://xml.zeit.de/zeit-magazin/images/local/01.jpg"
-            href="http://www.test.de" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
+            href_local="http://www.test.de" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
                 <bu>Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant L'e'Maiala in Florenz </bu>
                 <copyright link="http://foo.de">© Reuters/Alessandro Bianchi</copyright>
             </image>

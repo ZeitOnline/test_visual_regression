@@ -209,7 +209,7 @@ def test_column_should_have_header_image(testbrowser):
     assert browser.cssselect('figure.scaled-image')
     image = browser.cssselect('img.figure__media')[0]
     assert image.attrib['alt'] == 'Dies ist der lokale alt Text'
-    assert image.attrib['title'] == 'Spitzmarke: Dies ist die lokale Katze!'
+    assert image.attrib['title'] == 'Dies ist die lokale Katze!'
 
 
 def test_column_should_not_have_header_image(testbrowser):

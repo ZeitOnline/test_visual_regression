@@ -132,8 +132,10 @@ def leserartikel(context):
 
 
 @zeit.web.register_test
-def hidden(context):
-    return getattr(context, 'layout', 'default') in ('hidden', 'hide')
+def hidden_slide(context):
+    if not zeit.content.gallery.interfaces.IGalleryEntry.providedBy(context):
+        return True
+    return context.layout == 'hidden' or context.is_crop_of is None
 
 
 @zeit.web.register_test
