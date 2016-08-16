@@ -257,15 +257,28 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
-        self.layout = kw.pop('layout', 'default')
+        self._layout = kw.pop('layout', 'default')
         self.type = kw.pop('type', 'teaser')
-        self.__parent = kw.pop('parent', None)
+        self.__parent__ = kw.pop('parent', None)
 
     def __hash__(self):
         return hash((self.layout.id, id(self)))
 
     def __repr__(self):
         return object.__repr__(self)
+
+    @zeit.web.reify
+    def layout(self):
+        if self._layout:
+            layout = LEGACY_TEASER_MAPPING.get(self._layout, self._layout)
+            layout = zeit.content.cp.layout.get_layout(layout)
+            if layout:
+                return layout
+            else:
+                id = self._layout
+                return zeit.content.cp.layout.BlockLayout(
+                    id, id, areas=[], image_pattern=id)
+        return super(TeaserModule, self).layout
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)

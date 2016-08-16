@@ -56,8 +56,7 @@ class Image(object):
             variant = VARIANT_SOURCE.factory.find(
                 self.group, self.variant_id)
         except KeyError:
-            variant = VARIANT_SOURCE.factory.find(
-                self.group, self.variant_id)
+            variant = VARIANT_SOURCE.factory.find(self.group)
         variant.__parent__ = self.group
         return variant
 
@@ -215,16 +214,21 @@ class AuthorImage(Image):
     fill_color = None
 
 
-@grokcore.component.adapter(zeit.web.core.interfaces.INextread)
+@grokcore.component.adapter(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
-class NextreadImage(Image):
+class FrontendBlockImage(Image):
 
     @zeit.web.reify
     def variant_id(self):
         if self.context.variant_id:
             return self.context.variant_id
         else:
-            return super(NextreadImage, self).variant_id
+            return super(FrontendBlockImage, self).variant_id
+
+
+@grokcore.component.adapter(zeit.web.core.interfaces.INextread)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class NextreadImage(FrontendBlockImage):
 
     @zeit.web.reify
     def layout(self):
@@ -233,14 +237,14 @@ class NextreadImage(Image):
 
 @grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
-class TeaserImage(Image):
+class TeaserBlockImage(Image):
 
     @zeit.web.reify
     def variant_id(self):
         if self.context.layout.image_pattern:
             return self.context.layout.image_pattern
         else:
-            return super(TeaserImage, self).variant_id
+            return super(TeaserBlockImage, self).variant_id
 
 
 def image_from_block_content(context):
@@ -576,7 +580,7 @@ class VariantSource(zeit.content.image.variant.VariantSource):
     product_configuration = 'zeit.content.image'
     config_url = 'variant-source'
 
-    def find(self, context, variant_id):
+    def find(self, context, variant_id=DEFAULT_NAME):
         mapping = self._get_mapping()
         tree = self._get_tree()
         mapped = mapping.get(variant_id, variant_id)
