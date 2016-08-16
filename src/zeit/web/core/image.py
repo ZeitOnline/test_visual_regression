@@ -196,6 +196,10 @@ class GalleryEntryImage(Image):
     variant_id = 'original'
 
     @zeit.web.reify
+    def _meta(self):
+        return zeit.content.image.interfaces.IImageMetadata(self.context, None)
+
+    @zeit.web.reify
     def layout(self):
         return self.context.layout
 
