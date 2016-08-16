@@ -406,7 +406,7 @@ def test_block_infobox_should_contain_expected_structure(tplbrowser):
 def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
     view.package = 'zeit.web.site'
-    block = {}
+    block = {0: mock.Mock()}
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/gallery.html', block=block,
         view=view)
