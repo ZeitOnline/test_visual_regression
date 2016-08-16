@@ -1,132 +1,155 @@
-$bg_kicker--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freisteller'
-$bg_kicker--reisen: 'http://www.zeit.de/angebote/reisen/reise-box-header-2'
+$bg_img--jobs: 'http://www.zeit.de/angebote/stellenmarkt/stellenmarkt-freisteller'
 
 .partnerbox
-    margin: $vertical-space 0
-    &__label
-        @extend %label
-        +respond-min($break-tablet-min)
-            text-align: left
+	margin: $vertical-space 0
+	&__label
+		@extend %label
+		+respond-min($break-tablet-min)
+			text-align: left
 
 .partner
-    background-color: $color-advertising-bg
-    padding-bottom: remify(20px)
-    position: relative
-    min-height: remify(140px)
-    +respond-min($break-desktop-min)
-        padding-bottom: 0
-    &__action
-        padding: remify(0 25px)
-        +respond-min($break-desktop-min)
-            display: table-cell
-            vertical-align: top
-            width: 55%
-            padding: remify(25px)
-    &__intro
-        color: $zon-grey
-        font-size: em(14px)
-        line-height: em(25px)
-        letter-spacing: $letter-spacing-s
-        padding: remify(25px)
-        display: block
-        +respond-min($break-desktop-min)
-            display: table-cell
-            vertical-align: top
+	background-color: $color-advertising-bg
+	position: relative
+	min-height: remify(140px)
 
-.p-kicker
-    height: remify(72px)
-    text-align: left
-    background-color: $zon-lighter-grey
-    color: $white
-    &__text
-        font-size: em(18px)
-        font-weight: bold
-        line-height: em(22px)
-        display: table-cell
-        vertical-align: middle
-        height: remify(72px)
-        padding-left: remify(25px)
+	&__action
+		padding: remify(0 25px)
 
-.pa-button
-    display: inline-block
-    &__text
-        +zon-button-colored($base-color: #168750, $margin: remify(14px 6px 14px 0))
+	&__kicker
+		height: remify(72px)
+		text-align: left
+		background-color: $zon-lighter-grey
+		color: $zon-charcoal
+		border-bottom: 1px solid $gainsboro
 
-.pa-dropdown
-    background-color: $gainsboro
-    display: block
-    width: 100%
-    height: 40px
-    line-height: 35px
-    &__option
-        line-height: 35px
+	&__kicker-text
+		font-size: em(18px)
+		font-weight: bold
+		line-height: em(22px)
+		display: table-cell
+		vertical-align: middle
+		height: remify(72px)
+		+respond-min($break-phablet-min)
+			padding-left: 15px
+
+	&__kicker-img
+		display: table-cell
+		height: remify(72px)
+		width: remify(130px)
+
+	&__button-text
+		+zon-button-colored($base-color: #168750, $margin: remify(14px 6px 14px 0))
+
+	&__dropdown
+		background-color: $gainsboro
+		display: block
+		width: 100%
+		height: 40px
+		line-height: 35px
+
+	&__dropdown-option
+		line-height: 35px
+
+	&__dropdown-title
+		display: block
+		font-weight: 700
+		color: $zon-charcoal
+		font-size: em(18px)
+		padding-bottom: remify(15px)
+
+	&__dropdown-intro,
+	&__intro
+		color: $zon-grey
+		font-size: em(14px)
+		line-height: em(25px)
+		letter-spacing: $letter-spacing-s
+		display: block
+		+respond-min($break-desktop-min)
+			display: table-cell
+			vertical-align: top
+
+	&__intro
+		padding: remify(25px)
+
+	&__dropdown-intro
+		padding: remify(10px 0)
+
+	&__link
+		display: block
+		letter-spacing: $letter-spacing-s
+		font-size: em(15px)
+		line-height: em(23px)
+		padding-bottom: remify(20px)
+		+respond-min($break-phablet-min)
+			display: inline-block
+			margin-left: remify(20px)
+
+	&__link-url
+		border-bottom: 1px solid rgba($zon-grey, .4)
+		+on-interaction
+			border-bottom-color: rgba($zon-grey, .8)
+			color: $zon-grey
 
 
-.pa-link
-    display: block
-    letter-spacing: $letter-spacing-s
-    font-size: em(15px)
-    line-height: em(23px)
-    &__link
-        border-bottom: 1px solid rgba($zon-grey, .4)
-        +on-interaction
-            border-bottom-color: rgba($zon-grey, .8)
-            color: $zon-grey
-    +respond-min($break-phablet-min)
-        display: inline-block
-        margin-left: remify(20px)
+	/* modifier */
+	&--jobs
+		.partner
+			&__action
+				+respond-min($break-desktop-min)
+					width: 55%
+					display: table-cell
+					vertical-align: top
+					padding: remify(25px)
 
-/* modifier */
-.partner
+			&__dropdown-intro
+				display: none
 
-    &--jobs
-        .p-kicker
-            color: $zon-charcoal
-            border-bottom: 1px solid $gainsboro
-            &__img
-                display: table-cell
-                height: remify(72px)
-                width: remify(130px)
-                background: $zon_lighter_grey url($bg_kicker--jobs) no-repeat right
-                background-size: cover
-            &__text
-                padding-left: 0
-                +respond-min($break-phablet-min)
-                    padding-left: 15px
+			&__kicker-img
+				background: $zon_lighter_grey url($bg_img--jobs) no-repeat right
+				background-size: cover
 
-    &--reisen
-        .p-kicker
-            background: $zon_lighter_grey url($bg_kicker--reisen) no-repeat right
-            background-size: cover
-            &__text
-                max-width: remify(200px)
-                +respond-min($break-desktop-min)
-                    max-width: none
-        .pa-button
-            &__text
-                +zon-button-colored($base-color: #c27800, $margin: remify(14px 6px 14px 0))
-        .pa-link
-            text-align: right
-            margin-top: remify(30px)
-            +respond-min($break-phablet-min)
-                display: block
-                position: absolute
-                margin-top: 0
-                top: remify(12px)
-                right: remify(25px)
-            &__icon
-                color: $zon-charcoal
-                height: remify(25px)
-                width: remify(160px)
-                +on-interaction
-                    color: $zon-charcoal
-                +respond-min($break-phablet-min)
-                    color: $white
-                    +on-interaction
-                        color: $white
-            &__text
-                color: $zon-charcoal
-                +respond-min($break-phablet-min)
-                    color: $white
+	&--reisen
+		.partner
+			&__button-text
+				+zon-button-colored($base-color: #c27800, $margin: remify(14px 6px 14px 0))
 
+			&__link
+				text-align: right
+				padding: remify(20px 0)
+				+respond-min($break-phablet-min)
+					text-align: left
+					position: absolute
+					bottom: remify(5px)
+					left: 0
+					padding: 0
+					margin-left: remify(10px)
+				+respond-min($break-desktop-min)
+					margin-left: remify(20px)
+
+			&__link-icon
+				color: $zon-grey
+				height: remify(25px)
+				width: remify(160px)
+
+			&__link-text
+				color: $zon-grey
+
+			&__action
+				+respond-min($break-phablet-min)
+					width: 65%
+					display: table-cell
+					vertical-align: top
+					padding-top: remify(25px)
+
+			&__dropdown-intro,
+			&__intro
+				padding: remify(0 0 15px 0)
+				+respond-min($break-phablet-min)
+					display: table-cell
+
+			&__intro
+				+respond-min($break-tablet-min)
+					padding-top: remify(25px)
+				+respond-min($break-desktop-min)
+					padding-top: 0
 

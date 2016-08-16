@@ -45,7 +45,7 @@
   </head>
   <body>
     <cluster area="feature">
-      <region area="lead" automatic="True">
+      <region area="lead" automatic="True" automatic_type="channel">
         <query>
           <condition type="Channel" py:pytype="str">Wirtschaft Boerse</condition>
         </query>

@@ -99,6 +99,34 @@ def test_xml_renders_centerpage_with_centerpage_view(testserver):
     assert view.called
 
 
+def test_xml_renders_videos(testserver):
+    res = requests.get(
+        '%s/video/2014-01/3089721834001' % testserver.url,
+        headers={'Host': 'xml.zeit.de'})
+    assert res.status_code == 200
+
+
+def test_xml_renders_galleries(testserver):
+    res = requests.get(
+        '%s/galerien/bg-automesse-detroit-2014-usa' % testserver.url,
+        headers={'Host': 'xml.zeit.de'})
+    assert res.status_code == 200
+
+
+def test_xml_renders_authors(testserver):
+    res = requests.get(
+        '%s/autoren/j_random' % testserver.url,
+        headers={'Host': 'xml.zeit.de'})
+    assert res.status_code == 200
+
+
+def test_xml_renders_links(testserver):
+    res = requests.get(
+        '%s/zeit-online/link-object' % testserver.url,
+        headers={'Host': 'xml.zeit.de'})
+    assert res.status_code == 200
+
+
 def test_xml_renders_article_with_meta_robots(testserver):
     res = requests.get(
         '%s/zeit-online/article/01' % testserver.url,
