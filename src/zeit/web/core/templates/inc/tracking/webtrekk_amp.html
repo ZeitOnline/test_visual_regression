@@ -169,13 +169,20 @@
                         "url": "#"
                     }
                 },
-                "trackInTextLinkClick": {
+                "trackLocalInTextLinkClick": {
                     "on": "click",
-                    "selector": ".article__body a",
+                    "selector": ".article__body a[href*='zeit.de']",
                     "request": "event",
                     "vars": {
-                        "actionName": "amp.intext.....|#",
-                        "comment": "amp.intext....[link_text]|#"
+                        "actionName": "amp.intext....intern|#"
+                    }
+                },
+                "trackInTextLinkClick": {
+                    "on": "click",
+                    "selector": ".article__body a:not([href*='zeit.de'])",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.intext....extern|#"
                     }
                 }
             }
