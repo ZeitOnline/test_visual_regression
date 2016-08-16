@@ -11,7 +11,7 @@
 {%- endblock article_header %}
 
 {% block article_pages -%}
-    {% set gallery = view.gallery %}
+    {% require gallery = view.gallery %}
     {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     <div class="article__page gallery__info">
         <div class="gallery__description">
@@ -21,6 +21,7 @@
             {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
         </div>
     </div>
+    {% endrequire %}
 {%- endblock article_pages %}
 
 {% block article_comments %}{% endblock article_comments %}

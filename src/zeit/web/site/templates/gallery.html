@@ -1,7 +1,7 @@
 {% extends "zeit.web.site:templates/content.html" %}
 
 {% block article_pages %}
-    {% set gallery = view.gallery %}
+    {% require gallery = view.gallery %}
     <div class="article-page">
         {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     </div>
@@ -10,6 +10,7 @@
             {{ gallery.html | safe }}
         </div>
     </div>
+    {% endrequire %}
 {% endblock article_pages %}
 
 {% block veeseo_div %}

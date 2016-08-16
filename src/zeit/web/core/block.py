@@ -405,9 +405,18 @@ class Gallery(Block):
         self.context = context
 
     def __iter__(self):
-        if not self.context:
-            return iter([])
-        return self.context.values()
+        return iter(self._values)
+
+    def __bool__(self):
+        return bool(self._values)
+
+    __nonzero__ = __bool__
+
+    @zeit.web.reify
+    def _values(self):
+        if self.context is None:
+            return []
+        return list(self.context.values())
 
     @zeit.web.reify
     def html(self):

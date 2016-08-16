@@ -1,7 +1,7 @@
 {% extends "zeit.web.campus:templates/content.html" %}
 
 {% block article_pages %}
-    {% set gallery = view.gallery %}
+    {% require gallery = view.gallery %}
     <div class="article-page">
         <p class="article__summary article__item" itemprop="description">
             {{- view.subtitle -}}
@@ -13,4 +13,5 @@
             {{ gallery.html | safe }}
         </div>
     </div>
+    {% endrequire %}
 {% endblock article_pages %}

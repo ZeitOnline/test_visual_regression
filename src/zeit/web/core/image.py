@@ -30,15 +30,6 @@ log = logging.getLogger(__name__)
 CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
-def trashprop(key):
-    def fget(self):
-        raise Exception('TRASHGET', key)
-
-    def fset(self, val):
-        raise Exception('TRASHSET', key)
-    return property(fget, fset)
-
-
 class Image(object):
 
     grokcore.component.implements(zeit.web.core.interfaces.IImage)
@@ -123,10 +114,6 @@ class Image(object):
         # This should actually be called variant_name, but raisins. (ND)
         return VARIANT_SOURCE.factory.DEFAULT_NAME
 
-    @zeit.web.reify
-    def layout(self):
-        raise Exception('TRASHME', 'layout')
-
     def _ratio_for_viewport(self, viewport):
         if self.group is not None:
             image = self.group.master_image_for_viewport(viewport)
@@ -210,10 +197,6 @@ class GalleryEntryImage(Image):
     variant_id = 'original'
 
     @zeit.web.reify
-    def _meta(self):
-        return zeit.content.image.interfaces.IImageMetadata(self.context, None)
-
-    @zeit.web.reify
     def layout(self):
         return self.context.layout
 
@@ -257,8 +240,7 @@ class TeaserImage(Image):
         if self.context.layout.image_pattern:
             return self.context.layout.image_pattern
         else:
-            # return super(TeaserImage, self).variant_id
-            raise Exception('TRASHME')
+            return super(TeaserImage, self).variant_id
 
 
 def image_from_block_content(context):
@@ -522,16 +504,9 @@ class RemoteImageGroup(SyntheticImageGroup,
     @zeit.web.reify
     def master_image(self):
         try:
-            image = RemoteImage(self.image_url)
+            return RemoteImage(self.image_url)
         except TypeError:
             return
-
-        # image.src = self.image_url  # TRASHME if you can
-        image.src = trashprop('RemoteImageGroup.imagesrc')
-        # image.mimeType = 'image/jpeg'
-        image.mimeType = trashprop('RemoteImageGroup.mime')
-        image.variant_id = trashprop('RemoteImageGroup.variant_id')
-        return image
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageMetadata)

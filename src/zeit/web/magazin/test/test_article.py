@@ -642,7 +642,7 @@ def test_article_with_fictitious_imgs_should_not_render_img_container(
 
 def test_article01_has_linked_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/01')
-    image = browser.xpath('.figure-header .figure-media')
+    image = browser.cssselect('.figure-media')[0]
     assert image.attrib['href'] == 'http://links.to'
     assert image.attrib['alt'].startswith(
         'Gentrifizierung: Ein Bild aus vergangenen Zeiten')

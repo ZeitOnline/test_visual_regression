@@ -101,7 +101,6 @@ class IImage(zope.interface.Interface):
     fill_color = zope.interface.Attribute('Effective background fill color')
     group = zope.interface.Attribute('Imagegroup the image is based on')
     href = zope.interface.Attribute('Href attribute of the image')
-    layout = zope.interface.Attribute('Image layout')
     path = zope.interface.Attribute('Absolute path to the image')
     fallback_path = zope.interface.Attribute('Sized fallback path')
     fallback_height = zope.interface.Attribute('Sized height of the variant')

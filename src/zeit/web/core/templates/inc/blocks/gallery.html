@@ -1,5 +1,4 @@
-{% extends "zeit.web.core:templates/inc/article/gallery.html" %}
-
-{% set gallery = block %}
-
-{% block gallery_class %}inline-gallery{% endblock %}
+{% require gallery = block %}
+    {% extends "zeit.web.core:templates/inc/article/gallery.html" %}
+    {% block gallery_class %}inline-gallery{% endblock %}
+{% endrequire %}

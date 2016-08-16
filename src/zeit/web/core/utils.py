@@ -10,7 +10,6 @@ import itertools
 import urllib
 import urlparse
 
-import grokcore.component
 import jinja2
 import peak.util.proxies
 import pysolr
@@ -482,19 +481,6 @@ class LazyProxy(object):
         if self.__proxy__.get('type') != 'link':
             return False
         raise AttributeError('blog')
-
-
-@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
-@grokcore.component.adapter(ILazyProxy)
-class LazyProxyImages(object):
-    # XXX Hacky hack to allow lazy IImages lookup through z.c.queryAdapter
-    # return context.__conform__(zeit.content.image.interfaces.IImages)
-    def __init__(self, context):
-        raise Exception('TRASHME')
-        self.context = context
-        # TODO: Migrate image and fill_color properties to this class
-        self.image = context.image
-        self.fill_color = context.fill_color
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
