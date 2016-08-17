@@ -90,7 +90,7 @@ def test_image_should_render_supertitle_and_caption_in_alt_tag(monkeypatch):
     monkeypatch.setattr(
         zeit.content.article.interfaces, 'IArticle', lambda c, _: c)
     image = zeit.web.core.image.HeaderBlockImage(context)
-    image.caption = u'Standard &amp; Poor´s Zentrale in New York'
+    image.caption = u'Standard & Poor´s Zentrale in New York'
 
     assert image.alt == u'New York: Standard & Poor´s Zentrale in New York'
 
@@ -103,7 +103,7 @@ def test_image_should_render_caption_in_alt_tag(monkeypatch):
     monkeypatch.setattr(
         zeit.content.article.interfaces, 'IArticle', lambda c, _: c)
     image = zeit.web.core.image.HeaderBlockImage(context)
-    image.caption = u'Standard &amp; Poor´s Zentrale in New York'
+    image.caption = u'Standard & Poor´s Zentrale in New York'
 
     assert image.alt == u'Standard & Poor´s Zentrale in New York'
 
