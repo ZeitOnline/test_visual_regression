@@ -547,3 +547,27 @@ def test_get_svg_without_package_should_be_empty_str(application):
     svg = zeit.web.core.template.get_svg_from_file(
         name, className, package, cleanup, a11y)
     assert svg == ''
+
+
+def test_zplus_is_false_for_free_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    assert zeit.web.core.template.zplus_content(content) is False
+
+
+def test_zplus_is_false_for_non_article_content(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2014-01/1953013471001')
+    assert zeit.web.core.template.zplus_content(content) is False
+
+
+def test_zplus_is_true_for_print_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zeit')
+    assert zeit.web.core.template.zplus_content(content) is True
+
+
+def test_zplus_is_true_for_registration_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/fischer')
+    assert zeit.web.core.template.zplus_content(content) is True
