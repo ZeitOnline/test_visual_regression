@@ -640,12 +640,9 @@ def test_article_with_fictitious_imgs_should_not_render_img_container(
     assert not browser.cssselect('div.article__page figure.figure-stamp')
 
 
-def test_article01_has_linked_image(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/01')
-    image = browser.cssselect('.figure-media')[0]
-    assert image.attrib['href'] == 'http://links.to'
-    assert image.attrib['alt'].startswith(
-        'Gentrifizierung: Ein Bild aus vergangenen Zeiten')
+def test_article_has_linked_image(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/03')
+    assert browser.xpath('//a[@href="http://www.test.de"]/img')
 
 
 @pytest.mark.skipif(True,
