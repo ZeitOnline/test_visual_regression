@@ -215,30 +215,19 @@ def test_image_should_be_none_if_expired(application):
 
 
 def test_image_should_pass_through_ratio(application):
-    image = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/image'
-        '/filmstill-hobbit-schlacht-fuenf-hee/')
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    model_block.references.target = image
-    block = zeit.web.core.block.Image(model_block)
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/all-blocks')
+    block = zeit.web.core.interfaces.IPages(article)[0][3]
     image = zeit.web.core.interfaces.IImage(block)
     assert round(1.77 - image.ratio, 1) == 0
     assert not image.mobile_ratio
 
 
 def test_image_should_set_mobile_ratio_for_variant_original(application):
-    image = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/image/bertelsmann-infographic/')
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    model_block.xml = lxml.etree.fromstring('<image/>')
-    model_block.references.target = image
-    image = zeit.web.core.block.Image(model_block)
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/infographic')
+    block = zeit.web.core.interfaces.IPages(article)[0][1]
+    image = zeit.web.core.interfaces.IImage(block)
     assert round(0.80 - image.ratio, 1) == 0
     assert round(1.62 - image.mobile_ratio, 1) == 0
 
