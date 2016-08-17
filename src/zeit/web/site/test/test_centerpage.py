@@ -385,7 +385,9 @@ def test_newsbox_renders_correctly_on_homepage(testbrowser):
 def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
     browser = testbrowser('/thema/oper')
     wrapper = browser.cssselect('.newsticker__single')
-    newsbox = browser.cssselect('.cp-area--newsticker.cp-area--keywordpage')
+    newsbox = browser.cssselect(
+        '.cp-area--newsticker'
+        '.cp-area--newsticker-on-keywordpage')
     linktext = browser.cssselect('.newsteaser__text--kw-tp-page')
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(wrapper) == 1
