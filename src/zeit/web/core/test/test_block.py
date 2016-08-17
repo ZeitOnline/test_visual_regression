@@ -68,20 +68,6 @@ def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
     assert hasattr(video, 'video_still')
 
 
-def test_image_should_evaluate_to_false_if_is_empty_flag_is_set(application):
-    model_block = mock.Mock()
-    model_block.context.is_empty = True
-    zeit.web.core.block.BlockImages(model_block)
-    assert False
-    # TODO: Rewrite with real data
-
-
-def test_image_should_be_fail_if_is_empty_doesnot_exist(application):
-    model_block = mock.Mock()
-    image = zeit.web.core.block.Image(model_block)
-    assert bool(image) is False
-
-
 def test_image_should_render_supertitle_and_caption_in_alt_tag(monkeypatch):
     context = mock.Mock()
     context.context.supertitle = u'New York'
