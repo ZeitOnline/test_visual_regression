@@ -82,71 +82,43 @@ def test_image_should_be_fail_if_is_empty_doesnot_exist(application):
     assert bool(image) is False
 
 
-def test_image_should_render_supertitle_and_caption_in_alt_tag():
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    header = mock.Mock()
-    xml = ('<image base-id="http://xml.zeit.de/foo">'
-           '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
-           '<copyright>© Justin Lane / dpa</copyright>'
-           '</image>')
-    model_block.xml = lxml.etree.fromstring(xml)
-    with mock.patch(
-            'zeit.content.article.interfaces.IArticle') as article:
-        article(model_block).supertitle = u'New York'
-        article(model_block).title = u'Standard & Poor´s'
-        image = zeit.web.core.block.HeaderImage(model_block, header)
+def test_image_should_render_supertitle_and_caption_in_alt_tag(monkeypatch):
+    context = mock.Mock()
+    context.context.supertitle = u'New York'
+    context.context.title = u'Standard & Poor´s'
+
+    monkeypatch.setattr(
+        zeit.content.article.interfaces, 'IArticle', lambda c, _: c)
+    image = zeit.web.core.image.HeaderBlockImage(context)
+    image.caption = u'Standard &amp; Poor´s Zentrale in New York'
+
     assert image.alt == u'New York: Standard & Poor´s Zentrale in New York'
 
 
-def test_image_should_render_caption_in_alt_tag():
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    header = mock.Mock()
-    xml = ('<image base-id="http://xml.zeit.de/foo">'
-           '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
-           '<copyright>© Justin Lane / dpa</copyright>'
-           '</image>')
-    model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.HeaderImage(model_block, header)
+def test_image_should_render_caption_in_alt_tag(monkeypatch):
+    context = mock.Mock()
+    context.context.supertitle = None
+    context.context.title = u'Standard & Poor´s'
+
+    monkeypatch.setattr(
+        zeit.content.article.interfaces, 'IArticle', lambda c, _: c)
+    image = zeit.web.core.image.HeaderBlockImage(context)
+    image.caption = u'Standard &amp; Poor´s Zentrale in New York'
+
     assert image.alt == u'Standard & Poor´s Zentrale in New York'
 
 
-def test_image_should_render_supertitle_and_title_in_alt_tag():
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    header = mock.Mock()
-    xml = ('<image base-id="http://xml.zeit.de/foo">'
-           '<copyright>© Justin Lane / dpa</copyright>'
-           '</image>')
-    model_block.xml = lxml.etree.fromstring(xml)
-    with mock.patch(
-            'zeit.content.article.interfaces.IArticle') as article:
-        article(model_block).supertitle = u'New York'
-        article(model_block).title = u'Standard & Poor´s'
-        image = zeit.web.core.block.HeaderImage(model_block, header)
+def test_image_should_render_supertitle_and_title_in_alt_tag(monkeypatch):
+    context = mock.Mock()
+    context.context.supertitle = u'New York'
+    context.context.title = u'Standard & Poor´s'
+
+    monkeypatch.setattr(
+        zeit.content.article.interfaces, 'IArticle', lambda c, _: c)
+    image = zeit.web.core.image.HeaderBlockImage(context)
+    image.caption = None
+
     assert image.alt == u'New York: Standard & Poor´s'
-
-
-def test_image_should_decode_html_entities_in_caption(application):
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    xml = ('<image base-id="http://xml.zeit.de/foo">'
-           '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
-           '<copyright>© Justin Lane / dpa</copyright>'
-           '</image>')
-    model_block.xml = lxml.etree.fromstring(xml)
-    block = zeit.web.core.block.Image(model_block)
-    image = zeit.web.core.interfaces.IImage(block)
-    assert image.caption == u'Standard & Poor´s Zentrale in New York'
 
 
 def test_image_should_not_break_on_missing_caption(application):
@@ -223,15 +195,10 @@ def test_image_should_use_variant_given_on_layout(application):
 
 
 def test_image_should_use_variant_original_if_infographic(application):
-    image = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/image/bertelsmann-infographic/')
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    model_block.xml = lxml.etree.fromstring('<image/>')
-    model_block.references.target = image
-    block = zeit.web.core.block.Image(model_block)
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/infographic')
+    block = zeit.web.core.interfaces.IPages(article)[0][1]
+    assert block.block_type == 'image_infographic'
     image = zeit.web.core.interfaces.IImage(block)
     assert image.variant_id == 'original'
 
