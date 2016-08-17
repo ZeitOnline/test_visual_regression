@@ -224,12 +224,6 @@ def test_image_template_should_designate_correct_layouts(testbrowser):
     assert fullwidth.attrib['data-ratio'] == '1.77777777778'  # variant=wide
 
 
-def test_image_macro_should_not_autoescape_markup(testbrowser):
-    browser = testbrowser('/feature/feature_longform')
-    text = browser.cssselect('.figure-stamp--right .figure__text')[0]
-    assert u'Heckler & Koch' in text.text
-
-
 def test_image_macro_should_hide_none(testbrowser):
     # XXX I'd much rather change a caption in the article, but trying
     # to checkout raises ConstrainedNotSatisfiedError: xl-header. :-(

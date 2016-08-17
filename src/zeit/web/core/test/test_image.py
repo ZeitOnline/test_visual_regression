@@ -343,3 +343,9 @@ def test_image_host_is_configurable_for_legacy_images(testbrowser):
     settings['image_prefix'] = 'http://img.example.com'
     b = testbrowser('/zeit-magazin/index')
     assert b.cssselect('img[src^="http://img.example.com"]')
+
+
+def test_image_should_handle_ampersand_captions(testbrowser):
+    browser = testbrowser('/feature/feature_longform')
+    text = browser.xpath('//span[@class="figure__text"]')[0]
+    assert u'Heckler &amp; Koch' in lxml.etree.tostring(text)
