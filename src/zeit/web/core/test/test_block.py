@@ -189,12 +189,13 @@ def test_image_should_use_variant_original_if_infographic(application):
     assert image.variant_id == 'original'
 
 
-def test_image_should_be_false_if_expired(application):
+def test_image_should_be_none_if_expired(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/article-with-expired-image')
     image = zeit.web.core.interfaces.IImage(article)
     assert zeit.web.core.template.expired(image) is True
-    assert bool(image) is False
+    image = zeit.web.core.template.get_image(article, fallback=False)
+    assert image is None
 
 
 def test_image_should_pass_through_ratio(application):
