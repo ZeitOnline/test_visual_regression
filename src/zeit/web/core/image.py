@@ -32,6 +32,7 @@ CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
 class Image(object):
+    """Base class for all template-bound images in friedbert"""
 
     grokcore.component.implements(zeit.web.core.interfaces.IImage)
 
@@ -39,20 +40,24 @@ class Image(object):
         self.context = context
 
     def __bool__(self):
+        # Images shall evaluate to false if they don't actually have images
         return bool(self.group)
 
     __nonzero__ = __bool__
 
     @zeit.web.reify
     def _meta(self):
+        # Override hook for image metadata retrieval
         return zeit.content.image.interfaces.IImageMetadata(self.group, None)
 
     @zeit.web.reify
     def _images(self):
+        # Override hook for IImages adpater retrieval
         return zeit.content.image.interfaces.IImages(self.context, None)
 
     @zeit.web.reify
     def _variant(self):
+        # Override hook for variant object retrieval
         try:
             variant = VARIANT_SOURCE.factory.find(
                 self.group, self.variant_id)
@@ -63,17 +68,15 @@ class Image(object):
 
     @zeit.web.reify
     def group(self):
+        # Contains a valid (synthesized) imagegroup
         if self._images:
             return zeit.content.image.interfaces.IImageGroup(
                 self._images.image, None)
 
     @zeit.web.reify
-    def title(self):
-        if self._meta:
-            return self._meta.title
-
-    @zeit.web.reify
     def copyrights(self):
+        # Copyrights always come as a sanitized touple of touples
+        # containing a copyright text, URL and a nofollow flag.
         copyrights = []
         if self._meta and self._meta.copyrights:
             for text, uri, nf in self._meta.copyrights:
@@ -83,6 +86,11 @@ class Image(object):
                     continue
                 copyrights.append((text, uri, nf))
         return tuple(copyrights)
+
+    @zeit.web.reify
+    def title(self):
+        if self._meta:
+            return self._meta.title
 
     @zeit.web.reify
     def alt(self):
@@ -111,10 +119,12 @@ class Image(object):
 
     @zeit.web.reify
     def variant_id(self):
-        # This should actually be called variant_name, but raisins. (ND)
+        # This should actually be called variant_name, but raisins (ND)
         return VARIANT_SOURCE.factory.DEFAULT_NAME
 
     def _ratio_for_viewport(self, viewport):
+        # If the variant config does not provide a ratio, we try to determine
+        # it from the viewport-specific masterimage
         if self.group is not None:
             image = self.group.master_image_for_viewport(viewport)
             if image is None:
@@ -164,6 +174,9 @@ class Image(object):
 @grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 class CMSContentImage(Image):
+    """Default image for all top-level content types.
+    They usually have no way of knowing their variant and fallback to the
+    original. Deviations should be set in templates."""
 
     pass
 
