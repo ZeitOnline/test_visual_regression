@@ -84,18 +84,18 @@
         <raw_query>+published:"published" +keywords:"{{text}}" +type:(quiz OR article OR gallery OR video) -product_id:(News OR afp OR SID OR ADV) -ressort:(Administratives OR News OR Aktuelles) -expires:[* TO NOW]</raw_query>
       </region>
     </cluster>
-    <cluster visible="True" area="id-d976a64d-1589-4b49-a153-12bdcdf94d1e" kind="solo">
-        <region visible="True" hide-dupes="True" kind="newsticker" area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" count="8" automatic="True" automatic_type="query" title="Schlagzeilen zum Thema">
-          <raw_query>merkel</raw_query>
-          <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-          <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-396f44ea-f59b-46d7-adc1-856964e221a2"/>
-          <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-8bc57b9a-4670-400f-9a01-1f6c0afd8c16"/>
-          <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-          <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-          <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-          <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-          <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-ffa2cfac-36e2-4991-b4eb-007d472da3ae"/>
-        </region>
+    <cluster visible="True" area="id-d976a64d-1589-4b49-a153-12bdcdf94d1e" kind="solo" kind_title="Schlagzeilen-Region">
+      <region visible="True" hide-dupes="True" area="id-7c964ac7-6bc7-41aa-bd0b-44237e187c24" kind="newsticker" count="8" automatic="True" automatic_type="query" title="Schlagzeilen zum Thema">
+        <raw_query>+published:"published" +keywords:"{{ text }}" +type:"article" +product_id:(News OR afp OR SID OR ADV) +ressort:"News" -expires:[* TO NOW]</raw_query>
+        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-146b3a39-114e-4b46-94a6-d10e59162294"/>
+        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-86a1913e-f7c0-48f9-9f90-ee749ffaf2a5"/>
+        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-3046f9ec-338d-4a07-9d15-cb0731fbe2f7"/>
+        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-edbd1655-fd14-4af4-bc24-e8f2c69c7d42"/>
+        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-4fec549f-eaf4-44d3-99dd-30ff98d17d6c"/>
+        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-9895c0ef-d53b-44b1-898d-5f732c81db29"/>
+        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-75f300a4-6e85-427d-8e1b-950d1b2603b3"/>
+        <container cp:type="auto-teaser" module="zon-newsteaser" visible="True" cp:__name__="id-fdac5d3a-67a4-4445-9aa2-5150d516b5dc"/>
+      </region>
     </cluster>
   </body>
   <feed/>
