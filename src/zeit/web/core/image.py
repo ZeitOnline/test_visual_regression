@@ -47,12 +47,15 @@ class Image(object):
 
     @zeit.web.reify
     def _meta(self):
-        # Override hook for image metadata retrieval
+        # Image metadata is retrieved from the underlying group by default
+        # but this can be overwritten to include block metadata for example
         return zeit.content.image.interfaces.IImageMetadata(self.group, None)
 
     @zeit.web.reify
     def _images(self):
-        # Override hook for IImages adpater retrieval
+        # The CMS mechanics for extracting a single image or an image group
+        # from a piece of content (or fragment of it, ie teaserblock)
+        # is applied here but can be overwritten if necessary
         return zeit.content.image.interfaces.IImages(self.context, None)
 
     @zeit.web.reify
@@ -184,6 +187,7 @@ class CMSContentImage(Image):
 @grokcore.component.adapter(zeit.web.core.interfaces.IBlock)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 class ModuleImage(Image):
+    """Image adapter for friedbert specific zeit.edit block implementations"""
 
     pass
 
@@ -192,6 +196,9 @@ class ModuleImage(Image):
                             name=u'content')
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 def image_for_gallery(context):
+    """Content adapter for gallery images, that extracts the image from the
+    first slide of a gallery. Popular example would be the HP snapshot"""
+
     for key in context.keys():
         try:
             entry = context[key]
@@ -206,6 +213,9 @@ def image_for_gallery(context):
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGalleryEntry)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 class GalleryEntryImage(Image):
+    """Image adapter for gallery entries (slides), that always uses the
+    `original` variant and extracts its metadata from the slide, not the
+    slide's image"""
 
     variant_id = 'original'
 
@@ -221,6 +231,7 @@ class GalleryEntryImage(Image):
 @grokcore.component.adapter(zeit.content.author.interfaces.IAuthor)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
 class AuthorImage(Image):
+    """Image adapter for author objects enforcing `original` variants"""
 
     # XXX This should use a different variant, but author images currently
     # do not have a consistent ratio and framing of the portrayed person.
