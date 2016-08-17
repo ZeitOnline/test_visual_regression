@@ -455,18 +455,13 @@ class NewsletterTeaser(Block):
 
     @property
     def image(self):
-        # TODO: Migrate to zwc.image.Image
-        images = zeit.content.image.interfaces.IImages(
-            self.context.reference, None)
-        image = images.image if images is not None else None
-        if not zeit.content.image.interfaces.IImageGroup.providedBy(image):
-            return
-        if zeit.web.core.template.expired(image):
-            return
+        image = zeit.web.core.template.get_image(
+            self.context.reference, variant_id='wide', fallback=False)
         # XXX We should not hardcode the host, but newsletter is rendered on
         # friedbert-preview, which can't use `image_host`. Should we introduce
         # a separate setting?
-        return 'http://www.zeit.de' + image.variant_url('wide', 148, 84)
+        if image:
+            return 'http://www.zeit.de{}__148x84'.format(image.path)
 
     @property
     def videos(self):
@@ -505,7 +500,6 @@ class NewsletterAdvertisement(Block):
 
     @property
     def image(self):
-        # TODO: Migrate to zwc.image.Image
         return self.context.image.uniqueId.replace(
             'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
 
