@@ -203,15 +203,12 @@ def test_image_should_use_variant_original_if_infographic(application):
     assert image.variant_id == 'original'
 
 
-def test_image_should_be_none_if_expired(application):
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    with mock.patch('zeit.web.core.template.expired') as expired:
-        expired.return_value = True
-        image = zeit.web.core.block.Image(model_block)
-        assert image is None
+def test_image_should_be_false_if_expired(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/article-with-expired-image')
+    image = zeit.web.core.interfaces.IImage(article)
+    assert zeit.web.core.template.expired(image) is True
+    assert bool(image) is False
 
 
 def test_image_should_pass_through_ratio(application):
