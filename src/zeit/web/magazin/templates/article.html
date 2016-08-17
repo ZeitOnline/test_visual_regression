@@ -7,8 +7,9 @@
         {{ (article_macros[type] or article_macros['no_block'])(block) }}
         {% include [
         "{0}:templates/inc/blocks/{1}_{2}.html".format(view.package, type, block.layout),
-        "{0}:templates/inc/blocks/{1}.html".format(view.package, type)] ignore missing %}
-        {# No fallback to zeit.web.core:templates/inc/blocks/* #}
+        "{0}:templates/inc/blocks/{1}.html".format(view.package, type),
+        "zeit.web.core:templates/inc/blocks/{0}_{1}.html".format(type, block.layout),
+        "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
     {% endfor %}
 {% endmacro %}
 
