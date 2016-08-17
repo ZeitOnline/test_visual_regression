@@ -4,19 +4,20 @@
 <aside class="partnerbox">
     <span class="partnerbox__label">Verlagsangebot</span>
     <div class="partner partner--{% block modifier %}{% endblock %}">
-        <div class="p-kicker">
-            <span class="p-kicker__img"></span>
-            <span class="p-kicker__text">{% block kicker_text %}{% endblock %}</span>
-        </div>
+        {% block kicker %}{% endblock %}
         <div class="partner__intro">
             {% block intro %}{% endblock %}
         </div>
         <div class="partner__action">
-            {% block dropdown %}{% endblock %}
-            <span class="pa-button">
-                <a class="pa-button__text" href="{% block link_button %}{% endblock %}">{% block button %}{% endblock %}</a>
+            <span class="partner__dropdown-intro">
+                {% block dropdown_title %}{% endblock %}
+                {% block dropdown_intro %}{% endblock %}
             </span>
-            <span class="pa-link">
+            {% block dropdown %}{% endblock %}
+            <span class="partner__button">
+                <a class="partner__button-text" href="{% block link_button %}{% endblock %}">{% block button %}{% endblock %}</a>
+            </span>
+            <span class="partner__link">
                 {% block link_bottom %}{% endblock %}
             </span>
         </div>

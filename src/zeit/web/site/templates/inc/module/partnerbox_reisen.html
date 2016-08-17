@@ -1,9 +1,17 @@
 {%- extends "zeit.web.site:templates/inc/module/partnerbox.html" -%}
 
 {% block modifier %}reisen{% endblock %}
-{% block kicker_text %}Finden Sie hier Ihre Traumreise!{% endblock %}
 
-{% block intro %}Entdecken Sie einzigartige ZEIT-Reisen das ganze Jahr in über 60 faszinierende Länder dieser Erde!{% endblock %}
+
+{% block intro %}
+    {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" ignore missing %}
+{% endblock %}
+
+{% block dropdown_title %}
+    <span class="partner__dropdown-title">Finden Sie hier Ihre Traumreise!</span>
+{% endblock %}
+
+{% block dropdown_intro %}Entdecken Sie einzigartige ZEIT-Reisen das ganze Jahr in über 60 faszinierende Länder dieser Erde!{% endblock %}
 
 {% block dropdown %}
     {{ partner_macro.dropdown_reisen() }}
@@ -14,8 +22,8 @@
 {% block link_button %}http://zeitreisen.zeit.de/?wt_mc=zr.intern.display.zeit_online.reisebox.dynamisch.widget.widget&amp;utm_source=zeit_online&amp;utm_medium=display&amp;utm_campaign=reisebox_dynamisch&amp;utm_content=widget{% endblock %}
 
 {% block link_bottom %}
-    <div class="pa-link__text">Ein Angebot von</div>
+    <div class="partner__link-text">Ein Angebot von</div>
     <a href="http://zeitreisen.zeit.de/?wt_mc=zr.intern.display.zeit_online.reisebox.dynamisch.widget.widget&amp;utm_source=zeit_online&amp;utm_medium=display&amp;utm_campaign=reisebox_dynamisch&amp;utm_content=widget">
-        {{ lama.use_svg_icon('logo-zeit-reisen', 'pa-link__icon', view.package) }}
+        {{ lama.use_svg_icon('logo-zeit-reisen', 'partner__link-icon', view.package) }}
     </a>
 {% endblock %}
