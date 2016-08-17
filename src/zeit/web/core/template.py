@@ -150,11 +150,8 @@ def zplus_content(content):
         return False if acquisition == 'free' else True
 
     # Fallback
-    product_id = getattr(content, 'product_id', None)
-    if product_id == u'ZEDE':
-        return False
-    else:
-        return True
+    product_id = getattr(getattr(content, 'product', None), 'id', None)
+    return product_id != u'ZEDE'
 
 
 @zeit.web.register_test
