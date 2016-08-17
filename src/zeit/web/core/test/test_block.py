@@ -343,12 +343,10 @@ def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
 
 
 def test_block_image_should_contain_expected_structure(
-        tplbrowser, dummy_request):
-    block = mock.Mock()
-    block.href = 'http://images.zeit.de/image.jpg'
-    block.figure_mods = ('wide', 'rimless', 'apart')
-    block.copyrights = (('Andreas Gursky', 'http://www.example.com', False),)
-    block.ratio = 1
+        tplbrowser, dummy_request, application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/inline-imagegroup')
+    block = zeit.web.core.interfaces.IPages(article)[1][0]
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/image.html',
         block=block, request=dummy_request)
