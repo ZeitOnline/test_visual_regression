@@ -28,4 +28,3 @@
 		</div>
 	</div>
 </{{ atom_tag or 'div' }}>
-
