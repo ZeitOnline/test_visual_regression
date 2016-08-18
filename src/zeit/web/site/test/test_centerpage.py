@@ -374,7 +374,7 @@ def test_format_date_returns_expected_value_in_newsbox():
         == format_date(yesterday, pattern="HH:mm")
 
 
-def test_newsbox_renders_correctly_on_homepage(testbrowser):
+def test_newsbox_renders_correctly_on_homepage(testbrowser, datasolr):
     browser = testbrowser('/zeit-online/slenderized-index-with-newsbox')
     wrapper = browser.cssselect('.newsticker__column')
     section_heading_link = browser.cssselect('.section-heading__link')
