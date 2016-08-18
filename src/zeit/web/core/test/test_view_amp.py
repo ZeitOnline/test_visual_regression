@@ -115,6 +115,37 @@ def test_amp_article_has_valid_webtrekk_json(testbrowser):
     assert page_vars['cp25'] == "amp"
 
 
+def test_amp_article_has_valid_webtrekk_click_json(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    json_source = browser.cssselect(
+        'amp-analytics[type="webtrekk"] script'
+    )[0].text
+
+    try:
+        webtrekk = json.loads(json_source)
+        assert True
+    except ValueError:
+        assert False
+
+    assert 'trackLogoClick' in webtrekk['triggers']
+    assert 'trackImprimtClick' in webtrekk['triggers']
+    assert 'trackPrivacyClick' in webtrekk['triggers']
+    assert 'trackTopClick' in webtrekk['triggers']
+    assert 'trackBackToHomepageClick' in webtrekk['triggers']
+    assert 'trackNextAdButtonClick' in webtrekk['triggers']
+    assert 'trackNextAdImageClick' in webtrekk['triggers']
+    assert 'trackFooterLogoClick' in webtrekk['triggers']
+    assert 'trackFacebookClick' in webtrekk['triggers']
+    assert 'trackTwitterClick' in webtrekk['triggers']
+    assert 'trackWhatsAppClick' in webtrekk['triggers']
+    assert 'trackMailClick' in webtrekk['triggers']
+    assert 'trackAuthorClick' in webtrekk['triggers']
+    assert 'trackNextReadClick' in webtrekk['triggers']
+    assert 'trackKeywordsClick' in webtrekk['triggers']
+    assert 'trackLocalInTextLinkClick' in webtrekk['triggers']
+    assert 'trackExternInTextLinkClick' in webtrekk['triggers']
+
+
 def test_amp_article_contains_sharing_links(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     canonical = browser.cssselect('link[rel="canonical"]')[0].get('href')
@@ -154,3 +185,15 @@ def test_amp_article_should_have_ivw_tracking(testbrowser, monkeypatch):
     assert '"cp":  "wirtschaft/bild-text"' in ivw_text
     assert '"url": "https://ssl.' in ivw_text
     assert 'static/latest/html/amp-analytics-infonline.html' in ivw_text
+
+
+def test_amp_article_links_contain_tracking_data_attributes(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+
+    author = browser.cssselect('.byline a')[0]
+    assert author.get('data-vars-url') == author.get('href')
+
+    tag = browser.cssselect('.article-tags__link')[1]
+    assert tag.get('data-vars-url') == tag.get('href')
+    assert tag.get('data-vars-link-text') == 'Weltwirtschaftsforum Davos'
+    assert tag.get('data-vars-number') == '2'

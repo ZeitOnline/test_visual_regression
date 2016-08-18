@@ -126,8 +126,6 @@ def get_area(area):
 def get_module(module):
     if zeit.web.core.interfaces.IBlock.providedBy(module):
         return module
-    elif zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(module):
-        return module
     elif zeit.content.cp.interfaces.ICPExtraBlock.providedBy(module):
         name = 'cpextra'
     elif zeit.edit.interfaces.IBlock.providedBy(module):
