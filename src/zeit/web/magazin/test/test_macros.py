@@ -7,34 +7,6 @@ import zeit.cms.interfaces
 import zeit.web.core.interfaces
 
 
-def test_macro_p_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    html = 'Alles nicht so <em>wichtig</em>, oder?!'
-    lines = tpl.module.paragraph(html).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    markup = '<p class="is-constrained is-centered">'
-    markup += 'Alles nicht so <em>wichtig</em>, oder?!</p>'
-    assert markup == output
-
-
-def test_macro_raw_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    css_class = 'raw'
-    markup = ('<div class="%s">'
-              '<blink>ZEIT ONLINE</blink>'
-              '</div>' % css_class)
-    obj = {'xml': '<blink>ZEIT ONLINE</blink>'}
-    lines = tpl.module.raw(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line
-        assert markup == output
-
-
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
@@ -415,11 +387,3 @@ def test_macro_liveblog_produces_html(application, jinja2_env):
             'onerror="continue" />') in output
 
 
-def test_macro_contentadblock_produces_html(application, jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    view = mock.Mock()
-    view.context.advertising_enabled = True
-    tpl_module = tpl.make_module({'view': view})
-    assert tpl_module.contentadblock(mock.Mock()).strip() == (
-        '<div id="iq-artikelanker"></div>')

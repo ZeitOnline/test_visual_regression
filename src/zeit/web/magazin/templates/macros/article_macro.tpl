@@ -5,10 +5,6 @@
     {{ lama.adplace_middle_mobile(item, view) }}
 {%- endmacro %}
 
-{% macro contentadblock(item) -%}
-    {% include 'zeit.web.core:templates/inc/blocks/contentadblock.html' %}
-{%- endmacro %}
-
 {% macro supertitle() -%}
   <span class="article__head__supertitle">{{ view.supertitle }}</span>
 {%- endmacro %}
@@ -46,25 +42,6 @@
         </div>
     {%- endif %}
 {%- endmacro %}x
-
-{% macro paragraph(html) -%}
-    <p class="is-constrained is-centered">
-        {{ html | safe}}
-    </p>
-{%- endmacro %}
-
-{% macro unorderedlist(html) -%}
-    <ul class="is-constrained is-centered">
-        {{ html | safe }}
-    </ul>
-{%- endmacro %}
-
-{% macro orderedlist(html) -%}
-    <ol class="is-constrained is-centered">
-        {{ html | safe }}
-    </ol>
-{%- endmacro %}
-
 {% macro portraitbox(obj) -%}
     {% if obj.name -%}
         <figure class="portraitbox figure-stamp">
@@ -120,10 +97,6 @@
     <h2 class="article__subheading is-constrained is-centered">
         {{ intertitle | striptags }}
     </h2>
-{%- endmacro %}
-
-{% macro raw(obj) -%}
-    <div class="raw">{{ obj.xml | safe }}</div>
 {%- endmacro %}
 
 {% macro citation(obj) -%}
