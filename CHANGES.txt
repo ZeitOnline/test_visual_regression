@@ -4,7 +4,9 @@ Change log for zeit.web
 2.99 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3246: Remove redirect for expired video pages
+
+- FIX: Don't break when a ranking area is automatic=False
 
 
 2.98.1 (2016-08-16)
@@ -19,6 +21,8 @@ Change log for zeit.web
 -----------------
 
 - BUG-477: Keep sort parameter in comment pagination #1951
+
+- BUG-498: Centering gallery icons
 
 - ZON-3214: Restyle reisebox and bemify general partnerbox markup
 

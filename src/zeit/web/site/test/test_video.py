@@ -227,15 +227,6 @@ def test_video_should_not_break_on_missing_still_image(
     testbrowser('/zeit-online/video/3537342483001')
 
 
-def test_expired_video_should_trigger_redirect(testserver):
-    resp = requests.get(
-        '%s/zeit-online/video/3537342483002' % testserver.url,
-        allow_redirects=False)
-    assert resp.status_code == 301
-    assert (resp.headers['location'] == (
-            '%s/video/index' % testserver.url))
-
-
 def test_video_has_default_product_id(application, dummy_request):
     video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/video/3537342483001')
