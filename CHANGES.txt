@@ -4,17 +4,17 @@ Change log for zeit.web
 2.99 (unreleased)
 -----------------
 
+- BUG-497: Wrap auto-teaser blocks in zeit.web module classes just like normal teasers
+
 - ZON-3280: Enable RSS feeds for non-ZON content
 
 - ZON-3246: Remove redirect for expired video pages
 
 - ZON-2389: Make Webtrekk-ID configurable (for staging)
 
-- FIX: Don't break when a ranking area is automatic=False
-
-- BUG-497: Wrap auto-teaser blocks in zeit.web module classes just like normal teasers
-
 - ZON-3183: Add webtrekk clicktracking to amp pages
+
+- FIX: Don't break when a ranking area is automatic=False
 
 
 2.98.1 (2016-08-16)
