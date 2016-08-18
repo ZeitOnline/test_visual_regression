@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-2.99 (unreleased)
+2.99 (2016-08-18)
 -----------------
 
 - BUG-497: Wrap auto-teaser blocks in zeit.web module classes just like normal teasers
