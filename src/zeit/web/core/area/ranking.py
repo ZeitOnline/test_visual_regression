@@ -165,7 +165,10 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     @zeit.web.reify
     def hits(self):
         self.values()
-        return self._content_query.total_hits
+        try:
+            return int(self._content_query.total_hits)
+        except TypeError:
+            return 0
 
     @zeit.web.reify
     def start(self):
