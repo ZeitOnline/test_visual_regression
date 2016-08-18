@@ -4,6 +4,8 @@ Change log for zeit.web
 2.99 (unreleased)
 -----------------
 
+- ZON-3280: Enable RSS feeds for non-ZON content
+
 - ZON-3246: Remove redirect for expired video pages
 
 - ZON-2389: Make Webtrekk-ID configurable (for staging)
