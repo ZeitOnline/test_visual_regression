@@ -2,6 +2,9 @@
 
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
+{% set cp_type = view.context.type if view.context.type else '' %}
+{% set cp_area_modifier = ('newsticker-on-' ~ cp_type) if ('keywordpage' or 'topicpage') in cp_type and 'newsticker' in area.kind %}
+
 {% block before_module_list %}
     {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, 'newsteaser', 'alle_schlagzeilen') %}
     {{ cp.section_heading(area.title, 'Alle Schlagzeilen', 'news/index' , view, tracking_slug, unpadded=True, has_link=False if ('keywordpage' or 'topicpage') in cp_type else True) }}
