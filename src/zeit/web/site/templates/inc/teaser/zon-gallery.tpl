@@ -21,8 +21,12 @@
     </div>
 {% endblock %}
 
-{# Do not include kicker logo (applies when gallery is a ZMO gallery) #}
-{% block kicker_logo %}{% endblock %}
+{% block kicker_logo %}
+    {% if teaser is zplus_content %}
+        {{ lama.use_svg_icon('zplus', self.layout() + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
+    {% endif %}
+{% endblock %}
+
 {# Eliminate default teaser metadata #}
 {% block teaser_metadata_default %}{% endblock %}
 {# Eliminate default teaser byline #}

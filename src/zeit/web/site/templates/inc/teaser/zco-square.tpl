@@ -2,7 +2,11 @@
 
 {% block teaser_modifier %}{{ self.layout() }}--zco{% endblock %}
 
-{% block kicker_logo %}{% endblock %}
+{% block kicker_logo %}
+    {% if teaser is zplus_content %}
+        {{ lama.use_svg_icon('zplus', self.layout() + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
+    {% endif %}
+{% endblock %}
 
 {% block teaser_container %}
     <div class="teaser-square__product">
