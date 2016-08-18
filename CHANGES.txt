@@ -4,6 +4,8 @@ Change log for zeit.web
 2.99 (unreleased)
 -----------------
 
+- ZON-3246: Remove redirect for expired video pages
+
 - FIX: Don't break when a ranking area is automatic=False
 
 
