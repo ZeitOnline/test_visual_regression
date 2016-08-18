@@ -12,7 +12,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:4e2c9a3b-c89e-4b39-bb04-371fb84dd665}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">108</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-17T09:58:02.437939+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>

@@ -36,7 +36,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-17T09:58:02.437939+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.drongowski</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">108</attribute>
