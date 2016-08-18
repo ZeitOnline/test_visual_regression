@@ -1,9 +1,9 @@
 <blockquote class="
-        {% if block.layout == 'wide' %}
+        {%- if block.layout == 'wide' -%}
             quote--wide
-        {% else %}
+        {%- else -%}
             quote
-        {% endif %}
+        {%- endif -%}
 ">
     <span class="quote__text">{{ block.text }}</span>
     {% if block.attribution %}
