@@ -29,7 +29,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.haake</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-03-02T15:40:17.028269+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-03-02T15:39:55.211950+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">no</attribute>
