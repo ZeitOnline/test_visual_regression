@@ -1,3 +1,5 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
 {% set image = get_image(module, fallback=False) %}
 {% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
 {% set module_layout = self.layout() %}
@@ -10,7 +12,12 @@
         {% endif %}
         <div class="{{ module_layout }}__container">
             <h2 class="{{ module_layout }}__heading">
-                <span class="{{ module_layout }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
+                <span class="{{ module_layout }}__kicker">
+                {% if teaser is zplus_content %}
+                    {{ lama.use_svg_icon('zplus', self.layout() + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
+                {% endif %}
+                {{ teaser.teaserSupertitle or teaser.supertitle }}
+                </span>
                 {%- if teaser.teaserTitle or teaser.title %}<span class="visually-hidden">: </span>{% endif -%}
                 <span class="{{ module_layout }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
             </h2>
