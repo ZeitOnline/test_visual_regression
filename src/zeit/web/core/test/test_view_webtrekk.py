@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
     'teaser', [
         # teaser-classic solo
         ('.teaser-classic .teaser-classic__combined-link',
-         '1.1.1.solo-teaser-classic.text'),
+         '1.1.1.solo-teaser-classic-zplus.text'),
         # teaser-square minor
         ('.teaser-square .teaser-square__combined-link',
          '2.2.1.minor-teaser-square.text'),
@@ -25,7 +25,7 @@ from selenium.webdriver.support.ui import WebDriverWait
          '3.1.1.parquet-teaser-small.text'),
         # teaser-large parquet
         ('.parquet-teasers .teaser-large .teaser-large__combined-link',
-         '4.1.1.parquet-teaser-large.text')
+         '4.1.1.parquet-teaser-large-zplus.text')
     ])
 def test_cp_elements_provide_expected_id_for_webtrekk(
         selenium_driver, testserver, teaser):
