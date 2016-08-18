@@ -11,7 +11,7 @@
 {% set target_url = teaser.uniqueId | create_url %}
 
 <article class="{{ blockname | with_mods(blockname_modifier) }}
-    {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}" data-clicktracking="{{ area.kind }}">
+    {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}" data-clicktracking="{{ area.kind }}" {% if teaser is zplus_content %}data-zplus="true"{% endif %}>
     <header class="{{ '{}__header'.format(blockname) | with_mods(blockname_modifier) }}">
         {# get the image directly from the supplied image group #}
         {% set image = get_image(module, variant_id='cinema') %}
