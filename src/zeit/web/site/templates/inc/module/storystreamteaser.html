@@ -21,6 +21,9 @@
 
         <div class="{{ '{}__headercontent'.format(blockname) | with_mods(blockname_modifier) }}">
             <a class="{{ blockname }}__link" href="{{ target_url }}">
+                {% if teaser is zplus_content %}
+                    {{ lama.use_svg_icon('zplus', blockname + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
+                {% endif %}
                 <span class="{{ blockname }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
                 {%- if teaser.teaserSupertitle or teaser.supertitle -%}
                 <span class="visually-hidden">: </span>
