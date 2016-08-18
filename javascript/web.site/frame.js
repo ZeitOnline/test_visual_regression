@@ -14,15 +14,18 @@ require([ 'vendor/require' ], function() {});
 require([
     'web.core/menu',
     'web.core/clicktracking',
-    'web.site/adblockCount.js'
+    'web.site/adblockCount.js',
+    'web.core/adReload'
 ], function(
     menu,
     clicktracking,
-    adblockCount
+    adblockCount,
+    adReload
 ) {
     menu.init({ followMobile: 'always' });
     clicktracking.init();
     adblockCount.init();
+    adReload.init();
 });
 
 // add required jQuery plugins
