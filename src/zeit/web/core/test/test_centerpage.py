@@ -50,3 +50,19 @@ def test_teaser_layout_zon_square_should_be_adjusted_accordingly(application):
     block.append(article)
     module = zeit.web.core.centerpage.get_module(block)
     assert module.layout.id == 'zco-square'
+
+
+def test_auto_teasers_should_be_handled_like_normal_teasers(application):
+    cp = zeit.content.cp.centerpage.CenterPage()
+    cp.uniqueId = 'http://xml.zeit.de/testcp'
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'
+    area.count = 1
+    area.automatic_type = 'centerpage'
+    area.referenced_cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/index')
+    area.automatic = True
+    area.values()[0].layout = zeit.content.cp.layout.get_layout('zon-square')
+    auto = zeit.content.cp.interfaces.IRenderedArea(area).values()[0]
+    module = zeit.web.core.centerpage.get_module(auto)
+    assert module.layout.id == 'zco-square'

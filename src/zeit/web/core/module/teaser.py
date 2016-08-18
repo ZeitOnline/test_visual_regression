@@ -8,8 +8,7 @@ import zeit.web.core.interfaces
 import zeit.web.core.template
 
 
-class LayoutOverrideTeaserBlock(zeit.content.cp.blocks.teaser.TeaserBlock,
-                                grokcore.component.MultiAdapter):
+class LayoutOverrideTeaserBlock(grokcore.component.MultiAdapter):
 
     grokcore.component.baseclass()
     grokcore.component.provides(zeit.web.core.interfaces.IBlock)
@@ -17,9 +16,18 @@ class LayoutOverrideTeaserBlock(zeit.content.cp.blocks.teaser.TeaserBlock,
     override_layout_id = None
 
     def __init__(self, module, content):
-        super(LayoutOverrideTeaserBlock, self).__init__(
-            module.__parent__, module.xml)
+        self.module = module
         self._v_first_content = content
+
+    def __getattr__(self, name):
+        return getattr(self.module, name)
+
+    # Sigh, proxying would be so much easier if __getattr__ could catch these.
+    def __len__(self):
+        return len(self.module)
+
+    def __iter__(self):
+        return iter(self.module)
 
     @property
     def layout(self):
@@ -48,6 +56,11 @@ def dispatch_teaser_via_contenttype(context):
 
     return zope.component.getMultiAdapter(
         (context, teaser), zeit.web.core.interfaces.IBlock)
+
+
+@zeit.web.register_module('auto-teaser')
+def module_for_auto_teaser(context):
+    return dispatch_teaser_via_contenttype(context)
 
 
 @grokcore.component.adapter(
