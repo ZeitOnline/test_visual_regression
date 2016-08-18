@@ -45,15 +45,11 @@ $margin-ad-tablet: -($max-page-width - $max-overview-width) / 2
 
 +respond-min($break-tablet-min)
 	.newsticker
-		&__column,
-		&__single
+		&__column
 			float: left
 			width: 50%
 			&:nth-last-child(even)
 				padding-right: remify(15px)
-		&__single
-			width: 100%
-
 	.newsteaser
 		&__ad
 			margin: remify(15px) $margin-ad-tablet
