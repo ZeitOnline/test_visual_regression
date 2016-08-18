@@ -248,6 +248,13 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
     def FIELDS(self):
         return ' '.join(self.FIELD_MAP.keys())
 
+    def _convert(self, doc):
+        doc = super(SolrContentQuery, self)._convert(doc)
+        for key in ['teaser_image', 'teaser_image_fill_color']:
+            if doc.get(key):
+                doc[key] = doc[key][0]
+        return doc
+
     def _resolve(self, doc):
         return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
 
