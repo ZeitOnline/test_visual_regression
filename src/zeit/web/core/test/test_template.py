@@ -571,3 +571,11 @@ def test_zplus_is_true_for_registration_articles(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/fischer')
     assert zeit.web.core.template.zplus_content(content) is True
+
+
+def test_zplus_should_be_toggleable(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'reader_revenue': False}.get)
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/fischer')
+    assert zeit.web.core.template.zplus_content(content) is False

@@ -140,6 +140,10 @@ def zmo_content(content):
 
 @zeit.web.register_test
 def zplus_content(content):
+    if not zeit.web.core.application.FEATURE_TOGGLES.find(
+            'reader_revenue'):
+        return False
+
     # Links are defined as free content
     if zeit.content.link.interfaces.ILink.providedBy(content):
         return False
