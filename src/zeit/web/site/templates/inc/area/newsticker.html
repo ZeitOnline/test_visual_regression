@@ -3,7 +3,7 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% set cp_type = view.context.type if view.context.type else '' %}
-{% set cp_area_modifier = ('newsticker-on-' ~ cp_type) if ('keywordpage' or 'topicpage') in cp_type and 'newsticker' in area.kind %}
+{% set cp_area_modifier = ('newsticker-on-' ~ cp_type) if ('keywordpage' or 'topicpage') == cp_type and 'newsticker' == area.kind %}
 
 {% block before_module_list %}
     {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, 'newsteaser', 'alle_schlagzeilen') %}
