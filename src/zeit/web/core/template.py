@@ -140,18 +140,20 @@ def zmo_content(content):
 
 @zeit.web.register_test
 def zplus_content(content):
-    # Filter everything but articles
-    if not zeit.content.article.interfaces.IArticle.providedBy(content):
+    # Links are defined as free content
+    if zeit.content.link.interfaces.ILink.providedBy(content):
         return False
 
     # Use Acquisition attribute
-    acquisition = content.acquisition
+    acquisition = getattr(content, 'acquisition', None)
+
     if acquisition is not None:
         return False if acquisition == 'free' else True
 
-    # Fallback
+    # Fallback if print export does set attributes unexpectedly
+    print_fallback = ('ZEI', 'ZMLB', 'ZTCS')
     product_id = getattr(getattr(content, 'product', None), 'id', None)
-    return product_id != u'ZEDE'
+    return product_id in print_fallback
 
 
 @zeit.web.register_test
