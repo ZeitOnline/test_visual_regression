@@ -316,4 +316,3 @@ def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
     assert tpl.module.no_block('') == ''
-
