@@ -106,7 +106,8 @@ class Base(zeit.web.core.view.Base):
     renderer='string')
 @pyramid.view.view_config(
     header='host:newsfeed(\.staging)?\.zeit\.de',
-    custom_predicates=(zeit.web.site.view.is_zon_content,))
+    # We need to be as specific as the normal views with `is_zon_content` etc.
+    custom_predicates=(lambda *_: True,))
 class Newsfeed(Base):
 
     def __call__(self):
