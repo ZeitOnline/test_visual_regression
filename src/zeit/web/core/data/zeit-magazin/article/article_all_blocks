@@ -77,7 +77,7 @@
         <title>Mei, is des traurig!</title>
         <subtitle>Die Münchner Schoppenstube hat dichtgemacht. Was erzählt uns das über die Gentrifizierung? Ein Erklärungsversuch.</subtitle>
         <byline>von  Marie Schmidt</byline>
-        <division type="page">
+        <division type="page" xmlns:ns0="http://namespaces.zeit.de/CMS/cp" ns0:__name__="id-678ba457-741c-4c5f-8cde-535405cd0654" teaser="&quot;Ich möchte Weiblichkeit behaupten&quot;">
             <intertitle>Die Käufer spekulieren auf den kommenden Boom</intertitle>
             <image align="left" src="http://xml.zeit.de/exampleimages/artikel/04/03.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
@@ -112,9 +112,7 @@
           <citation text="Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time!" attribution="Jules Winnfield" url="http://www.imdb.com/title/tt0110912/quotes?item=qt0447099" layout="wide"/>
           <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/administratives/autoreninfos/wenke-husmann-info" publication-date="" expires=""/>
           <p>Veritatis doloribus, laudantium sequi error similique suscipit aperiam quod beatae doloremque tempora perferendis eligendi rem ea laboriosam eos temporibus reiciendis omnis amet expedita cumque. Accusamus maxime iure voluptatum magni in numquam debitis voluptatibus, nulla!</p>
-      </division>
-      <division xmlns:ns0="http://namespaces.zeit.de/CMS/cp" ns0:__name__="id-678ba457-741c-4c5f-8cde-535405cd0654" type="page" teaser="&quot;Ich möchte Weiblichkeit behaupten&quot;">
-        <liveblog ns0:__name__="id-b79786c1-9be1-4000-b4c2-1b0ad83411ca" blogID="100"/>
-      </division>
+          <liveblog ns0:__name__="id-b79786c1-9be1-4000-b4c2-1b0ad83411ca" blogID="100"/>
+        </division>
     </body>
 </article>
