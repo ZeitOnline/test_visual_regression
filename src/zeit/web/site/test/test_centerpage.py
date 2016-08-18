@@ -392,5 +392,5 @@ def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(wrapper) == 1
     assert len(newsbox) == 1
-    assert len(linktext) >= 1
+    assert len(linktext) == 8
     assert len(section_heading_link) == 0
