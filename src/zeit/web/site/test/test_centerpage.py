@@ -388,7 +388,7 @@ def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
     newsbox = browser.cssselect(
         '.cp-area--newsticker'
         '.cp-area--newsticker-on-keywordpage')
-    linktext = browser.cssselect('.newsteaser__text--kw-tp-page')
+    linktext = browser.cssselect('.newsteaser__text--on-keywordpage')
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(wrapper) == 1
     assert len(newsbox) == 1

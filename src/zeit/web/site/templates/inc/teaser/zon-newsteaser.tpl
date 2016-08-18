@@ -5,7 +5,7 @@
         <time class="newsteaser__time">
            {{ teaser | mod_date | format_date(pattern='HH:mm', type='switch_from_hours_to_date' if ('keywordpage' or 'topicpage') in cp_type else '') }}
         </time>
-        <div class="{{ 'newsteaser__text' | with_mods('kw-tp-page' if ('keywordpage' or 'topicpage') in cp_type) }}">
+        <div class="{{ 'newsteaser__text' | with_mods('on-' ~ cp_type if ('keywordpage' or 'topicpage') == cp_type) }}">
             <h2 class="newsteaser__heading">
                 {%- if teaser.teaserSupertitle or teaser.supertitle -%}
                     <span class="newsteaser__kicker">
