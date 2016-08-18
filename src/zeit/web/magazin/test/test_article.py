@@ -148,7 +148,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '26: "article.column"' in webtrekk_config
 
     # noscript string
-    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
+    assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
             '{}/zeit-magazin/article/03,0,0,0,0,0,0,0,0&'
             'cg1=redaktion&cg2=article&'
@@ -178,7 +178,7 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '3: "2/7",' in webtrekk_config
 
     # noscript
-    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
+    assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
             '{}/zeit-magazin/article/03,0,0,0,0,0,0,0,0&'
             'cg1=redaktion&cg2=article&'
@@ -233,7 +233,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '26: "centerpage.ZMO",' in webtrekk_config
     assert '27: ""' in webtrekk_config
 
-    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
+    assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
             'redaktion.zeit-magazin...centerpage.zmlb%7C'
             '{}/zeit-magazin/index,0,0,0,0,0,0,0,0&cg1=redaktion&'
             'cg2=centerpage&cg3=zeit-magazin&cg4=zmlb&cg5=&cg6=&cg7=index&'
