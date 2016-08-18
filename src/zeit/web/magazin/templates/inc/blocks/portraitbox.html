@@ -1,0 +1,8 @@
+{% if block.name -%}
+    <figure class="portraitbox figure-stamp">
+        <div class="portraitbox-heading">
+            {{ block.name }}
+        </div>
+        {{ block.text | safe }}
+    </figure>
+{%- endif %}

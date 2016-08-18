@@ -33,26 +33,6 @@
     </div>
 {%- endmacro %}
 
-{% macro liveblog(liveblog) -%}
-    {% if liveblog.blog_id -%}
-        <div class="is-constrained is-centered">
-            {# TODO: We should mock the liveblog backend for local testing. #}
-            {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(liveblog.blog_id) %}
-            {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
-        </div>
-    {%- endif %}
-{%- endmacro %}x
-{% macro portraitbox(obj) -%}
-    {% if obj.name -%}
-        <figure class="portraitbox figure-stamp">
-            <div class="portraitbox-heading">
-                {{ obj.name }}
-            </div>
-            {{ obj.text | safe }}
-        </figure>
-    {%- endif %}
-{%- endmacro %}
-
 {% macro subpage_chapter(number, subtitle, class) -%}
     {% if subtitle -%}
         <div class="{{ class }}">
@@ -91,35 +71,6 @@
             {{- number }} &mdash; {{ subtitle -}}
         </div>
     {% endif %}
-{%- endmacro %}
-
-{% macro intertitle(intertitle) -%}
-    <h2 class="article__subheading is-constrained is-centered">
-        {{ intertitle | striptags }}
-    </h2>
-{%- endmacro %}
-
-{% macro citation(obj) -%}
-    <blockquote class="
-        {% if obj.layout == 'wide' %}
-            quote--wide
-        {% else %}
-            quote
-        {% endif %}
-    ">
-        <span class="quote__text">{{ obj.text }}</span>
-        {% if obj.attribution %}
-            {% if obj.url %}
-                <span class="quote__author">
-                    <a href="{{ obj.url }}">
-                        {{ obj.attribution }}
-                    </a>
-                </span>
-            {% else %}
-                <span class="quote__author">{{ obj.attribution }}</span>
-            {% endif %}
-        {% endif %}
-    </blockquote>
 {%- endmacro %}
 
 {% macro advertising(ad) -%}

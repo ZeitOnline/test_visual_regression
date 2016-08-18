@@ -27,21 +27,6 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     assert '' == str(tpl.module.subpage_chapter(0, '', '')).strip()
 
 
-def test_macro_portraitbox_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    obj = {'name': 'name', 'text': 'text'}
-
-    markup = ('<figure class="portraitbox figure-stamp">'
-              '<div class="portraitbox-heading">name</div>'
-              'text</figure>')
-    lines = tpl.module.portraitbox(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
@@ -102,46 +87,6 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
 
     # assert empty subtitle
     assert '' == tpl.module.subpage_head(1, '', css_class)
-
-
-def test_macro_intertitle_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    lines = tpl.module.intertitle("xy").splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    m = '<h2 class="article__subheading is-constrained is-centered">xy</h2>'
-    assert m == output
-
-
-def test_macro_citation_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-
-    # assert normal quote
-    obj = {'layout': 'quote', 'attribution': 'Autor',
-           'url': 'www.zeit.de', 'text': 'Text'}
-    lines = tpl.module.citation(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    markup = ('<blockquote class="quote"><span class="quote__text">'
-              'Text</span><span class="quote__author"><a href="www.zeit.de">'
-              'Autor</a></span></blockquote>')
-    assert markup == output
-
-    # assert wider quote
-    obj = {'layout': 'wide', 'attribution': 'Autor',
-           'url': 'www.zeit.de', 'text': 'Text'}
-    lines = tpl.module.citation(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    markup = ('<blockquote class="quote--wide"><span class="quote__text">'
-              'Text</span><span class="quote__author"><a href="www.zeit.de">'
-              'Autor</a></span></blockquote>')
-    assert markup == output
 
 
 def test_macro_advertising_should_produce_script(jinja2_env):
@@ -371,19 +316,4 @@ def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
     assert tpl.module.no_block('') == ''
-
-
-def test_macro_liveblog_produces_html(application, jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    tpl_module = tpl.make_module({'view': mock.Mock()})
-    liveblog = mock.Mock()
-    liveblog.blog_id = '999'
-    lines = tpl_module.liveblog(liveblog).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert ('<esi:include src="http://www.zeit.de/liveblog-backend/999.html" '
-            'onerror="continue" />') in output
-
 
