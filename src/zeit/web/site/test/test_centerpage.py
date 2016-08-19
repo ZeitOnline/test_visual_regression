@@ -13,6 +13,11 @@ import zeit.solr.interfaces
 
 import zeit.web.site.view_centerpage
 
+import babel
+from datetime import datetime
+from datetime import timedelta
+from zeit.web.core.template import format_date
+
 
 def get_num(x):
     return int(''.join(char for char in x.strip() if char.isdigit()))
@@ -350,3 +355,50 @@ def test_liveblog_teaser_respects_liveblog_status(testbrowser):
 
     assert len(liveblog) == 17
     assert len(offline) == 8
+
+
+def test_format_date_returns_expected_value_in_newsbox():
+    tz = babel.dates.get_timezone('Europe/Berlin')
+    now = datetime.now(tz)
+    before = now - timedelta(hours=5)
+    yesterday = now - timedelta(days=1)
+
+    assert 'Heute, ' + str(before.strftime('%H:%M'))\
+        == format_date(before, type="switch_from_hours_to_date")
+
+    day = str(yesterday.strftime('%d'))
+    assert day + '. ' + str(yesterday.strftime('%m. %Y')) \
+        == format_date(yesterday, type="switch_from_hours_to_date")
+
+    assert str(yesterday.strftime('%H:%M'))\
+        == format_date(yesterday, pattern="HH:mm")
+
+
+def test_newsbox_renders_correctly_on_homepage(testbrowser, datasolr):
+    browser = testbrowser('/zeit-online/slenderized-index-with-newsbox')
+    wrapper = browser.cssselect('.newsticker__column')
+    section_heading_link = browser.cssselect('.section-heading__link')
+    assert len(wrapper) == 2
+    assert len(section_heading_link) == 1
+
+
+def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
+    browser = testbrowser('/thema/oper')
+    newsbox = browser.cssselect(
+        '.cp-area--newsticker.cp-area--newsticker-on-keywordpage')
+    linktext = browser.cssselect('.newsteaser__text--on-keywordpage')
+    section_heading_link = browser.cssselect('.section-heading__link')
+    assert len(newsbox) == 1
+    assert len(linktext) == 8
+    assert len(section_heading_link) == 0
+
+
+def test_newsbox_renders_correctly_on_topicpage(testbrowser, datasolr):
+    browser = testbrowser('/thema/jurastudium')
+    newsbox = browser.cssselect(
+        '.cp-area--newsticker.cp-area--newsticker-on-topicpage')
+    linktext = browser.cssselect('.newsteaser__text--on-topicpage')
+    section_heading_link = browser.cssselect('.section-heading__link')
+    assert len(newsbox) == 1
+    assert len(linktext) == 8
+    assert len(section_heading_link) == 0
