@@ -579,3 +579,8 @@ def test_zplus_should_be_toggleable(application, monkeypatch):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/fischer')
     assert zeit.web.core.template.zplus_content(content) is False
+
+
+def test_zplus_badge_should_be_rendered(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--zplus')) == 1
