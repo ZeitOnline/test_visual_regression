@@ -4,7 +4,7 @@ Change log for zeit.web
 2.100 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-2861: Newsbox on keyword- and topicpages
 
 
 2.99 (2016-08-18)
