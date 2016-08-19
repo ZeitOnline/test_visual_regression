@@ -271,7 +271,7 @@ def format_date(date, type='short', pattern=None):
     elif type == 'switch_from_hours_to_date':
         delta = datetime.datetime.now(date.tzinfo) - date
         if delta.days >= int(1):
-            pattern = 'd. MM. yyyy'
+            pattern = 'dd. MM. yyyy'
         elif delta.days < int(1):
             pattern = "'Heute,' HH:mm"
     if pattern is None:
