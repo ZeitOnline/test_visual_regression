@@ -530,6 +530,7 @@ class DataSolr(object):
                         u'teaser_text': content.teaserText,
                         u'title': content.title,
                         u'type': content.__class__.__name__.lower(),
+                        u'acquisition': 'free',
                         u'uniqueId': content.uniqueId})
                 except (AttributeError, AssertionError, TypeError):
                     continue
