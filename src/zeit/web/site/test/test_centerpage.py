@@ -385,9 +385,19 @@ def test_newsbox_renders_correctly_on_homepage(testbrowser, datasolr):
 def test_newsbox_renders_correctly_on_keywordpage(testbrowser, datasolr):
     browser = testbrowser('/thema/oper')
     newsbox = browser.cssselect(
-        '.cp-area--newsticker'
-        '.cp-area--newsticker-on-keywordpage')
+        '.cp-area--newsticker.cp-area--newsticker-on-keywordpage')
     linktext = browser.cssselect('.newsteaser__text--on-keywordpage')
+    section_heading_link = browser.cssselect('.section-heading__link')
+    assert len(newsbox) == 1
+    assert len(linktext) == 8
+    assert len(section_heading_link) == 0
+
+
+def test_newsbox_renders_correctly_on_topicpage(testbrowser, datasolr):
+    browser = testbrowser('/thema/jurastudium')
+    newsbox = browser.cssselect(
+        '.cp-area--newsticker.cp-area--newsticker-on-topicpage')
+    linktext = browser.cssselect('.newsteaser__text--on-topicpage')
     section_heading_link = browser.cssselect('.section-heading__link')
     assert len(newsbox) == 1
     assert len(linktext) == 8
