@@ -367,7 +367,7 @@ def test_format_date_returns_expected_value_in_newsbox():
         == format_date(before, type="switch_from_hours_to_date")
 
     day = str(yesterday.strftime('%d'))
-    assert day.lstrip('0') + '. ' + str(yesterday.strftime('%m. %Y')) \
+    assert day + '. ' + str(yesterday.strftime('%m. %Y')) \
         == format_date(yesterday, type="switch_from_hours_to_date")
 
     assert str(yesterday.strftime('%H:%M'))\
