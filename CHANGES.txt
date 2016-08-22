@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2861: Newsbox on keyword- and topicpages
 
+- BUG-481: Restrict gallery images to 100% of container width
+
 
 2.99 (2016-08-18)
 -----------------
