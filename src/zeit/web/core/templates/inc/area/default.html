@@ -29,7 +29,24 @@
                 "{0}:templates/inc/teaser/{1}.tpl".format(view.package, layout),
                 "{0}:templates/inc/module/{1}.html".format("zeit.web.core", layout),
                 "{0}:templates/inc/teaser/default.tpl".format(view.package)] %}
-            {% block after_module_include scoped %}{% endblock %}
+            {% block after_module_include scoped %}
+            {#
+            Display mobile ad place 3 in zon on homepage after the first module that's not a raw element, assuming for now, that there will be:
+            - only ONE raw element at the start of the first region (like olympia navigation)
+            - that the raw contains navigational elements and the ad should be placed after the first teaser, not the raw itself
+            #}
+            {%
+                if view.package == 'zeit.web.site'
+                and view.is_hp
+                and region_loop.index == 1
+                and area_loop.index == 1
+                and module_loop.index < 3
+            %}
+                {% if (module_loop.index == 1 and layout != 'rawtext') or ( module_loop.index == 2 )  %}
+                {{ lama.adplace(view.banner(3), view, mobile=True) }}
+                {% endif %}
+            {% endif %}
+            {% endblock %}
         {% endfor %}
     {% endblock module_list %}
     {% block after_module_list %}{% endblock %}
