@@ -460,8 +460,9 @@ class NewsletterTeaser(Block):
         # XXX We should not hardcode the host, but newsletter is rendered on
         # friedbert-preview, which can't use `image_host`. Should we introduce
         # a separate setting?
+        host = 'http://www.zeit.de'
         if image:
-            return 'http://www.zeit.de{}__148x84'.format(image.path)
+            return host + image.group.variant_url(image.variant_id, 148, 84)
 
     @property
     def videos(self):
