@@ -43,13 +43,22 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
     :param context:     Context of which to extract the image from
     :param fallback:    Whether missing image should render a fallback
     :param variant_id:  Override for automatic variant_id determination
-    :param fill_color:  Fill images with transparent background with color
+    :param fill_color:  Fill images with transparent background with color:
                             True    Determine automatically
                             False   Keep background transparent
                             'red'   Red fill color
                             '00F'   Blue fill color
-    :param name:        If image extraction for a context type is overloaded,
-                        use default u'' or choose named adapter like 'sharing'
+    :param name:        Image extraction for a specific context type can be
+                        overloaded with multiple extraction methods.
+                        These can be applied via the name parameter:
+                            content Select the first element from a container
+                                    object and retrieve the image from there
+                                    (e.g. first entry of a gallery or first
+                                     teaser in a block)
+                            sharing Select an image suitable for sharing the
+                                    content item on social media platforms
+                            author  Select the (first) author's portrait
+
     :rtype:             zeit.web.core.interfaces.IImage
     """
 
