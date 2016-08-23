@@ -4,6 +4,8 @@ Change log for zeit.web
 2.100 (unreleased)
 ------------------
 
+- BUG-499: Fix xml.zeit.de routing for column articles
+
 - ZON-2861: Newsbox on keyword- and topicpages
 
 - OPS-386: Refactor ZMO article-macros (Part: Article Blocks)
