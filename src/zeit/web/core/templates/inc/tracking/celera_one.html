@@ -10,6 +10,7 @@
             cre_client.request();
         }
     };
+    var head = document.getElementsByTagName('head')[0]
     var script = document.createElement( 'script' );
     var done = false;
 
@@ -20,10 +21,10 @@
             done = true;
             sendClientRequest();
             script.onload = script.onreadystatechange = null;
-            document.head.removeChild( script );
+            head.removeChild( script );
         };
     };
-    document.head.appendChild( script );
+    head.appendChild( script );
 })();
 </script>
 {% endif %}
