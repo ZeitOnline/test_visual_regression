@@ -8,7 +8,6 @@
 		<display_name py:pytype="str">Zacharias Zacharakis</display_name>
 	</author>
 	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
-	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
 	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Zacharias Zacharakis</attribute>
 	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
 	<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>

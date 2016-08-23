@@ -11,7 +11,7 @@
 {% set target_url = teaser.uniqueId | create_url %}
 
 <article class="{{ blockname | with_mods(blockname_modifier) }}
-    {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}" data-clicktracking="{{ area.kind }}" {% if teaser is zplus_content %}data-zplus="true"{% endif %}>
+    {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}" data-clicktracking="{{ area.kind }}">
     <header class="{{ '{}__header'.format(blockname) | with_mods(blockname_modifier) }}">
         {# get the image directly from the supplied image group #}
         {% set image = get_image(module, variant_id='cinema') %}
@@ -21,12 +21,7 @@
 
         <div class="{{ '{}__headercontent'.format(blockname) | with_mods(blockname_modifier) }}">
             <a class="{{ blockname }}__link" href="{{ target_url }}">
-                <span class="{{ blockname }}__kicker">
-                {% if teaser is zplus_content %}
-                    {{ lama.use_svg_icon('zplus', blockname + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
-                {% endif %}
-                {{ teaser.teaserSupertitle or teaser.supertitle }}
-                </span>
+                <span class="{{ blockname }}__kicker">{{ teaser.teaserSupertitle or teaser.supertitle }}</span>
                 {%- if teaser.teaserSupertitle or teaser.supertitle -%}
                 <span class="visually-hidden">: </span>
                 {% endif -%}
