@@ -63,7 +63,7 @@
         </topiclinks>
     </head>
     <body>
-        <title>CP-Editor 0.4</title>
+        <title>Z+ Teaser</title>
         <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True" kind="solo">
             <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
                 <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
@@ -81,6 +81,14 @@
                         <author expires="" href="http://xml.zeit.de/autoren/M/Test_Mann-2/index" publication-date="">
                             <display_name>Test Mann</display_name>
                         </author>
+                    </block>
+                </container>
+            </region>
+        </cluster>
+        <cluster area="id-b2dff7f3-9042-4a6f-a88d-143fdfc5cff3" visible="True" kind="solo">
+            <region area="id-6280c8ee-b68e-40dd-a117-4d681e282599" visible="True" kind="solo">
+                <container cp:__name__="id-622112b4-de48-9298-aac9-fa71dbde397a" cp:type="teaser" hide-dupes="True" module="leader-fullwidth" visible="True">
+                    <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/article/fischer">
                     </block>
                 </container>
             </region>
@@ -107,6 +115,14 @@
             <region area="id-da65a250-0482-4ce8-b662-5ca24af05062" visible="True" kind="minor">
                 <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe3b7" cp:type="teaser" hide-dupes="True" module="zon-square" visible="True">
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
+                    </block>
+                </container>
+                <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/cp-content/article-01" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01" year="2008">
+                    </block>
+                </container>
+                <container cp:__name__="id-bab27568-9d14-4553-ab76-70310bf45317" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+                    <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/fischer" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/fischer" year="2008">
                     </block>
                 </container>
             </region>
@@ -156,9 +172,34 @@
                 <container cp:type="auto-teaser" module="zon-gallery" visible="True" cp:__name__="id-a9cb1735-6a36-2401-afef-6e19baf544e3"/>
             </region>
         </cluster>
+
+        <cluster area="id-9e096c63-ca17-45f8-832c-867a6ad78505" kind="parquet" title="Parkett">
+            <region hide-dupes="True" area="id-d1ac1fc9-8640-4f32-96d8-8f956f04a7fb" kind="parquet" title="Z+ Parkett" read_more="mehr" read_more_url="http://www.zeit.de/politik/index">
+                <referenced_cp>http://xml.zeit.de/zeit-online/parquet</referenced_cp>
+                <container cp:type="teaser" module="zon-large" cp:__name__="id-9644ea40-0b1a-415f-9be9-38310b9bbdd2">
+                    <block href="http://xml.zeit.de/zeit-online/article/02"/>
+                </container>
+                <container cp:type="teaser" module="zon-large" cp:__name__="id-84169f27-ebff-48c0-a630-d08841984dd6">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+                </container>
+                <container cp:type="teaser" module="zon-large" cp:__name__="id-15218f5d-4cf2-4aa4-be2f-82597116ddd2" force_mobile_image="True">
+                    <block href="http://xml.zeit.de/zeit-online/article/fischer"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-9644ea40-0b1a-415f-9be9-38310b9bbcc2">
+                    <block href="http://xml.zeit.de/zeit-online/article/02"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-84169f27-ebff-48c0-a630-d08841984aa6">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-15218f5d-4cf2-4aa4-be2f-82597116cba2" force_mobile_image="True">
+                    <block href="http://xml.zeit.de/zeit-online/article/fischer"/>
+                </container>
+            </region>
+        </cluster>
+
     </body>
     <feed/>
     <teaser>
-        <title>CP-Editor 0.4</title>
+        <title>Z+ Teaser</title>
     </teaser>
 </centerpage>
