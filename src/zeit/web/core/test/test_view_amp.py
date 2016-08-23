@@ -55,8 +55,8 @@ def test_amp_contains_required_microdata(testbrowser):
     assert image.cssselect('[itemprop="url"]')[0].get('content') == (
         'http://localhost/zeit-online/image/'
         'filmstill-hobbit-schlacht-fuenf-hee/wide__822x462')
-    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
-    assert image.cssselect('[itemprop="height"]')[0].get('content') == '461'
+    assert image.cssselect('[itemprop="width"]')[0].get('content') == '822'
+    assert image.cssselect('[itemprop="height"]')[0].get('content') == '462'
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
