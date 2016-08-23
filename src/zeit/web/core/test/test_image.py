@@ -18,11 +18,12 @@ import zeit.web.core.template
 import zeit.web.core.view_image
 
 
-def test_image_download(appbrowser):
+def test_original_image_download(appbrowser):
     result = appbrowser.get('/zeit-online/image/weltall/original')
     image = Image.open(StringIO(''.join(result.app_iter)))
     assert image.size == (460, 460)
-    assert int(result.headers['Content-Length']) == 55509
+    assert abs(int(result.headers['Content-Length']) - 55 * 1024) < 1024, (
+        'The downloaded image should be roughly 55KB in size')
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
         'inline; filename="weltall.jpeg"')
@@ -32,7 +33,8 @@ def test_scaled_image_download(appbrowser):
     result = appbrowser.get('/zeit-online/image/weltall/wide__80x60')
     image = Image.open(StringIO(''.join(result.app_iter)))
     assert image.size == (80, 60)
-    assert int(result.headers['Content-Length']) < 55509
+    assert abs(int(result.headers['Content-Length']) - 3 * 1024) < 1024, (
+        'The scaled image should be roughly 3KB in size')
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
         'inline; filename="weltall.jpeg"')
@@ -43,7 +45,8 @@ def test_synthetic_image_download(appbrowser):
         '/zeit-magazin/images/local/01.jpg/imagegroup/original')
     image = Image.open(StringIO(''.join(result.app_iter)))
     assert image.size == (580, 326)
-    assert int(result.headers['Content-Length']) == 33495
+    assert abs(int(result.headers['Content-Length']) - 33 * 1024) < 1024, (
+        'The synthetic original should be roughly 33KB in size')
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
         'inline; filename="imagegroup.jpeg"')
@@ -51,10 +54,11 @@ def test_synthetic_image_download(appbrowser):
 
 def test_scaled_synthetic_image_download(appbrowser):
     result = appbrowser.get(
-        '/zeit-magazin/images/local/01.jpg/imagegroup/wide__80x60')
+        '/zeit-magazin/images/local/01.jpg/imagegroup/wide__320x180')
     image = Image.open(StringIO(''.join(result.app_iter)))
-    assert image.size == (80, 60)
-    assert int(result.headers['Content-Length']) < 33495
+    assert image.size == (320, 180)
+    assert abs(int(result.headers['Content-Length']) - 15 * 1024) < 1024, (
+        'The synthetic scale should be roughly 15KB in size')
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
         'inline; filename="imagegroup.jpeg"')
