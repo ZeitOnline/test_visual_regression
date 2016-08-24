@@ -12,6 +12,9 @@ Change log for zeit.web
 
 - OPS-386: Refactor ZMO article-macros (Part: Article Blocks)
 
+- BUG-493: Add spacing to column items in mobile navigation
+
+- BUG-397: Disable jobbox if feed is empty
 
 
 2.99 (2016-08-18)
