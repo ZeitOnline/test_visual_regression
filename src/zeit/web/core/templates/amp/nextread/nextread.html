@@ -1,6 +1,6 @@
 {% set image = get_image(module, fallback=False) %}
 <aside class="nextread nextread--{{ 'with-image' if image else 'no-image' }}">
-    <a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}">
+    <a class="nextread__link" title="{{ teaser.supertitle }}: {{ teaser.title }}" href="{{ teaser | create_url }}" data-vars-url="{{ teaser | create_url }}">
         <div class="nextread__lead article__item">{{ module.lead or 'Lesen Sie jetzt' }}</div>
 
         {% include "zeit.web.core:templates/amp/asset/image_nextread.html" %}

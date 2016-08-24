@@ -1,8 +1,18 @@
 Change log for zeit.web
 =======================
 
-2.99 (unreleased)
+2.100 (unreleased)
+------------------
+
+- ZON-2861: Newsbox on keyword- and topicpages
+
+- BUG-481: Restrict gallery images to 100% of container width
+
+
+2.99 (2016-08-18)
 -----------------
+
+- BUG-497: Wrap auto-teaser blocks in zeit.web module classes just like normal teasers
 
 - ZON-3280: Enable RSS feeds for non-ZON content
 
@@ -10,9 +20,9 @@ Change log for zeit.web
 
 - ZON-2389: Make Webtrekk-ID configurable (for staging)
 
-- FIX: Don't break when a ranking area is automatic=False
+- ZON-3183: Add webtrekk clicktracking to amp pages
 
-- BUG-497: Wrap auto-teaser blocks in zeit.web module classes just like normal teasers
+- FIX: Don't break when a ranking area is automatic=False
 
 
 2.98.1 (2016-08-16)
@@ -97,6 +107,8 @@ Change log for zeit.web
 - ZON-3099: Render xml.zeit.de
 
 - ZON-3197: SSL version of framebuilder
+
+- ZON-3238: Add advertorials from submenues to mobile navigation
 
 - MAINT: Combine image fallback and fallback_expired into one condition
 
