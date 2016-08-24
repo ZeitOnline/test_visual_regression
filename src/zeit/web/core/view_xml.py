@@ -115,6 +115,9 @@ class Centerpage(object):
     request_method='GET')
 @pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(
+    context=zeit.content.article.interfaces.IArticle,
+    custom_predicates=(lambda *_: True, lambda *_: True, lambda *_: True))
 @pyramid.view.view_config(context=zeit.content.author.interfaces.IAuthor)
 @pyramid.view.view_config(context=zeit.content.link.interfaces.ILink)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
