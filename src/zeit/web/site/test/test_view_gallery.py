@@ -67,7 +67,7 @@ def test_zon_gallery_image_max_widths(selenium_driver, testserver):
         cond = expected_conditions.presence_of_element_located(
             (By.CLASS_NAME, "bx-wrapper"))
         WebDriverWait(driver, 10).until(cond)
-        windowWidth = driver.execute_script('return window.innerWidth')
+        windowWidth = driver.execute_script('return document.body.clientWidth')
         portraitImageWidth = driver.execute_script(
             'return {}[1].width'.format(query))
         assert portraitImageWidth == windowWidth
@@ -83,7 +83,7 @@ def test_zon_gallery_image_max_widths(selenium_driver, testserver):
     try:
         cond = expected_conditions.presence_of_element_located(
             (By.CLASS_NAME, "bx-wrapper"))
-        windowWidth = driver.execute_script('return window.innerWidth')
+        windowWidth = driver.execute_script('return document.body.clientWidth')
         portraitImageWidth = driver.execute_script(
             'return {}[1].width'.format(query))
         assert portraitImageWidth == 461
