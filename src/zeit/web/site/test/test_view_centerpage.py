@@ -1449,6 +1449,15 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.jobbox__action'))
 
 
+def test_jobbox_is_not_displayed_whith_empty_feed(tplbrowser):
+    module = mock.Mock()
+    module = ()
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/module/jobbox.html',
+        module=module)
+    assert browser.contents == ''
+
+
 def test_partnerbox_jobs_is_displayed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/partnerbox-jobs')
 
