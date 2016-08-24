@@ -4,6 +4,8 @@ Change log for zeit.web
 2.100 (unreleased)
 ------------------
 
+- BUG-504: Fix position of adplace 3 for mobile
+
 - BUG-499: Fix xml.zeit.de routing for column articles
 
 - BUG-481: Restrict gallery images to 100% of container width
