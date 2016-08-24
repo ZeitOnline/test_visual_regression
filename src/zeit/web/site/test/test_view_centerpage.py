@@ -2340,3 +2340,9 @@ def test_dynamic_cps_consider_teaser_image_fill_color(testbrowser):
 
     assert image1.attrib['data-src'].endswith('__A3E6BB')
     assert not image2.attrib['data-src'].endswith('__')
+
+
+def test_imagecopyright_includes_videostage_poster_copyright(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
+    figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
+    assert len(figures) == 5

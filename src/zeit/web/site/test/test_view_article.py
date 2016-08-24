@@ -1696,3 +1696,10 @@ def test_contentad_is_rendered_once_on_article_pages(testbrowser):
 
     browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
     assert len(browser.cssselect(selector)) == 1
+
+
+def test_video_in_article_has_poster_copyright(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    figure_copyright = browser.cssselect('.video-figure__copyright')
+    assert len(figure_copyright) == 1
+    assert figure_copyright[0].text.startswith('© Foto: ')
