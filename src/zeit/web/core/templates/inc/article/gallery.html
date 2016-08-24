@@ -5,7 +5,7 @@
         <div class="gallery-slides js-gallery">
             {% for entry in gallery | reject("hidden_slide") -%}
                 {% set image_loop = loop %}
-                {% set image = get_image(entry) %}
+                {% set image = get_image(entry, fallback=False) %}
                 {% include 'zeit.web.core:templates/inc/asset/image_gallery.tpl' %}
             {%- endfor %}
         </div>

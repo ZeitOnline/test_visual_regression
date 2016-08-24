@@ -1,7 +1,7 @@
 {% extends 'zeit.web.campus:templates/inc/article-header/default.html' %}
 
 {% block article_header %}
-    {% set image = get_image(view.context, name='author', variant_id='portrait') -%}
+    {% set image = get_image(view.context, name='author', variant_id='portrait', fallback=False) -%}
     {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}
     <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
         {% if image -%}

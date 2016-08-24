@@ -1,6 +1,6 @@
 {%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
 
-{% set image = get_image(block) %}
+{% set image = get_image(block, fallback=False) %}
 {% set module_layout = 'article' %}
 
 {% set href = image.href %}
