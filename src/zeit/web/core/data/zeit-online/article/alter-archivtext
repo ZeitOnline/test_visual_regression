@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <article>
   <head>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">registration</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="new_comments">1</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="revision">42</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">÷-Scientologen</attribute>

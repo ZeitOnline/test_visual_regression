@@ -573,6 +573,12 @@ def test_zplus_is_true_for_abo_articles(application):
     assert zeit.web.core.template.zplus_content(content) is True
 
 
+def test_zplus_is_false_for_registration_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/alter-archivtext')
+    assert zeit.web.core.template.zplus_content(content) is False
+
+
 def test_zplus_should_be_toggleable(application, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'reader_revenue': False}.get)
