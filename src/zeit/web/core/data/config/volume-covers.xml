@@ -1,0 +1,5 @@
+<covers>
+  <cover id="printcover">PRINT Cover aufgeklappt</cover>
+  <cover id="coverimage">Cover breit für digital</cover>
+  <cover id="devices">Cover in Mobilgerät</cover>
+</covers>

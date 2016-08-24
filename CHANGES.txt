@@ -4,9 +4,14 @@ Change log for zeit.web
 2.100 (unreleased)
 ------------------
 
-- ZON-2861: Newsbox on keyword- and topicpages
+- BUG-499: Fix xml.zeit.de routing for column articles
 
 - BUG-481: Restrict gallery images to 100% of container width
+
+- ZON-2861: Newsbox on keyword- and topicpages
+
+- OPS-386: Refactor ZMO article-macros (Part: Article Blocks)
+
 
 
 2.99 (2016-08-18)
