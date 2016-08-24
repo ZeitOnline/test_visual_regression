@@ -1,5 +1,5 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-
+{% if module | length > 0 %}
 <aside class="{{ 'jobbox' | with_mods(area.kind) }}{% block jobbox_modifier %} jobbox--animate{% endblock %}">
 	{% block jobbox_toplabel %}<span class="jobbox__label">Verlagsangebot</span>{% endblock %}
 	<div class="jobbox__container">
@@ -33,3 +33,4 @@
 		</div>
 	</div>
 </aside>
+{% endif %}
