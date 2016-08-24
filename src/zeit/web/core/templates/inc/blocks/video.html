@@ -17,6 +17,12 @@
     <figcaption class="video-figure__caption">
         <span class="video-figure__pagetitle">{{ [block.supertitle, block.title] | join_if_exists(' - ') }}</span>
         <span class="video-figure__description">{{ block.description }}</span>
+        {# TODO: Schema.org Check. Und: Kann man auf den inneren span verzichten? #}
+        {% if block.credit and block.credit | trim | length > 7 %}
+            <span class="video-figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
+                <span itemprop="name">{{ block.credit | trim | replace('© Foto: ', '© Foto: ') }}</span>
+            </span>
+        {% endif %}
     </figcaption>
     {%- endblock %}
 
