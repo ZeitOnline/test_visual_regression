@@ -152,7 +152,7 @@ def zplus_content(content):
     acquisition = getattr(content, 'acquisition', None)
 
     if acquisition is not None:
-        return False if acquisition == 'free' else True
+        return acquisition == 'abo'
 
     # Fallback if print export does set attributes unexpectedly
     print_fallback = ('ZEI', 'ZMLB', 'ZTCS')

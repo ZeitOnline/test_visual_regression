@@ -567,7 +567,7 @@ def test_zplus_is_true_for_print_articles(application):
     assert zeit.web.core.template.zplus_content(content) is True
 
 
-def test_zplus_is_true_for_registration_articles(application):
+def test_zplus_is_true_for_abo_articles(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/fischer')
     assert zeit.web.core.template.zplus_content(content) is True

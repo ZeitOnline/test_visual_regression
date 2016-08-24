@@ -53,7 +53,7 @@
         </author>
       </reference>
     </references>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="acquisition">registration</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Julia Zange</attribute>
