@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <author href="http://xml.zeit.de/autoren/R/Arndt-Fabian_Rohlfing/index" publication-date="" expires="">
+      <display_name>Arndt-Fabian Rohlfing</display_name>
+    </author>
+    <author href="http://xml.zeit.de/autoren/F/Oliver_Fritsch-2/index" publication-date="" expires="">
+      <display_name>Oliver Fritsch</display_name>
+    </author>
+    <references></references>
+    <rankedTags>
+      <tag uuid="dc176d0f-0f66-4618-be8d-6a3263bdf8f0" url_value="" type="Person">Pep Guardiola</tag>
+      <tag uuid="a7564f25-99a7-4573-9012-593297014cbd" url_value="" type="free">Champions League</tag>
+      <tag uuid="c454966c-8bf1-41de-96e6-9a49dfa52ab7" url_value="" type="Organization">FC Bayern München</tag>
+      <tag type="Organization" score="5" uuid="71def803-0c8b-4c36-8f7b-085137a2a187" url_value="fc-barcelona">FC Barcelona</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/zeit-online/liveblog/champions-league-bilder/messi/" type="jpg" title="Messi" alt="Messi" align="left" publication-date="" expires="">
+      <bu>Lionel Messi feiert sein Tor gegen die Bayern. </bu>
+      <copyright>© Reuters / Albert Gea</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Arndt-Fabian Rohlfing;Oliver Fritsch</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Sport</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-05-06T22:08:10.316525+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-06T18:11:02.806202+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-05-06T22:08:36.258293+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-05-06T22:09:36.165529+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-05-06T21:52:15.953384+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-05-06T21:52:16.001552+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-05-06T22:08:33.337605+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.rvd-spaet-ersatz</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Wer siegt: Original oder Kopie?</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/sport/2015-05/b09d29a0-0e09-478a-9a1c-d34ed8ff7607.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">343efef53c6c49e5a198957a872bf56d</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Sport</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">70 Jahre DIE ZEIT</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Messi war verboten gut. #FCBFCB</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-liveblog</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">2616</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e888f61c-5ee0-49e7-82ab-febb9c955342}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">18</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Live-Blog Champions League</supertitle>
+    <title>Und dann kam Messi</title>
+    <subtitle>Barcelona war viel stärker als Bayern, doch lange hielt Neuer das 0:0. Wäre da nicht Messi gewesen. Was für ein Stürmer! Das Spiel zum Nachlesen im Live-Blog</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/liveblog/champions-league-bilder/messi/" type="jpg" title="Messi" alt="Messi" align="left" publication-date="" expires="" layout="large" is_empty="False">
+        <bu>Lionel Messi feiert sein Tor gegen die Bayern. </bu>
+        <copyright>© Reuters / Albert Gea</copyright>
+      </image>
+      <p>Das war mehr als ein Fußballspiel. Der FC Bayern wird vom FC Barcelona deutlich geschlagen. Barça war der Favorit, aber mit dieser Überlegenheit hatten nicht viele gerechnet. Es war eine Niederlage fast in der Klinsmann-Dimension. Nach dem demütigen 0:7 vor zwei Jahren sieht das nach einer gelungenen Revanche für die Katalanen aus.</p>
+      <p>Der Sieg war hochverdient. Dennoch war es unnötig für die Bayern, mit drei Toren Unterschied zu verlieren. Der überaus hervorragende Manuel Neuer hielt lange das 0:0. Mindestens zwei von drei Toren passierten nach Fehlern im eigenen Ballbesitz. Das Führungstor fiel spät. Und es fiel, als die Bayern die Kontrolle gewonnen zu haben schienen.</p>
+      <p>Auch ungewöhnlich: Dass Bayern nach dem ersten Tor so zerbrach. Das legt die Frage nahe: Wie wäre das Spiel ausgegangen, wenn Barça früher getroffen hätte?</p>
+      <p>Bayern München sah bis auf Neuer alt aus. Xabi Alonso, Bastian Schweinsteiger, selbst Philipp Lahm waren dem Tempo und dem Geschick des Gegners nicht gewachsen. Das riecht nach baldigem Umbruch. Bayern München sah aber auch jung aus, denn Juan Bernat beging den spielentscheidenden Fehler, in der Nähe des eigenen Strafraums gegen zwei Gegenspieler ins Dribbling zu gehen. Das war unerfahren.</p>
+      <p>Jérôme Boateng verteidigte eigentlich sehr gut, aber beim 2:0 fiel er wie eine Lenin-Statue vor einem Vierteljahrhundert. Er bekam Trost von Robert Huth, der twitterte: "Es gibt nichts unangenehmeres für einen Abwehrspieler als rückwärtslaufend in ein Eins-gegen-Eins mit Messi zu gehen." Ist das nicht verboten, was Messi da mit Boateng gemacht hat?<br/></p>
+      <p>Und da sind wir beim Spieler des Spiels, dem Spieler des Planeten. Lionel Messi ist nach ein paar (in seinen Maßstäben) durchschnittlichen Jahren wieder in Form. Ein paar Burger weniger, das Ansatz zum Doppelkinn ist weg und schon läufts wieder. Das 2:0 war himmlisch.</p>
+      <p>Es gibt selbst an diesem Abend Trost für den deutschen Fußballfan: Wäre Messi im WM-Jahr so drauf gewesen ...<em><br/></em><br/></p>
+      <liveblog blogID="166-201"/>
+      <p>
+        <em>Vorbemerkung</em>
+      </p>
+      <p>Halbfinale der Champions League, es ist das Los der Lose. FC Barcelona gegen Bayern München. Original gegen Kopie. Ursprungsdatei gegen Upgrade. Guardiola trifft auf seine Ex. Pep is coming home. Ist die Spannung noch auszuhalten?</p>
+      <p>Christian Spiller ist auf Dienstreise im Camp Nou, twittert dort. Wir, Arndt-Fabian Rohlfing und Oliver Fritsch, bloggen ab 20.15 Uhr an dieser Stelle live.</p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Live-Blog Champions League</supertitle>
+    <title>Und dann kam Messi</title>
+    <text>Barcelona war viel stärker als Bayern, doch lange hielt Neuer das 0:0. Wäre da nicht Messi gewesen. Was für ein Stürmer! Das Spiel zum Nachlesen im Live-Blog</text>
+  </teaser>
+</article>

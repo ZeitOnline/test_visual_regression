@@ -4,6 +4,8 @@ Change log for zeit.web
 2.100 (unreleased)
 ------------------
 
+- BUG-504: Fix position of adplace 3 for mobile
+
 - BUG-499: Fix xml.zeit.de routing for column articles
 
 - BUG-481: Restrict gallery images to 100% of container width
@@ -15,6 +17,8 @@ Change log for zeit.web
 - BUG-493: Add spacing to column items in mobile navigation
 
 - BUG-397: Disable jobbox if feed is empty
+
+- BUG-492: Remove series banner from breaking news and embed header articles
 
 
 2.99 (2016-08-18)
