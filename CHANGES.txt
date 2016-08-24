@@ -12,8 +12,6 @@ Change log for zeit.web
 
 - OPS-386: Refactor ZMO article-macros (Part: Article Blocks)
 
-- BUG-481: Restrict gallery images to 100% of container width
-
 
 
 2.99 (2016-08-18)
