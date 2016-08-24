@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - BUG-397: Disable jobbox if feed is empty
 
+- BUG-492: Remove series banner from breaking news and embed header articles
+
 
 2.99 (2016-08-18)
 -----------------
