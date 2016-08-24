@@ -510,6 +510,7 @@ class DataSolr(object):
                     semantic = zeit.cms.content.interfaces.ISemanticChange(
                         content)
                     assert zeit.web.core.view.known_content(content)
+                    # XXX acquisition is mocked statically until ZON-3286
                     results.append({
                         u'authors': content.authors,
                         u'date-last-modified': (

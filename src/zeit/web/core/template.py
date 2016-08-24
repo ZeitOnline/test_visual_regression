@@ -149,6 +149,7 @@ def zplus_content(content):
         return False
 
     # Use Acquisition attribute
+    # XXX acquisition is set statically for mocksolr in utils.py until ZON-3286
     acquisition = getattr(content, 'acquisition', None)
 
     if acquisition is not None:
