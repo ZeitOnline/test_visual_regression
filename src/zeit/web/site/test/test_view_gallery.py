@@ -56,3 +56,40 @@ def test_gallery_should_contain_veeseo_widget(testbrowser):
     select = testbrowser('/zeit-online/gallery/biga_1').cssselect
     assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
     assert select('.RA2VW2')
+
+
+def test_zon_gallery_image_max_widths(selenium_driver, testserver):
+    driver = selenium_driver
+    query = 'document.querySelectorAll(".gallery__media-item")'
+    selenium_driver.set_window_size(320, 568)
+    driver.get('%s/zeit-online/gallery/biga_1' % testserver.url)
+    try:
+        cond = expected_conditions.presence_of_element_located(
+            (By.CLASS_NAME, "bx-wrapper"))
+        WebDriverWait(driver, 10).until(cond)
+        windowWidth = driver.execute_script('return document.body.clientWidth')
+        portraitImageWidth = driver.execute_script(
+            'return {}[1].width'.format(query))
+        assert portraitImageWidth == windowWidth
+
+        landscapeImageWidth = driver.execute_script(
+            'return {}[2].width'.format(query))
+        assert landscapeImageWidth == windowWidth
+    except TimeoutException:
+        assert False, 'Timeout gallery script'
+
+    selenium_driver.set_window_size(600, 568)
+    driver.refresh()
+    try:
+        cond = expected_conditions.presence_of_element_located(
+            (By.CLASS_NAME, "bx-wrapper"))
+        windowWidth = driver.execute_script('return document.body.clientWidth')
+        portraitImageWidth = driver.execute_script(
+            'return {}[1].width'.format(query))
+        assert portraitImageWidth == 461
+
+        landscapeImageWidth = driver.execute_script(
+            'return {}[2].width'.format(query))
+        assert landscapeImageWidth == windowWidth
+    except TimeoutException:
+        assert False, 'Timeout gallery script'
