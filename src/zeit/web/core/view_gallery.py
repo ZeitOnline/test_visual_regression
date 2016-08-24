@@ -1,7 +1,8 @@
+import lxml.objectify
+
 import zeit.wysiwyg.interfaces
 
 import zeit.web
-
 import zeit.web.magazin.view
 
 
@@ -15,7 +16,11 @@ class Gallery(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def gallery(self):
-        return zeit.web.core.block.Gallery(self.context)
+        # We synthesize a gallery reference block to reuse the block template
+        block = zeit.content.article.edit.reference.Gallery(
+            self.context, lxml.objectify.E.gallery())
+        block.references = self.context
+        return zeit.web.core.interfaces.IFrontendBlock(block)
 
     @zeit.web.reify
     def banner_type(self):

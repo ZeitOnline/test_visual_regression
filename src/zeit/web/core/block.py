@@ -398,11 +398,13 @@ class HeaderVideo(Video):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IGallery)
 class Gallery(Block):
 
+    def __new__(cls, context):
+        if context.references is None:
+            return None
+        return super(Gallery, cls).__new__(cls, context)
+
     def __init__(self, context):
-        if zeit.content.article.edit.interfaces.IReference.providedBy(
-                context):
-            context = context.references
-        self.context = context
+        self.context = context.references
 
     def __iter__(self):
         return iter(self._values)
