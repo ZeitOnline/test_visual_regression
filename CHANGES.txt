@@ -1,7 +1,13 @@
 Change log for zeit.web
 =======================
 
-2.100 (unreleased)
+2.101 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+2.100 (2016-08-25)
 ------------------
 
 - BUG-397: Disable jobbox if feed is empty
