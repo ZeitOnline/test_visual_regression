@@ -228,16 +228,15 @@ def test_text_file_content_should_be_rendered(testbrowser):
     assert browser.contents == 'zeit.web\n'
 
 
-def test_c1_include_script_should_define_a_timeout_param(
+def test_c1_include_script_gets_appended(
         testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'tracking': True, 'third_party_modules': True}.get)
     browser = testbrowser('/zeit-online/article/simple')
     inline = u''.join(browser.xpath('//script/text()'))
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    assert 'url: "{}/tracking/tracking.js",\n'.format(
+    assert 'script.src = "{}/tracking/tracking.js"'.format(
         conf.get('c1_prefix')) in inline
-    assert 'timeout: 2000,\n' in inline
 
 
 def test_c1_correct_ressort_on_homepage(testbrowser, monkeypatch):
