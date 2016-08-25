@@ -1457,7 +1457,7 @@ def test_jobbox_is_not_displayed_whith_empty_feed(tplbrowser):
     browser = tplbrowser(
         'zeit.web.site:templates/inc/module/jobbox.html',
         module=module)
-    assert browser.contents == ''
+    assert len(browser.xpath('//html/body/*')) == 0
 
 
 def test_partnerbox_jobs_is_displayed_correctly(testbrowser):
