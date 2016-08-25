@@ -225,7 +225,6 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
     grokcore.component.context(Ranking)
 
     FIELD_MAP = {
-        'authors': 'authorships',
         'date-last-modified': 'date_last_modified',
         'date_first_released': '',
         'date_last_published': '',
@@ -266,7 +265,7 @@ class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
 
     # XXX Can we generate this from zeit.retresco.convert somehow?
     FIELD_MAP = {
-        'authors': 'authorships',
+        'author_names': 'authors',
         'date_last_semantic_change': 'last_semantic_change',
         'allow_comments': 'commentsAllowed',
         'show_comments': 'commentSectionEnable',
@@ -278,5 +277,18 @@ class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
         'article_template': 'template',
     }
 
+    def _convert(self, doc):
+        doc = super(TMSContentQuery, self)._convert(doc)
+        doc['authorships'] = [
+            FakeReference(zeit.cms.interfaces.ICMSContent(x, None))
+            for x in doc.get('authors', ())]
+        return doc
+
     def _resolve(self, doc):
         return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
+
+
+class FakeReference(object):
+
+    def __init__(self, content):
+        self.target = content

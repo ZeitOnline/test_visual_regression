@@ -160,12 +160,7 @@ class Newsfeed(Base):
                 authors = []
                 if getattr(content, 'authorships', None):
                     for author in content.authorships:
-                        name = None
-                        if isinstance(author, basestring):
-                            # LazyProxy solr result
-                            name = author
-                        else:
-                            name = getattr(author.target, 'display_name', None)
+                        name = getattr(author.target, 'display_name', None)
                         if name:
                             authors.append(name)
 
