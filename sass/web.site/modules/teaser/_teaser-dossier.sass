@@ -6,6 +6,7 @@
 	+respond-min($break-areas)
 		border-bottom: none
 		overflow: hidden
+		margin: 0 $page-padding
 		padding: 0
 		position: relative
 		+font-smoothing
@@ -85,4 +86,8 @@
 		margin: remify(-64px) 0 0 $page-padding
 		padding-bottom: remify(6px)
 		position: absolute
+		+respond-min($break-areas)
+			left: remify(40px)
+			margin: 0
+			top: remify(22px)
 
