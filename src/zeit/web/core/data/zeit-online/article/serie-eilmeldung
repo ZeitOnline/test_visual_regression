@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <header/>
+    <author href="http://xml.zeit.de/autoren/D/Tobias_Dorfer/index" publication-date="" expires="">
+      <display_name>Tobias Dorfer</display_name>
+    </author>
+    <references></references>
+    <rankedTags>
+      <tag url_value="ausbildung" uuid="b81275f7-b3a8-4c23-916d-14fb0a78f81f" score="4" type="free">Ausbildung</tag>
+      <tag type="free" url_value="berufswahl" uuid="6e97763c-c6ca-4914-9f86-4b8d406b9e23">Berufswahl</tag>
+      <tag type="topic" url_value="steuerhinterziehung" uuid="bca8a0d6-3710-4565-a58a-fa1ba0dc4db9">Steuerhinterziehung</tag>
+      <tag type="free" url_value="steuer" uuid="57ad6413-03ac-4375-8c6d-a22cd45bf492">Steuer</tag>
+      <tag url_value="arbeit" uuid="483a2523-0bc2-4665-8b1b-0ceeb52b53d3" score="3" type="free">Arbeit</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/karriere/beruf/2016-08/steuerfahnder-beruf/" type="jpg" title="steuerfahnder-beruf" alt="Ein Steuerfahnder durchsucht bei einem Einsatz in einem Unternehmen in Kassel Akten. (Archivaufnahme)" publication-date="2016-08-09T11:46:29+00:00" expires="2016-11-09T12:46:30+00:00">
+      <bu>Ein Steuerfahnder durchsucht bei einem Einsatz in einem Unternehmen in Kassel Akten. (Archivaufnahme)</bu>
+      <copyright>© Uwe Zucchi/dpa</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Sabine Hockling</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Karriere Beruf</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2116-08-16T07:18:16.223946+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2116-08-16T07:18:19.039687+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2116-08-16T07:18:19.191559+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2116-08-16T07:18:19.039687+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2116-08-16T07:18:18.302017+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_breaking">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2116-08-16T07:18:13.610358+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwarze</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/karriere/beruf/2016-08/efc7a945-02bc-4dfa-ba38-129f391221c9.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">328ce3a022a54cda8d83a326aa6af0d1</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Karriere</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">70 Jahre DIE ZEIT</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Betrüger fürchten sie, der Staat braucht sie: Steuerfahnder. Unser Beruf der Woche. </attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Beruf</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">3301</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:46388ec5-c162-43d8-b42d-e120b27375a5}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">33</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Steuerfahnder</supertitle>
+    <title>Sie jagen die Steuerhinterzieher</title>
+    <subtitle>Wer bei der Steuer trickst und betrügt, muss sie fürchten. Der Staat aber ist auf sie angewiesen: Steuerfahnder. Ein Beruf, der oft auch Nachtschichten mit sich bringt.</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" title="Ein Steuerfahnder durchsucht bei einem Einsatz in einem Unternehmen in Kassel Akten." alt="Steuerfahnder: Ein Steuerfahnder durchsucht bei einem Einsatz in einem Unternehmen in Kassel Akten." publication-date="2016-08-09T11:46:29+00:00" expires="2016-11-09T12:46:30+00:00" display_mode="column-width" variant_name="wide" is_empty="False" alt_local="Steuerfahnder: Ein Steuerfahnder durchsucht bei einem Einsatz in einem Unternehmen in Kassel Akten." title_local="Ein Steuerfahnder durchsucht bei einem Einsatz in einem Unternehmen in Kassel Akten.">
+        <bu>Ein Steuerfahnder durchsucht bei einem Einsatz in einem Unternehmen in Kassel Akten. (Archivaufnahme)</bu>
+        <copyright>© Uwe Zucchi/dpa</copyright>
+      </image>
+      <p>Prominente <a class="" href="http://www.zeit.de/sport/2016-08/uli-hoeness-bayern-muenchen-praesident" target="_blank">Steuersünder wie Uli Hoeneß</a>, Alice Schwarzer oder Klaus Zumwinkel haben den Beruf des Steuerfahnders bekannt gemacht. Dabei agieren sie lieber im Verborgenen und dürfen noch nicht einmal mit ihrer Familie über ihre Arbeit sprechen. Wer sich nicht dran hält, riskiert seinen Job.</p>
+      <p>Während bei Prominenten in der Regel der Rechtsanwalt auftaucht und für den Mandanten versucht, zu retten, was zu retten ist, werden Steuerfahnder von "normalen" Steuersündern oft wütend beschimpft und im schlimmsten Fall gar angegriffen. Denn Steuerfahnder dürfen bei der Suche nach belastenden Unterlagen sowohl Heim als auch Betrieb gründlich durchsuchen.</p>
+      <p>Um so viel belastendes Material wie möglich aufzuspüren, treten Steuerfahnder bei Außeneinsätzen mindestens zu zweit auf, kommen ohne Ankündigung und meist in Begleitung von Polizei oder Zoll. Aber auch im Innendienst sind Steuerfahnder nicht allein tätig, sondern arbeiten eng mit Betriebsprüfern zusammen, die sie auf mögliche Steuersünder aufmerksam machen. Liegen belastende Unterlagen vor, beginnt die eigentliche Arbeit. Dann wird ausgewertet, recherchiert und es werden Zeugen befragt.</p>
+      <intertitle>Beamter im gehobenen Dienst<br/></intertitle>
+      <p>Eine Ausbildung zum Steuerfahnder gibt es nicht. Wer sich für den Beruf interessiert, startet als Beamter im gehobenen Dienst der Steuerverwaltung. Der Weg dorthin führt über ein dreijähriges Studium an der Fachhochschule für öffentliche Verwaltung, das mit einem Diplom abgeschlossen wird. Parallel dazu finden praktische Studienabschnitte in Finanzämtern statt.</p>
+      <infobox xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" is_empty="False" href="http://xml.zeit.de/karriere/beruf/2012-09/infobox-beruf-der-woche" contenttype="infobox" publication-date="" expires="">
+        <supertitle>infobox-beruf-der-woche</supertitle>
+        <title xsi:nil="true"/>
+        <text xsi:nil="true"/>
+        <description xsi:nil="true"/>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+      </infobox>
+      <p>Für die Zulassung zum Studium müssen Bewerber die Fachhochschulreife bzw. die allgemeine Hochschulreife mitbringen, beamtenrechtliche Voraussetzungen erfüllen und dürfen die Höchstaltersgrenze, die ja nach Bundesland variieren, nicht überschreiten. Das Einstellungsverfahren besteht dabei aus einem schriftlichen Eignungstest sowie einem Vorstellungsgespräch.</p>
+      <p>Langweilig wird es als Steuerfahnder nicht, denn jeder Fall ist individuell. Um der Steuerhinterziehung auf die Spur zu kommen, braucht es neben mathematischen Kenntnissen, Beharrlichkeit und Menschenkenntnis auch eine gewisse Portion kriminalistisches Gespür.</p>
+      <ul>
+        <li>Ausbildung: Mit dem dualen Studium zum Diplom-Finanzwirt wird bereits während der Ausbildung sowohl theoretisch als auch praktisch gearbeitet. Vom ersten Tag der Ausbildung ist man als Beamter auf Widerruf tätig.</li>
+        <li>Gehalt: Der monatliche Anwärtergrundbetrag beträgt in der Laufbahn des gehobenen Dienstes etwa 1.100 Euro brutto monatlich. Nach der Ausbildung verdienen Steuerinspektoren in der Besoldungsgruppe A 9 ca. 2.300 Euro brutto pro Monat. Langfristig ist die Besoldungsgruppe A 13 mit einem Gehalt von etwa 4.500 Euro brutto monatlich möglich.</li>
+        <li>Arbeitszeit: Die Arbeitszeit verteilt sich auf fünf Tage in der Woche. Feste Arbeitszeiten sind allerdings nicht selbstverständlich, denn die Dienstzeiten richten sich nach den jeweiligen Einsätzen. Das heißt, auch Nachtschichten sind durchaus üblich.</li>
+      </ul>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Steuerfahnder</supertitle>
+    <title>Sie jagen die Steuerhinterzieher</title>
+    <text>Wer bei der Steuer trickst und betrügt, muss sie fürchten. Der Staat aber ist auf sie angewiesen: Steuerfahnder. Ein Beruf, der oft auch Nachtschichten mit sich bringt.</text>
+  </teaser>
+</article>

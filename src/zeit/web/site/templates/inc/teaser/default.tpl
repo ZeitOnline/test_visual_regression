@@ -96,7 +96,4 @@
     {% block teaser_media_position_after_container %}{% endblock %}
 
 </article>
-{% if view.is_hp and region_loop and region_loop.index == 1 and area_loop.index == 1 and loop.index == 1 %}
-    {{ lama.adplace(view.banner(3), view, mobile=True) }}
-{% endif %}
 {% endblock %}

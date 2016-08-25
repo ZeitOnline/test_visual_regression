@@ -1,21 +1,30 @@
 {% if toggles('tracking') and settings('c1_prefix') and view.c1_client %}
-<script type="text/javascript">
-window.Zeit.require([ 'jquery' ], function( $ ) {
-    $.ajax({
-        url: "{{ settings('c1_prefix') }}/tracking/tracking.js",
-        timeout: {{ settings('script_timeout', 2000) | int }},
-        dataType: "script",
-        cache: true,
-        success: function() {
-            if ( typeof( cre_client ) != "undefined" ) {
-                cre_client.set_page_view();
-            {% for func, value in view.c1_client %}
+<script>
+(function() {
+    var sendClientRequest = function() {
+        if ( typeof cre_client !== "undefined" ) {
+            cre_client.set_page_view();
+            {% for func, value in view.c1_client -%}
                 cre_client.{{ func }}( {{ value | safe }} );
-            {% endfor %}
-                cre_client.request();
-            }
+            {% endfor -%}
+            cre_client.request();
         }
-    });
-});
+    };
+    var head = document.getElementsByTagName('head')[0]
+    var script = document.createElement( 'script' );
+    var done = false;
+
+    script.src = "{{ settings('c1_prefix') }}/tracking/tracking.js";
+    {# Attach handlers for all browsers -#}
+    script.onload = script.onreadystatechange = function() {
+        if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete')) {
+            done = true;
+            sendClientRequest();
+            script.onload = script.onreadystatechange = null;
+            head.removeChild( script );
+        };
+    };
+    head.appendChild( script );
+})();
 </script>
 {% endif %}
