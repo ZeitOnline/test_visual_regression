@@ -489,12 +489,12 @@ def test_join_if_exists_should_should_filter_none():
 
 def test_get_svg_from_file_should_return_svg(application):
     name = 'reload'
-    className = 'reload-test'
+    class_name = 'reload-test'
     package = 'zeit.web.site'
     cleanup = True
     a11y = True
     svg = zeit.web.core.template.get_svg_from_file(
-        name, className, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y)
     assert '<svg xmlns="http://www.w3.org/2000/svg"' in svg
     assert 'width="14" height="13" viewBox="0 0 14 13"' in svg
     assert 'class="svg-symbol reload-test"' in svg
@@ -504,35 +504,35 @@ def test_get_svg_from_file_should_return_svg(application):
 
 def test_get_svg_from_file_should_return_no_a11y_svg(application):
     name = 'reload'
-    className = 'reload-test'
+    class_name = 'reload-test'
     package = 'zeit.web.site'
     a11y = False
     cleanup = True
     svg = zeit.web.core.template.get_svg_from_file(
-        name, className, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y)
     assert 'aria-hidden="true"' in svg
     assert 'aria-label="Neu laden"' not in svg
 
 
 def test_get_svg_from_file_should_return_unclean_svg(application):
     name = 'reload'
-    className = 'reload-test'
+    class_name = 'reload-test'
     package = 'zeit.web.site'
     a11y = False
     cleanup = False
     svg = zeit.web.core.template.get_svg_from_file(
-        name, className, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y)
     assert 'fill="#444' in svg
 
 
 def test_get_svg_without_package_should_be_empty_str(application):
     name = 'reload'
-    className = 'reload-test'
+    class_name = 'reload-test'
     a11y = False
     cleanup = True
     package = ''
     svg = zeit.web.core.template.get_svg_from_file(
-        name, className, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y)
     assert svg == ''
 
 
