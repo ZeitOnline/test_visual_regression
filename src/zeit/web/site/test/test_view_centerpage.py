@@ -394,7 +394,7 @@ def test_snapshot_morelink_text_icon_switch(
 def test_snapshot_should_show_first_gallery_image(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     image = browser.cssselect('.snapshot__media-item')[0]
-    assert image.attrib['src'].endswith('462507429-540x304.jpg')
+    assert '462507429-540x304.jpg' in image.attrib['src']
 
 
 def test_snapshot_media_link_should_have_title(testbrowser):
@@ -576,14 +576,16 @@ def test_videostage_has_zon_svg_logo(testbrowser):
     assert len(logo) == 1
 
 
-def test_module_printbox_should_contain_teaser_image(
+def test_module_printbox_should_produce_teaser_image(
         application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, dummy_request)
     printbox = zeit.web.core.centerpage.get_module(view.module_printbox)
-    assert isinstance(printbox.image, zeit.content.image.image.RepositoryImage)
+    image = zeit.web.core.template.get_image(
+        printbox, name='content', fallback=False)
+    assert zeit.web.core.interfaces.IImage.providedBy(image)
 
 
 def test_homepage_identifies_itself_as_homepage(testserver):
@@ -1449,6 +1451,15 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.jobbox__action'))
 
 
+def test_jobbox_is_not_displayed_whith_empty_feed(tplbrowser):
+    module = mock.Mock()
+    module = ()
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/module/jobbox.html',
+        module=module)
+    assert len(browser.xpath('//html/body/*')) == 0
+
+
 def test_partnerbox_jobs_is_displayed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/partnerbox-jobs')
 
@@ -1731,21 +1742,6 @@ def test_zett_parquet_should_have_ads(testbrowser):
         'wochenende-update-32/"] .teaser-small__label')[0]
 
     assert ad.text == 'Anzeige'
-
-
-def test_zett_parquet_first_teaser_shows_mobile_image(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-online/parquet-feeds' % testserver.url)
-
-    # set to mobile and test
-    driver.set_window_size(400, 800)
-    zett_area = driver.find_element_by_css_selector('.cp-area--zett')
-    assert(len(zett_area.find_elements_by_css_selector(
-           '.teaser-small__media--force-mobile')) == 1)
-
-    # reset size
-    driver.set_window_size(980, 800)
 
 
 def test_imagecopyright_tags_are_present_on_centerpages(testbrowser):
@@ -2320,19 +2316,21 @@ def test_teaser_link_title_should_match_kicker_and_headline(testbrowser):
         assert links[0].get('title') == links[1].get('title')
 
 
-def test_dynamic_cps_consider_teaser_image_fill_color(testbrowser):
+def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
-        'image-base-id': [
-            (u'http://xml.zeit.de/zeit-magazin/images/'
-                'harald-martenstein-wideformat')],
-        'image-fill-color': [u'A3E6BB']}, {
-            'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
-            'image-base-id': [
-                (u'http://xml.zeit.de/zeit-magazin/images/'
-                    'harald-martenstein-wideformat')],
-            'image-fill-color': [u'']}]
+        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
+                           'harald-martenstein-wideformat')],
+        'image-fill-color': [u'A3E6BB'], 'teaserText': 'text',
+        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
+        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}, {
+        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
+        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
+                           'harald-martenstein-wideformat')],
+        'image-fill-color': [u''], 'teaserText': 'text',
+        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
+        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
 
     browser = testbrowser('/serie/martenstein')
     image1 = browser.cssselect('.cp-area--ranking article img')[0]

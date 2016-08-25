@@ -341,20 +341,14 @@ class SpektrumFeed(Base):
                     last_published_semantic(content))),
                 E.guid(content.uniqueId, isPermaLink='false'),
             )
-            variant = zeit.web.core.template.get_image(
-                content=content, variant_id='wide', fallback=False)
-            if variant is not None:
-                image = zeit.content.image.interfaces.IMasterImage(
-                    variant.group, None)
-                if image is not None:
-                    item.append(E.enclosure(
-                        url='{}{}__220x124'.format(
-                            self.request.image_host, variant.path),
-                        # XXX Incorrect length, since bitblt will resize the
-                        # image, but since that happens outside of the
-                        # application, we cannot know the real size here.
-                        length=str(image.size),
-                        type=image.mimeType))
+            image = zeit.web.core.template.get_image(content, fallback=False)
+            if image:
+                variant = image.group['super']
+                item.append(E.enclosure(
+                    url='{}{}__180x120'.format(
+                        self.request.image_host, image.path),
+                    length='10240',  # ¯\_(ツ)_/¯
+                    type=variant.mimeType))
             channel.append(item)
         return root
 

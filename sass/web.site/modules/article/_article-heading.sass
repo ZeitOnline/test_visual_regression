@@ -13,13 +13,22 @@
 		font-size: remify(30px)
 		line-height: 1.2
 
+	// .article-heading__media, .article-heading__headline, .article-heading__image
+	// are only used in liveblog template. One day we could name it suitably ...
 	&__media
-		margin: 0 0 remify(6px)
+		height: 0
+		margin: 0 0 remify(24px)
+		padding-bottom: 100% / 16 * 9 // image variant 'wide' (16:9)
 
-	+respond-min($break-phablet-min)
+	+respond-min($break-tablet-min)
+		margin-top: remify(60px)
+
 		&--liveblog
 			font-size: 0
-			margin-top: remify(90px)
+			margin-top: remify(80px)
+
+		&__media
+			margin-bottom: remify(6px)
 
 		&__headline,
 		&__image
@@ -33,9 +42,6 @@
 
 		&__image
 			width: 35%
-
-	+respond-min($break-tablet-min)
-		margin-top: remify(60px)
 
 	+respond-min($break-desktop-min)
 		&--liveblog

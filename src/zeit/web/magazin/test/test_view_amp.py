@@ -77,13 +77,13 @@ def test_amp_contains_required_microdata(testbrowser):
     # check ImageObject
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert len(image.cssselect('[itemprop="url"]')[0].get('content'))
-    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
-    assert image.cssselect('[itemprop="height"]')[0].get('content') == '548'
+    assert image.cssselect('[itemprop="width"]')[0].get('content') == '822'
+    assert image.cssselect('[itemprop="height"]')[0].get('content') == '462'
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     url = copyright_holder.cssselect('[itemprop="url"]')[0]
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert url.get('href') == 'http://foo.de'
+    assert url.get('href') == 'http://foo.com'
     assert person.text == u'© Andreas Gebert/dpa'
 
     assert date_published.get('datetime') == '2013-09-26T08:00:00+02:00'

@@ -267,7 +267,7 @@ class RenderedLegacyArea(zeit.web.core.centerpage.Area):
         auto = zeit.content.cp.interfaces.IRenderedArea(area)
         content = auto._content_query()
 
-        lids = [block.layout.id] + area.count * ['zon-parquet-small']
+        lids = [block.layout.id] + area.count * ['zon-small']
         modules = [zeit.web.core.centerpage.TeaserModule(
             [t], layout=lids.pop(0), parent=self) for t in content]
         super(RenderedLegacyArea, self).__init__(

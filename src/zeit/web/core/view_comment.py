@@ -372,7 +372,7 @@ class PostCommentAdmin(PostComment):
                           name='komplettansicht')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
                           name='seite')
-@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
@@ -443,7 +443,7 @@ class PostCommentResource(PostComment):
                           name='komplettansicht')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
                           name='seite')
-@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
@@ -503,7 +503,7 @@ class CommentForm(zeit.web.core.view.CommentMixin,
     renderer='zeit.web.core:templates/inc/comments/replies.html',
     name='comment-replies')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)

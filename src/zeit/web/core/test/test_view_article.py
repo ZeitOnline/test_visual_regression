@@ -52,14 +52,3 @@ def test_url_of_image_groups_is_suffixed_with_desktop_on_big_browser_size(
     driver.get('%s/zeit-online/article/01' % testserver.url)
     body_image = driver.find_element_by_css_selector('.article__media img')
     assert body_image.get_attribute('src').endswith('desktop')
-
-
-def test_url_of_single_images_is_not_suffixed_with_target_viewport(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-online/article/02' % testserver.url)
-    body_image = driver.find_element_by_css_selector('.article__media img')
-    source = body_image.get_attribute('src')
-    assert 'bitblt' in source
-    assert not source.endswith('mobile')
-    assert not source.endswith('desktop')

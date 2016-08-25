@@ -133,8 +133,10 @@
 		&__classifieds
 			line-height: 2.625
 			padding-bottom: remify(6px)
+			padding-right: 0
 			padding-top: remify(6px)
 			li
+				padding-right: $page-padding--small
 				width: 33.33%
 			a
 				overflow: hidden
@@ -144,6 +146,7 @@
 		// hide "more" link and show children
 		&__classifieds-list
 			.nav__classifieds-item--has-dropdown
+				padding-right: 0
 				width: 100%
 			a[role="button"]
 				display: none
@@ -212,6 +215,7 @@
 		&__ressorts,
 		&__classifieds
 			li
+				padding-right: $page-padding--small
 				width: 50%
 
 	+respond-min($break-tablet-min)
