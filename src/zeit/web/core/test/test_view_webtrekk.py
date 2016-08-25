@@ -333,3 +333,34 @@ def test_video_page_provides_expected_webtrekk_string(
     assert tracking_data.endswith((
         '/video/2014-01/1953013471001/'
         'motorraeder-foto-momente-die-stille-schoenheit-der-polarlichter'))
+
+
+@pytest.mark.parametrize(
+    'teasers', [
+        ('.teaser-fullwidth a',
+         '1.1.1.solo-teaser-fullwidth-zplus.image'),
+        ('.teaser-fullwidth-column a',
+         '2.1.1.solo-teaser-fullwidth-column-zplus.image'),
+        ('.teaser-topic .teaser-topic-main a',
+         '5.1.1.topic-teaser-topic-main.text'),
+        ('.teaser-topic .teaser-topic-item a',
+         '5.1.2.topic-teaser-topic-item.text'),
+        ('.teaser-topic .teaser-topic-item[data-zplus="true"] a',
+         '5.1.3.topic-teaser-topic-item-zplus.text'),
+        ('.teaser-gallery[data-zplus="true"] a',
+         '6.1.2.gallery-teaser-gallery-zplus.image'),
+        ('.parquet-teasers .teaser-large  a',
+         '7.1.1.parquet-teaser-large-zplus.text')
+    ])
+def test_zplus_provides_expected_webtrekk_strings(
+        selenium_driver, testserver, teasers):
+
+    driver = selenium_driver
+    driver.get('%s/zeit-online/centerpage/zplus'
+               '#debug-clicktracking' % testserver.url)
+    driver.set_window_size(900, 800)
+
+    teaser_el = driver.find_element_by_css_selector(teasers[0])
+    teaser_el.click()
+    track_str = driver.execute_script("return window.trackingData")
+    assert('tablet.' + teasers[1] in track_str)
