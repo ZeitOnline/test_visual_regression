@@ -558,13 +558,14 @@ def test_zplus_is_false_for_free_articles(application):
 def test_zplus_is_false_for_non_article_content(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/video/2014-01/1953013471001')
+    print zeit.web.core.template.zplus_content(content)
     assert zeit.web.core.template.zplus_content(content) is False
 
 
-def test_zplus_is_true_for_print_articles(application):
+def test_zplus_is_false_for_articles_with_undefined_acquisition(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/zeit')
-    assert zeit.web.core.template.zplus_content(content) is True
+    assert zeit.web.core.template.zplus_content(content) is False
 
 
 def test_zplus_is_true_for_abo_articles(application):

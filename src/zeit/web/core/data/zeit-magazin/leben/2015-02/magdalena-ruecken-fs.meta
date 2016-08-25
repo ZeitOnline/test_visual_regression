@@ -11,6 +11,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>

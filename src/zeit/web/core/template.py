@@ -155,10 +155,7 @@ def zplus_content(content):
     if acquisition is not None:
         return acquisition == 'abo'
 
-    # Fallback if print export does set attributes unexpectedly
-    print_fallback = ('ZEI', 'ZMLB', 'ZTCS')
-    product_id = getattr(getattr(content, 'product', None), 'id', None)
-    return product_id in print_fallback
+    return False
 
 
 @zeit.web.register_test
