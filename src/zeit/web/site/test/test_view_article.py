@@ -1559,6 +1559,24 @@ def test_article_without_series_has_no_banner(testbrowser):
     assert len(browser.cssselect('.article-series')) == 0
 
 
+def test_article_in_series_with_embed_header_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/serie-cardstack')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_liveblog_in_series_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/serie-liveblog')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_eilmeldung_in_series_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/serie-eilmeldung')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
 def test_article_in_series_with_column_attribute_has_no_banner(testbrowser):
     browser = testbrowser('/zeit-online/article/fischer')
 
