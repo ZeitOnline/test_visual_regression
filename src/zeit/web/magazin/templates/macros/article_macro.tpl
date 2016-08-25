@@ -79,10 +79,6 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro image(obj, loop) %}
-    {# BBB Wrap the article image in a macro until we have block templates in ZMO #}
-    {% include "zeit.web.magazin:templates/inc/asset/image_article.tpl" with context %}
-{%- endmacro %}
 
 {% macro image_infographic(obj, loop) %}
     {% include "zeit.web.magazin:templates/inc/block/image_infographic.html" with context %}
