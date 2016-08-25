@@ -153,7 +153,7 @@ class Application(object):
         config.add_route(
             'schlagworte',
             '/schlagworte/{category}/{item}'
-            '{subpath:(|/|/index)(|/|/seite-\d+)($|/$|/index$)}')
+            '{subpath:(/index|/seite-\d+|)/?$}')
 
         # Route to post comments to a community service
         config.add_route('post_test_comments', '/admin/test-comments')
