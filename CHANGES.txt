@@ -20,6 +20,8 @@ Change log for zeit.web
 
 - BUG-492: Remove series banner from breaking news and embed header articles
 
+- BUG-509: Insert Celera One tracking script without using jQuery
+
 
 2.99 (2016-08-18)
 -----------------
