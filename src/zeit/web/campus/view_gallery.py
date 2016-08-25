@@ -6,7 +6,7 @@ import zeit.web.core.view_gallery
 
 @pyramid.view.view_config(
     renderer='templates/gallery.html',
-    context=zeit.web.core.gallery.IGallery,
+    context=zeit.content.gallery.interfaces.IGallery,
     custom_predicates=(zeit.web.campus.view.is_zco_content,),
     request_method='GET')
 class Gallery(zeit.web.core.view_gallery.Gallery,

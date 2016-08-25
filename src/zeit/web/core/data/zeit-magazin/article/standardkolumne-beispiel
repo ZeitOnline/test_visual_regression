@@ -91,7 +91,7 @@
     <title>Darf er sich wirklich heimlich sterilisieren lassen</title>
     <subtitle/>
     <division type="page">
-      <image src="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/katzencontent.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
+      <image src="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/katzencontent.jpg" type="jpg" title_local="Dies ist die lokale Katze!" alt_local="Dies ist der lokale alt Text" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
         <bu py:pytype="str">Die ist der image sub text</bu>
         <copyright link="http://foo.de">©foo</copyright>
       </image>

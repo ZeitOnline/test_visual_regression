@@ -142,12 +142,8 @@ def is_column_article(context, request):
 
 
 def has_author_image(context, request):
-    authors = zeit.web.core.article.convert_authors(context)
-    if not authors:
-        return False
-    # XXX Should use proper variant, cf. z.w.core.template.get_column_image.
-    return zeit.web.core.template.get_variant(
-        authors[0]['image_group'], 'original')
+    return zope.component.queryAdapter(
+        context, zeit.web.core.interfaces.IImage, 'author')
 
 
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
@@ -162,16 +158,6 @@ def has_author_image(context, request):
 class ColumnArticle(Article):
 
     header_layout = 'column'
-
-    @zeit.web.reify
-    def author_img(self):
-        return has_author_image(self.context, self.request)
-
-    @zeit.web.reify
-    def sharing_image(self):
-        if not self.authors:
-            return
-        return self.authors[0]['image_group']
 
 
 @view_config(name='seite',

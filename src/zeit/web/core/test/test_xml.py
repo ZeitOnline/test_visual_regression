@@ -76,6 +76,13 @@ def test_xml_renders_article_with_xml_content_view(testserver):
     assert view.called
 
 
+def test_xml_renders_column_articles(testserver):
+    res = requests.get(
+        '%s/zeit-online/article/fischer' % testserver.url,
+        headers={'Host': 'xml.zeit.de'})
+    assert res.status_code == 200
+
+
 def test_xml_renders_centerpage_as_expected(testserver):
     res = requests.get(
         '%s/zeit-magazin/centerpage/index' % testserver.url,

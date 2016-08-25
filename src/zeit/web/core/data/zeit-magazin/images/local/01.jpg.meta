@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/images/local/01.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant LeMaiala in Florenz</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-04T20:27:01.031177+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-10-04T20:27:01.031177+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stroebele</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-10-04T20:26:01+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImage" module="zeit.content.image.image"/&gt; &lt;global name="IMasterImage" module="zeit.content.image.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Reuters/Alessandro Bianchi&lt;/unicode&gt; &lt;string&gt;http://foo.de&lt;/string&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:30f5d4a0-0c46-477a-a362-9030d052665e}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-04T20:26:11.074958+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="links_to">http://www.test.de</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2014-01-03T21:28:39Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">2670347</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 03 Jan 2014 21:28:39 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"6a189d-28bf0b-4ef1797ecbc1c"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">image/jpeg</attribute>
+</head>

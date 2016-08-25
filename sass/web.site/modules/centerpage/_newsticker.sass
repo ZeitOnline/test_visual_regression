@@ -13,6 +13,9 @@ $margin-ad-tablet: -($max-page-width - $max-overview-width) / 2
 		font-variant-numeric: tabular-nums
 	&__text
 		margin-left: remify(64px)
+		&--on-keywordpage,
+		&--on-topicpage
+			margin-left: remify(112px)
 	&__heading
 		display: inline
 		font-size: 1em
@@ -47,7 +50,6 @@ $margin-ad-tablet: -($max-page-width - $max-overview-width) / 2
 			width: 50%
 			&:nth-last-child(even)
 				padding-right: remify(15px)
-
 	.newsteaser
 		&__ad
 			margin: remify(15px) $margin-ad-tablet

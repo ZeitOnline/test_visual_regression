@@ -57,7 +57,7 @@
                     "selector": ".footer__navigation li:nth-child(1) a",
                     "request": "event",
                     "vars": {
-                        "actionName": "amp.footernav.2.1..impressum|www.zeit.de/impressum/index"
+                        "actionName": "amp.footernav.top.1.1.impressum|www.zeit.de/impressum/index"
                     }
                 },
                 "trackPrivacyClick": {
@@ -65,7 +65,7 @@
                     "selector": ".footer__navigation li:nth-child(2) a",
                     "request": "event",
                     "vars": {
-                        "actionName": "amp.footernav.2.2..datenschutz|www.zeit.de/help/datenschutz"
+                        "actionName": "amp.footernav.top.1.2.datenschutz|www.zeit.de/hilfe/datenschutz"
                     }
                 },
                 "trackTopClick": {
@@ -73,7 +73,116 @@
                     "selector": ".footer__button",
                     "request": "event",
                     "vars": {
-                        "actionName": "amp.footernav.4.1..pfeil"
+                        "actionName": "amp.footernav.bottom.3.1.nach_oben|${canonicalUrl}"
+                    }
+                },
+                "trackBackToHomepageClick": {
+                    "on": "click",
+                    "selector": ".article__item a[href='{{ request.route_url('home') }}index']",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.article-pager....startseite|www.zeit.de/index"
+                    }
+                },
+                "trackNextAdButtonClick": {
+                    "on": "click",
+                    "selector": ".nextad .figure__link",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.publisher-nextread...image|premium.zeit.de/aktuelle-zeit"
+                    }
+                },
+                "trackNextAdImageClick": {
+                    "on": "click",
+                    "selector": ".nextad__button",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.publisher-nextread...button|premium.zeit.de/aktuelle-zeit"
+                    }
+                },
+                "trackFooterLogoClick": {
+                    "on": "click",
+                    "selector": ".footer > a:first-child",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.footernav.logo.1..logo|www.zeit.de/index"
+                    }
+                },
+                "trackFacebookClick": {
+                    "on": "click",
+                    "selector": ".article-sharing__link--facebook",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.social.1..facebook|${canonicalUrl}"
+                    }
+                },
+                "trackTwitterClick": {
+                    "on": "click",
+                    "selector": ".article-sharing__link--twitter",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.social.2..twitter|${canonicalUrl}"
+                    }
+                },
+                "trackWhatsAppClick": {
+                    "on": "click",
+                    "selector": ".article-sharing__link--whatsapp",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.social.3..whatsapp|${canonicalUrl}"
+                    }
+                },
+                "trackMailClick": {
+                    "on": "click",
+                    "selector": ".article-sharing__link--mail",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.social.4..mail|${canonicalUrl}"
+                    }
+                },
+                "trackAuthorClick": {
+                    "on": "click",
+                    "selector": ".byline a",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.0.0.0.article.text|${url}",
+                        "url": "#"
+                    }
+                },
+                "trackNextReadClick": {
+                    "on": "click",
+                    "selector": ".nextread__link",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.editorial-nextread...area|${url}",
+                        "url": "#"
+                    }
+                },
+                "trackKeywordsClick": {
+                    "on": "click",
+                    "selector": ".article-tags__link",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.articlebottom.article-tag.${number}..${linkText}|${url}",
+                        "number": "",
+                        "linkText": "",
+                        "url": "#"
+                    }
+                },
+                "trackLocalInTextLinkClick": {
+                    "on": "click",
+                    "selector": ".article__body a[href*='zeit.de']",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.intext....intern|#"
+                    }
+                },
+                "trackExternInTextLinkClick": {
+                    "on": "click",
+                    "selector": ".article__body a:not([href*='zeit.de'])",
+                    "request": "event",
+                    "vars": {
+                        "actionName": "amp.intext....extern|#"
                     }
                 }
             }

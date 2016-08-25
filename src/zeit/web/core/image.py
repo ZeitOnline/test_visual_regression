@@ -1,148 +1,469 @@
+# coding: utf-8
 import datetime
 import hashlib
 import logging
 import os
-import re
 import tempfile
+import urllib
 
 import PIL
 import pytz
 import requests
 import requests_file
 import grokcore.component
-import zc.sourcefactory.contextual
-import zc.sourcefactory.source
 import zope.component
 
 import zeit.cms.workflow.interfaces
+import zeit.content.author.interfaces
+import zeit.content.gallery.interfaces
 import zeit.content.image.imagegroup
 import zeit.content.image.interfaces
 import zeit.content.image.variant
 
 import zeit.web
 import zeit.web.core.cache
+import zeit.web.core.block
 import zeit.web.core.metrics
+import zeit.web.core.template
 
 
 log = logging.getLogger(__name__)
 CONFIG_CACHE = zeit.web.core.cache.get_region('config')
 
 
-class BaseImage(object):
+class Image(object):
+    """Base class for all template-bound images in friedbert"""
+
+    grokcore.component.implements(zeit.web.core.interfaces.IImage)
+
+    def __init__(self, context):
+        self.context = context
+
+    def __bool__(self):
+        # Images shall evaluate to false if they don't actually have images
+        return bool(self.group)
+
+    __nonzero__ = __bool__
+
+    @zeit.web.reify
+    def _meta(self):
+        # Image metadata is retrieved from the underlying group by default
+        # but this can be overwritten to include block metadata for example
+        return zeit.content.image.interfaces.IImageMetadata(self.group, None)
+
+    @zeit.web.reify
+    def _images(self):
+        # The CMS mechanics for extracting a single image or an image group
+        # from a piece of content (or fragment of it, ie teaserblock)
+        # is applied here but can be overwritten if necessary
+        return zeit.content.image.interfaces.IImages(self.context, None)
+
+    @zeit.web.reify
+    def _variant(self):
+        # Override hook for variant object retrieval
+        try:
+            variant = VARIANT_SOURCE.factory.find(
+                self.group, self.variant_id)
+        except KeyError:
+            variant = VARIANT_SOURCE.factory.find(self.group)
+        variant.__parent__ = self.group
+        return variant
+
+    @zeit.web.reify
+    def group(self):
+        # Contains a valid (synthesized) imagegroup
+        if self._images:
+            return zeit.content.image.interfaces.IImageGroup(
+                self._images.image, None)
+
+    @zeit.web.reify
+    def copyrights(self):
+        # Copyrights always come as a sanitized touple of touples
+        # containing a copyright text, URL and a nofollow flag.
+        copyrights = []
+        if self._meta and self._meta.copyrights:
+            for text, uri, nf in self._meta.copyrights:
+                text = zeit.web.core.utils.fix_misrepresented_latin(
+                    text).replace(u'© ', u'© ').strip()
+                if text == u'©':
+                    continue
+                copyrights.append((text, uri, nf))
+        return tuple(copyrights)
+
+    @zeit.web.reify
+    def title(self):
+        if self._meta:
+            return self._meta.title
+
+    @zeit.web.reify
+    def alt(self):
+        if self._meta:
+            return self._meta.alt
+
+    @zeit.web.reify
+    def caption(self):
+        if self._meta:
+            return self._meta.caption
+
+    @zeit.web.reify
+    def href(self):
+        if self._meta:
+            return self._meta.links_to
+
+    @zeit.web.reify
+    def origin(self):
+        if self._meta:
+            return self._meta.origin
+
+    @zeit.web.reify
+    def fill_color(self):
+        if self._images:
+            return self._images.fill_color
+
+    @zeit.web.reify
+    def variant_id(self):
+        # This should actually be called variant_name, but raisins (ND)
+        return VARIANT_SOURCE.factory.DEFAULT_NAME
+
+    def _ratio_for_viewport(self, viewport):
+        # If the variant config does not provide a ratio, we try to determine
+        # it from the viewport-specific masterimage
+        if self.group is not None:
+            image = self.group.master_image_for_viewport(viewport)
+            if image is None:
+                return
+            width, height = image.getImageSize()
+            return float(width) / float(height)
+
+    @zeit.web.reify
+    def ratio(self):
+        if self._variant.ratio is None:
+            return self._ratio_for_viewport('desktop')
+        else:
+            return self._variant.ratio
+
+    @zeit.web.reify
+    def mobile_ratio(self):
+        if self._variant.ratio is None:
+            mobile = self._ratio_for_viewport('mobile')
+            if mobile and self.ratio and round(abs(mobile - self.ratio), 3):
+                return mobile
+
+    @zeit.web.reify
+    def fallback_width(self):
+        return self._variant.fallback_width
+
+    @zeit.web.reify
+    def fallback_height(self):
+        return self._variant.fallback_height
+
+    @zeit.web.reify
+    def path(self):
+        url = self.group.variant_url(
+            self.variant_id,
+            fill_color=self.fill_color)
+        return urllib.quote(url)
+
+    @zeit.web.reify
+    def fallback_path(self):
+        url = self.group.variant_url(
+            self.variant_id,
+            width=self.fallback_width,
+            height=self.fallback_height,
+            fill_color=self.fill_color)
+        return urllib.quote(url)
+
+
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class CMSContentImage(Image):
+    """Default image for all top-level content types.
+    They usually have no way of knowing their variant and fallback to the
+    original. Deviations should be set in templates."""
+
+    pass
+
+
+@grokcore.component.adapter(zeit.web.core.interfaces.IBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class ModuleImage(Image):
+    """Image adapter for friedbert specific zeit.edit block implementations"""
+
+    pass
+
+
+@grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery,
+                            name=u'content')
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+def image_for_gallery(context):
+    """Content adapter for gallery images, that extracts the image from the
+    first slide of a gallery. Popular example would be the HP snapshot"""
+
+    for key in context.keys():
+        try:
+            entry = context[key]
+        except:
+            continue
+        else:
+            if zeit.web.core.template.hidden_slide(entry):
+                continue
+            return zeit.web.core.interfaces.IImage(entry)
+
+
+@grokcore.component.adapter(zeit.content.gallery.interfaces.IGalleryEntry)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class GalleryEntryImage(Image):
+    """Image adapter for gallery entries (slides), that always uses the
+    `original` variant and extracts its metadata from the slide, not the
+    slide's image"""
+
+    variant_id = 'original'
+
+    @zeit.web.reify
+    def _meta(self):
+        return zeit.content.image.interfaces.IImageMetadata(self.context, None)
+
+    @zeit.web.reify
+    def layout(self):
+        return self.context.layout
+
+
+@grokcore.component.adapter(zeit.content.author.interfaces.IAuthor)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class AuthorImage(Image):
+    """Image adapter for author objects enforcing `original` variants"""
+
+    # XXX This should use a different variant, but author images currently
+    # do not have a consistent ratio and framing of the portrayed person.
+    # So we need to crop the lower part of the image using CSS, ignoring
+    # the ratio.
+    variant_id = 'original'
+
+    # Author images shall not be filled with color.
+    fill_color = None
+
+
+@grokcore.component.adapter(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class FrontendBlockImage(Image):
+
+    @zeit.web.reify
+    def variant_id(self):
+        if self.context.variant_id:
+            return self.context.variant_id
+        else:
+            return super(FrontendBlockImage, self).variant_id
+
+
+@grokcore.component.adapter(zeit.web.core.interfaces.INextread)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class NextreadImage(FrontendBlockImage):
+
+    @zeit.web.reify
+    def layout(self):
+        return self.context.layout_id
+
+
+@grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class TeaserBlockImage(Image):
+
+    @zeit.web.reify
+    def variant_id(self):
+        if self.context.layout.image_pattern:
+            return self.context.layout.image_pattern
+        else:
+            return super(TeaserBlockImage, self).variant_id
+
+
+def image_from_block_content(context):
+    try:
+        content = list(context)[0]
+    except IndexError:
+        raise zope.component.interfaces.ComponentLookupError(
+            'Could not adapt as content', context,
+            zeit.web.core.interfaces.IImage)
+    image = zeit.web.core.interfaces.IImage(content, None)
+    if image is not None:
+        image.variant_id = context.layout.image_pattern
+    return image
+
+
+@grokcore.component.adapter(zeit.web.core.interfaces.IBlock,
+                            name=u'content')
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+def image_from_article_block_content(context):
+    return image_from_block_content(context)
+
+
+@grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock,
+                            name=u'content')
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+def image_from_teaser_block_content(context):
+    return image_from_block_content(context)
+
+
+@grokcore.component.adapter(zeit.web.core.centerpage.TeaserModule,
+                            name=u'')
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+def image_from_teaser_module_content(context):
+    return image_from_block_content(context)
+
+
+@grokcore.component.adapter(zeit.web.core.block.Image)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class BlockImage(Image):
+
+    def __init__(self, context):
+        super(BlockImage, self).__init__(context)
+        try:
+            self._reference = zeit.cms.content.interfaces.IReference(
+                self.context.context.references)
+        except (AttributeError, TypeError):
+            self._reference = None
+
+    @zeit.web.reify
+    def _meta(self):
+        if zeit.content.image.interfaces.IImageMetadata.providedBy(
+                self._reference):
+            return self._reference
+
+    @zeit.web.reify
+    def variant_id(self):
+        if self.context.variant_name:
+            return self.context.variant_name
+        else:
+            return super(BlockImage, self).variant_id
+
+
+@grokcore.component.adapter(zeit.web.core.block.HeaderImage)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class HeaderBlockImage(BlockImage):
+
+    def __init__(self, context):
+        super(HeaderBlockImage, self).__init__(context)
+        article = zeit.content.article.interfaces.IArticle(
+            self.context.context, None)
+        if article is not None:
+            self._a_supertitle = article.supertitle
+            self._a_title = article.title
+        else:
+            self._a_supertitle = None
+            self._a_title = None
+
+    @zeit.web.reify
+    def title(self):
+        title = super(HeaderBlockImage, self).title
+        if title:
+            return title
+        elif self.caption:
+            return self.caption
+        elif self._a_supertitle and self._a_title:
+            return u'{}: {}'.format(self._a_supertitle, self._a_title)
+        elif self._a_title:
+            return self._a_title
+
+    @zeit.web.reify
+    def alt(self):
+        alt = super(HeaderBlockImage, self).alt
+        if alt:
+            return alt
+        elif self._a_supertitle and self.caption:
+            return u'{}: {}'.format(self._a_supertitle, self.caption)
+        elif self.caption:
+            return self.caption
+        elif self._a_supertitle and self._a_title:
+            return u'{}: {}'.format(self._a_supertitle, self._a_title)
+        elif self._a_title:
+            return self._a_title
+
+
+@grokcore.component.adapter(zeit.cms.content.interfaces.ICommonMetadata,
+                            name=u'author')
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+def author_image_for_cmscontent(context):
+    for author in context.authorships:
+        image = zeit.web.core.interfaces.IImage(author.target, None)
+        if image:
+            return image
+    raise zope.component.interfaces.ComponentLookupError(
+        'Could not adapt as author', context, zeit.web.core.interfaces.IImage)
+
+
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent,
+                            name=u'sharing')
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+def sharing_image_for_cmscontent(context):
+    return zeit.web.core.interfaces.IImage(context)
+
+
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle,
+                            name=u'sharing')
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+def sharing_image_for_article(context):
+    """Use a configured fallback image for breaking news articles
+    that don't have an article image yet.
+    """
+
+    image = zeit.web.core.interfaces.IImage(context)
+
+    if image.group is None and zeit.content.article.interfaces.IBreakingNews(
+            context).is_breaking:
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        image.group = zeit.cms.interfaces.ICMSContent(
+            conf['breaking_news_fallback_image'], None)
+    elif zeit.web.site.view_article.is_column_article(context, None):
+        image = zope.component.queryAdapter(
+            context, zeit.web.core.interfaces.IImage, 'author')
+
+    if not image:
+        raise zope.component.interfaces.ComponentLookupError(
+            'Could not adapt as sharing', context,
+            zeit.web.core.interfaces.IImage)
+    return image
+
+
+class SyntheticImageGroup(zeit.content.image.imagegroup.ImageGroup,
+                          zeit.cms.repository.repository.Container):
+
+    def __init__(self, context):
+        super(SyntheticImageGroup, self).__init__()
+        self.context = context
+
+    def __getitem__(self, key):
+        return self.create_variant_image(key)
+
+    def __repr__(self):
+        return object.__repr__(self)
+
+    def __len__(self):
+        return int(bool(self.master_image))
+
+    def __contains__(self, key):
+        # Synthetic image groups *only* contain one master image.
+        return False
+
+    def keys(self):
+        return ()
 
     @property
-    def ratio(self):
-        try:
-            width, height = self.image.getImageSize()
-            return float(width) / float(height)
-        except (TypeError, ZeroDivisionError):
-            return
-
-    def getImageSize(self):  # NOQA
-        try:
-            return self.image.getImageSize()
-        except AttributeError:
-            return
+    def master_image(self):
+        raise NotImplementedError
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+# NOTE: Maybe we want to determine whether our lonesome image is actually
+#       contained in a group and then return that instead of synthesizing one.
+@grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(zeit.content.image.interfaces.IImage)
-class Image(BaseImage):
+class LocalImageGroup(SyntheticImageGroup):
 
-    def __init__(self, image):
-        self.image = image
-        self.image_pattern = 'default'
-        self.layout = ''
-        self.src = self.uniqueId = image.uniqueId
+    def __init__(self, context):
+        super(LocalImageGroup, self).__init__(context)
+        self.uniqueId = '{}/imagegroup/'.format(context.uniqueId)
 
-        group = zeit.content.image.interfaces.IImageGroup(image, None)
-        if group:
-            self.image_group = group.uniqueId
-        else:
-            self.image_group = None
-
-        meta = zeit.content.image.interfaces.IImageMetadata(image, None)
-        if meta:
-            self.alt = meta.alt
-            self.caption = meta.caption
-            self.copyright = meta.copyrights
-            self.title = meta.title
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
-@grokcore.component.adapter(zeit.content.image.interfaces.IImageGroup,
-                            zeit.content.image.interfaces.IImage)
-class TeaserImage(BaseImage):
-
-    def __init__(self, group, image):
-        self.image = image
-        self.image_group = group.uniqueId
-        self.image_pattern = 'default'
-        self.layout = ''
-        self.src = self.uniqueId = image.uniqueId
-        self.uniqueId = image.uniqueId
-
-        meta = zeit.content.image.interfaces.IImageMetadata(group, None)
-        if meta:
-            self.alt = meta.alt
-            self.caption = meta.caption
-            self.copyright = meta.copyrights
-            self.title = meta.title
-
-
-@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
-@grokcore.component.adapter(zeit.content.image.interfaces.IVariant)
-class VariantImage(object):
-
-    mobile_ratio = None
-
-    def __new__(cls, variant):
-        instance = super(VariantImage, cls).__new__(cls, variant)
-        instance.ratio = variant.ratio
-        if instance.ratio is None:
-            group = zeit.content.image.interfaces.IImageGroup(variant)
-            instance.ratio = cls._ratio_from_master_image(group, 'desktop')
-            if instance.ratio is None:
-                # No master image found to determine ratio from.
-                return None
-            mobile_ratio = cls._ratio_from_master_image(group, 'mobile')
-            if not cls.float_equals(mobile_ratio, instance.ratio):
-                instance.mobile_ratio = mobile_ratio
-        return instance
-
-    def __init__(self, variant):
-        self.image_pattern = variant.name
-        self.variant = variant.legacy_name or variant.name
-        self.group = zeit.content.image.interfaces.IImageGroup(variant)
-        self.image_group = self.group.uniqueId
-        self.path = self.group.variant_url(
-            self.image_pattern,
-            # XXX Slightly kludgy: fill_color is not a property of Variant but
-            # only transported through there by z.w.core.template.get_variant.
-            fill_color=getattr(variant, 'fill_color', None))
-        self.fallback_path = self.group.variant_url(
-            self.image_pattern,
-            variant.fallback_width,
-            variant.fallback_height)
-
-        meta = zeit.content.image.interfaces.IImageMetadata(self.group, None)
-        if meta:
-            self.alt = meta.alt
-            self.caption = meta.caption
-            self.copyright = meta.copyrights
-            self.title = meta.title
-
-    @staticmethod
-    def _ratio_from_master_image(group, viewport):
-        image = group.master_image_for_viewport(viewport)
-        if image is None:
-            return None
-        width, height = image.getImageSize()
-        return float(width) / float(height)
-
-    @staticmethod
-    def float_equals(a, b, ndigits=3):
-        return round(abs(a - b), ndigits) == 0
+    @zeit.web.reify
+    def master_image(self):
+        return self.context
 
 
 class RemoteImage(object):
@@ -210,60 +531,15 @@ class RemoteImage(object):
         return (0, 0)
 
 
-class RemoteImageGroup(zeit.content.image.imagegroup.ImageGroup,
-                       zeit.web.core.utils.nsdict):
-
-    def __init__(self, context):
-        super(RemoteImageGroup, self).__init__()
-        self.context = context
-
-    def __getitem__(self, key):
-        return self.create_variant_image(key)
-
-    def __repr__(self):
-        return object.__repr__(self)
-
-    def __len__(self):
-        return int(bool(self.master_image))
-
-    def __contains__(self, key):
-        # Local image groups *only* contain master images.
-        return False
-
-    def keys(self):
-        # Local image groups *only* contain master images.
-        return ()
-
-    @zeit.web.reify
-    def copyrights(self):
-        return (getattr(self.context, 'copyrights', None) or '').strip()
-
-    @zeit.web.reify
-    def teaserText(self):  # NOQA
-        return (getattr(self.context, 'teaserText', None) or '').strip()
-
-    @zeit.web.reify
-    def teaserTitle(self):  # NOQA
-        return (getattr(self.context, 'teaserTitle', None) or '').strip()
-
-    @zeit.web.reify
-    def title(self):
-        return (getattr(self.context, 'title', None) or '').strip()
+class RemoteImageGroup(SyntheticImageGroup,
+                       zeit.cms.repository.repository.Container):
 
     @zeit.web.reify
     def master_image(self):
         try:
-            image = RemoteImage(self.image_url)
+            return RemoteImage(self.image_url)
         except TypeError:
-            return None
-        image.src = self.image_url
-        image.mimeType = 'image/jpeg'
-        image.image_pattern = 'wide-large'
-        image.copyright = self.copyrights
-        image.caption = self.teaserText
-        image.title = self.teaserTitle
-        image.alt = self.title
-        return image
+            return
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageMetadata)
@@ -271,17 +547,21 @@ class RemoteImageGroup(zeit.content.image.imagegroup.ImageGroup,
 class RemoteImageMetaData(object):
 
     def __init__(self, group):
-        for field in zeit.content.image.interfaces.IImageMetadata:
-            setattr(self, field, None)
-        self.alt = group.title
-        self.caption = group.teaserText
-        self.title = group.teaserTitle
-        self.copyrights = group.copyrights
+        iface = zeit.content.image.interfaces.IImageMetadata
+        for field in iface:
+            try:
+                setattr(self, field, iface[field].missing_value)
+            except AttributeError:
+                continue
+        if group.__parent__ is not None:
+            self.alt = group.__parent__.title
+            self.caption = group.__parent__.text
+            self.title = group.__parent__.title
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IMasterImage)
-@grokcore.component.adapter(RemoteImageGroup)
-def remoteimagegroup_to_masterimage(group):
+@grokcore.component.adapter(SyntheticImageGroup)
+def syntheticimagegroup_to_masterimage(group):
     return group.master_image
 
 
@@ -317,54 +597,26 @@ def single_image_expiration(context):
     return zeit.web.core.interfaces.IExpiration(context.__parent__, None)
 
 
-@grokcore.component.adapter(VariantImage)
+@grokcore.component.adapter(zeit.web.core.interfaces.IImage)
 @grokcore.component.implementer(zeit.web.core.interfaces.IExpiration)
-def variant_image_expiration(context):
+def web_image_expiration(context):
     return zeit.web.core.interfaces.IExpiration(context.group, None)
-
-
-class ScaleSource(zeit.imp.source.ScaleSource):
-
-    def isAvailable(self, *args):  # NOQA
-        # Contrary to CMS behavior, we do not want to hide any image scales
-        # in zeit.web, so availability is `True` regardless of context.
-        return True
-
-SCALE_SOURCE = ScaleSource()(None)
-
-
-class ImageScales(zc.sourcefactory.contextual.BasicContextualSourceFactory):
-    # Only contextual so we can customize source_class
-
-    class source_class(zc.sourcefactory.source.FactoredContextualSource):
-
-        def find(self, id):
-            return self.factory.getValues(None).get(id)
-
-    def getValues(self, context):
-        def sub(x):
-            return int(re.sub('[^0-9]', '', '0' + str(x)))
-
-        return {s.name: (sub(s.width), sub(s.height)) for s in SCALE_SOURCE}
-
-IMAGE_SCALE_SOURCE = ImageScales()(None)
 
 
 class VariantSource(zeit.content.image.variant.VariantSource):
 
+    DEFAULT_NAME = 'original'
     product_configuration = 'zeit.content.image'
     config_url = 'variant-source'
 
-    def find(self, context, variant_id):
+    def find(self, context, variant_id=DEFAULT_NAME):
         mapping = self._get_mapping()
         tree = self._get_tree()
+        mapped = mapping.get(variant_id, variant_id)
         for node in tree.iterchildren('*'):
             if not self.isAvailable(node, context):
                 continue
-
             attributes = dict(node.attrib)
-            mapped = mapping.get(variant_id, variant_id)
-
             if attributes['name'] == mapped:
                 attributes['id'] = attributes['name']
                 variant = zeit.content.image.variant.Variant(**attributes)

@@ -76,13 +76,6 @@ class Author(zeit.web.site.view.Base):
         return {}
 
     @zeit.web.reify
-    def author_img(self):
-        # XXX This should use a different variant, see
-        # z.w.core.template.get_column_image for details.
-        return zeit.web.core.template.get_image(
-            content=self.context, variant_id='original', fallback=False)
-
-    @zeit.web.reify
     def tab_areas(self):
         if is_paginated(self.context, self.request) or (
                 len(self.area_favourite_content) == 0):

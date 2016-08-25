@@ -38,4 +38,3 @@ class Jobbox(zeit.web.core.centerpage.Module, list):
         url = conf.get('academics_hp_feed')
         list.__init__(self, zeit.web.site.area.rss.parse_feed(url, 'jobbox'))
         zeit.web.core.centerpage.Module.__init__(self, context)
-        self.title = "klaus"

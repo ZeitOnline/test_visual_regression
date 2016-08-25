@@ -11,14 +11,14 @@ from zeit.connector.interfaces import IResource
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
 import zeit.cms.repository.interfaces
-import zeit.content.author.interfaces
 import zeit.content.article.interfaces
+import zeit.content.author.interfaces
 import zeit.content.cp.interfaces
+import zeit.content.gallery.interfaces
 import zeit.content.link.interfaces
 import zeit.content.video.interfaces
 
 import zeit.web.core.article
-import zeit.web.core.gallery
 import zeit.web.core.view
 
 
@@ -115,6 +115,9 @@ class Centerpage(object):
     request_method='GET')
 @pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
+@pyramid.view.view_config(
+    context=zeit.content.article.interfaces.IArticle,
+    custom_predicates=(lambda *_: True, lambda *_: True, lambda *_: True))
 @pyramid.view.view_config(context=zeit.content.author.interfaces.IAuthor)
 @pyramid.view.view_config(context=zeit.content.link.interfaces.ILink)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
@@ -122,7 +125,7 @@ class Centerpage(object):
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 class HostHeaderContent(XMLContent):
     pass
 
@@ -148,7 +151,7 @@ class HostHeaderCP(Centerpage, HostHeaderContent):
 @pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.web.core.gallery.IGallery)
+@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 class RouteNameContent(XMLContent):
     pass
 

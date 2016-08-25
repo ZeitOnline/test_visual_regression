@@ -31,7 +31,7 @@
             {% set variant_id = view.header_module.variant_name -%}
         {% endif -%}
     {% endif -%}
-    {% set image = get_image(content=view.header_module, variant_id=variant_id, fallback=False) -%}
+    {% set image = get_image(view.header_module, variant_id=variant_id, fallback=False) -%}
     {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}
     <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
         <div class="{{ 'article-header__banderole' | with_mods(variant_id) }}">

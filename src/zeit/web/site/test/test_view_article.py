@@ -1303,7 +1303,7 @@ def test_instantarticle_representation_should_have_correct_content(
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
     assert 'Bernie Sanders' in bro.cssselect('figcaption')[0].text
-    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
+    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
 
 
 def test_instantarticle_item_should_wrap_correct_article_in_cdata(testbrowser):
@@ -1559,6 +1559,24 @@ def test_article_without_series_has_no_banner(testbrowser):
     assert len(browser.cssselect('.article-series')) == 0
 
 
+def test_article_in_series_with_embed_header_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/serie-cardstack')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_liveblog_in_series_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/serie-liveblog')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_eilmeldung_in_series_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/serie-eilmeldung')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
 def test_article_in_series_with_column_attribute_has_no_banner(testbrowser):
     browser = testbrowser('/zeit-online/article/fischer')
 
@@ -1643,43 +1661,40 @@ def test_infographics_should_use_customized_css_classes(testbrowser):
     assert 'x-subheadline' in browser.contents
 
 
-def test_infographics_should_render_border_styles_conditionally(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.core:templates/inc/blocks/image_infographic.html')
-    image = mock.Mock()
+def test_infographics_should_render_border_styles_conditionally(
+        tplbrowser, dummy_request):
+    template = 'zeit.web.core:templates/inc/blocks/image_infographic.html'
+    image = zeit.web.core.image.Image(mock.Mock())
     image.ratio = 1
+    image.group = mock.Mock()
+    image.group.master_image_for_viewport.return_value = None
+    image.group.variant_url.return_value = '/foo'
     image.figure_mods = ('FOO', 'BAR', 'BAZ')
 
     # all border styles present
-
-    image.meta.origin = True
-    image.copyright = ('FOO', 'BAR', 'BAZ')
+    image.origin = True
+    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
     image.caption = True
-    html_str = tpl.render(block=image)
-    assert '--borderless' not in html_str
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert not browser.cssselect('.x-footer--borderless')
+    assert not browser.cssselect('.x-subheadline--borderless')
 
     # borderless subheadline
-
     image.caption = False
-    html_str = tpl.render(block=image)
-    html = lxml.html.fromstring(html_str)
-    subheadline = html.cssselect('[class*="x-subheadline"]')
-    assert '--borderless' in subheadline[0].get('class')
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert browser.cssselect('.x-subheadline--borderless')
 
     # borderless footer
+    image.copyrights = ()
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert browser.cssselect('.x-footer--borderless')
 
-    image.copyright = ''
-    html_str = tpl.render(block=image)
-    html = lxml.html.fromstring(html_str)
-    footer = html.cssselect('[class*="x-footer"]')
-    assert '--borderless' in footer[0].get('class')
-
-    image.copyright = ('FOO', 'BAR', 'BAZ')
-    image.meta.origin = False
-    html_str = tpl.render(block=image)
-    html = lxml.html.fromstring(html_str)
-    footer = html.cssselect('[class*="x-footer"]')
-    assert '--borderless' in footer[0].get('class')
+    # no border styles present
+    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
+    image.origin = False
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert browser.cssselect('.x-footer--borderless')
+    assert browser.cssselect('.x-subheadline--borderless')
 
 
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):

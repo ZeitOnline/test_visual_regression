@@ -5,10 +5,6 @@
     {{ lama.adplace_middle_mobile(item, view) }}
 {%- endmacro %}
 
-{% macro contentadblock(item) -%}
-    {% include 'zeit.web.core:templates/inc/blocks/contentadblock.html' %}
-{%- endmacro %}
-
 {% macro supertitle() -%}
   <span class="article__head__supertitle">{{ view.supertitle }}</span>
 {%- endmacro %}
@@ -35,45 +31,6 @@
             </strong>
         </p>
     </div>
-{%- endmacro %}
-
-{% macro liveblog(liveblog) -%}
-    {% if liveblog.blog_id -%}
-        <div class="is-constrained is-centered">
-            {# TODO: We should mock the liveblog backend for local testing. #}
-            {% set esi_source = 'http://www.zeit.de/liveblog-backend/{}.html'.format(liveblog.blog_id) %}
-            {{ lama.insert_esi(esi_source, 'Liveblog konnte nicht geladen werden') }}
-        </div>
-    {%- endif %}
-{%- endmacro %}
-
-{% macro paragraph(html) -%}
-    <p class="is-constrained is-centered">
-        {{ html | safe}}
-    </p>
-{%- endmacro %}
-
-{% macro unorderedlist(html) -%}
-    <ul class="is-constrained is-centered">
-        {{ html | safe }}
-    </ul>
-{%- endmacro %}
-
-{% macro orderedlist(html) -%}
-    <ol class="is-constrained is-centered">
-        {{ html | safe }}
-    </ol>
-{%- endmacro %}
-
-{% macro portraitbox(obj) -%}
-    {% if obj.name -%}
-        <figure class="portraitbox figure-stamp">
-            <div class="portraitbox-heading">
-                {{ obj.name }}
-            </div>
-            {{ obj.text | safe }}
-        </figure>
-    {%- endif %}
 {%- endmacro %}
 
 {% macro subpage_chapter(number, subtitle, class) -%}
@@ -114,39 +71,6 @@
             {{- number }} &mdash; {{ subtitle -}}
         </div>
     {% endif %}
-{%- endmacro %}
-
-{% macro intertitle(intertitle) -%}
-    <h2 class="article__subheading is-constrained is-centered">
-        {{ intertitle | striptags }}
-    </h2>
-{%- endmacro %}
-
-{% macro raw(obj) -%}
-    <div class="raw">{{ obj.xml | safe }}</div>
-{%- endmacro %}
-
-{% macro citation(obj) -%}
-    <blockquote class="
-        {% if obj.layout == 'wide' %}
-            quote--wide
-        {% else %}
-            quote
-        {% endif %}
-    ">
-        <span class="quote__text">{{ obj.text }}</span>
-        {% if obj.attribution %}
-            {% if obj.url %}
-                <span class="quote__author">
-                    <a href="{{ obj.url }}">
-                        {{ obj.attribution }}
-                    </a>
-                </span>
-            {% else %}
-                <span class="quote__author">{{ obj.attribution }}</span>
-            {% endif %}
-        {% endif %}
-    </blockquote>
 {%- endmacro %}
 
 {% macro advertising(ad) -%}
@@ -271,7 +195,7 @@
 <div class="photocluster__wrap">
     <div class="photocluster">
     {% if block %}
-        {% for obj in block.itervalues() -%}
+        {% for obj in block | reject("hidden_slide") -%}
             <div class="photocluster__item">
                 <div class="scaled-image">
                     {% include "zeit.web.magazin:templates/inc/asset/image_photocluster.tpl" %}
@@ -308,8 +232,8 @@
     {%- endif -%}
 {% endmacro %}
 
-{% macro inlinegallery(block) -%}
-    {% include 'zeit.web.core:templates/inc/blocks/inlinegallery.html' %}
+{% macro gallery(block) -%}
+    {% include 'zeit.web.core:templates/inc/blocks/gallery.html' %}
 {%- endmacro %}
 
 {% macro no_block(block) %}{% endmacro %}

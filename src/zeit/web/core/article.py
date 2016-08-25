@@ -192,8 +192,6 @@ def convert_authors(article, is_longform=False):
             author = {
                 'name': getattr(author.target, 'display_name', None),
                 'href': getattr(author.target, 'uniqueId', None),
-                'image_group': getattr(zeit.content.image.interfaces.IImages(
-                    author.target, None), 'image', None),
                 'prefix': u'', 'suffix': u'', 'location': u''}
             # add location
             if location and not is_longform:
@@ -240,30 +238,14 @@ class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
     pass
 
 
-@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
-@grokcore.component.implementer(zeit.web.core.interfaces.ISharingImage)
-def default_sharing_image(context):
-    image = zeit.content.image.interfaces.IImages(context, None)
-    if image is None:
-        return None
-    return image.image
-
-
-@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
-@grokcore.component.implementer(zeit.web.core.interfaces.ISharingImage)
-def breakingnews_sharing_image(context):
-    """Use a configured fallback image for breaking news articles
-    that don't have an article image yet.
-    """
-
-    article_image = default_sharing_image(context)
-    if zeit.content.article.interfaces.IBreakingNews(
-            context).is_breaking and article_image is None:
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return zeit.cms.interfaces.ICMSContent(
-            conf['breaking_news_fallback_image'], None)
+@grokcore.component.adapter(zeit.web.core.interfaces.INextread)
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+def images_from_nextread(context):
+    if not len(context):
+        raise zope.component.interfaces.ComponentLookupError(
+            'Could not adapt', context, zeit.content.image.interfaces.IImages)
     else:
-        return article_image
+        return zeit.content.image.interfaces.IImages(context[0])
 
 
 class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):

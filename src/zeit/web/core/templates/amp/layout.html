@@ -107,8 +107,8 @@
                 {% block article_body %}
                 <div class="article__body" itemprop="articleBody">
                     {% block article_main_image %}
-                        {% set block = view.header_module if is_instance(view.header_module, 'zeit.web.core.block.Image') else None %}
-                        {% include "zeit.web.core:templates/amp/asset/image_article.html" %}
+                        {% set block = view.header_module %}
+                        {% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
                     {% endblock article_main_image %}
 
                     {% block article_pages %}
@@ -162,7 +162,11 @@
                         <ul class="article-tags__list" itemprop="keywords">
                         {% for tag in view.ranked_tags[:6] -%}
                             {% if tag.url_value %}
-                                <li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link">{{ tag.label }}</a>
+                                <li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link"
+                                    data-vars-number="{{ loop.index }}"
+                                    data-vars-link-text="{{ tag.label }}"
+                                    data-vars-url="{{ request.route_url('home') }}thema/{{ tag.url_value }}"
+                                >{{ tag.label }}</a>
                                 {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
                                 </li>
                             {% else %}
