@@ -112,15 +112,12 @@ class ColumnArticle(Article):
                           renderer='templates/photocluster.html')
 class PhotoclusterArticle(Article):
 
-    def __init__(self, *args, **kwargs):
-        super(PhotoclusterArticle, self).__init__(*args, **kwargs)
+    def __init__(self, context, request):
+        super(PhotoclusterArticle, self).__init__(context, request)
         for page in self.pages:
-            for index in range(len(page)):
-                if issubclass(
-                        type(page[index]), zeit.web.core.gallery.Gallery):
-                    cls = type('Photocluster',
-                               (zeit.web.core.gallery.Gallery,), {})
-                    page[index] = cls(page[index].context)
+            for block in page:
+                if isinstance(block, zeit.web.core.block.Gallery):
+                    block.block_type = 'photocluster'
 
 
 @pyramid.view.view_config(route_name='amp',

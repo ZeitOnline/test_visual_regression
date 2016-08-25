@@ -113,8 +113,9 @@ def test_header_module_should_be_first_image_of_content_blocks(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    url = 'http://xml.zeit.de/exampleimages/artikel/05/01.jpg'
-    assert article_view.header_module.src == url
+    block = article_view.header_module
+    assert zeit.web.core.template.get_image(block).path == (
+        '/zeit-magazin/images/local/01.jpg/imagegroup/original')
 
 
 def test_article_should_have_author_box(application):
@@ -197,11 +198,9 @@ def test_article_request_should_have_html5_doctype(testbrowser):
 
 def test_artikel05_should_have_header_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/05')
-    assert '<div class="article__head-wrap">' in browser.contents
-    assert 'div class="article__head-image">' in browser.contents
-    assert (
-        '<figure class="figure-longform is-pixelperfect scaled-image'
-        in browser.contents)
+    assert browser.cssselect('.article__head-wrap')
+    assert browser.cssselect('.article__head-image')
+    assert browser.cssselect('.figure-longform.is-pixelperfect.scaled-image')
 
 
 def test_column_should_have_header_image(testbrowser):
@@ -209,7 +208,8 @@ def test_column_should_have_header_image(testbrowser):
     assert browser.cssselect('div.article__column__headerimage')
     assert browser.cssselect('figure.scaled-image')
     image = browser.cssselect('img.figure__media')[0]
-    assert image.attrib['alt'] == 'Liebeskolumne: Die ist der image sub text'
+    assert image.attrib['alt'] == 'Dies ist der lokale alt Text'
+    assert image.attrib['title'] == 'Dies ist die lokale Katze!'
 
 
 def test_column_should_not_have_header_image(testbrowser):
