@@ -260,16 +260,12 @@ def test_inline_gallery_should_have_images(application):
         'http://xml.zeit.de/zeit-magazin/article/01')
     body = zeit.content.article.edit.interfaces.IEditableBody(context)
     gallery = zeit.web.core.interfaces.IFrontendBlock(body.values()[-1])
-    assert all(
-        zeit.web.core.gallery.IGalleryImage.providedBy(i)
-        for i in gallery.itervalues())
-
-    image = gallery.values()[4]
-    assert image.src == (
-        u'http://xml.zeit.de/galerien/bg-automesse-detroit'
-        u'-2014-usa-bilder/chrysler 200 s 1-540x304.jpg')
+    image = zeit.web.core.template.get_image(list(gallery)[5])
+    assert image.path == (
+        '/galerien/bg-automesse-detroit-2014-usa-bilder'
+        '/chrysler%20200%20s%201-540x304.jpg/imagegroup/original')
     assert image.alt is None
-    assert image.copyright[0][0] == u'\xa9'
+    assert image.copyrights == ()
 
 
 def test_breaking_news_should_be_provided(application):

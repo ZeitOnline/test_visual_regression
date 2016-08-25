@@ -7,11 +7,13 @@
         <span class="print-box__issue">Nr. {{ teaser.volume }}/{{ teaser.year }}</span>
     </div>
     <div class="print-box__content">
-        <figure class="print-box__media">
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_cover_cover" title="{{ title }}" data-id="{{ teaser_position }}.print-box.image">
-                <img class="print-box__media-item" src="{{ module.image | default_image_url('zon-printbox-wide') }}">
-            </a>
-        </figure>
+        {% require image = get_image(module, name='content', variant_id='original', fallback=False) %}
+            <figure class="print-box__media scaled-image">
+                <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_cover_cover" title="{{ title }}" data-id="{{ teaser_position }}.print-box.image">
+                    <img class="print-box__media-item" alt="{{ image.alt }}" src="{{ request.image_host + image.fallback_path }}" data-src="{{ request.image_host + image.path }}" data-ratio="{{ image.ratio }}">
+                </a>
+            </figure>
+        {% endrequire %}
         <div class="print-box__container">
             <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_headline_headline" title="{{ title }}" class="print-box__combined-link" data-id="{{ teaser_position }}.print-box.title-and-text">
                 <h2 class="print-box__content-heading">

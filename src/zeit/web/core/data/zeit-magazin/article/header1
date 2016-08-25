@@ -100,7 +100,7 @@
         <title>Kann Leipzig Hypezig überleben?</title>
         <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen – aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
         <division type="page">
-            <image align="left" alt="Die ist der Alttest" expires="" href="http://links.to" is_empty="False" layout="zmo-xl-header" publication-date="" src="http://xml.zeit.de/exampleimages/artikel/berlin_selfies.jpg" title="Katze!" type="jpg">
+            <image align="left" alt="Die ist der Alttest" expires="" href="http://links.to" is_empty="False" layout="zmo-xl-header" publication-date="" src="http://xml.zeit.de/zeit-magazin/images/local/01.jpg" title="Katze!" type="jpg">
                 <bu py:pytype="str">Die ist der image sub text</bu>
                 <copyright link="http://foo.de">©foo</copyright>
             </image>

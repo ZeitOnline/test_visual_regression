@@ -3,8 +3,9 @@
 <div class="{% block gallery_class %}gallery{% endblock %}">
     <div class="{{ self.gallery_class() }}-container">
         <div class="gallery-slides js-gallery">
-            {% for image in images.itervalues() -%}
+            {% for entry in gallery | reject("hidden_slide") -%}
                 {% set image_loop = loop %}
+                {% set image = get_image(entry, fallback=False) %}
                 {% include 'zeit.web.core:templates/inc/asset/image_gallery.tpl' %}
             {%- endfor %}
         </div>

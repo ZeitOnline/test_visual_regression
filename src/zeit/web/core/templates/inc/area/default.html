@@ -13,7 +13,7 @@
 
             {# ZON-2011: if there is no author image on columns, render as default teaser #}
             {# ZON-3039: if teaser is zco content, render as default teaser #}
-            {% if journalistic_format == 'column' and (not get_column_image(teaser) or teaser is zco_content) %}
+            {% if journalistic_format == 'column' and (not get_image(teaser, name='author') or teaser is zco_content) %}
                 {% set journalistic_format = None %}
             {% endif %}
 

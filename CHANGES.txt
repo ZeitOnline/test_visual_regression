@@ -1,10 +1,10 @@
 Change log for zeit.web
 =======================
 
-2.101 (unreleased)
-------------------
+3.0 (unreleased)
+----------------
 
-- Nothing changed yet.
+- ZON-1586: Overhaul image handling, remove bitblt
 
 
 2.100 (2016-08-25)

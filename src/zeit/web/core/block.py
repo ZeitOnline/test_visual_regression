@@ -14,7 +14,6 @@ import urlparse
 import zope.component
 import zope.interface
 
-from zeit.content.image.interfaces import INFOGRAPHIC_DISPLAY_TYPE
 import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
 import zeit.content.image.interfaces
@@ -27,7 +26,6 @@ import zeit.web.core.cache
 import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
-import zeit.web.core.template
 
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
@@ -250,82 +248,23 @@ class Quiz(Block):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
 class Image(Block):
 
-    def __new__(cls, model_block):
-        if getattr(model_block, 'is_empty', False):
-            return
-
-        referenced = None
+    def __init__(self, context):
+        self.context = context
+        self.display_mode = context.display_mode
+        self.block_type = 'image'
+        self.variant_name = context.variant_name
         try:
-            if model_block.references:
-                referenced = model_block.references.target
-        except TypeError:
-            pass  # Unresolveable uniqueId
+            image = zeit.content.image.interfaces.IImages(self).image
+            if image.display_type == (
+                    zeit.content.image.interfaces.INFOGRAPHIC_DISPLAY_TYPE):
+                self.block_type = 'image_infographic'
+                self.variant_name = 'original'
+        except:
+            pass
 
-        target = None
-        block_type = None
-        variant = model_block.variant_name
-        if zeit.content.image.interfaces.IImageGroup.providedBy(referenced):
-            if referenced.display_type == INFOGRAPHIC_DISPLAY_TYPE:
-                block_type = 'image_infographic'
-                variant = 'original'
-            target = zeit.web.core.template.get_variant(referenced, variant)
-        else:
-            target = referenced
-
-        if zeit.web.core.template.expired(target):
-            target = None
-        if not target:
-            return
-
-        instance = super(Image, cls).__new__(cls, model_block)
-        instance.image = target
-        instance.variant_name = variant
-        instance.meta = zeit.content.image.interfaces.IImageMetadata(
-            model_block.references.target, None)
-        if block_type:
-            instance.block_type = block_type
-
-        if isinstance(target, zeit.web.core.image.VariantImage):
-            instance.path = target.path
-            instance.fallback_path = target.fallback_path
-        else:
-            instance.src = target.uniqueId
-            instance.uniqueId = target.uniqueId
-
-        return instance
-
-    def __init__(self, model_block):
-        self.model_block = model_block
         # `legacy_layout` is required for bw compat of the ZCO default variant,
         # which is `portrait` rather the usual `wide`.
-        self.legacy_layout = model_block.xml.get('layout', None)
-        self.display_mode = model_block.display_mode
-
-        # TODO: don't use XML but adapt an Image and use it's metadata
-        if model_block.xml is not None:
-            bu_node = model_block.xml.find('bu')
-            bu = unicode(_inline_html(bu_node) or '').strip()
-            if bu:
-                # Repair encoded entities
-                bu = lxml.html.fromstring(bu).text_content().strip()
-
-            self.align = model_block.xml.get('align')
-            self.href = model_block.xml.get('href')
-            self.caption = self.title = self.alt = bu
-            cr = model_block.xml.find('copyright')
-            if cr is not None:
-                rel = cr.attrib.get('rel', '') == 'nofollow'
-                self.copyright = ((cr.text, cr.attrib.get('link', None), rel),)
-
-    # TRASHME when ZON-1586 lands
-    @property
-    def ratio(self):
-        return self.image.ratio
-
-    # TRASHME when ZON-1586 lands
-    @property
-    def mobile_ratio(self):
-        return self.image.mobile_ratio
+        self.legacy_layout = context.xml.get('layout', None)
 
     FIGURE_MODS = {
         'large': ('wide', 'rimless', 'apart'),
@@ -347,9 +286,6 @@ class HeaderImage(Image):
 
     block_type = 'image'
 
-    def __new__(cls, model_block, header):
-        return super(HeaderImage, cls).__new__(cls, model_block)
-
     def __init__(self, model_block, header):
         super(HeaderImage, self).__init__(model_block)
         # XXX Header images should not use `display_mode` at all, they should
@@ -357,24 +293,6 @@ class HeaderImage(Image):
         # the normal image templates for the header image, we pretend a fixed
         # display_mode accordingly.
         self.display_mode = 'large'
-
-        article_supertitle = None
-        article_title = None
-        try:
-            article_supertitle = zeit.content.article.interfaces.IArticle(
-                model_block).supertitle
-            article_title = zeit.content.article.interfaces.IArticle(
-                model_block).title
-        except:
-            pass
-
-        if not self.caption and article_supertitle and article_title:
-            self.title = u'{}: {}'.format(article_supertitle, article_title)
-
-        if article_supertitle and self.caption:
-            self.alt = u'{}: {}'.format(article_supertitle, self.caption)
-        elif article_supertitle and article_title:
-            self.alt = u'{}: {}'.format(article_supertitle, article_title)
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
@@ -385,7 +303,20 @@ class BlockImages(object):
 
     def __init__(self, context):
         self.context = context
-        self.image = context.model_block.references.target
+        self.image = None
+        if context.context.is_empty:
+            return
+        reference = zeit.content.image.interfaces.IImageReference(
+            context.context.references, None)
+        if reference and reference.target:
+            self.image = reference.target
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(zeit.web.core.interfaces.IBlock)
+def images_from_block(context):
+    return zope.component.getAdapter(
+        context.context, zeit.content.image.interfaces.IImages)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -465,15 +396,33 @@ class HeaderVideo(Video):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IGallery)
-def inlinegallery(context):
-    # Inline galleries are created dynamically via this factory because
-    # they inherit from zeit.web.core.gallery.Gallery. Declaring a regular
-    # class would introduce a circular dependency.
-    from zeit.web.core.gallery import Gallery
-    cls = type('Inlinegallery', (Gallery,), {})
-    if context.references is None:
-        return None
-    return cls(context.references)
+class Gallery(Block):
+
+    def __new__(cls, context):
+        if context.references is None:
+            return None
+        return super(Gallery, cls).__new__(cls, context)
+
+    def __init__(self, context):
+        self.context = context.references
+
+    def __iter__(self):
+        return iter(self._values)
+
+    def __bool__(self):
+        return bool(self._values)
+
+    __nonzero__ = __bool__
+
+    @zeit.web.reify
+    def _values(self):
+        if self.context is None:
+            return []
+        return list(self.context.values())
+
+    @zeit.web.reify
+    def html(self):
+        return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
@@ -508,17 +457,14 @@ class NewsletterTeaser(Block):
 
     @property
     def image(self):
-        images = zeit.content.image.interfaces.IImages(
-            self.context.reference, None)
-        image = images.image if images is not None else None
-        if not zeit.content.image.interfaces.IImageGroup.providedBy(image):
-            return
-        if zeit.web.core.template.expired(image):
-            return
+        image = zeit.web.core.template.get_image(
+            self.context.reference, variant_id='wide', fallback=False)
         # XXX We should not hardcode the host, but newsletter is rendered on
         # friedbert-preview, which can't use `image_host`. Should we introduce
         # a separate setting?
-        return 'http://www.zeit.de' + image.variant_url('wide', 148, 84)
+        host = 'http://www.zeit.de'
+        if image:
+            return host + image.group.variant_url(image.variant_id, 148, 84)
 
     @property
     def videos(self):
@@ -679,7 +625,7 @@ def _inline_html(xml, elements=None):
 class Nextread(zeit.web.core.utils.nslist):
     """Teaser block for nextread teasers in articles."""
 
-    image_pattern = 'default'
+    variant_id = 'default'
 
     def __init__(self, context, *args):
         super(Nextread, self).__init__(*args)
@@ -696,7 +642,7 @@ class Nextread(zeit.web.core.utils.nslist):
     def layout(self):
         return zeit.content.cp.layout.BlockLayout(
             self.layout_id, self.layout_id,
-            areas=[], image_pattern=self.image_pattern)
+            areas=[], image_pattern=self.variant_id)
 
     @zeit.web.reify
     def multitude(self):
@@ -713,7 +659,7 @@ class Nextread(zeit.web.core.utils.nslist):
 @grokcore.component.adapter(zeit.magazin.interfaces.IZMOContent)
 class ZMONextread(Nextread):
 
-    image_pattern = 'super'
+    variant_id = 'super'
 
     def __init__(self, context):
         nxr = zeit.magazin.interfaces.INextRead(context, None)
@@ -725,7 +671,7 @@ class ZMONextread(Nextread):
 @grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
 class ZONNextread(Nextread):
 
-    image_pattern = 'cinema'
+    variant_id = 'cinema'
 
     def __init__(self, context):
         rel = zeit.cms.related.interfaces.IRelatedContent(context, None)
@@ -738,7 +684,7 @@ class ZONNextread(Nextread):
     zeit.cms.interfaces.ICMSContent, name="advertisement")
 class AdvertisementNextread(Nextread):
 
-    image_pattern = 'cinema'
+    variant_id = 'cinema'
     layout_id = 'advertisement'
 
     def __init__(self, context):

@@ -342,19 +342,6 @@ def test_require_extension_should_ensure_variable_access_in_inner_block(
     assert jinja2_env.from_string(tpl).render(fix='fix').strip() == 'prefix'
 
 
-def test_get_column_image_should_return_an_image_or_none(application):
-    img = zeit.web.core.template.get_column_image(
-        zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/zeit-online/cp-content/kolumne'))
-
-    assert isinstance(img, zeit.web.core.image.VariantImage)
-    assert zeit.web.core.template.get_column_image(None) is None
-
-    teaser = mock.Mock()
-    teaser.authorships = None
-    assert zeit.web.core.template.get_column_image(teaser) is None
-
-
 def test_debug_breaking_news_request(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index?debug=eilmeldung')
     assert browser.cssselect('.breaking-news-banner')

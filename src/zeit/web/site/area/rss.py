@@ -96,10 +96,12 @@ class RSSLink(object):
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
 @grokcore.component.adapter(IRSSLink)
 def rsslink_to_imagegroup(context):
-    return zope.component.getAdapter(
+    imagegroup = zope.component.getAdapter(
         context,
         zeit.content.image.interfaces.IImageGroup,
         IRSSArea(context).kind)
+    imagegroup.__parent__ = context
+    return imagegroup
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)

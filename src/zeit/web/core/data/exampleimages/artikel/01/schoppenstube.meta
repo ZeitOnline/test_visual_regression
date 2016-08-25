@@ -3,6 +3,7 @@
   <attribute ns="DAV:" name="href">/cms/work/lebensart/2013-10/schoppenstube/</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-10-04T20:27:00.135886+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Ein Bild aus vergangenen Zeiten: Gerti Guhl, Besitzerin der Fraunhofer Schoppenstube in M&#xFC;nchen. Nun musste die Traditionsgastst&#xE4;tte schlie&#xDF;en.</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="links_to">http://links.to</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-04T20:26:11.048031+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:228ed8a6-16a7-4cc9-b0c7-74c675b2f67b}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-04T20:27:00.135886+00:00</attribute>
@@ -12,7 +13,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-10-04T20:21:46.376216+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Andreas Gebert/dpa&lt;/unicode&gt; &lt;none/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Andreas Gebert/dpa&lt;/unicode&gt; &lt;string&gt;http://foo.com&lt;/string&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">no</attribute>
   <attribute ns="DAV:" name="resourcetype"/>
   <attribute ns="DAV:" name="creationdate">2014-01-03T21:28:42Z</attribute>

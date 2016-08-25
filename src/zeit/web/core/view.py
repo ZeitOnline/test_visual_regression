@@ -472,10 +472,6 @@ class Base(object):
         return self.content_url  # XXX What's the point of this alias? (ND)
 
     @zeit.web.reify
-    def sharing_image(self):
-        return zeit.web.core.interfaces.ISharingImage(self.context, None)
-
-    @zeit.web.reify
     def timezone(self):
         return babel.dates.get_timezone('Europe/Berlin')
 

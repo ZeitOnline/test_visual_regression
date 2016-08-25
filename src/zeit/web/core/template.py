@@ -13,7 +13,6 @@ import urlparse
 import babel.dates
 import lxml.etree
 import pyramid.threadlocal
-import repoze.bitblt.transform
 import zope.component
 
 import zeit.campus.interfaces
@@ -37,97 +36,72 @@ SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 
 
 @zeit.web.register_global
-def get_variant(group, variant_id, fill_color=None):
-    try:
-        variant = zeit.web.core.image.VARIANT_SOURCE.factory.find(
-            group, variant_id)
-    except TypeError, err:
-        log.debug(err.message)
-    except KeyError:
-        log.debug(u'No {} variant for {}'.format(variant_id, group.uniqueId))
-    else:
-        variant.__parent__ = group
-        variant.fill_color = fill_color
-        try:
-            return zeit.web.core.interfaces.IImage(variant)
-        except TypeError:
-            return None
-
-
-FROM_CONTENT = object()
-
-
-@zeit.web.register_global
-def get_image(module=None, content=None, fallback=True, variant_id=None,
-              fill_color=FROM_CONTENT):
+def get_image(context, variant_id=None, fallback=True, fill_color=True,
+              name=u''):
     """Universal image retrieval function to be used in templates.
 
-    :param module: Module to extract a content and layout from
-    :param content: Override to provide different content with image reference
-    :param fallback: Specify whether missing images should render a fallback
-    :param variant_id: Override for automatic variant determination
-    :param fill_color: For images with transparent background, fill with
-                       the given color (None: keep transparent, FROM_CONTENT:
-                       determine color from IImages(content))
+    :param context:     Context of which to extract the image from
+    :param fallback:    Whether missing image should render a fallback
+    :param variant_id:  Override for automatic variant_id determination
+    :param fill_color:  Fill images with transparent background with color:
+                            True    Determine automatically
+                            False   Keep background transparent
+                            'red'   Red fill color
+                            '00F'   Blue fill color
+    :param name:        Image extraction for a specific context type can be
+                        overloaded with multiple extraction methods.
+                        These can be applied via the name parameter:
+                            content Select the first element from a container
+                                    object and retrieve the image from there
+                                    (e.g. first entry of a gallery or first
+                                     teaser in a block)
+                            sharing Select an image suitable for sharing the
+                                    content item on social media platforms
+                            author  Select the (first) author's portrait
+
+    :rtype:             zeit.web.core.interfaces.IImage
     """
 
-    if content is None:
-        content = first_child(module)
-
     try:
-        img = zeit.content.image.interfaces.IImages(content)
-        group = img.image
-        if fill_color is FROM_CONTENT:
-            fill_color = img.fill_color
-    except (TypeError, AttributeError):
-        group = None
-        if fill_color is FROM_CONTENT:
-            fill_color = None
+        if name == u'':
+            # For unnamed adapters we can rely on zope interface mechanics
+            # to determine whether our context already provides IImage.
+            image = zeit.web.core.interfaces.IImage(context)
+        else:
+            # For named adapters we have no chance of verifying the name
+            # requirement without a component lookup.
+            image = zope.component.getAdapter(
+                context, zeit.web.core.interfaces.IImage, name)
+    except (zope.component.ComponentLookupError, TypeError):
+        image = None
 
-    try:
-        if group is None:
-            group = module.image
-    except (TypeError, AttributeError):
-        pass
-
-    use_fallback = False
-    if not zeit.content.image.interfaces.IImageGroup.providedBy(group):
+    if not bool(image) or expired(image):
+        # To clarify, that we do not only want to test against None but also
+        # for invalid images, we cast to boolean.
         if not fallback:
             return None
-        use_fallback = True
-    elif expired(group):
-        if not fallback:
-            return None
-        use_fallback = True
-
-    if use_fallback:
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         default_id = conf.get('default_teaser_images')
-        group = zeit.cms.interfaces.ICMSContent(default_id, None)
-
-    if zeit.web.core.interfaces.IFrontendBlock.providedBy(module):
-        layout = module
-    else:
-        layout = get_layout(module)
-        if layout == 'hide':
-            layout = None
+        context = zeit.cms.interfaces.ICMSContent(default_id, None)
+        if image is None:
+            image = zeit.web.core.interfaces.IImage(context, None)
         else:
-            layout = zeit.content.cp.layout.get_layout(layout)
+            # If we managed to create a (broken) image earlier, we can reuse
+            # it to maintain its settings (ie. variant).
+            image.group = context
 
-    if variant_id is None:
-        try:
-            variant_id = layout.image_pattern
-        except AttributeError:
-            variant_id = 'default'
+    if not bool(image):
+        return None
 
-    return get_variant(group, variant_id, fill_color=fill_color)
+    if not fill_color:
+        image.fill_color = None
+    elif fill_color is not True:
+        image.fill_color = fill_color
 
+    if variant_id is not None:
+        image.variant_id = variant_id
 
-@zeit.web.register_test
-def variant(image):
-    # TRASHME: Jinja test to distinguish between bitblt/zci images.
-    return isinstance(image, zeit.web.core.image.VariantImage) or isinstance(
-        getattr(image, 'image', None), zeit.web.core.image.VariantImage)
+    return image
 
 
 @zeit.web.register_test
@@ -184,6 +158,12 @@ def column(context):
 @zeit.web.register_test
 def leserartikel(context):
     return getattr(context, 'genre', None) and context.genre == 'leserartikel'
+
+
+@zeit.web.register_test
+def hidden_slide(context):
+    if zeit.content.gallery.interfaces.IGalleryEntry.providedBy(context):
+        return context.layout == 'hidden'
 
 
 @zeit.web.register_test
@@ -432,97 +412,6 @@ def comment_tracking_col(context):
         return 0
 
 
-# TRASHME: Definition of default images sizes for bitblt images
-scales = {
-    'default': (200, 300),
-    'large': (800, 600),
-    'small': (200, 300),
-    'upright': (320, 480),
-    'zmo-xl-header': (460, 306),
-    'zmo-xl': (460, 306),
-    'zmo-medium-left': (225, 125),
-    'zmo-medium-center': (225, 125),
-    'zmo-medium-right': (225, 125),
-    'zmo-large-left': (225, 125),
-    'zmo-large-center': (225, 125),
-    'zmo-large-right': (225, 125),
-    'zmo-small-left': (225, 125),
-    'zmo-small-center': (225, 125),
-    'zmo-small-right': (225, 125),
-    '540x304': (290, 163),
-    '580x148': (290, 163),
-    '940x400': (470, 200),
-    '148x84': (74, 42),
-    '220x124': (110, 62),
-    '368x110': (160, 48),
-    '368x220': (160, 96),
-    '180x101': (90, 50),
-    'zmo-landscape-large': (460, 306),
-    'zmo-landscape-small': (225, 125),
-    'zmo-square-large': (200, 200),
-    'zmo-square-small': (50, 50),
-    'zmo-lead-upright': (320, 480),
-    'zmo-upright': (320, 432),
-    'zmo-large': (460, 200),
-    'zmo-medium': (330, 100),
-    'zmo-small': (200, 50),
-    'zmo-x-small': (100, 25),
-    'zmo-card-picture': (320, 480),
-    'zmo-print-cover': (315, 424),
-    'og-image': (600, 315),
-    'twitter-image_small': (120, 120),  # summary
-    'twitter-image-large': (560, 300),  # summary_large_image, photo
-    'newsletter-540x304': (540, 304),
-    'newsletter-220x124': (220, 124),
-    'zon-thumbnail': (580, 326),
-    'zon-large': (580, 326),
-    'zon-article-large': (820, 462),
-    'zon-printbox': (320, 234),
-    'zon-printbox-wide': (320, 148),
-    'zon-column': (300, 400),
-    'zon-square': (460, 460),
-    'topic': (980, 418),
-    'brightcove-still': (580, 326),
-    'brightcove-thumbnail': (120, 67),
-    'spektrum': (220, 124)
-}
-
-
-@zeit.web.register_filter
-def default_image_url(image, image_pattern='default'):
-    # TRASHME: Creates image urls for bitblt images
-    try:
-        image_pattern = getattr(image, 'image_pattern', image_pattern)
-        if image_pattern != 'default':
-            width, height = scales.get(image_pattern, (640, 480))
-        elif hasattr(image, 'legacy_layout'):
-            width, height = scales.get(image.legacy_layout, (640, 480))
-        else:
-            width, height = scales.get(image_pattern, (640, 480))
-        # TODO: use secret from settings?
-        signature = repoze.bitblt.transform.compute_signature(
-            width, height, 'time')
-
-        if getattr(image, 'uniqueId', None) is None:
-            return
-        if expired(image):
-            return
-
-        scheme, netloc, path, query, fragment = urlparse.urlsplit(
-            image.uniqueId)
-        parts = path.split('/')
-        parts.insert(-1, 'bitblt-%sx%s-%s' % (width, height, signature))
-        path = '/'.join(parts)
-        url = urlparse.urlunsplit((scheme, netloc, path, query, fragment))
-        request = pyramid.threadlocal.get_current_request()
-
-        return url.replace('http://xml.zeit.de', request.image_host, 1)
-    except Exception, e:
-        # XXX: Surely we do not want to try-except on a function scope.
-        log.debug('Cannot produce a default URL for {}. Reason {}'.format(
-                  image, e))
-
-
 @zeit.web.register_filter
 def pluralize(num, *forms):
     try:
@@ -578,20 +467,6 @@ def pop_from_dotted_name(string, index=-1):
 def macro(context, macro_name, *args, **kwargs):
     """Call a macro extracted from the context by its name."""
     return context.vars[macro_name](*args, **kwargs)
-
-
-@zeit.web.register_global
-def get_column_image(content, variant_id='original'):
-    # XXX: Could be transformed to a more generally useful get_author
-    try:
-        author = content.authorships[0].target
-    except (AttributeError, IndexError, TypeError):
-        return
-    # XXX This should use a different variant, but author images currently do
-    # not have a consistent ratio and framing of the portrayed person. So we
-    # need to crop the lower part of the image using CSS, ignoring the ratio.
-    return get_image(content=author, variant_id=variant_id, fallback=False,
-                     fill_color=None)
 
 
 @zeit.web.register_filter
