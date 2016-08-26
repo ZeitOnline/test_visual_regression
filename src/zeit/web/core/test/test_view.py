@@ -792,7 +792,7 @@ def test_reader_revenue_status_should_default_to_registration_for_zei(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, 'product_id', 'ZEI')
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/feature/feature_longform')
+        'http://xml.zeit.de/zeit-online/article/zeit')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp28'] == 'registration'
 
