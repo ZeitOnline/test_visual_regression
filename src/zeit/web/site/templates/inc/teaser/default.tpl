@@ -29,9 +29,11 @@
                     {% block teaser_kicker %}
                         <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content, 'zplus' if teaser is zplus_content) }}">
                             {% block kicker_logo scoped %}
-                                {% if teaser is zplus_content %}
-                                    {{ lama.use_svg_icon('zplus', self.layout() + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
-                                {% endif %}
+                                {% block zplus_kicker_logo %}
+                                    {% if teaser is zplus_content %}
+                                        {{ lama.use_svg_icon('zplus', self.layout() + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
+                                    {% endif %}
+                                {% endblock %}
                                 {% if teaser is zmo_content %}
                                     {{ lama.use_svg_icon('logo-zmo-zm', self.layout() + '__kicker-logo--zmo svg-symbol--hide-ie', view.package, a11y=False) }}
                                 {% elif teaser is zett_content %}
