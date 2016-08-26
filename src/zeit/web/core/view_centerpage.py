@@ -12,7 +12,12 @@ import zeit.web.core.centerpage
 import zeit.web.core.view
 import zeit.web.core.utils
 
+from zope.interface import providedBy
 
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ISitemap,
+    renderer='templates/sitemap/sitemap.html')
 class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     advertising_enabled = True
@@ -20,6 +25,8 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
     def __init__(self, *args, **kwargs):
         super(Centerpage, self).__init__(*args, **kwargs)
         self.context.advertising_enabled = self.banner_on
+        if zeit.content.cp.interfaces.ISitemap in providedBy(self.context):
+            self.request.response.content_type = 'application/xml'
 
         # Most of our resources will be purged from now on. We test this new
         # mechanism on CPs. This might be valid for all resources in the future
