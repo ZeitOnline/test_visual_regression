@@ -141,7 +141,7 @@ def test_image_template_should_designate_correct_layouts(testbrowser):
     assert fullwidth.attrib['data-ratio'] == '1.77777777778'  # variant=wide
 
 
-def test_image_macro_should_hide_none(testbrowser):
+def test_image_template_should_hide_none(testbrowser):
     # XXX I'd much rather change a caption in the article, but trying
     # to checkout raises ConstrainedNotSatisfiedError: xl-header. :-(
     with mock.patch('zeit.web.core.block._inline_html') as inline:
@@ -313,3 +313,6 @@ def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
     assert tpl.module.no_block('') == ''
+
+
+# TODO: Move tests into appropriate file / Cleanup (#OPS-386)
