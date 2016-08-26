@@ -4,7 +4,21 @@ Change log for zeit.web
 3.0 (unreleased)
 ----------------
 
+- Fix: ZMO infographic
+
 - ZON-1586: Overhaul image handling, remove bitblt
+
+
+2.100.2 (2016-08-25)
+--------------------
+
+- Hotfix: ZMO Macro fix: use macro OR template (never both)
+
+
+2.100.1 (2016-08-25)
+--------------------
+
+- Hotfix: Move ZMO image macro to template block
 
 
 2.100 (2016-08-25)
