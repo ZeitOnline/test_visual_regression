@@ -125,6 +125,9 @@
                     <block author="Test Mann" contenttype="article" date-first-released="" date-last-modified="2015-03-05T13:38:06+00:00" date-last-published="" expires="" href="http://xml.zeit.de/zeit-online/article/fischer" issue="26" last-semantic-change="2015-03-05T13:32:17.683587+00:00" publication-date="" ressort="Politik" uniqueId="http://xml.zeit.de/zeit-online/article/fischer" year="2008">
                     </block>
                 </container>
+                <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37a12" cp:type="teaser" module="zon-small">
+                <block uniqueId="http://xml.zeit.de/zeit-magazin/article/martenstein-portraitformat" />
+            </container>
             </region>
         </cluster>
         <cluster visible="True" area="id-7e329214-665f-457d-a624-94c47850f95d" kind="duo">
