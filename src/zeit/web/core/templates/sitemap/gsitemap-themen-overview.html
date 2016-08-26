@@ -1,0 +1,11 @@
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- set whitelist = whitelist() -%}
+{%- set total_pages = (whitelist | length / 100) | round | int -%}
+{%- for i in range(total_pages + 1) -%}
+    {%- if i > 0 -%}
+        <sitemap>
+            <loc>http://www.zeit.de{{ view.content_path }}?p={{ i }}</loc>
+        </sitemap>
+    {%- endif -%}
+{%- endfor -%}
+</sitemapindex>

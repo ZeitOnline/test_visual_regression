@@ -1,0 +1,7 @@
+{%- for i in range(area.total_pages + 1) -%}
+    {%- if i > 0 -%}
+    <sitemap>
+        <loc>http://www.zeit.de{{ view.content_path }}?p={{ i }}</loc>
+    </sitemap>
+    {%- endif -%}
+{%- endfor -%}
