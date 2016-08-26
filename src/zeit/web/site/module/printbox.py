@@ -28,10 +28,3 @@ class Printbox(zeit.web.core.centerpage.Module, list):
 
         if box is not None:
             self.append(box)
-
-    @zeit.web.reify
-    def image(self):
-        try:
-            return zeit.content.image.interfaces.IImages(self[0]).image
-        except (TypeError, IndexError, AttributeError):
-            return

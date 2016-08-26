@@ -640,11 +640,9 @@ def test_article_with_fictitious_imgs_should_not_render_img_container(
     assert not browser.cssselect('div.article__page figure.figure-stamp')
 
 
-def test_article03_has_linked_image(testbrowser):
+def test_article_has_linked_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03')
     assert browser.xpath('//a[@href="http://www.test.de"]/img')
-    alt = browser.xpath('//a[@href="http://www.test.de"]/img/@alt')[0]
-    assert alt.startswith('Immer noch die besten Botschafterinnen der Region')
 
 
 @pytest.mark.skipif(True,
@@ -662,33 +660,19 @@ def test_article02_should_have_esi_include(testbrowser):
     assert len(browser.cssselect('main include')) == 1
 
 
-def test_article_has_linked_copyright(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/03')
-    output = ""
-    for line in browser.contents.splitlines():
-        output += line.strip()
-    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" class="" target="_blank">' \
-        '© Reuters/Alessandro Bianchi' in output
-
-
-def test_longform_has_linked_copyright(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/05')
-    output = ""
-    for line in browser.contents.splitlines():
-        output += line.strip()
-    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" class="" target="_blank">' \
-        '© Johannes Eisele/AFP/Getty Images' in output
-
-
-def test_header_has_linked_copyright(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header1')
-    output = ""
-    for line in browser.contents.splitlines():
-        output += line.strip()
-    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" class="" target="_blank">©foo' in output
+@pytest.mark.parametrize(
+    'path', [('/zeit-magazin/article/03'), ('/zeit-magazin/article/05'),
+             ('/zeit-magazin/article/header1')])
+def test_article_has_linked_copyright(testbrowser, path):
+    browser = testbrowser(path)
+    assert browser.cssselect('.figure__copyright')
+    copyright = browser.cssselect('.figure__copyright')[0]
+    assert copyright.get('itemprop') == 'copyrightHolder'
+    assert copyright.cssselect('a')
+    link = copyright.cssselect('a')[0]
+    assert link.get('href') == 'http://foo.de'
+    assert link.get('target') == '_blank'
+    assert link.text_content() == u'© Reuters/Alessandro Bianchi'
 
 
 def test_feature_longform_should_have_zon_logo_header(testbrowser):

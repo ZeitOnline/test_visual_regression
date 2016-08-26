@@ -103,16 +103,14 @@ def test_vgwort_pixel_should_be_present(testbrowser):
     browser = testbrowser('/zeit-magazin/article/01')
     pixel = browser.cssselect('body img[src^="http://example.com"]')
     assert len(pixel) == 1
-    assert pixel[0].get('src').startswith('http://example.com/vgwort/')
-    # check for http://example.com/vgwort/1d19d1df864c492188198be0291ff993
-    # doesn't work because bitblt is processing all image sources in tests
+    assert pixel[0].get('src') == (
+        'http://example.com/vgwort/1d19d1df864c492188198be0291ff993')
 
     browser = testbrowser('/zeit-online/article/01')
     pixel = browser.cssselect('body img[src^="http://example.com"]')
     assert len(pixel) == 1
-    assert pixel[0].get('src').startswith('http://example.com/vgwort/')
-    # check for http://example.com/vgwort/1d19d1df864c492188198be0291ff993
-    # doesn't work because bitblt is processing all image sources in tests
+    assert pixel[0].get('src') == (
+        'http://example.com/vgwort/980d578641cd444aa69700ed11b21d63')
 
     browser = testbrowser('/zeit-online/index')
     pixel = browser.cssselect('body img[src^="http://example.com"]')

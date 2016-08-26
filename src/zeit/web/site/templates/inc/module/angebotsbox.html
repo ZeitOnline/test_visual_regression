@@ -5,12 +5,14 @@
         {{ teaser.supertitle }}
     </div>
     <div class="print-box__content">
-            <a class="print-box__title" href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_headline_headline" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.title">{{ teaser.title }}</a>
-        <figure class="print-box__media">
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_cover_cover" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.image">
-                <img class="print-box__media-item" src="{{ module.image | default_image_url('zon-printbox') }}">
-            </a>
-        </figure>
+        <a class="print-box__title" href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_headline_headline" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.title">{{ teaser.title }}</a>
+        {% require image = get_image(module, name='content', variant_id='original', fallback=False) %}
+            <figure class="print-box__media scaled-image">
+                <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_cover_cover" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.image">
+                    <img class="print-box__media-item" alt="{{ image.alt }}" src="{{ request.image_host + image.fallback_path }}" data-src="{{ request.image_host + image.path }}" data-ratio="{{ image.ratio }}">
+                </a>
+            </figure>
+        {% endrequire %}
         <div class="print-box__container">
             <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.text.text&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_text_text" title="{{ teaser.title }}" data-id="{{ teaser_position }}.angebots-box.text">
                 <p class="print-box__text">{{ teaser.subtitle }}</p>

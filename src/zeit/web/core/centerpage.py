@@ -106,6 +106,18 @@ def get_video(context):
     return primary
 
 
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock)
+def images_from_teaserblock(context):
+    try:
+        content = list(context)[0]
+    except IndexError:
+        raise zope.component.interfaces.ComponentLookupError(
+            'Could not adapt', context, zeit.web.core.interfaces.IImage)
+    return zeit.content.image.interfaces.IImages(content, None)
+
+
+@zeit.web.register_filter
 def get_area(area):
     return zeit.web.core.utils.get_named_adapter(
         area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
@@ -221,8 +233,9 @@ class Module(object):
 
     @layout.setter
     def layout(self, value):
-        self._layout = zeit.content.cp.layout.BlockLayout(
-            value, value, areas=[], image_pattern=value)
+        self._layout = zeit.content.cp.layout.get_layout(value) or (
+            zeit.content.cp.layout.BlockLayout(
+                value, value, areas=[], image_pattern=value))
 
     @property
     def request(self):
@@ -242,15 +255,39 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
-        self.layout = kw.pop('layout', 'default')
+        self._layout = kw.pop('layout', 'default')
         self.type = kw.pop('type', 'teaser')
-        self.__parent = kw.pop('parent', None)
+        self.__parent__ = kw.pop('parent', None)
 
     def __hash__(self):
         return hash((self.layout.id, id(self)))
 
     def __repr__(self):
         return object.__repr__(self)
+
+    @zeit.web.reify
+    def layout(self):
+        if self._layout:
+            layout = LEGACY_TEASER_MAPPING.get(self._layout, self._layout)
+            layout = zeit.content.cp.layout.get_layout(layout)
+            if layout:
+                return layout
+            else:
+                id = self._layout
+                return zeit.content.cp.layout.BlockLayout(
+                    id, id, areas=[], image_pattern=id)
+        return super(TeaserModule, self).layout
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(TeaserModule)
+def images_from_teasermodule(context):
+    try:
+        content = list(context)[0]
+    except IndexError:
+        raise zope.component.interfaces.ComponentLookupError(
+            'Could not adapt', context, zeit.content.image.interfaces.IImages)
+    return zeit.content.image.interfaces.IImages(content, None)
 
 
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)

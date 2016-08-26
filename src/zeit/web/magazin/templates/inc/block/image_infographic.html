@@ -1,11 +1,15 @@
-{% extends "zeit.web.magazin:templates/inc/asset/image_article.tpl"%}
-{% from 'zeit.web.magazin:templates/inc/asset/image_article.tpl' import footer_has_border with context %}
-{% set media_caption_additional_class = 'x-footer' ~ ( '' if footer_has_border else '--borderless') %}
+{% extends "zeit.web.magazin:templates/inc/asset/image_article.tpl" %}
+
+{% set media_block_additional_class = 'infographic' %}
 {% set media_block_additional_class = 'article__item' | with_mods(*obj.figure_mods) ~ (' infographic x-spacing') %}
-{% set media_copyright_class='x-copyright x-caption--sans' %}
+
+{% set media_caption_additional_class = 'x-footer'
+    ~ ('--borderless' if not image.origin or not image.copyrights) %}
 
 {% block media_caption_class %}infographic{% endblock %}
+{% block media_copyright_class %}x-copyright x-caption--sans{% endblock %}
+
 {% block media_caption_above %}
-    <h3 class="x-subheadline{{ '' if image.caption else '--borderless' }}" itemprop="name">{{ image.meta.title }}</h3>
+    <h3 class="x-subheadline{{ '--borderless' if not image.caption }}" itemprop="name">{{ image.title }}</h3>
     <p class="x-copytext" itemprop="caption">{{ image.caption }}</p>
 {% endblock %}

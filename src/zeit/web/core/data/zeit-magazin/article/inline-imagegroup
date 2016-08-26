@@ -78,18 +78,12 @@
     <title>Über seine Lieblingskaiserin</title>
     <byline>von Harald Martenstein</byline>
     <division type="page">
-      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" layout="zmo-xl-header">
-        <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
-        <copyright py:pytype="str">© Fengel</copyright>
-      </image>
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" layout="zmo-xl-header"></image>
       <p>Dreams Are My Reality. In Wien wollte ich wieder einmal die <a class="" href="http://www.kaisergruft.at/" target="_blank">Kapuzinergruft</a> besuchen, hauptsächlich wegen meiner Kaiserin. Sisi bedeutet für mich als Persönlichkeit das, was Robert De Niro für Martin Scorsese bedeutet. Sie liegt dort in einem Sarkophag, neben ihrem Franzl, dem Kaiser, und ihrem einzigen Sohn, dem labilen Kronprinzen Rudolf.</p>
       <p>Eigentlich will ich was anderes erzählen. Aber eines muss ich noch loswerden: In reiferen Jahren ließ Sisi sich oft mit ihrer Jacht im Mittelmeer ziellos umherfahren, allein. Wenn Sturm aufkam, mussten die Matrosen die immer noch betörend schöne Sisi mit Tauen an den Mast binden und dann direktemang in den Sturm hineinsegeln, volles Risiko. Wenn die eisige Gischt sie gepeitscht hat, wenn Brecher ihre zarten Glieder durchschüttelten und der wilde Sturm ihr hemmungslos im kastanienbraunen Kaiserinnenhaar wühlte, empfand Sisi das als erotisch anregend. Es lebe die Monarchie.</p>
       <p>Auch dies ist interessant: Vor genau 125 Jahren, 1889, hat Sisis Sohn Rudolf sich in Schloss Mayerling erschossen. Vorher hat er noch schnell seine Geliebte erschossen, die 17-jährige Baroness Mary Vetsera. Rudolf wäre vielleicht ein Reformkaiser geworden, er war im Geiste liberal. Andererseits hatte er im Geiste auch diese extrem schwere Schacke. Ursprünglich wollte Rudolf, der auf Befehl seines Vaters eine belgische Prinzessin geheiratet hatte, dass sich seine Hauptgeliebte Mizzi Kaspar gemeinsam mit ihm umbringt. Hauptgeliebte Mizzi weigerte sich, das finde ich nachvollziehbar. Rudolf verbrachte die Nacht mit Mizzi, am Morgen fuhr er nach Mayerling und starb dann eben mit der etwas weniger renitenten Baroness Mary. Mizzi lebte noch jahrzehntelang und hat niemals auch nur ein einziges Interview gegeben. So diskrete Frauen gibt es heute nicht mehr.</p>
       <p>Faszinierenderweise wiederholt sich die Geschichte von Mizzi und Mary dann bei Sisi. Auch Sisi stirbt anstelle einer anderen Person. Der Anarchist Luigi Lucheni wollte in Genf unbedingt den Prinzen von Orléans erdolchen. Das war sein größter Wunsch. Als der Prinz, ein eher flatterhafter Charakter mit wenig Termindisziplin, am vorgesehenen Tatort einfach nicht auftauchte, hat er, mehr oder weniger zufällig, die Kaiserin erdolcht.</p>
-      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin" layout="zmo-small-right">
-        <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
-        <copyright py:pytype="str">© Fengel</copyright>
-      </image>
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" layout="zmo-small-right"></image>
       <p>Ich weiß viel über Sisi. Wenn Sisi sich die Haare waschen ließ, dauerte das immer einen vollen Tag. Nachts legte sie sich rohes Rindfleisch aufs Gesicht. Angeblich ist das gut für die Haut. Vielleicht mochte sie auch nur das fleischige Gefühl. Ihr Gewicht und den Umfang ihrer Waden ließ sie drei Mal täglich kontrollieren, das sollte ich besser auch tun. Sisi hat durchaus gerne Süßigkeiten gegessen, anschließend aß sie dann lange gar nichts.</p>
       <p>Ich habe minutenlang vor dem Eingang zu Sisis Grab gestanden und gezögert. Ich befand mich an der letzten Wegmarke des Lebens. Der erste Schultag. Abitur. Der erste Job, Kinder, Ehen, all diese Sachen gehen einem durch den Kopf, das läuft alles ab wie ein Film im Zeitraffer. Jeder muss da durch. Ich erzähle es nur, weil jeder da durchmuss. Wie fühlt es sich an? Ich würde sagen, es fühlt sich an wie ein rohes Stück Rindfleisch.</p>
       <p>Einige Wochen vorher hätte ich es bereits machen können, beim Skilaufen. Ich hätte gedurft. Aber ich war mental noch nicht bereit. Außerdem standen hinter mir zu viele Leute. Ich mochte das nicht, mit all diesen Leuten.</p>
@@ -97,13 +91,13 @@
       <p>
         <em>Harald Martenstein ist Redakteur des <a class="" href="http://www.tagesspiegel.de/" target="_blank" title="externer Link">Tagesspiegels</a>.</em>
       </p>
-      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/" type="jpg" alt="Illustration von Martensteins Lieblingskaiserin">
-        <bu py:pytype="str">Illustration von Martensteins Lieblingskaiserin</bu>
-        <copyright py:pytype="str">© Fengel</copyright>
-      </image>
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/" type="jpg"></image>
       <p>
         <em>Diesen Artikel finden Sie als Audiodatei im Premiumbereich unter <a class="" href="https://premium.zeit.de/node/12415" target="_blank">www.zeit.de/audio</a></em>
       </p>
+    </division>
+    <division type="page">
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-online/cp-content/ig-1/" type="jpg"></image>
     </division>
     <image-credits>Illustration Fengel</image-credits>
     <subtitle/>
