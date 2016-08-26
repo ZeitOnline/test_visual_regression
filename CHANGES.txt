@@ -4,6 +4,8 @@ Change log for zeit.web
 3.0 (unreleased)
 ----------------
 
+- Fix: ZMO infographic
+
 - ZON-1586: Overhaul image handling, remove bitblt
 
 
