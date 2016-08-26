@@ -155,9 +155,7 @@
         <image-credits>Fotos (S. 16 + 17): Benne Ochs für DIE ZEIT/www.benneochs.de</image-credits>
         <supertitle>Friedhof Hamburg-Ohlsdorf</supertitle>
         <division type="page" teaser="Kein zeitlos sicheres Geschäft mehr">
-        <image src="http://xml.zeit.de/exampleimages/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="zmo-small-right" is_empty="False" alt="My 05er alt" title="my 05er title">
-            <bu>In Mexiko machte unser Reporterteam einen aufsehenerregenden Fund: In Petaquillas präsentierte Salvador Alanís, der Chef der Bürgerwehr, ein G36-Sturmgewehr der deutschen Marke Heckler &amp; Koch. Mit der Waffe hatte der Drogenboss "El Talibán" Angst und Schrecken im Ort verbreitet. Wie war sie dorthin gekommen? Die ZEIT berichtete schon 2013 über illegale Exporte von Heckler und Koch nach Mexiko. Entgegen einer Auflage der Bundesregierung waren rund 2000 Gewehre an Polizisten im Bundesstaat Guerrero gelangt. Die Staatsanwaltschaft Stuttgart ermittelt.</bu>
-            <copyright link="http://foo.de">© Johannes Eisele/AFP/Getty Images</copyright>
+        <image src="http://xml.zeit.de/exampleimages/artikel/05/02.jpg" type="jpg" publication-date="" expires="" layout="zmo-small-right" is_empty="False" alt="My 05er alt" title="my 05er title" caption_local="In Mexiko machte unser Reporterteam einen aufsehenerregenden Fund: In Petaquillas präsentierte Salvador Alanís, der Chef der Bürgerwehr, ein G36-Sturmgewehr der deutschen Marke Heckler &amp; Koch. Mit der Waffe hatte der Drogenboss El Talibán Angst und Schrecken im Ort verbreitet. Wie war sie dorthin gekommen? Die ZEIT berichtete schon 2013 über illegale Exporte von Heckler und Koch nach Mexiko. Entgegen einer Auflage der Bundesregierung waren rund 2000 Gewehre an Polizisten im Bundesstaat Guerrero gelangt. Die Staatsanwaltschaft Stuttgart ermittelt.">
         </image>
             <p>Man könnte sie skurril erzählen, anhand der Kupferdiebe, die hier Statuen stehlen, anhand der
       Hamburger Vermessungstechniker, die auf den schnurgeraden Alleen ihre Infrarotgeräte

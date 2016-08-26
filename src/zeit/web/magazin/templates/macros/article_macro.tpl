@@ -191,7 +191,7 @@
 <div class="photocluster__wrap">
     <div class="photocluster">
     {% if block %}
-        {% for obj in block.itervalues() -%}
+        {% for obj in block | reject("hidden_slide") -%}
             <div class="photocluster__item">
                 <div class="scaled-image">
                     {% include "zeit.web.magazin:templates/inc/asset/image_photocluster.tpl" %}
@@ -228,8 +228,8 @@
     {%- endif -%}
 {% endmacro %}
 
-{% macro inlinegallery(block) -%}
-    {% include 'zeit.web.core:templates/inc/blocks/inlinegallery.html' %}
+{% macro gallery(block) -%}
+    {% include 'zeit.web.core:templates/inc/blocks/gallery.html' %}
 {%- endmacro %}
 
 {% macro no_block(block) %}{% endmacro %}
