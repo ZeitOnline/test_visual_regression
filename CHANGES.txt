@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - Fix: ZMO infographic
 
+- BUG-508: Hide advertorial links in 1st level navigation without flexbox
+
 - ZON-1586: Overhaul image handling, remove bitblt
 
 - ZON-3262: Add dossier teaser
