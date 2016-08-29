@@ -356,11 +356,18 @@ def test_zplus_provides_expected_webtrekk_strings(
         selenium_driver, testserver, teasers):
 
     driver = selenium_driver
+    driver.set_window_size(900, 800)
     driver.get('%s/zeit-online/centerpage/zplus'
                '#debug-clicktracking' % testserver.url)
-    driver.set_window_size(900, 800)
 
-    teaser_el = driver.find_element_by_css_selector(teasers[0])
-    teaser_el.click()
-    track_str = driver.execute_script("return window.trackingData")
-    assert('tablet.' + teasers[1] in track_str)
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, teasers[0])))
+    except TimeoutException:
+        assert False, 'Element not locateable in 5 sec.'
+    else:
+        teaser_el = driver.find_element_by_css_selector(teasers[0])
+        teaser_el.click()
+        track_str = driver.execute_script("return window.trackingData")
+        assert('tablet.' + teasers[1] in track_str)
