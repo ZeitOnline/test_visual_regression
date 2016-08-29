@@ -14,12 +14,10 @@ import zeit.cms.repository.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.dynamicfolder.interfaces
-import zeit.content.gallery.interfaces
 import zeit.content.video.interfaces
 
 import zeit.web.core.article
 import zeit.web.core.centerpage
-import zeit.web.core.gallery
 import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.utils
@@ -110,14 +108,6 @@ class Article(Traversable):
 
         if tdict['view_name'].startswith('seite') and not tdict['subpath']:
             tdict['view_name'] = 'seite'
-
-
-@traverser(zeit.content.gallery.interfaces.IGallery)
-class Gallery(Traversable):
-
-    def __call__(self, tdict):
-        zope.interface.alsoProvides(
-            self.context, zeit.web.core.gallery.IGallery)
 
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)

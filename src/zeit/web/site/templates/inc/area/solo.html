@@ -1,0 +1,19 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+
+{% block after_module_include scoped %}
+{#
+Display mobile ad place 3 in zon on homepage after the first module that's not a raw element, assuming for now:
+- that the first element on a homepage is always a solo area (as offered by @jpfn)
+- that there will be only ONE raw element at the start of the first region (like olympia navigation)
+- that the raw contains navigational elements and the ad should be placed after the first teaser, not the raw itself
+#}
+{%
+    if view.is_hp
+    and region_loop.index == 1
+    and module_loop.index < 3
+%}
+    {% if (module_loop.index == 1 and layout != 'rawtext') or ( module_loop.index == 2 )  %}
+    {{ lama.adplace(view.banner(3), view, mobile=True) }}
+    {% endif %}
+{% endif %}
+{% endblock %}

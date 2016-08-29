@@ -3,6 +3,6 @@
 {% set module_layout = 'article-header' %}
 {% set image_itemprop = 'image' %}
 
-{% block media_block %}{{ super() | with_mods(image.image_pattern, view.article_layout) }}{% endblock %}
+{% block media_block %}{{ super() | with_mods(image.variant_id, view.article_layout) }}{% endblock %}
 {% block media_block_helper %}{{ super() | with_mods(view.article_layout) }}{% endblock %}
 {% block media_caption_class %}{{ module_layout }}{% endblock %}

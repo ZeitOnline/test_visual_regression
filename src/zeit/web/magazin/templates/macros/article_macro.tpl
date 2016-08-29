@@ -79,15 +79,6 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro image(obj, loop) %}
-    {# BBB Wrap the article image in a macro until we have block templates in ZMO #}
-    {% include "zeit.web.magazin:templates/inc/asset/image_article.tpl" with context %}
-{%- endmacro %}
-
-{% macro image_infographic(obj, loop) %}
-    {% include "zeit.web.magazin:templates/inc/block/image_infographic.html" with context %}
-{%- endmacro %}
-
 {% macro headerimage(obj, loop) %}
     {# BBB Wrap the article image in a macro until we have block templates in ZMO #}
     {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" with context %}
@@ -195,7 +186,7 @@
 <div class="photocluster__wrap">
     <div class="photocluster">
     {% if block %}
-        {% for obj in block.itervalues() -%}
+        {% for obj in block | reject("hidden_slide") -%}
             <div class="photocluster__item">
                 <div class="scaled-image">
                     {% include "zeit.web.magazin:templates/inc/asset/image_photocluster.tpl" %}
@@ -232,8 +223,8 @@
     {%- endif -%}
 {% endmacro %}
 
-{% macro inlinegallery(block) -%}
-    {% include 'zeit.web.core:templates/inc/blocks/inlinegallery.html' %}
+{% macro gallery(block) -%}
+    {% include 'zeit.web.core:templates/inc/blocks/gallery.html' %}
 {%- endmacro %}
 
 {% macro no_block(block) %}{% endmacro %}
