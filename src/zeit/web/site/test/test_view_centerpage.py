@@ -2002,6 +2002,7 @@ def test_printkiosk_area_should_render_in_isolation_skippage(testbrowser):
 def test_printkiosk_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/angebote/printkiosk/vorschau'.format(testserver.url))
+    driver.set_window_size(1200, 860)
     teaserbutton = driver.find_element_by_css_selector(
         '.js-bar-teaser-paginate')
     teaserbutton.click()
