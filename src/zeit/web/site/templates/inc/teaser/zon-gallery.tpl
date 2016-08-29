@@ -21,8 +21,10 @@
     </div>
 {% endblock %}
 
-{# Do not include kicker logo (applies when gallery is a ZMO gallery) #}
-{% block kicker_logo %}{% endblock %}
+{% block kicker_logo %}
+    {{ self.zplus_kicker_logo() }}
+{% endblock %}
+
 {# Eliminate default teaser metadata #}
 {% block teaser_metadata_default %}{% endblock %}
 {# Eliminate default teaser byline #}
