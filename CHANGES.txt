@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-3.0 (unreleased)
+3.0 (2016-08-29)
 ----------------
 
 - Fix: ZMO infographic
