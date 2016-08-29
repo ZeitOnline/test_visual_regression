@@ -1715,6 +1715,8 @@ def test_contentad_is_rendered_once_on_article_pages(testbrowser):
 
 def test_video_in_article_has_poster_copyright(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
-    figure_copyright = browser.cssselect('.video-figure__copyright')
-    assert len(figure_copyright) == 1
-    assert figure_copyright[0].text.startswith('© Foto: ')
+    figure_copyright_elem = browser.cssselect('.video-figure__copyright')
+    assert len(figure_copyright_elem) == 1
+    figure_copyright = figure_copyright_elem[0]
+    copyright_person = figure_copyright.cssselect('[itemprop="name"]')[0]
+    assert copyright_person.text == u'© Foto: Alaa Al-Marjani/Reuters'

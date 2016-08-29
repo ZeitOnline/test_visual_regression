@@ -2392,4 +2392,5 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
 def test_imagecopyright_includes_videostage_poster_copyright(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
-    assert len(figures) == 5
+    # robot video on stage has no copyright - on purpose.
+    assert len(figures) == 4
