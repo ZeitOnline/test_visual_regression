@@ -4,7 +4,6 @@
 {% block media_block %}{{ module_layout }} {{ module_layout }}--large{% endblock %}
 
 {% block media_caption -%}
-    {# TODO: Was haben wir denn hier? blocks schonmal nicht ... #}
     {% if teaser.credit and teaser.credit | trim | length > 7 %}
         <figcaption class="figure__caption figure__caption--hidden">
             <span class="video-figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
