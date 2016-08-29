@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-1586: Overhaul image handling, remove bitblt
 
+- ZON-3262: Add dossier teaser
+
 
 2.100.2 (2016-08-25)
 --------------------
