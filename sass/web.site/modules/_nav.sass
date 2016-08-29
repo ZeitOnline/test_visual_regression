@@ -330,6 +330,10 @@
 				display: block
 				float: none
 
+		&__login-list
+			left: auto
+			right: remify(-10px)
+
 		& li:hover a[aria-controls]:after,
 		&__login:hover a[aria-controls]:after
 			+drop_icon($open: true, $cross: false)
@@ -373,11 +377,6 @@
 		&__date
 			float: right
 			padding-top: 5px
-
-	+respond-min-max($break-tablet-min, $break-desktop-min)
-		&__login-list
-			left: auto
-			right: remify(-10px)
 
 
 //*************
