@@ -1397,18 +1397,28 @@ def test_cp_does_not_render_image_if_expired(testbrowser):
         assert '/zeit-online/cp-content/ig-2' not in browser.contents
 
 
+def test_zplus_parquet_has_own_styles(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+
+    area = browser.cssselect('.cp-area--zplus-parquet')[0]
+    logo = area.cssselect('.parquet-meta__logo--zplus')
+    more_link = area.cssselect('.parquet-meta__more-link--zplus')
+
+    assert len(logo)
+    assert len(more_link)
+
+
 def test_zmo_parquet_has_zmo_styles(testbrowser):
     browser = testbrowser('/zeit-online/parquet')
 
-    regions = browser.cssselect('.cp-region--parquet')
-    zmo_region = regions[3]
-    zmo_title = zmo_region.cssselect('.parquet-meta__title--zmo')
-    zmo_logo = zmo_region.cssselect('.parquet-meta__logo--zmo')
-    zmo_kicker = zmo_region.cssselect('.teaser-small__kicker--zmo-parquet')
+    area = browser.cssselect('.cp-area--zmo-parquet')[0]
+    zmo_title = area.cssselect('.parquet-meta__title--zmo')
+    zmo_logo = area.cssselect('.parquet-meta__logo--zmo')
+    zmo_kicker = area.cssselect('.teaser-small__kicker--zmo-parquet')
 
     assert len(zmo_title)
     assert len(zmo_logo)
-    assert len(zmo_kicker) == 2
+    assert len(zmo_kicker) == 3
 
 
 def test_jobbox_is_displayed_correctly(testbrowser):
