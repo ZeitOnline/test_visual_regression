@@ -11,6 +11,7 @@
     <area kind="parquet" title="Parkett-Fläche">parquet</area>
     <area kind="zmo-parquet" title="ZEITmagazin Parkett" available="zeit.web.core.interfaces.IInternalUse">zmo-parquet</area>
     <area kind="zco-parquet" title="ZEIT Campus Parkett" available="zeit.web.core.interfaces.IInternalUse">zco-parquet</area>
+    <area kind="zplus-parquet" title="Z+ Parkett" available="zeit.web.core.interfaces.IInternalUse">zplus-parquet</area>
     <area kind="spektrum" title="Spektrum Parkett" available="zeit.web.core.interfaces.IInternalUse">spektrum</area>
     <area kind="zett" title="ze.tt Parkett" available="zeit.web.core.interfaces.IInternalUse">zett</area>
     <area kind="storystream" title="Storystream-Fläche">storystream</area>

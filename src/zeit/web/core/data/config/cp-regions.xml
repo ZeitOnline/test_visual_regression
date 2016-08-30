@@ -28,6 +28,9 @@
     <region kind="parquet" title="ZEIT Campus Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="zco-parquet"/>
     </region>
+    <region kind="parquet" title="Z+ Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
+        <area kind="zplus-parquet"/>
+    </region>
     <region kind="parquet" title="Spektrum Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="spektrum"/>
     </region>
