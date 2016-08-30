@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-511: Right align user menu
 
+- BUG-333: Fix storystream text-overflow character color
+
 
 3.0 (2016-08-29)
 ----------------
