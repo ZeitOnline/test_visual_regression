@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <header>
+      <cardstack card_id="409" is_advertorial="False"/>
+    </header>
+    <author href="http://xml.zeit.de/autoren/S/Stefanie_Sippel/index" publication-date="" expires="">
+      <display_name>Stefanie Sippel</display_name>
+    </author>
+    <rankedTags>
+      <tag uuid="7b7b0181-8093-4b52-a1df-7061a4ba73c9" url_value="wasser" type="free">Wasser</tag>
+      <tag uuid="62f6421f-84e1-4087-b817-6c609bda692d" url_value="schwimmen" type="free">Schwimmen</tag>
+      <tag uuid="1f3d3f94-2715-4b14-9e93-753904b99fcb" url_value="olympische-spiele" type="topic">Olympische Spiele</tag>
+      <tag uuid="a01c4318-c0c3-4b67-9ec5-22fbfdaea78d" url_value="olympia" type="free">Olympia</tag>
+    </rankedTags>
+    <references></references>
+    <image base-id="http://xml.zeit.de/sport/2016-08/synchron-schwimmerin-2/" type="jpg" title="Sychronschwimmerinnen" alt="Japans Synchronschwimmerinnen präsentieren eine Choreografie im Teamwettbewerb. " publication-date="" expires="">
+      <bu>Japans Synchronscheimmerinnenpräsentieren eine Choreografie im Teamwettbewerb.</bu>
+      <copyright>©Getty Image / The Asahi Shimbun</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Stefanie Sippel</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Sport</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-08-16T15:29:35.944449+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-08-16T15:29:35.384818+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-08-16T15:49:08.612918+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-08-16T15:29:35.384818+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-08-16T15:29:34.863089+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-08-16T15:29:44.647896+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">embed</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-08-16T15:29:27.219649+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.miklis</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/sport/2016-08/47a128c6-c2b3-483e-8ac8-2515cc208f04.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">914d583f1a2c4204b5d9d878d9d56bb0</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Sport</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">70 Jahre DIE ZEIT</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Synchronschwimmerinnen zählen zu den komplettesten Athletinnen bei den Spielen. Da braucht es keine Männer.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">935</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:1ff291ef-1c61-4e9b-a07c-8b8956ce123c}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">34</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Synchronschwimmen</supertitle>
+    <title>Bitte lächeln!</title>
+    <subtitle>Sie heben sich aus dem Wasser, sie tanzen, sie planschen: Synchronschwimmerinnen zählen zu den komplettesten Athletinnen bei den Spielen. Da braucht es keine Männer.</subtitle>
+    <division type="page">
+      <image display_mode="column-width" variant_name="wide" is_empty="True"/>
+      <p>Olympia ist der Treffpunkt aller Sportarten. Wer es ins Programm schafft, darf sich alle vier Jahre der Weltöffentlichkeit präsentieren. Es wird gerungen, geschossen und geschwommen. In 41 Sportarten werden 306 neue Olympiasieger gekürt. Ziemlich viel für zwei Wochen.</p>
+      <p>Jeder Sport hat seine Technik, entwickelt eine eigene Faszination und bleibt anders in Erinnerung. Und die Besten einer Sportart kommen fast immer aus einem anderen Land. Während der Olympischen Spiele stellen wir täglich eine Sportart in einer Kartengeschichte vor. Die Sportart des Tages erklärt Ihnen Regeln und Techniken. Am gleichen Tag fällt in dieser Sportart auch eine wichtige Entscheidung. Heute ab 19 Uhr werden die Medaillen im Synchronschwimm-Duett vergeben.<br/></p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Synchronschwimmen</supertitle>
+    <text>Sie heben sich aus dem Wasser, sie tanzen, sie planschen: Synchronschwimmerinnen zählen zu den komplettesten Athletinnen bei den Spielen. Da braucht es keine Männer.</text>
+    <title>Bitte lächeln!</title>
+  </teaser>
+</article>

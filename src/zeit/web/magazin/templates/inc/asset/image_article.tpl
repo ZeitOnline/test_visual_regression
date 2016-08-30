@@ -1,6 +1,6 @@
 {% extends "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
 
-{% set image = obj %}
+{% set image = get_image(obj, fallback=False) %}
 {% set href = image.href %}
 {% set image_itemprop = 'image' %}
 
@@ -21,21 +21,11 @@ figure__media-container
 figure__media
 {%- endblock %}
 
-{% block media_caption -%}
-    <figcaption class="figure__caption {{ media_caption_additional_class }}">
-        {% if image.caption %}
-        <span class="figure__text">{{ image.caption | safe }}</span>
-        {% endif %}
-        {% if image.copyright | count and image.copyright[0][0] != '©' %}
-        <span class="figure__copyright" itemprop="copyrightHolder">
-            {% if image.copyright[0][1] %}
-            <a href="{{ image.copyright[0][1] }}" target="_blank">
-            {% endif %}
-                {{ image.copyright[0][0] }}
-            {% if image.copyright[0][1] %}
-            </a>
-            {% endif %}
-        </span>
-        {% endif %}
-    </figcaption>
+{% block media_caption_content -%}
+    {% if image.origin  %}
+        <span class="x-caption--sans">Quelle: {{ image.origin }}</span>
+    {% elif image.caption %}
+        <span class="figure__text">{{ image.caption }}</span>
+    {% endif %}
+    {{ super() }}
 {%- endblock %}

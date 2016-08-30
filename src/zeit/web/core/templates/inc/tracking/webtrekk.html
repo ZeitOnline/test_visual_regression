@@ -1,8 +1,12 @@
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_script.html" %}
 
 <script>
-    {# XXX: Please, only set variables in jinja where absolutely needed. #}
 
+    if (typeof window.webtrekkConfig === 'object') {
+        window.webtrekkConfig.trackId = "{{ settings('webtrekk_id') }}";
+    }
+
+    {# XXX: Please, only set variables in jinja where absolutely needed. #}
     {% set wt_kennung = view.webtrekk.identifier %}
 
     {% if view is framebuilder -%}

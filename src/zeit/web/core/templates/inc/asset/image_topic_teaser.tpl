@@ -11,8 +11,7 @@
 {% block media_link_title %}{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}{% endblock %}
 
 {% block media_block_additional_data_attributes %}
-    {%- set mobile_image = get_image(module, teaser, variant_id='wide') %}
-    {%- if mobile_image %}
+    {%- require mobile_image = get_image(module, variant_id='wide') %}
     data-mobile-src="{{ request.image_host + mobile_image.path }}" data-mobile-ratio="{{ mobile_image.ratio }}"
-    {%- endif %}
+    {%- endrequire %}
 {% endblock %}

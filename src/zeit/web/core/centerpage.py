@@ -17,7 +17,7 @@ import zeit.content.image.interfaces
 import zeit.content.video.interfaces
 import zeit.edit.interfaces
 
-import zeit.find.search
+import zeit.solr.connection
 
 import zeit.web
 import zeit.web.core.interfaces
@@ -76,17 +76,8 @@ class Region(Area):
     factory = zeit.content.cp.area.RegionFactory(None)
 
 
-@zeit.web.register_filter
-def auto_select_asset(teaser):
-    for getter in (get_video_asset, get_gallery_asset, get_image_asset):
-        asset = getter(teaser)
-        if asset:
-            return asset
-    log.debug('No assets for %s' % teaser.uniqueId)
-
-
-@zeit.web.register_filter
-def get_video_asset(teaser):
+@zeit.web.register_global
+def get_video(context):
 
     def get_video_source(self):
         try:
@@ -99,7 +90,7 @@ def get_video_asset(teaser):
             return self.flv_url
 
     try:
-        asset = zeit.content.video.interfaces.IVideoAsset(teaser)
+        asset = zeit.content.video.interfaces.IVideoAsset(context)
         primary = asset.video
         secondary = asset.video_2
     except TypeError:
@@ -115,23 +106,18 @@ def get_video_asset(teaser):
     return primary
 
 
-@zeit.web.register_filter
-def get_gallery_asset(teaser):
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ITeaserBlock)
+def images_from_teaserblock(context):
     try:
-        return zeit.content.gallery.interfaces.IGalleryReference(
-            teaser).gallery
-    except (TypeError, AttributeError):
-        return
+        content = list(context)[0]
+    except IndexError:
+        raise zope.component.interfaces.ComponentLookupError(
+            'Could not adapt', context, zeit.web.core.interfaces.IImage)
+    return zeit.content.image.interfaces.IImages(content, None)
 
 
 @zeit.web.register_filter
-def get_image_asset(teaser):
-    try:
-        return zeit.content.image.interfaces.IImages(teaser).image
-    except (TypeError, AttributeError):
-        return
-
-
 def get_area(area):
     return zeit.web.core.utils.get_named_adapter(
         area, zeit.content.cp.interfaces.IRenderedArea, 'kind')
@@ -139,8 +125,6 @@ def get_area(area):
 
 def get_module(module):
     if zeit.web.core.interfaces.IBlock.providedBy(module):
-        return module
-    elif zeit.content.cp.interfaces.IAutomaticTeaserBlock.providedBy(module):
         return module
     elif zeit.content.cp.interfaces.ICPExtraBlock.providedBy(module):
         name = 'cpextra'
@@ -249,8 +233,9 @@ class Module(object):
 
     @layout.setter
     def layout(self, value):
-        self._layout = zeit.content.cp.layout.BlockLayout(
-            value, value, areas=[], image_pattern=value)
+        self._layout = zeit.content.cp.layout.get_layout(value) or (
+            zeit.content.cp.layout.BlockLayout(
+                value, value, areas=[], image_pattern=value))
 
     @property
     def request(self):
@@ -270,15 +255,39 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
 
     def __init__(self, arg, **kw):
         zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
-        self.layout = kw.pop('layout', 'default')
+        self._layout = kw.pop('layout', 'default')
         self.type = kw.pop('type', 'teaser')
-        self.__parent = kw.pop('parent', None)
+        self.__parent__ = kw.pop('parent', None)
 
     def __hash__(self):
         return hash((self.layout.id, id(self)))
 
     def __repr__(self):
         return object.__repr__(self)
+
+    @zeit.web.reify
+    def layout(self):
+        if self._layout:
+            layout = LEGACY_TEASER_MAPPING.get(self._layout, self._layout)
+            layout = zeit.content.cp.layout.get_layout(layout)
+            if layout:
+                return layout
+            else:
+                id = self._layout
+                return zeit.content.cp.layout.BlockLayout(
+                    id, id, areas=[], image_pattern=id)
+        return super(TeaserModule, self).layout
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(TeaserModule)
+def images_from_teasermodule(context):
+    try:
+        content = list(context)[0]
+    except IndexError:
+        raise zope.component.interfaces.ComponentLookupError(
+            'Could not adapt', context, zeit.content.image.interfaces.IImages)
+    return zeit.content.image.interfaces.IImages(content, None)
 
 
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
@@ -299,8 +308,8 @@ def search_with_timing_metrics(*args, **kw):
     with zeit.web.core.metrics.timer(
             'zeit.web.site.area.default.solr.reponse_time'):
         return original_search(*args, **kw)
-original_search = zeit.find.search.search
-zeit.find.search.search = search_with_timing_metrics
+original_search = zeit.solr.connection.SolrConnection.search
+zeit.solr.connection.SolrConnection.search = search_with_timing_metrics
 
 
 # We can't do anything with non-existent content (as opposed to vivi where

@@ -152,9 +152,10 @@ class Application(object):
             '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}')
         config.add_route(
             'schlagworte',
-            '/schlagworte/{category}/{item}{subpath:($|/$|/index$)}')
+            '/schlagworte/{category}/{item}'
+            '{subpath:(/index|/seite-\d+|)/?$}')
 
-        # Route to post comments to a communit service
+        # Route to post comments to a community service
         config.add_route('post_test_comments', '/admin/test-comments')
 
         config.add_static_view(
@@ -174,6 +175,8 @@ class Application(object):
         config.add_request_method(configure_host('image'), reify=True)
         config.add_request_method(configure_host('jsconf'), reify=True)
         config.add_request_method(configure_host('fbia'), reify=True)
+        config.add_request_method(
+            configure_host('framebuilder_ssl_asset'), reify=True)
 
         config.add_request_method(
             zeit.web.core.security.get_user, name='user', reify=True)

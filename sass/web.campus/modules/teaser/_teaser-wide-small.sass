@@ -51,31 +51,26 @@
 .teaser-wide-small
 	&--advertorial
 		position: relative
-		font-family: "Verdana", $sans-fallbacks
-		&:before
-			background: rgba(#fff, 0.8)
-			color: #444
-			content: "Anzeige"
-			display: inline-block
-			font-family: $font-tabletgothic
-			font-size: remify(9px)
-			letter-spacing: 0.15em
-			padding: remify(10px)
-			position: absolute
-			text-transform: uppercase
-			top: $page-padding--small
-			right: $page-padding--small
-			+respond-min($break-tablet-min)
-				top: $page-padding
-				right: $cp-padding
-		.teaser-wide-small__kicker
-			font-size: 0.6375rem
-			padding-bottom: remify(8px)
-		.teaser-wide-small__title
-			font-family: "Impact", "Arial Black", "Arial Bold", Gadget, sans-serif
-			font-size: remify(19.2px)
-			letter-spacing: 0.05em
-			line-height: 1.2em
-		.teaser-wide-small__text,
-		.teaser-wide-small__metadata
-			font-size: remify(12px)
+		.teaser-wide-small__heading
+			&:before
+				background: rgba(#fff, 0.8)
+				color: #444
+				content: "Anzeige"
+				display: inline-block
+				font-family: $font-tabletgothic
+				font-size: remify(9px)
+				font-weight: normal
+				letter-spacing: 0.15em
+				line-height: 1
+				position: absolute
+				text-transform: uppercase
+				top: $page-padding--small
+				right: $page-padding--small
+				// z-index: 2
+				+respond-min($break-tablet-min)
+					padding: remify(10px)
+					top: $page-padding
+					right: $cp-padding
+		.teaser-wide-small__media--force-mobile + .teaser-wide-small__heading
+			&:before
+				padding: remify(10px)

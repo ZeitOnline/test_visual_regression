@@ -31,21 +31,6 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
     }
 
     /**
-     * images.js: create prefix
-     * @function prefix
-     * @param  {integer} width width of image
-     * @param  {integer} height height of image
-     * @return {string} prefix string for image path
-     */
-    function prefix( width, height ) {
-        var key = width + ':' + height + ':time',
-            out = sjcl.hash.sha1.hash( key ),
-            digest = sjcl.codec.hex.fromBits( out );
-
-        return '/bitblt-' + width + 'x' + height + '-' + digest;
-    }
-
-    /**
      * images.js: use standard image or hide allocated image space and
      * comment counter if no alternative source URL is present
      * @function hideImage
@@ -168,13 +153,8 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
         source = useMobileVariant ? imageData.mobileSrc : imageData.src;
         width = Math.round( width );
         height = Math.round( height );
-
-        if ( /bitblt/.test( source ) ) { // #TRASHME: for old BitBlt shizzle
-            token = prefix( width, height );
-            source = source.replace( /\/bitblt-\d+x\d+-[a-z0-9]+/, token );
-        } else {
-            source = source + '__' + width + 'x' + height;
-        }
+        source += '__' + width + 'x' + height + '__';
+        source += isMobile ? 'mobile' : 'desktop';
 
         return {
             width: origWidth,

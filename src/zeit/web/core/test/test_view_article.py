@@ -34,3 +34,21 @@ def test_advertorial_marker_is_returned_correctly():
     view = zeit.web.site.view_article.Article(
         content, pyramid.testing.DummyRequest())
     assert view.advertorial_marker == ('YYY', 'XXX', 'Zzz')
+
+
+def test_url_of_image_groups_is_suffixed_with_mobile_on_small_browser_size(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    body_image = driver.find_element_by_css_selector('.article__media img')
+    assert body_image.get_attribute('src').endswith('mobile')
+
+
+def test_url_of_image_groups_is_suffixed_with_desktop_on_big_browser_size(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.maximize_window()
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    body_image = driver.find_element_by_css_selector('.article__media img')
+    assert body_image.get_attribute('src').endswith('desktop')

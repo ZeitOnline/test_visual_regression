@@ -68,86 +68,46 @@ def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
     assert hasattr(video, 'video_still')
 
 
-def test_image_should_be_none_if_is_empty_is_true():
-    model_block = mock.Mock()
-    model_block.is_empty = True
-    image = zeit.web.core.block.Image(model_block)
-    assert image is None
+def test_image_should_render_supertitle_and_caption_in_alt_tag(monkeypatch):
+    context = mock.Mock()
+    context.context.supertitle = u'New York'
+    context.context.title = u'Standard & Poor´s'
 
+    monkeypatch.setattr(
+        zeit.content.article.interfaces, 'IArticle', lambda c, _: c)
+    image = zeit.web.core.image.HeaderBlockImage(context)
+    image.caption = u'Standard & Poor´s Zentrale in New York'
 
-def test_image_should_be_fail_if_is_empty_doesnot_exist():
-    model_block = mock.Mock()
-    image = zeit.web.core.block.Image(model_block)
-    assert image is None
-
-
-def test_image_should_render_supertitle_and_caption_in_alt_tag():
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    header = mock.Mock()
-    xml = ('<image base-id="http://xml.zeit.de/foo">'
-           '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
-           '<copyright>© Justin Lane / dpa</copyright>'
-           '</image>')
-    model_block.xml = lxml.etree.fromstring(xml)
-    with mock.patch(
-            'zeit.content.article.interfaces.IArticle') as article:
-        article(model_block).supertitle = u'New York'
-        article(model_block).title = u'Standard & Poor´s'
-        image = zeit.web.core.block.HeaderImage(model_block, header)
     assert image.alt == u'New York: Standard & Poor´s Zentrale in New York'
 
 
-def test_image_should_render_caption_in_alt_tag():
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    header = mock.Mock()
-    xml = ('<image base-id="http://xml.zeit.de/foo">'
-           '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
-           '<copyright>© Justin Lane / dpa</copyright>'
-           '</image>')
-    model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.HeaderImage(model_block, header)
+def test_image_should_render_caption_in_alt_tag(monkeypatch):
+    context = mock.Mock()
+    context.context.supertitle = None
+    context.context.title = u'Standard & Poor´s'
+
+    monkeypatch.setattr(
+        zeit.content.article.interfaces, 'IArticle', lambda c, _: c)
+    image = zeit.web.core.image.HeaderBlockImage(context)
+    image.caption = u'Standard & Poor´s Zentrale in New York'
+
     assert image.alt == u'Standard & Poor´s Zentrale in New York'
 
 
-def test_image_should_render_supertitle_and_title_in_alt_tag():
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    header = mock.Mock()
-    xml = ('<image base-id="http://xml.zeit.de/foo">'
-           '<copyright>© Justin Lane / dpa</copyright>'
-           '</image>')
-    model_block.xml = lxml.etree.fromstring(xml)
-    with mock.patch(
-            'zeit.content.article.interfaces.IArticle') as article:
-        article(model_block).supertitle = u'New York'
-        article(model_block).title = u'Standard & Poor´s'
-        image = zeit.web.core.block.HeaderImage(model_block, header)
+def test_image_should_render_supertitle_and_title_in_alt_tag(monkeypatch):
+    context = mock.Mock()
+    context.context.supertitle = u'New York'
+    context.context.title = u'Standard & Poor´s'
+
+    monkeypatch.setattr(
+        zeit.content.article.interfaces, 'IArticle', lambda c, _: c)
+    image = zeit.web.core.image.HeaderBlockImage(context)
+    image.caption = None
+
     assert image.alt == u'New York: Standard & Poor´s'
 
 
-def test_image_should_decode_html_entities_in_caption():
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    xml = ('<image base-id="http://xml.zeit.de/foo">'
-           '<bu>Standard &amp; Poor´s Zentrale in New York</bu>'
-           '<copyright>© Justin Lane / dpa</copyright>'
-           '</image>')
-    model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.Image(model_block)
-    assert image.caption == u'Standard & Poor´s Zentrale in New York'
-
-
-def test_image_should_not_break_on_missing_caption():
+def test_image_should_not_break_on_missing_caption(application):
     model_block = mock.Mock()
     model_block.display_mode = 'large'
     model_block.variant_name = 'wide'
@@ -156,11 +116,12 @@ def test_image_should_not_break_on_missing_caption():
            '<copyright>© Justin Lane / dpa</copyright>'
            '</image>')
     model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.Image(model_block)
-    assert image.caption == ''
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.interfaces.IImage(block)
+    assert image.caption is None
 
 
-def test_image_should_not_break_on_empty_caption():
+def test_image_should_not_break_on_empty_caption(application):
     model_block = mock.Mock()
     model_block.display_mode = 'large'
     model_block.variant_name = 'wide'
@@ -170,11 +131,12 @@ def test_image_should_not_break_on_empty_caption():
            '<copyright>© Justin Lane / dpa</copyright>'
            '</image>')
     model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.Image(model_block)
-    assert image.caption == ''
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.interfaces.IImage(block)
+    assert image.caption is None
 
 
-def test_image_should_not_break_on_whitespace_caption():
+def test_image_should_not_break_on_whitespace_caption(application):
     model_block = mock.Mock()
     model_block.display_mode = 'large'
     model_block.variant_name = 'wide'
@@ -184,8 +146,9 @@ def test_image_should_not_break_on_whitespace_caption():
            '<copyright>© Justin Lane / dpa</copyright>'
            '</image>')
     model_block.xml = lxml.etree.fromstring(xml)
-    image = zeit.web.core.block.Image(model_block)
-    assert image.caption == ''
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.interfaces.IImage(block)
+    assert image.caption is None
 
 
 def test_image_should_not_break_on_missing_image(application):
@@ -197,8 +160,9 @@ def test_image_should_not_break_on_missing_image(application):
     model_block.references.target = zeit.content.image.imagegroup.ImageGroup()
     # We use an otherwise empty folder to simulate missing master image.
     model_block.references.target.uniqueId = 'http://xml.zeit.de/news'
-    image = zeit.web.core.block.Image(model_block)
-    assert image is None
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.interfaces.IImage(block)
+    assert not image
 
 
 def test_image_should_use_variant_given_on_layout(application):
@@ -211,32 +175,45 @@ def test_image_should_use_variant_given_on_layout(application):
     model_block.is_empty = False
     model_block.xml = lxml.etree.fromstring('<image/>')
     model_block.references.target = image
-    image = zeit.web.core.block.Image(model_block)
-    assert 'original' == image.image.variant
+    block = zeit.web.core.block.Image(model_block)
+    image = zeit.web.core.interfaces.IImage(block)
+    assert image.variant_id == 'original'
 
 
-def test_image_should_be_none_if_expired():
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    with mock.patch('zeit.web.core.template.expired') as expired:
-        expired.return_value = True
-        image = zeit.web.core.block.Image(model_block)
-        assert image is None
+def test_image_should_use_variant_original_if_infographic(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/infographic')
+    block = zeit.web.core.interfaces.IPages(article)[0][1]
+    assert block.block_type == 'image_infographic'
+    image = zeit.web.core.interfaces.IImage(block)
+    assert image.variant_id == 'original'
+
+
+def test_image_should_be_none_if_expired(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/article-with-expired-image')
+    image = zeit.web.core.interfaces.IImage(article)
+    assert zeit.web.core.template.expired(image) is True
+    image = zeit.web.core.template.get_image(article, fallback=False)
+    assert image is None
 
 
 def test_image_should_pass_through_ratio(application):
-    image = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/image'
-        '/filmstill-hobbit-schlacht-fuenf-hee/')
-    model_block = mock.Mock()
-    model_block.display_mode = 'large'
-    model_block.variant_name = 'wide'
-    model_block.is_empty = False
-    model_block.references.target = image
-    image = zeit.web.core.block.Image(model_block)
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/all-blocks')
+    block = zeit.web.core.interfaces.IPages(article)[0][3]
+    image = zeit.web.core.interfaces.IImage(block)
     assert round(1.77 - image.ratio, 1) == 0
+    assert not image.mobile_ratio
+
+
+def test_image_should_set_mobile_ratio_for_variant_original(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/infographic')
+    block = zeit.web.core.interfaces.IPages(article)[0][1]
+    image = zeit.web.core.interfaces.IImage(block)
+    assert round(0.80 - image.ratio, 1) == 0
+    assert round(1.62 - image.mobile_ratio, 1) == 0
 
 
 def test_module_class_should_hash_as_expected():
@@ -338,14 +315,14 @@ def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
     assert browser.cssselect('div#iq-artikelanker')
 
 
-def test_block_image_should_contain_expected_structure(tplbrowser):
-    block = mock.Mock()
-    block.href = 'http://images.zeit.de/image.jpg'
-    block.figure_mods = ('wide', 'rimless', 'apart')
-    block.copyright = (('Andreas Gursky', 'http://www.example.com', False),)
-    block.ratio = 1
+def test_block_image_should_contain_expected_structure(
+        tplbrowser, dummy_request, application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/inline-imagegroup')
+    block = zeit.web.core.interfaces.IPages(article)[1][0]
     browser = tplbrowser(
-        'zeit.web.core:templates/inc/blocks/image.html', block=block)
+        'zeit.web.core:templates/inc/blocks/image.html',
+        block=block, request=dummy_request)
     assert browser.cssselect('img.article__media-item')
 
 
@@ -367,9 +344,9 @@ def test_block_infobox_should_contain_expected_structure(tplbrowser):
 def test_block_inlinegallery_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
     view.package = 'zeit.web.site'
-    block = {}
+    block = {0: mock.Mock()}
     browser = tplbrowser(
-        'zeit.web.core:templates/inc/blocks/inlinegallery.html', block=block,
+        'zeit.web.core:templates/inc/blocks/gallery.html', block=block,
         view=view)
     assert browser.cssselect('div.inline-gallery')
 

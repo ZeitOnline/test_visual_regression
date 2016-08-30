@@ -7,34 +7,6 @@ import zeit.cms.interfaces
 import zeit.web.core.interfaces
 
 
-def test_macro_p_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    html = 'Alles nicht so <em>wichtig</em>, oder?!'
-    lines = tpl.module.paragraph(html).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    markup = '<p class="is-constrained is-centered">'
-    markup += 'Alles nicht so <em>wichtig</em>, oder?!</p>'
-    assert markup == output
-
-
-def test_macro_raw_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    css_class = 'raw'
-    markup = ('<div class="%s">'
-              '<blink>ZEIT ONLINE</blink>'
-              '</div>' % css_class)
-    obj = {'xml': '<blink>ZEIT ONLINE</blink>'}
-    lines = tpl.module.raw(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line
-        assert markup == output
-
-
 def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
@@ -53,21 +25,6 @@ def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
 
     # assert empty subtitle
     assert '' == str(tpl.module.subpage_chapter(0, '', '')).strip()
-
-
-def test_macro_portraitbox_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    obj = {'name': 'name', 'text': 'text'}
-
-    markup = ('<figure class="portraitbox figure-stamp">'
-              '<div class="portraitbox-heading">name</div>'
-              'text</figure>')
-    lines = tpl.module.portraitbox(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup == output
 
 
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
@@ -132,46 +89,6 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_head(1, '', css_class)
 
 
-def test_macro_intertitle_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    lines = tpl.module.intertitle("xy").splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    m = '<h2 class="article__subheading is-constrained is-centered">xy</h2>'
-    assert m == output
-
-
-def test_macro_citation_should_produce_valid_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-
-    # assert normal quote
-    obj = {'layout': 'quote', 'attribution': 'Autor',
-           'url': 'www.zeit.de', 'text': 'Text'}
-    lines = tpl.module.citation(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    markup = ('<blockquote class="quote"><span class="quote__text">'
-              'Text</span><span class="quote__author"><a href="www.zeit.de">'
-              'Autor</a></span></blockquote>')
-    assert markup == output
-
-    # assert wider quote
-    obj = {'layout': 'wide', 'attribution': 'Autor',
-           'url': 'www.zeit.de', 'text': 'Text'}
-    lines = tpl.module.citation(obj).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    markup = ('<blockquote class="quote--wide"><span class="quote__text">'
-              'Text</span><span class="quote__author"><a href="www.zeit.de">'
-              'Autor</a></span></blockquote>')
-    assert markup == output
-
-
 def test_macro_advertising_should_produce_script(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
@@ -187,28 +104,31 @@ def test_macro_advertising_should_produce_script(jinja2_env):
     assert '' == tpl.module.advertising(ad_inactive)
 
 
-def test_image_template_should_produce_figure_markup(tplbrowser):
+def test_image_template_should_produce_figure_markup(
+        tplbrowser, dummy_request):
     block = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01').main_image_block
     image = zeit.web.core.interfaces.IFrontendBlock(block)
-    image.href = 'http://localhost/foo'
     browser = tplbrowser(
-        'zeit.web.magazin:templates/inc/asset/image_article.tpl', obj=image)
+        'zeit.web.magazin:templates/inc/asset/image_article.tpl',
+        obj=image, request=dummy_request)
     assert browser.cssselect('figure.figure-full-width')
     assert browser.cssselect('img.figure__media')
     assert browser.cssselect('span.figure__copyright')
-    assert browser.cssselect('a')[0].attrib['href'] == 'http://localhost/foo'
+    assert browser.cssselect('a')[0].attrib['href'] == 'http://links.to'
 
 
-def test_image_template_should_produce_copyright_caption(tplbrowser):
+def test_image_template_should_produce_copyright_caption(
+        tplbrowser, dummy_request):
     block = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01').main_image_block
     image = zeit.web.core.interfaces.IFrontendBlock(block)
     browser = tplbrowser(
-        'zeit.web.magazin:templates/inc/asset/image_article.tpl', obj=image)
+        'zeit.web.magazin:templates/inc/asset/image_article.tpl',
+        obj=image, request=dummy_request)
     copyright = browser.cssselect('.figure__copyright a')[0]
-    assert copyright.attrib['href'] == 'http://foo.de'
-    assert copyright.text.strip() == u'© Andreas Gebert/dpa'
+    assert copyright.attrib['href'] == 'http://foo.com'
+    assert copyright.text_content() == u'© Andreas Gebert/dpa'
 
 
 def test_image_template_should_designate_correct_layouts(testbrowser):
@@ -217,17 +137,11 @@ def test_image_template_should_designate_correct_layouts(testbrowser):
     assert header.attrib['data-ratio'] == '1.77858439201'  # variant=original
     stamp = browser.cssselect('figure.figure-stamp--right img')[0]
     assert stamp.attrib['data-ratio'] == '0.75'  # variant=portrait
-    fullwidth = browser.cssselect('figure.figure-full-width img')[0]
+    fullwidth = browser.cssselect('figure.is-centered img')[0]
     assert fullwidth.attrib['data-ratio'] == '1.77777777778'  # variant=wide
 
 
-def test_image_macro_should_not_autoescape_markup(testbrowser):
-    browser = testbrowser('/feature/feature_longform')
-    text = browser.cssselect('.figure-stamp--right .figure__text')[0]
-    assert u'Heckler & Koch' in text.text
-
-
-def test_image_macro_should_hide_none(testbrowser):
+def test_image_template_should_hide_none(testbrowser):
     # XXX I'd much rather change a caption in the article, but trying
     # to checkout raises ConstrainedNotSatisfiedError: xl-header. :-(
     with mock.patch('zeit.web.core.block._inline_html') as inline:
@@ -401,57 +315,4 @@ def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
     assert tpl.module.no_block('') == ''
 
 
-def test_macro_copyrights(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/layout_macro.tpl')
-    copyrights = [
-        dict(
-            image=('http://localhost:9090/exampleimages/'
-                   'artikel/mode.jpg'),
-            label='Lorem ipsum Cillum laborum cupidatat officia.',
-            link='http://www.zeit.de'
-        ),
-        dict(
-            image=('http://localhost:9090/exampleimages/'
-                   'artikel/briefmarke.jpg'),
-            label='Lorem ipsum Ut dolor quis pariatur occaecat.',
-            link=None
-        )
-    ]
-    module = tpl.make_module({'view': mock.Mock()})
-    snippet = lxml.html.fromstring(module.copyrights(copyrights))
-
-    assert len(snippet.cssselect('li.copyrights__entry')) == 2, (
-        'Two copyright entries should be contained in the list.')
-
-    assert snippet.cssselect(
-        'li.copyrights__entry:nth-child(1) .copyrights__label a'), (
-            'The first entry should produce a link element.')
-
-    assert not snippet.cssselect(
-        'li.copyrights__entry:nth-child(2) .copyrights__label a'), (
-            'The second entry should not produce a link element.')
-
-
-def test_macro_liveblog_produces_html(application, jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    tpl_module = tpl.make_module({'view': mock.Mock()})
-    liveblog = mock.Mock()
-    liveblog.blog_id = '999'
-    lines = tpl_module.liveblog(liveblog).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert ('<esi:include src="http://www.zeit.de/liveblog-backend/999.html" '
-            'onerror="continue" />') in output
-
-
-def test_macro_contentadblock_produces_html(application, jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    view = mock.Mock()
-    view.context.advertising_enabled = True
-    tpl_module = tpl.make_module({'view': view})
-    assert tpl_module.contentadblock(mock.Mock()).strip() == (
-        '<div id="iq-artikelanker"></div>')
+# TODO: Move tests into appropriate file / Cleanup (#OPS-386)

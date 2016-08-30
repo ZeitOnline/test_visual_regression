@@ -35,6 +35,7 @@
             this.element = $( element );
             this.featured = this.element.find( '.nav__ressorts-item--featured' );
             this.labeled = this.element.find( '.nav__ressorts-item--has-label' );
+            this.secondary = this.element.find( '.nav__dropdown-item--has-label' );
             this.moreList = $( '#more-ressorts' );
             this.items = this.element.children()
                 .not( '.nav__ressorts-item--has-dropdown' )
@@ -44,6 +45,9 @@
             this.clonedLabels = this.labeled.clone()
                 .addClass( 'nav__dropdown-item--has-label' )
                 .removeClass( 'nav__ressorts-item--has-label' );
+            this.clonedSecondary = this.secondary.clone()
+                .addClass( 'nav__ressorts-item--has-label' )
+                .removeClass( 'nav__dropdown-item--has-label' );
 
             this.init();
         }
@@ -54,6 +58,7 @@
 
                 // move advertorials to end of list
                 this.element
+                    .append( this.clonedSecondary )
                     .append( this.labeled );
                 // copy all items to more list
                 this.moreList

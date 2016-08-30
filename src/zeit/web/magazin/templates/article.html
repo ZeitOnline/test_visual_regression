@@ -1,10 +1,18 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
+{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as article_macros with context %}
 
 {% macro render_page(page) %}
-    {% for item in page %}
-        {% set type = item | block_type %}
-        {{ (blocks[type] or blocks['no_block'])(item) }}
+    {% for block in page %}
+        {% set type = ( block | block_type ) %}
+        {% if type in article_macros.__dict__ %}
+            {{ article_macros[type](block) }}
+        {% else %}
+            {% include [
+            "{0}:templates/inc/blocks/{1}_{2}.html".format(view.package, type, block.layout),
+            "{0}:templates/inc/blocks/{1}.html".format(view.package, type),
+            "zeit.web.core:templates/inc/blocks/{0}_{1}.html".format(type, block.layout),
+            "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
+        {% endif %}
     {% endfor %}
 {% endmacro %}
 
@@ -43,7 +51,7 @@
 
                     {% block article_pagination %}
                         {% if view.pagination %}
-                            {{ blocks.print_pagination( view.pagination ) }}
+                            {{ article_macros.print_pagination( view.pagination ) }}
                         {% endif %}
                     {% endblock article_pagination %}
                 </div>
@@ -70,7 +78,7 @@
 
     {% if view.context.product.id not in ['TGS', 'ZEI', 'ZMLB'] %}
         {% block article_publishdate %}
-            {{ blocks.add_publish_date(view.date_last_published_semantic, view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo) }}
+            {{ article_macros.add_publish_date(view.date_last_published_semantic, view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo) }}
         {% endblock article_publishdate %}
     {% endif %}
 

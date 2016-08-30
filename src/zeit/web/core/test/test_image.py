@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from hashlib import sha1
 from StringIO import StringIO
 
 from PIL import Image
@@ -16,40 +15,55 @@ import zeit.content.image.variant
 
 import zeit.web.core.image
 import zeit.web.core.template
+import zeit.web.core.view_image
 
 
-def test_image_download(appbrowser):
-    path = '/exampleimages/artikel/mode.jpg'
-    result = appbrowser.get(path)
-    image = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/' + path)
-    assert ''.join(result.app_iter) == image.open().read()
-    assert result.headers['Content-Length'] == '81123'
+def test_original_image_download(appbrowser):
+    result = appbrowser.get('/zeit-online/image/weltall/original')
+    image = Image.open(StringIO(''.join(result.app_iter)))
+    assert image.size == (460, 460)
+    # Sigh, the image size cannot be properly tested cross-platform, so we
+    # check if the resulting image is within the 5KB-range of the expected.
+    assert abs(int(result.headers['Content-Length']) - 56000) < 5000, (
+        'The downloaded image should be roughly 55KB in size')
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
-        'inline; filename="mode.jpg"')
+        'inline; filename="weltall.jpeg"')
 
 
 def test_scaled_image_download(appbrowser):
-    path = '/exampleimages/artikel/mode.jpg'
-    signature = sha1('80:60:time').hexdigest()  # We know the secret! :)
-    result = appbrowser.get('/bitblt-80x60-' + signature + path)
+    result = appbrowser.get('/zeit-online/image/weltall/wide__80x60')
     image = Image.open(StringIO(''.join(result.app_iter)))
     assert image.size == (80, 60)
-    assert int(result.headers['Content-Length']) < 81123
+    assert abs(int(result.headers['Content-Length']) - 3000) < 5000, (
+        'The scaled image should be roughly 3KB in size')
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
-        'inline; filename="mode.jpg"')
+        'inline; filename="weltall.jpeg"')
 
 
-def test_scaled_image_download_with_bad_signature(appbrowser):
-    path = '/exampleimages/artikel/mode.jpg'
-    signature = sha1('80:60:foobar').hexdigest()  # We know the secret! :)
-    result = appbrowser.get('/bitblt-80x60-' + signature + path)
-    # Bad signatures cause `repoze.bitblt` to do nothing;
-    # we get the original image.
+def test_synthetic_image_download(appbrowser):
+    result = appbrowser.get(
+        '/zeit-magazin/images/local/01.jpg/imagegroup/original')
     image = Image.open(StringIO(''.join(result.app_iter)))
-    assert image.size == (349, 522)
-    assert result.headers['Content-Length'] == '81123'
+    assert image.size == (580, 326)
+    assert abs(int(result.headers['Content-Length']) - 34000) < 5000, (
+        'The synthetic original should be roughly 33KB in size')
+    assert result.headers['Content-Type'] == 'image/jpeg'
+    assert result.headers['Content-Disposition'] == (
+        'inline; filename="imagegroup.jpeg"')
+
+
+def test_scaled_synthetic_image_download(appbrowser):
+    result = appbrowser.get(
+        '/zeit-magazin/images/local/01.jpg/imagegroup/wide__320x180')
+    image = Image.open(StringIO(''.join(result.app_iter)))
+    assert image.size == (320, 180)
+    assert abs(int(result.headers['Content-Length']) - 15000) < 5000, (
+        'The synthetic scale should be roughly 15KB in size')
+    assert result.headers['Content-Type'] == 'image/jpeg'
+    assert result.headers['Content-Disposition'] == (
+        'inline; filename="imagegroup.jpeg"')
 
 
 def test_image_download_from_brightcove_assets(appbrowser):
@@ -114,130 +128,6 @@ def test_spektrum_images_should_handle_non_ascii(testserver):
     resp = requests.get(u'{}/spektrum-image/images/umläut.jpg/wide'.format(
         testserver.url))
     assert resp.status_code == 404
-
-
-def test_variant_image_should_provide_desired_attributes(application):
-    group = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/ig-4')
-    meta = zeit.content.image.interfaces.IImageMetadata(group)
-    variant = group.get_variant_by_key('default')
-    img = zeit.web.core.interfaces.ITeaserImage(variant)
-
-    assert img.alt == meta.alt
-    assert img.title == meta.title
-    assert img.caption == meta.caption
-    assert img.copyright == meta.copyrights
-    assert img.image_pattern == img.variant == variant.name
-    assert img.ratio == variant.ratio
-    assert img.path == '/zeit-online/cp-content/ig-4/default'
-
-
-def test_variant_jinja_test_should_recognize_variants(application):
-    assert zeit.web.core.template.variant(42) is False
-
-    group = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/ig-4')
-    variant = group.get_variant_by_key('default')
-    img = zeit.web.core.interfaces.ITeaserImage(variant)
-
-    assert zeit.web.core.template.variant(img) is True
-
-
-def test_variant_getter_should_fallback_to_fallback_if_fallback_is_enabled(
-        application):
-    variant = zeit.web.core.template.get_image(None, fallback=True)
-    assert variant.path.endswith('/teaser_image/default')
-
-
-def test_variant_getter_shant_fallback_to_fallback_if_fallback_is_disabled(
-        application):
-    variant = zeit.web.core.template.get_image(None, fallback=False)
-    assert variant is None
-
-
-def test_variant_getter_should_favour_provided_content_over_extracted(
-        application):
-    module = [zeit.cms.interfaces.ICMSContent(
-              'http://xml.zeit.de/zeit-online/cp-content/article-01')]
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/article-02')
-    variant = zeit.web.core.template.get_image(module, content)
-    assert variant.path.endswith('default')
-
-
-def test_variant_getter_should_extract_content_if_not_explicitly_provided(
-        application):
-    module = [zeit.cms.interfaces.ICMSContent(
-              'http://xml.zeit.de/zeit-online/cp-content/article-01')]
-    variant = zeit.web.core.template.get_image(module)
-    assert variant.path.endswith('default')
-
-
-def test_variant_getter_should_bail_if_provided_content_has_no_image(
-        application):
-    variant = zeit.web.core.template.get_image([], mock.Mock(), False)
-    assert variant is None
-
-
-def test_variant_getter_should_bail_if_extracted_content_has_no_image(
-        application):
-    variant = zeit.web.core.template.get_image(mock.Mock(), None, False)
-    assert variant is None
-
-
-def test_variant_getter_should_know_how_to_extrawurst_nextread_modules(
-        application):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/article-01')
-    module = zeit.web.core.block.ZONNextread([content])
-    variant = zeit.web.core.template.get_image(module)
-    assert variant.path.endswith('cinema')
-
-
-def test_variant_getter_should_extract_image_pattern_from_a_provided_module(
-        application, monkeypatch):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/article-01')
-    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
-    variant = zeit.web.core.template.get_image(mock.Mock(), content)
-    assert variant.path.endswith('wide')
-
-
-def test_variant_getter_should_default_to_default_pattern_if_pattern_invalid(
-        application, monkeypatch):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/article-01')
-    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'foobar'.format)
-    variant = zeit.web.core.template.get_image(mock.Mock(), content)
-    assert variant.path.endswith('default')
-
-
-def test_variant_getter_should_get_correct_variant_by_image_pattern(
-        application, monkeypatch):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/article-01')
-    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
-    variant = zeit.web.core.template.get_image(mock.Mock(), content)
-    imagegroup = zeit.content.image.interfaces.IImages(content).image
-    assert imagegroup.variant_url('wide').endswith(variant.path)
-
-
-def test_variant_getter_should_gracefully_handle_unavailable_variant(
-        application, monkeypatch):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/article-01')
-    monkeypatch.setattr(zeit.content.cp.layout, 'get_layout', mock.MagicMock())
-    variant = zeit.web.core.template.get_image(mock.Mock(), content, False)
-    assert variant is None
-
-
-def test_variant_getter_should_output_a_variant_image_if_all_went_well(
-        application, monkeypatch):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/article-01')
-    monkeypatch.setattr(zeit.web.core.template, 'get_layout', 'large'.format)
-    variant = zeit.web.core.template.get_image(mock.Mock(), content)
-    assert isinstance(variant, zeit.web.core.image.VariantImage)
 
 
 def test_image_view_uses_native_filename_for_legacy_images():
@@ -395,32 +285,6 @@ def test_image_view_should_calculate_caching_time_from_context(application):
     assert view().cache_expires.call_args[0][0] == 10
 
 
-def test_variant_getter_should_handle_unavailable_ressource(application):
-    variant = zeit.web.core.template.get_variant(None, 'default')
-    assert variant is None
-
-
-def test_variant_getter_should_handle_unavailable_variant_spec(application):
-    group = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/ig-4')
-    variant = zeit.web.core.template.get_variant(group, 'foo')
-    assert variant is None
-
-
-def test_variant_getter_should_output_variant_teaser_image(application):
-    group = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/ig-1')
-    variant = zeit.web.core.template.get_variant(group, 'cinema')
-    assert zeit.web.core.interfaces.ITeaserImage.providedBy(variant)
-
-
-def test_variant_getter_should_set_appropriate_parent_attribute(application):
-    group = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/ig-1')
-    variant = zeit.web.core.template.get_variant(group, 'cinema')
-    assert variant.image_group == group.uniqueId
-
-
 def test_variant_source_should_produce_variant_legacy_mapping(application):
     vs = zeit.web.core.image.VARIANT_SOURCE
     assert len(vs.factory._get_mapping()) == 54
@@ -485,3 +349,9 @@ def test_image_host_is_configurable_for_legacy_images(testbrowser):
     settings['image_prefix'] = 'http://img.example.com'
     b = testbrowser('/zeit-magazin/index')
     assert b.cssselect('img[src^="http://img.example.com"]')
+
+
+def test_image_should_handle_ampersand_captions(testbrowser):
+    browser = testbrowser('/feature/feature_longform')
+    text = browser.xpath('//span[@class="figure__text"]')[0]
+    assert u'Heckler &amp; Koch' in lxml.etree.tostring(text)

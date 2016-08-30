@@ -5,6 +5,7 @@ import json
 import logging
 import os.path
 import pkg_resources
+import re
 import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
@@ -22,7 +23,6 @@ import pyramid.testing
 import pyramid_dogpile_cache2
 import pysolr
 import pytest
-import repoze.bitblt.processor
 import requests
 import selenium.webdriver
 import selenium.webdriver.firefox.firefox_binary
@@ -211,6 +211,8 @@ def app_settings(mockserver):
         'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
         'vivi_zeit.content.video_source-serie': (
             'egg://zeit.web.core/data/config/video-serie.xml'),
+        'vivi_zeit.content.volume_volume-cover-source': (
+            'egg://zeit.web.core/data/config/volume-covers.xml'),
         'vivi_zeit.cms_source-storystreams': (
             'egg://zeit.web.core/data/config/storystreams.xml'),
         'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',
@@ -308,10 +310,8 @@ def application_session(app_settings, request):
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
     request.addfinalizer(ZODB_LAYER.tearDown)
-    wsgi = repoze.bitblt.processor.ImageTransformationMiddleware(
-        app, secret='time', limit_to_application_url=True)
-    wsgi.zeit_app = factory
-    return wsgi
+    app.zeit_app = factory
+    return app
 
 
 @pytest.fixture
@@ -385,10 +385,7 @@ def debug_application(app_settings, request):
     app_settings = app_settings.copy()
     app_settings['jinja2.environment'] = 'zeit.web.core.jinja.Environment'
     app_settings['jinja2.show_exceptions'] = False
-    return repoze.bitblt.processor.ImageTransformationMiddleware(
-        zeit.web.core.application.Application()({}, **app_settings),
-        secret='time', limit_to_application_url=True
-    )
+    return zeit.web.core.application.Application()({}, **app_settings)
 
 
 @pytest.fixture
@@ -767,12 +764,20 @@ class WsgiBrowser(BaseBrowser, zope.testbrowser.wsgi.Browser):
 
 class TemplateBrowser(BaseBrowser):
 
+    _looks_like_full_html_unicode = re.compile(
+        unicode(r'^\s*<(?:html|!doctype)'), re.I).match
+    # lxml, y u no make this public?
+
     def __init__(self, environ):
         self.env = environ
 
     def open(self, uri, **kw):
         kw = zeit.web.core.utils.defaultdict(mock.Mock, **kw)
-        self.contents = self.env.get_template(uri).render(**kw)
+        html = self.env.get_template(uri).render(**kw)
+        if not self._looks_like_full_html_unicode(html):
+            html = ('<html xmlns:esi="http://www.edge-delivery.org/esi/1.0">'
+                    '<body>%s</body></html>') % html
+        self.contents = html
 
 
 class HttpBrowser(BaseBrowser):

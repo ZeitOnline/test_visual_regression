@@ -2,22 +2,17 @@
 import logging
 import math
 
+import grokcore.component
 import pyramid
-import pysolr
 import zc.iso8601.parse
-import zope.component
 import zope.schema
 
-from zeit.solr import query as lq
-import zeit.cms.content.property
 import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
-import zeit.solr.interfaces
 
 import zeit.web
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
-import zeit.web.core.metrics
 import zeit.web.core.template
 
 
@@ -38,6 +33,17 @@ class IRanking(zeit.content.cp.interfaces.IArea):
 
 @zeit.web.register_area('ranking')
 class Ranking(zeit.content.cp.automatic.AutomaticArea):
+    """An automatic area that provides solr-based pagination of results.
+
+    Optionally supports a `search-form` cpextra so the query can be entered
+    by the user instead of reading it from the area.
+
+    Supports manual content on the first page, and then automatic content on
+    the following pages: On the first page, if there are manual teasers,
+    Ranking claims to have count=0 (so it is effectively hidden), and on the
+    following pages, zeit.web.core.view_centerpage.CenterpagePage hides most
+    other areas/modules except for the Ranking area.
+    """
 
     zope.interface.implements(
         IRanking,
@@ -79,11 +85,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         (u'date_last_published', u'date_last_published_semantic'),
     ]
 
-    _hits = zeit.cms.content.property.ObjectPathAttributeProperty(
-        '.', 'hits', IRanking['hits'])
-
-    _hide_dupes = zeit.content.cp.area.Area.hide_dupes
-
     def __init__(self, context):
         super(Ranking, self).__init__(context)
         self.request = pyramid.threadlocal.get_current_request()
@@ -118,58 +119,12 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         if self.search_form:
             return self.search_form.sort_order
 
-    @property
-    def hide_dupes(self):
-        """We pack our own deduping for solr queries, so we pretend hide_dupes
-        to be False in that case, so that _extract_newest() doesn't try to
-        dedupe results a second time.
-
-        XXX If the solr deduping works out, move to zeit.content.cp?
-        """
-        if self.automatic_type == 'query':
-            return False
-        return self._hide_dupes
-
-    def _query_solr(self, query, sort_order):
-        if self._v_retrieved_content > 0:
-            return []
-
-        result = []
-        conn = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-        try:
-            with zeit.web.core.metrics.timer('solr.reponse_time'):
-                solr_result = conn.search(
-                    query,
-                    sort=sort_order,
-                    rows=self.count,
-                    start=self.start,
-                    fl=self.FIELDS,
-                    fq=self.filter_query)
-        except (pysolr.SolrError, ValueError) as e:
-            log.warning(u'{} for query {}'.format(e, query))
-        else:
-            self.hits = solr_result.hits
-            for doc in solr_result:
-                doc = self.document_hook(doc)
-                content = zeit.cms.interfaces.ICMSContent(doc, None)
-                if content is not None:
-                    result.append(content)
-        return result
-
     @zeit.web.reify('default_term')
-    def uids_above(self):
-        if not self._hide_dupes:
+    def existing_uids(self):
+        if not self.hide_dupes:
             return zeit.web.dont_cache([])
-        cp = zeit.content.cp.interfaces.ICenterPage(self)
-        return [i.uniqueId for i in cp._teasered_content_above(self)
-                if hasattr(i, 'uniqueId')]
-
-    @zeit.web.reify
-    def filter_query(self):
-        if len(self.uids_above) == 0:
-            return lq.any_value()
-        return lq.not_(lq.or_(
-            *[lq._field('uniqueId', '"%s"' % i) for i in self.uids_above]))
+        return [x.uniqueId for x in self._content_query.existing_teasers
+                if hasattr(x, 'uniqueId')]
 
     def document_hook(self, doc):
         for source, target in self.FIELD_MAP:
@@ -207,24 +162,22 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         if param and self.raw_query:
             return param
 
-    @property
+    @zeit.web.reify
     def hits(self):
-        if self._hits is None:
-            self.values()
-        return self._hits or 0
-
-    @hits.setter
-    def hits(self, value):
-        if self._hits is None:
-            self._hits = value
+        self.values()
+        try:
+            return int(self._content_query.total_hits)
+        except TypeError:
+            return 0
 
     @zeit.web.reify
     def start(self):
-        return self.count * max(self.page - 1 - (len(self.uids_above) > 0), 0)
+        return self.count * max(
+            self.page - 1 - (len(self.existing_uids) > 0), 0)
 
     @zeit.web.reify
     def count(self):
-        if self.page == 1 and len(self.uids_above) > 0:
+        if self.page == 1 and len(self.existing_uids) > 0:
             return 0
         return self.context._count
 
@@ -271,7 +224,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         count = self.context._count
         if self.hits > 0 < count:
             return int(math.ceil(float(self.hits) / float(count)) +
-                       (len(self.uids_above) > 0))
+                       (len(self.existing_uids) > 0))
         return 0
 
     @zeit.web.reify
@@ -285,3 +238,16 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return []
         pagination = self._pagination
         return pagination if pagination is not None else []
+
+
+class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery):
+
+    grokcore.component.context(Ranking)
+
+    @property
+    def FIELDS(self):
+        return self.context.FIELDS
+
+    def _resolve(self, solr_result):
+        doc = self.context.document_hook(solr_result)
+        return zeit.cms.interfaces.ICMSContent(doc, None)

@@ -104,7 +104,7 @@ def test_routesmapper_should_make_friedbert_surrender_to_blacklisted_routes(
 def test_routesmapper_should_make_friedbert_unblacklist_newsfeed_host(
         testserver):
     resp = requests.get(testserver.url + '/angebote/printkiosk/index',
-                        headers={'Host': 'newsfeed.localhost:port'})
+                        headers={'Host': 'newsfeed.zeit.de'})
     assert 'X-Render-With' not in resp.headers
 
 
@@ -121,12 +121,6 @@ def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
 
     with pytest.raises(urllib2.HTTPError) as info:
         testbrowser('/angebote/autosuche/foo/bar/wide__123x456')
-    assert info.value.getcode() == 404
-
-    with pytest.raises(urllib2.HTTPError) as info:
-        # This is not quite accurate: Pyramid never sees `bitblt` in the URL,
-        # since the bitblt middleware filters those segments beforehand.
-        testbrowser('/meine-autoren/foo/bar/bitblt-123x456-asdf/zon-column')
     assert info.value.getcode() == 404
 
 

@@ -84,14 +84,14 @@ def test_framebuilder_can_contain_ivw(testbrowser):
 def test_framebuilder_contains_no_meetrics(testbrowser):
     browser = testbrowser('/framebuilder')
     meetrics_script = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics_script) == 0
 
 
 def test_framebuilder_can_contain_meetrics(testbrowser):
     browser = testbrowser('/framebuilder?meetrics')
     meetrics_script = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics_script) == 1
 
 
@@ -338,3 +338,35 @@ def test_framebuilder_minimal_accepts_banner_channel_parameter(
     assert '' == driver.execute_script('return adcSiteInfo.level4')
     assert 'my,keywords' == driver.execute_script(
         'return adcSiteInfo.keywords')
+
+
+def test_framebuilder_loads_slimmed_script_file(testbrowser):
+    browser = testbrowser('/framebuilder')
+    scripts = browser.cssselect('body script')
+    assert scripts[-1].get('src').endswith('/js/web.site/frame.js')
+
+
+def test_framebuilder_should_require_ssl(application, dummy_request):
+    dummy_request.GET['useSSL'] = 'true'
+    view = zeit.web.site.view.FrameBuilder(None, dummy_request)
+
+    assert view.framebuilder_requires_ssl is True
+
+
+def test_framebuilder_should_not_enable_ads_on_ssl(application, dummy_request):
+    dummy_request.GET['banner_channel'] = 'digital/centerpage'
+    dummy_request.GET['useSSL'] = 'true'
+    view = zeit.web.site.view.FrameBuilder(None, dummy_request)
+
+    assert view.advertising_enabled is False
+
+
+def test_framebuilder_uses_ssl_assets(testbrowser):
+    browser = testbrowser('/framebuilder?useSSL')
+    ssl_str = 'https://ssl.zeit.de/www.zeit.de/static/latest/'
+    assert '{}css/web.site/all-old-ie.css'.format(ssl_str) in browser.contents
+    assert '{}css/web.site/framebuilder.css'.format(
+        ssl_str) in browser.contents
+    assert '{}js/vendor/modernizr-custom.js'.format(
+        ssl_str) in browser.contents
+    assert '{}js/web.site/frame.js'.format(ssl_str) in browser.contents

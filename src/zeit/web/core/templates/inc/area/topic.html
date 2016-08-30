@@ -14,7 +14,7 @@
                 {% set teaser = module | first_child %}
             {% endif %}
 
-            {% set image = get_image(module, teaser, variant_id=self.image_variant()) %}
+            {% set image = get_image(teaser, variant_id=self.image_variant()) %}
             {% set module_layout = self.topic_class() %}
             {% set href = teaser | create_url | append_campaign_params %}
             {% include "zeit.web.core:templates/inc/asset/image_topic_teaser.tpl" %}

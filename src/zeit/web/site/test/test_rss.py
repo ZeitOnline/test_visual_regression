@@ -7,6 +7,7 @@ import lxml.etree
 import requests
 
 import zeit.web.core.centerpage
+import zeit.web.core.template
 import zeit.web.site.area.rss
 import zeit.web.site.area.spektrum
 import zeit.web.site.area.zett
@@ -73,17 +74,11 @@ def test_spektrum_image_should_have_expected_attributes(application):
     link = zeit.web.site.area.spektrum.Link(xml)
     link.__parent__ = area
 
-    group = zeit.content.image.interfaces.IImages(link).image
-    image = group['wide__180x120']
-    assert image.mimeType == 'image/jpeg'
-    assert group.uniqueId.endswith(path)
-    assert image.size == 19599
-    assert image.getImageSize() == (180, 120)
-
-    meta = zeit.content.image.interfaces.IImageMetadata(group)
-    assert meta.caption == 'Puzzle puzzle puzzle'
-    assert meta.title == 'Puzzle'
-    assert meta.alt == 'Puzzle'
+    image = zeit.web.core.template.get_image(link, variant_id='wide')
+    assert image.path.endswith('{}/wide'.format(path))
+    assert image.caption == 'Puzzle puzzle puzzle'
+    assert image.title == 'Puzzle'
+    assert image.alt == 'Puzzle'
 
 
 def test_rss_images_should_render(testbrowser):

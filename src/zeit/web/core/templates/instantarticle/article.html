@@ -51,19 +51,13 @@
                   - image shall be 2048x2048 pixels
                   - image will be cropped to 4:3
              -->
-            {% require image_block = view.header_module if is_instance(view.header_module, 'zeit.web.core.block.Image') else None,
-                           variant = get_variant(view.context.main_image.target, 'square') %}
+            {% require image = get_image(view.header_module, variant_id='square', fallback=False) %}
                 <figure>
-                    <img src="{{ request.image_host + variant.path + '__2048x2048' }}" />
-                    {% set copyright = image_block.copyright[0][0] if (image_block.copyright and image_block.copyright[0]) else None %}
-                    {% if image_block.caption or copyright | trim | length > 1 %}
+                    <img src="{{ request.image_host + image.path + '__2048x2048' }}" />
+                    {% if image.caption or image.copyrights %}
                     <figcaption>
-                        {% if image_block.caption %}
-                        {{ image_block.caption }}
-                        {% endif %}
-                        {% if copyright | trim | length > 1 %}
-                        <cite>{{ copyright }}</cite>
-                        {% endif %}
+                        {{ image.caption }}
+                        <cite>{{ image.copyrights | map('first') | join(', ') }}</cite>
                     </figcaption>
                     {% endif %}
                 </figure>

@@ -2,8 +2,7 @@
 
 {% block layout %}teaser-column{% endblock %}
 
-{# TODO: "get_column_image(teaser)" is also used in image_zon-column.tpl . Should not be redundant. #}
-{% block teaser_modifier %}{% if get_column_image(teaser) %}{{ self.layout() }}--has-media{% endif %}{% endblock %}
+{% block teaser_modifier %}{% if get_image(teaser, name='author', fallback=False) %}{{ self.layout() }}--has-media{% endif %}{% endblock %}
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
@@ -14,8 +13,9 @@
    <div class="{{ self.layout() }}__series-label">{{ teaser.serie.serienname }}</div>
 {% endblock %}
 {% block teaser_kicker %}
-    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('zco' if teaser is zco_content) }}">
+    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content, 'zplus' if teaser is zplus_content) }}">
         {% block kicker_logo scoped %}
+            {{ self.zplus_kicker_logo() }}
             {% if teaser is zco_content and area.kind != 'zco-parquet' %}
                 <span class="{{ self.layout() }}__kicker-logo-divider">{{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}</span>
             {% endif %}

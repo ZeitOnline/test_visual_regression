@@ -9,6 +9,7 @@ import pyramid_dogpile_cache2.cache
 import pyramid.threadlocal
 import venusian
 import zope.component
+import zope.interface
 
 import zeit.content.cp.interfaces
 import zeit.edit.interfaces
@@ -117,7 +118,7 @@ class reify(object):  # NOQA
     """Inspired by `pyramid.decorator.reify` and `beaker.cache.cache_region`.
 
     With this property descriptor you can decorate zero-argument methods
-    of view classes, that will become cached read-only attributes.
+    of view classes, that will become cached read/write attributes.
 
     The first-level cache will hold the result for the scope of the current
     request only.
@@ -204,6 +205,10 @@ class reify(object):  # NOQA
 
         return value
 
+    def __set__(self, inst, value):
+        l_key = self._local_key(inst)
+        setattr(inst, l_key, value)
+
     def _global_key(self, inst):
         try:
             # XXX I can't decide whether using
@@ -261,6 +266,9 @@ def register_module(name):
     import zeit.web.core.interfaces
 
     def registrator(cls):
+        if not isinstance(cls, types.FunctionType):
+            zope.interface.declarations.classImplements(
+                cls, zeit.web.core.interfaces.IBlock)
         gsm = zope.component.getGlobalSiteManager()
         gsm.registerAdapter(cls, (zeit.edit.interfaces.IBlock,),
                             zeit.web.core.interfaces.IBlock, name)

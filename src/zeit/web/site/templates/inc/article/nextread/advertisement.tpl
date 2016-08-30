@@ -1,4 +1,4 @@
-{% set image = get_image(module, teaser, variant_id='super', fallback=False) %}
+{% set image = get_image(module, variant_id='super', fallback=False) %}
 {% set href = teaser.url %}
 {% set module_layout = 'nextread-advertisement' %}
 {% set tracking_slug = 'articlebottom.publisher-nextread...' %}

@@ -359,8 +359,10 @@ def test_small_teaser_should_have_responsive_layout(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
 
-    width_script = 'return $(".teaser-small__media").first().width()'
-    width = driver.execute_script(width_script)
+    script = ('var width = window.getComputedStyle('
+              'document.querySelector(".teaser-small__media-container")'
+              ').getPropertyValue("width"); return parseInt(width, 10);')
+    width = driver.execute_script(script)
 
     img_box = driver.find_elements_by_class_name('teaser-small__media')[0]
 
@@ -380,7 +382,9 @@ def test_snapshot_morelink_text_icon_switch(
     driver.set_window_size(screen_size[0], screen_size[1])
     driver.get('%s/zeit-online/teaser-gallery-setup' % testserver.url)
     linkdisplay = driver.execute_script(
-        "return $('.snapshot .section-heading__text').eq(0).css('display')")
+        'return window.getComputedStyle('
+        'document.querySelector(".snapshot .section-heading__text")'
+        ').getPropertyValue("display")')
     if screen_size[0] == 320:
         assert linkdisplay == u'none', 'Linktext not hidden on mobile'
     else:
@@ -390,7 +394,7 @@ def test_snapshot_morelink_text_icon_switch(
 def test_snapshot_should_show_first_gallery_image(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     image = browser.cssselect('.snapshot__media-item')[0]
-    assert image.attrib['src'].endswith('462507429-540x304.jpg')
+    assert '462507429-540x304.jpg' in image.attrib['src']
 
 
 def test_snapshot_media_link_should_have_title(testbrowser):
@@ -447,7 +451,7 @@ def test_parquet_regions_should_have_one_area_each(application):
         'http://xml.zeit.de/zeit-online/parquet-teaser-setup')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, pyramid.testing.DummyRequest())
-    assert all([len(region) == 1 for region in view.region_list_parquet])
+    assert [1, 1, 1] == [len(region) for region in view.region_list_parquet]
 
 
 def test_parquet_region_areas_should_have_multiple_modules_each(application):
@@ -511,6 +515,20 @@ def test_videostage_should_have_right_video_count(testbrowser):
     assert len(videos) == 4, 'We expect 4 videos in video-stage'
 
 
+def test_videostage_should_have_correct_images(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
+    video_images = browser.cssselect('#video-stage img')
+    assert len(video_images) == 4
+    vi0 = video_images[0].attrib.get('src')
+    assert '/video/2014-01/1953013471001/imagegroup/' in vi0
+    vi1 = video_images[1].attrib.get('src')
+    assert '/video/2014-01/3035864892001/imagegroup/' in vi1
+    vi2 = video_images[2].attrib.get('src')
+    assert '/zeit-online/video/3537342483001/imagegroup/' in vi2
+    vi3 = video_images[3].attrib.get('src')
+    assert '/video/2014-01/3089721834001/imagegroup/' in vi3
+
+
 def test_videostage_videos_should_have_video_ids(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     videos = browser.cssselect('#video-stage article')
@@ -558,14 +576,16 @@ def test_videostage_has_zon_svg_logo(testbrowser):
     assert len(logo) == 1
 
 
-def test_module_printbox_should_contain_teaser_image(
+def test_module_printbox_should_produce_teaser_image(
         application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, dummy_request)
     printbox = zeit.web.core.centerpage.get_module(view.module_printbox)
-    assert isinstance(printbox.image, zeit.content.image.image.RepositoryImage)
+    image = zeit.web.core.template.get_image(
+        printbox, name='content', fallback=False)
+    assert zeit.web.core.interfaces.IImage.providedBy(image)
 
 
 def test_homepage_identifies_itself_as_homepage(testserver):
@@ -1063,14 +1083,14 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
 def test_homepage_should_have_proper_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     meetrics = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
 def test_centerpage_must_not_have_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 0
 
 
@@ -1377,18 +1397,28 @@ def test_cp_does_not_render_image_if_expired(testbrowser):
         assert '/zeit-online/cp-content/ig-2' not in browser.contents
 
 
+def test_zplus_parquet_has_own_styles(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+
+    area = browser.cssselect('.cp-area--zplus-parquet')[0]
+    logo = area.cssselect('.parquet-meta__logo--zplus')
+    more_link = area.cssselect('.parquet-meta__more-link--zplus')
+
+    assert len(logo)
+    assert len(more_link)
+
+
 def test_zmo_parquet_has_zmo_styles(testbrowser):
     browser = testbrowser('/zeit-online/parquet')
 
-    regions = browser.cssselect('.cp-region--parquet')
-    zmo_region = regions[3]
-    zmo_title = zmo_region.cssselect('.parquet-meta__title--zmo')
-    zmo_logo = zmo_region.cssselect('.parquet-meta__logo--zmo')
-    zmo_kicker = zmo_region.cssselect('.teaser-small__kicker--zmo-parquet')
+    area = browser.cssselect('.cp-area--zmo-parquet')[0]
+    zmo_title = area.cssselect('.parquet-meta__title--zmo')
+    zmo_logo = area.cssselect('.parquet-meta__logo--zmo')
+    zmo_kicker = area.cssselect('.teaser-small__kicker--zmo-parquet')
 
     assert len(zmo_title)
     assert len(zmo_logo)
-    assert len(zmo_kicker) == 2
+    assert len(zmo_kicker) == 3
 
 
 def test_jobbox_is_displayed_correctly(testbrowser):
@@ -1431,6 +1461,15 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.jobbox__action'))
 
 
+def test_jobbox_is_not_displayed_whith_empty_feed(tplbrowser):
+    module = mock.Mock()
+    module = ()
+    browser = tplbrowser(
+        'zeit.web.site:templates/inc/module/jobbox.html',
+        module=module)
+    assert len(browser.xpath('//html/body/*')) == 0
+
+
 def test_partnerbox_jobs_is_displayed_correctly(testbrowser):
     browser = testbrowser('/zeit-online/partnerbox-jobs')
 
@@ -1440,19 +1479,19 @@ def test_partnerbox_jobs_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.partner__action'))
     assert len(box.cssselect('.partner__intro'))
     assert len(box.cssselect('.partner--jobs'))
-    assert len(box.cssselect('.p-kicker__img'))
-    assert len(box.cssselect('.p-kicker__text'))
-    assert len(box.cssselect('.pa-dropdown'))
-    assert len(box.cssselect('.pa-button'))
-    assert len(box.cssselect('.pa-link'))
-    assert len(box.cssselect('.pa-dropdown__option')) == 9
+    assert len(box.cssselect('.partner__kicker-img'))
+    assert len(box.cssselect('.partner__kicker-text'))
+    assert len(box.cssselect('.partner__dropdown'))
+    assert len(box.cssselect('.partner__button'))
+    assert len(box.cssselect('.partner__link'))
+    assert len(box.cssselect('.partner__dropdown-option')) == 9
 
 
 def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
-    dropdown = driver.find_elements_by_class_name('pa-dropdown')[0]
-    button = driver.find_elements_by_class_name('pa-button__text')[0]
+    dropdown = driver.find_elements_by_class_name('partner__dropdown')[0]
+    button = driver.find_elements_by_class_name('partner__button-text')[0]
 
     # test without selecting anything
     button.click()
@@ -1461,8 +1500,8 @@ def test_partnerbox_jobs_dropdown_works(selenium_driver, testserver):
 
     # test with selected dropdown
     driver.get('%s/zeit-online/partnerbox-jobs' % testserver.url)
-    dropdown = driver.find_elements_by_class_name('pa-dropdown')[0]
-    button = driver.find_elements_by_class_name('pa-button__text')[0]
+    dropdown = driver.find_elements_by_class_name('partner__dropdown')[0]
+    button = driver.find_elements_by_class_name('partner__button-text')[0]
 
     dropdown.find_element_by_xpath(
         "//option[text()='Kunst & Kultur']").click()
@@ -1478,22 +1517,21 @@ def test_partnerbox_reisen_is_displayed_correctly(testbrowser):
     box = browser.cssselect('.partnerbox')[0]
     assert len(box.cssselect('.partnerbox__label'))
     assert len(box.cssselect('.partner__action'))
-    assert len(box.cssselect('.partner__intro'))
     assert len(box.cssselect('.partner--reisen'))
-    assert len(box.cssselect('.p-kicker__img'))
-    assert len(box.cssselect('.p-kicker__text'))
-    assert len(box.cssselect('.pa-dropdown'))
-    assert len(box.cssselect('.pa-button'))
-    assert len(box.cssselect('.pa-link'))
-    assert len(box.cssselect('.pa-link__icon'))
-    assert len(box.cssselect('.pa-dropdown__option')) == 18
+    assert len(box.cssselect('.partner__dropdown'))
+    assert len(box.cssselect('.partner__dropdown-intro'))
+    assert len(box.cssselect('.partner__dropdown-title'))
+    assert len(box.cssselect('.partner__button'))
+    assert len(box.cssselect('.partner__link'))
+    assert len(box.cssselect('.partner__link-icon'))
+    assert len(box.cssselect('.partner__dropdown-option')) == 18
 
 
 @pytest.mark.xfail(reason='Last test fails on jenkins for unknown reason')
 def test_partnerbox_reisen_dropdown_works(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/partnerbox-reisen' % testserver.url)
-    button = driver.find_element_by_class_name('pa-button__text')
+    button = driver.find_element_by_class_name('partner__button-text')
 
     # test without selecting anything
     button.click()
@@ -1502,8 +1540,8 @@ def test_partnerbox_reisen_dropdown_works(selenium_driver, testserver):
 
     # test with selected dropdown
     driver.get('%s/zeit-online/partnerbox-reisen' % testserver.url)
-    dropdown = driver.find_element_by_class_name('pa-dropdown')
-    button = driver.find_element_by_class_name('pa-button__text')
+    dropdown = driver.find_element_by_class_name('partner__dropdown')
+    button = driver.find_element_by_class_name('partner__button-text')
 
     dropdown.find_element_by_xpath(
         "//option[text()='Kulturreisen']").click()
@@ -2052,21 +2090,23 @@ def test_centerpage_page_integration(testbrowser, datasolr):
     assert 'cp-area--ranking' in browser.contents
 
 
-def test_ranking_area_should_determine_uids_above(application, dummy_request):
+def test_ranking_area_should_determine_existing_uids(
+        application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
     area = zeit.web.core.centerpage.get_area(context)
-    assert area.uids_above == ['http://xml.zeit.de/zeit-magazin/leben/2015-02/'
-                               'magdalena-ruecken-fs',
-                               'http://xml.zeit.de/zeit-magazin/mode-design/'
-                               '2014-05/karl-lagerfeld-interview']
+    assert area.existing_uids == [
+        'http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs',
+        'http://xml.zeit.de/zeit-magazin/mode-design'
+        '/2014-05/karl-lagerfeld-interview',
+    ]
 
 
 def test_ranking_should_detect_empty_precedence(application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
     context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
     area = zeit.web.core.centerpage.get_area(context)
-    assert area.uids_above == []
+    assert area.existing_uids == []
 
 
 def test_ranking_ara_should_offset_resultset_on_materialized_cp(
@@ -2079,7 +2119,7 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 5
-    assert area.filter_query == (
+    assert area._content_query.filter_query == (
         'NOT (uniqueId:"http://xml.zeit.de/zeit-magazin/leben/2015-02/'
         'magdalena-ruecken-fs" OR uniqueId:"http://xml.zeit.de/zeit-magazin/'
         'mode-design/2014-05/karl-lagerfeld-interview")')
@@ -2094,7 +2134,7 @@ def test_ranking_area_should_not_offset_resultset_on_materialized_cp(
     area = zeit.web.core.centerpage.get_area(context)
     assert len(area.values()) == 10
     assert area.total_pages == 4
-    assert area.filter_query == '*:*'
+    assert area._content_query.filter_query == '*:*'
 
 
 @pytest.mark.parametrize('params, page', ([{'p': '2'}, 2], [{}, 1]))
@@ -2286,17 +2326,21 @@ def test_teaser_link_title_should_match_kicker_and_headline(testbrowser):
         assert links[0].get('title') == links[1].get('title')
 
 
-def test_dynamic_cps_consider_teaser_image_fill_color(testbrowser):
+def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01',
         'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
                            'harald-martenstein-wideformat')],
-        'image-fill-color': [u'A3E6BB']}, {
+        'image-fill-color': [u'A3E6BB'], 'teaserText': 'text',
+        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
+        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}, {
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
         'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
                            'harald-martenstein-wideformat')],
-        'image-fill-color': [u'']}]
+        'image-fill-color': [u''], 'teaserText': 'text',
+        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
+        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
 
     browser = testbrowser('/serie/martenstein')
     image1 = browser.cssselect('.cp-area--ranking article img')[0]
@@ -2304,3 +2348,52 @@ def test_dynamic_cps_consider_teaser_image_fill_color(testbrowser):
 
     assert image1.attrib['data-src'].endswith('__A3E6BB')
     assert not image2.attrib['data-src'].endswith('__')
+
+
+def test_dossier_teaser_should_be_rendered(testbrowser):
+    browser = testbrowser('/zeit-online/dossier-teaser')
+    teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-dossier')
+
+    assert teaser
+
+
+def test_dossier_teaser_image_should_have_attributes_for_mobile_variant(
+        testbrowser):
+    browser = testbrowser('/zeit-online/dossier-teaser')
+    img = browser.cssselect('.teaser-dossier__media-item')[0]
+    assert img.attrib['data-mobile-ratio'].startswith('1.77')
+    assert 'image/crystal-meth-nancy-schmidt/wide' in img.attrib[
+        'data-mobile-src']
+
+
+def test_dossier_teaser_image_should_use_mobile_variant_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+
+    driver.set_window_size(screen_sizes[1][0], screen_sizes[1][1])
+    driver.get('%s/zeit-online/dossier-teaser' % testserver.url)
+    img = driver.find_element_by_class_name('teaser-dossier__media-item')
+    ratio = float(img.size['width']) / img.size['height']
+    assert '/wide__' in img.get_attribute('src'), \
+        'wide image variant should be used on mobile devices'
+    assert 1.7 < ratio < 1.8, 'mobile ratio should be 16:9-ish'
+
+
+def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/dossier-teaser' % testserver.url)
+    teaser = driver.find_element_by_class_name('teaser-dossier')
+    helper = driver.find_element_by_class_name('teaser-dossier__container')
+
+    assert teaser.is_displayed(), 'dossier teaser missing'
+    assert helper.is_displayed(), 'dossier teaser container missing'
+
+    if screen_size[0] == 768:
+        width = teaser.size.get('width')
+        assert helper.size.get('width') == int('%.0f' % (width * 0.72))
+
+    elif screen_size[0] == 980:
+        width = teaser.size.get('width')
+        assert helper.size.get('width') == int('%.0f' % (width * 0.6666))

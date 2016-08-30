@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
 import mock
+import pytest
 
 import zeit.content.article.article
 import zeit.cms.interfaces
@@ -12,8 +13,6 @@ import zeit.cms.interfaces
 import zeit.web.core.application
 import zeit.web.core.interfaces
 import zeit.web.magazin.view_article
-
-import pytest
 
 
 def test_ipages_contains_blocks(application):
@@ -149,7 +148,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '26: "article.column"' in webtrekk_config
 
     # noscript string
-    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
+    assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
             '{}/zeit-magazin/article/03,0,0,0,0,0,0,0,0&'
             'cg1=redaktion&cg2=article&'
@@ -179,7 +178,7 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '3: "2/7",' in webtrekk_config
 
     # noscript
-    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
+    assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
             '{}/zeit-magazin/article/03,0,0,0,0,0,0,0,0&'
             'cg1=redaktion&cg2=article&'
@@ -234,7 +233,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '26: "centerpage.ZMO",' in webtrekk_config
     assert '27: ""' in webtrekk_config
 
-    assert ('http://zeit01.webtrekk.net/981949533494636/wt.pl?p=3,'
+    assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
             'redaktion.zeit-magazin...centerpage.zmlb%7C'
             '{}/zeit-magazin/index,0,0,0,0,0,0,0,0&cg1=redaktion&'
             'cg2=centerpage&cg3=zeit-magazin&cg4=zmlb&cg5=&cg6=&cg7=index&'
@@ -641,11 +640,9 @@ def test_article_with_fictitious_imgs_should_not_render_img_container(
     assert not browser.cssselect('div.article__page figure.figure-stamp')
 
 
-def test_article03_has_linked_image(testbrowser):
+def test_article_has_linked_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03')
     assert browser.xpath('//a[@href="http://www.test.de"]/img')
-    alt = browser.xpath('//a[@href="http://www.test.de"]/img/@alt')[0]
-    assert alt.startswith('Immer noch die besten Botschafterinnen der Region')
 
 
 @pytest.mark.skipif(True,
@@ -663,33 +660,19 @@ def test_article02_should_have_esi_include(testbrowser):
     assert len(browser.cssselect('main include')) == 1
 
 
-def test_article_has_linked_copyright(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/03')
-    output = ""
-    for line in browser.contents.splitlines():
-        output += line.strip()
-    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" target="_blank">' \
-        '© Reuters/Alessandro Bianchi' in output
-
-
-def test_longform_has_linked_copyright(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/05')
-    output = ""
-    for line in browser.contents.splitlines():
-        output += line.strip()
-    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" target="_blank">' \
-        '© Johannes Eisele/AFP/Getty Images' in output
-
-
-def test_header_has_linked_copyright(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header1')
-    output = ""
-    for line in browser.contents.splitlines():
-        output += line.strip()
-    assert '<span class="figure__copyright" itemprop="copyrightHolder">' \
-        '<a href="http://foo.de" target="_blank">©foo' in output
+@pytest.mark.parametrize(
+    'path', [('/zeit-magazin/article/03'), ('/zeit-magazin/article/05'),
+             ('/zeit-magazin/article/header1')])
+def test_article_has_linked_copyright(testbrowser, path):
+    browser = testbrowser(path)
+    assert browser.cssselect('.figure__copyright')
+    copyright = browser.cssselect('.figure__copyright')[0]
+    assert copyright.get('itemprop') == 'copyrightHolder'
+    assert copyright.cssselect('a')
+    link = copyright.cssselect('a')[0]
+    assert link.get('href') == 'http://foo.de'
+    assert link.get('target') == '_blank'
+    assert link.text_content() == u'© Reuters/Alessandro Bianchi'
 
 
 def test_feature_longform_should_have_zon_logo_header(testbrowser):
@@ -830,3 +813,18 @@ def test_article_tags_are_present_and_limited_in_longform(testbrowser):
     assert len(tags) == 1
     assert len(tags[0].find_class('article-tags__title')) == 1
     assert len(links) == 6
+
+
+def test_infographics_should_display_header_above_image(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/infographic')
+    items = list(browser.xpath('//figure')[0].iterchildren())
+    assert 'Die Entschlackung' == items[0].text
+    assert (
+        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        items[1].text)
+
+
+# TODO: Add `test_infographics_should_render_border_styles_conditionally` ?
+# There has been no real point in adapting the test only
+# to work with ZMO macros. Check, if this test is needed here, after ZMO
+# template-macros have been switched to blocks (OPS-386).

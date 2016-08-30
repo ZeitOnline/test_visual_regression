@@ -177,17 +177,7 @@ Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung bes
             <p>Er ist in Untergiesing aufgewachsen, wohin sich die Gentrifizierung gerade vorkrakt. Schon als Schüler hat er dort mit Freunden vor und nach dem Ausgehen in der Innenstadt einige Bier in der Burg Pilgersheim oder der Giesinger Heiwoog getrunken. Die gibt es nicht mehr. In den Boazn, die noch da sind, tauchen jetzt manchmal Leute mit seinem Führer auf. Bei Facebook verabreden sich Gruppen zum "Boazn Bash" und stürmen zu Dutzenden ein Lokal, in dem gewöhnlich nur ein paar alteingesessene Trinker hocken. <br /></p>
             <p>Den Wirten, berichtet Bildhauer, ist das recht, es bringt immerhin Umsatz. Und seine Bücher, hofft er, heben vielleicht die Wertschätzung der Leute für die einfachen Stüberl. Dass die schon nicht mehr ganz so authentisch sind, sobald er sie betritt, weiß er auch. "Komisch ist es schon", sagt er, "Teil des Problems zu sein."
       </p>
-      <gallery xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" is_empty="False" href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2014" issue="3" ressort="Mobilitaet" contenttype="gallery" publication-date="" expires="">
-        <badges>
-          <badge>gallery</badge>
-        </badges>
-        <supertitle/>
-        <title>Automesse Detroit 2014 US-Hersteller</title>
-        <text />
-        <description />
-        <byline />
-        <breadcrumb_title />
-      </gallery>
+      <gallery href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" contenttype="gallery"></gallery>
     </division>
     <supertitle>Gentrifizierung</supertitle>
 

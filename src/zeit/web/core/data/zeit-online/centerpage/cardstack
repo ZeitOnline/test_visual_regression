@@ -70,7 +70,7 @@
     <title>Alles digital</title>
     <subtitle>Internet, Schönes wie Kritisches zur Netzkultur, und ganz viel zum Spielen.</subtitle>
     <cluster visible="True" visible_mobile="True" area="id-525cdf87-4922-4abc-8ee3-dfd94e9ecbbe" kind="duo" kind_title="Standard-Region">
-      <region area="lead" visible="True" hide-dupes="True" count="7" automatic="True" visible_mobile="True" title="Alles digital" supertitle="Digital" read_more_url="http://www.zeit.de/digital/index">
+      <region area="lead" visible="True" hide-dupes="True" count="7" automatic="True" automatic_type="centerpage" visible_mobile="True" title="Alles digital" supertitle="Digital" read_more_url="http://www.zeit.de/digital/index">
         <referenced_cp>http://xml.zeit.de/campus/index</referenced_cp>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-782d4e82-a4da-47af-b709-7e8fa633cc61"/>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f68c4b0d-0636-422d-9145-7610206a3c3f"/>

@@ -342,19 +342,6 @@ def test_require_extension_should_ensure_variable_access_in_inner_block(
     assert jinja2_env.from_string(tpl).render(fix='fix').strip() == 'prefix'
 
 
-def test_get_column_image_should_return_an_image_or_none(application):
-    img = zeit.web.core.template.get_column_image(
-        zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/zeit-online/cp-content/kolumne'))
-
-    assert isinstance(img, zeit.web.core.image.VariantImage)
-    assert zeit.web.core.template.get_column_image(None) is None
-
-    teaser = mock.Mock()
-    teaser.authorships = None
-    assert zeit.web.core.template.get_column_image(teaser) is None
-
-
 def test_debug_breaking_news_request(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index?debug=eilmeldung')
     assert browser.cssselect('.breaking-news-banner')
@@ -363,12 +350,6 @@ def test_debug_breaking_news_request(testbrowser):
 def test_debug_breaking_news_default(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     assert not browser.cssselect('.breaking-news-banner')
-
-
-def test_attr_safe_returns_safe_text(application):
-    text = u'10 Saurier sind super % auf Zack'
-    target = 'sauriersindsuperaufzack'
-    assert zeit.web.core.template.attr_safe(text) == target
 
 
 def test_format_webtrekk_returns_safe_text(application):
@@ -508,12 +489,12 @@ def test_join_if_exists_should_should_filter_none():
 
 def test_get_svg_from_file_should_return_svg(application):
     name = 'reload'
-    className = 'reload-test'
+    class_name = 'reload-test'
     package = 'zeit.web.site'
     cleanup = True
     a11y = True
     svg = zeit.web.core.template.get_svg_from_file(
-        name, className, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y)
     assert '<svg xmlns="http://www.w3.org/2000/svg"' in svg
     assert 'width="14" height="13" viewBox="0 0 14 13"' in svg
     assert 'class="svg-symbol reload-test"' in svg
@@ -523,33 +504,77 @@ def test_get_svg_from_file_should_return_svg(application):
 
 def test_get_svg_from_file_should_return_no_a11y_svg(application):
     name = 'reload'
-    className = 'reload-test'
+    class_name = 'reload-test'
     package = 'zeit.web.site'
     a11y = False
     cleanup = True
     svg = zeit.web.core.template.get_svg_from_file(
-        name, className, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y)
     assert 'aria-hidden="true"' in svg
     assert 'aria-label="Neu laden"' not in svg
 
 
 def test_get_svg_from_file_should_return_unclean_svg(application):
     name = 'reload'
-    className = 'reload-test'
+    class_name = 'reload-test'
     package = 'zeit.web.site'
     a11y = False
     cleanup = False
     svg = zeit.web.core.template.get_svg_from_file(
-        name, className, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y)
     assert 'fill="#444' in svg
 
 
 def test_get_svg_without_package_should_be_empty_str(application):
     name = 'reload'
-    className = 'reload-test'
+    class_name = 'reload-test'
     a11y = False
     cleanup = True
     package = ''
     svg = zeit.web.core.template.get_svg_from_file(
-        name, className, package, cleanup, a11y)
+        name, class_name, package, cleanup, a11y)
     assert svg == ''
+
+
+def test_zplus_is_false_for_free_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    assert zeit.web.core.template.zplus_content(content) is False
+
+
+def test_zplus_is_false_for_non_article_content(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2014-01/1953013471001')
+    print zeit.web.core.template.zplus_content(content)
+    assert zeit.web.core.template.zplus_content(content) is False
+
+
+def test_zplus_is_false_for_articles_with_undefined_acquisition(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zeit')
+    assert zeit.web.core.template.zplus_content(content) is False
+
+
+def test_zplus_is_true_for_abo_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/fischer')
+    assert zeit.web.core.template.zplus_content(content) is True
+
+
+def test_zplus_is_false_for_registration_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/alter-archivtext')
+    assert zeit.web.core.template.zplus_content(content) is False
+
+
+def test_zplus_should_be_toggleable(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'reader_revenue': False}.get)
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/fischer')
+    assert zeit.web.core.template.zplus_content(content) is False
+
+
+def test_zplus_badge_should_be_rendered(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--zplus')) == 1

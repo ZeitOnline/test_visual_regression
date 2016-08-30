@@ -1,8 +1,8 @@
+import lxml.objectify
+
 import zeit.wysiwyg.interfaces
 
 import zeit.web
-import zeit.web.core.gallery
-
 import zeit.web.magazin.view
 
 
@@ -15,13 +15,12 @@ class Gallery(zeit.web.core.view.Content):
         self.context.advertising_enabled = self.advertising_enabled
 
     @zeit.web.reify
-    def images(self):
-        # TODO: Why does this not work with zope interfaces?
-        return zeit.web.core.gallery.standalone(self.context)
-
-    @zeit.web.reify
-    def galleryText(self):  # NOQA
-        return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
+    def gallery(self):
+        # We synthesize a gallery reference block to reuse the block template
+        block = zeit.content.article.edit.reference.Gallery(
+            self.context, lxml.objectify.E.gallery())
+        block.references = self.context
+        return zeit.web.core.interfaces.IFrontendBlock(block)
 
     @zeit.web.reify
     def banner_type(self):

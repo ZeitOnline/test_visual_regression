@@ -80,8 +80,8 @@
         id="zon-small"
         title="Kleiner Teaser"
         image_pattern="wide"
-        areas="duo major minor ranking parquet spektrum zett zmo-parquet zco-parquet author-favourite-content author-articles author-list"
-        default="major minor parquet zmo-parquet zco-parquet ranking spektrum zett author-favourite-content author-articles author-list"
+        areas="duo major minor ranking parquet spektrum zett zmo-parquet zplus-parquet zco-parquet author-favourite-content author-articles author-list"
+        default="major minor parquet zmo-parquet zplus-parquet zco-parquet ranking spektrum zett author-favourite-content author-articles author-list"
         available="zeit.cms.section.interfaces.IZONContent"
         />
     <layout
@@ -188,6 +188,13 @@
         image_pattern="wide"
         image_positions="true"
         areas="solo major minor ranking parquet"
+        />
+
+    <layout
+        id="zon-dossier"
+        title="Print Dossier Teaser vollbreit"
+        image_pattern="cinema"
+        areas="solo"
         />
 
     <!--   Teaser formats for Storystreams   -->
@@ -353,6 +360,14 @@
         image_pattern="wide"
         areas="solo"
         available="zeit.magazin.interfaces.IZMOContent"
+    />
+
+    <layout
+        id="zmo-square"
+        title="ZMO Quadrat"
+        image_pattern="square"
+        areas="solo duo major minor ranking parquet"
+        available="zeit.web.core.interfaces.IInternalUse"
     />
 
     <layout

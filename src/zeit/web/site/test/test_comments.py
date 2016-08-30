@@ -195,7 +195,7 @@ def test_comments_zon_template_respects_metadata(tplbrowser, monkeypatch):
     view.show_commentthread = False
     comments = tplbrowser('zeit.web.core:templates/inc/article/comments.html',
                           view=view, request=request)
-    assert comments.contents.strip() == '', (
+    assert comments.xpath('//body/*') == [], (
         'comment section template must return an empty document')
 
 
@@ -273,6 +273,13 @@ def test_comment_pagination_should_link_to_article(testbrowser):
     link = browser.cssselect('.pager__page a')[0]
     assert link.get('href') == (
         'http://localhost/zeit-online/article/01?page=2#comments')
+
+
+def test_comment_sorted_pagination_should_link_to_article(testbrowser):
+    browser = testbrowser('/zeit-online/article/01/comment-thread?sort=desc')
+    link = browser.cssselect('.pager__page a')[0]
+    assert link.get('href') == (
+        'http://localhost/zeit-online/article/01?sort=desc&page=2#comments')
 
 
 def test_comment_action_recommend_should_redirect_to_login(testserver):

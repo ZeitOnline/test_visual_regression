@@ -1,4 +1,5 @@
 import collections
+import datetime
 import logging
 import os
 import os.path
@@ -12,6 +13,7 @@ import urlparse
 import jinja2
 import peak.util.proxies
 import pysolr
+import pytz
 import zope.component
 
 import zeit.web.core
@@ -23,6 +25,7 @@ import zeit.solr.interfaces
 
 
 log = logging.getLogger(__name__)
+unset = object()
 
 
 def fix_misrepresented_latin(val):
@@ -117,7 +120,7 @@ def update_path(url, *segments):
     return urlparse.urlunparse(parts)
 
 
-def get_named_adapter(obj, iface, attr, name=None):
+def get_named_adapter(obj, iface, attr=unset, name=unset):
     """Retrieve a named adapted for a given object and interface, with a name
     beeing extracted from a given attribute. If no adapter is found, fallback
     to the unnamed default or the initial object itself.
@@ -129,13 +132,14 @@ def get_named_adapter(obj, iface, attr, name=None):
     :rtype: Object that hopefully implements `iface`
     """
 
+    if (attr is unset) == (name is unset):
+        raise TypeError('Expected exactly one of attr or name.')
+    elif name is unset:
+        name = getattr(obj, attr, u'')
     try:
-        return zope.component.getAdapter(
-            obj, iface, getattr(obj, attr, u'') if name is None else name)
+        return zope.component.getAdapter(obj, iface, name)
     except (zope.component.ComponentLookupError, TypeError):
-        if name is None:
-            return get_named_adapter(obj, iface, attr, u'')
-    return obj
+        return zope.component.queryAdapter(obj, iface, u'')
 
 
 def find_block(context, attrib='cp:__name__', **specs):
@@ -413,6 +417,11 @@ class LazyProxy(object):
     def __len__(self):
         return len(self.__origin__)
 
+    def __bool__(self):
+        return bool(self.__origin__)
+
+    __nonzero__ = __bool__
+
     def __iter__(self):
         try:
             return iter(self.__origin__)
@@ -453,6 +462,17 @@ class LazyProxy(object):
 
         if fill_color and fill_color[0]:
             return fill_color[0]
+
+    # Proxy zeit.web.core.interfaces.IExpiration
+    @property
+    def is_expired(self):
+        import zeit.web.core.date  # Prevent circular imports
+        date = zeit.web.core.date.parse_date(
+            self.__proxy__.get('image-expires', None))
+        if date is None:
+            return False
+        now = datetime.datetime.now(pytz.UTC)
+        return int((now - date).total_seconds()) > 0
 
     # Proxy zeit.content.link.interfaces.ILink.blog.
     # (Note: templates try to access this directly without adapting first.)
@@ -505,6 +525,7 @@ class DataSolr(object):
                     semantic = zeit.cms.content.interfaces.ISemanticChange(
                         content)
                     assert zeit.web.core.view.known_content(content)
+                    # XXX acquisition is mocked statically until ZON-3286
                     results.append({
                         u'authors': content.authors,
                         u'date-last-modified': (
@@ -525,6 +546,7 @@ class DataSolr(object):
                         u'teaser_text': content.teaserText,
                         u'title': content.title,
                         u'type': content.__class__.__name__.lower(),
+                        u'acquisition': 'free',
                         u'uniqueId': content.uniqueId})
                 except (AttributeError, AssertionError, TypeError):
                     continue

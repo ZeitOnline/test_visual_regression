@@ -682,7 +682,7 @@ def test_article_should_show_main_image_from_imagegroup(testbrowser):
 def test_article_should_have_proper_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     meetrics = browser.cssselect(
-        'script[src="http://s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
+        'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
@@ -1303,7 +1303,7 @@ def test_instantarticle_representation_should_have_correct_content(
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
     assert 'Bernie Sanders' in bro.cssselect('figcaption')[0].text
-    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
+    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
 
 
 def test_instantarticle_item_should_wrap_correct_article_in_cdata(testbrowser):
@@ -1382,6 +1382,16 @@ def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-expired-image')
     assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
     assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
+    assert len(browser.cssselect('.nextread figure')) == 0
+    assert len(browser.cssselect('.nextread image')) == 0
+
+
+def test_zon_nextread_teaser_must_not_show_image_for_column(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-column')
+    assert len(browser.cssselect('.nextread.nextread--with-image')) == 0
+    assert len(browser.cssselect('.nextread.nextread--no-image')) == 1
+    assert len(browser.cssselect('.nextread figure')) == 0
+    assert len(browser.cssselect('.nextread image')) == 0
 
 
 def test_article_contains_zeit_clickcounter(testbrowser):
@@ -1549,6 +1559,24 @@ def test_article_without_series_has_no_banner(testbrowser):
     assert len(browser.cssselect('.article-series')) == 0
 
 
+def test_article_in_series_with_embed_header_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/serie-cardstack')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_liveblog_in_series_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/serie-liveblog')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_eilmeldung_in_series_has_no_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/serie-eilmeldung')
+
+    assert len(browser.cssselect('.article-series')) == 0
+
+
 def test_article_in_series_with_column_attribute_has_no_banner(testbrowser):
     browser = testbrowser('/zeit-online/article/fischer')
 
@@ -1606,3 +1634,92 @@ def test_article_toc_is_printed_before_paragraphs_and_lists(testbrowser):
 
     assert 'article-toc' in first_child.get('class')
     assert page.cssselect('.article-toc + ol.list')
+
+
+def test_infographics_should_display_header_above_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/infographic')
+    items = list(browser.xpath('//figure')[0].iterchildren())
+    assert 'Die Entschlackung' == items[0].text
+    assert (
+        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        items[1].text)
+
+
+def test_infographics_should_display_origin_instead_of_caption(testbrowser):
+    browser = testbrowser('/zeit-online/article/infographic')
+    figure = browser.xpath('//figure')[0]
+    caption = figure.xpath('figcaption/*')[0]
+    assert 'Quelle: Statistisches Bundesamt' == caption.text
+
+
+def test_infographics_should_use_customized_css_classes(testbrowser):
+    browser = testbrowser('/zeit-online/article/infographic')
+    assert 'x-caption--sans' in browser.contents
+    assert 'x-copyright' in browser.contents
+    assert 'x-copytext' in browser.contents
+    assert 'x-footer' in browser.contents
+    assert 'x-subheadline' in browser.contents
+
+
+def test_infographics_should_render_border_styles_conditionally(
+        tplbrowser, dummy_request):
+    template = 'zeit.web.core:templates/inc/blocks/image_infographic.html'
+    image = zeit.web.core.image.Image(mock.Mock())
+    image.ratio = 1
+    image.group = mock.Mock()
+    image.group.master_image_for_viewport.return_value = None
+    image.group.variant_url.return_value = '/foo'
+    image.figure_mods = ('FOO', 'BAR', 'BAZ')
+
+    # all border styles present
+    image.origin = True
+    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
+    image.caption = True
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert not browser.cssselect('.x-footer--borderless')
+    assert not browser.cssselect('.x-subheadline--borderless')
+
+    # borderless subheadline
+    image.caption = False
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert browser.cssselect('.x-subheadline--borderless')
+
+    # borderless footer
+    image.copyrights = ()
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert browser.cssselect('.x-footer--borderless')
+
+    # no border styles present
+    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
+    image.origin = False
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert browser.cssselect('.x-footer--borderless')
+    assert browser.cssselect('.x-subheadline--borderless')
+
+
+def test_contentad_is_rendered_once_on_article_pages(testbrowser):
+    selector = '#iq-artikelanker'
+
+    browser = testbrowser('/zeit-online/article/infoboxartikel')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-3')
+    assert len(browser.cssselect(selector)) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    assert len(browser.cssselect(selector)) == 1
+
+
+def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zplus')
+
+    zplus_badge = browser.cssselect('.nextread__kicker-logo--zplus')
+    assert len(zplus_badge) == 1
+
+    link = browser.cssselect('.nextread__link')
+    assert len(link) == 1
+    data_id = link[0].attrib['data-id']
+    assert data_id == 'articlebottom.editorial-nextread...area-zplus'

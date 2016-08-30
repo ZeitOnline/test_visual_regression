@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-import pyramid.testing
 import pytest
 import re
 
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import InvalidSwitchToTargetException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
     'teaser', [
         # teaser-classic solo
         ('.teaser-classic .teaser-classic__combined-link',
-         '1.1.1.solo-teaser-classic.text'),
+         '1.1.1.solo-teaser-classic-zplus.text'),
         # teaser-square minor
         ('.teaser-square .teaser-square__combined-link',
          '2.2.1.minor-teaser-square.text'),
@@ -25,7 +25,7 @@ from selenium.webdriver.support.ui import WebDriverWait
          '3.1.1.parquet-teaser-small.text'),
         # teaser-large parquet
         ('.parquet-teasers .teaser-large .teaser-large__combined-link',
-         '4.1.1.parquet-teaser-large.text')
+         '4.1.1.parquet-teaser-large-zplus.text')
     ])
 def test_cp_elements_provide_expected_id_for_webtrekk(
         selenium_driver, testserver, teaser):
@@ -219,3 +219,155 @@ def test_article_elements_provide_expected_id_for_webtrekk(
     article_el.click()
     track_str = driver.execute_script("return window.trackingData")
     assert('stationaer.' + article[1] in track_str)
+
+
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
+def test_video_stage_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}#debug-clicktracking'
+    driver = selenium_driver
+    driver.set_window_size(980, 800)
+    driver.get(url.format('/zeit-online/video-stage'))
+
+    link = driver.find_element_by_class_name('video-large__combined-link')
+    link.click()
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.frame_to_be_available_and_switch_to_it(
+                (By.CLASS_NAME, 'video-player__iframe')))
+    except (TimeoutException, InvalidSwitchToTargetException):
+        assert False, 'iframe must be available'
+
+    driver.switch_to.default_content()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.video.large.alternative_nobelpreistraeger.brightcove..')
+    assert tracking_data.endswith((
+        '/video/2014-01/1953013471001/'
+        'foto-momente-die-stille-schoenheit-der-polarlichter'))
+
+
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
+def test_video_block_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}#debug-clicktracking'
+    driver = selenium_driver
+    driver.set_window_size(980, 800)
+
+    # test ZON article
+    driver.get(url.format('/zeit-online/article/zeit'))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.element_to_be_clickable(
+                (By.CLASS_NAME, 'vjs-big-play-button')))
+    except TimeoutException:
+        assert False, 'Play button must be clickable'
+
+    button = driver.find_element_by_class_name('vjs-big-play-button')
+    button.click()
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.invisibility_of_element_located(
+                (By.CLASS_NAME, 'vjs-big-play-button')))
+    except TimeoutException:
+        assert False, 'Play button must be hidden (video must be playing)'
+
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.video.large..brightcove..')
+    assert tracking_data.endswith((
+        '/video/2014-01/3035864892001/reporter-on-ice-zeit-online-'
+        'sportreporter-christian-spiller-uebt-skispringen'))
+
+    # test Campus article
+    driver.get(url.format('/campus/article/video'))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.element_to_be_clickable(
+                (By.CLASS_NAME, 'vjs-big-play-button')))
+    except TimeoutException:
+        assert False, 'Play button must be clickable'
+
+    button = driver.find_element_by_class_name('vjs-big-play-button')
+    button.click()
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.invisibility_of_element_located(
+                (By.CLASS_NAME, 'vjs-big-play-button')))
+    except TimeoutException:
+        assert False, 'Play button must be hidden (video must be playing)'
+
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.video.large..brightcove..')
+    assert tracking_data.endswith((
+        '/video/2014-01/3035864892001/reporter-on-ice-zeit-online-'
+        'sportreporter-christian-spiller-uebt-skispringen'))
+
+
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
+def test_video_page_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}#debug-clicktracking'
+    driver = selenium_driver
+    driver.set_window_size(980, 800)
+    driver.get(url.format(('/video/2014-01/1953013471001/motorraeder-foto-'
+                           'momente-die-stille-schoenheit-der-polarlichter')))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.frame_to_be_available_and_switch_to_it(
+                (By.CLASS_NAME, 'video-player__iframe')))
+    except (TimeoutException, InvalidSwitchToTargetException):
+        assert False, 'iframe must be available'
+
+    driver.switch_to.default_content()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.video.large.alternative_nobelpreistraeger.brightcove..')
+    assert tracking_data.endswith((
+        '/video/2014-01/1953013471001/'
+        'motorraeder-foto-momente-die-stille-schoenheit-der-polarlichter'))
+
+
+@pytest.mark.parametrize(
+    'teasers', [
+        ('.teaser-fullwidth a',
+         '1.1.1.solo-teaser-fullwidth-zplus.image'),
+        ('.teaser-fullwidth-column a',
+         '2.1.1.solo-teaser-fullwidth-column-zplus.image'),
+        ('.teaser-topic .teaser-topic-main a',
+         '5.1.1.topic-teaser-topic-main.text'),
+        ('.teaser-topic .teaser-topic-item a',
+         '5.1.2.topic-teaser-topic-item.text'),
+        ('.teaser-topic .teaser-topic-item[data-zplus="true"] a',
+         '5.1.3.topic-teaser-topic-item-zplus.text'),
+        ('.teaser-gallery[data-zplus="true"] a',
+         '6.1.2.gallery-teaser-gallery-zplus.image'),
+        ('.parquet-teasers .teaser-large  a',
+         '7.1.1.parquet-teaser-large-zplus.text')
+    ])
+def test_zplus_provides_expected_webtrekk_strings(
+        selenium_driver, testserver, teasers):
+
+    driver = selenium_driver
+    driver.set_window_size(900, 800)
+    driver.get('%s/zeit-online/centerpage/zplus'
+               '#debug-clicktracking' % testserver.url)
+
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, teasers[0])))
+    except TimeoutException:
+        assert False, 'Element not locateable in 5 sec.'
+    else:
+        teaser_el = driver.find_element_by_css_selector(teasers[0])
+        teaser_el.click()
+        track_str = driver.execute_script("return window.trackingData")
+        assert('tablet.' + teasers[1] in track_str)

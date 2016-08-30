@@ -1,2 +1,16 @@
-{% set image = block %}
-{% include 'zeit.web.core:templates/inc/asset/image_article.tpl' %}
+{%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
+
+{% set image = get_image(block, fallback=False) %}
+{% set module_layout = 'article' %}
+
+{% set href = image.href %}
+{% set image_itemprop = 'image' %}
+
+{% set media_block_additional_class = 'article__item' | with_mods(*block.figure_mods) %}
+
+{% set media_caption_additional_class = 'figure__caption--marginalia' if block.display_mode == 'float' else '' %}
+
+{% block media_caption_content %}
+    <span class="figure__text" itemprop="caption">{{ image.caption }}</span>
+    {{ super() }}
+{% endblock %}

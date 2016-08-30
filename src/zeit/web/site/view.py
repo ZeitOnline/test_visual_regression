@@ -11,7 +11,6 @@ import zeit.cms.content.interfaces
 import zeit.cms.interfaces
 
 import zeit.web.campus.view
-import zeit.web.core.gallery
 import zeit.web.core.security
 import zeit.web.core.view
 import zeit.web.magazin.view
@@ -128,10 +127,16 @@ def login_state(request):
 
 @pyramid.view.view_config(route_name='schlagworte')
 def schlagworte(request):
+    try:
+        page = int(request.matchdict['subpath'].lstrip('index/seite-'))
+    except (TypeError, ValueError):
+        page = 0
     raise pyramid.httpexceptions.HTTPMovedPermanently(
-        u'{}thema/{}'.format(
-            request.route_path('home'),
-            request.matchdict['item'].lower()).encode('utf-8'))
+        u'{}thema/{}{}'.format(
+            request.route_path('home').lower(),
+            request.matchdict['item'].lower(),
+            '?p={}'.format(page) if page > 1 else ''
+        ).encode('utf-8'))
 
 
 @pyramid.view.view_config(

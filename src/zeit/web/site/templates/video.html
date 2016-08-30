@@ -3,7 +3,7 @@
 
 {% block content %}
     <article class="article article--video" id="js-article"
-        {% if view.serie %} data-video-series="{{ view.serie | attr_safe }}"{% endif %}
+        {% if view.serie %} data-video-series="{{ view.serie | format_webtrekk }}"{% endif %}
         data-video-provider="brightcove"
         data-video-size="large"
         data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}"
@@ -15,10 +15,9 @@
         {% if view.iso_duration %}
             <meta itemprop="duration" content="{{ view.iso_duration }}">
         {% endif %}
-        {% set image = get_image(view, view.context, fallback=False, default='wide') %}
-        {% if image %}
-            <meta itemprop="thumbnailUrl" content="{{ view.request.route_url('home') + image.path }}">
-        {% endif %}
+        {% require image = get_image(view.context, variant_id="wide", fallback=False) %}
+            <meta itemprop="thumbnailUrl" content="{{ request.image_host + image.path }}">
+        {% endrequire %}
 
         <div class="article__item article__item--wide article__item--rimless">
             {{ vima.brightcove_video_tag(view.context.__name__, iframe=True) }}

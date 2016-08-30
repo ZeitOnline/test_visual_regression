@@ -20,7 +20,7 @@
         {% if view.is_advertorial %}
             <link href="{{ request.asset_host }}/css/web.site/advertorial.css" media="screen" rel="stylesheet" type="text/css" />
         {% else %}
-            <link href="{{ request.asset_host }}/css/web.site/{{ 'unresponsive' if view.desktop_only else 'screen'}}.css" media="screen" rel="stylesheet" type="text/css">
+            <link href="{{ request.asset_host }}/css/web.site/{{ 'unresponsive' if view.desktop_only else 'framebuilder'}}.css" media="screen" rel="stylesheet" type="text/css">
         {% endif %}
     <!--<![endif]-->
     {% endblock css_link %}
