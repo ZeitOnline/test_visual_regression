@@ -22,6 +22,11 @@
 			height: remify(30px)
 			max-width: remify(205px)
 			width: 100%
+		&--zplus
+			background-color: $zon-red
+			color: $white
+			height: remify(30px)
+			width: remify(36px)
 		&--zett
 			background-color: $primary-color-zett
 			color: $white
@@ -31,6 +36,11 @@
 			text-align: center
 			top: 0
 			width: remify(86px)
+
+	&__badge
+		display: none
+		+respond-min($break-tablet-min)
+			display: block
 
 	&__title
 		+link
@@ -119,15 +129,14 @@
 
 	&__topic-link,
 	&__more-link
-		+link
-			color: $zon-grey
-		+on-interaction
-			color: $zon-dark-grey
+		color: $zon-grey
 		display: inline-block
 		font-size: remify(14px)
 		letter-spacing: $zon-letter-spacing-s
 		text-overflow: ellipsis
 		overflow: hidden
+		+on-interaction
+			color: $zon-dark-grey
 
 	&__topic-link
 		border-bottom: 1px solid rgba($zon-mid-grey, .4)
@@ -139,17 +148,16 @@
 		&:after
 			content: "\25B8" // ▸ = Black Right-Pointing Small Triangle
 		&--spektrum
-			+link
-				color: $primary-color-spektrum
+			color: $primary-color-spektrum
 			display: block
 			font-weight: bold
 		&--zett
-			+link
-				color: $primary-color-zett
+			color: $primary-color-zett
 			display: block
 		&--zco
-			+link
-				color: $kicker-color-campus
+			color: $kicker-color-campus
+		&--zplus
+			color: $zon-red
 
 .parquet-teasers
 	display: table-cell

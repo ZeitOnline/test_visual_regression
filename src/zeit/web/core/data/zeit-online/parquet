@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="homepage">
 	<head>
 		<topiclinks>
@@ -104,21 +104,55 @@
 					<block href="http://xml.zeit.de/zeit-online/article/02"/>
 				</container>
 				<container cp:__name__="id-d976a64d-1589-4b49-a765-12bdcdf94d1g" cp:type="cpextra" module="adplace13" visible="True">
-				    <cp_extra for="zeit.content.cp.interfaces.IArea" id="adplace13" />
+					<cp_extra for="zeit.content.cp.interfaces.IArea" id="adplace13" />
 				</container>
 			</region>
 		</cluster>
-		<cluster area="id-e2f9e2c4-2700-4c62-8701-9f914e653435" kind="parquet" title="Parkett">
-			<region hide-dupes="True" area="id-663bd0f8-dab4-4388-97d4-e83a9d1774eb" kind="spektrum" title="Spektrum"/>
+		<cluster area="id-28063a7f-8af3-480b-ab08-12e3611c5324" kind="parquet" kind_title="Spektrum Parkett-Region">
+			<region hide-dupes="True" area="id-f8fd8512-f9b3-445e-8fdf-e6f647392848" kind="spektrum"/>
 		</cluster>
-		<cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet" title="Parkett">
-			<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zmo-parquet" title="ZEITMagazin" read_more="mehr davon" read_more_url="http://www.zeit.de/karriere/index">
+		<cluster area="id-169a7b31-11e3-4bb0-a529-92f888d73941" kind="parquet" kind_title="ZE.TT Parkett-Region">
+			<region hide-dupes="True" area="id-3c8d3436-b485-4d0d-ae3d-9e536bc5d30b" kind="zett"/>
+		</cluster>
+		<cluster area="id-3ee6066d-1600-41b4-927a-6ba998c3cd01" kind="parquet" kind_title="ZMO-Parkett-Region">
+			<region hide-dupes="True" area="id-fb2a5bb0-e8ce-4707-b5cc-00337fd704b6" kind="zmo-parquet" title="ZEITMagazin" read_more="mehr ZEITmagazin" read_more_url="http://xml.zeit.de/zeit-magazin/index">
 				<referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-8f4e4e36-58ee-4966-a350-8f488152571a">
-					<block href="http://xml.zeit.de/zeit-magazin/article/02"/>
+					<block href="http://xml.zeit.de/zeit-magazin/article/01"/>
 				</container>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
 					<block href="http://xml.zeit.de/zeit-magazin/article/02"/>
+				</container>
+				<container cp:type="teaser" module="zon-small" cp:__name__="id-db155134-a9b4-4cc2-afe9-ed3ae94b18bf">
+					<block href="http://xml.zeit.de/zeit-magazin/article/kochen-wuerzen-veganer-kuchen"/>
+				</container>
+			</region>
+		</cluster>
+		<cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet" kind_title="ZEIT Campus Parkett-Region">
+			<region hide-dupes="True" area="id-c52657e6-7494-46d9-86d4-90a88775090c" kind="zco-parquet" title="Zeit Campus Online" read_more="mehr ZEIT Campus" read_more_url="http://xml.zeit.de/campus/index">
+				<referenced_cp>http://xml.zeit.de/campus/index</referenced_cp>
+				<container cp:type="teaser" module="zon-large" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e1">
+					<block href="http://xml.zeit.de/campus/article/leserartikel" />
+				</container>
+				<container cp:type="teaser" module="zon-small" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5e2">
+					<block href="http://xml.zeit.de/campus/article/common" />
+				</container>
+				<container cp:type="teaser" module="zon-small" cp:__name__="id-fa697e00-56ae-4af1-b122-51952f4ebc21">
+					<block href="http://xml.zeit.de/campus/article/column" />
+				</container>
+			</region>
+		</cluster>
+		<cluster area="id-a19d7e8f-dc6e-4302-8497-95a9115f2757" kind="parquet" kind_title="Z+ Parkett-Region">
+			<region hide-dupes="True" area="id-fe72d5a4-890a-44d1-96b6-7736fe27ca03" kind="zplus-parquet" title="Exklusiv für Digital-Abonnenten" read_more="weitere exklusive Inhalte" read_more_url="http://xml.zeit.de/zeit-magazin/index">
+				<referenced_cp>http://xml.zeit.de/zeit-magazin/index</referenced_cp>
+				<container cp:type="teaser" module="zon-small" cp:__name__="id-2b3d3ff6-335f-40f2-a0ad-2173ea0877fd">
+					<block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+				</container>
+				<container cp:type="teaser" module="zon-small" cp:__name__="id-b9e172ed-ab42-4ca6-b480-0951017b3e02">
+					<block href="http://xml.zeit.de/zeit-online/article/02"/>
+				</container>
+				<container cp:type="teaser" module="zon-small" cp:__name__="id-fc6f79df-76fc-4fe4-a2bf-210dae01c1ca">
+					<block href="http://xml.zeit.de/zeit-online/article/fischer"/>
 				</container>
 			</region>
 		</cluster>
