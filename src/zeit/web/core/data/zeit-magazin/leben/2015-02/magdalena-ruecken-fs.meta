@@ -11,6 +11,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
@@ -29,7 +30,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.haake</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-03-02T15:40:17.028269+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-03-02T15:39:55.211950+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">no</attribute>
