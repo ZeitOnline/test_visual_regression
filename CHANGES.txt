@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-514: Fix font size for infobox content blocks
 
+- BUG-511: Right align user menu
+
 
 3.0 (2016-08-29)
 ----------------
