@@ -109,6 +109,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             teasertype += $article.data( 'clicktracking' ) ? $article.data( 'clicktracking' ) + '-' : '';
             teasertype += articleClasses[0];
+            teasertype += $article.data( 'zplus' ) ? '-zplus' : '';
 
             if ( element.type === 'submit' ) {
                 href = element.form.action + '?' + $( element.form ).serialize();

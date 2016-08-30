@@ -190,6 +190,13 @@
         areas="solo major minor ranking parquet"
         />
 
+    <layout
+        id="zon-dossier"
+        title="Print Dossier Teaser vollbreit"
+        image_pattern="cinema"
+        areas="solo"
+        />
+
     <!--   Teaser formats for Storystreams   -->
     <layout
         id="zon-tldr"

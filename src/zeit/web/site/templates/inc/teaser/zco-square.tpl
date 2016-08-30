@@ -2,7 +2,9 @@
 
 {% block teaser_modifier %}{{ self.layout() }}--zco{% endblock %}
 
-{% block kicker_logo %}{% endblock %}
+{% block kicker_logo %}
+    {{ self.zplus_kicker_logo() }}
+{% endblock %}
 
 {% block teaser_container %}
     <div class="teaser-square__product">

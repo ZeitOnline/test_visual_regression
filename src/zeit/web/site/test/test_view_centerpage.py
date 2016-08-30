@@ -2348,3 +2348,52 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
 
     assert image1.attrib['data-src'].endswith('__A3E6BB')
     assert not image2.attrib['data-src'].endswith('__')
+
+
+def test_dossier_teaser_should_be_rendered(testbrowser):
+    browser = testbrowser('/zeit-online/dossier-teaser')
+    teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-dossier')
+
+    assert teaser
+
+
+def test_dossier_teaser_image_should_have_attributes_for_mobile_variant(
+        testbrowser):
+    browser = testbrowser('/zeit-online/dossier-teaser')
+    img = browser.cssselect('.teaser-dossier__media-item')[0]
+    assert img.attrib['data-mobile-ratio'].startswith('1.77')
+    assert 'image/crystal-meth-nancy-schmidt/wide' in img.attrib[
+        'data-mobile-src']
+
+
+def test_dossier_teaser_image_should_use_mobile_variant_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+
+    driver.set_window_size(screen_sizes[1][0], screen_sizes[1][1])
+    driver.get('%s/zeit-online/dossier-teaser' % testserver.url)
+    img = driver.find_element_by_class_name('teaser-dossier__media-item')
+    ratio = float(img.size['width']) / img.size['height']
+    assert '/wide__' in img.get_attribute('src'), \
+        'wide image variant should be used on mobile devices'
+    assert 1.7 < ratio < 1.8, 'mobile ratio should be 16:9-ish'
+
+
+def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
+        selenium_driver, testserver, screen_size):
+    driver = selenium_driver
+    driver.set_window_size(screen_size[0], screen_size[1])
+    driver.get('%s/zeit-online/dossier-teaser' % testserver.url)
+    teaser = driver.find_element_by_class_name('teaser-dossier')
+    helper = driver.find_element_by_class_name('teaser-dossier__container')
+
+    assert teaser.is_displayed(), 'dossier teaser missing'
+    assert helper.is_displayed(), 'dossier teaser container missing'
+
+    if screen_size[0] == 768:
+        width = teaser.size.get('width')
+        assert helper.size.get('width') == int('%.0f' % (width * 0.72))
+
+    elif screen_size[0] == 980:
+        width = teaser.size.get('width')
+        assert helper.size.get('width') == int('%.0f' % (width * 0.6666))

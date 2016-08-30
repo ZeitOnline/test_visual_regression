@@ -5,7 +5,6 @@ import base64
 import collections
 import datetime
 import logging
-import lxml.etree
 import os.path
 import urlparse
 import re
