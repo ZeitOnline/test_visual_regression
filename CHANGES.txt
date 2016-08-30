@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - BUG-333: Fix storystream text-overflow character color
 
+- ZON-3276: Add Z+ parquet region
+
 
 3.0 (2016-08-29)
 ----------------
