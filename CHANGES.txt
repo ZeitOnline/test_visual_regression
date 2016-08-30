@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-3276: Add Z+ parquet region
 
+- ZON-3258: Make customer ID available for webtrekk inside wrapper app
+
 
 3.0 (2016-08-29)
 ----------------
