@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3241: Add zplus badges to CP teasers
 
+- BUG-514: Fix font size for infobox content blocks
+
 
 3.0 (2016-08-29)
 ----------------
