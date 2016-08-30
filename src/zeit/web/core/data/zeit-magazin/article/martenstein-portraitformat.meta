@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
   <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/testordner/martenstein-transparenz-test</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">161</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">zeit-magazin</attribute>

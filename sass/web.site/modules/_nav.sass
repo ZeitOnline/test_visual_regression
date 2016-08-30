@@ -323,12 +323,18 @@
 				white-space: nowrap
 				&:hover,
 				&:focus,
+				&.nav__ressorts-link--current, // override styles for main items that got moved inside "more" menu
 				&.nav__dropdown-link--current
 					background-color: $gainsboro
 					box-shadow: none
+					font-weight: normal
 			li
 				display: block
 				float: none
+
+		&__login-list
+			left: auto
+			right: remify(-10px)
 
 		& li:hover a[aria-controls]:after,
 		&__login:hover a[aria-controls]:after
@@ -373,11 +379,6 @@
 		&__date
 			float: right
 			padding-top: 5px
-
-	+respond-min-max($break-tablet-min, $break-desktop-min)
-		&__login-list
-			left: auto
-			right: remify(-10px)
 
 
 //*************
@@ -440,3 +441,7 @@
 			li.nav__ressorts-item--featured
 				text-align: right
 				width: 50%
+
+			// hide advertorial links in 1st level navigation
+			li.nav__ressorts-item--has-label
+				display: none

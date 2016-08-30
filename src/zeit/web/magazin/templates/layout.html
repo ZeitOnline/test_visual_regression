@@ -170,6 +170,8 @@
         <!-- tracking at end -->
         {% include "zeit.web.core:templates/inc/tracking/zeit.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
+        {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}
+        {% include "zeit.web.core:templates/inc/login-state-footer-esi.html"%}
         {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/celera_one.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
@@ -184,6 +186,5 @@
         <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
         <!--end: vgwort-->
         {% endif %}
-        {% include "zeit.web.core:templates/inc/login-state-footer-esi.html"%}
     </body>
 </html>

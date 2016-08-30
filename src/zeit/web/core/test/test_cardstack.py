@@ -28,8 +28,8 @@ def test_cardstack_should_be_included_on_articles(
             path_fragment)]
     }
 
-    assert browser.document.xpath('body/include/@src')[0] == (
-        '{}/stacks/esi/scripts'.format(espi))
+    assert browser.document.xpath(
+        'body/include[@src="{}/stacks/esi/scripts"]'.format(espi))
 
 
 # We test nothing with using the same stackId as query parameter
@@ -55,8 +55,8 @@ def test_cardstack_should_honor_article_stack_id(app_settings, testbrowser):
         'shareUrl': ['http://localhost/zeit-online/article/cardstack'],
     }
 
-    assert browser.document.xpath('body/include/@src')[0] == (
-        '{}/stacks/esi/scripts'.format(espi))
+    assert browser.document.xpath(
+        'body/include[@src="{}/stacks/esi/scripts"]'.format(espi))
 
 
 def test_missing_cardstacks_should_not_be_included(testbrowser):
@@ -87,8 +87,8 @@ def test_cardstack_should_be_included_on_cps(app_settings, testbrowser):
         '{}/stacks/kekse/esi/body?shareUrlQuerySuffix=stackId%3Dkekse'
         '&static=true'.format(espi))
 
-    assert browser.document.xpath('body/include/@src')[0] == (
-        '{}/stacks/esi/scripts'.format(espi))
+    assert browser.document.xpath(
+        'body/include[@src="{}/stacks/esi/scripts"]'.format(espi))
 
     browser = testbrowser('/campus/centerpage/cardstack')
 
@@ -100,8 +100,8 @@ def test_cardstack_should_be_included_on_cps(app_settings, testbrowser):
         'shareUrlQuerySuffix=stackId%3Derkaeltung-hausmittel-wirkung'
         '&static=true'.format(espi))
 
-    assert browser.document.xpath('body/include/@src')[0] == (
-        '{}/stacks/esi/scripts'.format(espi))
+    assert browser.document.xpath(
+        'body/include[@src="{}/stacks/esi/scripts"]'.format(espi))
 
 
 def test_cardstack_should_honor_cp_stack_id(app_settings, testbrowser):
@@ -117,8 +117,8 @@ def test_cardstack_should_honor_cp_stack_id(app_settings, testbrowser):
         '{}/stacks/kekse/esi/body?shareUrlQuerySuffix='
         'stackId%3Dkekse&static=true'.format(espi))
 
-    assert browser.document.xpath('body/include/@src')[0] == (
-        '{}/stacks/esi/scripts'.format(espi))
+    assert browser.document.xpath(
+        'body/include[@src="{}/stacks/esi/scripts"]'.format(espi))
 
 
 def test_cardstack_article_should_still_have_site_name_and_admin_meta_tag(
