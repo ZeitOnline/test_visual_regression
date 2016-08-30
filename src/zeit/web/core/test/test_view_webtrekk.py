@@ -13,7 +13,7 @@ from selenium.webdriver.support.ui import WebDriverWait
     'teaser', [
         # teaser-classic solo
         ('.teaser-classic .teaser-classic__combined-link',
-         '1.1.1.solo-teaser-classic.text'),
+         '1.1.1.solo-teaser-classic-zplus.text'),
         # teaser-square minor
         ('.teaser-square .teaser-square__combined-link',
          '2.2.1.minor-teaser-square.text'),
@@ -25,7 +25,7 @@ from selenium.webdriver.support.ui import WebDriverWait
          '3.1.1.parquet-teaser-small.text'),
         # teaser-large parquet
         ('.parquet-teasers .teaser-large .teaser-large__combined-link',
-         '4.1.1.parquet-teaser-large.text')
+         '4.1.1.parquet-teaser-large-zplus.text')
     ])
 def test_cp_elements_provide_expected_id_for_webtrekk(
         selenium_driver, testserver, teaser):
@@ -333,3 +333,41 @@ def test_video_page_provides_expected_webtrekk_string(
     assert tracking_data.endswith((
         '/video/2014-01/1953013471001/'
         'motorraeder-foto-momente-die-stille-schoenheit-der-polarlichter'))
+
+
+@pytest.mark.parametrize(
+    'teasers', [
+        ('.teaser-fullwidth a',
+         '1.1.1.solo-teaser-fullwidth-zplus.image'),
+        ('.teaser-fullwidth-column a',
+         '2.1.1.solo-teaser-fullwidth-column-zplus.image'),
+        ('.teaser-topic .teaser-topic-main a',
+         '5.1.1.topic-teaser-topic-main.text'),
+        ('.teaser-topic .teaser-topic-item a',
+         '5.1.2.topic-teaser-topic-item.text'),
+        ('.teaser-topic .teaser-topic-item[data-zplus="true"] a',
+         '5.1.3.topic-teaser-topic-item-zplus.text'),
+        ('.teaser-gallery[data-zplus="true"] a',
+         '6.1.2.gallery-teaser-gallery-zplus.image'),
+        ('.parquet-teasers .teaser-large  a',
+         '7.1.1.parquet-teaser-large-zplus.text')
+    ])
+def test_zplus_provides_expected_webtrekk_strings(
+        selenium_driver, testserver, teasers):
+
+    driver = selenium_driver
+    driver.set_window_size(900, 800)
+    driver.get('%s/zeit-online/centerpage/zplus'
+               '#debug-clicktracking' % testserver.url)
+
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, teasers[0])))
+    except TimeoutException:
+        assert False, 'Element not locateable in 5 sec.'
+    else:
+        teaser_el = driver.find_element_by_css_selector(teasers[0])
+        teaser_el.click()
+        track_str = driver.execute_script("return window.trackingData")
+        assert('tablet.' + teasers[1] in track_str)

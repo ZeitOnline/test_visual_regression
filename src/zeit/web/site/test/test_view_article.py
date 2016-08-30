@@ -1711,3 +1711,15 @@ def test_contentad_is_rendered_once_on_article_pages(testbrowser):
 
     browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
     assert len(browser.cssselect(selector)) == 1
+
+
+def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zplus')
+
+    zplus_badge = browser.cssselect('.nextread__kicker-logo--zplus')
+    assert len(zplus_badge) == 1
+
+    link = browser.cssselect('.nextread__link')
+    assert len(link) == 1
+    data_id = link[0].attrib['data-id']
+    assert data_id == 'articlebottom.editorial-nextread...area-zplus'

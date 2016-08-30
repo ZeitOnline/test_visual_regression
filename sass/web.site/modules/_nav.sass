@@ -323,9 +323,11 @@
 				white-space: nowrap
 				&:hover,
 				&:focus,
+				&.nav__ressorts-link--current, // override styles for main items that got moved inside "more" menu
 				&.nav__dropdown-link--current
 					background-color: $gainsboro
 					box-shadow: none
+					font-weight: normal
 			li
 				display: block
 				float: none
@@ -440,3 +442,7 @@
 			li.nav__ressorts-item--featured
 				text-align: right
 				width: 50%
+
+			// hide advertorial links in 1st level navigation
+			li.nav__ressorts-item--has-label
+				display: none

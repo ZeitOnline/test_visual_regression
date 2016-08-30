@@ -1,10 +1,20 @@
 Change log for zeit.web
 =======================
 
-3.0 (unreleased)
+3.1 (unreleased)
+----------------
+
+- ZON-3241: Add zplus badges to CP teasers
+
+- BUG-514: Fix font size for infobox content blocks
+
+
+3.0 (2016-08-29)
 ----------------
 
 - Fix: ZMO infographic
+
+- BUG-508: Hide advertorial links in 1st level navigation without flexbox
 
 - ZON-1586: Overhaul image handling, remove bitblt
 
