@@ -1,0 +1,10 @@
+{% extends "zeit.web.site:templates/inc/area/parquet.html" %}
+
+{% block area_title_text %}
+    <span class="parquet-meta__badge">
+        {{ lama.use_svg_icon('zplus', 'parquet-meta__logo parquet-meta__logo--zplus', view.package) }}
+    </span>
+    {{ super() }}
+{% endblock %}
+
+{% block parquet_meta_more_link_additional_class %}parquet-meta__more-link--zplus{% endblock %}
