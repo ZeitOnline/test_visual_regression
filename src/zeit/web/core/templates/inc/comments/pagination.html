@@ -1,35 +1,35 @@
 {%- set pages = view.comments.pages %}
 {%- if pages.pager %}
-	{%- if view.comments.sort == 'asc' -%}
-		{%- set prev_label = 'Ältere Kommentare' -%}
-		{%- set next_label = 'Neuere Kommentare' -%}
-		{%- set keep_sort = None -%}
-	{%- else -%}
-		{%- set prev_label = 'Neuere Kommentare' -%}
-		{%- set next_label = 'Ältere Kommentare' -%}
-		{%- set keep_sort = view.comments.sort -%}
-	{%- endif -%}
+    {%- if view.comments.sort == 'asc' -%}
+        {%- set prev_label = 'Ältere Kommentare' -%}
+        {%- set next_label = 'Neuere Kommentare' -%}
+        {%- set keep_sort = None -%}
+    {%- else -%}
+        {%- set prev_label = 'Neuere Kommentare' -%}
+        {%- set next_label = 'Ältere Kommentare' -%}
+        {%- set keep_sort = view.comments.sort -%}
+    {%- endif -%}
 <div class="comment-section__item" data-ct-area="comment_pager">
-	<nav class="pager" aria-labelledby="comments-pagination-title" data-ct-row="1">
-		<div class="visually-hidden" id="comments-pagination-title">Kommentarseiten</div>
-		{% if pages.current == pages.total %}
-		<a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(url=view.content_url, page=pages.current-1, cid=None) }}#comments">{{ prev_label }}</a>
-		{% else %}
-		<a class="pager__button pager__button--next" href="{{ view.request | append_get_params(url=view.content_url, page=pages.current+1, cid=None) }}#comments">Weitere Kommentare</a>
-		{% endif %}
-		<ul class="pager__pages">
-			{% for page in pages.pager %}
-			<li class="pager__page{% if page == pages.current %} pager__page--current{% endif %}">
-				{%- if page == pages.current -%}
-					<span>{{ page }}</span>
-				{%- elif page -%}
-					<a href="{{ view.request | append_get_params(url=view.content_url, page=page, sort=keep_sort, cid=None) }}#comments">{{ page }}</a>
-				{%- else -%}
-					<span>…</span>
-				{%- endif -%}
-			</li>
-			{% endfor %}
-		</ul>
-	</nav>
+    <nav class="pager" aria-labelledby="comments-pagination-title" data-ct-row="1">
+        <div class="visually-hidden" id="comments-pagination-title">Kommentarseiten</div>
+        {% if pages.current == pages.total %}
+        <a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(url=view.context | create_url, page=pages.current - 1, cid=None) }}#comments">{{ prev_label }}</a>
+        {% else %}
+        <a class="pager__button pager__button--next" href="{{ view.request | append_get_params(url=view.context | create_url, page=pages.current + 1, cid=None) }}#comments">Weitere Kommentare</a>
+        {% endif %}
+        <ul class="pager__pages">
+            {% for page in pages.pager %}
+            <li class="pager__page{% if page == pages.current %} pager__page--current{% endif %}">
+                {%- if page == pages.current -%}
+                    <span>{{ page }}</span>
+                {%- elif page -%}
+                    <a href="{{ view.request | append_get_params(url=view.context | create_url, page=page, sort=keep_sort, cid=None) }}#comments">{{ page }}</a>
+                {%- else -%}
+                    <span>…</span>
+                {%- endif -%}
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
 </div>
 {%- endif %}

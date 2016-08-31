@@ -205,9 +205,7 @@ def create_url(context, obj, request=None):
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
         return obj.url
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
-        slug = zeit.web.site.view_video.Video.get_slug(obj)
-        # titles = (t for t in (obj.supertitle, obj.title) if t)
-        # slug = zeit.cms.interfaces.normalize_filename(u' '.join(titles))
+        slug = zeit.web.core.video.get_seo_slug(obj)
         return create_url(
             context, u'{}/{}'.format(obj.uniqueId, slug), request)
     elif zeit.cms.interfaces.ICMSContent.providedBy(obj):

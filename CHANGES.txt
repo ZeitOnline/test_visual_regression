@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - BUG-333: Fix storystream text-overflow character color
 
+- BUG-466: Add Video slugs to comment URLs (prevents superfluous redirects)
+
 - ZON-3276: Add Z+ parquet region
 
 - ZON-3258: Make customer ID available for webtrekk inside wrapper app
