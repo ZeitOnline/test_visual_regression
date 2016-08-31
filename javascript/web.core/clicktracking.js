@@ -168,7 +168,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 subcolumn = $column.find( 'a' ).index( $element ) + 1 || 1;
             }
 
-            if ( column === '' ) {
+            if ( $row.length && column === '' ) {
                 // column = $row.find( 'a' ).not( $row.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
                 // needed, if there are more containers with the same row value
                 column = $area.find( '[data-ct-row="' + row + '"] a' ).not(
