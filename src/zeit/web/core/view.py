@@ -469,7 +469,7 @@ class Base(object):
 
     @zeit.web.reify
     def og_url(self):
-        return self.content_url  # XXX What's the point of this alias? (ND)
+        return self.content_url
 
     @zeit.web.reify
     def timezone(self):
@@ -780,7 +780,6 @@ class CommentMixin(object):
     def comments(self):
         if not self.show_commentthread:
             return
-
         sort = self.request.params.get('sort', 'asc')
         try:
             page = int(self.request.params.get('page', 1))

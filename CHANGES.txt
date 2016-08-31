@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - BUG-333: Fix storystream text-overflow character color
 
+- BUG-466: Add Video slugs to comment URLs (prevents superfluous redirects)
+
 - ZON-3241: Add zplus badges to CP teasers
 
 - ZON-3276: Add Z+ parquet region
