@@ -2,6 +2,7 @@
 <head xmlns:D="DAV:">
   <attribute ns="DAV:" name="href">/cms/work/centerpage/article_image_asset</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
@@ -12,7 +13,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:4e2c9a3b-c89e-4b39-bb04-371fb84dd665}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">108</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-17T09:58:02.437939+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>

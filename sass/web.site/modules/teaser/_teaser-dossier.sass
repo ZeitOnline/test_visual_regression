@@ -1,11 +1,12 @@
-.teaser-fullwidth
+.teaser-dossier
 	@extend %teaser
 	border-bottom: 1px solid $color-border
-	padding: 0 0 $vertical-space
 	margin: 0
+	padding: 0 0 $vertical-space
 	+respond-min($break-areas)
 		border-bottom: none
 		overflow: hidden
+		margin: 0 $page-padding
 		padding: 0
 		position: relative
 		+font-smoothing
@@ -19,10 +20,8 @@
 			background-color: rgb(0, 15, 20) // placeholder for image; same as default for +teaser-image-dark-overlay
 			margin: 0
 			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
-			z-index: 1
 	&__media-link
-		+respond-min($break-tablet-min)
-			+teaser-image-dark-overlay
+		+teaser-image-dark-overlay
 	&__container
 		padding: 0 $page-padding
 		+respond-min($break-tablet-min)
@@ -31,7 +30,6 @@
 			padding: 0 0 em(32px) em(32px)
 			position: absolute
 			width: 72%
-			z-index: 2
 		+respond-min($break-desktop-min)
 			width: 66.66%
 			padding: 0 em(10px) em(36px) em(36px)
@@ -39,62 +37,11 @@
 		@extend %teaser-heading
 		+respond-min($break-tablet-min)
 			margin-bottom: remify(16px)
-
-	&__series-label
-		@extend %teaser-series-label
-		+respond-min($break-tablet-min)
-			color: $white
-
 	&__kicker
 		@extend %teaser-kicker
-		&--blog
-			@extend %teaser-kicker--blog
 		+respond-min($break-tablet-min)
 			color: $white
 			font-size: em(14px)
-		&--zmo
-			@extend %teaser-kicker--zmo
-			font-size: remify(17px)
-			+respond-min($break-tablet-min)
-				letter-spacing: 0.1em
-				font-size: remify(16px)
-				line-height: 1.25
-		&--zett
-			@extend %teaser-kicker--zett
-			+respond-min($break-tablet-min)
-				font-size: remify(13px)
-				color: $zon_lighter_grey
-				letter-spacing: 0.08em
-				line-height: 1.5
-		&--zco
-			@extend %teaser-kicker--zco
-			font-size: remify(13px)
-	&__kicker-logo-divider
-		@extend %teaser-kicker-logo-divider
-	&__kicker-logo
-		&--zmo
-			@extend %teaser-kicker-logo--zmo
-			+respond-min($break-tablet-min)
-				background: none
-				border-radius: 0
-				border-right: 1px solid rgba($white, 0.5)
-				height: remify(22px)
-				margin-right: remify(7px)
-				padding-right: remify(4px)
-				width: remify(42px) // padding-right is added
-		&--zett
-			@extend %teaser-kicker-logo--zett
-		&--liveblog
-			@extend %teaser-kicker-logo--liveblog
-		&--liveblog-closed
-			@extend %teaser-kicker-logo--liveblog-closed
-		&--zco
-			$logo_format: (185/33)
-			height: remify(15px)
-			vertical-align: middle
-			width: remify(15px*$logo_format)
-		&--zplus
-			@extend %teaser-kicker-logo--zplus
 	&__title
 		@extend %teaser-title
 		font-size: em(24px)
@@ -125,3 +72,20 @@
 		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
+	&__marker
+		+font-smoothing
+		+inline-block
+		+teaser-image-text-shadow
+		border-bottom: 1px solid $grey--light
+		color: $grey--light
+		font-size: em(14px)
+		font-weight: 700
+		text-transform: uppercase
+		margin: remify(-64px) 0 0 $page-padding
+		padding-bottom: remify(6px)
+		position: absolute
+		+respond-min($break-areas)
+			left: remify(40px)
+			margin: 0
+			top: remify(22px)
+

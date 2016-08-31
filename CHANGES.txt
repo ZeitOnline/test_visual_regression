@@ -1,10 +1,54 @@
 Change log for zeit.web
 =======================
 
-3.0 (unreleased)
+3.2 (unreleased)
 ----------------
 
+- Nothing changed yet.
+
+
+3.1 (2016-08-31)
+----------------
+
+- BUG-514: Fix font size for infobox content blocks
+
+- BUG-511: Right align user menu
+
+- BUG-333: Fix storystream text-overflow character color
+
+- BUG-466: Add Video slugs to comment URLs (prevents superfluous redirects)
+
+- ZON-3241: Add zplus badges to CP teasers
+
+- ZON-3276: Add Z+ parquet region
+
+- ZON-3258: Make customer ID available for webtrekk inside wrapper app
+
+- FIX: Restore ratio for mobile infographics (lost in the 3.0 image merge)
+
+
+3.0 (2016-08-29)
+----------------
+
+- FIX: ZMO infographic
+
+- BUG-508: Hide advertorial links in 1st level navigation without flexbox
+
 - ZON-1586: Overhaul image handling, remove bitblt
+
+- ZON-3262: Add dossier teaser
+
+
+2.100.2 (2016-08-25)
+--------------------
+
+- Hotfix: ZMO Macro fix: use macro OR template (never both)
+
+
+2.100.1 (2016-08-25)
+--------------------
+
+- Hotfix: Move ZMO image macro to template block
 
 
 2.100 (2016-08-25)

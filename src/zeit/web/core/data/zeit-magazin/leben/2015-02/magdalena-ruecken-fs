@@ -33,6 +33,7 @@
         </image>
       </reference>
     </references>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
@@ -57,7 +58,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Die Fotografin Magdalena Wosinska stellt die Idee des Selfies auf den Kopf. Der Betrachter ihrer Reisebilder sieht von ihr nämlich immer nur den Rücken. </attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>

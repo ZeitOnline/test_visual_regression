@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/02" contenttype="article" />
+    </references>
+  </head>
+  <body>
+    <supertitle>Keep it simple</supertitle>
+    <title>Einfacher Artikel mit Z+ Nextread</title>
+    <division type="page">
+      <p>Köln (dpa) - In Deutschland ist die Zahl der jungen Cannabis-Konsumenten stark gestiegen. Das geht aus einer Studie der Bundeszentrale für gesundheitliche Aufklärung hervor, für die bundesweit 7000 Menschen repräsentativ befragt wurden.</p>
+      <p>Demnach breitete sich der Konsum in diesen Altersgruppen in den vergangenen sechs Jahren um rund 50 Prozent aus.</p>
+    </division>
+  </body>
+</article>

@@ -13,8 +13,9 @@
    <div class="{{ self.layout() }}__series-label">{{ teaser.serie.serienname }}</div>
 {% endblock %}
 {% block teaser_kicker %}
-    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('zco' if teaser is zco_content) }}">
+    <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content, 'zplus' if teaser is zplus_content) }}">
         {% block kicker_logo scoped %}
+            {{ self.zplus_kicker_logo() }}
             {% if teaser is zco_content and area.kind != 'zco-parquet' %}
                 <span class="{{ self.layout() }}__kicker-logo-divider">{{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}</span>
             {% endif %}

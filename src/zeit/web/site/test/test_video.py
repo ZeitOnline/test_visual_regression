@@ -3,6 +3,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 from selenium.webdriver.support.ui import WebDriverWait
+import mock
 import pytest
 import requests
 
@@ -230,6 +231,8 @@ def test_video_should_not_break_on_missing_still_image(
 def test_video_has_default_product_id(application, dummy_request):
     video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/video/3537342483001')
+    dummy_request.headers['X-SEO-Slug'] = (
+        'kuenstliche-intelligenz-roboter-myon-uebernimmt-opernrolle')
     view = zeit.web.site.view_video.Video(video, dummy_request)
     assert view.product_id == 'zede'
 
@@ -241,3 +244,24 @@ def test_video_page_has_proper_article_tags(testbrowser):
     assert len(taglist) == 1
     for taglink in taglinks:
         assert taglink.get('class').endswith('--video')
+
+
+def test_video_page_should_contain_seo_slug_in_og_url(testbrowser):
+    browser = testbrowser('/zeit-online/video/3537342483001')
+    og_url = browser.xpath('head/meta[@property="og:url"]/@content')[0]
+    assert og_url.endswith('intelligenz-roboter-myon-uebernimmt-opernrolle')
+
+
+def test_video_comment_pagination_should_contain_seo_slug(
+        application, dummy_request, tplbrowser):
+    view = mock.Mock()
+    view.comments.pages = {'pager': [1], 'current': 1, 'total': 3, 'sort': ''}
+    view.context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/video/3537342483001')
+    view.request = dummy_request
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/comments/pagination.html', view=view)
+    link = browser.cssselect('.pager__button')[0].attrib['href']
+    assert link == (
+        'http://example.com/zeit-online/video/3537342483001/kuenstliche-'
+        'intelligenz-roboter-myon-uebernimmt-opernrolle?page=2#comments')

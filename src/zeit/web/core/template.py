@@ -113,6 +113,26 @@ def zmo_content(content):
 
 
 @zeit.web.register_test
+def zplus_content(content):
+    if not zeit.web.core.application.FEATURE_TOGGLES.find(
+            'reader_revenue'):
+        return False
+
+    # Links are defined as free content
+    if zeit.content.link.interfaces.ILink.providedBy(content):
+        return False
+
+    # Use Acquisition attribute
+    # XXX acquisition is set statically for mocksolr in utils.py until ZON-3286
+    acquisition = getattr(content, 'acquisition', None)
+
+    if acquisition is not None:
+        return acquisition == 'abo'
+
+    return False
+
+
+@zeit.web.register_test
 def zett_content(content):
     return zeit.content.link.interfaces.ILink.providedBy(
         content) and content.url.startswith('http://ze.tt')
@@ -185,9 +205,7 @@ def create_url(context, obj, request=None):
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
         return obj.url
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
-        slug = zeit.web.site.view_video.Video.get_slug(obj)
-        # titles = (t for t in (obj.supertitle, obj.title) if t)
-        # slug = zeit.cms.interfaces.normalize_filename(u' '.join(titles))
+        slug = zeit.web.core.video.get_seo_slug(obj)
         return create_url(
             context, u'{}/{}'.format(obj.uniqueId, slug), request)
     elif zeit.cms.interfaces.ICMSContent.providedBy(obj):

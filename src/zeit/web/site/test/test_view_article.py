@@ -1697,6 +1697,28 @@ def test_infographics_should_render_border_styles_conditionally(
     assert browser.cssselect('.x-subheadline--borderless')
 
 
+def test_infographics_desktop_should_have_proper_asset_source(
+        testserver, selenium_driver):
+    selenium_driver.set_window_size(1280, 768)
+    selenium_driver.get(
+        '{}/zeit-online/article/infographic'.format(testserver.url))
+    img_src = selenium_driver.find_element_by_css_selector(
+        '.infographic img').get_attribute('src')
+    assert u'/zeit-online/image/bertelsmann-infographic/' \
+           u'original__820x1025__desktop' in img_src
+
+
+def test_infographics_mobile_should_have_proper_asset_source(
+        testserver, selenium_driver):
+    selenium_driver.set_window_size(767, 1280)
+    selenium_driver.get(
+        '{}/zeit-online/article/infographic'.format(testserver.url))
+    img_src = selenium_driver.find_element_by_css_selector(
+        '.infographic img').get_attribute('src')
+    assert u'/zeit-online/image/bertelsmann-infographic/' \
+           u'original__400x247__mobile' in img_src
+
+
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):
     selector = '#iq-artikelanker'
 
@@ -1711,3 +1733,15 @@ def test_contentad_is_rendered_once_on_article_pages(testbrowser):
 
     browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
     assert len(browser.cssselect(selector)) == 1
+
+
+def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zplus')
+
+    zplus_badge = browser.cssselect('.nextread__kicker-logo--zplus')
+    assert len(zplus_badge) == 1
+
+    link = browser.cssselect('.nextread__link')
+    assert len(link) == 1
+    data_id = link[0].attrib['data-id']
+    assert data_id == 'articlebottom.editorial-nextread...area-zplus'

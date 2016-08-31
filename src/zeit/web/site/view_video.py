@@ -5,12 +5,11 @@ import babel.dates
 import pyramid.httpexceptions
 import pyramid.view
 
-import zeit.cms.interfaces
 import zeit.content.video.interfaces
 
 import zeit.web
 import zeit.web.core.date
-import zeit.web.core.template
+import zeit.web.core.video
 import zeit.web.core.view
 import zeit.web.site.view
 
@@ -27,13 +26,11 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 
     advertising_enabled = True
 
-    def __init__(self, *args, **kwargs):
-        super(Video, self).__init__(*args, **kwargs)
-
+    def __init__(self, context, request):
+        super(Video, self).__init__(context, request)
         self.context.advertising_enabled = self.banner_on
-        if 'X-SEO-Slug' in self.request.headers and (
-                self.request.headers['X-SEO-Slug'] != self.slug):
-            location = '{}/{}'.format(self.content_url, self.slug)
+        if self.request.headers.get('X-SEO-Slug', '') != self.seo_slug:
+            location = '{}/{}'.format(self.content_url, self.seo_slug)
             if self.request.query_string:
                 location = '{}?{}'.format(location, self.request.query_string)
             raise pyramid.httpexceptions.HTTPMovedPermanently(
@@ -52,7 +49,7 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
         try:
             return self.context.renditions[0].video_duration / 1000
         except (AttributeError, IndexError, TypeError):
-            pass
+            return
 
     @zeit.web.reify
     def duration(self):
@@ -67,30 +64,17 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
             return 'PT{}S'.format(self._seconds)
 
     @zeit.web.reify
-    def supertitle(self):
-        return self.context.supertitle or self.context.teaserSupertitle
-
-    @zeit.web.reify
-    def title(self):
-        return self.context.title or self.context.teaserTitle
-
-    @zeit.web.reify
-    def subtitle(self):
-        return self.context.subtitle or self.context.teaserText
-
-    @zeit.web.reify
     def webtrekk_assets(self):
         return ['video.0/seite-1']
 
     @zeit.web.reify
-    def slug(self):
-        return self.get_slug(self)
+    def seo_slug(self):
+        return zeit.web.core.video.get_seo_slug(self.context)
+
+    @zeit.web.reify
+    def og_url(self):
+        return '{}/{}'.format(self.content_url, self.seo_slug)
 
     @zeit.web.reify
     def product_id(self):
         return super(Video, self).product_id or 'zede'
-
-    @staticmethod
-    def get_slug(self):
-        titles = (t for t in (self.supertitle, self.title) if t)
-        return zeit.cms.interfaces.normalize_filename(u' '.join(titles))
