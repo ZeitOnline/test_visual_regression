@@ -29,7 +29,7 @@
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">video</attribute>
         <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:28acec5a-f79e-4d24-b1c8-ca9a52264d95}</attribute>
         <attribute name="video_still" ns="http://namespaces.zeit.de/CMS/document">http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/2713/18140073001_3035871869001_Skispringen.jpg?pubId=18140073001</attribute>
-        <attribute name="credit" ns="http://namespaces.zeit.de/CMS/document">© Foto: Alaa Al-Marjani/Reuters</attribute>
+        <attribute name="video_still_copyright" ns="http://namespaces.zeit.de/CMS/document">© Foto: Alaa Al-Marjani/Reuters</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
         <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">
             &lt;pickle&gt;
