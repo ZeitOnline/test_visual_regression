@@ -37,8 +37,7 @@ def test_comments_should_contain_basic_meta_data(testbrowser):
 
 
 def test_comments_get_thread_should_respect_top_level_sort_order(testserver):
-    uid = ('http://xml.zeit.de/politik/deutschland/'
-           '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
+    uid = 'http://xml.zeit.de/zeit-online/article/03'
 
     comments = zeit.web.core.comments.get_thread(uid)['comments']
     assert comments[0]['created'] < comments[1]['created'], (
