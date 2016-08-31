@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import pytest
 import re
+import zope.component
+
+import zeit.solr.interfaces
 
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
@@ -371,3 +374,47 @@ def test_zplus_provides_expected_webtrekk_strings(
         teaser_el.click()
         track_str = driver.execute_script("return window.trackingData")
         assert('tablet.' + teasers[1] in track_str)
+
+
+def test_cp_area_pagination_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        ({'uniqueId':
+         'http://xml.zeit.de/zeit-online/article/01'}) for i in range(60)]
+
+    driver = selenium_driver
+    driver.set_window_size(1024, 800)
+    driver.get('%s/thema/berlin#debug-clicktracking' % testserver.url)
+
+    links = driver.find_elements_by_css_selector('.pager--ranking a')
+    labels = ['naechste_seite', '2', '3']
+
+    for index, link in enumerate(links):
+        link.click()
+        tracking_data = driver.execute_script("return window.trackingData")
+        assert('stationaer.area-pager....' + labels[index] in tracking_data)
+
+
+def test_news_pagination_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        ({'uniqueId':
+         'http://xml.zeit.de/zeit-online/article/01'}) for i in range(2)]
+
+    driver = selenium_driver
+    driver.set_window_size(1024, 800)
+    driver.get('%s/news/index#debug-clicktracking' % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.element_to_be_clickable(
+                (By.CSS_SELECTOR, '.pager--overview a')))
+    except TimeoutException:
+        assert False, 'pagination link must be clickable'
+
+    link = driver.find_element_by_css_selector('.pager--overview a')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert('stationaer.area-pager....vorheriger_tag' in tracking_data)
