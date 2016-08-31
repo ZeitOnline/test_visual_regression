@@ -4,23 +4,25 @@ Change log for zeit.web
 3.1 (unreleased)
 ----------------
 
-- ZON-3241: Add zplus badges to CP teasers
-
 - BUG-514: Fix font size for infobox content blocks
 
 - BUG-511: Right align user menu
 
 - BUG-333: Fix storystream text-overflow character color
 
+- ZON-3241: Add zplus badges to CP teasers
+
 - ZON-3276: Add Z+ parquet region
 
 - ZON-3258: Make customer ID available for webtrekk inside wrapper app
+
+- FIX: Restore ratio for mobile infographics (lost in the 3.0 image merge)
 
 
 3.0 (2016-08-29)
 ----------------
 
-- Fix: ZMO infographic
+- FIX: ZMO infographic
 
 - BUG-508: Hide advertorial links in 1st level navigation without flexbox
 
