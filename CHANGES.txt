@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-3.1 (unreleased)
+3.1 (2016-08-31)
 ----------------
 
 - BUG-514: Fix font size for infobox content blocks
