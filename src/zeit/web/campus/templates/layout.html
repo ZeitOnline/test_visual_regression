@@ -126,6 +126,8 @@
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
     {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
+    {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}
+    {% include "zeit.web.core:templates/inc/login-state-footer-esi.html"%}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
     {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
@@ -142,6 +144,5 @@
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
     {%- endif %}
     {% include "zeit.web.core:templates/inc/cardstack/footer.tpl" %}
-    {% include "zeit.web.core:templates/inc/login-state-footer-esi.html"%}
 </body>
 </html>

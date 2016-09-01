@@ -1,1 +1,3 @@
+{# include customer ID for script enabled webtrekk requests #}
+<div id="login-state" data-sso-id="{{ request.user.ssoid }}"></div>
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_noscript.html" %}

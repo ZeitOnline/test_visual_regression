@@ -6,11 +6,11 @@
         {% block area_title %}
             {% if area.referenced_cp is none %}
                 <span class="parquet-meta__title">
-                    {{ area.title }}
+                    {% block area_title_text %}{{ area.title }}{% endblock %}
                 </span>
             {% else %}
                 <a class="parquet-meta__title" href="{{ area.referenced_cp.uniqueId | create_url }}">
-                    {{ area.title }}
+                    {{ self.area_title_text() }}
                 </a>
             {% endif %}
         {% endblock area_title %}
@@ -29,7 +29,7 @@
                 </ul>
             {% endrequire %}
             {% if area.read_more and area.read_more_url %}
-                <a href="{{ area.read_more_url }}" class="parquet-meta__more-link {% block parquet_meta_more_link_additional_class %}{% endblock %}">
+                <a href="{{ area.read_more_url | create_url }}" class="parquet-meta__more-link {% block parquet_meta_more_link_additional_class %}{% endblock %}">
                     {{ area.read_more }}
                 </a>
             {% endif %}

@@ -157,6 +157,8 @@
     </div>
     {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
+    {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}
+    {% include "zeit.web.core:templates/inc/login-state-footer-esi.html" %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
     {% include "zeit.web.core:templates/inc/tracking/celera_one.html" ignore missing %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
@@ -184,7 +186,6 @@
     <!--end: vgwort-->
     {% endif %}
     {% include "zeit.web.core:templates/inc/cardstack/footer.tpl" %}
-    {% include "zeit.web.core:templates/inc/login-state-footer-esi.html"%}
     {% block veeseo %}
     {% endblock %}
 </body>
