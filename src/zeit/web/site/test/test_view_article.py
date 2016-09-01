@@ -1673,7 +1673,7 @@ def test_infographics_should_render_border_styles_conditionally(
 
     # all border styles present
     image.origin = True
-    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
+    image.copyrights = ('FOO', 'BAR', 'BAZ')
     image.caption = True
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert not browser.cssselect('.x-footer--borderless')
@@ -1684,13 +1684,19 @@ def test_infographics_should_render_border_styles_conditionally(
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.x-subheadline--borderless')
 
-    # borderless footer
+    # footer has border
+    image.origin = True
     image.copyrights = ()
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert browser.cssselect('.x-footer--borderless')
+    assert not browser.cssselect('.x-footer--borderless')
+
+    image.origin = False
+    image.copyrights = ('FOO', 'BAR', 'BAZ')
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert not browser.cssselect('.x-footer--borderless')
 
     # no border styles present
-    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
+    image.copyrights = ()
     image.origin = False
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.x-footer--borderless')
