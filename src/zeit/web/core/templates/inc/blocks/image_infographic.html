@@ -7,7 +7,7 @@
 {% set media_block_additional_class = 'article__item' | with_mods(*block.figure_mods) ~ ' ' ~ 'infographic'| with_mods(*block.figure_mods) ~ ' x-spacing' %}
 
 {% set media_caption_additional_class = 'x-footer'
-    ~ ('--borderless' if not image.origin or not image.copyrights)
+    ~ ('--borderless' if not (image.origin or image.copyrights))
     ~ (' figure__caption--marginalia' if block.display_mode == 'float')
 %}
 
