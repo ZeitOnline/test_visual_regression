@@ -265,13 +265,13 @@ class RequireExtension(jinja2.ext.Extension):
 
     Usage:
 
-    {% require image = get_image('large') %}
+    {% require image = produce_image('large') %}
         <img src="{{ image.url }}" class="{{ layout }}">
     {% endrequire %}
 
     Equivalent to:
 
-    {% set image = get_image('large') %}
+    {% set image = produce_image('large') %}
     {% if image %}
         <img src="{{ image.url }}" class="{{ layout }}">
     {% endif %}
