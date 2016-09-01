@@ -1,5 +1,5 @@
 {% if area.pagination %}
-<div class="{{ 'pager' | with_mods(area.kind) }}" data-ct-area="area-pager">
+<div class="{{ 'pager' | with_mods(area.kind) }}" data-ct-area="area-pager" data-ct-row="{{ 'page_%s_of_%s' | format(area.current_page, area.total_pages) }}" data-ct-column="false">
     {% if area.current_page == area.total_pages -%}
         <a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(**area.pagination_info.previous_param) }}">
             {{- area.pagination_info.previous_label -}}
