@@ -56,6 +56,17 @@
 				margin: remify(16px 25px 16px 60px)
 				width: remify(220px)
 
+	/* structure for zplus badge */
+	&__intro,
+	&__badge
+		+respond-min($break-tablet-min)
+			display: table-cell
+			vertical-align: top
+
+	&__badge
+		+respond-min($break-tablet-min)
+			width: remify(180px)
+
 
 .article__subheading
 	font-size: remify(20px)
@@ -93,6 +104,31 @@
 	margin-bottom: remify(30px)
 	span[itemprop="name"]
 		font-weight: bold
+
+.zplus
+	background-color: $zon-lighter-grey
+	height: remify(40px)
+	&__marker
+		background-color: $zon-red
+		display: table-cell
+		vertical-align: middle
+		width: remify(40px)
+		height: remify(40px)
+	&__marker-icon
+		color: #fff
+		margin: auto
+		display: block
+	&__label
+		display: table-cell
+		padding-left: remify(10px)
+		vertical-align: middle
+	&__link
+		+animated-interaction()
+		font-size: em(12px)
+		line-height: em(16px)
+		color: $grey
+		text-transform: uppercase
+		letter-spacing: $zon-letter-spacing-l
 
 .article-page
 	&:last-of-type
