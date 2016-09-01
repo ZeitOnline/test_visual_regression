@@ -50,9 +50,7 @@
                     {% endblock article_pages %}
 
                     {% block article_pagination %}
-                        {% if view.pagination %}
-                            {{ article_macros.print_pagination( view.pagination ) }}
-                        {% endif %}
+                        {% include "zeit.web.magazin:templates/inc/article/pagination.html" %}
                     {% endblock article_pagination %}
                 </div>
 
