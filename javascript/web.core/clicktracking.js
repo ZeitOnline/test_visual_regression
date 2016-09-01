@@ -51,6 +51,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             };
 
         return str
+            .toString()
             .toLowerCase()
             .replace( /\W/g, transliterate )
             .replace( /_+/g, '_' )
@@ -152,27 +153,34 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 row = $row.data( 'ct-row' ),
                 $column = $element.closest( '[data-ct-column]', $row ),
                 url = $element.attr( 'href' ),
-                column = '',
+                column = $column.data( 'ct-column' ),
                 subcolumn = '',
                 $needle = $element,
                 data;
 
-            if ( $column.length ) {
-                // use data-ct-column value or inherit parent value if none set
-                if ( $column.data( 'ct-column' ).length !== 0 ) { // include any numbers and strings
-                    column = $column.data( 'ct-column' );
-                } else {
+            if ( $column.length && column !== false ) {
+                // try to inherit parent value if no value is set (check for any number or string value)
+                if ( column.length === 0 ) {
+                    column = undefined;
                     $needle = $column.parent().find( 'a' ).first();
                 }
 
                 subcolumn = $column.find( 'a' ).index( $element ) + 1 || 1;
             }
 
-            if ( $row.length && column === '' ) {
-                // column = $row.find( 'a' ).not( $row.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
-                // needed, if there are more containers with the same row value
-                column = $area.find( '[data-ct-row="' + row + '"] a' ).not(
-                    $area.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
+            if ( column === undefined ) {
+                if ( $area.is( $row ) || $area.find( '[data-ct-row="' + row + '"]' ).length === 1 ) {
+                    // area and row attribute are on the same element
+                    // or there is only one child row with that value
+                    column = $row.find( 'a' ).not(
+                        $row.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
+                } else {
+                    // needed, if there are more containers with the same row value
+                    column = $area.find( '[data-ct-row="' + row + '"] a' ).not(
+                        $area.find( '[data-ct-column] a' ) ).index( $needle ) + 1 || 1;
+                }
+            } else if ( column === false ) {
+                column = '';
             }
 
             if ( $element.attr( 'aria-controls' ) ) {
