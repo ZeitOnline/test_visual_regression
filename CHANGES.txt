@@ -4,9 +4,11 @@ Change log for zeit.web
 3.2 (unreleased)
 ----------------
 
+- HOTFIX: Avoid XMLReference updating triggered by synthesized gallery blocks
+
 - BUG-517: Allow Adtile7 to be wide on ZMO
 
-- HOTFIX: Avoid XMLReference updating triggered by synthesized gallery blocks
+- FIX: Fix infographics
 
 
 3.1 (2016-08-31)
