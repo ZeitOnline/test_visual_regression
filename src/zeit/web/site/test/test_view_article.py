@@ -1711,7 +1711,7 @@ def test_infographics_desktop_should_have_proper_asset_source(
     img_src = selenium_driver.find_element_by_css_selector(
         '.infographic img').get_attribute('src')
     assert u'/zeit-online/image/bertelsmann-infographic/' \
-           u'original__820x1025__desktop' in img_src
+           u'original__820x507__desktop' in img_src
 
 
 def test_infographics_mobile_should_have_proper_asset_source(
@@ -1722,7 +1722,7 @@ def test_infographics_mobile_should_have_proper_asset_source(
     img_src = selenium_driver.find_element_by_css_selector(
         '.infographic img').get_attribute('src')
     assert u'/zeit-online/image/bertelsmann-infographic/' \
-           u'original__400x247__mobile' in img_src
+           u'original__400x500__mobile' in img_src
 
 
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):
