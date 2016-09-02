@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-3.2 (unreleased)
+3.2 (2016-09-02)
 ----------------
 
 - HOTFIX: Avoid XMLReference updating triggered by synthesized gallery blocks
