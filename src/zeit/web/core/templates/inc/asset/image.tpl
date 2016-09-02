@@ -14,7 +14,7 @@
                      data-src="{{ request.image_host + image.path }}"
                      data-ratio="{{ image.ratio }}"
                      {% block media_block_additional_data_attributes %}
-                        {% if image.mobile_ratio %}data-mobile-src="{{ source }}" data-mobile-ratio="{{ image.mobile_ratio }}"{% endif %}
+                        {% if image.mobile_ratio %}data-mobile-src="{{ request.image_host + image.path }}" data-mobile-ratio="{{ image.mobile_ratio }}"{% endif %}
                     {% endblock %}>
                 {% endblock %}
                 {{ media_container_after }}

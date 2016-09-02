@@ -68,7 +68,6 @@ div[id*="__container__"]
                 clear: both
                 float: right
                 margin: 0 remify(60px) remify(28px) remify(36px)
-                max-width: 300px
                 padding: 0
         // uses code by iqd, may break tomorrow
         div[id*="__container__"]
@@ -89,6 +88,13 @@ div[id*="__container__"]
                 padding-top: 0
                 margin: 0
                 max-width: 100%
+    &--7-on-article
+        +respond-min($break-3)
+            max-width: 802px
+            width: auto
+    &--8-on-article
+        +respond-min($break-3)
+            max-width: 300px
 
 // Fix hillarious unusable ad extras by iqd
 +respond-max($break-mobile-ad-width)

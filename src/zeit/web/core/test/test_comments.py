@@ -107,10 +107,8 @@ def test_comment_count_should_be_empty_for_link_object(
 
 
 def test_request_thread_should_respond(application, mockserver):
-    unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
-                 'wahlbeobachter-portraets')
     community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    thread = community._request_thread(unique_id)
+    thread = community._request_thread('/zeit-online/article/03')
     assert lxml.etree.fromstring(thread).xpath('comment_count')[0].text == '41'
 
 
@@ -219,11 +217,8 @@ def test_request_thread_mode_should_produce_expected_uris(
 
 
 def test_comment_to_dict_should_parse_correctly(application):
-    unique_id = ('/politik/deutschland/2013-07/wahlbeobachter-portraets/'
-                 'wahlbeobachter-portraets')
-
     community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    thread = community._request_thread(unique_id)
+    thread = community._request_thread('/zeit-online/article/03')
     comment_xml = lxml.etree.fromstring(thread).xpath('//comment')[0]
     comment = zeit.web.core.comments.comment_to_dict(comment_xml)
     assert comment['name'] == 'Skarsgard'
@@ -252,8 +247,7 @@ def test_comment_to_dict_should_parse_correctly(application):
 
 
 def test_entire_thread_should_be_parsed(application):
-    unique_id = ('http://xml.zeit.de/politik/deutschland/'
-                 '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
+    unique_id = 'http://xml.zeit.de/zeit-online/article/03'
     thread = zeit.web.core.comments.get_thread(unique_id, sort='desc')
     first = thread['comments'].pop(0)
     last = thread['comments'].pop()
@@ -265,8 +259,7 @@ def test_entire_thread_should_be_parsed(application):
 
 
 def test_thread_should_have_valid_page_information(application):
-    unique_id = ('http://xml.zeit.de/politik/deutschland/'
-                 '2013-07/wahlbeobachter-portraets/wahlbeobachter-portraets')
+    unique_id = 'http://xml.zeit.de/zeit-online/article/03'
     thread = zeit.web.core.comments.get_thread(unique_id)
     assert thread['pages']['current'] is None
     assert thread['pages']['total'] == 4

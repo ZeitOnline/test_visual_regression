@@ -1,6 +1,7 @@
 // styles for infographics implemented by templates
 .infographic
 	+respond-max($break-tablet-min)
-		+pie-clearfix
 		max-width: remify(420px)
-		float: left
+		display: inline-block
+		&--rimless
+			padding: 0 $page-padding
