@@ -6,6 +6,9 @@ Change log for zeit.web
 
 - ZON-2410: Show byline on video-related items
 
+- FIX: Clearly specify where to use a fallback image
+
+
 
 3.2 (2016-09-02)
 ----------------
