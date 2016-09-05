@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import pytest
 import re
+import zope.component
+
+import zeit.solr.interfaces
 
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
@@ -156,7 +159,7 @@ def test_buzzboard_provides_expected_webtrekk_strings(
         ('.nav__ressorts a',
          'topnav.mainnav.1..politik'),
         # tags
-        ('*[data-ct-row="article-tag"] a',
+        ('.nav__tags a',
          'topnav.article-tag.1..griechenland_krise')
     ])
 def test_navi_provides_expected_webtrekk_strings(
@@ -180,7 +183,7 @@ def test_navi_provides_expected_webtrekk_strings(
          'intext.2/seite-1...cyborgs|www.zeit.de/digital'),
         # toc
         ('.article-toc__link',
-         'article-toc....2'),
+         'article-toc.page_1_of_10...2'),
         # nextread
         ('.nextread a',
          'articlebottom.editorial-nextread...area'),
@@ -371,3 +374,163 @@ def test_zplus_provides_expected_webtrekk_strings(
         teaser_el.click()
         track_str = driver.execute_script("return window.trackingData")
         assert('tablet.' + teasers[1] in track_str)
+
+
+def test_cp_area_pagination_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        ({'uniqueId':
+         'http://xml.zeit.de/zeit-online/article/01'}) for i in range(60)]
+
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/thema/berlin#debug-clicktracking' % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.pager--ranking a')))
+    except TimeoutException:
+        assert False, 'pagination link must be present'
+
+    links = driver.find_elements_by_css_selector('.pager--ranking a')
+    labels = ['naechste_seite', '2', '3']
+
+    assert len(links) == len(labels)
+
+    for index, link in enumerate(links):
+        link.click()
+        tracking_data = driver.execute_script("return window.trackingData")
+        assert tracking_data.startswith(
+            'stationaer.area-pager.page_1_of_3...' + labels[index])
+
+
+def test_news_pagination_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        ({'uniqueId':
+         'http://xml.zeit.de/zeit-online/article/01'}) for i in range(2)]
+
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/news/index#debug-clicktracking' % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.pager--overview a')))
+    except TimeoutException:
+        assert False, 'pagination link must be present'
+
+    link = driver.find_element_by_css_selector('.pager--overview a')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.area-pager.page_1_of_30...vorheriger_tag')
+
+
+def test_article_pagination_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-online/article/paginated#debug-clicktracking'
+               % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.article-pagination a')))
+    except TimeoutException:
+        assert False, 'pagination link must be present'
+
+    links = driver.find_elements_by_css_selector('.article-pagination a')
+    labels = ['naechste_seite', '2', '3', 'all']
+
+    assert len(links) == len(labels)
+
+    for index, link in enumerate(links):
+        link.click()
+        tracking_data = driver.execute_script("return window.trackingData")
+        assert tracking_data.startswith(
+            'stationaer.article-pager.page_1_of_3...' + labels[index])
+
+
+def test_article_table_of_contents_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-online/article/paginated#debug-clicktracking'
+               % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.article-toc a')))
+    except TimeoutException:
+        assert False, 'table of contents link must be present'
+
+    links = driver.find_elements_by_css_selector('.article-toc a')
+    labels = ['2', '3', 'all']
+
+    assert len(links) == len(labels)
+
+    for index, link in enumerate(links):
+        link.click()
+        tracking_data = driver.execute_script("return window.trackingData")
+        assert tracking_data.startswith(
+            'stationaer.article-toc.page_1_of_3...' + labels[index])
+
+
+def test_comment_pagination_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-online/article/01#debug-clicktracking'
+               % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.comment-section .pager a')))
+    except TimeoutException:
+        assert False, 'comment pagination link must be present'
+
+    links = driver.find_elements_by_css_selector('.comment-section .pager a')
+    labels = ['weitere_kommentare', '2', '3', '4', '5', '8']
+
+    assert len(links) == len(labels)
+
+    for index, link in enumerate(links):
+        link.click()
+        tracking_data = driver.execute_script("return window.trackingData")
+        assert tracking_data.startswith(
+            'stationaer.comment_pager.page_1_of_8...' + labels[index])
+
+
+def test_zmo_article_pagination_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-magazin/article/03/seite-3#debug-clicktracking'
+               % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.main-footer')))
+    except TimeoutException:
+        assert False, 'we will wait for the footer forever ...'
+
+    links = driver.find_elements_by_css_selector('.article-pagination a')
+    labels = ['auf_seite_4', 'vorige_seite', '1', '2', '3', '4', '5', '6', '7',
+              'naechste_seite']
+
+    assert len(links) == len(labels)
+
+    for index, link in enumerate(links):
+        link.click()
+        tracking_data = driver.execute_script("return window.trackingData")
+        assert tracking_data.startswith(
+            'stationaer.article-pager.page_3_of_7...' + labels[index])

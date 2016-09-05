@@ -4,6 +4,8 @@ Change log for zeit.web
 3.3 (unreleased)
 ----------------
 
+- ZON-2949: Update clicktracking for pagination
+
 - ZON-2410: Show byline on video-related items
 
 - ZON-2375: Show still image copyright on video-related items

@@ -1,8 +1,8 @@
-<nav class="{% block pagination_class %}article-pagination{% endblock %} article__item" aria-labelledby="article-pagination-title">
+<nav class="{% block pagination_class %}article-pagination{% endblock %} article__item" aria-labelledby="article-pagination-title" data-ct-area="article-pager" data-ct-row="{{ 'page_%s_of_%s' | format(view.pagination.current, view.pagination.total) }}" data-ct-column="false">
     <h3 class="visually-hidden" id="article-pagination-title">Seitennavigation</h3>
 
     {% if view.pagination and view.pagination.next_page_url -%}
-        <a class="article-pagination__link" href="{{ view.pagination.next_page_url }}" data-id="article-pager....next-link">
+        <a class="article-pagination__link" href="{{ view.pagination.next_page_url }}" data-ct-label="Nächste Seite">
             <span class="article-pagination__button article-pagination__button--next">Nächste Seite
                 {%- block pagination_icon %}{% endblock -%}
             </span>
@@ -11,7 +11,7 @@
             {%- endif %}
         </a>
     {% else %}
-        <a class="article-pagination__link" href="{%- block pagination_link -%}{{ request.route_url('home') }}index{%- endblock -%}" data-id="article-pager....startseite">
+        <a class="article-pagination__link" href="{%- block pagination_link -%}{{ request.route_url('home') }}index{%- endblock -%}" data-ct-label="Startseite">
             <span class="article-pagination__button article-pagination__button--next">
                 {%- block pagination_button %}Startseite{% endblock -%}
                 {{- self.pagination_icon() -}}
@@ -30,7 +30,7 @@
             {%- if page == view.pagination.current -%}
                 <span>{{ page }}</span>
             {%- elif page -%}
-                <a href="{{ view.pagination.pages_urls[page - 1] }}" data-id="article-pager....{{ page }}">{{ page }}</a>
+                <a href="{{ view.pagination.pages_urls[page - 1] }}">{{ page }}</a>
             {%- else -%}
                 <span>…</span>
             {%- endif -%}
@@ -39,7 +39,7 @@
 
         {% block pager_complete_view -%}
         <li class="article-pager__all">
-            <a href="{{ view.content_url }}/komplettansicht" data-id="article-pager....all">
+            <a href="{{ view.content_url }}/komplettansicht" data-ct-label="all">
                 <span class="article-pager__who">Artikel</span>
                 <span class="article-pager__what">auf einer Seite lesen</span>
             </a>
