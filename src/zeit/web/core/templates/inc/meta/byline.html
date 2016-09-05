@@ -31,7 +31,7 @@
 {%- endmacro -%}
 
 {%- macro enum(obj) -%}
-    {% if obj | length <=3 and view.type == 'centerpage' %}
+    {% if obj | length <= 3 and view.type == 'centerpage' %}
         {% for type, item in obj -%}
             {% if not loop.first and not loop.last -%}
                 ,
@@ -40,7 +40,7 @@
             {%- endif %}
             {{ type | macro(item) }}
         {%- endfor %}
-    {% elif obj | length >=3 and view.type == 'centerpage'  %}
+    {% elif obj | length > 3 and view.type == 'centerpage'  %}
         {% set stripped_obj = obj[:3] %}
         {% for type, item in stripped_obj -%}
             {% if not loop.first -%}
