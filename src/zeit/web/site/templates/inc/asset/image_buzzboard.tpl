@@ -1,6 +1,6 @@
 {%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
 
-{% set image = get_image(teaser, variant_id='wide') %}
+{% set image = get_image(teaser, variant_id='wide', fallback=True) %}
 {% set media_caption_additional_class = 'figcaption--hidden' %}
 {% set href = teaser.uniqueId | create_url %}
 
