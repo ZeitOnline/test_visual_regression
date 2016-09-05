@@ -1,10 +1,20 @@
 Change log for zeit.web
 =======================
 
-3.2 (unreleased)
+3.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-2410: Show byline on video-related items
+
+
+3.2 (2016-09-02)
+----------------
+
+- HOTFIX: Avoid XMLReference updating triggered by synthesized gallery blocks
+
+- BUG-517: Allow Adtile7 to be wide on ZMO
+
+- FIX: Fix infographics
 
 
 3.1 (2016-08-31)

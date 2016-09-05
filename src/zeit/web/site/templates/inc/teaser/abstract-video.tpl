@@ -30,4 +30,5 @@
             </div>
         </div>
     </a>
+    {% block byline %}{% endblock %}
 </article>

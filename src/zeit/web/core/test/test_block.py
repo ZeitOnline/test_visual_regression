@@ -212,8 +212,8 @@ def test_image_should_set_mobile_ratio_for_variant_original(application):
         'http://xml.zeit.de/campus/article/infographic')
     block = zeit.web.core.interfaces.IPages(article)[0][1]
     image = zeit.web.core.interfaces.IImage(block)
-    assert round(0.80 - image.ratio, 1) == 0
-    assert round(1.62 - image.mobile_ratio, 1) == 0
+    assert round(0.80 - image.mobile_ratio, 1) == 0
+    assert round(1.62 - image.ratio, 1) == 0
 
 
 def test_module_class_should_hash_as_expected():
