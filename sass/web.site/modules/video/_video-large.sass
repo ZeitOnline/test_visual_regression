@@ -16,3 +16,9 @@
 		+font-smoothing()
 		+respond-min($break-desktop-min)
 			display: block
+	&__byline
+		@extend %teaser-metadata
+		+font-smoothing
+		color: $zon-lighter-grey
+		+respond-max($break-desktop-min)
+			display: none
