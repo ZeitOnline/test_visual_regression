@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-2375: Show still image copyright on video-related items
 
+- FIX: Clearly specify where to use a fallback image
+
 
 3.2 (2016-09-02)
 ----------------

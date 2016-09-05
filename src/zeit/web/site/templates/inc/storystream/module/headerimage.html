@@ -3,10 +3,11 @@
 {% set blockname = 'storystream-headerimage' %}
 <header class="{{ blockname }}">
     {# get the image directy from the supplied image group #}
-    {% set image = get_image(module, variant_id='cinema') %}
-    {# we need to explecitly pass the layout aka block class name #}
-    {% set module_layout = blockname %}
-    {% include "zeit.web.site:templates/inc/storystream/asset/headerimage_image.tpl" %}
+    {% require image = get_image(module, variant_id='cinema', fallback=True) %}
+        {# we need to explecitly pass the layout aka block class name #}
+        {% set module_layout = blockname %}
+        {% include "zeit.web.site:templates/inc/storystream/asset/headerimage_image.tpl" %}
+    {% endrequire %}
 
     <div class="{{ blockname }}__wrapper">
         <div class="{{ blockname }}__container">

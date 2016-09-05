@@ -11,7 +11,7 @@
     <meta property="og:title" content="{{ view.social_pagetitle }}">
     <meta property="og:description" content="{{ view.social_description }}">
     <meta property="og:url" content="{{ view.og_url }}">
-{% require image = get_image(view.context, variant_id='wide', name='sharing') %}
+{% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) %}
     {% set source = request.image_host + image.path + '__1300x731' -%}
     <meta property="og:image" content="{{ source }}">
     <meta property="og:image:width" content="1300">
