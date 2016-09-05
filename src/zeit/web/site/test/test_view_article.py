@@ -1751,3 +1751,12 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     assert len(link) == 1
     data_id = link[0].attrib['data-id']
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
+
+
+def test_video_in_article_has_poster_copyright(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    figure_copyright_elem = browser.cssselect('.video-figure__copyright')
+    assert len(figure_copyright_elem) == 1
+    figure_copyright = figure_copyright_elem[0]
+    copyright_person = figure_copyright.cssselect('[itemprop="name"]')[0]
+    assert copyright_person.text == u'© Foto: Alaa Al-Marjani/Reuters'

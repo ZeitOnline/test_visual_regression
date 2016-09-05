@@ -369,6 +369,7 @@ class Video(Block):
         self.title = self.video.title
         self.supertitle = self.video.supertitle
         self.description = self.video.subtitle
+        self.video_still_copyright = self.video.video_still_copyright
         self.id = self.video.uniqueId.split('/')[-1]  # XXX ugly
         self.format = model_block.layout
 

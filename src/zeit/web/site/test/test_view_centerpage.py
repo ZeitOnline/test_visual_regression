@@ -2011,6 +2011,7 @@ def test_printkiosk_area_should_render_in_isolation_skippage(testbrowser):
 def test_printkiosk_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/angebote/printkiosk/vorschau'.format(testserver.url))
+    driver.set_window_size(1200, 860)
     teaserbutton = driver.find_element_by_css_selector(
         '.js-bar-teaser-paginate')
     teaserbutton.click()
@@ -2396,3 +2397,10 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 980:
         width = teaser.size.get('width')
         assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
+
+
+def test_imagecopyright_includes_videostage_poster_copyright(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
+    figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
+    # robot video on stage has no copyright - on purpose.
+    assert len(figures) == 4
