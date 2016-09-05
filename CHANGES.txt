@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-3.3 (unreleased)
+3.3 (2016-09-05)
 ----------------
 
 - ZON-2949: Update clicktracking for pagination
