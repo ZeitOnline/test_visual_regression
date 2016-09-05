@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-2410: Show byline on video-related items
 
+- ZON-2375: Show still image copyright on video-related items
+
 
 3.2 (2016-09-02)
 ----------------
