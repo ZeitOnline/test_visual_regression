@@ -4,7 +4,7 @@ Change log for zeit.web
 3.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-2410: Show byline on video-related items
 
 
 3.2 (2016-09-02)
