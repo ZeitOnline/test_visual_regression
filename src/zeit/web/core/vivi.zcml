@@ -45,6 +45,7 @@
     <include package="zeit.campus" />
     <include package="zeit.newsletter" />
     <include package="zeit.push" />
+    <include package="zeit.retresco" />
     <!-- XXX Something about including the whole zeit.solr package is slow,
          and since we don't need it, we gain ~2s startup performance here -->
     <!-- <include package="zeit.solr" /> -->

@@ -50,41 +50,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         zeit.web.core.interfaces.IPagination
     )
 
-    FIELDS = ' '.join([
-        'authors',
-        'date-last-modified',
-        'date_first_released',
-        'date_last_published',
-        'image-base-id',
-        'image-fill-color',
-        'last-semantic-change',
-        'lead_candidate',
-        'product_id',
-        'show_commentthread',
-        'serie',
-        'supertitle',
-        'teaser_text',
-        'title',
-        'type',
-        'uniqueId',
-    ])
-
-    FIELD_MAP = [
-        (u'authors', u'authorships'),
-        (u'show_commentthread', u'commentSectionEnable'),
-        (u'supertitle', u'teaserSupertitle'),
-        (u'teaser_text', u'teaserText'),
-        (u'title', u'teaserTitle'),
-    ]
-
-    DATE_MAP = [
-        (u'date-last-modified', u'date_last_modified'),
-        (u'date_first_released', u'date_first_released'),
-        (u'last-semantic-change', u'last_semantic_change'),
-        (u'date_last_published', u'date_last_published'),
-        (u'date_last_published', u'date_last_published_semantic'),
-    ]
-
     def __init__(self, context):
         super(Ranking, self).__init__(context)
         self.request = pyramid.threadlocal.get_current_request()
@@ -125,36 +90,6 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return zeit.web.dont_cache([])
         return [x.uniqueId for x in self._content_query.existing_teasers
                 if hasattr(x, 'uniqueId')]
-
-    def document_hook(self, doc):
-        for source, target in self.FIELD_MAP:
-            try:
-                doc[target] = doc[source]
-            except KeyError:
-                continue
-
-        for source, target in self.DATE_MAP:
-            try:
-                doc[target] = zc.iso8601.parse.datetimetz(str(doc[source]))
-            except (KeyError, UnicodeEncodeError, ValueError):
-                continue
-
-        serie = doc.get('serie', None)
-        source = zeit.cms.content.interfaces.ICommonMetadata['serie'].source
-        doc['serie'] = source.factory.values.get(serie, None)
-
-        # XXX These asset badges and classification flags are not indexed
-        #     in Solr, so we lie about them.
-        doc.update({'gallery': None,
-                    'genre': None,
-                    'template': None,
-                    'video': None,
-                    'video_2': None})
-
-        doc.setdefault('lead_candidate', False)
-        doc.setdefault('commentSectionEnable', True)
-
-        return doc
 
     @zeit.web.reify
     def query_string(self):
@@ -240,14 +175,120 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         return pagination if pagination is not None else []
 
 
-class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery):
+class Converter(object):
+
+    def _convert(self, doc):
+        doc = self._convert_names(doc)
+        doc = self._convert_dates(doc)
+        doc = self._set_defaults(doc)
+        return doc
+
+    FIELD_MAP = NotImplemented
+
+    def _convert_names(self, doc):
+        for source, target in self.FIELD_MAP.items():
+            try:
+                doc[target] = doc[source]
+            except KeyError:
+                continue
+        return doc
+
+    DATE_FIELDS = [
+        'date_last_modified',
+        'date_first_released',
+        'last_semantic_change',
+        'date_last_published',
+        'date_last_published_semantic',
+    ]
+
+    def _convert_dates(self, doc):
+        for key in self.DATE_FIELDS:
+            try:
+                doc[key] = zc.iso8601.parse.datetimetz(str(doc[key]))
+            except (KeyError, UnicodeEncodeError, ValueError):
+                continue
+        return doc
+
+    def _set_defaults(self, doc):
+        # XXX These asset badges and classification flags are not indexed
+        #     in Solr, so we lie about them.
+        for name in ['gallery', 'genre', 'template', 'video', 'video_2']:
+            doc.setdefault(name, None)
+        doc.setdefault('lead_candidate', False)
+        doc.setdefault('commentSectionEnable', True)
+        return doc
+
+
+class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
+                       Converter):
 
     grokcore.component.context(Ranking)
 
-    @property
-    def FIELDS(self):
-        return self.context.FIELDS
+    FIELD_MAP = {
+        'date-last-modified': 'date_last_modified',
+        'date_first_released': '',
+        'date_last_published': '',
+        'date_last_published_semantic': 'date_last_published_semantic',
+        'image-base-id': 'teaser_image',
+        'image-fill-color': 'teaser_image_fill_color',
+        'last-semantic-change': 'last_semantic_change',
+        'lead_candidate': '',
+        'product_id': '',
+        'serie': '',
+        'show_commentthread': 'commentSectionEnable',
+        'supertitle': 'teaserSupertitle',
+        'teaser_text': 'teaserText',
+        'title': 'teaserTitle',
+        'type': 'doc_type',
+        'uniqueId': '',
+    }
 
-    def _resolve(self, solr_result):
-        doc = self.context.document_hook(solr_result)
-        return zeit.cms.interfaces.ICMSContent(doc, None)
+    @zeit.web.reify
+    def FIELDS(self):
+        return ' '.join(self.FIELD_MAP.keys())
+
+    def _convert(self, doc):
+        doc = super(SolrContentQuery, self)._convert(doc)
+        for key in ['teaser_image', 'teaser_image_fill_color']:
+            if doc.get(key):
+                doc[key] = doc[key][0]
+        return doc
+
+    def _resolve(self, doc):
+        return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
+
+
+class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
+                      Converter):
+
+    grokcore.component.context(Ranking)
+
+    # XXX Can we generate this from zeit.retresco.convert somehow?
+    FIELD_MAP = {
+        'author_names': 'authors',
+        'date_last_semantic_change': 'last_semantic_change',
+        'allow_comments': 'commentsAllowed',
+        'show_comments': 'commentSectionEnable',
+        'print_ressort': 'printRessort',
+        'teaser_text': 'teaserText',
+        'teaser_title': 'teaserTitle',
+        'teaser_supertitle': 'teaserSupertitle',
+        'article_genre': 'genre',
+        'article_template': 'template',
+    }
+
+    def _convert(self, doc):
+        doc = super(TMSContentQuery, self)._convert(doc)
+        doc['authorships'] = [
+            FakeReference(zeit.cms.interfaces.ICMSContent(x, None))
+            for x in doc.get('authors', ())]
+        return doc
+
+    def _resolve(self, doc):
+        return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
+
+
+class FakeReference(object):
+
+    def __init__(self, content):
+        self.target = content
