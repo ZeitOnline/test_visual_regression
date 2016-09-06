@@ -1673,7 +1673,7 @@ def test_infographics_should_render_border_styles_conditionally(
 
     # all border styles present
     image.origin = True
-    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
+    image.copyrights = ('FOO', 'BAR', 'BAZ')
     image.caption = True
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert not browser.cssselect('.x-footer--borderless')
@@ -1684,13 +1684,19 @@ def test_infographics_should_render_border_styles_conditionally(
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.x-subheadline--borderless')
 
-    # borderless footer
+    # footer has border
+    image.origin = True
     image.copyrights = ()
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert browser.cssselect('.x-footer--borderless')
+    assert not browser.cssselect('.x-footer--borderless')
+
+    image.origin = False
+    image.copyrights = ('FOO', 'BAR', 'BAZ')
+    browser = tplbrowser(template, block=image, request=dummy_request)
+    assert not browser.cssselect('.x-footer--borderless')
 
     # no border styles present
-    image.copyrights = (('FOO', 'BAR', 'BAZ'),)
+    image.copyrights = ()
     image.origin = False
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.x-footer--borderless')
@@ -1705,7 +1711,7 @@ def test_infographics_desktop_should_have_proper_asset_source(
     img_src = selenium_driver.find_element_by_css_selector(
         '.infographic img').get_attribute('src')
     assert u'/zeit-online/image/bertelsmann-infographic/' \
-           u'original__820x1025__desktop' in img_src
+           u'original__820x507__desktop' in img_src
 
 
 def test_infographics_mobile_should_have_proper_asset_source(
@@ -1716,7 +1722,7 @@ def test_infographics_mobile_should_have_proper_asset_source(
     img_src = selenium_driver.find_element_by_css_selector(
         '.infographic img').get_attribute('src')
     assert u'/zeit-online/image/bertelsmann-infographic/' \
-           u'original__400x247__mobile' in img_src
+           u'original__400x500__mobile' in img_src
 
 
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):
@@ -1745,3 +1751,12 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     assert len(link) == 1
     data_id = link[0].attrib['data-id']
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
+
+
+def test_video_in_article_has_poster_copyright(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    figure_copyright_elem = browser.cssselect('.video-figure__copyright')
+    assert len(figure_copyright_elem) == 1
+    figure_copyright = figure_copyright_elem[0]
+    copyright_person = figure_copyright.cssselect('[itemprop="name"]')[0]
+    assert copyright_person.text == u'© Foto: Alaa Al-Marjani/Reuters'

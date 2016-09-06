@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <video xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <head>
+    <author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Wenke Husmann</display_name>
+    </author>
     <renditions>
       <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319236001_thegreatrabbit-1280-720-h264.mp4" frame_width="720" video_duration="436118"/>
       <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319165001_thegreatrabbit-1280-720-h264.mp4" frame_width="400" video_duration="436118"/>

@@ -147,41 +147,6 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro print_pagination( pagination ) -%}
-    {% if pagination.total > 1 %}
-    <nav class="article-pagination is-constrained is-centered" aria-labelledby="pagination-title">
-        <div class="visually-hidden" id="pagination-title">Seitennavigation</div>
-        {% if pagination.next_page_title -%}
-            <div class="article-pagination__nexttitle">
-                <a href="{{ pagination.next_page_url }}">Auf Seite {{ pagination.current + 1 }} <span class="article-pagination__dash">—</span> {{ pagination.next_page_title }}</a>
-            </div>
-        {%- endif %}
-        <ul class="article-pagination__pager">
-            <li class="article-pagination__item">
-                {%- if pagination.prev_page_url -%}
-                    <a class="article-pagination__link" href="{{ pagination.prev_page_url }}">{{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon article-pagination__icon--active', view.package) }}</a>
-                {%- else -%}
-                    {{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon', view.package) }}
-                {%- endif -%}
-            </li>
-
-            {% for url in pagination.pages_urls -%}
-                {% set current_class = "article-pagination__link--current" if loop.index == pagination.current else "" %}
-                <li class="article-pagination__item"><a class="article-pagination__link {{current_class}}" href="{{ url }}">{{ loop.index }}</a></li>
-            {%- endfor %}
-
-            <li class="article-pagination__item">
-                {%- if pagination.next_page_url -%}
-                    <a class="article-pagination__link" href="{{ pagination.next_page_url }}">{{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--active', view.package) }}</a>
-                {%- else -%}
-                    {{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--next', view.package) }}
-                {%- endif -%}
-            </li>
-        </ul>
-    </nav>
-    {% endif %}
-{%- endmacro %}
-
 {% macro photocluster(block) %}
 <div class="photocluster__wrap">
     <div class="photocluster">
