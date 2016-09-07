@@ -40,7 +40,6 @@
     <include package="zeit.content.rawxml" />
     <include package="zeit.content.cp" />
     <include package="zeit.intrafind" />
-    <adapter factory="zeit.intrafind.tagger.Tagger" />
     <include package="zeit.magazin" />
     <include package="zeit.campus" />
     <include package="zeit.newsletter" />
