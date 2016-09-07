@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3120: Add LazyProxy support for TMS auto areas
 
+- FIX: Don't try to create vivi-thumbnails for gallery entries
+
 
 3.3 (2016-09-05)
 ----------------
