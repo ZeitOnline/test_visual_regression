@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-3.4 (unreleased)
+3.4 (2016-09-07)
 ----------------
 
 - ZON-3120: Add LazyProxy support for TMS auto areas
