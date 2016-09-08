@@ -21,8 +21,6 @@ import zeit.web.core.metrics
 import zeit.web.core.security
 import zeit.web.core.template
 import zeit.web.core.view
-import zeit.web.site.view
-import zeit.web.campus.view
 
 
 log = logging.getLogger(__name__)
@@ -435,7 +433,6 @@ class PostCommentResource(PostComment):
 
 
 @pyramid.view.view_defaults(
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
     request_param='action=recommend',
     request_method='GET')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
@@ -463,14 +460,8 @@ class RecommendCommentResource(PostCommentResource):
         self.request_method = 'GET'
 
 
-def is_zon_or_zco_content(context, request):
-    return (zeit.web.site.view.is_zon_content(context, request) or
-            zeit.web.campus.view.is_zco_content(context, request))
-
-
 # XXX We should be a little more specific here, ie ICommentableContent
 @pyramid.view.view_defaults(
-    custom_predicates=(is_zon_or_zco_content,),
     containment=zeit.cms.content.interfaces.ICommonMetadata)
 @pyramid.view.view_config(
     name='comment-form',

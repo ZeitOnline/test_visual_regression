@@ -5,16 +5,16 @@ import pyramid.view
 
 import zeit.web.core
 import zeit.web.core.view
-import zeit.web.campus.view
+import zeit.web.magazin.view
 
 
 log = logging.getLogger(__name__)
 
 
 @pyramid.view.view_defaults(
-    renderer='zeit.web.campus:templates/inc/comments/thread.html',
+    renderer='zeit.web.magazin:templates/inc/comments/thread.html',
     name='comment-thread',
-    custom_predicates=(zeit.web.campus.view.is_zco_content,))
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,))
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
 @pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
