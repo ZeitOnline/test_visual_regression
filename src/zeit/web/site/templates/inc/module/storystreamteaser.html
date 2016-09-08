@@ -14,10 +14,11 @@
     {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}" data-clicktracking="{{ area.kind }}">
     <header class="{{ '{}__header'.format(blockname) | with_mods(blockname_modifier) }}">
         {# get the image directly from the supplied image group #}
-        {% set image = get_image(module, variant_id='cinema') %}
-        {# we need to explicitly pass the layout aka block class name #}
-        {% set module_layout = blockname %}
-        {% include "zeit.web.site:templates/inc/storystream/asset/headerimage_image.tpl" %}
+        {% require image = get_image(module, variant_id='cinema', fallback=True) %}
+            {# we need to explicitly pass the layout aka block class name #}
+            {% set module_layout = blockname %}
+            {% include "zeit.web.site:templates/inc/storystream/asset/headerimage_image.tpl" %}
+        {% endrequire %}
 
         <div class="{{ '{}__headercontent'.format(blockname) | with_mods(blockname_modifier) }}">
             <a class="{{ blockname }}__link" href="{{ target_url }}">

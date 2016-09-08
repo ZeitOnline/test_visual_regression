@@ -210,6 +210,34 @@ def test_video_teaser_should_be_identified_as_such(application):
     assert zeit.web.core.template.is_video(video)
 
 
+def test_video_teaser_should_display_byline(testbrowser):
+    bylines = testbrowser('/zeit-online/video-teaser')\
+        .cssselect("[class$='__byline']")
+    assert len(bylines) == 7
+    for value in bylines:
+        # remove duplicated whitespace
+        assert " ".join(value.text.split()) == 'Von Wenke Husmann'
+
+
+def test_video_single_page_should_display_byline(testbrowser):
+    byline = testbrowser('/zeit-online/video/3537342483001')\
+        .cssselect('.byline--on-videopage')
+    assert len(byline) == 1
+    temp = [byline[0].text]
+    descendants = byline[0].iterdescendants()
+    for i in descendants:
+        temp.append(i.text)
+    raw_inner_html = " ".join(temp).replace("\n", "")
+    assert " ".join(raw_inner_html.split()) == 'Von Wenke Husmann'
+
+
+def test_video_stage_main_should_display_byline(testbrowser):
+    byline = testbrowser('zeit-online/video-stage') \
+        .cssselect('.video-large__byline')
+    assert len(byline) == 1
+    assert " ".join(byline[0].text.split()) == 'Von Wenke Husmann'
+
+
 def test_article_teaser_should_not_be_identified_as_video(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt')

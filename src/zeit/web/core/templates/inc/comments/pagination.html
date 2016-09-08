@@ -9,8 +9,8 @@
         {%- set next_label = 'Ältere Kommentare' -%}
         {%- set keep_sort = view.comments.sort -%}
     {%- endif -%}
-<div class="comment-section__item" data-ct-area="comment_pager">
-    <nav class="pager" aria-labelledby="comments-pagination-title" data-ct-row="1">
+<div class="comment-section__item">
+    <nav class="pager" aria-labelledby="comments-pagination-title" data-ct-area="comment_pager" data-ct-row="{{ 'page_%s_of_%s' | format(pages.current, pages.total) }}" data-ct-column="false">
         <div class="visually-hidden" id="comments-pagination-title">Kommentarseiten</div>
         {% if pages.current == pages.total %}
         <a class="pager__button pager__button--previous" href="{{ view.request | append_get_params(url=view.context | create_url, page=pages.current - 1, cid=None) }}#comments">{{ prev_label }}</a>

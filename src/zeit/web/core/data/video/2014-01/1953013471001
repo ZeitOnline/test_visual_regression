@@ -1,6 +1,9 @@
 <video xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <head>
 	<keywordset/>
+	<author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="" expires="">
+	  <display_name py:pytype="str">Wenke Husmann</display_name>
+	</author>
 	<renditions>
 		<rendition url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4" frame_width="1280"/>
 	</renditions>
@@ -27,6 +30,7 @@
 	<attribute ns="http://namespaces.zeit.de/CMS/document" name="thumbnail">
 	http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041162001_ari-origin05-arc-154-1352391648628.jpg?pubId=18140073001
 	</attribute>
+	<attribute name="video_still_copyright" ns="http://namespaces.zeit.de/CMS/document">© Foto: Steven Spielberg</attribute>
 	<attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">video</attribute>
 	<attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9135becb-ee77-4e82-acd3-a3f0ede596a1}</attribute>
 	<attribute ns="http://namespaces.zeit.de/CMS/document" name="video_still">

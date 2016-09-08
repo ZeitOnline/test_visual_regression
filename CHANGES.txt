@@ -1,10 +1,42 @@
 Change log for zeit.web
 =======================
 
-3.2 (unreleased)
+3.5 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- BUG-528: Remove teaser image title attribute
+
+- BUG-529: Fix topic teaser mobile image resource
+
+
+3.4 (2016-09-07)
+----------------
+
+- ZON-3120: Add LazyProxy support for TMS auto areas
+
+- FIX: Don't try to create vivi-thumbnails for gallery entries
+
+
+3.3 (2016-09-05)
+----------------
+
+- ZON-2949: Update clicktracking for pagination
+
+- ZON-2410: Show byline on video-related items
+
+- ZON-2375: Show still image copyright on video-related items
+
+- FIX: Clearly specify where to use a fallback image
+
+
+3.2 (2016-09-02)
+----------------
+
+- HOTFIX: Avoid XMLReference updating triggered by synthesized gallery blocks
+
+- BUG-517: Allow Adtile7 to be wide on ZMO
+
+- FIX: Fix infographics
 
 
 3.1 (2016-08-31)

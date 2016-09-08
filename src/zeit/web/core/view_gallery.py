@@ -1,25 +1,24 @@
+import grokcore.component
 import lxml.objectify
 
-import zeit.wysiwyg.interfaces
+import zeit.content.image.interfaces
 
 import zeit.web
-import zeit.web.magazin.view
 
 
 class Gallery(zeit.web.core.view.Content):
 
     advertising_enabled = True
 
-    def __init__(self, *args, **kwargs):
-        super(Gallery, self).__init__(*args, **kwargs)
+    def __init__(self, context, request):
+        super(Gallery, self).__init__(context, request)
         self.context.advertising_enabled = self.advertising_enabled
 
     @zeit.web.reify
     def gallery(self):
         # We synthesize a gallery reference block to reuse the block template
         block = zeit.content.article.edit.reference.Gallery(
-            self.context, lxml.objectify.E.gallery())
-        block.references = self.context
+            self.context, lxml.objectify.E.gallery(href=self.context.uniqueId))
         return zeit.web.core.interfaces.IFrontendBlock(block)
 
     @zeit.web.reify
@@ -36,3 +35,14 @@ class Gallery(zeit.web.core.view.Content):
     @zeit.web.reify
     def webtrekk_assets(self):
         return ['gallery.0/seite-1']
+
+
+@grokcore.component.adapter(
+    zeit.content.image.interfaces.IImage)
+@grokcore.component.implementer(
+    zeit.content.image.interfaces.IPersistentThumbnail)
+def persistent_thumbnail_factory(context):
+    """Disable vivi-only functionality, especially since creating content does
+    not work in our environment.
+    """
+    return object()
