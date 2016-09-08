@@ -10,7 +10,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">41b7eb498ee744f3a56c73567395a9ec</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-02-12T03:32:17.547937+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
@@ -20,7 +19,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">29.01.2015</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">registration</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/2015/05/Crystal</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
@@ -57,7 +56,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">13</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">49</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">10492218</attribute>

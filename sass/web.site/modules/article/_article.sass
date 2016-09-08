@@ -31,6 +31,8 @@
 			margin: remify(40px) auto
 			width: 90%
 
+		&--has-badge
+
 		+respond-min($break-tablet-min)
 			max-width: remify(660px)
 			margin-left: auto
@@ -56,17 +58,11 @@
 				margin: remify(16px 25px 16px 60px)
 				width: remify(220px)
 
-	/* structure for zplus badge */
-	&__intro,
-	&__badge
+	/* structure adaption for zplus badge */
+	&__intro
 		+respond-min($break-tablet-min)
 			display: table-cell
 			vertical-align: top
-
-	&__badge
-		+respond-min($break-tablet-min)
-			width: remify(180px)
-
 
 .article__subheading
 	font-size: remify(20px)
@@ -106,8 +102,9 @@
 		font-weight: bold
 
 .zplus
-	background-color: $zon-lighter-grey
-	height: remify(40px)
+	&__badge
+		background-color: $zon-lighter-grey
+		height: remify(40px)
 	&__marker
 		background-color: $zon-red
 		display: table-cell
@@ -129,6 +126,15 @@
 		color: $grey
 		text-transform: uppercase
 		letter-spacing: $zon-letter-spacing-l
+
+	+respond-min($break-tablet-min)
+		display: table-cell
+		vertical-align: top
+
+		&__badge
+			width: remify(180px)
+			height: remify(180px)
+
 
 .article-page
 	&:last-of-type

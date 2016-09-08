@@ -10,6 +10,7 @@ import zope.component
 
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
+import zeit.content.volume.interfaces
 
 from zeit.web.site.view_feed import (
     CONTENT_MAKER, ELEMENT_MAKER,
@@ -260,6 +261,34 @@ class Article(zeit.web.core.view.Content):
 
         path = prefix + '?print'
         return url + path
+
+    @zeit.web.reify
+    def volume(self):
+        return zeit.content.volume.interfaces.IVolume(self.context, None)
+
+    @zeit.web.reify
+    def zplus_label(self):
+        try:
+            acquisition = getattr(self.context, 'acquisition', None)
+            if self.volume:
+                if acquisition == 'registration':
+                    return {'intro': 'Aus der',
+                            'link': self.volume.uniqueId.replace('xml','www'),
+                            'link_text': 'ZEIT Nr. ' + str(self.volume.volume)
+                            + '/' + str(self.volume.year),
+                            'cover': self.volume.covers['printcover']}
+                elif acquisition == 'abo':
+                    return {'intro': '',
+                            'link': self.volume.uniqueId.replace('xml','www'),
+                            'link_text': u'Exklusiv für Abonennten',
+                            'cover': self.volume.covers['printcover']}
+            else:
+                return {'intro': '',
+                        'link': self.request.host + '/exklusiv',
+                        'link_text': u'Exklusiv für Abonennten',
+                        'cover': False}
+        except:
+            return False
 
     @zeit.web.reify
     def breadcrumbs(self):

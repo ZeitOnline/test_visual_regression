@@ -30,6 +30,7 @@ import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.utils
 
+
 log = logging.getLogger(__name__)
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
@@ -130,6 +131,24 @@ def zplus_content(content):
         return acquisition == 'abo'
 
     return False
+
+
+@zeit.web.register_test
+def zplus_content_article(content):
+
+    if not zeit.web.core.application.FEATURE_TOGGLES.find(
+            'reader_revenue'):
+        return False
+
+    # Links are defined as free content
+    if zeit.content.link.interfaces.ILink.providedBy(content):
+        return False
+
+    # Use Acquisition attribute
+    # XXX acquisition is set statically for mocksolr in utils.py until ZON-3286
+    acquisition = getattr(content, 'acquisition', None)
+
+    return acquisition in ('abo', 'registration')
 
 
 @zeit.web.register_test

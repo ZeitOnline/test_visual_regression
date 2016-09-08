@@ -27,7 +27,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:21da7127-f585-49ed-b4c6-200c7a1f7fea}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">5dc3d7bc15ba46ca934f0eb82951d22b</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>

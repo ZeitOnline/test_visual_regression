@@ -68,6 +68,7 @@ setup(
         'zeit.content.quiz',
         'zeit.content.text',
         'zeit.content.video',
+        'zeit.content.volume',
         'zeit.edit',
         'zeit.find',
         'zeit.intrafind',

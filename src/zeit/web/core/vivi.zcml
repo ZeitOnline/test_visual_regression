@@ -39,6 +39,7 @@
     <include package="zeit.content.video" />
     <include package="zeit.content.rawxml" />
     <include package="zeit.content.cp" />
+    <include package="zeit.content.volume" />
     <include package="zeit.intrafind" />
     <adapter factory="zeit.intrafind.tagger.Tagger" />
     <include package="zeit.magazin" />
@@ -53,6 +54,7 @@
     <include package="zeit.wysiwyg" />
     <include package="zeit.brightcove" />
     <include package="zeit.vgwort" />
+    <include package="zeit.objectlog" />
     <include package="zeit.objectlog" />
 
 </configure>
