@@ -273,13 +273,13 @@ class Article(zeit.web.core.view.Content):
             if self.volume:
                 if acquisition == 'registration':
                     return {'intro': 'Aus der',
-                            'link': self.volume.uniqueId.replace('xml','www'),
+                            'link': self.volume.uniqueId.replace('xml', 'www'),
                             'link_text': 'ZEIT Nr. ' + str(self.volume.volume)
                             + '/' + str(self.volume.year),
                             'cover': self.volume.covers['printcover']}
                 elif acquisition == 'abo':
                     return {'intro': '',
-                            'link': self.volume.uniqueId.replace('xml','www'),
+                            'link': self.volume.uniqueId.replace('xml', 'www'),
                             'link_text': u'Exklusiv für Abonennten',
                             'cover': self.volume.covers['printcover']}
             else:
