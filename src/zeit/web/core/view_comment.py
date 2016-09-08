@@ -454,13 +454,8 @@ class RecommendCommentResource(PostCommentResource):
         # redirect unauthorized recommendation request
         # prevent 403 HTTPForbidden response in PostComment
         if not request.user:
-            if request.registry.settings.sso_activate:
-                pattern = '{}/anmelden?url={}'
-                host = request.registry.settings.get('sso_url')
-            else:
-                pattern = '{}/user/login?destination={}'
-                host = request.registry.settings.get('community_host')
-
+            pattern = '{}/anmelden?url={}'
+            host = request.registry.settings.get('sso_url')
             location = pattern.format(host, urllib.quote_plus(request.url))
             raise pyramid.httpexceptions.HTTPSeeOther(location=location)
 

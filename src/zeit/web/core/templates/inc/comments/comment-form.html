@@ -40,7 +40,7 @@
     {%- block comment_form %}
     <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
         {%- if is_mod %} data-mod="mod"{% endif %}>
-         {% if view.comment_form.show_comment_form -%}
+        {% if view.comment_form.show_comment_form -%}
         <div class="comment-form__text comment-form__text--metadata" data-ct-row="1">
             {% if request.user.picture %}
                 <img class="comment-form__avatar" alt="Avatarbild von {{ request.user.name }}" src="{{ request.user.picture }}">
@@ -60,7 +60,7 @@
                 <span class="js-count-formchars"></span> 1500 Zeichen
             </span>
         </div>
-            {% if request.registry.settings.sso_activate and not request.user.name %}
+            {% if not request.user.name %}
             <div class="comment-form__sso-username">
                 <p class="comment-form__hint{% if view.error and not view.error.error == 'username_exists_or_invalid' %} comment-form__hint--error{% endif %}">
                     Sie haben noch keinen Benutzernamen. Dieser wird einmalig festgelegt und ist öffentlich sichtbar.
@@ -95,23 +95,12 @@
         <p>
             Bitte melden Sie sich an, um zu kommentieren.
         </p>
-        {% if request.registry.settings.sso_activate %}
-            <a class="button" href="{{
-                        request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
-                Anmelden
-            </a>
-            <a class="button" href="{{
-                        request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
+        <a class="button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
+            Anmelden
+        </a>
+        <a class="button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
             Registrieren
-            </a>
-                {% else %}
-            <a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ view.content_url | e }}">
-                Anmelden
-            </a>
-            <a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ view.content_url | e }}">
-                Registrieren
-            </a>
-        {% endif %}
+        </a>
     </form>
 {%- endif %}
 </div>
@@ -124,21 +113,12 @@
         <p>
             Bitte melden Sie sich an, um diesen Kommentar zu melden.
         </p>
-        {% if request.registry.settings.sso_activate %}
-            <a class="button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
-                Anmelden
-            </a>
-            <a class="button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
-                Registrieren
-            </a>
-                {% else %}
-            <a class="button" href="{{ request.registry.settings.community_host }}/user/login?destination={{ view.content_url | e }}">
-                Anmelden
-            </a>
-            <a class="button" href="{{ request.registry.settings.community_host }}/user/register?destination={{ view.content_url | e }}">
-                Registrieren
-            </a>
-        {% endif %}
+        <a class="button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
+            Anmelden
+        </a>
+        <a class="button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
+            Registrieren
+        </a>
     </form>
 {%- endif %}
 </script>

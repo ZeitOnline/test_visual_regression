@@ -285,12 +285,8 @@ def test_comment_action_recommend_should_redirect_to_login(testserver):
     path = '/zeit-online/article/01?action=recommend&pid=2968470'
     url = testserver.url + path
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    if conf.get('sso_activate'):
-        pattern = '{}/anmelden?url={}'
-        host = conf.get('sso_url')
-    else:
-        pattern = '{}/user/login?destination={}'
-        host = conf.get('community_host')
+    pattern = '{}/anmelden?url={}'
+    host = conf.get('sso_url')
     location = pattern.format(host, urllib.quote_plus(url))
 
     response = requests.get(url, allow_redirects=False)
