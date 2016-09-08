@@ -1,25 +1,12 @@
-$comment-color-notice:          $grey
-$comment-color-header-sub:      $dusty-gray
-$comment-color-head-background: $color-page-bg
+$comment-color-head-background: transparent
 $comment-color-head-color:      $color-text
+$comment-color-head-small:      $dusty-gray
+$comment-color-note-background: $grey--light
+$comment-color-notice:          $grey
 
 @import "web.core/modules/comments/comment-section"
 
 // own styles, which differ from core
 .comment-section
-	// &__head
-	// 	+respond-min($break-tablet-min)
-	// 		background-color: transparent
-	&__button
-		white-space: nowrap
-		+respond-min($break-phablet-min)
-			float: right
-	// 	&:after
-	// 		content: "\25B8" // ▸ = Black right-pointing small triangle
-	// 		margin-left: 3px
-	&__headline
-		font-size: remify(18px)
-		+respond-min($break-phablet-min)
-			font-size: remify(20px)
 	&__body + &__note
 		border-top: 1px solid $color-border

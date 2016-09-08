@@ -107,6 +107,7 @@
 			margin-bottom: remify(4px)
 
 	&__moderations
+		+default-article-textlink
 		clear: left
 		float: left
 		list-style: none
@@ -114,15 +115,12 @@
 		padding: 0
 		text-align: left
 	&__moderation
-		color: $comment-color-moderation-link
 		font-size: remify(15px)
 		letter-spacing: $letter-spacing-s
 		line-height: 2
-		+on-interaction
-			border-bottom: 1px solid currentColor
 
 		&--sending
-			color: $comment-color-moderation-sending-font !important
+			color: $comment-color-moderation-sending !important
 
 	&__rewrapper
 		display: block
@@ -132,10 +130,10 @@
 			visibility: hidden
 		&:hover
 			.comment__count
-				background-color: $comment-color-rewrapper-hover-count-background
+				background-color: $comment-color-count-background--hover
 			.comment__cta
-				color: $comment-color-rewrapper-hover-cta-font
-				border-bottom: 1px solid $comment-color-rewrapper-hover-cta-border
+				color: $comment-color-cta-font--hover
+				border-bottom: 1px solid $comment-color-cta-border--hover
 
 	// TODO: redundant mit dem Overlay Wrapper Count Zeugs???
 	&__count
@@ -240,10 +238,10 @@
 
 	&:hover
 		.comment-overlay__count
-			background-color: $comment-color-overlay-count-background
+			background-color: $comment-color-count-background--hover
 		.comment-overlay__cta
-			color: $comment-color-overlay-cta-font
-			border-bottom: 1px solid $comment-color-overlay-cta-border
+			color: $comment-color-cta-font--hover
+			border-bottom: 1px solid $comment-color-cta-border--hover
 
 // icons
 .comment__badge
