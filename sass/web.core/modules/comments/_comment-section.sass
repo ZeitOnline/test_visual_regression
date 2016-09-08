@@ -1,11 +1,12 @@
 .comment-section
-	margin: 0 (-$page-padding)
+	+unpadded
+	margin-bottom: remify(40px)
 	+respond-min($break-tablet-min)
 		border-top: 1px solid $color-border
 	&__item
+		+padded
 		margin-left: auto
 		margin-right: auto
-		padding: 0 $page-padding
 		+respond-min($break-tablet-min)
 			max-width: remify(700px) // 660px + 2*$page-padding
 	&__note
@@ -54,6 +55,3 @@
 		.comment-section__notice,
 		.comment-form__cancel--hidden
 			display: none
-
-.no-js .comment-section__link-autoupdate
-	display: none
