@@ -5,7 +5,7 @@ Default teaser template to inherit from.
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 {%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{%- set image = get_image(module) %}
+{%- set image = get_image(module, fallback=True) %}
 {%- set video = get_video(teaser) %}
 
 <article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"

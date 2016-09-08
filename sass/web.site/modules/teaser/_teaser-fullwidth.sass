@@ -1,37 +1,36 @@
 .teaser-fullwidth
 	@extend %teaser
 	border-bottom: 1px solid $color-border
-	padding: 0 0 $vertical-space
 	margin: 0
-	+respond-min($break-areas)
-		border-bottom: none
-		overflow: hidden
-		padding: 0
-		position: relative
+	padding: 0 0 $vertical-space
+	+respond-min($break-tablet-min)
 		+font-smoothing
 		+teaser-image-text-shadow
+		background-color: rgb(0, 15, 20) // placeholder for image; same as default for +teaser-image-dark-overlay
+		border-bottom: none
+		height: 0
+		overflow: hidden
+		padding: 0 0 (100% / 7 * 3) 0 // image variant 'cinema'
+		position: relative
 	&__media
+		background-color: $zon-lighter-grey // placeholder for image
 		height: 0
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
-		background-color: $zon-lighter-grey // placeholder for image
-		margin: 0 0 $petite
 		+respond-min($break-tablet-min)
 			background-color: rgb(0, 15, 20) // placeholder for image; same as default for +teaser-image-dark-overlay
-			margin: 0
 			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
-			z-index: 1
 	&__media-link
 		+respond-min($break-tablet-min)
 			+teaser-image-dark-overlay
+			color: #fff
 	&__container
-		padding: 0 $page-padding
+		padding: $vertical-space $page-padding 0
 		+respond-min($break-tablet-min)
 			bottom: 0
 			left: 0
 			padding: 0 0 em(32px) em(32px)
 			position: absolute
 			width: 72%
-			z-index: 2
 		+respond-min($break-desktop-min)
 			width: 66.66%
 			padding: 0 em(10px) em(36px) em(36px)

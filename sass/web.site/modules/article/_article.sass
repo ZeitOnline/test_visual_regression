@@ -4,7 +4,6 @@
 	font-style: italic
 	font-weight: normal // needed for e.g. liveblog header image
 	line-height: 1.5
-	margin: remify(8px auto 0)
 	color: $zon-dark-grey
 	+respond-min($break-desktop-min)
 		font-size: remify(16px)
@@ -97,6 +96,12 @@
 		font-size: em(20px)
 
 .byline
+	&--on-videopage
+		color: $zon-light-grey
+		a
+			color: $zon-lighter-grey
+			+on-interaction
+				color: $zon-light-grey
 	margin-bottom: remify(30px)
 	span[itemprop="name"]
 		font-weight: bold
@@ -144,6 +149,7 @@
 
 	&__caption
 		@extend %figure-caption
+		margin: remify(8px auto 0)
 
 		&--marginalia
 			margin-top: remify(12px)

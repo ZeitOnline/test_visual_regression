@@ -1,0 +1,34 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
+
+{% if view.pagination and view.pagination.total > 1 %}
+<nav class="article-pagination is-constrained is-centered" aria-labelledby="pagination-title" data-ct-area="article-pager" data-ct-row="{{ 'page_%s_of_%s' | format(view.pagination.current, view.pagination.total) }}" data-ct-column="false">
+    <div class="visually-hidden" id="pagination-title">Seitennavigation</div>
+    {% if view.pagination.next_page_title -%}
+        <div class="article-pagination__nexttitle">
+            <a href="{{ view.pagination.next_page_url }}">Auf Seite {{ view.pagination.current + 1 }} <span class="article-pagination__dash">—</span> {{ view.pagination.next_page_title }}</a>
+        </div>
+    {%- endif %}
+    <ul class="article-pagination__pager">
+        <li class="article-pagination__item">
+            {%- if view.pagination.prev_page_url -%}
+                <a class="article-pagination__link" href="{{ view.pagination.prev_page_url }}">{{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon article-pagination__icon--active', view.package) }}</a>
+            {%- else -%}
+                {{ lama.use_svg_icon('pagination-previous', 'article-pagination__icon', view.package) }}
+            {%- endif -%}
+        </li>
+
+        {% for url in view.pagination.pages_urls -%}
+            {% set current_class = "article-pagination__link--current" if loop.index == view.pagination.current else "" %}
+            <li class="article-pagination__item"><a class="article-pagination__link {{current_class}}" href="{{ url }}">{{ loop.index }}</a></li>
+        {%- endfor %}
+
+        <li class="article-pagination__item">
+            {%- if view.pagination.next_page_url -%}
+                <a class="article-pagination__link" href="{{ view.pagination.next_page_url }}">{{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--active', view.package) }}</a>
+            {%- else -%}
+                {{ lama.use_svg_icon('pagination-next', 'article-pagination__icon article-pagination__icon--next', view.package) }}
+            {%- endif -%}
+        </li>
+    </ul>
+</nav>
+{% endif %}
