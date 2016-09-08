@@ -3,11 +3,7 @@
 		background-color: $color-page-bg
 		box-shadow: 0 0 em(5px) rgba($color-body-bg, .5) // add invisible box-shadow to tame bodypainting advertising
 		color: $color-text
+		margin: 0 auto
 		min-width: em(320px)
-		+respond-min($max-page-width)
-			&:not(&--longform)
-				transition: all 0.5s
-				left: 50%
-				margin-left: -$max-page-width/2
-				max-width: $max-page-width
-				position: relative
+		&:not(&--longform)
+			max-width: $max-page-width

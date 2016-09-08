@@ -29,11 +29,6 @@
 .article__page
     @extend %copy
     margin-bottom: remify(48px)
-    p:first-of-type
-        +respond-min($comments__break-overlap)
-            padding-right: em(80px)
-        +respond-min($break-3)
-            padding-right: 0
     // bad idea ...
     p
         +default-article-textlink
