@@ -67,6 +67,7 @@ require([
     'web.core/plugins/jquery.picturefill',
     'web.core/plugins/jquery.referrerCount',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
+    'web.core/plugins/jquery.countFormchars',
     'web.core/plugins/jquery.imageCopyrightFooter',
     'web.magazin/plugins/jquery.backgroundvideo',
     'web.magazin/plugins/jquery.switchvideo'
@@ -77,5 +78,6 @@ require([
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
     $.picturefill();
     $( 'main' ).animateScroll({ selector: '.js-scroll' });
+    $( '.comment-section' ).countFormchars();
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
 });
