@@ -192,6 +192,15 @@ class ModuleImage(Image):
     pass
 
 
+@grokcore.component.adapter(zeit.content.image.interfaces.IImageGroup)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class ImageGroupImage(Image):
+
+    @zeit.web.reify
+    def group(self):
+        return self.context
+
+
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery,
                             name=u'content')
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)

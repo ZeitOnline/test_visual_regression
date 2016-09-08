@@ -25,6 +25,6 @@
     <volume>49</volume>
   </body>
   <covers>
-    <cover href="http://xml.zeit.de/campus/image/cover" id="printcover"/>
+    <cover href="http://xml.zeit.de/angebote/printkiosk/bildergruppen/die-zeit-cover" id="printcover"/>
   </covers>
 </volume>

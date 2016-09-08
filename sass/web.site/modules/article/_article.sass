@@ -107,6 +107,8 @@
 		font-weight: bold
 
 .zplus
+	position: relative
+
 	&__badge
 		background-color: $zon-lighter-grey
 		height: remify(40px)
@@ -120,17 +122,25 @@
 		color: #fff
 		margin: auto
 		display: block
-	&__label
+	&__text
 		display: table-cell
 		padding-left: remify(10px)
 		vertical-align: middle
-	&__label-link
-		+animated-interaction()
+		line-height: remify(40px)
 		font-size: em(12px)
-		line-height: em(16px)
 		color: $grey
 		text-transform: uppercase
 		letter-spacing: $zon-letter-spacing-l
+	&__link
+		+animated-interaction()
+		color: $grey
+		border-bottom: 1px solid $grey
+	&__media
+		height: remify(60px)
+		width: remify(82px)
+		position: absolute
+		right: remify(-14px)
+		top: remify(-10px)
 
 	+respond-min($break-tablet-min)
 		display: table-cell
@@ -138,8 +148,22 @@
 
 		&__badge
 			width: remify(180px)
-			height: remify(180px)
+			min-height: remify(180px)
 
+		&__label
+			display: block
+
+		&__media
+			position: static
+			width: remify(125px)
+
+		&__text
+			line-height: remify(20px)
+			display: block
+			width: 100%
+			text-align: center
+			padding: remify(18px 0 21px 0)
+			font-size: em(13px)
 
 .article-page
 	&:last-of-type
