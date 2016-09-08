@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - BUG-528: Remove teaser image title attribute
 
+- BUG-529: Fix topic teaser mobile image resource
+
 
 3.4 (2016-09-07)
 ----------------
