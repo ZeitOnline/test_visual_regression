@@ -9,7 +9,6 @@
                 {% block media_block_wrapper %}
                 <img class="{% block media_block_item %}{{ module_layout }}__media-item{% endblock %}"
                      alt="{{ image.alt }}"
-                     title="{{ image.title }}"
                      src="{{ request.image_host + image.fallback_path }}"
                      data-src="{{ request.image_host + image.path }}"
                      data-ratio="{{ image.ratio }}"
