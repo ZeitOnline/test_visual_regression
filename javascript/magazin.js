@@ -25,10 +25,8 @@ require([
     'web.core/clicktracking',
     'web.core/adReload',
     'web.core/menu',
+    'web.core/comments',
     'web.magazin/errors',
-    'web.magazin/tabs',
-    'web.magazin/comments',
-    'web.magazin/sharing',
     'web.magazin/cards',
     'web.magazin/photocluster'
 ], function(
@@ -37,24 +35,25 @@ require([
     clicktracking,
     adReload,
     menu,
-    errors,
-    tabs,
     comments,
-    sharing,
+    errors,
     cards,
     photocluster
 ) {
+    var article = document.getElementById( 'js-article' );
+
     images.init();
     menu.init();
     clicktracking.init();
     adReload.init();
     errors.init();
-    tabs.init();
-    comments.init();
-    sharing.init();
     cards.init();
-    photocluster.init();
     zeit.clearQueue();
+
+    if ( article ) {
+        comments.init();
+        photocluster.init();
+    }
 });
 
 // add required jQuery plugins
