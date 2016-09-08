@@ -206,10 +206,11 @@ def test_artikel05_should_have_header_image(testbrowser):
 def test_column_should_have_header_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/standardkolumne-beispiel')
     assert browser.cssselect('div.article__column__headerimage')
-    assert browser.cssselect('figure.scaled-image')
-    image = browser.cssselect('img.figure__media')[0]
+    figure = browser.cssselect('figure.figure-header.scaled-image')[0]
+    link = figure.cssselect('a')[0]
+    image = figure.cssselect('img')[0]
     assert image.attrib['alt'] == 'Dies ist der lokale alt Text'
-    assert image.attrib['title'] == 'Dies ist die lokale Katze!'
+    assert link.attrib['title'] == 'Dies ist die lokale Katze!'
 
 
 def test_column_should_not_have_header_image(testbrowser):
