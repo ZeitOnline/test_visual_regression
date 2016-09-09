@@ -210,3 +210,14 @@ def test_xml_liveblog_include(testserver):
     xml = lxml.etree.fromstring(res.content)
     assert xml.xpath('//div[@data-type="esi-content"]')
     assert xml.xpath('//*[name()="esi:include"]')
+
+
+def test_xml_adds_cors_header(testserver):
+    res = requests.get(
+        '%s/zeit-online/link-object' % testserver.url,
+        headers={'Host': 'xml.zeit.de'})
+    assert res.headers['Access-Control-Allow-Origin'] == '*'
+    res = requests.get(
+        '%s/davcontent/text' % testserver.url,
+        headers={'Host': 'xml.zeit.de'})
+    assert res.headers['Access-Control-Allow-Origin'] == '*'
