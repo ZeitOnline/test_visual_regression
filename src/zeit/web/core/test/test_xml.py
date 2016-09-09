@@ -221,3 +221,12 @@ def test_xml_adds_cors_header(testserver):
         '%s/davcontent/text' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
     assert res.headers['Access-Control-Allow-Origin'] == '*'
+
+
+def test_xml_renders_image_meta_files(testserver):
+    # For example, quiz.zeit.de parses those.
+    res = requests.get(
+        '%s/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee.meta' %
+        testserver.url, headers={'Host': 'xml.zeit.de'})
+    assert res.status_code == 200
+    assert res.content.startswith('<?xml')
