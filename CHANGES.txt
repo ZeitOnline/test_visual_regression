@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - BUG-529: Fix topic teaser mobile image resource
 
+- FIX: Update Partnerbox "Reisen" to new image API
+
 
 3.4 (2016-09-07)
 ----------------
