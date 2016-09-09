@@ -1,37 +1,41 @@
-{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
 {% block comment_section_head %}
     <h3 class="visually-hidden">Kommentare</h3>
-    <div class="comment-section__head comment-section__item" data-ct-area="comment_header">
-    {% if view.comment_area.show_comments %}
-    	<span class="comment-section__headline">
-    		{{ view.comments.headline }}
-    		{% if view.comments.pages.title %}
-    		<small>{{ view.comments.pages.title }}</small>
-    		{% endif %}
-    	</span>
-        {% if view.comment_area.show_comment_form %}
-        	<a href="#comment-form" class="comment-section__button button js-scroll" data-ct-row="1">
-        		Kommentieren
-        	</a>
+    <div class="comment-section__head" data-ct-area="comment_header">
+        <div class="comment-section__item">
+        {% if view.comment_area.show_comments %}
+            <span class="comment-section__headline">
+                {{ view.comments.headline }}
+                {% if view.comments.pages.title %}
+                    <small>{{ view.comments.pages.title }}</small>
+                {% endif %}
+            </span>
+            {% if view.comment_area.show_comment_form %}
+                <a href="#comment-form" class="comment-section__button button js-scroll" data-ct-row="1">
+                    {% block comment_section_head_cta %}Kommentieren{% endblock %}
+                </a>
+            {% endif %}
+        {% elif view.comment_area.no_comments %}
+            <span class="comment-section__headline">
+                <span class="nowrap">Noch keine Kommentare.</span>
+                <span class="nowrap">{% block comment_section_head_discuss %}Diskutieren Sie mit.{% endblock %}</span>
+            </span>
+        {% else %}
+            <span class="comment-section__headline">
+                <span class="nowrap">Kommentare</span>
+            </span>
         {% endif %}
-    {% elif view.comment_area.no_comments %}
-    	<span class="comment-section__headline">
-    		<span class="nowrap">Noch keine Kommentare.</span>
-    		<span class="nowrap">Diskutieren Sie mit.</span>
-    	</span>
-    {% else %}
-    	<span class="comment-section__headline">
-    		<span class="nowrap">Kommentare</span>
-    	</span>
-    {% endif %}
-
-    {% if view.comment_area.message  %}
-    	<div class="comment-section__message">
-    		{{ view.comment_area.message }}
-    	</div>
-    {% endif %}
+        </div>
     </div>
+
+    {% if view.comment_area.message  -%}
+    <div class="comment-section__message">
+        <div class="comment-section__item">
+            {{- view.comment_area.message -}}
+        </div>
+    </div>
+    {%- endif %}
 {% endblock %}
 
 {% if view.comment_area.show_comments %}

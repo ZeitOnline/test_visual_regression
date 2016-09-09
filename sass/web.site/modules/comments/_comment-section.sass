@@ -7,12 +7,21 @@ $comment-color-notice:          $zon-grey
 
 // own styles, which differ from core
 .comment-section
-	&__head
+
+	// adjust mobile page padding as long as ZON is not using $page-padding--small on .main
+	margin-left: -$page-padding;
+	margin-right: -$page-padding;
+
+	&__head,
+	&__head + &__message
 		+respond-min($break-tablet-min)
 			background-color: transparent
 	&__button
 		&:after
 			content: "\25B8" // ▸ = Black right-pointing small triangle
 			margin-left: 3px
+	&__head + &__message
+		background-color: $comment-color-head-background
+		padding-top: 0
 	&__body + &__note
 		border-top: 1px solid $color-border

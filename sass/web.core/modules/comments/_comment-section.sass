@@ -39,10 +39,9 @@ $comment-color-notice:          $grey !default // this is especially for the pre
 			@extend %exclamation
 	&__note + &__form
 		border-top: 0
-	&__head &__message
-		clear: both
-		padding-top: em(32px)
-		text-align: left
+	&__head + &__message
+		padding-bottom: em(16px)
+		padding-top: em(16px)
 	&__headline
 		display: block
 		font-size: remify(18px)
