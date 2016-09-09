@@ -433,6 +433,8 @@ class PostCommentResource(PostComment):
 
 
 @pyramid.view.view_defaults(
+    # XXX specificity wars: it's not just for CSS
+    custom_predicates=(lambda *_: True,),
     request_param='action=recommend',
     request_method='GET')
 @pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
