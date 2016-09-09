@@ -1,50 +1,42 @@
 # -*- coding: utf-8 -*-
-import lxml.etree
-import mock
 
 import zeit.cms.interfaces
+import zeit.web.magazin.view_article
 
 
-def test_comments_template_respects_metadata(jinja2_env, testserver):
-    url = 'http://xml.zeit.de/zeit-magazin/article/01'
-    comments = jinja2_env.get_template(
-        'zeit.web.magazin:templates/inc/article/comments.html')
-    content = zeit.cms.interfaces.ICMSContent(url)
-    request = mock.MagicMock()
-    request.user = {'ssoid': 123}
-    request.session = {'user': {'uid': '123', 'name': 'Max'}}
-    request.path_url = url
-    view = zeit.web.magazin.view_article.Article(content, request)
-    view.content_url = url
+def test_comments_template_respects_metadata(tplbrowser, dummy_request):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/01')
+    dummy_request.user = {'ssoid': 123, 'uid': '123', 'name': 'Max'}
+    view = zeit.web.magazin.view_article.Article(content, dummy_request)
     view.commenting_allowed = False
-    string = comments.render(view=view, request=request)
-    html = lxml.html.fromstring(string)
-
-    assert len(html.cssselect('#js-comments')) == 1, (
+    comments = tplbrowser('zeit.web.core:templates/inc/article/comments.html',
+                          view=view, request=dummy_request)
+    assert len(comments.cssselect('.comment-section')) == 1, (
         'comment section must be present')
-    assert len(html.cssselect('article.comment')) > 0, (
+
+    thread = tplbrowser('zeit.web.core:templates/inc/comments/thread.html',
+                        view=view, request=dummy_request)
+    assert len(thread.cssselect('article.comment')) > 0, (
         'comments must be displayed')
-    assert len(html.cssselect('#js-comments-form')) == 0, (
-        'comment form must not be present')
 
-    # reset view (kind of)
-    view = zeit.web.magazin.view_article.Article(content, request)
-    view.content_url = url
+    form = tplbrowser('zeit.web.core:templates/inc/comments/comment-form.html',
+                      view=view, request=dummy_request)
+    assert len(form.cssselect('#comment-form[data-uid="123"]')) == 1, (
+        'comment form tag with data-uid attribute must be present')
+    assert len(form.cssselect('#comment-form textarea')) == 0, (
+        'comment form must be empty')
+
     view.show_commentthread = False
-    view.linkreach = {}
-    string = comments.render(view=view, request=request)
-
-    assert string.strip() == '', (
+    comments = tplbrowser('zeit.web.core:templates/inc/article/comments.html',
+                          view=view, request=dummy_request)
+    assert comments.xpath('//body/*') == [], (
         'comment section template must return an empty document')
 
 
-def test_comments_and_replies_do_appear(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/article/01' % testserver.url)
-    button = driver.find_element_by_class_name('js-comments-trigger')
-    button.click()
-    comments = driver.find_elements_by_class_name('comment')
-    assert 'Ich bin ja schon etwas angejahrt' in comments[7].text
-    assert 'is-indented' in comments[8].get_attribute('class')
-    assert 'Man muss nicht Sozialist sein' in comments[8].text
+def test_comments_and_replies_do_appear(testserver, httpbrowser):
+    browser = httpbrowser('%s/zeit-magazin/article/01' % testserver.url)
+    comments = browser.cssselect('article.comment')
+    assert 'Jetzt aber los.' in comments[0].text_content().strip()
+    assert 'comment--indented' in comments[1].get('class')
+    assert 'ja, echt?' in comments[1].text_content().strip()
