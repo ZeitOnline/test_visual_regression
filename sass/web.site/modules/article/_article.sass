@@ -30,8 +30,6 @@
 			margin: remify(40px) auto
 			width: 90%
 
-		&--has-badge
-
 		+respond-min($break-tablet-min)
 			max-width: remify(660px)
 			margin-left: auto
@@ -45,6 +43,10 @@
 				float: left
 				margin: remify(14px 25px 14px 0)
 				width: remify(205px)
+
+			&--has-badge
+				max-width: remify(820px)
+				margin-right: 0px
 
 		+respond-min($break-desktop-min)
 			&--apart
@@ -62,6 +64,7 @@
 		+respond-min($break-tablet-min)
 			display: table-cell
 			vertical-align: top
+			max-width: remify(560px)
 
 .article__subheading
 	font-size: remify(20px)
@@ -107,11 +110,12 @@
 		font-weight: bold
 
 .zplus
-	position: relative
-
-	&__badge
+	&__banner
 		background-color: $zon-lighter-grey
 		height: remify(40px)
+		position: relative
+	&__badge
+		display: table-cell
 	&__marker
 		background-color: $zon-red
 		display: table-cell
@@ -138,25 +142,24 @@
 	&__media
 		height: remify(60px)
 		width: remify(82px)
+	&__cover
 		position: absolute
-		right: remify(-14px)
+		right: remify(14px)
 		top: remify(-10px)
 
 	+respond-min($break-tablet-min)
 		display: table-cell
 		vertical-align: top
+		padding-left: $page-padding
 
-		&__badge
+		&__banner
 			width: remify(180px)
 			min-height: remify(180px)
-
 		&__label
 			display: block
-
 		&__media
-			position: static
 			width: remify(125px)
-
+			margin: auto
 		&__text
 			line-height: remify(20px)
 			display: block
@@ -164,6 +167,29 @@
 			text-align: center
 			padding: remify(18px 0 21px 0)
 			font-size: em(13px)
+		&__cover
+			position: static
+			width: 100%
+		&__badge
+			position: absolute
+			top: remify(100px)
+			left: remify(20px)
+
+		// modifications for minimal version
+		&--coverless
+			vertical-align: bottom
+
+			.zplus__banner
+				min-height: remify(80px)
+				margin-bottom: remify(40px)
+
+			.zplus__text
+				padding-top: remify(30px)
+
+			.zplus__badge
+				top: remify(-20px)
+				left: remify(70px)
+
 
 .article-page
 	&:last-of-type

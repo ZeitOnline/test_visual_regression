@@ -1,4 +1,4 @@
-<div class="article__item">
+<div class="article__item {% if view.context is zplus_content_article %}article__item--has-badge{% endif %}">
     {% set headertag = 'div' if view.pagination and view.pagination.current > 1 and view.current_page.teaser else 'h1' %}
     <{{ headertag }} class="article-heading" itemprop="headline">
         <span class="article-heading__kicker">

@@ -1,6 +1,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<div class="article__item {% if view.context is zplus_content %}article__item--has-badge{% endif %}">
+<div class="article__item {% if view.context is zplus_content_article %}article__item--has-badge{% endif %}">
     {% if view.pagination and view.pagination.current > 1 %}
         <div class="article__page-teaser">
             Seite {{ view.pagination.current }}/{{ view.pagination.total }}
