@@ -101,6 +101,16 @@ class Portraitbox(Block):
         return ''.join(parts)
 
 
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVolume)
+class Volume(Block):
+
+    def __init__(self, model_block):
+        self.volume = model_block.references.target
+        self.printcover = self.volume.covers['printcover']
+        self.year = self.volume.year
+
+
 class IInfoboxDivision(zope.interface.Interface):
     pass
 
