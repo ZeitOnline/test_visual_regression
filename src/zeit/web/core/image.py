@@ -189,7 +189,12 @@ class CMSContentImage(Image):
 class ModuleImage(Image):
     """Image adapter for friedbert specific zeit.edit block implementations"""
 
-    pass
+    @zeit.web.reify
+    def variant_id(self):
+        if self.context.layout.image_pattern:
+            return self.context.layout.image_pattern
+        else:
+            return super(ModuleImage, self).variant_id
 
 
 @grokcore.component.adapter(zeit.content.image.interfaces.IImageGroup)

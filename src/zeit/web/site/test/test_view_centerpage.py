@@ -1524,6 +1524,9 @@ def test_partnerbox_reisen_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.partner__link'))
     assert len(box.cssselect('.partner__link-icon'))
     assert len(box.cssselect('.partner__dropdown-option')) == 18
+    media = box.cssselect('.partner__media-item')
+    assert len(media)
+    assert media[0].attrib['src'].endswith('/reisebox-image/wide__822x462')
 
 
 @pytest.mark.xfail(reason='Last test fails on jenkins for unknown reason')

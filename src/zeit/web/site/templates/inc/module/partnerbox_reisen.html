@@ -4,6 +4,7 @@
 
 
 {% block intro %}
+    {% set module_layout = 'partner' %}
     {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" ignore missing %}
 {% endblock %}
 
@@ -19,11 +20,11 @@
 
 {% block button %}Reisen anzeigen{% endblock %}
 
-{% block link_button %}http://zeitreisen.zeit.de/?wt_mc=zr.intern.display.zeit_online.reisebox.dynamisch.widget.widget&amp;utm_source=zeit_online&amp;utm_medium=display&amp;utm_campaign=reisebox_dynamisch&amp;utm_content=widget{% endblock %}
+{% block link_button %}{{ module.href }}{% endblock %}
 
 {% block link_bottom %}
     <div class="partner__link-text">Ein Angebot von</div>
-    <a href="http://zeitreisen.zeit.de/?wt_mc=zr.intern.display.zeit_online.reisebox.dynamisch.widget.widget&amp;utm_source=zeit_online&amp;utm_medium=display&amp;utm_campaign=reisebox_dynamisch&amp;utm_content=widget">
+    <a href="{{ module.href }}">
         {{ lama.use_svg_icon('logo-zeit-reisen', 'partner__link-icon', view.package) }}
     </a>
 {% endblock %}

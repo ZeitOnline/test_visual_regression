@@ -130,7 +130,8 @@ def test_default_teaser_should_not_expose_ranking_area_proxies(
     browser = testbrowser('/dynamic/paul-auster')
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 10
 
-    assert all('ProxyExposed' not in a[0][0] for a in log.debug.call_args_list)
+    log = log.debug.call_args_list
+    assert all('ProxyExposed' not in a[0][0] for a in log), str(log)
 
 
 def test_tms_query_should_not_expose_ranking_area_proxies(
@@ -149,4 +150,5 @@ def test_tms_query_should_not_expose_ranking_area_proxies(
     browser = testbrowser('/dynamic/tms-berlin')
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 25
 
-    assert all('ProxyExposed' not in a[0][0] for a in log.debug.call_args_list)
+    log = log.debug.call_args_list
+    assert all('ProxyExposed' not in a[0][0] for a in log), str(log)

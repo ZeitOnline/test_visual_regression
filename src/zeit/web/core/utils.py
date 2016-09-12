@@ -607,6 +607,9 @@ class DataTMS(zeit.retresco.connection.TMS, RandomContent):
                     'teaser_image',
                     'http://xml.zeit.de/zeit-online/'
                     'image/filmstill-hobbit-schlacht-fuenf-hee/')
+                # XXX LazyProxy cannot support liveblogs, and we don't want to
+                # expose those in tests.
+                data['payload']['is_live'] = False
                 result.append(data)
         self._response = {
             'num_found': len(result),
