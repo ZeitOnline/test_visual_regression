@@ -1,5 +1,3 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-
 <div class="article__item {% block modifier %}{% endblock %}">
     {% if view.pagination and view.pagination.current > 1 %}
         <div class="article__page-teaser">
@@ -25,4 +23,3 @@
         {% endblock %}
     {% endif %}
 </div>
-
