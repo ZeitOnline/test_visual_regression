@@ -1,25 +1,27 @@
-$comment-color-notice:          $zon-grey
-$comment-color-header-sub:      $zon-mid-grey
 $comment-color-head-background: $zon-lighter-grey
 $comment-color-head-color:      $color-text
+$comment-color-head-small:      $zon-mid-grey
+$comment-color-notice:          $zon-grey
 
 @import "web.core/modules/comments/comment-section"
 
 // own styles, which differ from core
 .comment-section
-	&__head
+
+	// adjust mobile page padding as long as ZON is not using $page-padding--small on .main
+	margin-left: -$page-padding;
+	margin-right: -$page-padding;
+
+	&__head,
+	&__head + &__message
 		+respond-min($break-tablet-min)
 			background-color: transparent
 	&__button
-		white-space: nowrap
-		+respond-min($break-phablet-min)
-			float: right
 		&:after
 			content: "\25B8" // ▸ = Black right-pointing small triangle
 			margin-left: 3px
-	&__headline
-		font-size: remify(18px)
-		+respond-min($break-phablet-min)
-			font-size: remify(20px)
+	&__head + &__message
+		background-color: $comment-color-head-background
+		padding-top: 0
 	&__body + &__note
 		border-top: 1px solid $color-border

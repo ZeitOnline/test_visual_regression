@@ -25,10 +25,8 @@ require([
     'web.core/clicktracking',
     'web.core/adReload',
     'web.core/menu',
+    'web.core/comments',
     'web.magazin/errors',
-    'web.magazin/tabs',
-    'web.magazin/comments',
-    'web.magazin/sharing',
     'web.magazin/cards',
     'web.magazin/photocluster'
 ], function(
@@ -37,24 +35,25 @@ require([
     clicktracking,
     adReload,
     menu,
-    errors,
-    tabs,
     comments,
-    sharing,
+    errors,
     cards,
     photocluster
 ) {
+    var article = document.getElementById( 'js-article' );
+
     images.init();
     menu.init();
     clicktracking.init();
     adReload.init();
     errors.init();
-    tabs.init();
-    comments.init();
-    sharing.init();
     cards.init();
-    photocluster.init();
     zeit.clearQueue();
+
+    if ( article ) {
+        comments.init();
+        photocluster.init();
+    }
 });
 
 // add required jQuery plugins
@@ -68,6 +67,7 @@ require([
     'web.core/plugins/jquery.picturefill',
     'web.core/plugins/jquery.referrerCount',
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
+    'web.core/plugins/jquery.countFormchars',
     'web.core/plugins/jquery.imageCopyrightFooter',
     'web.magazin/plugins/jquery.backgroundvideo',
     'web.magazin/plugins/jquery.switchvideo'
@@ -78,5 +78,6 @@ require([
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
     $.picturefill();
     $( 'main' ).animateScroll({ selector: '.js-scroll' });
+    $( '.comment-section' ).countFormchars();
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
 });

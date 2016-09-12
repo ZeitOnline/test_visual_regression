@@ -4,6 +4,11 @@
 	font-size: em(14px)
 	letter-spacing: $letter-spacing-s
 	margin: 1px 0 // simple border
+	padding-left: $page-padding--small
+	+respond-min($break-page-padding)
+		padding-left: $page-padding
+	+respond-min($break-tablet-min)
+		padding-left: 0
 	&__container
 		display: flex
 		justify-content: space-between
@@ -25,9 +30,7 @@
 		padding: remify(14px) 0
 		margin-left: remify(28px)
 		&:first-child
-			margin-left: $page-padding
-			+respond-min($break-tablet-min)
-				margin-left: 0
+			margin-left: 0
 		&--active
 			+link
 				color: $comment-color-preferences-active

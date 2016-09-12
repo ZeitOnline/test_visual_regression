@@ -1,0 +1,12 @@
+$comment-color-head-background: transparent
+$comment-color-head-color:      $color-text
+$comment-color-head-small:      $dusty-gray
+$comment-color-note-background: $grey--light
+$comment-color-notice:          $grey
+
+@import "web.core/modules/comments/comment-section"
+
+// own styles, which differ from core
+.comment-section
+	&__body + &__note
+		border-top: 1px solid $color-border
