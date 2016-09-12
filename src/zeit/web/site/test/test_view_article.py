@@ -1823,7 +1823,7 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
     assert len(zplus_link) == 1
-    assert 'http://www.zeit.de/ausgabe/2014/49' == zplus_link[0].attrib['href']
+    assert '/2014/49' in zplus_link[0].attrib['href']
     assert 'Exklusiv' in zplus_link[0].text.strip()
     assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
             in zplus_media[0].attrib['src'])
@@ -1852,7 +1852,7 @@ def test_zplus_register_print_article_has_correct_markup(testbrowser):
     assert len(zplus_media) == 1
     assert len(zplus_link) == 1
     assert len(zplus_label) == 1
-    assert 'http://www.zeit.de/ausgabe/2014/49' == zplus_link[0].attrib['href']
+    assert '/2014/49' in zplus_link[0].attrib['href']
     assert 'ZEIT Nr. 49/2014' in zplus_link[0].text.strip()
     assert 'Aus der' in zplus_label[0].text.strip()
     assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
