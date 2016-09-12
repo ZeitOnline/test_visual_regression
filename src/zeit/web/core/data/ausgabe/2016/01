@@ -32,6 +32,6 @@
     <volume>01</volume>
   </body>
   <covers>
-    <cover href="http://xml.zeit.de/angebote/printkiosk/bildergruppen/die-zeit" id="printcover"/>
+    <cover href="http://xml.zeit.de/2016-09/test-printcover" id="printcover"/>
   </covers>
 </volume>
