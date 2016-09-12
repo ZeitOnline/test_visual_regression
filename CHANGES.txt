@@ -8,6 +8,10 @@ Change log for zeit.web
 
 - BUG-529: Fix topic teaser mobile image resource
 
+- ZON-2548: Assimilate ZEITmagazin comments
+
+- BUG-531: Send CORS header on xml.zeit.de, render meta files
+
 - FIX: Update Partnerbox "Reisen" to new image API
 
 

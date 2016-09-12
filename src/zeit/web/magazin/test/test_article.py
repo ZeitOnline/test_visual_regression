@@ -657,7 +657,7 @@ def test_article02_uses_esi(selenium_driver, testserver):
 
 def test_article02_should_have_esi_include(testbrowser):
     browser = testbrowser('/zeit-magazin/article/02')
-    assert len(browser.cssselect('main include')) == 1
+    assert len(browser.cssselect('main include')) == 3
 
 
 @pytest.mark.parametrize(

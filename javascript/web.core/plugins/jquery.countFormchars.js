@@ -27,16 +27,10 @@
     * @return {object} jQuery-Object for chaining
     */
     $.fn.countFormchars = function() {
-        return this.each( function() {
-
-            $( this ).on( 'change keyup paste', '.comment-form__textarea', function( e ) {
-
-                var $counter = $( this ).parent( '.comment-form' ).find( '.js-count-formchars' ),
-                    formFieldContentLength = $( this ).val().length;
-                $counter.text( formFieldContentLength + ' / ' );
-
-            } );
-
+        return this.on( 'change keyup paste', '.comment-form__textarea', function( e ) {
+            $( this.form )
+                .find( '.js-count-formchars' )
+                .text( this.value.length + ' / ' );
         });
     };
 })( jQuery );
