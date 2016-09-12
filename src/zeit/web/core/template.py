@@ -30,7 +30,6 @@ import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.utils
 
-
 log = logging.getLogger(__name__)
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
