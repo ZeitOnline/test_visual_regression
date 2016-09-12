@@ -42,7 +42,8 @@
             '.zon-grafik',
             '.zon-grafik--map',
             'picture',
-            '.infographic'
+            '.infographic',
+            '.volume-teaser'
         ];
         this.threshold = 40;
         this.initialMarginLeft = parseInt( this.element.css( 'margin-left' ) );

@@ -1,5 +1,12 @@
-<pre style="background-color: magenta">Volume</pre>
-
-{% set image = get_image(block.printcover) %}
-{% include "zeit.web.core:templates/inc/asset/image_linked.tpl" ignore missing %}
-
+<aside class="volume-teaser article__item article__item--marginalia">
+    {% set image = get_image(block.printcover) %}
+    {% set module_layout = 'article' %}
+    {% set media_caption_additional_class = 'figcaption--hidden' %}
+    {% set webtrekk_params = '?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=rr&utm_content=webreader_packshot_cover_cover' %}
+    {% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
+    {% if block.teaser_text %}
+        <a class="volume-teaser__link" href="http://www.zeit.de/{{ block.year }}/{{ block.issue }}{{ webtrekk_params }}">{{ block.teaser_text }}</a>
+    {% else %}
+        <a class="volume-teaser__link" href="http://www.zeit.de/{{ block.year }}/{{ block.issue }}{{ webtrekk_params }}">Dieser Artikel stammt aus der ZEIT Nr. {{ block.issue }}, {{ block.year }}. Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.</a>
+    {% endif %}
+</aside>
