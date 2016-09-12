@@ -106,9 +106,11 @@ class Portraitbox(Block):
 class Volume(Block):
 
     def __init__(self, model_block):
-        self.volume = model_block.references.target
-        self.printcover = self.volume.covers['printcover']
-        self.year = self.volume.year
+        self.volume_obj = model_block.references.target
+        self.printcover = self.volume_obj.covers['printcover']
+        self.year = self.volume_obj.year
+        self.issue = str(self.volume_obj.volume).zfill(2)
+        self.teaser_text = model_block.references.teaserText
 
 
 class IInfoboxDivision(zope.interface.Interface):
