@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - FIX: Update Partnerbox "Reisen" to new image API
 
+- FIX: Handle non-ascii image uniqueIds
+
 
 3.4 (2016-09-07)
 ----------------
