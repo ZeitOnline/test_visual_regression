@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-2548: Assimilate ZEITmagazin comments
 
+- BUG-531: Send CORS header on xml.zeit.de, render meta files
+
 - FIX: Update Partnerbox "Reisen" to new image API
 
 

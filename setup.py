@@ -54,7 +54,7 @@ setup(
         'zeit.brightcove',
         'zeit.cms>=2.82.0.dev0',
         'zeit.campus>=1.6.0.dev0',
-        'zeit.connector',
+        'zeit.connector>=2.8.0.dev0',
         'zeit.content.advertisement',
         'zeit.content.article>=3.18.0.dev0',
         'zeit.content.author>=2.6.0.dev0',
