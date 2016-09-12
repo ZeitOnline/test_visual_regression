@@ -19,6 +19,12 @@ Change log for zeit.web
 - FIX: Handle non-ascii image uniqueIds
 
 
+3.4.1 (2016-09-12)
+------------------
+
+- HOTFIX: Handle non-ascii image uniqueIds
+
+
 3.4 (2016-09-07)
 ----------------
 
