@@ -1857,3 +1857,13 @@ def test_zplus_register_print_article_has_correct_markup(testbrowser):
     assert 'Aus der' in zplus_label[0].text.strip()
     assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
             in zplus_media[0].attrib['src'])
+
+
+def test_free_article_has_no_zplus_badge(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+
+    zplus_box = browser.cssselect('.zplus')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_box) == 0
+    assert len(zplus_modifier) == 0

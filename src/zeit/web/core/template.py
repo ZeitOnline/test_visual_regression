@@ -134,24 +134,6 @@ def zplus_content(content):
 
 
 @zeit.web.register_test
-def zplus_content_article(content):
-
-    if not zeit.web.core.application.FEATURE_TOGGLES.find(
-            'reader_revenue'):
-        return False
-
-    # Links are defined as free content
-    if zeit.content.link.interfaces.ILink.providedBy(content):
-        return False
-
-    # Use Acquisition attribute
-    # XXX acquisition is set statically for mocksolr in utils.py until ZON-3286
-    acquisition = getattr(content, 'acquisition', None)
-
-    return acquisition in ('abo', 'registration')
-
-
-@zeit.web.register_test
 def zett_content(content):
     return zeit.content.link.interfaces.ILink.providedBy(
         content) and content.url.startswith('http://ze.tt')

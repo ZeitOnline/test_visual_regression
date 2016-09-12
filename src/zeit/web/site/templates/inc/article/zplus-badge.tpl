@@ -1,3 +1,5 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
 <div class="zplus {% if not view.zplus_label.cover %}zplus--coverless{% endif %}">
     <div class="zplus__banner article__item article__item--rimless">
         {%  if view.context.acquisition == 'abo' %}

@@ -46,7 +46,10 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_layout(self):
-        return self.context.header_layout or 'default'
+        if self.zplus_label:
+            return 'zplus'
+        else:
+            return self.context.header_layout or 'default'
 
     @zeit.web.reify
     def pages(self):
@@ -282,11 +285,12 @@ class Article(zeit.web.core.view.Content):
                             'link': self.volume.uniqueId.replace('xml', 'www'),
                             'link_text': u'Exklusiv für Abonennten',
                             'cover': self.volume.covers['printcover']}
-            else:
+            elif acquisition and acquisition != 'free':
                 return {'intro': '',
                         'link': self.request.host + '/exklusiv',
                         'link_text': u'Exklusiv für Abonennten',
                         'cover': False}
+            return False
         except:
             return False
 

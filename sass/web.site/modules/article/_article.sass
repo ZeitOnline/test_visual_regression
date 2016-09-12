@@ -46,7 +46,19 @@
 
 			&--has-badge
 				max-width: remify(820px)
-				margin-right: 0px
+				margin-left: auto
+				margin-right: auto
+
+				.article-heading,
+				.article__zplus
+					max-width: remify(740px)
+					margin-left: auto
+
+				.article__zplus
+					display: flex
+
+				.article__intro
+					flex-grow: 1
 
 		+respond-min($break-desktop-min)
 			&--apart
@@ -59,12 +71,6 @@
 				margin: remify(16px 25px 16px 60px)
 				width: remify(220px)
 
-	/* structure adaption for zplus badge */
-	&__intro
-		+respond-min($break-tablet-min)
-			display: table-cell
-			vertical-align: top
-			max-width: remify(560px)
 
 .article__subheading
 	font-size: remify(20px)
@@ -110,6 +116,9 @@
 		font-weight: bold
 
 .zplus
+	padding: remify(0 0 10px 0)
+	flex-grow: 1
+
 	&__banner
 		background-color: $zon-lighter-grey
 		height: remify(40px)
@@ -140,7 +149,6 @@
 		color: $grey
 		border-bottom: 1px solid $grey
 	&__media
-		height: remify(60px)
 		width: remify(82px)
 	&__cover
 		position: absolute
@@ -148,12 +156,12 @@
 		top: remify(-10px)
 
 	+respond-min($break-tablet-min)
-		display: table-cell
-		vertical-align: top
-		padding-left: $page-padding
+		padding: 0 0 0 $page-padding
 
 		&__banner
 			width: remify(180px)
+			margin-left: auto
+			margin-right: 0
 			min-height: remify(180px)
 		&__label
 			display: block
@@ -177,7 +185,7 @@
 
 		// modifications for minimal version
 		&--coverless
-			vertical-align: bottom
+			align-self: flex-end
 
 			.zplus__banner
 				min-height: remify(80px)
