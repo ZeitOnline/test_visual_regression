@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - BUG-531: Send CORS header on xml.zeit.de, render meta files
 
+- ZON-3181: Make query for author pages configurable
+
 - FIX: Update Partnerbox "Reisen" to new image API
 
 
