@@ -1,40 +1,8 @@
 {% extends "zeit.web.core:templates/inc/comments/thread.html" %}
 
-{% block comment_section_head %}
-
-    <h3 class="visually-hidden">Kommentare</h3>
-    <div class="comment-section__head">
-        <div class="comment-section__head-container comment-section__item">
-            {% if view.comment_area.show_comments %}
-                <span class="comment-section__headline">
-                    {{ view.comments.headline }}
-                    {% if view.comments.pages.title %}
-                        <small>{{ view.comments.pages.title }}</small>
-                    {% endif %}
-                </span>
-                {% if view.comment_area.show_comment_form %}
-                    <a href="#comment-form" class="comment-section__button js-scroll">
-                        Mitdiskutieren
-                        {{ lama.use_svg_icon('arrow-right', 'comment-section__icon', view.package) }}
-                    </a>
-                {% endif %}
-            {% elif view.comment_area.no_comments %}
-                <span class="comment-section__headline">
-                    <span class="nowrap">Noch keine Kommentare.</span>
-                    <span class="nowrap">Hier mitdiskutieren.</span>
-                </span>
-            {% else %}
-                <span class="comment-section__headline">
-                    <span class="nowrap">Kommentare</span>
-                </span>
-            {% endif %}
-        </div>
-    </div>
-
-    {% if view.comment_area.message  %}
-        <div class="comment-section__item comment-section__message">
-            {{- view.comment_area.message -}}
-        </div>
-    {% endif %}
-
+{% block comment_section_head_cta %}
+    Mitdiskutieren
+    {{ lama.use_svg_icon('arrow-right', 'comment-section__icon', view.package) }}
 {% endblock %}
+
+{% block comment_section_head_discuss %}Hier mitdiskutieren.{% endblock %}

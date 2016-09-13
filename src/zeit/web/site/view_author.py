@@ -145,19 +145,20 @@ class Comments(Author):
 
 def create_author_article_area(
         context, count=None, dedupe_favourite_content=True):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     cp = zeit.content.cp.centerpage.CenterPage()
     zope.interface.alsoProvides(cp, zeit.cms.section.interfaces.IZONContent)
     cp.uniqueId = context.uniqueId + u'/articles'
     area = cp.body.create_item('region').create_item('area')
     area.kind = 'author-articles'
     area.automatic_type = 'query'
-    area.raw_query = u'author:"{}" AND (type:article)'.format(
-        context.display_name)
+    area.raw_query = unicode(
+        conf.get('author_articles_query', 'author:"{}"')).format(
+            context.display_name)
     area.raw_order = 'date-first-released desc'
     if count is not None:
         area.count = count
     else:
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         area.count = int(conf.get('author_articles_page_size', '10'))
     area.automatic = True
     favourite_content = (

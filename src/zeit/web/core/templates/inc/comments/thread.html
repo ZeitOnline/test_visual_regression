@@ -1,99 +1,103 @@
-{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
 {% block comment_section_head %}
     <h3 class="visually-hidden">Kommentare</h3>
-    <div class="comment-section__head comment-section__item" data-ct-area="comment_header">
-    {% if view.comment_area.show_comments %}
-    	<span class="comment-section__headline">
-    		{{ view.comments.headline }}
-    		{% if view.comments.pages.title %}
-    		<small>{{ view.comments.pages.title }}</small>
-    		{% endif %}
-    	</span>
-        {% if view.comment_area.show_comment_form %}
-        	<a href="#comment-form" class="comment-section__button button js-scroll" data-ct-row="1">
-        		Kommentieren
-        	</a>
+    <div class="comment-section__head" data-ct-area="comment_header">
+        <div class="comment-section__item">
+        {% if view.comment_area.show_comments %}
+            <span class="comment-section__headline">
+                {{ view.comments.headline }}
+                {% if view.comments.pages.title %}
+                    <small>{{ view.comments.pages.title }}</small>
+                {% endif %}
+            </span>
+            {% if view.comment_area.show_comment_form %}
+                <a href="#comment-form" class="comment-section__button button js-scroll" data-ct-row="1">
+                    {% block comment_section_head_cta %}Kommentieren{% endblock %}
+                </a>
+            {% endif %}
+        {% elif view.comment_area.no_comments %}
+            <span class="comment-section__headline">
+                <span class="nowrap">Noch keine Kommentare.</span>
+                <span class="nowrap">{% block comment_section_head_discuss %}Diskutieren Sie mit.{% endblock %}</span>
+            </span>
+        {% else %}
+            <span class="comment-section__headline">
+                <span class="nowrap">Kommentare</span>
+            </span>
         {% endif %}
-    {% elif view.comment_area.no_comments %}
-    	<span class="comment-section__headline">
-    		<span class="nowrap">Noch keine Kommentare.</span>
-    		<span class="nowrap">Diskutieren Sie mit.</span>
-    	</span>
-    {% else %}
-    	<span class="comment-section__headline">
-    		<span class="nowrap">Kommentare</span>
-    	</span>
-    {% endif %}
-
-    {% if view.comment_area.message  %}
-    	<div class="comment-section__message">
-    		{{ view.comment_area.message }}
-    	</div>
-    {% endif %}
+        </div>
     </div>
+
+    {% if view.comment_area.message  -%}
+    <div class="comment-section__message">
+        <div class="comment-section__item">
+            {{- view.comment_area.message -}}
+        </div>
+    </div>
+    {%- endif %}
 {% endblock %}
 
 {% if view.comment_area.show_comments %}
 <div class="comment-preferences" data-ct-area="comment_header">
-	<div class="comment-preferences__container" data-ct-row="2">
-		{# funky future feature?
-		<a class="comment-preferences__item nowrap" href="{{ request.content_url }}#comments">
-			{{ lama.use_svg_icon('spinner', 'comment-preferences__icon comment-preferences__icon--spinner', view.package) }}
-			Auto-Aktualisierung an
-		</a>
-		#}
-		{% if view.comments.sort == 'asc' %}
-			{% set href = view.content_url + '?sort=desc' %}
-			{% set label = 'Neueste zuerst' %}
-		{% elif view.comments.sort == 'desc' %}
-			{% set href = view.content_url %}
-			{% set label = 'Älteste zuerst' %}
-		{% else %}
-			{% set href = view.content_url %}
-			{% set label = 'Alle Kommentare anzeigen' %}
-		{% endif %}
-		<a class="comment-preferences__item nowrap" href="{{ href }}#comments">
-			{{ lama.use_svg_icon('sorting', 'comment-preferences__icon comment-preferences__icon--sorting', view.package) }}
-			<span>{{ label }}</span>
-		</a>
-		{% if view.comments.has_promotion %}
-			{% set href = view.content_url + '?sort=promoted' %}
-			<a class="{{ 'comment-preferences__item' | with_mods('buttonized', 'active' if view.comments.sort == 'promoted') }} nowrap" href="{{ href }}#comments">
-				{{ lama.use_svg_icon('promoted', 'comment-preferences__icon comment-preferences__icon--promoted', view.package) }}
-				<span class="comment-preferences__text">Nur Redaktionsempfehlungen</span>
-			</a>
-		{% endif %}
-		{% if view.comments.has_recommendations %}
-			{% set href = view.content_url + '?sort=recommended' %}
-			<a class="{{ 'comment-preferences__item' | with_mods('buttonized', 'active' if view.comments.sort == 'recommended') }} nowrap" href="{{ href }}#comments">
-				{{ lama.use_svg_icon('recommended', 'comment-preferences__icon comment-preferences__icon--recommended', view.package) }}
-				<span class="comment-preferences__text">Nur Leserempfehlungen</span>
-			</a>
-		{% endif %}
-	</div>
+    <div class="comment-preferences__container" data-ct-row="2">
+        {# funky future feature?
+        <a class="comment-preferences__item nowrap" href="{{ request.content_url }}#comments">
+            {{ lama.use_svg_icon('spinner', 'comment-preferences__icon comment-preferences__icon--spinner', view.package) }}
+            Auto-Aktualisierung an
+        </a>
+        #}
+        {% if view.comments.sort == 'asc' %}
+            {% set href = view.content_url + '?sort=desc' %}
+            {% set label = 'Neueste zuerst' %}
+        {% elif view.comments.sort == 'desc' %}
+            {% set href = view.content_url %}
+            {% set label = 'Älteste zuerst' %}
+        {% else %}
+            {% set href = view.content_url %}
+            {% set label = 'Alle Kommentare anzeigen' %}
+        {% endif %}
+        <a class="comment-preferences__item nowrap" href="{{ href }}#comments">
+            {{ lama.use_svg_icon('sorting', 'comment-preferences__icon comment-preferences__icon--sorting', view.package) }}
+            <span>{{ label }}</span>
+        </a>
+        {% if view.comments.has_promotion %}
+            {% set href = view.content_url + '?sort=promoted' %}
+            <a class="{{ 'comment-preferences__item' | with_mods('buttonized', 'active' if view.comments.sort == 'promoted') }} nowrap" href="{{ href }}#comments">
+                {{ lama.use_svg_icon('promoted', 'comment-preferences__icon comment-preferences__icon--promoted', view.package) }}
+                <span class="comment-preferences__text">Nur Redaktionsempfehlungen</span>
+            </a>
+        {% endif %}
+        {% if view.comments.has_recommendations %}
+            {% set href = view.content_url + '?sort=recommended' %}
+            <a class="{{ 'comment-preferences__item' | with_mods('buttonized', 'active' if view.comments.sort == 'recommended') }} nowrap" href="{{ href }}#comments">
+                {{ lama.use_svg_icon('recommended', 'comment-preferences__icon comment-preferences__icon--recommended', view.package) }}
+                <span class="comment-preferences__text">Nur Leserempfehlungen</span>
+            </a>
+        {% endif %}
+    </div>
 </div>
 
 <div class="comment-section__body" id="js-comments-body" data-ct-area="comment_content">
 
-	{# Show ads before the n-th comment, or before the last comment if there are less than n #}
-	{% for comment in view.comments.comments %}
+    {# Show ads before the n-th comment, or before the last comment if there are less than n #}
+    {% for comment in view.comments.comments %}
 
-		{% if (loop.length < view.comments.ad_place and loop.last ) or loop.index == view.comments.ad_place -%}
-			{% if view.context.advertising_enabled -%}
-			<div class="comment__ad">
-				{{ lama.adplace(view.banner(8), view) }}
-			</div>
-			{%- endif %}
-		{% endif %}
+        {% if (loop.length < view.comments.ad_place and loop.last ) or loop.index == view.comments.ad_place -%}
+            {% if view.context.advertising_enabled -%}
+            <div class="comment__ad">
+                {{ lama.adplace(view.banner(8), view) }}
+            </div>
+            {%- endif %}
+        {% endif %}
 
-		{% include "zeit.web.core:templates/inc/comments/comment.html" %}
+        {% include "zeit.web.core:templates/inc/comments/comment.html" %}
 
-		{% if view.show_replies(comment) %}
-			{% for comment in comment.replies %}
-				{% include "zeit.web.core:templates/inc/comments/comment.html" %}
-			{% endfor %}
-		{% elif comment.replies %}
+        {% if view.show_replies(comment) %}
+            {% for comment in comment.replies %}
+                {% include "zeit.web.core:templates/inc/comments/comment.html" %}
+            {% endfor %}
+        {% elif comment.replies %}
 
         {% for comment in comment.replies[:1] %}
             {% include "zeit.web.core:templates/inc/comments/comment.html" %}
@@ -110,16 +114,16 @@
             </div>
         {% endif %}
 
-		{% endif %}
-	{% endfor %}
+        {% endif %}
+    {% endfor %}
 </div>
 
 {% include "zeit.web.core:templates/inc/comments/pagination.html" %}
 
 {% else %}
-	{% if view.context.advertising_enabled -%}
-		<div class="comment__ad">
-			{{ lama.adplace(view.banner(8), view) }}
-		</div>
-	{% endif %}
+    {% if view.context.advertising_enabled -%}
+        <div class="comment__ad">
+            {{ lama.adplace(view.banner(8), view) }}
+        </div>
+    {% endif %}
 {% endif %}

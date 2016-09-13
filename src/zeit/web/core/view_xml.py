@@ -33,6 +33,7 @@ class XMLContent(zeit.web.core.view.Base):
         super(XMLContent, self).__call__()
         self.request.response.content_type = 'application/xml'
         self.request.response.charset = 'iso-8859-1'
+        self.request.response.headers['Access-Control-Allow-Origin'] = '*'
         self._include_infoboxes()
         self._include_liveblogs()
         self._set_meta_robots()
@@ -181,8 +182,10 @@ class NonXMLContent(zeit.web.core.view.Base):
         with magic.Magic(flags=magic.MAGIC_MIME_TYPE) as m:
             file_type = m.id_buffer(head)
         if file_type:
-            return Response(
+            response = Response(
                 app_iter=FileIter(IResource(self.context).data),
                 content_type=file_type)
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response
         else:
             raise pyramid.httpexceptions.HTTPNotFound()
