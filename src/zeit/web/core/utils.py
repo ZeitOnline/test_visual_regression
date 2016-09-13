@@ -555,7 +555,7 @@ class DataSolr(RandomContent):
                     content)
                 results.append({
                     # XXX mocked statically until ZON-3286
-                    u'acquisition': 'free',
+                    u'access': 'free',
                     u'authors': content.authors,
                     u'date-last-modified': (
                         modified.date_last_modified.isoformat()),

@@ -772,7 +772,7 @@ def test_reader_revenue_status_should_be_sent_to_webtrekk(dummy_request):
 def test_reader_revenue_status_should_utilize_feature_toggle(
         dummy_request, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'acquisition_status_webtrekk': False}.get)
+        'access_status_webtrekk': False}.get)
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     view = zeit.web.site.view_article.Article(context, dummy_request)

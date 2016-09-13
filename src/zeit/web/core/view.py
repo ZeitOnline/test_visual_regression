@@ -635,14 +635,14 @@ class Base(object):
             ('cp27', ';'.join(self.webtrekk_assets))  # Asset
         ])
 
-        if zeit.web.core.template.toggles('acquisition_status_webtrekk'):
-            acquisition = getattr(self.context, 'acquisition', None)
-            if acquisition is None:
+        if zeit.web.core.template.toggles('access_status_webtrekk'):
+            access = getattr(self.context, 'access', None)
+            if access is None:
                 if self.product_id == u'ZEDE':
-                    acquisition = 'free'
+                    access = 'free'
                 else:
-                    acquisition = 'registration'
-            custom_parameter.update({'cp28': acquisition})
+                    access = 'registration'
+            custom_parameter.update({'cp28': access})
 
         # @see https://sites.google.com/a/apps.zeit.de/
         # verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs
