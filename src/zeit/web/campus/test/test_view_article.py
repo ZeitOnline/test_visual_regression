@@ -198,12 +198,16 @@ def test_campus_article_does_not_have_contentad(testbrowser):
     assert not select('#iq-artikelanker')
 
 
-def test_article_has_sharing_bar(testbrowser):
-    browser = testbrowser('campus/article/paginated')
-    assert len(browser.cssselect('.article-interactions')) == 1
-    assert len(browser.cssselect('.sharing-menu')) == 1
-    assert len(browser.cssselect('.sharing-menu__item')) == 3
-    assert len(browser.cssselect('.print-menu')) == 1
+def test_campus_article_has_sharing_menu(testbrowser):
+    browser = testbrowser('/campus/article/simple')
+    sharing_menu = browser.cssselect('.sharing-menu')[0]
+    links = sharing_menu.cssselect('.sharing-menu__link')
+    labels = sharing_menu.cssselect('.sharing-menu__text')
+
+    assert len(sharing_menu.cssselect('.sharing-menu__item')) == 3
+    assert labels[0].text == 'Auf Facebook teilen'
+    assert labels[1].text == 'Twittern'
+    assert 'via=zeitcampus' in links[1].attrib['href']
 
 
 def test_article_header_default_considers_image_layout(testbrowser):

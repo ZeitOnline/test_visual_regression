@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import urlparse
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
@@ -7,8 +8,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 import mock
 import pytest
 
-import zeit.content.article.article
+import zeit.cms.checkout.helper
 import zeit.cms.interfaces
+import zeit.content.article.article
 
 import zeit.web.core.application
 import zeit.web.core.interfaces
@@ -761,8 +763,8 @@ def test_article_first_page_must_have_no_image_as_first_block(application):
     block = zeit.web.core.article.pages_of_article(context)[0][0]
 
     assert zeit.content.article.edit.interfaces.IImage.providedBy(
-        body), ('Image should be present on first position in \
-        article body.')
+        body), ('Image should be present on first position in '
+                'article body.')
     assert not zeit.content.article.edit.interfaces.IImage.providedBy(
         block), 'Image must not be present on first position in page.'
 
@@ -828,3 +830,65 @@ def test_infographics_should_display_header_above_image(testbrowser):
 # There has been no real point in adapting the test only
 # to work with ZMO macros. Check, if this test is needed here, after ZMO
 # template-macros have been switched to blocks (OPS-386).
+
+
+def test_share_buttons_are_present(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/03')
+    sharing_menu = browser.cssselect('.sharing-menu')[0]
+    links = sharing_menu.cssselect('.sharing-menu__link')
+    labels = sharing_menu.cssselect('.sharing-menu__text')
+
+    assert 'sharing-menu--big' not in sharing_menu.attrib['class']
+
+    #  facebook
+    parts = urlparse.urlparse(links[1].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    url = query.get('u').pop(0)
+    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share_small.link' in url
+    assert 'utm_medium=sm' in url
+    assert 'utm_source=facebook_zonaudev_ext' in url
+    assert 'utm_campaign=ref' in url
+    assert 'utm_content=zeitde_share_small_link_x' in url
+
+    #  twitter
+    parts = urlparse.urlparse(links[1].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert query.get('text').pop(0) == (
+        'Der Chianti hat eine zweite Chance verdient')
+    assert query.get('via').pop(0) == 'ZEITmagazin'
+    assert 'share_small' in query.get('url').pop(0)
+
+    #  whatsapp
+    parts = urlparse.urlparse(links[2].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert ('Der Chianti hat eine zweite Chance verdient - '
+            'Artikel auf ZEITmagazin ONLINE: ') in query.get('text').pop(0)
+
+    #  mail
+    parts = urlparse.urlparse(links[3].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert ('Der Chianti hat eine zweite Chance verdient - '
+            'Artikel auf ZEITmagazin ONLINE') in query.get('subject').pop(0)
+    assert 'Artikel auf ZEITmagazin ONLINE lesen:' in query.get('body').pop(0)
+
+    assert labels[0].text == 'Auf Facebook teilen'
+    assert labels[1].text == 'Twittern'
+    assert labels[2].text == 'WhatsApp'
+    assert labels[3].text == 'Mailen'
+
+
+def test_share_buttons_are_big(tplbrowser, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/03')
+    view = zeit.web.magazin.view_article.Article(context, dummy_request)
+    view.share_buttons = 'big'
+    browser = tplbrowser(
+        'zeit.web.magazin:templates/inc/article/sharing-menu.html',
+        view=view, request=dummy_request)
+    sharing_menu = browser.cssselect('.sharing-menu')[0]
+    links = sharing_menu.cssselect('.sharing-menu__link')
+
+    assert 'sharing-menu--big' in sharing_menu.attrib['class']
+
+    for link in links:
+        assert 'share_big' in link.attrib['href']
