@@ -53,7 +53,7 @@
         </author>
       </reference>
     </references>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Julia Zange</attribute>
@@ -128,8 +128,8 @@
         <copyright py:pytype="str">© Michael Herdlein</copyright>
       </image>
       <p>
-        <em>Thomas Fischer ist Bundesrichter in Karlsruhe und schreibt für 
-ZEIT und ZEIT ONLINE über Rechtsfragen. Weitere Artikel seiner Kolumne 
+        <em>Thomas Fischer ist Bundesrichter in Karlsruhe und schreibt für
+ZEIT und ZEIT ONLINE über Rechtsfragen. Weitere Artikel seiner Kolumne
 finden Sie <a href="http://www.zeit.de/autoren/F/Thomas_Fischer/" target="_blank">hier</a> – und auf <a href="http://fischer-stgb.de/" target="_blank">seiner Website</a>.</em>
       </p>
       <intertitle>Vorspann</intertitle>

@@ -4,7 +4,7 @@ Change log for zeit.web
 3.6 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Rename ``acquisition`` to ``access``.
 
 
 3.5 (2016-09-13)
