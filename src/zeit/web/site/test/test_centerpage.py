@@ -111,8 +111,7 @@ def test_buzzboard_should_avoid_same_teaser_image_twice(
     browser = testbrowser('/zeit-online/buzz-box')
     area = browser.cssselect('.cp-area--buzzboard')[0]
     assert len(area.cssselect('.teaser-buzzboard__media')) == 4
-    assert len(area.cssselect(
-        '.teaser-buzzboard__media-container--duplicate')) == 2
+    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 2
 
 
 def test_tile7_is_rendered_on_correct_position(testbrowser):

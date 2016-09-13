@@ -5,5 +5,5 @@
 {% block media_link_title %}{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}{% endblock %}
 
 {% if image.path in view.buzzboard_images(image.path) %}
-    {% set media_container_additional_class = 'teaser-buzzboard__media-container--duplicate' %}
+    {% set media_block_additional_class = 'teaser-buzzboard__media--duplicate' %}
 {% endif %}

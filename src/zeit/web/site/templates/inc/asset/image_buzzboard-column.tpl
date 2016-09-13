@@ -8,7 +8,7 @@
 {% set media_container_additional_class = 'teaser-buzzboard__media-container--column' %}
 
 {% if image.path in view.buzzboard_images(image.path) %}
-    {% set media_container_additional_class = 'teaser-buzzboard__media-container--column teaser-buzzboard__media-container--duplicate' %}
+    {% set media_block_additional_class = 'teaser-buzzboard__media--column teaser-buzzboard__media--duplicate' %}
 {% endif %}
 
 
