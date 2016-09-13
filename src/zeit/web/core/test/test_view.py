@@ -764,7 +764,7 @@ def test_health_check_with_fs_should_be_configurable(testbrowser):
 
 def test_reader_revenue_status_should_be_sent_to_webtrekk(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
+        'http://xml.zeit.de/zeit-online/article/all-blocks')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp28'] == 'free'
 
@@ -782,7 +782,7 @@ def test_reader_revenue_status_should_utilize_feature_toggle(
 def test_reader_revenue_status_should_default_to_free_for_zede(
         dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
+        'http://xml.zeit.de/zeit-online/article/all-blocks')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp28'] == 'free'
 

@@ -985,7 +985,7 @@ def test_zeit_article_has_correct_meta_line(testserver, selenium_driver):
 
     assert dates[0].text == u'12. Februar 2015, 4:32 Uhr'
     assert dates[1].text == u'Editiert am 15. Februar 2015, 18:18 Uhr'
-    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+    assert source.text == u'DIE ZEIT Nr. 49/2014, 29. Januar 2015'
 
 
 def test_tgs_article_has_correct_meta_line(testserver, selenium_driver):
