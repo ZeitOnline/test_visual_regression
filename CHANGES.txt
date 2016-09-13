@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-3.5 (unreleased)
+3.5 (2016-09-13)
 ----------------
 
 - BUG-528: Remove teaser image title attribute
