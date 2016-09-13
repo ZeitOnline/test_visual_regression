@@ -133,6 +133,12 @@ def zplus_content(content):
 
 
 @zeit.web.register_test
+def volume_teaser(content):
+    toggle = zeit.web.core.application.FEATURE_TOGGLES.find('volume_teaser')
+    return toggle and content.medium
+
+
+@zeit.web.register_test
 def zett_content(content):
     return zeit.content.link.interfaces.ILink.providedBy(
         content) and content.url.startswith('http://ze.tt')
