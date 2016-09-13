@@ -100,6 +100,14 @@ class Base(zeit.web.core.view.Base):
                 ('keywords', ','.join(self.adwords)),
                 ('tma', '')]
 
+    @zeit.web.reify
+    def publisher_name(self):
+        return 'ZEITmagazin ONLINE'
+
+    @zeit.web.reify
+    def twitter_username(self):
+        return 'ZEITmagazin'
+
 
 @pyramid.view.view_config(
     route_name='login_state',

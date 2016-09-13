@@ -663,6 +663,19 @@ class Base(object):
     def append_to_webtrekk_assets(self, value):
         self._webtrekk_assets.append(value)
 
+    @zeit.web.reify
+    def share_buttons(self):
+        if getattr(self.context, 'bigshare_buttons', None):
+            return 'big'
+
+    @zeit.web.reify
+    def publisher_name(self):
+        return 'ZEIT ONLINE'
+
+    @zeit.web.reify
+    def twitter_username(self):
+        return 'zeitonline'
+
 
 class CeleraOneMixin(object):
 
