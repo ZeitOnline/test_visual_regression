@@ -93,6 +93,9 @@
 
             {% block article_footer %}
             <div class="article__footer article__item" data-ct-area="articlebottom">
+                {% block article_sharing %}
+                    {% include "zeit.web.core:templates/inc/article/sharing-menu.html" %}
+                {% endblock %}
                 {% block article_tags %}
                     {% include "zeit.web.core:templates/inc/article/tags.html" %}
                 {% endblock %}
