@@ -151,9 +151,16 @@
 	&__media
 		width: remify(82px)
 	&__cover
-		position: absolute
-		right: remify(14px)
-		top: remify(-10px)
+		display: none
+
+	// dont show cover on very small displays
+	+respond-min(em(350px))
+		&__cover
+			display: block
+			position: absolute
+			right: remify(14px)
+			top: remify(-10px)
+
 
 	+respond-min($break-tablet-min)
 		padding: 0 0 0 $page-padding
