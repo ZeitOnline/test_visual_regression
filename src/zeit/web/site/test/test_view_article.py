@@ -1765,14 +1765,13 @@ def test_video_in_article_has_poster_copyright(testbrowser):
 def test_volume_teaser_is_rendered_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     volume_teaser = browser.cssselect('.volume-teaser')
-    image_src = browser.cssselect('[data-src*="test-printcover"]')[0].get('src')
     volume_teaser_link = browser.cssselect(
         '.volume-teaser__link')[0].get('href')
     assert len(volume_teaser) == 1
     assert volume_teaser_link == 'https://premium.zeit.de/diezeit/2016/' \
-        '01?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.cover.cover' \
-        '&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=rr' \
-        '&utm_content=webreader_packshot_cover_cover'
+        '01?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.' \
+        'cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=' \
+        'rr&utm_content=webreader_packshot_cover_cover'
 
 
 def test_volume_teaser_display_correct_image_on_desktop(
@@ -1783,4 +1782,3 @@ def test_volume_teaser_display_correct_image_on_desktop(
     img_src = selenium_driver.find_element_by_css_selector(
         '[data-src*="test-printcover"]').get_attribute('src')
     assert u'2016-09/test-printcover/original__220x158__desktop' in img_src
-
