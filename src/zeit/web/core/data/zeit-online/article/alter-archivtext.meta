@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
     <attribute name="href" ns="DAV:">/cms/work/2008/13/Scientologen</attribute>
-    <attribute name="acquisition" ns="http://namespaces.zeit.de/CMS/document">registration</attribute>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">registration</attribute>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
     <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">1</attribute>
     <attribute name="title" ns="http://namespaces.zeit.de/CMS/document">OT 8 antwortet nicht</attribute>

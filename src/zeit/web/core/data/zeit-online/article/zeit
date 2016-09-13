@@ -60,7 +60,7 @@
       <bu py:pytype="str">Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
       <copyright py:pytype="str" link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
     </image>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">registration</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">10492218</attribute>

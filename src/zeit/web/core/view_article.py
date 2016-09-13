@@ -277,9 +277,9 @@ class Article(zeit.web.core.view.Content):
             return False
 
         try:
-            acquisition = getattr(self.context, 'acquisition', None)
+            access = getattr(self.context, 'access', None)
             if self.volume:
-                if acquisition == 'registration':
+                if access == 'registration':
                     return {'intro': 'Aus der',
                             'link': self.request.host + '/'
                             + str(self.volume.year) + '/'
@@ -287,14 +287,14 @@ class Article(zeit.web.core.view.Content):
                             'link_text': 'ZEIT Nr. ' + str(self.volume.volume)
                             + '/' + str(self.volume.year),
                             'cover': self.volume.covers['printcover']}
-                elif acquisition == 'abo':
+                elif access == 'abo':
                     return {'intro': '',
                             'link': self.request.host + '/'
                             + str(self.volume.year) + '/'
                             + str(self.volume.volume),
                             'link_text': u'Exklusiv für Abonennten',
                             'cover': self.volume.covers['printcover']}
-            elif acquisition and acquisition != 'free':
+            elif access and access != 'free':
                 return {'intro': '',
                         'link': self.request.host + '/exklusiv',
                         'link_text': u'Exklusiv für Abonennten',
