@@ -8,9 +8,9 @@
     <aside class="volume-teaser article__item article__item--marginalia">
         {% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
         {% if block.teaser_text %}
-            <a class="volume-teaser__link" href="http://www.zeit.de/{{ block.year }}/{{ block.issue }}{{ webtrekk_params }}">{{ block.teaser_text }}</a>
+            <a class="volume-teaser__link" href="https://premium.zeit.de/{{ block.medium }}/{{ block.year }}/{{ block.issue }}{{ webtrekk_params }}">{{ block.teaser_text }}</a>
         {% else %}
-            <a class="volume-teaser__link" href="http://www.zeit.de/{{ block.year }}/{{ block.issue }}{{ webtrekk_params }}">Dieser Artikel stammt aus der ZEIT Nr. {{ block.issue }}, {{ block.year }}. Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.</a>
+            <a class="volume-teaser__link" href="https://premium.zeit.de/{{ block.medium }}/{{ block.year }}/{{ block.issue }}{{ webtrekk_params }}">Dieser Artikel stammt aus der ZEIT Nr. {{ block.issue }}, {{ block.year }}. Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.</a>
         {% endif %}
     </aside>
 

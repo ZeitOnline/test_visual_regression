@@ -106,11 +106,18 @@ class Portraitbox(Block):
 class Volume(Block):
 
     def __init__(self, model_block):
-        self.volume_obj = model_block.references.target
-        self.printcover = self.volume_obj.covers['printcover']
-        self.year = self.volume_obj.year
-        self.issue = str(self.volume_obj.volume).zfill(2)
-        self.teaser_text = model_block.references.teaserText
+        result = model_block.references
+        volume_obj = result.target
+        self.printcover = volume_obj.covers['printcover']
+        self.medium = self._product_path(volume_obj.product.id)
+        self.year = volume_obj.year
+        self.issue = str(volume_obj.volume).zfill(2)
+        self.teaser_text = result.teaserText
+
+    def _product_path(self, medium):
+        # TODO add more product-url mappings to the dictionary
+        map_product_path = {'ZEI': 'diezeit'}
+        return map_product_path[medium]
 
 
 class IInfoboxDivision(zope.interface.Interface):
