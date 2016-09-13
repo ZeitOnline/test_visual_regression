@@ -98,6 +98,23 @@ def test_buzzboard_renders_column_teaser(testbrowser):
         '.teaser-buzzboard__media-container--column')) == 1
 
 
+def test_buzzboard_should_avoid_same_teaser_image_twice(
+        testbrowser, monkeypatch):
+
+    # Make most shared equal to most read to provide two column teasers.
+    def social_ranking(self, **kw):
+        return self._get_ranking('views', **kw)
+
+    monkeypatch.setattr(
+        zeit.web.core.reach.Reach, 'get_social', social_ranking)
+
+    browser = testbrowser('/zeit-online/buzz-box')
+    area = browser.cssselect('.cp-area--buzzboard')[0]
+    assert len(area.cssselect('.teaser-buzzboard__media')) == 4
+    assert len(area.cssselect(
+        '.teaser-buzzboard__media-container--duplicate')) == 2
+
+
 def test_tile7_is_rendered_on_correct_position(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     tile7_on_first_position = browser.cssselect(
