@@ -271,6 +271,11 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def zplus_label(self):
+
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'reader_revenue'):
+            return False
+
         try:
             acquisition = getattr(self.context, 'acquisition', None)
             if self.volume:
