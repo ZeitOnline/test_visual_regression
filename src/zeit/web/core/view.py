@@ -1071,6 +1071,17 @@ class Content(CeleraOneMixin, CommentMixin, Base):
         return predecessor + successor
 
     @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(Content, self).webtrekk
+        style = 'share_buttons_{}'.format(self.share_buttons or 'small')
+
+        webtrekk['customParameter'].update({
+            'cp31': style  # share button style
+        })
+
+        return webtrekk
+
+    @zeit.web.reify
     def nextread(self):
         return zeit.web.core.interfaces.INextread(self.context, [])
 
