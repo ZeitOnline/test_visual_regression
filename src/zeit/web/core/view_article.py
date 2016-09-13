@@ -284,8 +284,8 @@ class Article(zeit.web.core.view.Content):
                             'link': self.request.host + '/' +
                             str(self.volume.year) + '/' +
                             str(self.volume.volume),
-                            'link_text': 'ZEIT Nr. ' + str(self.volume.volume)
-                            + '/' + str(self.volume.year),
+                            'link_text': 'ZEIT Nr. ' + str(self.volume.volume) +
+                            '/' + str(self.volume.year),
                             'cover': self.volume.covers['printcover']}
                 elif access == 'abo':
                     return {'intro': '',
