@@ -841,7 +841,7 @@ def test_share_buttons_are_present(testbrowser):
     assert 'sharing-menu--big' not in sharing_menu.attrib['class']
 
     #  facebook
-    parts = urlparse.urlparse(links[1].attrib['href'])
+    parts = urlparse.urlparse(links[0].attrib['href'])
     query = urlparse.parse_qs(parts.query)
     url = query.get('u').pop(0)
     assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share_small.link' in url
