@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - Rename ``acquisition`` to ``access``.
 
+- FIX: Don't try to create vivi-thumbnails for gallery entries (really now)
+
 
 3.5 (2016-09-13)
 ----------------
