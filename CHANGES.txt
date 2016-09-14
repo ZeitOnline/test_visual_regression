@@ -1,14 +1,34 @@
 Change log for zeit.web
 =======================
 
-3.5 (unreleased)
+3.6 (unreleased)
+----------------
+
+- Rename ``acquisition`` to ``access``.
+
+
+3.5 (2016-09-13)
 ----------------
 
 - BUG-528: Remove teaser image title attribute
 
 - BUG-529: Fix topic teaser mobile image resource
 
+- ZON-2548: Assimilate ZEITmagazin comments
+
+- BUG-531: Send CORS header on xml.zeit.de, render meta files
+
+- ZON-3181: Make query for author pages configurable
+
 - FIX: Update Partnerbox "Reisen" to new image API
+
+- FIX: Handle non-ascii image uniqueIds
+
+
+3.4.1 (2016-09-12)
+------------------
+
+- HOTFIX: Handle non-ascii image uniqueIds
 
 
 3.4 (2016-09-07)

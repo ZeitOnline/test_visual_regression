@@ -52,7 +52,7 @@
         function isElementInViewport( el ) {
 
             // special bonus for those using jQuery
-            if ( el instanceof jQuery ) {
+            if ( el instanceof $ ) {
                 el = el[0];
             }
 

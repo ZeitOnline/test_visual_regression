@@ -1,16 +1,24 @@
+$comment-color-head-background: $grey--light !default
+$comment-color-head-color:      $color-text !default
+$comment-color-head-small:      $dusty-gray !default
+$comment-color-note-background: $comment-color-head-background !default
+$comment-color-note-color:      $comment-color-head-color !default
+$comment-color-notice:          $grey !default // this is especially for the premoderation notice right below a reply form
+
 .comment-section
-	margin: 0 (-$page-padding)
+	+unpadded
+	margin-bottom: remify(40px)
 	+respond-min($break-tablet-min)
 		border-top: 1px solid $color-border
 	&__item
+		+padded
 		margin-left: auto
 		margin-right: auto
-		padding: 0 $page-padding
 		+respond-min($break-tablet-min)
 			max-width: remify(700px) // 660px + 2*$page-padding
 	&__note
-		background-color: $comment-color-head-background
-		color: $comment-color-head-color
+		background-color: $comment-color-note-background
+		color: $comment-color-note-color
 		padding-bottom: em(16px)
 		padding-top: em(16px)
 	&__head
@@ -31,29 +39,31 @@
 			@extend %exclamation
 	&__note + &__form
 		border-top: 0
-	&__head &__message
-		clear: both
-		padding-top: em(32px)
-		text-align: left
+	&__head + &__message
+		padding-bottom: em(16px)
+		padding-top: em(16px)
 	&__headline
 		display: block
+		font-size: remify(18px)
 		font-weight: bold
 		margin-bottom: .5em
 		+respond-min($break-phablet-min)
 			float: left
+			font-size: remify(20px)
 			margin-bottom: 0
 		small
-			color: $comment-color-header-sub
+			color: $comment-color-head-small
 			display: block
 			font-size: remify(12px)
 			font-weight: normal
 			letter-spacing: $letter-spacing-m
+	&__button
+		white-space: nowrap
+		+respond-min($break-phablet-min)
+			float: right
 	&__form
 		border-top: 1px solid $color-border
 
 		.comment-section__notice,
 		.comment-form__cancel--hidden
 			display: none
-
-.no-js .comment-section__link-autoupdate
-	display: none

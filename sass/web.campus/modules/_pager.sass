@@ -1,0 +1,42 @@
+// pagination pager, used in e.g. ranking areas and comments pagination
+.pager
+	margin: remify(16px 0 32px)
+
+.pager__button
+	border: 3px solid currentColor
+	color: $color-article-primary
+	display: inline-block
+	font-size: remify(14px)
+	font-weight: bold
+	letter-spacing: .01em
+	margin: remify(20px 14px 0 0)
+	padding: remify(6px 8px 6px 12px)
+	text-transform: uppercase
+	+on-interaction
+		border-color: currentColor
+		color: $color-text
+
+.pager__pages
+	display: inline-block
+	padding: 0
+	margin: 1.25rem 0 0 0
+	font-size: .875rem
+	letter-spacing: .05em
+	line-height: 2
+
+.pager__page
+	color: $color-article-primary
+	letter-spacing: $letter-spacing-m
+	display: inline-block
+	& + &:before
+		color: $color-separator
+		content: "/"
+	a, span
+		padding: 0 1em
+		display: inline-block
+	span
+		color: $color-separator // for "..."
+	&--current
+		span
+			color: inherit
+			font-weight: bold
