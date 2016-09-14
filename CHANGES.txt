@@ -4,7 +4,11 @@ Change log for zeit.web
 3.6 (unreleased)
 ----------------
 
+- ZON-3263: Show duplicate images on Buzzboard with opacity
+
 - Rename ``acquisition`` to ``access``.
+
+- FIX: Don't try to create vivi-thumbnails for gallery entries (really now)
 
 
 3.5 (2016-09-13)

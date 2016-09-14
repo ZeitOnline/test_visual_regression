@@ -2,6 +2,9 @@
   xmlns="http://namespaces.zope.org/zope"
   xmlns:grok="http://namespaces.zope.org/grok">
 
+    <include package="zope.component" file="meta.zcml" />
+    <include package="grokcore.component" file="meta.zcml" />
+
     <include file="vivi.zcml" />
     <grok:grok exclude="test" package="." />
 
@@ -12,5 +15,7 @@
       factory=".utils.LazyProxy"
       provides="zeit.cms.interfaces.ICMSContent"
       />
+
+    <adapter factory=".view_gallery.persistent_thumbnail_factory" />
 
 </configure>
