@@ -40,6 +40,9 @@
     <region kind="solo" title="Simple-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="ranking"/>
     </region>
+    <region kind="solo" title="Simple-Region" type="sitemap">
+        <area kind="ranking-sitemap"/>
+    </region>
     <region kind="solo" title="Simple-Region" type="!storystream" available="zeit.campus.interfaces.IZCOContent">
         <area kind="zco-ranking"/>
     </region>
