@@ -1,4 +1,4 @@
-{%  if block is volume_teaser %}
+{% if toggles('volume_teaser') %}
 
     {% set image = get_image(block.printcover) %}
     {% set module_layout = 'article' %}
