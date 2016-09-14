@@ -877,18 +877,28 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[3].text == 'Mailen'
 
 
-def test_share_buttons_are_big(tplbrowser, dummy_request):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    view = zeit.web.magazin.view_article.Article(context, dummy_request)
-    view.share_buttons = 'big'
-    browser = tplbrowser(
-        'zeit.web.magazin:templates/inc/article/sharing-menu.html',
-        view=view, request=dummy_request)
+def test_share_buttons_are_big(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/04')
     sharing_menu = browser.cssselect('.sharing-menu')[0]
     links = sharing_menu.cssselect('.sharing-menu__link')
 
     assert 'sharing-menu--big' in sharing_menu.attrib['class']
+    assert len(links) == 4
 
     for link in links:
         assert 'share_big' in link.attrib['href']
+
+
+def test_article_view_has_share_buttons_set_correctly(
+        application, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/03')
+    view = zeit.web.magazin.view_article.Article(article, dummy_request)
+    assert not view.share_buttons
+    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_small'
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/04')
+    view = zeit.web.magazin.view_article.Article(article, dummy_request)
+    assert view.share_buttons == 'big'
+    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
