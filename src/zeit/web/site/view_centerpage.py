@@ -50,8 +50,6 @@ class Centerpage(
         return 'homepage' if self.is_hp else super(Centerpage, self).ressort
 
     def buzzboard_images(self, image=None):
-        # Stores images of buzzboards to avoid duplicate images #ZON-3147
-
         # The list we return shall not include the current image but still be
         # added to the registered images.
         registered_images = self._buzzboard_images.copy()
