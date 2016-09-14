@@ -162,7 +162,7 @@ class Image(object):
         url = self.group.variant_url(
             self.variant_id,
             fill_color=self.fill_color)
-        return urllib.quote(url)
+        return urllib.quote(url.encode('utf-8'))
 
     @zeit.web.reify
     def fallback_path(self):
@@ -171,7 +171,7 @@ class Image(object):
             width=self.fallback_width,
             height=self.fallback_height,
             fill_color=self.fill_color)
-        return urllib.quote(url)
+        return urllib.quote(url.encode('utf-8'))
 
 
 @grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)

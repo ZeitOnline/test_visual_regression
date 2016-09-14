@@ -122,12 +122,12 @@ def zplus_content(content):
     if zeit.content.link.interfaces.ILink.providedBy(content):
         return False
 
-    # Use Acquisition attribute
-    # XXX acquisition is set statically for mocksolr in utils.py until ZON-3286
-    acquisition = getattr(content, 'acquisition', None)
+    # Use Access attribute
+    # XXX access is set statically for mocksolr in utils.py until ZON-3286
+    access = getattr(content, 'access', None)
 
-    if acquisition is not None:
-        return acquisition == 'abo'
+    if access is not None:
+        return access == 'abo'
 
     return False
 
