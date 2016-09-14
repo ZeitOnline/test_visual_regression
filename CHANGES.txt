@@ -4,6 +4,8 @@ Change log for zeit.web
 3.6 (unreleased)
 ----------------
 
+- ZON-3263: Show duplicate images on Buzzboard with opacity
+
 - Rename ``acquisition`` to ``access``.
 
 
