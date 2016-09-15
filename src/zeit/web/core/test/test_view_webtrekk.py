@@ -22,7 +22,7 @@ from selenium.webdriver.support.ui import WebDriverWait
          '2.2.1.minor-teaser-square.text'),
         # teaser-small major
         ('.teaser-small .teaser-small__combined-link',
-         '2.1.1.major-teaser-small-zplus.text'),
+         '2.1.1.major-teaser-small.text'),
         # teaser-small parquet
         ('.parquet-teasers .teaser-small .teaser-small__combined-link',
          '3.1.1.parquet-teaser-small.text'),
