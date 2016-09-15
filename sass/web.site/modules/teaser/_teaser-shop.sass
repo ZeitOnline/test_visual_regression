@@ -35,21 +35,14 @@
 	&__media
 		@extend %teaser-bar__media
 
-	&__container
-		@extend %teaser-bar__container
-		padding-top: 10px
-
-	&__figurewrapper
-		@extend %teaser-bar__figurewrapper
-
 	&__text
 		border-top: 1px solid $color-border
 		color: $zon-charcoal
 		font-size: remify(16px)
 		letter-spacing: $zon-letter-spacing-s
 		line-height: 1.2
-		margin: 0
-		padding-top: remify(10px)
+		margin: remify(10px 0 0)
+		padding: remify(10px 18px 20px)
 		&:after
 			content: "\0020\25B8" // No-Break Space and ▸ = Black Right-Pointing Small Triangle
 		+respond-min($break-desktop-min)

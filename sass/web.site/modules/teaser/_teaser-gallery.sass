@@ -32,9 +32,6 @@ $break-gallery-teasers: $break-phablet-min
 	&__container
 		@extend %teaser-bar__container
 
-	&__figurewrapper
-		@extend %teaser-bar__figurewrapper
-
 	&__heading
 		@extend %teaser-heading
 
@@ -60,14 +57,15 @@ $break-gallery-teasers: $break-phablet-min
 		@extend %teaser-text
 
 	&__icon
-		position: absolute
 		bottom: em(10px)
-		left: em(10px)
-		height: em(22px)
-		width: em(32px)
-		stroke: $white
 		color: $zon-charcoal
 		fill-opacity: 0.6
+		height: em(22px)
+		left: em(10px)
+		pointer-events: none // enable covered link
+		position: absolute
+		stroke: $white
+		width: em(32px)
 
 	&__counter
 		background-color: $zon-charcoal
