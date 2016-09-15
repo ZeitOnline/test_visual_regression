@@ -1233,9 +1233,8 @@ class FrameBuilder(CeleraOneMixin):
 
     @zeit.web.reify
     def adcontroller_values(self):
-
         if not self.banner_channel:
-            return
+            return []
 
         adc_levels = self.banner_channel.split('/')
 
