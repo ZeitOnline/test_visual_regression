@@ -17,7 +17,7 @@ from zope.interface import providedBy
 
 @pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ISitemap,
-    renderer='templates/sitemap/sitemap.html')
+    renderer='templates/sitemap.html')
 class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     advertising_enabled = True

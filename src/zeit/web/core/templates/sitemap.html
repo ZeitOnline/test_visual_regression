@@ -10,9 +10,9 @@
             {%- set page_view = True -%}
         {%- endif -%}
         {%- if page_view -%}
-            {%- include "zeit.web.core:templates/sitemap/page.html" -%}
+            {%- include "zeit.web.core:templates/inc/sitemap/page.html" -%}
         {%- else -%}
-            {%- include "zeit.web.core:templates/sitemap/overview.html" -%}
+            {%- include "zeit.web.core:templates/inc/sitemap/overview.html" -%}
         {%- endif -%}
     {%- endfor -%}
 {%- endfor -%}
