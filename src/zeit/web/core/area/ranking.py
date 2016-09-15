@@ -140,7 +140,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         try:
             page = self._page()
             assert page > 0
-            if page == 1:
+            if page == 1 and not self.is_sitemap:
                 raise pyramid.httpexceptions.HTTPMovedPermanently(
                     zeit.web.core.template.remove_get_params(
                         self.request.url, 'p'))
@@ -173,6 +173,11 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return []
         pagination = self._pagination
         return pagination if pagination is not None else []
+
+    @property
+    def is_sitemap(self):
+        return zeit.content.cp.interfaces.ISitemap.providedBy(
+            zeit.content.cp.interfaces.ICenterPage(self))
 
 
 class Converter(object):
