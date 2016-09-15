@@ -5,7 +5,7 @@
     {% set media_caption_additional_class = 'figcaption--hidden' %}
     {% set href = 'https://premium.zeit.de/{}/{}/{}?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=rr&utm_content=webreader_packshot_cover_cover'.format(block.medium, block.year, block.issue) %}
 
-    <aside class="volume-teaser article__item article__item--marginalia">
+    <aside class="volume-teaser article__item article__item--marginalia" data-clicktracking="volumeteaser">
         {% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
         {% if block.teaser_text %}
             <a class="volume-teaser__link" href="{{ href }}">{{ block.teaser_text }}</a>
