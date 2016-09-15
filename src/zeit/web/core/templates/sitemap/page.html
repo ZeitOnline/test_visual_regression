@@ -1,0 +1,17 @@
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:n="http://www.google.com/schemas/sitemap-news/0.9"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+    xmlns:py="http://codespeak.net/lxml/objectify/pytype"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:video="http://www.google.com/schemas/sitemap-video/1.1"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml">
+{%- for module in area.values() -%}
+    {%- set teaser = module | first_child -%}
+    {%- require image = get_image(module, variant_id='wide', fallback=False) -%}
+        {%- set source = request.image_host + image.path + '__1300x731' -%}
+        {%- set copyright = image.copyrights | map('first') | join(', ') -%}
+    {%- endrequire -%}
+    {%- include "zeit.web.core:templates/inc/teaser/{0}.html".format(layout) ignore missing -%}
+{%- endfor -%}
+</urlset>
