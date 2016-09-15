@@ -20,6 +20,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">29.01.2015</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/2015/05/Crystal</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>

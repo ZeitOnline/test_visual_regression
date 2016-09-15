@@ -1763,7 +1763,7 @@ def test_video_in_article_has_poster_copyright(testbrowser):
 
 
 def test_zplus_zon_article_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
+    browser = testbrowser('/zeit-online/article/zplus-zon')
 
     zplus_box = browser.cssselect('.zplus--coverless')
     assert len(zplus_box) == 1
@@ -1786,7 +1786,7 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
 
 
 def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
-    browser = testbrowser('/zeit-online/article/zeit-novolume')
+    browser = testbrowser('/zeit-online/article/zplus-novolume')
 
     zplus_box = browser.cssselect('.zplus--coverless')
     assert len(zplus_box) == 1
@@ -1801,7 +1801,7 @@ def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
 
 
 def test_zplus_abo_print_article_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-online/article/02')
+    browser = testbrowser('/zeit-online/article/zplus-zeit')
 
     zplus_box = browser.cssselect('.zplus')
     assert len(zplus_box) == 1
@@ -1830,7 +1830,7 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
 
 
 def test_zplus_register_print_article_has_correct_markup(testbrowser):
-    browser = testbrowser('/zeit-online/article/zeit')
+    browser = testbrowser('/zeit-online/article/zplus-zeit-register')
 
     zplus_box = browser.cssselect('.zplus')
     assert len(zplus_box) == 1

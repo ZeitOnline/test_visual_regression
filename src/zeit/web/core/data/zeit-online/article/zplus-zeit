@@ -48,7 +48,7 @@
     <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
     <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
     <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">http://xml.zeit.de/kultur/film/2014-12/15a48f2c-82b0-4136-b4aa-ad3f57ff2fa0.tmp</attribute>
-    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">ZEDE</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">ZEI</attribute>
     <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort" py:pytype="str">980d578641cd444aa69700ed11b21d63</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">yes</attribute>
     <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>

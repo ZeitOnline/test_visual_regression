@@ -281,22 +281,23 @@ class Article(zeit.web.core.view.Content):
             if self.volume:
                 if access == 'registration':
                     return {'intro': 'Aus der',
-                            'link': self.request.host + '/' +
-                            str(self.volume.year) + '/' +
-                            str(self.volume.volume),
-                            'link_text': 'ZEIT Nr. ' + str(self.volume.volume) +
-                            '/' + str(self.volume.year),
+                            'link': '{}/{!s}/{!s}'.format(
+                                self.request.host,
+                                self.volume.year,
+                                self.volume.volume),
+                            'link_text': 'ZEIT Nr. {!s}/{!s}'.format(
+                                self.volume.volume, self.volume.year),
                             'cover': self.volume.covers['printcover']}
                 elif access == 'abo':
                     return {'intro': '',
-                            'link': self.request.host + '/' +
-                            str(self.volume.year) + '/' +
-                            str(self.volume.volume),
+                            'link': '{}/{!s}/{!s}'.format(
+                                self.request.host,
+                                self.volume.year, self.volume.volume),
                             'link_text': u'Exklusiv für Abonennten',
                             'cover': self.volume.covers['printcover']}
             elif access and access != 'free':
                 return {'intro': '',
-                        'link': self.request.host + '/exklusiv',
+                        'link': '{}/exklusiv'.format(self.request.host),
                         'link_text': u'Exklusiv für Abonennten',
                         'cover': False}
             return False
