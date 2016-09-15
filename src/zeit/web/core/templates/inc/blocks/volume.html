@@ -7,11 +7,13 @@
 
     <aside class="volume-teaser article__item article__item--marginalia" data-clicktracking="volumeteaser">
         {% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
+        <a class="volume-teaser__link" href="{{ href }}">
         {% if block.teaser_text %}
-            <a class="volume-teaser__link" href="{{ href }}">{{ block.teaser_text }}</a>
+            {{ block.teaser_text }}
         {% else %}
-            <a class="volume-teaser__link" href="{{ href }}">Dieser Artikel stammt aus der ZEIT Nr. {{ block.issue }}, {{ block.year }}. Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.</a>
+            Dieser Artikel stammt aus der ZEIT Nr. {{ block.issue }}, {{ block.year }}. Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.
         {% endif %}
+        </a>
     </aside>
 
 {% endif %}
