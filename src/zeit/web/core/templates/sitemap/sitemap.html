@@ -5,11 +5,15 @@
 {%- for region in view.regions -%}
     {%- for area in region.values() if 'ranking' in area.kind -%}
         {%- set layout = area.values() | first_child | get_layout -%}
+        {%- if 'gsitemap-newssite' in layout -%}
+            {# newssitemap has no overview #}
+            {%- set page_view = True -%}
+        {%- endif -%}
         {%- if 'gsitemap-themen' in layout and page_view -%}
             {%- include "zeit.web.core:templates/sitemap/gsitemap-themen.html" -%}
         {%- elif 'gsitemap-themen' in layout -%}
             {%- include "zeit.web.core:templates/sitemap/gsitemap-themen-overview.html" -%}
-        {%- elif 'gsitemap-newssite' in layout or page_view -%}
+        {%- elif page_view -%}
             {%- include "zeit.web.core:templates/sitemap/page.html" -%}
         {%- else -%}
             {%- include "zeit.web.core:templates/sitemap/overview.html" -%}
