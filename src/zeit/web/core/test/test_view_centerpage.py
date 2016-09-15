@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-import lxml.etree
 import pytest
 import requests
 import zope.component
