@@ -4,6 +4,8 @@ Change log for zeit.web
 3.6 (unreleased)
 ----------------
 
+- ZON-2848: Add augmentable share buttons for ZMO
+
 - Rename ``acquisition`` to ``access``.
 
 
