@@ -324,6 +324,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     useDataId: [
                         [
                          '.section-heading',
+                         '.section-footer',
                          '.snapshot__media',
                          '#servicebox',
                          '.breaking-news-banner',

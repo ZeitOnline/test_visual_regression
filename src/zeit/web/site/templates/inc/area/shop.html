@@ -1,38 +1,44 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% set module_layout = 'teaser-shop' %}
+{% set tracking_slug = '{}...{}'.format(region_loop.index, '-'.join([area.kind, module_layout])) %}
 
 {% block before_module_list %}
-	{% set tracking_slug = '{}...{}'.format(region_loop.index, '-'.join([area.kind, module_layout])) %}
-	<div class="section-heading section-heading--unpadded section-heading--zeitshop">
-		<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1"
-		   class="section-heading__title section-heading__title--zeitshop"
-		   data-id="{{ tracking_slug }}.logo">
-		{{ lama.use_svg_icon('logo-zeitshop', 'section-heading__logo--zeitshop', view.package) }}
-		</a>
-		<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=zumShop&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.link.zeitshop.1"
-		   class="section-heading__link section-heading__link--unpadded section-heading__link--zeitshop"
-		   data-id="{{ tracking_slug }}.alleangebote">
-			<span class="section-heading__text">Alle Angebote im Shop</span>
-		</a>
-	</div>
+    <div class="section-heading section-heading--unpadded section-heading--zeitshop">
+        <a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=Logo&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.logo.zeitshop.1"
+           class="section-heading__title section-heading__title--zeitshop"
+           data-id="{{ tracking_slug }}.logo">
+        {{ lama.use_svg_icon('logo-zeitshop', 'section-heading__logo--zeitshop', view.package) }}
+        </a>
+        <a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=zumShop&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.link.zeitshop.1"
+           class="section-heading__link section-heading__link--unpadded section-heading__link--zeitshop"
+           data-id="{{ tracking_slug }}.alle_angebote">
+            <span class="section-heading__text">Alle Angebote im Shop</span>
+        </a>
+    </div>
 {% endblock %}
 
 {% block module_list %}
-	<div class="{{ module_layout }}-group__container {{ module_layout }}-group__container--shop ">
-		{{ super() }}
-	</div>
+    <div class="{{ module_layout }}-group__container">
+        {{ super() }}
+    </div>
 {% endblock %}
 
 {% block after_module_list %}
-	<a href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=zumShop&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.link.zeitshop.1">
-		<span class="button {{ module_layout }}-group__button {{ module_layout }}-group__button--default">Alle Angebote</span>
-		{% if area.next_page %}
-			<span class="button {{ module_layout }}-group__button {{ module_layout }}-group__button--jsdesktop js-bar-teaser-paginate"
-			      data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
-				{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), view.package) }}
-				Weitere laden
-			</span>
-		{% endif %}
-	</a>
+    <div class="section-footer">
+        <a  href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=zumShop&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.link.zeitshop.1"
+            class="button {{ module_layout }}__button {{ module_layout }}__button--default"
+            data-id="{{ tracking_slug }}.alle_angebote">
+            Alle Angebote
+        </a>
+        {% if area.values() %}
+        <a  href="http://shop.zeit.de/?et=l6VVNm&et_cid=13&et_lid=22&et_sub=zumShop&wt_zmc=fix.int.zshop.zeitde.produktbuehne.startseite.link.zeitshop.1"
+            class="button {{ module_layout }}__button {{ module_layout }}__button--jsdesktop js-bar-teaser-paginate"
+            data-id="{{ tracking_slug }}.weitere_laden"
+            data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
+            {{ lama.use_svg_icon('shuffle', '{}__shuffle-icon'.format(module_layout), view.package) }}
+            Weitere laden
+        </a>
+        {% endif %}
+    </div>
 {% endblock %}

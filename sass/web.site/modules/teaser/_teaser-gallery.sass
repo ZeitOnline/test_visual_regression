@@ -13,12 +13,6 @@ $break-gallery-teasers: $break-phablet-min
 			// flexbox for same height
 			display: flex
 
-	&__button
-		@extend %teaser-bar-group__button
-
-	&__shuffle-icon
-		@extend %teaser-bar-group__shuffle-icon
-
 
 .no-js .js-bar-teaser-shuffle
 	display: none
@@ -85,3 +79,9 @@ $break-gallery-teasers: $break-phablet-min
 		pointer-events: none // enable covered link
 		position: absolute
 		right: 0
+
+	&__button
+		@extend %teaser-bar__button
+
+	&__shuffle-icon
+		@extend %teaser-bar__shuffle-icon
