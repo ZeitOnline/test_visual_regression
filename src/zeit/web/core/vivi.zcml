@@ -1,4 +1,6 @@
-<configure xmlns="http://namespaces.zope.org/zope">
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:grok="http://namespaces.zope.org/grok">
 
     <!-- include only those parts of zeit.cms:application.zcml that the vivi
          *model* code needs, thus saving us lots of zope.* includes -->
@@ -44,13 +46,10 @@
     <include package="zeit.newsletter" />
     <include package="zeit.push" />
 
-    <!-- XXX Temporary workaround: We load both retresco and intrafind,
+    <!-- XXX Temporary workaround: We load parts of retresco,
          but use the ITagger from intrafind. -->
-    <configure xmlns:meta="http://namespaces.zope.org/meta">
-      <meta:provides feature="zeit.retresco.tms" />
-      <include package="zeit.retresco" />
-    </configure>
-    <includeOverrides package="zeit.intrafind" />
+    <grok:grok package="zeit.retresco" />
+    <include package="zeit.intrafind" />
 
     <!-- XXX Something about including the whole zeit.solr package is slow,
          and since we don't need it, we gain ~2s startup performance here -->
