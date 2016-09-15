@@ -9,11 +9,7 @@
             {# newssitemap has no overview #}
             {%- set page_view = True -%}
         {%- endif -%}
-        {%- if 'gsitemap-themen' in layout and page_view -%}
-            {%- include "zeit.web.core:templates/sitemap/gsitemap-themen.html" -%}
-        {%- elif 'gsitemap-themen' in layout -%}
-            {%- include "zeit.web.core:templates/sitemap/gsitemap-themen-overview.html" -%}
-        {%- elif page_view -%}
+        {%- if page_view -%}
             {%- include "zeit.web.core:templates/sitemap/page.html" -%}
         {%- else -%}
             {%- include "zeit.web.core:templates/sitemap/overview.html" -%}

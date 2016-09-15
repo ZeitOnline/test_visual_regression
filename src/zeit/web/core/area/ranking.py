@@ -7,6 +7,7 @@ import pyramid
 import zc.iso8601.parse
 import zope.schema
 
+import zeit.cms.tagging.interfaces
 import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
 
@@ -297,3 +298,31 @@ class FakeReference(object):
 
     def __init__(self, content):
         self.target = content
+
+
+class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):
+
+    grokcore.component.name('topicsitemap')
+
+    def __call__(self):
+        self.total_hits = 0
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        result = []
+        try:
+            topics = zope.component.getUtility(
+                zeit.cms.tagging.interfaces.ITopicpages)
+            response = topics.get_topics(self.start, self.rows)
+            self.total_hits = response.hits
+            for item in response:
+                content = zeit.cms.interfaces.ICMSContent({
+                    'uniqueId': u'{}/{}'.format(
+                        conf.get('topic_prefix', ''), item['id']),
+                    'title': item['title'],
+                }, None)
+                if content is not None:
+                    result.append(content)
+        except:
+            log.warning(
+                'Error retrieving topic pages for %s',
+                self.context.uniqueId, exc_info=True)
+        return result

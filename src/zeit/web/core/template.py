@@ -694,9 +694,3 @@ def expired(content):
     if info is None:
         return False
     return info.is_expired
-
-
-@zeit.web.register_global
-def whitelist():
-    return zope.component.getUtility(
-        zeit.cms.tagging.interfaces.IWhitelist).values()
