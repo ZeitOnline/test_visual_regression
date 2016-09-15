@@ -281,7 +281,7 @@ class Article(zeit.web.core.view.Content):
             if self.volume:
                 if access == 'registration':
                     return {'intro': 'Aus der',
-                            'link': '{}/{!s}/{!s}'.format(
+                            'link': 'http://{}/{!s}/{!s}'.format(
                                 self.request.host,
                                 self.volume.year,
                                 self.volume.volume),
@@ -290,14 +290,14 @@ class Article(zeit.web.core.view.Content):
                             'cover': self.volume.covers['printcover']}
                 elif access == 'abo':
                     return {'intro': '',
-                            'link': '{}/{!s}/{!s}'.format(
+                            'link': 'http://{}/{!s}/{!s}'.format(
                                 self.request.host,
                                 self.volume.year, self.volume.volume),
                             'link_text': u'Exklusiv für Abonennten',
                             'cover': self.volume.covers['printcover']}
             elif access and access != 'free':
                 return {'intro': '',
-                        'link': '{}/exklusiv'.format(self.request.host),
+                        'link': 'http://{}/exklusiv'.format(self.request.host),
                         'link_text': u'Exklusiv für Abonennten',
                         'cover': False}
             return False
