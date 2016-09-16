@@ -4,6 +4,8 @@ Change log for zeit.web
 3.7 (unreleased)
 ----------------
 
+- ZON-3240: Integrate zplus article badge
+
 - ZON-2848: Add augmentable share buttons for ZMO
 
 
