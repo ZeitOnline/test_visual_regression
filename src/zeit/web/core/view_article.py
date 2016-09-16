@@ -10,6 +10,7 @@ import zope.component
 
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
+import zeit.content.volume.interfaces
 
 from zeit.web.site.view_feed import (
     CONTENT_MAKER, ELEMENT_MAKER,
@@ -45,7 +46,10 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_layout(self):
-        return self.context.header_layout or 'default'
+        if self.zplus_label:
+            return 'zplus'
+        else:
+            return self.context.header_layout or 'default'
 
     @zeit.web.reify
     def pages(self):
@@ -260,6 +264,45 @@ class Article(zeit.web.core.view.Content):
 
         path = prefix + '?print'
         return url + path
+
+    @zeit.web.reify
+    def volume(self):
+        return zeit.content.volume.interfaces.IVolume(self.context, None)
+
+    @zeit.web.reify
+    def zplus_label(self):
+
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'reader_revenue'):
+            return False
+
+        try:
+            access = getattr(self.context, 'access', None)
+            if self.volume:
+                if access == 'registration':
+                    return {'intro': 'Aus der',
+                            'link': 'http://{}/{!s}/{!s}'.format(
+                                self.request.host,
+                                self.volume.year,
+                                self.volume.volume),
+                            'link_text': 'ZEIT Nr. {!s}/{!s}'.format(
+                                self.volume.volume, self.volume.year),
+                            'cover': self.volume.covers['printcover']}
+                elif access == 'abo':
+                    return {'intro': '',
+                            'link': 'http://{}/{!s}/{!s}'.format(
+                                self.request.host,
+                                self.volume.year, self.volume.volume),
+                            'link_text': u'Exklusiv für Abonennten',
+                            'cover': self.volume.covers['printcover']}
+            elif access and access != 'free':
+                return {'intro': '',
+                        'link': 'http://{}/exklusiv'.format(self.request.host),
+                        'link_text': u'Exklusiv für Abonennten',
+                        'cover': False}
+            return False
+        except:
+            return False
 
     @zeit.web.reify
     def breadcrumbs(self):

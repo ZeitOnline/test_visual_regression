@@ -985,7 +985,7 @@ def test_zeit_article_has_correct_meta_line(testserver, selenium_driver):
 
     assert dates[0].text == u'12. Februar 2015, 4:32 Uhr'
     assert dates[1].text == u'Editiert am 15. Februar 2015, 18:18 Uhr'
-    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+    assert source.text == u'DIE ZEIT Nr. 49/2014, 29. Januar 2015'
 
 
 def test_tgs_article_has_correct_meta_line(testserver, selenium_driver):
@@ -1760,6 +1760,113 @@ def test_video_in_article_has_poster_copyright(testbrowser):
     figure_copyright = figure_copyright_elem[0]
     copyright_person = figure_copyright.cssselect('[itemprop="name"]')[0]
     assert copyright_person.text == u'© Foto: Alaa Al-Marjani/Reuters'
+
+
+def test_zplus_zon_article_has_correct_markup(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zon')
+
+    zplus_box = browser.cssselect('.zplus--coverless')
+    assert len(zplus_box) == 1
+
+    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
+    zplus_text = zplus_box[0].cssselect('.zplus__text')
+    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_modifier) == 2
+    assert len(zplus_banner) == 1
+    assert len(zplus_badge) == 1
+    assert len(zplus_marker) == 1
+    assert len(zplus_text) == 1
+    assert len(zplus_link) == 1
+    assert 'exklusiv' in zplus_link[0].attrib['href']
+    assert 'Exklusiv' in zplus_link[0].text.strip()
+
+
+def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-novolume')
+
+    zplus_box = browser.cssselect('.zplus--coverless')
+    assert len(zplus_box) == 1
+
+    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_modifier) == 2
+    assert len(zplus_banner) == 1
+    assert len(zplus_badge) == 1
+
+
+def test_zplus_abo_print_article_has_correct_markup(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zeit')
+
+    zplus_box = browser.cssselect('.zplus')
+    assert len(zplus_box) == 1
+
+    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
+    zplus_text = zplus_box[0].cssselect('.zplus__text')
+    zplus_cover = zplus_box[0].cssselect('.zplus__cover')
+    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
+    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_modifier) == 2
+    assert len(zplus_banner) == 1
+    assert len(zplus_badge) == 1
+    assert len(zplus_marker) == 1
+    assert len(zplus_text) == 1
+    assert len(zplus_cover) == 1
+    assert len(zplus_media) == 1
+    assert len(zplus_link) == 1
+    assert '/2014/49' in zplus_link[0].attrib['href']
+    assert 'Exklusiv' in zplus_link[0].text.strip()
+    assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
+            in zplus_media[0].attrib['src'])
+
+
+def test_zplus_register_print_article_has_correct_markup(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zeit-register')
+
+    zplus_box = browser.cssselect('.zplus')
+    assert len(zplus_box) == 1
+
+    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_text = zplus_box[0].cssselect('.zplus__text')
+    zplus_cover = zplus_box[0].cssselect('.zplus__cover')
+    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
+    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_label = zplus_box[0].cssselect('.zplus__label')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_modifier) == 2
+    assert len(zplus_banner) == 1
+    assert len(zplus_badge) == 0
+    assert len(zplus_text) == 1
+    assert len(zplus_cover) == 1
+    assert len(zplus_media) == 1
+    assert len(zplus_link) == 1
+    assert len(zplus_label) == 1
+    assert '/2014/49' in zplus_link[0].attrib['href']
+    assert 'ZEIT Nr. 49/2014' in zplus_link[0].text.strip()
+    assert 'Aus der' in zplus_label[0].text.strip()
+    assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
+            in zplus_media[0].attrib['src'])
+
+
+def test_free_article_has_no_zplus_badge(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+
+    zplus_box = browser.cssselect('.zplus')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_box) == 0
+    assert len(zplus_modifier) == 0
 
 
 def test_volume_teaser_is_rendered_correctly(testbrowser):

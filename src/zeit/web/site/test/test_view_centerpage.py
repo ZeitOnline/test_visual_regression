@@ -1001,7 +1001,6 @@ def test_gallery_teaser_has_correct_elements(testbrowser):
     area = browser.cssselect('.cp-area--gallery')[0]
 
     assert len(area.cssselect('.teaser-gallery')) == wanted
-    assert len(area.cssselect('.teaser-gallery__figurewrapper')) == wanted
     assert len(area.cssselect('.teaser-gallery__media')) == wanted
     assert len(area.cssselect('.teaser-gallery__icon')) == wanted
     assert len(area.cssselect('.teaser-gallery__counter')) == wanted
@@ -2187,6 +2186,11 @@ def test_shop_and_printkiosk_must_not_contain_links_inside_links(testbrowser):
 
     browser = testbrowser('/angebote/printkiosk/vorschau')
     assert len(browser.cssselect('.teaser-printkiosk:first-child a')) == 1
+
+
+def test_shop_contains_load_more_button(testbrowser):
+    browser = testbrowser('/angebote/zeit-shop-buehne/vorschau')
+    assert browser.cssselect('.cp-area--shop .js-bar-teaser-paginate')
 
 
 def test_dynamic_cps_detect_videos_of_type_video(
