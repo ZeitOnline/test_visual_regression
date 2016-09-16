@@ -1,4 +1,4 @@
-{% if toggles('volume_teaser') and block.medium %}
+{% if toggles('volume_teaser') %}
 <aside class="volume-teaser article__item article__item--marginalia" data-clicktracking="volumeteaser">
     {% include "{}:templates/inc/asset/image_volumeteaser.tpl".format(view.package) ignore missing %}
 </aside>

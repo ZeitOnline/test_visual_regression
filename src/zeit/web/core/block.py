@@ -119,7 +119,7 @@ class Volume(Block):
         # The path will be used in hyperlinks to premium
         # (https://premium.zeit.de/diezeit/2016/01)
         map_product_path = {'ZEI': 'diezeit'}
-        return map_product_path.get(product_id)
+        return map_product_path.get(product_id, 'diezeit')
 
 
 class IInfoboxDivision(zope.interface.Interface):
