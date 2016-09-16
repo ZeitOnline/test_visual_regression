@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags>
+      <tag type="Organization" url_value="world-anti-doping-agency-%28wada%29" uuid="8f50cb01-0cfd-4bb3-af58-b22acab59f57">World Anti-Doping Agency (Wada)</tag>
+      <tag url_value="ioc" uuid="cdb09557-e4fe-4718-b42a-ee5400bb1ade" score="5" type="Organization">IOC</tag>
+      <tag url_value="hacker" uuid="0e53e5fe-9bd8-44ff-beb1-69799c2e69c6" score="4" type="free">Hacker</tag>
+      <tag url_value="internet" uuid="32366255-a1c7-4d14-b07c-96b47edb92d7" score="4" type="free">Internet</tag>
+      <tag url_value="medikament" uuid="874501d6-f616-477a-85d9-b24cbd10a8bb" score="4" type="free">Medikament</tag>
+      <tag url_value="sportler" uuid="544b6b5d-ec31-4d65-8c8b-d80a3a3ad47d" score="4" type="free">Sportler</tag>
+    </rankedTags>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Sport</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT Online</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-01T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-01T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-01T15:12:09.866518+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-01T15:13:09.811283+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-01T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.newspublish</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn:newsml:afp.com:20150601:doc-2n64x</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">SID</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Sport-Informations-Dienst</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1159bddc254242769fbbe1fa1c0e380d</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Sport</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:85c42592-3840-41c6-b039-83cc16de66d6}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">1900</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Wada</supertitle>
+    <title>Hacker veröffentlichen weitere Daten von Sportlern</title>
+    <subtitle>Russische Hacker haben die Welt-Anti-Doping-Agentur angegriffen und vertrauliche Daten über Athleten veröffentlicht. Unter ihnen sind auch fünf deutsche Sportler.</subtitle>
+    <division type="page">
+      <p>Eine russische Hackergruppe hat Daten der Welt-Anti-Doping-Agentur (Wada) von weiteren Sportlern veröffentlicht. Das bestätigte die <a class="" href="https://www.wada-ama.org/en/media/news/2016-09/wada-confirms-another-batch-of-athlete-data-leaked-by-russian-cyber-hackers-fancy" target="_blank">Wada</a><a class="" href="https://www.wada-ama.org/en/media/news/2016-09/wada-confirms-another-batch-of-athlete-data-leaked-by-russian-cyber-hackers-fancy" target="_blank"> in einer Mitteilung auf ihrer Website</a>. Nun seien vertrauliche Informationen von 25 Sportlern aus acht Nationen durch die Hacker öffentlich gemacht worden, erklärte die Antidopingagentur. Insgesamt seien 29 Sportler von den Veröffentlichungen betroffen, sagte Wada-Generaldirektor Olivier Niggli. Unter den Athleten sind demnach auch fünf Deutsche.</p>
+ 	  <volume href="http://xml.zeit.de/ausgabe/2016/01" />
+      <p>Die russische Hackergruppe, die sich Fancy Bears nennt, hatte zuvor die <a class="" href="http://www.zeit.de/sport/2016-09/wada-datenbank-leak-serena-venus-williams-doping" target="_blank">Accounts von mehreren amerikanischen Topathleten</a> bei der Wada durchsucht. Sie stellten dabei bereits mehrere medizinische Ausnahmegenehmigungen für Mittel der Athleten ins Internet. </p>
+      <p>Die viermalige Turnolympiasiegerin Simone Biles, Tennisstar Venus Williams und Basketballolympiasiegerin Elena Delle Donne hatten sich nach den ersten Veröffentlichungen gewehrt und die Vorwürfe zurückgewiesen. Sie bekamen dabei Unterstützung von der Wada und vom Internationalen Olympischen Komitee (IOC). Auf der neu veröffentlichten Liste steht unter anderem auch der deutsche Diskuswerfer Robert Harting.</p>
+      <p>Sportler dürfen mitunter Medikamente einnehmen, die auf der Dopingliste stehen, müssen dafür aber eine medizinische Ausnahmegenehmigung vorweisen. "Wir bedauern, dass diese Kriminellen versucht haben, den Ruf der betroffenen Athleten auf diese Weise zu schädigen", sagte Wada-Direktor Niggli.</p>
+    </division>
+  </body>
+</article>
