@@ -1,5 +1,4 @@
 {% if image %}
-    {% block image_figure_wrapper %}
     <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image"
         {%- if image_itemprop %} itemprop="{{ image_itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
         {% block media_caption_above %}{% endblock %}
@@ -39,5 +38,4 @@
         </figcaption>
         {%- endblock media_caption -%}
     </figure>
-    {% endblock %}
 {% endif %}
