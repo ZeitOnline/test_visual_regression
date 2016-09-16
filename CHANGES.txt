@@ -4,7 +4,7 @@ Change log for zeit.web
 3.7 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-2848: Add augmentable share buttons for ZMO
 
 
 3.6 (2016-09-15)

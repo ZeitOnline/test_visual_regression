@@ -38,6 +38,7 @@
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Fabian Lange;Cornelius Lange</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>

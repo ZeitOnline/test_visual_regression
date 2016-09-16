@@ -84,6 +84,10 @@ class LongformArticle(Article):
     def show_date_format(self):
         return 'short'
 
+    @zeit.web.reify
+    def share_buttons(self):
+        return 'big'
+
 
 @pyramid.view.view_config(context=zeit.web.core.article.IFeatureLongform,
                           renderer='templates/feature_longform.html')
@@ -94,6 +98,14 @@ class FeatureLongform(LongformArticle):
         keywords = super(FeatureLongform, self).adwords
         keywords.remove('zeitmz')
         return keywords
+
+    @zeit.web.reify
+    def publisher_name(self):
+        return 'ZEIT ONLINE'
+
+    @zeit.web.reify
+    def twitter_username(self):
+        return 'zeitonline'
 
 
 @pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle,

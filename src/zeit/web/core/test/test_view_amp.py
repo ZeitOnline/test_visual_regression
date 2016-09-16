@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import lxml.etree
 import json
+import lxml.etree
+import urllib
 import zeit.web.core.application
 
 
@@ -153,8 +154,8 @@ def test_amp_article_contains_sharing_links(testbrowser):
     links = sharing.cssselect('.article-sharing__link')
     assert sharing.cssselect('.article-sharing__title')[0].text == 'Teilen'
     assert len(links) == 4
-    assert ('?u=' + canonical) in links[0].get('href')
-    assert ('url=' + canonical) in links[1].get('href')
+    assert ('?u=' + urllib.quote(canonical)) in links[0].get('href')
+    assert ('url=' + urllib.quote(canonical)) in links[1].get('href')
 
 
 def test_amp_article_shows_tags_correctly(testbrowser):
