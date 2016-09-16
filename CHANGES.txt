@@ -12,6 +12,8 @@ Change log for zeit.web
 
 - ZON-3259: Show volume teaser in articles
 
+- ZON-3286: Support zplus content in Buzzboard/box
+
 
 3.6 (2016-09-15)
 ----------------
