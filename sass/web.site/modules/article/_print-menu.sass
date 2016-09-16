@@ -17,3 +17,14 @@
 
 	+respond-min($break-desktop-min)
 		display: block
+
+// workaround for the sharing-menu 1 sunset period
+.sharing-menu2 + .print-menu
+	left: auto
+	line-height: remify(35px)
+	right: 0
+	// top: remify(20px)
+
+	.print-menu__link
+		&:first-child:before
+			content: none
