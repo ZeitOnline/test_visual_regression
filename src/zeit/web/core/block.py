@@ -117,6 +117,8 @@ class Volume(Block):
     def _product_path(self, medium):
         # TODO add more product-url mappings to the dictionary
         map_product_path = {'ZEI': 'diezeit'}
+        if medium not in map_product_path:
+            return ''
         return map_product_path[medium]
 
 
