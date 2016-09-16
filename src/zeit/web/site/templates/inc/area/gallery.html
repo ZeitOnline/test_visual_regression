@@ -1,24 +1,28 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% set module_layout = 'teaser-gallery' %}
+{% set tracking_slug = '{}...{}'.format(region_loop.index, '-'.join([area.kind, module_layout])) %}
 
 {% block before_module_list %}
-    {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, '-'.join([area.kind, module_layout]), 'alle_fotostrecken') %}
-	{{ cp.section_heading('Fotostrecken', 'Alle Fotostrecken', 'foto/index', view, tracking_slug, unpadded=True) }}
+    {{ cp.section_heading('Fotostrecken', 'Alle Fotostrecken', 'foto/index', view, tracking_slug ~ '.alle_fotostrecken', unpadded=True) }}
 {% endblock %}
 
 {% block module_list %}
-	<div class="{{ module_layout }}-group__container">
-		{{ super() }}
-	</div>
+    <div class="{{ module_layout }}-group__container">
+        {{ super() }}
+    </div>
 {% endblock %}
 
 {% block after_module_list %}
-	{% if area.values() %}
-		<a href="{{ view.request.route_url('home') }}foto/index"
-			class="button {{ module_layout }}-group__button js-bar-teaser-paginate"
-			data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
-			{{ lama.use_svg_icon('shuffle', '{}-group__shuffle-icon'.format(module_layout), view.package) }}Weitere laden
-		</a>
-	{% endif %}
+    {% if area.values() -%}
+    <div class="section-footer">
+        <a  href="{{ view.request.route_url('home') }}foto/index"
+            class="button {{ module_layout }}__button js-bar-teaser-paginate"
+            data-id="{{ tracking_slug }}.weitere_laden"
+            data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
+            {{ lama.use_svg_icon('shuffle', '{}__shuffle-icon'.format(module_layout), view.package) }}
+            Weitere laden
+        </a>
+    </div>
+    {%- endif %}
 {% endblock %}

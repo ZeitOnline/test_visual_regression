@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
     <head>
         <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
@@ -46,6 +47,7 @@
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Pia Volk</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">yes</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>

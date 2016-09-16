@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="homepage">
+  <head>
+    <topiclinks>
+      <topiclink>
+        <topiclink_label_1>Doping</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/thema/doping</topiclink_url_1>
+        <topiclink_label_2>US-Wahl</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/thema/us-wahl</topiclink_url_2>
+        <topiclink_label_3>Syrien</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/thema/syrien</topiclink_url_3>
+      </topiclink>
+    </topiclinks>
+    <header_image xsi:nil="true"/>
+    <snapshot src="http://xml.zeit.de/kultur/2012-03/momente/091215-moment-spaet.jpg" type="jpg" title="Internationales Heißluftballonfestival in Dubai " alt="Internationales Heißluftballonfestival in Dubai " align="left" publication-date="" expires="">
+      <bu>Internationales Heißluftballonfestival in Dubai </bu>
+      <copyright>© Karim Sahib/Reuters</copyright>
+    </snapshot>
+    <image base-id="http://xml.zeit.de/politik/deutschland/2016-04/alternative-fuer-deutschland-thema-parteitag/" type="jpg" title="AfD Thema Header Dossier" alt="Alternative für Deutschland" publication-date="" expires="2016-07-30T10:06:44+00:00" title_local="AfD Thema Header Dossier" alt_local="Alternative für Deutschland">
+      <bu xsi:nil="true"/>
+      <copyright>© Julian Stratenschulte/dpa </copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-09-15T14:07:48.029054+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-10-01T16:16:50.233082+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-09-15T14:07:49.603956+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-09-15T14:07:49.531930+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-09-15T14:07:49.397024+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-09-15T14:04:21.786564+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Aktuelle Nachrichten, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport lesen Sie auf ZEIT ONLINE. Aktuelle Nachrichten, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport lesen Sie auf ZEIT.de. Aktuelle Nachrichten, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport lesen Sie bei der ZEIT. Aktuelle Nachrichten, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport – die ZEIT. Aktuelle News, Kommentare, Analysen und Hintergrundberichte aus Politik, Wirtschaft, Gesellschaft, Wissen, Kultur und Sport lesen Sie auf ZEIT ONLINE.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">ZEIT ONLINE | Nachrichten, Hintergründe und Debatten</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-09-15T14:07:45.713335+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.havertz</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">homepage</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ec3d1b35-41b0-44a1-9453-0ff5c004c872}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>ZEIT ONLINE Startseite</title>
+    <cluster visible="True" visible_mobile="True" area="id-ff74a31d-ef34-4e3e-8933-fe10a9bb5520" kind="solo" kind_title="Solo-Region" title="Aufmacher">
+      <region visible="True" visible_mobile="True" area="id-364a31cb-f55b-4a50-8842-6a698dc052f4" kind="solo">
+        <container cp:type="teaser" module="zon-fullwidth" visible="True" visible_mobile="True" cp:__name__="id-ff53d90f-1e4a-4ab8-90fa-1fa0be8de64b">
+          <block href="http://xml.zeit.de/zeit-online/cp-content/article-03" />
+        </container>
+      </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-ebed1ecf-476f-4f46-9571-0ccbf127b787" kind="gallery" kind_title="Shop-Bühne">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-cfa934ac-c5a5-44ba-9c51-764b24b54c1f" kind="shop" count="3" automatic="True" automatic_type="centerpage" title="Shop CP" read_more_url="http://shop.zeit.de">
+        <referenced_cp>http://xml.zeit.de/angebote/zeit-shop-buehne/inhaltstemplate</referenced_cp>
+        <container cp:type="auto-teaser" module="zon-shop" visible="True" visible_mobile="True" cp:__name__="id-074b73a0-743d-4558-b165-3452e0c5b364"/>
+        <container cp:type="auto-teaser" module="zon-shop" visible="True" visible_mobile="True" cp:__name__="id-86b08ed6-357b-4248-b3c6-bf90eef09184"/>
+        <container cp:type="auto-teaser" module="zon-shop" visible="True" visible_mobile="True" cp:__name__="id-be728090-d3aa-4294-b61c-453f3831540a"/>
+      </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-611121ee-c611-4115-85a5-634841855adf" kind="gallery" kind_title="Fotostrecken-Region">
+      <region visible="True" hide-dupes="True" area="id-f103fa99-95e2-4094-8bb9-d56b482325f7" kind="gallery" title="Fotostrecken" count="2" automatic="True" automatic_type="centerpage" visible_mobile="True" supertitle="Fotografie" read_more_url="http://www.zeit.de/foto/index">
+        <referenced_cp>http://xml.zeit.de/foto/index</referenced_cp>
+        <container cp:type="auto-teaser" module="zon-gallery" visible="True" visible_mobile="True" cp:__name__="id-98341214-10dc-4f3f-9940-66e481827ce6"/>
+        <container cp:type="auto-teaser" module="zon-gallery" visible="True" visible_mobile="True" cp:__name__="id-eed28a56-7c2a-46e1-920f-be0da4aefdec"/>
+      </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-dd1e1771-41f5-452b-b97b-ee05c51cbead" kind="gallery" kind_title="ZEIT Printbanderole">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-4abc6f1d-99f9-4cc8-8269-72a349bf4ef2" kind="printkiosk" count="4" automatic="True" automatic_type="centerpage" title="Jetzt für Sie am Kiosk" read_more_url="http://www.zeit.de/administratives/printbanderole/inhaltstemplate">
+        <referenced_cp>http://xml.zeit.de/angebote/printkiosk/inhaltstemplate</referenced_cp>
+        <container cp:type="auto-teaser" module="zon-printkiosk" visible="True" visible_mobile="True" cp:__name__="id-1ea0dad6-4f45-4593-a923-4ccd74c7432c"/>
+        <container cp:type="auto-teaser" module="zon-printkiosk" visible="True" visible_mobile="True" cp:__name__="id-533165ed-87aa-4761-a1fa-efeb5bfb3bb1"/>
+        <container cp:type="auto-teaser" module="zon-printkiosk" visible="True" visible_mobile="True" cp:__name__="id-db201d2e-26fc-4d1f-949a-e45e4f1464b1"/>
+        <container cp:type="auto-teaser" module="zon-printkiosk" visible="True" visible_mobile="True" cp:__name__="id-1b7b02ff-aff2-4126-a6e9-f73649cf6a2f"/>
+      </region>
+    </cluster>
+  </body>
+  <feed></feed>
+  <teaser>
+    <title>ZEIT ONLINE Startseite</title>
+  </teaser>
+</centerpage>

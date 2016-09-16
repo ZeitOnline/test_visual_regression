@@ -1,5 +1,6 @@
-import grokcore.component
 import lxml.objectify
+import zope.component
+import zope.interface
 
 import zeit.content.image.interfaces
 
@@ -37,10 +38,8 @@ class Gallery(zeit.web.core.view.Content):
         return ['gallery.0/seite-1']
 
 
-@grokcore.component.adapter(
-    zeit.content.image.interfaces.IImage)
-@grokcore.component.implementer(
-    zeit.content.image.interfaces.IPersistentThumbnail)
+@zope.component.adapter(zeit.content.image.interfaces.IImage)
+@zope.interface.implementer(zeit.content.image.interfaces.IPersistentThumbnail)
 def persistent_thumbnail_factory(context):
     """Disable vivi-only functionality, especially since creating content does
     not work in our environment.

@@ -538,7 +538,7 @@ def test_get_svg_without_package_should_be_empty_str(application):
 
 def test_zplus_is_false_for_free_articles(application):
     content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
+        'http://xml.zeit.de/zeit-online/article/all-blocks')
     assert zeit.web.core.template.zplus_content(content) is False
 
 
