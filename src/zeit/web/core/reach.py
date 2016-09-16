@@ -43,7 +43,7 @@ class Reach(object):
             doc['serie'] = NotImplemented
             doc['teaserTitle'] = doc.get('title')
             doc['teaserSupertitle'] = doc.get('supertitle')
-            doc['access'] = 'free'
+            doc['access'] = doc.get('access', 'free')
             docs[idx] = zeit.cms.interfaces.ICMSContent(doc)
         return docs
 
