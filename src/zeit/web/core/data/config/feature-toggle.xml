@@ -14,4 +14,5 @@
   <access_status_webtrekk>true</access_status_webtrekk>
   <reader_revenue>true</reader_revenue>
   <dummy>false</dummy>
+  <volume_teaser>true</volume_teaser>
 </features>
