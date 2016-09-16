@@ -352,7 +352,7 @@ def test_article_sharing_menu_should_open_and_close(
 
     sharing_menu_selector = '.sharing-menu > .sharing-menu__items'
     sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > .sharing-menu__title.js-sharing-menu')
+        '.sharing-menu > a[aria-controls]')
     sharing_menu_items = selenium_driver.find_element_by_css_selector(
         sharing_menu_selector)
 
@@ -384,7 +384,7 @@ def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
     selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
 
     sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > .sharing-menu__title.js-sharing-menu')
+        '.sharing-menu > a[aria-controls]')
     whatsapp_item = selenium_driver.find_element_by_css_selector(
         '.sharing-menu__item--whatsapp')
 
