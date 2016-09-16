@@ -114,12 +114,12 @@ class Volume(Block):
         self.issue = str(volume_obj.volume).zfill(2)
         self.teaser_text = result.teaserText
 
-    def _product_path(self, medium):
+    def _product_path(self, product_id):
         # TODO add more product-url mappings to the dictionary
+        # The path will be used in hyperlinks to premium
+        # (https://premium.zeit.de/diezeit/2016/01)
         map_product_path = {'ZEI': 'diezeit'}
-        if medium not in map_product_path:
-            return ''
-        return map_product_path[medium]
+        return map_product_path.get(product_id)
 
 
 class IInfoboxDivision(zope.interface.Interface):
