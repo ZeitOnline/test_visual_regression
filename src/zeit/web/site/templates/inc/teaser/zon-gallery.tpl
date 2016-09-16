@@ -7,18 +7,7 @@
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
-
-    {# OPTIMIZE: Figcaption would be better than this wrapper.
-       But JS fills the whole <figure> when loading an image.#}
-    <div class="{{ self.layout() }}__figurewrapper">
-        {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" %}
-
-        {{ lama.use_svg_icon('gallery', '{}__icon'.format(self.layout()), view.package) }}
-
-        <small class="{{ self.layout() }}__counter">
-            {{ teaser.keys() | list | length | pluralize('Keine Fotos', 'Ein Foto', '{} Fotos') }}
-        </small>
-    </div>
+    {% include "zeit.web.site:templates/inc/teaser_asset/imagegroup_gallery.tpl" %}
 {% endblock %}
 
 {% block kicker_logo %}

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis" publication-date="" expires="">
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml" publication-date="" expires="">
       <display_name py:pytype="str">Zacharias Zacharakis</display_name>
     </author>
     <references>

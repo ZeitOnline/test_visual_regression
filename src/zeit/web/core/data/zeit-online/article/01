@@ -21,7 +21,7 @@
       <reference type="intern" href="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
     </references>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="access">free</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Wenke Husmann</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>

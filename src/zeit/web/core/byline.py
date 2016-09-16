@@ -174,5 +174,4 @@ class ProxyByline(Byline):
     zeit.web.core.utils.ILazyProxy, name='author')
 @grokcore.component.implementer(IByline)
 class ProxyAuthorByline(ProxyByline, StructuredDataByline):
-
     pass

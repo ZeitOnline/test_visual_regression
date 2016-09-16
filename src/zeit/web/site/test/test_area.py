@@ -130,4 +130,25 @@ def test_default_teaser_should_not_expose_ranking_area_proxies(
     browser = testbrowser('/dynamic/paul-auster')
     assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 10
 
-    assert all('ProxyExposed' not in a[0][0] for a in log.debug.call_args_list)
+    log = log.debug.call_args_list
+    assert all('ProxyExposed' not in a[0][0] for a in log), str(log)
+
+
+def test_tms_query_should_not_expose_ranking_area_proxies(
+        testbrowser, monkeypatch, request):
+    previous = zope.component.queryUtility(zeit.retresco.interfaces.ITMS)
+    request.addfinalizer(lambda: zope.component.provideUtility(previous))
+    zope.component.provideUtility(zeit.web.core.utils.DataTMS())
+
+    log = mock.Mock()
+    monkeypatch.setattr(zeit.web.core.utils, 'log', log)
+
+    monkeypatch.setattr(
+        zeit.web.core.comments.Community, 'get_comment_counts',
+        lambda *args: {x: 1 for x in args})
+
+    browser = testbrowser('/dynamic/tms-berlin')
+    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 25
+
+    log = log.debug.call_args_list
+    assert all('ProxyExposed' not in a[0][0] for a in log), str(log)

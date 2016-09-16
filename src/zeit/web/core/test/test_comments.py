@@ -721,8 +721,9 @@ def test_article_view_should_have_short_caching_time_on_unloadable_thread(
     monkeypatch.setattr(
         zeit.web.core.comments.Community, 'is_healthy', lambda self: False)
     browser = testbrowser('/zeit-online/article/01/comment-thread')
+    select = browser.cssselect
     assert browser.headers.get('cache-control') == 'max-age=1'
-    assert browser.cssselect('.comment-section__message')[0].text.strip() == (
+    assert select('.comment-section__message')[0].text_content().strip() == (
         u'Ein technischer Fehler ist aufgetreten. Die Kommentare '
         u'zu diesem Artikel konnten nicht geladen werden. Bitte '
         u'entschuldigen Sie diese Störung.')

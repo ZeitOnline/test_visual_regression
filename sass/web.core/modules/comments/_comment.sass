@@ -1,5 +1,5 @@
 .comment
-	padding: 0 $page-padding
+	+padded
 	border-top: 1px solid $comment-color-border
 
 	&:first-child
@@ -107,6 +107,7 @@
 			margin-bottom: remify(4px)
 
 	&__moderations
+		+default-article-textlink
 		clear: left
 		float: left
 		list-style: none
@@ -114,15 +115,12 @@
 		padding: 0
 		text-align: left
 	&__moderation
-		color: $comment-color-moderation-link
 		font-size: remify(15px)
 		letter-spacing: $letter-spacing-s
 		line-height: 2
-		+on-interaction
-			border-bottom: 1px solid currentColor
 
 		&--sending
-			color: $comment-color-moderation-sending-font !important
+			color: $comment-color-moderation-sending !important
 
 	&__rewrapper
 		display: block
@@ -132,10 +130,10 @@
 			visibility: hidden
 		&:hover
 			.comment__count
-				background-color: $comment-color-rewrapper-hover-count-background
+				background-color: $comment-color-count-background--hover
 			.comment__cta
-				color: $comment-color-rewrapper-hover-cta-font
-				border-bottom: 1px solid $comment-color-rewrapper-hover-cta-border
+				color: $comment-color-cta-font--hover
+				border-bottom: 1px solid $comment-color-cta-border--hover
 
 	// TODO: redundant mit dem Overlay Wrapper Count Zeugs???
 	&__count
@@ -159,13 +157,15 @@
 	border-top-width: 0 !important
 	padding: 0
 	+respond-min($break-phablet-min)
+		padding: 0 $page-padding--small
+	+respond-min($break-page-padding)
 		padding: 0 $page-padding
 
 	.comment__container
-		box-shadow: inset remify(24px) 0 0 0 $comment-color-indented-boxshadow
-		padding-left: remify(48px)
-		padding-right: $page-padding
 		border-top: 1px solid $comment-color-border
+		box-shadow: inset $page-padding--small 0 0 0 $comment-color-indented-boxshadow
+		padding-left: $page-padding--small * 2
+		padding-right: $page-padding--small
 		position: relative
 
 		+respond-min($break-phablet-min)
@@ -222,7 +222,7 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ) // IE 9 fallback
 	height: 70%
 	left: 0
-	padding-left: remify(48px)
+	padding-left: $page-padding--small * 2
 	position: absolute
 	right: 0
 	+respond-min($break-phablet-min)
@@ -238,10 +238,10 @@
 
 	&:hover
 		.comment-overlay__count
-			background-color: $comment-color-overlay-count-background
+			background-color: $comment-color-count-background--hover
 		.comment-overlay__cta
-			color: $comment-color-overlay-cta-font
-			border-bottom: 1px solid $comment-color-overlay-cta-border
+			color: $comment-color-cta-font--hover
+			border-bottom: 1px solid $comment-color-cta-border--hover
 
 // icons
 .comment__badge

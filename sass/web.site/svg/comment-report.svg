@@ -2,7 +2,7 @@
 <svg width="8px" height="10px" viewBox="0 0 8 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Melden</title>
     <g>
-	   <polygon fill="#444444" points="8,0 1.999,0 1.999,5 8,5 6.444,2.5"/>
+	   <polygon fill="#444444" points="8,0 2,0 2,5 8,5 6.5,2.5"/>
 	   <rect fill="#444444" width="1" height="10"/>
     </g>
 </svg>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<comments url="/commentsection/url/zeit-magazin/article/01">
+	<last_comment_timestamp>1473241299</last_comment_timestamp>
+	<last_comment_name></last_comment_name>
+	<last_comment_uid>3</last_comment_uid>
+	<comment_count>4</comment_count>
+	<page/>
+	<thread_position/>
+	<comments_count_toplevel>1</comments_count_toplevel>
+	<comments_count_recommendations_editors>0</comments_count_recommendations_editors>
+	<comments_count_recommendations_readers>0</comments_count_recommendations_readers>
+	<nid>281882</nid>
+	<comment id="cid-188">
+		<comments_count_subthread>3</comments_count_subthread>
+		<date>
+			<year>2016</year>
+			<month>09</month>
+			<day>07</day>
+			<hour>8</hour>
+			<minute>09</minute>
+		</date>
+		<created>1473235745</created>
+		<changed>1473235745</changed>
+		<homepage></homepage>
+		<subject>[empty]</subject>
+		<content>&lt;p&gt;Jetzt aber los.&lt;/p&gt;</content>
+		<author id="uid-394578" url="/user/skarsgard">
+			<name>Skarsgard</name>
+		</author>
+	</comment>
+	<comment id="cid-205">
+		<inreply to="cid-188"/>
+		<date>
+			<year>2016</year>
+			<month>09</month>
+			<day>07</day>
+			<hour>9</hour>
+			<minute>15</minute>
+		</date>
+		<created>1473239711</created>
+		<changed>1473239711</changed>
+		<homepage></homepage>
+		<subject>[empty]</subject>
+		<content>&lt;p&gt;ja, echt?&lt;/p&gt;</content>
+		<author id="uid-3" roles="freelancer" url="/users/test_user21" sex="weiblich">
+			<name>test_user21</name>
+		</author>
+	</comment>
+	<path>/commentsection/url/zeit-magazin/article/01</path>
+	<source>http://localhost:9090/zeit-magazin/article/01</source>
+</comments>

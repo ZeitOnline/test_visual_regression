@@ -1001,7 +1001,6 @@ def test_gallery_teaser_has_correct_elements(testbrowser):
     area = browser.cssselect('.cp-area--gallery')[0]
 
     assert len(area.cssselect('.teaser-gallery')) == wanted
-    assert len(area.cssselect('.teaser-gallery__figurewrapper')) == wanted
     assert len(area.cssselect('.teaser-gallery__media')) == wanted
     assert len(area.cssselect('.teaser-gallery__icon')) == wanted
     assert len(area.cssselect('.teaser-gallery__counter')) == wanted
@@ -1524,6 +1523,9 @@ def test_partnerbox_reisen_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.partner__link'))
     assert len(box.cssselect('.partner__link-icon'))
     assert len(box.cssselect('.partner__dropdown-option')) == 18
+    media = box.cssselect('.partner__media-item')
+    assert len(media)
+    assert media[0].attrib['src'].endswith('/reisebox-image/wide__822x462')
 
 
 @pytest.mark.xfail(reason='Last test fails on jenkins for unknown reason')
@@ -2184,6 +2186,11 @@ def test_shop_and_printkiosk_must_not_contain_links_inside_links(testbrowser):
 
     browser = testbrowser('/angebote/printkiosk/vorschau')
     assert len(browser.cssselect('.teaser-printkiosk:first-child a')) == 1
+
+
+def test_shop_contains_load_more_button(testbrowser):
+    browser = testbrowser('/angebote/zeit-shop-buehne/vorschau')
+    assert browser.cssselect('.cp-area--shop .js-bar-teaser-paginate')
 
 
 def test_dynamic_cps_detect_videos_of_type_video(

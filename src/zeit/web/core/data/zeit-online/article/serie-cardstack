@@ -19,7 +19,7 @@
       <copyright>©Getty Image / The Asahi Shimbun</copyright>
     </image>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">free</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Stefanie Sippel</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>

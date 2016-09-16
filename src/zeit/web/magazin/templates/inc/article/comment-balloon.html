@@ -1,0 +1,8 @@
+{% if view.commenting_allowed or view.comments %}
+    <div class="comment-balloon">
+        <a class="comment-balloon__link js-scroll" href="#comments">
+            <span class="comment-balloon__count">{{ view.comments.comment_count | default(0) }}</span>
+            <span class="comment-balloon__text">{% if view.comments.comment_count == 1 %}Kommentar{% else %}Kommentare{% endif %}</span>
+        </a>
+    </div>
+{% endif %}

@@ -22,9 +22,7 @@ figure__media
 {%- endblock %}
 
 {% block media_caption_content -%}
-    {% if image.origin  %}
-        <span class="x-caption--sans">Quelle: {{ image.origin }}</span>
-    {% elif image.caption %}
+    {% if image.caption -%}
         <span class="figure__text">{{ image.caption }}</span>
     {% endif %}
     {{ super() }}

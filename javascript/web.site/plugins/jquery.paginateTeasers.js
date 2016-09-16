@@ -61,14 +61,12 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
                 window.location.href = fallbackUrl;
             }
         });
-
-        return false;
     }
 
     /**
     * paginateTeasers.js: remove the visible teasers and show these which were
     * invisible until now.
-    * @function loadGalleryTeasers
+    * @function slideGalleryTeasers
     */
     function slideGalleryTeasers( ) {
 
@@ -91,8 +89,6 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
                     });
                 }
             });
-
-        return false;
     }
 
     /**
@@ -103,6 +99,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
     */
     function paginateGalleryTeasers( event ) {
 
+        event.preventDefault();
         $this = $( this );
         $this.blur();
         $galleryArea = $this.closest( '.cp-area' );
@@ -117,9 +114,6 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
         } else {
             loadGalleryTeasers( );
         }
-
-        return false;
-
     }
 
     /**

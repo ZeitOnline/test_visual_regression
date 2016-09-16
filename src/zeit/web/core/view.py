@@ -635,14 +635,14 @@ class Base(object):
             ('cp27', ';'.join(self.webtrekk_assets))  # Asset
         ])
 
-        if zeit.web.core.template.toggles('acquisition_status_webtrekk'):
-            acquisition = getattr(self.context, 'acquisition', None)
-            if acquisition is None:
+        if zeit.web.core.template.toggles('access_status_webtrekk'):
+            access = getattr(self.context, 'access', None)
+            if access is None:
                 if self.product_id == u'ZEDE':
-                    acquisition = 'free'
+                    access = 'free'
                 else:
-                    acquisition = 'registration'
-            custom_parameter.update({'cp28': acquisition})
+                    access = 'registration'
+            custom_parameter.update({'cp28': access})
 
         # @see https://sites.google.com/a/apps.zeit.de/
         # verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs
@@ -662,6 +662,19 @@ class Base(object):
 
     def append_to_webtrekk_assets(self, value):
         self._webtrekk_assets.append(value)
+
+    @zeit.web.reify
+    def share_buttons(self):
+        if getattr(self.context, 'bigshare_buttons', None):
+            return 'big'
+
+    @zeit.web.reify
+    def publisher_name(self):
+        return 'ZEIT ONLINE'
+
+    @zeit.web.reify
+    def twitter_username(self):
+        return 'zeitonline'
 
 
 class CeleraOneMixin(object):
@@ -1058,6 +1071,17 @@ class Content(CeleraOneMixin, CommentMixin, Base):
         return predecessor + successor
 
     @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(Content, self).webtrekk
+        style = 'share_buttons_{}'.format(self.share_buttons or 'small')
+
+        webtrekk['customParameter'].update({
+            'cp31': style  # share button style
+        })
+
+        return webtrekk
+
+    @zeit.web.reify
     def nextread(self):
         return zeit.web.core.interfaces.INextread(self.context, [])
 
@@ -1209,9 +1233,8 @@ class FrameBuilder(CeleraOneMixin):
 
     @zeit.web.reify
     def adcontroller_values(self):
-
         if not self.banner_channel:
-            return
+            return []
 
         adc_levels = self.banner_channel.split('/')
 
