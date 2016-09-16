@@ -26,6 +26,7 @@
     <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Wenke Husmann</attribute>
     <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">free</attribute>
     <attribute name="channels" ns="http://namespaces.zeit.de/CMS/document">Digital Mobil</attribute>
     <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
     <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
