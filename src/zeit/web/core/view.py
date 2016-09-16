@@ -663,6 +663,19 @@ class Base(object):
     def append_to_webtrekk_assets(self, value):
         self._webtrekk_assets.append(value)
 
+    @zeit.web.reify
+    def share_buttons(self):
+        if getattr(self.context, 'bigshare_buttons', None):
+            return 'big'
+
+    @zeit.web.reify
+    def publisher_name(self):
+        return 'ZEIT ONLINE'
+
+    @zeit.web.reify
+    def twitter_username(self):
+        return 'zeitonline'
+
 
 class CeleraOneMixin(object):
 
@@ -1056,6 +1069,17 @@ class Content(CeleraOneMixin, CommentMixin, Base):
             return zeit.web.dont_cache(predecessor + successor)
 
         return predecessor + successor
+
+    @zeit.web.reify
+    def webtrekk(self):
+        webtrekk = super(Content, self).webtrekk
+        style = 'share_buttons_{}'.format(self.share_buttons or 'small')
+
+        webtrekk['customParameter'].update({
+            'cp31': style  # share button style
+        })
+
+        return webtrekk
 
     @zeit.web.reify
     def nextread(self):

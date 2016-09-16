@@ -1,5 +1,3 @@
-import re
-
 import pyramid.view
 
 import zeit.campus.interfaces
@@ -26,6 +24,14 @@ class Base(zeit.web.core.view.Base):
     @zeit.web.reify
     def adwords(self):
         return ['zeitonline', 'zeitcampus']
+
+    @zeit.web.reify
+    def publisher_name(self):
+        return 'ZEIT Campus'
+
+    @zeit.web.reify
+    def twitter_username(self):
+        return 'zeitcampus'
 
 
 @pyramid.view.view_config(
