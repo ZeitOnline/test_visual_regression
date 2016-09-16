@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import base64
 import datetime
+import urlparse
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -1889,3 +1890,81 @@ def test_volume_teaser_display_correct_image_on_desktop(
     img_src = selenium_driver.find_element_by_css_selector(
         '[data-src*="test-printcover"]').get_attribute('src')
     assert u'2016-09/test-printcover/original__220x158__desktop' in img_src
+
+
+def test_share_buttons_are_present(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    sharing_menu = browser.cssselect('.sharing-menu')[0]
+    links = sharing_menu.cssselect('.sharing-menu__link')
+    labels = sharing_menu.cssselect('.sharing-menu__text')
+
+    assert 'sharing-menu--big' not in sharing_menu.attrib['class']
+
+    #  facebook
+    parts = urlparse.urlparse(links[0].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    url = query.get('u').pop(0)
+    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share_small.link' in url
+    assert 'utm_medium=sm' in url
+    assert 'utm_source=facebook_zonaudev_ext' in url
+    assert 'utm_campaign=ref' in url
+    assert 'utm_content=zeitde_share_small_link_x' in url
+
+    #  twitter
+    parts = urlparse.urlparse(links[1].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert query.get('text').pop(0) == (
+        'Williams wackelt weiter, steht aber im Viertelfinale')
+    assert query.get('via').pop(0) == 'zeitonline'
+    assert 'share_small' in query.get('url').pop(0)
+
+    #  whatsapp
+    parts = urlparse.urlparse(links[2].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
+            'Artikel auf ZEIT ONLINE: ') in query.get('text').pop(0)
+
+    #  mail
+    parts = urlparse.urlparse(links[3].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
+            'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
+    assert 'Artikel auf ZEIT ONLINE lesen:' in query.get('body').pop(0)
+
+    assert labels[0].text == 'Facebook'
+    assert labels[1].text == 'Twitter'
+    assert labels[2].text == 'WhatsApp'
+    assert labels[3].text == 'Mail'
+
+
+def test_share_buttons_are_big(testbrowser):
+    browser = testbrowser('/zeit-online/article/tags')
+    sharing_menu = browser.cssselect('.sharing-menu2')[0]
+    links = sharing_menu.cssselect('.sharing-menu2__link')
+    labels = sharing_menu.cssselect('.sharing-menu2__text')
+
+    assert 'sharing-menu2--big' in sharing_menu.attrib['class']
+    assert len(links) == 4
+
+    for link in links:
+        assert '.ref.zeitde.share_big.' in link.attrib['href']
+
+    assert labels[0].text == 'Auf Facebook teilen'
+    assert labels[1].text == 'Twittern'
+    assert labels[2].text == 'WhatsApp'
+    assert labels[3].text == 'Mailen'
+
+
+def test_article_view_has_share_buttons_set_correctly(
+        application, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert not view.share_buttons
+    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_small'
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/tags')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.share_buttons == 'big'
+    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
