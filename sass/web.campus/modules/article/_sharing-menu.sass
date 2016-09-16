@@ -1,17 +1,17 @@
-$interaction-color: $color-text--light
-$interaction-hover-color: $black
-
-@import "web.core/modules/article/article-interactions"
-
-.article-interactions
-	display: flex
-	line-height: remify(40px)
-
 .sharing-menu
+	+clearfix
+	line-height: remify(40px)
+	margin: remify(20px 0 32px)
+
+	&__items
+		float: left
+		list-style-type: none
+		margin: 0
+		padding: 0
 
 	&__item
 		float: left
-		margin-right: remify(1px)
+		margin-right: 1px
 
 	&__link
 		+clearfix
@@ -43,19 +43,13 @@ $interaction-hover-color: $black
 		margin: remify(9px 12px)
 		width: remify(22px)
 
-.print-menu
-	margin-left: remify(6px)
+	+respond-min($break-tablet-min)
+		float: left
 
-	&__link
-		&:not(:last-child):after
-			color: $color-separator
-			content: " / "
-			margin: 0 .25em
-
-+respond-min($break-tablet-min)
-	.sharing-menu
 		&__item
 			margin-right: remify(10px)
+			&--whatsapp
+				display: none
 
 		&__icon
 			height: remify(26px)

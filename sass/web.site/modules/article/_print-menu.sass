@@ -1,0 +1,19 @@
+.print-menu
+	display: none
+	left: remify(55px)
+	position: absolute
+	top: remify(20px)
+
+	&__link
+		color: $zon-grey
+		font-size: em(14px)
+		letter-spacing: $letter-spacing-s
+		+on-interaction
+			color: $zon-dark-grey
+		&:before
+			color: $color-separator
+			content: " / "
+			margin: 0 .25em
+
+	+respond-min($break-desktop-min)
+		display: block

@@ -43,13 +43,11 @@
 
     {% block article_footer %}
     <div class="article-footer article__item" data-ct-area="articlebottom">
-
-        {% block article_interactions %}
-        <div class="article-interactions">
+        {% block article_sharing %}
             {% include "zeit.web.site:templates/inc/article/sharing-menu.html" %}
-            {% block print %}
-            {% endblock %}
-        </div>
+        {% endblock %}
+
+        {% block print %}
         {% endblock %}
 
         {% block article_tags %}
