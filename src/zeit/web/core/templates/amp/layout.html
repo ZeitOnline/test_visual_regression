@@ -137,21 +137,22 @@
                     </a>
                 </div>
 
+                {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share_small.link.x&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_small_link_x' -%}
                 <footer class="article__footer article__item">
                     <nav class="article-sharing">
                         <h4 class="article-sharing__title">Teilen</h4>
                         <ul class="article-sharing__list">
                             <li class="article-sharing__item">
-                                <a class="article-sharing__link article-sharing__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ view.content_url + '?wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=facebook_zonaudev_ext&utm_campaign=facebook_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}">Facebook</a>
+                                <a class="article-sharing__link article-sharing__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ content_url.format('facebook') | urlencode }}">Facebook</a>
                             </li>
                             <li class="article-sharing__item">
-                                <a class="article-sharing__link article-sharing__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via=zeitonline&amp;url={{ view.content_url + '?wt_zmc=sm.ext.zonaudev.twitter.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=twitter_zonaudev_ext&utm_campaign=twitter_referrer&utm_content=zeitde_dskshare_link_x' | urlencode }}">Twitter</a>
+                                <a class="article-sharing__link article-sharing__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via={{ view.twitter_username }}&amp;url={{ content_url.format('twitter') | urlencode }}">Twitter</a>
                             </li>
                             <li class="article-sharing__item article-sharing__item--whatsapp">
-                                <a class="article-sharing__link article-sharing__link--whatsapp" href="whatsapp://send?text={{ (view.title + ' - Artikel auf ZEIT ONLINE: ' + view.content_url) | urlencode }}">WhatsApp</a>
+                                <a class="article-sharing__link article-sharing__link--whatsapp" href="whatsapp://send?text={{ '%s - Artikel auf %s: %s' | format(view.title, view.publisher_name, content_url.format('whatsapp')) | urlencode }}">WhatsApp</a>
                             </li>
                             <li class="article-sharing__item">
-                                <a class="article-sharing__link article-sharing__link--mail" href="mailto:?subject={{ (view.title + ' - Artikel auf ZEIT ONLINE') | urlencode }}&amp;body={{ ('Artikel auf ZEIT ONLINE lesen: ' + view.content_url + '?wt_zmc=sm.ext.zonaudev.mail.ref.zeitde.dskshare.link.x&utm_medium=sm&utm_source=mail_zonaudev_ext&utm_campaign=mail_referrer&utm_content=zeitde_dskshare_link_x') | urlencode }}">Mail</a>
+                                <a class="article-sharing__link article-sharing__link--mail" href="mailto:?subject={{ '%s - Artikel auf %s' | format(view.title, view.publisher_name) | urlencode }}&amp;body={{ 'Artikel auf %s lesen: %s' | format(view.publisher_name, content_url.format('mail')) | urlencode }}">Mail</a>
                             </li>
                         </ul>
                     </nav>
