@@ -12,7 +12,8 @@
 		"subtitle": "In Baden-Württemberg ist in einem Flüchtlingsheim ein Feuer ausgebrochen. Mehrere Bewohner sprangen aus den Fenstern. Die Brandursache ist unklar.",
 		"channels": ["Gesellschaft Zeitgeschehen"],
 		"fetchedAt": 1441595521529,
-		"timestamp": 1441595515000
+		"timestamp": 1441595515000,
+		"access": "free"
 	},
 	{
 		"location": "/politik/ausland/2015-09/tuerkei-pkk-bombenanschlag",
@@ -27,7 +28,8 @@
 		"subtitle": "Kurdische Rebellen bekennen sich zu der Attacke. Ihren Angaben zufolge war es der schwerste Anschlag seit dem Scheitern des Waffenstillstands.",
 		"channels": ["Politik Ausland"],
 		"fetchedAt": 1441581361709,
-		"timestamp": 1441581157000
+		"timestamp": 1441581157000,
+		"access": "free"
 	},
 	{
 		"location": "/gesellschaft/2015-09/fluechtlinge-helfer-gemeinnuetzigkeit-interview",
@@ -41,6 +43,7 @@
 		"subtitle": "Die Hilfsbewegung für die Flüchtlinge organisiert und vernetzt sich selbst, weil der Staat versagt. Der Forscher Christian Schuldt sieht darin einen grundlegenden Trend.",
 		"channels": ["Gesellschaft"],
 		"fetchedAt": 1441616161326,
-		"timestamp": 1441615939000
+		"timestamp": 1441615939000,
+		"access": "free"
 	}
 ]
