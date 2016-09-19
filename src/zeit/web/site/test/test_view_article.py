@@ -1664,7 +1664,7 @@ def test_infographics_should_use_customized_css_classes(testbrowser):
 
 def test_infographics_should_render_border_styles_conditionally(
         tplbrowser, dummy_request):
-    template = 'zeit.web.core:templates/inc/blocks/image_infographic.html'
+    template = 'zeit.web.core:templates/inc/blocks/infographic.html'
     image = zeit.web.core.image.Image(mock.Mock())
     image.ratio = 1
     image.group = mock.Mock()
