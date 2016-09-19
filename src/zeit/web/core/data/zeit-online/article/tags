@@ -24,6 +24,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">28409905</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Julia Spinola</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Kultur Musik</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>

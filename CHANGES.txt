@@ -14,6 +14,8 @@ Change log for zeit.web
 
 - ZON-3286: Support zplus content in Buzzboard/box
 
+- ZON-2852: Enable big share buttons for ZEIT ONLINE
+
 - MAINT: Remove campus_launch feature toggle
 
 
