@@ -1,7 +1,7 @@
 Change log for zeit.web
 =======================
 
-3.7 (unreleased)
+3.7 (2016-09-19)
 ----------------
 
 - BUG-535: Show "load more" button for ZEIT-SHOP
