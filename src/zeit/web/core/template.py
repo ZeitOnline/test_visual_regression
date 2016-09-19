@@ -135,8 +135,7 @@ def zett_content(content):
 
 @zeit.web.register_test
 def zco_content(content):
-    toggle = zeit.web.core.application.FEATURE_TOGGLES.find('campus_launch')
-    return toggle and zeit.campus.interfaces.IZCOContent.providedBy(content)
+    return zeit.campus.interfaces.IZCOContent.providedBy(content)
 
 
 @zeit.web.register_test

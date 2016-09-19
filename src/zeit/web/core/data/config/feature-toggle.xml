@@ -6,9 +6,7 @@
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
   <third_party_modules>false</third_party_modules>
-  <campus_launch>true</campus_launch>
   <tracking>false</tracking>
-  <campus_new_label>true</campus_new_label>
   <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
   <access_status_ivw>true</access_status_ivw>
   <access_status_webtrekk>true</access_status_webtrekk>

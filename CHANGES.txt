@@ -16,6 +16,8 @@ Change log for zeit.web
 
 - ZON-2852: Enable big share buttons for ZEIT ONLINE
 
+- MAINT: Remove campus_launch feature toggle
+
 
 3.6 (2016-09-15)
 ----------------
