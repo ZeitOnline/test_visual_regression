@@ -48,8 +48,8 @@
     <include package="zeit.push" />
 
     <!-- XXX Temporary workaround: We load parts of retresco,
-         but use the ITagger from intrafind. -->
-    <grok:grok package="zeit.retresco" />
+         but use ITagger and IWhitelist from intrafind. -->
+    <grok:grok package="zeit.retresco.convert" />
     <include package="zeit.intrafind" />
 
     <!-- XXX Something about including the whole zeit.solr package is slow,
