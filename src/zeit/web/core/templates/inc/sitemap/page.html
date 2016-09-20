@@ -8,6 +8,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml">
 {%- for module in area.values() -%}
     {%- set teaser = module | first_child -%}
+    {%- set layout = module | get_layout -%}
     {%- require image = get_image(module, variant_id='wide', fallback=False) -%}
         {%- set source = request.image_host + image.path + '__1300x731' -%}
         {%- set copyright = image.copyrights | map('first') | join(', ') -%}
