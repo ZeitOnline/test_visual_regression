@@ -466,31 +466,31 @@
         available="zeit.magazin.interfaces.IZMOContent"/>
 
     <layout
-        id="gsitemap"
+        id="sitemap-default"
         title="Sitemap Teaser"
         areas="ranking"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
-        id="gsitemap-newssite"
+        id="sitemap-news"
         title="Newssite Sitemap Teaser"
         areas="ranking"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
-        id="gsitemap-video"
+        id="sitemap-video"
         title="Video Sitemap Teaser"
         areas="ranking"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
-        id="gsitemap-themen"
+        id="sitemap-topics"
         title="Themen Sitemap Teaser"
         areas="ranking"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
     <layout
-        id="gsitemap-appcon"
+        id="sitemap-apps"
         title="Appcon Sitemap Teaser"
         areas="ranking"
         available="zeit.content.cp.interfaces.ISitemap"/>

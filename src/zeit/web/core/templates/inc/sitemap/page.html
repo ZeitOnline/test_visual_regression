@@ -12,6 +12,6 @@
         {%- set source = request.image_host + image.path + '__1300x731' -%}
         {%- set copyright = image.copyrights | map('first') | join(', ') -%}
     {%- endrequire -%}
-    {%- include "zeit.web.core:templates/inc/teaser/{0}.html".format(layout) ignore missing -%}
+    {%- include "zeit.web.core:templates/inc/sitemap/teaser/{0}.html".format(layout.replace('sitemap-', '')) ignore missing -%}
 {%- endfor -%}
 </urlset>

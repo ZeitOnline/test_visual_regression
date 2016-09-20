@@ -5,7 +5,7 @@
 {%- for region in view.regions -%}
     {%- for area in region.values() if 'ranking' in area.kind -%}
         {%- set layout = area.values() | first_child | get_layout -%}
-        {%- if 'gsitemap-newssite' in layout -%}
+        {%- if layout == 'sitemap-news' -%}
             {# newssitemap has no overview #}
             {%- set page_view = True -%}
         {%- endif -%}

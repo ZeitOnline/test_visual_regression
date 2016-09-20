@@ -57,16 +57,16 @@
     <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa257" kind="solo" title="Suchergebnisse">
       <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc7" kind="ranking" title="Ergebnisse" count="10" automatic="True" automatic_type="query">
         <raw_query>(type:(article OR blogpost) OR cp_type_s:arena) AND -product_id:(UGC OR Administratives OR TGS) AND -ressort:Spiele</raw_query>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-7677b90b-6cf3-49fb-8343-9416b1a8c500"/>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-cb1a9735-66a3-4012-afef-9ba13f544e6e"/>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-913cb698-41ee-479b-997c-86232fd3c3d3"/>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-6c213b7e-8977-4cec-9ec4-18ac3a158fb0"/>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-99a43f3d-2c44-4441-be2e-6cdb5fd7c35f"/>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-4cb09a25-12f5-4d90-bc9b-3b116277660d"/>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-ba5ca08c-6f71-4c8d-bb73-6b49a5fcae39"/>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e"/>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-b23c344c-0df1-4fc8-8615-635125dc6b76"/>
-        <container cp:type="auto-teaser" module="gsitemap-newssite" visible="True" cp:__name__="id-18d1f7df-e85c-4883-a639-5c5b83289e0a"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-7677b90b-6cf3-49fb-8343-9416b1a8c500"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-cb1a9735-66a3-4012-afef-9ba13f544e6e"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-913cb698-41ee-479b-997c-86232fd3c3d3"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-6c213b7e-8977-4cec-9ec4-18ac3a158fb0"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-99a43f3d-2c44-4441-be2e-6cdb5fd7c35f"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-4cb09a25-12f5-4d90-bc9b-3b116277660d"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-ba5ca08c-6f71-4c8d-bb73-6b49a5fcae39"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-b23c344c-0df1-4fc8-8615-635125dc6b76"/>
+        <container cp:type="auto-teaser" module="sitemap-news" visible="True" cp:__name__="id-18d1f7df-e85c-4883-a639-5c5b83289e0a"/>
         <raw_order>last-semantic-change desc</raw_order>
       </region>
     </cluster>
