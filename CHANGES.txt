@@ -4,6 +4,8 @@ Change log for zeit.web
 3.8 (unreleased)
 ----------------
 
+- BUG-526: Fix wrong webtrekk url param in AMP
+
 - FIX: Fetch video poster for image copyright thumbnails
 
 

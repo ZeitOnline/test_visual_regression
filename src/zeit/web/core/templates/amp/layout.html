@@ -166,7 +166,7 @@
                                 <li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link"
                                     data-vars-number="{{ loop.index }}"
                                     data-vars-link-text="{{ tag.label }}"
-                                    data-vars-url="{{ request.route_url('home') }}thema/{{ tag.url_value }}"
+                                    data-vars-url="{{ request.route_url('home')  | substring_from('://') }}thema/{{ tag.url_value }}"
                                 >{{ tag.label }}</a>
                                 {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
                                 </li>
