@@ -4,7 +4,7 @@ Change log for zeit.web
 3.9 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- ZON-3236: Render sitemaps
 
 
 3.8 (2016-09-21)
