@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - ZON-3359: Add nofollow to merian link
 
+- ZON-3066: Tweak main font size for iPhone 6
+
 
 3.8 (2016-09-21)
 ----------------
