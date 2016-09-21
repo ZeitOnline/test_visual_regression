@@ -29,7 +29,7 @@
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">video</attribute>
         <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:2efecae1-48f0-409b-a1b3-b7daee8b835f}</attribute>
         <attribute name="video_still" ns="http://namespaces.zeit.de/CMS/document">http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/938/18140073001_3090367483001_held.jpg?pubId=18140073001</attribute>
-        <attribute name="video_still_copyright" ns="http://namespaces.zeit.de/CMS/document">© Foto: ZEIT Online</attribute>
+        <attribute name="video_still_copyright" ns="http://namespaces.zeit.de/CMS/document">ZEIT Online</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
         <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">
             &lt;pickle&gt;

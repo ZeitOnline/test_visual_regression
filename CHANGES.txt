@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - ZON-3066: Tweak main font size for iPhone 6
 
+- FIX: Include video still copyright text via template
+
 
 3.8 (2016-09-21)
 ----------------
