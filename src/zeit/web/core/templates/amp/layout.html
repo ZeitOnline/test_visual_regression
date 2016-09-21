@@ -137,13 +137,14 @@
                     </a>
                 </div>
 
-                {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share_small.link.x&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_small_link_x' -%}
+                {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_small_link_x' -%}
+                {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share_small.link.x' -%}
                 <footer class="article__footer article__item">
                     <nav class="article-sharing">
                         <h4 class="article-sharing__title">Teilen</h4>
                         <ul class="article-sharing__list">
                             <li class="article-sharing__item">
-                                <a class="article-sharing__link article-sharing__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ content_url.format('facebook') | urlencode }}">Facebook</a>
+                                <a class="article-sharing__link article-sharing__link--facebook" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}">Facebook</a>
                             </li>
                             <li class="article-sharing__item">
                                 <a class="article-sharing__link article-sharing__link--twitter" href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via={{ view.twitter_username }}&amp;url={{ content_url.format('twitter') | urlencode }}">Twitter</a>
