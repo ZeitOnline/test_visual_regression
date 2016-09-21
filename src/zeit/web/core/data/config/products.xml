@@ -44,4 +44,5 @@
 	<product id="Unknown">Unbekannt</product>
 	<product id="BE" href="http://www.boldeconomy.com">Bold Economy</product>
 	<product id="NORR" href="http://www.norrmagazin.de">NORR</product>
+	<product id="merian" href="http://shop.jalag.de/merian/abo/" target="_blank" label="Erschienen in MERIAN" title="Merian" show="link">Merian</product>
 </products>
