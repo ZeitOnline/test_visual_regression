@@ -17,9 +17,9 @@
     <figcaption class="video-figure__caption">
         <span class="video-figure__pagetitle">{{ [block.supertitle, block.title] | join_if_exists(' - ') }}</span>
         <span class="video-figure__description">{{ block.description }}</span>
-        {% if block.video_still_copyright and block.video_still_copyright | trim | length > 7 %}
+        {% if block.video_still_copyright and block.video_still_copyright | trim %}
             <span class="video-figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
-                <span itemprop="name">{{ block.video_still_copyright | trim | replace('© Foto: ', '© Foto: ') }}</span>
+                <span itemprop="name">© Foto: {{ block.video_still_copyright | trim }}</span>
             </span>
         {% endif %}
     </figcaption>
