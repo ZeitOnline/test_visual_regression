@@ -6,6 +6,8 @@ Change log for zeit.web
 
 - ZON-3236: Render sitemaps
 
+- ZON-3359: Add nofollow to merian link
+
 
 3.8 (2016-09-21)
 ----------------
