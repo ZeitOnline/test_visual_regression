@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import pyramid.view
-import lxml.etree
 import zope.component
 
 import zeit.cms.interfaces
@@ -284,3 +283,13 @@ def json_update_time(request):
         dlps = dlp = None
     request.response.cache_expires(5)
     return {'last_published': dlp, 'last_published_semantic': dlps}
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ISitemap,
+    renderer='templates/sitemap.html')
+class Sitemap(Centerpage):
+
+    def __init__(self, *args, **kw):
+        super(Sitemap, self).__init__(*args, **kw)
+        self.request.response.content_type = 'application/xml'

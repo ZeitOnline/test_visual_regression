@@ -397,8 +397,8 @@ class Base(object):
             elif not keyword.url_value:
                 uuid = keyword.uniqueId.replace('tag://', '')
                 keyword = zope.component.getUtility(
-                    zeit.cms.tagging.interfaces.IWhitelist).get(uuid, None)
-                if not keyword:
+                    zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
+                if keyword is None:
                     continue
             tags.append(keyword)
         return tags
