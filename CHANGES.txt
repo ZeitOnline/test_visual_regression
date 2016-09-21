@@ -1,10 +1,22 @@
 Change log for zeit.web
 =======================
 
-3.8 (unreleased)
+3.9 (unreleased)
 ----------------
 
 - Nothing changed yet.
+
+
+3.8 (2016-09-21)
+----------------
+
+- BUG-526: Fix wrong webtrekk url param in AMP
+
+- FIX: Fetch video poster for image copyright thumbnails
+
+- FIX: Fix template variable replacement for Campus and ZMO
+
+- MAINT: Add google analytics campaign parameter for facebook only
 
 
 3.7 (2016-09-19)
