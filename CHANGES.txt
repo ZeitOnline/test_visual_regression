@@ -10,6 +10,8 @@ Change log for zeit.web
 
 - FIX: Fix template variable replacement for Campus and ZMO
 
+- MAINT: Add google analytics campaign parameter for facebook only
+
 
 3.7 (2016-09-19)
 ----------------
