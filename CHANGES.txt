@@ -8,6 +8,8 @@ Change log for zeit.web
 
 - FIX: Fetch video poster for image copyright thumbnails
 
+- FIX: Fix template variable replacement for Campus and ZMO
+
 
 3.7 (2016-09-19)
 ----------------
