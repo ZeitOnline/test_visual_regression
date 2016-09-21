@@ -1,0 +1,74 @@
+
+#overlay-wrapper,
+.overlay-tracker
+	display: none
+
+.overlay
+	background: $color-overlay
+	bottom: 0
+	display: none
+	height: 100%
+	left: 0
+	opacity: 0.7
+	overflow: hidden
+	position: fixed
+	right: 0
+	top: 0
+	width: 100%
+	z-index: 99998
+
+.overlay__dialog
+	background-color: $white
+	border-radius: remify(3px)
+	box-shadow: 0 2px 10px 0 rgba(0,0,0,.2)
+	display: none
+	left: 5%
+	padding: remify(30px)
+	position: fixed
+	right: 5%
+	top: 5%
+	z-index: 99999
+
+	+respond-min($break-tablet-min)
+		left: 30%
+		right: 30%
+		top: 30%
+
+.overlay__content
+	text-align: center
+
+.overlay__headline
+	color: $color-text
+	font-size: remify(20px)
+	font-weight: bold
+	line-height: 1.2
+	margin: remify(0 0 6px)
+
+.overlay__text
+	color: $color-text--light
+	font-size: remify(16px)
+	margin: remify(0 0 20px)
+
+.overlay__button
+	min-width: remify(140px)
+
+.overlay__button-icon
+	height: remify(15px)
+	position: relative
+	top: remify(2px)
+	width: remify(15px)
+
+.overlay__text-button
+	background: transparent
+	border: 0
+	color: $silver
+	cursor: pointer
+	display: block
+	font-size: remify(14px)
+	margin-top: remify(10px)
+	outline: 0
+	text-align: center
+	width: 100%
+
+	+on-interaction
+		color: $dusty-gray

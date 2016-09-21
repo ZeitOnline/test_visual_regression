@@ -16,7 +16,7 @@
       <display_name py:pytype="str">Anne Mustermann</display_name>
       <location>Berlin</location>
     </author>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>

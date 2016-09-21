@@ -1,41 +1,42 @@
 .button
-  +inline-block
-  font-family: $font-tabletgothic
-  font-size: $font-s
-  cursor: pointer
-  text-transform: uppercase
-  padding: $fine $small $thin*0.8 $small
-  color: $color-button
-  background-color: $color-button-bg
-  letter-spacing: 1px
-  border: none
-  +on-interaction
-    color: $color-button--hover
-    background-color: $color-button-bg--hover
-  &[disabled]
-    color: $color-button--disabled
-    background-color: $color-button-bg--disabled
-
-// avoid inheriting any :visited link colors for button anchors
-a.button
-  +link
-    color: $color-button
+	+inline-block
+	background-color: $color-button-bg
+	border: none
+	color: $color-button
+	cursor: pointer
+	font-family: $font-tabletgothic
+	font-size: em(14px)
+	letter-spacing: 1px
+	padding: remify(9px 16px 8px)
+	text-transform: uppercase
+	+on-interaction
+		background-color: $color-button-bg--hover
+		color: $color-button--hover
+	&[disabled]
+		background-color: $color-button-bg--disabled
+		color: $color-button--disabled
 
 input,
 textarea,
 select
-  font-size: $font-ml
-  // line-height: 1.2222
-  color: $color-input
-  background-color: $color-input-bg
-  border: none
-  padding: $small
+	background-color: $color-input-bg
+	border: none
+	color: $color-input
+	font-size: remify(15px)
+	padding: remify(16px)
+	&.error
+		background-color: $color-input-bg--error
+		color: $color-input--error
+	&:focus
+		background-color: $color-input-bg--focus
+		color: $color-input--focus
 
 textarea
-  display: block
-  width: 100%
-  min-height: em(140px)
+	display: block
+	min-height: em(140px)
+	resize: vertical
+	width: 100%
 
 +input-placeholder
-  color: $charcoal
-  opacity: 1
+	color: $charcoal
+	opacity: 1

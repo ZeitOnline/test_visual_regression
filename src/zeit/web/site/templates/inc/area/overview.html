@@ -1,7 +1,5 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% block before_module_list %}
-    {% if area.pagination %}
-        {% include "zeit.web.site:templates/inc/pagination.tpl" %}
-    {% endif %}
+    {% include "zeit.web.site:templates/inc/pagination.tpl" %}
 {% endblock %}

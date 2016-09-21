@@ -43,6 +43,10 @@
             {% endblock article_header %}
             <div class="article__body-wrap">
                 <div class="article__body">
+                    {% block comments_balloon %}
+                        {%- include "zeit.web.magazin:templates/inc/article/comment-balloon.html" -%}
+                    {% endblock comments_balloon %}
+
                     {% block article_pages %}
                         <div class="article__page">
                             {{ render_page(view.current_page) }}
@@ -50,23 +54,20 @@
                     {% endblock article_pages %}
 
                     {% block article_pagination %}
-                        {% if view.pagination %}
-                            {{ article_macros.print_pagination( view.pagination ) }}
-                        {% endif %}
+                        {% include "zeit.web.magazin:templates/inc/article/pagination.html" %}
                     {% endblock article_pagination %}
                 </div>
 
                 {% block article_footer %}
                 <div class="article__footer article__item" data-ct-area="articlebottom">
+                    {% block article_sharing %}
+                        {% include "zeit.web.magazin:templates/inc/article/sharing-menu.html" %}
+                    {% endblock %}
                     {% block article_tags %}
                         {% include "zeit.web.core:templates/inc/article/tags.html" %}
                     {% endblock %}
                 </div>
                 {% endblock %}
-
-                {% block article_comments %}
-                    {%- include "zeit.web.magazin:templates/inc/article/comments.html" -%}
-                {% endblock article_comments %}
 
                 {% if view.nextread %}
                     {%- include "zeit.web.magazin:templates/inc/article/nextread.html" -%}
@@ -81,5 +82,10 @@
             {{ article_macros.add_publish_date(view.date_last_published_semantic, view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo) }}
         {% endblock article_publishdate %}
     {% endif %}
+
+    {% block comments %}
+        {% include "zeit.web.core:templates/inc/article/comments.html" %}
+    {% endblock comments %}
+
 
 {% endblock content %}

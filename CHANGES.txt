@@ -1,7 +1,97 @@
 Change log for zeit.web
 =======================
 
-3.2 (unreleased)
+3.9 (unreleased)
+----------------
+
+- Nothing changed yet.
+
+
+3.8 (2016-09-21)
+----------------
+
+- BUG-526: Fix wrong webtrekk url param in AMP
+
+- FIX: Fetch video poster for image copyright thumbnails
+
+- FIX: Fix template variable replacement for Campus and ZMO
+
+- MAINT: Add google analytics campaign parameter for facebook only
+
+
+3.7 (2016-09-19)
+----------------
+
+- BUG-535: Show "load more" button for ZEIT-SHOP
+
+- ZON-3240: Integrate zplus article badge
+
+- ZON-2848: Add augmentable share buttons for ZMO
+
+- ZON-3259: Show volume teaser in articles
+
+- ZON-3286: Support zplus content in Buzzboard/box
+
+- ZON-2852: Enable big share buttons for ZEIT ONLINE
+
+- MAINT: Remove campus_launch feature toggle
+
+
+3.6 (2016-09-15)
+----------------
+
+- ZON-3263: Show duplicate images on Buzzboard with opacity
+
+- Rename ``acquisition`` to ``access``.
+
+- FIX: Don't try to create vivi-thumbnails for gallery entries (really now)
+
+
+3.5 (2016-09-13)
+----------------
+
+- BUG-528: Remove teaser image title attribute
+
+- BUG-529: Fix topic teaser mobile image resource
+
+- ZON-2548: Assimilate ZEITmagazin comments
+
+- BUG-531: Send CORS header on xml.zeit.de, render meta files
+
+- ZON-3181: Make query for author pages configurable
+
+- FIX: Update Partnerbox "Reisen" to new image API
+
+- FIX: Handle non-ascii image uniqueIds
+
+
+3.4.1 (2016-09-12)
+------------------
+
+- HOTFIX: Handle non-ascii image uniqueIds
+
+
+3.4 (2016-09-07)
+----------------
+
+- ZON-3120: Add LazyProxy support for TMS auto areas
+
+- FIX: Don't try to create vivi-thumbnails for gallery entries
+
+
+3.3 (2016-09-05)
+----------------
+
+- ZON-2949: Update clicktracking for pagination
+
+- ZON-2410: Show byline on video-related items
+
+- ZON-2375: Show still image copyright on video-related items
+
+- FIX: Clearly specify where to use a fallback image
+
+
+3.2 (2016-09-02)
 ----------------
 
 - HOTFIX: Avoid XMLReference updating triggered by synthesized gallery blocks

@@ -4,7 +4,6 @@
 	font-style: italic
 	font-weight: normal // needed for e.g. liveblog header image
 	line-height: 1.5
-	margin: remify(8px auto 0)
 	color: $zon-dark-grey
 	+respond-min($break-desktop-min)
 		font-size: remify(16px)
@@ -44,6 +43,18 @@
 				float: left
 				margin: remify(14px 25px 14px 0)
 				width: remify(205px)
+
+			&--has-badge
+				.article-heading,
+				.article__zplus
+					max-width: remify(740px)
+					margin-left: auto
+
+				.article__zplus
+					display: flex
+
+				.article__intro
+					flex-grow: 1
 
 		+respond-min($break-desktop-min)
 			&--apart
@@ -90,9 +101,109 @@
 		font-size: em(20px)
 
 .byline
+	&--on-videopage
+		color: $zon-light-grey
+		a
+			color: $zon-lighter-grey
+			+on-interaction
+				color: $zon-light-grey
 	margin-bottom: remify(30px)
 	span[itemprop="name"]
 		font-weight: bold
+
+.zplus
+	padding: remify(0 0 10px 0)
+	flex-grow: 1
+
+	&__banner
+		background-color: $zon-lighter-grey
+		height: remify(40px)
+		position: relative
+	&__badge
+		display: table-cell
+	&__marker
+		background-color: $zon-red
+		display: table-cell
+		vertical-align: middle
+		width: remify(40px)
+		height: remify(40px)
+	&__marker-icon
+		color: #fff
+		margin: auto
+		display: block
+	&__text
+		display: table-cell
+		padding-left: remify(10px)
+		vertical-align: middle
+		line-height: remify(40px)
+		font-size: em(12px)
+		color: $grey
+		text-transform: uppercase
+		letter-spacing: $zon-letter-spacing-l
+	&__link
+		+animated-interaction()
+		color: $grey
+		border-bottom: 1px solid $grey
+	&__media
+		width: remify(82px)
+	&__cover
+		display: none
+
+	// hide cover on very small displays
+	+respond-min(em(350px))
+		&__cover
+			display: block
+			position: absolute
+			right: remify(14px)
+			top: remify(-10px)
+
+
+	+respond-min($break-tablet-min)
+		padding: 0 0 0 $page-padding
+
+		&__banner
+			width: remify(180px)
+			margin-left: auto
+			margin-right: 0
+			min-height: remify(180px)
+		&__label
+			display: block
+		&__media
+			width: remify(125px)
+			margin: auto
+		&__text
+			line-height: remify(20px)
+			display: block
+			width: 100%
+			text-align: center
+			padding: remify(18px 0 21px 0)
+			font-size: em(13px)
+		&__cover
+			position: static
+			width: 100%
+		&__badge
+			position: absolute
+			top: remify(100px)
+			left: remify(20px)
+		&__marker
+			width: remify(48px)
+
+		// modifications for minimal version
+		&--coverless
+			align-self: flex-end
+
+			.zplus__banner
+				min-height: remify(80px)
+				margin-bottom: remify(40px)
+
+			.zplus__text
+				padding-top: remify(30px)
+
+			.zplus__badge
+				top: remify(-20px)
+				left: 50%
+				transform: translateX(-24px)
+
 
 .article-page
 	&:last-of-type
@@ -102,6 +213,7 @@
 
 	&__caption
 		@extend %figure-caption
+		margin: remify(8px auto 0)
 
 		&--marginalia
 			margin-top: remify(12px)

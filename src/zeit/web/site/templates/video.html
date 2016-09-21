@@ -35,9 +35,15 @@
             <div class="summary" itemprop="description">
                 {{ view.subtitle }}
             </div>
+            {%- set byline = view.context | get_byline('main') %}
+            {% if byline | length -%}
+                <div class="{{ 'byline' | with_mods('on-videopage') }}">
+                {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
+                </div>
+            {% endif -%}
             <div class="metadata" data-ct-area="articleheader">
                 {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
-                {% include "zeit.web.site:templates/inc/article/sharing-menu.tpl" %}
+                {% include "zeit.web.site:templates/inc/article/sharing-menu.html" %}
             </div>
             {% set tag_modifier = "video" %}
             {% include "zeit.web.core:templates/inc/article/tags.html" %}

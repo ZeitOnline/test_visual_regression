@@ -13,6 +13,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>

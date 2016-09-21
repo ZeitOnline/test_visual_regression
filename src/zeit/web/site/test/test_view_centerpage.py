@@ -173,11 +173,10 @@ def test_small_teaser_should_display_no_image_on_mobile(
 
 def test_fullwidth_teaser_should_be_rendered(testbrowser):
     browser = testbrowser('/zeit-online/fullwidth-teaser')
-    teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-fullwidth')
-    teaser_column = browser.cssselect(
-        '.cp-area.cp-area--solo .teaser-fullwidth-column')
+    teaser = browser.cssselect('.teaser-fullwidth')
+    teaser_column = browser.cssselect('.teaser-fullwidth-column')
 
-    assert len(teaser) == 4
+    assert len(teaser) == 5
     assert len(teaser_column) == 1
 
 
@@ -1002,7 +1001,6 @@ def test_gallery_teaser_has_correct_elements(testbrowser):
     area = browser.cssselect('.cp-area--gallery')[0]
 
     assert len(area.cssselect('.teaser-gallery')) == wanted
-    assert len(area.cssselect('.teaser-gallery__figurewrapper')) == wanted
     assert len(area.cssselect('.teaser-gallery__media')) == wanted
     assert len(area.cssselect('.teaser-gallery__icon')) == wanted
     assert len(area.cssselect('.teaser-gallery__counter')) == wanted
@@ -1525,6 +1523,9 @@ def test_partnerbox_reisen_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.partner__link'))
     assert len(box.cssselect('.partner__link-icon'))
     assert len(box.cssselect('.partner__dropdown-option')) == 18
+    media = box.cssselect('.partner__media-item')
+    assert len(media)
+    assert media[0].attrib['src'].endswith('/reisebox-image/wide__822x462')
 
 
 @pytest.mark.xfail(reason='Last test fails on jenkins for unknown reason')
@@ -2012,6 +2013,7 @@ def test_printkiosk_area_should_render_in_isolation_skippage(testbrowser):
 def test_printkiosk_loads_next_page_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('{}/angebote/printkiosk/vorschau'.format(testserver.url))
+    driver.set_window_size(1200, 860)
     teaserbutton = driver.find_element_by_css_selector(
         '.js-bar-teaser-paginate')
     teaserbutton.click()
@@ -2184,6 +2186,11 @@ def test_shop_and_printkiosk_must_not_contain_links_inside_links(testbrowser):
 
     browser = testbrowser('/angebote/printkiosk/vorschau')
     assert len(browser.cssselect('.teaser-printkiosk:first-child a')) == 1
+
+
+def test_shop_contains_load_more_button(testbrowser):
+    browser = testbrowser('/angebote/zeit-shop-buehne/vorschau')
+    assert browser.cssselect('.cp-area--shop .js-bar-teaser-paginate')
 
 
 def test_dynamic_cps_detect_videos_of_type_video(
@@ -2397,3 +2404,10 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 980:
         width = teaser.size.get('width')
         assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
+
+
+def test_imagecopyright_includes_videostage_poster_copyright(testbrowser):
+    browser = testbrowser('/zeit-online/video-stage')
+    figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
+    # robot video on stage has no copyright - on purpose.
+    assert len(figures) == 4

@@ -18,7 +18,7 @@
       <copyright>© Uwe Zucchi/dpa</copyright>
     </image>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">free</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Sabine Hockling</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>

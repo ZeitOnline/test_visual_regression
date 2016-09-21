@@ -111,13 +111,19 @@ def test_campus_teaser_lead_cinema_has_correct_structure(testbrowser):
 
 
 def test_campus_teaser_topic_has_correct_structure(testbrowser):
-    select = testbrowser('/campus/centerpage/teaser-topic').cssselect
-    assert len(select('.teaser-topic')) == 1
-    assert len(select('.teaser-topic-main')) == 1
-    assert len(select('.teaser-topic-item')) == 3
-    assert (
-        'cp-content/ig-1/cinema' in
-        select('.teaser-topic__media-item').pop().attrib['src'])
+    browser = testbrowser('/campus/centerpage/teaser-topic')
+    teaser = browser.cssselect('.teaser-topic')[0]
+    image = teaser.cssselect('.teaser-topic__media-item')[0]
+
+    assert len(teaser.cssselect('.teaser-topic__media')) == 1
+    assert len(teaser.cssselect('.teaser-topic-main')) == 1
+    assert len(teaser.cssselect('.teaser-topic-list')) == 1
+    assert len(teaser.cssselect('.teaser-topic-item')) == 3
+
+    assert image.attrib['data-src'].endswith(
+        '/zeit-online/cp-content/ig-1/cinema')
+    assert image.attrib['data-mobile-src'].endswith(
+        '/zeit-online/cp-content/ig-1/wide')
 
 
 def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):

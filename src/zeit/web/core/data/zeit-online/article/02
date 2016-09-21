@@ -20,7 +20,7 @@
       <reference type="intern" href="http://xml.zeit.de/zeit-online/article/01" contenttype="article" />
     </references>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="acquisition" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">abo</attribute>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">abo</attribute>
     <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
     <attribute name="author" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Wenke Husmann</attribute>
     <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>

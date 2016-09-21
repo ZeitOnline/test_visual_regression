@@ -1,9 +1,10 @@
 import lxml.objectify
+import zope.component
+import zope.interface
 
-import zeit.wysiwyg.interfaces
+import zeit.content.image.interfaces
 
 import zeit.web
-import zeit.web.magazin.view
 
 
 class Gallery(zeit.web.core.view.Content):
@@ -35,3 +36,12 @@ class Gallery(zeit.web.core.view.Content):
     @zeit.web.reify
     def webtrekk_assets(self):
         return ['gallery.0/seite-1']
+
+
+@zope.component.adapter(zeit.content.image.interfaces.IImage)
+@zope.interface.implementer(zeit.content.image.interfaces.IPersistentThumbnail)
+def persistent_thumbnail_factory(context):
+    """Disable vivi-only functionality, especially since creating content does
+    not work in our environment.
+    """
+    return object()

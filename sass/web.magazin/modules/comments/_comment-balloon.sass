@@ -1,0 +1,36 @@
+.comment-balloon
+	+unpadded
+	display: none
+	+respond-min($break-1)
+		display: block
+	+respond-min($break-3)
+		margin: remify(0 -30px)
+
+.comment-balloon__link
+	background-color: $grey--light
+	color: $black
+	float: right
+	margin: remify(0 0 32px 20px)
+	padding: remify(12px 14px 7px)
+	position: relative
+	text-align: center
+	&:after
+		border-color: $grey--light $grey--light transparent transparent
+		border-style: solid
+		border-width: 8px
+		bottom: -16px
+		content: ''
+		position: absolute
+		right: 12px
+	+on-interaction
+		color: $grey
+
+.comment-balloon__count
+	display: block
+	font-size: em(18px)
+	line-height: normal
+
+.comment-balloon__text
+	font-family: $font-tabletgothic
+	font-size: em(11px)
+	font-weight: bold

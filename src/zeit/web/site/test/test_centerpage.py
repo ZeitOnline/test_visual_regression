@@ -98,6 +98,22 @@ def test_buzzboard_renders_column_teaser(testbrowser):
         '.teaser-buzzboard__media-container--column')) == 1
 
 
+def test_buzzboard_should_avoid_same_teaser_image_twice(
+        testbrowser, monkeypatch):
+
+    # Make most shared equal to most read to provide two column teasers.
+    def social_ranking(self, **kw):
+        return self._get_ranking('views', **kw)
+
+    monkeypatch.setattr(
+        zeit.web.core.reach.Reach, 'get_social', social_ranking)
+
+    browser = testbrowser('/zeit-online/buzz-box')
+    area = browser.cssselect('.cp-area--buzzboard')[0]
+    assert len(area.cssselect('.teaser-buzzboard__media')) == 4
+    assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 2
+
+
 def test_tile7_is_rendered_on_correct_position(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     tile7_on_first_position = browser.cssselect(
@@ -210,13 +226,20 @@ def test_centerpage_markdown_module_is_rendered(jinja2_env):
     assert len(html.cssselect('.markup__text li')) == 4
 
 
-def test_centerpage_teaser_topic_is_rendered(testbrowser):
-    select = testbrowser('/zeit-online/topic-teaser').cssselect
-    assert len(select('.teaser-topic')) == 1
-    assert len(select('.teaser-topic__media')) == 1
-    assert len(select('.teaser-topic-main')) == 1
-    assert len(select('.teaser-topic-list')) == 1
-    assert len(select('.teaser-topic-item')) == 3
+def test_centerpage_teaser_topic_has_correct_structure(testbrowser):
+    browser = testbrowser('/zeit-online/topic-teaser')
+    teaser = browser.cssselect('.teaser-topic')[0]
+    image = teaser.cssselect('.teaser-topic__media-item')[0]
+
+    assert len(teaser.cssselect('.teaser-topic__media')) == 1
+    assert len(teaser.cssselect('.teaser-topic-main')) == 1
+    assert len(teaser.cssselect('.teaser-topic-list')) == 1
+    assert len(teaser.cssselect('.teaser-topic-item')) == 3
+
+    assert image.attrib['data-src'].endswith(
+        '/zeit-online/cp-content/ig-1/cinema')
+    assert image.attrib['data-mobile-src'].endswith(
+        '/zeit-online/cp-content/ig-1/wide')
 
 
 def test_inhouse_label_should_be_displayed(testbrowser):

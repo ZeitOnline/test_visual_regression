@@ -1,7 +1,7 @@
-$comment-color-notice:          #707070
-$comment-color-header-sub:      #fff
 $comment-color-head-background: $color-community-primary
 $comment-color-head-color:      #fff
+$comment-color-head-small:      #fff
+$comment-color-notice:          $color-text--light
 
 @import "web.core/modules/comments/comment-section"
 
@@ -9,13 +9,14 @@ $comment-color-head-color:      #fff
 .comment-section
 	&__button
 		+font-smoothing
-		border: 3px solid currentColor
+		border: 3px solid #fff
 		color: #fff
 		display: inline-block
-		font-weight: bold
 		padding: remify(6px 8px 6px 12px)
+		+on-interaction
+			background-color: #fff
+			color: $color-community-primary
 		+respond-min($break-phablet-min)
-			float: right
 			// fake the button to appear in the center of the pink section
 			// (phablet) or on the bottom-line of the big headline (tablet)
 			margin-top: remify(6px)
@@ -30,15 +31,12 @@ $comment-color-head-color:      #fff
 		&:before
 			background-color: #fff
 			color: #444
-	&__head + &__message
-		padding-bottom: em(16px)
-		padding-top: em(16px)
 	&__headline
 		@extend %font-beckett
 		+font-smoothing
 		font-size: remify(42px)
 		font-weight: normal
-		+respond-min($break-tablet-min)
+		+respond-min($break-phablet-min)
 			font-size: remify(64px)
 		small
 			font-family: $font-tabletgothic

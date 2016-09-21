@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import base64
 import datetime
+import urlparse
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -351,7 +352,7 @@ def test_article_sharing_menu_should_open_and_close(
 
     sharing_menu_selector = '.sharing-menu > .sharing-menu__items'
     sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > .sharing-menu__title.js-sharing-menu')
+        '.sharing-menu > a[aria-controls]')
     sharing_menu_items = selenium_driver.find_element_by_css_selector(
         sharing_menu_selector)
 
@@ -383,7 +384,7 @@ def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
     selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
 
     sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > .sharing-menu__title.js-sharing-menu')
+        '.sharing-menu > a[aria-controls]')
     whatsapp_item = selenium_driver.find_element_by_css_selector(
         '.sharing-menu__item--whatsapp')
 
@@ -985,7 +986,7 @@ def test_zeit_article_has_correct_meta_line(testserver, selenium_driver):
 
     assert dates[0].text == u'12. Februar 2015, 4:32 Uhr'
     assert dates[1].text == u'Editiert am 15. Februar 2015, 18:18 Uhr'
-    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
+    assert source.text == u'DIE ZEIT Nr. 49/2014, 29. Januar 2015'
 
 
 def test_tgs_article_has_correct_meta_line(testserver, selenium_driver):
@@ -1751,3 +1752,219 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     assert len(link) == 1
     data_id = link[0].attrib['data-id']
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
+
+
+def test_video_in_article_has_poster_copyright(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit')
+    figure_copyright_elem = browser.cssselect('.video-figure__copyright')
+    assert len(figure_copyright_elem) == 1
+    figure_copyright = figure_copyright_elem[0]
+    copyright_person = figure_copyright.cssselect('[itemprop="name"]')[0]
+    assert copyright_person.text == u'© Foto: Alaa Al-Marjani/Reuters'
+
+
+def test_zplus_zon_article_has_correct_markup(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zon')
+
+    zplus_box = browser.cssselect('.zplus--coverless')
+    assert len(zplus_box) == 1
+
+    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
+    zplus_text = zplus_box[0].cssselect('.zplus__text')
+    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_modifier) == 2
+    assert len(zplus_banner) == 1
+    assert len(zplus_badge) == 1
+    assert len(zplus_marker) == 1
+    assert len(zplus_text) == 1
+    assert len(zplus_link) == 1
+    assert 'exklusiv' in zplus_link[0].attrib['href']
+    assert 'Exklusiv' in zplus_link[0].text.strip()
+
+
+def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-novolume')
+
+    zplus_box = browser.cssselect('.zplus--coverless')
+    assert len(zplus_box) == 1
+
+    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_modifier) == 2
+    assert len(zplus_banner) == 1
+    assert len(zplus_badge) == 1
+
+
+def test_zplus_abo_print_article_has_correct_markup(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zeit')
+
+    zplus_box = browser.cssselect('.zplus')
+    assert len(zplus_box) == 1
+
+    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
+    zplus_text = zplus_box[0].cssselect('.zplus__text')
+    zplus_cover = zplus_box[0].cssselect('.zplus__cover')
+    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
+    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_modifier) == 2
+    assert len(zplus_banner) == 1
+    assert len(zplus_badge) == 1
+    assert len(zplus_marker) == 1
+    assert len(zplus_text) == 1
+    assert len(zplus_cover) == 1
+    assert len(zplus_media) == 1
+    assert len(zplus_link) == 1
+    assert '/2014/49' in zplus_link[0].attrib['href']
+    assert 'Exklusiv' in zplus_link[0].text.strip()
+    assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
+            in zplus_media[0].attrib['src'])
+
+
+def test_zplus_register_print_article_has_correct_markup(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zeit-register')
+
+    zplus_box = browser.cssselect('.zplus')
+    assert len(zplus_box) == 1
+
+    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_text = zplus_box[0].cssselect('.zplus__text')
+    zplus_cover = zplus_box[0].cssselect('.zplus__cover')
+    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
+    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_label = zplus_box[0].cssselect('.zplus__label')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_modifier) == 2
+    assert len(zplus_banner) == 1
+    assert len(zplus_badge) == 0
+    assert len(zplus_text) == 1
+    assert len(zplus_cover) == 1
+    assert len(zplus_media) == 1
+    assert len(zplus_link) == 1
+    assert len(zplus_label) == 1
+    assert '/2014/49' in zplus_link[0].attrib['href']
+    assert 'ZEIT Nr. 49/2014' in zplus_link[0].text.strip()
+    assert 'Aus der' in zplus_label[0].text.strip()
+    assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
+            in zplus_media[0].attrib['src'])
+
+
+def test_free_article_has_no_zplus_badge(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+
+    zplus_box = browser.cssselect('.zplus')
+    zplus_modifier = browser.cssselect('.article__item--has-badge')
+
+    assert len(zplus_box) == 0
+    assert len(zplus_modifier) == 0
+
+
+def test_volume_teaser_is_rendered_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/article/volumeteaser')
+    volume_teaser = browser.cssselect('.volume-teaser')
+    volume_teaser_link = browser.cssselect(
+        '.volume-teaser__link')[0].get('href')
+    assert len(volume_teaser) == 1
+    assert volume_teaser_link == 'https://premium.zeit.de/diezeit/2016/' \
+        '01?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.' \
+        'cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=' \
+        'rr&utm_content=webreader_packshot_cover_cover'
+
+
+def test_volume_teaser_display_correct_image_on_desktop(
+        testserver, selenium_driver):
+    selenium_driver.set_window_size(1280, 768)
+    selenium_driver.get(
+        '{}/zeit-online/article/volumeteaser'.format(testserver.url))
+    img_src = selenium_driver.find_element_by_css_selector(
+        '[data-src*="test-printcover"]').get_attribute('src')
+    assert u'2016-09/test-printcover/original__220x158__desktop' in img_src
+
+
+def test_share_buttons_are_present(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    sharing_menu = browser.cssselect('.sharing-menu')[0]
+    links = sharing_menu.cssselect('.sharing-menu__link')
+    labels = sharing_menu.cssselect('.sharing-menu__text')
+
+    assert 'sharing-menu--big' not in sharing_menu.attrib['class']
+
+    #  facebook
+    parts = urlparse.urlparse(links[0].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    url = query.get('u').pop(0)
+    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share_small.link' in url
+    assert 'utm_medium=sm' in url
+    assert 'utm_source=facebook_zonaudev_ext' in url
+    assert 'utm_campaign=ref' in url
+    assert 'utm_content=zeitde_share_small_link_x' in url
+
+    #  twitter
+    parts = urlparse.urlparse(links[1].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert query.get('text').pop(0) == (
+        'Williams wackelt weiter, steht aber im Viertelfinale')
+    assert query.get('via').pop(0) == 'zeitonline'
+    assert 'share_small' in query.get('url').pop(0)
+
+    #  whatsapp
+    parts = urlparse.urlparse(links[2].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
+            'Artikel auf ZEIT ONLINE: ') in query.get('text').pop(0)
+
+    #  mail
+    parts = urlparse.urlparse(links[3].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
+            'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
+    assert 'Artikel auf ZEIT ONLINE lesen:' in query.get('body').pop(0)
+
+    assert labels[0].text == 'Facebook'
+    assert labels[1].text == 'Twitter'
+    assert labels[2].text == 'WhatsApp'
+    assert labels[3].text == 'Mail'
+
+
+def test_share_buttons_are_big(testbrowser):
+    browser = testbrowser('/zeit-online/article/tags')
+    sharing_menu = browser.cssselect('.sharing-menu2')[0]
+    links = sharing_menu.cssselect('.sharing-menu2__link')
+    labels = sharing_menu.cssselect('.sharing-menu2__text')
+
+    assert 'sharing-menu2--big' in sharing_menu.attrib['class']
+    assert len(links) == 4
+
+    for link in links:
+        assert '.ref.zeitde.share_big.' in link.attrib['href']
+
+    assert labels[0].text == 'Auf Facebook teilen'
+    assert labels[1].text == 'Twittern'
+    assert labels[2].text == 'WhatsApp'
+    assert labels[3].text == 'Mailen'
+
+
+def test_article_view_has_share_buttons_set_correctly(
+        application, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert not view.share_buttons
+    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_small'
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/tags')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.share_buttons == 'big'
+    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'

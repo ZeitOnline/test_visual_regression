@@ -10,18 +10,21 @@ import itertools
 import urllib
 import urlparse
 
+import grokcore.component
 import jinja2
 import peak.util.proxies
 import pysolr
 import pytz
 import zope.component
 
-import zeit.web.core
 import zeit.cms.content.interfaces
 import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.solr.interfaces
+import zeit.retresco.connection
+import zeit.retresco.convert
+import zeit.retresco.interfaces
 
 
 log = logging.getLogger(__name__)
@@ -340,8 +343,8 @@ class LazyProxy(object):
         object.__setattr__(self, '__proxy__', context)
 
         # Let ourselves be treated like the actual content type we proxy for.
-        if 'type' in self.__proxy__:
-            type_id = self.__proxy__['type']
+        if 'doc_type' in self.__proxy__:
+            type_id = self.__proxy__['doc_type']
             # BBB for really old video objects that were indexed differently.
             if type_id == 'zeit.brightcove.interfaces.IVideo':
                 type_id = 'video'
@@ -440,28 +443,43 @@ class LazyProxy(object):
     # Proxy special ICommonMetadata attributes. (XXX copy&paste)
     @property
     def product(self):
+        # Silently swallow missing item for solr/tms, but expose for reach.
+        if ('product' not in self.__proxy__ or
+                self.__proxy__['product'] is NotImplemented):
+            self.__proxy__.pop('product', None)
+            raise AttributeError('product')
         source = zeit.cms.content.interfaces.ICommonMetadata[
             'product'].source(self)
         for value in source:
             if value.id == self.__proxy__.get('product_id'):
                 return value
 
+    @property
+    def serie(self):
+        # Silently swallow missing item for solr/tms, but expose for reach.
+        if ('serie' not in self.__proxy__ or
+                self.__proxy__['serie'] is NotImplemented):
+            self.__proxy__.pop('serie', None)
+            raise AttributeError('serie')
+        source = zeit.cms.content.interfaces.ICommonMetadata[
+            'serie'].source(self)
+        return source.factory.values.get(self.__proxy__.get('serie'))
+
     # Proxy zeit.content.image.interfaces.IImages. Since we bypass ZCA
     # in __conform__ above, we cannot use an adapter to do this. ;-)
     @property
     def image(self):
-        image_ids = self.__proxy__.get('image-base-id', [])
-        if not image_ids:
+        image_id = self.__proxy__.get('teaser_image')
+        if not image_id:
             raise AttributeError('image')
-        return zeit.cms.interfaces.ICMSContent(image_ids[0], None)
+        return zeit.cms.interfaces.ICMSContent(image_id, None)
 
     # Proxy zeit.content.image.interfaces.IImages
     @property
     def fill_color(self):
-        fill_color = self.__proxy__.get('image-fill-color', [])
-
-        if fill_color and fill_color[0]:
-            return fill_color[0]
+        fill_color = self.__proxy__.get('teaser_image_fill_color')
+        if fill_color:
+            return fill_color
 
     # Proxy zeit.web.core.interfaces.IExpiration
     @property
@@ -501,60 +519,112 @@ def dump_request(response):
         method=method, headers=headers, data=data, uri=uri)
 
 
-@zope.interface.implementer(zeit.solr.interfaces.ISolr)
-class DataSolr(object):
-    """Fake Solr implementation that is used for local development."""
+class RandomContent(object):
 
-    def search(self, q, rows=10, **kw):
+    def _get_content(self):
+        import zeit.web.core.view  # Prevent circular import
         parts = urlparse.urlparse('egg://zeit.web.core/data')
         repo = pkg_resources.resource_filename(parts.netloc, parts.path[1:])
-        results = []
         for root, subdirs, files in os.walk(repo):
             if not random.getrandbits(1):
                 continue  # Skip some folders to speed things up.
             for filename in files:
-                try:
-                    name = filename.replace('.meta', '')
-                    unique_id = os.path.join(
-                        root.replace(repo, 'http://xml.zeit.de'), name)
-                    content = zeit.cms.interfaces.ICMSContent(unique_id)
-                    publish = zeit.cms.workflow.interfaces.IPublishInfo(
-                        content)
-                    modified = zeit.cms.workflow.interfaces.IModified(
-                        content)
-                    semantic = zeit.cms.content.interfaces.ISemanticChange(
-                        content)
-                    assert zeit.web.core.view.known_content(content)
-                    # XXX acquisition is mocked statically until ZON-3286
-                    results.append({
-                        u'authors': content.authors,
-                        u'date-last-modified': (
-                            modified.date_last_modified.isoformat()),
-                        u'date_first_released': (
-                            publish.date_first_released.isoformat()),
-                        u'date_last_published': (
-                            publish.date_last_published.isoformat()),
-                        u'last-semantic-change': (
-                            semantic.last_semantic_change.isoformat()),
-                        u'image-base-id': [
-                            'http://xml.zeit.de/zeit-online/'
-                            'image/filmstill-hobbit-schlacht-fuenf-hee/'],
-                        u'lead_candidate': False,
-                        u'product_id': content.product.id,
-                        u'serie': None,
-                        u'supertitle': content.supertitle,
-                        u'teaser_text': content.teaserText,
-                        u'title': content.title,
-                        u'type': content.__class__.__name__.lower(),
-                        u'acquisition': 'free',
-                        u'uniqueId': content.uniqueId})
-                except (AttributeError, AssertionError, TypeError):
-                    continue
+                name = filename.replace('.meta', '')
+                unique_id = os.path.join(
+                    root.replace(repo, 'http://xml.zeit.de'), name)
+                content = zeit.cms.interfaces.ICMSContent(unique_id, None)
+                if zeit.web.core.view.known_content(content):
+                    yield content
 
+
+@zope.interface.implementer(zeit.solr.interfaces.ISolr)
+class DataSolr(RandomContent):
+    """Fake Solr implementation that is used for local development."""
+
+    def search(self, q, rows=10, **kw):
         log.debug('Mocking solr request ' + urllib.urlencode(
             kw.items() + [('q', q), ('rows', rows)], True))
+        results = []
+        for content in self._get_content():
+            try:
+                publish = zeit.cms.workflow.interfaces.IPublishInfo(
+                    content)
+                modified = zeit.cms.workflow.interfaces.IModified(
+                    content)
+                semantic = zeit.cms.content.interfaces.ISemanticChange(
+                    content)
+                results.append({
+                    u'access': 'free',
+                    u'authors': content.authors,
+                    u'date-last-modified': (
+                        modified.date_last_modified.isoformat()),
+                    u'date_first_released': (
+                        publish.date_first_released.isoformat()),
+                    u'date_last_published': (
+                        publish.date_last_published.isoformat()),
+                    u'last-semantic-change': (
+                        semantic.last_semantic_change.isoformat()),
+                    u'image-base-id': [
+                        'http://xml.zeit.de/zeit-online/'
+                        'image/filmstill-hobbit-schlacht-fuenf-hee/'],
+                    u'lead_candidate': False,
+                    u'product_id': content.product.id,
+                    u'serie': None,
+                    u'supertitle': content.supertitle,
+                    u'teaser_text': content.teaserText,
+                    u'title': content.title,
+                    u'type': content.__class__.__name__.lower(),
+                    u'uniqueId': content.uniqueId})
+            except (AttributeError, TypeError):
+                continue
         return pysolr.Results(
             random.sample(results, min(rows, len(results))), len(results))
 
     def update_raw(self, xml, **kw):
         pass
+
+
+@zope.interface.implementer(zeit.retresco.interfaces.ITMS)
+class DataTMS(zeit.retresco.connection.TMS, RandomContent):
+    """Fake TMS implementation that is used for local development."""
+
+    def __init__(self):
+        self._response = {}
+
+    def _request(self, request, **kw):
+        return self._response
+
+    def get_topicpage_documents(self, id, start=0, rows=25):
+        log.debug(
+            'Mocking TMS request id=%s, start=%s, rows=%s', id, start, rows)
+        result = []
+        for content in self._get_content():
+            data = zeit.retresco.interfaces.ITMSRepresentation(content)()
+            if data is not None:
+                # Ensure we always have an image
+                data['payload'].setdefault(
+                    'teaser_image',
+                    'http://xml.zeit.de/zeit-online/'
+                    'image/filmstill-hobbit-schlacht-fuenf-hee/')
+                # XXX LazyProxy cannot support liveblogs, and we don't want to
+                # expose those in tests.
+                data['payload']['is_live'] = False
+                result.append(data)
+        self._response = {
+            'num_found': len(result),
+            'docs': random.sample(
+                result, min(rows, len(result))),
+        }
+        result = super(DataTMS, self).get_topicpage_documents(id, start, rows)
+        self._response = {}
+        return result
+
+
+class CMSSearch(zeit.retresco.convert.Converter):
+
+    interface = zeit.cms.interfaces.ICMSContent
+    grokcore.component.name('zeit.find')
+
+    def __call__(self):
+        # Disable vivi-specific Converter, as it does not work without Zope.
+        return {}

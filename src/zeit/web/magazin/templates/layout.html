@@ -77,6 +77,10 @@
         {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
 
+        {% block skiplink %}
+        <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
+        {% endblock skiplink %}
+
         <div class="page">
 
         {% block adplace_top %}
@@ -93,7 +97,7 @@
         {% endblock adplace_top %}
 
 
-            <div class="page__content {% block page_content_additional_class %}{% endblock %}" id="js-page-wrap-inner">
+            <div class="page__content {% block page_content_additional_class %}{% endblock %}">
 
 
                 {% profile %}
@@ -114,7 +118,7 @@
 
                 {% endprofile %}
 
-                <main class="main">
+                <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
                     {% block content %}{% endblock content %}
                 </main>
 

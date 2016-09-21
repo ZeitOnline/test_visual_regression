@@ -2,7 +2,7 @@
 <head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
   <attribute ns="DAV:" name="href">/cms/work/kultur/film/2014-12/hobbit-monumentalfilm</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-12-05T17:11:30.179510+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">abo</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">5010</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>

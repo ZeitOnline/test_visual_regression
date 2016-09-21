@@ -85,3 +85,10 @@ def test_photocluster_has_expected_content(testbrowser):
     assert images[5].attrib['src'].endswith(
         '/galerien/bg-automesse-detroit-2014-usa-bilder/'
         'VW_Dune-540x304.jpg/imagegroup/original')
+
+
+def test_does_not_try_to_create_thumbnail(application):
+    image = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/image'
+        '/bertelsmann-infographic/piechart.png')
+    zeit.content.image.interfaces.IPersistentThumbnail(image)

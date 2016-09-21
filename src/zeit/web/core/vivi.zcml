@@ -39,12 +39,20 @@
     <include package="zeit.content.video" />
     <include package="zeit.content.rawxml" />
     <include package="zeit.content.cp" />
-    <include package="zeit.intrafind" />
-    <adapter factory="zeit.intrafind.tagger.Tagger" />
+    <include package="zeit.content.volume" />
     <include package="zeit.magazin" />
     <include package="zeit.campus" />
     <include package="zeit.newsletter" />
     <include package="zeit.push" />
+
+    <!-- XXX Temporary workaround: We load both retresco and intrafind,
+         but use the ITagger from intrafind. -->
+    <configure xmlns:meta="http://namespaces.zope.org/meta">
+      <meta:provides feature="zeit.retresco.tms" />
+      <include package="zeit.retresco" />
+    </configure>
+    <includeOverrides package="zeit.intrafind" />
+
     <!-- XXX Something about including the whole zeit.solr package is slow,
          and since we don't need it, we gain ~2s startup performance here -->
     <!-- <include package="zeit.solr" /> -->

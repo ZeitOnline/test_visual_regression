@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-import lxml.etree
 import json
+import lxml.etree
+import urllib
 import zeit.web.core.application
 
 
@@ -153,8 +154,8 @@ def test_amp_article_contains_sharing_links(testbrowser):
     links = sharing.cssselect('.article-sharing__link')
     assert sharing.cssselect('.article-sharing__title')[0].text == 'Teilen'
     assert len(links) == 4
-    assert ('?u=' + canonical) in links[0].get('href')
-    assert ('url=' + canonical) in links[1].get('href')
+    assert ('?u=' + urllib.quote(canonical)) in links[0].get('href')
+    assert ('url=' + urllib.quote(canonical)) in links[1].get('href')
 
 
 def test_amp_article_shows_tags_correctly(testbrowser):
@@ -191,9 +192,9 @@ def test_amp_article_links_contain_tracking_data_attributes(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
 
     author = browser.cssselect('.byline a')[0]
-    assert author.get('data-vars-url') == author.get('href')
+    assert author.get('data-vars-url') == author.get('href').split('://')[1]
 
     tag = browser.cssselect('.article-tags__link')[1]
-    assert tag.get('data-vars-url') == tag.get('href')
+    assert tag.get('data-vars-url') == tag.get('href').split('://')[1]
     assert tag.get('data-vars-link-text') == 'Weltwirtschaftsforum Davos'
     assert tag.get('data-vars-number') == '2'
