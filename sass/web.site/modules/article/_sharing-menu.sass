@@ -1,0 +1,57 @@
+.sharing-menu
+	margin: remify(20px 0 32px)
+
+	&__title
+		color: $zon-grey
+		font-size: em(14px)
+		letter-spacing: $letter-spacing-s
+		+on-interaction
+			color: $zon-dark-grey
+		&:after
+			+drop_icon()
+		// js-induced state modifications
+		&[aria-expanded="true"]
+			color: $zon-dark-grey
+			&:after
+				+drop_icon($open: true)
+	&__items
+		+clearfix
+		list-style-type: none
+		margin: remify(14px 0 0)
+		padding: 0
+		&[aria-hidden="true"]
+			display: none
+
+	&__item
+		float: left
+		&:not(:last-child):after
+			content: "/"
+			color: $color-separator
+			margin: remify(0 8px)
+	&__link
+		font-size: em(14px)
+		font-weight: bold
+		line-height: 2.0
+		+on-interaction
+			border-bottom: 1px solid currentColor
+		&--facebook
+			+link
+				color: $color-facebook
+		&--twitter
+			+link
+				color: $color-twitter
+		&--whatsapp
+			+link
+				color: $color-whatsapp
+		&--mail
+			+link
+				color: $zon-grey
+
+	&__icon
+		display: none
+
+	+respond-min($break-tablet-min)
+		&__item
+			&--whatsapp
+				display: none
+

@@ -579,7 +579,7 @@ $inline-block-alignment: none !default;
 @mixin pie-clearfix {
 	&:after {
 		content: "";
-		display: table;
+		display: block; // http://cssmojo.com/the-very-latest-clearfix-reloaded/
 		clear: both;
 	}
 

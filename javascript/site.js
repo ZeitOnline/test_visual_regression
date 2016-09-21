@@ -21,7 +21,6 @@ require([
     'web.core/overscrolling.js',
     'web.site/video/videoStage',
     'web.core/articledate',
-    'web.site/articlesharing',
     'web.core/comments',
     'web.site/adblockCount.js'
 ], function(
@@ -34,7 +33,6 @@ require([
     overscrolling,
     videoStage,
     articledate,
-    articlesharing,
     comments,
     adblockCount
 ) {
@@ -49,7 +47,6 @@ require([
 
     if ( article ) {
         articledate.init();
-        articlesharing.init();
         comments.init();
         //overscrolling.init();
         zeit.overscrolling = overscrolling;
@@ -58,13 +55,6 @@ require([
     adblockCount.init();
     zeit.clearQueue();
 });
-
-String.prototype.format = function() {
-    var args = arguments;
-    return this.replace( /{(\d+)}/g, function( match, number ) {
-        return typeof args[number] !== 'undefined' ? args[number] : match ;
-    });
-};
 
 // add required jQuery plugins
 // require jQuery first, so we don't have to shim simple plugins
@@ -133,6 +123,7 @@ require([
         article.find( '.liveblog' ).liveblog();
         article.find( '.article-toc' ).toggleRegions();
         $.picturefill();
+        $( '.sharing-menu' ).toggleRegions();
         $( '.comment-section' ).countFormchars();
         $( '.js-fix-position' ).fixPosition();
     } else if ( pageType === 'author' ) {

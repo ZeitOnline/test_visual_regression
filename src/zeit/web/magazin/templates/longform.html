@@ -26,11 +26,12 @@
             {% endblock longform_logo -%}
         </div>
 
-        {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share.link.x&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_link_x' -%}
+        {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_link_x' -%}
+        {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share.link.x' -%}
         <aside class="header__sharing" data-ct-row="social">
             <a href="http://twitter.com/intent/tweet?text={{ view.title | urlencode }}&amp;via={{ view.twitter_username | urlencode }}&amp;url={{ content_url.format('twitter') | urlencode }}"
                 target="_blank" class="header__link" title="Auf Twitter teilen" data-ct-label="twitter">{{ lama.use_svg_icon('sharing-twitter', 'header__sharing-icon', view.package) }}</a>
-            <a href="http://www.facebook.com/sharer/sharer.php?u={{ content_url.format('facebook') | urlencode }}"
+            <a href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}"
                 target="_blank" class="header__link" title="Auf Facebook teilen" data-ct-label="facebook">{{ lama.use_svg_icon('sharing-facebook', 'header__sharing-icon', view.package) }}</a>
         </aside>
     </div>
