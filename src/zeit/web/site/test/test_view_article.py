@@ -1968,3 +1968,14 @@ def test_article_view_has_share_buttons_set_correctly(
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.share_buttons == 'big'
     assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
+
+
+def test_merian_link_has_nofollow(testbrowser, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-merian-nofollow')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.product_id == 'merian'
+
+    browser = testbrowser('/zeit-online/article/simple-merian-nofollow')
+    sourcelink = browser.cssselect('.metadata__source a')[0]
+    assert sourcelink.attrib['rel'] == 'nofollow'
