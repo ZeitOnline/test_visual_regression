@@ -41,6 +41,7 @@
   <setting name="fbia_prefix" xsi:type="xsd:string">/fbia</setting>
   <setting name="c1_prefix" xsi:type="xsd:string">/jsconf</setting>
   <setting name="series_prefix" xsi:type="xsd:string">http://xml.zeit.de/serie</setting>
+  <setting name="topic_prefix" xsi:type="xsd:string">http://xml.zeit.de/thema</setting>
   <!-- Do not use in other contexts than framebuilders useSSL variant, has no local testing alternative -->
   <setting name="framebuilder_ssl_asset_prefix" xsi:type="xsd:string">https://ssl.zeit.de/www.zeit.de/static/latest</setting>
 
