@@ -233,11 +233,13 @@ class reify(object):  # NOQA
 
 
 def register_module(name):
-    """Register a CPExtra implementation for a RAM-style module using the
-    cpextra identifier as an adapter name.
+    """Register a wrapper for a centerpage module. How the `name` is determined
+    during lookup depends on the module, see z.w.core.centerpage.get_module().
 
-    Usage example:
-    First, implement your module class in python
+    Example: Registering a CPExtra implementation for a RAM-style module using
+    the cpextra identifier as an adapter name.
+
+    First, implement your module class in python (optional):
 
     @zeit.web.register_module('ice-cream-truck')
     class IceCreamTruck(zeit.web.core.centerpage.Module):
@@ -261,6 +263,7 @@ def register_module(name):
 
     If your module template is self-sufficient, you can even skip the python
     module implementation and registration.
+
     """
     # Prevent circular import (zeit.web.__init__)
     import zeit.web.core.interfaces
@@ -277,8 +280,12 @@ def register_module(name):
 
 
 def register_area(name):
-    """Register an area renderer implementation for a RAM-style area using the
-    area kind descriptor as an adapter identifier.
+    """Register an area renderer implementation for a RAM-style area, using the
+    area's `kind` property as the `name`. For example::
+
+        @zeit.web.register_area('ranking')
+        class Ranking(zeit.content.cp.automatic.AutomaticArea):
+            pass
     """
 
     def registrator(cls):

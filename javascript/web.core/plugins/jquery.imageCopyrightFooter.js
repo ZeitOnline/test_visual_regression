@@ -90,9 +90,21 @@
                         // Get image source URL. Consider unfetched lazy loading images.
                         $currentImageTag = $currentImage.find( 'img' ).eq( 0 );
                         currentImageUrl = $currentImageTag.data( 'source' ) || $currentImageTag.attr( 'src' );
-                        wholeString += itemTemplate
-                            .replace( '___name___', $currentCopyrightHolder.html() )
-                            .replace( '___image___', currentImageUrl );
+
+                        // If no image was found, check if the copyright belongs t a video poster image
+                        if ( !currentImageUrl ) {
+                            currentImageUrl = $currentImage.find( '.vjs-poster' ).eq( 0 ).css( 'background-image' );
+                            if ( currentImageUrl ) {
+                                currentImageUrl = currentImageUrl.replace( /(url\(|\)|'|")/gi, '' );
+                            }
+                        }
+
+                        // Add current image to the list (if successfull)
+                        if ( currentImageUrl ) {
+                            wholeString += itemTemplate
+                                .replace( '___name___', $currentCopyrightHolder.html() )
+                                .replace( '___image___', currentImageUrl );
+                        }
                     }
 
                     containerTemplate.before( containerTemplate.html() );

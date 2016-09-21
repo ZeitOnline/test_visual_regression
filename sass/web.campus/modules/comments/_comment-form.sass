@@ -6,13 +6,15 @@ $comment-color-form-cancel-link: $color-text--light
 
 .comment-login
 	padding-bottom: remify(40px)
+
+.comment-form
 	.button
-		border: 3px solid currentColor
-		color: $color-article-primary
-		font-size: remify(14px)
-		font-weight: bold
-		letter-spacing: .01em
-		padding: remify(6px 8px 6px 12px)
+		color: $color-community-primary
 		+on-interaction
-			border-color: currentColor
-			color: $color-text
+			background-color: $color-community-primary
+			border-color: $color-community-primary
+			color: #fff
+		&[disabled]
+			+on-interaction
+				background-color: transparent
+				color: $color-community-primary

@@ -1,12 +1,12 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% set tracking_id = 'share_%s' | format(view.share_buttons or 'small') %}
-{% set tracking_link = '{0}?wt_zmc=sm.ext.zonaudev.{1}.ref.zeitde.{2}.link.x&utm_medium=sm&utm_source={1}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_{2}_link_x' %}
-{% set content_url = tracking_link.format(view.content_url, '{0}', tracking_id) %}
+{% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_%s_link_x' | format(tracking_id) -%}
+{% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.%s.link.x' | format(tracking_id) %}
 <div class="{{ self.layout() | with_mods(view.share_buttons) }}">
     {% block sharing_menu_toggle %}{% endblock -%}
     <ul class="{% block layout %}sharing-menu{% endblock %}__items" id="sharing-menu-list" data-ct-row="social">
         <li class="{{ self.layout() }}__item">
-            <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ content_url.format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook">
+            <a class="{{ '%s__link' | format(self.layout()) | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}" target="_blank" data-ct-label="facebook">
                 {{ lama.use_svg_icon('sharing-facebook', '%s__icon' | format(self.layout()) | with_mods('facebook'), view.package) }}
                 <span class="{{ self.layout() }}__text">{% block sharing_menu_text_facebook %}Auf Facebook teilen{% endblock %}</span>
             </a>
