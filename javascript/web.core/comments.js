@@ -423,7 +423,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                         // enable submit button again
                         $form.find( '.button' ).prop( 'disabled', false );
                     } else if ( response.response.premoderation ) {
-                        var premoderation = $( $( '#premoderation-template' ).html().format( response.response.userName ) );
+                        var premoderation = $( $( '#premoderation-template' ).html().replace( '${userName}', response.response.userName ) );
                         if ( response.response.setUser ) {
                             premoderation.find( '.show-set-user' ).show();
                         } else {

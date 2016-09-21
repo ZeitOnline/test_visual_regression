@@ -6,13 +6,13 @@
 	<div class="overlay" data-tracking="refreshbox.refreshOverlay|{{view.og_url|replace('http://','')}}" tabindex="-1"></div>
 	<div class="overlay__dialog" role="dialog" aria-labelledby="refreshbox-title" aria-describedby="refreshbox-text">
 		<div class="overlay__content" role="document">
-			<span class="overlay__headline" id="refreshbox-title">
+			<h3 class="overlay__headline" id="refreshbox-title">
 				ZEIT ONLINE wurde aktualisiert.
-			</span>
-			<span class="overlay__text" id="refreshbox-text">
+			</h3>
+			<p class="overlay__text" id="refreshbox-text">
 				Laden Sie die Seite neu, um Zugriff auf alle aktuellen Beiträge zu haben.
-			</span>
-			<button type="button" class="overlay__button" data-tracking="refreshbox.refreshButton|{{view.og_url|replace('http://','')}}">
+			</p>
+			<button type="button" class="overlay__button button" data-tracking="refreshbox.refreshButton|{{view.og_url|replace('http://','')}}">
 				{{ lama.use_svg_icon('reload', 'overlay__button-icon', view.package) }}
 				Neu laden
 			</button>
