@@ -247,6 +247,21 @@ def test_c1_correct_ressort_on_homepage(testbrowser, monkeypatch):
     assert 'cre_client.set_channel( "homepage" );' in (browser.contents)
 
 
+def test_c1_client_should_receive_entitlement(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True}.get)
+    access_source = zeit.cms.content.sources.AccessSource().factory
+    assert 'cre_client.set_entitlement( "{}" );'.format(
+        access_source.translate_to_c1('free')) in (
+            testbrowser('/zeit-online/article/01').contents)
+    assert 'cre_client.set_entitlement( "{}" );'.format(
+        access_source.translate_to_c1('registration')) in (
+            testbrowser('zeit-online/article/zplus-zeit-register').contents)
+    assert 'cre_client.set_entitlement( "{}" );'.format(
+        access_source.translate_to_c1('abo')) in (
+            testbrowser('zeit-online/article/zplus-zeit').contents)
+
+
 def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
