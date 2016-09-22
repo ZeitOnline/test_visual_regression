@@ -262,6 +262,23 @@ def test_c1_client_should_receive_entitlement(testbrowser, monkeypatch):
             testbrowser('zeit-online/article/zplus-zeit').contents)
 
 
+def test_http_header_should_contain_c1_entitlement(testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True}.get)
+    access_source = zeit.cms.content.sources.AccessSource().factory
+    assert requests.head(
+        testserver.url + '/zeit-online/article/01').headers.get(
+            'C1-Track-Entitlement') == access_source.translate_to_c1('free')
+    register_article = (
+        testserver.url + '/zeit-online/article/zplus-zeit-register')
+    assert requests.head(register_article).headers.get(
+        'C1-Track-Entitlement') == (
+            access_source.translate_to_c1('registration'))
+    assert requests.head(
+        testserver.url + '/zeit-online/article/zplus-zeit').headers.get(
+            'C1-Track-Entitlement') == access_source.translate_to_c1('abo')
+
+
 def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
