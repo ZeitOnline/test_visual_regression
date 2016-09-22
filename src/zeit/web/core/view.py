@@ -693,6 +693,11 @@ class CeleraOneMixin(object):
         return getattr(self, 'sub_ressort', None)
 
     @zeit.web.reify
+    def _c1_entitlement(self):
+        # XXX Needs translation from zeit.cms.content.source
+        return getattr(self.context, 'access', None)
+
+    @zeit.web.reify
     def _c1_cms_id(self):
         uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
         return getattr(uuid, 'id', None)
@@ -727,6 +732,7 @@ class CeleraOneMixin(object):
             'set_cms_id': self._c1_cms_id,
             'set_content_id': self.content_path,
             'set_doc_type': self._c1_doc_type,
+            'set_entitlement': self._c1_entitlement,
             'set_heading': self._get_c1_heading(),
             'set_kicker': self._get_c1_kicker(),
             'set_service_id': 'zon'
@@ -741,6 +747,7 @@ class CeleraOneMixin(object):
             'C1-Track-CMS-ID': self._c1_cms_id,
             'C1-Track-Content-ID': self.content_path,
             'C1-Track-Doc-Type': self._c1_doc_type,
+            'C1-Track-Entitlement': self._c1_entitlement,
             'C1-Track-Heading': self._get_c1_heading(self._headersafe),
             'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
             'C1-Track-Service-ID': 'zon'
