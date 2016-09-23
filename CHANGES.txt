@@ -1,12 +1,22 @@
 Change log for zeit.web
 =======================
 
-3.9 (unreleased)
+3.10 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.9 (2016-09-21)
 ----------------
 
 - ZON-3236: Render sitemaps
 
+- ZON-3359: Add nofollow to merian link
+
 - ZON-3066: Tweak main font size for iPhone 6
+
+- FIX: Include video still copyright text via template
 
 
 3.8 (2016-09-21)
