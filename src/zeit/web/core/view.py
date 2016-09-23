@@ -694,8 +694,9 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_entitlement(self):
-        # XXX Needs translation from zeit.cms.content.source
-        return getattr(self.context, 'access', None)
+        access = getattr(self.context, 'access', None)
+        access_source = zeit.cms.content.sources.ACCESS_SOURCE.factory
+        return access_source.translate_to_c1(access)
 
     @zeit.web.reify
     def _c1_cms_id(self):
