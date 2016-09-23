@@ -9,6 +9,17 @@
         margin-right: auto
         max-width: remify($article-content-max-width)
 
+        &--marginalia
+            clear: both
+            margin: remify(40px auto)
+            width: 90%
+
+            +respond-min($break-2)
+                clear: left
+                float: left
+                margin: remify(8px 20px 28px 0)
+                max-width: em(240px)
+
     &__footer
         border-top: 1px solid $color-border
         clear: both
