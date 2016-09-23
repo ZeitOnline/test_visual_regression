@@ -10,7 +10,7 @@
     USER_BLOCKED: {{ view.comment_area.user_blocked }}
 </pre>
 #}
-{% if view.show_commentthread %}
+{% if view.show_commentthread and (view.commenting_allowed or view.comments) %}
 {% include "zeit.web.core:templates/inc/comments/premoderation.html" %}
 <section class="comment-section" id="comments">
     {% set query = '?' + request.query_string if request.query_string else '' %}
