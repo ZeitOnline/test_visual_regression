@@ -362,7 +362,7 @@ class Raw(Block):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
-def RawText(context):
+def RawText(context):  # NOQA
     return context
 
 
