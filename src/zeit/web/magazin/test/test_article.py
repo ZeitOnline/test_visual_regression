@@ -819,10 +819,10 @@ def test_article_tags_are_present_and_limited_in_longform(testbrowser):
 
 def test_infographics_should_display_header_above_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/infographic')
-    items = list(browser.xpath('//figure')[0].iterchildren())
+    items = list(browser.cssselect('.infographic__media')[0].iterchildren())
     assert 'Die Entschlackung' == items[0].text
     assert (
-        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        u'Potenzial der Bertelsmann-Geschäfte (in Prozent des Umsatzes)' ==
         items[1].text)
 
 

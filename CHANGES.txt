@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-Nach dem Deployment muss man dann die Sitemap-CPs in Production geeignet anlegen,
+ZON-3236: Nach dem Deployment muss man dann die Sitemap-CPs in Production geeignet anlegen,
 am besten aus http://vivi.staging.zeit.de/repository/gsitemaps/ kopieren.
 ISitemap Interface vergeben auf vivi-db mit:
 bin/zope debug work/maintenancejobs/tools/provide_interface.py http://xml.zeit.de/path/to/thing zeit.content.cp.interfaces.ISitemap
@@ -13,7 +13,7 @@ bin/zope debug work/maintenancejobs/tools/provide_interface.py http://xml.zeit.d
 3.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3180: Enlarge infographics with layout `small` for desktop
 
 
 3.9 (2016-09-21)
