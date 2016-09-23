@@ -13,7 +13,7 @@ bin/zope debug work/maintenancejobs/tools/provide_interface.py http://xml.zeit.d
 3.10 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3180: Enlarge infographics with layout `small` for desktop
 
 
 3.9 (2016-09-21)

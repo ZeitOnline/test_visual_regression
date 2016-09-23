@@ -244,10 +244,6 @@ $longform-header-max-height: 1400px
       &:first-child
         margin-bottom: remify(82px)
 
-  .quote--wide
-    +respond-min($break-3)
-      margin-left: $huge
-
   .article__opener
     margin-left: auto
     margin-right: auto
@@ -257,6 +253,12 @@ $longform-header-max-height: 1400px
     max-width: remify($longform-content-max-width)
     +respond-min($break-3)
       max-width: remify($longform-content-max-width--desktop)
+
+  .quote--wide
+    max-width: remify($longform-inline-max-width)
+  .quote--short
+    +respond-min($break-2)
+      max-width: remify(240px)
 
   .figure-horizontal, .figure-horizontal--right
     max-width: remify($longform-inline-max-width)

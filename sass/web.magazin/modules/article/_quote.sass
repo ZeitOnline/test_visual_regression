@@ -1,0 +1,38 @@
+.quote
+	font-family: $sans-serif-base-font
+	letter-spacing: $letter-spacing-m
+	margin: $medium auto
+
+	&--wide
+		max-width: remify(820px)
+
+	&--short
+		+respond-min($break-2)
+			clear: left
+			float: left
+			line-height: 1.4
+			margin: $thin $gutter $compact 0
+			max-width: remify(240px)
+
+	&__text
+		+body-type-zoom
+		color: $grey--dark
+		font-weight: bold
+		margin: 0
+		max-width: remify(470px)
+		&:before
+			content: '»'
+			margin-right: 0.1em
+		&:after
+			content: '«'
+			margin-left: 0.1em
+
+	&__source
+		color: $charcoal
+		font-size: em(14px)
+		margin-top: 1em
+		&:before
+			content: "\2014  "
+
+	&__link
+		color: inherit
