@@ -78,6 +78,14 @@ class OrderedList(UnorderedList):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IAuthor)
+class Authorbox(Block):
+    def __init__(self, model_block):
+        result = model_block.references
+        self.author = result.target
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPortraitbox)
 class Portraitbox(Block):
 
