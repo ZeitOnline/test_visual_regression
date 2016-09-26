@@ -9,11 +9,11 @@
     {%- if time -%}
         {% if kind == 'nextread' or kind == 'teaser-storystream' %}
             <span class="{{ layout }}__dt">
-                {{ time }}
+                {{- time -}}
             </span>
         {% else %}
             <time class="{{ layout }}__datetime js-update-datetime" datetime="{{ teaser | release_date | format_date('iso8601') }}">
-                {{ time }}
+                {{- time -}}
             </time>
         {% endif %}
     {%- endif %}
