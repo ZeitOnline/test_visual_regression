@@ -7,6 +7,7 @@
   </variant>
   <variant name="tile" display_name="Kachel (4:5)" aspect_ratio="4:5" fallback_size="660x660"/>
   <variant name="square" display_name="Quadrat (1:1)" aspect_ratio="1:1" fallback_size="460x460">
+    <size id="micro" display_name="Quadrat (Kopf)" max_size="100x100"/>
     <size id="small" display_name="Quadrat (klein)" max_size="460x460"/>
     <size id="large" display_name="Quadrat (groß)"/>
   </variant>
