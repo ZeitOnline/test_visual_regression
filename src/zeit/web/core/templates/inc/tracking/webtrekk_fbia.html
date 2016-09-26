@@ -1,10 +1,5 @@
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_script.html" %}
 <script type="text/javascript">
-    {# XXX: Please, only set variables in jinja where absolutely needed. #}
-
-    {% set wt_kennung = view.webtrekk.identifier %}
-
-    var Z_WT_KENNUNG = "{{ wt_kennung + '|' + view.content_url.replace('http://', '') }}";
 
     var webtrekk = {
         linkTrack : "standard",
@@ -37,7 +32,7 @@
             {% endfor -%}
         };
 
-        wt.contentId = Z_WT_KENNUNG;
+        wt.contentId = "{{ view.webtrekk_content_id }}";
         wt.sendinfo();
     }
 </script>

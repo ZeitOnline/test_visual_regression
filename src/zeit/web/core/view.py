@@ -644,17 +644,24 @@ class Base(object):
                     access = 'registration'
             custom_parameter.update({'cp28': access})
 
+        return {
+            'contentGroup': content_group,
+            'customParameter': custom_parameter
+        }
+
+    @zeit.web.reify
+    def webtrekk_identifier(self):
         # @see https://sites.google.com/a/apps.zeit.de/
         # verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs
         identifier = '.'.join(map(zeit.web.core.template.format_webtrekk, [
             'redaktion', self.ressort, self.sub_ressort,
-            self.serie.replace(' ', ''), self.type, product_id]))
+            self.serie.replace(' ', ''), self.type, self.product_id or '']))
+        return identifier
 
-        return {
-            'identifier': identifier,
-            'contentGroup': content_group,
-            'customParameter': custom_parameter
-        }
+    @zeit.web.reify
+    def webtrekk_content_id(self):
+        content_url = self.content_url.replace('http://', '')
+        return '{}|{}'.format(self.webtrekk_identifier, content_url)
 
     @zeit.web.reify
     def webtrekk_assets(self):
