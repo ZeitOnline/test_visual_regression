@@ -26,6 +26,10 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         self.request.response.headers.add('s-maxage', '21600')
 
     @zeit.web.reify
+    def volume(self):
+        return zeit.content.volume.interfaces.IVolume(self.context, None)
+
+    @zeit.web.reify
     def regions(self):
         """List of regions, the outermost container making up our centerpage.
         :rtype: list
