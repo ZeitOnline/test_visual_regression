@@ -1971,3 +1971,23 @@ def test_merian_link_has_nofollow(testbrowser, dummy_request):
     browser = testbrowser('/zeit-online/article/simple-merian-nofollow')
     sourcelink = browser.cssselect('.metadata__source a')[0]
     assert sourcelink.attrib['rel'] == 'nofollow'
+
+
+def test_article_contains_authorbox(testbrowser):
+    browser = testbrowser('/zeit-online/article/authorbox')
+    authorbox = browser.cssselect('.authorbox')
+    assert len(authorbox) == 3
+
+    author = authorbox[1]
+    image = author.cssselect('[itemprop="image"]')[0]
+    name = author.cssselect('strong[itemprop="name"]')[0]
+    description = author.cssselect('[itemprop="description"]')[0]
+    url = author.cssselect('a[itemprop="url"]')[0]
+
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.get('itemscope') is not None
+    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
+            ) in image.cssselect('[itemprop="url"]')[0].get('content')
+    assert name.text.strip() == 'Jochen Wegner'
+    assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
+    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
