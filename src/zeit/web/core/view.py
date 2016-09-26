@@ -705,6 +705,10 @@ class CeleraOneMixin(object):
         return getattr(uuid, 'id', None)
 
     @zeit.web.reify
+    def _c1_content_id(self):
+        return self.webtrekk_content_id
+
+    @zeit.web.reify
     def _c1_doc_type(self):
         if self.type == 'gallery':
             return 'bildergalerie'
@@ -732,7 +736,7 @@ class CeleraOneMixin(object):
             'set_channel': self._c1_channel,
             'set_sub_channel': self._c1_sub_channel,
             'set_cms_id': self._c1_cms_id,
-            'set_content_id': self.content_path,
+            'set_content_id': self._c1_content_id,
             'set_doc_type': self._c1_doc_type,
             'set_heading': self._get_c1_heading(),
             'set_kicker': self._get_c1_kicker(),
@@ -746,7 +750,7 @@ class CeleraOneMixin(object):
             'C1-Track-Channel': self._c1_channel,
             'C1-Track-Sub-Channel': self._c1_sub_channel,
             'C1-Track-CMS-ID': self._c1_cms_id,
-            'C1-Track-Content-ID': self.content_path,
+            'C1-Track-Content-ID': self._c1_content_id,
             'C1-Track-Doc-Type': self._c1_doc_type,
             'C1-Track-Heading': self._get_c1_heading(self._headersafe),
             'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
