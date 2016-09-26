@@ -438,16 +438,6 @@
 	}
 }
 
-// pseudo classes
-%off-screen {
-	height: 1px;
-	left: -10000px;
-	overflow: hidden;
-	position: absolute;
-	top: auto;
-	width: 1px;
-}
-
 // build mobile plus/minus button as used in infoxbox
 @mixin build-mobile-plus-minus-button($content: '+') {
 	background: $zon-mid-grey;

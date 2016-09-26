@@ -26,39 +26,6 @@
   letter-spacing: 1px
   line-height: $headline-line-height
 
-.quote, %quote
-  @extend %headline
-  margin-left: 0
-
-.quote__text
-  +body-type-zoom
-  display: block
-  &:before
-    content: '»'
-    margin-right: 0.1em
-  &:after
-    content: '«'
-    margin-left: 0.1em
-
-.quote__author
-  font-family: $sans-serif-base-font
-  font-size: $font-s
-  display: block
-  color: $charcoal
-  margin-top: $little
-  &:before
-    content: "\2014  "
-
-.quote--wide, %quote--wide
-  @extend %quote
-  +respond-min($break-1)
-    margin-left: $small
-    max-width: 80%
-  +respond-min($break-2)
-    max-width: 70%
-  +respond-min($break-3)
-    max-width: 50%
-
 .video--fallback
   position: absolute
   top: -50%

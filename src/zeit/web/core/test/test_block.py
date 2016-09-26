@@ -184,7 +184,7 @@ def test_image_should_use_variant_original_if_infographic(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/infographic')
     block = zeit.web.core.interfaces.IPages(article)[0][1]
-    assert block.block_type == 'image_infographic'
+    assert block.block_type == 'infographic'
     image = zeit.web.core.interfaces.IImage(block)
     assert image.variant_id == 'original'
 

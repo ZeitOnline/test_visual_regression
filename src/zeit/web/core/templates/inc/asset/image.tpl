@@ -30,7 +30,7 @@
                 {%- for name, url, nofollow in image.copyrights %}
                     <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
                         {%- if url and not omit_image_links %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif -%}
-                        <span class="{% block media_copyright_class %}{% endblock %}" itemprop="name">{{ name }}</span>
+                        <span itemprop="name">{{ name }}</span>
                         {%- if url and not omit_image_links %}</a>{% endif -%}
                     </span>
                 {%- endfor %}
