@@ -293,12 +293,12 @@ class Article(zeit.web.core.view.Content):
                             'link': 'http://{}/{!s}/{!s}'.format(
                                 self.request.host,
                                 self.volume.year, self.volume.volume),
-                            'link_text': u'Exklusiv für Abonennten',
+                            'link_text': u'Exklusiv für Abonnenten',
                             'cover': self.volume.covers['printcover']}
             elif access and access != 'free':
                 return {'intro': '',
                         'link': 'http://{}/exklusiv'.format(self.request.host),
-                        'link_text': u'Exklusiv für Abonennten',
+                        'link_text': u'Exklusiv für Abonnenten',
                         'cover': False}
             return False
         except:
