@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
-import lxml
 
 
-def test_article_page_should_contain_blocks(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/all-blocks')
-    page = browser.cssselect('.article__page')
-    html_str = lxml.html.tostring(page[0])
+def test_article_page_should_contain_blocks(testserver, httpbrowser):
+    browser = httpbrowser(
+        '%s/zeit-magazin/article/all-blocks' % testserver.url)
+    page = browser.cssselect('.article__page')[0]
 
     paragraph = browser.cssselect('.paragraph')
     intertitle = browser.cssselect('.article__subheading')
     contentadblock = browser.cssselect('#iq-artikelanker')
-    portraitbox = page[0].cssselect('.portraitbox.figure-stamp')
-    raw = page[0].cssselect('.raw')
+    portraitbox = page.cssselect('.portraitbox.figure-stamp')
+    raw = page.cssselect('.raw')
 
     assert len(paragraph) == 11
     assert 'paragraph article__item' in paragraph[0].get('class')
@@ -24,8 +23,7 @@ def test_article_page_should_contain_blocks(testbrowser):
     assert len(contentadblock) == 1
 
     # liveblog
-    assert '<include src="http://www.zeit.de/liveblog-backend/100.html"' \
-           ' onerror="continue"></include>' in html_str
+    assert page.cssselect('.liveblog')
 
 
 def test_article_should_render_variants_of_block_citation(testbrowser):
