@@ -49,30 +49,31 @@ div[id*="__container__"]
     &--8-on-centerpage
         background-color: $color-page-bg
         color: $color-text
-        margin: 0 auto $compact auto
+        margin: 0 auto $compact
         width: 300px
     &--7-on-article,
     &--8-on-article
         display: none
         +respond_min($break-mobile-ad-width)
-            border-top: 1px solid $charcoal
             border-bottom: 1px solid $charcoal
-            margin: 0 auto 0.625em
-            max-width: 41.25rem
-            padding-bottom: remify(15px)
+            border-top: 1px solid $charcoal
             display: table
+            margin: remify(0 auto 15px)
+            max-width: remify(660px)
+            padding: remify(0 15px)
             vertical-align: middle
             width: 100%
             +respond-min($break-3)
                 border: none
                 clear: both
                 float: right
-                margin: 0 remify(60px) remify(28px) remify(36px)
+                margin: remify(0 60px 28px 36px)
+                max-width: remify(300px)
                 padding: 0
+                width: auto
         // uses code by iqd, may break tomorrow
         div[id*="__container__"]
             display: table-cell
-            padding-top: remify(15px)
             position: relative
             text-align: center
             & > iframe[id^="google_ads_iframe"]
@@ -85,16 +86,11 @@ div[id*="__container__"]
                     display: none
             +respond-min($break-3)
                 display: block
-                padding-top: 0
                 margin: 0
                 max-width: 100%
     &--7-on-article
         +respond-min($break-3)
-            max-width: 802px
-            width: auto
-    &--8-on-article
-        +respond-min($break-3)
-            max-width: 300px
+            max-width: none
 
 // Fix hillarious unusable ad extras by iqd
 +respond-max($break-mobile-ad-width)
