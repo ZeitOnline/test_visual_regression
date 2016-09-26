@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import datetime
+
 import lxml.html
+import mock
 import pyramid.testing
 import pytest
 import zope.component
@@ -124,12 +126,33 @@ def test_view_author_comments_should_have_comments_area(
         application, dummy_request):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
-    request = dummy_request
-    request.registry.settings = {'author_comment_page_size': '6'}
-    request.GET = {'p': '1'}
-    view = zeit.web.site.view_author.Comments(author, request)
+    dummy_request.registry.settings = {'author_comment_page_size': '6'}
+    dummy_request.GET = {'p': '1'}
+    view = zeit.web.site.view_author.Comments(author, dummy_request)
     assert type(view.tab_areas[0]) == (
         zeit.web.site.view_author.UserCommentsArea)
+
+
+def test_author_comments_should_correctly_validate_pagination(
+        application, dummy_request, monkeypatch):
+    mock_comments = mock.MagicMock(return_value={'comments': []})
+    monkeypatch.setattr(
+        zeit.web.core.comments.Community, 'get_user_comments', mock_comments)
+
+    dummy_request.GET = {}
+    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    assert view.tab_areas is not None
+    assert mock_comments.call_args[1]['page'] == 1
+
+    dummy_request.GET = {'p': 'nan'}
+    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    assert view.tab_areas is not None
+    assert mock_comments.call_args[1]['page'] == 1
+
+    dummy_request.GET = {'p': '3'}
+    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    assert view.tab_areas is not None
+    assert mock_comments.call_args[1]['page'] == 3
 
 
 def test_author_contact_should_be_fully_rendered(testbrowser):

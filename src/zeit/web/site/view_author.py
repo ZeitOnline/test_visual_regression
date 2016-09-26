@@ -122,7 +122,11 @@ class Comments(Author):
 
     @zeit.web.reify
     def tab_areas(self):
-        page = int(self.request.GET.get('p', '1'))
+        try:
+            page = int(self.request.GET['p'])
+        except (KeyError, ValueError):
+            page = 1
+
         page_size = int(self.request.registry.settings.get(
             'author_comment_page_size', '10'))
 
