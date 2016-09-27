@@ -55,7 +55,6 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <volume href="http://xml.zeit.de/ausgabe/2016/01" />
     <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
         <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="volumeheader" title="FOOOO">
             <!--<container cp:type="cpextra" module="mosttrending" visible="True" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a007">-->
