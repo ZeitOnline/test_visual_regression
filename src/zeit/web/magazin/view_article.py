@@ -33,16 +33,6 @@ log = logging.getLogger(__name__)
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
 
     @zeit.web.reify
-    def comments(self):
-        if not self.show_commentthread:
-            return
-        thread = zeit.web.core.comments.get_thread(
-            self.context.uniqueId, sort='desc')
-        if thread and thread.get('request_failed'):
-            return None
-        return thread
-
-    @zeit.web.reify
     def genre(self):
         prefix = 'ein'
         if self.context.genre in (
