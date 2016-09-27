@@ -393,6 +393,14 @@ def test_block_place_should_contain_expected_structure(tplbrowser):
     assert browser.cssselect('script[type="text/javascript"]')
 
 
+def test_block_authorbox_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/authorbox.html', block=block)
+    assert browser.cssselect(
+        '.authorbox.article__item.article__item--marginalia')
+
+
 def test_block_portraitbox_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
