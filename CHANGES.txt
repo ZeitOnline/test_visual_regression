@@ -13,9 +13,17 @@ bin/zope debug work/maintenancejobs/tools/provide_interface.py http://xml.zeit.d
 3.10 (unreleased)
 -----------------
 
+- BUG-546: Show date last modified for nextread and search results
+
 - ZON-3180: Enlarge infographics with layout `small` for desktop
 
-- ZON-3240: Added some optical adjustments
+- ZON-3240: Added some optical adjustments to Z+ badges
+
+- ZON-3325: Send entitlement (access rights) to C1
+
+- ZON-1560: Add authorbox for single authors with image
+
+- MAINT: Try to stabilize selenium tests by waiting for HTML body
 
 
 3.9 (2016-09-21)

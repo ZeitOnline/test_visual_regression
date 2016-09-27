@@ -16,7 +16,7 @@
     {% set tracking_slug = '{}...{}'.format(region_loop.index, '-'.join([area.kind, module_layout])) %}
     <div class="section-footer">
         <a  href="{{ area.read_more_url }}"
-            class="button printkiosk__button js-bar-teaser-paginate"
+            class="printkiosk__button js-bar-teaser-paginate"
             data-id="{{ tracking_slug }}.weitere_laden"
             data-sourceurl="{{ view.content_url }}/area/{{ area.uniqueId.rsplit('/', 1)[-1] }}?p=">
             {{ lama.use_svg_icon('shuffle', 'printkiosk__shuffle-icon', view.package) }}
