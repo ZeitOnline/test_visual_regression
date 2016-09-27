@@ -41,7 +41,7 @@ def test_gsitemap_page_with_image_copyright(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
-                          'crystal-meth-nancy-schmidt/'],
+                          'filmstill-hobbit-schlacht-fuenf-hee/'],
         'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}]
     browser = testbrowser('/gsitemaps/index.xml?p=1')
     assert (browser.document.xpath('//url/loc')[0].text ==
