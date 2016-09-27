@@ -1,0 +1,8 @@
+{% set image = get_image(view.volume.covers['coverimage'], fallback=False) %}
+{% set module_layout = "header-image" %}
+{% set media_caption_additional_class = 'figcaption--hidden' %}
+
+<header class="header-image">
+    {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
+    {% include "{0}:templates/inc/area/volume-navigation.html".format(view.package) ignore missing %}
+</header>
