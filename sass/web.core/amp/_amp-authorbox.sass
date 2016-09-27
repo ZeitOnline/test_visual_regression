@@ -1,0 +1,40 @@
+.authorbox
+
+	&__container
+		align-items: center
+		display: flex
+		letter-spacing: $letter-spacing-s
+		line-height: 1.125
+		margin: remify(0 0 16px)
+
+	&__media
+		flex: 0 0 auto
+		height: remify(72px)
+		margin: remify(0 15px 4px 0)
+		width: remify(72px)
+
+		img
+			border-radius: 50%
+
+	&__name
+		display: block
+		font-family: $font-tabletgothic
+		font-size: em(14px)
+		margin-bottom: remify(6px)
+		text-transform: uppercase
+
+	&__summary
+		color: $color-text--light
+		font-family: $font-franziska
+		font-size: em(16px)
+
+	+respond-min($break-tablet-min)
+		text-align: center
+
+		&__container
+			display: block
+
+		&__media
+			height: remify(100px)
+			margin: remify(0 auto 14px)
+			width: remify(100px)
