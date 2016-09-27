@@ -4,7 +4,6 @@ import datetime
 import lxml.html
 import mock
 import pyramid.testing
-import pytest
 import zope.component
 
 import zeit.solr.interfaces
@@ -103,10 +102,16 @@ def test_author_page_should_hide_favourite_content_on_further_pages(
     assert len(select('.teaser-small')) == 3
 
 
-@pytest.mark.skipif(
-    True, reason='We cannot browser-test this, deduplication happens via solr')
-def test_articles_by_author_should_not_repeat_favourite_content(testbrowser):
-    pass
+def test_articles_by_author_should_not_repeat_favourite_content(
+        testbrowser, monkeypatch):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/j_random')
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    mock_search = mock.Mock()
+    monkeypatch.setattr(solr, 'search', mock_search)
+    testbrowser('/autoren/j_random')
+    for fav in author.favourite_content:
+        assert fav.uniqueId in mock_search.call_args[1]['fq']
 
 
 def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
