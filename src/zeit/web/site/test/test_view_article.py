@@ -1141,7 +1141,7 @@ def test_article_advertorial_pages_should_render_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/angebot/seite-2')
     assert browser.cssselect('.advertorial-marker')
     browser = testbrowser('/zeit-online/article/angebot/komplettansicht')
-    assert browser.cssselect('.advertorial-marker ')
+    assert browser.cssselect('.advertorial-marker')
 
 
 def test_article_lineage_should_render_correctly(testbrowser):
@@ -1395,6 +1395,12 @@ def test_zon_nextread_teaser_must_not_show_image_for_column(testbrowser):
     assert len(browser.cssselect('.nextread image')) == 0
 
 
+def test_nextread_should_display_date_last_published_semantic(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread')
+    nextread_date = browser.cssselect('.nextread__dt')[0]
+    assert nextread_date.text.strip() == '15. Februar 2015'
+
+
 def test_article_contains_zeit_clickcounter(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
@@ -1639,32 +1645,23 @@ def test_article_toc_is_printed_before_paragraphs_and_lists(testbrowser):
 
 def test_infographics_should_display_header_above_image(testbrowser):
     browser = testbrowser('/zeit-online/article/infographic')
-    items = list(browser.xpath('//figure')[0].iterchildren())
+    items = list(browser.cssselect('.infographic__media')[0].iterchildren())
     assert 'Die Entschlackung' == items[0].text
     assert (
-        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        u'Potenzial der Bertelsmann-Geschäfte (in Prozent des Umsatzes)' ==
         items[1].text)
 
 
 def test_infographics_should_display_origin_instead_of_caption(testbrowser):
     browser = testbrowser('/zeit-online/article/infographic')
-    figure = browser.xpath('//figure')[0]
-    caption = figure.xpath('figcaption/*')[0]
-    assert 'Quelle: Statistisches Bundesamt' == caption.text
+    infographic = browser.cssselect('.infographic')[0]
+    caption = infographic.cssselect('figcaption')[0]
+    assert 'Quelle: Statistisches Bundesamt' == caption.text.strip()
 
 
-def test_infographics_should_use_customized_css_classes(testbrowser):
-    browser = testbrowser('/zeit-online/article/infographic')
-    assert 'x-caption--sans' in browser.contents
-    assert 'x-copyright' in browser.contents
-    assert 'x-copytext' in browser.contents
-    assert 'x-footer' in browser.contents
-    assert 'x-subheadline' in browser.contents
-
-
-def test_infographics_should_render_border_styles_conditionally(
+def test_infographics_should_render_html_correctly(
         tplbrowser, dummy_request):
-    template = 'zeit.web.core:templates/inc/blocks/image_infographic.html'
+    template = 'zeit.web.core:templates/inc/blocks/infographic.html'
     image = zeit.web.core.image.Image(mock.Mock())
     image.ratio = 1
     image.group = mock.Mock()
@@ -1677,31 +1674,32 @@ def test_infographics_should_render_border_styles_conditionally(
     image.copyrights = ('FOO', 'BAR', 'BAZ')
     image.caption = True
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert not browser.cssselect('.x-footer--borderless')
-    assert not browser.cssselect('.x-subheadline--borderless')
+    assert browser.cssselect('.infographic__text')
+    assert browser.cssselect('.infographic__caption')
 
     # borderless subheadline
     image.caption = False
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert browser.cssselect('.x-subheadline--borderless')
+    assert not browser.cssselect('.infographic__text')
 
     # footer has border
     image.origin = True
     image.copyrights = ()
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert not browser.cssselect('.x-footer--borderless')
+    assert browser.cssselect('.infographic__caption')
 
     image.origin = False
     image.copyrights = ('FOO', 'BAR', 'BAZ')
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert not browser.cssselect('.x-footer--borderless')
+    assert browser.cssselect('.infographic__caption')
 
     # no border styles present
     image.copyrights = ()
     image.origin = False
+    image.caption = False
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert browser.cssselect('.x-footer--borderless')
-    assert browser.cssselect('.x-subheadline--borderless')
+    assert not browser.cssselect('.infographic__text')
+    assert not browser.cssselect('.infographic__caption')
 
 
 def test_infographics_desktop_should_have_proper_asset_source(
@@ -1723,7 +1721,7 @@ def test_infographics_mobile_should_have_proper_asset_source(
     img_src = selenium_driver.find_element_by_css_selector(
         '.infographic img').get_attribute('src')
     assert u'/zeit-online/image/bertelsmann-infographic/' \
-           u'original__400x500__mobile' in img_src
+           u'original__450x563__mobile' in img_src
 
 
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):
@@ -1968,3 +1966,14 @@ def test_article_view_has_share_buttons_set_correctly(
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.share_buttons == 'big'
     assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
+
+
+def test_merian_link_has_nofollow(testbrowser, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-merian-nofollow')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.product_id == 'merian'
+
+    browser = testbrowser('/zeit-online/article/simple-merian-nofollow')
+    sourcelink = browser.cssselect('.metadata__source a')[0]
+    assert sourcelink.attrib['rel'] == 'nofollow'

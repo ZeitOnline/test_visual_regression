@@ -465,4 +465,34 @@
         areas="minor"
         available="zeit.magazin.interfaces.IZMOContent"/>
 
+    <layout
+        id="sitemap-default"
+        title="Sitemap Teaser"
+        areas="ranking"
+        available="zeit.content.cp.interfaces.ISitemap"/>
+
+    <layout
+        id="sitemap-news"
+        title="Newssite Sitemap Teaser"
+        areas="ranking"
+        available="zeit.content.cp.interfaces.ISitemap"/>
+
+    <layout
+        id="sitemap-video"
+        title="Video Sitemap Teaser"
+        areas="ranking"
+        available="zeit.content.cp.interfaces.ISitemap"/>
+
+    <layout
+        id="sitemap-topics"
+        title="Themen Sitemap Teaser"
+        areas="ranking"
+        available="zeit.content.cp.interfaces.ISitemap"/>
+
+    <layout
+        id="sitemap-apps"
+        title="Appcon Sitemap Teaser"
+        areas="ranking"
+        available="zeit.content.cp.interfaces.ISitemap"/>
+
 </layouts>

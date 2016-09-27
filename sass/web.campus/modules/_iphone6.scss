@@ -1,0 +1,17 @@
+@media
+	// iPhone 6 (in portrait and landscape mode)
+	screen and (device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2),
+	// iPhone 6 Plus (in portrait and landscape mode)
+	screen and (device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) {
+
+	.main {
+		// uncomment the next line to have a visible feedback that the media query applies
+		// background-image: linear-gradient(to right, orchid 3px, white 3px);
+		font-size: 106.25%; // 16 -> 17px
+	}
+
+	// reset headlines, if possible? (mostly not)
+	h1, h2, h3 {
+		font-size: 1rem;
+	}
+}

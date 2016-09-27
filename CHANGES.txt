@@ -1,10 +1,35 @@
 Change log for zeit.web
 =======================
 
-3.9 (unreleased)
+POSTDEPLOY
+----------
+
+ZON-3236: Nach dem Deployment muss man dann die Sitemap-CPs in Production geeignet anlegen,
+am besten aus http://vivi.staging.zeit.de/repository/gsitemaps/ kopieren.
+ISitemap Interface vergeben auf vivi-db mit:
+bin/zope debug work/maintenancejobs/tools/provide_interface.py http://xml.zeit.de/path/to/thing zeit.content.cp.interfaces.ISitemap
+
+
+3.10 (unreleased)
+-----------------
+
+- BUG-546: Show date last modified for nextread and search results
+
+- ZON-3180: Enlarge infographics with layout `small` for desktop
+
+- ZON-3325: Send entitlement (access rights) to C1
+
+
+3.9 (2016-09-21)
 ----------------
 
-- Nothing changed yet.
+- ZON-3236: Render sitemaps
+
+- ZON-3359: Add nofollow to merian link
+
+- ZON-3066: Tweak main font size for iPhone 6
+
+- FIX: Include video still copyright text via template
 
 
 3.8 (2016-09-21)

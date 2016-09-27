@@ -7,6 +7,7 @@ import pyramid
 import zc.iso8601.parse
 import zope.schema
 
+import zeit.cms.tagging.interfaces
 import zeit.content.cp.automatic
 import zeit.content.cp.interfaces
 
@@ -140,7 +141,7 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
         try:
             page = self._page()
             assert page > 0
-            if page == 1:
+            if page == 1 and not self.is_sitemap:
                 raise pyramid.httpexceptions.HTTPMovedPermanently(
                     zeit.web.core.template.remove_get_params(
                         self.request.url, 'p'))
@@ -173,6 +174,11 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             return []
         pagination = self._pagination
         return pagination if pagination is not None else []
+
+    @property
+    def is_sitemap(self):
+        return zeit.content.cp.interfaces.ISitemap.providedBy(
+            zeit.content.cp.interfaces.ICenterPage(self))
 
 
 class Converter(object):
@@ -292,3 +298,31 @@ class FakeReference(object):
 
     def __init__(self, content):
         self.target = content
+
+
+class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):
+
+    grokcore.component.name('topicsitemap')
+
+    def __call__(self):
+        self.total_hits = 0
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        result = []
+        try:
+            topics = zope.component.getUtility(
+                zeit.cms.tagging.interfaces.ITopicpages)
+            response = topics.get_topics(self.start, self.rows)
+            self.total_hits = response.hits
+            for item in response:
+                content = zeit.cms.interfaces.ICMSContent({
+                    'uniqueId': u'{}/{}'.format(
+                        conf.get('topic_prefix', ''), item['id']),
+                    'title': item['title'],
+                }, None)
+                if content is not None:
+                    result.append(content)
+        except:
+            log.warning(
+                'Error retrieving topic pages for %s',
+                self.context.uniqueId, exc_info=True)
+        return result
