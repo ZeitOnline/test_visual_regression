@@ -25,7 +25,7 @@
             <image:loc>{{ source }}</image:loc>
             <image:caption>{{ [image.caption, copyright] | reject('none') | join(' ') }}</image:caption>
             <image:title>{{ image.title }}</image:title>
-            <image:license>{{ copyright_url }}</image:license>
+            <image:license>{{ image.copyrights[0] | length >=2 and image.copyrights[0][1] }}</image:license>
         </image:image>
     {% endrequire %}
 </url>
