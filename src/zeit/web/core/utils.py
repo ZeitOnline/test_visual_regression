@@ -562,6 +562,8 @@ class DataSolr(RandomContent):
                         publish.date_first_released.isoformat()),
                     u'date_last_published': (
                         publish.date_last_published.isoformat()),
+                    u'date_last_published_semantic': (
+                        publish.date_last_published_semantic.isoformat()),
                     u'last-semantic-change': (
                         semantic.last_semantic_change.isoformat()),
                     u'image-base-id': [
