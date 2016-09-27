@@ -19,6 +19,8 @@ bin/zope debug work/maintenancejobs/tools/provide_interface.py http://xml.zeit.d
 
 - ZON-3325: Send entitlement (access rights) to C1
 
+- ZON-1560: Add authorbox for single authors with image
+
 - MAINT: Try to stabilize selenium tests by waiting for HTML body
 
 
