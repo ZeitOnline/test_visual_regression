@@ -87,7 +87,10 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
 
     @zeit.web.reify
     def surrounding_teasers(self):
-        return len(self._content_query.existing_teasers)
+        if self.hide_dupes:
+            return len(self._content_query.existing_teasers)
+        else:
+            return 0
 
     @zeit.web.reify
     def query_string(self):
