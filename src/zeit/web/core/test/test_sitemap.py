@@ -100,7 +100,7 @@ def test_gsitemap_newssite(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
-                          'filmstill-hobbit-schlacht-fuenf-hee/'],
+                          'crystal-meth-nancy-schmidt/'],
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'},
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'}]
     browser = testbrowser('/gsitemaps/newsitemap.xml')
@@ -132,14 +132,16 @@ def test_gsitemap_newssite(testbrowser):
         xml.xpath(
             '//image:image/image:loc', namespaces=ns)[0].text ==
         'http://localhost/zeit-online/image/'
-        'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+        'crystal-meth-nancy-schmidt/wide__1300x731')
     assert (
         xml.xpath(
             '//image:image/image:caption', namespaces=ns)[0].text ==
-        u'Handlung, wohin man auch schaut in dieser Szene aus dem letzten '
-        u'Hobbit-Teil "Die Schlacht der fünf Heere" '
-        u'(©\xa0Warner Bros.)')
-    assert len(xml.xpath('//image:image', namespaces=ns)) == 1
+        u'Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen '
+        u'Gera und Jena (©\xa0Milos Djuric)')
+    assert (
+        xml.xpath(
+            '//image:image/image:license', namespaces=ns)[0].text ==
+        'http://www.milosdjuric.com/')
 
 
 def test_gsitemap_video(testbrowser):
