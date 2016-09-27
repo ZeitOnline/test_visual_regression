@@ -119,11 +119,9 @@
 		background-color: $zon-lighter-grey
 		height: remify(40px)
 		position: relative
-	&__badge
-		display: table-cell
 	&__marker
-		background-color: $zon-red
 		display: table-cell
+		background-color: $zon-red
 		vertical-align: middle
 		width: remify(40px)
 		height: remify(40px)
@@ -181,12 +179,15 @@
 		&__cover
 			position: static
 			width: 100%
-		&__badge
+		&__marker
 			position: absolute
 			top: remify(100px)
 			left: remify(20px)
-		&__marker
 			width: remify(48px)
+		&__marker-icon
+			transform: translateY(4px)
+			width: remify(40px)
+			height: remify(42px)
 
 		// modifications for minimal version
 		&--coverless
@@ -199,10 +200,17 @@
 			.zplus__text
 				padding-top: remify(30px)
 
-			.zplus__badge
-				top: remify(-20px)
+			.zplus__marker
+				top: remify(-16px)
 				left: 50%
-				transform: translateX(-24px)
+				transform: translateX(-19px)
+				width: remify(38px)
+				height: remify(34px)
+
+			.zplus__marker-icon
+				transform: translateY(3px)
+				width: remify(38px)
+				height: remify(37px)
 
 
 .article-page
