@@ -1,4 +1,4 @@
-{% if view.commenting_allowed or (view.show_commentthread and view.comments) %}
+{% if view.has_comment_area %}
     <div class="comment-balloon">
         <a class="comment-balloon__link js-scroll" href="#comments">
             <span class="comment-balloon__count">{{ view.comment_count | default(0) }}</span>

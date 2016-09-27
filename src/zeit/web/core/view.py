@@ -814,6 +814,17 @@ class CommentMixin(object):
         return self.context.commentSectionEnable is not False
 
     @zeit.web.reify
+    def has_comment_area(self):
+        # show comments if:
+        # 1. comment section is enabled *and*
+        # 2. commenting is allowed _or_ there are existing comments
+        # (avoid displaying "0 Comments: Add one" + "sorry, comments closed")
+        # be carefull with self.comment_count - it sends an extra request
+        # and is intended to be used _outside_ the comments ESI
+        return self.show_commentthread and (self.commenting_allowed or
+                                            self.comment_count)
+
+    @zeit.web.reify
     def comment_form(self):
         user = self.request.user
         user_blocked = user.get('blocked')

@@ -1,5 +1,5 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
-{% if view.show_commentthread and (view.commenting_allowed or view.comments) %}
+{% if view.has_comment_area %}
 {% include "zeit.web.core:templates/inc/comments/premoderation.html" %}
 <section class="comment-section" id="comments">
     {% set query = '?' + request.query_string if request.query_string else '' %}
