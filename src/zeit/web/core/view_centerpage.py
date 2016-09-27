@@ -128,6 +128,23 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         return None
 
     @zeit.web.reify
+    def webtrekk_content_id(self):
+        # special case for search results
+        if self.area_ranking and self.area_ranking.query_string:
+            content_url = self.content_url.replace('http://', '')
+            if content_url.endswith('/index'):
+                content_url = content_url[:-len('/index')]
+            if self.area_ranking.hits:
+                basename = 'treffer'
+            else:
+                basename = 'keine_treffer'
+            content_url = '{}/{}'.format(content_url, basename)
+
+            return '{}|{}'.format(self.webtrekk_identifier, content_url)
+        else:
+            return super(Centerpage, self).webtrekk_content_id
+
+    @zeit.web.reify
     def next_page_url(self):
         ranking = self.area_ranking
         if ranking is None:

@@ -78,6 +78,13 @@ class OrderedList(UnorderedList):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IAuthor)
+class Authorbox(Block):
+    def __init__(self, model_block):
+        self.author = model_block.references.target
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPortraitbox)
 class Portraitbox(Block):
 
@@ -362,7 +369,7 @@ class Raw(Block):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
-def RawText(context):
+def RawText(context):  # NOQA
     return context
 
 

@@ -46,6 +46,6 @@
             </span>
         {% endif %}
 
-        <a class="button {{ '{}__button'.format(blockname) | with_mods(blockname_modifier) }}" href="{{ target_url }}">zum Live-Dossier</a>
+        <a class="{{ '{}__button'.format(blockname) | with_mods(blockname_modifier) }}" href="{{ target_url }}">zum Live-Dossier</a>
     </div>
 </article>
