@@ -1,16 +1,5 @@
-{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
-{#
-<pre>
-    SHOW: {{ view.comment_area.show }}
-    SHOW_COMMENT_FORM: {{ view.comment_area.show_comment_form }}
-    SHOW_COMMENTS: {{ view.comment_area.show_comments }}
-    NO_COMMENTS: {{ view.comment_area.show_comments }}
-    MESSAGE: {{ view.comment_area.message }}
-    NOTE: {{ view.comment_area.note }}
-    USER_BLOCKED: {{ view.comment_area.user_blocked }}
-</pre>
-#}
-{% if view.show_commentthread %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
+{% if view.has_comment_area %}
 {% include "zeit.web.core:templates/inc/comments/premoderation.html" %}
 <section class="comment-section" id="comments">
     {% set query = '?' + request.query_string if request.query_string else '' %}
