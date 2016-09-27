@@ -9,10 +9,6 @@
 {%- for module in area.values() -%}
     {%- set teaser = module | first_child -%}
     {%- set layout = module | get_layout -%}
-    {%- require image = get_image(module, variant_id='wide', fallback=False) -%}
-        {%- set source = request.image_host + image.path + '__1300x731' -%}
-        {%- set copyright = image.copyrights | map('first') | join(', ') -%}
-    {%- endrequire -%}
     {%- include "zeit.web.core:templates/inc/sitemap/teaser/{0}.html".format(layout.replace('sitemap-', '')) ignore missing -%}
 {%- endfor -%}
 </urlset>
