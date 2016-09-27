@@ -1,4 +1,4 @@
-{% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% if view.show_commentthread and (view.commenting_allowed or view.comments) %}
 {% include "zeit.web.core:templates/inc/comments/premoderation.html" %}
 <section class="comment-section" id="comments">
