@@ -1539,7 +1539,7 @@ def test_article_in_series_has_banner_image(testbrowser):
     image = figure[0].cssselect('img')[0]
 
     assert len(figure) == 1
-    assert image.get('data-ratio') == '10.0'
+    assert image.get('data-ratio') == '12.25'
 
 
 def test_article_in_series_has_correct_link(testbrowser):
