@@ -82,10 +82,33 @@
             <image align="left" src="http://xml.zeit.de/exampleimages/artikel/04/03.jpg" type="jpg" publication-date="" expires="" layout="small" is_empty="False">
                 <bu>Ein Mann in Leipzig vor dem "Bau Büro"</bu>
                 <copyright>© Johannes Eisele/AFP/Getty Images</copyright>
-                </image>
-            <p>Die Nacht, die in der Fraunhofer Schoppenstube jahrzehntelang besungen wurde, indem sie nämlich nicht allein zum Schlafen da ist, hat sich dann doch verzogen.</p>
-            <p>Die Nacht, die in der Fraunhofer Schoppenstube jahrzehntelang besungen
-          wurde, indem sie nämlich nicht allein zum Schlafen da ist, hat sich dann doch verzogen.</p>
+            </image>
+            <p>Quis vitae voluptatibus nam quasi quam distinctio nostrum porro harum saepe accusamus eveniet culpa exercitationem tempora laboriosam illo molestiae, et voluptatum non aut nisi, iste! Dolor accusantium doloremque, iusto nobis dolorum pariatur quidem sit harum id tempore. Quae quidem iste adipisci mollitia? Voluptatum, voluptatem ipsam! Asperiores nostrum temporibus, aperiam iusto voluptatibus laudantium! Ipsa totam nisi hic, nostrum esse exercitationem vero consectetur. Ipsa, nemo. Earum!</p>
+
+            <intertitle>large: L</intertitle>
+            <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="large"></image>
+            <p>Itaque ex asperiores, iste dolor? Corrupti, illo quisquam. Voluptas corrupti veniam rem eligendi soluta iste porro eius ex maxime, delectus minus dolores, libero in.</p>
+
+            <intertitle>column-width: M</intertitle>
+            <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="column-width"></image>
+            <p>Earum eaque, dolorem, neque est fugit perferendis quae et adipisci vero temporibus nisi ad, mollitia cumque ut quibusdam culpa labore blanditiis! Excepturi, itaque at.</p>
+
+            <intertitle>medium-float-left: M (links)</intertitle>
+            <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="medium-float-left"></image>
+            <p>Itaque ex asperiores, iste dolor? Corrupti, illo quisquam. Voluptas corrupti veniam rem eligendi soluta iste porro eius ex maxime, delectus minus dolores, libero in.</p>
+
+            <intertitle>medium-float-right M (rechts)</intertitle>
+            <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="medium-float-right"></image>
+            <p>Earum eaque, dolorem, neque est fugit perferendis quae et adipisci vero temporibus nisi ad, mollitia cumque ut quibusdam culpa labore blanditiis! Excepturi, itaque at.</p>
+
+            <intertitle>float: S (links)</intertitle>
+            <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="float"></image>
+            <p>Sit dolor atque, dolorem praesentium, quod, nisi et id ullam consequatur nesciunt recusandae numquam. Nam sed cum commodi eos, voluptates, provident iure odit qui consequatur libero sunt perferendis neque natus dolore similique nobis, consectetur. Tenetur rerum minima quasi adipisci nostrum veritatis libero, ut obcaecati facilis ducimus delectus nemo asperiores ullam itaque molestias reprehenderit eum molestiae velit eius? Dolores rem ea non aperiam voluptas quasi.</p>
+
+            <intertitle>small-float-right: S (rechts)</intertitle>
+            <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="small-float-right"></image>
+            <p>Nobis voluptatem accusantium totam sit suscipit rem, cum consequatur, itaque corrupti iure magnam. Ipsam provident autem recusandae illum voluptas, voluptatum sequi eum, ipsa impedit aspernatur adipisci praesentium optio architecto natus, at officiis nesciunt harum! Quae saepe hic atque, eius. Quos adipisci similique ab. Odit cupiditate sit a, eos fugit obcaecati cum quibusdam dolorem reiciendis possimus nulla rerum earum nostrum vero explicabo ipsa, labore ad?</p>
+
           <raw alldevices="true">
             <hr/>
             <h2>R.A.W.</h2>
@@ -109,7 +132,9 @@
           </image>
           <citation text="Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time!" attribution="Jules Winnfield" url="http://www.imdb.com/title/tt0110912/quotes?item=qt0447099" layout="short"/>
           <p>In vielen der neu renovierten Häuser mit ihren meist aufwändig sanierten Wohnungen beträgt die Nettokaltmiete pro Quadratmeter bei Neuvermietungen mittlerweile 7,50 Euro oder mehr, hat Dieter Rink, Stadtsoziologe am UFZ Leipzig, beobachtet. Viele von Leipzigs Wächterhäusern, ein <a href="http://www.zeit.de/lebensart/2012-11/zwischennutzung-stadtentwicklung-prinzessinnengaerten" target="_blank" class="">Vorzeige-Konzept der Zwischennutzung</a> für sanierungsbedürftige Bauten, bei dem die Mieter einen geringen Obolus zahlen und dafür die Räumlichkeiten in Eigenarbeit renovieren, werden nach der privaten Instandsetzung teurer weitervermietet. <a href="http://www.querbeet-leipzig.de/" target="_blank" class="">Queerbeet</a>, ein Verein für städtisches Gemeinschaftsgärtnern, musste jüngst seinen Garten im Leipziger Westen aufgeben. Die Bagger sind bereits angerückt, eine neue Kita soll gebaut werden.  </p>
-          <citation text="Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time!" attribution="Jules Winnfield" url="http://www.imdb.com/title/tt0110912/quotes?item=qt0447099" layout="wide"/>
+          <citation text="The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brother's keeper and the finder of lost children."/>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, perferendis voluptas tempora consequuntur aliquid minus nemo. Quisquam rem autem quam odio vel officiis eveniet libero, quasi culpa non fuga blanditiis maxime? Non in repellendus deserunt reiciendis, exercitationem nemo asperiores incidunt fuga quasi ipsa recusandae perspiciatis autem, molestiae iste, error voluptas neque ullam.</p>
+          <citation text="And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee." attribution="Jules Winnfield" url="http://slipsum.com" layout="wide"/>
           <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/administratives/autoreninfos/wenke-husmann-info" publication-date="" expires=""/>
           <p>Veritatis doloribus, laudantium sequi error similique suscipit aperiam quod beatae doloremque tempora perferendis eligendi rem ea laboriosam eos temporibus reiciendis omnis amet expedita cumque. Accusamus maxime iure voluptatum magni in numquam debitis voluptatibus, nulla!</p>
           <liveblog ns0:__name__="id-b79786c1-9be1-4000-b4c2-1b0ad83411ca" blogID="100"/>

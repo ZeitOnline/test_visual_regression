@@ -85,7 +85,7 @@
             <input type="hidden" name="action" value="comment">
             <input type="hidden" name="pid" value="{{ pid }}">
             <a href="{{ view.content_url }}" class="comment-form__cancel {{ class }} js-cancel-reply">Abbrechen</a>
-            <input class="button" type="submit" value="{{ submit_value }}" data-ct-label="kommentar_senden" />
+            <input class="comment-form__button button" type="submit" value="{{ submit_value }}" data-ct-label="kommentar_senden" />
         </p>
     {% endif %}
     </form>
@@ -95,10 +95,10 @@
         <p>
             Bitte melden Sie sich an, um zu kommentieren.
         </p>
-        <a class="button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
             Anmelden
         </a>
-        <a class="button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
             Registrieren
         </a>
     </form>
@@ -113,10 +113,10 @@
         <p>
             Bitte melden Sie sich an, um diesen Kommentar zu melden.
         </p>
-        <a class="button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
             Anmelden
         </a>
-        <a class="button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
             Registrieren
         </a>
     </form>

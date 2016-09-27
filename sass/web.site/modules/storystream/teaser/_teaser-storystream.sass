@@ -99,8 +99,7 @@ $teaser-storystream-left-outer-desktop: 20px
 		width: remify(13px)
 
 	&__button
-		+zon-button-dark
-		margin-left: 0
+		+zon-button-dark($margin: remify(14px 0))
 
 +respond-min($break-tablet-min)
 	.teaser-storystream__media
@@ -145,9 +144,9 @@ $teaser-storystream-left-outer-desktop: 20px
 	.teaser-storystream__update--in-area-minor
 		display: none
 	.teaser-storystream__button--in-area-minor
+		+zon-button-light($background: 'light')
 		position: absolute
 		bottom: remify(-60px)
-		+zon-button-light
 
 +respond-min($break-desktop-min)
 	.teaser-storystream.teaser-storystream--in-area-minor
