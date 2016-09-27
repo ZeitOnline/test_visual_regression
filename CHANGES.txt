@@ -25,6 +25,8 @@ bin/zope debug work/maintenancejobs/tools/provide_interface.py http://xml.zeit.d
 
 - MAINT: Try to stabilize selenium tests by waiting for HTML body
 
+- ZON-3278: Extract `.core.video.get_seo_slug()` to `zeit.content.video`.
+
 
 3.9 (2016-09-21)
 ----------------
