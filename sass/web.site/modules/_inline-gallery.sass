@@ -10,9 +10,6 @@ $break-gallery-min: em(576px)
 		@extend .gallery-container
 
 .gallery-slides
-	figure
-		margin: 0
-		padding: 0
 	.gallery__media-item
 		margin: 0 auto
 		max-height: 620px
@@ -84,6 +81,8 @@ $break-gallery-min: em(576px)
 	text-indent: -9999px
 	width: $gallery-dots-diameter
 	+on-interaction
+		opacity: 0.7
+	&.active
 		opacity: 0.7
 
 .bx-prev,

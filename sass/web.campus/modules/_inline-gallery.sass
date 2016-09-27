@@ -9,6 +9,7 @@
 	.gallery__media-item
 		margin: 0 auto
 		max-height: 620px
+		max-width: 100%
 		width: auto
 	.figure__caption
 		margin: 0 auto
@@ -77,6 +78,8 @@
 	width: $gallery-dots-diameter
 	+on-interaction
 		background-color: $color-article-primary
+	&.active
+		background-color: $color-article-primary
 
 .bx-prev,
 .bx-next
@@ -98,6 +101,7 @@
 
 .bx-arrow-icon
 	height: remify(15px)
+	margin-top: 30%
 	width: remify(21px)
 
 .bx-overlay-prev,
@@ -115,6 +119,7 @@
 		width: $gallery-button-radius--large
 		.bx-arrow-icon
 			height: remify(30px)
+			margin-top: 28%
 			width: remify(42px)
 
 .bx-zone-prev,
