@@ -1395,6 +1395,12 @@ def test_zon_nextread_teaser_must_not_show_image_for_column(testbrowser):
     assert len(browser.cssselect('.nextread image')) == 0
 
 
+def test_nextread_should_display_date_last_published_semantic(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread')
+    nextread_date = browser.cssselect('.nextread__dt')[0]
+    assert nextread_date.text.strip() == '15. Februar 2015'
+
+
 def test_article_contains_zeit_clickcounter(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')

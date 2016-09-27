@@ -247,6 +247,38 @@ def test_c1_correct_ressort_on_homepage(testbrowser, monkeypatch):
     assert 'cre_client.set_channel( "homepage" );' in (browser.contents)
 
 
+def test_c1_client_should_receive_entitlement(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True}.get)
+    access_source = zeit.cms.content.sources.ACCESS_SOURCE.factory
+    assert 'cre_client.set_entitlement( "{}" );'.format(
+        access_source.translate_to_c1('free')) in (
+            testbrowser('/zeit-online/article/01').contents)
+    assert 'cre_client.set_entitlement( "{}" );'.format(
+        access_source.translate_to_c1('registration')) in (
+            testbrowser('zeit-online/article/zplus-zeit-register').contents)
+    assert 'cre_client.set_entitlement( "{}" );'.format(
+        access_source.translate_to_c1('abo')) in (
+            testbrowser('zeit-online/article/zplus-zeit').contents)
+
+
+def test_http_header_should_contain_c1_entitlement(testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True}.get)
+    access_source = zeit.cms.content.sources.ACCESS_SOURCE.factory
+    assert requests.head(
+        testserver.url + '/zeit-online/article/01').headers.get(
+            'C1-Track-Entitlement') == access_source.translate_to_c1('free')
+    register_article = (
+        testserver.url + '/zeit-online/article/zplus-zeit-register')
+    assert requests.head(register_article).headers.get(
+        'C1-Track-Entitlement') == (
+            access_source.translate_to_c1('registration'))
+    assert requests.head(
+        testserver.url + '/zeit-online/article/zplus-zeit').headers.get(
+            'C1-Track-Entitlement') == access_source.translate_to_c1('abo')
+
+
 def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
