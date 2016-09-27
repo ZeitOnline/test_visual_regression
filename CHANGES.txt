@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-(nothing yet)
+- ZON-3273: Needs config for tube areas, see PR for the what-and-where
 
 
 3.10 (unreleased)
@@ -21,6 +21,8 @@ POSTDEPLOY
 - ZON-3325: Send entitlement (access rights) to C1
 
 - ZON-1560: Add authorbox for single authors with image
+
+- ZON-3273: Add tube area
 
 - FIX: Render copyright url and handle empty image caption in sitemaps
 
