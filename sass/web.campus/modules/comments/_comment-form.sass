@@ -7,14 +7,13 @@ $comment-color-form-cancel-link: $color-text--light
 .comment-login
 	padding-bottom: remify(40px)
 
-.comment-form
-	.button
-		color: $color-community-primary
+.comment-form__button
+	color: $color-community-primary
+	+on-interaction
+		background-color: $color-community-primary
+		border-color: $color-community-primary
+		color: #fff
+	&[disabled]
 		+on-interaction
-			background-color: $color-community-primary
-			border-color: $color-community-primary
-			color: #fff
-		&[disabled]
-			+on-interaction
-				background-color: transparent
-				color: $color-community-primary
+			background-color: transparent
+			color: $color-community-primary

@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml">
+    </author>
+    <topic type="intern" href="http://xml.zeit.de/thema/test">
+        <label>Science</label>
+    </topic>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Zacharias Zacharakis</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="channels" ns="http://namespaces.zeit.de/CMS/document">Campus</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2016-04-02T10:01:53.437856+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2016-01-10T09:39:17.773713+00:00</attribute>
+    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:18.167553+00:00</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:17.773713+00:00</attribute>
+    <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="erscheint" ns="http://namespaces.zeit.de/CMS/document">05.05.2015</attribute>
+    <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_amp" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_instant_article" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:10.319064+00:00</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="long_text" ns="http://namespaces.zeit.de/CMS/workflow">Sogar nachts bekommen Studenten Hilfe. (akg)</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="mostread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="print-publish" ns="http://namespaces.zeit.de/CMS/document">2015-05-05T06:00:00+00:00</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZTCS</attribute>
+    <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT Campus</attribute>
+    <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">c709ca95afcf4b3e9b68a8aab56db53e</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Campus</attribute>
+    <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="short_text" ns="http://namespaces.zeit.de/CMS/workflow">Hier gibt es Hilfe für Studenten: Wir haben die wichtigsten Anlaufstellen gesammelt. (akg)</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document">5098</attribute>
+    <attribute name="tldr_milestone" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/document">article</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">article</attribute>
+    <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:446a4dc8-e536-4c7f-8187-45e443a524be}</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">01</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;Article&quot; module=&quot;zeit.content.article.article&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;IZCOContent&quot; module=&quot;zeit.campus.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZCOArticle&quot; module=&quot;zeit.campus.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Feature</supertitle>
+    <title>Autorenbox mit Autorenfoto</title>
+    <subtitle>Als Nutzer möchte ich einfach erkennen können von welchem Autor ein Artikel stammt.</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/campus/image/strumpfhose/" type="jpg"/>
+      <p>Necessitatibus, provident molestiae repellat nulla id tempora expedita, consequuntur illum iure doloribus, sequi, dolorem repellendus! A soluta possimus ipsum pariatur, aliquid dolorem non quaerat voluptatem esse quibusdam quidem minima dignissimos autem delectus assumenda odit eaque aliquam tempora, repellat nisi? Quibusdam nesciunt numquam optio porro quam voluptatibus quae id sunt fuga vel molestiae illo iusto facere amet, ab accusantium ducimus, culpa autem sapiente, veniam odit!</p>
+      <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/paar-abgewendet-streit/" type="jpg" display_mode="float"/>
+      <p>Molestiae culpa incidunt facilis, excepturi harum repellat officiis eum tempora, quam ratione maxime nostrum voluptatum, soluta vitae doloribus pariatur quisquam molestias, aliquam ut accusantium perspiciatis similique suscipit asperiores vel. Dolorum, sapiente labore. Expedita ratione id quam doloribus sequi? Recusandae vel natus ex modi minus ratione. Cupiditate quidem quo eos nulla tenetur, iure, consectetur eveniet quam asperiores esse aspernatur deserunt, officia animi tempore ex beatae!</p>
+      <author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml">
+        <biography>meine lange Biography im Vivi Feld Kurzbio</biography>
+      </author>
+      <p>Aspernatur eveniet accusantium odio temporibus fuga doloremque architecto perferendis nulla veniam assumenda libero, eligendi doloribus maiores alias consequatur sed perspiciatis minus quia, sint, similique? Saepe aliquid iure sunt ab et aliquam laudantium facere, officiis illo, voluptate eveniet. Eius nihil pariatur voluptate quas harum nisi, ex ipsum odit officia blanditiis iure eos, facere sint, totam, aspernatur sequi ut veniam facilis cumque quaerat. Eos laudantium, aut dolores et nemo praesentium, sit cumque facere repudiandae ipsa magnam, debitis reprehenderit odio cum maiores expedita doloribus aliquid. Dolore, officia iste, tempore velit delectus eligendi ipsam numquam unde!</p>
+      <author href="http://xml.zeit.de/autoren/W/Jochen_Wegner/index">
+        <biography>meine lange Biography</biography>
+      </author>
+      <p>Nam ipsa deserunt iure, est ducimus, at officia vero suscipit fugit excepturi minima, error consequuntur reprehenderit, officiis nemo animi? Ea consequatur veritatis dicta nostrum laborum corporis expedita molestias rerum, odio sapiente quidem, alias enim quos aspernatur est provident ducimus iste totam rem! Consectetur fugit dolore et aliquam itaque minima hic ratione accusantium ab, quo architecto sequi voluptatum corporis iste veniam neque nostrum quia animi obcaecati reprehenderit deleniti. Dolores eligendi natus perspiciatis quisquam illo quos ab, maxime corporis harum aut quidem molestiae optio deleniti enim quis, corrupti dicta rerum, debitis tempora voluptatem, ea?</p>
+      <author href="http://xml.zeit.de/autoren/B/Jochen_Bittner/index.xml">
+        <biography>meine lange Biography</biography>
+      </author>
+      <p>Maxime ut animi voluptatem enim, voluptate quo in numquam molestiae corrupti similique pariatur nesciunt ipsum, id ad debitis ea quia mollitia, aut. Veritatis, praesentium, aut nobis sit ipsum autem voluptatum, veniam non, eaque sequi atque officia tempora sint hic ea obcaecati! Repellat, dicta assumenda! Dolor dolore perspiciatis, iste deleniti. Rem dolorum, amet consequuntur voluptatibus corporis distinctio voluptas ex ullam reiciendis officia eaque explicabo quibusdam velit similique eveniet, harum, quos quod sint esse assumenda aut! Molestias laboriosam amet ratione doloremque ea voluptatem explicabo quasi placeat, fuga ipsa. Minus tempora ipsum modi, perspiciatis provident.</p>
+    </division>
+  </body>
+</article>
