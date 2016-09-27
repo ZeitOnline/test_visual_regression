@@ -10,6 +10,9 @@ import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC  # NOQA
+from selenium.webdriver.support.ui import WebDriverWait
 import cryptography.hazmat.backends
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -567,8 +570,18 @@ def selenium_driver(request):
         browser = browsers[request.param](**parameters)
     else:
         browser = browsers[request.param]()
-
     request.addfinalizer(lambda *args: browser.quit())
+
+    timeout = int(os.environ.get('ZEIT_WEB_FF_TIMEOUT', 30))
+    original_get = browser.get
+
+    def get_and_wait_for_body(self, *args, **kw):
+        result = original_get(*args, **kw)
+        WebDriverWait(self, timeout).until(
+            EC.presence_of_element_located((By.TAG_NAME, "body")))
+        return result
+    browser.get = get_and_wait_for_body.__get__(browser)
+
     return browser
 
 
