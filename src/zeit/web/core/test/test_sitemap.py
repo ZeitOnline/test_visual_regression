@@ -78,6 +78,24 @@ def test_gsitemap_page_without_image(testbrowser, monkeypatch):
     assert not xml.xpath('//image:image', namespaces={'image': ns})
 
 
+def test_gsitemap_page_does_not_break_without_image_caption(
+        testbrowser, monkeypatch):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
+                          'filmstill-hobbit-schlacht-fuenf-hee/'],
+        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}]
+    monkeypatch.setattr(zeit.web.core.image.Image, 'caption', None)
+    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    print browser.contents
+    xml = lxml.etree.fromstring(browser.contents)
+    ns = 'http://www.google.com/schemas/sitemap-image/1.1'
+    assert (
+        xml.xpath(
+            '//image:image/image:caption', namespaces={'image': ns})[0].text ==
+        u'(©\xa0Warner Bros.)')
+
+
 def test_gsitemap_newssite(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
