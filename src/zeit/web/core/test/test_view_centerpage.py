@@ -345,3 +345,12 @@ def test_invisible_module_should_not_be_rendered(application, testbrowser):
 
     browser = testbrowser('/zeit-online/invisible-teaser')
     assert len(browser.cssselect('.cp-area > *')) == visible
+
+
+def test_centerpage_should_update_webtrekk_content_id_for_search_results(
+        application, dummy_request, datasolr):
+    dummy_request.GET['q'] = 'test'
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/suche/index')
+    view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
+    view.content_path = u'/suche/index'
+    assert view.webtrekk_content_id.endswith('/suche/treffer')

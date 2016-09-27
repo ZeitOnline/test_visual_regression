@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3180: Enlarge infographics with layout `small` for desktop
 
+- ZON-3282: Propagate webtrekk content ID to CeleraOne
+
 - ZON-3240: Added some optical adjustments to Z+ badges
 
 - ZON-3325: Send entitlement (access rights) to C1

@@ -60,7 +60,7 @@ def test_framebuilder_sets_webtrekk_values_differently(testbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
 
-    assert ('var Z_WT_KENNUNG = "redaktion....centerpage.zede|" + '
+    assert ('wt.contentId = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
             'window.location.pathname;') in webtrekk_config
     assert ("7: window.location.pathname.split('/').pop()") in webtrekk_config
@@ -241,7 +241,7 @@ def test_framebuilder_minimal_can_contain_webtrekk(testbrowser):
 
 def test_framebuilder_minimal_sets_webtrekk_values_differently(testbrowser):
     browser = testbrowser('/framebuilder?minimal&webtrekk')
-    assert ('var Z_WT_KENNUNG = "redaktion....centerpage.zede|" + '
+    assert ('wt.contentId = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
             'window.location.pathname;') in browser.contents
     assert ("7: window.location.pathname.split('/').pop()") in browser.contents
