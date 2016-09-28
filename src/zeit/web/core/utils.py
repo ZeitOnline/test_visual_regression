@@ -21,6 +21,7 @@ import zeit.cms.content.interfaces
 import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.cms.workflow.interfaces
+import zeit.content.video.video
 import zeit.solr.interfaces
 import zeit.retresco.connection
 import zeit.retresco.convert
@@ -497,6 +498,13 @@ class LazyProxy(object):
         if self.__proxy__.get('type') != 'link':
             return False
         raise AttributeError('blog')
+
+    _dummy_video = zeit.content.video.video.Video()
+
+    # Proxy zeit.content.video.interfaces.IVideo.seo_slug
+    @property
+    def seo_slug(self):
+        return zeit.content.video.video.Video.seo_slug.__get__(self)
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
