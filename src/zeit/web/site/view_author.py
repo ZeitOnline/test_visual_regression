@@ -122,7 +122,11 @@ class Comments(Author):
 
     @zeit.web.reify
     def tab_areas(self):
-        page = int(self.request.GET.get('p', '1'))
+        try:
+            page = int(self.request.GET['p'])
+        except (KeyError, ValueError):
+            page = 1
+
         page_size = int(self.request.registry.settings.get(
             'author_comment_page_size', '10'))
 
@@ -149,7 +153,15 @@ def create_author_article_area(
     cp = zeit.content.cp.centerpage.CenterPage()
     zope.interface.alsoProvides(cp, zeit.cms.section.interfaces.IZONContent)
     cp.uniqueId = context.uniqueId + u'/articles'
-    area = cp.body.create_item('region').create_item('area')
+    cp.body.clear()
+
+    if dedupe_favourite_content:
+        area = cp.body.create_item('region').create_item('area')
+        for content in context.favourite_content:
+            block = area.create_item('teaser')
+            block.insert(0, content)
+
+    area = area = cp.body.create_item('region').create_item('area')
     area.kind = 'author-articles'
     area.automatic_type = 'query'
     area.raw_query = unicode(
@@ -161,22 +173,21 @@ def create_author_article_area(
     else:
         area.count = int(conf.get('author_articles_page_size', '10'))
     area.automatic = True
-    favourite_content = (
-        context.favourite_content if dedupe_favourite_content else [])
-    return AuthorArticleRanking(area, favourite_content)
+    area.hide_dupes = True
+    return AuthorRanking(area)
 
 
-class AuthorArticleRanking(zeit.web.core.area.ranking.Ranking):
-
-    def __init__(self, context, favourite_content):
-        super(AuthorArticleRanking, self).__init__(context)
-        self.existing_uids = [x.uniqueId for x in favourite_content]
+class AuthorRanking(zeit.web.core.area.ranking.Ranking):
 
     @zeit.web.reify
     def count(self):
         if self.page == 1:
-            return self.context._count - len(self.existing_uids)
+            return self.context._count - self.surrounding_teasers
         return self.context._count
+
+    @zeit.web.reify
+    def start(self):
+        return self.count * max(self.page - 1, 0)
 
 
 class UserCommentsArea(zeit.web.core.centerpage.Area):
