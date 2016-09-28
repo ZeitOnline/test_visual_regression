@@ -7,7 +7,7 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.10 (unreleased)
+3.10 (2016-09-28)
 -----------------
 
 - BUG-546: Show date last modified for nextread and search results
