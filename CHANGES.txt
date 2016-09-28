@@ -10,7 +10,7 @@ POSTDEPLOY
 3.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Keep test image variant config in sync with production version
 
 
 3.10 (2016-09-28)
