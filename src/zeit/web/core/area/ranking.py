@@ -243,8 +243,6 @@ class FakeReference(object):
 class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
                        Converter):
 
-    grokcore.component.context(Ranking)
-
     FIELD_MAP = {
         'access': '',
         'authors': '',
@@ -284,8 +282,6 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
 class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
                       Converter):
 
-    grokcore.component.context(Ranking)
-
     # XXX Can we generate this from zeit.retresco.convert somehow?
     FIELD_MAP = collections.OrderedDict((
         ('authors', 'authorships'),
@@ -313,8 +309,6 @@ class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
 class ElasticsearchContentQuery(
         zeit.content.cp.automatic.ElasticsearchContentQuery,
         Converter):
-
-    grokcore.component.context(Ranking)
 
     include_payload = True
     FIELD_MAP = TMSContentQuery.FIELD_MAP
