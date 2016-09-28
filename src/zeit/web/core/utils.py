@@ -446,8 +446,10 @@ class LazyProxy(object):
     def product(self):
         # Silently swallow missing item for solr/tms, but expose for reach.
         if self.__proxy__.get('product') is NotImplemented:
-            self.__proxy__.pop('product', None)
-            raise AttributeError('product')
+            self.__proxy__.pop('product')
+            result = self.__getattr__('product')
+            self.__proxy__['product'] = NotImplemented
+            return result
         source = zeit.cms.content.interfaces.ICommonMetadata[
             'product'].source(self)
         for value in source:
@@ -458,8 +460,10 @@ class LazyProxy(object):
     def serie(self):
         # Silently swallow missing item for solr/tms, but expose for reach.
         if self.__proxy__.get('serie') is NotImplemented:
-            self.__proxy__.pop('serie', None)
-            raise AttributeError('serie')
+            self.__proxy__.pop('serie')
+            result = self.__getattr__('serie')
+            self.__proxy__['serie'] = NotImplemented
+            return result
         source = zeit.cms.content.interfaces.ICommonMetadata[
             'serie'].source(self)
         return source.factory.values.get(self.__proxy__.get('serie'))
