@@ -222,6 +222,7 @@ class Converter(object):
             doc.setdefault(name, None)
         doc.setdefault('lead_candidate', False)
         doc.setdefault('commentSectionEnable', True)
+        doc.setdefault('access', 'free')
         return doc
 
 
@@ -231,6 +232,7 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
     grokcore.component.context(Ranking)
 
     FIELD_MAP = {
+        'access': '',
         'date-last-modified': 'date_last_modified',
         'date_first_released': '',
         'date_last_published': '',

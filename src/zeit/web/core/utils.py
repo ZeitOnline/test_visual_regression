@@ -553,8 +553,7 @@ class DataSolr(RandomContent):
                     content)
                 semantic = zeit.cms.content.interfaces.ISemanticChange(
                     content)
-                results.append({
-                    u'access': 'free',
+                data = {
                     u'authors': content.authors,
                     u'date-last-modified': (
                         modified.date_last_modified.isoformat()),
@@ -576,7 +575,13 @@ class DataSolr(RandomContent):
                     u'teaser_text': content.teaserText,
                     u'title': content.title,
                     u'type': content.__class__.__name__.lower(),
-                    u'uniqueId': content.uniqueId})
+                    u'uniqueId': content.uniqueId
+                }
+                if 'fl' in kw:
+                    for key in list(data.keys()):
+                        if key not in kw['fl']:
+                            del data[key]
+                results.append(data)
             except (AttributeError, TypeError):
                 continue
         return pysolr.Results(
