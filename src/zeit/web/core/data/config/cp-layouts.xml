@@ -221,7 +221,7 @@
         id="topic"
         title="Dossier-Teaser"
         image_pattern="topic"
-        areas="topic"
+        areas="topic volume-header"
         default="topic"
         />
     <!-- Legacy teaser formats -->
