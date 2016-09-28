@@ -1,6 +1,7 @@
 import grokcore.component
 
 import zeit.web
+import zeit.web.core.area.automatic
 import zeit.web.core.area.ranking
 
 
@@ -9,11 +10,11 @@ class AuthorList(zeit.web.core.area.ranking.Ranking):
     pass
 
 
-class SolrContentQuery(zeit.web.core.area.ranking.SolrContentQuery):
+class SolrContentQuery(zeit.web.core.area.automatic.SolrContentQuery):
 
     grokcore.component.context(AuthorList)
 
-    FIELD_MAP = zeit.web.core.area.ranking.SolrContentQuery.FIELD_MAP.copy()
+    FIELD_MAP = zeit.web.core.area.automatic.SolrContentQuery.FIELD_MAP.copy()
     FIELD_MAP.update({
         'author_summary_t': 'summary',
         'display_name_s': 'display_name',
