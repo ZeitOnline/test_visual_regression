@@ -12,6 +12,7 @@ import urlparse
 
 import grokcore.component
 import jinja2
+import mock
 import peak.util.proxies
 import pysolr
 import pytz
@@ -26,6 +27,7 @@ import zeit.solr.interfaces
 import zeit.retresco.connection
 import zeit.retresco.convert
 import zeit.retresco.interfaces
+import zeit.retresco.search
 
 
 log = logging.getLogger(__name__)
@@ -631,6 +633,47 @@ class DataTMS(zeit.retresco.connection.TMS, RandomContent):
         result = super(DataTMS, self).get_topicpage_documents(id, start, rows)
         self._response = {}
         return result
+
+
+@zope.interface.implementer(zeit.retresco.interfaces.IElasticsearch)
+class DataES(zeit.retresco.search.Elasticsearch, RandomContent):
+    """Fake elasticsearch implementation that is used for local development."""
+
+    def __init__(self):
+        self._response = {}
+        self.client = mock.Mock()
+        self.client.search = self._search
+        self.index = None
+
+    def search(
+            self, query, sort_order, start=0, rows=25, include_payload=False):
+        result = []
+        for content in self._get_content():
+            data = zeit.retresco.interfaces.ITMSRepresentation(content)()
+            if data is not None:
+                # Ensure we always have an image
+                data['payload'].setdefault(
+                    'teaser_image',
+                    'http://xml.zeit.de/zeit-online/'
+                    'image/filmstill-hobbit-schlacht-fuenf-hee/')
+                # XXX LazyProxy cannot support liveblogs, and we don't want to
+                # expose those in tests.
+                data['payload']['is_live'] = False
+                if not include_payload:
+                    del data['payload']
+                result.append({'_source': data})
+
+        self._response = {'hits': {
+            'total': len(result),
+            'hits': random.sample(result, min(rows, len(result))),
+        }}
+        result = super(DataES, self).search(
+            query, sort_order, start, rows, include_payload)
+        self._response = {}
+        return result
+
+    def _search(self, *args, **kw):
+        return self._response
 
 
 class CMSSearch(zeit.retresco.convert.Converter):

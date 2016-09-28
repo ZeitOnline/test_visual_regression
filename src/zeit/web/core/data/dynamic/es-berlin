@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="keywordpage">
+  <head>
+    <header_image xsi:nil="true"/>
+    <topiclinks>
+    </topiclinks>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels"/>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-07-22T10:29:32.180915+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-02T09:31:49.393294+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-07-22T10:30:13.437031+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-07-22T10:15:03.863308+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-08-25T08:57:02.741844+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-07-22T10:15:07.360615+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu Berlin.</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-robots">index, follow, noodp, noydir, noarchive</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Berlin - News und Infos</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-08-25T08:54:08.011567+00:00</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.neukamm</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Administratives</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="seo-keyword-entity-type">location</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="title">template</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:6cd0fe01-2d85-4d96-9c1e-7f6d23b55a4a}</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="CenterPage" module="zeit.content.cp.centerpage"/&gt;
+        &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Berlin</title>
+    <cluster visible="True" visible_mobile="True" area="id-087711b6-6b4e-4a28-8027-827b252941b2" kind="solo" kind_title="Solo-Region">
+      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-31e82165-ba9e-4fa2-91c7-a434c0d40b11" kind="solo">
+        <container cp:type="headerimage" module="headerimage" visible="True" visible_mobile="True" cp:__name__="id-e4222991-6040-487c-849a-b173fe71c094" supertitle="" title="Berlin"/>
+      </region>
+    </cluster>
+    <cluster visible="True" visible_mobile="True" area="id-294bc94a-a7ef-4342-9d18-cb2738c90aa9" kind="solo" kind_title="Simple-Region">
+      <region area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="elasticsearch-query" count="25" hide-dupes="True" kind="ranking" visible="True" visible_mobile="True">
+        <elasticsearch_raw_query/>
+        <elasticsearch_raw_order/>
+        <container cp:__name__="id-a620cc6b-00e4-4635-a808-a31c8dbdb7f4" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-b895d982-47ab-401f-9b70-6aeeb46cb46a" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-b8d31e52-feb1-476d-96c3-2be2af811318" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-caca4ef1-84c1-47c0-b82f-efbf1c41dae5" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-b93c0fe2-a47b-48f1-b91f-d9ac789f3d60" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-90168d93-7df5-4025-a10b-8c50b52bb3ca" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-029380ab-0bf4-40c8-8c7c-552f3ab817d0" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-2a6c6406-c3c9-4b44-b7ec-a2bb8bb1dfd8" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-31dfdd6a-9aa4-4c27-840a-141bb5e65680" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-a0a325d8-d633-45ed-9f46-d2409d9889ae" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-5129568e-7c60-4365-9517-94322a762ad1" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-1317838a-b955-4e79-9944-815d30796c54" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-0af7b0b2-a4e1-49af-8049-03c23bded2a7" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-d7067f7f-4cd1-43c3-b501-15560f840dec" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-050b94e6-3877-4afd-9cbd-42813e5a6aa6" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-20cf41bd-40ae-4f21-9054-ca46ff4fff51" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-dd30550b-7860-446b-8870-32c02d118370" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-9fb4da47-0a1a-4124-b24d-4c1bf6491a78" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-c4118b57-92cc-4cd0-871f-80ff30e7558e" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-767e07d7-1b26-4474-9a7d-3cd185877ba6" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-cfdada23-84da-4ef4-9ec7-1c400281cd5c" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-bf82f79f-f427-433b-a708-9544cccd355b" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-5372229a-2f6f-48a6-b3e4-c156cf090348" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-1ed30880-bba1-4679-925c-1942ee92f795" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+        <container cp:__name__="id-adf3fcd0-c794-45e2-af87-707c2cb9099c" cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3"/>
+      </region>
+    </cluster>
+  </body>
+  <feed/>
+</centerpage>

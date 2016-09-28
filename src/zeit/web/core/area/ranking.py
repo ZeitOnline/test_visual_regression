@@ -310,6 +310,24 @@ class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
         return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
 
 
+class ElasticsearchContentQuery(
+        zeit.content.cp.automatic.ElasticsearchContentQuery,
+        Converter):
+
+    grokcore.component.context(Ranking)
+
+    include_payload = True
+    FIELD_MAP = TMSContentQuery.FIELD_MAP
+
+    def _convert(self, doc):
+        doc = super(ElasticsearchContentQuery, self)._convert(doc)
+        doc = self._convert_authorships(doc)
+        return doc
+
+    def _resolve(self, doc):
+        return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
+
+
 class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):
 
     grokcore.component.name('topicsitemap')
