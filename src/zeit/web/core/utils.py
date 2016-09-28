@@ -444,8 +444,7 @@ class LazyProxy(object):
     @property
     def product(self):
         # Silently swallow missing item for solr/tms, but expose for reach.
-        if ('product' not in self.__proxy__ or
-                self.__proxy__['product'] is NotImplemented):
+        if self.__proxy__.get('product') is NotImplemented:
             self.__proxy__.pop('product', None)
             raise AttributeError('product')
         source = zeit.cms.content.interfaces.ICommonMetadata[
@@ -457,8 +456,7 @@ class LazyProxy(object):
     @property
     def serie(self):
         # Silently swallow missing item for solr/tms, but expose for reach.
-        if ('serie' not in self.__proxy__ or
-                self.__proxy__['serie'] is NotImplemented):
+        if self.__proxy__.get('serie') is NotImplemented:
             self.__proxy__.pop('serie', None)
             raise AttributeError('serie')
         source = zeit.cms.content.interfaces.ICommonMetadata[
@@ -568,9 +566,7 @@ class DataSolr(RandomContent):
                     u'image-base-id': [
                         'http://xml.zeit.de/zeit-online/'
                         'image/filmstill-hobbit-schlacht-fuenf-hee/'],
-                    u'lead_candidate': False,
                     u'product_id': content.product.id,
-                    u'serie': None,
                     u'supertitle': content.supertitle,
                     u'teaser_text': content.teaserText,
                     u'title': content.title,
