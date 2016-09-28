@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import collections
 import logging
 import math
 
@@ -215,6 +216,13 @@ class Converter(object):
                 continue
         return doc
 
+    def _convert_authorships(self, doc):
+        # Not generally applicable, since solr does not index author uniqueIds.
+        doc['authorships'] = [
+            FakeReference(zeit.cms.interfaces.ICMSContent(x, None))
+            for x in doc.get('authorships', ())]
+        return doc
+
     def _set_defaults(self, doc):
         # XXX These asset badges and classification flags are not indexed
         #     in Solr, so we lie about them.
@@ -224,6 +232,12 @@ class Converter(object):
         doc.setdefault('commentSectionEnable', True)
         doc.setdefault('access', 'free')
         return doc
+
+
+class FakeReference(object):
+
+    def __init__(self, content):
+        self.target = content
 
 
 class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
@@ -273,34 +287,27 @@ class TMSContentQuery(zeit.content.cp.automatic.TMSContentQuery,
     grokcore.component.context(Ranking)
 
     # XXX Can we generate this from zeit.retresco.convert somehow?
-    FIELD_MAP = {
-        'author_names': 'authors',
-        'date_last_semantic_change': 'last_semantic_change',
-        'allow_comments': 'commentsAllowed',
-        'show_comments': 'commentSectionEnable',
-        'print_ressort': 'printRessort',
-        'teaser_text': 'teaserText',
-        'teaser_title': 'teaserTitle',
-        'teaser_supertitle': 'teaserSupertitle',
-        'article_genre': 'genre',
-        'article_template': 'template',
-    }
+    FIELD_MAP = collections.OrderedDict((
+        ('authors', 'authorships'),
+        ('author_names', 'authors'),
+        ('date_last_semantic_change', 'last_semantic_change'),
+        ('allow_comments', 'commentsAllowed'),
+        ('show_comments', 'commentSectionEnable'),
+        ('print_ressort', 'printRessort'),
+        ('teaser_text', 'teaserText'),
+        ('teaser_title', 'teaserTitle'),
+        ('teaser_supertitle', 'teaserSupertitle'),
+        ('article_genre', 'genre'),
+        ('article_template', 'template'),
+    ))
 
     def _convert(self, doc):
         doc = super(TMSContentQuery, self)._convert(doc)
-        doc['authorships'] = [
-            FakeReference(zeit.cms.interfaces.ICMSContent(x, None))
-            for x in doc.get('authors', ())]
+        doc = self._convert_authorships(doc)
         return doc
 
     def _resolve(self, doc):
         return zeit.cms.interfaces.ICMSContent(self._convert(doc), None)
-
-
-class FakeReference(object):
-
-    def __init__(self, content):
-        self.target = content
 
 
 class TopicsitemapContentQuery(zeit.content.cp.automatic.ContentQuery):
