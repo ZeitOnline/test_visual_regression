@@ -128,7 +128,7 @@ def test_default_teaser_should_not_expose_ranking_area_proxies(
         lambda *args: {x: 1 for x in args})
 
     browser = testbrowser('/dynamic/paul-auster')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 10
+    assert len(browser.cssselect('.cp-area--ranking article')) == 10
     assert 'teaser-small__byline' in browser.contents
 
     log = log.debug.call_args_list
@@ -150,7 +150,7 @@ def test_tms_query_should_not_expose_ranking_area_proxies(
         lambda *args: {x: 1 for x in args})
 
     browser = testbrowser('/dynamic/tms-berlin')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 25
+    assert len(browser.cssselect('.cp-area--ranking article')) == 25
 
     log = log.debug.call_args_list
     assert all('ProxyExposed' not in a[0][0] for a in log), str(log)
@@ -172,7 +172,7 @@ def test_elasticsearch_query_should_not_expose_ranking_area_proxies(
         lambda *args: {x: 1 for x in args})
 
     browser = testbrowser('/dynamic/es-berlin')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 25
+    assert len(browser.cssselect('.cp-area--ranking article')) == 25
 
     log = log.debug.call_args_list
     assert all('ProxyExposed' not in a[0][0] for a in log), str(log)
