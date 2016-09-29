@@ -1,8 +1,39 @@
-{% set image = get_image(view.volume.covers['coverimage'], fallback=False) %}
-{% set module_layout = "header-image" %}
-{% set media_caption_additional_class = 'figcaption--hidden' %}
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
 
-<header class="header-image">
-    {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
-</header>
-{% include "{0}:templates/inc/area/volume-navigation.html".format(view.package) ignore missing %}
+{% block image_variant %}cinema{% endblock %}
+
+{% block module_list %}
+    <section class="{% block topic_class %}teaser-topic{% endblock %}">
+        <article class="volume-heading__issue">
+            <div class="volume-heading__logo">
+            {{ lama.use_svg_icon('logo-dz-white', '', view.package) }}
+            </div>
+            <div class="volume-heading__caption">
+                Ausgabe Nr. {{ '%02d' % view.volume.volume }}/{{ view.volume.year }}
+            </div>
+        </article>
+        {% if area.values() | length > 0 %}
+
+            {% set module = area.values()[0] %}
+            {% set teaser = module | first_child %}
+            {% set module_layout = self.topic_class() %}
+            {% set image = get_image(view.volume.covers['coverimage'], fallback=False) %}
+
+            {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
+
+            <div class="{{ self.topic_class() }}-list">
+                {% for module in area.values()[0:3] -%}
+                    {% set teaser = module | first_child %}
+                    {% set layout = module | get_layout %}
+
+                    {% include [
+                    "{0}:templates/inc/teaser/{1}.tpl".format(view.package, layout),
+                    "{0}:templates/inc/teaser/{1}.tpl".format('zeit.web.core', layout),
+                    "zeit.web.core:templates/inc/teaser/topic.tpl"] %}
+                {% endfor %}
+            </div>
+
+        {% endif %}
+    </section>
+     {% include "{0}:templates/inc/area/volume-navigation.html".format(view.package) ignore missing %}
+{% endblock %}

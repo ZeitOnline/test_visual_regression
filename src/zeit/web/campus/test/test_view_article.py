@@ -316,3 +316,23 @@ def test_cardstack_block_produces_correct_html(testbrowser):
     browser = testbrowser('/campus/article/cardstack')
     block = browser.cssselect('main article .cardstack')
     assert len(block) == 1
+
+
+def test_article_contains_authorbox(testbrowser):
+    browser = testbrowser('/zeit-online/article/authorbox')
+    authorbox = browser.cssselect('.authorbox')
+    assert len(authorbox) == 3
+
+    author = authorbox[1]
+    image = author.cssselect('[itemprop="image"]')[0]
+    name = author.cssselect('strong[itemprop="name"]')[0]
+    description = author.cssselect('[itemprop="description"]')[0]
+    url = author.cssselect('a[itemprop="url"]')[0]
+
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.get('itemscope') is not None
+    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
+            ) in image.cssselect('[itemprop="url"]')[0].get('content')
+    assert name.text.strip() == 'Jochen Wegner'
+    assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
+    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'

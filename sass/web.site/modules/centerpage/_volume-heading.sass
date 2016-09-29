@@ -1,4 +1,27 @@
 .volume-heading
+	position: relative
+	background-color: magenta
+
+	&__issue
+		+font-smoothing()
+		color: $white
+		position: relative
+		display: inline-block
+		z-index: 1
+		+respond-min($break-tablet-min)
+			padding: remify(100px 0 0 60px)
+		+respond-max($break-tablet-min)
+			margin: remify(24px 0 50px)
+
+	&__caption
+		height: 24px
+		font-family: TabletGothic
+		font-weight: bold
+		font-size: $font-xl
+		letter-spacing: $letter-spacing-m
+		+respond-min($break-tablet-min)
+			margin-top: remify(16px)
+
 	&__navigation
 		background-color: $zon-lighter-grey
 		display: flex

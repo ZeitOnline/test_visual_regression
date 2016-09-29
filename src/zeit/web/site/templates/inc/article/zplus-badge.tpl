@@ -3,10 +3,8 @@
 <div class="zplus {% if not view.zplus_label.cover %}zplus--coverless{% endif %}">
     <div class="zplus__banner article__item article__item--rimless">
         {%  if view.context.access == 'abo' %}
-            <div class="zplus__badge">
-                <div class="zplus__marker">
+            <div class="zplus__marker">
                 {{ lama.use_svg_icon('zplus', 'zplus__marker-icon svg-symbol--hide-ie', view.package, a11y=False) }}
-                </div>
             </div>
         {% endif %}
         <div class="zplus__text">
