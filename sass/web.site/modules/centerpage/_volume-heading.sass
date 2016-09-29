@@ -1,4 +1,48 @@
 .volume-heading
-
 	&__navigation
+		background-color: $zon-lighter-grey
+		display: flex
+		flex-wrap: wrap
 
+	&__current
+		padding: remify(20px 0 25px 0)
+		width: 100%
+		flex-grow: 1
+		border-bottom: solid 1px $zon-light-grey
+		display: flex
+
+	&__packshot,
+	&__cta
+		display: inline-block
+		width: 48%
+
+	&__cta
+		font-weight: bold
+		color: $zon-dark-grey
+		font-size: remify(16px)
+		align-self: center
+		padding-right: remify(15px)
+
+	&__packshot
+		padding: remify(0 15px)
+
+	&__previous,
+	&__next
+		flex-grow: 1
+		line-height: remify(50px)
+		font-size: remify(12px)
+		color: $zon-charcoal
+		letter-spacing: $zon-letter-spacing-m
+		&:after,
+		&:before
+			font-size: remify(35px)
+			padding: remify(0 1px)
+
+	&__next
+		text-align: right
+		&:after
+			content: "\203A"
+
+	&__previous
+		&:before
+			content: "\2039"

@@ -1,1 +1,19 @@
-<div class="volume-heading__navigation">{{ view.volume_next }}</div>
+<div class="volume-heading__navigation">
+    <div class="volume-heading__current">
+        {% if view.volume %}
+        <span class="volume-heading__packshot">
+            {% set packshot = view.volume.covers['printcover'] %}
+            {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" ignore missing %}
+        </span>
+        <span class="volume-heading__cta">
+            Lesen Sie diese Ausagbe als <a href="">E-Paper, App und auf dem E-Reader</a>.
+        </span>
+        {% endif %}
+    </div>
+    <div class="volume-heading__previous">
+        DIE ZEIT Nr. 14/2016
+    </div>
+    <div class="volume-heading__next">
+        DIE ZEIT Nr. 15/2016
+    </div>
+</div>

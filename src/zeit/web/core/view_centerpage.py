@@ -27,12 +27,11 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
     def volume(self):
-        volume = zeit.content.volume.interfaces.IVolume(self.context, None)
-        cp = zeit.content.cp.interfaces.ICenterPage(volume)
-        return volume
+        return zeit.content.volume.interfaces.IVolume(self.context, None)
 
     @zeit.web.reify
     def volume_next(self):
+        # zeit.content.cp.interfaces.ICenterPage(volume, None)
         return self.volume.next if self.volume else None
 
     @zeit.web.reify

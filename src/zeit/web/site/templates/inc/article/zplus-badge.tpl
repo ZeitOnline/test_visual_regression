@@ -19,7 +19,8 @@
         </div>
         {% if view.zplus_label.cover %}
         <div class="zplus__cover">
-            {% include "zeit.web.core:templates/inc/asset/image_cover.tpl" ignore missing %}
+            {% set packshot = view.zplus_label.cover %}
+            {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" ignore missing %}
         </div>
         {% endif %}
     </div>

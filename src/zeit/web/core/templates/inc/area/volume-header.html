@@ -4,5 +4,5 @@
 
 <header class="header-image">
     {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
-    {% include "{0}:templates/inc/area/volume-navigation.html".format(view.package) ignore missing %}
 </header>
+{% include "{0}:templates/inc/area/volume-navigation.html".format(view.package) ignore missing %}
