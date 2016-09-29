@@ -593,7 +593,7 @@ class DataSolr(RandomContent):
             except (AttributeError, TypeError):
                 continue
         return pysolr.Results(
-            random.sample(results, min(rows, len(results))), len(results))
+            [random.choice(results) for x in range(rows)], len(results))
 
     def update_raw(self, xml, **kw):
         pass
@@ -627,11 +627,11 @@ class DataTMS(zeit.retresco.connection.TMS, RandomContent):
                 result.append(data)
         self._response = {
             'num_found': len(result),
-            'docs': random.sample(
-                result, min(rows, len(result))),
+            'docs': [random.choice(result) for x in range(rows)],
         }
         result = super(DataTMS, self).get_topicpage_documents(id, start, rows)
         self._response = {}
+        print result
         return result
 
 
@@ -665,7 +665,7 @@ class DataES(zeit.retresco.search.Elasticsearch, RandomContent):
 
         self._response = {'hits': {
             'total': len(result),
-            'hits': random.sample(result, min(rows, len(result))),
+            'hits': [random.choice(result) for x in range(rows)],
         }}
         result = super(DataES, self).search(
             query, sort_order, start, rows, include_payload)
