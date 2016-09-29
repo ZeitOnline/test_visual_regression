@@ -69,3 +69,18 @@
 	&__previous
 		&:before
 			content: "\2039"
+
+	+respond-min($break-tablet-min)
+
+		&__previous
+			order: 1
+
+		&__current
+			width: auto
+			order: 2
+			border-bottom: none
+
+		&__next
+			order: 3
+
+
