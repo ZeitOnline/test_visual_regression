@@ -503,8 +503,6 @@ class LazyProxy(object):
             return False
         raise AttributeError('blog')
 
-    _dummy_video = zeit.content.video.video.Video()
-
     # Proxy zeit.content.video.interfaces.IVideo.seo_slug
     @property
     def seo_slug(self):
