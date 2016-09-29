@@ -27,27 +27,37 @@
 		display: flex
 		flex-wrap: wrap
 
+	&__media
+		width: remify(100px)
+		margin-left: auto
+		margin-right: 0
+
 	&__current
 		padding: remify(20px 0 25px 0)
 		width: 100%
 		flex-grow: 1
 		border-bottom: solid 1px $zon-light-grey
-		display: flex
 
 	&__packshot,
 	&__cta
 		display: inline-block
-		width: 48%
 
 	&__cta
 		font-weight: bold
 		color: $zon-dark-grey
 		font-size: remify(16px)
-		align-self: center
 		padding-right: remify(15px)
+		width: 50%
+		vertical-align: top
 
 	&__packshot
 		padding: remify(0 15px)
+		width: 40%
+
+	&__link
+		+animated-interaction()
+		color: $zon-dark-grey
+		border-bottom: 1px solid $zon-light-grey
 
 	&__previous,
 	&__next
@@ -58,8 +68,9 @@
 		letter-spacing: $zon-letter-spacing-m
 		&:after,
 		&:before
-			font-size: remify(35px)
-			padding: remify(0 1px)
+			font-size: remify(30px)
+			padding: remify(0 10px)
+			vertical-align: sub
 
 	&__next
 		text-align: right
@@ -71,6 +82,9 @@
 			content: "\2039"
 
 	+respond-min($break-tablet-min)
+		&__navigation
+			flex-wrap: nowrap
+			min-height: remify(150px)
 
 		&__previous
 			order: 1
@@ -82,5 +96,15 @@
 
 		&__next
 			order: 3
+
+		&__previous,
+		&__next
+			padding: remify(20px 0 25px 0)
+			min-width: 20%
+			align-self: center
+
+		&__media
+			width: remify(225px)
+			transform: translateY(-50px)
 
 
