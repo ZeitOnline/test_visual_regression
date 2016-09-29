@@ -27,6 +27,8 @@ def test_comments_template_respects_metadata(tplbrowser, dummy_request):
     assert len(form.cssselect('#comment-form textarea')) == 0, (
         'comment form must be empty')
 
+    # reset view to compute reified properties again
+    view = zeit.web.magazin.view_article.Article(content, dummy_request)
     view.show_commentthread = False
     comments = tplbrowser('zeit.web.core:templates/inc/article/comments.html',
                           view=view, request=dummy_request)

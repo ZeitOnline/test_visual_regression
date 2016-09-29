@@ -1539,7 +1539,7 @@ def test_article_in_series_has_banner_image(testbrowser):
     image = figure[0].cssselect('img')[0]
 
     assert len(figure) == 1
-    assert image.get('data-ratio') == '10.0'
+    assert image.get('data-ratio') == '12.25'
 
 
 def test_article_in_series_has_correct_link(testbrowser):
@@ -1768,7 +1768,6 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
     assert len(zplus_box) == 1
 
     zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
     zplus_marker = zplus_box[0].cssselect('.zplus__marker')
     zplus_text = zplus_box[0].cssselect('.zplus__text')
     zplus_link = zplus_box[0].cssselect('.zplus__link')
@@ -1776,7 +1775,6 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_badge) == 1
     assert len(zplus_marker) == 1
     assert len(zplus_text) == 1
     assert len(zplus_link) == 1
@@ -1791,7 +1789,7 @@ def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
     assert len(zplus_box) == 1
 
     zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_badge = zplus_box[0].cssselect('.zplus__marker')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
@@ -1806,7 +1804,6 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
     assert len(zplus_box) == 1
 
     zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
     zplus_marker = zplus_box[0].cssselect('.zplus__marker')
     zplus_text = zplus_box[0].cssselect('.zplus__text')
     zplus_cover = zplus_box[0].cssselect('.zplus__cover')
@@ -1816,7 +1813,6 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_badge) == 1
     assert len(zplus_marker) == 1
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
@@ -1835,7 +1831,7 @@ def test_zplus_register_print_article_has_correct_markup(testbrowser):
     assert len(zplus_box) == 1
 
     zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
     zplus_text = zplus_box[0].cssselect('.zplus__text')
     zplus_cover = zplus_box[0].cssselect('.zplus__cover')
     zplus_media = zplus_box[0].cssselect('.zplus__media-item')
@@ -1845,7 +1841,7 @@ def test_zplus_register_print_article_has_correct_markup(testbrowser):
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_badge) == 0
+    assert len(zplus_marker) == 0
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
@@ -1977,3 +1973,23 @@ def test_merian_link_has_nofollow(testbrowser, dummy_request):
     browser = testbrowser('/zeit-online/article/simple-merian-nofollow')
     sourcelink = browser.cssselect('.metadata__source a')[0]
     assert sourcelink.attrib['rel'] == 'nofollow'
+
+
+def test_article_contains_authorbox(testbrowser):
+    browser = testbrowser('/zeit-online/article/authorbox')
+    authorbox = browser.cssselect('.authorbox')
+    assert len(authorbox) == 3
+
+    author = authorbox[1]
+    image = author.cssselect('[itemprop="image"]')[0]
+    name = author.cssselect('strong[itemprop="name"]')[0]
+    description = author.cssselect('[itemprop="description"]')[0]
+    url = author.cssselect('a[itemprop="url"]')[0]
+
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.get('itemscope') is not None
+    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
+            ) in image.cssselect('[itemprop="url"]')[0].get('content')
+    assert name.text.strip() == 'Jochen Wegner'
+    assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
+    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
