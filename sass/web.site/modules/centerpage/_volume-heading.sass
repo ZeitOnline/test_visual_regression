@@ -84,7 +84,7 @@
 	+respond-min($break-tablet-min)
 		&__navigation
 			flex-wrap: nowrap
-			min-height: remify(150px)
+			height: remify(145px)
 
 		&__previous
 			order: 1
@@ -93,6 +93,7 @@
 			width: auto
 			order: 2
 			border-bottom: none
+			align-self: center
 
 		&__next
 			order: 3
@@ -102,9 +103,14 @@
 			padding: remify(20px 0 25px 0)
 			min-width: 20%
 			align-self: center
+			font-size: remify(14px)
 
 		&__media
-			width: remify(225px)
-			transform: translateY(-50px)
+			width: remify(220px)
+			padding: 0
+			transform: translateY(-30px)
 
+		&__cta
+			transform: translateY(60px)
+			padding-left: remify(15px)
 
