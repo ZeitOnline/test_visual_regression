@@ -47,6 +47,7 @@
 		color: $zon-dark-grey
 		font-size: remify(16px)
 		padding-right: remify(30px)
+		line-height: remify(22px)
 		width: 50%
 		vertical-align: top
 
@@ -61,15 +62,15 @@
 
 	&__previous,
 	&__next
+		display: inline-block // non flex fallback
 		flex-grow: 1
 		line-height: remify(50px)
 		font-size: remify(12px)
-		color: $zon-charcoal
 		letter-spacing: $zon-letter-spacing-m
 		&:after,
 		&:before
 			font-size: remify(30px)
-			padding: remify(0 10px)
+			padding: remify(0 8px)
 			vertical-align: sub
 
 	&__next
@@ -85,7 +86,7 @@
 
 		&__navigation
 			flex-wrap: nowrap
-			height: remify(145px)
+			min-height: remify(145px)
 
 		&__previous
 			order: 1
@@ -100,9 +101,11 @@
 
 		&__previous,
 		&__next
-			padding: remify(20px 0 25px 0)
 			min-width: 20%
 			align-self: center
+			&:before,
+			&:after
+				padding: remify(0 10px)
 
 		&__media
 			width: remify(150px)
@@ -117,7 +120,8 @@
 			padding: 0
 
 		&__current
-			transform: translateY(-50px)
+			transform: translateY(-30px)
+			padding: 0
 
 		&__cta
 			padding-top: remify(50px) //center text again
@@ -126,6 +130,13 @@
 		&__next
 			font-size: remify(14px)
 
+		&__previous
+			&:before
+				padding-left: remify(20px)
+
+		&__next
+			&:after
+				padding-right: remify(20px)
 
 
 
