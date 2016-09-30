@@ -40,13 +40,13 @@
 
 	&__packshot,
 	&__cta
-		display: inline-block
+		display: table-cell
 
 	&__cta
 		font-weight: bold
 		color: $zon-dark-grey
 		font-size: remify(16px)
-		padding-right: remify(15px)
+		padding-right: remify(30px)
 		width: 50%
 		vertical-align: top
 
@@ -82,6 +82,7 @@
 			content: "\2039"
 
 	+respond-min($break-tablet-min)
+
 		&__navigation
 			flex-wrap: nowrap
 			height: remify(145px)
@@ -93,7 +94,6 @@
 			width: auto
 			order: 2
 			border-bottom: none
-			align-self: center
 
 		&__next
 			order: 3
@@ -103,14 +103,31 @@
 			padding: remify(20px 0 25px 0)
 			min-width: 20%
 			align-self: center
-			font-size: remify(14px)
 
+		&__media
+			width: remify(150px)
+
+		&__cta
+			padding-left: remify(15px)
+			vertical-align: middle
+
+	+respond-min($break-desktop-min)
 		&__media
 			width: remify(220px)
 			padding: 0
-			transform: translateY(-30px)
+
+		&__current
+			transform: translateY(-50px)
 
 		&__cta
-			transform: translateY(60px)
-			padding-left: remify(15px)
+			padding-top: remify(50px) //center text again
+
+		&__previous,
+		&__next
+			font-size: remify(14px)
+
+
+
+
+
 
