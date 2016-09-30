@@ -30,6 +30,13 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         return zeit.content.volume.interfaces.IVolume(self.context, None)
 
     @zeit.web.reify
+    def volume_navigation(self):
+        return {'link': 'https://epaper.zeit.de/abo/diezeit/{!s}/{!s}'.format(
+                self.volume.year,
+                str(self.volume.volume).zfill(2)),
+                'cover': self.volume.covers['printcover']}
+
+    @zeit.web.reify
     def volume_next(self):
         # zeit.content.cp.interfaces.ICenterPage(volume, None)
         return self.volume.next if self.volume else None

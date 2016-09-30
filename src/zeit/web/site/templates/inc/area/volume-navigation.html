@@ -1,15 +1,14 @@
+{% if view.volume_navigation %}
 <div class="volume-heading__navigation">
     <div class="volume-heading__current">
-        {% if view.volume %}
         <span class="volume-heading__packshot">
-            {% set packshot = view.volume.covers['printcover'] %}
+            {% set packshot = view.volume_navigation.cover %}
             {% set packshot_layout = 'volume-heading' %}
             {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" ignore missing %}
         </span>
         <span class="volume-heading__cta">
-            Lesen Sie diese Ausgabe als <a class="volume-heading__link" href="">E-Paper, App und auf dem E-Reader</a>.
+            Lesen Sie diese Ausgabe als <a class="volume-heading__link" href="{{view.volume_navigation.link}}">E-Paper, App und auf dem E-Reader</a>.
         </span>
-        {% endif %}
     </div>
     <a class="volume-heading__previous">
         DIE ZEIT Nr. 14/2016
@@ -18,3 +17,4 @@
         DIE ZEIT Nr. 15/2016
     </a>
 </div>
+{% endif %}
