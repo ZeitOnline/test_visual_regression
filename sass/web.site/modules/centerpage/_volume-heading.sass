@@ -16,9 +16,13 @@
 		height: 24px
 		font-family: TabletGothic
 		font-weight: bold
-		font-size: $font-xl
-		letter-spacing: $letter-spacing-m
-		+respond-min($break-tablet-min)
+		+respond-min($break-desktop-min)
+			font-size: $font-xxxl
+			letter-spacing: $letter-spacing-l
+			margin-top: remify(20px)
+		+respond-max($break-desktop-min)
+			font-size: $font-xl
+			letter-spacing: $letter-spacing-m
 			margin-top: remify(16px)
 
 	&__navigation
@@ -139,12 +143,12 @@
 
 .volume-heading-teaser
 	@extend .teaser-topic-item
-	color: $white
-	+font-smoothing()
 	&__kicker
 		@extend .teaser-topic-item__kicker
+		
 	&__title
 		@extend .teaser-topic-item__title
+		
 	&:after
 		@extend .teaser-topic-item:after
 		+respond-max($break-tablet-min)
