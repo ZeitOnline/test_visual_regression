@@ -57,13 +57,13 @@
   <body>
     <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
         <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="volume-header" title="FOOOO">
-          <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e6">
+          <container cp:type="teaser" module="volume-header" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e6">
           <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-julia-zange" />
           </container>
-          <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
+          <container cp:type="teaser" module="volume-header" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
             <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
           </container>
-          <container cp:type="teaser" module="topic" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
+          <container cp:type="teaser" module="volume-header" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
             <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
           </container>
         </region>

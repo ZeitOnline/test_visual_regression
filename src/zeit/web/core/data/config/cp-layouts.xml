@@ -224,6 +224,12 @@
         areas="topic volume-header"
         default="topic"
         />
+    <!-- Teaser in volume-header -->
+    <layout
+        id="volume-header"
+        title="Teaser in volume-header"
+        areas="volume-header"
+        />
     <!-- Legacy teaser formats -->
     <layout
         id="leader"
