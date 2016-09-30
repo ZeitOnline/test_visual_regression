@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+## -*- coding: utf-8 -*-
 import re
 
 from selenium.common.exceptions import TimeoutException
@@ -2419,3 +2419,16 @@ def test_volume_centerpage_has_volume_navigation(testbrowser):
     assert len(packshot) == 1
     assert len(cta) == 1
     assert len(media) == 1
+
+
+def test_volume_centerpage_has_volume_header(testbrowser):
+    browser = testbrowser('/2016/01/index')
+
+    volume_header = browser.cssselect('.cp-area--volume-header')
+    teaser = volume_header[0].cssselect('.volume-heading-teaser')
+
+    caption = volume_header[0].cssselect('.volume-heading__caption')
+
+    assert len(volume_header) == 1
+    assert 'Ausgabe Nr. 01/2016' in caption[0].text.strip()
+    assert len(teaser) == 3
