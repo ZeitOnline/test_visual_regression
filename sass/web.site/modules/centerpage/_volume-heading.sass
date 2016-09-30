@@ -1,6 +1,5 @@
 .volume-heading
 	position: relative
-	background-color: magenta
 
 	&__issue
 		+font-smoothing()
@@ -138,7 +137,16 @@
 			&:after
 				padding-right: remify(20px)
 
-
-
-
-
+.volume-heading-teaser
+	@extend .teaser-topic-item
+	color: $white
+	+font-smoothing()
+	&__kicker
+		@extend .teaser-topic-item__kicker
+	&__title
+		@extend .teaser-topic-item__title
+	&:after
+		@extend .teaser-topic-item:after
+		+respond-max($break-tablet-min)
+			border-bottom: 1px solid rgba(255, 255, 255, 1)
+			width: remify(70px)
