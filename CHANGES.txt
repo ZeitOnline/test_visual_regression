@@ -10,7 +10,7 @@ POSTDEPLOY
 3.11 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Handle non-ascii uniqueIds in webtrekk content id
 
 
 3.10.1 (2016-09-29)
