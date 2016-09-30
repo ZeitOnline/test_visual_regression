@@ -10,6 +10,8 @@ POSTDEPLOY
 3.11 (unreleased)
 -----------------
 
+- HOTFIX: Don't break on missing meta files etc. in author pages
+
 - FIX: Handle non-ascii uniqueIds in webtrekk content id
 
 
