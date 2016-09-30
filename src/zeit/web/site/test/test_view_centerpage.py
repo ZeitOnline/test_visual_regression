@@ -2392,3 +2392,30 @@ def test_imagecopyright_includes_videostage_poster_copyright(testbrowser):
     figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
     # robot video on stage has no copyright - on purpose.
     assert len(figures) == 4
+
+
+def test_volume_centerpage_has_volume_navigation(testbrowser):
+    browser = testbrowser('/2016/01/index')
+
+    nav = browser.cssselect('.volume-heading__navigation')
+    assert len(nav) == 1
+
+    current = nav[0].cssselect('.volume-heading__current')
+    prev = nav[0].cssselect('.volume-heading__previous')
+    next = nav[0].cssselect('.volume-heading__next')
+
+    assert len(current) == 1
+    assert len(prev) == 1
+    assert len(next) == 1
+    assert '2015/52' in prev[0].attrib['href']
+    assert '52/2015' in prev[0].text.strip()
+    assert '2016/02' in next[0].attrib['href']
+    assert '02/2016' in next[0].text.strip()
+
+    packshot = current[0].cssselect('.volume-heading__packshot')
+    cta = current[0].cssselect('.volume-heading__cta')
+    media = current[0].cssselect('.volume-heading__media')
+
+    assert len(packshot) == 1
+    assert len(cta) == 1
+    assert len(media) == 1

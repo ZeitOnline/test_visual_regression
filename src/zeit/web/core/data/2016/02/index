@@ -36,7 +36,7 @@
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">homepage</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:91f3d214-5186-454c-9e69-6ce74562ed90}</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
+    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">02</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
     <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
