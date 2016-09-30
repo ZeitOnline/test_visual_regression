@@ -40,7 +40,7 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
     @zeit.web.reify
     def volume_next(self):
         return {'link': 'http://{}/{!s}/{!s}/index'.format(
-                self.request.host,'2016','02'),
+                self.request.host, '2016', '02'),
                 'label': '{}/{}'.format('02', '2016')}
         # zeit.content.cp.interfaces.ICenterPage(volume, None)
         # return self.volume.next if self.volume else None
@@ -49,7 +49,7 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
     @zeit.web.reify
     def volume_previous(self):
         return {'link': 'http://{}/{!s}/{!s}/index'.format(
-                self.request.host,'2015','52'),
+                self.request.host, '2015', '52'),
                 'label': '{}/{}'.format('52', '2015')}
         # return self.volume.previous if self.volume else None
 
