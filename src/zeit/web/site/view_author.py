@@ -159,7 +159,7 @@ def create_author_article_area(
         area = cp.body.create_item('region').create_item('area')
         for content in context.favourite_content:
             block = area.create_item('teaser')
-            block.insert(0, content)
+            block.insert(0, content, suppress_errors=True)
 
     area = area = cp.body.create_item('region').create_item('area')
     area.kind = 'author-articles'

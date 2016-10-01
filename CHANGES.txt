@@ -10,7 +10,26 @@ POSTDEPLOY
 3.11 (unreleased)
 -----------------
 
+- ZON-3163: Wire up auto areas with elasticsearch
+
+- PERF: Use ContentQuery with LazyProxy for all areas
+
+
+3.10.2 (2016-09-30)
+-------------------
+
+- HOTFIX: Don't break on missing meta files etc. in author pages
+
+- FIX: Handle non-ascii uniqueIds in webtrekk content id
+
+
+3.10.1 (2016-09-29)
+-------------------
+>>>>>>> master
+
 - MAINT: Keep test image variant config in sync with production version
+
+- FIX: Repair LazyProxy for solr results
 
 
 3.10 (2016-09-28)

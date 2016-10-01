@@ -878,3 +878,12 @@ def test_webtrekk_tracking_id_is_defined(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     assert 'window.webtrekkConfig.trackId = "674229970930653";' in (
         browser.contents)
+
+
+def test_webtrekk_content_id_should_handle_nonascii(
+        application, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    dummy_request.traversed = (u'umläut',)
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert view.webtrekk_content_id.endswith(u'umläut')

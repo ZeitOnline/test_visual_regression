@@ -12,6 +12,7 @@ import urlparse
 
 import grokcore.component
 import jinja2
+import mock
 import peak.util.proxies
 import pysolr
 import pytz
@@ -21,10 +22,12 @@ import zeit.cms.content.interfaces
 import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.cms.workflow.interfaces
+import zeit.content.video.video
 import zeit.solr.interfaces
 import zeit.retresco.connection
 import zeit.retresco.convert
 import zeit.retresco.interfaces
+import zeit.retresco.search
 
 
 log = logging.getLogger(__name__)
@@ -444,10 +447,11 @@ class LazyProxy(object):
     @property
     def product(self):
         # Silently swallow missing item for solr/tms, but expose for reach.
-        if ('product' not in self.__proxy__ or
-                self.__proxy__['product'] is NotImplemented):
-            self.__proxy__.pop('product', None)
-            raise AttributeError('product')
+        if self.__proxy__.get('product') is NotImplemented:
+            self.__proxy__.pop('product')
+            result = self.__getattr__('product')
+            self.__proxy__['product'] = NotImplemented
+            return result
         source = zeit.cms.content.interfaces.ICommonMetadata[
             'product'].source(self)
         for value in source:
@@ -457,10 +461,11 @@ class LazyProxy(object):
     @property
     def serie(self):
         # Silently swallow missing item for solr/tms, but expose for reach.
-        if ('serie' not in self.__proxy__ or
-                self.__proxy__['serie'] is NotImplemented):
-            self.__proxy__.pop('serie', None)
-            raise AttributeError('serie')
+        if self.__proxy__.get('serie') is NotImplemented:
+            self.__proxy__.pop('serie')
+            result = self.__getattr__('serie')
+            self.__proxy__['serie'] = NotImplemented
+            return result
         source = zeit.cms.content.interfaces.ICommonMetadata[
             'serie'].source(self)
         return source.factory.values.get(self.__proxy__.get('serie'))
@@ -499,6 +504,11 @@ class LazyProxy(object):
         if self.__proxy__.get('type') != 'link':
             return False
         raise AttributeError('blog')
+
+    # Proxy zeit.content.video.interfaces.IVideo.seo_slug
+    @property
+    def seo_slug(self):
+        return zeit.content.video.video.Video.seo_slug.__get__(self)
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
@@ -553,8 +563,7 @@ class DataSolr(RandomContent):
                     content)
                 semantic = zeit.cms.content.interfaces.ISemanticChange(
                     content)
-                results.append({
-                    u'access': 'free',
+                data = {
                     u'authors': content.authors,
                     u'date-last-modified': (
                         modified.date_last_modified.isoformat()),
@@ -569,18 +578,22 @@ class DataSolr(RandomContent):
                     u'image-base-id': [
                         'http://xml.zeit.de/zeit-online/'
                         'image/filmstill-hobbit-schlacht-fuenf-hee/'],
-                    u'lead_candidate': False,
                     u'product_id': content.product.id,
-                    u'serie': None,
                     u'supertitle': content.supertitle,
                     u'teaser_text': content.teaserText,
                     u'title': content.title,
                     u'type': content.__class__.__name__.lower(),
-                    u'uniqueId': content.uniqueId})
+                    u'uniqueId': content.uniqueId
+                }
+                if 'fl' in kw:
+                    for key in list(data.keys()):
+                        if key not in kw['fl']:
+                            del data[key]
+                results.append(data)
             except (AttributeError, TypeError):
                 continue
         return pysolr.Results(
-            random.sample(results, min(rows, len(results))), len(results))
+            [random.choice(results) for x in range(rows)], len(results))
 
     def update_raw(self, xml, **kw):
         pass
@@ -614,12 +627,53 @@ class DataTMS(zeit.retresco.connection.TMS, RandomContent):
                 result.append(data)
         self._response = {
             'num_found': len(result),
-            'docs': random.sample(
-                result, min(rows, len(result))),
+            'docs': [random.choice(result) for x in range(rows)],
         }
         result = super(DataTMS, self).get_topicpage_documents(id, start, rows)
         self._response = {}
+        print result
         return result
+
+
+@zope.interface.implementer(zeit.retresco.interfaces.IElasticsearch)
+class DataES(zeit.retresco.search.Elasticsearch, RandomContent):
+    """Fake elasticsearch implementation that is used for local development."""
+
+    def __init__(self):
+        self._response = {}
+        self.client = mock.Mock()
+        self.client.search = self._search
+        self.index = None
+
+    def search(
+            self, query, sort_order, start=0, rows=25, include_payload=False):
+        result = []
+        for content in self._get_content():
+            data = zeit.retresco.interfaces.ITMSRepresentation(content)()
+            if data is not None:
+                # Ensure we always have an image
+                data['payload'].setdefault(
+                    'teaser_image',
+                    'http://xml.zeit.de/zeit-online/'
+                    'image/filmstill-hobbit-schlacht-fuenf-hee/')
+                # XXX LazyProxy cannot support liveblogs, and we don't want to
+                # expose those in tests.
+                data['payload']['is_live'] = False
+                if not include_payload:
+                    del data['payload']
+                result.append({'_source': data})
+
+        self._response = {'hits': {
+            'total': len(result),
+            'hits': [random.choice(result) for x in range(rows)],
+        }}
+        result = super(DataES, self).search(
+            query, sort_order, start, rows, include_payload)
+        self._response = {}
+        return result
+
+    def _search(self, *args, **kw):
+        return self._response
 
 
 class CMSSearch(zeit.retresco.convert.Converter):
