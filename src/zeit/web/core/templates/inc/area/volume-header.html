@@ -11,13 +11,8 @@
             </div>
         </article>
         {% if area.values() | length > 0 %}
-
-            {% set module = area.values()[0] %}
-            {% set teaser = module | first_child %}
             {% set module_layout = self.topic_class() %}
-            {% set image = get_image(view.volume.covers['coverimage'], fallback=False) %}
-
-            {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
+            {% include "zeit.web.core:templates/inc/asset/image_bgr_volume_header.tpl" %}
 
             <div class="{{ self.topic_class() }}-list">
                 {% for module in area.values()[0:3] -%}
