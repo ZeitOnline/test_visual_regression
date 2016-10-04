@@ -79,11 +79,6 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro headerimage(obj, loop) %}
-    {# BBB Wrap the article image in a macro until we have block templates in ZMO #}
-    {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" with context %}
-{%- endmacro %}
-
 {% macro video(obj) -%}
     {% if obj.id and 'header' not in obj.format | default('') -%}
         <figure class="
@@ -187,9 +182,5 @@
         {%- endfor -%}
     {%- endif -%}
 {% endmacro %}
-
-{% macro gallery(block) -%}
-    {% include 'zeit.web.core:templates/inc/blocks/gallery.html' %}
-{%- endmacro %}
 
 {% macro no_block(block) %}{% endmacro %}
