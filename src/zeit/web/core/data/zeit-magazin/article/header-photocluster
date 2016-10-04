@@ -13,17 +13,16 @@
         <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="copyrights" ns="http://namespaces.zeit.de/CMS/document">Quelle</attribute>
         <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2013-10-08T09:25:41.497174+00:00</attribute>
-        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2013-09-26T06:00:00+00:00</attribute>
-        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2013-10-08T09:26:47.102964+00:00</attribute>
-        <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2013-10-08T09:25:03.039843+00:00</attribute>
-        <attribute name="nextread_layout" ns="http://namespaces.zeit.de/CMS/document">minimal</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2013-10-08T09:25:41.497174+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2013-09-26T06:00:00+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2013-10-08T09:26:47.102964+00:00</attribute>
+        <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2013-10-08T09:25:03.039843+00:00</attribute>
         <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
         <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="genre" ns="http://namespaces.zeit.de/CMS/document">reportage</attribute>
         <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-        <attribute name="header_layout" ns="http://namespaces.zeit.de/CMS/document">traum</attribute>
+        <attribute name="header_layout" ns="http://namespaces.zeit.de/CMS/document">photocluster</attribute>
         <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-03-27T13:41:24.553806+00:00</attribute>
@@ -54,43 +53,22 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
-        <nextread>
-            <reference author="Carolin Emcke" contenttype="article" expires="" href="http://xml.zeit.de/zeit-magazin/article/vegetarisch-kochen-fuer-gaeste" issue="26" publication-date="" ressort="Lebensart" type="intern" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" year="2008">
-                <supertitle>Kochen für Gäste</supertitle>
-                <teaser_supertitle xsi:nil="true"/>
-                <title xsi:nil="true"/>
-                <text xsi:nil="true"/>
-                <description xsi:nil="true"/>
-                <byline xsi:nil="true"/>
-                <breadcrumb_title xsi:nil="true"/>
-                <author expires="" href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="">
-                    <display_name>Carolin Emcke</display_name>
-                    <location>Eisenhüttenstadt</location>
-                </author>
-            </reference>
-        </nextread>
     </head>
     <body>
-        <supertitle>Ich habe einen Traum</supertitle>
-        <title>Pegah Ferydoni</title>
-        <subtitle>Wie viele Flüchtlingskinder bin ich eine Suchende, Getriebene.</subtitle>
+        <supertitle>photocluster?</supertitle>
+        <title>Am I real?</title>
+        <subtitle>Vel, deleniti minima, magni quam consequatur sequi reprehenderit atque, beatae asperiores, totam consequuntur fugiat animi!</subtitle>
         <division type="page">
-            <image align="left" alt="Die ist der Alttest" expires="" href="http://links.to" is_empty="False" layout="zmo-xl-header" publication-date="" src="http://xml.zeit.de/exampleimages/artikel/traum.jpg" title="Katze!" type="jpg">
+            <image align="left" alt="Die ist der Alttest" expires="" href="http://links.to" is_empty="False" layout="zmo-xl-header" publication-date="" src="http://xml.zeit.de/zeit-magazin/images/local/01.jpg" title="Katze!" type="jpg">
                 <bu py:pytype="str">Die ist der image sub text</bu>
                 <copyright link="http://foo.de">©foo</copyright>
             </image>
-            <p>Leipzig hat in den letzten Jahren viele neue Spitznamen bekommen.
-                <a class="" href="http://www.faz.net/aktuell/politik/inland/leipzig-dieser-ort-ist-kein-traum-11525236.html" target="_blank">
-                    &quot;Disneyland des Unperfekten&quot;</a> wurde die Stadt in einem Artikel der 
-                <em>
-                    FAZ</em>getauft, für ihre illegalen Klubs, die Raves im Wald, die Altbauwohnungen für 300 Euro Warmmiete. Dann wurde die klassische bürgerliche Kultur in Oper, Theatern und Konzerthäusern dazugerechnet und die Universität, die jährlich 28.000 Studenten anzieht, und Leipzig wurde zum neuen Berlin. Tolerant und offen sei die Stadt zudem, auch ein 
-                <a class="" href="http://www.zeit.de/2012/12/S-Homosexualitaet-Leipzig" target="_blank">
-                    &quot;Biotop der Schwulenszene&quot;</a>, wie die ZEIT berichtete. Als Sammelbegriff für die anhaltende mediale Aufmerksamkeit für Sachsens zweitgrößte Stadt hat sich schließlich &quot;Hypezig&quot; etabliert.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam cum deleniti, atque consequatur. Aut nam fugiat similique enim debitis accusantium repellendus accusamus laborum pariatur eum, eaque vel vero? Accusamus veniam cumque exercitationem hic molestiae est odit culpa modi. Maiores pariatur, obcaecati! Deserunt numquam dolore tempora animi distinctio quod culpa ullam nobis tempore suscipit. Pariatur quibusdam libero, voluptas expedita illo nemo? Error aliquid magni placeat odio ducimus. Error quod quis eveniet, sapiente corporis veniam minus blanditiis recusandae molestias perferendis! Voluptates quia dicta commodi vel iusto quam, quod hic accusamus tenetur, expedita suscipit aliquam pariatur, deleniti? Blanditiis labore delectus, nam hic fugit provident, reiciendis, eos qui laboriosam ratione corporis beatae maiores. Officia harum cupiditate necessitatibus quaerat magni molestiae est, natus vel nesciunt iusto, pariatur, facilis cumque minus praesentium aspernatur mollitia.</p>
         </division>
     </body>
     <teaser>
-        <supertitle>&quot;Tatort&quot; mit Ulrich Tukur</supertitle>
-        <title>Shakespeare im Kugelhagel</title>
-        <text>Schnellfeuer-Oper aus Wiesbaden. Der experimentelle &quot;Tatort&quot; mit Ulrich Tukur war eine Hommage an Tarantino, Truffaut und Shakespeare. Großes Kino! Die Twittritik</text>
+        <supertitle>Jens Spahn</supertitle>
+        <title>Merz allein macht noch kein Wirtschaftsprofil</title>
+        <text>Der CDU-Politiker Jens Spahn fordert von seiner Partei Mut zu grundlegenden Reformen. Eine weitere Regulierung der Wirtschaft durch Schwarz-Rot lehnt er ab.</text>
     </teaser>
 </article>
