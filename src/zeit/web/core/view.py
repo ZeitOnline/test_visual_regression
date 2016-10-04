@@ -660,8 +660,8 @@ class Base(object):
 
     @zeit.web.reify
     def webtrekk_content_id(self):
-        content_url = self.content_url.replace('http://', '')
-        return '{}|{}'.format(self.webtrekk_identifier, content_url)
+        content_url = self.content_url.replace(u'http://', u'')
+        return u'{}|{}'.format(self.webtrekk_identifier, content_url)
 
     @zeit.web.reify
     def webtrekk_assets(self):

@@ -7,7 +7,33 @@ POSTDEPLOY
 - ZON-3273: Needs config for tube areas, see PR for the what-and-where
 
 
-3.10 (unreleased)
+3.11 (unreleased)
+-----------------
+
+- ZON-3273: Add tube area
+
+- ZON-3163: Wire up auto areas with elasticsearch
+
+- PERF: Use ContentQuery with LazyProxy for all areas
+
+
+3.10.2 (2016-09-30)
+-------------------
+
+- HOTFIX: Don't break on missing meta files etc. in author pages
+
+- FIX: Handle non-ascii uniqueIds in webtrekk content id
+
+
+3.10.1 (2016-09-29)
+-------------------
+
+- MAINT: Keep test image variant config in sync with production version
+
+- FIX: Repair LazyProxy for solr results
+
+
+3.10 (2016-09-28)
 -----------------
 
 - BUG-546: Show date last modified for nextread and search results
@@ -22,7 +48,9 @@ POSTDEPLOY
 
 - ZON-1560: Add authorbox for single authors with image
 
-- ZON-3273: Add tube area
+- ZON-3278: Extract `.core.video.get_seo_slug()` to `zeit.content.video`.
+
+- BUG-523: Properly offset author page articles
 
 - FIX: Render copyright url and handle empty image caption in sitemaps
 
