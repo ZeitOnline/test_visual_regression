@@ -4,11 +4,13 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-(nothing yet)
+- ZON-3273: Needs config for tube areas, see PR for the what-and-where
 
 
 3.11 (unreleased)
 -----------------
+
+- ZON-3273: Add tube area
 
 - ZON-3163: Wire up auto areas with elasticsearch
 
