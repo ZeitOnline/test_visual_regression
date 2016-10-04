@@ -497,7 +497,7 @@ def mockserver(request):
     interface = ISettings
     zope.interface.declarations.alsoProvides(settings, interface)
     zope.component.provideUtility(settings, interface)
-    config.add_tween('zeit.web.core.test.conftest.sleep_tween')
+    config.add_tween('zeit.web.conftest.sleep_tween')
     app = config.make_wsgi_app()
     server = gocept.httpserverlayer.wsgi.Layer()
     server.wsgi_app = app
