@@ -142,27 +142,6 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro photocluster(block) %}
-<div class="photocluster__wrap">
-    <div class="photocluster">
-    {% if block %}
-        {% for obj in block | reject("hidden_slide") -%}
-            <div class="photocluster__item">
-                <div class="scaled-image">
-                    {% include "zeit.web.magazin:templates/inc/asset/image_photocluster.tpl" %}
-                </div>
-            </div>
-        {%- endfor %}
-    {% endif %}
-    </div>
-    <div class="photocluster__caption is-constrained is-centered">
-        <div class="photocluster__caption__text">
-            {{ block.html | safe }}
-        </div>
-    </div>
-</div>
-{% endmacro %}
-
 {% macro meta_author(authors, class="article__head__meta__author", titlecase=True) %}
     {%- if authors -%}
         {%- for author in authors -%}
