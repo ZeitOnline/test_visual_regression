@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3163: Wire up auto areas with elasticsearch
 
+- BUG-550: Be more defensive about wrongly configured STOA modules
+
 - PERF: Use ContentQuery with LazyProxy for all areas
 
 
