@@ -66,10 +66,12 @@
 	&--author-list,
 	&--newsticker,
 	&--overview,
-	&--ranking
+	&--ranking,
+	&--tube
 		padding: 0 $page-padding--small
 
-	&--ranking
+	&--ranking,
+	&--tube
 		padding-top: remify(14px)
 
 	&--buzzboard
@@ -96,7 +98,8 @@
 		&--author-list,
 		&--newsticker,
 		&--overview,
-		&--ranking
+		&--ranking,
+		&--tube
 			clear: both
 			float: none
 			margin: 0 auto
@@ -109,6 +112,7 @@
 		&--overview
 			max-width: $max-overview-width + 2 * $page-padding
 		&--ranking,
+		&--tube,
 		&--newsticker-on-keywordpage,
 		&--newsticker-on-topicpage
 			$max-ranking-width: $medium-content-width + 2 * $page-padding
@@ -140,5 +144,6 @@
 		text-align: center
 
 	+respond-min($break-desktop-min)
-		&--ranking
+		&--ranking,
+		&--tube
 			padding-top: remify(30px)

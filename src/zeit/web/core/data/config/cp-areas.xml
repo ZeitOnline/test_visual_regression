@@ -19,6 +19,7 @@
     <area kind="newsticker" title="Schlagzeilen-Fläche">newsticker</area>
     <area kind="ranking" title="Simple-Fläche" available="zeit.cms.section.interfaces.IZONContent">ranking</area>
     <area kind="zco-ranking" title="Simple-Fläche" available="zeit.campus.interfaces.IZCOContent">zco-ranking</area>
+    <area kind="tube" title="Schlauch-Fläche" available="zeit.cms.section.interfaces.IZONContent">tube</area>
     <area kind="shop" available="zeit.web.core.interfaces.IInternalUse">overview</area>
     <area kind="buzzboard" title="Buzz-Board" available="zeit.web.core.interfaces.IInternalUse">buzzboard</area>
     <area kind="author-favourite-content" available="zeit.content.dynamicfolder.interfaces.IVirtualContent">author-favourite-content</area>
