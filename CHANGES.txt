@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - BUG-550: Be more defensive about wrongly configured STOA modules
 
+- PERF: reach returns product_id and serie now
+
 - PERF: Use ContentQuery with LazyProxy for all areas
 
 
