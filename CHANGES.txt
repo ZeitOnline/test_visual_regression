@@ -25,7 +25,6 @@ POSTDEPLOY
 
 3.10.1 (2016-09-29)
 -------------------
->>>>>>> master
 
 - MAINT: Keep test image variant config in sync with production version
 
