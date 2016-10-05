@@ -7,7 +7,7 @@ POSTDEPLOY
 - ZON-3273: Needs config for tube areas, see PR for the what-and-where
 
 
-3.11 (unreleased)
+3.11 (2016-10-05)
 -----------------
 
 - ZON-3273: Add tube area
