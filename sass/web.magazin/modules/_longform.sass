@@ -25,7 +25,8 @@ $longform-header-max-height: 1400px
   .article__head__subtitle
     color: $grey--dark
     font-size: $font-ml
-    margin: 0 auto
+    font-weight: bold
+    margin-bottom: 0
     max-width: remify(480px)
     text-align: center
     +respond-min($break-2)
@@ -128,6 +129,7 @@ $longform-header-max-height: 1400px
         +link-colors($white, $white, $white, $white, $white)
         border-color: $white
 
+  // does this really still exist? [ms]
   &.has-light-header
     .article__head-wrap
       background-color: $charcoal
@@ -264,10 +266,10 @@ $longform-header-max-height: 1400px
     +respond-min(em($bp-adjust-horizontal-figures--2))
       position: relative
       width: 100%
-      .figure__media, img
+      .figure__media
         float: none
         width: 100%
-      .figure__caption, figcaption
+      .figure__caption
         max-width: remify(240px)
         width: em(200px)
         position: absolute
@@ -276,20 +278,20 @@ $longform-header-max-height: 1400px
         top: 0
         float: none
     +respond-min(em($bp-adjust-horizontal-figures--3))
-      .figure__caption, figcaption
+      .figure__caption
         width: em(220px)
     +respond-min(em($bp-adjust-horizontal-figures--4))
-      .figure__caption, figcaption
+      .figure__caption
         width: 100%
-    .figure__media, img
+    .figure__media
       max-width: remify($longform-inline-max-width)
   .figure-horizontal--right
     +respond-min(em($bp-adjust-horizontal-figures--2))
-      .figure__caption, figcaption
+      .figure__caption
         right: 100%
         left: auto
   .figure-full-width
-    .figure__caption, figcaption
+    .figure__caption
       max-width: remify($longform-image-caption-max-width)
       padding-right: 0
 

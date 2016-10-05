@@ -1,235 +1,129 @@
 // –––––––––––––––––––––––
+//     STANDARD HEADER
+// –––––––––––––––––––––––
+
+.article__head--default
+	.article__head__media
+		max-width: remify(500px)
+
+// –––––––––––––––––––––––
 //      TRAUM HEADER
 // –––––––––––––––––––––––
 
 .article__head--traum
-  max-width: none
-  margin-bottom: $medium
-  +respond-min($break-1)
-    margin-bottom: $big
-  +respond-min($break-2)
-    margin-bottom: $big
-  +respond-min($break-3)
-    margin-bottom: $big
+	max-width: none
+	margin-bottom: $medium
+	+respond-min($break-1)
+		margin-bottom: $big
 
-  .is-constrained
-    margin: 0 auto
+	.article__head__title
+		margin-bottom: 0
 
-  .article__head__supertitle
+	.article__head__subtitle
+		@extend %headline
+		@extend %font-xl-xxl
+		text-align: center
+		margin-bottom: $compact
+		&:before
+			content: "—"
+			display: block
+			margin-top: $micro
+			margin-bottom: $micro
 
-  .article__head__title
-    @extend %font-xl-xxl
-    margin-bottom: 0
-
-  .article__head__subtitle
-    @extend %headline
-    @extend %font-xl-xxl
-    text-align: center
-    margin-bottom: $compact
-    &:before
-      content: "—"
-      display: block
-      margin-top: $micro
-      margin-bottom: $micro
-    p
-      margin-top: 0
-
-  .article__head__image
-    +bleed($break-3)
-    max-width: none
-
-  .article__head__meta-wrap
-    margin: 0 auto
-    display: block
-
-  .article__head__meta
-  .article__head__meta__genre
-  .article__head__meta__location
-  .article__head__meta__author
-  .article__head__meta__source
-  .article__head__meta__date
+	.article__head__media
+		max-width: remify(920px)
 
 // –––––––––––––––––––––––
 //    TEXT ONLY HEADER
 // –––––––––––––––––––––––
 
-.article__head-wrap--text-only
-  +respond-min($break-3)
-      padding-left: $gutter/2
-      padding-right: $gutter/2
-
 .article__head--text-only
-  text-align: left
-  +respond-min($break-1)
-    padding-left: 7%
+	text-align: left
+	+respond-min($break-1)
+		padding-left: 7%
 
-  .article__head__title
-    @extend %font-xl-xxl
-    margin-bottom: $small
-    +respond-min($break-3)
-      margin-bottom: $small
+	.article__head__title
+		margin-bottom: $small
 
-  .article__head__subtitle
-    @extend %headline
-    @extend %font-xl-xxl
-    margin-bottom: $small
+	.article__head__subtitle
+		@extend %headline
+		@extend %font-xl-xxl
+		margin-bottom: $small
 
-  .article__head__meta__author
-    color: $black
+	.article__head__meta__author
+		color: $black
 
 // –––––––––––––––––––––––
 //    LEINWAND HEADER
 // –––––––––––––––––––––––
 
 .article__head--leinwand
-  max-width: none
-  margin-top: 0
-  .article__head__title
-    font-size: $font-xl
-    +respond-min($break-2)
-      font-size: $font-xxl
-  .article__head__subtitle
-    p
-      +body-type-zoom
-  .is-constrained
-    margin: 0 auto
-  .article__head__image
-    +bleed($break-tablet-min)
-    max-width: none
-    +respond-min($break-tablet-min)
-      margin-top: $gutter
+	max-width: none
+	margin-top: 0
+	.article__head__media
+		margin-left: -$page-padding--small
+		margin-right: -$page-padding--small
+		+respond-min($break-page-padding)
+			margin-left: auto
+			margin-right: auto
+			margin-top: remify(30px)
+			max-width: remify(920px)
+
 // –––––––––––––––––––––––
 //    BRIEFMARKE HEADER
 // –––––––––––––––––––––––
 
 .article__head--stamp
-  text-align: left
-  .article__head__title
-    font-size: $font-xl
-    +respond-max($break-1)
-      margin-top: 0
-    +respond-min($break-1)
-      font-size: $font-xxl
-    +respond-min($break-2)
-      margin-bottom: $compact
-    +respond-min($break-3)
-      font-size: $font-xxxl
-  h1
-    +respond-min($break-1)
-      margin-top: em(-25px)
-  .article__head__subtitle
-    p
-      +body-type-zoom
-  .is-constrained
-    margin: 0 auto
-  .article__head__image
-    max-width: none
-    margin-bottom: $compact
-    +respond-max($break-1)
-      padding-left: 20%
+	text-align: left
+	.article__head__title
+		+respond-min($break-1)
+			font-size: $font-xxl
+		+respond-min($break-2)
+			margin-bottom: $compact
+		+respond-min($break-3)
+			font-size: $font-xxxl
+	.article__head__media
+		+respond-min($break-1)
+			margin-bottom: remify(-20px)
+			margin-left: 50%
 
-.article__head__stamp-wrap
-  overflow: hidden
-  position: relative
-  .figure-header
-    margin-bottom: 0
-  .figure__image
-    margin-bottom: 0
-  +respond-min($break-1)
-    text-align: right
-    .article__head__image
-      display: inline-block
-      width: 50%
-      margin-bottom: 0
-    .article__head__supertitle
-      position: absolute
-      left: 0
-      bottom: 0
-      margin-bottom: 0
 
 // –––––––––––––––––––––––
 //    MODE HEADER
 // –––––––––––––––––––––––
 
 .article__head--mode
-  overflow: hidden
-  max-width: 820px
-  max-width: 51.25rem
-  .article__head__image
-    +respond-max($break-1)
-      padding-right: 30%
-      padding-left: 15%
-      margin-bottom: $little
-    +respond-min($break-1)
-      max-width: none
-      padding-right: $gutter*3
-      float: left
-      width: 50%
-      margin-bottom: 0
-      margin-top: $large*1.1
-    +respond-min($break-2)
-      margin-top: $large*1.18
-    +respond-min($break-3)
-      margin-top: $large*1.25
-  .wrap
-    text-align: left
-    overflow: hidden
-  .article__head__title
-    font-size: $font-xl
-    +respond-max($break-1)
-      padding-left: 15%
-    +respond-min($break-2)
-      font-size: $font-xxl
-  .article__head__subtitle
-    +body-type-zoom
-  .article__head__supertitle
-    +respond-max($break-1)
-      padding-left: 15%
+	max-width: remify(820px)
+	text-align: left
+	+respond-min($break-1)
+		+pie-clearfix
+		.article__head__media
+			float: left
+			margin: remify(56px 0 0)
+			max-width: $medium-content-width / 2
+			width: 42%
+		.article__head__text
+			float: right
+			width: 50%
 
 // –––––––––––––––––––––––
 //    COLUMN HEAD
 // –––––––––––––––––––––––
 .article__head--column
-  max-width: none
-  margin-bottom: $medium
-  +respond-min($break-1)
-    margin-bottom: $big
-  +respond-min($break-2)
-    margin-bottom: $big
-  +respond-min($break-3)
-    margin-bottom: $huge
 
-  .is-constrained
-    margin: 0 auto
+	.article__head__title
+		margin-bottom: 0
 
-  .article__head__supertitle
+	.article__head__byline
+		@extend %headline
+		@extend %font-xl-xxl
+		margin-bottom: remify($huge)
+		&:before
+			content: "—"
+			display: block
+			margin-top: $micro
+			margin-bottom: $micro
 
-  .article__head__title
-    @extend %font-xl-xxl
-    margin-bottom: 0
-
-  .article__column__author
-    @extend %headline
-    @extend %font-xl-xxl
-    text-align: center
-    margin-bottom: em_to_rem($huge)
-    &:before
-      content: "—"
-      display: block
-      margin-top: $micro
-      margin-bottom: $micro
-    a
-      +link
-        color: $black
-
-  .article__column__headerimage
-    max-width: 270px
-    margin: 0 auto em_to_rem($huge) auto
-    img
-      width: 100%
-
-// –––––––––––––––––––––––
-//    LONGFORM HEAD
-// –––––––––––––––––––––––
-.figure-longform
-    margin: 0;
+	.article__head__media
+		max-width: remify(300px)
+		margin-bottom: remify($huge)
