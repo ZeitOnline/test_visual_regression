@@ -108,10 +108,11 @@
 	&--7-on-article
 		clear: both
 		float: right
-		margin: remify(0 60px 28px 36px)
-		max-width: 940px
+		margin: remify(0 0 28px 36px)
 		padding: 0
 		width: auto
+		+respond-min($break-desktop-min)
+			margin-right: remify(60px)
 	&--8-on-article
 		background-color: $color-advertising-bg
 		margin: 0 auto
