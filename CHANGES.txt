@@ -7,14 +7,28 @@ POSTDEPLOY
 - ZON-3273: Needs config for tube areas, see PR for the what-and-where
 
 
-3.11 (unreleased)
+3.12 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.11 (2016-10-05)
 -----------------
 
 - ZON-3273: Add tube area
 
 - ZON-3163: Wire up auto areas with elasticsearch
 
+- BUG-544: Remove max-width for adtile7 in articles
+
+- BUG-552: Fix infographic default image size
+
 - BUG-550: Be more defensive about wrongly configured STOA modules
+
+- BUG-541: Highlight current gallery navigation item for touch devices
+
+- FIX: Be defensive about infobox missing meta files for xml.zeit.de
 
 - PERF: reach returns product_id and serie now
 

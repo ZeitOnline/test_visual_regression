@@ -48,7 +48,7 @@ class XMLContent(zeit.web.core.view.Base):
     def _include_infoboxes(self):
         for infobox in self.xml.xpath('/article/body/division/infobox'):
             box = zeit.cms.interfaces.ICMSContent(infobox.get('href'), None)
-            if box is None:
+            if not zeit.content.infobox.interfaces.IInfobox.providedBy(box):
                 log.info(
                     'Cannot resolve infobox %s, ignored.', infobox.get('href'))
                 continue
