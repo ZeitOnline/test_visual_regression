@@ -497,8 +497,6 @@ def test_header_articles_produce_no_error(testbrowser):
         'div.article__wrap')
     assert testbrowser('/zeit-magazin/article/header5').cssselect(
         'div.article__wrap')
-    assert testbrowser('/zeit-magazin/article/header5-2').cssselect(
-        'div.article__wrap')
     assert testbrowser('/zeit-magazin/article/header6').cssselect(
         'div.article__wrap')
 

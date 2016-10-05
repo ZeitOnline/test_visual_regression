@@ -198,7 +198,7 @@ def test_article_request_should_have_html5_doctype(testbrowser):
 
 def test_artikel05_should_have_header_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/05')
-    assert browser.cssselect('.article__head-wrap')
+    assert browser.cssselect('.article__head')
     assert browser.cssselect('.article__head-image')
     assert browser.cssselect('.figure-longform.is-pixelperfect.scaled-image')
 

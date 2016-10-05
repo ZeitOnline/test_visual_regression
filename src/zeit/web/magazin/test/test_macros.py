@@ -111,7 +111,7 @@ def test_image_template_should_produce_figure_markup(
     image = zeit.web.core.interfaces.IFrontendBlock(block)
     browser = tplbrowser(
         'zeit.web.magazin:templates/inc/asset/image_article.tpl',
-        obj=image, request=dummy_request)
+        block=image, request=dummy_request)
     assert browser.cssselect('figure.figure-full-width')
     assert browser.cssselect('img.figure__media')
     assert browser.cssselect('span.figure__copyright')
@@ -125,7 +125,7 @@ def test_image_template_should_produce_copyright_caption(
     image = zeit.web.core.interfaces.IFrontendBlock(block)
     browser = tplbrowser(
         'zeit.web.magazin:templates/inc/asset/image_article.tpl',
-        obj=image, request=dummy_request)
+        block=image, request=dummy_request)
     copyright = browser.cssselect('.figure__copyright a')[0]
     assert copyright.attrib['href'] == 'http://foo.com'
     assert copyright.text_content() == u'© Andreas Gebert/dpa'
