@@ -10,9 +10,6 @@ $break-gallery-min: em(576px)
 		@extend .gallery-container
 
 .gallery-slides
-	figure
-		margin: 0
-		padding: 0
 	.gallery__media-item
 		margin: 0 auto
 		max-height: 620px
@@ -42,8 +39,8 @@ $break-gallery-min: em(576px)
 
 .bx-wrapper--touch
 	.bx-controls
-		padding: $page-padding $page-padding 1em
-		+respond-min($break-tablet-min)
+		padding: remify(20px) $page-padding--small 1em
+		+respond-min($break-page-padding)
 			padding: 0 0 1em
 .bx-wrapper--no-touch
 	.bx-controls

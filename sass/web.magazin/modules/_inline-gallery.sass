@@ -2,19 +2,22 @@ $gallery-button-radius: em(35px)
 $gallery-dots-diameter: 8px
 
 .inline-gallery
-	margin: 0 auto em(60px)
+	+unpadded
+	margin-bottom: remify(60px)
+
+	+respond-min($break-page-padding)
+		margin-left: auto
+		margin-right: auto
+
+	&-container
+		@extend .gallery-container
 
 .gallery-slides
-	figure
-		margin: 0
-		padding: 0
-		clear: none
 	.gallery__media-item
 		margin: 0 auto
 		max-height: 620px
 		width: auto
 	.figure__caption
-		color: $grey--mid
 		margin: $small auto 0
 		max-width: none
 		padding: 0 $page-padding--small
@@ -23,9 +26,7 @@ $gallery-dots-diameter: 8px
 	.figure__copyright
 		color: $charcoal
 		a
-			+link-colors($charcoal, $charcoal, $charcoal, $charcoal, $charcoal)
-			+on-interaction
-				border-color: $charcoal
+			color: inherit
 
 // appear just after bxSlider initialisation
 // needed for "static" galleries
@@ -38,8 +39,8 @@ $gallery-dots-diameter: 8px
 
 .bx-wrapper--touch
 	.bx-controls
-		padding: $page-padding $page-padding 1em
-		+respond-min($break-1)
+		padding: remify(20px) $page-padding--small 1em
+		+respond-min($break-page-padding)
 			padding: 0 0 1em
 .bx-wrapper--no-touch
 	.bx-controls
