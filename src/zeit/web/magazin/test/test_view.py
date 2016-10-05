@@ -198,15 +198,14 @@ def test_article_request_should_have_html5_doctype(testbrowser):
 
 def test_artikel05_should_have_header_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/05')
-    assert browser.cssselect('.article__head')
+    assert browser.cssselect('.article__head-wrap')
     assert browser.cssselect('.article__head-image')
     assert browser.cssselect('.figure-longform.is-pixelperfect.scaled-image')
 
 
 def test_column_should_have_header_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/standardkolumne-beispiel')
-    assert browser.cssselect('div.article__column__headerimage')
-    figure = browser.cssselect('figure.figure-header.scaled-image')[0]
+    figure = browser.cssselect('figure.article__head__media')[0]
     link = figure.cssselect('a')[0]
     image = figure.cssselect('img')[0]
     assert image.attrib['alt'] == 'Dies ist der lokale alt Text'
@@ -216,7 +215,7 @@ def test_column_should_have_header_image(testbrowser):
 def test_column_should_not_have_header_image(testbrowser):
     browser = testbrowser(
         '/zeit-magazin/article/standardkolumne-ohne-bild-beispiel')
-    assert '<div class="article__column__headerimage">' not in browser.contents
+    assert not browser.cssselect('figure.article__head__media')
 
 
 def test_a_404_request_should_be_from_zon_main_page(testbrowser):

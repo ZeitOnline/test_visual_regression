@@ -133,7 +133,7 @@ def test_image_template_should_produce_copyright_caption(
 
 def test_image_template_should_designate_correct_layouts(testbrowser):
     browser = testbrowser('/zeit-magazin/article/inline-imagegroup')
-    header = browser.cssselect('figure.figure-header img')[0]
+    header = browser.cssselect('.article__head__media-item')[0]
     assert header.attrib['data-ratio'] == '1.77858439201'  # variant=original
     stamp = browser.cssselect('figure.figure-stamp--right img')[0]
     assert stamp.attrib['data-ratio'] == '0.75'  # variant=portrait
