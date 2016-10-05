@@ -13,23 +13,15 @@
   <span class="article__head__title">{{ view.title }}</span>
 {%- endmacro %}
 
-{% macro subtitle(include_meta=False, with_quotes=False) -%}
+{% macro subtitle(include_meta=False) -%}
     <div class="article__head__subtitle">
-        <p>
-            <strong>
-                {% if with_quotes %}
-                    »{{ view.subtitle }}«
-                {% else %}
-                    {{ view.subtitle }}
-                {% endif %}
-                {% if include_meta and view.genre %}
-                    {{ view.genre | title }}
-                {% endif %}
-                {% if include_meta and view.authors %}
-                    {{ meta_author(view.authors, titlecase=view.genre==None) }}
-                {% endif %}
-            </strong>
-        </p>
+        {{ view.subtitle }}
+        {% if include_meta and view.genre %}
+            {{ view.genre | title }}
+        {% endif %}
+        {% if include_meta and view.authors %}
+            {{ meta_author(view.authors, titlecase=view.genre==None) }}
+        {% endif %}
     </div>
 {%- endmacro %}
 
