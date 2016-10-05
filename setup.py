@@ -52,7 +52,7 @@ setup(
         'zc.iso8601',
         'zc.sourcefactory',
         'zeit.brightcove',
-        'zeit.cms>=2.91.0.dev0',
+        'zeit.cms>=2.91.1.dev0',
         'zeit.campus>=1.6.0.dev0',
         'zeit.connector>=2.8.0.dev0',
         'zeit.content.advertisement',
