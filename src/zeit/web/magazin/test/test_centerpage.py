@@ -148,7 +148,7 @@ def test_teaser_upright_large_has_correct_markup(testbrowser):
     assert supertitle.text.strip() == u'Raffiniert kochen'
     assert title.text.strip() == 'Die perfekte Illusion'
     assert u'Safran, Salzzitronen' in subtitle.text.strip()
-    assert re.search('frau-isst-suppe-2/tile__660x660',
+    assert re.search('frau-isst-suppe-2/tile__315x394',
                      img.get('src'))
     assert img.get('alt') == 'Eine Frau isst Paprikasuppe'
 

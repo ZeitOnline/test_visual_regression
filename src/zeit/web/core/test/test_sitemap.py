@@ -78,11 +78,29 @@ def test_gsitemap_page_without_image(testbrowser, monkeypatch):
     assert not xml.xpath('//image:image', namespaces={'image': ns})
 
 
-def test_gsitemap_newssite(testbrowser):
+def test_gsitemap_page_does_not_break_without_image_caption(
+        testbrowser, monkeypatch):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'filmstill-hobbit-schlacht-fuenf-hee/'],
+        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}]
+    monkeypatch.setattr(zeit.web.core.image.Image, 'caption', None)
+    browser = testbrowser('/gsitemaps/index.xml?p=1')
+    print browser.contents
+    xml = lxml.etree.fromstring(browser.contents)
+    ns = 'http://www.google.com/schemas/sitemap-image/1.1'
+    assert (
+        xml.xpath(
+            '//image:image/image:caption', namespaces={'image': ns})[0].text ==
+        u'(©\xa0Warner Bros.)')
+
+
+def test_gsitemap_newssite(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
+                          'crystal-meth-nancy-schmidt/'],
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'},
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'}]
     browser = testbrowser('/gsitemaps/newsitemap.xml')
@@ -114,14 +132,16 @@ def test_gsitemap_newssite(testbrowser):
         xml.xpath(
             '//image:image/image:loc', namespaces=ns)[0].text ==
         'http://localhost/zeit-online/image/'
-        'filmstill-hobbit-schlacht-fuenf-hee/wide__1300x731')
+        'crystal-meth-nancy-schmidt/wide__1300x731')
     assert (
         xml.xpath(
             '//image:image/image:caption', namespaces=ns)[0].text ==
-        u'Handlung, wohin man auch schaut in dieser Szene aus dem letzten '
-        u'Hobbit-Teil "Die Schlacht der fünf Heere" '
-        u'(©\xa0Warner Bros.)')
-    assert len(xml.xpath('//image:image', namespaces=ns)) == 1
+        u'Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen '
+        u'Gera und Jena (©\xa0Milos Djuric)')
+    assert (
+        xml.xpath(
+            '//image:image/image:license', namespaces=ns)[0].text ==
+        'http://www.milosdjuric.com/')
 
 
 def test_gsitemap_video(testbrowser):

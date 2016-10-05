@@ -4,16 +4,69 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-ZON-3236: Nach dem Deployment muss man dann die Sitemap-CPs in Production geeignet anlegen,
-am besten aus http://vivi.staging.zeit.de/repository/gsitemaps/ kopieren.
-ISitemap Interface vergeben auf vivi-db mit:
-bin/zope debug work/maintenancejobs/tools/provide_interface.py http://xml.zeit.de/path/to/thing zeit.content.cp.interfaces.ISitemap
+- ZON-3273: Needs config for tube areas, see PR for the what-and-where
 
 
-3.10 (unreleased)
+3.11 (unreleased)
 -----------------
 
+- ZON-3273: Add tube area
+
+- ZON-3163: Wire up auto areas with elasticsearch
+
+- BUG-552: Fix infographic default image size
+
+- BUG-550: Be more defensive about wrongly configured STOA modules
+
+- BUG-541: Highlight current gallery navigation item for touch devices
+
+- FIX: Be defensive about infobox missing meta files for xml.zeit.de
+
+- PERF: reach returns product_id and serie now
+
+- PERF: Use ContentQuery with LazyProxy for all areas
+
+
+3.10.2 (2016-09-30)
+-------------------
+
+- HOTFIX: Don't break on missing meta files etc. in author pages
+
+- FIX: Handle non-ascii uniqueIds in webtrekk content id
+
+
+3.10.1 (2016-09-29)
+-------------------
+
+- MAINT: Keep test image variant config in sync with production version
+
+- FIX: Repair LazyProxy for solr results
+
+
+3.10 (2016-09-28)
+-----------------
+
+- BUG-546: Show date last modified for nextread and search results
+
 - ZON-3180: Enlarge infographics with layout `small` for desktop
+
+- ZON-3282: Propagate webtrekk content ID to CeleraOne
+
+- ZON-3240: Added some optical adjustments to Z+ badges
+
+- ZON-3325: Send entitlement (access rights) to C1
+
+- ZON-1560: Add authorbox for single authors with image
+
+- ZON-3278: Extract `.core.video.get_seo_slug()` to `zeit.content.video`.
+
+- BUG-523: Properly offset author page articles
+
+- FIX: Render copyright url and handle empty image caption in sitemaps
+
+- MAINT: Remove obsolete exceptions in ZMO comments
+
+- MAINT: Try to stabilize selenium tests by waiting for HTML body
 
 
 3.9 (2016-09-21)

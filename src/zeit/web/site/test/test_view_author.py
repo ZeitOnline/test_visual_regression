@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 import datetime
+
 import lxml.html
+import mock
 import pyramid.testing
-import pytest
 import zope.component
 
 import zeit.solr.interfaces
@@ -101,10 +102,16 @@ def test_author_page_should_hide_favourite_content_on_further_pages(
     assert len(select('.teaser-small')) == 3
 
 
-@pytest.mark.skipif(
-    True, reason='We cannot browser-test this, deduplication happens via solr')
-def test_articles_by_author_should_not_repeat_favourite_content(testbrowser):
-    pass
+def test_articles_by_author_should_not_repeat_favourite_content(
+        testbrowser, monkeypatch):
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/j_random')
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    mock_search = mock.Mock()
+    monkeypatch.setattr(solr, 'search', mock_search)
+    testbrowser('/autoren/j_random')
+    for fav in author.favourite_content:
+        assert fav.uniqueId in mock_search.call_args[1]['fq']
 
 
 def test_first_page_shows_fewer_solr_results_since_it_shows_favourite_content(
@@ -124,12 +131,33 @@ def test_view_author_comments_should_have_comments_area(
         application, dummy_request):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
-    request = dummy_request
-    request.registry.settings = {'author_comment_page_size': '6'}
-    request.GET = {'p': '1'}
-    view = zeit.web.site.view_author.Comments(author, request)
+    dummy_request.registry.settings = {'author_comment_page_size': '6'}
+    dummy_request.GET = {'p': '1'}
+    view = zeit.web.site.view_author.Comments(author, dummy_request)
     assert type(view.tab_areas[0]) == (
         zeit.web.site.view_author.UserCommentsArea)
+
+
+def test_author_comments_should_correctly_validate_pagination(
+        application, dummy_request, monkeypatch):
+    mock_comments = mock.MagicMock(return_value={'comments': []})
+    monkeypatch.setattr(
+        zeit.web.core.comments.Community, 'get_user_comments', mock_comments)
+
+    dummy_request.GET = {}
+    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    assert view.tab_areas is not None
+    assert mock_comments.call_args[1]['page'] == 1
+
+    dummy_request.GET = {'p': 'nan'}
+    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    assert view.tab_areas is not None
+    assert mock_comments.call_args[1]['page'] == 1
+
+    dummy_request.GET = {'p': '3'}
+    view = zeit.web.site.view_author.Comments(mock.Mock(), dummy_request)
+    assert view.tab_areas is not None
+    assert mock_comments.call_args[1]['page'] == 3
 
 
 def test_author_contact_should_be_fully_rendered(testbrowser):

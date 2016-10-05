@@ -15,12 +15,20 @@
             {%- endfor -%}
         </n:keywords>
     </n:news>
-    {%- if image-%}
+    {% require image = get_image(module, variant_id='wide', fallback=False) %}
+        {%- set source = request.image_host + image.path + '__1300x731' -%}
+        {%- set copyright = image.copyrights | map('first') | join(', ') -%}
+        {%- if copyright -%}
+            {%- set copyright = '(' ~ copyright ~ ')' -%}
+        {%- endif -%}
+        {%- if image.copyrights and image.copyrights[0] -%}
+            {%- set copyright_url = image.copyrights[0][1] -%}
+        {%- endif -%}
         <image:image>
             <image:loc>{{ source }}</image:loc>
-            <image:caption>{{ image.caption + ' (' + copyright + ')' }}</image:caption>
+            <image:caption>{{ [image.caption, copyright] | reject('none') | join(' ') }}</image:caption>
             <image:title>{{ image.title }}</image:title>
             <image:license>{{ copyright_url }}</image:license>
         </image:image>
-    {%- endif -%}
+    {% endrequire %}
 </url>
