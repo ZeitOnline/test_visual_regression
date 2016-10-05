@@ -446,12 +446,12 @@ def test_article_page_should_throw_404_if_no_pages_are_exceeded(application):
         page()
 
 
-def test_article_page_should_work_if_pages_from_request_fit(application):
+def test_article_page_should_work_if_pages_from_request_fit(
+        application, dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/03')
     page = zeit.web.magazin.view_article.ArticlePage(
-        article, pyramid.testing.DummyRequest())
-    page.request.registry.settings = {}
+        article, dummy_request)
     page.request.path_info = 'article/03/seite-3'
     page()
     assert len(page.pages) == 7

@@ -159,15 +159,17 @@ def test_c1_cms_id_should_correspond_to_context_uuid(
     assert dict(view.c1_client).get('set_cms_id') == '"%s"' % uuid
 
 
-def test_c1_content_id_should_correspond_to_traversal_path(
-        testbrowser, dummy_request, monkeypatch):
+def test_c1_content_id_should_correspond_to_webtrekk_content_id(
+        application, dummy_request, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'tracking': True, 'iqd': True, 'third_party_modules': True}.get)
 
-    browser = testbrowser('/zeit-online/article/01?page=2')
-    assert browser.headers['C1-Track-Content-ID'] == '/zeit-online/article/01'
-    assert 'cre_client.set_content_id( "/zeit-online/article/01" );' in (
-        browser.contents)
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    content_id = view.webtrekk_content_id
+    assert dict(view.c1_header).get('C1-Track-Content-ID') == content_id
+    assert dict(view.c1_client).get('set_content_id') == '"%s"' % content_id
 
 
 @pytest.mark.parametrize('path, doc_type', [
@@ -876,3 +878,12 @@ def test_webtrekk_tracking_id_is_defined(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     assert 'window.webtrekkConfig.trackId = "674229970930653";' in (
         browser.contents)
+
+
+def test_webtrekk_content_id_should_handle_nonascii(
+        application, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    dummy_request.traversed = (u'umläut',)
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert view.webtrekk_content_id.endswith(u'umläut')

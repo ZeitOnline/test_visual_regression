@@ -10,6 +10,7 @@ import zope.component
 import zeit.solr.query
 
 import zeit.web
+import zeit.web.core.area.automatic
 import zeit.web.core.area.ranking
 
 
@@ -94,7 +95,7 @@ class Overview(zeit.web.core.area.ranking.Ranking):
         return (self.today - date).days + 1
 
 
-class DateContentQuery(zeit.web.core.area.ranking.SolrContentQuery):
+class DateContentQuery(zeit.web.core.area.automatic.SolrContentQuery):
 
     grokcore.component.context(Overview)
 

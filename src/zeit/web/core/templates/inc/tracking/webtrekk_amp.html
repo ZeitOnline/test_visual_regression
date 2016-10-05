@@ -1,6 +1,3 @@
-{# XXX: Please, only set variables in jinja where absolutely needed. #}
-{% set wt_kennung = view.webtrekk.identifier %}
-
 <amp-analytics type="webtrekk">
     <script type="application/json">
         {
@@ -12,7 +9,7 @@
             "vars": {
                 "trackDomain": "zeit01.webtrekk.net",
                 "trackId": "{{ settings('webtrekk_id') }}",
-                "contentId": "{{ wt_kennung + '|' + view.content_url.replace('http://', '') }}"
+                "contentId": "{{ view.webtrekk_content_id }}"
             },
             "requests": {
                 "trackURL": "https://${trackDomain}/${trackId}/wt",

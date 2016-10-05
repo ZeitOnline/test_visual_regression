@@ -39,8 +39,8 @@ class Reach(object):
         kw.setdefault('limit', 3)
         docs = self._get('/'.join(('ranking', location)), **kw) or []
         for idx, doc in enumerate(docs):
-            doc['product'] = NotImplemented
-            doc['serie'] = NotImplemented
+            doc['product_id'] = doc.get('product_id')
+            doc['serie'] = doc.get('serie')
             doc['teaserTitle'] = doc.get('title')
             doc['teaserSupertitle'] = doc.get('supertitle')
             doc['access'] = doc.get('access', 'free')

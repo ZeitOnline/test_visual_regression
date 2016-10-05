@@ -1,25 +1,24 @@
 <variants>
   <variant name="default" focus_x="0.5" focus_y="0.3" zoom="1.0"/>
-  <variant name="narrow" display_name="Schmal (2:3)" aspect_ratio="2:3"/>
-  <variant name="portrait" display_name="Porträt (3:4)" aspect_ratio="3:4" fallback_size="612x816">
+  <variant name="wide" display_name="Standard 16:9" aspect_ratio="16:9" fallback_size="822x462">
+    <size id="small" display_name="Standard 16:9 (klein)" max_size="300x169"/>
+    <size id="large" display_name="Standard 16:9 (groß)"/>
+  </variant>
+  <variant name="super" display_name="Klassisch 3:2" aspect_ratio="3:2" fallback_size="620x413"/>
+  <variant name="standard" display_name="Kompakt 4:3" aspect_ratio="4:3" fallback_size="490x368" available="zeit.magazin.interfaces.IZMOContent"/>
+  <variant name="cinema" display_name="Leinwand 7:3" aspect_ratio="7:3" fallback_size="980x420"/>
+  <variant name="square" display_name="Quadrat 1:1" aspect_ratio="1:1" fallback_size="460x460">
+    <size id="micro" display_name="Quadrat 1:1 (Kopf)" max_size="100x100"/>
+    <size id="small" display_name="Quadrat 1:1 (klein)" max_size="300x300"/>
+    <size id="large" display_name="Quadrat 1:1 (groß)" fallback_size="767x767"/>
+  </variant>
+  <variant name="panorama" display_name="Panorama 7:2" aspect_ratio="7:2" fallback_size="980x280"/>
+  <variant name="stripe" display_name="Streifen 49:4" aspect_ratio="49:4" fallback_size="980x80"/>
+  <variant name="tile" display_name="Kachel 4:5" aspect_ratio="4:5" fallback_size="315x394"/>
+  <variant name="portrait" display_name="Porträt 3:4" aspect_ratio="3:4" fallback_size="612x816">
     <size id="small" display_name="Porträt 3:4 (klein)" max_size="300x400"/>
     <size id="large" display_name="Porträt 3:4 (groß)"/>
   </variant>
-  <variant name="tile" display_name="Kachel (4:5)" aspect_ratio="4:5" fallback_size="660x660"/>
-  <variant name="square" display_name="Quadrat (1:1)" aspect_ratio="1:1" fallback_size="460x460">
-    <size id="micro" display_name="Quadrat (Kopf)" max_size="100x100"/>
-    <size id="small" display_name="Quadrat (klein)" max_size="460x460"/>
-    <size id="large" display_name="Quadrat (groß)"/>
-  </variant>
-  <variant name="standard" disay_name="Standard (4:3)" aspect_ratio="4:3"/>
-  <variant name="super" display_name="Super (3:2)" aspect_ratio="3:2"/>
-  <variant name="wide" display_name="Breitbild (16:9)" aspect_ratio="16:9" fallback_size="822x462">
-    <size id="small" display_name="Standard 16:9 (klein)" max_size="250x141"/>
-    <size id="large" display_name="Standard 16:9 (groß)"/>
-  </variant>
-  <variant name="cinema" display_name="Leinwand (7:3)" aspect_ratio="7:3"/>
-  <variant name="background" display_name="Hintergrund (7:3)" aspect_ratio="7:3"/>
-  <variant name="panorama" display_name="Panorama (7:2)" aspect_ratio="7:2"/>
-  <variant name="stripe" display_name="Streifen (10:1)" aspect_ratio="10:1" fallback_size="980x98"/>
-  <variant name="original" display_name="Original" aspect_ratio="original"/>
+  <variant name="narrow" display_name="Hochkant 2:3" aspect_ratio="2:3" fallback_size="300x450"/>
+  <variant name="original" focus_x="0.5" focus_y="0.3" zoom="1.0" aspect_ratio="original"/>
 </variants>

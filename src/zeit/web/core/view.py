@@ -644,17 +644,24 @@ class Base(object):
                     access = 'registration'
             custom_parameter.update({'cp28': access})
 
+        return {
+            'contentGroup': content_group,
+            'customParameter': custom_parameter
+        }
+
+    @zeit.web.reify
+    def webtrekk_identifier(self):
         # @see https://sites.google.com/a/apps.zeit.de/
         # verpixelungskonzept-zeit-online/webtrekk#TOC-Struktur-der-Content-IDs
         identifier = '.'.join(map(zeit.web.core.template.format_webtrekk, [
             'redaktion', self.ressort, self.sub_ressort,
-            self.serie.replace(' ', ''), self.type, product_id]))
+            self.serie.replace(' ', ''), self.type, self.product_id or '']))
+        return identifier
 
-        return {
-            'identifier': identifier,
-            'contentGroup': content_group,
-            'customParameter': custom_parameter
-        }
+    @zeit.web.reify
+    def webtrekk_content_id(self):
+        content_url = self.content_url.replace(u'http://', u'')
+        return u'{}|{}'.format(self.webtrekk_identifier, content_url)
 
     @zeit.web.reify
     def webtrekk_assets(self):
@@ -704,6 +711,10 @@ class CeleraOneMixin(object):
         return getattr(uuid, 'id', None)
 
     @zeit.web.reify
+    def _c1_content_id(self):
+        return self.webtrekk_content_id
+
+    @zeit.web.reify
     def _c1_doc_type(self):
         if self.type == 'gallery':
             return 'bildergalerie'
@@ -731,7 +742,7 @@ class CeleraOneMixin(object):
             'set_channel': self._c1_channel,
             'set_sub_channel': self._c1_sub_channel,
             'set_cms_id': self._c1_cms_id,
-            'set_content_id': self.content_path,
+            'set_content_id': self._c1_content_id,
             'set_doc_type': self._c1_doc_type,
             'set_entitlement': self._c1_entitlement,
             'set_heading': self._get_c1_heading(),
@@ -746,7 +757,7 @@ class CeleraOneMixin(object):
             'C1-Track-Channel': self._c1_channel,
             'C1-Track-Sub-Channel': self._c1_sub_channel,
             'C1-Track-CMS-ID': self._c1_cms_id,
-            'C1-Track-Content-ID': self.content_path,
+            'C1-Track-Content-ID': self._c1_content_id,
             'C1-Track-Doc-Type': self._c1_doc_type,
             'C1-Track-Entitlement': self._c1_entitlement,
             'C1-Track-Heading': self._get_c1_heading(self._headersafe),
@@ -820,6 +831,17 @@ class CommentMixin(object):
     @zeit.web.reify
     def show_commentthread(self):
         return self.context.commentSectionEnable is not False
+
+    @zeit.web.reify
+    def has_comment_area(self):
+        # show comments if:
+        # 1. comment section is enabled *and*
+        # 2. commenting is allowed _or_ there are existing comments
+        # (avoid displaying "0 Comments: Add one" + "sorry, comments closed")
+        # be carefull with self.comment_count - it sends an extra request
+        # and is intended to be used _outside_ the comments ESI
+        return self.show_commentthread and (self.commenting_allowed or
+                                            self.comment_count)
 
     @zeit.web.reify
     def comment_form(self):

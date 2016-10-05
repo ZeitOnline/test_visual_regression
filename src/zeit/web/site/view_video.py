@@ -9,7 +9,6 @@ import zeit.content.video.interfaces
 
 import zeit.web
 import zeit.web.core.date
-import zeit.web.core.video
 import zeit.web.core.view
 import zeit.web.site.view
 
@@ -69,7 +68,7 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 
     @zeit.web.reify
     def seo_slug(self):
-        return zeit.web.core.video.get_seo_slug(self.context)
+        return self.context.seo_slug
 
     @zeit.web.reify
     def og_url(self):
