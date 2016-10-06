@@ -221,7 +221,7 @@
         id="topic"
         title="Dossier-Teaser"
         image_pattern="topic"
-        areas="topic volume-header"
+        areas="topic"
         default="topic"
         />
     <!-- Teaser in volume-header -->
@@ -229,6 +229,7 @@
         id="volume-header"
         title="Teaser in volume-header"
         areas="volume-header"
+        default="volume-header"
         />
     <!-- Legacy teaser formats -->
     <layout
