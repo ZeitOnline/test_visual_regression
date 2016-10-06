@@ -59,11 +59,9 @@
     <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
 
-    {% block css_lte_8_link %}
     <!--[if lte IE 8]>
         <link href="{{ request.asset_host }}/css/web.site/all-old-ie.css" media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
-    {% endblock css_lte_8_link %}
     {% block css_link %}
     <!--[if gt IE 8]><!-->
         <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">

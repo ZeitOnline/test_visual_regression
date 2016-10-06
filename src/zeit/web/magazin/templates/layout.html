@@ -9,9 +9,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=Edge">
         <meta name="msapplication-config" content="none">
-        {% block pagetitle %}
         <title>{{ view.pagetitle }}</title>
-        {% endblock pagetitle %}
         <meta name="description" content="{{ view.pagedescription }}">
         {% if view.meta_keywords -%}
             <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
@@ -36,11 +34,9 @@
         {% if view.next_page_url -%}
             <link rel="next" href="{{ view.next_page_url }}">
         {% endif -%}
-        {% block css_lte8_link %}
         <!--[if lte IE 8]>
             <link href="{{ request.asset_host }}/css/web.magazin/all-old-ie.css" media="screen" rel="stylesheet" type="text/css" />
         <![endif]-->
-        {% endblock css_lte8_link %}
         {% block css_link %}
         <!--[if gt IE 8]><!-->
             <link href="{{ request.asset_host }}/css/web.magazin/screen.css" media="screen" rel="stylesheet" type="text/css" />
