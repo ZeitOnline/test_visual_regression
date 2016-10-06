@@ -167,9 +167,9 @@
 
         </div>
 
-        <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
         {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
+        <script src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
         <!-- tracking at end -->
         {% include "zeit.web.core:templates/inc/tracking/zeit.html" ignore missing %}
@@ -180,10 +180,10 @@
         {% include "zeit.web.core:templates/inc/tracking/celera_one.html" ignore missing %}
         {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
 
-        <script type="text/javascript">
+        <script>
             var require = { baseUrl: '{{ request.asset_host }}/js/' };
         </script>
-        <script type="text/javascript" src="{{ request.asset_host }}/js/magazin.js"></script>
+        <script src="{{ request.asset_host }}/js/magazin.js"></script>
 
         {% if view.vgwort_url %}
         <!--start: vgwort-->
