@@ -7,21 +7,15 @@
 <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="msapplication-config" content="none">
         <title>{{ view.pagetitle }}</title>
         <meta name="description" content="{{ view.pagedescription }}">
         {% if view.meta_keywords -%}
             <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
-        {%- endif %}
+        {% endif -%}
         <meta name="robots" content="{{ view.meta_robots }}">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" id="viewport-meta">
-
-        {% include "zeit.web.core:templates/inc/inline_js/library.html" %}
-
-        <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
-        <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
-        <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="msapplication-config" content="none">
         {% if view.is_amp -%}
             <link rel="amphtml" href="{{ view.amp_url }}">
         {% endif -%}
@@ -34,33 +28,38 @@
         {% if view.next_page_url -%}
             <link rel="next" href="{{ view.next_page_url }}">
         {% endif -%}
+        {% if view.syndication_source -%}
+            <link rel="syndication-source" href="{{ view.syndication_source }}">
+        {% endif -%}
 
         {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
 
+        <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
+        <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+
         <!--[if lte IE 8]>
-            <link href="{{ request.asset_host }}/css/web.magazin/all-old-ie.css" media="screen" rel="stylesheet" type="text/css" />
+            <link href="{{ request.asset_host }}/css/web.magazin/all-old-ie.css" media="screen" rel="stylesheet" type="text/css">
         <![endif]-->
         {% block css_link %}
         <!--[if gt IE 8]><!-->
-            <link href="{{ request.asset_host }}/css/web.magazin/screen.css" media="screen" rel="stylesheet" type="text/css" />
+            <link href="{{ request.asset_host }}/css/web.magazin/screen.css" media="screen" rel="stylesheet" type="text/css">
         <!--<![endif]-->
         {% endblock css_link %}
-        <!-- iqd css code integrated in screen.css via modules/_iqd_adcode.sass -->
 
-        <!-- date metadata -->
+        {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
         {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
 
         {% block sharing_meta -%}
-        <!-- sharing metadata -->
         {%- include "zeit.web.magazin:templates/inc/meta/sharing.html" -%}
         {%- endblock sharing_meta %}
 
         {# Modernizr -#}
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
 
-        {% if toggles('third_party_modules', 'tracking') %}
+        {% if toggles('third_party_modules') -%}
             <script src="https://script.ioam.de/iam.js"></script>
-        {% endif %}
+        {% endif -%}
         {% if toggles('third_party_modules', 'iqd') %}
             {% include "zeit.web.core:templates/inc/ads/head.html" %}
             {%- block content_ad_script -%}{%- endblock -%}
@@ -157,7 +156,7 @@
                 {% endblock footer %}
                 {% endprofile %}
 
-            </div><!-- end: #js-page-wrap-inner -->
+            </div>
 
         {% block adplace_floor %}
             <!-- mobile ad at bottom -->

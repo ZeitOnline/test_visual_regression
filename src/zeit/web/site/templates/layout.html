@@ -7,7 +7,6 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <!-- http-equiv='X-UA-Compatible' via Server -->
     <title>{{ view.pagetitle }}</title>
     <meta name="description" content="{{ view.pagedescription }}">
     {% if view.meta_keywords -%}
@@ -69,10 +68,9 @@
             }
         }
     </script>
-    {% if toggles('third_party_modules') %}
-        <!-- IVW -->
+    {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>
-    {% endif %}
+    {% endif -%}
     {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
         {%- block content_ad_script -%}{%- endblock -%}
@@ -147,9 +145,6 @@
     {% block meetrics %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
     {% endblock %}
-    <script>
-        var require = { baseUrl: '{{ request.asset_host }}/js/' };
-    </script>
 
     <!-- popover -->
     {% if view.is_hp %}
@@ -160,6 +155,9 @@
         {%- include "zeit.web.core:templates/inc/tracking/adblocker_count.html" ignore missing -%}
     {% endblock %}
 
+    <script>
+        var require = { baseUrl: '{{ request.asset_host }}/js/' };
+    </script>
     <script src="{{ request.asset_host }}/js/site.js"></script>
 
     {% if view.vgwort_url %}

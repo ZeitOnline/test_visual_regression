@@ -10,6 +10,7 @@
     {% endif -%}
     <meta name="robots" content="{{ view.meta_robots }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="author" content="ZEIT ONLINE GmbH, Hamburg, Germany">
     <meta name="msapplication-config" content="none">
     {% if view.is_amp -%}
@@ -53,11 +54,9 @@
             }
         }
     </script>
-
-    {% if toggles('third_party_modules') %}
-        <!-- IVW -->
+    {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>
-    {% endif %}
+    {% endif -%}
     {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
         {%- block content_ad_script -%}{%- endblock -%}
@@ -119,7 +118,7 @@
     {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
     {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
     {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}
-    {% include "zeit.web.core:templates/inc/login-state-footer-esi.html"%}
+    {% include "zeit.web.core:templates/inc/login-state-footer-esi.html" %}
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
     {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
@@ -134,7 +133,7 @@
 
     {% if view.vgwort_url -%}
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
-    {%- endif %}
+    {% endif -%}
     {% include "zeit.web.core:templates/inc/cardstack/footer.tpl" %}
 </body>
 </html>
