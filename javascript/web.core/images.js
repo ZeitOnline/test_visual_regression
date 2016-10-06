@@ -15,6 +15,7 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
             breakpoint: Zeit.breakpoint.get(),
             width: $w.width()
         },
+        devicePixelRatio = window.devicePixelRatio || 1,
         isMobile, isDesktop, $triggerRegion;
 
     /**
@@ -150,16 +151,22 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
         }
 
         // source berechnen
-        source = useMobileVariant ? imageData.mobileSrc : imageData.src;
-        width = Math.round( width );
-        height = Math.round( height );
-        source += '__' + width + 'x' + height + '__';
-        source += isMobile ? 'mobile' : 'desktop';
+        source = [];
+        source.push(
+            useMobileVariant ? imageData.mobileSrc : imageData.src,
+            Math.round( width ) + 'x' + Math.round( height ),
+            isMobile ? 'mobile' : 'desktop'
+        );
+
+        // only enabled for certain assets
+        if ( $parent.hasClass( 'high-resolution' ) && devicePixelRatio > 1 ) {
+            source.push( devicePixelRatio + 'x' );
+        }
 
         return {
             width: origWidth,
             height: origHeight,
-            source: source
+            source: source.join( '__' )
         };
     }
 
