@@ -34,6 +34,9 @@
         {% if view.next_page_url -%}
             <link rel="next" href="{{ view.next_page_url }}">
         {% endif -%}
+
+        {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
+
         <!--[if lte IE 8]>
             <link href="{{ request.asset_host }}/css/web.magazin/all-old-ie.css" media="screen" rel="stylesheet" type="text/css" />
         <![endif]-->
