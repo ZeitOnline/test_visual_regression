@@ -53,9 +53,9 @@
     <!--<![endif]-->
     {% endblock css_link %}
 
-    {%- include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing -%}
-    {%- include "zeit.web.core:templates/inc/meta/date.html" ignore missing -%}
-    {%- include "zeit.web.site:templates/inc/meta/sharing.html" ignore missing -%}
+    {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
+    {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
+    {%- include "zeit.web.site:templates/inc/meta/sharing.html" -%}
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
@@ -74,7 +74,7 @@
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif %}
     {% if toggles('third_party_modules', 'iqd') %}
-        {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/head.html" %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
     {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
@@ -86,9 +86,8 @@
 <body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}" data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
-
-    {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
-    {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
 
     {% block skiplink %}
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
@@ -132,19 +131,19 @@
             </main>
             {% profile %}
             {% block footer %}
-                {%- include "zeit.web.site:templates/inc/footer.html" ignore missing -%}
+                {%- include "zeit.web.site:templates/inc/footer.html" -%}
             {% endblock footer %}
             {% block progress_circle %}{% endblock %}
             {% endprofile %}
         </div>
     </div>
-    {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
     {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
     {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}
     {% include "zeit.web.core:templates/inc/login-state-footer-esi.html" %}
-    {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
-    {% include "zeit.web.core:templates/inc/tracking/celera_one.html" ignore missing %}
-    {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
+    {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
     {% block meetrics %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
     {% endblock %}

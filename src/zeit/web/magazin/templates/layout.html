@@ -62,7 +62,7 @@
             <script src="https://script.ioam.de/iam.js"></script>
         {% endif %}
         {% if toggles('third_party_modules', 'iqd') %}
-            {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
+            {% include "zeit.web.core:templates/inc/ads/head.html" %}
             {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
         {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
@@ -72,9 +72,9 @@
     </head>
     <body data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 
-        {% include "zeit.web.core:templates/inc/tag-manager.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tag-manager.html" %}
+        {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
 
         {% block skiplink %}
         <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
@@ -166,18 +166,16 @@
 
         </div>
 
-
-        {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
         <script src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
-        <!-- tracking at end -->
-        {% include "zeit.web.core:templates/inc/tracking/zeit.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
         {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}
-        {% include "zeit.web.core:templates/inc/login-state-footer-esi.html"%}
-        {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/celera_one.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/login-state-footer-esi.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
+        {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/meetrics.html" %}
 
         <script>
             var require = { baseUrl: '{{ request.asset_host }}/js/' };
