@@ -4,6 +4,7 @@
 {% set module_layout = 'infographic' %}
 {% set href = image.href %}
 {% set image_itemprop = 'image' %}
+{% set media_block_additional_class = 'high-resolution' %}
 
 {% block media_block %}{{ '%s__media' | format(module_layout) | with_mods(block.display_mode) }}{% endblock %}
 {% block media_caption_class %}infographic{% endblock %}
