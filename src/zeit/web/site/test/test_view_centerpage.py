@@ -2397,12 +2397,12 @@ def test_imagecopyright_includes_videostage_poster_copyright(testbrowser):
 def test_volume_centerpage_has_volume_navigation(testbrowser):
     browser = testbrowser('/2016/01/index')
 
-    nav = browser.cssselect('.volume-heading__navigation')
+    nav = browser.cssselect('.volume-navigation__navigation')
     assert len(nav) == 1
 
-    current = nav[0].cssselect('.volume-heading__current')
-    prev = nav[0].cssselect('.volume-heading__previous')
-    next = nav[0].cssselect('.volume-heading__next')
+    current = nav[0].cssselect('.volume-navigation__current')
+    prev = nav[0].cssselect('.volume-navigation__previous')
+    next = nav[0].cssselect('.volume-navigation__next')
 
     assert len(current) == 1
     assert len(prev) == 1
@@ -2412,9 +2412,9 @@ def test_volume_centerpage_has_volume_navigation(testbrowser):
     assert '2016/02' in next[0].attrib['href']
     assert '02/2016' in next[0].text.strip()
 
-    packshot = current[0].cssselect('.volume-heading__packshot')
-    cta = current[0].cssselect('.volume-heading__cta')
-    media = current[0].cssselect('.volume-heading__media')
+    packshot = current[0].cssselect('.volume-navigation__packshot')
+    cta = current[0].cssselect('.volume-navigation__cta')
+    media = current[0].cssselect('.volume-navigation__media')
 
     assert len(packshot) == 1
     assert len(cta) == 1
