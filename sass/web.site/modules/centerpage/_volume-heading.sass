@@ -1,23 +1,20 @@
 .volume-heading
-	+clearfix
-	+font-smoothing
-	padding: remify(24px $page-padding 32px)
-	position: relative
-	text-align: center
+	@extend %teaser-cp-area-fullwidth
+	&__media
+		@extend %teaser-cp-area-fullwidth__media
+	&__media-container
+		@extend %teaser-cp-area-fullwidth__media-container
 	&__issue
-		+font-smoothing()
 		color: $white
 		position: relative
 		display: inline-block
 		z-index: 1
-
 	&__caption
 		height: 24px
 		font-family: TabletGothic
 		font-weight: bold
 		margin-top: remify(24px)
 		letter-spacing: $letter-spacing-l
-
 	&__logo
 		width: remify(260px)
 		&--item
@@ -33,47 +30,12 @@
 			width: remify(256px)
 			margin: 0 auto
 
-	&__media
-		bottom: 0
-		left: 0
-		margin: 0
-		min-height: 100%
-		min-width: 100%
-		position: absolute
-		right: 0
-		top: 0
-		&.is-pixelperfect
-			a
-				height: 100%
-			img
-				min-height: 100%
-				min-width: 100%
-				width: auto
-	&__media-container
-		+plain-transparent-overlay($alpha: 0.5)
-		background-color: $color-dark-background
-		height: 100%
-
 .volume-heading-teaser
-	margin: auto
-	max-width: remify(450px)
+	@extend %teaser-item-divider
 	&:after
 		border-bottom: 1px solid rgba($white, 1)
-		content: ""
-		display: block
-		height: 0
-		margin: remify(20px) auto remify(12px)
-	&:last-child:after
-		content: none
 	&__kicker
-		color: $zon-lighter-grey
-		display: inline-block
-		font-size: em(14px)
-		font-weight: normal
-		letter-spacing: $zon-letter-spacing-l
-		line-height: 1.2
-		text-transform: uppercase
-		margin-bottom: remify(4px)
+		@extend %teaser-kicker-cp-area-fullwidth
 	&__title
 		@extend %teaser-title
 		color: $white
@@ -124,4 +86,3 @@
 		&:after
 			border-bottom: 1px solid rgba($white, 1)
 			width: remify(70px)
-
