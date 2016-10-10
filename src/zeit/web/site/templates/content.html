@@ -43,13 +43,11 @@
 
     {% block article_footer %}
     <div class="article-footer article__item" data-ct-area="articlebottom">
+        {% block article_sharing %}
+            {% include "zeit.web.site:templates/inc/article/sharing-menu{}.html".format('-big' if view.share_buttons == 'big' else '') %}
+        {% endblock %}
 
-        {% block article_interactions %}
-        <div class="article-interactions">
-            {% include "zeit.web.site:templates/inc/article/sharing-menu.html" %}
-            {% block print %}
-            {% endblock %}
-        </div>
+        {% block print %}
         {% endblock %}
 
         {% block article_tags %}

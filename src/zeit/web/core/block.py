@@ -78,6 +78,13 @@ class OrderedList(UnorderedList):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IAuthor)
+class Authorbox(Block):
+    def __init__(self, model_block):
+        self.author = model_block.references.target
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPortraitbox)
 class Portraitbox(Block):
 
@@ -99,6 +106,27 @@ class Portraitbox(Block):
                 # First item of fragments_fromstring may be str/unicode.
                 parts.append(element)
         return ''.join(parts)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IVolume)
+class Volume(Block):
+
+    def __init__(self, model_block):
+        result = model_block.references
+        volume_obj = result.target
+        self.printcover = volume_obj.covers['printcover']
+        self.medium = self._product_path(volume_obj.product.id)
+        self.year = volume_obj.year
+        self.issue = str(volume_obj.volume).zfill(2)
+        self.teaser_text = result.teaserText
+
+    def _product_path(self, product_id):
+        # TODO add more product-url mappings to the dictionary
+        # The path will be used in hyperlinks to premium
+        # (https://premium.zeit.de/diezeit/2016/01)
+        map_product_path = {'ZEI': 'diezeit'}
+        return map_product_path.get(product_id, 'diezeit')
 
 
 class IInfoboxDivision(zope.interface.Interface):
@@ -257,7 +285,7 @@ class Image(Block):
             image = zeit.content.image.interfaces.IImages(self).image
             if image.display_type == (
                     zeit.content.image.interfaces.INFOGRAPHIC_DISPLAY_TYPE):
-                self.block_type = 'image_infographic'
+                self.block_type = 'infographic'
                 self.variant_name = 'original'
         except:
             pass
@@ -341,7 +369,7 @@ class Raw(Block):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
-def RawText(context):
+def RawText(context):  # NOQA
     return context
 
 

@@ -12,7 +12,8 @@
 		"subtitle": "Rassismus ist kein ostdeutsches Phänomen. Aber während Anschläge im Westen konspirativ verlaufen, sind es im Osten pogromartige rassistische Randale mit Dabeistehern.",
 		"channels": ["Politik Deutschland"],
 		"fetchedAt": 1441623241276,
-		"timestamp": 1441623077000
+		"timestamp": 1441623077000,
+		"access": "free"
 	},
 	{
 		"location": "/politik/deutschland/2015-09/deutschland-moral-fluechtlingspolitik",
@@ -27,7 +28,8 @@
 		"subtitle": "Die Bilder von Tausenden ankommenden Flüchtlingen gehen um die Welt. Internationale Medien loben die \"Willkommenskultur\" der Deutschen – üben aber auch Kritik.",
 		"channels": ["Politik Deutschland"],
 		"fetchedAt": 1441627561250,
-		"timestamp": 1441627333000
+		"timestamp": 1441627333000,
+		"access": "free"
 	},
 	{
 		"location": "/gesellschaft/2015-09/fluechtlinge-helfer-gemeinnuetzigkeit-interview",
@@ -41,6 +43,7 @@
 		"subtitle": "Die Hilfsbewegung für die Flüchtlinge organisiert und vernetzt sich selbst, weil der Staat versagt. Der Forscher Christian Schuldt sieht darin einen grundlegenden Trend.",
 		"channels": ["Gesellschaft"],
 		"fetchedAt": 1441616161326,
-		"timestamp": 1441615939000
+		"timestamp": 1441615939000,
+		"access": "free"
 	}
 ]

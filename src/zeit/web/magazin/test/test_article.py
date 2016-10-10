@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+import urllib
 import urlparse
 
 from selenium.webdriver.common.by import By
@@ -162,7 +163,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
             'cp15=&cp25=original&cp26=article.column&cp27='.format(
-                testserver.url.replace('http://', ''))) in source
+                urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
 def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
@@ -192,7 +193,7 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
             'cp15=&cp25=original&cp26=article.column&cp27='.format(
-                testserver.url.replace('http://', ''))) in source
+                urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
 def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
@@ -245,7 +246,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp9=zeitmz/centerpage&cp10=yes&cp11=&cp12=desktop.site&'
             'cp13=stationaer&cp14=friedbert&cp15=&cp25=original&'
             'cp26=centerpage.ZMO&cp27='.format(
-                testserver.url.replace('http://', ''))) in source
+                urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
 def test_webtrekk_series_tag_is_set_corectly(testserver, httpbrowser):
@@ -257,14 +258,14 @@ def test_webtrekk_series_tag_is_set_corectly(testserver, httpbrowser):
         'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
 
     host = testserver.url.replace('http://', '')
-    assert ('var Z_WT_KENNUNG = "redaktion.zeit-magazin..toedlichekeime'
+    assert ('wt.contentId = "redaktion.zeit-magazin..toedlichekeime'
             '.article.zei|{}/zeit-magazin/article/06";'
             .format(host)) in webtrekk_config
     assert u'6: "tödlichekeime",' in webtrekk_config
 
     assert ('redaktion.zeit-magazin..toedlichekeime.article.zei%7C'
             '{}/zeit-magazin/article/06,0,0,0,0,0,0,0,0'
-            .format(host)) in source
+            .format(urllib.quote(host))) in source
 
 
 def test_webtrekk_has_session_parameter(testbrowser):
@@ -819,10 +820,10 @@ def test_article_tags_are_present_and_limited_in_longform(testbrowser):
 
 def test_infographics_should_display_header_above_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/infographic')
-    items = list(browser.xpath('//figure')[0].iterchildren())
+    items = list(browser.cssselect('.infographic__media')[0].iterchildren())
     assert 'Die Entschlackung' == items[0].text
     assert (
-        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        u'Potenzial der Bertelsmann-Geschäfte (in Prozent des Umsatzes)' ==
         items[1].text)
 
 

@@ -1,7 +1,6 @@
 {% set esi_source = '%slogin-state?%s' | format(request.route_url('home'), {
     'for': 'footer',
-    'wt_kennung': view.webtrekk.identifier,
-    'content_url': view.content_url,
+    'content_id': view.webtrekk_content_id,
     'content_group': view.webtrekk.contentGroup | urlencode,
     'custom_parameter': view.webtrekk.customParameter | urlencode,
 } | urlencode) %}

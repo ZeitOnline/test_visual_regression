@@ -1,18 +1,5 @@
-<blockquote class="
-        {%- if block.layout == 'wide' -%}
-            quote--wide
-        {%- else -%}
-            quote
-        {%- endif -%}
-">
-    <span class="quote__text">{{ block.text }}</span>
-    {% if block.attribution %}
-        {% if block.url %}
-            <span class="quote__author">
-                <a href="{{ block.url }}">{{ block.attribution }}</a>
-            </span>
-        {% else %}
-            <span class="quote__author">{{ block.attribution }}</span>
-        {% endif %}
-    {% endif %}
-</blockquote>
+{% extends "zeit.web.core:templates/inc/blocks/citation.html" %}
+
+{% block citation_class %}
+    {{- 'quote' | with_mods(block.layout if block.layout) -}}
+{% endblock %}

@@ -23,17 +23,15 @@ $longform-header-max-height: 1400px
       font-size: em(50px)
 
   .article__head__subtitle
-    margin-bottom: 0
-    p
-      max-width: 25em
-      color: $grey--dark
-      text-align: center
-      font-size: $font-ml
-      margin-bottom: 0 !important
-      +respond-min($break-2)
-        font-size: $font-l
-      +respond-min($break-3)
-        font-size: $font-xl
+    color: $grey--dark
+    font-size: $font-ml
+    margin: 0 auto
+    max-width: remify(480px)
+    text-align: center
+    +respond-min($break-2)
+      font-size: $font-l
+    +respond-min($break-3)
+      font-size: $font-xl
 
   .article__head-wrap
     +fake-box-shadow-inset($black)
@@ -230,8 +228,9 @@ $longform-header-max-height: 1400px
     padding-left: 0
     padding-right: 0
     background-color: $white
-    p
-      margin-bottom: $little
+
+  .paragraph
+    margin-bottom: $little
 
   .article__page
     background-color: $color-page-bg
@@ -244,10 +243,6 @@ $longform-header-max-height: 1400px
       &:first-child
         margin-bottom: remify(82px)
 
-  .quote--wide
-    +respond-min($break-3)
-      margin-left: $huge
-
   .article__opener
     margin-left: auto
     margin-right: auto
@@ -257,6 +252,12 @@ $longform-header-max-height: 1400px
     max-width: remify($longform-content-max-width)
     +respond-min($break-3)
       max-width: remify($longform-content-max-width--desktop)
+
+  .quote--wide
+    max-width: remify($longform-inline-max-width)
+  .quote--short
+    +respond-min($break-2)
+      max-width: remify(240px)
 
   .figure-horizontal, .figure-horizontal--right
     max-width: remify($longform-inline-max-width)

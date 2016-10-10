@@ -270,7 +270,7 @@
 	              $hover-border-color: transparent,
 	              $font-size: remify(13px),
 	              $font-weight: bold,
-	              $letter-spacing: $zon-letter-spacing-l,
+	              $letter-spacing: $letter-spacing-l,
 	              $margin: remify(14px 6px),
 	              $padding: remify(8px 16px),
 	              $disabled: true
@@ -348,9 +348,17 @@
 	);
 }
 
-@mixin zon-button-light($margin: 0) {
-	@include zon-button($background-color: rgba(255, 255, 255, 0.5),
-	                    $hover-background-color: rgba(255, 255, 255, 0.8),
+@mixin zon-button-light($margin: 0, $background: 'colored') {
+	$background-color: rgba(235, 235, 235, 0.5);
+	$hover-background-color: rgba(235, 235, 235, 0.2);
+
+	@if $background == 'light' {
+		$background-color: rgba(255, 255, 255, 0.5);
+		$hover-background-color: rgba(255, 255, 255, 0.8);
+	}
+
+	@include zon-button($background-color: $background-color,
+	                    $hover-background-color: $hover-background-color,
 	                    $color: $zon-charcoal,
 	                    $hover-color: $black,
 	                    $visited-color: $zon-charcoal,
@@ -436,16 +444,6 @@
 	@if $border_width > 0 {
 		border: $border_width solid $border_color;
 	}
-}
-
-// pseudo classes
-%off-screen {
-	height: 1px;
-	left: -10000px;
-	overflow: hidden;
-	position: absolute;
-	top: auto;
-	width: 1px;
 }
 
 // build mobile plus/minus button as used in infoxbox
@@ -579,7 +577,7 @@ $inline-block-alignment: none !default;
 @mixin pie-clearfix {
 	&:after {
 		content: "";
-		display: table;
+		display: block; // http://cssmojo.com/the-very-latest-clearfix-reloaded/
 		clear: both;
 	}
 

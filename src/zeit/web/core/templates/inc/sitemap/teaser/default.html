@@ -1,0 +1,15 @@
+<url>
+    <loc>{{ teaser.uniqueId | create_url }}</loc>
+    <lastmod>{{ teaser | mod_date }}</lastmod>
+    {% require image = get_image(module, variant_id='wide', fallback=False) %}
+        {%- set source = request.image_host + image.path + '__1300x731' -%}
+        {%- set copyright = image.copyrights | map('first') | join(', ') -%}
+        {%- if copyright -%}
+            {%- set copyright = '(' ~ copyright ~ ')' -%}
+        {%- endif -%}
+        <image:image>
+            <image:loc>{{ source }}</image:loc>
+            <image:caption>{{ [image.caption, copyright] | reject('none') | join(' ') }}</image:caption>
+        </image:image>
+    {% endrequire %}
+</url>

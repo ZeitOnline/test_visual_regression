@@ -12,7 +12,8 @@
         "subtitle": "Die Bundesregierung stellt sechs Milliarden Euro für die Versorgung von Asylbewerbern bereit. Zudem präsentiert sie einen Plan, der Fehlanreize beseitigen soll.",
         "channels": ["Politik Deutschland"],
         "fetchedAt": 1441589401554,
-        "timestamp": 1441589363000
+        "timestamp": 1441589363000,
+        "access": "free"
     },
     {
         "location": "/politik/deutschland/2015-09/muenchen-fluechtlinge-unterstuetzung-verteilung",
@@ -27,7 +28,8 @@
         "subtitle": "Tausende Flüchtlinge aus Ungarn sind am Wochenende in Bayern angekommen und nur zum Teil bereits weitergefahren. Die Zahl der Neuankömmlinge geht deutlich zurück.",
         "channels": ["Politik Deutschland"],
         "fetchedAt": 1441553041418,
-        "timestamp": 1441553009000
+        "timestamp": 1441553009000,
+        "access": "free"
     },
     {
         "location": "/politik/ausland/2015-09/fluechtlinge-ungarn-orban-grenzen",
@@ -42,6 +44,7 @@
         "subtitle": "Ungarns Regierungschef fordert von Deutschland und Österreich, keine Flüchtlinge mehr aufzunehmen. Ansonsten würden \"mehrere Millionen\" Menschen nach Europa kommen.",
         "channels": ["Politik Ausland"],
         "fetchedAt": 1441585081229,
-        "timestamp": 1441584967000
+        "timestamp": 1441584967000,
+        "access": "free"
     }
 ]

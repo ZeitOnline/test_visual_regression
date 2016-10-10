@@ -114,22 +114,17 @@ def zmo_content(content):
 
 @zeit.web.register_test
 def zplus_content(content):
-    if not zeit.web.core.application.FEATURE_TOGGLES.find(
-            'reader_revenue'):
+    if not zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
         return False
 
     # Links are defined as free content
     if zeit.content.link.interfaces.ILink.providedBy(content):
         return False
 
-    # Use Access attribute
-    # XXX access is set statically for mocksolr in utils.py until ZON-3286
     access = getattr(content, 'access', None)
-
-    if access is not None:
-        return access == 'abo'
-
-    return False
+    if access is None:
+        return False
+    return (access == 'abo')
 
 
 @zeit.web.register_test
@@ -140,8 +135,7 @@ def zett_content(content):
 
 @zeit.web.register_test
 def zco_content(content):
-    toggle = zeit.web.core.application.FEATURE_TOGGLES.find('campus_launch')
-    return toggle and zeit.campus.interfaces.IZCOContent.providedBy(content)
+    return zeit.campus.interfaces.IZCOContent.providedBy(content)
 
 
 @zeit.web.register_test
@@ -205,9 +199,8 @@ def create_url(context, obj, request=None):
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
         return obj.url
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
-        slug = zeit.web.core.video.get_seo_slug(obj)
         return create_url(
-            context, u'{}/{}'.format(obj.uniqueId, slug), request)
+            context, u'{}/{}'.format(obj.uniqueId, obj.seo_slug), request)
     elif zeit.cms.interfaces.ICMSContent.providedBy(obj):
         return create_url(context, obj.uniqueId, request=request)
     else:

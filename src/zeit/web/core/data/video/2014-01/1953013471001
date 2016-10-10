@@ -30,7 +30,7 @@
 	<attribute ns="http://namespaces.zeit.de/CMS/document" name="thumbnail">
 	http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/18140073001_1956041162001_ari-origin05-arc-154-1352391648628.jpg?pubId=18140073001
 	</attribute>
-	<attribute name="video_still_copyright" ns="http://namespaces.zeit.de/CMS/document">© Foto: Steven Spielberg</attribute>
+	<attribute name="video_still_copyright" ns="http://namespaces.zeit.de/CMS/document">Steven Spielberg</attribute>
 	<attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">video</attribute>
 	<attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9135becb-ee77-4e82-acd3-a3f0ede596a1}</attribute>
 	<attribute ns="http://namespaces.zeit.de/CMS/document" name="video_still">

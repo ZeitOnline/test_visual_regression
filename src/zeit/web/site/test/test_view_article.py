@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import base64
 import datetime
+import urlparse
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -351,7 +352,7 @@ def test_article_sharing_menu_should_open_and_close(
 
     sharing_menu_selector = '.sharing-menu > .sharing-menu__items'
     sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > .sharing-menu__title.js-sharing-menu')
+        '.sharing-menu > a[aria-controls]')
     sharing_menu_items = selenium_driver.find_element_by_css_selector(
         sharing_menu_selector)
 
@@ -383,7 +384,7 @@ def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
     selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
 
     sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > .sharing-menu__title.js-sharing-menu')
+        '.sharing-menu > a[aria-controls]')
     whatsapp_item = selenium_driver.find_element_by_css_selector(
         '.sharing-menu__item--whatsapp')
 
@@ -1140,7 +1141,7 @@ def test_article_advertorial_pages_should_render_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/angebot/seite-2')
     assert browser.cssselect('.advertorial-marker')
     browser = testbrowser('/zeit-online/article/angebot/komplettansicht')
-    assert browser.cssselect('.advertorial-marker ')
+    assert browser.cssselect('.advertorial-marker')
 
 
 def test_article_lineage_should_render_correctly(testbrowser):
@@ -1394,6 +1395,12 @@ def test_zon_nextread_teaser_must_not_show_image_for_column(testbrowser):
     assert len(browser.cssselect('.nextread image')) == 0
 
 
+def test_nextread_should_display_date_last_published_semantic(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread')
+    nextread_date = browser.cssselect('.nextread__dt')[0]
+    assert nextread_date.text.strip() == '15. Februar 2015'
+
+
 def test_article_contains_zeit_clickcounter(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
@@ -1532,7 +1539,7 @@ def test_article_in_series_has_banner_image(testbrowser):
     image = figure[0].cssselect('img')[0]
 
     assert len(figure) == 1
-    assert image.get('data-ratio') == '10.0'
+    assert image.get('data-ratio') == '12.25'
 
 
 def test_article_in_series_has_correct_link(testbrowser):
@@ -1638,32 +1645,23 @@ def test_article_toc_is_printed_before_paragraphs_and_lists(testbrowser):
 
 def test_infographics_should_display_header_above_image(testbrowser):
     browser = testbrowser('/zeit-online/article/infographic')
-    items = list(browser.xpath('//figure')[0].iterchildren())
+    items = list(browser.cssselect('.infographic__media')[0].iterchildren())
     assert 'Die Entschlackung' == items[0].text
     assert (
-        'Potenzial der Bertelsmann-Geschaefte (in Prozent des Umsatzes)' ==
+        u'Potenzial der Bertelsmann-Geschäfte (in Prozent des Umsatzes)' ==
         items[1].text)
 
 
 def test_infographics_should_display_origin_instead_of_caption(testbrowser):
     browser = testbrowser('/zeit-online/article/infographic')
-    figure = browser.xpath('//figure')[0]
-    caption = figure.xpath('figcaption/*')[0]
-    assert 'Quelle: Statistisches Bundesamt' == caption.text
+    infographic = browser.cssselect('.infographic')[0]
+    caption = infographic.cssselect('figcaption')[0]
+    assert 'Quelle: Statistisches Bundesamt' == caption.text.strip()
 
 
-def test_infographics_should_use_customized_css_classes(testbrowser):
-    browser = testbrowser('/zeit-online/article/infographic')
-    assert 'x-caption--sans' in browser.contents
-    assert 'x-copyright' in browser.contents
-    assert 'x-copytext' in browser.contents
-    assert 'x-footer' in browser.contents
-    assert 'x-subheadline' in browser.contents
-
-
-def test_infographics_should_render_border_styles_conditionally(
+def test_infographics_should_render_html_correctly(
         tplbrowser, dummy_request):
-    template = 'zeit.web.core:templates/inc/blocks/image_infographic.html'
+    template = 'zeit.web.core:templates/inc/blocks/infographic.html'
     image = zeit.web.core.image.Image(mock.Mock())
     image.ratio = 1
     image.group = mock.Mock()
@@ -1676,31 +1674,32 @@ def test_infographics_should_render_border_styles_conditionally(
     image.copyrights = ('FOO', 'BAR', 'BAZ')
     image.caption = True
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert not browser.cssselect('.x-footer--borderless')
-    assert not browser.cssselect('.x-subheadline--borderless')
+    assert browser.cssselect('.infographic__text')
+    assert browser.cssselect('.infographic__caption')
 
     # borderless subheadline
     image.caption = False
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert browser.cssselect('.x-subheadline--borderless')
+    assert not browser.cssselect('.infographic__text')
 
     # footer has border
     image.origin = True
     image.copyrights = ()
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert not browser.cssselect('.x-footer--borderless')
+    assert browser.cssselect('.infographic__caption')
 
     image.origin = False
     image.copyrights = ('FOO', 'BAR', 'BAZ')
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert not browser.cssselect('.x-footer--borderless')
+    assert browser.cssselect('.infographic__caption')
 
     # no border styles present
     image.copyrights = ()
     image.origin = False
+    image.caption = False
     browser = tplbrowser(template, block=image, request=dummy_request)
-    assert browser.cssselect('.x-footer--borderless')
-    assert browser.cssselect('.x-subheadline--borderless')
+    assert not browser.cssselect('.infographic__text')
+    assert not browser.cssselect('.infographic__caption')
 
 
 def test_infographics_desktop_should_have_proper_asset_source(
@@ -1722,7 +1721,7 @@ def test_infographics_mobile_should_have_proper_asset_source(
     img_src = selenium_driver.find_element_by_css_selector(
         '.infographic img').get_attribute('src')
     assert u'/zeit-online/image/bertelsmann-infographic/' \
-           u'original__400x500__mobile' in img_src
+           u'original__450x563__mobile' in img_src
 
 
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):
@@ -1779,7 +1778,6 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
     assert len(zplus_box) == 1
 
     zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
     zplus_marker = zplus_box[0].cssselect('.zplus__marker')
     zplus_text = zplus_box[0].cssselect('.zplus__text')
     zplus_link = zplus_box[0].cssselect('.zplus__link')
@@ -1787,7 +1785,6 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_badge) == 1
     assert len(zplus_marker) == 1
     assert len(zplus_text) == 1
     assert len(zplus_link) == 1
@@ -1802,7 +1799,7 @@ def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
     assert len(zplus_box) == 1
 
     zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_badge = zplus_box[0].cssselect('.zplus__marker')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
@@ -1817,7 +1814,6 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
     assert len(zplus_box) == 1
 
     zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
     zplus_marker = zplus_box[0].cssselect('.zplus__marker')
     zplus_text = zplus_box[0].cssselect('.zplus__text')
     zplus_cover = zplus_box[0].cssselect('.zplus__cover')
@@ -1827,7 +1823,6 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_badge) == 1
     assert len(zplus_marker) == 1
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
@@ -1846,7 +1841,7 @@ def test_zplus_register_print_article_has_correct_markup(testbrowser):
     assert len(zplus_box) == 1
 
     zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__badge')
+    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
     zplus_text = zplus_box[0].cssselect('.zplus__text')
     zplus_cover = zplus_box[0].cssselect('.zplus__cover')
     zplus_media = zplus_box[0].cssselect('.zplus__media-item')
@@ -1856,7 +1851,7 @@ def test_zplus_register_print_article_has_correct_markup(testbrowser):
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_badge) == 0
+    assert len(zplus_marker) == 0
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
@@ -1877,3 +1872,134 @@ def test_free_article_has_no_zplus_badge(testbrowser):
 
     assert len(zplus_box) == 0
     assert len(zplus_modifier) == 0
+
+
+def test_volume_teaser_is_rendered_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/article/volumeteaser')
+    volume_teaser = browser.cssselect('.volume-teaser')
+    volume_teaser_link = browser.cssselect(
+        '.volume-teaser__link')[0].get('href')
+    assert len(volume_teaser) == 1
+    assert volume_teaser_link == 'https://premium.zeit.de/diezeit/2016/' \
+        '01?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.' \
+        'cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=' \
+        'rr&utm_content=webreader_packshot_cover_cover'
+
+
+def test_volume_teaser_display_correct_image_on_desktop(
+        testserver, selenium_driver):
+    selenium_driver.set_window_size(1280, 768)
+    selenium_driver.get(
+        '{}/zeit-online/article/volumeteaser'.format(testserver.url))
+    img_src = selenium_driver.find_element_by_css_selector(
+        '[data-src*="test-printcover"]').get_attribute('src')
+    assert u'2016-09/test-printcover/original__220x158__desktop' in img_src
+
+
+def test_share_buttons_are_present(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    sharing_menu = browser.cssselect('.sharing-menu')[0]
+    links = sharing_menu.cssselect('.sharing-menu__link')
+    labels = sharing_menu.cssselect('.sharing-menu__text')
+
+    assert 'sharing-menu--big' not in sharing_menu.attrib['class']
+
+    #  facebook
+    parts = urlparse.urlparse(links[0].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    url = query.get('u').pop(0)
+    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share_small.link' in url
+    assert 'utm_medium=sm' in url
+    assert 'utm_source=facebook_zonaudev_ext' in url
+    assert 'utm_campaign=ref' in url
+    assert 'utm_content=zeitde_share_small_link_x' in url
+
+    #  twitter
+    parts = urlparse.urlparse(links[1].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert query.get('text').pop(0) == (
+        'Williams wackelt weiter, steht aber im Viertelfinale')
+    assert query.get('via').pop(0) == 'zeitonline'
+    assert 'share_small' in query.get('url').pop(0)
+
+    #  whatsapp
+    parts = urlparse.urlparse(links[2].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
+            'Artikel auf ZEIT ONLINE: ') in query.get('text').pop(0)
+
+    #  mail
+    parts = urlparse.urlparse(links[3].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
+            'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
+    assert 'Artikel auf ZEIT ONLINE lesen:' in query.get('body').pop(0)
+
+    assert labels[0].text == 'Facebook'
+    assert labels[1].text == 'Twitter'
+    assert labels[2].text == 'WhatsApp'
+    assert labels[3].text == 'Mail'
+
+
+def test_share_buttons_are_big(testbrowser):
+    browser = testbrowser('/zeit-online/article/tags')
+    sharing_menu = browser.cssselect('.sharing-menu2')[0]
+    links = sharing_menu.cssselect('.sharing-menu2__link')
+    labels = sharing_menu.cssselect('.sharing-menu2__text')
+
+    assert 'sharing-menu2--big' in sharing_menu.attrib['class']
+    assert len(links) == 4
+
+    for link in links:
+        assert '.ref.zeitde.share_big.' in link.attrib['href']
+
+    assert labels[0].text == 'Auf Facebook teilen'
+    assert labels[1].text == 'Twittern'
+    assert labels[2].text == 'WhatsApp'
+    assert labels[3].text == 'Mailen'
+
+
+def test_article_view_has_share_buttons_set_correctly(
+        application, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert not view.share_buttons
+    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_small'
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/tags')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.share_buttons == 'big'
+    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
+
+
+def test_merian_link_has_nofollow(testbrowser, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-merian-nofollow')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.product_id == 'merian'
+
+    browser = testbrowser('/zeit-online/article/simple-merian-nofollow')
+    sourcelink = browser.cssselect('.metadata__source a')[0]
+    assert sourcelink.attrib['rel'] == 'nofollow'
+
+
+def test_article_contains_authorbox(testbrowser):
+    browser = testbrowser('/zeit-online/article/authorbox')
+    authorbox = browser.cssselect('.authorbox')
+    assert len(authorbox) == 3
+
+    author = authorbox[1]
+    image = author.cssselect('[itemprop="image"]')[0]
+    name = author.cssselect('strong[itemprop="name"]')[0]
+    description = author.cssselect('[itemprop="description"]')[0]
+    url = author.cssselect('a[itemprop="url"]')[0]
+
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.get('itemscope') is not None
+    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
+            ) in image.cssselect('[itemprop="url"]')[0].get('content')
+    assert name.text.strip() == 'Jochen Wegner'
+    assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
+    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'

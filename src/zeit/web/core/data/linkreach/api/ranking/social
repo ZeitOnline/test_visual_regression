@@ -12,7 +12,8 @@
 		"subtitle": "Alles angepasste Langweiler, diese BWLer. Unser Autor träumte vom Intellektuellendasein – und studierte Geschichte. Kurz vor Studienende möchte er sich entschuldigen.",
 		"channels": ["Studium Uni-Leben"],
 		"fetchedAt": 1441702321503,
-		"timestamp": 1441702195000
+		"timestamp": 1441702195000,
+		"access": "free"
 	},
 	{
 		"location": "/gesellschaft/schule/2015-09/bildung-auslaender-abschluss-migrationshintergrund",
@@ -27,7 +28,8 @@
 		"subtitle": "Schüler mit ausländischen Wurzeln erreichen eher den höchsten Bildungsabschluss als Einheimische. Doch auch Jugendliche ohne Migrationshintergrund haben sich verbessert.",
 		"channels": ["Gesellschaft Schule"],
 		"fetchedAt": 1441723921408,
-		"timestamp": 1441723715000
+		"timestamp": 1441723715000,
+		"access": "free"
 	},
 	{
 		"location": "/gesellschaft/zeitgeschehen/2015-09/ungarn-kamerafrau-fluechtlinge-gewalt-roeszke",
@@ -42,6 +44,7 @@
 		"subtitle": "Eine Mitarbeiterin eines ungarischen Fernsehsenders hat ein flüchtendes Kind getreten, einem Mann stellte sie ein Bein. Der Sender hat die Kamerafrau entlassen.",
 		"channels": ["Gesellschaft Zeitgeschehen"],
 		"fetchedAt": 1441774921343,
-		"timestamp": 1441774710000
+		"timestamp": 1441774710000,
+		"access": "free"
 	}
 ]

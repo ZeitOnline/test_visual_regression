@@ -1,0 +1,84 @@
+.sharing-menu2
+	margin: remify(20px -7px 56px 0)
+
+	&__items
+		+clearfix
+		list-style-type: none
+		margin: 0
+		padding: 0
+
+	&__item
+		float: left
+		margin-right: remify(7px)
+
+	&__link
+		border-radius: 4px
+		color: $white
+		display: block
+		line-height: remify(35px)
+		min-height: remify(40px)
+		min-width: remify(40px)
+		text-align: center
+		+on-interaction
+			color: $white
+		&--facebook
+			background-color: $color-facebook
+			+on-interaction
+				background-color: $color-facebook-hover
+		&--twitter
+			background-color: $color-twitter
+			+on-interaction
+				background-color: $color-twitter-hover
+		&--whatsapp
+			background-color: $color-whatsapp
+			+on-interaction
+				background-color: $color-whatsapp-hover
+		&--mail
+			background-color: $color-mail
+			+on-interaction
+				background-color: $color-mail-hover
+
+	&__text
+		+font-smoothing
+		display: none
+		font-size: em(13px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-l
+		padding-right: remify(22px)
+		text-transform: uppercase
+
+	&__icon
+		display: inline-block
+		vertical-align: middle
+		&--facebook
+			height: remify(20px)
+			width: remify(10px)
+		&--twitter
+			height: remify(16px)
+			width: remify(21px)
+		&--whatsapp
+			height: remify(22px)
+			width: remify(22px)
+		&--mail
+			height: remify(14px)
+			width: remify(20px)
+
+
+	// TABLET
+	+respond-min($break-tablet-min)
+		margin-bottom: remify(72px)
+
+		&__link
+			&--whatsapp
+				display: none
+
+		// big share buttons
+		&--big &__link
+			line-height: remify(34px)
+			min-height: 0
+		&--big &__icon
+			margin: remify(0 8px 0 12px)
+			&--facebook
+				margin: remify(0 11px 0 15px)
+		&--big &__text
+			display: inline

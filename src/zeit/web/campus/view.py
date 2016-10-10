@@ -9,8 +9,7 @@ import zeit.web.campus.module.toolbox
 
 
 def is_zco_content(context, request):
-    toggle = zeit.web.core.application.FEATURE_TOGGLES.find('campus_launch')
-    return toggle and zeit.campus.interfaces.IZCOContent.providedBy(context)
+    return zeit.campus.interfaces.IZCOContent.providedBy(context)
 
 
 class Base(zeit.web.core.view.Base):

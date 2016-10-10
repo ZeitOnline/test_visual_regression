@@ -1,6 +1,51 @@
-// styles for infographics implemented by templates
 .infographic
-	+respond-max($break-tablet-min)
+	font-family: $font-tabletgothic
+	letter-spacing: $letter-spacing-s
+	line-height: 1.4
+
+	&__headline
+		@extend %font-beckett
+		font-size: em(26px)
+		margin: remify(0 0 10px)
+
+	&__text
+		font-size: em(16px)
+		line-height: 1.5
+
+	&__text,
+	&__caption
+		border-top: 1px solid $color-border
+		margin: .5rem 0
+		padding-top: .5rem
+
+	&__media
+		clear: both
+		margin: remify(40px auto)
 		max-width: remify(420px)
-		&--rimless
-			padding: 0 $page-padding
+		width: 100%
+
+	&__caption
+		color: $grey
+		font-size: em(14px)
+
+	&__copyright
+		float: right
+
+	+respond-min($break-tablet-min)
+
+		&__media
+			max-width: remify(660px)
+
+			&--float
+				float: left
+				margin: remify(14px 25px 14px 0)
+				max-width: remify(300px)
+
+			&--large
+				max-width: remify(820px)
+
+	+respond-min($break-desktop-min)
+
+		&__media
+			&--float
+				margin: remify(16px 25px 16px 60px)

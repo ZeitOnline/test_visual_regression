@@ -2092,25 +2092,6 @@ def test_centerpage_page_integration(testbrowser, datasolr):
     assert 'cp-area--ranking' in browser.contents
 
 
-def test_ranking_area_should_determine_existing_uids(
-        application, dummy_request):
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
-    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    area = zeit.web.core.centerpage.get_area(context)
-    assert area.existing_uids == [
-        'http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs',
-        'http://xml.zeit.de/zeit-magazin/mode-design'
-        '/2014-05/karl-lagerfeld-interview',
-    ]
-
-
-def test_ranking_should_detect_empty_precedence(application, dummy_request):
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/ukraine')
-    context = zeit.web.core.utils.find_block(cp, attrib='area', kind='ranking')
-    area = zeit.web.core.centerpage.get_area(context)
-    assert area.existing_uids == []
-
-
 def test_ranking_ara_should_offset_resultset_on_materialized_cp(
         application, dummy_request):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)

@@ -38,26 +38,19 @@
 	text-align: center
 
 .overlay__headline
-	color: $zon-charcoal
-	display: block
+	color: $color-text
 	font-size: remify(20px)
 	font-weight: bold
-	line-height: remify(24px)
-	margin-bottom: remify(6px)
+	line-height: 1.2
+	margin: remify(0 0 6px)
 
 .overlay__text
-	color: $zon-grey
-	display: block
+	color: $color-text--light
 	font-size: remify(16px)
-	margin-bottom: remify(20px)
+	margin: remify(0 0 20px)
 
 .overlay__button
-	@extend .button
-	background-color: rgba(235, 235, 235, .5)
-
-	&:hover,
-	&:focus
-		background-color: rgba(235, 235, 235, .2)
+	min-width: remify(140px)
 
 .overlay__button-icon
 	height: remify(15px)
@@ -68,7 +61,7 @@
 .overlay__text-button
 	background: transparent
 	border: 0
-	color: $zon-light-grey
+	color: $silver
 	cursor: pointer
 	display: block
 	font-size: remify(14px)
@@ -77,6 +70,5 @@
 	text-align: center
 	width: 100%
 
-	&:hover
-		color: $zon-mid-grey
-
+	+on-interaction
+		color: $dusty-gray
