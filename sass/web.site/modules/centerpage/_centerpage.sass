@@ -93,6 +93,18 @@
 		border-top: 1px solid $color-border
 		padding-bottom: $page-padding
 
+	&--gallery,
+	&--shop
+		background-color: $zon-lighter-grey
+		padding: 0 $page-padding remify(40px)
+	// Printbanderole
+	&--printkiosk
+		background-color: $color-dark-background
+		background-image: linear-gradient(to right, #4A4A4A 0%, #2C2A2B 30%, #494A4E 60%, #3B3B3D 80%, #4A4A4A 100%)
+		color: $white
+		padding: remify(24px 0 30px)
+		text-align: center
+
 	+respond-min($break-areas)
 		float: left
 		&--author-list,
@@ -131,17 +143,6 @@
 		&--quartet
 			width: 25%
 
-	&--gallery,
-	&--shop
-		background-color: $zon-lighter-grey
-		padding: 0 $page-padding remify(40px)
-	// Printbanderole
-	&--printkiosk
-		background-color: $color-dark-background
-		background-image: linear-gradient(to right, #4A4A4A 0%, #2C2A2B 30%, #494A4E 60%, #3B3B3D 80%, #4A4A4A 100%)
-		color: $white
-		padding: remify(24px 0 30px)
-		text-align: center
 
 	+respond-min($break-desktop-min)
 		&--ranking,
