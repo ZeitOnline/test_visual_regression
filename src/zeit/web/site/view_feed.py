@@ -64,7 +64,7 @@ def lps_sort(context):
     info = zeit.cms.workflow.interfaces.IPublishInfo(context, None)
     if info is None:
         return DATE_MIN
-    return info.date_last_published_semantic or DATE_MIN
+    return getattr(info, 'date_last_published_semantic', None) or DATE_MIN
 
 
 def filter_and_sort_entries(items):
