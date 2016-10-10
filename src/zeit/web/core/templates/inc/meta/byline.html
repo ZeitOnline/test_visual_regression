@@ -31,26 +31,7 @@
 {%- endmacro -%}
 
 {%- macro enum(obj) -%}
-    {% if obj | length <= 3 and view.type == 'centerpage' %}
-        {% for type, item in obj -%}
-            {% if not loop.first and not loop.last -%}
-                ,
-            {%- elif loop.last and loop.length > 1 %}
-                und
-            {%- endif %}
-            {{ type | macro(item) }}
-        {%- endfor %}
-    {% elif obj | length > 3 and view.type == 'centerpage'  %}
-        {% set stripped_obj = obj[:3] %}
-        {% for type, item in stripped_obj -%}
-            {% if not loop.first -%}
-                ,
-            {%- endif %}
-            {{ type | macro(item) }}
-        {%- endfor %}
-        u.a.
-    {% else %}
-        {% for type, item in obj -%}
+    {% for type, item in obj -%}
         {% if not loop.first and not loop.last -%}
             ,
         {%- elif loop.last and loop.length > 1 %}
@@ -58,7 +39,6 @@
         {%- endif %}
         {{ type | macro(item) }}
     {%- endfor %}
-    {% endif %}
 {%- endmacro -%}
 
 {%- for type, obj in byline -%}
