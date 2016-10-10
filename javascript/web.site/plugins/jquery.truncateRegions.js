@@ -28,7 +28,7 @@
             container, link;
 
         if ( hidden > 0 ) {
-            link = this.element.find( '[aria-controls]' );
+            link = this.element.children( '[aria-controls]' );
             link.children().first().text( '+' + hidden );
             link.on( 'click', function() {
                 link.velocity( 'slideUp', { duration: 100 } );
