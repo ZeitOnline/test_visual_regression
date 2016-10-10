@@ -1,0 +1,16 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+
+{% set cp_area_additional_class = ' js-truncate-region' %}
+{% set cp_area_supplement_id = 'truncated' ~ region_loop.index %}
+
+{% block before_module_list %}
+    <h2 class="cp-area__headline">{{ area.title }}</h2>
+{% endblock %}
+
+{% block after_module_list %}
+    <a href="#{{ cp_area_supplement_id }}" class="cp-area__control" id="label-{{ cp_area_supplement_id }}" aria-controls="{{ cp_area_supplement_id }}" data-id="{{ '%s.%s..%s-show-more.button' | format(region_loop.index, area_loop.index, area.kind) }}">
+        <span class="cp-area__badge-icon">+</span>
+        <span class="cp-area__badge-label">Weitere Artikel anzeigen</span>
+    </a>
+    <div class="cp-area__supplement" id="{{ cp_area_supplement_id }}"></div>
+{% endblock %}
