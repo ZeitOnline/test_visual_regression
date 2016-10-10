@@ -1,165 +1,88 @@
 .volume-heading
-	position: relative
-
+	@extend %teaser-cp-area-fullwidth
+	&__media
+		@extend %teaser-cp-area-fullwidth__media
+	&__media-container
+		@extend %teaser-cp-area-fullwidth__media-container
 	&__issue
-		+font-smoothing()
 		color: $white
 		position: relative
 		display: inline-block
 		z-index: 1
-		+respond-min($break-tablet-min)
-			padding: remify(100px 0 0 60px)
-		+respond-max($break-tablet-min)
-			margin: remify(24px 0 50px)
-
 	&__caption
 		height: 24px
 		font-family: TabletGothic
 		font-weight: bold
-		+respond-min($break-desktop-min)
-			font-size: $font-xxxl
-			letter-spacing: $letter-spacing-l
-			margin-top: remify(20px)
-		+respond-max($break-desktop-min)
-			font-size: $font-xl
-			letter-spacing: $letter-spacing-m
-			margin-top: remify(16px)
-
-	&__navigation
-		background-color: $zon-lighter-grey
-		display: flex
-		flex-wrap: wrap
-
-	&__media
-		width: remify(100px)
-		margin-left: auto
-		margin-right: 0
-
-	&__current
-		padding: remify(20px 0 25px 0)
-		width: 100%
-		flex-grow: 1
-		border-bottom: solid 1px $zon-light-grey
-
-	&__packshot,
-	&__cta
-		display: table-cell
-
-	&__cta
-		font-weight: bold
-		color: $zon-dark-grey
-		font-size: remify(16px)
-		padding-right: remify(30px)
-		line-height: remify(22px)
-		width: 50%
-		vertical-align: top
-		max-width: remify(300px)
-
-	&__packshot
-		padding: remify(0 15px)
-		width: 40%
-
-	&__link
-		+animated-interaction()
-		color: $zon-dark-grey
-		border-bottom: 1px solid $zon-light-grey
-
-	&__previous,
-	&__next
-		display: inline-block // non flex fallback
-		flex-grow: 1
-
-	&__next
-		text-align: right
-
-	&__previous-link,
-	&__next-link
-		line-height: remify(50px)
-		font-size: remify(12px)
-		letter-spacing: x-spacing-m
-		&:after,
-		&:before
-			font-size: remify(30px)
-			padding: remify(0 8px)
-			vertical-align: sub
-
-	&__next-link
-		text-align: right
-		&:after
-			content: "\203A"
-
-	&__previous-link
-		&:before
-			content: "\2039"
-
-	+respond-min($break-tablet-min)
-
-		&__navigation
-			flex-wrap: nowrap
-			min-height: remify(145px)
-
-		&__previous
-			order: 1
-
-		&__current
-			width: auto
-			order: 2
-			border-bottom: none
-
-		&__next
-			order: 3
-
-		&__previous,
-		&__next
-			min-width: 20%
-			align-self: center
-
-		&__previous-link,
-		&__next-link
-			&:before,
-			&:after
-				padding: remify(0 10px)
-
-		&__media
-			width: remify(150px)
-
-		&__cta
-			vertical-align: middle
-
-	+respond-min($break-desktop-min)
-		&__media
-			width: remify(220px)
-			padding: 0
-
-		&__current
-			transform: translateY(-30px)
-			padding: 0
-
-		&__cta
-			padding-top: remify(50px) //center text again
-
-		&__previous-link,
-		&__next-link
-			font-size: remify(14px)
-
-		&__previous-link
-			&:before
-				padding-left: remify(20px)
-
-		&__next-link
-			&:after
-				padding-right: remify(20px)
+		margin-top: remify(24px)
+		letter-spacing: $letter-spacing-l
+	&__logo
+		width: remify(260px)
+		&--item
+			&:first-of-type
+				&:after
+					border-bottom: 1px solid rgba($white, .75)
+					content: ""
+					display: inherit
+					height: 0
+					margin: remify(8px) auto remify(14px)
+		&--zmo
+			display: inherit
+			width: remify(256px)
+			margin: 0 auto
 
 .volume-heading-teaser
-	@extend .teaser-topic-item
-	&__kicker
-		@extend .teaser-topic-item__kicker
-
-	&__title
-		@extend .teaser-topic-item__title
-
+	@extend %teaser-item-divider
 	&:after
-		@extend .teaser-topic-item:after
-		+respond-max($break-tablet-min)
-			border-bottom: 1px solid rgba(255, 255, 255, 1)
+		border-bottom: 1px solid rgba($white, 1)
+	&__kicker
+		@extend %teaser-kicker-cp-area-fullwidth
+	&__title
+		@extend %teaser-title
+		color: $white
+		font-size: em(18px)
+
+.volume-heading-list
+	position: relative
+
++respond-min($break-tablet-min)
+	.volume-heading
+		padding: remify(40px 0)
+		text-align: inherit
+		&__issue
+			padding: remify(76px)
+	.volume-heading-list
+		float: right
+		padding: remify(0 32px 0 0)
+		width: 40%
+	.volume-heading-teaser
+		&:after
+			margin: remify(20px) 0 remify(16px)
+			width: 24%
+		&__kicker
+			margin-bottom: remify(10px)
+		&__title
+			font-size: em(20px)
+
++respond-min($break-desktop-min)
+	.volume-heading-list
+		padding: remify(0 36px 0 5px)
+		width: 33.33%
+	.volume-heading
+		&__caption
+			font-size: $font-xxl
+
++respond-max($break-desktop-min)
+	.volume-heading
+		&__caption
+			font-size: $font-mxxl--px
+
++respond-max($break-tablet-min)
+	.volume-heading
+		&__issue
+			margin: remify(24px 0 50px)
+		&__caption
+			font-size: $font-xl
+	.volume-heading-teaser
+		&:after
+			border-bottom: 1px solid rgba($white, 1)
 			width: remify(70px)

@@ -1,20 +1,21 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% block module_list %}
-    <section class="{% block topic_class %}teaser-topic{% endblock %}">
+    <section class="{% block layout_class %}volume-heading{% endblock %}">
         <article class="volume-heading__issue">
             <div class="volume-heading__logo">
-            {{ lama.use_svg_icon('logo-dz-white', '', view.package) }}
+                <div class="volume-heading__logo--item">{{ lama.use_svg_icon('logo-dz-white','volume-heading__logo--zon', 'zeit.web.site') }}</div>
+                <div class="volume-heading__logo--item">{{ lama.use_svg_icon('logo-zmo-large','volume-heading__logo--zmo', 'zeit.web.magazin') }}</div>
             </div>
             <h1 class="volume-heading__caption">
                 Ausgabe Nr. {{ '%02d' % view.volume.volume }}/{{ view.volume.year }}
             </h1>
         </article>
         {% if area.values() | length > 0 %}
-            {% set module_layout = self.topic_class() %}
+            {% set module_layout = self.layout_class() %}
             {% include "zeit.web.core:templates/inc/asset/image_bgr_volume_header.tpl" %}
 
-            <div class="{{ self.topic_class() }}-list">
+            <div class="{{ self.layout_class() }}-list">
                 {% for module in area.values()[0:3] -%}
                     {% set teaser = module | first_child %}
                     {% set layout = module | get_layout %}

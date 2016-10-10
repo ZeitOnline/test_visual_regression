@@ -1,38 +1,9 @@
-%teaser-kicker-topic
-	color: $zon-lighter-grey
-	display: inline-block
-	font-size: em(14px)
-	font-weight: normal
-	letter-spacing: $zon-letter-spacing-l
-	line-height: 1.2
-	text-transform: uppercase
-
 .teaser-topic
-	+clearfix
-	+font-smoothing
-	padding: remify(24px $page-padding 32px)
-	position: relative
-	text-align: center
+	@extend %teaser-cp-area-fullwidth
 	&__media
-		bottom: 0
-		left: 0
-		margin: 0
-		min-height: 100%
-		min-width: 100%
-		position: absolute
-		right: 0
-		top: 0
-		&.is-pixelperfect
-			a
-				height: 100%
-			img
-				min-height: 100%
-				min-width: 100%
-				width: auto
+		@extend %teaser-cp-area-fullwidth__media
 	&__media-container
-		+plain-transparent-overlay($alpha: 0.5)
-		background-color: $color-dark-background
-		height: 100%
+		@extend %teaser-cp-area-fullwidth__media-container
 
 .teaser-topic-main
 	position: relative
@@ -46,7 +17,7 @@
 	&__combined-link
 		@extend %teaser-combined-link
 	&__kicker
-		@extend %teaser-kicker-topic
+		@extend %teaser-kicker-cp-area-fullwidth
 		margin-bottom: remify(10px)
 	&__title
 		@extend %teaser-title
@@ -65,18 +36,11 @@
 	position: relative
 
 .teaser-topic-item
-	margin: auto
-	max-width: remify(450px)
-	&:after
-		border-bottom: 1px solid rgba($white, .4)
-		content: ""
-		display: block
-		height: 0
-		margin: remify(20px) auto remify(12px)
+	@extend %teaser-item-divider
 	&:last-child:after
 		content: none
 	&__series-label
-		@extend %teaser-kicker-topic
+		@extend %teaser-kicker-cp-area-fullwidth
 		margin: 0
 		&:after
 			content: " –" // attention: mdash
@@ -87,9 +51,8 @@
 	&__combined-link
 		@extend %teaser-combined-link
 	&__kicker
-		@extend %teaser-kicker-topic
+		@extend %teaser-kicker-cp-area-fullwidth
 		display: inline-block
-		margin-bottom: remify(4px)
 	&__kicker-logo-divider
 		@extend %teaser-kicker-logo-divider
 	&__kicker-logo
@@ -122,7 +85,6 @@
 		@extend %teaser-title
 		color: $white
 		font-size: em(18px)
-
 
 +respond-min($break-tablet-min)
 	.teaser-topic
