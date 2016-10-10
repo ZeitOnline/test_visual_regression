@@ -1,7 +1,7 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% block image_variant %}cinema{% endblock %}
-{#{% set is_topic_variant = (area.kind == 'topic-variant') %}#}
+{% set is_topic_variant = (area.kind == 'topic-variant') %}
 
 {% block module_list %}
     <section class="{% block topic_class %}teaser-topic{% endblock %}">
