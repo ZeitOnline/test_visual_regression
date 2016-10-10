@@ -2398,11 +2398,11 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.site.view_centerpage.Centerpage,
                         'volume_next',
                         {'link': 'http://ww.zeit.de/2016/02/index',
-                        'label': '02/2016'})
+                         'label': '02/2016'})
     monkeypatch.setattr(zeit.web.site.view_centerpage.Centerpage,
                         'volume_previous',
                         {'link': 'http://ww.zeit.de/2015/52/index',
-                        'label': '52/2015'})
+                         'label': '52/2015'})
     browser = testbrowser('/2016/01/index')
     nav = browser.cssselect('.volume-navigation')
     assert len(nav) == 1
