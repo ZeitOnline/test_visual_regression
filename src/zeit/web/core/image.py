@@ -128,7 +128,7 @@ class Image(object):
     def _ratio_for_viewport(self, viewport):
         # If the variant config does not provide a ratio, we try to determine
         # it from the viewport-specific masterimage
-        if self.group is not None:
+        if zeit.content.image.interfaces.IImageGroup.providedBy(self.group):
             image = self.group.master_image_for_viewport(viewport)
             if image is None:
                 return
