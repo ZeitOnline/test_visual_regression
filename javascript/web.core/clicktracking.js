@@ -329,6 +329,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                          '#servicebox',
                          '.breaking-news-banner',
                          '.article-lineage',
+                         '.js-truncate-region',
                          '.partnerbox'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'

@@ -10,7 +10,11 @@ POSTDEPLOY
 3.12 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3390: Toggle ressort area teasers
+
+- BUG-473: Clear floating article items
+
+- FIX: Be defensive about image groups with missing meta files
 
 
 3.11 (2016-10-05)
