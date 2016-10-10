@@ -10,11 +10,19 @@
             Lesen Sie diese Ausgabe als <a class="volume-heading__link" href="{{view.volume_navigation.link}}">E-Paper, App und auf dem E-Reader</a>.
         </span>
     </div>
-    <a class="volume-heading__previous" href="{{view.volume_previous.link}}">
-        DIE ZEIT Nr. {{view.volume_previous.label}}
-    </a>
-    <a class="volume-heading__next" href="{{view.volume_next.link}}">
-        DIE ZEIT Nr. {{view.volume_next.label}}
-    </a>
+    <span class="volume-heading__previous">
+        {% if view.volume_previous %}
+        <a class="volume-heading__previous-link" href="{{view.volume_previous.link}}">
+            DIE ZEIT Nr. {{view.volume_previous.label}}
+        </a>
+        {% endif %}
+    </span>
+    <span class="volume-heading__next">
+        {% if view.volume_next %}
+        <a class="volume-heading__next-link" href="{{view.volume_next.link}}">
+            DIE ZEIT Nr. {{view.volume_next.label}}
+        </a>
+        {% endif %}
+    </span>
 </div>
 {% endif %}

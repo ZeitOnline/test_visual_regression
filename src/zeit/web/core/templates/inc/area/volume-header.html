@@ -6,9 +6,9 @@
             <div class="volume-heading__logo">
             {{ lama.use_svg_icon('logo-dz-white', '', view.package) }}
             </div>
-            <div class="volume-heading__caption">
+            <h1 class="volume-heading__caption">
                 Ausgabe Nr. {{ '%02d' % view.volume.volume }}/{{ view.volume.year }}
-            </div>
+            </h1>
         </article>
         {% if area.values() | length > 0 %}
             {% set module_layout = self.topic_class() %}

@@ -53,6 +53,7 @@
 		line-height: remify(22px)
 		width: 50%
 		vertical-align: top
+		max-width: remify(300px)
 
 	&__packshot
 		padding: remify(0 15px)
@@ -67,6 +68,12 @@
 	&__next
 		display: inline-block // non flex fallback
 		flex-grow: 1
+
+	&__next
+		text-align: right
+
+	&__previous-link,
+	&__next-link
 		line-height: remify(50px)
 		font-size: remify(12px)
 		letter-spacing: x-spacing-m
@@ -76,12 +83,12 @@
 			padding: remify(0 8px)
 			vertical-align: sub
 
-	&__next
+	&__next-link
 		text-align: right
 		&:after
 			content: "\203A"
 
-	&__previous
+	&__previous-link
 		&:before
 			content: "\2039"
 
@@ -106,6 +113,9 @@
 		&__next
 			min-width: 20%
 			align-self: center
+
+		&__previous-link,
+		&__next-link
 			&:before,
 			&:after
 				padding: remify(0 10px)
@@ -114,7 +124,6 @@
 			width: remify(150px)
 
 		&__cta
-			padding-left: remify(15px)
 			vertical-align: middle
 
 	+respond-min($break-desktop-min)
@@ -129,15 +138,15 @@
 		&__cta
 			padding-top: remify(50px) //center text again
 
-		&__previous,
-		&__next
+		&__previous-link,
+		&__next-link
 			font-size: remify(14px)
 
-		&__previous
+		&__previous-link
 			&:before
 				padding-left: remify(20px)
 
-		&__next
+		&__next-link
 			&:after
 				padding-right: remify(20px)
 

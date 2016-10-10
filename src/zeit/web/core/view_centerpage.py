@@ -36,22 +36,22 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
                 str(self.volume.volume).zfill(2)),
                 'cover': self.volume.covers['printcover']}
 
-    # just testdata, change if solr has correct results (as)
     @zeit.web.reify
     def volume_next(self):
-        return {'link': 'http://{}/{!s}/{!s}/index'.format(
-                self.request.host, '2016', '02'),
-                'label': '{}/{}'.format('02', '2016')}
-        # zeit.content.cp.interfaces.ICenterPage(volume, None)
-        # return self.volume.next if self.volume else None
+        return self.get_volume_info(self.volume.next)
 
-    # just testdata, change if solr has correct results (as)
     @zeit.web.reify
     def volume_previous(self):
-        return {'link': 'http://{}/{!s}/{!s}/index'.format(
-                self.request.host, '2015', '52'),
-                'label': '{}/{}'.format('52', '2015')}
-        # return self.volume.previous if self.volume else None
+        return self.get_volume_info(self.volume.previous)
+
+    def get_volume_info(self, volume):
+        volume_cp = zeit.content.cp.interfaces.ICenterPage(volume, None)
+        if volume_cp:
+            return {'link': zeit.web.core.template.create_url(None,
+                                                              volume_cp,
+                                                              self.request),
+                    'label': '{}/{}'.format(str(volume.volume).zfill(2),
+                                            volume.year)}
 
     @zeit.web.reify
     def regions(self):
