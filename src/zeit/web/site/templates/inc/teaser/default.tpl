@@ -27,7 +27,7 @@
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
-                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content, 'zplus' if teaser is zplus_content) }}">
+                        <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content) }}">
                             {% block kicker_logo scoped %}
                                 {% block zplus_kicker_logo %}
                                     {% if teaser is zplus_content %}
