@@ -10,6 +10,10 @@ POSTDEPLOY
 3.12 (unreleased)
 -----------------
 
+- BUG-532: Show table of contents before portraitbox or subheadline
+
+- ZON-3379: Add ressort areas teaser
+
 - ZON-3390: Toggle ressort area teasers
 
 - BUG-473: Clear floating article items

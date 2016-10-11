@@ -2448,3 +2448,23 @@ def test_volume_centerpage_has_volume_header(testbrowser):
     assert len(volume_header) == 1
     assert 'Ausgabe Nr. 01/2016' in caption[0].text.strip()
     assert len(teaser) == 3
+
+
+def test_zplus_teaser_has_zplus_badge(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/zplus')
+    teaser = browser.cssselect('.cp-area--major article.teaser-large')[0]
+    assert teaser.cssselect('.teaser-large__kicker-logo--zplus')
+
+
+def test_zplus_teaser_has_no_badge_in_print_ressort_area(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/print-ressort')
+    teaser = browser.cssselect(
+        '.cp-region--solo:nth-child(3) article.teaser-large')[0]
+    assert not teaser.cssselect('.teaser-large__kicker-logo--zplus')
+
+
+def test_ressort_areas_have_ressort_title(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/print-ressort')
+    areas = browser.cssselect('.cp-area--print-ressort')
+    assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
+    assert areas[1].cssselect('.cp-area__headline')[0].text == 'Wirtschaft'
