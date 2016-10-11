@@ -10,6 +10,8 @@ POSTDEPLOY
 3.12 (unreleased)
 -----------------
 
+- ZON-3379: Add ressort areas teaser
+
 - ZON-3390: Toggle ressort area teasers
 
 - BUG-473: Clear floating article items
