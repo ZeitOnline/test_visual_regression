@@ -6,6 +6,8 @@ POSTDEPLOY
 
 - ZON-3273: Needs config for tube areas, see PR for the what-and-where
 
+- FIX: Be defensive about unresolveable LazyProxies in feeds
+
 
 3.12 (unreleased)
 -----------------
