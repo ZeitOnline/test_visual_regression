@@ -25,13 +25,8 @@ class ImageGroup(zeit.web.core.image.RemoteImageGroup):
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
-class VideoImages(object):
-
-    fill_color = None
-
-    def __init__(self, context):
-        self.context = context
-        self.image = zeit.content.image.interfaces.IImageGroup(context)
+class VideoImages(zeit.web.core.image.RemoteImages):
+    pass
 
 
 @zeit.web.register_module('playlist')

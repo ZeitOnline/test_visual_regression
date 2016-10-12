@@ -12,6 +12,7 @@ import requests
 import requests_file
 import grokcore.component
 import zope.component
+import zope.interface
 
 import zeit.cms.workflow.interfaces
 import zeit.content.author.interfaces
@@ -571,6 +572,17 @@ class RemoteImageMetaData(object):
             self.alt = group.__parent__.title
             self.caption = group.__parent__.text
             self.title = group.__parent__.title
+
+
+# Baseclass, register this as an adapter at the concrete usage points.
+@zope.interface.implementer(zeit.content.image.interfaces.IImages)
+class RemoteImages(object):
+
+    fill_color = None
+
+    def __init__(self, context):
+        self.context = context
+        self.image = zeit.content.image.interfaces.IImageGroup(context)
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IMasterImage)
