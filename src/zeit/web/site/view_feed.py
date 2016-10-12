@@ -41,37 +41,26 @@ DC_MAKER = getattr(ELEMENT_MAKER, '{%s}creator' % DC_NAMESPACE)
 
 
 def format_rfc822_date(date):
-    if date is None:
-        date = datetime.datetime.min
     return email.utils.formatdate(calendar.timegm(date.timetuple()))
 
 
 def format_iso8601_date(date):
-    if date is None:
-        date = datetime.datetime.min
     return date.isoformat()
-
-
-def last_published_semantic(context):
-    return zeit.cms.workflow.interfaces.IPublishInfo(
-        context).date_last_published_semantic
 
 
 DATE_MIN = datetime.datetime(datetime.MINYEAR, 1, 1, tzinfo=pytz.UTC)
 
 
-def lps_sort(context):
+def last_published_semantic(context):
     info = zeit.cms.workflow.interfaces.IPublishInfo(context, None)
-    if info is None:
-        return DATE_MIN
-    return info.date_last_published_semantic or DATE_MIN
+    return getattr(info, 'date_last_published_semantic', None) or DATE_MIN
 
 
 def filter_and_sort_entries(items):
     filter_news = filter(
         lambda c: '/news' not in c.uniqueId,
         items)
-    return sorted(filter_news, key=lps_sort, reverse=True)
+    return sorted(filter_news, key=last_published_semantic, reverse=True)
 
 
 def create_public_url(url):

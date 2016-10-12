@@ -6,6 +6,12 @@ POSTDEPLOY
 
 - ZON-3273: Needs config for tube areas, see PR for the what-and-where
 
+- ZON-3352: Implement header for volume page
+
+- ZON-3362: Implement header navigation for volume page
+
+- FIX: Be defensive about unresolveable LazyProxies in feeds
+
 
 3.12 (unreleased)
 -----------------
