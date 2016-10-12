@@ -2394,6 +2394,62 @@ def test_imagecopyright_includes_videostage_poster_copyright(testbrowser):
     assert len(figures) == 4
 
 
+def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.site.view_centerpage.Centerpage,
+                        'volume_next',
+                        {'link': 'http://ww.zeit.de/2016/02/index',
+                         'label': '02/2016'})
+    monkeypatch.setattr(zeit.web.site.view_centerpage.Centerpage,
+                        'volume_previous',
+                        {'link': 'http://ww.zeit.de/2015/52/index',
+                         'label': '52/2015'})
+    browser = testbrowser('/2016/01/index')
+    nav = browser.cssselect('.volume-navigation')
+    assert len(nav) == 1
+
+    current = nav[0].cssselect('.volume-navigation__current')
+    prev = nav[0].cssselect('.volume-navigation__previous-link')
+    next = nav[0].cssselect('.volume-navigation__next-link')
+
+    assert len(current) == 1
+    assert len(prev) == 1
+    assert len(next) == 1
+    assert '2015/52' in prev[0].attrib['href']
+    assert '52/2015' in prev[0].text.strip()
+    assert '2016/02' in next[0].attrib['href']
+    assert '02/2016' in next[0].text.strip()
+
+    packshot = current[0].cssselect('.volume-navigation__packshot')
+    cta = current[0].cssselect('.volume-navigation__cta')
+    media = current[0].cssselect('.volume-navigation__media')
+
+    assert len(packshot) == 1
+    assert len(cta) == 1
+    assert len(media) == 1
+
+
+def test_volume_centerpage_navi_dont_show_invalid_links(testbrowser):
+    browser = testbrowser('/2016/02/index')
+
+    next = browser.cssselect('.volume-navigation__next-link')
+    prev = browser.cssselect('.volume-navigation__previous-link')
+    assert len(next) == 0
+    assert len(prev) == 0
+
+
+def test_volume_centerpage_has_volume_header(testbrowser):
+    browser = testbrowser('/2016/01/index')
+
+    volume_header = browser.cssselect('.cp-area--volume-header')
+    teaser = volume_header[0].cssselect('.volume-heading-teaser')
+
+    caption = volume_header[0].cssselect('.volume-heading__caption')
+
+    assert len(volume_header) == 1
+    assert 'Ausgabe Nr. 01/2016' in caption[0].text.strip()
+    assert len(teaser) == 3
+
+
 def test_zplus_teaser_has_zplus_badge(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/zplus')
     teaser = browser.cssselect('.cp-area--major article.teaser-large')[0]
