@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <head>
+        <header_image/>
+        <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
+        <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+        <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:03.346120+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:09:09.014473+00:00</attribute>
+        <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2015-03-24T17:08:09.170784+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2015-03-24T17:09:09.014473+00:00</attribute>
+        <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+        <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2015-03-16T13:14:00.932648+00:00</attribute>
+        <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.bruenjes</attribute>
+        <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+        <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
+        <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+        <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Politik</attribute>
+        <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
+        <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
+        <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+        <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
+        <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
+        <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;CenterPage&quot; module=&quot;zeit.content.cp.centerpage&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;ICP2015&quot; module=&quot;zeit.content.cp.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+        <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
+        <topiclinks>
+            <topiclink_title>Schwerpunkte</topiclink_title>
+            <topiclink>
+                <topiclink_label_1>Islamischer Staat</topiclink_label_1>
+                <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
+                <topiclink_label_2>Bundeswehr</topiclink_label_2>
+                <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
+                <topiclink_label_3>Hongkong</topiclink_label_3>
+                <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
+            </topiclink>
+        </topiclinks>
+    </head>
+    <body>
+        <supertitle>Ausgabenseite</supertitle>
+        <title>Ressortflächen</title>
+        <cluster area="id-8458d4a8-7cee-4b15-be25-0e0e36e327cd" kind="solo">
+          <region hide-dupes="True" area="id-0b68c298-c9de-4a92-b0f4-d1ac839b2ae9" kind="solo">
+            <container cp:type="headerimage" module="headerimage" cp:__name__="id-3e6bf101-bd4b-49a7-a27e-82e2df102cd2" supertitle="Ausgabenseite" title="Ressortflächen">
+              <image>http://xml.zeit.de/zeit-online/cp-content/ig-1/</image>
+            </container>
+          </region>
+        </cluster>
+        <cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a4" kind="solo">
+            <region hide-dupes="True" area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="print-ressort" title="Politik">
+                <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
+                <container cp:type="teaser" module="zon-large" cp:__name__="id-ea7dc592-96e4-47c6-b19b-8844131735c2">
+                    <block href="http://xml.zeit.de/zeit-online/article/zeit"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8de">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-02"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-b71b5ef7-d4c1-4c3e-99d6-ee48455e82f9">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-03"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-bda65215-57f7-4f6a-bbdd-738e4a05e5d7">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-05"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-06"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8df">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-live"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-b71b5ef7-d4c1-4c3e-99d6-ee48455e82f0">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-offline"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-bda65215-57f7-4f6a-bbdd-738e4a05e5d8">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne"/>
+                </container>
+            </region>
+        </cluster>
+        <cluster area="id-ce33b4ec-f212-497e-b201-6045478b7e94" kind="solo">
+            <region hide-dupes="True" area="id-bda65215-7c4b-41b0-8717-4ac10bbf86a4" kind="print-ressort" title="Wirtschaft">
+                <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
+                <container cp:type="teaser" module="zon-large" cp:__name__="id-b71b5ef7-96e4-47c6-b19b-8844131735c2">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8de">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-02"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-d4c1-4c3e-99d6-ee48455e82f9">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-03"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-bda65215-57f7-4f6a-bbdd-738e4a05e5d7">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-05"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-b71b5ef7-c758-45ed-8aa2-78e539eead9b">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-06"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8df">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-live"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-ea7dc592-d4c1-4c3e-99d6-ee48455e82f0">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-offline"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-e9fb1dd8-57f7-4f6a-bbdd-738e4a05e5d8">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik"/>
+                </container>
+                <container cp:type="teaser" module="zon-small" cp:__name__="id-c01879aa-c758-45ed-8aa2-78e539eead9c">
+                    <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne"/>
+                </container>
+            </region>
+        </cluster>
+    </body>
+    <feed/>
+</centerpage>

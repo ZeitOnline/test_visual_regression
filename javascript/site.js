@@ -83,6 +83,7 @@ require([
     'web.site/plugins/jquery.selectNav',
     'web.site/plugins/jquery.paginateTeasers',
     'web.site/plugins/jquery.longTextWrapper',
+    'web.site/plugins/jquery.truncateRegions',
     'web.site/plugins/jquery.tabs',
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
@@ -115,6 +116,7 @@ require([
         $( '.jobbox--animate' ).animateJobs();
         $( '.js-tabs' ).tabs();
         $( '.partner__action' ).boxDropdown();
+        $( '.js-truncate-region' ).truncateRegions();
 
     } else if ( article.length ) {
         // article, gallery etc.
