@@ -10,6 +10,10 @@ POSTDEPLOY
 
 - ZON-3362: Implement header navigation for volume page
 
+- FIX: Be defensive about unresolveable LazyProxies in feeds
+
+- FIX: Skip missing remote images
+
 
 3.12 (unreleased)
 -----------------
