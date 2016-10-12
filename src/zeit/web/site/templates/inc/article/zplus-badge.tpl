@@ -15,6 +15,6 @@
         </div>
 
         {% set packshot = view.zplus_label.cover %}
-        {% include "zeit.web.core:templates/inc/asset/image_cover.tpl" %}
+        {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" %}
     </div>
 </div>
