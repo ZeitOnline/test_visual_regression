@@ -8,12 +8,10 @@
             </div>
         {% endif %}
         <div class="zplus__text">
-            {% if view.zplus_label %}
-                <span class="zplus__label">{{ view.zplus_label.intro }}</span>
-                <a class="zplus__link" href="{{ view.zplus_label.link }}">
-                    {{ view.zplus_label.link_text }}
-                </a>
-            {% endif %}
+            <span class="zplus__label">{{ view.zplus_label.intro }}</span>
+            <a class="zplus__link" href="{{ view.zplus_label.link }}">
+                {{ view.zplus_label.link_text }}
+            </a>
         </div>
         {% if view.zplus_label.cover %}
         <div class="zplus__cover">
