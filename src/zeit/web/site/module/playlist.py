@@ -17,21 +17,19 @@ log = logging.getLogger(__name__)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 class ImageGroup(zeit.web.core.image.RemoteImageGroup):
 
-    def __init__(self, context):
-        super(ImageGroup, self).__init__(context)
-        self.image_url = context.video_still
-        self.uniqueId = '{}/imagegroup/'.format(context.uniqueId)
+    @classmethod
+    def get_image_url(cls, context):
+        return context.video_still
+
+    @zeit.web.reify
+    def uniqueId(self):
+        return '{}/imagegroup/'.format(self.context.uniqueId)
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
-class VideoImages(object):
-
-    fill_color = None
-
-    def __init__(self, context):
-        self.context = context
-        self.image = zeit.content.image.interfaces.IImageGroup(context)
+class VideoImages(zeit.web.core.image.RemoteImages):
+    pass
 
 
 @zeit.web.register_module('playlist')
