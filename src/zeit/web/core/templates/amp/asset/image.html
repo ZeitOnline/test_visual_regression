@@ -1,5 +1,5 @@
 {% if image %}
-    {%- set image_sources = image_sources | default([320, 480, 660, 822]) %}
+    {%- set image_sources = image_sources | default([320, 480, 660, 820]) %}
     {%- set default_width = 320 %}
     {%- set default_height = (default_width / image.ratio) | int %}
     {%- set image_width = image.fallback_width | default(default_width, True) %}
