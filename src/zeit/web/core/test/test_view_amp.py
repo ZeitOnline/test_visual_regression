@@ -198,3 +198,32 @@ def test_amp_article_links_contain_tracking_data_attributes(testbrowser):
     assert tag.get('data-vars-url') == tag.get('href').split('://')[1]
     assert tag.get('data-vars-link-text') == 'Weltwirtschaftsforum Davos'
     assert tag.get('data-vars-number') == '2'
+
+
+def test_amp_article_shows_volume_badge_for_subscription(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/zplus-zeit')
+    volume_badge = browser.cssselect('.volume-badge')[0]
+    volume_text = volume_badge.cssselect('.volume-badge__text')[0]
+
+    assert volume_text.text.strip() == u'Exklusiv für Abonnenten'
+    assert volume_badge.cssselect('.volume-badge__icon')
+    assert volume_badge.cssselect('.volume-badge__media')
+
+
+def test_amp_article_shows_volume_badge_for_registration(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/zplus-zeit-register')
+    volume_badge = browser.cssselect('.volume-badge')[0]
+    volume_text = volume_badge.cssselect('.volume-badge__text')[0]
+
+    assert volume_text.text.strip() == u'Aus der ZEIT Nr. 49/2014'
+    assert not volume_badge.cssselect('.volume-badge__icon')
+    assert volume_badge.cssselect('.volume-badge__media')
+
+
+def test_amp_article_shows_volume_badge_for_exclusive(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/zplus-zon')
+    volume_badge = browser.cssselect('.volume-badge')[0]
+    volume_text = volume_badge.cssselect('.volume-badge__text')[0]
+
+    assert volume_text.text.strip() == u'Exklusiv für Abonnenten'
+    assert volume_badge.cssselect('.volume-badge__icon')
