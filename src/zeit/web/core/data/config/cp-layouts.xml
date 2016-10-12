@@ -74,14 +74,14 @@
         id="zon-large"
         title="Großer Teaser"
         image_pattern="wide"
-        areas="duo major ranking tube parquet zco-parquet"
+        areas="duo major ranking tube print-ressort parquet zco-parquet"
         />
     <layout
         id="zon-small"
         title="Kleiner Teaser"
         image_pattern="wide"
-        areas="duo major minor ranking tube parquet spektrum zett zmo-parquet zplus-parquet zco-parquet author-favourite-content author-articles author-list"
-        default="major minor parquet zmo-parquet zplus-parquet zco-parquet ranking tube spektrum zett author-favourite-content author-articles author-list"
+        areas="duo major minor ranking tube print-ressort parquet spektrum zett zmo-parquet zplus-parquet zco-parquet author-favourite-content author-articles author-list"
+        default="major minor parquet zmo-parquet zplus-parquet zco-parquet ranking tube print-ressort spektrum zett author-favourite-content author-articles author-list"
         available="zeit.cms.section.interfaces.IZONContent"
         />
     <layout
@@ -223,6 +223,13 @@
         image_pattern="topic"
         areas="topic"
         default="topic"
+        />
+    <!-- Teaser in volume-header -->
+    <layout
+        id="volume-header"
+        title="Teaser in volume-header"
+        areas="volume-header"
+        default="volume-header"
         />
     <!-- Legacy teaser formats -->
     <layout
