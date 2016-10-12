@@ -144,13 +144,12 @@
 		color: $grey
 		border-bottom: 1px solid $grey
 	&__media
-		width: remify(82px)
-	&__cover
 		display: none
+		width: remify(82px)
 
 	// hide cover on very small displays
 	+respond-min(em(350px))
-		&__cover
+		&__media
 			display: block
 			position: absolute
 			right: remify(14px)
@@ -168,8 +167,9 @@
 		&__label
 			display: block
 		&__media
-			width: remify(125px)
 			margin: auto
+			position: static
+			width: remify(125px)
 		&__text
 			line-height: remify(20px)
 			display: block
@@ -177,9 +177,6 @@
 			text-align: center
 			padding: remify(18px 0 21px 0)
 			font-size: em(13px)
-		&__cover
-			position: static
-			width: 100%
 		&__marker
 			position: absolute
 			top: remify(100px)
