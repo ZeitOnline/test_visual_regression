@@ -26,6 +26,34 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         self.request.response.headers.add('s-maxage', '21600')
 
     @zeit.web.reify
+    def volume(self):
+        return zeit.content.volume.interfaces.IVolume(self.context, None)
+
+    @zeit.web.reify
+    def volume_navigation(self):
+        return {'link': 'https://epaper.zeit.de/abo/diezeit/{!s}/{!s}'.format(
+                self.volume.year,
+                str(self.volume.volume).zfill(2)),
+                'cover': self.volume.covers['printcover']}
+
+    @zeit.web.reify
+    def volume_next(self):
+        return self.get_volume_info(self.volume.next)
+
+    @zeit.web.reify
+    def volume_previous(self):
+        return self.get_volume_info(self.volume.previous)
+
+    def get_volume_info(self, volume):
+        volume_cp = zeit.content.cp.interfaces.ICenterPage(volume, None)
+        if volume_cp:
+            return {'link': zeit.web.core.template.create_url(None,
+                                                              volume_cp,
+                                                              self.request),
+                    'label': '{}/{}'.format(str(volume.volume).zfill(2),
+                                            volume.year)}
+
+    @zeit.web.reify
     def regions(self):
         """List of regions, the outermost container making up our centerpage.
         :rtype: list
