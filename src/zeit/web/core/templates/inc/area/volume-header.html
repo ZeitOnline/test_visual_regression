@@ -11,10 +11,11 @@
                 Ausgabe Nr. {{ '%02d' % view.volume.volume }}/{{ view.volume.year }}
             </h1>
         </article>
-        {% if area.values() | length > 0 %}
+
             {% set module_layout = self.layout_class() %}
             {% include "zeit.web.core:templates/inc/asset/image_bgr_volume_header.tpl" %}
 
+        {% if area.values() | length > 0 %}
             <div class="{{ self.layout_class() }}-list">
                 {% for module in area.values()[0:3] -%}
                     {% set teaser = module | first_child %}
