@@ -6,6 +6,8 @@
   <legacy-mapping layout="float-portrait" variant_name="portrait" />
   <legacy-mapping layout="float-square" variant_name="square" />
   <legacy-mapping layout="large" variant_name="wide" />
+  <legacy-mapping layout="medium-float-left" display_mode="wide" />
+  <legacy-mapping layout="medium-float-right" display_mode="wide" />
   <legacy-mapping layout="portrait" variant_name="original" />
   <legacy-mapping layout="small" variant_name="wide" />
   <legacy-mapping layout="zco-portrait" variant_name="portrait" />

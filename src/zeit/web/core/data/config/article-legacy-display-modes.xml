@@ -6,6 +6,8 @@
   <legacy-mapping layout="float-portrait" display_mode="float" />
   <legacy-mapping layout="float-square" display_mode="float" />
   <legacy-mapping layout="large" display_mode="large" />
+  <legacy-mapping layout="medium-float-left" display_mode="column-width" />
+  <legacy-mapping layout="medium-float-right" display_mode="column-width" />
   <legacy-mapping layout="portrait" display_mode="float" />
   <legacy-mapping layout="small" display_mode="float" />
 
@@ -20,11 +22,10 @@
   <legacy-mapping layout="zmo-portrait-header" display_mode="header" />
   <legacy-mapping layout="zmo-narrow-header" display_mode="header" />
   <legacy-mapping layout="zmo-xl-header" display_mode="header" />
-
   <legacy-mapping layout="zmo-xl" display_mode="float" />
   <legacy-mapping layout="zmo-large-center" display_mode="large" />
-  <legacy-mapping layout="zmo-medium-left" display_mode="medium-float-left" />
-  <legacy-mapping layout="zmo-medium-right" display_mode="medium-float-right" />
+  <legacy-mapping layout="zmo-medium-left" display_mode="column-width" />
+  <legacy-mapping layout="zmo-medium-right" display_mode="column-width" />
   <legacy-mapping layout="zmo-medium-center" display_mode="column-width" />
   <legacy-mapping layout="zmo-small-left" display_mode="float" />
   <legacy-mapping layout="zmo-small-left-original" display_mode="float" />
