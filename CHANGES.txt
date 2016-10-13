@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing yet.
 
 
-3.12 (unreleased)
+3.12 (2016-10-13)
 -----------------
 
 - ZON-3352: Implement header for volume page
