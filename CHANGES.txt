@@ -4,25 +4,35 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- ZON-3273: Needs config for tube areas, see PR for the what-and-where
+- Nothing yet.
+
+
+3.13 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.12 (2016-10-13)
+-----------------
 
 - ZON-3352: Implement header for volume page
 
 - ZON-3362: Implement header navigation for volume page
 
-
-3.12 (unreleased)
------------------
-
-- BUG-532: Show table of contents before portraitbox or subheadline
-
 - ZON-3379: Add ressort areas teaser
 
 - ZON-3390: Toggle ressort area teasers
 
+- BUG-532: Show table of contents before portraitbox or subheadline
+
 - BUG-473: Clear floating article items
 
 - FIX: Be defensive about image groups with missing meta files
+
+- FIX: Be defensive about unresolveable LazyProxies in feeds
+
+- FIX: Skip missing remote images
 
 
 3.11 (2016-10-05)

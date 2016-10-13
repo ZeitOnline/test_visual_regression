@@ -16,11 +16,10 @@ log = logging.getLogger(__name__)
 @grokcore.component.adapter(zeit.web.site.area.rss.IRSSLink, name='jobbox')
 class ImageGroup(zeit.web.core.image.RemoteImageGroup):
 
-    def __init__(self, context):
-        super(ImageGroup, self).__init__(context)
-        self.image_url = context.image_url
-        self.uniqueId = 'http://xml.zeit.de/academics-image{}'.format(
-            context.image_url.replace('https://www.academics.de', ''))
+    @zeit.web.reify
+    def uniqueId(self):
+        return 'http://xml.zeit.de/academics-image{}'.format(
+            self.image_url.replace('https://www.academics.de', ''))
 
 
 @grokcore.component.implementer(zeit.web.site.area.rss.IRSSLink)
