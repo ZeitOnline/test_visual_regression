@@ -1024,6 +1024,8 @@ class Content(CeleraOneMixin, CommentMixin, Base):
         if self.context.product and self.context.product.show:
             label = self.context.product.label or self.context.product.title
             if self.context.product.show == 'issue' and self.context.volume:
+                if self.context.access == 'registration':
+                    return None
                 label += self.issue_format.format(self.context.volume,
                                                   self.context.year)
             elif self.context.product.show == 'source':
