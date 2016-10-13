@@ -10,7 +10,9 @@ POSTDEPLOY
 3.13 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-542: Fix ZMO gallery captions
+
+- MAINT: Cleanup ZMO article header and CSS
 
 
 3.12 (2016-10-13)

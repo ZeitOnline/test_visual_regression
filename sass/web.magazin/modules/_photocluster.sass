@@ -1,40 +1,31 @@
-.photocluster__wrap
-    @extend .gallery
-
 .photocluster
-    position: relative
-    overflow: hidden
+	@extend .gallery
 
-.photocluster__item
-    +respond-min($break-1)
-        &.size-s
-            width: 25%
-        &.size-m
-            width: 33.3333%
-        &.size-l
-            width: 50%
-    img
-        width: 100%
+.photocluster__container
+	margin: 0 auto
+	max-width: remify(920px)
+	position: relative
+	overflow: hidden
 
-.photocluster__figure
-	margin: 0
+.photocluster__media
+	+respond-min($break-1)
+		float: left
+		width: 50%
 
-.photocluster__caption
-    border-width: 1px 0
-    border-style: solid
-    border-color: #fff
-    font-family: $font-tabletgothic
-    padding: $junior 0
-    margin-top: $compact
-    +respond-max($break-1)
-        padding-left: $page-padding--small
-        padding-right: $page-padding--small
-    +respond-min($break-3)
-        margin-top: $large
+		&--small
+			width: 25%
 
-.photocluster__caption__text
-    p
-        font-size: $font-m
-        max-width: none
-    p:last-child
-        margin: 0
+.photocluster__description
+	box-sizing: content-box
+	color: #333
+	font-family: $font-tabletgothic
+	font-size: em(14px)
+	margin-top: $compact
+	padding-left: $page-padding--small
+	padding-right: $page-padding--small
+
+	+respond-min($break-3)
+		margin-top: $large
+
+	p:last-child
+		margin: 0

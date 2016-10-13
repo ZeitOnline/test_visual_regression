@@ -4,7 +4,7 @@
     <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.dobmeier</attribute>
     <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2014-04-02T15:30:07.712159+00:00</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name=&quot;LocalImage&quot; module=&quot;zeit.content.image.image&quot;/&gt; &lt;global name=&quot;IZMOContent&quot; module=&quot;zeit.magazin.interfaces&quot;/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
-    <attribute name="copyrights" ns="http://namespaces.zeit.de/CMS/document">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;© Nicole Zepter für ZEITmagazin&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+    <attribute name="copyrights" ns="http://namespaces.zeit.de/CMS/document">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Nicole Zepter f&#xFC;r ZEITmagazin&lt;/unicode&gt; &lt;string&gt;http://www.example.com&lt;/string&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
     <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:2c3b30ab-234c-425f-a5be-fc1bf9550449}</attribute>
     <attribute name="alignment" ns="http://namespaces.zeit.de/CMS/image">left</attribute>
     <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2014-04-05T06:36:09.658696+00:00</attribute>

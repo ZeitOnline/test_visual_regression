@@ -1,21 +1,15 @@
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 
-<div class="article__head-wrap">
-    <header class="article__head article__head--leinwand">
-        <div class="article__head__image">
-            {{ blocks['headerimage'](view.header_module) }}
+<header class="article__head article__head--leinwand">
+    {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
+    <div class="is-constrained is-centered">
+        <h1 itemprop="headline">
+            {{ blocks.supertitle() }}
+            {{ blocks.title() }}
+        </h1>
+        {{ blocks.subtitle(include_meta=True) }}
+        <div class="article__head__meta">
+            {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
         </div>
-        <div class="is-constrained">
-            <h1 itemprop="headline">
-                {{ blocks.supertitle() }}
-                {{ blocks.title() }}
-            </h1>
-            {{ blocks.subtitle(include_meta=True) }}
-            <span class="article__head__meta-wrap">
-                <span class="article__head__meta">
-                    {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
-                </span>
-            </span>
-        </div>
-    </header>
-</div>
+    </div>
+</header>

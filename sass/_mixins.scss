@@ -139,20 +139,6 @@
 	}
 }
 
-@mixin bleed($max: $medium-content-width + 2 * $gutter) {
-	margin-left: -$page-padding--small;
-	margin-right: -$page-padding--small;
-	@include respond-min($break-page-padding) {
-		margin-left: -$page-padding;
-		margin-right: -$page-padding;
-	}
-
-	@include respond-min($max) {
-		margin-left: 0;
-		margin-right: 0;
-	}
-}
-
 @mixin visuallyhidden {
 	border: 0;
 	clip: rect(0 0 0 0);
