@@ -160,7 +160,7 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
 
         // only enabled for certain assets
         if ( $parent.hasClass( 'high-resolution' ) && devicePixelRatio > 1 ) {
-            source.push( devicePixelRatio + 'x' );
+            source.push( 'scale_' + devicePixelRatio );
         }
 
         return {
