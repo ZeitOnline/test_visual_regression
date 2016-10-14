@@ -1,10 +1,14 @@
 .volume-overview-teaser
 	padding-bottom: $page-padding--small/2
 	&__media
-		display: block
+		display: block // no-flex fallback
+		display: flex
+		flex-direction: row
 		margin: $page-padding $page-padding--small/2 0
 	&__media-container
-		width: remify(130px)
+		width: remify(150px)
+		flex-grow: 1
+		margin-right: $page-padding
 	&__issue,
 	&__link
 		font-family: $font-tabletgothic
@@ -13,13 +17,14 @@
 		font-style: normal
 		letter-spacing: $letter-spacing-l
 		margin: 0
-	&__issue
-		margin-top: $page-padding--small/2
 	&__link
 		padding-bottom: remify(2px)
 		font-weight: normal
 		color: $zon-mid-grey
 		border-bottom: 1px solid $zon-mid-grey
+	&__caption
+		flex-grow: 1
+		padding-top: $page-padding
 
 +respond-min($break-tablet-min)
 	.volume-overview-teaser
@@ -28,4 +33,7 @@
 			display: inline-block
 			margin: $page-padding $page-padding--small/2 0
 		&__media-container
+			margin: 0
 			width: remify(220px)
+		&__caption
+			padding-top: $page-padding--small/2
