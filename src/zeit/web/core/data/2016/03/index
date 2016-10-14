@@ -61,7 +61,7 @@
           <block href="http://xml.zeit.de/zeit-online/article/fischer" />
           </container>
           <container cp:type="teaser" module="volume-header" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
-            <block href="http://xml.zeit.de/zeit-online/article/simple" />
+            <block href="http://xml.zeit.de/zeit-magazin/article/standardkolumne-beispiel" />
           </container>
           <container cp:type="teaser" module="volume-header" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
             <block href="http://xml.zeit.de/zeit-online/article/zeit" />
