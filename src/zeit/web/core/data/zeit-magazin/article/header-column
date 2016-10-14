@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
     <head>
-        <author expires="" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="">
+        <author expires="" href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="">
             <display_name py:pytype="str">Armin Mustermann</display_name>
         </author>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -13,16 +13,16 @@
         <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="copyrights" ns="http://namespaces.zeit.de/CMS/document">Quelle</attribute>
         <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2013-10-08T09:25:41.497174+00:00</attribute>
-        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2013-09-26T06:00:00+00:00</attribute>
-        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2013-10-08T09:26:47.102964+00:00</attribute>
-        <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow" xmlns:py="http://codespeak.net/lxml/objectify/pytype">2013-10-08T09:25:03.039843+00:00</attribute>
+        <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2013-10-08T09:25:41.497174+00:00</attribute>
+        <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2013-09-26T06:00:00+00:00</attribute>
+        <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2013-10-08T09:26:47.102964+00:00</attribute>
+        <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2013-10-08T09:25:03.039843+00:00</attribute>
         <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
         <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="genre" ns="http://namespaces.zeit.de/CMS/document">reportage</attribute>
         <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-        <attribute name="header_layout" ns="http://namespaces.zeit.de/CMS/document">text-only</attribute>
+        <attribute name="header_layout" ns="http://namespaces.zeit.de/CMS/document">column</attribute>
         <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-03-27T13:41:24.553806+00:00</attribute>
@@ -55,26 +55,20 @@
 &lt;/pickle&gt;</attribute>
     </head>
     <body>
-        <supertitle>Spitzmarke</supertitle>
-        <title>Kann Leipzig Hypezig überleben?</title>
+        <supertitle>column</supertitle>
+        <title>Kolumne</title>
         <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen – aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
         <division type="page">
-            <image align="left" alt="Die ist der Alttest" expires="" href="http://links.to" is_empty="False" layout="zmo-xl-header" publication-date="" src="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/katzencontent.jpg" title="Katze!" type="jpg">
+            <image align="left" alt="Die ist der Alttest" expires="" href="http://links.to" is_empty="False" layout="zmo-xl-header" publication-date="" src="http://xml.zeit.de/zeit-magazin/images/local/01.jpg" title="Katze!" type="jpg">
                 <bu py:pytype="str">Die ist der image sub text</bu>
                 <copyright link="http://foo.de">©foo</copyright>
             </image>
-            <p>Leipzig hat in den letzten Jahren viele neue Spitznamen bekommen.
-                <a class="" href="http://www.faz.net/aktuell/politik/inland/leipzig-dieser-ort-ist-kein-traum-11525236.html" target="_blank">
-                    &quot;Disneyland des Unperfekten&quot;</a> wurde die Stadt in einem Artikel der 
-                <em>
-                    FAZ</em>getauft, für ihre illegalen Klubs, die Raves im Wald, die Altbauwohnungen für 300 Euro Warmmiete. Dann wurde die klassische bürgerliche Kultur in Oper, Theatern und Konzerthäusern dazugerechnet und die Universität, die jährlich 28.000 Studenten anzieht, und Leipzig wurde zum neuen Berlin. Tolerant und offen sei die Stadt zudem, auch ein 
-                <a class="" href="http://www.zeit.de/2012/12/S-Homosexualitaet-Leipzig" target="_blank">
-                    &quot;Biotop der Schwulenszene&quot;</a>, wie die ZEIT berichtete. Als Sammelbegriff für die anhaltende mediale Aufmerksamkeit für Sachsens zweitgrößte Stadt hat sich schließlich &quot;Hypezig&quot; etabliert.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At error odio voluptates eveniet illum, consectetur mollitia totam a qui. Temporibus molestias dicta repellat minima. Amet adipisci, neque reprehenderit at accusamus et possimus tempora laborum asperiores quod quo cupiditate modi natus vel ad a quas nulla voluptatibus tenetur magni odio saepe consequuntur. Quidem magnam facere dolorum quos, aut, voluptatibus iste magni recusandae iure expedita, omnis ipsa facilis, nemo! Inventore natus odit dolores? Quis itaque blanditiis debitis adipisci alias, labore aperiam deleniti repellat dicta exercitationem! Laboriosam similique maxime alias sit veritatis, consectetur, vero tempore quaerat praesentium sunt iure repudiandae ipsum repellat deleniti odio minus nihil quam quis, odit placeat at. A illo, debitis asperiores eaque quidem. Neque dignissimos quae amet incidunt sint autem! Totam aut soluta, debitis iste magni accusamus.</p>
         </division>
     </body>
     <teaser>
-        <supertitle>Infektion</supertitle>
-        <title>Ebola-Patient in Leipziger Klinik gestorben</title>
-        <text>Der UN-Mitarbeiter war in sehr kritischem Zustand in das Klinikum eingeliefert worden. Er ist der erste Ebola-Erkrankte, der in Deutschland der Krankheit erlag.</text>
+        <supertitle>Jens Spahn</supertitle>
+        <title>Merz allein macht noch kein Wirtschaftsprofil</title>
+        <text>Der CDU-Politiker Jens Spahn fordert von seiner Partei Mut zu grundlegenden Reformen. Eine weitere Regulierung der Wirtschaft durch Schwarz-Rot lehnt er ab.</text>
     </teaser>
 </article>

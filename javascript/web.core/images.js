@@ -223,13 +223,14 @@ define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle'
      */
     function showImages( imageArray ) {
         imageArray = imageArray || $( images ).filter( function() {
-            var $parent = $( this ).closest( '.scaled-image' );
+            var $img = $( this ),
+                $parent = $img.closest( '.scaled-image' );
             // fix for galleries, remove, if we want img galleries lazy
-            if ( $( this ).closest( '.slide' ).length > 0 || $( this ).closest( '.photocluster__item' ).length > 0 ) {
+            if ( $img.closest( '.slide' ).length > 0 || $img.closest( '.photocluster' ).length > 0 ) {
                 return true;
             }
             // if lazyload or hidden filter out
-            if ( $( this ).data( 'tolazyload' ) === true || $parent.css( 'display' ) === 'none' ) {
+            if ( $img.data( 'tolazyload' ) === true || $parent.css( 'display' ) === 'none' ) {
                 return false;
             }
             return true;

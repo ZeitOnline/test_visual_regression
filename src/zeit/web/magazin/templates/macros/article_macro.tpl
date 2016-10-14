@@ -13,23 +13,15 @@
   <span class="article__head__title">{{ view.title }}</span>
 {%- endmacro %}
 
-{% macro subtitle(include_meta=False, with_quotes=False) -%}
+{% macro subtitle(include_meta=False) -%}
     <div class="article__head__subtitle">
-        <p>
-            <strong>
-                {% if with_quotes %}
-                    »{{ view.subtitle }}«
-                {% else %}
-                    {{ view.subtitle }}
-                {% endif %}
-                {% if include_meta and view.genre %}
-                    {{ view.genre | title }}
-                {% endif %}
-                {% if include_meta and view.authors %}
-                    {{ meta_author(view.authors, titlecase=view.genre==None) }}
-                {% endif %}
-            </strong>
-        </p>
+        {{ view.subtitle }}
+        {% if include_meta and view.genre %}
+            {{ view.genre | title }}
+        {% endif %}
+        {% if include_meta and view.authors %}
+            {{ meta_author(view.authors, titlecase=view.genre==None) }}
+        {% endif %}
     </div>
 {%- endmacro %}
 
@@ -77,11 +69,6 @@
     {% if ad.type == 'rectangle' %}
         <div class="iqdplace" data-place="medrec_8"></div>
     {% endif %}
-{%- endmacro %}
-
-{% macro headerimage(obj, loop) %}
-    {# BBB Wrap the article image in a macro until we have block templates in ZMO #}
-    {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" with context %}
 {%- endmacro %}
 
 {% macro video(obj) -%}
@@ -147,27 +134,6 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro photocluster(block) %}
-<div class="photocluster__wrap">
-    <div class="photocluster">
-    {% if block %}
-        {% for obj in block | reject("hidden_slide") -%}
-            <div class="photocluster__item">
-                <div class="scaled-image">
-                    {% include "zeit.web.magazin:templates/inc/asset/image_photocluster.tpl" %}
-                </div>
-            </div>
-        {%- endfor %}
-    {% endif %}
-    </div>
-    <div class="photocluster__caption is-constrained is-centered">
-        <div class="photocluster__caption__text">
-            {{ block.html | safe }}
-        </div>
-    </div>
-</div>
-{% endmacro %}
-
 {% macro meta_author(authors, class="article__head__meta__author", titlecase=True) %}
     {%- if authors -%}
         {%- for author in authors -%}
@@ -187,9 +153,5 @@
         {%- endfor -%}
     {%- endif -%}
 {% endmacro %}
-
-{% macro gallery(block) -%}
-    {% include 'zeit.web.core:templates/inc/blocks/gallery.html' %}
-{%- endmacro %}
 
 {% macro no_block(block) %}{% endmacro %}

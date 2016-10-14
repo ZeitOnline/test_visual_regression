@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags>
+      <tag type="free" score="4" uuid="9f611c7f-e172-42d5-9ad4-e7305de44215" url_value="biorhythmus">Biorhythmus</tag>
+      <tag type="free" score="4" uuid="a6a32ad9-ac6b-42c6-ae88-096c9b561725" url_value="kunststoff">Kunststoff</tag>
+      <tag type="free" score="4" uuid="3b3d1bb1-75ae-491c-8919-7003b067cc96" url_value="schlaf">Schlaf</tag>
+      <tag type="free" score="4" uuid="58b00f01-82b9-40b5-8e8f-e62e99a95943" url_value="umfrage">Umfrage</tag>
+      <tag type="free" score="3" uuid="d411666c-5c17-4bc7-b5e5-060e044bb050" url_value="euro">Euro</tag>
+    </rankedTags>
+    <header/>
+    <image base-id="http://xml.zeit.de/campus/image/testbild/" type="png"></image>
+    <nextread>
+      <reference type="intern" href="http://xml.zeit.de/zeit-magazin/article/01"></reference>
+    </nextread>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">8387429</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Mirko Borsche</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">zeit-magazin mode-design</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-09-23T06:01:00.798086+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-09-23T06:01:03.758907+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-09-23T06:01:03.955451+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-09-23T06:01:03.758907+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-09-23T06:01:03.128144+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">01.09.2016</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Niemand mag seinen Wecker. Er sieht meistens nicht schön aus. Er weckt. Dabei versucht er alles, um in unserer Gunst aufzusteigen.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Wecker: Von allen gehasst</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZMLB-2016-37-Strom-37</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">auto</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">Strom 37</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-09-23T06:00:58.359351+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.miklis</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">maximal</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">Strom 37</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">83</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/zeit-magazin/2016/37/Strom-37</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2016-09-01T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Magazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">306dbdb52bf844a5875c1e0d48c84c9d</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1378993011928</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">zeitmagazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZMLB-2016-37</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Unter Strom</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Es gibt wenig Menschen, die gern von einem Fiepen geweckt werden. Deswegen lebt der Wecker in ständiger Angst.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">mode-design</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">2017</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:80f44052-26e8-46a3-9b4d-5e15c9996266}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">37</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Unter Strom</supertitle>
+    <title>Mirko Borsche mag keine Wecker und testet trotzdem einen</title>
+    <byline>von Mirko Borsche</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/campus/image/testbild/" type="png" display_mode="column-width" variant_name="super"></image>
+      <p>Wenn es eine Umfrage gäbe, welches Haushaltsgerät das verhassteste ist, würde ganz sicher der Wecker gewinnen. <a class="" href="http://www.zeit.de/digital/mobil/2012-01/wecker-apps-test" target="_blank">Der Wecker</a> versucht wirklich alles, um in unserer Gunst ein klein wenig aufzusteigen – aber egal, ob er schöner aussieht, sanfter piepst oder sich rücksichtsvoll unserem Biorhythmus anpasst, im Zweifel muss er immer damit rechnen, an die Wand geknallt zu werden. Tragisch, irgendwie.</p>
+      <portraitbox layout="short" href="http://xml.zeit.de/portraitboxen/pia"/>
+      <p>So ist das leider auch bei mir. Ich hasse es, unsanft aus dem Schlaf gerissen zu werden. In meiner Aufwachpanik habe ich schon so manchen Wecker zerstört, weil ich zu stark draufgehauen oder ihn gleich vom Nachttisch gefegt habe. Am schlimmsten ist es, wenn ich sehr früh einen Flieger kriegen muss. Dann schlafe ich schlecht und suche ständig den Knopf, der das Display zum Leuchten bringt, um zu schauen, wie viel Uhr es ist, und um zu überprüfen, ob der Wecker auch wirklich gestellt ist. Danach kann ich aber erst recht nicht mehr schlafen.</p>
+      <gallery href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" contenttype="gallery"></gallery>
+      <p>Der Wecker Flip von Lexon hat mein Dilemma etwas gemindert. Um den Alarm einzuschalten, dreht man ihn einfach um, sodass die Seite oben ist, auf der "on" steht. Zum Ausschalten dreht man ihn auf die "off"-Seite, es ist also immer sehr klar, ob er an ist oder nicht. Weil er mit Gummi ummantelt ist, rutscht er dabei nicht aus der Hand. Wenn ich nachts sehen will, wie lange ich noch schlafen kann, reicht ein leichtes Antippen der Oberfläche, um kurz das Display aufleuchten zu lassen. Eine Snooze-Funktion gibt es auch. Alles gut und schön also. Aber ein Wecker ist ein Wecker ist ein Wecker. Ich respektiere seinen guten Willen. Doch wirklich mögen kann ich ihn einfach nicht.</p>
+    </division>
+    <image-credits>Foto  Lexon</image-credits>
+    <subtitle>Die wichtigste Aufgabe eines Weckers ist es, uns zu wecken. Doch ist er auch gestellt? Beim Modell "Flip" sehen Sie das auf einen Blick, und es geht im Handumdrehen.</subtitle>
+  </body>
+  <teaser>
+    <title>Von allen gehasst</title>
+    <text>Niemand mag seinen Wecker. Er sieht meistens nicht schön aus. Er macht unangenehme Geräusche. Er weckt. Dabei versucht er alles, um in unserer Gunst aufzusteigen.</text>
+    <supertitle>Wecker</supertitle>
+  </teaser>
+</article>
