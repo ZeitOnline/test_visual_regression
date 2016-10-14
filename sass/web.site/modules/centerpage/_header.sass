@@ -8,3 +8,53 @@
 		font-size: remify(22px)
 		margin: 0
 		text-align: center
+
+.centerpage-header--volume
+	background-color: transparent
+	border-bottom: 1px solid $color-border
+	text-align: center
+
+	.centerpage-header
+		&__text,
+		&__dropdown
+			display: block
+
+		&__title
+			font-size: remify(24px)
+
+		&__text
+			font-size: remify(16px)
+			font-family: $font-franziska
+			padding: $page-padding--small
+
+		&__selector
+			padding: $page-padding--small
+			text-align: center
+
+		&__dropdown,
+		&__link
+			display: inline-block
+
+		&__dropdown
+			width: remify(200px)
+			border-color: $zon-light-grey
+
+		&__link
+			margin-left: $page-padding
+			+animated-interaction()
+
+		&__link
+			+animated-interaction()
+			color: $zon-dark-grey
+			font-size: remify(12px)
+			border-bottom: 1px solid $zon-light-grey
+
+			text-align: left
+			font-weight: bold
+			letter-spacing: $letter-spacing-m
+
+		&__dropdown
+			height: 30px
+			background-color: $white
+
+
