@@ -1,0 +1,12 @@
+<div class="photocluster">
+    <div class="photocluster__container js-photocluster">
+    {% if block %}
+        {% for obj in block | reject("hidden_slide") -%}
+            {% include "zeit.web.magazin:templates/inc/asset/image_photocluster.tpl" %}
+        {%- endfor %}
+    {% endif %}
+    </div>
+    <div class="photocluster__description article__item">
+        {{ block.html | safe }}
+    </div>
+</div>
