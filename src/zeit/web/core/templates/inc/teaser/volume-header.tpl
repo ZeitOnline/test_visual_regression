@@ -3,3 +3,4 @@
 {% block layout %}volume-heading-teaser{% endblock %}
 {% block teaser_journalistic_format %}{% endblock %}
 {% block teaser_container %}{% endblock %}
+{% block zplus_kicker_logo %}{% endblock %}
