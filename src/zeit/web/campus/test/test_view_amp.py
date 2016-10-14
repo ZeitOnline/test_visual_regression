@@ -69,9 +69,9 @@ def test_amp_contains_required_microdata(testbrowser):
     # check ImageObject
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert image.cssselect('[itemprop="url"]')[0].get('content') == (
-        'http://localhost/campus/image/jura-studium-fleiss/wide__822x462')
-    assert image.cssselect('[itemprop="width"]')[0].get('content') == '822'
-    assert image.cssselect('[itemprop="height"]')[0].get('content') == '462'
+        'http://localhost/campus/image/jura-studium-fleiss/wide__820x461')
+    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
+    assert image.cssselect('[itemprop="height"]')[0].get('content') == '461'
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     url = copyright_holder.cssselect('[itemprop="url"]')[0]

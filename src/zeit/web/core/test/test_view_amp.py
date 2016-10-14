@@ -55,9 +55,9 @@ def test_amp_contains_required_microdata(testbrowser):
     assert image.get('itemtype') == 'http://schema.org/ImageObject'
     assert image.cssselect('[itemprop="url"]')[0].get('content') == (
         'http://localhost/zeit-online/image/'
-        'filmstill-hobbit-schlacht-fuenf-hee/wide__822x462')
-    assert image.cssselect('[itemprop="width"]')[0].get('content') == '822'
-    assert image.cssselect('[itemprop="height"]')[0].get('content') == '462'
+        'filmstill-hobbit-schlacht-fuenf-hee/wide__820x461')
+    assert image.cssselect('[itemprop="width"]')[0].get('content') == '820'
+    assert image.cssselect('[itemprop="height"]')[0].get('content') == '461'
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
@@ -198,3 +198,32 @@ def test_amp_article_links_contain_tracking_data_attributes(testbrowser):
     assert tag.get('data-vars-url') == tag.get('href').split('://')[1]
     assert tag.get('data-vars-link-text') == 'Weltwirtschaftsforum Davos'
     assert tag.get('data-vars-number') == '2'
+
+
+def test_amp_article_shows_volume_badge_for_subscription(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/zplus-zeit')
+    volume_badge = browser.cssselect('.volume-badge')[0]
+    volume_text = volume_badge.cssselect('.volume-badge__text')[0]
+
+    assert volume_text.text.strip() == u'Exklusiv für Abonnenten'
+    assert volume_badge.cssselect('.volume-badge__icon')
+    assert volume_badge.cssselect('.volume-badge__media')
+
+
+def test_amp_article_shows_volume_badge_for_registration(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/zplus-zeit-register')
+    volume_badge = browser.cssselect('.volume-badge')[0]
+    volume_text = volume_badge.cssselect('.volume-badge__text')[0]
+
+    assert volume_text.text.strip() == u'Aus der ZEIT Nr. 49/2014'
+    assert not volume_badge.cssselect('.volume-badge__icon')
+    assert volume_badge.cssselect('.volume-badge__media')
+
+
+def test_amp_article_shows_volume_badge_for_exclusive(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/zplus-zon')
+    volume_badge = browser.cssselect('.volume-badge')[0]
+    volume_text = volume_badge.cssselect('.volume-badge__text')[0]
+
+    assert volume_text.text.strip() == u'Exklusiv für Abonnenten'
+    assert volume_badge.cssselect('.volume-badge__icon')
