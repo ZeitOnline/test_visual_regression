@@ -1,13 +1,14 @@
-<div class="centerpage-header centerpage-header--volume">
-    <h1 class="centerpage-header__title">Archiv</h1>
+{%- extends "zeit.web.site:templates/inc/module/centerpage-header.html" -%}
+
+{% block modifier %}centerpage-header--volume{% endblock %}">
+{% block additional_content %}
     <span class="centerpage-header__text">Hier finden sie alle Artikel aus DIE ZEIT seit 1946.</span>
     <span class="centerpage-header__selector">
         <select class="centerpage-header__dropdown">
-            <option>2016</option>
-            <option>2015</option>
-            <option>2014</option>
-            <option>2013</option>
+            {% for year in view.volume_years_list %}
+                <option value="{{ year }}" {%- if year == view.volume_year %}selected{% endif -%}>{{ year }}</option>
+            {% endfor %}
         </select>
-        <a href="" class="centerpage-header__link">Suchen</a>
+        <a href="#" onclick="window.location.href=window.location.protocol+'//'+window.location.host+'/'+document.getElementsByClassName('centerpage-header__dropdown')[0].value;" class="centerpage-header__link">Suchen</a>
     </span>
-</div>
+{% endblock %}

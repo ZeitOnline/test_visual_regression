@@ -11,6 +11,8 @@ import zeit.web.core.centerpage
 import zeit.web.core.view
 import zeit.web.core.utils
 
+import datetime
+
 
 class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
@@ -52,6 +54,17 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
                                                               self.request),
                     'label': '{}/{}'.format(str(volume.volume).zfill(2),
                                             volume.year)}
+
+    @zeit.web.reify
+    def volume_years_list(self):
+        items = []
+        for year in range(datetime.datetime.now().year, 1945, -1):
+            items.append(year)
+        return items
+
+    @zeit.web.reify
+    def volume_year(self):
+        return self.context.year
 
     @zeit.web.reify
     def regions(self):
