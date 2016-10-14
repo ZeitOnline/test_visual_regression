@@ -10,6 +10,8 @@ POSTDEPLOY
 3.13 (unreleased)
 -----------------
 
+- ZON-3355: Add volume badge for AMP articles
+
 - BUG-542: Fix ZMO gallery captions
 
 - MAINT: Cleanup ZMO article header and CSS
