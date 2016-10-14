@@ -1,101 +1,80 @@
 .article
-    @extend %dancing_fonts
-    margin-left: auto
-    margin-right: auto
-    max-width: $max-page-width
+	@extend %dancing_fonts
 
-    &__item
-        margin-left: auto
-        margin-right: auto
-        max-width: remify($article-content-max-width)
+	&__item
+		margin-left: auto
+		margin-right: auto
+		max-width: remify($article-content-max-width)
 
-        &--marginalia
-            clear: both
-            margin: remify(40px auto)
-            width: 90%
+		&--marginalia
+			clear: both
+			margin: remify(40px auto)
+			width: 90%
 
-            +respond-min($break-2)
-                clear: left
-                float: left
-                margin: remify(8px 20px 28px 0)
-                max-width: em(240px)
+			+respond-min($break-2)
+				clear: left
+				float: left
+				margin: remify(8px 20px 28px 0)
+				max-width: em(240px)
 
-    &__footer
-        border-top: 1px solid $color-border
-        clear: both
-        margin: remify(48px auto 80px)
-        +respond-min($break-tablet-min)
-            margin-bottom: remify(48px)
+			+respond-min($break-3)
+				margin-left: remify(60px)
+
+	&__footer
+		border-top: 1px solid $color-border
+		clear: both
+		margin: remify(48px auto 80px)
+		+respond-min($break-tablet-min)
+			margin-bottom: remify(48px)
 
 // special case for app wrapper
 .article__wrap
-    &--is-wrapped
-        overflow: hidden
+	&--is-wrapped
+		overflow: hidden
 
 .article__body
-    font-family: $article-body-font
-    +respond-min($break-3)
-        padding-left: $gutter/2
-        padding-right: $gutter/2
+	font-family: $article-body-font
 
 .article__page
-    margin-bottom: remify(48px)
-
-.has-headline-switch
-    width: 100%
-    +respond-max($break-3)
-        .article__title-wrap
-            margin-bottom: $medium
-    +respond-minw-minh($break-3, em(800px))
-        display: table
-        .article__title-wrap
-            display: table-footer-group
+	margin-bottom: remify(48px)
 
 .article__subheading
-    @extend %headline
-    +body-type-zoom
-    margin-bottom: remify(8px)
-    margin-top: remify(28px)
+	@extend %headline
+	+body-type-zoom
+	margin-bottom: remify(8px)
+	margin-top: remify(28px)
 
 .article__meta__box
-    div
-        @extend %meta
-        font-size: $font-s
-        margin-top: $small
-    span
-        display: block
-        text-transform: uppercase
-        margin-top: $tiny
-        color: $grey
-        &:first-child
-            font-family: $font-tabletgothic
-            font-weight: bold
-
-figure
-	margin: $medium 0
-	width: 100%
-	.figure__media, img
-		max-width: 100%
-		width: 100%
-	.figure__caption, figcaption
-		@extend %figcaption
+	div
+		@extend %meta
 		font-size: $font-s
 		margin-top: $small
-	.figure__media--embed
-		.figure__media--embed__wrap
-			width: 100%
-			position: relative
-			background-color: black
-			padding-bottom: 56.25%
-		iframe
-			position: absolute
-			width: 100%
-			height: 100%
-			left: 0
-			top: 0
+	span
+		display: block
+		text-transform: uppercase
+		margin-top: $tiny
+		color: $grey
+		&:first-child
+			font-family: $font-tabletgothic
+			font-weight: bold
+
+.figure
+	margin: $medium auto
+	width: 100%
+.figure__media
+	max-width: 100%
+	width: 100%
+.figure__caption
+	color: $grey--mid
+	font-family: $sans-serif-base-font
+	font-size: em(14px)
+	margin-top: remify(16px)
+.figure__copyright
+	color: $grey
 .figure-horizontal, .figure-horizontal--right
+	margin: $medium 0
 	+pie-clearfix
-	.figure__media, img
+	.figure__media
 		max-width: remify($article-content-max-width)
 		width: 100%
 		display: block
@@ -104,7 +83,7 @@ figure
 			width: 60%
 		+respond-min($break-2)
 			width: 71.74%
-	.figure__caption, figcaption
+	.figure__caption
 		+respond-min($break-1)
 			+inline-block
 			padding-top: 5%
@@ -113,25 +92,25 @@ figure
 			width: 28.26%
 .figure-horizontal
 	+respond-min($break-1)
-		.figure__media, img
+		.figure__media
 			float: left
-		.figure__caption, figcaption
+		.figure__caption
 			float: right
 			padding-left: $gutter
 .figure-horizontal--right
 	+respond-min($break-1)
-		.figure__media, img
+		.figure__media
 			float: right
-		.figure__caption, figcaption
+		.figure__caption
 			float: left
 			padding-right: $gutter
 // hacked for longform-launch
 // todo: make responsible by height (NB)
 .figure-full-width
-	.figure__media, img
-		display: block
-		width: 100%
-	.figure__caption, figcaption
+	margin: $medium auto
+	max-width: remify(920px)
+	width: 100%
+	.figure__caption
 		max-width: remify($article-content-max-width)
 		margin-left: auto
 		margin-right: auto
@@ -139,7 +118,7 @@ figure
 			padding-right: 10%
 .figure-stamp, .figure-stamp--right
 	margin: $small auto
-	overflow: hidden
+	width: 100%
 	.video__still
 		width: 40%
 		margin: 0 $gutter $gutter/2 0
@@ -147,11 +126,11 @@ figure
 		.video__button
 			width: 50px
 			height: 50px
-		.figure__media, img
+		.figure__media
 			width: 100%
 			float: none
 			margin: 0
-	.figure__media, img
+	.figure__media
 		margin: 0 $gutter $gutter/2 0
 		max-width: $stamp-width
 		float: left
@@ -171,15 +150,20 @@ figure
 			.video__play-icon
 				width: 65px
 				height: 65px
-			.figure__media, img
+			.figure__media
 				margin-bottom: $gutter
-		.figure__media, img
+		.figure__media
 			float: none
 			margin-bottom: $gutter
 			width: 100%
+	+respond-min($break-3)
+		margin-left: remify(60px)
 .figure-stamp--right
 	+respond-min($break-2)
 		margin-left: $gutter
 		margin-right: 0
 		float: right
 		clear: right
+	+respond-min($break-3)
+		margin-left: $gutter
+		margin-right: remify(60px)

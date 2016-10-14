@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
-    <author href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="" expires="">
+    <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
       <display_name py:pytype="str">Armin Mustermann</display_name>
     </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
@@ -13,16 +13,16 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">Quelle</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-08T09:25:41.497174+00:00</attribute>
-    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
-    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
-    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-08T09:25:41.497174+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">reportage</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">leinwand</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">mode</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-27T13:41:24.553806+00:00</attribute>
@@ -55,13 +55,13 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <supertitle>Architektur</supertitle>
-    <title>Ein Traum von einem Haus</title>
+    <supertitle>mode</supertitle>
+    <title>Hochkant links</title>
     <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen – aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
     <division type="page">
-      <image src="http://xml.zeit.de/exampleimages/artikel/leinwands.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="2014-07-11T12:01:22+00:00" layout="zmo-xl-header" is_empty="False">
+      <image src="http://xml.zeit.de/exampleimages/artikel/mode.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
         <bu py:pytype="str">Die ist der image sub text</bu>
-        <copyright link="http://foo.de">©foo</copyright>
+        <copyright py:pytype="str">©foo</copyright>
       </image>
       <p>Leipzig hat in den letzten Jahren viele neue Spitznamen bekommen.<a class="" href="http://www.faz.net/aktuell/politik/inland/leipzig-dieser-ort-ist-kein-traum-11525236.html" target="_blank">"Disneyland des Unperfekten"</a> wurde die Stadt in einem Artikel der <em>FAZ</em>getauft, für ihre illegalen Klubs, die Raves im Wald, die Altbauwohnungen für 300 Euro Warmmiete. Dann wurde die klassische bürgerliche Kultur in Oper, Theatern und Konzerthäusern dazugerechnet und die Universität, die jährlich 28.000 Studenten anzieht, und Leipzig wurde zum neuen Berlin. Tolerant und offen sei die Stadt zudem, auch ein <a class="" href="http://www.zeit.de/2012/12/S-Homosexualitaet-Leipzig" target="_blank">"Biotop der Schwulenszene"</a>, wie die ZEIT berichtete. Als Sammelbegriff für die anhaltende mediale Aufmerksamkeit für Sachsens zweitgrößte Stadt hat sich schließlich "Hypezig" etabliert.</p>
     </division>

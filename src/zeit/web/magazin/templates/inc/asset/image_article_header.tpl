@@ -1,3 +1,7 @@
-{% extends "zeit.web.magazin:templates/inc/asset/image_article.tpl" %}
+{% extends "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
 
-{% block media_block %}figure-header{% endblock %}
+{% set image = get_image(view.header_module, fallback=False) %}
+{% set href = image.href %}
+{% set image_itemprop = 'image' %}
+{% set module_layout = 'article__head' %}
+{% block media_caption_class %}{{ module_layout }}{% endblock %}

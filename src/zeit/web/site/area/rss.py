@@ -106,13 +106,8 @@ def rsslink_to_imagegroup(context):
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 @grokcore.component.adapter(IRSSLink)
-class RSSImages(object):
-
-    fill_color = None
-
-    def __init__(self, context):
-        self.context = context
-        self.image = zeit.content.image.interfaces.IImageGroup(context)
+class RSSImages(zeit.web.core.image.RemoteImages):
+    pass
 
 
 def parse_feed(url, kind, timeout=2):

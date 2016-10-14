@@ -1,27 +1,21 @@
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 
-<div class="article__head-wrap">
-    <header class="article__head article__head--traum">
-        <div class="is-constrained">
-            <h1 itemprop="headline">
-                {{ blocks.supertitle() }}
-                {{ blocks.title() }}
-            </h1>
-            {{ blocks.subtitle() }}
-        </div>
-        {% if view.header_module %}
-            <div class="article__head__image">
-                {{ blocks['headerimage'](view.header_module) }}
+<header class="article__head article__head--traum">
+    <div class="is-constrained is-centered">
+        <h1 itemprop="headline">
+            {{ blocks.supertitle() }}
+            {{ blocks.title() }}
+        </h1>
+        {{ blocks.subtitle() }}
+    </div>
+    {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
+    <div class="is-constrained is-centered">
+        <div class="article__head__meta">
+            <div class="article__head__byline">
+                {{ view.genre }}
+                {{ blocks.meta_author(view.authors) }}
             </div>
-        {% endif %}
-        <span class="article__head__meta-wrap is-constrained">
-            <span class="article__head__meta">
-                <div class="article__head__meta__offset">
-                    {{ view.genre }}
-                    {{ blocks.meta_author(view.authors) }}
-                </div>
-                {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
-            </span>
-        </span>
-    </header>
-</div>
+            {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
+        </div>
+    </div>
+</header>

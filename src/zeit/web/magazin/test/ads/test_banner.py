@@ -46,7 +46,7 @@ def test_banner_should_fallback_on_not_registered_banner_types(application):
 
 
 def test_banner_should_not_be_displayed_on_short_pages(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header2')
+    browser = testbrowser('/zeit-magazin/article/header-traum')
     assert not browser.cssselect('#iqadtile4')
 
 
