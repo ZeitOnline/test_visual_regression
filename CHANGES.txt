@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - BUG-542: Fix ZMO gallery captions
 
+- BUG-555: Remove styles for unused image display modes
+
 - MAINT: Cleanup ZMO article header and CSS
 
 
