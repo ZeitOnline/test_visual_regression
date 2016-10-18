@@ -12,10 +12,10 @@ def test_article_page_should_contain_blocks(testserver, httpbrowser):
     portraitbox = page.cssselect('.portraitbox.figure-stamp')
     raw = page.cssselect('.raw')
 
-    assert len(paragraph) == 11
+    assert len(paragraph) == 9
     assert 'paragraph article__item' in paragraph[0].get('class')
 
-    assert len(intertitle) == 7
+    assert len(intertitle) == 5
     assert 'article__subheading article__item' in intertitle[0].get('class')
 
     assert len(portraitbox) == 1
