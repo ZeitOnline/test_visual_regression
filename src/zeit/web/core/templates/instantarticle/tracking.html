@@ -18,18 +18,17 @@
                     return this.isMobileView() ? 'mobile.site' : 'desktop.site';
                 },
                 getTrackingBreakpointAlike: function() {
-                    var width = this.getClientWidth(),
-                        breakpoint = 'mobile';
-                    if ( width >= 520 ) {
-                        breakpoint = 'phablet';
-                        if ( width >= 768 ) {
-                            breakpoint = 'tablet';
-                            if ( width >= 980 ) {
-                                breakpoint = 'stationär';
-                            }
-                        }
+                    var width = this.getClientWidth();
+
+                    if ( width >= 980 ) {
+                        return 'stationaer';
+                    } else if ( width >= 768 ) {
+                        return 'tablet';
+                    } else if ( width >= 520 ) {
+                        return 'phablet';
                     }
-                    return breakpoint;
+
+                    return 'mobile';
                 }
             };
         </script>
