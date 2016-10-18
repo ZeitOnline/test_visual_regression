@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3355: Add volume badge for AMP articles
 
+- ZON-3375: Ensure linked image templates can handle nofollow flag
+
 - BUG-542: Fix ZMO gallery captions
 
 - BUG-555: Remove styles for unused image display modes
