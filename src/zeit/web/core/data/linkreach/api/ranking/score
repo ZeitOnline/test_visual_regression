@@ -2,7 +2,7 @@
 	{
 		"location": "/politik/deutschland/2015-09/fluechtlinge-bundesregierung-milliardenpaket",
 		"score": 2.58941317016317,
-		"uniqueId": "http://xml.zeit.de/zeit-magazin/article/header1",
+		"uniqueId": "http://xml.zeit.de/zeit-magazin/article/header-default",
 		"ressort": "politik",
 		"sub_ressort": "deutschland",
 		"date_first_released": "2015-09-07T01:29:23Z",
@@ -18,7 +18,7 @@
 	{
 		"location": "/politik/deutschland/2015-09/muenchen-fluechtlinge-unterstuetzung-verteilung",
 		"score": 2.450124125874126,
-		"uniqueId": "http://xml.zeit.de/zeit-magazin/article/header2",
+		"uniqueId": "http://xml.zeit.de/zeit-magazin/article/header-traum",
 		"ressort": "politik",
 		"sub_ressort": "deutschland",
 		"date_first_released": "2015-09-06T15:23:29Z",
@@ -34,7 +34,7 @@
 	{
 		"location": "/gesellschaft/zeitgeschehen/2015-09/fluchthilfe-fluechtlinge-wien-budapest-auto-konvoi",
 		"score": 2.0926754079254075,
-		"uniqueId": "http://xml.zeit.de/zeit-magazin/article/header3",
+		"uniqueId": "http://xml.zeit.de/zeit-magazin/article/header-text-only",
 		"ressort": "gesellschaft",
 		"sub_ressort": "zeitgeschehen",
 		"date_first_released": "2015-09-06T17:37:16Z",

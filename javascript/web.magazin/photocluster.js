@@ -13,11 +13,10 @@ define([ 'jquery' ], function( $ ) {
      * @function init
      */
     var init = function() {
-        var $cluster = $('.photocluster');
+        var $cluster = $('.js-photocluster');
 
         if ($cluster.length) {
             var $photos = $cluster.children();
-            var classes = ['size-s', 'size-m', 'size-l'];
             var noGlobal = ( window.jQuery !== $ );
 
             // hack for old library freewall.js
@@ -25,13 +24,6 @@ define([ 'jquery' ], function( $ ) {
             if ( noGlobal ) {
                 window.jQuery = window.$ = $;
             }
-
-            // run through all photo boxes
-            $photos.each(function(idx, photo){
-                var $photo = $(photo);
-                // add random sizing class
-                $photo.addClass(classes[Math.floor(Math.random()*classes.length)]);
-            });
 
             /**
              * require photocluster library
@@ -44,12 +36,14 @@ define([ 'jquery' ], function( $ ) {
                     $.noConflict( true );
                 }
 
-                var wall = new freewall('.photocluster');
+                var wall = new freewall('.js-photocluster');
                 wall.reset({
-                    selector: '.photocluster__item',
+                    selector: '.photocluster__media',
                     animate: true,
-                    cellW: 200,
+                    cellW: 221,
                     cellH: 'auto',
+                    gutterX: 12,
+                    gutterY: 12,
                     onResize: function() {
                         wall.fitWidth();
                     }
