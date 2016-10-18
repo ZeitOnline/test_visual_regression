@@ -6,7 +6,5 @@
 
   <display-mode id="header" available="zeit.magazin.interfaces.IZMOContent">Artikelkopf</display-mode>
 
-  <display-mode id="medium-float-left" available="zeit.magazin.interfaces.IZMOContent">M links</display-mode>
-  <display-mode id="medium-float-right" available="zeit.magazin.interfaces.IZMOContent">M rechts</display-mode>
   <display-mode id="small-float-right" available="zeit.magazin.interfaces.IZMOContent">S rechts</display-mode>
 </display-modes>
