@@ -7,8 +7,6 @@
 {% block media_block -%}
 {{ {'large': 'figure-full-width',
     'column-width': 'figure is-constrained is-centered',
-    'medium-float-left': 'figure-horizontal',
-    'medium-float-right': 'figure-horizontal--right',
     'small-float-right': 'figure-stamp--right'}.get(
         block.display_mode, 'figure-stamp') }}
 {%- endblock %}
