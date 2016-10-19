@@ -1824,7 +1824,9 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
             in zplus_media[0].attrib['src'])
 
 
-def test_zplus_register_print_article_has_correct_markup(testbrowser):
+def test_zplus_register_print_article_has_correct_markup(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'reader_revenue': True}.get)
     browser = testbrowser('/zeit-online/article/zplus-zeit-register')
 
     zplus_box = browser.cssselect('.zplus')
@@ -1854,6 +1856,16 @@ def test_zplus_register_print_article_has_correct_markup(testbrowser):
     assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
             in zplus_media[0].attrib['src'])
     assert article_metadata_source.__len__() == 0
+
+
+def test_zplus_register_print_article_has_correct_markup_if_reader_revenue_off(
+    testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'reader_revenue': False}.get)
+    browser = testbrowser('/zeit-online/article/zplus-zeit-register')
+
+    article_metadata_source = browser.cssselect('.metadata__source')
+    assert article_metadata_source.__len__() == 1
 
 
 def test_free_article_has_no_zplus_badge(testbrowser):
