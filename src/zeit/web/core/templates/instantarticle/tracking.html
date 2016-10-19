@@ -9,7 +9,12 @@
             window.FBIA = {
                 tabletMinWidth: 768,
                 getClientWidth: function() {
-                    return window.screen.width || 0;
+                    try {
+                        return window.screen.width || 0;
+                    }
+                    catch (e) {
+                        return 0;
+                    }
                 },
                 isMobileView: function() {
                     return this.getClientWidth() < this.tabletMinWidth;
