@@ -112,6 +112,11 @@ class Image(object):
             return self._meta.links_to
 
     @zeit.web.reify
+    def nofollow(self):
+        if self._meta:
+            return self._meta.nofollow
+
+    @zeit.web.reify
     def origin(self):
         if self._meta:
             return self._meta.origin
