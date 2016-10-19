@@ -111,7 +111,7 @@ def test_teaser_landscape_small_has_correct_markup(testbrowser):
     assert supertitle.text.strip() == u'Raffiniert kochen'
     assert title.text.strip() == 'Die perfekte Illusion'
     assert u'Safran, Salzzitronen' in subtitle.text.strip()
-    assert re.search('frau-isst-suppe-2/wide__822x462',
+    assert re.search('frau-isst-suppe-2/wide__820x461',
                      img.get('src'))
     assert img.get('alt') == 'Eine Frau isst Paprikasuppe'
 
@@ -170,7 +170,7 @@ def test_teaser_landscape_large_has_correct_markup(testbrowser):
     assert supertitle.text.strip() == u'Raffiniert kochen'
     assert title.text.strip() == 'Die perfekte Illusion'
     assert u'Safran, Salzzitronen' in subtitle.text.strip()
-    assert re.search('frau-isst-suppe-2/wide__822x462',
+    assert re.search('frau-isst-suppe-2/wide__820x461',
                      img.get('src'))
     assert img.get('alt') == 'Eine Frau isst Paprikasuppe'
 

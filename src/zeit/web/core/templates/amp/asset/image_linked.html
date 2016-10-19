@@ -2,7 +2,7 @@
 
 {% block media %}
     {% if href -%}
-        <a class="figure__link" title="{{ image.title }}" href="{{ href }}">
+        <a class="figure__link" title="{{ image.title }}" href="{{ href }}"{% if image.nofollow %} rel="nofollow"{% endif %}>
     {%- endif %}
     {{ super() }}
     {% if href -%}

@@ -69,10 +69,11 @@ def test_inline_gallery_uses_responsive_images_with_ratio(testbrowser):
 
 def test_photocluster_has_expected_markup(testbrowser):
     browser = testbrowser('/zeit-magazin/article/cluster-beispiel')
-    img_wrap = browser.cssselect(".photocluster .photocluster__item")
-    imgs = browser.cssselect(".photocluster img")
-    assert len(img_wrap) == 7
-    assert len(imgs) == 7
+    cluster = browser.cssselect('.photocluster')[0]
+    media = cluster.cssselect('.photocluster__media')
+    images = cluster.cssselect('img')
+    assert len(media) == 7
+    assert len(images) == 7
 
 
 def test_photocluster_has_expected_content(testbrowser):

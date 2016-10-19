@@ -1,16 +1,14 @@
 {% extends "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
 
-{% set image = get_image(obj, fallback=False) %}
+{% set image = get_image(block, fallback=False) %}
 {% set href = image.href %}
 {% set image_itemprop = 'image' %}
 
 {% block media_block -%}
 {{ {'large': 'figure-full-width',
     'column-width': 'figure is-constrained is-centered',
-    'medium-float-left': 'figure-horizontal',
-    'medium-float-right': 'figure-horizontal--right',
     'small-float-right': 'figure-stamp--right'}.get(
-        obj.display_mode, 'figure-stamp') }}
+        block.display_mode, 'figure-stamp') }}
 {%- endblock %}
 
 {% block media_block_helper -%}
@@ -23,7 +21,7 @@ figure__media
 
 {% block media_caption_content -%}
     {% if image.caption -%}
-        <span class="figure__text">{{ image.caption }}</span>
+        <span class="figure__text" itemprop="caption">{{ image.caption }}</span>
     {% endif %}
     {{ super() }}
 {%- endblock %}
