@@ -51,9 +51,8 @@
                     {# longforms do have a special headerimage (which has the same name as article headerimages) #}
 
                     {% if is_instance(view.header_module, 'zeit.web.core.block.Image') %}
-                        {% set block_type = 'headerimage' %}
                         <div class="article__head-image">
-                            {% set obj = view.header_module %}
+                            {% set block = view.header_module %}
                             {% include "zeit.web.magazin:templates/inc/asset/image_article_longform.tpl" %}
                         </div>
                     {% elif is_instance(view.header_module, 'zeit.web.core.block.HeaderVideo') %}

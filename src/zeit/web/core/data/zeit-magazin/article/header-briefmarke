@@ -13,16 +13,16 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">Quelle</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-08T09:25:41.497174+00:00</attribute>
-    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
-    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
-    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-08T09:25:41.497174+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">reportage</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">leinwand</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">briefmarke</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-03-27T13:41:24.553806+00:00</attribute>
@@ -55,11 +55,11 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <supertitle>Architektur</supertitle>
-    <title>Ein Traum von einem Haus</title>
+    <supertitle>briefmarke</supertitle>
+    <title>Hochkant rechts</title>
     <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen – aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
     <division type="page">
-      <image src="http://xml.zeit.de/exampleimages/artikel/leinwand.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
+      <image src="http://xml.zeit.de/exampleimages/artikel/briefmarke.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
         <bu py:pytype="str">Die ist der image sub text</bu>
         <copyright link="http://foo.de">©foo</copyright>
       </image>

@@ -60,12 +60,14 @@
 	&--zett,
 	&--zplus-parquet,
 	&--zmo-parquet,
-	&--zco-parquet
+	&--zco-parquet,
+	&--volume-header
 		padding: 0
 		position: relative
 	&--author-list,
 	&--newsticker,
 	&--overview,
+	&--print-ressort,
 	&--ranking,
 	&--tube
 		padding: 0 $page-padding--small
@@ -93,11 +95,32 @@
 		border-top: 1px solid $color-border
 		padding-bottom: $page-padding
 
+	&--gallery,
+	&--shop
+		background-color: $zon-lighter-grey
+		padding: 0 $page-padding remify(40px)
+	// Printbanderole
+	&--printkiosk
+		background-color: $color-dark-background
+		background-image: linear-gradient(to right, #4A4A4A 0%, #2C2A2B 30%, #494A4E 60%, #3B3B3D 80%, #4A4A4A 100%)
+		color: $white
+		padding: remify(24px 0 30px)
+		text-align: center
+
+	&__headline
+		color: $zon-dark-grey
+		font-size: em(16px)
+		letter-spacing: $letter-spacing-m
+		line-height: 1.2
+		margin: remify(60px 0 8px)
+		text-transform: uppercase
+
 	+respond-min($break-areas)
 		float: left
 		&--author-list,
 		&--newsticker,
 		&--overview,
+		&--print-ressort,
 		&--ranking,
 		&--tube
 			clear: both
@@ -130,18 +153,13 @@
 			width: 33.33%
 		&--quartet
 			width: 25%
+		&--print-ressort
+			max-width: remify(620px)
 
-	&--gallery,
-	&--shop
-		background-color: $zon-lighter-grey
-		padding: 0 $page-padding remify(40px)
-	// Printbanderole
-	&--printkiosk
-		background-color: $color-dark-background
-		background-image: linear-gradient(to right, #4A4A4A 0%, #2C2A2B 30%, #494A4E 60%, #3B3B3D 80%, #4A4A4A 100%)
-		color: $white
-		padding: remify(24px 0 30px)
-		text-align: center
+		&__headline
+			border-bottom: 1px solid $color-border
+			font-size: em(18px)
+			padding-bottom: remify(12px)
 
 	+respond-min($break-desktop-min)
 		&--ranking,

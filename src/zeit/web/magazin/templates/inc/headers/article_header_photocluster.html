@@ -1,22 +1,16 @@
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context%}
+{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 
-<div class="article__head-wrap">
-    <header class="article__head article__head--text-only">
-        <h1 itemprop="headline">
-            {{ blocks.supertitle() }}
-            {{ blocks.title() }}
-        </h1>
-        {{ blocks.subtitle() }}
-        <span class="article__head__meta-wrap">
-            <span class="article__head__meta">
-                <div class="article__head__meta__offset">
-                    {% if view.genre -%}
-                        {{view.genre}}
-                    {%- endif %}
-                    {{ blocks.meta_author(view.authors) }}
-                </div>
-                {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
-            </span>
-        </span>
-    </header>
-</div>
+<header class="article__head article__head--text-only">
+    <h1 itemprop="headline">
+        {{ blocks.supertitle() }}
+        {{ blocks.title() }}
+    </h1>
+    {{ blocks.subtitle() }}
+    <div class="article__head__meta">
+        <div class="article__head__byline">
+            {{ view.genre }}
+            {{ blocks.meta_author(view.authors) }}
+        </div>
+        {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
+    </div>
+</header>

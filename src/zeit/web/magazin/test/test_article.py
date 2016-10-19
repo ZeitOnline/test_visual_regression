@@ -487,76 +487,74 @@ def test_article_1_10_have_correct_h1(testbrowser):
 
 
 def test_header_articles_produce_no_error(testbrowser):
-    assert testbrowser('/zeit-magazin/article/header1').cssselect(
+    assert testbrowser('/zeit-magazin/article/header-default').cssselect(
         'div.article__wrap')
-    assert testbrowser('/zeit-magazin/article/header2').cssselect(
+    assert testbrowser('/zeit-magazin/article/header-traum').cssselect(
         'div.article__wrap')
-    assert testbrowser('/zeit-magazin/article/header3').cssselect(
+    assert testbrowser('/zeit-magazin/article/header-text-only').cssselect(
         'div.article__wrap')
-    assert testbrowser('/zeit-magazin/article/header4').cssselect(
+    assert testbrowser('/zeit-magazin/article/header-briefmarke').cssselect(
         'div.article__wrap')
-    assert testbrowser('/zeit-magazin/article/header5').cssselect(
+    assert testbrowser('/zeit-magazin/article/header-leinwand').cssselect(
         'div.article__wrap')
-    assert testbrowser('/zeit-magazin/article/header5-2').cssselect(
-        'div.article__wrap')
-    assert testbrowser('/zeit-magazin/article/header6').cssselect(
+    assert testbrowser('/zeit-magazin/article/header-mode').cssselect(
         'div.article__wrap')
 
 
 def test_header_articles_have_correct_h1(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header1')
+    browser = testbrowser('/zeit-magazin/article/header-default')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/zeit-magazin/article/header2')
+    browser = testbrowser('/zeit-magazin/article/header-traum')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/zeit-magazin/article/header3')
+    browser = testbrowser('/zeit-magazin/article/header-text-only')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/zeit-magazin/article/header4')
+    browser = testbrowser('/zeit-magazin/article/header-briefmarke')
     assert browser.cssselect('h1 > .article__head__title')
-    browser = testbrowser('/zeit-magazin/article/header5')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
-    browser = testbrowser('/zeit-magazin/article/header6')
+    browser = testbrowser('/zeit-magazin/article/header-leinwand')
     assert browser.cssselect('h1 > .article__head__title')
     assert browser.cssselect('h1 > .article__head__supertitle')
-
-
-def test_article_header2_has_correct_subtitle(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header2')
-    assert 'Wie viele Flüchtlingskinder bin '\
-        'ich eine Suchende, Getriebene.' in browser.contents
-
-
-def test_artikel_header_header1_should_have_correct_header_source(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header1')
+    browser = testbrowser('/zeit-magazin/article/header-mode')
     assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .article__head__supertitle')
 
 
-def test_artikel_header_header2_should_have_correct_source(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header2')
+def test_article_header_traum_has_correct_subtitle(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-traum')
+    subtitle = browser.cssselect('.article__head__subtitle')[0]
+    assert subtitle.text_content().strip() == (
+        u'Wie viele Flüchtlingskinder bin ich eine Suchende, Getriebene.')
+
+
+def test_artikel_header_default_should_have_correct_source(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-default')
+    assert browser.cssselect('header.article__head.article__head--default')
+
+
+def test_artikel_header_traum_should_have_correct_source(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-traum')
     assert browser.cssselect('header.article__head.article__head--traum')
 
 
-def test_artikel_header_header3_should_have_correct_source(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header3')
+def test_artikel_header_text_should_have_correct_source(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-text-only')
     assert browser.cssselect('header.article__head.article__head--text-only')
 
 
-def test_artikel_header_header4_should_have_correct_source(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header4')
-    assert browser.cssselect(
-        'header.article__head.article__head--stamp.is-constrained')
+def test_artikel_header_briefmarke_should_have_correct_source(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-briefmarke')
+    assert browser.cssselect('header.article__head.article__head--stamp')
 
 
-def test_artikel_header_header5_should_have_correct_source(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header5')
+def test_artikel_header_leinwand_should_have_correct_source(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-leinwand')
     assert browser.cssselect('header.article__head.article__head--leinwand')
 
 
-def test_artikel_header_header6_should_have_correct_source(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/header6')
+def test_artikel_header_mode_should_have_correct_source(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-mode')
     assert browser.cssselect('header.article__head.article__head--mode')
 
 
@@ -664,12 +662,14 @@ def test_article02_should_have_esi_include(testbrowser):
 
 
 @pytest.mark.parametrize(
-    'path', [('/zeit-magazin/article/03'), ('/zeit-magazin/article/05'),
-             ('/zeit-magazin/article/header1')])
-def test_article_has_linked_copyright(testbrowser, path):
+    'path, selector', [
+        ('/zeit-magazin/article/03', '.figure-stamp .figure__copyright'),
+        ('/zeit-magazin/article/05', '.figure-longform .figure__copyright'),
+        ('/zeit-magazin/article/header-default', '.article__head__copyright')])
+def test_article_has_linked_copyright(testbrowser, path, selector):
     browser = testbrowser(path)
-    assert browser.cssselect('.figure__copyright')
-    copyright = browser.cssselect('.figure__copyright')[0]
+    assert browser.cssselect(selector)
+    copyright = browser.cssselect(selector)[0]
     assert copyright.get('itemprop') == 'copyrightHolder'
     assert copyright.cssselect('a')
     link = copyright.cssselect('a')[0]
@@ -737,17 +737,17 @@ def test_articles_should_have_exact_one_h1(testbrowser):
     assert len(testbrowser('/zeit-magazin/article/09').cssselect('h1')) == 1
     assert len(testbrowser('/zeit-magazin/article/10').cssselect('h1')) == 1
     assert len(testbrowser(
-               '/zeit-magazin/article/header1').cssselect('h1')) == 1
+               '/zeit-magazin/article/header-default').cssselect('h1')) == 1
     assert len(testbrowser(
-               '/zeit-magazin/article/header2').cssselect('h1')) == 1
+               '/zeit-magazin/article/header-traum').cssselect('h1')) == 1
     assert len(testbrowser(
-               '/zeit-magazin/article/header3').cssselect('h1')) == 1
+               '/zeit-magazin/article/header-text-only').cssselect('h1')) == 1
     assert len(testbrowser(
-               '/zeit-magazin/article/header4').cssselect('h1')) == 1
+               '/zeit-magazin/article/header-briefmarke').cssselect('h1')) == 1
     assert len(testbrowser(
-               '/zeit-magazin/article/header5').cssselect('h1')) == 1
+               '/zeit-magazin/article/header-leinwand').cssselect('h1')) == 1
     assert len(testbrowser(
-               '/zeit-magazin/article/header6').cssselect('h1')) == 1
+               '/zeit-magazin/article/header-mode').cssselect('h1')) == 1
 
 
 def test_longform_should_have_exact_one_h1(testbrowser):

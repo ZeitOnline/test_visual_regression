@@ -40,6 +40,7 @@
 				max-width: remify(820px)
 
 			&--marginalia
+				clear: left
 				float: left
 				margin: remify(14px 25px 24px 0)
 				width: remify(205px)
@@ -135,21 +136,20 @@
 		vertical-align: middle
 		line-height: remify(40px)
 		font-size: em(12px)
-		color: $grey
+		color: $zon-grey
 		text-transform: uppercase
 		letter-spacing: $zon-letter-spacing-l
 	&__link
 		+animated-interaction()
-		color: $grey
-		border-bottom: 1px solid $grey
+		color: $zon-grey
+		border-bottom: 1px solid $zon-grey
 	&__media
-		width: remify(82px)
-	&__cover
 		display: none
+		width: remify(82px)
 
 	// hide cover on very small displays
 	+respond-min(em(350px))
-		&__cover
+		&__media
 			display: block
 			position: absolute
 			right: remify(14px)
@@ -167,8 +167,9 @@
 		&__label
 			display: block
 		&__media
-			width: remify(125px)
 			margin: auto
+			position: static
+			width: remify(125px)
 		&__text
 			line-height: remify(20px)
 			display: block
@@ -176,9 +177,6 @@
 			text-align: center
 			padding: remify(18px 0 21px 0)
 			font-size: em(13px)
-		&__cover
-			position: static
-			width: 100%
 		&__marker
 			position: absolute
 			top: remify(100px)

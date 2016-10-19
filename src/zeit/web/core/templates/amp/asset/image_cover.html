@@ -1,0 +1,9 @@
+{% extends "zeit.web.core:templates/amp/asset/image.html" %}
+
+{% set image = get_image(view.zplus_label.cover, fallback=False) %}
+{% set image_sources = [82, 124] %}
+{% block media_block %}volume-badge__media{% endblock %}
+{% block caption %}{% endblock %}
+{% block sizes -%}
+    sizes="(min-width: 768px) 124px, 82px"
+{% endblock %}

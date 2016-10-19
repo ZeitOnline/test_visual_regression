@@ -86,6 +86,22 @@ def test_rss_images_should_render(testbrowser):
     assert browser.cssselect('.cp-area--zett article img')
 
 
+def test_rss_should_not_have_imagegroup_if_it_has_no_image_url(application):
+    xml_str = """
+        <item>
+            <title><![CDATA[]]></title>
+            <link><![CDATA[]]></link>
+            <description><![CDATA[]]></description>
+        </item>"""
+
+    area = mock.Mock()
+    area.kind = 'spektrum'
+    xml = lxml.etree.fromstring(xml_str)
+    link = zeit.web.site.area.spektrum.Link(xml)
+    link.__parent__ = area
+    assert zeit.web.core.template.get_image(link, fallback=False) is None
+
+
 def test_spektrum_parquet_should_render_special_parquet_link(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
     teasers = browser.cssselect(

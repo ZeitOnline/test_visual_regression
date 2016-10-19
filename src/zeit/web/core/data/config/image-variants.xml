@@ -1,6 +1,6 @@
 <variants>
   <variant name="default" focus_x="0.5" focus_y="0.3" zoom="1.0"/>
-  <variant name="wide" display_name="Standard 16:9" aspect_ratio="16:9" fallback_size="822x462">
+  <variant name="wide" display_name="Standard 16:9" aspect_ratio="16:9" fallback_size="820x461">
     <size id="small" display_name="Standard 16:9 (klein)" max_size="300x169"/>
     <size id="large" display_name="Standard 16:9 (groß)"/>
   </variant>

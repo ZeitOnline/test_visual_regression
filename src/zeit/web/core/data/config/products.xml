@@ -2,7 +2,7 @@
 <products>
 	<!-- "label" overwrites value if necessary -->
 	<product id="ZEDE">ZEIT ONLINE</product>
-   	<product id="ZEI" show="issue" volume="True" location="http://xml.zeit.de/ausgabe/{year}/{name}">DIE ZEIT</product>
+   	<product id="ZEI" show="issue" volume="True" location="http://xml.zeit.de/ausgabe/{year}/{name}" centerpage="http://xml.zeit.de/{year}/{name}/index">DIE ZEIT</product>
 	<product id="leserartikel" href="http://www.zeit.de/leserartikel/index">Leserartikel</product>
 	<product id="ZMLB" href="http://www.zeit.de/zeit-magazin/index" show="issue">ZEITmagazin</product>
 	<product id="TEST">Test/Development</product>

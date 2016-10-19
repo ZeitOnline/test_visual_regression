@@ -12,6 +12,7 @@ import requests
 import requests_file
 import grokcore.component
 import zope.component
+import zope.interface
 
 import zeit.cms.workflow.interfaces
 import zeit.content.author.interfaces
@@ -111,6 +112,11 @@ class Image(object):
             return self._meta.links_to
 
     @zeit.web.reify
+    def nofollow(self):
+        if self._meta:
+            return self._meta.nofollow
+
+    @zeit.web.reify
     def origin(self):
         if self._meta:
             return self._meta.origin
@@ -128,7 +134,7 @@ class Image(object):
     def _ratio_for_viewport(self, viewport):
         # If the variant config does not provide a ratio, we try to determine
         # it from the viewport-specific masterimage
-        if self.group is not None:
+        if zeit.content.image.interfaces.IImageGroup.providedBy(self.group):
             image = self.group.master_image_for_viewport(viewport)
             if image is None:
                 return
@@ -548,6 +554,24 @@ class RemoteImage(object):
 class RemoteImageGroup(SyntheticImageGroup,
                        zeit.cms.repository.repository.Container):
 
+    def __new__(cls, context):
+        if not cls.get_image_url(context):
+            return None
+        return super(RemoteImageGroup, cls).__new__(cls, context)
+
+    def __init__(self, context):
+        super(RemoteImageGroup, self).__init__(context)
+        self.image_url = self.get_image_url(context)
+
+    # We cannot use a property/reify since we need this already in __new__.
+    @classmethod
+    def get_image_url(cls, context):
+        # This API applies to most of our subclasses, so it's not worth raising
+        # NotImplementedError here only to have each of them copy this down.
+        return context.image_url
+
+    uniqueId = NotImplemented
+
     @zeit.web.reify
     def master_image(self):
         try:
@@ -571,6 +595,17 @@ class RemoteImageMetaData(object):
             self.alt = group.__parent__.title
             self.caption = group.__parent__.text
             self.title = group.__parent__.title
+
+
+# Baseclass, register this as an adapter at the concrete usage points.
+@zope.interface.implementer(zeit.content.image.interfaces.IImages)
+class RemoteImages(object):
+
+    fill_color = None
+
+    def __init__(self, context):
+        self.context = context
+        self.image = zeit.content.image.interfaces.IImageGroup(context, None)
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IMasterImage)

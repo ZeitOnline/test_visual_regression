@@ -1,0 +1,42 @@
+.cp-area
+
+	&--truncated
+		> article:last-of-type
+			border-bottom: 1px solid $color-border
+			+respond-min($break-areas)
+				border-bottom-width: 0
+
+	&--truncated &__control
+		display: inline-block
+
+	&__control
+		display: none
+		padding: remify(16px 0)
+		+on-interaction
+			.cp-area__badge-icon
+				background-color: $zon-charcoal
+			.cp-area__badge-label
+				color: $zon-dark-grey
+				border-bottom: 1px solid $zon-mid-grey
+
+	&__supplement
+		&[aria-hidden="true"]
+			display: none
+
+	&__badge-icon
+		+font-smoothing
+		background-color: $zon-trout
+		border-radius: 1em
+		color: $zon-lighter-grey
+		font-size: remify(11px)
+		margin-right: remify(10px)
+		padding: remify(2px 9px)
+		transition: background-color .2s
+
+	&__badge-label
+		border-bottom: 1px solid rgba($zon-grey, .5)
+		color: $zon-grey
+		font-size: remify(15px)
+		letter-spacing: $letter-spacing-s
+		transition-duration: .2s
+		transition-property: border-bottom-color, color

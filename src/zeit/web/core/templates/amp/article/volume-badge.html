@@ -1,0 +1,17 @@
+{% if view.zplus_label %}
+<div class="article__volume article__item article__item--wide">
+    <a class="volume-badge" href="{{ view.zplus_label.link }}">
+        <span class="volume-badge__text">
+            {{- view.zplus_label.intro }} {{ view.zplus_label.link_text -}}
+        </span>
+
+        {%  if view.context is zplus_content -%}
+            <svg class="volume-badge__icon">
+                <use xlink:href="#svg-zplus"/>
+            </svg>
+        {% endif -%}
+
+        {% include "zeit.web.core:templates/amp/asset/image_cover.html" %}
+    </a>
+</div>
+{% endif %}

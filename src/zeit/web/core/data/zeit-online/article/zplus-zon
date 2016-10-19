@@ -1,63 +1,65 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="" expires="">
-      <display_name py:pytype="str">Wenke Husmann</display_name>
+      <display_name>Wenke Husmann</display_name>
     </author>
     <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00">
-      <bu py:pytype="str">Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
-      <copyright py:pytype="str">© Warner Bros.</copyright>
+      <bu>Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
+      <copyright>© Warner Bros.</copyright>
     </image>
     <references>
       <reference type="intern" href="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
     </references>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Wenke Husmann</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">Kultur Film</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-12-09T09:23:57.105802+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-27T17:11:30.179510+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-12-09T09:32:11.073684+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-05-27T09:24:56.823418+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-05-27T17:11:30.179510+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
-    <attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="genre">glosse</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-12-05T17:11:22.109311+00:00</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.lavrov</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/kultur/film/2014-12/15a48f2c-82b0-4136-b4aa-ad3f57ff2fa0.tmp</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">980d578641cd444aa69700ed11b21d63</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Kultur</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="serie">70 Jahre DIE ZEIT</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Film</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">5010</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">49</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Wenke Husmann</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Kultur Film</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-12-09T09:23:57.105802+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-27T17:11:30.179510+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-12-09T09:32:11.073684+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-05-27T09:24:56.823418+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-05-27T17:11:30.179510+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">glosse</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-12-05T17:11:22.109311+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.lavrov</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/kultur/film/2014-12/15a48f2c-82b0-4136-b4aa-ad3f57ff2fa0.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">980d578641cd444aa69700ed11b21d63</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Kultur</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">70 Jahre DIE ZEIT</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Film</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">5010</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
       &lt;global name="Provides" module="zope.interface.declarations"/&gt;
@@ -79,8 +81,8 @@
     <subtitle>Der letzte Herr-der-Ringe-Hobbit-Teil läuft an. Er ist wieder ein bisschen bombastischer. Was, fragt sich der ermattende Kinobesucher, kommt eigentlich noch auf uns zu?</subtitle>
     <division xmlns:ns0="http://namespaces.zeit.de/CMS/cp" type="page">
       <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00" is_empty="False" title_local="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt_local="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott" title="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott">
-        <bu py:pytype="str">Bernie Sanders kommt Hillary Clinton gefährlich nahe. Wenn der Sozialist sie weiter bedrängt, könnte sie nach links ausscheren.</bu>
-        <copyright py:pytype="str">© Warner Bros.</copyright>
+        <bu>Bernie Sanders kommt Hillary Clinton gefährlich nahe. Wenn der Sozialist sie weiter bedrängt, könnte sie nach links ausscheren.</bu>
+        <copyright>© Warner Bros.</copyright>
       </image>
       <p>Ja, der WAHNSINN! Diese Berge! Wären sie Wellen, hätte Christopher Nolan sie für <em><a class="" href="http://www.zeit.de/kultur/film/2014-11/interstellar-christopher-nolan-film" target="_blank">Interstellar</a></em> gecastet. Diese Weiten, gegen die selbst die nordamerikanischen Plains wie eine staubige Verkehrsinsel wirken. Und erst die Schlachten! Mal schauen, was Ridley Scott denen nach Weihnachten mit Moses und Ramses entgegensetzen wird. "<a class="" href="http://www.exodus-derfilm.de/#home" target="_blank">Episches</a>", verspricht er bereits. Das alles dank 3D-Kameras und einer Kunststoffbrille zum Greifen plastisch. Doch doch, für <em>Der Hobbit, Teil III, Die Schlacht der fünf Heere</em> kann man den Wahnsinn schon mal großschreiben. </p>
       <p>Nicht nur CGI-mäßig betrachtet. Die Produktion von <em>Der Herr der Ringe, Teil I, Die Gefährten </em>kostete seinerzeit (das war 2001) 93 Millionen Dollar und spielte 872 Millionen Dollar ein. <em>Der Herr der Ringe, Teil II, Die zwei Türme</em> kostete 94 Millionen Dollar und spielte 926 Millionen ein. <em>Der Herr der Ringe, Teil III, Die Rückkehr des Königs</em> – bleiben Sie dran, es lohnt sich – machte aus 94 Millionen 1,12 Milliarden. <em>Teil IV</em> alias <em><a class="" href="http://www.zeit.de/2012/51/Film-Hobbit-Peter-Jackson-Tolkien" target="_blank">Der Hobbit, I, Eine unerwartete Reise</a></em> machte 1,02 Milliarden Dollar, <em>Teil V</em> (<a class="" href="http://www.zeit.de/kultur/film/2013-12/film-hobbit-smaugs-einoede" target="_blank"><em>Der Hobbit, II, Smaugs Einöde</em></a>) 958 Millionen. Zusammen mit dem jüngsten und letzten Giganten, <em>Der Hobbit, III, Die Schlacht der fünf Heere</em>, kostete die <em>Hobbit</em>-Trilogie 561 Millionen Dollar, mithin mehr als doppelt so viel wie die drei <em>Herr-der-Ringe</em>-Filme. Die Hobbits gelten seitdem als die teuerste Filmproduktion aller Zeiten. Extrapoliert man die Kosten-Nutzen-Rechnung wird man am Ende zusammenfassen können: sechs Milliarden verdient. Hier rettet eine Bande kleinwüchsiger Barfußläufer das Big Business.</p>
