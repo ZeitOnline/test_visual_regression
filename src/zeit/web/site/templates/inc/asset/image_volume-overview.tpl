@@ -6,5 +6,5 @@
 
 {% block media_caption_content %}
     <p class="{{ module_layout }}__issue">{{ '%02d' % volume.volume }}/{{ volume.year }}</p>
-    <a class="{{ module_layout }}__link" href="{{ href }}">Jetzt lesen</a>
+    <a class="{{ module_layout }}__link" href="{{ href }}" data-id="{{ tracking_slug }}text">Jetzt lesen</a>
 {% endblock %}
