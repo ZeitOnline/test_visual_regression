@@ -1,119 +1,91 @@
-$standard-header-max-width: 41.25em
-$standard-header-image-max-width: 31.25em
-
-.article__head--default
-  .article__head__title
-    font-size: $font-xl
-    +respond-min($break-2)
-      font-size: $font-xxl
-  .article__head__subtitle
-    p
-      +body-type-zoom
-    strong
-      font-weight: normal
-
 .article__head
-  text-align: center
-  max-width: $standard-header-max-width
-  margin: 0 auto
-  margin-bottom: $compact
-  margin-top: $medium
-  +respond-min($break-1)
-    margin-bottom: $big
-  +respond-min($break-2)
-    margin-top: $large
-    margin-bottom: $large
-  +respond-min($break-3)
-    margin-top: $wide
-    margin-bottom: $wide
-  a
-    +animated-interaction($color-link--hover)
+	text-align: center
+	max-width: $medium-content-width
+	margin: $medium auto $compact
+	+respond-min($break-1)
+		margin-bottom: $big
+	+respond-min($break-2)
+		margin-top: $large
+		margin-bottom: $large
+	+respond-min($break-3)
+		margin-top: $huge
+		margin-bottom: $huge
 
-//normalize h1 font
-.article__head-wrap
-  h1
-    font-size: 1em
-    font-weight: normal
+	// normalize h1 font
+	h1
+		font-size: 1em
+		font-weight: normal
+		margin: 0
+
+.article__head__meta__author
+	+animated-interaction($color-link--hover)
 
 .article__head__supertitle
-  @extend %supertitle
-  display: block
-  font-size: $font-m
-  margin-bottom: $small
-  +respond-min($break-3)
-    font-size: $font-ml
+	@extend %supertitle
+	display: block
+	font-size: $font-m
+	margin-bottom: $small
+	+respond-min($break-3)
+		font-size: $font-ml
 
 .article__head__title
-  @extend %headline
-  display: block
-  margin-bottom: $compact
-  +respond-min($break-2)
-    margin-bottom: $big
+	@extend %headline
+	display: block
+	font-size: $font-xl
+	margin-bottom: $compact
+	+respond-min($break-2)
+		font-size: $font-xxl
+		margin-bottom: $big
 
 .article__head__subtitle
-  @extend %subheading
-  text-align: left
-  margin-bottom: $compact
-  .article__head__meta__author
-    +link
-      color: $black
+	+body-type-zoom
+	margin: $small auto $compact
+	text-align: left
 
-.article__head__image
-  max-width: $standard-header-image-max-width
-  text-align: left
-  display: block
-  margin: 0 auto
-  margin-bottom: $medium
-  +respond-min($break-1)
-    margin-bottom: $large
-  +respond-min($break-2)
-    margin-bottom: $wide
-  img
-    width: 100%
-    display: block
-  figure
-    margin-top: 0
-    margin-bottom: 0
-    position: relative
-  .figure__caption
-    position: absolute
-    bottom: 0
-    background: rgba(0, 0, 0, 0.5)
-    width: 100%
-    padding: $thin
-    font-size: $font-xs
-    opacity: 0.0
-    transition: opacity .2s linear
-    .figure__text
-      display: none
-    .figure__copyright
-      color: $grey--light
-      display: block
-      a
-        +link-colors($grey--light, $grey--light, $grey--light, $grey--light, $grey--light)
-        border: 0
-  &:hover
-    .figure__caption
-      opacity: 1.0
+.article__head__media
+	margin: 0 auto $medium
+	position: relative
+	+respond-min($break-1)
+		margin-bottom: $large
+	+respond-min($break-2)
+		margin-bottom: $wide
+	&:hover
+		.article__head__caption
+			opacity: 1
+
+.article__head__caption
+	background-color: rgba(0, 0, 0, 0.5)
+	bottom: 0
+	color: $grey--light
+	font-size: $font-xs
+	opacity: 0
+	padding: remify(6px)
+	position: absolute
+	transition: opacity .2s linear
+	width: 100%
+	&:empty
+		display: none
+	a
+		color: inherit
 
 .article__head__meta
-  @extend %meta
-  text-align: left
-  text-transform: uppercase
-  margin-bottom: 0
-  display: block
-  margin-top: $thin
-  letter-spacing: 1px
-  font-size: $font-xs
-  max-width: 40em
-  line-height: $meta-line-height
+	@extend %meta
+	font-size: $font-xs
+	letter-spacing: 1px
+	line-height: 1.7
+	margin-top: $thin
+	max-width: 40em // 12px * 40 = 480px ?
+	text-align: left
+	text-transform: uppercase
 
-.article__head__meta__offset
-  display: block
-  margin-bottom: $fine
+.article__head__meta__author
+	color: inherit
+
+.article__head__byline
+	margin-bottom: $fine
 
 .article__head__meta__source
-  &:after
-    content: ' — '
-  a
-    color: inherit
+	&:after
+		content: ' — '
+	a
+		color: inherit

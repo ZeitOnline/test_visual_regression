@@ -93,14 +93,6 @@
             <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="column-width"></image>
             <p>Earum eaque, dolorem, neque est fugit perferendis quae et adipisci vero temporibus nisi ad, mollitia cumque ut quibusdam culpa labore blanditiis! Excepturi, itaque at.</p>
 
-            <intertitle>medium-float-left: M (links)</intertitle>
-            <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="medium-float-left"></image>
-            <p>Itaque ex asperiores, iste dolor? Corrupti, illo quisquam. Voluptas corrupti veniam rem eligendi soluta iste porro eius ex maxime, delectus minus dolores, libero in.</p>
-
-            <intertitle>medium-float-right M (rechts)</intertitle>
-            <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="medium-float-right"></image>
-            <p>Earum eaque, dolorem, neque est fugit perferendis quae et adipisci vero temporibus nisi ad, mollitia cumque ut quibusdam culpa labore blanditiis! Excepturi, itaque at.</p>
-
             <intertitle>float: S (links)</intertitle>
             <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" display_mode="float"></image>
             <p>Sit dolor atque, dolorem praesentium, quod, nisi et id ullam consequatur nesciunt recusandae numquam. Nam sed cum commodi eos, voluptates, provident iure odit qui consequatur libero sunt perferendis neque natus dolore similique nobis, consectetur. Tenetur rerum minima quasi adipisci nostrum veritatis libero, ut obcaecati facilis ducimus delectus nemo asperiores ullam itaque molestias reprehenderit eum molestiae velit eius? Dolores rem ea non aperiam voluptas quasi.</p>

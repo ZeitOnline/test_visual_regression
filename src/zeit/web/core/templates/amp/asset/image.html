@@ -1,23 +1,30 @@
 {% if image %}
-    {% block image %}
+    {%- set image_sources = image_sources | default([320, 480, 660, 820]) %}
+    {%- set default_width = 320 %}
+    {%- set default_height = (default_width / image.ratio) | int %}
+    {%- set image_width = image.fallback_width | default(default_width, True) %}
+    {%- set image_height = image.fallback_height | default(default_height, True) %}
+    {%- block image %}
         <figure class="{% block media_block %}{{ 'figure' | with_mods(block.display_mode if block) }}{% endblock %}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
             {% block media -%}
             <amp-img
                 src="{{ request.image_host + image.fallback_path }}"
-                srcset="{% for w in [320, 480, 660, 822] %}{{ '%s%s__%sx%s %sw' | format(request.image_host, image.path, w, (w / image.ratio) | int, w) }}{{ ', ' if not loop.last }}{% endfor %}"
+                srcset="{% for w in image_sources %}{{ '%s%s__%sx%s %sw' | format(request.image_host, image.path, w, (w / image.ratio) | int, w) }}{{ ', ' if not loop.last }}{% endfor %}"
                 alt="{{ image.alt }}"
-                width="{{ image.fallback_width }}"
-                height="{{ image.fallback_height }}"
-                {% if block and block.display_mode == 'large' -%}
-                sizes="(min-width: 820px) 820px, 100vw"
-                {% endif -%}
+                width="{{ image_width }}"
+                height="{{ image_height }}"
+                {% block sizes -%}
+                    {% if block and block.display_mode == 'large' -%}
+                        sizes="(min-width: 820px) 820px, 100vw"
+                    {% endif -%}
+                {% endblock -%}
                 layout="responsive"
                 attribution="{{ image.copyrights | map('first') | join(', ') }}"
                 itemprop="contentUrl"></amp-img>
             {% endblock media -%}
             <meta itemprop="url" content="{{ request.image_host + image.fallback_path }}">
-            <meta itemprop="width" content="{{ image.fallback_width }}">
-            <meta itemprop="height" content="{{ image.fallback_height }}">
+            <meta itemprop="width" content="{{ image_width }}">
+            <meta itemprop="height" content="{{ image_height }}">
 
             {% block caption %}
             <figcaption class="figure__caption">

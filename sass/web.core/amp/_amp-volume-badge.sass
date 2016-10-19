@@ -1,0 +1,76 @@
+.volume-badge
+	box-sizing: border-box
+	background-color: $zon-lighter-grey
+	color: $color-text--light
+	display: block
+	line-height: remify(40px)
+	margin: 0 (-$page-padding--small)
+	position: relative
+	+on-interaction
+		.volume-badge__text
+			color: $zon-dark-grey
+			border-bottom-color: $zon-mid-grey
+
+	&__icon
+		background-color: $red
+		color: #fff
+		float: left
+		height: remify(22px)
+		padding: remify(((40px - 22px) / 2) ((42px - 28px) / 2))
+		width: remify(28px)
+
+	&__text
+		border-bottom: 1px solid rgba($color-text--light, .5)
+		font-size: em(12px)
+		letter-spacing: $zon-letter-spacing-l
+		margin-left: remify(10px)
+		text-transform: uppercase
+
+	&__media
+		float: right
+		margin: remify(-10px $page-padding--small -10px 0)
+		width: remify(82px)
+
+	// if there is SVG icon and cover, hide cover for small screens
+	&__icon + &__media
+		display: none
+		+respond-min(em(350px))
+			display: block
+
+	+respond-min($break-tablet-min)
+		float: right
+		line-height: 1.5
+		margin: remify(0 0 0 40px)
+		padding: remify(20px)
+		text-align: center
+		width: remify(180px)
+
+		&__icon
+			bottom: remify(34px)
+			height: remify(42px)
+			left: remify(20px)
+			padding: 0
+			position: absolute
+			width: remify(48px)
+			z-index: 1
+			// if there is no cover
+			&:last-child
+				bottom: auto
+				height: remify(34px)
+				left: 50%
+				margin-left: remify(-38px / 2)
+				top: remify(-34px / 2)
+				width: remify(38px)
+
+		&__text
+			font-size: em(13px)
+			margin: 0
+
+		&__media
+			float: none
+			margin: remify(20px auto 0)
+			width: remify(124px)
+
+		// if icon meets cover
+		&__icon + &__media
+			margin-right: 0

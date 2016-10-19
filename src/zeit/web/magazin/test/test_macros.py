@@ -111,7 +111,7 @@ def test_image_template_should_produce_figure_markup(
     image = zeit.web.core.interfaces.IFrontendBlock(block)
     browser = tplbrowser(
         'zeit.web.magazin:templates/inc/asset/image_article.tpl',
-        obj=image, request=dummy_request)
+        block=image, request=dummy_request)
     assert browser.cssselect('figure.figure-full-width')
     assert browser.cssselect('img.figure__media')
     assert browser.cssselect('span.figure__copyright')
@@ -125,7 +125,7 @@ def test_image_template_should_produce_copyright_caption(
     image = zeit.web.core.interfaces.IFrontendBlock(block)
     browser = tplbrowser(
         'zeit.web.magazin:templates/inc/asset/image_article.tpl',
-        obj=image, request=dummy_request)
+        block=image, request=dummy_request)
     copyright = browser.cssselect('.figure__copyright a')[0]
     assert copyright.attrib['href'] == 'http://foo.com'
     assert copyright.text_content() == u'© Andreas Gebert/dpa'
@@ -133,7 +133,7 @@ def test_image_template_should_produce_copyright_caption(
 
 def test_image_template_should_designate_correct_layouts(testbrowser):
     browser = testbrowser('/zeit-magazin/article/inline-imagegroup')
-    header = browser.cssselect('figure.figure-header img')[0]
+    header = browser.cssselect('.article__head__media-item')[0]
     assert header.attrib['data-ratio'] == '1.77858439201'  # variant=original
     stamp = browser.cssselect('figure.figure-stamp--right img')[0]
     assert stamp.attrib['data-ratio'] == '0.75'  # variant=portrait

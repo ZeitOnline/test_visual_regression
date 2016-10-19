@@ -2,22 +2,22 @@
 {% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 
 {% block article_header -%}
-    <div class="article__head-wrap">
-        <header class="article__head article__head--default">
-            {{ blocks.supertitle() }}
-            {{ blocks.title() }}
-        </header>
-    </div>
+    <header class="article__head article__head--default">
+        {{ blocks.supertitle() }}
+        {{ blocks.title() }}
+    </header>
 {%- endblock article_header %}
 
 {% block article_pages -%}
     {% require gallery = view.gallery %}
-    {% include "zeit.web.core:templates/inc/article/gallery.html" %}
-    <div class="article__page gallery__info">
-        <div class="gallery__description">
+    <div class="article-page">
+        {% include "zeit.web.core:templates/inc/article/gallery.html" %}
+    </div>
+    <div class="article__page">
+        <div class="gallery__description article__item">
             {{ gallery.html | safe }}
         </div>
-        <div class="article__head__meta">
+        <div class="article__head__meta article__item">
             {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
         </div>
     </div>

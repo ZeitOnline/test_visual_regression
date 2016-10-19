@@ -333,7 +333,7 @@ def test_variant_source_should_raise_keyerror_for_faulty_specs(application):
 def test_img_src_should_contain_fallback_size(testbrowser):
     b = testbrowser('/zeit-online/slenderized-index')
     assert b.cssselect(
-        'img[src$="/filmstill-hobbit-schlacht-fuenf-hee/wide__822x462"]')
+        'img[src$="/filmstill-hobbit-schlacht-fuenf-hee/wide__820x461"]')
 
 
 def test_image_host_is_configurable_for_variant_images(testbrowser):
