@@ -33,6 +33,7 @@
   </body>
   <covers>
     <cover href="http://xml.zeit.de/2016-09/test-printcover" id="printcover"/>
+    <cover href="http://xml.zeit.de/ausgabe/images/printcover_fallback" id="printcover_fallback"/>
     <cover href="http://xml.zeit.de/2016-09/volume_header" id="coverimage"/>
   </covers>
 </volume>
