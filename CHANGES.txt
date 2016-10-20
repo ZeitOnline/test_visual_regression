@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - BUG-555: Remove styles for unused image display modes
 
+- BUG-547: Avoid SecurityError because of Same-Origin-Policy
+
 - MAINT: Cleanup ZMO article header and CSS
 
 - MAINT: Remove unused Stanford Javascript Crypto Library
