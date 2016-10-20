@@ -1,6 +1,8 @@
 import datetime
+
 import pytest
 import pytz
+import zope.component
 
 import zeit.cms.interfaces
 
@@ -48,3 +50,10 @@ def test_already_expired_image_should_have_caching_time_zero(
     workflow = zeit.cms.workflow.interfaces.IPublishInfo(group)
     workflow.released_to = expires
     assert zeit.web.core.interfaces.ICachingTime(group['wide']) == 0
+
+
+def test_longer_client_caching_time_overrides_varnish_time(testbrowser):
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['caching_time_centerpage'] = 9999
+    browser = testbrowser('/zeit-online/main-teaser-setup')
+    assert browser.headers['cache-control'] == 'max-age=9999'

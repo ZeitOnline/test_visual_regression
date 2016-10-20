@@ -8,14 +8,19 @@ import zeit.content.gallery.interfaces
 import zeit.content.image.image
 import zeit.content.image.interfaces
 
-import zeit.web.core.image
-
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
 @grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
 def caching_time_content(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return int(conf.get('caching_time_content', '0'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
+@grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
+def varnish_caching_time_content(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('varnish_caching_time_content', '3600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
