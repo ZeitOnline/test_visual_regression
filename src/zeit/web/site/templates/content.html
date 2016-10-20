@@ -11,7 +11,7 @@
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
     {% profile %}
         {% block article_head %}
-            {% include ["zeit.web.site:templates/inc/article-header/{}.html".format(view.header_layout),
+            {% include ["zeit.web.site:templates/inc/article-header/{}.html".format('zplus' if view.zplus_label else view.header_layout),
                         "zeit.web.site:templates/inc/article-header/default.html"] %}
         {% endblock article_head %}
     {% endprofile %}
