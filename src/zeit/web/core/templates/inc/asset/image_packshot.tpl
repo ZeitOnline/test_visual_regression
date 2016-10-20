@@ -1,3 +1,5 @@
-{% extends "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
+{% extends "zeit.web.core:templates/inc/asset/image.tpl" %}
 
-{% set image = get_image(packshot, fallback=False) or get_image(packshot_fallback, fallback=False) %}
+{% set module_layout = packshot_layout if packshot_layout else 'zplus' %}
+{% set image = get_image(packshot, fallback=False) %}
+{% block media_caption %}{% endblock %}
