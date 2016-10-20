@@ -2,12 +2,19 @@
 	background-color: $zon-lighter-grey
 	margin: remify(0 (-$page-padding) 32px)
 	padding: remify(40px $page-padding)
+
 	+respond-min($break-tablet-min)
 		margin-bottom: remify(48px)
+
 	&__title
 		font-size: remify(22px)
 		margin: 0
 		text-align: center
+
+	&__text
+		font-size: remify(16px)
+		font-family: $font-franziska
+		padding: $page-padding--small
 
 .centerpage-header--volume
 	background-color: transparent
@@ -15,25 +22,16 @@
 	text-align: center
 
 	.centerpage-header
-		&__text,
-		&__dropdown
-			display: block
-
 		&__title
 			font-size: remify(24px)
-
-		&__text
-			font-size: remify(16px)
-			font-family: $font-franziska
-			padding: $page-padding--small
-
-		&__selector
-			padding: $page-padding--small
-			text-align: center
 
 		&__dropdown,
 		&__link
 			display: inline-block
+			font-size: remify(12px)
+			font-weight: bold
+			letter-spacing: $letter-spacing-s
+			color: $zon-dark-grey
 
 		&__dropdown
 			width: remify(200px)
@@ -42,18 +40,10 @@
 			background-color: $white
 
 		&__link
+			+animated-interaction()
 			margin-left: $page-padding
-			+animated-interaction()
-
-		&__link
-			+animated-interaction()
-			color: $zon-dark-grey
-			font-size: remify(12px)
 			border-bottom: 1px solid $zon-light-grey
 
-			text-align: left
-			font-weight: bold
-			letter-spacing: $letter-spacing-m
 
 +respond-min($break-tablet-min)
 

@@ -2,13 +2,13 @@
 
 {% block modifier %}centerpage-header--volume{% endblock %}">
 {% block additional_content %}
-    <span class="centerpage-header__text">Hier finden sie alle Artikel aus DIE ZEIT seit 1946.</span>
-    <span class="centerpage-header__selector">
-        <select class="centerpage-header__dropdown" onchange="document.getElementsByClassName('centerpage-header__link')[0].setAttribute('href',window.location.protocol+'//'+window.location.host+'/'+this.value+'/index');">
-            {% for year in view.volume_years_list %}
-                <option value="{{ year }}" {%- if year == view.volume_year %}selected{% endif -%}>{{ year }}</option>
-            {% endfor %}
-        </select>
-        <a class="centerpage-header__link" href="{{ request.url }}" data-id="volume-overview-dropwdown...text">Suchen</a>
-    </span>
+    <div class="centerpage-header__text">
+        Hier finden sie alle Artikel aus DIE ZEIT seit 1946.
+    </div>
+    <select class="centerpage-header__dropdown" onchange="document.getElementsByClassName('centerpage-header__link')[0].setAttribute('href',window.location.protocol+'//'+window.location.host+'/'+this.value+'/index');">
+        {% for year in view.volume_years_list %}
+            <option value="{{ year }}" {%- if year == view.volume_year %}selected{% endif -%}>{{ year }}</option>
+        {% endfor %}
+    </select>
+    <a class="centerpage-header__link" href="{{ request.url }}" data-id="volume-overview-dropwdown...text">Suchen</a>
 {% endblock %}
