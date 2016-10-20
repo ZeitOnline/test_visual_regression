@@ -57,3 +57,9 @@ def test_longer_client_caching_time_overrides_varnish_time(testbrowser):
     settings['caching_time_centerpage'] = 9999
     browser = testbrowser('/zeit-online/main-teaser-setup')
     assert browser.headers['cache-control'] == 'max-age=9999'
+
+
+def test_sitemap_should_not_be_cached_in_varnish(application):
+    sitemap = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/gsitemaps/index.xml')
+    assert zeit.web.core.interfaces.IVarnishCachingTime(sitemap) == 0

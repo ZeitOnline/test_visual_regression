@@ -37,6 +37,14 @@ def caching_time_cp(context):
     return int(conf.get('caching_time_centerpage', '0'))
 
 
+@grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ISitemap)
+def varnish_caching_time_sitemap(context):
+    # Apparently, Google penalizes outdated sitemaps, so we're extra careful.
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('varnish_caching_time_sitemap', '0'))
+
+
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery)
 def caching_time_gallery(context):
