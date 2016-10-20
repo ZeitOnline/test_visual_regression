@@ -9,7 +9,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-02-01T12:07:55.111638+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-10-07T12:07:55.111638+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-10-07T12:14:48.262511+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-10-07T11:10:45.118658+00:00</attribute>
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
