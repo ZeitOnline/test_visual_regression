@@ -81,6 +81,15 @@ def redirect_on_cp2015_suffix(request):
             location=url)
 
 
+def c1header_or_get(request, name):
+
+    # TODO: not in production
+    if name in request.headers:
+        return request.headers.get(name, None)
+
+    return request.GET.get(name, None)
+
+
 class Base(object):
     """Base class for all views."""
 
@@ -682,6 +691,19 @@ class Base(object):
     @zeit.web.reify
     def twitter_username(self):
         return 'zeitonline'
+
+    @zeit.web.reify
+    def paywall(self):
+
+        walls = ['register', 'metered', 'subscribe']
+
+        if not c1header_or_get(self.request, 'C1-Paywall-On'):
+            return None
+
+        if c1header_or_get(self.request, 'C1-Paywall-Reason') in walls:
+            return c1header_or_get(self.request, 'C1-Paywall-Reason')
+
+        return None
 
 
 class CeleraOneMixin(object):
