@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - MAINT: Cleanup ZMO article header and CSS
 
+- MAINT: Remove unused Stanford Javascript Crypto Library
+
 
 3.12 (2016-10-13)
 -----------------
