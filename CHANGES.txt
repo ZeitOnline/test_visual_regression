@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing yet.
 
 
-3.13 (unreleased)
+3.13 (2016-10-20)
 -----------------
 
 - ZON-3355: Add volume badge for AMP articles
