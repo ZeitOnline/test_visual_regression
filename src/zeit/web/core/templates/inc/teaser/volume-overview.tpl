@@ -8,9 +8,9 @@
 
     <a class="volume-overview-teaser__wrapper" href="{{ href }}" data-id="{{ tracking_slug }}">
         {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" ignore missing %}
-        <figcaption class="volume-overview-teaser__caption">
+        <div class="volume-overview-teaser__caption">
             <p class="{{ module_layout }}__issue">{{ '%02d' % volume.volume }}/{{ volume.year }}</p>
-            <span class="{{ module_layout }}__cta" href="{{ href }}">Jetzt lesen</span>
-        </figcaption>
+            <span class="{{ module_layout }}__cta" href="{{ href }}"><span>Jetzt</span><span class="visually-hidden"> Ausgabe {{ '%02d' % volume.volume }}/{{ volume.year }} </span> <span>lesen</span>
+        </div>
     </a>
 {% endfor %}
