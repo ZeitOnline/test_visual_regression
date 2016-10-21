@@ -5,14 +5,14 @@
 
 	&__media
 		width: remify(100px)
-		margin-left: auto
 		margin-right: 0
+		margin-left: auto
 
 	&__current
-		padding: remify(20px 0 25px 0)
-		width: 100%
+		padding: remify(20px 30px)
 		flex-grow: 1
 		border-bottom: solid 1px $zon-light-grey
+		width: 100%
 
 	&__packshot,
 	&__cta
@@ -22,19 +22,17 @@
 		font-weight: bold
 		color: $zon-dark-grey
 		font-size: remify(16px)
-		padding-right: remify(30px)
 		line-height: remify(22px)
-		width: 50%
-		vertical-align: top
-		max-width: remify(300px)
+		vertical-align: middle
+		padding-left: remify(15px)
+		width: 75%
+
+	&__packshot
+		width: 25%
 
 	&__link
 		+animated-interaction()
 		border-bottom: 1px solid $zon-light-grey
-
-	&__packshot
-		padding: remify(0 15px)
-		width: 40%
 
 	&__previous,
 	&__next
@@ -73,7 +71,7 @@
 			order: 1
 
 		&__current
-			width: auto
+			max-width: remify(450px)
 			order: 2
 			border-bottom: none
 
@@ -94,9 +92,6 @@
 		&__media
 			width: remify(150px)
 
-		&__cta
-			vertical-align: middle
-
 	+respond-min($break-desktop-min)
 		&__media
 			width: remify(200px)
@@ -105,9 +100,15 @@
 		&__current
 			transform: translateY(-30px)
 			padding: 0
+			max-width: none
 
 		&__cta
 			padding-top: remify(50px) //center text again
+			padding-right: remify(30px)
+			width: 50%
+
+		&__packshot
+			width: 40%
 
 		&__previous-link,
 		&__next-link
