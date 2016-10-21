@@ -280,7 +280,8 @@ class Article(zeit.web.core.view.Content):
             access = getattr(self.context, 'access', None)
             if self.volume:
                 if access == 'registration':
-                    return {'intro': 'Aus der',
+                    return {'hide_source_label': True,
+                            'intro': 'Aus der',
                             'link': 'http://{}/{!s}/{!s}'.format(
                                 self.request.host,
                                 self.volume.year,
