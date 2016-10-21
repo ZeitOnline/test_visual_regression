@@ -81,13 +81,18 @@ def redirect_on_cp2015_suffix(request):
             location=url)
 
 
-def c1header_or_get(request, name):
+def c1requestheader_or_get(request, name):
 
-    # TODO: not in production
+    # TODO: Den Request hier nutzen/haben, nicht reinreichen.
+
     if name in request.headers:
         return request.headers.get(name, None)
 
-    return request.GET.get(name, None)
+    # We want to allow manipulation via GET-Params for testing,
+    # but not in production
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    if conf.get('environment') != 'production':
+        return request.GET.get(name, None)
 
 
 class Base(object):
@@ -695,13 +700,13 @@ class Base(object):
     @zeit.web.reify
     def paywall(self):
 
-        walls = ['register', 'metered', 'subscribe']
+        walls = ['register', 'metered', 'paid']
 
-        if not c1header_or_get(self.request, 'C1-Paywall-On'):
+        if not c1requestheader_or_get(self.request, 'C1-Paywall-On'):
             return None
 
-        if c1header_or_get(self.request, 'C1-Paywall-Reason') in walls:
-            return c1header_or_get(self.request, 'C1-Paywall-Reason')
+        if c1requestheader_or_get(self.request, 'C1-Paywall-Reason') in walls:
+            return c1requestheader_or_get(self.request, 'C1-Paywall-Reason')
 
         return None
 
