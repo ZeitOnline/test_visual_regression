@@ -55,6 +55,14 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
+    <title>Archiv</title>
+    <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fad252" kind="solo" title="Archiv">
+      <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38se" kind="solo" visible="True">
+        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526d" title="Archiv" cp:type="cpextra" module="volume-centerpage-header">
+          <cp_extra id="volume-centerpage-header"/>
+        </container>
+      </region>
+    </cluster>
     <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
         <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="volume-overview" title="FOOOO">
           <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-4dad5907-5745-4a86-9b33-8c48ae71fa16">
@@ -82,6 +90,6 @@
     </cluster>
   </body>
   <teaser>
-    <title>Ausgabe 2016 / 01</title>
+    <title>Archiv</title>
   </teaser>
 </centerpage>
