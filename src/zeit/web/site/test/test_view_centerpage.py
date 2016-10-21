@@ -1412,11 +1412,17 @@ def test_zmo_parquet_has_zmo_styles(testbrowser):
     area = browser.cssselect('.cp-area--zmo-parquet')[0]
     zmo_title = area.cssselect('.parquet-meta__title--zmo')
     zmo_logo = area.cssselect('.parquet-meta__logo--zmo')
-    zmo_kicker = area.cssselect('.teaser-small__kicker--zmo-parquet')
+    teasers = area.cssselect('article')
 
     assert len(zmo_title)
     assert len(zmo_logo)
-    assert len(zmo_kicker) == 3
+    assert len(teasers) == 3
+
+    for teaser in teasers:
+        kicker_classname = teaser.cssselect(
+            '.teaser-small__kicker')[0].get('class')
+        assert 'teaser-small__kicker--zmo' in kicker_classname
+        assert 'teaser-small__kicker--zmo-parquet' in kicker_classname
 
 
 def test_jobbox_is_displayed_correctly(testbrowser):
@@ -1860,9 +1866,9 @@ def test_zmo_teaser_kicker_should_have_zmo_modifier(testbrowser):
     assert len(teaser_fullwidth_kicker) == 1
     assert len(teaser_classic_kicker) == 1
     assert len(teaser_large_kicker) == 2
-    assert len(teaser_small_kicker) == 4
+    assert len(teaser_small_kicker) == 6
     assert len(teaser_small_minor_kicker) == 2
-    assert len(teaser_parquet_kicker) == 0
+    assert len(teaser_parquet_kicker) == 2
 
 
 def test_longform_should_not_contain_logo_in_kicker(testbrowser):
@@ -2473,8 +2479,47 @@ def test_volume_overview_has_adapted_centerpage_header(
 
 def test_zplus_teaser_has_zplus_badge(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/zplus')
-    teaser = browser.cssselect('.cp-area--major article.teaser-large')[0]
-    assert teaser.cssselect('.teaser-large__kicker-logo--zplus')
+
+    # test fullwidth teasers
+    teasers = browser.cssselect('.cp-area--solo article')
+    assert len(teasers) == 2
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
+
+    # test major area teasers
+    teasers = browser.cssselect('.cp-area--major article')
+    assert len(teasers) == 4
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
+
+    # test minor area teasers
+    teasers = browser.cssselect('.cp-area--minor article')
+    assert len(teasers) == 4
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
+
+    # test square teasers
+    teasers = browser.cssselect('.cp-area--duo article')
+    assert len(teasers) == 2
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
+
+    # test parquet teasers
+    teasers = browser.cssselect('.cp-area--parquet article')
+    assert len(teasers) == 6
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
+
+    # test ZMO parquet teasers
+    teasers = browser.cssselect('.cp-area--zmo-parquet article')
+    assert len(teasers) == 3
+    for teaser in teasers:
+        assert teaser.cssselect('.teaser-small__kicker-logo--zplus')
 
 
 def test_zplus_teaser_has_no_badge_in_print_ressort_area(testbrowser):

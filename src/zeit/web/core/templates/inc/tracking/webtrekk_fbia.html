@@ -1,5 +1,10 @@
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_script.html" %}
-<script type="text/javascript">
+
+<script>
+
+    if (typeof window.webtrekkConfig === 'object') {
+        window.webtrekkConfig.trackId = "{{ settings('webtrekk_id') }}";
+    }
 
     var webtrekk = {
         linkTrack : "standard",

@@ -12,10 +12,6 @@ require.config({
         'picturefill': 'vendor/picturefill',
         'velocity': 'vendor/velocity',
         'velocity.ui': 'vendor/velocity.ui',
-        // to build current sjcl.js, in bower_components/sjcl do
-        // $ ./configure --without-all --with-sha1 --with-codecHex --compress=none
-        // $ make sjcl.js tidy
-        'sjcl': 'libs/sjcl',
         'bxSlider': 'web.core/plugins/jquery.bxslider',
         'freewall': 'vendor/freewall',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',

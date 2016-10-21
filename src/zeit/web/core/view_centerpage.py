@@ -22,11 +22,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         super(Centerpage, self).__init__(*args, **kwargs)
         self.context.advertising_enabled = self.banner_on
 
-        # Most of our resources will be purged from now on. We test this new
-        # mechanism on CPs. This might be valid for all resources in the future
-        # (RD, 7.8.2015)
-        self.request.response.headers.add('s-maxage', '21600')
-
     @zeit.web.reify
     def volume(self):
         return zeit.content.volume.interfaces.IVolume(self.context, None)
