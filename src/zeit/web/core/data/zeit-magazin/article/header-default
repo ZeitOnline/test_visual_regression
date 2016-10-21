@@ -5,6 +5,7 @@
             <display_name py:pytype="str">Armin Mustermann</display_name>
         </author>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+        <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">abo</attribute>
         <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
         <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Armin Mustermann</attribute>
         <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>

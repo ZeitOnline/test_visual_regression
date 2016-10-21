@@ -10,7 +10,7 @@ POSTDEPLOY
 3.14 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-563: Fix ZMO article header for subscription articles
 
 
 3.13 (2016-10-20)
