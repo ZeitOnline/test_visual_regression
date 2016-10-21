@@ -179,7 +179,7 @@ class ArticleByline(Byline):
     def expand_authors(authors):
         for author in authors:
             if isinstance(author, basestring):
-                yield 'text', author
+                yield 'text_author', author
             elif author.target.uniqueId:
                 yield 'linked_author', author.target
             else:
@@ -195,7 +195,7 @@ class StructuredDataByline(Byline):
     def expand_authors(authors):
         for author in authors:
             if isinstance(author, basestring):
-                yield 'text', author
+                yield 'text_author', author
             else:
                 yield 'plain_author', author.target
 

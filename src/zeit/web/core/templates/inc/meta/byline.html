@@ -2,6 +2,14 @@
     {{ obj }}
 {%- endmacro -%}
 
+{%- macro text_author(string) %}
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">
+            {{- string -}}
+        </span>
+    </span>
+{%- endmacro -%}
+
 {%- macro plain_author(obj) %}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">
