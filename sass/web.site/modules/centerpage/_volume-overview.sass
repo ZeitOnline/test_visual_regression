@@ -1,23 +1,25 @@
 .volume-overview-teaser
 	padding-bottom: $page-padding--small/2
-	&__media
+	&__wrapper
 		display: block // no-flex fallback
 		display: flex
 		flex-direction: row
 		margin: $page-padding $page-padding--small/2 0
-	&__media-container
-		width: remify(150px)
+	&__media
 		flex-grow: 1
 		margin-right: $page-padding
+	&__media-container
+		//width: remify(150px)
 	&__issue,
-	&__link
+	&__cta
+		color: $zon-charcoal
 		font-family: $font-tabletgothic
 		font-size: remify(14px)
 		font-weight: bold
 		font-style: normal
 		letter-spacing: $letter-spacing-l
 		margin: 0
-	&__link
+	&__cta
 		+animated-interaction
 		padding-bottom: remify(2px)
 		font-weight: normal
@@ -26,15 +28,17 @@
 	&__caption
 		flex-grow: 1
 		padding-top: $page-padding
+		white-space: nowrap
 
 +respond-min($break-tablet-min)
 	.volume-overview-teaser
 		padding: $page-padding--small/2 $page-padding--small/2
-		&__media
+		&__wrapper
 			display: inline-block
 			margin: $page-padding $page-padding--small/2
-		&__media-container
+		&__media
 			margin: 0
+		&__media-container
 			width: remify(220px)
 		&__caption
 			padding-top: $page-padding--small
