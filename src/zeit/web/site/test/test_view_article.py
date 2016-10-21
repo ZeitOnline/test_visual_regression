@@ -1824,7 +1824,8 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
             in zplus_media[0].attrib['src'])
 
 
-def test_zplus_register_print_article_has_correct_markup(testbrowser, monkeypatch):
+def test_zplus_print_article_has_correct_markup(
+        testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'reader_revenue': True}.get)
     browser = testbrowser('/zeit-online/article/zplus-zeit-register')
@@ -1858,8 +1859,8 @@ def test_zplus_register_print_article_has_correct_markup(testbrowser, monkeypatc
     assert article_metadata_source.__len__() == 0
 
 
-def test_zplus_register_print_article_has_correct_markup_if_reader_revenue_off(
-    testbrowser, monkeypatch):
+def test_zplus_print_article_has_correct_markup_if_reader_revenue_off(
+        testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'reader_revenue': False}.get)
     browser = testbrowser('/zeit-online/article/zplus-zeit-register')
