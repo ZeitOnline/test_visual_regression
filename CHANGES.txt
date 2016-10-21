@@ -9,6 +9,7 @@ POSTDEPLOY
 
 3.13 (unreleased)
 -----------------
+- ZON-3236: Don't cache sitemaps in varnish at all
 
 - ZON-3355: Add volume badge for AMP articles
 
