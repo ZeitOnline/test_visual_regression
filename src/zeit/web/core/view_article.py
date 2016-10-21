@@ -46,10 +46,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_layout(self):
-        if self.zplus_label:
-            return 'zplus'
-        else:
-            return self.context.header_layout or 'default'
+        return self.context.header_layout or 'default'
 
     @zeit.web.reify
     def pages(self):
