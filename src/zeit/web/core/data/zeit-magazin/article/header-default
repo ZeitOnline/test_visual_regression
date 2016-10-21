@@ -2,8 +2,9 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
     <head>
         <author expires="" href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="">
-            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <display_name>Armin Mustermann</display_name>
         </author>
+        <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/" type="jpg"/>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">abo</attribute>
         <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
@@ -61,7 +62,7 @@
         <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen – aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
         <division type="page">
             <image align="left" alt="Die ist der Alttest" expires="" href="http://links.to" is_empty="False" layout="zmo-xl-header" publication-date="" src="http://xml.zeit.de/zeit-magazin/images/local/01.jpg" title="Katze!" type="jpg">
-                <bu py:pytype="str">Die ist der image sub text</bu>
+                <bu>Die ist der image sub text</bu>
                 <copyright link="http://foo.de">©foo</copyright>
             </image>
             <p>Leipzig hat in den letzten Jahren viele neue Spitznamen bekommen.
