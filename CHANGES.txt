@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - BUG-563: Fix ZMO article header for subscription articles
 
+- BUG-561: Unveil Z+ badge for ZMO parquet teasers
+
 
 3.13 (2016-10-20)
 -----------------
