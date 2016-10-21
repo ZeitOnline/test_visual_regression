@@ -557,3 +557,33 @@ def test_volume_teaser_provides_expected_webtrekk_string(
         'tablet.volumeteaser.2/seite-1...dieser_artikel_stammt_aus_der_zeit_'
         'nr_01_2016_lesen_sie_diese_ausgabe_als_e_paper_app_und_auf_dem_e_'
         'reader|premium.zeit.de/diezeit/2016/01')
+
+
+def test_volume_overview_teaser_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(800, 600)
+    driver.get('%s/2016/index#debug-clicktracking'
+               % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.volume-overview-teaser__wrapper')))
+    except TimeoutException:
+        assert False, 'volume-overview-teaser must be present'
+
+    links = driver.find_elements_by_css_selector(
+        '.volume-overview-teaser__wrapper')
+    assert len(links) == 7
+    tracking_data = []
+    for link in links[0:3]:
+        link.click()
+        tracking_data.append(str(
+            driver.execute_script("return window.trackingData")))
+    assert tracking_data == ['tablet.volume-overview-teaser..1.'
+                             '|zeit.de/2014/49/index',
+                             'tablet.volume-overview-teaser..2.'
+                             '|zeit.de/2015/52/index',
+                             'tablet.volume-overview-teaser..3.|'
+                             'zeit.de/2016/01/index']
