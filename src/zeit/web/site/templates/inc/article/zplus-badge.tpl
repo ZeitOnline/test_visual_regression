@@ -9,8 +9,8 @@
         {% endif %}
         <div class="zplus__text">
             <span class="zplus__label">{{ view.zplus_label.intro }}</span>
-            <a class="zplus__link" href="{{ view.zplus_label.link }}" data-ct-label="exklusiv_fuer_abonnenten">
-                {{ view.zplus_label.link_text }}
+            <a href="{{ view.zplus_label.link }}" data-ct-label="exklusiv_fuer_abonnenten">
+                <span class="zplus__link">{{ view.zplus_label.link_text }}</span>
                 {% set packshot = view.zplus_label.cover %}
                 {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" %}
             </a>
