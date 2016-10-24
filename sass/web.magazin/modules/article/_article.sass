@@ -71,39 +71,6 @@
 	margin-top: remify(16px)
 .figure__copyright
 	color: $grey
-.figure-horizontal, .figure-horizontal--right
-	margin: $medium 0
-	+pie-clearfix
-	.figure__media
-		max-width: remify($article-content-max-width)
-		width: 100%
-		display: block
-		+respond-min($break-1)
-			+inline-block
-			width: 60%
-		+respond-min($break-2)
-			width: 71.74%
-	.figure__caption
-		+respond-min($break-1)
-			+inline-block
-			padding-top: 5%
-			width: 40%
-		+respond-min($break-2)
-			width: 28.26%
-.figure-horizontal
-	+respond-min($break-1)
-		.figure__media
-			float: left
-		.figure__caption
-			float: right
-			padding-left: $gutter
-.figure-horizontal--right
-	+respond-min($break-1)
-		.figure__media
-			float: right
-		.figure__caption
-			float: left
-			padding-right: $gutter
 // hacked for longform-launch
 // todo: make responsible by height (NB)
 .figure-full-width

@@ -196,7 +196,7 @@ def test_article_request_should_have_html5_doctype(testbrowser):
     assert '<!DOCTYPE html>' in browser.contents
 
 
-def test_artikel05_should_have_header_image(testbrowser):
+def test_article05_should_have_header_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/05')
     assert browser.cssselect('.article__head-wrap')
     assert browser.cssselect('.article__head-image')
@@ -240,49 +240,49 @@ def test_tracking_type_is_provided(application):
     assert article_view.tracking_type == 'article'
 
 
-def test_artikel02_has_lebensart_ressort(application):
+def test_article02_has_lebensart_ressort(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.ressort == 'lebensart'
 
 
-def test_artikel02_has_leben_sub_ressort(application):
+def test_article02_has_leben_sub_ressort(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.sub_ressort == 'leben'
 
 
-def test_artikel02_has_correct_banner_channel(application):
+def test_article02_has_correct_banner_channel(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/02')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.banner_channel == 'zeitmz/leben/article'
 
 
-def test_artikel06_has_meta_keywords(application):
+def test_article06_has_meta_keywords(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/06')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.meta_keywords == ['Sterben', 'Tod', 'Bestattung']
 
 
-def test_artikel01_has_correct_authors_list(application):
+def test_article01_has_correct_authors_list(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.authors_list == 'Anne Mustermann'
 
 
-def test_artikel08_has_correct_authors_list(application):
+def test_article08_has_correct_authors_list(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/08')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.authors_list == 'Anne Mustermann;Oliver Fritsch'
 
 
-def test_artikel05_has_set_text_length(application):
+def test_article05_has_set_text_length(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/05')
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())

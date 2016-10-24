@@ -73,8 +73,8 @@
                     "{}:templates/amp/article/publisher.html".format(view.package),
                     "zeit.web.core:templates/amp/article/publisher.html"] %}
                 <meta itemprop="mainEntityOfPage" content="{{ view.content_url }}">
-                <header class="article__header article__item">
-                    <h1 class="headline" itemprop="headline">
+                <header class="{{ 'article__header' | with_mods('has-volume' if view.zplus_label) }}">
+                    <h1 class="headline article__item" itemprop="headline">
                         <span class="headline__kicker">
                             {%- if view.context is column -%}
                                 {{- '%s / ' | format(view.serie) -}}
@@ -86,21 +86,24 @@
                             {{- view.title -}}
                         </span>
                     </h1>
-                    <div class="summary" itemprop="description">
-                        {{ view.subtitle }}
-                    </div>
-                    {% set byline = view.context | get_byline('main') -%}
-                    {% if byline | length -%}
-                    <div class="byline">
-                        {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
-                    </div>
-                    {% else -%}
-                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                        <meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
-                    </span>
-                    {% endif -%}
-                    <div class="metadata">
-                        {% include "zeit.web.core:templates/amp/article/metadata.html" %}
+                    {% include "zeit.web.core:templates/amp/article/volume-badge.html" %}
+                    <div class="article__item">
+                        <div class="summary" itemprop="description">
+                            {{ view.subtitle }}
+                        </div>
+                        {% set byline = view.context | get_byline('main') -%}
+                        {% if byline | length -%}
+                        <div class="byline">
+                            {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
+                        </div>
+                        {% else -%}
+                        <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                            <meta itemprop="name" content="{% if view.context.product %}{{ view.context.product.title }}{% else %}ZEIT ONLINE{% endif %}">
+                        </span>
+                        {% endif -%}
+                        <div class="metadata">
+                            {% include "zeit.web.core:templates/amp/article/metadata.html" %}
+                        </div>
                     </div>
                 </header>
 

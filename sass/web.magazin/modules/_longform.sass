@@ -259,37 +259,6 @@ $longform-header-max-height: 1400px
     +respond-min($break-2)
       max-width: remify(240px)
 
-  .figure-horizontal, .figure-horizontal--right
-    max-width: remify($longform-inline-max-width)
-    margin-left: auto
-    margin-right: auto
-    +respond-min(em($bp-adjust-horizontal-figures--2))
-      position: relative
-      width: 100%
-      .figure__media
-        float: none
-        width: 100%
-      .figure__caption
-        max-width: remify(240px)
-        width: em(200px)
-        position: absolute
-        left: 100%
-        padding-left: $gutter
-        top: 0
-        float: none
-    +respond-min(em($bp-adjust-horizontal-figures--3))
-      .figure__caption
-        width: em(220px)
-    +respond-min(em($bp-adjust-horizontal-figures--4))
-      .figure__caption
-        width: 100%
-    .figure__media
-      max-width: remify($longform-inline-max-width)
-  .figure-horizontal--right
-    +respond-min(em($bp-adjust-horizontal-figures--2))
-      .figure__caption
-        right: 100%
-        left: auto
   .figure-full-width
     .figure__caption
       max-width: remify($longform-image-caption-max-width)

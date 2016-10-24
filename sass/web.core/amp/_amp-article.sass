@@ -23,6 +23,17 @@
 			padding-left: .5em
 			font-size: 1rem
 			line-height: 1
+	&__header--has-volume
+		display: table
+		margin: remify(0 0 40px)
+		width: 100%
+		+respond-min($break-tablet-min)
+			+pie-clearfix
+			display: block
+	&__volume
+		display: table-footer-group
+		+respond-min($break-tablet-min)
+			display: block
 
 %caption
 	color: #444
@@ -65,7 +76,7 @@
 
 .headline
 	font-size: 1em
-	margin: remify(24px 0)
+	margin: remify(24px auto)
 	&__kicker
 		color: $color-kicker
 		display: block

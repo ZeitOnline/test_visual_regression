@@ -528,42 +528,42 @@ def test_article_header_traum_has_correct_subtitle(testbrowser):
         u'Wie viele Flüchtlingskinder bin ich eine Suchende, Getriebene.')
 
 
-def test_artikel_header_default_should_have_correct_source(testbrowser):
+def test_article_header_default_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-default')
     assert browser.cssselect('header.article__head.article__head--default')
 
 
-def test_artikel_header_traum_should_have_correct_source(testbrowser):
+def test_article_header_traum_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-traum')
     assert browser.cssselect('header.article__head.article__head--traum')
 
 
-def test_artikel_header_text_should_have_correct_source(testbrowser):
+def test_article_header_text_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-text-only')
     assert browser.cssselect('header.article__head.article__head--text-only')
 
 
-def test_artikel_header_briefmarke_should_have_correct_source(testbrowser):
+def test_article_header_briefmarke_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-briefmarke')
     assert browser.cssselect('header.article__head.article__head--stamp')
 
 
-def test_artikel_header_leinwand_should_have_correct_source(testbrowser):
+def test_article_header_leinwand_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-leinwand')
     assert browser.cssselect('header.article__head.article__head--leinwand')
 
 
-def test_artikel_header_mode_should_have_correct_source(testbrowser):
+def test_article_header_mode_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-mode')
     assert browser.cssselect('header.article__head.article__head--mode')
 
 
-def test_artikel_header_standardkolumne_should_have_correct_src(testbrowser):
+def test_article_header_standardkolumne_should_have_correct_src(testbrowser):
     browser = testbrowser('/zeit-magazin/article/standardkolumne-beispiel')
     assert browser.cssselect('header.article__head.article__head--column')
 
 
-def test_artikel_header_sequelpage_should_have_correct_source(testbrowser):
+def test_article_header_sequelpage_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03/seite-2')
     assert browser.cssselect('header.article__head.article__head--sequel')
 

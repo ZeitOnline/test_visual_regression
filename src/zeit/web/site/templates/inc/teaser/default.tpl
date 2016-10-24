@@ -34,7 +34,7 @@
                                         {{ lama.use_svg_icon('zplus', self.layout() + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
                                     {% endif %}
                                 {% endblock %}
-                                {% if teaser is zmo_content %}
+                                {% if teaser is zmo_content and area.kind != 'zmo-parquet' %}
                                     {{ lama.use_svg_icon('logo-zmo-zm', self.layout() + '__kicker-logo--zmo svg-symbol--hide-ie', view.package, a11y=False) }}
                                 {% elif teaser is zett_content %}
                                     {{ lama.use_svg_icon('logo-zett-small', self.layout() + '__kicker-logo--zett svg-symbol--hide-ie', view.package, a11y=False) }}
