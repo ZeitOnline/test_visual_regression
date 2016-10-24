@@ -12,11 +12,13 @@ POSTDEPLOY
 
 - ZON-2968: Shorten byline on centerpages
 
+- ZON-3314: Implement paywall property on views
+
+- ZON-3376: Don't show .metadata__source for articles with Z+ volume badge in header
+
 - BUG-563: Fix ZMO article header for subscription articles
 
 - BUG-561: Unveil Z+ badge for ZMO parquet teasers
-
-- ZON-3314: Implement paywall property on views
 
 
 3.13 (2016-10-20)
