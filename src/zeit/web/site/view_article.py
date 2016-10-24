@@ -39,7 +39,7 @@ log = logging.getLogger(__name__)
              zeit.web.core.view.is_advertorial),
              renderer='templates/article_advertorial.html')
 @view_config(name='komplettansicht',
-             renderer='templates/komplett.html')
+             renderer='templates/komplettansicht.html')
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
              zeit.web.core.view.is_advertorial),
              name='komplettansicht',
@@ -157,7 +157,7 @@ def has_author_image(context, request):
                                 is_column_article,
                                 has_author_image),
              name='komplettansicht',
-             renderer='templates/komplett.html')
+             renderer='templates/komplettansicht.html')
 class ColumnArticle(Article):
 
     header_layout = 'column'
