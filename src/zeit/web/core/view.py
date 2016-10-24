@@ -95,6 +95,10 @@ def c1requestheader_or_get(request, name):
         return request.GET.get(name, None)
 
 
+def is_paywalled(context, request):
+    return c1requestheader_or_get(request, 'C1-Paywall-On')
+
+
 class Base(object):
     """Base class for all views."""
 
