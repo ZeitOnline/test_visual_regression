@@ -579,3 +579,9 @@ def test_volume_header_provides_expected_webtrekk_string(
     assert tracking_data.startswith(
         'stationaer.volume-navigation.current-volume...|'
         'epaper.zeit.de/abo/diezeit/2016/01')
+
+    link = driver.find_element_by_css_selector('.volume-heading-teaser a')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.volume-header.teaser.1..sommer_in_berlin')

@@ -1,7 +1,7 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% block module_list %}
-    <section class="{% block layout_class %}volume-heading{% endblock %}">
+    <section class="{% block layout_class %}volume-heading{% endblock %}" data-ct-area="volume-header">
         <article class="volume-heading__issue">
             <div class="volume-heading__logo">
                 <div class="volume-heading__logo--item">{{ lama.use_svg_icon('logo-dz-white','volume-heading__logo--zon', 'zeit.web.site') }}</div>
@@ -16,7 +16,7 @@
             {% include "zeit.web.core:templates/inc/asset/image_bgr_volume_header.tpl" %}
 
         {% if area.values() | length > 0 %}
-            <div class="{{ self.layout_class() }}-list">
+            <div class="{{ self.layout_class() }}-list" data-ct-row="teaser">
                 {% for module in area.values()[0:3] -%}
                     {% set teaser = module | first_child %}
                     {% set layout = module | get_layout %}
