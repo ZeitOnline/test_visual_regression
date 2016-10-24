@@ -44,6 +44,10 @@ log = logging.getLogger(__name__)
              zeit.web.core.view.is_advertorial),
              name='komplettansicht',
              renderer='templates/article_advertorial_komplett.html')
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
+             zeit.web.core.view.is_paywalled),
+             name='komplettansicht',
+             renderer='zeit.web.core:templates/paywall.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
@@ -155,9 +159,20 @@ def has_author_image(context, request):
              renderer='templates/article.html')
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
                                 is_column_article,
+                                has_author_image,
+                                zeit.web.core.view.is_paywalled),
+             renderer='zeit.web.core:templates/paywall.html')
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
+                                is_column_article,
                                 has_author_image),
              name='komplettansicht',
              renderer='templates/komplettansicht.html')
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
+                                is_column_article,
+                                has_author_image,
+                                zeit.web.core.view.is_paywalled),
+             name='komplettansicht',
+             renderer='zeit.web.core:templates/paywall.html')
 class ColumnArticle(Article):
 
     header_layout = 'column'
