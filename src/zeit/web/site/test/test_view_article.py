@@ -875,10 +875,10 @@ def test_unset_product_id_article_has_correct_meta_robots(
     assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
 
 
-def test_article_has_correct_meta_keywords(application, monkeypatch):
+def test_article_has_correct_meta_keywords(
+        application, monkeypatch, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    request = pyramid.testing.DummyRequest()
 
     # all values
     monkeypatch.setattr(
@@ -887,10 +887,9 @@ def test_article_has_correct_meta_keywords(application, monkeypatch):
         zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
     monkeypatch.setattr(
         zeit.web.core.view.Base, u'meta_keywords', [u'foo', u'bar'])
-    article = zeit.web.site.view_article.Article(context, request)
-    # assertion is always true, perhaps remove parentheses?
-    assert article.meta_keywords == ['Politik, Der Supertitle, foo, bar'], (
-        'wrong article keywords')
+    article = zeit.web.site.view_article.Article(context, dummy_request)
+    assert article.meta_keywords == [
+        'Politik', 'Der Supertitle', 'foo', 'bar']
 
     # missing values
     monkeypatch.setattr(
@@ -899,9 +898,8 @@ def test_article_has_correct_meta_keywords(application, monkeypatch):
         zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
     monkeypatch.setattr(
         zeit.web.core.view.Base, u'meta_keywords', [])
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.meta_keywords == ['Der Supertitle'], (
-        'wrong article keywords')
+    article_view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert article_view.meta_keywords == ['Der Supertitle']
 
 
 def test_robots_rules_for_angebote_articles(application):
@@ -985,7 +983,7 @@ def test_zeit_article_has_correct_meta_line(testserver, selenium_driver):
 
     assert dates[0].text == u'12. Februar 2015, 4:32 Uhr'
     assert dates[1].text == u'Editiert am 15. Februar 2015, 18:18 Uhr'
-    assert source.text == u'DIE ZEIT Nr. 49/2014, 29. Januar 2015'
+    assert source.text == u'DIE ZEIT Nr. 5/2015, 29. Januar 2015'
 
 
 def test_tgs_article_has_correct_meta_line(testserver, selenium_driver):
@@ -1887,13 +1885,14 @@ def test_free_print_article_has_volume_badge(testbrowser):
     assert badge.cssselect('.zplus__media')
 
     # test volume badge is in single page view too
-    browser = testbrowser('/zeit-online/article/zei-free/komplettansicht')
+    browser = testbrowser(
+        '/zeit-online/article/zplus-zeit-free/komplettansicht')
 
     assert browser.cssselect('main article .zplus')
 
 
 def test_free_print_article_shows_no_volume_badge_on_page_two(testbrowser):
-    browser = testbrowser('/zeit-online/article/zei-free/seite-2')
+    browser = testbrowser('/zeit-online/article/zplus-zeit-free/seite-2')
 
     assert not browser.cssselect('main article .zplus')
 
