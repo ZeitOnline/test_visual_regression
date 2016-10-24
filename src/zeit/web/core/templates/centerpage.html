@@ -1,0 +1,16 @@
+{% extends "{}:templates/layout.html".format(view.package) %}
+
+{% block main %}
+    {% for region_prev, region, region_next in view.regions | neighborhood %}
+        {% set region_loop = loop %}
+        {%- include ["zeit.web.core:templates/inc/region/{}.html".format(region.kind),
+                     "zeit.web.core:templates/inc/region/default.html"] -%}
+    {% endfor %}
+{% endblock main %}
+
+{% block meetrics %}
+    {# meetrics should only track the homepage #}
+    {% if view.is_hp %}
+        {{ super() }}
+    {% endif %}
+{% endblock meetrics %}
