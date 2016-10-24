@@ -33,6 +33,9 @@ log = logging.getLogger(__name__)
                request_method='GET')
 @view_config(renderer='templates/article.html')
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
+             zeit.web.core.view.is_paywalled),
+             renderer='zeit.web.core:templates/paywall.html')
+@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
              zeit.web.core.view.is_advertorial),
              renderer='templates/article_advertorial.html')
 @view_config(name='komplettansicht',
