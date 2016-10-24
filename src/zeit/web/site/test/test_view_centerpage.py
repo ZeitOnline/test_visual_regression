@@ -1085,11 +1085,11 @@ def test_homepage_should_have_proper_meetrics_integration(testbrowser):
     assert len(meetrics) == 1
 
 
-def test_centerpage_must_not_have_meetrics_integration(testbrowser):
+def test_centerpage_should_have_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
-    assert len(meetrics) == 0
+    assert len(meetrics) == 1
 
 
 def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):

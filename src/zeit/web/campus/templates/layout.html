@@ -131,9 +131,7 @@
     {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
     {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
-    {% block meetrics %}
-        {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
-    {% endblock %}
+    {% include "zeit.web.core:templates/inc/tracking/meetrics.html" %}
 
     <script>
         var require = { baseUrl: '{{ request.asset_host }}/js/' };
