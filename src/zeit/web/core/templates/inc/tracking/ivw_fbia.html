@@ -1,8 +1,6 @@
-<!-- ivw ver2 tracking -->
-<!-- SZM VERSION="2" -->
-<script type="text/javascript">
+<script>
     var iam_data = {
-            "st" : "", // dynamicallly set mobile|desktop
+            "st" : "zeitonl", // 'mobzeit' on mobile
             "cp" : "{{ view.ressort if view.ressort else 'administratives' }}/{% if view.sub_ressort %}{{ view.sub_ressort }}/{% endif %}bild-text",
             "sv" : "i2", // 'mo' on mobile, see below
             "co" : "URL: {{ view.content_path }}"
@@ -11,8 +9,6 @@
     if ( window.FBIA.isMobileView() ) {
         iam_data.st = "mobzeit";
         iam_data.sv = "mo";
-    } else {
-        iam_data.st = "zeitonl";
     }
 
     if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {

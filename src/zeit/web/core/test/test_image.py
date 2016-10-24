@@ -355,3 +355,15 @@ def test_image_should_handle_ampersand_captions(testbrowser):
     browser = testbrowser('/feature/feature_longform')
     text = browser.xpath('//span[@class="figure__text"]')[0]
     assert u'Heckler &amp; Koch' in lxml.etree.tostring(text)
+
+
+def test_link_nofollow_should_be_set_in_amp_linked_image(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    image_link = browser.cssselect('.figure__link')[0]
+    assert 'nofollow' in image_link.attrib.values()
+
+
+def test_link_nofollow_should_be_set_in_core_image_template(testbrowser):
+    browser = testbrowser('/zeit-online/cp-content/article-03')
+    image_link = browser.cssselect('.article__head__media a')[0]
+    assert 'nofollow' in image_link.attrib.values()
