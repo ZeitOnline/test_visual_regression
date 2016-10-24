@@ -10,6 +10,8 @@ POSTDEPLOY
 3.14 (unreleased)
 -----------------
 
+- ZON-2968: Shorten byline on centerpages
+
 - BUG-563: Fix ZMO article header for subscription articles
 
 - BUG-561: Unveil Z+ badge for ZMO parquet teasers
