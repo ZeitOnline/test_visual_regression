@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - BUG-561: Unveil Z+ badge for ZMO parquet teasers
 
+- ZON-3314: Implement paywall property on views
+
 
 3.13 (2016-10-20)
 -----------------
