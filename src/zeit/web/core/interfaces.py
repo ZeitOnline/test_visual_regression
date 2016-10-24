@@ -60,8 +60,14 @@ class IDeltaSecondsEntity(IDeltaTimeEntity):
 
 
 class ICachingTime(zope.interface.Interface):
-    """Provide a caching time in seconds for a content object such as
+    """Provides a client caching time in seconds for a content object such as
     ICMSContent.
+    """
+
+
+class IVarnishCachingTime(zope.interface.Interface):
+    """Provides a caching time in seconds for a content object such as
+    ICMSContent for our varnish cache.
     """
 
 

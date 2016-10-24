@@ -1752,6 +1752,16 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
 
 
+def test_article_byline_is_displayed_completely(testbrowser):
+    browser = testbrowser('/zeit-online/article/01')
+    dom_node_byline = browser.cssselect('.byline')
+    assert len(dom_node_byline) == 1
+    raw_inner_html = dom_node_byline[0].text_content().replace("\n", "")
+    assert " ".join(raw_inner_html.split()) == \
+           'Eine Glosse von Wenke Husmann, Jochen Bittner,' \
+           ' Heike Jahberg und Jasper Riemann'
+
+
 def test_video_in_article_has_poster_copyright(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     figure_copyright_elem = browser.cssselect('.video-figure__copyright')

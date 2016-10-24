@@ -4,6 +4,15 @@
     <author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="" expires="">
       <display_name py:pytype="str">Wenke Husmann</display_name>
     </author>
+    <author href="http://xml.zeit.de/autoren/B/Jochen_Bittner/index.xml" publication-date="" expires="">
+      <display_name py:pytype="str">Jochen Bittner</display_name>
+    </author>
+    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
+      <display_name py:pytype="str">Heike Jahberg</display_name>
+    </author>
+    <author href="http://xml.zeit.de/autoren/R/Jasper_Riemann/index" publication-date="" expires="">
+      <display_name py:pytype="str">Jasper Riemann</display_name>
+    </author>
     <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00">
       <bu py:pytype="str">Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
       <copyright py:pytype="str">© Warner Bros.</copyright>
