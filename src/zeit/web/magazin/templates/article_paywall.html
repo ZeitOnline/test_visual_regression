@@ -1,0 +1,19 @@
+{% extends "zeit.web.magazin:templates/content.html" %}
+
+{% block content_ad_script -%}{% endblock %}
+
+{% block article_pages %}
+    <div class="article__page">
+        {%- set page = view.current_page -%}
+        {%- set block = (page | select('paragraph') | first) -%}
+        {%- set type = 'paragraph' -%}
+        {% include "zeit.web.core:templates/inc/article/paywall/paragraph.html" %}
+        {% block paywall_form %}{% endblock %}
+    </div>
+{% endblock article_pages %}
+
+{% block comments_balloon %}{% endblock %}
+{% block article_footer %}{% endblock %}
+{% block comments %}{% endblock %}
+{% block article_pagination %}{% endblock %}
+{% block nextread %}{% endblock %}

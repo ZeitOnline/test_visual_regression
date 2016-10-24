@@ -1,0 +1,13 @@
+{% extends "zeit.web.magazin:templates/feature_longform.html" %}
+
+{% block article_pages %}
+<section class="article__page">
+    {%- set page = view.current_page -%}
+    {%- set block = (page | select('paragraph') | first) -%}
+    {%- set type = 'paragraph' -%}
+    {% include "zeit.web.core:templates/inc/article/paywall/paragraph.html" %}
+    {% block paywall_form %}{% endblock %}
+</section>
+{% endblock %}
+
+{% block article_footer %}{% endblock %}
