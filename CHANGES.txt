@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - BUG-561: Unveil Z+ badge for ZMO parquet teasers
 
+- MAINT: Report facebook instant articles for IVW properly
+
 
 3.13 (2016-10-20)
 -----------------
