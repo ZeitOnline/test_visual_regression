@@ -113,6 +113,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
                                 zeit.web.core.view.is_advertorial),
              path_info='.*seite-(.*)',
              renderer='templates/article_advertorial.html')
+@view_config(name='seite',
+             custom_predicates=(zeit.web.site.view.is_zon_content,
+                                zeit.web.core.view.is_paywalled),
+             path_info='.*seite-(.*)',
+             renderer='zeit.web.core:templates/paywall.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
@@ -184,6 +189,13 @@ class ColumnArticle(Article):
                                 has_author_image),
              path_info='.*seite-(.*)',
              renderer='templates/article.html')
+@view_config(name='seite',
+             custom_predicates=(zeit.web.site.view.is_zon_content,
+                                is_column_article,
+                                has_author_image,
+                                zeit.web.core.view.is_paywalled),
+             path_info='.*seite-(.*)',
+             renderer='zeit.web.core:templates/paywall.html')
 class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
     pass
 
