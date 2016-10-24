@@ -16,8 +16,8 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     advertising_enabled = True
 
-    def __init__(self, *args, **kwargs):
-        super(Centerpage, self).__init__(*args, **kwargs)
+    def __init__(self, context, request):
+        super(Centerpage, self).__init__(context, request)
         self.context.advertising_enabled = self.banner_on
 
     @zeit.web.reify
@@ -330,6 +330,6 @@ def json_update_time(request):
     renderer='templates/sitemap.html')
 class Sitemap(Centerpage):
 
-    def __init__(self, *args, **kw):
-        super(Sitemap, self).__init__(*args, **kw)
+    def __init__(self, context, request):
+        super(Sitemap, self).__init__(context, request)
         self.request.response.content_type = 'application/xml'

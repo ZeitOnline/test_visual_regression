@@ -176,6 +176,6 @@ class LiveblogArticle(Article):
 
     header_layout = 'liveblog'
 
-    def __init__(self, *args, **kwargs):
-        super(LiveblogArticle, self).__init__(*args, **kwargs)
+    def __init__(self, context, request):
+        super(LiveblogArticle, self).__init__(context, request)
         self.liveblog = zeit.web.core.interfaces.ILiveblogInfo(self.context)
