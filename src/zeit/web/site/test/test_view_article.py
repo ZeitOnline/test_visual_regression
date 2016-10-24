@@ -876,7 +876,6 @@ def test_unset_product_id_article_has_correct_meta_robots(
 
 
 def test_article_has_correct_meta_keywords(application, monkeypatch):
-
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
@@ -887,11 +886,11 @@ def test_article_has_correct_meta_keywords(application, monkeypatch):
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'supertitle', u'Der Supertitle')
     monkeypatch.setattr(
-        zeit.web.core.view.Base, u'meta_keywords', [u'Test', u'Test1'])
-    article_view = zeit.web.site.view_article.Article(context, request)
-    assert (article_view.meta_keywords ==
-            ['Politik, Der Supertitle, Test, Test 1'],
-            ('wrong article keywords'))
+        zeit.web.core.view.Base, u'meta_keywords', [u'foo', u'bar'])
+    article = zeit.web.site.view_article.Article(context, request)
+    # assertion is always true, perhaps remove parentheses?
+    assert article.meta_keywords == ['Politik, Der Supertitle, foo, bar'], (
+        'wrong article keywords')
 
     # missing values
     monkeypatch.setattr(
@@ -1877,6 +1876,33 @@ def test_zplus_print_article_has_correct_markup_if_reader_revenue_off(
 
     article_metadata_source = browser.cssselect('.metadata__source')
     assert article_metadata_source.__len__() == 1
+
+
+def test_free_print_article_has_volume_badge(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zeit-free')
+    badge = browser.cssselect('main article .zplus')[0]
+    label = badge.cssselect('.zplus__text')[0]
+
+    assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 1/2016'
+    assert badge.cssselect('.zplus__media')
+
+    # test volume badge is in single page view too
+    browser = testbrowser('/zeit-online/article/zei-free/komplettansicht')
+
+    assert browser.cssselect('main article .zplus')
+
+
+def test_free_print_article_shows_no_volume_badge_on_page_two(testbrowser):
+    browser = testbrowser('/zeit-online/article/zei-free/seite-2')
+
+    assert not browser.cssselect('main article .zplus')
+
+
+def test_registration_zon_article_has_no_zplus_badge(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zon-register')
+
+    assert not browser.cssselect('.zplus')
+    assert not browser.cssselect('.article__item--has-badge')
 
 
 def test_free_article_has_no_zplus_badge(testbrowser):
