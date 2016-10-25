@@ -81,6 +81,20 @@ def redirect_on_cp2015_suffix(request):
             location=url)
 
 
+def c1requestheader_or_get(request, name):
+
+    # TODO: Den Request hier nutzen/haben, nicht reinreichen.
+
+    if name in request.headers:
+        return request.headers.get(name, None)
+
+    # We want to allow manipulation via GET-Params for testing,
+    # but not in production
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    if conf.get('environment') != 'production':
+        return request.GET.get(name, None)
+
+
 class Base(object):
     """Base class for all views."""
 
@@ -689,6 +703,23 @@ class Base(object):
     @zeit.web.reify
     def twitter_username(self):
         return 'zeitonline'
+
+    @zeit.web.reify
+    def paywall(self):
+
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'reader_revenue'):
+            return False
+
+        walls = ['register', 'metered', 'paid']
+
+        if not c1requestheader_or_get(self.request, 'C1-Paywall-On'):
+            return None
+
+        if c1requestheader_or_get(self.request, 'C1-Paywall-Reason') in walls:
+            return c1requestheader_or_get(self.request, 'C1-Paywall-Reason')
+
+        return None
 
 
 class CeleraOneMixin(object):

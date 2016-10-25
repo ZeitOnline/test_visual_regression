@@ -2393,6 +2393,14 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
         assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
 
 
+def test_cp_teaser_should_display_three_authors_max(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    byline_raw = browser.cssselect('.teaser-small__byline')
+    byline = ' '.join(byline_raw[0].text.strip().split())
+    assert byline == 'Eine Glosse von Wenke Husmann,' \
+                     ' Jochen Bittner, Heike Jahberg u.a.'
+
+
 def test_imagecopyright_includes_videostage_poster_copyright(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
