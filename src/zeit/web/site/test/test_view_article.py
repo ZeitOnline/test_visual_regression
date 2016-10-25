@@ -1676,6 +1676,7 @@ def test_infographics_should_render_html_correctly(
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.infographic__text')
     assert browser.cssselect('.infographic__caption')
+    assert browser.cssselect('.infographic__media.high-resolution')
 
     # borderless subheadline
     image.caption = False
