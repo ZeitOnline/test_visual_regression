@@ -7,10 +7,16 @@ POSTDEPLOY
 - Nothing yet.
 
 
-3.14 (unreleased)
+3.15 (unreleased)
 -----------------
 
-- ZON-3413: Add display density descriptor to image URLs
+- Nothing changed yet.
+
+
+3.14 (2016-10-25)
+-----------------
+
+- ZON-3346: Consider display density (device pixel ratio) for infographics
 
 - ZON-3236: Don't cache sitemaps in varnish at all (Afterwards merge/deploy varnish)
 
@@ -18,7 +24,7 @@ POSTDEPLOY
 
 - ZON-3314: Implement paywall property on views
 
-- ZON-3376: Don't show .metadata__source for articles with Z+ volume badge in header
+- ZON-3376: Hide source for articles with volume badge in header
 
 - BUG-563: Fix ZMO article header for subscription articles
 
