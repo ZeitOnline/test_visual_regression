@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing yet.
 
 
-3.14 (unreleased)
+3.14 (2016-10-25)
 -----------------
 
 - ZON-3346: Consider display density (device pixel ratio) for infographics
