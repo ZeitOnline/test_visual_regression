@@ -10,6 +10,8 @@ POSTDEPLOY
 3.14 (unreleased)
 -----------------
 
+- ZON-3413: Add display density descriptor to image URLs
+
 - ZON-3236: Don't cache sitemaps in varnish at all (Afterwards merge/deploy varnish)
 
 - ZON-2968: Shorten byline on centerpages
