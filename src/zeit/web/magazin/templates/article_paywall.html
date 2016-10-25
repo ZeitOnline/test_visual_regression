@@ -8,7 +8,9 @@
         {%- set block = (page | select('paragraph') | first) -%}
         {%- set type = 'paragraph' -%}
         {% include "zeit.web.core:templates/inc/article/paywall/paragraph.html" %}
-        {% block paywall_form %}{% endblock %}
+        {% block paywall_form %}
+            {% include "zeit.web.core:templates/inc/article/paywall/form_{0}.html".format(view.paywall) %}
+        {% endblock %}
     </div>
 {% endblock article_pages %}
 

@@ -5,7 +5,9 @@
 
     {view_name(i.e. 'article')}_{paywall_reason(i.e. 'register')}.html
 
-    if a template is missing, the original template is used (w/o paywall)
+    The templates fall back in order of speciality down to the article w/o paywall
 #}
 {%- include ["{0}:templates/{1}_{2}.html".format(view.package, view.view_name, view.paywall),
+             "{0}:templates/{1}_paywall.html".format(view.package, view.view_name),
+             "{0}:templates/article_paywall.html".format(view.package),
              "{0}:templates/{1}.html".format(view.package, view.view_name)] ignore missing -%}
