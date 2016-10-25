@@ -42,7 +42,21 @@
     <ressort name="Campus" uniqueId="http://xml.zeit.de/campus"><title>Campus</title></ressort>
     <ressort name="Zeit für die Schule" uniqueId="http://xml.zeit.de/schule"><title>Zeit für die Schule</title></ressort>
 
-    <ressort name="Kultur" uniqueId="http://xml.zeit.de/kultur"><title>Kultur</title></ressort>
+    <ressort name="Kultur" uniqueId="http://xml.zeit.de/kultur">
+        <title>Kultur</title>
+        <subnavigation name="Musik" uniqueId="http://xml.zeit.de/kultur/musik">
+            <title>Musik</title>
+        </subnavigation>
+        <subnavigation name="Literatur" uniqueId="http://xml.zeit.de/kultur/literatur">
+            <title>Literatur</title>
+        </subnavigation>
+        <subnavigation name="Film" uniqueId="http://xml.zeit.de/kultur/film">
+            <title>Film &amp; TV</title>
+        </subnavigation>
+        <subnavigation name="Kunst" uniqueId="http://xml.zeit.de/kultur/kunst">
+            <title>Kunst</title>
+        </subnavigation>
+    </ressort>
     <ressort name="Feuilleton" uniqueId="http://xml.zeit.de/feuilleton"><title>Feuilleton</title></ressort>
     <ressort name="Musik" uniqueId="http://xml.zeit.de/musik"><title>Musik</title></ressort>
     <ressort name="Literatur" uniqueId="http://xml.zeit.de/literatur"><title>Literatur</title></ressort>
