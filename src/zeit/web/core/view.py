@@ -711,6 +711,10 @@ class Base(object):
     @zeit.web.reify
     def paywall(self):
 
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'reader_revenue'):
+            return False
+
         walls = ['register', 'metered', 'paid']
 
         if not c1requestheader_or_get(self.request, 'C1-Paywall-On'):

@@ -1676,6 +1676,7 @@ def test_infographics_should_render_html_correctly(
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.infographic__text')
     assert browser.cssselect('.infographic__caption')
+    assert browser.cssselect('.infographic__media.high-resolution')
 
     # borderless subheadline
     image.caption = False
@@ -1834,12 +1835,16 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
             in zplus_media[0].attrib['src'])
 
 
-def test_zplus_register_print_article_has_correct_markup(testbrowser):
+def test_zplus_print_article_has_correct_markup(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'reader_revenue': True}.get)
     browser = testbrowser('/zeit-online/article/zplus-zeit-register')
 
     zplus_box = browser.cssselect('.zplus')
     assert len(zplus_box) == 1
 
+    article_metadata_source = browser.cssselect('.metadata__source')
     zplus_banner = zplus_box[0].cssselect('.zplus__banner')
     zplus_marker = zplus_box[0].cssselect('.zplus__marker')
     zplus_text = zplus_box[0].cssselect('.zplus__text')
@@ -1862,6 +1867,17 @@ def test_zplus_register_print_article_has_correct_markup(testbrowser):
     assert 'Aus der' in zplus_label[0].text.strip()
     assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
             in zplus_media[0].attrib['src'])
+    assert article_metadata_source.__len__() == 0
+
+
+def test_zplus_print_article_has_correct_markup_if_reader_revenue_off(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'reader_revenue': False}.get)
+    browser = testbrowser('/zeit-online/article/zplus-zeit-register')
+
+    article_metadata_source = browser.cssselect('.metadata__source')
+    assert article_metadata_source.__len__() == 1
 
 
 def test_free_article_has_no_zplus_badge(testbrowser):

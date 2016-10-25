@@ -3,6 +3,7 @@
             "st" : "zeitonl", // 'mobzeit' on mobile
             "cp" : "{{ view.ressort if view.ressort else 'administratives' }}/{% if view.sub_ressort %}{{ view.sub_ressort }}/{% endif %}bild-text",
             "sv" : "i2", // 'mo' on mobile, see below
+            "fb": "1", // marker for facebook instant articles
             "co" : "URL: {{ view.content_path }}"
         };
 
@@ -12,6 +13,6 @@
     }
 
     if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {
-        iom.h( iam_data, 1 );
+        iom.c( iam_data, 1 );
     }
 </script>
