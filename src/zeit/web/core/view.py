@@ -692,6 +692,16 @@ class Base(object):
         self._webtrekk_assets.append(value)
 
     @zeit.web.reify
+    def ivw_code(self):
+        code = [self.ressort or 'administratives',
+                self.sub_ressort,
+                'bild-text']
+        if zeit.web.core.template.zplus_content(self.context) and (
+                not self.paywall):
+            code.append('paid')
+        return '/'.join([x for x in code if x])
+
+    @zeit.web.reify
     def share_buttons(self):
         if getattr(self.context, 'bigshare_buttons', None):
             return 'big'
