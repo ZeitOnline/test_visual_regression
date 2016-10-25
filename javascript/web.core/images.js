@@ -6,7 +6,7 @@
  * images.js: module for images
  * @module images
  */
-define([ 'sjcl', 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], function( sjcl, $, Zeit ) {
+define([ 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], function( $, Zeit ) {
 
     var images = [],
         $w = $( window ),

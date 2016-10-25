@@ -46,10 +46,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_layout(self):
-        if self.zplus_label:
-            return 'zplus'
-        else:
-            return self.context.header_layout or 'default'
+        return self.context.header_layout or 'default'
 
     @zeit.web.reify
     def pages(self):
@@ -280,7 +277,8 @@ class Article(zeit.web.core.view.Content):
             access = getattr(self.context, 'access', None)
             if self.volume:
                 if access == 'registration':
-                    return {'intro': 'Aus der',
+                    return {'hide_source_label': True,
+                            'intro': 'Aus der',
                             'link': 'http://{}/{!s}/{!s}'.format(
                                 self.request.host,
                                 self.volume.year,

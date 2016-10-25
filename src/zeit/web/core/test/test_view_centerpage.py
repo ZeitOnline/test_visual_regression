@@ -106,9 +106,9 @@ def test_centerpage_should_collect_teaser_counts_from_community(
     assert count == '129'
 
 
-def test_centerpage_should_have_smaxage(testserver, testbrowser):
+def test_centerpage_should_have_xmaxage(testserver, testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
-    assert browser.headers.dict['s-maxage'] == '21600'
+    assert browser.headers.dict['x-maxage'] == '3600'
 
 
 def test_rendering_centerpage_should_cache_region_and_area_values(

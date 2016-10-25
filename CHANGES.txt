@@ -7,7 +7,25 @@ POSTDEPLOY
 - Nothing yet.
 
 
-3.13 (unreleased)
+3.14 (unreleased)
+-----------------
+
+- ZON-3236: Don't cache sitemaps in varnish at all (Afterwards merge/deploy varnish)
+
+- ZON-2968: Shorten byline on centerpages
+
+- ZON-3314: Implement paywall property on views
+
+- ZON-3376: Don't show .metadata__source for articles with Z+ volume badge in header
+
+- BUG-563: Fix ZMO article header for subscription articles
+
+- BUG-561: Unveil Z+ badge for ZMO parquet teasers
+
+- MAINT: Report facebook instant articles for IVW properly
+
+
+3.13 (2016-10-20)
 -----------------
 
 - ZON-3355: Add volume badge for AMP articles
@@ -18,7 +36,11 @@ POSTDEPLOY
 
 - BUG-555: Remove styles for unused image display modes
 
+- BUG-547: Avoid SecurityError because of Same-Origin-Policy
+
 - MAINT: Cleanup ZMO article header and CSS
+
+- MAINT: Remove unused Stanford Javascript Crypto Library
 
 
 3.12 (2016-10-13)

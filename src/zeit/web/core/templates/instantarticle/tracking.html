@@ -9,7 +9,12 @@
             window.FBIA = {
                 tabletMinWidth: 768,
                 getClientWidth: function() {
-                    return Math.max( parent.document.documentElement.clientWidth || 0, parent.window.innerWidth || 0 );
+                    try {
+                        return window.screen.width || 0;
+                    }
+                    catch (e) {
+                        return 0;
+                    }
                 },
                 isMobileView: function() {
                     return this.getClientWidth() < this.tabletMinWidth;
@@ -18,18 +23,17 @@
                     return this.isMobileView() ? 'mobile.site' : 'desktop.site';
                 },
                 getTrackingBreakpointAlike: function() {
-                    var width = this.getClientWidth(),
-                        breakpoint = 'mobile';
-                    if ( width >= 520 ) {
-                        breakpoint = 'phablet';
-                        if ( width >= 768 ) {
-                            breakpoint = 'tablet';
-                            if ( width >= 980 ) {
-                                breakpoint = 'stationär';
-                            }
-                        }
+                    var width = this.getClientWidth();
+
+                    if ( width >= 980 ) {
+                        return 'stationaer';
+                    } else if ( width >= 768 ) {
+                        return 'tablet';
+                    } else if ( width >= 520 ) {
+                        return 'phablet';
                     }
-                    return breakpoint;
+
+                    return 'mobile';
                 }
             };
         </script>
