@@ -58,8 +58,8 @@
     <title>Archiv</title>
     <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fad252" kind="solo" title="Archiv">
       <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38se" kind="solo" visible="True">
-        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526d" title="Archiv" cp:type="cpextra" module="volume-centerpage-header">
-          <cp_extra id="volume-centerpage-header"/>
+        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526d" title="Archiv" cp:type="cpextra" module="archiv-header">
+          <cp_extra id="archiv-header"/>
         </container>
       </region>
     </cluster>
