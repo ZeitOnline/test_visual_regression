@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 
 def test_article_page_should_contain_blocks(testserver, httpbrowser):
@@ -58,3 +59,45 @@ def test_article_contains_authorbox(testbrowser):
     assert name.text.strip() == 'Jochen Wegner'
     assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+
+
+@pytest.mark.parametrize('on,reason', [
+    ('True', 'paid'),
+    ('True', 'register'),
+    ('True', 'metered')
+])
+def test_paywall_switch_showing_forms(on, reason, testbrowser):
+    browser = testbrowser(
+        'zeit-magazin/article/03'
+        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'.format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+
+    browser = testbrowser(
+        'zeit-magazin/article/03/seite-2'
+        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
+        .format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+
+    browser = testbrowser(
+        'zeit-magazin/article/03/komplettansicht'
+        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
+        .format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+
+    browser = testbrowser(
+        'zeit-magazin/article/standardkolumne-beispiel'
+        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
+        .format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+
+    # longform
+    browser = testbrowser(
+        'zeit-magazin/article/05?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
+        .format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+
+    # feature longform
+    browser = testbrowser(
+        'feature/feature_longform?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
+        .format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
