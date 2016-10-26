@@ -10,6 +10,8 @@ POSTDEPLOY
 3.15 (unreleased)
 -----------------
 
+- ZON-3404: Change clicktracking ID for Z+ packshots in article header
+
 - BUG-554: Let headerimages overlay on tubes
 
 - FIX: Fallbacks and polishing for volume header

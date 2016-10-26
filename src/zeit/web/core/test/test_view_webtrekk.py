@@ -548,7 +548,7 @@ def test_volume_teaser_provides_expected_webtrekk_string(
             expected_conditions.presence_of_element_located(
                 (By.CSS_SELECTOR, '.volume-teaser a')))
     except TimeoutException:
-        assert False, 'pagination link must be present'
+        assert False, 'link must be present'
 
     link = driver.find_element_by_css_selector('.volume-teaser__link')
     link.click()
@@ -557,6 +557,52 @@ def test_volume_teaser_provides_expected_webtrekk_string(
         'tablet.volumeteaser.2/seite-1...dieser_artikel_stammt_aus_der_zeit_'
         'nr_01_2016_lesen_sie_diese_ausgabe_als_e_paper_app_und_auf_dem_e_'
         'reader|premium.zeit.de/diezeit/2016/01')
+
+
+def test_volume_teaser_in_article_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(800, 600)
+    driver.get('%s/zeit-online/article/zplus-zeit#debug-clicktracking'
+               % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.zplus__banner a')))
+    except TimeoutException:
+        assert False, 'link must be present'
+
+    link = driver.find_element_by_css_selector('.zplus__banner a')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'tablet.volumeteaser.0...exklusiv_fuer_abonnenten|')
+
+
+def test_coverless_volume_teaser_in_article_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(800, 600)
+    driver.get('%s/zeit-online/article/zplus-zon#debug-clicktracking'
+               % testserver.url)
+
+    # Wait explicity for --coverless, to enforce lading the new article.
+    # Without it, the previous test page is still opened while testing.
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.zplus--coverless .zplus__banner a')))
+    except TimeoutException:
+        assert False, 'link must be present'
+
+    link = driver.find_element_by_css_selector('.zplus__banner a')
+    print(link)
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    print(tracking_data)
+    assert tracking_data.startswith(
+        'tablet.volumeteaser_coverless.0...exklusiv_fuer_abonnenten|')
 
 
 def test_volume_header_provides_expected_webtrekk_string(
