@@ -7,17 +7,38 @@ POSTDEPLOY
 - Nothing yet.
 
 
-3.14 (unreleased)
+3.15 (unreleased)
 -----------------
+
+- ZON-3404: Change clicktracking ID for Z+ packshots in article header
+
+- BUG-554: Let headerimages overlay on tubes
+
+- FIX: Fallbacks and polishing for volume header
+
+
+3.14 (2016-10-25)
+-----------------
+
+- ZON-3346: Consider display density (device pixel ratio) for infographics
+
+- ZON-3236: Don't cache sitemaps in varnish at all (Afterwards merge/deploy varnish)
+
+- ZON-2968: Shorten byline on centerpages
+
+- ZON-3314: Implement paywall property on views
+
+- ZON-3376: Hide source for articles with volume badge in header
 
 - BUG-563: Fix ZMO article header for subscription articles
 
 - BUG-561: Unveil Z+ badge for ZMO parquet teasers
 
+- MAINT: Report facebook instant articles for IVW properly
+
 
 3.13 (2016-10-20)
 -----------------
-- ZON-3236: Don't cache sitemaps in varnish at all
 
 - ZON-3355: Add volume badge for AMP articles
 

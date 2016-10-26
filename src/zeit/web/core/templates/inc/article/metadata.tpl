@@ -9,7 +9,7 @@
     </time>
 {% endif -%}
 
-{% if view.source_label -%}
+{% if view.source_label and not view.zplus_label.hide_source_label -%}
 	<span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
 		{%- if view.source_url -%}
 			<a href="{{ view.source_url }}"{% if view.product_id == 'merian' %} rel="nofollow"{% endif %}>{{ view.source_label }}</a>
