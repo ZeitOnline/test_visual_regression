@@ -57,7 +57,7 @@
 	      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-987b0c46-6967-417b-895e-de0eb14d64f4" kind="solo">
 
 	        <container cp:type="teaser" module="volume" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-97cd491c-c56f-4ef3-96d0-76bde8a80671" supertitle="myspitzmarke" title="mytitel" read_more="myweiterlesen" read_more_url="myweiterlesenurl" force_mobile_image="False">
-	          <block href="http://xml.zeit.de/2016/34/ausgabe" uniqueId="http://xml.zeit.de/2016/34/ausgabe" publication-date="" expires="" date-last-modified="2016-10-20T11:09:53+00:00" date-first-released="2016-10-20T11:09:53.043919+00:00" date-last-published="2016-10-20T11:09:53.043919+00:00" last-semantic-change="2016-10-20T11:09:13.627108+00:00"/>
+	          <block href="http://xml.zeit.de/2016/34/ausgabe" uniqueId="http://xml.zeit.de/2016/34/ausgabe" publication-date="" expires="" date-last-modified="2016-10-20T11:09:53+00:00" date-first-released="2016-10-20T11:09:53.043919+00:00" date-last-published="2016-10-20T11:09:53.043919+00:00" last-semantic-change="2016-10-20T11:09:13.627108+00:00" year="2008" issue="40" contenttype="volume"/>
 	        </container>
 
 	      </region>
