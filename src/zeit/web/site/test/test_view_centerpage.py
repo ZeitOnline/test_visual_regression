@@ -1085,11 +1085,11 @@ def test_homepage_should_have_proper_meetrics_integration(testbrowser):
     assert len(meetrics) == 1
 
 
-def test_centerpage_must_not_have_meetrics_integration(testbrowser):
+def test_centerpage_should_have_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
-    assert len(meetrics) == 0
+    assert len(meetrics) == 1
 
 
 def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
@@ -2393,6 +2393,14 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
         assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
 
 
+def test_cp_teaser_should_display_three_authors_max(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    byline_raw = browser.cssselect('.teaser-small__byline')
+    byline = ' '.join(byline_raw[0].text.strip().split())
+    assert byline == 'Eine Glosse von Wenke Husmann,' \
+                     ' Jochen Bittner, Heike Jahberg u.a.'
+
+
 def test_imagecopyright_includes_videostage_poster_copyright(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     figures = browser.cssselect('figure *[itemprop=copyrightHolder]')
@@ -2513,3 +2521,10 @@ def test_ressort_areas_have_ressort_title(testbrowser):
     areas = browser.cssselect('.cp-area--print-ressort')
     assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
     assert areas[1].cssselect('.cp-area__headline')[0].text == 'Wirtschaft'
+
+
+def test_headerimage_should_overlay_onto_tube_area(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/tube')
+    assert browser.cssselect('.cp-area--tube')
+    header_image = browser.cssselect('.cp-area--solo .header-image')[0]
+    assert '--overlain' in header_image.attrib['class']
