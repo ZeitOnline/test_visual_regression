@@ -1,23 +1,25 @@
 {% if view.volume_navigation %}
-<div class="volume-navigation">
-    <div class="volume-navigation__current">
+<div class="volume-navigation" data-ct-area="volume-navigation">
+    <a class="volume-navigation__current" href="{{view.volume_navigation.link}}" data-ct-row="current-volume" data-ct-column="false" title="Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.">
         <span class="volume-navigation__packshot">
             {% set packshot = view.volume_navigation.cover %}
             {% set packshot_layout = 'volume-navigation' %}
             {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" ignore missing %}
         </span>
         <span class="volume-navigation__cta">
-            Lesen Sie diese Ausgabe als <a class="volume-navigation__link" href="{{view.volume_navigation.link}}">E-Paper, App und auf dem E-Reader</a>.
+            <span class="volume-navigation__link">
+            Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.
+            </span>
         </span>
-    </div>
-    <span class="volume-navigation__previous">
+    </a>
+    <span class="volume-navigation__previous" data-ct-row="prev-volume" data-ct-column="false">
         {% if view.volume_previous %}
         <a class="volume-navigation__previous-link" href="{{view.volume_previous.link}}">
             DIE ZEIT Nr. {{view.volume_previous.label}}
         </a>
         {% endif %}
     </span>
-    <span class="volume-navigation__next">
+    <span class="volume-navigation__next" data-ct-row="next-volume" data-ct-column="false">
         {% if view.volume_next %}
         <a class="volume-navigation__next-link" href="{{view.volume_next.link}}">
             DIE ZEIT Nr. {{view.volume_next.label}}

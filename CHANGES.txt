@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - BUG-554: Let headerimages overlay on tubes
 
+- FIX: Fallbacks and polishing for volume header
+
 
 3.14 (2016-10-25)
 -----------------
