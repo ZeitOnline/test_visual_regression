@@ -66,3 +66,17 @@
 			text-align: left
 	&--inhouse &__media
 		@extend %teaser-small-media-inhouse !optional
+	&--exclusive &__media
+		@extend %teaser-small-media-exclusive
+	&--exclusive &__media + &__container
+		vertical-align: middle
+		+respond-min($break-tablet-min)
+			padding-left: remify(20px)
+	&--exclusive &__title
+		+respond-min($break-tablet-min)
+			font-size: remify(28px)
+		+respond-min($break-desktop-min)
+			font-size: remify(32px)
+	&--exclusive &__metadata
+		+respond-min($break-tablet-min)
+			font-size: em(14px)

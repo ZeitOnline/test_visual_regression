@@ -7,23 +7,15 @@
 <!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-        <meta name="msapplication-config" content="none">
-        {% block pagetitle %}
         <title>{{ view.pagetitle }}</title>
-        {% endblock pagetitle %}
         <meta name="description" content="{{ view.pagedescription }}">
         {% if view.meta_keywords -%}
             <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
-        {%- endif %}
+        {% endif -%}
         <meta name="robots" content="{{ view.meta_robots }}">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" id="viewport-meta">
-
-        {% include "zeit.web.core:templates/inc/inline_js/library.html" %}
-
-        <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
-        <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
-        <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="msapplication-config" content="none">
         {% if view.is_amp -%}
             <link rel="amphtml" href="{{ view.amp_url }}">
         {% endif -%}
@@ -36,34 +28,40 @@
         {% if view.next_page_url -%}
             <link rel="next" href="{{ view.next_page_url }}">
         {% endif -%}
-        {% block css_lte8_link %}
+        {% if view.syndication_source -%}
+            <link rel="syndication-source" href="{{ view.syndication_source }}">
+        {% endif -%}
+
+        {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
+
+        <link rel="shortcut icon" href="http://images.zeit.de/static/img/favicon.ico">
+        <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
+        <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
+
         <!--[if lte IE 8]>
-            <link href="{{ request.asset_host }}/css/web.magazin/all-old-ie.css" media="screen" rel="stylesheet" type="text/css" />
+            <link href="{{ request.asset_host }}/css/web.magazin/all-old-ie.css" media="screen" rel="stylesheet" type="text/css">
         <![endif]-->
-        {% endblock css_lte8_link %}
         {% block css_link %}
         <!--[if gt IE 8]><!-->
-            <link href="{{ request.asset_host }}/css/web.magazin/screen.css" media="screen" rel="stylesheet" type="text/css" />
+            <link href="{{ request.asset_host }}/css/web.magazin/screen.css" media="screen" rel="stylesheet" type="text/css">
         <!--<![endif]-->
         {% endblock css_link %}
-        <!-- iqd css code integrated in screen.css via modules/_iqd_adcode.sass -->
 
-        <!-- date metadata -->
+        {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
         {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
 
         {% block sharing_meta -%}
-        <!-- sharing metadata -->
         {%- include "zeit.web.magazin:templates/inc/meta/sharing.html" -%}
         {%- endblock sharing_meta %}
 
         {# Modernizr -#}
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
 
-        {% if toggles('third_party_modules', 'tracking') %}
+        {% if toggles('third_party_modules') -%}
             <script src="https://script.ioam.de/iam.js"></script>
-        {% endif %}
+        {% endif -%}
         {% if toggles('third_party_modules', 'iqd') %}
-            {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
+            {% include "zeit.web.core:templates/inc/ads/head.html" %}
             {%- block content_ad_script -%}{%- endblock -%}
         {% endif %}
         {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
@@ -73,9 +71,9 @@
     </head>
     <body data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
 
-        {% include "zeit.web.core:templates/inc/tag-manager.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tag-manager.html" %}
+        {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
 
         {% block skiplink %}
         <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
@@ -119,7 +117,7 @@
                 {% endprofile %}
 
                 <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
-                    {% block content %}{% endblock content %}
+                    {% block main %}{% endblock main %}
                 </main>
 
                 {% profile %}
@@ -158,7 +156,7 @@
                 {% endblock footer %}
                 {% endprofile %}
 
-            </div><!-- end: #js-page-wrap-inner -->
+            </div>
 
         {% block adplace_floor %}
             <!-- mobile ad at bottom -->
@@ -167,23 +165,21 @@
 
         </div>
 
-        <script type="text/javascript" src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
+        <script src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
-        {% include "zeit.web.core:templates/inc/ads/finalize.html" ignore missing %}
-
-        <!-- tracking at end -->
-        {% include "zeit.web.core:templates/inc/tracking/zeit.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/meetrics.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
         {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}
-        {% include "zeit.web.core:templates/inc/login-state-footer-esi.html"%}
-        {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/tracking/celera_one.html" ignore missing %}
-        {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/login-state-footer-esi.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
+        {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
+        {% include "zeit.web.core:templates/inc/tracking/meetrics.html" %}
 
-        <script type="text/javascript">
+        <script>
             var require = { baseUrl: '{{ request.asset_host }}/js/' };
         </script>
-        <script type="text/javascript" src="{{ request.asset_host }}/js/magazin.js"></script>
+        <script src="{{ request.asset_host }}/js/magazin.js"></script>
 
         {% if view.vgwort_url %}
         <!--start: vgwort-->

@@ -9,11 +9,9 @@
     <title>ZEIT ONLINE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    {% block css_lte_8_link %}
     <!--[if lte IE 8]>
         <link href="{{ request.asset_host }}/css/web.site/all-old-ie.css" media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
-    {% endblock css_lte_8_link %}
 
     {% block css_link %}
     <!--[if gt IE 8]><!-->
