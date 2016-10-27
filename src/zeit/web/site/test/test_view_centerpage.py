@@ -1085,11 +1085,11 @@ def test_homepage_should_have_proper_meetrics_integration(testbrowser):
     assert len(meetrics) == 1
 
 
-def test_centerpage_must_not_have_meetrics_integration(testbrowser):
+def test_centerpage_should_have_meetrics_integration(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
-    assert len(meetrics) == 0
+    assert len(meetrics) == 1
 
 
 def test_centerpage_renders_buzzbox_accordion(selenium_driver, testserver):
@@ -2521,3 +2521,10 @@ def test_ressort_areas_have_ressort_title(testbrowser):
     areas = browser.cssselect('.cp-area--print-ressort')
     assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
     assert areas[1].cssselect('.cp-area__headline')[0].text == 'Wirtschaft'
+
+
+def test_headerimage_should_overlay_onto_tube_area(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/tube')
+    assert browser.cssselect('.cp-area--tube')
+    header_image = browser.cssselect('.cp-area--solo .header-image')[0]
+    assert '--overlain' in header_image.attrib['class']

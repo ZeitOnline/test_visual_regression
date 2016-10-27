@@ -30,7 +30,7 @@
 {% endif %}
 {%- endblock %}
 
-{% block content %}
+{% block main %}
     <article class="article" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         <div class="article__wrap{% if view.is_wrapped %} article__wrap--is-wrapped{% endif %}">
@@ -90,4 +90,4 @@
     {% endblock comments %}
 
 
-{% endblock content %}
+{% endblock main %}
