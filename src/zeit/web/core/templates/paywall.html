@@ -1,0 +1,13 @@
+{#
+    Switch content templates based on paywall-Attribute.
+    Each content type that will be paywalled needs to have
+    additionally have three templates in the form of:
+
+    {view_name(i.e. 'article')}_{paywall_reason(i.e. 'register')}.html
+
+    The templates fall back in order of speciality down to the article w/o paywall
+#}
+{%- include ["{0}:templates/{1}_{2}.html".format(view.package, view.view_name, view.paywall),
+             "{0}:templates/{1}_paywall.html".format(view.package, view.view_name),
+             "{0}:templates/article_paywall.html".format(view.package),
+             "{0}:templates/{1}.html".format(view.package, view.view_name)] ignore missing -%}
