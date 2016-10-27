@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="" expires="">
+      <display_name>Wenke Husmann</display_name>
+    </author>
+    <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00">
+      <bu>Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der fünf Heere"</bu>
+      <copyright>© Warner Bros.</copyright>
+    </image>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
+    </references>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Wenke Husmann</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Kultur Film</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-12-09T09:23:57.105802+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-27T17:11:30.179510+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-12-09T09:32:11.073684+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-05-27T09:24:56.823418+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-05-27T17:11:30.179510+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">glosse</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-12-05T17:11:22.109311+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.lavrov</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/kultur/film/2014-12/15a48f2c-82b0-4136-b4aa-ad3f57ff2fa0.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">980d578641cd444aa69700ed11b21d63</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Kultur</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">70 Jahre DIE ZEIT</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Film</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">5010</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>"Der Hobbit"</supertitle>
+    <title>Geht's noch größer? </title>
+    <subtitle>Der letzte Herr-der-Ringe-Hobbit-Teil läuft an. Er ist wieder ein bisschen bombastischer. Was, fragt sich der ermattende Kinobesucher, kommt eigentlich noch auf uns zu?</subtitle>
+    <division xmlns:ns0="http://namespaces.zeit.de/CMS/cp" type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="2015-03-03T12:43:31+00:00" is_empty="False" title_local="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt_local="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott" title="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" alt="Kultur, &quot;Der Hobbit&quot;, Film, Peter Jackson, Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott">
+        <bu>Bernie Sanders kommt Hillary Clinton gefährlich nahe. Wenn der Sozialist sie weiter bedrängt, könnte sie nach links ausscheren.</bu>
+        <copyright>© Warner Bros.</copyright>
+      </image>
+      <p>Ja, der WAHNSINN! Diese Berge! Wären sie Wellen, hätte Christopher Nolan sie für <em><a class="" href="http://www.zeit.de/kultur/film/2014-11/interstellar-christopher-nolan-film" target="_blank">Interstellar</a></em> gecastet. Diese Weiten, gegen die selbst die nordamerikanischen Plains wie eine staubige Verkehrsinsel wirken. Und erst die Schlachten! Mal schauen, was Ridley Scott denen nach Weihnachten mit Moses und Ramses entgegensetzen wird. "<a class="" href="http://www.exodus-derfilm.de/#home" target="_blank">Episches</a>", verspricht er bereits. Das alles dank 3D-Kameras und einer Kunststoffbrille zum Greifen plastisch. Doch doch, für <em>Der Hobbit, Teil III, Die Schlacht der fünf Heere</em> kann man den Wahnsinn schon mal großschreiben. </p>
+      <p>Nicht nur CGI-mäßig betrachtet. Die Produktion von <em>Der Herr der Ringe, Teil I, Die Gefährten </em>kostete seinerzeit (das war 2001) 93 Millionen Dollar und spielte 872 Millionen Dollar ein. <em>Der Herr der Ringe, Teil II, Die zwei Türme</em> kostete 94 Millionen Dollar und spielte 926 Millionen ein. <em>Der Herr der Ringe, Teil III, Die Rückkehr des Königs</em> – bleiben Sie dran, es lohnt sich – machte aus 94 Millionen 1,12 Milliarden. <em>Teil IV</em> alias <em><a class="" href="http://www.zeit.de/2012/51/Film-Hobbit-Peter-Jackson-Tolkien" target="_blank">Der Hobbit, I, Eine unerwartete Reise</a></em> machte 1,02 Milliarden Dollar, <em>Teil V</em> (<a class="" href="http://www.zeit.de/kultur/film/2013-12/film-hobbit-smaugs-einoede" target="_blank"><em>Der Hobbit, II, Smaugs Einöde</em></a>) 958 Millionen. Zusammen mit dem jüngsten und letzten Giganten, <em>Der Hobbit, III, Die Schlacht der fünf Heere</em>, kostete die <em>Hobbit</em>-Trilogie 561 Millionen Dollar, mithin mehr als doppelt so viel wie die drei <em>Herr-der-Ringe</em>-Filme. Die Hobbits gelten seitdem als die teuerste Filmproduktion aller Zeiten. Extrapoliert man die Kosten-Nutzen-Rechnung wird man am Ende zusammenfassen können: sechs Milliarden verdient. Hier rettet eine Bande kleinwüchsiger Barfußläufer das Big Business.</p>
+      <p>Alles ganz großartig. Fühlte man sich danach nicht so entsetzlich übersättigt. Das ganze <em>Herr-der-Ringe-Hobbit</em>-Konglomerat ist so bekömmlich wie ein Great-Deal-XXL-Burger-Menü an der Autobahnraststätte. Im vorletzten Teil hatte ich zwischendurch Mails abgearbeitet, weil ich nicht mehr konnte: dieses Heroisieren unter Horngeblase, dieses Aufbäumen, Widerstehen, Beistehen und Wiederauferstehen von mehrfach Durchstochenen zu Monumentalmusik. Ist sicherlich Typ-Sache. In jugendlicheren Jahren hat man sich schließlich auch ganze Nächte lang vor übersteuerten Basslautsprechern den Hörsinn weggedröhnt. Fand ich super. Aber damals fand ich auch McDonalds super.</p>
+      <p>Die Frage drängt sich auf: Geht es eigentlich noch größer? Was machen diese Monumentalfilmer wohl, sagen wir, als übernächstes? Ein Vorgeschmack: <em>Odysseus</em>, <em>Jurassic Park</em>, <em>Fluch der Karibik 5</em> und natürlich <em><a class="" href="https://www.youtube.com/watch?v=erLk59H86ww" target="_blank">Star Wars, Episode VII: The Force Awakens</a></em>. Mal abgesehen von Unterschieden im Faltenwurf der Kostüme und Gesichter ist dieses Megalomanie-Kino kaum noch unterscheidbar. Score, Cast, Schnitt, Plot – da müsste man jetzt plötzlich auf Feinheiten achten. Aber wer ist dazu so sinnesüberreizt in den Tiefen seines iSense-Sessels des Multiplex noch in der Lage?</p>
+      <p>Regisseure sind Menschen, die in aller Regel sehr viele Talente auf sich vereinen: Sie haben eine präzise Vorstellung davon, wie dürre Worte sich in bewegte Bilder verwandeln, wie sie die Künstlerseelen von Schauspielern dazu bringen, diese Bilder zu beleben und unterbezahlte Techniker, sie auszuleuchten und nachzubearbeiten, und sie müssen sehr gut mit Geld umgehen können, es besorgen, verwalten, sparen und investieren und das jahrelang, täglich, unter immer neuen Widrigkeiten. Ein Filmset ist tatsächlich eine nomadisierende Großbaustelle und der Regisseur so was wie ihr Bauleiter. Ich empfinde im Grunde für jeden, der es schafft, einen Film überhaupt fertigzustellen, aufrichtige Hochachtung. Viele Regisseure haben darüberhinaus wirklich kluge und überraschende Ideen, was man mit Film alles anstellen kann.</p>
+      <p>Peter Jackson beispielsweise. Der Mann schreibt ja auch noch die Drehbücher und produziert die Filme, gerade so, als wären ihm die obigen Aufgaben nicht genug. Ein Tausendsassa, ein Arbeitstier, ein Visionär und Waghals. Manche schreiben: ein Genie. </p>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/administratives/autoreninfos/wenke-husmann-info" publication-date="" expires=""/>
+      <p>Und was macht dieser wahnsinnige Filmemacher jetzt, wo Bilbo Beutlin endgültig in seine auenländische Rundhöhle zurückgekehrt ist? Er wird einen Film drehen über die Zerstörung nordrheinwestfälischer und hessischer Talsperren durch britische Kampfflieger am 16. Mai 1943. Genau: einen Kriegsfilm. Aber kein Wummtata. Einige der Piloten waren Neuseeländer, darunter der letzte Überlebende, <a class="" href="http://dambustersblog.com/category/les-munro/" target="_blank">Les Munro</a>, der später Schafzüchter wurde und Bürgermeister von Te Kuiti im Kreis Waitomo. Er ist heute 95 Jahre alt. Ihm gehe es in dem Film vor allem um die Verbindung zu Neuseeland, <a class="" href="http://deadline.com/2014/07/peter-jackson-the-hobbit-stanley-kubrick-the-beatles-810912/" target="_blank">sagt Jackson</a>, seiner Heimat, die er liebt wie Mittelerde. Der Film soll 2016 in die Kinos kommen. </p>
+      <p>Davor freilich produziert Jackson noch eben rasch das 3D-Motion-Capture-Sequel <em>Tim und Struppi 2 </em>fertig, gemeinsam mit Steven Spielberg. Wird sicher auch ganz groß.</p>
+    </division>
+  </body>
+  <teaser>
+    <title>Geht's noch größer?</title>
+    <supertitle>"Der Hobbit"</supertitle>
+    <text>Der letzte Herr-der-Ringe-Hobbit-Teil läuft an. Er ist wieder ein bisschen bombastischer. Was, fragt sich der ermattende Kinobesucher, kommt eigentlich noch auf uns zu?</text>
+  </teaser>
+</article>

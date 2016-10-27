@@ -2523,6 +2523,15 @@ def test_ressort_areas_have_ressort_title(testbrowser):
     assert areas[1].cssselect('.cp-area__headline')[0].text == 'Wirtschaft'
 
 
+def test_exclusive_areas_render_correctly(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/exclusive')
+    areas = browser.cssselect('.cp-area--exclusive-ressort')
+    teasers = browser.cssselect('.cp-area--exclusive-ressort article')
+    assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
+    assert areas[1].cssselect('.cp-area__headline')[0].text == 'Wirtschaft'
+    assert 'teaser-small--exclusive' in teasers[0].get('class')
+
+
 def test_headerimage_should_overlay_onto_tube_area(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/tube')
     assert browser.cssselect('.cp-area--tube')
