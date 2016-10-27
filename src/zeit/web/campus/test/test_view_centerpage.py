@@ -123,7 +123,7 @@ def test_campus_teaser_topic_has_correct_structure(testbrowser):
     assert image.attrib['data-src'].endswith(
         '/zeit-online/cp-content/ig-1/cinema')
     assert image.attrib['data-mobile-src'].endswith(
-        '/zeit-online/cp-content/ig-1/wide')
+        '/zeit-online/cp-content/ig-1/portrait')
 
 
 def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):

@@ -1,19 +1,3 @@
-{#
-
-This is the main template for the context type "centerpage".
-
-Available attributes:
-    zeit.web.magazin.view_centerpage.Centerpage
-
-#}
-{% extends "zeit.web.magazin:templates/layout.html" %}
+{% extends "zeit.web.core:templates/centerpage.html" %}
 
 {% block page_content_additional_class %}for-centerpage{% endblock %}
-
-{% block content %}
-    {% for region in view.regions %}
-        {% set region_loop = loop %}
-        {%- include ["zeit.web.core:templates/inc/region/{}.html".format(region.kind),
-                     "zeit.web.core:templates/inc/region/default.html"] ignore missing -%}
-    {% endfor %}
-{% endblock content %}
