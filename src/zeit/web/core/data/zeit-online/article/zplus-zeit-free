@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/K/Harald_Kaiser/index" publication-date="" expires="">
+      <display_name>Harald Kaiser</display_name>
+    </author>
+    <rankedTags>
+      <tag uuid="c43f68cc-9bb8-4474-9976-26ecd1078861" url_value="auto" type="free">Auto</tag>
+      <tag uuid="0f2a88c3-1c3a-4f88-8580-a5f58b19a4db" url_value="autodesign" type="free">Autodesign</tag>
+      <tag uuid="95eaf9df-6cb1-45b6-9d95-631fa3900329" url_value="autoindustrie" type="free">Autoindustrie</tag>
+      <tag uuid="72d1f119-bc8f-4cb6-b085-a8316966ebb4" url_value="volkswagen" type="Organization">Volkswagen</tag>
+      <tag uuid="aec62814-5b87-4852-9dcf-c07420eb984d" url_value="general-motors" type="Organization">General Motors</tag>
+      <tag uuid="74ade18f-9ec8-43f1-abe6-d20e0af3ef6f" url_value="fiat" type="Organization">Fiat</tag>
+      <tag uuid="a95c03af-b4b9-450d-9cc7-7e573546ec93" url_value="ford" type="Organization">Ford</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/mobilitaet/2016-10/fiat-multipla/" type="jpg"></image>
+    <header/>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">35417891</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Harald Kaiser</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Mobilitaet</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-10-24T05:58:18.067131+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-10-20T01:56:03.181797+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-10-24T05:58:19.940006+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-10-24T05:58:19.831139+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-10-24T05:58:19.707445+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-10-20T01:56:09.037984+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">06.10.2016</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2016-42-AS-Flops-der-Autogeschichte</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.default</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">AS-Flops der Autogeschichte</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-10-24T05:58:14.498051+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.zacharakis</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">AS-Flops der Autogeschichte</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">32</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/2016/42/AS-Flops-der-Autogeschichte</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2016-10-06T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">76480570dfa54268a026a236ef1b46fa</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">561282516</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2016-10-20T01:56:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Mobilitaet</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Wirtschaft</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2016-42</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">#Auto-Flops: Auch erfahrene Hersteller liegen manchmal voll daneben. Wir schauen zurück auf die größten Reinfälle.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">9070</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:c9fe7ace-416d-4d77-a22d-f355894d19d8}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Automobilgeschichte</supertitle>
+    <title>Fahrende Flops</title>
+    <subtitle>Auf der Pariser Automesse werden Dutzende neue Autos präsentiert. Wir schauen lieber zurück – auf die größten Reinfälle.</subtitle>
+    <byline>von Harald Kaiser</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-4/" type="jpg" title="Fiat Multipla" publication-date="" expires="" display_mode="column-width" variant_name="wide" is_empty="False" title_local="Der Fiat Multipla landet wegen seiner Front auf der Liste der hässlichsten Autos." caption_local="Der Fiat Multipla landet wegen seiner Front auf der Liste der hässlichsten Autos." alt_local="Automobilgeschichte: Der Fiat Multipla landet wegen seiner Front auf der Liste der hässlichsten Autos.">
+        <bu>Der Fiat Multipla landet wegen seiner Front auf der Liste der hässlichsten Autos.</bu>
+        <copyright>© Hersteller</copyright>
+      </image>
+      <p>Andächtig steht VW-Markenvorstand Herbert Diess auf der
+      Bühne der Pariser Automesse, als der neueste Volkswagen enthüllt wird. Der <a class="" href="http://www.zeit.de/mobilitaet/2016-10/elektroautos-autosalon-paris-vw-id-opel-ampera-e-reichweite" target="_blank">Volkswagen I.D.,
+      ein Elektroauto mit 600 Kilometer Reichweite</a>, soll 2020 auf den Markt kommen, "der Golf der
+      Zukunft", wie Diess ihn nicht nur wegen der Größe, sondern auch wegen seiner
+      Massentauglichkeit nennt. Aber ob er ein Erfolg wird?</p>
+      <p>Die großen Autobauer waren schon immer groß darin, Großes zu verkünden – und dann ziemliche Flops zu landen. Großes Tamtam war auch angesagt, als im Jahr 2001 der VW Phaeton in Serie ging, der erste <a class="" href="http://www.zeit.de/2002/40/Das_Phaenomen" target="_blank">Luxusschlitten der Marke Volkswagen</a>. Vor mehreren Hundert Gästen in der gläsernen Manufaktur spielte die Staatskapelle Dresden. Stolz erzählte Bundeskanzler Gerhard Schröder, dass er als früherer Aufsichtsrat zu den Vätern des Phaeton zähle: "Ich habe zu denen gehört, die von der Konzeption überzeugt worden sind, und das hat sich auch nicht geändert."</p>
+      <p>Doch wer heute seine Nase an den Fenstern der gläsernen Manufaktur platt drückt, um den <a class="" href="http://www.zeit.de/2006/11/Teurer_Phaeton" target="_blank">Bau des Phaeton</a> zu erleben, starrt ins Leere – seit März ist die Produktion eingestellt. Der Phaeton, benannt nach einem Sohn des griechischen Sonnengotts Helios, reiht sich ein in die lange Liste der Flops der Autogeschichte. Größenwahn, skurrile technische Ideen, missratenes Design – es gibt
+viele Gründe dafür, dass auch erfahrene Autohersteller manchmal voll
+danebenliegen.</p>
+      <p>Der Phaeton war schwer verkäuflich. Analysten schätzten, dass VW pro Auto 28.000 Euro zubuttern musste – bei einem durchschnittlichen Neupreis von 75.000 Euro ohne Sonderausstattung. VW wollte damals den Luxuswagenmarkt aufmischen und Besitzer der Mercedes S-Klasse wie auch des 7er BMW zum Umsteigen reizen. <a class="" href="http://www.zeit.de/thema/general-motors" target="_blank">General Motors</a> (GM) hingegen hatte mehr als 50 Jahre vorher weit Größeres im Sinn, als 1958 im Waldorf Astoria Hotel in New York mordsmäßig auf dicke Hose gemacht wurde. Es sollte gleich der gesamte Autobau revolutioniert werden. Ein Hauch von Hollywood umwehte die Szenerie. Gleißende Scheinwerfer, sphärische Klänge und eine Tanzcombo bildeten den Rahmen für die Präsentation des Firebird III, einer Art Raumschiff auf Rädern.</p>
+      <p>Chefdesigner Harley Earl, ein Zwei-Meter-Hüne, sagte bei der Präsentation: "Das ist das Auto, mit dem Sie eines Tages zum Astroport fahren werden, wenn Sie Ihren Trip zum Mond antreten." Eines mit drei riesigen Leitwerken hinten, vier weiteren Stummelflügeln drum herum sowie zwei Plexiglaskuppeln für je einen Reisenden. Unter der imposanten Hülle steckte eine 225-PS-Gasturbine, anstelle eines Lenkrads gab es einen Steuerknüppel. Dass der markige Satz des Chefdesigners nicht über den Stellenwert eines Horoskops hinausgekommen ist, verwundert nicht weiter. War doch die spinnerte Straßenrakete einfach viel zu weit weg von den Bedürfnissen der Autofahrernation USA. Aber wenigstens fand der Name 1967 Eingang in das Modell-Universum von GM – als Pontiac Firebird.</p>
+      <image base-id="http://xml.zeit.de/2016-09/test-printcover/" type="jpg" title="DIE ZEIT 42/2016" alt="DIE ZEIT 42/2016" href="http://premium.zeit.de/aktuelle-zeit?wt_zmc=fix.int.zonpme.zeitde.artikelbox.ausgseite.bildtext.cover.cover&amp;amp;utm_medium=fix&amp;amp;utm_source=zeitde_zonpme_int&amp;amp;utm_campaign=artikelbox&amp;amp;utm_content=ausgseite_bildtext_cover_cover" publication-date="" expires="" display_mode="float" variant_name="original" is_empty="False" set-manually="True" title_local="DIE ZEIT 42/2016" caption_local="Dieser Artikel stammt aus der ZEIT Nr. 42 vom 6.10.2016." alt_local="DIE ZEIT 42/2016">
+        <bu>Dieser Artikel stammt aus der ZEIT Nr. 42 vom 6.10.2016.</bu>
+        <copyright link="http://premium.zeit.de/aktuelle-zeit?wt_zmc=fix.int.zonpme.zeitde.artikelbox.ausgseite.bildtext.text.text&amp;amp;utm_medium=fix&amp;amp;utm_source=zeitde_zonpme_int&amp;amp;utm_campaign=artikelbox&amp;amp;utm_content=ausgseite_bildtext_text_text">Die aktuelle ZEIT können Sie am Kiosk oder hier erwerben.</copyright>
+      </image>
+      <p>In der Geschichte des Autos gab es jede Menge verheißungsvoller Ankündigungen. Eine der berühmtesten war der Fall des Ford Edsel, der im August 1957 auf den Markt kam und schon bald einen Ehrenplatz auf dem Pannenstreifen der Erinnerung eingenommen hat. Die Limousine schaukelte nur etwas mehr als zwei Jahre über die Highways. Bis zum Produktionsende im November 1959 fand der Ford lediglich 110.000 Kunden. Das entsprach damals weniger als einem Prozent aller US-Autoverkäufe.</p>
+      <p>Die miesen Zahlen lagen auch an der katastrophalen Qualität. So verfielen manche Edsel bei Kälte in eine merkwürdige Starre. Ursache waren die bei Minustemperaturen verhärteten Schaltseile im Automatikgetriebe. Der wesentliche Grund jedoch, weswegen der Edsel zum Ladenhüter wurde, war sein senkrecht stehender Kühlergrill, der manche an eine Vagina erinnerte. Angestachelt von Hausfrauenverbänden, protestierten viele Damen vor Ford-Händlern gegen dieses Auto. Damit war die Luft aus den Reifen.</p>
+    </division>
+    <division type="page" teaser="Regenwasser im Fußraum">
+      <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-5/" type="jpg" title="Volkswagen 1600 TL" publication-date="" expires="" display_mode="column-width" variant_name="wide" is_empty="False" set-manually="True" title_local="Volkswagen 1600 TL" caption_local="Volkswagen 1600 TL">
+        <bu>Volkswagen 1600 TL</bu>
+        <copyright>© Hersteller</copyright>
+      </image>
+      <p>Etwa zur gleichen Zeit machte <a class="" href="http://www.zeit.de/mobilitaet/2015-03/autohersteller-borgward-comeback" target="_blank">Carl F. W. Borgward</a> auf der anderen Seite des Atlantiks, in Bremen, von sich reden. Er schenkte den Aufsteigern der Nachkriegszeit die famose Isabella – damit aber auch inkontinente Automatikgetriebe sowie Einspritzmotoren mit Dampfblasenbildung ab Werk, was zum Stottern führte. Auch Borgwards anderes Modell, die kokette Arabella mit Heckflossen, war qualitativ leider unter aller Kanone. Im Volksmund wurde der Wagen "Bananenauto" genannt, weil er nach der Auslieferung durch Nachbesserungen erst beim Kunden reifte. Zu Anfang zerbröselten die Getriebe schneller, als die Besitzer das Regenwasser aus dem Fußraum schöpfen konnten. Die Undichtigkeiten führten zum Spottnamen "Aquabella". 1961 kam der Konkurs.</p>
+      <p>Ob es die erste Keilform-Limousine Ro 80 war, die wegen hartnäckigen Ölverlusts öfter verreckte, oder ob es die VW-Typen 1500 und 1600 TL waren – die Besitzer dieser Fahrzeuge mussten die Macken entweder mit Selbstironie verarbeiten oder den Spott anderer ertragen. Während sich Ro-80-Fahrer am Steuer mit Handzeichen beim Entgegenkommen grüßten – die Zahl der Finger stand für die Anzahl der Tauschmotoren –, mussten TL-Besitzer mit der hämischen Bemerkung leben, ihr Auto sei eine "traurige Lösung". Das eigentlich als Aufstiegsmodell vom Käfer gedachte Auto mit Schwabbelfahrwerk und schlappen Motoren zog keinen Hering vom Teller.</p>
+      <p>Das alles ist aber nichts gegen das Debakel, das sich die Verantwortlichen der GM-Marke <a class="" href="http://www.zeit.de/auto/2013-06/autos-fehlkonstruktion-unfallgefahr/seite-2" target="_blank">Chevrolet mit dem Modell Corvair</a> Mitte der sechziger Jahre eingebrockt hatten. Der damals noch unbekannte amerikanische Verbraucheranwalt Ralph Nader hatte in seinem Buch <em>Unsafe at Any Speed</em> (Unsicher bei jeder Geschwindigkeit) katastrophale Schwächen des Corvairs aufgedeckt. Obwohl Ingenieure bei der Entwicklung darauf hingewiesen hatten, dass das Heckmotorkonzept zusammen mit der Billig-Hinterachse eine starke Neigung zum Ausbrechen besitze, bestanden die Kostendrücker auf dieser Lösung. Effekt: Es kam zu zahlreichen schweren Unfällen. 1969 wurde die Corvair-Produktion eingestellt.
+      </p>
+      <p>Kreative Köpfe versuchten immer wieder, dem Automobil das Fliegen beizubringen. So stellte Moulton Taylor 1949 und 1950 drei Versionen seines Aerocars vor. Geschäftlich war es ein Desaster. Taylor wie auch andere Erfinder unterschätzten nämlich, dass ihre Geschöpfe immer Kompromisse waren. Sie flogen schlecht oder fuhren saumäßig.</p>
+      <p>Und 1964 war es wieder der Autoriese GM, der sich Unerhörtes traute und ein Auto für eine spezielle Zielgruppe zeigte: den Runabout, der auf der Weltausstellung in New York als kommendes Hausfrauenauto angepriesen wurde. Das Fahrzeug hatte drei Räder, wobei das vordere zum Einparken um 180 Grad gedreht werden konnte. Hinten hatten die Konstrukteure einen ausfahrbaren Einkaufswagen installiert. Der Sinn: Die Hausfrau zieht am Supermarkt den leeren Einkaufswagen aus dem Heck und schiebt ihn später voll wieder rein. Das Auto kam nie über den Status eines Einzelstücks hinaus.</p>
+      <p><a class="" href="http://www.zeit.de/mobilitaet/2015-04/autodesign-haessliche-autos" target="_blank">Richtige Gurken, die tatsächlich in Produktion gingen</a>, gibt es auch in der jüngeren Vergangenheit. Etwa der erste <a class="" href="http://www.zeit.de/2003/30/Autotest_30" target="_blank">Fiat Multipla</a>, der 1998 gleich als Designunfall geboren wurde. Motto: Darin möchte man nicht tot überm Lenkrad hängen. Nach heftiger Stilkritik von allen Seiten meinte <a class="" href="http://www.zeit.de/thema/fiat" target="_blank">Fiat</a> vermeintlich selbstbewusst: "Da müssen wir auf dem Weg zum Kultauto durch." Wenig später wurde das Design verändert.</p>
+      <p>Im Jahr 2000 veranstalteten die Moderatoren der US-Radiosendung <em>Car Talk</em> unter ihren Hörern die Wahl des schlechtesten Autos des Jahrhunderts. An erster Stelle landete der Yugo des jugoslawischen Herstellers Zastava. Ein Wähler kommentierte: "Immerhin hatte er eine beheizbare Heckscheibe. So blieben die Hände beim Anschieben wenigstens warm." Der zweite Platz ging an den Chevrolet Vega, der, so meinte einer, "aus komprimiertem Rost gebaut worden ist". Auf Rang drei folgte der Ford Pinto, zu dem sich so geäußert wurde: "In unserer Straße wurden eines Nachts zwölf Autos gestohlen, nur der Pinto meines Vaters stand am nächsten Morgen noch da." Hübsch ist auch das Urteil über den Plymouth Volare, der Siebter wurde: "Die Lenkung war so mies, dass ich mir einen Weg zur Arbeit suchen musste, auf dem ich nur Rechtskurven zu fahren brauchte."</p>
+    </division>
+  </body>
+  <teaser>
+    <title>Fahrende Flops</title>
+    <text>Größenwahn, skurrile technische Ideen, missratenes Design: Immer wieder liegen auch erfahrene Autohersteller voll daneben. Wir schauen zurück auf die größten Reinfälle.</text>
+    <supertitle>Automobilgeschichte</supertitle>
+  </teaser>
+</article>
