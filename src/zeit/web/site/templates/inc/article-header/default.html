@@ -1,5 +1,5 @@
 {% include "zeit.web.site:templates/inc/article/series.tpl" %}
-{% set template_suffix = '-zplus' if view.zplus_label else '' %}
+{% set template_suffix = '-zplus' if view.zplus_label and view.page_nr == 1 else '' %}
 
 {% block heading %}
     {% include "zeit.web.site:templates/inc/article/heading{}.tpl".format(template_suffix) %}

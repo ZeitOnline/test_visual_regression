@@ -239,7 +239,7 @@ def test_centerpage_teaser_topic_has_correct_structure(testbrowser):
     assert image.attrib['data-src'].endswith(
         '/zeit-online/cp-content/ig-1/cinema')
     assert image.attrib['data-mobile-src'].endswith(
-        '/zeit-online/cp-content/ig-1/wide')
+        '/zeit-online/cp-content/ig-1/portrait')
 
 
 def test_inhouse_label_should_be_displayed(testbrowser):

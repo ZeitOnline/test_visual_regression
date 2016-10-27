@@ -4,13 +4,23 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Nothing yet.
+- `exclusive-ressort` in den cp-layout/regions/areas.xml Dateien bekanntmachen (https://github.com/ZeitOnline/zeit.web/pull/2058/files)
 
 
 3.15 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3404: Change clicktracking ID for Z+ packshots in article header
+
+- ZON-3410: Add ressort area for exclusive page
+
+- ZON-3314: Paywall base templates
+
+- BUG-554: Let headerimages overlay on tubes
+
+- BUG-565: Show volume badge for free accessible print articles and Z+ logo for paid articles only
+
+- FIX: Fallbacks and polishing for volume header
 
 
 3.14 (2016-10-25)

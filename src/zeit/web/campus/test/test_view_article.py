@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import pytest
 
 import zeit.cms.interfaces
 
@@ -336,3 +337,37 @@ def test_article_contains_authorbox(testbrowser):
     assert name.text.strip() == 'Jochen Wegner'
     assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+
+
+@pytest.mark.parametrize('on,reason', [
+    ('True', 'paid'),
+    ('True', 'register'),
+    ('True', 'metered')
+])
+def test_paywall_switch_showing_forms(on, reason, testbrowser):
+    browser = testbrowser(
+        'campus/article/paginated'
+        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'.format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+
+    browser = testbrowser(
+        'campus/article/paginated/seite-2'
+        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
+        .format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+
+    browser = testbrowser(
+        'campus/article/paginated/komplettansicht'
+        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
+        .format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+
+    browser = testbrowser(
+        'campus/article/column?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
+        .format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+
+    browser = testbrowser(
+        'campus/article/simple?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
+        .format(on, reason))
+    assert len(browser.cssselect('.paragraph--faded')) == 1

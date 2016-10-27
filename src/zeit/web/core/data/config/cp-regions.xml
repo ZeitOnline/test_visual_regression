@@ -49,6 +49,9 @@
     <region kind="solo" title="Ressort-Fläche" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="print-ressort"/>
     </region>
+    <region kind="solo" title="Exklusiv-Fläche" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
+        <area kind="exclusive-ressort"/>
+    </region>
     <region kind="solo" title="Jahresuberblick" available="zeit.web.core.interfaces.IInternalUse" type="!storystream">
         <area kind="overview"/>
     </region>
