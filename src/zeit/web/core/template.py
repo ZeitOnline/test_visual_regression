@@ -81,7 +81,11 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
         if not fallback:
             return None
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        default_id = conf.get('default_teaser_images')
+        # fallback = True: legacy but not flexible
+        if type(fallback) == type(True):
+            default_id = conf.get('default_teaser_images')
+        else:
+            default_id = conf.get(fallback)
         context = zeit.cms.interfaces.ICMSContent(default_id, None)
         if image is None:
             image = zeit.web.core.interfaces.IImage(context, None)

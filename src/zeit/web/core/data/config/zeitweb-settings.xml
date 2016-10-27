@@ -9,6 +9,7 @@
   <setting name="author_articles_query" xsi:type="xsd:string">author:"{}" AND (type:article OR type:video OR type:link OR type:gallery)</setting>
 
   <setting name="default_teaser_images" xsi:type="xsd:string">http://xml.zeit.de/zeit-magazin/default/teaser_image</setting>
+  <setting name="default_packshot_diezeit" xsi:type="xsd:string">http://xml.zeit.de/ausgabe/default_packshot_diezeit</setting>
 
   <setting name="breaking_news_timeout" xsi:type="xsd:int">7200</setting>
 
