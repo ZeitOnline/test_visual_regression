@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3404: Change clicktracking ID for Z+ packshots in article header
 
+- ZON-3410: Add ressort area for exclusive page
+
 - BUG-554: Let headerimages overlay on tubes
 
 - FIX: Fallbacks and polishing for volume header
