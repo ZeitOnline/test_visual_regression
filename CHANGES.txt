@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3410: Add ressort area for exclusive page
 
+- ZON-3314: Paywall base templates
+
 - BUG-554: Let headerimages overlay on tubes
 
 - BUG-565: Show volume badge for free accessible print articles and Z+ logo for paid articles only
