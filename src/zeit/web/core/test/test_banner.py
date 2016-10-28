@@ -98,7 +98,7 @@ def test_banner_should_be_displayed_on_article_when_banner_xml_is_missing(
 
 def test_inject_banner_code_should_be_inserted_on_all_pages():
     total = 10
-    pages = [mock.Mock() for i in xrange(total)]
+    pages = [zeit.web.core.article.Page(mock.Mock()) for i in xrange(total)]
 
     with mock.patch.object(
             zeit.web.core.article,
@@ -109,18 +109,18 @@ def test_inject_banner_code_should_be_inserted_on_all_pages():
                     _place_content_ad_by_paragraph):
             _place_adtag_by_paragraph.return_value = True
             _place_content_ad_by_paragraph.return_value = True
-            zeit.web.core.article._inject_banner_code(pages, True, False)
+            zeit.web.core.article._inject_banner_code(pages, 'zon')
             assert _place_adtag_by_paragraph.call_count == total
 
 
 def test_inject_banner_code_should_be_inserted_on_certain_pages():
     total = 10
-    pages = [mock.Mock() for i in xrange(total)]
+    pages = [zeit.web.core.article.Page(mock.Mock()) for i in xrange(total)]
 
     with mock.patch.object(zeit.web.core.article,
                            "_place_adtag_by_paragraph") as mock_method:
         mock_method.return_value = True
-        zeit.web.core.article._inject_banner_code(pages, True, True)
+        zeit.web.core.article._inject_banner_code(pages, 'longform')
         assert mock_method.call_count == 1
 
 

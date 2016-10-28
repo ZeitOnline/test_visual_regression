@@ -48,7 +48,8 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def pages(self):
-        return zeit.web.core.interfaces.IPages(self.context)
+        return zeit.web.core.article.pages_of_article(
+            self.context, self.advertising_enabled)
 
     @zeit.web.reify
     def is_all_pages_view(self):
