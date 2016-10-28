@@ -10,6 +10,8 @@ POSTDEPLOY
 3.15 (unreleased)
 -----------------
 
+- ZON-3403: Update IVW code for paid content
+
 - ZON-3404: Change clicktracking ID for Z+ packshots in article header
 
 - ZON-3410: Add ressort area for exclusive page

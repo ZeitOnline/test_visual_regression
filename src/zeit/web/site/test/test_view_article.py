@@ -1254,23 +1254,12 @@ def test_article_lineage_should_not_render_on_administratives(testbrowser):
     assert len(browser.cssselect('.article-lineage')) == 0
 
 
-def test_advertisement_nextread_should_render_after_veeseo(
-        testbrowser, workingcopy):
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    with checked_out(article) as co:
-        co.ressort = u'Wirtschaft'
-        co.sub_ressort = None
-        zeit.cms.related.interfaces.IRelatedContent(co).related = (
-            zeit.cms.interfaces.ICMSContent(
-                'http://xml.zeit.de/zeit-online/article/02'),)
-    browser = testbrowser('/zeit-online/article/01')
-    nextread = browser.xpath('//main/article')[1]
-    veeseo = browser.xpath('//main/div')[1]
-    ad = browser.xpath('//main/article')[2]
-    assert nextread.attrib.get('class') == 'nextread nextread--with-image'
-    assert veeseo.attrib.get('class') == 'RA2VW2'
-    assert ad.attrib.get('class') == 'nextread-advertisement'
+def test_advertisement_nextread_should_render_after_veeseo(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-verlagsnextread')
+    nextread = browser.cssselect('article.nextread')[0]
+    siblings = nextread.xpath('following-sibling::*')
+    assert siblings[0].get('class') == 'RA2VW2'
+    assert siblings[1].get('class') == 'nextread-advertisement'
 
 
 def test_article_should_contain_veeseo_widget(testbrowser):
@@ -2073,3 +2062,41 @@ def test_paywall_switch_showing_forms(on, reason, testbrowser):
         'zeit-online/article/fischer?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
         .format(on, reason))
     assert len(browser.cssselect('.paragraph--faded')) == 1
+
+
+def test_free_article_has_correct_ivw_code(dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.ivw_code == 'kultur/film/bild-text'
+
+
+def test_free_article_without_ressort_has_correct_ivw_code(dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    view.ressort = ''
+    assert view.ivw_code == 'administratives/bild-text'
+
+
+def test_free_article_without_sub_ressort_has_correct_ivw_code(dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    view.sub_ressort = None
+    assert view.ivw_code == 'sport/bild-text'
+
+
+def test_paid_subscription_article_has_correct_ivw_code(dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.ivw_code == 'kultur/film/bild-text/paid'
+
+
+def test_not_paid_subscription_article_has_correct_ivw_code(dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit')
+    dummy_request.GET = {'C1-Paywall-On': 'true', 'C1-Paywall-Reason': 'paid'}
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.ivw_code == 'kultur/film/bild-text'

@@ -2,11 +2,11 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <author expires="" href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="">
-      <display_name py:pytype="str">Wenke Husmann</display_name>
+      <display_name>Wenke Husmann</display_name>
     </author>
-    <image align="left" base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" expires="2015-03-03T12:43:31+00:00" publication-date="" type="jpg">
-      <bu py:pytype="str">Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;</bu>
-      <copyright py:pytype="str">© Warner Bros.</copyright>
+    <image align="left" base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg">
+      <bu>Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;</bu>
+      <copyright>© Warner Bros.</copyright>
     </image>
     <rankedTags>
       <tag score="5" type="topic" url_value="film" uuid="3b2d448a-00a7-4b1b-9235-8503207e01d9">Film</tag>
@@ -19,53 +19,53 @@
     <references>
       <reference type="intern" href="http://xml.zeit.de/zeit-online/article/01" contenttype="article" />
     </references>
-    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">abo</attribute>
-    <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
-    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Wenke Husmann</attribute>
-    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
-    <attribute name="channels" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Kultur Film</attribute>
-    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Redaktion</attribute>
-    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">yes</attribute>
-    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">2014-12-09T09:23:57.105802+00:00</attribute>
-    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">2014-12-05T17:12:24.668544+00:00</attribute>
-    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">2014-12-09T09:32:11.073684+00:00</attribute>
-    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">2014-12-09T09:24:56.823418+00:00</attribute>
-    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">2014-12-05T17:11:30.179510+00:00</attribute>
-    <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">yes</attribute>
-    <attribute name="executable" ns="http://apache.org/dav/props/" py:pytype="str">F</attribute>
-    <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="genre" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">glosse</attribute>
-    <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
-    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">2014-12-05T17:11:22.109311+00:00</attribute>
-    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">ldap.lavrov</attribute>
-    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
-    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
-    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">http://xml.zeit.de/kultur/film/2014-12/15a48f2c-82b0-4136-b4aa-ad3f57ff2fa0.tmp</attribute>
-    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">ZEDE</attribute>
-    <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort" py:pytype="str">980d578641cd444aa69700ed11b21d63</attribute>
-    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">yes</attribute>
-    <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
-    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">no</attribute>
-    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Kultur</attribute>
-    <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">yes</attribute>
-    <attribute name="serie" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Geschafft!</attribute>
-    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">yes</attribute>
-    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">OK</attribute>
-    <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">Film</attribute>
-    <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">5010</attribute>
-    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta" py:pytype="str">article</attribute>
-    <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow" py:pytype="str">no</attribute>
-    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">{urn:uuid:21da7127-f585-49ed-b4c6-200c7a1f7fea}</attribute>
-    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">49</attribute>
-    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document" py:pytype="str">2014</attribute>
-    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta" py:pytype="str">&lt;pickle&gt;
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">abo</attribute>
+    <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Wenke Husmann</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="channels" ns="http://namespaces.zeit.de/CMS/document">Kultur Film</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2014-12-09T09:23:57.105802+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2014-12-05T17:12:24.668544+00:00</attribute>
+    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2014-12-09T09:32:11.073684+00:00</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2014-12-09T09:24:56.823418+00:00</attribute>
+    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2014-12-05T17:11:30.179510+00:00</attribute>
+    <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="genre" ns="http://namespaces.zeit.de/CMS/document">glosse</attribute>
+    <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-12-05T17:11:22.109311+00:00</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.lavrov</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/kultur/film/2014-12/15a48f2c-82b0-4136-b4aa-ad3f57ff2fa0.tmp</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">980d578641cd444aa69700ed11b21d63</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Kultur</attribute>
+    <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="serie" ns="http://namespaces.zeit.de/CMS/document">Geschafft!</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">Film</attribute>
+    <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document">5010</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">article</attribute>
+    <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:21da7127-f585-49ed-b4c6-200c7a1f7fea}</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">49</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
       &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
@@ -87,8 +87,8 @@
     <byline>von Barbara Baumgartner</byline>
     <division type="page">
       <image align="left" alt="Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott" alt_local="Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott" expires="2015-03-03T12:43:31+00:00" is_empty="False" layout="large" publication-date="" src="http://xml.zeit.de/exampleimages/artikel/advertorial-01/wochenmarkt-43.jpg" title="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" title_local="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" type="jpg">
-        <bu py:pytype="str">Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung.</bu>
-        <copyright py:pytype="str">© Warner Bros.</copyright>
+        <bu>Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung.</bu>
+        <copyright>© Warner Bros.</copyright>
       </image>
       <p>Es fällt auf, dass in Barcelona das Dribbling ein wichtiges Stilmittel ist (189 erfolgreiche). Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung (71). Seine Alleingänge schaffen Raum für die Mitspieler. Weil sie trotzdem oft den Ball besitzen, zeigt das: Sie passen öfter, spielen lieber ab.</p>
       <p>Es fällt auf, dass in Barcelona das Dribbling ein wichtiges Stilmittel ist (189 erfolgreiche). Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung (71). Seine Alleingänge schaffen Raum für die Mitspieler. Weil sie trotzdem oft den Ball besitzen, zeigt das: Sie passen öfter, spielen lieber ab.</p>
