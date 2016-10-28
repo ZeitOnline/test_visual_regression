@@ -1,6 +1,6 @@
 {%- extends "zeit.web.site:templates/inc/module/centerpage-header.html" -%}
 
-{% block modifier %}centerpage-header--volume{% endblock %}">
+{% block modifier %}centerpage-header--archive{% endblock %}">
 {% block additional_content %}
     <div class="centerpage-header__text">
         Hier finden sie alle Artikel aus DIE ZEIT seit 1946.
@@ -10,5 +10,5 @@
             <option value="{{ year }}" {%- if year == view.volume_year %}selected{% endif -%}>{{ year }}</option>
         {% endfor %}
     </select>
-    <a class="centerpage-header__link" href="{{ request.url }}" data-id="volume-overview-dropwdown...text">Suchen</a>
+    <a class="centerpage-header__link" href="{{ request.url }}" data-id="archive-dropdown...text">Suchen</a>
 {% endblock %}
