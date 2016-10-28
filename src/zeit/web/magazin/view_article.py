@@ -53,7 +53,6 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
                           renderer='templates/longform.html')
 class LongformArticle(Article):
 
-    is_longform = True
     pagetitle_suffix = u' | ZEIT ONLINE'
 
     @zeit.web.reify

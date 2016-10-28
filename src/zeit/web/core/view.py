@@ -948,8 +948,6 @@ class CommentMixin(object):
 
 class Content(CeleraOneMixin, CommentMixin, Base):
 
-    is_longform = False
-
     @zeit.web.reify
     def basename(self):
         return os.path.basename(self.request.path.rstrip('/'))

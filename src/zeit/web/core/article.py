@@ -218,7 +218,7 @@ class ILongformArticle(zeit.content.article.interfaces.IArticle):
     pass
 
 
-class IFeatureLongform(zeit.content.article.interfaces.IArticle):
+class IFeatureLongform(ILongformArticle):
     pass
 
 
