@@ -149,6 +149,5 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
         try:
             self.context = zeit.cms.interfaces.ICMSContent(
                 'http://xml.zeit.de/index')
-            self.context.advertising_enabled = self.banner_on
         except TypeError:
             raise pyramid.httpexceptions.HTTPNotFound()

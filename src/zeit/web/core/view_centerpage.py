@@ -16,10 +16,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     advertising_enabled = True
 
-    def __init__(self, context, request):
-        super(Centerpage, self).__init__(context, request)
-        self.context.advertising_enabled = self.banner_on
-
     @zeit.web.reify
     def volume(self):
         return zeit.content.volume.interfaces.IVolume(self.context, None)

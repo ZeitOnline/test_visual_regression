@@ -27,13 +27,11 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 
     def __init__(self, context, request):
         super(Video, self).__init__(context, request)
-        self.context.advertising_enabled = self.banner_on
         if self.request.headers.get('X-SEO-Slug', '') != self.seo_slug:
             location = '{}/{}'.format(self.content_url, self.seo_slug)
             if self.request.query_string:
                 location = '{}?{}'.format(location, self.request.query_string)
-            raise pyramid.httpexceptions.HTTPMovedPermanently(
-                location=location)
+            raise pyramid.httpexceptions.HTTPMovedPermanently(location)
 
     @zeit.web.reify
     def breadcrumbs(self):

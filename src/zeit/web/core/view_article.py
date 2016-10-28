@@ -32,7 +32,6 @@ class Article(zeit.web.core.view.Content):
 
     def __init__(self, context, request):
         super(Article, self).__init__(context, request)
-        self.context.advertising_enabled = self.banner_on
         self.context.current_year = datetime.date.today().year
         # throw 404 for 'komplettansicht' if there's just one article page
         if self.is_all_pages_view and len(self.pages) == 1:
