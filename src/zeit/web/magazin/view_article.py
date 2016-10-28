@@ -28,8 +28,32 @@ log = logging.getLogger(__name__)
                        zeit.web.core.view.is_advertorial),
     renderer='templates/advertorial.html')
 @pyramid.view.view_config(renderer='templates/article.html')
+@pyramid.view.view_config(
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                       zeit.web.core.view.is_paywalled),
+    renderer='zeit.web.core:templates/paywall.html')
 @pyramid.view.view_config(name='komplettansicht',
-                          renderer='templates/article_komplett.html')
+                          renderer='templates/komplettansicht.html')
+@pyramid.view.view_config(
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                       zeit.web.core.view.is_paywalled),
+    name='komplettansicht',
+    renderer='zeit.web.core:templates/paywall.html')
+@pyramid.view.view_config(
+    context=zeit.web.core.article.IColumnArticle,
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                       zeit.web.core.view.is_paywalled),
+    renderer='zeit.web.core:templates/paywall.html')
+@pyramid.view.view_config(
+    context=zeit.web.core.article.IShortformArticle,
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                       zeit.web.core.view.is_paywalled),
+    renderer='zeit.web.core:templates/paywall.html')
+@pyramid.view.view_config(
+    context=zeit.web.core.article.IPhotoclusterArticle,
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                       zeit.web.core.view.is_paywalled),
+    renderer='zeit.web.core:templates/paywall.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
 
     @zeit.web.reify
@@ -45,15 +69,30 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
 @pyramid.view.view_config(name='seite',
                           path_info='.*seite-(.*)',
                           renderer='templates/article.html')
+@pyramid.view.view_config(
+    name='seite',
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                       zeit.web.core.view.is_paywalled),
+    path_info='.*seite-(.*)',
+    renderer='zeit.web.core:templates/paywall.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
 @pyramid.view.view_config(context=zeit.web.core.article.ILongformArticle,
                           renderer='templates/longform.html')
+@pyramid.view.view_config(
+    context=zeit.web.core.article.ILongformArticle,
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
+                       zeit.web.core.view.is_paywalled),
+    renderer='zeit.web.core:templates/paywall.html')
 class LongformArticle(Article):
 
     pagetitle_suffix = u' | ZEIT ONLINE'
+
+    def __init__(self, context, request):
+        super(LongformArticle, self).__init__(context, request)
+        self.view_name = 'longform'
 
     @zeit.web.reify
     def adwords(self):
@@ -80,7 +119,15 @@ class LongformArticle(Article):
 
 @pyramid.view.view_config(context=zeit.web.core.article.IFeatureLongform,
                           renderer='templates/feature_longform.html')
+@pyramid.view.view_config(
+    context=zeit.web.core.article.IFeatureLongform,
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
+    renderer='zeit.web.core:templates/paywall.html')
 class FeatureLongform(LongformArticle):
+
+    def __init__(self, context, request):
+        super(LongformArticle, self).__init__(context, request)
+        self.view_name = 'feature_longform'
 
     @zeit.web.reify
     def adwords(self):

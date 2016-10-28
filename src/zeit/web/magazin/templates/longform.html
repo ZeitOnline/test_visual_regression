@@ -1,7 +1,7 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
 {% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
-{% import 'zeit.web.magazin:templates/article.html' as article with context %}
+{% import "zeit.web.magazin:templates/content.html" as article with context %}
 
 {% block adplace_top %}
 {% endblock adplace_top %}
@@ -41,7 +41,7 @@
 {% block adplace_billboard %}
 {% endblock adplace_billboard %}
 
-{% block content %}
+{% block main %}
     <article class="article article--longform" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         <div class="article__wrap">
@@ -81,6 +81,7 @@
 
                 {{ lama.adplace(view.banner(3), view) }}
 
+                {% block article_pages %}
                 {% for page in view.pages %}
                 <section class="article__page">
                     {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
@@ -89,6 +90,7 @@
                     {{ article.render_page(page) }}
                 </section>
                 {% endfor %}
+                {% endblock article_pages %}
             </div>
 
             {% block article_footer %}
@@ -103,7 +105,7 @@
             {% endblock %}
         </div>
     </article>
-{% endblock content %}
+{% endblock main %}
 
 {% block adplace_floor %}
 {% endblock adplace_floor %}

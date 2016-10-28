@@ -264,6 +264,10 @@ class Article(zeit.web.core.view.Content):
     def volume(self):
         return zeit.content.volume.interfaces.IVolume(self.context, None)
 
+    # this property returns all the information for the article header badge
+    # - Z+ logo and link for subscription content
+    # - cover and link for print volume where applicable
+    # ... a more descriptive name would be zplus_or_volume_badge
     @zeit.web.reify
     def zplus_label(self):
 
@@ -271,31 +275,45 @@ class Article(zeit.web.core.view.Content):
                 'reader_revenue'):
             return False
 
+        # default values
+        badge = {
+            'cover': False,
+            'hide_source_label': False,
+            'intro': '',
+            'link': None,
+            'link_text': '',
+            'zplus': False
+        }
+
         try:
             access = getattr(self.context, 'access', None)
+
+            if access == 'abo':
+                badge.update({
+                    'link': 'http://{}/exklusiv'.format(self.request.host),
+                    'link_text': u'Exklusiv für Abonnenten',
+                    'zplus': True
+                })
+
             if self.volume:
-                if access == 'registration':
-                    return {'hide_source_label': True,
-                            'intro': 'Aus der',
-                            'link': 'http://{}/{!s}/{!s}'.format(
-                                self.request.host,
-                                self.volume.year,
-                                self.volume.volume),
-                            'link_text': 'ZEIT Nr. {!s}/{!s}'.format(
-                                self.volume.volume, self.volume.year),
-                            'cover': self.volume.covers['printcover']}
-                elif access == 'abo':
-                    return {'intro': '',
-                            'link': 'http://{}/{!s}/{!s}'.format(
-                                self.request.host,
-                                self.volume.year, self.volume.volume),
-                            'link_text': u'Exklusiv für Abonnenten',
-                            'cover': self.volume.covers['printcover']}
-            elif access and access != 'free':
-                return {'intro': '',
-                        'link': 'http://{}/exklusiv'.format(self.request.host),
-                        'link_text': u'Exklusiv für Abonnenten',
-                        'cover': False}
+                badge.update({
+                    'cover': self.volume.covers['printcover'],
+                    'link': 'http://{}/{!s}/{!s}'.format(
+                        self.request.host,
+                        self.volume.year,
+                        self.volume.volume),
+                })
+
+                if access != 'abo':
+                    badge.update({
+                        'hide_source_label': True,
+                        'intro': 'Aus der',
+                        'link_text': 'ZEIT Nr. {!s}/{!s}'.format(
+                            self.volume.volume, self.volume.year)
+                    })
+
+            if badge['link']:
+                return badge
             return False
         except:
             return False
@@ -354,6 +372,10 @@ class Article(zeit.web.core.view.Content):
                 if block_type in self.WEBTREKK_ASSETS:
                     assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
         return assets
+
+    @zeit.web.reify
+    def view_name(self):
+        return self.request.view_name or 'article'
 
 
 class AcceleratedMobilePageArticle(Article):

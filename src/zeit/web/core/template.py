@@ -165,6 +165,11 @@ def framebuilder(view):
     return isinstance(view, zeit.web.core.view.FrameBuilder)
 
 
+@zeit.web.register_test
+def paragraph(block):
+    return block_type(block) == 'paragraph'
+
+
 @zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block
@@ -283,6 +288,11 @@ def obj_debug(value):
         return '\n'.join(res)
     except AttributeError:
         return False
+
+
+@zeit.web.register_filter
+def neighborhood(iterable, default=None):
+    return zeit.web.core.utils.neighborhood(iterable, default)
 
 
 @zeit.web.register_filter
