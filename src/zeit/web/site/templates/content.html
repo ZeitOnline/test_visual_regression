@@ -70,7 +70,7 @@
 
     {% block article_google_ad %}
         {% if view.context.advertising_enabled -%}
-            {{ lama.adplace(view.banner(5), view) }}
+            {{ lama.adplace(banner(5), view) }}
         {%- endif %}
     {% endblock article_google_ad %}
     {% block comments %}

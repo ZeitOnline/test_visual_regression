@@ -4,12 +4,12 @@
 {% if view.advertising_enabled %}
     {% if loop.index == 10 %}
         <div class="newsteaser__ad">
-            {{ lama.adplace(view.banner(7), view) }}
-            {{ lama.adplace(view.banner(4), view, mobile=True) }}
+            {{ lama.adplace(banner(7), view) }}
+            {{ lama.adplace(banner(4), view, mobile=True) }}
         </div>
     {% elif loop.index == 30 %}
         <div class="newsteaser__ad">
-            {{ lama.adplace(view.banner(8), view) }}
+            {{ lama.adplace(banner(8), view) }}
         </div>
     {% endif %}
 {% endif %}

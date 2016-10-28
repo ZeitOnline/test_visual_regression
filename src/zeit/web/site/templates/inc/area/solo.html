@@ -13,7 +13,7 @@ Display mobile ad place 3 in zon on homepage after the first module that's not a
     and module_loop.index < 3
 %}
     {% if (module_loop.index == 1 and layout != 'rawtext') or ( module_loop.index == 2 )  %}
-    {{ lama.adplace(view.banner(3), view, mobile=True) }}
+    {{ lama.adplace(banner(3), view, mobile=True) }}
     {% endif %}
 {% endif %}
 {% endblock %}

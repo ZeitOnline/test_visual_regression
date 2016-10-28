@@ -3,7 +3,7 @@
 {% macro place(item) -%}
     {{ lama.adplace(item, view) }}
     {% if item.tile == 7 %}
-        {{ lama.adplace(view.banner(4), view, mobile=True) }}
+        {{ lama.adplace(banner(4), view, mobile=True) }}
     {% endif %}
 {%- endmacro %}
 

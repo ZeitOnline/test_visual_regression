@@ -3,23 +3,18 @@ import mock
 
 import zeit.cms.interfaces
 
-import zeit.web.core.application
 import zeit.web.core.banner
+import zeit.web.core.template
 import zeit.web.magazin
 
 
-def test_banner_view_should_return_place_if_tile_present(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/02')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert isinstance(article_view.banner(1), zeit.web.core.banner.Place)
+def test_banner_global_should_return_place_if_tile_present(application):
+    assert isinstance(
+        zeit.web.core.template.banner(1), zeit.web.core.banner.Place)
 
 
-def test_banner_view_should_return_none_if_tile_is_not_present(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/02')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.banner(999) is None
+def test_banner_global_should_return_none_if_tile_is_not_present(application):
+    assert zeit.web.core.template.banner(999) is None
 
 
 def test_banner_toggles_viewport_zoom(application):

@@ -86,7 +86,7 @@
         {% if (loop.length < view.comments.ad_place and loop.last ) or loop.index == view.comments.ad_place -%}
             {% if view.context.advertising_enabled -%}
             <div class="comment__ad">
-                {{ lama.adplace(view.banner(8), view) }}
+                {{ lama.adplace(banner(8), view) }}
             </div>
             {%- endif %}
         {% endif %}
@@ -123,7 +123,7 @@
 {% else %}
     {% if view.context.advertising_enabled -%}
         <div class="comment__ad">
-            {{ lama.adplace(view.banner(8), view) }}
+            {{ lama.adplace(banner(8), view) }}
         </div>
     {% endif %}
 {% endif %}

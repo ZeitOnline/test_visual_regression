@@ -325,12 +325,6 @@ class Base(object):
     def adwords(self):
         return ['zeitonline']
 
-    def banner(self, tile):
-        try:
-            return list(zeit.web.core.banner.BANNER_SOURCE)[tile - 1]
-        except IndexError:
-            return
-
     @zeit.web.reify
     def canonical_url(self):
         """ Set own url as default canonical. Overwrite for special
