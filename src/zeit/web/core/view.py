@@ -262,12 +262,12 @@ class Base(object):
         return self.type
 
     @zeit.web.reify
-    def banner_on(self):
-        # respect the global advertising switch
-        if self.advertising_enabled is False or self.context.banner is False:
+    def advertising_enabled(self):
+        if zeit.web.core.application.FEATURE_TOGGLES.find('iqd') is False:
             return False
-        # deliver banner if no banner is defined in xml
-        if self.context.banner is None or self.context.banner is True:
+        elif self.context.banner is False:
+            return False
+        else:
             return True
 
     def banner_toggles(self, name):
@@ -592,7 +592,6 @@ class Base(object):
             return value.lower() if value else ''
 
         pagination = '1/1'
-        banner_on = 'no'
         # beware of None
         product_id = get_param('product_id')
 
@@ -602,9 +601,6 @@ class Base(object):
             else:
                 page = self.pagination.get('current')
             pagination = '{}/{}'.format(page, self.pagination.get('total'))
-
-        if getattr(self.context, 'advertising_enabled', False):
-            banner_on = 'yes'
 
         if getattr(self, 'is_push_news', False):
             push = 'wichtigenachrichten.push'
@@ -642,7 +638,7 @@ class Base(object):
             ('cp7', get_param('news_source')),  # Quelle
             ('cp8', product_id),  # Product-ID
             ('cp9', get_param('banner_channel')),  # Banner-Channel
-            ('cp10', banner_on),  # Banner aktiv
+            ('cp10', ('no', 'yes')[self.advertising_enabled]),  # Banner aktiv
             ('cp11', ''),  # Fehlermeldung
             ('cp12', 'desktop.site'),  # Seitenversion Endgerät
             ('cp13', 'stationaer'),  # Breakpoint
