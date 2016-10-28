@@ -288,7 +288,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         if ( debugMode ) {
             event.preventDefault();
             event.stopImmediatePropagation();
-            console.debug( trackingData );
+            console.debug( trackingData + ' (method: ' + event.data.funcName + ')' );
             window.trackingData = trackingData;
         } else if ( trackingData ) {
             window.wt.sendinfo({
