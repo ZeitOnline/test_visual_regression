@@ -171,8 +171,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def authors(self):
-        return zeit.web.core.article.convert_authors(
-            self.context, self.is_longform)
+        return zeit.web.core.article.convert_authors(self.context)
 
     @zeit.web.reify
     def authors_list(self):

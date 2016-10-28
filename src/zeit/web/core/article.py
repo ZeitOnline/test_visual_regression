@@ -182,7 +182,8 @@ def pages_of_article(context):
     return _inject_banner_code(pages, advertising_enabled, is_longform)
 
 
-def convert_authors(article, is_longform=False):
+def convert_authors(article):
+    is_longform = zeit.web.core.article.ILongformArticle.providedBy(article)
     author_list = []
     try:
         author_ref = article.authorships
