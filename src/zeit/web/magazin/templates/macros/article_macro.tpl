@@ -2,7 +2,9 @@
 
 {% macro place(item) -%}
     {{ lama.adplace(item, view) }}
-    {{ lama.adplace_middle_mobile(item, view) }}
+    {% if item.tile == 7 %}
+        {{ lama.adplace(view.banner(4), view, mobile=True) }}
+    {% endif %}
 {%- endmacro %}
 
 {% macro supertitle() -%}
