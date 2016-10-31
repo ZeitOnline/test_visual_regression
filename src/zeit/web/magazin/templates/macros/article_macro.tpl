@@ -60,12 +60,6 @@
     {% endif %}
 {%- endmacro %}
 
-{% macro advertising(ad) -%}
-    {% if ad.type == 'rectangle' %}
-        <div class="iqdplace" data-place="medrec_8"></div>
-    {% endif %}
-{%- endmacro %}
-
 {% macro video(obj) -%}
     {% if obj.id and 'header' not in obj.format | default('') -%}
         <figure class="
