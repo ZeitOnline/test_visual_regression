@@ -11,7 +11,4 @@ import zeit.web.core.view_gallery
     request_method='GET')
 class Gallery(zeit.web.core.view_gallery.Gallery,
               zeit.web.campus.view.Content):
-
-    @zeit.web.reify
-    def banner_type(self):
-        return 'gallery'
+    pass

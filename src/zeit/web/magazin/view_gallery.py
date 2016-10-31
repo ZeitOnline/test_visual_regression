@@ -11,4 +11,6 @@ import zeit.web.magazin.view
              renderer='templates/gallery.html')
 class Gallery(zeit.web.core.view_gallery.Gallery, zeit.web.magazin.view.Base):
 
-    pass
+    @zeit.web.reify
+    def banner_type(self):
+        return 'article'

@@ -17,10 +17,6 @@ class Gallery(zeit.web.core.view.Content):
         return zeit.web.core.interfaces.IFrontendBlock(block)
 
     @zeit.web.reify
-    def banner_type(self):
-        return 'article'
-
-    @zeit.web.reify
     def breadcrumbs(self):
         breadcrumbs = super(Gallery, self).breadcrumbs
         self.breadcrumbs_by_navigation(breadcrumbs)
