@@ -7,6 +7,8 @@ POSTDEPLOY
 3.16 (unreleased)
 -----------------
 
+- ZON-3449: Specify fallback for missing packshot image
+
 - MAINT: Send referrer and user-agent to solr
 
 
