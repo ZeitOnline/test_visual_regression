@@ -69,9 +69,7 @@
     {% endblock %}
 
     {% block article_google_ad %}
-        {% if view.context.advertising_enabled -%}
-            {{ lama.adplace(banner(5), view) }}
-        {%- endif %}
+        {{ lama.adplace(banner(5), view) }}
     {% endblock article_google_ad %}
     {% block comments %}
     {% profile %}
