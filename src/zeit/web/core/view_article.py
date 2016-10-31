@@ -375,6 +375,10 @@ class Article(zeit.web.core.view.Content):
                     assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
         return assets
 
+    @zeit.web.reify
+    def view_name(self):
+        return self.request.view_name or 'article'
+
 
 class AcceleratedMobilePageArticle(Article):
 

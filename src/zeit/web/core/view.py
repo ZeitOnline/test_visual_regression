@@ -95,6 +95,10 @@ def c1requestheader_or_get(request, name):
         return request.GET.get(name, None)
 
 
+def is_paywalled(context, request):
+    return c1requestheader_or_get(request, 'C1-Paywall-On')
+
+
 class Base(object):
     """Base class for all views."""
 
@@ -593,7 +597,6 @@ class Base(object):
             value = getattr(self, key, False)
             return value.lower() if value else ''
 
-        ivw_code = [self.ressort, self.sub_ressort, 'bild-text']
         pagination = '1/1'
         banner_on = 'no'
         # beware of None
@@ -637,7 +640,7 @@ class Base(object):
 
         custom_parameter = collections.OrderedDict([
             ('cp1', get_param('authors_list')),  # Autor
-            ('cp2', '/'.join([x for x in ivw_code if x]).lower()),  # IVW-Code
+            ('cp2', self.ivw_code),  # IVW-Code
             ('cp3', pagination),  # Seitenanzahl
             ('cp4', ';'.join(self.meta_keywords).lower()),  # Schlagworte
             ('cp5', self.date_last_modified),  # Last Published
@@ -690,6 +693,16 @@ class Base(object):
 
     def append_to_webtrekk_assets(self, value):
         self._webtrekk_assets.append(value)
+
+    @zeit.web.reify
+    def ivw_code(self):
+        code = [self.ressort or 'administratives',
+                self.sub_ressort,
+                'bild-text']
+        if zeit.web.core.template.zplus_content(self.context) and (
+                not self.paywall):
+            code.append('paid')
+        return '/'.join([x for x in code if x])
 
     @zeit.web.reify
     def share_buttons(self):

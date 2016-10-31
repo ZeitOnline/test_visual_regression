@@ -5,7 +5,7 @@
 <script type="text/javascript">
     var iam_data = {
             "st" : "zeitonl",
-            "cp" : "{{ view.ressort if view.ressort else 'administratives' }}/{% if view.sub_ressort %}{{ view.sub_ressort }}/{% endif %}bild-text",
+            "cp" : "{{ view.ivw_code }}",
             "sv" : "{% if view.is_hp %}ke{% else %}i2{% endif %}", // 'mo' on mobile, see below
             {% if view is framebuilder -%}
             "co" : "URL: " + window.location.host + window.location.pathname

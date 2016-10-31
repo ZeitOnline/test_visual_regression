@@ -20,8 +20,8 @@
     <area kind="ranking" title="Simple-Fläche" available="zeit.cms.section.interfaces.IZONContent">ranking</area>
     <area kind="zco-ranking" title="Simple-Fläche" available="zeit.campus.interfaces.IZCOContent">zco-ranking</area>
     <area kind="tube" title="Schlauch-Fläche" available="zeit.cms.section.interfaces.IZONContent">tube</area>
-    <area kind="print-ressort" title="Ressort-Fläche" available="zeit.cms.section.interfaces.IZONContent">tube</area>
-    <area kind="exclusive-ressort" title="Exklusiv-Fläche" available="zeit.cms.section.interfaces.IZONContent">tube</area>
+    <area kind="print-ressort" title="Ressort-Fläche" available="zeit.cms.section.interfaces.IZONContent">print-ressort</area>
+    <area kind="exclusive-ressort" title="Exklusiv-Fläche" available="zeit.cms.section.interfaces.IZONContent">exclusive-ressort</area>
     <area kind="shop" available="zeit.web.core.interfaces.IInternalUse">overview</area>
     <area kind="buzzboard" title="Buzz-Board" available="zeit.web.core.interfaces.IInternalUse">buzzboard</area>
     <area kind="author-favourite-content" available="zeit.content.dynamicfolder.interfaces.IVirtualContent">author-favourite-content</area>
