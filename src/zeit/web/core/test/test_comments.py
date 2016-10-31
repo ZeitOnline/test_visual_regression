@@ -954,3 +954,14 @@ def test_request_thread_should_be_called_only_once_by_article_and_comment_esi(
         r = requests.get('{}/zeit-online/article/01'.format(testserver.url))
         r.raise_for_status()
         assert req_thread.call_count == 2
+
+
+def test_thread_template_should_render_adplace(
+        application, dummy_request, tplbrowser):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/comments/thread.html', view=view)
+    assert browser.cssselect('.comment__ad')
+    assert browser.cssselect('.comment__ad script')
