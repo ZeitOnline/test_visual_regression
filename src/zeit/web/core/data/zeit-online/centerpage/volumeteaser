@@ -53,15 +53,40 @@
     </head>
     <body>
         <title>Ausgaben-Teaser auf CPs</title>
+
+        <cluster area="id-7e329214-665f-457d-a624-94c47850f95d" kind="duo">
+            <region hide-dupes="True" area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb7" kind="duo">
+                <container cp:type="teaser" module="zon-square" cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7">
+                    <block contenttype="article" href="http://xml.zeit.de/feature/feature_longform" uniqueId="http://xml.zeit.de/feature/feature_longform"/>
+                </container>
+            </region>
+            <region hide-dupes="True" area="id-c1a352a2-5e54-4ab1-86f3-bbf565666083" kind="duo">
+                <container cp:type="teaser" module="zon-square" cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551">
+                    <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+                </container>
+            </region>
+        </cluster>
+
 	    <cluster visible="True" visible_mobile="True" area="id-78dbe1c1-e240-4f49-a0c6-1d2f189576aa" kind="solo" kind_title="Solo-Region">
 	      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-987b0c46-6967-417b-895e-de0eb14d64f4" kind="solo">
 
-	        <container cp:type="teaser" module="volume" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-97cd491c-c56f-4ef3-96d0-76bde8a80671" supertitle="myspitzmarke" title="mytitel" read_more="myweiterlesen" read_more_url="myweiterlesenurl" force_mobile_image="False">
-	          <block href="http://xml.zeit.de/2016/01/ausgabe" uniqueId="http://xml.zeit.de/2016/01/ausgabe" publication-date="" expires="" date-last-modified="2016-10-20T11:09:53+00:00" date-first-released="2016-10-20T11:09:53.043919+00:00" date-last-published="2016-10-20T11:09:53.043919+00:00" last-semantic-change="2016-10-20T11:09:13.627108+00:00" year="2008" issue="40" contenttype="volume"/>
+	        <container cp:type="teaser" module="volume" visible="True" visible_mobile="True" cp:__name__="id-97cd491c-c56f-4ef3-96d0-76bde8a80671" read_more="Alternativtext am Teaser: Lesen Sie diese Ausgabe.">
+	          <block href="http://xml.zeit.de/2016/01/ausgabe" uniqueId="http://xml.zeit.de/2016/01/ausgabe" year="2008" issue="40" contenttype="volume"/>
 	        </container>
 
 	      </region>
 	    </cluster>
+
+        <cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a4" kind="solo">
+            <region hide-dupes="True" area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="exclusive-ressort" count="5" automatic="True" automatic_type="centerpage" title="Politik">
+                <query>
+                    <condition type="Channel">Politik</condition>
+                </query>
+                <referenced_cp>http://xml.zeit.de/zeit-online/centerpage/zplus</referenced_cp>
+                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-eadad746-bdbe-4eba-957f-289b52b4b5a8" force_mobile_image="True"/>
+            </region>
+        </cluster>
+
     </body>
     <feed/>
     <teaser>
