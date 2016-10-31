@@ -263,9 +263,7 @@ class Base(object):
 
     @zeit.web.reify
     def advertising_enabled(self):
-        if zeit.web.core.application.FEATURE_TOGGLES.find('iqd') is False:
-            return False
-        elif self.context.banner is False:
+        if self.context.banner is False:
             return False
         else:
             return True
@@ -1241,8 +1239,8 @@ class FrameBuilder(CeleraOneMixin):
 
     @zeit.web.reify
     def advertising_enabled(self):
-        return self.banner_channel is not None and not(
-            self.framebuilder_requires_ssl)
+        return self.banner_channel is not None and (
+            self.framebuilder_requires_ssl is False)
 
     @zeit.web.reify
     def banner_channel(self):
