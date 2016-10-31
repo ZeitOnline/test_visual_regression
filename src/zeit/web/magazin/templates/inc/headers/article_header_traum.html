@@ -1,21 +1,21 @@
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
+{% extends "zeit.web.magazin:templates/inc/headers/article_header_default.html" %}
 
+{% block article_header %}
 <header class="article__head article__head--traum">
     <div class="is-constrained is-centered">
-        <h1 itemprop="headline">
-            {{ blocks.supertitle() }}
-            {{ blocks.title() }}
-        </h1>
-        {{ blocks.subtitle() }}
+        {{ self.headline() }}
+        <div class="article__head__subtitle">
+            {{- view.subtitle -}}
+        </div>
     </div>
     {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
     <div class="is-constrained is-centered">
         <div class="article__head__meta">
             <div class="article__head__byline">
-                {{ view.genre }}
-                {{ blocks.meta_author(view.authors) }}
+                {{ self.genre_and_authors() }}
             </div>
-            {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
+            {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
         </div>
     </div>
 </header>
+{% endblock %}
