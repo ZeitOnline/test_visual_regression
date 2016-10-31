@@ -27,7 +27,6 @@ log = logging.getLogger(__name__)
 
 class Article(zeit.web.core.view.Content):
 
-    advertising_enabled = True
     page_nr = 1
 
     def __init__(self, context, request):

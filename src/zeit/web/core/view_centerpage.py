@@ -14,8 +14,6 @@ import zeit.web.core.utils
 
 class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
-    advertising_enabled = True
-
     @zeit.web.reify
     def volume(self):
         return zeit.content.volume.interfaces.IVolume(self.context, None)

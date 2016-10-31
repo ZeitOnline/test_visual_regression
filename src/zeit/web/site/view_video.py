@@ -23,8 +23,6 @@ log = logging.getLogger(__name__)
     renderer='templates/video.html')
 class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 
-    advertising_enabled = True
-
     def __init__(self, context, request):
         super(Video, self).__init__(context, request)
         if self.request.headers.get('X-SEO-Slug', '') != self.seo_slug:
