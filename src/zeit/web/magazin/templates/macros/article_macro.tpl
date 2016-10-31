@@ -1,12 +1,5 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{% macro place(item) -%}
-    {{ lama.adplace(item, view) }}
-    {% if item.tile == 7 %}
-        {{ lama.adplace(banner(4), view, mobile=True) }}
-    {% endif %}
-{%- endmacro %}
-
 {% macro supertitle() -%}
   <span class="article__head__supertitle">{{ view.supertitle }}</span>
 {%- endmacro %}
