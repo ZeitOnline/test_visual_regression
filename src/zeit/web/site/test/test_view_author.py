@@ -70,6 +70,21 @@ def test_articles_by_author_should_paginate(testbrowser):
     assert page.text_content().strip() == '2'
 
 
+def test_author_area_articles_should_offset_correctly(
+        application, dummy_request):
+
+    author = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/j_random')
+    area = zeit.web.site.view_author.create_author_article_area(author)
+
+    dummy_request.GET['p'] = 4
+    area.request = dummy_request
+
+    assert area.surrounding_teasers == 3
+    assert area.count == 10
+    assert 4 * 10 - 3
+
+
 def test_author_page_should_hide_favourite_content_on_further_pages(
         testbrowser):
     settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
