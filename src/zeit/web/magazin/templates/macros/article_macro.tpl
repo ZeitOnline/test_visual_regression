@@ -153,5 +153,3 @@
         {%- endfor -%}
     {%- endif -%}
 {% endmacro %}
-
-{% macro no_block(block) %}{% endmacro %}

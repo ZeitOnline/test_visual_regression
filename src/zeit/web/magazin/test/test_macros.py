@@ -309,10 +309,4 @@ def test_add_publish_date_generates_script(jinja2_env):
         assert el['markup'] in output
 
 
-def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    assert tpl.module.no_block('') == ''
-
-
 # TODO: Move tests into appropriate file / Cleanup (#OPS-386)
