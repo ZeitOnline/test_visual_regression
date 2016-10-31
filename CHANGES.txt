@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- `exclusive-ressort` in den cp-layout/regions/areas.xml Dateien bekanntmachen (https://github.com/ZeitOnline/zeit.web/pull/2058/files)
+3.15 (2016-10-31)
 
 
 3.15 (unreleased)
