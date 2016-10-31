@@ -5,26 +5,6 @@
     {{ lama.adplace_middle_mobile(item, view) }}
 {%- endmacro %}
 
-{% macro supertitle() -%}
-  <span class="article__head__supertitle">{{ view.supertitle }}</span>
-{%- endmacro %}
-
-{% macro title() -%}
-  <span class="article__head__title">{{ view.title }}</span>
-{%- endmacro %}
-
-{% macro subtitle(include_meta=False) -%}
-    <div class="article__head__subtitle">
-        {{ view.subtitle }}
-        {% if include_meta and view.genre %}
-            {{ view.genre | title }}
-        {% endif %}
-        {% if include_meta and view.authors %}
-            {{ meta_author(view.authors, titlecase=view.genre==None) }}
-        {% endif %}
-    </div>
-{%- endmacro %}
-
 {% macro subpage_chapter(number, subtitle, class) -%}
     {% if subtitle -%}
         <div class="{{ class }}">
@@ -133,23 +113,3 @@
         <!--<![endif]-->
     {% endif %}
 {%- endmacro %}
-
-{% macro meta_author(authors, class="article__head__meta__author", titlecase=True) %}
-    {%- if authors -%}
-        {%- for author in authors -%}
-            {%- if titlecase -%}
-                {{ author.prefix | title }}
-            {% else %}
-                {{ author.prefix }}
-            {% endif %}
-            <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            {%- if author.href -%}
-                <a href="{{ author.href | create_url }}" class="{{ class }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>{{ author.location }}
-            {%- else -%}
-                <span class="{{ class }}"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
-            {%- endif -%}
-            </span>
-            {{- author.suffix -}}
-        {%- endfor -%}
-    {%- endif -%}
-{% endmacro %}
