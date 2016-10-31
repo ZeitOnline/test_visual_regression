@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import mock
 import pytest
 
 
@@ -59,6 +60,35 @@ def test_article_contains_authorbox(testbrowser):
     assert name.text.strip() == 'Jochen Wegner'
     assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+
+
+def test_article_header_should_contain_html_if_author_exists(tplbrowser):
+    view = mock.Mock()
+    view.authors = [{'prefix': 'Von', 'href': 'www.zeit.de', 'name': 'Tom',
+                    'location': ', Bern', 'suffix': 'und'},
+                    {'prefix': '', 'href': '', 'name': 'Anna', 'location': '',
+                    'suffix': ''}]
+    browser = tplbrowser(
+        'zeit.web.magazin:templates/inc/headers/article_header_default.html',
+        view=view)
+    markup = (
+        'Von<span itemprop="author" itemscope itemtype="http://schema.org/'
+        'Person"><a href="www.zeit.de" class="test" itemprop="url"><span '
+        'itemprop="name">Tom</span></a>, Bern</span>und<span itemprop="author"'
+        ' itemscope itemtype="http://schema.org/Person"><span class="test">'
+        '<span itemprop="name">Anna</span></span></span>')
+    subtitle = browser.cssselect('.article__head__subtitle')
+    assert markup.strip() == subtitle[0]
+
+
+def test_article_header_shouldnt_produce_html_if_no_author(tplbrowser):
+    view = mock.Mock()
+    view.authors = []
+    browser = tplbrowser(
+        'zeit.web.magazin:templates/inc/headers/article_header_default.html',
+        view=view)
+    authors = browser.cssselect('.x')
+    assert not authors
 
 
 @pytest.mark.parametrize('on,reason', [

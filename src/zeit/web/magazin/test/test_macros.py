@@ -150,39 +150,6 @@ def test_image_template_should_hide_none(testbrowser):
         assert '<span class="figure__text">None</span>' not in browser.contents
 
 
-def test_macro_meta_author_should_produce_html_if_author_exists(
-        application, jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    test_class = 'test'
-    authors = [{'prefix': 'Von', 'href': 'www.zeit.de', 'name': 'Tom',
-                'location': ', Bern', 'suffix': 'und'},
-               {'prefix': '', 'href': '', 'name': 'Anna', 'location': '',
-                'suffix': ''}]
-    markup = (
-        'Von<span itemprop="author" itemscope itemtype="http://schema.org/'
-        'Person"><a href="www.zeit.de" class="test" itemprop="url"><span '
-        'itemprop="name">Tom</span></a>, Bern</span>und<span itemprop="author"'
-        ' itemscope itemtype="http://schema.org/Person"><span class="test">'
-        '<span itemprop="name">Anna</span></span></span>')
-    lines = tpl.module.meta_author(authors, test_class).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup.strip() == output
-
-
-def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    authors = []
-    lines = tpl.module.meta_author(authors).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert '' == output
-
-
 def test_macro_video_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')
