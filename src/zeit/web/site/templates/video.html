@@ -23,7 +23,7 @@
             {{ vima.brightcove_video_tag(view.context.__name__, iframe=True) }}
         </div>
 
-        {% if view.context.advertising_enabled %}
+        {% if view.advertising_enabled %}
             <div class="article__item article__item--wide">
                 {{ lama.adplace(banner(7), view) }}
             </div>

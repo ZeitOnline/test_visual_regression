@@ -384,7 +384,7 @@ def test_block_paragraph_should_contain_expected_structure(tplbrowser):
 
 def test_block_place_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
-    view.context.advertising_enabled = True
+    view.advertising_enabled = True
     view.banner_channel = {}
     block = mock.Mock()
     block.on_page_nr = 1

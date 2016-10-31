@@ -119,7 +119,7 @@
 {% include "zeit.web.core:templates/inc/comments/pagination.html" %}
 
 {% else %}
-    {% if view.context.advertising_enabled -%}
+    {% if view.advertising_enabled -%}
         <div class="comment__ad">
             {{ lama.adplace(banner(8), view) }}
         </div>
