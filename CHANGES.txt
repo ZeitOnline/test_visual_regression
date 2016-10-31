@@ -7,13 +7,10 @@ POSTDEPLOY
 3.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Send referrer and user-agent to solr
 
 
 3.15 (2016-10-31)
-
-
-3.15 (unreleased)
 -----------------
 
 - ZON-3403: Update IVW code for paid content
