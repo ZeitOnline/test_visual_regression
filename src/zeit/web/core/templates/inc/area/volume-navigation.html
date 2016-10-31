@@ -2,7 +2,7 @@
 <div class="volume-navigation" data-ct-area="volume-navigation">
     <a class="volume-navigation__current" href="{{view.volume_navigation.link}}" data-ct-row="current-volume" data-ct-column="false" title="Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.">
         <span class="volume-navigation__packshot">
-            {% set packshot = view.volume_navigation.cover %}
+            {% set packshot = view.volume_navigation.cover or view.volume_navigation.cover_fallback %}
             {% set packshot_layout = 'volume-navigation' %}
             {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" ignore missing %}
         </span>
