@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-3449: Specify fallback for missing packshot image
 
+- BUG-568: Consider favorite content when offsetting author area pages
+
 - BUG-553: Restore adtile in comment thread
 
 - MAINT: Send referrer and user-agent to solr
