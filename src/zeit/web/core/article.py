@@ -56,12 +56,6 @@ def _inject_banner_code(pages, pubtype):
             'content_ad_para': [4],  # paragraph/s to insert content ad after
             'possible_pages': range(1, len(pages) + 1)
         },
-        'zmo': {
-            'tiles': [7, 8],
-            'ad_paras': [2, 6],
-            'content_ad_para': [4],
-            'possible_pages': range(1, len(pages) + 1)
-        },
         'longform': {
             'tiles': [8],
             'ad_paras': [5],
@@ -171,8 +165,6 @@ def pages_of_article(article, advertising_enabled=True):
 
     if zeit.web.core.article.ILongformArticle.providedBy(article):
         pubtype = 'longform'
-    elif zeit.magazin.interfaces.IZMOContent.providedBy(article):
-        pubtype = 'zmo'
     else:
         pubtype = 'zon'
 
