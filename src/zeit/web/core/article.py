@@ -57,7 +57,7 @@ def _inject_banner_code(pages, pubtype):
             'possible_pages': range(1, len(pages) + 1)
         },
         'longform': {
-            'tiles': [8],
+            'tiles': [7],
             'ad_paras': [5],
             'content_ad_para': [],  # no content ads for longforms
             'possible_pages': [2]  # page 1 is somehow the "intro text"
