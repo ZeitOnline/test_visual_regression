@@ -1,0 +1,8 @@
+.paywall-iframe
+	&__iframe
+		border: none
+		height: 540px // initial mobile height, will be changed by javascript
+		overflow: hidden
+		width: 100%
+		+respond-min($break-tablet-min)
+			height: 350px
