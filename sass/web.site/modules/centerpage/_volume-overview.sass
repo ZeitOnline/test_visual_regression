@@ -8,6 +8,8 @@
 	&__media
 		flex-grow: 1
 		margin-right: $page-padding
+		max-width: remify(220px)
+		min-width: remify(150px)
 	&__media-container
 		//width: remify(150px)
 	&__issue,
@@ -43,7 +45,7 @@
 		&__caption
 			padding-top: $page-padding--small
 
-.no-flexbox // basically only for small screens in legacy browsers
+.no-flexbox
 	.volume-overview-teaser
 		&__caption
 			padding-top: $page-padding--small/2
