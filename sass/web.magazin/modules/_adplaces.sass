@@ -17,10 +17,8 @@ div[id*="__container__"]
 		margin: -1px (-$page-padding)
 	+respond_min($break-mobile-ad-width)
 		display: none // generally hidden on desktop
-	&--4-on-centerpage
-		margin-bottom: remify(20px)
-		+respond_min($break-2)
-			display: none
+	&--1
+		padding-bottom: remify(10px) // BUG-366
 	&--4-on-article
 		margin: remify(40px) (-$page-padding--small)
 	&--8
