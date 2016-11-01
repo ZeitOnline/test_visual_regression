@@ -74,17 +74,17 @@
           <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f785b07f-62cd-4326-a5c3-49cb35da6de1">
             <block href="http://xml.zeit.de/ausgabe/2016/01" uniqueId="http://xml.zeit.de/ausgabe/2016/01" publication-date="" expires=""/>
           </container>
-          <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f785b07f-62cd-4326-a5c3-49cb35da6de1">
-            <block href="http://xml.zeit.de/ausgabe/2016/01" uniqueId="http://xml.zeit.de/ausgabe/2016/01" publication-date="" expires=""/>
+          <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f785b07f-62cd-4326-a5c3-49cb35da6de12">
+            <block href="http://xml.zeit.de/ausgabe/2016/02" uniqueId="http://xml.zeit.de/ausgabe/2016/02" publication-date="" expires=""/>
           </container>
-          <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f785b07f-62cd-4326-a5c3-49cb35da6de1">
-            <block href="http://xml.zeit.de/ausgabe/2016/01" uniqueId="http://xml.zeit.de/ausgabe/2016/01" publication-date="" expires=""/>
+          <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f785b07f-62cd-4326-a5c3-49cb35da6de13">
+            <block href="http://xml.zeit.de/ausgabe/2016/02" uniqueId="http://xml.zeit.de/ausgabe/2016/02" publication-date="" expires=""/>
           </container>
-          <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f785b07f-62cd-4326-a5c3-49cb35da6de1">
-            <block href="http://xml.zeit.de/ausgabe/2016/01" uniqueId="http://xml.zeit.de/ausgabe/2016/01" publication-date="" expires=""/>
+          <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f785b07f-62cd-4326-a5c3-49cb35da6de14">
+            <block href="http://xml.zeit.de/ausgabe/2016/02" uniqueId="http://xml.zeit.de/ausgabe/2016/02" publication-date="" expires=""/>
           </container>
-          <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f785b07f-62cd-4326-a5c3-49cb35da6de1">
-            <block href="http://xml.zeit.de/ausgabe/2016/01" uniqueId="http://xml.zeit.de/ausgabe/2016/01" publication-date="" expires=""/>
+          <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f785b07f-62cd-4326-a5c3-49cb35da6de15">
+            <block href="http://xml.zeit.de/ausgabe/2016/02" uniqueId="http://xml.zeit.de/ausgabe/2016/02" publication-date="" expires=""/>
           </container>
         </region>
     </cluster>
