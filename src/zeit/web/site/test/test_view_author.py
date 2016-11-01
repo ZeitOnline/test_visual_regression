@@ -82,7 +82,7 @@ def test_author_area_articles_should_offset_correctly(
 
     assert area.surrounding_teasers == 3
     assert area.count == 10
-    assert 4 * 10 - 3
+    assert area.start == 27
 
 
 def test_author_page_should_hide_favourite_content_on_further_pages(
