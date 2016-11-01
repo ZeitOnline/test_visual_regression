@@ -4,10 +4,17 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- `exclusive-ressort` in den cp-layout/regions/areas.xml Dateien bekanntmachen (https://github.com/ZeitOnline/zeit.web/pull/2058/files)
+3.16 (unreleased)
+-----------------
+
+- ZON-3449: Specify fallback for missing packshot image
+
+- MAINT: Send referrer and user-agent to solr
+
+- OPS-414: Fix volume navi in IE10
 
 
-3.15 (unreleased)
+3.15 (2016-10-31)
 -----------------
 
 - ZON-3403: Update IVW code for paid content

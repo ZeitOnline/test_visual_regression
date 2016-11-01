@@ -13,6 +13,7 @@
 		flex-grow: 1
 		border-bottom: solid 1px $zon-light-grey
 		width: 100%
+		display: block
 
 	&__packshot,
 	&__cta
@@ -36,7 +37,7 @@
 
 	&__previous,
 	&__next
-		display: inline-block // non flex fallback
+		display: inline-block
 		flex-grow: 1
 
 	&__next
@@ -71,7 +72,8 @@
 			order: 1
 
 		&__current
-			max-width: remify(450px)
+			width: 60%
+			max-width: remify(400px)
 			order: 2
 			border-bottom: none
 
