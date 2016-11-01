@@ -168,6 +168,11 @@ class Base(object):
             return '{}/{}'.format(conf.get('vgwort_url'), token)
 
     @zeit.web.reify
+    def sso_url_prefix(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('sso_prefix', 'https://meine.zeit.de')
+
+    @zeit.web.reify
     def type(self):
         return type(self.context).__name__.lower()
 
