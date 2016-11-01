@@ -7,13 +7,14 @@ POSTDEPLOY
 3.16 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3449: Specify fallback for missing packshot image
+
+- MAINT: Send referrer and user-agent to solr
+
+- OPS-414: Fix volume navi in IE10
 
 
 3.15 (2016-10-31)
-
-
-3.15 (unreleased)
 -----------------
 
 - ZON-3403: Update IVW code for paid content
