@@ -2442,6 +2442,12 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
     assert len(media) == 1
 
 
+def test_volume_centerpage_volume_fallback_for_missing_packshot(testbrowser):
+    browser = testbrowser('/2016/02/index')
+    packshot = browser.cssselect('.volume-navigation__packshot noscript')
+    assert 'default_packshot_diezeit' in packshot[0].attrib['data-src']
+
+
 def test_volume_centerpage_navi_dont_show_invalid_links(testbrowser):
     browser = testbrowser('/2016/02/index')
 
