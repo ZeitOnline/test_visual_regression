@@ -536,6 +536,14 @@ def toggles(*keys):
 
 
 @zeit.web.register_global
+def banner(tile):
+    try:
+        return list(zeit.web.core.banner.BANNER_SOURCE)[tile - 1]
+    except IndexError:
+        return
+
+
+@zeit.web.register_global
 def interrupt(reason=None):
     if toggles('instantarticle_interrupts'):
         raise zeit.web.core.jinja.Interrupt(reason)

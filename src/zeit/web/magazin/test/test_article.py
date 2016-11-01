@@ -14,11 +14,12 @@ import zeit.cms.interfaces
 import zeit.content.article.article
 
 import zeit.web.core.application
+import zeit.web.core.article
 import zeit.web.core.interfaces
 import zeit.web.magazin.view_article
 
 
-def test_ipages_contains_blocks(application):
+def test_pages_list_contains_blocks(application):
     xml = StringIO("""\
 <article>
   <head/>
@@ -33,7 +34,7 @@ def test_ipages_contains_blocks(application):
 </article>
 """)
     article = zeit.content.article.article.Article(xml)
-    pages = zeit.web.core.interfaces.IPages(article)
+    pages = zeit.web.core.article.pages_of_article(article)
     assert 2 == len(pages)
     assert 'foo bar\n' == str(list(pages[0])[0])
     assert 1 == pages[1].number

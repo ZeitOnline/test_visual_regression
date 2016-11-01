@@ -41,9 +41,9 @@ class Centerpage(
         zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
     """Main view class for ZEIT ONLINE centerpages."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, context, request):
+        super(Centerpage, self).__init__(context, request)
         self._buzzboard_images = {}
-        super(Centerpage, self).__init__(*args, **kwargs)
 
     @zeit.web.reify
     def ressort(self):
@@ -132,8 +132,8 @@ class Storystream(Centerpage):
 
     countable_atom_types = [zeit.content.cp.interfaces.ITeaserBlock]
 
-    def __init__(self, *args, **kwargs):
-        super(Centerpage, self).__init__(*args, **kwargs)
+    def __init__(self, context, request):
+        super(Centerpage, self).__init__(context, request)
         self.prepare_atom_meta()
 
     def prepare_atom_meta(self):
