@@ -59,10 +59,9 @@ def test_banner_should_not_be_displayed_on_disabled_cp(testbrowser):
     assert not browser.cssselect('div[class*="ad-tile_"]')
 
 
-def test_banner_view_should_be_displayed_on_pages(testbrowser):
+def test_banner_tile7_should_appear_on_article_pages(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03')
     assert browser.cssselect('#ad-desktop-7')
-    assert browser.cssselect('#ad-desktop-8')
     browser = testbrowser('/zeit-magazin/article/03/seite-3')
     assert browser.cssselect('#ad-desktop-7')
     browser = testbrowser('/zeit-magazin/article/03/seite-4')
@@ -78,10 +77,10 @@ def test_banner_tile3_should_be_displayed_on_pages(testbrowser):
     assert browser.cssselect('#ad-desktop-3')
 
 
-def test_banner_view_should_be_displayed_on_succeeding_pages(testbrowser):
+def test_banner_tile7_should_not_appear_on_short_pages(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03/seite-2')
-    assert not browser.cssselect('#iqadtile7')
+    assert not browser.cssselect('#ad-desktop-7')
     browser = testbrowser('/zeit-magazin/article/03/seite-5')
-    assert not browser.cssselect('#iqadtile7')
+    assert not browser.cssselect('#ad-desktop-7')
     browser = testbrowser('/zeit-magazin/article/03/seite-6')
-    assert not browser.cssselect('#iqadtile7')
+    assert not browser.cssselect('#ad-desktop-7')
