@@ -2491,6 +2491,19 @@ def test_volume_overview_has_adapted_centerpage_header(
     assert '1947/index' in link.get_attribute('href')
 
 
+def test_volume_overview_teasers_render_expected_markup(testbrowser):
+    browser = testbrowser('/2016/index')
+    teasers = browser.cssselect('.cp-area--volume-overview >'
+                                ' .volume-overview-teaser a')
+    assert len(teasers) == 7
+    for teaser in teasers:
+        caption = teaser.cssselect('.volume-overview-teaser__caption')[0]
+        assert caption.find('span')[0].text + \
+            caption.find('span')[2].text == 'Jetzt lesen'
+        assert 'volume-overview-teaser__media' in \
+               teaser.cssselect('figure')[0].get('class')
+
+
 def test_zplus_teaser_has_zplus_badge(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/zplus')
 
