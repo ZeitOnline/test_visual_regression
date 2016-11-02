@@ -161,7 +161,7 @@ def create_author_article_area(
             block = area.create_item('teaser')
             block.insert(0, content, suppress_errors=True)
 
-    area = area = cp.body.create_item('region').create_item('area')
+    area = cp.body.create_item('region').create_item('area')
     area.kind = 'author-articles'
     area.automatic_type = 'query'
     area.raw_query = unicode(
@@ -187,7 +187,9 @@ class AuthorRanking(zeit.web.core.area.ranking.Ranking):
 
     @zeit.web.reify
     def start(self):
-        return self.count * max(self.page - 1, 0)
+        if self.page == 1:
+            return 0
+        return self.count * (self.page - 1) - self.surrounding_teasers
 
 
 class UserCommentsArea(zeit.web.core.centerpage.Area):

@@ -95,6 +95,10 @@ def c1requestheader_or_get(request, name):
         return request.GET.get(name, None)
 
 
+def is_paywalled(context, request):
+    return c1requestheader_or_get(request, 'C1-Paywall-On')
+
+
 class Base(object):
     """Base class for all views."""
 
@@ -258,12 +262,10 @@ class Base(object):
         return self.type
 
     @zeit.web.reify
-    def banner_on(self):
-        # respect the global advertising switch
-        if self.advertising_enabled is False or self.context.banner is False:
+    def advertising_enabled(self):
+        if self.context.banner is False:
             return False
-        # deliver banner if no banner is defined in xml
-        if self.context.banner is None or self.context.banner is True:
+        else:
             return True
 
     def banner_toggles(self, name):
@@ -320,12 +322,6 @@ class Base(object):
     @zeit.web.reify
     def adwords(self):
         return ['zeitonline']
-
-    def banner(self, tile):
-        try:
-            return list(zeit.web.core.banner.BANNER_SOURCE)[tile - 1]
-        except IndexError:
-            return
 
     @zeit.web.reify
     def canonical_url(self):
@@ -593,9 +589,7 @@ class Base(object):
             value = getattr(self, key, False)
             return value.lower() if value else ''
 
-        ivw_code = [self.ressort, self.sub_ressort, 'bild-text']
         pagination = '1/1'
-        banner_on = 'no'
         # beware of None
         product_id = get_param('product_id')
 
@@ -605,9 +599,6 @@ class Base(object):
             else:
                 page = self.pagination.get('current')
             pagination = '{}/{}'.format(page, self.pagination.get('total'))
-
-        if getattr(self.context, 'advertising_enabled', False):
-            banner_on = 'yes'
 
         if getattr(self, 'is_push_news', False):
             push = 'wichtigenachrichten.push'
@@ -637,7 +628,7 @@ class Base(object):
 
         custom_parameter = collections.OrderedDict([
             ('cp1', get_param('authors_list')),  # Autor
-            ('cp2', '/'.join([x for x in ivw_code if x]).lower()),  # IVW-Code
+            ('cp2', self.ivw_code),  # IVW-Code
             ('cp3', pagination),  # Seitenanzahl
             ('cp4', ';'.join(self.meta_keywords).lower()),  # Schlagworte
             ('cp5', self.date_last_modified),  # Last Published
@@ -645,7 +636,7 @@ class Base(object):
             ('cp7', get_param('news_source')),  # Quelle
             ('cp8', product_id),  # Product-ID
             ('cp9', get_param('banner_channel')),  # Banner-Channel
-            ('cp10', banner_on),  # Banner aktiv
+            ('cp10', ('no', 'yes')[self.advertising_enabled]),  # Banner aktiv
             ('cp11', ''),  # Fehlermeldung
             ('cp12', 'desktop.site'),  # Seitenversion Endgerät
             ('cp13', 'stationaer'),  # Breakpoint
@@ -690,6 +681,16 @@ class Base(object):
 
     def append_to_webtrekk_assets(self, value):
         self._webtrekk_assets.append(value)
+
+    @zeit.web.reify
+    def ivw_code(self):
+        code = [self.ressort or 'administratives',
+                self.sub_ressort,
+                'bild-text']
+        if zeit.web.core.template.zplus_content(self.context) and (
+                not self.paywall):
+            code.append('paid')
+        return '/'.join([x for x in code if x])
 
     @zeit.web.reify
     def share_buttons(self):
@@ -951,8 +952,6 @@ class CommentMixin(object):
 
 
 class Content(CeleraOneMixin, CommentMixin, Base):
-
-    is_longform = False
 
     @zeit.web.reify
     def basename(self):
@@ -1240,8 +1239,8 @@ class FrameBuilder(CeleraOneMixin):
 
     @zeit.web.reify
     def advertising_enabled(self):
-        return self.banner_channel is not None and not(
-            self.framebuilder_requires_ssl)
+        return self.banner_channel is not None and (
+            self.framebuilder_requires_ssl is False)
 
     @zeit.web.reify
     def banner_channel(self):

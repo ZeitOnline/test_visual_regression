@@ -27,14 +27,10 @@ log = logging.getLogger(__name__)
 
 class Article(zeit.web.core.view.Content):
 
-    advertising_enabled = True
-    is_longform = False
     page_nr = 1
 
-    def __init__(self, *args, **kwargs):
-        super(Article, self).__init__(*args, **kwargs)
-        self.context.advertising_enabled = self.banner_on
-        self.context.is_longform = self.is_longform
+    def __init__(self, context, request):
+        super(Article, self).__init__(context, request)
         self.context.current_year = datetime.date.today().year
         # throw 404 for 'komplettansicht' if there's just one article page
         if self.is_all_pages_view and len(self.pages) == 1:
@@ -50,7 +46,8 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def pages(self):
-        return zeit.web.core.interfaces.IPages(self.context)
+        return zeit.web.core.article.pages_of_article(
+            self.context, self.advertising_enabled)
 
     @zeit.web.reify
     def is_all_pages_view(self):
@@ -173,8 +170,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def authors(self):
-        return zeit.web.core.article.convert_authors(
-            self.context, self.is_longform)
+        return zeit.web.core.article.convert_authors(self.context)
 
     @zeit.web.reify
     def authors_list(self):
@@ -374,6 +370,10 @@ class Article(zeit.web.core.view.Content):
                 if block_type in self.WEBTREKK_ASSETS:
                     assets.append('{}.{}/seite-{}'.format(block_type, p, nr))
         return assets
+
+    @zeit.web.reify
+    def view_name(self):
+        return self.request.view_name or 'article'
 
 
 class AcceleratedMobilePageArticle(Article):

@@ -104,7 +104,7 @@ def test_ressort_literally_returns_correct_ressort(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     article_view = zeit.web.site.view_article.Article(context, request)
-    assert article_view.ressort_literally == 'Kultur'
+    assert article_view.ressort_literally == u'Film & TV'
     # With sub-ressort
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/quotes')

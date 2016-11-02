@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
+import mock
+
 import zope.component
 
 import zeit.web.core.interfaces
 
 
-def test_adplace_middle_mobile_dont_produces_html(jinja2_env):
+def test_adplace_doesnt_produce_output_if_advertising_disabled(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.core:templates/macros/layout_macro.tpl')
-    lines = tpl.module.adplace_middle_mobile(False).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert '' == output
+    view = mock.Mock()
+    view.advertising_enabled = False
+    banner = mock.Mock()
+    output = tpl.module.adplace(banner, view)
+    assert output.strip() == ''
 
 
 def test_esi_macro_should_produce_directive_depending_on_environment(
