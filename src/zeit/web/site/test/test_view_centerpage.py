@@ -2473,9 +2473,9 @@ def test_volume_centerpage_has_volume_header(testbrowser):
 def test_volume_overview_has_adapted_centerpage_header(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.get('%s/2017/01/index' % testserver.url)
+    driver.get('%s/2016/index' % testserver.url)
     header = driver.find_element_by_css_selector(
-        '.centerpage-header--volume')
+        '.centerpage-header--archive')
     text = driver.find_element_by_css_selector(
         '.centerpage-header__text')
     dropdown = driver.find_element_by_css_selector(
