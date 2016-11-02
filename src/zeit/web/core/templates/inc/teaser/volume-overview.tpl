@@ -1,6 +1,6 @@
 {% for block in area.values()-%}
     {% set volume = block | first_child %}
-    {% set href = 'https://zeit.de/{0}/{1:02d}/index?wt_params=foo42'.format(volume.year, volume.volume) %}
+    {% set href = 'https://zeit.de/{0}/{1:02d}/index'.format(volume.year, volume.volume) %}
     {% set packshot = volume.covers['printcover'] %}
     {% set packshot_layout = module_layout %}
     {% set tracking_slug = "volume-overview-teaser..{}.".format(loop.index) %}
