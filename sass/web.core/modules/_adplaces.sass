@@ -1,12 +1,10 @@
-%medium-rectangle
-	background-color: $color-page-bg
-	color: $color-text
-	margin: remify(40px) auto
-	width: 300px
-%monsterbanner
-	max-width: 940px
-	margin: 0 auto
-	padding: $little 0
+div[id*="__container__"]
+	&:before
+		@extend %label
+		content: "Anzeige"
+		display: none
+		margin-left: auto
+		margin-right: auto
 
 // mobile ads
 .ad-mobile
@@ -35,24 +33,24 @@
 		display: block // generally visible on desktop
 		&:empty
 			display: none
-	.ad__label
-		@extend %label
-	.ad-desktop--3 > .ad__label
-		@extend %label
 	// shows Anzeige-Label before every Ad
 	&[data-banner-label]
 		div[id*="__container__"]:before
-			@extend %label
-			content: "Anzeige"
+			display: block
 	&--3,
 	&--12
-		@extend %monsterbanner
+		margin: 0 auto
+		max-width: remify(940px)
+		padding: remify(14px 0)
 	&--7,
 	&--8,
 	&--9,
 	&--10,
 	&--11
-		@extend %medium-rectangle
+		background-color: $color-page-bg
+		color: $color-text
+		margin: remify(40px) auto
+		width: remify(300px)
 	&--7-on-centerpage,
 	&--8-on-centerpage,
 	&--9-on-centerpage,
@@ -74,10 +72,6 @@
 				margin: 0 auto
 				max-width: 100%
 			&:before
-				@extend %label
-				content: "Anzeige"
-				margin-left: auto
-				margin-right: auto
 				max-width: remify(980px)
 				padding-right: remify(20px)
 	&--13-on-centerpage
@@ -100,10 +94,6 @@
 				margin: 0 auto
 				max-width: 100%
 			&:before
-				@extend %label
-				content: "Anzeige"
-				margin-left: auto
-				margin-right: auto
 				max-width: remify(660px)
 	&--7-on-article
 		clear: both

@@ -41,7 +41,11 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
     """Universal image retrieval function to be used in templates.
 
     :param context:     Context of which to extract the image from
-    :param fallback:    Whether missing image should render a fallback
+    :param fallback:    Set whether missing image should render a fallback:
+                            True    Render the default fallback image
+                            False   Do not render a fallback at all
+                            'foo'   Render the fallback image configured under
+                                    the zeit.web settings key 'foo'
     :param variant_id:  Override for automatic variant_id determination
     :param fill_color:  Fill images with transparent background with color:
                             True    Determine automatically
@@ -78,10 +82,13 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
     if not bool(image) or expired(image):
         # To clarify, that we do not only want to test against None but also
         # for invalid images, we cast to boolean.
-        if not fallback:
+        if fallback is False:
             return None
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        default_id = conf.get('default_teaser_images')
+        if fallback is True:
+            default_id = conf.get('default_teaser_images')
+        else:
+            default_id = conf.get(fallback, '')
         context = zeit.cms.interfaces.ICMSContent(default_id, None)
         if image is None:
             image = zeit.web.core.interfaces.IImage(context, None)
@@ -526,6 +533,14 @@ def toggles(*keys):
     """Returns whether all provided feature toggles are enabled"""
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     return all(toggles.find(key) for key in keys)
+
+
+@zeit.web.register_global
+def banner(tile):
+    try:
+        return list(zeit.web.core.banner.BANNER_SOURCE)[tile - 1]
+    except IndexError:
+        return
 
 
 @zeit.web.register_global

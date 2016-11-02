@@ -3,23 +3,18 @@ import mock
 
 import zeit.cms.interfaces
 
-import zeit.web.core.application
 import zeit.web.core.banner
+import zeit.web.core.template
 import zeit.web.magazin
 
 
-def test_banner_view_should_return_place_if_tile_present(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/02')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert isinstance(article_view.banner(1), zeit.web.core.banner.Place)
+def test_banner_global_should_return_place_if_tile_present(application):
+    assert isinstance(
+        zeit.web.core.template.banner(1), zeit.web.core.banner.Place)
 
 
-def test_banner_view_should_return_none_if_tile_is_not_present(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/02')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert article_view.banner(999) is None
+def test_banner_global_should_return_none_if_tile_is_not_present(application):
+    assert zeit.web.core.template.banner(999) is None
 
 
 def test_banner_toggles_viewport_zoom(application):
@@ -64,10 +59,9 @@ def test_banner_should_not_be_displayed_on_disabled_cp(testbrowser):
     assert not browser.cssselect('div[class*="ad-tile_"]')
 
 
-def test_banner_view_should_be_displayed_on_pages(testbrowser):
+def test_banner_tile7_should_appear_on_article_pages(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03')
     assert browser.cssselect('#ad-desktop-7')
-    assert browser.cssselect('#ad-desktop-8')
     browser = testbrowser('/zeit-magazin/article/03/seite-3')
     assert browser.cssselect('#ad-desktop-7')
     browser = testbrowser('/zeit-magazin/article/03/seite-4')
@@ -83,10 +77,10 @@ def test_banner_tile3_should_be_displayed_on_pages(testbrowser):
     assert browser.cssselect('#ad-desktop-3')
 
 
-def test_banner_view_should_be_displayed_on_succeeding_pages(testbrowser):
+def test_banner_tile7_should_not_appear_on_short_pages(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03/seite-2')
-    assert not browser.cssselect('#iqadtile7')
+    assert not browser.cssselect('#ad-desktop-7')
     browser = testbrowser('/zeit-magazin/article/03/seite-5')
-    assert not browser.cssselect('#iqadtile7')
+    assert not browser.cssselect('#ad-desktop-7')
     browser = testbrowser('/zeit-magazin/article/03/seite-6')
-    assert not browser.cssselect('#iqadtile7')
+    assert not browser.cssselect('#ad-desktop-7')

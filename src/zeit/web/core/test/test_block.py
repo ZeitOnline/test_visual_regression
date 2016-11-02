@@ -10,6 +10,8 @@ import zope.interface.declarations
 
 import zeit.cms.interfaces
 import zeit.edit.interfaces
+
+import zeit.web.core.article
 import zeit.web.core.centerpage
 import zeit.web.site.view_article
 
@@ -183,7 +185,7 @@ def test_image_should_use_variant_given_on_layout(application):
 def test_image_should_use_variant_original_if_infographic(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/infographic')
-    block = zeit.web.core.interfaces.IPages(article)[0][1]
+    block = zeit.web.core.article.pages_of_article(article)[0][1]
     assert block.block_type == 'infographic'
     image = zeit.web.core.interfaces.IImage(block)
     assert image.variant_id == 'original'
@@ -201,7 +203,7 @@ def test_image_should_be_none_if_expired(application):
 def test_image_should_pass_through_ratio(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/all-blocks')
-    block = zeit.web.core.interfaces.IPages(article)[0][3]
+    block = zeit.web.core.article.pages_of_article(article)[0][3]
     image = zeit.web.core.interfaces.IImage(block)
     assert round(1.77 - image.ratio, 1) == 0
     assert not image.mobile_ratio
@@ -210,7 +212,7 @@ def test_image_should_pass_through_ratio(application):
 def test_image_should_set_mobile_ratio_for_variant_original(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/infographic')
-    block = zeit.web.core.interfaces.IPages(article)[0][1]
+    block = zeit.web.core.article.pages_of_article(article)[0][1]
     image = zeit.web.core.interfaces.IImage(block)
     assert round(0.80 - image.mobile_ratio, 1) == 0
     assert round(1.62 - image.ratio, 1) == 0
@@ -319,7 +321,7 @@ def test_block_image_should_contain_expected_structure(
         tplbrowser, dummy_request, application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/inline-imagegroup')
-    block = zeit.web.core.interfaces.IPages(article)[1][0]
+    block = zeit.web.core.article.pages_of_article(article)[1][0]
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/image.html',
         block=block, request=dummy_request)
@@ -382,7 +384,7 @@ def test_block_paragraph_should_contain_expected_structure(tplbrowser):
 
 def test_block_place_should_contain_expected_structure(tplbrowser):
     view = mock.Mock()
-    view.context.advertising_enabled = True
+    view.advertising_enabled = True
     view.banner_channel = {}
     block = mock.Mock()
     block.on_page_nr = 1
