@@ -13,6 +13,8 @@ POSTDEPLOY
 
 - OPS-414: Fix volume navi in IE10
 
+- BUG-570: Fix one hour global content caching time 
+
 
 3.15 (2016-10-31)
 -----------------
