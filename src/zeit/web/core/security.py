@@ -91,6 +91,10 @@ def get_user_info(request):
         user_info['mail'] = sso_info.get('email')
         user_info['ssoid'] = sso_info['id']
         user_info['sso_verification'] = cookie
+        try:
+            user_info['entrypoint'] = sso_info['entrypoint']
+        except KeyError:
+            pass
 
     # We still get the users avatar from the community. So we need to call the
     # community.

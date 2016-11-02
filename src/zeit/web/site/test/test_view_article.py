@@ -2100,3 +2100,53 @@ def test_not_paid_subscription_article_has_correct_ivw_code(dummy_request):
     dummy_request.GET = {'C1-Paywall-On': 'true', 'C1-Paywall-Reason': 'paid'}
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.ivw_code == 'kultur/film/bild-text'
+
+
+def test_webtrekk_should_get_login_info_for_logged_out_users(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp23'] == 'nicht_angemeldet'
+
+
+def test_webtrekk_should_get_full_login_info_for_logged_in_users(
+        dummy_request, mockserver_factory, monkeypatch):
+
+    def sso_cookie_patch(r):
+        return {
+            'name': 'my_name',
+            'email': 'my_email@example.com',
+            'entrypoint': 'http://xml.zeit.de/entrypoint',
+            'uid': '14'}
+
+    monkeypatch.setattr(
+        zeit.web.core.security, 'get_user',
+        sso_cookie_patch)
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+
+    assert view.webtrekk['customParameter']['cp23'] == (
+        'angemeldet|http://xml.zeit.de/entrypoint')
+
+
+def test_webtrekk_should_get_no_login_path_when_missing_uid(
+        dummy_request, mockserver_factory, monkeypatch):
+
+    def sso_cookie_patch(r):
+        # no uid
+        return {
+            'name': 'my_name',
+            'email': 'my_email@example.com',
+            'entrypoint': 'http://xml.zeit.de/entrypoint'}
+
+    monkeypatch.setattr(
+        zeit.web.core.security, 'get_user',
+        sso_cookie_patch)
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+
+    assert view.webtrekk['customParameter']['cp23'] == 'nicht_angemeldet'
