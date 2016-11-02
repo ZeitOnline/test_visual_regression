@@ -9,7 +9,7 @@
         {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" ignore missing %}
         <div class="volume-overview-teaser__caption">
             <p class="{{ module_layout }}__issue">{{ '%02d' % volume.volume }}/{{ volume.year }}</p>
-            <span class="{{ module_layout }}__cta" href="{{ href }}"><span>Jetzt </span><span class="visually-hidden">Ausgabe {{ '%02d' % volume.volume }}/{{ volume.year }} </span> <span>lesen</span>
+            <span class="{{ module_layout }}__cta"><span>Jetzt </span><span class="visually-hidden">Ausgabe {{ '%02d' % volume.volume }}/{{ volume.year }} </span> <span>lesen</span>
         </div>
     </a>
 {% endfor %}
