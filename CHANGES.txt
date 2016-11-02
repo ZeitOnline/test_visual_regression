@@ -4,7 +4,13 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.16 (unreleased)
+3.17 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.16 (2016-11-02)
 -----------------
 
 - ZON-3449: Specify fallback for missing packshot image
@@ -16,6 +22,10 @@ POSTDEPLOY
 - MAINT: Send referrer and user-agent to solr
 
 - OPS-414: Fix volume navi in IE10
+
+- BUG-570: Fix one hour global content caching time
+
+- FIX: Be defensive about property access
 
 
 3.15 (2016-10-31)
