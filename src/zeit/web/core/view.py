@@ -628,17 +628,17 @@ class Base(object):
         ])
 
         # Track login status with entrypoint url
-        try:
-            user_login_info = zeit.web.core.security.get_user(self.request)
-            if 'uid' in user_login_info:
-                user_login_status = 'angemeldet'
+        user_login_status = 'nicht_angemeldet'
+        user_login_info = self.request.user
+        # uid may be 0, so we cannot rely on boolean check
+        if 'uid' in user_login_info:
+            user_login_status = 'angemeldet'
+            # entrypoint may be u''
+            if 'entrypoint' in user_login_info and (
+                    user_login_info['entrypoint']):
                 user_login_status = '{}|{}'.format(
                     user_login_status,
                     urllib.unquote(user_login_info['entrypoint']))
-            else:
-                user_login_status = 'nicht_angemeldet'
-        except KeyError:
-            pass
 
         custom_parameter = collections.OrderedDict([
             ('cp1', get_param('authors_list')),  # Autor
