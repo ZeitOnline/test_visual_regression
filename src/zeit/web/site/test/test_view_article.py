@@ -2109,19 +2109,29 @@ def test_webtrekk_should_get_login_info_for_logged_out_users(dummy_request):
     assert view.webtrekk['customParameter']['cp23'] == 'nicht_angemeldet'
 
 
+def test_webtrekk_should_get_logged_off_info_when_missing_uid(
+        dummy_request):
+
+    dummy_request.user = {
+        'name': 'my_name',
+        'email': 'my_email@example.com',
+        'entrypoint': 'http://xml.zeit.de/entrypoint'}
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+
+    assert view.webtrekk['customParameter']['cp23'] == 'nicht_angemeldet'
+
+
 def test_webtrekk_should_get_full_login_info_for_logged_in_users(
-        dummy_request, mockserver_factory, monkeypatch):
+        dummy_request):
 
-    def sso_cookie_patch(r):
-        return {
-            'name': 'my_name',
-            'email': 'my_email@example.com',
-            'entrypoint': 'http://xml.zeit.de/entrypoint',
-            'uid': '14'}
-
-    monkeypatch.setattr(
-        zeit.web.core.security, 'get_user',
-        sso_cookie_patch)
+    dummy_request.user = {
+        'name': 'my_name',
+        'email': 'my_email@example.com',
+        'entrypoint': 'http://xml.zeit.de/entrypoint',
+        'uid': '14'}
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -2131,22 +2141,17 @@ def test_webtrekk_should_get_full_login_info_for_logged_in_users(
         'angemeldet|http://xml.zeit.de/entrypoint')
 
 
-def test_webtrekk_should_get_no_login_path_when_missing_uid(
-        dummy_request, mockserver_factory, monkeypatch):
+def test_webtrekk_should_get_no_login_path_when_entrypoint_is_empty(
+        dummy_request):
 
-    def sso_cookie_patch(r):
-        # no uid
-        return {
-            'name': 'my_name',
-            'email': 'my_email@example.com',
-            'entrypoint': 'http://xml.zeit.de/entrypoint'}
-
-    monkeypatch.setattr(
-        zeit.web.core.security, 'get_user',
-        sso_cookie_patch)
+    dummy_request.user = {
+        'name': 'my_name',
+        'email': 'my_email@example.com',
+        'entrypoint': '',
+        'uid': '14'}
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     view = zeit.web.site.view_article.Article(context, dummy_request)
 
-    assert view.webtrekk['customParameter']['cp23'] == 'nicht_angemeldet'
+    assert view.webtrekk['customParameter']['cp23'] == 'angemeldet'
