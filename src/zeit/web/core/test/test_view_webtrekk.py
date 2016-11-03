@@ -623,7 +623,8 @@ def test_volume_header_provides_expected_webtrekk_string(
     link.click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.volume-navigation.current-volume...|'
+        'stationaer.volume-navigation.current-volume...'
+        'lesen_sie_diese_ausgabe_als_e_paper_app_und_auf_dem_e_reader|'
         'epaper.zeit.de/abo/diezeit/2016/01')
 
     link = driver.find_element_by_css_selector('.volume-heading-teaser a')
