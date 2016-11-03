@@ -7,6 +7,8 @@ POSTDEPLOY
 3.17 (unreleased)
 -----------------
 
+- ZON-3287: Track login entrypoint, stored in master cookie
+
 - FIX: Be defensive about deleted parent comments
 
 
