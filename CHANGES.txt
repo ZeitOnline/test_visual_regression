@@ -7,7 +7,7 @@ POSTDEPLOY
 3.17 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Be defensive about deleted parent comments
 
 
 3.16 (2016-11-02)
