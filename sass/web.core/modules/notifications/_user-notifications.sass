@@ -1,0 +1,13 @@
+.notification
+	font-size: remify(16px)
+	letter-spacing: $zon-letter-spacing-s
+	padding: $page-padding*0.75 $page-padding
+	text-align: center
+	&--success
+		color: #118d1f
+		background-color: #cfeac7
+
++respond-min($break-tablet-min)
+	.notification
+		position: relative
+		margin-top: -2px // cover navigation border-bottom
