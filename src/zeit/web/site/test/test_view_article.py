@@ -2125,6 +2125,7 @@ def test_webtrekk_should_get_full_login_info_for_logged_in_users(
         dummy_request):
 
     dummy_request.user = {
+        'ssoid': '123',
         'name': 'my_name',
         'email': 'my_email@example.com',
         'entrypoint': 'http://xml.zeit.de/entrypoint'}
@@ -2141,6 +2142,7 @@ def test_webtrekk_should_get_no_login_path_when_entrypoint_is_empty(
         dummy_request):
 
     dummy_request.user = {
+        'ssoid': '123',
         'name': 'my_name',
         'email': 'my_email@example.com',
         'entrypoint': ''}
