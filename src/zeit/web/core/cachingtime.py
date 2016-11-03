@@ -27,7 +27,9 @@ def varnish_caching_time_content(context):
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 def caching_time_article(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_article', '60'))
+    # Toplevel content types should have 0, so that browsers re-request them
+    # after login/logout, see BUG-343.
+    return int(conf.get('caching_time_article', '0'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
@@ -41,7 +43,8 @@ def varnish_caching_time_article(context):
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 def caching_time_cp(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_centerpage', '600'))
+    # BUG-343
+    return int(conf.get('caching_time_centerpage', '0'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
@@ -63,7 +66,8 @@ def varnish_caching_time_sitemap(context):
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery)
 def caching_time_gallery(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_gallery', '600'))
+    # BUG-343
+    return int(conf.get('caching_time_gallery', '0'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
