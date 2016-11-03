@@ -71,6 +71,7 @@ require([
     'web.core/plugins/jquery.toggleRegions',
     'web.core/plugins/jquery.countFormchars',
     'web.core/plugins/jquery.imageCopyrightFooter',
+    'web.core/plugins/jquery.notifications',
     'web.site/plugins/jquery.accordion',
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.animateJobs',
@@ -138,4 +139,5 @@ require([
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     // search
     $( '.search-form' ).searchTools();
+    $('.notifications').notifications();
 });

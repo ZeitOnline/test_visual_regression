@@ -58,7 +58,8 @@ require([
     'web.core/plugins/jquery.inlinegallery',
     'web.core/plugins/jquery.imageCopyrightFooter',
     'web.core/plugins/jquery.referrerCount',
-    'web.core/plugins/jquery.countFormchars'
+    'web.core/plugins/jquery.countFormchars',
+    'web.core/plugins/jquery.notifications'
 ], function( $, Velocity ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         main = $( '#main' );
