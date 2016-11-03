@@ -1,1 +1,62 @@
-{# insert paid form here #}
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
+
+<aside class="gate article__item article__item--rimless" data-ct-area="gate" data-ct-row="{{ view.paywall }}"  data-ct-column="false">
+    {% block gate_icon -%}
+        {{ lama.use_svg_icon('zplus', 'gate__icon', view.package, a11y=False) }}
+    {% endblock -%}
+    <h3 class="gate__title">
+        {%- block gate_title -%}
+            Wählen Sie Ihr Angebot und lesen Sie direkt weiter.
+        {%- endblock -%}
+    </h3>
+    <form action="https://premium.zeit.de/bestellung/800144" class="gate__form" data-ct-column="digital" data-ct-subcolumn="false">
+        <div class="gate__offer">
+            <input class="gate__option" id="gate-option-1" type="radio" name="angebot" value="https://premium.zeit.de/bestellung/800144" checked="checked"
+                onchange="this.form.action=this.value; this.form.setAttribute('data-ct-column', 'digital');">
+            <label for="gate-option-1" class="gate__label">
+                Unbegrenzter Digital-Zugang
+            </label>
+            <ul class="gate__list">
+                <li class="gate__list-item">Alle Artikel auf ZEIT ONLINE frei</li>
+                <li class="gate__list-item">DIE ZEIT als App, E-Paper und auf dem E-Reader</li>
+                <li class="gate__list-item"><strong>4 Wochen kostenlos testen</strong></li>
+                <li class="gate__list-item">danach 4,10 EUR pro Woche, jederzeit kündbar</li>
+            </ul>
+        </div>
+        <div class="gate__offer">
+            <input class="gate__option" id="gate-option-2" type="radio" name="angebot" value="https://premium.zeit.de/bestellung/1318185"
+                onchange="this.form.action=this.value; this.form.setAttribute('data-ct-column', 'digital+print');">
+            <label for="gate-option-2" class="gate__label">
+                Unbegrenzter Digital-Zugang inklusive Print
+            </label>
+            <ul class="gate__list">
+                <li class="gate__list-item">Jede Woche DIE ZEIT gedruckt frei Haus</li>
+                <li class="gate__list-item">Alle Artikel auf ZEIT ONLINE frei</li>
+                <li class="gate__list-item">DIE ZEIT als App, E-Paper und auf dem E-Reader</li>
+                <li class="gate__list-item"><strong>4 Wochen kostenlos testen</strong></li>
+                <li class="gate__list-item">danach 5,00 EUR pro Woche, jederzeit kündbar</li>
+            </ul>
+        </div>
+        <div class="gate__actions">
+            <input type="hidden" name="url" value="{{ view.content_url }}">
+            <input type="hidden" name="wt_zmc" value="fix.int.zonaudev.diezeit.wall_abo.premium.bar_{{ view.paywall }}.link.x">
+            <input type="hidden" name="utm_medium" value="fix">
+            <input type="hidden" name="utm_source" value="diezeit_zonaudev_int">
+            <input type="hidden" name="utm_campaign" value="wall_abo">
+            <input type="hidden" name="utm_content" value="premium_bar_{{ view.paywall }}_link_x">
+            <input class="gate__button" type="submit" value="Weiter" data-ct-label="button">
+        </div>
+    </form>
+
+    {% block gate_link -%}
+        {# this condition would only be possible inside an ESI or different cache buckets for logged in and not logged in users #}
+        {#% if not request.user -%#}
+        <p class="gate__note">
+            Sie sind bereits Digital-Abonnent?
+            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}" class="gate__link">
+                Hier anmelden
+            </a>
+        </p>
+        {#% endif %#}
+    {%- endblock %}
+</aside>
