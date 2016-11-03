@@ -2109,13 +2109,10 @@ def test_webtrekk_should_get_login_info_for_logged_out_users(dummy_request):
     assert view.webtrekk['customParameter']['cp23'] == 'nicht_angemeldet'
 
 
-def test_webtrekk_should_get_logged_off_info_when_missing_uid(
+def test_webtrekk_should_get_logged_off_info_user_info_is_empty(
         dummy_request):
 
-    dummy_request.user = {
-        'name': 'my_name',
-        'email': 'my_email@example.com',
-        'entrypoint': 'http://xml.zeit.de/entrypoint'}
+    dummy_request.user = {}
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')

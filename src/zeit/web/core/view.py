@@ -630,8 +630,7 @@ class Base(object):
         # Track login status with entrypoint url
         user_login_status = 'nicht_angemeldet'
         user_login_info = self.request.user
-        # uid may be 0, so we cannot rely on boolean check
-        if 'uid' in user_login_info:
+        if user_login_info:
             user_login_status = 'angemeldet'
             # entrypoint may be u''
             if 'entrypoint' in user_login_info and (
