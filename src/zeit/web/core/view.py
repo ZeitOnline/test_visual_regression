@@ -853,10 +853,10 @@ class CommentMixin(object):
             return False
 
         permalinked = self.comments['index'].get(cid, {})
-        if not permalinked.get('is_reply'):
+        if not (permalinked.get('is_reply') and permalinked.get('root_index')):
             return False
         try:
-            root = self.comments['comments'][permalinked.get('root_index') - 1]
+            root = self.comments['comments'][permalinked['root_index'] - 1]
             return root['cid'] == parent['cid']
         except IndexError:
             return False
