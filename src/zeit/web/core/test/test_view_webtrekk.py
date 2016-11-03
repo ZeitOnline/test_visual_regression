@@ -615,11 +615,11 @@ def test_volume_header_provides_expected_webtrekk_string(
     try:
         WebDriverWait(driver, 3).until(
             expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '.volume-navigation__link')))
+                (By.CSS_SELECTOR, '.teaser-volume__link')))
     except TimeoutException:
         assert False, 'navigation link must be present'
 
-    link = driver.find_element_by_css_selector('.volume-navigation__link')
+    link = driver.find_element_by_css_selector('.teaser-volume__link')
     link.click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(

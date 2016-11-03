@@ -2418,12 +2418,12 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
                         {'link': 'http://ww.zeit.de/2015/52/index',
                          'label': '52/2015'})
     browser = testbrowser('/2016/01/index')
-    nav = browser.cssselect('.volume-navigation')
+    nav = browser.cssselect('.teaser-volume')
     assert len(nav) == 1
 
-    current = nav[0].cssselect('.volume-navigation__current')
-    prev = nav[0].cssselect('.volume-navigation__previous-link')
-    next = nav[0].cssselect('.volume-navigation__next-link')
+    current = nav[0].cssselect('.teaser-volume__current')
+    prev = nav[0].cssselect('.teaser-colume__previous-link')
+    next = nav[0].cssselect('.teaser-volume__next-link')
 
     assert len(current) == 1
     assert len(prev) == 1
