@@ -2422,7 +2422,7 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
     assert len(nav) == 1
 
     current = nav[0].cssselect('.teaser-volume__current')
-    prev = nav[0].cssselect('.teaser-colume__previous-link')
+    prev = nav[0].cssselect('.teaser-volume__previous-link')
     next = nav[0].cssselect('.teaser-volume__next-link')
 
     assert len(current) == 1
@@ -2433,9 +2433,9 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
     assert '2016/02' in next[0].attrib['href']
     assert '02/2016' in next[0].text.strip()
 
-    packshot = current[0].cssselect('.volume-navigation__packshot')
-    cta = current[0].cssselect('.volume-navigation__cta')
-    media = current[0].cssselect('.volume-navigation__media')
+    packshot = current[0].cssselect('.teaser-volume__packshot')
+    cta = current[0].cssselect('.teaser-volume__cta')
+    media = current[0].cssselect('.teaser-volume__media')
 
     assert len(packshot) == 1
     assert len(cta) == 1
@@ -2444,15 +2444,15 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
 
 def test_volume_centerpage_volume_fallback_for_missing_packshot(testbrowser):
     browser = testbrowser('/2016/02/index')
-    packshot = browser.cssselect('.volume-navigation__packshot noscript')
+    packshot = browser.cssselect('.teaser-volume__packshot noscript')
     assert 'default_packshot_diezeit' in packshot[0].attrib['data-src']
 
 
 def test_volume_centerpage_navi_dont_show_invalid_links(testbrowser):
     browser = testbrowser('/2016/02/index')
 
-    next = browser.cssselect('.volume-navigation__next-link')
-    prev = browser.cssselect('.volume-navigation__previous-link')
+    next = browser.cssselect('.teaser-volume__next-link')
+    prev = browser.cssselect('.teaser-volume__previous-link')
     assert len(next) == 0
     assert len(prev) == 0
 
