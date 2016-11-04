@@ -139,5 +139,5 @@ require([
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     // search
     $( '.search-form' ).searchTools();
-    $( '.notifications' ).notificationsgit ();
+    $( '.notifications' ).notifications();
 });
