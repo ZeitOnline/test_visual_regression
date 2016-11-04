@@ -4,9 +4,6 @@
 	flex-wrap: wrap
 	margin: $vertical-space auto
 
-	&--below-volumeheader
-		margin-top: 0
-
 	&__media
 		width: remify(100px)
 		margin-right: 0
@@ -15,7 +12,6 @@
 	&__current
 		padding: remify(20px 30px)
 		flex-grow: 1
-		border-bottom: solid 1px $zon-light-grey
 		margin: auto
 		width: 100%
 		display: block
@@ -67,6 +63,11 @@
 	&__previous-link
 		&:before
 			content: "\2039"
+
+	&--below-volumeheader
+		margin-top: 0
+		.teaser-volume__current
+			border-bottom: solid 1px $zon-light-grey
 
 	+respond-min($break-tablet-min)
 
