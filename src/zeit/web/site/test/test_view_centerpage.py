@@ -2543,3 +2543,21 @@ def test_headerimage_should_overlay_onto_tube_area(testbrowser):
     assert browser.cssselect('.cp-area--tube')
     header_image = browser.cssselect('.cp-area--solo .header-image')[0]
     assert '--overlain' in header_image.attrib['class']
+
+
+def test_volume_teaser_on_cphas_correct_elements(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/volumeteaser')
+
+    assert len(browser.cssselect('.teaser-volume')) == 2
+
+    teaser_linktexts = browser.cssselect('.teaser-volume__link')
+    assert teaser_linktexts[0].text.strip() == (
+        'Alternativtext am Teaser: Lesen Sie diese Ausgabe.')
+    assert teaser_linktexts[1].text.strip() == (
+        'Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.')
+
+    teaser_images = browser.cssselect('.teaser-volume__media-item')
+    assert teaser_images[0].attrib['src'].endswith(
+        '/2016-09/test-printcover/original')
+    assert teaser_images[1].attrib['src'].endswith(
+        '/ausgabe/default_packshot_diezeit/original')
