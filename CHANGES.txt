@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - FIX: Be defensive about deleted parent comments
 
+- FIX: Be defensive about still images for nonexistent videos
+
 
 3.16 (2016-11-02)
 -----------------
