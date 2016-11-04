@@ -15,7 +15,7 @@
 
     {# Case A: First Region after a Solo Leader: BANNER 7 before the First Module. #}
     {% if view.has_solo_leader and region_loop.index == 2 and module_loop.index == 1 %}
-        {{ lama.adplace(view.banner(7), view) }}
+        {{ lama.adplace(banner(7), view) }}
     {% endif %}
 
     {# Case C: Every other Region: BANNER 8 before the First Module. #}
@@ -26,20 +26,20 @@
         )
         and module_loop.index == 1
         %}
-        {{ lama.adplace(view.banner(8), view) }}
+        {{ lama.adplace(banner(8), view) }}
     {% endif %}
 {% endblock %}
 
 {% block after_module_include %}
     {# Case B: First Region on page Solo Leader: BANNER 7 after the First Module. #}
     {% if not(view.has_solo_leader) and region_loop.index == 1 and module_loop.index == 1 %}
-        {{ lama.adplace(view.banner(7), view) }}
+        {{ lama.adplace(banner(7), view) }}
     {% endif %}
 {% endblock %}
 
 {% block after_module_list %}
     {# assuming 1st or 2nd region is the region we're looking for. #}
     {% if (view.has_solo_leader and region_loop.index == 2) or (not(view.has_solo_leader) and region_loop.index == 1) %}
-        {{ lama.adplace(view.banner(4), view, mobile=True) }}
+        {{ lama.adplace(banner(4), view, mobile=True) }}
     {% endif %}
 {% endblock %}

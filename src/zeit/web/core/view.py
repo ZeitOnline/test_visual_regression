@@ -15,6 +15,7 @@ import pyramid.response
 import pyramid.settings
 import pyramid.view
 import pyramid.httpexceptions
+import urllib
 import werkzeug.http
 import zope.component
 
@@ -262,12 +263,10 @@ class Base(object):
         return self.type
 
     @zeit.web.reify
-    def banner_on(self):
-        # respect the global advertising switch
-        if self.advertising_enabled is False or self.context.banner is False:
+    def advertising_enabled(self):
+        if self.context.banner is False:
             return False
-        # deliver banner if no banner is defined in xml
-        if self.context.banner is None or self.context.banner is True:
+        else:
             return True
 
     def banner_toggles(self, name):
@@ -324,12 +323,6 @@ class Base(object):
     @zeit.web.reify
     def adwords(self):
         return ['zeitonline']
-
-    def banner(self, tile):
-        try:
-            return list(zeit.web.core.banner.BANNER_SOURCE)[tile - 1]
-        except IndexError:
-            return
 
     @zeit.web.reify
     def canonical_url(self):
@@ -598,7 +591,6 @@ class Base(object):
             return value.lower() if value else ''
 
         pagination = '1/1'
-        banner_on = 'no'
         # beware of None
         product_id = get_param('product_id')
 
@@ -608,9 +600,6 @@ class Base(object):
             else:
                 page = self.pagination.get('current')
             pagination = '{}/{}'.format(page, self.pagination.get('total'))
-
-        if getattr(self.context, 'advertising_enabled', False):
-            banner_on = 'yes'
 
         if getattr(self, 'is_push_news', False):
             push = 'wichtigenachrichten.push'
@@ -638,6 +627,18 @@ class Base(object):
                 'short_num'))  # Veröffentlichungsdatum
         ])
 
+        # Track login status with entrypoint url
+        user_login_status = 'nicht_angemeldet'
+        user_login_info = self.request.user
+        if user_login_info:
+            user_login_status = 'angemeldet'
+            # entrypoint may be u''
+            if 'entrypoint' in user_login_info and (
+                    user_login_info['entrypoint']):
+                user_login_status = '{}|{}'.format(
+                    user_login_status,
+                    urllib.unquote(user_login_info['entrypoint']))
+
         custom_parameter = collections.OrderedDict([
             ('cp1', get_param('authors_list')),  # Autor
             ('cp2', self.ivw_code),  # IVW-Code
@@ -648,12 +649,13 @@ class Base(object):
             ('cp7', get_param('news_source')),  # Quelle
             ('cp8', product_id),  # Product-ID
             ('cp9', get_param('banner_channel')),  # Banner-Channel
-            ('cp10', banner_on),  # Banner aktiv
+            ('cp10', ('no', 'yes')[self.advertising_enabled]),  # Banner aktiv
             ('cp11', ''),  # Fehlermeldung
             ('cp12', 'desktop.site'),  # Seitenversion Endgerät
             ('cp13', 'stationaer'),  # Breakpoint
             ('cp14', 'friedbert'),  # Beta-Variante
             ('cp15', push),  # Push und Eilmeldungen
+            ('cp23', user_login_status),  # Login status with entrypoint url
             ('cp25', 'original'),  # Plattform
             ('cp26', pagetype),  # inhaltlicher Pagetype
             ('cp27', ';'.join(self.webtrekk_assets))  # Asset
@@ -851,10 +853,10 @@ class CommentMixin(object):
             return False
 
         permalinked = self.comments['index'].get(cid, {})
-        if not permalinked.get('is_reply'):
+        if not (permalinked.get('is_reply') and permalinked.get('root_index')):
             return False
         try:
-            root = self.comments['comments'][permalinked.get('root_index') - 1]
+            root = self.comments['comments'][permalinked['root_index'] - 1]
             return root['cid'] == parent['cid']
         except IndexError:
             return False
@@ -964,8 +966,6 @@ class CommentMixin(object):
 
 
 class Content(CeleraOneMixin, CommentMixin, Base):
-
-    is_longform = False
 
     @zeit.web.reify
     def basename(self):
@@ -1253,8 +1253,8 @@ class FrameBuilder(CeleraOneMixin):
 
     @zeit.web.reify
     def advertising_enabled(self):
-        return self.banner_channel is not None and not(
-            self.framebuilder_requires_ssl)
+        return self.banner_channel is not None and (
+            self.framebuilder_requires_ssl is False)
 
     @zeit.web.reify
     def banner_channel(self):

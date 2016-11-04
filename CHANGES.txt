@@ -4,14 +4,32 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.16 (unreleased)
+3.17 (unreleased)
+-----------------
+
+- ZON-3287: Track login entrypoint, stored in master cookie
+
+- FIX: Be defensive about deleted parent comments
+
+- FIX: Be defensive about still images for nonexistent videos
+
+
+3.16 (2016-11-02)
 -----------------
 
 - ZON-3449: Specify fallback for missing packshot image
 
+- BUG-568: Consider favorite content when offsetting author area pages
+
+- BUG-553: Restore adtile in comment thread
+
 - MAINT: Send referrer and user-agent to solr
 
 - OPS-414: Fix volume navi in IE10
+
+- BUG-570: Fix one hour global content caching time
+
+- FIX: Be defensive about property access
 
 
 3.15 (2016-10-31)
