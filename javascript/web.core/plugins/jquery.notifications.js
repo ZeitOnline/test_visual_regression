@@ -1,9 +1,9 @@
 (function( $, window ) {
     $.fn.notifications = function () {
        if (window.location.hash.substr(1) == 'registration_success'){
-           $('.notification').removeClass('notification--hidden');
+           $('.notification--registration').removeClass('notification--hidden');
        } else {
-           $('.notification').remove();
+           $('.notification--registration').remove();
        }
     };
 })( jQuery, window );
