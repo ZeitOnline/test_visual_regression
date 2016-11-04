@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<article>
+    <head>
+        <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
+            <display_name>Marie Schmidt</display_name>
+        </author>
+        <rankedTags xmlns:ns11="http://codespeak.net/lxml/objectify/pytype">
+            <tag uuid="71a88c71-677e-436e-9715-07cc83d126f3" type="topic">Gentrifizierung</tag>
+            <tag type="Person" score="6" uuid="72a7dc22-5360-461f-85c7-6475164b0f6e" url_value="christian-ude">Christian Ude</tag>
+            <tag type="Organization" score="4" uuid="ddd1c7c5-1864-4642-818c-c153a2c9ebe5" url_value="facebook">Facebook</tag>
+            <tag type="free" score="4" uuid="0e750423-5e1a-4951-87dd-3809ac9e00b8" url_value="mietvertrag">Mietvertrag</tag>
+            <tag type="Location" score="2" uuid="93ba80ad-76d9-4ff5-bcf0-66d011cf8eef" url_value="muenchen">München</tag>
+        </rankedTags>
+        <references>
+            <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2013/33/city-guide-muenchen-nachtleben-clubs" year="2013" issue="33" ressort="Kultur" author="Ralph Geisenhanslüke" contenttype="article" publication-date="2013-08-15T02:52:43+00:00" expires="">
+                <supertitle>City Guide München</supertitle>
+                <title>"Die meisten Münchner hassen das P1"</title>
+                <text>Wie steht's um das bayerische Nachtleben, 30 Jahre nach Giorgio Moroder? Der DJ und Labelbetreiber Mathias Modica gibt im Interview die Route für den perfekten Abend vor.</text>
+                <description>Wie steht's um das bayerische Nachtleben, 30 Jahre nach Giorgio Moroder? Der DJ und Labelbetreiber Mathias Modica gibt im Interview die Route für den perfekten Abend vor.</description>
+                <byline />
+                <image base-id="http://xml.zeit.de/reisen/2013-08/mathias-modica/" type="jpg" publication-date="" expires="">
+                    <bu>Der DJ Mathias Modica  in der Ruby Bar, die er zusammen mit zwei Freunden betreibt.</bu>
+                    <copyright link="http://www.bastiarlt.de">© Sebastian Arlt für DIE ZEIT</copyright>
+                </image>
+            </reference>
+            <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/lebensart/mode/2013-08/produktdesign-subkultur-muenchen-maximilianstrasse" year="2013" issue="33" ressort="Lebensart" author="Mareike Nieberding" contenttype="article" publication-date="" expires="">
+                <supertitle>Kreativwirtschaft</supertitle>
+                <title>Ein Schaufenster für Münchens Jungdesigner</title>
+                <text>Zu hohe Mieten, zu wenig Platz: Münchner Produktdesigner waren in der Stadt lange nicht sichtbar. Ein Laden auf der Maximilianstraße soll das ändern. </text>
+                <description>Zu hohe Mieten, zu wenig Platz: Münchner Produktdesigner waren in der Stadt lange nicht sichtbar. Ein Laden auf der Maximilianstraße soll das ändern. </description>
+                <byline />
+                <image base-id="http://xml.zeit.de/lebensart/2013-08/teaser-design-muenchen2-2/" type="jpg" publication-date="" expires="">
+                    <bu>Der temporäre Shop Haeppi Piecis verkauft Mode und Produktdesign aus München. </bu>
+                    <copyright>© Phil Pham</copyright>
+                </image>
+            </reference>
+            <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/lebensart/2012-11/fs-tobias-petri-fvf-2" year="2012" issue="47" ressort="Lebensart" contenttype="gallery" publication-date="" expires="">
+                <badges>
+                    <badge>gallery</badge>
+                </badges>
+                <supertitle>Freunde von Freunden</supertitle>
+                <title>Fischgrät, Brennholz, Schiefertafel</title>
+                <text>Tobias Petri zeigt Mut zum Minimalismus, in seiner Firma Holzrausch und privat.
+Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung besucht.</text>
+                <description>Tobias Petri zeigt Mut zum Minimalismus, in seiner Firma Holzrausch und privat.
+Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung besucht.</description>
+                <byline />
+                <image title="Tobias Petri Teaser" base-id="http://xml.zeit.de/lebensart/2012-11/fs-tobias-petri-fvf-teaser-2/" type="jpg" publication-date="" expires="">
+                    <bu />
+                    <copyright>© Christoph Schaller für Freunde von Freunden</copyright>
+                </image>
+            </reference>
+        </references>
+        <attribute name='artbox_gallery' ns='http://namespaces.zeit.de/CMS/document'>http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa</attribute>
+        <image base-id="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00">
+            <bu>Ein Bild aus vergangenen Zeiten: Gerti Guhl, Besitzerin der Fraunhofer Schoppenstube in München. Nun musste die Traditionsgaststätte schließen.</bu>
+            <copyright>© Andreas Gebert/dpa</copyright>
+        </image>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">1094383</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Marie Schmidt</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-08T09:25:41.497174+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">26.09.2013</attribute>
+        <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2013-40-Gentrifizierung-Mnchen</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.default</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">Gentrifizierung München</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-10-08T09:25:41.176681+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.weihser</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">Gentrifizierung München</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">64</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1d19d1df864c492188198be0291ff993</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2013-10-03T03:11:20+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Testserie</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">mode-design</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Feuilleton</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2013-40</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">9017</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:a798c5df-ee19-42aa-b8a5-2afa05ea3506}</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">40</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+      &lt;initialized_object&gt;
+        &lt;klass&gt;
+          &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+        &lt;/klass&gt;
+        &lt;arguments&gt;
+          &lt;tuple&gt;
+            &lt;global name="Article" module="zeit.content.article.article"/&gt;
+            &lt;global name="Interface" module="zope.interface"/&gt;
+            &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+            &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+          &lt;/tuple&gt;
+        &lt;/arguments&gt;
+      &lt;/initialized_object&gt;
+    &lt;/pickle&gt;</attribute>
+    </head>
+    <body>
+        <title>Mei, is des traurig!</title>
+        <subtitle>Die Münchner Schoppenstube hat dichtgemacht. Was erzählt uns das über die Gentrifizierung? Ein Erklärungsversuch.</subtitle>
+        <byline>von  Marie Schmidt</byline>
+        <division type="page">
+            <image src="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/30921833.jpg" type="jpg" publication-date="" expires="2014-01-03T21:28:07+00:00" layout="large" is_empty="False">
+                <bu>Ein Bild aus vergangenen Zeiten: Gerti Guhl, Besitzerin der Fraunhofer Schoppenstube in München. Nun musste die Traditionsgaststätte schließen.</bu>
+                <copyright link="http://foo.de">© Andreas Gebert/dpa</copyright>
+            </image>
+            <raw alldevices="true">
+              <div class="article__item x-spacing">
+                <h1 class="x-headline">.x-headline</h1>
+                <h3 class="x-subheadline">.x-subheadline</h3>
+                <p class="x-copytext">.x-copytext minima provident quas neque fugiat harum quo atque magni, mollitia delectus tempore ea culpa facere hic assumenda, ducimus reiciendis enim, quis inventore optio fuga!</p>
+                <div class="x-footer">
+                  .x-footer
+                  <span class="x-copyright">.x-copyright</span>
+                </div>
+                <div class="x-footer--borderless">
+                  .x-footer--borderless
+                  <span class="x-copyright">.x-copyright</span>
+                </div>
+                <div class="x-caption">.x-caption</div>
+                <div class="x-caption--sans">.x-caption--sans</div>
+                <div class="x-caption--serif">.x-caption--serif</div>
+              </div>
+            </raw>
+            <raw alldevices="true">
+              <style type="text/css">
+                .x-content-column,
+                .x-fullwidth,
+                .x-fullwidth--tablet,
+                .x-fullwidth--phablet,
+                .x-fullwidth--mobile { padding:1em; background-color:#ddd; }
+                hr { border-width: 1px 0 0; border-color: #ddd; border-style: solid; }
+              </style>
+              <div class="x-content-column x-spacing" style="background-color:#edd;">
+                <code>x-content-column</code>
+                <p><em>Immer</em> Textspaltenbreite</p>
+              </div>
+              <div class="x-fullwidth x-spacing" style="background-color:#ded;">
+                <code>x-fullwidth</code>
+                <p><em>Immer</em> bis zum Rand</p>
+              </div>
+              <div class="x-fullwidth--tablet x-spacing" style="background-color:#dde;">
+                <code>x-fullwidth--tablet</code>
+                <p>Bis zum Rand, wenn schmaler als 768 px</p>
+              </div>
+              <div class="x-fullwidth--phablet x-spacing" style="background-color:#eed;">
+                <code>x-fullwidth--phablet</code>
+                <p>Bis zum Rand, wenn schmaler als 520 px</p>
+              </div>
+              <div class="x-fullwidth--mobile x-spacing" style="background-color:#ede;">
+                <code>x-fullwidth--mobile</code>
+                <p>Bis zum Rand, wenn schmaler als 480 px</p>
+              </div>
+              <div class="x-content-column x-fullwidth--phablet x-spacing" style="background-color:#dee;">
+                <code>x-content-column x-fullwidth--phablet</code>
+                <p>
+                  Bis zum Rand, wenn schmaler als 520 px<br/>
+                  Textspaltenbreite, wenn 520 px und breiter
+                </p>
+              </div>
+              <hr/>
+              <div class="x-content-column x-spacing" style="background-color:#ddd;">
+                <code>x-spacing</code>
+                <p>Normaler vertikaler Abstand, wie bei Bildern und so</p>
+              </div>
+              <hr/>
+              <div class="x-content-column x-spacing--large" style="background-color:#ddd;">
+                <code>x-spacing--large</code>
+                <p>Doppelter vertikaler Abstand</p>
+              </div>
+              <hr/>
+              <div class="x-content-column x-spacing--paragraph" style="background-color:#ddd;">
+                <code>x-spacing--paragraph</code>
+                <p>Absatzabstand</p>
+              </div>
+              <hr/>
+            </raw>
+    </division>
+    <supertitle>Gentrifizierung</supertitle>
+
+    </body>
+    <teaser>
+        <title>Das Münchner Stüberl stirbt</title>
+        <text>Mei, is' des traurig! Die Schoppenstube im Münchner Glockenbachviertel hat dichtgemacht. Was erzählt uns das über die Gentrifizierung?</text>
+        <supertitle>Gentrifizierung</supertitle>
+    </teaser>
+</article>
