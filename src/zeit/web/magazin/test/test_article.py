@@ -14,11 +14,12 @@ import zeit.cms.interfaces
 import zeit.content.article.article
 
 import zeit.web.core.application
+import zeit.web.core.article
 import zeit.web.core.interfaces
 import zeit.web.magazin.view_article
 
 
-def test_ipages_contains_blocks(application):
+def test_pages_list_contains_blocks(application):
     xml = StringIO("""\
 <article>
   <head/>
@@ -33,7 +34,7 @@ def test_ipages_contains_blocks(application):
 </article>
 """)
     article = zeit.content.article.article.Article(xml)
-    pages = zeit.web.core.interfaces.IPages(article)
+    pages = zeit.web.core.article.pages_of_article(article)
     assert 2 == len(pages)
     assert 'foo bar\n' == str(list(pages[0])[0])
     assert 1 == pages[1].number
@@ -147,6 +148,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
         in webtrekk_config
     assert '14: "friedbert"' in webtrekk_config
     assert '15: ""' in webtrekk_config
+    assert '23: "nicht_angemeldet"' in webtrekk_config
     assert '25: "original"' in webtrekk_config
     assert '26: "article.column"' in webtrekk_config
 
@@ -162,7 +164,8 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
             't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
-            'cp15=&cp25=original&cp26=article.column&cp27='.format(
+            'cp15=&cp23=nicht_angemeldet&cp25=original&'
+            'cp26=article.column&cp27='.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
@@ -192,7 +195,8 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
             't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
-            'cp15=&cp25=original&cp26=article.column&cp27='.format(
+            'cp15=&cp23=nicht_angemeldet&cp25=original&'
+            'cp26=article.column&cp27='.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
@@ -232,6 +236,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
         in webtrekk_config
     assert '14: "friedbert",' in webtrekk_config
     assert '15: "",' in webtrekk_config
+    assert '23: "nicht_angemeldet",' in webtrekk_config
     assert '25: "original",' in webtrekk_config
     assert '26: "centerpage.ZMO",' in webtrekk_config
     assert '27: ""' in webtrekk_config
@@ -244,7 +249,8 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp2=zeit-magazin/bild-text&cp3=1/1&cp4=zeit-magazin&'
             'cp5=2016-05-23+12%3A14%3A06.113344%2B02%3A00&cp6=&cp7=&cp8=zmlb&'
             'cp9=zeitmz/centerpage&cp10=yes&cp11=&cp12=desktop.site&'
-            'cp13=stationaer&cp14=friedbert&cp15=&cp25=original&'
+            'cp13=stationaer&cp14=friedbert&cp15=&'
+            'cp23=nicht_angemeldet&cp25=original&'
             'cp26=centerpage.ZMO&cp27='.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 

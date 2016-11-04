@@ -71,11 +71,6 @@ class IVarnishCachingTime(zope.interface.Interface):
     """
 
 
-class IPages(zope.interface.common.sequence.IReadSequence):
-    """List of the <division>s of an zeit.content.article.interfaces.IArticle
-    """
-
-
 class IExpiration(zope.interface.Interface):
 
     seconds = zope.interface.Attribute(
