@@ -658,7 +658,8 @@ class Base(object):
             ('cp23', user_login_status),  # Login status with entrypoint url
             ('cp25', 'original'),  # Plattform
             ('cp26', pagetype),  # inhaltlicher Pagetype
-            ('cp27', ';'.join(self.webtrekk_assets))  # Asset
+            ('cp27', ';'.join(self.webtrekk_assets)),  # Asset
+            ('cp30', self.paywall or 'open')  # Paywall Schranke
         ])
 
         if zeit.web.core.template.toggles('access_status_webtrekk'):
