@@ -13,6 +13,8 @@ POSTDEPLOY
 
 - FIX: Be defensive about still images for nonexistent videos
 
+- MAINT: Fix typography for .x-footer--borderless
+
 
 3.16 (2016-11-02)
 -----------------
