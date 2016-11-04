@@ -71,7 +71,7 @@
 	      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-987b0c46-6967-417b-895e-de0eb14d64f4" kind="solo">
 
 	        <container cp:type="teaser" module="volume" visible="True" visible_mobile="True" cp:__name__="id-97cd491c-c56f-4ef3-96d0-76bde8a80671" read_more="Alternativtext am Teaser: Lesen Sie diese Ausgabe.">
-	          <block href="http://xml.zeit.de/2016/01/ausgabe" uniqueId="http://xml.zeit.de/2016/01/ausgabe" year="2008" issue="40" contenttype="volume"/>
+	          <block href="http://xml.zeit.de/2016/01/ausgabe" uniqueId="http://xml.zeit.de/2016/01/ausgabe" year="2016" issue="01" contenttype="volume"/>
 	        </container>
 
 	      </region>
@@ -84,6 +84,26 @@
                 </query>
                 <referenced_cp>http://xml.zeit.de/zeit-online/centerpage/zplus</referenced_cp>
                 <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-eadad746-bdbe-4eba-957f-289b52b4b5a8" force_mobile_image="True"/>
+            </region>
+        </cluster>
+
+        <cluster visible="True" visible_mobile="True" area="id-78dbe1c1-e240-3f49-a0c6-1d2f189576aa" kind="solo" kind_title="Solo-Region">
+          <region visible="True" visible_mobile="True" hide-dupes="True" area="id-987b0c46-6967-317b-895e-de0eb14d64f4" kind="solo">
+
+            <container cp:type="teaser" module="volume" visible="True" visible_mobile="True" cp:__name__="id-97cd491c-c56f-4ef3-96d0-66bde8a80671">
+              <block href="http://xml.zeit.de/2016/02/ausgabe" uniqueId="http://xml.zeit.de/2016/02/ausgabe" year="2016" issue="02" contenttype="volume"/>
+            </container>
+
+          </region>
+        </cluster>
+
+        <cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a5" kind="solo">
+            <region hide-dupes="True" area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e95" kind="exclusive-ressort" count="5" automatic="True" automatic_type="centerpage" title="Wirtschaft">
+                <query>
+                    <condition type="Channel">Wirtschaft</condition>
+                </query>
+                <referenced_cp>http://xml.zeit.de/zeit-online/centerpage/zplus</referenced_cp>
+                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-eadad746-bdbe-4eba-957f-289b52b4b5a9" force_mobile_image="True"/>
             </region>
         </cluster>
 

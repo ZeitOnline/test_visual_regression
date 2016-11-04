@@ -1,7 +1,11 @@
-.volume-navigation
+.teaser-volume
 	background-color: $zon-lighter-grey
 	display: flex
 	flex-wrap: wrap
+	margin: $vertical-space auto
+
+	&--below-volumeheader
+		margin-top: 0
 
 	&__media
 		width: remify(100px)
@@ -96,12 +100,18 @@
 			width: remify(150px)
 
 	+respond-min($break-desktop-min)
+
+		margin-top: $vertical-space + remify(30px) // compensate for translateY
+
+		&--below-volumeheader
+			margin-top: 0
+
 		&__media
 			width: remify(200px)
 			padding: 0
 
 		&__current
-			transform: translateY(-30px)
+			transform: translateY(remify(-30px))
 			padding: remify(0 30px)
 			max-width: remify(680px)
 
