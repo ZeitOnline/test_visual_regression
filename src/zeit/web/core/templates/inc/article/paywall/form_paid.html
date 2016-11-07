@@ -38,7 +38,7 @@
             </ul>
         </div>
         <div class="gate__actions">
-            <input type="hidden" name="url" value="{{ view.content_url }}">
+            <input type="hidden" name="url" value="{{ view.content_url }}#success-subscription">
             <input type="hidden" name="wt_zmc" value="fix.int.zonaudev.diezeit.wall_abo.premium.bar_{{ view.paywall }}.link.x">
             <input type="hidden" name="utm_medium" value="fix">
             <input type="hidden" name="utm_source" value="diezeit_zonaudev_int">
@@ -53,7 +53,7 @@
         {#% if not request.user -%#}
         <p class="gate__note">
             Sie sind bereits Digital-Abonnent?
-            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}" class="gate__link">
+            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration" class="gate__link">
                 Hier anmelden
             </a>
         </p>
