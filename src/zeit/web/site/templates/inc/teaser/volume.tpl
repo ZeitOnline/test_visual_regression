@@ -4,5 +4,3 @@
 {% set linklabel = module.read_more or 'Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.' %}
 
 {% block volumeteaser_link %}https://epaper.zeit.de/abo/diezeit/{{ volume.year }}/{{ '%02d' % volume.volume }}{% endblock %}
-{% block volumeteaser_ct_area %}volumeteaser{% endblock %}
-{% block volumeteaser_ct_row %}{{ region_loop.index }}{% endblock %}
