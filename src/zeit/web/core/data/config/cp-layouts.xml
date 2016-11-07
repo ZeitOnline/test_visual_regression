@@ -197,6 +197,13 @@
         areas="solo"
         />
 
+    <layout
+        id="volume"
+        title="Ausgabenteaser"
+        image_pattern="original"
+        areas="solo"
+        />
+
     <!--   Teaser formats for Storystreams   -->
     <layout
         id="zon-tldr"
