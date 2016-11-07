@@ -2,6 +2,34 @@
 import pytest
 
 
+def test_longform_contains_subpage_index(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/05')
+    index = browser.cssselect('.article__subpage-index')
+
+    assert len(index) == 4
+
+    for i, toc in enumerate(index):
+        items = toc.cssselect('li')
+        assert toc.cssselect('h3')
+        assert toc.cssselect('ol')
+        assert len(items) == 4
+        for k, item in enumerate(items):
+            if k == i:
+                assert item.cssselect('.article__subpage-active')
+            else:
+                link = item.cssselect('a')[0]
+                assert link.get('href') == '#kapitel{}'.format(k + 1)
+
+
+def test_longform_contains_subpage_head(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/05')
+    headlines = browser.cssselect('.article__subpage-head')
+    assert len(headlines) == 4
+
+    for i, headline in enumerate(headlines):
+        assert headline.attrib['id'] == 'kapitel{}'.format(i + 1)
+
+
 def test_article_page_should_contain_blocks(testserver, httpbrowser):
     browser = httpbrowser(
         '%s/zeit-magazin/article/all-blocks' % testserver.url)

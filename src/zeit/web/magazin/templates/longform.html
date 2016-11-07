@@ -78,8 +78,26 @@
                 {% block article_pages %}
                 {% for page in view.pages %}
                 <section class="article__page">
-                    {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
-                    {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
+                    {% if page.teaser -%}
+                        <h2 class="article__subpage-head is-centered is-constrained" id="kapitel{{ page.number }}">
+                            {{- page.number }} &mdash; {{ page.teaser -}}
+                        </h2>
+                        <aside class="article__subpage-index figure-stamp">
+                            <h3 class="article__subpage-index__title">&Uuml;bersicht</h3>
+                            <ol>
+                                {% for item in view.pages if item.teaser %}
+                                <li class="article__subpage-index__item">
+                                    <span class="article__subpage-index__item__count">{{ item.number }} &mdash; </span>
+                                    {% if loop.index == page.number %}
+                                        <span class="article__subpage-index__item__title article__subpage-active">{{ item.teaser }}</span>
+                                    {% else %}
+                                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{ item.teaser }}</a>
+                                    {% endif %}
+                                </li>
+                                {% endfor %}
+                            </ol>
+                        </aside>
+                    {% endif -%}
 
                     {{ article.render_page(page) }}
                 </section>
