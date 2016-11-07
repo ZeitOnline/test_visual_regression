@@ -905,3 +905,14 @@ def test_article_view_has_share_buttons_set_correctly(
     view = zeit.web.magazin.view_article.Article(article, dummy_request)
     assert view.share_buttons == 'big'
     assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
+
+
+def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
+    url = ('/zeit-online/article/zplus-zeit'
+           '?C1-Paywall-On=true&C1-Paywall-Reason=paid')
+    browser = testbrowser(url)
+
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+    webtrekk_config = script.text_content().strip()
+    assert '30: "paid"' in webtrekk_config
