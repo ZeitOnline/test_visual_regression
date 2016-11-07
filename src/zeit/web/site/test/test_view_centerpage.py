@@ -2534,7 +2534,7 @@ def test_exclusive_areas_render_correctly(testbrowser):
     areas = browser.cssselect('.cp-area--exclusive-ressort')
     teasers = browser.cssselect('.cp-area--exclusive-ressort article')
     assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
-    assert areas[1].cssselect('.cp-area__headline')[0].text == 'Wirtschaft'
+    assert not areas[1].cssselect('.cp-area__headline')
     assert 'teaser-small--exclusive' in teasers[0].get('class')
 
 
