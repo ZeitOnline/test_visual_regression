@@ -2424,10 +2424,12 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
     current = nav[0].cssselect('.teaser-volumeteaser__current')
     prev = nav[0].cssselect('.teaser-volumeteaser__previous-link')
     next = nav[0].cssselect('.teaser-volumeteaser__next-link')
+    modifier = browser.cssselect('.teaser-volumeteaser--below-volumeheader')
 
     assert len(current) == 1
     assert len(prev) == 1
     assert len(next) == 1
+    assert len(modifier) == 1
     assert '2015/52' in prev[0].attrib['href']
     assert '52/2015' in prev[0].text.strip()
     assert '2016/02' in next[0].attrib['href']
