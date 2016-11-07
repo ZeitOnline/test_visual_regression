@@ -8,20 +8,20 @@
     {% block volumeteaser_link %}{{ view.volume_navigation.link }}{% endblock %}
 
     {% block volumeteaser_modifier %}teaser-volume--below-volumeheader{% endblock %}
-    {% block volumeteaser_ct_area %}volume-navigation{% endblock %}
-    {% block volumeteaser_ct_row %}current-volume{% endblock %}
+    {% block volumeteaser_data_ct %}data-ct-area="volume-navigation" data-ct-row="current-volume" data-ct-column="false"{% endblock %}
+    {% block volumeteaser_data_ct_label %}data-ct-label="{{ linklabel }}"{% endblock %}
 
     {% block volumeteaser_navigation %}
-        <span class="teaser-volume__previous" data-ct-row="prev-volume" data-ct-column="false">
+        <span class="{{ self.volumeteaser_blockname() }}__previous" data-ct-row="prev-volume" data-ct-column="false">
             {% if view.volume_previous %}
-            <a class="teaser-volume__previous-link" href="{{view.volume_previous.link}}">
+            <a class="{{ self.volumeteaser_blockname() }}__previous-link" href="{{ view.volume_previous.link }}">
                 DIE ZEIT Nr. {{view.volume_previous.label}}
             </a>
             {% endif %}
         </span>
-        <span class="teaser-volume__next" data-ct-row="next-volume" data-ct-column="false">
+        <span class="{{ self.volumeteaser_blockname() }}__next" data-ct-row="next-volume" data-ct-column="false">
             {% if view.volume_next %}
-            <a class="teaser-volume__next-link" href="{{view.volume_next.link}}">
+            <a class="{{ self.volumeteaser_blockname() }}__next-link" href="{{ view.volume_next.link }}">
                 DIE ZEIT Nr. {{view.volume_next.label}}
             </a>
             {% endif %}
