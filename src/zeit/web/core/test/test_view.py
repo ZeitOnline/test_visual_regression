@@ -887,3 +887,33 @@ def test_webtrekk_content_id_should_handle_nonascii(
     dummy_request.traversed = (u'umläut',)
     view = zeit.web.core.view.Content(context, dummy_request)
     assert view.webtrekk_content_id.endswith(u'umläut')
+
+
+def test_notfication_after_paywall_registration_renders_correctly(
+        testserver, selenium_driver):
+    message_txt = u'Herzlich willkommen! Mit Ihrer Anmeldung k\xf6nnen' \
+        u' Sie nun unsere Artikel lesen.'
+    url_hash = '#registration_success'
+
+    # ZON
+    selenium_driver.get(
+        '{}/zeit-online/article/01#registration_success'.format(testserver.url))
+    assert message_txt == selenium_driver.find_element_by_css_selector(
+        '.notification--success').text
+    assert url_hash not in selenium_driver.current_url
+
+    # ZMO
+    selenium_driver.get(
+        '{}/zeit-magazin/article/essen-geniessen-spargel-lamm'
+        '#registration_success'.format(testserver.url))
+    assert message_txt == selenium_driver.find_element_by_css_selector(
+        '.notification--success').text
+    assert url_hash not in selenium_driver.current_url
+
+    # ZCO
+    selenium_driver.get(
+        '{}/campus/article/infographic'
+        '#registration_success'.format(testserver.url))
+    assert message_txt == selenium_driver.find_element_by_css_selector(
+        '.notification--success').text
+    assert url_hash not in selenium_driver.current_url
