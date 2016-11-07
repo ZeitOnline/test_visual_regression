@@ -7,7 +7,21 @@ POSTDEPLOY
 3.17 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3287: Track login entrypoint, stored in master cookie
+
+- ZON-3399: Implement volume teaser on CP
+
+- ZON-3288: Track paywall status with webtrekk
+
+- ZON-3410: Remove truncation from exclusive region
+
+- FIX: Be defensive about deleted parent comments
+
+- FIX: Be defensive about still images for nonexistent videos
+
+- MAINT: Fix typography for .x-footer--borderless
+
+- MAINT: Use sensible default caching times
 
 
 3.16 (2016-11-02)
