@@ -2128,7 +2128,7 @@ def test_webtrekk_should_get_full_login_info_for_logged_in_users(
         'ssoid': '123',
         'name': 'my_name',
         'email': 'my_email@example.com',
-        'entrypoint': 'http://xml.zeit.de/entrypoint'}
+        'entry_url': 'http://xml.zeit.de/entrypoint'}
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -2145,7 +2145,7 @@ def test_webtrekk_should_get_no_login_path_when_entrypoint_is_empty(
         'ssoid': '123',
         'name': 'my_name',
         'email': 'my_email@example.com',
-        'entrypoint': ''}
+        'entry_url': ''}
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
