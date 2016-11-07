@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import mock
 import pytest
 
 
@@ -62,32 +61,20 @@ def test_article_contains_authorbox(testbrowser):
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
 
 
-def test_article_header_should_contain_html_if_author_exists(tplbrowser):
-    view = mock.Mock()
-    view.authors = [{'prefix': 'Von', 'href': 'www.zeit.de', 'name': 'Tom',
-                    'location': ', Bern', 'suffix': 'und'},
-                    {'prefix': '', 'href': '', 'name': 'Anna', 'location': '',
-                    'suffix': ''}]
-    browser = tplbrowser(
-        'zeit.web.magazin:templates/inc/headers/article_header_default.html',
-        view=view)
-    markup = (
-        'Von<span itemprop="author" itemscope itemtype="http://schema.org/'
-        'Person"><a href="www.zeit.de" class="test" itemprop="url"><span '
-        'itemprop="name">Tom</span></a>, Bern</span>und<span itemprop="author"'
-        ' itemscope itemtype="http://schema.org/Person"><span class="test">'
-        '<span itemprop="name">Anna</span></span></span>')
-    subtitle = browser.cssselect('.article__head__subtitle')
-    assert markup.strip() == subtitle[0]
+def test_article_header_contains_authors(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/08')
+    authors = browser.cssselect('span[itemprop="author"]')
+    link = authors[0].cssselect('a[itemprop="url"]')[0]
+    assert len(authors) == 2
+    assert authors[0].text_content() == 'Anne Mustermann, Berlin'
+    assert authors[1].text_content() == 'Oliver Fritsch, London'
+    assert link.get('href') == 'http://localhost/autoren/anne_mustermann'
+    assert link.text_content() == 'Anne Mustermann'
 
 
-def test_article_header_shouldnt_produce_html_if_no_author(tplbrowser):
-    view = mock.Mock()
-    view.authors = []
-    browser = tplbrowser(
-        'zeit.web.magazin:templates/inc/headers/article_header_default.html',
-        view=view)
-    authors = browser.cssselect('.x')
+def test_article_header_without_author(testbrowser):
+    browser = testbrowser('zeit-magazin/article/martenstein-portraitformat')
+    authors = browser.cssselect('span[itemprop="author"]')
     assert not authors
 
 
