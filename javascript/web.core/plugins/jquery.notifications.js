@@ -21,7 +21,12 @@
         // keep enabled for keyboard users
         function handleFocusStyle ( $, e ) {
             var notification = e.currentTarget;
-            e.type === 'mousedown' ? $( notification ).addClass( 'notification--no-focus' ) : false;
+            if ( e.type === 'mousedown' ) {
+                $( notification ).addClass( 'notification--no-focus' );
+            } else {
+                $( notification ).removeClass( 'notification--no-focus' );
+            }
+
             $( notification ).on( 'blur', function() {
                 $( this ).removeClass( 'notification--no-focus' );
             });
