@@ -1,7 +1,7 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% block before_module_list %}
-    {{ if area.title -}}
+    {% if area.title -%}
         <h2 class="cp-area__headline">{{ area.title }}</h2>
-    {{ endif -}}
+    {% endif -%}
 {% endblock %}
