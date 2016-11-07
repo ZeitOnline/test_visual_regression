@@ -15,6 +15,10 @@ POSTDEPLOY
 
 - MAINT: Fix typography for .x-footer--borderless
 
+- MAINT: Use sensible default caching times
+
+- ZON-3399: Implement volume teaser on CP
+
 
 3.16 (2016-11-02)
 -----------------
