@@ -7,26 +7,6 @@ import zeit.cms.interfaces
 import zeit.web.core.interfaces
 
 
-def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    css_class = 'article__subpage-chapter'
-
-    # assert normal markup
-    markup = ('<div class="%s">'
-              '<span>Kapitel 1</span>'
-              '<span>&mdash; Title &mdash;</span>'
-              '<span></span></div>' % css_class)
-    lines = tpl.module.subpage_chapter(1, 'Title', css_class).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-    # assert empty subtitle
-    assert '' == str(tpl.module.subpage_chapter(0, '', '')).strip()
-
-
 def test_macro_subpage_index_should_produce_markup(jinja2_env):
     tpl = jinja2_env.get_template(
         'zeit.web.magazin:templates/macros/article_macro.tpl')

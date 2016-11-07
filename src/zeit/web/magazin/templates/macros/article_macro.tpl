@@ -1,15 +1,5 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{% macro subpage_chapter(number, subtitle, class) -%}
-    {% if subtitle -%}
-        <div class="{{ class }}">
-            <span>Kapitel {{ number }}</span>
-            <span>&mdash; {{ subtitle }} &mdash;</span>
-            <span></span>
-        </div>
-    {%- endif %}
-{%- endmacro %}
-
 {% macro subpage_index(pages, subtitle, number, index_class, active_class) -%}
     {% if subtitle %}
     <div class="{{ index_class }} figure-stamp">
