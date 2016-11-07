@@ -7,11 +7,9 @@
 		margin: $page-padding $page-padding--small/2 0
 	&__media
 		flex-grow: 1
-		margin-right: $page-padding
-		max-width: remify(220px)
-		min-width: remify(150px)
+		width: 50%
 	&__media-container
-		//width: remify(150px)
+		width: remify(150px)
 	&__issue,
 	&__cta
 		color: $zon-charcoal
@@ -31,19 +29,21 @@
 		flex-grow: 1
 		padding-top: $page-padding
 		white-space: nowrap
+		width: 50%
 
-+respond-min($break-tablet-min)
++respond-min($break-phablet-min)
 	.volume-overview-teaser
 		padding: $page-padding--small/2 $page-padding--small/2
 		&__wrapper
 			display: inline-block
 			margin: $page-padding $page-padding--small/2
-		&__media
-			margin: 0
 		&__media-container
 			width: remify(220px)
+		&__media
+			width: auto
 		&__caption
 			padding-top: $page-padding--small
+			width: auto
 
 .no-flexbox
 	.volume-overview-teaser
