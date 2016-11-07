@@ -52,10 +52,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         return items
 
     @zeit.web.reify
-    def volume_year(self):
-        return self.context.year
-
-    @zeit.web.reify
     def regions(self):
         """List of regions, the outermost container making up our centerpage.
         :rtype: list
