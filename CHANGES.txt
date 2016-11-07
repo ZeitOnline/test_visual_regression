@@ -13,6 +13,8 @@ POSTDEPLOY
 
 - ZON-3288: Track paywall status with webtrekk
 
+- ZON-3410: Remove truncation from exclusive region
+
 - FIX: Be defensive about deleted parent comments
 
 - FIX: Be defensive about still images for nonexistent videos
