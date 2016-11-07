@@ -45,42 +45,34 @@ class Page(object):
             self.blocks.append(block)
 
 
-def _inject_banner_code(
-        pages, advertising_enabled, is_longform, pubtype='zon'):
+def _inject_banner_code(pages, pubtype):
     """Injecting banner code in page.blocks counts and injects only after
     paragraphs, configured for zon, zmo, longforms... for now"""
 
-    possible_pages = [i for i in xrange(1, len(pages) + 1)]
     banner_conf = {
         'zon': {
             'tiles': [7],  # banner tiles in articles
             'ad_paras': [2],  # paragraph(s) to insert ad after
-            'content_ad_para': [4]  # paragraph/s to insert content ad after
-        },
-        'zmo': {
-            'tiles': [7, 8],
-            'ad_paras': [2, 6],
-            'content_ad_para': [4]
+            'content_ad_para': [4],  # paragraph/s to insert content ad after
+            'possible_pages': range(1, len(pages) + 1)
         },
         'longform': {
-            'tiles': [8],
-            'ad_paras': [5]
+            'tiles': [7],
+            'ad_paras': [5],
+            'content_ad_para': [],  # no content ads for longforms
+            'possible_pages': [2]  # page 1 is somehow the "intro text"
         }
     }
 
-    if is_longform:
-        possible_pages = [2]  # page 1 is somehow the "intro text"
-        pubtype = 'longform'
-
-    if advertising_enabled:
-        for i, page in enumerate(pages, start=1):
-            if i in possible_pages:
-                _place_adtag_by_paragraph(page,
-                                          banner_conf[pubtype]['tiles'],
-                                          banner_conf[pubtype]['ad_paras'])
-                if not is_longform:
-                    _place_content_ad_by_paragraph(
-                        page, banner_conf[pubtype]['content_ad_para'])
+    for index, page in enumerate(pages, start=1):
+        if index in banner_conf[pubtype]['possible_pages']:
+            _place_adtag_by_paragraph(
+                page,
+                banner_conf[pubtype]['tiles'],
+                banner_conf[pubtype]['ad_paras'])
+            _place_content_ad_by_paragraph(
+                page,
+                banner_conf[pubtype]['content_ad_para'])
     return pages
 
 
@@ -142,19 +134,10 @@ def _place_content_ad_by_paragraph(page, possible_paragraphs):
                 pass
 
 
-@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
-@grokcore.component.implementer(zeit.web.core.interfaces.IPages)
-def pages_of_article(context):
-    body = zeit.content.article.edit.interfaces.IEditableBody(context)
+def pages_of_article(article, advertising_enabled=True):
+    body = zeit.content.article.edit.interfaces.IEditableBody(article)
     body.ensure_division()  # Old articles don't always have divisions.
-    try:
-        advertising_enabled = context.advertising_enabled
-    except AttributeError:
-        advertising_enabled = True
-    try:
-        is_longform = context.is_longform
-    except AttributeError:
-        is_longform = False
+
     # IEditableBody excludes the first division since it cannot be edited
     first_division = body.xml.xpath('division[@type="page"]')[0]
     first_division = body._get_element_for_node(first_division)
@@ -164,7 +147,7 @@ def pages_of_article(context):
     pages.append(page)
     blocks = body.values()
 
-    header = zeit.content.article.edit.interfaces.IHeaderArea(context)
+    header = zeit.content.article.edit.interfaces.IHeaderArea(article)
     try:
         if blocks[0] == header.module:
             del blocks[0]
@@ -176,13 +159,20 @@ def pages_of_article(context):
             pages.append(page)
         else:
             page.append(block)
-    if zeit.magazin.interfaces.IZMOContent.providedBy(context):
-        return _inject_banner_code(
-            pages, advertising_enabled, is_longform, pubtype='zmo')
-    return _inject_banner_code(pages, advertising_enabled, is_longform)
+
+    if advertising_enabled is False:
+        return pages
+
+    if zeit.web.core.article.ILongformArticle.providedBy(article):
+        pubtype = 'longform'
+    else:
+        pubtype = 'zon'
+
+    return _inject_banner_code(pages, pubtype)
 
 
-def convert_authors(article, is_longform=False):
+def convert_authors(article):
+    is_longform = zeit.web.core.article.ILongformArticle.providedBy(article)
     author_list = []
     try:
         author_ref = article.authorships
@@ -218,7 +208,7 @@ class ILongformArticle(zeit.content.article.interfaces.IArticle):
     pass
 
 
-class IFeatureLongform(zeit.content.article.interfaces.IArticle):
+class IFeatureLongform(ILongformArticle):
     pass
 
 

@@ -1,4 +1,4 @@
-                {{ lama.adplace(view.banner(8), view, mobile=True) }}
+                {{ lama.adplace(banner(8), view, mobile=True) }}
             </main>
             {% block footer %}
                 {%- include "zeit.web.campus:templates/inc/footer.html" -%}

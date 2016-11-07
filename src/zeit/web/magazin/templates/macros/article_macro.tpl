@@ -1,10 +1,5 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{% macro place(item) -%}
-    {{ lama.adplace(item, view) }}
-    {{ lama.adplace_middle_mobile(item, view) }}
-{%- endmacro %}
-
 {% macro subpage_chapter(number, subtitle, class) -%}
     {% if subtitle -%}
         <div class="{{ class }}">
@@ -42,12 +37,6 @@
         <div class="{{ class }}" id="kapitel{{ number }}">
             {{- number }} &mdash; {{ subtitle -}}
         </div>
-    {% endif %}
-{%- endmacro %}
-
-{% macro advertising(ad) -%}
-    {% if ad.type == 'rectangle' %}
-        <div class="iqdplace" data-place="medrec_8"></div>
     {% endif %}
 {%- endmacro %}
 

@@ -40,8 +40,8 @@
             </header>
             {% block adplace_billboard %}
                 {# desktop ad place 3 #}
-                {{ lama.adplace(view.banner(3), view) }}
+                {{ lama.adplace(banner(3), view) }}
                 {# mobile ad place 1 #}
-                {{ lama.adplace(view.banner(1), view, mobile=True) }}
+                {{ lama.adplace(banner(1), view, mobile=True) }}
             {% endblock adplace_billboard %}
             <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">

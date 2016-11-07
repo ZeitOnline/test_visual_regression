@@ -89,21 +89,6 @@ def test_macro_subpage_head_should_produce_markup(jinja2_env):
     assert '' == tpl.module.subpage_head(1, '', css_class)
 
 
-def test_macro_advertising_should_produce_script(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-
-    # test normal
-    ad = {'type': 'rectangle'}
-    markup = '<div class="iqdplace" data-place="medrec_8"></div>'
-    lines = tpl.module.advertising(ad).splitlines()
-    assert markup == lines[0].strip()
-
-    # test inactive
-    ad_inactive = {'type': 'no'}
-    assert '' == tpl.module.advertising(ad_inactive)
-
-
 def test_image_template_should_produce_figure_markup(
         tplbrowser, dummy_request):
     block = zeit.cms.interfaces.ICMSContent(

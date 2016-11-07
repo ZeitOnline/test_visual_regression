@@ -42,8 +42,8 @@ class Base(zeit.web.core.view.Base):
     nav_show_ressorts = True
     nav_show_search = True
 
-    def __init__(self, *args, **kwargs):
-        super(Base, self).__init__(*args, **kwargs)
+    def __init__(self, context, request):
+        super(Base, self).__init__(context, request)
         if self.request.params.get('commentstart'):
             target_url = zeit.web.core.template.remove_get_params(
                 self.request.url, 'commentstart')
@@ -149,6 +149,5 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
         try:
             self.context = zeit.cms.interfaces.ICMSContent(
                 'http://xml.zeit.de/index')
-            self.context.advertising_enabled = self.banner_on
         except TypeError:
             raise pyramid.httpexceptions.HTTPNotFound()
