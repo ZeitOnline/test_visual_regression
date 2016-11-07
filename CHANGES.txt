@@ -9,6 +9,10 @@ POSTDEPLOY
 
 - ZON-3287: Track login entrypoint, stored in master cookie
 
+- ZON-3399: Implement volume teaser on CP
+
+- ZON-3288: Track paywall status with webtrekk
+
 - FIX: Be defensive about deleted parent comments
 
 - FIX: Be defensive about still images for nonexistent videos
@@ -16,8 +20,6 @@ POSTDEPLOY
 - MAINT: Fix typography for .x-footer--borderless
 
 - MAINT: Use sensible default caching times
-
-- ZON-3399: Implement volume teaser on CP
 
 
 3.16 (2016-11-02)
