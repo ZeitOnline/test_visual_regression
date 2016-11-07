@@ -7,20 +7,21 @@ import zeit.content.cp.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.image.image
 import zeit.content.image.interfaces
+import zeit.content.video.interfaces
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
 @grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
 def caching_time_content(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_content', '10'))
+    return int(conf.get('caching_time_content', '0'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
 @grokcore.component.adapter(zeit.cms.interfaces.ICMSContent)
 def varnish_caching_time_content(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('varnish_caching_time_content', '0'))
+    return int(conf.get('varnish_caching_time_content', '600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
@@ -36,7 +37,7 @@ def caching_time_article(context):
 @grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
 def varnish_caching_time_article(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('varnish_caching_time_article', '0'))
+    return int(conf.get('varnish_caching_time_article', '600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
@@ -51,7 +52,7 @@ def caching_time_cp(context):
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICenterPage)
 def varnish_caching_time_cp(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('varnish_caching_time_centerpage', '0'))
+    return int(conf.get('varnish_caching_time_centerpage', '600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
@@ -59,7 +60,7 @@ def varnish_caching_time_cp(context):
 def varnish_caching_time_sitemap(context):
     # Apparently, Google penalizes outdated sitemaps, so we're extra careful.
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('varnish_caching_time_sitemap', '6'))
+    return int(conf.get('varnish_caching_time_sitemap', '0'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
@@ -72,9 +73,24 @@ def caching_time_gallery(context):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery)
-def varnsih_caching_time_gallery(context):
+def varnish_caching_time_gallery(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('varnish_caching_time_gallery', '0'))
+    return int(conf.get('varnish_caching_time_gallery', '600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+def caching_time_video(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    # BUG-343
+    return int(conf.get('caching_time_video', '0'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
+@grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
+def varnish_caching_time_video(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('varnish_caching_time_video', '600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
@@ -92,35 +108,35 @@ def caching_time_image(context):
 @grokcore.component.adapter(zeit.content.image.interfaces.IImage)
 def varnish_caching_time_image(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('varnish_caching_time_image', '0'))
+    return int(conf.get('varnish_caching_time_image', '3600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 def caching_time_videostill(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_videostill', '600'))
+    return int(conf.get('caching_time_videostill', '0'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
 @grokcore.component.adapter(zeit.content.video.interfaces.IVideo)
 def varnish_caching_time_videostill(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('varnish_caching_time_videostill', '0'))
+    return int(conf.get('varnish_caching_time_videostill', '600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
 @grokcore.component.adapter(zeit.content.cp.interfaces.IFeed)
 def caching_time_feed(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_feed', '600'))
+    return int(conf.get('caching_time_feed', '0'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
 @grokcore.component.adapter(zeit.content.cp.interfaces.IFeed)
 def varnish_caching_time_feed(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('varnish_caching_time_feed', '0'))
+    return int(conf.get('varnish_caching_time_feed', '600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
@@ -138,4 +154,4 @@ def caching_time_external(context):
 @grokcore.component.adapter(zeit.content.image.image.TemporaryImage)
 def varnish_caching_time_external(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('varnish_caching_time_external', '0'))
+    return int(conf.get('varnish_caching_time_external', '600'))

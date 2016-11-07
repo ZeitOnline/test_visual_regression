@@ -11,6 +11,12 @@ POSTDEPLOY
 
 - FIX: Be defensive about deleted parent comments
 
+- FIX: Be defensive about still images for nonexistent videos
+
+- MAINT: Fix typography for .x-footer--borderless
+
+- MAINT: Use sensible default caching times
+
 
 3.16 (2016-11-02)
 -----------------

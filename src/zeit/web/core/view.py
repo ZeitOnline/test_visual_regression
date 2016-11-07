@@ -632,12 +632,10 @@ class Base(object):
         user_login_info = self.request.user
         if user_login_info:
             user_login_status = 'angemeldet'
-            # entrypoint may be u''
-            if 'entrypoint' in user_login_info and (
-                    user_login_info['entrypoint']):
+            if user_login_info.get('entry_url'):
                 user_login_status = '{}|{}'.format(
                     user_login_status,
-                    urllib.unquote(user_login_info['entrypoint']))
+                    urllib.unquote(user_login_info['entry_url']))
 
         custom_parameter = collections.OrderedDict([
             ('cp1', get_param('authors_list')),  # Autor
