@@ -576,17 +576,21 @@ def test_volume_overview_teaser_provides_expected_webtrekk_string(
     links = driver.find_elements_by_css_selector(
         '.volume-overview-teaser__wrapper')
     assert len(links) == 7
-    tracking_data = []
-    for link in links[0:3]:
-        link.click()
-        tracking_data.append(str(
-            driver.execute_script("return window.trackingData")))
-    assert tracking_data == ['tablet.volume-overview-teaser..1.'
-                             '|zeit.de/2014/49/index',
-                             'tablet.volume-overview-teaser..2.'
-                             '|zeit.de/2015/52/index',
-                             'tablet.volume-overview-teaser..3.|'
-                             'zeit.de/2016/01/index']
+
+    links[0].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith('tablet.volume-overview-teaser..1.|')
+    assert tracking_data.endswith('/2014/49/index')
+
+    links[1].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith('tablet.volume-overview-teaser..2.|')
+    assert tracking_data.endswith('/2015/52/index')
+
+    links[2].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith('tablet.volume-overview-teaser..3.|')
+    assert tracking_data.endswith('/2016/01/index')
 
 
 def test_volume_teaser_in_article_provides_expected_webtrekk_string(
