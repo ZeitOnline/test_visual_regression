@@ -276,6 +276,7 @@ class Base(object):
     def adcontroller_handle(self):
         replacements = {
             'article': 'artikel',
+            'author': 'centerpage',
             'centerpage': 'centerpage',
             'gallery': 'galerie',
             'quiz': 'quiz',
@@ -286,9 +287,12 @@ class Base(object):
             return '{}_{}'.format(
                 'mcs' if 'mcs/' in self.banner_channel else 'adv',
                 'index' if self.type == 'centerpage' else 'artikel')
-        return 'index' if self.type == 'centerpage' and (
-            self.sub_ressort == '' or self.ressort ==
-            'zeit-magazin') else replacements[self.type]
+        if self.type == 'centerpage' and (
+                self.sub_ressort == '' or self.ressort == 'zeit-magazin'):
+            return 'index'
+        if self.type in replacements:
+            return replacements[self.type]
+        return 'centerpage'
 
     @zeit.web.reify
     def adcontroller_values(self):
