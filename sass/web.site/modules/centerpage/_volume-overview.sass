@@ -7,7 +7,8 @@
 		margin: $page-padding $page-padding--small/2 0
 	&__media
 		flex-grow: 1
-		width: 50%
+		max-width: remify(150px)
+		margin-right: $page-padding
 	&__media-container
 		width: remify(150px)
 	&__issue,
@@ -29,7 +30,6 @@
 		flex-grow: 1
 		padding-top: $page-padding
 		white-space: nowrap
-		width: 50%
 
 +respond-min($break-phablet-min)
 	.volume-overview-teaser
@@ -37,13 +37,12 @@
 		&__wrapper
 			display: inline-block
 			margin: $page-padding $page-padding--small/2
-		&__media-container
-			width: remify(220px)
 		&__media
-			width: auto
+			max-width: remify(200px)
+		&__media-container
+			width: remify(200px)
 		&__caption
 			padding-top: $page-padding--small
-			width: auto
 
 .no-flexbox
 	.volume-overview-teaser
