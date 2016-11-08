@@ -139,5 +139,7 @@ require([
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     // search
     $( '.search-form' ).searchTools();
-    $( window ).notifications();
+
+    // notifications
+    $.notifications();
 });

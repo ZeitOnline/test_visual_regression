@@ -82,6 +82,8 @@ require([
     }
 
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
-    $( window ).notifications();
+
+    // notifications
+    $.notifications();
 
 });

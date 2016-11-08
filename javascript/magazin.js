@@ -81,5 +81,7 @@ require([
     $( 'main' ).animateScroll({ selector: '.js-scroll' });
     $( '.comment-section' ).countFormchars();
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
-    $( window ).notifications();
+
+    // notifications
+    $.notifications();
 });
