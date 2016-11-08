@@ -1,15 +1,10 @@
 .notification
+	+padded
+	padding-top: $page-padding*0.75
+	padding-bottom: $page-padding*0.75
 	font-size: remify(16px)
 	letter-spacing: $letter-spacing-s
-	padding: $page-padding*0.75 $page-padding
 	text-align: center
-	&--no-focus
-		outline: none
 	&--success
 		color: #005600
 		background-color: #cfeac7
-
-+respond-min($break-tablet-min)
-	.notification
-		position: relative
-		margin-top: -2px // cover navigation border-bottom
