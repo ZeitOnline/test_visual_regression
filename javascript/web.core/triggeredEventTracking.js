@@ -55,7 +55,7 @@ What does this script do?
    tracking. This could be generalized in the future, if/as needed.
 
 ----------------------------------------------------------------------------- */
-define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
+define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Clicktracking, Zeit ) {
 
     var EXPECTED_NAME = 'zonTriggeredEventTracking',
         debugMode,
@@ -71,6 +71,19 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
     /* -------------------------------------------------------------------------
     Tracking functions which trigger the actual tracking
     ------------------------------------------------------------------------- */
+    _functions.sendTracking.sendSlugToWebrekk = function( trackingData ) {
+        window.wt.sendinfo({
+            linkId: trackingData,
+            sendOnUnload: 1
+        });
+
+        if ( debugMode ) {
+            console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
+            console.log( trackingData );
+            window.trackingData = trackingData;
+        }
+    };
+
     _functions.sendTracking.sendVideoEventToWebtrekk = function( eventString ) {
 
         // make sure webtrekk is available
@@ -114,16 +127,7 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
         trackingData = Clicktracking.formatTrackingData( data );
 
-        window.wt.sendinfo({
-            linkId: trackingData,
-            sendOnUnload: 1
-        });
-
-        if ( debugMode ) {
-            console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
-            console.log( trackingData );
-            window.trackingData = trackingData;
-        }
+        _functions.sendTracking.sendSlugToWebrekk( trackingData );
     };
 
     _functions.sendTracking.sendVideoViewToIVW = function() {
@@ -167,6 +171,19 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
     };
 
+    // we get nearly complete tracking slugs from meine.zeit.de
+    // just add breakpoint
+    _functions.handleSpecificPlugin.trackMeineZeitClickEvent = function( messageDataObject ) {
+        var breakpoint = Zeit.breakpoint.getTrackingBreakpoint(),
+            slug = breakpoint + messageDataObject.slug;
+
+        if ( typeof( window.wt ) === 'undefined' || typeof( window.wt.sendinfo ) !== 'function' ) {
+            return;
+        }
+
+        _functions.sendTracking.sendSlugToWebrekk( slug );
+    };
+
     /* -------------------------------------------------------------------------
     Dispatch functions: filter the incoming messages and match them to specific
     handlers.
@@ -176,6 +193,10 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
         if ( messageDataObject.sender === 'videojs' ) {
             _functions.handleSpecificPlugin.trackVideojsEvent( messageDataObject.event );
+        }
+
+        if ( messageDataObject.sender === 'meinezeit' ) {
+            _functions.handleSpecificPlugin.trackMeineZeitClickEvent( messageDataObject );
         }
 
     };
