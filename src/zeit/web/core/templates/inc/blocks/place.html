@@ -4,14 +4,14 @@ That's why we set Banners 7+8+9 only on the first three pages and do
 not display ads on other pages. #}
 {% if view.is_all_pages_view %}
     {% if block.on_page_nr == 1 %}
-        {{ lama.adplace(view.banner(7), view) }}
-        {{ lama.adplace(view.banner(4), view, mobile=True) }}
+        {{ lama.adplace(banner(7), view) }}
+        {{ lama.adplace(banner(4), view, mobile=True) }}
     {% elif block.on_page_nr == 2 %}
-        {{ lama.adplace(view.banner(9), view) }}
+        {{ lama.adplace(banner(9), view) }}
     {% endif %}
 {% else %}
     {{ lama.adplace(block, view) }}
     {% if block.tile == 7 %}
-        {{ lama.adplace(view.banner(4), view, mobile=True) }}
+        {{ lama.adplace(banner(4), view, mobile=True) }}
     {% endif %}
 {% endif %}

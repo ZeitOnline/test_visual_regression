@@ -1,5 +1,6 @@
-{% macro adplace_adctrl(banner, view, mobile) -%}
-    {{ caller() }}
+{% macro adplace(banner, view, mobile=False) -%}
+  {% if view.advertising_enabled %}
+    <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
     {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
     {% set operator = '' if mobile else '!' %}
     {% set type = 'mobile' if mobile else 'desktop' %}
@@ -30,23 +31,8 @@
             }
         </script>
     </div>
+  {% endif %}
 {% endmacro %}
-
-{% macro adplace_middle_mobile(banner, view, mobile=True) -%}
-    {% if banner.tile == 7 -%}
-        {% call adplace_adctrl(view.banner(4), view, mobile) -%}
-            <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
-        {%- endcall %}
-    {%- endif %}
-{%- endmacro %}
-
-{% macro adplace(banner, view, mobile=False) -%}
-    {% if view.context.advertising_enabled -%}
-        {% call adplace_adctrl(banner, view, mobile) -%}
-            <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
-        {%- endcall %}
-    {% endif -%}
-{%- endmacro %}
 
 {% macro use_svg_icon(name, className, package, cleanup=True, a11y=True) -%}
     {#

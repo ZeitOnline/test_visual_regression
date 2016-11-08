@@ -1,7 +1,8 @@
-.volume-navigation
+.teaser-volumeteaser
 	background-color: $zon-lighter-grey
 	display: flex
 	flex-wrap: wrap
+	margin: $vertical-space auto
 
 	&__media
 		width: remify(100px)
@@ -11,8 +12,9 @@
 	&__current
 		padding: remify(20px 30px)
 		flex-grow: 1
-		border-bottom: solid 1px $zon-light-grey
+		margin: auto
 		width: 100%
+		display: block
 
 	&__packshot,
 	&__cta
@@ -36,7 +38,7 @@
 
 	&__previous,
 	&__next
-		display: inline-block // non flex fallback
+		display: inline-block
 		flex-grow: 1
 
 	&__next
@@ -62,6 +64,11 @@
 		&:before
 			content: "\2039"
 
+	&--below-volumeheader
+		margin-top: 0
+		.teaser-volume__current
+			border-bottom: solid 1px $zon-light-grey
+
 	+respond-min($break-tablet-min)
 
 		flex-wrap: nowrap
@@ -71,7 +78,8 @@
 			order: 1
 
 		&__current
-			max-width: remify(450px)
+			width: 60%
+			max-width: remify(400px)
 			order: 2
 			border-bottom: none
 
@@ -93,14 +101,20 @@
 			width: remify(150px)
 
 	+respond-min($break-desktop-min)
+
+		margin-top: $vertical-space + remify(30px) // compensate for translateY
+
+		&--below-volumeheader
+			margin-top: 0
+
 		&__media
 			width: remify(200px)
 			padding: 0
 
 		&__current
-			transform: translateY(-30px)
+			transform: translateY(remify(-30px))
 			padding: remify(0 30px)
-			max-width: none
+			max-width: remify(680px)
 
 		&__cta
 			padding-top: remify(50px) //center text again

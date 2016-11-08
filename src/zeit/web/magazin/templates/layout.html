@@ -85,9 +85,9 @@
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
-                        {{ lama.adplace(view.banner(1), view) }}
+                        {{ lama.adplace(banner(1), view) }}
                         <div id="iqd_rightAd">
-                            {{ lama.adplace(view.banner(2), view) }}
+                            {{ lama.adplace(banner(2), view) }}
                         </div>
                     </div>
                 </div>
@@ -107,8 +107,8 @@
                 {%- endif %}
 
                 {% block adplace_billboard %}
-                    {{ lama.adplace(view.banner(3), view) }}
-                    {{ lama.adplace(view.banner(1), view, True) }}
+                    {{ lama.adplace(banner(3), view) }}
+                    {{ lama.adplace(banner(1), view, True) }}
                 {% endblock adplace_billboard %}
 
                 {% block page_title %}
@@ -160,7 +160,7 @@
 
         {% block adplace_floor %}
             <!-- mobile ad at bottom -->
-            {{ lama.adplace(view.banner(8), view, True) }}
+            {{ lama.adplace(banner(8), view, True) }}
         {% endblock adplace_floor %}
 
         </div>

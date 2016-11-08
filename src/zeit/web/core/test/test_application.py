@@ -166,6 +166,7 @@ def test_runtime_settings_are_type_converted(application):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     assert isinstance(conf['author_articles_page_size'], int)
     assert isinstance(conf['default_teaser_images'], basestring)
+    assert isinstance(conf['default_packshot_diezeit'], basestring)
     assert isinstance(conf['reach_timeout'], float)
 
 

@@ -4,7 +4,9 @@
 {% set cp_area_supplement_id = 'truncated' ~ region_loop.index %}
 
 {% block before_module_list %}
-    <h2 class="cp-area__headline">{{ area.title }}</h2>
+    {% if area.title -%}
+        <h2 class="cp-area__headline">{{ area.title }}</h2>
+    {% endif -%}
 {% endblock %}
 
 {% block after_module_list %}

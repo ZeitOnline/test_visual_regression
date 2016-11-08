@@ -1,30 +1,31 @@
 {% if view.volume_navigation %}
-<div class="volume-navigation" data-ct-area="volume-navigation">
-    <a class="volume-navigation__current" href="{{view.volume_navigation.link}}" data-ct-row="current-volume" data-ct-column="false" title="Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.">
-        <span class="volume-navigation__packshot">
-            {% set packshot = view.volume_navigation.cover %}
-            {% set packshot_layout = 'volume-navigation' %}
-            {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" ignore missing %}
+
+    {%- extends "zeit.web.core:templates/inc/teaser/abstract-volume.tpl" -%}
+
+    {% set volume = view.volume %}
+    {% set linklabel = 'Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.' %}
+
+    {% block volumeteaser_link %}{{ view.volume_navigation.link }}{% endblock %}
+
+    {% block volumeteaser_modifier %}teaser-volumeteaser--below-volumeheader{% endblock %}
+    {% block volumeteaser_data_ct %}data-ct-area="volume-navigation" data-ct-row="current-volume" data-ct-column="false"{% endblock %}
+    {% block volumeteaser_data_ct_label %}data-ct-label="{{ linklabel }}"{% endblock %}
+
+    {% block volumeteaser_navigation %}
+        <span class="{{ self.volumeteaser_blockname() }}__previous" data-ct-row="prev-volume" data-ct-column="false">
+            {% if view.volume_previous %}
+            <a class="{{ self.volumeteaser_blockname() }}__previous-link" href="{{ view.volume_previous.link }}">
+                DIE ZEIT Nr. {{view.volume_previous.label}}
+            </a>
+            {% endif %}
         </span>
-        <span class="volume-navigation__cta">
-            <span class="volume-navigation__link">
-            Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.
-            </span>
+        <span class="{{ self.volumeteaser_blockname() }}__next" data-ct-row="next-volume" data-ct-column="false">
+            {% if view.volume_next %}
+            <a class="{{ self.volumeteaser_blockname() }}__next-link" href="{{ view.volume_next.link }}">
+                DIE ZEIT Nr. {{view.volume_next.label}}
+            </a>
+            {% endif %}
         </span>
-    </a>
-    <span class="volume-navigation__previous" data-ct-row="prev-volume" data-ct-column="false">
-        {% if view.volume_previous %}
-        <a class="volume-navigation__previous-link" href="{{view.volume_previous.link}}">
-            DIE ZEIT Nr. {{view.volume_previous.label}}
-        </a>
-        {% endif %}
-    </span>
-    <span class="volume-navigation__next" data-ct-row="next-volume" data-ct-column="false">
-        {% if view.volume_next %}
-        <a class="volume-navigation__next-link" href="{{view.volume_next.link}}">
-            DIE ZEIT Nr. {{view.volume_next.label}}
-        </a>
-        {% endif %}
-    </span>
-</div>
+    {% endblock %}
+
 {% endif %}
