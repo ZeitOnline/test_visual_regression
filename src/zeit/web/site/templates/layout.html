@@ -112,9 +112,6 @@
                 {% endblock navigation %}
             </header>
             {% endif %}
-            {% block user_notifications %}
-                 {%- include "zeit.web.core:templates/inc/notifications/user_notifications.html" ignore missing -%}
-            {% endblock %}
             {% block breaking_news %}
                 {%- include "zeit.web.site:templates/inc/breaking_news.tpl" ignore missing -%}
             {% endblock breaking_news %}
