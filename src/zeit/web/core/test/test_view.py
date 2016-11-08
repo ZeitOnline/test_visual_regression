@@ -897,7 +897,8 @@ def test_notfication_after_paywall_registration_renders_correctly(
 
     # ZON
     selenium_driver.get(
-        '{}/zeit-online/article/01#registration_success'.format(testserver.url))
+        '{}/zeit-online/article/01#registration_success'.format(
+            testserver.url))
     assert message_txt == selenium_driver.find_element_by_css_selector(
         '.notification--success').text
     assert url_hash not in selenium_driver.current_url
