@@ -11,30 +11,8 @@
             if ( 'replaceState' in history ) {
                 history.replaceState( null, document.title, location.pathname + location.search );
             } else {
-                location.hash = null;
+                return false;
             }
-        } else {
-            return;
         }
-
-        // a11y: remove :focus outline only for mouse users
-        // keep enabled for keyboard users
-        function handleFocusStyle ( $, e ) {
-            var notification = e.currentTarget;
-            if ( e.type === 'mousedown' ) {
-                $( notification ).addClass( 'notification--no-focus' );
-            } else {
-                $( notification ).removeClass( 'notification--no-focus' );
-            }
-
-            $( notification ).on( 'blur', function() {
-                $( this ).removeClass( 'notification--no-focus' );
-            });
-        }
-
-        $( '.notification' ).on( 'mousedown', function( e )  {
-            handleFocusStyle( $, e );
-        });
-
-    };
+    });
 })( jQuery, window );
