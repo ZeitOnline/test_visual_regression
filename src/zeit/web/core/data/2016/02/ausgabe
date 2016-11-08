@@ -1,0 +1,37 @@
+<volume xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+  <head>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-09-07T14:12:22.119953+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_digital_published">2016-10-06T19:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-09-07T14:12:36.207536+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-09-07T14:12:36.319805+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-09-07T14:12:36.207536+00:00</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.neukamm</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">volume</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:8d4dsbe728-7b6f-4e06-b6a0-ba199669a378}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Volume" module="zeit.content.volume.volume"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <year>2016</year>
+    <volume>02</volume>
+  </body>
+  <covers>
+    <cover href="http://xml.zeit.de/2016-09/volume_header" id="coverimage"/>
+  </covers>
+</volume>

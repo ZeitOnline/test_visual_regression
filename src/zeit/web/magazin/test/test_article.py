@@ -151,6 +151,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '23: "nicht_angemeldet"' in webtrekk_config
     assert '25: "original"' in webtrekk_config
     assert '26: "article.column"' in webtrekk_config
+    assert '30: "open"' in webtrekk_config
 
     # noscript string
     assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
@@ -165,7 +166,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
             'cp15=&cp23=nicht_angemeldet&cp25=original&'
-            'cp26=article.column&cp27='.format(
+            'cp26=article.column&cp27=&cp30=open'.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
@@ -196,7 +197,7 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
             'cp15=&cp23=nicht_angemeldet&cp25=original&'
-            'cp26=article.column&cp27='.format(
+            'cp26=article.column&cp27=&cp30=open'.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
@@ -240,6 +241,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '25: "original",' in webtrekk_config
     assert '26: "centerpage.ZMO",' in webtrekk_config
     assert '27: ""' in webtrekk_config
+    assert '30: "open"' in webtrekk_config
 
     assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
             'redaktion.zeit-magazin...centerpage.zmlb%7C'
@@ -251,7 +253,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp9=zeitmz/centerpage&cp10=yes&cp11=&cp12=desktop.site&'
             'cp13=stationaer&cp14=friedbert&cp15=&'
             'cp23=nicht_angemeldet&cp25=original&'
-            'cp26=centerpage.ZMO&cp27='.format(
+            'cp26=centerpage.ZMO&cp27=&cp30=open'.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
@@ -903,3 +905,14 @@ def test_article_view_has_share_buttons_set_correctly(
     view = zeit.web.magazin.view_article.Article(article, dummy_request)
     assert view.share_buttons == 'big'
     assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
+
+
+def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
+    url = ('/zeit-online/article/zplus-zeit'
+           '?C1-Paywall-On=true&C1-Paywall-Reason=paid')
+    browser = testbrowser(url)
+
+    script = browser.cssselect(
+        'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
+    webtrekk_config = script.text_content().strip()
+    assert '30: "paid"' in webtrekk_config
