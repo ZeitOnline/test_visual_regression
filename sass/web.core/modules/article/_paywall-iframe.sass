@@ -1,8 +1,15 @@
+$break-mobile-wide: ( height: remify(456px), width: em(359px) )
+$break-mobile-extrawide: ( height: remify(420px), width: em(502px) )
+$break-phablet-wide: ( height: remify(330px), width: em(540px) )
 .paywall-iframe
 	&__iframe
 		border: none
-		height: 540px // initial mobile height, will be changed by javascript
+		height: remify(475px)
 		overflow: hidden
 		width: 100%
-		+respond-min($break-tablet-min)
-			height: 350px
+		+respond-min(map-get($break-mobile-wide, width))
+			height: map-get($break-mobile-wide, height)
+		+respond-min(map-get($break-mobile-extrawide, width))
+			height: map-get($break-mobile-extrawide, height)
+		+respond-min(map-get($break-phablet-wide, width))
+			height: map-get($break-phablet-wide, height)
