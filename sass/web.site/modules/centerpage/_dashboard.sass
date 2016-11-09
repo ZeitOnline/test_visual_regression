@@ -1,0 +1,39 @@
+.dashboard
+	padding-bottom: remify(40px)
+
+	&__upper
+		background-color: $trout
+		padding: 0 $page-padding
+
+	&__lower
+		background-color: $cararra
+		padding: remify(36px) $page-padding
+
+	&__header
+		+font-smoothing
+		padding: remify($page-padding 0)
+		margin: 0
+
+	&__kicker
+		color: $charcoal
+		display: block
+		font-size: remify(16px)
+		letter-spacing: $zon-letter-spacing-m
+		margin-bottom: remify(4px)
+
+	&__title
+		color: $white
+		display: block
+		font-size: remify(24px)
+		letter-spacing: 0.008em
+		line-height: 1.25
+		margin-bottom: remify(4px)
+
+	+respond-min($break-tablet-min)
+
+		&__header
+			padding: remify($page-padding*2 0)
+
+		&__title
+			font-size: remify(32px)
+
