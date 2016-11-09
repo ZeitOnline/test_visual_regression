@@ -25,6 +25,8 @@ POSTDEPLOY
 
 - MAINT: Use sensible default caching times
 
+- MAINT: Cleanup content & paywall templates
+
 
 3.16 (2016-11-02)
 -----------------
