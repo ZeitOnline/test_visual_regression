@@ -2329,12 +2329,12 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
         'image-fill-color': [u'A3E6BB'], 'teaserText': 'text',
         'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
         'date_first_released': '2012-02-22T14:36:32.452398+00:00'}, {
-        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
-        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                           'harald-martenstein-wideformat')],
-        'image-fill-color': [u''], 'teaserText': 'text',
-        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
-        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
+            'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
+            'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
+                              'harald-martenstein-wideformat')],
+            'image-fill-color': [u''], 'teaserText': 'text',
+            'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
+            'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
 
     browser = testbrowser('/serie/martenstein')
     image1 = browser.cssselect('.cp-area--ranking article img')[0]
@@ -2418,24 +2418,26 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
                         {'link': 'http://ww.zeit.de/2015/52/index',
                          'label': '52/2015'})
     browser = testbrowser('/2016/01/index')
-    nav = browser.cssselect('.volume-navigation')
+    nav = browser.cssselect('.teaser-volumeteaser')
     assert len(nav) == 1
 
-    current = nav[0].cssselect('.volume-navigation__current')
-    prev = nav[0].cssselect('.volume-navigation__previous-link')
-    next = nav[0].cssselect('.volume-navigation__next-link')
+    current = nav[0].cssselect('.teaser-volumeteaser__current')
+    prev = nav[0].cssselect('.teaser-volumeteaser__previous-link')
+    next = nav[0].cssselect('.teaser-volumeteaser__next-link')
+    modifier = browser.cssselect('.teaser-volumeteaser--below-volumeheader')
 
     assert len(current) == 1
     assert len(prev) == 1
     assert len(next) == 1
+    assert len(modifier) == 1
     assert '2015/52' in prev[0].attrib['href']
     assert '52/2015' in prev[0].text.strip()
     assert '2016/02' in next[0].attrib['href']
     assert '02/2016' in next[0].text.strip()
 
-    packshot = current[0].cssselect('.volume-navigation__packshot')
-    cta = current[0].cssselect('.volume-navigation__cta')
-    media = current[0].cssselect('.volume-navigation__media')
+    packshot = current[0].cssselect('.teaser-volumeteaser__packshot')
+    cta = current[0].cssselect('.teaser-volumeteaser__cta')
+    media = current[0].cssselect('.teaser-volumeteaser__media')
 
     assert len(packshot) == 1
     assert len(cta) == 1
@@ -2444,15 +2446,15 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
 
 def test_volume_centerpage_volume_fallback_for_missing_packshot(testbrowser):
     browser = testbrowser('/2016/02/index')
-    packshot = browser.cssselect('.volume-navigation__packshot noscript')
+    packshot = browser.cssselect('.teaser-volumeteaser__packshot noscript')
     assert 'default_packshot_diezeit' in packshot[0].attrib['data-src']
 
 
 def test_volume_centerpage_navi_dont_show_invalid_links(testbrowser):
     browser = testbrowser('/2016/02/index')
 
-    next = browser.cssselect('.volume-navigation__next-link')
-    prev = browser.cssselect('.volume-navigation__previous-link')
+    next = browser.cssselect('.teaser-volumeteaser__next-link')
+    prev = browser.cssselect('.teaser-volumeteaser__previous-link')
     assert len(next) == 0
     assert len(prev) == 0
 
@@ -2468,6 +2470,40 @@ def test_volume_centerpage_has_volume_header(testbrowser):
     assert len(volume_header) == 1
     assert 'Ausgabe Nr. 01/2016' in caption[0].text.strip()
     assert len(teaser) == 3
+
+
+def test_volume_overview_has_adapted_centerpage_header(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/2016/index' % testserver.url)
+    header = driver.find_element_by_css_selector(
+        '.centerpage-header--archive')
+    text = driver.find_element_by_css_selector(
+        '.centerpage-header__text')
+    dropdown = driver.find_element_by_css_selector(
+        '.centerpage-header__dropdown')
+    link = driver.find_element_by_css_selector(
+        '.centerpage-header__link')
+    dropdown.find_element_by_xpath("//option[text()='1947']").click()
+
+    assert header.is_displayed()
+    assert text.is_displayed()
+    assert dropdown.is_displayed()
+    assert link.is_displayed()
+    assert '1947/index' in link.get_attribute('href')
+
+
+def test_volume_overview_teasers_render_expected_markup(testbrowser):
+    browser = testbrowser('/2016/index')
+    teasers = browser.cssselect('.cp-area--volume-overview >'
+                                ' .volume-overview-teaser a')
+    assert len(teasers) == 7
+    for teaser in teasers:
+        caption = teaser.cssselect('.volume-overview-teaser__caption')[0]
+        assert caption.find('span')[0].text + \
+            caption.find('span')[2].text == 'Jetzt lesen'
+        assert 'volume-overview-teaser__media' in \
+               teaser.cssselect('figure')[0].get('class')
 
 
 def test_zplus_teaser_has_zplus_badge(testbrowser):
@@ -2534,7 +2570,7 @@ def test_exclusive_areas_render_correctly(testbrowser):
     areas = browser.cssselect('.cp-area--exclusive-ressort')
     teasers = browser.cssselect('.cp-area--exclusive-ressort article')
     assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
-    assert areas[1].cssselect('.cp-area__headline')[0].text == 'Wirtschaft'
+    assert not areas[1].cssselect('.cp-area__headline')
     assert 'teaser-small--exclusive' in teasers[0].get('class')
 
 
@@ -2543,3 +2579,21 @@ def test_headerimage_should_overlay_onto_tube_area(testbrowser):
     assert browser.cssselect('.cp-area--tube')
     header_image = browser.cssselect('.cp-area--solo .header-image')[0]
     assert '--overlain' in header_image.attrib['class']
+
+
+def test_volume_teaser_on_cphas_correct_elements(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/volumeteaser')
+
+    assert len(browser.cssselect('.teaser-volumeteaser')) == 2
+
+    teaser_linktexts = browser.cssselect('.teaser-volumeteaser__link')
+    assert teaser_linktexts[0].text.strip() == (
+        'Alternativtext am Teaser: Lesen Sie diese Ausgabe.')
+    assert teaser_linktexts[1].text.strip() == (
+        'Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.')
+
+    teaser_images = browser.cssselect('.teaser-volumeteaser__media-item')
+    assert teaser_images[0].attrib['src'].endswith(
+        '/2016-09/test-printcover/original')
+    assert teaser_images[1].attrib['src'].endswith(
+        '/ausgabe/default_packshot_diezeit/original')

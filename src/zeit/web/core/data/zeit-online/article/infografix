@@ -1,25 +1,25 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <rankedTags>
-      <tag type="Organization" url_value="world-anti-doping-agency-%28wada%29" uuid="8f50cb01-0cfd-4bb3-af58-b22acab59f57">World Anti-Doping Agency (Wada)</tag>
-      <tag url_value="ioc" uuid="cdb09557-e4fe-4718-b42a-ee5400bb1ade" score="5" type="Organization">IOC</tag>
-      <tag url_value="hacker" uuid="0e53e5fe-9bd8-44ff-beb1-69799c2e69c6" score="4" type="free">Hacker</tag>
-      <tag url_value="internet" uuid="32366255-a1c7-4d14-b07c-96b47edb92d7" score="4" type="free">Internet</tag>
-      <tag url_value="medikament" uuid="874501d6-f616-477a-85d9-b24cbd10a8bb" score="4" type="free">Medikament</tag>
-      <tag url_value="sportler" uuid="544b6b5d-ec31-4d65-8c8b-d80a3a3ad47d" score="4" type="free">Sportler</tag>
-    </rankedTags>
+    <keywordset>
+      <keyword src="manual">Tennis</keyword>
+      <keyword src="manual">Paris</keyword>
+      <keyword src="manual"/>
+    </keywordset>
+    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
+      <display_name>Heike Jahberg</display_name>
+    </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Sport</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT Online</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">sid</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-01T15:12:07+00:00</attribute>
@@ -71,15 +71,81 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <supertitle>Wada</supertitle>
-    <title>Hacker veröffentlichen weitere Daten von Sportlern</title>
-    <subtitle>Russische Hacker haben die Welt-Anti-Doping-Agentur angegriffen und vertrauliche Daten über Athleten veröffentlicht. Unter ihnen sind auch fünf deutsche Sportler.</subtitle>
+    <supertitle>Tennis</supertitle>
+    <title>Williams wackelt weiter, steht aber im Viertelfinale</title>
+    <byline>SID</byline>
     <division type="page">
-      <p>Eine russische Hackergruppe hat Daten der Welt-Anti-Doping-Agentur (Wada) von weiteren Sportlern veröffentlicht. Das bestätigte die <a class="" href="https://www.wada-ama.org/en/media/news/2016-09/wada-confirms-another-batch-of-athlete-data-leaked-by-russian-cyber-hackers-fancy" target="_blank">Wada</a><a class="" href="https://www.wada-ama.org/en/media/news/2016-09/wada-confirms-another-batch-of-athlete-data-leaked-by-russian-cyber-hackers-fancy" target="_blank"> in einer Mitteilung auf ihrer Website</a>. Nun seien vertrauliche Informationen von 25 Sportlern aus acht Nationen durch die Hacker öffentlich gemacht worden, erklärte die Antidopingagentur. Insgesamt seien 29 Sportler von den Veröffentlichungen betroffen, sagte Wada-Generaldirektor Olivier Niggli. Unter den Athleten sind demnach auch fünf Deutsche.</p>
- 	  <volume href="http://xml.zeit.de/2016/01/ausgabe" />
-      <p>Die russische Hackergruppe, die sich Fancy Bears nennt, hatte zuvor die <a class="" href="http://www.zeit.de/sport/2016-09/wada-datenbank-leak-serena-venus-williams-doping" target="_blank">Accounts von mehreren amerikanischen Topathleten</a> bei der Wada durchsucht. Sie stellten dabei bereits mehrere medizinische Ausnahmegenehmigungen für Mittel der Athleten ins Internet. </p>
-      <p>Die viermalige Turnolympiasiegerin Simone Biles, Tennisstar Venus Williams und Basketballolympiasiegerin Elena Delle Donne hatten sich nach den ersten Veröffentlichungen gewehrt und die Vorwürfe zurückgewiesen. Sie bekamen dabei Unterstützung von der Wada und vom Internationalen Olympischen Komitee (IOC). Auf der neu veröffentlichten Liste steht unter anderem auch der deutsche Diskuswerfer Robert Harting.</p>
-      <p>Sportler dürfen mitunter Medikamente einnehmen, die auf der Dopingliste stehen, müssen dafür aber eine medizinische Ausnahmegenehmigung vorweisen. "Wir bedauern, dass diese Kriminellen versucht haben, den Ruf der betroffenen Athleten auf diese Weise zu schädigen", sagte Wada-Direktor Niggli.</p>
+    <raw alldevices="true">
+      <div class="article__item x-spacing">
+        <h1 class="x-headline">.x-headline</h1>
+        <h3 class="x-subheadline">.x-subheadline</h3>
+        <p class="x-copytext">.x-copytext minima provident quas neque fugiat harum quo atque magni, mollitia delectus tempore ea culpa facere hic assumenda, ducimus reiciendis enim, quis inventore optio fuga!</p>
+        <div class="x-footer">
+          .x-footer
+          <span class="x-copyright">.x-copyright</span>
+        </div>
+        <div class="x-footer--borderless">
+          .x-footer--borderless
+          <span class="x-copyright">.x-copyright</span>
+        </div>
+        <div class="x-caption">.x-caption</div>
+        <div class="x-caption--sans">.x-caption--sans</div>
+        <div class="x-caption--serif">.x-caption--serif</div>
+      </div>
+    </raw>
+    <raw alldevices="true">
+      <style type="text/css">
+        .x-content-column,
+        .x-fullwidth,
+        .x-fullwidth--tablet,
+        .x-fullwidth--phablet,
+        .x-fullwidth--mobile { padding:1em; background-color:#ddd; }
+        hr { border-width: 1px 0 0; border-color: #ddd; border-style: solid; }
+      </style>
+      <div class="x-content-column x-spacing" style="background-color:#edd;">
+        <code>x-content-column</code>
+        <p><em>Immer</em> Textspaltenbreite</p>
+      </div>
+      <div class="x-fullwidth x-spacing" style="background-color:#ded;">
+        <code>x-fullwidth</code>
+        <p><em>Immer</em> bis zum Rand</p>
+      </div>
+      <div class="x-fullwidth--tablet x-spacing" style="background-color:#dde;">
+        <code>x-fullwidth--tablet</code>
+        <p>Bis zum Rand, wenn schmaler als 768 px</p>
+      </div>
+      <div class="x-fullwidth--phablet x-spacing" style="background-color:#eed;">
+        <code>x-fullwidth--phablet</code>
+        <p>Bis zum Rand, wenn schmaler als 520 px</p>
+      </div>
+      <div class="x-fullwidth--mobile x-spacing" style="background-color:#ede;">
+        <code>x-fullwidth--mobile</code>
+        <p>Bis zum Rand, wenn schmaler als 480 px</p>
+      </div>
+      <div class="x-content-column x-fullwidth--phablet x-spacing" style="background-color:#dee;">
+        <code>x-content-column x-fullwidth--phablet</code>
+        <p>
+          Bis zum Rand, wenn schmaler als 520 px<br/>
+          Textspaltenbreite, wenn 520 px und breiter
+        </p>
+      </div>
+      <hr/>
+      <div class="x-content-column x-spacing" style="background-color:#ddd;">
+        <code>x-spacing</code>
+        <p>Normaler vertikaler Abstand, wie bei Bildern und so</p>
+      </div>
+      <hr/>
+      <div class="x-content-column x-spacing--large" style="background-color:#ddd;">
+        <code>x-spacing--large</code>
+        <p>Doppelter vertikaler Abstand</p>
+      </div>
+      <hr/>
+      <div class="x-content-column x-spacing--paragraph" style="background-color:#ddd;">
+        <code>x-spacing--paragraph</code>
+        <p>Absatzabstand</p>
+      </div>
+      <hr/>
+    </raw>
     </division>
   </body>
 </article>
