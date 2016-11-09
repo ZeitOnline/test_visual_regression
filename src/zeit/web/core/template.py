@@ -712,3 +712,8 @@ def expired(content):
     if info is None:
         return False
     return info.is_expired
+
+
+@zeit.web.register_global
+def get_current_year():
+    return datetime.datetime.now().year

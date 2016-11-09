@@ -36,7 +36,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">homepage</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:91f3d214-5186-454c-9e69-6ce74562ed90}</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">52</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">01</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
@@ -55,21 +55,23 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
+    <title>Archiv</title>
+    <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fad252" kind="solo" title="Archiv">
+      <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38se" kind="solo" visible="True">
+        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526d" title="Archiv" cp:type="cpextra" module="centerpage-archive-header">
+          <cp_extra id="centerpage-archive-header"/>
+        </container>
+      </region>
+    </cluster>
     <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
-        <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="volume-header" title="FOOOO">
-          <container cp:type="teaser" module="volume-header" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e6">
-          <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne-julia-zange" />
-          </container>
-          <container cp:type="teaser" module="volume-header" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e7">
-            <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
-          </container>
-          <container cp:type="teaser" module="volume-header" cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e8">
-            <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
+        <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="volume-overview" title="FOOOO">
+          <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-8b63311b-9def-4b2a-9d09-ff3968bf5559">
+            <block href="http://xml.zeit.de/ausgabe/2015/52" uniqueId="http://xml.zeit.de/2015/52/ausgabe" publication-date="" expires=""/>
           </container>
         </region>
     </cluster>
   </body>
   <teaser>
-    <title>Ausgabe 2015 / 52</title>
+    <title>Archiv</title>
   </teaser>
 </centerpage>
