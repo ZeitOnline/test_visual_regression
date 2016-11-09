@@ -1,1 +1,7 @@
-{% extends "zeit.web.site:templates/inc/area/print-ressort.html" %}
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+
+{% block before_module_list %}
+    {% if area.title -%}
+        <h2 class="cp-area__headline">{{ area.title }}</h2>
+    {% endif -%}
+{% endblock %}
