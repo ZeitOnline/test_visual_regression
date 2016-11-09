@@ -15,6 +15,8 @@ POSTDEPLOY
 
 - ZON-3410: Remove truncation from exclusive region
 
+- ZON-3380: Introduce volume overview page (each volume of a year)
+
 - BUG-475: Filter `verlagsangebote` directory content for advertisements
 
 - FIX: Be defensive about deleted parent comments
@@ -26,6 +28,8 @@ POSTDEPLOY
 - MAINT: Use sensible default caching times
 
 - MAINT: Cleanup content & paywall templates
+
+- MAINT: Make caching time for newsfeed.zeit.de
 
 
 3.16 (2016-11-02)

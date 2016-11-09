@@ -559,6 +559,43 @@ def test_volume_teaser_provides_expected_webtrekk_string(
         'reader|premium.zeit.de/diezeit/2016/01')
 
 
+def test_volume_overview_teaser_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(800, 600)
+    driver.get('%s/2016/index#debug-clicktracking'
+               % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.volume-overview-teaser__wrapper')))
+    except TimeoutException:
+        assert False, 'volume-overview-teaser must be present'
+
+    links = driver.find_elements_by_css_selector(
+        '.volume-overview-teaser__wrapper')
+    assert len(links) == 7
+
+    links[0].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'tablet.volume-overview-teaser..1.49_2014|')
+    assert tracking_data.endswith('/2014/49/index')
+
+    links[1].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'tablet.volume-overview-teaser..2.52_2015|')
+    assert tracking_data.endswith('/2015/52/index')
+
+    links[2].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'tablet.volume-overview-teaser..3.01_2016|')
+    assert tracking_data.endswith('/2016/01/index')
+
+
 def test_volume_teaser_in_article_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     driver = selenium_driver
