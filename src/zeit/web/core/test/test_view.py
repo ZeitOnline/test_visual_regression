@@ -17,6 +17,11 @@ import zeit.web.magazin.view_centerpage
 import zeit.web.site.view_article
 import zeit.web.site.view_centerpage
 
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 @pytest.fixture
 def mock_ad_view(application):
@@ -893,28 +898,35 @@ def test_notfication_after_paywall_registration_renders_correctly(
         testserver, selenium_driver):
     message_txt = u'Herzlich willkommen! Mit Ihrer Anmeldung k\xf6nnen' \
         u' Sie nun unsere Artikel lesen.'
-    url_hash = '#registration_success'
+    url_hash = '#success-registration'
+
+    driver = selenium_driver
+
+    def assert_notification():
+        try:
+            cond = expected_conditions.presence_of_element_located((
+                By.CLASS_NAME, "notification--success"))
+            WebDriverWait(driver, 5).until(cond)
+        except TimeoutException:
+            assert False, 'Timeout notification %s' % driver.current_url
+        else:
+            notification = driver.find_element_by_class_name(
+                'notification--success')
+            assert message_txt == notification.text
+            assert url_hash not in driver.current_url
 
     # ZON
-    selenium_driver.get(
-        '{}/zeit-online/article/01#registration_success'.format(
-            testserver.url))
-    assert message_txt == selenium_driver.find_element_by_css_selector(
-        '.notification--success').text
-    assert url_hash not in selenium_driver.current_url
+    driver.get('{0}/zeit-online/article/01{1}'
+               .format(testserver.url, url_hash))
+    assert_notification()
 
     # ZMO
-    selenium_driver.get(
-        '{}/zeit-magazin/article/essen-geniessen-spargel-lamm'
-        '#registration_success'.format(testserver.url))
-    assert message_txt == selenium_driver.find_element_by_css_selector(
-        '.notification--success').text
-    assert url_hash not in selenium_driver.current_url
+    driver.get(
+        '{0}/zeit-magazin/article/essen-geniessen-spargel-lamm{1}'
+        .format(testserver.url, url_hash))
+    assert_notification()
 
     # ZCO
-    selenium_driver.get(
-        '{}/campus/article/infographic'
-        '#registration_success'.format(testserver.url))
-    assert message_txt == selenium_driver.find_element_by_css_selector(
-        '.notification--success').text
-    assert url_hash not in selenium_driver.current_url
+    driver.get(
+        '{0}/campus/article/infographic{1}'.format(testserver.url, url_hash))
+    assert_notification()
