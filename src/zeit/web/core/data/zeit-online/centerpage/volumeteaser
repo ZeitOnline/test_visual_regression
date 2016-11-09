@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="iso-8859-1"?>
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -50,41 +50,10 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
         <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
-        <topiclinks>
-            <topiclink_title>Schwerpunkte</topiclink_title>
-            <topiclink>
-                <topiclink_label_1>Islamischer Staat</topiclink_label_1>
-                <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
-                <topiclink_label_2>Bundeswehr</topiclink_label_2>
-                <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
-                <topiclink_label_3>Hongkong</topiclink_label_3>
-                <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
-            </topiclink>
-        </topiclinks>
     </head>
     <body>
-        <supertitle>Ausgabenseite</supertitle>
-        <title>Ressortflächen</title>
-        <cluster area="id-8458d4a8-7cee-4b15-be25-0e0e36e327cd" kind="solo">
-          <region hide-dupes="True" area="id-0b68c298-c9de-4a92-b0f4-d1ac839b2ae9" kind="solo">
-            <container cp:type="headerimage" module="headerimage" cp:__name__="id-3e6bf101-bd4b-49a7-a27e-82e2df102cd2" supertitle="Ausgabenseite" title="Ressortflächen">
-              <image>http://xml.zeit.de/zeit-online/cp-content/ig-1/</image>
-            </container>
-          </region>
-        </cluster>
-        <cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a4" kind="solo">
-            <region hide-dupes="True" area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="exclusive-ressort" count="5" automatic="True" automatic_type="centerpage" title="Politik">
-                <query>
-                    <condition type="Channel">Politik</condition>
-                </query>
-                <referenced_cp>http://xml.zeit.de/zeit-online/centerpage/zplus</referenced_cp>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-eadad746-bdbe-4eba-957f-289b52b4b5a8" force_mobile_image="True"/>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-097f3602-7fad-418f-af71-b387398a2ae2"/>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-a389ba64-0b85-48a9-8541-8cf7df44ba3f"/>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-fe53ea51-374c-4265-a678-773af7a19cff"/>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-0915d1d1-34ee-4e75-9f2d-0ac9494e19ab"/>
-            </region>
-        </cluster>
+        <title>Ausgaben-Teaser auf CPs</title>
+
         <cluster area="id-7e329214-665f-457d-a624-94c47850f95d" kind="duo">
             <region hide-dupes="True" area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb7" kind="duo">
                 <container cp:type="teaser" module="zon-square" cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7">
@@ -97,19 +66,50 @@
                 </container>
             </region>
         </cluster>
-        <cluster area="id-ce33b4ec-f212-497e-b201-6045478b7e94" kind="solo">
-            <region hide-dupes="True" area="id-bda65215-7c4b-41b0-8717-4ac10bbf86a4" kind="exclusive-ressort" count="5" automatic="True" automatic_type="centerpage" title="">
+
+	    <cluster visible="True" visible_mobile="True" area="id-78dbe1c1-e240-4f49-a0c6-1d2f189576aa" kind="solo" kind_title="Solo-Region">
+	      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-987b0c46-6967-417b-895e-de0eb14d64f4" kind="solo">
+
+	        <container cp:type="teaser" module="volume" visible="True" visible_mobile="True" cp:__name__="id-97cd491c-c56f-4ef3-96d0-76bde8a80671" read_more="Alternativtext am Teaser: Lesen Sie diese Ausgabe.">
+	          <block href="http://xml.zeit.de/2016/01/ausgabe" uniqueId="http://xml.zeit.de/2016/01/ausgabe" year="2016" issue="01" contenttype="volume"/>
+	        </container>
+
+	      </region>
+	    </cluster>
+
+        <cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a4" kind="solo">
+            <region hide-dupes="True" area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="exclusive-ressort" count="5" automatic="True" automatic_type="centerpage" title="Politik">
+                <query>
+                    <condition type="Channel">Politik</condition>
+                </query>
+                <referenced_cp>http://xml.zeit.de/zeit-online/centerpage/zplus</referenced_cp>
+                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-eadad746-bdbe-4eba-957f-289b52b4b5a8" force_mobile_image="True"/>
+            </region>
+        </cluster>
+
+        <cluster visible="True" visible_mobile="True" area="id-78dbe1c1-e240-3f49-a0c6-1d2f189576aa" kind="solo" kind_title="Solo-Region">
+          <region visible="True" visible_mobile="True" hide-dupes="True" area="id-987b0c46-6967-317b-895e-de0eb14d64f4" kind="solo">
+
+            <container cp:type="teaser" module="volume" visible="True" visible_mobile="True" cp:__name__="id-97cd491c-c56f-4ef3-96d0-66bde8a80671">
+              <block href="http://xml.zeit.de/2016/02/ausgabe" uniqueId="http://xml.zeit.de/2016/02/ausgabe" year="2016" issue="02" contenttype="volume"/>
+            </container>
+
+          </region>
+        </cluster>
+
+        <cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a5" kind="solo">
+            <region hide-dupes="True" area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e95" kind="exclusive-ressort" count="5" automatic="True" automatic_type="centerpage" title="Wirtschaft">
                 <query>
                     <condition type="Channel">Wirtschaft</condition>
                 </query>
                 <referenced_cp>http://xml.zeit.de/zeit-online/centerpage/zplus</referenced_cp>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-4e429b63-8f2b-4f1d-8929-ab23379ab243" force_mobile_image="True"/>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-0a054316-effb-4992-8e75-60954bce0948"/>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-a08e00fa-71ad-471b-a222-aa2271cd878e"/>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-771d41b5-6b7a-4ef4-8368-462240ac5b52"/>
-                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-87d66389-6a2c-408b-a04e-f46a29ae7d70"/>
+                <container cp:type="auto-teaser" module="zon-small" cp:__name__="id-eadad746-bdbe-4eba-957f-289b52b4b5a9" force_mobile_image="True"/>
             </region>
         </cluster>
+
     </body>
     <feed/>
+    <teaser>
+        <title>Z+ Teaser</title>
+    </teaser>
 </centerpage>

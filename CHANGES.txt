@@ -9,6 +9,14 @@ POSTDEPLOY
 
 - ZON-3287: Track login entrypoint, stored in master cookie
 
+- ZON-3399: Implement volume teaser on CP
+
+- ZON-3288: Track paywall status with webtrekk
+
+- ZON-3410: Remove truncation from exclusive region
+
+- BUG-475: Filter `verlagsangebote` directory content for advertisements
+
 - FIX: Be defensive about deleted parent comments
 
 - FIX: Be defensive about still images for nonexistent videos
