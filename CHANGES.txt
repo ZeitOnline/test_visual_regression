@@ -27,6 +27,8 @@ POSTDEPLOY
 
 - MAINT: Use sensible default caching times
 
+- MAINT: Cleanup content & paywall templates
+
 - MAINT: Make caching time for newsfeed.zeit.de
 
 
