@@ -66,7 +66,7 @@
     <cluster visible="True" area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
         <region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="volume-overview" title="FOOOO">
           <container cp:type="teaser" module="volume-overview" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-8b63311b-9def-4b2a-9d09-ff3968bf5559">
-            <block href="http://xml.zeit.de/ausgabe/2015/52" uniqueId="http://xml.zeit.de/ausgabe/2015/52" publication-date="" expires=""/>
+            <block href="http://xml.zeit.de/ausgabe/2015/52" uniqueId="http://xml.zeit.de/2015/52/ausgabe" publication-date="" expires=""/>
           </container>
         </region>
     </cluster>
