@@ -579,17 +579,20 @@ def test_volume_overview_teaser_provides_expected_webtrekk_string(
 
     links[0].click()
     tracking_data = driver.execute_script("return window.trackingData")
-    assert tracking_data.startswith('tablet.volume-overview-teaser..1.|')
+    assert tracking_data.startswith(
+        'tablet.volume-overview-teaser..1.49_2014|')
     assert tracking_data.endswith('/2014/49/index')
 
     links[1].click()
     tracking_data = driver.execute_script("return window.trackingData")
-    assert tracking_data.startswith('tablet.volume-overview-teaser..2.|')
+    assert tracking_data.startswith(
+        'tablet.volume-overview-teaser..2.52_2015|')
     assert tracking_data.endswith('/2015/52/index')
 
     links[2].click()
     tracking_data = driver.execute_script("return window.trackingData")
-    assert tracking_data.startswith('tablet.volume-overview-teaser..3.|')
+    assert tracking_data.startswith(
+        'tablet.volume-overview-teaser..3.01_2016|')
     assert tracking_data.endswith('/2016/01/index')
 
 

@@ -3,7 +3,7 @@
     {% set href = '{0}{1}/{2:02d}/index'.format(request.route_url('home'), volume.year, volume.volume) %}
     {% set packshot = volume.covers['printcover'] %}
     {% set packshot_layout = module_layout %}
-    {% set tracking_slug = "volume-overview-teaser..{}.".format(loop.index) %}
+    {% set tracking_slug = "volume-overview-teaser..{}.{}_{}".format(loop.index, '%02d' % volume.volume, volume.year) %}
 
     <a class="volume-overview-teaser__wrapper" href="{{ href }}" data-id="{{ tracking_slug }}">
         {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" ignore missing %}
