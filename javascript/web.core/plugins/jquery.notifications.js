@@ -1,8 +1,7 @@
-(function( $, window ) {
+(function( $, location, document ) {
     $.extend({
         notifications: function() {
-            var location = window.location,
-                msgRegistrationSuccess = '<div class="notification notification--success" tabindex="0">' +
+            var msgRegistrationSuccess = '<div class="notification notification--success" tabindex="0">' +
                     'Herzlich willkommen! Mit Ihrer Anmeldung können Sie nun unsere Artikel lesen.</div>';
 
             // display hash only when loading article page from email-link
@@ -14,9 +13,7 @@
                 } else {
                     location.hash = null;
                 }
-            } else {
-                return false;
             }
         }
     });
-})( jQuery, window );
+})( jQuery, location, document );
