@@ -126,14 +126,14 @@ def varnish_caching_time_videostill(context):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
-@grokcore.component.adapter(zeit.content.cp.interfaces.IFeed)
+@grokcore.component.adapter(zeit.web.core.interfaces.INewsfeed)
 def caching_time_feed(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return int(conf.get('caching_time_feed', '0'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
-@grokcore.component.adapter(zeit.content.cp.interfaces.IFeed)
+@grokcore.component.adapter(zeit.web.core.interfaces.INewsfeed)
 def varnish_caching_time_feed(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return int(conf.get('varnish_caching_time_feed', '600'))

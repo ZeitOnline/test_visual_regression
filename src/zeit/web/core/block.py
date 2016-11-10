@@ -732,10 +732,13 @@ class AdvertisementNextread(Nextread):
         # Invalidate child name cache, since the folder object might have been
         # cached, so its contents may not be up to date.
         folder._local_unique_map_data.clear()
-        key = random.sample(folder.keys(), 1)
-        if not key:
-            return None
-        return folder[key[0]]
+        values = filter(
+            zeit.content.advertisement.interfaces.IAdvertisement.providedBy,
+            folder.values())
+        try:
+            return random.choice(values)
+        except IndexError:
+            return
 
 
 @DEFAULT_TERM_CACHE.cache_on_arguments()
