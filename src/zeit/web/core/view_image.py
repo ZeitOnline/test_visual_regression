@@ -85,9 +85,9 @@ class LocalImage(Image):
 
     def __init__(self, context, request):
         super(LocalImage, self).__init__(context, request)
-        group = zeit.content.image.interfaces.IImageGroup(self.context)
-        variant = request.path_info.rsplit('/', 1).pop()
         try:
+            group = zeit.content.image.interfaces.IImageGroup(self.context)
+            variant = request.path_info.rsplit('/', 1).pop()
             self.context = group[variant]
         except Exception, err:
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
@@ -101,9 +101,9 @@ class Brightcove(Image):
 
     def __init__(self, context, request):
         super(Brightcove, self).__init__(context, request)
-        group = zeit.content.image.interfaces.IImageGroup(self.context)
-        variant = request.path_info.rsplit('/', 1).pop()
         try:
+            group = zeit.content.image.interfaces.IImageGroup(self.context)
+            variant = request.path_info.rsplit('/', 1).pop()
             self.context = group[self.mapping.get(variant, variant)]
         except Exception, err:
             raise pyramid.httpexceptions.HTTPNotFound(err.message)

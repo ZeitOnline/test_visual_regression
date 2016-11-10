@@ -10,7 +10,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-09-07T14:10:35.515389+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-09-07T14:10:43.696142+00:00</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">default_packshot_diezeit.jpg</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">default_packshot_diezeit.png</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; DIE ZEIT&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.neukamm</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-09-07T14:10:43.418999+00:00</attribute>
