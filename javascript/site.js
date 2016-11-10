@@ -99,9 +99,9 @@ require([
 
     $( window ).referrerCount();
     // global and "above the fold"
-    $.notifications();
     $( '.nav__search' ).toggleSearch();
     $( '.nav__ressorts-list' ).adaptToSpace();
+    $.notifications();
 
     if ( pageType === 'centerpage' ) {
         // homepage
