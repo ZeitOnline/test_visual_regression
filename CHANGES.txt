@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - BUG-475: Filter `verlagsangebote` directory content for advertisements
 
+- BUG-556: Add favicon 16x16 & 32x32px
+
 - FIX: Be defensive about deleted parent comments
 
 - FIX: Be defensive about still images for nonexistent videos
