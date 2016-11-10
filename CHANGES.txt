@@ -17,6 +17,10 @@ POSTDEPLOY
 
 - ZON-3380: Introduce volume overview page (each volume of a year)
 
+- ZON-3315: Add gate forms for paid content
+
+- ZON-3316: Add gate forms for metered content
+
 - BUG-475: Filter `verlagsangebote` directory content for advertisements
 
 - FIX: Be defensive about deleted parent comments
