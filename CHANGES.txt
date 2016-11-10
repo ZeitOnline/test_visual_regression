@@ -35,6 +35,8 @@ POSTDEPLOY
 
 - MAINT: Make caching time for newsfeed.zeit.de
 
+- FIX: Show headerimage for single region content
+
 
 3.16 (2016-11-02)
 -----------------
