@@ -699,16 +699,18 @@ def test_navigation_should_show_logged_in_user_correctly(
     assert links[2].attrib['href'] == '/logout'
 
 
-def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/inc/navigation/login-state.html')
+def test_navigation_should_handle_logged_out_user_correctly(
+        tplbrowser, dummy_request):
 
     info = {'login': '/login',
             'logout': '/logout',
             'user': None}
 
-    css = lxml.html.fromstring(tpl.render(**info)).cssselect
-    assert css('a')[0].attrib['href'] == '/login'
+    browser = tplbrowser(
+        'zeit.web.magazin:templates/inc/navigation/login-state.html',
+        request=dummy_request, **info)
+
+    assert browser.cssselect('a')[0].attrib['href'] == '/login'
 
 
 def test_schema_org_publisher_mark_up(testbrowser):
