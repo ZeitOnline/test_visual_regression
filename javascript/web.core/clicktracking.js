@@ -152,10 +152,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 $row = $element.closest( '[data-ct-row]' ),
                 row = $row.data( 'ct-row' ),
                 $column = $element.closest( '[data-ct-column]', $row ),
-                url = $element.attr( 'href' ),
                 column = $column.data( 'ct-column' ),
                 subcolumn = '',
                 $needle = $element,
+                url,
                 data;
 
             if ( $column.length && column !== false ) {
@@ -165,7 +165,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     $needle = $column.parent().find( 'a' ).first();
                 }
 
-                subcolumn = $column.find( 'a' ).index( $element ) + 1 || 1;
+                // only set subcolumn if not marked to be omitted
+                if ( $column.data( 'ct-subcolumn' ) !== false ) {
+                    subcolumn = $column.find( 'a' ).index( $element ) + 1 || 1;
+                }
             }
 
             if ( column === undefined ) {
@@ -188,6 +191,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 if ( !( Zeit.isMobileView() && $element.data( 'follow-mobile' ) ) ) {
                     url = '#' + $element.attr( 'aria-controls' );
                 }
+            } else if ( $element.attr( 'type' ) === 'submit' ) {
+                url = $element.get( 0 ).form.action;
+            } else {
+                url = $element.attr( 'href' );
             }
 
             data = [
@@ -330,7 +337,9 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                          '.breaking-news-banner',
                          '.article-lineage',
                          '.js-truncate-region',
-                         '.partnerbox'
+                         '.partnerbox',
+                         '.volume-overview-teaser',
+                         '.centerpage-header'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],

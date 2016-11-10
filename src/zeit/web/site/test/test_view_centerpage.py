@@ -2329,12 +2329,12 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
         'image-fill-color': [u'A3E6BB'], 'teaserText': 'text',
         'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
         'date_first_released': '2012-02-22T14:36:32.452398+00:00'}, {
-        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
-        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                           'harald-martenstein-wideformat')],
-        'image-fill-color': [u''], 'teaserText': 'text',
-        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
-        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
+            'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
+            'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
+                              'harald-martenstein-wideformat')],
+            'image-fill-color': [u''], 'teaserText': 'text',
+            'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
+            'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
 
     browser = testbrowser('/serie/martenstein')
     image1 = browser.cssselect('.cp-area--ranking article img')[0]
@@ -2470,6 +2470,40 @@ def test_volume_centerpage_has_volume_header(testbrowser):
     assert len(volume_header) == 1
     assert 'Ausgabe Nr. 01/2016' in caption[0].text.strip()
     assert len(teaser) == 3
+
+
+def test_volume_overview_has_adapted_centerpage_header(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/2016/index' % testserver.url)
+    header = driver.find_element_by_css_selector(
+        '.centerpage-header--archive')
+    text = driver.find_element_by_css_selector(
+        '.centerpage-header__text')
+    dropdown = driver.find_element_by_css_selector(
+        '.centerpage-header__dropdown')
+    link = driver.find_element_by_css_selector(
+        '.centerpage-header__link')
+    dropdown.find_element_by_xpath("//option[text()='1947']").click()
+
+    assert header.is_displayed()
+    assert text.is_displayed()
+    assert dropdown.is_displayed()
+    assert link.is_displayed()
+    assert '1947/index' in link.get_attribute('href')
+
+
+def test_volume_overview_teasers_render_expected_markup(testbrowser):
+    browser = testbrowser('/2016/index')
+    teasers = browser.cssselect('.cp-area--volume-overview >'
+                                ' .volume-overview-teaser a')
+    assert len(teasers) == 7
+    for teaser in teasers:
+        caption = teaser.cssselect('.volume-overview-teaser__caption')[0]
+        assert caption.find('span')[0].text + \
+            caption.find('span')[2].text == 'Jetzt lesen'
+        assert 'volume-overview-teaser__media' in \
+               teaser.cssselect('figure')[0].get('class')
 
 
 def test_zplus_teaser_has_zplus_badge(testbrowser):

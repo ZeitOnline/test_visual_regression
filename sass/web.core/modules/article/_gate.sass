@@ -1,0 +1,121 @@
+.gate
+	background-color: $concrete
+	font-family: $font-tabletgothic
+	padding: remify(20px $page-padding--small)
+	position: relative
+	text-align: center
+
+	&__icon
+		background-color: $red
+		color: #fff
+		height: remify(40px)
+		left: 50%
+		margin: remify(-20px 0 0 -24px)
+		padding: remify(3px)
+		position: absolute
+		top: 0
+		width: remify(49px)
+
+	&__title
+		font-size: em(20px)
+		letter-spacing: 0.015em
+		line-height: 1.3
+		margin: 0
+
+	// add some space for the Z+ logo
+	&__icon + &__title
+		margin-top: remify(14px)
+
+	&__form
+		background-color: #fff
+		margin: remify(18px 0 0)
+		padding: remify(0 $page-padding--small 30px)
+		text-align: left
+
+	&__offer
+		border-color: $color-border
+		border-style: solid
+		border-width: 0 0 1px
+		padding: remify(16px 0 0)
+
+	&__actions
+		margin: remify(24px 0 0)
+		text-align: center
+
+	&__label
+		display: block
+		font-size: em(18px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-s
+		margin: remify(0 24px 16px 0)
+
+	&__option
+		float: right
+		margin-top: remify(7px)
+
+	&__list
+		clear: both
+		color: $color-text--light
+		font-size: em(15px)
+		letter-spacing: $letter-spacing-s
+		list-style: square
+		margin: 0
+		overflow: hidden
+		padding: remify(0 0 0 20px)
+		transition: max-height .12s linear
+
+	&__list-item
+		padding-bottom: remify(4px)
+		&:last-child
+			padding-bottom: remify(16px)
+
+	&__option:not(:checked) ~ &__list
+		max-height: 0
+	&__option:checked ~ &__list
+		max-height: 15em // carefull, depends on the text content and breakpoint
+
+	&__button
+		+zon-button-colored($red)
+		min-width: remify(250px)
+
+	&__note
+		+default-article-textlink
+		color: #444
+		font-size: em(15px)
+		letter-spacing: $letter-spacing-s
+		margin: 0
+		padding-top: remify(20px)
+
+	&__link
+		white-space: nowrap
+
+	+respond-min($break-tablet-min)
+		padding: remify(30px 45px)
+
+		&__icon
+			height: remify(55px)
+			margin: remify(-34px 0 0 -33px)
+			width: remify(67px)
+
+		&__title
+			font-size: em(26px)
+
+		// add some space for the Z+ logo
+		&__icon + &__title
+			margin-top: remify(24px)
+
+		&__form
+			margin: remify(24px 0 15px)
+			padding: remify(8px 40px 40px)
+
+		&__offer
+			padding: remify(36px 0 20px)
+
+		&__actions
+			text-align: right
+
+		&__note
+			padding-top: remify(15px)
+
+		&__button
+			min-width: remify(124px)
