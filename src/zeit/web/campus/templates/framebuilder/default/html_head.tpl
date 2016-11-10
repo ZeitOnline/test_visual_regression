@@ -19,7 +19,6 @@
 
     {% if toggles('third_party_modules', 'iqd') %}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
-        {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
     {% if settings('livereload') %}
         <script src="//localhost:35729/livereload.js"></script>

@@ -14,7 +14,6 @@ select
 	color: $color-input
 	font-size: remify(15px)
 	letter-spacing: $zon-letter-spacing-s
-	padding: remify(10px 20px)
 	&.error
 		background-color: $color-input-bg--error
 		border-color: $color-input-border--error
@@ -23,6 +22,10 @@ select
 		background-color: $color-input-bg--focus
 		border-color: $color-input-border--focus
 		color: $color-input--focus
+
+input,
+textarea
+	padding: remify(10px 20px)
 
 textarea
 	display: block

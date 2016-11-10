@@ -88,7 +88,6 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     renderer='zeit.web.core:templates/paywall.html')
 class LongformArticle(Article):
 
-    is_longform = True
     pagetitle_suffix = u' | ZEIT ONLINE'
 
     def __init__(self, context, request):

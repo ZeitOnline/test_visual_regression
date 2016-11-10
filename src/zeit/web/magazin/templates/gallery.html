@@ -10,7 +10,7 @@
 
 {% block article_pages -%}
     {% require gallery = view.gallery %}
-    <div class="article-page">
+    <div class="article__page">
         {% include "zeit.web.core:templates/inc/article/gallery.html" %}
     </div>
     <div class="article__page">
@@ -23,5 +23,3 @@
     </div>
     {% endrequire %}
 {%- endblock article_pages %}
-
-{% block comments_balloon %}{% endblock comments_balloon %}

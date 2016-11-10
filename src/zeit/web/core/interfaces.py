@@ -71,9 +71,9 @@ class IVarnishCachingTime(zope.interface.Interface):
     """
 
 
-class IPages(zope.interface.common.sequence.IReadSequence):
-    """List of the <division>s of an zeit.content.article.interfaces.IArticle
-    """
+class INewsfeed(zope.interface.Interface):
+    """Marker interface to make ICachingTime for newsfeed.zeit.de separately
+    configurable."""
 
 
 class IExpiration(zope.interface.Interface):
