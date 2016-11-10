@@ -74,6 +74,7 @@ require([
     'web.magazin/plugins/jquery.switchvideo'
 ], function( $, Velocity ) {
     $( window ).referrerCount();
+    $.notifications();
     $( '.js-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
@@ -81,7 +82,4 @@ require([
     $( 'main' ).animateScroll({ selector: '.js-scroll' });
     $( '.comment-section' ).countFormchars();
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
-
-    // notifications
-    $.notifications();
 });

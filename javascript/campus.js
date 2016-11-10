@@ -68,6 +68,7 @@ require([
     $.noConflict( true );
 
     $( window ).referrerCount();
+    $.notifications();
     $( '.js-scroll' ).animateScroll();
 
     switch ( pageType ) {
@@ -82,8 +83,5 @@ require([
     }
 
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
-
-    // notifications
-    $.notifications();
 
 });

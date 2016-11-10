@@ -99,6 +99,7 @@ require([
 
     $( window ).referrerCount();
     // global and "above the fold"
+    $.notifications();
     $( '.nav__search' ).toggleSearch();
     $( '.nav__ressorts-list' ).adaptToSpace();
 
@@ -139,7 +140,4 @@ require([
     $( '.js-image-copyright-footer' ).imageCopyrightFooter();
     // search
     $( '.search-form' ).searchTools();
-
-    // notifications
-    $.notifications();
 });
