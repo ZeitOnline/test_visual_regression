@@ -1,11 +1,7 @@
 {% extends "zeit.web.magazin:templates/content.html" %}
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 
 {% block article_header -%}
-    <header class="article__head article__head--default">
-        {{ blocks.supertitle() }}
-        {{ blocks.title() }}
-    </header>
+    {% include "zeit.web.magazin:templates/inc/headers/article_header_gallery.html" %}
 {%- endblock article_header %}
 
 {% block article_pages -%}
