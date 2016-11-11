@@ -27,9 +27,13 @@ POSTDEPLOY
 
 - BUG-556: Add favicon 16x16 & 32x32px
 
+- BUG-571: Polish print stylesheet for columns
+
 - FIX: Be defensive about deleted parent comments
 
 - FIX: Be defensive about still images for nonexistent videos
+
+- FIX: Define author and fallback values for adcontroller handle
 
 - MAINT: Fix typography for .x-footer--borderless
 
