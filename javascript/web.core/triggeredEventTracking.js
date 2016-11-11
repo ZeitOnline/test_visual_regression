@@ -58,7 +58,7 @@ What does this script do?
 define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Clicktracking, Zeit ) {
 
     var EXPECTED_NAME = 'zonTriggeredEventTracking',
-        debugMode,
+        debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1,
 
         // encapsulate the functions into groups to make the code more readable (hopefully)
         _functions = {
@@ -72,25 +72,20 @@ define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Cl
     Tracking functions which trigger the actual tracking
     ------------------------------------------------------------------------- */
     _functions.sendTracking.sendSlugToWebrekk = function( trackingData ) {
-        window.wt.sendinfo({
-            linkId: trackingData,
-            sendOnUnload: 1
-        });
 
         if ( debugMode ) {
             console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
             console.log( trackingData );
             window.trackingData = trackingData;
+        } else {
+            window.wt.sendinfo({
+                linkId: trackingData,
+                sendOnUnload: 1
+            });
         }
     };
 
     _functions.sendTracking.sendVideoEventToWebtrekk = function( eventString ) {
-
-        // make sure webtrekk is available
-        if ( typeof( window.wt ) === 'undefined' || typeof( window.wt.sendinfo ) !== 'function' ) {
-            return;
-        }
-
         var messageData,
             messageSender,
             $container,
@@ -177,10 +172,6 @@ define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Cl
         var breakpoint = Zeit.breakpoint.getTrackingBreakpoint(),
             slug = breakpoint + messageDataObject.slug;
 
-        if ( typeof( window.wt ) === 'undefined' || typeof( window.wt.sendinfo ) !== 'function' ) {
-            return;
-        }
-
         _functions.sendTracking.sendSlugToWebrekk( slug );
     };
 
@@ -245,7 +236,10 @@ define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Cl
     ------------------------------------------------------------------------- */
     init = function() {
 
-        debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
+        // make sure webtrekk is available
+        if ( ( typeof window.wt === 'undefined' || typeof( window.wt.sendinfo ) !== 'function' ) && !debugMode ) {
+            return;
+        }
 
         $( window ).on( 'message', function( event ) {
             _functions.dispatch.dispatchAllMessages( event );
