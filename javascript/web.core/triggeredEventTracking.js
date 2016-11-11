@@ -55,7 +55,7 @@ What does this script do?
    tracking. This could be generalized in the future, if/as needed.
 
 ----------------------------------------------------------------------------- */
-define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Clicktracking, Zeit ) {
+define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
     var EXPECTED_NAME = 'zonTriggeredEventTracking',
         debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1,
@@ -71,7 +71,8 @@ define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Cl
     /* -------------------------------------------------------------------------
     Tracking functions which trigger the actual tracking
     ------------------------------------------------------------------------- */
-    _functions.sendTracking.sendSlugToWebrekk = function( trackingData ) {
+    _functions.sendTracking.sendDataToWebrekk = function( data ) {
+        var trackingData = Clicktracking.formatTrackingData( data );
 
         if ( debugMode ) {
             console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
@@ -94,8 +95,7 @@ define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Cl
             videoProvider = '',
             videoPageUrl = window.location.host + window.location.pathname,
             data,
-            videoData,
-            trackingData;
+            videoData;
 
         // we blindly assume that there is only one player on the page. ...
         // If in the future we have multiple video players, the ID would need
@@ -120,9 +120,7 @@ define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Cl
             videoPageUrl
         ];
 
-        trackingData = Clicktracking.formatTrackingData( data );
-
-        _functions.sendTracking.sendSlugToWebrekk( trackingData );
+        _functions.sendTracking.sendDataToWebrekk( data );
     };
 
     _functions.sendTracking.sendVideoViewToIVW = function() {
@@ -167,12 +165,15 @@ define( [ 'jquery', 'web.core/clicktracking', 'web.core/zeit' ], function( $, Cl
     };
 
     // we get nearly complete tracking slugs from meine.zeit.de
-    // just add breakpoint
     _functions.handleSpecificPlugin.trackMeineZeitClickEvent = function( messageDataObject ) {
-        var breakpoint = Zeit.breakpoint.getTrackingBreakpoint(),
-            slug = breakpoint + messageDataObject.slug;
+        // replace leading dot for current values in meine.zeit.de, may be removed soon
+        var trackingData = messageDataObject.slug.replace( /^\./, '' ).split( '|' ),
+            data = [
+                trackingData[0],
+                trackingData[1] // url
+            ];
 
-        _functions.sendTracking.sendSlugToWebrekk( slug );
+        _functions.sendTracking.sendDataToWebrekk( data );
     };
 
     /* -------------------------------------------------------------------------
