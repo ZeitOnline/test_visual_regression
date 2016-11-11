@@ -140,6 +140,7 @@ class Application(object):
         config.add_route('home-campus', '/campus/')
         config.add_route('home-zmo', '/zeit-magazin/')
         config.add_route('login_state', '/login-state')
+        config.add_route('dashboard_user', '/konto')
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')

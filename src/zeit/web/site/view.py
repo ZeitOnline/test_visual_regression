@@ -124,6 +124,36 @@ class Base(zeit.web.core.view.Base):
 def login_state(request):
     return zeit.web.core.security.get_login_state(request)
 
+@pyramid.view.view_config(
+    route_name='dashboard_user',
+    renderer='templates/inc/module/dashboard_user.html',
+    http_cache=60)
+class UserDashboard(zeit.web.core.view.FrameBuilder, Base):
+    def __init__(self, context, request):
+        super(UserDashboard, self).__init__(context, request)
+        try:
+            self.context = zeit.cms.interfaces.ICMSContent(
+                'http://xml.zeit.de/index')
+            self.dashboard_user = self.dashboard_user()
+        except TypeError:
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+    def dashboard_user(self):
+        from lxml import etree
+        xml = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/config/dashboard_user.xml', None).data
+        parser = etree.XMLParser(ns_clean=True, recover=True, encoding='utf-8')
+        sections_xml = etree.fromstring(xml.encode('utf-8'), parser=parser).iterfind('section')
+        return {
+            'title': etree.fromstring(xml).find('title').text,
+            'kicker': etree.fromstring(xml).find('kicker').text,
+            'sections': {section.get('id'): self._iter(section) for section in sections_xml},
+        }
+
+    def _iter(self, section):
+        links = section.iterfind('link')
+        lnks = [{'text': link.text, 'attributes': link.attrib} for link in links]
+        sctn = section.attrib
+        return {'section_atts': sctn, 'links': lnks}
 
 @pyramid.view.view_config(route_name='schlagworte')
 def schlagworte(request):
