@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <dashboard>
-    <title>Mein Konto TEST</title>
-    <kicker>Herzlich Willkommen TEST</kicker>
+    <title>Mein Konto</title>
+    <kicker>Herzlich Willkommen</kicker>
     <show_userinfo>true</show_userinfo>
 
     <!-- Einstellungen -->
