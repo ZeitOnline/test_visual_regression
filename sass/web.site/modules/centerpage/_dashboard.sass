@@ -7,7 +7,7 @@
 
 	&__lower
 		background-color: $cararra
-		padding: remify(36px) $page-padding
+		padding: $page-padding $page-padding
 
 	&__header
 		+font-smoothing
@@ -54,6 +54,12 @@
 		font-size: remify(16px)
 		letter-spacing: $letter-spacing-s
 		color: $grey--mid-dark
+		border-bottom: 2px solid $zon-alto
+		padding: $page-padding 0
+
+	&__box--is-header
+		padding: 0
+		border-bottom: none
 
 	&__box-title
 		text-transform: uppercase
@@ -68,7 +74,7 @@
 			line-height: remify(40px)
 
 	&__content
-		padding: $page-padding 0
+		padding: 0 $page-padding
 
 	+respond-min($break-tablet-min)
 
