@@ -7,6 +7,10 @@ POSTDEPLOY
 3.17 (unreleased)
 -----------------
 
+- OPS-386: Get rid of some more ZMO article macros
+
+- ZON-3385: Show message on return after successfull registration
+
 - ZON-3287: Track login entrypoint, stored in master cookie
 
 - ZON-3399: Implement volume teaser on CP
@@ -23,9 +27,15 @@ POSTDEPLOY
 
 - BUG-475: Filter `verlagsangebote` directory content for advertisements
 
+- BUG-556: Add favicon 16x16 & 32x32px
+
+- BUG-571: Polish print stylesheet for columns
+
 - FIX: Be defensive about deleted parent comments
 
 - FIX: Be defensive about still images for nonexistent videos
+
+- FIX: Define author and fallback values for adcontroller handle
 
 - MAINT: Fix typography for .x-footer--borderless
 
@@ -34,6 +44,8 @@ POSTDEPLOY
 - MAINT: Cleanup content & paywall templates
 
 - MAINT: Make caching time for newsfeed.zeit.de
+
+- FIX: Show headerimage for single region content
 
 
 3.16 (2016-11-02)
