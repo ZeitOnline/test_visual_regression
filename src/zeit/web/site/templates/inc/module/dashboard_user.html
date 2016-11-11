@@ -1,11 +1,13 @@
+{% extends "zeit.web.site:templates/layout.html" %}
+{% block main %}
 <div class="dashboard">
     <div class="dashboard__upper">
         <div class="article__item">
             <h1 class="dashboard__header" itemprop="headline">
                 <span class="dashboard__kicker">
-                    Herzlich Willkommen
+                    {{view.dashboard_user['kicker']}}
                 </span>
-                <span class="dashboard__title">Mein Konto</span>
+                <span class="dashboard__title">{{view.dashboard_user['title']}}</span>
             </h1>
         </div>
     </div>
@@ -29,14 +31,17 @@
     </div>
     <div class="dashboard__content">
         <div class="article__item">
-            <div class="dashboard__box">
-                <h2 class="dashboard__box-title">Einstellungen</h2>
-                <ul class="dashboard__box-list">
-                    <li><a href="">Abo verwalten</a></li>
-                    <li><a href="">Kundensupport & FAQ</a></li>
-                    <li><a href="">DIE ZEIT digital lesen</a></li>
-                </ul>
+              {% for section in view.dashboard_user['sections'].values() %}
+                <div class="dashboard__box">
+                <h2 class="dashboard__box-title">{{section['section_atts']['name']}}</h2>
+                  <ul class="dashboard__box-list">
+                    {% for link in section['links'] %}
+                      <li><a href="{{link['attributes']['href']}}" id="{{link['attributes']['id']}}">{{link['text']}}</a> </li> {% endfor %}
+                  </ul>
+                </li>
+              {% endfor %}
             </div>
         </div>
     </div>
 </div>
+{% endblock main %}
