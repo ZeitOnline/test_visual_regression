@@ -1,4 +1,6 @@
-{% if area.values() | length > 0 %}
+{% if area.values() | length == 0 %}
+<!-- Spektrum-Parquet not shown because empty or timed out. -->
+{% else %}
 
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
