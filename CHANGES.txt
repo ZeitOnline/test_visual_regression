@@ -6,7 +6,7 @@ POSTDEPLOY
 
 - unblock https://github.com/ZeitOnline/zeit.varnish/pull/126
 
-3.17 (unreleased)
+3.17 (2016-11-11)
 -----------------
 
 - ZON-3410: Remove truncation from exclusive region
