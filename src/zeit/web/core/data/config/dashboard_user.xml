@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <dashboard>
-    <title>Mein Konto</title>
-    <kicker>Herzlich Willkommen</kicker>
+    <title>Mein Konto TEST</title>
+    <kicker>Herzlich Willkommen TEST</kicker>
     <show_userinfo>true</show_userinfo>
 
     <!-- Einstellungen -->
@@ -14,9 +14,9 @@
     <!-- Abonnements -->
     <section id="abo" class="body" name="Meine Abonnements">
         <link href="https://premium.zeit.de/user" id="">Abo verwalten</link>
-        <link href="https://premium.zeit.de/faq" id="">Kundensupport & FAQ</link>
-        <link href="https://premium.zeit.de/abo?wt_zmc=fix.int.zonpme.zede.konto.premium.text.link.link&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=konto&utm_content=premium_text_link_link" id="">DIE ZEIT digital lesen</link>
-        <link href="https://premium.zeit.de/abo/zeitaudio?wt_zmc=fix.int.zonpme.zede.konto.premium.text.link.link&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=konto&utm_content=premium_text_link_link" id="">ZEIT Audio hören</link>
+        <link href="https://premium.zeit.de/faq" id="">Kundensupport UND FAQ</link>
+        <link href="https://premium.zeit.de/abo?wt_zmc=fix.int.zonpme.zede.konto.premium.text.link.link&amp;utm_medium=fix&amp;utm_source=zede_zonpme_int&amp;utm_campaign=konto&amp;utm_content=premium_text_link_link" id="">DIE ZEIT digital lesen</link>
+        <link href="https://premium.zeit.de/abo/zeitaudio?wt_zmc=fix.int.zonpme.zede.konto.premium.text.link.link&amp;utm_medium=fix&amp;utm_source=zede_zonpme_int&amp;utm_campaign=konto&amp;utm_content=premium_text_link_link" id="">ZEIT Audio hören</link>
         <link href="#" id="">Leseempfehlungen auf ZEIT ONLINE Link zur Exklusivseite</link>
     </section>
 
@@ -37,7 +37,7 @@
         <link href="http://studiengaenge.zeit.de/sit" id="">Studium-Interessentest (SIT)</link>
         <link href="http://studiengaenge.zeit.de/" id="">Suchmaschine für Studiengänge</link>
         <link href="http://ranking.zeit.de" id="">CHE Hochschulranking</link>
-        <link href="https://premium.zeit.de/studentenabo?wt_zmc=fix.int.zonpme.zede.konto.premium.text.link.link&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=konto&utm_content=premium_text_link_link" id="">Studenten-Abo der ZEIT</link>
+        <link href="https://premium.zeit.de/studentenabo?wt_zmc=fix.int.zonpme.zede.konto.premium.text.link.link&amp;utm_medium=fix&amp;utm_source=zede_zonpme_int&amp;utm_campaign=konto&amp;utm_content=premium_text_link_link" id="">Studenten-Abo der ZEIT</link>
     </section>
 
     <!-- Diverses -->
@@ -45,6 +45,6 @@
         <link href="http://community.zeit.de/newsletter" id="">Newsletter-Übersicht</link>
         <link href="http://jobs.zeit.de/" id="">Zum ZEIT Stellenmarkt</link>
         <link href="http://www.zeit.de/archiv" id="">Zum Archiv</link>
-        <link href="https://premium.zeit.de/zeit-apps?wt_zmc=fix.int.zonpme.zede.konto.premium.text.link.link&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=konto&utm_content=premium_text_link_link" id="">Unsere Apps im Überblick</link>
+        <link href="https://premium.zeit.de/zeit-apps?wt_zmc=fix.int.zonpme.zede.konto.premium.text.link.link&amp;utm_medium=fix&amp;utm_source=zede_zonpme_int&amp;utm_campaign=konto&amp;utm_content=premium_text_link_link" id="">Unsere Apps im Überblick</link>
     </section>
 </dashboard>
