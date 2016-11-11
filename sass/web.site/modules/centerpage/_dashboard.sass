@@ -29,6 +29,47 @@
 		line-height: 1.25
 		margin-bottom: remify(4px)
 
+	&__user
+		border-bottom: 2px solid $zon-alto
+		padding-bottom: $page-padding
+		margin-bottom: $page-padding
+
+	&__user-name
+		font-size: remify(18px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-s
+		color: $grey--mid-dark
+		display: table-cell
+		padding-left: $page-padding
+		vertical-align: middle
+
+	&__user-image
+		width: remify(80px)
+		height: remify(80px)
+		background-color: $zon-alto
+		border-radius: 50%
+		display: table-cell
+
+	&__box
+		font-size: remify(16px)
+		letter-spacing: $letter-spacing-s
+		color: $grey--mid-dark
+
+	&__box-title
+		text-transform: uppercase
+
+	&__box-list
+		list-style: none
+		padding: 0
+		a
+			+animated-interaction()
+			color: $grey
+			border-bottom: 2px solid $zon-light-grey
+			line-height: remify(40px)
+
+	&__content
+		padding: $page-padding 0
+
 	+respond-min($break-tablet-min)
 
 		&__header
@@ -36,4 +77,18 @@
 
 		&__title
 			font-size: remify(32px)
+
+		&__lower
+			.article__item
+				display: flex
+
+		&__user
+			border-bottom: none
+			flex-grow: 1
+			align-self: center
+			margin: 0
+			padding: 0
+
+		&__box
+			flex-grow: 2
 
