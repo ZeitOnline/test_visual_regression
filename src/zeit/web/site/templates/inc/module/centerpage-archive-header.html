@@ -1,0 +1,14 @@
+{%- extends "zeit.web.site:templates/inc/module/centerpage-header.html" -%}
+
+{% block modifier %}centerpage-header--archive{% endblock %}">
+{% block additional_content %}
+    <div class="centerpage-header__text">
+        Hier finden Sie alle Artikel aus DIE ZEIT seit 1946.
+    </div>
+    <select class="centerpage-header__dropdown" onchange="document.getElementsByClassName('centerpage-header__link')[0].setAttribute('href',window.location.protocol+'//'+window.location.host+'/'+this.value+'/index');">
+        {% for year in range(get_current_year(), 1945, -1) %}
+            <option value="{{ year }}" {%- if year == view.context.year %}selected{% endif -%}>{{ year }}</option>
+        {% endfor %}
+    </select>
+    <a class="centerpage-header__link" href="{{ request.url }}" data-id="archive-dropdown...text">Suchen</a>
+{% endblock %}

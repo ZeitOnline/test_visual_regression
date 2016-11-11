@@ -71,6 +71,7 @@ require([
     'web.core/plugins/jquery.toggleRegions',
     'web.core/plugins/jquery.countFormchars',
     'web.core/plugins/jquery.imageCopyrightFooter',
+    'web.core/plugins/jquery.notifications',
     'web.site/plugins/jquery.accordion',
     'web.site/plugins/jquery.adaptnav',
     'web.site/plugins/jquery.animateJobs',
@@ -100,6 +101,7 @@ require([
     // global and "above the fold"
     $( '.nav__search' ).toggleSearch();
     $( '.nav__ressorts-list' ).adaptToSpace();
+    $.notifications();
 
     if ( pageType === 'centerpage' ) {
         // homepage

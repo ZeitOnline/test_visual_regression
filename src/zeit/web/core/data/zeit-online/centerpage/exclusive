@@ -98,7 +98,7 @@
             </region>
         </cluster>
         <cluster area="id-ce33b4ec-f212-497e-b201-6045478b7e94" kind="solo">
-            <region hide-dupes="True" area="id-bda65215-7c4b-41b0-8717-4ac10bbf86a4" kind="exclusive-ressort" count="5" automatic="True" automatic_type="centerpage" title="Wirtschaft">
+            <region hide-dupes="True" area="id-bda65215-7c4b-41b0-8717-4ac10bbf86a4" kind="exclusive-ressort" count="5" automatic="True" automatic_type="centerpage" title="">
                 <query>
                     <condition type="Channel">Wirtschaft</condition>
                 </query>

@@ -339,35 +339,18 @@ def test_article_contains_authorbox(testbrowser):
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
 
 
-@pytest.mark.parametrize('on,reason', [
-    ('True', 'paid'),
-    ('True', 'register'),
-    ('True', 'metered')
-])
-def test_paywall_switch_showing_forms(on, reason, testbrowser):
-    browser = testbrowser(
-        'campus/article/paginated'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'.format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
+@pytest.mark.parametrize('reason', ['paid', 'register', 'metered'])
+def test_paywall_switch_showing_forms(reason, testbrowser):
+    urls = [
+        'campus/article/paginated',
+        'campus/article/paginated/seite-2',
+        'campus/article/paginated/komplettansicht',
+        'campus/article/column',
+        'campus/article/simple'
+    ]
 
-    browser = testbrowser(
-        'campus/article/paginated/seite-2'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
-
-    browser = testbrowser(
-        'campus/article/paginated/komplettansicht'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
-
-    browser = testbrowser(
-        'campus/article/column?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
-
-    browser = testbrowser(
-        'campus/article/simple?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
+    for url in urls:
+        browser = testbrowser(
+            '{}?C1-Paywall-On=True&C1-Paywall-Reason={}'.format(url, reason))
+        assert len(browser.cssselect('.paragraph--faded')) == 1
+        assert len(browser.cssselect('.gate')) == int(reason != 'register')

@@ -106,43 +106,19 @@ def test_article_header_without_author(testbrowser):
     assert not authors
 
 
-@pytest.mark.parametrize('on,reason', [
-    ('True', 'paid'),
-    ('True', 'register'),
-    ('True', 'metered')
-])
-def test_paywall_switch_showing_forms(on, reason, testbrowser):
-    browser = testbrowser(
-        'zeit-magazin/article/03'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'.format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
+@pytest.mark.parametrize('reason', ['paid', 'register', 'metered'])
+def test_paywall_switch_showing_forms(reason, testbrowser):
+    urls = [
+        'zeit-magazin/article/03',
+        'zeit-magazin/article/03/seite-2',
+        'zeit-magazin/article/03/komplettansicht',
+        'zeit-magazin/article/standardkolumne-beispiel',
+        'zeit-magazin/article/05',
+        'feature/feature_longform'
+    ]
 
-    browser = testbrowser(
-        'zeit-magazin/article/03/seite-2'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
-
-    browser = testbrowser(
-        'zeit-magazin/article/03/komplettansicht'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
-
-    browser = testbrowser(
-        'zeit-magazin/article/standardkolumne-beispiel'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
-
-    # longform
-    browser = testbrowser(
-        'zeit-magazin/article/05?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
-
-    # feature longform
-    browser = testbrowser(
-        'feature/feature_longform?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
+    for url in urls:
+        browser = testbrowser(
+            '{}?C1-Paywall-On=True&C1-Paywall-Reason={}'.format(url, reason))
+        assert len(browser.cssselect('.paragraph--faded')) == 1
+        assert len(browser.cssselect('.gate')) == int(reason != 'register')

@@ -7,15 +7,43 @@ POSTDEPLOY
 3.17 (unreleased)
 -----------------
 
+- ZON-3385: Show message on return after successfull registration
+
 - ZON-3287: Track login entrypoint, stored in master cookie
+
+- ZON-3399: Implement volume teaser on CP
+
+- ZON-3288: Track paywall status with webtrekk
+
+- ZON-3410: Remove truncation from exclusive region
+
+- ZON-3380: Introduce volume overview page (each volume of a year)
+
+- ZON-3315: Add gate forms for paid content
+
+- ZON-3316: Add gate forms for metered content
+
+- BUG-475: Filter `verlagsangebote` directory content for advertisements
+
+- BUG-556: Add favicon 16x16 & 32x32px
+
+- BUG-571: Polish print stylesheet for columns
 
 - FIX: Be defensive about deleted parent comments
 
 - FIX: Be defensive about still images for nonexistent videos
 
+- FIX: Define author and fallback values for adcontroller handle
+
 - MAINT: Fix typography for .x-footer--borderless
 
 - MAINT: Use sensible default caching times
+
+- MAINT: Cleanup content & paywall templates
+
+- MAINT: Make caching time for newsfeed.zeit.de
+
+- FIX: Show headerimage for single region content
 
 
 3.16 (2016-11-02)
