@@ -6,6 +6,12 @@ POSTDEPLOY
 
 - unblock https://github.com/ZeitOnline/zeit.varnish/pull/126
 
+3.18 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
 3.17 (2016-11-11)
 -----------------
 
