@@ -69,6 +69,7 @@
 	&__box-list
 		list-style: none
 		padding: 0
+		margin: 0
 		a
 			+animated-interaction()
 			color: $grey
@@ -97,9 +98,15 @@
 			margin: 0
 			padding: 0
 
-		&__box
-			flex-grow: 2
+		&__box-list
+			display: inline-block
+			width: 48%
+			vertical-align: top
 
 		&__box--is-header
 			padding-left: $page-padding
+			flex-grow: 2
+			.dashboard__box-list
+				width: auto
+
 

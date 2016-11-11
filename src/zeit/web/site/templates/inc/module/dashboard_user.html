@@ -36,7 +36,11 @@
                 <h2 class="dashboard__box-title">{{section['section_atts']['name']}}</h2>
                   <ul class="dashboard__box-list">
                     {% for link in section['links'] %}
-                      <li><a href="{{link['attributes']['href']}}" id="{{link['attributes']['id']}}">{{link['text']}}</a> </li> {% endfor %}
+                      <li><a href="{{link['attributes']['href']}}" id="{{link['attributes']['id']}}">{{link['text']}}</a></li>
+                      {%- if loop.index > 1 and (loop.length / 2)|round|int == loop.index %}
+                        </ul><ul class="dashboard__box-list">
+                      {% endif -%}
+                    {% endfor %}
                   </ul>
                 </div>
               {% endfor %}
