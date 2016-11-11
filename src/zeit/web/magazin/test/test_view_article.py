@@ -121,4 +121,6 @@ def test_paywall_switch_showing_forms(reason, testbrowser):
         browser = testbrowser(
             '{}?C1-Paywall-On=True&C1-Paywall-Reason={}'.format(url, reason))
         assert len(browser.cssselect('.paragraph--faded')) == 1
-        assert len(browser.cssselect('.gate')) == int(reason != 'register')
+        assert len(browser.cssselect('.gate')) == 1
+        assert len(browser.cssselect(
+            '.gate--register')) == int(reason == 'register')
