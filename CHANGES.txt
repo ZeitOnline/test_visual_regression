@@ -4,8 +4,6 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- unblock https://github.com/ZeitOnline/zeit.varnish/pull/126
-
 3.18 (unreleased)
 -----------------
 
