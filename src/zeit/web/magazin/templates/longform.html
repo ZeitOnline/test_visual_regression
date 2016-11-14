@@ -1,7 +1,6 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
 {% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
-{% import "zeit.web.magazin:templates/content.html" as article with context %}
 
 {% block adplace_top %}
 {% endblock adplace_top %}
@@ -99,7 +98,7 @@
                         </aside>
                     {% endif -%}
 
-                    {{ article.render_page(page) }}
+                    {% include "zeit.web.magazin:templates/inc/article/page.html" %}
                 </section>
                 {% endfor %}
                 {% endblock article_pages %}
