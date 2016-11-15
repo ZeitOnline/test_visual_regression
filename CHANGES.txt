@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - MAINT: Make single page videos available as html5 video tag
 
+- MAINT: Only use Jinja’s ignore missing mark if appropriate.
+
 
 3.17 (2016-11-11)
 -----------------
