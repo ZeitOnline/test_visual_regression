@@ -7,6 +7,8 @@ POSTDEPLOY
 3.18 (unreleased)
 -----------------
 
+- BUG-537: Omit zett/spektrum parquet area if RSS feed is empty or unavailable
+
 - MAINT: Make single page videos available as html5 video tag
 
 
