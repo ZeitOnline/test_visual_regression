@@ -7,11 +7,12 @@
 
 	&__lower
 		background-color: $cararra
-		padding: $page-padding $page-padding
+		padding: $page-padding
+		padding-bottom: 0
 
 	&__header
 		+font-smoothing
-		padding: remify($page-padding 0)
+		padding: $page-padding 0
 		margin: 0
 
 	&__kicker
@@ -32,7 +33,6 @@
 	&__user
 		border-bottom: 2px solid $zon-alto
 		padding-bottom: $page-padding
-		margin-bottom: $page-padding*2
 
 	&__user-name
 		font-size: remify(18px)
@@ -42,8 +42,6 @@
 		display: table-cell
 		padding-left: $page-padding
 		vertical-align: middle
-		max-width: remify(400px)
-		word-wrap: break-word
 
 	&__user-image
 		width: remify(80px)
@@ -53,18 +51,18 @@
 		display: table-cell
 
 	&__box
-		font-size: remify(16px)
 		letter-spacing: $letter-spacing-s
 		color: $grey--mid-dark
-		border-bottom: 2px solid $zon-alto
-		padding: $page-padding 0
+		padding: remify(30px 0)
+		&:not(:last-child)
+			border-bottom: 2px solid $zon-alto
 
 	&__box--is-header
-		padding: 0
 		border-bottom: none
 
 	&__box-title
 		text-transform: uppercase
+		margin: remify(0 0 $cp-padding 0)
 
 	&__box-list
 		list-style: none
@@ -88,24 +86,28 @@
 			font-size: remify(32px)
 
 		&__lower
+			padding-top: 0
 			.article__item
 				display: flex
 
 		&__user
 			border-bottom: none
-			flex-grow: 1
 			align-self: center
-			margin: 0
 			padding: 0
+			width: 50%
+			padding-right: $page-padding
+
+		&__box
+			display: flex
+			flex-wrap: wrap
+
+		&__box-title
+			width: 100%
 
 		&__box-list
-			display: inline-block
-			width: 48%
-			vertical-align: top
+			width: 50%
 
 		&__box--is-header
-			padding-left: $page-padding
-			flex-grow: 2
 			.dashboard__box-list
 				width: auto
 
