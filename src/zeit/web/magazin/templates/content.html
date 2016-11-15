@@ -1,20 +1,5 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as article_macros with context %}
-
-{% macro render_page(page) %}
-    {% for block in page %}
-        {% set type = ( block | block_type ) %}
-        {% if type in article_macros.__dict__ %}
-            {{ article_macros[type](block) }}
-        {% else %}
-            {% include [
-            "{0}:templates/inc/blocks/{1}_{2}.html".format(view.package, type, block.layout),
-            "{0}:templates/inc/blocks/{1}.html".format(view.package, type),
-            "zeit.web.core:templates/inc/blocks/{0}_{1}.html".format(type, block.layout),
-            "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
-        {% endif %}
-    {% endfor %}
-{% endmacro %}
+{% import "zeit.web.magazin:templates/macros/article_macro.tpl" as article_macros %}
 
 {% block main %}
     <article class="article" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">

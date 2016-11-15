@@ -1,0 +1,9 @@
+.gate
+	&__iframe
+		// due to smaller estate magazin needs some more/different breakpoints
+		$break-mobile-extrawide: ( height: remify(400px), width: em(538px) )
+		$break-phablet-wide: ( height: remify(330px), width: em(540px) )
+		+respond-min(map-get($break-mobile-extrawide, width))
+			height: map-get($break-mobile-extrawide, height)
+		+respond-min(map-get($break-phablet-wide, width))
+			height: map-get($break-phablet-wide, height)

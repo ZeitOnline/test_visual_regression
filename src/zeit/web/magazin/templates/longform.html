@@ -1,7 +1,6 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
 {% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
-{% import "zeit.web.magazin:templates/content.html" as article with context %}
 
 {% block adplace_top %}
 {% endblock adplace_top %}
@@ -62,21 +61,15 @@
                     {% endif %}
                 {% endif %}
 
-                <header class="article__title-wrap">
-                    <h1 itemprop="headline">
-                        {{ blocks.title() }}
-                    </h1>
-                    <div class="article__head__meta">
-                        {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
-                        {{ blocks.meta_author(view.authors) }}
-                    </div>
-                </header>
+                {% include "zeit.web.magazin:templates/inc/headers/article_header_longform.html" %}
             </div>
 
             <div class="article__body">
                 <!-- block for Teaser -->
                 <section class="article__page">
-                    {{ blocks.subtitle() }}
+                    <div class="article__head__subtitle">
+                        {{- view.subtitle -}}
+                    </div>
                 </section>
 
                 {{ lama.adplace(banner(3), view) }}
@@ -84,10 +77,28 @@
                 {% block article_pages %}
                 {% for page in view.pages %}
                 <section class="article__page">
-                    {{ blocks.subpage_head( page.number, page.teaser, 'article__subpage-head is-centered is-constrained' ) }}
-                    {{ blocks.subpage_index( view.pages, page.teaser, page.number, 'article__subpage-index', 'article__subpage-active' ) }}
+                    {% if page.teaser -%}
+                        <h2 class="article__subpage-head is-centered is-constrained" id="kapitel{{ page.number }}">
+                            {{- page.number }} &mdash; {{ page.teaser -}}
+                        </h2>
+                        <aside class="article__subpage-index figure-stamp">
+                            <h3 class="article__subpage-index__title">&Uuml;bersicht</h3>
+                            <ol>
+                                {% for item in view.pages if item.teaser %}
+                                <li class="article__subpage-index__item">
+                                    <span class="article__subpage-index__item__count">{{ item.number }} &mdash; </span>
+                                    {% if loop.index == page.number %}
+                                        <span class="article__subpage-index__item__title article__subpage-active">{{ item.teaser }}</span>
+                                    {% else %}
+                                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{ item.teaser }}</a>
+                                    {% endif %}
+                                </li>
+                                {% endfor %}
+                            </ol>
+                        </aside>
+                    {% endif -%}
 
-                    {{ article.render_page(page) }}
+                    {% include "zeit.web.magazin:templates/inc/article/page.html" %}
                 </section>
                 {% endfor %}
                 {% endblock article_pages %}

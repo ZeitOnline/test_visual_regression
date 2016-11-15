@@ -4,46 +4,56 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.17 (unreleased)
+3.18 (unreleased)
 -----------------
 
-- ZON-3385: Show message on return after successfull registration
+- MAINT: Make single page videos available as html5 video tag
 
-- ZON-3287: Track login entrypoint, stored in master cookie
 
-- ZON-3399: Implement volume teaser on CP
-
-- ZON-3288: Track paywall status with webtrekk
+3.17 (2016-11-11)
+-----------------
 
 - ZON-3410: Remove truncation from exclusive region
 
-- ZON-3380: Introduce volume overview page (each volume of a year)
+- ZON-3399: Implement volume teaser on CP
 
-- ZON-3315: Add gate forms for paid content
+- ZON-3385: Show message on return after successfull registration
+
+- ZON-3380: Introduce volume overview page (each volume of a year)
 
 - ZON-3316: Add gate forms for metered content
 
-- BUG-475: Filter `verlagsangebote` directory content for advertisements
+- ZON-3315: Add gate forms for paid content
 
-- BUG-556: Add favicon 16x16 & 32x32px
+- ZON-3314: Add registration form to paywalled articles
+
+- ZON-3288: Track paywall status with webtrekk
+
+- ZON-3287: Track login entrypoint, stored in master cookie
+
+- OPS-386: Get rid of some more ZMO article macros
 
 - BUG-571: Polish print stylesheet for columns
 
-- FIX: Be defensive about deleted parent comments
+- BUG-556: Add favicon 16x16 & 32x32px
 
-- FIX: Be defensive about still images for nonexistent videos
+- BUG-475: Filter `verlagsangebote` directory content for advertisements
+
+- FIX: Show headerimage for single region content
 
 - FIX: Define author and fallback values for adcontroller handle
 
-- MAINT: Fix typography for .x-footer--borderless
+- FIX: Be defensive about still images for nonexistent videos
+
+- FIX: Be defensive about deleted parent comments
 
 - MAINT: Use sensible default caching times
 
-- MAINT: Cleanup content & paywall templates
-
 - MAINT: Make caching time for newsfeed.zeit.de
 
-- FIX: Show headerimage for single region content
+- MAINT: Fix typography for .x-footer--borderless
+
+- MAINT: Cleanup content & paywall templates
 
 
 3.16 (2016-11-02)

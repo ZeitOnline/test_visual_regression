@@ -1,15 +1,50 @@
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
-
+{% block article_header %}
 <header class="article__head article__head--default">
+    {% block headline -%}
     <h1 itemprop="headline">
-        {{ blocks.supertitle() }}
-        {{ blocks.title() }}
+        <span class="article__head__supertitle">{{ view.supertitle }}</span>
+        <span class="article__head__title">{{ view.title }}</span>
     </h1>
+    {% endblock -%}
+
     {% if view.page_nr == 1 and view.header_module %}
         {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
     {% endif %}
-    {{ blocks.subtitle(include_meta=True) }}
-    <div class="article__head__meta">
-        {% include "zeit.web.magazin:templates/inc/article_area_date.html" ignore missing %}
+
+    {% block subtitle -%}
+    <div class="article__head__subtitle">
+        {{ view.subtitle }}
+
+        {% block genre_and_authors -%}
+            {% if view.genre -%}
+                {{ view.genre | title }}
+            {% endif -%}
+
+            {% if view.authors -%}
+                {% for author in view.authors -%}
+                    {% if view.genre -%}
+                        {{ author.prefix }}
+                    {% else -%}
+                        {{ author.prefix | title }}
+                    {% endif -%}
+                    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                    {%- if author.href -%}
+                        <a href="{{ author.href | create_url }}" class="article__head__meta__author" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>{{ author.location }}
+                    {%- else -%}
+                        <span class="article__head__meta__author"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
+                    {%- endif -%}
+                    </span>
+                    {{- author.suffix -}}
+                {% endfor -%}
+            {% endif -%}
+        {% endblock -%}
     </div>
+    {% endblock -%}
+
+    {% block article_date -%}
+    <div class="article__head__meta">
+        {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
+    </div>
+    {% endblock -%}
 </header>
+{% endblock %}

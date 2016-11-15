@@ -2,6 +2,34 @@
 import pytest
 
 
+def test_longform_contains_subpage_index(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/05')
+    index = browser.cssselect('.article__subpage-index')
+
+    assert len(index) == 4
+
+    for i, toc in enumerate(index):
+        items = toc.cssselect('li')
+        assert toc.cssselect('h3')
+        assert toc.cssselect('ol')
+        assert len(items) == 4
+        for k, item in enumerate(items):
+            if k == i:
+                assert item.cssselect('.article__subpage-active')
+            else:
+                link = item.cssselect('a')[0]
+                assert link.get('href') == '#kapitel{}'.format(k + 1)
+
+
+def test_longform_contains_subpage_head(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/05')
+    headlines = browser.cssselect('.article__subpage-head')
+    assert len(headlines) == 4
+
+    for i, headline in enumerate(headlines):
+        assert headline.attrib['id'] == 'kapitel{}'.format(i + 1)
+
+
 def test_article_page_should_contain_blocks(testserver, httpbrowser):
     browser = httpbrowser(
         '%s/zeit-magazin/article/all-blocks' % testserver.url)
@@ -61,6 +89,23 @@ def test_article_contains_authorbox(testbrowser):
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
 
 
+def test_article_header_contains_authors(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/08')
+    authors = browser.cssselect('span[itemprop="author"]')
+    link = authors[0].cssselect('a[itemprop="url"]')[0]
+    assert len(authors) == 2
+    assert authors[0].text_content() == 'Anne Mustermann, Berlin'
+    assert authors[1].text_content() == 'Oliver Fritsch, London'
+    assert link.get('href') == 'http://localhost/autoren/anne_mustermann'
+    assert link.text_content() == 'Anne Mustermann'
+
+
+def test_article_header_without_author(testbrowser):
+    browser = testbrowser('zeit-magazin/article/martenstein-portraitformat')
+    authors = browser.cssselect('span[itemprop="author"]')
+    assert not authors
+
+
 @pytest.mark.parametrize('reason', ['paid', 'register', 'metered'])
 def test_paywall_switch_showing_forms(reason, testbrowser):
     urls = [
@@ -76,4 +121,6 @@ def test_paywall_switch_showing_forms(reason, testbrowser):
         browser = testbrowser(
             '{}?C1-Paywall-On=True&C1-Paywall-Reason={}'.format(url, reason))
         assert len(browser.cssselect('.paragraph--faded')) == 1
-        assert len(browser.cssselect('.gate')) == int(reason != 'register')
+        assert len(browser.cssselect('.gate')) == 1
+        assert len(browser.cssselect(
+            '.gate--register')) == int(reason == 'register')
