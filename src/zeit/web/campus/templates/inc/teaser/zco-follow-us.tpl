@@ -7,7 +7,7 @@
     <div class="{{ self.layout() }}__packshot">
         <a class="packshot" href="{{ teaser | create_url | append_campaign_params }}" title="{{- teaser.teaserSupertitle or teaser.supertitle -}}: {{ teaser.teaserTitle or teaser.title }}" data-id="{{ teaser_position }}.solo-teaser-follow-us.packshot">
             {% set module_layout = "packshot" %}
-            {% include "zeit.web.campus:templates/inc/teaser/asset/image_zco-follow-us.tpl" ignore missing %}
+            {% include "zeit.web.campus:templates/inc/teaser/asset/image_zco-follow-us.tpl" %}
             <div class="packshot__content">
                 <div class="packshot__kicker">{{- teaser.teaserSupertitle or teaser.supertitle -}}</div>
                 <div class="packshot__title">{{ teaser.teaserTitle or teaser.title }}</div>
