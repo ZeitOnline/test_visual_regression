@@ -13,7 +13,7 @@ require.config({
         'velocity': 'vendor/velocity',
         'velocity.ui': 'vendor/velocity.ui',
         'bxSlider': 'web.core/plugins/jquery.bxslider',
-        'freewall': 'vendor/freewall',
+        'masonry': 'vendor/masonry.pkgd.min',
         'jquery.clarify': 'web.core/plugins/jquery.clarify',
         'jquery.debounce': 'web.core/plugins/jquery.debounce',
         'jquery.throttle': 'web.core/plugins/jquery.throttle',
@@ -33,10 +33,6 @@ require.config({
         'web.site/plugins/jquery.fixPosition': [ 'jquery', 'jquery.throttle' ],
         'web.site/plugins/jquery.hpOverlay': [ 'jquery', 'jquery.debounce' ],
         'web.site/plugins/jquery.togglesearch': [ 'jquery', 'jquery.debounce' ],
-        'freewall': {
-            deps: [ 'jquery' ],
-            exports: 'freewall'
-        },
         'velocity': {
             deps: [ 'jquery' ]
         },

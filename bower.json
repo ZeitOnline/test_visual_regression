@@ -3,13 +3,18 @@
   "version": "0.3.0",
   "private": true,
   "dependencies": {
-    "freewall": "1.0.6",
     "jquery": "1.12.4",
     "jquery.inview": "1.1.2",
+    "masonry": "^4.1.1",
     "normalize.css": "5.0.0",
     "picturefill": "3.0.2",
     "requirejs": "2.3.2",
     "svg4everybody": "2.1.2",
     "velocity": "1.3.1"
+  },
+  "overrides": {
+    "masonry": {
+      "main": "dist/masonry.pkgd.min.js"
+    }
   }
 }
