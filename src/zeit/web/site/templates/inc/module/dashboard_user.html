@@ -14,7 +14,7 @@
     <div class="dashboard__lower">
         <div class="article__item">
             <div class="dashboard__user">
-                {% if not request.user.picture %}
+                {% if request.user.picture %}
                     <img src="{{request.user.picture}}" class="dashboard__user-image" />
                 {% endif %}
                 <span class="dashboard__user-name">
