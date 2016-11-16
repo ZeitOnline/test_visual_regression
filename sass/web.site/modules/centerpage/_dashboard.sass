@@ -7,8 +7,7 @@
 
 	&__lower
 		background-color: $cararra
-		padding: $page-padding
-		padding-bottom: 0
+		padding: 0 $page-padding
 
 	&__header
 		+font-smoothing
@@ -32,7 +31,7 @@
 
 	&__user
 		border-bottom: 2px solid $zon-alto
-		padding-bottom: $page-padding
+		padding: $page-padding 0
 
 	&__user-name
 		font-size: remify(18px)
@@ -86,14 +85,12 @@
 			font-size: remify(32px)
 
 		&__lower
-			padding-top: 0
 			.article__item
 				display: flex
 
 		&__user
 			border-bottom: none
 			align-self: center
-			padding: 0
 			width: 50%
 			padding-right: $page-padding
 
