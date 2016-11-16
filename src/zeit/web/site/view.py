@@ -125,6 +125,7 @@ class Base(zeit.web.core.view.Base):
 def login_state(request):
     return zeit.web.core.security.get_login_state(request)
 
+
 @pyramid.view.view_config(
     route_name='dashboard_user',
     renderer='templates/inc/module/dashboard_user.html',
@@ -138,7 +139,7 @@ class UserDashboard(zeit.cms.content.sources.SimpleXMLSourceBase, Base):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         if not self.request.user:
             raise pyramid.httpexceptions.HTTPMovedPermanently(
-                    location=conf.get('sso_url'))
+                location=conf.get('sso_url'))
         try:
             self.context = zeit.cms.interfaces.ICMSContent(
                 'http://xml.zeit.de/index')
@@ -164,6 +165,7 @@ class UserDashboard(zeit.cms.content.sources.SimpleXMLSourceBase, Base):
                 for link in links]
         sctn = section.attrib
         return {'section_atts': sctn, 'links': lnks}
+
 
 @pyramid.view.view_config(route_name='schlagworte')
 def schlagworte(request):
