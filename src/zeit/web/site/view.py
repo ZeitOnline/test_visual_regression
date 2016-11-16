@@ -137,7 +137,7 @@ class UserDashboard(zeit.cms.content.sources.SimpleXMLSourceBase, Base):
         super(UserDashboard, self).__init__(context, request)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         if not self.request.user:
-            raise pyramid.httpexceptions.HTTPMovedPermanently(
+            raise pyramid.httpexceptions.HTTPFound(
                     location=conf.get('sso_url'))
         try:
             self.context = zeit.cms.interfaces.ICMSContent(
