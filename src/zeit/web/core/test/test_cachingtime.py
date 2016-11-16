@@ -22,7 +22,8 @@ def test_caching_time_should_be_set_per_content_object(application, content):
 
 
 def test_brightcove_view_sets_marker(application, dummy_request):
-    video = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/video/2014-01/1953013471001')
+    video = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/video/2014-01/1953013471001')
     from zeit.web.core.view_image import Brightcove
     dummy_request.path_info = '/wide__280x157__desktop'
     brightcove_view = Brightcove(video, dummy_request)
