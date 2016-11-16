@@ -109,7 +109,7 @@ class Brightcove(Image):
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
         zope.interface.alsoProvides(
             self.context,
-            zeit.web.core.interfaces.IBrightcoveTemporaryImage)
+            zeit.web.core.interfaces.IExternalTemporaryImage)
 
 
 class RSSImage(Image):

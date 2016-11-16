@@ -287,5 +287,6 @@ class ILiveblogInfo(zope.interface.Interface):
     """Returns liveblog metadata."""
 
 
-class IBrightcoveTemporaryImage(zope.interface.Interface):
-    """A marker interface to distinguish a brightcove image from others."""
+class IExternalTemporaryImage(zope.interface.Interface):
+    """A marker interface to distinguish externally hosted images vs. those
+    from friedbert itself."""
