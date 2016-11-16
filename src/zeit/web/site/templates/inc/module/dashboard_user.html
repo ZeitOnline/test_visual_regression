@@ -23,9 +23,9 @@
             </div>
             <!-- header -->
             {% for section in view.dashboard_user.sections['header'] %}
-            <div class="dashboard__box dashboard__box--is-header" data-ct-area="user-dashboard">
+            <div class="dashboard__box dashboard__box--is-header" data-ct-area="user-dashboard" data-ct-column="false">
                 <h2 class="dashboard__box-title">{{section.section_atts.name}}</h2>
-                <ul class="dashboard__box-list" data-ct-column="false">
+                <ul class="dashboard__box-list">
                     {% for link in section.links %}
                       <li>
                         <a href="{{link.attributes.href}}" id="{{link.attributes.id}}">
@@ -42,9 +42,9 @@
     <div class="dashboard__content">
         <div class="article__item">
               {% for section in view.dashboard_user.sections['body'] %}
-                <div class="dashboard__box" data-ct-area="user-dashboard">
+                <div class="dashboard__box" data-ct-area="user-dashboard" data-ct-column="false">
                 <h2 class="dashboard__box-title">{{section.section_atts.name}}</h2>
-                  <ul class="dashboard__box-list" data-ct-column="false">
+                  <ul class="dashboard__box-list">
                     {% for link in section.links %}
                       <li>
                         <a href="{{link.attributes.href}}" id="{{link.attributes.id}}">
