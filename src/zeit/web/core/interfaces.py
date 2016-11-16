@@ -285,3 +285,7 @@ class ICommunity(zope.interface.Interface):
 
 class ILiveblogInfo(zope.interface.Interface):
     """Returns liveblog metadata."""
+
+
+class IBrightcoveTemporaryImage(zope.interface.Interface):
+    """A marker interface to distinguish a brightcove image from others."""

@@ -21,6 +21,15 @@ def test_caching_time_should_be_set_per_content_object(application, content):
     assert zeit.web.core.interfaces.ICachingTime(obj) == content[1]
 
 
+def test_brightcove_view_sets_marker(application, dummy_request):
+    video = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/video/2014-01/1953013471001')
+    from zeit.web.core.view_image import Brightcove
+    dummy_request.path_info = '/wide__280x157__desktop'
+    brightcove_view = Brightcove(video, dummy_request)
+    from zeit.web.core.interfaces import IBrightcoveTemporaryImage
+    assert IBrightcoveTemporaryImage.providedBy(brightcove_view.context)
+
+
 def test_response_should_have_intended_caching_time(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     assert browser.headers['cache-control'] == 'max-age=20'
