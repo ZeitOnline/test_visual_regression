@@ -14,27 +14,24 @@
     <div class="dashboard__lower">
         <div class="article__item">
             <div class="dashboard__user">
-                <span class="dashboard__user-image">
-                  <img src="{{request.user.picture}}" />
-                </span>
+                {% if not request.user.picture %}
+                    <img src="{{request.user.picture}}" class="dashboard__user-image" />
+                {% endif %}
                 <span class="dashboard__user-name">
                     {{request.user.name}}
                 </span>
             </div>
             <!-- header -->
             {% for section in view.dashboard_user.sections['header'] %}
-            <div class="dashboard__box dashboard__box--is-header">
+            <div class="dashboard__box dashboard__box--is-header" data-ct-area="user-dashboard">
                 <h2 class="dashboard__box-title">{{section.section_atts.name}}</h2>
-                <ul class="dashboard__box-list">
+                <ul class="dashboard__box-list" data-ct-column="false">
                     {% for link in section.links %}
                       <li>
                         <a href="{{link.attributes.href}}" id="{{link.attributes.id}}">
                           {{link.text}}
                         </a>
                       </li>
-                      {%- if loop.index > 1 and (loop.length / 2)|round|int == loop.index %}
-                        </ul><ul class="dashboard__box-list">
-                      {% endif -%}
                     {% endfor %}
                 </ul>
             </div>
@@ -45,9 +42,9 @@
     <div class="dashboard__content">
         <div class="article__item">
               {% for section in view.dashboard_user.sections['body'] %}
-                <div class="dashboard__box">
+                <div class="dashboard__box" data-ct-area="user-dashboard">
                 <h2 class="dashboard__box-title">{{section.section_atts.name}}</h2>
-                  <ul class="dashboard__box-list">
+                  <ul class="dashboard__box-list" data-ct-column="false">
                     {% for link in section.links %}
                       <li>
                         <a href="{{link.attributes.href}}" id="{{link.attributes.id}}">

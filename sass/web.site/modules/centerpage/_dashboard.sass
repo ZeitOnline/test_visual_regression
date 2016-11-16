@@ -31,23 +31,24 @@
 
 	&__user
 		border-bottom: 2px solid $zon-alto
-		padding: $page-padding 0
+		padding: remify(30px 0)
+		display: flex
 
 	&__user-name
 		font-size: remify(18px)
 		font-weight: bold
 		letter-spacing: $letter-spacing-s
 		color: $grey--mid-dark
-		display: table-cell
-		padding-left: $page-padding
-		vertical-align: middle
+		align-self: center
+		word-wrap: break-word
+		overflow: hidden
 
 	&__user-image
-		width: remify(80px)
 		height: remify(80px)
-		background-color: $zon-alto
+		width: remify(80px)
 		border-radius: 50%
-		display: table-cell
+		border: 2px solid $zon-light-grey
+		margin-right: $page-padding
 
 	&__box
 		letter-spacing: $letter-spacing-s
@@ -97,6 +98,9 @@
 		&__box
 			display: flex
 			flex-wrap: wrap
+
+		&__box--is-header
+			display: block
 
 		&__box-title
 			width: 100%
