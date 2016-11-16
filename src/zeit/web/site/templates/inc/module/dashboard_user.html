@@ -5,38 +5,55 @@
         <div class="article__item">
             <h1 class="dashboard__header" itemprop="headline">
                 <span class="dashboard__kicker">
-                    {{view.dashboard_user['kicker']}}
+                    {{view.dashboard_user.kicker}}
                 </span>
-                <span class="dashboard__title">{{view.dashboard_user['title']}}</span>
+                <span class="dashboard__title">{{view.dashboard_user.title}}</span>
             </h1>
         </div>
     </div>
     <div class="dashboard__lower">
         <div class="article__item">
             <div class="dashboard__user">
-                <span class="dashboard__user-image"></span>
+                <span class="dashboard__user-image">
+                  <img src="{{request.user.picture}}" />
+                </span>
                 <span class="dashboard__user-name">
-                    Giovanni di Lorenzo
+                    {{request.user.name}}
                 </span>
             </div>
+            <!-- header -->
+            {% for section in view.dashboard_user.sections['header'] %}
             <div class="dashboard__box dashboard__box--is-header">
-                <h2 class="dashboard__box-title">Einstellungen</h2>
+                <h2 class="dashboard__box-title">{{section.section_atts.name}}</h2>
                 <ul class="dashboard__box-list">
-                    <li><a href="">Abo verwalten</a></li>
-                    <li><a href="">Kundensupport & FAQ</a></li>
-                    <li><a href="">DIE ZEIT digital lesen</a></li>
+                    {% for link in section.links %}
+                      <li>
+                        <a href="{{link.attributes.href}}" id="{{link.attributes.id}}">
+                          {{link.text}}
+                        </a>
+                      </li>
+                      {%- if loop.index > 1 and (loop.length / 2)|round|int == loop.index %}
+                        </ul><ul class="dashboard__box-list">
+                      {% endif -%}
+                    {% endfor %}
                 </ul>
             </div>
+            {% endfor %}
         </div>
     </div>
+    <!-- body -->
     <div class="dashboard__content">
         <div class="article__item">
-              {% for section in view.dashboard_user['sections'].values() %}
+              {% for section in view.dashboard_user.sections['body'] %}
                 <div class="dashboard__box">
-                <h2 class="dashboard__box-title">{{section['section_atts']['name']}}</h2>
+                <h2 class="dashboard__box-title">{{section.section_atts.name}}</h2>
                   <ul class="dashboard__box-list">
-                    {% for link in section['links'] %}
-                      <li><a href="{{link['attributes']['href']}}" id="{{link['attributes']['id']}}">{{link['text']}}</a></li>
+                    {% for link in section.links %}
+                      <li>
+                        <a href="{{link.attributes.href}}" id="{{link.attributes.id}}">
+                          {{link.text}}
+                        </a>
+                      </li>
                       {%- if loop.index > 1 and (loop.length / 2)|round|int == loop.index %}
                         </ul><ul class="dashboard__box-list">
                       {% endif -%}

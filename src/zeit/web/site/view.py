@@ -15,6 +15,7 @@ import zeit.web.core.security
 import zeit.web.core.view
 import zeit.web.magazin.view
 
+import zope.component
 
 log = logging.getLogger(__name__)
 
@@ -128,9 +129,16 @@ def login_state(request):
     route_name='dashboard_user',
     renderer='templates/inc/module/dashboard_user.html',
     http_cache=60)
-class UserDashboard(zeit.web.core.view.FrameBuilder, Base):
+class UserDashboard(zeit.cms.content.sources.SimpleXMLSourceBase, Base):
+    product_configuration = 'zeit.web'
+    config_url = 'dashboarduser-source'
+
     def __init__(self, context, request):
         super(UserDashboard, self).__init__(context, request)
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        if not self.request.user:
+            raise pyramid.httpexceptions.HTTPMovedPermanently(
+                    location=conf.get('sso_url'))
         try:
             self.context = zeit.cms.interfaces.ICMSContent(
                 'http://xml.zeit.de/index')
@@ -139,19 +147,21 @@ class UserDashboard(zeit.web.core.view.FrameBuilder, Base):
             raise pyramid.httpexceptions.HTTPNotFound()
 
     def dashboard_user(self):
-        from lxml import etree
-        xml = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/config/dashboard_user.xml', None).data
-        parser = etree.XMLParser(ns_clean=True, recover=True, encoding='utf-8')
-        sections_xml = etree.fromstring(xml.encode('utf-8'), parser=parser).iterfind('section')
+        xml = self._get_tree()
+        sections_xml_header = xml.xpath('//section[@class="header"]')
+        sections_xml_body = xml.xpath('//section[@class="body"]')
         return {
-            'title': etree.fromstring(xml).find('title').text,
-            'kicker': etree.fromstring(xml).find('kicker').text,
-            'sections': {section.get('id'): self._iter(section) for section in sections_xml},
-        }
+            'title': xml.find('title').text,
+            'kicker': xml.find('kicker').text,
+            'sections': {'header': [self._iter_section(section)
+                                    for section in sections_xml_header],
+                         'body': [self._iter_section(section)
+                                  for section in sections_xml_body]}}
 
-    def _iter(self, section):
-        links = section.iterfind('link')
-        lnks = [{'text': link.text, 'attributes': link.attrib} for link in links]
+    def _iter_section(self, section):
+        links = section.xpath('link')
+        lnks = [{'text': link.text, 'attributes': link.attrib}
+                for link in links]
         sctn = section.attrib
         return {'section_atts': sctn, 'links': lnks}
 
