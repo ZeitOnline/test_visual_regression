@@ -107,6 +107,9 @@ class Brightcove(Image):
             self.context = group[self.mapping.get(variant, variant)]
         except Exception, err:
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
+        zope.interface.alsoProvides(
+            self.context,
+            zeit.web.core.interfaces.IBrightcoveTemporaryImage)
 
 
 class RSSImage(Image):
