@@ -23,6 +23,9 @@ import zeit.web.core.utils
 import zeit.web.site.module.playlist
 import zeit.web.site.view_centerpage
 
+import jwt
+from zeit.web.core.session import SESSION_CACHE
+
 
 screen_sizes = ((320, 480, True), (520, 960, True),
                 (768, 1024, False), (980, 1024, False))
@@ -2576,15 +2579,12 @@ def test_user_dashboard_correct_elements(testbrowser, sso_keypair):
     data = SESSION_CACHE.get(sso_cookie)
     browser = testbrowser('/konto')
 
-    request = pyramid.testing.DummyRequest()
-    request.user = {'ssoid': '123', 'name': 'foo', 'picture': 'user.png'}
     assert len(browser.cssselect('.dashboard__user-name')) == 1
-    assert ('foo' in browser.cssselect('.dashboard__user-name'))
-    assert ('user.png' in browser.cssselect('.dashboard__user-name'))
-    assert len(browser.cssselect('.dashboard__user-image')) == 1
+    assert (browser.cssselect('.dashboard__user-name')[0].text.strip() == 'test-user')
+    #assert len(browser.cssselect('.dashboard__user-image')) == 1
     assert len(browser.cssselect('.dashboard__box.dashboard__box--is-header')) == 1
     assert len(browser.cssselect('.dashboard__box-title')) == 6
-
+    assert (browser.cssselect('.dashboard__box-title')[1].text.strip() == 'Meine Abonnements')
 #    teaser_linktexts = browser.cssselect('.teaser-volumeteaser__link')
 #    assert teaser_linktexts[0].text.strip() == (
 #        'Alternativtext am Teaser: Lesen Sie diese Ausgabe.')
