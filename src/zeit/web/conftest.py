@@ -171,6 +171,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/banner.xml'),
         'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
+        'vivi_zeit.web_dashboarduser-source': (
+            'egg://zeit.web.core/data/config/dashboard_user.xml'),
         'vivi_zeit.web_navigation-source': (
             'egg://zeit.web.core/data/config/navigation.xml'),
         'vivi_zeit.web_navigation-services-source': (
