@@ -2563,3 +2563,36 @@ def test_volume_teaser_on_cphas_correct_elements(testbrowser):
         '/2016-09/test-printcover/original')
     assert teaser_images[1].attrib['src'].endswith(
         '/ausgabe/default_packshot_diezeit/original')
+
+
+def test_user_dashboard_correct_elements(testbrowser, sso_keypair):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+    testbrowser.cookies.forURL(
+        'http://localhost')['my_sso_cookie'] = sso_cookie
+    testbrowser.open('/login-state')
+    data = SESSION_CACHE.get(sso_cookie)
+    browser = testbrowser('/konto')
+
+    request = pyramid.testing.DummyRequest()
+    request.user = {'ssoid': '123', 'name': 'foo', 'picture': 'user.png'}
+    assert len(browser.cssselect('.dashboard__user-name')) == 1
+    assert ('foo' in browser.cssselect('.dashboard__user-name'))
+    assert ('user.png' in browser.cssselect('.dashboard__user-name'))
+    assert len(browser.cssselect('.dashboard__user-image')) == 1
+    assert len(browser.cssselect('.dashboard__box.dashboard__box--is-header')) == 1
+    assert len(browser.cssselect('.dashboard__box-title')) == 6
+
+#    teaser_linktexts = browser.cssselect('.teaser-volumeteaser__link')
+#    assert teaser_linktexts[0].text.strip() == (
+#        'Alternativtext am Teaser: Lesen Sie diese Ausgabe.')
+#    assert teaser_linktexts[1].text.strip() == (
+#        'Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.')
+#
+#    teaser_images = browser.cssselect('.teaser-volumeteaser__media-item')
+#    assert teaser_images[0].attrib['src'].endswith(
+#        '/2016-09/test-printcover/original')
+#    assert teaser_images[1].attrib['src'].endswith(
+#        '/ausgabe/default_packshot_diezeit/original')
