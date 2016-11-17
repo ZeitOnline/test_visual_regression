@@ -2332,12 +2332,12 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
         'image-fill-color': [u'A3E6BB'], 'teaserText': 'text',
         'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
         'date_first_released': '2012-02-22T14:36:32.452398+00:00'}, {
-        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
-        'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                           'harald-martenstein-wideformat')],
-        'image-fill-color': [u''], 'teaserText': 'text',
-        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
-        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
+            'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
+            'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
+                              'harald-martenstein-wideformat')],
+            'image-fill-color': [u''], 'teaserText': 'text',
+            'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
+            'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
 
     browser = testbrowser('/serie/martenstein')
     image1 = browser.cssselect('.cp-area--ranking article img')[0]
@@ -2568,7 +2568,7 @@ def test_volume_teaser_on_cphas_correct_elements(testbrowser):
         '/ausgabe/default_packshot_diezeit/original')
 
 
-def test_user_dashboard_correct_elements(testbrowser, sso_keypair):
+def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['sso_key'] = sso_keypair['public']
     sso_cookie = jwt.encode(
@@ -2579,11 +2579,31 @@ def test_user_dashboard_correct_elements(testbrowser, sso_keypair):
     data = SESSION_CACHE.get(sso_cookie)
     browser = testbrowser('/konto')
 
-    assert len(browser.cssselect('.dashboard__user-name')) == 1
-    assert (browser.cssselect('.dashboard__user-name')[0].text.strip() == 'test-user')
-    #assert len(browser.cssselect('.dashboard__user-image')) == 1
-    assert len(browser.cssselect('.dashboard__box.dashboard__box--is-header')) == 1
+    # main structure
+    assert len(browser.cssselect('.dashboard')) == 1
+    assert len(browser.cssselect('.dashboard__upper')) == 1
+    assert len(browser.cssselect('.dashboard__lower')) == 1
+    assert len(browser.cssselect('.dashboard__content')) == 1
+    assert len(browser.cssselect('.dashboard__header')) == 1
+    assert len(browser.cssselect('.article-pagination')) == 1
+
+    # head
+    assert (browser.cssselect('.dashboard__kicker')[0].text.strip() ==
+            'Herzlich Willkommen')
+    assert (browser.cssselect('.dashboard__title')[0].text.strip() ==
+            'Mein Konto')
+    assert len(browser.cssselect('.dashboard__user')) == 1
+    assert (browser.cssselect('.dashboard__user-name')[0].text.strip() ==
+            'test-user')
+    assert len(browser.cssselect('.dashboard__user-image')) == 1
+    assert len(browser.cssselect('.dashboard__box--is-header')) == 1
+
+    # body
+    assert len(browser.cssselect('.dashboard__box')) == 6
     assert len(browser.cssselect('.dashboard__box-title')) == 6
-    assert (browser.cssselect('.dashboard__box-title')[1].text.strip() == 'Meine Abonnements')
-    assert (browser.cssselect('.dashboard__box-title')[3].text.strip() == 'Spiele')
-    assert (browser.cssselect('.dashboard__box-list')[2].cssselect('a')[0].text.strip() == u'ZEIT Audio hören')
+    assert (browser.cssselect('.dashboard__box-title')[1].text.strip() ==
+            'Meine Abonnements')
+    assert (browser.cssselect('.dashboard__box-title')[3].text.strip() ==
+            'Spiele')
+    assert (browser.cssselect('.dashboard__box-list')[2]
+            .cssselect('a')[0].text.strip() == u'ZEIT Audio hören')

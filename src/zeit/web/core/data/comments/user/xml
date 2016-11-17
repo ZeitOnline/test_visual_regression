@@ -3,7 +3,7 @@
     <uid>457322</uid>
     <name>test-user</name>
     <mail>test-user@example.com</mail>
-    <picture>0</picture>
+    <picture>test.png</picture>
     <roles>
         <role>authenticated user</role>
     </roles>
