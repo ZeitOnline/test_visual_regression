@@ -33,12 +33,13 @@ def test_author_header_should_be_fully_rendered(testbrowser):
 
 def test_author_page_should_show_favourite_content_if_available(testbrowser):
     browser = testbrowser('/autoren/j_random')
-    assert len(browser.cssselect('.teaser-small')) == 3
+    assert len(browser.cssselect(
+        '.cp-area--author-favourite-content .teaser-small')) == 3
 
 
 def test_author_page_should_hide_favourite_content_if_missing(testbrowser):
     browser = testbrowser('/autoren/anne_mustermann')
-    assert len(browser.cssselect('.cp-area--ranking .teaser-small')) == 0
+    assert len(browser.cssselect('.cp-area--author-favourite-content')) == 0
     assert len(browser.cssselect('.teaser-small')) == 0
 
 
@@ -83,6 +84,24 @@ def test_author_area_articles_should_offset_correctly(
     assert area.surrounding_teasers == 3
     assert area.count == 10
     assert area.start == 27
+
+
+def test_author_page_with_favourite_content_should_get_total_pages_correctly(
+        testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    # case 1: 7 articles on page 1, 10 articles on page 2
+    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                    for i in range(17)])
+    select = testbrowser('/autoren/j_random').cssselect
+    assert len(select('.cp-area--author-favourite-content article')) == 3
+    assert len(select('.pager__pages .pager__page')) == 2
+
+    # case 2: 7 articles on page 1, 10 articles on page 2, 1 article on page 3
+    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                    for i in range(18)])
+    select = testbrowser('/autoren/j_random').cssselect
+    assert len(select('.cp-area--author-favourite-content article')) == 3
+    assert len(select('.pager__pages .pager__page')) == 3
 
 
 def test_author_page_should_hide_favourite_content_on_further_pages(
