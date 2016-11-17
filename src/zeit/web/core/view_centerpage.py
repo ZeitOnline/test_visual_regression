@@ -67,6 +67,22 @@ class AreaRankingMixin(object):
             return 'noindex,follow,noodp,noydir,noarchive'
         return super(AreaRankingMixin, self).meta_robots
 
+    @zeit.web.reify
+    def pagination(self):
+        if self.area_ranking is None:
+            return {}
+        # Return as many of the same keys in
+        # z.w.core.view_article.Article.pagination as make sense here. (Only
+        # used by z.w.core.view.Base.webtrekk at the moment.)
+        return {
+            'current': self.area_ranking.current_page,
+            'total': self.area_ranking.total_pages,
+            'pager': self.area_ranking._pagination,
+            'content_url': self.content_url,
+            'next_page_url': self.next_page_url,
+            'prev_page_url': self.prev_page_url,
+        }
+
 
 class Centerpage(AreaRankingMixin, zeit.web.core.view.CeleraOneMixin,
                  zeit.web.core.view.Base):
@@ -215,22 +231,6 @@ class Centerpage(AreaRankingMixin, zeit.web.core.view.CeleraOneMixin,
     @zeit.web.reify
     def tracking_type(self):
         return type(self.context).__name__.title()
-
-    @zeit.web.reify
-    def pagination(self):
-        if self.area_ranking is None:
-            return {}
-        # Return as many of the same keys in
-        # z.w.core.view_article.Article.pagination as make sense here. (Only
-        # used by z.w.core.view.Base.webtrekk at the moment.)
-        return {
-            'current': self.area_ranking.current_page,
-            'total': self.area_ranking.total_pages,
-            'pager': self.area_ranking._pagination,
-            'content_url': self.content_url,
-            'next_page_url': self.next_page_url,
-            'prev_page_url': self.prev_page_url,
-        }
 
     @zeit.web.reify
     def comment_counts(self):
