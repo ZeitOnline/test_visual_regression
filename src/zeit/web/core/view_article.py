@@ -185,10 +185,6 @@ class Article(zeit.web.core.view.Content):
         return reach.get_buzz(self.context.uniqueId).get('social')
 
     @zeit.web.reify
-    def tracking_type(self):
-        return self.type
-
-    @zeit.web.reify
     def text_length(self):
         return self.context.textLength
 

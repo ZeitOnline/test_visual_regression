@@ -229,10 +229,6 @@ class Centerpage(AreaRankingMixin, zeit.web.core.view.CeleraOneMixin,
             return False
 
     @zeit.web.reify
-    def tracking_type(self):
-        return type(self.context).__name__.title()
-
-    @zeit.web.reify
     def comment_counts(self):
         community = zope.component.getUtility(
             zeit.web.core.interfaces.ICommunity)
