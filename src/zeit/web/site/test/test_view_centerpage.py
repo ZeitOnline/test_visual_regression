@@ -2585,14 +2585,5 @@ def test_user_dashboard_correct_elements(testbrowser, sso_keypair):
     assert len(browser.cssselect('.dashboard__box.dashboard__box--is-header')) == 1
     assert len(browser.cssselect('.dashboard__box-title')) == 6
     assert (browser.cssselect('.dashboard__box-title')[1].text.strip() == 'Meine Abonnements')
-#    teaser_linktexts = browser.cssselect('.teaser-volumeteaser__link')
-#    assert teaser_linktexts[0].text.strip() == (
-#        'Alternativtext am Teaser: Lesen Sie diese Ausgabe.')
-#    assert teaser_linktexts[1].text.strip() == (
-#        'Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.')
-#
-#    teaser_images = browser.cssselect('.teaser-volumeteaser__media-item')
-#    assert teaser_images[0].attrib['src'].endswith(
-#        '/2016-09/test-printcover/original')
-#    assert teaser_images[1].attrib['src'].endswith(
-#        '/ausgabe/default_packshot_diezeit/original')
+    assert (browser.cssselect('.dashboard__box-title')[3].text.strip() == 'Spiele')
+    assert (browser.cssselect('.dashboard__box-list')[2].cssselect('a')[0].text.strip() == u'ZEIT Audio hören')
