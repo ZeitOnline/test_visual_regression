@@ -139,7 +139,7 @@ class UserDashboard(zeit.cms.content.sources.SimpleXMLSourceBase, Base):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         if not self.request.user:
             raise pyramid.httpexceptions.HTTPFound(
-                    location=conf.get('sso_url'))
+                location=conf.get('sso_url'))
         try:
             self.context = zeit.cms.interfaces.ICMSContent(
                 'http://xml.zeit.de/index')
