@@ -12,7 +12,64 @@ import zeit.web.core.view
 import zeit.web.core.utils
 
 
-class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
+class AreaRankingMixin(object):
+
+    @zeit.web.reify
+    def canonical_url(self):
+        ranking = self.area_ranking
+        url = super(AreaRankingMixin, self).canonical_url
+
+        if ranking and ranking.current_page == 1:
+            remove_param = ranking.page_info(1)['remove_get_param']
+            return zeit.web.core.utils.remove_get_params(
+                url, remove_param)
+
+        if ranking and ranking.current_page > 1:
+            get_param = ranking.page_info(
+                ranking.current_page)['append_get_param']
+            return zeit.web.core.utils.add_get_params(url, **get_param)
+
+        return url
+
+    @zeit.web.reify
+    def next_page_url(self):
+        ranking = self.area_ranking
+        if ranking is None:
+            return None
+        if ranking.current_page < ranking.total_pages:
+            get_param = ranking.page_info(
+                ranking.current_page + 1)['append_get_param']
+            return zeit.web.core.utils.add_get_params(
+                self.request.url, **get_param)
+
+    @zeit.web.reify
+    def prev_page_url(self):
+        ranking = self.area_ranking
+        if ranking is None:
+            return None
+        # suppress page param for page 1
+        if ranking.current_page == 2:
+            remove_param = ranking.page_info(
+                ranking.current_page)['remove_get_param']
+            return zeit.web.core.utils.remove_get_params(
+                self.request.url, remove_param)
+        elif ranking.current_page > 2:
+            get_param = ranking.page_info(
+                ranking.current_page - 1)['append_get_param']
+            return zeit.web.core.utils.add_get_params(
+                self.request.url, **get_param)
+
+    @zeit.web.reify
+    def meta_robots(self):
+        ranking = self.area_ranking
+        # Prevent continuation pages from being indexed
+        if ranking is not None and ranking.current_page > 1:
+            return 'noindex,follow,noodp,noydir,noarchive'
+        return super(AreaRankingMixin, self).meta_robots
+
+
+class Centerpage(AreaRankingMixin, zeit.web.core.view.CeleraOneMixin,
+                 zeit.web.core.view.Base):
 
     @zeit.web.reify
     def volume(self):
@@ -120,23 +177,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         return breadcrumbs
 
     @zeit.web.reify
-    def canonical_url(self):
-        ranking = self.area_ranking
-        url = super(Centerpage, self).canonical_url
-
-        if ranking and ranking.current_page == 1:
-            remove_param = ranking.page_info(1)['remove_get_param']
-            return zeit.web.core.utils.remove_get_params(
-                url, remove_param)
-
-        if ranking and ranking.current_page > 1:
-            get_param = ranking.page_info(
-                ranking.current_page)['append_get_param']
-            return zeit.web.core.utils.add_get_params(url, **get_param)
-
-        return url
-
-    @zeit.web.reify
     def area_ranking(self):
         for region in self.regions:
             for area in region.values():
@@ -162,34 +202,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
             return super(Centerpage, self).webtrekk_content_id
 
     @zeit.web.reify
-    def next_page_url(self):
-        ranking = self.area_ranking
-        if ranking is None:
-            return None
-        if ranking.current_page < ranking.total_pages:
-            get_param = ranking.page_info(
-                ranking.current_page + 1)['append_get_param']
-            return zeit.web.core.utils.add_get_params(
-                self.request.url, **get_param)
-
-    @zeit.web.reify
-    def prev_page_url(self):
-        ranking = self.area_ranking
-        if ranking is None:
-            return None
-        # suppress page param for page 1
-        if ranking.current_page == 2:
-            remove_param = ranking.page_info(
-                ranking.current_page)['remove_get_param']
-            return zeit.web.core.utils.remove_get_params(
-                self.request.url, remove_param)
-        elif ranking.current_page > 2:
-            get_param = ranking.page_info(
-                ranking.current_page - 1)['append_get_param']
-            return zeit.web.core.utils.add_get_params(
-                self.request.url, **get_param)
-
-    @zeit.web.reify
     def is_hp(self):
         return self.context.type == 'homepage'
 
@@ -199,14 +211,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
             return self.regions[0].values()[0].kind == 'solo'
         except (AttributeError, IndexError):
             return False
-
-    @zeit.web.reify
-    def meta_robots(self):
-        ranking = self.area_ranking
-        # Prevent continuation pages from being indexed
-        if ranking is not None and ranking.current_page > 1:
-            return 'noindex,follow,noodp,noydir,noarchive'
-        return super(Centerpage, self).meta_robots
 
     @zeit.web.reify
     def tracking_type(self):

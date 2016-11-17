@@ -19,7 +19,8 @@ log = logging.getLogger(__name__)
     context=zeit.content.author.interfaces.IAuthor,
     renderer='templates/author.html')
 @pyramid.view.view_config(name='')
-class Author(zeit.web.site.view.Base):
+class Author(zeit.web.core.view_centerpage.AreaRankingMixin,
+             zeit.web.site.view.Base):
     """This view implements tabs that each have their own URL.
     To add a tab, subclass this, configure a different view name and provide
     a different ``tab_areas``.
@@ -98,6 +99,10 @@ class Author(zeit.web.site.view.Base):
     @zeit.web.reify
     def area_articles(self):
         return create_author_article_area(self.context)
+
+    @zeit.web.reify
+    def area_ranking(self):
+        return self.tab_areas[-1]
 
     @zeit.web.reify
     def has_author_comments(self):
