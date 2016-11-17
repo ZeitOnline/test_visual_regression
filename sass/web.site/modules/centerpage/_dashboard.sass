@@ -1,5 +1,5 @@
 .dashboard
-	padding-bottom: remify(40px)
+	border-bottom: 2px solid $zon-alto
 
 	&__upper
 		background-color: $trout
@@ -56,6 +56,8 @@
 		padding: remify(30px 0)
 		&:not(:last-child)
 			border-bottom: 2px solid $zon-alto
+		&:last-child
+			margin-bottom: $page-padding
 
 	&__box--is-header
 		border-bottom: none
@@ -111,5 +113,4 @@
 		&__box--is-header
 			.dashboard__box-list
 				width: auto
-
 
