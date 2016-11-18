@@ -3,11 +3,13 @@
 	font-size: remify(14px)
 	line-height: 1.2
 	&--fullwidth
+		padding-top: remify(14px)
 		padding-left: $page-padding
 		+respond-min($break-tablet-min)
 			padding-left: 0
 			color: $white
 			left: remify(32px)
+			padding-top: 0
 			position: absolute
 			top: remify(28px)
 			z-index: 1
@@ -22,9 +24,8 @@
 		margin: remify(0 2px 14px 0)
 		padding-bottom: remify(8px)
 		&--fullwidth
-			margin-top: remify(14px)
+			margin-bottom: 0
 			+respond-min($break-tablet-min)
-				margin-top: 0
 				border-color: $white
 
 	&__name
