@@ -2569,6 +2569,12 @@ def test_volume_teaser_on_cphas_correct_elements(testbrowser):
 
 
 def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
+    # XXX there are certainly better ways to test this:
+    # if browser has no sso session
+    try:
+        browser = testbrowser('/konto')
+    except:
+        assert True
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['sso_key'] = sso_keypair['public']
     sso_cookie = jwt.encode(
