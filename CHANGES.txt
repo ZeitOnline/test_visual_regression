@@ -7,7 +7,7 @@ POSTDEPLOY
 3.19 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-573: Distinguish caching between external and internal temporary images
 
 
 3.18 (2016-11-21)
