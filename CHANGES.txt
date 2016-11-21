@@ -7,7 +7,7 @@ POSTDEPLOY
 3.20 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix margin of blog marker on fullwidth teaser
 
 
 3.19 (2016-11-21)
