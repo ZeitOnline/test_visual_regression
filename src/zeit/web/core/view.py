@@ -666,11 +666,6 @@ class Base(object):
 
         if zeit.web.core.template.toggles('access_status_webtrekk'):
             access = getattr(self.context, 'access', None)
-            if access is None:
-                if self.product_id == u'ZEDE':
-                    access = 'free'
-                else:
-                    access = 'registration'
             custom_parameter.update({'cp28': access})
 
         return {
