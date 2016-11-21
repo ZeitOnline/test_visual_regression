@@ -15,7 +15,6 @@ import pyramid.response
 import pyramid.settings
 import pyramid.view
 import pyramid.httpexceptions
-import urllib
 import werkzeug.http
 import zope.component
 
@@ -631,16 +630,6 @@ class Base(object):
                 'short_num'))  # Veröffentlichungsdatum
         ])
 
-        # Track login status with entrypoint url
-        user_login_status = 'nicht_angemeldet'
-        user_login_info = self.request.user
-        if user_login_info:
-            user_login_status = 'angemeldet'
-            if user_login_info.get('entry_url'):
-                user_login_status = '{}|{}'.format(
-                    user_login_status,
-                    urllib.unquote(user_login_info['entry_url']))
-
         custom_parameter = collections.OrderedDict([
             ('cp1', get_param('authors_list')),  # Autor
             ('cp2', self.ivw_code),  # IVW-Code
@@ -657,7 +646,6 @@ class Base(object):
             ('cp13', 'stationaer'),  # Breakpoint
             ('cp14', 'friedbert'),  # Beta-Variante
             ('cp15', push),  # Push und Eilmeldungen
-            ('cp23', user_login_status),  # Login status with entrypoint url
             ('cp25', 'original'),  # Plattform
             ('cp26', pagetype),  # inhaltlicher Pagetype
             ('cp27', ';'.join(self.webtrekk_assets)),  # Asset
