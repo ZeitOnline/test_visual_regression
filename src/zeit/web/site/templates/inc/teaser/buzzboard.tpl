@@ -10,9 +10,9 @@
         {% set media_caption_additional_class = 'figcaption--hidden' %}
         {% set href = teaser.uniqueId | create_url %}
         {% if teaser is column %}
-            {% include "zeit.web.site:templates/inc/asset/image_buzzboard-column.tpl" ignore missing %}
+            {% include "zeit.web.site:templates/inc/asset/image_buzzboard-column.tpl" %}
         {% else %}
-            {% include "zeit.web.site:templates/inc/asset/image_buzzboard.tpl" ignore missing %}
+            {% include "zeit.web.site:templates/inc/asset/image_buzzboard.tpl" %}
         {% endif %}
     {% endif %}
 {% endblock %}

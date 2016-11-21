@@ -4,7 +4,71 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.16 (unreleased)
+3.19 (unreleased)
+-----------------
+
+- BUG-573: Distinguish caching between external and internal temporary images
+
+
+3.18 (2016-11-21)
+-----------------
+
+- ZON-3465: Add new authentication provider configuration for rawr
+
+- BUG-537: Omit zett/spektrum parquet area if RSS feed is empty or unavailable
+
+- MAINT: Make single page videos available as html5 video tag
+
+- MAINT: Only use Jinja’s ignore missing mark if appropriate.
+
+
+3.17 (2016-11-11)
+-----------------
+
+- ZON-3410: Remove truncation from exclusive region
+
+- ZON-3399: Implement volume teaser on CP
+
+- ZON-3385: Show message on return after successfull registration
+
+- ZON-3380: Introduce volume overview page (each volume of a year)
+
+- ZON-3316: Add gate forms for metered content
+
+- ZON-3315: Add gate forms for paid content
+
+- ZON-3314: Add registration form to paywalled articles
+
+- ZON-3288: Track paywall status with webtrekk
+
+- ZON-3287: Track login entrypoint, stored in master cookie
+
+- OPS-386: Get rid of some more ZMO article macros
+
+- BUG-571: Polish print stylesheet for columns
+
+- BUG-556: Add favicon 16x16 & 32x32px
+
+- BUG-475: Filter `verlagsangebote` directory content for advertisements
+
+- FIX: Show headerimage for single region content
+
+- FIX: Define author and fallback values for adcontroller handle
+
+- FIX: Be defensive about still images for nonexistent videos
+
+- FIX: Be defensive about deleted parent comments
+
+- MAINT: Use sensible default caching times
+
+- MAINT: Make caching time for newsfeed.zeit.de
+
+- MAINT: Fix typography for .x-footer--borderless
+
+- MAINT: Cleanup content & paywall templates
+
+
+3.16 (2016-11-02)
 -----------------
 
 - ZON-3449: Specify fallback for missing packshot image
@@ -16,6 +80,10 @@ POSTDEPLOY
 - MAINT: Send referrer and user-agent to solr
 
 - OPS-414: Fix volume navi in IE10
+
+- BUG-570: Fix one hour global content caching time
+
+- FIX: Be defensive about property access
 
 
 3.15 (2016-10-31)

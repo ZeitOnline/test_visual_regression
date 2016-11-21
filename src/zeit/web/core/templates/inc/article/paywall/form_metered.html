@@ -1,1 +1,9 @@
-{# insert metered form here #}
+{% extends "zeit.web.core:templates/inc/article/paywall/form_paid.html" %}
+
+{%- block gate_title -%}
+    Sie haben Ihr Freikontingent registrierungspflichtiger Artikel erreicht.
+    Wählen Sie Ihren Zugang und lesen Sie direkt weiter.
+{%- endblock -%}
+
+{% block gate_icon %}{% endblock %}
+{% block gate_link %}{% endblock %}

@@ -63,7 +63,7 @@
             {% include "zeit.web.site:templates/inc/breaking_news.tpl" %}
         {% endblock breaking_news %}
 
-        {% include "zeit.web.core:templates/amp/ads/tile_1.html" ignore missing %}
+        {% include "zeit.web.core:templates/amp/ads/tile_1.html" %}
 
         <main itemprop="mainContentOfPage">
         {% block main %}
@@ -125,7 +125,7 @@
                                 {% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
                                 {% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False %}
                                     {% set ad_displayed = True %}
-                                    {% include "zeit.web.core:templates/amp/ads/tile_4.html" ignore missing %}
+                                    {% include "zeit.web.core:templates/amp/ads/tile_4.html" %}
                                 {% endif %}
                             {% endfor %}
                             </section>
@@ -200,7 +200,7 @@
             {% endblock %}
 
             {% block footer_ad %}
-                {% include "zeit.web.core:templates/amp/ads/tile_8.html" ignore missing %}
+                {% include "zeit.web.core:templates/amp/ads/tile_8.html" %}
             {% endblock footer_ad %}
         {% endblock main %}
         </main>

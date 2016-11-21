@@ -1,34 +1,5 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as article_macros with context %}
-
-{% macro render_page(page) %}
-    {% for block in page %}
-        {% set type = ( block | block_type ) %}
-        {% if type in article_macros.__dict__ %}
-            {{ article_macros[type](block) }}
-        {% else %}
-            {% include [
-            "{0}:templates/inc/blocks/{1}_{2}.html".format(view.package, type, block.layout),
-            "{0}:templates/inc/blocks/{1}.html".format(view.package, type),
-            "zeit.web.core:templates/inc/blocks/{0}_{1}.html".format(type, block.layout),
-            "zeit.web.core:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
-        {% endif %}
-    {% endfor %}
-{% endmacro %}
-
-{% block content_ad_script -%}
-{% if view.advertising_enabled %}
-<script type="text/javascript">
-    (function() {
-        var s = document.createElement('script');
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = document.location.protocol + '//cdn.iqcontentplatform.de/iq.js';
-        var sc = document.getElementsByTagName('script')[0]; sc.parentNode.insertBefore(s, sc);
-    })();
-</script>
-{% endif %}
-{%- endblock %}
+{% import "zeit.web.magazin:templates/macros/article_macro.tpl" as article_macros %}
 
 {% block main %}
     <article class="article" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
@@ -43,19 +14,11 @@
             {% endblock article_header %}
             <div class="article__body-wrap">
                 <div class="article__body">
-                    {% block comments_balloon %}
-                        {%- include "zeit.web.magazin:templates/inc/article/comment-balloon.html" -%}
-                    {% endblock comments_balloon %}
+                    {% block comments_balloon %}{% endblock %}
 
-                    {% block article_pages %}
-                        <div class="article__page">
-                            {{ render_page(view.current_page) }}
-                        </div>
-                    {% endblock article_pages %}
+                    {% block article_pages %}{% endblock %}
 
-                    {% block article_pagination %}
-                        {% include "zeit.web.magazin:templates/inc/article/pagination.html" %}
-                    {% endblock article_pagination %}
+                    {% block article_pagination %}{% endblock %}
                 </div>
 
                 {% block article_footer %}
@@ -77,10 +40,10 @@
             </div>
         </div>
     </article>
-    <!-- seo article date modification -->
 
     {% if view.context.product.id not in ['TGS', 'ZEI', 'ZMLB'] %}
         {% block article_publishdate %}
+            <!-- seo article date modification -->
             {{ article_macros.add_publish_date(view.date_last_published_semantic, view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo) }}
         {% endblock article_publishdate %}
     {% endif %}
@@ -88,6 +51,5 @@
     {% block comments %}
         {% include "zeit.web.core:templates/inc/article/comments.html" %}
     {% endblock comments %}
-
 
 {% endblock main %}

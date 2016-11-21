@@ -1,0 +1,10 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+
+{% block module_list %}
+    <div class="{% block layout_class %}volume-overview-teaser{% endblock %}">
+        {% if area.values() | length > 0 %}
+            {% set module_layout = self.layout_class() %}
+            {% include "zeit.web.core:templates/inc/teaser/volume-overview.tpl" %}
+        {% endif %}
+    </div>
+{% endblock %}

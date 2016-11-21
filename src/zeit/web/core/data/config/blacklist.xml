@@ -4,7 +4,6 @@
   <route>/schlagworte/index/{segment}/index</route>
   <route>/studium/rankings/index</route>
   <route>/{foobar:.*}/komplettansicht?print=true</route>
-  <route>/{foo:\d+}/index</route>
   <route>/static/js/projekte/*path</route>
   <route>/angebote/autosuche/{exceptimage:((?!__).)+}</route>
   <route>/meine-autoren/{exceptimage:((?!__|zon-column).)+}</route>
