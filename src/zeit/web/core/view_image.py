@@ -107,6 +107,9 @@ class Brightcove(Image):
             self.context = group[self.mapping.get(variant, variant)]
         except Exception, err:
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
+        zope.interface.alsoProvides(
+            self.context,
+            zeit.web.core.interfaces.IExternalTemporaryImage)
 
 
 class RSSImage(Image):
@@ -131,6 +134,9 @@ class RSSImage(Image):
             self.context = group[variant]
         except Exception, err:
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
+        zope.interface.alsoProvides(
+            self.context,
+            zeit.web.core.interfaces.IExternalTemporaryImage)
 
     @zeit.web.reify
     def remote_host(self):

@@ -4,7 +4,15 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.18 (unreleased)
+3.19 (unreleased)
+-----------------
+
+- BUG-573: Distinguish caching between external and internal temporary images
+
+- BUG-586: Improve rendering speed of SpektrumFeed
+
+
+3.18 (2016-11-21)
 -----------------
 
 - ZON-3465: Add new authentication provider configuration for rawr
