@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.19 (unreleased)
+3.19 (2016-11-21)
 -----------------
 
 - ZON-3481: Correct sitemap date format to ISO-8601
