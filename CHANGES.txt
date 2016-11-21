@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.18 (unreleased)
+3.18 (2016-11-21)
 -----------------
 
 - ZON-3465: Add new authentication provider configuration for rawr
