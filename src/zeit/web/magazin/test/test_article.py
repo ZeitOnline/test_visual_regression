@@ -148,7 +148,6 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
         in webtrekk_config
     assert '14: "friedbert"' in webtrekk_config
     assert '15: ""' in webtrekk_config
-    assert '23: "nicht_angemeldet"' in webtrekk_config
     assert '25: "original"' in webtrekk_config
     assert '26: "article.column"' in webtrekk_config
     assert '30: "open"' in webtrekk_config
@@ -165,8 +164,8 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
             't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
-            'cp15=&cp23=nicht_angemeldet&cp25=original&'
-            'cp26=article.column&cp27=&cp30=open'.format(
+            'cp15=&cp25=original&cp26=article.column&cp27=&cp30=open&cp28=free'
+            '&cp31=share_buttons_small&cp23=nicht_angemeldet'.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
@@ -188,16 +187,11 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
     assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
             'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
             '{}/zeit-magazin/article/03,0,0,0,0,0,0,0,0&'
-            'cg1=redaktion&cg2=article&'
-            'cg3=lebensart&cg4=zede&cg5=essen-trinken&cg6=weinkolumne&'
-            'cg7=seite-2&cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
-            'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&cp3=2/7'
-            '&cp4=wein%3Bitalien%3Btoskana%3Bbologna%3Bbozen%3Bflorenz%3B'
-            't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
-            'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
-            'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
-            'cp15=&cp23=nicht_angemeldet&cp25=original&'
-            'cp26=article.column&cp27=&cp30=open'.format(
+            'cg1=redaktion&cg2=article&cg3=lebensart&cg4=zede&'
+            'cg5=essen-trinken&cg6=weinkolumne&cg7=seite-2&'
+            'cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
+            'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&'
+            'cp3=2/7'.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
@@ -237,7 +231,6 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
         in webtrekk_config
     assert '14: "friedbert",' in webtrekk_config
     assert '15: "",' in webtrekk_config
-    assert '23: "nicht_angemeldet",' in webtrekk_config
     assert '25: "original",' in webtrekk_config
     assert '26: "centerpage.ZMO",' in webtrekk_config
     assert '27: ""' in webtrekk_config
@@ -251,9 +244,9 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp2=zeit-magazin/bild-text&cp3=1/1&cp4=zeit-magazin&'
             'cp5=2016-05-23+12%3A14%3A06.113344%2B02%3A00&cp6=&cp7=&cp8=zmlb&'
             'cp9=zeitmz/centerpage&cp10=yes&cp11=&cp12=desktop.site&'
-            'cp13=stationaer&cp14=friedbert&cp15=&'
-            'cp23=nicht_angemeldet&cp25=original&'
-            'cp26=centerpage.ZMO&cp27=&cp30=open'.format(
+            'cp13=stationaer&cp14=friedbert&cp15=&cp25=original&'
+            'cp26=centerpage.ZMO&cp27=&cp30=open&cp28=registration&'
+            'cp23=nicht_angemeldet'.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
