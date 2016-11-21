@@ -73,13 +73,13 @@
                 {% include "zeit.web.core:templates/instantarticle/blocks/{}.html".format(block | block_type) ignore missing %}
                 {# ad after first 100 words, determined by adpara tuple #}
                 {% if adpara != None and page_loop.index0 == adpara[0] and block_loop.index0 == adpara[1] %}
-                    {% include "zeit.web.core:templates/instantarticle/ads/tile_4.html" ignore missing %}
+                    {% include "zeit.web.core:templates/instantarticle/ads/tile_4.html" %}
                 {% endif %}
                 {# middle ad if more pages #}
                 {% if page.number > 0 %}
                     {% if page.number == view.pages | length // 2 %}
                         {% if page | length // 2 == loop.index %}
-                            {% include "zeit.web.core:templates/instantarticle/ads/tile_5.html" ignore missing %}
+                            {% include "zeit.web.core:templates/instantarticle/ads/tile_5.html" %}
                         {% endif %}
                     {% endif %}
                 {% endif %}
@@ -87,7 +87,7 @@
         {% endfor %}
 
         {# ad on article end #}
-        {% include "zeit.web.core:templates/instantarticle/ads/tile_8.html" ignore missing %}
+        {% include "zeit.web.core:templates/instantarticle/ads/tile_8.html" %}
 
         <!-- Analytics code loaded from an iframe -->
         <figure class="op-tracker">
