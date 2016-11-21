@@ -245,7 +245,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp5=2016-05-23+12%3A14%3A06.113344%2B02%3A00&cp6=&cp7=&cp8=zmlb&'
             'cp9=zeitmz/centerpage&cp10=yes&cp11=&cp12=desktop.site&'
             'cp13=stationaer&cp14=friedbert&cp15=&cp25=original&'
-            'cp26=centerpage.ZMO&cp27=&cp30=open&cp28=registration&'
+            'cp26=centerpage.ZMO&cp27=&cp30=open&cp28=free&'
             'cp23=nicht_angemeldet'.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
