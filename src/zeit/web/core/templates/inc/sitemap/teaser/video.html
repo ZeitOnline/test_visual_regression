@@ -5,7 +5,7 @@
         <video:content_loc>{{ teaser.flv_url }}</video:content_loc>
         <video:title>{{ teaser.title }}</video:title>
         <video:description>{{ teaser.teaserText }}</video:description>
-        <video:publication_date>{{ teaser | mod_date }}</video:publication_date>
+        <video:publication_date>{{ teaser | mod_date | format_date('iso8601') }}</video:publication_date>
         <video:category>{{ teaser.ressort }}</video:category>
         <video:family_friendly>yes</video:family_friendly>
     </video:video>
