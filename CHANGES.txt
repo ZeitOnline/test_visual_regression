@@ -7,6 +7,8 @@ POSTDEPLOY
 3.19 (unreleased)
 -----------------
 
+- ZON-3481: Correct sitemap date format to ISO-8601
+
 - BUG-573: Distinguish caching between external and internal temporary images
 
 - BUG-586: Improve rendering speed of SpektrumFeed
