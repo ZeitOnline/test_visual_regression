@@ -2,19 +2,6 @@
 	color: $zon-dark-grey
 	font-size: remify(14px)
 	line-height: 1.2
-	&--fullwidth
-		padding-top: remify(14px)
-		padding-left: $page-padding
-		+respond-min($break-tablet-min)
-			padding-left: 0
-			color: $white
-			left: remify(32px)
-			padding-top: 0
-			position: absolute
-			top: remify(28px)
-			z-index: 1
-		+respond-min($break-desktop-min)
-			left: remify(36px)
 
 	&__marker
 		+inline-block
@@ -23,12 +10,9 @@
 		letter-spacing: 0.14em
 		margin: remify(0 2px 14px 0)
 		padding-bottom: remify(8px)
-		&--fullwidth
-			margin-bottom: 0
-			+respond-min($break-tablet-min)
-				border-color: $white
 
 	&__name
 		font-family: $font-franziska
 		font-style: italic
 		font-weight: normal
+
