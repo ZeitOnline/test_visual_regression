@@ -328,12 +328,12 @@ class SpektrumFeed(Base):
             )
             image = zeit.web.core.template.get_image(content, fallback=False)
             if image:
-                variant = image.group['super']
                 item.append(E.enclosure(
                     url='{}{}__180x120'.format(
                         self.request.image_host, image.path),
                     length='10240',  # ¯\_(ツ)_/¯
-                    type=variant.mimeType))
+                    type='image/jpeg'))  # ¯\_(ツ)_/¯
+
             channel.append(item)
         return root
 

@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - BUG-573: Distinguish caching between external and internal temporary images
 
+- BUG-586: Improve rendering speed of SpektrumFeed
+
 
 3.18 (2016-11-21)
 -----------------
