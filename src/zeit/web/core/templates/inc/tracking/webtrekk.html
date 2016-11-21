@@ -54,14 +54,22 @@
         {%- endif %}
 
         var ls = document.getElementById('login-state'),
-            ssoId;
+            ssoCp = 'nicht_angemeldet',
+            ssoId, ssoUrl;
 
         if (ls) {
             ssoId = ls.getAttribute('data-sso-id');
+            ssoUrl = ls.getAttribute('data-sso-url');
             if (ssoId) {
                 wt.customerId = ssoId;
+                ssoCp = 'angemeldet';
+                if (ssoUrl) {
+                    ssoCp = ssoCp + '|' + ssoUrl;
+                }
             }
         }
+
+        wt.customParameter[23] = ssoCp;
 
         {% if view is framebuilder -%}
             wt.contentId = "{{ view.webtrekk_identifier }}|" + window.location.hostname + window.location.pathname;
