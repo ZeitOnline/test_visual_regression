@@ -8,8 +8,8 @@
         {{- request.GET.get('content_group') -}}&amp;
         {{- request.GET.get('custom_parameter') -}}&amp;
         {#- Add login parameter -#}
-        cp23={{ request | webtrekk_sso_parameter }}&amp;
+        cp23={{ request | webtrekk_sso_parameter | urlencode }}&amp;
         {#- Add SSO user ID -#}
-        cd={{ request.user.ssoid }}" />
+        cd={{ request.user.ssoid | urlencode }}" />
     </div>
 </noscript>
