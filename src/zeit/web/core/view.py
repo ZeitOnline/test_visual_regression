@@ -373,6 +373,10 @@ class Base(object):
     def supertitle(self):
         return self.context.supertitle
 
+    @zeit.web.reify
+    def subtitle(self):
+        return self.context.subtitle
+
     def _pagetitle(self, suffix):
         try:
             title = zeit.seo.interfaces.ISEO(self.context).html_title
