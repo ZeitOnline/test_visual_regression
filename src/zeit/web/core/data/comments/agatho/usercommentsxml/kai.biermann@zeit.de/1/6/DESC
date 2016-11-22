@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users_comments>
+	<uid>172432</uid>
+	<published_total>14</published_total>
+	<item>
+		<cid>597</cid>
+		<title>[empty]</title>
+		<description>&lt;p&gt;vier&lt;/p&gt;</description>
+		<pubDate>2016-10-05T10:25:43+0000</pubDate>
+		<cms_uniqueId>http://xml.zeit.de/zeit-online/gallery/biga_1</cms_uniqueId>
+	</item>
+	<item>
+		<cid>594</cid>
+		<title>[empty]</title>
+		<description>&lt;p&gt;drei&lt;/p&gt;</description>
+		<pubDate>2016-10-05T10:25:12+0000</pubDate>
+		<cms_uniqueId>http://xml.zeit.de/zeit-online/gallery/biga_1</cms_uniqueId>
+	</item>
+	<item>
+		<cid>592</cid>
+		<title>[empty]</title>
+		<description>&lt;p&gt;zwei&lt;/p&gt;</description>
+		<pubDate>2016-10-05T10:14:10+0000</pubDate>
+		<cms_uniqueId>http://xml.zeit.de/zeit-online/gallery/biga_1</cms_uniqueId>
+	</item>
+	<item>
+		<cid>589</cid>
+		<title>[empty]</title>
+		<description>&lt;p&gt;eins&lt;/p&gt;</description>
+		<pubDate>2016-10-05T10:13:29+0000</pubDate>
+		<cms_uniqueId>http://xml.zeit.de/zeit-online/gallery/biga_1</cms_uniqueId>
+	</item>
+	<item>
+		<cid>586</cid>
+		<title>[empty]</title>
+		<description>&lt;p&gt;00&lt;/p&gt;</description>
+		<pubDate>2016-09-27T12:38:34+0000</pubDate>
+		<cms_uniqueId>http://xml.zeit.de/zeit-online/gallery/biga_1</cms_uniqueId>
+	</item>
+	<item>
+		<cid>473</cid>
+		<title>[empty]</title>
+		<description>&lt;p&gt;yes&lt;/p&gt;</description>
+		<pubDate>2016-09-23T12:15:18+0000</pubDate>
+		<cms_uniqueId>http://xml.zeit.de/campus/article/authorbox</cms_uniqueId>
+	</item>
+</users_comments>
