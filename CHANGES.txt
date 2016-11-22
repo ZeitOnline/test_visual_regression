@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - ZON-3478: Polish Archivepage
 
+- OPS-425: Add code style linting to ZMO scripts
+
 3.19 (2016-11-21)
 -----------------
 
