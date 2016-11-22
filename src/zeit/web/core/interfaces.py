@@ -242,7 +242,7 @@ class IPagination(zope.interface.Interface):
         'The actual page being displayed.')
     current_page = zope.interface.Attribute(
         'Same as page. Kept for hysterical raisins.')
-    total_page = zope.interface.Attribute(
+    total_pages = zope.interface.Attribute(
         'Number of pages available.')
     pagination = zope.interface.Attribute('A list of page numbers.')
     pagination_info = zope.interface.Attribute(
