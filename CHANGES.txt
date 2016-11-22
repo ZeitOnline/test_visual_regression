@@ -9,6 +9,7 @@ POSTDEPLOY
 
 - FIX: Fix margin of blog marker on fullwidth teaser
 
+- ZON-3478: Polish Archivepage
 
 3.19 (2016-11-21)
 -----------------
