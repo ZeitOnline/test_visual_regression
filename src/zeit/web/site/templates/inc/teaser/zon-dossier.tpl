@@ -4,7 +4,7 @@
 
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
-    {% include "zeit.web.site:templates/inc/asset/image_zon-dossier.tpl" ignore missing %}
+    {% include "zeit.web.site:templates/inc/asset/image_zon-dossier.tpl" %}
     <div class="teaser-dossier__marker">Dossier</div>
 {% endblock %}
 

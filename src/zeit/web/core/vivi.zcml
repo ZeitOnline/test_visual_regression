@@ -52,10 +52,11 @@
     <grok:grok package="zeit.retresco.convert" />
     <include package="zeit.intrafind" />
 
-    <!-- XXX Something about including the whole zeit.solr package is slow,
-         and since we don't need it, we gain ~2s startup performance here -->
+    <!-- We only want the solr connection, but not IUpdater etc, since that
+         would only slow tests down that use the `workingcopy` fixture. -->
     <!-- <include package="zeit.solr" /> -->
     <utility factory="zeit.solr.connection.solr_connection_factory" />
+
     <include package="zeit.seo" />
     <include package="zeit.wysiwyg" />
     <include package="zeit.brightcove" />

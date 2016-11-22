@@ -388,7 +388,7 @@ def test_cp_area_pagination_provides_expected_webtrekk_string(
     driver.get('%s/thema/berlin#debug-clicktracking' % testserver.url)
 
     try:
-        WebDriverWait(driver, 3).until(
+        WebDriverWait(driver, 5).until(
             expected_conditions.presence_of_element_located(
                 (By.CSS_SELECTOR, '.pager--ranking a')))
     except TimeoutException:

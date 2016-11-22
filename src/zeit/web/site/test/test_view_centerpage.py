@@ -2480,6 +2480,8 @@ def test_volume_overview_has_adapted_centerpage_header(
         '.centerpage-header--archive')
     text = driver.find_element_by_css_selector(
         '.centerpage-header__text')
+    title = driver.find_element_by_css_selector(
+        '.centerpage-header__title')
     dropdown = driver.find_element_by_css_selector(
         '.centerpage-header__dropdown')
     link = driver.find_element_by_css_selector(
@@ -2487,9 +2489,10 @@ def test_volume_overview_has_adapted_centerpage_header(
     dropdown.find_element_by_xpath("//option[text()='1947']").click()
 
     assert header.is_displayed()
-    assert text.is_displayed()
     assert dropdown.is_displayed()
     assert link.is_displayed()
+    assert 'DIE ZEIT aus dem Jahr 2016' in text.text
+    assert 'Jahrgang 2016' in title.text
     assert '1947/index' in link.get_attribute('href')
 
 
