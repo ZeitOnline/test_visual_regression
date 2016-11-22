@@ -672,7 +672,7 @@ def test_article02_should_have_esi_include(testbrowser):
 @pytest.mark.parametrize(
     'path, selector', [
         ('/zeit-magazin/article/03', '.figure-stamp .figure__copyright'),
-        ('/zeit-magazin/article/05', '.figure-longform .figure__copyright'),
+        ('/zeit-magazin/article/05', '.longform-header__copyright'),
         ('/zeit-magazin/article/header-default', '.article__head__copyright')])
 def test_article_has_linked_copyright(testbrowser, path, selector):
     browser = testbrowser(path)

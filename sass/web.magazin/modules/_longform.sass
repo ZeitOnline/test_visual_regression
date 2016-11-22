@@ -8,6 +8,9 @@ $longform-header-offset: 50px
 $longform-header-min-height: 400px
 $longform-header-max-height: 1400px
 
+.longform-header__media
+  height: 100%
+
 .article--longform
   max-width: none
 
@@ -81,14 +84,6 @@ $longform-header-max-height: 1400px
       height: em(1350px) - em($longform-header-offset)
     +respond-min-h(em(1400px))
       height: em(1400px) - em($longform-header-offset)
-
-  .article__head-image
-    height: 100%
-    figure, img
-      min-width: 100%
-      min-height: 100%
-      max-width: none
-      max-height: none
 
   .article__main-video--longform
     overflow: hidden
