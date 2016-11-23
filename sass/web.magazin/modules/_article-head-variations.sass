@@ -21,9 +21,9 @@
 
 	.article__head__subtitle
 		@extend %headline
-		@extend %font-xl-xxl
+		@extend %article-title
+		margin: 0 auto $compact
 		text-align: center
-		margin-bottom: $compact
 		&:before
 			content: "—"
 			display: block
@@ -47,8 +47,7 @@
 
 	.article__head__subtitle
 		@extend %headline
-		@extend %font-xl-xxl
-		margin-bottom: $small
+		@extend %article-title
 
 // –––––––––––––––––––––––
 //    LEINWAND HEADER
@@ -57,6 +56,10 @@
 .article__head--leinwand
 	max-width: none
 	margin-top: 0
+	.article__head__headline
+		margin-top: remify(36px)
+		+respond-min($break-2)
+			margin-top: remify(90px)
 	.article__head__media
 		margin-left: -$page-padding--small
 		margin-right: -$page-padding--small
@@ -99,7 +102,7 @@
 			margin: remify(56px 0 0)
 			max-width: $medium-content-width / 2
 			width: 42%
-		.article__head__text
+		.article__head__media + div .article__head__text
 			float: right
 			width: 50%
 
@@ -113,8 +116,7 @@
 
 	.article__head__byline
 		@extend %headline
-		@extend %font-xl-xxl
-		margin-bottom: remify($huge)
+		@extend %article-title
 		&:before
 			content: "—"
 			display: block
@@ -123,4 +125,3 @@
 
 	.article__head__media
 		max-width: remify(300px)
-		margin-bottom: remify($huge)
