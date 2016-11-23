@@ -636,6 +636,14 @@ def join_if_exists(iterable, string=''):
     return string.join([item for item in iterable if item])
 
 
+@zeit.web.register_filter
+def webtrekk_sso_parameter(request):
+    if request.user and request.user.get('ssoid'):
+        info = ['angemeldet', request.user.get('entry_url')]
+        return '|'.join([item for item in info if item])
+    return 'nicht_angemeldet'
+
+
 @zeit.web.register_global
 def provides(obj, iface):
     try:
