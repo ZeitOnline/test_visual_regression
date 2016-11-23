@@ -661,7 +661,7 @@ class Base(object):
         ])
 
         if zeit.web.core.template.toggles('access_status_webtrekk'):
-            access = getattr(self.context, 'access', None)
+            access = getattr(self.context, 'access', '')
             custom_parameter.update({'cp28': access})
 
         return {
