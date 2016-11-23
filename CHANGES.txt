@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - FIX: Be defensive about missing values in agatho response
 
+- BUG-581: Require author image for buzzboard column
+
 
 3.19 (2016-11-21)
 -----------------
