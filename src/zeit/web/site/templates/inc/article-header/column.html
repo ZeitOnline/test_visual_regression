@@ -29,9 +29,11 @@
                         </div>
                     {% endif %}
                 </div>
+                {% require image = get_image(view.context, name='author', fallback=False) -%}
                 <div class="column-heading__author">
                     {% include "zeit.web.site:templates/inc/article/column_author_image.tpl" %}
                 </div>
+                {% endrequire %}
             </div>
         </div>
     </div>

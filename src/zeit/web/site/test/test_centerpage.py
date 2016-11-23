@@ -97,6 +97,17 @@ def test_buzzboard_renders_column_teaser(testbrowser):
         '.teaser-buzzboard__media-container--column')) == 1
 
 
+def test_buzzboard_renders_column_teaser_without_authorimage(testbrowser):
+    browser = testbrowser('/zeit-online/buzz-box')
+    url = 'http://xml.zeit.de/zeit-online/cp-content/kolumne-ohne-autorenbild'
+    article = browser.cssselect(
+        'article.teaser-buzzboard[data-unique-id="{}"]'.format(url))[0]
+    assert article.cssselect('.teaser-buzzboard__media')
+    assert not article.cssselect('.teaser-buzzboard__media--column')
+    assert article.cssselect('.teaser-buzzboard__media-container')
+    assert not article.cssselect('.teaser-buzzboard__media-container--column')
+
+
 def test_buzzboard_should_avoid_same_teaser_image_twice(
         testbrowser, monkeypatch):
 
