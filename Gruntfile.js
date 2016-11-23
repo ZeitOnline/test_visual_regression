@@ -216,8 +216,6 @@ module.exports = function(grunt) {
             options: {
                 config: project.sourceDir + '.jscsrc',
                 excludeFiles: [
-                    // omit zeit.web.magazin plugins for the moment
-                    project.sourceDir + 'javascript/web.magazin/**/*.js',
                     project.sourceDir + 'javascript/libs/**/*',
                     project.sourceDir + 'javascript/vendor/**/*'
                 ]

@@ -28,14 +28,17 @@
 	+respond-min($break-3)
 		font-size: $font-ml
 
-.article__head__title
-	@extend %headline
-	display: block
+%article-title
 	font-size: $font-xl
 	margin-bottom: $compact
 	+respond-min($break-2)
 		font-size: $font-xxl
 		margin-bottom: $big
+
+.article__head__title
+	@extend %headline
+	@extend %article-title
+	display: block
 
 .article__head__subtitle
 	+body-type-zoom
@@ -48,7 +51,7 @@
 	+respond-min($break-1)
 		margin-bottom: $large
 	+respond-min($break-2)
-		margin-bottom: $wide
+		margin-bottom: $huge
 	&:hover
 		.article__head__caption
 			opacity: 1

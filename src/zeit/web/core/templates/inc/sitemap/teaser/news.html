@@ -2,13 +2,13 @@
 {%- set keywords_extra = [teaser.ressort, teaser.sub_ressort] -%}
 <url>
     <loc>{{ teaser.uniqueId | create_url }}</loc>
-    <lastmod>{{ teaser | mod_date }}</lastmod>
     <n:news>
         <n:publication>
             <n:name>ZEIT ONLINE</n:name>
             <n:language>de</n:language>
         </n:publication>
         <n:title>{{ teaser.supertitle }}: {{ teaser.title }}</n:title>
+        <n:publication_date>{{ teaser | mod_date | format_date('iso8601') }}</n:publication_date>
         <n:keywords>
             {%- for keyword in keywords | list + keywords_extra | list -%}
                 {%- if loop.index > 1 -%}{{ ', ' }}{%- endif -%}{{ keyword | trim }}

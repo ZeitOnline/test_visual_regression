@@ -13,11 +13,11 @@ define([ 'jquery' ], function( $ ) {
      * @function init
      */
     var init = function() {
-        var $cluster = $('.js-photocluster');
+        var $cluster = $( '.js-photocluster' );
 
-        if ($cluster.length) {
-            var $photos = $cluster.children();
-            var noGlobal = ( window.jQuery !== $ );
+        if ( $cluster.length ) {
+            var $photos = $cluster.children(),
+                noGlobal = ( window.jQuery !== $ );
 
             // hack for old library freewall.js
             // make sure that jQuery is in the global scope
@@ -36,7 +36,7 @@ define([ 'jquery' ], function( $ ) {
                     $.noConflict( true );
                 }
 
-                var wall = new freewall('.js-photocluster');
+                var wall = new freewall( '.js-photocluster' );
                 wall.reset({
                     selector: '.photocluster__media',
                     animate: true,
