@@ -741,6 +741,7 @@ class CeleraOneMixin(object):
     def __call__(self):
         resp = super(CeleraOneMixin, self).__call__()
         self.request.response.headers.update(self.c1_header)
+        self.set_c1_meter_response_headers()
         return resp
 
     @zeit.web.reify
@@ -816,6 +817,20 @@ class CeleraOneMixin(object):
             'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
             'C1-Track-Service-ID': 'zon'
         }.items() if v is not None]
+
+    def set_c1_meter_response_headers(self):
+
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        if conf.get('environment') == 'production':
+            return
+
+        request = self.request
+
+        for req_header_name in request.headers:
+            if req_header_name.startswith('C1-Meter-'):
+                res_header_name = 'X-Debug-{}'.format(req_header_name)
+                res_header_value = request.headers.get(req_header_name, '')
+                request.response.headers[res_header_name] = res_header_value
 
 
 class CommentMixin(object):

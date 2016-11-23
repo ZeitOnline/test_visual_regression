@@ -25,6 +25,8 @@ POSTDEPLOY
 
 - BUG-590: Remove webtrekk custom parameter for `login` from cached HTML
 
+- MAINT: Return C1 headers as debug information
+
 
 3.19 (2016-11-21)
 -----------------
