@@ -15,6 +15,9 @@ POSTDEPLOY
 
 - BUG-577: Provide spacing for ZMO article header with expired images
 
+- FIX: Be defensive about missing values in agatho response
+
+
 3.19 (2016-11-21)
 -----------------
 
