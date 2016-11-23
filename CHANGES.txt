@@ -27,6 +27,7 @@ POSTDEPLOY
 
 - MAINT: Return C1 headers as debug information
 
+- BUG-591: Report access right to webtrekk literally
 
 3.19 (2016-11-21)
 -----------------
