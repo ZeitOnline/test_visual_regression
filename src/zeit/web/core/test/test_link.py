@@ -28,7 +28,7 @@ def test_link_object_teaser_should_point_directly_to_destination(testbrowser):
     browser = testbrowser('/zeit-online/link-object')
     href = ('http://blog.zeit.de/nsu-prozess-blog/2015/02/25/'
             'medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/')
-    assert browser.cssselect('.teaser-fullwidth--blog a[href="%s"]' % href)
+    assert browser.cssselect('.teaser-fullwidth a[href="%s"]' % href)
 
 
 def test_create_url_filter_should_create_correct_url(application):

@@ -388,7 +388,7 @@ def test_cp_area_pagination_provides_expected_webtrekk_string(
     driver.get('%s/thema/berlin#debug-clicktracking' % testserver.url)
 
     try:
-        WebDriverWait(driver, 3).until(
+        WebDriverWait(driver, 5).until(
             expected_conditions.presence_of_element_located(
                 (By.CSS_SELECTOR, '.pager--ranking a')))
     except TimeoutException:
@@ -557,6 +557,43 @@ def test_volume_teaser_provides_expected_webtrekk_string(
         'tablet.volumeteaser.2/seite-1...dieser_artikel_stammt_aus_der_zeit_'
         'nr_01_2016_lesen_sie_diese_ausgabe_als_e_paper_app_und_auf_dem_e_'
         'reader|premium.zeit.de/diezeit/2016/01')
+
+
+def test_volume_overview_teaser_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(800, 600)
+    driver.get('%s/2016/index#debug-clicktracking'
+               % testserver.url)
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.volume-overview-teaser__wrapper')))
+    except TimeoutException:
+        assert False, 'volume-overview-teaser must be present'
+
+    links = driver.find_elements_by_css_selector(
+        '.volume-overview-teaser__wrapper')
+    assert len(links) == 7
+
+    links[0].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'tablet.volume-overview-teaser..1.49_2014|')
+    assert tracking_data.endswith('/2014/49/index')
+
+    links[1].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'tablet.volume-overview-teaser..2.52_2015|')
+    assert tracking_data.endswith('/2015/52/index')
+
+    links[2].click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'tablet.volume-overview-teaser..3.01_2016|')
+    assert tracking_data.endswith('/2016/01/index')
 
 
 def test_volume_teaser_in_article_provides_expected_webtrekk_string(

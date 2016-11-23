@@ -2155,7 +2155,7 @@ def test_ranking_area_should_be_found_regardless_of_kind(
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     cp.body.values()[1].values()[0].kind = 'author-list'
     view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
-    assert view.area_ranking
+    assert view.area_providing_pagination
 
 
 def test_no_author_should_not_display_byline(testbrowser, workingcopy):
@@ -2474,6 +2474,43 @@ def test_volume_centerpage_has_volume_header(testbrowser):
     assert len(volume_header) == 1
     assert 'Ausgabe Nr. 01/2016' in caption[0].text.strip()
     assert len(teaser) == 3
+
+
+def test_volume_overview_has_adapted_centerpage_header(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/2016/index' % testserver.url)
+    header = driver.find_element_by_css_selector(
+        '.centerpage-header--archive')
+    text = driver.find_element_by_css_selector(
+        '.centerpage-header__text')
+    title = driver.find_element_by_css_selector(
+        '.centerpage-header__title')
+    dropdown = driver.find_element_by_css_selector(
+        '.centerpage-header__dropdown')
+    link = driver.find_element_by_css_selector(
+        '.centerpage-header__link')
+    dropdown.find_element_by_xpath("//option[text()='1947']").click()
+
+    assert header.is_displayed()
+    assert dropdown.is_displayed()
+    assert link.is_displayed()
+    assert 'DIE ZEIT aus dem Jahr 2016' in text.text
+    assert 'Jahrgang 2016' in title.text
+    assert '1947/index' in link.get_attribute('href')
+
+
+def test_volume_overview_teasers_render_expected_markup(testbrowser):
+    browser = testbrowser('/2016/index')
+    teasers = browser.cssselect('.cp-area--volume-overview >'
+                                ' .volume-overview-teaser a')
+    assert len(teasers) == 7
+    for teaser in teasers:
+        caption = teaser.cssselect('.volume-overview-teaser__caption')[0]
+        assert caption.find('span')[0].text + \
+            caption.find('span')[2].text == 'Jetzt lesen'
+        assert 'volume-overview-teaser__media' in \
+               teaser.cssselect('figure')[0].get('class')
 
 
 def test_zplus_teaser_has_zplus_badge(testbrowser):

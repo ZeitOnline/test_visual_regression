@@ -1,24 +1,12 @@
 {% extends "zeit.web.site:templates/content.html" %}
-{% block content_ad_script -%}{%- endblock %}
 
 {% block article_pages %}
-    <section class="article-page" data-page-number="{{ view.current_page.number + 1 }}">
-        {%- set page = view.current_page -%}
-        {%- set block = (page | select('paragraph') | first) -%}
-        {%- set type = 'paragraph' -%}
-        {% include "zeit.web.core:templates/inc/article/paywall/paragraph.html" %}
-        {% block paywall_form %}
-            {% include "zeit.web.core:templates/inc/article/paywall/form_{0}.html".format(view.paywall) %}
-        {% endblock %}
-    </section>
+    {% include "zeit.web.core:templates/inc/article/paywall/page.html" %}
 {% endblock article_pages %}
 
-{% block article_pagination %}{% endblock article_pagination %}
-{% block article_storystreamteaser_teaser %}{% endblock article_storystreamteaser_teaser %}
-{% block article_storystreamteaser %}{% endblock %}
-{% block veeseo_div %}{% endblock %}
-{% block print %}{% endblock %}
-{% block comments %}{% endblock %}
-{% block article_footer %}{% endblock %}
 {% block lineage %}{% endblock %}
+{% block article_footer %}{% endblock %}
 {% block nextread %}{% endblock %}
+{% block nextread_ad %}{% endblock %}
+{% block article_google_ad %}{% endblock %}
+{% block comments %}{% endblock %}

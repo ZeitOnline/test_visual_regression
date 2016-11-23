@@ -47,7 +47,7 @@ def test_gsitemap_page_with_image_copyright(testbrowser):
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/campus/article/01-countdown-studium')
     assert (browser.document.xpath('//url/lastmod')[0].text ==
-            '2016-02-18 13:50:52.380804+01:00')
+            '2016-02-18T13:50:52+01:00')
     xml = lxml.etree.fromstring(browser.contents)
     ns = 'http://www.google.com/schemas/sitemap-image/1.1'
     assert xml.xpath('//image:image', namespaces={'image': ns})[0] is not None
@@ -106,8 +106,6 @@ def test_gsitemap_newssite(testbrowser):
     browser = testbrowser('/gsitemaps/newsitemap.xml')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/zeit-magazin/article/autorenbox')
-    assert (browser.document.xpath('//url/lastmod')[0].text ==
-            '2014-04-29 13:00:55.287082+02:00')
     xml = lxml.etree.fromstring(browser.contents)
     ns = {'image': 'http://www.google.com/schemas/sitemap-image/1.1',
           'n': 'http://www.google.com/schemas/sitemap-news/0.9'}
@@ -120,6 +118,10 @@ def test_gsitemap_newssite(testbrowser):
         xml.xpath(
             '//n:news/n:publication/n:language', namespaces=ns)[0].text ==
         'de')
+    assert (
+        xml.xpath(
+            '//n:news/n:publication_date',
+            namespaces=ns)[0].text == '2014-04-29T13:00:55+02:00')
     assert (
         xml.xpath('//n:news/n:title', namespaces=ns)[0].text ==
         'Big Data: Schwanger ohne digitale Spuren')
@@ -174,7 +176,7 @@ def test_gsitemap_video(testbrowser):
         'illuminieren den Himmel in atemberaubenden Farben.')
     assert (
         xml.xpath('//video:publication_date', namespaces=ns)[0].text.strip() ==
-        '2012-11-08 11:37:55+01:00')
+        '2012-11-08T11:37:55+01:00')
     assert (
         xml.xpath('//video:category', namespaces=ns)[0].text.strip() ==
         'Wissen')

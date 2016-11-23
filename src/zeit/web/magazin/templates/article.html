@@ -1,1 +1,30 @@
 {% extends "zeit.web.magazin:templates/content.html" %}
+
+{% block content_ad_script -%}
+{% if view.advertising_enabled %}
+<script type="text/javascript">
+    (function() {
+        var s = document.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = document.location.protocol + '//cdn.iqcontentplatform.de/iq.js';
+        var sc = document.getElementsByTagName('script')[0]; sc.parentNode.insertBefore(s, sc);
+    })();
+</script>
+{% endif %}
+{%- endblock %}
+
+{% block comments_balloon %}
+    {%- include "zeit.web.magazin:templates/inc/article/comment-balloon.html" -%}
+{% endblock comments_balloon %}
+
+{% block article_pages %}
+    <div class="article__page">
+        {% set page = view.current_page %}
+        {% include "zeit.web.magazin:templates/inc/article/page.html" %}
+    </div>
+{% endblock article_pages %}
+
+{% block article_pagination %}
+    {% include "zeit.web.magazin:templates/inc/article/pagination.html" %}
+{% endblock article_pagination %}

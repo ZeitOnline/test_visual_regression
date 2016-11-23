@@ -4,7 +4,7 @@
 
 window.rawrConfig = {
 {% if provides(view.context, 'zeit.cms.content.interfaces.ICommonMetadata') %}
-    locationMetaData: {
+    'locationMetaData': {
         'article_id': '{{ view.content_path }}',
         'published': '{{ view.date_last_modified | format_date('iso8601') }}',
         'description': '{{ view.title | replace("\'", "\\\'") | safe }}',
@@ -18,7 +18,13 @@ window.rawrConfig = {
         'meta': {
             'description': '{{ view.title | replace("\'", "\\\'") | safe }}'
         }
-    }
+    },
 {% endif %}
+
+    'authProviders': {
+        'sso': true,
+        'email': false,
+        'oauth': false
+    }
 };
 </script>

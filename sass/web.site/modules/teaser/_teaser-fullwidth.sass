@@ -27,13 +27,17 @@
 		padding: $vertical-space $page-padding 0
 		+respond-min($break-tablet-min)
 			bottom: 0
+			display: flex
+			flex-direction: column
+			justify-content: flex-end
 			left: 0
-			padding: 0 0 em(32px) em(32px)
+			padding: remify(28px 0 32px 32px)
 			position: absolute
+			top: 0
 			width: 72%
 		+respond-min($break-desktop-min)
 			width: 66.66%
-			padding: 0 em(10px) em(36px) em(36px)
+			padding: remify(28px 10px 36px 36px)
 	&__heading
 		@extend %teaser-heading
 		+respond-min($break-tablet-min)
@@ -43,6 +47,13 @@
 		@extend %teaser-series-label
 		+respond-min($break-tablet-min)
 			color: $white
+
+	+respond-min($break-tablet-min)
+		.blog-format
+			color: $white
+			margin-bottom: auto // needed for flex item alignment
+		.blog-format__marker
+			border-bottom-color: $white
 
 	&__kicker
 		@extend %teaser-kicker

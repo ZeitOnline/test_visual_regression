@@ -199,8 +199,7 @@ def test_article_request_should_have_html5_doctype(testbrowser):
 def test_article05_should_have_header_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/05')
     assert browser.cssselect('.article__head-wrap')
-    assert browser.cssselect('.article__head-image')
-    assert browser.cssselect('.figure-longform.is-pixelperfect.scaled-image')
+    assert browser.cssselect('.longform-header__media.is-pixelperfect')
 
 
 def test_column_should_have_header_image(testbrowser):
@@ -699,16 +698,18 @@ def test_navigation_should_show_logged_in_user_correctly(
     assert links[2].attrib['href'] == '/logout'
 
 
-def test_navigation_should_handle_logged_out_user_correctly(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/inc/navigation/login-state.html')
+def test_navigation_should_handle_logged_out_user_correctly(
+        tplbrowser, dummy_request):
 
     info = {'login': '/login',
             'logout': '/logout',
             'user': None}
 
-    css = lxml.html.fromstring(tpl.render(**info)).cssselect
-    assert css('a')[0].attrib['href'] == '/login'
+    browser = tplbrowser(
+        'zeit.web.magazin:templates/inc/navigation/login-state.html',
+        request=dummy_request, **info)
+
+    assert browser.cssselect('a')[0].attrib['href'] == '/login'
 
 
 def test_schema_org_publisher_mark_up(testbrowser):

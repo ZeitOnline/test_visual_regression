@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-from selenium.common.exceptions import TimeoutException
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC  # NOQA
-from selenium.webdriver.support.ui import WebDriverWait
 import mock
 import pytest
 import requests
@@ -120,27 +116,9 @@ def test_video_page_should_embed_sharing_menu(testbrowser):
     assert len(browser.cssselect('.sharing-menu a.sharing-menu__link')) > 0
 
 
-def test_video_page_video_iframe_should_exist(testserver, testbrowser):
+def test_video_page_video_player_should_exist(testserver, testbrowser):
     browser = testbrowser('/zeit-online/video/3537342483001')
-    assert len(browser.cssselect('.video-player__iframe')) > 0
-
-
-def test_video_page_video_should_exist(selenium_driver, testserver):
-
-    driver = selenium_driver
-    driver.get('{}/zeit-online/video/3537342483001'.format(testserver.url))
-
-    iframe = driver.find_element_by_css_selector(
-        '.video-player__iframe')
-    driver.switch_to.frame(iframe)
-
-    try:
-        player = WebDriverWait(driver, 20).until(
-            EC.presence_of_element_located(
-                (By.CSS_SELECTOR, '.video-js')))
-        assert player
-    except TimeoutException:
-        assert False, 'Video not visible within 20 seconds'
+    assert len(browser.cssselect('.video-player video')) == 1
 
 
 def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
