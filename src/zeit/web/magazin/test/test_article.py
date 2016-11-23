@@ -150,6 +150,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '15: ""' in webtrekk_config
     assert '25: "original"' in webtrekk_config
     assert '26: "article.column"' in webtrekk_config
+    assert '28: "free"' in webtrekk_config
     assert '30: "open"' in webtrekk_config
 
     # noscript string
@@ -234,6 +235,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '25: "original",' in webtrekk_config
     assert '26: "centerpage.ZMO",' in webtrekk_config
     assert '27: ""' in webtrekk_config
+    assert '28: "free"' in webtrekk_config
     assert '30: "open"' in webtrekk_config
 
     assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
