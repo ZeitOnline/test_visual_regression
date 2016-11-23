@@ -7,13 +7,7 @@
 {% block teaser_media_position_before_title %}
     {% if row == 0 %}
         {% set module_layout = self.layout() %}
-        {% set media_caption_additional_class = 'figcaption--hidden' %}
-        {% set href = teaser.uniqueId | create_url %}
-        {% if teaser is column %}
-            {% include "zeit.web.site:templates/inc/asset/image_buzzboard-column.tpl" %}
-        {% else %}
-            {% include "zeit.web.site:templates/inc/asset/image_buzzboard.tpl" %}
-        {% endif %}
+        {% include "zeit.web.site:templates/inc/asset/image_buzzboard.tpl" %}
     {% endif %}
 {% endblock %}
 

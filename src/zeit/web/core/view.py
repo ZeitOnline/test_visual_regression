@@ -171,6 +171,10 @@ class Base(object):
     def type(self):
         return type(self.context).__name__.lower()
 
+    @zeit.web.reify
+    def tracking_type(self):
+        return self.type
+
     # XXX Base View should not depend on ICommonMetadata
     # Throws an error if resssort, sub_ressort, cap_title ... is None
     @zeit.web.reify
@@ -371,6 +375,10 @@ class Base(object):
     @zeit.web.reify
     def supertitle(self):
         return self.context.supertitle
+
+    @zeit.web.reify
+    def subtitle(self):
+        return self.context.subtitle
 
     def _pagetitle(self, suffix):
         try:

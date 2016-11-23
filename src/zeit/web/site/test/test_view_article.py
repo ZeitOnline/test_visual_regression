@@ -652,12 +652,10 @@ def test_article_should_not_break_without_author(
         '.column-heading__author .column-heading__media-item')
 
 
-def test_article_for_column_without_authorimage_should_be_rendered_default(
-        testbrowser):
+def test_article_column_without_authorimage_should_be_same(testbrowser):
     browser = testbrowser('/zeit-online/cp-content/kolumne-ohne-autorenbild')
-
-    assert len(browser.cssselect('.article--columnarticle')) == 0
-    assert len(browser.cssselect('.column-heading')) == 0
+    assert len(browser.cssselect('.article--columnarticle')) == 1
+    assert len(browser.cssselect('.column-heading')) == 1
 
 
 def test_article_column_should_be_identifiable_by_suitable_css_class(

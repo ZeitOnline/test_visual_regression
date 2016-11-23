@@ -12,7 +12,78 @@ import zeit.web.core.view
 import zeit.web.core.utils
 
 
-class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
+class AreaProvidingPaginationMixin(object):
+
+    @zeit.web.reify
+    def canonical_url(self):
+        area = self.area_providing_pagination
+        url = super(AreaProvidingPaginationMixin, self).canonical_url
+
+        if area and area.current_page == 1:
+            remove_param = area.page_info(1)['remove_get_param']
+            return zeit.web.core.utils.remove_get_params(
+                url, remove_param)
+
+        if area and area.current_page > 1:
+            get_param = area.page_info(
+                area.current_page)['append_get_param']
+            return zeit.web.core.utils.add_get_params(url, **get_param)
+
+        return url
+
+    @zeit.web.reify
+    def next_page_url(self):
+        area = self.area_providing_pagination
+
+        if area and area.current_page < area.total_pages:
+            get_param = area.page_info(
+                area.current_page + 1)['append_get_param']
+            return zeit.web.core.utils.add_get_params(
+                self.request.url, **get_param)
+
+    @zeit.web.reify
+    def prev_page_url(self):
+        area = self.area_providing_pagination
+
+        # suppress page param for page 1
+        if area and area.current_page == 2:
+            remove_param = area.page_info(
+                area.current_page)['remove_get_param']
+            return zeit.web.core.utils.remove_get_params(
+                self.request.url, remove_param)
+        elif area and area.current_page > 2:
+            get_param = area.page_info(
+                area.current_page - 1)['append_get_param']
+            return zeit.web.core.utils.add_get_params(
+                self.request.url, **get_param)
+
+    @zeit.web.reify
+    def meta_robots(self):
+        area = self.area_providing_pagination
+        # Prevent continuation pages from being indexed
+        if area and area.current_page > 1:
+            return 'noindex,follow,noodp,noydir,noarchive'
+        return super(AreaProvidingPaginationMixin, self).meta_robots
+
+    @zeit.web.reify
+    def pagination(self):
+        if self.area_providing_pagination is None:
+            return {}
+        # Return as many of the same keys in
+        # z.w.core.view_article.Article.pagination as make sense here. (Only
+        # used by z.w.core.view.Base.webtrekk at the moment.)
+        return {
+            'current': self.area_providing_pagination.current_page,
+            'total': self.area_providing_pagination.total_pages,
+            'pager': self.area_providing_pagination.pagination,
+            'content_url': self.content_url,
+            'next_page_url': self.next_page_url,
+            'prev_page_url': self.prev_page_url,
+        }
+
+
+class Centerpage(AreaProvidingPaginationMixin,
+                 zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
     def volume(self):
@@ -120,24 +191,7 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
         return breadcrumbs
 
     @zeit.web.reify
-    def canonical_url(self):
-        ranking = self.area_ranking
-        url = super(Centerpage, self).canonical_url
-
-        if ranking and ranking.current_page == 1:
-            remove_param = ranking.page_info(1)['remove_get_param']
-            return zeit.web.core.utils.remove_get_params(
-                url, remove_param)
-
-        if ranking and ranking.current_page > 1:
-            get_param = ranking.page_info(
-                ranking.current_page)['append_get_param']
-            return zeit.web.core.utils.add_get_params(url, **get_param)
-
-        return url
-
-    @zeit.web.reify
-    def area_ranking(self):
+    def area_providing_pagination(self):
         for region in self.regions:
             for area in region.values():
                 if zeit.web.core.interfaces.IPagination.providedBy(area):
@@ -146,12 +200,13 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
     def webtrekk_content_id(self):
+        area = self.area_providing_pagination
         # special case for search results
-        if self.area_ranking and self.area_ranking.query_string:
+        if area and area.query_string:
             content_url = self.content_url.replace('http://', '')
             if content_url.endswith('/index'):
                 content_url = content_url[:-len('/index')]
-            if self.area_ranking.hits:
+            if area.hits:
                 basename = 'treffer'
             else:
                 basename = 'keine_treffer'
@@ -160,34 +215,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
             return '{}|{}'.format(self.webtrekk_identifier, content_url)
         else:
             return super(Centerpage, self).webtrekk_content_id
-
-    @zeit.web.reify
-    def next_page_url(self):
-        ranking = self.area_ranking
-        if ranking is None:
-            return None
-        if ranking.current_page < ranking.total_pages:
-            get_param = ranking.page_info(
-                ranking.current_page + 1)['append_get_param']
-            return zeit.web.core.utils.add_get_params(
-                self.request.url, **get_param)
-
-    @zeit.web.reify
-    def prev_page_url(self):
-        ranking = self.area_ranking
-        if ranking is None:
-            return None
-        # suppress page param for page 1
-        if ranking.current_page == 2:
-            remove_param = ranking.page_info(
-                ranking.current_page)['remove_get_param']
-            return zeit.web.core.utils.remove_get_params(
-                self.request.url, remove_param)
-        elif ranking.current_page > 2:
-            get_param = ranking.page_info(
-                ranking.current_page - 1)['append_get_param']
-            return zeit.web.core.utils.add_get_params(
-                self.request.url, **get_param)
 
     @zeit.web.reify
     def is_hp(self):
@@ -199,34 +226,6 @@ class Centerpage(zeit.web.core.view.CeleraOneMixin, zeit.web.core.view.Base):
             return self.regions[0].values()[0].kind == 'solo'
         except (AttributeError, IndexError):
             return False
-
-    @zeit.web.reify
-    def meta_robots(self):
-        ranking = self.area_ranking
-        # Prevent continuation pages from being indexed
-        if ranking is not None and ranking.current_page > 1:
-            return 'noindex,follow,noodp,noydir,noarchive'
-        return super(Centerpage, self).meta_robots
-
-    @zeit.web.reify
-    def tracking_type(self):
-        return type(self.context).__name__.title()
-
-    @zeit.web.reify
-    def pagination(self):
-        if self.area_ranking is None:
-            return {}
-        # Return as many of the same keys in
-        # z.w.core.view_article.Article.pagination as make sense here. (Only
-        # used by z.w.core.view.Base.webtrekk at the moment.)
-        return {
-            'current': self.area_ranking.current_page,
-            'total': self.area_ranking.total_pages,
-            'pager': self.area_ranking._pagination,
-            'content_url': self.content_url,
-            'next_page_url': self.next_page_url,
-            'prev_page_url': self.prev_page_url,
-        }
 
     @zeit.web.reify
     def comment_counts(self):
@@ -254,7 +253,7 @@ class CenterpagePage(object):
 
     @zeit.web.reify
     def regions(self):
-        if self.area_ranking is None:
+        if self.area_providing_pagination is None:
             # A paginatable centerpage needs a ranking area.
             raise pyramid.httpexceptions.HTTPNotFound(
                 'This centerpage is not paginatable.')
@@ -265,7 +264,8 @@ class CenterpagePage(object):
 
         # Reconstruct a paginated cp with optional header and ranking area.
         regions = [zeit.web.core.centerpage.Region(
-            [zeit.web.core.centerpage.IRendered(self.area_ranking)])]
+            [zeit.web.core.centerpage.IRendered(
+                self.area_providing_pagination)])]
 
         # We keep any areas of the first region that contain at least one kind
         # of preserve-worthy module.
@@ -285,7 +285,7 @@ class CenterpagePage(object):
         return regions
 
     @zeit.web.reify
-    def area_ranking(self):
+    def area_providing_pagination(self):
         # Prevent infloop with our tweaked self.regions
         # XXX Is there a better factoring than copy&paste?
         regions = [zeit.web.core.centerpage.IRendered(x)

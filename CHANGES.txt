@@ -9,6 +9,20 @@ POSTDEPLOY
 
 - FIX: Fix margin of blog marker on fullwidth teaser
 
+- ZON-3478: Polish Archivepage
+
+- OPS-425: Add code style linting to ZMO scripts
+
+- BUG-577: Provide spacing for ZMO article header with expired images
+
+- FIX: Be defensive about missing values in agatho response
+
+- BUG-581: Require author image for buzzboard column
+
+- BUG-583: Fix pagination for author pages
+
+- BUG-592: Make author page pagination SEO friendly
+
 
 3.19 (2016-11-21)
 -----------------
@@ -71,7 +85,7 @@ POSTDEPLOY
 
 - MAINT: Use sensible default caching times
 
-- MAINT: Make caching time for newsfeed.zeit.de
+- MAINT: Make caching time for newsfeed.zeit.de configurable
 
 - MAINT: Fix typography for .x-footer--borderless
 
