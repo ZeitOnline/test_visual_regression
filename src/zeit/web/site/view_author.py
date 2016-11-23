@@ -1,4 +1,5 @@
 # coding: utf-8
+import math
 import pyramid.view
 import zope.component
 
@@ -190,6 +191,14 @@ class AuthorRanking(zeit.web.core.area.ranking.Ranking):
         if self.page == 1:
             return 0
         return self.count * (self.page - 1) - self.surrounding_teasers
+
+    @zeit.web.reify
+    def total_pages(self):
+        count = self.context._count
+        items = self.hits + self.surrounding_teasers
+        if items > 0 < count:
+            return int(math.ceil(float(items) / float(count)))
+        return 0
 
 
 class UserCommentsArea(zeit.web.core.centerpage.Area):

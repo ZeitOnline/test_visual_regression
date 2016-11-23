@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - BUG-581: Require author image for buzzboard column
 
+- BUG-583: Fix pagination for author pages
+
 
 3.19 (2016-11-21)
 -----------------
