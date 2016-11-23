@@ -1,4 +1,5 @@
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<?xml version="1.0" encoding="utf-8"?>
+<article>
     <head>
         <author href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
             <display_name>Fabian Lange</display_name>
@@ -30,11 +31,21 @@
                 </image>
             </reference>
         </references>
+        <rankedTags>
+            <tag url_value="wein" uuid="df4baf1f-9491-4dbb-80c2-f8762bf3f2fe" score="4" type="free">Wein</tag>
+            <tag url_value="italien" uuid="fb4f1490-b187-4073-a51f-02bf101a354d" score="3" type="Location">Italien</tag>
+            <tag url_value="toskana" uuid="96aed46d-4a4d-4815-afe6-7f9ba73914ed" score="2" type="Location">Toskana</tag>
+            <tag url_value="bologna" uuid="48e46d3d-cb20-4c65-8000-5d7bab864110" score="1" type="Location">Bologna</tag>
+            <tag url_value="bozen" uuid="4620a5e7-9e11-4c07-8b4f-7114b66ab7c9" score="1" type="Location">Bozen</tag>
+            <tag url_value="florenz" uuid="96be130a-ad9e-4770-90e0-5a98158df58b" score="1" type="Location">Florenz</tag>
+            <tag url_value="tuebingen" uuid="5636720f-3312-406e-b843-73ade2c9603c" score="1" type="Location">Tübingen</tag>
+        </rankedTags>
         <image align="left" base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-07/teaser-chianti/" type="jpg" publication-date="" expires="">
             <bu>Immer noch die besten Botschafterinnen der Region: Fiasco-Flaschen im Restaurant L'e'Maiala in Florenz </bu>
             <copyright>© Reuters/Alessandro Bianchi</copyright>
         </image>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">free</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Fabian Lange;Cornelius Lange</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
