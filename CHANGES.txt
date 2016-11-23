@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - BUG-592: Make author page pagination SEO friendly
 
+- BUG-590: Remove webtrekk custom parameter for `login` from cached HTML
+
 
 3.19 (2016-11-21)
 -----------------
