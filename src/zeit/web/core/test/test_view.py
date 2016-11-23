@@ -930,3 +930,14 @@ def test_notfication_after_paywall_registration_renders_correctly(
     driver.get(
         '{0}/campus/article/infographic{1}'.format(testserver.url, url_hash))
     assert_notification()
+
+
+def test_http_header_should_contain_c1_debug_echoes(testserver):
+    response = requests.get(
+        '%s/zeit-online/article/simple' % testserver.url,
+        headers={
+            'C1-Meter-Status': 'always_paid',
+            'C1-Meter-User-Status': 'anonymous',
+        })
+    assert response.headers.get('x-debug-c1-meter-status') == 'always_paid'
+    assert response.headers.get('x-debug-c1-meter-user-status') == 'anonymous'

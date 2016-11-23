@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - BUG-592: Make author page pagination SEO friendly
 
+- MAINT: Return C1 headers as debug information
+
 
 3.19 (2016-11-21)
 -----------------
