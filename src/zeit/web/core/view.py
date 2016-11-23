@@ -172,6 +172,10 @@ class Base(object):
     def type(self):
         return type(self.context).__name__.lower()
 
+    @zeit.web.reify
+    def tracking_type(self):
+        return self.type
+
     # XXX Base View should not depend on ICommonMetadata
     # Throws an error if resssort, sub_ressort, cap_title ... is None
     @zeit.web.reify

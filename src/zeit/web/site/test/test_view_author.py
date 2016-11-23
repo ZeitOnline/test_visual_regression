@@ -283,3 +283,91 @@ def test_author_has_correct_open_graph_image(testbrowser):
         '731')
     assert select('meta[name="twitter:image"]')[0].get('content') == url
     assert select('link[rel="image_src"]')[0].get('href') == url
+
+
+def test_author_page_has_correct_pagination_information(
+        application, dummy_request):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                    for i in range(22)])
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/autoren/j_random')
+    dummy_request.path_info = u'/autoren/j_random'
+    dummy_request.url = 'http://example.com/autoren/j_random'
+
+    view = zeit.web.site.view_author.Author(content, dummy_request)
+    assert view.canonical_url == 'http://example.com/autoren/j_random'
+    assert view.next_page_url == 'http://example.com/autoren/j_random?p=2'
+    assert view.prev_page_url is None
+    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
+    assert view.pagination.get('current') == 1
+    assert view.pagination.get('total') == 3
+    assert view.webtrekk['customParameter']['cp3'] == '1/3'
+
+    dummy_request.GET['p'] = '2'
+    view = zeit.web.site.view_author.Author(content, dummy_request)
+    assert view.canonical_url == 'http://example.com/autoren/j_random?p=2'
+    assert view.next_page_url == 'http://example.com/autoren/j_random?p=3'
+    assert view.prev_page_url == 'http://example.com/autoren/j_random'
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.pagination.get('current') == 2
+    assert view.pagination.get('total') == 3
+    assert view.webtrekk['customParameter']['cp3'] == '2/3'
+
+    dummy_request.GET['p'] = '3'
+    view = zeit.web.site.view_author.Author(content, dummy_request)
+    assert view.canonical_url == 'http://example.com/autoren/j_random?p=3'
+    assert view.next_page_url is None
+    assert view.prev_page_url == 'http://example.com/autoren/j_random?p=2'
+    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.pagination.get('current') == 3
+    assert view.pagination.get('total') == 3
+    assert view.webtrekk['customParameter']['cp3'] == '3/3'
+
+
+def test_author_page_contains_pagination_information(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = ([{'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/01'}
+                    for i in range(22)])
+
+    url = 'http://localhost/autoren/j_random'
+
+    select = testbrowser('/autoren/j_random').cssselect
+    assert select('link[rel="canonical"]')[0].get('href') == url
+    assert select('link[rel="next"]')[0].get('href') == url + '?p=2'
+    assert not select('link[rel="prev"]')
+    assert select('meta[name="robots"]')[0].get('content') == (
+        'index,follow,noodp,noydir,noarchive')
+
+    select = testbrowser('/autoren/j_random?p=3').cssselect
+    assert select('link[rel="canonical"]')[0].get('href') == url + '?p=3'
+    assert not select('link[rel="next"]')
+    assert select('link[rel="prev"]')[0].get('href') == url + '?p=2'
+    assert select('meta[name="robots"]')[0].get('content') == (
+        'noindex,follow,noodp,noydir,noarchive')
+
+
+def test_author_comments_page_contains_pagination_information(testbrowser):
+    url = 'http://localhost/autoren/author3/kommentare'
+
+    select = testbrowser('/autoren/author3/kommentare').cssselect
+    assert select('link[rel="canonical"]')[0].get('href') == url
+    assert select('link[rel="next"]')[0].get('href') == url + '?p=2'
+    assert not select('link[rel="prev"]')
+    assert select('meta[name="robots"]')[0].get('content') == (
+        'index,follow,noodp,noydir,noarchive')
+
+    select = testbrowser('/autoren/author3/kommentare?p=2').cssselect
+    assert select('link[rel="canonical"]')[0].get('href') == url + '?p=2'
+    assert select('link[rel="next"]')[0].get('href') == url + '?p=3'
+    assert select('link[rel="prev"]')[0].get('href') == url
+    assert select('meta[name="robots"]')[0].get('content') == (
+        'noindex,follow,noodp,noydir,noarchive')
+
+    select = testbrowser('/autoren/author3/kommentare?p=3').cssselect
+    assert select('link[rel="canonical"]')[0].get('href') == url + '?p=3'
+    assert not select('link[rel="next"]')
+    assert select('link[rel="prev"]')[0].get('href') == url + '?p=2'
+    assert select('meta[name="robots"]')[0].get('content') == (
+        'noindex,follow,noodp,noydir,noarchive')

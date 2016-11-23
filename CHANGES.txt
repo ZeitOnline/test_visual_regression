@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - BUG-583: Fix pagination for author pages
 
+- BUG-592: Make author page pagination SEO friendly
+
 
 3.19 (2016-11-21)
 -----------------
