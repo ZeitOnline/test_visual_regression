@@ -934,9 +934,9 @@ def test_user_comment_thread_should_have_expected_structure(application):
     community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
     thread = community.get_user_comments(author)
     assert thread['uid'] == 172432
-    assert thread['published_total'] == 570
+    assert thread['published_total'] == 14
     assert thread['page'] == 1
-    assert thread['page_total'] == 95
+    assert thread['page_total'] == 3
     assert thread['sort'] == 'DESC'
     assert thread['rows'] == 6
     assert len(thread['comments']) == 6

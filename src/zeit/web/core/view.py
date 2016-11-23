@@ -15,7 +15,6 @@ import pyramid.response
 import pyramid.settings
 import pyramid.view
 import pyramid.httpexceptions
-import urllib
 import werkzeug.http
 import zope.component
 
@@ -171,6 +170,10 @@ class Base(object):
     @zeit.web.reify
     def type(self):
         return type(self.context).__name__.lower()
+
+    @zeit.web.reify
+    def tracking_type(self):
+        return self.type
 
     # XXX Base View should not depend on ICommonMetadata
     # Throws an error if resssort, sub_ressort, cap_title ... is None
@@ -372,6 +375,10 @@ class Base(object):
     @zeit.web.reify
     def supertitle(self):
         return self.context.supertitle
+
+    @zeit.web.reify
+    def subtitle(self):
+        return self.context.subtitle
 
     def _pagetitle(self, suffix):
         try:
@@ -631,16 +638,6 @@ class Base(object):
                 'short_num'))  # Veröffentlichungsdatum
         ])
 
-        # Track login status with entrypoint url
-        user_login_status = 'nicht_angemeldet'
-        user_login_info = self.request.user
-        if user_login_info:
-            user_login_status = 'angemeldet'
-            if user_login_info.get('entry_url'):
-                user_login_status = '{}|{}'.format(
-                    user_login_status,
-                    urllib.unquote(user_login_info['entry_url']))
-
         custom_parameter = collections.OrderedDict([
             ('cp1', get_param('authors_list')),  # Autor
             ('cp2', self.ivw_code),  # IVW-Code
@@ -657,7 +654,6 @@ class Base(object):
             ('cp13', 'stationaer'),  # Breakpoint
             ('cp14', 'friedbert'),  # Beta-Variante
             ('cp15', push),  # Push und Eilmeldungen
-            ('cp23', user_login_status),  # Login status with entrypoint url
             ('cp25', 'original'),  # Plattform
             ('cp26', pagetype),  # inhaltlicher Pagetype
             ('cp27', ';'.join(self.webtrekk_assets)),  # Asset
@@ -740,6 +736,7 @@ class CeleraOneMixin(object):
     def __call__(self):
         resp = super(CeleraOneMixin, self).__call__()
         self.request.response.headers.update(self.c1_header)
+        self.set_c1_meter_response_headers()
         return resp
 
     @zeit.web.reify
@@ -815,6 +812,20 @@ class CeleraOneMixin(object):
             'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
             'C1-Track-Service-ID': 'zon'
         }.items() if v is not None]
+
+    def set_c1_meter_response_headers(self):
+
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        if conf.get('environment') == 'production':
+            return
+
+        request = self.request
+
+        for req_header_name in request.headers:
+            if req_header_name.startswith('C1-Meter-'):
+                res_header_name = 'X-Debug-{}'.format(req_header_name)
+                res_header_value = request.headers.get(req_header_name, '')
+                request.response.headers[res_header_name] = res_header_value
 
 
 class CommentMixin(object):
