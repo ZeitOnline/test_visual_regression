@@ -13,15 +13,9 @@ POSTDEPLOY
 3.20 (2016-11-24)
 -----------------
 
-- FIX: Fix margin of blog marker on fullwidth teaser
-
 - ZON-3478: Polish Archivepage
 
-- OPS-425: Add code style linting to ZMO scripts
-
 - BUG-577: Provide spacing for ZMO article header with expired images
-
-- FIX: Be defensive about missing values in agatho response
 
 - BUG-581: Require author image for buzzboard column
 
@@ -31,9 +25,16 @@ POSTDEPLOY
 
 - BUG-590: Remove webtrekk custom parameter for `login` from cached HTML
 
+- BUG-591: Report access right to webtrekk literally
+
+- FIX: Fix margin of blog marker on fullwidth teaser
+
+- FIX: Be defensive about missing values in agatho response
+
+- OPS-425: Add code style linting to ZMO scripts
+
 - MAINT: Return C1 headers as debug information
 
-- BUG-591: Report access right to webtrekk literally
 
 3.19 (2016-11-21)
 -----------------
