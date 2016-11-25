@@ -354,7 +354,7 @@ class PostComment(zeit.web.core.view.Base):
 
 @pyramid.view.view_config(route_name='post_test_comments',
                           renderer='templates/post_test_comments.html',
-                          custom_predicates=(zeit.web.core.is_admin,))
+                          custom_predicates=(zeit.web.core.view.is_admin,))
 class PostCommentAdmin(PostComment):
     def __init__(self, context, request):
         super(PostCommentAdmin, self).__init__(context, request)

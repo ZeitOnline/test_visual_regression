@@ -61,6 +61,12 @@ def is_paginated(context, request):
         return False
 
 
+def is_admin(context, request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return ((conf.get('environment') != 'production') or
+            (request.client_addr == '127.0.0.1'))
+
+
 def redirect_on_trailing_slash(request):
     if request.path.endswith('/') and not len(request.path) == 1:
         scheme, netloc, path, params, query, fragment = urlparse.urlparse(
@@ -90,8 +96,7 @@ def c1requestheader_or_get(request, name):
 
     # We want to allow manipulation via GET-Params for testing,
     # but not in production
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    if conf.get('environment') != 'production':
+    if is_admin(None, request):
         return request.GET.get(name, None)
 
 
@@ -453,7 +458,7 @@ class Base(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         try:
             return ('ZONApp' in self.request.headers.get('user-agent', '') or (
-                conf.get('is_admin') and
+                conf.get('environment') != 'production' and
                     'app-content' in self.request.query_string))
         except (AttributeError, TypeError):
             return False
