@@ -1,19 +1,30 @@
+import copy
+import logging
+
+import gocept.lxml.objectify
 import grokcore.component
+import xml.sax.saxutils
 import zope.component
 import zope.interface
-import copy
-import xml.sax.saxutils
+import zope.security.proxy
 
 import zeit.cms.content.sources
 import zeit.cms.interfaces
-import zeit.content.article
+import zeit.connector.cache
+import zeit.content.article.article
+import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
+import zeit.retresco.interfaces
 
+import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.core.template
+
+
+log = logging.getLogger(__name__)
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -134,8 +145,49 @@ def _place_content_ad_by_paragraph(page, possible_paragraphs):
                 pass
 
 
+@zope.component.adapter(zeit.content.article.interfaces.IArticle)
+@zope.interface.implementer(zeit.content.article.edit.interfaces.IEditableBody)
+def get_retresco_body(article):
+    # We want to be very cautious here and retreat to static XML as a
+    # source for our article body if anything goes wrong/ takes too long
+    # with the TMS body.
+
+    xml = zope.security.proxy.removeSecurityProxy(article.xml['body'])
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conn = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+
+    try:
+        assert toggles.find('enable_intext_links') is True
+        assert not zeit.seo.interfaces.ISEO(article).disable_intext_links
+
+        uuid = zeit.cms.content.interfaces.IUUID(article).id
+        timeout = conf.get('retresco_timeout', 0.1)
+        body = conn.get_article_body(uuid, timeout=timeout)
+
+        if unichr(65533) in body:
+            # XXX Stopgap until tms encoding issues are resolved
+            raise ValueError('Encountered encoding issues in retresco body')
+
+        xml = gocept.lxml.objectify.fromstring(body)
+    except AssertionError:
+        log.info(
+            'Retresco preconditions unmet %s' % article, exc_info=True)
+    except:
+        log.warning(
+            'Retresco article enrichment failed %s' % article, exc_info=True)
+
+    return zope.component.queryMultiAdapter(
+        (article, xml),
+        zeit.content.article.edit.interfaces.IEditableBody)
+
+
 def pages_of_article(article, advertising_enabled=True):
-    body = zeit.content.article.edit.interfaces.IEditableBody(article)
+    body = zope.component.getAdapter(
+        article,
+        zeit.content.article.edit.interfaces.IEditableBody,
+        name='retresco')
     body.ensure_division()  # Old articles don't always have divisions.
 
     # IEditableBody excludes the first division since it cannot be edited
