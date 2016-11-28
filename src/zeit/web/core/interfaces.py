@@ -71,6 +71,11 @@ class IVarnishCachingTime(zope.interface.Interface):
     """
 
 
+class INewsfeed(zope.interface.Interface):
+    """Marker interface to make ICachingTime for newsfeed.zeit.de separately
+    configurable."""
+
+
 class IExpiration(zope.interface.Interface):
 
     seconds = zope.interface.Attribute(
@@ -237,7 +242,7 @@ class IPagination(zope.interface.Interface):
         'The actual page being displayed.')
     current_page = zope.interface.Attribute(
         'Same as page. Kept for hysterical raisins.')
-    total_page = zope.interface.Attribute(
+    total_pages = zope.interface.Attribute(
         'Number of pages available.')
     pagination = zope.interface.Attribute('A list of page numbers.')
     pagination_info = zope.interface.Attribute(
@@ -280,3 +285,8 @@ class ICommunity(zope.interface.Interface):
 
 class ILiveblogInfo(zope.interface.Interface):
     """Returns liveblog metadata."""
+
+
+class IExternalTemporaryImage(zope.interface.Interface):
+    """A marker interface to distinguish externally hosted images vs. those
+    from friedbert itself."""

@@ -21,5 +21,5 @@
     {% if loop.index == 1 and module[0].is_ad == False %}
         {% set force_mobile_image = True %}
     {% endif %}
-    {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" ignore missing %}
+    {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" %}
 {% endblock %}

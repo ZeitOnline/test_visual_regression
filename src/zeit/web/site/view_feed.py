@@ -12,6 +12,7 @@ import urlparse
 import pyramid.view
 import lxml.builder
 import lxml.etree
+import zope.interface
 
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
@@ -19,9 +20,8 @@ import zeit.cms.interfaces
 import zeit.push.interfaces
 
 import zeit.web
-import zeit.web.core.cachingtime
+import zeit.web.core.interfaces
 import zeit.web.core.template
-import zeit.web.site.view
 
 
 log = logging.getLogger(__name__)
@@ -100,10 +100,11 @@ class Base(zeit.web.core.view.Base):
 class Newsfeed(Base):
 
     def __call__(self):
+        # Make newsfeed cachingtime configurable.
+        zope.interface.alsoProvides(
+            self.context, zeit.web.core.interfaces.INewsfeed)
         super(Newsfeed, self).__call__()
         self.request.response.content_type = 'application/rss+xml'
-        self.request.response.cache_expires(
-            zeit.web.core.cachingtime.caching_time_feed(self.context))
         return lxml.etree.tostring(
             self.build_feed(), pretty_print=True, xml_declaration=True,
             encoding='UTF-8')
@@ -327,12 +328,12 @@ class SpektrumFeed(Base):
             )
             image = zeit.web.core.template.get_image(content, fallback=False)
             if image:
-                variant = image.group['super']
                 item.append(E.enclosure(
                     url='{}{}__180x120'.format(
                         self.request.image_host, image.path),
                     length='10240',  # ¯\_(ツ)_/¯
-                    type=variant.mimeType))
+                    type='image/jpeg'))  # ¯\_(ツ)_/¯
+
             channel.append(item)
         return root
 

@@ -7,88 +7,6 @@ import zeit.cms.interfaces
 import zeit.web.core.interfaces
 
 
-def test_macro_subpage_chapter_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    css_class = 'article__subpage-chapter'
-
-    # assert normal markup
-    markup = ('<div class="%s">'
-              '<span>Kapitel 1</span>'
-              '<span>&mdash; Title &mdash;</span>'
-              '<span></span></div>' % css_class)
-    lines = tpl.module.subpage_chapter(1, 'Title', css_class).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-    # assert empty subtitle
-    assert '' == str(tpl.module.subpage_chapter(0, '', '')).strip()
-
-
-def test_macro_subpage_index_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    css_index = 'article__subpage-index'
-    markup_standard = ('<div class="%s figure-stamp">'
-                       '<div class="article__subpage-index__title">'
-                       '&uuml;bersicht</div><ol>') % css_index
-
-    fake_page = type('Dummy', (object,), {})
-    fake_page.number = 1
-    fake_page.teaser = 'Erster'
-
-    # assert normal markup
-    markup = (
-        u'%s<li class="article__subpage-index__item"><span class="'
-        'article__subpage-index__item__count">1 &mdash; </span><span class="'
-        'article__subpage-index__item__title-wrap"><a href="#kapitel1" class="'
-        'article__subpage-index__item__title js-scroll">Erster</a></span>'
-        '</li></ol></div>') % (markup_standard)
-    lines = tpl.module.subpage_index(
-        [fake_page], 'Title', 2, css_index, '').splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-    # assert active markup
-    css_active = 'article__subpage-active'
-    markup_active = (
-        u'%s<li class="article__subpage-index__item"><span '
-        'class="article__subpage-index__item__count">1 &mdash; </span><span '
-        'class="article__subpage-index__item__title-wrap"><span class="'
-        'article__subpage-index__item__title %s">Erster</span></span></li>'
-        '</ol></div>') % (markup_standard, css_active)
-    lines_active = tpl.module.subpage_index(
-        [fake_page], 'Title', 1, css_index, css_active).splitlines()
-    output_active = ""
-    for line in lines_active:
-        output_active += line.strip()
-    assert markup_active == output_active
-
-    # assert empty subtitle
-    assert '' == tpl.module.subpage_index(['1'], '', 1)
-
-
-def test_macro_subpage_head_should_produce_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    css_class = 'article__subpage-head'
-
-    # assert normal markup
-    markup = '<div class="%s" id="kapitel1">1 &mdash; Title</div>' % css_class
-    lines = tpl.module.subpage_head(1, 'Title', css_class).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup == output
-
-    # assert empty subtitle
-    assert '' == tpl.module.subpage_head(1, '', css_class)
-
-
 def test_image_template_should_produce_figure_markup(
         tplbrowser, dummy_request):
     block = zeit.cms.interfaces.ICMSContent(
@@ -133,39 +51,6 @@ def test_image_template_should_hide_none(testbrowser):
         inline.return_value = ''
         browser = testbrowser('/feature/feature_longform')
         assert '<span class="figure__text">None</span>' not in browser.contents
-
-
-def test_macro_meta_author_should_produce_html_if_author_exists(
-        application, jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    test_class = 'test'
-    authors = [{'prefix': 'Von', 'href': 'www.zeit.de', 'name': 'Tom',
-                'location': ', Bern', 'suffix': 'und'},
-               {'prefix': '', 'href': '', 'name': 'Anna', 'location': '',
-                'suffix': ''}]
-    markup = (
-        'Von<span itemprop="author" itemscope itemtype="http://schema.org/'
-        'Person"><a href="www.zeit.de" class="test" itemprop="url"><span '
-        'itemprop="name">Tom</span></a>, Bern</span>und<span itemprop="author"'
-        ' itemscope itemtype="http://schema.org/Person"><span class="test">'
-        '<span itemprop="name">Anna</span></span></span>')
-    lines = tpl.module.meta_author(authors, test_class).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert markup.strip() == output
-
-
-def test_macro_meta_author_shouldnt_produce_html_if_no_author(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    authors = []
-    lines = tpl.module.meta_author(authors).splitlines()
-    output = ''
-    for line in lines:
-        output += line.strip()
-    assert '' == output
 
 
 def test_macro_video_should_produce_markup(jinja2_env):
@@ -292,12 +177,6 @@ def test_add_publish_date_generates_script(jinja2_env):
         for line in lines:
             output += line.strip()
         assert el['markup'] in output
-
-
-def test_no_block_macro_should_produce_basically_no_markup(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.magazin:templates/macros/article_macro.tpl')
-    assert tpl.module.no_block('') == ''
 
 
 # TODO: Move tests into appropriate file / Cleanup (#OPS-386)

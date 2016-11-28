@@ -20,7 +20,11 @@
         {% endrequire %}
 
         <div class="article__item article__item--wide article__item--rimless">
-            {{ vima.brightcove_video_tag(view.context.__name__, iframe=True) }}
+            {% if toggles('zon_videosinglepage_via_html5') %}
+                {{ vima.brightcove_video_tag(view.context.__name__, iframe=False) }}
+            {% else %}
+                {{ vima.brightcove_video_tag(view.context.__name__, iframe=True) }}
+            {% endif %}
         </div>
 
         {% if view.advertising_enabled %}

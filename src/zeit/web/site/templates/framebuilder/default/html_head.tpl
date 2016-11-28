@@ -23,7 +23,7 @@
     <!--<![endif]-->
     {% endblock css_link %}
 
-    {% include "zeit.web.core:templates/inc/inline_js/library.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/inline_js/library.html" %}
 
     {# Modernizr -#}
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
@@ -32,7 +32,7 @@
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif %}
     {% if toggles('third_party_modules', 'iqd') %}
-        {% include "zeit.web.core:templates/inc/ads/head.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/ads/head.html" %}
     {% endif %}
     {% if settings('livereload') %}
         <script src="//localhost:35729/livereload.js"></script>

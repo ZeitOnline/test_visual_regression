@@ -1,11 +1,12 @@
-{% extends "zeit.web.magazin:templates/content.html" %}
+{% extends "zeit.web.magazin:templates/article.html" %}
+
 {% block article_pages %}
     {% for page in view.pages %}
         <div class="article__page">
-            {{ render_page(page) }}
+            {% include "zeit.web.magazin:templates/inc/article/page.html" %}
         </div>
     {% endfor %}
 {% endblock article_pages %}
+
 {% block article_pagination %}
-<!-- todo: read on one page -->
 {% endblock article_pagination %}

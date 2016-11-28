@@ -1,0 +1,13 @@
+{% extends "zeit.web.magazin:templates/inc/headers/article_header_default.html" %}
+
+{% block article_header %}
+<header class="article__title-wrap">
+    <h1 itemprop="headline">
+        <span class="article__head__title">{{ view.title }}</span>
+    </h1>
+    <div class="article__head__meta">
+        {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
+        {{ self.genre_and_authors() }}
+    </div>
+</header>
+{% endblock %}

@@ -236,7 +236,6 @@ def app_settings(mockserver):
         'jinja2.enable_profiler': False,
         'use_wesgi': True,
         'mock_solr': True,
-        'is_admin': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
         'vivi_zeit.web_runtime-settings-source': (

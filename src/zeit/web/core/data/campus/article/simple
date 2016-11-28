@@ -18,6 +18,7 @@
         <label>Science</label>
     </topic>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">abo</attribute>
     <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="article_id" ns="http://namespaces.zeit.de/CMS/print">556168</attribute>
     <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Anna Bordel</attribute>

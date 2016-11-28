@@ -8,6 +8,7 @@
   <third_party_modules>false</third_party_modules>
   <tracking>false</tracking>
   <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
+  <zon_videosinglepage_via_html5>true</zon_videosinglepage_via_html5>
   <access_status_ivw>true</access_status_ivw>
   <access_status_webtrekk>true</access_status_webtrekk>
   <reader_revenue>true</reader_revenue>

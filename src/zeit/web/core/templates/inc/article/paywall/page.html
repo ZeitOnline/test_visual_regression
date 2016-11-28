@@ -1,0 +1,6 @@
+<section class="{% block page_class %}article-page{% endblock %}" data-page-number="{{ view.current_page.number + 1 }}">
+    {%- set page = view.current_page -%}
+    {%- set block = (page | select('paragraph') | first) -%}
+    {% include "zeit.web.core:templates/inc/article/paywall/paragraph.html" %}
+    {% include "zeit.web.core:templates/inc/article/paywall/form_{}.html".format(view.paywall) %}
+</section>

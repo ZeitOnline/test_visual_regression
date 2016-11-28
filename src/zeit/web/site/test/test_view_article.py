@@ -652,12 +652,10 @@ def test_article_should_not_break_without_author(
         '.column-heading__author .column-heading__media-item')
 
 
-def test_article_for_column_without_authorimage_should_be_rendered_default(
-        testbrowser):
+def test_article_column_without_authorimage_should_be_same(testbrowser):
     browser = testbrowser('/zeit-online/cp-content/kolumne-ohne-autorenbild')
-
-    assert len(browser.cssselect('.article--columnarticle')) == 0
-    assert len(browser.cssselect('.column-heading')) == 0
+    assert len(browser.cssselect('.article--columnarticle')) == 1
+    assert len(browser.cssselect('.column-heading')) == 1
 
 
 def test_article_column_should_be_identifiable_by_suitable_css_class(
@@ -2035,33 +2033,22 @@ def test_article_contains_authorbox(testbrowser):
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
 
 
-@pytest.mark.parametrize('on,reason', [
-    ('True', 'paid'),
-    ('True', 'register'),
-    ('True', 'metered')
-])
-def test_paywall_switch_showing_forms(on, reason, testbrowser):
-    browser = testbrowser(
-        'zeit-online/article/zeit'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'.format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
+@pytest.mark.parametrize('reason', ['paid', 'register', 'metered'])
+def test_paywall_switch_showing_forms(reason, testbrowser):
+    urls = [
+        'zeit-online/article/zeit',
+        'zeit-online/article/zeit/seite-2',
+        'zeit-online/article/zeit/komplettansicht',
+        'zeit-online/article/fischer'
+    ]
 
-    browser = testbrowser(
-        'zeit-online/article/zeit/seite-2'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
-
-    browser = testbrowser(
-        'zeit-online/article/zeit/komplettansicht'
-        '?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
-
-    browser = testbrowser(
-        'zeit-online/article/fischer?C1-Paywall-On={0}&C1-Paywall-Reason={1}'
-        .format(on, reason))
-    assert len(browser.cssselect('.paragraph--faded')) == 1
+    for url in urls:
+        browser = testbrowser(
+            '{}?C1-Paywall-On=True&C1-Paywall-Reason={}'.format(url, reason))
+        assert len(browser.cssselect('.paragraph--faded')) == 1
+        assert len(browser.cssselect('.gate')) == 1
+        assert len(browser.cssselect(
+            '.gate--register')) == int(reason == 'register')
 
 
 def test_free_article_has_correct_ivw_code(dummy_request):
@@ -2100,55 +2087,3 @@ def test_not_paid_subscription_article_has_correct_ivw_code(dummy_request):
     dummy_request.GET = {'C1-Paywall-On': 'true', 'C1-Paywall-Reason': 'paid'}
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.ivw_code == 'kultur/film/bild-text'
-
-
-def test_webtrekk_should_get_login_info_for_logged_out_users(dummy_request):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.webtrekk['customParameter']['cp23'] == 'nicht_angemeldet'
-
-
-def test_webtrekk_should_get_logged_off_info_user_info_is_empty(
-        dummy_request):
-
-    dummy_request.user = {}
-
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-
-    assert view.webtrekk['customParameter']['cp23'] == 'nicht_angemeldet'
-
-
-def test_webtrekk_should_get_full_login_info_for_logged_in_users(
-        dummy_request):
-
-    dummy_request.user = {
-        'ssoid': '123',
-        'name': 'my_name',
-        'email': 'my_email@example.com',
-        'entry_url': 'http://xml.zeit.de/entrypoint'}
-
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-
-    assert view.webtrekk['customParameter']['cp23'] == (
-        'angemeldet|http://xml.zeit.de/entrypoint')
-
-
-def test_webtrekk_should_get_no_login_path_when_entrypoint_is_empty(
-        dummy_request):
-
-    dummy_request.user = {
-        'ssoid': '123',
-        'name': 'my_name',
-        'email': 'my_email@example.com',
-        'entry_url': ''}
-
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-
-    assert view.webtrekk['customParameter']['cp23'] == 'angemeldet'

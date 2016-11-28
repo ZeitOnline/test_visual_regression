@@ -58,7 +58,7 @@ What does this script do?
 define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
     var EXPECTED_NAME = 'zonTriggeredEventTracking',
-        debugMode,
+        debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1,
 
         // encapsulate the functions into groups to make the code more readable (hopefully)
         _functions = {
@@ -71,13 +71,22 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
     /* -------------------------------------------------------------------------
     Tracking functions which trigger the actual tracking
     ------------------------------------------------------------------------- */
-    _functions.sendTracking.sendVideoEventToWebtrekk = function( eventString ) {
+    _functions.sendTracking.sendDataToWebrekk = function( data ) {
+        var trackingData = Clicktracking.formatTrackingData( data );
 
-        // make sure webtrekk is available
-        if ( typeof( window.wt ) === 'undefined' || typeof( window.wt.sendinfo ) !== 'function' ) {
-            return;
+        if ( debugMode ) {
+            console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
+            console.log( trackingData );
+            window.trackingData = trackingData;
+        } else {
+            window.wt.sendinfo({
+                linkId: trackingData,
+                sendOnUnload: 1
+            });
         }
+    };
 
+    _functions.sendTracking.sendVideoEventToWebtrekk = function( eventString ) {
         var messageData,
             messageSender,
             $container,
@@ -86,8 +95,7 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
             videoProvider = '',
             videoPageUrl = window.location.host + window.location.pathname,
             data,
-            videoData,
-            trackingData;
+            videoData;
 
         // we blindly assume that there is only one player on the page. ...
         // If in the future we have multiple video players, the ID would need
@@ -112,18 +120,7 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
             videoPageUrl
         ];
 
-        trackingData = Clicktracking.formatTrackingData( data );
-
-        window.wt.sendinfo({
-            linkId: trackingData,
-            sendOnUnload: 1
-        });
-
-        if ( debugMode ) {
-            console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
-            console.log( trackingData );
-            window.trackingData = trackingData;
-        }
+        _functions.sendTracking.sendDataToWebrekk( data );
     };
 
     _functions.sendTracking.sendVideoViewToIVW = function() {
@@ -167,6 +164,18 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
     };
 
+    // we get nearly complete tracking slugs from meine.zeit.de
+    _functions.handleSpecificPlugin.trackMeineZeitClickEvent = function( messageDataObject ) {
+        // replace leading dot for current values in meine.zeit.de, may be removed soon
+        var trackingData = messageDataObject.slug.replace( /^\./, '' ).split( '|' ),
+            data = [
+                trackingData[0],
+                trackingData[1] // url
+            ];
+
+        _functions.sendTracking.sendDataToWebrekk( data );
+    };
+
     /* -------------------------------------------------------------------------
     Dispatch functions: filter the incoming messages and match them to specific
     handlers.
@@ -176,6 +185,10 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
         if ( messageDataObject.sender === 'videojs' ) {
             _functions.handleSpecificPlugin.trackVideojsEvent( messageDataObject.event );
+        }
+
+        if ( messageDataObject.sender === 'meinezeit' ) {
+            _functions.handleSpecificPlugin.trackMeineZeitClickEvent( messageDataObject );
         }
 
     };
@@ -224,7 +237,10 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
     ------------------------------------------------------------------------- */
     init = function() {
 
-        debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
+        // make sure webtrekk is available
+        if ( ( typeof window.wt === 'undefined' || typeof( window.wt.sendinfo ) !== 'function' ) && !debugMode ) {
+            return;
+        }
 
         $( window ).on( 'message', function( event ) {
             _functions.dispatch.dispatchAllMessages( event );

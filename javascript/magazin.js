@@ -69,10 +69,12 @@ require([
     'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
     'web.core/plugins/jquery.countFormchars',
     'web.core/plugins/jquery.imageCopyrightFooter',
+    'web.core/plugins/jquery.notifications',
     'web.magazin/plugins/jquery.backgroundvideo',
     'web.magazin/plugins/jquery.switchvideo'
 ], function( $, Velocity ) {
     $( window ).referrerCount();
+    $.notifications();
     $( '.js-gallery' ).inlinegallery();
     $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();

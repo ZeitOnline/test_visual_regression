@@ -4,7 +4,7 @@
         <a href="{{ teaser | create_url }}">
             <div class="{{ module_layout }}__imageitem">
                 <div class="{{ module_layout }}__image">
-                    {% include "zeit.web.site:templates/inc/asset/image_zon-author-list.tpl" ignore missing %}
+                    {% include "zeit.web.site:templates/inc/asset/image_zon-author-list.tpl" %}
                 </div>
                 <div class="{{ module_layout }}__text">
                     <h3 class="{{ '{}__name'.format(module_layout) | with_mods('without-summary' if not teaser.summary) }}">{{ teaser.display_name }}</h3>
