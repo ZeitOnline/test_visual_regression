@@ -6,6 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 import lxml.html
+import urllib2
 import mock
 import pyramid.httpexceptions
 import pyramid.testing
@@ -2606,12 +2607,16 @@ def test_volume_teaser_on_cphas_correct_elements(testbrowser):
 
 
 def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
-    # XXX there are certainly better ways to test this:
-    # if browser has no sso session
+    # browser without sso session
+    b = testbrowser()
+    b.mech_browser.set_handle_redirect(False)
     try:
-        browser = testbrowser('/konto')
-    except:
-        assert True
+       b.open('/konto')
+    except urllib2.HTTPError, e:
+       assert e.getcode() == 302
+       assert e.hdrs.get('location') == 'http://sso.example.org'
+
+    # browser with sso session
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['sso_key'] = sso_keypair['public']
     sso_cookie = jwt.encode(
