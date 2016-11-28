@@ -71,6 +71,12 @@
                 $( window ).on( 'resize', $.debounce( function() {
                     self.adapt();
                 }, 100 ));
+                // BUG-549
+                // safari gets the width of pseudo elements wrong
+                // found no better fix than measuring again late in process
+                $( window ).one( 'load', function() {
+                    self.adapt();
+                });
             },
             adapt: function() {
                 var parent = this.element.parent();
