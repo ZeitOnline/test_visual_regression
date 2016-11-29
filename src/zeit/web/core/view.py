@@ -89,8 +89,6 @@ def redirect_on_cp2015_suffix(request):
 
 def c1requestheader_or_get(request, name):
 
-    # TODO: Den Request hier nutzen/haben, nicht reinreichen.
-
     if name in request.headers:
         return request.headers.get(name, None)
 
@@ -103,7 +101,8 @@ def c1requestheader_or_get(request, name):
 
 
 def get_c1_paywall_from_request(request):
-    # TODO: Link zur Doku hier eintragen
+
+    # https://github.com/ZeitOnline/zeit.web/wiki/CeleraOne-Schranken
 
     if not zeit.web.core.application.FEATURE_TOGGLES.find(
             'reader_revenue'):
@@ -115,9 +114,6 @@ def get_c1_paywall_from_request(request):
     c1_meter_user_status = c1requestheader_or_get(
         request, 'C1-Meter-User-Status')
 
-    # Warning: Das ist hier seeehr explizit und sprechend.
-    # TODO: Vielleicht aufräumen. Aber nicht versuchen zu clever zu sein.
-
     if not c1_meter_status:
         return None
     else:
@@ -127,8 +123,6 @@ def get_c1_paywall_from_request(request):
             # "metered" hier in indirekter Schlussfolgerung.
             # Man könnte metered-counts vergleichen, aber das
             # würde den Varnish aufblähen.
-            # TODO: Welche Variante sollen ungültige user-status
-            # anzeigen? Soll das nach Access-Status gehen?
             if c1_meter_user_status == 'anonymous':
                 return 'register'
             else:
