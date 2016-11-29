@@ -2033,8 +2033,11 @@ def test_article_contains_authorbox(testbrowser):
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
 
 
-@pytest.mark.parametrize('reason', ['paid', 'register', 'metered'])
-def test_paywall_switch_showing_forms(reason, testbrowser):
+@pytest.mark.parametrize('c1_parameter', [
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous',
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=registered',
+    '?C1-Meter-Status=always_paid'])
+def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
     urls = [
         'zeit-online/article/zeit',
         'zeit-online/article/zeit/seite-2',
@@ -2044,11 +2047,32 @@ def test_paywall_switch_showing_forms(reason, testbrowser):
 
     for url in urls:
         browser = testbrowser(
-            '{}?C1-Paywall-On=True&C1-Paywall-Reason={}'.format(url, reason))
+            '{}{}'.format(url, c1_parameter))
         assert len(browser.cssselect('.paragraph--faded')) == 1
         assert len(browser.cssselect('.gate')) == 1
         assert len(browser.cssselect(
-            '.gate--register')) == int(reason == 'register')
+            '.gate--register')) == int('anonymous' in c1_parameter)
+
+
+@pytest.mark.parametrize('c1_parameter', [
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous',
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=registered',
+    '?C1-Meter-Status=always_paid'])
+def test_paywall_switch_showing_register_form(c1_parameter, testbrowser):
+    urls = [
+        'zeit-online/article/zeit',
+        'zeit-online/article/zeit/seite-2',
+        'zeit-online/article/zeit/komplettansicht',
+        'zeit-online/article/fischer'
+    ]
+
+    for url in urls:
+        browser = testbrowser(
+            '{}{}'.format(url, c1_parameter))
+        assert len(browser.cssselect('.paragraph--faded')) == 1
+        assert len(browser.cssselect('.gate')) == 1
+        assert len(browser.cssselect(
+            '.gate--register')) == int('anonymous' in c1_parameter)
 
 
 def test_free_article_has_correct_ivw_code(dummy_request):
@@ -2084,6 +2108,6 @@ def test_paid_subscription_article_has_correct_ivw_code(dummy_request):
 def test_not_paid_subscription_article_has_correct_ivw_code(dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/zplus-zeit')
-    dummy_request.GET = {'C1-Paywall-On': 'true', 'C1-Paywall-Reason': 'paid'}
+    dummy_request.GET = {'C1-Meter-Status': 'always_paid'}
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.ivw_code == 'kultur/film/bild-text'

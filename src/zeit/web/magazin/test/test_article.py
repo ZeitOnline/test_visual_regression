@@ -904,7 +904,7 @@ def test_article_view_has_share_buttons_set_correctly(
 
 def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
     url = ('/zeit-online/article/zplus-zeit'
-           '?C1-Paywall-On=true&C1-Paywall-Reason=paid')
+           '?C1-Meter-Status=always_paid')
     browser = testbrowser(url)
 
     script = browser.cssselect(
