@@ -78,8 +78,8 @@
                 $( window ).on( 'load', function( event ) {
                     if ( self.isDesktop() && self.node.scrollWidth > self.maxWidth ) {
                         self.adapt();
-                        $( this ).off( event );
                     }
+                    $( this ).off( event );
                 });
             },
             adapt: function() {
