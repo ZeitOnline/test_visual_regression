@@ -2111,3 +2111,22 @@ def test_not_paid_subscription_article_has_correct_ivw_code(dummy_request):
     dummy_request.GET = {'C1-Meter-Status': 'always_paid'}
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.ivw_code == 'kultur/film/bild-text'
+
+
+def test_invalid_paywall_status_is_ignored(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/zplus-zeit?C1-Meter-Status=wurstbrot')
+    assert len(browser.cssselect('.paragraph--faded')) == 0
+
+
+def test_paywall_get_param_works_like_http_header(testbrowser):
+
+    browser_with_header = testbrowser()
+    browser_with_header.addHeader('C1-Meter-Status', 'always_paid')
+    browser_with_header.open(
+        '/zeit-online/article/zplus-zeit?C1-Meter-Status=wurstbrot')
+
+    browser_with_getparam = testbrowser(
+        '/zeit-online/article/zplus-zeit?C1-Meter-Status=always_paid')
+
+    assert browser_with_getparam.contents == browser_with_header.contents
