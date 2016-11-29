@@ -7,6 +7,8 @@ POSTDEPLOY
 3.21 (unreleased)
 -----------------
 
+- BUG-549: Fix ressort navigation width for Safari >= Version 10
+
 - MAINT: Remove separate is_admin setting
 
 
