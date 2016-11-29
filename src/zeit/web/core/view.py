@@ -96,12 +96,53 @@ def c1requestheader_or_get(request, name):
 
     # We want to allow manipulation via GET-Params for testing,
     # but not in production
+    # TODO: Das hier (oder in der Funktion)cachen? Wir lesen ja bei jedem
+    # Zugriff die Konfiguration aus. Das wirkt unnötig teuer.
     if is_admin(None, request):
         return request.GET.get(name, None)
 
 
+def get_c1_paywall_from_request(request):
+    # TODO: Link zur Doku hier eintragen
+
+    if not zeit.web.core.application.FEATURE_TOGGLES.find(
+            'reader_revenue'):
+        return False
+
+    c1_meter_status = c1requestheader_or_get(
+        request, 'C1-Meter-Status')
+
+    c1_meter_user_status = c1requestheader_or_get(
+        request, 'C1-Meter-User-Status')
+
+    # Warning: Das ist hier seeehr explizit und sprechend.
+    # TODO: Vielleicht aufräumen. Aber nicht versuchen zu clever zu sein.
+
+    if not c1_meter_status:
+        return None
+    else:
+        if c1_meter_status == 'always_paid':
+            return 'paid'
+        elif c1_meter_status == 'paywall':
+            # "metered" hier in indirekter Schlussfolgerung.
+            # Man könnte metered-counts vergleichen, aber das
+            # würde den Varnish aufblähen.
+            # TODO: Welche Variante sollen ungültige user-status
+            # anzeigen? Soll das nach Access-Status gehen?
+            if c1_meter_user_status == 'anonymous':
+                return 'register'
+            else:
+                return 'metered'
+        else:
+            # Wenn ein Wert kommt, den wir nicht erwarten,
+            # zeigen wir im Zweifel keine Paywall an.
+            return None
+
+    return None
+
+
 def is_paywalled(context, request):
-    return c1requestheader_or_get(request, 'C1-Paywall-On')
+    return zeit.web.core.view.get_c1_paywall_from_request(request)
 
 
 class Base(object):
@@ -720,20 +761,7 @@ class Base(object):
 
     @zeit.web.reify
     def paywall(self):
-
-        if not zeit.web.core.application.FEATURE_TOGGLES.find(
-                'reader_revenue'):
-            return False
-
-        walls = ['register', 'metered', 'paid']
-
-        if not c1requestheader_or_get(self.request, 'C1-Paywall-On'):
-            return None
-
-        if c1requestheader_or_get(self.request, 'C1-Paywall-Reason') in walls:
-            return c1requestheader_or_get(self.request, 'C1-Paywall-Reason')
-
-        return None
+        return zeit.web.core.view.get_c1_paywall_from_request(self.request)
 
 
 class CeleraOneMixin(object):
