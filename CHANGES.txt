@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - MAINT: Remove separate is_admin setting
 
+- MAINT: Update node modules and bower components
+
 
 3.20 (2016-11-24)
 -----------------
