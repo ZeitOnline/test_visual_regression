@@ -15,7 +15,6 @@ import pyramid.response
 import pyramid.settings
 import pyramid.view
 import pyramid.httpexceptions
-import werkzeug.http
 import zope.component
 
 from zeit.solr import query as lq
@@ -34,6 +33,7 @@ import zeit.web.core.comments
 import zeit.web.core.date
 import zeit.web.core.template
 import zeit.web.core.navigation
+import zeit.web.core.paywall
 
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
@@ -87,53 +87,8 @@ def redirect_on_cp2015_suffix(request):
             location=url)
 
 
-def c1requestheader_or_get(request, name):
-
-    if name in request.headers:
-        return request.headers.get(name, None)
-
-    # We want to allow manipulation via GET-Params for testing,
-    # but not in production
-    if is_admin(None, request):
-        return request.GET.get(name, None)
-
-
-def get_c1_paywall_from_request(request):
-
-    # https://github.com/ZeitOnline/zeit.web/wiki/CeleraOne-Schranken
-
-    if not zeit.web.core.application.FEATURE_TOGGLES.find(
-            'reader_revenue'):
-        return False
-
-    c1_meter_status = c1requestheader_or_get(
-        request, 'C1-Meter-Status')
-
-    c1_meter_user_status = c1requestheader_or_get(
-        request, 'C1-Meter-User-Status')
-
-    if not c1_meter_status:
-        return None
-    else:
-        if c1_meter_status == 'always_paid':
-            return 'paid'
-        elif c1_meter_status == 'paywall':
-            # "metered" is deducted indirectly.
-            # To avoid metered-counts (would bloat varnish buckets),
-            # we check the user status when "paywall" occurs.
-            if c1_meter_user_status == 'anonymous':
-                return 'register'
-            else:
-                return 'metered'
-        else:
-            # In doubt, if C1 sends something unexpected, we show the content.
-            return None
-
-    return None
-
-
 def is_paywalled(context, request):
-    return zeit.web.core.view.get_c1_paywall_from_request(request)
+    return zeit.web.core.paywall.Paywall.status(request)
 
 
 class Base(object):
@@ -752,104 +707,7 @@ class Base(object):
 
     @zeit.web.reify
     def paywall(self):
-        return zeit.web.core.view.get_c1_paywall_from_request(self.request)
-
-
-class CeleraOneMixin(object):
-
-    def __call__(self):
-        resp = super(CeleraOneMixin, self).__call__()
-        self.request.response.headers.update(self.c1_header)
-        self.set_c1_meter_response_headers()
-        return resp
-
-    @zeit.web.reify
-    def _c1_channel(self):
-        return getattr(self, 'ressort', None)
-
-    @zeit.web.reify
-    def _c1_sub_channel(self):
-        return getattr(self, 'sub_ressort', None)
-
-    @zeit.web.reify
-    def _c1_entitlement(self):
-        access = getattr(self.context, 'access', None)
-        access_source = zeit.cms.content.sources.ACCESS_SOURCE.factory
-        return access_source.translate_to_c1(access)
-
-    @zeit.web.reify
-    def _c1_cms_id(self):
-        uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
-        return getattr(uuid, 'id', None)
-
-    @zeit.web.reify
-    def _c1_content_id(self):
-        return self.webtrekk_content_id
-
-    @zeit.web.reify
-    def _c1_doc_type(self):
-        if self.type == 'gallery':
-            return 'bildergalerie'
-        elif isinstance(self, zeit.web.core.view.FrameBuilder):
-            return 'arena'
-        else:
-            return self.type
-
-    @classmethod
-    def _headersafe(cls, string):
-        pattern = r'[^ %s]' % ''.join(werkzeug.http._token_chars)
-        return re.sub(pattern, '', string.encode('utf-8', 'ignore'))
-
-    def _get_c1_heading(self, prep=unicode):
-        if getattr(self.context, 'title', None) is not None:
-            return prep(self.context.title.strip())
-
-    def _get_c1_kicker(self, prep=unicode):
-        if getattr(self.context, 'supertitle', None) is not None:
-            return prep(self.context.supertitle.strip())
-
-    @zeit.web.reify
-    def c1_client(self):
-        return [(k, u'"{}"'.format(v.replace('"', r'\"'))) for k, v in {
-            'set_channel': self._c1_channel,
-            'set_sub_channel': self._c1_sub_channel,
-            'set_cms_id': self._c1_cms_id,
-            'set_content_id': self._c1_content_id,
-            'set_doc_type': self._c1_doc_type,
-            'set_entitlement': self._c1_entitlement,
-            'set_heading': self._get_c1_heading(),
-            'set_kicker': self._get_c1_kicker(),
-            'set_service_id': 'zon'
-        }.items() if v is not None] + [
-            ('set_origin', 'window.Zeit.getCeleraOneOrigin()')]
-
-    @zeit.web.reify
-    def c1_header(self):
-        return [(k, v.encode('utf-8', 'ignore')) for k, v in {
-            'C1-Track-Channel': self._c1_channel,
-            'C1-Track-Sub-Channel': self._c1_sub_channel,
-            'C1-Track-CMS-ID': self._c1_cms_id,
-            'C1-Track-Content-ID': self._c1_content_id,
-            'C1-Track-Doc-Type': self._c1_doc_type,
-            'C1-Track-Entitlement': self._c1_entitlement,
-            'C1-Track-Heading': self._get_c1_heading(self._headersafe),
-            'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
-            'C1-Track-Service-ID': 'zon'
-        }.items() if v is not None]
-
-    def set_c1_meter_response_headers(self):
-
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        if conf.get('environment') == 'production':
-            return
-
-        request = self.request
-
-        for req_header_name in request.headers:
-            if req_header_name.startswith('C1-Meter-'):
-                res_header_name = 'X-Debug-{}'.format(req_header_name)
-                res_header_value = request.headers.get(req_header_name, '')
-                request.response.headers[res_header_name] = res_header_value
+        return zeit.web.core.paywall.Paywall.status(self.request)
 
 
 class CommentMixin(object):
@@ -998,7 +856,7 @@ class CommentMixin(object):
         return result
 
 
-class Content(CeleraOneMixin, CommentMixin, Base):
+class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def basename(self):
@@ -1255,7 +1113,7 @@ class service_unavailable(object):  # NOQA
         return pyramid.response.Response(body, 503)
 
 
-class FrameBuilder(CeleraOneMixin):
+class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
 
