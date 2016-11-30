@@ -10,10 +10,8 @@ class Paywall(object):
 
     @staticmethod
     def c1requestheader_or_get(request, name):
-
         if name in request.headers:
             return request.headers.get(name, None)
-
         # We want to allow manipulation via GET-Params for testing,
         # but not in production
         if zeit.web.core.view.is_not_in_production(None, request):
@@ -21,16 +19,15 @@ class Paywall(object):
 
     @staticmethod
     def status(request):
-
-        # https://github.com/ZeitOnline/zeit.web/wiki/CeleraOne-Schranken
-
+        """See https://github.com/ZeitOnline/zeit.web/wiki/CeleraOne-Schranken
+        for possible headers and their meaning.
+        """
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
                 'reader_revenue'):
             return False
 
         c1_meter_status = Paywall.c1requestheader_or_get(
             request, 'C1-Meter-Status')
-
         c1_meter_user_status = Paywall.c1requestheader_or_get(
             request, 'C1-Meter-User-Status')
 
@@ -40,7 +37,7 @@ class Paywall(object):
             if c1_meter_status == 'always_paid':
                 return 'paid'
             elif c1_meter_status == 'paywall':
-                # "metered" is deducted indirectly.
+                # "metered" is deduced indirectly:
                 # To avoid metered-counts (would bloat varnish buckets),
                 # we check the user status when "paywall" occurs.
                 if c1_meter_user_status == 'anonymous':
