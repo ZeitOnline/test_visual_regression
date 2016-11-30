@@ -94,8 +94,6 @@ def c1requestheader_or_get(request, name):
 
     # We want to allow manipulation via GET-Params for testing,
     # but not in production
-    # TODO: Das hier (oder in der Funktion)cachen? Wir lesen ja bei jedem
-    # Zugriff die Konfiguration aus. Das wirkt unnötig teuer.
     if is_admin(None, request):
         return request.GET.get(name, None)
 
@@ -120,16 +118,15 @@ def get_c1_paywall_from_request(request):
         if c1_meter_status == 'always_paid':
             return 'paid'
         elif c1_meter_status == 'paywall':
-            # "metered" hier in indirekter Schlussfolgerung.
-            # Man könnte metered-counts vergleichen, aber das
-            # würde den Varnish aufblähen.
+            # "metered" is deducted indirectly.
+            # To avoid metered-counts (would bloat varnish buckets),
+            # we check the user status when "paywall" occurs.
             if c1_meter_user_status == 'anonymous':
                 return 'register'
             else:
                 return 'metered'
         else:
-            # Wenn ein Wert kommt, den wir nicht erwarten,
-            # zeigen wir im Zweifel keine Paywall an.
+            # In doubt, if C1 sends something unexpected, we show the content.
             return None
 
     return None
