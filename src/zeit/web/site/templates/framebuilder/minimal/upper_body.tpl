@@ -3,10 +3,10 @@
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 
-    {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" ignore missing %}
+    {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
 
     {% if view.framebuilder_requires_ivw %}
-        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" ignore missing %}
+        {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
     {% endif %}
 
     {% block skiplink -%}

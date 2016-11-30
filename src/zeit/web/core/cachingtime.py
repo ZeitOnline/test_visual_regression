@@ -141,17 +141,31 @@ def varnish_caching_time_feed(context):
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
 @grokcore.component.adapter(zeit.content.image.image.TemporaryImage)
-def caching_time_external(context):
+def caching_time_temporary_image(context):
     expires = zeit.web.core.interfaces.IExpiration(context, None)
     expires = expires and expires.seconds
     if expires is not None:
         return max(expires, 0)
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return int(conf.get('caching_time_external', '600'))
+    return int(conf.get('caching_time_image', '600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
 @grokcore.component.adapter(zeit.content.image.image.TemporaryImage)
-def varnish_caching_time_external(context):
+def varnish_caching_time_temporary_image(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('varnish_caching_time_image', '600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
+@grokcore.component.adapter(zeit.web.core.interfaces.IExternalTemporaryImage)
+def caching_time_external_image(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_external', '600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
+@grokcore.component.adapter(zeit.web.core.interfaces.IExternalTemporaryImage)
+def varnish_caching_time_external_image(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return int(conf.get('varnish_caching_time_external', '600'))

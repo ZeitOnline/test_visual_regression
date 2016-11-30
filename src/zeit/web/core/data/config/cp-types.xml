@@ -11,6 +11,7 @@
   <type name="template">Template</type>
   <type name="archive-print-volume">Archiv-Print-Volume</type>
   <type name="archive-print-year">Archiv-Print-Year</type>
+  <type name="volume">Ausgabenseite</type>
   <type name="ZMO">ZMO-Homepage</type>
   <type name="storystream">Storystream</type>
   <type name="serienseite">Serienseite</type>

@@ -1,6 +1,6 @@
 <url>
     <loc>{{ teaser.uniqueId | create_url }}</loc>
-    <lastmod>{{ teaser | mod_date }}</lastmod>
+    <lastmod>{{ teaser | mod_date | format_date('iso8601') }}</lastmod>
     {% require image = get_image(module, variant_id='wide', fallback=False) %}
         {%- set source = request.image_host + image.path + '__1300x731' -%}
         {%- set copyright = image.copyrights | map('first') | join(', ') -%}

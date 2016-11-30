@@ -801,13 +801,6 @@ def test_health_check_with_fs_should_be_configurable(testbrowser):
         zeit.web.core.view.health_check('request')
 
 
-def test_reader_revenue_status_should_be_sent_to_webtrekk(dummy_request):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/all-blocks')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.webtrekk['customParameter']['cp28'] == 'free'
-
-
 def test_reader_revenue_status_should_utilize_feature_toggle(
         dummy_request, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
@@ -818,22 +811,21 @@ def test_reader_revenue_status_should_utilize_feature_toggle(
     assert 'cp28' not in view.webtrekk['customParameter'].keys()
 
 
-def test_reader_revenue_status_should_default_to_free_for_zede(
-        dummy_request):
+def test_reader_revenue_status_should_reflect_access_right(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/all-blocks')
+        'http://xml.zeit.de/zeit-online/article/01')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp28'] == 'free'
 
-
-def test_reader_revenue_status_should_default_to_registration_for_zei(
-        dummy_request, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'product_id', 'ZEI')
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/zeit')
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp28'] == 'registration'
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp28'] == 'abo'
 
 
 def test_jquery_not_overwritten(testserver, selenium_driver):
@@ -930,3 +922,14 @@ def test_notfication_after_paywall_registration_renders_correctly(
     driver.get(
         '{0}/campus/article/infographic{1}'.format(testserver.url, url_hash))
     assert_notification()
+
+
+def test_http_header_should_contain_c1_debug_echoes(testserver):
+    response = requests.get(
+        '%s/zeit-online/article/simple' % testserver.url,
+        headers={
+            'C1-Meter-Status': 'always_paid',
+            'C1-Meter-User-Status': 'anonymous',
+        })
+    assert response.headers.get('x-debug-c1-meter-status') == 'always_paid'
+    assert response.headers.get('x-debug-c1-meter-user-status') == 'anonymous'

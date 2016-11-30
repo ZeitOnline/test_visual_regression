@@ -1,7 +1,7 @@
 .centerpage-header
 	background-color: $zon-lighter-grey
 	margin: remify(0 (-$page-padding) 32px)
-	padding: remify(40px $page-padding)
+	padding: remify($page-padding*2 $page-padding)
 
 	+respond-min($break-tablet-min)
 		margin-bottom: remify(48px)
@@ -14,16 +14,13 @@
 	&__text
 		font-size: remify(16px)
 		font-family: $font-franziska
-		padding: $page-padding--small
+		padding: $page-padding--small 0
 
 .centerpage-header--archive
 	background-color: transparent
 	border-bottom: 1px solid $color-border
 	text-align: center
-	padding: remify($page-padding)
-
-	+respond-min($break-tablet-min)
-		margin: remify(0 $page-padding)
+	margin: remify(0 $page-padding 32px)
 
 	.centerpage-header
 		&__title
@@ -48,12 +45,18 @@
 			+animated-interaction()
 			margin-left: $page-padding
 			border-bottom: 1px solid $zon-light-grey
-			margin: remify(0 $page-padding 32px)
+			margin: remify(0 $page-padding)
+			padding-top: $page-padding--small
+
+		+respond-min($break-phablet-min)
+			&__text
+				font-size: remify(20px)
+				max-width: remify(600px)
+				margin-left: auto
+				margin-right: auto
 
 		+respond-min($break-tablet-min)
 			&__title
 				font-size: remify(34px)
 
-			&__text
-				font-size: remify(20px)
 

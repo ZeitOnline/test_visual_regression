@@ -153,28 +153,19 @@ def is_column_article(context, request):
     return getattr(context, 'serie', None) and context.serie.column
 
 
-def has_author_image(context, request):
-    return zope.component.queryAdapter(
-        context, zeit.web.core.interfaces.IImage, 'author')
-
-
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article,
-                                has_author_image),
+                                is_column_article),
              renderer='templates/article.html')
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
                                 is_column_article,
-                                has_author_image,
                                 zeit.web.core.view.is_paywalled),
              renderer='zeit.web.core:templates/paywall.html')
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article,
-                                has_author_image),
+                                is_column_article),
              name='komplettansicht',
              renderer='templates/komplettansicht.html')
 @view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
                                 is_column_article,
-                                has_author_image,
                                 zeit.web.core.view.is_paywalled),
              name='komplettansicht',
              renderer='zeit.web.core:templates/paywall.html')
@@ -185,14 +176,12 @@ class ColumnArticle(Article):
 
 @view_config(name='seite',
              custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article,
-                                has_author_image),
+                                is_column_article),
              path_info='.*seite-(.*)',
              renderer='templates/article.html')
 @view_config(name='seite',
              custom_predicates=(zeit.web.site.view.is_zon_content,
                                 is_column_article,
-                                has_author_image,
                                 zeit.web.core.view.is_paywalled),
              path_info='.*seite-(.*)',
              renderer='zeit.web.core:templates/paywall.html')

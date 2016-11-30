@@ -4,12 +4,60 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.18 (unreleased)
+3.21 (unreleased)
 -----------------
+
+- BUG-549: Fix ressort navigation width for Safari >= Version 10
+
+- MAINT: Remove separate is_admin setting
+
+
+3.20 (2016-11-24)
+-----------------
+
+- ZON-3478: Polish Archivepage
+
+- BUG-577: Provide spacing for ZMO article header with expired images
+
+- BUG-581: Require author image for buzzboard column
+
+- BUG-583: Fix pagination for author pages
+
+- BUG-592: Make author page pagination SEO friendly
+
+- BUG-590: Remove webtrekk custom parameter for `login` from cached HTML
+
+- BUG-591: Report access right to webtrekk literally
+
+- FIX: Fix margin of blog marker on fullwidth teaser
+
+- FIX: Be defensive about missing values in agatho response
+
+- OPS-425: Add code style linting to ZMO scripts
+
+- MAINT: Return C1 headers as debug information
+
+
+3.19 (2016-11-21)
+-----------------
+
+- ZON-3481: Correct sitemap date format to ISO-8601
+
+- BUG-573: Distinguish caching between external and internal temporary images
+
+- BUG-586: Improve rendering speed of SpektrumFeed
+
+
+3.18 (2016-11-21)
+-----------------
+
+- ZON-3465: Add new authentication provider configuration for rawr
 
 - BUG-537: Omit zett/spektrum parquet area if RSS feed is empty or unavailable
 
 - MAINT: Make single page videos available as html5 video tag
+
+- MAINT: Only use Jinja’s ignore missing mark if appropriate.
 
 
 3.17 (2016-11-11)
@@ -51,7 +99,7 @@ POSTDEPLOY
 
 - MAINT: Use sensible default caching times
 
-- MAINT: Make caching time for newsfeed.zeit.de
+- MAINT: Make caching time for newsfeed.zeit.de configurable
 
 - MAINT: Fix typography for .x-footer--borderless
 

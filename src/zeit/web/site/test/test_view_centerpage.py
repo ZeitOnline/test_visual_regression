@@ -2151,7 +2151,7 @@ def test_ranking_area_should_be_found_regardless_of_kind(
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     cp.body.values()[1].values()[0].kind = 'author-list'
     view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
-    assert view.area_ranking
+    assert view.area_providing_pagination
 
 
 def test_no_author_should_not_display_byline(testbrowser, workingcopy):
@@ -2480,6 +2480,8 @@ def test_volume_overview_has_adapted_centerpage_header(
         '.centerpage-header--archive')
     text = driver.find_element_by_css_selector(
         '.centerpage-header__text')
+    title = driver.find_element_by_css_selector(
+        '.centerpage-header__title')
     dropdown = driver.find_element_by_css_selector(
         '.centerpage-header__dropdown')
     link = driver.find_element_by_css_selector(
@@ -2487,9 +2489,10 @@ def test_volume_overview_has_adapted_centerpage_header(
     dropdown.find_element_by_xpath("//option[text()='1947']").click()
 
     assert header.is_displayed()
-    assert text.is_displayed()
     assert dropdown.is_displayed()
     assert link.is_displayed()
+    assert 'DIE ZEIT aus dem Jahr 2016' in text.text
+    assert 'Jahrgang 2016' in title.text
     assert '1947/index' in link.get_attribute('href')
 
 

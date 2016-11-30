@@ -1,4 +1,5 @@
 # coding: utf-8
+import math
 import pyramid.view
 import zope.component
 
@@ -18,7 +19,8 @@ log = logging.getLogger(__name__)
     context=zeit.content.author.interfaces.IAuthor,
     renderer='templates/author.html')
 @pyramid.view.view_config(name='')
-class Author(zeit.web.site.view.Base):
+class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
+             zeit.web.site.view.Base):
     """This view implements tabs that each have their own URL.
     To add a tab, subclass this, configure a different view name and provide
     a different ``tab_areas``.
@@ -97,6 +99,12 @@ class Author(zeit.web.site.view.Base):
     @zeit.web.reify
     def area_articles(self):
         return create_author_article_area(self.context)
+
+    @zeit.web.reify
+    def area_providing_pagination(self):
+        for area in self.tab_areas:
+            if zeit.web.core.interfaces.IPagination.providedBy(area):
+                return area
 
     @zeit.web.reify
     def has_author_comments(self):
@@ -190,6 +198,14 @@ class AuthorRanking(zeit.web.core.area.ranking.Ranking):
         if self.page == 1:
             return 0
         return self.count * (self.page - 1) - self.surrounding_teasers
+
+    @zeit.web.reify
+    def total_pages(self):
+        count = self.context._count
+        items = self.hits + self.surrounding_teasers
+        if items > 0 < count:
+            return int(math.ceil(float(items) / float(count)))
+        return 0
 
 
 class UserCommentsArea(zeit.web.core.centerpage.Area):

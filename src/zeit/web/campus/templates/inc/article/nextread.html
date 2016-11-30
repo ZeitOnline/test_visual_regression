@@ -10,5 +10,5 @@ This is the nextread area at the bottom of an article.
     {% set teaser_type = teaser | block_type %}
     {% include
         ["zeit.web.campus:templates/inc/article/nextread/{}.html".format(teaser_type),
-         "zeit.web.campus:templates/inc/article/nextread/default.html"] ignore missing %}
+         "zeit.web.campus:templates/inc/article/nextread/default.html"] %}
 </aside>
