@@ -31,6 +31,7 @@
     $.fn.adaptToSpace = function() {
 
         function Container( element ) {
+            this.maxWidth = 0;
             this.node = element;
             this.element = $( element );
             this.featured = this.element.find( '.nav__ressorts-item--featured' );
@@ -71,6 +72,15 @@
                 $( window ).on( 'resize', $.debounce( function() {
                     self.adapt();
                 }, 100 ));
+                // BUG-549
+                // safari gets the width of pseudo elements wrong
+                // found no better fix than measuring again late in process
+                $( window ).on( 'load', function( event ) {
+                    if ( self.isDesktop() && self.node.scrollWidth > self.maxWidth ) {
+                        self.adapt();
+                    }
+                    $( this ).off( event );
+                });
             },
             adapt: function() {
                 var parent = this.element.parent();
@@ -81,12 +91,12 @@
                 if ( this.isDesktop() ) {
                     parent.removeClass( 'nav__ressorts--fitted' );
                     this.clonedItems.hide();
+                    this.maxWidth = parent.width();
 
-                    var maxWidth = parent.width(),
-                        index;
+                    var index = this.items.length;
 
-                    for ( index = this.items.length; index--; ) {
-                        if ( this.node.scrollWidth > maxWidth ) {
+                    for ( ; index--; ) {
+                        if ( this.node.scrollWidth > this.maxWidth ) {
                             this.items.eq( index ).hide();
                             this.clonedItems.eq( index ).show();
                         } else {
