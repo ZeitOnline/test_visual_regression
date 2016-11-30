@@ -61,7 +61,7 @@ def is_paginated(context, request):
         return False
 
 
-def is_admin(context, request):
+def is_not_in_production(context, request):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return ((conf.get('environment') != 'production') or
             (request.client_addr == '127.0.0.1'))

@@ -16,7 +16,7 @@ class Paywall(object):
 
         # We want to allow manipulation via GET-Params for testing,
         # but not in production
-        if zeit.web.core.view.is_admin(None, request):
+        if zeit.web.core.view.is_not_in_production(None, request):
             return request.GET.get(name, None)
 
     @staticmethod
