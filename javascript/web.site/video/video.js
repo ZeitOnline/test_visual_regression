@@ -27,9 +27,10 @@ define([ 'jquery' ],
                         elem: [],
                         playerData: {
                             'accountId': '18140073001',
-                            'playerId': '65fa926a-0fe0-4031-8cbf-9db35cecf64a'
+                            'playerId': '65fa926a-0fe0-4031-8cbf-9db35cecf64a',
+                            'embed': 'default'
                         },
-                        type: 'iframe' // change to 'html5' when html5 player is available
+                        type: 'html5' // change to 'html5' when html5 player is available
                     }, config ),
                     /**
                      * html templates for player code
@@ -43,16 +44,24 @@ define([ 'jquery' ],
                                 'src=\'//players.brightcove.net/{{accountId}}/' +
                                 '{{playerId}}_default/index.html?videoId={{videoId}}\' ' +
                                 'allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div>',
-                        html5: '' // supply template
+                        html5:  '<div class=\'video-player\'>' +
+                                '<video data-account=\'{{accountId}}\' ' +
+                                'data-player=\'{{playerId}}\' ' +
+                                'data-embed=\'{{embed}}\' ' +
+                                'data-video-id=\'{{videoId}}\' ' +
+                                'class=\'video-js video-player__videotag\' preload=\'none\' controls></video></div>' +
+                                '<script src=\'//players.brightcove.net/{{accountId}}/' +
+                                '{{playerId}}_{{embed}}/index.min.js\'></script>'
                     },
                     snippet;
                 if ( typeof videoId === 'undefined' ) {
                     return;
                 } else {
                     snippet = templates[defaults.type]
-                            .replace( '{{accountId}}', defaults.playerData.accountId )
-                            .replace( '{{playerId}}', defaults.playerData.playerId )
-                            .replace( '{{videoId}}', videoId );
+                            .replace( /\{{accountId}}/g, defaults.playerData.accountId )
+                            .replace( /\{{playerId}}/g, defaults.playerData.playerId )
+                            .replace( /\{{videoId}}/g, videoId )
+                            .replace( /\{{embed}}/g, 'default' );
                     if ( defaults.elem.size() > 0 ) {
                         $.each( defaults.elem, function( index, value ) {
                             $( defaults.elem[index] ).empty().html( snippet );

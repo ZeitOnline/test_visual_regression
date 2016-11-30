@@ -16,6 +16,34 @@
             {% include "zeit.web.site:templates/inc/teaser/video-large.tpl" %}
             {{- view.append_to_webtrekk_assets(['video', region_loop.index, 1, 1] | join('.')) -}}
         {% endwith %}
+        <div id="placeHolder">
+    <button onclick="addPlayer()">Add Player</button>
+  </div>
+      <!-- custom script -->
+      <script type="text/JavaScript">
+        var myPlayer,
+          playerHTML,
+          playerData = {
+            'accountId': '18140073001',
+            'playerId': '65fa926a-0fe0-4031-8cbf-9db35cecf64a',
+          };
+
+        function addPlayer() {
+          // dynamically build the player video element
+          playerHTML = '<video id=\"myPlayer\" data-account=\"' + playerData.accountId + '\" data-player=\"' + playerData.playerId + '\" data-embed=\"default\" class=\"video-js\" controls></video>';
+          // inject the player code into the DOM
+          document.getElementById('placeHolder').innerHTML = playerHTML;
+          // add and execute the player script tag
+          var s = document.createElement('script');
+          s.src = "http://players.brightcove.net/" + playerData.accountId + "/" + playerData.playerId + "_default/index.min.js";
+          document.body.appendChild(s);
+          s.onload = callback;
+        }
+
+        function callback() {
+          myPlayer = videojs('myPlayer');
+        }
+      </script>
     </div>
     <div class="video-stage-secondary">
         <h6 class="video-stage-secondary__title">Die neuesten Videos</h6>
