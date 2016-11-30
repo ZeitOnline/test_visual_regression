@@ -4,8 +4,16 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.21 (unreleased)
+3.22 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.21 (2016-11-30)
+-----------------
+
+- ZON-3512: Evaluate C1 paywall headers correctly
 
 - BUG-549: Fix ressort navigation width for Safari >= Version 10
 
