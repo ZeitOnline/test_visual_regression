@@ -7,7 +7,7 @@ POSTDEPLOY
 3.22 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3408: Add ZMO paywalls
 
 
 3.21 (2016-11-30)
