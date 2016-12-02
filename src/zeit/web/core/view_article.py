@@ -262,12 +262,12 @@ class Article(zeit.web.core.view.Content):
         # default values
         badge = {
             'cover': False,  # volume cover
-            'hide_source_label': False, # state spurce label
+            'hide_source_label': False,  # state of source label
             'intro': '',  # intro text for article badge
             'link': None,  # link to archiv or exclusiv page
             'link_text': '',  # link text
             'zplus': False,  # zplus state
-            'is_print': False  # zon or print
+            'volume_exists': False  # has a volume object
         }
 
         try:
@@ -287,7 +287,7 @@ class Article(zeit.web.core.view.Content):
                         self.request.host,
                         self.volume.year,
                         self.volume.volume),
-                    'is_print': True
+                    'volume_exists': True
                 })
 
                 if access != 'abo':
