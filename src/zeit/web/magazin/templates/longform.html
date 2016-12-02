@@ -46,14 +46,10 @@
             <div class="article__head-wrap">
 
                 {% require block = view.header_module %}
-                    {# longforms do have a special headerimage (which has the same name as article headerimages) #}
-                    {% if is_instance(block, 'zeit.web.core.block.Image') %}
-                        {% set type = 'headerimage-longform' %}
-                    {% else %}
-                        {% set type = block | block_type %}
-                    {% endif %}
-
-                    {% include "zeit.web.magazin:templates/inc/blocks/{0}.html".format(type) ignore missing %}
+                    {% set type = block | block_type %}
+                    {% include [
+                        "zeit.web.magazin:templates/inc/blocks/header{0}-longform.html".format(type),
+                        "zeit.web.magazin:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
                 {% endrequire %}
 
                 {% include "zeit.web.magazin:templates/inc/headers/article_header_longform.html" %}
