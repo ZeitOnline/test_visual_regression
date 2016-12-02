@@ -252,9 +252,6 @@ class Article(zeit.web.core.view.Content):
         return zeit.content.volume.interfaces.IVolume(self.context, None)
 
     # this property returns all the information for the article header badge
-    # - Z+ logo and link for subscription content
-    # - cover and link for print volume where applicable
-    # ... a more descriptive name would be zplus_or_volume_badge
     @zeit.web.reify
     def zplus_label(self):
 
@@ -264,12 +261,13 @@ class Article(zeit.web.core.view.Content):
 
         # default values
         badge = {
-            'cover': False,
-            'hide_source_label': False,
-            'intro': '',
-            'link': None,
-            'link_text': '',
-            'zplus': False
+            'cover': False,  # volume cover
+            'hide_source_label': False, # state spurce label
+            'intro': '',  # intro text for article badge
+            'link': None,  # link to archiv or exclusiv page
+            'link_text': '',  # link text
+            'zplus': False,  # zplus state
+            'is_print': False  # zon or print
         }
 
         try:
@@ -289,6 +287,7 @@ class Article(zeit.web.core.view.Content):
                         self.request.host,
                         self.volume.year,
                         self.volume.volume),
+                    'is_print': True
                 })
 
                 if access != 'abo':
