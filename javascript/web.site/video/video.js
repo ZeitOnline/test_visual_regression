@@ -21,6 +21,7 @@ define([ 'jquery' ],
                  * @type {object}
                  * @property {array} elem list of dom nodes to replace by video
                  * @property {object} playerData standard data about the bc player
+                 * @property {object} players save require config here
                  * @property {string} html5 use 'html5' player (not available yet) or 'iframe'
                  */
                 var defaults = $.extend({
@@ -30,6 +31,7 @@ define([ 'jquery' ],
                             'playerId': '65fa926a-0fe0-4031-8cbf-9db35cecf64a',
                             'embed': 'default'
                         },
+                        players: {},
                         type: 'html5' // change to 'html5' when html5 player is available
                     }, config ),
                     /**
@@ -59,12 +61,29 @@ define([ 'jquery' ],
                             .replace( /\{{playerId}}/g, defaults.playerData.playerId )
                             .replace( /\{{videoId}}/g, videoId )
                             .replace( /\{{embed}}/g, 'default' );
-                    if ( defaults.elem.size() > 0 ) {
-                        $.each( defaults.elem, function( index, value ) {
-                            $( defaults.elem[index] ).empty().html( snippet );
+                    $.each( defaults.elem, function( index, value ) {
+                        $( defaults.elem[index] ).empty().html( snippet );
+                    });
+                    // in case of html5 player we have to load a script from brightcove
+                    // if your site uses require.js, this same script needs to be required
+                    // but for each player individually, so we need n local requires
+                    if ( defaults.type === 'html5' ) {
+                        // build video and account dependet js source address
+                        scriptSrc = scriptSrc
+                            .replace( /\{{accountId}}/g, defaults.playerData.accountId )
+                            .replace( /\{{playerId}}/g, defaults.playerData.playerId )
+                            .replace( /\{{embed}}/g, 'default' );
+                        // add encapsuled require config per videoId
+                        // http://requirejs.org/docs/api.html#multiversion
+                        defaults.players[ videoId ] = require.config({
+                            'paths': { 'bc': scriptSrc },
+                            'timeout': 30,
+                            'context': videoId
                         });
+                        // require the script
+                        defaults.players[ videoId ]( [ 'require', 'bc' ] );
                     }
-                    return $( snippet );
+                    return defaults.elem;
                 }
             }
         };
