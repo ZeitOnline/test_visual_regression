@@ -39,19 +39,15 @@ define([ 'jquery' ],
                      * @property {string} html5 code for the html5 player
                      */
                     templates = {
-                        iframe: '<div class=\'video-player\'>' +
-                                '<iframe class=\'video-player__iframe\' ' +
-                                'src=\'//players.brightcove.net/{{accountId}}/' +
-                                '{{playerId}}_default/index.html?videoId={{videoId}}\' ' +
+                        iframe: '<div class="video-player">' +
+                                '<iframe class="video-player__iframe" ' +
+                                'src="//players.brightcove.net/{{accountId}}/' +
+                                '{{playerId}}_default/index.html?videoId={{videoId}}" ' +
                                 'allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div>',
-                        html5:  '<div class=\'video-player\'>' +
-                                '<video data-account=\'{{accountId}}\' ' +
-                                'data-player=\'{{playerId}}\' ' +
-                                'data-embed=\'{{embed}}\' ' +
-                                'data-video-id=\'{{videoId}}\' ' +
-                                'class=\'video-js video-player__videotag\' preload=\'none\' controls></video></div>' +
-                                '<script src=\'//players.brightcove.net/{{accountId}}/' +
-                                '{{playerId}}_{{embed}}/index.min.js\'></script>'
+                        html5:  '<div class="video-player">' +
+                                '<video id="player-{{videoId}}" data-account="{{accountId}}" ' +
+                                'data-player="{{playerId}}" data-embed="{{embed}}" data-video-id="{{videoId}}" ' +
+                                'class="video-js video-player__videotag" preload="none"></video></div>'
                     },
                     snippet;
                 if ( typeof videoId === 'undefined' ) {
