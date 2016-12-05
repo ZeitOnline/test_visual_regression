@@ -50,6 +50,10 @@
     <!-- XXX Temporary workaround: We load parts of retresco,
          but use ITagger and IWhitelist from intrafind. -->
     <grok:grok package="zeit.retresco.convert" />
+    <utility provides="zeit.retresco.interfaces.ITMS"
+             factory="zeit.retresco.connection.from_product_config"
+            />
+
     <include package="zeit.intrafind" />
 
     <!-- We only want the solr connection, but not IUpdater etc, since that
