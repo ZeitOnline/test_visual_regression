@@ -49,8 +49,9 @@ define([ 'jquery' ],
                                 'data-player="{{playerId}}" data-embed="{{embed}}" data-video-id="{{videoId}}" ' +
                                 'class="video-js video-player__videotag" preload="none"></video></div>'
                     },
-                    snippet;
-                if ( typeof videoId === 'undefined' ) {
+                    snippet,
+                    scriptSrc = '//players.brightcove.net/{{accountId}}/{{playerId}}_{{embed}}/index.min';
+                if ( typeof videoId === 'undefined' && defaults.elem.length < 1 ) {
                     return;
                 } else {
                     snippet = templates[defaults.type]
