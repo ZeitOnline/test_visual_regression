@@ -128,7 +128,7 @@ def login_state(request):
 
 @pyramid.view.view_config(
     route_name='dashboard_user',
-    renderer='templates/inc/module/dashboard_user.html',
+    renderer='templates/dashboard_user.html',
     http_cache=60)
 class UserDashboard(zeit.cms.content.sources.SimpleXMLSourceBase, Base):
     product_configuration = 'zeit.web'
