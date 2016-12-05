@@ -32,7 +32,7 @@ define([ 'jquery' ],
                             'embed': 'default'
                         },
                         players: {},
-                        type: 'html5' // change to 'html5' when html5 player is available
+                        type: 'html5'
                     }, config ),
                     /**
                      * html templates for player code
