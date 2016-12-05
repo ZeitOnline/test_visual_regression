@@ -142,7 +142,7 @@ class UserDashboard(zeit.cms.content.sources.SimpleXMLSourceBase, Base):
                 location=conf.get('sso_url'))
         try:
             self.context = zeit.cms.interfaces.ICMSContent(
-                'http://xml.zeit.de/index')
+                conf.get('vivi_zeit.web_dashboardusercp-url'))
             self.dashboard_user = self.dashboard_user()
         except TypeError:
             raise pyramid.httpexceptions.HTTPNotFound()
