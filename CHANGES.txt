@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-3408: Add ZMO paywalls
 
+- ZON-3118: Swap article bodies with intext-link data from TMS (feature-toggled)
+
 - MAINT: Set banner_channel for author pages
 
 
