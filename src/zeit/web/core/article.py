@@ -158,25 +158,25 @@ def get_retresco_body(article):
     conn = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
     toggles = zeit.web.core.application.FEATURE_TOGGLES
 
-    try:
-        assert toggles.find('enable_intext_links') is True
-        assert not zeit.seo.interfaces.ISEO(article).disable_intext_links
+    if toggles.find('enable_intext_links'):
+        try:
+            assert not zeit.seo.interfaces.ISEO(article).disable_intext_links
 
-        uuid = zeit.cms.content.interfaces.IUUID(article).id
-        timeout = conf.get('retresco_timeout', 0.1)
-        body = conn.get_article_body(uuid, timeout=timeout)
+            uuid = zeit.cms.content.interfaces.IUUID(article).id
+            timeout = conf.get('retresco_timeout', 0.1)
+            body = conn.get_article_body(uuid, timeout=timeout)
 
-        if unichr(65533) in body:
-            # XXX Stopgap until tms encoding issues are resolved
-            raise ValueError('Encountered encoding issues in retresco body')
+            if unichr(65533) in body:
+                # XXX Stopgap until tms encoding issues are resolved
+                raise ValueError(
+                    'Encountered encoding issues in retresco body')
 
-        xml = gocept.lxml.objectify.fromstring(body)
-    except AssertionError:
-        log.info(
-            'Retresco preconditions unmet %s' % article, exc_info=True)
-    except:
-        log.warning(
-            'Retresco article enrichment failed %s' % article, exc_info=True)
+            xml = gocept.lxml.objectify.fromstring(body)
+        except AssertionError:
+            log.debug('Retresco body disabled for %s', article.uniqueId)
+        except:
+            log.warning(
+                'Retresco body failed for %s', article.uniqueId, exc_info=True)
 
     return zope.component.queryMultiAdapter(
         (article, xml),
