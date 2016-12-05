@@ -59,7 +59,7 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
 
     @zeit.web.reify
     def banner_channel(self):
-        return ''
+        return 'administratives/autoren'
 
     @zeit.web.reify
     def ressort(self):

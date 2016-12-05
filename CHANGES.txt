@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-3408: Add ZMO paywalls
 
+- MAINT: Set banner_channel for author pages
+
 
 3.21 (2016-11-30)
 -----------------
