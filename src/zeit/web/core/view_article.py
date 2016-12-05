@@ -235,12 +235,6 @@ class Article(zeit.web.core.view.Content):
             return None
 
     @zeit.web.reify
-    def pdf_link(self):
-        server = 'http://pdf.zeit.de/'
-        path = '/'.join(self.request.traversed)
-        return server + path + '.pdf'
-
-    @zeit.web.reify
     def print_link(self):
         url = self.content_url
         prefix = '/komplettansicht'
