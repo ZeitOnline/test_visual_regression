@@ -176,6 +176,13 @@ def get_login_state(request):
     info['logout'] = u'{}/abmelden?url={}'.format(
         settings['sso_url'], destination)
 
+    # toggle if rawr shows registry in iframe or in new window
+    if zeit.web.core.application.FEATURE_TOGGLES.find('rawr_iframe'):
+        info['register_rawr'] = (u'{}/registrieren_email?template=rawr&url={}'
+                                 .format(settings['sso_url'], destination))
+    else:
+        info['register_rawr'] = info['register']
+
     if request.user:
         info['user'] = request.user
         info['profile'] = "{}/user".format(settings['community_host'])
