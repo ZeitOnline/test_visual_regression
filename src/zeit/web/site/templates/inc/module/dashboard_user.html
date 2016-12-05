@@ -2,7 +2,7 @@
 {% block main %}
 <div class="dashboard">
     <div class="dashboard__upper">
-        <div class="article__item">
+        <div class="dashboard__item">
             <h1 class="dashboard__header" itemprop="headline">
                 <span class="dashboard__kicker">
                     {{view.dashboard_user.kicker}}
@@ -12,7 +12,7 @@
         </div>
     </div>
     <div class="dashboard__lower">
-        <div class="article__item">
+        <div class="dashboard__item">
             <div class="dashboard__user">
                 {% if request.user.picture %}
                     <img src="{{request.user.picture}}" class="dashboard__user-image" />
@@ -40,7 +40,7 @@
     </div>
     <!-- body -->
     <div class="dashboard__content">
-        <div class="article__item">
+        <div class="dashboard__item">
               {% for section in view.dashboard_user.sections['body'] %}
                 <div class="dashboard__box" data-ct-area="user-dashboard" data-ct-column="false">
                 <h2 class="dashboard__box-title">{{section.section_atts.name}}</h2>

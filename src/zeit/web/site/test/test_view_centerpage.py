@@ -2611,10 +2611,10 @@ def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
     b = testbrowser()
     b.mech_browser.set_handle_redirect(False)
     try:
-       b.open('/konto')
+        b.open('/konto')
     except urllib2.HTTPError, e:
-       assert e.getcode() == 302
-       assert e.hdrs.get('location') == 'http://sso.example.org'
+        assert e.getcode() == 302
+        assert e.hdrs.get('location') == 'http://sso.example.org'
 
     # browser with sso session
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)

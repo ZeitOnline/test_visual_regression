@@ -14,6 +14,9 @@
 		padding: $page-padding 0
 		margin: 0
 
+	&__item
+		@extend .article__item
+
 	&__kicker
 		color: $charcoal
 		display: block
@@ -59,8 +62,8 @@
 		&:last-child
 			margin-bottom: $page-padding
 
-	&__box--is-header
-		border-bottom: none
+		&--is-header
+			border-bottom: none
 
 	&__box-title
 		text-transform: uppercase
@@ -88,7 +91,7 @@
 			font-size: remify(32px)
 
 		&__lower
-			.article__item
+			.dashboard__item
 				display: flex
 
 		&__user
@@ -101,8 +104,10 @@
 			display: flex
 			flex-wrap: wrap
 
-		&__box--is-header
-			display: block
+			&--is-header
+				display: block
+				.dashboard__box-list
+					width: auto
 
 		&__box-title
 			width: 100%
@@ -110,7 +115,5 @@
 		&__box-list
 			width: 50%
 
-		&__box--is-header
-			.dashboard__box-list
-				width: auto
+
 
