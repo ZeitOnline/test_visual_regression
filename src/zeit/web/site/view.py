@@ -5,8 +5,7 @@ import urllib
 import pyramid.httpexceptions
 import pyramid.view
 
-import zeit.content.article.interfaces
-import zeit.content.video.interfaces
+import zeit.content.rawxml.interfaces
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
 
@@ -127,12 +126,9 @@ def login_state(request):
 
 
 @pyramid.view.view_config(
-    route_name='dashboard_user',
-    renderer='templates/dashboard_user.html',
-    http_cache=60)
-class UserDashboard(zeit.cms.content.sources.SimpleXMLSourceBase, Base):
-    product_configuration = 'zeit.web'
-    config_url = 'dashboarduser-source'
+    context=zeit.content.rawxml.interfaces.IUserDashboard,
+    renderer='templates/dashboard_user.html')
+class UserDashboard(Base):
 
     def __init__(self, context, request):
         super(UserDashboard, self).__init__(context, request)
@@ -140,15 +136,17 @@ class UserDashboard(zeit.cms.content.sources.SimpleXMLSourceBase, Base):
         if not self.request.user:
             raise pyramid.httpexceptions.HTTPFound(
                 location=conf.get('sso_url'))
-        try:
-            self.context = zeit.cms.interfaces.ICMSContent(
-                conf.get('vivi_zeit.web_dashboardusercp-url'))
-            self.dashboard_user = self.dashboard_user()
-        except TypeError:
-            raise pyramid.httpexceptions.HTTPNotFound()
+        # XXX There's nothing in ICommonMetadata that's relevant for the
+        # dashboard (and rawxml objects rightfully don't have it), but
+        # `layout.html` and `view.Base` expect it, which feels somewhat wrong
+        # and should be cleaned up; for now we pacify them with default values.
+        zeit.cms.browser.form.apply_default_values(
+            self.context, zeit.cms.content.interfaces.ICommonMetadata,
+            set_none=True)
 
+    @zeit.web.reify
     def dashboard_user(self):
-        xml = self._get_tree()
+        xml = self.context.xml
         sections_xml_header = xml.xpath('//section[@class="header"]')
         sections_xml_body = xml.xpath('//section[@class="body"]')
         return {
