@@ -191,8 +191,6 @@ def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
     testbrowser.cookies.forURL(
         'http://localhost')['my_sso_cookie'] = sso_cookie
     testbrowser.open('/login-state')
-    from zeit.web.core.session import SESSION_CACHE
-    data = SESSION_CACHE.get(sso_cookie)
     browser = testbrowser('/konto')
 
     # main structure
