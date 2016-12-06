@@ -154,16 +154,17 @@ class UserDashboard(Base):
         return self.context.xml.kicker
 
     def dashboard_sections(self, class_):
-        xml = self.context.xml
-        return [self._iter_section(section)
-                for section in xml.xpath('//section[@class="%s"]' % class_)]
+        return [self._parse_section(section) for section
+                in self.context.xml.xpath('//section[@class="%s"]' % class_)]
 
-    def _iter_section(self, section):
-        links = section.xpath('link')
-        lnks = [{'text': link.text, 'attributes': link.attrib}
-                for link in links]
-        sctn = section.attrib
-        return {'section_atts': sctn, 'links': lnks}
+    def _parse_section(self, section):
+        result = dict(section.attrib)
+        result['links'] = []
+        for node in section.xpath('link'):
+            link = dict(node.attrib)
+            link['text'] = node.text
+            result['links'].append(link)
+        return result
 
 
 @pyramid.view.view_config(route_name='schlagworte')
