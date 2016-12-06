@@ -6,7 +6,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 import lxml.html
-import urllib2
 import mock
 import pyramid.httpexceptions
 import pyramid.testing
@@ -23,9 +22,6 @@ import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.site.module.playlist
 import zeit.web.site.view_centerpage
-
-import jwt
-from zeit.web.core.session import SESSION_CACHE
 
 
 screen_sizes = ((320, 480, True), (520, 960, True),
@@ -2604,54 +2600,3 @@ def test_volume_teaser_on_cphas_correct_elements(testbrowser):
         '/2016-09/test-printcover/original')
     assert teaser_images[1].attrib['src'].endswith(
         '/ausgabe/default_packshot_diezeit/original')
-
-
-def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
-    # browser without sso session
-    b = testbrowser()
-    b.mech_browser.set_handle_redirect(False)
-    try:
-        b.open('/konto')
-    except urllib2.HTTPError, e:
-        assert e.getcode() == 302
-        assert e.hdrs.get('location') == 'http://sso.example.org'
-
-    # browser with sso session
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    conf['sso_key'] = sso_keypair['public']
-    sso_cookie = jwt.encode(
-        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
-    testbrowser.cookies.forURL(
-        'http://localhost')['my_sso_cookie'] = sso_cookie
-    testbrowser.open('/login-state')
-    data = SESSION_CACHE.get(sso_cookie)
-    browser = testbrowser('/konto')
-
-    # main structure
-    assert len(browser.cssselect('.dashboard')) == 1
-    assert len(browser.cssselect('.dashboard__upper')) == 1
-    assert len(browser.cssselect('.dashboard__lower')) == 1
-    assert len(browser.cssselect('.dashboard__content')) == 1
-    assert len(browser.cssselect('.dashboard__header')) == 1
-    assert len(browser.cssselect('.article-pagination')) == 1
-
-    # head
-    assert (browser.cssselect('.dashboard__kicker')[0].text.strip() ==
-            'Herzlich Willkommen')
-    assert (browser.cssselect('.dashboard__title')[0].text.strip() ==
-            'Mein Konto')
-    assert len(browser.cssselect('.dashboard__user')) == 1
-    assert (browser.cssselect('.dashboard__user-name')[0].text.strip() ==
-            'test-user')
-    assert len(browser.cssselect('.dashboard__user-image')) == 1
-    assert len(browser.cssselect('.dashboard__box--is-header')) == 1
-
-    # body
-    assert len(browser.cssselect('.dashboard__box')) == 6
-    assert len(browser.cssselect('.dashboard__box-title')) == 6
-    assert (browser.cssselect('.dashboard__box-title')[1].text.strip() ==
-            'Meine Abonnements')
-    assert (browser.cssselect('.dashboard__box-title')[3].text.strip() ==
-            'Spiele')
-    assert (browser.cssselect('.dashboard__box-list')[2]
-            .cssselect('a')[0].text.strip() == u'ZEIT Audio hören')
