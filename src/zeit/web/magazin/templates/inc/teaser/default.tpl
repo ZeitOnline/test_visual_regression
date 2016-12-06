@@ -1,7 +1,6 @@
 {#
 Default teaser template to inherit from.
 #}
-
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
 {%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
@@ -40,6 +39,11 @@ Default teaser template to inherit from.
         <h2>
             {% block teaser_kicker -%}
                 <span class="{{ self.layout() }}__kicker">
+                    {% block zplus_kicker_logo %}
+                        {% if teaser is zplus_content %}
+                            {{ lama.use_svg_icon('zplus', self.layout() + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
+                        {% endif %}
+                    {% endblock %}
                     {{- teaser.teaserSupertitle or teaser.supertitle -}}
                 </span>
                 {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">: </span>{% endif %}
