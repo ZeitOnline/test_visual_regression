@@ -5,9 +5,9 @@
         <div class="dashboard__item">
             <h1 class="dashboard__header" itemprop="headline">
                 <span class="dashboard__kicker">
-                    {{view.dashboard_user.kicker}}
+                    {{view.kicker}}
                 </span>
-                <span class="dashboard__title">{{view.dashboard_user.title}}</span>
+                <span class="dashboard__title">{{view.title}}</span>
             </h1>
         </div>
     </div>
@@ -22,7 +22,7 @@
                 </span>
             </div>
             <!-- header -->
-            {% for section in view.dashboard_user.sections['header'] %}
+            {% for section in view.dashboard_sections('header') %}
             <div class="dashboard__box dashboard__box--is-header" data-ct-area="user-dashboard" data-ct-column="false">
                 <h2 class="dashboard__box-title">{{section.section_atts.name}}</h2>
                 <ul class="dashboard__box-list">
@@ -41,7 +41,7 @@
     <!-- body -->
     <div class="dashboard__content">
         <div class="dashboard__item">
-              {% for section in view.dashboard_user.sections['body'] %}
+              {% for section in view.dashboard_sections('body') %}
                 <div class="dashboard__box" data-ct-area="user-dashboard" data-ct-column="false">
                 <h2 class="dashboard__box-title">{{section.section_atts.name}}</h2>
                   <ul class="dashboard__box-list">
@@ -63,4 +63,3 @@
     </div>
 </div>
 {% endblock main %}
-

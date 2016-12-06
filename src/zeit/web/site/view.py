@@ -145,17 +145,18 @@ class UserDashboard(Base):
             set_none=True)
 
     @zeit.web.reify
-    def dashboard_user(self):
+    def title(self):
+        return self.context.xml.title
+
+    # Don't call this `supertitle` so it doesn't show up in the browser title
+    @zeit.web.reify
+    def kicker(self):
+        return self.context.xml.kicker
+
+    def dashboard_sections(self, class_):
         xml = self.context.xml
-        sections_xml_header = xml.xpath('//section[@class="header"]')
-        sections_xml_body = xml.xpath('//section[@class="body"]')
-        return {
-            'title': xml.find('title').text,
-            'kicker': xml.find('kicker').text,
-            'sections': {'header': [self._iter_section(section)
-                                    for section in sections_xml_header],
-                         'body': [self._iter_section(section)
-                                  for section in sections_xml_body]}}
+        return [self._iter_section(section)
+                for section in xml.xpath('//section[@class="%s"]' % class_)]
 
     def _iter_section(self, section):
         links = section.xpath('link')
