@@ -561,7 +561,7 @@ def test_videostage_video_should_play(selenium_driver, testserver):
     try:
         player = WebDriverWait(driver, 10).until(
             expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '#video-stage .video-player__iframe'))
+                (By.CSS_SELECTOR, 'video#player-1953013471001_html5_api'))
         )
         assert article.get_attribute(
             'data-video-id') in player.get_attribute('src')
