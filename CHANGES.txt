@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-3408: Add ZMO paywalls
 
+- ZON-3393: User dashboard
+
 - ZON-3118: Swap article bodies with intext-link data from TMS
   (featuretoggle: enable_intext_links)
 
