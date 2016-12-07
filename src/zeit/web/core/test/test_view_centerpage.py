@@ -354,3 +354,18 @@ def test_centerpage_should_update_webtrekk_content_id_for_search_results(
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
     view.content_path = u'/suche/index'
     assert view.webtrekk_content_id.endswith('/suche/treffer')
+
+
+def test_hp_topics_should_be_rendered(application, dummy_request):
+    config = zeit.web.core.view_centerpage.json_topic_config(dummy_request)
+
+    assert config['topics'][0]['topic'] == 'Islamischer Staat'
+    assert config['topics'][0]['url'] == ('http://www.zeit.de/schlagworte/'
+                                          'organisationen/islamischer-staat/'
+                                          'index')
+    assert config['topics'][1]['topic'] == 'Bundeswehr'
+    assert config['topics'][1]['url'] == ('http://www.zeit.de/schlagworte/'
+                                          'themen/bundeswehr/index')
+    assert config['topics'][2]['topic'] == 'Hongkong'
+    assert config['topics'][2]['url'] == ('http://www.zeit.de/schlagworte/'
+                                          'orte/hongkong/index')
