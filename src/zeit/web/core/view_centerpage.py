@@ -327,14 +327,14 @@ def json_topic_config(request):
     try:
         resource = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
         cp = zeit.content.cp.interfaces.ICenterPage(resource)
-        config = {"topics": [
-            {"topic": cp.topiclink_label_1, "url": cp.topiclink_url_1},
-            {"topic": cp.topiclink_label_2, "url": cp.topiclink_url_2},
-            {"topic": cp.topiclink_label_3, "url": cp.topiclink_url_3}]}
-
+        config = {'topics': []}
+        for x in xrange(1, 4):
+            label = getattr(cp, 'topiclink_label_{}'.format(x))
+            url = getattr(cp, 'topiclink_url_{}'.format(x))
+            if url and label:
+                config['topics'].append({'topic': label, 'url': url})
     except (AttributeError, KeyError, TypeError):
         config = {}
-
     request.response.cache_expires(5)
     return config
 
