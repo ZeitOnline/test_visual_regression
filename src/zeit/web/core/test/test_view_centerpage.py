@@ -369,3 +369,15 @@ def test_hp_topics_should_be_rendered(application, dummy_request):
     assert config['topics'][2]['topic'] == 'Hongkong'
     assert config['topics'][2]['url'] == ('http://www.zeit.de/schlagworte/'
                                           'orte/hongkong/index')
+
+
+def test_hp_topics_should_only_be_rendered_as_needed(application,
+                                                     dummy_request,
+                                                     workingcopy):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
+    with zeit.cms.checkout.helper.checked_out(cp) as co:
+        co.topiclink_url_3 = ''
+        co.topiclink_label_3 = ''
+    config = zeit.web.core.view_centerpage.json_topic_config(
+        dummy_request)
+    assert len(config['topics']) == 2
