@@ -4,6 +4,7 @@ import logging
 import grokcore.component
 import lxml.etree
 import pyramid.view
+import pyramid.httpexceptions
 import zope.component
 import zope.component.interfaces
 import zope.interface
@@ -65,6 +66,20 @@ class Centerpage(
     renderer='templates/centerpage.html')
 class CenterpagePage(zeit.web.core.view_centerpage.CenterpagePage, Centerpage):
     pass
+
+
+@pyramid.view.view_config(
+    context=zeit.content.cp.interfaces.ICP2015,
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_paywalled))
+def temporary_redirect_paywalled_centerpage(context, request):
+    """ Centerpages with a paywall actually don't really exists.
+    However, a Centerpage which is based on the newest volume object
+    (which is called 'Ausgabenseite') is supposed to send a temporary
+    redirect. Therefore this Centerpage will be the only one with the status
+    'paid' for now. (RD, 2012-12-08) """
+    raise pyramid.httpexceptions.HTTPTemporaryRedirect(
+            location=request.registry.settings['redirect_volume_cp'])
 
 
 @pyramid.view.view_config(
