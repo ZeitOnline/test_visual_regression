@@ -1098,13 +1098,11 @@ def test_missing_keyword_links_are_replaced(testbrowser):
     assert keyword.attrib['href'].endswith('/thema/wein')
 
 
-def test_article_has_print_pdf_function(testbrowser):
+def test_article_has_print_function(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     links = browser.cssselect('.print-menu__link')
     assert (links[0].attrib['href'].endswith(
         '/zeit-online/article/01?print'))
-    assert (links[1].attrib['href'] ==
-            'http://pdf.zeit.de/zeit-online/article/01.pdf')
 
 
 def test_multi_page_article_has_print_link(testbrowser):

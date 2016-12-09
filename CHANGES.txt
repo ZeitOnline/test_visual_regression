@@ -7,6 +7,8 @@ POSTDEPLOY
 3.22 (unreleased)
 -----------------
 
+- ZON-3528: Remove all links to pdf.zeit.de
+
 - ZON-3408: Add ZMO paywalls
 
 - ZON-3393: User dashboard
