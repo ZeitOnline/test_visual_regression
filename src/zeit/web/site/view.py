@@ -5,8 +5,7 @@ import urllib
 import pyramid.httpexceptions
 import pyramid.view
 
-import zeit.content.article.interfaces
-import zeit.content.video.interfaces
+import zeit.content.rawxml.interfaces
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
 
@@ -15,6 +14,7 @@ import zeit.web.core.security
 import zeit.web.core.view
 import zeit.web.magazin.view
 
+import zope.component
 
 log = logging.getLogger(__name__)
 
@@ -123,6 +123,50 @@ class Base(zeit.web.core.view.Base):
     http_cache=60)  # Perhaps needed for bw compat? (ND)
 def login_state(request):
     return zeit.web.core.security.get_login_state(request)
+
+
+@pyramid.view.view_config(
+    context=zeit.content.rawxml.interfaces.IUserDashboard,
+    renderer='templates/dashboard_user.html')
+class UserDashboard(Base):
+
+    def __init__(self, context, request):
+        super(UserDashboard, self).__init__(context, request)
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        if not self.request.user:
+            raise pyramid.httpexceptions.HTTPFound(
+                location=u'{}?{}'.format(
+                    conf.get('sso_url'),
+                    urllib.urlencode({'url': self.request.url})))
+        # XXX There's nothing in ICommonMetadata that's relevant for the
+        # dashboard (and rawxml objects rightfully don't have it), but
+        # `layout.html` and `view.Base` expect it, which feels somewhat wrong
+        # and should be cleaned up; for now we pacify them with default values.
+        zeit.cms.browser.form.apply_default_values(
+            self.context, zeit.cms.content.interfaces.ICommonMetadata,
+            set_none=True)
+
+    @zeit.web.reify
+    def title(self):
+        return self.context.xml.title
+
+    # Don't call this `supertitle` so it doesn't show up in the browser title
+    @zeit.web.reify
+    def kicker(self):
+        return self.context.xml.kicker
+
+    def dashboard_sections(self, class_):
+        return [self._parse_section(section) for section
+                in self.context.xml.xpath('//section[@class="%s"]' % class_)]
+
+    def _parse_section(self, section):
+        result = dict(section.attrib)
+        result['links'] = []
+        for node in section.xpath('link'):
+            link = dict(node.attrib)
+            link['text'] = node.text
+            result['links'].append(link)
+        return result
 
 
 @pyramid.view.view_config(route_name='schlagworte')

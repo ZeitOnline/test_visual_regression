@@ -1,0 +1,24 @@
+{% import "zeit.web.magazin:templates/macros/layout_macro.tpl" as lama %}
+
+{% if block.id and 'header' not in block.format | default('') -%}
+    <figure class="
+    {% if block.format == 'zmo-small-left' or block.format == 'small' %}
+        figure-stamp
+    {% elif block.format == 'large' or block.format == 'zmo-large-left' or block.format == 'zmo-large-center' or block.format == 'zmo-large-right' %}
+        figure-full-width
+    {% elif block.format == 'zmo-small-right' %}
+         figure-stamp--right
+    {% else %}
+         figure is-constrained is-centered
+    {% endif %}" data-video="{{ block.id }}">
+        {% if block.video_still %}
+        <div class="video__still">
+            <img class="figure__media" src="{{ block.video_still }}" alt="Video: {{ block.title }}" title="Video: {{ block.title }}">
+            <span class="video__button">{{ lama.use_svg_icon('playbutton', 'video__play-icon', view.package) }}</span>
+        </div>
+        {% endif %}
+        <figcaption class="figure__caption">
+            {{ block.description }}
+        </figcaption>
+    </figure>
+{%- endif %}

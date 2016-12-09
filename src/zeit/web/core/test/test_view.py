@@ -773,6 +773,14 @@ def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
         "return rawrConfig.locationMetaData.meta.description")
 
 
+def test_rawr_config_should_have_series_tag(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/campus/article/02-beziehung-schluss-machen'
+               % testserver.url)
+    assert 'In der Mensa mit' == driver.execute_script(
+        "return rawrConfig.locationMetaData.series")
+
+
 def test_health_check_should_response_and_have_status_200(testbrowser):
     browser = testbrowser('/health_check')
     assert browser.headers['Content-Length'] == '2'

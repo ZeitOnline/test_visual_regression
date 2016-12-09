@@ -191,10 +191,9 @@ class Article(zeit.web.core.view.Content):
     @zeit.web.reify
     def news_source(self):
         """1:1 implementation of questionable xslt construct"""
-        if (self.context.ressort == 'News' and
-                self.context.product and self.context.product.id == 'News'):
+        if self.context.ressort == 'News' and self.product_id == 'News':
             return 'dpa'
-        elif self.context.product and self.context.product.id == 'SID':
+        elif self.product_id == 'SID':
             return 'Sport-Informations-Dienst'
         else:
             try:
