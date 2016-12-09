@@ -18,8 +18,13 @@
 	display: block
 	font-size: $font-s
 	letter-spacing: $hair
-	line-height: 1.25
-	margin-bottom: remify(4px)
+	//line-height: 1.25
+	//margin-bottom: remify(4px)
+
+%teaser__title-box
+	align-items: center
+	display: flex
+	flex-flow: row wrap
 
 %teaser__title
 	color: $black
@@ -27,7 +32,8 @@
 	font-size: $font-ml
 	font-weight: bold
 	line-height: 1.25
-	margin: 0 0 $thin 0
+	margin: remify(4px) 0 $thin 0
+	width: 100%
 
 %teaser__subtitle
 	color: $black
@@ -55,6 +61,8 @@
 	&__media
 		@extend %teaser__media
 		max-height: remify(165px)
+	&__title-box
+		@extend %teaser__title-box
 	&__text
 		@extend %teaser__text
 	&__kicker
