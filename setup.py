@@ -36,7 +36,7 @@ setup(
         'iso8601',
         'lxml',
         'martian',
-        'pyramid',
+        'pyramid >= 1.6.0',
         'pyramid_debugtoolbar',
         'pyramid_dogpile_cache2',
         'pyramid_jinja2',

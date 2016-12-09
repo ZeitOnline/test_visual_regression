@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - MAINT: Set banner_channel for author pages
 
+- MAINT: Update to current Pyramid version
+
 
 3.21 (2016-11-30)
 -----------------
