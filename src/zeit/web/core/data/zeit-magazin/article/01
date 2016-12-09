@@ -56,6 +56,7 @@ Das Wohndesignblog "Freunde von Freunden" hat ihn in seiner Münchner Wohnung bes
             <bu>Ein Bild aus vergangenen Zeiten: Gerti Guhl, Besitzerin der Fraunhofer Schoppenstube in München. Nun musste die Traditionsgaststätte schließen.</bu>
             <copyright>© Andreas Gebert/dpa</copyright>
         </image>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">1094383</attribute>
