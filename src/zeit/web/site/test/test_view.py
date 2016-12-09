@@ -1,16 +1,22 @@
 # coding: utf-8
-import requests
+import urllib2
 
+import jwt
 import pyramid.testing
+import requests
+import zope.component
 
+import zeit.web.core.interfaces
 import zeit.web.site.view
 
 
 def test_login_state_view_should_deliver_correct_destination(dummy_request):
     dummy_request.route_url = lambda *args, **kw: 'http://destination_sso/'
     r = zeit.web.site.view.login_state(dummy_request)
-    assert r['login'] == 'http://my_sso/anmelden?url=http://destination_sso'
-    assert r['logout'] == 'http://my_sso/abmelden?url=http://destination_sso'
+    assert (r['login'] ==
+            'http://sso.example.org/anmelden?url=http://destination_sso')
+    assert (r['logout'] ==
+            'http://sso.example.org/abmelden?url=http://destination_sso')
 
 
 def test_article_should_have_breadcrumbs(testbrowser):
@@ -164,3 +170,54 @@ def test_schema_org_publisher_mark_up(testbrowser):
         'structured-data-publisher-logo-zon.png')
     assert logo.cssselect('[itemprop="width"]')[0].get('content') == '565'
     assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
+
+
+def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
+    # browser without sso session
+    b = testbrowser()
+    b.mech_browser.set_handle_redirect(False)
+    try:
+        b.open('/konto')
+    except urllib2.HTTPError, e:
+        assert e.getcode() == 302
+        assert (e.hdrs.get('location') ==
+                'http://sso.example.org?url=http%3A%2F%2Flocalhost%2Fkonto')
+
+    # browser with sso session
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+    testbrowser.cookies.forURL(
+        'http://localhost')['my_sso_cookie'] = sso_cookie
+    testbrowser.open('/login-state')
+    browser = testbrowser('/konto')
+
+    # main structure
+    assert len(browser.cssselect('.dashboard')) == 1
+    assert len(browser.cssselect('.dashboard__upper')) == 1
+    assert len(browser.cssselect('.dashboard__lower')) == 1
+    assert len(browser.cssselect('.dashboard__content')) == 1
+    assert len(browser.cssselect('.dashboard__header')) == 1
+    assert len(browser.cssselect('.article-pagination')) == 1
+
+    # head
+    assert (browser.cssselect('.dashboard__kicker')[0].text.strip() ==
+            'Herzlich Willkommen')
+    assert (browser.cssselect('.dashboard__title')[0].text.strip() ==
+            'Mein Konto')
+    assert len(browser.cssselect('.dashboard__user')) == 1
+    assert (browser.cssselect('.dashboard__user-name')[0].text.strip() ==
+            'test-user')
+    assert len(browser.cssselect('.dashboard__user-image')) == 1
+    assert len(browser.cssselect('.dashboard__box--is-header')) == 1
+
+    # body
+    assert len(browser.cssselect('.dashboard__box')) == 6
+    assert len(browser.cssselect('.dashboard__box-title')) == 6
+    assert (browser.cssselect('.dashboard__box-title')[1].text.strip() ==
+            'Meine Abonnements')
+    assert (browser.cssselect('.dashboard__box-title')[3].text.strip() ==
+            'Spiele')
+    assert (browser.cssselect('.dashboard__box-list')[2]
+            .cssselect('a')[0].text.strip() == u'ZEIT Audio hören')
