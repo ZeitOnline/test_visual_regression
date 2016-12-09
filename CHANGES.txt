@@ -19,6 +19,8 @@ POSTDEPLOY
 
 - OPS-448: Deliver HP topics for mobile apps via JSON-Response
 
+- OPS-386: Clean up magazin article macros
+
 - MAINT: Set banner_channel for author pages
 
 - MAINT: Update to current Pyramid version
