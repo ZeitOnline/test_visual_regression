@@ -17,7 +17,11 @@ POSTDEPLOY
 - ZON-3223: Set custom register URL for rawr
   (featuretoggle: rawr_iframe)
 
+- OPS-448: Deliver HP topics for mobile apps via JSON-Response
+
 - MAINT: Set banner_channel for author pages
+
+- MAINT: Update to current Pyramid version
 
 
 3.21 (2016-11-30)
