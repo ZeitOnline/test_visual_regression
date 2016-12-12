@@ -7,7 +7,7 @@ POSTDEPLOY
 3.23 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-596: Don't show fallback cover in Zplus badge for ZON articles
 
 
 3.22 (2016-12-12)
