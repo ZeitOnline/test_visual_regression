@@ -13,6 +13,8 @@ POSTDEPLOY
 
 - BUG-604: Only set webtrekk parameter if detectable
 
+- FIX: Remove extra margin arround dashboard
+
 
 3.22 (2016-12-12)
 -----------------
