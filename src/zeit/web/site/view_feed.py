@@ -302,7 +302,7 @@ class SpektrumFeed(Base):
                        type=self.request.response.content_type)
         )
         root.append(channel)
-        for content in filter_and_sort_entries(self.items)[1:100]:
+        for content in filter_and_sort_entries(self.items)[:100]:
             normalized_title = zeit.cms.interfaces.normalize_filename(
                 content.title)
             tracking = [
