@@ -163,6 +163,7 @@ def get_login_state(request):
     settings = request.registry.settings
     destination = request.params['context-uri'] if request.params.get(
         'context-uri') else request.route_url('home').rstrip('/')
+    entry_service = 'friedbert'
     info = {}
 
     if not request.authenticated_userid and request.cookies.get(
@@ -171,8 +172,8 @@ def get_login_state(request):
 
     info['login'] = u'{}/anmelden?url={}'.format(
         settings['sso_url'], destination)
-    info['register'] = u'{}/registrieren?url={}'.format(
-        settings['sso_url'], destination)
+    info['register'] = u'{}/registrieren?url={}&entry_service={}'.format(
+        settings['sso_url'], destination, entry_service)
     info['logout'] = u'{}/abmelden?url={}'.format(
         settings['sso_url'], destination)
 
