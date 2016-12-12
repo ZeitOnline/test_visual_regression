@@ -73,11 +73,12 @@ class CenterpagePage(zeit.web.core.view_centerpage.CenterpagePage, Centerpage):
     custom_predicates=(zeit.web.site.view.is_zon_content,
                        zeit.web.core.view.is_paywalled))
 def temporary_redirect_paywalled_centerpage(context, request):
-    """ Centerpages with a paywall actually don't really exists.
+    """ Centerpages with a paywall actually don't really exist.
     However, a Centerpage which is based on the newest volume object
     (which is called 'Ausgabenseite') is supposed to send a temporary
-    redirect. Therefore this Centerpage will be the only one with the status
-    'paid' for now. (RD, 2012-12-08) """
+    redirect, if there's no active subscription.
+    Therefore this Centerpage will be the only one with the status
+    'paid' for now and therefore uses the paywall logic. (RD, 2016-12-08) """
     raise pyramid.httpexceptions.HTTPTemporaryRedirect(
             location=request.registry.settings['redirect_volume_cp'])
 
