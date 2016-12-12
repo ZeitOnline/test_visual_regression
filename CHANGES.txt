@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - BUG-596: Don't show fallback cover in Zplus badge for ZON articles
 
+- BUG-604: Only set webtrekk parameter if detectable
+
 
 3.22 (2016-12-12)
 -----------------
