@@ -130,6 +130,14 @@ class Application(object):
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
+
+        # XXX: This route was introduced, because we needed a smaller and
+        # better interface than the whole Centerpage in XML to communicate
+        # our topics. It is meant to sketch an URL structure, which we might
+        # use in the future and hopefully from a dedicated config service.
+        # (MK and RD, 2016-12-07)
+        config.add_route('json_topic_config', '/config/zon/hp-topics')
+
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('invalidate_comment_thread', '/-comments/invalidate')
         config.add_route(

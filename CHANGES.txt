@@ -4,8 +4,18 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.22 (unreleased)
+3.23 (unreleased)
 -----------------
+
+- BUG-596: Don't show fallback cover in Zplus badge for ZON articles
+
+- BUG-604: Only set webtrekk parameter if detectable
+
+
+3.22 (2016-12-12)
+-----------------
+
+- ZON-3528: Remove all links to pdf.zeit.de
 
 - ZON-3408: Add ZMO paywalls
 
@@ -17,7 +27,13 @@ POSTDEPLOY
 - ZON-3223: Set custom register URL for rawr
   (featuretoggle: rawr_iframe)
 
+- OPS-448: Deliver HP topics for mobile apps via JSON-Response
+
+- OPS-386: Clean up magazin article macros
+
 - MAINT: Set banner_channel for author pages
+
+- MAINT: Update to current Pyramid version
 
 
 3.21 (2016-11-30)

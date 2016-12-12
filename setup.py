@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='3.22.dev0',
+    version='3.23.dev0',
     author=(
         'Thomas Baumann, Nico Bruenjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -36,7 +36,7 @@ setup(
         'iso8601',
         'lxml',
         'martian',
-        'pyramid',
+        'pyramid >= 1.6.0',
         'pyramid_debugtoolbar',
         'pyramid_dogpile_cache2',
         'pyramid_jinja2',
