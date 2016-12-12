@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-3463: Redirect volume-page on no subscription requests
 
+- ZON-3407: Add ZEIT MAGAZIN ONLINE Teaser Z+
+
 - BUG-596: Don't show fallback cover in Zplus badge for ZON articles
 
 - BUG-604: Only set webtrekk parameter if detectable
