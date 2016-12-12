@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.22 (unreleased)
+3.22 (2016-12-12)
 -----------------
 
 - ZON-3528: Remove all links to pdf.zeit.de
