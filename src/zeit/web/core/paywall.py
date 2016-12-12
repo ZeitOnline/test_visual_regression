@@ -53,7 +53,7 @@ class Paywall(object):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IPaywallAccess)
-@grokcore.component.adapter(zeit.cms.interfaces.ICommonMetadata)
+@grokcore.component.adapter(zeit.cms.content.interfaces.ICommonMetadata)
 def access_for_common_content(context):
     return getattr(context, 'access', None)
 
@@ -66,8 +66,9 @@ def access_for_cps(context):
 
             # When we have a volume and there is no next volume,
             # it is considered to be the newest volume.
-            if volume is not None and volume.next() is None:
-                return 'paid'
+
+            if volume is not None and volume.next is None:
+                return 'abo'
     return getattr(context, 'access', None)
 
 
