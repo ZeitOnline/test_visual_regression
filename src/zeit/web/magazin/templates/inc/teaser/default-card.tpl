@@ -1,4 +1,5 @@
 {%- import 'zeit.web.magazin:templates/macros/centerpage_macro.tpl' as cp with context %}
+{%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% set fill_color = module.background_color %}
 {% if not fill_color %}
@@ -19,6 +20,11 @@
             <div class="card {% block card_class %}{% endblock %}"{% if card_style %} style="{{ card_style }}"{% endif %}>
                 <h2>
                     <div class="card__title">
+                        {% block zplus_kicker_logo %}
+                            {% if teaser is zplus_content %}
+                                {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                            {% endif %}
+                        {% endblock %}
                         {{ teaser.teaserSupertitle or teaser.supertitle }}
                     </div>
                     {% block teaser_image %}
