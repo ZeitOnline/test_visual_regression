@@ -98,6 +98,7 @@ def app_settings(mockserver):
         'cardstack_backend': mockserver.url + '/cardstack',
         'connector_type': 'mock',
         'vgwort_url': 'http://example.com/vgwort',
+        'redirect_volume_cp': 'http://redirect.example.com',
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
         'breaking_news_fallback_image': (
