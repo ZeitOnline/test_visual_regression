@@ -61,7 +61,7 @@ def access_for_common_content(context):
 @grokcore.component.implementer(zeit.web.core.interfaces.IPaywallAccess)
 @grokcore.component.adapter(zeit.content.cp.interfaces.ICP2015)
 def access_for_cps(context):
-    if getattr(context, 'type', None) == 'volume':
+    if context.type == 'volume':
             volume = zeit.content.volume.interfaces.IVolume(context, None)
 
             # When we have a volume and there is no next volume,
