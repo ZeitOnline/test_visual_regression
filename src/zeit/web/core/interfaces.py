@@ -290,3 +290,7 @@ class ILiveblogInfo(zope.interface.Interface):
 class IExternalTemporaryImage(zope.interface.Interface):
     """A marker interface to distinguish externally hosted images vs. those
     from friedbert itself."""
+
+
+class IPaywallAccess(zope.interface.Interface):
+    """ Get access state of a resource"""

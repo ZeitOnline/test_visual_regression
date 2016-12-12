@@ -1,5 +1,5 @@
-import re
-
+import re  # wb
+import grokcore
 import werkzeug.http
 import zope.component
 
@@ -52,6 +52,25 @@ class Paywall(object):
         return None
 
 
+@grokcore.component.implementer(zeit.web.core.interfaces.IPaywallAccess)
+@grokcore.component.adapter(zeit.cms.content.interfaces.ICommonMetadata)
+def access_for_common_content(context):
+    return context.access
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IPaywallAccess)
+@grokcore.component.adapter(zeit.content.cp.interfaces.ICP2015)
+def access_for_cps(context):
+    if context.type == 'volume':
+            volume = zeit.content.volume.interfaces.IVolume(context, None)
+
+            # When we have a volume and there is no next volume,
+            # it is considered to be the newest volume.
+            if volume is not None and volume.next is None:
+                return 'abo'
+    return context.access
+
+
 class CeleraOneMixin(object):
 
     def __call__(self):
@@ -70,7 +89,7 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_entitlement(self):
-        access = getattr(self.context, 'access', None)
+        access = zeit.web.core.interfaces.IPaywallAccess(self.context)
         access_source = zeit.cms.content.sources.ACCESS_SOURCE.factory
         return access_source.translate_to_c1(access)
 
