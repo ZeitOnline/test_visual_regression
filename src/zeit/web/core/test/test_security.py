@@ -234,9 +234,9 @@ def test_rawr_config_should_contain_register_and_login_url(
     driver.get('%s/zeit-online/article/01' % testserver.url)
     assert driver.execute_script('return rawrConfig.registerUrl') is None
     driver.execute_script('rawrConfig.sso()')
-    assert 'http://my_sso/anmelden' in driver.execute_script(
+    assert 'http://sso.example.org/anmelden' in driver.execute_script(
         'return rawrConfig.loginUrl')
-    assert ('http://my_sso/registrieren_email?template=rawr' in
+    assert ('http://sso.example.org/registrieren_email?template=rawr' in
             driver.execute_script('return rawrConfig.registerUrl'))
 
 

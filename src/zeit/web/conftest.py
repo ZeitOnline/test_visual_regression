@@ -226,7 +226,7 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/author-biography-questions.xml',
         'vivi_zeit.cms_celery-config': '/dev/null',
         'sso_activate': '',
-        'sso_url': 'http://my_sso',
+        'sso_url': 'http://sso.example.org',
         'sso_cookie': 'my_sso_cookie',
         'sso_rawr_secret': 'my_rawr_secret',
         'jinja2.show_exceptions': True,
@@ -401,7 +401,7 @@ def dummy_request(application, request):
     # See pyramid.router.Router.invoke_subrequest()
     config = application.zeit_app.config
     req.registry = config.registry
-    req._set_extensions(config.registry.getUtility(
+    pyramid.request.apply_request_extensions(req, config.registry.getUtility(
         pyramid.interfaces.IRequestExtensions))
     config.begin(req)
     request.addfinalizer(pyramid.threadlocal.manager.clear)
