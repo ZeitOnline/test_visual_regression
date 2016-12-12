@@ -1836,7 +1836,7 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
     teaser_small_minor_logo = browser.cssselect(
         '.teaser-small-minor__kicker-logo--zmo')
     teaser_kicker_zmo_parquet = browser.cssselect(
-        '.teaser-small__kicker--zmo-parquet svg')
+        '.teaser-small__kicker--zmo-parquet .teaser-small__kicker-logo--zmo')
 
     assert len(teaser_fullwidth_logo) == 1
     assert len(teaser_classic_logo) == 1
