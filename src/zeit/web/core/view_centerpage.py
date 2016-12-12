@@ -321,6 +321,25 @@ def json_update_time(request):
 
 
 @pyramid.view.view_config(
+    route_name='json_topic_config',
+    renderer='jsonp')
+def json_topic_config(request):
+    try:
+        resource = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
+        cp = zeit.content.cp.interfaces.ICenterPage(resource)
+        config = {'topics': []}
+        for x in xrange(1, 4):
+            label = getattr(cp, 'topiclink_label_{}'.format(x))
+            url = getattr(cp, 'topiclink_url_{}'.format(x))
+            if url and label:
+                config['topics'].append({'topic': label, 'url': url})
+    except (AttributeError, KeyError, TypeError):
+        config = {}
+    request.response.cache_expires(5)
+    return config
+
+
+@pyramid.view.view_config(
     context=zeit.content.cp.interfaces.ISitemap,
     renderer='templates/sitemap.html')
 class Sitemap(Centerpage):
