@@ -165,7 +165,7 @@ def test_view_author_comments_should_have_comments_area(
         application, dummy_request):
     author = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/autoren/author3')
-    dummy_request.registry.settings = {'author_comment_page_size': '6'}
+    dummy_request.registry.settings['author_comment_page_size'] = '6'
     dummy_request.GET = {'p': '1'}
     view = zeit.web.site.view_author.Comments(author, dummy_request)
     assert type(view.tab_areas[0]) == (
