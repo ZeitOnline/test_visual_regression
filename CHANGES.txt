@@ -23,6 +23,9 @@ POSTDEPLOY
 
 - FIX: Adapt test for rawr_iframe feature toggle
 
+- MAINT: Include the first teaser in spektrum feed as well
+
+
 3.22 (2016-12-12)
 -----------------
 
