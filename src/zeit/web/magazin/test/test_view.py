@@ -438,7 +438,7 @@ def test_article_page_should_throw_404_if_no_pages_are_exceeded(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
-    page.request.registry.settings = {}
+    page.request.registry.settings.clear()
     page.request.path_info = u'article/03/seite-9'
     with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
         page()
