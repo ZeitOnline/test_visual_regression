@@ -2608,23 +2608,22 @@ def test_volume_teaser_on_cphas_correct_elements(testbrowser):
     '?C1-Meter-Status=paywall&C1-Meter-User-Status=registered',
     '?C1-Meter-Status=always_paid'])
 def test_paywall_switch_on_volume_cp_and_show_redirect(
-        testserver, c1_parameter, httpbrowser):
+        testserver, c1_parameter):
     resp = requests.get(
-            '{}/2015/52/index{}'.format(
-                testserver.url, c1_parameter), allow_redirects=False)
+        '{}/2015/52/index{}'.format(
+            testserver.url, c1_parameter), allow_redirects=False)
     assert resp.headers['location'] == 'http://redirect.example.com'
     assert resp.status_code == 307
 
 
-def test_volume_cp_should_send_correct_headers(
-        testserver, httpbrowser, monkeypatch):
+def test_volume_cp_should_send_correct_headers(testserver, monkeypatch):
 
     def next_volume(me):
         return None
     monkeypatch.setattr(
-            zeit.content.volume.volume.Volume, 'next', None)
+        zeit.content.volume.volume.Volume, 'next', None)
     cp = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/2015/52/index')
+        'http://xml.zeit.de/2015/52/index')
     request = pyramid.testing.DummyRequest()
     c1_mixin = zeit.web.core.paywall.CeleraOneMixin()
     c1_mixin.context = cp

@@ -15,6 +15,11 @@ POSTDEPLOY
 
 - BUG-604: Only set webtrekk parameter if detectable
 
+- FIX: Remove extra margin arround dashboard
+
+- FIX: Add authInFrame to rawr_iframe feature toggle
+
+- FIX: Adapt test for rawr_iframe feature toggle
 
 3.22 (2016-12-12)
 -----------------

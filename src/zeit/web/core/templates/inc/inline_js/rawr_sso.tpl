@@ -10,7 +10,7 @@ window.rawrConfig.sso = function() {
     this.registerUrl = "{{ register_rawr }}";
     this.logoutUrl = "{{ logout }}";
     this.rawrReturnUrlParameter = "url";
-    this.authInFrame = true;
+    this.authInFrame = {{ auth_iframe }};
 };
 
 </script>
