@@ -1,69 +1,67 @@
 $live-blog-indicator-diameter: 10px
 
 @keyframes live-blog-indicator-animation
-    0%
-        opacity: 1
-    80%
-        opacity: 1
-    90%
-        opacity: 0
+	0%
+		opacity: 1
+	80%
+		opacity: 1
+	90%
+		opacity: 0
 
 
 .liveblog-status
-    background-color: $cararra
-    +clearfix
+	background-color: $cararra
+	+clearfix
 
-    &__label
-        background-color: $trout
-        color: $white
-        float: left
-        font-size: em(13px)
-        font-weight: bold
-        letter-spacing: $zon-letter-spacing-m
-        text-transform: uppercase
-        &:before
-            background-color: $white
-            border-radius: 50%
-            content: ""
-            display: inline-block
-            height: $live-blog-indicator-diameter
-            margin-right: 5px
-            width: $live-blog-indicator-diameter
+	&__label
+		background-color: $trout
+		color: $white
+		float: left
+		font-size: em(13px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-m
+		text-transform: uppercase
+		&:before
+			background-color: $white
+			border-radius: 50%
+			content: ""
+			display: inline-block
+			height: $live-blog-indicator-diameter
+			margin-right: 5px
+			width: $live-blog-indicator-diameter
 
-    &__label--live
-        background-color: $zon-red
-        &:before
-            animation: live-blog-indicator-animation 2s infinite
+	&__label--live
+		background-color: $red
+		&:before
+			animation: live-blog-indicator-animation 2s infinite
 
-    &__label,
-    &__meta
-        line-height: remify(20px)
-        padding: remify(15px) $page-padding
+	&__label,
+	&__meta
+		+padded
+		line-height: remify(20px)
+		padding-bottom: remify(15px)
+		padding-top: remify(15px)
 
-    &__meta
-        color: $zon-grey
-        float: right
-        font-size: em(14px)
-        letter-spacing: $zon-letter-spacing-s
-        padding-left: 0
+	&__meta
+		color: $color-text--light
+		float: right
+		font-size: em(14px)
+		letter-spacing: $letter-spacing-s
+		padding-left: 0
 
-    &__meta-date,
-    &__meta-divider
-        display: none
+	&__meta-date
+		display: none
 
-    +respond-min($break-phablet-min)
-        &__label,
-        &__meta
-            padding: remify(15px 28px)
+	+respond-min($break-phablet-min)
+		&__label,
+		&__meta
+			padding: remify(15px 28px)
 
-        &__meta
-            float: left
+		&__meta
+			float: left
 
-        &__meta-date,
-        &__meta-divider
-            display: inline
-
-        &__meta-divider
-            &:before
-                content: "—"
-                margin: 0 5px
+		&__meta-date
+			display: inline
+			&:after
+				content: " — "
+				margin: 0 5px
