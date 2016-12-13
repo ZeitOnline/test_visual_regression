@@ -238,13 +238,11 @@ def test_article_header_default_considers_image_layout(testbrowser):
     assert image.get('data-ratio') == '1.77777777778'
 
 
-def test_article_has_print_pdf_function(testbrowser):
+def test_article_has_print_function(testbrowser):
     browser = testbrowser('/campus/article/debate')
     links = browser.cssselect('.print-menu__link')
     assert (links[0].attrib['href'].endswith(
         '/campus/article/debate?print'))
-    assert (links[1].attrib['href'] ==
-            'http://pdf.zeit.de/campus/article/debate.pdf')
 
 
 def test_multi_page_article_has_print_link(testbrowser):

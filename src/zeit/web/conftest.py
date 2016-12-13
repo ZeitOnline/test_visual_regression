@@ -98,6 +98,7 @@ def app_settings(mockserver):
         'cardstack_backend': mockserver.url + '/cardstack',
         'connector_type': 'mock',
         'vgwort_url': 'http://example.com/vgwort',
+        'redirect_volume_cp': 'http://redirect.example.com',
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
         'breaking_news_fallback_image': (
@@ -401,7 +402,7 @@ def dummy_request(application, request):
     # See pyramid.router.Router.invoke_subrequest()
     config = application.zeit_app.config
     req.registry = config.registry
-    req._set_extensions(config.registry.getUtility(
+    pyramid.request.apply_request_extensions(req, config.registry.getUtility(
         pyramid.interfaces.IRequestExtensions))
     config.begin(req)
     request.addfinalizer(pyramid.threadlocal.manager.clear)

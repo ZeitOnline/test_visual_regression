@@ -189,6 +189,7 @@ class LegacyTeaserMapping(zeit.web.core.utils.frozendict):
         super(LegacyTeaserMapping, self).__init__(
             x for k, v in self._map.iteritems() for x in zip(v, [k] * len(v)))
 
+
 LEGACY_TEASER_MAPPING = LegacyTeaserMapping()
 
 
@@ -312,6 +313,8 @@ def search_with_timing_metrics(*args, **kw):
     with zeit.web.core.metrics.timer(
             'zeit.web.site.area.default.solr.reponse_time'):
         return original_search(*args, **kw)
+
+
 original_search = zeit.solr.connection.SolrConnection.search
 zeit.solr.connection.SolrConnection.search = search_with_timing_metrics
 
@@ -325,6 +328,8 @@ def iter_without_fakeentry(self):
             yield zeit.cms.interfaces.ICMSContent(unique_id)
         except TypeError:
             continue
+
+
 zeit.content.cp.blocks.teaser.TeaserBlock.__iter__ = iter_without_fakeentry
 
 
@@ -337,6 +342,8 @@ def layout_or_fake(instance):
         return result
     return zeit.content.cp.layout.BlockLayout(
         id, id, areas=[], image_pattern=id)
+
+
 zeit.content.cp.blocks.teaser.TeaserBlock.original_layout = (
     zeit.content.cp.blocks.teaser.TeaserBlock.layout.__get__)
 zeit.content.cp.blocks.teaser.TeaserBlock.layout = property(
