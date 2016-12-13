@@ -238,6 +238,7 @@ def test_rawr_config_should_contain_register_and_login_url(
         'return rawrConfig.loginUrl')
     assert ('http://sso.example.org/registrieren_email?template=rawr' in
             driver.execute_script('return rawrConfig.registerUrl'))
+    assert (driver.execute_script('return rawrConfig.authInFrame') is True)
 
 
 def test_rawr_config_should_contain_user_data_as_base64_encoded_json(

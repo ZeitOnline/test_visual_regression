@@ -180,8 +180,10 @@ def get_login_state(request):
     if zeit.web.core.application.FEATURE_TOGGLES.find('rawr_iframe'):
         info['register_rawr'] = (u'{}/registrieren_email?template=rawr&url={}'
                                  .format(settings['sso_url'], destination))
+        info['auth_iframe'] = 'true'
     else:
         info['register_rawr'] = info['register']
+        info['auth_iframe'] = 'false'
 
     if request.user:
         info['user'] = request.user
