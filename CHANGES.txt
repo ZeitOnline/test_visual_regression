@@ -4,8 +4,27 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.22 (unreleased)
+3.23 (unreleased)
 -----------------
+
+- ZON-3463: Redirect volume-page on no subscription requests
+
+- ZON-3407: Add ZEIT MAGAZIN ONLINE Teaser Z+
+
+- BUG-596: Don't show fallback cover in Zplus badge for ZON articles
+
+- BUG-604: Only set webtrekk parameter if detectable
+
+- FIX: Remove extra margin arround dashboard
+
+- FIX: Add authInFrame to rawr_iframe feature toggle
+
+- FIX: Adapt test for rawr_iframe feature toggle
+
+3.22 (2016-12-12)
+-----------------
+
+- ZON-3528: Remove all links to pdf.zeit.de
 
 - ZON-3408: Add ZMO paywalls
 
@@ -18,6 +37,8 @@ POSTDEPLOY
   (featuretoggle: rawr_iframe)
 
 - OPS-448: Deliver HP topics for mobile apps via JSON-Response
+
+- OPS-386: Clean up magazin article macros
 
 - MAINT: Set banner_channel for author pages
 

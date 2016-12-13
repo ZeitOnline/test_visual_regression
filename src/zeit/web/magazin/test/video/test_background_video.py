@@ -9,4 +9,4 @@ def test_background_video_html(selenium_driver, testserver):
         fallback = video.find_element_by_tag_name("img")
         video.find_element_by_xpath("//source[@type='video/mp4']")
         video.find_element_by_xpath("//source[@type='video/webm']")
-        assert 'video--fallback ' == unicode(fallback.get_attribute("class"))
+        assert 'video--fallback' in fallback.get_attribute("class")

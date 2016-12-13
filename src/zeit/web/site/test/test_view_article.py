@@ -1098,13 +1098,11 @@ def test_missing_keyword_links_are_replaced(testbrowser):
     assert keyword.attrib['href'].endswith('/thema/wein')
 
 
-def test_article_has_print_pdf_function(testbrowser):
+def test_article_has_print_function(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     links = browser.cssselect('.print-menu__link')
     assert (links[0].attrib['href'].endswith(
         '/zeit-online/article/01?print'))
-    assert (links[1].attrib['href'] ==
-            'http://pdf.zeit.de/zeit-online/article/01.pdf')
 
 
 def test_multi_page_article_has_print_link(testbrowser):
@@ -1775,6 +1773,7 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
     assert len(zplus_link) == 1
     assert 'exklusiv' in zplus_box[0].cssselect('a')[0].attrib['href']
     assert 'Exklusiv' in zplus_link[0].text.strip()
+    assert not zplus_box[0].cssselect('.zplus__media')
 
 
 def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
@@ -1790,6 +1789,17 @@ def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
     assert len(zplus_badge) == 1
+    assert not zplus_box[0].cssselect('.zplus__media')
+
+
+def test_zplus_coverless_print_article_has_fallback_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-nocover')
+
+    zplus_box = browser.cssselect('.zplus')
+    assert len(zplus_box) == 1
+
+    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
+    assert 'default_packshot_diezeit' in zplus_media[0].attrib['src']
 
 
 def test_zplus_abo_print_article_has_correct_markup(testbrowser):

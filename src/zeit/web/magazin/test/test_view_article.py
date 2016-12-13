@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 import pytest
+
+import zeit.cms.interfaces
+
+import zeit.web.magazin.view_article
 
 
 def test_longform_contains_subpage_index(testbrowser):
@@ -127,3 +133,25 @@ def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
         assert len(browser.cssselect('.gate')) == 1
         assert len(browser.cssselect(
             '.gate--register')) == int('anonymous' in c1_parameter)
+
+
+@pytest.mark.parametrize('last_published, first_released, contained', [
+    (None, datetime.datetime(2014, 1, 1), False),
+    (datetime.datetime(2014, 1, 2), datetime.datetime(2014, 1, 1), True)])
+def test_seo_publish_date_script_should_be_generated_conditionally(
+        last_published, first_released, contained, dummy_request, tplbrowser):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/03')
+    view = zeit.web.magazin.view_article.Article(context, dummy_request)
+
+    view.date_last_published_semantic = last_published
+    view.date_first_released = first_released
+    view.show_date_format_seo = 'short'
+
+    browser = tplbrowser(
+        'zeit.web.magazin:templates/content.html',
+        view=view, request=dummy_request)
+
+    inline_scritps = ''.join(browser.xpath('//script/text()'))
+    assert ('1. Januar 2014' in inline_scritps) == contained

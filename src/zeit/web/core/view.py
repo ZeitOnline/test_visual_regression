@@ -874,7 +874,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def date_format(self):
-        if self.context.product and self.context.product.id in ('ZEI', 'ZMLB'):
+        if self.product_id in ('ZEI', 'ZMLB'):
             return 'short'
         return 'long'
 

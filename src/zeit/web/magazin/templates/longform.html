@@ -1,5 +1,4 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
-{% import 'zeit.web.magazin:templates/macros/article_macro.tpl' as blocks with context %}
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
 {% block adplace_top %}
@@ -46,17 +45,12 @@
         <div class="article__wrap">
             <div class="article__head-wrap">
 
-                {% if view.header_module %}
-                    {# longforms do have a special headerimage (which has the same name as article headerimages) #}
-
-                    {% if is_instance(view.header_module, 'zeit.web.core.block.Image') %}
-                        {% include "zeit.web.magazin:templates/inc/asset/image_article_longform.tpl" %}
-                    {% elif is_instance(view.header_module, 'zeit.web.core.block.HeaderVideo') %}
-                        {{ blocks['headervideo'](view.header_module) }}
-                    {% else %}
-                        {{ blocks[view.header_module | block_type](view.header_module) }}
-                    {% endif %}
-                {% endif %}
+                {% require block = view.header_module %}
+                    {% set type = block | block_type %}
+                    {% include [
+                        "zeit.web.magazin:templates/inc/blocks/header{0}-longform.html".format(type),
+                        "zeit.web.magazin:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
+                {% endrequire %}
 
                 {% include "zeit.web.magazin:templates/inc/headers/article_header_longform.html" %}
             </div>
