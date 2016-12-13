@@ -192,7 +192,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     url = '#' + $element.attr( 'aria-controls' );
                 }
             } else if ( $element.attr( 'type' ) === 'submit' ) {
-                url = $element.get( 0 ).form.action;
+                // report form target
+                // be aware of form elements named "action"
+                // or forms with empty or missing "action" attribute
+                url = $element.get( 0 ).form.getAttribute( 'action' ) || location.host + location.pathname;
             } else {
                 url = $element.attr( 'href' );
             }
