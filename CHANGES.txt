@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - FIX: Fix rawr config typo
 
+- MAINT: Enhance C1-Debug-Headers (make our C1-Tracking headers visible)
+
 
 3.23 (2016-12-13)
 -----------------
