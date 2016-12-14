@@ -7,7 +7,7 @@ POSTDEPLOY
 3.24 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix rawr config typo
 
 
 3.23 (2016-12-13)
