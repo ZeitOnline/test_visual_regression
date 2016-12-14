@@ -8,8 +8,9 @@ define( [
        'jquery',
        'velocity.ui',
        'web.core/zeit',
+       'web.core/clicktracking',
        'jquery.throttle',
-       'jquery.inview' ], function( Modernizr, $, Velocity, Zeit ) {
+       'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
     var defaults = {
         documentMinHeight: 800,
         jumpHash: '#overscroll-article',
@@ -23,23 +24,16 @@ define( [
         progressElement: '#circle_progress',
         progressElementBar: '#circle_progress_bar',
         progressText: 'Zurück zur Startseite',
-        trackingBase: 'stationaer.overscroll....',
-        trackingSlugs: {
-            view: 'appear',
-            click: 'clickToHP',
-            scroll: 'scrollToHP'
-        },
+        trackingBase: 'overscroll....',
         triggerElement: '.footer',
         scrollToTrigger: true
     },
     config,
     debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
-    clickTrack = function( type, target ) {
-        var trackingData = config.trackingBase + type + '|' + target;
-        window.wt.sendinfo({
-            linkId: trackingData,
-            sendOnUnload: 1
-        });
+    clickTrack = function( type ) {
+        var data = [ config.trackingBase + type, config.jumpTo ];
+
+        Clicktracking.send( data );
         $( window ).trigger( 'overscroll', { 'action': type } );
     },
     animateCircle = function( $element, p ) {
@@ -117,7 +111,7 @@ define( [
         $( config.overscrollElement ).on( 'inview', function( event, isInView ) {
             if ( isInView ) {
                 $( config.overscrollElement ).off( 'inview' );
-                clickTrack( 'appear', config.jumpTo );
+                clickTrack( 'appear' );
             }
         });
 
@@ -127,7 +121,7 @@ define( [
             if ( debug ) {
                 console.debug( 'overscrolling: click jump to HP.' );
             } else {
-                clickTrack( 'clickToHP', config.jumpTo );
+                clickTrack( 'clickToHP' );
                 window.location.href = config.jumpTo; // click w/o hash
             }
         });
@@ -138,7 +132,7 @@ define( [
                 if ( debug ) {
                     console.debug( 'overscrolling: jump to HP.' );
                 } else {
-                    clickTrack( 'scrollToHP', config.jumpTo );
+                    clickTrack( 'scrollToHP' );
                     if ( config.scrollToTrigger && history.pushState ) {
                         history.pushState( null, null, '#!top-of-overscroll' );
                     }
