@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - MAINT: Enhance C1-Debug-Headers (make our C1-Tracking headers visible)
 
+- MAINT: Have Centerpage view inherit from Content
+
 
 3.23 (2016-12-13)
 -----------------
