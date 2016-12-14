@@ -57,7 +57,7 @@
 
             <div class="article__body">
                 <!-- block for Teaser -->
-                <section class="article__page">
+                <section class="article-page">
                     <div class="article__head__subtitle">
                         {{- view.subtitle -}}
                     </div>
@@ -67,7 +67,7 @@
 
                 {% block article_pages %}
                 {% for page in view.pages %}
-                <section class="article__page">
+                <section class="article-page">
                     {% if page.teaser -%}
                         <h2 class="article__subpage-head is-centered is-constrained" id="kapitel{{ page.number }}">
                             {{- page.number }} &mdash; {{ page.teaser -}}
