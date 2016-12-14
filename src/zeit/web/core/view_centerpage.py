@@ -83,7 +83,8 @@ class AreaProvidingPaginationMixin(object):
 
 
 class Centerpage(AreaProvidingPaginationMixin,
-                 zeit.web.core.view.Content):
+                 zeit.web.core.paywall.CeleraOneMixin,
+                 zeit.web.core.view.Base):
 
     @zeit.web.reify
     def volume(self):
