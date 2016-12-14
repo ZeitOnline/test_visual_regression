@@ -4,8 +4,8 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.24 (unreleased)
------------------
+3.23.1 (2016-12-14)
+-------------------
 
 - FIX: Fix rawr config typo
 
