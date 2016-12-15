@@ -244,7 +244,10 @@ def app_settings(mockserver):
         'webtrekk_version': '3',
     }
 
-
+# 'chrome': selenium.webdriver.Chrome
+# "phantomjs": selenium.webdriver.PhantomJS
+# now on: geckodriver, install via brew install geckodriver
+# or from here: https://github.com/mozilla/geckodriver/releases
 browsers = {
     'firefox': selenium.webdriver.Firefox
 }
@@ -562,25 +565,25 @@ def selenium_driver(request):
         profile.update_preferences()
         parameters['firefox_profile'] = profile
         # Old versions: <https://ftp.mozilla.org/pub/firefox/releases/>
-        ff_binary = os.environ.get('ZEIT_WEB_FF_BINARY')
-        if ff_binary:
-            parameters['firefox_binary'] = (
-                selenium.webdriver.firefox.firefox_binary.FirefoxBinary(
-                    ff_binary))
+        # ff_binary = os.environ.get('ZEIT_WEB_FF_BINARY')
+        # if ff_binary:
+        #     parameters['firefox_binary'] = (
+        #         selenium.webdriver.firefox.firefox_binary.FirefoxBinary(
+        #             ff_binary))
         browser = browsers[request.param](**parameters)
     else:
         browser = browsers[request.param]()
     request.addfinalizer(lambda *args: browser.quit())
 
-    timeout = int(os.environ.get('ZEIT_WEB_FF_TIMEOUT', 30))
-    original_get = browser.get
+    # timeout = int(os.environ.get('ZEIT_WEB_FF_TIMEOUT', 30))
+    # original_get = browser.get
 
-    def get_and_wait_for_body(self, *args, **kw):
-        result = original_get(*args, **kw)
-        WebDriverWait(self, timeout).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body")))
-        return result
-    browser.get = get_and_wait_for_body.__get__(browser)
+    # def get_and_wait_for_body(self, *args, **kw):
+    #     result = original_get(*args, **kw)
+    #     WebDriverWait(self, timeout).until(
+    #         EC.presence_of_element_located((By.TAG_NAME, "body")))
+    #     return result
+    # browser.get = get_and_wait_for_body.__get__(browser)
 
     return browser
 
