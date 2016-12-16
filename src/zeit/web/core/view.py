@@ -857,6 +857,10 @@ class CommentMixin(object):
 
 
 class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
+    """Base view class for content that a) provides ICommonMetadata and b) is a
+    "single content" (e.g. article/gallery/video, but not centerpage).
+    XXX We should introduce an interface for this.
+    """
 
     @zeit.web.reify
     def basename(self):

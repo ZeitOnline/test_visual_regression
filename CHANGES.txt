@@ -4,7 +4,29 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.23 (unreleased)
+3.24 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.23.2 (2016-12-14)
+-------------------
+
+- MAINT: Revert "Have Centerpage view inherit from Content"
+
+
+3.23.1 (2016-12-14)
+-------------------
+
+- FIX: Fix rawr config typo
+
+- MAINT: Enhance C1-Debug-Headers (make our C1-Tracking headers visible)
+
+- MAINT: Have Centerpage view inherit from Content
+
+
+3.23 (2016-12-13)
 -----------------
 
 - ZON-3463: Redirect volume-page on no subscription requests
@@ -15,11 +37,16 @@ POSTDEPLOY
 
 - BUG-604: Only set webtrekk parameter if detectable
 
+- BUG-597: Fix TypeError when form.action returns a DOM element
+
 - FIX: Remove extra margin arround dashboard
 
 - FIX: Add authInFrame to rawr_iframe feature toggle
 
 - FIX: Adapt test for rawr_iframe feature toggle
+
+- MAINT: Include the first teaser in spektrum feed as well
+
 
 3.22 (2016-12-12)
 -----------------

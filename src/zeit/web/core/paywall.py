@@ -161,8 +161,16 @@ class CeleraOneMixin(object):
 
         request = self.request
 
-        for req_header_name in request.headers:
-            if req_header_name.startswith('C1-Meter-'):
-                res_header_name = 'X-Debug-{}'.format(req_header_name)
-                res_header_value = request.headers.get(req_header_name, '')
-                request.response.headers[res_header_name] = res_header_value
+        headers = {}
+        headers.update(request.headers)
+        headers.update(request.response.headers)
+
+        # Since C1 strips our C1-Track-* Headers, but we want to see them,
+        # we "copy" them into X-Debug-Headers.
+        # And: we also want to echo the C1-Meter Headers comming from them
+        # on the 2nd round trip.
+        for name in headers:
+            if name.startswith('C1-'):
+                res_name = 'X-Debug-{}'.format(name)
+                value = headers.get(name, '')
+                request.response.headers[res_name] = value
