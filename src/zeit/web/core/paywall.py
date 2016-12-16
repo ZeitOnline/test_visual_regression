@@ -95,7 +95,9 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def _c1_entitlement_id(self):
-        return None if self._c1_entitlement == 'free' else 'zeit-fullaccess'
+        return None if (
+            self._c1_entitlement == 'free' or self._c1_entitlement is None
+        ) else 'zeit-fullaccess'
 
     @zeit.web.reify
     def _c1_cms_id(self):
