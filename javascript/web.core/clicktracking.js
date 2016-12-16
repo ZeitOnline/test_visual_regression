@@ -327,12 +327,20 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         },
 
         linkInGalleryContent: function( $element, $gallery ) {
-            var imgnumber = $gallery.find( '.bx-pager' ).text().split( ' / ' )[0],
+            // current contains the image number *after* the click, so we have to adjust that
+            var row = $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? 1 : 2,
+                column = $element[ 0 ].className.indexOf( 'prev' ) < 0 ? 2 : 1,
+                pager = $gallery.find( '.bx-pager' ).text().split( ' / ' ),
+                total = parseInt( pager.pop(), 10 ),
+                current = parseInt( pager.pop(), 10 ),
+                // add +1 for left click (1) and -1 for right click (2)
+                // consider 0 and total + 1
+                number = ( current + column * -2 + 3 ) % total || total,
                 data = [
                     'gallery', // [verortung]
-                    $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? '1' : '2',
-                    $element[ 0 ].className.indexOf( 'prev' ) < 0 ? '2' : '1', // [spalte]
-                    imgnumber, // [subreihe]
+                    row, // [reihe]
+                    column, // [spalte]
+                    number, // [subreihe]
                     sanitizeString(
                         $element.children().first().text() ||
                         $element.text() ), // bezeichner
