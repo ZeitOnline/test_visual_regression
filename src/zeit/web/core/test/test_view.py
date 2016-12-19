@@ -286,6 +286,24 @@ def test_http_header_should_contain_c1_entitlement(testserver, monkeypatch):
             'C1-Track-Entitlement') == access_source.translate_to_c1('abo')
 
 
+def test_http_header_should_contain_c1_entitlement_id(testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True}.get)
+
+    free_article = testserver.url + '/zeit-online/article/01'
+    assert not requests.head(free_article).headers.get(
+        'C1-Track-Entitlement-ID')
+
+    register_article = (
+        testserver.url + '/zeit-online/article/zplus-zeit-register')
+    assert requests.head(register_article).headers.get(
+        'C1-Track-Entitlement-ID') == 'zeit-fullaccess'
+
+    paid_article = testserver.url + '/zeit-online/article/zplus-zeit'
+    assert requests.head(paid_article).headers.get(
+        'C1-Track-Entitlement-ID') == 'zeit-fullaccess'
+
+
 def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')

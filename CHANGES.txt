@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-3532: Refactor event click tracking
 
+- ZON-3531: Introduce entitlement ID to C1 tracking
+
 
 3.23.2 (2016-12-14)
 -------------------
