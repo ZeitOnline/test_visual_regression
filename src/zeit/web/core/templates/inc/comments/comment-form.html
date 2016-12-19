@@ -38,7 +38,7 @@
 {%- if request.user %}
     {% set is_mod = 'admin-tech' in request.user.roles or 'admin-editor' in request.user.roles %}
     {%- block comment_form %}
-    <form class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
+    <form action="#comments" class="comment-form js-submit-comment" method="POST" id="comment-form" data-uid="{{ request.user.uid }}"
         {%- if is_mod %} data-mod="mod"{% endif %}>
         {% if view.comment_form.show_comment_form -%}
         <div class="comment-form__text comment-form__text--metadata" data-ct-row="1">
