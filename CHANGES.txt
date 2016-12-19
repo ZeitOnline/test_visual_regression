@@ -7,7 +7,7 @@ POSTDEPLOY
 3.24 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3532: Refactor event click tracking
 
 
 3.23.2 (2016-12-14)
