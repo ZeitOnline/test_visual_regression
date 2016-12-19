@@ -1,0 +1,12 @@
+.byline
+	font-family: $sans-serif-base-font
+	font-size: $font-xl
+	font-weight: bold
+	line-height: $headline-line-height
+	+respond-min($break-2)
+		font-size: $font-xxl
+	&:before
+		content: "—"
+		display: block
+		margin-top: remify(8px)
+		margin-bottom: remify(8px)
