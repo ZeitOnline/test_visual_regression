@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.24 (unreleased)
+3.24 (2016-12-19)
 -----------------
 
 - ZON-3532: Refactor event click tracking
