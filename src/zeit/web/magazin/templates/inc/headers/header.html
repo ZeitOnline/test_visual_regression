@@ -1,9 +1,10 @@
 {% block article_header %}
-<header class="article__head article__head--default">
+<header class="header-article header-article--{% block layout %}{{ view.header_layout }}{% endblock %}">
+
     {% block headline -%}
-    <h1 class="article__head__headline" itemprop="headline">
-        <span class="article__head__supertitle">{{ view.supertitle }}</span>
-        <span class="article__head__title">{{ view.title }}</span>
+    <h1 class="headline" itemprop="headline">
+        <span class="headline__supertitle">{{ view.supertitle }}</span>
+        <span class="headline__title">{{ view.title }}</span>
     </h1>
     {% endblock -%}
 
@@ -12,7 +13,7 @@
     {% endif %}
 
     {% block subtitle -%}
-    <div class="article__head__subtitle">
+    <div class="header-article__subtitle">
         {{ view.subtitle }}
 
         {% block genre_and_authors -%}
@@ -29,9 +30,9 @@
                     {% endif -%}
                     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
                     {%- if author.href -%}
-                        <a href="{{ author.href | create_url }}" class="article__head__meta__author" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>{{ author.location }}
+                        <a href="{{ author.href | create_url }}" class="header-article__author" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>{{ author.location }}
                     {%- else -%}
-                        <span class="article__head__meta__author"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
+                        <span class="header-article__author"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
                     {%- endif -%}
                     </span>
                     {{- author.suffix -}}
@@ -42,9 +43,10 @@
     {% endblock -%}
 
     {% block article_date -%}
-    <div class="article__head__meta">
+    <div class="meta">
         {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
     </div>
     {% endblock -%}
+
 </header>
-{% endblock %}
+{% endblock article_header %}
