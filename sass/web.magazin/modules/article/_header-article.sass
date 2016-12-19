@@ -61,3 +61,21 @@
 				margin-bottom: remify(90px)
 		& > figure
 			max-width: remify(300px)
+	&--leinwand
+		max-width: none
+		margin-top: 0
+		& > figure
+			margin-left: -$page-padding--small
+			margin-right: -$page-padding--small
+			+respond-min($break-page-padding)
+				margin-left: auto
+				margin-right: auto
+				margin-top: remify(30px)
+				max-width: remify(920px)
+		.headline
+			margin-top: remify(36px)
+			margin-bottom: remify(42px)
+			+respond-min($break-2)
+				margin-bottom: remify(90px)
+				margin-top: remify(90px)
+
