@@ -178,12 +178,16 @@ def get_login_state(request):
         settings['sso_url'], destination)
 
     # toggle if rawr shows registry in iframe or in new window
+    entry_service = 'rawr'
     if zeit.web.core.application.FEATURE_TOGGLES.find('rawr_iframe'):
-        info['register_rawr'] = (u'{}/registrieren_email?template=rawr&url={}'
-                                 .format(settings['sso_url'], destination))
+        info['register_rawr'] = (
+            u'{}/registrieren_email?template=rawr&url={}&entry_service={}'
+            .format(settings['sso_url'], destination, entry_service))
         info['auth_iframe'] = 'true'
     else:
-        info['register_rawr'] = info['register']
+        info['register_rawr'] = (
+            u'{}/registrieren?url={}&entry_service={}'
+            .format(settings['sso_url'], destination, entry_service))
         info['auth_iframe'] = 'false'
 
     if request.user:
