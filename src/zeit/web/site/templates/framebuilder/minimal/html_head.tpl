@@ -12,13 +12,15 @@
 
     {% include "zeit.web.core:templates/inc/inline_js/library.html" %}
 
-    {% if view.framebuilder_requires_ivw %}
+    {% if view.framebuilder_requires_ivw -%}
         <!-- IVW -->
         <script src="https://script.ioam.de/iam.js"></script>
-    {% endif %}
-    {% if toggles('third_party_modules', 'iqd') %}
+    {%- endif %}
+
+    {% if toggles('third_party_modules', 'iqd') -%}
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
-    {% endif %}
-    {% if settings('livereload') %}
+    {%- endif %}
+
+    {% if settings('livereload') -%}
         <script src="//localhost:35729/livereload.js"></script>
-    {% endif %}
+    {%- endif %}
