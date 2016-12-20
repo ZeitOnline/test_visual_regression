@@ -9,6 +9,7 @@
     <title>ZEIT ONLINE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
     <!--[if lte IE 8]>
         <link href="{{ request.asset_host }}/css/web.site/all-old-ie.css" media="screen" rel="stylesheet" type="text/css">
     <![endif]-->
