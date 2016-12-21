@@ -1,10 +1,10 @@
-{% extends "zeit.web.magazin:templates/inc/headers/article_header_default.html" %}
+{% extends "zeit.web.magazin:templates/inc/headers/header.html" %}
 
 {% block article_header %}
-<header class="article__head article__head--mode">
+<header class="header-article header-article--mode">
     {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
     <div class="article__item">
-        <div class="article__head__text">
+        <div class="header__text">
             {{ self.headline() }}
             {{ self.article_date() }}
             {{ self.subtitle() }}

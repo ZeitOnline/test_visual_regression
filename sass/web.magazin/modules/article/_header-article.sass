@@ -94,6 +94,22 @@
 				margin-bottom: remify(90px)
 				margin-top: remify(90px)
 	// –––––––––––––––––––––––
+	//    MODE HEADER
+	// –––––––––––––––––––––––
+	&--mode
+		max-width: remify(820px)
+		text-align: left
+		+respond-min($break-1)
+			+pie-clearfix
+			& > figure
+				float: left
+				margin: remify(56px 0 0)
+				max-width: $medium-content-width / 2
+				width: 42%
+				& + div .header__text
+					float: right
+					width: 50%
+	// –––––––––––––––––––––––
 	//    TEXT ONLY HEADER
 	// –––––––––––––––––––––––
 	&--text-only
