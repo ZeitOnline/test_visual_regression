@@ -57,7 +57,13 @@
 	&--column
 		.byline
 			margin-bottom: remify(42px)
+			&:before
+				content: "—"
+				display: block
+				font-size: $font-xl
+				margin-top: remify(8px)
 			+respond-min($break-2)
+				font-size: $font-xxl
 				margin-bottom: remify(90px)
 		& > figure
 			max-width: remify(300px)
@@ -78,4 +84,8 @@
 			+respond-min($break-2)
 				margin-bottom: remify(90px)
 				margin-top: remify(90px)
+	&--text-only
+		text-align: left
+		+respond-min($break-1)
+			padding-left: 7%
 
