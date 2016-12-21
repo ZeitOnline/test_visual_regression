@@ -47,6 +47,9 @@
 	&__byline
 		margin-bottom: $fine
 	// differing header layout from here
+	// –––––––––––––––––––––––
+	//     STANDARD HEADER
+	// –––––––––––––––––––––––
 	&--default
 		.headline
 			margin-bottom: remify(42px)
@@ -54,6 +57,9 @@
 				margin-bottom: remify(90px)
 		& > figure
 			max-width: remify(500px)
+	// –––––––––––––––––––––––
+	//    COLUMN HEAD
+	// –––––––––––––––––––––––
 	&--column
 		.byline
 			margin-bottom: remify(42px)
@@ -67,6 +73,9 @@
 				margin-bottom: remify(90px)
 		& > figure
 			max-width: remify(300px)
+	// –––––––––––––––––––––––
+	//    LEINWAND HEADER
+	// –––––––––––––––––––––––
 	&--leinwand
 		max-width: none
 		margin-top: 0
@@ -84,8 +93,34 @@
 			+respond-min($break-2)
 				margin-bottom: remify(90px)
 				margin-top: remify(90px)
+	// –––––––––––––––––––––––
+	//    TEXT ONLY HEADER
+	// –––––––––––––––––––––––
 	&--text-only
 		text-align: left
 		+respond-min($break-1)
 			padding-left: 7%
-
+	// –––––––––––––––––––––––
+	//      TRAUM HEADER
+	// –––––––––––––––––––––––
+	&--traum
+		max-width: none
+		margin-bottom: $medium
+		+respond-min($break-1)
+			margin-bottom: $big
+		& > figure
+			max-width: remify(920px)
+		.header__subtitle
+			font-size: $font-xl
+			font-weight: bold
+			letter-spacing: remify(1px)
+			line-height: $headline-line-height
+			margin: 0 auto $compact
+			text-align: center
+			+respond-min($break-2)
+				font-size: $font-xxl
+			&:before
+				content: "—"
+				display: block
+				margin-top: $micro
+				margin-bottom: $micro

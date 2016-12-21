@@ -1,17 +1,17 @@
-{% extends "zeit.web.magazin:templates/inc/headers/article_header_default.html" %}
+{% extends "zeit.web.magazin:templates/inc/headers/header.html" %}
 
 {% block article_header %}
-<header class="article__head article__head--traum">
+<header class="header-article header-article--traum">
     <div class="is-constrained is-centered">
         {{ self.headline() }}
-        <div class="article__head__subtitle">
+        <div class="header__subtitle">
             {{- view.subtitle -}}
         </div>
     </div>
     {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
     <div class="is-constrained is-centered">
-        <div class="article__head__meta">
-            <div class="article__head__byline">
+        <div class="meta">
+            <div class="byline">
                 {{ self.genre_and_authors() }}
             </div>
             {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
