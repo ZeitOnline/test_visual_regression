@@ -5,12 +5,18 @@
  */
 define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
-    var debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1;
+    var location = document.location,
+        debugMode = location.hash.indexOf( 'debug-clicktracking' ) > -1;
 
+    /**
+     * Adds the viewport size, splits the parameters and sanatizes the identifier
+     * @param  {array}   containing at least one parameter slug and a link ID (URL)
+     * @return {array}   array of tracking information
+     */
     function formatTrackingData( trackingData ) {
-        var length = trackingData.unshift( Zeit.breakpoint.getTrackingBreakpoint() ),
-            url = trackingData.pop(),
-            slug = trackingData.join( '.' );
+        var url = trackingData.pop(),
+            slug = trackingData.join( '.' ),
+            data = slug.split( '.' );
 
         if ( url ) {
             url = url.replace( /http(s)?:\/\//, '' );
@@ -21,12 +27,51 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 url = $( 'meta[property="og:url"]' );
                 url = url.length ?
                     url.attr( 'content' ).replace( /http(s)?:\/\//, '' ) :
-                    window.location.host + window.location.pathname;
+                    location.host + location.pathname;
             } else if ( slug.indexOf( '.studiumbox.' ) === -1 ) {
                 url = url.split( '?' )[0];
             }
         }
-        return slug + '|' + url;
+
+        data.unshift( Zeit.breakpoint.getTrackingBreakpoint() );
+        data.push( url );
+
+        return data;
+    }
+
+    /**
+     * Send webtrekk information
+     * @param  {array}   containing at least one parameter slug and a link ID (URL)
+     */
+    function send( trackingData ) {
+        var data = formatTrackingData( trackingData );
+
+        window.wt.sendinfo({
+            linkId: data.pop(),
+            customClickParameter: {
+                4: data.shift(),
+                5: data.shift(),
+                6: data.shift(),
+                7: data.shift(),
+                8: data.shift(),
+                9: data.shift()
+            },
+            sendOnUnload: 1
+        });
+    }
+
+    /**
+     * Returns the tracking data as a string. For historical reasons this string contains:
+     *  - the "Aktionsparameter" as a dot-separated string
+     *  - followed by the identifier (most commonly a URL) separated by a pipe character ("|")
+     * @param  {array}    containing at least one parameter slug and a link ID (URL)
+     * @return {string}   formated string
+     */
+    function string( trackingData ) {
+        var data = formatTrackingData( trackingData ),
+            id = data.pop();
+
+        return data.join( '.' ) + '|' + id;
     }
 
     /**
@@ -128,7 +173,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 href // url
             ];
 
-            return formatTrackingData( data );
+            return data;
         },
         /**
          * track links with data-id attribute that contains the complete webtrekk id without href
@@ -140,7 +185,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 $element.data( 'id' ),
                 $element.attr( 'href' ) // url
             ];
-            return formatTrackingData( data );
+            return data;
         },
         /**
          * track links inside parents with appropriate data attributes
@@ -212,7 +257,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     $element.text() ), // bezeichner
                 url // url
             ];
-            return formatTrackingData( data );
+            return data;
         },
         /**
          * track links with data-tracking attribute that contains the complete webtrekk id plus href
@@ -225,7 +270,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     trackingData[0],
                     trackingData[1] // url
                 ];
-            return formatTrackingData( data );
+            return data;
         },
         /**
          * track elements in the parquet-meta section
@@ -254,7 +299,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 $element.attr( 'href' ) // Ziel-URL
             ];
 
-            return formatTrackingData( data );
+            return data;
         },
         /**
          * track links which are inside an article text
@@ -272,44 +317,56 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
                     '', // [spalte] leer lassen
                     '', // [subreihe] leer lassen
-                    sanitizeString( $element.text() ), // [bezeichner] Verlinkter Text bsp. "koalitionsverhandlungen_sind_gescheitert"
-                    $element.attr( 'href' ) // url
+                    sanitizeString(
+                        $element.children().first().text() ||
+                        $element.text() ), // [bezeichner] Verlinkter Text bsp. "koalitionsverhandlungen_sind_gescheitert"
+                    $element.attr( 'href' ) || location.host + location.pathname // url
                 ];
 
-            return formatTrackingData( data );
+            return data;
         },
 
         linkInGalleryContent: function( $element, $gallery ) {
-            var imgnumber = $gallery.find( '.bx-pager' ).text().split( ' / ' )[0],
+            // the pager contains the image number *after* the click, so we want to adjust that
+            var pager = $gallery.find( '.bx-pager' ).text().split( ' / ' ),
+                row = $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? 1 : 2,
+                column = $element[ 0 ].className.indexOf( 'prev' ) < 0 ? 2 : 1,
+                total = parseInt( pager.pop(), 10 ),
+                current = parseInt( pager.pop(), 10 ),
+                // add +1 for left click (1) and -1 for right click (2)
+                // consider 0 and total + 1
+                number = ( current + column * -2 + 3 ) % total || total,
                 data = [
                     'gallery', // [verortung]
-                    $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? '1' : '2',
-                    $element[ 0 ].className.indexOf( 'links' ) < 0 ? '2' : '1', // [spalte]
-                    imgnumber, // [subreihe]
-                    sanitizeString( $element.text() ), // [bezeichner]
-                    window.location.href // url
+                    row, // [reihe]
+                    column, // [spalte]
+                    number, // [subreihe]
+                    sanitizeString(
+                        $element.children().first().text() ||
+                        $element.text() ), // bezeichner
+                    location.host + location.pathname // url
                 ];
-            return formatTrackingData( data );
+            return data;
         }
     },
     clickTrack = function( event ) {
-        var trackingData = trackElement[ event.data.funcName ]( $( this ), event );
+        var data = trackElement[ event.data.funcName ]( $( this ), event ),
+            trackingData;
 
         if ( debugMode ) {
             event.preventDefault();
             event.stopImmediatePropagation();
+            trackingData = string( data );
             console.debug( trackingData + ' (method: ' + event.data.funcName + ')' );
             window.trackingData = trackingData;
-        } else if ( trackingData ) {
-            window.wt.sendinfo({
-                linkId: trackingData,
-                sendOnUnload: 1
-            });
+        } else if ( data ) {
+            send( data );
         }
     };
 
     return {
-        formatTrackingData: formatTrackingData,
+        string: string,
+        send: send,
         init: function() {
             if ( typeof Zeit === 'undefined' || ( typeof window.wt === 'undefined' && !debugMode ) ) {
                 return;

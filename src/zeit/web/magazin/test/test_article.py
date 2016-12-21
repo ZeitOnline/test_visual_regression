@@ -630,18 +630,18 @@ def test_nextread_should_fallback_to_default_layout(application):
 
 def test_article_with_images_should_render_image_container(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03')
-    assert browser.cssselect('div.article__page figure.figure-stamp')
+    assert browser.cssselect('div.article-page figure.figure-stamp')
 
 
 def test_article_without_images_should_not_render_image_container(testbrowser):
     browser = testbrowser('/zeit-magazin/article/artikel-ohne-assets')
-    assert not browser.cssselect('div.article__page figure.figure-stamp')
+    assert not browser.cssselect('div.article-page figure.figure-stamp')
 
 
 def test_article_with_fictitious_imgs_should_not_render_img_container(
         testbrowser):
     browser = testbrowser('/zeit-magazin/article/artikel-mit-fiktiven-assets')
-    assert not browser.cssselect('div.article__page figure.figure-stamp')
+    assert not browser.cssselect('div.article-page figure.figure-stamp')
 
 
 def test_article_has_linked_image(testbrowser):
