@@ -1,7 +1,7 @@
 {% extends "zeit.web.magazin:templates/inc/headers/article_header_default.html" %}
 
 {% block article_header %}
-<header class="article__head article__head--column">
+<header class="article__head article__head--column" data-ct-area="articleheader">
     {{ self.headline() }}
     <div class="article__head__byline">
         {{ self.genre_and_authors() }}

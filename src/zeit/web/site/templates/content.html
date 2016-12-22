@@ -11,8 +11,10 @@
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
     {% profile %}
         {% block article_head %}
+            <div data-ct-area="articleheader">
             {% include ["zeit.web.site:templates/inc/article-header/{}.html".format(view.header_layout),
                         "zeit.web.site:templates/inc/article-header/default.html"] %}
+            </div>
         {% endblock article_head %}
     {% endprofile %}
     {% profile %}

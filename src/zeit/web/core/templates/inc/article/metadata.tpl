@@ -10,9 +10,9 @@
 {% endif -%}
 
 {% if view.source_label and not (view.zplus_label and view.zplus_label.hide_source_label) -%}
-	<span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}">
+	<span class="metadata__source{% if view.obfuscated_source %} encoded-date" data-obfuscated="{{ view.obfuscated_source }}{% endif %}" data-ct-row="source">
 		{%- if view.source_url -%}
-			<a href="{{ view.source_url }}"{% if view.product_id == 'merian' %} rel="nofollow"{% endif %}>{{ view.source_label }}</a>
+			<a href="{{ view.source_url }}" data-ct-label="text"{% if view.product_id == 'merian' %} rel="nofollow"{% endif %}>{{ view.source_label }}</a>
 		{%- else -%}
 			{{ view.source_label }}
 		{%- endif -%}
@@ -24,8 +24,8 @@
 		span wrapper to prevent the :after-slash from being underlined
 		(which would happen if a was the child which gets a slash as :after-content)
 	#}
-	<span>
+	<span data-ct-row="comments">
 		{% set comments_string = view.comment_count | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
-		<a class="metadata__commentcount js-scroll" href="#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
+		<a class="metadata__commentcount js-scroll" href="#comments" title="Kommentare anzeigen" data-ct-label="comments">{{ comments_string }}</a>
 	</span>
 {% endif %}

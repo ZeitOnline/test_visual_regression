@@ -5,3 +5,4 @@
 {% set image_itemprop = 'image' %}
 {% set module_layout = 'article__head' %}
 {% block media_caption_class %}{{ module_layout }}{% endblock %}
+{% block image_link_additional_data_attributes %} data-ct-row="image" data-ct-column="false" data-ct-label="image"{% endblock %}
