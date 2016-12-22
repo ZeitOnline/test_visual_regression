@@ -6,7 +6,7 @@
 {% set cp_area_modifier = ('newsticker-on-' ~ cp_type) if cp_type in ['keywordpage', 'topicpage'] and 'newsticker' == area.kind %}
 
 {% block before_module_list %}
-    {% set tracking_slug = '{}...{}.{}'.format(region_loop.index, 'newsteaser', 'alle_schlagzeilen') %}
+    {% set tracking_slug = '{}.{}..newsteaser.alle_schlagzeilen'.format(area.kind, region_loop.index) %}
     {{ cp.section_heading(area.title, 'Alle Schlagzeilen', '' if cp_type in ['keywordpage', 'topicpage'] else 'news/index' , view, tracking_slug, unpadded=True) }}
 {% endblock %}
 
