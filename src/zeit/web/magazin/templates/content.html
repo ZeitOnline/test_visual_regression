@@ -8,7 +8,7 @@
                 {% if view.current_page.number == 0 %}
                     {% include "zeit.web.magazin:templates/inc/headers/header_{}.html".format(view.header_layout) ignore missing %}
                 {% else %}
-                    {% include "zeit.web.magazin:templates/inc/headers/article_header_sequelpages.html" %}
+                    {% include "zeit.web.magazin:templates/inc/headers/header_sequelpages.html" %}
                 {% endif %}
             {% endblock article_header %}
             <div class="article__body-wrap">
