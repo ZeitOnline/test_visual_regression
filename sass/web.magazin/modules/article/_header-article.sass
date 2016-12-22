@@ -160,7 +160,13 @@
 	//      Z PLUS BADGE
 	// –––––––––––––––––––––––
 	&--zplusbadge
-		+respond-min($break-1)
+		+respond-min($break-2)
 			margin-top: remify(70px)
 		.headline
 			margin-bottom: remify(25px)
+		&.header-article--column
+			.headline
+				margin-bottom: 0
+			.byline
+				+respond-min($break-2)
+					margin-bottom: remify(42px)
