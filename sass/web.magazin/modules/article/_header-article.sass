@@ -110,6 +110,22 @@
 					float: right
 					width: 50%
 	// –––––––––––––––––––––––
+	//    BRIEFMARKE HEADER
+	// –––––––––––––––––––––––
+	&--stamp
+		text-align: left
+		.header__title
+			+respond-min($break-1)
+				font-size: $font-xxl
+			+respond-min($break-2)
+				margin-bottom: $compact
+			+respond-min($break-3)
+				font-size: $font-xxxl
+		& > figure
+			+respond-min($break-1)
+				margin-bottom: remify(-20px)
+				margin-left: 50%
+	// –––––––––––––––––––––––
 	//    TEXT ONLY HEADER
 	// –––––––––––––––––––––––
 	&--text-only
