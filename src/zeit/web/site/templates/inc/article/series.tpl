@@ -1,5 +1,5 @@
 {% if view.has_series_attached %}
-    <div class="article-series">
+    <div class="article-series" data-ct-row="series" data-ct-column="false">
         {% require image = get_image(view.series, variant_id='stripe', fallback=False) -%}
             {% set module_layout = "article-series" %}
             {% set media_caption_additional_class = 'figcaption--hidden' %}
@@ -7,7 +7,7 @@
             {% include "zeit.web.core:templates/inc/asset/image.tpl" %}
         {%- endrequire -%}
 
-        <a href="{{ view.series | create_url }}" class="article-series__heading" itemprop="isPartOf">
+        <a href="{{ view.series | create_url }}" class="article-series__heading" itemprop="isPartOf" data-ct-label="text">
             <div class="article-series__inner-heading">
                 <span class="article-series__kicker">Aus der Serie</span><span class="visually-hidden">: </span>
                 <span class="article-series__title">{{ view.serie }}</span>
