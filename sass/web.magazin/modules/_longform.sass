@@ -16,7 +16,9 @@ $longform-header-max-height: 1400px
 
 	.article__head__title
 		color: $white
+		display: block
 		font-size: em(24px)
+		line-height: 1.4
 		margin-bottom: $fine
 		+respond-min($break-1)
 			font-size: em(30px)
@@ -25,12 +27,22 @@ $longform-header-max-height: 1400px
 		+respond-min($break-4)
 			font-size: em(50px)
 
+	.article__head__meta
+		font-size: .75em
+		font-weight: bold
+		letter-spacing: 1px
+		line-height: 1.7
+		margin-top: .5em
+		max-width: 40em
+		text-align: left
+		text-transform: uppercase
+
 	.article__head__subtitle
 		color: $grey--dark
 		font-family: $font-tabletgothic
 		font-size: $font-ml
 		font-weight: bold
-		margin-bottom: 0
+		margin: 1.125em auto 0
 		max-width: remify(480px)
 		text-align: center
 		+respond-min($break-2)
