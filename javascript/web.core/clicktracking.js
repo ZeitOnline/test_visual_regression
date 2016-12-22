@@ -145,6 +145,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 element = $element.get( 0 ),
                 $article = $element.closest( 'article, aside' ),
                 $area = $element.closest( '.cp-area' ),
+                context = $article.data( 'clicktracking' ),
                 articleClasses = $article.get( 0 ).className.split( ' ' );
 
             if ( element.className.indexOf( 'button' ) !== -1 ) {
@@ -278,10 +279,11 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * @param  {Object} $element jQuery Element with the link that was clicked
          * @return {string}          formatted linkId-string for webtrekk call
          */
-        parquetMeta: function( $element ) {
+        parquetMeta: function( $element, event ) {
 
             var linkClassName = $element.get( 0 ).className.split( ' ' )[0],
                 linkType,
+                $column = $( event.delegateTarget ),
                 data;
 
             if ( linkClassName === 'parquet-meta__title' ) {
@@ -291,11 +293,11 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             }
 
             data = [
-                'parquet', // Verortung
                 $element.index( '.parquet-meta a' ) + 1, // Reihe (insgesamt, nicht aktueller Riegel)
                 '1', // Spalte
                 '', // Teasertyp, hier leer
                 linkType, // Name (bei Ressort) oder Linktyp (politik|wirtschaft / topiclink|morelink)
+                $column.data( 'clicktracking' ), // Verortung
                 $element.attr( 'href' ) // Ziel-URL
             ];
 
