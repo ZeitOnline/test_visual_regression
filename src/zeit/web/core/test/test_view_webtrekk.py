@@ -20,18 +20,32 @@ from selenium.webdriver.support.ui import WebDriverWait
 @pytest.mark.parametrize(
     'teaser', [
         # teaser-classic solo
+        ('.teaser-classic .teaser-classic__media-item',
+         'solo.1.1.teaser-classic-zplus.image'),
         ('.teaser-classic .teaser-classic__combined-link',
          'solo.1.1.teaser-classic-zplus.text'),
+        ('.teaser-classic .teaser-classic__commentcount',
+         'solo.1.1.teaser-classic-zplus.comments'),
         # teaser-square minor
-        ('.teaser-square .teaser-square__combined-link',
+        # ('.cp-area--minor .teaser-square__media-item',
+        #  'minor.2.1.teaser-square.image'),
+        ('.cp-area--minor .teaser-square__combined-link',
          'minor.2.1.teaser-square.text'),
+        ('.cp-area--minor .teaser-square__button',
+         'minor.2.1.teaser-square.button'),
         # teaser-small major
-        ('.teaser-small .teaser-small__combined-link',
+        ('.cp-area--major .teaser-small__media-item',
+         'major.2.1.teaser-small.image'),
+        ('.cp-area--major .teaser-small__combined-link',
          'major.2.1.teaser-small.text'),
+        ('.cp-area--major .teaser-small__commentcount',
+         'major.2.1.teaser-small.comments'),
         # teaser-small parquet
         ('.parquet-teasers .teaser-small .teaser-small__combined-link',
          'parquet-titel.3.1.teaser-small.text'),
         # teaser-large parquet
+        ('.parquet-teasers .teaser-large .teaser-large__commentcount',
+         'parquet-titel.4.1.teaser-large-zplus.comments'),
         ('.parquet-teasers .teaser-large .teaser-large__combined-link',
          'parquet-titel.4.1.teaser-large-zplus.text')
     ])
@@ -54,10 +68,12 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     # mobile
     driver.set_window_size(400, 800)
 
-    teaser_el = driver.find_element_by_css_selector(teaser[0])
-    teaser_el.click()
-    track_str = driver.execute_script("return window.trackingData")
-    assert('mobile.' + teaser[1] in track_str)
+    # exclude testing for images on mobile
+    if 'teaser-small__media-item' not in teaser[0]:
+        teaser_el = driver.find_element_by_css_selector(teaser[0])
+        teaser_el.click()
+        track_str = driver.execute_script("return window.trackingData")
+        assert('mobile.' + teaser[1] in track_str)
 
     # phablet
     driver.set_window_size(520, 800)
@@ -95,7 +111,8 @@ def test_cp_element_provides_expected_url_for_webtrekk(
     teaser_el = driver.find_element_by_css_selector('.teaser-classic a')
     teaser_el.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert('/zeit-online/article/02' in track_str)
+    assert track_str.endswith(
+        '|%s/zeit-online/article/02' % testserver.url.replace('http://', ''))
 
 
 def test_parquet_meta_provides_expected_webtrekk_strings(
@@ -112,11 +129,20 @@ def test_parquet_meta_provides_expected_webtrekk_strings(
     assert ('stationaer.parquet-titel.3.0.1.title|%s/zeit-online/parquet'
             % testserver.url.replace('http://', '')) == track_str
 
-    link = driver.find_element_by_css_selector('.parquet-meta__links a')
-    link.click()
+    links = driver.find_elements_by_css_selector('.parquet-meta__links a')
+
+    for x in range(3):
+        links[x].click()
+        track_str = driver.execute_script("return window.trackingData")
+        identifier = 'stationaer.parquet-titel.3.0.{}.topiclink|{}'.format(
+            x + 2, links[x].get_attribute('href').replace('http://', ''))
+        assert identifier == track_str
+
+    title = driver.find_element_by_css_selector('.parquet-meta__more-link')
+    title.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert ('stationaer.parquet-titel.3.0.2.topiclink'
-            '|www.zeit.de/themen/krise-griechenland' in track_str)
+    assert track_str == (
+        'stationaer.parquet-titel.3.0.5.morelink|www.zeit.de/politik/index')
 
 
 def test_buzzboard_provides_expected_webtrekk_strings(
@@ -182,6 +208,15 @@ def test_navi_provides_expected_webtrekk_strings(
 
 @pytest.mark.parametrize(
     'article', [
+        # thema
+        ('.article-header__topic',
+         'articleheader.thema...science'),
+        # author
+        ('.article-header__byline a',
+         'articleheader.author.1..text'),
+        # comment link
+        ('.metadata__commentcount',
+         'articleheader.comments...42_kommentare'),
         # intext
         ('.paragraph a',
          'intext.2/seite-1...cyborgs|www.zeit.de/digital'),
@@ -352,9 +387,9 @@ def test_video_page_provides_expected_webtrekk_string(
          'topic.5.1.teaser-topic-main.text'),
         ('.teaser-topic .teaser-topic-item a',
          'topic.5.2.teaser-topic-item.text'),
-        ('.teaser-topic .teaser-topic-item[data-zplus="true"] a',
+        ('.teaser-topic .teaser-topic-item[data-zplus] a',
          'topic.5.3.teaser-topic-item-zplus.text'),
-        ('.teaser-gallery[data-zplus="true"] a',
+        ('.teaser-gallery[data-zplus] a',
          'gallery.6.2.teaser-gallery-zplus.image'),
         ('.parquet-teasers .teaser-large  a',
          'parquet-z_parkett.7.1.teaser-large-zplus.text')
@@ -538,6 +573,12 @@ def test_zmo_article_pagination_provides_expected_webtrekk_string(
         tracking_data = driver.execute_script("return window.trackingData")
         assert tracking_data.startswith(
             'stationaer.article-pager.page_3_of_7...' + labels[index])
+
+    link = driver.find_element_by_css_selector('.comment-balloon__link')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.comment-balloon.comments...0_kommentare')
 
 
 def test_volume_teaser_provides_expected_webtrekk_string(
