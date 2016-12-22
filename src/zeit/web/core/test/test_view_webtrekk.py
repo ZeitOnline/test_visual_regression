@@ -104,9 +104,13 @@ def test_cp_element_provides_expected_url_for_webtrekk(
         selenium_driver, testserver):
 
     driver = selenium_driver
+    driver.set_window_size(980, 800)
     driver.get('%s/zeit-online/webtrekk-test-setup'
                '#debug-clicktracking' % testserver.url)
-    driver.set_window_size(980, 800)
+
+    # scroll down first - bizarre selenium bug
+    teaser_el = driver.find_element_by_css_selector('.teaser-small a')
+    teaser_el.click()
 
     teaser_el = driver.find_element_by_css_selector('.teaser-classic a')
     teaser_el.click()
