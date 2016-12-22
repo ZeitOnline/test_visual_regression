@@ -24,8 +24,8 @@
 		span wrapper to prevent the :after-slash from being underlined
 		(which would happen if a was the child which gets a slash as :after-content)
 	#}
-	<span data-ct-row="comments">
+	<span data-ct-row="comments" data-ct-column="false">
 		{% set comments_string = view.comment_count | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
-		<a class="metadata__commentcount js-scroll" href="#comments" title="Kommentare anzeigen" data-ct-label="comments">{{ comments_string }}</a>
+		<a class="metadata__commentcount js-scroll" href="#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
 	</span>
 {% endif %}
