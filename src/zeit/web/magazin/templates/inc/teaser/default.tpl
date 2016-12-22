@@ -15,8 +15,10 @@ Default teaser template to inherit from.
 
     {% if video -%}
         {# call video asset #}
+        {% block teaser_video %}
             {% set href = teaser | create_url %}
             {{ cp.headervideo_linked(video, self.layout() + '__media-container ' + self.layout() + '__media-container--' + self.layout_shade(), '', href) }}
+        {% endblock %}
     {%- elif image -%}
         {# call image asset #}
         {% block teaser_image scoped %}

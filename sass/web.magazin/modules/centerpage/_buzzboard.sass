@@ -40,41 +40,6 @@
 			vertical-align: top
 			counter-increment: buzz-board
 
-	&__container
-		min-height: remify(69px)
-		margin-bottom: $compact
-		padding: 0 $fine 0 $medium
-		position: relative
-		word-wrap: break-word
-		span
-			margin: $micro 0
-		&:before
-			font-family: $font-tiemann
-			content: counter(buzz-board)
-			font-size: $font-xxxl
-			position: absolute
-			left: 0
-			line-height: 1em
-
-	&__heading
-		font-size: 1em
-		font-weight: normal
-		margin: 0
-		a
-			+link-colors($black, $black, $black, $black, $black)
-
-	&__kicker
-		display: block
-		font-size: $font-s
-		letter-spacing: $hair
-
-	&__title
-		font-weight: bold
-
-	&__metadata
-		color: $grey
-		font-size: $font-s
-
 	&__icon
 		margin-right: $fine
 		height: remify(36px)
