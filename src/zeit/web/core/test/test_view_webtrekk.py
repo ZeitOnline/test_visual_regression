@@ -3,7 +3,6 @@ import mock
 import pyramid.decorator
 import pyramid.interfaces
 import pytest
-import re
 import time
 import zope.component
 
@@ -22,19 +21,19 @@ from selenium.webdriver.support.ui import WebDriverWait
     'teaser', [
         # teaser-classic solo
         ('.teaser-classic .teaser-classic__combined-link',
-         '1.1.1.solo-teaser-classic-zplus.text'),
+         'solo.1.1.teaser-classic-zplus.text'),
         # teaser-square minor
         ('.teaser-square .teaser-square__combined-link',
-         '2.2.1.minor-teaser-square.text'),
+         'minor.2.1.teaser-square.text'),
         # teaser-small major
         ('.teaser-small .teaser-small__combined-link',
-         '2.1.1.major-teaser-small.text'),
+         'major.2.1.teaser-small.text'),
         # teaser-small parquet
         ('.parquet-teasers .teaser-small .teaser-small__combined-link',
-         '3.1.1.parquet-teaser-small.text'),
+         'parquet-titel.3.1.teaser-small.text'),
         # teaser-large parquet
         ('.parquet-teasers .teaser-large .teaser-large__combined-link',
-         '4.1.1.parquet-teaser-large-zplus.text')
+         'parquet-titel.4.1.teaser-large-zplus.text')
     ])
 def test_cp_elements_provide_expected_id_for_webtrekk(
         selenium_driver, testserver, teaser):
@@ -110,14 +109,14 @@ def test_parquet_meta_provides_expected_webtrekk_strings(
     title = driver.find_element_by_css_selector('.parquet-meta__title')
     title.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert(re.search('stationaer.parquet.1.1..titel|'
-           '.*/zeit-online/parquet', track_str))
+    assert ('stationaer.parquet-titel.3.0.1.title|%s/zeit-online/parquet'
+            % testserver.url.replace('http://', '')) == track_str
 
     link = driver.find_element_by_css_selector('.parquet-meta__links a')
     link.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert('stationaer.parquet.2.1..topiclink'
-           '|www.zeit.de/themen/krise-griechenland' in track_str)
+    assert ('stationaer.parquet-titel.3.0.2.topiclink'
+            '|www.zeit.de/themen/krise-griechenland' in track_str)
 
 
 def test_buzzboard_provides_expected_webtrekk_strings(
@@ -133,21 +132,20 @@ def test_buzzboard_provides_expected_webtrekk_strings(
     header = driver.find_element_by_css_selector('.buzz-box__heading')
     header.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert(re.search('mobile.....buzz-box__heading.aufsteigend|'
-           '.*/zeit-online/buzz-box#buzz-trend', track_str))
+    assert track_str == 'mobile.minor.2..buzz-box.aufsteigend|#buzz-box'
 
     link = driver.find_element_by_css_selector('.teaser-buzz__combined-link')
     link.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert(re.search('mobile.1.2.2.minor-teaser-buzz.text|'
-           '.*/zeit-online/article/01', track_str))
+    assert track_str.startswith('mobile.minor.2.4.teaser-buzz.text|')
+    assert track_str.endswith('/zeit-online/article/01')
 
     # desktop
     driver.set_window_size(980, 800)
     link.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert(re.search('stationaer.1.2.2.minor-teaser-buzz.text|'
-           '.*/zeit-online/article/01', track_str))
+    assert track_str.startswith('stationaer.minor.2.4.teaser-buzz.text|')
+    assert track_str.endswith('/zeit-online/article/01')
 
 
 @pytest.mark.parametrize(
@@ -347,19 +345,19 @@ def test_video_page_provides_expected_webtrekk_string(
 @pytest.mark.parametrize(
     'teasers', [
         ('.teaser-fullwidth a',
-         '1.1.1.solo-teaser-fullwidth-zplus.image'),
+         'solo.1.1.teaser-fullwidth-zplus.image'),
         ('.teaser-fullwidth-column a',
-         '2.1.1.solo-teaser-fullwidth-column-zplus.image'),
+         'solo.2.1.teaser-fullwidth-column-zplus.image'),
         ('.teaser-topic .teaser-topic-main a',
-         '5.1.1.topic-teaser-topic-main.text'),
+         'topic.5.1.teaser-topic-main.text'),
         ('.teaser-topic .teaser-topic-item a',
-         '5.1.2.topic-teaser-topic-item.text'),
+         'topic.5.2.teaser-topic-item.text'),
         ('.teaser-topic .teaser-topic-item[data-zplus="true"] a',
-         '5.1.3.topic-teaser-topic-item-zplus.text'),
+         'topic.5.3.teaser-topic-item-zplus.text'),
         ('.teaser-gallery[data-zplus="true"] a',
-         '6.1.2.gallery-teaser-gallery-zplus.image'),
+         'gallery.6.2.teaser-gallery-zplus.image'),
         ('.parquet-teasers .teaser-large  a',
-         '7.1.1.parquet-teaser-large-zplus.text')
+         'parquet-z_parkett.7.1.teaser-large-zplus.text')
     ])
 def test_zplus_provides_expected_webtrekk_strings(
         selenium_driver, testserver, teasers):
@@ -811,7 +809,7 @@ def test_gallery_provides_expected_webtrekk_string(
 def test_buzz_box_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     pathname = '/zeit-online/buzz-box'
-    pattern = 'stationaer.....buzz-box__heading.{}|#buzz-box'
+    pattern = 'stationaer.minor.1..buzz-box.{}|#buzz-box'
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('{}{}#debug-clicktracking'.format(testserver.url, pathname))
