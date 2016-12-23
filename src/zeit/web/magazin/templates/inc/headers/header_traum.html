@@ -1,21 +1,20 @@
 {% extends "zeit.web.magazin:templates/inc/headers/header.html" %}
 
-{% block article_header %}
-<header class="header-article header-article--traum">
-    <div class="is-constrained is-centered">
-        {{ self.headline() }}
-        <div class="header-article__subtitle">
-            {{- view.subtitle -}}
-        </div>
+{% block header_content %}
+<div class="is-constrained is-centered">
+    {{ self.headline() }}
+    <div class="header-article__subtitle">
+        {{- view.subtitle -}}
     </div>
-    {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
-    <div class="is-constrained is-centered">
-        <div class="meta">
-            <div class="byline">
-                {{ self.genre_and_authors() }}
-            </div>
-            {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
+    {{ self.zplusbadge() }}
+</div>
+{% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
+<div class="is-constrained is-centered">
+    <div class="meta">
+        <div class="byline">
+            {{ self.genre_and_authors() }}
         </div>
+        {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
     </div>
-</header>
+</div>
 {% endblock %}

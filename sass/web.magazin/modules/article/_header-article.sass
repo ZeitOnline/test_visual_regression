@@ -113,7 +113,7 @@
 	// –––––––––––––––––––––––
 	//    BRIEFMARKE HEADER
 	// –––––––––––––––––––––––
-	&--stamp
+	&--briefmarke
 		text-align: left
 		.headline__title
 			+respond-min($break-1)
@@ -164,6 +164,11 @@
 		&.header-article--default
 			+respond-min($break-2)
 				margin-top: remify(70px)
+			.headline
+				margin-bottom: remify(24px)
+			& > figure
+				+respond-min($break-2)
+					margin-bottom: remify(52px)
 		&.header-article--column
 			.headline
 				margin-bottom: 0
@@ -178,3 +183,25 @@
 				+respond-min($break-2)
 					margin-top: remify(70px)
 					margin-bottom: remify(20px)
+		&.header-article--mode
+			.headline
+				margin-bottom: remify(24px)
+				+respond-min($break-2)
+					margin-top: remify(5px)
+					margin-bottom: remify(34px)
+			.zplus-badge
+				justify-content: flex-start
+				margin-bottom: remify(54px)
+		&.header-article--briefmarke
+			.headline
+				margin-bottom: remify(30px)
+				+respond-min($break-2)
+					margin-bottom: remify(24px)
+			.zplus-badge
+				justify-content: flex-start
+				margin-bottom: remify(54px)
+		&.header-article--traum
+			.header-article__subtitle
+				margin-bottom: remify(24px)
+			.zplus-badge
+				margin-bottom: remify(54px)
