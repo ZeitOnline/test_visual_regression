@@ -100,23 +100,35 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     assert('stationaer.' + teaser[1] in track_str)
 
 
+@pytest.mark.parametrize(
+    'teasers', [
+        ('.teaser-classic .teaser-classic__combined-link',
+         '/zeit-online/article/02'),
+        ('.teaser-small .teaser-small__combined-link',
+         '/zeit-online/article/01'),
+        ('.teaser-square .teaser-square__combined-link',
+         '/zeit-online/gallery/biga_1')
+    ])
 def test_cp_element_provides_expected_url_for_webtrekk(
-        selenium_driver, testserver):
+        selenium_driver, testserver, teasers):
 
     driver = selenium_driver
-    driver.set_window_size(980, 800)
+    driver.set_window_size(400, 800)
     driver.get('%s/zeit-online/webtrekk-test-setup'
                '#debug-clicktracking' % testserver.url)
+    hostname = testserver.url.replace('http://', '')
 
-    # scroll down first - bizarre selenium bug
-    teaser_el = driver.find_element_by_css_selector('.teaser-small a')
-    teaser_el.click()
-
-    teaser_el = driver.find_element_by_css_selector('.teaser-classic a')
-    teaser_el.click()
-    track_str = driver.execute_script("return window.trackingData")
-    assert track_str.endswith(
-        '|%s/zeit-online/article/02' % testserver.url.replace('http://', ''))
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, teasers[0])))
+    except TimeoutException:
+        assert False, 'Element not locateable in 5 sec.'
+    else:
+        teaser_el = driver.find_element_by_css_selector(teasers[0])
+        teaser_el.click()
+        track_str = driver.execute_script('return window.trackingData;')
+        assert track_str.endswith('|%s%s' % (hostname, teasers[1]))
 
 
 def test_parquet_meta_provides_expected_webtrekk_strings(
