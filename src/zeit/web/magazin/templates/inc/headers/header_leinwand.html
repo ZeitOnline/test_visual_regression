@@ -1,12 +1,11 @@
 {% extends "zeit.web.magazin:templates/inc/headers/header.html" %}
 
-{% block article_header %}
-<header class="header-article header-article--leinwand">
-    {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
-    <div class="is-constrained is-centered">
-        {{ self.headline() }}
-        {{ self.subtitle() }}
-        {{ self.article_date() }}
-    </div>
-</header>
+{% block header_content %}
+{% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
+<div class="is-constrained is-centered">
+    {{ self.headline() }}
+    {{ self.zplusbadge() }}
+    {{ self.subtitle() }}
+    {{ self.article_date() }}
+</div>
 {% endblock %}

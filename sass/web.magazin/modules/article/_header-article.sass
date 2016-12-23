@@ -86,6 +86,7 @@
 				margin-left: auto
 				margin-right: auto
 				margin-top: remify(30px)
+				margin-bottom: 0
 				max-width: remify(920px)
 		.headline
 			margin-top: remify(36px)
@@ -160,13 +161,20 @@
 	//      Z PLUS BADGE
 	// –––––––––––––––––––––––
 	&--zplusbadge
-		+respond-min($break-2)
-			margin-top: remify(70px)
-		.headline
-			margin-bottom: remify(25px)
+		&.header-article--default
+			+respond-min($break-2)
+				margin-top: remify(70px)
 		&.header-article--column
 			.headline
 				margin-bottom: 0
 			.byline
+				&:before
+					margin-bottom: remify(7px)
 				+respond-min($break-2)
 					margin-bottom: remify(42px)
+		&.header-article--leinwand
+			.headline
+				margin-bottom: remify(15px)
+				+respond-min($break-2)
+					margin-top: remify(70px)
+					margin-bottom: remify(20px)
