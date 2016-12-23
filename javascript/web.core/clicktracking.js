@@ -321,13 +321,14 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * @return {string}          formatted linkId-string for webtrekk call
          */
         linkInArticleContent: function( $element, $page ) {
-            var $currentParagraph =  $element.closest( 'p, [data-clicktracking]', $page ),
-                currentPageNumber = $page.data( 'page-number' ) || 0,
-                currentParagraphNumber = $currentParagraph.prevAll( 'p' ).length + 1,
-                trackType = $element.closest( '[data-clicktracking]' ).data( 'clicktracking' ) || 'intext',
+            var $blocks = $page.children( '[class]' ),
+                $block = $element.closest( $blocks ),
+                pageNumber = $page.data( 'page-number' ) || 0,
+                blockNumber = $blocks.index( $block ) || 0,
+                trackType = $block.length ? $block.attr( 'class' ).split( ' ' ).shift() : 'intext',
                 data = [
                     trackType, // [verortung]
-                    currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
+                    blockNumber + '/seite-' + pageNumber, // [reihe] Nummer des Blocks / Nummer der Seite bsp: "2/seite-1"
                     '', // [spalte] leer lassen
                     '', // [subreihe] leer lassen
                     sanitizeString(
