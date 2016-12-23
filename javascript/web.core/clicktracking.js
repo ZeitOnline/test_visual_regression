@@ -145,7 +145,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 element = $element.get( 0 ),
                 $article = $element.closest( 'article, aside' ),
                 $area = $element.closest( '.cp-area' ),
-                context = $article.data( 'clicktracking' ),
+                context = $area.data( 'ct-context' ),
                 column = '',
                 articleClasses = $article.get( 0 ).className.split( ' ' );
 
@@ -304,7 +304,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 data;
 
             data = [
-                $column.data( 'clicktracking' ), // Verortung
+                $column.data( 'ct-context' ), // Verortung
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // Region bzw. Reihe
                 0, // Spalte
                 $column.find( 'a' ).index( $element ) + 1, // Subreihe
