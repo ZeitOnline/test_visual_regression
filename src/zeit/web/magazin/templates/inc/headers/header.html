@@ -1,6 +1,6 @@
 {% block article_header %}
 <header class="header-article header-article--{% block layout %}{{ view.header_layout }}{% endblock %}{% if view.zplus_label and view.page_nr == 1 %} header-article--zplusbadge{% endif %}">
-
+    {% block header_content %}
     {% block headline -%}
     <h1 class="headline" itemprop="headline">
         <span class="headline__supertitle">{{ view.supertitle }}</span>
@@ -8,11 +8,11 @@
     </h1>
     {% endblock -%}
 
-    {% block before_image %}
+    {% block zplusbadge %}
         {% if view.zplus_label and view.page_nr == 1 %}
             {% include "zeit.web.magazin:templates/inc/article/zplus-badge.html" %}
         {% endif %}
-    {% endblock before_image %}
+    {% endblock zplusbadge %}
 
     {% if view.page_nr == 1 and view.header_module %}
         {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
@@ -53,6 +53,6 @@
         {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
     </div>
     {% endblock -%}
-
+    {% endblock header_content %}
 </header>
 {% endblock article_header %}

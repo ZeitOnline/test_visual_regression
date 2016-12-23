@@ -1,13 +1,11 @@
 {% extends "zeit.web.magazin:templates/inc/headers/header.html" %}
 
-{% block article_header %}
-<header class="header-article header-article--column{% if view.zplus_label and view.page_nr == 1 %} header-article--zplusbadge{% endif %}">
+{% block header_content %}
     {{ self.headline() }}
     <div class="byline">
         {{ self.genre_and_authors() }}
     </div>
-    {{ self.before_image() }}
+    {{ self.zplusbadge() }}
     {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
     {{ self.article_date() }}
-</header>
 {% endblock %}
