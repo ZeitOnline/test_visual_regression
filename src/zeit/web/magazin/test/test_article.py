@@ -548,7 +548,8 @@ def test_article_header_text_should_have_correct_source(testbrowser):
 
 def test_article_header_briefmarke_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-briefmarke')
-    assert browser.cssselect('header.header-article.header-article--stamp')
+    assert browser.cssselect(
+        'header.header-article.header-article--briefmarke')
 
 
 def test_article_header_leinwand_should_have_correct_source(testbrowser):
