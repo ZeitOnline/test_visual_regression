@@ -1,5 +1,6 @@
 {% if image %}
     <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image"
+        {%- block image_additional_data_attributes %}{% endblock %}
         {%- if image_itemprop %} itemprop="{{ image_itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
         {% block media_caption_above %}{% endblock %}
         <!--[if gt IE 8]><!-->
