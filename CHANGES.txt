@@ -7,7 +7,7 @@ POSTDEPLOY
 3.25 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3578: Update clicktracking for centerpages, article header, article blocks
 
 
 3.24 (2016-12-19)

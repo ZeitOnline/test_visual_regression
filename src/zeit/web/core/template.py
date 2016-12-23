@@ -521,6 +521,18 @@ def format_iqd(string):
     return string
 
 
+@zeit.web.register_filter
+def get_clicktracking_identifier(area):
+    if area.kind == 'parquet' and area.title:
+        return 'parquet-{}'.format(format_webtrekk(area.title))
+    elif area.kind in ['zett', 'spektrum']:
+        return 'parquet-{}'.format(area.kind)
+    elif area.kind.endswith('-parquet'):
+        return 'parquet-{}'.format(area.kind.rsplit('-', 1).pop(0))
+    else:
+        return area.kind
+
+
 @zeit.web.register_global
 def settings(key, default=None):
     """Returns the configuration value for a provided key"""

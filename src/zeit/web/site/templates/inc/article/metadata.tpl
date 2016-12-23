@@ -13,7 +13,7 @@
             </div>
             {%- set byline = view.context | get_byline('main') %}
             {% if byline | length -%}
-            <div class="byline">
+            <div class="byline" data-ct-row="author">
                 {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
             </div>
             {% endif -%}

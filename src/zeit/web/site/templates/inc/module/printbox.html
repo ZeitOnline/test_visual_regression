@@ -1,4 +1,4 @@
-{% set teaser_position = '{}.{}.{}'.format(region_loop.index, area_loop.index, module_loop.index) %}
+{% set teaser_position = '{}.{}.{}'.format(area.kind, region_loop.index, module_loop.index) %}
 
 <aside class="print-box">
     {% set title = teaser.supertitle + ' - ' + teaser.title -%}
