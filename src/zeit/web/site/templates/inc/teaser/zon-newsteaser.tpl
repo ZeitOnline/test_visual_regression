@@ -1,4 +1,4 @@
-<article class="newsteaser">
+<article class="newsteaser" data-meetrics="{{ area.kind }}" data-clicktracking="{{ area.kind }}">
     <a class="newsteaser__combined-link" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}" href="{{ teaser.uniqueId | create_url }}">
         <time class="newsteaser__time">
            {{ teaser | mod_date | format_date(pattern='HH:mm', type='switch_from_hours_to_date' if cp_type in ['keywordpage', 'topicpage'] else '') }}

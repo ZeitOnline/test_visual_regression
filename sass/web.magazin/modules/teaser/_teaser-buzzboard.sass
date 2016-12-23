@@ -1,0 +1,36 @@
+.teaser-buzzboard
+	min-height: remify(69px)
+	margin-bottom: $compact
+	padding: 0 $fine 0 $medium
+	position: relative
+	word-wrap: break-word
+	&:before
+		font-family: $font-tiemann
+		content: counter(buzz-board)
+		font-size: $font-xxxl
+		position: absolute
+		left: 0
+		line-height: 1em
+
+	&__text
+		color: $black
+
+	&__title-box
+		@extend %teaser__title-box
+
+	&__kicker
+		display: block
+		font-size: $font-s
+		font-weight: normal
+		letter-spacing: $hair
+
+	&__title
+		font-weight: bold
+		line-height: 1.25
+		margin: remify(6px 0 4px)
+		width: 100%
+
+	&__metadata
+		color: $grey
+		font-size: $font-s
+		letter-spacing: $letter-spacing-s

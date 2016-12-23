@@ -4,10 +4,16 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.25 (unreleased)
+3.26 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+3.25 (2016-12-23)
+-----------------
+
+- ZON-3578: Update clicktracking for centerpages, article header, article blocks
 
 
 3.24 (2016-12-19)

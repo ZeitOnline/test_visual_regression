@@ -1,5 +1,5 @@
 {% block article_header %}
-<header class="header-article header-article--{% block layout %}{{ view.header_layout }}{% endblock %}{% if view.zplus_label and view.page_nr == 1 %} header-article--zplusbadge{% endif %}">
+<header class="header-article header-article--{% block layout %}{{ view.header_layout }}{% endblock %}{% if view.zplus_label and view.page_nr == 1 %} header-article--zplusbadge{% endif %}" data-ct-area="articleheader">
     {% block header_content %}
     {% block headline -%}
     <h1 class="headline" itemprop="headline">
