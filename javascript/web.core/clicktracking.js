@@ -111,7 +111,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         /**
          * track elements in the main section
          * @param  {Object} $element jQuery Element with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         main: function( $element, event ) {
 
@@ -196,7 +196,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         /**
          * track links with data-id attribute that contains the complete webtrekk id without href
          * @param  {object} $element jQuery collection with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         useDataId: function( $element ) {
             var data = [
@@ -208,7 +208,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         /**
          * track links inside parents with appropriate data attributes
          * @param  {object} $element jQuery collection with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         useDataArea: function( $element, event ) {
             var $area = $( event.delegateTarget ),
@@ -280,7 +280,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         /**
          * track links with data-tracking attribute that contains the complete webtrekk id plus href
          * @param  {object} $element jQuery collection with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         useDataTracking: function( $element ) {
             var trackingData = $element.data( 'tracking' ).split( '|' ),
@@ -294,7 +294,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * track elements in the parquet-meta section
          * definition: https://docs.google.com/spreadsheets/d/1uY8XXULPq7zUre9prBWiKDaBQercLmAEENCVF8LQk4Q/edit#gid=1056411343
          * @param  {Object} $element jQuery Element with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         parquetMeta: function( $element, event ) {
 
@@ -318,7 +318,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * track links which are inside an article text
          * @param  {object} $element jQuery collection with the link that was clicked
          * @param  {object} $page    jQuery collection with the page containing the clicked link
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         linkInArticleContent: function( $element, $page ) {
             var $blocks = $page.children( '[class]' ),
