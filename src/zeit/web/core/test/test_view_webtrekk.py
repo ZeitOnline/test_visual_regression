@@ -229,7 +229,7 @@ def test_navi_provides_expected_webtrekk_strings(
          'articleheader.thema...science'),
         # author
         ('.article-header__byline a',
-         'articleheader.author.1..text'),
+         'articleheader.author.1_of_1..jochen_bittner'),
         # comment link
         ('.metadata__commentcount',
          'articleheader.comments...42_kommentare'),
