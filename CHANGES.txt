@@ -7,7 +7,7 @@ POSTDEPLOY
 3.26 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Re-release after grunting properly
 
 
 3.25 (2016-12-23)
