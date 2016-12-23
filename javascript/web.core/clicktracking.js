@@ -331,6 +331,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                     '', // [spalte] leer lassen
                     '', // [subreihe] leer lassen
                     sanitizeString(
+                        $element.data( 'ct-label' ) ||
                         $element.children().first().text() ||
                         $element.text() ), // [bezeichner] Verlinkter Text bsp. "koalitionsverhandlungen_sind_gescheitert"
                     $element.attr( 'href' ) || location.host + location.pathname // url
