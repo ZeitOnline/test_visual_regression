@@ -306,7 +306,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             data = [
                 $column.data( 'clicktracking' ), // Verortung
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // Region bzw. Reihe
-                '0', // Spalte
+                0, // Spalte
                 $column.find( 'a' ).index( $element ) + 1, // Subreihe
                 linkType, // Linktyp (title|topiclink|morelink)
                 $element.attr( 'href' ) // Ziel-URL
