@@ -7,11 +7,13 @@ POSTDEPLOY
 3.26 (unreleased)
 -----------------
 
+- ZON-3569: Change fallback image and styles for volume packshots
+
+- ZON-3557: Add zplus badge to ZMO article header
+
 - ZON-3542: Show error notification if paywall after registration
 
 - ZON-3517: Mark content only for subscribers in ZMO articles (AMP part)
-
-- ZON-3557: Add zplus badge to ZMO article header
 
 
 3.25.1 (2016-12-23)
