@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-magazin/2016/49/kerzen-marmormuster/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-11-28T09:27:32.126613+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-11-28T09:27:29.335750+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="variants">&lt;pickle&gt; &lt;dictionary&gt; &lt;item&gt; &lt;key&gt; &lt;unicode&gt;portrait-large&lt;/unicode&gt; &lt;/key&gt; &lt;value&gt; &lt;dictionary&gt; &lt;item key="focus_x"&gt; &lt;int&gt;0&lt;/int&gt; &lt;/item&gt; &lt;item key="focus_y"&gt; &lt;float&gt;0.999999999999973&lt;/float&gt; &lt;/item&gt; &lt;item key="zoom"&gt; &lt;float&gt;0.9999999999999999&lt;/float&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/value&gt; &lt;/item&gt; &lt;item&gt; &lt;key&gt; &lt;unicode&gt;portrait-small&lt;/unicode&gt; &lt;/key&gt; &lt;value&gt; &lt;dictionary&gt; &lt;item key="focus_x"&gt; &lt;float&gt;0.4512820512820511&lt;/float&gt; &lt;/item&gt; &lt;item key="focus_y"&gt; &lt;float&gt;0.6843444076158168&lt;/float&gt; &lt;/item&gt; &lt;item key="zoom"&gt; &lt;float&gt;0.8571511627906976&lt;/float&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/value&gt; &lt;/item&gt; &lt;item&gt; &lt;key&gt; &lt;unicode&gt;square-large&lt;/unicode&gt; &lt;/key&gt; &lt;value&gt; &lt;dictionary&gt; &lt;item key="focus_x"&gt; &lt;int&gt;0&lt;/int&gt; &lt;/item&gt; &lt;item key="focus_y"&gt; &lt;float&gt;0.44713358572201156&lt;/float&gt; &lt;/item&gt; &lt;item key="zoom"&gt; &lt;float&gt;0.9999999999999999&lt;/float&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/value&gt; &lt;/item&gt; &lt;item&gt; &lt;key&gt; &lt;unicode&gt;square-small&lt;/unicode&gt; &lt;/key&gt; &lt;value&gt; &lt;dictionary&gt; &lt;item key="focus_x"&gt; &lt;int&gt;0&lt;/int&gt; &lt;/item&gt; &lt;item key="focus_y"&gt; &lt;float&gt;0.4272579772850186&lt;/float&gt; &lt;/item&gt; &lt;item key="zoom"&gt; &lt;float&gt;0.9999999999999999&lt;/float&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/value&gt; &lt;/item&gt; &lt;item&gt; &lt;key&gt; &lt;unicode&gt;tile&lt;/unicode&gt; &lt;/key&gt; &lt;value&gt; &lt;dictionary&gt; &lt;item key="focus_x"&gt; &lt;float&gt;0.5158730158730158&lt;/float&gt; &lt;/item&gt; &lt;item key="focus_y"&gt; &lt;float&gt;0.4763874008999339&lt;/float&gt; &lt;/item&gt; &lt;item key="zoom"&gt; &lt;float&gt;0.9015441860465117&lt;/float&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/value&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_images">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;desktop&lt;/unicode&gt; &lt;unicode&gt;WT_candles.jpg&lt;/unicode&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:85d4c541-f7db-42cf-ba05-7c7ab48f2dac}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-11-28T09:27:29.388898+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-11-28T09:26:22.891394+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Alex Walker&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="nofollow">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Marmorierte Kerzen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-11-28T09:27:29.273655+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-11-28T09:27:29.335750+00:00</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2016-11-28T09:27:30Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Mon, 28 Nov 2016 09:27:30 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"f8c4a5-1000-5425914ae77c4"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>
