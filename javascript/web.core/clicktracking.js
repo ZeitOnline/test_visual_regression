@@ -325,13 +325,13 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             var $blocks = $page.children( '[class]' ),
                 $block = $element.closest( $blocks ),
                 pageNumber = $page.data( 'page-number' ) || 0,
-                blockNumber = $blocks.index( $block ) || 0,
-                trackType = $block.length ? $block.attr( 'class' ).split( ' ' ).shift() : 'intext',
+                blockNumber = $blocks.index( $block ) + 1,
+                blockType = $block.length ? $block.data( 'ct-block' ) || $block.attr( 'class' ).split( ' ' ).shift() : 'intext',
                 data = [
-                    trackType, // [verortung]
-                    blockNumber + '/seite-' + pageNumber, // [reihe] Nummer des Blocks / Nummer der Seite bsp: "2/seite-1"
-                    '', // [spalte] leer lassen
-                    '', // [subreihe] leer lassen
+                    'articlebody', // [verortung]
+                    blockNumber, // [reihe]
+                    'seite-' + pageNumber, // [spalte]
+                    blockType, // [subreihe]
                     sanitizeString(
                         $element.data( 'ct-label' ) ||
                         $element.children().first().text() ||
