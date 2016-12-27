@@ -6,9 +6,9 @@
         <div class="article__wrap{% if view.is_wrapped %} article__wrap--is-wrapped{% endif %}">
             {% block article_header %}
                 {% if view.current_page.number == 0 %}
-                    {% include "zeit.web.magazin:templates/inc/headers/article_header_{}.html".format(view.header_layout) ignore missing %}
+                    {% include "zeit.web.magazin:templates/inc/header/header_{}.html".format(view.header_layout) ignore missing %}
                 {% else %}
-                    {% include "zeit.web.magazin:templates/inc/headers/article_header_sequelpages.html" %}
+                    {% include "zeit.web.magazin:templates/inc/header/header_sequelpages.html" %}
                 {% endif %}
             {% endblock article_header %}
             <div class="article__body-wrap">
@@ -45,7 +45,7 @@
         <!--[if gt IE 8]><!-->
         <script type="text/javascript">
             {# Due to seo reasons, original publish date is added later #}
-            var time = document.querySelector('.article__head__meta__date'),
+            var time = document.querySelector('.meta__date'),
                 content = time.textContent != undefined ? time.textContent : time.innerText,
                 published = document.createTextNode('{{ view.date_first_released | format_date(view.show_date_format_seo) }} — '),
                 linebreak = document.createElement('br'),
