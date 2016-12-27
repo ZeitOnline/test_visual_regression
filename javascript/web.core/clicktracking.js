@@ -187,7 +187,8 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. reihe
                 column, // spalte
                 teasertype, // subreihe
-                $element.data( 'ct-label' ) || type, // bezeichner (image, button, text)
+                sanitizeString(
+                    $element.data( 'ct-label' ) || type ), // bezeichner (image, button, text)
                 href // url
             ];
 
