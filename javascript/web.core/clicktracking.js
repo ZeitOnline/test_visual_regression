@@ -322,7 +322,11 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * @return {array}           list of data for webtrekk call
          */
         linkInArticleContent: function( $element, $page ) {
-            var $blocks = $page.children( '[class]' ),
+            var $blocks = $page.children( '[class]' ).not([ // exclude some blocks
+                        '[data-ct-area="article-toc"]', // table of contents
+                        '.article__subheading', // page title and intertitle
+                        '.article__subpage-head' // page title in longform
+                    ].join() ),
                 $block = $element.closest( $blocks ),
                 pageNumber = $page.data( 'page-number' ) || 0,
                 blockNumber = $blocks.index( $block ) + 1,
