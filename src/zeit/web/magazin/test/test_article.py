@@ -91,24 +91,24 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
 
     assert locate_by_selector(
         '//script[@src=\'//stats.g.doubleclick.net/dc.js\']'), (
-            'script for Doubleclick not in DOM')
+        'script for Doubleclick not in DOM')
     assert locate_by_selector(
         '//script[@src=\'//www.googletagmanager.com'
         '/gtm.js?id=GTM-TQGX6J\']'), (
-            'script for Google tag manager not in DOM')
+        'script for Google tag manager not in DOM')
     assert locate_by_selector(
         '//script[@src=\'http://scripts.zeit.de/js/rsa.js\']'), (
-            'script for RSA not in DOM')
+        'script for RSA not in DOM')
     assert locate_by_selector(
         '//script[@src=\'http://scripts.zeit.de/static/js/'
         'webtrekk/webtrekk_v4.0.5.js\']'), (
-            'script for Webtrekk not in DOM')
+        'script for Webtrekk not in DOM')
     assert locate_by_selector(
         '//script[@src=\'https://script.ioam.de/iam.js\']'), (
-            'script for IVW not in DOM')
+        'script for IVW not in DOM')
     assert locate_by_selector(
         '//img[starts-with(@src,\'http://zeitonl.ivwbox.de\')]'), (
-            'pixel for IVW not in DOM')
+        'pixel for IVW not in DOM')
 
 
 def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
@@ -665,11 +665,10 @@ def test_article02_should_have_esi_include(testbrowser):
     assert len(browser.cssselect('main include')) == 3
 
 
-@pytest.mark.parametrize(
-    'path, selector', [
-        ('/zeit-magazin/article/03', '.figure-stamp .figure__copyright'),
-        ('/zeit-magazin/article/05', '.longform-header__copyright'),
-        ('/zeit-magazin/article/header-default', '.header-article__copyright')])
+@pytest.mark.parametrize('path, selector', [
+    ('/zeit-magazin/article/03', '.figure-stamp .figure__copyright'),
+    ('/zeit-magazin/article/05', '.longform-header__copyright'),
+    ('/zeit-magazin/article/header-default', '.header-article__copyright')])
 def test_article_has_linked_copyright(testbrowser, path, selector):
     browser = testbrowser(path)
     assert browser.cssselect(selector)
