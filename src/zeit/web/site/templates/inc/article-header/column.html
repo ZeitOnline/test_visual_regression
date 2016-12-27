@@ -12,7 +12,7 @@
                         <span class="column-heading__title">{{ view.title }}</span>
                     </h1>
                     {% if view.authors %}
-                        <div class="column-heading__name">
+                        <div class="column-heading__name" data-ct-row="author">
                             Eine Kolumne von
                             {% for author in view.authors -%}
                                 <span itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -20,7 +20,10 @@
                                     {%- if loop.last %} und {% else %}, {% endif -%}
                                 {%- endif -%}
                                 {%- if author.href -%}
-                                    <a href="{{ author.href | create_url }}" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>
+                                    <a href="{{ author.href | create_url }}" itemprop="url" data-ct-column="
+                                        {{- '%s_of_%s' | format(loop.index, loop.length) }}" data-ct-subcolumn="false"><span itemprop="name">
+                                        {{- author.name -}}
+                                    </span></a>
                                 {%- else -%}
                                     <span itemprop="name">{{ author.name }}</span>
                                 {%- endif -%}

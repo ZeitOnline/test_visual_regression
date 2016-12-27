@@ -39,7 +39,7 @@ def test_longform_contains_subpage_head(testbrowser):
 def test_article_page_should_contain_blocks(testserver, httpbrowser):
     browser = httpbrowser(
         '%s/zeit-magazin/article/all-blocks' % testserver.url)
-    page = browser.cssselect('.article__page')[0]
+    page = browser.cssselect('.article-page')[0]
 
     paragraph = browser.cssselect('.paragraph')
     intertitle = browser.cssselect('.article__subheading')

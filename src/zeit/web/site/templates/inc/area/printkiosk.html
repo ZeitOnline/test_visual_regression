@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block after_module_list %}
-    {% set tracking_slug = '{}...{}'.format(region_loop.index, '-'.join([area.kind, module_layout])) %}
+    {% set tracking_slug = '{}.{}..{}'.format(area.kind, region_loop.index, module_layout) %}
     <div class="section-footer">
         <a  href="{{ area.read_more_url }}"
             class="printkiosk__button js-bar-teaser-paginate"

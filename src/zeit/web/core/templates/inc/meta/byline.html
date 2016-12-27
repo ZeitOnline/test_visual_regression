@@ -1,8 +1,8 @@
-{%- macro text(obj) %}
+{%- macro text(obj, counter) %}
     {{ obj }}
 {%- endmacro -%}
 
-{%- macro text_author(string) %}
+{%- macro text_author(string, counter) %}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">
             {{- string -}}
@@ -10,7 +10,7 @@
     </span>
 {%- endmacro -%}
 
-{%- macro plain_author(obj) %}
+{%- macro plain_author(obj, counter) %}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
         <span itemprop="name">
             {{- obj.display_name -}}
@@ -21,34 +21,36 @@
     </span>
 {%- endmacro -%}
 
-{%- macro linked_author(obj) %}
+{%- macro linked_author(obj, counter) %}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <a href="{{ obj.uniqueId | create_url }}" itemprop="url"{% if view.is_amp %} data-vars-url="{{ obj.uniqueId | create_url | substring_from('://') }}"{% endif %}>
+        <a href="{{ obj.uniqueId | create_url }}" itemprop="url" data-ct-column="
+            {{- '%s_of_%s' | format(counter.index, counter.length) }}" data-ct-subcolumn="false"
+            {%- if view.is_amp %} data-vars-url="{{ obj.uniqueId | create_url | substring_from('://') }}"{% endif %}>
             <span itemprop="name">
                 {{- obj.display_name -}}
     </span></a></span>
 {%- endmacro -%}
 
-{%- macro csv(obj) -%}
+{%- macro csv(obj, counter) -%}
     {%- for type, item in obj -%}
-        {{ type | macro(item) }}
+        {{ type | macro(item, loop) }}
         {%- if not loop.last -%}
             ,
         {% endif -%}
     {%- endfor -%}
 {%- endmacro -%}
 
-{%- macro enum(obj) -%}
+{%- macro enum(obj, counter) -%}
     {% for type, item in obj -%}
         {% if not loop.first and not loop.last -%}
             ,
         {%- elif loop.last and loop.length > 1 %}
             und
         {%- endif %}
-        {{ type | macro(item) }}
+        {{ type | macro(item, loop) }}
     {%- endfor %}
 {%- endmacro -%}
 
 {%- for type, obj in byline -%}
-    {{ type | macro(obj) }}
+    {{ type | macro(obj, loop) }}
 {%- endfor %}
