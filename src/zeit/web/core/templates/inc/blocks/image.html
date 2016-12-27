@@ -7,7 +7,7 @@
 {% set media_block_additional_class = 'article__item' | with_mods(*block.figure_mods) %}
 {% set media_caption_additional_class = 'figure__caption--marginalia' if block.display_mode == 'float' else '' %}
 
-{% block image_additional_data_attributes %} data-clicktracking="image"{% endblock %}
+{% block image_additional_data_attributes %} data-ct-block="image"{% endblock %}
 {% block image_link_additional_data_attributes %} data-ct-label="image"{% endblock %}
 
 {% block media_caption_content %}
