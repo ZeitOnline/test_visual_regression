@@ -916,38 +916,46 @@ def test_notfication_after_paywall_registration_renders_correctly(
         testserver, selenium_driver):
     message_txt = u'Herzlich willkommen! Mit Ihrer Anmeldung k\xf6nnen' \
         u' Sie nun unsere Artikel lesen.'
+    message_txt_error = u'Leider haben Sie kein g\xfcltiges Abonnement ' \
+        u'f\xfcr diesen Artikel. Bitte w\xe4hlen Sie unten das ' \
+        u'gew\xfcnschte Abo.'
     url_hash = '#success-registration'
 
     driver = selenium_driver
 
-    def assert_notification():
+    def assert_notification(css_class, text):
         try:
             cond = expected_conditions.presence_of_element_located((
-                By.CLASS_NAME, "notification--success"))
+                By.CLASS_NAME, css_class))
             WebDriverWait(driver, 5).until(cond)
         except TimeoutException:
             assert False, 'Timeout notification %s' % driver.current_url
         else:
-            notification = driver.find_element_by_class_name(
-                'notification--success')
-            assert message_txt == notification.text
+            notification = driver.find_element_by_class_name(css_class)
+            assert text == notification.text
             assert url_hash not in driver.current_url
 
     # ZON
     driver.get('{0}/zeit-online/article/01{1}'
                .format(testserver.url, url_hash))
-    assert_notification()
+    assert_notification('notification--success', message_txt)
 
     # ZMO
     driver.get(
         '{0}/zeit-magazin/article/essen-geniessen-spargel-lamm{1}'
         .format(testserver.url, url_hash))
-    assert_notification()
+    assert_notification('notification--success', message_txt)
 
     # ZCO
     driver.get(
         '{0}/campus/article/infographic{1}'.format(testserver.url, url_hash))
-    assert_notification()
+    assert_notification('notification--success', message_txt)
+
+    # ZON wrong subscription
+    driver.get(
+        '{0}/zeit-online/article/zplus-zeit?C1-Meter-Status=always_paid{1}'
+        .format(testserver.url, url_hash))
+    assert_notification('notification--error', message_txt_error)
 
 
 def test_http_header_should_contain_c1_debug_echoes(testserver):

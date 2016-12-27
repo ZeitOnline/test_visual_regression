@@ -332,7 +332,7 @@ class Base(object):
 
     @zeit.web.reify
     def js_vars(self):
-        names = ('banner_channel', 'ressort', 'sub_ressort', 'type')
+        names = ('banner_channel', 'ressort', 'sub_ressort', 'type', 'paywall')
         return [(name, getattr(self, name, '')) for name in names]
 
     @zeit.web.reify
