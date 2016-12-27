@@ -7,6 +7,8 @@ POSTDEPLOY
 3.26 (unreleased)
 -----------------
 
+- ZON-3542: Show error notification if paywall after registration
+
 - ZON-3517: Mark content only for subscribers in ZMO articles (AMP part)
 
 - ZON-3557: Add zplus badge to ZMO article header
