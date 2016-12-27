@@ -3,7 +3,7 @@
 {% block article_header %}
     {% set image = get_image(view.context, name='author', variant_id='portrait', fallback=False) -%}
     {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}
-    <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
+    <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}" data-ct-area="articleheader">
         {% if image -%}
         <div class="article-header__column-image">
             {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}

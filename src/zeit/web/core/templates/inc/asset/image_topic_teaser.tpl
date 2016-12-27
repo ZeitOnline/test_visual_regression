@@ -1,6 +1,7 @@
 {% if not is_topic_variant %}
     {%- extends "zeit.web.core:templates/inc/asset/image.tpl" -%}
 {% else %}
+    {%- set tracking_slug = '{}.{}.1.teaser-topic-wide.'.format(area.kind, region_loop.index) -%}
     {%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
 {% endif %}
 
