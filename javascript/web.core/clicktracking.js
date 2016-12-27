@@ -23,7 +23,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             // For some links, we want to preserve the GET parameters.
             // Otherwise, remove them!
-            if ( data.length > 1 && data[1] === 'social' && data[2] > 0 ) {
+            if ( data.length > 2 && data[1] === 'social' && data[2] > 0 ) {
                 url = $( 'meta[property="og:url"]' );
                 url = url.length ?
                     url.attr( 'content' ).replace( /http(s)?:\/\//, '' ) :
