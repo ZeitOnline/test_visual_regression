@@ -1,5 +1,5 @@
 {% block article_header %}
-<header class="article__head article__head--default">
+<header class="article__head article__head--default" data-ct-area="articleheader">
     {% block headline -%}
     <h1 class="article__head__headline" itemprop="headline">
         <span class="article__head__supertitle">{{ view.supertitle }}</span>
@@ -21,6 +21,7 @@
             {% endif -%}
 
             {% if view.authors -%}
+                <span data-ct-row="author">
                 {% for author in view.authors -%}
                     {% if view.genre -%}
                         {{ author.prefix }}
@@ -29,13 +30,18 @@
                     {% endif -%}
                     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
                     {%- if author.href -%}
-                        <a href="{{ author.href | create_url }}" class="article__head__meta__author" itemprop="url"><span itemprop="name">{{ author.name }}</span></a>{{ author.location }}
+                        <a class="article__head__meta__author" href="
+                            {{- author.href | create_url }}" itemprop="url" data-ct-column="
+                            {{- '%s_of_%s' | format(loop.index, loop.length) }}" data-ct-subcolumn="false"><span itemprop="name">
+                            {{- author.name -}}
+                        </span></a>{{ author.location }}
                     {%- else -%}
                         <span class="article__head__meta__author"><span itemprop="name">{{ author.name }}</span>{{ author.location }}</span>
                     {%- endif -%}
                     </span>
                     {{- author.suffix -}}
                 {% endfor -%}
+                </span>
             {% endif -%}
         {% endblock -%}
     </div>
