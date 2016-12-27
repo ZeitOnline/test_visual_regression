@@ -72,7 +72,8 @@
                         <h2 class="article__subpage-head is-centered is-constrained" id="kapitel{{ page.number }}">
                             {{- page.number }} &mdash; {{ page.teaser -}}
                         </h2>
-                        <aside class="article__subpage-index figure-stamp">
+                        <aside class="article__subpage-index figure-stamp" data-ct-area="article-toc" data-ct-row="
+                            {{- 'page_%s_of_%s' | format(page.number, loop.length - 1) }}" data-ct-column="false">
                             <h3 class="article__subpage-index__title">&Uuml;bersicht</h3>
                             <ol>
                                 {% for item in view.pages if item.teaser %}
@@ -81,7 +82,7 @@
                                     {% if loop.index == page.number %}
                                         <span class="article__subpage-index__item__title article__subpage-active">{{ item.teaser }}</span>
                                     {% else %}
-                                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll">{{ item.teaser }}</a>
+                                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll" data-ct-label="{{ loop.index }}">{{ item.teaser }}</a>
                                     {% endif %}
                                 </li>
                                 {% endfor %}
