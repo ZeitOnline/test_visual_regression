@@ -1,5 +1,5 @@
 {% if view.source_label %}
-<span class="article__head__meta__source" data-ct-row="source" data-ct-column="false">
+<span class="meta__source" data-ct-row="source" data-ct-column="false">
 	{%- if view.source_url -%}
 	<a href="{{ view.source_url }}">{{ view.source_label }}</a>
 	{%- else -%}
@@ -8,6 +8,6 @@
 	{%- if advertorial_byline %} {{ advertorial_byline }}{% endif -%}
 </span>
 {% endif %}
-<time itemprop="datePublished" content="{{ view.date_last_modified | format_date('iso8601') }}" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="article__head__meta__date">
+<time itemprop="datePublished" content="{{ view.date_last_modified | format_date('iso8601') }}" datetime="{{ view.date_last_modified | format_date('iso8601') }}" class="meta__date">
     {{ view.date_last_modified | format_date(view.show_date_format) }}
 </time>
