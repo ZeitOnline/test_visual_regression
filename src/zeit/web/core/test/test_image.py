@@ -365,5 +365,5 @@ def test_link_nofollow_should_be_set_in_amp_linked_image(testbrowser):
 
 def test_link_nofollow_should_be_set_in_core_image_template(testbrowser):
     browser = testbrowser('/zeit-online/cp-content/article-03')
-    image_link = browser.cssselect('.article__head__media a')[0]
+    image_link = browser.cssselect('.header-article__media-container a')[0]
     assert 'nofollow' in image_link.attrib.values()

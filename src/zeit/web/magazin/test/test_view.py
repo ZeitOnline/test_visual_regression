@@ -199,13 +199,12 @@ def test_article_request_should_have_html5_doctype(testbrowser):
 def test_article05_should_have_header_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/05')
     assert browser.cssselect('.article__head-wrap')
-    assert browser.cssselect('.article__head-image')
-    assert browser.cssselect('.figure-longform.is-pixelperfect.scaled-image')
+    assert browser.cssselect('.longform-header__media.is-pixelperfect')
 
 
 def test_column_should_have_header_image(testbrowser):
     browser = testbrowser('/zeit-magazin/article/standardkolumne-beispiel')
-    figure = browser.cssselect('figure.article__head__media')[0]
+    figure = browser.cssselect('figure.header-article__media')[0]
     link = figure.cssselect('a')[0]
     image = figure.cssselect('img')[0]
     assert image.attrib['alt'] == 'Dies ist der lokale alt Text'
@@ -215,7 +214,7 @@ def test_column_should_have_header_image(testbrowser):
 def test_column_should_not_have_header_image(testbrowser):
     browser = testbrowser(
         '/zeit-magazin/article/standardkolumne-ohne-bild-beispiel')
-    assert not browser.cssselect('figure.article__head__media')
+    assert not browser.cssselect('figure.header-article__media')
 
 
 def test_a_404_request_should_be_from_zon_main_page(testbrowser):
@@ -439,7 +438,7 @@ def test_article_page_should_throw_404_if_no_pages_are_exceeded(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/03')
     page = zeit.web.magazin.view_article.ArticlePage(article, mock.Mock())
-    page.request.registry.settings = {}
+    page.request.registry.settings.clear()
     page.request.path_info = u'article/03/seite-9'
     with pytest.raises(pyramid.httpexceptions.HTTPNotFound):
         page()

@@ -1,36 +1,44 @@
 .teaser-fullwidth
-    @extend %teaser-large
-    display: block
-    margin-bottom: 0
-    +respond-min($break-2)
-        margin-bottom: 0
+	@extend %teaser-large
+	display: block
+	margin-bottom: 0
+	+respond-min($break-2)
+		margin-bottom: 0
 
-    &__media
-        @extend %teaser-large__media
-        height: 0
-        padding-bottom: 100% / 3 * 4 // image variant 'portrait'
-        +respond-min($break-2)
-            padding-bottom: 100% / 16 * 9 // image variant 'wide'
+	&__media
+		@extend %teaser-large__media
+		height: 0
+		padding-bottom: 100% / 3 * 4 // image variant 'portrait'
+		+respond-min($break-2)
+			padding-bottom: 100% / 16 * 9 // image variant 'wide'
 
-    &__text
-        @extend %teaser-large__text
-        text-align: center
-        padding: $thin 15% $medium 15%
+	&__title-box
+		align-items: baseline
+		display: flex
+		flex-flow: row wrap
+		justify-content: center
+		& > .zplus-logo
+			flex-shrink: 0
 
-    &__title
-        @extend %teaser-large__title
+	&__text
+		@extend %teaser-large__text
+		text-align: center
+		padding: $thin 15% $medium 15%
 
-    &__subtitle
-        @extend %teaser-large__subtitle
+	&__title
+		@extend %teaser-large__title
 
-    &__kicker
-        @extend %teaser-large__kicker
+	&__subtitle
+		@extend %teaser-large__subtitle
 
-    &--light
-        background-color: $white
+	&__kicker
+		@extend %teaser-large__kicker
 
-    &--light &__media
-        @extend %teaser--light
+	&--light
+		background-color: $white
 
-    &--light &__text
-        +link-colors($black, $black, $black, $black, $black)
+	&--light &__media
+		@extend %teaser--light
+
+	&--light &__text
+		+link-colors($black, $black, $black, $black, $black)

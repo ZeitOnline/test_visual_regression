@@ -1,5 +1,4 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
-{% import "zeit.web.magazin:templates/macros/article_macro.tpl" as article_macros %}
 
 {% block main %}
     <article class="article" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
@@ -7,9 +6,9 @@
         <div class="article__wrap{% if view.is_wrapped %} article__wrap--is-wrapped{% endif %}">
             {% block article_header %}
                 {% if view.current_page.number == 0 %}
-                    {% include "zeit.web.magazin:templates/inc/headers/article_header_{}.html".format(view.header_layout) ignore missing %}
+                    {% include "zeit.web.magazin:templates/inc/header/header_{}.html".format(view.header_layout) ignore missing %}
                 {% else %}
-                    {% include "zeit.web.magazin:templates/inc/headers/article_header_sequelpages.html" %}
+                    {% include "zeit.web.magazin:templates/inc/header/header_sequelpages.html" %}
                 {% endif %}
             {% endblock article_header %}
             <div class="article__body-wrap">
@@ -41,11 +40,23 @@
         </div>
     </article>
 
-    {% if view.context.product.id not in ['TGS', 'ZEI', 'ZMLB'] %}
-        {% block article_publishdate %}
-            <!-- seo article date modification -->
-            {{ article_macros.add_publish_date(view.date_last_published_semantic, view.date_first_released | format_date(view.show_date_format_seo), view.show_date_format_seo) }}
-        {% endblock article_publishdate %}
+    {% if view.product_id not in ('TGS', 'ZEI', 'ZMLB') and view.date_last_published_semantic %}
+        <!-- seo article date modification -->
+        <!--[if gt IE 8]><!-->
+        <script type="text/javascript">
+            {# Due to seo reasons, original publish date is added later #}
+            var time = document.querySelector('.meta__date'),
+                content = time.textContent != undefined ? time.textContent : time.innerText,
+                published = document.createTextNode('{{ view.date_first_released | format_date(view.show_date_format_seo) }} — '),
+                linebreak = document.createElement('br'),
+                text = "{% if view.show_date_format_seo == 'long' %}zuletzt aktualisiert am {% else %}editiert: {% endif %}" + content;
+            if ( content != undefined ) {
+                time.parentNode.insertBefore(published, time);
+                time.parentNode.insertBefore(linebreak, time);
+                time.firstChild.nodeValue = text;
+            }
+        </script>
+        <!--<![endif]-->
     {% endif %}
 
     {% block comments %}

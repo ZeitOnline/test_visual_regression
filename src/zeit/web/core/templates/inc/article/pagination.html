@@ -1,4 +1,4 @@
-<nav class="{% block pagination_class %}article-pagination{% endblock %} article__item" aria-labelledby="article-pagination-title" data-ct-area="article-pager" data-ct-row="{{ 'page_%s_of_%s' | format(view.pagination.current, view.pagination.total) }}" data-ct-column="false">
+<nav class="{% block pagination_class %}article-pagination{% endblock %} article__item" aria-labelledby="article-pagination-title" data-ct-area="article-pager" data-ct-row="{% if view.pagination %}{{ 'page_%s_of_%s' | format(view.pagination.current, view.pagination.total) }}{% endif %}" data-ct-column="false">
     <h3 class="visually-hidden" id="article-pagination-title">Seitennavigation</h3>
 
     {% if view.pagination and view.pagination.next_page_url -%}

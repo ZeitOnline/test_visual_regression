@@ -1,0 +1,19 @@
+.headline
+	font-family: $sans-serif-base-font
+	font-size: remify(16px)
+	font-weight: normal
+	margin: 0
+	&__supertitle
+		display: block
+		font-size: $font-m
+		letter-spacing: remify(2px)
+		margin-bottom: $small
+		+respond-min($break-3)
+			font-size: $font-ml
+	&__title
+		font-size: $font-xl
+		font-weight: bold
+		letter-spacing: remify(1px)
+		line-height: $headline-line-height
+		+respond-min($break-2)
+			font-size: $font-xxl

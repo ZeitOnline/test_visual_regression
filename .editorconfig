@@ -14,11 +14,12 @@ trim_trailing_whitespace = true
 indent_style = space
 indent_size = 4
 
-# HTML templates and CSS files
-[*.{html,tpl}]
+# HTML templates and JavaScript files
+[*.{html,tpl,js}]
 indent_style = space
 indent_size = 4
 
+# CSS files
 [*.{sass, scss, css}]
 indent_style = tab
 indent_size = 4

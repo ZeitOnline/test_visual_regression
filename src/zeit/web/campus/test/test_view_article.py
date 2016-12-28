@@ -238,13 +238,11 @@ def test_article_header_default_considers_image_layout(testbrowser):
     assert image.get('data-ratio') == '1.77777777778'
 
 
-def test_article_has_print_pdf_function(testbrowser):
+def test_article_has_print_function(testbrowser):
     browser = testbrowser('/campus/article/debate')
     links = browser.cssselect('.print-menu__link')
     assert (links[0].attrib['href'].endswith(
         '/campus/article/debate?print'))
-    assert (links[1].attrib['href'] ==
-            'http://pdf.zeit.de/campus/article/debate.pdf')
 
 
 def test_multi_page_article_has_print_link(testbrowser):
@@ -339,8 +337,11 @@ def test_article_contains_authorbox(testbrowser):
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
 
 
-@pytest.mark.parametrize('reason', ['paid', 'register', 'metered'])
-def test_paywall_switch_showing_forms(reason, testbrowser):
+@pytest.mark.parametrize('c1_parameter', [
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous',
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=registered',
+    '?C1-Meter-Status=always_paid'])
+def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
     urls = [
         'campus/article/paginated',
         'campus/article/paginated/seite-2',
@@ -351,8 +352,8 @@ def test_paywall_switch_showing_forms(reason, testbrowser):
 
     for url in urls:
         browser = testbrowser(
-            '{}?C1-Paywall-On=True&C1-Paywall-Reason={}'.format(url, reason))
+            '{}{}'.format(url, c1_parameter))
         assert len(browser.cssselect('.paragraph--faded')) == 1
         assert len(browser.cssselect('.gate')) == 1
         assert len(browser.cssselect(
-            '.gate--register')) == int(reason == 'register')
+            '.gate--register')) == int('anonymous' in c1_parameter)

@@ -98,6 +98,7 @@ def app_settings(mockserver):
         'cardstack_backend': mockserver.url + '/cardstack',
         'connector_type': 'mock',
         'vgwort_url': 'http://example.com/vgwort',
+        'redirect_volume_cp': 'http://redirect.example.com',
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
         'breaking_news_fallback_image': (
@@ -226,7 +227,7 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/author-biography-questions.xml',
         'vivi_zeit.cms_celery-config': '/dev/null',
         'sso_activate': '',
-        'sso_url': 'http://my_sso',
+        'sso_url': 'http://sso.example.org',
         'sso_cookie': 'my_sso_cookie',
         'sso_rawr_secret': 'my_rawr_secret',
         'jinja2.show_exceptions': True,
@@ -234,7 +235,6 @@ def app_settings(mockserver):
         'jinja2.enable_profiler': False,
         'use_wesgi': True,
         'mock_solr': True,
-        'is_admin': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
         'vivi_zeit.web_runtime-settings-source': (
@@ -402,7 +402,7 @@ def dummy_request(application, request):
     # See pyramid.router.Router.invoke_subrequest()
     config = application.zeit_app.config
     req.registry = config.registry
-    req._set_extensions(config.registry.getUtility(
+    pyramid.request.apply_request_extensions(req, config.registry.getUtility(
         pyramid.interfaces.IRequestExtensions))
     config.begin(req)
     request.addfinalizer(pyramid.threadlocal.manager.clear)

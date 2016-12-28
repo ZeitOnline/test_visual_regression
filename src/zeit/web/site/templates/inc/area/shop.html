@@ -1,7 +1,7 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% set module_layout = 'teaser-shop' %}
-{% set tracking_slug = '{}...{}'.format(region_loop.index, '-'.join([area.kind, module_layout])) %}
+{% set tracking_slug = '{}.{}..{}'.format(area.kind, region_loop.index, module_layout) %}
 
 {% block before_module_list %}
     <div class="section-heading section-heading--unpadded section-heading--zeitshop">

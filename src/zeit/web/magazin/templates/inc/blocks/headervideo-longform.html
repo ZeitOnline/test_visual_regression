@@ -1,0 +1,15 @@
+{% if block.id is not defined and block.uniqueId -%}
+    {% set id = block.uniqueId | substring_from('/') %}
+{% elif block.id -%}
+    {% set id = block.id %}
+{% endif %}
+
+{% if id -%}
+    <div data-backgroundvideo="{{ id }}" class="{{ wrap_class | default ('article__main-video--longform') }}">
+        <video preload="auto" loop="loop" muted="muted" volume="0" poster="{{ block.video_still }}">
+            <source src="{{ block.highest_rendition }}" type="video/mp4">
+            <source src="http://live0.zeit.de/multimedia/videos/{{ id }}.webm" type="video/webm">
+        </video>
+        <img class="video--fallback" src="http://live0.zeit.de/multimedia/videos/{{ id }}.jpg" alt="Video: {{ block.title }}" title="Video: {{ block.title }}">
+    </div>
+{%- endif %}

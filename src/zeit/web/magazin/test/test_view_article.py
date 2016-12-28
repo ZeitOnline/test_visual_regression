@@ -1,5 +1,11 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 import pytest
+
+import zeit.cms.interfaces
+
+import zeit.web.magazin.view_article
 
 
 def test_longform_contains_subpage_index(testbrowser):
@@ -33,7 +39,7 @@ def test_longform_contains_subpage_head(testbrowser):
 def test_article_page_should_contain_blocks(testserver, httpbrowser):
     browser = httpbrowser(
         '%s/zeit-magazin/article/all-blocks' % testserver.url)
-    page = browser.cssselect('.article__page')[0]
+    page = browser.cssselect('.article-page')[0]
 
     paragraph = browser.cssselect('.paragraph')
     intertitle = browser.cssselect('.article__subheading')
@@ -106,8 +112,11 @@ def test_article_header_without_author(testbrowser):
     assert not authors
 
 
-@pytest.mark.parametrize('reason', ['paid', 'register', 'metered'])
-def test_paywall_switch_showing_forms(reason, testbrowser):
+@pytest.mark.parametrize('c1_parameter', [
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous',
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=registered',
+    '?C1-Meter-Status=always_paid'])
+def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
     urls = [
         'zeit-magazin/article/03',
         'zeit-magazin/article/03/seite-2',
@@ -119,8 +128,30 @@ def test_paywall_switch_showing_forms(reason, testbrowser):
 
     for url in urls:
         browser = testbrowser(
-            '{}?C1-Paywall-On=True&C1-Paywall-Reason={}'.format(url, reason))
+            '{}{}'.format(url, c1_parameter))
         assert len(browser.cssselect('.paragraph--faded')) == 1
         assert len(browser.cssselect('.gate')) == 1
         assert len(browser.cssselect(
-            '.gate--register')) == int(reason == 'register')
+            '.gate--register')) == int('anonymous' in c1_parameter)
+
+
+@pytest.mark.parametrize('last_published, first_released, contained', [
+    (None, datetime.datetime(2014, 1, 1), False),
+    (datetime.datetime(2014, 1, 2), datetime.datetime(2014, 1, 1), True)])
+def test_seo_publish_date_script_should_be_generated_conditionally(
+        last_published, first_released, contained, dummy_request, tplbrowser):
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/03')
+    view = zeit.web.magazin.view_article.Article(context, dummy_request)
+
+    view.date_last_published_semantic = last_published
+    view.date_first_released = first_released
+    view.show_date_format_seo = 'short'
+
+    browser = tplbrowser(
+        'zeit.web.magazin:templates/content.html',
+        view=view, request=dummy_request)
+
+    inline_scritps = ''.join(browser.xpath('//script/text()'))
+    assert ('1. Januar 2014' in inline_scritps) == contained

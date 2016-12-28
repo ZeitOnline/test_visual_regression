@@ -286,6 +286,24 @@ def test_http_header_should_contain_c1_entitlement(testserver, monkeypatch):
             'C1-Track-Entitlement') == access_source.translate_to_c1('abo')
 
 
+def test_http_header_should_contain_c1_entitlement_id(testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True}.get)
+
+    free_article = testserver.url + '/zeit-online/article/01'
+    assert not requests.head(free_article).headers.get(
+        'C1-Track-Entitlement-ID')
+
+    register_article = (
+        testserver.url + '/zeit-online/article/zplus-zeit-register')
+    assert requests.head(register_article).headers.get(
+        'C1-Track-Entitlement-ID') == 'zeit-fullaccess'
+
+    paid_article = testserver.url + '/zeit-online/article/zplus-zeit'
+    assert requests.head(paid_article).headers.get(
+        'C1-Track-Entitlement-ID') == 'zeit-fullaccess'
+
+
 def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
@@ -773,6 +791,14 @@ def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
         "return rawrConfig.locationMetaData.meta.description")
 
 
+def test_rawr_config_should_have_series_tag(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/campus/article/02-beziehung-schluss-machen'
+               % testserver.url)
+    assert 'In der Mensa mit' == driver.execute_script(
+        "return rawrConfig.locationMetaData.series")
+
+
 def test_health_check_should_response_and_have_status_200(testbrowser):
     browser = testbrowser('/health_check')
     assert browser.headers['Content-Length'] == '2'
@@ -801,13 +827,6 @@ def test_health_check_with_fs_should_be_configurable(testbrowser):
         zeit.web.core.view.health_check('request')
 
 
-def test_reader_revenue_status_should_be_sent_to_webtrekk(dummy_request):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/all-blocks')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.webtrekk['customParameter']['cp28'] == 'free'
-
-
 def test_reader_revenue_status_should_utilize_feature_toggle(
         dummy_request, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
@@ -818,22 +837,21 @@ def test_reader_revenue_status_should_utilize_feature_toggle(
     assert 'cp28' not in view.webtrekk['customParameter'].keys()
 
 
-def test_reader_revenue_status_should_default_to_free_for_zede(
-        dummy_request):
+def test_reader_revenue_status_should_reflect_access_right(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/all-blocks')
+        'http://xml.zeit.de/zeit-online/article/01')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp28'] == 'free'
 
-
-def test_reader_revenue_status_should_default_to_registration_for_zei(
-        dummy_request, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.site.view_article.Article, 'product_id', 'ZEI')
     context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/zeit')
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp28'] == 'registration'
+
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp28'] == 'abo'
 
 
 def test_jquery_not_overwritten(testserver, selenium_driver):
@@ -898,35 +916,54 @@ def test_notfication_after_paywall_registration_renders_correctly(
         testserver, selenium_driver):
     message_txt = u'Herzlich willkommen! Mit Ihrer Anmeldung k\xf6nnen' \
         u' Sie nun unsere Artikel lesen.'
+    message_txt_error = u'Leider haben Sie kein g\xfcltiges Abonnement ' \
+        u'f\xfcr diesen Artikel. Bitte w\xe4hlen Sie unten das ' \
+        u'gew\xfcnschte Abo.'
     url_hash = '#success-registration'
 
     driver = selenium_driver
 
-    def assert_notification():
+    def assert_notification(css_class, text):
         try:
             cond = expected_conditions.presence_of_element_located((
-                By.CLASS_NAME, "notification--success"))
+                By.CLASS_NAME, css_class))
             WebDriverWait(driver, 5).until(cond)
         except TimeoutException:
             assert False, 'Timeout notification %s' % driver.current_url
         else:
-            notification = driver.find_element_by_class_name(
-                'notification--success')
-            assert message_txt == notification.text
+            notification = driver.find_element_by_class_name(css_class)
+            assert text == notification.text
             assert url_hash not in driver.current_url
 
     # ZON
     driver.get('{0}/zeit-online/article/01{1}'
                .format(testserver.url, url_hash))
-    assert_notification()
+    assert_notification('notification--success', message_txt)
 
     # ZMO
     driver.get(
         '{0}/zeit-magazin/article/essen-geniessen-spargel-lamm{1}'
         .format(testserver.url, url_hash))
-    assert_notification()
+    assert_notification('notification--success', message_txt)
 
     # ZCO
     driver.get(
         '{0}/campus/article/infographic{1}'.format(testserver.url, url_hash))
-    assert_notification()
+    assert_notification('notification--success', message_txt)
+
+    # ZON wrong subscription
+    driver.get(
+        '{0}/zeit-online/article/zplus-zeit?C1-Meter-Status=always_paid{1}'
+        .format(testserver.url, url_hash))
+    assert_notification('notification--error', message_txt_error)
+
+
+def test_http_header_should_contain_c1_debug_echoes(testserver):
+    response = requests.get(
+        '%s/zeit-online/article/simple' % testserver.url,
+        headers={
+            'C1-Meter-Status': 'always_paid',
+            'C1-Meter-User-Status': 'anonymous',
+        })
+    assert response.headers.get('x-debug-c1-meter-status') == 'always_paid'
+    assert response.headers.get('x-debug-c1-meter-user-status') == 'anonymous'

@@ -7,9 +7,10 @@ window.rawrConfig.sso = function() {
     this.name = "ZEIT ONLINE";
     this.icon = "{{ request.route_url('home') }}favicon.ico";
     this.loginUrl = "{{ login }}";
-    this.registerUrl = "{{ register }}";
+    this.registerUrl = "{{ register_rawr }}";
     this.logoutUrl = "{{ logout }}";
     this.rawrReturnUrlParameter = "url";
+    this.authInIframe = {{ auth_iframe }};
 };
 
 </script>

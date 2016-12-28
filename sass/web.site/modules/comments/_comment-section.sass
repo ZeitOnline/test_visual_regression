@@ -12,6 +12,9 @@ $comment-color-notice:          $zon-grey
 	margin-left: -$page-padding;
 	margin-right: -$page-padding;
 
+	&__head + &__message
+		background-color: $comment-color-head-background
+		padding-top: 0
 	&__head,
 	&__head + &__message
 		+respond-min($break-tablet-min)
@@ -20,8 +23,5 @@ $comment-color-notice:          $zon-grey
 		&:after
 			content: "\25B8" // ▸ = Black right-pointing small triangle
 			margin-left: 3px
-	&__head + &__message
-		background-color: $comment-color-head-background
-		padding-top: 0
 	&__body + &__note
 		border-top: 1px solid $color-border

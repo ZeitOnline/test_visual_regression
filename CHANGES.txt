@@ -4,12 +4,160 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.18 (unreleased)
+3.26 (unreleased)
 -----------------
+
+- ZON-3569: Change fallback image and styles for volume packshots
+
+- ZON-3557: Add zplus badge to ZMO article header
+
+- ZON-3542: Show error notification if paywall after registration
+
+- ZON-3517: Mark content only for subscribers in ZMO articles (AMP part)
+
+- FIX: Be defensive about invalid requests for legacy keyword redirects
+
+
+3.25.1 (2016-12-23)
+-------------------
+
+- FIX: Re-release after grunting properly
+
+
+3.25 (2016-12-23)
+-----------------
+
+- ZON-3578: Update clicktracking for centerpages, article header, article blocks
+
+
+3.24 (2016-12-19)
+-----------------
+
+- ZON-3532: Refactor event click tracking
+
+- ZON-3531: Introduce entitlement ID to C1 tracking
+
+
+3.23.2 (2016-12-14)
+-------------------
+
+- MAINT: Revert "Have Centerpage view inherit from Content"
+
+
+3.23.1 (2016-12-14)
+-------------------
+
+- FIX: Fix rawr config typo
+
+- MAINT: Enhance C1-Debug-Headers (make our C1-Tracking headers visible)
+
+- MAINT: Have Centerpage view inherit from Content
+
+
+3.23 (2016-12-13)
+-----------------
+
+- ZON-3463: Redirect volume-page on no subscription requests
+
+- ZON-3407: Add ZEIT MAGAZIN ONLINE Teaser Z+
+
+- BUG-596: Don't show fallback cover in Zplus badge for ZON articles
+
+- BUG-604: Only set webtrekk parameter if detectable
+
+- BUG-597: Fix TypeError when form.action returns a DOM element
+
+- FIX: Remove extra margin arround dashboard
+
+- FIX: Add authInFrame to rawr_iframe feature toggle
+
+- FIX: Adapt test for rawr_iframe feature toggle
+
+- MAINT: Include the first teaser in spektrum feed as well
+
+
+3.22 (2016-12-12)
+-----------------
+
+- ZON-3528: Remove all links to pdf.zeit.de
+
+- ZON-3408: Add ZMO paywalls
+
+- ZON-3393: User dashboard
+
+- ZON-3118: Swap article bodies with intext-link data from TMS
+  (featuretoggle: enable_intext_links)
+
+- ZON-3223: Set custom register URL for rawr
+  (featuretoggle: rawr_iframe)
+
+- OPS-448: Deliver HP topics for mobile apps via JSON-Response
+
+- OPS-386: Clean up magazin article macros
+
+- MAINT: Set banner_channel for author pages
+
+- MAINT: Update to current Pyramid version
+
+
+3.21 (2016-11-30)
+-----------------
+
+- ZON-3512: Evaluate C1 paywall headers correctly
+
+- BUG-549: Fix ressort navigation width for Safari >= Version 10
+
+- MAINT: Remove separate is_admin setting
+
+- MAINT: Update node modules and bower components
+
+
+3.20 (2016-11-24)
+-----------------
+
+- ZON-3478: Polish Archivepage
+
+- BUG-577: Provide spacing for ZMO article header with expired images
+
+- BUG-581: Require author image for buzzboard column
+
+- BUG-583: Fix pagination for author pages
+
+- BUG-592: Make author page pagination SEO friendly
+
+- BUG-590: Remove webtrekk custom parameter for `login` from cached HTML
+
+- BUG-591: Report access right to webtrekk literally
+
+- FIX: Fix margin of blog marker on fullwidth teaser
+
+- FIX: Be defensive about missing values in agatho response
+
+- OPS-425: Add code style linting to ZMO scripts
+
+- MAINT: Return C1 headers as debug information
+
+
+3.19 (2016-11-21)
+-----------------
+
+- ZON-3481: Correct sitemap date format to ISO-8601
+
+- BUG-573: Distinguish caching between external and internal temporary images
+
+- BUG-586: Improve rendering speed of SpektrumFeed
+
+
+3.18 (2016-11-21)
+-----------------
+
+- ZON-3465: Add new authentication provider configuration for rawr
 
 - BUG-537: Omit zett/spektrum parquet area if RSS feed is empty or unavailable
 
 - MAINT: Make single page videos available as html5 video tag
+
+- MAINT: Only use Jinja’s ignore missing mark if appropriate.
 
 
 3.17 (2016-11-11)
@@ -51,7 +199,7 @@ POSTDEPLOY
 
 - MAINT: Use sensible default caching times
 
-- MAINT: Make caching time for newsfeed.zeit.de
+- MAINT: Make caching time for newsfeed.zeit.de configurable
 
 - MAINT: Fix typography for .x-footer--borderless
 

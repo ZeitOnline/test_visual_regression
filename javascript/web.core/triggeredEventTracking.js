@@ -72,17 +72,13 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
     Tracking functions which trigger the actual tracking
     ------------------------------------------------------------------------- */
     _functions.sendTracking.sendDataToWebrekk = function( data ) {
-        var trackingData = Clicktracking.formatTrackingData( data );
-
         if ( debugMode ) {
+            var trackingData = Clicktracking.string( data );
             console.log( '[zonTriggeredEventTracking] Webtrekk data sent: ' );
             console.log( trackingData );
             window.trackingData = trackingData;
         } else {
-            window.wt.sendinfo({
-                linkId: trackingData,
-                sendOnUnload: 1
-            });
+            Clicktracking.send( data );
         }
     };
 
