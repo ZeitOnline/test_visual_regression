@@ -1,6 +1,5 @@
 import logging
 
-import pyramid.view
 import babel.dates
 import pyramid.httpexceptions
 import pyramid.view
@@ -16,7 +15,7 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.video.interfaces.IVideo,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     request_method='GET',

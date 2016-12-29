@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 import re
 
-import pyramid.view
-
 import zeit.magazin.interfaces
 
+import zeit.web
 import zeit.web.core.security
 import zeit.web.core.view
 
@@ -109,7 +108,7 @@ class Base(zeit.web.core.view.Base):
         return 'ZEITmagazin'
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='login_state',
     renderer='templates/inc/navigation/login-state.html',
     request_param='for=magazin',

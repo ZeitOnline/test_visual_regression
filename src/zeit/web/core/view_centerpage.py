@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-import pyramid.view
+import pyramid.httpexceptions
 import zope.component
 
 import zeit.cms.interfaces
 import zeit.cms.workflow
 import zeit.content.cp.interfaces
 
+import zeit.web
 import zeit.web.core.interfaces
 import zeit.web.core.centerpage
 import zeit.web.core.view
@@ -298,7 +299,7 @@ class CenterpagePage(object):
         return None
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='json_update_time',
     renderer='jsonp')
 def json_update_time(request):
@@ -320,7 +321,7 @@ def json_update_time(request):
     return {'last_published': dlp, 'last_published_semantic': dlps}
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='json_topic_config',
     renderer='jsonp')
 def json_topic_config(request):
@@ -339,7 +340,7 @@ def json_topic_config(request):
     return config
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ISitemap,
     renderer='templates/sitemap.html')
 class Sitemap(Centerpage):

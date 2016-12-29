@@ -1,13 +1,15 @@
 # coding: utf-8
+import logging
 import math
-import pyramid.view
+
+import pyramid.httpexceptions
 import zope.component
+import zope.interface
 
 import zeit.content.author.interfaces
-import zope.interface
-import logging
 
 from zeit.web.core.view import is_paginated
+import zeit.web
 import zeit.web.core.area.ranking
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
@@ -15,10 +17,10 @@ import zeit.web.core.interfaces
 log = logging.getLogger(__name__)
 
 
-@pyramid.view.view_defaults(
+@zeit.web.view_defaults(
     context=zeit.content.author.interfaces.IAuthor,
     renderer='templates/author.html')
-@pyramid.view.view_config(name='')
+@zeit.web.view_config(name='')
 class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
              zeit.web.site.view.Base):
     """This view implements tabs that each have their own URL.
@@ -123,7 +125,7 @@ class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
         return False
 
 
-@pyramid.view.view_config(name='kommentare')
+@zeit.web.view_config(name='kommentare')
 class Comments(Author):
 
     current_tab_name = 'kommentare'
