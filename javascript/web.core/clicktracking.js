@@ -332,7 +332,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 blockNumber = $blocks.index( $block ) + 1,
                 blockType = $block.length ? $block.data( 'ct-block' ) || $block.attr( 'class' ).split( ' ' ).shift() : 'intext',
                 data = [
-                    'articlebody', // [verortung]
+                    'article', // [verortung]
                     blockNumber, // [reihe]
                     'seite-' + pageNumber, // [spalte]
                     blockType, // [subreihe]

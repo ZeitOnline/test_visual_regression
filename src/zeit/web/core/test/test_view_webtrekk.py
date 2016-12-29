@@ -241,16 +241,16 @@ def test_navi_provides_expected_webtrekk_strings(
          'article-toc.page_1_of_2...2'),
         # intext
         ('.paragraph a',
-         'articlebody.2.seite-1.paragraph.kuendigung|www.zeit.de/karriere'),
+         'article.2.seite-1.paragraph.kuendigung|www.zeit.de/karriere'),
         # authorbox
         ('.authorbox a',
-         'articlebody.6.seite-1.authorbox.zur_autorenseite'),
+         'article.6.seite-1.authorbox.zur_autorenseite'),
         # infobox
         ('.infobox a',
-         'articlebody.9.seite-1.infobox.crystal_meth|#crystal-meth-1-tab'),
+         'article.9.seite-1.infobox.crystal_meth|#crystal-meth-1-tab'),
         # portraitbox
         ('.portraitbox a',
-         'articlebody.13.seite-1.portraitbox.pia_volk|piavolk.net'),
+         'article.13.seite-1.portraitbox.pia_volk|piavolk.net'),
         # pagination
         ('.article-pagination__link',
          'article-pager.page_1_of_2...naechste_seite'),
@@ -640,7 +640,7 @@ def test_volume_teaser_provides_expected_webtrekk_string(
     link.click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'tablet.articlebody.2.seite-1.volume-teaser.dieser_artikel_stammt_'
+        'tablet.article.2.seite-1.volume-teaser.dieser_artikel_stammt_'
         'aus_der_zeit_nr_01_2016_lesen_sie_diese_ausgabe_als_e_paper_app_'
         'und_auf_dem_e_reader|premium.zeit.de/diezeit/2016/01')
 
@@ -810,25 +810,25 @@ def test_inline_gallery_provides_expected_webtrekk_string(
     driver.find_element_by_class_name('bx-prev').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.articlebody.6.seite-1.inline-gallery.ein_bild_zurueck')
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_zurueck')
     assert tracking_data.endswith(pathname)
 
     driver.find_element_by_class_name('bx-next').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.articlebody.6.seite-1.inline-gallery.ein_bild_vor')
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_vor')
     assert tracking_data.endswith(pathname)
 
     driver.find_element_by_class_name('bx-overlay-prev').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.articlebody.6.seite-1.inline-gallery.ein_bild_zurueck')
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_zurueck')
     assert tracking_data.endswith(pathname)
 
     driver.find_element_by_class_name('bx-overlay-next').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.articlebody.6.seite-1.inline-gallery.ein_bild_vor')
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_vor')
     assert tracking_data.endswith(pathname)
 
 

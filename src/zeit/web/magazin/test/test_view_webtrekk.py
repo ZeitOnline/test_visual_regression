@@ -78,28 +78,28 @@ def test_inline_gallery_provides_expected_webtrekk_string(
     time.sleep(0.05)
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.articlebody.4.seite-1.inline-gallery.ein_bild_zurueck')
+        'stationaer.article.4.seite-1.inline-gallery.ein_bild_zurueck')
     assert tracking_data.endswith(pathname)
 
     driver.find_element_by_class_name('bx-next').click()
     time.sleep(0.05)
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.articlebody.4.seite-1.inline-gallery.ein_bild_vor')
+        'stationaer.article.4.seite-1.inline-gallery.ein_bild_vor')
     assert tracking_data.endswith(pathname)
 
     driver.find_element_by_class_name('bx-overlay-prev').click()
     time.sleep(0.05)
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.articlebody.4.seite-1.inline-gallery.ein_bild_zurueck')
+        'stationaer.article.4.seite-1.inline-gallery.ein_bild_zurueck')
     assert tracking_data.endswith(pathname)
 
     driver.find_element_by_class_name('bx-overlay-next').click()
     time.sleep(0.05)
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.articlebody.4.seite-1.inline-gallery.ein_bild_vor')
+        'stationaer.article.4.seite-1.inline-gallery.ein_bild_vor')
     assert tracking_data.endswith(pathname)
 
 

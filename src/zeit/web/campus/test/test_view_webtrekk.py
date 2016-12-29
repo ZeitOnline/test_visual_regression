@@ -20,7 +20,7 @@ from selenium.webdriver.support.ui import WebDriverWait
          'articleheader.comments...42_kommentare|#comments'),
         # intext
         ('.paragraph a',
-         'articlebody.2.seite-1.paragraph.cyborgs|www.zeit.de/digital'),
+         'article.2.seite-1.paragraph.cyborgs|www.zeit.de/digital'),
         # toc
         ('.article-toc__link',
          'article-toc.page_1_of_10...2'),
