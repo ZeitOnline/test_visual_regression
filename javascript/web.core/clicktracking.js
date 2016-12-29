@@ -358,7 +358,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             if ( /-(prev|next)/.test( className ) ) {
                 row = className.indexOf( 'overlay' ) < 0 ? 1 : 2;
                 column = className.indexOf( 'prev' ) < 0 ? 2 : 1;
-                current = parseInt( pager.text().split( ' / ' ).pop(), 10 );
+                current = parseInt( pager.text().split( ' / ' ).unshift(), 10 );
             }
             // navigation bullets for touch devices
             else if ( className.indexOf( 'bx-pager-link' ) !== -1 ) {
