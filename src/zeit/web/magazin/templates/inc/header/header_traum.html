@@ -1,0 +1,20 @@
+{% extends "zeit.web.magazin:templates/inc/header/header.html" %}
+
+{% block header_content %}
+<div class="is-constrained is-centered">
+    {{ self.headline() }}
+    <div class="header-article__subtitle">
+        {{- view.subtitle -}}
+    </div>
+    {{ self.zplusbadge() }}
+</div>
+{% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
+<div class="is-constrained is-centered">
+    <div class="meta">
+        <div class="byline">
+            {{ self.genre_and_authors() }}
+        </div>
+        {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
+    </div>
+</div>
+{% endblock %}

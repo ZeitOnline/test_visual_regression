@@ -35,17 +35,17 @@
 
         {% include "zeit.web.site:templates/inc/article/heading.tpl" %}
 
-        <div class="article__item">
+        <div class="article__item" data-ct-area="articleheader">
             <div class="summary" itemprop="description">
                 {{ view.subtitle }}
             </div>
             {%- set byline = view.context | get_byline('main') %}
             {% if byline | length -%}
-                <div class="{{ 'byline' | with_mods('on-videopage') }}">
+                <div class="{{ 'byline' | with_mods('on-videopage') }}" data-ct-row="author">
                 {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
                 </div>
             {% endif -%}
-            <div class="metadata" data-ct-area="articleheader">
+            <div class="metadata">
                 {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
                 {% include "zeit.web.site:templates/inc/article/sharing-menu.html" %}
             </div>

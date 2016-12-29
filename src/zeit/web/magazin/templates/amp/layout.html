@@ -19,6 +19,10 @@
 	</div>
 {% endblock logo %}
 
+{% block volume_badge %}
+    {% include "zeit.web.magazin:templates/amp/article/subscribers-badge.html" %}
+{% endblock %}
+
 {% block footer_logo %}
 	<a href="{{ request.route_url('home') }}zeit-magazin/index">
 		<svg class="footer__logo">

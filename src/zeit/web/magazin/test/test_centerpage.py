@@ -25,9 +25,9 @@ def monkeyreq(monkeypatch):
 
 def test_cp_should_have_buzz_module(testbrowser):
     browser = testbrowser('/zeit-magazin/buzz')
-    assert '<section class="buzzboard">' in browser.contents
-    assert '<table class="buzzboard__table' in browser.contents
-    assert '<div class="buzzboard__container">' in browser.contents
+    buzzboard = browser.cssselect('section.buzzboard')[0]
+    assert buzzboard.cssselect('table.buzzboard__table')
+    assert len(buzzboard.cssselect('.teaser-buzzboard')) == 9
 
 
 def test_get_reaches_from_centerpage_view(application):

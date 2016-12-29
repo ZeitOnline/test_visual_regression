@@ -96,6 +96,13 @@ def test_keyword_redirect_should_handle_pagination(testserver):
     assert resp.headers['Location'] == '%s/thema/rom?p=3' % testserver.url
 
 
+def test_keyword_redirect_should_reject_invalid_urls(testserver):
+    resp = requests.get(
+        testserver.url + '/schlagworte/personen/%0DSanta-Klaus/index',
+        allow_redirects=False)
+    assert resp.status_code == 400
+
+
 def test_main_nav_should_render_labels(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     dropdown_label = browser.cssselect('.nav__ressorts-list *[data-label]')

@@ -2,7 +2,7 @@
 
 {% block article_pages %}
     {% for page in view.pages %}
-        <div class="article__page">
+        <div class="article-page" data-page-number="{{ page.number+1 }}" id="seite-{{ page.number+1 }}">
             {% include "zeit.web.magazin:templates/inc/article/page.html" %}
         </div>
     {% endfor %}

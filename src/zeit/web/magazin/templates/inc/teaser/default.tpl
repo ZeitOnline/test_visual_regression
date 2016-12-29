@@ -10,12 +10,15 @@ Default teaser template to inherit from.
 <article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
          data-clicktracking="{{ area.kind }}"
+         {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
          {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
 
     {% if video -%}
         {# call video asset #}
+        {% block teaser_video %}
             {% set href = teaser | create_url %}
             {{ cp.headervideo_linked(video, self.layout() + '__media-container ' + self.layout() + '__media-container--' + self.layout_shade(), '', href) }}
+        {% endblock %}
     {%- elif image -%}
         {# call image asset #}
         {% block teaser_image scoped %}
@@ -27,7 +30,7 @@ Default teaser template to inherit from.
     {% block comments %}
         {% set comments = view.comment_counts[teaser.uniqueId] %}
         {% if comments and teaser.commentSectionEnable -%}
-        <a href="{{ teaser | create_url }}#comments" class="cp_comment__counter">
+        <a href="{{ teaser | create_url }}#comments" class="cp_comment__counter" data-ct-label="comments">
             {{- lama.use_svg_icon('comments-count', 'cp_comment__icon', view.package) -}}
             <span class="cp_comment__count">{{ comments }}</span>
         </a>
