@@ -923,11 +923,19 @@ def test_notfication_after_paywall_registration_renders_correctly(
 
     driver = selenium_driver
 
-    def assert_notification(css_class, text):
+    def assert_notification(pathname, css_class, text, query=''):
+        driver.get('%s%s%s%s' % (testserver.url, pathname, query, url_hash))
+        selector = 'link[itemprop="mainEntityOfPage"][href="{}{}"]'.format(
+            testserver.url, pathname)
         try:
-            cond = expected_conditions.presence_of_element_located((
-                By.CLASS_NAME, css_class))
-            WebDriverWait(driver, 5).until(cond)
+            # assure we are seeing the right page
+            WebDriverWait(driver, 3).until(
+                expected_conditions.presence_of_element_located((
+                    By.CSS_SELECTOR, selector)))
+            # check for notification element
+            WebDriverWait(driver, 1).until(
+                expected_conditions.presence_of_element_located((
+                    By.CLASS_NAME, css_class)))
         except TimeoutException:
             assert False, 'Timeout notification %s' % driver.current_url
         else:
@@ -936,26 +944,21 @@ def test_notfication_after_paywall_registration_renders_correctly(
             assert url_hash not in driver.current_url
 
     # ZON
-    driver.get('{0}/zeit-online/article/01{1}'
-               .format(testserver.url, url_hash))
-    assert_notification('notification--success', message_txt)
+    assert_notification('/zeit-online/article/01', 'notification--success',
+                        message_txt)
 
     # ZMO
-    driver.get(
-        '{0}/zeit-magazin/article/essen-geniessen-spargel-lamm{1}'
-        .format(testserver.url, url_hash))
-    assert_notification('notification--success', message_txt)
+    assert_notification('/zeit-magazin/article/essen-geniessen-spargel-lamm',
+                        'notification--success', message_txt)
 
     # ZCO
-    driver.get(
-        '{0}/campus/article/infographic{1}'.format(testserver.url, url_hash))
-    assert_notification('notification--success', message_txt)
+    assert_notification('/campus/article/infographic', 'notification--success',
+                        message_txt)
 
     # ZON wrong subscription
-    driver.get(
-        '{0}/zeit-online/article/zplus-zeit?C1-Meter-Status=always_paid{1}'
-        .format(testserver.url, url_hash))
-    assert_notification('notification--error', message_txt_error)
+    assert_notification('/zeit-online/article/zplus-zeit',
+                        'notification--error', message_txt_error,
+                        '?C1-Meter-Status=always_paid')
 
 
 def test_http_header_should_contain_c1_debug_echoes(testserver):
