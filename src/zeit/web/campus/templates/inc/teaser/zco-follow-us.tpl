@@ -1,8 +1,7 @@
 {%- import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama -%}
 <aside class="{% block layout %}teaser-follow-us{% endblock %} {% if module.visible_mobile == False %} mobile-hidden{% endif %}"
     data-unique-id="{{ teaser.uniqueId }}"
-    data-meetrics="{{ area.kind }}"
-    data-clicktracking="{{ area.kind }}">
+    data-meetrics="{{ area.kind }}">
     <div class="{{ self.layout() }}__packshot">
         <a class="packshot" href="{{ teaser | create_url | append_campaign_params }}" title="
             {{- teaser.teaserSupertitle or teaser.supertitle -}}: {{ teaser.teaserTitle or teaser.title }}" data-ct-label="packshot">

@@ -1330,14 +1330,13 @@ def test_author_teaser_is_not_rendered_in_major(testbrowser):
     assert len(author) == 0
 
 
-def test_all_teasers_have_clicktrack_attribute(testbrowser):
+def test_all_areas_have_clicktrack_attribute(testbrowser):
     browser = testbrowser('/zeit-online/basic-teasers-setup')
-    selector = 'article[data-unique-id]'
-    teasers = browser.cssselect(selector)
-    assert len(teasers)
+    areas = browser.cssselect('.cp-area')
+    assert len(areas)
 
-    for teaser in teasers:
-        assert teaser.attrib['data-clicktracking'] != ''
+    for area in areas:
+        assert area.attrib['data-ct-context'] != ''
 
 
 def test_adtile12_from_cp_extra_is_there(testbrowser):

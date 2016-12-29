@@ -15,6 +15,8 @@ POSTDEPLOY
 
 - ZON-3517: Mark content only for subscribers in ZMO articles (AMP part)
 
+- ZON-3588: Automate event tracking for article body
+
 - FIX: Be defensive about invalid requests for legacy keyword redirects
 
 

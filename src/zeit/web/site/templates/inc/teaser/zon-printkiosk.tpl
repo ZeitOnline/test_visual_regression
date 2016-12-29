@@ -1,6 +1,5 @@
 <article class="{% block layout %}teaser-printkiosk{% endblock %}"
     data-unique-id="{{ teaser.uniqueId }}"
-    data-clicktracking="{{ area.kind }}"
     data-type="teaser">
     {% set teaser_link = teaser | create_url %}
     {% if teaser_link %}<a href="{{ teaser_link }}">{% endif %}

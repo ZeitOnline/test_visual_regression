@@ -1,6 +1,5 @@
 <article class="{% block layout %}teaser-shop{% endblock %}"
     data-unique-id="{{ teaser.uniqueId }}"
-    data-clicktracking="{{ area.kind }}"
     data-type="teaser">
     <a href="{{ teaser | create_url }}">
         {% set module_layout = self.layout() %}
