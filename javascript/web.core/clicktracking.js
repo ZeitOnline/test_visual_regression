@@ -346,26 +346,36 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             return data;
         },
 
-        linkInGalleryContent: function( $element, $gallery ) {
-            // the pager contains the image number *after* the click, so we want to adjust that
-            var pager = $gallery.find( '.bx-pager' ).text().split( ' / ' ),
-                row = $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? 1 : 2,
-                column = $element[ 0 ].className.indexOf( 'prev' ) < 0 ? 2 : 1,
-                total = parseInt( pager.pop(), 10 ),
-                current = parseInt( pager.pop(), 10 ),
-                // add +1 for left click (1) and -1 for right click (2)
-                // consider 0 and total + 1
-                number = ( current + column * -2 + 3 ) % total || total,
-                data = [
-                    'gallery', // [verortung]
-                    row, // [reihe]
-                    column, // [spalte]
-                    number, // [subreihe]
-                    sanitizeString(
-                        $element.children().first().text() ||
-                        $element.text() ), // bezeichner
-                    location.host + location.pathname // url
-                ];
+        linkInGalleryContent: function( $element, $page ) {
+            var className = $element[ 0 ].className,
+                pager = $page.find( '.bx-pager' ),
+                row = 3,
+                column = '',
+                current = '',
+                data;
+
+            // navigation arrows
+            if ( /-(prev|next)/.test( className ) ) {
+                row = className.indexOf( 'overlay' ) < 0 ? 1 : 2;
+                column = className.indexOf( 'prev' ) < 0 ? 2 : 1;
+                current = parseInt( pager.text().split( ' / ' ).pop(), 10 );
+            }
+            // navigation bullets for touch devices
+            else if ( className.indexOf( 'bx-pager-link' ) !== -1 ) {
+                row = 1;
+                current = pager.find( '.bx-pager-link' ).index( $element ) + 1;
+            }
+
+            data = [
+                'gallery', // [verortung]
+                row, // [reihe]
+                column, // [spalte]
+                current, // [subreihe] contains the image number *after* the click
+                sanitizeString(
+                    $element.children().first().text() ||
+                    $element.text() ), // bezeichner
+                location.host + location.pathname // url
+            ];
             return data;
         }
     },
