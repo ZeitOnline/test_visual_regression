@@ -12,7 +12,6 @@
 
 <article class="{% block layout %}teaser-card{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
-         data-clicktracking="{{ area.kind }}"
          {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
          {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
     <div class="card__wrap">
