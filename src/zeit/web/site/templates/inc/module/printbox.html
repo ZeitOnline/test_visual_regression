@@ -1,5 +1,3 @@
-{% set teaser_position = '{}.{}.{}'.format(area.kind, region_loop.index, module_loop.index) %}
-
 <aside class="print-box">
     {% set title = teaser.supertitle + ' - ' + teaser.title -%}
     <div class="print-box__heading">
@@ -9,26 +7,26 @@
     <div class="print-box__content">
         {% require image = get_image(module, name='content', variant_id='original', fallback=False) %}
             <figure class="print-box__media scaled-image">
-                <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_cover_cover" title="{{ title }}" data-id="{{ teaser_position }}.print-box.image">
+                <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_cover_cover" title="{{ title }}">
                     <img class="print-box__media-item" alt="{{ image.alt }}" src="{{ request.image_host + image.fallback_path }}" data-src="{{ request.image_host + image.path }}" data-ratio="{{ image.ratio }}">
                 </a>
             </figure>
         {% endrequire %}
         <div class="print-box__container">
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_headline_headline" title="{{ title }}" class="print-box__combined-link" data-id="{{ teaser_position }}.print-box.title-and-text">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_headline_headline" title="{{ title }}" class="print-box__combined-link" data-ct-label="title-and-text">
                 <h2 class="print-box__content-heading">
                     <span class="print-box__kicker">{{ teaser.supertitle }}</span>
                     <span class="print-box__title">{{ teaser.title }}</span>
                 </h2>
                 <p class="print-box__text">{{ teaser.subtitle }}</p>
             </a>
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.weitere.weitere&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_weitere_weitere" class="print-box__link" data-id="{{ teaser_position }}.print-box.weitere_themen">
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.weitere.weitere&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_weitere_weitere" class="print-box__link" data-ct-label="Weitere Themen">
                 Weitere Themen
             </a>
-            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.button.button&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_button_button" data-id="{{ teaser_position }}.print-box.button">
-                <span class="print-box__button">Mehr erfahren</span>
+            <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.printbox.ausgseite.bildtext.button.button&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=printbox&amp;utm_content=ausgseite_bildtext_button_button" class="print-box__button">
+                Mehr erfahren
             </a>
-            <a href="http://leserservice.zeit.de/diesewoche/DIE-ZEIT-kostenlos-testen/index.php?r=npb" class="print-box__link" data-id="{{ teaser_position }}.print-box.testen_sie_3_wochen_die_gedruckte_zeit">
+            <a href="http://leserservice.zeit.de/diesewoche/DIE-ZEIT-kostenlos-testen/index.php?r=npb" class="print-box__link" data-ct-label="testen_sie_3_wochen_die_gedruckte_zeit">
                 Testen Sie 3 Wochen die gedruckte ZEIT
             </a>
         </div>
