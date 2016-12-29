@@ -19,6 +19,11 @@ class AreaProvidingPaginationMixin(object):
         area = self.area_providing_pagination
         url = super(AreaProvidingPaginationMixin, self).canonical_url
 
+        if area and area.current_page:
+            if 'url' in area.page_info(area.current_page):
+                return area.page_info(area.current_page)['url']
+
+        # if pagination via GET param, suppress page param for page 1
         if area and area.current_page == 1:
             remove_param = area.page_info(1)['remove_get_param']
             return zeit.web.core.utils.remove_get_params(
@@ -36,8 +41,11 @@ class AreaProvidingPaginationMixin(object):
         area = self.area_providing_pagination
 
         if area and area.current_page < area.total_pages:
-            get_param = area.page_info(
-                area.current_page + 1)['append_get_param']
+            next_page_number = area.current_page + 1
+            if 'url' in area.page_info(next_page_number):
+                return area.page_info(next_page_number)['url']
+
+            get_param = area.page_info(next_page_number)['append_get_param']
             return zeit.web.core.utils.add_get_params(
                 self.request.url, **get_param)
 
@@ -45,15 +53,21 @@ class AreaProvidingPaginationMixin(object):
     def prev_page_url(self):
         area = self.area_providing_pagination
 
-        # suppress page param for page 1
+        if not area or area.current_page < 2:
+            return None
+
+        prev_page_number = area.current_page - 1
+        if 'url' in area.page_info(prev_page_number):
+            return area.page_info(prev_page_number)['url']
+
+        # if pagination via GET param, suppress page param for page 1
         if area and area.current_page == 2:
             remove_param = area.page_info(
                 area.current_page)['remove_get_param']
             return zeit.web.core.utils.remove_get_params(
                 self.request.url, remove_param)
         elif area and area.current_page > 2:
-            get_param = area.page_info(
-                area.current_page - 1)['append_get_param']
+            get_param = area.page_info(prev_page_number)['append_get_param']
             return zeit.web.core.utils.add_get_params(
                 self.request.url, **get_param)
 
