@@ -224,30 +224,55 @@ def test_navi_provides_expected_webtrekk_strings(
 
 @pytest.mark.parametrize(
     'article', [
-        # thema
-        ('.article-header__topic',
-         'articleheader.thema...science'),
+        # serie
+        ('.article-series__heading',
+         'articleheader.series...chefsache'),
         # author
-        ('.article-header__byline a',
-         'articleheader.author.1_of_1..jochen_bittner'),
+        ('.byline a',
+         'articleheader.author.1_of_1..anne_mustermann'),
+        # source
+        ('.metadata__source a',
+         'articleheader.source...erschienen_bei_vice|www.example.com/foo'),
         # comment link
         ('.metadata__commentcount',
-         'articleheader.comments...42_kommentare'),
-        # intext
-        ('.paragraph a',
-         'intext.2/seite-1...cyborgs|www.zeit.de/digital'),
+         'articleheader.comments...42_kommentare|#comments'),
         # toc
         ('.article-toc__link',
-         'article-toc.page_1_of_10...2'),
+         'article-toc.page_1_of_2...2'),
+        # intext
+        ('.paragraph a',
+         'article.2.seite-1.paragraph.kuendigung|www.zeit.de/karriere'),
+        # authorbox
+        ('.authorbox a',
+         'article.6.seite-1.authorbox.zur_autorenseite'),
+        # infobox
+        ('.infobox a',
+         'article.9.seite-1.infobox.crystal_meth|#crystal-meth-1-tab'),
+        # portraitbox
+        ('.portraitbox a',
+         'article.13.seite-1.portraitbox.pia_volk|piavolk.net'),
+        # pagination
+        ('.article-pagination__link',
+         'article-pager.page_1_of_2...naechste_seite'),
+        ('.article-pager a',
+         'article-pager.page_1_of_2...2'),
+        ('.article-pager__all a',
+         'article-pager.page_1_of_2...all'),
+        # tags
+        ('.article-tags a',
+         'articlebottom.article-tag.1..arbeitgeber'),
+        # sharing
+        ('.sharing-menu__title',
+         'articlebottom.social.0.1.teilen|#sharing-menu-list'),
         # nextread
         ('.nextread a',
-         'articlebottom.editorial-nextread...area'),
+         'articlebottom.editorial-nextread...area-zplus'),
     ])
 def test_article_elements_provide_expected_id_for_webtrekk(
         selenium_driver, testserver, article):
 
     driver = selenium_driver
-    driver.get('%s/campus/article/paginated#debug-clicktracking'
+    driver.get('%s/zeit-online/article/webtrekk-test#debug-clicktracking'
                % testserver.url)
 
     # prevent testfail at first run
@@ -615,9 +640,9 @@ def test_volume_teaser_provides_expected_webtrekk_string(
     link.click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'tablet.volumeteaser.2/seite-1...dieser_artikel_stammt_aus_der_zeit_'
-        'nr_01_2016_lesen_sie_diese_ausgabe_als_e_paper_app_und_auf_dem_e_'
-        'reader|premium.zeit.de/diezeit/2016/01')
+        'tablet.article.2.seite-1.volume-teaser.dieser_artikel_stammt_'
+        'aus_der_zeit_nr_01_2016_lesen_sie_diese_ausgabe_als_e_paper_app_'
+        'und_auf_dem_e_reader|premium.zeit.de/diezeit/2016/01')
 
 
 def test_volume_overview_teaser_provides_expected_webtrekk_string(
@@ -785,25 +810,25 @@ def test_inline_gallery_provides_expected_webtrekk_string(
     driver.find_element_by_class_name('bx-prev').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.intext.1/seite-1...ein_bild_zurueck')
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_zurueck')
     assert tracking_data.endswith(pathname)
 
     driver.find_element_by_class_name('bx-next').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.intext.1/seite-1...ein_bild_vor')
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_vor')
     assert tracking_data.endswith(pathname)
 
     driver.find_element_by_class_name('bx-overlay-prev').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.intext.1/seite-1...ein_bild_zurueck')
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_zurueck')
     assert tracking_data.endswith(pathname)
 
     driver.find_element_by_class_name('bx-overlay-next').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.intext.1/seite-1...ein_bild_vor')
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_vor')
     assert tracking_data.endswith(pathname)
 
 
@@ -832,7 +857,7 @@ def test_gallery_provides_expected_webtrekk_string(
     driver.find_element_by_class_name('bx-next').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.gallery.1.2.1.ein_bild_vor')
+        'stationaer.gallery.1.2.2.ein_bild_vor')
     assert tracking_data.endswith(pathname)
 
     # wait for sliding animation
@@ -841,7 +866,7 @@ def test_gallery_provides_expected_webtrekk_string(
     driver.find_element_by_class_name('bx-prev').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.gallery.1.1.2.ein_bild_zurueck')
+        'stationaer.gallery.1.1.1.ein_bild_zurueck')
     assert tracking_data.endswith(pathname)
 
     # wait for sliding animation
@@ -850,7 +875,7 @@ def test_gallery_provides_expected_webtrekk_string(
     driver.find_element_by_class_name('bx-overlay-next').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.gallery.2.2.1.ein_bild_vor')
+        'stationaer.gallery.2.2.2.ein_bild_vor')
     assert tracking_data.endswith(pathname)
 
     # wait for sliding animation
@@ -859,7 +884,7 @@ def test_gallery_provides_expected_webtrekk_string(
     driver.find_element_by_class_name('bx-overlay-prev').click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'stationaer.gallery.2.1.2.ein_bild_zurueck')
+        'stationaer.gallery.2.1.1.ein_bild_zurueck')
     assert tracking_data.endswith(pathname)
 
 
