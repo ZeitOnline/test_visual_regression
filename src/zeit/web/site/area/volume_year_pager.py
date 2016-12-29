@@ -29,20 +29,16 @@ class VolumeYearPager(zeit.web.core.area.ranking.Ranking):
 
     @zeit.web.reify
     def current_page(self):
-        return self.__year_to_page(self.current_page_year)
-
-    @zeit.web.reify
-    def current_page_year(self):
-        # XXX: das sieht aber fragil aus.
-        return int(self.request.path.lstrip('/').split('/')[0])
+        return self.__year_to_page(self.__current_page_year())
 
     @zeit.web.reify
     def pagination_info(self):
         return {
             'previous_label': u'Nächstes Jahr',
-            'previous_url': self.__url_for_year(self.current_page_year + 1),
+            'previous_url': self.__url_for_year(
+                self.__current_page_year() + 1),
             'next_label': u'Vorheriges Jahr',
-            'next_url': self.__url_for_year(self.current_page_year - 1)}
+            'next_url': self.__url_for_year(self.__current_page_year() - 1)}
 
     def page_info(self, page_nr):
         if not page_nr:
@@ -57,8 +53,14 @@ class VolumeYearPager(zeit.web.core.area.ranking.Ranking):
         return zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages, slots=6)
 
+    """ The real current year (anno domini) """
     def __current_year(self):
         return datetime.datetime.today().year
+
+    """ The year which the user is viewing (chosen via URL) """
+    def __current_page_year(self):
+        # XXX: looks fragile. Can we read this from page XML data?
+        return int(self.request.path.lstrip('/').split('/')[0])
 
     def __year_to_page(self, year):
         return (self.__current_year() - year) + 1
@@ -67,6 +69,6 @@ class VolumeYearPager(zeit.web.core.area.ranking.Ranking):
         return self.__current_year() - page + 1
 
     def __url_for_year(self, year):
-        # XXX: geht das besser?
+        # XXX: do we have a scheme+host variable available for areas?
         return '{}://{}/{}/index'.format(
             self.request.scheme, self.request.host, year)
