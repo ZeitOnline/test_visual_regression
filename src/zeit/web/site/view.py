@@ -175,12 +175,16 @@ def schlagworte(request):
         page = int(request.matchdict['subpath'].lstrip('index/seite-'))
     except (TypeError, ValueError):
         page = 0
-    raise pyramid.httpexceptions.HTTPMovedPermanently(
-        u'{}thema/{}{}'.format(
-            request.route_path('home').lower(),
-            request.matchdict['item'].lower(),
-            '?p={}'.format(page) if page > 1 else ''
-        ).encode('utf-8'))
+    try:
+        result = pyramid.httpexceptions.HTTPMovedPermanently(
+            u'{}thema/{}{}'.format(
+                request.route_path('home').lower(),
+                request.matchdict['item'].lower(),
+                '?p={}'.format(page) if page > 1 else ''
+            ).encode('utf-8'))
+    except:
+        result = pyramid.httpexceptions.HTTPBadRequest()
+    raise result
 
 
 @pyramid.view.view_config(
