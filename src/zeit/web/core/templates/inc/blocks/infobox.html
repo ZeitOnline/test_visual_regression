@@ -1,6 +1,6 @@
 {% if block.contents -%}
 {% set base_id = block.identifier %}
-<aside class="infobox js-infobox" id="{{ base_id }}" data-clicktracking="infobox">
+<aside class="infobox js-infobox" id="{{ base_id }}">
     <div class="infobox__container">
         <h2 class="infobox__title">{{ block.title | default('Information', True) }}</h2>
         <div class="infobox__navigation"></div>

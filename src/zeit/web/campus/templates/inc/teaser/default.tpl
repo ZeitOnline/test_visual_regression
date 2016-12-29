@@ -2,7 +2,7 @@
 
 <article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}"
     data-unique-id="{{ teaser.uniqueId }}"
-    {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %} data-clicktracking="{{ area.kind }}"
+    {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
     {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
     {%- block teaser_attributes %}{% endblock %} itemscope itemtype="http://schema.org/Article" itemref="publisher">
 
