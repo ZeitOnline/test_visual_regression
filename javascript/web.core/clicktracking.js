@@ -141,13 +141,12 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             var data = [],
                 href,
                 type = 'text',
-                teasertype = '',
                 element = $element.get( 0 ),
                 $article = $element.closest( 'article, aside' ),
                 $area = $element.closest( '.cp-area' ),
                 context = $area.data( 'ct-context' ),
                 column = '',
-                articleClasses = $article.get( 0 ).className.split( ' ' );
+                teasertype = $article.data( 'ct-block' ) || $article.attr( 'class' ).split( ' ' ).shift();
 
             if ( element.className.indexOf( 'button' ) !== -1 ) {
                 type = 'button';
@@ -155,7 +154,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 type = 'image';
             }
 
-            teasertype += articleClasses[0];
             teasertype += $article.data( 'zplus' ) ? '-zplus' : '';
 
             if ( element.type === 'submit' ) {
