@@ -2629,3 +2629,25 @@ def test_volume_cp_should_send_correct_headers(testserver, monkeypatch):
     c1_mixin.context = cp
     c1_mixin.request = request
     assert c1_mixin._c1_entitlement == 'paid'
+
+
+def test_volume_overview_has_correct_pagination(testbrowser):
+    browser = testbrowser('/2015/index')
+
+    prev_tag = browser.cssselect('head link[rel="prev"]')[0]
+    next_tag = browser.cssselect('head link[rel="next"]')[0]
+    current_tag = browser.cssselect('head link[rel="canonical"]')[0]
+    assert prev_tag.get('href').endswith('/2016/index')
+    assert next_tag.get('href').endswith('/2014/index')
+    assert current_tag.get('href').endswith('/2015/index')
+
+    next_button = browser.cssselect('.pager__button--next')[0]
+    assert next_button.text == 'Vorheriges Jahr'
+
+    prev_link = browser.cssselect('.pager__pages a')[0]
+    next_link = browser.cssselect('.pager__pages a')[1]
+    assert prev_link.get('href').endswith('/2016/index')
+    assert next_link.get('href').endswith('/2014/index')
+
+    current = browser.cssselect('.pager__pages .pager__page--current')[0]
+    assert current.text_content() == '2015'
