@@ -2585,7 +2585,7 @@ def test_headerimage_should_overlay_onto_tube_area(testbrowser):
     assert '--overlain' in header_image.attrib['class']
 
 
-def test_volume_teaser_on_cphas_correct_elements(testbrowser):
+def test_volume_teaser_on_cp_has_correct_elements(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/volumeteaser')
 
     assert len(browser.cssselect('.teaser-volumeteaser')) == 2
