@@ -2651,3 +2651,6 @@ def test_volume_overview_has_correct_pagination(testbrowser):
 
     current = browser.cssselect('.pager__pages .pager__page--current')[0]
     assert current.text_content() == '2015'
+
+    meta_robots = browser.cssselect('head meta[name="robots"]')[0]
+    meta_robots.get('content') == 'index'

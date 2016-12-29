@@ -74,6 +74,12 @@ class AreaProvidingPaginationMixin(object):
     @zeit.web.reify
     def meta_robots(self):
         area = self.area_providing_pagination
+
+        # If the area has explicitly set own meta-robots rules, apply these.
+        # This is the the exception from the exception below.
+        if area and area.meta_robots:
+            return area.meta_robots
+
         # Prevent continuation pages from being indexed
         if area and area.current_page > 1:
             return 'noindex,follow,noodp,noydir,noarchive'
