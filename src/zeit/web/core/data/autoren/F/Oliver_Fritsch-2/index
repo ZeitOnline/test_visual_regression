@@ -3,7 +3,7 @@
   <firstname>Oliver</firstname>
   <lastname>Fritsch</lastname>
   <email>oliver.fritsch@zeit.de</email>
-  <vgwortid py:pytype="int">2212513</vgwortid>
+  <vgwortid>2212513</vgwortid>
   <vgwortcode>2212513</vgwortcode>
   <status>Online</status>
   <display_name>Oliver Fritsch</display_name>
