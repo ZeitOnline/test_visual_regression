@@ -38,7 +38,7 @@
                     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
                     {%- if author.href -%}
                         <a class="header-article__author" href="
-                            {{- author.href | create_url }}" itemprop="url" data-ct-column="
+                            {{- author.href | create_url }}" rel="author" itemprop="url" data-ct-column="
                             {{- '%s_of_%s' | format(loop.index, loop.length) }}" data-ct-subcolumn="false"><span itemprop="name">
                             {{- author.name -}}
                         </span></a>{{ author.location }}

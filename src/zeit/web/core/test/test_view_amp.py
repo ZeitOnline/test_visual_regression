@@ -227,3 +227,30 @@ def test_amp_article_shows_volume_badge_for_exclusive(testbrowser):
 
     assert volume_text.text.strip() == u'Exklusiv für Abonnenten'
     assert volume_badge.cssselect('.volume-badge__icon')
+
+
+def test_amp_article_contains_authorbox(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/authorbox')
+    authorbox = browser.cssselect('.authorbox')
+    assert len(authorbox) == 3
+
+    # test custom biography
+    author = authorbox[0]
+    description = author.cssselect('.authorbox__summary')[0]
+    assert description.text.strip() == 'Text im Feld Kurzbio'
+    assert description.get('itemprop') == 'description'
+
+    # test author content and microdata
+    author = authorbox[1]
+    image = author.cssselect('[itemprop="image"]')[0]
+    name = author.cssselect('strong[itemprop="name"]')[0]
+    description = author.cssselect('[itemprop="description"]')[0]
+    url = author.cssselect('a[itemprop="url"]')[0]
+
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.get('itemscope') is not None
+    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
+            ) in image.cssselect('[itemprop="url"]')[0].get('content')
+    assert name.text.strip() == 'Jochen Wegner'
+    assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
+    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
