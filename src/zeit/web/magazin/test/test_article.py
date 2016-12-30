@@ -64,8 +64,8 @@ def test_article_has_valid_facebook_meta_tags(testbrowser):
     select = browser.cssselect
     assert '<meta property="og:site_name" '\
         'content="ZEITmagazin">' in browser.contents
-    assert '<meta property="fb:admins"'\
-        ' content="595098294">' in browser.contents
+    assert '<meta property="fb:app_id"'\
+        ' content="638028906281625">' in browser.contents
     assert '<meta property="og:type"'\
         ' content="article">' in browser.contents
     assert '<meta property="og:title"'\

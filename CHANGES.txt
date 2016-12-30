@@ -19,6 +19,10 @@ POSTDEPLOY
 
 - FIX: Be defensive about invalid requests for legacy keyword redirects
 
+- MAINT: Replace library `freewall` with `masonry`
+
+- MAINT: Update sharing metadata regarding authorship
+
 
 3.25.1 (2016-12-23)
 -------------------
