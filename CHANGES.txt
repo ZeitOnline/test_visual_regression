@@ -21,6 +21,8 @@ POSTDEPLOY
 
 - MAINT: Replace library `freewall` with `masonry`
 
+- MAINT: Update sharing metadata regarding authorship
+
 
 3.25.1 (2016-12-23)
 -------------------
