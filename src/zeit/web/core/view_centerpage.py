@@ -77,7 +77,7 @@ class AreaProvidingPaginationMixin(object):
 
         # If the area has explicitly set own meta-robots rules, apply these.
         # This is the the exception from the exception below.
-        if area and area.meta_robots:
+        if area and getattr(area, 'meta_robots', None):
             return area.meta_robots
 
         # Prevent continuation pages from being indexed
