@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.26 (unreleased)
+3.26 (2016-12-30)
 -----------------
 
 - ZON-3569: Change fallback image and styles for volume packshots
