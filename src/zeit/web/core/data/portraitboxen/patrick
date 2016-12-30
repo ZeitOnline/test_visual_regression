@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+<container layout="artbox" label="portrait">
   <block>
     <title>Patrick Beuth</title>
     <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/administratives/autoreninfos/bilder/patrick-beuth.jpg" type="jpg" publication-date="" expires="">

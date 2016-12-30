@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<gallery>
   <head>
     <image-folder>http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/</image-folder>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>

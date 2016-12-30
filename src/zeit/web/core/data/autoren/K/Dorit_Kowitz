@@ -2,5 +2,5 @@
 <author>
   <firstname>Dorit</firstname>
   <lastname>Kowitz</lastname>
-  <display_name xmlns:py="http://codespeak.net/lxml/objectify/pytype">Dorit Kowitz</display_name>
+  <display_name>Dorit Kowitz</display_name>
 </author>

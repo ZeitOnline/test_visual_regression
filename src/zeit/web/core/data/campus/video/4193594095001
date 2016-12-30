@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<video xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<video xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <head>
     <renditions>
       <rendition url="http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201504/2409/18140073001_4193657875001_4193594095001.mp4" frame_width="400" video_duration="120048"/>

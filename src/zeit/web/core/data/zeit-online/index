@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
         <image src="http://xml.zeit.de/zeit-online/cp-content/ig-1/" type="jpg" title="Ein Seemann im Hafen von Hamburg " alt="Ein Seemann im Hafen von Hamburg " align="left" publication-date="" expires="">

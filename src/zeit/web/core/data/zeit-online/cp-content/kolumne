@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <references>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/wirtschaft/2014-10/frankreich-verlangt-milliardeninvestitionen" year="2014" issue="41" ressort="Wirtschaft" contenttype="article" publication-date="" expires="" genre="nachricht">

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-2" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
       <bu>Die ist der image sub text</bu>

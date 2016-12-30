@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <references>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/ZMO-326/online-2-autoren-aktualisiert" year="2008" issue="26" ressort="Wirtschaft" author="Anne Mustermann;Armin Mustermann" contenttype="article" publication-date="" expires="" genre="interview">

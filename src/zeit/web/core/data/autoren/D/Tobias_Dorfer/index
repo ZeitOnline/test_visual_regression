@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<author xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<author>
   <firstname>Tobias</firstname>
   <lastname>Dorfer</lastname>
   <status>Online</status>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<gallery>
     <head>
         <image-folder>http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/</image-folder>
         <image align="left" base-id="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube" expires="" publication-date="" title="Desktops Teaser" type="jpg" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -17,10 +17,10 @@
         <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
         <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-08T09:25:41.497174+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-08T09:25:41.497174+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-09-26T06:00:00+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-08T09:26:47.102964+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2013-10-08T09:25:03.039843+00:00</attribute>
         <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
         <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
         <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>

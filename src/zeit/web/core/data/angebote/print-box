@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<link xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<link>
   <head>
     <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/angebote/bilder-angebotsbox/packshot-04-320x148.jpg" type="jpg" title="packshot-04-320x148.jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>

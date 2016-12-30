@@ -1,4 +1,4 @@
-<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="storystream">
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="storystream">
 <head>
 	<header_image src="http://xml.zeit.de/exampleimages/artikel/01/schoppenstube/30921833.jpg" type="jpg" title="Griechenland Tsipras" align="left" publication-date="" expires="">
 		<bu>Wahlkampfplakat von Alexis Tsipras in Athen</bu>

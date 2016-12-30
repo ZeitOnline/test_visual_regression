@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/buchtipp/ishiguro/aufmacher-ishiguro/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
@@ -77,8 +77,8 @@
     <subtitle>Drachen und Geister, Menschenfresser und Höllenhunde – in seinem neuen Roman nimmt Kazuo Ishiguro uns mit in das Britannien des frühen Mittelalters.</subtitle>
     <division type="page">
       <image base-id="http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt/" type="jpg" alt="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" align="left" publication-date="" expires="2015-05-13T11:46:39+00:00" layout="large" is_empty="False" title_local="Crystal Meth: Nancy braucht was Schnelles" alt_local="Crystal Meth: Gesellschaft, Crystal Meth, Drogensucht, Drogenkonsum" title="Crystal Meth: Nancy braucht was Schnelles">
-        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype">Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
-        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
+        <bu>Nancy Schmidt auf einem Feld in ihrem Heimatort zwischen Gera und Jena</bu>
+        <copyright link="http://www.milosdjuric.com/">© Milos Djuric </copyright>
       </image>
       <p>Zwischen
 dem Bestseller "Was vom Tage übrig blieb" und dem neuen Roman von Kazuo Ishiguro
