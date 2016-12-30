@@ -3,8 +3,8 @@
     <head>
         <header_image/>
         <image src="http://xml.zeit.de/zeit-online/cp-content/ig-1/" type="jpg" title="Ein Seemann im Hafen von Hamburg " alt="Ein Seemann im Hafen von Hamburg " align="left" publication-date="" expires="">
-            <bu py:pytype="str">Mauerfall</bu>
-            <copyright py:pytype="str">© dpa</copyright>
+            <bu>Mauerfall</bu>
+            <copyright>© dpa</copyright>
         </image>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
         <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>

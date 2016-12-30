@@ -2,7 +2,7 @@
 <container xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
   <supertitle>Crystal Meth</supertitle>
   <block>
-    <title py:pytype="str">Crystal Meth</title>
+    <title>Crystal Meth</title>
     <text>
       <p>Die Droge Methamphetamin ist eine synthetisch hergestellte Substanz, die geraucht,         geschnupft oder gespritzt wird. Sie bewirkt, dass der Körper       <strong>Glückshormone</strong>       ausschüttet.</p>
       <p>Bereits im       <strong>Zweiten Weltkrieg</strong>       wurde der Wirkstoff unter anderem deutschen         Soldaten verabreicht. Er sollte ihnen die Angst nehmen und sie wach halten.</p>

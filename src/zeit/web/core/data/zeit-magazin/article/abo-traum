@@ -2,7 +2,7 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
     <head>
         <author expires="" href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="">
-            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <display_name>Armin Mustermann</display_name>
         </author>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>

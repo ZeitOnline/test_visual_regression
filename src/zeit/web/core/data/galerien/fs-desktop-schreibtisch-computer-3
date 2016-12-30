@@ -91,11 +91,11 @@
                     <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
                     <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg" type="jpg" publication-date="" expires="">
                     <bu xsi:nil="true"/>
-                    <copyright py:pytype="str">©</copyright>
+                    <copyright>©</copyright>
                     </image>
                     <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg" type="jpg" publication-date="" expires="">
                     <bu xsi:nil="true"/>
-                    <copyright py:pytype="str">©</copyright>
+                    <copyright>©</copyright>
                     </thumbnail>
                 </block>
                 <block name="03-desktop-schreibtisch-computer-digital.jpg">

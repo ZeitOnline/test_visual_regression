@@ -4,7 +4,7 @@
     <image-folder>http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/</image-folder>
     <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
-      <copyright py:pytype="str">© Alexander Gerst/ESA</copyright>
+      <copyright>© Alexander Gerst/ESA</copyright>
     </image>
     <badges>
       <badge>gallery</badge>
@@ -59,7 +59,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:0ef98e45-7bc2-4ccc-9813-daa37f4b2411}</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">25</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
-    <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
       &lt;global name="Provides" module="zope.interface.declarations"/&gt;
@@ -80,14 +80,14 @@
       <container>
         <block name="01-alexander-gerst-weltall-fotos-erde-iss.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">In den Jardins du Trocadéro am Fuße des Eiffelturms herrscht Hochbetrieb. Frankreich muss sich auf bis zu 40 Grad einstellen.</caption>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">In den Jardins du Trocadéro am Fuße des Eiffelturms herrscht Hochbetrieb. Frankreich muss sich auf bis zu 40 Grad einstellen.</caption>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Chesnot/Getty Images</copyright>
+            <copyright link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Chesnot/Getty Images</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-bilder/thumbnails/01-alexander-gerst-weltall-fotos-erde-iss.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str" link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Chesnot/Getty Images</copyright>
+            <copyright link="http://www.esa.int/Our_Activities/Human_Spaceflight/Blue_dot/Highlights/Best_of_Blue_Dot2">© Chesnot/Getty Images</copyright>
           </thumbnail>
         </block>
       </container>

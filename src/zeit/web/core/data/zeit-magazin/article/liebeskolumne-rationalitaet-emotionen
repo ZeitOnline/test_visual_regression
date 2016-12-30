@@ -9,21 +9,21 @@
       <tag type="Person" score="5" uuid="dcc4b842-5ad0-4c19-b068-b1101dcb0f69" url_value="wolfgang-schmidbauer">Wolfgang Schmidbauer</tag>
     </rankedTags>
     <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/S/Wolfgang_Schmidbauer/index.xml" publication-date="" expires="">
-      <display_name py:pytype="str">Wolfgang Schmidbauer</display_name>
+      <display_name>Wolfgang Schmidbauer</display_name>
     </author>
     <references>
       <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/online/2009/36/liebeskolumne-serie-link" year="2009" issue="36" ressort="Lebensart" contenttype="link" publication-date="2009-09-05T04:04:23+00:00" expires="" ns0:href="http://www.zeit.de/themen/serie/index?q=liebeskolumne">
-        <supertitle py:pytype="str">Partnerschaftsserie</supertitle>
+        <supertitle>Partnerschaftsserie</supertitle>
         <teaser_supertitle xsi:nil="true"/>
-        <title py:pytype="str">Die großen Fragen der Liebe</title>
-        <text py:pytype="str">Der Paartherapeut Wolfgang Schmidbauer beantwortet die großen Fragen der Liebe</text>
-        <description py:pytype="str">Der Paartherapeut Wolfgang Schmidbauer beantwortet die großen Fragen der Liebe</description>
+        <title>Die großen Fragen der Liebe</title>
+        <text>Der Paartherapeut Wolfgang Schmidbauer beantwortet die großen Fragen der Liebe</text>
+        <description>Der Paartherapeut Wolfgang Schmidbauer beantwortet die großen Fragen der Liebe</description>
         <byline xsi:nil="true"/>
         <breadcrumb_title xsi:nil="true"/>
       </reference>
     </references>
     <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/paar-abgewendet-streit/" type="jpg" title="Emotionale Kälte" alt="Paar steht abgewendet nebeneinander" align="left" publication-date="" expires="">
-      <bu py:pytype="str">Paar steht abgewendet nebeneinander</bu>
+      <bu>Paar steht abgewendet nebeneinander</bu>
       <copyright link="http://www.photocase.de/milchhonig">© milchhonig / photocase.de</copyright>
     </image>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
@@ -100,7 +100,7 @@
     <division type="page">
       <p><strong>Die Frage: </strong>Vera und Fritz haben sich im Hörsaal kennengelernt, sie saßen in einer Vorlesung über die Grundlagen der Infinitesimalrechnung nebeneinander. Vera studiert Mathematik, Fritz brauchte den Schein für sein Diplom in Maschinenbau. Beide haben sich auf Anhieb gut verstanden und einander auch den Eltern vorgestellt: Veras Vater ist Professor, ihre Mutter Anwältin; die Eltern von Fritz arbeiten beide als Ärzte. Nach zwei Jahren bemerkt Vera, dass Fritz oft abweisend und einsilbig ist. Sie will wissen, was ihm fehlt. Fritz druckst herum und sagt schließlich: "Ich bin ja selber so rational, ein Techniker, und du, du bist auch so rational. Ich weiß nicht, ob das mit uns gut geht. Du hast zu wenig Emotionen, ich spüre dich nicht!" Vera würde am liebsten auf ihn losgehen oder fortlaufen.</p>
       <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" src="http://xml.zeit.de/bilder/2009/36/lebensart/liebeskolumne-serienbild/liebeskolumne-serienbild-180x101.jpg" type="jpg" title="Liebeskolumne" align="left" href="http://www.zeit.de/themen/serie/index?q=liebeskolumne" publication-date="" expires="" set-manually="True" layout="small" is_empty="False">
-        <bu py:pytype="str">Lesen Sie hier alle bisherigen Ratschläge von unserem Paartherapeuten Wolfgang Schmidbauer</bu>
+        <bu>Lesen Sie hier alle bisherigen Ratschläge von unserem Paartherapeuten Wolfgang Schmidbauer</bu>
         <copyright link="http://www.photocase.de/de/user.asp?u=340169">© Neophoto/Photocase</copyright>
       </image>
       <p><strong>Wolfgang Schmidbauer antwortet:</strong> Im Allgemeinen glauben zivilisierte Personen, ihren Mitmenschen etwas Gutes zu tun, wenn sie ihre Emotionen zügeln. Daher hat es der gebildete Mensch in der Liebe auch schwerer als das Naturkind, wie schon Sigmund Freud wusste, als er sinngemäß an seine Braut schrieb: Das Gesindel lebt sich aus, und wir verzichten! Fritz will – weniger einsichtig als Freud – das Problem nicht als etwas sehen, das ihn mit Vera verbindet. Er will es ihr in die Schuhe schieben und es quasi mit ihr loswerden. Statt mit Vera zu besprechen, wo er sich durch ihre Rationalität gehemmt fühlt, entwertet er sie pauschal und macht so ein Dilemma unlösbar, das bei glücklicheren Paaren humorvoll umgangen wird: Wir einigen uns, dass es vernünftig ist, die Sau dort rauszulassen, wo es niemandem schadet.</p>

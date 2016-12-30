@@ -9,29 +9,29 @@
       <tag url_value="dessert" uuid="65d605b9-b37b-418d-940d-48e9cb5ad68d" score="4" type="free">Dessert</tag>
     </rankedTags>
     <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
-      <display_name py:pytype="str">Elisabeth Raether</display_name>
+      <display_name>Elisabeth Raether</display_name>
     </author>
     <references>
       <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2014/09/stimmts-himalayasalz" year="2014" issue="9" ressort="Wissen" author="Christoph Drösser" contenttype="article" publication-date="2014-02-27T01:06:00+00:00" expires="">
-        <supertitle py:pytype="str">Kolumne Stimmt's?</supertitle>
-        <teaser_supertitle py:pytype="str">Kolumne Stimmt's?</teaser_supertitle>
-        <title py:pytype="str">Ist Himalayasalz besonders gesund?</title>
-        <text py:pytype="str">Das Himalayasalz stammt dem Namen nach vom höchsten Ort der Erde. Außergewöhnlich soll das rosafarbene Mineral sein. Doch nur wenige der Versprechungen sind wahr. </text>
-        <description py:pytype="str">Das Himalayasalz stammt dem Namen nach vom höchsten Ort der Erde. Außergewöhnlich soll das rosafarbene Mineral sein. Doch nur wenige der Versprechungen sind wahr. </description>
-        <byline py:pytype="str">von Christoph Drösser</byline>
-        <breadcrumb_title py:pytype="str">Stimmt's? Ist Himalayasalz besonders gesund?</breadcrumb_title>
+        <supertitle>Kolumne Stimmt's?</supertitle>
+        <teaser_supertitle>Kolumne Stimmt's?</teaser_supertitle>
+        <title>Ist Himalayasalz besonders gesund?</title>
+        <text>Das Himalayasalz stammt dem Namen nach vom höchsten Ort der Erde. Außergewöhnlich soll das rosafarbene Mineral sein. Doch nur wenige der Versprechungen sind wahr. </text>
+        <description>Das Himalayasalz stammt dem Namen nach vom höchsten Ort der Erde. Außergewöhnlich soll das rosafarbene Mineral sein. Doch nur wenige der Versprechungen sind wahr. </description>
+        <byline>von Christoph Drösser</byline>
+        <breadcrumb_title>Stimmt's? Ist Himalayasalz besonders gesund?</breadcrumb_title>
         <image base-id="http://xml.zeit.de/wissen/gesundheit/2014-02/himalayasalz-2/" type="jpg" title="Himalayasalz" align="left" publication-date="" expires="">
-          <bu py:pytype="str">Himalayasalz hat seine rosa Färbung von rotem Eisenoxid.</bu>
-          <copyright py:pytype="str">©Rainer Zenz/wikimedia</copyright>
+          <bu>Himalayasalz hat seine rosa Färbung von rotem Eisenoxid.</bu>
+          <copyright>©Rainer Zenz/wikimedia</copyright>
         </image>
         <author href="http://xml.zeit.de/autoren/D/Christoph_Droesser/index.xml" publication-date="" expires="">
-          <display_name py:pytype="str">Christoph Drösser</display_name>
+          <display_name>Christoph Drösser</display_name>
         </author>
       </reference>
     </references>
     <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/" type="jpg" title="Eine Frau isst Paprikasuppe" alt="Eine Frau isst Paprikasuppe" align="left" publication-date="" expires="2014-05-18T07:51:24+00:00">
-      <bu py:pytype="str">Paprikasuppe löffelweise</bu>
-      <copyright py:pytype="str">© Jason Lowe</copyright>
+      <bu>Paprikasuppe löffelweise</bu>
+      <copyright>© Jason Lowe</copyright>
     </image>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
@@ -104,8 +104,8 @@
     <byline>von Elisabeth Raether</byline>
     <division type="page">
       <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" src="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/frau-isst-suppe-2-zmo-landscape-large.jpg" type="jpg" title="Eine Frau isst Paprikasuppe" alt="Eine Frau isst Paprikasuppe" align="left" publication-date="" expires="2014-05-18T07:51:24+00:00" layout="zmo-medium-center" is_empty="False">
-        <bu py:pytype="str">Paprikasuppe löffelweise</bu>
-        <copyright py:pytype="str">© Jason Lowe</copyright>
+        <bu>Paprikasuppe löffelweise</bu>
+        <copyright>© Jason Lowe</copyright>
       </image>
       <p>
         <strong>Vorspeise</strong>
@@ -117,14 +117,14 @@
       <p>6 rote Paprika (Kerne und Stiel entfernt),  Salz, Pfeffer, eine Prise Zucker, etwas Essig,  50 ml Olivenöl, vielleicht etwas Sherry</p>
       <p>Paprikaschoten in einer Auflaufform im Ofen bei  200 Grad am besten bei Umlufthitze garen, bis die Haut verbrannt  ist und Blasen wirft. Das dauert ungefähr 50 Minuten.  Währenddessen ab und zu wenden. Aus dem Ofen nehmen,  in eine Schüssel geben, die mit Klarsicht-Folie abgedeckt wird.  Der Dampf sorgt dafür, dass sich die Schale leichter  lösen lässt. Nach 20 Minuten kann man die Paprikaschoten  mit der Hand schälen.</p>
       <image src="http://xml.zeit.de/zeit-magazin/essen-trinken/2014-05/freunde-jason-lowe-london-kochen-inline/freunde-jason-lowe-london-kochen-inline-zmo-landscape-large.jpg" type="jpg" align="left" publication-date="" expires="" layout="zmo-small-right" is_empty="False" set-manually="True">
-        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Freunde in der Londoner Wohnung von Jason Lowe, der regelmäßig für unsere Rubrik »Wochenmarkt« fotgrafiert. </bu>
-        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">© Jason Lowe</copyright>
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype">Freunde in der Londoner Wohnung von Jason Lowe, der regelmäßig für unsere Rubrik »Wochenmarkt« fotgrafiert. </bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype">© Jason Lowe</copyright>
       </image>
       <p>Den Saft, der sich in der Auflaufform gesammelt hat, aufheben. Zusammen mit den Paprika glatt pürieren. Sie haben  es sich vermutlich schon gedacht: Hier werden Suppen auch  nicht durch ein Sieb gedrückt, wenn Gäste kommen.</p>
       <p>Die Suppe langsam erwärmen, abschmecken mit Salz, Pfeffer, Zucker, Essig und reichlich Olivenöl, eventuell auch etwas Sherry hinzugeben. Die Portionen sollten klein sein, die Suppe  sollte intensiv schmecken (das ist wahrscheinlicher, wenn Sie eine Biopaprika verwendet haben) und ist relativ dickflüssig.</p>
       <image src="http://xml.zeit.de/zeit-magazin/essen-trinken/2014-05/chili-knoblauch-ingwer-kochen-freunde-inline/chili-knoblauch-ingwer-kochen-freunde-inline-zmo-lead-upright.jpg" type="jpg" align="left" publication-date="" expires="" set-manually="True" layout="zmo-small-left" is_empty="False">
-        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Chilischote, Knoblauchzehen, Ingwer und Safran kommen ans Zitronenhuhn</bu>
-        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">© Jason Lowe</copyright>
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype">Chilischote, Knoblauchzehen, Ingwer und Safran kommen ans Zitronenhuhn</bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype">© Jason Lowe</copyright>
       </image>
       <p>
         <strong>Hauptspeise</strong>
@@ -135,8 +135,8 @@
       <p><br/>4 Hühnerschenkel, 4 Zwiebeln, 2–3 Knoblauchzehen, 1 Stück Ingwer,  1 Chilischote ohne Kerne, 1 TL gemahlener Piment,  1 g Safran, 800 ml dünne Gemüsebrühe, 4 kleine eingelegte Zitronen  (aus dem Feinkostladen)<br/>400 g Bulgur, 50 g gehackte getrocknete Cranberrys, 50 g Butter,  100 g geröstete Pinienkerne, Salz, Pfeffer</p>
       <p>Hühnerschenkel von beiden Seiten in heißem Öl  in einem schweren Topf anbraten,  sodass sie eine braune Farbe bekommen. Aus dem  Topf nehmen, beiseitestellen.</p>
       <image src="http://xml.zeit.de/zeit-magazin/essen-trinken/2014-05/bulgur-cranberrys-kochen-freunde-inline/bulgur-cranberrys-kochen-freunde-inline-zmo-upright.jpg" type="jpg" align="left" publication-date="" expires="" layout="zmo-small-right" is_empty="False" set-manually="True">
-        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">Bulgur und Cranberrys gibt es in vielen Supermärkten – aber das müssen Sie ja nicht zugeben. </bu>
-        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">© Jason Lowe</copyright>
+        <bu xmlns:py="http://codespeak.net/lxml/objectify/pytype">Bulgur und Cranberrys gibt es in vielen Supermärkten – aber das müssen Sie ja nicht zugeben. </bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype">© Jason Lowe</copyright>
       </image>
       <p>Zwiebeln, Knoblauch, Ingwer und Chilischote hacken und im selben Topf mit Piment anschwitzen.  Mit Brühe angießen. Safran in etwas heißem Wasser auflösen und samt Flüssigkeit dazugeben. Zitronen inklusive der Schale klein schneiden und dazugeben.  50 Minuten bei kleiner Hitze zugedeckt garen, bis das Fleisch sich leicht vom Knochen lösen lässt.</p>
       <p>Die Beilage haben wir uns von Claudia Roden abgeschaut. Die Kochbuchautorin ist eine nach London  ausgewanderte ägyptische Jüdin, sie könnte Ottolenghis Großmutter sein und bereitet Bulgur so zu:  Die Körner in Salzwasser gar kochen, vor dem  Servieren klein gehackte Cranberrys, geröstete Pinienkerne  und Butter unterrühren. Salzen und pfeffern.</p>
@@ -158,8 +158,8 @@
     <subtitle>Safran, Salzzitronen, Anis, Bulgur – ein paar ungewöhnliche Zutaten genügen, damit Ihre Freunde und Sie selbst glauben können, Sie seien ein guter Koch.</subtitle>
     <division xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="page" teaser="Libanesischer Aniskuchen">
       <image src="http://xml.zeit.de/zeit-magazin/essen-trinken/2014-05/Aniskuchen-kochen-freunde-inline/Aniskuchen-kochen-freunde-inline-zmo-landscape-large.jpg" type="jpg" align="left" publication-date="" expires="" layout="zmo-small-left" is_empty="False" set-manually="True">
-        <bu py:pytype="str">Ein Kuchen ohne Butter und Eier, dafür mit Kurkuma, auch Gelbwurz genannt</bu>
-        <copyright py:pytype="str">© Jason Lowe</copyright>
+        <bu>Ein Kuchen ohne Butter und Eier, dafür mit Kurkuma, auch Gelbwurz genannt</bu>
+        <copyright>© Jason Lowe</copyright>
       </image>
       <intertitle>Dessert</intertitle>
       <p><em>Libanesischer Aniskuchen</em> – für ungefähr 8 Personen</p>

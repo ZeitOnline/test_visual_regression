@@ -57,7 +57,7 @@
       <p ns0:__name__="id-654a421b-01c5-4e91-bcb8-e811ad6959e1">text paragraph 1</p>
       <gallery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" is_empty="False" href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-2" year="2008" issue="26" ressort="Lebensart" contenttype="gallery" publication-date="" expires="" ns0:__name__="id-bd0af3e4-3df2-4ab0-abe9-7b56d823b529">
         <supertitle xsi:nil="true"/>
-        <title py:pytype="str">Wandzeichnungen</title>
+        <title>Wandzeichnungen</title>
         <text xsi:nil="true"/>
         <description xsi:nil="true"/>
         <byline xsi:nil="true"/>

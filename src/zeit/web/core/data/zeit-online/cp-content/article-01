@@ -2,7 +2,7 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-1" type="jpg" title="Die ist der Titel" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
-      <bu py:pytype="str">Die ist der image sub text</bu>
+      <bu>Die ist der image sub text</bu>
       <copyright link="http://foo.de">©foo</copyright>
     </image>
     <badges>
@@ -13,7 +13,7 @@
       <badge>video</badge>
     </badges>
     <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
-      <display_name py:pytype="str">Anne Mustermann</display_name>
+      <display_name>Anne Mustermann</display_name>
       <location>Berlin</location>
     </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
@@ -46,15 +46,15 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:4e2c9a3b-c89e-4b39-bb04-371fb84dd665}</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
     <author expires="" href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="">
-            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <display_name>Armin Mustermann</display_name>
             <location>Berlin</location>
     </author>
     <!--author expires="" href="http://xml.zeit.de/autoren/author3" publication-date="">
-            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <display_name>Armin Mustermann</display_name>
             <location>Berlin</location>
     </author>
     <author expires="" href="http://xml.zeit.de/autoren/author4" publication-date="">
-            <display_name py:pytype="str">Armin Mustermann</display_name>
+            <display_name>Armin Mustermann</display_name>
             <location>Berlin</location>
     </author-->
 
@@ -81,7 +81,7 @@
     <subtitle>subtitle - article image asset</subtitle>
     <division type="page">
       <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="large" is_empty="False">
-        <bu py:pytype="str">Die ist der image sub text</bu>
+        <bu>Die ist der image sub text</bu>
         <copyright link="http://foo.de">©foo</copyright>
       </image>
       <p/>

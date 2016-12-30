@@ -1,12 +1,12 @@
 <gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
     <head>
         <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
-          <display_name py:pytype="str">Heike Jahberg</display_name>
+          <display_name>Heike Jahberg</display_name>
         </author>
         <image-folder>http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/</image-folder>
         <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/" type="jpg" title="Eine Frau isst Paprikasuppe" alt="Eine Frau isst Paprikasuppe" align="left" publication-date="" expires="2014-05-18T07:51:24+00:00">
-            <bu py:pytype="str">Paprikasuppe löffelweise</bu>
-            <copyright py:pytype="str">© Jason Lowe</copyright>
+            <bu>Paprikasuppe löffelweise</bu>
+            <copyright>© Jason Lowe</copyright>
         </image>
         <badges>
             <badge>gallery</badge>
@@ -46,7 +46,7 @@
         <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:1d13d7af-cc9e-4b97-9d28-5be90f5bc574}</attribute>
         <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">14</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
-         <attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+         <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;
       &lt;global name="Provides" module="zope.interface.declarations"/&gt;
@@ -91,11 +91,11 @@
                     <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
                     <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg" type="jpg" publication-date="" expires="">
                     <bu xsi:nil="true"/>
-                    <copyright py:pytype="str">©</copyright>
+                    <copyright>©</copyright>
                     </image>
                     <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer-bilder/13-Traum_barrymanilow_zeitmagazintraum_SCplusV2.jpg" type="jpg" publication-date="" expires="">
                     <bu xsi:nil="true"/>
-                    <copyright py:pytype="str">©</copyright>
+                    <copyright>©</copyright>
                     </thumbnail>
                 </block>
                 <block layout="image-only" name="03-desktop-schreibtisch-computer-digital.jpg">

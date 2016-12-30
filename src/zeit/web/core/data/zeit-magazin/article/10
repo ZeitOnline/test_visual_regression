@@ -2,10 +2,10 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <author href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
-      <display_name py:pytype="str">Anne Mustermann</display_name>
+      <display_name>Anne Mustermann</display_name>
     </author>
     <author href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
-      <display_name py:pytype="str">Armin Mustermann</display_name>
+      <display_name>Armin Mustermann</display_name>
       <location>Bitterfeld</location>
     </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>

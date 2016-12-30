@@ -3,10 +3,10 @@
   <head>
     <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/images/harald-martenstein-diskriminierung-png-test/" type="png" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
-      <copyright py:pytype="str">© Fengel</copyright>
+      <copyright>© Fengel</copyright>
     </image>
     <author href="http://xml.zeit.de/autoren/E/Maria_Exner/index" publication-date="" expires="">
-      <display_name py:pytype="str">Maria Exner</display_name>
+      <display_name>Maria Exner</display_name>
     </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
@@ -57,7 +57,7 @@
     <division type="page">
       <image base-id="http://xml.zeit.de/zeit-magazin/images/harald-martenstein-diskriminierung-png-test/" type="png" align="left" publication-date="" expires="" layout="large" is_empty="False">
         <bu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-        <copyright py:pytype="str">© Fengel</copyright>
+        <copyright>© Fengel</copyright>
       </image>
       <p>Lorem dolorem<br/></p>
     </division>

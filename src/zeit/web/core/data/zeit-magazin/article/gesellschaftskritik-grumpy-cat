@@ -7,13 +7,13 @@
       <tag type="free" url_value="katzen" uuid="c62c0ec4-4710-4c45-a41f-837f390f75a9" ns10:pytype="str">Katzen</tag>
     </rankedTags>
     <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/M/Christine_Meffert/index.xml" publication-date="" expires="">
-      <display_name py:pytype="str">Christine Meffert</display_name>
+      <display_name>Christine Meffert</display_name>
     </author>
     <references>
       <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ns0="http://namespaces.zeit.de/CMS/link" type="intern" href="http://xml.zeit.de/gesellschaft/zeitgeschehen/2013-07/link-serie-gesellschaftskritik" year="2013" issue="28" ressort="Gesellschaft" contenttype="link" publication-date="" expires="" ns0:href="http://www.zeit.de/serie/gesellschaftskritik">
-        <supertitle py:pytype="str">Serie</supertitle>
-        <teaser_supertitle py:pytype="str">Serie</teaser_supertitle>
-        <title py:pytype="str">Lesen Sie hier alle Artikel aus der Gesellschaftskritik</title>
+        <supertitle>Serie</supertitle>
+        <teaser_supertitle>Serie</teaser_supertitle>
+        <title>Lesen Sie hier alle Artikel aus der Gesellschaftskritik</title>
         <text xsi:nil="true"/>
         <description xsi:nil="true"/>
         <byline xsi:nil="true"/>
@@ -21,8 +21,8 @@
       </reference>
     </references>
     <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/grumpy-cat/" type="jpg" title="Grumpy Cat bei den MTV Movie Awards 2014" alt="Grumpy Cat bei den MTV Movie Awards 2014" align="left" publication-date="" expires="">
-      <bu py:pytype="str">Grumpy Cat bei den MTV Movie Awards 2014</bu>
-      <copyright py:pytype="str">© Jason Merritt/Getty Images</copyright>
+      <bu>Grumpy Cat bei den MTV Movie Awards 2014</bu>
+      <copyright>© Jason Merritt/Getty Images</copyright>
     </image>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
@@ -98,8 +98,8 @@
     <byline>von Christine Meffert</byline>
     <division type="page">
       <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/grumpy-cat/" type="jpg" title="Grumpy Cat bei den MTV Movie Awards 2014" alt="Grumpy Cat bei den MTV Movie Awards 2014" align="left" publication-date="" expires="" is_empty="False" layout="large">
-        <bu py:pytype="str">Grumpy Cat bei den MTV Movie Awards 2014</bu>
-        <copyright py:pytype="str">© Jason Merritt/Getty Images</copyright>
+        <bu>Grumpy Cat bei den MTV Movie Awards 2014</bu>
+        <copyright>© Jason Merritt/Getty Images</copyright>
       </image>
       <p>Es ist selten geworden, dass man mit schlechter Laune ein Star wird. Die Kultur der schlechten Laune ist mit Figuren wie Ekel Alfred und Oskar aus der Mülltonne untergegangen.</p>
       <p>Heute haben die Figuren auf den Bildschirmen gefälligst supergut drauf zu sein, dass heißt nicht zwangsläufig nett und lieb – siehe Dieter Bohlen –, aber bitte bloß nicht "schlecht gelaunt". Wenn einer "schlecht gelaunt" rüberkommt, ist das fast schon sein mediales Todesurteil, da mag der schlecht Gelaunte noch so viel auf dem Kasten haben und noch so viele Gründe für schlechte Laune.</p>

@@ -138,8 +138,8 @@
                         <byline xsi:nil="true"/>
                         <breadcrumb_title xsi:nil="true"/>
                         <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/" type="jpg" title="Eine Frau isst Paprikasuppe" alt="Eine Frau isst Paprikasuppe" align="left" publication-date="" expires="2014-05-18T07:51:24+00:00">
-                            <bu py:pytype="str">Paprikasuppe löffelweise</bu>
-                            <copyright py:pytype="str">© Jason Lowe</copyright>
+                            <bu>Paprikasuppe löffelweise</bu>
+                            <copyright>© Jason Lowe</copyright>
                         </image>
                     </block>
                 </container>

@@ -10,41 +10,41 @@
   <external xmlns:py="http://codespeak.net/lxml/objectify/pytype">false</external>
   <image_group xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/autoren/B/Jochen_Bittner/jochen-bittner-2/" type="" align="left" publication-date="" expires="">
     <bu xsi:nil="true"/>
-    <copyright py:pytype="str">© Michael Heck</copyright>
+    <copyright>© Michael Heck</copyright>
   </image_group>
   <twitter xmlns:py="http://codespeak.net/lxml/objectify/pytype">jochenbittner</twitter>
   <biography xmlns:py="http://codespeak.net/lxml/objectify/pytype">Wollte immer Journalist werden, studierte aber neben der freien Schreiberei – u. a. für die "Kieler Nachrichten", die "FAZ" und die "Welt" – erst einmal Jura und Philosophie.
 Nach einer Promotion über die IRA in Belfast kam er 2001 zur Politischen Redaktion der ZEIT. Von 2007 bis 2011 Europa-Korrespondent in Brüssel. Verantwortlich für die Meinungsseiten der Politik.</biography>
   <favourites>
     <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2003/45/Amerika_2fIrak" year="2003" issue="45" ressort="Politik" contenttype="article" publication-date="" expires="">
-      <supertitle py:pytype="str">USA</supertitle>
-      <title py:pytype="str">Prinzip Ofenrohr</title>
-      <text py:pytype="str">Ein Geheim-Büro im Pentagon schrieb Horrormeldungen über das irakische Waffenarsenal zusammen. Sie landeten direkt beim Präsidenten. Die CIA steuerte politisch maßgeschneiderte Analysen bei. Zum ersten Mal berichten Zeugen</text>
-      <description py:pytype="str">Ein Geheim-Büro im Pentagon schrieb Horrormeldungen über das irakische Waffenarsenal zusammen. Sie landeten direkt beim Präsidenten. Die CIA steuerte politisch maßgeschneiderte Analysen bei. Zum ersten Mal berichten Zeugen</description>
-      <byline py:pytype="str">Von Jochen Bittner und Thomas Kleine-Brockhoff</byline>
+      <supertitle>USA</supertitle>
+      <title>Prinzip Ofenrohr</title>
+      <text>Ein Geheim-Büro im Pentagon schrieb Horrormeldungen über das irakische Waffenarsenal zusammen. Sie landeten direkt beim Präsidenten. Die CIA steuerte politisch maßgeschneiderte Analysen bei. Zum ersten Mal berichten Zeugen</text>
+      <description>Ein Geheim-Büro im Pentagon schrieb Horrormeldungen über das irakische Waffenarsenal zusammen. Sie landeten direkt beim Präsidenten. Die CIA steuerte politisch maßgeschneiderte Analysen bei. Zum ersten Mal berichten Zeugen</description>
+      <byline>Von Jochen Bittner und Thomas Kleine-Brockhoff</byline>
       <breadcrumb_title xsi:nil="true"/>
     </reference>
     <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2009/36/Gluehbirne" year="2009" issue="36" ressort="Politik" contenttype="article" publication-date="" expires="">
-      <supertitle py:pytype="str">EU</supertitle>
-      <title py:pytype="str">Ein Schlag  auf die  Birne</title>
-      <text py:pytype="str">Heute tritt das EU-weite Glühbirnenverbot in Kraft. Aber wie kam es eigentlich in die Welt? Eine Geschichte über die Macht Brüsseler Bürokraten.</text>
-      <description py:pytype="str">Heute tritt das EU-weite Glühbirnenverbot in Kraft. Aber wie kam es eigentlich in die Welt? Eine Geschichte über die Macht Brüsseler Bürokraten.</description>
-      <byline py:pytype="str">Von Jochen Bittner</byline>
+      <supertitle>EU</supertitle>
+      <title>Ein Schlag  auf die  Birne</title>
+      <text>Heute tritt das EU-weite Glühbirnenverbot in Kraft. Aber wie kam es eigentlich in die Welt? Eine Geschichte über die Macht Brüsseler Bürokraten.</text>
+      <description>Heute tritt das EU-weite Glühbirnenverbot in Kraft. Aber wie kam es eigentlich in die Welt? Eine Geschichte über die Macht Brüsseler Bürokraten.</description>
+      <byline>Von Jochen Bittner</byline>
       <breadcrumb_title xsi:nil="true"/>
       <image base-id="http://xml.zeit.de/bilder/2009/36/politik/deutschland/birne/" type="jpg" title="Glühbirne" alt="Glühbirne" align="left" publication-date="" expires="">
-        <bu py:pytype="str">Das Ende der klassischen Glühbirne naht</bu>
-        <copyright py:pytype="str">© Sean Gallup/Getty Images</copyright>
+        <bu>Das Ende der klassischen Glühbirne naht</bu>
+        <copyright>© Sean Gallup/Getty Images</copyright>
       </image>
     </reference>
     <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2014/02/david-cameron-europa-reformen" year="2014" issue="2" ressort="Politik" contenttype="article" publication-date="2014-01-09T01:43:34+00:00" expires="" author="Jochen Bittner">
-      <supertitle py:pytype="str">David Cameron</supertitle>
-      <title py:pytype="str">Wenn nicht jetzt, wann dann?</title>
-      <text py:pytype="str">Großbritanniens Premier David Cameron hat die besten Reformideen für Europa. Angela Merkel sollte sich daran orientieren</text>
-      <description py:pytype="str">Großbritanniens Premier David Cameron hat die besten Reformideen für Europa. Angela Merkel sollte sich daran orientieren</description>
-      <byline py:pytype="str">von  Jochen Bittner</byline>
+      <supertitle>David Cameron</supertitle>
+      <title>Wenn nicht jetzt, wann dann?</title>
+      <text>Großbritanniens Premier David Cameron hat die besten Reformideen für Europa. Angela Merkel sollte sich daran orientieren</text>
+      <description>Großbritanniens Premier David Cameron hat die besten Reformideen für Europa. Angela Merkel sollte sich daran orientieren</description>
+      <byline>von  Jochen Bittner</byline>
       <breadcrumb_title xsi:nil="true"/>
       <author href="http://xml.zeit.de/autoren/B/Jochen_Bittner/index.xml" publication-date="" expires="">
-        <display_name py:pytype="str">Jochen Bittner</display_name>
+        <display_name>Jochen Bittner</display_name>
       </author>
     </reference>
   </favourites>

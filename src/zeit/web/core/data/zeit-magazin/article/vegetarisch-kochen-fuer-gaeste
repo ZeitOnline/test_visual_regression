@@ -7,51 +7,51 @@
       <tag type="free" url_value="vegetarische-ernaehrung" uuid="4ce9df78-500c-46f8-b7ba-c3ae47d46ace" ns10:pytype="str">Vegetarische Ernährung</tag>
     </rankedTags>
     <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
-      <display_name py:pytype="str">Elisabeth Raether</display_name>
+      <display_name>Elisabeth Raether</display_name>
     </author>
     <references>
       <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/lebensart/essen-trinken/2013-11/stevan-paul-kochbuch-deutschland-vegetarisch" year="2013" issue="46" ressort="Lebensart" author="Kirsten Haake" contenttype="article" publication-date="" expires="">
-        <supertitle py:pytype="str">Serie Amuse Buch</supertitle>
-        <teaser_supertitle py:pytype="str">Serie Amuse Buch</teaser_supertitle>
-        <title py:pytype="str">Der Speck kann weg</title>
-        <text py:pytype="str">Schnüsch und Kirschenmichel: Stevan Paul hat mit "Deutschland vegetarisch" einen Kochbuch-Klassiker geschrieben. Er erinnert darin an vergessen geglaubte Gerichte.</text>
-        <description py:pytype="str">Schnüsch und Kirschenmichel: Stevan Paul hat mit "Deutschland vegetarisch" einen Kochbuch-Klassiker geschrieben. Er erinnert darin an vergessen geglaubte Gerichte.</description>
+        <supertitle>Serie Amuse Buch</supertitle>
+        <teaser_supertitle>Serie Amuse Buch</teaser_supertitle>
+        <title>Der Speck kann weg</title>
+        <text>Schnüsch und Kirschenmichel: Stevan Paul hat mit "Deutschland vegetarisch" einen Kochbuch-Klassiker geschrieben. Er erinnert darin an vergessen geglaubte Gerichte.</text>
+        <description>Schnüsch und Kirschenmichel: Stevan Paul hat mit "Deutschland vegetarisch" einen Kochbuch-Klassiker geschrieben. Er erinnert darin an vergessen geglaubte Gerichte.</description>
         <byline xsi:nil="true"/>
-        <breadcrumb_title py:pytype="str">Ein Lob auf das Kochbuch "Deutschland vegetarisch"</breadcrumb_title>
+        <breadcrumb_title>Ein Lob auf das Kochbuch "Deutschland vegetarisch"</breadcrumb_title>
         <image base-id="http://xml.zeit.de/lebensart/essen-trinken/2013-11/semmelknoedel/" type="jpg" title="semmelknödel mit rahmkraut" alt="Semmelknödel mit Rahmkraut aus &quot;Deutschland vegetarisch&quot;" align="left" publication-date="" expires="">
-          <bu py:pytype="str">Dreierlei Klöße aus "Deutschland vegetarisch"</bu>
-          <copyright py:pytype="str">© Kramp + Gölling</copyright>
+          <bu>Dreierlei Klöße aus "Deutschland vegetarisch"</bu>
+          <copyright>© Kramp + Gölling</copyright>
         </image>
         <author href="http://xml.zeit.de/autoren/H/Kirsten _Haake/index" publication-date="" expires="">
-          <display_name py:pytype="str">Kirsten Haake</display_name>
+          <display_name>Kirsten Haake</display_name>
         </author>
       </reference>
       <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2014/14/infografik-fleischersatz-ernaehrung" year="2014" issue="14" ressort="Wissen" author="Bernd Eberhart;Haika Hinze;Jelka Lerche" contenttype="article" publication-date="2014-03-27T01:03:00+00:00" expires="">
-        <supertitle py:pytype="str">Wissen in Bildern</supertitle>
-        <teaser_supertitle py:pytype="str">Wissen in Bildern</teaser_supertitle>
-        <title py:pytype="str">Fleischnix &amp; Primus Tofu</title>
-        <text py:pytype="str">Aus Überzeugung nur Möhren und Salat? Das muss nicht sein. Auch Vegetarier essen Steaks und Spaghetti Bolognese. Aber was steckt in tierfreundlichen Fleischalternativen?</text>
-        <description py:pytype="str">Aus Überzeugung nur Möhren und Salat? Das muss nicht sein. Auch Vegetarier essen Steaks und Spaghetti Bolognese. Aber was steckt in tierfreundlichen Fleischalternativen?</description>
-        <byline py:pytype="str">von Bernd Eberhart</byline>
+        <supertitle>Wissen in Bildern</supertitle>
+        <teaser_supertitle>Wissen in Bildern</teaser_supertitle>
+        <title>Fleischnix &amp; Primus Tofu</title>
+        <text>Aus Überzeugung nur Möhren und Salat? Das muss nicht sein. Auch Vegetarier essen Steaks und Spaghetti Bolognese. Aber was steckt in tierfreundlichen Fleischalternativen?</text>
+        <description>Aus Überzeugung nur Möhren und Salat? Das muss nicht sein. Auch Vegetarier essen Steaks und Spaghetti Bolognese. Aber was steckt in tierfreundlichen Fleischalternativen?</description>
+        <byline>von Bernd Eberhart</byline>
         <breadcrumb_title xsi:nil="true"/>
         <image base-id="http://xml.zeit.de/wissen/2014-03/s45-infografik-fleischalternativen/" type="jpg" align="left" href="http://images.zeit.de/wissen/2014-03/s45-infografik-fleischalternativen.pdf" publication-date="2014-03-28T01:01:00+00:00" expires="">
-          <bu py:pytype="str">Klicken Sie auf das Bild, um die Grafik als PDF herunterzuladen.</bu>
-          <copyright py:pytype="str">© H. Hinze/J. Lerche/P. M. Hoffmann/B. Eberhart</copyright>
+          <bu>Klicken Sie auf das Bild, um die Grafik als PDF herunterzuladen.</bu>
+          <copyright>© H. Hinze/J. Lerche/P. M. Hoffmann/B. Eberhart</copyright>
         </image>
         <author href="http://xml.zeit.de/autoren/E/Bernd_Eberhart/index" publication-date="" expires="">
-          <display_name py:pytype="str">Bernd Eberhart</display_name>
+          <display_name>Bernd Eberhart</display_name>
         </author>
         <author href="http://xml.zeit.de/autoren/H/Haika_Hinze/index" publication-date="" expires="">
-          <display_name py:pytype="str">Haika Hinze</display_name>
+          <display_name>Haika Hinze</display_name>
         </author>
         <author href="http://xml.zeit.de/autoren/L/Jelka_Lerche/index" publication-date="" expires="">
-          <display_name py:pytype="str">Jelka Lerche</display_name>
+          <display_name>Jelka Lerche</display_name>
         </author>
       </reference>
     </references>
     <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" title="Das Pistazienparfait wird verspeist" alt="Das Pistazienparfait wird verspeist" align="left" publication-date="" expires="2014-05-17T08:09:14+00:00">
-      <bu py:pytype="str">Das Pistazienparfait wird verspeist</bu>
-      <copyright py:pytype="str">© Silvio Knezevic</copyright>
+      <bu>Das Pistazienparfait wird verspeist</bu>
+      <copyright>© Silvio Knezevic</copyright>
     </image>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
@@ -125,8 +125,8 @@
     <byline>von Elisabeth Raether</byline>
     <division type="page">
       <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/zeit-magazin/2014/17/pistazienparfait/" type="jpg" title="Das Pistazienparfait wird verspeist" alt="Das Pistazienparfait wird verspeist" align="left" publication-date="" expires="2014-05-17T08:09:14+00:00" layout="large" is_empty="False">
-        <bu py:pytype="str">Das Pistazienparfait wird verspeist</bu>
-        <copyright py:pytype="str">© Silvio Knezevic</copyright>
+        <bu>Das Pistazienparfait wird verspeist</bu>
+        <copyright>© Silvio Knezevic</copyright>
       </image>
       <p>
         <strong>Vorspeise</strong>

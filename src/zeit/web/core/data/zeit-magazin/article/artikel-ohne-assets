@@ -9,19 +9,19 @@
       <tag url_value="dessert" uuid="65d605b9-b37b-418d-940d-48e9cb5ad68d" score="4" type="free">Dessert</tag>
     </rankedTags>
     <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
-      <display_name py:pytype="str">Elisabeth Raether</display_name>
+      <display_name>Elisabeth Raether</display_name>
     </author>
     <references>
       <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2014/09/stimmts-himalayasalz" year="2014" issue="9" ressort="Wissen" author="Christoph Drösser" contenttype="article" publication-date="2014-02-27T01:06:00+00:00" expires="">
-        <supertitle py:pytype="str">Artikel ohne Assets</supertitle>
-        <teaser_supertitle py:pytype="str">Artikel ohne Assets</teaser_supertitle>
-        <title py:pytype="str">Artikel ohne Assets</title>
-        <text py:pytype="str">Artikel ohne Assets</text>
-        <description py:pytype="str">Artikel ohne Assets</description>
-        <byline py:pytype="str"></byline>
-        <breadcrumb_title py:pytype="str">Stimmt's? Ist Himalayasalz besonders gesund?</breadcrumb_title>
+        <supertitle>Artikel ohne Assets</supertitle>
+        <teaser_supertitle>Artikel ohne Assets</teaser_supertitle>
+        <title>Artikel ohne Assets</title>
+        <text>Artikel ohne Assets</text>
+        <description>Artikel ohne Assets</description>
+        <byline></byline>
+        <breadcrumb_title>Stimmt's? Ist Himalayasalz besonders gesund?</breadcrumb_title>
         <author href="http://xml.zeit.de/autoren/D/Christoph_Droesser/index.xml" publication-date="" expires="">
-          <display_name py:pytype="str">Christoph Drösser</display_name>
+          <display_name>Christoph Drösser</display_name>
         </author>
       </reference>
     </references>
@@ -96,8 +96,8 @@
     <byline>von Elisabeth Raether</byline>
     <division type="page">
       <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" src="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/frau-isst-suppe-2-zmo-landscape-large.jpg" type="jpg" title="Eine Frau isst Paprikasuppe" alt="Eine Frau isst Paprikasuppe" align="left" publication-date="" expires="2014-05-18T07:51:24+00:00" layout="zmo-medium-center" is_empty="False">
-        <bu py:pytype="str">Paprikasuppe löffelweise</bu>
-        <copyright py:pytype="str">© Jason Lowe</copyright>
+        <bu>Paprikasuppe löffelweise</bu>
+        <copyright>© Jason Lowe</copyright>
       </image>
       <p>
         <strong>Vorspeise</strong>
@@ -138,8 +138,8 @@
     <subtitle>Artikel ohne Assets</subtitle>
     <division xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="page" teaser="Libanesischer Aniskuchen">
       <image src="http://xml.zeit.de/zeit-magazin/essen-trinken/2014-05/Aniskuchen-kochen-freunde-inline/Aniskuchen-kochen-freunde-inline-zmo-landscape-large.jpg" type="jpg" align="left" publication-date="" expires="" layout="zmo-small-left" is_empty="False" set-manually="True">
-        <bu py:pytype="str">Ein Kuchen ohne Butter und Eier, dafür mit Kurkuma, auch Gelbwurz genannt</bu>
-        <copyright py:pytype="str">© Jason Lowe</copyright>
+        <bu>Ein Kuchen ohne Butter und Eier, dafür mit Kurkuma, auch Gelbwurz genannt</bu>
+        <copyright>© Jason Lowe</copyright>
       </image>
       <intertitle>Dessert</intertitle>
       <p><em>Libanesischer Aniskuchen</em> – für ungefähr 8 Personen</p>

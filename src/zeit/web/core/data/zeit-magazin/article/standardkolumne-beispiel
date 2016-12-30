@@ -3,7 +3,7 @@
   <head>
     <references>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/ZMO-326/online-2-autoren-aktualisiert" year="2008" issue="26" ressort="Wirtschaft" author="Anne Mustermann;Armin Mustermann" contenttype="article" publication-date="" expires="" genre="interview">
-        <supertitle py:pytype="str">Too much</supertitle>
+        <supertitle>Too much</supertitle>
         <teaser_supertitle xsi:nil="true"/>
         <title xsi:nil="true"/>
         <text xsi:nil="true"/>
@@ -11,10 +11,10 @@
         <byline xsi:nil="true"/>
         <breadcrumb_title xsi:nil="true"/>
         <author href="http://xml.zeit.de/autoren/M/Anne_Mustermann/index" publication-date="" expires="">
-          <display_name py:pytype="str">Anne Mustermann</display_name>
+          <display_name>Anne Mustermann</display_name>
         </author>
         <author href="http://xml.zeit.de/autoren/M/Armin_Mustermann/index" publication-date="" expires="">
-          <display_name py:pytype="str">Armin Mustermann</display_name>
+          <display_name>Armin Mustermann</display_name>
           <location>Bitterfeld</location>
         </author>
       </reference>
@@ -72,7 +72,7 @@
 &lt;/pickle&gt;</attribute>
     <nextread>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/article/header-text-only" year="2008" issue="26" ressort="Lebensart" author="Carolin Emcke" contenttype="article" publication-date="" expires="">
-        <supertitle py:pytype="str">Flüchtlinge</supertitle>
+        <supertitle>Flüchtlinge</supertitle>
         <teaser_supertitle xsi:nil="true"/>
         <title xsi:nil="true"/>
         <text xsi:nil="true"/>
@@ -80,7 +80,7 @@
         <byline xsi:nil="true"/>
         <breadcrumb_title xsi:nil="true"/>
         <author href="http://xml.zeit.de/autoren/E/Carolin_Emcke-2/index" publication-date="" expires="">
-          <display_name py:pytype="str">Carolin Emcke</display_name>
+          <display_name>Carolin Emcke</display_name>
           <location>Eisenhüttenstadt</location>
         </author>
       </reference>
@@ -92,7 +92,7 @@
     <subtitle/>
     <division type="page">
       <image src="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/katzencontent.jpg" type="jpg" title_local="Dies ist die lokale Katze!" alt_local="Dies ist der lokale alt Text" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
-        <bu py:pytype="str">Die ist der image sub text</bu>
+        <bu>Die ist der image sub text</bu>
         <copyright link="http://foo.de">©foo</copyright>
       </image>
       <p><strong>Die Frage: </strong>Maria und Klaus haben zwei Kinder, Klaus findet, damit ist die Familienplanung abgeschlossen. Maria bedrückt es jedoch, dass sie nun nie wieder schwanger werden soll. Sie haben zwei Mädchen, sie hätte auch noch gerne einen Jungen. So bezirzt sie Klaus, es darauf ankommen zu lassen, es sei sowieso unwahrscheinlich, schwanger zu werden, solange ein Kind noch gestillt werde. Prompt kommt die dritte Schwangerschaft. Klaus schluckt seinen Ärger hinunter, geht zum Arzt und lässt sich sterilisieren. Maria ist fassungslos. "Du hättest das mit mir besprechen müssen!" – "Ich dachte, ich tue uns einen Gefallen", sagt Klaus. "Ich nehme dir den Verhütungsstress ab!" Aber das Gegenteil geschieht. Bald sind Klaus und Maria ein Elternpaar ohne Erotik.</p>

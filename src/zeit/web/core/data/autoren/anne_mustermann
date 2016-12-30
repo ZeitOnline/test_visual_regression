@@ -6,7 +6,7 @@
   <display_name>Anne Mustermann</display_name>
   <summary>Redakteurin in den Ressorts Wirtschaft, Karriere, Mobilität, ZEIT ONLINE.</summary>
   <image_group src="http://xml.zeit.de/zeit-online/cp-content/author_images/Julia_Zange/">
-    <bu py:pytype="str">Der Lobbyist Peter Hochegger (Archivfoto von 2010)</bu>
-    <copyright py:pytype="str">© Roland Schlager/dpa</copyright>
+    <bu>Der Lobbyist Peter Hochegger (Archivfoto von 2010)</bu>
+    <copyright>© Roland Schlager/dpa</copyright>
   </image_group>
 </author>

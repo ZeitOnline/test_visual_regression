@@ -47,7 +47,7 @@
     <cluster area="feature">
       <region area="lead" automatic="True" automatic_type="channel">
         <query>
-          <condition type="Channel" py:pytype="str">Wirtschaft Boerse</condition>
+          <condition type="Channel">Wirtschaft Boerse</condition>
         </query>
         <container cp:type="auto-teaser" module="leader" cp:__name__="id-0b6f3d4c-7d98-4def-9867-9b4353069741"/>
         <container cp:type="auto-teaser" module="buttons" cp:__name__="id-3530bbb4-4d6a-4131-b716-93731b16b5a1"/>

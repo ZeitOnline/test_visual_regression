@@ -2,7 +2,7 @@
 <article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
   <head>
     <author href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="" expires="">
-      <display_name py:pytype="str">Armin Mustermann</display_name>
+      <display_name>Armin Mustermann</display_name>
     </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
@@ -60,7 +60,7 @@
     <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen – aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
     <division type="page">
       <image src="http://xml.zeit.de/exampleimages/artikel/briefmarke.jpg" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
-        <bu py:pytype="str">Die ist der image sub text</bu>
+        <bu>Die ist der image sub text</bu>
         <copyright link="http://foo.de">©foo</copyright>
       </image>
       <p>Leipzig hat in den letzten Jahren viele neue Spitznamen bekommen.<a class="" href="http://www.faz.net/aktuell/politik/inland/leipzig-dieser-ort-ist-kein-traum-11525236.html" target="_blank">"Disneyland des Unperfekten"</a> wurde die Stadt in einem Artikel der <em>FAZ</em>getauft, für ihre illegalen Klubs, die Raves im Wald, die Altbauwohnungen für 300 Euro Warmmiete. Dann wurde die klassische bürgerliche Kultur in Oper, Theatern und Konzerthäusern dazugerechnet und die Universität, die jährlich 28.000 Studenten anzieht, und Leipzig wurde zum neuen Berlin. Tolerant und offen sei die Stadt zudem, auch ein <a class="" href="http://www.zeit.de/2012/12/S-Homosexualitaet-Leipzig" target="_blank">"Biotop der Schwulenszene"</a>, wie die ZEIT berichtete. Als Sammelbegriff für die anhaltende mediale Aufmerksamkeit für Sachsens zweitgrößte Stadt hat sich schließlich "Hypezig" etabliert.</p>
