@@ -17,6 +17,8 @@ POSTDEPLOY
 
 - ZON-3588: Automate event tracking for article body
 
+- BUG-613: Show authorbox custom description if defined
+
 - FIX: Be defensive about invalid requests for legacy keyword redirects
 
 - MAINT: Replace library `freewall` with `masonry`
