@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
+<container xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
   <supertitle>Diese Studenten</supertitle>
   <block>
     <title>Opportunisten</title>

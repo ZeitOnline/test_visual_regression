@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
   <head>
     <header_image/>
     <rankedTags xmlns:ns0="http://namespaces.zeit.de/CMS/tagging">
@@ -89,9 +89,9 @@
             <xi:fallback>Ziel http://xml.zeit.de/broken/reference.lead nicht erreichbar.</xi:fallback>
           </xi:include>
           <topiclinks>
-            <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index" py:pytype="str">Ukraine</topiclink>
-            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index" py:pytype="str">Raumsonde</topiclink>
-            <topiclink href="http://www.zeit.de/sport/schach-wm-2014" py:pytype="str">Schach-WM 2014</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index">Ukraine</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index">Raumsonde</topiclink>
+            <topiclink href="http://www.zeit.de/sport/schach-wm-2014">Schach-WM 2014</topiclink>
           </topiclinks>
         </container>
         <container cp:type="placeholder" module="placeholder" cp:__name__="id-5b0d52bd-4beb-4602-b68a-6f00bdcb23c8"/>
@@ -104,9 +104,9 @@
             <xi:fallback>Ziel http://xml.zeit.de/broken/reference.lead nicht erreichbar.</xi:fallback>
           </xi:include>
           <topiclinks>
-            <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index" py:pytype="str">Ukraine</topiclink>
-            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index" py:pytype="str">Raumsonde Rosetta</topiclink>
-            <topiclink href="http://www.zeit.de/sport/schach-wm-2014" py:pytype="str">Schach-WM 2014</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index">Ukraine</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index">Raumsonde Rosetta</topiclink>
+            <topiclink href="http://www.zeit.de/sport/schach-wm-2014">Schach-WM 2014</topiclink>
           </topiclinks>
         </container>
         <container cp:type="placeholder" module="placeholder" cp:__name__="id-f9b0fb9d-9c0e-4e51-a17a-84f8a4db5958"/>
@@ -120,9 +120,9 @@
             <xi:fallback>Ziel http://xml.zeit.de/index.lead nicht erreichbar.</xi:fallback>
           </xi:include>
           <topiclinks>
-            <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index" py:pytype="str">Ukraine</topiclink>
-            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index" py:pytype="str">Raumsonde Rosetta</topiclink>
-            <topiclink href="http://www.zeit.de/sport/schach-wm-2014" py:pytype="str">Schach-WM 2014</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/orte/ukraine/index">Ukraine</topiclink>
+            <topiclink href="http://www.zeit.de/schlagworte/themen/rosetta/index">Raumsonde Rosetta</topiclink>
+            <topiclink href="http://www.zeit.de/sport/schach-wm-2014">Schach-WM 2014</topiclink>
           </topiclinks>
         </container>
         <container cp:type="placeholder" module="placeholder" cp:__name__="id-f9b0fb9d-9c0e-4e51-a17a-84f8a4db5958"/>
