@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
-      <bu py:pytype="str">Die ist der image sub text</bu>
+      <bu>Die ist der image sub text</bu>
       <copyright link="http://foo.de">©foo</copyright>
     </image>
     <badges>
@@ -13,7 +13,7 @@
       <badge>video</badge>
     </badges>
     <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
-      <display_name py:pytype="str">Anne Mustermann</display_name>
+      <display_name>Anne Mustermann</display_name>
       <location>Berlin</location>
     </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
@@ -66,7 +66,7 @@
     <subtitle>subtitle - article image asset</subtitle>
     <division type="page">
       <image base-id="http://xml.zeit.de/zeit-magazin/centerpage/katzencontent/" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="" layout="large" is_empty="False">
-        <bu py:pytype="str">Die ist der image sub text</bu>
+        <bu>Die ist der image sub text</bu>
         <copyright link="http://foo.de">©foo</copyright>
       </image>
       <p/>

@@ -4,6 +4,9 @@
 {% set href = image.href %}
 {% set image_itemprop = 'image' %}
 
+{% block image_additional_data_attributes %} data-ct-block="image"{% endblock %}
+{% block image_link_additional_data_attributes %} data-ct-label="image"{% endblock %}
+
 {% block media_block -%}
 {{ {'large': 'figure-full-width',
     'column-width': 'figure is-constrained is-centered',

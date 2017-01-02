@@ -1,41 +1,42 @@
-#stoa-artikelanker
-    margin: $vertical-space 0
-    +unpadded
-
 .stoa
-    display: block
-    background-color: $color-tools-primary
-    color: $white
-    text-align: center
-    +on-interaction
-        color: $color-text
-        .stoa__button
-            border: 3px solid $color-text
+	+font-smoothing
+	+unpadded
+	+padded
+	background-color: $color-tools-primary
+	color: $white
+	margin-bottom: remify(30px)
+	margin-top: remify(30px)
+	padding-bottom: remify(20px)
+	padding-top: remify(20px)
+	text-align: center
 
-    &__title
-        +font-smoothing
-        @extend %font-beckett
-        +scaled-font(30px, $title-factor) // adapted to handle long words
-        line-height: 1 // adapted to handle long words
-        display: block
-        padding: remify(20px 30px)
-        word-wrap: break-word
-    &__link
-        padding: remify(0px 30px 25px)
-        display: block
-        letter-spacing: .01em
-    &__button
-        @extend %cta-button-box
-        border: 3px solid $white
-        padding: remify(5px 20px)
-        display: block
-    &__icon
-        @extend %cta-button-icon
+	&__link
+		color: inherit
+		display: block
+		+on-interaction
+			color: $color-text
 
-+respond-min($break-tablet-min)
-    #stoa-artikelanker
-        +pie-clearfix
-        float: left
-        margin: $page-padding--small
-        width: remify(300px)
+	&__title
+		@extend %font-beckett
+		+scaled-font(30px, $title-factor) // adapted to handle long words
+		line-height: 1 // adapted to handle long words
+		margin: remify(0 0 12px)
+		word-wrap: break-word
 
+	&__button
+		color: inherit
+		display: inline-block
+
+	&__icon
+		@extend %cta-button-icon
+
+	+respond-min($break-tablet-min)
+		clear: left
+		float: left
+		margin: remify(8px 20px 20px 0)
+		padding-bottom: remify(25px)
+		padding-top: remify(25px)
+		width: remify(300px)
+
+		&__title
+			margin-bottom: remify(18px)

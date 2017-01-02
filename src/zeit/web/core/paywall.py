@@ -94,6 +94,12 @@ class CeleraOneMixin(object):
         return access_source.translate_to_c1(access)
 
     @zeit.web.reify
+    def _c1_entitlement_id(self):
+        return None if (
+            self._c1_entitlement == 'free' or self._c1_entitlement is None
+        ) else 'zeit-fullaccess'
+
+    @zeit.web.reify
     def _c1_cms_id(self):
         uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
         return getattr(uuid, 'id', None)
@@ -133,6 +139,7 @@ class CeleraOneMixin(object):
             'set_content_id': self._c1_content_id,
             'set_doc_type': self._c1_doc_type,
             'set_entitlement': self._c1_entitlement,
+            'set_entitlement_id': self._c1_entitlement_id,
             'set_heading': self._get_c1_heading(),
             'set_kicker': self._get_c1_kicker(),
             'set_service_id': 'zon'
@@ -148,6 +155,7 @@ class CeleraOneMixin(object):
             'C1-Track-Content-ID': self._c1_content_id,
             'C1-Track-Doc-Type': self._c1_doc_type,
             'C1-Track-Entitlement': self._c1_entitlement,
+            'C1-Track-Entitlement-ID': self._c1_entitlement_id,
             'C1-Track-Heading': self._get_c1_heading(self._headersafe),
             'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
             'C1-Track-Service-ID': 'zon'
@@ -161,8 +169,16 @@ class CeleraOneMixin(object):
 
         request = self.request
 
-        for req_header_name in request.headers:
-            if req_header_name.startswith('C1-Meter-'):
-                res_header_name = 'X-Debug-{}'.format(req_header_name)
-                res_header_value = request.headers.get(req_header_name, '')
-                request.response.headers[res_header_name] = res_header_value
+        headers = {}
+        headers.update(request.headers)
+        headers.update(request.response.headers)
+
+        # Since C1 strips our C1-Track-* Headers, but we want to see them,
+        # we "copy" them into X-Debug-Headers.
+        # And: we also want to echo the C1-Meter Headers comming from them
+        # on the 2nd round trip.
+        for name in headers:
+            if name.startswith('C1-'):
+                res_name = 'X-Debug-{}'.format(name)
+                value = headers.get(name, '')
+                request.response.headers[res_name] = value

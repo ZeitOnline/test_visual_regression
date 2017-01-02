@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
+import mock
+import pyramid.decorator
+import pyramid.interfaces
 import pytest
-import re
+import time
 import zope.component
 
 import zeit.solr.interfaces
+
+import zeit.web.core.template
 
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
@@ -15,20 +20,34 @@ from selenium.webdriver.support.ui import WebDriverWait
 @pytest.mark.parametrize(
     'teaser', [
         # teaser-classic solo
+        ('.teaser-classic .teaser-classic__media-item',
+         'solo.1.1.teaser-classic-zplus.image'),
         ('.teaser-classic .teaser-classic__combined-link',
-         '1.1.1.solo-teaser-classic-zplus.text'),
+         'solo.1.1.teaser-classic-zplus.text'),
+        ('.teaser-classic .teaser-classic__commentcount',
+         'solo.1.1.teaser-classic-zplus.comments'),
         # teaser-square minor
-        ('.teaser-square .teaser-square__combined-link',
-         '2.2.1.minor-teaser-square.text'),
+        # ('.cp-area--minor .teaser-square__media-item',
+        #  'minor.2.1.teaser-square.image'),
+        ('.cp-area--minor .teaser-square__combined-link',
+         'minor.2.1.teaser-square.text'),
+        ('.cp-area--minor .teaser-square__button',
+         'minor.2.1.teaser-square.button'),
         # teaser-small major
-        ('.teaser-small .teaser-small__combined-link',
-         '2.1.1.major-teaser-small.text'),
+        ('.cp-area--major .teaser-small__media-item',
+         'major.2.1.teaser-small.image'),
+        ('.cp-area--major .teaser-small__combined-link',
+         'major.2.1.teaser-small.text'),
+        ('.cp-area--major .teaser-small__commentcount',
+         'major.2.1.teaser-small.comments'),
         # teaser-small parquet
         ('.parquet-teasers .teaser-small .teaser-small__combined-link',
-         '3.1.1.parquet-teaser-small.text'),
+         'parquet-titel.3.1.teaser-small.text'),
         # teaser-large parquet
+        ('.parquet-teasers .teaser-large .teaser-large__commentcount',
+         'parquet-titel.4.1.teaser-large-zplus.comments'),
         ('.parquet-teasers .teaser-large .teaser-large__combined-link',
-         '4.1.1.parquet-teaser-large-zplus.text')
+         'parquet-titel.4.1.teaser-large-zplus.text')
     ])
 def test_cp_elements_provide_expected_id_for_webtrekk(
         selenium_driver, testserver, teaser):
@@ -49,10 +68,12 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     # mobile
     driver.set_window_size(400, 800)
 
-    teaser_el = driver.find_element_by_css_selector(teaser[0])
-    teaser_el.click()
-    track_str = driver.execute_script("return window.trackingData")
-    assert('mobile.' + teaser[1] in track_str)
+    # exclude testing for images on mobile
+    if 'teaser-small__media-item' not in teaser[0]:
+        teaser_el = driver.find_element_by_css_selector(teaser[0])
+        teaser_el.click()
+        track_str = driver.execute_script("return window.trackingData")
+        assert('mobile.' + teaser[1] in track_str)
 
     # phablet
     driver.set_window_size(520, 800)
@@ -79,18 +100,35 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     assert('stationaer.' + teaser[1] in track_str)
 
 
+@pytest.mark.parametrize(
+    'teasers', [
+        ('.teaser-classic .teaser-classic__combined-link',
+         '/zeit-online/article/02'),
+        ('.teaser-small .teaser-small__combined-link',
+         '/zeit-online/article/01'),
+        ('.teaser-square .teaser-square__combined-link',
+         '/zeit-online/gallery/biga_1')
+    ])
 def test_cp_element_provides_expected_url_for_webtrekk(
-        selenium_driver, testserver):
+        selenium_driver, testserver, teasers):
 
     driver = selenium_driver
+    driver.set_window_size(400, 800)
     driver.get('%s/zeit-online/webtrekk-test-setup'
                '#debug-clicktracking' % testserver.url)
-    driver.set_window_size(980, 800)
+    hostname = testserver.url.replace('http://', '')
 
-    teaser_el = driver.find_element_by_css_selector('.teaser-classic a')
-    teaser_el.click()
-    track_str = driver.execute_script("return window.trackingData")
-    assert('/zeit-online/article/02' in track_str)
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, teasers[0])))
+    except TimeoutException:
+        assert False, 'Element not locateable in 5 sec.'
+    else:
+        teaser_el = driver.find_element_by_css_selector(teasers[0])
+        teaser_el.click()
+        track_str = driver.execute_script('return window.trackingData;')
+        assert track_str.endswith('|%s%s' % (hostname, teasers[1]))
 
 
 def test_parquet_meta_provides_expected_webtrekk_strings(
@@ -104,14 +142,23 @@ def test_parquet_meta_provides_expected_webtrekk_strings(
     title = driver.find_element_by_css_selector('.parquet-meta__title')
     title.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert(re.search('stationaer.parquet.1.1..titel|'
-           '.*/zeit-online/parquet', track_str))
+    assert ('stationaer.parquet-titel.3.0.1.title|%s/zeit-online/parquet'
+            % testserver.url.replace('http://', '')) == track_str
 
-    link = driver.find_element_by_css_selector('.parquet-meta__links a')
-    link.click()
+    links = driver.find_elements_by_css_selector('.parquet-meta__links a')
+
+    for x in range(3):
+        links[x].click()
+        track_str = driver.execute_script("return window.trackingData")
+        identifier = 'stationaer.parquet-titel.3.0.{}.topiclink|{}'.format(
+            x + 2, links[x].get_attribute('href').replace('http://', ''))
+        assert identifier == track_str
+
+    title = driver.find_element_by_css_selector('.parquet-meta__more-link')
+    title.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert('stationaer.parquet.2.1..topiclink'
-           '|www.zeit.de/themen/krise-griechenland' in track_str)
+    assert track_str == (
+        'stationaer.parquet-titel.3.0.5.morelink|www.zeit.de/politik/index')
 
 
 def test_buzzboard_provides_expected_webtrekk_strings(
@@ -127,21 +174,20 @@ def test_buzzboard_provides_expected_webtrekk_strings(
     header = driver.find_element_by_css_selector('.buzz-box__heading')
     header.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert(re.search('mobile.....buzz-box__heading.aufsteigend|'
-           '.*/zeit-online/buzz-box#buzz-trend', track_str))
+    assert track_str == 'mobile.minor.2..buzz-box.aufsteigend|#buzz-box'
 
     link = driver.find_element_by_css_selector('.teaser-buzz__combined-link')
     link.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert(re.search('mobile.1.2.2.minor-teaser-buzz.text|'
-           '.*/zeit-online/article/01', track_str))
+    assert track_str.startswith('mobile.minor.2.4.teaser-buzz.text|')
+    assert track_str.endswith('/zeit-online/article/01')
 
     # desktop
     driver.set_window_size(980, 800)
     link.click()
     track_str = driver.execute_script("return window.trackingData")
-    assert(re.search('stationaer.1.2.2.minor-teaser-buzz.text|'
-           '.*/zeit-online/article/01', track_str))
+    assert track_str.startswith('stationaer.minor.2.4.teaser-buzz.text|')
+    assert track_str.endswith('/zeit-online/article/01')
 
 
 @pytest.mark.parametrize(
@@ -178,21 +224,55 @@ def test_navi_provides_expected_webtrekk_strings(
 
 @pytest.mark.parametrize(
     'article', [
-        # intext
-        ('.paragraph a',
-         'intext.2/seite-1...cyborgs|www.zeit.de/digital'),
+        # serie
+        ('.article-series__heading',
+         'articleheader.series...chefsache'),
+        # author
+        ('.byline a',
+         'articleheader.author.1_of_1..anne_mustermann'),
+        # source
+        ('.metadata__source a',
+         'articleheader.source...erschienen_bei_vice|www.example.com/foo'),
+        # comment link
+        ('.metadata__commentcount',
+         'articleheader.comments...42_kommentare|#comments'),
         # toc
         ('.article-toc__link',
-         'article-toc.page_1_of_10...2'),
+         'article-toc.page_1_of_2...2'),
+        # intext
+        ('.paragraph a',
+         'article.2.seite-1.paragraph.kuendigung|www.zeit.de/karriere'),
+        # authorbox
+        ('.authorbox a',
+         'article.6.seite-1.authorbox.zur_autorenseite'),
+        # infobox
+        ('.infobox a',
+         'article.9.seite-1.infobox.crystal_meth|#crystal-meth-1-tab'),
+        # portraitbox
+        ('.portraitbox a',
+         'article.13.seite-1.portraitbox.pia_volk|piavolk.net'),
+        # pagination
+        ('.article-pagination__link',
+         'article-pager.page_1_of_2...naechste_seite'),
+        ('.article-pager a',
+         'article-pager.page_1_of_2...2'),
+        ('.article-pager__all a',
+         'article-pager.page_1_of_2...all'),
+        # tags
+        ('.article-tags a',
+         'articlebottom.article-tag.1..arbeitgeber'),
+        # sharing
+        ('.sharing-menu__title',
+         'articlebottom.social.0.1.teilen|#sharing-menu-list'),
         # nextread
         ('.nextread a',
-         'articlebottom.editorial-nextread...area'),
+         'articlebottom.editorial-nextread...area-zplus'),
     ])
 def test_article_elements_provide_expected_id_for_webtrekk(
         selenium_driver, testserver, article):
 
     driver = selenium_driver
-    driver.get('%s/campus/article/paginated#debug-clicktracking'
+    driver.get('%s/zeit-online/article/webtrekk-test#debug-clicktracking'
                % testserver.url)
 
     # prevent testfail at first run
@@ -341,19 +421,19 @@ def test_video_page_provides_expected_webtrekk_string(
 @pytest.mark.parametrize(
     'teasers', [
         ('.teaser-fullwidth a',
-         '1.1.1.solo-teaser-fullwidth-zplus.image'),
+         'solo.1.1.teaser-fullwidth-zplus.image'),
         ('.teaser-fullwidth-column a',
-         '2.1.1.solo-teaser-fullwidth-column-zplus.image'),
+         'solo.2.1.teaser-fullwidth-column-zplus.image'),
         ('.teaser-topic .teaser-topic-main a',
-         '5.1.1.topic-teaser-topic-main.text'),
+         'topic.5.1.teaser-topic-main.text'),
         ('.teaser-topic .teaser-topic-item a',
-         '5.1.2.topic-teaser-topic-item.text'),
-        ('.teaser-topic .teaser-topic-item[data-zplus="true"] a',
-         '5.1.3.topic-teaser-topic-item-zplus.text'),
-        ('.teaser-gallery[data-zplus="true"] a',
-         '6.1.2.gallery-teaser-gallery-zplus.image'),
+         'topic.5.2.teaser-topic-item.text'),
+        ('.teaser-topic .teaser-topic-item[data-zplus] a',
+         'topic.5.3.teaser-topic-item-zplus.text'),
+        ('.teaser-gallery[data-zplus] a',
+         'gallery.6.2.teaser-gallery-zplus.image'),
         ('.parquet-teasers .teaser-large  a',
-         '7.1.1.parquet-teaser-large-zplus.text')
+         'parquet-z_parkett.7.1.teaser-large-zplus.text')
     ])
 def test_zplus_provides_expected_webtrekk_strings(
         selenium_driver, testserver, teasers):
@@ -535,6 +615,12 @@ def test_zmo_article_pagination_provides_expected_webtrekk_string(
         assert tracking_data.startswith(
             'stationaer.article-pager.page_3_of_7...' + labels[index])
 
+    link = driver.find_element_by_css_selector('.comment-balloon__link')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.comment-balloon.comments...0_kommentare')
+
 
 def test_volume_teaser_provides_expected_webtrekk_string(
         selenium_driver, testserver):
@@ -554,9 +640,9 @@ def test_volume_teaser_provides_expected_webtrekk_string(
     link.click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'tablet.volumeteaser.2/seite-1...dieser_artikel_stammt_aus_der_zeit_'
-        'nr_01_2016_lesen_sie_diese_ausgabe_als_e_paper_app_und_auf_dem_e_'
-        'reader|premium.zeit.de/diezeit/2016/01')
+        'tablet.article.2.seite-1.volume-teaser.dieser_artikel_stammt_'
+        'aus_der_zeit_nr_01_2016_lesen_sie_diese_ausgabe_als_e_paper_app_'
+        'und_auf_dem_e_reader|premium.zeit.de/diezeit/2016/01')
 
 
 def test_volume_overview_teaser_provides_expected_webtrekk_string(
@@ -669,3 +755,156 @@ def test_volume_header_provides_expected_webtrekk_string(
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
         'stationaer.volume-header.teaser.1..sommer_in_berlin')
+
+
+def test_comment_form_provides_expected_webtrekk_string(
+        selenium_driver, testserver, application):
+    extensions = application.zeit_app.config.registry.getUtility(
+        pyramid.interfaces.IRequestExtensions)
+    with mock.patch.dict(extensions.descriptors, {
+            'user': pyramid.decorator.reify(lambda x: {
+                'name': 'john.doe',
+                'mail': 'test@example.org',
+                'ssoid': 123,
+                'has_community_data': True,
+                'uid': 123,
+            })}):
+        driver = selenium_driver
+        driver.set_window_size(1024, 768)
+        driver.get('%s/zeit-online/article/01#debug-clicktracking'
+                   % testserver.url)
+
+        try:
+            WebDriverWait(driver, 3).until(
+                expected_conditions.presence_of_element_located(
+                    (By.ID, 'comment-form')))
+        except TimeoutException:
+            assert False, 'comment form must be present'
+
+        form = driver.find_element_by_id('comment-form')
+
+        # fill out comment
+        form.find_element_by_tag_name('textarea').send_keys('Test')
+        # submit form
+        form.find_element_by_xpath('//input[@type="submit"]').click()
+
+        tracking_data = driver.execute_script("return window.trackingData")
+        assert tracking_data == (
+            'stationaer.comment_form.2.1..kommentar_senden|#comments')
+
+
+def test_inline_gallery_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    pathname = '/zeit-online/article/inline-gallery'
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('{}{}#debug-clicktracking'.format(testserver.url, pathname))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CLASS_NAME, 'bx-wrapper')))
+    except TimeoutException:
+        assert False, 'inline gallery must be present'
+
+    driver.find_element_by_class_name('bx-prev').click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_zurueck')
+    assert tracking_data.endswith(pathname)
+
+    driver.find_element_by_class_name('bx-next').click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_vor')
+    assert tracking_data.endswith(pathname)
+
+    driver.find_element_by_class_name('bx-overlay-prev').click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_zurueck')
+    assert tracking_data.endswith(pathname)
+
+    driver.find_element_by_class_name('bx-overlay-next').click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.article.6.seite-1.inline-gallery.ein_bild_vor')
+    assert tracking_data.endswith(pathname)
+
+
+def test_gallery_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    pathname = '/zeit-online/gallery/biga_1'
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('{}{}#debug-clicktracking'.format(testserver.url, pathname))
+
+    # prevent testfail on consecutive run
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.title_contains(
+                'Das hab ich auf dem Schirm'))
+    except TimeoutException:
+        assert False, 'page must be loaded'
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CLASS_NAME, 'bx-wrapper')))
+    except TimeoutException:
+        assert False, 'gallery must be present'
+
+    driver.find_element_by_class_name('bx-next').click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.gallery.1.2.2.ein_bild_vor')
+    assert tracking_data.endswith(pathname)
+
+    # wait for sliding animation
+    time.sleep(0.6)
+
+    driver.find_element_by_class_name('bx-prev').click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.gallery.1.1.1.ein_bild_zurueck')
+    assert tracking_data.endswith(pathname)
+
+    # wait for sliding animation
+    time.sleep(0.6)
+
+    driver.find_element_by_class_name('bx-overlay-next').click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.gallery.2.2.2.ein_bild_vor')
+    assert tracking_data.endswith(pathname)
+
+    # wait for sliding animation
+    time.sleep(0.6)
+
+    driver.find_element_by_class_name('bx-overlay-prev').click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.gallery.2.1.1.ein_bild_zurueck')
+    assert tracking_data.endswith(pathname)
+
+
+def test_buzz_box_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    pathname = '/zeit-online/buzz-box'
+    pattern = 'stationaer.minor.1..buzz-box.{}|#buzz-box'
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('{}{}#debug-clicktracking'.format(testserver.url, pathname))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CLASS_NAME, 'buzz-accordion')))
+    except TimeoutException:
+        assert False, 'buzz boxes must be present'
+
+    for header in driver.find_elements_by_class_name('buzz-box__heading'):
+        key = zeit.web.core.template.format_webtrekk(header.text)
+        header.click()
+        tracking_data = driver.execute_script("return window.trackingData")
+        assert tracking_data == pattern.format(key)

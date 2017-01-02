@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/R/Leonie_Ruhland/index">
+      <display_name>Leonie Ruhland</display_name>
+    </author>
+    <rankedTags>
+      <tag uuid="52263a74-ad42-4544-9c0f-d04aaaef1149" url_value="diy" type="free">DIY</tag>
+      <tag uuid="9cd74ff3-9048-4131-a4ca-477ac8cb2e86" url_value="design" type="free">Design</tag>
+    </rankedTags>
+    <nextread>
+      <reference href="http://xml.zeit.de/zeit-magazin/2016/47/lesezeichen-bommel-wundertuete"></reference>
+    </nextread>
+    <header/>
+    <image base-id="http://xml.zeit.de/zeit-magazin/images/kerzen-marmormuster/" type="jpg" caption_local="Marmorierte Kerzen"></image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">9317328</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Leonie Ruhland</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">zeit-magazin mode-design</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-12-20T05:49:00.504167+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-12-20T05:49:02.902899+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-12-20T05:49:03.161308+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-12-20T05:49:02.902899+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-12-20T05:49:02.244375+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">24.11.2016</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Zu marmorieren ist nicht schwer, dabei nicht zu kleckern umso mehr. Kerzen sind gut zum Üben. Sie sind billig und ein schönes Weihnachtsgeschenk.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Kerzen: Brennender Marmor </attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZMLB-2016-49-Wundertte-49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">Wundertüte 49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-12-20T05:48:58.524286+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.havertz</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">Wundertüte 49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">96</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/zeit-magazin/2016/49/Wundertte-49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2016-11-24T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZMLB</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT Magazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">20c3562026904cd9acf6fa54667d9605</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1378993011928</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">zeitmagazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZMLB-2016-49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Wundertüte</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Ein gutes, günstiges Geschenk von Herzen? Marmorieren Sie Kerzen! #wundertüte</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">mode-design</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">1367</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:dbc55bd5-8923-479a-93f3-3be570975b8b}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">49</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <title>Marmorierte Kerzen</title>
+    <byline>von Leonie Ruhland</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/zeit-magazin/images/kerzen-marmormuster/" type="jpg" publication-date="" expires="" display_mode="column-width" variant_name="tile" is_empty="False" caption_local="Marmorierte Kerzen" title_local="Marmorierte Kerzen" alt_local="Marmorierte Kerzen"></image>
+      <p>
+        <em>Man braucht: Marmorierfarben, Plastikbehälter, Holzstab zum Umrühren, Kerzen und Haushaltshandschuhe</em>
+      </p>
+      <p>Die New Yorkerin Clare McGibbon, 29, hat von klein auf viele Dinge am liebsten <a class="" href="http://www.zeit.de/thema/diy" target="_blank">selbst hergestellt</a>. Wie man marmoriert, lernte sie schon im Kindergarten. Auf etsy.com zeigte sie zuerst, wie das mit einem Schal funktioniert. Dann wollte sie es auch mit anderen Gegenständen probieren und kam auf die Idee mit den Kerzen. So geht’s: Man gibt ein paar Tropfen Marmorierfarbe in einen mit Wasser gefüllten Plastikbehälter, der groß genug ist, dass man die Kerzen darin komplett eintauchen kann (Marmorierfarbe bekommt man im Bastelladen oder online). McGibbon benutzt gern Schwarz und Weiß und empfiehlt, höchstens drei verschiedene Farben zugleich zu verwenden. Mit einem Holzstab zieht man zügig Muster in die Flüssigkeit. Dann fasst man die Kerzen behutsam am Docht, taucht sie ein und zieht sie schnell wieder heraus. Die Kerzen danach aufrecht trocknen lassen, etwa in einem Kerzenständer. Man sollte Haushaltshandschuhe tragen und Zeitungspapier unterlegen, denn die Farbe lässt sich hinterher schwer abwaschen.</p>
+      <p>
+        <em>Mitarbeit:  Corinna Liebreich</em>
+      </p>
+    </division>
+    <caption>Man braucht: Marmorierfarben, Plastikbehälter, Holzstab zum Umrühren, Kerzen und
+      Haushaltshandschuhe</caption>
+    <image-credits>
+      Illustration
+      <em>Alex Walker</em>
+    </image-credits>
+    <supertitle>Wundertüte</supertitle>
+    <subtitle> </subtitle>
+  </body>
+  <teaser>
+    <title>Brennender Marmor </title>
+    <supertitle>Kerzen</supertitle>
+    <text>Zu marmorieren ist nicht schwer, dabei nicht zu kleckern umso mehr. Kerzen sind gut zum Üben. Sie sind billig, leicht zu handhaben und ein schönes Weihnachtsgeschenk.</text>
+  </teaser>
+</article>

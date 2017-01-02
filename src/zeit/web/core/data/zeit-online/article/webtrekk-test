@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <header/>
+    <author href="http://xml.zeit.de/autoren/anne_mustermann">
+      <display_name>Anne Mustermann</display_name>
+    </author>
+    <references>
+      <reference type="intern" href="http://xml.zeit.de/zeit-online/article/zplus-zeit"></reference>
+    </references>
+    <rankedTags>
+      <tag type="free" score="4" uuid="ce21bc33-57e5-4cb6-918a-d142482e2520" url_value="arbeitgeber">Arbeitgeber</tag>
+      <tag type="free" score="4" uuid="de762a10-49a9-4b42-af13-8c29bea570f4" url_value="arbeitsmarkt">Arbeitsmarkt</tag>
+      <tag type="free" score="4" uuid="c1120d3b-96c3-4229-8add-4db6803eabfb" url_value="emotion">Emotion</tag>
+      <tag type="free" score="4" uuid="d8bd0b06-d1fd-430e-b8d4-7aa339ce99b5" url_value="entlassung">Entlassung</tag>
+      <tag type="free" score="4" uuid="31059e8a-34e2-443d-b83a-2b940e06950f" url_value="fuehrungskraft">Führungskraft</tag>
+      <tag type="free" score="4" uuid="656dcf0d-f7a3-4fb0-90cc-7cbeba935d7b" url_value="gespraech">Gespräch</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/karriere/beruf/2016-12/kuendigung-gespraech-vorbereitung/" type="jpg" title="Kündingung Gespräch Vorbereitung" alt="Eine neue Studie zeigt, dass sich nur wenige Führungskräfte intensiv auf ein Kündigungsgespräch vorbereiten – und dass Kündigungen außergewöhnlich oft an Freitagen ausgesprochen werden." publication-date="2016-12-08T16:16:23+00:00" expires="2017-03-08T16:16:24+00:00" title_local="Kündingung Gespräch Vorbereitung" caption_local="Eine neue Studie zeigt, dass sich nur wenige Führungskräfte intensiv auf ein Kündigungsgespräch vorbereiten – und dass Kündigungen außergewöhnlich oft an Freitagen ausgesprochen werden." alt_local="Eine neue Studie zeigt, dass sich nur wenige Führungskräfte intensiv auf ein Kündigungsgespräch vorbereiten – und dass Kündigungen außergewöhnlich oft an Freitagen ausgesprochen werden.">
+      <bu>Eine neue Studie zeigt, dass sich nur wenige Führungskräfte intensiv auf ein Kündigungsgespräch vorbereiten – und dass Kündigungen außergewöhnlich oft an Freitagen ausgesprochen werden.</bu>
+      <copyright>© Patrick Pleul/dpa</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Anne Mustermann</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Karriere Beruf</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-12-26T07:18:58.033084+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-12-26T07:19:00.173983+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-12-26T07:19:00.361385+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-12-26T07:19:00.173983+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-12-26T07:18:59.432966+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="deeplink_url">http://www.example.com/foo</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="genre">interview</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-12-26T07:18:56.450379+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.Online-cvd</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/karriere/beruf/2016-12/e9493f74-234c-4ab6-9724-80d669bf3fb9.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">Vice</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">f71dfc2d590a40a5a9d513fee6067641</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Karriere</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Chefsache</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Eine neue Studie zeigt: Die wenigsten Chefs bereiten sich auf ein Kündigungsgespräch richtig vor.</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Beruf</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">6270</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ec9b1391-a53d-41ed-b6d0-53fc0a483500}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">51</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Kündigung</supertitle>
+    <title>"Viele Chefs sind schlecht vorbereitet"</title>
+    <subtitle>Eine Kündigung ist ein bedeutsamer Einschnitt im Leben. Die Belastung, die mit ihrer Mitteilung einhergeht, wird von vielen Führungskräften unterschätzt. </subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/karriere/beruf/2016-12/kuendigung-gespraech-vorbereitung/" type="jpg" title="Kündingung Gespräch Vorbereitung" alt="Eine neue Studie zeigt, dass sich nur wenige Führungskräfte intensiv auf ein Kündigungsgespräch vorbereiten – und dass Kündigungen außergewöhnlich oft an Freitagen ausgesprochen werden." publication-date="2016-12-08T16:16:23+00:00" expires="2017-03-08T16:16:24+00:00" display_mode="column-width" variant_name="wide" is_empty="False" title_local="Eine neue Studie zeigt, dass sich nur wenige Führungskräfte intensiv auf ein Kündigungsgespräch vorbereiten – und dass Kündigungen außergewöhnlich oft an Freitagen ausgesprochen werden." caption_local="Eine neue Studie zeigt, dass sich nur wenige Führungskräfte intensiv auf ein Kündigungsgespräch vorbereiten – und dass Kündigungen außergewöhnlich oft an Freitagen ausgesprochen werden." alt_local="Kündigung: Eine neue Studie zeigt, dass sich nur wenige Führungskräfte intensiv auf ein Kündigungsgespräch vorbereiten – und dass Kündigungen außergewöhnlich oft an Freitagen ausgesprochen werden.">
+        <bu>Eine neue Studie zeigt, dass sich nur wenige Führungskräfte intensiv auf ein Kündigungsgespräch vorbereiten – und dass Kündigungen außergewöhnlich oft an Freitagen ausgesprochen werden.</bu>
+        <copyright>© Patrick Pleul/dpa</copyright>
+      </image>
+      <p><strong>ZEIT ONLINE:</strong> Frau Richter, Sie haben mit Ihrer aktuellen Studie Kündigungsgespräche in deutschen Unternehmen analysiert. Wie laufen Kündigungen ab?</p>
+      <p><strong>Manuela Richter:</strong> Zunächst einmal muss ich sagen, dass es recht schwierig war, Führungskräfte und Mitarbeiter von Personalabteilungen für die Teilnahme an der Studie zu gewinnen. Denn das Thema <a class="" href="http://www.zeit.de/karriere" target="_blank">Kündigung</a> ist nach wie vor ein Tabuthema, über das nur ungern öffentlich gesprochen wird – obwohl das Interesse und der Informationsbedarf sehr groß sind. Von mehr als 1.000 Interessenten waren nur 158 bereit, sich zu äußern. Und das sind vermutlich auch diejenigen, die schon vieles richtig machen.</p>
+      <p>Kommt es zu Kündigungen, werden zu einem überwiegenden Teil (85 Prozent) auch tatsächlich persönliche Gespräche geführt. Diese Gespräche finden meist unter sechs Augen zwischen dem Vorgesetzten, einem Mitarbeiter der Personalabteilung und dem Betroffenen statt und dauern im Durchschnitt eine halbe Stunde. Nur wenige der befragten Unternehmen verschicken ihre Kündigungen per Post, Bote oder E-Mail.</p>
+      <p>Das ist gut und wichtig, denn in dem persönlichen Gespräch steckt viel Potenzial, um dem Betroffenen Wertschätzung entgegenzubringen und ihm damit zu ermöglichen, einigermaßen positiv in die Zukunft zu blicken. Viele Betroffene reagieren emotional auf die Nachricht. In unserer Studie waren die meisten geschockt oder enttäuscht (50 Prozent), manche waren aber auch verärgert oder empört (14 Prozent). Dementsprechend legten auch 21 Prozent der Betroffenen Widerspruch und Klage (23 Prozent) ein. Ohne ein Kündigungsgespräch stieg dieser Prozentsatz sogar auf mehr als das Doppelte.</p>
+      <p><strong>ZEIT ONLINE:</strong> Der Freitag ist der "beliebteste" Tag für Kündigungen. Warum ist das so?</p>
+      <author href="http://xml.zeit.de/autoren/anne_mustermann">
+        <display_name>Anne Mustermann</display_name>
+      </author>
+      <p><strong>Richter:</strong> Hier kann ich nur mutmaßen. Es mag die gute Absicht dahinterstecken, dem Mitarbeiter über das Wochenende Zeit geben zu wollen, die Nachricht verdauen, und um am Montag wieder gefasster zur Arbeit erscheinen zu können – sofern er nicht freigestellt wird, was laut unseren Ergebnissen in etwa der Hälfte der Fälle geschieht. Außerdem ist am Freitag natürlich die Arbeit der Woche schon erledigt.</p>
+      <p>Bewusst oder unbewusst mag auch das Ziel sein, den Mitarbeiter erst einmal nicht sehen zu müssen. Denn Kündigungen auszusprechen, ist auch für die Vorgesetzten eine sehr unangenehme Aufgabe. Oft fühlen sie sich schuldig oder haben Sorge vor den Reaktionen des betroffenen Mitarbeiters bzw. der Kollegen.</p>
+      <infobox href="http://xml.zeit.de/infoboxen/crystal-meth" contenttype="infobox"></infobox>
+      <p><strong>ZEIT ONLINE:</strong> Für viele Führungskräfte zählt das Kündigungsgespräch zu ihren schwierigsten Aufgaben. Warum aber gehen viele nicht oder kaum vorbereitet in das Gespräch?</p>
+      <p><strong>Richter:</strong> Die Belastung, die damit einhergeht, einem oftmals langjährigen Mitarbeiter eine lebensverändernde Nachricht wie eine Entlassung mitteilen zu müssen, wird nach wie vor unterschätzt. Von Seiten des Arbeitgebers wird zu wenig Unterstützung angeboten: Die Hälfte unserer Befragten bereitete sich ausschließlich anhand der Personalakte auf die bevorstehende Kündigung vor. Darüber hinaus suchten je elf Prozent den Rat ihres Vorgesetzten, eines Personalmitarbeiters oder bildeten sich selbstständig über Ratgeberliteratur weiter. 15 Prozent gingen völlig unvorbereitet in die Gespräche.</p>
+      <p>Das ist alles andere als eine systematische Vorbereitung und umso schlimmer, da es hier um die berufliche Existenz eines Menschen geht. Immerhin erhielten 17 Prozent eine Checkliste. Eine Kündigung aber sowohl sachlich und rechtssicher, gleichzeitig aber auch fair und wertschätzend zu vermitteln, kann man nicht mit einer Checkliste oder aus Büchern lernen. Dafür ist Übung nötig. Ein erster Schritt in diese Richtung ist eine psychologische Weiterqualifizierung, die neben einem professionellen Aufbau des Gespräches auch Themen wie faire Gesprächsführung und den Umgang mit den Emotionen der Betroffenen beinhaltet. Eine solche Weiterbildung erhielten aber nur neun Prozent der Befragten. Und daran muss sich dringend etwas ändern.</p>
+      <portraitbox layout="short" is_empty="False" href="http://xml.zeit.de/portraitboxen/pia"/>
+      <p><strong>ZEIT ONLINE:</strong> Was sind die Folgen von schlecht durchgeführten Kündigungen?</p>
+      <p><strong>Richter:</strong> Für die betroffene Person bedeutet eine Kündigung einen bedeutsamen Einschnitt in ihrem Leben. Denn neben dem Einkommen gehen auch ein geregelten Tagesablauf, soziale Kontakte und damit ein Teil der Identität verloren. Wenn die Kündigung dann noch unfair abläuft, können psychische Erkrankungen die Folge sein und so den Wiedereintritt in den Arbeitsmarkt erschweren.</p>
+      <p>Auch kann eine ungerechte Kündigung womöglich das Bedürfnis nach Rache am ehemaligen Arbeitgeber wecken: Der Betroffene zieht mit größerer Wahrscheinlichkeit vor Gericht und teilt seine schlechten Erfahrungen mit Freunden und Bekannten, was sich wiederum rufschädigend auf das Unternehmen auswirkt. Ähnlich reagieren die Kollegen, welche unsensibel und unfair durchgeführte Kündigungen beobachten. Hinzu kommt noch ein Absinken von Moral und Motivation und damit der Leistungsfähigkeit – schließlich könnte es ihnen in Zukunft ähnlich ergehen. Im schlimmsten Fall überlegen sich die Leistungsträger, die das Unternehmen eigentlich halten möchte, selbst zu kündigen und sich einen besseren Arbeitgeber zu suchen.</p>
+      <p><strong>ZEIT ONLINE:</strong> Wie können Unternehmen ihre Führungskräfte unterstützen, diese Aufgabe qualifizierter zu erfüllen?</p>
+      <p><strong>Richter:</strong> Weg von rein juristischen Seminaren und Checklisten hin zu einer ganzheitlichen Weiterbildung. Nicht einmalig vor einer Kündigungswelle, sondern als regulärer Teil der Führungskräfteentwicklung. Letztlich ist eine Kündigung ein Spezialfall eines Schlechte-Nachrichten-Gesprächs und derartige Gespräche stehen im Arbeitsalltag an der Tagesordnung: Ein Urlaub kann nicht genehmigt werden, es muss Mehrarbeit geleistet werden, eine negative Leistungsbeurteilung muss rückgemeldet werden und so weiter. Wenn im täglichen Miteinander schon nicht fair und respektvoll miteinander umgegangen wird, hilft auch kein Training kurz vor der Kündigung mehr.</p>
+    </division>
+    <division type="page" teaser="Raum für Notizen">
+      <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Kündigung</supertitle>
+    <title>"Viele Chefs sind schlecht vorbereitet"</title>
+    <text>Eine Kündigung ist ein bedeutsamer Einschnitt im Leben. Die Belastung, die mit ihrer Mitteilung einhergeht, wird von vielen Führungskräften unterschätzt. </text>
+  </teaser>
+</article>

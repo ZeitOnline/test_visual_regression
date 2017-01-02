@@ -86,7 +86,9 @@
                             {{- view.title -}}
                         </span>
                     </h1>
-                    {% include "zeit.web.core:templates/amp/article/volume-badge.html" %}
+                    {% block volume_badge %}
+                        {% include "zeit.web.core:templates/amp/article/volume-badge.html" %}
+                    {% endblock %}
                     <div class="article__item">
                         <div class="summary" itemprop="description">
                             {{ view.subtitle }}

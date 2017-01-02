@@ -2,14 +2,18 @@
 	@extend .gallery
 
 .photocluster__container
-	margin: 0 auto
-	max-width: remify(920px)
-	position: relative
-	overflow: hidden
+	+respond-min($break-1)
+		position: relative
+		overflow: hidden
 
 .photocluster__media
+	margin-bottom: remify(14px)
+
 	+respond-min($break-1)
 		float: left
+		margin-bottom: 1.5%
+		padding-left: 0.75%
+		padding-right: 0.75%
 		width: 50%
 
 		&--small

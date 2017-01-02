@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<centerpage type="centerpage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -75,7 +75,7 @@
             <region visible="True" visible_mobile="True" hide-dupes="True" area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="tube" count="5" automatic="True" automatic_type="channel" title="Politik">
                 <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
                 <query>
-                    <condition type="Channel" py:pytype="str">Politik</condition>
+                    <condition type="Channel">Politik</condition>
                 </query>
                 <container cp:type="auto-teaser" module="zon-large" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-ea7dc592-96e4-47c6-b19b-8844131735c2"/>
                 <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8de"/>
