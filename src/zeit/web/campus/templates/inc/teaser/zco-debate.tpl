@@ -5,7 +5,7 @@
 {% set block = module %}
 
 {% block wrapper_start %}
-    <article class="teaser-debate" data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}" data-clicktracking="{{ area.kind }}">
+    <article class="teaser-debate" data-unique-id="{{ teaser.uniqueId }}" data-meetrics="{{ area.kind }}">
 {% endblock %}
 
 {% block wrapper_end %}

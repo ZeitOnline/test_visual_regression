@@ -4,7 +4,13 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.26 (unreleased)
+3.27 (unreleased)
+-----------------
+
+- MAINT: Clean up test data
+
+
+3.26 (2016-12-30)
 -----------------
 
 - ZON-3569: Change fallback image and styles for volume packshots
@@ -15,7 +21,15 @@ POSTDEPLOY
 
 - ZON-3517: Mark content only for subscribers in ZMO articles (AMP part)
 
+- ZON-3588: Automate event tracking for article body
+
+- BUG-613: Show authorbox custom description if defined
+
 - FIX: Be defensive about invalid requests for legacy keyword redirects
+
+- MAINT: Replace library `freewall` with `masonry`
+
+- MAINT: Update sharing metadata regarding authorship
 
 
 3.25.1 (2016-12-23)

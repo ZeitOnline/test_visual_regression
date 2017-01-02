@@ -2028,6 +2028,13 @@ def test_article_contains_authorbox(testbrowser):
     authorbox = browser.cssselect('.authorbox')
     assert len(authorbox) == 3
 
+    # test custom biography
+    author = authorbox[0]
+    description = author.cssselect('.authorbox__summary')[0]
+    assert description.text.strip() == 'Text im Feld Kurzbio'
+    assert description.get('itemprop') == 'description'
+
+    # test author content and microdata
     author = authorbox[1]
     image = author.cssselect('[itemprop="image"]')[0]
     name = author.cssselect('strong[itemprop="name"]')[0]
