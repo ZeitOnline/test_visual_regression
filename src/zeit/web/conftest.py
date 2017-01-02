@@ -253,6 +253,19 @@ browsers = {
 }
 
 
+# mark all selenium tests by use of fixture selenium_driver
+# to run only selenium test by invoking
+# pytest -m selenium
+def pytest_collection_modifyitems(items):
+    for item in items:
+        try:
+            fixtures = item.fixturenames
+            if 'selenium_driver' in fixtures:
+                item.add_marker(pytest.mark.selenium)
+        except:
+            pass
+
+
 def test_asset_path(*parts):
     """Return full file-system path for given test asset path."""
     return os.path.abspath(
