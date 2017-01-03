@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import re
 
 from selenium.common.exceptions import TimeoutException
@@ -2643,10 +2644,9 @@ def test_volume_overview_has_correct_pagination(testbrowser):
     next_button = browser.cssselect('.pager__button--next')[0]
     assert next_button.text == 'Vorheriges Jahr'
 
+    current_year = datetime.datetime.today().year
     prev_link = browser.cssselect('.pager__pages a')[0]
-    next_link = browser.cssselect('.pager__pages a')[1]
-    assert prev_link.get('href').endswith('/2016/index')
-    assert next_link.get('href').endswith('/2014/index')
+    assert prev_link.get('href').endswith('/{}/index'.format(current_year))
 
     current = browser.cssselect('.pager__pages .pager__page--current')[0]
     assert current.text_content() == '2015'
