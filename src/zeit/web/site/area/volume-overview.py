@@ -37,12 +37,16 @@ class VolumeOverview(zeit.web.core.area.ranking.Ranking):
         return 'index,follow,noodp,noydir,noarchive'
 
     @zeit.web.reify
-    def total_pages(self):
-        return self.__current_year() - FIRST_YEAR + 1
+    def page(self):
+        return self.__year_to_page(self.__current_page_year())
 
     @zeit.web.reify
     def current_page(self):
-        return self.__year_to_page(self.__current_page_year())
+        return self.page
+
+    @zeit.web.reify
+    def total_pages(self):
+        return self.__current_year() - FIRST_YEAR + 1
 
     @zeit.web.reify
     def pagination_info(self):
@@ -62,9 +66,10 @@ class VolumeOverview(zeit.web.core.area.ranking.Ranking):
             'url': self.__url_for_year(page_year)}
 
     @zeit.web.reify
-    def _pagination(self):
-        return zeit.web.core.template.calculate_pagination(
+    def pagination(self):
+        pagination = zeit.web.core.template.calculate_pagination(
             self.current_page, self.total_pages, slots=6)
+        return pagination if pagination is not None else []
 
     """ The real current year (anno domini) """
     def __current_year(self):
