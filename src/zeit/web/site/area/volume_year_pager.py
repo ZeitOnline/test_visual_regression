@@ -25,7 +25,7 @@ class VolumeYearPager(zeit.web.core.area.ranking.Ranking):
 
     @zeit.web.reify
     def meta_robots(self):
-        return 'index'
+        return 'index,follow,noodp,noydir,noarchive'
 
     @zeit.web.reify
     def total_pages(self):

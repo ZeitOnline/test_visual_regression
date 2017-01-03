@@ -2652,4 +2652,4 @@ def test_volume_overview_has_correct_pagination(testbrowser):
     assert current.text_content() == '2015'
 
     meta_robots = browser.cssselect('head meta[name="robots"]')[0]
-    meta_robots.get('content') == 'index'
+    meta_robots.get('content') == 'index,follow,noodp,noydir,noarchive'
