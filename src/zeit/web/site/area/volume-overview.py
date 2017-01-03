@@ -2,12 +2,14 @@
 import datetime
 import logging
 
-# import zope.interface
+import pyramid
+import zope.interface
 
 import zeit.web
 import zeit.web.core.area.automatic
 import zeit.web.core.area.ranking
-
+import zeit.web.core.centerpage
+import zeit.web.core.interfaces
 
 log = logging.getLogger(__name__)
 
@@ -16,7 +18,7 @@ FIRST_YEAR = 1946
 
 
 @zeit.web.register_area('volume-overview')
-# class VolumeOverviewPager(zeit.web.core.centerpage.Area):
+# class VolumeOverview(zeit.web.core.centerpage.Area):
 class VolumeOverview(zeit.web.core.area.ranking.Ranking):
     """An automatic area that performs pagination over years, i.e.
     one year is one page.
@@ -26,11 +28,11 @@ class VolumeOverview(zeit.web.core.area.ranking.Ranking):
     with as many blocks as there are results for that year.
     """
 
-    # zope.interface.implements(zeit.web.core.interfaces.IPagination)
+    zope.interface.implements(zeit.web.core.interfaces.IPagination)
 
-    @zeit.web.reify
-    def visible(self):
-        return True
+    def __init__(self, arg, **kw):
+        super(self.__class__, self).__init__(arg, **kw)
+        self.request = pyramid.threadlocal.get_current_request()
 
     @zeit.web.reify
     def meta_robots(self):
