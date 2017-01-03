@@ -12,11 +12,13 @@ require([ 'vendor/require' ], function() {});
 
 // require anonymous AMD modules here
 require([
+    'web.core/zeit',
     'web.core/menu',
     'web.core/clicktracking',
     'web.site/adblockCount.js',
     'web.core/adReload'
 ], function(
+    zeit,
     menu,
     clicktracking,
     adblockCount,
@@ -26,6 +28,7 @@ require([
     clicktracking.init();
     adblockCount.init();
     adReload.init();
+    zeit.clearQueue();
 });
 
 // add required jQuery plugins
