@@ -88,10 +88,6 @@
           </container>
         </region>
     </cluster>
-    <cluster visible="True" area="id-6a52b56e-a52a-4547-8d9a-5ab999f65166" kind="solo">
-        <region visible="True" area="id-4da301e7-7dfe-4d84-9c50-45df50ecc545" kind="volume-year-pager">
-        </region>
-    </cluster>
   </body>
   <teaser>
     <title>Archiv</title>

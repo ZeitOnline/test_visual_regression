@@ -2,6 +2,8 @@
 import datetime
 import logging
 
+# import zope.interface
+
 import zeit.web
 import zeit.web.core.area.automatic
 import zeit.web.core.area.ranking
@@ -13,8 +15,9 @@ log = logging.getLogger(__name__)
 FIRST_YEAR = 1946
 
 
-@zeit.web.register_area('volume-year-pager')
-class VolumeYearPager(zeit.web.core.area.ranking.Ranking):
+@zeit.web.register_area('volume-overview')
+# class VolumeOverviewPager(zeit.web.core.centerpage.Area):
+class Overview(zeit.web.core.area.ranking.Ranking):
     """An automatic area that performs pagination over years, i.e.
     one year is one page.
 
@@ -22,6 +25,12 @@ class VolumeYearPager(zeit.web.core.area.ranking.Ranking):
     in fact usually only one block is configured, and the area fills itself
     with as many blocks as there are results for that year.
     """
+
+    # zope.interface.implements(zeit.web.core.interfaces.IPagination)
+
+    @zeit.web.reify
+    def visible(self):
+        return True
 
     @zeit.web.reify
     def meta_robots(self):
