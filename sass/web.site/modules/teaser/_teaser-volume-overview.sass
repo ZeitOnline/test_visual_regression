@@ -1,49 +1,41 @@
-.volume-overview-teaser
-	padding-bottom: $page-padding--small/2
-	&__wrapper
-		display: block // no-flex fallback
-		display: flex
-		flex-direction: row
-		margin: $page-padding $page-padding--small/2 0
+.teaser-volume-overview
+	+pie-clearfix
+	flex: 0 1 100%
+	padding: remify(0 0 32px)
+	&__link
+		+on-interaction
+			span
+				color: inherit
 	&__media
-		max-width: remify(150px)
-		margin-right: $page-padding
-	&__media-container
-		width: remify(150px)
+		float: left;
+		margin-right: remify(20px)
+		max-width: remify(160px)
+		width: 50%
 	&__media-item
 		@extend %volume-packshot-shadow
-	&__issue,
-	&__cta
-		color: $zon-charcoal
-		font-family: $font-tabletgothic
-		font-size: remify(14px)
-		font-weight: bold
+	&__caption
+		font-size: remify(16px)
 		letter-spacing: $letter-spacing-l
+		padding-top: remify(16px)
+		white-space: nowrap
+	&__issue
 		margin: 0
 	&__cta
-		+animated-interaction
-		padding-bottom: remify(2px)
-		font-weight: normal
+		border-bottom: 1px solid currentColor
 		color: $zon-mid-grey
-		border-bottom: 1px solid $zon-mid-grey
-	&__caption
-		padding-top: $page-padding
-		white-space: nowrap
+		font-size: remify(13px)
 
-+respond-min($break-phablet-min)
-	.volume-overview-teaser
-		padding: $page-padding--small/2 $page-padding--small/2
-		&__wrapper
-			display: inline-block
-			margin: $page-padding $page-padding--small/2
+	+respond-min($break-phablet-min)
+		flex: 0 1 33.33%
+		padding-right: remify(24px)
 		&__media
-			max-width: remify(200px)
-		&__media-container
-			width: remify(200px)
+			float: none
+			margin-right: 0
+			max-width: none
+			width: auto
 		&__caption
-			padding-top: $page-padding--small
+			font-size: remify(14px)
+			padding-top: remify(14px)
 
-.no-flexbox
-	.volume-overview-teaser
-		&__caption
-			padding-top: $page-padding--small/2
+	+respond-min($break-tablet-min)
+		flex: 0 1 25%
