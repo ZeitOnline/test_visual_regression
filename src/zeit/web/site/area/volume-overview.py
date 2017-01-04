@@ -55,10 +55,7 @@ class VolumeOverview(zeit.content.cp.automatic.AutomaticArea):
     def pagination_info(self):
         return {
             'previous_label': u'Nächstes Jahr',
-            'previous_url': self.__url_for_year(
-                self.__current_page_year() + 1),
-            'next_label': u'Vorheriges Jahr',
-            'next_url': self.__url_for_year(self.__current_page_year() - 1)}
+            'next_label': u'Vorheriges Jahr'}
 
     def page_info(self, page_nr):
         if not page_nr:

@@ -54,15 +54,9 @@ class Overview(zeit.web.core.area.ranking.Ranking):
 
     @zeit.web.reify
     def pagination_info(self):
-        previous_day = (self.today + datetime.timedelta(
-            days=self.current_page)).strftime("%Y-%m-%d")
-        next_day = (self.today - datetime.timedelta(
-            days=self.current_page)).strftime("%Y-%m-%d")
         return {
             'previous_label': u'Nächster Tag',
-            'previous_param': dict(date=previous_day),
-            'next_label': u'Vorheriger Tag',
-            'next_param': dict(date=next_day)}
+            'next_label': u'Vorheriger Tag'}
 
     def page_info(self, page_nr):
         if not page_nr:
