@@ -58,8 +58,9 @@
 		margin-bottom: em(10px)
 
 %teaser-kicker
-	display: block
+	align-items: center
 	color: $color-text-highlighted
+	display: flex
 	font-size: em(13px)
 	font-weight: bold
 	letter-spacing: $zon-letter-spacing-m
@@ -99,21 +100,22 @@
 		border-radius: 3px
 		color: $white
 		height: remify(18px)
-		margin-right: remify(4px)
-		vertical-align: middle
+		margin-right: remify(8px)
+		margin-top: remify(-1px)
 		width: remify(31px)
 	&--zett
 		background-color: $primary-color-zett
 		color: $white
 		height: remify(18px)
-		margin-right: remify(4px)
-		vertical-align: sub
+		margin-right: remify(8px)
 		width: remify(30px)
 	&--zco
 		$logo_format: (185/33)
-		height: remify(14px)
-		vertical-align: middle
-		width: remify(ceil(14px*$logo_format))
+		border-right: 1px solid currentColor
+		height: em(14px + 3px, 12px)
+		margin-right: remify(6px)
+		width: em(ceil(14px*$logo_format + 7px), 12px) // add padding for border right, use em for larger fullwidth kicker
+		padding: em(3px 6px 0 0, 12px)
 	&--liveblog
 		background-image: linear-gradient(to top, $zon-red, #d41910)
 		background-color: $zon-red
@@ -123,10 +125,9 @@
 		font-weight: bold
 		font-style: normal
 		letter-spacing: $zon-letter-spacing-l
-		margin-right: remify(3px)
+		margin-right: remify(8px)
 		padding: remify(2px 6px 3px)
 		text-transform: uppercase
-		vertical-align: 2px
 		&:before
 			animation: live-blog-indicator-animation 2s infinite
 			background-color: $zon-lighter-grey
@@ -144,9 +145,16 @@
 	&--zplus
 		background-color: $zon-red
 		color: #fff
-		margin-right: remify(4px)
+		flex-shrink: 0
+		height: remify(23px)
+		margin-right: remify(8px)
 		margin-top: remify(-2px)
-		vertical-align: middle
+		width: remify(28px)
+	&--zplus-xs
+		@extend %teaser-kicker-logo--zplus
+		height: remify(18px)
+		margin-right: remify(6px)
+		width: remify(22px)
 
 %teaser-combined-link
 	color: inherit
