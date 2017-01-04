@@ -216,6 +216,7 @@ class UserCommentsArea(zeit.web.core.centerpage.Area):
         super(self.__class__, self).__init__(arg, **kw)
         self.kind = 'user-comments'
         self.comments = kw.get('comments', {'page_total': 0, 'page': 1})
+        self.request = pyramid.threadlocal.get_current_request()
 
     @zeit.web.reify
     def page(self):
