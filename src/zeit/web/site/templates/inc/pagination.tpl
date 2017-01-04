@@ -14,11 +14,9 @@
         {% set page_info = area.page_info(num) %}
         <li class="pager__page{% if num == area.current_page %} pager__page--current{% endif %}">
             {%- if num == area.current_page -%}
-                <span>{{ page_info.page_label }}</span>
-            {%- elif num == 1 -%}
-                <a href="{{ page_info.url or (view.request.url | remove_get_params(page_info.remove_get_param)) }}">{{ page_info.page_label }}</a>
+                <span>{{ page_info.label }}</span>
             {%- elif num -%}
-                <a href="{{ page_info.url or (view.request | append_get_params(**page_info.append_get_param)) }}">{{ page_info.page_label }}</a>
+                <a href="{{ page_info.url }}">{{ page_info.label }}</a>
             {%- else -%}
                 <span>…</span>
             {%- endif -%}

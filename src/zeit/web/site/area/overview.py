@@ -77,10 +77,15 @@ class Overview(zeit.web.core.area.ranking.Ranking):
                 date_label == "31.12"):
                     date_label = date.strftime("%d.%m.%Y")
 
+        url = zeit.web.core.utils.remove_get_params(self.request.url, 'date')
+        if page_nr > 1:
+            url = zeit.web.core.utils.add_get_params(
+                url, **dict(date=date_param))
+
         return {
-            'page_label': date_label,
-            'remove_get_param': 'date',
-            'append_get_param': dict(date=date_param)}
+            'label': date_label,
+            'url': url
+        }
 
     def _page(self):
         return self.date_to_page(dateutil.parser.parse(

@@ -65,7 +65,7 @@ class VolumeOverview(zeit.content.cp.automatic.AutomaticArea):
             page_nr = 1
         page_year = self.__page_to_year(page_nr)
         return {
-            'page_label': page_year,
+            'label': page_year,
             'url': self.__url_for_year(page_year)}
 
     @zeit.web.reify
