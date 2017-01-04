@@ -18,8 +18,9 @@ FIRST_YEAR = 1946
 
 
 @zeit.web.register_area('volume-overview')
+# class VolumeOverview(zeit.web.core.area.ranking.Ranking):
 # class VolumeOverview(zeit.web.core.centerpage.Area):
-class VolumeOverview(zeit.web.core.area.ranking.Ranking):
+class VolumeOverview(zeit.content.cp.automatic.AutomaticArea):
     """An automatic area that performs pagination over years, i.e.
     one year is one page.
 
