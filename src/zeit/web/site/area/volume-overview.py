@@ -87,6 +87,4 @@ class VolumeOverview(zeit.content.cp.automatic.AutomaticArea):
         return self.__current_year() - page + 1
 
     def __url_for_year(self, year):
-        # XXX: do we have a scheme+host variable available for areas?
-        return '{}://{}/{}/index'.format(
-            self.request.scheme, self.request.host, year)
+        return '{}{}/index'.format(self.request.route_url('home'), year)
