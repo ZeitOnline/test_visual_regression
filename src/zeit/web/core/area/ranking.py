@@ -127,6 +127,8 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
             # XXX: Encoding Error! "/ukraine?a=0&amp;p=2"
             url = zeit.web.core.utils.add_get_params(url, **dict(p=page_nr))
 
+        # clean up to remove campaign params etc
+        url = zeit.web.core.utils.remove_all_get_params_except(url, 'p', 'q')
         return {
             'label': page_nr,
             'url': url

@@ -113,6 +113,27 @@ def remove_get_params(url, *args):
             scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
 
 
+def remove_all_get_params_except(url, *args):
+    """Remove all URL's query parameters except the ones specified by args,
+    while preserving all other parts of the URL.
+
+    :param url: Uniform resource locator
+    :param params: query parameter keys to be preserved
+    :rtype: unicode
+    """
+    scheme, netloc, path, query, frag = urlparse.urlsplit(url)
+    query_p = urlparse.parse_qs(query)
+    for param in query_p.keys():
+        if param not in args:
+            query_p.pop(param, None)
+    if len(query_p) == 0:
+        return u'{}://{}{}'.format(
+            scheme, netloc, path)
+    else:
+        return u'{}://{}{}?{}'.format(
+            scheme, netloc, path, urllib.urlencode(query_p, doseq=True))
+
+
 def update_path(url, *segments):
     """Safely update a URL's path preserving all other parts of the URL.
 
