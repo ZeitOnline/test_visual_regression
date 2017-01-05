@@ -52,7 +52,10 @@
     <region kind="solo" title="Exklusiv-Fläche" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="exclusive-ressort"/>
     </region>
-    <region kind="solo" title="Jahresuberblick" available="zeit.web.core.interfaces.IInternalUse" type="!storystream">
+    <region kind="solo" title="Jahresübersicht" available="zeit.web.core.interfaces.IInternalUse">
+        <area kind="volume-overview"/>
+    </region>
+    <region kind="solo" title="Aktuelle Schlagzeilen" available="zeit.web.core.interfaces.IInternalUse">
         <area kind="overview"/>
     </region>
     <region kind="solo" title="Schlagzeilen-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">

@@ -119,15 +119,17 @@ class Ranking(zeit.content.cp.automatic.AutomaticArea):
     def pagination_info(self):
         return {
             'previous_label': u'Vorherige Seite',
-            'previous_param': dict(p=self.current_page - 1),
-            'next_label': u'Nächste Seite',
-            'next_param': dict(p=self.current_page + 1)}
+            'next_label': u'Nächste Seite'}
 
     def page_info(self, page_nr):
+        url = zeit.web.core.utils.remove_get_params(self.request.url, 'p')
+        if page_nr > 1:
+            url = zeit.web.core.utils.add_get_params(url, **dict(p=page_nr))
+
         return {
-            'page_label': page_nr,
-            'remove_get_param': 'p',
-            'append_get_param': dict(p=page_nr)}
+            'label': page_nr,
+            'url': url
+        }
 
     @zeit.web.reify
     def page(self):

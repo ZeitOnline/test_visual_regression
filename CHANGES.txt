@@ -7,6 +7,8 @@ POSTDEPLOY
 3.27 (unreleased)
 -----------------
 
+- ZON-3571: Paginate volume overview
+
 - ZON-2718: Add structured data for video pages
 
 - FEAT: Add hook to require external scripts in ZON blogs

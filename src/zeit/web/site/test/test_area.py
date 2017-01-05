@@ -108,14 +108,12 @@ def test_overview_should_have_page_info(application, clock, dummy_request):
     area = get_area('overview', 1)
     area.request = dummy_request
     pi = area.page_info(1)
-    assert pi['page_label'] == '10.05.2016'
-    assert pi['remove_get_param'] == 'date'
-    assert pi['append_get_param']['date'] == '2016-05-10'
+    assert pi['label'] == '10.05.2016'
+    assert not pi['url'].endswith('date=2016-05-10')
 
     pi = area.page_info(2)
-    assert pi['page_label'] == '09.05'
-    assert pi['remove_get_param'] == 'date'
-    assert pi['append_get_param']['date'] == '2016-05-09'
+    assert pi['label'] == '09.05'
+    assert pi['url'].endswith('date=2016-05-09')
 
 
 def test_default_teaser_should_not_expose_ranking_area_proxies(
