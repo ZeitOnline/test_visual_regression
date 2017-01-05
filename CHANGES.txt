@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - MAINT: Clean up test data
 
+- FEAT: Add hook to require external scripts in ZON blogs
+
 
 3.26 (2016-12-30)
 -----------------
