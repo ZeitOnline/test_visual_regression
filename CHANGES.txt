@@ -7,7 +7,11 @@ POSTDEPLOY
 3.27 (unreleased)
 -----------------
 
+- ZON-2718: Add structured data for video pages
+
 - MAINT: Clean up test data
+
+- FEAT: Add hook to require external scripts in ZON blogs
 
 
 3.26 (2016-12-30)

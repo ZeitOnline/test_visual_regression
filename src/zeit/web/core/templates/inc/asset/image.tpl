@@ -1,4 +1,8 @@
 {% if image %}
+    {%- set default_width = 320 %}
+    {%- set default_height = (default_width / image.ratio) | int %}
+    {%- set image_width = image.fallback_width | default(default_width, True) %}
+    {%- set image_height = image.fallback_height | default(default_height, True) %}
     <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image"
         {%- block image_additional_data_attributes %}{% endblock %}
         {%- if image_itemprop %} itemprop="{{ image_itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
@@ -23,8 +27,8 @@
         </noscript>
         <!--<![endif]-->
         <meta itemprop="url" content="{{ request.image_host + image.fallback_path }}">
-        <meta itemprop="width" content="{{ image.fallback_width }}">
-        <meta itemprop="height" content="{{ image.fallback_height }}">
+        <meta itemprop="width" content="{{ image_width }}">
+        <meta itemprop="height" content="{{ image_height }}">
         {% block media_caption -%}
         <figcaption class="{% block media_caption_class %}figure{% endblock %}__caption {{ media_caption_additional_class }}">
             {%- block media_caption_content %}
