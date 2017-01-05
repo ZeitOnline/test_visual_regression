@@ -232,7 +232,7 @@ def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
 
 def test_login_status_is_set_as_class(testbrowser, sso_keypair):
     # browser without sso session
-    testbrowser.open('/login-state')
+    testbrowser.open('/login-state/article/simple')
     assert 'is-loggedin' not in testbrowser.contents
 
     # browser with sso session
@@ -242,5 +242,5 @@ def test_login_status_is_set_as_class(testbrowser, sso_keypair):
         {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
     testbrowser.cookies.forURL(
         'http://localhost')['my_sso_cookie'] = sso_cookie
-    testbrowser.open('/login-state')
+    testbrowser.open('/zeit-online/article/simple')
     assert 'is-loggedin' in testbrowser.contents
