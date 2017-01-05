@@ -48,13 +48,11 @@
 
     {% block gate_link -%}
         {# this condition would only be possible inside an ESI or different cache buckets for logged in and not logged in users #}
-        {#% if not request.user -%#}
         <p class="gate__note">
             Sie sind bereits Digital-Abonnent?
             <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration" class="gate__link">
                 Hier anmelden
             </a>
         </p>
-        {#% endif %#}
     {%- endblock %}
 </aside>
