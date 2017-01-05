@@ -23,6 +23,7 @@
         <label>Science</label>
     </topic>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">abo</attribute>
     <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="article_id" ns="http://namespaces.zeit.de/CMS/print">556168</attribute>
     <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Wenke Husmann</attribute>
@@ -75,6 +76,7 @@
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">ZEIT Studienführer</attribute>
     <attribute name="running-volume" ns="http://namespaces.zeit.de/CMS/workflow">ZSF-2015-01</attribute>
     <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="serie" ns="http://namespaces.zeit.de/CMS/document">In der Mensa mit</attribute>
     <attribute name="short_text" ns="http://namespaces.zeit.de/CMS/workflow">Hier gibt es Hilfe für Studenten: Wir haben die wichtigsten Anlaufstellen gesammelt. (akg)</attribute>
     <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>

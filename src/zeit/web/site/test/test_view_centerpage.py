@@ -2514,28 +2514,28 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
 
     # test fullwidth teasers
     teasers = browser.cssselect('.cp-area--solo article')
-    assert len(teasers) == 2
+    assert len(teasers) == 3
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test major area teasers
     teasers = browser.cssselect('.cp-area--major article')
-    assert len(teasers) == 4
+    assert len(teasers) == 6
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test minor area teasers
-    teasers = browser.cssselect('.cp-area--minor article')
-    assert len(teasers) == 4
+    teasers = browser.cssselect('.cp-area--minor article[data-zplus]')
+    assert len(teasers) == 5
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test square teasers
-    teasers = browser.cssselect('.cp-area--duo article')
-    assert len(teasers) == 2
+    teasers = browser.cssselect('.cp-area--duo article[data-zplus]')
+    assert len(teasers) == 3
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
