@@ -739,7 +739,7 @@ def test_canonical_ruleset_on_cps(testbrowser, datasolr):
     # several params
     browser = testbrowser('/dynamic/ukraine?p=2&a=0#comment')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?p=2'
+    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?a=0&p=2'
 
 
 def test_canonical_ruleset_on_article_pages(testbrowser):
