@@ -1,10 +1,10 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 <div class="{% block layout %}zplus-badge{% endblock %}
-    {%- if not view.zplus_label.volume_exists %} {{ self.layout() }}--coverless{% endif %}" data-ct-area="volumeteaser
-    {%- if not view.zplus_label.cover %}_coverless{% endif %}">
-    <div class="{{ self.layout() }}__banner article__item article__item--rimless" data-ct-row="0" data-ct-column="false">
-        <a class="{{ self.layout() }}__link" href="{{ view.zplus_label.link }}" data-ct-label="exklusiv_fuer_abonnenten">
+    {%- if not view.zplus_label.volume_exists %} {{ self.layout() }}--coverless{% endif %}" data-ct-row="volumeteaser
+    {%- if not view.zplus_label.cover %}_coverless{% endif %}" data-ct-column="false">
+    <div class="{{ self.layout() }}__banner article__item article__item--rimless">
+        <a class="{{ self.layout() }}__link" href="{{ view.zplus_label.link }}">
             <span class="{{ self.layout() }}__text">
                 <span class="{{ self.layout() }}__intro">{{ view.zplus_label.intro }}</span>
                 <span class="{{ self.layout() }}__link-text">{{ view.zplus_label.link_text }}</span>
