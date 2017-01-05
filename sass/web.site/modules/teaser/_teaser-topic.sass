@@ -52,9 +52,11 @@
 		@extend %teaser-combined-link
 	&__kicker
 		@extend %teaser-kicker-cp-area-fullwidth
+		align-items: center
 		display: inline-block
-	&__kicker-logo-divider
-		@extend %teaser-kicker-logo-divider
+		justify-content: center // keep specificity low
+	article[data-zplus] &__kicker
+		display: flex
 	&__kicker-logo
 		&--zmo
 			@extend %teaser-kicker-logo--zmo
@@ -80,7 +82,7 @@
 		&--zco
 			@extend %teaser-kicker-logo--zco
 		&--zplus
-			@extend %teaser-kicker-logo--zplus
+			@extend %teaser-kicker-logo--zplus-xs
 	&__title
 		@extend %teaser-title
 		color: $white
@@ -108,8 +110,11 @@
 			&:after
 				content: "–" // attention: mdash
 				margin: 0 .25em
+		article[data-zplus] &__series-label
+			float: none
 		&__kicker
 			margin-bottom: remify(10px)
+			justify-content: flex-start
 		&__title
 			font-size: em(20px)
 
