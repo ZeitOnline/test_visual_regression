@@ -9,9 +9,11 @@ POSTDEPLOY
 
 - ZON-2718: Add structured data for video pages
 
+- FEAT: Add hook to require external scripts in ZON blogs
+
 - MAINT: Clean up test data
 
-- FEAT: Add hook to require external scripts in ZON blogs
+- MAINT: Polish Z+ kicker logo
 
 
 3.26 (2016-12-30)
