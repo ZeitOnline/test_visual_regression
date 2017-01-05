@@ -207,6 +207,8 @@
                     <h4>Wie wird der Modus ausgelöst?</h4>
                     <ul>
                         <li>Über den Query Parameter <a href="/index?iqadtest=iqadview">?iqadtest=iqadview</a>.</li>
+                        <li>Über den Query Parameter <a href="/index?iqadtest=iqviewadplace">?iqadtest=iqviewadplace</a> sieht man alle verfügbaren Werbeplätze.</li>
+
                     </ul>
                     </text>
             </container>
