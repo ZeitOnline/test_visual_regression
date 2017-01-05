@@ -7,8 +7,13 @@
         data-video-provider="brightcove"
         data-video-size="large"
         data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}"
-        itemtype="http://schema.org/VideoObject" itemscope>
+        itemprop="mainEntity"
+        itemscope
+        itemtype="http://schema.org/VideoObject"
+        itemid="{{ view.basename }}"
+        itemref="publisher">
         {% profile %}
+        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         <meta itemprop="playerType" content="HTML5 Flash">
         <meta itemprop="name" content="{{ view.title }}">
         <meta itemprop="uploadDate" content="{{ view.date_last_modified | format_date('iso8601') }}">

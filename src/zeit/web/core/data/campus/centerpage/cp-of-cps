@@ -69,7 +69,7 @@
 &lt;/pickle&gt;</attribute>
     <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
   </head>
-  <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <cluster visible="True" visible_mobile="True" area="id-a5ffaf22-0ddf-442b-97d5-f317ddc57af7" kind="solo" kind_title="Solo-Region">
       <region visible="True" visible_mobile="True" hide-dupes="True" area="id-a5f43cfa-8a38-4712-bca5-468f1ded1b55" kind="solo">

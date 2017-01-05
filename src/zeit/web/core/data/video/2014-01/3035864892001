@@ -1,4 +1,4 @@
-<video xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<video xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <renditions>
             <rendition frame_width="720" url="http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/1177/18140073001_3035898001001_Beitrag-Skispringen-f-r-Anf-nger.mp4"/>

@@ -1,4 +1,4 @@
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:cp="http://namespaces.zeit.de/CMS/cp">
+<article xmlns:cp="http://namespaces.zeit.de/CMS/cp">
 <head>
 <header>
 <cardstack cp:__name__="id-a5873350-202c-4705-91ec-e601eccc239e" card_id="272" is_advertorial="False"/>

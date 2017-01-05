@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -202,17 +202,17 @@
                 <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a">
                     <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" year="2015" issue="7" ressort="zeit-magazin" contenttype="gallery" publication-date="" expires="">
                         <badges>
-                            <badge py:pytype="str">gallery</badge>
+                            <badge>gallery</badge>
                         </badges>
-                        <supertitle py:pytype="str">Reisefotografie</supertitle>
-                        <title py:pytype="str">Stadt, Land, Rücken</title>
-                        <text py:pytype="str">Magdalena Wosinska reist durch die USA und fotografiert sich selbst. In den Mittelpunkt stellt sie einen Körperteil, der häufig übersehen wird: ihren Rücken.</text>
-                        <description py:pytype="str">Magdalena Wosinska reist durch die USA und fotografiert sich selbst. In den Mittelpunkt stellt sie einen Körperteil, der häufig übersehen wird: ihren Rücken.</description>
+                        <supertitle>Reisefotografie</supertitle>
+                        <title>Stadt, Land, Rücken</title>
+                        <text>Magdalena Wosinska reist durch die USA und fotografiert sich selbst. In den Mittelpunkt stellt sie einen Körperteil, der häufig übersehen wird: ihren Rücken.</text>
+                        <description>Magdalena Wosinska reist durch die USA und fotografiert sich selbst. In den Mittelpunkt stellt sie einen Körperteil, der häufig übersehen wird: ihren Rücken.</description>
                         <byline xsi:nil="true"/>
                         <breadcrumb_title xsi:nil="true"/>
                         <image base-id="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs-teaser/" type="jpg" title="Magdalena Teaser" align="left" publication-date="" expires="">
                             <bu xsi:nil="true"/>
-                            <copyright py:pytype="str">© Magdalena Wosinska</copyright>
+                            <copyright>© Magdalena Wosinska</copyright>
                         </image>
                     </block>
                 </container>
@@ -221,18 +221,18 @@
                 <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e">
                     <block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" uniqueId="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="Tillmann Prüfer" genre="interview">
                         <video href="http://xml.zeit.de/video/2014-05/3537359236001" href2="" expires="" video_id="vid3537359236001" video_id_2=""/>
-                        <supertitle py:pytype="str">Karl Lagerfeld</supertitle>
-                        <title py:pytype="str">"Ich bin nicht intellektuell, nur ziemlich kultiviert"</title>
-                        <text py:pytype="str">Er gibt Nietzsche-Bände heraus und lernt von seiner Katze. Im Interview spricht Karl Lagerfeld über schöne Hände und ewige Jugend.</text>
-                        <description py:pytype="str">Er gibt Nietzsche-Bände heraus und lernt von seiner Katze. Im Interview spricht Karl Lagerfeld über schöne Hände und ewige Jugend.</description>
+                        <supertitle>Karl Lagerfeld</supertitle>
+                        <title>"Ich bin nicht intellektuell, nur ziemlich kultiviert"</title>
+                        <text>Er gibt Nietzsche-Bände heraus und lernt von seiner Katze. Im Interview spricht Karl Lagerfeld über schöne Hände und ewige Jugend.</text>
+                        <description>Er gibt Nietzsche-Bände heraus und lernt von seiner Katze. Im Interview spricht Karl Lagerfeld über schöne Hände und ewige Jugend.</description>
                         <byline xsi:nil="true"/>
                         <breadcrumb_title xsi:nil="true"/>
                         <author href="http://xml.zeit.de/autoren/P/Tillmann_Pruefer/index.xml" publication-date="" expires="">
-                            <display_name py:pytype="str">Tillmann Prüfer</display_name>
+                            <display_name>Tillmann Prüfer</display_name>
                         </author>
                         <image base-id="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld/" type="jpg" title="Karl Lagerfeld" alt="Karl Lagerfeld" align="left" publication-date="" expires="">
-                            <bu py:pytype="str">Karl Lagerfeld</bu>
-                            <copyright py:pytype="str">© Karl Lagerfeld</copyright>
+                            <bu>Karl Lagerfeld</bu>
+                            <copyright>© Karl Lagerfeld</copyright>
                         </image>
                     </block>
                 </container>
@@ -249,8 +249,8 @@
                         <byline xsi:nil="true"/>
                         <breadcrumb_title xsi:nil="true"/>
                         <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/" type="jpg" title="Eine Frau isst Paprikasuppe" alt="Eine Frau isst Paprikasuppe" align="left" publication-date="" expires="2014-05-18T07:51:24+00:00">
-                            <bu py:pytype="str">Paprikasuppe löffelweise</bu>
-                            <copyright py:pytype="str">© Jason Lowe</copyright>
+                            <bu>Paprikasuppe löffelweise</bu>
+                            <copyright>© Jason Lowe</copyright>
                         </image>
                     </block>
                 </container>
@@ -282,7 +282,7 @@
         <cluster visible="True" area="id-6f4ded13-7461-4197-804c-db3d668fa257" title="Dynamischer Inhalt" kind="solo">
             <region visible="True" area="id-5fe59e73-e388-42a4-a8d4-750b0bf96fc7" kind="solo" title="Dynamischer Inhalt" count="3" automatic="True" automatic_type="channel">
                 <query>
-                  <condition type="Channel" py:pytype="str">News</condition>
+                  <condition type="Channel">News</condition>
                 </query>
                 <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="id-7677b90b-6cf3-49fb-8343-9416b1a8c500"/>
                 <container cp:type="auto-teaser" module="zon-small" visible="True" cp:__name__="id-cb1a9735-66a3-4012-afef-9ba13f544e6e"/>
