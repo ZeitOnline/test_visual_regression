@@ -228,3 +228,19 @@ def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
             'Spiele')
     assert (browser.cssselect('.dashboard__box-list')[2]
             .cssselect('a')[0].text.strip() == u'ZEIT Audio hören')
+
+
+def test_login_status_is_set_as_class(testbrowser, sso_keypair):
+    # browser without sso session
+    testbrowser.open('/login-state')
+    assert 'is-loggedin' not in testbrowser.contents
+
+    # browser with sso session
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+    testbrowser.cookies.forURL(
+        'http://localhost')['my_sso_cookie'] = sso_cookie
+    testbrowser.open('/login-state')
+    assert 'is-loggedin' in testbrowser.contents
