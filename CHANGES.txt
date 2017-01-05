@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.27 (unreleased)
+3.27 (2017-01-05)
 -----------------
 
 - ZON-3571: Paginate volume overview
