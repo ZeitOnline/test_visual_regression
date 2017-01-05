@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import re
 
 from selenium.common.exceptions import TimeoutException
@@ -738,7 +739,7 @@ def test_canonical_ruleset_on_cps(testbrowser, datasolr):
     # several params
     browser = testbrowser('/dynamic/ukraine?p=2&a=0#comment')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?p=2'
+    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?a=0&p=2'
 
 
 def test_canonical_ruleset_on_article_pages(testbrowser):
@@ -2498,14 +2499,15 @@ def test_volume_overview_has_adapted_centerpage_header(
 
 def test_volume_overview_teasers_render_expected_markup(testbrowser):
     browser = testbrowser('/2016/index')
-    teasers = browser.cssselect('.cp-area--volume-overview >'
-                                ' .volume-overview-teaser a')
+    teasers = browser.cssselect(
+        '.cp-area--volume-overview .teaser-volume-overview a')
     assert len(teasers) == 7
     for teaser in teasers:
-        caption = teaser.cssselect('.volume-overview-teaser__caption')[0]
-        assert caption.find('span')[0].text + \
-            caption.find('span')[2].text == 'Jetzt lesen'
-        assert 'volume-overview-teaser__media' in \
+        caption = teaser.cssselect('.teaser-volume-overview__cta')[0]
+        caption_text = caption.text_content().strip()
+        assert caption_text.startswith('Jetzt Ausgabe ')
+        assert caption_text.endswith(' lesen')
+        assert 'teaser-volume-overview__media' in \
                teaser.cssselect('figure')[0].get('class')
 
 
@@ -2514,28 +2516,28 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
 
     # test fullwidth teasers
     teasers = browser.cssselect('.cp-area--solo article')
-    assert len(teasers) == 2
+    assert len(teasers) == 3
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test major area teasers
     teasers = browser.cssselect('.cp-area--major article')
-    assert len(teasers) == 4
+    assert len(teasers) == 6
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test minor area teasers
-    teasers = browser.cssselect('.cp-area--minor article')
-    assert len(teasers) == 4
+    teasers = browser.cssselect('.cp-area--minor article[data-zplus]')
+    assert len(teasers) == 5
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test square teasers
-    teasers = browser.cssselect('.cp-area--duo article')
-    assert len(teasers) == 2
+    teasers = browser.cssselect('.cp-area--duo article[data-zplus]')
+    assert len(teasers) == 3
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
@@ -2584,7 +2586,7 @@ def test_headerimage_should_overlay_onto_tube_area(testbrowser):
     assert '--overlain' in header_image.attrib['class']
 
 
-def test_volume_teaser_on_cphas_correct_elements(testbrowser):
+def test_volume_teaser_on_cp_has_correct_elements(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/volumeteaser')
 
     assert len(browser.cssselect('.teaser-volumeteaser')) == 2
@@ -2628,3 +2630,27 @@ def test_volume_cp_should_send_correct_headers(testserver, monkeypatch):
     c1_mixin.context = cp
     c1_mixin.request = request
     assert c1_mixin._c1_entitlement == 'paid'
+
+
+def test_volume_overview_has_correct_pagination(testbrowser):
+    browser = testbrowser('/2015/index')
+
+    prev_tag = browser.cssselect('head link[rel="prev"]')[0]
+    next_tag = browser.cssselect('head link[rel="next"]')[0]
+    current_tag = browser.cssselect('head link[rel="canonical"]')[0]
+    assert prev_tag.get('href').endswith('/2016/index')
+    assert next_tag.get('href').endswith('/2014/index')
+    assert current_tag.get('href').endswith('/2015/index')
+
+    next_button = browser.cssselect('.pager__button--next')[0]
+    assert next_button.text == 'Vorheriges Jahr'
+
+    current_year = datetime.datetime.today().year
+    prev_link = browser.cssselect('.pager__pages a')[0]
+    assert prev_link.get('href').endswith('/{}/index'.format(current_year))
+
+    current = browser.cssselect('.pager__pages .pager__page--current')[0]
+    assert current.text_content() == '2015'
+
+    meta_robots = browser.cssselect('head meta[name="robots"]')[0]
+    meta_robots.get('content') == 'index,follow,noodp,noydir,noarchive'
