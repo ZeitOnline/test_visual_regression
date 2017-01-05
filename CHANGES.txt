@@ -7,6 +7,8 @@ POSTDEPLOY
 3.27 (unreleased)
 -----------------
 
+- ZON-2718: Add structured data for video pages
+
 - MAINT: Clean up test data
 
 
