@@ -1224,7 +1224,6 @@ def invalid_unicode_in_request(request):
 @zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
 @zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
-@zeit.web.view_config(route_name='schlagworte_index')
 def surrender(context, request):
     return pyramid.response.Response(
         'OK', 303, headerlist=[('X-Render-With', 'default')])
