@@ -700,7 +700,7 @@ def test_volume_teaser_in_article_provides_expected_webtrekk_string(
     link.click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'tablet.articleheader.volumeteaser...exklusiv_fuer_abonnenten|')
+        'tablet.articleheader.zplus-badge...exklusiv_fuer_abonnenten|')
 
 
 def test_coverless_volume_teaser_in_article_provides_expected_webtrekk_string(
@@ -725,7 +725,7 @@ def test_coverless_volume_teaser_in_article_provides_expected_webtrekk_string(
     tracking_data = driver.execute_script("return window.trackingData")
     print(tracking_data)
     assert tracking_data.startswith(
-        'tablet.articleheader.volumeteaser_coverless'
+        'tablet.articleheader.zplus-badge_coverless'
         '...exklusiv_fuer_abonnenten|')
 
 

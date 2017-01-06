@@ -1,7 +1,7 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 <div class="{% block layout %}zplus-badge{% endblock %}
-    {%- if not view.zplus_label.volume_exists %} {{ self.layout() }}--coverless{% endif %}" data-ct-row="volumeteaser
+    {%- if not view.zplus_label.volume_exists %} {{ self.layout() }}--coverless{% endif %}" data-ct-row="zplus-badge
     {%- if not view.zplus_label.cover %}_coverless{% endif %}" data-ct-column="false">
     <div class="{{ self.layout() }}__banner article__item article__item--rimless">
         <a class="{{ self.layout() }}__link" href="{{ view.zplus_label.link }}">
