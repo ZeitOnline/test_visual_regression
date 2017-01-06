@@ -1,0 +1,86 @@
+.zplus-badge
+	padding: remify(0 0 10px 0)
+	flex-grow: 1
+
+	&__banner
+		background-color: $zon-lighter-grey
+		color: $color-text--light
+		line-height: remify(40px)
+		position: relative
+	&__link
+		+animated-interaction($color: $color-link--hover, $border-color: transparent)
+		color: inherit
+		display: block
+		+on-interaction
+			.zplus-badge__link-text
+				border-bottom-color: currentColor
+	&__icon
+		background-color: $red
+		color: #fff
+		float: left
+		height: remify(40px)
+		padding: remify(((40px - 23px) / 2) ((42px - 28px) / 2))
+		width: remify(42px)
+	&__text
+		font-size: em(12px)
+		letter-spacing: $zon-letter-spacing-l
+		margin-left: remify(10px)
+		text-transform: uppercase
+	&__link-text
+		border-bottom: 1px solid rgba($color-text--light, .5)
+	&__media
+		float: right
+		margin: remify(-10px $page-padding--small -10px 0)
+		width: remify(82px)
+
+	// if there is SVG icon and cover, hide cover for small screens
+	&__icon + &__media
+		display: none
+		+respond-min(em(350px))
+			display: block
+
+	+respond-min($break-tablet-min)
+		padding: remify(0 0 0 20px)
+
+		&__banner
+			line-height: 1.5
+			padding: remify(20px)
+			text-align: center
+			width: remify(180px)
+
+		&__intro
+			display: block
+
+		&__icon
+			bottom: remify(34px)
+			height: remify(42px)
+			left: remify(20px)
+			padding: 0
+			position: absolute
+			width: remify(48px)
+			z-index: 1
+			// if there is no cover
+			&:last-child
+				bottom: auto
+				height: remify(34px)
+				left: 50%
+				margin-left: remify(-38px / 2)
+				top: remify(-34px / 2)
+				width: remify(38px)
+
+		&__text
+			font-size: em(13px)
+			margin: 0
+
+		&__media
+			float: none
+			margin: remify(20px auto 0)
+			width: remify(124px)
+
+		// if icon meets cover
+		&__icon + &__media
+			margin-right: 0
+
+		// modifications for minimal version
+		&--coverless
+			align-self: flex-end

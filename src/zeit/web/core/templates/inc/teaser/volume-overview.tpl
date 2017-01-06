@@ -2,7 +2,7 @@
 {% set layout = 'teaser-{}'.format(module | get_layout) %}
 {% set href = '{0}{1}/{2:02d}/index'.format(request.route_url('home'), volume.year, volume.volume) %}
 {% set packshot = volume.covers['printcover'] %}
-{% set packshot_layout = layout %}
+{% set module_layout = layout %}
 
 <aside class="{{ layout }}">
     <a class="{{ layout }}__link" href="{{ href }}" data-ct-label="{{ '%02d_%d' | format(volume.volume, volume.year) }}">

@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - MAINT: Polish Z+ kicker logo
 
+- MAINT: Harmonize Z+ badge naming
+
 
 3.26 (2016-12-30)
 -----------------
