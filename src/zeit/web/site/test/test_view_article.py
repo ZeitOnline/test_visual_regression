@@ -1757,68 +1757,68 @@ def test_video_in_article_has_poster_copyright(testbrowser):
 def test_zplus_zon_article_has_correct_markup(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zon')
 
-    zplus_box = browser.cssselect('.zplus--coverless')
+    zplus_box = browser.cssselect('.zplus-badge--coverless')
     assert len(zplus_box) == 1
 
-    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
-    zplus_text = zplus_box[0].cssselect('.zplus__text')
-    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_banner = zplus_box[0].cssselect('.zplus-badge__banner')
+    zplus_icon = zplus_box[0].cssselect('.zplus-badge__icon')
+    zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_marker) == 1
+    assert len(zplus_icon) == 1
     assert len(zplus_text) == 1
     assert len(zplus_link) == 1
     assert 'exklusiv' in zplus_box[0].cssselect('a')[0].attrib['href']
     assert 'Exklusiv' in zplus_link[0].text.strip()
-    assert not zplus_box[0].cssselect('.zplus__media')
+    assert not zplus_box[0].cssselect('.zplus-badge__media')
 
 
 def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-novolume')
 
-    zplus_box = browser.cssselect('.zplus--coverless')
+    zplus_box = browser.cssselect('.zplus-badge--coverless')
     assert len(zplus_box) == 1
 
-    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__marker')
+    zplus_banner = zplus_box[0].cssselect('.zplus-badge__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus-badge__icon')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
     assert len(zplus_badge) == 1
-    assert not zplus_box[0].cssselect('.zplus__media')
+    assert not zplus_box[0].cssselect('.zplus-badge__media')
 
 
 def test_zplus_coverless_print_article_has_fallback_image(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-nocover')
 
-    zplus_box = browser.cssselect('.zplus')
+    zplus_box = browser.cssselect('.zplus-badge')
     assert len(zplus_box) == 1
 
-    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
+    zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
     assert 'default_packshot_diezeit' in zplus_media[0].attrib['src']
 
 
 def test_zplus_abo_print_article_has_correct_markup(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit')
 
-    zplus_box = browser.cssselect('.zplus')
+    zplus_box = browser.cssselect('.zplus-badge')
     assert len(zplus_box) == 1
 
-    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
-    zplus_text = zplus_box[0].cssselect('.zplus__text')
-    zplus_cover = zplus_box[0].cssselect('.zplus__media')
-    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
-    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_banner = zplus_box[0].cssselect('.zplus-badge__banner')
+    zplus_icon = zplus_box[0].cssselect('.zplus-badge__icon')
+    zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
+    zplus_cover = zplus_box[0].cssselect('.zplus-badge__media')
+    zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_marker) == 1
+    assert len(zplus_icon) == 1
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
@@ -1835,22 +1835,22 @@ def test_zplus_print_article_has_correct_markup(
         'reader_revenue': True}.get)
     browser = testbrowser('/zeit-online/article/zplus-zeit-register')
 
-    zplus_box = browser.cssselect('.zplus')
+    zplus_box = browser.cssselect('.zplus-badge')
     assert len(zplus_box) == 1
 
     article_metadata_source = browser.cssselect('.metadata__source')
-    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
-    zplus_text = zplus_box[0].cssselect('.zplus__text')
-    zplus_cover = zplus_box[0].cssselect('.zplus__media')
-    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
-    zplus_link = zplus_box[0].cssselect('.zplus__link')
-    zplus_label = zplus_box[0].cssselect('.zplus__label')
+    zplus_banner = zplus_box[0].cssselect('.zplus-badge__banner')
+    zplus_icon = zplus_box[0].cssselect('.zplus-badge__icon')
+    zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
+    zplus_cover = zplus_box[0].cssselect('.zplus-badge__media')
+    zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link')
+    zplus_label = zplus_box[0].cssselect('.zplus-badge__label')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_marker) == 0
+    assert len(zplus_icon) == 0
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
@@ -1876,36 +1876,36 @@ def test_zplus_print_article_has_correct_markup_if_reader_revenue_off(
 
 def test_free_print_article_has_volume_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free')
-    badge = browser.cssselect('main article .zplus')[0]
-    label = badge.cssselect('.zplus__text')[0]
+    badge = browser.cssselect('main article .zplus-badge')[0]
+    label = badge.cssselect('.zplus-badge__text')[0]
 
     assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 1/2016'
-    assert badge.cssselect('.zplus__media')
+    assert badge.cssselect('.zplus-badge__media')
 
     # test volume badge is in single page view too
     browser = testbrowser(
         '/zeit-online/article/zplus-zeit-free/komplettansicht')
 
-    assert browser.cssselect('main article .zplus')
+    assert browser.cssselect('main article .zplus-badge')
 
 
 def test_free_print_article_shows_no_volume_badge_on_page_two(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free/seite-2')
 
-    assert not browser.cssselect('main article .zplus')
+    assert not browser.cssselect('main article .zplus-badge')
 
 
 def test_registration_zon_article_has_no_zplus_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zon-register')
 
-    assert not browser.cssselect('.zplus')
+    assert not browser.cssselect('.zplus-badge')
     assert not browser.cssselect('.article__item--has-badge')
 
 
 def test_free_article_has_no_zplus_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
 
-    zplus_box = browser.cssselect('.zplus')
+    zplus_box = browser.cssselect('.zplus-badge')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_box) == 0
