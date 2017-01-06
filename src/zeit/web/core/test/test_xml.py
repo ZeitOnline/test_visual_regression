@@ -20,16 +20,6 @@ def test_xml_renders_with_host_header(testserver):
     assert res.status_code == 200
 
 
-def test_xml_renders_with_route_name(testserver):
-    res = requests.get(
-        '%s/xml/zeit-online/index' % testserver.url)
-    assert res.status_code == 200
-
-    res = requests.get(
-        '%s/xml/zeit-magazin/centerpage/index' % testserver.url)
-    assert res.status_code == 200
-
-
 def test_xml_renders_iso_8859_1(testserver):
     path = os.path.dirname(
         zeit.web.core.__file__) + '/data/zeit-online/article/01'
