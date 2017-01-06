@@ -19,7 +19,12 @@ import zeit.web.site.area.zett
 log = logging.getLogger(__name__)
 
 
-@zeit.web.view_config(context=zeit.content.image.interfaces.IImage)
+@zeit.web.view_defaults(
+    context=zeit.content.image.interfaces.IImage)
+@zeit.web.view_config(
+    host_restriction='img')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_not_in_production,))
 class Image(zeit.web.core.view.Base):
 
     def __call__(self):
@@ -78,9 +83,13 @@ class Image(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
 
 
-@zeit.web.view_config(
+@zeit.web.view_defaults(
     context=zeit.content.image.interfaces.IImage,
     name='imagegroup')
+@zeit.web.view_config(
+    host_restriction='img')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_not_in_production,))
 class LocalImage(Image):
 
     def __init__(self, context, request):
@@ -93,9 +102,13 @@ class LocalImage(Image):
             raise pyramid.httpexceptions.HTTPNotFound(err.message)
 
 
-@zeit.web.view_config(
+@zeit.web.view_defaults(
     context=zeit.content.video.interfaces.IVideo,
     name='imagegroup')
+@zeit.web.view_config(
+    host_restriction='img')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_not_in_production,))
 class Brightcove(Image):
 
     mapping = {'still.jpg': 'wide__580x326', 'thumbnail.jpg': 'wide__120x67'}
@@ -145,14 +158,26 @@ class RSSImage(Image):
         return conf.get(self.host_key, '')
 
 
-@zeit.web.view_config(route_name='spektrum-image')
+@zeit.web.view_defaults(
+    context=zeit.content.image.interfaces.IImage,
+    route_name='spektrum-image')
+@zeit.web.view_config(
+    host_restriction='img')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_not_in_production,))
 class Spektrum(RSSImage):
 
     host_key = 'spektrum_img_host'
     ig_class = zeit.web.site.area.spektrum.ImageGroup
 
 
-@zeit.web.view_config(route_name='zett-image')
+@zeit.web.view_defaults(
+    context=zeit.content.image.interfaces.IImage,
+    route_name='zett-image')
+@zeit.web.view_config(
+    host_restriction='img')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_not_in_production,))
 class Zett(RSSImage):
 
     host_key = 'zett_img_host'
