@@ -119,6 +119,13 @@ class Application(object):
         if self.settings.get('zodbconn.uri'):
             self.config.include('pyramid_zodbconn')
 
+        config.add_view_predicate(
+            'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
+            weighs_more_than=('custom',))
+        config.add_route_predicate(
+            'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
+            weighs_more_than=('traverse',))
+
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('campus_framebuilder', '/campus/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')

@@ -1,5 +1,6 @@
-import urlparse
 import logging
+import re
+import urlparse
 
 import grokcore.component
 import pyramid.httpexceptions
@@ -250,8 +251,88 @@ class RoutesMapper(pyramid.urldispatch.RoutesMapper):
             [host.startswith(x) for x in self.SKIP_BLACKLIST_ON_HOSTS])
 
 
+class HostRestrictionPredicate(object):
+    """Requests with a specific host header shall be exclusively answered by
+    certain views. This means, that these views can only be accessed with that
+    host header and all other views shall not answer if the header is present.
+
+    The predicate is used like following:
+
+      @zeit.web.view_config(context=IFoo, host_restriction=True)
+      class FooView(object):
+          ...
+
+      @zeit.web.view_config(context=IFooBar, host_restriction='bar')
+      class FooBarView(FooView)
+          ...
+
+    Our foo view is now configured to be available under abc.zeit.de,
+    xyz.zeit.de and any other host name, that is not bar.zeit.de (!).
+
+    Whereas the foobar view is exclusively (!) available with a host header
+    of bar.zeit.de.
+
+    Accepted value types:
+
+    True    view available for all host-headers unclaimed by other views
+    False   view unaffected by host-header restrictions
+    str     singular host-header restriction
+    tuple   multiple host-headers
+
+    Note: Headers may also contain a staging segment, i.e. xml.staging.zeit.de
+    """
+
+    def __init__(self, value, config):
+        if value in (None, True, False):
+            self.value = bool(value)
+            return
+        elif isinstance(value, basestring):
+            self.value = (value,)  # Ensure value is iterable
+        elif isinstance(value, tuple):
+            if not all(isinstance(v, basestring) for v in value):
+                raise TypeError(
+                    'host tuple contains non-string items')
+            self.value = value
+        else:
+            raise TypeError('host must be string or tuple of strings')
+
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        if 'restricted_hosts' not in conf:
+            conf['restricted_hosts'] = set()
+        conf['restricted_hosts'].update(value)
+
+    def text(self):
+        return u'host_restriction = {}'.format(self.value)
+
+    phash = text
+
+    def __call__(self, info_or_context, request):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        r_hosts = conf.get('restricted_hosts')
+
+        # Abort if no restriction is configured or view is exempt
+        if not r_hosts or not self.value:
+            return True
+
+        header = request.headers.get('host', 'www.zeit.de')
+
+        if self.value is True:
+            # View is available on all unclaimed hosts
+            for host in r_hosts:
+                if re.match('{}(\.staging)?\.zeit\.de'.format(host), header):
+                    return False
+            return True
+
+        for host in self.value:
+            if re.match('{}(\.staging)?\.zeit\.de'.format(host), header):
+                return True
+
+        return False
+
+
 class view_config(pyramid.view.view_config):  # NOQA
     __custom_defaults__ = {
+        'host_restriction': True,
         'request_method': 'GET'}
 
     def __init__(self, **settings):
