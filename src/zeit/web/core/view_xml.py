@@ -26,20 +26,33 @@ import zeit.web.core.view
 log = logging.getLogger(__name__)
 
 
-@zeit.web.view_defaults(
-    host_restriction='xml',
-    renderer='string')
-@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent)
-@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
-@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor)
-@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@zeit.web.view_config(context=zeit.content.link.interfaces.ILink)
-@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
-@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
-@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
+# Note: One might think it would be sleeker to set the host_restriction as a
+#       view_default. That would be a great idea, if not for the excruciating
+#       convultion that is pyramid view predicate discrimination.
+
+@zeit.web.view_defaults(renderer='string')
+@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.link.interfaces.ILink,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle,
+                      host_restriction='xml')
 class XMLContent(zeit.web.core.view.Base):
 
     def __call__(self):
@@ -111,9 +124,12 @@ class XMLContent(zeit.web.core.view.Base):
         return self.context.xml
 
 
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2009)
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015)
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2009,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015,
+                      host_restriction='xml')
 class XMLCenterpage(XMLContent):
 
     @property

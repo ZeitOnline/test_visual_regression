@@ -194,7 +194,9 @@ class Newsfeed(Base):
         return root
 
 
-@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor)
+@zeit.web.view_config(
+    context=zeit.content.author.interfaces.IAuthor,
+    host_restriction='newsfeed')
 class AuthorFeed(Newsfeed):
 
     @zeit.web.reify
