@@ -7,7 +7,7 @@ POSTDEPLOY
 3.28 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Harmonize Z+ badge naming
 
 
 3.27 (2017-01-05)
@@ -22,8 +22,6 @@ POSTDEPLOY
 - MAINT: Clean up test data
 
 - MAINT: Polish Z+ kicker logo
-
-- MAINT: Harmonize Z+ badge naming
 
 
 3.26 (2016-12-30)
