@@ -81,7 +81,9 @@ def join_queries(url, join_query):
     return urlparse.urlunparse([scheme, netloc, path, params, query, fragment])
 
 
-@zeit.web.view_defaults(renderer='string')
+@zeit.web.view_defaults(
+    host_restriction='newsfeed',
+    renderer='string')
 class Base(zeit.web.core.view.Base):
 
     @property
@@ -89,11 +91,7 @@ class Base(zeit.web.core.view.Base):
         return zeit.content.cp.interfaces.ITeaseredContent(self.context)
 
 
-@zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICP2015,
-    header='host:newsfeed(\.staging)?\.zeit\.de',
-    # We need to be as specific as the normal views with `is_zon_content` etc.
-    custom_predicates=(lambda *_: True,))
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015)
 class Newsfeed(Base):
 
     def __call__(self):
@@ -196,11 +194,7 @@ class Newsfeed(Base):
         return root
 
 
-@zeit.web.view_config(
-    route_name='newsfeed')
-@zeit.web.view_config(
-    header='host:newsfeed(\.staging)?\.zeit\.de',
-    context=zeit.content.author.interfaces.IAuthor)
+@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor)
 class AuthorFeed(Newsfeed):
 
     @zeit.web.reify
