@@ -28,8 +28,6 @@ log = logging.getLogger(__name__)
 
 class XMLContent(zeit.web.core.view.Base):
 
-    allowed_on_hosts = ['xml']
-
     def __call__(self):
         super(XMLContent, self).__call__()
         self.request.response.content_type = 'application/xml'
@@ -176,8 +174,6 @@ class RouteNameCP(CenterpageMixin, RouteNameContent):
 @zeit.web.view_config(
     header='host:xml(\.staging)?\.zeit\.de')
 class NonXMLContent(zeit.web.core.view.Base):
-
-    allowed_on_hosts = ['xml']
 
     def __call__(self):
         super(NonXMLContent, self).__call__()

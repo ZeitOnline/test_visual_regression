@@ -84,8 +84,6 @@ def join_queries(url, join_query):
 @zeit.web.view_defaults(renderer='string')
 class Base(zeit.web.core.view.Base):
 
-    allowed_on_hosts = ['newsfeed']
-
     @property
     def items(self):
         return zeit.content.cp.interfaces.ITeaseredContent(self.context)
@@ -222,7 +220,6 @@ class AuthorFeed(Newsfeed):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    header='host:newsfeed(\.staging)?\.zeit\.de',
     name='rss-instantarticle')
 class InstantArticleFeed(Newsfeed):
 
