@@ -26,6 +26,20 @@ import zeit.web.core.view
 log = logging.getLogger(__name__)
 
 
+@zeit.web.view_defaults(
+    host_restriction='xml',
+    renderer='string')
+@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent)
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor)
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.content.link.interfaces.ILink)
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
 class XMLContent(zeit.web.core.view.Base):
 
     def __call__(self):
@@ -97,82 +111,20 @@ class XMLContent(zeit.web.core.view.Base):
         return self.context.xml
 
 
-class CenterpageMixin(object):
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2009)
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015)
+class XMLCenterpage(XMLContent):
 
     @property
     def xml(self):
         return zeit.content.cp.interfaces.IRenderedXML(self.context)
 
 
-# NOTE: Pyramid route specififity is an obscure topic. We try to configure
-#       the XML routes as specific as our HTML ones with dummy predicates (ND)
-
-
-@zeit.web.view_defaults(
-    header='host:xml(\.staging)?\.zeit\.de',
-    custom_predicates=(lambda *_: True,),
-    renderer='string',
-    request_method='GET')
-@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent)
 @zeit.web.view_config(
-    context=zeit.content.article.interfaces.IArticle,
-    custom_predicates=(lambda *_: True, lambda *_: True, lambda *_: True))
-@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor)
-@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@zeit.web.view_config(context=zeit.content.link.interfaces.ILink)
-@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
-@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
-@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
-class HostHeaderContent(XMLContent):
-    pass
-
-
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2009)
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015)
-class HostHeaderCP(CenterpageMixin, HostHeaderContent):
-    pass
-
-
-@zeit.web.view_defaults(
-    route_name='xml',
-    custom_predicates=(lambda *_: True,),
-    renderer='string',
-    request_method='GET')
-@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent)
-@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
-@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor)
-@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@zeit.web.view_config(context=zeit.content.link.interfaces.ILink)
-@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
-@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
-@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
-class RouteNameContent(XMLContent):
-    pass
-
-
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2009)
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015)
-class RouteNameCP(CenterpageMixin, RouteNameContent):
-    pass
-
-
-@zeit.web.view_defaults(
     context=zeit.cms.repository.interfaces.IDAVContent,
-    custom_predicates=(lambda *_: True,),
-    renderer='string',
-    request_method='GET')
-@zeit.web.view_config(
-    route_name='xml')
-@zeit.web.view_config(
-    header='host:xml(\.staging)?\.zeit\.de')
+    host_restriction='xml',
+    renderer='string')
 class NonXMLContent(zeit.web.core.view.Base):
 
     def __call__(self):

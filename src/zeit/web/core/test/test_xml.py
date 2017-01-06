@@ -99,7 +99,7 @@ def test_xml_renders_centerpage_as_expected(testserver):
 
 
 def test_xml_renders_centerpage_with_centerpage_view(testserver):
-    with mock.patch('zeit.web.core.view_xml.CenterpageMixin.__call__') as view:
+    with mock.patch('zeit.web.core.view_xml.XMLCenterpage.__call__') as view:
         requests.get(
             '%s/zeit-magazin/centerpage/index' % testserver.url,
             headers={'Host': 'xml.zeit.de'})

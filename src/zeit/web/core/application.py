@@ -180,8 +180,6 @@ class Application(object):
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
 
-        config.add_route('xml', '/xml/*traverse')
-
         config.add_request_method(configure_host('asset'), reify=True)
         config.add_request_method(configure_host('image'), reify=True)
         config.add_request_method(configure_host('jsconf'), reify=True)
