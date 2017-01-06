@@ -159,7 +159,6 @@ class RSSImage(Image):
 
 
 @zeit.web.view_defaults(
-    context=zeit.content.image.interfaces.IImage,
     route_name='spektrum-image')
 @zeit.web.view_config(
     host_restriction='img')
@@ -172,7 +171,6 @@ class Spektrum(RSSImage):
 
 
 @zeit.web.view_defaults(
-    context=zeit.content.image.interfaces.IImage,
     route_name='zett-image')
 @zeit.web.view_config(
     host_restriction='img')
