@@ -1763,7 +1763,7 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
     zplus_banner = zplus_box[0].cssselect('.zplus-badge__banner')
     zplus_icon = zplus_box[0].cssselect('.zplus-badge__icon')
     zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
-    zplus_link = zplus_box[0].cssselect('.zplus-badge__link')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link-text')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
@@ -1813,7 +1813,7 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser):
     zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
     zplus_cover = zplus_box[0].cssselect('.zplus-badge__media')
     zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
-    zplus_link = zplus_box[0].cssselect('.zplus-badge__link')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link-text')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
@@ -1844,8 +1844,8 @@ def test_zplus_print_article_has_correct_markup(
     zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
     zplus_cover = zplus_box[0].cssselect('.zplus-badge__media')
     zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
-    zplus_link = zplus_box[0].cssselect('.zplus-badge__link')
-    zplus_label = zplus_box[0].cssselect('.zplus-badge__label')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link-text')
+    zplus_intro = zplus_box[0].cssselect('.zplus-badge__intro')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
@@ -1855,10 +1855,10 @@ def test_zplus_print_article_has_correct_markup(
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
     assert len(zplus_link) == 1
-    assert len(zplus_label) == 1
+    assert len(zplus_intro) == 1
     assert '/2014/49' in zplus_box[0].cssselect('a')[0].attrib['href']
     assert 'ZEIT Nr. 49/2014' in zplus_link[0].text.strip()
-    assert 'Aus der' in zplus_label[0].text.strip()
+    assert 'Aus der' in zplus_intro[0].text.strip()
     assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
             in zplus_media[0].attrib['src'])
     assert article_metadata_source.__len__() == 0
