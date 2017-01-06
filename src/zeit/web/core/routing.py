@@ -299,7 +299,7 @@ class HostRestrictionPredicate(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         if 'restricted_hosts' not in conf:
             conf['restricted_hosts'] = set()
-        conf['restricted_hosts'].update(value)
+        conf['restricted_hosts'].update(self.value)
 
     def text(self):
         return u'host_restriction = {}'.format(self.value)
