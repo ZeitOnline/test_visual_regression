@@ -4,10 +4,24 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.27 (unreleased)
+3.28 (unreleased)
 -----------------
 
+- Nothing changed yet.
+
+
+3.27 (2017-01-05)
+-----------------
+
+- ZON-3571: Paginate volume overview
+
+- ZON-2718: Add structured data for video pages
+
+- FEAT: Add hook to require external scripts in ZON blogs
+
 - MAINT: Clean up test data
+
+- MAINT: Polish Z+ kicker logo
 
 
 3.26 (2016-12-30)
