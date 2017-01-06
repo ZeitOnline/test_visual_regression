@@ -7,7 +7,7 @@ POSTDEPLOY
 3.28 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Harmonize Z+ badge naming
 
 
 3.27 (2017-01-05)
