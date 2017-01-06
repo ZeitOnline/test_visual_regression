@@ -248,3 +248,17 @@ class RoutesMapper(pyramid.urldispatch.RoutesMapper):
         host = request.headers.get('Host', '')
         return not any(
             [host.startswith(x) for x in self.SKIP_BLACKLIST_ON_HOSTS])
+
+
+class view_config(pyramid.view.view_config):  # NOQA
+    __custom_defaults__ = {
+        'request_method': 'GET'}
+
+    def __init__(self, **settings):
+        super(view_config, self).__init__(**settings)
+        for key, value in self.__custom_defaults__.items():
+            self.__dict__.setdefault(key, value)
+
+
+class view_defaults(view_config, pyramid.view.view_defaults):  # NOQA
+    pass

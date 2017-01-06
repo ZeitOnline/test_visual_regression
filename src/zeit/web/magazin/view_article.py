@@ -18,8 +18,7 @@ log = logging.getLogger(__name__)
 
 @zeit.web.view_defaults(
     context=zeit.content.article.interfaces.IArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,),
-    request_method='GET')
+    custom_predicates=(zeit.web.magazin.view.is_zmo_content,))
 @zeit.web.view_config(
     custom_predicates=(zeit.web.magazin.view.is_zmo_content,
                        zeit.web.core.view.is_advertorial),

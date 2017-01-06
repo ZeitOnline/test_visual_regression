@@ -28,8 +28,7 @@ log = logging.getLogger(__name__)
 
 @zeit.web.view_defaults(
     context=zeit.content.article.interfaces.IArticle,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
-    request_method='GET')
+    custom_predicates=(zeit.web.site.view.is_zon_content,))
 @zeit.web.view_config(
     renderer='templates/article.html')
 @zeit.web.view_config(

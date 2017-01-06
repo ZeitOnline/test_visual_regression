@@ -435,8 +435,7 @@ class PostCommentResource(PostComment):
 @zeit.web.view_defaults(
     # XXX specificity wars: it's not just for CSS
     custom_predicates=(lambda *_: True,),
-    request_param='action=recommend',
-    request_method='GET')
+    request_param='action=recommend')
 @zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
 @zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
                       name='komplettansicht')
