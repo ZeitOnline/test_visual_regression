@@ -2,6 +2,7 @@ import mock
 
 import pyramid.scripts.pviews
 import pyramid.request
+
 import zeit.cms.interfaces
 
 import zeit.web.site.view_centerpage

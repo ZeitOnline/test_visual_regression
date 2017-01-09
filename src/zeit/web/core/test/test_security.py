@@ -2,10 +2,8 @@ import json
 
 import jwt
 import mock
-import pyramid.interfaces
 import pytest
 import requests
-import zope.component
 
 from zeit.web.core.comments import get_thread
 from zeit.web.core.security import get_user_info

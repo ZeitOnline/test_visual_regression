@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import os
+import sys
+
 import lxml.etree
 import magic
 import mock
-import os
 import requests
-import sys
+
 import zeit.web.core
 
 
