@@ -16,6 +16,11 @@
                 return this[key] ? this[key] : '';
             }
         },
+        toggles: {
+            {% for key, value in view.js_toggles -%}
+                '{{ key }}': {{ 'true' if value else 'false' }}{{ ',' if not loop.last }}
+            {% endfor -%}
+        },
         {% if view is framebuilder -%}
         isWrapped: navigator.userAgent.indexOf('ZONApp') > -1,
         {% else -%}
