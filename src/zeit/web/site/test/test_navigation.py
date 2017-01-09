@@ -8,6 +8,7 @@ import selenium.webdriver
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -365,10 +366,15 @@ def test_nav_search_is_working_as_expected(
             assert False, 'Input must be visible'
 
     # test if search form gets submitted
+    old_page = driver.find_element_by_tag_name('html')
+    stale = expected_conditions.staleness_of(old_page)
     search__input.send_keys('test')
-    search__button.click()
-
-    assert driver.current_url.endswith('/zeit-online/zeitonline?q=test')
+    search__button.send_keys(Keys.RETURN)
+    try:
+        WebDriverWait(driver, 20).until(stale)
+        assert driver.current_url.endswith('/zeit-online/zeitonline?q=test')
+    except TimeoutException:
+        assert False, 'Search page not visited'
 
 
 def test_nav_burger_menu_is_working_as_expected(selenium_driver, testserver):
@@ -483,19 +489,32 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     driver.set_window_size(768, 1024)
     # wait for script
     try:
-        WebDriverWait(driver, 1).until(
+        WebDriverWait(driver, 2).until(
             expected_conditions.visibility_of(featured_nav_item))
     except TimeoutException:
         assert False, 'Featured item must be visible'
 
-    assert not chosen_nav_item.is_displayed(), (
-        '[on tablet] chosen nav item should be hidden')
-    assert more_dropdown.is_displayed(), (
-        '[on tablet] more dropdown should be visible')
-    actions.move_to_element(more_dropdown).perform()
-    assert cloned_nav_item.is_displayed(), (
-        '[on tablet] chosen nav item should be visible'
-        ' in more-dropdown on :hover')
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.invisibility_of_element_located(
+                (By.CSS_SELECTOR,
+                '.nav__ressorts-item--more > .nav__dropdown-list')))
+        # assert not chosen_nav_item.is_displayed(), (
+        #     '[on tablet] chosen nav item should be hidden')
+        # assert more_dropdown.is_displayed(), (
+        #     '[on tablet] more dropdown should be visible')
+    except TimeoutException:
+        assert False, 'more menue must be invisible'
+
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.visibility_of(more_dropdown))
+        more_dropdown.send_keys(Keys.SPACE)
+        assert cloned_nav_item.is_displayed(), (
+            '[on tablet] chosen nav item should be visible'
+            ' in more-dropdown on :hover')
+    except TimeoutException:
+        assert False, 'more_dropdown must be visible'
 
     # desktop
     driver.set_window_size(980, 1024)

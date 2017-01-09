@@ -11,6 +11,7 @@ import zeit.solr.interfaces
 import zeit.web.core.template
 
 from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import TimeoutException
 from selenium.common.exceptions import InvalidSwitchToTargetException
 from selenium.webdriver.support import expected_conditions
@@ -87,7 +88,7 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     driver.set_window_size(768, 800)
 
     teaser_el = driver.find_element_by_css_selector(teaser[0])
-    teaser_el.click()
+    teaser_el.send_keys(Keys.RETURN)
     track_str = driver.execute_script("return window.trackingData")
     assert('tablet.' + teaser[1] in track_str)
 
@@ -451,7 +452,7 @@ def test_zplus_provides_expected_webtrekk_strings(
         assert False, 'Element not locateable in 5 sec.'
     else:
         teaser_el = driver.find_element_by_css_selector(teasers[0])
-        teaser_el.click()
+        teaser_el.send_keys(Keys.RETURN)
         track_str = driver.execute_script("return window.trackingData")
         assert('tablet.' + teasers[1] in track_str)
 
@@ -610,7 +611,7 @@ def test_zmo_article_pagination_provides_expected_webtrekk_string(
     assert len(links) == len(labels)
 
     for index, link in enumerate(links):
-        link.click()
+        link.send_keys(Keys.RETURN)
         tracking_data = driver.execute_script("return window.trackingData")
         assert tracking_data.startswith(
             'stationaer.article-pager.page_3_of_7...' + labels[index])
