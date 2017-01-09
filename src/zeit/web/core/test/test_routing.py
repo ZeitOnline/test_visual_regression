@@ -173,7 +173,7 @@ def test_dynamic_folder_traversal_should_trigger_redirect_to_index(
 
 def test_view_config_should_apply_custom_defaults(monkeypatch):
     defaults = {'foo': 42, 'bar': False}
-    monkeypatch.setattr(zeit.web.view_config, '__custom_defaults__', defaults)
+    monkeypatch.setattr(zeit.web.view_config, '__global_defaults__', defaults)
 
     decorator = zeit.web.view_config(bar=True)
 
