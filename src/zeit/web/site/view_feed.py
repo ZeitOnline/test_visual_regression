@@ -82,7 +82,6 @@ def join_queries(url, join_query):
 
 
 @zeit.web.view_defaults(
-    host_restriction='newsfeed',
     renderer='string')
 class Base(zeit.web.core.view.Base):
 
@@ -91,7 +90,9 @@ class Base(zeit.web.core.view.Base):
         return zeit.content.cp.interfaces.ITeaseredContent(self.context)
 
 
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015)
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICP2015,
+    host_restriction='newsfeed')
 class Newsfeed(Base):
 
     def __call__(self):
@@ -216,7 +217,8 @@ class AuthorFeed(Newsfeed):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-instantarticle')
+    name='rss-instantarticle',
+    host_restriction='newsfeed')
 class InstantArticleFeed(Newsfeed):
 
     @zeit.web.reify
@@ -267,7 +269,8 @@ class InstantArticleFeed(Newsfeed):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-spektrum-flavoured')
+    name='rss-spektrum-flavoured',
+    host_restriction='newsfeed')
 class SpektrumFeed(Base):
 
     def __call__(self):
@@ -382,7 +385,8 @@ class SocialFeed(Base):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-socialflow-twitter')
+    name='rss-socialflow-twitter',
+    host_restriction='newsfeed')
 class TwitterFeed(SocialFeed):
 
     def social_value(self, content):
@@ -391,7 +395,8 @@ class TwitterFeed(SocialFeed):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-socialflow-facebook')
+    name='rss-socialflow-facebook',
+    host_restriction='newsfeed')
 class FacebookFeed(SocialFeed):
 
     def social_value(self, content):
@@ -400,7 +405,8 @@ class FacebookFeed(SocialFeed):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-socialflow-facebook-zmo')
+    name='rss-socialflow-facebook-zmo',
+    host_restriction='newsfeed')
 class FacebookMagazinFeed(SocialFeed):
 
     def social_value(self, content):
@@ -409,7 +415,8 @@ class FacebookMagazinFeed(SocialFeed):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-socialflow-facebook-zco')
+    name='rss-socialflow-facebook-zco',
+    host_restriction='newsfeed')
 class FacebookCampusFeed(SocialFeed):
 
     def social_value(self, content):
@@ -418,7 +425,8 @@ class FacebookCampusFeed(SocialFeed):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-roost')
+    name='rss-roost',
+    host_restriction='newsfeed')
 class RoostFeed(SocialFeed):
 
     def make_title(self, content):
