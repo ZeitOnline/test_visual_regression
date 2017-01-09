@@ -29,12 +29,12 @@ def test_custom_predicate_should_only_match_website_content(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/zeitonline')
     request = mock.Mock()
-    assert view_wrapper.__predicates__[0](context, request), (
+    assert view_wrapper.__predicates__[1](context, request), (
         'The predicate does not work for ZON content')
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/centerpage/index')
-    assert view_wrapper.__predicates__[0](context, request) is False, (
+    assert view_wrapper.__predicates__[1](context, request) is False, (
         'The predicate should not work for ZMO Content')
 
     # TODO: has to be adapted (as)
@@ -66,17 +66,17 @@ def test_custom_predicate_should_only_match_zmo_content(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/centerpage/index')
     request = mock.Mock()
-    assert view_wrapper.__predicates__[0](context, request), (
+    assert view_wrapper.__predicates__[1](context, request), (
         'The predicate does not work for ZMO content')
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/zeitonline')
-    assert view_wrapper.__predicates__[0](context, request) is False, (
+    assert view_wrapper.__predicates__[1](context, request) is False, (
         'The predicate should not work for ZON Content')
 
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/centerpage/zmo_zon_matching')
-    assert view_wrapper.__predicates__[0](context, request) is False, (
+    assert view_wrapper.__predicates__[1](context, request) is False, (
         'The predicate should not work for ZMO Content, if '
         'rebrush_website_content is set to True.')
 
