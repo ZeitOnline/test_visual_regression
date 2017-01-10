@@ -18,8 +18,12 @@
         },
         toggles: {
             {% for key, value in view.js_toggles -%}
-                '{{ key }}': {{ 'true' if value else 'false' }}{{ ',' if not loop.last }}
+                '{{ key }}': {{ 'true' if value else 'false' }},
             {% endfor -%}
+
+            get: function( key ) {
+                return this[key] || false;
+            }
         },
         {% if view is framebuilder -%}
         isWrapped: navigator.userAgent.indexOf('ZONApp') > -1,
