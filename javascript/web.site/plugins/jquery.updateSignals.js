@@ -13,8 +13,8 @@
             uniqueId: $( document.body ).data( 'uniqueId' ),
             timeEndpoint: '/json/delta_time?unique_id=',
             commentsEndpoint: '/json/comment_count?unique_id=',
-            timeInterval: parseInt(Zeit.view.update_signals_time_interval, 10) || 60,
-            commentsInterval: parseInt(Zeit.view.update_signals_comments_interval, 10) || 60
+            timeInterval: parseInt( Zeit.view.get( 'update_signals_time_interval' ), 10 ) || 60,
+            commentsInterval: parseInt( Zeit.view.get( 'update_signals_comments_interval' ), 10 ) || 60
         };
 
     /**
@@ -96,6 +96,10 @@
          * @category Function
          */
         updateSignals: function() {
+
+            if ( !Zeit.toggles.get( 'update_signals' ) ) {
+                return;
+            }
 
             if ( !Zeit.isMobileView() ) {
                 poll( options.timeEndpoint, options.timeInterval * 1000, '.js-update-datetime' );
