@@ -333,7 +333,8 @@ class Base(object):
     @zeit.web.reify
     def js_vars(self):
         names = ('banner_channel', 'ressort', 'sub_ressort', 'type',
-                 'hp_overlay_interval', 'update_signals_interval', 'paywall')
+                 'hp_overlay_interval', 'update_signals_comments_interval',
+                 'update_signals_time_interval', 'paywall')
         return [(name, getattr(self, name, '')) for name in names]
 
     @zeit.web.reify
@@ -717,9 +718,14 @@ class Base(object):
         return zeit.web.core.paywall.Paywall.status(self.request)
 
     @zeit.web.reify
-    def update_signals_interval(self):
+    def update_signals_comments_interval(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf.get('update_signals_interval', '')
+        return conf.get('update_signals_comments_interval', '')
+
+    @zeit.web.reify
+    def update_signals_time_interval(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('update_signals_time_interval', '')
 
     @zeit.web.reify
     def hp_overlay_interval(self):

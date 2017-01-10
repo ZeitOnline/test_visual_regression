@@ -43,7 +43,8 @@
   <setting name="hp_overlay_interval" xsi:type="xsd:int">78</setting>
   <!-- updateSignals settings, reminder on/off is now a feature toggle -->
   <!-- homepage update signals interval, in seconds -->
-  <setting name="update_signals_interval" xsi:type="xsd:int">300</setting>
+  <setting name="update_signals_comments_interval" xsi:type="xsd:int">20</setting>
+  <setting name="update_signals_time_interval" xsi:type="xsd:int">60</setting>
 
   <setting name="asset_prefix" xsi:type="xsd:string">/static/latest</setting>
   <setting name="image_prefix" xsi:type="xsd:string"></setting>
