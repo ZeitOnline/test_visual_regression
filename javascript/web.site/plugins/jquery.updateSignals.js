@@ -12,7 +12,9 @@
             outVelocity: 500,
             uniqueId: $( document.body ).data( 'uniqueId' ),
             timeEndpoint: '/json/delta_time?unique_id=',
-            commentsEndpoint: '/json/comment_count?unique_id='
+            commentsEndpoint: '/json/comment_count?unique_id=',
+            timeInterval: parseInt(Zeit.view.update_signals_time_interval, 10) || 60,
+            commentsInterval: parseInt(Zeit.view.update_signals_comments_interval, 10) || 60
         };
 
     /**
@@ -96,11 +98,11 @@
         updateSignals: function() {
 
             if ( !Zeit.isMobileView() ) {
-                poll( options.timeEndpoint, 1000 * 60, '.js-update-datetime' );
-                poll( options.commentsEndpoint, 1000 * 20, '.js-update-commentcount' );
+                poll( options.timeEndpoint, options.timeInterval * 1000, '.js-update-datetime' );
+                poll( options.commentsEndpoint, options.commentsInterval * 1000, '.js-update-commentcount' );
 
                 /**
-                 * bind event on diverse elements
+                 * bind event on several elements
                  * @event  signals.update
                  */
                 $( '.js-update-datetime, .js-update-commentcount' ).on( 'signals.update', textAnimation );
