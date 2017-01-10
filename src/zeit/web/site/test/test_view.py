@@ -270,10 +270,6 @@ def test_loggedin_status_hides_register_link_on_gate(
         {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
 
     # add_cookie() only works for the domain of the last get(), sigh.
-    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
-    driver.add_cookie({'name': 'my_sso_cookie', 'value': sso_cookie})
-    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
-
     driver.get('{}/zeit-online/article/zplus-zeit-register{}'.format(
         testserver.url, '?C1-Meter-Status=always_paid'))
     driver.add_cookie({'name': 'my_sso_cookie', 'value': sso_cookie})
