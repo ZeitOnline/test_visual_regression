@@ -212,6 +212,15 @@ class ImageGroupImage(Image):
         return self.context
 
 
+@grokcore.component.adapter(zeit.content.image.interfaces.IImage)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class SingleImageImage(Image):
+
+    @zeit.web.reify
+    def group(self):
+        return zeit.content.image.interfaces.IImageGroup(self.context, None)
+
+
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery,
                             name=u'content')
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
