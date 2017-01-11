@@ -111,7 +111,6 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
             videoSize,
             videoSeries,
             videoProvider,
-            '', // origin (zdf/reuters)
             eventString,
             videoPageUrl
         ];
@@ -229,7 +228,7 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
     };
 
     /* -------------------------------------------------------------------------
-    Register the event handler for postes messages
+    Register the event handler for posted messages
     ------------------------------------------------------------------------- */
     init = function() {
 
