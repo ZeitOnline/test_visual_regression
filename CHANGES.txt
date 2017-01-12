@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.30 (unreleased)
+3.30 (2017-01-12)
 -----------------
 
 - HOTFIX: Encode url in pagination
