@@ -19,11 +19,10 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">49</attribute>
   </head>
-  <body>
-    <year>2014</year>
-    <volume>49</volume>
-  </body>
+  <body/>
   <covers>
     <cover href="http://xml.zeit.de/angebote/printkiosk/bildergruppen/die-zeit-cover" id="printcover"/>
   </covers>
