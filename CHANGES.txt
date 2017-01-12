@@ -7,7 +7,7 @@ POSTDEPLOY
 3.30 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Encode url in pagination
 
 
 3.29 (2017-01-12)
