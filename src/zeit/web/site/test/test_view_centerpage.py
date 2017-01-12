@@ -757,6 +757,10 @@ def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == 'http://localhost/suche/index?p=2'
 
+    browser = testbrowser('/suche/index?q=s%C3%BC%C3%9F')
+    link = browser.cssselect('link[rel="canonical"]')[0]
+    assert link.get('href') == 'http://localhost/suche/index?q=s%C3%BC%C3%9F'
+
     browser = testbrowser('/dynamic/ukraine')
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == 'http://localhost/dynamic/ukraine'
