@@ -4,10 +4,10 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.29 (unreleased)
+3.28.1 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Missing css/js
 
 
 3.28 (2017-01-12)
