@@ -95,27 +95,21 @@ def test_amp_contains_required_microdata(testbrowser):
         'http://localhost/autoren/anne_mustermann')
 
 
-def test_amp_article_shows_subscribers_badge_for_paid_article(testbrowser):
+def test_amp_article_shows_zplus_badge_for_paid_article(testbrowser):
     browser = testbrowser('/amp/zeit-magazin/article/zplus-zmo-paid')
-    badge = browser.cssselect('.subscribers-badge')[0]
-    text = badge.cssselect('.subscribers-badge__text')[0]
+    badge = browser.cssselect('.zplus-badge')[0]
+    text = badge.cssselect('.zplus-badge__text')[0]
 
     assert text.text.strip() == u'Exklusiv für Abonnenten'
-    assert badge.cssselect('.subscribers-badge__icon')
-    # no volume badge for ZMO articles
-    assert not browser.cssselect('.volume-badge')
+    assert badge.cssselect('.zplus-badge__icon')
 
 
-def test_amp_article_shows_no_subscribers_badge_for_metered_article(
+def test_amp_article_shows_no_zplus_badge_for_metered_article(
         testbrowser):
     browser = testbrowser('/amp/zeit-magazin/article/zplus-zmo-register')
-    assert not browser.cssselect('.subscribers-badge')
-    # no volume badge for ZMO articles
-    assert not browser.cssselect('.volume-badge')
+    assert not browser.cssselect('.zplus-badge')
 
 
-def test_amp_article_shows_no_subscribers_badge_for_free_article(testbrowser):
+def test_amp_article_shows_no_zplus_badge_for_free_article(testbrowser):
     browser = testbrowser('/amp/zeit-magazin/article/03')
-    assert not browser.cssselect('.subscribers-badge')
-    # no volume badge for ZMO articles
-    assert not browser.cssselect('.volume-badge')
+    assert not browser.cssselect('.zplus-badge')
