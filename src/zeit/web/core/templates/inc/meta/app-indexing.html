@@ -1,0 +1,5 @@
+{% if view.canonical_url %}
+    <meta property="al:ios:app_name" content="ZEIT ONLINE">
+    <meta property="al:ios:app_store_id" content="828889166">
+    <meta property="al:ios:url" content="{{ view.canonical_url | safe }}">
+{% endif %}
