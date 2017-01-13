@@ -4,7 +4,25 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.28 (unreleased)
+3.31 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.30 (2017-01-12)
+-----------------
+
+- HOTFIX: Encode url in pagination
+
+
+3.29 (2017-01-12)
+-----------------
+
+- FIX: Missing css/js
+
+
+3.28 (2017-01-12)
 -----------------
 
 - MAINT: Harmonize Z+ badge naming

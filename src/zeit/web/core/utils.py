@@ -84,6 +84,9 @@ def add_get_params(url, **kw):
     :rtype: unicode
     """
 
+    if isinstance(url, unicode):
+        url = url.encode('utf-8')
+
     parts = list(urlparse.urlparse(url))
     query = dict(urlparse.parse_qs(parts[4]))
     params = [(k, v) for k, v in itertools.chain(
