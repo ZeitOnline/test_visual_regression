@@ -16,4 +16,5 @@
   <volume_teaser>true</volume_teaser>
   <rawr_iframe>true</rawr_iframe>
   <enable_intext_links>false</enable_intext_links>
+  <overscrolling>true</overscrolling>
 </features>
