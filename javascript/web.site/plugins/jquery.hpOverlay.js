@@ -133,7 +133,7 @@
         // start new timer
         if ( !this.visible ) {
             this.timer = window.setTimeout( function() { that.fetchData(); }, interval  );
-            this.log( 'New timer started for ' + Math.floor( interval / 1000 / 60 ) + ' minutes' );
+            this.log( 'New timer started for ' + interval / 1000 / 60 + ' minutes' );
         }
     };
 
