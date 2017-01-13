@@ -336,6 +336,12 @@ class Base(object):
         return [(name, getattr(self, name, '')) for name in names]
 
     @zeit.web.reify
+    def js_toggles(self):
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        names = ('overscrolling')
+        return [(name, toggles.find(name)) for name in names]
+
+    @zeit.web.reify
     def navigation(self):
         return zeit.web.core.navigation.NAVIGATION_SOURCE.navigation
 
