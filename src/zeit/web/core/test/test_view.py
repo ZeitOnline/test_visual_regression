@@ -981,7 +981,7 @@ def test_js_toggles_are_correctly_returned(
 
 
 def test_js_toggles_are_correctly_displayed(
-    monkeypatch, selenium_driver, testserver):
+        monkeypatch, selenium_driver, testserver):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'hp_overlay': True, 'update_signals': False}.get)
     driver = selenium_driver
