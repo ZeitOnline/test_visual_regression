@@ -13,7 +13,6 @@ define( [
        'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
     var defaults = {
         documentMinHeight: 800,
-        isActive: Zeit.toggles.get( 'overscrolling' ) || false,
         jumpHash: '#overscroll-article',
         jumpTo: 'http://www.zeit.de/index',
         livePreview: false,
@@ -31,6 +30,36 @@ define( [
     },
     config,
     debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
+    isActive = function() {
+        var isActivated = true,
+            message,
+            status = [{
+            isActive: Zeit.toggles.get( 'overscrolling' ) || false,
+            message: 'set to off or toggle missing'
+        }, {
+            isActive: $( document ).height() >= config.documentMinHeight,
+            message: 'documentMinHeight not matched'
+        }, {
+            isActive: Modernizr.svg,
+            message: 'no svg available'
+        }, {
+            isActive: Zeit.breakpoint.get() === 'desktop',
+            message: 'only on desktop'
+        }];
+        $.each( status, function( index, value ) {
+            if ( !value.isActive ) {
+                message = 'overscrolling: ' + value.message;
+                isActivated = value.isActive;
+                return false;
+            }
+        });
+        if ( debug && message ) {
+            message += ', overwritten by debug';
+            console.debug( message );
+            isActivated = true;
+        }
+        return isActivated;
+    },
     clickTrack = function( type ) {
         var data = [ config.trackingBase + type, config.jumpTo ];
 
@@ -145,12 +174,8 @@ define( [
 
     return {
         init: function( options ) {
-            if ( !Modernizr.svg ) {
-                if ( debug ) { console.debug( 'overscrolling: no svg available' ); }
-                return;
-            }
             config = $.extend( defaults, options );
-            if ( !config.isActive && !debug ) {
+            if ( !isActive() ) {
                 return;
             }
             if ( window.location.href.indexOf( '#!top-of-overscroll' ) > -1  && history.pushState ) {
@@ -168,21 +193,11 @@ define( [
                     return;
                 }
             }
-            if ( $( document ).height() >= config.documentMinHeight ) {
-                // inview event to change to elemen
-                $( config.triggerElement ).on( 'inview', function( event, isInView ) {
-                    if ( isInView ) {
-                        if ( Zeit.breakpoint.get() === 'desktop' ) {
-                            // attach Elements
-                            loadElements();
-                        } else {
-                            if ( debug ) { console.debug( 'overscrolling: not on desktop' ); }
-                        }
-                    }
-                });
-            } else {
-                if ( debug ) { console.debug( 'overscrolling: documentMinHeight not matched' ); }
-            }
+            $( config.triggerElement ).on( 'inview', function( event, isInView ) {
+                if ( isInView && Zeit.breakpoint.get() === 'desktop' ) {
+                    loadElements();
+                }
+            });
         }
     };
 
