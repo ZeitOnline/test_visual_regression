@@ -48,6 +48,9 @@ define( [
         }, {
             isActive: Zeit.view.get( 'paywall' ) === '',
             message: 'paywall active'
+        }, {
+            isActive: $( 'body[data-overscrolling="off"]' ).length < 1,
+            message: 'article deactivated from cms'
         }];
         $.each( status, function( index, value ) {
             if ( !value.isActive ) {
