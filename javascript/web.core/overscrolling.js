@@ -45,6 +45,9 @@ define( [
         }, {
             isActive: Zeit.breakpoint.get() === 'desktop',
             message: 'only on desktop'
+        }, {
+            isActive: Zeit.view.get( 'paywall' ) === '',
+            message: 'paywall active'
         }];
         $.each( status, function( index, value ) {
             if ( !value.isActive ) {
