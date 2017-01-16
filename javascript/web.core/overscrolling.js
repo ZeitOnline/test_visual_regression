@@ -1,7 +1,7 @@
 /**
  * @fileOverview Script to overscroll content pages with a loaction switch to another page
  * @author nico.bruenjes@zeit.de
- * @version  0.1
+ * @version  0.2
  */
 define( [
        'modernizr',
@@ -13,6 +13,7 @@ define( [
        'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
     var defaults = {
         documentMinHeight: 800,
+        isActive: Zeit.toggles.get( 'overscrolling' ) || false,
         jumpHash: '#overscroll-article',
         jumpTo: 'http://www.zeit.de/index',
         livePreview: false,
@@ -149,6 +150,9 @@ define( [
                 return;
             }
             config = $.extend( defaults, options );
+            if ( !config.isActive && !debug ) {
+                return;
+            }
             if ( window.location.href.indexOf( '#!top-of-overscroll' ) > -1  && history.pushState ) {
                 if ( 'scrollRestoration' in history ) {
                     history.scrollRestoration = 'manual';
