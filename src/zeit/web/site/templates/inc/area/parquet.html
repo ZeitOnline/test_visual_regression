@@ -1,7 +1,7 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% block before_module_list %}
-    <div class="parquet-meta">
+    <div class="parquet-meta" data-ct-context="{{ area | get_clicktracking_identifier }}">
 
         {% block area_title %}
             {% if area.referenced_cp is none %}

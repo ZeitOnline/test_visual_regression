@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <references>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/ZMO-326/online-2-autoren-aktualisiert" year="2008" issue="26" ressort="Wirtschaft" author="Anne Mustermann;Armin Mustermann" contenttype="article" publication-date="" expires="" genre="interview">
-        <supertitle py:pytype="str">Too much</supertitle>
+        <supertitle>Too much</supertitle>
         <teaser_supertitle xsi:nil="true"/>
         <title xsi:nil="true"/>
         <text xsi:nil="true"/>
@@ -11,10 +11,10 @@
         <byline xsi:nil="true"/>
         <breadcrumb_title xsi:nil="true"/>
         <author href="http://xml.zeit.de/autoren/M/Anne_Mustermann/index" publication-date="" expires="">
-          <display_name py:pytype="str">Anne Mustermann</display_name>
+          <display_name>Anne Mustermann</display_name>
         </author>
         <author href="http://xml.zeit.de/autoren/M/Armin_Mustermann/index" publication-date="" expires="">
-          <display_name py:pytype="str">Armin Mustermann</display_name>
+          <display_name>Armin Mustermann</display_name>
           <location>Bitterfeld</location>
         </author>
       </reference>

@@ -64,8 +64,8 @@ def test_article_has_valid_facebook_meta_tags(testbrowser):
     select = browser.cssselect
     assert '<meta property="og:site_name" '\
         'content="ZEITmagazin">' in browser.contents
-    assert '<meta property="fb:admins"'\
-        ' content="595098294">' in browser.contents
+    assert '<meta property="fb:app_id"'\
+        ' content="638028906281625">' in browser.contents
     assert '<meta property="og:type"'\
         ' content="article">' in browser.contents
     assert '<meta property="og:title"'\
@@ -91,24 +91,24 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
 
     assert locate_by_selector(
         '//script[@src=\'//stats.g.doubleclick.net/dc.js\']'), (
-            'script for Doubleclick not in DOM')
+        'script for Doubleclick not in DOM')
     assert locate_by_selector(
         '//script[@src=\'//www.googletagmanager.com'
         '/gtm.js?id=GTM-TQGX6J\']'), (
-            'script for Google tag manager not in DOM')
+        'script for Google tag manager not in DOM')
     assert locate_by_selector(
         '//script[@src=\'http://scripts.zeit.de/js/rsa.js\']'), (
-            'script for RSA not in DOM')
+        'script for RSA not in DOM')
     assert locate_by_selector(
         '//script[@src=\'http://scripts.zeit.de/static/js/'
         'webtrekk/webtrekk_v4.0.5.js\']'), (
-            'script for Webtrekk not in DOM')
+        'script for Webtrekk not in DOM')
     assert locate_by_selector(
         '//script[@src=\'https://script.ioam.de/iam.js\']'), (
-            'script for IVW not in DOM')
+        'script for IVW not in DOM')
     assert locate_by_selector(
         '//img[starts-with(@src,\'http://zeitonl.ivwbox.de\')]'), (
-            'pixel for IVW not in DOM')
+        'pixel for IVW not in DOM')
 
 
 def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
@@ -365,35 +365,35 @@ def test_article_has_correct_page_meta_keywords(testbrowser):
 def test_article08_has_correct_date(testbrowser):
     # not updated print article
     browser = testbrowser('/zeit-magazin/article/08')
-    date = browser.cssselect('.article__head__meta__date')[0].text
+    date = browser.cssselect('.meta__date')[0].text
     assert date.strip() == '19. Februar 2014'
 
 
 def test_article09_has_correct_date(testbrowser):
     # updated print article
     browser = testbrowser('/zeit-magazin/article/09')
-    date = browser.cssselect('.article__head__meta__date')[0].text
+    date = browser.cssselect('.meta__date')[0].text
     assert date.strip() == u'4. März 2014, 14:35 Uhr'
 
 
 def test_article03_has_correct_date(testbrowser):
     # not updated online article
     browser = testbrowser('/zeit-magazin/article/03')
-    date = browser.cssselect('.article__head__meta__date')[0].text
+    date = browser.cssselect('.meta__date')[0].text
     assert date.strip() == '30. Juli 2013, 17:20 Uhr'
 
 
 def test_article10_has_correct_date(testbrowser):
     # updated online article
     browser = testbrowser('/zeit-magazin/article/10')
-    date = browser.cssselect('.article__head__meta__date')[0].text
+    date = browser.cssselect('.meta__date')[0].text
     assert date.strip() == '20. Februar 2014, 17:59 Uhr'
 
 
 def test_article05_has_correct_date(testbrowser):
     # longform
     browser = testbrowser('/zeit-magazin/article/05')
-    date = browser.cssselect('.article__head__meta__date')[0].text
+    date = browser.cssselect('.meta__date')[0].text
     assert date.strip() == '3. November 2013'
 
 
@@ -407,7 +407,7 @@ def test_online_article_has_last_changed_date(selenium_driver, testserver):
     # online articles should include the last semantic change date
     driver = selenium_driver
     driver.get('%s/zeit-magazin/article/10' % testserver.url)
-    meta_date = driver.find_element_by_class_name("article__head__meta__date")
+    meta_date = driver.find_element_by_class_name("meta__date")
     assert 'ZULETZT AKTUALISIERT AM 20. FEBRUAR 2014, '\
         '17:59 UHR' in meta_date.text
 
@@ -416,27 +416,27 @@ def test_gallery_has_last_changed_date(selenium_driver, testserver):
     # galleries should include the last semantic change date
     driver = selenium_driver
     driver.get('%s/galerien/fs-desktop-schreibtisch-computer' % testserver.url)
-    meta_date = driver.find_element_by_class_name("article__head__meta__date")
+    meta_date = driver.find_element_by_class_name("meta__date")
     assert 'ZULETZT AKTUALISIERT AM 3. APRIL 2014, 16:17 UHR' in meta_date.text
 
 
 def test_article03_has_no_source(testbrowser):
     # zon source
     browser = testbrowser('/zeit-magazin/article/03')
-    assert 'article__head__meta__source' not in browser.contents
+    assert 'meta__source' not in browser.contents
 
 
 def test_article10_has_correct_online_source(testbrowser):
     # online source
     browser = testbrowser('/zeit-magazin/article/10')
-    meta_source = browser.cssselect('span.article__head__meta__source')[0]
+    meta_source = browser.cssselect('span.meta__source')[0]
     assert 'Erschienen bei golem.de' in meta_source.text_content()
 
 
 def test_article08_has_correct_print_source(testbrowser):
     # print source
     browser = testbrowser('/zeit-magazin/article/08')
-    meta_source = browser.cssselect('span.article__head__meta__source')[0]
+    meta_source = browser.cssselect('span.meta__source')[0]
     assert u'DIE ZEIT Nr. 26/2008' in meta_source.text_content()
 
 
@@ -463,30 +463,30 @@ def test_article_1_10_produce_no_error(testbrowser):
 
 def test_article_1_10_have_correct_h1(testbrowser):
     browser = testbrowser('/zeit-magazin/article/01')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/02')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/03')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/04')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/05')
     assert browser.cssselect('h1 > .article__head__title')
     browser = testbrowser('/zeit-magazin/article/06')
     assert browser.cssselect('h1 > .article__head__title')
     browser = testbrowser('/zeit-magazin/article/08')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/09')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/10')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
 
 
 def test_header_articles_produce_no_error(testbrowser):
@@ -506,69 +506,70 @@ def test_header_articles_produce_no_error(testbrowser):
 
 def test_header_articles_have_correct_h1(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-default')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/header-traum')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/header-text-only')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/header-briefmarke')
-    assert browser.cssselect('h1 > .article__head__title')
+    assert browser.cssselect('h1 > .headline__title')
     browser = testbrowser('/zeit-magazin/article/header-leinwand')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
     browser = testbrowser('/zeit-magazin/article/header-mode')
-    assert browser.cssselect('h1 > .article__head__title')
-    assert browser.cssselect('h1 > .article__head__supertitle')
+    assert browser.cssselect('h1 > .headline__title')
+    assert browser.cssselect('h1 > .headline__supertitle')
 
 
 def test_article_header_traum_has_correct_subtitle(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-traum')
-    subtitle = browser.cssselect('.article__head__subtitle')[0]
+    subtitle = browser.cssselect('.header-article__subtitle')[0]
     assert subtitle.text_content().strip() == (
         u'Wie viele Flüchtlingskinder bin ich eine Suchende, Getriebene.')
 
 
 def test_article_header_default_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-default')
-    assert browser.cssselect('header.article__head.article__head--default')
+    assert browser.cssselect('header.header-article.header-article--default')
 
 
 def test_article_header_traum_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-traum')
-    assert browser.cssselect('header.article__head.article__head--traum')
+    assert browser.cssselect('header.header-article.header-article--traum')
 
 
 def test_article_header_text_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-text-only')
-    assert browser.cssselect('header.article__head.article__head--text-only')
+    assert browser.cssselect('header.header-article.header-article--text-only')
 
 
 def test_article_header_briefmarke_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-briefmarke')
-    assert browser.cssselect('header.article__head.article__head--stamp')
+    assert browser.cssselect(
+        'header.header-article.header-article--briefmarke')
 
 
 def test_article_header_leinwand_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-leinwand')
-    assert browser.cssselect('header.article__head.article__head--leinwand')
+    assert browser.cssselect('header.header-article.header-article--leinwand')
 
 
 def test_article_header_mode_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-mode')
-    assert browser.cssselect('header.article__head.article__head--mode')
+    assert browser.cssselect('header.header-article.header-article--mode')
 
 
 def test_article_header_standardkolumne_should_have_correct_src(testbrowser):
     browser = testbrowser('/zeit-magazin/article/standardkolumne-beispiel')
-    assert browser.cssselect('header.article__head.article__head--column')
+    assert browser.cssselect('header.header-article.header-article--column')
 
 
 def test_article_header_sequelpage_should_have_correct_source(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03/seite-2')
-    assert browser.cssselect('header.article__head.article__head--sequel')
+    assert browser.cssselect('header.header-article.header-article--sequel')
 
 
 def test_nextread_teaser_block_has_teasers_available(application):
@@ -664,11 +665,10 @@ def test_article02_should_have_esi_include(testbrowser):
     assert len(browser.cssselect('main include')) == 3
 
 
-@pytest.mark.parametrize(
-    'path, selector', [
-        ('/zeit-magazin/article/03', '.figure-stamp .figure__copyright'),
-        ('/zeit-magazin/article/05', '.longform-header__copyright'),
-        ('/zeit-magazin/article/header-default', '.article__head__copyright')])
+@pytest.mark.parametrize('path, selector', [
+    ('/zeit-magazin/article/03', '.figure-stamp .figure__copyright'),
+    ('/zeit-magazin/article/05', '.longform-header__copyright'),
+    ('/zeit-magazin/article/header-default', '.header-article__copyright')])
 def test_article_has_linked_copyright(testbrowser, path, selector):
     browser = testbrowser(path)
     assert browser.cssselect(selector)

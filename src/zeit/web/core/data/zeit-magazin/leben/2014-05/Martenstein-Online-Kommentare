@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/leben/2014-05/teaser-martenstein-fengel-neu/" type="jpg" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
-      <copyright py:pytype="str">© Martin Fengel</copyright>
+      <copyright>© Martin Fengel</copyright>
     </image>
     <rankedTags>
       <tag uuid="32366255-a1c7-4d14-b07c-96b47edb92d7" url_value="internet" type="free">Internet</tag>
@@ -71,7 +71,7 @@
     <division type="page">
       <image src="http://xml.zeit.de/zeit-magazin/leben/2014-05/teaser-martenstein-fengel-neu/teaser-martenstein-fengel-neu-zmo-small.jpg" type="jpg" align="left" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
         <bu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-        <copyright py:pytype="str">© Martin Fengel</copyright>
+        <copyright>© Martin Fengel</copyright>
       </image>
       <p>Lassen Sie uns ganz offen miteinander reden, ja? Im Netz geht das wunderbar einfach. Zu den Errungenschaften des Netzes gehört der Leserkommentar, der an jeden Artikel angehängt werden kann, als Lob, oder als Kritik, oder als Anmerkung.</p>
       <p>Wir, die Journalistinnen und Journalisten, müssen sich da vieles anhören. Sogar Grobheiten, manchmal! Nicht selten ist die Kritik der Leser natürlich zutreffend. Und manchmal sehen wir das sogar ein.</p>

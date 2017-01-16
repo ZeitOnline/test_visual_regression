@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<gallery>
   <head>
     <image-folder>http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/</image-folder>
     <badges>
@@ -79,217 +79,217 @@
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/462507429.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© Geoff Robins/AFP/Getty Images</copyright>
+            <copyright>© Geoff Robins/AFP/Getty Images</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/462507429.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© Geoff Robins/AFP/Getty Images</copyright>
+            <copyright>© Geoff Robins/AFP/Getty Images</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="462507429.jpg" name="462507429-540x304.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Ford präsentiert auf der Automesse in Detroit den neuen Pick-up F-150.</caption>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Ford präsentiert auf der Automesse in Detroit den neuen Pick-up F-150.</caption>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/462507429-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© Geoff Robins/AFP/Getty Images</copyright>
+            <copyright>© Geoff Robins/AFP/Getty Images</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/462507429-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© Geoff Robins/AFP/Getty Images</copyright>
+            <copyright>© Geoff Robins/AFP/Getty Images</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="Detroit Eindrucke_6.jpg" name="Detroit Eindrucke_6-540x304.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Auch Konkurrent GMC zeigt eine neue Pick-up-Serie, den Canyon.</caption>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Auch Konkurrent GMC zeigt eine neue Pick-up-Serie, den Canyon.</caption>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/Detroit Eindrucke_6-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/Detroit Eindrucke_6-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="02-shomei-tomatsu.jpg" name="02-shomei-tomatsu.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Cadillac stellt auf der Messe das neue ATS Coupé vor.</caption>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Cadillac stellt auf der Messe das neue ATS Coupé vor.</caption>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/02-shomei-tomatsu.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© Stan Honda/AFP/Getty Images</copyright>
+            <copyright>© Stan Honda/AFP/Getty Images</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/02-shomei-tomatsu.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© Stan Honda/AFP/Getty Images</copyright>
+            <copyright>© Stan Honda/AFP/Getty Images</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="Corvette Z06 1.jpg" name="Corvette Z06 1-540x304.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Corvette Z06 mit 625 PS</caption>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Corvette Z06 mit 625 PS</caption>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/Corvette Z06 1-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/Corvette Z06 1-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="chrysler 200 s 1.jpg" name="chrysler 200 s 1-540x304.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Chryslers Mittelklasse-Modell 200</caption>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Chryslers Mittelklasse-Modell 200</caption>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/chrysler 200 s 1-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/chrysler 200 s 1-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="VW_Dune.jpg" name="VW_Dune-540x304.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">VW präsentiert das höhergelegte Beetle-Derivat Dune.</caption>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">VW präsentiert das höhergelegte Beetle-Derivat Dune.</caption>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/VW_Dune-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/VW_Dune-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="462507429.jpg" layout="hidden" name="462507429-940x528.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/462507429-940x528.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/462507429-940x528.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block layout="hidden" name="Audi_allroad.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/Audi_allroad.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/Audi_allroad.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="Audi_allroad.jpg" name="Audi_allroad-540x304.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Audi zeigt die Studie Allroad Shooting Brake.</caption>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Audi zeigt die Studie Allroad Shooting Brake.</caption>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/Audi_allroad-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/Audi_allroad-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block layout="hidden" name="Detroit Eindrucke_6.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/Detroit Eindrucke_6.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/Detroit Eindrucke_6.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="RTX17B4J.jpg" layout="hidden" name="RTX17B4J-540x304.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" py:pytype="str">Auch Konkurrent GMC stellt einen neuen Pick-Up vor, den Canyon.</caption>
+          <caption xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">Auch Konkurrent GMC stellt einen neuen Pick-Up vor, den Canyon.</caption>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/RTX17B4J-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/RTX17B4J-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block layout="hidden" name="VW_Dune.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/VW_Dune.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/VW_Dune.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block layout="hidden" name="chrysler 200 s 1.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/chrysler 200 s 1.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/chrysler 200 s 1.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block layout="hidden" name="462438185.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/462438185.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/462438185.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block is_crop_of="462438185.jpg" layout="hidden" name="462438185-540x304.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/462438185-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/462438185-540x304.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block layout="hidden" name="Corvette Z06 1.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/Corvette Z06 1.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/Corvette Z06 1.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block layout="hidden" name="RTX17B4J.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/RTX17B4J.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/RTX17B4J.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© SPX/Matthias Knödler</copyright>
+            <copyright>© SPX/Matthias Knödler</copyright>
           </thumbnail>
         </block>
         <block layout="hidden" name="462635637.jpg">
           <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
           <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/462635637.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© Stan Honda/AFP/Getty Images</copyright>
+            <copyright>© Stan Honda/AFP/Getty Images</copyright>
           </image>
           <thumbnail xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa-bilder/thumbnails/462635637.jpg" type="jpg" publication-date="" expires="">
             <bu xsi:nil="true"/>
-            <copyright py:pytype="str">© Stan Honda/AFP/Getty Images</copyright>
+            <copyright>© Stan Honda/AFP/Getty Images</copyright>
           </thumbnail>
         </block>
       </container>

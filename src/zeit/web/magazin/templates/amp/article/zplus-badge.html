@@ -1,0 +1,12 @@
+{% if view.zplus_label and view.zplus_label.zplus %}
+<div class="article__item">
+    <a class="zplus-badge" href="{{ view.zplus_label.link }}">
+        <svg class="zplus-badge__icon">
+            <use xlink:href="#svg-zplus"/>
+        </svg>
+        <span class="zplus-badge__text">
+            {{- view.zplus_label.intro }} {{ view.zplus_label.link_text -}}
+        </span>
+    </a>
+</div>
+{% endif %}

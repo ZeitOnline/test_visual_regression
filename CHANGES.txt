@@ -4,10 +4,76 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.25 (unreleased)
+3.31 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FEM-8: Minimize transfer volume from homepage overlay and update signals
+
+
+3.30 (2017-01-12)
+-----------------
+
+- HOTFIX: Encode url in pagination
+
+
+3.29 (2017-01-12)
+-----------------
+
+- FIX: Missing css/js
+
+
+3.28 (2017-01-12)
+-----------------
+
+- MAINT: Harmonize Z+ badge naming
+
+
+3.27 (2017-01-05)
+-----------------
+
+- ZON-3571: Paginate volume overview
+
+- ZON-2718: Add structured data for video pages
+
+- FEAT: Add hook to require external scripts in ZON blogs
+
+- MAINT: Clean up test data
+
+- MAINT: Polish Z+ kicker logo
+
+
+3.26 (2016-12-30)
+-----------------
+
+- ZON-3569: Change fallback image and styles for volume packshots
+
+- ZON-3557: Add zplus badge to ZMO article header
+
+- ZON-3542: Show error notification if paywall after registration
+
+- ZON-3517: Mark content only for subscribers in ZMO articles (AMP part)
+
+- ZON-3588: Automate event tracking for article body
+
+- BUG-613: Show authorbox custom description if defined
+
+- FIX: Be defensive about invalid requests for legacy keyword redirects
+
+- MAINT: Replace library `freewall` with `masonry`
+
+- MAINT: Update sharing metadata regarding authorship
+
+
+3.25.1 (2016-12-23)
+-------------------
+
+- FIX: Re-release after grunting properly
+
+
+3.25 (2016-12-23)
+-----------------
+
+- ZON-3578: Update clicktracking for centerpages, article header, article blocks
 
 
 3.24 (2016-12-19)

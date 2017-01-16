@@ -228,7 +228,7 @@
         }
 
         this.tabs.attr( 'id', function() {
-            return this.getAttribute( 'data-id' );
+            return this.getAttribute( 'data-link-id' );
         });
     };
 

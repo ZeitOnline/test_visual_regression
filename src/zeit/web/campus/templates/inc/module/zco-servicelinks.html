@@ -7,7 +7,7 @@
         <ul class="servicelinks__column">
             {% for service in service_column %}
                 {% set row_loop = loop %}
-                {% set tracking_slug = '{}.{}.{}.servicelinks.{}'.format(region_loop.index, column_loop.index, row_loop.index, service.id) %}
+                {% set tracking_slug = 'servicelinks.{}.{}.{}.{}'.format(region_loop.index, area_loop.index, row_loop.index + column_loop.index0 * (service_column | length), service.id) %}
                 <li class="servicelinks__item">
                     <a class="servicelinks__link" href="{{ service.href }}" data-id="{{ tracking_slug }}">{{ service.title }}</a>
                 </li>

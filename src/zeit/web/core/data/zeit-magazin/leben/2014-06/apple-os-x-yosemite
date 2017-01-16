@@ -1,29 +1,29 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <author href="http://xml.zeit.de/autoren/W/Rabea_Weihser/index.xml" publication-date="" expires="">
-      <display_name py:pytype="str">Rabea Weihser</display_name>
+      <display_name>Rabea Weihser</display_name>
     </author>
     <image base-id="http://xml.zeit.de/zeit-magazin/leben/2014-06/tim-cook/" type="jpg" title="Tim Cook" alt="Tim Cook" align="left" publication-date="" expires="">
-      <bu py:pytype="str">Apples Tim Cook</bu>
-      <copyright py:pytype="str">© REUTERS/Robert Galbraith</copyright>
+      <bu>Apples Tim Cook</bu>
+      <copyright>© REUTERS/Robert Galbraith</copyright>
     </image>
     <references/>
     <nextread>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/leben/2014-05/ralf-moeller-selfie-cannes-stallone" year="2014" issue="22" ressort="zeit-magazin" author="Anna Kemper" contenttype="article" publication-date="" expires="">
-        <supertitle py:pytype="str">Gesellschaftskritik</supertitle>
-        <teaser_supertitle py:pytype="str">Gesellschaftskritik</teaser_supertitle>
-        <title py:pytype="str">Kuck mal, wer da knipst</title>
-        <text py:pytype="str">So misslungen, dass es fast schon wieder süß ist: Ralf Möller macht ein Selfie mit Männern, die Selfies machen. Und erfindet eine neue Kategorie der Selbstdarstellung. </text>
-        <description py:pytype="str">So misslungen, dass es fast schon wieder süß ist: Ralf Möller macht ein Selfie mit Männern, die Selfies machen. Und erfindet eine neue Kategorie der Selbstdarstellung. </description>
+        <supertitle>Gesellschaftskritik</supertitle>
+        <teaser_supertitle>Gesellschaftskritik</teaser_supertitle>
+        <title>Kuck mal, wer da knipst</title>
+        <text>So misslungen, dass es fast schon wieder süß ist: Ralf Möller macht ein Selfie mit Männern, die Selfies machen. Und erfindet eine neue Kategorie der Selbstdarstellung. </text>
+        <description>So misslungen, dass es fast schon wieder süß ist: Ralf Möller macht ein Selfie mit Männern, die Selfies machen. Und erfindet eine neue Kategorie der Selbstdarstellung. </description>
         <byline xsi:nil="true"/>
         <breadcrumb_title xsi:nil="true"/>
         <image base-id="http://xml.zeit.de/zeit-magazin/leben/2014-05/ralf-moeller-selfie-teaser/" type="jpg" alt="Selfie: Ralf Möller in Cannes" align="left" publication-date="" expires="">
-          <bu py:pytype="str">Selfie: Ralf Möller in Cannes</bu>
-          <copyright py:pytype="str">@ Ralf Möller/Facebook </copyright>
+          <bu>Selfie: Ralf Möller in Cannes</bu>
+          <copyright>@ Ralf Möller/Facebook </copyright>
         </image>
         <author href="http://xml.zeit.de/autoren/K/Anna_Kemper/index.xml" publication-date="" expires="">
-          <display_name py:pytype="str">Anna Kemper</display_name>
+          <display_name>Anna Kemper</display_name>
         </author>
       </reference>
     </nextread>
@@ -102,8 +102,8 @@
     <subtitle>Apples Messias Tim Cook bringt frohe Kunde. Yosemite heißt das neue Mac-Betriebssystem. Der Name beweist: Dieses Technologie-Imperium ist Gottes Werk.</subtitle>
     <division type="page">
       <image src="http://xml.zeit.de/zeit-magazin/leben/2014-06/tim-cook/tim-cook-zmo-landscape-small.jpg" type="jpg" title="Tim Cook" alt="Tim Cook" align="left" publication-date="" expires="" layout="zmo-xl-header" is_empty="False">
-        <bu py:pytype="str">Apples Tim Cook</bu>
-        <copyright py:pytype="str">© REUTERS/Robert Galbraith</copyright>
+        <bu>Apples Tim Cook</bu>
+        <copyright>© REUTERS/Robert Galbraith</copyright>
       </image>
       <p>Josemait ist ein schlimmes Wort. Alle deutschen Mittelstufenschüler träumen bös davon in der Nacht vorm Englischdiktat. Wenn die Lehrerin einen Satz mit Jussämittieh bildet und aus der Lautsprache nur Buchstabensalat auf Papier wird.<br/></p>
       <p>Alle deutschen Mittelstufenschüler können die Gebete einstellen, denn der gute Gott von Kalifornien hat sie erhört. Der Messias Tim Cook bringt frohe Kunde: <a class="" href="http://www.zeit.de/digital/mobil/2014-06/apple-keynote-ios8-macosx-yosemite" target="_blank">Yosemite ist in der Welt</a>, auf dass alle Völker der Erde diesen Namen preisen und niemals mehr falsch buchstabieren. Was früher einen läppischen Nationalpark bezeichnete, wird nun überschrieben von Apples neuem Betriebssystem OS X 10.10. </p>

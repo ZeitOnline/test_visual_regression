@@ -916,38 +916,49 @@ def test_notfication_after_paywall_registration_renders_correctly(
         testserver, selenium_driver):
     message_txt = u'Herzlich willkommen! Mit Ihrer Anmeldung k\xf6nnen' \
         u' Sie nun unsere Artikel lesen.'
+    message_txt_error = u'Leider haben Sie kein g\xfcltiges Abonnement ' \
+        u'f\xfcr diesen Artikel. Bitte w\xe4hlen Sie unten das ' \
+        u'gew\xfcnschte Abo.'
     url_hash = '#success-registration'
 
     driver = selenium_driver
 
-    def assert_notification():
+    def assert_notification(pathname, css_class, text, query=''):
+        driver.get('%s%s%s%s' % (testserver.url, pathname, query, url_hash))
+        selector = 'link[itemprop="mainEntityOfPage"][href="{}{}"]'.format(
+            testserver.url, pathname)
         try:
-            cond = expected_conditions.presence_of_element_located((
-                By.CLASS_NAME, "notification--success"))
-            WebDriverWait(driver, 5).until(cond)
+            # assure we are seeing the right page
+            WebDriverWait(driver, 3).until(
+                expected_conditions.presence_of_element_located((
+                    By.CSS_SELECTOR, selector)))
+            # check for notification element
+            WebDriverWait(driver, 1).until(
+                expected_conditions.presence_of_element_located((
+                    By.CLASS_NAME, css_class)))
         except TimeoutException:
             assert False, 'Timeout notification %s' % driver.current_url
         else:
-            notification = driver.find_element_by_class_name(
-                'notification--success')
-            assert message_txt == notification.text
+            notification = driver.find_element_by_class_name(css_class)
+            assert text == notification.text
             assert url_hash not in driver.current_url
 
     # ZON
-    driver.get('{0}/zeit-online/article/01{1}'
-               .format(testserver.url, url_hash))
-    assert_notification()
+    assert_notification('/zeit-online/article/01', 'notification--success',
+                        message_txt)
 
     # ZMO
-    driver.get(
-        '{0}/zeit-magazin/article/essen-geniessen-spargel-lamm{1}'
-        .format(testserver.url, url_hash))
-    assert_notification()
+    assert_notification('/zeit-magazin/article/essen-geniessen-spargel-lamm',
+                        'notification--success', message_txt)
 
     # ZCO
-    driver.get(
-        '{0}/campus/article/infographic{1}'.format(testserver.url, url_hash))
-    assert_notification()
+    assert_notification('/campus/article/infographic', 'notification--success',
+                        message_txt)
+
+    # ZON wrong subscription
+    assert_notification('/zeit-online/article/zplus-zeit',
+                        'notification--error', message_txt_error,
+                        '?C1-Meter-Status=always_paid')
 
 
 def test_http_header_should_contain_c1_debug_echoes(testserver):
@@ -959,3 +970,24 @@ def test_http_header_should_contain_c1_debug_echoes(testserver):
         })
     assert response.headers.get('x-debug-c1-meter-status') == 'always_paid'
     assert response.headers.get('x-debug-c1-meter-user-status') == 'anonymous'
+
+
+def test_js_toggles_are_correctly_returned(
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True, 'update_signals': False}.get)
+    view = zeit.web.core.view.Base(None, None)
+    assert view.js_toggles == [('hp_overlay', True), ('update_signals', False)]
+
+
+def test_js_toggles_are_correctly_displayed(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True, 'update_signals': False}.get)
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index' % testserver.url)
+    hpo = driver.execute_script('return Zeit.toggles.hp_overlay')
+    uds = driver.execute_script('return Zeit.toggles.update_signals')
+
+    assert hpo
+    assert not uds

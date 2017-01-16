@@ -9,7 +9,7 @@
     <a class="{{ self.volumeteaser_blockname() }}__current" href="{% block volumeteaser_link %}{% endblock %}" title="{{ linklabel }}" {% block volumeteaser_data_ct_label %}{% endblock %}>
         <span class="{{ self.volumeteaser_blockname() }}__packshot">
             {% set packshot = volume.covers['printcover'] %}
-            {% set packshot_layout = self.volumeteaser_blockname() %}
+            {% set module_layout = self.volumeteaser_blockname() %}
             {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" %}
         </span>
         <span class="{{ self.volumeteaser_blockname() }}__cta">

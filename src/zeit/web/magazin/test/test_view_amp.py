@@ -93,3 +93,23 @@ def test_amp_contains_required_microdata(testbrowser):
     assert author.cssselect('[itemprop="name"]')[0].text == 'Anne Mustermann'
     assert author.cssselect('[itemprop="url"]')[0].get('href') == (
         'http://localhost/autoren/anne_mustermann')
+
+
+def test_amp_article_shows_zplus_badge_for_paid_article(testbrowser):
+    browser = testbrowser('/amp/zeit-magazin/article/zplus-zmo-paid')
+    badge = browser.cssselect('.zplus-badge')[0]
+    text = badge.cssselect('.zplus-badge__text')[0]
+
+    assert text.text.strip() == u'Exklusiv für Abonnenten'
+    assert badge.cssselect('.zplus-badge__icon')
+
+
+def test_amp_article_shows_no_zplus_badge_for_metered_article(
+        testbrowser):
+    browser = testbrowser('/amp/zeit-magazin/article/zplus-zmo-register')
+    assert not browser.cssselect('.zplus-badge')
+
+
+def test_amp_article_shows_no_zplus_badge_for_free_article(testbrowser):
+    browser = testbrowser('/amp/zeit-magazin/article/03')
+    assert not browser.cssselect('.zplus-badge')

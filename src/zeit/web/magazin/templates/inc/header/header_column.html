@@ -1,11 +1,12 @@
-{% extends "zeit.web.magazin:templates/inc/headers/article_header_default.html" %}
+{% extends "zeit.web.magazin:templates/inc/header/header.html" %}
 
 {% block article_header %}
-<header class="article__head article__head--column">
+<header class="header-article header-article--column" data-ct-area="articleheader">
     {{ self.headline() }}
-    <div class="article__head__byline">
+    <div class="byline">
         {{ self.genre_and_authors() }}
     </div>
+    {{ self.zplusbadge() }}
     {% include "zeit.web.magazin:templates/inc/asset/image_article_header.tpl" %}
     {{ self.article_date() }}
 </header>

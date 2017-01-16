@@ -1,7 +1,7 @@
 {% extends "zeit.web.magazin:templates/content.html" %}
 
 {% block article_header -%}
-    {% include "zeit.web.magazin:templates/inc/headers/article_header_gallery.html" %}
+    {% include "zeit.web.magazin:templates/inc/header/header_gallery.html" %}
 {%- endblock article_header %}
 
 {% block article_pages -%}
@@ -13,7 +13,7 @@
         <div class="gallery__description article__item">
             {{ gallery.html | safe }}
         </div>
-        <div class="article__head__meta article__item">
+        <div class="meta article__item">
             {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
         </div>
     </div>
