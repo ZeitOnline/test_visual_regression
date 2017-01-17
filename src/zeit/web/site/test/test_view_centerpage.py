@@ -2658,3 +2658,22 @@ def test_volume_overview_has_correct_pagination(testbrowser):
 
     meta_robots = browser.cssselect('head meta[name="robots"]')[0]
     meta_robots.get('content') == 'index,follow,noodp,noydir,noarchive'
+
+
+def test_hpoverlay_toggle_toggles_html_output(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.cssselect('#overlay-wrapper')
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': False}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert not browser.cssselect('#overlay-wrapper')
+
+
+def test_hpoverlay_html_output_is_not_on_articles(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True}.get)
+    browser = testbrowser('/zeit-online/article/simple')
+    assert not browser.cssselect('#overlay-wrapper')
