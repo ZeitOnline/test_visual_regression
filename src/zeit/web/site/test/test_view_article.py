@@ -2126,3 +2126,24 @@ def test_paywall_get_param_works_like_http_header(testbrowser):
         '/zeit-online/article/zplus-zeit?C1-Meter-Status=always_paid')
 
     assert browser_with_getparam.contents == browser_with_header.contents
+
+
+def test_paywall_returns_correct_first_click_free_to_webtrekk(
+        application, dummy_request):
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'unfeasible'
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'no'
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
+    dummy_request.GET['C1-Meter-Status'] = 'open'
+    dummy_request.GET['C1-Meter-Info'] = 'first_click_free'
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'yes'
