@@ -212,14 +212,17 @@
                     </ul>
                     </text>
             </container>
-            <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-dbcf7-4d07-a59c-287eb191f252" title="HP Popover">
+            <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-dbcf7-4d07-a59c-287eb191f252" title="HP Overlay Wrapper / PopOver / ZON wurde aktualisiert">
                 <text>
                     <p>Die Anzeige des Popovers auf der HP kann erzwungen oder im Debug Modus auf normalem Weg gestartet werden.</p>
                     <h4>Wie wird der Modus ausgelöst?</h4>
                     <ul>
                         <li>
-                            Über den Query Parameter <a href="/index?debug-popover">?debug-popover</a>
-                            oder <a href="/index?force-popover">?force-popover</a>.
+                            Über den Query Parameter <a href="/zeit-online/index?debug-popover">?debug-popover</a>
+                            oder <a href="/zeit-online/index?force-popover">?force-popover</a>.
+                        </li>
+                        <li>
+                            Unterdrücken kann man ihn über den Query Parameter <a href="/zeit-online/index?prevent-popover">?prevent-popover</a>.
                         </li>
                     </ul>
                 </text>
