@@ -13,10 +13,10 @@ import zeit.web.site.view
 def test_login_state_view_should_deliver_correct_destination(dummy_request):
     dummy_request.route_url = lambda *args, **kw: 'http://destination_sso/'
     r = zeit.web.site.view.login_state(dummy_request)
-    assert (r['login'] ==
-            'http://sso.example.org/anmelden?url=http://destination_sso')
-    assert (r['logout'] ==
-            'http://sso.example.org/abmelden?url=http://destination_sso')
+    assert ('http://sso.example.org/anmelden?url=http://destination_sso' in
+            r['login'])
+    assert ('http://sso.example.org/abmelden?url=http://destination_sso' in
+            r['logout'])
 
 
 def test_article_should_have_breadcrumbs(testbrowser):
