@@ -51,7 +51,7 @@
         {#% if not request.user -%#}
         <p class="gate__note">
             Sie sind bereits Digital-Abonnent?
-            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration" class="gate__link">
+            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration&entry_service=schranke_paid" class="gate__link">
                 Hier anmelden
             </a>
         </p>

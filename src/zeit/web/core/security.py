@@ -163,19 +163,20 @@ def get_login_state(request):
     settings = request.registry.settings
     destination = request.params['context-uri'] if request.params.get(
         'context-uri') else request.route_url('home').rstrip('/')
-    entry_service = 'friedbert'
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    entry_service = conf.get('entry_service', 'sonstige')
     info = {}
 
     if not request.authenticated_userid and request.cookies.get(
             settings.get('sso_cookie')):
         log.warn('SSO Cookie present, but not authenticated')
 
-    info['login'] = u'{}/anmelden?url={}'.format(
-        settings['sso_url'], destination)
+    info['login'] = u'{}/anmelden?url={}&entry_service={}'.format(
+        settings['sso_url'], destination, entry_service)
     info['register'] = u'{}/registrieren?url={}&entry_service={}'.format(
         settings['sso_url'], destination, entry_service)
-    info['logout'] = u'{}/abmelden?url={}'.format(
-        settings['sso_url'], destination)
+    info['logout'] = u'{}/abmelden?url={}&entry_service={}'.format(
+        settings['sso_url'], destination, entry_service)
 
     # toggle if rawr shows registry in iframe or in new window
     entry_service = 'rawr'
