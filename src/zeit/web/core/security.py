@@ -187,7 +187,7 @@ def get_login_state(request):
 
     if request.user:
         info['user'] = request.user
-        info['profile'] = "{}/user".format(settings['community_host'])
+        info['profile'] = "{}konto".format(request.route_url('home'))
     info['rawr_authentication'] = ', '.join(_rawr_authentication(request))
 
     return info
