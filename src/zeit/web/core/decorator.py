@@ -7,6 +7,7 @@ import types
 from dogpile.cache.api import NO_VALUE
 import pyramid_dogpile_cache2.cache
 import pyramid.threadlocal
+import pyramid.view
 import venusian
 import zope.component
 import zope.interface
@@ -14,7 +15,6 @@ import zope.interface
 import zeit.content.cp.interfaces
 import zeit.edit.interfaces
 
-import zeit.web.core
 
 __all__ = [
     'reify', 'register_area', 'register_module', 'register_filter',
@@ -325,3 +325,16 @@ def cache_on_request(func):
         setattr(request, cache_attribute, cache)
         return result
     return cached
+
+
+class view_config(pyramid.view.view_config):  # NOQA
+    __custom_defaults__ = {}
+
+    def __init__(self, **settings):
+        super(view_config, self).__init__(**settings)
+        for key, value in self.__custom_defaults__.items():
+            self.__dict__.setdefault(key, value)
+
+
+class view_defaults(view_config, pyramid.view.view_defaults):  # NOQA
+    pass
