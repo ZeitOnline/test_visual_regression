@@ -340,7 +340,7 @@ class Base(object):
     @zeit.web.reify
     def js_toggles(self):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
-        names = ('hp_overlay', 'update_signals')
+        names = ('hp_overlay', 'update_signals', 'overscrolling')
         return [(name, toggles.find(name)) for name in names]
 
     @zeit.web.reify
@@ -660,9 +660,18 @@ class Base(object):
             ('cp30', self.paywall or 'open')  # Paywall Schranke
         ])
 
+        access = getattr(self.context, 'access', '')
+
         if zeit.web.core.template.toggles('access_status_webtrekk'):
-            access = getattr(self.context, 'access', '')
             custom_parameter.update({'cp28': access})
+
+        first_click_free = 'unfeasible'
+        if zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
+            if access == 'registration':
+                c1_fcf_header = zeit.web.core.paywall.Paywall.first_click_free(
+                    self.request)
+                first_click_free = 'yes' if c1_fcf_header else 'no'
+        custom_parameter.update({'cp29': first_click_free})
 
         return {
             'contentGroup': content_group,

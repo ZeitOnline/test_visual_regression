@@ -2126,3 +2126,99 @@ def test_paywall_get_param_works_like_http_header(testbrowser):
         '/zeit-online/article/zplus-zeit?C1-Meter-Status=always_paid')
 
     assert browser_with_getparam.contents == browser_with_header.contents
+
+
+def test_overscrolling_is_active(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1200, 900)
+    driver.get(
+        '%s/zeit-online/article/01' % testserver.url)
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
+def test_overscrolling_is_not_active_on_paywalls(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1200, 900)
+    path = 'zeit-online/article/01'
+    query = 'C1-Meter-Status=paywall&C1-Meter-User-Status=register'
+    driver.get('{}/{}?{}'.format(testserver.url, path, query))
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
+def test_overscrolling_is_not_active_on_non_destop_environment(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(760, 900)
+    path = 'zeit-online/article/01'
+    query = 'C1-Meter-Status=paywall&C1-Meter-User-Status=register'
+    driver.get('{}/{}?{}'.format(testserver.url, path, query))
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
+def test_overscrolling_is_working_as_expected(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1200, 900)
+    driver.get(
+        '%s/zeit-online/article/01' % testserver.url)
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+    driver.execute_script('window.scrollBy(0, 801)')
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
+def test_paywall_returns_correct_first_click_free_to_webtrekk(
+        application, dummy_request):
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'unfeasible'
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'no'
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
+    dummy_request.GET['C1-Meter-Status'] = 'open'
+    dummy_request.GET['C1-Meter-Info'] = 'first_click_free'
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'yes'
