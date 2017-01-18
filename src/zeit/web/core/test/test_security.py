@@ -273,3 +273,20 @@ def test_no_user_rawr_authentication_is_empty(dummy_request):
     rawr_user, rawr_signature, timestamp = stuff
     data = json.loads(rawr_user.decode('base64'))
     assert data == {}
+
+
+def test_sso_url_contains_default_params(dummy_request):
+    state = zeit.web.core.security.get_login_state(dummy_request)
+    assert (
+        state['register'] == 'http://sso.example.org/registrieren?url='
+                             'http://example.com&entry_service=sonstige')
+    assert (
+        state['register_rawr'] == 'http://sso.example.org/registrieren_email'
+                                  '?template=rawr&url=http://example.com'
+                                  '&entry_service=rawr')
+    assert (
+        state['logout'] == 'http://sso.example.org/abmelden'
+                           '?url=http://example.com&entry_service=sonstige')
+    assert (
+        state['login'] == 'http://sso.example.org/anmelden'
+                          '?url=http://example.com&entry_service=sonstige')
