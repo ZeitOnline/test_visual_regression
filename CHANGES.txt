@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - FEM-8: Minimize transfer volume from homepage overlay and update signals
 
+- MAINT: Subclass view_config decorators into zeit.web
+
 
 3.30 (2017-01-12)
 -----------------
