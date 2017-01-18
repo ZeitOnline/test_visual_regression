@@ -1,7 +1,7 @@
 /**
  * @fileOverview Script to overscroll content pages with a loaction switch to another page
  * @author nico.bruenjes@zeit.de
- * @version  0.1
+ * @version  0.2
  */
 define( [
        'modernizr',
@@ -30,6 +30,42 @@ define( [
     },
     config,
     debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
+    isActive = function() {
+        var isActivated = true,
+            message,
+            status = [{
+            isActive: Zeit.toggles.get( 'overscrolling' ) || false,
+            message: 'set to off or toggle missing'
+        }, {
+            isActive: $( document ).height() >= config.documentMinHeight,
+            message: 'documentMinHeight not matched'
+        }, {
+            isActive: Modernizr.svg,
+            message: 'no svg available'
+        }, {
+            isActive: Zeit.breakpoint.get() === 'desktop',
+            message: 'only on desktop'
+        }, {
+            isActive: Zeit.view.get( 'paywall' ) === '',
+            message: 'paywall active'
+        }, {
+            isActive: $( 'body[data-overscrolling="off"]' ).length < 1,
+            message: 'article deactivated from cms'
+        }];
+        $.each( status, function( index, value ) {
+            if ( !value.isActive ) {
+                message = 'overscrolling: ' + value.message;
+                isActivated = value.isActive;
+                return false;
+            }
+        });
+        if ( debug && message ) {
+            message += ', overwritten by debug';
+            console.debug( message );
+            isActivated = true;
+        }
+        return isActivated;
+    },
     clickTrack = function( type ) {
         var data = [ config.trackingBase + type, config.jumpTo ];
 
@@ -144,11 +180,10 @@ define( [
 
     return {
         init: function( options ) {
-            if ( !Modernizr.svg ) {
-                if ( debug ) { console.debug( 'overscrolling: no svg available' ); }
+            config = $.extend( defaults, options );
+            if ( !isActive() ) {
                 return;
             }
-            config = $.extend( defaults, options );
             if ( window.location.href.indexOf( '#!top-of-overscroll' ) > -1  && history.pushState ) {
                 if ( 'scrollRestoration' in history ) {
                     history.scrollRestoration = 'manual';
@@ -164,21 +199,11 @@ define( [
                     return;
                 }
             }
-            if ( $( document ).height() >= config.documentMinHeight ) {
-                // inview event to change to elemen
-                $( config.triggerElement ).on( 'inview', function( event, isInView ) {
-                    if ( isInView ) {
-                        if ( Zeit.breakpoint.get() === 'desktop' ) {
-                            // attach Elements
-                            loadElements();
-                        } else {
-                            if ( debug ) { console.debug( 'overscrolling: not on desktop' ); }
-                        }
-                    }
-                });
-            } else {
-                if ( debug ) { console.debug( 'overscrolling: documentMinHeight not matched' ); }
-            }
+            $( config.triggerElement ).on( 'inview', function( event, isInView ) {
+                if ( isInView && Zeit.breakpoint.get() === 'desktop' ) {
+                    loadElements();
+                }
+            });
         }
     };
 
