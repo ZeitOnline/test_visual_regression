@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-3551: Add overscrolling.js to site.js
 
+- ZON-3544: Add entry_service parameter for SSO
+
 - FEM-8: Minimize transfer volume from homepage overlay and update signals
 
 - MAINT: Subclass view_config decorators into zeit.web
