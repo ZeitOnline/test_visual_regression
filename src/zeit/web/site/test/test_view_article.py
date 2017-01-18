@@ -2201,3 +2201,24 @@ def test_overscrolling_is_working_as_expected(
         By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
+
+
+def test_paywall_returns_correct_first_click_free_to_webtrekk(
+        application, dummy_request):
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'unfeasible'
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'no'
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
+    dummy_request.GET['C1-Meter-Status'] = 'open'
+    dummy_request.GET['C1-Meter-Info'] = 'first_click_free'
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'yes'

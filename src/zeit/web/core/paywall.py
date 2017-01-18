@@ -51,6 +51,20 @@ class Paywall(object):
 
         return None
 
+    @staticmethod
+    def first_click_free(request):
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'reader_revenue'):
+            return False
+
+        c1_meter_status = Paywall.c1requestheader_or_get(
+            request, 'C1-Meter-Status')
+        c1_meter_info = Paywall.c1requestheader_or_get(
+            request, 'C1-Meter-Info')
+
+        return (
+            c1_meter_status == 'open' and c1_meter_info == 'first_click_free')
+
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IPaywallAccess)
 @grokcore.component.adapter(zeit.cms.content.interfaces.ICommonMetadata)
