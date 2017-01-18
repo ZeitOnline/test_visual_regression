@@ -7,6 +7,8 @@ POSTDEPLOY
 3.31 (unreleased)
 -----------------
 
+- ZON-3394: Change links and styling of user dropnav
+
 - FEM-8: Minimize transfer volume from homepage overlay and update signals
 
 
