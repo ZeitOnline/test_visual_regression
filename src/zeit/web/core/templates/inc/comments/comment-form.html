@@ -95,10 +95,10 @@
         <p>
             Bitte melden Sie sich an, um zu kommentieren.
         </p>
-        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}&entry_service=kommentare">
             Anmelden
         </a>
-        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}&entry_service=kommentare">
             Registrieren
         </a>
     </form>
@@ -113,10 +113,10 @@
         <p>
             Bitte melden Sie sich an, um diesen Kommentar zu melden.
         </p>
-        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}&entry_service=kommentare">
             Anmelden
         </a>
-        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}&entry_service=kommentare">
             Registrieren
         </a>
     </form>

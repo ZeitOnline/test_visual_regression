@@ -61,4 +61,6 @@
 
   <setting name="varnish_caching_time_content" xsi:type="xsd:int">3600</setting>
   <setting name="varnish_caching_time_sitemap" xsi:type="xsd:int">0</setting>
+
+  <setting name="entry_service" xsi:type="xsd:string">sonstige</setting>
 </settings>
