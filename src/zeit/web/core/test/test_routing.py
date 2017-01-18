@@ -8,6 +8,7 @@ from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.interfaces
 import zeit.cms.interfaces
 
+import zeit.web
 import zeit.web.core.article
 import zeit.web.core.routing
 
@@ -167,3 +168,13 @@ def test_dynamic_folder_traversal_should_trigger_redirect_to_index(
         zeit.web.core.routing.RepositoryTraverser.invoke(**tdict)
 
     assert redirect.value.location.endswith(moved)
+
+
+def test_view_config_should_apply_custom_defaults(monkeypatch):
+    defaults = {'foo': 42, 'bar': False}
+    monkeypatch.setattr(zeit.web.view_config, '__custom_defaults__', defaults)
+
+    decorator = zeit.web.view_config(bar=True)
+
+    assert decorator.foo == 42
+    assert decorator.bar is True

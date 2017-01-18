@@ -9,14 +9,14 @@ import types
 import urllib
 import urlparse
 
-import pyramid.view
 import lxml.builder
 import lxml.etree
 import zope.interface
 
+import zeit.cms.interfaces
+import zeit.content.author.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
-import zeit.cms.interfaces
 import zeit.push.interfaces
 
 import zeit.web
@@ -81,6 +81,7 @@ def join_queries(url, join_query):
     return urlparse.urlunparse([scheme, netloc, path, params, query, fragment])
 
 
+@zeit.web.view_defaults(renderer='string')
 class Base(zeit.web.core.view.Base):
 
     allowed_on_hosts = ['newsfeed']
@@ -90,10 +91,8 @@ class Base(zeit.web.core.view.Base):
         return zeit.content.cp.interfaces.ITeaseredContent(self.context)
 
 
-@pyramid.view.view_defaults(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
-    renderer='string')
-@pyramid.view.view_config(
     header='host:newsfeed(\.staging)?\.zeit\.de',
     # We need to be as specific as the normal views with `is_zon_content` etc.
     custom_predicates=(lambda *_: True,))
@@ -199,11 +198,11 @@ class Newsfeed(Base):
         return root
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='newsfeed')
-@pyramid.view.view_config(
+@zeit.web.view_config(
     header='host:newsfeed(\.staging)?\.zeit\.de',
-    context='zeit.content.author.interfaces.IAuthor')
+    context=zeit.content.author.interfaces.IAuthor)
 class AuthorFeed(Newsfeed):
 
     @zeit.web.reify
@@ -221,10 +220,8 @@ class AuthorFeed(Newsfeed):
                 self.context, count=8, dedupe_favourite_content=False))
 
 
-@pyramid.view.view_defaults(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    renderer='string')
-@pyramid.view.view_config(
     header='host:newsfeed(\.staging)?\.zeit\.de',
     name='rss-instantarticle')
 class InstantArticleFeed(Newsfeed):
@@ -275,10 +272,9 @@ class InstantArticleFeed(Newsfeed):
         return root
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-spektrum-flavoured',
-    renderer='string')
+    name='rss-spektrum-flavoured')
 class SpektrumFeed(Base):
 
     def __call__(self):
@@ -391,50 +387,45 @@ class SocialFeed(Base):
             return content.title
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-socialflow-twitter',
-    renderer='string')
+    name='rss-socialflow-twitter')
 class TwitterFeed(SocialFeed):
 
     def social_value(self, content):
         return zeit.push.interfaces.IPushMessages(content).short_text
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-socialflow-facebook',
-    renderer='string')
+    name='rss-socialflow-facebook')
 class FacebookFeed(SocialFeed):
 
     def social_value(self, content):
         return zeit.push.interfaces.IAccountData(content).facebook_main_text
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-socialflow-facebook-zmo',
-    renderer='string')
+    name='rss-socialflow-facebook-zmo')
 class FacebookMagazinFeed(SocialFeed):
 
     def social_value(self, content):
         return zeit.push.interfaces.IAccountData(content).facebook_magazin_text
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-socialflow-facebook-zco',
-    renderer='string')
+    name='rss-socialflow-facebook-zco')
 class FacebookCampusFeed(SocialFeed):
 
     def social_value(self, content):
         return zeit.push.interfaces.IAccountData(content).facebook_campus_text
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
-    name='rss-roost',
-    renderer='string')
+    name='rss-roost')
 class RoostFeed(SocialFeed):
 
     def make_title(self, content):

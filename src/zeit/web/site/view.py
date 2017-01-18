@@ -3,18 +3,18 @@ import logging
 import urllib
 
 import pyramid.httpexceptions
-import pyramid.view
+import zope.component
 
 import zeit.content.rawxml.interfaces
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
 
+import zeit.web
 import zeit.web.campus.view
 import zeit.web.core.security
 import zeit.web.core.view
 import zeit.web.magazin.view
 
-import zope.component
 
 log = logging.getLogger(__name__)
 
@@ -111,12 +111,12 @@ class Base(zeit.web.core.view.Base):
         return self.request.GET.get('stackId', '') or None
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='login_state',
     renderer='templates/inc/navigation/login-state.html',
     request_param='for=site',
     http_cache=60)
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='login_state',
     renderer='templates/inc/navigation/login-state.html',
     custom_predicates=((lambda c, r: 'for' not in r.GET.keys()),),
@@ -125,7 +125,7 @@ def login_state(request):
     return zeit.web.core.security.get_login_state(request)
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.rawxml.interfaces.IUserDashboard,
     renderer='templates/dashboard_user.html')
 class UserDashboard(Base):
@@ -169,7 +169,7 @@ class UserDashboard(Base):
         return result
 
 
-@pyramid.view.view_config(route_name='schlagworte')
+@zeit.web.view_config(route_name='schlagworte')
 def schlagworte(request):
     try:
         page = int(request.matchdict['subpath'].lstrip('index/seite-'))
@@ -187,7 +187,7 @@ def schlagworte(request):
     raise result
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='framebuilder',
     renderer='templates/framebuilder/framebuilder.html')
 class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):

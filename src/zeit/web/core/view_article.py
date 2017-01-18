@@ -3,7 +3,6 @@ import datetime
 import logging
 import re
 
-from pyramid.view import view_config, view_defaults
 import lxml.etree
 import pyramid.httpexceptions
 import zope.component
@@ -384,19 +383,23 @@ class AcceleratedMobilePageArticle(Article):
         return webtrekk
 
 
-@view_config(route_name='amp',
-             context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(lambda context, _: not context.is_amp,),
-             request_method='GET')
+@zeit.web.view_config(
+    route_name='amp',
+    context=zeit.content.article.interfaces.IArticle,
+    custom_predicates=(lambda context, _: not context.is_amp,),
+    request_method='GET')
 def redirect_amp_disabled(context, request):
     url = request.url.replace('/amp/', '/', 1)
     raise pyramid.httpexceptions.HTTPFound(url)
 
 
-@view_defaults(context=zeit.content.article.interfaces.IArticle)
-@view_config(route_name='instantarticle')
-@view_config(route_name='instantarticle-item',
-             wrapper='instantarticle-item')
+@zeit.web.view_defaults(
+    context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_config(
+    route_name='instantarticle')
+@zeit.web.view_config(
+    route_name='instantarticle-item',
+    wrapper='instantarticle-item')
 class InstantArticle(Article):
 
     def __call__(self):
@@ -434,9 +437,10 @@ class InstantArticle(Article):
         return None
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             name='instantarticle-item',
-             renderer='string')
+@zeit.web.view_config(
+    context=zeit.content.article.interfaces.IArticle,
+    name='instantarticle-item',
+    renderer='string')
 class InstantArticleItem(Article):
 
     def __call__(self):
@@ -480,9 +484,10 @@ class InstantArticleItem(Article):
         return lxml.etree.tostring(item)
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             route_name='fbia',
-             renderer='templates/instantarticle/tracking.html')
+@zeit.web.view_config(
+    context=zeit.content.article.interfaces.IArticle,
+    route_name='fbia',
+    renderer='templates/instantarticle/tracking.html')
 class InstantArticleTracking(Article):
 
     @zeit.web.reify

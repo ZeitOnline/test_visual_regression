@@ -15,7 +15,8 @@ import zeit.cms.interfaces
 import zeit.content.article.edit.interfaces
 import zeit.content.article.edit.reference
 
-import zeit.web.core
+import zeit.web.core.block
+import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.magazin.view_article
 
