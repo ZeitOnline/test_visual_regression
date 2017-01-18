@@ -26,6 +26,8 @@ POSTDEPLOY
 
 - MAINT: Subclass view_config decorators into zeit.web
 
+- ZON-2284: Tighten friedbert view openness
+
 
 3.30 (2017-01-12)
 -----------------

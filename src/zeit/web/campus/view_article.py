@@ -9,8 +9,7 @@ import zeit.web.core.view_article
 
 @zeit.web.view_defaults(
     context=zeit.content.article.interfaces.IArticle,
-    custom_predicates=(zeit.web.campus.view.is_zco_content,),
-    request_method='GET')
+    custom_predicates=(zeit.web.campus.view.is_zco_content,))
 @zeit.web.view_config(renderer='templates/article.html')
 @zeit.web.view_config(
     custom_predicates=(zeit.web.campus.view.is_zco_content,
