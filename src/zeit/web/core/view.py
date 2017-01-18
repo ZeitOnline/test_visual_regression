@@ -1249,14 +1249,7 @@ def invalid_unicode_in_request(request):
     body = 'Status 400: Invalid unicode data in request.'
     return pyramid.response.Response(body, 400)
 
-  
-# For some reason we are not able to register ICMSContent on this.
-# We have to register this on every content-view.
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
-@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
-@zeit.web.view_config(route_name='schlagworte_index')
+
 def surrender(context, request):
     return pyramid.response.Response(
         'OK', 303, headerlist=[('X-Render-With', 'default')])

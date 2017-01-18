@@ -169,7 +169,7 @@ class Spektrum(RSSImage):
     host_key = 'spektrum_img_host'
     ig_class = zeit.web.site.area.spektrum.ImageGroup
 
-    
+
 @zeit.web.view_defaults(
     route_name='zett-image')
 @zeit.web.view_config(
