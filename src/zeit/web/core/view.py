@@ -340,7 +340,7 @@ class Base(object):
     @zeit.web.reify
     def js_toggles(self):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
-        names = ('hp_overlay', 'update_signals')
+        names = ('hp_overlay', 'update_signals', 'overscrolling')
         return [(name, toggles.find(name)) for name in names]
 
     @zeit.web.reify
