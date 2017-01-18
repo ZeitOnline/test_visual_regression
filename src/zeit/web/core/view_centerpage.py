@@ -20,15 +20,8 @@ class AreaProvidingPaginationMixin(object):
         area = self.area_providing_pagination
         url = super(AreaProvidingPaginationMixin, self).canonical_url
 
-        if area and area.current_page == 1:
-            remove_param = area.page_info(1)['remove_get_param']
-            return zeit.web.core.utils.remove_get_params(
-                url, remove_param)
-
-        if area and area.current_page > 1:
-            get_param = area.page_info(
-                area.current_page)['append_get_param']
-            return zeit.web.core.utils.add_get_params(url, **get_param)
+        if area and area.current_page:
+            return area.page_info(area.current_page)['url']
 
         return url
 
@@ -37,30 +30,28 @@ class AreaProvidingPaginationMixin(object):
         area = self.area_providing_pagination
 
         if area and area.current_page < area.total_pages:
-            get_param = area.page_info(
-                area.current_page + 1)['append_get_param']
-            return zeit.web.core.utils.add_get_params(
-                self.request.url, **get_param)
+            next_page_number = area.current_page + 1
+            return area.page_info(next_page_number)['url']
 
     @zeit.web.reify
     def prev_page_url(self):
         area = self.area_providing_pagination
 
-        # suppress page param for page 1
-        if area and area.current_page == 2:
-            remove_param = area.page_info(
-                area.current_page)['remove_get_param']
-            return zeit.web.core.utils.remove_get_params(
-                self.request.url, remove_param)
-        elif area and area.current_page > 2:
-            get_param = area.page_info(
-                area.current_page - 1)['append_get_param']
-            return zeit.web.core.utils.add_get_params(
-                self.request.url, **get_param)
+        if not area or area.current_page < 2:
+            return None
+
+        prev_page_number = area.current_page - 1
+        return area.page_info(prev_page_number)['url']
 
     @zeit.web.reify
     def meta_robots(self):
         area = self.area_providing_pagination
+
+        # If the area has explicitly set own meta-robots rules, apply these.
+        # This is the the exception from the exception below.
+        if area and getattr(area, 'meta_robots', None):
+            return area.meta_robots
+
         # Prevent continuation pages from being indexed
         if area and area.current_page > 1:
             return 'noindex,follow,noodp,noydir,noarchive'
@@ -204,7 +195,7 @@ class Centerpage(AreaProvidingPaginationMixin,
     def webtrekk_content_id(self):
         area = self.area_providing_pagination
         # special case for search results
-        if area and area.query_string:
+        if area and getattr(area, 'query_string', None):
             content_url = self.content_url.replace('http://', '')
             if content_url.endswith('/index'):
                 content_url = content_url[:-len('/index')]

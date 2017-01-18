@@ -238,6 +238,13 @@
         areas="volume-header"
         default="volume-header"
         />
+    <!-- Volume year overview (/2016/index) -->
+    <layout
+        id="volume-overview"
+        title="Teaser in volume-overview"
+        areas="volume-overview"
+        default="volume-overview"
+        />
     <!-- Legacy teaser formats -->
     <layout
         id="leader"
