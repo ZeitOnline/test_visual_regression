@@ -290,3 +290,12 @@ def test_sso_url_contains_default_params(dummy_request):
     assert (
         state['login'] == 'http://sso.example.org/anmelden'
                           '?url=http://example.com&entry_service=sonstige')
+
+
+def test_sso_url_contains_custom_params(dummy_request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['entry_service'] = 'custom'
+    state = zeit.web.core.security.get_login_state(dummy_request)
+    assert (
+        state['register'] == 'http://sso.example.org/registrieren?url='
+                             'http://example.com&entry_service=custom')
