@@ -97,21 +97,8 @@ class Base(object):
     seo_title_default = u''
     pagetitle_suffix = u''
     inline_svg_icons = False
-    host_check_required_on = ['newsfeed', 'xml']
 
     def __call__(self):
-        # to avoid circular imports
-        import zeit.web.site.view_feed
-
-        # XXX: Since we do not have a configuration based on containments
-        # for our views, the "function view_is_forbidden_by_host" is necessary
-        # to control, that only explicitly configured views with the attribute
-        # allowed_on_hosts, will render e.g. an RSS feed on newsfeed.zeit.de
-        # host header (RD, 2015-09; updated by TK, 2016-06)
-
-        if not self.is_allowed_on_host(self.request.headers.get('host')):
-            raise pyramid.httpexceptions.HTTPNotFound()
-
         redirect_on_trailing_slash(self.request)
         # Don't redirect for preview (since the workingcopy does not contain
         # the suffix-less version)
@@ -141,16 +128,6 @@ class Base(object):
         self.context = context
         self.request = request
         self._webtrekk_assets = []
-
-    def is_allowed_on_host(self, host):
-        allowed_on_hosts = getattr(self, 'allowed_on_hosts', None)
-        if host and any([h in host for h in self.host_check_required_on]):
-            if allowed_on_hosts and any(
-                [re.match('{}(\.staging)?\.zeit\.de'.format(x), host)
-                    for x in allowed_on_hosts]):
-                    return True
-            return False
-        return True
 
     @zeit.web.reify
     def vgwort_url(self):
@@ -1273,13 +1250,6 @@ def invalid_unicode_in_request(request):
     return pyramid.response.Response(body, 400)
 
 
-# For some reason we are not able to register ICMSContent on this.
-# We have to register this on every content-view.
-@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
-@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
-@zeit.web.view_config(route_name='schlagworte_index')
 def surrender(context, request):
     return pyramid.response.Response(
         'OK', 303, headerlist=[('X-Render-With', 'default')])

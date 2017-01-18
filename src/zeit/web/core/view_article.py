@@ -386,8 +386,7 @@ class AcceleratedMobilePageArticle(Article):
 @zeit.web.view_config(
     route_name='amp',
     context=zeit.content.article.interfaces.IArticle,
-    custom_predicates=(lambda context, _: not context.is_amp,),
-    request_method='GET')
+    custom_predicates=(lambda context, _: not context.is_amp,))
 def redirect_amp_disabled(context, request):
     url = request.url.replace('/amp/', '/', 1)
     raise pyramid.httpexceptions.HTTPFound(url)
