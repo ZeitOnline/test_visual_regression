@@ -68,8 +68,6 @@
 		// 	content: none
 
 	// LOGIN
-	&__login
-		// min-width: remify(80px)
 	&__login-link
 		text-align: right
 	&__login-icon
@@ -129,6 +127,7 @@
 		&__metadata
 			padding: remify(12px 5px 10px $page-padding--small)
 
+		&__login,
 		&__ressorts,
 		&__classifieds
 			line-height: 2.625
@@ -180,20 +179,10 @@
 				&:last-child
 					display: none
 
-		&__login
-			line-height: remify(60px)
 		&__login-title
-			float: left
-			max-width: 66%
 			overflow: hidden
 			text-overflow: ellipsis
 			white-space: nowrap
-		&__login-list
-			float: right
-			font-size: remify(14px)
-			letter-spacing: .08em
-			li:not(:last-child)
-				display: none
 
 		&__metadata
 			line-height: 1.5
@@ -212,6 +201,7 @@
 			display: none
 
 	+respond-max($break-phablet-min)
+		&__login,
 		&__ressorts,
 		&__classifieds
 			li

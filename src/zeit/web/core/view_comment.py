@@ -8,14 +8,13 @@ import datetime
 
 import lxml
 import pyramid.httpexceptions
-import pyramid.view
 import requests
 import requests.exceptions
 import zope.component
 
 import zeit.cms.interfaces
 
-import zeit.web.core
+import zeit.web
 import zeit.web.core.comments
 import zeit.web.core.metrics
 import zeit.web.core.security
@@ -352,10 +351,10 @@ class PostComment(zeit.web.core.view.Base):
         invalidate_comment_thread(unique_id)
 
 
-@pyramid.view.view_config(route_name='post_test_comments',
-                          renderer='templates/post_test_comments.html',
-                          custom_predicates=(
-                              zeit.web.core.view.is_not_in_production,))
+@zeit.web.view_config(
+    route_name='post_test_comments',
+    renderer='templates/post_test_comments.html',
+    custom_predicates=(zeit.web.core.view.is_not_in_production,))
 class PostCommentAdmin(PostComment):
     def __init__(self, context, request):
         super(PostCommentAdmin, self).__init__(context, request)
@@ -365,18 +364,18 @@ class PostCommentAdmin(PostComment):
             self.post_comment()
 
 
-@pyramid.view.view_defaults(renderer='json', request_method='POST')
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
-                          name='komplettansicht')
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
-                          name='seite')
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@zeit.web.view_defaults(renderer='json', request_method='POST')
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
+                      name='komplettansicht')
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
+                      name='seite')
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class PostCommentResource(PostComment):
 
     msg = {'Username exists or not valid': 'username_exists_or_invalid'}
@@ -433,22 +432,22 @@ class PostCommentResource(PostComment):
         return pyramid.httpexceptions.HTTPSeeOther(location=location)
 
 
-@pyramid.view.view_defaults(
+@zeit.web.view_defaults(
     # XXX specificity wars: it's not just for CSS
     custom_predicates=(lambda *_: True,),
     request_param='action=recommend',
     request_method='GET')
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
-                          name='komplettansicht')
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle,
-                          name='seite')
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
+                      name='komplettansicht')
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
+                      name='seite')
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
         # redirect unauthorized recommendation request
@@ -464,12 +463,12 @@ class RecommendCommentResource(PostCommentResource):
 
 
 # XXX We should be a little more specific here, ie ICommentableContent
-@pyramid.view.view_defaults(
+@zeit.web.view_defaults(
     containment=zeit.cms.content.interfaces.ICommonMetadata)
-@pyramid.view.view_config(
+@zeit.web.view_config(
     name='comment-form',
     renderer='zeit.web.core:templates/inc/comments/comment-form.html')
-@pyramid.view.view_config(
+@zeit.web.view_config(
     name='report-form',
     renderer='zeit.web.core:templates/inc/comments/report-form.html')
 class CommentForm(zeit.web.core.view.CommentMixin,
@@ -488,16 +487,16 @@ class CommentForm(zeit.web.core.view.CommentMixin,
         return self.request.session.pop(self.request.params['error'], None)
 
 
-@pyramid.view.view_defaults(
+@zeit.web.view_defaults(
     renderer='zeit.web.core:templates/inc/comments/replies.html',
     name='comment-replies')
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class CommentReplies(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify
@@ -550,7 +549,7 @@ def invalidate_comment_thread(unique_id):
     zeit.web.core.comments.get_cacheable_thread.invalidate(unique_id)
 
 
-@pyramid.view.view_config(route_name='invalidate_comment_thread')
+@zeit.web.view_config(route_name='invalidate_comment_thread')
 def invalidate(request):
     if not request.headers.get('X-Watchword', None) == 'g@ldf1nch':
         raise pyramid.httpexceptions.HTTPForbidden(
@@ -575,7 +574,7 @@ def invalidate(request):
             explanation='Error: {}'.format(err))
 
 
-@pyramid.view.view_config(route_name='invalidate_community_maintenance')
+@zeit.web.view_config(route_name='invalidate_community_maintenance')
 def invalidate_maintenance(request):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     unique_id = conf.get('community_maintenance')

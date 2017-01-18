@@ -1,7 +1,9 @@
-import pyramid.view
+import pyramid.httpexceptions
 
 import zeit.campus.interfaces
+import zeit.cms.interfaces
 
+import zeit.web
 import zeit.web.core.application
 import zeit.web.core.security
 import zeit.web.core.view
@@ -33,7 +35,7 @@ class Base(zeit.web.core.view.Base):
         return 'zeitcampus'
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='login_state',
     renderer='templates/inc/navigation/login-state.html',
     request_param='for=campus',
@@ -42,7 +44,7 @@ def login_state(request):
     return zeit.web.core.security.get_login_state(request)
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='campus_framebuilder',
     renderer='templates/framebuilder/framebuilder.html')
 class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):

@@ -26,7 +26,6 @@ import zeit.cms.repository.repository
 import zeit.cms.repository.unknown
 import zeit.connector
 import zeit.web
-import zeit.web.core
 import zeit.web.core.bugsnag
 import zeit.web.core.cache
 import zeit.web.core.interfaces
