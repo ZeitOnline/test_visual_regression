@@ -80,8 +80,7 @@ def join_queries(url, join_query):
     return urlparse.urlunparse([scheme, netloc, path, params, query, fragment])
 
 
-@zeit.web.view_defaults(
-    renderer='string')
+@zeit.web.view_defaults(renderer='string')
 class Base(zeit.web.core.view.Base):
 
     @property

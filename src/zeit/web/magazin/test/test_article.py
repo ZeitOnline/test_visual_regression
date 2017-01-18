@@ -151,6 +151,7 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '25: "original"' in webtrekk_config
     assert '26: "article.column"' in webtrekk_config
     assert '28: "free"' in webtrekk_config
+    assert '29: "unfeasible"' in webtrekk_config
     assert '30: "open"' in webtrekk_config
 
     # noscript string
@@ -166,7 +167,8 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
             'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
             'cp15=&cp25=original&cp26=article.column&cp27=&cp30=open&cp28=free'
-            '&cp31=share_buttons_small&cp23=nicht_angemeldet'.format(
+            '&cp29=unfeasible&cp31=share_buttons_small'
+            '&cp23=nicht_angemeldet'.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 
 
@@ -235,8 +237,9 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
     assert '25: "original",' in webtrekk_config
     assert '26: "centerpage.ZMO",' in webtrekk_config
     assert '27: ""' in webtrekk_config
-    assert '28: "free"' in webtrekk_config
     assert '30: "open"' in webtrekk_config
+    assert '28: "free"' in webtrekk_config
+    assert '29: "unfeasible"' in webtrekk_config
 
     assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
             'redaktion.zeit-magazin...centerpage.zmlb%7C'
@@ -247,7 +250,7 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp5=2016-05-23+12%3A14%3A06.113344%2B02%3A00&cp6=&cp7=&cp8=zmlb&'
             'cp9=zeitmz/centerpage&cp10=yes&cp11=&cp12=desktop.site&'
             'cp13=stationaer&cp14=friedbert&cp15=&cp25=original&'
-            'cp26=centerpage.ZMO&cp27=&cp30=open&cp28=free&'
+            'cp26=centerpage.ZMO&cp27=&cp30=open&cp28=free&cp29=unfeasible&'
             'cp23=nicht_angemeldet'.format(
                 urllib.quote(testserver.url.replace('http://', '')))) in source
 

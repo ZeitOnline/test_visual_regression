@@ -583,29 +583,41 @@ def test_caching_headers_should_be_set(testbrowser):
 def test_article_should_have_correct_js_view(testbrowser):
     bc = testbrowser('/zeit-magazin/article/01').contents
     assert "window.Zeit = {" in bc
-    assert "'banner_channel': 'zeitmz/modeunddesign/article'," in bc
-    assert "'ressort': 'zeit-magazin'," in bc
-    assert "'sub_ressort': 'mode-design'," in bc
-    assert "'type': 'article'," in bc
+    assert "'banner_channel': \"zeitmz/modeunddesign/article\"," in bc
+    assert "'ressort': \"zeit-magazin\"," in bc
+    assert "'sub_ressort': \"mode-design\"," in bc
+    assert "'type': \"article\"," in bc
+    assert "'hp_overlay_interval': 78," in bc
+    assert "'update_signals_comments_interval': 20," in bc
+    assert "'update_signals_time_interval': 60," in bc
+    assert "'paywall': null," in bc
 
 
 def test_centerpage_should_have_correct_js_view(testbrowser):
     bc = testbrowser('/zeit-magazin/centerpage/lebensart').contents
     assert "window.Zeit = {" in bc
-    assert "'banner_channel': 'zeitmz/leben/centerpage'," in bc
-    assert "'ressort': 'lebensart'," in bc
-    assert "'sub_ressort': 'leben'," in bc
-    assert "'type': 'centerpage'," in bc
+    assert "'banner_channel': \"zeitmz/leben/centerpage\"," in bc
+    assert "'ressort': \"lebensart\"," in bc
+    assert "'sub_ressort': \"leben\"," in bc
+    assert "'type': \"centerpage\"," in bc
+    assert "'hp_overlay_interval': 78," in bc
+    assert "'update_signals_comments_interval': 20," in bc
+    assert "'update_signals_time_interval': 60," in bc
+    assert "'paywall': null," in bc
 
 
 def test_gallery_should_have_correct_js_view(testbrowser):
     b = testbrowser('/galerien/fs-desktop-schreibtisch-computer')
     bc = b.contents
     assert "window.Zeit = {" in bc
-    assert "'banner_channel': 'zeitmz/leben/article'," in bc
-    assert "'sub_ressort': 'leben'," in bc
-    assert "'ressort': 'zeit-magazin'," in bc
-    assert "'type': 'gallery'," in bc
+    assert "'banner_channel': \"zeitmz/leben/article\"," in bc
+    assert "'sub_ressort': \"leben\"," in bc
+    assert "'ressort': \"zeit-magazin\"," in bc
+    assert "'type': \"gallery\"," in bc
+    assert "'hp_overlay_interval': 78," in bc
+    assert "'update_signals_comments_interval': 20," in bc
+    assert "'update_signals_time_interval': 60," in bc
+    assert "'paywall': null," in bc
 
 
 def test_iqd_mobile_settings_are_filled(application):
@@ -695,8 +707,8 @@ def test_navigation_should_show_logged_in_user_correctly(
         'background-image: url(/picture.jpg)')
     links = css('#user-menu a')
     assert links[0].attrib['href'] == '/profile'
-    assert links[1].attrib['href'] == '/abo'
-    assert links[2].attrib['href'] == '/logout'
+    assert '/abo' in links[1].attrib['href']
+    assert links[3].attrib['href'] == '/logout'
 
 
 def test_navigation_should_handle_logged_out_user_correctly(

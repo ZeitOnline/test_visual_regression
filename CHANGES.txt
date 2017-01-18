@@ -4,7 +4,36 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.28 (unreleased)
+- PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
+
+
+3.31 (unreleased)
+-----------------
+
+- ZON-3394: Change links and styling of user dropnav
+
+- ZON-3402: Track first_click_free status in Webtrekk
+
+- ZON-3551: Add overscrolling.js to site.js
+
+- FEM-8: Minimize transfer volume from homepage overlay and update signals
+
+- MAINT: Subclass view_config decorators into zeit.web
+
+
+3.30 (2017-01-12)
+-----------------
+
+- HOTFIX: Encode url in pagination
+
+
+3.29 (2017-01-12)
+-----------------
+
+- FIX: Missing css/js
+
+
+3.28 (2017-01-12)
 -----------------
 
 - MAINT: Harmonize Z+ badge naming

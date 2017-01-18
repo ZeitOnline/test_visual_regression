@@ -309,8 +309,16 @@ class Base(object):
 
     @zeit.web.reify
     def js_vars(self):
-        names = ('banner_channel', 'ressort', 'sub_ressort', 'type', 'paywall')
+        names = ('banner_channel', 'ressort', 'sub_ressort', 'type',
+                 'hp_overlay_interval', 'update_signals_comments_interval',
+                 'update_signals_time_interval', 'paywall')
         return [(name, getattr(self, name, '')) for name in names]
+
+    @zeit.web.reify
+    def js_toggles(self):
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        names = ('hp_overlay', 'update_signals', 'overscrolling')
+        return [(name, toggles.find(name)) for name in names]
 
     @zeit.web.reify
     def navigation(self):
@@ -629,9 +637,18 @@ class Base(object):
             ('cp30', self.paywall or 'open')  # Paywall Schranke
         ])
 
+        access = getattr(self.context, 'access', '')
+
         if zeit.web.core.template.toggles('access_status_webtrekk'):
-            access = getattr(self.context, 'access', '')
             custom_parameter.update({'cp28': access})
+
+        first_click_free = 'unfeasible'
+        if zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
+            if access == 'registration':
+                c1_fcf_header = zeit.web.core.paywall.Paywall.first_click_free(
+                    self.request)
+                first_click_free = 'yes' if c1_fcf_header else 'no'
+        custom_parameter.update({'cp29': first_click_free})
 
         return {
             'contentGroup': content_group,
@@ -685,6 +702,21 @@ class Base(object):
     @zeit.web.reify
     def paywall(self):
         return zeit.web.core.paywall.Paywall.status(self.request)
+
+    @zeit.web.reify
+    def update_signals_comments_interval(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('update_signals_comments_interval', '')
+
+    @zeit.web.reify
+    def update_signals_time_interval(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('update_signals_time_interval', '')
+
+    @zeit.web.reify
+    def hp_overlay_interval(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('hp_overlay_interval', '')
 
 
 class CommentMixin(object):
@@ -1217,7 +1249,14 @@ def invalid_unicode_in_request(request):
     body = 'Status 400: Invalid unicode data in request.'
     return pyramid.response.Response(body, 400)
 
-
+  
+# For some reason we are not able to register ICMSContent on this.
+# We have to register this on every content-view.
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
+@zeit.web.view_config(route_name='schlagworte_index')
 def surrender(context, request):
     return pyramid.response.Response(
         'OK', 303, headerlist=[('X-Render-With', 'default')])

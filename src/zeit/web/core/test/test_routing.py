@@ -179,7 +179,7 @@ def test_view_config_should_apply_custom_defaults(monkeypatch):
 
     assert decorator.foo == 42
     assert decorator.bar is True
-
+    
 
 def test_host_restriction_predicate_validates_argument(application):
     Predicate = zeit.web.core.routing.HostRestrictionPredicate  # NOQA
