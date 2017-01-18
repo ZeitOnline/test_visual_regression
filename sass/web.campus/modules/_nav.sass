@@ -116,9 +116,6 @@ $nav-color-border: #444
 			@extend %nav-link-arrow
 
 	// LOGIN
-	&__login
-		@extend %nav-font-m
-		min-width: remify(50px)
 	&__login-link
 		text-align: right
 	&__login-icon
@@ -237,15 +234,10 @@ $nav-color-border: #444
 				float: left
 				width: 50%
 
-		&__login
-			line-height: remify(60px)
 		&__login-title
-			float: left
-			width: 66%
-		&__login-list
-			float: right
-			li:not(:last-child)
-				display: none
+			overflow: hidden
+			text-overflow: ellipsis
+			white-space: nowrap
 		&__user-picture
 			float: left
 			height: remify(40px)
@@ -253,6 +245,24 @@ $nav-color-border: #444
 			width: remify(40px)
 			&--default
 				display: none
+
+		&__login-list
+			li
+				float: left
+				padding-right: $page-padding--small
+				width: 33.33%
+			a
+				overflow: hidden
+				text-overflow: ellipsis
+				white-space: nowrap
+
++respond-max($break-phablet-min)
+	.nav
+		&__login-list
+			li
+				padding-right: $page-padding--small
+				width: 50%
+
 
 
 +respond-min($break-tablet-min)
