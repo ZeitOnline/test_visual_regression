@@ -1106,7 +1106,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             *[t.uniqueId for t in self.nextread])
 
 
-@pyramid.view.view_config(route_name='health_check')
+@zeit.web.view_config(route_name='health_check')
 def health_check(request):
     """ View callable to perform a health a check by checking,
         if the configured repository path exists.
@@ -1264,10 +1264,10 @@ def not_found(request):
          ('Content-Type', 'text/plain; charset=utf-8')])
 
 
-@pyramid.view.view_config(context=pyramid.exceptions.URLDecodeError)
+@zeit.web.view_config(context=pyramid.exceptions.URLDecodeError)
 # Unfortunately, not everyone raises a specific error, so we need to catch
 # the generic one, too. (See also <https://github.com/Pylons/webob/issues/115>)
-@pyramid.view.view_config(context=UnicodeDecodeError)
+@zeit.web.view_config(context=UnicodeDecodeError)
 def invalid_unicode_in_request(request):
     body = 'Status 400: Invalid unicode data in request.'
     return pyramid.response.Response(body, 400)
@@ -1275,24 +1275,26 @@ def invalid_unicode_in_request(request):
 
 # For some reason we are not able to register ICMSContent on this.
 # We have to register this on every content-view.
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(route_name='schlagworte_index')
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
+@zeit.web.view_config(route_name='schlagworte_index')
 def surrender(context, request):
     return pyramid.response.Response(
         'OK', 303, headerlist=[('X-Render-With', 'default')])
 
 
-@pyramid.view.view_config(route_name='blacklist')
+@zeit.web.view_config(route_name='blacklist')
 def blacklist(context, request):
     return pyramid.httpexceptions.HTTPNotImplemented(
         headers=[('X-Render-With', 'default'),
                  ('Content-Type', 'text/plain; charset=utf-8')])
 
 
-@pyramid.view.view_config(route_name='json_delta_time', renderer='json')
+@zeit.web.view_config(
+    route_name='json_delta_time',
+    renderer='json')
 def json_delta_time(request):
     unique_id = request.GET.get('unique_id', None)
     date = request.GET.get('date', None)
@@ -1332,7 +1334,9 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
     return {'delta_time': delta_time}
 
 
-@pyramid.view.view_config(route_name='json_comment_count', renderer='json')
+@zeit.web.view_config(
+    route_name='json_comment_count',
+    renderer='json')
 def json_comment_count(request):
     try:
         unique_id = request.GET.get('unique_id', None)
@@ -1367,14 +1371,14 @@ def json_comment_count(request):
     return {'comment_count': comment_count}
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.text.interfaces.IText,
     renderer='string')
 def view_textcontent(context, request):
     return context.text
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='login_state',
     renderer='templates/inc/login-state-footer.html',
     request_param='for=footer',

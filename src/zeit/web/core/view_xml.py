@@ -5,7 +5,7 @@ from pyramid.response import Response
 import lxml.etree
 import lxml.objectify
 import magic
-import pyramid.view
+import pyramid.httpexceptions
 
 from zeit.connector.interfaces import IResource
 import zeit.cms.content.interfaces
@@ -18,6 +18,7 @@ import zeit.content.gallery.interfaces
 import zeit.content.link.interfaces
 import zeit.content.video.interfaces
 
+import zeit.web
 import zeit.web.core.article
 import zeit.web.core.view
 
@@ -98,7 +99,7 @@ class XMLContent(zeit.web.core.view.Base):
         return self.context.xml
 
 
-class Centerpage(object):
+class CenterpageMixin(object):
 
     @property
     def xml(self):
@@ -109,68 +110,71 @@ class Centerpage(object):
 #       the XML routes as specific as our HTML ones with dummy predicates (ND)
 
 
-@pyramid.view.view_defaults(
+@zeit.web.view_defaults(
     header='host:xml(\.staging)?\.zeit\.de',
     custom_predicates=(lambda *_: True,),
     renderer='string',
     request_method='GET')
-@pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(
+@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent)
+@zeit.web.view_config(
     context=zeit.content.article.interfaces.IArticle,
     custom_predicates=(lambda *_: True, lambda *_: True, lambda *_: True))
-@pyramid.view.view_config(context=zeit.content.author.interfaces.IAuthor)
-@pyramid.view.view_config(context=zeit.content.link.interfaces.ILink)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor)
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.content.link.interfaces.ILink)
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
 class HostHeaderContent(XMLContent):
     pass
 
 
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2009)
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2015)
-class HostHeaderCP(Centerpage, HostHeaderContent):
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2009)
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015)
+class HostHeaderCP(CenterpageMixin, HostHeaderContent):
     pass
 
 
-@pyramid.view.view_defaults(
+@zeit.web.view_defaults(
     route_name='xml',
     custom_predicates=(lambda *_: True,),
     renderer='string',
     request_method='GET')
-@pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.content.author.interfaces.IAuthor)
-@pyramid.view.view_config(context=zeit.content.link.interfaces.ILink)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent)
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor)
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
+@zeit.web.view_config(context=zeit.content.link.interfaces.ILink)
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
+@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
 class RouteNameContent(XMLContent):
     pass
 
 
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2009)
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2015)
-class RouteNameCP(Centerpage, RouteNameContent):
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage)
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2009)
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015)
+class RouteNameCP(CenterpageMixin, RouteNameContent):
     pass
 
 
-@pyramid.view.view_defaults(
+@zeit.web.view_defaults(
     context=zeit.cms.repository.interfaces.IDAVContent,
     custom_predicates=(lambda *_: True,),
     renderer='string',
     request_method='GET')
-@pyramid.view.view_config(route_name='xml')
-@pyramid.view.view_config(header='host:xml(\.staging)?\.zeit\.de')
+@zeit.web.view_config(
+    route_name='xml')
+@zeit.web.view_config(
+    header='host:xml(\.staging)?\.zeit\.de')
 class NonXMLContent(zeit.web.core.view.Base):
 
     allowed_on_hosts = ['xml']
