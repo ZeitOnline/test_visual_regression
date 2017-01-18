@@ -2152,7 +2152,7 @@ def test_overscrolling_is_not_active_on_paywalls(
     driver = selenium_driver
     driver.set_window_size(1200, 900)
     path = 'zeit-online/article/01'
-    query= 'C1-Meter-Status=paywall&C1-Meter-User-Status=register'
+    query = 'C1-Meter-Status=paywall&C1-Meter-User-Status=register'
     driver.get('{}/{}?{}'.format(testserver.url, path, query))
     footer = driver.find_element_by_class_name('footer')
     driver.execute_script(
