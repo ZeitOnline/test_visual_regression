@@ -4,8 +4,17 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
+
+
 3.31 (unreleased)
 -----------------
+
+- ZON-3394: Change links and styling of user dropnav
+
+- ZON-3402: Track first_click_free status in Webtrekk
+
+- ZON-3551: Add overscrolling.js to site.js
 
 - FEM-8: Minimize transfer volume from homepage overlay and update signals
 
