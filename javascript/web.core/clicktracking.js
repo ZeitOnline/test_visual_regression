@@ -23,7 +23,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             // For some links, we want to preserve the GET parameters.
             // Otherwise, remove them!
-            if ( slug.indexOf( '.social.' ) !== -1 ) {
+            if ( data.length > 2 && data[1] === 'social' && data[2] > 0 ) {
                 url = $( 'meta[property="og:url"]' );
                 url = url.length ?
                     url.attr( 'content' ).replace( /http(s)?:\/\//, '' ) :
@@ -111,7 +111,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         /**
          * track elements in the main section
          * @param  {Object} $element jQuery Element with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         main: function( $element, event ) {
 
@@ -141,13 +141,12 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             var data = [],
                 href,
                 type = 'text',
-                teasertype = '',
                 element = $element.get( 0 ),
                 $article = $element.closest( 'article, aside' ),
                 $area = $element.closest( '.cp-area' ),
-                context = $article.data( 'clicktracking' ),
+                context = $area.data( 'ct-context' ),
                 column = '',
-                articleClasses = $article.get( 0 ).className.split( ' ' );
+                teasertype = $article.data( 'ct-block' ) || $article.attr( 'class' ).split( ' ' ).shift();
 
             if ( element.className.indexOf( 'button' ) !== -1 ) {
                 type = 'button';
@@ -155,7 +154,6 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 type = 'image';
             }
 
-            teasertype += articleClasses[0];
             teasertype += $article.data( 'zplus' ) ? '-zplus' : '';
 
             if ( element.type === 'submit' ) {
@@ -187,7 +185,8 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // region bzw. reihe
                 column, // spalte
                 teasertype, // subreihe
-                $element.data( 'ct-label' ) || type, // bezeichner (image, button, text)
+                sanitizeString(
+                    $element.data( 'ct-label' ) || type ), // bezeichner (image, button, text)
                 href // url
             ];
 
@@ -196,7 +195,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         /**
          * track links with data-id attribute that contains the complete webtrekk id without href
          * @param  {object} $element jQuery collection with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         useDataId: function( $element ) {
             var data = [
@@ -208,7 +207,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         /**
          * track links inside parents with appropriate data attributes
          * @param  {object} $element jQuery collection with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         useDataArea: function( $element, event ) {
             var $area = $( event.delegateTarget ),
@@ -280,7 +279,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         /**
          * track links with data-tracking attribute that contains the complete webtrekk id plus href
          * @param  {object} $element jQuery collection with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         useDataTracking: function( $element ) {
             var trackingData = $element.data( 'tracking' ).split( '|' ),
@@ -294,7 +293,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * track elements in the parquet-meta section
          * definition: https://docs.google.com/spreadsheets/d/1uY8XXULPq7zUre9prBWiKDaBQercLmAEENCVF8LQk4Q/edit#gid=1056411343
          * @param  {Object} $element jQuery Element with the link that was clicked
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         parquetMeta: function( $element, event ) {
 
@@ -304,9 +303,9 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 data;
 
             data = [
-                $column.data( 'clicktracking' ), // Verortung
+                $column.data( 'ct-context' ), // Verortung
                 $element.closest( '.cp-region' ).index( '.main .cp-region' ) + 1, // Region bzw. Reihe
-                '0', // Spalte
+                0, // Spalte
                 $column.find( 'a' ).index( $element ) + 1, // Subreihe
                 linkType, // Linktyp (title|topiclink|morelink)
                 $element.attr( 'href' ) // Ziel-URL
@@ -318,18 +317,23 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          * track links which are inside an article text
          * @param  {object} $element jQuery collection with the link that was clicked
          * @param  {object} $page    jQuery collection with the page containing the clicked link
-         * @return {string}          formatted linkId-string for webtrekk call
+         * @return {array}           list of data for webtrekk call
          */
         linkInArticleContent: function( $element, $page ) {
-            var $currentParagraph =  $element.closest( 'p, [data-clicktracking]', $page ),
-                currentPageNumber = $page.data( 'page-number' ) || 0,
-                currentParagraphNumber = $currentParagraph.prevAll( 'p' ).length + 1,
-                trackType = $element.closest( '[data-clicktracking]' ).data( 'clicktracking' ) || 'intext',
+            var $blocks = $page.children( '[class]' ).not([ // exclude some blocks
+                        '[data-ct-area="article-toc"]', // table of contents
+                        '.article__subheading', // page title and intertitle
+                        '.article__subpage-head' // page title in longform
+                    ].join() ),
+                $block = $element.closest( $blocks ),
+                pageNumber = $page.data( 'page-number' ) || 0,
+                blockNumber = $blocks.index( $block ) + 1,
+                blockType = $block.length ? $block.data( 'ct-block' ) || $block.attr( 'class' ).split( ' ' ).shift() : 'intext',
                 data = [
-                    trackType, // [verortung]
-                    currentParagraphNumber + '/seite-' + currentPageNumber, // "Nummer des Absatzes"/"Nummer der Seite" Bsp: "2/seite-1"
-                    '', // [spalte] leer lassen
-                    '', // [subreihe] leer lassen
+                    'article', // [verortung]
+                    blockNumber, // [reihe]
+                    'seite-' + pageNumber, // [spalte]
+                    blockType, // [subreihe]
                     sanitizeString(
                         $element.data( 'ct-label' ) ||
                         $element.children().first().text() ||
@@ -340,26 +344,36 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             return data;
         },
 
-        linkInGalleryContent: function( $element, $gallery ) {
-            // the pager contains the image number *after* the click, so we want to adjust that
-            var pager = $gallery.find( '.bx-pager' ).text().split( ' / ' ),
-                row = $element[ 0 ].className.indexOf( 'overlay' ) < 0 ? 1 : 2,
-                column = $element[ 0 ].className.indexOf( 'prev' ) < 0 ? 2 : 1,
-                total = parseInt( pager.pop(), 10 ),
-                current = parseInt( pager.pop(), 10 ),
-                // add +1 for left click (1) and -1 for right click (2)
-                // consider 0 and total + 1
-                number = ( current + column * -2 + 3 ) % total || total,
-                data = [
-                    'gallery', // [verortung]
-                    row, // [reihe]
-                    column, // [spalte]
-                    number, // [subreihe]
-                    sanitizeString(
-                        $element.children().first().text() ||
-                        $element.text() ), // bezeichner
-                    location.host + location.pathname // url
-                ];
+        linkInGalleryContent: function( $element, $page ) {
+            var className = $element[ 0 ].className,
+                pager = $page.find( '.bx-pager' ),
+                row = 3,
+                column = '',
+                current = '',
+                data;
+
+            // navigation arrows
+            if ( /-(prev|next)/.test( className ) ) {
+                row = className.indexOf( 'overlay' ) < 0 ? 1 : 2;
+                column = className.indexOf( 'prev' ) < 0 ? 2 : 1;
+                current = parseInt( pager.text().split( ' / ' ).shift(), 10 );
+            }
+            // navigation bullets for touch devices
+            else if ( className.indexOf( 'bx-pager-link' ) !== -1 ) {
+                row = 1;
+                current = pager.find( '.bx-pager-link' ).index( $element ) + 1;
+            }
+
+            data = [
+                'gallery', // [verortung]
+                row, // [reihe]
+                column, // [spalte]
+                current, // [subreihe] contains the image number *after* the click
+                sanitizeString(
+                    $element.children().first().text() ||
+                    $element.text() ), // bezeichner
+                location.host + location.pathname // url
+            ];
             return data;
         }
     },
@@ -415,10 +429,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                          '.teaser-topic-variant__media',
                          '.breaking-news-banner',
                          '.article-lineage',
-                         '.js-truncate-region',
-                         '.partnerbox',
-                         '.volume-overview-teaser',
-                         '.centerpage-header'
+                         '.js-truncate-region'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],

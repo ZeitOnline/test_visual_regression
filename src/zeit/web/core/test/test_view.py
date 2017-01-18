@@ -970,3 +970,25 @@ def test_http_header_should_contain_c1_debug_echoes(testserver):
         })
     assert response.headers.get('x-debug-c1-meter-status') == 'always_paid'
     assert response.headers.get('x-debug-c1-meter-user-status') == 'anonymous'
+
+
+def test_js_toggles_are_correctly_returned(
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True, 'update_signals': False}.get)
+    view = zeit.web.core.view.Base(None, None)
+    assert ('hp_overlay', True) in view.js_toggles
+    assert ('update_signals', False) in view.js_toggles
+
+
+def test_js_toggles_are_correctly_displayed(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True, 'update_signals': False}.get)
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index' % testserver.url)
+    hpo = driver.execute_script('return Zeit.toggles.hp_overlay')
+    uds = driver.execute_script('return Zeit.toggles.update_signals')
+
+    assert hpo
+    assert not uds

@@ -20,7 +20,7 @@
                                     {%- if loop.last %} und {% else %}, {% endif -%}
                                 {%- endif -%}
                                 {%- if author.href -%}
-                                    <a href="{{ author.href | create_url }}" itemprop="url" data-ct-column="
+                                    <a href="{{ author.href | create_url }}" rel="author" itemprop="url" data-ct-column="
                                         {{- '%s_of_%s' | format(loop.index, loop.length) }}" data-ct-subcolumn="false"><span itemprop="name">
                                         {{- author.name -}}
                                     </span></a>

@@ -1,9 +1,9 @@
-<aside class="authorbox article__item article__item--marginalia" data-clicktracking="authorbox" itemprop="author" itemscope itemtype="http://schema.org/Person">
+<aside class="authorbox article__item article__item--marginalia" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <div class="authorbox__container">
         {%- include "zeit.web.core:templates/inc/asset/image_authorbox.tpl" -%}
         <div>
             <strong class="authorbox__name" itemprop="name">{{ block.author.display_name }}</strong>
-            <em class="authorbox__summary" itemprop="description">{{ block.author.summary }}</em>
+            <em class="authorbox__summary" itemprop="description">{{ block.text | default(block.author.summary, True) }}</em>
         </div>
     </div>
 

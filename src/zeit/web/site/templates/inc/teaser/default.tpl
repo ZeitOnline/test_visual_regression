@@ -6,8 +6,7 @@
     {%- block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}
     {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="
     {{- teaser.uniqueId }}"
-    {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %} data-clicktracking="
-    {{- area | get_clicktracking_identifier }}"
+    {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
     {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
     {%- block teaser_attributes %}{% endblock %}>
 
@@ -46,7 +45,7 @@
                                 {% elif teaser is zett_content %}
                                     {{ lama.use_svg_icon('logo-zett-small', self.layout() + '__kicker-logo--zett svg-symbol--hide-ie', view.package, a11y=False) }}
                                 {% elif teaser is zco_content and area.kind != 'zco-parquet' %}
-                                    <span class="{{ '%s__kicker-logo-divider' | format(self.layout()) }}">{{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}</span>
+                                    {{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}
                                 {% elif teaser is liveblog %}
                                     <span class="{{ '%s__kicker-logo' | format(self.layout()) | with_mods('liveblog', 'liveblog-closed' if module.liveblog and not module.liveblog.is_live) }}"><span class="visually-hidden">(</span>live<span class="visually-hidden">)</span></span>
                                 {% endif %}

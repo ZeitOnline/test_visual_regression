@@ -202,28 +202,55 @@ def test_amp_article_links_contain_tracking_data_attributes(testbrowser):
 
 def test_amp_article_shows_volume_badge_for_subscription(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/zplus-zeit')
-    volume_badge = browser.cssselect('.volume-badge')[0]
-    volume_text = volume_badge.cssselect('.volume-badge__text')[0]
+    volume_badge = browser.cssselect('.zplus-badge')[0]
+    volume_text = volume_badge.cssselect('.zplus-badge__text')[0]
 
     assert volume_text.text.strip() == u'Exklusiv für Abonnenten'
-    assert volume_badge.cssselect('.volume-badge__icon')
-    assert volume_badge.cssselect('.volume-badge__media')
+    assert volume_badge.cssselect('.zplus-badge__icon')
+    assert volume_badge.cssselect('.zplus-badge__media')
 
 
 def test_amp_article_shows_volume_badge_for_registration(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/zplus-zeit-register')
-    volume_badge = browser.cssselect('.volume-badge')[0]
-    volume_text = volume_badge.cssselect('.volume-badge__text')[0]
+    volume_badge = browser.cssselect('.zplus-badge')[0]
+    volume_text = volume_badge.cssselect('.zplus-badge__text')[0]
 
     assert volume_text.text.strip() == u'Aus der ZEIT Nr. 49/2014'
-    assert not volume_badge.cssselect('.volume-badge__icon')
-    assert volume_badge.cssselect('.volume-badge__media')
+    assert not volume_badge.cssselect('.zplus-badge__icon')
+    assert volume_badge.cssselect('.zplus-badge__media')
 
 
 def test_amp_article_shows_volume_badge_for_exclusive(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/zplus-zon')
-    volume_badge = browser.cssselect('.volume-badge')[0]
-    volume_text = volume_badge.cssselect('.volume-badge__text')[0]
+    volume_badge = browser.cssselect('.zplus-badge')[0]
+    volume_text = volume_badge.cssselect('.zplus-badge__text')[0]
 
     assert volume_text.text.strip() == u'Exklusiv für Abonnenten'
-    assert volume_badge.cssselect('.volume-badge__icon')
+    assert volume_badge.cssselect('.zplus-badge__icon')
+
+
+def test_amp_article_contains_authorbox(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/authorbox')
+    authorbox = browser.cssselect('.authorbox')
+    assert len(authorbox) == 3
+
+    # test custom biography
+    author = authorbox[0]
+    description = author.cssselect('.authorbox__summary')[0]
+    assert description.text.strip() == 'Text im Feld Kurzbio'
+    assert description.get('itemprop') == 'description'
+
+    # test author content and microdata
+    author = authorbox[1]
+    image = author.cssselect('[itemprop="image"]')[0]
+    name = author.cssselect('strong[itemprop="name"]')[0]
+    description = author.cssselect('[itemprop="description"]')[0]
+    url = author.cssselect('a[itemprop="url"]')[0]
+
+    assert author.get('itemtype') == 'http://schema.org/Person'
+    assert author.get('itemscope') is not None
+    assert ('http://localhost/autoren/W/Jochen_Wegner/jochen-wegner/square'
+            ) in image.cssselect('[itemprop="url"]')[0].get('content')
+    assert name.text.strip() == 'Jochen Wegner'
+    assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
+    assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'

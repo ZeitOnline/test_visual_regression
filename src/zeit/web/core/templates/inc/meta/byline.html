@@ -16,14 +16,14 @@
             {{- obj.display_name -}}
         </span>
         {%- if obj.uniqueId -%}
-        <link itemprop="url" href="{{ obj.uniqueId | create_url }}">
+        <link itemprop="url" rel="author" href="{{ obj.uniqueId | create_url }}">
         {%- endif -%}
     </span>
 {%- endmacro -%}
 
 {%- macro linked_author(obj, counter) %}
     <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <a href="{{ obj.uniqueId | create_url }}" itemprop="url" data-ct-column="
+        <a href="{{ obj.uniqueId | create_url }}" rel="author" itemprop="url" data-ct-column="
             {{- '%s_of_%s' | format(counter.index, counter.length) }}" data-ct-subcolumn="false"
             {%- if view.is_amp %} data-vars-url="{{ obj.uniqueId | create_url | substring_from('://') }}"{% endif %}>
             <span itemprop="name">

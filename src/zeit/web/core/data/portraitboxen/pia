@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<container xmlns:py="http://codespeak.net/lxml/objectify/pytype" layout="artbox" label="portrait">
+<container layout="artbox" label="portrait">
   <block>
     <title>Pia Volk</title>
     <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" align="left" src="http://xml.zeit.de/reisen/2013-06/bild-pia-volk2/bild-pia-volk2-180x101.jpg" type="jpg" publication-date="" expires="">
       <bu xsi:nil="true"/>
       <copyright>© Pia Volk</copyright>
     </image>
-    <text py:pytype="str">
+    <text>
       <p><a href="http://piavolk.net">Pia Volk</a> ist freie Journalistin. Wenn sie sich nicht gerade mit ihrem <a href="http://arewethereyet.de">Sohn in der Weltgeschichte</a> herumtreibt und von dort berichtet, lebt sie in Leipzig.</p>
     </text>
   </block>

@@ -4,7 +4,66 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.26 (unreleased)
+- PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
+
+
+3.31 (unreleased)
+-----------------
+
+- ZON-3394: Change links and styling of user dropnav
+
+- ZON-3402: Track first_click_free status in Webtrekk
+
+- ZON-3551: Add overscrolling.js to site.js
+
+- ZON-3544: Add entry_service parameter for SSO
+
+- ZON-3549: Hide login-link on paywall for loggedin users
+
+- ZON-3565: Add iOS app indexing meta tags
+
+- BUG-620: Fix video event tracking
+
+- FEM-8: Minimize transfer volume from homepage overlay and update signals
+
+- MAINT: Subclass view_config decorators into zeit.web
+
+- ZON-2284: Tighten friedbert view openness
+
+
+3.30 (2017-01-12)
+-----------------
+
+- HOTFIX: Encode url in pagination
+
+
+3.29 (2017-01-12)
+-----------------
+
+- FIX: Missing css/js
+
+
+3.28 (2017-01-12)
+-----------------
+
+- MAINT: Harmonize Z+ badge naming
+
+
+3.27 (2017-01-05)
+-----------------
+
+- ZON-3571: Paginate volume overview
+
+- ZON-2718: Add structured data for video pages
+
+- FEAT: Add hook to require external scripts in ZON blogs
+
+- MAINT: Clean up test data
+
+- MAINT: Polish Z+ kicker logo
+
+
+3.26 (2016-12-30)
 -----------------
 
 - ZON-3569: Change fallback image and styles for volume packshots
@@ -15,7 +74,15 @@ POSTDEPLOY
 
 - ZON-3517: Mark content only for subscribers in ZMO articles (AMP part)
 
+- ZON-3588: Automate event tracking for article body
+
+- BUG-613: Show authorbox custom description if defined
+
 - FIX: Be defensive about invalid requests for legacy keyword redirects
+
+- MAINT: Replace library `freewall` with `masonry`
+
+- MAINT: Update sharing metadata regarding authorship
 
 
 3.25.1 (2016-12-23)

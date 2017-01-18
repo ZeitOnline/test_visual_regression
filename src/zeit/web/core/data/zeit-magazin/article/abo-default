@@ -1,11 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
     <head>
         <author expires="" href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="">
             <display_name>Armin Mustermann</display_name>
         </author>
         <image base-id="http://xml.zeit.de/zeit-magazin/2014/17/frau-isst-suppe-2/" type="jpg"/>
-        <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">abo</attribute>
         <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
