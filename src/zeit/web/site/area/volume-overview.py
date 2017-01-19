@@ -2,13 +2,12 @@
 import datetime
 import logging
 
+import grokcore.component
 import pyramid
 import zope.interface
 
 import zeit.web
 import zeit.web.core.area.automatic
-import zeit.web.core.area.ranking
-import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 
 log = logging.getLogger(__name__)
@@ -86,3 +85,15 @@ class VolumeOverview(zeit.content.cp.automatic.AutomaticArea):
 
     def __url_for_year(self, year):
         return '{}{}/index'.format(self.request.route_url('home'), year)
+
+
+class SolrContentQuery(zeit.web.core.area.automatic.SolrContentQuery):
+
+    grokcore.component.context(VolumeOverview)
+
+    FIELD_MAP = zeit.web.core.area.automatic.SolrContentQuery.FIELD_MAP.copy()
+    FIELD_MAP.update({
+        'cover_printcover': '',
+        'volume': '',
+        'year': '',
+    })
