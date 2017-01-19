@@ -11,7 +11,7 @@ POSTDEPLOY
 -----------------
 
 - HOTFIX: Fix wording in login menu (Account->Konto)
-
+- PERF: Render volume overview from solr result without resolving volume objects
 
 3.31 (2017-01-19)
 -----------------
