@@ -10,7 +10,7 @@ POSTDEPLOY
 3.32 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Fix wording in login menu (Account->Konto)
 
 
 3.31 (2017-01-19)
