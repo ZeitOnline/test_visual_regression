@@ -7,7 +7,7 @@ POSTDEPLOY
 - PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
 
 
-3.31 (unreleased)
+3.31 (2017-01-19)
 -----------------
 
 - ZON-3394: Change links and styling of user dropnav
