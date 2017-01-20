@@ -44,10 +44,17 @@
                                     {{ lama.use_svg_icon('logo-zmo-zm', self.layout() + '__kicker-logo--zmo svg-symbol--hide-ie', view.package, a11y=False) }}
                                 {% elif teaser is zett_content %}
                                     {{ lama.use_svg_icon('logo-zett-small', self.layout() + '__kicker-logo--zett svg-symbol--hide-ie', view.package, a11y=False) }}
+                                {% elif teaser is tag_with_logo_content and teaser is zco_content and teaser is not zplus_content %}
+                                    {{ lama.use_svg_icon('tag-d17', self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
+                                    {% if area.kind != 'zco-parquet' %}
+                                    {{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}
+                                    {% endif %}
                                 {% elif teaser is zco_content and area.kind != 'zco-parquet' %}
                                     {{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}
                                 {% elif teaser is liveblog %}
                                     <span class="{{ '%s__kicker-logo' | format(self.layout()) | with_mods('liveblog', 'liveblog-closed' if module.liveblog and not module.liveblog.is_live) }}"><span class="visually-hidden">(</span>live<span class="visually-hidden">)</span></span>
+                                {% elif teaser is tag_with_logo_content and teaser is not zplus_content %}
+                                    {{ lama.use_svg_icon('tag-d17', self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
                                 {% endif %}
                             {% endblock %}
                             {{ teaser.teaserSupertitle or teaser.supertitle -}}
