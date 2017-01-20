@@ -24,6 +24,8 @@
 	&__kicker-logo
 		&--zplus
 			@extend %teaser-kicker-logo--zplus
+		&--tag
+			@extend %teaser-kicker-logo--tag
 	&__title
 		@extend %teaser-title
 	&__metadata
@@ -103,3 +105,6 @@
 			.nextread__kicker,
 			.nextread__metadata
 				color: $zon-lighter-grey
+			.nextread__kicker-logo
+				&--tag
+					color: inherit
