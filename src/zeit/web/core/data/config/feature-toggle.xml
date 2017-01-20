@@ -14,4 +14,9 @@
   <reader_revenue>true</reader_revenue>
   <dummy>false</dummy>
   <volume_teaser>true</volume_teaser>
+  <rawr_iframe>true</rawr_iframe>
+  <enable_intext_links>false</enable_intext_links>
+  <hp_overlay>true</hp_overlay>
+  <update_signals>true</update_signals>
+  <overscrolling>true</overscrolling>
 </features>

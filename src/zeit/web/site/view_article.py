@@ -2,8 +2,6 @@
 import datetime
 import logging
 
-from pyramid.view import view_config
-from pyramid.view import view_defaults
 import babel.dates
 import zope.component
 
@@ -28,26 +26,32 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
-@view_defaults(context=zeit.content.article.interfaces.IArticle,
-               custom_predicates=(zeit.web.site.view.is_zon_content,),
-               request_method='GET')
-@view_config(renderer='templates/article.html')
-@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-             zeit.web.core.view.is_paywalled),
-             renderer='zeit.web.core:templates/paywall.html')
-@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-             zeit.web.core.view.is_advertorial),
-             renderer='templates/article_advertorial.html')
-@view_config(name='komplettansicht',
-             renderer='templates/komplettansicht.html')
-@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-             zeit.web.core.view.is_advertorial),
-             name='komplettansicht',
-             renderer='templates/article_advertorial_komplett.html')
-@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-             zeit.web.core.view.is_paywalled),
-             name='komplettansicht',
-             renderer='zeit.web.core:templates/paywall.html')
+@zeit.web.view_defaults(
+    context=zeit.content.article.interfaces.IArticle,
+    custom_predicates=(zeit.web.site.view.is_zon_content,))
+@zeit.web.view_config(
+    renderer='templates/article.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_paywalled),
+    renderer='zeit.web.core:templates/paywall.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_advertorial),
+    renderer='templates/article_advertorial.html')
+@zeit.web.view_config(
+    name='komplettansicht',
+    renderer='templates/komplettansicht.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_advertorial),
+    name='komplettansicht',
+    renderer='templates/article_advertorial_komplett.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_paywalled),
+    name='komplettansicht',
+    renderer='zeit.web.core:templates/paywall.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
 
     @zeit.web.reify
@@ -105,25 +109,29 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return zeit.cms.interfaces.ICMSContent(uid, None)
 
 
-@view_config(name='seite',
-             path_info='.*seite-(.*)',
-             renderer='templates/article.html')
-@view_config(name='seite',
-             custom_predicates=(zeit.web.site.view.is_zon_content,
-                                zeit.web.core.view.is_advertorial),
-             path_info='.*seite-(.*)',
-             renderer='templates/article_advertorial.html')
-@view_config(name='seite',
-             custom_predicates=(zeit.web.site.view.is_zon_content,
-                                zeit.web.core.view.is_paywalled),
-             path_info='.*seite-(.*)',
-             renderer='zeit.web.core:templates/paywall.html')
+@zeit.web.view_config(
+    name='seite',
+    path_info='.*seite-(.*)',
+    renderer='templates/article.html')
+@zeit.web.view_config(
+    name='seite',
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_advertorial),
+    path_info='.*seite-(.*)',
+    renderer='templates/article_advertorial.html')
+@zeit.web.view_config(
+    name='seite',
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       zeit.web.core.view.is_paywalled),
+    path_info='.*seite-(.*)',
+    renderer='zeit.web.core:templates/paywall.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
-@view_config(route_name='amp',
-             renderer='templates/amp/article.html')
+@zeit.web.view_config(
+    route_name='amp',
+    renderer='templates/amp/article.html')
 class AcceleratedMobilePageArticle(
         zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
     pass
@@ -141,9 +149,10 @@ def is_breaking_news(context, request):
     return info and (now - info.date_first_released) < threshold
 
 
-@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_breaking_news),
-             renderer='templates/article_breaking.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       is_breaking_news),
+    renderer='templates/article_breaking.html')
 class BreakingNews(Article):
 
     header_layout = 'breaking'
@@ -153,55 +162,51 @@ def is_column_article(context, request):
     return getattr(context, 'serie', None) and context.serie.column
 
 
-def has_author_image(context, request):
-    return zope.component.queryAdapter(
-        context, zeit.web.core.interfaces.IImage, 'author')
-
-
-@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article,
-                                has_author_image),
-             renderer='templates/article.html')
-@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article,
-                                has_author_image,
-                                zeit.web.core.view.is_paywalled),
-             renderer='zeit.web.core:templates/paywall.html')
-@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article,
-                                has_author_image),
-             name='komplettansicht',
-             renderer='templates/komplettansicht.html')
-@view_config(custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article,
-                                has_author_image,
-                                zeit.web.core.view.is_paywalled),
-             name='komplettansicht',
-             renderer='zeit.web.core:templates/paywall.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       is_column_article),
+    renderer='templates/article.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       is_column_article,
+                       zeit.web.core.view.is_paywalled),
+    renderer='zeit.web.core:templates/paywall.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       is_column_article),
+    name='komplettansicht',
+    renderer='templates/komplettansicht.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       is_column_article,
+                       zeit.web.core.view.is_paywalled),
+    name='komplettansicht',
+    renderer='zeit.web.core:templates/paywall.html')
 class ColumnArticle(Article):
 
     header_layout = 'column'
 
 
-@view_config(name='seite',
-             custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article,
-                                has_author_image),
-             path_info='.*seite-(.*)',
-             renderer='templates/article.html')
-@view_config(name='seite',
-             custom_predicates=(zeit.web.site.view.is_zon_content,
-                                is_column_article,
-                                has_author_image,
-                                zeit.web.core.view.is_paywalled),
-             path_info='.*seite-(.*)',
-             renderer='zeit.web.core:templates/paywall.html')
+@zeit.web.view_config(
+    name='seite',
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       is_column_article),
+    path_info='.*seite-(.*)',
+    renderer='templates/article.html')
+@zeit.web.view_config(
+    name='seite',
+    custom_predicates=(zeit.web.site.view.is_zon_content,
+                       is_column_article,
+                       zeit.web.core.view.is_paywalled),
+    path_info='.*seite-(.*)',
+    renderer='zeit.web.core:templates/paywall.html')
 class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
     pass
 
 
-@view_config(context=zeit.web.core.article.ILiveblogArticle,
-             renderer='templates/liveblog.html')
+@zeit.web.view_config(
+    context=zeit.web.core.article.ILiveblogArticle,
+    renderer='templates/liveblog.html')
 class LiveblogArticle(Article):
 
     header_layout = 'liveblog'

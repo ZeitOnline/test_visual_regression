@@ -132,9 +132,16 @@ def comment_to_dict(comment):
     if comment.xpath('comments_count_subthread/text()'):
         sublevel_comment_count = int(
             comment.xpath('comments_count_subthread/text()')[0])
-    # TODO: Catch name and cid unavailabilty in element tree.
+    uid = None
+    if comment.xpath('author/@id'):
+        uid = comment.xpath('author/@id')[0].lstrip('uid-')
+    try:
+        cid = int(comment.xpath('./@id')[0].lstrip('cid-'))
+    except:
+        cid = None
+
     return dict(
-        uid=comment.xpath('author/@id')[0].lstrip('uid-'),
+        uid=uid,
         in_reply=in_reply,
         img_url=picture_url,
         userprofile_url=profile_url,
@@ -144,7 +151,7 @@ def comment_to_dict(comment):
         text_stripped=content_stripped,
         role=', '.join(roles),
         fans=','.join(fans),
-        cid=int(comment.xpath('./@id')[0].lstrip('cid-')),
+        cid=cid,
         recommendations=len(
             comment.xpath('flagged[@type="leser_empfehlung"]')),
         is_author=is_author,

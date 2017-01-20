@@ -48,12 +48,16 @@ $layout: ".teaser-square"
 		display: inline-block
 		font-size: em(14px)
 		font-weight: normal
-		letter-spacing: $zon-letter-spacing-m
+		letter-spacing: $zon-letter-spacing-l
 		line-height: 1.2857
 		margin-bottom: .5em
+		text-transform: uppercase
 		&--zco
 			@extend %teaser-kicker--zco
 			color: #fff
+	article[data-zplus] &__kicker
+		align-items: center
+		display: flex
 	&__kicker-logo
 		&--zett
 			@extend %teaser-kicker-logo--zett
@@ -66,7 +70,7 @@ $layout: ".teaser-square"
 		&--liveblog-closed
 			@extend %teaser-kicker-logo--liveblog-closed
 		&--zplus
-			@extend %teaser-kicker-logo--zplus
+			@extend %teaser-kicker-logo--zplus-xs
 	&__series-label
 		margin-bottom: 0
 		&:after
@@ -136,6 +140,12 @@ $layout: ".teaser-square"
 		vertical-align: middle
 		width: remify(146px)
 
+	&--zmo
+		#{$layout}__series-label,
+		#{$layout}__kicker
+			letter-spacing: $zon-letter-spacing-m
+			text-transform: none
+
 	&--graphic
 		#{$layout}__container
 			padding-left: $page-padding
@@ -148,9 +158,9 @@ $layout: ".teaser-square"
 		#{$layout}__series-label,
 		#{$layout}__kicker
 			color: $zon-lighter-grey
-			font-size: em(13px)
-			letter-spacing: 0.14em
-			text-transform: uppercase
+
+		#{$layout}__kicker
+			justify-content: center
 
 		#{$layout}__kicker
 			margin-bottom: remify(10px)

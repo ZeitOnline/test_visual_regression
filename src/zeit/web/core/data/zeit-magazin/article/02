@@ -2,7 +2,7 @@
 <article>
     <head>
         <references>
-            <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" type="intern" href="http://xml.zeit.de/2013/44/friedhof-hamburg-ohlsdorf" year="2013" issue="44" ressort="Gesellschaft" author="Henning Sußebach" contenttype="article" publication-date="2013-10-31T02:37:21+00:00" expires="">
+            <reference type="intern" href="http://xml.zeit.de/2013/44/friedhof-hamburg-ohlsdorf" year="2013" issue="44" ressort="Gesellschaft" author="Henning Sußebach" contenttype="article" publication-date="2013-10-31T02:37:21+00:00" expires="">
                 <supertitle>Bestattungen</supertitle>
                 <title>Die Angst des Friedhofs vor dem Tod</title>
                 <text>
@@ -26,67 +26,67 @@
             <tag url_value="paris" uuid="677bc5e6-35e8-47da-af94-c8fed6316ba2" score="1" type="Location">Paris</tag>
             <tag url_value="koerper" uuid="e6ce87ec-1302-44f0-86cd-c47f633b9b26" score="4" type="free">Körper</tag>
         </rankedTags>
-        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
+        <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
             <display_name>Ijoma Mangold</display_name>
         </author>
-        <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
+        <author href="http://xml.zeit.de/autoren/max_mustermann" publication-date="" expires="">
             <display_name>Susanne Mayer</display_name>
         </author>
-        <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" align="left" base-id="http://xml.zeit.de/exampleimages/artikel/02/heft/" type="jpg" publication-date="" expires="">
+        <image align="left" base-id="http://xml.zeit.de/exampleimages/artikel/02/heft/" type="jpg" publication-date="" expires="">
             <bu>Die Professorin und Autorin Barbara Vinken in einem ihrer Lieblingsstücke, einem kurzen Kleid von Thierry Mugler</bu>
             <copyright>© Sigrid Reinichs</copyright>
         </image>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="article_id">748779</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="author">Ijoma Mangold;Susanne Mayer</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-12T07:21:39.625053+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-10-02T06:00:00+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-12T07:22:41.634012+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">moep</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">02.10.2013</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://apache.org/dav/props/" name="executable">F</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2013-41-LM-Vinken</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.default</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="jobname">LM-Vinken</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-10-12T07:21:33.365673+00:00</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.Richter</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="origname">LM-Vinken</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="page">63</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">341a4b6242fd4e87b18cf06e30eb44c7</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/print" name="ressort">Tabloid</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2013-41</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">leben</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="text-length">17287</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:06598b35-2e0a-44f4-b49a-983d14ea4a66}</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="volume">41</attribute>
-        <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">748779</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Ijoma Mangold;Susanne Mayer</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2013-10-12T07:21:39.625053+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2013-10-02T06:00:00+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2013-10-12T07:22:41.634012+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="nextread_layout">moep</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">02.10.2013</attribute>
+        <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2013-41-LM-Vinken</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.default</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">LM-Vinken</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-10-12T07:21:33.365673+00:00</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.Richter</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">LM-Vinken</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">63</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">341a4b6242fd4e87b18cf06e30eb44c7</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Lebensart</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Tabloid</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2013-41</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">leben</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">17287</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:06598b35-2e0a-44f4-b49a-983d14ea4a66}</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">41</attribute>
+        <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2013</attribute>
         <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;

@@ -1,16 +1,26 @@
 # coding: utf-8
-import requests
+import urllib2
 
+import jwt
 import pyramid.testing
+import requests
+import zope.component
 
+import zeit.web.core.interfaces
 import zeit.web.site.view
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 def test_login_state_view_should_deliver_correct_destination(dummy_request):
     dummy_request.route_url = lambda *args, **kw: 'http://destination_sso/'
     r = zeit.web.site.view.login_state(dummy_request)
-    assert r['login'] == 'http://my_sso/anmelden?url=http://destination_sso'
-    assert r['logout'] == 'http://my_sso/abmelden?url=http://destination_sso'
+    assert ('http://sso.example.org/anmelden?url=http://destination_sso' in
+            r['login'])
+    assert ('http://sso.example.org/abmelden?url=http://destination_sso' in
+            r['logout'])
 
 
 def test_article_should_have_breadcrumbs(testbrowser):
@@ -90,6 +100,13 @@ def test_keyword_redirect_should_handle_pagination(testserver):
     assert resp.headers['Location'] == '%s/thema/rom?p=3' % testserver.url
 
 
+def test_keyword_redirect_should_reject_invalid_urls(testserver):
+    resp = requests.get(
+        testserver.url + '/schlagworte/personen/%0DSanta-Klaus/index',
+        allow_redirects=False)
+    assert resp.status_code == 400
+
+
 def test_main_nav_should_render_labels(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     dropdown_label = browser.cssselect('.nav__ressorts-list *[data-label]')
@@ -164,3 +181,105 @@ def test_schema_org_publisher_mark_up(testbrowser):
         'structured-data-publisher-logo-zon.png')
     assert logo.cssselect('[itemprop="width"]')[0].get('content') == '565'
     assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
+
+
+def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
+    # browser without sso session
+    b = testbrowser()
+    b.mech_browser.set_handle_redirect(False)
+    try:
+        b.open('/konto')
+    except urllib2.HTTPError, e:
+        assert e.getcode() == 302
+        assert (e.hdrs.get('location') ==
+                'http://sso.example.org?url=http%3A%2F%2Flocalhost%2Fkonto')
+
+    # browser with sso session
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+    testbrowser.cookies.forURL(
+        'http://localhost')['my_sso_cookie'] = sso_cookie
+    testbrowser.open('/login-state')
+    browser = testbrowser('/konto')
+
+    # main structure
+    assert len(browser.cssselect('.dashboard')) == 1
+    assert len(browser.cssselect('.dashboard__upper')) == 1
+    assert len(browser.cssselect('.dashboard__lower')) == 1
+    assert len(browser.cssselect('.dashboard__content')) == 1
+    assert len(browser.cssselect('.dashboard__header')) == 1
+    assert len(browser.cssselect('.article-pagination')) == 1
+
+    # head
+    assert (browser.cssselect('.dashboard__kicker')[0].text.strip() ==
+            'Herzlich Willkommen')
+    assert (browser.cssselect('.dashboard__title')[0].text.strip() ==
+            'Mein Konto')
+    assert len(browser.cssselect('.dashboard__user')) == 1
+    assert (browser.cssselect('.dashboard__user-name')[0].text.strip() ==
+            'test-user')
+    assert len(browser.cssselect('.dashboard__user-image')) == 1
+    assert len(browser.cssselect('.dashboard__box--is-header')) == 1
+
+    # body
+    assert len(browser.cssselect('.dashboard__box')) == 6
+    assert len(browser.cssselect('.dashboard__box-title')) == 6
+    assert (browser.cssselect('.dashboard__box-title')[1].text.strip() ==
+            'Meine Abonnements')
+    assert (browser.cssselect('.dashboard__box-title')[3].text.strip() ==
+            'Spiele')
+    assert (browser.cssselect('.dashboard__box-list')[2]
+            .cssselect('a')[0].text.strip() == u'ZEIT Audio hören')
+
+
+# needs selenium because of esi include
+def test_login_status_is_set_as_class(
+        selenium_driver, testserver, sso_keypair):
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+
+    # add_cookie() only works for the domain of the last get(), sigh.
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    driver.add_cookie({'name': 'my_sso_cookie', 'value': sso_cookie})
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, 'footer'))
+    assert WebDriverWait(selenium_driver, 1).until(condition)
+
+    html_elem = select('html')[0]
+    assert 'is-loggedin' in html_elem.get_attribute('class')
+
+
+# needs selenium because of esi include
+def test_loggedin_status_hides_register_link_on_gate(
+        selenium_driver, testserver, sso_keypair):
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+
+    # add_cookie() only works for the domain of the last get(), sigh.
+    driver.get('{}/zeit-online/article/zplus-zeit-register{}'.format(
+        testserver.url, '?C1-Meter-Status=always_paid'))
+    driver.add_cookie({'name': 'my_sso_cookie', 'value': sso_cookie})
+    driver.get('{}/zeit-online/article/zplus-zeit-register{}'.format(
+        testserver.url, '?C1-Meter-Status=always_paid'))
+
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, 'footer'))
+    assert WebDriverWait(selenium_driver, 1).until(condition)
+
+    gate_elem = select('.gate__note')
+    assert len(gate_elem) == 1
+    assert not gate_elem[0].is_displayed()

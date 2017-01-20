@@ -19,7 +19,7 @@
 {% endblock comments_balloon %}
 
 {% block article_pages %}
-    <div class="article__page">
+    <div class="article-page" data-page-number="{{ view.current_page.number + 1 }}">
         {% set page = view.current_page %}
         {% include "zeit.web.magazin:templates/inc/article/page.html" %}
     </div>

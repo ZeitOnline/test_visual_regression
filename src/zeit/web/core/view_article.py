@@ -3,7 +3,6 @@ import datetime
 import logging
 import re
 
-from pyramid.view import view_config, view_defaults
 import lxml.etree
 import pyramid.httpexceptions
 import zope.component
@@ -185,20 +184,15 @@ class Article(zeit.web.core.view.Content):
         return reach.get_buzz(self.context.uniqueId).get('social')
 
     @zeit.web.reify
-    def tracking_type(self):
-        return self.type
-
-    @zeit.web.reify
     def text_length(self):
         return self.context.textLength
 
     @zeit.web.reify
     def news_source(self):
         """1:1 implementation of questionable xslt construct"""
-        if (self.context.ressort == 'News' and
-                self.context.product and self.context.product.id == 'News'):
+        if self.context.ressort == 'News' and self.product_id == 'News':
             return 'dpa'
-        elif self.context.product and self.context.product.id == 'SID':
+        elif self.product_id == 'SID':
             return 'Sport-Informations-Dienst'
         else:
             try:
@@ -239,12 +233,6 @@ class Article(zeit.web.core.view.Content):
             return None
 
     @zeit.web.reify
-    def pdf_link(self):
-        server = 'http://pdf.zeit.de/'
-        path = '/'.join(self.request.traversed)
-        return server + path + '.pdf'
-
-    @zeit.web.reify
     def print_link(self):
         url = self.content_url
         prefix = '/komplettansicht'
@@ -263,9 +251,6 @@ class Article(zeit.web.core.view.Content):
         return zeit.content.volume.interfaces.IVolume(self.context, None)
 
     # this property returns all the information for the article header badge
-    # - Z+ logo and link for subscription content
-    # - cover and link for print volume where applicable
-    # ... a more descriptive name would be zplus_or_volume_badge
     @zeit.web.reify
     def zplus_label(self):
 
@@ -275,12 +260,13 @@ class Article(zeit.web.core.view.Content):
 
         # default values
         badge = {
-            'cover': False,
-            'hide_source_label': False,
-            'intro': '',
-            'link': None,
-            'link_text': '',
-            'zplus': False
+            'cover': False,  # volume cover
+            'hide_source_label': False,  # state of source label
+            'intro': '',  # intro text for article badge
+            'link': None,  # link to archiv or exclusiv page
+            'link_text': '',  # link text
+            'zplus': False,  # zplus state
+            'volume_exists': False  # has a volume object
         }
 
         try:
@@ -300,6 +286,7 @@ class Article(zeit.web.core.view.Content):
                         self.request.host,
                         self.volume.year,
                         self.volume.volume),
+                    'volume_exists': True
                 })
 
                 if access != 'abo':
@@ -396,19 +383,22 @@ class AcceleratedMobilePageArticle(Article):
         return webtrekk
 
 
-@view_config(route_name='amp',
-             context=zeit.content.article.interfaces.IArticle,
-             custom_predicates=(lambda context, _: not context.is_amp,),
-             request_method='GET')
+@zeit.web.view_config(
+    route_name='amp',
+    context=zeit.content.article.interfaces.IArticle,
+    custom_predicates=(lambda context, _: not context.is_amp,))
 def redirect_amp_disabled(context, request):
     url = request.url.replace('/amp/', '/', 1)
     raise pyramid.httpexceptions.HTTPFound(url)
 
 
-@view_defaults(context=zeit.content.article.interfaces.IArticle)
-@view_config(route_name='instantarticle')
-@view_config(route_name='instantarticle-item',
-             wrapper='instantarticle-item')
+@zeit.web.view_defaults(
+    context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_config(
+    route_name='instantarticle')
+@zeit.web.view_config(
+    route_name='instantarticle-item',
+    wrapper='instantarticle-item')
 class InstantArticle(Article):
 
     def __call__(self):
@@ -446,9 +436,10 @@ class InstantArticle(Article):
         return None
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             name='instantarticle-item',
-             renderer='string')
+@zeit.web.view_config(
+    context=zeit.content.article.interfaces.IArticle,
+    name='instantarticle-item',
+    renderer='string')
 class InstantArticleItem(Article):
 
     def __call__(self):
@@ -492,9 +483,10 @@ class InstantArticleItem(Article):
         return lxml.etree.tostring(item)
 
 
-@view_config(context=zeit.content.article.interfaces.IArticle,
-             route_name='fbia',
-             renderer='templates/instantarticle/tracking.html')
+@zeit.web.view_config(
+    context=zeit.content.article.interfaces.IArticle,
+    route_name='fbia',
+    renderer='templates/instantarticle/tracking.html')
 class InstantArticleTracking(Article):
 
     @zeit.web.reify

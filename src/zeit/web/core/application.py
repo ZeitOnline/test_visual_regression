@@ -26,7 +26,6 @@ import zeit.cms.repository.repository
 import zeit.cms.repository.unknown
 import zeit.connector
 import zeit.web
-import zeit.web.core
 import zeit.web.core.bugsnag
 import zeit.web.core.cache
 import zeit.web.core.interfaces
@@ -120,6 +119,13 @@ class Application(object):
         if self.settings.get('zodbconn.uri'):
             self.config.include('pyramid_zodbconn')
 
+        config.add_view_predicate(
+            'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
+            weighs_more_than=('custom',))
+        config.add_route_predicate(
+            'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
+            weighs_more_than=('traverse',))
+
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('campus_framebuilder', '/campus/framebuilder')
         config.add_route('instantarticle', '/instantarticle/*traverse')
@@ -130,12 +136,19 @@ class Application(object):
         config.add_route('json_delta_time', '/json/delta_time')
         config.add_route('json_update_time', '/json_update_time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment_count')
+
+        # XXX: This route was introduced, because we needed a smaller and
+        # better interface than the whole Centerpage in XML to communicate
+        # our topics. It is meant to sketch an URL structure, which we might
+        # use in the future and hopefully from a dedicated config service.
+        # (MK and RD, 2016-12-07)
+        config.add_route('json_topic_config', '/config/zon/hp-topics')
+
         config.add_route('comments', '/-comments/collection/*traverse')
         config.add_route('invalidate_comment_thread', '/-comments/invalidate')
         config.add_route(
             'invalidate_community_maintenance',
             '/-comments/invalidate_maintenance')
-        config.add_route('newsfeed', '/newsfeed/*traverse')
         config.add_route('home', '/')
         config.add_route('home-campus', '/campus/')
         config.add_route('home-zmo', '/zeit-magazin/')
@@ -146,7 +159,8 @@ class Application(object):
         config.add_route('blacklist', '/-blacklist', factory=lambda x: None)
         config.add_route(
             'schlagworte_index',
-            '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}')
+            '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}',
+            factory=zeit.web.core.view.surrender)
         config.add_route(
             'schlagworte',
             '/schlagworte/{category}/{item}'
@@ -165,8 +179,6 @@ class Application(object):
 
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
-
-        config.add_route('xml', '/xml/*traverse')
 
         config.add_request_method(configure_host('asset'), reify=True)
         config.add_request_method(configure_host('image'), reify=True)

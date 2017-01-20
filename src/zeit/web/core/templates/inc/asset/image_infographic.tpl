@@ -8,6 +8,8 @@
 
 {% block media_block %}{{ '%s__media' | format(module_layout) | with_mods(block.display_mode) }}{% endblock %}
 {% block media_caption_class %}infographic{% endblock %}
+{% block image_additional_data_attributes %} data-ct-block="infographic"{% endblock %}
+{% block image_link_additional_data_attributes %} data-ct-label="image"{% endblock %}
 
 {% block media_caption_above %}
     <h3 class="infographic__headline" itemprop="name">{{ image.title }}</h3>

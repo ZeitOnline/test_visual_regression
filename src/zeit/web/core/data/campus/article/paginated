@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <author href="http://xml.zeit.de/autoren/F/Jan_Fischer" publication-date="" expires="">
-      <display_name>Jan Fischer</display_name>
+    <author href="http://xml.zeit.de/autoren/B/Jochen_Bittner/index.xml" publication-date="" expires="">
+      <display_name>Jochen Bittner</display_name>
     </author>
     <references>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/campus/article/01-countdown-studium" contenttype="article" />
@@ -26,7 +26,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">2938314</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Jan Fischer</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Jochen Bittner</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Karriere</attribute>
@@ -74,6 +74,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Campus</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZTCS-2016-01</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">In der Mensa mit</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Kennen Sie diese 10 Geräte? Glückwunsch, dann sind Sie hiermit offiziell cool. (tgr)</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
@@ -104,7 +105,7 @@
   <body>
     <title>Der Gadget-Kanon</title>
     <subtitle>Bücher? Filme? Kunstwerke? Nö: Wer unsere Zeit wirklich verstehen will, muss diese zehn Geräte kennen.</subtitle>
-    <byline>von Jan Fischer,  Oskar Piegsa</byline>
+    <byline>von Jochen Bittner,  Oskar Piegsa</byline>
     <division type="page">
       <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/" type="jpg" title="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." alt="Technik: Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." align="left" publication-date="2016-01-14T16:04:40+00:00" expires="2016-04-14T15:04:42+00:00" layout="large" is_empty="False" alt_local="Technik: Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto." title_local="Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto.">
         <bu>Ein Besucher benutzt während einer Messe in einer Kirche in Washington einen Selfie-Stick für ein Foto.</bu>

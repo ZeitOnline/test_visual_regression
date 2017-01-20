@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/test-cp-legacy/meine-testkarte-bildergruppe/" type="png" align="left" publication-date="" expires="">
       <bu xsi:nil="true"/>
-      <copyright py:pytype="str">© Zeit</copyright>
+      <copyright>© Zeit</copyright>
     </image>
     <author href="http://xml.zeit.de/autoren/E/Maria_Exner/index" publication-date="" expires="">
-      <display_name py:pytype="str">Maria Exner</display_name>
+      <display_name>Maria Exner</display_name>
     </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
@@ -57,7 +57,7 @@
     <division type="page">
       <image base-id="http://xml.zeit.de/zeit-magazin/test-cp-legacy/meine-testkarte-bildergruppe/" type="png" align="left" publication-date="" expires="" layout="large" is_empty="False">
         <bu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-        <copyright py:pytype="str">© Zeit</copyright>
+        <copyright>© Zeit</copyright>
       </image>
       <p>Lorem dolorem<br/></p>
     </division>

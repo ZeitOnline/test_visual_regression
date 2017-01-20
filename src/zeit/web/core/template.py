@@ -1,6 +1,7 @@
 # coding: utf8
 import collections
 import datetime
+import json
 import logging
 import pkg_resources
 import random
@@ -521,6 +522,18 @@ def format_iqd(string):
     return string
 
 
+@zeit.web.register_filter
+def get_clicktracking_identifier(area):
+    if area.kind == 'parquet' and area.title:
+        return 'parquet-{}'.format(format_webtrekk(area.title))
+    elif area.kind in ['zett', 'spektrum']:
+        return 'parquet-{}'.format(area.kind)
+    elif area.kind.endswith('-parquet'):
+        return 'parquet-{}'.format(area.kind.rsplit('-', 1).pop(0))
+    else:
+        return area.kind
+
+
 @zeit.web.register_global
 def settings(key, default=None):
     """Returns the configuration value for a provided key"""
@@ -634,6 +647,19 @@ def remove_get_params(url, *args):
 def join_if_exists(iterable, string=''):
     """Join list items through string, if item is not None"""
     return string.join([item for item in iterable if item])
+
+
+@zeit.web.register_filter
+def webtrekk_sso_parameter(request):
+    if request.user and request.user.get('ssoid'):
+        info = ['angemeldet', request.user.get('entry_url')]
+        return '|'.join([item for item in info if item])
+    return 'nicht_angemeldet'
+
+
+@zeit.web.register_filter
+def tojson(value):
+    return json.dumps(remove_break(value))
 
 
 @zeit.web.register_global

@@ -1,4 +1,4 @@
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:cp="http://namespaces.zeit.de/CMS/cp">
+<article xmlns:cp="http://namespaces.zeit.de/CMS/cp">
 <head>
 <header>
 <quiz quiz_id="103" adreload_enabled="True"/>

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<gallery xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<gallery>
   <head>
     <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
       <display_name>Heike Jahberg</display_name>

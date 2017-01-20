@@ -5,7 +5,7 @@ from pyramid.response import Response
 import lxml.etree
 import lxml.objectify
 import magic
-import pyramid.view
+import pyramid.httpexceptions
 
 from zeit.connector.interfaces import IResource
 import zeit.cms.content.interfaces
@@ -18,6 +18,7 @@ import zeit.content.gallery.interfaces
 import zeit.content.link.interfaces
 import zeit.content.video.interfaces
 
+import zeit.web
 import zeit.web.core.article
 import zeit.web.core.view
 
@@ -25,9 +26,34 @@ import zeit.web.core.view
 log = logging.getLogger(__name__)
 
 
-class XMLContent(zeit.web.core.view.Base):
+# Note: One might think it would be sleeker to set the host_restriction as a
+#       view_default. That would be a great idea, if not for the excruciating
+#       convultion that is pyramid view predicate discrimination.
 
-    allowed_on_hosts = ['xml']
+@zeit.web.view_defaults(renderer='string')
+@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.link.interfaces.ILink,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle,
+                      host_restriction='xml')
+class XMLContent(zeit.web.core.view.Base):
 
     def __call__(self):
         super(XMLContent, self).__call__()
@@ -98,82 +124,24 @@ class XMLContent(zeit.web.core.view.Base):
         return self.context.xml
 
 
-class Centerpage(object):
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2009,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.content.cp.interfaces.ICP2015,
+                      host_restriction='xml')
+class XMLCenterpage(XMLContent):
 
     @property
     def xml(self):
         return zeit.content.cp.interfaces.IRenderedXML(self.context)
 
 
-# NOTE: Pyramid route specififity is an obscure topic. We try to configure
-#       the XML routes as specific as our HTML ones with dummy predicates (ND)
-
-
-@pyramid.view.view_defaults(
-    header='host:xml(\.staging)?\.zeit\.de',
-    custom_predicates=(lambda *_: True,),
-    renderer='string',
-    request_method='GET')
-@pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(
-    context=zeit.content.article.interfaces.IArticle,
-    custom_predicates=(lambda *_: True, lambda *_: True, lambda *_: True))
-@pyramid.view.view_config(context=zeit.content.author.interfaces.IAuthor)
-@pyramid.view.view_config(context=zeit.content.link.interfaces.ILink)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
-class HostHeaderContent(XMLContent):
-    pass
-
-
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2009)
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2015)
-class HostHeaderCP(Centerpage, HostHeaderContent):
-    pass
-
-
-@pyramid.view.view_defaults(
-    route_name='xml',
-    custom_predicates=(lambda *_: True,),
-    renderer='string',
-    request_method='GET')
-@pyramid.view.view_config(context=zeit.cms.content.interfaces.IXMLContent)
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.content.author.interfaces.IAuthor)
-@pyramid.view.view_config(context=zeit.content.link.interfaces.ILink)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(context=zeit.web.core.article.IColumnArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
-@pyramid.view.view_config(context=zeit.web.core.article.IShortformArticle)
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
-class RouteNameContent(XMLContent):
-    pass
-
-
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2009)
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICP2015)
-class RouteNameCP(Centerpage, RouteNameContent):
-    pass
-
-
-@pyramid.view.view_defaults(
+@zeit.web.view_config(
     context=zeit.cms.repository.interfaces.IDAVContent,
-    custom_predicates=(lambda *_: True,),
-    renderer='string',
-    request_method='GET')
-@pyramid.view.view_config(route_name='xml')
-@pyramid.view.view_config(header='host:xml(\.staging)?\.zeit\.de')
+    host_restriction='xml',
+    renderer='string')
 class NonXMLContent(zeit.web.core.view.Base):
-
-    allowed_on_hosts = ['xml']
 
     def __call__(self):
         super(NonXMLContent, self).__call__()

@@ -1,35 +1,35 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <author href="http://xml.zeit.de/autoren/P/Tillmann_Pruefer/index.xml" publication-date="" expires="">
-      <display_name py:pytype="str">Tillmann Prüfer</display_name>
+      <display_name>Tillmann Prüfer</display_name>
     </author>
     <image base-id="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld/" type="jpg" title="Karl Lagerfeld" alt="Karl Lagerfeld" align="left" publication-date="" expires="">
-      <bu py:pytype="str">Karl Lagerfeld</bu>
-      <copyright py:pytype="str">© Karl Lagerfeld</copyright>
+      <bu>Karl Lagerfeld</bu>
+      <copyright>© Karl Lagerfeld</copyright>
     </image>
     <references/>
     <rankedTags>
       <tag url_value="karl-lagerfeld" uuid="e146b928-17af-4a07-99be-47128337adfa" score="6" type="Person">Karl Lagerfeld</tag>
-      <tag type="free" url_value="modedesign" uuid="3be62aae-aaaf-4a5c-b06b-73ee11599e2b" py:pytype="str">Modedesign</tag>
+      <tag type="free" url_value="modedesign" uuid="3be62aae-aaaf-4a5c-b06b-73ee11599e2b">Modedesign</tag>
       <tag url_value="chanel" uuid="0af031da-ebf9-4976-b751-4c6f4803fda2" score="5" type="Organization">Chanel</tag>
       <tag url_value="tom-ford" uuid="e51e403a-4253-44c0-90ed-c0df20274996" score="4" type="Person">Tom Ford</tag>
     </rankedTags>
     <nextread>
       <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2014/18/stilkolumne-culotte" year="2014" issue="18" ressort="zeit-magazin" author="Tillmann Prüfer" contenttype="article" publication-date="2014-04-24T07:53:00+00:00" expires="">
-        <supertitle py:pytype="str">Stilkolumne</supertitle>
-        <teaser_supertitle py:pytype="str">Stilkolumne</teaser_supertitle>
-        <title py:pytype="str">Mal halblang!</title>
-        <text py:pytype="str">Nicht Rock, nicht Hose, sondern irgendetwas dazwischen: Die wadenlange Culotte ist zurück. Ihr größter Vorteil? Sie gibt den Blick frei auf besonders hübsche Schuhe.</text>
-        <description py:pytype="str">Nicht Rock, nicht Hose, sondern irgendetwas dazwischen: Die wadenlange Culotte ist zurück. Ihr größter Vorteil? Sie gibt den Blick frei auf besonders hübsche Schuhe.</description>
-        <byline py:pytype="str">von Tillmann Prüfer</byline>
+        <supertitle>Stilkolumne</supertitle>
+        <teaser_supertitle>Stilkolumne</teaser_supertitle>
+        <title>Mal halblang!</title>
+        <text>Nicht Rock, nicht Hose, sondern irgendetwas dazwischen: Die wadenlange Culotte ist zurück. Ihr größter Vorteil? Sie gibt den Blick frei auf besonders hübsche Schuhe.</text>
+        <description>Nicht Rock, nicht Hose, sondern irgendetwas dazwischen: Die wadenlange Culotte ist zurück. Ihr größter Vorteil? Sie gibt den Blick frei auf besonders hübsche Schuhe.</description>
+        <byline>von Tillmann Prüfer</byline>
         <breadcrumb_title xsi:nil="true"/>
         <image base-id="http://xml.zeit.de/zeit-magazin/2014/18/stilkolumne-culotte-max-mara/" type="jpg" alt="Hose von Max Mara" align="left" publication-date="" expires="">
-          <bu py:pytype="str">Ohne Bodenkontakt: Wadenlange Hose von Max Mara, 245 Euro</bu>
-          <copyright py:pytype="str">© Peter Langer</copyright>
+          <bu>Ohne Bodenkontakt: Wadenlange Hose von Max Mara, 245 Euro</bu>
+          <copyright>© Peter Langer</copyright>
         </image>
         <author href="http://xml.zeit.de/autoren/P/Tillmann_Pruefer/index.xml" publication-date="" expires="">
-          <display_name py:pytype="str">Tillmann Prüfer</display_name>
+          <display_name>Tillmann Prüfer</display_name>
         </author>
       </reference>
     </nextread>
@@ -108,8 +108,8 @@
       <p><strong>Lagerfeld: </strong>Selbstgefälligkeit ist die schlimmste Bremse im Leben, die einem passieren kann.</p>
       <p><strong>ZEITmagazin ONLINE: </strong>Mit Ihrem Äußeren – sind Sie damit zufrieden? </p>
       <p><strong>Lagerfeld: </strong>Da
- gab es Zeiten, als ich nicht mit mir zufrieden war, aber heute bin ich 
-derart stilisiert – das steht überhaupt nicht mehr zur Diskussion. So 
+ gab es Zeiten, als ich nicht mit mir zufrieden war, aber heute bin ich
+derart stilisiert – das steht überhaupt nicht mehr zur Diskussion. So
 ist es, so bleibt es.</p>
       <p><strong>ZEITmagazin ONLINE: </strong>Sie altern ja tatsächlich auch nicht mehr ...</p>
       <citation text="Ich habe nie Alkohol getrunken und nie geraucht." attribution="Karl Lagerfeld" layout="short"/>
@@ -117,29 +117,29 @@ ist es, so bleibt es.</p>
       <p><strong>ZEITmagazin ONLINE: </strong>Sie sehen seit 30 Jahren so aus wie Sie heute aussehen ...</p>
       <p><strong>Lagerfeld: </strong>Das
  ist eine Energiefrage. Man braucht Enthusiasmus für das, was man macht.
- Und eine gute Umgebung von Leuten, die nicht über Krankheit und über 
-das Altern sprechen. Ich kenne niemanden aus meiner Generation. Ich 
-finde diese Leute entsetzlich. Selbst Jüngere sprechen nun schon von 
+ Und eine gute Umgebung von Leuten, die nicht über Krankheit und über
+das Altern sprechen. Ich kenne niemanden aus meiner Generation. Ich
+finde diese Leute entsetzlich. Selbst Jüngere sprechen nun schon von
 Kreislaufproblemen. Ich pflege eine freiwillige Selbstdisziplin, die ich
- schon nicht mehr Selbstdisziplin nennen kann, weil ich keinen anderen 
-Weg sehe, mich zu benehmen. Und ich lebe gesund. Ich habe nie Alkohol 
+ schon nicht mehr Selbstdisziplin nennen kann, weil ich keinen anderen
+Weg sehe, mich zu benehmen. Und ich lebe gesund. Ich habe nie Alkohol
 getrunken und nie geraucht oder Drogen genommen. So ein Tugendpinsel wie
- ich muss eigentlich furchtbar langweilig sein. Aber ich hoffe, ich 
+ ich muss eigentlich furchtbar langweilig sein. Aber ich hoffe, ich
 schaffe das zu überpudern.</p>
       <gallery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" is_empty="False" href="http://xml.zeit.de/galerien/bg-automesse-detroit-2014-usa" year="2014" issue="16" ressort="zeit-magazin" contenttype="gallery" publication-date="" expires="">
         <badges>
-          <badge py:pytype="str">gallery</badge>
+          <badge>gallery</badge>
         </badges>
         <supertitle xsi:nil="true"/>
         <teaser_supertitle xsi:nil="true"/>
-        <title py:pytype="str">Karl Lagerfeld</title>
+        <title>Karl Lagerfeld</title>
         <text xsi:nil="true"/>
         <description xsi:nil="true"/>
         <byline xsi:nil="true"/>
         <breadcrumb_title xsi:nil="true"/>
         <image base-id="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/fs-karl-lagerfeld-teaser/" type="jpg" title="Karl Lagerfeld Teaser" align="left" publication-date="" expires="">
           <bu xsi:nil="true"/>
-          <copyright py:pytype="str">© Pierre Guillaud/AFP/Getty Images</copyright>
+          <copyright>© Pierre Guillaud/AFP/Getty Images</copyright>
         </image>
       </gallery>
       <p><strong>ZEITmagazin ONLINE: </strong>Sie haben nie Alkohol getrunken?</p>
@@ -157,8 +157,8 @@ schaffe das zu überpudern.</p>
       <p><strong>ZEITmagazin ONLINE: </strong>Überhaupt nicht!</p>
       <p><strong>Lagerfeld: </strong>Tue ich auch nicht! Grauenhafte Vorstellung, dass man nachher nicht mehr sein Gesicht bewegen kann!</p>
       <image src="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-2/karl-lagerfeld-2-zmo-x-small.jpg" type="jpg" title="Karl Lagerfeld" align="left" publication-date="" expires="" set-manually="True" layout="zmo-small-right" is_empty="False">
-        <bu py:pytype="str">Karl Lagerfeld  bei einer Fendi-Präsentation in Mailand, 2012</bu>
-        <copyright py:pytype="str">© Luca Bruno/dpa</copyright>
+        <bu>Karl Lagerfeld  bei einer Fendi-Präsentation in Mailand, 2012</bu>
+        <copyright>© Luca Bruno/dpa</copyright>
       </image>
       <p><strong>ZEITmagazin ONLINE: </strong>Stimmt es, dass Sie sich schon als Junge sehr stilvoll gekleidet haben?</p>
       <p><strong>Lagerfeld: </strong>Man kann ja nicht in der Mode leben, wenn man selber Kleidung nicht mag. Ich wollte schon als Kind jeden Tag nach dem Mittagsschlaf etwas anderes anziehen.</p>
@@ -190,8 +190,8 @@ schaffe das zu überpudern.</p>
       <p><strong>ZEITmagazin ONLINE: </strong>Es gibt von Chanel keine Männerkollektion ...</p>
       <p><strong>Lagerfeld: </strong>Ich mache ein paar Modelle, die ziehe ich aber selber nicht an. Ich komme mir darin vor, als wäre ich meine Mutter ...</p>
       <image src="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-fitting-inline/karl-lagerfeld-fitting-inline-zmo-small.jpg" type="jpg" align="left" publication-date="" expires="" layout="zmo-medium-center" is_empty="False" set-manually="True">
-        <bu py:pytype="str">Letzte Handgriffe vor der Präsentation der Chanel-Sommerkollektion 2014 </bu>
-        <copyright py:pytype="str">© Benoit Peverelli/Chanel</copyright>
+        <bu>Letzte Handgriffe vor der Präsentation der Chanel-Sommerkollektion 2014 </bu>
+        <copyright>© Benoit Peverelli/Chanel</copyright>
       </image>
       <p><strong>ZEITmagazin ONLINE: </strong>Hat es Sie nie interessiert, Männermode für Chanel zu machen?</p>
       <p><strong>Lagerfeld: </strong>Coco Chanel hatte sich selbst immer so für Männersachen interessiert, dass es nie nötig war, welche zu entwerfen. Und wissen Sie, ich mache schon so viel Kollektionen, da muss ich nicht noch mehr machen. Ich habe einen Vertrag für vier und ich mache acht. Ich bin mir auch nicht sicher, ob es mich interessiert. Bei Castings von Männermodels falle ich vor Langeweile tot um. Die sehen trostlos aus, man hat das Gefühl, der Sonnenstrahl eines Lustgreises hat sie für 15 Minuten ins Scheinwerferlicht getragen. Es gibt wenige Ausnahmen wie Brad Kroenig oder <a class="" href="http://models.com/models/baptiste-giabiconi" target="_blank">Baptiste Giabiconi</a>.</p>

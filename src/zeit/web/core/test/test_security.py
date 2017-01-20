@@ -2,7 +2,6 @@ import json
 
 import jwt
 import mock
-import pyramid.interfaces
 import pytest
 import requests
 import zope.component
@@ -228,13 +227,17 @@ def test_get_user_info_replaces_community_host(
     assert user_info['picture'] == 'http://static_community/foo/picture.png'
 
 
-def test_rawr_config_should_contain_login_url(selenium_driver, testserver):
+def test_rawr_config_should_contain_register_and_login_url(
+        selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/article/01' % testserver.url)
-    assert driver.execute_script('return rawrConfig.loginUrl') is None
+    assert driver.execute_script('return rawrConfig.registerUrl') is None
     driver.execute_script('rawrConfig.sso()')
-    assert 'http://my_sso/anmelden' in driver.execute_script(
+    assert 'http://sso.example.org/anmelden' in driver.execute_script(
         'return rawrConfig.loginUrl')
+    assert ('http://sso.example.org/registrieren_email?template=rawr' in
+            driver.execute_script('return rawrConfig.registerUrl'))
+    assert (driver.execute_script('return rawrConfig.authInIframe') is True)
 
 
 def test_rawr_config_should_contain_user_data_as_base64_encoded_json(
@@ -269,3 +272,29 @@ def test_no_user_rawr_authentication_is_empty(dummy_request):
     rawr_user, rawr_signature, timestamp = stuff
     data = json.loads(rawr_user.decode('base64'))
     assert data == {}
+
+
+def test_sso_url_contains_default_params(dummy_request):
+    state = zeit.web.core.security.get_login_state(dummy_request)
+    assert (
+        state['register'] == 'http://sso.example.org/registrieren?url='
+                             'http://example.com&entry_service=sonstige')
+    assert (
+        state['register_rawr'] == 'http://sso.example.org/registrieren_email'
+                                  '?template=rawr&url=http://example.com'
+                                  '&entry_service=rawr')
+    assert (
+        state['logout'] == 'http://sso.example.org/abmelden'
+                           '?url=http://example.com&entry_service=sonstige')
+    assert (
+        state['login'] == 'http://sso.example.org/anmelden'
+                          '?url=http://example.com&entry_service=sonstige')
+
+
+def test_sso_url_contains_custom_params(dummy_request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['entry_service'] = 'custom'
+    state = zeit.web.core.security.get_login_state(dummy_request)
+    assert (
+        state['register'] == 'http://sso.example.org/registrieren?url='
+                             'http://example.com&entry_service=custom')

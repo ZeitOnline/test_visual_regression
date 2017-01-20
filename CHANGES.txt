@@ -4,12 +4,218 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.20 (unreleased)
+- 3.31 PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
+
+
+3.33 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.32 (2017-01-19)
+-----------------
+
+- HOTFIX: Fix wording in login menu (Account->Konto)
+- PERF: Render volume overview from solr result without resolving volume objects
+
+3.31 (2017-01-19)
+-----------------
+
+- ZON-3394: Change links and styling of user dropnav
+
+- ZON-3402: Track first_click_free status in Webtrekk
+
+- ZON-3551: Add overscrolling.js to site.js
+
+- ZON-3544: Add entry_service parameter for SSO
+
+- ZON-3549: Hide login-link on paywall for loggedin users
+
+- ZON-3565: Add iOS app indexing meta tags
+
+- ZON-2284: Tighten friedbert view openness (aka "do not provide articles on img subdomain")
+
+- BUG-620: Fix video event tracking
+
+- FEM-8: Minimize transfer volume from homepage overlay and update signals
+
+- MAINT: Subclass view_config decorators into zeit.web
+
+
+3.30 (2017-01-12)
+-----------------
+
+- HOTFIX: Encode url in pagination
+
+
+3.29 (2017-01-12)
+-----------------
+
+- FIX: Missing css/js
+
+
+3.28 (2017-01-12)
+-----------------
+
+- MAINT: Harmonize Z+ badge naming
+
+
+3.27 (2017-01-05)
+-----------------
+
+- ZON-3571: Paginate volume overview
+
+- ZON-2718: Add structured data for video pages
+
+- FEAT: Add hook to require external scripts in ZON blogs
+
+- MAINT: Clean up test data
+
+- MAINT: Polish Z+ kicker logo
+
+
+3.26 (2016-12-30)
+-----------------
+
+- ZON-3569: Change fallback image and styles for volume packshots
+
+- ZON-3557: Add zplus badge to ZMO article header
+
+- ZON-3542: Show error notification if paywall after registration
+
+- ZON-3517: Mark content only for subscribers in ZMO articles (AMP part)
+
+- ZON-3588: Automate event tracking for article body
+
+- BUG-613: Show authorbox custom description if defined
+
+- FIX: Be defensive about invalid requests for legacy keyword redirects
+
+- MAINT: Replace library `freewall` with `masonry`
+
+- MAINT: Update sharing metadata regarding authorship
+
+
+3.25.1 (2016-12-23)
+-------------------
+
+- FIX: Re-release after grunting properly
+
+
+3.25 (2016-12-23)
+-----------------
+
+- ZON-3578: Update clicktracking for centerpages, article header, article blocks
+
+
+3.24 (2016-12-19)
+-----------------
+
+- ZON-3532: Refactor event click tracking
+
+- ZON-3531: Introduce entitlement ID to C1 tracking
+
+
+3.23.2 (2016-12-14)
+-------------------
+
+- MAINT: Revert "Have Centerpage view inherit from Content"
+
+
+3.23.1 (2016-12-14)
+-------------------
+
+- FIX: Fix rawr config typo
+
+- MAINT: Enhance C1-Debug-Headers (make our C1-Tracking headers visible)
+
+- MAINT: Have Centerpage view inherit from Content
+
+
+3.23 (2016-12-13)
+-----------------
+
+- ZON-3463: Redirect volume-page on no subscription requests
+
+- ZON-3407: Add ZEIT MAGAZIN ONLINE Teaser Z+
+
+- BUG-596: Don't show fallback cover in Zplus badge for ZON articles
+
+- BUG-604: Only set webtrekk parameter if detectable
+
+- BUG-597: Fix TypeError when form.action returns a DOM element
+
+- FIX: Remove extra margin arround dashboard
+
+- FIX: Add authInFrame to rawr_iframe feature toggle
+
+- FIX: Adapt test for rawr_iframe feature toggle
+
+- MAINT: Include the first teaser in spektrum feed as well
+
+
+3.22 (2016-12-12)
+-----------------
+
+- ZON-3528: Remove all links to pdf.zeit.de
+
+- ZON-3408: Add ZMO paywalls
+
+- ZON-3393: User dashboard
+
+- ZON-3118: Swap article bodies with intext-link data from TMS
+  (featuretoggle: enable_intext_links)
+
+- ZON-3223: Set custom register URL for rawr
+  (featuretoggle: rawr_iframe)
+
+- OPS-448: Deliver HP topics for mobile apps via JSON-Response
+
+- OPS-386: Clean up magazin article macros
+
+- MAINT: Set banner_channel for author pages
+
+- MAINT: Update to current Pyramid version
+
+
+3.21 (2016-11-30)
+-----------------
+
+- ZON-3512: Evaluate C1 paywall headers correctly
+
+- BUG-549: Fix ressort navigation width for Safari >= Version 10
+
+- MAINT: Remove separate is_admin setting
+
+- MAINT: Update node modules and bower components
+
+
+3.20 (2016-11-24)
+-----------------
+
+- ZON-3478: Polish Archivepage
+
+- BUG-577: Provide spacing for ZMO article header with expired images
+
+- BUG-581: Require author image for buzzboard column
+
+- BUG-583: Fix pagination for author pages
+
+- BUG-592: Make author page pagination SEO friendly
+
+- BUG-590: Remove webtrekk custom parameter for `login` from cached HTML
+
+- BUG-591: Report access right to webtrekk literally
 
 - FIX: Fix margin of blog marker on fullwidth teaser
 
-- ZON-3478: Polish Archivepage
+- FIX: Be defensive about missing values in agatho response
+
+- OPS-425: Add code style linting to ZMO scripts
+
+- MAINT: Return C1 headers as debug information
+
 
 3.19 (2016-11-21)
 -----------------

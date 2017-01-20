@@ -15,8 +15,6 @@ import pyramid.response
 import pyramid.settings
 import pyramid.view
 import pyramid.httpexceptions
-import urllib
-import werkzeug.http
 import zope.component
 
 from zeit.solr import query as lq
@@ -35,6 +33,7 @@ import zeit.web.core.comments
 import zeit.web.core.date
 import zeit.web.core.template
 import zeit.web.core.navigation
+import zeit.web.core.paywall
 
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
@@ -62,6 +61,12 @@ def is_paginated(context, request):
         return False
 
 
+def is_not_in_production(context, request):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return ((conf.get('environment') != 'production') or
+            (request.client_addr == '127.0.0.1'))
+
+
 def redirect_on_trailing_slash(request):
     if request.path.endswith('/') and not len(request.path) == 1:
         scheme, netloc, path, params, query, fragment = urlparse.urlparse(
@@ -82,22 +87,8 @@ def redirect_on_cp2015_suffix(request):
             location=url)
 
 
-def c1requestheader_or_get(request, name):
-
-    # TODO: Den Request hier nutzen/haben, nicht reinreichen.
-
-    if name in request.headers:
-        return request.headers.get(name, None)
-
-    # We want to allow manipulation via GET-Params for testing,
-    # but not in production
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    if conf.get('environment') != 'production':
-        return request.GET.get(name, None)
-
-
 def is_paywalled(context, request):
-    return c1requestheader_or_get(request, 'C1-Paywall-On')
+    return zeit.web.core.paywall.Paywall.status(request)
 
 
 class Base(object):
@@ -106,21 +97,8 @@ class Base(object):
     seo_title_default = u''
     pagetitle_suffix = u''
     inline_svg_icons = False
-    host_check_required_on = ['newsfeed', 'xml']
 
     def __call__(self):
-        # to avoid circular imports
-        import zeit.web.site.view_feed
-
-        # XXX: Since we do not have a configuration based on containments
-        # for our views, the "function view_is_forbidden_by_host" is necessary
-        # to control, that only explicitly configured views with the attribute
-        # allowed_on_hosts, will render e.g. an RSS feed on newsfeed.zeit.de
-        # host header (RD, 2015-09; updated by TK, 2016-06)
-
-        if not self.is_allowed_on_host(self.request.headers.get('host')):
-            raise pyramid.httpexceptions.HTTPNotFound()
-
         redirect_on_trailing_slash(self.request)
         # Don't redirect for preview (since the workingcopy does not contain
         # the suffix-less version)
@@ -151,16 +129,6 @@ class Base(object):
         self.request = request
         self._webtrekk_assets = []
 
-    def is_allowed_on_host(self, host):
-        allowed_on_hosts = getattr(self, 'allowed_on_hosts', None)
-        if host and any([h in host for h in self.host_check_required_on]):
-            if allowed_on_hosts and any(
-                [re.match('{}(\.staging)?\.zeit\.de'.format(x), host)
-                    for x in allowed_on_hosts]):
-                    return True
-            return False
-        return True
-
     @zeit.web.reify
     def vgwort_url(self):
         token = zeit.vgwort.interfaces.IToken(self.context).public_token
@@ -171,6 +139,10 @@ class Base(object):
     @zeit.web.reify
     def type(self):
         return type(self.context).__name__.lower()
+
+    @zeit.web.reify
+    def tracking_type(self):
+        return self.type
 
     # XXX Base View should not depend on ICommonMetadata
     # Throws an error if resssort, sub_ressort, cap_title ... is None
@@ -348,8 +320,16 @@ class Base(object):
 
     @zeit.web.reify
     def js_vars(self):
-        names = ('banner_channel', 'ressort', 'sub_ressort', 'type')
+        names = ('banner_channel', 'ressort', 'sub_ressort', 'type',
+                 'hp_overlay_interval', 'update_signals_comments_interval',
+                 'update_signals_time_interval', 'paywall')
         return [(name, getattr(self, name, '')) for name in names]
+
+    @zeit.web.reify
+    def js_toggles(self):
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        names = ('hp_overlay', 'update_signals', 'overscrolling')
+        return [(name, toggles.find(name)) for name in names]
 
     @zeit.web.reify
     def navigation(self):
@@ -461,7 +441,7 @@ class Base(object):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         try:
             return ('ZONApp' in self.request.headers.get('user-agent', '') or (
-                conf.get('is_admin') and
+                conf.get('environment') != 'production' and
                     'app-content' in self.request.query_string))
         except (AttributeError, TypeError):
             return False
@@ -646,16 +626,6 @@ class Base(object):
                 'short_num'))  # Veröffentlichungsdatum
         ])
 
-        # Track login status with entrypoint url
-        user_login_status = 'nicht_angemeldet'
-        user_login_info = self.request.user
-        if user_login_info:
-            user_login_status = 'angemeldet'
-            if user_login_info.get('entry_url'):
-                user_login_status = '{}|{}'.format(
-                    user_login_status,
-                    urllib.unquote(user_login_info['entry_url']))
-
         custom_parameter = collections.OrderedDict([
             ('cp1', get_param('authors_list')),  # Autor
             ('cp2', self.ivw_code),  # IVW-Code
@@ -672,21 +642,24 @@ class Base(object):
             ('cp13', 'stationaer'),  # Breakpoint
             ('cp14', 'friedbert'),  # Beta-Variante
             ('cp15', push),  # Push und Eilmeldungen
-            ('cp23', user_login_status),  # Login status with entrypoint url
             ('cp25', 'original'),  # Plattform
             ('cp26', pagetype),  # inhaltlicher Pagetype
             ('cp27', ';'.join(self.webtrekk_assets)),  # Asset
             ('cp30', self.paywall or 'open')  # Paywall Schranke
         ])
 
+        access = getattr(self.context, 'access', '')
+
         if zeit.web.core.template.toggles('access_status_webtrekk'):
-            access = getattr(self.context, 'access', None)
-            if access is None:
-                if self.product_id == u'ZEDE':
-                    access = 'free'
-                else:
-                    access = 'registration'
             custom_parameter.update({'cp28': access})
+
+        first_click_free = 'unfeasible'
+        if zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
+            if access == 'registration':
+                c1_fcf_header = zeit.web.core.paywall.Paywall.first_click_free(
+                    self.request)
+                first_click_free = 'yes' if c1_fcf_header else 'no'
+        custom_parameter.update({'cp29': first_click_free})
 
         return {
             'contentGroup': content_group,
@@ -739,102 +712,22 @@ class Base(object):
 
     @zeit.web.reify
     def paywall(self):
-
-        if not zeit.web.core.application.FEATURE_TOGGLES.find(
-                'reader_revenue'):
-            return False
-
-        walls = ['register', 'metered', 'paid']
-
-        if not c1requestheader_or_get(self.request, 'C1-Paywall-On'):
-            return None
-
-        if c1requestheader_or_get(self.request, 'C1-Paywall-Reason') in walls:
-            return c1requestheader_or_get(self.request, 'C1-Paywall-Reason')
-
-        return None
-
-
-class CeleraOneMixin(object):
-
-    def __call__(self):
-        resp = super(CeleraOneMixin, self).__call__()
-        self.request.response.headers.update(self.c1_header)
-        return resp
+        return zeit.web.core.paywall.Paywall.status(self.request)
 
     @zeit.web.reify
-    def _c1_channel(self):
-        return getattr(self, 'ressort', None)
+    def update_signals_comments_interval(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('update_signals_comments_interval', '')
 
     @zeit.web.reify
-    def _c1_sub_channel(self):
-        return getattr(self, 'sub_ressort', None)
+    def update_signals_time_interval(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('update_signals_time_interval', '')
 
     @zeit.web.reify
-    def _c1_entitlement(self):
-        access = getattr(self.context, 'access', None)
-        access_source = zeit.cms.content.sources.ACCESS_SOURCE.factory
-        return access_source.translate_to_c1(access)
-
-    @zeit.web.reify
-    def _c1_cms_id(self):
-        uuid = zeit.cms.content.interfaces.IUUID(self.context, None)
-        return getattr(uuid, 'id', None)
-
-    @zeit.web.reify
-    def _c1_content_id(self):
-        return self.webtrekk_content_id
-
-    @zeit.web.reify
-    def _c1_doc_type(self):
-        if self.type == 'gallery':
-            return 'bildergalerie'
-        elif isinstance(self, zeit.web.core.view.FrameBuilder):
-            return 'arena'
-        else:
-            return self.type
-
-    @classmethod
-    def _headersafe(cls, string):
-        pattern = r'[^ %s]' % ''.join(werkzeug.http._token_chars)
-        return re.sub(pattern, '', string.encode('utf-8', 'ignore'))
-
-    def _get_c1_heading(self, prep=unicode):
-        if getattr(self.context, 'title', None) is not None:
-            return prep(self.context.title.strip())
-
-    def _get_c1_kicker(self, prep=unicode):
-        if getattr(self.context, 'supertitle', None) is not None:
-            return prep(self.context.supertitle.strip())
-
-    @zeit.web.reify
-    def c1_client(self):
-        return [(k, u'"{}"'.format(v.replace('"', r'\"'))) for k, v in {
-            'set_channel': self._c1_channel,
-            'set_sub_channel': self._c1_sub_channel,
-            'set_cms_id': self._c1_cms_id,
-            'set_content_id': self._c1_content_id,
-            'set_doc_type': self._c1_doc_type,
-            'set_entitlement': self._c1_entitlement,
-            'set_heading': self._get_c1_heading(),
-            'set_kicker': self._get_c1_kicker(),
-            'set_service_id': 'zon'
-        }.items() if v is not None] + [
-            ('set_origin', 'window.Zeit.getCeleraOneOrigin()')]
-
-    @zeit.web.reify
-    def c1_header(self):
-        return [(k, v.encode('utf-8', 'ignore')) for k, v in {
-            'C1-Track-Channel': self._c1_channel,
-            'C1-Track-Sub-Channel': self._c1_sub_channel,
-            'C1-Track-CMS-ID': self._c1_cms_id,
-            'C1-Track-Content-ID': self._c1_content_id,
-            'C1-Track-Doc-Type': self._c1_doc_type,
-            'C1-Track-Entitlement': self._c1_entitlement,
-            'C1-Track-Heading': self._get_c1_heading(self._headersafe),
-            'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
-            'C1-Track-Service-ID': 'zon'
-        }.items() if v is not None]
+    def hp_overlay_interval(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('hp_overlay_interval', '')
 
 
 class CommentMixin(object):
@@ -983,7 +876,11 @@ class CommentMixin(object):
         return result
 
 
-class Content(CeleraOneMixin, CommentMixin, Base):
+class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
+    """Base view class for content that a) provides ICommonMetadata and b) is a
+    "single content" (e.g. article/gallery/video, but not centerpage).
+    XXX We should introduce an interface for this.
+    """
 
     @zeit.web.reify
     def basename(self):
@@ -1001,7 +898,7 @@ class Content(CeleraOneMixin, CommentMixin, Base):
 
     @zeit.web.reify
     def date_format(self):
-        if self.context.product and self.context.product.id in ('ZEI', 'ZMLB'):
+        if self.product_id in ('ZEI', 'ZMLB'):
             return 'short'
         return 'long'
 
@@ -1197,7 +1094,7 @@ class Content(CeleraOneMixin, CommentMixin, Base):
             *[t.uniqueId for t in self.nextread])
 
 
-@pyramid.view.view_config(route_name='health_check')
+@zeit.web.view_config(route_name='health_check')
 def health_check(request):
     """ View callable to perform a health a check by checking,
         if the configured repository path exists.
@@ -1240,7 +1137,7 @@ class service_unavailable(object):  # NOQA
         return pyramid.response.Response(body, 503)
 
 
-class FrameBuilder(CeleraOneMixin):
+class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     inline_svg_icons = True
 
@@ -1355,35 +1252,30 @@ def not_found(request):
          ('Content-Type', 'text/plain; charset=utf-8')])
 
 
-@pyramid.view.view_config(context=pyramid.exceptions.URLDecodeError)
+@zeit.web.view_config(context=pyramid.exceptions.URLDecodeError)
 # Unfortunately, not everyone raises a specific error, so we need to catch
 # the generic one, too. (See also <https://github.com/Pylons/webob/issues/115>)
-@pyramid.view.view_config(context=UnicodeDecodeError)
+@zeit.web.view_config(context=UnicodeDecodeError)
 def invalid_unicode_in_request(request):
     body = 'Status 400: Invalid unicode data in request.'
     return pyramid.response.Response(body, 400)
 
 
-# For some reason we are not able to register ICMSContent on this.
-# We have to register this on every content-view.
-@pyramid.view.view_config(context=zeit.content.cp.interfaces.ICenterPage)
-@pyramid.view.view_config(context=zeit.content.article.interfaces.IArticle)
-@pyramid.view.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@pyramid.view.view_config(context=zeit.content.video.interfaces.IVideo)
-@pyramid.view.view_config(route_name='schlagworte_index')
 def surrender(context, request):
     return pyramid.response.Response(
         'OK', 303, headerlist=[('X-Render-With', 'default')])
 
 
-@pyramid.view.view_config(route_name='blacklist')
+@zeit.web.view_config(route_name='blacklist')
 def blacklist(context, request):
     return pyramid.httpexceptions.HTTPNotImplemented(
         headers=[('X-Render-With', 'default'),
                  ('Content-Type', 'text/plain; charset=utf-8')])
 
 
-@pyramid.view.view_config(route_name='json_delta_time', renderer='json')
+@zeit.web.view_config(
+    route_name='json_delta_time',
+    renderer='json')
 def json_delta_time(request):
     unique_id = request.GET.get('unique_id', None)
     date = request.GET.get('date', None)
@@ -1423,7 +1315,9 @@ def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
     return {'delta_time': delta_time}
 
 
-@pyramid.view.view_config(route_name='json_comment_count', renderer='json')
+@zeit.web.view_config(
+    route_name='json_comment_count',
+    renderer='json')
 def json_comment_count(request):
     try:
         unique_id = request.GET.get('unique_id', None)
@@ -1458,14 +1352,14 @@ def json_comment_count(request):
     return {'comment_count': comment_count}
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.text.interfaces.IText,
     renderer='string')
 def view_textcontent(context, request):
     return context.text
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     route_name='login_state',
     renderer='templates/inc/login-state-footer.html',
     request_param='for=footer',

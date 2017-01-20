@@ -82,6 +82,7 @@ class OrderedList(UnorderedList):
 class Authorbox(Block):
     def __init__(self, model_block):
         self.author = model_block.references.target
+        self.text = model_block.references.biography
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)

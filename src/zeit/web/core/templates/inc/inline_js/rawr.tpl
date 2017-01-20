@@ -17,7 +17,8 @@ window.rawrConfig = {
             {%- endif %}],
         'meta': {
             'description': '{{ view.title | replace("\'", "\\\'") | safe }}'
-        }
+        },
+        'series': '{{ view.serie | replace("\'", "\\\'") | safe }}'
     },
 {% endif %}
 

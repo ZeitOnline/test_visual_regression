@@ -1,3 +1,7 @@
 {# include customer ID for script enabled webtrekk requests #}
-<div id="login-state" data-sso-id="{{ request.user.ssoid }}"></div>
+<div id="login-state" data-sso-id="{{ request.user.ssoid }}" data-sso-url="{{ request.user.entry_url }}"></div>
+{# Make Login-Status available for CSS styling. Works because this is loaded via ESI. #}
+{% if request.user %}
+<script type="text/javascript">document.documentElement.className += ' is-loggedin';</script>
+{% endif %}
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_noscript.html" %}

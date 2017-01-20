@@ -23,6 +23,8 @@
   <setting name="comment_page_size" xsi:type="xsd:int">4</setting>
   <setting name="community_host_timeout_secs" xsi:type="xsd:int">10</setting>
 
+  <setting name="retresco_timeout" xsi:type="xsd:double">0.2</setting>
+
   <setting name="reach_timeout" xsi:type="xsd:double">0.2</setting>
 
   <setting name="cp_preserve_modules_on_pagination" xsi:type="xsd:string">headerimage centerpage-header search-form authorlist-alphabet-pager</setting>
@@ -35,6 +37,14 @@
   <setting name="caching_time_image" xsi:type="xsd:int">30</setting>
   <setting name="caching_time_videostill" xsi:type="xsd:int">35</setting>
   <setting name="caching_time_external" xsi:type="xsd:int">15</setting>
+
+  <!-- homepage hp overlay settings, reminder on/off is now a feature-toggle -->
+  <!-- homepage hp overlay interval, in seconds -->
+  <setting name="hp_overlay_interval" xsi:type="xsd:int">78</setting>
+  <!-- updateSignals settings, reminder on/off is now a feature toggle -->
+  <!-- homepage update signals interval, in seconds -->
+  <setting name="update_signals_comments_interval" xsi:type="xsd:int">20</setting>
+  <setting name="update_signals_time_interval" xsi:type="xsd:int">60</setting>
 
   <setting name="asset_prefix" xsi:type="xsd:string">/static/latest</setting>
   <setting name="image_prefix" xsi:type="xsd:string"></setting>
@@ -51,4 +61,6 @@
 
   <setting name="varnish_caching_time_content" xsi:type="xsd:int">3600</setting>
   <setting name="varnish_caching_time_sitemap" xsi:type="xsd:int">0</setting>
+
+  <setting name="entry_service" xsi:type="xsd:string">sonstige</setting>
 </settings>

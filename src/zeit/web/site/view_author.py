@@ -1,12 +1,15 @@
 # coding: utf-8
-import pyramid.view
+import logging
+import math
+
+import pyramid.httpexceptions
 import zope.component
+import zope.interface
 
 import zeit.content.author.interfaces
-import zope.interface
-import logging
 
 from zeit.web.core.view import is_paginated
+import zeit.web
 import zeit.web.core.area.ranking
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
@@ -14,11 +17,12 @@ import zeit.web.core.interfaces
 log = logging.getLogger(__name__)
 
 
-@pyramid.view.view_defaults(
+@zeit.web.view_defaults(
     context=zeit.content.author.interfaces.IAuthor,
     renderer='templates/author.html')
-@pyramid.view.view_config(name='')
-class Author(zeit.web.site.view.Base):
+@zeit.web.view_config(name='')
+class Author(zeit.web.core.view_centerpage.AreaProvidingPaginationMixin,
+             zeit.web.site.view.Base):
     """This view implements tabs that each have their own URL.
     To add a tab, subclass this, configure a different view name and provide
     a different ``tab_areas``.
@@ -57,7 +61,7 @@ class Author(zeit.web.site.view.Base):
 
     @zeit.web.reify
     def banner_channel(self):
-        return ''
+        return 'administratives/autoren'
 
     @zeit.web.reify
     def ressort(self):
@@ -99,6 +103,12 @@ class Author(zeit.web.site.view.Base):
         return create_author_article_area(self.context)
 
     @zeit.web.reify
+    def area_providing_pagination(self):
+        for area in self.tab_areas:
+            if zeit.web.core.interfaces.IPagination.providedBy(area):
+                return area
+
+    @zeit.web.reify
     def has_author_comments(self):
         page_size = int(self.request.registry.settings.get(
             'author_comment_page_size', '10'))
@@ -115,7 +125,7 @@ class Author(zeit.web.site.view.Base):
         return False
 
 
-@pyramid.view.view_config(name='kommentare')
+@zeit.web.view_config(name='kommentare')
 class Comments(Author):
 
     current_tab_name = 'kommentare'
@@ -191,6 +201,14 @@ class AuthorRanking(zeit.web.core.area.ranking.Ranking):
             return 0
         return self.count * (self.page - 1) - self.surrounding_teasers
 
+    @zeit.web.reify
+    def total_pages(self):
+        count = self.context._count
+        items = self.hits + self.surrounding_teasers
+        if items > 0 < count:
+            return int(math.ceil(float(items) / float(count)))
+        return 0
+
 
 class UserCommentsArea(zeit.web.core.centerpage.Area):
 
@@ -200,6 +218,7 @@ class UserCommentsArea(zeit.web.core.centerpage.Area):
         super(self.__class__, self).__init__(arg, **kw)
         self.kind = 'user-comments'
         self.comments = kw.get('comments', {'page_total': 0, 'page': 1})
+        self.request = pyramid.threadlocal.get_current_request()
 
     @zeit.web.reify
     def page(self):
@@ -223,12 +242,14 @@ class UserCommentsArea(zeit.web.core.centerpage.Area):
     def pagination_info(self):
         return {
             'previous_label': u'Vorherige Seite',
-            'previous_param': dict(p=self.current_page - 1),
-            'next_label': u'Nächste Seite',
-            'next_param': dict(p=self.current_page + 1)}
+            'next_label': u'Nächste Seite'}
 
     def page_info(self, page_nr):
+        url = zeit.web.core.utils.remove_get_params(self.request.url, 'p')
+        if page_nr > 1:
+            url = zeit.web.core.utils.add_get_params(url, **dict(p=page_nr))
+
         return {
-            'page_label': page_nr,
-            'remove_get_param': 'p',
-            'append_get_param': dict(p=page_nr)}
+            'label': page_nr,
+            'url': url
+        }

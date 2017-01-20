@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <head>
         <header_image/>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -81,6 +81,9 @@
                 <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/zeit-online/gallery/biga_1" />
                 </container>
+                <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6008b8ffe1b7" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/zett/gluecksforschung-helfer-zett"/>
+                </container>
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60597" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/zeit-online/article/01" />
                 </container>
@@ -98,6 +101,18 @@
             <region area="id-bb856af5-0ad1-4849-b2f3-43fb635f4fc6" kind="duo">
                 <container cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/zeit-magazin/mode-design/2014-05/karl-lagerfeld-interview" />
+                </container>
+            </region>
+        </cluster>
+        <cluster area="id-a102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
+            <region area="id-a1a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
+                <container cp:__name__="id-a160c834-fa2e-4d35-a540-d20dff18f95a" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/campus/article/paginated" />
+                </container>
+            </region>
+            <region area="id-a1856af5-0ad1-4849-b2f3-43fb635f4fc6" kind="duo">
+                <container cp:__name__="id-a1c15e19-b931-4441-8d40-7ed4eb76f35e" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/campus/article/common" />
                 </container>
             </region>
         </cluster>
@@ -121,6 +136,18 @@
             </region>
             <region area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87bb" kind="duo">
                 <container cp:__name__="id-908960fb-7e9f-4e5f-bb94-ad0893e6fcf1" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
+                </container>
+            </region>
+        </cluster>
+        <cluster area="id-23329214-665f-457d-a624-94c47850f956" kind="duo">
+            <region area="id-23b51a45-a5d2-4040-8da7-112f9d5d6cb8" kind="duo">
+                <container cp:__name__="id-2385b64b-2644-4f24-8fb9-6698b8ffe1b8" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/zett/gluecksforschung-helfer-zett"/>
+                </container>
+            </region>
+            <region area="id-2398c5c2-2b95-42b7-9ccc-83e684fa87bb" kind="duo">
+                <container cp:__name__="id-238960fb-7e9f-4e5f-bb94-ad0893e6fcf1" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
                 </container>
             </region>

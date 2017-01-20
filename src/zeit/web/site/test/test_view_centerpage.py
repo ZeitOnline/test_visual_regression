@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import re
 
 from selenium.common.exceptions import TimeoutException
@@ -16,6 +17,7 @@ import zope.component
 from zeit.cms.checkout.helper import checked_out
 import zeit.cms.interfaces
 import zeit.content.cp.centerpage
+import zeit.content.volume
 
 import zeit.web.core.centerpage
 import zeit.web.core.template
@@ -737,7 +739,7 @@ def test_canonical_ruleset_on_cps(testbrowser, datasolr):
     # several params
     browser = testbrowser('/dynamic/ukraine?p=2&a=0#comment')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?p=2'
+    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?a=0&p=2'
 
 
 def test_canonical_ruleset_on_article_pages(testbrowser):
@@ -754,6 +756,10 @@ def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
     browser = testbrowser('/suche/index?p=2')
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == 'http://localhost/suche/index?p=2'
+
+    browser = testbrowser('/suche/index?q=s%C3%BC%C3%9F')
+    link = browser.cssselect('link[rel="canonical"]')[0]
+    assert link.get('href') == 'http://localhost/suche/index?q=s%C3%BC%C3%9F'
 
     browser = testbrowser('/dynamic/ukraine')
     link = browser.cssselect('link[rel="canonical"]')
@@ -1329,14 +1335,13 @@ def test_author_teaser_is_not_rendered_in_major(testbrowser):
     assert len(author) == 0
 
 
-def test_all_teasers_have_clicktrack_attribute(testbrowser):
+def test_all_areas_have_clicktrack_attribute(testbrowser):
     browser = testbrowser('/zeit-online/basic-teasers-setup')
-    selector = 'article[data-unique-id]'
-    teasers = browser.cssselect(selector)
-    assert len(teasers)
+    areas = browser.cssselect('.cp-area')
+    assert len(areas)
 
-    for teaser in teasers:
-        assert teaser.attrib['data-clicktracking'] != ''
+    for area in areas:
+        assert area.attrib['data-ct-context'] != ''
 
 
 def test_adtile12_from_cp_extra_is_there(testbrowser):
@@ -1836,7 +1841,7 @@ def test_zmo_teaser_kicker_should_contain_logo(testbrowser):
     teaser_small_minor_logo = browser.cssselect(
         '.teaser-small-minor__kicker-logo--zmo')
     teaser_kicker_zmo_parquet = browser.cssselect(
-        '.teaser-small__kicker--zmo-parquet svg')
+        '.teaser-small__kicker--zmo-parquet .teaser-small__kicker-logo--zmo')
 
     assert len(teaser_fullwidth_logo) == 1
     assert len(teaser_classic_logo) == 1
@@ -2151,7 +2156,7 @@ def test_ranking_area_should_be_found_regardless_of_kind(
     cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/dynamic/umbrien')
     cp.body.values()[1].values()[0].kind = 'author-list'
     view = zeit.web.site.view_centerpage.CenterpagePage(cp, dummy_request)
-    assert view.area_ranking
+    assert view.area_providing_pagination
 
 
 def test_no_author_should_not_display_byline(testbrowser, workingcopy):
@@ -2498,14 +2503,15 @@ def test_volume_overview_has_adapted_centerpage_header(
 
 def test_volume_overview_teasers_render_expected_markup(testbrowser):
     browser = testbrowser('/2016/index')
-    teasers = browser.cssselect('.cp-area--volume-overview >'
-                                ' .volume-overview-teaser a')
+    teasers = browser.cssselect(
+        '.cp-area--volume-overview .teaser-volume-overview a')
     assert len(teasers) == 7
     for teaser in teasers:
-        caption = teaser.cssselect('.volume-overview-teaser__caption')[0]
-        assert caption.find('span')[0].text + \
-            caption.find('span')[2].text == 'Jetzt lesen'
-        assert 'volume-overview-teaser__media' in \
+        caption = teaser.cssselect('.teaser-volume-overview__cta')[0]
+        caption_text = caption.text_content().strip()
+        assert caption_text.startswith('Jetzt Ausgabe ')
+        assert caption_text.endswith(' lesen')
+        assert 'teaser-volume-overview__media' in \
                teaser.cssselect('figure')[0].get('class')
 
 
@@ -2514,28 +2520,28 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
 
     # test fullwidth teasers
     teasers = browser.cssselect('.cp-area--solo article')
-    assert len(teasers) == 2
+    assert len(teasers) == 3
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test major area teasers
     teasers = browser.cssselect('.cp-area--major article')
-    assert len(teasers) == 4
+    assert len(teasers) == 6
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test minor area teasers
-    teasers = browser.cssselect('.cp-area--minor article')
-    assert len(teasers) == 4
+    teasers = browser.cssselect('.cp-area--minor article[data-zplus]')
+    assert len(teasers) == 5
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test square teasers
-    teasers = browser.cssselect('.cp-area--duo article')
-    assert len(teasers) == 2
+    teasers = browser.cssselect('.cp-area--duo article[data-zplus]')
+    assert len(teasers) == 3
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
@@ -2584,7 +2590,7 @@ def test_headerimage_should_overlay_onto_tube_area(testbrowser):
     assert '--overlain' in header_image.attrib['class']
 
 
-def test_volume_teaser_on_cphas_correct_elements(testbrowser):
+def test_volume_teaser_on_cp_has_correct_elements(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/volumeteaser')
 
     assert len(browser.cssselect('.teaser-volumeteaser')) == 2
@@ -2600,3 +2606,74 @@ def test_volume_teaser_on_cphas_correct_elements(testbrowser):
         '/2016-09/test-printcover/original')
     assert teaser_images[1].attrib['src'].endswith(
         '/ausgabe/default_packshot_diezeit/original')
+
+
+@pytest.mark.parametrize('c1_parameter', [
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous',
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=registered',
+    '?C1-Meter-Status=always_paid'])
+def test_paywall_switch_on_volume_cp_and_show_redirect(
+        testserver, c1_parameter):
+    resp = requests.get(
+        '{}/2015/52/index{}'.format(
+            testserver.url, c1_parameter), allow_redirects=False)
+    assert resp.headers['location'] == 'http://redirect.example.com'
+    assert resp.status_code == 307
+
+
+def test_volume_cp_should_send_correct_headers(testserver, monkeypatch):
+
+    def next_volume(me):
+        return None
+    monkeypatch.setattr(
+        zeit.content.volume.volume.Volume, 'next', None)
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/2015/52/index')
+    request = pyramid.testing.DummyRequest()
+    c1_mixin = zeit.web.core.paywall.CeleraOneMixin()
+    c1_mixin.context = cp
+    c1_mixin.request = request
+    assert c1_mixin._c1_entitlement == 'paid'
+
+
+def test_volume_overview_has_correct_pagination(testbrowser):
+    browser = testbrowser('/2015/index')
+
+    prev_tag = browser.cssselect('head link[rel="prev"]')[0]
+    next_tag = browser.cssselect('head link[rel="next"]')[0]
+    current_tag = browser.cssselect('head link[rel="canonical"]')[0]
+    assert prev_tag.get('href').endswith('/2016/index')
+    assert next_tag.get('href').endswith('/2014/index')
+    assert current_tag.get('href').endswith('/2015/index')
+
+    next_button = browser.cssselect('.pager__button--next')[0]
+    assert next_button.text == 'Vorheriges Jahr'
+
+    current_year = datetime.datetime.today().year
+    prev_link = browser.cssselect('.pager__pages a')[0]
+    assert prev_link.get('href').endswith('/{}/index'.format(current_year))
+
+    current = browser.cssselect('.pager__pages .pager__page--current')[0]
+    assert current.text_content() == '2015'
+
+    meta_robots = browser.cssselect('head meta[name="robots"]')[0]
+    meta_robots.get('content') == 'index,follow,noodp,noydir,noarchive'
+
+
+def test_hpoverlay_toggle_toggles_html_output(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.cssselect('#overlay-wrapper')
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': False}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert not browser.cssselect('#overlay-wrapper')
+
+
+def test_hpoverlay_html_output_is_not_on_articles(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True}.get)
+    browser = testbrowser('/zeit-online/article/simple')
+    assert not browser.cssselect('#overlay-wrapper')
