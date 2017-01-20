@@ -992,3 +992,19 @@ def test_js_toggles_are_correctly_displayed(
 
     assert hpo
     assert not uds
+
+
+def test_article_view_attribute_nooverscrolling_is_not_set(
+        application, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert not view.no_overscrolling
+
+
+def test_article_view_attribute_nooverscrolling_is_set(
+        application, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.no_overscrolling
