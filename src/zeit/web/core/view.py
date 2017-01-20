@@ -243,13 +243,9 @@ class Base(object):
 
     @zeit.web.reify
     def content_ad_enabled(self):
-    # delete try/ except later
-        try:
-            if self.context.content_ad is False:
-                return False
-            else:
-                return True
-        except:
+        if self.context.banner_content is False:
+            return False
+        else:
             return True
 
     def banner_toggles(self, name):
