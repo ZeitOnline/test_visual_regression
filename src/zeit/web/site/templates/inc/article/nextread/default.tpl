@@ -21,6 +21,8 @@
                 <span class="{{ module_layout }}__kicker">
                 {% if teaser is zplus_content %}
                     {{ lama.use_svg_icon('zplus', module_layout + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
+                {% elif teaser is tag_with_logo_content %}
+                    {{ lama.use_svg_icon('tag-d17', self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
                 {% endif %}
                 {{ teaser.teaserSupertitle or teaser.supertitle }}
                 </span>
