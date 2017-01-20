@@ -8,6 +8,7 @@
     {{- teaser.uniqueId }}"
     {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
     {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
+    {%- block taglogo_data %}{% if teaser is tag_with_logo_content %} data-taglogo="true"{% endif %}{% endblock %}
     {%- block teaser_attributes %}{% endblock %}>
 
     {% block teaser_label %}{% endblock %}
