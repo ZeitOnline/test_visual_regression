@@ -2677,3 +2677,60 @@ def test_hpoverlay_html_output_is_not_on_articles(monkeypatch, testbrowser):
         'hp_overlay': True}.get)
     browser = testbrowser('/zeit-online/article/simple')
     assert not browser.cssselect('#overlay-wrapper')
+
+
+def test_d17_icon_feature_toggle_is_working(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': False}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert not browser.cssselect('*[data-taglogo="true"]')
+
+
+def test_d17_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True }.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert browser.cssselect('*[data-taglogo="true"]')
+    assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
+    assert len(browser.cssselect('.teaser-small__kicker-logo--tag')) == 3
+    assert len(browser.cssselect(
+        '.teaser-fullwidth-column__kicker-logo--tag')) == 1
+    assert len(browser.cssselect(
+        '.teaser-small-column__kicker-logo--tag')) == 1
+    assert browser.cssselect(
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zco')
+    text = 'Freier Teaser Kicker'
+    uid = 'http://xml.zeit.de/zeit-online/cp-content/taglogo/link-d17-tag'
+    attr = 'data-unique-id="{}"'.format(uid)
+    selector = 'article[{}] .teaser-small__kicker-logo--tag'.format(attr)
+    assert text in browser.cssselect(selector)[0].getparent().text_content()
+
+
+def test_d17_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True }.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zplus + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + teaser-small__kicker-logo--zplus')
+
+
+def test_d17_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True }.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zmo + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + teaser-small__kicker-logo--zmo')
+
+
+def test_d17_icon_is_not_display_on_zett_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True }.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zett + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + teaser-small__kicker-logo--zett')
