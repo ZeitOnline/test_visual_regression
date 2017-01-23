@@ -4,14 +4,43 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.31 (unreleased)
+- 3.31 PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
+
+
+3.33 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.32 (2017-01-19)
+-----------------
+
+- HOTFIX: Fix wording in login menu (Account->Konto)
+- PERF: Render volume overview from solr result without resolving volume objects
+
+3.31 (2017-01-19)
 -----------------
 
 - ZON-3394: Change links and styling of user dropnav
 
 - ZON-3402: Track first_click_free status in Webtrekk
 
+- ZON-3551: Add overscrolling.js to site.js
+
+- ZON-3544: Add entry_service parameter for SSO
+
+- ZON-3549: Hide login-link on paywall for loggedin users
+
+- ZON-3565: Add iOS app indexing meta tags
+
+- ZON-2284: Tighten friedbert view openness (aka "do not provide articles on img subdomain")
+
+- BUG-620: Fix video event tracking
+
 - FEM-8: Minimize transfer volume from homepage overlay and update signals
+
+- MAINT: Subclass view_config decorators into zeit.web
 
 
 3.30 (2017-01-12)

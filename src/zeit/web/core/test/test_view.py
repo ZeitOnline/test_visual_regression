@@ -977,7 +977,8 @@ def test_js_toggles_are_correctly_returned(
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'hp_overlay': True, 'update_signals': False}.get)
     view = zeit.web.core.view.Base(None, None)
-    assert view.js_toggles == [('hp_overlay', True), ('update_signals', False)]
+    assert ('hp_overlay', True) in view.js_toggles
+    assert ('update_signals', False) in view.js_toggles
 
 
 def test_js_toggles_are_correctly_displayed(

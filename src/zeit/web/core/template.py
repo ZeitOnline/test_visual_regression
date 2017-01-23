@@ -1,6 +1,7 @@
 # coding: utf8
 import collections
 import datetime
+import json
 import logging
 import pkg_resources
 import random
@@ -665,6 +666,11 @@ def webtrekk_sso_parameter(request):
         info = ['angemeldet', request.user.get('entry_url')]
         return '|'.join([item for item in info if item])
     return 'nicht_angemeldet'
+
+
+@zeit.web.register_filter
+def tojson(value):
+    return json.dumps(remove_break(value))
 
 
 @zeit.web.register_global

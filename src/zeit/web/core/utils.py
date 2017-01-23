@@ -501,6 +501,18 @@ class LazyProxy(object):
     def seo_slug(self):
         return zeit.content.video.video.Video.seo_slug.__get__(self)
 
+    # Proxy zeit.content.volume.interfaces.IVolume.covers
+    @property
+    def covers(self):
+        result = {}
+        for key, value in self.__proxy__.items():
+            if key.startswith('cover_'):
+                name = key.replace('cover_', '', 1)
+                result[name] = zeit.cms.interfaces.ICMSContent(value, None)
+        if not result:
+            raise AttributeError('covers')
+        return result
+
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
 

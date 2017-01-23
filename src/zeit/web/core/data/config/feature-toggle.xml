@@ -18,5 +18,6 @@
   <enable_intext_links>false</enable_intext_links>
   <hp_overlay>true</hp_overlay>
   <update_signals>true</update_signals>
+  <overscrolling>true</overscrolling>
   <tag_logos>true</tag_logos>
 </features>
