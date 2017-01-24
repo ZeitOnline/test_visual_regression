@@ -21,8 +21,8 @@ def test_video_imagegroup_should_adapt_videos(application):
 
 
 @pytest.mark.parametrize('img,size,res', [
-    ('wide', 276839, (579, 326)),
-    ('cinema', 218033, (580, 248))
+    ('wide', 34602, (579, 326)),
+    ('cinema', 26598, (580, 248))
 ])
 def test_video_imagegroup_should_set_local_image_fileobj(
         img, size, res, application):
