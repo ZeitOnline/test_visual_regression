@@ -139,10 +139,13 @@ def zplus_content(content):
 def tag_with_logo_content(content):
     if toggles('tag_logos'):
         logotags = [('D17', 'tag-d17')]
-        for keyword in content.keywords:
-            for label, logo in logotags:
-                if keyword.label == label:
-                    return logo
+        try:
+            for keyword in content.keywords:
+                for label, logo in logotags:
+                    if keyword.label == label:
+                        return logo
+        except AttributeError:
+            pass
     return False
 
 
