@@ -10,7 +10,7 @@ POSTDEPLOY
 3.33 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3464: Possibility to switch off Contentad (Friedbert Part)
 
 
 3.32 (2017-01-19)
