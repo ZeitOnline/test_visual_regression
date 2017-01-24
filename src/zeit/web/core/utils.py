@@ -513,6 +513,13 @@ class LazyProxy(object):
             raise AttributeError('covers')
         return result
 
+    # returning fake keywords, needs implementation to work with
+    # automatic areas (solr query must be edited to get keywords
+    # and these need to be adapted into intrafind objects)
+    @property
+    def keywords(self):
+        return ()
+
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
 
@@ -578,6 +585,7 @@ class DataSolr(RandomContent):
                         publish.date_last_published_semantic.isoformat()),
                     u'last-semantic-change': (
                         semantic.last_semantic_change.isoformat()),
+                    u'keyword': content.keywords,
                     u'image-base-id': [
                         'http://xml.zeit.de/zeit-online/'
                         'image/filmstill-hobbit-schlacht-fuenf-hee/'],
