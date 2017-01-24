@@ -10,7 +10,7 @@ POSTDEPLOY
 3.33 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Load brightcove images from local path in tests instead of production HTTP
 
 
 3.32 (2017-01-19)
