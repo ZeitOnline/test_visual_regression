@@ -73,7 +73,6 @@ def test_image_download_from_brightcove_assets(appbrowser):
         zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/video/2014-01/3035864892001'))
     assert ''.join(result.app_iter) == group['wide'].open().read()
-    assert result.headers['Content-Length'] == '34602'
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
         'inline; filename="imagegroup.jpeg"')
