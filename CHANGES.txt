@@ -4,10 +4,26 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
+- 3.31 PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
 
 
-3.31 (unreleased)
+3.33 (unreleased)
+-----------------
+
+- ZON-3464: Possibility to switch off Contentad (Friedbert Part)
+
+- MAINT: Load brightcove images from local path in tests instead of production HTTP
+
+
+3.32 (2017-01-19)
+-----------------
+
+- HOTFIX: Fix wording in login menu (Account->Konto)
+
+- PERF: Render volume overview from solr result without resolving volume objects
+
+
+3.31 (2017-01-19)
 -----------------
 
 - ZON-3394: Change links and styling of user dropnav
@@ -22,13 +38,13 @@ POSTDEPLOY
 
 - ZON-3565: Add iOS app indexing meta tags
 
+- ZON-2284: Tighten friedbert view openness (aka "do not provide articles on img subdomain")
+
 - BUG-620: Fix video event tracking
 
 - FEM-8: Minimize transfer volume from homepage overlay and update signals
 
 - MAINT: Subclass view_config decorators into zeit.web
-
-- ZON-2284: Tighten friedbert view openness
 
 
 3.30 (2017-01-12)
