@@ -10,6 +10,8 @@ POSTDEPLOY
 3.33 (unreleased)
 -----------------
 
+- ZON-3464: Possibility to switch off Contentad (Friedbert Part)
+
 - MAINT: Load brightcove images from local path in tests instead of production HTTP
 
 
@@ -17,7 +19,9 @@ POSTDEPLOY
 -----------------
 
 - HOTFIX: Fix wording in login menu (Account->Konto)
+
 - PERF: Render volume overview from solr result without resolving volume objects
+
 
 3.31 (2017-01-19)
 -----------------
