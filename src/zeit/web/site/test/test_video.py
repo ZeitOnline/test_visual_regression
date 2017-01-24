@@ -20,17 +20,16 @@ def test_video_imagegroup_should_adapt_videos(application):
     assert isinstance(group, zeit.web.site.module.playlist.ImageGroup)
 
 
-@pytest.mark.parametrize('img,size,res', [
-    ('wide', 34602, (579, 326)),
-    ('cinema', 26598, (580, 248))
+@pytest.mark.parametrize('img,res', [
+    ('wide', (579, 326)),
+    ('cinema', (580, 248))
 ])
 def test_video_imagegroup_should_set_local_image_fileobj(
-        img, size, res, application):
+        img, res, application):
     unique_id = 'http://xml.zeit.de/zeit-online/video/3537342483001'
     video = zeit.cms.interfaces.ICMSContent(unique_id)
     group = zeit.content.image.interfaces.IImageGroup(video)
     image = group[img]
-    assert image.size == size
     assert image.getImageSize() == res
 
 
