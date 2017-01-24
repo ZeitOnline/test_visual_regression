@@ -7,6 +7,7 @@ import tempfile
 import urllib
 
 import PIL
+import pkg_resources
 import pytz
 import requests
 import requests_file
@@ -210,6 +211,15 @@ class ImageGroupImage(Image):
     @zeit.web.reify
     def group(self):
         return self.context
+
+
+@grokcore.component.adapter(zeit.content.image.interfaces.IImage)
+@grokcore.component.implementer(zeit.web.core.interfaces.IImage)
+class SingleImageImage(Image):
+
+    @zeit.web.reify
+    def group(self):
+        return zeit.content.image.interfaces.IImageGroup(self.context, None)
 
 
 @grokcore.component.adapter(zeit.content.gallery.interfaces.IGallery,
@@ -495,6 +505,12 @@ class RemoteImage(object):
         if not isinstance(url, basestring):
             raise TypeError('Remote image URL needs to be string formatted')
         self.url = url
+        # Allow tests to load Brightcove images locally (XXX test-only code,
+        # but it's still better than depending on Brightcove/HTTP in tests).
+        if '%DATA%' in self.url:
+            self.url = self.url.replace(
+                '%DATA%', pkg_resources.resource_filename(
+                    'zeit.web.core', 'data'))
         self.mimeType = 'image/jpeg'
         self.format = 'jpeg'
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)

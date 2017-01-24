@@ -27,4 +27,5 @@
     <area kind="author-favourite-content" available="zeit.content.dynamicfolder.interfaces.IVirtualContent">author-favourite-content</area>
     <area kind="author-articles" available="zeit.content.dynamicfolder.interfaces.IVirtualContent">author-articles</area>
     <area kind="author-list" available="zeit.content.dynamicfolder.interfaces.IVirtualContent">author-list</area>
+    <area kind="volume-overview" title="Ausgaben-Fläche" available="zeit.web.core.interfaces.IInternalUse">volume-overview</area>
 </areas>

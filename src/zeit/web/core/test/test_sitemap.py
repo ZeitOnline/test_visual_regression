@@ -157,11 +157,8 @@ def test_gsitemap_video(testbrowser):
     xml = lxml.etree.fromstring(browser.contents)
     ns = {'video': 'http://www.google.com/schemas/sitemap-video/1.1'}
     assert xml.xpath('//video:video', namespaces=ns)[0] is not None
-    assert (
-        xml.xpath('//video:thumbnail_loc', namespaces=ns)[0].text ==
-        'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/'
-        '18140073001_1956041162001_ari-origin05-arc-154-1352391648628.jpg?'
-        'pubId=18140073001')
+    assert ('thumbnail.jpg' in xml.xpath(
+        '//video:thumbnail_loc', namespaces=ns)[0].text)
     assert (
         xml.xpath('//video:content_loc', namespaces=ns)[0].text ==
         'http://brightcove.vo.llnwd.net/pd16/media/18140073001/'

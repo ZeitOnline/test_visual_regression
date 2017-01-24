@@ -7,13 +7,22 @@
         communityHost: '{{ request.registry.settings.community_host }}',
         view: {
             {% for key, value in view.js_vars -%}
-                '{{ key }}': '{{ value | remove_break }}',
+                '{{ key }}': {{ value | tojson | safe }},
             {% endfor -%}
 
             {# use to get view values savely #}
 
             get: function( key ) {
                 return this[key] ? this[key] : '';
+            }
+        },
+        toggles: {
+            {% for key, value in view.js_toggles -%}
+                '{{ key }}': {{ 'true' if value else 'false' }},
+            {% endfor -%}
+
+            get: function( key ) {
+                return this[key] || false;
             }
         },
         {% if view is framebuilder -%}

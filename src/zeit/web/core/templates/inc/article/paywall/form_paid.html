@@ -9,9 +9,9 @@
             Wählen Sie Ihren Zugang und lesen Sie direkt weiter.
         {%- endblock -%}
     </h3>
-    <form action="https://premium.zeit.de/bestellung/800144" class="gate__form" data-ct-column="digital" data-ct-subcolumn="false">
+    <form action="https://premium.zeit.de/bestellung/800144?entry_service=schranke_paid" class="gate__form" data-ct-column="digital" data-ct-subcolumn="false">
         <div class="gate__offer">
-            <input class="gate__option" id="gate-option-1" type="radio" name="angebot" value="https://premium.zeit.de/bestellung/800144" checked="checked"
+            <input class="gate__option" id="gate-option-1" type="radio" name="angebot" value="https://premium.zeit.de/bestellung/800144?entry_service=schranke_paid" checked="checked"
                 onchange="this.form.action=this.value; this.form.setAttribute('data-ct-column', 'digital');">
             <label for="gate-option-1" class="gate__label">
                 Gratis Digital-Zugang testen
@@ -23,7 +23,7 @@
             </ul>
         </div>
         <div class="gate__offer">
-            <input class="gate__option" id="gate-option-2" type="radio" name="angebot" value="https://premium.zeit.de/bestellung/1318185"
+            <input class="gate__option" id="gate-option-2" type="radio" name="angebot" value="https://premium.zeit.de/bestellung/1318185?entry_service=schranke_paid"
                 onchange="this.form.action=this.value; this.form.setAttribute('data-ct-column', 'digital+print');">
             <label for="gate-option-2" class="gate__label">
                 Gratis Digital-Zugang + <span class="nowrap">DIE ZEIT</span> testen
@@ -47,14 +47,11 @@
     </form>
 
     {% block gate_link -%}
-        {# this condition would only be possible inside an ESI or different cache buckets for logged in and not logged in users #}
-        {#% if not request.user -%#}
         <p class="gate__note">
             Sie sind bereits Digital-Abonnent?
-            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration" class="gate__link">
+            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration&entry_service=schranke_paid" class="gate__link">
                 Hier anmelden
             </a>
         </p>
-        {#% endif %#}
     {%- endblock %}
 </aside>

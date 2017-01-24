@@ -429,10 +429,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                          '.teaser-topic-variant__media',
                          '.breaking-news-banner',
                          '.article-lineage',
-                         '.js-truncate-region',
-                         '.partnerbox',
-                         '.volume-overview-teaser',
-                         '.centerpage-header'
+                         '.js-truncate-region'
                         ].join(),
                         'a[data-id]:not([data-wt-click])'
                     ],

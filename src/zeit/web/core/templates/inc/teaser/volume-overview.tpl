@@ -1,15 +1,17 @@
-{% for block in area.values()-%}
-    {% set volume = block | first_child %}
-    {% set href = '{0}{1}/{2:02d}/index'.format(request.route_url('home'), volume.year, volume.volume) %}
-    {% set packshot = volume.covers['printcover'] %}
-    {% set packshot_layout = module_layout %}
-    {% set tracking_slug = "volume-overview-teaser..{}.{}_{}".format(loop.index, '%02d' % volume.volume, volume.year) %}
+{% set volume = module | first_child %}
+{% set layout = 'teaser-{}'.format(module | get_layout) %}
+{% set href = '{0}{1}/{2:02d}/index'.format(request.route_url('home'), volume.year, volume.volume) %}
+{% set packshot = volume.covers['printcover'] %}
+{% set module_layout = layout %}
 
-    <a class="volume-overview-teaser__wrapper" href="{{ href }}" data-id="{{ tracking_slug }}">
+<aside class="{{ layout }}">
+    <a class="{{ layout }}__link" href="{{ href }}" data-ct-label="{{ '%02d_%d' | format(volume.volume, volume.year) }}">
         {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" %}
-        <div class="volume-overview-teaser__caption">
-            <p class="{{ module_layout }}__issue">{{ '%02d' % volume.volume }}/{{ volume.year }}</p>
-            <span class="{{ module_layout }}__cta"><span>Jetzt </span><span class="visually-hidden">Ausgabe {{ '%02d' % volume.volume }}/{{ volume.year }} </span> <span>lesen</span>
+        <div class="{{ layout }}__caption">
+            <p class="{{ layout }}__issue"><strong>{{ '%02d/%d' | format (volume.volume, volume.year) }}</strong></p>
+            <span class="{{ layout }}__cta">
+                Jetzt <span class="visually-hidden">Ausgabe {{ '%02d/%d' | format (volume.volume, volume.year) }}</span> lesen
+            </span>
         </div>
     </a>
-{% endfor %}
+</aside>

@@ -1,11 +1,11 @@
 import pyramid.threadlocal
-import pyramid.view
 import pytz
 import zc.iso8601.parse
 
 import zeit.content.image.interfaces
 import zeit.wysiwyg.html
 
+import zeit.web
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.core.view_image
@@ -41,8 +41,9 @@ def datetime_to_html(self, dt_string):
 zeit.wysiwyg.html.ConversionStep.datetime_to_html = datetime_to_html
 
 
-@pyramid.view.view_config(context=zeit.content.image.interfaces.IImage,
-                          name='@@raw')
+@zeit.web.view_config(
+    context=zeit.content.image.interfaces.IImage,
+    name='@@raw')
 class ImageView(zeit.web.core.view_image.Image):
     """Since zeit.wysiwyg.html.ImageStep.to_html insists on creating
     an URL that ends in '/@@raw', we need to oblige.

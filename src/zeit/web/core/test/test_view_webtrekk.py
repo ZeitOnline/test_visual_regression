@@ -656,30 +656,30 @@ def test_volume_overview_teaser_provides_expected_webtrekk_string(
     try:
         WebDriverWait(driver, 3).until(
             expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '.volume-overview-teaser__wrapper')))
+                (By.CSS_SELECTOR, '.volume-overview')))
     except TimeoutException:
-        assert False, 'volume-overview-teaser must be present'
+        assert False, 'volume-overview must be present'
 
     links = driver.find_elements_by_css_selector(
-        '.volume-overview-teaser__wrapper')
+        '.teaser-volume-overview')
     assert len(links) == 7
 
     links[0].click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'tablet.volume-overview-teaser..1.49_2014|')
+        'tablet.volume-overview.2.1.teaser-volume-overview.49_2014|')
     assert tracking_data.endswith('/2014/49/index')
 
     links[1].click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'tablet.volume-overview-teaser..2.52_2015|')
+        'tablet.volume-overview.2.2.teaser-volume-overview.52_2015|')
     assert tracking_data.endswith('/2015/52/index')
 
     links[2].click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'tablet.volume-overview-teaser..3.01_2016|')
+        'tablet.volume-overview.2.3.teaser-volume-overview.01_2016|')
     assert tracking_data.endswith('/2016/01/index')
 
 
@@ -693,15 +693,15 @@ def test_volume_teaser_in_article_provides_expected_webtrekk_string(
     try:
         WebDriverWait(driver, 3).until(
             expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '.zplus__banner a')))
+                (By.CSS_SELECTOR, '.zplus-badge__link')))
     except TimeoutException:
         assert False, 'link must be present'
 
-    link = driver.find_element_by_css_selector('.zplus__banner a')
+    link = driver.find_element_by_css_selector('.zplus-badge__link')
     link.click()
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
-        'tablet.volumeteaser.0...exklusiv_fuer_abonnenten|')
+        'tablet.articleheader.zplus-badge...exklusiv_fuer_abonnenten|')
 
 
 def test_coverless_volume_teaser_in_article_provides_expected_webtrekk_string(
@@ -716,17 +716,18 @@ def test_coverless_volume_teaser_in_article_provides_expected_webtrekk_string(
     try:
         WebDriverWait(driver, 3).until(
             expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '.zplus--coverless .zplus__banner a')))
+                (By.CSS_SELECTOR, '.zplus-badge__link')))
     except TimeoutException:
         assert False, 'link must be present'
 
-    link = driver.find_element_by_css_selector('.zplus__banner a')
+    link = driver.find_element_by_css_selector('.zplus-badge__link')
     print(link)
     link.click()
     tracking_data = driver.execute_script("return window.trackingData")
     print(tracking_data)
     assert tracking_data.startswith(
-        'tablet.volumeteaser_coverless.0...exklusiv_fuer_abonnenten|')
+        'tablet.articleheader.zplus-badge_coverless'
+        '...exklusiv_fuer_abonnenten|')
 
 
 def test_volume_header_provides_expected_webtrekk_string(

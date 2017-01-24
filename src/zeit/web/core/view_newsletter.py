@@ -1,17 +1,16 @@
-import pyramid.view
-
-import zeit.cms.workflow.interfaces
 import zeit.newsletter.interfaces
 
-import zeit.web.core.block
+import zeit.web
 import zeit.web.core.view
 
 
-@pyramid.view.view_config(context=zeit.newsletter.interfaces.INewsletter,
-                          renderer='dav://newsletter.html')
-@pyramid.view.view_config(context=zeit.newsletter.interfaces.INewsletter,
-                          request_param='format=txt',
-                          renderer='dav://newsletter_text.html')
+@zeit.web.view_config(
+    context=zeit.newsletter.interfaces.INewsletter,
+    renderer='dav://newsletter.html')
+@zeit.web.view_config(
+    context=zeit.newsletter.interfaces.INewsletter,
+    request_param='format=txt',
+    renderer='dav://newsletter_text.html')
 class Newsletter(zeit.web.core.view.Base):
 
     def __call__(self):

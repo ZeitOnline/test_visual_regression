@@ -43,7 +43,6 @@ import zope.testbrowser.wsgi
 import zeit.content.image.interfaces
 import zeit.solr.interfaces
 
-import zeit.web.core
 import zeit.web.core.application
 import zeit.web.core.routing
 import zeit.web.core.utils
