@@ -2692,7 +2692,7 @@ def test_d17_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert browser.cssselect('*[data-taglogo="true"]')
     assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
-    assert len(browser.cssselect('.teaser-small__kicker-logo--tag')) == 3
+    assert len(browser.cssselect('.teaser-small__kicker-logo--tag')) == 4
     assert len(browser.cssselect(
         '.teaser-fullwidth-column__kicker-logo--tag')) == 1
     assert len(browser.cssselect(
@@ -2734,3 +2734,12 @@ def test_d17_icon_is_not_display_on_zett_teaser(monkeypatch, testbrowser):
         'teaser-small__kicker-logo--zett + .teaser-small__kicker-logo--tag')
     assert not browser.cssselect(
         '.teaser-small__kicker-logo--tag + teaser-small__kicker-logo--zett')
+
+
+def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True }.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    query = ('.cp-region--solo + .cp-region--duo article:first-child '
+             '.teaser-small__kicker-logo--tag')
+    assert browser.cssselect(query)
