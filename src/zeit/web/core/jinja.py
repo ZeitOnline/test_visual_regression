@@ -62,7 +62,7 @@ class Environment(jinja2.environment.Environment):
         traceback = make_jinja_traceback(exc_info, source_hint)
         exc_info = traceback.exc_info
         path = get_current_request_path()
-        log.error('Error rendering %s', path, exc_info=exc_info)
+        log.error('Error while rendering %s', path, exc_info=exc_info)
 
         group_by = None
         if exc_info[0] is jinja2.exceptions.UndefinedError:
