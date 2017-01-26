@@ -135,7 +135,7 @@ def zplus_content(content):
     return (access == 'abo')
 
 
-@zeit.web.register_test
+@zeit.web.register_filter
 def tag_with_logo_content(content):
     if toggles('tag_logos'):
         logotags = [('D17', 'tag-d17')]

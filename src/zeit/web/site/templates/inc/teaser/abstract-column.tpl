@@ -16,15 +16,15 @@
     <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content, 'zplus' if teaser is zplus_content) }}">
         {% block kicker_logo scoped %}
             {{ self.zplus_kicker_logo() }}
-            {% if teaser is tag_with_logo_content and teaser is zco_content and teaser is not zplus_content %}
-                {{ lama.use_svg_icon('tag-d17', self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
+            {% if tag_with_logo_content and teaser is zco_content and teaser is not zplus_content %}
+                {{ lama.use_svg_icon(tag_with_logo_content, self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
                 {% if area.kind != 'zco-parquet' %}
                 {{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}
                 {% endif %}
             {% elif teaser is zco_content and area.kind != 'zco-parquet' %}
                 {{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}
-            {% elif teaser is tag_with_logo_content and teaser is not zplus_content %}
-                {{ lama.use_svg_icon('tag-d17', self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
+            {% elif tag_with_logo_content and teaser is not zplus_content %}
+                {{ lama.use_svg_icon(tag_with_logo_content, self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
             {% endif %}
         {% endblock %}
         {{ teaser.teaserSupertitle or teaser.supertitle -}}
