@@ -468,7 +468,7 @@ class LazyProxy(object):
             whitelist = zope.component.getUtility(
                 zeit.cms.tagging.interfaces.IWhitelist)
             keywords = zip(self.__proxy__.get('keyword'),
-                self.__proxy__.get('keyword_id'))
+                           self.__proxy__.get('keyword_id'))
             for label, url_value in keywords:
                 taglist = whitelist.search(label)
                 tag = filter(lambda x: x.url_value == url_value, taglist)

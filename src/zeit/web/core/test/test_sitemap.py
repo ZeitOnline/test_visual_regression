@@ -87,7 +87,6 @@ def test_gsitemap_page_does_not_break_without_image_caption(
         'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}]
     monkeypatch.setattr(zeit.web.core.image.Image, 'caption', None)
     browser = testbrowser('/gsitemaps/index.xml?p=1')
-    print browser.contents
     xml = lxml.etree.fromstring(browser.contents)
     ns = 'http://www.google.com/schemas/sitemap-image/1.1'
     assert (
