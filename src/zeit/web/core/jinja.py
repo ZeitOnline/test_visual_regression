@@ -32,11 +32,6 @@ log = logging.getLogger(__name__)
 p_log = logging.getLogger('profile')
 
 
-# The function to create jinja traceback objects.  This is dynamically
-# imported on the first exception in handle_exception().
-_make_traceback = None
-
-
 def finalize(expr):
     """Custom jinja finalizer function to implicitly hide `None` expressions"""
     if expr is None:
@@ -87,18 +82,9 @@ class Environment(jinja2.environment.Environment):
         if issubclass(exc_info[0], pyramid.httpexceptions.HTTPException):
             raise exc_info[0], exc_info[1], exc_info[2]
 
-        global _make_traceback
-        if _make_traceback is None:
-            from jinja2.debug import make_traceback as _make_traceback
-        traceback = _make_traceback(exc_info, source_hint)
+        traceback = make_jinja_traceback(exc_info, source_hint)
         exc_info = traceback.standard_exc_info
-
-        path = '<unknown>'
-        try:
-            request = pyramid.threadlocal.get_current_request()
-            path = request.path_info
-        except:
-            pass
+        path = get_current_request_path()
         log.error('Error rendering %s', path, exc_info=exc_info)
 
         group_by = None
@@ -124,6 +110,25 @@ class Environment(jinja2.environment.Environment):
 
     def getattr(self, obj, attribute):
         return self.__getsth__('getattr', obj, attribute)
+
+
+def get_current_request_path():
+    try:
+        request = pyramid.threadlocal.get_current_request()
+        return request.path_info
+    except:
+        return '<unknown>'
+
+
+def make_jinja_traceback(exc_info, source_hint=None):
+    global _make_traceback
+    if _make_traceback is None:
+        from jinja2.debug import make_traceback as _make_traceback
+    return _make_traceback(exc_info, source_hint)
+
+# The function to create jinja traceback objects.  This is dynamically
+# imported when the first exception occurs, since it incurs some overhead.
+_make_traceback = None
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):
