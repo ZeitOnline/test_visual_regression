@@ -12,6 +12,10 @@
       <badge>map</badge>
       <badge>video</badge>
     </badges>
+    <rankedTags>
+      <tag type="topic" score="10" uuid="6d2eb253-f131-4181-b667-8a9033ac2a9e" url_value="d17">D17</tag>
+      <tag type="topic" score="9" uuid="c151f61d-da76-4f38-95c6-6f04f4a41c1f" url_value="wirtschaftspolitik">Wirtschaftspolitik</tag>
+    </rankedTags>
     <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
       <display_name>Anne Mustermann</display_name>
       <location>Berlin</location>
