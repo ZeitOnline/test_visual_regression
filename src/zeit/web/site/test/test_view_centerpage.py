@@ -2713,7 +2713,7 @@ def test_d17_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zplus + .teaser-small__kicker-logo--tag')
     assert not browser.cssselect(
-        '.teaser-small__kicker-logo--tag + teaser-small__kicker-logo--zplus')
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zplus')
 
 
 def test_d17_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
@@ -2723,7 +2723,7 @@ def test_d17_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zmo + .teaser-small__kicker-logo--tag')
     assert not browser.cssselect(
-        '.teaser-small__kicker-logo--tag + teaser-small__kicker-logo--zmo')
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zmo')
 
 
 def test_d17_icon_is_not_display_on_zett_teaser(monkeypatch, testbrowser):
@@ -2733,7 +2733,7 @@ def test_d17_icon_is_not_display_on_zett_teaser(monkeypatch, testbrowser):
     assert not browser.cssselect(
         'teaser-small__kicker-logo--zett + .teaser-small__kicker-logo--tag')
     assert not browser.cssselect(
-        '.teaser-small__kicker-logo--tag + teaser-small__kicker-logo--zett')
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zett')
 
 
 def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
