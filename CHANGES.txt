@@ -10,7 +10,7 @@ POSTDEPLOY
 3.34 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Include rawtext in webtrekk block tracking
 
 
 3.33 (2017-01-26)
