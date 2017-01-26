@@ -5,6 +5,7 @@ import sys
 import pytest
 import requests
 import venusian
+import pyramid.exceptions
 
 import zeit.web.magazin.view_centerpage
 import zeit.web.core.decorator
@@ -198,3 +199,8 @@ def test_faulty_jinja_test_should_not_bother_friedbert(debug_application):
     venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c4',))
     tpl = env.from_string(u'foo {{ 42 is bad }}')
     assert tpl.render().strip() == 'foo'
+
+
+def test_host_restrictions_should_not_be_allowed_on_view_defaults():
+    with pytest.raises(pyramid.exceptions.ConfigurationError):
+        zeit.web.core.decorator.view_defaults(host_restriction='foo')
