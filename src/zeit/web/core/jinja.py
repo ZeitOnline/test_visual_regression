@@ -32,29 +32,6 @@ log = logging.getLogger(__name__)
 p_log = logging.getLogger('profile')
 
 
-def finalize(expr):
-    """Custom jinja finalizer function to implicitly hide `None` expressions"""
-    if expr is None:
-        return u''
-    return expr
-
-
-class Undefined(jinja2.runtime.Undefined):
-    """Custom jinja Undefined class that represents unresolvable template
-    statements and expressions. It ignores undefined errors, ensures it is
-    printable and returns further Undefined objects if indexed or called.
-    """
-
-    def __html__(self):
-        return jinja2.utils.Markup()
-
-    @jinja2.utils.internalcode
-    def _fail_with_undefined_error(self, *args, **kw):
-        pass
-
-    __getattr__ = __getitem__ = __call__ = lambda self, *args: self.__class__()
-
-
 class Interrupt(BaseException):
     """Custom error class to deliberately escape fault-tolerant rendering."""
 
@@ -112,6 +89,22 @@ class Environment(jinja2.environment.Environment):
         return self.__getsth__('getattr', obj, attribute)
 
 
+class Undefined(jinja2.runtime.Undefined):
+    """Custom jinja Undefined class that represents unresolvable template
+    statements and expressions. It ignores undefined errors, ensures it is
+    printable and returns further Undefined objects if indexed or called.
+    """
+
+    def __html__(self):
+        return jinja2.utils.Markup()
+
+    @jinja2.utils.internalcode
+    def _fail_with_undefined_error(self, *args, **kw):
+        pass
+
+    __getattr__ = __getitem__ = __call__ = lambda self, *args: self.__class__()
+
+
 def get_current_request_path():
     try:
         request = pyramid.threadlocal.get_current_request()
@@ -129,6 +122,13 @@ def make_jinja_traceback(exc_info, source_hint=None):
 # The function to create jinja traceback objects.  This is dynamically
 # imported when the first exception occurs, since it incurs some overhead.
 _make_traceback = None
+
+
+def finalize(expr):
+    """Custom jinja finalizer function to implicitly hide `None` expressions"""
+    if expr is None:
+        return u''
+    return expr
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):
