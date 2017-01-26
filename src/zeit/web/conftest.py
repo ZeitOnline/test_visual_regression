@@ -376,20 +376,6 @@ def workingcopy(application, zodb, request):
     request.addfinalizer(lambda: site.__exit__(None, None, None))
 
 
-# XXX Toggling the exception view in an existing application would be much more
-# convenient than having to create an entirely new one just for that purpose,
-# but I can't find a way to temporarily de-register a pyramid view.
-@pytest.fixture
-def debug_application(app_settings, request):
-    plone.testing.zca.pushGlobalRegistry()
-    zope.browserpage.metaconfigure.clear()
-    request.addfinalizer(plone.testing.zca.popGlobalRegistry)
-    app_settings = app_settings.copy()
-    app_settings['jinja2.environment'] = 'zeit.web.core.jinja.Environment'
-    app_settings['jinja2.show_exceptions'] = False
-    return zeit.web.core.application.Application()({}, **app_settings)
-
-
 @pytest.fixture
 def dummy_request(application, request):
     req = pyramid.testing.DummyRequest(is_xhr=False)

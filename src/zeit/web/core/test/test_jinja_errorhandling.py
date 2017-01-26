@@ -150,7 +150,7 @@ def do_things(arg, kw1=42, kw2=45):
     return arg * (kw2 - kw1)
 
 
-def test_safeguarded_jinja_modifier_should_preserve_func(debug_application):
+def test_safeguarded_jinja_modifier_should_preserve_func():
     env = zeit.web.core.jinja.Environment()
     venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c1',))
     tpl = env.from_string(u'{{ "foo" | do_things }}')
@@ -167,7 +167,7 @@ def faulty_filter(*args):
     1 / 0
 
 
-def test_faulty_jinja_filter_should_not_bother_friedbert(debug_application):
+def test_faulty_jinja_filter_should_not_bother_friedbert():
     env = zeit.web.core.jinja.Environment()
     venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c2',))
     tpl = env.from_string(u'foo {{ 42 | bad }}')
@@ -179,7 +179,7 @@ def faulty_global(*args):
     1 / 0
 
 
-def test_faulty_jinja_global_should_not_bother_friedbert(debug_application):
+def test_faulty_jinja_global_should_not_bother_friedbert():
     env = zeit.web.core.jinja.Environment()
     venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c3',))
     tpl = env.from_string(u'foo {{ bad(42) }}')
@@ -191,7 +191,7 @@ def faulty_test(*args):
     1 / 0
 
 
-def test_faulty_jinja_test_should_not_bother_friedbert(debug_application):
+def test_faulty_jinja_test_should_not_bother_friedbert():
     env = zeit.web.core.jinja.Environment()
     venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c4',))
     tpl = env.from_string(u'foo {{ 42 is bad }}')
