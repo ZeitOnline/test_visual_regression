@@ -60,7 +60,7 @@ class Environment(jinja2.environment.Environment):
             raise exc_info[0], exc_info[1], exc_info[2]
 
         traceback = make_jinja_traceback(exc_info, source_hint)
-        exc_info = traceback.standard_exc_info
+        exc_info = traceback.exc_info
         path = get_current_request_path()
         log.error('Error rendering %s', path, exc_info=exc_info)
 
