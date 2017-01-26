@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3596: Add logos on kicker for some keywords (i.e. D17)
 
+- MAINT: Include rawtext in webtrekk block tracking
+
 
 3.33 (2017-01-26)
 -----------------
