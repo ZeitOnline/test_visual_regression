@@ -229,7 +229,6 @@ def app_settings(mockserver):
         'sso_url': 'http://sso.example.org',
         'sso_cookie': 'my_sso_cookie',
         'sso_rawr_secret': 'my_rawr_secret',
-        'jinja2.show_exceptions': True,
         'jinja2.environment': 'jinja2.environment.Environment',
         'jinja2.enable_profiler': False,
         'use_wesgi': True,
