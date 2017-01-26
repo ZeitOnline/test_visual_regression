@@ -1,9 +1,11 @@
 from __future__ import absolute_import
 
+from jinja2._compat import string_types
 import StringIO
 import cProfile
 import datetime
 import email.utils
+import inspect
 import logging
 import os
 import pkg_resources
@@ -13,6 +15,7 @@ import urlparse
 
 import bugsnag
 import jinja2.environment
+import jinja2.exceptions
 import jinja2.ext
 import jinja2.loaders
 import jinja2.nodes
@@ -100,15 +103,82 @@ class Undefined(jinja2.runtime.Undefined):
 
     @jinja2.utils.internalcode
     def _fail_with_undefined_error(self, *args, **kw):
-        pass
+        """Logs Undefined errors with traceback. Note that Jinja only calls
+        this for "second-level" Undefined situations, i.e. when a template
+        tries to access an attribute of an already Undefined object. This means
+        ``{{ context.nonexistent }}`` is silent, but we'll be called for
+        ``{{ context.nonexistent.thing }}``.
+        """
+        tb = make_jinja_traceback((
+            self._undefined_exception,
+            self._undefined_exception(self._error_message()),
+            Traceback.from_current_stack()))
+        log.warning(
+            'Undefined while rendering %s', get_current_request_path(),
+            exc_info=tb.exc_info)
+        return self.__class__()
 
-    __getattr__ = __getitem__ = __call__ = lambda self, *args: self.__class__()
+    def _error_message(self):
+        from jinja2.utils import missing
+        if zeit.cms.interfaces.ICMSContent.providedBy(self._undefined_obj):
+            make_repr = cmscontent_repr
+        else:
+            make_repr = jinja2.utils.object_type_repr
+        if self._undefined_hint is None:
+            if self._undefined_obj is missing:
+                hint = '%r is undefined' % self._undefined_name
+            elif not isinstance(self._undefined_name, string_types):
+                hint = '%s has no element %r' % (
+                    make_repr(self._undefined_obj), self._undefined_name)
+            else:
+                hint = '%r has no attribute %r' % (
+                    make_repr(self._undefined_obj), self._undefined_name)
+        else:
+            hint = self._undefined_hint
+        return hint
+
+    # The superclass assigns these method by copying the function, too,
+    # so they don't pick up our overriden method by themselves unfortunately.
+    __getattr__ = __getitem__ = __call__ = _fail_with_undefined_error
+
+
+def cmscontent_repr(content):
+    return unicode(content).encode('ascii', 'backslashreplace')
+
+
+class Traceback(object):
+    """Fakes just enough of the types.TracebackType API to satisfy
+    jinja2.utils.make_traceback.
+
+    Inspired by <https://stackoverflow.com/a/13210518>.
+    """
+
+    def __init__(self, tb_frame, tb_lineno, tb_next):
+        self.tb_frame = tb_frame
+        self.tb_lineno = tb_lineno
+        self.tb_next = tb_next
+
+    @classmethod
+    def from_current_stack(cls):
+        """Converts inspect.stack() into chained Traceback objects."""
+        # Skip inner frames until Undefined._fail_with_undefined_error()
+        stack = inspect.stack(0)[3:]
+        tb = None
+        inside_template = True
+        for item in stack:
+            tb = cls(item[0], item[2], tb)
+            if not inside_template:
+                break
+            if not item[0].f_globals.get('__jinja_template__'):
+                # make_jinja_traceback requires one last non-template frame.
+                inside_template = False
+        return tb
 
 
 def get_current_request_path():
     try:
         request = pyramid.threadlocal.get_current_request()
-        return request.path_info
+        return request.path_info.encode('ascii', 'backslashreplace')
     except:
         return '<unknown>'
 
