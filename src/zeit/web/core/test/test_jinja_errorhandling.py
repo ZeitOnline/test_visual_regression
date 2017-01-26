@@ -6,10 +6,8 @@ import pytest
 import requests
 import venusian
 
-import zeit.web.magazin.view_centerpage
 import zeit.web.core.decorator
-import zeit.web.core.template
-import zeit.web.core.view_centerpage
+import zeit.web.core.jinja
 
 
 class Raiser(object):
