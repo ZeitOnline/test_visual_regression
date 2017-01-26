@@ -101,7 +101,9 @@ def test_gsitemap_newssite(testbrowser):
     solr.results = [{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'crystal-meth-nancy-schmidt/'],
-        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'},
+        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
+        'keyword': ['Schwangerschaft', 'Konsumverhalten'],
+        'keyword_id': ['schwangerschaft', 'konsumverhalten']},
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'}]
     browser = testbrowser('/gsitemaps/newsitemap.xml')
     assert (browser.document.xpath('//url/loc')[0].text ==
@@ -127,8 +129,7 @@ def test_gsitemap_newssite(testbrowser):
         'Big Data: Schwanger ohne digitale Spuren')
     assert (
         xml.xpath('//n:news/n:keywords', namespaces=ns)[0].text ==
-        u'Schwangerschaft, Konsumverhalten, Werbung, Tracking, Facebook, '
-        u'Behörde, Minnesota, USA, New York, Digital, Datenschutz')
+        u'Schwangerschaft, Konsumverhalten, Digital, Datenschutz')
     assert xml.xpath('//image:image', namespaces=ns)[0] is not None
     assert (
         xml.xpath(
