@@ -341,7 +341,8 @@ class view_config(pyramid.view.view_config):  # NOQA
 class view_defaults(pyramid.view.view_defaults):  # NOQA
 
     def __init__(self, **settings):
-        if 'host_restriction' in settings.keys():
-            raise pyramid.exceptions.ConfigurationError(
-                "Host restrictions must not be configured in view_defaults.")
+        for key in settings.keys():
+            if key in view_config.__global_defaults__.keys():
+                raise pyramid.exceptions.ConfigurationError(
+                    "{} must not be configured in view_defaults.".format(key))
         super(view_defaults, self).__init__(**settings)
