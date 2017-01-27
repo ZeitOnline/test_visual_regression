@@ -20,4 +20,5 @@
   <update_signals>true</update_signals>
   <overscrolling>true</overscrolling>
   <tag_logos>true</tag_logos>
+  <zplus_badge_gray>true</zplus_badge_gray>
 </features>
