@@ -1713,13 +1713,13 @@ def test_contentad_is_rendered_once_on_article_pages(testbrowser):
     browser = testbrowser('/zeit-online/article/infoboxartikel')
     assert len(browser.cssselect(selector)) == 1
 
-    browser = testbrowser('/zeit-online/article/zeit')
+    browser = testbrowser('/zeit-online/article/fischer')
     assert len(browser.cssselect(selector)) == 1
 
-    browser = testbrowser('/zeit-online/article/zeit/seite-3')
+    browser = testbrowser('/zeit-online/article/fischer/seite-2')
     assert len(browser.cssselect(selector)) == 1
 
-    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    browser = testbrowser('/zeit-online/article/fischer/komplettansicht')
     assert len(browser.cssselect(selector)) == 1
 
 

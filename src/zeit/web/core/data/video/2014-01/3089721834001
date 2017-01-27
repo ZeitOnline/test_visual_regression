@@ -25,10 +25,10 @@
         <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
         <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Gesellschaft</attribute>
         <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
-        <attribute name="thumbnail" ns="http://namespaces.zeit.de/CMS/document">http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/558/18140073001_3090355980001_held.jpg?pubId=18140073001</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/document" name="thumbnail">file://%DATA%/zeit-online/video/thumbnail.jpg</attribute>
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">video</attribute>
         <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:2efecae1-48f0-409b-a1b3-b7daee8b835f}</attribute>
-        <attribute name="video_still" ns="http://namespaces.zeit.de/CMS/document">http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/201401/938/18140073001_3090367483001_held.jpg?pubId=18140073001</attribute>
+	<attribute ns="http://namespaces.zeit.de/CMS/document" name="video_still">file://%DATA%/zeit-online/video/still.jpg</attribute>
         <attribute name="video_still_copyright" ns="http://namespaces.zeit.de/CMS/document">ZEIT Online</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
         <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">

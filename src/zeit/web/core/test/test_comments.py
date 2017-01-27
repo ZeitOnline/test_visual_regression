@@ -965,3 +965,15 @@ def test_thread_template_should_render_adplace(
         'zeit.web.core:templates/inc/comments/thread.html', view=view)
     assert browser.cssselect('.comment__ad')
     assert browser.cssselect('.comment__ad script')
+
+
+def test_smoke_comment_admin(testbrowser, application):
+    extensions = application.zeit_app.config.registry.getUtility(
+        pyramid.interfaces.IRequestExtensions)
+    with mock.patch.dict(extensions.descriptors, {
+            'user': pyramid.decorator.reify(lambda x: {
+                'ssoid': 123,
+                'has_community_data': True,
+                'uid': 123,
+            })}):
+        testbrowser('/admin/test-comments')
