@@ -561,7 +561,7 @@ def test_videostage_video_should_play(selenium_driver, testserver):
         '#video-stage .video-large figure')
     videolink.click()
     try:
-        player = WebDriverWait(driver, 10).until(
+        player = WebDriverWait(driver, 20).until(
             expected_conditions.presence_of_element_located(
                 (By.CSS_SELECTOR, 'video#player-1953013471001_html5_api'))
         )
