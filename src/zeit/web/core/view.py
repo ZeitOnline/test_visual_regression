@@ -236,11 +236,17 @@ class Base(object):
 
     @zeit.web.reify
     def advertising_enabled(self):
-        return getattr(self.context, 'banner', False)
+        if self.context.banner is False:
+            return False
+        else:
+            return True
 
     @zeit.web.reify
     def content_ad_enabled(self):
-        return getattr(self.context, 'banner_content', False)
+        if self.context.banner_content is False:
+            return False
+        else:
+            return True
 
     def banner_toggles(self, name):
         return None
