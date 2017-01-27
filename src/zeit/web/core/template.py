@@ -135,6 +135,20 @@ def zplus_content(content):
     return (access == 'abo')
 
 
+@zeit.web.register_filter
+def tag_with_logo_content(content):
+    if toggles('tag_logos'):
+        logotags = [('D17', 'tag-d17')]
+        try:
+            for keyword in content.keywords:
+                for label, logo in logotags:
+                    if keyword.label == label:
+                        return logo
+        except AttributeError:
+            pass
+    return False
+
+
 @zeit.web.register_test
 def zett_content(content):
     return zeit.content.link.interfaces.ILink.providedBy(
