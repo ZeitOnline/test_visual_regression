@@ -961,6 +961,39 @@ def test_notfication_after_paywall_registration_renders_correctly(
                         '?C1-Meter-Status=always_paid')
 
 
+def test_notfication_after_account_confirmation_renders_correctly(
+        testserver, selenium_driver):
+    driver = selenium_driver
+    url_hash = '#success-confirm-account'
+    text = u'Ihr Konto wurde best\xe4tigt. Sie sind jetzt angemeldet.'
+    # request some arbitrary article page
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    driver.add_cookie({
+        'name': 'my_sso_cookie',
+        'value': 'just be present',
+    })
+    with mock.patch('zeit.web.core.security.get_user_info') as get_user:
+        get_user.return_value = {
+            'ssoid': '123',
+            'mail': 'test@example.org',
+            'name': 'jrandom',
+        }
+        # request the actual dashboard page
+        driver.get('%s/konto#success-confirm-account' % testserver.url)
+        try:
+            # check for notification element
+            WebDriverWait(driver, 1).until(
+                expected_conditions.presence_of_element_located((
+                    By.CLASS_NAME, 'notification--success')))
+        except TimeoutException:
+            assert False, 'Timeout notification %s' % driver.current_url
+        else:
+            notification = driver.find_element_by_class_name(
+                'notification--success')
+            assert text == notification.text
+            assert url_hash not in driver.current_url
+
+
 def test_http_header_should_contain_c1_debug_echoes(testserver):
     response = requests.get(
         '%s/zeit-online/article/simple' % testserver.url,
