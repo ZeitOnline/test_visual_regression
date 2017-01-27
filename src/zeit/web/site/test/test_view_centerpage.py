@@ -2336,7 +2336,7 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
         'date_first_released': '2012-02-22T14:36:32.452398+00:00'}, {
             'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
             'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                              'harald-martenstein-wideformat')],
+                               'harald-martenstein-wideformat')],
             'image-fill-color': [u''], 'teaserText': 'text',
             'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
             'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
