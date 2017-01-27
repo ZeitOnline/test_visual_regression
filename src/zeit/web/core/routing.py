@@ -217,6 +217,7 @@ class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
             matchers.append(matcher)
         return matchers
 
+
 BLACKLIST = BlacklistSource()(None)
 
 

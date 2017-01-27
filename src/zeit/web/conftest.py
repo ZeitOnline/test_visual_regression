@@ -229,7 +229,6 @@ def app_settings(mockserver):
         'sso_url': 'http://sso.example.org',
         'sso_cookie': 'my_sso_cookie',
         'sso_rawr_secret': 'my_rawr_secret',
-        'jinja2.show_exceptions': True,
         'jinja2.environment': 'jinja2.environment.Environment',
         'jinja2.enable_profiler': False,
         'use_wesgi': True,
@@ -374,20 +373,6 @@ def workingcopy(application, zodb, request):
     interaction.__enter__()
     request.addfinalizer(lambda: interaction.__exit__(None, None, None))
     request.addfinalizer(lambda: site.__exit__(None, None, None))
-
-
-# XXX Toggling the exception view in an existing application would be much more
-# convenient than having to create an entirely new one just for that purpose,
-# but I can't find a way to temporarily de-register a pyramid view.
-@pytest.fixture
-def debug_application(app_settings, request):
-    plone.testing.zca.pushGlobalRegistry()
-    zope.browserpage.metaconfigure.clear()
-    request.addfinalizer(plone.testing.zca.popGlobalRegistry)
-    app_settings = app_settings.copy()
-    app_settings['jinja2.environment'] = 'zeit.web.core.jinja.Environment'
-    app_settings['jinja2.show_exceptions'] = False
-    return zeit.web.core.application.Application()({}, **app_settings)
 
 
 @pytest.fixture

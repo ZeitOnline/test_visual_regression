@@ -2,14 +2,15 @@
 import exceptions
 import sys
 
+import plone.testing.zca
 import pytest
 import requests
 import venusian
+import zope.browserpage.metaconfigure
 
-import zeit.web.magazin.view_centerpage
+import zeit.web.core.application
 import zeit.web.core.decorator
-import zeit.web.core.template
-import zeit.web.core.view_centerpage
+import zeit.web.core.jinja
 
 
 class Raiser(object):
@@ -152,7 +153,7 @@ def do_things(arg, kw1=42, kw2=45):
     return arg * (kw2 - kw1)
 
 
-def test_safeguarded_jinja_modifier_should_preserve_func(debug_application):
+def test_safeguarded_jinja_modifier_should_preserve_func():
     env = zeit.web.core.jinja.Environment()
     venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c1',))
     tpl = env.from_string(u'{{ "foo" | do_things }}')
@@ -169,7 +170,7 @@ def faulty_filter(*args):
     1 / 0
 
 
-def test_faulty_jinja_filter_should_not_bother_friedbert(debug_application):
+def test_faulty_jinja_filter_should_not_bother_friedbert():
     env = zeit.web.core.jinja.Environment()
     venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c2',))
     tpl = env.from_string(u'foo {{ 42 | bad }}')
@@ -181,7 +182,7 @@ def faulty_global(*args):
     1 / 0
 
 
-def test_faulty_jinja_global_should_not_bother_friedbert(debug_application):
+def test_faulty_jinja_global_should_not_bother_friedbert():
     env = zeit.web.core.jinja.Environment()
     venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c3',))
     tpl = env.from_string(u'foo {{ bad(42) }}')
@@ -193,8 +194,30 @@ def faulty_test(*args):
     1 / 0
 
 
-def test_faulty_jinja_test_should_not_bother_friedbert(debug_application):
+def test_faulty_jinja_test_should_not_bother_friedbert():
     env = zeit.web.core.jinja.Environment()
     venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c4',))
     tpl = env.from_string(u'foo {{ 42 is bad }}')
+    assert tpl.render().strip() == 'foo'
+
+
+# XXX Is there an easier/faster way to set up an Application with different
+# settings than copying the application_session fixture wholesale?
+@pytest.fixture
+def error_swallowing_application(app_settings, request):
+    plone.testing.zca.pushGlobalRegistry()
+    zope.browserpage.metaconfigure.clear()
+    request.addfinalizer(plone.testing.zca.popGlobalRegistry)
+    app_settings = app_settings.copy()
+    app_settings['jinja2.environment'] = 'zeit.web.core.jinja.Environment'
+    factory = zeit.web.core.application.Application()
+    app = factory({}, **app_settings)
+    app.zeit_app = factory
+    return app
+
+
+def test_integration_jinja_environment_is_configured_for_ignoring_errors(
+        error_swallowing_application):
+    env = error_swallowing_application.zeit_app.jinja_env
+    tpl = env.from_string(u'foo {{ 42 | bad }}')
     assert tpl.render().strip() == 'foo'
