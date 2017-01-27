@@ -2204,7 +2204,7 @@ def test_overscrolling_is_working_as_expected(
 
 
 def test_overscrolling_is_turned_off_by_configuration(
-    monkeypatch, selenium_driver, testserver):
+        monkeypatch, selenium_driver, testserver):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'overscrolling': True}.get)
     driver = selenium_driver
