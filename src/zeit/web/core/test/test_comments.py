@@ -995,6 +995,6 @@ def test_smoke_post_on_article(testserver, application):
             })}):
 
         resp = requests.post(
-                '{}/zeit-online/article/01'.format(testserver.url),
-                allow_redirects=False)
+            '{}/zeit-online/article/01'.format(testserver.url),
+            allow_redirects=False)
         assert resp.status_code == 303
