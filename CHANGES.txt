@@ -7,7 +7,7 @@ POSTDEPLOY
 - 3.31 PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
 
 
-3.34 (unreleased)
+3.34 (2017-01-27)
 -----------------
 
 - ZON-3596: Add logos on kicker for some keywords (i.e. D17)
