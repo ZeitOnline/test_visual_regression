@@ -73,11 +73,12 @@ class Environment(jinja2.environment.Environment):
     areas can be ommited from the rendered output.
     """
 
-    def __init__(self, undefined=Undefined, **kw):
-        super(Environment, self).__init__(undefined=undefined, **kw)
-        self.filters = zeit.web.core.utils.defaultdict(undefined, self.filters)
-        self.globals = zeit.web.core.utils.defaultdict(undefined, self.globals)
-        self.tests = zeit.web.core.utils.defaultdict(undefined, self.tests)
+    def __init__(self, **kw):
+        kw['undefined'] = Undefined
+        super(Environment, self).__init__(**kw)
+        self.filters = zeit.web.core.utils.defaultdict(Undefined, self.filters)
+        self.globals = zeit.web.core.utils.defaultdict(Undefined, self.globals)
+        self.tests = zeit.web.core.utils.defaultdict(Undefined, self.tests)
 
     def handle_exception(
             self, exc_info=None, rendered=False, source_hint=None):
