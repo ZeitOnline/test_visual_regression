@@ -552,23 +552,22 @@ def test_videostage_series_select_should_navigate_away(
     assert '/serie/rekorder' in driver.current_url
 
 
-def test_videostage_video_should_play(selenium_driver, testserver):
+def test_videostage_thumbnail_should_be_replaced(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/video-stage' % testserver.url)
     article = driver.find_element_by_css_selector(
         '#video-stage .video-large')
     videolink = driver.find_element_by_css_selector(
         '#video-stage .video-large figure')
+    thumbnail = article.find_element_by_css_selector(
+        '.video-thumbnail__media-item')
     videolink.click()
     try:
-        player = WebDriverWait(driver, 20).until(
-            expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, 'video#player-1953013471001_html5_api'))
-        )
-        assert article.get_attribute(
-            'data-video-id') in player.get_attribute('src')
+        WebDriverWait(driver, 10).until(
+            expected_conditions.staleness_of(thumbnail))
+        assert True
     except TimeoutException:
-        assert False, 'Video not visible with 10 seconds'
+        assert False, 'Thumbnail not replaced by video'
 
 
 def test_videostage_has_zon_svg_logo(testbrowser):
