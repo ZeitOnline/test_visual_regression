@@ -55,7 +55,8 @@ $layout: ".teaser-square"
 		&--zco
 			@extend %teaser-kicker--zco
 			color: #fff
-	article[data-zplus] &__kicker
+	article[data-zplus] &__kicker,
+	article[data-taglogo] &__kicker
 		align-items: center
 		display: flex
 	&__kicker-logo
@@ -71,6 +72,9 @@ $layout: ".teaser-square"
 			@extend %teaser-kicker-logo--liveblog-closed
 		&--zplus
 			@extend %teaser-kicker-logo--zplus-xs
+		&--tag
+			@extend %teaser-kicker-logo--tag
+			color: inherit
 	&__series-label
 		margin-bottom: 0
 		&:after
