@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-3672: Make premium order links configurable
 
+- OPS-494: Log Undefined errors, and log ICMSContent with their uniqueId
+
 
 3.34 (2017-01-27)
 -----------------
