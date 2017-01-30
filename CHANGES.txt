@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - OPS-495: Configure our custom error swallowing Jinja enviroment properly
 
+- ZON-3672: Make premium order links configurable
+
 
 3.34 (2017-01-27)
 -----------------
