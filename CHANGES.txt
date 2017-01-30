@@ -10,7 +10,7 @@ POSTDEPLOY
 3.36 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3629: Add property overscrolling to view 
 
 
 3.35 (2017-01-30)
