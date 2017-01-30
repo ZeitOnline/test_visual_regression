@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-3672: Make premium order links configurable
 
+- FIX: Register keyword redirect views properly 
+
 
 3.34 (2017-01-27)
 -----------------
