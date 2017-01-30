@@ -7,7 +7,7 @@ POSTDEPLOY
 - 3.31 PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
 
 
-3.35 (unreleased)
+3.35 (2017-01-30)
 -----------------
 
 - OPS-494: Make POST comment work after ZON-2284
