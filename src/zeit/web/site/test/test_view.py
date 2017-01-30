@@ -41,16 +41,22 @@ def test_keyword_index_pages_should_fall_back_to_xslt(testserver):
     resp = requests.get(
         '%s/schlagworte/index/A/index' % testserver.url,
         allow_redirects=False)
-    assert resp.status_code == 501
+    assert resp.status_code == 303
+    assert resp.headers['x-render-with'] == 'default'
+
+    resp = requests.get(
+        '%s/schlagworte/themen/A/index' % testserver.url,
+        allow_redirects=False)
+    assert resp.status_code == 303
     assert resp.headers['x-render-with'] == 'default'
 
 
 def test_keyword_pages_should_send_redirect(testserver):
     resp = requests.get(
-        '%s/schlagworte/orte/Xy/index' % testserver.url,
+        '%s/schlagworte/orte/berlin/index' % testserver.url,
         allow_redirects=False)
     assert resp.status_code == 301
-    assert resp.headers['Location'] == '%s/thema/xy' % testserver.url
+    assert resp.headers['Location'] == '%s/thema/berlin' % testserver.url
 
 
 def test_commentstart_param_should_trigger_redirect(testserver):

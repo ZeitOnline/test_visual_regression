@@ -7,10 +7,32 @@ POSTDEPLOY
 - 3.31 PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
 
 
-3.34 (unreleased)
+3.36 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+3.35 (2017-01-30)
+-----------------
+
+- OPS-494: Make POST comment work after ZON-2284
+
+- OPS-495: Configure our custom error swallowing Jinja enviroment properly
+
+- ZON-3672: Make premium order links configurable
+
+- FIX: Register keyword redirect views properly 
+
+- OPS-494: Log Undefined errors, and log ICMSContent with their uniqueId
+
+
+3.34 (2017-01-27)
+-----------------
+
+- ZON-3596: Add logos on kicker for some keywords (i.e. D17)
+
+- MAINT: Include rawtext in webtrekk block tracking
 
 
 3.33 (2017-01-26)

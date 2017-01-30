@@ -45,6 +45,10 @@
 	&__kicker-logo
 		&--zplus
 			@extend %teaser-kicker-logo--zplus
+		&--tag
+			@extend %teaser-kicker-logo--tag
+			+respond-min($break-tablet-min)
+				color: inherit
 	&__title
 		@extend %teaser-title
 		font-size: em(24px)
