@@ -33,7 +33,7 @@ class PostComment(zeit.web.core.view.Base):
     """
 
     def __init__(self, context, request, path=None):
-
+        super(PostComment, self).__init__(context, request)
         if not request.user:
             raise pyramid.httpexceptions.HTTPForbidden(
                 title='No User',
@@ -47,8 +47,6 @@ class PostComment(zeit.web.core.view.Base):
         self.new_cid = None
         self.request_method = 'POST'
         self.path = request.params.get('path') or path
-        self.context = context
-        self.request = request
         zwcs = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         self.community_host = zwcs.get('community_host')
         self.status = []
@@ -364,18 +362,27 @@ class PostCommentAdmin(PostComment):
             self.post_comment()
 
 
-@zeit.web.view_defaults(renderer='json', request_method='POST')
-@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle)
+@zeit.web.view_defaults(renderer='json')
 @zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
-                      name='komplettansicht')
+                      request_method='POST')
 @zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
-                      name='seite')
-@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
-@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
-@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+                      name='komplettansicht',
+                      request_method='POST')
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
+                      name='seite',
+                      request_method='POST')
+@zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery,
+                      request_method='POST')
+@zeit.web.view_config(context=zeit.content.video.interfaces.IVideo,
+                      request_method='POST')
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle,
+                      request_method='POST')
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle,
+                      request_method='POST')
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
+                      request_method='POST')
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle,
+                      request_method='POST')
 class PostCommentResource(PostComment):
 
     msg = {'Username exists or not valid': 'username_exists_or_invalid'}
