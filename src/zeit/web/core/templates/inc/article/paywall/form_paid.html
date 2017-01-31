@@ -9,9 +9,9 @@
             Wählen Sie Ihren Zugang und lesen Sie direkt weiter.
         {%- endblock -%}
     </h3>
-    <form action="https://premium.zeit.de/bestellung/800144?entry_service=schranke_paid" class="gate__form" data-ct-column="digital" data-ct-subcolumn="false">
+    <form action="{{ settings('paywall_premium_product_digitalonly', 'https://premium.zeit.de') }}" class="gate__form" data-ct-column="digital" data-ct-subcolumn="false">
         <div class="gate__offer">
-            <input class="gate__option" id="gate-option-1" type="radio" name="angebot" value="https://premium.zeit.de/bestellung/800144?entry_service=schranke_paid" checked="checked"
+            <input class="gate__option" id="gate-option-1" type="radio" name="angebot" value="{{ settings('paywall_premium_product_digitalonly', 'https://premium.zeit.de') }}" checked="checked"
                 onchange="this.form.action=this.value; this.form.setAttribute('data-ct-column', 'digital');">
             <label for="gate-option-1" class="gate__label">
                 Gratis Digital-Zugang testen
@@ -23,7 +23,7 @@
             </ul>
         </div>
         <div class="gate__offer">
-            <input class="gate__option" id="gate-option-2" type="radio" name="angebot" value="https://premium.zeit.de/bestellung/1318185?entry_service=schranke_paid"
+            <input class="gate__option" id="gate-option-2" type="radio" name="angebot" value="{{ settings('paywall_premium_product_digitalandprint', 'https://premium.zeit.de') }}"
                 onchange="this.form.action=this.value; this.form.setAttribute('data-ct-column', 'digital+print');">
             <label for="gate-option-2" class="gate__label">
                 Gratis Digital-Zugang + <span class="nowrap">DIE ZEIT</span> testen
