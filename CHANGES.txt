@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-3687: Show account confirm message after successful registration
 
+- BUG-618: Reapply font-family for form elements (e.g. buttons)
+
 
 3.35 (2017-01-30)
 -----------------
