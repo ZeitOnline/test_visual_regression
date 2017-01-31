@@ -8,9 +8,11 @@ POSTDEPLOY
 3.36 (unreleased)
 -----------------
 
-- ZON-3629: Add property overscrolling to view 
+- FIX: Spawn #D17 logo on nextread kicker
 
-- ZON-3664: Add zplus logo to register paywall 
+- ZON-3629: Add property overscrolling to view
+
+- ZON-3664: Add zplus logo to register paywall
 
 - ZON-3687: Show account confirm message after successful registration
 
@@ -24,7 +26,7 @@ POSTDEPLOY
 
 - ZON-3672: Make premium order links configurable
 
-- FIX: Register keyword redirect views properly 
+- FIX: Register keyword redirect views properly
 
 - OPS-494: Log Undefined errors, and log ICMSContent with their uniqueId
 
