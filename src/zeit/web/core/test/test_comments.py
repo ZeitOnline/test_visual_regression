@@ -965,3 +965,36 @@ def test_thread_template_should_render_adplace(
         'zeit.web.core:templates/inc/comments/thread.html', view=view)
     assert browser.cssselect('.comment__ad')
     assert browser.cssselect('.comment__ad script')
+
+
+def test_smoke_comment_admin(testbrowser, application):
+    extensions = application.zeit_app.config.registry.getUtility(
+        pyramid.interfaces.IRequestExtensions)
+    with mock.patch.dict(extensions.descriptors, {
+            'user': pyramid.decorator.reify(lambda x: {
+                'ssoid': 123,
+                'has_community_data': True,
+                'uid': 123,
+            })}):
+        testbrowser('/admin/test-comments')
+
+
+def test_smoke_post_on_article(testserver, application):
+    resp = requests.post(
+        '{}/zeit-online/article/01'.format(testserver.url),
+        allow_redirects=False)
+    assert resp.status_code == 403
+
+    extensions = application.zeit_app.config.registry.getUtility(
+        pyramid.interfaces.IRequestExtensions)
+    with mock.patch.dict(extensions.descriptors, {
+            'user': pyramid.decorator.reify(lambda x: {
+                'ssoid': 123,
+                'has_community_data': True,
+                'uid': 123,
+            })}):
+
+        resp = requests.post(
+            '{}/zeit-online/article/01'.format(testserver.url),
+            allow_redirects=False)
+        assert resp.status_code == 303

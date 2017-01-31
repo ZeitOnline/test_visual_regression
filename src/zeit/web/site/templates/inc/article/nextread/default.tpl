@@ -3,6 +3,7 @@
 {% set image = get_image(module, fallback=False) %}
 {% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
 {% set module_layout = self.layout() %}
+{% set tag_with_logo_content = teaser | tag_with_logo_content %}
 {% if teaser is zplus_content %}
     {% set data_id = "articlebottom.editorial-nextread...area-zplus" %}
 {% else %}
@@ -21,6 +22,8 @@
                 <span class="{{ module_layout }}__kicker">
                 {% if teaser is zplus_content %}
                     {{ lama.use_svg_icon('zplus', module_layout + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
+                {% elif tag_with_logo_content %}
+                    {{ lama.use_svg_icon(tag_with_logo_content, self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
                 {% endif %}
                 {{ teaser.teaserSupertitle or teaser.supertitle }}
                 </span>

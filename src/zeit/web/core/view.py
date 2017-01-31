@@ -699,6 +699,11 @@ class Base(object):
             return 'big'
 
     @zeit.web.reify
+    def no_overscrolling(self):
+        if not getattr(self.context, 'overscrolling', None):
+            return True
+
+    @zeit.web.reify
     def publisher_name(self):
         return 'ZEIT ONLINE'
 

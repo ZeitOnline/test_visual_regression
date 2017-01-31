@@ -21,15 +21,16 @@
       <reference type="intern" href="http://xml.zeit.de/zeit-online/article/zeit" contenttype="article" />
     </references>
     <rankedTags>
-      <tag url_value="" uuid="df4baf1f-9491-4dbb-80c2-f8762bf3f2fe" score="4" type="free">Wein</tag>
-      <tag url_value="italien" uuid="fb4f1490-b187-4073-a51f-02bf101a354d" score="3" type="Location">Italien</tag>
-      <tag url_value="toskana" uuid="96aed46d-4a4d-4815-afe6-7f9ba73914ed" score="2" type="Location">Toskana</tag>
-      <tag url_value="bologna" uuid="48e46d3d-cb20-4c65-8000-5d7bab864110" score="1" type="Location">Bologna</tag>
-      <tag url_value="bozen" uuid="4620a5e7-9e11-4c07-8b4f-7114b66ab7c9" score="1" type="Location">Bozen</tag>
-      <tag url_value="florenz" uuid="96be130a-ad9e-4770-90e0-5a98158df58b" score="1" type="Location">Florenz</tag>
+      <tag type="topic" score="10" uuid="6d2eb253-f131-4181-b667-8a9033ac2a9e" url_value="d17">D17</tag>
+      <tag type="topic" score="9" uuid="c151f61d-da76-4f38-95c6-6f04f4a41c1f" url_value="wirtschaftspolitik">Wirtschaftspolitik</tag>
+      <tag type="Organization" score="5" uuid="0599bca7-37f0-4ad1-9281-66c1efe41d20" url_value="europaeische-zentralbank">Europäische Zentralbank</tag>
+      <tag type="Organization" score="5" uuid="3ca2d609-188c-459d-9461-4ad025482ba4" url_value="oecd">OECD</tag>
+      <tag type="free" score="4" uuid="3294ba09-e9a0-4e97-a2ac-6f3bf617b48a" url_value="deflation">Deflation</tag>
+      <tag type="free" score="4" uuid="4b2d29a1-d9d6-4b6c-968a-e4d636858fce" url_value="europapolitik">Europapolitik</tag>
+      <tag type="free" score="4" uuid="242bd103-9c34-436a-b498-5c3b3b1ed8ca" url_value="stabilitaetspakt">Stabilitätspakt</tag>
     </rankedTags>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Wenke Husmann</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
@@ -39,7 +40,6 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="overscrolling">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-12-09T09:23:57.105802+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-27T17:11:30.179510+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-12-09T09:32:11.073684+00:00</attribute>
@@ -67,7 +67,6 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">70 Jahre DIE ZEIT</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Film</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">5010</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>

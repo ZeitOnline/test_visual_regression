@@ -19,4 +19,6 @@
   <hp_overlay>true</hp_overlay>
   <update_signals>true</update_signals>
   <overscrolling>true</overscrolling>
+  <tag_logos>true</tag_logos>
+  <zplus_badge_on_registration_paywall>true</zplus_badge_on_registration_paywall>
 </features>
