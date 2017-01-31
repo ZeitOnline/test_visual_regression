@@ -10,7 +10,9 @@ POSTDEPLOY
 3.36 (unreleased)
 -----------------
 
-- ZON-3629: Add property overscrolling to view 
+- BUG-629: Add ZMO kicker logo for nextread teaser
+
+- ZON-3629: Add property overscrolling to view
 
 
 3.35 (2017-01-30)
@@ -22,7 +24,7 @@ POSTDEPLOY
 
 - ZON-3672: Make premium order links configurable
 
-- FIX: Register keyword redirect views properly 
+- FIX: Register keyword redirect views properly
 
 - OPS-494: Log Undefined errors, and log ICMSContent with their uniqueId
 
