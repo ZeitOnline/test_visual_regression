@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3664: Add zplus logo to register paywall 
 
+- ZON-3687: Show account confirm message after successful registration
+
 
 3.35 (2017-01-30)
 -----------------
