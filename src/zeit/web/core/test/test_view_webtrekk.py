@@ -277,7 +277,7 @@ def test_article_elements_provide_expected_id_for_webtrekk(
 
     # prevent testfail at first run
     presence_art = expected_conditions.presence_of_element_located(
-        (By.CLASS_NAME, 'main--article'))
+        (By.CLASS_NAME, 'article-series'))
 
     try:
         WebDriverWait(driver, 3).until(presence_art)

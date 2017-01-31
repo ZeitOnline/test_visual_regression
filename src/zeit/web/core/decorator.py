@@ -8,13 +8,13 @@ from dogpile.cache.api import NO_VALUE
 import pyramid_dogpile_cache2.cache
 import pyramid.threadlocal
 import pyramid.view
+import pyramid.exceptions
 import venusian
 import zope.component
 import zope.interface
 
 import zeit.content.cp.interfaces
 import zeit.edit.interfaces
-
 
 __all__ = [
     'reify', 'register_area', 'register_module', 'register_filter',
@@ -339,4 +339,10 @@ class view_config(pyramid.view.view_config):  # NOQA
 
 
 class view_defaults(pyramid.view.view_defaults):  # NOQA
-    pass
+
+    def __init__(self, **settings):
+        for key in settings.keys():
+            if key in view_config.__global_defaults__.keys():
+                raise pyramid.exceptions.ConfigurationError(
+                    "{} must not be configured in view_defaults.".format(key))
+        super(view_defaults, self).__init__(**settings)

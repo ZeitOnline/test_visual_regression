@@ -338,7 +338,8 @@ class Article(zeit.web.core.view.Content):
         return breadcrumbs
 
     WEBTREKK_ASSETS = (
-        'cardstack', 'inlinegallery', 'liveblog', 'quiz', 'raw', 'video')
+        'cardstack', 'inlinegallery', 'liveblog', 'quiz', 'raw', 'rawtext',
+        'video')
 
     @zeit.web.reify
     def webtrekk_assets(self):
