@@ -149,6 +149,24 @@ def tag_with_logo_content(content):
     return False
 
 
+@zeit.web.register_filter
+def logo_icon(teaser, kind):
+    if zmo_content(teaser) and kind != 'zmo-parquet':
+        return 'logo-zmo-zm'
+    if zett_content(teaser):
+        return 'logo-zett-small'
+    taglogo = tag_with_logo_content(teaser)
+    if zco_content(teaser) and kind != 'zco-parquet':
+        if taglogo and not zplus_content(teaser):
+            return 'taglogo-zco'
+        return 'logo-zco'
+    if taglogo and not zplus_content(teaser):
+        return 'taglogo'
+    if liveblog(teaser):
+        return 'liveblog'
+    return ''
+
+
 @zeit.web.register_test
 def zett_content(content):
     return zeit.content.link.interfaces.ILink.providedBy(
