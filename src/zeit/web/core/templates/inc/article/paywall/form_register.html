@@ -1,3 +1,10 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
+
 <aside class="gate gate--register article__item article__item--rimless">
+    {% if toggles('zplus_badge_on_registration_paywall') %}
+        {% block gate_icon -%}
+            {{ lama.use_svg_icon('zplus', 'gate__icon gate__icon--grey', 'zeit.web.site', a11y=False) }}
+        {% endblock -%}
+    {% endif %}
     <iframe src="{{ request.registry.settings.sso_url }}/registrieren_email?url={{ view.content_url }}%23success-registration&wt_zmc=fix.int.zonaudev.diezeit.wall_register.meinezeit.bar_register.link.x&utm_medium=fix&utm_source=diezeit_zonaudev_int&utm_campaign=wall_register&utm_content=meinezeit_bar_register_link_x&entry_service=schranke_register" class="gate__iframe" id="paywall-register" scrolling="no"></iframe>
 </aside>

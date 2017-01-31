@@ -11,6 +11,9 @@
   <setting name="default_teaser_images" xsi:type="xsd:string">http://xml.zeit.de/zeit-magazin/default/teaser_image</setting>
   <setting name="default_packshot_diezeit" xsi:type="xsd:string">http://xml.zeit.de/ausgabe/default_packshot_diezeit</setting>
 
+  <setting name="paywall_premium_product_digitalonly" xsi:type="xsd:string">https://premium.zeit.de/bestellung/1579642?entry_service=schranke_paid</setting>
+  <setting name="paywall_premium_product_digitalandprint" xsi:type="xsd:string">https://premium.zeit.de/bestellung/1596808?entry_service=schranke_paid</setting>
+
   <setting name="breaking_news_timeout" xsi:type="xsd:int">7200</setting>
 
   <setting name="script_timeout" xsi:type="xsd:int">2000</setting>
@@ -55,7 +58,7 @@
   <setting name="topic_prefix" xsi:type="xsd:string">http://xml.zeit.de/thema</setting>
   <!-- Do not use in other contexts than framebuilders useSSL variant, has no local testing alternative -->
   <setting name="framebuilder_ssl_asset_prefix" xsi:type="xsd:string">https://ssl.zeit.de/www.zeit.de/static/latest</setting>
-
+  <setting name="volume_navigation_base" xsi:type="xsd:string">https://premium.zeit.de/abo/diezeit/%s/%02d</setting>
   <setting name="webtrekk_version" xsi:type="xsd:string">4.3.1</setting>
   <setting name="webtrekk_id" xsi:type="xsd:string">674229970930653</setting>
 

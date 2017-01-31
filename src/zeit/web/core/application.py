@@ -159,8 +159,9 @@ class Application(object):
         config.add_route('blacklist', '/-blacklist', factory=lambda x: None)
         config.add_route(
             'schlagworte_index',
-            '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}',
-            factory=zeit.web.core.view.surrender)
+            '/schlagworte/{category}/{item:[A-Z]($|/$|/index$)}')
+        config.add_view(
+            zeit.web.core.view.surrender, route_name='schlagworte_index')
         config.add_route(
             'schlagworte',
             '/schlagworte/{category}/{item}'
