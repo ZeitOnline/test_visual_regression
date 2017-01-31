@@ -1,9 +1,11 @@
 from __future__ import absolute_import
 
+from jinja2._compat import string_types
 import StringIO
 import cProfile
 import datetime
 import email.utils
+import inspect
 import logging
 import os
 import pkg_resources
@@ -13,6 +15,7 @@ import urlparse
 
 import bugsnag
 import jinja2.environment
+import jinja2.exceptions
 import jinja2.ext
 import jinja2.loaders
 import jinja2.nodes
@@ -30,34 +33,6 @@ import zeit.web.core.utils
 
 log = logging.getLogger(__name__)
 p_log = logging.getLogger('profile')
-
-
-# The function to create jinja traceback objects.  This is dynamically
-# imported on the first exception in handle_exception().
-_make_traceback = None
-
-
-def finalize(expr):
-    """Custom jinja finalizer function to implicitly hide `None` expressions"""
-    if expr is None:
-        return u''
-    return expr
-
-
-class Undefined(jinja2.runtime.Undefined):
-    """Custom jinja Undefined class that represents unresolvable template
-    statements and expressions. It ignores undefined errors, ensures it is
-    printable and returns further Undefined objects if indexed or called.
-    """
-
-    def __html__(self):
-        return jinja2.utils.Markup()
-
-    @jinja2.utils.internalcode
-    def _fail_with_undefined_error(self, *args, **kw):
-        pass
-
-    __getattr__ = __getitem__ = __call__ = lambda self, *args: self.__class__()
 
 
 class Interrupt(BaseException):
@@ -87,19 +62,10 @@ class Environment(jinja2.environment.Environment):
         if issubclass(exc_info[0], pyramid.httpexceptions.HTTPException):
             raise exc_info[0], exc_info[1], exc_info[2]
 
-        global _make_traceback
-        if _make_traceback is None:
-            from jinja2.debug import make_traceback as _make_traceback
-        traceback = _make_traceback(exc_info, source_hint)
-        exc_info = traceback.standard_exc_info
-
-        path = '<unknown>'
-        try:
-            request = pyramid.threadlocal.get_current_request()
-            path = request.path_info
-        except:
-            pass
-        log.error('Error rendering %s', path, exc_info=exc_info)
+        traceback = make_jinja_traceback(exc_info, source_hint)
+        exc_info = traceback.exc_info
+        path = get_current_request_path()
+        log.error('Error while rendering %s', path, exc_info=exc_info)
 
         group_by = None
         if exc_info[0] is jinja2.exceptions.UndefinedError:
@@ -124,6 +90,115 @@ class Environment(jinja2.environment.Environment):
 
     def getattr(self, obj, attribute):
         return self.__getsth__('getattr', obj, attribute)
+
+
+class Undefined(jinja2.runtime.Undefined):
+    """Custom jinja Undefined class that represents unresolvable template
+    statements and expressions. It ignores undefined errors, ensures it is
+    printable and returns further Undefined objects if indexed or called.
+    """
+
+    def __html__(self):
+        return jinja2.utils.Markup()
+
+    @jinja2.utils.internalcode
+    def _fail_with_undefined_error(self, *args, **kw):
+        """Logs Undefined errors with traceback. Note that Jinja only calls
+        this for "second-level" Undefined situations, i.e. when a template
+        tries to access an attribute of an already Undefined object. This means
+        ``{{ context.nonexistent }}`` is silent, but we'll be called for
+        ``{{ context.nonexistent.thing }}``.
+        """
+        tb = make_jinja_traceback((
+            self._undefined_exception,
+            self._undefined_exception(self._error_message()),
+            Traceback.from_current_stack()))
+        log.warning(
+            'Undefined while rendering %s', get_current_request_path(),
+            exc_info=tb.exc_info)
+        return self.__class__()
+
+    def _error_message(self):
+        from jinja2.utils import missing
+        if zeit.cms.interfaces.ICMSContent.providedBy(self._undefined_obj):
+            make_repr = cmscontent_repr
+        else:
+            make_repr = jinja2.utils.object_type_repr
+        if self._undefined_hint is None:
+            if self._undefined_obj is missing:
+                hint = '%r is undefined' % self._undefined_name
+            elif not isinstance(self._undefined_name, string_types):
+                hint = '%s has no element %r' % (
+                    make_repr(self._undefined_obj), self._undefined_name)
+            else:
+                hint = '%r has no attribute %r' % (
+                    make_repr(self._undefined_obj), self._undefined_name)
+        else:
+            hint = self._undefined_hint
+        return hint
+
+    # The superclass assigns these method by copying the function, too,
+    # so they don't pick up our overriden method by themselves unfortunately.
+    __getattr__ = __getitem__ = __call__ = _fail_with_undefined_error
+
+
+def cmscontent_repr(content):
+    return unicode(content).encode('ascii', 'backslashreplace')
+
+
+class Traceback(object):
+    """Fakes just enough of the types.TracebackType API to satisfy
+    jinja2.utils.make_traceback.
+
+    Inspired by <https://stackoverflow.com/a/13210518>.
+    """
+
+    def __init__(self, tb_frame, tb_lineno, tb_next):
+        self.tb_frame = tb_frame
+        self.tb_lineno = tb_lineno
+        self.tb_next = tb_next
+
+    @classmethod
+    def from_current_stack(cls):
+        """Converts inspect.stack() into chained Traceback objects."""
+        # Skip inner frames until Undefined._fail_with_undefined_error()
+        stack = inspect.stack(0)[3:]
+        tb = None
+        inside_template = True
+        for item in stack:
+            tb = cls(item[0], item[2], tb)
+            if not inside_template:
+                break
+            if not item[0].f_globals.get('__jinja_template__'):
+                # make_jinja_traceback requires one last non-template frame.
+                inside_template = False
+        return tb
+
+
+def get_current_request_path():
+    try:
+        request = pyramid.threadlocal.get_current_request()
+        return request.path_info.encode('ascii', 'backslashreplace')
+    except:
+        return '<unknown>'
+
+
+def make_jinja_traceback(exc_info, source_hint=None):
+    global _make_traceback
+    if _make_traceback is None:
+        from jinja2.debug import make_traceback as _make_traceback
+    return _make_traceback(exc_info, source_hint)
+
+# The function to create jinja traceback objects.  This is dynamically
+# imported when the first exception occurs, since it incurs some overhead.
+_make_traceback = None
+
+
+def finalize(expr):
+    """Custom jinja finalizer function to implicitly hide `None` expressions"""
+    if expr is None:
+        return u''
+    return expr
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):

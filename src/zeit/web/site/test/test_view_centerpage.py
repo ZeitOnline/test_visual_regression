@@ -2743,3 +2743,8 @@ def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
     query = ('.cp-region--solo + .cp-region--duo article:first-child '
              '.teaser-small__kicker-logo--tag')
     assert browser.cssselect(query)
+
+
+def test_d17_icon_is_display_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-taglogo')
+    assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')
