@@ -4,13 +4,15 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- 3.31 PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
-
 
 3.36 (unreleased)
 -----------------
 
 - ZON-3629: Add property overscrolling to view 
+
+- ZON-3664: Add zplus logo to register paywall 
+
+- ZON-3687: Show account confirm message after successful registration
 
 
 3.35 (2017-01-30)
