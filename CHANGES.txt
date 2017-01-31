@@ -4,13 +4,32 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- 3.31 PREdeploy: Disable Overscrolling in GTM (https://github.com/ZeitOnline/zeit.web/pull/2159). POSTdeploy: activate Overscrolling feature toggle.
 
-
-3.36 (unreleased)
+3.37 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+3.36 (2017-01-31)
+-----------------
+
+
+- ZON-3629: Add property overscrolling to view
+
+- ZON-3664: Add zplus logo to register paywall
+
+- ZON-3687: Show account confirm message after successful registration
+
+- BUG-618: Reapply font-family for form elements (e.g. buttons)
+
+- BUG-629: Add ZMO kicker logo for nextread teaser
+
+- BUG-624: Fix links to volume in premium
+
+- FIX: Spawn #D17 logo on nextread kicker
+
+- BUG-593: Change video player in videostage to html5
 
 
 3.35 (2017-01-30)
@@ -22,7 +41,7 @@ POSTDEPLOY
 
 - ZON-3672: Make premium order links configurable
 
-- FIX: Register keyword redirect views properly 
+- FIX: Register keyword redirect views properly
 
 - OPS-494: Log Undefined errors, and log ICMSContent with their uniqueId
 

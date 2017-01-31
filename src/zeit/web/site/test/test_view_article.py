@@ -2203,6 +2203,23 @@ def test_overscrolling_is_working_as_expected(
         selenium_driver, 1).until(condition)
 
 
+def test_overscrolling_is_turned_off_by_configuration(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1200, 900)
+    driver.get(
+        '%s/zeit-online/article/01' % testserver.url)
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
 def test_paywall_returns_correct_first_click_free_to_webtrekk(
         application, dummy_request):
 
@@ -2222,3 +2239,10 @@ def test_paywall_returns_correct_first_click_free_to_webtrekk(
     dummy_request.GET['C1-Meter-Info'] = 'first_click_free'
     view = zeit.web.site.view_article.Article(content, dummy_request)
     assert view.webtrekk['customParameter']['cp29'] == 'yes'
+
+
+def test_nextread_shows_zmo_kicker_logo_and_styles(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zmo')
+    nextread = browser.cssselect('article.nextread')[0]
+    assert nextread.cssselect('.nextread__kicker--zmo')
+    assert nextread.cssselect('.nextread__kicker-logo--zmo')

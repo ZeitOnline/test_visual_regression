@@ -84,9 +84,10 @@ class Centerpage(AreaProvidingPaginationMixin,
 
     @zeit.web.reify
     def volume_navigation(self):
-        return {'link': 'https://epaper.zeit.de/abo/diezeit/{!s}/{!s}'.format(
-                self.volume.year,
-                str(self.volume.volume).zfill(2)),
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return {'link': conf['volume_navigation_base'] % (
+                    self.volume.year,
+                    self.volume.volume),
                 'cover': self.volume.covers['printcover']}
 
     @zeit.web.reify
