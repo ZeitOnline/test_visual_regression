@@ -1,1 +1,1 @@
-<span class="{{ '%s__kicker-logo' | format(self.layout()) | with_mods('liveblog', 'liveblog-closed' if module.liveblog and not module.liveblog.is_live) }}"><span class="visually-hidden">(</span>live<span class="visually-hidden">)</span></span>
+<span class="{{ '%s__kicker-logo' | format(logo_layout | with_mods('liveblog', 'liveblog-closed' if module.liveblog and not module.liveblog.is_live) }}"><span class="visually-hidden">(</span>live<span class="visually-hidden">)</span></span>

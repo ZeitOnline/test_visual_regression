@@ -36,17 +36,15 @@
                     {% block teaser_kicker %}
                         <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content) }}">
                             {% block kicker_logo scoped %}
-                                {% block zplus_kicker_logo %}
-                                    {% if teaser is zplus_content %}
-                                        {{ lama.use_svg_icon('zplus', self.layout() + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
-                                    {% endif %}
-                                {% endblock zplus_kicker_logo %}
+                                {% block zplus_kicker_logo %}{% endblock zplus_kicker_logo %}
                                 {% block content_kicker_logo %}
                                     {% set logo_layout = self.layout() %}
-                                    {% include [
-                                        "zeit.web.core:templates/inc/badges/{}.tpl".format(teaser | logo_icon(area.kind) ),
-                                        "zeit.web.core:templates/inc/badges/{}.html".format(teaser | logo_icon(area.kind) )
-                                    ] ignore missing %}
+                                    {% for template in teaser | logo_icon(area.kind) %}
+                                        {% include [
+                                            "zeit.web.core:templates/inc/badges/{}.tpl".format(template),
+                                            "zeit.web.core:templates/inc/badges/{}.html".format(template)
+                                        ] ignore missing %}
+                                    {% endfor %}
                                 {% endblock content_kicker_logo %}
                             {% endblock kicker_logo %}
                             {{ teaser.teaserSupertitle or teaser.supertitle -}}

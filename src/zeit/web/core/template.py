@@ -151,20 +151,23 @@ def tag_with_logo_content(content):
 
 @zeit.web.register_filter
 def logo_icon(teaser, kind):
+    templates = []
+    if zplus_content(teaser):
+        templates.append('logo-zplus-red')
     if zmo_content(teaser) and kind != 'zmo-parquet':
-        return 'logo-zmo-zm'
-    if zett_content(teaser):
-        return 'logo-zett-small'
-    taglogo = tag_with_logo_content(teaser)
-    if zco_content(teaser) and kind != 'zco-parquet':
-        if taglogo and not zplus_content(teaser):
-            return 'taglogo-zco'
-        return 'logo-zco'
-    if taglogo and not zplus_content(teaser):
-        return 'taglogo'
+        templates.append('logo-zmo-zm')
+        return templates
     if liveblog(teaser):
-        return 'liveblog'
-    return ''
+        templates.append('liveblog')
+        return templates
+    if zett_content(teaser):
+        templates.append('logo-zett-small')
+        return templates
+    if tag_with_logo_content(teaser) and not zplus_content(teaser):
+        templates.append('taglogo')
+    if zco_content(teaser) and kind != 'zco-parquet':
+        templates.append('logo-zco')
+    return templates
 
 
 @zeit.web.register_test
