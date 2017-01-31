@@ -18,13 +18,16 @@
         {% endif %}
         <div class="{{ module_layout }}__container">
             <h2 class="{{ module_layout }}__heading">
-                <span class="{{ module_layout }}__kicker">
+                <span class="{{ '%s__kicker' | format(module_layout) | with_mods('zmo' if teaser is zmo_content) }}">
                 {% if teaser is zplus_content %}
                     {{ lama.use_svg_icon('zplus', module_layout + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
-                {% elif tag_with_logo_content %}
-                    {{ lama.use_svg_icon(tag_with_logo_content, self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
                 {% endif %}
-                {{ teaser.teaserSupertitle or teaser.supertitle }}
+                {% if teaser is zmo_content %}
+                    {{ lama.use_svg_icon('logo-zmo-zm', module_layout + '__kicker-logo--zmo svg-symbol--hide-ie', view.package, a11y=False) }}
+                {% elif tag_with_logo_content and teaser is not zplus_content %}
+                    {{ lama.use_svg_icon(tag_with_logo_content, module_layout + '__kicker-logo--tag svg-symbol--hide-ie', view.package, a11y=False) }}
+                {% endif %}
+                {{ teaser.teaserSupertitle or teaser.supertitle -}}
                 </span>
                 {%- if teaser.teaserTitle or teaser.title %}<span class="visually-hidden">: </span>{% endif -%}
                 <span class="{{ module_layout }}__title">{{ teaser.teaserTitle or teaser.title }}</span>

@@ -2239,3 +2239,10 @@ def test_paywall_returns_correct_first_click_free_to_webtrekk(
     dummy_request.GET['C1-Meter-Info'] = 'first_click_free'
     view = zeit.web.site.view_article.Article(content, dummy_request)
     assert view.webtrekk['customParameter']['cp29'] == 'yes'
+
+
+def test_nextread_shows_zmo_kicker_logo_and_styles(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zmo')
+    nextread = browser.cssselect('article.nextread')[0]
+    assert nextread.cssselect('.nextread__kicker--zmo')
+    assert nextread.cssselect('.nextread__kicker-logo--zmo')
