@@ -23,6 +23,8 @@ POSTDEPLOY
 
 - FIX: Spawn #D17 logo on nextread kicker
 
+- BUG-593: Change video player in videostage to html5
+
 
 3.35 (2017-01-30)
 -----------------

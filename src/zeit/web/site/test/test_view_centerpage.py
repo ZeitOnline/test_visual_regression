@@ -552,23 +552,22 @@ def test_videostage_series_select_should_navigate_away(
     assert '/serie/rekorder' in driver.current_url
 
 
-def test_videostage_video_should_play(selenium_driver, testserver):
+def test_videostage_thumbnail_should_be_replaced(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/video-stage' % testserver.url)
     article = driver.find_element_by_css_selector(
         '#video-stage .video-large')
     videolink = driver.find_element_by_css_selector(
         '#video-stage .video-large figure')
+    thumbnail = article.find_element_by_css_selector(
+        '.video-thumbnail__media-item')
     videolink.click()
     try:
-        player = WebDriverWait(driver, 10).until(
-            expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '#video-stage .video-player__iframe'))
-        )
-        assert article.get_attribute(
-            'data-video-id') in player.get_attribute('src')
+        WebDriverWait(driver, 10).until(
+            expected_conditions.staleness_of(thumbnail))
+        assert True
     except TimeoutException:
-        assert False, 'Video not visible with 10 seconds'
+        assert False, 'Thumbnail not replaced by video'
 
 
 def test_videostage_has_zon_svg_logo(testbrowser):
@@ -2336,7 +2335,7 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
         'date_first_released': '2012-02-22T14:36:32.452398+00:00'}, {
             'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
             'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                              'harald-martenstein-wideformat')],
+                               'harald-martenstein-wideformat')],
             'image-fill-color': [u''], 'teaserText': 'text',
             'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
             'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
