@@ -8,6 +8,9 @@ POSTDEPLOY
 3.36 (unreleased)
 -----------------
 
+
+- BUG-629: Add ZMO kicker logo for nextread teaser
+
 - FIX: Spawn #D17 logo on nextread kicker
 
 - ZON-3629: Add property overscrolling to view
@@ -17,6 +20,7 @@ POSTDEPLOY
 - ZON-3687: Show account confirm message after successful registration
 
 - BUG-618: Reapply font-family for form elements (e.g. buttons)
+
 
 
 3.35 (2017-01-30)
