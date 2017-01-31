@@ -9,10 +9,6 @@ POSTDEPLOY
 -----------------
 
 
-- BUG-629: Add ZMO kicker logo for nextread teaser
-
-- FIX: Spawn #D17 logo on nextread kicker
-
 - ZON-3629: Add property overscrolling to view
 
 - ZON-3664: Add zplus logo to register paywall
@@ -21,6 +17,11 @@ POSTDEPLOY
 
 - BUG-618: Reapply font-family for form elements (e.g. buttons)
 
+- BUG-629: Add ZMO kicker logo for nextread teaser
+
+- BUG-624: Fix links to volume in premium
+
+- FIX: Spawn #D17 logo on nextread kicker
 
 
 3.35 (2017-01-30)
