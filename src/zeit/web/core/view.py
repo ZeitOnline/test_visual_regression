@@ -92,6 +92,7 @@ def is_paywalled(context, request):
 
 
 class Base(object):
+
     """Base class for all views."""
 
     seo_title_default = u''
@@ -878,6 +879,7 @@ class CommentMixin(object):
 
 
 class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
+
     """Base view class for content that a) provides ICommonMetadata and b) is a
     "single content" (e.g. article/gallery/video, but not centerpage).
     XXX We should introduce an interface for this.
@@ -1122,6 +1124,7 @@ def health_check(request):
 
 
 class service_unavailable(object):  # NOQA
+
     def __init__(self, context, request):
         try:
             path = request.path
