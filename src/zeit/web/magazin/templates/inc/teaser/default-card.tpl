@@ -21,8 +21,10 @@
                 <h2>
                     <div class="card__title">
                         {% block zplus_kicker_logo %}
-                            {% if teaser is zplus_content %}
+                            {% if teaser is zplus_abo_content %}
                                 {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                            {% elif teaser is zplus_registration_content %}
+                                {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo-register--xs svg-symbol--hide-ie', view.package, a11y=False) }}
                             {% endif %}
                         {% endblock %}
                         {{ teaser.teaserSupertitle or teaser.supertitle }}

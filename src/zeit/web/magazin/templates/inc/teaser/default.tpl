@@ -41,8 +41,10 @@ Default teaser template to inherit from.
         <h2 class="{{ self.layout() }}__title-box">
             {% block teaser_kicker -%}
                 {% block zplus_kicker_logo %}
-                    {% if teaser is zplus_content %}
+                    {% if teaser is zplus_abo_content %}
                         {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                    {% elif teaser is zplus_registration_content %}
+                        {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo-register--xs svg-symbol--hide-ie', view.package, a11y=False) }}
                     {% endif %}
                 {% endblock %}
                 <span class="{{ self.layout() }}__kicker">

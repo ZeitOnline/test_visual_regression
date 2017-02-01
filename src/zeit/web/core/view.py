@@ -689,7 +689,7 @@ class Base(object):
         code = [self.ressort or 'administratives',
                 self.sub_ressort,
                 'bild-text']
-        if zeit.web.core.template.zplus_content(self.context) and (
+        if zeit.web.core.template.zplus_abo_content(self.context) and (
                 not self.paywall):
             code.append('paid')
         return '/'.join([x for x in code if x])
