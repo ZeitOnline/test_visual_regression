@@ -155,6 +155,9 @@ def zplus_registration_content(content):
 
 @zeit.web.register_test
 def zplus_content(content):
+    if not zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
+        return False
+
     return zplus_abo_content(content) or zplus_registration_content(content)
 
 
