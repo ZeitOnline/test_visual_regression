@@ -436,16 +436,40 @@ def test_zplus_is_false_for_articles_with_undefined_access(application):
     assert zeit.web.core.template.zplus_content(content) is False
 
 
+def test_zplus_abo_is_true_for_abo_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/fischer')
+    assert zeit.web.core.template.zplus_abo_content(content) is True
+
+
 def test_zplus_is_true_for_abo_articles(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/fischer')
     assert zeit.web.core.template.zplus_content(content) is True
 
 
-def test_zplus_is_false_for_registration_articles(application):
+def test_zplus_registration_is_false_for_abo_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/fischer')
+    assert zeit.web.core.template.zplus_registration_content(content) is False
+
+
+def test_zplus_abo_is_false_for_registration_articles(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/alter-archivtext')
-    assert zeit.web.core.template.zplus_content(content) is False
+    assert zeit.web.core.template.zplus_abo_content(content) is False
+
+
+def test_zplus_register_is_true_for_registration_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/alter-archivtext')
+    assert zeit.web.core.template.zplus_registration_content(content) is True
+
+
+def test_zplus_is_true_for_registration_articles(application):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/alter-archivtext')
+    assert zeit.web.core.template.zplus_content(content) is True
 
 
 def test_zplus_should_be_toggleable(application, monkeypatch):
@@ -454,6 +478,22 @@ def test_zplus_should_be_toggleable(application, monkeypatch):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/fischer')
     assert zeit.web.core.template.zplus_content(content) is False
+
+
+def test_zplus_abo_should_be_toggleable(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'reader_revenue': False}.get)
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/fischer')
+    assert zeit.web.core.template.zplus_abo_content(content) is False
+
+
+def test_zplus_registration_should_be_toggleable(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'zplus_badge_gray': False}.get)
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/cp-content/article-zeit-register')
+    assert zeit.web.core.template.zplus_registration_content(content) is False
 
 
 def test_zplus_badge_should_be_rendered(testbrowser):
