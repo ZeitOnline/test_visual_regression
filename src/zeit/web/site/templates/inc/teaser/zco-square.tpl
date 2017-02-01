@@ -3,7 +3,13 @@
 {% block teaser_modifier %}{{ self.layout() }}--zco{% endblock %}
 
 {% block kicker_logo %}
-    {{ self.zplus_kicker_logo() }}
+    {% set logo_layout = self.layout() %}
+    {% for template in teaser | logo_icon(area.kind, zplus_only=True) %}
+        {% include [
+            "zeit.web.core:templates/inc/badges/{}.tpl".format(template),
+            "zeit.web.core:templates/inc/badges/{}.html".format(template)
+        ] ignore missing %}
+    {% endfor %}
 {% endblock %}
 
 {% block teaser_container %}

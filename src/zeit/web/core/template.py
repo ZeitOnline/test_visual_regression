@@ -173,13 +173,15 @@ def tag_with_logo_content(content):
 
 
 @zeit.web.register_filter
-def logo_icon(teaser, kind):
+def logo_icon(teaser, kind, zplus_only=False):
     templates = []
     # add Z+Icon independent from other icons
     if zplus_abo_content(teaser):
         templates.append('logo-zplus')
     elif zplus_registration_content(teaser):
         templates.append('logo-zplus-register')
+    if zplus_only:
+        return templates
 
     # exclusive icons, set and return
     if zmo_content(teaser) and kind != 'zmo-parquet':
