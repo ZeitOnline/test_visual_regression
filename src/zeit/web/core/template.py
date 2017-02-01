@@ -121,7 +121,7 @@ def zmo_content(content):
 
 
 @zeit.web.register_test
-def zplus_content(content):
+def zplus_abo_content(content):
     if not zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
         return False
 
@@ -133,6 +133,29 @@ def zplus_content(content):
     if access is None:
         return False
     return (access == 'abo')
+
+
+@zeit.web.register_test
+def zplus_registration_content(content):
+    if not zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
+        return False
+
+    if not zeit.web.core.application.FEATURE_TOGGLES.find('zplus_badge_gray'):
+        return False
+
+    # Links are defined as free content
+    if zeit.content.link.interfaces.ILink.providedBy(content):
+        return False
+
+    access = getattr(content, 'access', None)
+    if access is None:
+        return False
+    return (access == 'registration')
+
+
+@zeit.web.register_test
+def zplus_content(content):
+    return zplus_abo_content(content) or zplus_registration_content(content)
 
 
 @zeit.web.register_filter
@@ -152,8 +175,13 @@ def tag_with_logo_content(content):
 @zeit.web.register_filter
 def logo_icon(teaser, kind):
     templates = []
-    if zplus_content(teaser):
-        templates.append('logo-zplus-red')
+    # add Z+Icon independent from other icons
+    if zplus_abo_content(teaser):
+        templates.append('logo-zplus')
+    elif zplus_registration_content(teaser):
+        templates.append('logo-zplus-register')
+
+    # exclusive icons, set and return
     if zmo_content(teaser) and kind != 'zmo-parquet':
         templates.append('logo-zmo-zm')
         return templates
@@ -163,10 +191,13 @@ def logo_icon(teaser, kind):
     if zett_content(teaser):
         templates.append('logo-zett-small')
         return templates
+
+    # inclusive icons may appear both
     if tag_with_logo_content(teaser) and not zplus_content(teaser):
         templates.append('taglogo')
     if zco_content(teaser) and kind != 'zco-parquet':
         templates.append('logo-zco')
+
     return templates
 
 
