@@ -64,12 +64,8 @@
     <url>http://services.zeit.de/ausgabenseite/</url>
     <nofollow>false</nofollow>
     <!-- use byline "mo-mi" for Angebotsbox (digital edition for free) -->
-    <!-- byline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">mo-mi</byline -->
+    <!-- byline>mo-mi</byline -->
     <!-- use no byline for Printbox (this weeks issue) -->
-    <byline xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+    <byline></byline>
   </body>
-  <teaser>
-    <title xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-    <text xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
-  </teaser>
 </link>
