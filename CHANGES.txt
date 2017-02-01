@@ -8,7 +8,7 @@ POSTDEPLOY
 3.37 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-631: Add page padding for login link (mobile)
 
 
 3.36 (2017-01-31)
