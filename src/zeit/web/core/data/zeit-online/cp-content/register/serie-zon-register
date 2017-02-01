@@ -1,0 +1,209 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" expires="">
+      <display_name>Anne Mustermann</display_name>
+      <location>Berlin</location>
+    </author>
+    <rankedTags>
+      <tag type="topic" score="5" uuid="3ea5e261-730b-4649-afa7-fff6f6935d89" url_value="android">Android</tag>
+      <tag type="free" score="4" uuid="480d85d4-ba2e-41a8-b334-11d744946060" url_value="app">App</tag>
+      <tag type="free" score="4" uuid="1c47d701-cb9a-413e-9d52-c8e243c56de1" url_value="smartphone">Smartphone</tag>
+      <tag type="free" score="4" uuid="4f3088cc-1307-49eb-b42f-e837de99e465" url_value="iphone">iPhone</tag>
+    </rankedTags>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/digital/mobil/2014-10/cuddlr-app-kuscheln-verabreden" year="2014" issue="41" ressort="Digital" serie="App-Kritik" contenttype="article" publication-date="" expires="" author="Thorsten Schröder">
+        <supertitle>Cuddlr</supertitle>
+        <title>Wer kuschelt jetzt mit mir?</title>
+        <text>Seit Tinder und Grindr ist es normal, sich Fremde für schnelle Onlineabenteuer zu bestellen. Cuddlr geht einen Schritt zurück und holt die Kuschelparty aufs Smartphone.</text>
+        <description>Seit Tinder und Grindr ist es normal, sich Fremde für schnelle Onlineabenteuer zu bestellen. Cuddlr geht einen Schritt zurück und holt die Kuschelparty aufs Smartphone.</description>
+        <byline xsi:nil="true"/>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/digital/mobil/2014-10/cuddlr-app-kuschelpartner-gesucht/" type="jpg" title="Kuscheln" alt="Kuschelbedürftig" align="left" publication-date="" expires="">
+          <bu>Kuschelbedürftig? Dafür gibt es eine App.</bu>
+          <copyright>© grenzverkehr / photocase.de</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/S/Torsten_Schroeder/index" publication-date="" expires="">
+          <display_name>Thorsten Schröder</display_name>
+        </author>
+      </reference>
+    </references>
+    <image base-id="http://xml.zeit.de/zeit-online/cp-content/ig-4" type="jpg" title="Katze!" alt="Die ist der Alttest" align="left" href="http://links.to" publication-date="" expires="">
+      <bu>Die ist der image sub text</bu>
+      <copyright link="http://foo.de">©foo</copyright>
+    </image>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Thorsten Schröder</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Digital Mobil</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-10-24T08:21:57.947065+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-10-24T08:22:59.671272+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-10-24T08:21:59.779123+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-10-24T08:22:59.671272+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="deeplink_url">http://www.boldeconomy.com/app-kritik-moment-checky</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-10-24T08:21:55.450762+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwabe</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Wie oft nehmen Sie Ihr Smartphone in die Hand, um Nachrichten zu checken, zu spielen oder zu lesen? 30-mal am Tag? Oder eher 70? 150? Die Apps Moment und Checky zählen mit. </attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/digital/mobil/2014-10/39a2b970-96a2-48a7-bb68-02cbe1a0ce98.tmp</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">BE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Bold Economy</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">a52230a962f243f384a96f9de5d58c83</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Digital</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">App-Kritik</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Die Apps Moment und Checky zählen, wie oft &amp; wie lange man sein Smartphone benutzt. Ändert man deswegen etwas? (pb)</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Mobil</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">5274</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:859a65f0-0579-4854-87ab-c8b2de70416d}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">44</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Checky und Moment</supertitle>
+    <title>Liegenlassen lernen</title>
+    <subtitle>Moment und Checky zählen, wie oft jemand sein Smartphone benutzt und führen ihm die manchmal schockierend hohe Zahl vor Augen. Helfen die Apps so bei der digitalen Diät?</subtitle>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/digital/mobil/2014-10/smartphone-strasse-kreuzung/" type="jpg" align="left" publication-date="" expires="" layout="large" is_empty="False" title_local="Checky und Moment: Liegenlassen lernen" alt_local="Checky und Moment" title="Checky und Moment: Liegenlassen lernen" alt="Checky und Moment">
+        <bu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+        <copyright>© Lucas Jackson/Reuters</copyright>
+      </image>
+      <p>In der Regel ist das iPhone das Letzte, was ich abends in der
+Hand habe und das Erste, auf das ich nach dem Aufwachen schaue. Während
+der Kaffee durchläuft, schaue ich aufs iPhone, beim Zähneputzen auch.
+Und auf dem Weg zur U-Bahn vermeide ich es immer wieder nur durch ein
+Manöver im letzten Moment, nicht in jemanden hineinzurennen, der wie ich
+ gerade auf seinen Bildschirm starrt. In der U-Bahn lese ich Artikel auf
+ dem iPhone, steige ich aus und habe wieder Netz, gucke ich schnell nach
+ neuen Nachrichten auf Whatsapp oder Facebook. Und das waren nur die
+ersten 50 Minuten meines Tages.</p>
+      <p>
+        <strong>Auf zum gesünderen, besseren, iPhone-freien Ich</strong>
+      </p>
+      <p>Dass das nicht gesund ist, weiß ich. Dass ich das
+ändern sollte, auch. Aber wie für die meisten ist es auch für mich die
+bequemste, weil immer verfügbare Übersprungshandlung. Beim Friseur
+vertreibt es die Zeit, bis man an der Reihe ist, auf der Party
+überbrückt es die Leere, bis die Freunde ankommen. Das ständige Klingeln
+ und Vibrieren in der Tasche unterbricht mich in allem, was ich tue:
+Selbst bei spannenden Filmen gucke ich zwischendurch kurz auf den
+Bildschirm. Warum? Keine Ahnung. Es gibt ganze <a href="http://www2.kent.edu/news/news-detail.cfm?newsitem=C87DA8EB-0E77-DCF2-AAD1C317FB742933" target="_blank">Studien</a>,
+ die belegen, dass der ständige Griff zum Smartphone zu psychischen
+Erkrankungen wie Angststörungen oder größerer Unzufriedenheit und Stress
+ führen kann. Beunruhigende Aussichten.</p>
+      <p>Das Problem: Wie oft ich am Tag wirklich auf mein iPhone gucke, kann ich
+ nur schwer einschätzen, was ich wie ändern kann also auch. Zumindest
+bislang. Jetzt starte ich den digitalen Entzug, ausgerechnet mit einer
+Smartphone-App. Genauer: mit zweien. <a href="http://inthemoment.io/" target="_blank">Moment</a> und <a href="http://www.checkyapp.com/" target="_blank">Checky</a>
+ gehören zur Familie der Tracking-Apps, mit denen wir unsere Schritte,
+unsere Kalorien und unseren Schlaf überwachen und die im Idealfall zu
+einem gesünderen, besseren Ich führen. In diesem Fall heißt das: einem
+Ich, das mehr Zeit bei sich und weniger am iPhone verbringt.</p>
+      <p>
+        <strong>Ich habe das Gefühl, Kevin versteht mich</strong>
+      </p>
+      <p>Einmal installiert zählt Moment im Hintergrund die
+Minuten, die man am iPhone verbringt und merkt sich erbarmungslos jedes
+Mal, da man es in die Hand nimmt. Erreicht man bestimmte Marken, blinkt
+Moment mahnend auf dem Display auf: "Sie haben heute bereits 15 Minuten
+an ihrem iPhone verbracht", heißt es bei mir schon um zehn Uhr morgens. </p>
+      <image src="http://xml.zeit.de/digital/mobil/2014-10/moment-app/moment-app-180xVar.png" type="png" align="left" publication-date="" expires="" set-manually="True" layout="small" is_empty="False" title_local="Checky und Moment: Liegenlassen lernen" alt_local="Checky und Moment" title="Checky und Moment: Liegenlassen lernen" alt="Checky und Moment">
+        <bu>30 Minuten – und das für ein Selfie im Schlafanzug</bu>
+        <copyright>© Thorsten Schröder</copyright>
+      </image>
+      <p>Kevin Holesh, Programmierer aus Pittsburgh, hatte die
+ Idee für die App, als das iPhone begann, an seiner Ehe zu nagen. Er und
+ seine Frau hätten immer mehr Abende damit verbracht, auf ihre Displays
+zu starren, statt in die Augen des anderen, erzählt er. "Ich wollte
+einfach mehr im Moment leben", so Holesh. Ich habe das Gefühl, Kevin
+versteht mich.</p>
+      <p>Und zumindest auf dem Papier scheint die App, die
+seit Juni verfügbar ist, ihren Dienst zu tun. Moment-Nutzer würden ihr
+ Smartphone schon nach wenigen Wochen statt 71 Minuten nur noch 45
+Minuten nutzen, sagt der Programmierer. Hunderttausende habe Moment
+bereits aus den engen Fesseln ihres iPhones befreit. Am Ende des ersten
+Tages liest sich meine Bilanz niederschmetternd: 77 Minuten, 79-mal in
+die Hand genommen. Damit lande ich über dem Durchschnitt. Gut, dass ich
+endlich eingreife.</p>
+      <p>Auch Checky zeigt mir an, wie oft ich zum iPhone greife und wie sich das
+ über die Tage entwickelt. Auf einer Karte kann ich sehen, wo ich das am Häufigsten tue: In der Wohnung, im Büro und an der einen
+U-Bahn-Haltestelle, an der ich auf dem Weg dazwischen Empfang habe. Wie
+viele Minuten meines Tages ich damit am Ende mit Blick nach unten
+verbringe, verschweigt mir Checky leider. Dennoch: Mehr als 250.000
+Downloads geben mir zumindest das wohlige Gefühl, das sonst nur
+Gruppentherapien verschaffen: Ich bin mit meinem Problem und dem Wunsch
+nach mehr Realität als Virtualität nicht allein.</p>
+      <p>
+        <strong>Gelangweiltes Scrollen oder wichtige E-Mail?</strong>
+      </p>
+      <image src="http://xml.zeit.de/digital/mobil/2014-10/checky-app/checky-app-180xVar.png" type="png" align="left" publication-date="" expires="" set-manually="True" layout="small" is_empty="False" title_local="Checky und Moment: Liegenlassen lernen" alt_local="Checky und Moment" title="Checky und Moment: Liegenlassen lernen" alt="Checky und Moment">
+        <bu>Mit 77-mal scheint es bei mir besonders dringend.</bu>
+        <copyright>© Thorsten Schröder</copyright>
+      </image>
+      <p>Ob mir das Wissen um Minuten und
+Übersprungshandlungen bei meinem Entzug helfen, ist schwer zu sagen.
+Dass ich heute 77-mal auf mein iPhone geguckt habe, beeindruckt und
+beschämt mich gleichermaßen. Denn es führt mir die Sekundenbruchteile
+vor Augen, in denen ich andere Dinge unterbrochen habe, um etwas
+nachzugucken, was meist wahrscheinlich hätte warten können. Dass mir
+Moment vorhält, wie viele Minuten meines Tages mein Smartphone wegnagt,
+zeigt mir deutlich, wie viel Zeit ich tatsächlich einsparen könnte, wenn
+ ich das iPhone einfach mal liegen lassen würde. </p>
+      <p>Was mir die Apps leider nicht verraten: Wo fange ich
+an zu sparen? Weder Moment noch Checky können zwischen den wichtigen und
+ den unwichtigen Griffen zum Smartphone unterscheiden. Ist es eine
+E-Mail, die nicht warten kann? Oder einfach nur gelangweiltes Wischen
+durch Bilder auf Instagram? Und zumindest in der Testphase greife ich
+allein deshalb öfter zum iPhone, um zu gucken, wie oft ich zum iPhone
+gegriffen habe. </p>
+      <p>
+        <em>Moment gibt es für 4,99 Dollar für
+ das iPhone, eine Android-Version ist derzeit nicht in Planung. Checky
+ gibt es gratis für iOS und Android. <br/></em>
+      </p>
+    </division>
+  </body>
+  <teaser>
+    <supertitle>Checky und Moment</supertitle>
+    <title>Liegenlassen lernen</title>
+    <text>Moment und Checky zählen, wie oft jemand sein Smartphone benutzt und führen ihm die manchmal schockierend hohe Zahl vor Augen. Helfen die Apps so bei der digitalen Diät?</text>
+  </teaser>
+</article>
