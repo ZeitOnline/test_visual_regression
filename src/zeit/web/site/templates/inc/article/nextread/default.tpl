@@ -21,7 +21,7 @@
             <h2 class="{{ module_layout }}__heading">
                 <span class="{{ '%s__kicker' | format(module_layout) | with_mods('zmo' if teaser is zmo_content) }}">
                 {% set logo_layout = self.layout() %}
-                {% for template in teaser | logo_icon(area.kind) %}
+                {% for template in teaser | logo_icon() %}
                     {% include [
                         "zeit.web.core:templates/inc/badges/{}.tpl".format(template),
                         "zeit.web.core:templates/inc/badges/{}.html".format(template)

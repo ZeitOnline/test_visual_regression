@@ -176,7 +176,7 @@ def tag_with_logo_content(content):
 
 
 @zeit.web.register_filter
-def logo_icon(teaser, kind, zplus_only=False):
+def logo_icon(teaser, kind=None, zplus_only=False):
     templates = []
     # add Z+Icon independent from other icons
     if zplus_abo_content(teaser):
