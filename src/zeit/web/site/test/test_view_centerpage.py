@@ -2559,6 +2559,57 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus')
 
 
+def test_register_teaser_has_zplus_register_badge(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/register')
+
+    # test fullwidth teasers
+    teasers = browser.cssselect('.cp-area--solo article')
+    assert len(teasers) == 3
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test major area teasers
+    teasers = browser.cssselect('.cp-area--major article')
+    assert len(teasers) == 6
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test minor area teasers
+    teasers = browser.cssselect(
+        '.cp-area--minor article[data-zplus$="register"]')
+    assert len(teasers) == 3
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test square teasers
+    teasers = browser.cssselect('.cp-area--duo article[data-zplus]')
+    assert len(teasers) == 3
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test parquet teasers
+    teasers = browser.cssselect('.cp-area--parquet article')
+    assert len(teasers) == 6
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test ZMO parquet teasers
+    teasers = browser.cssselect('.cp-area--zmo-parquet article')
+    assert len(teasers) == 1
+    for teaser in teasers:
+        assert teaser.cssselect('.teaser-small__kicker-logo--zplus-register')
+
+
 def test_zplus_teaser_has_no_badge_in_print_ressort_area(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     teaser = browser.cssselect(

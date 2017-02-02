@@ -4,8 +4,10 @@
 {% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
 {% set module_layout = self.layout() %}
 {% set tag_with_logo_content = teaser | tag_with_logo_content %}
-{% if teaser is zplus_content %}
+{% if teaser is zplus_abo_content %}
     {% set data_id = "articlebottom.editorial-nextread...area-zplus" %}
+{% elif teaser is zplus_registration_content %}
+    {% set data_id = "articlebottom.editorial-nextread...area-zplus-register" %}
 {% else %}
     {% set data_id = "articlebottom.editorial-nextread...area" %}
 {% endif %}
