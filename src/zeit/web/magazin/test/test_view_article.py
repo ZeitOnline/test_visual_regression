@@ -36,9 +36,8 @@ def test_longform_contains_subpage_head(testbrowser):
         assert headline.attrib['id'] == 'kapitel{}'.format(i + 1)
 
 
-def test_article_page_should_contain_blocks(testserver, httpbrowser):
-    browser = httpbrowser(
-        '%s/zeit-magazin/article/all-blocks' % testserver.url)
+def test_article_page_should_contain_blocks(httpbrowser):
+    browser = httpbrowser('/zeit-magazin/article/all-blocks')
     page = browser.cssselect('.article-page')[0]
 
     paragraph = browser.cssselect('.paragraph')
