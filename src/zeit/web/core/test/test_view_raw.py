@@ -32,3 +32,14 @@ def test_renders_meta_files(testserver, hostname):
     assert r.status_code == 200
     assert r.headers['content-type'] == 'application/xml; charset=UTF-8'
     assert 'robots.txt' in r.content
+
+
+@pytest.mark.parametrize('statichost', ['static', 'scripts'])
+def test_cannot_access_content_on_static_hosts(testserver, statichost):
+    r = requests.get('%s/zeit-online/index' % testserver.url,
+                     headers={'Host': statichost + '.zeit.de'},
+                     timeout=3600)
+    assert r.status_code == 404
+    r = requests.get('%s/zeit-online/image/weltall/original' % testserver.url,
+                     headers={'Host': statichost + '.zeit.de'})
+    assert r.status_code == 404

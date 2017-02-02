@@ -9,11 +9,18 @@ import zeit.cms.repository.interfaces
 import zeit.web
 
 
-@zeit.web.view_config(context=zeit.cms.repository.interfaces.IDAVContent)
-# Even though no host_restriction means "all hosts", we need to explicitly
-# declare xml so it meshes with the other views in z.w.core.view_xml.
 @zeit.web.view_config(
-    context=zeit.cms.repository.interfaces.IDAVContent,
+    context=zeit.cms.repository.interfaces.IUnknownResource)
+@zeit.web.view_config(
+    context=zeit.content.text.interfaces.IText)
+@zeit.web.view_config(
+    context=zeit.cms.repository.interfaces.IUnknownResource,
+    host_restriction=('xml', 'static', 'scripts'))
+@zeit.web.view_config(
+    context=zeit.content.text.interfaces.IText,
+    host_restriction=('xml', 'static', 'scripts'))
+@zeit.web.view_config(
+    context=zeit.content.image.interfaces.IImage,
     host_restriction='xml')
 class RawContent(zeit.web.core.view.Base):
     """Content that does not have a type that zeit.web especially recognizes is
