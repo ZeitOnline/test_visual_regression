@@ -175,9 +175,6 @@ class Application(object):
             path='zeit.web.static:',
             cache_max_age=ast.literal_eval(self.settings['assets_max_age']))
 
-        config.add_static_view(name=self.settings.get(
-            'jsconf_prefix', '/jsconf'), path='zeit.web.core:data/config')
-
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
 
