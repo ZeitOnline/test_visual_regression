@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - BUG-631: Add page padding for login link (mobile)
 
+- ZON-3658: Remove any images.zeit.de remnants, it's img.zeit.de all the way now
+
 
 3.36 (2017-01-31)
 -----------------
