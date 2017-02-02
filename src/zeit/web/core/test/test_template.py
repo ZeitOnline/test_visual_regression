@@ -491,8 +491,9 @@ def test_zplus_abo_should_be_toggleable(application, monkeypatch):
 def test_zplus_registration_should_be_toggleable(application, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'zplus_badge_gray': False}.get)
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/cp-content/article-zeit-register')
+    path = ('http://xml.zeit.de/zeit-online/cp-content/register/'
+            'article-zeit-register')
+    content = zeit.cms.interfaces.ICMSContent(path)
     assert zeit.web.core.template.zplus_registration_content(content) is False
 
 
