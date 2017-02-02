@@ -1041,3 +1041,14 @@ def test_article_view_attribute_nooverscrolling_is_set(
         'http://xml.zeit.de/zeit-online/article/02')
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.no_overscrolling
+
+
+def test_url_path_not_found_should_render_404(testserver):
+    resp = requests.get('%s/zeit-magazin/centerpage/lifestyle'
+                        % testserver.url)
+    assert u'Dokument nicht gefunden' in resp.text
+
+
+def test_not_renderable_content_object_should_trigger_restart(testserver):
+    resp = requests.get('%s/zeit-online/quiz/quiz-workaholic' % testserver.url)
+    assert resp.headers['x-render-with'] == 'default'
