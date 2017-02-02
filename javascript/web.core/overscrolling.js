@@ -51,6 +51,9 @@ define( [
         }, {
             isActive: $( 'body[data-overscrolling="off"]' ).length < 1,
             message: 'article deactivated from cms'
+        }, {
+            isActive: !Zeit.isWrapped,
+            message: 'deactivated in app'
         }];
         $.each( status, function( index, value ) {
             if ( !value.isActive ) {
