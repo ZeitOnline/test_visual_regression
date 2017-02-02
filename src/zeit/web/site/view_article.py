@@ -122,13 +122,6 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
-@view_config(route_name='amp',
-             renderer='templates/amp/article.html')
-class AcceleratedMobilePageArticle(
-        zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
-    pass
-
-
 def is_breaking_news(context, request):
     breaking = zeit.content.article.interfaces.IBreakingNews(context, None)
     if not (breaking and breaking.is_breaking):
@@ -198,3 +191,18 @@ class LiveblogArticle(Article):
     def __init__(self, context, request):
         super(LiveblogArticle, self).__init__(context, request)
         self.liveblog = zeit.web.core.interfaces.ILiveblogInfo(self.context)
+
+
+@view_config(route_name='amp',
+             renderer='templates/amp/article.html')
+class AcceleratedMobilePageArticle(
+        zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
+    pass
+
+
+@view_config(route_name='amp',
+             context=zeit.web.core.article.ILiveblogArticle,
+             renderer='templates/amp/liveblog.html')
+class AcceleratedMobilePageLiveblogArticle(
+        LiveblogArticle, AcceleratedMobilePageArticle):
+    pass
