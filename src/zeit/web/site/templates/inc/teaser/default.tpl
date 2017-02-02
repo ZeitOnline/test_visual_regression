@@ -2,7 +2,14 @@
 {% import 'zeit.web.site:templates/macros/centerpage_macro.tpl' as cp %}
 
 {% block teaser %}
-<article class="{% block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}{% if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="{{ teaser.uniqueId }}"{% block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %} data-clicktracking="{{ area.kind }}" {% block zplus_data %}{% if teaser is zplus_content %}data-zplus="true"{% endif %}{% endblock %} {% block teaser_attributes %}{% endblock %}>
+<article class="
+    {%- block layout %}{{ layout | default('default') }}{% endblock %} {% block teaser_modifier %}{% endblock %}
+    {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="
+    {{- teaser.uniqueId }}"
+    {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
+    {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
+    {%- block taglogo_data %}{% if tag_with_logo_content %} data-taglogo="true"{% endif %}{% endblock %}
+    {%- block teaser_attributes %}{% endblock %}>
 
     {% block teaser_label %}{% endblock %}
     {% block teaser_media_position_before_title %}{% endblock %}
@@ -38,10 +45,17 @@
                                     {{ lama.use_svg_icon('logo-zmo-zm', self.layout() + '__kicker-logo--zmo svg-symbol--hide-ie', view.package, a11y=False) }}
                                 {% elif teaser is zett_content %}
                                     {{ lama.use_svg_icon('logo-zett-small', self.layout() + '__kicker-logo--zett svg-symbol--hide-ie', view.package, a11y=False) }}
+                                {% elif tag_with_logo_content and teaser is zco_content and teaser is not zplus_content %}
+                                    {{ lama.use_svg_icon(tag_with_logo_content, self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
+                                    {% if area.kind != 'zco-parquet' %}
+                                    {{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}
+                                    {% endif %}
                                 {% elif teaser is zco_content and area.kind != 'zco-parquet' %}
-                                    <span class="{{ '%s__kicker-logo-divider' | format(self.layout()) }}">{{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}</span>
+                                    {{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}
                                 {% elif teaser is liveblog %}
                                     <span class="{{ '%s__kicker-logo' | format(self.layout()) | with_mods('liveblog', 'liveblog-closed' if module.liveblog and not module.liveblog.is_live) }}"><span class="visually-hidden">(</span>live<span class="visually-hidden">)</span></span>
+                                {% elif tag_with_logo_content and teaser is not zplus_content %}
+                                    {{ lama.use_svg_icon(tag_with_logo_content, self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
                                 {% endif %}
                             {% endblock %}
                             {{ teaser.teaserSupertitle or teaser.supertitle -}}
@@ -87,7 +101,7 @@
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
                     {% if comments and teaser.commentSectionEnable %}
                         {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
-                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser | create_url }}#comments" title="Kommentare anzeigen">{{ comments_string }}</a>
+                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser | create_url }}#comments" data-ct-label="comments" title="Kommentare anzeigen">{{ comments_string }}</a>
                     {% endif %}
                 {% endblock teaser_commentcount %}
             </div>

@@ -2,7 +2,7 @@
 <author>
   <firstname>Oliver</firstname>
   <lastname>Fritsch</lastname>
-  <display_name xmlns:py="http://codespeak.net/lxml/objectify/pytype">Oliver Fritsch</display_name>
+  <display_name>Oliver Fritsch</display_name>
   <title/>
   <vgwortid>2212513</vgwortid>
   <email>oliver.fritsch@zeit.de</email>

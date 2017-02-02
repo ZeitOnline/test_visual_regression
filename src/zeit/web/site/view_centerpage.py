@@ -3,7 +3,6 @@ import logging
 
 import grokcore.component
 import lxml.etree
-import pyramid.view
 import pyramid.httpexceptions
 import zope.component
 import zope.component.interfaces
@@ -14,6 +13,7 @@ import zeit.content.cp.area
 import zeit.content.cp.interfaces
 
 from zeit.web.core.centerpage import Region, Area
+import zeit.web
 import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.navigation
@@ -29,12 +29,12 @@ import zeit.web.site.module.printbox
 log = logging.getLogger(__name__)
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
     custom_predicates=(zeit.web.site.view.is_zon_content,
                        zeit.web.core.view.is_advertorial),
     renderer='templates/centerpage_advertorial.html')
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
@@ -59,7 +59,7 @@ class Centerpage(
         return registered_images
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
     custom_predicates=(zeit.web.site.view.is_zon_content,
                        zeit.web.core.view.is_paginated),
@@ -68,7 +68,7 @@ class CenterpagePage(zeit.web.core.view_centerpage.CenterpagePage, Centerpage):
     pass
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
     custom_predicates=(zeit.web.site.view.is_zon_content,
                        zeit.web.core.view.is_paywalled))
@@ -80,10 +80,10 @@ def temporary_redirect_paywalled_centerpage(context, request):
     Therefore this Centerpage will be the only one with the status
     'paid' for now and therefore uses the paywall logic. (RD, 2016-12-08) """
     raise pyramid.httpexceptions.HTTPTemporaryRedirect(
-            location=request.registry.settings['redirect_volume_cp'])
+        location=request.registry.settings['redirect_volume_cp'])
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     name='area',
     context=zeit.content.cp.interfaces.ICP2015,
     renderer='templates/inc/area/includer.html')
@@ -133,7 +133,7 @@ class CenterpageArea(Centerpage):
         }
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.IStoryStream,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/storystream.html')
@@ -184,12 +184,12 @@ class Storystream(Centerpage):
         self.atom_meta['latest_date'] = latest_atom
 
 
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,
                        zeit.web.core.view.is_advertorial),
     renderer='templates/centerpage_advertorial.html')
-@pyramid.view.view_config(
+@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')

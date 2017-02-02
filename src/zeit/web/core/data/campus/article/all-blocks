@@ -120,6 +120,12 @@
         <copyright link="http://foo.de">©foo</copyright>
       </image>
       <p>Obcaecati praesentium labore doloribus iusto eum accusantium delectus cupiditate quaerat error, placeat, sapiente rem. Soluta natus dolore reiciendis ratione quod.</p>
+      <studycourse id="mathematik"/>
+      <p>Ratione ipsam voluptate est aliquid illo minima, quisquam unde, ad? Laudantium tenetur facere similique aut nostrum, veniam fugiat dicta adipisci saepe voluptates, rem nam quae accusantium consequatur deserunt beatae non ratione sapiente dolor quisquam esse, itaque autem. Vitae doloribus nemo obcaecati accusamus excepturi porro id, eligendi aliquam sequi iure suscipit sunt, laborum ut. Perspiciatis, qui, ratione.</p>
+      <author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml">
+        <biography>meine lange Biography im Vivi Feld Kurzbio</biography>
+      </author>
+      <p>Quibusdam nulla quasi debitis sit ratione aliquid optio quaerat molestias sed eius adipisci voluptas in saepe libero, ab nam, dignissimos vero aspernatur omnis incidunt nobis eligendi at! Asperiores et tempore ratione, exercitationem cupiditate ab, architecto tenetur, dolore alias distinctio neque totam maiores deserunt modi non! Voluptatibus nemo minima facilis ex aspernatur cupiditate unde doloremque similique optio.</p>
       <image base-id="http://xml.zeit.de/campus/image/jura-studium-fleiss/" type="jpg" align="left" layout="column-width"></image>
       <p>Similique saepe accusantium officia asperiores quo velit aliquam nobis accusamus placeat quibusdam iste, sit debitis perferendis inventore tenetur fugit molestias delectus ex recusandae porro.</p>
       <infobox href="http://xml.zeit.de/zeit-online/article/info-bonobo" is_empty="False" />

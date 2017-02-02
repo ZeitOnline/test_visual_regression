@@ -21,9 +21,15 @@
 		margin-bottom: remify(10px)
 	&__kicker
 		@extend %teaser-kicker
+		&--zmo
+			@extend %teaser-kicker--zmo
 	&__kicker-logo
 		&--zplus
 			@extend %teaser-kicker-logo--zplus
+		&--zmo
+			@extend %teaser-kicker-logo--zmo
+		&--tag
+			@extend %teaser-kicker-logo--tag
 	&__title
 		@extend %teaser-title
 	&__metadata
@@ -41,8 +47,19 @@
 		background: $zon-dark-grey
 		.nextread__lead
 			color: $zon-lighter-grey
-		.nextread__kicker
+		.nextread__kicker,
+		.nextread__kicker-logo--zmo,
+		.nextread__kicker-logo--tag
 			color: $zon-mid-grey
+		.nextread__kicker-logo
+			&--zmo
+				background: none
+				border-radius: 0
+				border-right: 1px solid rgba($white, 0.5)
+				height: remify(18px)
+				margin-right: remify(7px)
+				padding-right: remify(3px)
+				width: remify(34px) // padding-right is added
 		.nextread__title
 			color: $white
 		.nextread__metadata
@@ -74,6 +91,15 @@
 			+teaser-image-dark-overlay($angle: 0deg)
 		&__heading
 			margin-bottom: remify(16px)
+		&__kicker-logo
+			&--zmo
+				background: none
+				border-radius: 0
+				border-right: 1px solid rgba($white, 0.5)
+				height: remify(18px)
+				margin-right: remify(7px)
+				padding-right: remify(3px)
+				width: remify(34px) // padding-right is added
 		&__title
 			font-size: em(28px)
 			line-height: 1.12
@@ -103,3 +129,7 @@
 			.nextread__kicker,
 			.nextread__metadata
 				color: $zon-lighter-grey
+			.nextread__kicker-logo
+				&--zmo,
+				&--tag
+					color: inherit

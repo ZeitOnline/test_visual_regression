@@ -1,7 +1,7 @@
 {%- extends "zeit.web.site:templates/inc/teaser/default.tpl" -%}
 
 {% block layout %}teaser-gallery{% endblock %}
-{% block teaser_attributes %}data-type="teaser"{% endblock %}
+{% block teaser_attributes %} data-type="teaser"{% endblock %}
 
 {% block teaser_journalistic_format %}{% endblock %}
 

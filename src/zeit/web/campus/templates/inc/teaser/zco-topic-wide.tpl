@@ -11,7 +11,7 @@
     {%- endif %}
 
     {%- if readmore_url -%}
-        <a class="{{ self.layout() }}__topic-button" title="{{ topic_supertitle }} - {{ area.title }}" href="{{ readmore_url }}">
+        <a class="{{ self.layout() }}__topic-button" title="{{ topic_supertitle }} - {{ area.title }}" href="{{ readmore_url }}" data-ct-label="thema">
             {{- topic_supertitle -}}
         </a>
     {%- endif -%}

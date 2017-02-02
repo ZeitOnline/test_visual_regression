@@ -5,3 +5,6 @@
 {% endif %}
 
 {% set module_layout = 'column-heading' %}
+{% block image_link_additional_data_attributes %}
+    data-ct-row="author" data-ct-column="{{ '%s_of_%s' | format(1, view.authors | length) }}" data-ct-subcolumn="false" data-ct-label="image"
+{%- endblock %}

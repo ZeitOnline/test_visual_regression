@@ -84,6 +84,9 @@ def add_get_params(url, **kw):
     :rtype: unicode
     """
 
+    if isinstance(url, unicode):
+        url = url.encode('utf-8')
+
     parts = list(urlparse.urlparse(url))
     query = dict(urlparse.parse_qs(parts[4]))
     params = [(k, v) for k, v in itertools.chain(
@@ -458,6 +461,22 @@ class LazyProxy(object):
             'serie'].source(self)
         return source.factory.values.get(self.__proxy__.get('serie'))
 
+    @property
+    def keywords(self):
+        tags = []
+        try:
+            whitelist = zope.component.getUtility(
+                zeit.cms.tagging.interfaces.IWhitelist)
+            keywords = zip(self.__proxy__.get('keyword'),
+                           self.__proxy__.get('keyword_id'))
+            for label, url_value in keywords:
+                taglist = whitelist.search(label)
+                tag = filter(lambda x: x.url_value == url_value, taglist)
+                tags.append(tag[0])
+        except:
+            pass
+        return tags
+
     # Proxy zeit.content.image.interfaces.IImages. Since we bypass ZCA
     # in __conform__ above, we cannot use an adapter to do this. ;-)
     @property
@@ -497,6 +516,18 @@ class LazyProxy(object):
     @property
     def seo_slug(self):
         return zeit.content.video.video.Video.seo_slug.__get__(self)
+
+    # Proxy zeit.content.volume.interfaces.IVolume.covers
+    @property
+    def covers(self):
+        result = {}
+        for key, value in self.__proxy__.items():
+            if key.startswith('cover_'):
+                name = key.replace('cover_', '', 1)
+                result[name] = zeit.cms.interfaces.ICMSContent(value, None)
+        if not result:
+            raise AttributeError('covers')
+        return result
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
@@ -561,6 +592,8 @@ class DataSolr(RandomContent):
                         publish.date_last_published.isoformat()),
                     u'date_last_published_semantic': (
                         publish.date_last_published_semantic.isoformat()),
+                    u'keyword': [tag.label for tag in content.keywords],
+                    u'keyword_id': [tag.url_value for tag in content.keywords],
                     u'last-semantic-change': (
                         semantic.last_semantic_change.isoformat()),
                     u'image-base-id': [

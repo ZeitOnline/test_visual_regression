@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<centerpage type="homepage" xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 <head>
     <header_image/>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
@@ -207,17 +207,22 @@
                     <h4>Wie wird der Modus ausgelöst?</h4>
                     <ul>
                         <li>Über den Query Parameter <a href="/index?iqadtest=iqadview">?iqadtest=iqadview</a>.</li>
+                        <li>Über den Query Parameter <a href="/index?iqadtest=iqviewadplace">?iqadtest=iqviewadplace</a> sieht man alle verfügbaren Werbeplätze.</li>
+
                     </ul>
                     </text>
             </container>
-            <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-dbcf7-4d07-a59c-287eb191f252" title="HP Popover">
+            <container cp:type="markup" module="markup" visible_mobile="True" cp:__name__="id-8ae1e86c-dbcf7-4d07-a59c-287eb191f252" title="HP Overlay Wrapper / PopOver / ZON wurde aktualisiert">
                 <text>
                     <p>Die Anzeige des Popovers auf der HP kann erzwungen oder im Debug Modus auf normalem Weg gestartet werden.</p>
                     <h4>Wie wird der Modus ausgelöst?</h4>
                     <ul>
                         <li>
-                            Über den Query Parameter <a href="/index?debug-popover">?debug-popover</a>
-                            oder <a href="/index?force-popover">?force-popover</a>.
+                            Über den Query Parameter <a href="/zeit-online/index?debug-popover">?debug-popover</a>
+                            oder <a href="/zeit-online/index?force-popover">?force-popover</a>.
+                        </li>
+                        <li>
+                            Unterdrücken kann man ihn über den Query Parameter <a href="/zeit-online/index?prevent-popover">?prevent-popover</a>.
                         </li>
                     </ul>
                 </text>

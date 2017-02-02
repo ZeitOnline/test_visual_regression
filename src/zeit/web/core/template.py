@@ -1,6 +1,7 @@
 # coding: utf8
 import collections
 import datetime
+import json
 import logging
 import pkg_resources
 import random
@@ -132,6 +133,20 @@ def zplus_content(content):
     if access is None:
         return False
     return (access == 'abo')
+
+
+@zeit.web.register_filter
+def tag_with_logo_content(content):
+    if toggles('tag_logos'):
+        logotags = [('D17', 'tag-d17')]
+        try:
+            for keyword in content.keywords:
+                for label, logo in logotags:
+                    if keyword.label == label:
+                        return logo
+        except AttributeError:
+            pass
+    return False
 
 
 @zeit.web.register_test
@@ -521,6 +536,18 @@ def format_iqd(string):
     return string
 
 
+@zeit.web.register_filter
+def get_clicktracking_identifier(area):
+    if area.kind == 'parquet' and area.title:
+        return 'parquet-{}'.format(format_webtrekk(area.title))
+    elif area.kind in ['zett', 'spektrum']:
+        return 'parquet-{}'.format(area.kind)
+    elif area.kind.endswith('-parquet'):
+        return 'parquet-{}'.format(area.kind.rsplit('-', 1).pop(0))
+    else:
+        return area.kind
+
+
 @zeit.web.register_global
 def settings(key, default=None):
     """Returns the configuration value for a provided key"""
@@ -642,6 +669,11 @@ def webtrekk_sso_parameter(request):
         info = ['angemeldet', request.user.get('entry_url')]
         return '|'.join([item for item in info if item])
     return 'nicht_angemeldet'
+
+
+@zeit.web.register_filter
+def tojson(value):
+    return json.dumps(remove_break(value))
 
 
 @zeit.web.register_global

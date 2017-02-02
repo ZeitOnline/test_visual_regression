@@ -317,6 +317,15 @@ def test_block_contentadblock_should_contain_expected_structure(tplbrowser):
     assert browser.cssselect('div#iq-artikelanker')
 
 
+def test_block_contentadblock_isnt_shown_when_content_ad_enabled_is_false(
+        tplbrowser):
+    view = mock.Mock()
+    view.content_ad_enabled = False
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/contentadblock.html', view=view)
+    assert not browser.cssselect('div#iq-artikelanker')
+
+
 def test_block_image_should_contain_expected_structure(
         tplbrowser, dummy_request, application):
     article = zeit.cms.interfaces.ICMSContent(

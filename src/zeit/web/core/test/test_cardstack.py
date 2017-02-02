@@ -126,5 +126,5 @@ def test_cardstack_article_should_still_have_site_name_and_admin_meta_tag(
     doc = testbrowser('/zeit-online/article/cardstack?stackId=kekse').document
     assert doc.xpath('head/meta[@property="og:site_name"]/@content')[0] == (
         'ZEIT ONLINE')
-    assert doc.xpath('head/meta[@property="fb:admins"]/@content')[0] == (
-        '595098294')
+    assert doc.xpath('head/meta[@property="fb:app_id"]/@content')[0] == (
+        '638028906281625')

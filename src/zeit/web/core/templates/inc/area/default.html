@@ -1,6 +1,9 @@
 {% import '{}:templates/macros/layout_macro.tpl'.format(view.package) as lama %}
 {% import '{}:templates/macros/centerpage_macro.tpl'.format(view.package) as cp %}
-<div class="{{ 'cp-area' | with_mods(area.kind, cp_area_modifier) }}{% if area.visible_mobile == False %} mobile-hidden{% endif %}{{ cp_area_additional_class }}">
+<div class="{{ 'cp-area' | with_mods(area.kind, cp_area_modifier) }}
+    {%- if area.visible_mobile == False %} mobile-hidden{% endif %}
+    {{- cp_area_additional_class }}" data-ct-context="
+    {{- area | get_clicktracking_identifier }}">
     {% profile %}
     {% block before_module_list %}{% endblock %}
     {% block module_list %}
@@ -10,6 +13,7 @@
             {% set teaser = module | first_child %}
             {% set layout = module | get_layout %}
             {% set journalistic_format = module | get_journalistic_format %}
+            {% set tag_with_logo_content = teaser | tag_with_logo_content %}
 
             {# ZON-2011: if there is no author image on columns, render as default teaser #}
             {# ZON-3039: if teaser is zco content, render as default teaser #}

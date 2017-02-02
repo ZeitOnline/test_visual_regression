@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
 	<head>
 		<topiclinks>
 			<topiclink>
@@ -12,45 +12,45 @@
 			</topiclink>
 		</topiclinks>
 		<header_image xsi:nil="true"/>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author"/>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-10-23T04:43:08.016153+00:00</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-10-01T15:35:47.219274+00:00</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-10-23T04:56:11.059335+00:00</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-10-22T14:41:11.743505+00:00</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-10-22T14:41:11.563818+00:00</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-10-22T14:41:34.515701+00:00</attribute>
-		<attribute py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Aktuelle Nachrichten, Hintergründe, Kommentare und Reportagen zu deutscher und internationaler Politik bei ZEIT ONLINE</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-10-22T14:40:56.652107+00:00</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stuerzenhofecker</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/politik/index-2.cp2015</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e4563229-60f2-4cd0-b372-8d255989b58c}</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
-		<attribute py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-10-23T04:43:08.016153+00:00</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-10-01T15:35:47.219274+00:00</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-10-23T04:56:11.059335+00:00</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-10-22T14:41:11.743505+00:00</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-10-22T14:41:11.563818+00:00</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-10-22T14:41:34.515701+00:00</attribute>
+		<attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">Aktuelle Nachrichten, Hintergründe, Kommentare und Reportagen zu deutscher und internationaler Politik bei ZEIT ONLINE</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-10-22T14:40:56.652107+00:00</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stuerzenhofecker</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/politik/index-2.cp2015</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Politik</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">centerpage-2009</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/zeit.content.cp" name="type">centerpage</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:e4563229-60f2-4cd0-b372-8d255989b58c}</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">23</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+		<attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
 	&lt;initialized_object&gt;
 		&lt;klass&gt;
 			&lt;global name="Provides" module="zope.interface.declarations"/&gt;

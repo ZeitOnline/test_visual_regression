@@ -7,8 +7,13 @@
         data-video-provider="brightcove"
         data-video-size="large"
         data-video-page-url="{{ view.content_url }}{% if view.slug %}/{{ view.slug }}{% endif %}"
-        itemtype="http://schema.org/VideoObject" itemscope>
+        itemprop="mainEntity"
+        itemscope
+        itemtype="http://schema.org/VideoObject"
+        itemid="{{ view.basename }}"
+        itemref="publisher">
         {% profile %}
+        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         <meta itemprop="playerType" content="HTML5 Flash">
         <meta itemprop="name" content="{{ view.title }}">
         <meta itemprop="uploadDate" content="{{ view.date_last_modified | format_date('iso8601') }}">
@@ -35,17 +40,17 @@
 
         {% include "zeit.web.site:templates/inc/article/heading.tpl" %}
 
-        <div class="article__item">
+        <div class="article__item" data-ct-area="articleheader">
             <div class="summary" itemprop="description">
                 {{ view.subtitle }}
             </div>
             {%- set byline = view.context | get_byline('main') %}
             {% if byline | length -%}
-                <div class="{{ 'byline' | with_mods('on-videopage') }}">
+                <div class="{{ 'byline' | with_mods('on-videopage') }}" data-ct-row="author">
                 {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
                 </div>
             {% endif -%}
-            <div class="metadata" data-ct-area="articleheader">
+            <div class="metadata">
                 {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
                 {% include "zeit.web.site:templates/inc/article/sharing-menu.html" %}
             </div>

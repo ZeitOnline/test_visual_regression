@@ -16,4 +16,9 @@
   <volume_teaser>true</volume_teaser>
   <rawr_iframe>true</rawr_iframe>
   <enable_intext_links>false</enable_intext_links>
+  <hp_overlay>true</hp_overlay>
+  <update_signals>true</update_signals>
+  <overscrolling>true</overscrolling>
+  <tag_logos>true</tag_logos>
+  <zplus_badge_on_registration_paywall>true</zplus_badge_on_registration_paywall>
 </features>

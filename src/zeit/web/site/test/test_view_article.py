@@ -1713,13 +1713,13 @@ def test_contentad_is_rendered_once_on_article_pages(testbrowser):
     browser = testbrowser('/zeit-online/article/infoboxartikel')
     assert len(browser.cssselect(selector)) == 1
 
-    browser = testbrowser('/zeit-online/article/zeit')
+    browser = testbrowser('/zeit-online/article/fischer')
     assert len(browser.cssselect(selector)) == 1
 
-    browser = testbrowser('/zeit-online/article/zeit/seite-3')
+    browser = testbrowser('/zeit-online/article/fischer/seite-2')
     assert len(browser.cssselect(selector)) == 1
 
-    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    browser = testbrowser('/zeit-online/article/fischer/komplettansicht')
     assert len(browser.cssselect(selector)) == 1
 
 
@@ -1757,68 +1757,68 @@ def test_video_in_article_has_poster_copyright(testbrowser):
 def test_zplus_zon_article_has_correct_markup(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zon')
 
-    zplus_box = browser.cssselect('.zplus--coverless')
+    zplus_box = browser.cssselect('.zplus-badge--coverless')
     assert len(zplus_box) == 1
 
-    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
-    zplus_text = zplus_box[0].cssselect('.zplus__text')
-    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_banner = zplus_box[0].cssselect('.zplus-badge__banner')
+    zplus_icon = zplus_box[0].cssselect('.zplus-badge__icon')
+    zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link-text')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_marker) == 1
+    assert len(zplus_icon) == 1
     assert len(zplus_text) == 1
     assert len(zplus_link) == 1
     assert 'exklusiv' in zplus_box[0].cssselect('a')[0].attrib['href']
     assert 'Exklusiv' in zplus_link[0].text.strip()
-    assert not zplus_box[0].cssselect('.zplus__media')
+    assert not zplus_box[0].cssselect('.zplus-badge__media')
 
 
 def test_zplus_volumeless_print_article_has_zplus_zon_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-novolume')
 
-    zplus_box = browser.cssselect('.zplus--coverless')
+    zplus_box = browser.cssselect('.zplus-badge--coverless')
     assert len(zplus_box) == 1
 
-    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_badge = zplus_box[0].cssselect('.zplus__marker')
+    zplus_banner = zplus_box[0].cssselect('.zplus-badge__banner')
+    zplus_badge = zplus_box[0].cssselect('.zplus-badge__icon')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
     assert len(zplus_badge) == 1
-    assert not zplus_box[0].cssselect('.zplus__media')
+    assert not zplus_box[0].cssselect('.zplus-badge__media')
 
 
 def test_zplus_coverless_print_article_has_fallback_image(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-nocover')
 
-    zplus_box = browser.cssselect('.zplus')
+    zplus_box = browser.cssselect('.zplus-badge')
     assert len(zplus_box) == 1
 
-    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
+    zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
     assert 'default_packshot_diezeit' in zplus_media[0].attrib['src']
 
 
 def test_zplus_abo_print_article_has_correct_markup(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit')
 
-    zplus_box = browser.cssselect('.zplus')
+    zplus_box = browser.cssselect('.zplus-badge')
     assert len(zplus_box) == 1
 
-    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
-    zplus_text = zplus_box[0].cssselect('.zplus__text')
-    zplus_cover = zplus_box[0].cssselect('.zplus__media')
-    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
-    zplus_link = zplus_box[0].cssselect('.zplus__link')
+    zplus_banner = zplus_box[0].cssselect('.zplus-badge__banner')
+    zplus_icon = zplus_box[0].cssselect('.zplus-badge__icon')
+    zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
+    zplus_cover = zplus_box[0].cssselect('.zplus-badge__media')
+    zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link-text')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_marker) == 1
+    assert len(zplus_icon) == 1
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
@@ -1835,30 +1835,30 @@ def test_zplus_print_article_has_correct_markup(
         'reader_revenue': True}.get)
     browser = testbrowser('/zeit-online/article/zplus-zeit-register')
 
-    zplus_box = browser.cssselect('.zplus')
+    zplus_box = browser.cssselect('.zplus-badge')
     assert len(zplus_box) == 1
 
     article_metadata_source = browser.cssselect('.metadata__source')
-    zplus_banner = zplus_box[0].cssselect('.zplus__banner')
-    zplus_marker = zplus_box[0].cssselect('.zplus__marker')
-    zplus_text = zplus_box[0].cssselect('.zplus__text')
-    zplus_cover = zplus_box[0].cssselect('.zplus__media')
-    zplus_media = zplus_box[0].cssselect('.zplus__media-item')
-    zplus_link = zplus_box[0].cssselect('.zplus__link')
-    zplus_label = zplus_box[0].cssselect('.zplus__label')
+    zplus_banner = zplus_box[0].cssselect('.zplus-badge__banner')
+    zplus_icon = zplus_box[0].cssselect('.zplus-badge__icon')
+    zplus_text = zplus_box[0].cssselect('.zplus-badge__text')
+    zplus_cover = zplus_box[0].cssselect('.zplus-badge__media')
+    zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
+    zplus_link = zplus_box[0].cssselect('.zplus-badge__link-text')
+    zplus_intro = zplus_box[0].cssselect('.zplus-badge__intro')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_modifier) == 2
     assert len(zplus_banner) == 1
-    assert len(zplus_marker) == 0
+    assert len(zplus_icon) == 0
     assert len(zplus_text) == 1
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
     assert len(zplus_link) == 1
-    assert len(zplus_label) == 1
+    assert len(zplus_intro) == 1
     assert '/2014/49' in zplus_box[0].cssselect('a')[0].attrib['href']
     assert 'ZEIT Nr. 49/2014' in zplus_link[0].text.strip()
-    assert 'Aus der' in zplus_label[0].text.strip()
+    assert 'Aus der' in zplus_intro[0].text.strip()
     assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
             in zplus_media[0].attrib['src'])
     assert article_metadata_source.__len__() == 0
@@ -1876,36 +1876,36 @@ def test_zplus_print_article_has_correct_markup_if_reader_revenue_off(
 
 def test_free_print_article_has_volume_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free')
-    badge = browser.cssselect('main article .zplus')[0]
-    label = badge.cssselect('.zplus__text')[0]
+    badge = browser.cssselect('main article .zplus-badge')[0]
+    label = badge.cssselect('.zplus-badge__text')[0]
 
     assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 1/2016'
-    assert badge.cssselect('.zplus__media')
+    assert badge.cssselect('.zplus-badge__media')
 
     # test volume badge is in single page view too
     browser = testbrowser(
         '/zeit-online/article/zplus-zeit-free/komplettansicht')
 
-    assert browser.cssselect('main article .zplus')
+    assert browser.cssselect('main article .zplus-badge')
 
 
 def test_free_print_article_shows_no_volume_badge_on_page_two(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free/seite-2')
 
-    assert not browser.cssselect('main article .zplus')
+    assert not browser.cssselect('main article .zplus-badge')
 
 
 def test_registration_zon_article_has_no_zplus_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zon-register')
 
-    assert not browser.cssselect('.zplus')
+    assert not browser.cssselect('.zplus-badge')
     assert not browser.cssselect('.article__item--has-badge')
 
 
 def test_free_article_has_no_zplus_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
 
-    zplus_box = browser.cssselect('.zplus')
+    zplus_box = browser.cssselect('.zplus-badge')
     zplus_modifier = browser.cssselect('.article__item--has-badge')
 
     assert len(zplus_box) == 0
@@ -2028,6 +2028,13 @@ def test_article_contains_authorbox(testbrowser):
     authorbox = browser.cssselect('.authorbox')
     assert len(authorbox) == 3
 
+    # test custom biography
+    author = authorbox[0]
+    description = author.cssselect('.authorbox__summary')[0]
+    assert description.text.strip() == 'Text im Feld Kurzbio'
+    assert description.get('itemprop') == 'description'
+
+    # test author content and microdata
     author = authorbox[1]
     image = author.cssselect('[itemprop="image"]')[0]
     name = author.cssselect('strong[itemprop="name"]')[0]
@@ -2119,3 +2126,123 @@ def test_paywall_get_param_works_like_http_header(testbrowser):
         '/zeit-online/article/zplus-zeit?C1-Meter-Status=always_paid')
 
     assert browser_with_getparam.contents == browser_with_header.contents
+
+
+def test_overscrolling_is_active(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1200, 900)
+    driver.get(
+        '%s/zeit-online/article/01' % testserver.url)
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
+def test_overscrolling_is_not_active_on_paywalls(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1200, 900)
+    path = 'zeit-online/article/01'
+    query = 'C1-Meter-Status=paywall&C1-Meter-User-Status=register'
+    driver.get('{}/{}?{}'.format(testserver.url, path, query))
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
+def test_overscrolling_is_not_active_on_non_destop_environment(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(760, 900)
+    path = 'zeit-online/article/01'
+    query = 'C1-Meter-Status=paywall&C1-Meter-User-Status=register'
+    driver.get('{}/{}?{}'.format(testserver.url, path, query))
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
+def test_overscrolling_is_working_as_expected(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1200, 900)
+    driver.get(
+        '%s/zeit-online/article/01' % testserver.url)
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+    driver.execute_script('window.scrollBy(0, 801)')
+    condition = expected_conditions.visibility_of_element_located((
+        By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
+def test_overscrolling_is_turned_off_by_configuration(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'overscrolling': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1200, 900)
+    driver.get(
+        '%s/zeit-online/article/01' % testserver.url)
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+
+
+def test_paywall_returns_correct_first_click_free_to_webtrekk(
+        application, dummy_request):
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple')
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'unfeasible'
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'no'
+
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/zplus-zeit-register')
+    dummy_request.GET['C1-Meter-Status'] = 'open'
+    dummy_request.GET['C1-Meter-Info'] = 'first_click_free'
+    view = zeit.web.site.view_article.Article(content, dummy_request)
+    assert view.webtrekk['customParameter']['cp29'] == 'yes'
+
+
+def test_nextread_shows_zmo_kicker_logo_and_styles(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zmo')
+    nextread = browser.cssselect('article.nextread')[0]
+    assert nextread.cssselect('.nextread__kicker--zmo')
+    assert nextread.cssselect('.nextread__kicker-logo--zmo')

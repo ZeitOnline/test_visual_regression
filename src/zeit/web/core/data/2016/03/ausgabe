@@ -1,4 +1,4 @@
-<volume xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<volume>
   <head>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-09-07T14:12:22.119953+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_digital_published">2016-12-06T19:00:00+00:00</attribute>
@@ -26,11 +26,10 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">3</attribute>
   </head>
-  <body>
-    <year>2016</year>
-    <volume>03</volume>
-  </body>
+  <body/>
   <covers>
   </covers>
 </volume>

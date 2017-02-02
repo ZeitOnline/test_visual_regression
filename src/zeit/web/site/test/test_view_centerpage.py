@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import datetime
 import re
 
 from selenium.common.exceptions import TimeoutException
@@ -551,23 +552,22 @@ def test_videostage_series_select_should_navigate_away(
     assert '/serie/rekorder' in driver.current_url
 
 
-def test_videostage_video_should_play(selenium_driver, testserver):
+def test_videostage_thumbnail_should_be_replaced(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/video-stage' % testserver.url)
     article = driver.find_element_by_css_selector(
         '#video-stage .video-large')
     videolink = driver.find_element_by_css_selector(
         '#video-stage .video-large figure')
+    thumbnail = article.find_element_by_css_selector(
+        '.video-thumbnail__media-item')
     videolink.click()
     try:
-        player = WebDriverWait(driver, 10).until(
-            expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '#video-stage .video-player__iframe'))
-        )
-        assert article.get_attribute(
-            'data-video-id') in player.get_attribute('src')
+        WebDriverWait(driver, 10).until(
+            expected_conditions.staleness_of(thumbnail))
+        assert True
     except TimeoutException:
-        assert False, 'Video not visible with 10 seconds'
+        assert False, 'Thumbnail not replaced by video'
 
 
 def test_videostage_has_zon_svg_logo(testbrowser):
@@ -738,7 +738,7 @@ def test_canonical_ruleset_on_cps(testbrowser, datasolr):
     # several params
     browser = testbrowser('/dynamic/ukraine?p=2&a=0#comment')
     link = browser.cssselect('link[rel="canonical"]')
-    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?p=2'
+    assert link[0].get('href') == 'http://localhost/dynamic/ukraine?a=0&p=2'
 
 
 def test_canonical_ruleset_on_article_pages(testbrowser):
@@ -755,6 +755,10 @@ def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
     browser = testbrowser('/suche/index?p=2')
     link = browser.cssselect('link[rel="canonical"]')
     assert link[0].get('href') == 'http://localhost/suche/index?p=2'
+
+    browser = testbrowser('/suche/index?q=s%C3%BC%C3%9F')
+    link = browser.cssselect('link[rel="canonical"]')[0]
+    assert link.get('href') == 'http://localhost/suche/index?q=s%C3%BC%C3%9F'
 
     browser = testbrowser('/dynamic/ukraine')
     link = browser.cssselect('link[rel="canonical"]')
@@ -1330,14 +1334,13 @@ def test_author_teaser_is_not_rendered_in_major(testbrowser):
     assert len(author) == 0
 
 
-def test_all_teasers_have_clicktrack_attribute(testbrowser):
+def test_all_areas_have_clicktrack_attribute(testbrowser):
     browser = testbrowser('/zeit-online/basic-teasers-setup')
-    selector = 'article[data-unique-id]'
-    teasers = browser.cssselect(selector)
-    assert len(teasers)
+    areas = browser.cssselect('.cp-area')
+    assert len(areas)
 
-    for teaser in teasers:
-        assert teaser.attrib['data-clicktracking'] != ''
+    for area in areas:
+        assert area.attrib['data-ct-context'] != ''
 
 
 def test_adtile12_from_cp_extra_is_there(testbrowser):
@@ -2332,7 +2335,7 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
         'date_first_released': '2012-02-22T14:36:32.452398+00:00'}, {
             'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/02',
             'image-base-id': [(u'http://xml.zeit.de/zeit-magazin/images/'
-                              'harald-martenstein-wideformat')],
+                               'harald-martenstein-wideformat')],
             'image-fill-color': [u''], 'teaserText': 'text',
             'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
             'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
@@ -2499,14 +2502,15 @@ def test_volume_overview_has_adapted_centerpage_header(
 
 def test_volume_overview_teasers_render_expected_markup(testbrowser):
     browser = testbrowser('/2016/index')
-    teasers = browser.cssselect('.cp-area--volume-overview >'
-                                ' .volume-overview-teaser a')
+    teasers = browser.cssselect(
+        '.cp-area--volume-overview .teaser-volume-overview a')
     assert len(teasers) == 7
     for teaser in teasers:
-        caption = teaser.cssselect('.volume-overview-teaser__caption')[0]
-        assert caption.find('span')[0].text + \
-            caption.find('span')[2].text == 'Jetzt lesen'
-        assert 'volume-overview-teaser__media' in \
+        caption = teaser.cssselect('.teaser-volume-overview__cta')[0]
+        caption_text = caption.text_content().strip()
+        assert caption_text.startswith('Jetzt Ausgabe ')
+        assert caption_text.endswith(' lesen')
+        assert 'teaser-volume-overview__media' in \
                teaser.cssselect('figure')[0].get('class')
 
 
@@ -2515,28 +2519,28 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
 
     # test fullwidth teasers
     teasers = browser.cssselect('.cp-area--solo article')
-    assert len(teasers) == 2
+    assert len(teasers) == 3
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test major area teasers
     teasers = browser.cssselect('.cp-area--major article')
-    assert len(teasers) == 4
+    assert len(teasers) == 6
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test minor area teasers
-    teasers = browser.cssselect('.cp-area--minor article')
-    assert len(teasers) == 4
+    teasers = browser.cssselect('.cp-area--minor article[data-zplus]')
+    assert len(teasers) == 5
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
 
     # test square teasers
-    teasers = browser.cssselect('.cp-area--duo article')
-    assert len(teasers) == 2
+    teasers = browser.cssselect('.cp-area--duo article[data-zplus]')
+    assert len(teasers) == 3
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
         assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
@@ -2585,7 +2589,7 @@ def test_headerimage_should_overlay_onto_tube_area(testbrowser):
     assert '--overlain' in header_image.attrib['class']
 
 
-def test_volume_teaser_on_cphas_correct_elements(testbrowser):
+def test_volume_teaser_on_cp_has_correct_elements(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/volumeteaser')
 
     assert len(browser.cssselect('.teaser-volumeteaser')) == 2
@@ -2629,3 +2633,117 @@ def test_volume_cp_should_send_correct_headers(testserver, monkeypatch):
     c1_mixin.context = cp
     c1_mixin.request = request
     assert c1_mixin._c1_entitlement == 'paid'
+
+
+def test_volume_overview_has_correct_pagination(testbrowser):
+    browser = testbrowser('/2015/index')
+
+    prev_tag = browser.cssselect('head link[rel="prev"]')[0]
+    next_tag = browser.cssselect('head link[rel="next"]')[0]
+    current_tag = browser.cssselect('head link[rel="canonical"]')[0]
+    assert prev_tag.get('href').endswith('/2016/index')
+    assert next_tag.get('href').endswith('/2014/index')
+    assert current_tag.get('href').endswith('/2015/index')
+
+    next_button = browser.cssselect('.pager__button--next')[0]
+    assert next_button.text == 'Vorheriges Jahr'
+
+    current_year = datetime.datetime.today().year
+    prev_link = browser.cssselect('.pager__pages a')[0]
+    assert prev_link.get('href').endswith('/{}/index'.format(current_year))
+
+    current = browser.cssselect('.pager__pages .pager__page--current')[0]
+    assert current.text_content() == '2015'
+
+    meta_robots = browser.cssselect('head meta[name="robots"]')[0]
+    meta_robots.get('content') == 'index,follow,noodp,noydir,noarchive'
+
+
+def test_hpoverlay_toggle_toggles_html_output(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.cssselect('#overlay-wrapper')
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': False}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert not browser.cssselect('#overlay-wrapper')
+
+
+def test_hpoverlay_html_output_is_not_on_articles(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True}.get)
+    browser = testbrowser('/zeit-online/article/simple')
+    assert not browser.cssselect('#overlay-wrapper')
+
+
+def test_d17_icon_feature_toggle_is_working(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': False}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert not browser.cssselect('*[data-taglogo="true"]')
+
+
+def test_d17_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert browser.cssselect('*[data-taglogo="true"]')
+    assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
+    assert len(browser.cssselect('.teaser-small__kicker-logo--tag')) == 4
+    assert len(browser.cssselect(
+        '.teaser-fullwidth-column__kicker-logo--tag')) == 1
+    assert len(browser.cssselect(
+        '.teaser-small-column__kicker-logo--tag')) == 1
+    assert browser.cssselect(
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zco')
+    text = 'Freier Teaser Kicker'
+    uid = 'http://xml.zeit.de/zeit-online/cp-content/taglogo/link-d17-tag'
+    attr = 'data-unique-id="{}"'.format(uid)
+    selector = 'article[{}] .teaser-small__kicker-logo--tag'.format(attr)
+    assert text in browser.cssselect(selector)[0].getparent().text_content()
+
+
+def test_d17_icon_is_not_display_on_zplus_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zplus + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zplus')
+
+
+def test_d17_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zmo + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zmo')
+
+
+def test_d17_icon_is_not_display_on_zett_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    assert not browser.cssselect(
+        'teaser-small__kicker-logo--zett + .teaser-small__kicker-logo--tag')
+    assert not browser.cssselect(
+        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zett')
+
+
+def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    query = ('.cp-region--solo + .cp-region--duo article:first-child '
+             '.teaser-small__kicker-logo--tag')
+    assert browser.cssselect(query)
+
+
+def test_d17_icon_is_display_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-taglogo')
+    assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="topicpage">
+<centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="topicpage">
   <head>
     <header_image/>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
@@ -67,7 +67,7 @@
         <container cp:__name__="id-31dfdd6a-9aa4-4c27-840a-141bb5e65680" cp:type="auto-teaser" module="zon-small" visible="True"/>
         <container cp:__name__="id-a0a325d8-d633-45ed-9f46-d2409d9889ae" cp:type="auto-teaser" module="zon-small" visible="True"/>
         <query>
-          <condition type="Channel" py:pytype="str">News</condition>
+          <condition type="Channel">News</condition>
         </query>
       </region>
     </cluster>

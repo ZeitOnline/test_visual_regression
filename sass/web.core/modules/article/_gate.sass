@@ -15,6 +15,9 @@
 		position: absolute
 		top: 0
 		width: remify(49px)
+		&--grey
+			background-color: $grey
+			color: $white
 
 	&__title
 		font-size: em(20px)
@@ -85,6 +88,8 @@
 		letter-spacing: $letter-spacing-s
 		margin: 0
 		padding-top: remify(20px)
+		.is-loggedin &
+			display: none
 
 	&__link
 		white-space: nowrap

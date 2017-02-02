@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
-<link xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<link>
     <head>
         <author expires="" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <display_name>Tom Sundermann</display_name>

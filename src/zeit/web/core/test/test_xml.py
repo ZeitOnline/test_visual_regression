@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
+import os
+import sys
+
 import lxml.etree
 import magic
 import mock
-import os
 import requests
-import sys
+
 import zeit.web.core
 
 
@@ -17,16 +19,6 @@ def test_xml_renders_with_host_header(testserver):
     res = requests.get(
         '%s/zeit-magazin/centerpage/index' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
-    assert res.status_code == 200
-
-
-def test_xml_renders_with_route_name(testserver):
-    res = requests.get(
-        '%s/xml/zeit-online/index' % testserver.url)
-    assert res.status_code == 200
-
-    res = requests.get(
-        '%s/xml/zeit-magazin/centerpage/index' % testserver.url)
     assert res.status_code == 200
 
 
@@ -99,7 +91,7 @@ def test_xml_renders_centerpage_as_expected(testserver):
 
 
 def test_xml_renders_centerpage_with_centerpage_view(testserver):
-    with mock.patch('zeit.web.core.view_xml.Centerpage.__call__') as view:
+    with mock.patch('zeit.web.core.view_xml.XMLCenterpage.__call__') as view:
         requests.get(
             '%s/zeit-magazin/centerpage/index' % testserver.url,
             headers={'Host': 'xml.zeit.de'})

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<article xmlns:py="http://codespeak.net/lxml/objectify/pytype">
+<article>
   <head>
     <author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml">
       <display_name>Wenke Husmann</display_name>
@@ -39,6 +39,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="overscrolling">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-12-09T09:23:57.105802+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-05-27T17:11:30.179510+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-12-09T09:32:11.073684+00:00</attribute>

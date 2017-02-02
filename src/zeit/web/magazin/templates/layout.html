@@ -20,13 +20,13 @@
             <link rel="amphtml" href="{{ view.amp_url }}">
         {% endif -%}
         {% if view.canonical_url -%}
-            <link rel="canonical" href="{{ view.canonical_url }}">
+            <link rel="canonical" href="{{ view.canonical_url | safe }}">
         {% endif -%}
         {% if view.prev_page_url -%}
-            <link rel="prev" href="{{ view.prev_page_url }}">
+            <link rel="prev" href="{{ view.prev_page_url | safe }}">
         {% endif -%}
         {% if view.next_page_url -%}
-            <link rel="next" href="{{ view.next_page_url }}">
+            <link rel="next" href="{{ view.next_page_url | safe }}">
         {% endif -%}
         {% if view.syndication_source -%}
             <link rel="syndication-source" href="{{ view.syndication_source }}">
@@ -54,6 +54,8 @@
         {%- include "zeit.web.magazin:templates/inc/meta/sharing.html" -%}
         {%- endblock sharing_meta %}
 
+        {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
+
         {# Modernizr -#}
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
 
@@ -69,7 +71,7 @@
             <script src="//localhost:35729/livereload.js"></script>
         {% endif %}
     </head>
-    <body data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}>
+    <body data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
         {% include "zeit.web.core:templates/inc/tag-manager.html" %}
         {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}

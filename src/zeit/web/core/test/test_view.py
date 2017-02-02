@@ -286,6 +286,24 @@ def test_http_header_should_contain_c1_entitlement(testserver, monkeypatch):
             'C1-Track-Entitlement') == access_source.translate_to_c1('abo')
 
 
+def test_http_header_should_contain_c1_entitlement_id(testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tracking': True}.get)
+
+    free_article = testserver.url + '/zeit-online/article/01'
+    assert not requests.head(free_article).headers.get(
+        'C1-Track-Entitlement-ID')
+
+    register_article = (
+        testserver.url + '/zeit-online/article/zplus-zeit-register')
+    assert requests.head(register_article).headers.get(
+        'C1-Track-Entitlement-ID') == 'zeit-fullaccess'
+
+    paid_article = testserver.url + '/zeit-online/article/zplus-zeit'
+    assert requests.head(paid_article).headers.get(
+        'C1-Track-Entitlement-ID') == 'zeit-fullaccess'
+
+
 def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
@@ -898,38 +916,82 @@ def test_notfication_after_paywall_registration_renders_correctly(
         testserver, selenium_driver):
     message_txt = u'Herzlich willkommen! Mit Ihrer Anmeldung k\xf6nnen' \
         u' Sie nun unsere Artikel lesen.'
+    message_txt_error = u'Leider haben Sie kein g\xfcltiges Abonnement ' \
+        u'f\xfcr diesen Artikel. Bitte w\xe4hlen Sie unten das ' \
+        u'gew\xfcnschte Abo.'
     url_hash = '#success-registration'
 
     driver = selenium_driver
 
-    def assert_notification():
+    def assert_notification(pathname, css_class, text, query=''):
+        driver.get('%s%s%s%s' % (testserver.url, pathname, query, url_hash))
+        selector = 'link[itemprop="mainEntityOfPage"][href="{}{}"]'.format(
+            testserver.url, pathname)
         try:
-            cond = expected_conditions.presence_of_element_located((
-                By.CLASS_NAME, "notification--success"))
-            WebDriverWait(driver, 5).until(cond)
+            # assure we are seeing the right page
+            WebDriverWait(driver, 3).until(
+                expected_conditions.presence_of_element_located((
+                    By.CSS_SELECTOR, selector)))
+            # check for notification element
+            WebDriverWait(driver, 1).until(
+                expected_conditions.presence_of_element_located((
+                    By.CLASS_NAME, css_class)))
+        except TimeoutException:
+            assert False, 'Timeout notification %s' % driver.current_url
+        else:
+            notification = driver.find_element_by_class_name(css_class)
+            assert text == notification.text
+            assert url_hash not in driver.current_url
+
+    # ZON
+    assert_notification('/zeit-online/article/01', 'notification--success',
+                        message_txt)
+
+    # ZMO
+    assert_notification('/zeit-magazin/article/essen-geniessen-spargel-lamm',
+                        'notification--success', message_txt)
+
+    # ZCO
+    assert_notification('/campus/article/infographic', 'notification--success',
+                        message_txt)
+
+    # ZON wrong subscription
+    assert_notification('/zeit-online/article/zplus-zeit',
+                        'notification--error', message_txt_error,
+                        '?C1-Meter-Status=always_paid')
+
+
+def test_notfication_after_account_confirmation_renders_correctly(
+        testserver, selenium_driver):
+    driver = selenium_driver
+    url_hash = '#success-confirm-account'
+    text = u'Ihr Konto wurde best\xe4tigt. Sie sind jetzt angemeldet.'
+    # request some arbitrary article page
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    driver.add_cookie({
+        'name': 'my_sso_cookie',
+        'value': 'just be present',
+    })
+    with mock.patch('zeit.web.core.security.get_user_info') as get_user:
+        get_user.return_value = {
+            'ssoid': '123',
+            'mail': 'test@example.org',
+            'name': 'jrandom',
+        }
+        # request the actual dashboard page
+        driver.get('%s/konto#success-confirm-account' % testserver.url)
+        try:
+            # check for notification element
+            WebDriverWait(driver, 1).until(
+                expected_conditions.presence_of_element_located((
+                    By.CLASS_NAME, 'notification--success')))
         except TimeoutException:
             assert False, 'Timeout notification %s' % driver.current_url
         else:
             notification = driver.find_element_by_class_name(
                 'notification--success')
-            assert message_txt == notification.text
+            assert text == notification.text
             assert url_hash not in driver.current_url
-
-    # ZON
-    driver.get('{0}/zeit-online/article/01{1}'
-               .format(testserver.url, url_hash))
-    assert_notification()
-
-    # ZMO
-    driver.get(
-        '{0}/zeit-magazin/article/essen-geniessen-spargel-lamm{1}'
-        .format(testserver.url, url_hash))
-    assert_notification()
-
-    # ZCO
-    driver.get(
-        '{0}/campus/article/infographic{1}'.format(testserver.url, url_hash))
-    assert_notification()
 
 
 def test_http_header_should_contain_c1_debug_echoes(testserver):
@@ -941,3 +1003,41 @@ def test_http_header_should_contain_c1_debug_echoes(testserver):
         })
     assert response.headers.get('x-debug-c1-meter-status') == 'always_paid'
     assert response.headers.get('x-debug-c1-meter-user-status') == 'anonymous'
+
+
+def test_js_toggles_are_correctly_returned(
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True, 'update_signals': False}.get)
+    view = zeit.web.core.view.Base(None, None)
+    assert ('hp_overlay', True) in view.js_toggles
+    assert ('update_signals', False) in view.js_toggles
+
+
+def test_js_toggles_are_correctly_displayed(
+        monkeypatch, selenium_driver, testserver):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'hp_overlay': True, 'update_signals': False}.get)
+    driver = selenium_driver
+    driver.get('%s/zeit-online/index' % testserver.url)
+    hpo = driver.execute_script('return Zeit.toggles.hp_overlay')
+    uds = driver.execute_script('return Zeit.toggles.update_signals')
+
+    assert hpo
+    assert not uds
+
+
+def test_article_view_attribute_nooverscrolling_is_not_set(
+        application, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert not view.no_overscrolling
+
+
+def test_article_view_attribute_nooverscrolling_is_set(
+        application, dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.site.view_article.Article(article, dummy_request)
+    assert view.no_overscrolling

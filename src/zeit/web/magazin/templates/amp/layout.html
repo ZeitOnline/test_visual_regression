@@ -19,6 +19,10 @@
 	</div>
 {% endblock logo %}
 
+{% block zplus_badge %}
+	{% include "zeit.web.magazin:templates/amp/article/zplus-badge.html" %}
+{% endblock %}
+
 {% block footer_logo %}
 	<a href="{{ request.route_url('home') }}zeit-magazin/index">
 		<svg class="footer__logo">

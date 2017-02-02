@@ -87,7 +87,6 @@ def test_gsitemap_page_does_not_break_without_image_caption(
         'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}]
     monkeypatch.setattr(zeit.web.core.image.Image, 'caption', None)
     browser = testbrowser('/gsitemaps/index.xml?p=1')
-    print browser.contents
     xml = lxml.etree.fromstring(browser.contents)
     ns = 'http://www.google.com/schemas/sitemap-image/1.1'
     assert (
@@ -101,7 +100,9 @@ def test_gsitemap_newssite(testbrowser):
     solr.results = [{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'crystal-meth-nancy-schmidt/'],
-        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'},
+        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
+        'keyword': ['Schwangerschaft', 'Konsumverhalten'],
+        'keyword_id': ['schwangerschaft', 'konsumverhalten']},
         {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'}]
     browser = testbrowser('/gsitemaps/newsitemap.xml')
     assert (browser.document.xpath('//url/loc')[0].text ==
@@ -127,8 +128,7 @@ def test_gsitemap_newssite(testbrowser):
         'Big Data: Schwanger ohne digitale Spuren')
     assert (
         xml.xpath('//n:news/n:keywords', namespaces=ns)[0].text ==
-        u'Schwangerschaft, Konsumverhalten, Werbung, Tracking, Facebook, '
-        u'Behörde, Minnesota, USA, New York, Digital, Datenschutz')
+        u'Schwangerschaft, Konsumverhalten, Digital, Datenschutz')
     assert xml.xpath('//image:image', namespaces=ns)[0] is not None
     assert (
         xml.xpath(
@@ -157,11 +157,8 @@ def test_gsitemap_video(testbrowser):
     xml = lxml.etree.fromstring(browser.contents)
     ns = {'video': 'http://www.google.com/schemas/sitemap-video/1.1'}
     assert xml.xpath('//video:video', namespaces=ns)[0] is not None
-    assert (
-        xml.xpath('//video:thumbnail_loc', namespaces=ns)[0].text ==
-        'http://brightcove.vo.llnwd.net/d21/unsecured/media/18140073001/'
-        '18140073001_1956041162001_ari-origin05-arc-154-1352391648628.jpg?'
-        'pubId=18140073001')
+    assert ('thumbnail.jpg' in xml.xpath(
+        '//video:thumbnail_loc', namespaces=ns)[0].text)
     assert (
         xml.xpath('//video:content_loc', namespaces=ns)[0].text ==
         'http://brightcove.vo.llnwd.net/pd16/media/18140073001/'

@@ -73,7 +73,6 @@ def test_image_download_from_brightcove_assets(appbrowser):
         zeit.cms.interfaces.ICMSContent(
             'http://xml.zeit.de/video/2014-01/3035864892001'))
     assert ''.join(result.app_iter) == group['wide'].open().read()
-    assert result.headers['Content-Length'] == '307690'
     assert result.headers['Content-Type'] == 'image/jpeg'
     assert result.headers['Content-Disposition'] == (
         'inline; filename="imagegroup.jpeg"')
@@ -365,5 +364,5 @@ def test_link_nofollow_should_be_set_in_amp_linked_image(testbrowser):
 
 def test_link_nofollow_should_be_set_in_core_image_template(testbrowser):
     browser = testbrowser('/zeit-online/cp-content/article-03')
-    image_link = browser.cssselect('.article__head__media a')[0]
+    image_link = browser.cssselect('.header-article__media-container a')[0]
     assert 'nofollow' in image_link.attrib.values()

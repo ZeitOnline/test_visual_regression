@@ -33,7 +33,7 @@
     {% endif -%}
     {% set image = get_image(view.header_module, variant_id=variant_id, fallback=False) -%}
     {% set modifier = '%s-%s' | format(view.article_layout, 'with-image' if image else 'no-image') -%}
-    <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}">
+    <div class="{{ 'article-header' | with_mods(view.article_layout, modifier) }}" data-ct-area="articleheader">
         <div class="{{ 'article-header__banderole' | with_mods(variant_id) }}">
         {% if image -%}
             <div class="{{ 'article-header__default-image' | with_mods(variant_id) }}">
@@ -59,13 +59,13 @@
         <div class="{{ 'article-header__default-info' | with_mods(variant_id) }}">
         {% block article_topic-%}
             {% if view.topic_page and view.topic_label %}
-            <a class="{{ 'article-header__topic' | with_mods(view.article_layout) }}" href="{{ view.topic_page.uniqueId | create_url }}">{{ view.topic_label }}</a>
+            <a class="{{ 'article-header__topic' | with_mods(view.article_layout) }}" href="{{ view.topic_page.uniqueId | create_url }}" data-ct-row="thema" data-ct-column="false">{{ view.topic_label }}</a>
             {% endif %}
         {% endblock -%}
         {% block article_byline -%}
             {% set byline = view.context | get_byline('main') -%}
             {% if byline | length -%}
-            <div class="article-header__byline">
+            <div class="article-header__byline" data-ct-row="author">
                 {%- include 'zeit.web.core:templates/inc/meta/byline.html' -%}
             </div>
             {% endif -%}
