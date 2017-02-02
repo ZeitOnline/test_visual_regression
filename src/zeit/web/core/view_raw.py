@@ -15,10 +15,10 @@ import zeit.web
     context=zeit.content.text.interfaces.IText)
 @zeit.web.view_config(
     context=zeit.cms.repository.interfaces.IUnknownResource,
-    host_restriction=('xml', 'static', 'scripts'))
+    host_restriction=('xml', 'static', 'scripts', 'zeus'))
 @zeit.web.view_config(
     context=zeit.content.text.interfaces.IText,
-    host_restriction=('xml', 'static', 'scripts'))
+    host_restriction=('xml', 'static', 'scripts', 'zeus'))
 @zeit.web.view_config(
     context=zeit.content.image.interfaces.IImage,
     host_restriction='xml')
