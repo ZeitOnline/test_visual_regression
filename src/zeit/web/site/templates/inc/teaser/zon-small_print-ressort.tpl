@@ -2,6 +2,6 @@
 
 {% block zplus_data %}{% endblock %}
 
-{% block zplus_kicker_logo %}{% endblock %}
+{% block content_kicker_logo %}{% endblock %}
 
 {% block teaser_datetime %}{% endblock %}

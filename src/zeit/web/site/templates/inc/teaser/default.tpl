@@ -36,7 +36,6 @@
                     {% block teaser_kicker %}
                         <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content) }}">
                             {% block kicker_logo scoped %}
-                                {% block zplus_kicker_logo %}{% endblock zplus_kicker_logo %}
                                 {% block content_kicker_logo %}
                                     {% set logo_layout = self.layout() %}
                                     {% for template in teaser | logo_icon(area.kind) %}
