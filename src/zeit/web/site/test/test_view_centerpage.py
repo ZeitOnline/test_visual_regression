@@ -2800,3 +2800,13 @@ def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
 def test_d17_icon_is_display_on_nextread(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-taglogo')
     assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')
+
+
+def test_zett_icon_is_display_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zett')
+    assert browser.cssselect('article.nextread .nextread__kicker-logo--zett')
+
+
+def test_zco_icon_is_display_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zco')
+    assert browser.cssselect('article.nextread .nextread__kicker-logo--zco')
