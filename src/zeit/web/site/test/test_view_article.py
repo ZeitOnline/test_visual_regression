@@ -2201,6 +2201,16 @@ def test_overscrolling_is_working_as_expected(
         By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
+    # overscrolling is inactive in app
+    driver.get(
+        '%s/zeit-online/article/01?app-content' % testserver.url)
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
 
 
 def test_overscrolling_is_turned_off_by_configuration(
