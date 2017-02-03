@@ -39,10 +39,7 @@
                                 {% block content_kicker_logo %}
                                     {% set logo_layout = self.layout() %}
                                     {% for template in teaser | logo_icon(area.kind) %}
-                                        {% include [
-                                            "zeit.web.core:templates/inc/badges/{}.tpl".format(template),
-                                            "zeit.web.core:templates/inc/badges/{}.html".format(template)
-                                        ] ignore missing %}
+                                        {% include "zeit.web.core:templates/inc/badges/{}.tpl".format(template) %}
                                     {% endfor %}
                                 {% endblock content_kicker_logo %}
                             {% endblock kicker_logo %}

@@ -24,10 +24,7 @@
                 <span class="{{ '%s__kicker' | format(module_layout) | with_mods('zmo' if teaser is zmo_content) }}">
                 {% set logo_layout = self.layout() %}
                 {% for template in teaser | logo_icon() %}
-                    {% include [
-                        "zeit.web.core:templates/inc/badges/{}.tpl".format(template),
-                        "zeit.web.core:templates/inc/badges/{}.html".format(template)
-                    ] ignore missing %}
+                    {% include "zeit.web.core:templates/inc/badges/{}.tpl".format(template) %}
                 {% endfor %}
                 {{ teaser.teaserSupertitle or teaser.supertitle -}}
                 </span>
