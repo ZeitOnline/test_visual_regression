@@ -140,9 +140,6 @@ def zplus_registration_content(content):
     if not zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
         return False
 
-    if not zeit.web.core.application.FEATURE_TOGGLES.find('zplus_badge_gray'):
-        return False
-
     # Links are defined as free content
     if zeit.content.link.interfaces.ILink.providedBy(content):
         return False
@@ -186,12 +183,17 @@ def logo_icon(teaser, kind=None, zplus=None):
                             'only': show only z+ icons
     """
     templates = []
+    zplus_icon = False
+
     if not zplus == 'skip':
         # add Z+Icon independent from other icons
         if zplus_abo_content(teaser):
             templates.append('logo-zplus')
-        elif zplus_registration_content(teaser):
+	        zplus_icon = True
+        elif zplus_registration_content(teaser) and
+                toggles('zplus_badge_gray'):
             templates.append('logo-zplus-register')
+	        zplus_icon = True
         if zplus == 'only':
             return templates
 
@@ -207,7 +209,7 @@ def logo_icon(teaser, kind=None, zplus=None):
         return templates
 
     # inclusive icons may appear both
-    if tag_with_logo_content(teaser) and not zplus_content(teaser):
+    if tag_with_logo_content(teaser) and not zplus_icon:
         templates.append('taglogo')
     if zco_content(teaser) and kind != 'zco-parquet':
         templates.append('logo-zco')
