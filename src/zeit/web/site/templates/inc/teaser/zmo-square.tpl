@@ -4,7 +4,7 @@
 
 {% block kicker_logo %}
     {% set logo_layout = self.layout() %}
-    {% for template in teaser | logo_icon(area.kind, zplus_only=True) %}
+    {% for template in teaser | logo_icon(area.kind, zplus='only') %}
         {% include "zeit.web.core:templates/inc/badges/{}.tpl".format(template) %}
     {% endfor %}
 {% endblock %}

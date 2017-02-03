@@ -176,15 +176,24 @@ def tag_with_logo_content(content):
 
 
 @zeit.web.register_filter
-def logo_icon(teaser, kind=None, zplus_only=False):
+def logo_icon(teaser, kind=None, zplus=None):
+    """Function to add a list of icon templates to a teaser
+    :param teaser:      Teaser to which the icons are added
+    :param kind:        kind of the area the teaser is in
+    :param zplus:       chose to show or show not the z+ section
+                            None:   Show both z* and rest of icons
+                            'skip': skip z+ icons
+                            'only': show only z+ icons
+    """
     templates = []
-    # add Z+Icon independent from other icons
-    if zplus_abo_content(teaser):
-        templates.append('logo-zplus')
-    elif zplus_registration_content(teaser):
-        templates.append('logo-zplus-register')
-    if zplus_only:
-        return templates
+    if not zplus == 'skip':
+        # add Z+Icon independent from other icons
+        if zplus_abo_content(teaser):
+            templates.append('logo-zplus')
+        elif zplus_registration_content(teaser):
+            templates.append('logo-zplus-register')
+        if zplus == 'only':
+            return templates
 
     # exclusive icons, set and return
     if zmo_content(teaser) and kind != 'zmo-parquet':
