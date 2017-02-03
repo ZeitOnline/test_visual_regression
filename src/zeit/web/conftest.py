@@ -232,6 +232,7 @@ def app_settings(mockserver):
         'jinja2.environment': 'jinja2.environment.Environment',
         'jinja2.enable_profiler': False,
         'use_wesgi': True,
+        'serve_assets': True,
         'mock_solr': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',

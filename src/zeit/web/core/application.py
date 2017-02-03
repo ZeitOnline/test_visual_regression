@@ -170,10 +170,11 @@ class Application(object):
         # Route to post comments to a community service
         config.add_route('post_test_comments', '/admin/test-comments')
 
-        config.add_static_view(
-            name=self.settings.get('asset_prefix', '/static/latest'),
-            path='zeit.web.static:',
-            cache_max_age=ast.literal_eval(self.settings['assets_max_age']))
+        if self.settings['serve_assets']:
+            config.add_static_view(
+                name=self.settings.get('asset_prefix', '/static/latest'),
+                path='zeit.web.static:', cache_max_age=ast.literal_eval(
+                    self.settings['assets_max_age']))
 
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))
