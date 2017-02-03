@@ -15,7 +15,6 @@
       <tag type="topic" url_value="" uuid="fbcd1d0b-81fd-48c5-923e-26e68131d60c">Fotografie</tag>
       <tag type="free" url_value="" uuid="1d594845-7955-4e15-ba37-958af527ce92">ISS</tag>
     </rankedTags>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>

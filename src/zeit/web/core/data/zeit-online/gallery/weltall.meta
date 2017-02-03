@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:ns3="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/wissen/2015-06/alexander-gerst-weltall-fotos-erde-iss-fs</attribute>
+  <attribute>
+    <rankedTags ns="http://namespaces.zeit.de/CMS/tagging">
+      <rankedTags>
+        <tag>Alexander Gerst</tag>
+        <tag>Weltraum</tag>
+        <tag>Fotografie</tag>
+        <tag>ISS</tag>
+      </rankedTags>
+    </rankedTags>
+  </attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Vor einem Jahr twitterte @Astro_Alex das erste Foto aus dem All. Viele eindrucksvolle folgten. Eine Auswahl (sg)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2015</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Gallery" module="zeit.content.gallery.gallery"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:25a73684-224a-4f93-b440-32c448a525a9}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-02T14:38:40.247713+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned">a9f848df-bc0a-4e16-a318-8cba8d89a307 5053a8b9-8df6-4b28-a69d-c1e37b2c9750 fbcd1d0b-81fd-48c5-923e-26e68131d60c 1d594845-7955-4e15-ba37-958af527ce92</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Wie viele Sch&#xE4;tze wohl noch auf der Speicherkarte von Alexander Gersts Kamera schlummern&#x2026; (sg)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">gallery</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-02T14:52:39.354530+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-02T14:53:38.983403+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-06-02T14:53:01.212442+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.stockrahm</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/zeit.content.gallery" name="type">standalone</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-06-02T14:38:13.119368+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">n/a</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-02T14:37:11.009741+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wissen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">22</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitmagazin&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="channels"&gt; &lt;string&gt;parse-channel-news&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;parse&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-02T14:52:39.545926+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2015-06-02T14:52:39Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">30063</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Tue, 02 Jun 2015 14:52:39 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"e70f4b-756f-5178a18083ca8"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
