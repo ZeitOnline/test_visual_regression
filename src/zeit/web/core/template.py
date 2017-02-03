@@ -189,11 +189,11 @@ def logo_icon(teaser, kind=None, zplus=None):
         # add Z+Icon independent from other icons
         if zplus_abo_content(teaser):
             templates.append('logo-zplus')
-	        zplus_icon = True
-        elif zplus_registration_content(teaser) and
+            zplus_icon = True
+        elif zplus_registration_content(teaser) and \
                 toggles('zplus_badge_gray'):
             templates.append('logo-zplus-register')
-	        zplus_icon = True
+            zplus_icon = True
         if zplus == 'only':
             return templates
 
