@@ -464,7 +464,7 @@ def test_zplus_provides_expected_webtrekk_strings(
          'solo.2.1.teaser-fullwidth-column-zplus-register.image'),
         ('.teaser-topic .teaser-topic-item[data-zplus] a',
          'topic.5.2.teaser-topic-item-zplus-register.text'),
-        ('.parquet-teasers .teaser-large  a',
+        ('.parquet-teasers .teaser-large a',
          'parquet-z_parkett.7.1.teaser-large-zplus-register.text')
     ])
 def test_zplus_registration_provides_expected_webtrekk_strings(
