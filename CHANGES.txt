@@ -8,6 +8,8 @@ POSTDEPLOY
 3.37 (unreleased)
 -----------------
 
+- BUG-634: Deactivate overscrolling and popover in app
+
 - BUG-636: Fix hash replacement after notification
 
 - BUG-635: Update testdata for user-dashboard :bug:
