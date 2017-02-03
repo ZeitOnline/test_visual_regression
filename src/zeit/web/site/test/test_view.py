@@ -237,7 +237,7 @@ def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
     assert (browser.cssselect('.dashboard__box-title')[3].text.strip() ==
             'Spiele')
     assert (browser.cssselect('.dashboard__box-list')[2]
-            .cssselect('a')[0].text.strip() == u'ZEIT Audio hören')
+            .cssselect('a')[1].text.strip() == u'ZEIT Audio hören')
 
 
 # needs selenium because of esi include
