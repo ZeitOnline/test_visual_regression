@@ -12,7 +12,7 @@
 
 <article class="{% block layout %}teaser-card{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
-         {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
+         {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %}
          {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
     <div class="card__wrap">
         <div class="card__deck">
