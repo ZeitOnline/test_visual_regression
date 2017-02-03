@@ -488,13 +488,13 @@ def test_zplus_abo_should_be_toggleable(application, monkeypatch):
     assert zeit.web.core.template.zplus_abo_content(content) is False
 
 
-def test_zplus_registration_should_be_toggleable(application, monkeypatch):
+def test_zplus_register_icon_should_be_toggleable(application, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'zplus_badge_gray': False}.get)
     path = ('http://xml.zeit.de/zeit-online/cp-content/register/'
             'article-zeit-register')
     content = zeit.cms.interfaces.ICMSContent(path)
-    assert zeit.web.core.template.zplus_registration_content(content) is False
+    assert not zeit.web.core.template.logo_icon(content)
 
 
 def test_zplus_badge_should_be_rendered(testbrowser):
