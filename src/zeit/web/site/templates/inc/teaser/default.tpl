@@ -7,8 +7,8 @@
     {%- if module.visible_mobile == False %} mobile-hidden{% endif %}" data-unique-id="
     {{- teaser.uniqueId }}"
     {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
-    {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
-    {%- block taglogo_data %}{% if tag_with_logo_content %} data-taglogo="true"{% endif %}{% endblock %}
+    {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %}
+    {%- block taglogo_data %}{% if teaser | tag_with_logo_content %} data-taglogo="true"{% endif %}{% endblock %}
     {%- block teaser_attributes %}{% endblock %}>
 
     {% block teaser_label %}{% endblock %}
@@ -36,28 +36,13 @@
                     {% block teaser_kicker %}
                         <span class="{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, 'zmo' if teaser is zmo_content, 'zett' if teaser is zett_content, 'zco' if teaser is zco_content) }}">
                             {% block kicker_logo scoped %}
-                                {% block zplus_kicker_logo %}
-                                    {% if teaser is zplus_content %}
-                                        {{ lama.use_svg_icon('zplus', self.layout() + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
-                                    {% endif %}
-                                {% endblock %}
-                                {% if teaser is zmo_content and area.kind != 'zmo-parquet' %}
-                                    {{ lama.use_svg_icon('logo-zmo-zm', self.layout() + '__kicker-logo--zmo svg-symbol--hide-ie', view.package, a11y=False) }}
-                                {% elif teaser is zett_content %}
-                                    {{ lama.use_svg_icon('logo-zett-small', self.layout() + '__kicker-logo--zett svg-symbol--hide-ie', view.package, a11y=False) }}
-                                {% elif tag_with_logo_content and teaser is zco_content and teaser is not zplus_content %}
-                                    {{ lama.use_svg_icon(tag_with_logo_content, self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
-                                    {% if area.kind != 'zco-parquet' %}
-                                    {{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}
-                                    {% endif %}
-                                {% elif teaser is zco_content and area.kind != 'zco-parquet' %}
-                                    {{ lama.use_svg_icon('logo-zco', self.layout() + '__kicker-logo--zco svg-symbol--hide-ie', 'zeit.web.campus', a11y=False) }}
-                                {% elif teaser is liveblog %}
-                                    <span class="{{ '%s__kicker-logo' | format(self.layout()) | with_mods('liveblog', 'liveblog-closed' if module.liveblog and not module.liveblog.is_live) }}"><span class="visually-hidden">(</span>live<span class="visually-hidden">)</span></span>
-                                {% elif tag_with_logo_content and teaser is not zplus_content %}
-                                    {{ lama.use_svg_icon(tag_with_logo_content, self.layout() + '__kicker-logo--tag svg-symbol--hide-ie', 'zeit.web.site', a11y=False) }}
-                                {% endif %}
-                            {% endblock %}
+                                {% block content_kicker_logo %}
+                                    {% set logo_layout = self.layout() %}
+                                    {% for template in teaser | logo_icon(area.kind) %}
+                                        {% include "zeit.web.core:templates/inc/badges/{}.tpl".format(template) %}
+                                    {% endfor %}
+                                {% endblock content_kicker_logo %}
+                            {% endblock kicker_logo %}
                             {{ teaser.teaserSupertitle or teaser.supertitle -}}
                         </span>
                         {%- if teaser.teaserSupertitle or teaser.supertitle -%}

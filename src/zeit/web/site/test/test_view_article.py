@@ -1735,6 +1735,18 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
 
 
+def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-register')
+
+    reg_badge = browser.cssselect('.nextread__kicker-logo--zplus-register')
+    assert len(reg_badge) == 1
+
+    link = browser.cssselect('.nextread__link')
+    assert len(link) == 1
+    data_id = link[0].attrib['data-id']
+    assert data_id == 'articlebottom.editorial-nextread...area-zplus-register'
+
+
 def test_article_byline_is_displayed_completely(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     dom_node_byline = browser.cssselect('.byline')

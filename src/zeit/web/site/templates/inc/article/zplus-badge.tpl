@@ -9,7 +9,7 @@
                 <span class="{{ self.layout() }}__intro">{{ view.zplus_label.intro }}</span>
                 <span class="{{ self.layout() }}__link-text">{{ view.zplus_label.link_text }}</span>
             </span>
-            {%  if view.context is zplus_content %}
+            {%  if view.context is zplus_abo_content %}
                 {{ lama.use_svg_icon('zplus', self.layout() ~ '__icon svg-symbol--hide-ie', view.package, a11y=False) }}
             {% endif %}
             {% if view.zplus_label.volume_exists %}
