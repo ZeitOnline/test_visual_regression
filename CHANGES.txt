@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - ZON-3568: Add grey Z+ icon to teasers for content that requires registration
 
+- FIX: Add entry_service parameter "schranke_paid" in Z+ subscription form
+
 
 3.36 (2017-01-31)
 -----------------
