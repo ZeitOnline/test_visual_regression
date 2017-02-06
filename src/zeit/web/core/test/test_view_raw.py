@@ -13,6 +13,7 @@ def test_renders_text_content(testserver, hostname):
         headers={'Host': hostname + '.zeit.de'})
     assert r.status_code == 200
     assert r.headers['content-type'] == 'text/plain; charset=UTF-8'
+    assert r.headers['Access-Control-Allow-Origin'] == '*'
     assert r.content == 'zeit.web\n'
 
 
@@ -22,6 +23,7 @@ def test_renders_unknown_content(testserver, hostname):
         headers={'Host': hostname + '.zeit.de'})
     assert r.status_code == 200
     assert r.headers['content-type'] == 'text/plain; charset=UTF-8'
+    assert r.headers['Access-Control-Allow-Origin'] == '*'
     assert r.content == 'zeit.web\n'
 
 
@@ -31,6 +33,7 @@ def test_renders_meta_files(testserver, hostname):
         headers={'Host': hostname + '.zeit.de'})
     assert r.status_code == 200
     assert r.headers['content-type'] == 'application/xml; charset=UTF-8'
+    assert r.headers['Access-Control-Allow-Origin'] == '*'
     assert 'robots.txt' in r.content
 
 
