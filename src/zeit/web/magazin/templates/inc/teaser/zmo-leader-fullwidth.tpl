@@ -9,9 +9,7 @@ Teaser template for fullwidth lead teaser
 {% block comments %}{% endblock %}
 
 {% block teaser_title %}
-    {% if teaser is zplus_content %}
-        {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--s svg-symbol--hide-ie', view.package, a11y=False) }}
-    {% endif %}
+    {{ self.zplus_kicker_logo() }}
     {{ super() }}
 {% endblock teaser_title%}
 

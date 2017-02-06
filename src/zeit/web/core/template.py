@@ -121,8 +121,8 @@ def zmo_content(content):
 
 
 @zeit.web.register_test
-def zplus_content(content):
-    if not zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
+def zplus_abo_content(content):
+    if not toggles('reader_revenue'):
         return False
 
     # Links are defined as free content
@@ -133,6 +133,29 @@ def zplus_content(content):
     if access is None:
         return False
     return (access == 'abo')
+
+
+@zeit.web.register_test
+def zplus_registration_content(content):
+    if not toggles('reader_revenue'):
+        return False
+
+    # Links are defined as free content
+    if zeit.content.link.interfaces.ILink.providedBy(content):
+        return False
+
+    access = getattr(content, 'access', None)
+    if access is None:
+        return False
+    return (access == 'registration')
+
+
+@zeit.web.register_test
+def zplus_content(content):
+    if not toggles('reader_revenue'):
+        return False
+
+    return zplus_abo_content(content) or zplus_registration_content(content)
 
 
 @zeit.web.register_filter
@@ -147,6 +170,51 @@ def tag_with_logo_content(content):
         except AttributeError:
             pass
     return False
+
+
+@zeit.web.register_filter
+def logo_icon(teaser, kind=None, zplus=None):
+    """Function to add a list of icon templates to a teaser
+    :param teaser:      Teaser to which the icons are added
+    :param kind:        kind of the area the teaser is in
+    :param zplus:       chose to show or show not the z+ section
+                            None:   Show both z* and rest of icons
+                            'skip': skip z+ icons
+                            'only': show only z+ icons
+    """
+    templates = []
+    zplus_icon = False
+
+    if not zplus == 'skip':
+        # add Z+Icon independent from other icons
+        if zplus_abo_content(teaser):
+            templates.append('logo-zplus')
+            zplus_icon = True
+        elif zplus_registration_content(teaser) and \
+                toggles('zplus_badge_gray'):
+            templates.append('logo-zplus-register')
+            zplus_icon = True
+        if zplus == 'only':
+            return templates
+
+    # exclusive icons, set and return
+    if zmo_content(teaser) and kind != 'zmo-parquet':
+        templates.append('logo-zmo-zm')
+        return templates
+    if liveblog(teaser):
+        templates.append('liveblog')
+        return templates
+    if zett_content(teaser):
+        templates.append('logo-zett-small')
+        return templates
+
+    # inclusive icons may appear both
+    if tag_with_logo_content(teaser) and not zplus_icon:
+        templates.append('taglogo')
+    if zco_content(teaser) and kind != 'zco-parquet':
+        templates.append('logo-zco')
+
+    return templates
 
 
 @zeit.web.register_test

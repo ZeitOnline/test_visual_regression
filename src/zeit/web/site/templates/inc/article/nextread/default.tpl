@@ -3,9 +3,10 @@
 {% set image = get_image(module, fallback=False) %}
 {% set comments = view.comment_counts.get(teaser.uniqueId, 0) %}
 {% set module_layout = self.layout() %}
-{% set tag_with_logo_content = teaser | tag_with_logo_content %}
-{% if teaser is zplus_content %}
+{% if teaser is zplus_abo_content %}
     {% set data_id = "articlebottom.editorial-nextread...area-zplus" %}
+{% elif teaser is zplus_registration_content %}
+    {% set data_id = "articlebottom.editorial-nextread...area-zplus-register" %}
 {% else %}
     {% set data_id = "articlebottom.editorial-nextread...area" %}
 {% endif %}
@@ -20,14 +21,10 @@
         <div class="{{ module_layout }}__container">
             <h2 class="{{ module_layout }}__heading">
                 <span class="{{ '%s__kicker' | format(module_layout) | with_mods('zmo' if teaser is zmo_content) }}">
-                {% if teaser is zplus_content %}
-                    {{ lama.use_svg_icon('zplus', module_layout + '__kicker-logo--zplus svg-symbol--hide-ie', view.package, a11y=False) }}
-                {% endif %}
-                {% if teaser is zmo_content %}
-                    {{ lama.use_svg_icon('logo-zmo-zm', module_layout + '__kicker-logo--zmo svg-symbol--hide-ie', view.package, a11y=False) }}
-                {% elif tag_with_logo_content and teaser is not zplus_content %}
-                    {{ lama.use_svg_icon(tag_with_logo_content, module_layout + '__kicker-logo--tag svg-symbol--hide-ie', view.package, a11y=False) }}
-                {% endif %}
+                {% set logo_layout = self.layout() %}
+                {% for template in teaser | logo_icon() %}
+                    {% include "zeit.web.core:templates/inc/badges/{}.tpl".format(template) %}
+                {% endfor %}
                 {{ teaser.teaserSupertitle or teaser.supertitle -}}
                 </span>
                 {%- if teaser.teaserTitle or teaser.title %}<span class="visually-hidden">: </span>{% endif -%}
