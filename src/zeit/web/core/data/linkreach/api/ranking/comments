@@ -34,7 +34,7 @@
     {
         "location": "/politik/ausland/2015-09/fluechtlinge-ungarn-orban-grenzen",
         "score": 265,
-        "uniqueId": "http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik",
+        "uniqueId": "http://xml.zeit.de/zeit-online/article/zplus-zeit-register",
         "ressort": "politik",
         "sub_ressort": "ausland",
         "date_first_released": "2015-09-07T00:16:07Z",
@@ -45,6 +45,6 @@
         "channels": ["Politik Ausland"],
         "fetchedAt": 1441585081229,
         "timestamp": 1441584967000,
-        "access": "free"
+        "access": "registration"
     }
 ]

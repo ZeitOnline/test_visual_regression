@@ -256,7 +256,7 @@ def register_module(name):
     Create a template in site/templates/inc/module/ice-cream-truck.tpl
 
     {% for f in module.flavours %}
-        <img src="//images.zeit.de/ice-cream-assets/{{ f }}.jpg"/>
+        <img src="//img.zeit.de/ice-cream-assets/{{ f }}.jpg"/>
     {% endfor %}
 
     That's it.

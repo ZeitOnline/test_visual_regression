@@ -177,7 +177,7 @@ vernehmen. </p>
           <div class="newsletter-teaser">
             <input type="hidden" value="5vor8" name="nl"/>
             <input type="hidden" name="mode" value="2click"/>
-            <img src="http://images.zeit.de/bilder/newsletter/Anmeldeseite/nl_5vor8.jpg" alt="Fünf vor 8:00" class="left"/>
+            <img src="http://img.zeit.de/bilder/newsletter/Anmeldeseite/nl_5vor8.jpg" alt="Fünf vor 8:00" class="left"/>
             <div class="title">Fünf vor 8:00</div>
             <p class="teaser">Abonnieren Sie die Morgenkolumne von ZEIT ONLINE – von Montag bis Freitag per E-Mail.</p>
             <label for="emailadresse" class="hideme">Ihre E-Mail-Adresse:</label>

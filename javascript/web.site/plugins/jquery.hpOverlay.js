@@ -48,8 +48,8 @@
             this.log( 'Overlay cancelled by option.' );
             return;
         }
-        if ( Zeit.isMobileView() || this.cookieValue === 'canceled' ) {
-            this.log( 'Overlay canceled by breakpoint or cookie.' );
+        if ( Zeit.isMobileView() || this.cookieValue === 'canceled' || Zeit.isWrapped ) {
+            this.log( 'Overlay canceled by breakpoint, app or cookie.' );
             return;
         }
         if ( this.options.force ) {
