@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - ZON-3658: Remove any images.zeit.de remnants, it's img.zeit.de all the way now
 
+- ZON-3568: Add grey Z+ icon to teasers for content that requires registration
+
 
 3.36 (2017-01-31)
 -----------------
