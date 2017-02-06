@@ -104,7 +104,8 @@
 			@extend %teaser-kicker-logo--zplus-register
 		&--tag
 			@extend %teaser-kicker-logo--tag
-			color: inherit
+			+respond-min($break-tablet-min)
+				color: inherit
 	&__title
 		@extend %teaser-title
 		font-size: em(24px)
