@@ -24,7 +24,7 @@
                             {% if teaser is zplus_abo_content %}
                                 {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
                             {% elif teaser is zplus_registration_content and toggles('zplus_badge_gray') %}
-                                {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo-register--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                                {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
                             {% endif %}
                         {% endblock %}
                         {{ teaser.teaserSupertitle or teaser.supertitle }}
