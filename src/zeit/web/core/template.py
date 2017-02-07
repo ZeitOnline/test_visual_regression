@@ -448,6 +448,24 @@ def get_journalistic_format(block):
 
 
 @zeit.web.register_filter
+def get_gallery_images_count(context):
+    images = None
+
+    if zeit.content.gallery.interfaces.IGallery.providedBy(context):
+        images = context.values()
+    elif zeit.content.article.interfaces.IArticle.providedBy(context):
+        body = zeit.content.article.edit.interfaces.IEditableBody(context)
+        for block in body.values():
+            if zeit.content.article.edit.interfaces.IGallery.providedBy(block):
+                gallery = zeit.web.core.interfaces.IFrontendBlock(block)
+                images = gallery
+                break
+
+    if images:
+        return len(filter(lambda i: not hidden_slide(i), images))
+
+
+@zeit.web.register_filter
 def first_child(iterable):
     try:
         return iter(iterable).next()
