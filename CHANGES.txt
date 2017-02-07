@@ -5,10 +5,28 @@ POSTDEPLOY
 ----------
 
 
-3.37 (unreleased)
+3.38 (unreleased)
 -----------------
 
+- Nothing changed yet.
+
+
+3.37 (2017-02-07)
+-----------------
+
+- BUG-634: Deactivate overscrolling and popover in app
+
+- BUG-636: Fix hash replacement after notification
+
+- BUG-635: Update testdata for user-dashboard :bug:
+
 - BUG-631: Add page padding for login link (mobile)
+
+- ZON-3658: Remove any images.zeit.de remnants, it's img.zeit.de all the way now
+
+- ZON-3568: Add grey Z+ icon to teasers for content that requires registration
+
+- FIX: Add entry_service parameter "schranke_paid" in Z+ subscription form
 
 
 3.36 (2017-01-31)

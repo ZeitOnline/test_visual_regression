@@ -456,12 +456,44 @@ def test_zplus_provides_expected_webtrekk_strings(
         assert('tablet.' + teasers[1] in track_str)
 
 
+@pytest.mark.parametrize(
+    'teasers', [
+        ('.teaser-fullwidth a',
+         'solo.1.1.teaser-fullwidth-zplus-register.image'),
+        ('.teaser-fullwidth-column a',
+         'solo.2.1.teaser-fullwidth-column-zplus-register.image'),
+        ('.teaser-topic .teaser-topic-item[data-zplus] a',
+         'topic.5.2.teaser-topic-item-zplus-register.text'),
+        ('.parquet-teasers .teaser-large a',
+         'parquet-z_parkett.7.1.teaser-large-zplus-register.text')
+    ])
+def test_zplus_registration_provides_expected_webtrekk_strings(
+        selenium_driver, testserver, teasers):
+
+    driver = selenium_driver
+    driver.set_window_size(900, 800)
+    driver.get('%s/zeit-online/centerpage/register'
+               '#debug-clicktracking' % testserver.url)
+
+    try:
+        WebDriverWait(driver, 5).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, teasers[0])))
+    except TimeoutException:
+        assert False, 'Element not locateable in 5 sec.'
+    else:
+        teaser_el = driver.find_element_by_css_selector(teasers[0])
+        teaser_el.click()
+        track_str = driver.execute_script("return window.trackingData")
+        assert('tablet.' + teasers[1] in track_str)
+
+
 def test_cp_area_pagination_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
         ({'uniqueId':
-         'http://xml.zeit.de/zeit-online/article/01'}) for i in range(60)]
+          'http://xml.zeit.de/zeit-online/article/01'}) for i in range(60)]
 
     driver = selenium_driver
     driver.set_window_size(1024, 768)
@@ -491,7 +523,7 @@ def test_news_pagination_provides_expected_webtrekk_string(
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
         ({'uniqueId':
-         'http://xml.zeit.de/zeit-online/article/01'}) for i in range(2)]
+          'http://xml.zeit.de/zeit-online/article/01'}) for i in range(2)]
 
     driver = selenium_driver
     driver.set_window_size(1024, 768)

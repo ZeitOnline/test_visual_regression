@@ -2533,10 +2533,12 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
 
     # test minor area teasers
     teasers = browser.cssselect('.cp-area--minor article[data-zplus]')
-    assert len(teasers) == 5
+    assert len(teasers) == 7
     for teaser in teasers:
         layout = teaser.get('class').split()[0]
-        assert teaser.cssselect('.{}__kicker-logo--zplus'.format(layout))
+        assert (teaser.cssselect('.{}__kicker-logo--zplus'.format(layout)) or
+                teaser.cssselect(
+                    '.{}__kicker-logo--zplus-register'.format(layout)))
 
     # test square teasers
     teasers = browser.cssselect('.cp-area--duo article[data-zplus]')
@@ -2557,6 +2559,57 @@ def test_zplus_teaser_has_zplus_badge(testbrowser):
     assert len(teasers) == 3
     for teaser in teasers:
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus')
+
+
+def test_register_teaser_has_zplus_register_badge(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/register')
+
+    # test fullwidth teasers
+    teasers = browser.cssselect('.cp-area--solo article')
+    assert len(teasers) == 3
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test major area teasers
+    teasers = browser.cssselect('.cp-area--major article')
+    assert len(teasers) == 6
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test minor area teasers
+    teasers = browser.cssselect(
+        '.cp-area--minor article[data-zplus$="register"]')
+    assert len(teasers) == 5
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test square teasers
+    teasers = browser.cssselect('.cp-area--duo article[data-zplus]')
+    assert len(teasers) == 3
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test parquet teasers
+    teasers = browser.cssselect('.cp-area--parquet article')
+    assert len(teasers) == 6
+    for teaser in teasers:
+        layout = teaser.get('class').split()[0]
+        assert teaser.cssselect(
+            '.{}__kicker-logo--zplus-register'.format(layout))
+
+    # test ZMO parquet teasers
+    teasers = browser.cssselect('.cp-area--zmo-parquet article')
+    assert len(teasers) == 1
+    for teaser in teasers:
+        assert teaser.cssselect('.teaser-small__kicker-logo--zplus-register')
 
 
 def test_zplus_teaser_has_no_badge_in_print_ressort_area(testbrowser):
@@ -2747,3 +2800,13 @@ def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
 def test_d17_icon_is_display_on_nextread(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-taglogo')
     assert browser.cssselect('article.nextread .nextread__kicker-logo--tag')
+
+
+def test_zett_icon_is_display_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zett')
+    assert browser.cssselect('article.nextread .nextread__kicker-logo--zett')
+
+
+def test_zco_icon_is_display_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zco')
+    assert browser.cssselect('article.nextread .nextread__kicker-logo--zco')
