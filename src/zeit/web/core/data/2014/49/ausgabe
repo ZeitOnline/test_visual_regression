@@ -24,6 +24,6 @@
   </head>
   <body/>
   <covers>
-    <cover href="http://xml.zeit.de/angebote/printkiosk/bildergruppen/die-zeit-cover" id="printcover"/>
+    <cover href="http://xml.zeit.de/angebote/printkiosk/bildergruppen/die-zeit-cover" id="printcover" product_id="ZEI"/>
   </covers>
 </volume>
