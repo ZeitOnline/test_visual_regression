@@ -84,7 +84,7 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     assert('phablet.' + teaser[1] in track_str)
 
     # tablet
-    driver.set_window_size(768, 800)
+    driver.set_window_size(800, 600)
 
     teaser_el = driver.find_element_by_css_selector(teaser[0])
     teaser_el.click()
