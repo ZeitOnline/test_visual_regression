@@ -654,29 +654,6 @@ def test_zmo_article_pagination_provides_expected_webtrekk_string(
         'stationaer.comment-balloon.comments...0_kommentare')
 
 
-def test_volume_teaser_provides_expected_webtrekk_string(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.set_window_size(800, 600)
-    driver.get('%s/zeit-online/article/volumeteaser#debug-clicktracking'
-               % testserver.url)
-
-    try:
-        WebDriverWait(driver, 3).until(
-            expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '.volume-teaser a')))
-    except TimeoutException:
-        assert False, 'link must be present'
-
-    link = driver.find_element_by_css_selector('.volume-teaser__link')
-    link.click()
-    tracking_data = driver.execute_script("return window.trackingData")
-    assert tracking_data.startswith(
-        'tablet.article.2.seite-1.volume-teaser.dieser_artikel_stammt_'
-        'aus_der_zeit_nr_01_2016_lesen_sie_diese_ausgabe_als_e_paper_app_'
-        'und_auf_dem_e_reader|premium.zeit.de/diezeit/2016/01')
-
-
 def test_volume_overview_teaser_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     driver = selenium_driver
