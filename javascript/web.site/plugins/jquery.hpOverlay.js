@@ -37,13 +37,23 @@
         this.timestamp = null;
         this.visible = false;
         this.wrapper = $( '#overlay-wrapper' );
-
+        this.visibility_listener = null;
         this.init();
+    },
+    visibility_listener = function() {
+        if ( document.hidden ) {
+            this.log( 'document is hidden' );
+            this.unbindResetEvents();
+        } else {
+            this.log( 'document is visible' );
+            this.bindResetEvents();
+            // always fetch if come back from hidden state
+            this.fetchData();
+        }
     };
 
     // start or restart popover process
     Overlay.prototype.init = function() {
-        var that = this;
         if ( ( !this.isLiveServer && !this.options.debug && !this.options.force ) || this.options.prevent ) {
             this.log( 'Overlay cancelled by option.' );
             return;
@@ -56,17 +66,10 @@
         if ( !document.hidden ) {
             this.bindResetEvents();
         }
-        document.addEventListener( 'visibilitychange', function() {
-            if ( document.hidden ) {
-                that.log( 'document is hidden' );
-                that.unbindResetEvents();
-            } else {
-                that.log( 'document is visible' );
-                that.bindResetEvents();
-                // always fetch if come back from hidden state
-                that.fetchData();
-            }
-        });
+        // bind this on runtime to make it revokable
+        this.visibility_listener = visibility_listener.bind( this );
+        document.addEventListener( 'visibilitychange', this.visibility_listener );
+        // fetchData initially
         this.fetchData();
     };
 
@@ -228,6 +231,7 @@
     Overlay.prototype.unbindEvents = function() {
         $( window ).off( '.hpoverlay' );
         $( document ).off( '.hpoverlay' );
+        document.removeEventListener( 'visibilitychange', this.visibility_listener );
     };
 
     // jquery plugin
