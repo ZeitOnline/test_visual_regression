@@ -1930,10 +1930,7 @@ def test_volume_teaser_is_rendered_correctly(testbrowser):
     volume_teaser_link = browser.cssselect(
         '.volume-teaser__link')[0].get('href')
     assert len(volume_teaser) == 1
-    assert volume_teaser_link == 'https://premium.zeit.de/diezeit/2016/' \
-        '01?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.' \
-        'cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=' \
-        'rr&utm_content=webreader_packshot_cover_cover'
+    assert volume_teaser_link == 'https://premium.zeit.de/abo/diezeit/2016/01'
 
 
 def test_volume_teaser_display_correct_image_on_desktop(
