@@ -52,11 +52,6 @@
             this.log( 'Overlay canceled by breakpoint, app or cookie.' );
             return;
         }
-        if ( this.options.force ) {
-            this.log( 'Show overlay forced by option.' );
-            this.show();
-            return;
-        }
         // look for keystrokes etc. only in active document
         if ( !document.hidden ) {
             this.bindResetEvents();
@@ -139,6 +134,13 @@
 
     // get the actual timestamp of page and check against prior data
     Overlay.prototype.fetchData = function() {
+        this.log( 'fetchData started' );
+        // force display of popover
+        if ( this.options.force ) {
+            this.log( 'Show overlay forced by option.' );
+            this.show();
+            return;
+        }
         // data is only fetched if document is visible
         if ( !document.hidden ) {
             var that = this;
