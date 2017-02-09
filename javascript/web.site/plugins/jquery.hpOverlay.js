@@ -26,10 +26,10 @@
         this.isLiveServer = /^(www\.)?zeit\.de$/.test( window.location.hostname );
         this.options = {
             cookieTimeInDays: 1.5,
-            debug: location.search.indexOf( 'debug-popover' ) !== -1,
+            debug: location.href.indexOf( 'debug-popover' ) !== -1,
             endpoint: location.protocol + '//' + location.host + '/json_update_time/index',
-            force: location.search.indexOf( 'force-popover' ) !== -1,
-            prevent: location.search.indexOf( 'prevent-popover' ) !== -1,
+            force: location.href.indexOf( 'force-popover' ) !== -1,
+            prevent: location.href.indexOf( 'prevent-popover' ) !== -1,
             resetInterval: 1000
         };
         this.page = $( 'body > .page' );
