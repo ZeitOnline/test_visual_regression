@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3700: Fix premium link in article volume module
 
+- BUG-647: Fix color and placement of taglogo in topic teaser
+
 
 3.37 (2017-02-07)
 -----------------
