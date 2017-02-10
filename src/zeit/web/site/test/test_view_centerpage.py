@@ -2744,7 +2744,7 @@ def test_d17_icon_is_displayed_on_teaser(monkeypatch, testbrowser):
     browser = testbrowser('/zeit-online/centerpage/taglogo')
     assert browser.cssselect('*[data-taglogo="true"]')
     assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--tag')) == 1
-    assert len(browser.cssselect('.teaser-small__kicker-logo--tag')) == 4
+    assert len(browser.cssselect('.teaser-small__kicker-logo--tag')) == 3
     assert len(browser.cssselect(
         '.teaser-fullwidth-column__kicker-logo--tag')) == 1
     assert len(browser.cssselect(
