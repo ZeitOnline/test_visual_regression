@@ -88,16 +88,16 @@
             <container cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3" cp:type="teaser" module="zon-small">
                 <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-zm-d17-tag" uniqueId="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-zm-d17-tag"/>
             </container>
-            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="False" module="zon-small" visible="True">
                 <block href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-campus-d17-tag" />
             </container>
-            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5b" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5b" cp:type="teaser" hide-dupes="False" module="zon-small" visible="True">
                 <block href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-zplus-d17-tag" />
             </container>
-            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5c" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5c" cp:type="teaser" hide-dupes="False" module="zon-small" visible="True">
                 <block href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-zett-d17-tag" />
             </container>
-            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5d" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
+            <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5d" cp:type="teaser" hide-dupes="False" module="zon-small" visible="True">
                 <block href="http://xml.zeit.de/zeit-online/cp-content/taglogo/link-d17-tag" />
             </container>
         </region>
@@ -129,22 +129,22 @@
         </region>
     </cluster>
     <cluster visible="True" visible_mobile="True" area="id-525cdf87-4922-4abc-8ee3-dfd94e9ecbbe" kind="duo" kind_title="Standard-Region">
-      <region area="lead" visible="True" hide-dupes="True" count="7" automatic="True" automatic_type="centerpage" visible_mobile="True" title="Alles digital" supertitle="Digital" read_more_url="http://www.zeit.de/digital/index">
+      <region area="lead" visible="True" hide-dupes="False" count="7" automatic="True" automatic_type="centerpage" visible_mobile="True" title="Alles digital" supertitle="Digital" read_more_url="http://www.zeit.de/digital/index">
         <referenced_cp>http://xml.zeit.de/campus/index</referenced_cp>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-782d4e82-a4da-47af-b709-7e8fa633cc61"/>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" text_color="dark" overlay_level="3" cp:__name__="id-f68c4b0d-0636-422d-9145-7610206a3c3f"/>
       </region>
-      <region area="informatives" visible="True" hide-dupes="True" visible_mobile="True">
+      <region area="informatives" visible="True" hide-dupes="False" visible_mobile="True">
       </region>
     </cluster>
     <cluster visible="True" area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
         <region visible="True" area="id-c8a4bedc-5721-412f-994f-c55fb03955d2" kind="duo">
-            <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a">
+            <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="False" cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a">
                 <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d17-tag" uniqueId="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-d17-tag"/>
             </container>
         </region>
         <region visible="True" area="id-bb856af5-0ad1-4849-b2f3-43fb635f4fc6" kind="duo">
-            <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="True" cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e">
+            <container cp:type="teaser" module="zon-square" visible="True" hide-dupes="False" cp:__name__="id-fac15e19-b931-4441-8d40-7ed4eb76f35e">
                 <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/taglogo/article-zplus-d17-tag" />
             </container>
         </region>
