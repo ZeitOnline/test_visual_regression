@@ -192,6 +192,7 @@
 
     // action when reload button or overlay was clicked
     Overlay.prototype.reload = function() {
+        window.scrollTo( 0, 0 );
         window.location.reload();
     };
 
