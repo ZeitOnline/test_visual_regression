@@ -8,6 +8,8 @@ POSTDEPLOY
 3.38 (unreleased)
 -----------------
 
+- BUG-643: Define ressort_literally for Campus
+
 - ZON-3700: Fix premium link in article volume module
 
 
