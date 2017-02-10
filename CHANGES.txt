@@ -5,8 +5,8 @@ POSTDEPLOY
 ----------
 
 
-3.38 (unreleased)
------------------
+3.37.1 (2017-02-10)
+-------------------
 
 - ZON-3700: Fix premium link in article volume module
 
