@@ -34,6 +34,10 @@ class Base(zeit.web.core.view.Base):
     def twitter_username(self):
         return 'zeitcampus'
 
+    @zeit.web.reify
+    def ressort_literally(self):
+        return 'Campus'
+
 
 @zeit.web.view_config(
     route_name='login_state',

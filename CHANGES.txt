@@ -8,6 +8,8 @@ POSTDEPLOY
 3.38 (unreleased)
 -----------------
 
+- BUG-643: Define ressort_literally for Campus
+
 - BUG-640: Modernize Google Tagmanager Code
 
 
