@@ -91,6 +91,7 @@ def is_paywalled(context, request):
 
 
 class Base(object):
+
     """Base class for all views."""
 
     seo_title_default = u''
@@ -687,7 +688,7 @@ class Base(object):
         code = [self.ressort or 'administratives',
                 self.sub_ressort,
                 'bild-text']
-        if zeit.web.core.template.zplus_content(self.context) and (
+        if zeit.web.core.template.zplus_abo_content(self.context) and (
                 not self.paywall):
             code.append('paid')
         return '/'.join([x for x in code if x])
@@ -797,6 +798,10 @@ class CommentMixin(object):
         return self.context.commentSectionEnable is not False
 
     @zeit.web.reify
+    def article_premoderate(self):
+        return self.context.commentsPremoderate
+
+    @zeit.web.reify
     def has_comment_area(self):
         # show comments if:
         # 1. comment section is enabled *and*
@@ -811,7 +816,7 @@ class CommentMixin(object):
     def comment_form(self):
         user = self.request.user
         user_blocked = user.get('blocked')
-        premoderation = user.get('premoderation')
+        premoderation_user = user.get('premoderation')
         valid_community_login = (
             user.get('has_community_data') and
             user.get('uid') and user.get('uid') != '0')
@@ -855,8 +860,9 @@ class CommentMixin(object):
             'note': note,
             'message': message,
             'user_blocked': user_blocked,
-            'show_premoderation_warning': premoderation and (
-                self.commenting_allowed and not user_blocked)
+            'show_premoderation_warning_user': premoderation_user and (
+                self.commenting_allowed and not user_blocked),
+            'show_premoderation_warning_article': self.article_premoderate
         }
 
     @zeit.web.reify
@@ -877,6 +883,7 @@ class CommentMixin(object):
 
 
 class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
+
     """Base view class for content that a) provides ICommonMetadata and b) is a
     "single content" (e.g. article/gallery/video, but not centerpage).
     XXX We should introduce an interface for this.
@@ -1121,6 +1128,7 @@ def health_check(request):
 
 
 class service_unavailable(object):  # NOQA
+
     def __init__(self, context, request):
         try:
             path = request.path

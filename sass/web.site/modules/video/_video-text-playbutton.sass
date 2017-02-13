@@ -4,7 +4,11 @@
 	font-weight: 300
 	+font-smoothing()
 	&:before
-		content: '\25B6' // ▶ = Black right-pointing triangle
+		// On Unicode 6.1, one unicode code point can have multiple glyphs,
+		// and you can choose those using variation selectors.
+		// E.g. you can use U+FE0E for text style graph and U+FE0F for Apple Color Emoji.
+		// @see http://stackoverflow.com/a/12950876
+		content: '\25B6 \FE0E' // ▶ = Black right-pointing triangle (prevent color emoji on iOS)
 		font-size: 90%
 		padding: 0 remify(4px) 0 0
 		vertical-align: middle

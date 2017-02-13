@@ -13,7 +13,6 @@
             {% set teaser = module | first_child %}
             {% set layout = module | get_layout %}
             {% set journalistic_format = module | get_journalistic_format %}
-            {% set tag_with_logo_content = teaser | tag_with_logo_content %}
 
             {# ZON-2011: if there is no author image on columns, render as default teaser #}
             {# ZON-3039: if teaser is zco content, render as default teaser #}

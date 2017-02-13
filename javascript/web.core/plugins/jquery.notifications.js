@@ -7,7 +7,14 @@
                 msgRegistrationErrorWrongSubscription = '<div class="notification notification--error" tabindex="0">' +
                     'Leider haben Sie kein gültiges Abonnement für diesen Artikel. Bitte wählen Sie unten das gewünschte Abo.</div>',
                 msgAccountConfirmSuccess = '<div class="notification notification--success" tabindex="0">' +
-                    'Ihr Konto wurde bestätigt. Sie sind jetzt angemeldet.</div>';
+                    'Ihr Konto wurde bestätigt. Sie sind jetzt angemeldet.</div>',
+                removeHash = function() {
+                    if ( 'replaceState' in history ) {
+                        history.replaceState( null, document.title, location.pathname + location.search );
+                    } else {
+                        location.hash = null;
+                    }
+                };
 
             // display hash only when loading page from email-link
 
@@ -18,17 +25,14 @@
                     } else {
                         $( msgRegistrationSuccess ).insertAfter( $header );
                     }
+                    removeHash();
                     break;
                 case 'success-confirm-account':
                     $( msgAccountConfirmSuccess ).insertAfter( $header );
+                    removeHash();
                     break;
             }
 
-            if ( 'replaceState' in history ) {
-                history.replaceState( null, document.title, location.pathname + location.search );
-            } else {
-                location.hash = null;
-            }
         }
     });
 })( jQuery, location, document );

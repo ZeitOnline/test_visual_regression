@@ -9,7 +9,7 @@ Default teaser template to inherit from.
 
 <article class="{% block layout %}teaser{% endblock %} {% block layout_shade %}{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
-         {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
+         {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %}
          {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
 
     {% if video -%}
@@ -41,8 +41,10 @@ Default teaser template to inherit from.
         <h2 class="{{ self.layout() }}__title-box">
             {% block teaser_kicker -%}
                 {% block zplus_kicker_logo %}
-                    {% if teaser is zplus_content %}
+                    {% if teaser is zplus_abo_content %}
                         {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                    {% elif teaser is zplus_registration_content and toggles('zplus_badge_gray') %}
+                        {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
                     {% endif %}
                 {% endblock %}
                 <span class="{{ self.layout() }}__kicker">
