@@ -8,6 +8,8 @@ POSTDEPLOY
 3.38 (unreleased)
 -----------------
 
+- ZON-3576: Transmit per-content premoderate flag
+
 - BUG-643: Define ressort_literally for Campus
 
 - BUG-640: Modernize Google Tagmanager Code
