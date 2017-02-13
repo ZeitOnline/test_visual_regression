@@ -283,7 +283,7 @@ class Article(zeit.web.core.view.Content):
                 badge.update({
                     'cover': self.volume.get_cover(
                         'printcover', self.product_id),
-                    'link': 'http://{}/{!s}/{!s}'.format(
+                    'link': 'http://{}/{!s}/{:02d}'.format(
                         self.request.host,
                         self.volume.year,
                         self.volume.volume),
@@ -294,7 +294,7 @@ class Article(zeit.web.core.view.Content):
                     badge.update({
                         'hide_source_label': True,
                         'intro': 'Aus der',
-                        'link_text': 'ZEIT Nr. {!s}/{!s}'.format(
+                        'link_text': 'ZEIT Nr. {:02d}/{!s}'.format(
                             self.volume.volume, self.volume.year)
                     })
 
