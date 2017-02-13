@@ -22,7 +22,6 @@ import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
-import zeit.content.text.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
@@ -1359,13 +1358,6 @@ def json_comment_count(request):
             count == 0 and 'Keine' or count, count != '1' and 'e' or '')
 
     return {'comment_count': comment_count}
-
-
-@zeit.web.view_config(
-    context=zeit.content.text.interfaces.IText,
-    renderer='string')
-def view_textcontent(context, request):
-    return context.text
 
 
 @zeit.web.view_config(
