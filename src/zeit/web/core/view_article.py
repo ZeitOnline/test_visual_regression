@@ -487,6 +487,7 @@ class InstantArticleItem(Article):
 @zeit.web.view_config(
     context=zeit.content.article.interfaces.IArticle,
     route_name='fbia',
+    host_restriction='fbia',
     renderer='templates/instantarticle/tracking.html')
 class InstantArticleTracking(Article):
 

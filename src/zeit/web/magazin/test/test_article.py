@@ -111,8 +111,8 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
         'pixel for IVW not in DOM')
 
 
-def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
-    browser = httpbrowser(testserver.url + '/zeit-magazin/article/03')
+def test_article03_has_correct_webtrekk_values(httpbrowser):
+    browser = httpbrowser('/zeit-magazin/article/03')
     source = browser.cssselect(
         'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
     script = browser.cssselect(
@@ -169,11 +169,11 @@ def test_article03_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp15=&cp25=original&cp26=article.column&cp27=&cp30=open&cp28=free'
             '&cp29=unfeasible&cp31=share_buttons_small'
             '&cp23=nicht_angemeldet'.format(
-                urllib.quote(testserver.url.replace('http://', '')))) in source
+                urllib.quote(browser.host.replace('http://', '')))) in source
 
 
-def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
-    browser = httpbrowser(testserver.url + '/zeit-magazin/article/03/seite-2')
+def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
+    browser = httpbrowser('/zeit-magazin/article/03/seite-2')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
@@ -195,11 +195,11 @@ def test_article03_page2_has_correct_webtrekk_values(testserver, httpbrowser):
             'cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
             'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&'
             'cp3=2/7'.format(
-                urllib.quote(testserver.url.replace('http://', '')))) in source
+                urllib.quote(browser.host.replace('http://', '')))) in source
 
 
-def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
-    browser = httpbrowser(testserver.url + '/zeit-magazin/index')
+def test_cp_has_correct_webtrekk_values(httpbrowser):
+    browser = httpbrowser('/zeit-magazin/index')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
@@ -252,18 +252,18 @@ def test_cp_has_correct_webtrekk_values(testserver, httpbrowser):
             'cp13=stationaer&cp14=friedbert&cp15=&cp25=original&'
             'cp26=centerpage.ZMO&cp27=&cp30=open&cp28=free&cp29=unfeasible&'
             'cp23=nicht_angemeldet'.format(
-                urllib.quote(testserver.url.replace('http://', '')))) in source
+                urllib.quote(browser.host.replace('http://', '')))) in source
 
 
-def test_webtrekk_series_tag_is_set_corectly(testserver, httpbrowser):
-    browser = httpbrowser(testserver.url + '/zeit-magazin/article/06')
+def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
+    browser = httpbrowser('/zeit-magazin/article/06')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
         'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
 
-    host = testserver.url.replace('http://', '')
+    host = browser.host.replace('http://', '')
     assert ('wt.contentId = "redaktion.zeit-magazin..toedlichekeime'
             '.article.zei|{}/zeit-magazin/article/06";'
             .format(host)) in webtrekk_config
@@ -283,14 +283,14 @@ def test_webtrekk_has_session_parameter(testbrowser):
     assert '1: window.Zeit.wrapped.client' in webtrekk_config
 
 
-def test_webtrekk_noscript_contains_user_info(testserver, httpbrowser):
+def test_webtrekk_noscript_contains_user_info(httpbrowser):
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         get_user.return_value = {
             'ssoid': '123',
             'mail': 'test@example.org',
             'name': 'jrandom',
         }
-        browser = httpbrowser(testserver.url + '/zeit-magazin/article/03',
+        browser = httpbrowser('/zeit-magazin/article/03',
                               cookies={'my_sso_cookie': 'just_be_present'})
         webtrekk = browser.cssselect(
             'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
