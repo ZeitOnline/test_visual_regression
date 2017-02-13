@@ -161,3 +161,10 @@ def test_seo_publish_date_script_should_be_generated_conditionally(
 
     inline_scritps = ''.join(browser.xpath('//script/text()'))
     assert ('1. Januar 2014' in inline_scritps) == contained
+
+
+def test_volume_teaser_uses_zmo_printcover(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/volumeteaser')
+    image = browser.cssselect('img.volume-teaser__media-item')
+    assert len(image) == 1
+    assert 'zeit-wissen' in image[0].get('src')

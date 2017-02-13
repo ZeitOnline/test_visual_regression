@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3656: Serve text and unknown content as raw bytes
 
+- ZON-3400: Show the volume cover of the article's product, if available
+
 - BUG-643: Define ressort_literally for Campus
 
 - BUG-640: Modernize Google Tagmanager Code
