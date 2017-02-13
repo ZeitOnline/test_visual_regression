@@ -140,17 +140,6 @@ def test_failsafe_rendering(markup, assertion, kw):
     assert condition, message.format(assertion)
 
 
-def test_url_path_not_found_should_render_404(testserver):
-    resp = requests.get('%s/zeit-magazin/centerpage/lifestyle'
-                        % testserver.url)
-    assert u'Dokument nicht gefunden' in resp.text
-
-
-def test_not_renderable_content_object_should_trigger_restart(testserver):
-    resp = requests.get('%s/zeit-online/quiz/quiz-workaholic' % testserver.url)
-    assert resp.headers['x-render-with'] == 'default'
-
-
 @zeit.web.core.decorator.JinjaEnvRegistrator('filters', category='_c1')
 def do_things(arg, kw1=42, kw2=45):
     """Docstrings document things."""
