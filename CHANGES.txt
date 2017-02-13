@@ -8,7 +8,15 @@ POSTDEPLOY
 3.38 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3576: Transmit per-content premoderate flag
+
+- ZON-3654: Prevent accessing content via fbia.zeit.de
+
+- ZON-3656: Serve text and unknown content as raw bytes
+
+- BUG-643: Define ressort_literally for Campus
+
+- BUG-640: Modernize Google Tagmanager Code
 
 
 3.37.1 (2017-02-10)
