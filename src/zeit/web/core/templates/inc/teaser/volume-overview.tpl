@@ -1,7 +1,7 @@
 {% set volume = module | first_child %}
 {% set layout = 'teaser-{}'.format(module | get_layout) %}
 {% set href = '{0}{1}/{2:02d}/index'.format(request.route_url('home'), volume.year, volume.volume) %}
-{% set packshot = volume.covers['printcover'] %}
+{% set packshot = volume.get_cover('printcover') %}
 {% set module_layout = layout %}
 
 <aside class="{{ layout }}">

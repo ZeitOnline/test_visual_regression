@@ -1,5 +1,7 @@
 {% if toggles('volume_teaser') %}
 <aside class="volume-teaser article__item article__item--marginalia">
-    {% include "{}:templates/inc/asset/image_volumeteaser.tpl".format(view.package) ignore missing %}
+    {% include [
+        "{}:templates/inc/asset/image_volumeteaser.tpl".format(view.package),
+        "zeit.web.core:templates/inc/asset/image_volumeteaser.tpl"] ignore missing %}
 </aside>
 {% endif %}

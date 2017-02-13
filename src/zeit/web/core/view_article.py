@@ -281,7 +281,8 @@ class Article(zeit.web.core.view.Content):
 
             if self.volume:
                 badge.update({
-                    'cover': self.volume.covers['printcover'],
+                    'cover': self.volume.get_cover(
+                        'printcover', self.product_id),
                     'link': 'http://{}/{!s}/{!s}'.format(
                         self.request.host,
                         self.volume.year,
