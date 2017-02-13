@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3576: Transmit per-content premoderate flag
 
+- ZON-3654: Prevent accessing content via fbia.zeit.de
+
 - BUG-643: Define ressort_literally for Campus
 
 - BUG-640: Modernize Google Tagmanager Code
