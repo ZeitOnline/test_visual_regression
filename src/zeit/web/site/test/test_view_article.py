@@ -1833,6 +1833,10 @@ def test_zplus_coverless_print_article_has_fallback_image(testbrowser):
     zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
     assert 'default_packshot_diezeit' in zplus_media[0].attrib['src']
 
+    link = zplus_box[0].cssselect('a.zplus-badge__link')[0]
+    assert link.attrib['href'] == 'http://localhost/2016/03'
+    assert 'ZEIT Nr. 03/2016' in link.text_content()
+
 
 def test_zplus_abo_print_article_has_correct_markup(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit')
@@ -1910,8 +1914,10 @@ def test_free_print_article_has_volume_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free')
     badge = browser.cssselect('main article .zplus-badge')[0]
     label = badge.cssselect('.zplus-badge__text')[0]
+    link = badge.cssselect('.zplus-badge__link')[0]
 
-    assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 1/2016'
+    assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 01/2016'
+    assert link.attrib['href'] == 'http://localhost/2016/01'
     assert badge.cssselect('.zplus-badge__media')
 
     # test volume badge is in single page view too
