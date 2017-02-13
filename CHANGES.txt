@@ -8,11 +8,29 @@ POSTDEPLOY
 3.38 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3576: Transmit per-content premoderate flag
+
+- ZON-3654: Prevent accessing content via fbia.zeit.de
+
+- BUG-643: Define ressort_literally for Campus
+
+- BUG-640: Modernize Google Tagmanager Code
+
+
+3.37.1 (2017-02-10)
+-------------------
+
+- ZON-3700: Fix premium link in article volume module
+
+- BUG-647: Fix color and placement of taglogo in topic teaser
 
 
 3.37 (2017-02-07)
 -----------------
+
+- ZON-3658: Remove any images.zeit.de remnants, it's img.zeit.de all the way now
+
+- ZON-3568: Add grey Z+ icon to teasers for content that requires registration
 
 - BUG-634: Deactivate overscrolling and popover in app
 
@@ -22,16 +40,11 @@ POSTDEPLOY
 
 - BUG-631: Add page padding for login link (mobile)
 
-- ZON-3658: Remove any images.zeit.de remnants, it's img.zeit.de all the way now
-
-- ZON-3568: Add grey Z+ icon to teasers for content that requires registration
-
 - FIX: Add entry_service parameter "schranke_paid" in Z+ subscription form
 
 
 3.36 (2017-01-31)
 -----------------
-
 
 - ZON-3629: Add property overscrolling to view
 
@@ -45,23 +58,23 @@ POSTDEPLOY
 
 - BUG-624: Fix links to volume in premium
 
-- FIX: Spawn #D17 logo on nextread kicker
-
 - BUG-593: Change video player in videostage to html5
+
+- FIX: Spawn #D17 logo on nextread kicker
 
 
 3.35 (2017-01-30)
 -----------------
 
+- ZON-3672: Make premium order links configurable
+
 - OPS-494: Make POST comment work after ZON-2284
 
 - OPS-495: Configure our custom error swallowing Jinja enviroment properly
 
-- ZON-3672: Make premium order links configurable
+- OPS-494: Log Undefined errors, and log ICMSContent with their uniqueId
 
 - FIX: Register keyword redirect views properly
-
-- OPS-494: Log Undefined errors, and log ICMSContent with their uniqueId
 
 
 3.34 (2017-01-27)

@@ -21,14 +21,22 @@
     <div class="comment-section__note">
         <div class="comment-section__message comment-section__item">{{ view.comment_form.note }}</div>
     </div>
-{% elif view.comment_form.user_blocked or view.comment_form.show_premoderation_warning %}
+{% elif view.comment_form.user_blocked or view.comment_form.show_premoderation_warning_user or view.comment_form.show_premoderation_warning_article%}
     <div class="comment-section__note">
         <div class="comment-section__notice comment-section__item">
         {% if view.comment_form.user_blocked %}
             Die Kommentarfunktion wurde für Ihr Benutzerprofil gesperrt.
-        {% elif view.comment_form.show_premoderation_warning %}
+        {% elif view.comment_form.show_premoderation_warning_article %}
+          <span class="premoderation_article">
+          Liebe Leserinnen und Leser, in diesem Kommentarbereich prüfen wir alle
+          Beiträge, bevor sie veröffentlicht werden. Ihr Kommentar erscheint,
+          sobald er gesichtet wurde.
+          </span>
+        {% elif view.comment_form.show_premoderation_warning_user %}
+            <span class="premoderation_user">
             Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
             oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
+            </span>
         {% endif %}
         </div>
     </div>
@@ -74,9 +82,16 @@
         <textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500">
             {%- if view.error and view.error.comment %}{{ view.error.comment }}{% endif -%}
         </textarea>
-            {% if view.comment_form.show_premoderation_warning %}
+            {% if view.comment_form.show_premoderation_warning_article %}
             {# hidden in comment form, just visible in (cloned) reply form #}
-            <p class="comment-form__text comment-section__notice">
+            <p class="comment-form__text comment-section__notice premoderation_article">
+                Liebe Leserinnen und Leser, in diesem Kommentarbereich prüfen
+                wir alle Beiträge, bevor sie veröffentlicht werden. Ihr
+                Kommentar erscheint, sobald er gesichtet wurde.
+            </p>
+            {% elif view.comment_form.show_premoderation_warning_user %}
+            {# hidden in comment form, just visible in (cloned) reply form #}
+            <p class="comment-form__text comment-section__notice premoderation_user">
                 Wir überprüfen vorübergehend Ihre Kommentare, bevor wir sie veröffentlichen. Das liegt entweder daran, dass Sie neu hier sind,
                 oder kürzlich gegen <a href="{{ request.route_url('home') }}administratives/2010-03/netiquette">unsere Netiquette</a> verstoßen haben.
             </p>

@@ -1393,14 +1393,34 @@ def test_article_contains_zeit_clickcounter(testbrowser):
             ) in counter[0].get('src')
 
 
-def test_fbia_article_contains_meta_robots(testbrowser):
-    browser = testbrowser('/fbia/zeit-online/article/simple')
+def test_fbia_article_contains_meta_robots(httpbrowser):
+    browser = httpbrowser('/fbia/zeit-online/article/simple',
+                          headers={'Host': 'fbia.zeit.de'})
     assert '<meta name="robots" content="noindex, follow">' in browser.contents
 
 
-def test_fbia_article_contains_correct_webtrekk_platform(testbrowser):
-    browser = testbrowser('/fbia/zeit-online/article/simple')
+def test_fbia_article_contains_correct_webtrekk_platform(httpbrowser):
+    browser = httpbrowser('/fbia/zeit-online/article/simple',
+                          headers={'Host': 'fbia.zeit.de'})
     assert '25: "instant article"' in browser.contents
+
+
+def test_cannot_access_content_on_fbia_host(testserver):
+    r = requests.get('%s/zeit-online/index' % testserver.url,
+                     headers={'Host': 'fbia.zeit.de'})
+    assert r.status_code == 404
+    r = requests.get('%s/zeit-online/image/weltall/original' % testserver.url,
+                     headers={'Host': 'fbia.zeit.de'})
+    assert r.status_code == 404
+
+
+def test_cannot_access_fbia_tracking_on_content_host(testserver):
+    r = requests.get('%s/fbia/zeit-online/article/simple' % testserver.url,
+                     headers={'Host': 'www.zeit.de'})
+    assert r.status_code == 404
+    r = requests.get('%s/fbia/zeit-online/article/simple' % testserver.url,
+                     headers={'Host': 'fbia.zeit.de'})
+    assert r.status_code == 200
 
 
 def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
@@ -1930,10 +1950,7 @@ def test_volume_teaser_is_rendered_correctly(testbrowser):
     volume_teaser_link = browser.cssselect(
         '.volume-teaser__link')[0].get('href')
     assert len(volume_teaser) == 1
-    assert volume_teaser_link == 'https://premium.zeit.de/diezeit/2016/' \
-        '01?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.' \
-        'cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=' \
-        'rr&utm_content=webreader_packshot_cover_cover'
+    assert volume_teaser_link == 'https://premium.zeit.de/abo/diezeit/2016/01'
 
 
 def test_volume_teaser_display_correct_image_on_desktop(
