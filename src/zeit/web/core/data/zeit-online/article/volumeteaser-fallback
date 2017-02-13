@@ -41,7 +41,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn:newsml:afp.com:20150601:doc-2n64x</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">SID</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Sport-Informations-Dienst</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1159bddc254242769fbbe1fa1c0e380d</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>

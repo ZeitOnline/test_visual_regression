@@ -22,7 +22,6 @@ import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
-import zeit.content.text.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
@@ -799,6 +798,10 @@ class CommentMixin(object):
         return self.context.commentSectionEnable is not False
 
     @zeit.web.reify
+    def article_premoderate(self):
+        return self.context.commentsPremoderate
+
+    @zeit.web.reify
     def has_comment_area(self):
         # show comments if:
         # 1. comment section is enabled *and*
@@ -813,7 +816,7 @@ class CommentMixin(object):
     def comment_form(self):
         user = self.request.user
         user_blocked = user.get('blocked')
-        premoderation = user.get('premoderation')
+        premoderation_user = user.get('premoderation')
         valid_community_login = (
             user.get('has_community_data') and
             user.get('uid') and user.get('uid') != '0')
@@ -857,8 +860,9 @@ class CommentMixin(object):
             'note': note,
             'message': message,
             'user_blocked': user_blocked,
-            'show_premoderation_warning': premoderation and (
-                self.commenting_allowed and not user_blocked)
+            'show_premoderation_warning_user': premoderation_user and (
+                self.commenting_allowed and not user_blocked),
+            'show_premoderation_warning_article': self.article_premoderate
         }
 
     @zeit.web.reify
@@ -1354,13 +1358,6 @@ def json_comment_count(request):
             count == 0 and 'Keine' or count, count != '1' and 'e' or '')
 
     return {'comment_count': comment_count}
-
-
-@zeit.web.view_config(
-    context=zeit.content.text.interfaces.IText,
-    renderer='string')
-def view_textcontent(context, request):
-    return context.text
 
 
 @zeit.web.view_config(

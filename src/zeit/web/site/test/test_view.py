@@ -160,12 +160,33 @@ def test_sharing_titles_differ_from_html_title(testbrowser):
 
 def test_article_should_show_premoderation_warning(application):
     article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    request = pyramid.testing.DummyRequest()
+    request.host_url = 'http://www.zeit.de'
+    request.user = {'ssoid': '123', 'blocked': False, 'premoderation': True}
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.comment_area['show_premoderation_warning_user'] is True
+
+
+def test_article_should_show_premoderation_article_warning(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+    request.host_url = 'http://www.zeit.de'
+    request.user = {'ssoid': '123', 'blocked': False, 'premoderation': False}
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.comment_area['show_premoderation_warning_article'] is True
+
+
+def test_article_should_show_premoderation_and_article_warning(application):
+    article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
     request.host_url = 'http://www.zeit.de'
     request.user = {'ssoid': '123', 'blocked': False, 'premoderation': True}
     view = zeit.web.site.view_article.Article(article, request)
-    assert view.comment_area['show_premoderation_warning'] is True
+    assert view.comment_area['show_premoderation_warning_article'] is True
+    assert view.comment_area['show_premoderation_warning_user'] is True
 
 
 def test_schema_org_publisher_mark_up(testbrowser):

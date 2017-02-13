@@ -91,7 +91,7 @@
   &lt;list&gt;
     &lt;dictionary&gt;
       &lt;item key="channels"&gt;
-          &lt;string&gt;parse-channel-news&lt;/string&gt;
+          &lt;string&gt;channel-news&lt;/string&gt;
       &lt;/item&gt;
       &lt;item key="enabled"&gt;
           &lt;false/&gt;
@@ -100,7 +100,7 @@
           &lt;unicode&gt;Mobile-Text&lt;/unicode&gt;
       &lt;/item&gt;
       &lt;item key="type"&gt;
-          &lt;string&gt;parse&lt;/string&gt;
+          &lt;string&gt;mobile&lt;/string&gt;
       &lt;/item&gt;
     &lt;/dictionary&gt;
     &lt;dictionary&gt;

@@ -503,6 +503,7 @@ endpoint_agatho = (
      'comment': 'my comment',
      'pid': None,
      'uid': '123',
+     'article_premoderate': 'true',
      'subject': '[empty]'}})
 
 endpoint_report = (
@@ -870,7 +871,7 @@ def test_post_comment_should_have_correct_premoderation_states(
         response.content = ''
         mock_method.return_value = response
         ret_value = poster.post_comment()
-        assert ret_value['response']['premoderation'] is state
+        assert ret_value['response']['premoderation_user'] is state
 
 
 def test_user_comment_should_have_expected_structure(application):

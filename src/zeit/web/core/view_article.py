@@ -281,7 +281,8 @@ class Article(zeit.web.core.view.Content):
 
             if self.volume:
                 badge.update({
-                    'cover': self.volume.covers['printcover'],
+                    'cover': self.volume.get_cover(
+                        'printcover', self.product_id),
                     'link': 'http://{}/{!s}/{!s}'.format(
                         self.request.host,
                         self.volume.year,
@@ -487,6 +488,7 @@ class InstantArticleItem(Article):
 @zeit.web.view_config(
     context=zeit.content.article.interfaces.IArticle,
     route_name='fbia',
+    host_restriction='fbia',
     renderer='templates/instantarticle/tracking.html')
 class InstantArticleTracking(Article):
 

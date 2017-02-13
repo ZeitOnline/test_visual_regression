@@ -1,5 +1,10 @@
 (function( vjs ) {
-
+    /*
+     * This file is stored in vivi (http://vivi.zeit.de/repository/static/js/brightcove-plugins/)
+     * and included into the players via http://scripts.zeit.de/static/js/brightcove-plugins/videojs-event-broadcast.js .
+     * But we keep a copy inside the repository to have it greppable and to keep a file history.
+     *
+     */
     var videojsEventBroadcastPlugin = function( options ) {
         var player = this,
         postEventToWindow = function( eventString ) {

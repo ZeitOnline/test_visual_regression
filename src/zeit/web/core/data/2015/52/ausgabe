@@ -31,7 +31,7 @@
   </head>
   <body/>
   <covers>
-    <cover href="http://xml.zeit.de/2016-09/test-printcover" id="printcover"/>
-    <cover href="http://xml.zeit.de/2016-09/volume_header" id="coverimage"/>
+    <cover href="http://xml.zeit.de/2016-09/test-printcover" id="printcover" product_id="ZEI"/>
+    <cover href="http://xml.zeit.de/2016-09/volume_header" id="coverimage" product_id="ZEI"/>
   </covers>
 </volume>
