@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - BUG-640: Modernize Google Tagmanager Code
 
+- BUG-645: Prevent hp_overlay from building a dead end
+
 
 3.37.1 (2017-02-10)
 -------------------
