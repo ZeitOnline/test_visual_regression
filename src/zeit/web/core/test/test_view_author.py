@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 def test_author_page_should_render_bio_questions(testbrowser):
     browser = testbrowser('/autoren/D/Tobias_Dorfer')
     question1 = browser.cssselect('.author-questions__title')[0].text
