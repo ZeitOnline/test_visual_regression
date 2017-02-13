@@ -32,7 +32,9 @@ def test_renders_meta_files(testserver, hostname):
         '%s/text/dummy.meta' % testserver.url,
         headers={'Host': hostname + '.zeit.de'})
     assert r.status_code == 200
-    assert r.headers['content-type'] == 'application/xml; charset=UTF-8'
+    # As of libmagic 5.30 our meta files are recognised as text/xml (ND)
+    assert r.headers['content-type'] in (
+        'application/xml; charset=UTF-8', 'text/xml; charset=UTF-8')
     assert r.headers['Access-Control-Allow-Origin'] == '*'
     assert 'robots.txt' in r.content
 
