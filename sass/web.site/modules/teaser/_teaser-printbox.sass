@@ -1,53 +1,46 @@
 .print-box
-	padding: $vertical-space 0
 	&__heading
-		color: $zon-charcoal
 		border-bottom: 1px solid $color-border
-		font-size: $font-s
+		color: $zon-charcoal
+		font-size: em(14px)
 		font-weight: bold
 		letter-spacing: $zon-letter-spacing-m
-		margin: 0 0 remify(16px)
-		padding: remify(0 10px 10px 10px)
+		padding: remify($vertical-space 0 10px)
 		text-transform: uppercase
 
 	&__issue
+		font-size: em(12px)
 		font-weight: normal
 		white-space: nowrap
-		font-size: em(12px)
 
 	&__content
 		+clearfix
+		padding: remify(16px 0 $vertical-space)
 
 	&__combined-link
 		@extend %teaser-combined-link
 
 	&__content-heading
-		font-size: 1em
-		margin: 1em 0 0.125em
-		+respond-min($break-phablet-min)
-			margin: 0
+		margin: 0
 
 	&__kicker
 		@extend %teaser-kicker
-		font-size: $font-xs
 
 	&__title
 		@extend %teaser-title
-		font-size: em(18px)
-		line-height: 1.4
 
 	&__media
-		margin: auto
-		max-width: 320px
+		margin: remify(0 auto 16px)
+		max-width: remify(320px)
 		+respond-min($break-phablet-min)
 			float: left
-			margin: 1.25em 0 0
-			padding-right: 1.25em
+			margin: remify(20px 0 0)
+			max-width: none
+			padding-right: remify(20px)
 			width: 50%
 		+respond-min($break-tablet-min)
 			float: none
-			margin-bottom: remify(16px)
-			margin-top: 0
+			margin: remify(0 auto 16px)
 			padding-right: 0
 			width: auto
 
@@ -56,22 +49,18 @@
 			display: table-cell
 		+respond-min($break-tablet-min)
 			display: block
-			width: auto
 
 	&__media-item
 		@extend %teaser-media-item !optional
-		width: 100%
 
 	&__text
 		@extend %teaser-text
-		font-size: $font-mm
-		line-height: 1.4
-		margin: 0 0 remify(8px)
+		margin: remify(8px 0 12px)
 
 	&__link
 		color: $zon-red
 		display: block
-		font-size: $font-ss
+		font-size: em(13px)
 
 		&:visited,
 		&:hover,
@@ -88,26 +77,13 @@
 
 .print-box--angebot
 	.print-box
-		&__heading
-			font-size: $font-s
-
-		&__media
-			margin: 0
-
 		&__title
 			margin: 0 0 remify(20px)
 			+respond-min($break-phablet-min)
-				width: 50%
 				float: right
 				margin: 0
+				width: 50%
 			+respond-min($break-tablet-min)
 				float: none
-				font-size: $font-ml
 				margin: 0 0 remify(20px)
-				position: static
 				width: auto
-			+respond-min($break-desktop-min)
-				font-size: $font-mxl
-
-		&__text
-			margin: remify(12px) 0
