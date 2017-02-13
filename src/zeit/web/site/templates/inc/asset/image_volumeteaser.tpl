@@ -2,7 +2,7 @@
 
 {% set image = get_image(block.printcover, fallback='default_packshot_diezeit') %}
 {% set module_layout = 'volume-teaser' %}
-{% set href = 'https://premium.zeit.de/{}/{}/{}?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=rr&utm_content=webreader_packshot_cover_cover'.format(block.medium, block.year, block.issue) %}
+{% set href = 'https://premium.zeit.de/abo/{}/{}/{}'.format(block.medium, block.year, block.issue) %}
 
 {% block media_caption_content %}
     <a class="{{ module_layout }}__link" href="{{ href }}">

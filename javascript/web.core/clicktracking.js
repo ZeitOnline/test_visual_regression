@@ -154,7 +154,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 type = 'image';
             }
 
-            teasertype += $article.data( 'zplus' ) ? '-zplus' : '';
+            teasertype += $article.data( 'zplus' ) ? '-' + $article.data( 'zplus' ) : '';
 
             if ( element.type === 'submit' ) {
                 href = element.form.action + '?' + $( element.form ).serialize();

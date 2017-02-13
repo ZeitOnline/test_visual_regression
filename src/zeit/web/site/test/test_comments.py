@@ -58,12 +58,43 @@ def test_comment_form_should_be_rendered(testbrowser, monkeypatch):
         'note': None,
         'message': None,
         'user_blocked': False,
-        'show_premoderation_warning': False
+        'show_premoderation_warning_user': False
     }
     monkeypatch.setattr(
         zeit.web.core.view_comment.CommentForm, 'comment_area', comment)
-    browser = testbrowser('/zeit-online/article/01/comment-form')
+    browser = testbrowser('/zeit-online/article/02/comment-form')
     assert len(browser.cssselect('#comment-form')) == 1
+
+
+def test_comment_form_correct_premoderation_warnings_should_be_rendered(
+        tplbrowser, dummy_request):
+    dummy_request.user = {
+        'ssoid': 123,
+        'blocked': False,
+        'premoderation': True,
+        'has_community_data': True,
+        'uid': 123,
+        'name': 'Max'
+    }
+    article_with_premod = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    article_without_premod = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    view = zeit.web.core.view_comment.CommentForm(
+        article_without_premod, dummy_request)
+    browser_comment_form = tplbrowser(
+        'zeit.web.core:templates/inc/comments/comment-form.html',
+        view=view, request=dummy_request)
+    assert len(browser_comment_form.cssselect('.premoderation_user')) > 0
+    assert len(browser_comment_form.cssselect('.premoderation_article')) == 0
+
+    view = zeit.web.core.view_comment.CommentForm(
+        article_with_premod, dummy_request)
+    browser_comment_form = tplbrowser(
+        'zeit.web.core:templates/inc/comments/comment-form.html',
+        view=view, request=dummy_request)
+    assert len(browser_comment_form.cssselect('.premoderation_user')) == 0
+    assert len(browser_comment_form.cssselect('.premoderation_article')) > 1
 
 
 def test_comment_form_should_display_parent_hint(tplbrowser, dummy_request):
@@ -301,7 +332,7 @@ def test_comment_area_note_should_be_displayed_if_set(
         'note': 'No community login',
         'message': None,
         'user_blocked': False,
-        'show_premoderation_warning': False
+        'show_premoderation_warning_user': False
     }
     monkeypatch.setattr(
         zeit.web.core.view_comment.CommentForm, 'comment_form', form)

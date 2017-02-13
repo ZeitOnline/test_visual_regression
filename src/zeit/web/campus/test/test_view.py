@@ -55,3 +55,14 @@ def test_schema_org_publisher_mark_up(testbrowser):
         'structured-data-publisher-logo-zco.png')
     assert logo.cssselect('[itemprop="width"]')[0].get('content') == '347'
     assert logo.cssselect('[itemprop="height"]')[0].get('content') == '60'
+
+
+def test_ressort_literally_returns_correct_ressort(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/index')
+    view = zeit.web.campus.view_centerpage.Centerpage(context, mock.Mock())
+    assert view.ressort_literally == 'Campus'
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/article/simple')
+    article_view = zeit.web.campus.view_article.Article(context, mock.Mock())
+    assert article_view.ressort_literally == 'Campus'

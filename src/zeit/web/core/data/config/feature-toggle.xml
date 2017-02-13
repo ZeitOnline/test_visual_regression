@@ -1,24 +1,25 @@
 <?xml version="1.0"?>
 <features>
-  <amp_advertising>true</amp_advertising>
-  <fbia_advertising>true</fbia_advertising>
-  <article_lineage>true</article_lineage>
-  <instantarticle_interrupts>true</instantarticle_interrupts>
-  <iqd>false</iqd>
-  <third_party_modules>false</third_party_modules>
-  <tracking>false</tracking>
-  <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
-  <zon_videosinglepage_via_html5>true</zon_videosinglepage_via_html5>
   <access_status_ivw>true</access_status_ivw>
   <access_status_webtrekk>true</access_status_webtrekk>
-  <reader_revenue>true</reader_revenue>
+  <amp_advertising>true</amp_advertising>
+  <article_lineage>true</article_lineage>
   <dummy>false</dummy>
-  <volume_teaser>true</volume_teaser>
-  <rawr_iframe>true</rawr_iframe>
   <enable_intext_links>false</enable_intext_links>
+  <fbia_advertising>true</fbia_advertising>
   <hp_overlay>true</hp_overlay>
-  <update_signals>true</update_signals>
+  <instantarticle_interrupts>true</instantarticle_interrupts>
+  <iqd>false</iqd>
   <overscrolling>true</overscrolling>
+  <rawr_iframe>true</rawr_iframe>
+  <reader_revenue>true</reader_revenue>
   <tag_logos>true</tag_logos>
+  <third_party_modules>false</third_party_modules>
+  <tracking>false</tracking>
+  <update_signals>true</update_signals>
+  <volume_teaser>true</volume_teaser>
+  <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
+  <zon_videosinglepage_via_html5>true</zon_videosinglepage_via_html5>
+  <zplus_badge_gray>true</zplus_badge_gray>
   <zplus_badge_on_registration_paywall>true</zplus_badge_on_registration_paywall>
 </features>

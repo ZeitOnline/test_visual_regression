@@ -1755,6 +1755,18 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
 
 
+def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-register')
+
+    reg_badge = browser.cssselect('.nextread__kicker-logo--zplus-register')
+    assert len(reg_badge) == 1
+
+    link = browser.cssselect('.nextread__link')
+    assert len(link) == 1
+    data_id = link[0].attrib['data-id']
+    assert data_id == 'articlebottom.editorial-nextread...area-zplus-register'
+
+
 def test_article_byline_is_displayed_completely(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     dom_node_byline = browser.cssselect('.byline')
@@ -1938,10 +1950,7 @@ def test_volume_teaser_is_rendered_correctly(testbrowser):
     volume_teaser_link = browser.cssselect(
         '.volume-teaser__link')[0].get('href')
     assert len(volume_teaser) == 1
-    assert volume_teaser_link == 'https://premium.zeit.de/diezeit/2016/' \
-        '01?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.' \
-        'cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=' \
-        'rr&utm_content=webreader_packshot_cover_cover'
+    assert volume_teaser_link == 'https://premium.zeit.de/abo/diezeit/2016/01'
 
 
 def test_volume_teaser_display_correct_image_on_desktop(
@@ -2219,6 +2228,16 @@ def test_overscrolling_is_working_as_expected(
     driver.execute_script('window.scrollBy(0, 801)')
     condition = expected_conditions.visibility_of_element_located((
         By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
+    # overscrolling is inactive in app
+    driver.get(
+        '%s/zeit-online/article/01?app-content' % testserver.url)
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
 
