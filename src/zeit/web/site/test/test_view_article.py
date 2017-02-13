@@ -1755,7 +1755,7 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
 
 
-def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
+def test_zplus_badge_should_be_rendered_on_nextread_register(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-register')
 
     reg_badge = browser.cssselect('.nextread__kicker-logo--zplus-register')
