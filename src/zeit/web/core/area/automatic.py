@@ -92,7 +92,7 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'show_commentthread': 'commentSectionEnable',
         'supertitle': 'teaserSupertitle',
         'teaser_text': 'teaserText',
-        'title': 'teaserTitle',
+        'teaser_title': 'teaserTitle',
         'type': 'doc_type',
         'uniqueId': '',
     }
