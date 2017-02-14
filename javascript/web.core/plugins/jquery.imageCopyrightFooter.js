@@ -54,7 +54,6 @@
 
                 show: function() {
                     // disable overscrolling
-                    document.body.setAttribute( 'data-overscrolling', 'off' );
                     $( window ).off( 'scroll.over' );
                     $( '#overscrolling' ).remove();
                     // there is a strange unresolvable bug that it's only scrolling on the first click

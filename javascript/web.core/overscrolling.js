@@ -170,9 +170,6 @@ define( [
 
         $( window ).on( 'scroll.over', $.throttle( function() {
             animateCircleByScroll();
-            // skip if overscrolling is disabled on the fly
-            if ( document.body.getAttribute( 'data-overscrolling' ) === 'off' ) { return; }
-
             if ( $( window ).scrollTop() >= $( document ).height() - $( window ).height() ) {
                 if ( debug ) {
                     console.debug( 'overscrolling: jump to HP.' );
