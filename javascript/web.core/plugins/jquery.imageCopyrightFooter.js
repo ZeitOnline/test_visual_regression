@@ -3,7 +3,7 @@
  * @author thomas.puppe@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+(function( $, document ) {
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -35,6 +35,7 @@
                 '</li>',
             slideDuration = 300,
             scrollDuration = 500,
+            overscrolling = document.body.getAttribute( 'data-overscrolling' ),
             copyrights = {
                 container: null,
                 initialized: false,
@@ -53,6 +54,9 @@
                 },
 
                 show: function() {
+                    // disable overscrolling
+                    document.body.setAttribute( 'data-overscrolling', 'off' );
+                    $( '#overscrolling' ).hide();
                     // there is a strange unresolvable bug that it's only scrolling on the first click
                     // or never at all when using Velocity for the sliding animation, so use jQuery instead
                     this.container
@@ -60,13 +64,46 @@
                     //  .velocity( 'slideDown', slideDuration );
                     this.container.children().eq( 0 )
                         .scrollIntoView({ duration: scrollDuration });
+                    // this.scrollIntoView();
                     this.open = true;
                 },
 
                 hide: function() {
+                    var overscrollContainer = $( '#overscrolling' );
+                    if ( overscrollContainer.length ) {
+                        $( 'html' ).velocity( 'scroll', {
+                            duration: scrollDuration,
+                            offset: $( window ).scrollTop() - this.container.height()
+                        });
+                    }
+
                     this.container
                         .velocity( 'slideUp', slideDuration );
                     this.open = false;
+
+                    // reset overscrolling value
+                    if ( overscrolling ) {
+                        document.body.setAttribute( 'data-overscrolling', overscrolling );
+                    } else {
+                        document.body.removeAttribute( 'data-overscrolling' );
+                    }
+                },
+
+                scrollIntoView: function() {
+                    var overscrollContainer = $( '#overscrolling' ),
+                        innerHeight = $( window ).height();
+
+                    // if overscrolling is active and copyright container is smaller than the viewport, scroll to bottom of page footer
+                    if ( overscrollContainer.length && innerHeight < this.container.height() ) {
+                        overscrollContainer.scrollIntoView({
+                            duration: scrollDuration,
+                            delay: slideDuration,
+                            offset: innerHeight * -1
+                        });
+                    } else {
+                        this.container.children().eq( 0 )
+                            .scrollIntoView({ duration: scrollDuration });
+                    }
                 },
 
                 init: function() {
@@ -125,4 +162,4 @@
             copyrights.toggle();
         });
     };
-})( jQuery );
+})( jQuery, document );
