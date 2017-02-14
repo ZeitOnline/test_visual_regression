@@ -168,7 +168,7 @@ define( [
             }
         });
 
-        $( window ).on( 'scroll', $.throttle( function() {
+        $( window ).on( 'scroll.over', $.throttle( function() {
             animateCircleByScroll();
             // skip if overscrolling is disabled on the fly
             if ( document.body.getAttribute( 'data-overscrolling' ) === 'off' ) { return; }
