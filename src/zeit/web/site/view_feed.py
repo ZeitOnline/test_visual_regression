@@ -189,7 +189,7 @@ class Newsfeed(Base):
                 )
                 channel.append(item)
             except Exception:
-                log.warning("Could't add content to Newsfeed")
+                log.warning("Couldn't add content to Newsfeed")
                 continue
         return root
 
@@ -263,7 +263,7 @@ class InstantArticleFeed(Newsfeed):
                     src=instant_articles_url, onerror='continue')
                 channel.append(include)
             except Exception:
-                log.warning("Could not add item to Instant Article Feed.")
+                log.warning("Couldn't add content to Instant Article Feed.")
                 continue
         return root
 
@@ -332,7 +332,7 @@ class SpektrumFeed(Base):
 
                 channel.append(item)
             except Exception:
-                log.warning("Could't add item to Spektrum feed.")
+                log.warning("Couldn't add content to Spektrum feed.")
                 continue
         return root
 
@@ -383,7 +383,7 @@ class SocialFeed(Base):
                     item.append(CONTENT_MAKER(social_value))
                 channel.append(item)
             except Exception:
-                log.warning("Could't add content to Social Feed.")
+                log.warning("Couldn't add content to Social Feed.")
                 continue
         return root
 
