@@ -3,8 +3,7 @@
   <head>
     <header/>
     <image base-id="http://xml.zeit.de/zeit-magazin/images/kerzen-marmormuster/" type="jpg" publication-date="" expires="" caption_local="Lorde beim Coachella-Festival 2016"></image>
-    <author href="http://xml.zeit.de/autoren/K/Anna_Kemper/index.xml" publication-date="" expires="">
-      <image base-id="http://xml.zeit.de/autoren/K/Anna_Kemper/anna-kemper-3"></image>
+    <author href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml">
       <display_name>Anna Kemper</display_name>
     </author>
     <rankedTags>
