@@ -120,11 +120,9 @@
                 }
             };
 
-        return this.each( function() {
-            $( this ).on( 'click', function( e ) {
-                e.preventDefault();
-                copyrights.toggle();
-            } );
+        return this.on( 'click', function( e ) {
+            e.preventDefault();
+            copyrights.toggle();
         });
     };
 })( jQuery );
