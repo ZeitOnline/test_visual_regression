@@ -5,7 +5,13 @@ POSTDEPLOY
 ----------
 
 
-3.38 (unreleased)
+3.39 (unreleased)
+-----------------
+
+- MAINT: Skip broken content in feeds
+
+
+3.38 (2017-02-14)
 -----------------
 
 - ZON-3576: Transmit per-content premoderate flag
