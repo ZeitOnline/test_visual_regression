@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - BUG-650: Update default volumeteaser text
 
+- BUG-649: Format link to volume page with leading zero
+
 - MAINT: Skip broken content in feeds
 
 
