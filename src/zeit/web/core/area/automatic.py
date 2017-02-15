@@ -93,6 +93,7 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'supertitle': 'teaserSupertitle',
         'teaser_text': 'teaserText',
         'teaser_title': 'teaserTitle',
+        'title': 'title',
         'type': 'doc_type',
         'uniqueId': '',
     }
