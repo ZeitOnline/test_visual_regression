@@ -9,7 +9,7 @@
     {% if block.teaser_text %}
         {{ block.teaser_text }}
     {% else %}
-        Dieser Artikel stammt aus der ZEIT Nr. {{ block.issue }}, {{ block.year }}. Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.
+        Dieser Artikel stammt aus der ZEIT Nr. {{ block.issue }}/{{ block.year }}. Hier können Sie die gesamte Ausgabe lesen.
     {% endif %}
     </a>
 {% endblock %}

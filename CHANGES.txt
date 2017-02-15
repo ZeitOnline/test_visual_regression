@@ -5,7 +5,23 @@ POSTDEPLOY
 ----------
 
 
-3.38 (unreleased)
+3.39 (unreleased)
+-----------------
+
+- BUG-653: Redirect folder to /index for ZMO and ZCO
+
+- BUG-655: Show Z+ badge in ZMO for subscription content only
+
+- BUG-650: Update default volumeteaser text
+
+- BUG-649: Format link to volume page with leading zero
+
+- BUG-656: Use teaser title in solr results
+
+- MAINT: Skip broken content in feeds
+
+
+3.38 (2017-02-14)
 -----------------
 
 - ZON-3576: Transmit per-content premoderate flag

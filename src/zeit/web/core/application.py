@@ -150,8 +150,6 @@ class Application(object):
             'invalidate_community_maintenance',
             '/-comments/invalidate_maintenance')
         config.add_route('home', '/')
-        config.add_route('home-campus', '/campus/')
-        config.add_route('home-zmo', '/zeit-magazin/')
         config.add_route('login_state', '/login-state')
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-image', '/spektrum-image/*path')

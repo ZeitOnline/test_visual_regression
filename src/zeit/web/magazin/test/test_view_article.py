@@ -168,3 +168,17 @@ def test_volume_teaser_uses_zmo_printcover(testbrowser):
     image = browser.cssselect('img.volume-teaser__media-item')
     assert len(image) == 1
     assert 'zeit-wissen' in image[0].get('src')
+
+
+def test_article_shows_zplus_badge_for_paid_article(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/zplus-zmo-paid')
+    badge = browser.cssselect('.zplus-badge')[0]
+    text = badge.cssselect('.zplus-badge__text')[0]
+
+    assert text.text.strip() == u'Exklusiv für Abonnenten'
+    assert badge.cssselect('.zplus-badge__logo')
+
+
+def test_article_shows_no_zplus_badge_for_metered_article(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/zplus-zmo-register')
+    assert not browser.cssselect('.zplus-badge')
