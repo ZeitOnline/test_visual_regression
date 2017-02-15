@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - BUG-656: Use teaser title in solr results
 
+- BUG-630: Prevent unintentional overscrolling at image copyrights
+
 - MAINT: Skip broken content in feeds
 
 
