@@ -188,8 +188,10 @@ class Newsfeed(Base):
                     E.guid(content_url, isPermaLink='false'),
                 )
                 channel.append(item)
-            except Exception:
-                log.warning("Couldn't add content to Newsfeed")
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
                 continue
         return root
 
@@ -262,8 +264,10 @@ class InstantArticleFeed(Newsfeed):
                 include = getattr(E, '{%s}include' % ESI_NAMESPACE)(
                     src=instant_articles_url, onerror='continue')
                 channel.append(include)
-            except Exception:
-                log.warning("Couldn't add content to Instant Article Feed.")
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
                 continue
         return root
 
@@ -331,8 +335,10 @@ class SpektrumFeed(Base):
                         type='image/jpeg'))  # ¯\_(ツ)_/¯
 
                 channel.append(item)
-            except Exception:
-                log.warning("Couldn't add content to Spektrum feed.")
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
                 continue
         return root
 
@@ -382,8 +388,10 @@ class SocialFeed(Base):
                 if social_value:
                     item.append(CONTENT_MAKER(social_value))
                 channel.append(item)
-            except Exception:
-                log.warning("Couldn't add content to Social Feed.")
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
                 continue
         return root
 
