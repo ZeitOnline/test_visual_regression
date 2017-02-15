@@ -775,6 +775,8 @@ def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
 
     assert '/campus/article/simple_date_changed' == driver.execute_script(
         "return rawrConfig.locationMetaData.article_id")
+    assert '/campus/article/simple_date_changed' == driver.execute_script(
+        "return rawrConfig.locationMetaData.ident")
     assert '2016-02-10T10:39:16+01:00' == driver.execute_script(
         "return rawrConfig.locationMetaData.published")
     assert 'Hier gibt es Hilfe' == driver.execute_script(
