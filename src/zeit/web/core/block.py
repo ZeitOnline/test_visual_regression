@@ -116,7 +116,9 @@ class Volume(Block):
     def __init__(self, model_block):
         result = model_block.references
         volume_obj = result.target
-        self.printcover = volume_obj.covers['printcover']
+        article = zeit.content.article.interfaces.IArticle(model_block)
+        self.printcover = volume_obj.get_cover(
+            'printcover', article.product.id)
         self.medium = self._product_path(volume_obj.product.id)
         self.year = volume_obj.year
         self.issue = str(volume_obj.volume).zfill(2)
@@ -533,8 +535,9 @@ class NewsletterAdvertisement(Block):
 
     @property
     def image(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return self.context.image.uniqueId.replace(
-            'http://xml.zeit.de/', 'http://images.zeit.de/', 1)
+            'http://xml.zeit.de', conf['image_prefix'], 1)
 
 
 def _raw_html(xml):

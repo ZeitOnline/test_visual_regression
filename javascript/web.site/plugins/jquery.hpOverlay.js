@@ -26,10 +26,10 @@
         this.isLiveServer = /^(www\.)?zeit\.de$/.test( window.location.hostname );
         this.options = {
             cookieTimeInDays: 1.5,
-            debug: location.search.indexOf( 'debug-popover' ) !== -1,
+            debug: location.href.indexOf( 'debug-popover' ) !== -1,
             endpoint: location.protocol + '//' + location.host + '/json_update_time/index',
-            force: location.search.indexOf( 'force-popover' ) !== -1,
-            prevent: location.search.indexOf( 'prevent-popover' ) !== -1,
+            force: location.href.indexOf( 'force-popover' ) !== -1,
+            prevent: location.href.indexOf( 'prevent-popover' ) !== -1,
             resetInterval: 1000
         };
         this.page = $( 'body > .page' );
@@ -37,41 +37,39 @@
         this.timestamp = null;
         this.visible = false;
         this.wrapper = $( '#overlay-wrapper' );
-
+        this.visibility_listener = null;
         this.init();
+    },
+    visibility_listener = function() {
+        if ( document.hidden ) {
+            this.log( 'document is hidden' );
+            this.unbindResetEvents();
+        } else {
+            this.log( 'document is visible' );
+            this.bindResetEvents();
+            // always fetch if come back from hidden state
+            this.fetchData();
+        }
     };
 
     // start or restart popover process
     Overlay.prototype.init = function() {
-        var that = this;
         if ( ( !this.isLiveServer && !this.options.debug && !this.options.force ) || this.options.prevent ) {
             this.log( 'Overlay cancelled by option.' );
             return;
         }
-        if ( Zeit.isMobileView() || this.cookieValue === 'canceled' ) {
-            this.log( 'Overlay canceled by breakpoint or cookie.' );
-            return;
-        }
-        if ( this.options.force ) {
-            this.log( 'Show overlay forced by option.' );
-            this.show();
+        if ( Zeit.isMobileView() || this.cookieValue === 'canceled' || Zeit.isWrapped ) {
+            this.log( 'Overlay canceled by breakpoint, app or cookie.' );
             return;
         }
         // look for keystrokes etc. only in active document
         if ( !document.hidden ) {
             this.bindResetEvents();
         }
-        document.addEventListener( 'visibilitychange', function() {
-            if ( document.hidden ) {
-                that.log( 'document is hidden' );
-                that.unbindResetEvents();
-            } else {
-                that.log( 'document is visible' );
-                that.bindResetEvents();
-                // always fetch if come back from hidden state
-                that.fetchData();
-            }
-        });
+        // bind this on runtime to make it revokable
+        this.visibility_listener = visibility_listener.bind( this );
+        document.addEventListener( 'visibilitychange', this.visibility_listener );
+        // fetchData initially
         this.fetchData();
     };
 
@@ -139,6 +137,13 @@
 
     // get the actual timestamp of page and check against prior data
     Overlay.prototype.fetchData = function() {
+        this.log( 'fetchData started' );
+        // force display of popover
+        if ( this.options.force ) {
+            this.log( 'Show overlay forced by option.' );
+            this.show();
+            return;
+        }
         // data is only fetched if document is visible
         if ( !document.hidden ) {
             var that = this;
@@ -187,6 +192,7 @@
 
     // action when reload button or overlay was clicked
     Overlay.prototype.reload = function() {
+        window.scrollTo( 0, 0 );
         window.location.reload();
     };
 
@@ -226,6 +232,7 @@
     Overlay.prototype.unbindEvents = function() {
         $( window ).off( '.hpoverlay' );
         $( document ).off( '.hpoverlay' );
+        document.removeEventListener( 'visibilitychange', this.visibility_listener );
     };
 
     // jquery plugin

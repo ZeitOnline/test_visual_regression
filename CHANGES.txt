@@ -5,10 +5,78 @@ POSTDEPLOY
 ----------
 
 
-3.36 (unreleased)
+3.40 (unreleased)
 -----------------
 
-- FIX: Spawn #D17 logo on nextread kicker
+- Nothing changed yet.
+
+
+3.39 (2017-02-15)
+-----------------
+
+- BUG-653: Redirect folder to /index for ZMO and ZCO
+
+- BUG-655: Show Z+ badge in ZMO for subscription content only
+
+- BUG-650: Update default volumeteaser text
+
+- BUG-649: Format link to volume page with leading zero
+
+- BUG-656: Use teaser title in solr results
+
+- BUG-630: Prevent unintentional overscrolling at image copyrights
+
+- MAINT: Skip broken content in feeds
+
+
+3.38 (2017-02-14)
+-----------------
+
+- ZON-3576: Transmit per-content premoderate flag
+
+- ZON-3654: Prevent accessing content via fbia.zeit.de
+
+- ZON-3656: Serve text and unknown content as raw bytes
+
+- ZON-3400: Show the volume cover of the article's product, if available
+
+- BUG-643: Define ressort_literally for Campus
+
+- BUG-640: Modernize Google Tagmanager Code
+
+- BUG-645: Prevent hp_overlay from building a dead end
+
+- MAINT: Polish printbox
+
+
+3.37.1 (2017-02-10)
+-------------------
+
+- ZON-3700: Fix premium link in article volume module
+
+- BUG-647: Fix color and placement of taglogo in topic teaser
+
+
+3.37 (2017-02-07)
+-----------------
+
+- ZON-3658: Remove any images.zeit.de remnants, it's img.zeit.de all the way now
+
+- ZON-3568: Add grey Z+ icon to teasers for content that requires registration
+
+- BUG-634: Deactivate overscrolling and popover in app
+
+- BUG-636: Fix hash replacement after notification
+
+- BUG-635: Update testdata for user-dashboard :bug:
+
+- BUG-631: Add page padding for login link (mobile)
+
+- FIX: Add entry_service parameter "schranke_paid" in Z+ subscription form
+
+
+3.36 (2017-01-31)
+-----------------
 
 - ZON-3629: Add property overscrolling to view
 
@@ -16,19 +84,29 @@ POSTDEPLOY
 
 - ZON-3687: Show account confirm message after successful registration
 
+- BUG-618: Reapply font-family for form elements (e.g. buttons)
+
+- BUG-629: Add ZMO kicker logo for nextread teaser
+
+- BUG-624: Fix links to volume in premium
+
+- BUG-593: Change video player in videostage to html5
+
+- FIX: Spawn #D17 logo on nextread kicker
+
 
 3.35 (2017-01-30)
 -----------------
+
+- ZON-3672: Make premium order links configurable
 
 - OPS-494: Make POST comment work after ZON-2284
 
 - OPS-495: Configure our custom error swallowing Jinja enviroment properly
 
-- ZON-3672: Make premium order links configurable
+- OPS-494: Log Undefined errors, and log ICMSContent with their uniqueId
 
 - FIX: Register keyword redirect views properly
-
-- OPS-494: Log Undefined errors, and log ICMSContent with their uniqueId
 
 
 3.34 (2017-01-27)

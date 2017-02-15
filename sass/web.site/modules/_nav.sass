@@ -180,9 +180,9 @@
 					display: none
 
 		&__login-title
-			overflow: hidden
-			text-overflow: ellipsis
-			white-space: nowrap
+			line-height: remify(60px)
+		&__login-link
+			margin-right: $page-padding--small
 
 		&__metadata
 			line-height: 1.5
@@ -205,7 +205,6 @@
 		&__ressorts,
 		&__classifieds
 			li
-				padding-right: $page-padding--small
 				width: 50%
 
 	+respond-min($break-tablet-min)

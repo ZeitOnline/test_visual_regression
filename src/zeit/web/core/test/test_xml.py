@@ -165,17 +165,18 @@ def test_xml_renders_image(testserver):
 
 def test_xml_renders_text(testserver):
     res = requests.get(
-        '%s/davcontent/text' % testserver.url,
+        '%s/text/dummy' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
 
     assert res.headers['content-type'] == 'text/plain; charset=UTF-8'
-    assert 'Global Drug Survey 2016' in res.content
+    assert res.content == 'zeit.web\n'
 
 
 def test_xml_renders_non_xml_content_view(testserver):
-    with mock.patch('zeit.web.core.view_xml.NonXMLContent.__call__') as view:
+    with mock.patch(
+            'zeit.web.core.view_raw.RawContent.__call__') as view:
         requests.get(
-            '%s/davcontent/text' % testserver.url,
+            '%s/davcontent/raw' % testserver.url,
             headers={'Host': 'xml.zeit.de'})
     assert view.called
 
@@ -210,7 +211,7 @@ def test_xml_adds_cors_header(testserver):
         headers={'Host': 'xml.zeit.de'})
     assert res.headers['Access-Control-Allow-Origin'] == '*'
     res = requests.get(
-        '%s/davcontent/text' % testserver.url,
+        '%s/davcontent/raw' % testserver.url,
         headers={'Host': 'xml.zeit.de'})
     assert res.headers['Access-Control-Allow-Origin'] == '*'
 

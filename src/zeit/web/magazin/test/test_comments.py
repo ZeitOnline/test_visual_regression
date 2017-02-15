@@ -36,8 +36,8 @@ def test_comments_template_respects_metadata(tplbrowser, dummy_request):
         'comment section template must return an empty document')
 
 
-def test_comments_and_replies_do_appear(testserver, httpbrowser):
-    browser = httpbrowser('%s/zeit-magazin/article/01' % testserver.url)
+def test_comments_and_replies_do_appear(httpbrowser):
+    browser = httpbrowser('/zeit-magazin/article/01')
     comments = browser.cssselect('article.comment')
     assert 'Jetzt aber los.' in comments[0].text_content().strip()
     assert 'comment--indented' in comments[1].get('class')

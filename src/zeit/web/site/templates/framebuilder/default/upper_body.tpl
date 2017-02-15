@@ -1,5 +1,5 @@
 </head>
-<body{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
+<body>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 

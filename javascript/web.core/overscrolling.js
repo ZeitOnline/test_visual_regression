@@ -33,37 +33,43 @@ define( [
     isActive = function() {
         var isActivated = true,
             message,
+            index,
             status = [{
-            isActive: Zeit.toggles.get( 'overscrolling' ) || false,
-            message: 'set to off or toggle missing'
-        }, {
-            isActive: $( document ).height() >= config.documentMinHeight,
-            message: 'documentMinHeight not matched'
-        }, {
-            isActive: Modernizr.svg,
-            message: 'no svg available'
-        }, {
-            isActive: Zeit.breakpoint.get() === 'desktop',
-            message: 'only on desktop'
-        }, {
-            isActive: Zeit.view.get( 'paywall' ) === '',
-            message: 'paywall active'
-        }, {
-            isActive: $( 'body[data-overscrolling="off"]' ).length < 1,
-            message: 'article deactivated from cms'
-        }];
-        $.each( status, function( index, value ) {
-            if ( !value.isActive ) {
-                message = 'overscrolling: ' + value.message;
-                isActivated = value.isActive;
-                return false;
+                isActive: Zeit.toggles.get( 'overscrolling' ),
+                message: 'feature toggle is off or missing'
+            }, {
+                isActive: $( document ).height() >= config.documentMinHeight,
+                message: 'documentMinHeight not matched'
+            }, {
+                isActive: Modernizr.svg,
+                message: 'no svg available'
+            }, {
+                isActive: Zeit.breakpoint.get() === 'desktop',
+                message: 'only on desktop'
+            }, {
+                isActive: Zeit.view.get( 'paywall' ) === '',
+                message: 'paywall active'
+            }, {
+                isActive: $( 'body[data-overscrolling="off"]' ).length < 1,
+                message: 'article deactivated from cms'
+            }, {
+                isActive: !Zeit.isWrapped,
+                message: 'deactivated in app'
+            }];
+
+        for ( index = status.length; index--; ) {
+            if ( !status[ index ].isActive ) {
+                message = status[ index ].message;
+                isActivated = false;
+                break;
             }
-        });
-        if ( debug && message ) {
-            message += ', overwritten by debug';
-            console.debug( message );
+        }
+
+        if ( debug && !isActivated ) {
+            console.debug( 'overscrolling: %s (overwritten by debug)', message );
             isActivated = true;
         }
+
         return isActivated;
     },
     clickTrack = function( type ) {
@@ -162,7 +168,7 @@ define( [
             }
         });
 
-        $( window ).on( 'scroll', $.throttle( function() {
+        $( window ).on( 'scroll.over', $.throttle( function() {
             animateCircleByScroll();
             if ( $( window ).scrollTop() >= $( document ).height() - $( window ).height() ) {
                 if ( debug ) {

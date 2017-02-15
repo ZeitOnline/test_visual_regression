@@ -26,6 +26,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 @pytest.fixture
 def mock_ad_view(application):
     class MockAdView(zeit.web.core.view.Base):
+
         def __init__(
                 self, type, ressort,
                 sub_ressort, is_hp=False, banner_id=None, serienname='',
@@ -912,7 +913,7 @@ def test_webtrekk_content_id_should_handle_nonascii(
     assert view.webtrekk_content_id.endswith(u'umläut')
 
 
-def test_notfication_after_paywall_registration_renders_correctly(
+def test_notification_after_paywall_registration_renders_correctly(
         testserver, selenium_driver):
     message_txt = u'Herzlich willkommen! Mit Ihrer Anmeldung k\xf6nnen' \
         u' Sie nun unsere Artikel lesen.'
@@ -961,7 +962,25 @@ def test_notfication_after_paywall_registration_renders_correctly(
                         '?C1-Meter-Status=always_paid')
 
 
-def test_notfication_after_account_confirmation_renders_correctly(
+def test_notification_script_does_not_edit_unknown_hashes(
+        testserver, selenium_driver):
+    driver = selenium_driver
+    url_hash = '#debug-clicktracking'
+    driver.get('{}/zeit-online/article/01{}'.format(testserver.url, url_hash))
+    selector = 'link[itemprop="mainEntityOfPage"][href="{}{}"]'.format(
+        testserver.url, '/zeit-online/article/01')
+    try:
+        # assure we are seeing the right page
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located((
+                By.CSS_SELECTOR, selector)))
+    except TimeoutException:
+        assert False, 'Timeout notification %s' % driver.current_url
+    else:
+        assert url_hash in driver.current_url
+
+
+def test_notification_after_account_confirmation_renders_correctly(
         testserver, selenium_driver):
     driver = selenium_driver
     url_hash = '#success-confirm-account'
@@ -1041,3 +1060,14 @@ def test_article_view_attribute_nooverscrolling_is_set(
         'http://xml.zeit.de/zeit-online/article/02')
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert view.no_overscrolling
+
+
+def test_url_path_not_found_should_render_404(testserver):
+    resp = requests.get('%s/zeit-magazin/centerpage/lifestyle'
+                        % testserver.url)
+    assert u'Dokument nicht gefunden' in resp.text
+
+
+def test_not_renderable_content_object_should_trigger_restart(testserver):
+    resp = requests.get('%s/zeit-online/quiz/quiz-workaholic' % testserver.url)
+    assert resp.headers['x-render-with'] == 'default'

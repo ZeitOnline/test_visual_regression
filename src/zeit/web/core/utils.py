@@ -517,9 +517,11 @@ class LazyProxy(object):
     def seo_slug(self):
         return zeit.content.video.video.Video.seo_slug.__get__(self)
 
-    # Proxy zeit.content.volume.interfaces.IVolume.covers
-    @property
-    def covers(self):
+    # Proxy zeit.content.volume.interfaces.IVolume.get_cover
+    def get_cover(self, cover_id, product_id=None):
+        # We ignore product_id, since it's only relevant for content talking
+        # about its volume, not for a teaser of the volume itself (which is all
+        # LazyProxy is concerned with).
         result = {}
         for key, value in self.__proxy__.items():
             if key.startswith('cover_'):
@@ -602,6 +604,7 @@ class DataSolr(RandomContent):
                     u'product_id': content.product.id,
                     u'supertitle': content.supertitle,
                     u'teaser_text': content.teaserText,
+                    u'teaser_title': content.teaserTitle,
                     u'title': content.title,
                     u'type': content.__class__.__name__.lower(),
                     u'uniqueId': content.uniqueId

@@ -1393,14 +1393,34 @@ def test_article_contains_zeit_clickcounter(testbrowser):
             ) in counter[0].get('src')
 
 
-def test_fbia_article_contains_meta_robots(testbrowser):
-    browser = testbrowser('/fbia/zeit-online/article/simple')
+def test_fbia_article_contains_meta_robots(httpbrowser):
+    browser = httpbrowser('/fbia/zeit-online/article/simple',
+                          headers={'Host': 'fbia.zeit.de'})
     assert '<meta name="robots" content="noindex, follow">' in browser.contents
 
 
-def test_fbia_article_contains_correct_webtrekk_platform(testbrowser):
-    browser = testbrowser('/fbia/zeit-online/article/simple')
+def test_fbia_article_contains_correct_webtrekk_platform(httpbrowser):
+    browser = httpbrowser('/fbia/zeit-online/article/simple',
+                          headers={'Host': 'fbia.zeit.de'})
     assert '25: "instant article"' in browser.contents
+
+
+def test_cannot_access_content_on_fbia_host(testserver):
+    r = requests.get('%s/zeit-online/index' % testserver.url,
+                     headers={'Host': 'fbia.zeit.de'})
+    assert r.status_code == 404
+    r = requests.get('%s/zeit-online/image/weltall/original' % testserver.url,
+                     headers={'Host': 'fbia.zeit.de'})
+    assert r.status_code == 404
+
+
+def test_cannot_access_fbia_tracking_on_content_host(testserver):
+    r = requests.get('%s/fbia/zeit-online/article/simple' % testserver.url,
+                     headers={'Host': 'www.zeit.de'})
+    assert r.status_code == 404
+    r = requests.get('%s/fbia/zeit-online/article/simple' % testserver.url,
+                     headers={'Host': 'fbia.zeit.de'})
+    assert r.status_code == 200
 
 
 def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
@@ -1735,6 +1755,18 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
 
 
+def test_zplus_badge_should_be_rendered_on_nextread_register(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-register')
+
+    reg_badge = browser.cssselect('.nextread__kicker-logo--zplus-register')
+    assert len(reg_badge) == 1
+
+    link = browser.cssselect('.nextread__link')
+    assert len(link) == 1
+    data_id = link[0].attrib['data-id']
+    assert data_id == 'articlebottom.editorial-nextread...area-zplus-register'
+
+
 def test_article_byline_is_displayed_completely(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     dom_node_byline = browser.cssselect('.byline')
@@ -1800,6 +1832,10 @@ def test_zplus_coverless_print_article_has_fallback_image(testbrowser):
 
     zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
     assert 'default_packshot_diezeit' in zplus_media[0].attrib['src']
+
+    link = zplus_box[0].cssselect('a.zplus-badge__link')[0]
+    assert link.attrib['href'] == 'http://localhost/2016/03'
+    assert 'ZEIT Nr. 03/2016' in link.text_content()
 
 
 def test_zplus_abo_print_article_has_correct_markup(testbrowser):
@@ -1878,8 +1914,10 @@ def test_free_print_article_has_volume_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free')
     badge = browser.cssselect('main article .zplus-badge')[0]
     label = badge.cssselect('.zplus-badge__text')[0]
+    link = badge.cssselect('.zplus-badge__link')[0]
 
-    assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 1/2016'
+    assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 01/2016'
+    assert link.attrib['href'] == 'http://localhost/2016/01'
     assert badge.cssselect('.zplus-badge__media')
 
     # test volume badge is in single page view too
@@ -1918,10 +1956,7 @@ def test_volume_teaser_is_rendered_correctly(testbrowser):
     volume_teaser_link = browser.cssselect(
         '.volume-teaser__link')[0].get('href')
     assert len(volume_teaser) == 1
-    assert volume_teaser_link == 'https://premium.zeit.de/diezeit/2016/' \
-        '01?wt_zmc=fix.int.zonpme.zede.rr.premium_intern.packshot.' \
-        'cover.cover&utm_medium=fix&utm_source=zede_zonpme_int&utm_campaign=' \
-        'rr&utm_content=webreader_packshot_cover_cover'
+    assert volume_teaser_link == 'https://premium.zeit.de/abo/diezeit/2016/01'
 
 
 def test_volume_teaser_display_correct_image_on_desktop(
@@ -2201,6 +2236,16 @@ def test_overscrolling_is_working_as_expected(
         By.CSS_SELECTOR, 'body[data-is-hp="true"]'))
     assert WebDriverWait(
         selenium_driver, 1).until(condition)
+    # overscrolling is inactive in app
+    driver.get(
+        '%s/zeit-online/article/01?app-content' % testserver.url)
+    footer = driver.find_element_by_class_name('footer')
+    driver.execute_script(
+        "return arguments[0].scrollIntoView();window.scrollBy(0,100)", footer)
+    condition = expected_conditions.invisibility_of_element_located((
+        By.CSS_SELECTOR, '#overscrolling'))
+    assert WebDriverWait(
+        selenium_driver, 1).until(condition)
 
 
 def test_overscrolling_is_turned_off_by_configuration(
@@ -2239,3 +2284,10 @@ def test_paywall_returns_correct_first_click_free_to_webtrekk(
     dummy_request.GET['C1-Meter-Info'] = 'first_click_free'
     view = zeit.web.site.view_article.Article(content, dummy_request)
     assert view.webtrekk['customParameter']['cp29'] == 'yes'
+
+
+def test_nextread_shows_zmo_kicker_logo_and_styles(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple-nextread-zmo')
+    nextread = browser.cssselect('article.nextread')[0]
+    assert nextread.cssselect('.nextread__kicker--zmo')
+    assert nextread.cssselect('.nextread__kicker-logo--zmo')

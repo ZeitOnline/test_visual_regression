@@ -12,7 +12,7 @@
 
 <article class="{% block layout %}teaser-card{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
-         {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="true"{% endif %}{% endblock %}
+         {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %}
          {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
     <div class="card__wrap">
         <div class="card__deck">
@@ -21,8 +21,10 @@
                 <h2>
                     <div class="card__title">
                         {% block zplus_kicker_logo %}
-                            {% if teaser is zplus_content %}
+                            {% if teaser is zplus_abo_content %}
                                 {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                            {% elif teaser is zplus_registration_content and toggles('zplus_badge_gray') %}
+                                {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
                             {% endif %}
                         {% endblock %}
                         {{ teaser.teaserSupertitle or teaser.supertitle }}

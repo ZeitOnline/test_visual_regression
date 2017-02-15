@@ -18,7 +18,7 @@
     <meta name="apple-itunes-app" content="app-id=448633376">
     <meta name="application-name" content="ZEIT ONLINE">
     <meta name="msapplication-config" content="none">
-    <meta name="msapplication-TileImage" content="http://images.zeit.de/static/img/zo-icon-win8-144x144.png">
+    <meta name="msapplication-TileImage" content="{{ request.image_host }}/static/img/zo-icon-win8-144x144.png">
     <meta name="msapplication-TileColor" content="#e6e6e6">
     {% if view.is_amp -%}
         <link rel="amphtml" href="{{ view.amp_url }}">
@@ -39,7 +39,7 @@
     {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
 
     <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
-    <link rel="apple-touch-icon-precomposed" href="http://images.zeit.de/static/img/ZO-ipad-114x114.png">
+    <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
 
     <!--[if lte IE 8]>
