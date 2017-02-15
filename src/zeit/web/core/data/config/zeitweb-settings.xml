@@ -12,7 +12,7 @@
   <setting name="default_packshot_diezeit" xsi:type="xsd:string">http://xml.zeit.de/ausgabe/default_packshot_diezeit</setting>
 
   <setting name="paywall_premium_product_digitalonly" xsi:type="xsd:string">https://premium.zeit.de/bestellung/1579642</setting>
-  <setting name="paywall_premium_product_digitalandprint" xsi:type="xsd:string">https://premium.zeit.de/bestellung/1596808</setting>
+  <setting name="paywall_premium_product_digitalandprint" xsi:type="xsd:string">https://premium.zeit.de/bestellung/1596805</setting>
 
   <setting name="breaking_news_timeout" xsi:type="xsd:int">7200</setting>
 
