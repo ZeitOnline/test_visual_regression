@@ -604,6 +604,7 @@ class DataSolr(RandomContent):
                     u'product_id': content.product.id,
                     u'supertitle': content.supertitle,
                     u'teaser_text': content.teaserText,
+                    u'teaser_title': content.teaserTitle,
                     u'title': content.title,
                     u'type': content.__class__.__name__.lower(),
                     u'uniqueId': content.uniqueId

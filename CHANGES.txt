@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - BUG-649: Format link to volume page with leading zero
 
+- BUG-656: Use teaser title in solr results
+
 - MAINT: Skip broken content in feeds
 
 
