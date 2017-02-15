@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - BUG-653: Redirect folder to /index for ZMO and ZCO
 
+- BUG-655: Show Z+ badge in ZMO for subscription content only
+
 - BUG-650: Update default volumeteaser text
 
 - BUG-649: Format link to volume page with leading zero
