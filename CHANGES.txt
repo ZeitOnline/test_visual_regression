@@ -8,7 +8,7 @@ POSTDEPLOY
 3.39 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Skip broken content in feeds
 
 
 3.38 (2017-02-14)
