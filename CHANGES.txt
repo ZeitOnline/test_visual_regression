@@ -8,6 +8,8 @@ POSTDEPLOY
 3.39 (unreleased)
 -----------------
 
+- BUG-650: Update default volumeteaser text
+
 - MAINT: Skip broken content in feeds
 
 
