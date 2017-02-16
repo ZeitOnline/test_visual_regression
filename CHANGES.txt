@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - FIX: Make cover images on volume overview page work again by fixing solr/lazyproxy
 
+- MAINT: Add ident property to rawrConfig
+
 
 3.39 (2017-02-15)
 -----------------
