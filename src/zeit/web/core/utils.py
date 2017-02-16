@@ -522,14 +522,12 @@ class LazyProxy(object):
         # We ignore product_id, since it's only relevant for content talking
         # about its volume, not for a teaser of the volume itself (which is all
         # LazyProxy is concerned with).
-        result = {}
         for key, value in self.__proxy__.items():
             if key.startswith('cover_'):
                 name = key.replace('cover_', '', 1)
-                result[name] = zeit.cms.interfaces.ICMSContent(value, None)
-        if not result:
-            raise AttributeError('covers')
-        return result
+                if cover_id == name:
+                    return zeit.cms.interfaces.ICMSContent(value, None)
+        raise AttributeError('get_cover')
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
