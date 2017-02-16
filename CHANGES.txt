@@ -5,8 +5,8 @@ POSTDEPLOY
 ----------
 
 
-3.39.1 (unreleased)
------------------
+3.39.1 (2017-02-16)
+-------------------
 
 - HOTFIX: Add general premoderation attribute for overlay
 
