@@ -8,6 +8,8 @@ POSTDEPLOY
 3.39.1 (unreleased)
 -----------------
 
+- HOTFIX: Add general premoderation attribute for overlay
+
 - BUG-658: Let C1-Fake-Param trump C1 Header in Staging
 
 - FIX: Make cover images on volume overview page work again by fixing solr/lazyproxy
