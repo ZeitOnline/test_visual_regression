@@ -464,17 +464,11 @@ class LazyProxy(object):
     @property
     def keywords(self):
         tags = []
-        try:
-            whitelist = zope.component.getUtility(
-                zeit.cms.tagging.interfaces.IWhitelist)
-            keywords = zip(self.__proxy__.get('keyword'),
-                           self.__proxy__.get('keyword_id'))
-            for label, url_value in keywords:
-                taglist = whitelist.search(label)
-                tag = filter(lambda x: x.url_value == url_value, taglist)
-                tags.append(tag[0])
-        except:
-            pass
+        keywords = zip(self.__proxy__.get('keyword', ()),
+                       self.__proxy__.get('keyword_id', ()))
+        for label, url_value in keywords:
+            tags.append(zeit.intrafind.tag.Tag(
+                label, label, url_value=url_value))
         return tags
 
     # Proxy zeit.content.image.interfaces.IImages. Since we bypass ZCA
