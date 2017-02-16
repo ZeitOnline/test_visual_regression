@@ -5,10 +5,12 @@ POSTDEPLOY
 ----------
 
 
-3.40 (unreleased)
+3.39.1 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-658: Let C1-Fake-Param trump C1 Header in Staging
+
+- FIX: Make cover images on volume overview page work again by fixing solr/lazyproxy
 
 
 3.39 (2017-02-15)

@@ -1026,6 +1026,18 @@ def test_http_header_should_contain_c1_debug_echoes(testserver):
     assert response.headers.get('x-debug-c1-meter-user-status') == 'anonymous'
 
 
+def test_c1_get_param_should_trump_http_header(testserver):
+    response = requests.get(
+        '{}/zeit-online/article/simple?{}'.format(
+            testserver.url,
+            'C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous'),
+        headers={
+            'C1-Meter-Status': 'always_paid',
+            'C1-Meter-User-Status': 'anonymous',
+        })
+    assert 'gate--register' in response.content
+
+
 def test_js_toggles_are_correctly_returned(
         application, dummy_request, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
