@@ -48,3 +48,13 @@ def test_cannot_access_content_on_static_hosts(testserver, statichost):
     r = requests.get('%s/zeit-online/image/weltall/original' % testserver.url,
                      headers={'Host': statichost + '.zeit.de'})
     assert r.status_code == 404
+
+
+def test_renders_raw_files_with_their_contenttype(testserver):
+    r = requests.get(
+        '%s/davcontent/example.css' % testserver.url,
+        headers={'Host': 'www.zeit.de'})
+    assert r.status_code == 200
+    assert r.headers['content-type'] == 'text/css; charset=UTF-8'
+    assert r.headers['Access-Control-Allow-Origin'] == '*'
+    assert 'koennseMalEbenWrapper' in r.content

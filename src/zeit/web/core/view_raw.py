@@ -42,3 +42,19 @@ class RawContent(zeit.web.core.view.Base):
             return response
         else:
             raise pyramid.httpexceptions.HTTPNotFound()
+
+
+@zeit.web.view_config(
+    context=zeit.cms.repository.interfaces.IFile)
+@zeit.web.view_config(
+    context=zeit.cms.repository.interfaces.IFile,
+    host_restriction=('xml', 'static', 'scripts', 'zeus'))
+class RawFile(zeit.web.core.view.Base):
+
+    def __call__(self):
+        super(RawFile, self).__call__()
+        response = Response(
+            app_iter=FileIter(IResource(self.context).data),
+            content_type=self.context.mimeType)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response
