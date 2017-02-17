@@ -860,7 +860,8 @@ def test_community_maintenance_should_be_disabled_for_invalid_url(application):
     ({}, False, 200, True),
     ({}, False, 200, False)])
 def test_post_comment_should_have_correct_premoderation_states(
-        application, monkeypatch, header, state, status_code, premoderation_article):
+        application, monkeypatch, header, state, status_code,
+        premoderation_article):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = 'my comment'
