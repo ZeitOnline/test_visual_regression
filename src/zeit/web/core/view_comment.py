@@ -268,6 +268,9 @@ class PostComment(zeit.web.core.view.Base):
             self.status.append(
                 'Comment needs moderation (premoderation state)')
 
+        premoderation = (
+            True if premoderation_user or premoderation_article else False)
+
         return {
             'request': {
                 'action': action,
@@ -280,6 +283,7 @@ class PostComment(zeit.web.core.view.Base):
                 'new_cid': self.new_cid,
                 'setUser': set_user,
                 'userName': self.user_name,
+                'premoderation': premoderation,
                 'premoderation_user': premoderation_user,
                 'premoderation_article': premoderation_article}}
 

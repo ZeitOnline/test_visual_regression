@@ -283,10 +283,8 @@ class Article(zeit.web.core.view.Content):
                 badge.update({
                     'cover': self.volume.get_cover(
                         'printcover', self.product_id),
-                    'link': 'http://{}/{!s}/{!s}'.format(
-                        self.request.host,
-                        self.volume.year,
-                        self.volume.volume),
+                    'link': self.volume.fill_template(
+                        'http://%s/{year}/{name}' % self.request.host),
                     'volume_exists': True
                 })
 
@@ -294,8 +292,8 @@ class Article(zeit.web.core.view.Content):
                     badge.update({
                         'hide_source_label': True,
                         'intro': 'Aus der',
-                        'link_text': 'ZEIT Nr. {!s}/{!s}'.format(
-                            self.volume.volume, self.volume.year)
+                        'link_text': self.volume.fill_template(
+                            'ZEIT Nr. {name}/{year}'),
                     })
 
             if badge['link']:

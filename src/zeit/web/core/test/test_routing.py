@@ -130,6 +130,10 @@ def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
     ('', '/index'),
     ('/', '/index'),
     ('/zeit-online', '/zeit-online/index'),
+    ('/zeit-magazin/', '/zeit-magazin/index'),
+    ('/zeit-magazin', '/zeit-magazin/index'),
+    ('/campus/', '/campus/index'),
+    ('/campus', '/campus/index'),
     ('/zeit-online/', '/zeit-online/index'),
     ('/zeit-online/?wt_param=12001', '/zeit-online/index?wt_param=12001'),
     ('/zeit-online?page=25#static', '/zeit-online/index?page=25#static')])
