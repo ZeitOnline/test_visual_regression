@@ -1966,7 +1966,7 @@ def test_volume_teaser_display_correct_image_on_desktop(
         '{}/zeit-online/article/volumeteaser'.format(testserver.url))
     img_src = selenium_driver.find_element_by_css_selector(
         '[data-src*="test-printcover"]').get_attribute('src')
-    assert u'2016-09/test-printcover/original__220x158__desktop' in img_src
+    assert u'2016-09/test-printcover/original__220x157__desktop' in img_src
 
 
 def test_share_buttons_are_present(testbrowser):
