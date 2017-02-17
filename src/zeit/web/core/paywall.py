@@ -10,12 +10,14 @@ class Paywall(object):
 
     @staticmethod
     def c1requestheader_or_get(request, name):
-        if name in request.headers:
-            return request.headers.get(name, None)
         # We want to allow manipulation via GET-Params for testing,
         # but not in production
         if zeit.web.core.view.is_not_in_production(None, request):
-            return request.GET.get(name, None)
+            if request.GET.get(name, None):
+                return request.GET.get(name, None)
+
+        if name in request.headers:
+            return request.headers.get(name, None)
 
     @staticmethod
     def status(request):
