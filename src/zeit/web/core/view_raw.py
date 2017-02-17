@@ -30,13 +30,14 @@ class RawContent(zeit.web.core.view.Base):
 
     def __call__(self):
         super(RawContent, self).__call__()
-        head = IResource(self.context).data.read(200)
-        IResource(self.context).data.close()
+        resource = IResource(self.context)
+        head = resource.data.read(200)
+        resource.data.seek(0)
         with magic.Magic(flags=magic.MAGIC_MIME_TYPE) as m:
             file_type = m.id_buffer(head)
         if file_type:
             response = Response(
-                app_iter=FileIter(IResource(self.context).data),
+                app_iter=FileIter(resource.data),
                 content_type=file_type)
             response.headers['Access-Control-Allow-Origin'] = '*'
             return response
