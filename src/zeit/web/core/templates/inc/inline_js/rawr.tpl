@@ -5,6 +5,7 @@
 window.rawrConfig = {
 {% if provides(view.context, 'zeit.cms.content.interfaces.ICommonMetadata') %}
     'locationMetaData': {
+        'ident': '{{ view.content_path }}',
         'article_id': '{{ view.content_path }}',
         'published': '{{ view.date_last_modified | format_date('iso8601') }}',
         'description': '{{ view.title | replace("\'", "\\\'") | safe }}',
