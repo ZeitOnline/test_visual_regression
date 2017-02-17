@@ -47,14 +47,14 @@ class RawContent(zeit.web.core.view.Base):
                 # any), since that can't be guessed from the filename. ;)
                 file_type = file_type.replace('text/plain', guessed)
 
-        if file_type:
-            response = Response(
-                app_iter=FileIter(resource.data),
-                content_type=file_type)
-            response.headers['Access-Control-Allow-Origin'] = '*'
-            return response
-        else:
+        if not file_type:
             raise pyramid.httpexceptions.HTTPNotFound()
+
+        response = Response(
+            app_iter=FileIter(resource.data),
+            content_type=file_type)
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        return response
 
 
 @zeit.web.view_config(
