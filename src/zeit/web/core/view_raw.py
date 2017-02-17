@@ -1,3 +1,5 @@
+import mimetypes
+
 from pyramid.response import FileIter
 from pyramid.response import Response
 import magic
@@ -34,7 +36,17 @@ class RawContent(zeit.web.core.view.Base):
         head = resource.data.read(200)
         resource.data.seek(0)
         with magic.Magic(flags=magic.MAGIC_MIME_TYPE) as m:
-            file_type = m.id_buffer(head)
+            file_type = m.id_buffer(head) or ''
+        # Unfortunately, libmagic insists on also reading the file if you want
+        # to give it a filename; this does not work for our abstraction level.
+        # Fortunately, the stdlib includes a filename-only function.
+        if not file_type or file_type.startswith('text/plain'):
+            guessed, transfer = mimetypes.guess_type(self.context.__name__)
+            if guessed:
+                # We keep the charset declaration that magic figured out (if
+                # any), since that can't be guessed from the filename. ;)
+                file_type = file_type.replace('text/plain', guessed)
+
         if file_type:
             response = Response(
                 app_iter=FileIter(resource.data),
