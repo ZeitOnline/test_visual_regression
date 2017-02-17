@@ -8,6 +8,8 @@ POSTDEPLOY
 3.40 (unreleased)
 -----------------
 
+- ZON-3707: Change wording and link on paywall
+
 - ZON-3670: Polish volume badge
 
 - BUG-659: Prevent sso urls from encoding in rawr config
