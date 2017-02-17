@@ -26,9 +26,9 @@
 
         <div class="article__item article__item--wide article__item--rimless">
             {% if toggles('zon_videosinglepage_via_html5') %}
-                {{ vima.brightcove_video_tag(view.context.__name__, iframe=False) }}
+                {{ vima.brightcove_video_tag(view.context.__name__, iframe=False, brightcove_player=view.videoplayer_id.centerpage) }}
             {% else %}
-                {{ vima.brightcove_video_tag(view.context.__name__, iframe=True) }}
+                {{ vima.brightcove_video_tag(view.context.__name__, iframe=True, brightcove_player=view.videoplayer_id.centerpage) }}
             {% endif %}
         </div>
 
