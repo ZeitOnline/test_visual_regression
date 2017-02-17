@@ -8,11 +8,13 @@ POSTDEPLOY
 3.40 (unreleased)
 -----------------
 
-- PERF: Don't load further tag properties from the whitelist
+- ZON-3670: Polish volume badge
 
 - BUG-659: Prevent sso urls from encoding in rawr config
 
 - BUG-661: Add a filename-based mime detection in addition to content-based; support vivi content-type 'file'
+
+- PERF: Don't load further tag properties from the whitelist
 
 
 3.39.1 (2017-02-16)
