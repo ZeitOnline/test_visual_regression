@@ -8,7 +8,19 @@ POSTDEPLOY
 3.40 (unreleased)
 -----------------
 
+- Nothing changed yet.
+
+
+3.39.1 (2017-02-16)
+-------------------
+
+- HOTFIX: Add general premoderation attribute for overlay
+
 - BUG-658: Let C1-Fake-Param trump C1 Header in Staging
+
+- FIX: Make cover images on volume overview page work again by fixing solr/lazyproxy
+
+- MAINT: Add ident property to rawrConfig
 
 
 3.39 (2017-02-15)
