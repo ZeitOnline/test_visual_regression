@@ -906,6 +906,19 @@ def test_webtrekk_tracking_id_is_defined(testbrowser):
         browser.contents)
 
 
+def test_webtrekk_parameters_may_include_nextread_url(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-verlagsnextread')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp33'] == (
+        'shop.zeit.de/sortiment/kinderwelt/spielzeug-und-accessoires/2178/'
+        'zookids-stiftemaeppchen-tom-tiger')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert 'cp33' not in view.webtrekk['customParameter']
+
+
 def test_webtrekk_content_id_should_handle_nonascii(
         application, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
