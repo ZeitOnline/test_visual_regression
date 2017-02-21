@@ -274,7 +274,8 @@ class Article(zeit.web.core.view.Content):
 
             if access == 'abo':
                 badge.update({
-                    'link': 'http://{}/exklusiv'.format(self.request.host),
+                    'link': 'http://{}/exklusive-zeit-artikel'.format(
+                            self.request.host),
                     'link_text': u'Exklusiv für Abonnenten',
                     'zplus': True
                 })
