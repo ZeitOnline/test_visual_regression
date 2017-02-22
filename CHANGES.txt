@@ -5,7 +5,13 @@ POSTDEPLOY
 ----------
 
 
-3.40 (unreleased)
+3.41 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.40 (2017-02-20)
 -----------------
 
 - ZON-3707: Change wording and link on paywall

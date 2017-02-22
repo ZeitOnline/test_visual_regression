@@ -521,7 +521,9 @@ class LazyProxy(object):
                 name = key.replace('cover_', '', 1)
                 if cover_id == name:
                     return zeit.cms.interfaces.ICMSContent(value, None)
-        raise AttributeError('get_cover')
+        log.debug(
+            u"ProxyExposed: '{}' could not emulate 'get_cover'".format(self))
+        return self.__origin__.get_cover(cover_id)
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
