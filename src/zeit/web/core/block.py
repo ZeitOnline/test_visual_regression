@@ -494,9 +494,11 @@ class NewsletterTeaser(Block):
         # XXX We should not hardcode the host, but newsletter is rendered on
         # friedbert-preview, which can't use `image_host`. Should we introduce
         # a separate setting?
-        host = 'http://www.zeit.de'
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        image_host = conf.get('newslettter_image_host', '').strip('/')
         if image:
-            return host + image.group.variant_url(image.variant_id, 148, 84)
+            return urlparse.urljoin(image_host, image.group.variant_url(
+                image.variant_id, 148, 84))
 
     @property
     def videos(self):
@@ -511,8 +513,10 @@ class NewsletterTeaser(Block):
 
     @property
     def url(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        content_host = conf.get('newsletter_content_host', '').strip('/')
         url = self.uniqueId.replace(
-            'http://xml.zeit.de/', 'http://www.zeit.de/', 1)
+            'http://xml.zeit.de', content_host, 1)
         if self.autoplay:
             url += '#autoplay'
         return url
@@ -537,7 +541,7 @@ class NewsletterAdvertisement(Block):
     def image(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return self.context.image.uniqueId.replace(
-            'http://xml.zeit.de', conf['image_prefix'], 1)
+                'http://xml.zeit.de', conf['image_prefix'], 1)
 
 
 def _raw_html(xml):
