@@ -8,7 +8,11 @@ POSTDEPLOY
 3.41 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3705: Track volume packshot links with product id
+
+- ZON-3584: Cleanup webtrekk property and add nextread url
+
+- ZON-3703: Disintegrate print-ressort areas
 
 
 3.40 (2017-02-20)

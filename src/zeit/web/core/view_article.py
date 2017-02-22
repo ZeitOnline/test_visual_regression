@@ -298,6 +298,11 @@ class Article(zeit.web.core.view.Content):
                     })
 
             if badge['link']:
+                badge['link'] += (
+                    '?wt_zmc=fix.int.zonpme.zeitde.wall_abo.premium.packshot.'
+                    'cover.{0}&utm_medium=fix&utm_source=zeitde_zonpme_int&utm'
+                    '_campaign=wall_abo&utm_content=premium_packshot_cover_{0}'
+                ).format(self.product_id.lower())
                 return badge
             return False
         except:
