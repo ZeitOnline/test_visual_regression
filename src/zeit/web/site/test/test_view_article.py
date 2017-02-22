@@ -1803,7 +1803,8 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
     assert len(zplus_icon) == 1
     assert len(zplus_text) == 1
     assert len(zplus_link) == 1
-    assert 'exklusiv' in zplus_box[0].cssselect('a')[0].attrib['href']
+    assert ('exklusive-zeit-artikel' in
+            zplus_box[0].cssselect('a')[0].attrib['href'])
     assert 'Exklusiv' in zplus_link[0].text.strip()
     assert not zplus_box[0].cssselect('.zplus-badge__media')
 
