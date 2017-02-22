@@ -3,8 +3,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <!-- Supported types: xsd:string, xsd:int, xsd:double -->
-  <setting name="newsletter_image_host" xsi:type="xsd:string">http://img.zeit.de</setting>
-  <setting name="newsletter_content_host" xsi:type="xsd:string">http://zeit.de</setting>
+
   <setting name="author_articles_page_size" xsi:type="xsd:int">10</setting>
   <setting name="author_comment_page_size" xsi:type="xsd:int">6</setting>
   <setting name="author_articles_query" xsi:type="xsd:string">author:"{}" AND (type:article OR type:video OR type:link OR type:gallery)</setting>
@@ -49,6 +48,9 @@
   <!-- homepage update signals interval, in seconds -->
   <setting name="update_signals_comments_interval" xsi:type="xsd:int">20</setting>
   <setting name="update_signals_time_interval" xsi:type="xsd:int">60</setting>
+   <!-- Use this nonsense Hosts for test purposes. -->
+  <setting name="newsletter_image_host" xsi:type="xsd:string">http://imgtest.zeit.de</setting>
+  <setting name="newsletter_content_host" xsi:type="xsd:string">http://www.zeittest.de</setting>
 
   <setting name="asset_prefix" xsi:type="xsd:string">/static/latest</setting>
   <setting name="image_prefix" xsi:type="xsd:string"></setting>

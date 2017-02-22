@@ -491,11 +491,10 @@ class NewsletterTeaser(Block):
     def image(self):
         image = zeit.web.core.template.get_image(
             self.context.reference, variant_id='wide', fallback=False)
-        # XXX We should not hardcode the host, but newsletter is rendered on
-        # friedbert-preview, which can't use `image_host`. Should we introduce
-        # a separate setting?
+        # Dont use "image_prefix" from "zeitweb-settings.xml" , we want to use
+        # a different img host for newsletters
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        image_host = conf.get('newslettter_image_host', '').strip('/')
+        image_host = conf.get('newsletter_image_host', '').strip('/')
         if image:
             return urlparse.urljoin(image_host, image.group.variant_url(
                 image.variant_id, 148, 84))
