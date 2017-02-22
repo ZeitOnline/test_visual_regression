@@ -30,6 +30,9 @@
 		float: right
 		margin: remify(-10px $page-padding--small -10px 0)
 		width: remify(82px)
+		// styled according to https://www.ampproject.org/docs/reference/components/amp-img
+		& > amp-img
+			box-shadow: 2px 2px 4px 0px rgba(0, 0, 0, 0.5)
 
 	// if there is SVG icon and cover, hide cover for small screens
 	&__icon + &__media

@@ -53,6 +53,9 @@
                 },
 
                 show: function() {
+                    // disable overscrolling
+                    $( window ).off( 'scroll.over' );
+                    $( '#overscrolling' ).remove();
                     // there is a strange unresolvable bug that it's only scrolling on the first click
                     // or never at all when using Velocity for the sliding animation, so use jQuery instead
                     this.container
@@ -120,11 +123,9 @@
                 }
             };
 
-        return this.each( function() {
-            $( this ).on( 'click', function( e ) {
-                e.preventDefault();
-                copyrights.toggle();
-            } );
+        return this.on( 'click', function( e ) {
+            e.preventDefault();
+            copyrights.toggle();
         });
     };
 })( jQuery );

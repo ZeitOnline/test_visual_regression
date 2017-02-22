@@ -73,68 +73,32 @@
           </region>
         </cluster>
         <cluster area="id-c01879aa-f212-497e-b201-4ac10bbf86a4" kind="solo">
-            <region hide-dupes="True" area="id-e9fb1dd8-7c4b-41b0-8717-6045478b7e94" kind="print-ressort" title="Politik">
-                <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
-                <container cp:type="teaser" module="zon-large" cp:__name__="id-ea7dc592-96e4-47c6-b19b-8844131735c2">
-                    <block href="http://xml.zeit.de/zeit-online/article/zeit"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8de">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-02"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-b71b5ef7-d4c1-4c3e-99d6-ee48455e82f9">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-03"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-bda65215-57f7-4f6a-bbdd-738e4a05e5d7">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-05"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9b">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-06"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8df">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-live"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-b71b5ef7-d4c1-4c3e-99d6-ee48455e82f0">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-offline"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-bda65215-57f7-4f6a-bbdd-738e4a05e5d8">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-c758-45ed-8aa2-78e539eead9c">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne"/>
-                </container>
-            </region>
+            <area area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="query" count="9" kind="print-ressort" title="Politik">
+                <module cp:__name__="id-167b003d-0199-4cc5-831e-c1eaac5f925c" cp:type="auto-teaser" module="zon-large"/>
+                <module cp:__name__="id-4a960096-2165-4f23-bdf9-c38a34655c43" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-aa3d66b6-5a83-4c28-98de-78686d074a62" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-13b34132-500d-41b4-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-097121c4-56ca-4711-950d-54989b5ed453" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-167b003d-0199-4cc8-531e-c1eaac5f925c" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-4a960096-2165-4f32-bdf9-c38a34655c43" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-aa3d66b6-5a83-4c28-89de-78686d074a62" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-13b34132-500d-414b-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-small"/>
+                <raw_query>published:&quot;published&quot; AND keywords:&quot;umbrien&quot;</raw_query>
+                <page>1</page>
+            </area>
         </cluster>
         <cluster area="id-ce33b4ec-f212-497e-b201-6045478b7e94" kind="solo">
-            <region hide-dupes="True" area="id-bda65215-7c4b-41b0-8717-4ac10bbf86a4" kind="print-ressort" title="Wirtschaft">
-                <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
-                <container cp:type="teaser" module="zon-large" cp:__name__="id-b71b5ef7-96e4-47c6-b19b-8844131735c2">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8de">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-02"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-ce33b4ec-d4c1-4c3e-99d6-ee48455e82f9">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-03"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-bda65215-57f7-4f6a-bbdd-738e4a05e5d7">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-05"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-b71b5ef7-c758-45ed-8aa2-78e539eead9b">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-06"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8df">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-live"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-ea7dc592-d4c1-4c3e-99d6-ee48455e82f0">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/liveblog-offline"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-e9fb1dd8-57f7-4f6a-bbdd-738e4a05e5d8">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik"/>
-                </container>
-                <container cp:type="teaser" module="zon-small" cp:__name__="id-c01879aa-c758-45ed-8aa2-78e539eead9c">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne"/>
-                </container>
-            </region>
+            <area area="id-bda65215-7c4b-41b0-8717-4ac10bbf86a4" automatic="True" automatic_type="query" count="9" kind="print-ressort" title="Wirtschaft">
+                <module cp:__name__="id-b71b5ef7-96e4-47c6-b19b-8844131735c2" cp:type="auto-teaser" module="zon-large"/>
+                <module cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8de" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-ce33b4ec-d4c1-4c3e-99d6-ee48455e82f9" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-bda65215-57f7-4f6a-bbdd-738e4a05e5d7" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-b71b5ef7-c758-45ed-8aa2-78e539eead9b" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-fbbbd6ac-14bd-4f64-92c7-2fea6fa8c8df" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-ea7dc592-d4c1-4c3e-99d6-ee48455e82f0" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-e9fb1dd8-57f7-4f6a-bbdd-738e4a05e5d8" cp:type="auto-teaser" module="zon-small"/>
+                <module cp:__name__="id-c01879aa-c758-45ed-8aa2-78e539eead9c" cp:type="auto-teaser" module="zon-small"/>
+            </area>
         </cluster>
     </body>
     <feed/>

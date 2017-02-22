@@ -1755,7 +1755,7 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
 
 
-def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
+def test_zplus_badge_should_be_rendered_on_nextread_register(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-register')
 
     reg_badge = browser.cssselect('.nextread__kicker-logo--zplus-register')
@@ -1803,7 +1803,8 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
     assert len(zplus_icon) == 1
     assert len(zplus_text) == 1
     assert len(zplus_link) == 1
-    assert 'exklusiv' in zplus_box[0].cssselect('a')[0].attrib['href']
+    assert ('exklusive-zeit-artikel' in
+            zplus_box[0].cssselect('a')[0].attrib['href'])
     assert 'Exklusiv' in zplus_link[0].text.strip()
     assert not zplus_box[0].cssselect('.zplus-badge__media')
 
@@ -1832,6 +1833,10 @@ def test_zplus_coverless_print_article_has_fallback_image(testbrowser):
 
     zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
     assert 'default_packshot_diezeit' in zplus_media[0].attrib['src']
+
+    link = zplus_box[0].cssselect('a.zplus-badge__link')[0]
+    assert link.attrib['href'].startswith('http://localhost/2016/03')
+    assert 'ZEIT Nr. 03/2016' in link.text_content()
 
 
 def test_zplus_abo_print_article_has_correct_markup(testbrowser):
@@ -1910,8 +1915,10 @@ def test_free_print_article_has_volume_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free')
     badge = browser.cssselect('main article .zplus-badge')[0]
     label = badge.cssselect('.zplus-badge__text')[0]
+    link = badge.cssselect('.zplus-badge__link')[0]
 
-    assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 1/2016'
+    assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 01/2016'
+    assert link.attrib['href'].startswith('http://localhost/2016/01')
     assert badge.cssselect('.zplus-badge__media')
 
     # test volume badge is in single page view too
@@ -1944,6 +1951,16 @@ def test_free_article_has_no_zplus_badge(testbrowser):
     assert len(zplus_modifier) == 0
 
 
+def test_zplus_volume_cover_should_track_link_with_product_id(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zeit')
+    assert browser.cssselect('.zplus-badge__link')
+    href = browser.cssselect('.zplus-badge__link')[0].attrib['href']
+    assert href == ('http://localhost/2014/49?wt_zmc=fix.int.zonpme.zeitde.'
+                    'wall_abo.premium.packshot.cover.zei&utm_medium=fix&utm'
+                    '_source=zeitde_zonpme_int&utm_campaign=wall_abo&'
+                    'utm_content=premium_packshot_cover_zei')
+
+
 def test_volume_teaser_is_rendered_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/volumeteaser')
     volume_teaser = browser.cssselect('.volume-teaser')
@@ -1960,7 +1977,7 @@ def test_volume_teaser_display_correct_image_on_desktop(
         '{}/zeit-online/article/volumeteaser'.format(testserver.url))
     img_src = selenium_driver.find_element_by_css_selector(
         '[data-src*="test-printcover"]').get_attribute('src')
-    assert u'2016-09/test-printcover/original__220x158__desktop' in img_src
+    assert u'2016-09/test-printcover/original__220x157__desktop' in img_src
 
 
 def test_share_buttons_are_present(testbrowser):

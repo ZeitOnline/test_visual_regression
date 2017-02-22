@@ -775,6 +775,8 @@ def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
 
     assert '/campus/article/simple_date_changed' == driver.execute_script(
         "return rawrConfig.locationMetaData.article_id")
+    assert '/campus/article/simple_date_changed' == driver.execute_script(
+        "return rawrConfig.locationMetaData.ident")
     assert '2016-02-10T10:39:16+01:00' == driver.execute_script(
         "return rawrConfig.locationMetaData.published")
     assert 'Hier gibt es Hilfe' == driver.execute_script(
@@ -904,6 +906,19 @@ def test_webtrekk_tracking_id_is_defined(testbrowser):
         browser.contents)
 
 
+def test_webtrekk_parameters_may_include_nextread_url(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-verlagsnextread')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp33'] == (
+        'shop.zeit.de/sortiment/kinderwelt/spielzeug-und-accessoires/2178/'
+        'zookids-stiftemaeppchen-tom-tiger')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert 'cp33' not in view.webtrekk['customParameter']
+
+
 def test_webtrekk_content_id_should_handle_nonascii(
         application, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
@@ -1022,6 +1037,18 @@ def test_http_header_should_contain_c1_debug_echoes(testserver):
         })
     assert response.headers.get('x-debug-c1-meter-status') == 'always_paid'
     assert response.headers.get('x-debug-c1-meter-user-status') == 'anonymous'
+
+
+def test_c1_get_param_should_trump_http_header(testserver):
+    response = requests.get(
+        '{}/zeit-online/article/simple?{}'.format(
+            testserver.url,
+            'C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous'),
+        headers={
+            'C1-Meter-Status': 'always_paid',
+            'C1-Meter-User-Status': 'anonymous',
+        })
+    assert 'gate--register' in response.content
 
 
 def test_js_toggles_are_correctly_returned(

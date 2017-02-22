@@ -18,7 +18,7 @@ require([
     'web.core/triggeredEventTracking',
     'web.core/adReload',
     'web.core/menu',
-    'web.core/overscrolling.js',
+    'web.core/overscrolling',
     'web.site/video/videoStage',
     'web.core/articledate',
     'web.core/comments',

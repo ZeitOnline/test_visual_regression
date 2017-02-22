@@ -5,10 +5,60 @@ POSTDEPLOY
 ----------
 
 
-3.39 (unreleased)
+3.41 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3705: Track volume packshot links with product id
+
+- ZON-3584: Cleanup webtrekk property and add nextread url
+
+- ZON-3703: Disintegrate print-ressort areas
+
+- BUG-664: Change link url for exclusive page
+
+
+3.40 (2017-02-20)
+-----------------
+
+- ZON-3707: Change wording and link on paywall
+
+- ZON-3670: Polish volume badge
+
+- BUG-659: Prevent sso urls from encoding in rawr config
+
+- BUG-661: Add a filename-based mime detection in addition to content-based; support vivi content-type 'file'
+
+- PERF: Don't load further tag properties from the whitelist
+
+
+3.39.1 (2017-02-16)
+-------------------
+
+- HOTFIX: Add general premoderation attribute for overlay
+
+- BUG-658: Let C1-Fake-Param trump C1 Header in Staging
+
+- FIX: Make cover images on volume overview page work again by fixing solr/lazyproxy
+
+- MAINT: Add ident property to rawrConfig
+
+
+3.39 (2017-02-15)
+-----------------
+
+- BUG-653: Redirect folder to /index for ZMO and ZCO
+
+- BUG-655: Show Z+ badge in ZMO for subscription content only
+
+- BUG-650: Update default volumeteaser text
+
+- BUG-649: Format link to volume page with leading zero
+
+- BUG-656: Use teaser title in solr results
+
+- BUG-630: Prevent unintentional overscrolling at image copyrights
+
+- MAINT: Skip broken content in feeds
 
 
 3.38 (2017-02-14)
