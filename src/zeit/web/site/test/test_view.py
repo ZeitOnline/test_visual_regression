@@ -14,13 +14,18 @@ from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
 
-def test_login_state_view_should_deliver_correct_destination(dummy_request):
+def test_login_state_view_should_deliver_correct_sso_urls(dummy_request):
     dummy_request.route_url = lambda *args, **kw: 'http://destination_sso/'
     r = zeit.web.site.view.login_state(dummy_request)
-    assert ('http://sso.example.org/anmelden?url=http://destination_sso' in
-            r['login'])
-    assert ('http://sso.example.org/abmelden?url=http://destination_sso' in
-            r['logout'])
+    assert ('http://sso.example.org/registrieren?url=http://destination_sso'
+            '&entry_service=sonstige' == r['register'])
+    assert ('http://sso.example.org/registrieren_email?template=rawr'
+            '&url=http://destination_sso&entry_service=rawr' ==
+            r['register_rawr'])
+    assert ('http://sso.example.org/anmelden?url=http://destination_sso'
+            '&entry_service=sonstige' == r['login'])
+    assert ('http://sso.example.org/abmelden?url=http://destination_sso'
+            '&entry_service=sonstige' == r['logout'])
 
 
 def test_article_should_have_breadcrumbs(testbrowser):
@@ -160,12 +165,33 @@ def test_sharing_titles_differ_from_html_title(testbrowser):
 
 def test_article_should_show_premoderation_warning(application):
     article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/02')
+    request = pyramid.testing.DummyRequest()
+    request.host_url = 'http://www.zeit.de'
+    request.user = {'ssoid': '123', 'blocked': False, 'premoderation': True}
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.comment_area['show_premoderation_warning_user'] is True
+
+
+def test_article_should_show_premoderation_article_warning(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    request = pyramid.testing.DummyRequest()
+    request.host_url = 'http://www.zeit.de'
+    request.user = {'ssoid': '123', 'blocked': False, 'premoderation': False}
+    view = zeit.web.site.view_article.Article(article, request)
+    assert view.comment_area['show_premoderation_warning_article'] is True
+
+
+def test_article_should_show_premoderation_and_article_warning(application):
+    article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     request = pyramid.testing.DummyRequest()
     request.host_url = 'http://www.zeit.de'
     request.user = {'ssoid': '123', 'blocked': False, 'premoderation': True}
     view = zeit.web.site.view_article.Article(article, request)
-    assert view.comment_area['show_premoderation_warning'] is True
+    assert view.comment_area['show_premoderation_warning_article'] is True
+    assert view.comment_area['show_premoderation_warning_user'] is True
 
 
 def test_schema_org_publisher_mark_up(testbrowser):

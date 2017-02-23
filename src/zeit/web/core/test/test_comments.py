@@ -17,6 +17,7 @@ import requests.exceptions
 import zope.component
 
 from zeit.cms.interfaces import ID_NAMESPACE as NS
+
 import zeit.web.core.view_comment
 
 
@@ -503,6 +504,7 @@ endpoint_agatho = (
      'comment': 'my comment',
      'pid': None,
      'uid': '123',
+     'article_premoderate': 'true',
      'subject': '[empty]'}})
 
 endpoint_report = (
@@ -851,12 +853,16 @@ def test_community_maintenance_should_be_disabled_for_invalid_url(application):
     assert maintenance['text_active'].startswith(u'Aufgrund')
 
 
-@pytest.mark.parametrize("header, state, status_code", [
-    ({'x-premoderation': 'true'}, True, 202),
-    ({'x-premoderation': 'false'}, False, 200),
-    ({}, False, 200)])
+@pytest.mark.parametrize("header, state, status_code, premoderation_article", [
+    ({'x-premoderation': 'true'}, True, 202, True),
+    ({'x-premoderation': 'false'}, False, 200, True),
+    ({'x-premoderation': 'false'}, False, 200, False),
+    ({'x-premoderation': 'true'}, False, 200, True),
+    ({}, False, 200, True),
+    ({}, False, 200, False)])
 def test_post_comment_should_have_correct_premoderation_states(
-        application, monkeypatch, header, state, status_code):
+        application, monkeypatch, header, state, status_code,
+        premoderation_article):
     poster = _create_poster(monkeypatch)
     poster.request.method = "POST"
     poster.request.params['comment'] = 'my comment'
@@ -870,7 +876,10 @@ def test_post_comment_should_have_correct_premoderation_states(
         response.content = ''
         mock_method.return_value = response
         ret_value = poster.post_comment()
-        assert ret_value['response']['premoderation'] is state
+        assert ret_value['response']['premoderation_user'] is state
+        if ((state and status_code == 202) or
+                premoderation_article is True):
+            assert ret_value['response']['premoderation'] is True
 
 
 def test_user_comment_should_have_expected_structure(application):

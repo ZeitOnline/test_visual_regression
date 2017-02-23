@@ -232,6 +232,7 @@ def app_settings(mockserver):
         'jinja2.environment': 'jinja2.environment.Environment',
         'jinja2.enable_profiler': False,
         'use_wesgi': True,
+        'serve_assets': True,
         'mock_solr': True,
         'advertisement_nextread_folder': 'verlagsangebote',
         'quiz_url': 'http://quiz.zeit.de/#/quiz/{quiz_id}',
@@ -681,7 +682,7 @@ def tplbrowser(jinja2_env):
 @pytest.fixture
 def httpbrowser(testserver):
     """HTTP-level test browser"""
-    return HttpBrowser()
+    return HttpBrowser(testserver.url)
 
 
 class TestApp(webtest.TestApp):
@@ -779,7 +780,12 @@ class TemplateBrowser(BaseBrowser):
 
 class HttpBrowser(BaseBrowser):
 
+    def __init__(self, base_uri):
+        self.host = base_uri
+
     def open(self, uri, **kw):
+        if not uri.startswith(self.host):
+            uri = '{}/{}'.format(self.host, uri.lstrip('/'))
         r = requests.get(uri, **kw)
         self.contents = r.text
 

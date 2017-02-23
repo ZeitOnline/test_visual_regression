@@ -12,7 +12,7 @@
   <setting name="default_packshot_diezeit" xsi:type="xsd:string">http://xml.zeit.de/ausgabe/default_packshot_diezeit</setting>
 
   <setting name="paywall_premium_product_digitalonly" xsi:type="xsd:string">https://premium.zeit.de/bestellung/1579642</setting>
-  <setting name="paywall_premium_product_digitalandprint" xsi:type="xsd:string">https://premium.zeit.de/bestellung/1596808</setting>
+  <setting name="paywall_premium_product_digitalandprint" xsi:type="xsd:string">https://premium.zeit.de/bestellung/1596805</setting>
 
   <setting name="breaking_news_timeout" xsi:type="xsd:int">7200</setting>
 
@@ -48,12 +48,15 @@
   <!-- homepage update signals interval, in seconds -->
   <setting name="update_signals_comments_interval" xsi:type="xsd:int">20</setting>
   <setting name="update_signals_time_interval" xsi:type="xsd:int">60</setting>
+   <!-- Use this nonsense Hosts for test purposes. -->
+  <setting name="newsletter_image_host" xsi:type="xsd:string">http://imgtest.zeit.de</setting>
+  <setting name="newsletter_content_host" xsi:type="xsd:string">http://www.zeittest.de</setting>
 
   <setting name="asset_prefix" xsi:type="xsd:string">/static/latest</setting>
   <setting name="image_prefix" xsi:type="xsd:string"></setting>
-  <setting name="jsconf_prefix" xsi:type="xsd:string">/jsconf</setting>
+  <setting name="jsconf_prefix" xsi:type="xsd:string">/config</setting>
   <setting name="fbia_prefix" xsi:type="xsd:string">/fbia</setting>
-  <setting name="c1_prefix" xsi:type="xsd:string">/jsconf</setting>
+  <setting name="c1_prefix" xsi:type="xsd:string">/config</setting>
   <setting name="series_prefix" xsi:type="xsd:string">http://xml.zeit.de/serie</setting>
   <setting name="topic_prefix" xsi:type="xsd:string">http://xml.zeit.de/thema</setting>
   <!-- Do not use in other contexts than framebuilders useSSL variant, has no local testing alternative -->

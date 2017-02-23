@@ -3,7 +3,11 @@
         {{- teaser.supertitle -}}
     </div>
     <div class="print-box__content">
-        <a class="print-box__title" href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_headline_headline" title="{{ teaser.title }}" data-ct-label="title">{{ teaser.title }}</a>
+        <a class="print-box__combined-link" href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.headline.headline&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_headline_headline" data-ct-label="title">
+            <h2 class="print-box__content-heading">
+                <span class="print-box__title">{{ teaser.title }}</span>
+            </h2>
+        </a>
         {% require image = get_image(module, name='content', variant_id='original', fallback=False) %}
             <figure class="print-box__media scaled-image">
                 <a href="{{ teaser.url }}?wt_zmc=cross.int.zonpme.zeitde.angebbox.probe.bildtext.cover.cover&amp;utm_medium=cross&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=angebbox&amp;utm_content=probe_bildtext_cover_cover" title="{{ teaser.title }}">

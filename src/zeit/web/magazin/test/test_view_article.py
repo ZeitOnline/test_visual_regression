@@ -36,9 +36,8 @@ def test_longform_contains_subpage_head(testbrowser):
         assert headline.attrib['id'] == 'kapitel{}'.format(i + 1)
 
 
-def test_article_page_should_contain_blocks(testserver, httpbrowser):
-    browser = httpbrowser(
-        '%s/zeit-magazin/article/all-blocks' % testserver.url)
+def test_article_page_should_contain_blocks(httpbrowser):
+    browser = httpbrowser('/zeit-magazin/article/all-blocks')
     page = browser.cssselect('.article-page')[0]
 
     paragraph = browser.cssselect('.paragraph')
@@ -162,3 +161,24 @@ def test_seo_publish_date_script_should_be_generated_conditionally(
 
     inline_scritps = ''.join(browser.xpath('//script/text()'))
     assert ('1. Januar 2014' in inline_scritps) == contained
+
+
+def test_volume_teaser_uses_zmo_printcover(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/volumeteaser')
+    image = browser.cssselect('img.volume-teaser__media-item')
+    assert len(image) == 1
+    assert 'zeit-wissen' in image[0].get('src')
+
+
+def test_article_shows_zplus_badge_for_paid_article(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/zplus-zmo-paid')
+    badge = browser.cssselect('.zplus-badge')[0]
+    text = badge.cssselect('.zplus-badge__text')[0]
+
+    assert text.text.strip() == u'Exklusiv für Abonnenten'
+    assert badge.cssselect('.zplus-badge__logo')
+
+
+def test_article_shows_no_zplus_badge_for_metered_article(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/zplus-zmo-register')
+    assert not browser.cssselect('.zplus-badge')

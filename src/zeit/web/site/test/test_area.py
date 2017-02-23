@@ -116,6 +116,21 @@ def test_overview_should_have_page_info(application, clock, dummy_request):
     assert pi['url'].endswith('date=2016-05-09')
 
 
+def test_overview_should_render_cover_image_from_solr_result(testbrowser):
+    volume = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/2016/01/ausgabe')
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'uniqueId': volume.uniqueId,
+        'year': volume.year,
+        'volume': volume.volume,
+        'cover_printcover': volume.get_cover('printcover').uniqueId,
+    }]
+    browser = testbrowser('/2016/index-solr')
+    assert '/2016-09/test-printcover' in browser.cssselect(
+        '.teaser-volume-overview img')[0].get('src')
+
+
 def test_default_teaser_should_not_expose_ranking_area_proxies(
         testbrowser, datasolr, monkeypatch):
     log = mock.Mock()

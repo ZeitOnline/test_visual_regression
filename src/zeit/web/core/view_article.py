@@ -274,18 +274,18 @@ class Article(zeit.web.core.view.Content):
 
             if access == 'abo':
                 badge.update({
-                    'link': 'http://{}/exklusiv'.format(self.request.host),
+                    'link': 'http://{}/exklusive-zeit-artikel'.format(
+                            self.request.host),
                     'link_text': u'Exklusiv für Abonnenten',
                     'zplus': True
                 })
 
             if self.volume:
                 badge.update({
-                    'cover': self.volume.covers['printcover'],
-                    'link': 'http://{}/{!s}/{!s}'.format(
-                        self.request.host,
-                        self.volume.year,
-                        self.volume.volume),
+                    'cover': self.volume.get_cover(
+                        'printcover', self.product_id),
+                    'link': self.volume.fill_template(
+                        'http://%s/{year}/{name}' % self.request.host),
                     'volume_exists': True
                 })
 
@@ -293,11 +293,16 @@ class Article(zeit.web.core.view.Content):
                     badge.update({
                         'hide_source_label': True,
                         'intro': 'Aus der',
-                        'link_text': 'ZEIT Nr. {!s}/{!s}'.format(
-                            self.volume.volume, self.volume.year)
+                        'link_text': self.volume.fill_template(
+                            'ZEIT Nr. {name}/{year}'),
                     })
 
             if badge['link']:
+                badge['link'] += (
+                    '?wt_zmc=fix.int.zonpme.zeitde.wall_abo.premium.packshot.'
+                    'cover.{0}&utm_medium=fix&utm_source=zeitde_zonpme_int&utm'
+                    '_campaign=wall_abo&utm_content=premium_packshot_cover_{0}'
+                ).format(self.product_id.lower())
                 return badge
             return False
         except:
@@ -487,6 +492,7 @@ class InstantArticleItem(Article):
 @zeit.web.view_config(
     context=zeit.content.article.interfaces.IArticle,
     route_name='fbia',
+    host_restriction='fbia',
     renderer='templates/instantarticle/tracking.html')
 class InstantArticleTracking(Article):
 

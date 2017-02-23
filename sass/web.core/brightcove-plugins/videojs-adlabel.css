@@ -1,0 +1,29 @@
+/*
+ * Special CSS for brightcove player inline text "Anzeige".
+ *
+ * This file is stored in vivi (http://vivi.zeit.de/repository/static/css/brightcove-plugins/)
+ * and included into the players via http://scripts.zeit.de/static/css/brightcove-plugins/videojs-adlabel.css .
+ * But we keep a copy inside the repository to have it greppable and to keep a file history.
+ *
+*/
+.vjs-ad-playing.vjs-user-inactive .vjs-current-time {
+	-webkit-transition-delay: 3s;
+	-moz-transition-delay: 3s;
+	-ms-transition-delay: 3s;
+	-o-transition-delay: 3s;
+	transition-delay: 3s;
+	-webkit-transition: width 0.5s;
+	-moz-transition: width 0.5s;
+	-ms-transition: width 0.5s;
+	-o-transition: width 0.5s;
+	transition: width 0.5s;
+	width: 0;
+}
+
+.vjs-ad-playing.vjs-user-active .vjs-current-time {
+	width: 120px !important;
+}
+.vjs-ad-playing .vjs-current-time-display::before {
+	content: 'Anzeige';
+	padding-right: 15px;
+}

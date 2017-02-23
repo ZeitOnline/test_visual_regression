@@ -2613,18 +2613,25 @@ def test_register_teaser_has_zplus_register_badge(testbrowser):
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus-register')
 
 
-def test_zplus_teaser_has_no_badge_in_print_ressort_area(testbrowser):
+def test_zplus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     teaser = browser.cssselect(
         '.cp-region--solo:nth-child(3) article.teaser-large')[0]
     assert not teaser.cssselect('.teaser-large__kicker-logo--zplus')
 
 
-def test_ressort_areas_have_ressort_title(testbrowser):
+def test_ressort_areas_have_ressort_title(testbrowser, datasolr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     areas = browser.cssselect('.cp-area--print-ressort')
     assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
     assert areas[1].cssselect('.cp-area__headline')[0].text == 'Wirtschaft'
+
+
+def test_ressort_areas_should_disintegrate(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = []
+    browser = testbrowser('/zeit-online/centerpage/print-ressort')
+    assert len(browser.cssselect('.cp-area--print-ressort')) == 0
 
 
 def test_exclusive_areas_render_correctly(testbrowser):

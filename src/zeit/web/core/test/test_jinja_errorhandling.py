@@ -6,7 +6,6 @@ import sys
 
 import plone.testing.zca
 import pytest
-import requests
 import venusian
 import zope.browserpage.metaconfigure
 
@@ -140,17 +139,6 @@ def test_failsafe_rendering(markup, assertion, kw):
     assert condition, message.format(assertion)
 
 
-def test_url_path_not_found_should_render_404(testserver):
-    resp = requests.get('%s/zeit-magazin/centerpage/lifestyle'
-                        % testserver.url)
-    assert u'Dokument nicht gefunden' in resp.text
-
-
-def test_not_renderable_content_object_should_trigger_restart(testserver):
-    resp = requests.get('%s/zeit-online/quiz/quiz-workaholic' % testserver.url)
-    assert resp.headers['x-render-with'] == 'default'
-
-
 @zeit.web.core.decorator.JinjaEnvRegistrator('filters', category='_c1')
 def do_things(arg, kw1=42, kw2=45):
     """Docstrings document things."""
@@ -235,7 +223,7 @@ def test_undefined_error_logs_classname_for_most_objects(jinja_log):
     assert "'dict object' has no attribute 'foo'" in jinja_log.getvalue()
 
 
-def test_undefined_error_logs_repr_for_ICMSContent(jinja_log):
+def test_undefined_error_logs_repr_for_cms_content(jinja_log):
     env = zeit.web.core.jinja.Environment()
     content = zeit.cms.testcontenttype.testcontenttype.ExampleContentType()
     content.uniqueId = u'http://xml.zeit.de/täst'

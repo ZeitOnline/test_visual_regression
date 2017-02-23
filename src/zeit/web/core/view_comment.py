@@ -157,6 +157,8 @@ class PostComment(zeit.web.core.view.Base):
             data['pid'] = pid
             if not self.user_name:
                 data['user_name'] = user_name
+            if self.context.commentsPremoderate:
+                data['article_premoderate'] = 'true'
 
         elif action == 'report' and pid:
             method = 'get'
@@ -256,12 +258,18 @@ class PostComment(zeit.web.core.view.Base):
             request.session['last_commented_time'] = (
                 datetime.datetime.utcnow())
 
-        premoderation = True if (response.status_code == 202 and (
+        premoderation_user = True if (response.status_code == 202 and (
             response.headers.get('x-premoderation') == 'true')) else False
 
-        if premoderation:
+        premoderation_article = (
+            True if self.context.commentsPremoderate else False)
+
+        if premoderation_user:
             self.status.append(
                 'Comment needs moderation (premoderation state)')
+
+        premoderation = (
+            True if premoderation_user or premoderation_article else False)
 
         return {
             'request': {
@@ -275,7 +283,9 @@ class PostComment(zeit.web.core.view.Base):
                 'new_cid': self.new_cid,
                 'setUser': set_user,
                 'userName': self.user_name,
-                'premoderation': premoderation}}
+                'premoderation': premoderation,
+                'premoderation_user': premoderation_user,
+                'premoderation_article': premoderation_article}}
 
     def _action_url(self, action, path):
         endpoint = 'services/json?callback=zeit' if (action in [
