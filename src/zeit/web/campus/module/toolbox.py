@@ -24,7 +24,6 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
                        text=unicode(node.get('text')),
                        cta=unicode(node.get('cta')),
                        cta_flyout=unicode(node.get('cta_flyout')),
-                       tracking=unicode(node.get('tracking')),
                        href=unicode(node.get('href')))
 
     @property
@@ -41,10 +40,5 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
     def footer_link(self):
         tree = self._get_tree()
         return tree.get('href')
-
-    @property
-    def footer_tracking(self):
-        tree = self._get_tree()
-        return tree.get('tracking')
 
 TOOL_SOURCE = ToolSource()
