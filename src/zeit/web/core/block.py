@@ -491,8 +491,8 @@ class NewsletterTeaser(Block):
     def image(self):
         image = zeit.web.core.template.get_image(
             self.context.reference, variant_id='wide', fallback=False)
-        # Dont use "image_prefix" from "zeitweb-settings.xml" , we want to use
-        # a different img host for newsletters
+        # The newsletter is rendered on friedbert-preview, so we cannot use
+        # `image_host`, since that would be friedbert-preview itself.
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         image_host = conf.get('newsletter_image_host', '').strip('/')
         if image:
