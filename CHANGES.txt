@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3703: Disintegrate print-ressort areas
 
+- ZON-3669: Polish volume teaser on archive pages
+
 - BUG-664: Change link url for exclusive page
 
 - BUG-665: Add settting for newsletter content and image host
