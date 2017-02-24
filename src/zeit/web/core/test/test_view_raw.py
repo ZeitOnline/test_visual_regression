@@ -17,6 +17,16 @@ def test_renders_text_content(testserver, hostname):
     assert r.content == 'zeit.web\n'
 
 
+def test_renders_xml_content(testserver, hostname):
+    r = requests.get(
+        '%s/config/community_maintenance.xml' % testserver.url,
+        headers={'Host': hostname + '.zeit.de'})
+    assert r.status_code == 200
+    assert r.headers['content-type'] == 'application/xml; charset=UTF-8'
+    assert r.headers['Access-Control-Allow-Origin'] == '*'
+    assert 'maintenance' in r.content
+
+
 def test_renders_unknown_content(testserver, hostname):
     r = requests.get(
         '%s/text/dummy' % testserver.url,
