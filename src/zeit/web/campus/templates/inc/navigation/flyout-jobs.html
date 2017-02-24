@@ -1,0 +1,19 @@
+{% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
+
+<aside class="nav-flyout" data-ct-row="2" data-ct-column="6">
+    <ul class="nav-flyout__list">
+        <li class="nav-flyout__item">
+            <a href="https://jobs.zeit.de/campus/berufstest" class="nav-flyout__link">
+                <p class="nav-flyout__headline">Berufstest</p>
+                <p class="nav-flyout__text">Berufspersönlichkeit entdecken {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</p>
+            </a>
+        </li>
+        <li class="nav-flyout__item">
+            <a href="https://jobs.zeit.de/campus/absolventen-jobs" class="nav-flyout__link">
+                <p class="nav-flyout__headline">Absolventen Jobs</p>
+                <p class="nav-flyout__text">Zu den Jobs {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</p>
+            </a>
+        </li>
+    </ul>
+    <a href="https://jobs.zeit.de/campus/welcher-beruf-passt-zu-mir" class="nav-flyout__sit-link">Welcher Beruf passt zu mir? {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</a>
+</aside>
