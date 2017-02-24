@@ -71,6 +71,7 @@
                 {% endfor -%}
             </ul>
         </nav>
+        {% if toggles('campus_jobs_flyout_menu') -%}
         <nav class="nav__tools">
             <p class="nav__tools-title"><a href="https://jobs.zeit.de/campus/welcher-beruf-passt-zu-mir" role="button" aria-controls="jobs-menu" data-follow-mobile="true"><span class="nav__dropdown">Welcher Beruf passt zu mir?</span></a></p>
             <ul class="nav__tools-list" data-ct-column>
@@ -78,6 +79,7 @@
                 <li><a href="https://jobs.zeit.de/campus/absolventen-jobs">Absolventen Jobs</a></li>
             </ul>
         </nav>
+        {% endif -%}
     </div>
 </div>
 
@@ -85,6 +87,8 @@
     {%- include "zeit.web.campus:templates/inc/navigation/flyout.html" -%}
 </div>
 
+{% if toggles('campus_jobs_flyout_menu') %}
 <div class="header__flyout" id="jobs-menu" aria-hidden="true">
     {%- include "zeit.web.campus:templates/inc/navigation/flyout-jobs.html" -%}
 </div>
+{% endif %}
