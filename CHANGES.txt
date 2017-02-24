@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - BUG-665: Add settting for newsletter content and image host
 
+- BUG-656: Consider teaser kicker in Solr results
+
 - BUG-667: Make rawxml rendering work again
 
 
