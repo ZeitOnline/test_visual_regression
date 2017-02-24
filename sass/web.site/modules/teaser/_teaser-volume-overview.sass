@@ -2,9 +2,6 @@
 	+pie-clearfix
 	flex: 0 1 100%
 	margin: remify(0 20px 32px)
-	.lt-ie10 &
-		float: left
-		width: remify(160px)
 	&__link
 		display: block
 		+on-interaction
@@ -30,6 +27,9 @@
 
 	+respond-min($break-phablet-min)
 		flex: 0 1 remify(195px)
+		float: left // no flexbox fallback
+		width: remify(195px) // no flexbox fallback
+
 		&__media
 			float: none
 			margin-right: 0
