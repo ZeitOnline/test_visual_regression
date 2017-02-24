@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - BUG-665: Add settting for newsletter content and image host
 
+- BUG-656: Consider teaser kicker in Solr results
+
 
 3.40 (2017-02-20)
 -----------------
