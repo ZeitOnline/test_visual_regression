@@ -4,6 +4,7 @@
         <author expires="" href="http://xml.zeit.de/autoren/armin_mustermann" publication-date="">
             <display_name>Armin Mustermann</display_name>
         </author>
+        <image base-id="http://xml.zeit.de/zeit-magazin/images/stoff/" type="jpg"></image>
         <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">abo</attribute>
         <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
         <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
