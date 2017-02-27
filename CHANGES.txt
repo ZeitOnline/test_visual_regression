@@ -8,6 +8,8 @@ POSTDEPLOY
 3.41 (unreleased)
 -----------------
 
+- ZON-3688: Polish storystream-teaser
+
 - ZON-3705: Track volume packshot links with product id
 
 - ZON-3584: Cleanup webtrekk property and add nextread url
