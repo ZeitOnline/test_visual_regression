@@ -8,7 +8,7 @@ POSTDEPLOY
 3.42 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-641: Use ZON videoplayer in ZMO
 
 
 3.41 (2017-02-27)
