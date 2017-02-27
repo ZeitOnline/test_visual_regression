@@ -9,6 +9,13 @@ $teaser-storystream-left-outer-desktop: 20px
 .teaser-storystream
 	background-color: $teaser-storystream-background-color
 	+font-smoothing
+	margin: $vertical-space (-$page-padding)
+	&--in-area-solo
+		margin-left: 0
+		margin-right: 0
+	+respond-min($break-areas)
+		margin-left: 0
+		margin-right: 0
 
 	&__header
 		position: relative
