@@ -1,23 +1,34 @@
 import mock
+import zope.component
 import zope.testbrowser.wsgi
 
 import zeit.cms.interfaces
 import zeit.newsletter.interfaces
 
 
+def test_uses_conf_values_for_hosts(application):
+    b = zope.testbrowser.wsgi.Browser(wsgi_app=application)
+    b.open('http://localhost/newsletter/februar')
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    content_host = conf.get('newsletter_img_host', '').strip('/')
+    img_host = conf.get('newsletter_content_host', '').strip('/')
+    assert content_host in b.contents
+    assert img_host in b.contents
+
+
 def test_renders_image(application):
     b = zope.testbrowser.wsgi.Browser(wsgi_app=application)
     b.open('http://localhost/newsletter/februar')
-    assert 'http://www.zeit.de/zeit-magazin/article/01' in b.contents
-    assert 'http://www.zeit.de/zeit-magazin/article/02' in b.contents
-    assert ('http://www.zeit.de/exampleimages/artikel/01'
+    assert 'http://www.zeittest.de/zeit-magazin/article/01' in b.contents
+    assert 'http://www.zeittest.de/zeit-magazin/article/02' in b.contents
+    assert ('http://imgtest.zeit.de/exampleimages/artikel/01'
             '/schoppenstube/wide__148x84' in b.contents)
 
 
 def test_renders_videos(application):
     b = zope.testbrowser.wsgi.Browser(wsgi_app=application)
     b.open('http://localhost/newsletter/februar')
-    assert 'http://www.zeit.de/zeit-magazin/article/01' in b.contents
+    assert 'http://www.zeittest.de/zeit-magazin/article/01' in b.contents
     assert 'Skispringen' in b.contents
 
 
@@ -40,5 +51,5 @@ def test_newsletter_does_not_render_image_if_expired(application):
             'zeit.web.core.image.ImageExpiration.is_expired') as expired:
         expired.return_value = True
         b.open('http://localhost/newsletter/februar')
-    assert ('http://www.zeit.de/exampleimages/artikel/01/schoppenstube'
+    assert ('http://www.zeittest.de/exampleimages/artikel/01/schoppenstube'
             not in b.contents)

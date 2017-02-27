@@ -25,8 +25,6 @@ log = logging.getLogger(__name__)
 #       convultion that is pyramid view predicate discrimination.
 
 @zeit.web.view_defaults(renderer='string')
-@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent,
-                      host_restriction='xml')
 @zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
                       host_restriction='xml')
 @zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor,

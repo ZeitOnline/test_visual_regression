@@ -6,7 +6,6 @@ import sys
 
 import plone.testing.zca
 import pytest
-import requests
 import venusian
 import zope.browserpage.metaconfigure
 
@@ -224,7 +223,7 @@ def test_undefined_error_logs_classname_for_most_objects(jinja_log):
     assert "'dict object' has no attribute 'foo'" in jinja_log.getvalue()
 
 
-def test_undefined_error_logs_repr_for_ICMSContent(jinja_log):
+def test_undefined_error_logs_repr_for_cms_content(jinja_log):
     env = zeit.web.core.jinja.Environment()
     content = zeit.cms.testcontenttype.testcontenttype.ExampleContentType()
     content.uniqueId = u'http://xml.zeit.de/täst'

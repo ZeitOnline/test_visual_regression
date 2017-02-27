@@ -90,16 +90,15 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'product_id': '',
         'serie': '',
         'show_commentthread': 'commentSectionEnable',
-        'supertitle': 'teaserSupertitle',
+        'teaser_supertitle': 'teaserSupertitle',
         'teaser_text': 'teaserText',
         'teaser_title': 'teaserTitle',
-        'title': 'title',
         'type': 'doc_type',
         'uniqueId': '',
     }
 
     @zeit.web.reify
-    def FIELDS(self):
+    def FIELDS(self):  # NOQA
         return ' '.join(self.FIELD_MAP.keys())
 
     def _convert(self, doc):

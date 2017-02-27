@@ -521,7 +521,9 @@ class LazyProxy(object):
                 name = key.replace('cover_', '', 1)
                 if cover_id == name:
                     return zeit.cms.interfaces.ICMSContent(value, None)
-        raise AttributeError('get_cover')
+        log.debug(
+            u"ProxyExposed: '{}' could not emulate 'get_cover'".format(self))
+        return self.__origin__.get_cover(cover_id)
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
@@ -595,6 +597,7 @@ class DataSolr(RandomContent):
                         'image/filmstill-hobbit-schlacht-fuenf-hee/'],
                     u'product_id': content.product.id,
                     u'supertitle': content.supertitle,
+                    u'teaser_supertitle': content.teaserSupertitle,
                     u'teaser_text': content.teaserText,
                     u'teaser_title': content.teaserTitle,
                     u'title': content.title,
