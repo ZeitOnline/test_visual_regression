@@ -5,8 +5,16 @@ POSTDEPLOY
 ----------
 
 
-3.41 (unreleased)
+3.42 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.41 (2017-02-27)
+-----------------
+
+- ZON-3688: Polish storystream-teaser
 
 - ZON-3705: Track volume packshot links with product id
 
@@ -14,9 +22,15 @@ POSTDEPLOY
 
 - ZON-3703: Disintegrate print-ressort areas
 
+- ZON-3669: Polish volume teaser on archive pages
+
 - BUG-664: Change link url for exclusive page
 
 - BUG-665: Add settting for newsletter content and image host
+
+- BUG-656: Consider teaser kicker in Solr results
+
+- BUG-667: Make rawxml rendering work again
 
 
 3.40 (2017-02-20)

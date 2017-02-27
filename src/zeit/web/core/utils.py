@@ -597,6 +597,7 @@ class DataSolr(RandomContent):
                         'image/filmstill-hobbit-schlacht-fuenf-hee/'],
                     u'product_id': content.product.id,
                     u'supertitle': content.supertitle,
+                    u'teaser_supertitle': content.teaserSupertitle,
                     u'teaser_text': content.teaserText,
                     u'teaser_title': content.teaserTitle,
                     u'title': content.title,

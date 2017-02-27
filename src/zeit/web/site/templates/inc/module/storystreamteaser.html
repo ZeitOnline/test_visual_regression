@@ -4,7 +4,9 @@
 {# the blockname is also used by clicktracking.js for tracking/reporting stuff #}
 {% set blockname = 'teaser-storystream' %}
 
-{% if area.kind == 'minor' %}
+{% if area.kind == 'solo' %}
+    {% set blockname_modifier = 'in-area-solo' %}
+{% elif area.kind == 'minor' %}
     {% set blockname_modifier = 'in-area-minor' %}
 {% endif %}
 
