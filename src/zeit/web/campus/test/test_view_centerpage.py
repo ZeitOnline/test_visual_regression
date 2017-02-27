@@ -159,6 +159,13 @@ def test_campus_toolbox_exists(testbrowser):
     assert len(select('.toolbox__item')) == 3
 
 
+def test_campus_navigation_contains_jobmarket(testbrowser):
+    browser = testbrowser('/campus/article/simple')
+    jobmarket = browser.cssselect('nav__tools')[1]
+    assert len(jobmarket.cssselect('.nav__tools-title')) == 1
+    assert len(jobmarket.cssselect('.nav__tools-list a')) == 2
+
+
 def test_headerimage_has_appropriate_html_structure(testbrowser):
     browser = testbrowser('/campus/centerpage/thema')
     header = browser.cssselect('.header-image')
