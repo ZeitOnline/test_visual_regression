@@ -2,7 +2,6 @@
 # i.e. already running servers and real hostnames (not just "localhost").
 # The test requires a registered and confirmed user (state=active).
 
-import pytest
 import requests
 import time
 import zope.testbrowser.browser
@@ -16,12 +15,10 @@ testuser = 'thomas.strothjohann+unmoderiert1@apps.zeit.de'
 testpassword = 'unmoderierteins'
 
 
-@pytest.mark.staging
 def test_endtoend_pass():
     pass
 
 
-@pytest.mark.staging
 def test_endtoend_responsecode():
     resp = requests.get('http://www.staging.zeit.de/index')
     assert resp.status_code == 200
@@ -31,7 +28,6 @@ def test_endtoend_responsecode():
     assert resp.status_code == 200
 
 
-@pytest.mark.staging
 def test_endtoend_newsfeeds():
     resp = requests.get(
         'http://newsfeed.staging.zeit.de/administratives/'
@@ -44,7 +40,6 @@ def test_endtoend_newsfeeds():
     assert resp.status_code == 200
 
 
-@pytest.mark.staging
 def test_endtoend_centerpages_contain_teasers():
     browser = zope.testbrowser.browser.Browser()
 
@@ -64,7 +59,6 @@ def test_endtoend_centerpages_contain_teasers():
     assert browser.contents.count('<article class="teaser-') > 20
 
 
-@pytest.mark.staging
 def test_endtoend_login_and_logout():
     b = zope.testbrowser.browser.Browser()
     b.open('https://meine.staging.zeit.de/anmelden')
@@ -78,7 +72,6 @@ def test_endtoend_login_and_logout():
     assert 'Logout erfolgreich' in b.contents
 
 
-@pytest.mark.staging
 def test_endtoend_infographic():
     b = zope.testbrowser.browser.Browser()
     b.open('https://meine.staging.zeit.de/anmelden')
@@ -97,7 +90,6 @@ def test_endtoend_infographic():
     assert 'Logout erfolgreich' in b.contents
 
 
-@pytest.mark.staging
 def test_endtoend_commenting():
     b = zope.testbrowser.browser.Browser()
     b.open('https://meine.staging.zeit.de/anmelden')
@@ -124,7 +116,6 @@ def test_endtoend_commenting():
     assert 'Logout erfolgreich' in b.contents
 
 
-@pytest.mark.staging
 def test_endtoend_videostage_thumbnail_should_be_replaced(selenium_driver):
     driver = selenium_driver
     driver.get('http://www.staging.zeit.de/video/index')
@@ -143,7 +134,6 @@ def test_endtoend_videostage_thumbnail_should_be_replaced(selenium_driver):
         assert False, 'Thumbnail not replaced by video'
 
 
-@pytest.mark.staging
 def test_endtoend_video_should_load_on_video_single_page(selenium_driver):
     driver = selenium_driver
     driver.get(
@@ -160,7 +150,6 @@ def test_endtoend_video_should_load_on_video_single_page(selenium_driver):
         assert False, 'Video player not loaded'
 
 
-@pytest.mark.staging
 def test_endtoend_asset_cache_header():
     response = requests.get(
         'http://www.staging.zeit.de/static/latest/css/web.site/screen.css')
