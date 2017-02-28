@@ -15,11 +15,7 @@ testuser = 'thomas.strothjohann+unmoderiert1@apps.zeit.de'
 testpassword = 'unmoderierteins'
 
 
-def test_endtoend_pass():
-    pass
-
-
-def test_endtoend_responsecode():
+def test_responsecode():
     resp = requests.get('http://www.staging.zeit.de/index')
     assert resp.status_code == 200
     resp = requests.get('http://www.staging.zeit.de/zeit-magazin/index')
@@ -28,7 +24,7 @@ def test_endtoend_responsecode():
     assert resp.status_code == 200
 
 
-def test_endtoend_newsfeeds():
+def test_newsfeeds():
     resp = requests.get(
         'http://newsfeed.staging.zeit.de/administratives/'
         'socialflow-zmo/rss-socialflow-facebook')
@@ -40,7 +36,7 @@ def test_endtoend_newsfeeds():
     assert resp.status_code == 200
 
 
-def test_endtoend_centerpages_contain_teasers():
+def test_centerpages_contain_teasers():
     browser = zope.testbrowser.browser.Browser()
 
     # OPTIMIZE: use real HTML/CSS selectors
@@ -59,7 +55,7 @@ def test_endtoend_centerpages_contain_teasers():
     assert browser.contents.count('<article class="teaser-') > 20
 
 
-def test_endtoend_login_and_logout():
+def test_login_and_logout():
     b = zope.testbrowser.browser.Browser()
     b.open('https://meine.staging.zeit.de/anmelden')
     b.getControl(
@@ -72,7 +68,7 @@ def test_endtoend_login_and_logout():
     assert 'Logout erfolgreich' in b.contents
 
 
-def test_endtoend_infographic():
+def test_infographic():
     b = zope.testbrowser.browser.Browser()
     b.open('https://meine.staging.zeit.de/anmelden')
     b.getControl(name='email').value = testuser
@@ -90,7 +86,7 @@ def test_endtoend_infographic():
     assert 'Logout erfolgreich' in b.contents
 
 
-def test_endtoend_commenting():
+def test_commenting():
     b = zope.testbrowser.browser.Browser()
     b.open('https://meine.staging.zeit.de/anmelden')
     b.getControl(name='email').value = testuser
@@ -116,7 +112,7 @@ def test_endtoend_commenting():
     assert 'Logout erfolgreich' in b.contents
 
 
-def test_endtoend_videostage_thumbnail_should_be_replaced(selenium_driver):
+def test_videostage_thumbnail_should_be_replaced(selenium_driver):
     driver = selenium_driver
     driver.get('http://www.staging.zeit.de/video/index')
     article = driver.find_element_by_css_selector(
@@ -134,7 +130,7 @@ def test_endtoend_videostage_thumbnail_should_be_replaced(selenium_driver):
         assert False, 'Thumbnail not replaced by video'
 
 
-def test_endtoend_video_should_load_on_video_single_page(selenium_driver):
+def test_video_should_load_on_video_single_page(selenium_driver):
     driver = selenium_driver
     driver.get(
         'http://www.staging.zeit.de/video/2017-02/5338993650001/argentinien-'
@@ -150,7 +146,7 @@ def test_endtoend_video_should_load_on_video_single_page(selenium_driver):
         assert False, 'Video player not loaded'
 
 
-def test_endtoend_asset_cache_header():
+def test_asset_cache_header():
     response = requests.get(
         'http://www.staging.zeit.de/static/latest/css/web.site/screen.css')
     assert response.status_code == 200
