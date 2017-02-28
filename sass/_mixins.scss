@@ -569,3 +569,8 @@ $inline-block-alignment: none !default;
 
 	@include has-layout;
 }
+
+//  Background svg mixin
+@mixin background-svg($svg){
+    background-image: svg-url($svg);
+}
