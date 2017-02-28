@@ -1,7 +1,9 @@
 // enable video iframes to be full-width inside the article
 // This is used for video stages ("Videoriegel" on home page),
 // video single pages and inline videos in articles.
-.video-player
+.video-player,
+// specificity war with brightcove on IE11 (.video-js.bc-player-c09a3b98-8829-47a5-b93b-c3cca8a4b5e9_default)
+.video-js.video-player
 	padding-bottom: 100% / 16 * 9
 	position: relative
 	&__iframe,

@@ -8,7 +8,11 @@ POSTDEPLOY
 3.42 (unreleased)
 -----------------
 
+- ZON-3485: Inline portrait boxes
+
 - BUG-641: Use ZON videoplayer in ZMO
+
+- FIX: Fight the specificity war with brightcove on IE11
 
 
 3.41 (2017-02-27)

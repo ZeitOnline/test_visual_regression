@@ -420,6 +420,13 @@ def test_block_portraitbox_should_contain_expected_structure(tplbrowser):
         '.portraitbox.article__item.article__item--marginalia')
 
 
+def test_block_portraitbox_should_render_without_reference(testbrowser):
+    browser = testbrowser('/zeit-online/article/portraitbox_inline')
+    assert browser.cssselect('.portraitbox__heading')[0].text == 'Kai Biermann'
+    assert (browser.cssselect('.portraitbox__body')[0].text ==
+            u'Studierter Psychologe, längst aber Journalist')
+
+
 def test_block_quiz_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(
