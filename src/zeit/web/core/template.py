@@ -12,6 +12,7 @@ import urllib
 import urlparse
 
 import babel.dates
+import grokcore.component
 import lxml.etree
 import pyramid.threadlocal
 import zope.component
@@ -449,11 +450,6 @@ def get_journalistic_format(block):
 
 @zeit.web.register_filter
 def get_gallery_images_count(context):
-    if zeit.content.article.interfaces.IArticle.providedBy(context):
-        body = zeit.content.article.edit.interfaces.IEditableBody(context)
-        for block in body.values():
-            if zeit.content.article.edit.interfaces.IGallery.providedBy(block):
-                return get_gallery_images_count(block.references)
     return zeit.content.gallery.interfaces.IVisibleEntryCount(context, 0)
 
 
