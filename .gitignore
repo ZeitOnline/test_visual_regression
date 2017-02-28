@@ -19,3 +19,9 @@ src/zeit/web/static/css
 src/zeit/web/static/js
 tools/resource
 tools/resource.meta
+/smoketest/bin
+/smoketest/include
+/smoketest/local
+/smoketest/lib
+/smoketest/pip-selfcheck.json
+/smoketest/selenium

@@ -22,7 +22,7 @@ def test_endtoend_pass():
 
 
 @pytest.mark.staging
-def test_endtoend_responsecode(testserver):
+def test_endtoend_responsecode():
     resp = requests.get('http://www.staging.zeit.de/index')
     assert resp.status_code == 200
     resp = requests.get('http://www.staging.zeit.de/zeit-magazin/index')
@@ -32,7 +32,7 @@ def test_endtoend_responsecode(testserver):
 
 
 @pytest.mark.staging
-def test_endtoend_newsfeeds(testserver):
+def test_endtoend_newsfeeds():
     resp = requests.get(
         'http://newsfeed.staging.zeit.de/administratives/'
         'socialflow-zmo/rss-socialflow-facebook')
@@ -161,7 +161,7 @@ def test_endtoend_video_should_load_on_video_single_page(selenium_driver):
 
 
 @pytest.mark.staging
-def test_endtoend_asset_cache_header(testserver):
+def test_endtoend_asset_cache_header():
     response = requests.get(
         'http://www.staging.zeit.de/static/latest/css/web.site/screen.css')
     assert response.status_code == 200
