@@ -5,4 +5,4 @@ if [ ! -f bin/python ]; then
     virtualenv .
 fi
 bin/pip install --no-deps -r ./requirements.txt
-bin/pytest $*
+bin/pytest $DIR/test $*
