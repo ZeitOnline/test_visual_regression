@@ -11,95 +11,90 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
-testuser = 'thomas.strothjohann+unmoderiert1@apps.zeit.de'
-testpassword = 'unmoderierteins'
 
-
-def test_responsecode():
-    resp = requests.get('http://www.staging.zeit.de/index')
+def test_responsecode(config):
+    resp = requests.get('{}/index'.format(config.get('BASE_URL')))
     assert resp.status_code == 200
-    resp = requests.get('http://www.staging.zeit.de/zeit-magazin/index')
+    resp = requests.get('{}/zeit-magazin/index'.format(config.get('BASE_URL')))
     assert resp.status_code == 200
-    resp = requests.get('http://www.staging.zeit.de/campus/index')
+    resp = requests.get('{}/campus/index'.format(config.get('BASE_URL')))
     assert resp.status_code == 200
 
 
-def test_newsfeeds():
+def test_newsfeeds(config):
     resp = requests.get(
-        'http://newsfeed.staging.zeit.de/administratives/'
-        'socialflow-zmo/rss-socialflow-facebook')
+        '{}/administratives/socialflow-zmo/rss-socialflow-facebook'.format(
+            config.get('NEWSFEED_BASE_URL')))
     assert resp.status_code == 200
 
     resp = requests.get(
-        'http://newsfeed.staging.zeit.de/administratives/'
-        'socialflow-zmo/rss-socialflow-facebook-zmo')
+        '{}/administratives/socialflow-zmo/rss-socialflow-facebook-zmo'.format(
+            config.get('NEWSFEED_BASE_URL')))
     assert resp.status_code == 200
 
 
-def test_centerpages_contain_teasers():
+def test_centerpages_contain_teasers(config):
     browser = zope.testbrowser.browser.Browser()
 
     # OPTIMIZE: use real HTML/CSS selectors
     # assert len(browser.cssselect('article[class*=teaser]')) > 50
 
-    browser.open('http://www.staging.zeit.de/index')
+    browser.open('{}/index'.format(config.get('BASE_URL')))
     assert browser.contents.count('<article class="teaser-') > 50
 
-    browser.open('http://www.staging.zeit.de/politik/index')
+    browser.open('{}/politik/index'.format(config.get('BASE_URL')))
     assert browser.contents.count('<article class="teaser-') > 20
 
-    browser.open('http://www.staging.zeit.de/zeit-magazin/index')
+    browser.open('{}/zeit-magazin/index'.format(config.get('BASE_URL')))
     assert browser.contents.count('<article class="teaser-') > 20
 
-    browser.open('http://www.staging.zeit.de/campus/index')
+    browser.open('{}/campus/index'.format(config.get('BASE_URL')))
     assert browser.contents.count('<article class="teaser-') > 20
 
 
-def test_login_and_logout():
+def test_login_and_logout(config):
     b = zope.testbrowser.browser.Browser()
-    b.open('https://meine.staging.zeit.de/anmelden')
+    b.open('{}/anmelden'.format(config.get('MEMBER_BASE_URL')))
     b.getControl(
-        name='email').value = testuser
-    b.getControl(name='password').value = testpassword
+        name='email').value = config.get('MEMBER_USERNAME')
+    b.getControl(name='password').value = config.get('MEMBER_PASSWORD')
     b.getControl('Anmelden').click()
-    assert 'http://www.staging.zeit.de/konto' in b.url
+    assert '{}/konto'.format(config.get('BASE_URL')) in b.url
     # logout
-    b.open('https://meine.staging.zeit.de/abmelden')
+    b.open('{}/abmelden'.format(config.get('MEMBER_BASE_URL')))
     assert 'Logout erfolgreich' in b.contents
 
 
-def test_infographic():
+def test_infographic(config):
     b = zope.testbrowser.browser.Browser()
-    b.open('https://meine.staging.zeit.de/anmelden')
-    b.getControl(name='email').value = testuser
-    b.getControl(name='password').value = testpassword
+    b.open('{}/anmelden'.format(config.get('MEMBER_BASE_URL')))
+    b.getControl(name='email').value = config.get('MEMBER_USERNAME')
+    b.getControl(name='password').value = config.get('MEMBER_PASSWORD')
     b.getControl('Anmelden').click()
-    assert 'http://www.staging.zeit.de/konto' in b.url
+    assert '{}/konto'.format(config.get('BASE_URL')) in b.url
 
     b.open(
-        'http://www.staging.zeit.de/2016/40/'
-        'globalisierung-arm-reich-entwicklung-soziale-ungleichheit')
+        '{}/2016/40/globalisierung-arm-reich-entwicklung-'
+        'soziale-ungleichheit'.format(config.get('BASE_URL')))
     assert '<div class="infographic">' in b.contents
 
     # logout
-    b.open('https://meine.staging.zeit.de/abmelden')
+    b.open('{}/abmelden'.format(config.get('MEMBER_BASE_URL')))
     assert 'Logout erfolgreich' in b.contents
 
 
-def test_commenting():
+def test_commenting(config):
     b = zope.testbrowser.browser.Browser()
-    b.open('https://meine.staging.zeit.de/anmelden')
-    b.getControl(name='email').value = testuser
-    b.getControl(name='password').value = testpassword
+    b.open('{}/anmelden'.format(config.get('MEMBER_BASE_URL')))
+    b.getControl(name='email').value = config.get('MEMBER_USERNAME')
+    b.getControl(name='password').value = config.get('MEMBER_PASSWORD')
     b.getControl('Anmelden').click()
-    assert 'http://www.staging.zeit.de/konto' in b.url
+    assert '{}/konto'.format(config.get('BASE_URL')) in b.url
 
-    b.open(
-        'http://www.staging.zeit.de/'
-        'sport/fussball/2010-04/kaiserslautern-marcel-reif')
+    b.open('{}/sport/fussball/2010-04/kaiserslautern-marcel-reif'.format(
+        config.get('BASE_URL')))
     assert 'id="comment-form"' in b.contents
 
-    # testcomment = 'mein-testkommentar-{}'.format(random.random())
     testcomment = 'mein-testkommentar {}'.format(time.strftime("%c"))
 
     b.getForm(id='comment-form').getControl(name='comment').value = testcomment
@@ -108,13 +103,13 @@ def test_commenting():
     assert testcomment in b.contents
 
     # logout
-    b.open('https://meine.staging.zeit.de/abmelden')
+    b.open('{}/abmelden'.format(config.get('MEMBER_BASE_URL')))
     assert 'Logout erfolgreich' in b.contents
 
 
-def test_videostage_thumbnail_should_be_replaced(selenium_driver):
+def test_videostage_thumbnail_should_be_replaced(config, selenium_driver):
     driver = selenium_driver
-    driver.get('http://www.staging.zeit.de/video/index')
+    driver.get('{}/video/index'.format(config.get('BASE_URL')))
     article = driver.find_element_by_css_selector(
         '#video-stage .video-large')
     videolink = driver.find_element_by_css_selector(
@@ -130,12 +125,12 @@ def test_videostage_thumbnail_should_be_replaced(selenium_driver):
         assert False, 'Thumbnail not replaced by video'
 
 
-def test_video_should_load_on_video_single_page(selenium_driver):
+def test_video_should_load_on_video_single_page(config, selenium_driver):
     driver = selenium_driver
     driver.get(
-        'http://www.staging.zeit.de/video/2017-02/5338993650001/argentinien-'
-        'ringfoermige-sonnenfinsternis-begeistert-beobachter-in-suedamerika')
-
+        '{}/video/2017-02/5338993650001/argentinien-ringfoermige-'
+        'sonnenfinsternis-begeistert-beobachter-in-suedamerika'.format(
+            config.get('BASE_URL')))
     video_visible_ec = expected_conditions.presence_of_element_located(
         (By.CLASS_NAME, 'vjs-control-bar'))
 
@@ -146,8 +141,13 @@ def test_video_should_load_on_video_single_page(selenium_driver):
         assert False, 'Video player not loaded'
 
 
-def test_asset_cache_header():
-    response = requests.get(
-        'http://www.staging.zeit.de/static/latest/css/web.site/screen.css')
+def test_asset_cache_header(config):
+    response = requests.get('{}/static/latest/css/web.site/screen.css'.format(
+        config.get('BASE_URL')))
     assert response.status_code == 200
     assert response.headers.get('Cache-Control', '') == 'max-age=31536000'
+
+
+def test_responsecode_404(config):
+    resp = requests.get('{}/gipsnet'.format(config.get('BASE_URL')))
+    assert resp.status_code == 404
