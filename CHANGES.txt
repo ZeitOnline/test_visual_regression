@@ -8,6 +8,8 @@ POSTDEPLOY
 3.42 (unreleased)
 -----------------
 
+- ZON-3485: Inline portrait boxes
+
 - BUG-641: Use ZON videoplayer in ZMO
 
 
