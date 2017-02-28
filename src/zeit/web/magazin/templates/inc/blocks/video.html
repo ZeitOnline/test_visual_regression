@@ -15,11 +15,10 @@
     data-video-size="large"
     data-video-provider="brightcove"
     data-video-page-url="{{ block.video | create_url }}">
-    {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}
     {% if toggles('zon_inline_video_via_html5') %}
-        {{ vima.brightcove_video_tag(block.id, iframe=False, brightcove_player=playerId) }}
+        {{ vima.brightcove_video_tag(block.id, iframe=False, brightcove_player=view.videoplayer_id.article) }}
     {% else %}
-        {{ vima.brightcove_video_tag(block.id, iframe=True, brightcove_player=playerId) }}
+        {{ vima.brightcove_video_tag(block.id, iframe=True, brightcove_player=view.videoplayer_id.article) }}
     {% endif %}
 
     {% block video_caption -%}
