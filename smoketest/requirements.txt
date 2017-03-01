@@ -1,0 +1,14 @@
+# Keep in sync with friedbert-deployment/component/source/versions.cfg
+pytest==3.0.3
+py==1.4.31
+
+requests==2.7.0
+
+selenium==2.53.0
+
+zope.testbrowser==4.0.4
+mechanize==0.2.5
+pytz==2012c
+zope.event==3.5.2
+zope.interface==4.0.5
+zope.schema==3.7.1

@@ -1,10 +1,16 @@
+import grokcore.component
 import lxml.objectify
 import zope.component
 import zope.interface
 
+import zeit.content.gallery.interfaces
+import zeit.content.article.edit.reference
+import zeit.content.article.interfaces
 import zeit.content.image.interfaces
 
 import zeit.web
+import zeit.web.core.interfaces
+import zeit.web.core.view
 
 
 class Gallery(zeit.web.core.view.Content):
@@ -35,3 +41,14 @@ def persistent_thumbnail_factory(context):
     not work in our environment.
     """
     return object()
+
+
+@grokcore.component.adapter(zeit.content.article.interfaces.IArticle)
+@grokcore.component.implementer(
+    zeit.content.gallery.interfaces.IVisibleEntryCount)
+def article_gallery_image_count(context):
+    body = zeit.content.article.edit.interfaces.IEditableBody(context)
+    for block in body.values():
+        if zeit.content.article.edit.interfaces.IGallery.providedBy(block):
+            return zeit.content.gallery.interfaces.IVisibleEntryCount(
+                block.references, 0)
