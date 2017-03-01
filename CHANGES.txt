@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - BUG-641: Use ZON videoplayer in ZMO
 
+- BUG-637: Consider hidden images for gallery image counter
+
 - FIX: Fight the specificity war with brightcove on IE11
 
 

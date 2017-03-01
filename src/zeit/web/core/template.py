@@ -12,7 +12,6 @@ import urllib
 import urlparse
 
 import babel.dates
-import grokcore.component
 import lxml.etree
 import pyramid.threadlocal
 import zope.component
