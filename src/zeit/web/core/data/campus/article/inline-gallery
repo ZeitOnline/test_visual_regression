@@ -12,6 +12,7 @@
     <author expires="" href="http://xml.zeit.de/autoren/anne_mustermann" publication-date="">
       <display_name>Anne Mustermann</display_name>
     </author>
+    <image base-id="http://xml.zeit.de/zeit-online/image/stress-frau-springen/"></image>
     <references>
     </references>
     <topic type="intern" href="http://xml.zeit.de/thema/test">
