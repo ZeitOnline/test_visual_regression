@@ -315,16 +315,10 @@ class Base(object):
             self.request.route_url('home').rstrip('/'), self.request.path_info)
 
     @zeit.web.reify
-    def videoplayer_id(self):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        return conf['brightcove_videoplayer_hp_cp_single']
-
-    @zeit.web.reify
     def js_vars(self):
         names = ('banner_channel', 'ressort', 'sub_ressort', 'type',
                  'hp_overlay_interval', 'update_signals_comments_interval',
-                 'update_signals_time_interval', 'paywall',
-                 'videoplayer_id')
+                 'update_signals_time_interval', 'paywall')
         return [(name, getattr(self, name, '')) for name in names]
 
     @zeit.web.reify
