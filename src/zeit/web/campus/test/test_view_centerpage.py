@@ -166,7 +166,6 @@ def test_campus_navigation_contains_jobmarket(testbrowser):
     assert len(jobmarket.cssselect('.nav__tools-list a')) == 2
     control = jobmarket.cssselect('a[aria-controls]')[0]
     flyout = browser.cssselect('#%s' % control.get('aria-controls'))[0]
-    assert len(flyout.cssselect('.nav__tools-title')) == 1
     assert len(flyout.cssselect('.nav-flyout__link')) == 2
     assert len(flyout.cssselect('.nav-flyout__footer-link')) == 1
 
