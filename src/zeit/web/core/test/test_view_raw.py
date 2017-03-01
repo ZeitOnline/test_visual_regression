@@ -1,4 +1,5 @@
 import pytest
+import re
 import requests
 
 
@@ -22,7 +23,8 @@ def test_renders_xml_content(testserver, hostname):
         '%s/config/community_maintenance.xml' % testserver.url,
         headers={'Host': hostname + '.zeit.de'})
     assert r.status_code == 200
-    assert r.headers['content-type'] == 'application/xml; charset=UTF-8'
+    pattern = re.compile('(application|text)\/xml;\ charset=UTF-8')
+    assert pattern.match(r.headers['content-type'])
     assert r.headers['Access-Control-Allow-Origin'] == '*'
     assert 'maintenance' in r.content
 
