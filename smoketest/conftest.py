@@ -1,11 +1,34 @@
 import os
 
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.ui import WebDriverWait
 import pytest
 import selenium.webdriver
 import selenium.webdriver.firefox.firefox_binary
+
+
+TESTCONFIG_STAGING = {
+    'BASE_URL': 'http://www.staging.zeit.de',
+    'NEWSFEED_BASE_URL': 'http://newsfeed.staging.zeit.de',
+    'MEMBER_BASE_URL': 'https://meine.staging.zeit.de',
+    'MEMBER_USERNAME': 'thomas.strothjohann+unmoderiert1@apps.zeit.de',
+    'MEMBER_PASSWORD': 'unmoderierteins'
+}
+
+TESTCONFIG_PRODUCTION = {
+    'BASE_URL': 'http://www.zeit.de',
+    'NEWSFEED_BASE_URL': 'http://newsfeed.zeit.de',
+    'MEMBER_BASE_URL': 'https://meine.zeit.de',
+    'MEMBER_USERNAME': 'thomas.strothjohann+unmoderiert1@apps.zeit.de',
+    'MEMBER_PASSWORD': 'unmoderierteins'
+}
+
+
+@pytest.fixture(scope='session')
+def config():
+    environment = os.environ.get('ZEIT_WEB_SMOKETESTS', 'STAGING')
+    return globals()['TESTCONFIG_%s' % environment]
 
 
 BROWSERS = {
@@ -44,7 +67,7 @@ def selenium_driver(request):
     def get_and_wait_for_body(self, *args, **kw):
         result = original_get(*args, **kw)
         WebDriverWait(self, timeout).until(
-            EC.presence_of_element_located((By.TAG_NAME, "body")))
+            ec.presence_of_element_located((By.TAG_NAME, "body")))
         return result
     browser.get = get_and_wait_for_body.__get__(browser)
 

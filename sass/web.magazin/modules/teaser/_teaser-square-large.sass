@@ -14,7 +14,6 @@
 
 	&__title
 		@extend %teaser-large__title
-		width: 100%
 
 	&__subtitle
 		@extend %teaser-large__subtitle
@@ -24,9 +23,7 @@
 
 	&--light
 		background-color: $white
+		color: $black
 
 	&--light &__media
 		@extend %teaser--light
-
-	&--light &__text
-		+link-colors($black, $black, $black, $black, $black)

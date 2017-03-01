@@ -36,7 +36,7 @@
             </ul>
         </div>
         <div class="gate__actions">
-            <input type="hidden" name="entry_service" value="schranke_paid">
+            <input type="hidden" name="entry_service" value="schranke-paid">
             <input type="hidden" name="url" value="{{ view.content_url }}#success-registration">
             <input type="hidden" name="wt_zmc" value="fix.int.zonaudev.diezeit.wall_abo.premium.bar_{{ view.paywall }}.link.x">
             <input type="hidden" name="utm_medium" value="fix">
@@ -50,7 +50,7 @@
     {% block gate_link -%}
         <p class="gate__note">
             Sie sind bereits Digital-Abonnent?
-            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration&entry_service=schranke_paid" class="gate__link">
+            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration&entry_service=schranke-paid" class="gate__link">
                 Hier anmelden
             </a>
         </p>
