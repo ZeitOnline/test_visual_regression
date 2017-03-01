@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - FIX: Fight the specificity war with brightcove on IE11
 
+- MAINT: Polish z+logo for ZMO teasers
+
 
 3.41 (2017-02-27)
 -----------------
