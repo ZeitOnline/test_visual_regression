@@ -13,23 +13,23 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 def test_responsecode(config):
-    resp = requests.get('{}/index'.format(config.get('BASE_URL')))
+    resp = requests.get('{}/index'.format(config['BASE_URL']))
     assert resp.status_code == 200
-    resp = requests.get('{}/zeit-magazin/index'.format(config.get('BASE_URL')))
+    resp = requests.get('{}/zeit-magazin/index'.format(config['BASE_URL']))
     assert resp.status_code == 200
-    resp = requests.get('{}/campus/index'.format(config.get('BASE_URL')))
+    resp = requests.get('{}/campus/index'.format(config['BASE_URL']))
     assert resp.status_code == 200
 
 
 def test_newsfeeds(config):
     resp = requests.get(
         '{}/administratives/socialflow-zmo/rss-socialflow-facebook'.format(
-            config.get('NEWSFEED_BASE_URL')))
+            config['NEWSFEED_BASE_URL']))
     assert resp.status_code == 200
 
     resp = requests.get(
         '{}/administratives/socialflow-zmo/rss-socialflow-facebook-zmo'.format(
-            config.get('NEWSFEED_BASE_URL')))
+            config['NEWSFEED_BASE_URL']))
     assert resp.status_code == 200
 
 
@@ -39,60 +39,60 @@ def test_centerpages_contain_teasers(config):
     # OPTIMIZE: use real HTML/CSS selectors
     # assert len(browser.cssselect('article[class*=teaser]')) > 50
 
-    browser.open('{}/index'.format(config.get('BASE_URL')))
+    browser.open('{}/index'.format(config['BASE_URL']))
     assert browser.contents.count('<article class="teaser-') > 50
 
-    browser.open('{}/politik/index'.format(config.get('BASE_URL')))
+    browser.open('{}/politik/index'.format(config['BASE_URL']))
     assert browser.contents.count('<article class="teaser-') > 20
 
-    browser.open('{}/zeit-magazin/index'.format(config.get('BASE_URL')))
+    browser.open('{}/zeit-magazin/index'.format(config['BASE_URL']))
     assert browser.contents.count('<article class="teaser-') > 20
 
-    browser.open('{}/campus/index'.format(config.get('BASE_URL')))
+    browser.open('{}/campus/index'.format(config['BASE_URL']))
     assert browser.contents.count('<article class="teaser-') > 20
 
 
 def test_login_and_logout(config):
     b = zope.testbrowser.browser.Browser()
-    b.open('{}/anmelden'.format(config.get('MEMBER_BASE_URL')))
+    b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
     b.getControl(
-        name='email').value = config.get('MEMBER_USERNAME')
-    b.getControl(name='password').value = config.get('MEMBER_PASSWORD')
+        name='email').value = config['MEMBER_USERNAME']
+    b.getControl(name='password').value = config['MEMBER_PASSWORD']
     b.getControl('Anmelden').click()
-    assert '{}/konto'.format(config.get('BASE_URL')) in b.url
+    assert '{}/konto'.format(config['BASE_URL']) in b.url
     # logout
-    b.open('{}/abmelden'.format(config.get('MEMBER_BASE_URL')))
+    b.open('{}/abmelden'.format(config['MEMBER_BASE_URL']))
     assert 'Logout erfolgreich' in b.contents
 
 
 def test_infographic(config):
     b = zope.testbrowser.browser.Browser()
-    b.open('{}/anmelden'.format(config.get('MEMBER_BASE_URL')))
-    b.getControl(name='email').value = config.get('MEMBER_USERNAME')
-    b.getControl(name='password').value = config.get('MEMBER_PASSWORD')
+    b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
+    b.getControl(name='email').value = config['MEMBER_USERNAME']
+    b.getControl(name='password').value = config['MEMBER_PASSWORD']
     b.getControl('Anmelden').click()
-    assert '{}/konto'.format(config.get('BASE_URL')) in b.url
+    assert '{}/konto'.format(config['BASE_URL']) in b.url
 
     b.open(
         '{}/2016/40/globalisierung-arm-reich-entwicklung-'
-        'soziale-ungleichheit'.format(config.get('BASE_URL')))
+        'soziale-ungleichheit'.format(config['BASE_URL']))
     assert '<div class="infographic">' in b.contents
 
     # logout
-    b.open('{}/abmelden'.format(config.get('MEMBER_BASE_URL')))
+    b.open('{}/abmelden'.format(config['MEMBER_BASE_URL']))
     assert 'Logout erfolgreich' in b.contents
 
 
 def test_commenting(config):
     b = zope.testbrowser.browser.Browser()
-    b.open('{}/anmelden'.format(config.get('MEMBER_BASE_URL')))
-    b.getControl(name='email').value = config.get('MEMBER_USERNAME')
-    b.getControl(name='password').value = config.get('MEMBER_PASSWORD')
+    b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
+    b.getControl(name='email').value = config['MEMBER_USERNAME']
+    b.getControl(name='password').value = config['MEMBER_PASSWORD']
     b.getControl('Anmelden').click()
-    assert '{}/konto'.format(config.get('BASE_URL')) in b.url
+    assert '{}/konto'.format(config['BASE_URL']) in b.url
 
     b.open('{}/sport/fussball/2010-04/kaiserslautern-marcel-reif'.format(
-        config.get('BASE_URL')))
+        config['BASE_URL']))
     assert 'id="comment-form"' in b.contents
 
     testcomment = 'mein-testkommentar {}'.format(time.strftime("%c"))
@@ -103,13 +103,13 @@ def test_commenting(config):
     assert testcomment in b.contents
 
     # logout
-    b.open('{}/abmelden'.format(config.get('MEMBER_BASE_URL')))
+    b.open('{}/abmelden'.format(config['MEMBER_BASE_URL']))
     assert 'Logout erfolgreich' in b.contents
 
 
 def test_videostage_thumbnail_should_be_replaced(config, selenium_driver):
     driver = selenium_driver
-    driver.get('{}/video/index'.format(config.get('BASE_URL')))
+    driver.get('{}/video/index'.format(config['BASE_URL']))
     article = driver.find_element_by_css_selector(
         '#video-stage .video-large')
     videolink = driver.find_element_by_css_selector(
@@ -130,7 +130,7 @@ def test_video_should_load_on_video_single_page(config, selenium_driver):
     driver.get(
         '{}/video/2017-02/5338993650001/argentinien-ringfoermige-'
         'sonnenfinsternis-begeistert-beobachter-in-suedamerika'.format(
-            config.get('BASE_URL')))
+            config['BASE_URL']))
     video_visible_ec = expected_conditions.presence_of_element_located(
         (By.CLASS_NAME, 'vjs-control-bar'))
 
@@ -143,11 +143,11 @@ def test_video_should_load_on_video_single_page(config, selenium_driver):
 
 def test_asset_cache_header(config):
     response = requests.get('{}/static/latest/css/web.site/screen.css'.format(
-        config.get('BASE_URL')))
+        config['BASE_URL']))
     assert response.status_code == 200
     assert response.headers.get('Cache-Control', '') == 'max-age=31536000'
 
 
 def test_responsecode_404(config):
-    resp = requests.get('{}/gipsnet'.format(config.get('BASE_URL')))
+    resp = requests.get('{}/gipsnet'.format(config['BASE_URL']))
     assert resp.status_code == 404
