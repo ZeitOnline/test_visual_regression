@@ -1,3 +1,4 @@
+<?xml version='1.0' encoding='UTF-8'?>
 <centerpage xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="centerpage">
   <head>
     <header_image xsi:nil="true"/>

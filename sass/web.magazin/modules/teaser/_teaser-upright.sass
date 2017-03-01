@@ -2,11 +2,11 @@
 .teaser-upright
 	@extend %teaser
 	background-color: $grey--mid-dark // fallback for expired images
+	color: $white
 
 	&__media
 		@extend %teaser--dark
 		height: 0
-		margin: 0
 		padding-bottom: 100% / 4 * 5 // image variant 'tile'
 
 	&__title-box
@@ -20,14 +20,11 @@
 
 	&__kicker
 		@extend %teaser__kicker
-		color: $white
 		letter-spacing: normal
 
 	&__title
 		@extend %teaser__title
 		+font-smoothing
-		color: $white
-		margin: remify(6px) 0 0 0
 		text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px
 
 	&__gallery-icon

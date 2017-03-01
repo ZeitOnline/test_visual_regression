@@ -1,6 +1,5 @@
 .teaser-fullwidth
 	@extend %teaser-large
-	display: block
 	margin-bottom: 0
 	+respond-min($break-2)
 		margin-bottom: 0
@@ -12,22 +11,15 @@
 		+respond-min($break-2)
 			padding-bottom: 100% / 16 * 9 // image variant 'wide'
 
-	&__title-box
-		align-items: baseline
-		display: flex
-		flex-flow: row wrap
-		justify-content: center
-		& > .zplus-logo,
-		& > .zplus-logo-register
-			flex-shrink: 0
-
 	&__text
 		@extend %teaser-large__text
+		padding: $thin 15% $medium
 		text-align: center
-		padding: $thin 15% $medium 15%
 
 	&__title
 		@extend %teaser-large__title
+		display: inline
+		width: auto
 
 	&__subtitle
 		@extend %teaser-large__subtitle
@@ -37,9 +29,14 @@
 
 	&--light
 		background-color: $white
+		color: $black
 
 	&--light &__media
 		@extend %teaser--light
 
-	&--light &__text
-		+link-colors($black, $black, $black, $black, $black)
+	+respond-min($break-2)
+		.zplus-logo,
+		.zplus-logo-register
+			height: remify(23px)
+			margin-right: remify(10px)
+			width: remify(28px)
