@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3485: Inline portrait boxes
 
+- ZON-3731: Update entry_service value
+
 - BUG-641: Use ZON videoplayer in ZMO
 
 - BUG-637: Consider hidden images for gallery image counter
