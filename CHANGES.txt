@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - MAINT: Polish z+logo for ZMO teasers
 
+- FEM-23: Add comment to framebuilder HTML
+
 
 3.41 (2017-02-27)
 -----------------
