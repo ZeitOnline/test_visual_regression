@@ -8,9 +8,7 @@
     ) %}
 
 <div class="video-player"
-    id="video-player-{{ videoId }}"
-    data-video-provider="brightcove"
-    data-video-size="large">
+    id="video-player-{{ videoId }}">
 
     {% if iframe %}
         <iframe

@@ -91,6 +91,12 @@
 		margin-right: auto
 		+respond-min($break-3)
 			padding-right: 10%
+
+// move down to make space for the comment-balloon
++respond-min($break-1)
+	.article-page>.figure-full-width:first-child
+		padding-top: remify(120px)
+
 .figure-stamp, .figure-stamp--right
 	margin: $small auto
 	width: 100%
