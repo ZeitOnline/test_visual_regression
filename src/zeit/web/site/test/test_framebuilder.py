@@ -23,23 +23,18 @@ def test_framebuilder_can_disable_responsiveness(testbrowser):
 
 
 def test_framebuilder_should_slice_page_on_request(testbrowser):
-    full_page = testbrowser('/framebuilder').contents
+    head = testbrowser('/framebuilder?page_slice=html_head')
+    assert not head.cssselect('body')
 
-    head = testbrowser('/framebuilder?page_slice=html_head').contents
-    assert not testbrowser.cssselect('body')
-    assert head in full_page
+    upper_body = testbrowser('/framebuilder?page_slice=upper_body')
+    assert not upper_body.cssselect('head')
+    assert '<body' in upper_body.contents
+    assert '</body>' not in upper_body.contents
 
-    upper_body = testbrowser('/framebuilder?page_slice=upper_body').contents
-    assert not testbrowser.cssselect('head')
-
-    sanitized = upper_body.replace('?page_slice=upper_body', '').strip()
-    assert '</body>' not in sanitized
-    assert sanitized in full_page
-
-    lower_body = testbrowser('/framebuilder?page_slice=lower_body').contents
-    assert not testbrowser.cssselect('head')
-    assert '</body>' in lower_body
-    assert lower_body.strip() in full_page
+    lower_body = testbrowser('/framebuilder?page_slice=lower_body')
+    assert not lower_body.cssselect('head')
+    assert '<body' not in lower_body.contents
+    assert '</body>' in lower_body.contents
 
 
 def test_framebuilder_contains_no_webtrekk(testbrowser):
@@ -203,28 +198,20 @@ def test_framebuilder_accepts_banner_channel_parameter(
         'return adcSiteInfo.keywords')
 
 
-# ----------- MINIMAL FRAMEBUILDER -----------------------------------------
 def test_framebuilder_minimal_should_slice_page_on_request(testbrowser):
-    full_page = testbrowser('/framebuilder?minimal').contents
 
-    head = testbrowser('/framebuilder?minimal&page_slice=html_head').contents
-    assert not testbrowser.cssselect('body')
-    assert head in full_page
+    head = testbrowser('/framebuilder?minimal&page_slice=html_head')
+    assert not head.cssselect('body')
 
-    upper_body = testbrowser(
-        '/framebuilder?minimal&page_slice=upper_body').contents
-    assert not testbrowser.cssselect('head')
+    upper_body = testbrowser('/framebuilder?minimal&page_slice=upper_body')
+    assert not upper_body.cssselect('head')
+    assert '<body' in upper_body.contents
+    assert '</body>' not in upper_body.contents
 
-    sanitized = upper_body.replace(
-        '?minimal&page_slice=upper_body', '').strip()
-    assert '</body>' not in sanitized
-    assert sanitized in full_page
-
-    lower_body = testbrowser(
-        '/framebuilder?minimal&page_slice=lower_body').contents
-    assert not testbrowser.cssselect('head')
-    assert '</body>' in lower_body
-    assert lower_body.strip() in full_page
+    lower_body = testbrowser('/framebuilder?minimal&page_slice=lower_body')
+    assert not lower_body.cssselect('head')
+    assert '<body' not in lower_body.contents
+    assert '</body>' in lower_body.contents
 
 
 def test_framebuilder_minimal_contains_no_webtrekk(testbrowser):
@@ -269,7 +256,6 @@ def test_framebuilder_contains_data_for_wrapper_app(testbrowser):
             in browser.cssselect('head')[0].text_content())
 
 
-# TODO
 def test_framebuilder_minimal_should_have_login_cut_mark(testbrowser):
     browser = testbrowser('/framebuilder')
     assert 'start::cut_mark::login' in browser.contents
