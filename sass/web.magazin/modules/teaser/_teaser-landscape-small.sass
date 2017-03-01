@@ -25,6 +25,7 @@
 	&__subtitle
 		@extend %teaser__subtitle
 
-+respond-min($break-2)
-	.cp-area--major > .teaser-landscape-small
-		width: 48%
+	+respond-min($break-2)
+		.cp-area--major &
+			display: inline-block // no-flexbox fallback
+			width: 48%

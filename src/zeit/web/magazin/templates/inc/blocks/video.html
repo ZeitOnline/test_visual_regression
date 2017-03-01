@@ -1,7 +1,7 @@
-{% import "zeit.web.magazin:templates/macros/layout_macro.tpl" as lama %}
+{% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 
 {% if block.id and 'header' not in block.format | default('') -%}
-    <figure class="
+<figure class="
     {% if block.format == 'zmo-small-left' or block.format == 'small' %}
         figure-stamp
     {% elif block.format == 'large' or block.format == 'zmo-large-left' or block.format == 'zmo-large-center' or block.format == 'zmo-large-right' %}
@@ -10,15 +10,23 @@
          figure-stamp--right
     {% else %}
          figure is-constrained is-centered
-    {% endif %}" data-video="{{ block.id }}">
-        {% if block.video_still %}
-        <div class="video__still">
-            <img class="figure__media" src="{{ block.video_still }}" alt="Video: {{ block.title }}" title="Video: {{ block.title }}">
-            <span class="video__button">{{ lama.use_svg_icon('playbutton', 'video__play-icon', view.package) }}</span>
-        </div>
-        {% endif %}
-        <figcaption class="figure__caption">
-            {{ block.description }}
-        </figcaption>
-    </figure>
-{%- endif %}
+    {% endif %}"
+    {%- if block.video.serie and block.video.serie.serienname %} data-video-series="{{ block.video.serie.serienname | format_webtrekk }}"{% endif %}
+    data-video-size="large"
+    data-video-provider="brightcove"
+    data-video-page-url="{{ block.video | create_url }}">
+    {% set playerId = 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9' %}
+    {% if toggles('zon_inline_video_via_html5') %}
+        {{ vima.brightcove_video_tag(block.id, iframe=False, brightcove_player=playerId) }}
+    {% else %}
+        {{ vima.brightcove_video_tag(block.id, iframe=True, brightcove_player=playerId) }}
+    {% endif %}
+
+    {% block video_caption -%}
+    <figcaption class="figure__caption">
+        {{ block.description }}
+    </figcaption>
+    {%- endblock %}
+
+</figure>
+{% endif %}

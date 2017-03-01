@@ -8,7 +8,19 @@ POSTDEPLOY
 3.42 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3485: Inline portrait boxes
+
+- ZON-3731: Update entry_service value
+
+- BUG-641: Use ZON videoplayer in ZMO
+
+- BUG-637: Consider hidden images for gallery image counter
+
+- FIX: Fight the specificity war with brightcove on IE11
+
+- MAINT: Polish z+logo for ZMO teasers
+
+- FEM-23: Add comment to framebuilder HTML
 
 
 3.41 (2017-02-27)

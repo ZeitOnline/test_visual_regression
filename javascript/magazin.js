@@ -15,6 +15,7 @@ require([
     'web.core/zeit',
     'web.core/images',
     'web.core/clicktracking',
+    'web.core/triggeredEventTracking',
     'web.core/adReload',
     'web.core/menu',
     'web.core/comments',
@@ -62,8 +63,7 @@ require([
     'web.core/plugins/jquery.countFormchars',
     'web.core/plugins/jquery.imageCopyrightFooter',
     'web.core/plugins/jquery.notifications',
-    'web.magazin/plugins/jquery.backgroundvideo',
-    'web.magazin/plugins/jquery.switchvideo'
+    'web.magazin/plugins/jquery.backgroundvideo'
 ], function( $, Velocity ) {
     // remove jQuery from global scope
     $.noConflict( true );
@@ -71,7 +71,6 @@ require([
     $( window ).referrerCount();
     $.notifications();
     $( '.js-gallery' ).inlinegallery();
-    $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
     $.picturefill();
     $( 'main' ).animateScroll({ selector: '.js-scroll' });

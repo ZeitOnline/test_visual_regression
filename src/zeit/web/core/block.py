@@ -90,15 +90,15 @@ class Authorbox(Block):
 class Portraitbox(Block):
 
     def __init__(self, model_block):
-        pbox = model_block.references
-        if zeit.content.portraitbox.interfaces.IPortraitbox.providedBy(pbox):
-            self.text = self._author_text(pbox.text)
-            self.name = pbox.name
+        if getattr(model_block, 'text'):
+            self.text = self._author_text(model_block.text)
+        if getattr(model_block, 'name'):
+            self.name = model_block.name
 
-    def _author_text(self, pbox):
+    def _author_text(self, text):
         # not the most elegant solution, but it gets sh*t done
         parts = []
-        for element in lxml.html.fragments_fromstring(pbox):
+        for element in lxml.html.fragments_fromstring(text):
             if isinstance(element, lxml.etree.ElementBase):
                 if element.tag == 'raw':
                     continue

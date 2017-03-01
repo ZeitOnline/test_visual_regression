@@ -9,31 +9,6 @@ import zeit.cms.interfaces
 from zeit.web.core.block import Video
 
 
-def test_video_html(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/article/01' % testserver.url)
-    for video in driver.find_elements_by_tag_name('figure'):
-        if video.get_attribute("data-video"):
-            still = video.find_element_by_class_name("video__still")
-            img = video.find_element_by_tag_name("img")
-            button = video.find_element_by_css_selector(".video__button")
-            caption = video.find_element_by_tag_name("figcaption")
-            # before click
-            assert still.tag_name == 'div'
-            assert 'figure__media' == unicode(img.get_attribute("class"))
-            assert 'figure__caption' == unicode(caption.get_attribute("class"))
-            # after click
-            button.click()
-            wrap = video.find_element_by_class_name("video__wrapper")
-            try:
-                wrap.find_element_by_tag_name("object")
-            except:
-                wrap.find_element_by_tag_name("iframe")
-            # test if the correct video is shown
-            assert wrap.get_attribute(
-                "data-video") == video.get_attribute("data-video")
-
-
 def test_video_source_should_be_highest_rendition_url(application):
     model_block = mock.Mock()
     model_block.layout = 'zmo-small-left'
@@ -71,7 +46,7 @@ def test_video_source_should_be_highest_rendition_url(application):
     ('small', 'figure-stamp')]
 )
 def test_video_block_should_produce_markup(format, klass, tplbrowser):
-    block = {'id': 42, 'video_still': 'pic.jpg',
+    block = {'id': 42, 'video_still': 'pic.jpg', 'video': 'fake',
              'description': 'test', 'format': format, 'title': 'title'}
     view = {'package': 'zeit.web.magazin'}
 
@@ -81,13 +56,11 @@ def test_video_block_should_produce_markup(format, klass, tplbrowser):
 
     figure = browser.cssselect('figure')[0]
     assert figure.attrib['class'].strip() == klass
-    assert figure.attrib['data-video'] == '42'
+    assert figure.attrib['data-video-provider'] == 'brightcove'
 
-    assert browser.cssselect('img')[0].attrib == {
-        'class': 'figure__media',
-        'src': 'pic.jpg',
-        'alt': 'Video: title',
-        'title': 'Video: title'}
+    video = browser.cssselect('video')[0]
+    assert video.attrib['data-video-id'] == '42'
+    assert video.attrib['class'] == 'video-js video-player__videotag'
 
     caption = browser.cssselect('figcaption')[0]
     assert caption.attrib['class'] == 'figure__caption'
