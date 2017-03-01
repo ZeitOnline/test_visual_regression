@@ -978,15 +978,16 @@ def test_centerpage_teaser_is_clickable_en_block_for_touch_devices(
 
 
 def test_gallery_teaser_exists(testbrowser):
-    select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
-    assert len(select('.cp-region--gallery')) == 1
-    assert len(select('.cp-area--gallery')) == 1
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    regions = browser.cssselect('.cp-region--gallery')
+    areas = regions[0].cssselect('.cp-area--gallery')
+    teasers = areas[0].cssselect('.teaser-gallery ')
+    assert len(teasers) == 2
 
 
 def test_gallery_teaser_has_ressort_heading(testbrowser):
     select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
     title = select('.cp-area--gallery .section-heading__title')
-    assert len(title) == 1
     assert "Fotostrecken" in title[0].text
 
 
@@ -2817,3 +2818,19 @@ def test_zett_icon_is_display_on_nextread(testbrowser):
 def test_zco_icon_is_display_on_nextread(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-zco')
     assert browser.cssselect('article.nextread .nextread__kicker-logo--zco')
+
+
+def test_gallery_teaser_respects_hidden_slides(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    article = browser.cssselect('article[data-unique-id="{}"]'.format(
+        'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer'))[0]
+    counter = article.cssselect('.teaser-gallery__counter')[0]
+    assert counter.text == '13 Fotos'
+
+
+def test_gallery_teaser_handles_articles_with_inline_galleries(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    article = browser.cssselect('article[data-unique-id="{}"]'.format(
+        'http://xml.zeit.de/zeit-online/article/inline-gallery'))[0]
+    counter = article.cssselect('.teaser-gallery__counter')[0]
+    assert counter.text == '7 Fotos'

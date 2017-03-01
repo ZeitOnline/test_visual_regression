@@ -448,6 +448,11 @@ def get_journalistic_format(block):
 
 
 @zeit.web.register_filter
+def get_gallery_images_count(context):
+    return zeit.content.gallery.interfaces.IVisibleEntryCount(context, 0)
+
+
+@zeit.web.register_filter
 def first_child(iterable):
     try:
         return iter(iterable).next()
