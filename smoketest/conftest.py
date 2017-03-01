@@ -27,11 +27,9 @@ TESTCONFIG_PRODUCTION = {
 
 @pytest.fixture(scope='session')
 def config():
-    print('###########DOCONFIG###########')
     environment = os.environ.get('ZEIT_WEB_SMOKETESTS', 'STAGING')
     return globals()['TESTCONFIG_%s' % environment]
 
-config()
 
 BROWSERS = {
     'firefox': selenium.webdriver.Firefox,
