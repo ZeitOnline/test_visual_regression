@@ -7,6 +7,7 @@ import pyramid.httpexceptions
 
 from zeit.connector.interfaces import IResource
 import zeit.cms.repository.interfaces
+import zeit.content.cp.interfaces
 import zeit.content.image.interfaces
 import zeit.content.rawxml.interfaces
 import zeit.content.text.interfaces
@@ -21,6 +22,8 @@ import zeit.web
 @zeit.web.view_config(
     context=zeit.content.rawxml.interfaces.IRawXML)
 @zeit.web.view_config(
+    context=zeit.content.cp.interfaces.IFeed)
+@zeit.web.view_config(
     context=zeit.cms.repository.interfaces.IUnknownResource,
     host_restriction=('xml', 'static', 'scripts', 'zeus'))
 @zeit.web.view_config(
@@ -28,6 +31,9 @@ import zeit.web
     host_restriction=('xml', 'static', 'scripts', 'zeus'))
 @zeit.web.view_config(
     context=zeit.content.rawxml.interfaces.IRawXML,
+    host_restriction=('xml', 'static', 'scripts', 'zeus'))
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.IFeed,
     host_restriction=('xml', 'static', 'scripts', 'zeus'))
 @zeit.web.view_config(
     context=zeit.content.image.interfaces.IImage,
