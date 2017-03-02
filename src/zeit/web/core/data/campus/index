@@ -3,12 +3,12 @@
   <head xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <topiclinks>
       <topiclink>
-        <topiclink_label_1>Paul Auster</topiclink_label_1>
-        <topiclink_url_1>http://www.zeit.de/dynamic/paul-auster</topiclink_url_1>
-        <topiclink_label_2>Ausdauersport</topiclink_label_2>
-        <topiclink_url_2>http://www.zeit.de/dynamic/ausdauersport</topiclink_url_2>
-        <topiclink_label_3>Bayerische Landesbank</topiclink_label_3>
-        <topiclink_url_3>http://www.zeit.de/dynamic/bayerische-landesbank</topiclink_url_3>
+        <topiclink_label_1>Jung und links</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/serie/jung-und-links</topiclink_url_1>
+        <topiclink_label_2>Liebe &amp; Sex</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/thema/liebe-und-sex</topiclink_url_2>
+        <topiclink_label_3>Bachelor</topiclink_label_3>
+        <topiclink_url_3>http://xml.zeit.de/thema/bachelor</topiclink_url_3>
       </topiclink>
     </topiclinks>
     <header_image/>
