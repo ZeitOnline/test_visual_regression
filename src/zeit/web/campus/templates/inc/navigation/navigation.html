@@ -64,7 +64,8 @@
             <a class="nav__topics-link" href="{{ request.route_url('home') }}campus/themen">Alle Themen</a>
         </nav>
         <nav class="nav__tools">
-            <p class="nav__tools-title"><a href="{{ view.toolbox.footer_link }}" role="button" aria-controls="tools-menu" data-follow-mobile="true"><span class="nav__dropdown">
+            <p class="nav__tools-title"><a href="{{ view.toolbox.footer_link }}" role="button" aria-controls="tools-menu" data-follow-mobile="true"
+                {%- if toggles('campus_jobs_flyout_menu') -%} data-offside="true"{% endif %}><span class="nav__dropdown">
                 {{- view.toolbox.header_text | replace(' soll ich', '<span class="nav__tools-extra"> soll ich</span>' | safe) -}}
             </span></a></p>
             <ul class="nav__tools-list" data-ct-column>
