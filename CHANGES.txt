@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.42 (unreleased)
+3.42 (2017-03-02)
 -----------------
 
 - ZON-3321: Add a new and shiny videoplayer button
