@@ -28,7 +28,7 @@ define([ 'jquery' ],
                         elem: [],
                         playerData: {
                             'accountId': '18140073001',
-                            'playerId': '65fa926a-0fe0-4031-8cbf-9db35cecf64a',
+                            'playerId': window.Zeit.cpVideoPlayerId,
                             'embed': 'default'
                         },
                         players: {},
