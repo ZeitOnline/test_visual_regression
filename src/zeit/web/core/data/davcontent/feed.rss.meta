@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">feed</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:ceea1c98-316c-4a2c-8879-3381a2a98ed5}</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2017-03-02T11:30:22Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">30868</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 02 Mar 2017 11:30:22 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"12620ae-7894-549bdc13259f6"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">application/rss+xml</attribute>
+</head>

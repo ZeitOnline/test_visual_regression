@@ -3,7 +3,10 @@
 	display: flex
 	flex-flow: row wrap
 	margin: auto
-	max-width: remify(470px) // 2 * 195px teaser + 20px margin left and right
+	max-width: remify(340px)
+
+	+respond-min($break-phablet-min)
+		max-width: remify(470px) // 2 * 195px teaser + 20px margin left and right
 
 	+respond-min($break-tablet-min)
 		max-width: remify(705px) // 3 * 195px teaser + 20px margin left and right

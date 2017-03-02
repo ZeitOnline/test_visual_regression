@@ -49,6 +49,16 @@ def test_renders_unknown_text_content_with_mime_type(testserver, hostname):
     assert 'extraDivFromHell' in r.content
 
 
+def test_renders_rss_feeds(testserver, hostname):
+    r = requests.get(
+        '%s/davcontent/feed.rss' % testserver.url,
+        headers={'Host': hostname + '.zeit.de'})
+    assert r.status_code == 200
+    assert r.headers['content-type'] == 'application/xml; charset=UTF-8'
+    assert r.headers['Access-Control-Allow-Origin'] == '*'
+    assert 'heise online' in r.content
+
+
 def test_renders_meta_files(testserver, hostname):
     r = requests.get(
         '%s/text/dummy.meta' % testserver.url,
