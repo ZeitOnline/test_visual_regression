@@ -22,7 +22,6 @@ import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
-import zeit.content.text.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
@@ -587,9 +586,6 @@ class Base(object):
             return value.lower() if value else ''
 
         pagination = '1/1'
-        # beware of None
-        product_id = get_param('product_id')
-
         if getattr(self, 'pagination', None):
             if getattr(self, 'is_all_pages_view', False):
                 page = 'all'
@@ -609,11 +605,24 @@ class Base(object):
         else:
             pagetype = self.detailed_content_type
 
+        if zeit.cms.content.interfaces.ICommonMetadata.providedBy(
+                self.context):
+            access = self.context.access
+        else:
+            field = zeit.cms.content.interfaces.ICommonMetadata['access']
+            access = field.default
+
+        if access == 'registration':
+            fcf = zeit.web.core.paywall.Paywall.first_click_free(self.request)
+            first_click_free = 'yes' if fcf else 'no'
+        else:
+            first_click_free = 'unfeasible'
+
         content_group = collections.OrderedDict([
             ('cg1', 'redaktion'),  # Zuordnung/Bereich
             ('cg2', get_param('tracking_type')),  # Kategorie
             ('cg3', get_param('ressort')),  # Ressort
-            ('cg4', product_id),  # Online/Sourcetype
+            ('cg4', get_param('product_id')),  # Online/Sourcetype
             ('cg5', self.sub_ressort.lower()),  # Subressort
             ('cg6', self.serie.replace(' ', '').lower()),  # Cluster
             ('cg7', self.request.path_info.split('/')[-1]),  # doc-path
@@ -631,7 +640,7 @@ class Base(object):
             ('cp5', self.date_last_modified),  # Last Published
             ('cp6', getattr(self, 'text_length', '')),  # Textlänge
             ('cp7', get_param('news_source')),  # Quelle
-            ('cp8', product_id),  # Product-ID
+            ('cp8', get_param('product_id')),  # Product-ID
             ('cp9', get_param('banner_channel')),  # Banner-Channel
             ('cp10', ('no', 'yes')[self.advertising_enabled]),  # Banner aktiv
             ('cp11', ''),  # Fehlermeldung
@@ -642,21 +651,18 @@ class Base(object):
             ('cp25', 'original'),  # Plattform
             ('cp26', pagetype),  # inhaltlicher Pagetype
             ('cp27', ';'.join(self.webtrekk_assets)),  # Asset
+            ('cp28', access),  #
+            ('cp29', first_click_free),  # First click free
             ('cp30', self.paywall or 'open')  # Paywall Schranke
         ])
 
-        access = getattr(self.context, 'access', '')
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'access_status_webtrekk'):
+            del custom_parameter['cp28']
 
-        if zeit.web.core.template.toggles('access_status_webtrekk'):
-            custom_parameter.update({'cp28': access})
-
-        first_click_free = 'unfeasible'
-        if zeit.web.core.application.FEATURE_TOGGLES.find('reader_revenue'):
-            if access == 'registration':
-                c1_fcf_header = zeit.web.core.paywall.Paywall.first_click_free(
-                    self.request)
-                first_click_free = 'yes' if c1_fcf_header else 'no'
-        custom_parameter.update({'cp29': first_click_free})
+        if not zeit.web.core.application.FEATURE_TOGGLES.find(
+                'reader_revenue'):
+            custom_parameter['cp29'] = 'unfeasible'
 
         return {
             'contentGroup': content_group,
@@ -1077,11 +1083,14 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
     @zeit.web.reify
     def webtrekk(self):
         webtrekk = super(Content, self).webtrekk
-        style = 'share_buttons_{}'.format(self.share_buttons or 'small')
+        custom_parameter = webtrekk['customParameter']
 
-        webtrekk['customParameter'].update({
-            'cp31': style  # share button style
-        })
+        style = 'share_buttons_{}'.format(self.share_buttons or 'small')
+        custom_parameter['cp31'] = style
+
+        if self.nextread_ad:
+            parsed = urlparse.urlparse(self.nextread_ad[0].url)
+            custom_parameter['cp33'] = ''.join(parsed[1:3])
 
         return webtrekk
 
@@ -1359,13 +1368,6 @@ def json_comment_count(request):
             count == 0 and 'Keine' or count, count != '1' and 'e' or '')
 
     return {'comment_count': comment_count}
-
-
-@zeit.web.view_config(
-    context=zeit.content.text.interfaces.IText,
-    renderer='string')
-def view_textcontent(context, request):
-    return context.text
 
 
 @zeit.web.view_config(

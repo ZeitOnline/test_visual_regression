@@ -83,10 +83,23 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             menu.on( 'blur', '*[role="button"], *[aria-hidden] a', function( event ) {
                 if ( visibleSubmenu ) {
                     setTimeout( function() {
+                        // make sure it's still there - may have been changed by another click event
+                        if ( !visibleSubmenu ) { return; }
+
                         var submenu = document.getElementById( visibleSubmenu.attr( 'aria-controls' ) ),
                             focused = visibleSubmenu.get( 0 ) === document.activeElement || $.contains( submenu, document.activeElement );
 
                         if ( !focused ) {
+                            // adjust focus to move to the "next" menu item
+                            // it does not work perfectly if you move "backwards"
+                            // or click outside the flyout - but what is working perfectly anyway?
+                            if ( visibleSubmenu.data( 'offside' ) && visibleSubmenu.get( 0 ) !== event.target ) {
+                                var links = menu.find( 'a' ).filter( ':visible' ),
+                                    index = links.index( visibleSubmenu );
+
+                                links.eq( index + 1 ).focus();
+                            }
+
                             toggleElement( visibleSubmenu, false );
                         }
                     }, 1 );
@@ -105,6 +118,15 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                     case 32: // [SPACE]
                         event.preventDefault();
                         $( event.target ).trigger( 'click', true );
+                        break;
+
+                    case 9: // [TAB]
+                        // ensure the focus moves to the first link in the controlled container
+                        // even if there are other links in between
+                        if ( visibleSubmenu && visibleSubmenu.data( 'offside' ) ) {
+                            event.preventDefault();
+                            $( '#' + visibleSubmenu.attr( 'aria-controls' ) ).find( 'a' ).first().focus();
+                        }
                         break;
                 }
             });

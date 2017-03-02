@@ -7,7 +7,7 @@ import zeit.web
 import zeit.web.core.application
 import zeit.web.core.security
 import zeit.web.core.view
-import zeit.web.campus.module.toolbox
+import zeit.web.campus.navigation
 
 
 def is_zco_content(context, request):
@@ -19,8 +19,11 @@ class Base(zeit.web.core.view.Base):
     seo_title_default = u'ZEIT Campus ONLINE | studieren. arbeiten. leben.'
     pagetitle_suffix = u' | ZEIT Campus'
 
+    # make job market links available in view
+    jobmarket = zeit.web.campus.navigation.JOB_MARKET_SOURCE
+
     # make toolbox links available in view
-    toolbox = zeit.web.campus.module.toolbox.TOOL_SOURCE
+    toolbox = zeit.web.campus.navigation.TOOL_SOURCE
 
     @zeit.web.reify
     def adwords(self):

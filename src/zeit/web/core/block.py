@@ -91,15 +91,15 @@ class Authorbox(Block):
 class Portraitbox(Block):
 
     def __init__(self, model_block):
-        pbox = model_block.references
-        if zeit.content.portraitbox.interfaces.IPortraitbox.providedBy(pbox):
-            self.text = self._author_text(pbox.text)
-            self.name = pbox.name
+        if getattr(model_block, 'text'):
+            self.text = self._author_text(model_block.text)
+        if getattr(model_block, 'name'):
+            self.name = model_block.name
 
-    def _author_text(self, pbox):
+    def _author_text(self, text):
         # not the most elegant solution, but it gets sh*t done
         parts = []
-        for element in lxml.html.fragments_fromstring(pbox):
+        for element in lxml.html.fragments_fromstring(text):
             if isinstance(element, lxml.etree.ElementBase):
                 if element.tag == 'raw':
                     continue
@@ -117,7 +117,9 @@ class Volume(Block):
     def __init__(self, model_block):
         result = model_block.references
         volume_obj = result.target
-        self.printcover = volume_obj.covers['printcover']
+        article = zeit.content.article.interfaces.IArticle(model_block)
+        self.printcover = volume_obj.get_cover(
+            'printcover', article.product.id)
         self.medium = self._product_path(volume_obj.product.id)
         self.year = volume_obj.year
         self.issue = str(volume_obj.volume).zfill(2)
@@ -513,12 +515,13 @@ class NewsletterTeaser(Block):
     def image(self):
         image = zeit.web.core.template.get_image(
             self.context.reference, variant_id='wide', fallback=False)
-        # XXX We should not hardcode the host, but newsletter is rendered on
-        # friedbert-preview, which can't use `image_host`. Should we introduce
-        # a separate setting?
-        host = 'http://www.zeit.de'
+        # The newsletter is rendered on friedbert-preview, so we cannot use
+        # `image_host`, since that would be friedbert-preview itself.
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        image_host = conf.get('newsletter_image_host', '').strip('/')
         if image:
-            return host + image.group.variant_url(image.variant_id, 148, 84)
+            return urlparse.urljoin(image_host, image.group.variant_url(
+                image.variant_id, 148, 84))
 
     @property
     def videos(self):
@@ -533,8 +536,10 @@ class NewsletterTeaser(Block):
 
     @property
     def url(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        content_host = conf.get('newsletter_content_host', '').strip('/')
         url = self.uniqueId.replace(
-            'http://xml.zeit.de/', 'http://www.zeit.de/', 1)
+            'http://xml.zeit.de', content_host, 1)
         if self.autoplay:
             url += '#autoplay'
         return url
@@ -559,7 +564,7 @@ class NewsletterAdvertisement(Block):
     def image(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return self.context.image.uniqueId.replace(
-            'http://xml.zeit.de', conf['image_prefix'], 1)
+                'http://xml.zeit.de', conf['image_prefix'], 1)
 
 
 def _raw_html(xml):

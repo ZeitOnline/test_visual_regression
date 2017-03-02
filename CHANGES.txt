@@ -5,14 +5,124 @@ POSTDEPLOY
 ----------
 
 
-3.38 (unreleased)
+3.43 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.42 (2017-03-02)
+-----------------
+
+- ZON-3321: Add a new and shiny videoplayer button
+
+- ZON-3485: Inline portrait boxes
+
+- ZON-3603: Extend ZEIT Campus Navigation
+
+- ZON-3728: Limit packshot size for volume teaser in ZMO
+
+- ZON-3731: Update entry_service value
+
+- BUG-637: Consider hidden images for gallery image counter
+
+- BUG-641: Use ZON videoplayer in ZMO
+
+- FIX: Fight the specificity war with brightcove on IE11
+
+- FIX: Render content-type rss feed
+
+- MAINT: Polish z+logo for ZMO teasers
+
+- MAINT: Tweak volume overview design
+
+- FEM-23: Add comment to framebuilder HTML
+
+
+3.41 (2017-02-27)
+-----------------
+
+- ZON-3688: Polish storystream-teaser
+
+- ZON-3705: Track volume packshot links with product id
+
+- ZON-3584: Cleanup webtrekk property and add nextread url
+
+- ZON-3703: Disintegrate print-ressort areas
+
+- ZON-3669: Polish volume teaser on archive pages
+
+- BUG-664: Change link url for exclusive page
+
+- BUG-665: Add settting for newsletter content and image host
+
+- BUG-656: Consider teaser kicker in Solr results
+
+- BUG-667: Make rawxml rendering work again
+
+
+3.40 (2017-02-20)
+-----------------
+
+- ZON-3707: Change wording and link on paywall
+
+- ZON-3670: Polish volume badge
+
+- BUG-659: Prevent sso urls from encoding in rawr config
+
+- BUG-661: Add a filename-based mime detection in addition to content-based; support vivi content-type 'file'
+
+- PERF: Don't load further tag properties from the whitelist
+
+
+3.39.1 (2017-02-16)
+-------------------
+
+- HOTFIX: Add general premoderation attribute for overlay
+
+- BUG-658: Let C1-Fake-Param trump C1 Header in Staging
+
+- FIX: Make cover images on volume overview page work again by fixing solr/lazyproxy
+
+- MAINT: Add ident property to rawrConfig
+
+
+3.39 (2017-02-15)
+-----------------
+
+- BUG-653: Redirect folder to /index for ZMO and ZCO
+
+- BUG-655: Show Z+ badge in ZMO for subscription content only
+
+- BUG-650: Update default volumeteaser text
+
+- BUG-649: Format link to volume page with leading zero
+
+- BUG-656: Use teaser title in solr results
+
+- BUG-630: Prevent unintentional overscrolling at image copyrights
+
+- MAINT: Skip broken content in feeds
+
+
+3.38 (2017-02-14)
 -----------------
 
 - ZON-3576: Transmit per-content premoderate flag
 
+- ZON-3654: Prevent accessing content via fbia.zeit.de
+
+- ZON-3656: Serve text and unknown content as raw bytes
+
+- ZON-3400: Show the volume cover of the article's product, if available
+
 - BUG-643: Define ressort_literally for Campus
 
 - BUG-640: Modernize Google Tagmanager Code
+
+- BUG-645: Prevent hp_overlay from building a dead end
+
+- MAINT: Polish printbox
 
 
 3.37.1 (2017-02-10)

@@ -150,8 +150,6 @@ class Application(object):
             'invalidate_community_maintenance',
             '/-comments/invalidate_maintenance')
         config.add_route('home', '/')
-        config.add_route('home-campus', '/campus/')
-        config.add_route('home-zmo', '/zeit-magazin/')
         config.add_route('login_state', '/login-state')
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-image', '/spektrum-image/*path')
@@ -170,13 +168,11 @@ class Application(object):
         # Route to post comments to a community service
         config.add_route('post_test_comments', '/admin/test-comments')
 
-        config.add_static_view(
-            name=self.settings.get('asset_prefix', '/static/latest'),
-            path='zeit.web.static:',
-            cache_max_age=ast.literal_eval(self.settings['assets_max_age']))
-
-        config.add_static_view(name=self.settings.get(
-            'jsconf_prefix', '/jsconf'), path='zeit.web.core:data/config')
+        if self.settings['serve_assets']:
+            config.add_static_view(
+                name=self.settings.get('asset_prefix', '/static/latest'),
+                path='zeit.web.static:', cache_max_age=ast.literal_eval(
+                    self.settings['assets_max_age']))
 
         config.add_renderer('jsonp', pyramid.renderers.JSONP(
             param_name='callback'))

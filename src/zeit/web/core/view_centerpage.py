@@ -88,7 +88,7 @@ class Centerpage(AreaProvidingPaginationMixin,
         return {'link': conf['volume_navigation_base'] % (
                     self.volume.year,
                     self.volume.volume),
-                'cover': self.volume.covers['printcover']}
+                'cover': self.volume.get_cover('printcover')}
 
     @zeit.web.reify
     def volume_next(self):

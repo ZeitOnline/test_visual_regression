@@ -978,15 +978,16 @@ def test_centerpage_teaser_is_clickable_en_block_for_touch_devices(
 
 
 def test_gallery_teaser_exists(testbrowser):
-    select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
-    assert len(select('.cp-region--gallery')) == 1
-    assert len(select('.cp-area--gallery')) == 1
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    regions = browser.cssselect('.cp-region--gallery')
+    areas = regions[0].cssselect('.cp-area--gallery')
+    teasers = areas[0].cssselect('.teaser-gallery ')
+    assert len(teasers) == 2
 
 
 def test_gallery_teaser_has_ressort_heading(testbrowser):
     select = testbrowser('/zeit-online/teaser-gallery-setup').cssselect
     title = select('.cp-area--gallery .section-heading__title')
-    assert len(title) == 1
     assert "Fotostrecken" in title[0].text
 
 
@@ -2612,18 +2613,25 @@ def test_register_teaser_has_zplus_register_badge(testbrowser):
         assert teaser.cssselect('.teaser-small__kicker-logo--zplus-register')
 
 
-def test_zplus_teaser_has_no_badge_in_print_ressort_area(testbrowser):
+def test_zplus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     teaser = browser.cssselect(
         '.cp-region--solo:nth-child(3) article.teaser-large')[0]
     assert not teaser.cssselect('.teaser-large__kicker-logo--zplus')
 
 
-def test_ressort_areas_have_ressort_title(testbrowser):
+def test_ressort_areas_have_ressort_title(testbrowser, datasolr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     areas = browser.cssselect('.cp-area--print-ressort')
     assert areas[0].cssselect('.cp-area__headline')[0].text == 'Politik'
     assert areas[1].cssselect('.cp-area__headline')[0].text == 'Wirtschaft'
+
+
+def test_ressort_areas_should_disintegrate(testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = []
+    browser = testbrowser('/zeit-online/centerpage/print-ressort')
+    assert len(browser.cssselect('.cp-area--print-ressort')) == 0
 
 
 def test_exclusive_areas_render_correctly(testbrowser):
@@ -2810,3 +2818,19 @@ def test_zett_icon_is_display_on_nextread(testbrowser):
 def test_zco_icon_is_display_on_nextread(testbrowser):
     browser = testbrowser('/zeit-online/article/simple-nextread-zco')
     assert browser.cssselect('article.nextread .nextread__kicker-logo--zco')
+
+
+def test_gallery_teaser_respects_hidden_slides(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    article = browser.cssselect('article[data-unique-id="{}"]'.format(
+        'http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer'))[0]
+    counter = article.cssselect('.teaser-gallery__counter')[0]
+    assert counter.text == '13 Fotos'
+
+
+def test_gallery_teaser_handles_articles_with_inline_galleries(testbrowser):
+    browser = testbrowser('/zeit-online/teaser-gallery-setup')
+    article = browser.cssselect('article[data-unique-id="{}"]'.format(
+        'http://xml.zeit.de/zeit-online/article/inline-gallery'))[0]
+    counter = article.cssselect('.teaser-gallery__counter')[0]
+    assert counter.text == '7 Fotos'

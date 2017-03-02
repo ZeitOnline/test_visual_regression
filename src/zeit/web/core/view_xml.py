@@ -1,16 +1,10 @@
 import logging
 
-from pyramid.response import FileIter
-from pyramid.response import Response
 import lxml.etree
 import lxml.objectify
-import magic
-import pyramid.httpexceptions
 
-from zeit.connector.interfaces import IResource
 import zeit.cms.content.interfaces
 import zeit.cms.interfaces
-import zeit.cms.repository.interfaces
 import zeit.content.article.interfaces
 import zeit.content.author.interfaces
 import zeit.content.cp.interfaces
@@ -31,8 +25,6 @@ log = logging.getLogger(__name__)
 #       convultion that is pyramid view predicate discrimination.
 
 @zeit.web.view_defaults(renderer='string')
-@zeit.web.view_config(context=zeit.cms.content.interfaces.IXMLContent,
-                      host_restriction='xml')
 @zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
                       host_restriction='xml')
 @zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor,
@@ -135,25 +127,3 @@ class XMLCenterpage(XMLContent):
     @property
     def xml(self):
         return zeit.content.cp.interfaces.IRenderedXML(self.context)
-
-
-@zeit.web.view_config(
-    context=zeit.cms.repository.interfaces.IDAVContent,
-    host_restriction='xml',
-    renderer='string')
-class NonXMLContent(zeit.web.core.view.Base):
-
-    def __call__(self):
-        super(NonXMLContent, self).__call__()
-        head = IResource(self.context).data.read(200)
-        IResource(self.context).data.close()
-        with magic.Magic(flags=magic.MAGIC_MIME_TYPE) as m:
-            file_type = m.id_buffer(head)
-        if file_type:
-            response = Response(
-                app_iter=FileIter(IResource(self.context).data),
-                content_type=file_type)
-            response.headers['Access-Control-Allow-Origin'] = '*'
-            return response
-        else:
-            raise pyramid.httpexceptions.HTTPNotFound()
