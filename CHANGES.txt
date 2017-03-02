@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - FIX: Fight the specificity war with brightcove on IE11
 
+- FIX: Render content-type rss feed
+
 - MAINT: Polish z+logo for ZMO teasers
 
 - MAINT: Tweak volume overview design
