@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3731: Update entry_service value
 
+- ZON-3603: Extend ZEIT Campus Navigation
+
 - BUG-641: Use ZON videoplayer in ZMO
 
 - BUG-637: Consider hidden images for gallery image counter
