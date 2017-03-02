@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - MAINT: Polish z+logo for ZMO teasers
 
+- MAINT: Tweak volume overview design
+
 - FEM-23: Add comment to framebuilder HTML
 
 
