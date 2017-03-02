@@ -8,6 +8,8 @@ POSTDEPLOY
 3.42 (unreleased)
 -----------------
 
+- ZON-3321: Add a new and shiny videoplayer button
+
 - ZON-3485: Inline portrait boxes
 
 - ZON-3603: Extend ZEIT Campus Navigation
