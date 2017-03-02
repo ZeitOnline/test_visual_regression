@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<links href="https://jobs.zeit.de/campus/welcher-beruf-passt-zu-mir" header="Welcher Beruf passt zu mir?" footer="Welcher Beruf passt zu mir?">
+    <link
+        title_flyout="Berufstest"
+        href="https://jobs.zeit.de/campus/berufstest"
+        cta_flyout="Berufspersönlichkeit entdecken">
+    </link>
+    <link
+        title_flyout="Absolventen Jobs"
+        href="https://jobs.zeit.de/campus/absolventen-jobs"
+        cta_flyout="Zu den Jobs">
+    </link>
+</links>
