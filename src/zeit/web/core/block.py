@@ -564,7 +564,7 @@ class NewsletterAdvertisement(Block):
     def image(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return self.context.image.uniqueId.replace(
-                'http://xml.zeit.de', conf['image_prefix'], 1)
+            'http://xml.zeit.de', conf['image_prefix'], 1)
 
 
 def _raw_html(xml):
