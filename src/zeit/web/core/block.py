@@ -277,8 +277,8 @@ class Liveblog(Block):
                         # return SEO ID using AMP theme
                         # 23 = zeit
                         # 24 = zeit-solo
-                        # 2x = zeit-amp
-                        if blog_theme_id == 23:
+                        # 27 = zeit-amp
+                        if blog_theme_id == 27:
                             return '{}-{}'.format(blog_id, seo['Id'])
 
 
