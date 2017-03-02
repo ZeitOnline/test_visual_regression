@@ -44,69 +44,97 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <cluster area="id-f7099ad5-d7d2-4a09-ac74-ed6fbc10f6d5" kind="solo" kind_title="Solo" visible="True" visible_mobile="True">
-        <region area="id-9c26ce0f-a9af-4419-9038-43cf7ed4348b" hide-dupes="True" kind="solo" visible="True" visible_mobile="True">
-            <container cp:type="teaser" module="zmo-leader-fullwidth" overlay_level="3" text_color="dark" visible="True" visible_mobile="True" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
-              <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
-            </container>
-        </region>
-    </cluster>
-    <cluster area="feature">
-      <region area="lead">
-        <container cp:type="teaser" module="zmo-square-large" visible="True" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3">
-          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
-        </container>
-        <container cp:type="teaser" module="zmo-square-large" visible="True" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def4">
-          <block href="http://xml.zeit.de/zeit-magazin/article/02" uniqueId="http://xml.zeit.de/zeit-magazin/article/02" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
-        </container>
-        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13">
-          <block href="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" uniqueId="http://xml.zeit.de/zeit-magazin/centerpage/article_image_asset" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
-        </container>
-        <container cp:type="teaser" module="zmo-landscape-small" cp:__name__="id-e5fec0f8-772a-42dc-8f8a-ab1559b814f5">
-          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
-        </container>
-        <container cp:type="teaser" module="zmo-landscape-large" cp:__name__="id-e5fec0f8-772a-42dc-8f8a-ab1559b814ff">
-          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
-        </container>
-      </region>
-      <region area="informatives">
-        <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f">
-          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" year="2008" issue="26" ressort="Lebensart" contenttype="article" publication-date="" expires="" date-last-modified="2014-03-17T11:58:05+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-03-17T09:58:02.437939+00:00"></block>
-        </container>
-        <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25455">
-          <block href="http://xml.zeit.de/zeit-magazin/article/01" uniqueId="http://xml.zeit.de/zeit-magazin/article/01" year="2014" issue="43" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2014-11-10T09:48:54+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-10T09:48:49.226076+00:00">
-          </block>
-        </container>
-        <container cp:type="teaser" module="zmo-upright" hide-dupes="True" visible="True" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25454">
-          <block href="http://xml.zeit.de/zeit-magazin/article/advertorial" uniqueId="http://xml.zeit.de/zeit-magazin/article/advertorial" year="2014" issue="43" ressort="Angebote" contenttype="article" publication-date="" expires="" date-last-modified="2014-11-10T09:48:54+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-11-10T09:48:49.226076+00:00">
-          </block>
-        </container>
-        <container cp:type="teaser" module="zmo-card-picture" hide-dupes="true" visible="true" cp:__name__="id-381c8f6a-dc39-40e3-a919-09aa41eaa7c2" background_color="f3ca20">
-          <block href="http://xml.zeit.de/zeit-magazin/article/martenstein-wideformat" uniqueid="http://xml.zeit.de/zeit-magazin/article/martenstein-wideformat" year="2014" issue="19" ressort="zeit-magazin" contenttype="article" publication-date="" expires="" author="maria exner" date-last-modified="2014-05-05t09:37:35+00:00" date-first-released="" date-last-published="" last-semantic-change="2014-05-05t09:37:21.413549+00:00">
-          </block>
+    <cluster area="id-f7099ad5-d7d2-4a09-ac74-ed6fbc10f6d5" kind="solo">
+      <region area="id-9c26ce0f-a9af-4419-9038-43cf7ed4348b" kind="solo">
+        <container module="zmo-leader-fullwidth" cp:__name__="id-7194a8a7-401e-479e-aad2-ca3e5925def3" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs"/>
         </container>
       </region>
     </cluster>
-    <cluster area="id-baa2ea9a-e2f6-4931-9c9e-b555968c598c" kind="trio" kind_title="Trio-Region" visible="True" visible_mobile="True">
-      <region area="id-c42d56d2-9d5a-4b93-a28b-c7e8219f7acd" automatic_type="query" count="9" hide-dupes="True" kind="trio" title="DAS LEBEN IST BUNT - IN JEDER BEZIEHUNG" visible="True" visible_mobile="True">
-        <container module="zmo-mtb-square" overlay_level="3" text_color="dark" visible="True" visible_mobile="True" cp:__name__="id-136cd0a5-84c3-4010-97d2-bf6a7b4130c4" cp:type="teaser">
-          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" uniqueId="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" year="2016" issue="49" ressort="zeit-magazin" serie="Beziehungen" contenttype="article" publication-date="" expires="" author="Susanne Mayer"></block>
+    <cluster area="id-497f3875-b4af-4396-bc18-8449d26b7bac" kind="duo">
+      <region area="id-e29a890c-5d03-4f10-88c0-75724a1b5264" kind="major">
+        <container module="zmo-square-large" cp:__name__="id-7e7ad7b1-436b-46c3-a82e-bd52d76ac95b" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/article/abo-leinwand"/>
         </container>
-        <container module="zmo-mtb-square" overlay_level="3" text_color="dark" visible="True" visible_mobile="True" cp:__name__="id-b5c2d03a-2d1e-4fef-ad62-88a2c3ce4970" cp:type="teaser">
-          <block href="http://xml.zeit.de/zeit-magazin/article/01" uniqueId="http://xml.zeit.de/zeit-magazin/article/01" year="2016" issue="47" ressort="zeit-magazin" serie="Beziehungen" contenttype="article" publication-date="" expires="" author="Wenke Husmann"></block>
+        <container module="zmo-landscape-small" cp:__name__="id-3d8caa23-ae05-4e60-9572-20ca379a8e13" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/article/zplus-zmo-register"/>
         </container>
-        <container module="zmo-mtb-square" overlay_level="3" text_color="dark" visible="True" visible_mobile="True" cp:__name__="id-87c81f4f-ebf0-4c1b-9073-d135346d9240" cp:type="teaser">
-          <block href="http://xml.zeit.de/zeit-magazin/article/advertorial" uniqueId="http://xml.zeit.de/zeit-magazin/article/advertorial" year="2016" issue="46" ressort="zeit-magazin" serie="Beziehungen" contenttype="article" publication-date="" expires="" author="Marin Majica"></block>
+        <container module="zmo-landscape-small" cp:__name__="id-e5fec0f8-772a-42dc-8f8a-ab1559b814f5" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs"/>
+        </container>
+        <container module="zmo-landscape-large" cp:__name__="id-e5fec0f8-772a-42dc-8f8a-ab1559b814ff" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/article/abo-briefmarke"/>
+        </container>
+        <container module="zmo-landscape-large-photo" cp:__name__="id-e5fec0f8-772a-42dc-8f8a-ab1559b814fa" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs"/>
+        </container>
+        <container module="zmo-upright-large" cp:__name__="id-7e7ad7b1-436b-46c3-a82e-bd52d76ac95a" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/article/zplus-zmo-register"/>
+        </container>
+      </region>
+      <region area="id-78c3a035-7099-4205-8dc5-3662bc9a7b32" kind="minor">
+        <container module="zmo-upright" cp:__name__="id-1e28ba2e-17a6-490f-91da-358833389d9f" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs"/>
+        </container>
+        <container module="zmo-upright" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25455" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/article/01"/>
+        </container>
+        <container module="zmo-print-cover" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25444" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/article/02"/>
+        </container>
+        <container module="zmo-upright" cp:__name__="id-8012d88f-ac3e-4e13-a3d4-ce39d8e25454" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/article/advertorial"/>
+        </container>
+        <container module="zmo-card-picture" cp:__name__="id-381c8f6a-dc39-40e3-a919-09aa41eaa7c2" cp:type="teaser" background_color="f3ca20">
+          <block href="http://xml.zeit.de/zeit-magazin/article/martenstein-wideformat"/>
         </container>
       </region>
     </cluster>
-    <cluster area="teaser-mosaic"/>
-    <supertitle>ZMO CP</supertitle>
-    <title>ZMO</title>
-    <subtitle>ZMO CP</subtitle>
+    <cluster area="id-7c243c08-5d54-41eb-ad08-25f5469e082c" kind="solo">
+      <region area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="buzzboard" title="Beliebt und Angesagt">
+        <container cp:type="cpextra" module="zmo-mostread" cp:__name__="id-a0f43ef7-29af-49f9-b8da-3cc989f4a003">
+          <cp_extra id="zmo-mostread"/>
+        </container>
+        <container cp:type="cpextra" module="zmo-mostliked" cp:__name__="id-c7d8c767-9f68-4a29-8ce9-2cf09a68340a">
+          <cp_extra id="zmo-mostliked"/>
+        </container>
+        <container cp:type="cpextra" module="zmo-mostcommented" cp:__name__="id-a067d15a-9fa8-4730-9c0f-56b406b586d6">
+          <cp_extra id="zmo-mostcommented"/>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-baa2ea9a-e2f6-4931-9c9e-b555968c598c" kind="trio">
+      <region area="id-c42d56d2-9d5a-4b93-a28b-c7e8219f7acd" kind="trio" title="Das Leben ist bunt - in jeder Beziehung">
+        <container module="zmo-mtb-square" cp:__name__="id-136cd0a5-84c3-4010-97d2-bf6a7b4130c4" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs"/>
+        </container>
+        <container module="zmo-mtb-square" cp:__name__="id-b5c2d03a-2d1e-4fef-ad62-88a2c3ce4970" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-magazin/article/01"/>
+        </container>
+        <container module="zmo-mtb-square" cp:__name__="id-87c81f4f-ebf0-4c1b-9073-d135346d9240" cp:type="teaser">
+          <block href="http://xml.zeit.de/zeit-online/article/zplus-zeit-register"/>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-3238e5bd-0b06-4a34-a250-58c6917ee263" kind="trio">
+      <region area="id-5b2fe2b9-dbf2-4c12-9938-3a046123e51a" kind="trio">
+        <container module="zmo-card-citation" cp:__name__="id-8edac1e6-7c40-499f-b9eb-259c45d6de08" cp:type="teaser" background_color="EDB887">
+          <block href="http://xml.zeit.de/zeit-magazin/article/martenstein-portraitformat"/>
+        </container>
+        <container module="zmo-card-picture" cp:__name__="id-bb06ddf3-ea52-4206-981e-b7f0ee4116fc" cp:type="teaser" background_color="E2654E">
+          <block href="http://xml.zeit.de/zeit-magazin/article/martenstein-wideformat"/>
+        </container>
+        <container module="zmo-card-flip-read" cp:__name__="id-ed242d4d-f311-45ea-a660-dbb3ec370e18" cp:type="teaser" background_color="F58C75">
+          <block href="http://xml.zeit.de/zeit-magazin/article/martenstein-transparenz-test"/>
+        </container>
+      </region>
+    </cluster>
+    <supertitle>CP</supertitle>
+    <title>Z+ Teaser</title>
+    <subtitle>Übersicht über alle Teaser-Typen</subtitle>
   </body>
   <teaser>
-    <title>ZMO</title>
-    <text>ZMO CP</text>
+    <title>Z+ Teaser</title>
+    <text>Übersicht über alle Teaser-Typen</text>
   </teaser>
 </centerpage>

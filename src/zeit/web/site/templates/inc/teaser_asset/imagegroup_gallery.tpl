@@ -5,7 +5,7 @@
     {{ lama.use_svg_icon('gallery', '{}__icon'.format(module_layout), view.package) }}
 
     <small class="{{ module_layout }}__counter">
-        {{- teaser.keys() | list | length | pluralize('Keine Fotos', 'Ein Foto', '{} Fotos') -}}
+        {{- teaser | get_gallery_images_count | pluralize('Keine Fotos', 'Ein Foto', '{} Fotos') -}}
     </small>
 
     {{ super() }}

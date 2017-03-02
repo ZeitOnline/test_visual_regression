@@ -1,21 +1,30 @@
-$mtb-teaser-width: remify(270px)
-$mtb-teaser-max-width: remify(320px)
 
 .teaser-mtb-square
 	@extend %teaser
-	margin: remify(0 auto 42px)
-	max-width: $mtb-teaser-max-width
+	margin-bottom: remify(40px)
+	max-width: remify(320px)
+	min-width: remify(270px)
+
+	+respond-min($break-0)
+		margin-left: remify(14px)
+		margin-right: remify(14px)
 	+respond-min($break-1)
-		width: $mtb-teaser-width
+		float: left // no-flexbox fallback
+		width: 45%
+	+respond-min($break-desktop-min)
+		width: 30%
 
 	&__media
 		@extend %teaser__media
 
 	&__title-box
-			@extend %teaser__title-box
+		@extend %teaser__title-box
 
 	&__text
 		@extend %teaser__text
+		+respond-max(em(360px))
+			padding-left: remify(14px)
+			padding-right: remify(14px)
 
 	&__kicker
 		@extend %teaser__kicker
