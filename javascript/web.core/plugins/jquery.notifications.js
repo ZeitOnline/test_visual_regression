@@ -7,7 +7,9 @@
                 msgRegistrationErrorWrongSubscription = '<div class="notification notification--error" tabindex="0">' +
                     'Leider haben Sie kein gültiges Abonnement für diesen Artikel. Bitte wählen Sie unten das gewünschte Abo.</div>',
                 msgAccountConfirmSuccess = '<div class="notification notification--success" tabindex="0">' +
-                    'Ihr Konto wurde bestätigt. Sie sind jetzt angemeldet.</div>',
+                    'Herzlich willkommen! Ihr Konto ist nun aktiviert.</div>',
+                msgChangeConfirmSuccess = '<div class="notification notification--success" tabindex="0">' +
+                    'Ihre Einstellungen wurden gespeichert. Viel Spaß!</div>',
                 removeHash = function() {
                     if ( 'replaceState' in history ) {
                         history.replaceState( null, document.title, location.pathname + location.search );
@@ -29,6 +31,10 @@
                     break;
                 case 'success-confirm-account':
                     $( msgAccountConfirmSuccess ).insertAfter( $header );
+                    removeHash();
+                    break;
+                case 'success-confirm-change':
+                    $( msgChangeConfirmSuccess ).insertAfter( $header );
                     removeHash();
                     break;
             }
