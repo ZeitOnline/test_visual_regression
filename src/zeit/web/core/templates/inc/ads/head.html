@@ -1,11 +1,5 @@
 {% if view.advertising_enabled %}
 <!-- ad controller head start -->
-<!-- gzip testing -->
-<script type="text/javascript">
-    var gzipEnabled = false;
-</script>
-<script type="text/javascript" src="http://scripts.zeit.de/iqd/iqd_gzip_test.js.gz"></script>
-
 
 <!-- adcontroller load -->
 <script type="text/javascript">
@@ -15,12 +9,10 @@
             var dm = window.location.href.toLowerCase();
             return dm.indexOf( 'iqdeployment=' ) > 1 ? dm.split( 'iqdeployment=' )[1].split( '&' )[0] : 'live';
         })(),
-        // conditionalize output of gzip fileending, to prevent code replication
-        gz_suffix = gzipEnabled ? '.gz' : '',
         // conditionalize output of cdn directory for mobile, to prevent code replication
         mob_suffix = window.Zeit.isMobileView() ? '_mob' : '';
 
-    document.write('<scr' + 'ipt src="http://scripts.zeit.de/iqd/cdn_zeit' + mob_suffix + '/' + iqd_mode + '/iqadcontroller.js' + gz_suffix + '"></scr' + 'ipt>');
+    document.write('<scr' + 'ipt src="http://scripts.zeit.de/iqd/cdn_zeit' + mob_suffix + '/' + iqd_mode + '/iqadcontroller.js"></scr' + 'ipt>');
 </script>
 
 <!-- mandanten object -->
