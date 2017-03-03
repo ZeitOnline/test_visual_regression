@@ -145,7 +145,8 @@ def test_asset_cache_header(config):
     response = requests.get('{}/static/latest/css/web.site/screen.css'.format(
         config['BASE_URL']))
     assert response.status_code == 200
-    assert response.headers.get('Cache-Control', '') == 'max-age=31536000'
+    assert response.headers.get(
+        'Cache-Control', '') == 'max-age=31536000, immutable'
 
 
 def test_responsecode_404(config):
