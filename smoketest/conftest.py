@@ -9,6 +9,7 @@ import selenium.webdriver.firefox.firefox_binary
 
 
 TESTCONFIG_STAGING = {
+    'ENV': 'STAGING',
     'BASE_URL': 'http://www.staging.zeit.de',
     'NEWSFEED_BASE_URL': 'http://newsfeed.staging.zeit.de',
     'MEMBER_BASE_URL': 'https://meine.staging.zeit.de',
@@ -17,11 +18,12 @@ TESTCONFIG_STAGING = {
 }
 
 TESTCONFIG_PRODUCTION = {
+    'ENV': 'PRODUCTION',
     'BASE_URL': 'http://www.zeit.de',
     'NEWSFEED_BASE_URL': 'http://newsfeed.zeit.de',
     'MEMBER_BASE_URL': 'https://meine.zeit.de',
-    'MEMBER_USERNAME': 'thomas.strothjohann+unmoderiert1@apps.zeit.de',
-    'MEMBER_PASSWORD': 'unmoderierteins'
+    'MEMBER_USERNAME': 'leser-moderiert@example.com',
+    'MEMBER_PASSWORD': 'pytestEnd2End'
 }
 
 
