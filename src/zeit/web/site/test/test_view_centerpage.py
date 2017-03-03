@@ -2721,22 +2721,21 @@ def test_volume_overview_has_correct_pagination(testbrowser):
 
 
 def test_hpoverlay_toggle_toggles_html_output(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': True}.get)
+    active = zope.component.getUtility(
+        zeit.web.core.interfaces.ISettings).get('breaking_news_config')
     browser = testbrowser('/zeit-online/slenderized-index')
-    assert browser.cssselect('#overlay-wrapper')
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': False}.get)
-    browser = testbrowser('/zeit-online/slenderized-index')
-    assert not browser.cssselect('#overlay-wrapper')
+    if active:
+        assert browser.cssselect('#overlay-wrapper')
+    else:
+        assert not browser.cssselect('#overlay-wrapper')
 
 
 def test_hpoverlay_html_output_is_not_on_articles(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': True}.get)
+    active = zope.component.getUtility(
+        zeit.web.core.interfaces.ISettings).get('breaking_news_config')
     browser = testbrowser('/zeit-online/article/simple')
-    assert not browser.cssselect('#overlay-wrapper')
+    if active:
+        assert not browser.cssselect('#overlay-wrapper')
 
 
 def test_d17_icon_feature_toggle_is_working(monkeypatch, testbrowser):
