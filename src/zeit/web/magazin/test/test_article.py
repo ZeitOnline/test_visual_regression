@@ -735,19 +735,9 @@ def test_article_has_linked_image(testbrowser):
     assert browser.xpath('//a[@href="http://www.test.de"]/img')
 
 
-@pytest.mark.skipif(True,
-                    reason="We need a way to mock liveblog in tests")
-def test_article02_uses_esi(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/article/02')
-    blog = WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.ID, "livedesk-root")))
-    assert blog.is_displayed(), 'ESI Liveblog not displayed'
-
-
 def test_article02_should_have_esi_include(testbrowser):
     browser = testbrowser('/zeit-magazin/article/02')
-    assert len(browser.cssselect('main include')) == 3
+    assert len(browser.cssselect('main include')) == 2
 
 
 @pytest.mark.parametrize('path, selector', [
