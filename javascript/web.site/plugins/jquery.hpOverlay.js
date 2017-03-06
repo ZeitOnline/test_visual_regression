@@ -10,7 +10,7 @@
  *
  * @author Anika Szuppa
  * @author Nico Brünjes
- * @version 1.0
+ * @version 1.01
  *
  * @requires ZEIT-Lib
  */
@@ -22,7 +22,7 @@
         this.activeElement = null;
         this.cookieValue = Zeit.cookieRead( 'overlaycanceled' );
         this.initialized = false;
-        this.interval = ( parseInt( Zeit.view.get( 'hp_overlay_interval' ), 10 ) || 120 ) * 1000;
+        this.interval = ( parseInt( Zeit.hpOverlay.interval, 10 ) || 120 ) * 1000;
         this.isLiveServer = /^(www\.)?zeit\.de$/.test( window.location.hostname );
         this.options = {
             cookieTimeInDays: 1.5,
@@ -238,7 +238,7 @@
     // jquery plugin
     $.extend({
         hpOverlay: function() {
-            if ( Zeit.toggles.get( 'hp_overlay' ) ) {
+            if ( Zeit.hpOverlay.active ) {
                 new Overlay();
             }
         }

@@ -587,7 +587,6 @@ def test_article_should_have_correct_js_view(testbrowser):
     assert "'ressort': \"zeit-magazin\"," in bc
     assert "'sub_ressort': \"mode-design\"," in bc
     assert "'type': \"article\"," in bc
-    assert "'hp_overlay_interval': 78," in bc
     assert "'update_signals_comments_interval': 20," in bc
     assert "'update_signals_time_interval': 60," in bc
     assert "'paywall': null," in bc
@@ -600,7 +599,6 @@ def test_centerpage_should_have_correct_js_view(testbrowser):
     assert "'ressort': \"lebensart\"," in bc
     assert "'sub_ressort': \"leben\"," in bc
     assert "'type': \"centerpage\"," in bc
-    assert "'hp_overlay_interval': 78," in bc
     assert "'update_signals_comments_interval': 20," in bc
     assert "'update_signals_time_interval': 60," in bc
     assert "'paywall': null," in bc
@@ -614,7 +612,6 @@ def test_gallery_should_have_correct_js_view(testbrowser):
     assert "'sub_ressort': \"leben\"," in bc
     assert "'ressort': \"zeit-magazin\"," in bc
     assert "'type': \"gallery\"," in bc
-    assert "'hp_overlay_interval': 78," in bc
     assert "'update_signals_comments_interval': 20," in bc
     assert "'update_signals_time_interval': 60," in bc
     assert "'paywall': null," in bc

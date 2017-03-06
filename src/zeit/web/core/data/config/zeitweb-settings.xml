@@ -41,7 +41,8 @@
   <setting name="caching_time_videostill" xsi:type="xsd:int">35</setting>
   <setting name="caching_time_external" xsi:type="xsd:int">15</setting>
 
-  <!-- homepage hp overlay settings, reminder on/off is now a feature-toggle -->
+  <!-- homepage hp overlay settings -->
+  <setting name="hp_overlay_active" xsi:type="xsd:boolean">true</setting>
   <!-- homepage hp overlay interval, in seconds -->
   <setting name="hp_overlay_interval" xsi:type="xsd:int">78</setting>
   <!-- updateSignals settings, reminder on/off is now a feature toggle -->

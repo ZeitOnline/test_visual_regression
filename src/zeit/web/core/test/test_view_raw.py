@@ -1,5 +1,4 @@
 import pytest
-import re
 import requests
 
 
@@ -23,8 +22,9 @@ def test_renders_xml_content(testserver, hostname):
         '%s/config/community_maintenance.xml' % testserver.url,
         headers={'Host': hostname + '.zeit.de'})
     assert r.status_code == 200
-    pattern = re.compile('(application|text)\/xml;\ charset=UTF-8')
-    assert pattern.match(r.headers['content-type'])
+    # As of libmagic 5.30 our meta files are recognised as text/xml (ND)
+    assert r.headers['content-type'] in (
+        'application/xml; charset=UTF-8', 'text/xml; charset=UTF-8')
     assert r.headers['Access-Control-Allow-Origin'] == '*'
     assert 'maintenance' in r.content
 
@@ -54,7 +54,9 @@ def test_renders_rss_feeds(testserver, hostname):
         '%s/davcontent/feed.rss' % testserver.url,
         headers={'Host': hostname + '.zeit.de'})
     assert r.status_code == 200
-    assert r.headers['content-type'] == 'application/xml; charset=UTF-8'
+    # As of libmagic 5.30 our meta files are recognised as text/xml (ND)
+    assert r.headers['content-type'] in (
+        'application/xml; charset=UTF-8', 'text/xml; charset=UTF-8')
     assert r.headers['Access-Control-Allow-Origin'] == '*'
     assert 'heise online' in r.content
 

@@ -6,6 +6,10 @@
         jsconfHost: '{{ request.jsconf_host }}',
         communityHost: '{{ request.registry.settings.community_host }}',
         cpVideoPlayerId: '{{ settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') }}',
+        hpOverlay: {
+            active: {{ 'true' if settings('hp_overlay_active', False) else 'false' }},
+            interval: '{{ settings('hp_overlay_interval') }}'
+        },
         view: {
             {% for key, value in view.js_vars -%}
                 '{{ key }}': {{ value | tojson | safe }},
