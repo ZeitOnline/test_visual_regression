@@ -2720,22 +2720,23 @@ def test_volume_overview_has_correct_pagination(testbrowser):
     meta_robots.get('content') == 'index,follow,noodp,noydir,noarchive'
 
 
-def test_hpoverlay_toggle_toggles_html_output(monkeypatch, testbrowser):
-    active = zope.component.getUtility(
-        zeit.web.core.interfaces.ISettings).get('hp_overlay_active')
+def test_hpoverlay_settings_toggles_html_output(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    conf['hp_overlay_active'] = True
     browser = testbrowser('/zeit-online/slenderized-index')
-    if active:
-        assert browser.cssselect('#overlay-wrapper')
-    else:
-        assert not browser.cssselect('#overlay-wrapper')
+    assert browser.cssselect('#overlay-wrapper')
+
+    conf['hp_overlay_active'] = False
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert not browser.cssselect('#overlay-wrapper')
 
 
-def test_hpoverlay_html_output_is_not_on_articles(monkeypatch, testbrowser):
-    active = zope.component.getUtility(
-        zeit.web.core.interfaces.ISettings).get('hp_overlay_active')
+def test_hpoverlay_html_output_is_not_on_articles(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['hp_overlay_active'] = True
     browser = testbrowser('/zeit-online/article/simple')
-    if active:
-        assert not browser.cssselect('#overlay-wrapper')
+    assert not browser.cssselect('#overlay-wrapper')
 
 
 def test_d17_icon_feature_toggle_is_working(monkeypatch, testbrowser):
