@@ -2722,7 +2722,7 @@ def test_volume_overview_has_correct_pagination(testbrowser):
 
 def test_hpoverlay_toggle_toggles_html_output(monkeypatch, testbrowser):
     active = zope.component.getUtility(
-        zeit.web.core.interfaces.ISettings).get('breaking_news_config')
+        zeit.web.core.interfaces.ISettings).get('hp_overlay_active')
     browser = testbrowser('/zeit-online/slenderized-index')
     if active:
         assert browser.cssselect('#overlay-wrapper')
@@ -2732,7 +2732,7 @@ def test_hpoverlay_toggle_toggles_html_output(monkeypatch, testbrowser):
 
 def test_hpoverlay_html_output_is_not_on_articles(monkeypatch, testbrowser):
     active = zope.component.getUtility(
-        zeit.web.core.interfaces.ISettings).get('breaking_news_config')
+        zeit.web.core.interfaces.ISettings).get('hp_overlay_active')
     browser = testbrowser('/zeit-online/article/simple')
     if active:
         assert not browser.cssselect('#overlay-wrapper')
