@@ -90,10 +90,10 @@ class Authorbox(Block):
 class Portraitbox(Block):
 
     def __init__(self, model_block):
-        if getattr(model_block, 'text'):
-            self.text = self._author_text(model_block.text)
-        if getattr(model_block, 'name'):
-            self.name = model_block.name
+        pbox = model_block.references
+        if zeit.content.portraitbox.interfaces.IPortraitbox.providedBy(pbox):
+            self.text = self._author_text(pbox.text)
+            self.name = pbox.name
 
     def _author_text(self, text):
         # not the most elegant solution, but it gets sh*t done
