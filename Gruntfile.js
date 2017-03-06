@@ -422,10 +422,10 @@ module.exports = function(grunt) {
             },
             livereload: {
                 // This target doesn't run any tasks
-                // But when a file in `dist/css/*` is edited it will trigger the live reload
+                // But when a file in e.g. `dist/css/*` is changed it will trigger the live reload
                 // So when sass compiles the files, it will only trigger live reload on
                 // the css files and not on the scss files
-                files: [ 'src/zeit/web/static/css/**/*.css' ],
+                files: [ project.codeDir + 'css/**/*.css', project.codeDir + 'js/*.js' ],
                 options: {
                     livereload: true
                 }

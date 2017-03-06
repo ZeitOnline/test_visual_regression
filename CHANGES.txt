@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - FEM-34: Remove gzip test from AdController
 
+- FEM-32: Reactivate live reload
+
 - MAINT: Add notification for changed account settings, change registration wording
 
 
