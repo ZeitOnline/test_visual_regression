@@ -8,11 +8,15 @@ POSTDEPLOY
 3.43 (unreleased)
 -----------------
 
-- ZON-3485: Rollback, the feature is broken
-
 - FEM-34: Remove gzip test from AdController
 
 - MAINT: Add notification for changed account settings, change registration wording
+
+
+3.42.1 (2017-03-06)
+-------------------
+
+- ZON-3485: Rollback, the feature is broken
 
 
 3.42 (2017-03-02)
