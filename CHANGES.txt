@@ -8,6 +8,8 @@ POSTDEPLOY
 3.43 (unreleased)
 -----------------
 
+- ZON-3485: Rollback, the feature is broken
+
 - FEM-34: Remove gzip test from AdController
 
 - FEM-25: Refactor HP overlay
