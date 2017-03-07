@@ -8,7 +8,6 @@
   <dummy>false</dummy>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
-  <hp_overlay>true</hp_overlay>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
   <overscrolling>true</overscrolling>

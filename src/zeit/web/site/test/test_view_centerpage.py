@@ -2720,21 +2720,21 @@ def test_volume_overview_has_correct_pagination(testbrowser):
     meta_robots.get('content') == 'index,follow,noodp,noydir,noarchive'
 
 
-def test_hpoverlay_toggle_toggles_html_output(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': True}.get)
+def test_hpoverlay_settings_toggles_html_output(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+
+    conf['hp_overlay_active'] = True
     browser = testbrowser('/zeit-online/slenderized-index')
     assert browser.cssselect('#overlay-wrapper')
 
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': False}.get)
+    conf['hp_overlay_active'] = False
     browser = testbrowser('/zeit-online/slenderized-index')
     assert not browser.cssselect('#overlay-wrapper')
 
 
-def test_hpoverlay_html_output_is_not_on_articles(monkeypatch, testbrowser):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': True}.get)
+def test_hpoverlay_html_output_is_not_on_articles(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['hp_overlay_active'] = True
     browser = testbrowser('/zeit-online/article/simple')
     assert not browser.cssselect('#overlay-wrapper')
 

@@ -1087,22 +1087,19 @@ def test_c1_get_param_should_trump_http_header(testserver):
 def test_js_toggles_are_correctly_returned(
         application, dummy_request, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': True, 'update_signals': False}.get)
+        'update_signals': False}.get)
     view = zeit.web.core.view.Base(None, None)
-    assert ('hp_overlay', True) in view.js_toggles
     assert ('update_signals', False) in view.js_toggles
 
 
 def test_js_toggles_are_correctly_displayed(
         monkeypatch, selenium_driver, testserver):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': True, 'update_signals': False}.get)
+        'update_signals': False}.get)
     driver = selenium_driver
     driver.get('%s/zeit-online/index' % testserver.url)
-    hpo = driver.execute_script('return Zeit.toggles.hp_overlay')
     uds = driver.execute_script('return Zeit.toggles.update_signals')
 
-    assert hpo
     assert not uds
 
 
