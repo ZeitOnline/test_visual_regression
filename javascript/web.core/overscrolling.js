@@ -29,7 +29,7 @@ define( [
         scrollToTrigger: true
     },
     config,
-    debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
+    debug = location.href.indexOf( 'debug-overscrolling' ) !== -1,
     isActive = function() {
         var isActivated = true,
             message,
