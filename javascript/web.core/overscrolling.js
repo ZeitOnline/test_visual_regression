@@ -14,7 +14,7 @@ define( [
     var defaults = {
         documentMinHeight: 800,
         jumpHash: '#overscroll-article',
-        jumpTo: 'http://www.zeit.de/index',
+        jumpTo: Zeit.actualHost + 'index' || 'http://www.zeit.de/index',
         livePreview: false,
         overscrollElement: '#overscrolling',
         previewAreaAdress: '/index/area/no-1',
