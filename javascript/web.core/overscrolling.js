@@ -35,8 +35,8 @@ define( [
             message,
             index,
             status = [{
-                isActive: Zeit.toggles.get( 'overscrolling' ),
-                message: 'feature toggle is off or missing'
+                isActive: Zeit.overscrollingActive,
+                message: 'active setting is off or missing'
             }, {
                 isActive: $( document ).height() >= config.documentMinHeight,
                 message: 'documentMinHeight not matched'
