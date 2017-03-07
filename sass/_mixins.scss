@@ -377,6 +377,18 @@
 	);
 }
 
+@mixin zon-gate-button($base-color: #b91109, $margin: 0) {
+	@include zon-button($background-color: rgba($base-color, 1),
+	                    $hover-background-color: darken(rgba($base-color, 1), 10%),
+	                    $color: $white,
+	                    $hover-color: $white,
+	                    $visited-color: $white,
+	                    $margin: $margin,
+	                    $padding: remify(10px 16px),
+	                    $disabled: false
+	);
+}
+
 // mac font smoothing switching
 // please use extremely carefully http://usabilitypost.com/2012/11/05/stop-fixing-font-smoothing/
 // rather use case may be **light text on dark background**
