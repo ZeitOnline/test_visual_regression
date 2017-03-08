@@ -170,7 +170,7 @@ POSTDEPLOY
 
 - ZON-3664: Add zplus logo to register paywall
 
-- ZON-3687: Show account confirm message after successful registration
+- ZON-3678: Show account confirm message after successful registration
 
 - BUG-618: Reapply font-family for form elements (e.g. buttons)
 
