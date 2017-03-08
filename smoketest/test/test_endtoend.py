@@ -33,25 +33,6 @@ def test_newsfeeds(config):
     assert resp.status_code == 200
 
 
-def test_centerpages_contain_teasers(config):
-    browser = zope.testbrowser.browser.Browser()
-
-    # OPTIMIZE: use real HTML/CSS selectors
-    # assert len(browser.cssselect('article[class*=teaser]')) > 50
-
-    browser.open('{}/index'.format(config['BASE_URL']))
-    assert browser.contents.count('<article class="teaser-') > 50
-
-    browser.open('{}/politik/index'.format(config['BASE_URL']))
-    assert browser.contents.count('<article class="teaser-') > 20
-
-    browser.open('{}/zeit-magazin/index'.format(config['BASE_URL']))
-    assert browser.contents.count('<article class="teaser-') > 20
-
-    browser.open('{}/campus/index'.format(config['BASE_URL']))
-    assert browser.contents.count('<article class="teaser-') > 20
-
-
 def test_login_and_logout(config):
     b = zope.testbrowser.browser.Browser()
     b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
@@ -187,3 +168,19 @@ def test_asset_cache_header(config):
 def test_responsecode_404(config):
     resp = requests.get('{}/gipsnet'.format(config['BASE_URL']))
     assert resp.status_code == 404
+
+
+def test_centerpages_contain_teasers(config, testbrowser):
+
+    browser = testbrowser('{}/index'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')) > 50
+
+    browser = testbrowser('{}/politik/index'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')) > 20
+
+    browser = testbrowser(
+        '{}/zeit-magazin/index'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')) > 20
+
+    browser = testbrowser('{}/campus/index'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')) > 20
