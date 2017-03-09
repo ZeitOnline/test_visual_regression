@@ -220,6 +220,7 @@ module.exports = function(grunt) {
                 src: [ project.sourceDir + 'javascript' ]
             },
             options: {
+                fix: true,
                 configFile: project.sourceDir + '.eslintrc',
                 ignorePattern: [
                     'javascript/vendor',
