@@ -13,7 +13,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $commentForm = $( '#comment-form' ),
         uid = $commentForm.attr( 'data-uid' ),
         slideDuration = 300,
-        inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
+        inputEvent = ( 'oninput' in document.createElement( 'input' ) ) ? 'input' : 'keypress',
         sendurl = window.location.href;
 
     /**
@@ -24,7 +24,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     function toggleRecommendationLink( link ) {
         var label;
 
-        if ( link.hasClass( 'comment__reaction--active' )) {
+        if ( link.hasClass( 'comment__reaction--active' ) ) {
             label = 'Empfehlen';
         } else {
             label = 'Empfohlen';
@@ -231,9 +231,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $.ajax({
             url: sendurl,
             data: {
-                'ajax':     'true',
-                'action':   'recommend',
-                'pid':      cid
+                'ajax': 'true',
+                'action': 'recommend',
+                'pid': cid
             },
             dataType: 'json',
             method: 'POST',
@@ -275,9 +275,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $.ajax({
             url: sendurl,
             data: {
-                'ajax':     'true',
-                'action':   action,
-                'pid':      cid
+                'ajax': 'true',
+                'action': action,
+                'pid': cid
             },
             dataType: 'json',
             method: 'POST'
@@ -333,10 +333,10 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $.ajax({
             url: sendurl,
             data: {
-                'ajax':     'true',
-                'action':   'report',
-                'pid':      input.pid.value,
-                'comment':  input.comment.value
+                'ajax': 'true',
+                'action': 'report',
+                'pid': input.pid.value,
+                'comment': input.comment.value
             },
             dataType: 'json',
             method: 'POST',
@@ -390,10 +390,10 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $form.find( '.button' ).prop( 'disabled', true );
 
         var data = {
-            'ajax':      'true',
-            'action':    'comment',
-            'pid':       input.pid.value,
-            'comment':   input.comment.value
+            'ajax': 'true',
+            'action': 'comment',
+            'pid': input.pid.value,
+            'comment': input.comment.value
         };
 
         if ( input.username ) {
@@ -616,7 +616,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             'complete': function() {
                 $repliesToShow.slice( 5 ).show();
             }
-        } );
+        });
 
     }
 
@@ -631,7 +631,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             'complete': function() {
                 $answers.slice( 5 ).hide();
             }
-        } );
+        });
     }
 
     function jumpToComment() {

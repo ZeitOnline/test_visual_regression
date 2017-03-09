@@ -3,7 +3,7 @@
  * @author anika.szuppa@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
 
     function Jobbox( element ) {
         var box = $( element );
@@ -30,7 +30,7 @@
         this.button.attr( 'href', link );
 
         if ( !initial ) {
-            job.velocity( 'transition.slideUpIn', { duration: 500, display: 'block' } );
+            job.velocity( 'transition.slideUpIn', { duration: 500, display: 'block' });
         }
 
         job.velocity( 'transition.slideUpOut', {

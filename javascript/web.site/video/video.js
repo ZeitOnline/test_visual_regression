@@ -49,7 +49,7 @@ define([ 'jquery' ],
                                 'src="//players.brightcove.net/{{accountId}}/' +
                                 '{{playerId}}_default/index.html?videoId={{videoId}}" ' +
                                 'allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe></div>',
-                        html5:  '<div class="video-player">' +
+                        html5: '<div class="video-player">' +
                                 '<video id="player-{{videoId}}" data-account="{{accountId}}" ' +
                                 'data-player="{{playerId}}" data-embed="{{embed}}" data-video-id="{{videoId}}" ' +
                                 'class="video-js video-player__videotag" preload="none"></video></div>'
@@ -59,7 +59,7 @@ define([ 'jquery' ],
                 if ( typeof videoId === 'undefined' && defaults.elem.length < 1 ) {
                     return;
                 } else {
-                    snippet = templates[defaults.type]
+                    snippet = templates[ defaults.type ]
                             .replace( /\{{accountId}}/g, defaults.playerData.accountId )
                             .replace( /\{{playerId}}/g, defaults.playerData.playerId )
                             .replace( /\{{videoId}}/g, videoId )
@@ -84,7 +84,7 @@ define([ 'jquery' ],
                             'context': videoId
                         });
                         // require the script
-                        defaults.players[ videoId ]( [ 'require', 'bc' ] );
+                        defaults.players[ videoId ]([ 'require', 'bc' ]);
                     }
                     return defaults.elem;
                 }

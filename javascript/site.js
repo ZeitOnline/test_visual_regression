@@ -48,7 +48,7 @@ require([
     if ( article ) {
         articledate.init();
         comments.init();
-        overscrolling.init( { livePreview: true } );
+        overscrolling.init({ livePreview: true });
     }
 
     adblockCount.init();

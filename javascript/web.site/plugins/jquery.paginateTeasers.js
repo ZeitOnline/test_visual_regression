@@ -43,19 +43,19 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
             //}
 
             $galleryArea.find( selector ).velocity( 'transition.slideLeftBigOut', {
-                    duration: slidingDuration,
-                    stagger: 50,
-                    complete: function( elements ) {
-                        $( elements ).parent().replaceWith( $teasers.parent() );
-                        images.scale( $teasers );
-                        $teasers.velocity( 'transition.slideRightBigIn', {
-                            display: '', // remove the property altogether and return to previous display value from CSS
-                            duration: slidingDuration,
-                            stagger: 50
-                        });
-                    }
-                });
-        }).fail(function( ) {
+                duration: slidingDuration,
+                stagger: 50,
+                complete: function( elements ) {
+                    $( elements ).parent().replaceWith( $teasers.parent() );
+                    images.scale( $teasers );
+                    $teasers.velocity( 'transition.slideRightBigIn', {
+                        display: '', // remove the property altogether and return to previous display value from CSS
+                        duration: slidingDuration,
+                        stagger: 50
+                    });
+                }
+            });
+        }).fail( function( ) {
             fallbackUrl = $this.attr( 'href' );
             if ( fallbackUrl ) {
                 window.location.href = fallbackUrl;
@@ -78,17 +78,17 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
         // new items) we use velocity.
 
         $visibleTeasers.velocity( 'transition.slideLeftBigOut', {
-                duration: slidingDuration,
-                stagger: 50,
-                complete: function( elements ) {
-                    $visibleTeasers.remove();
-                    $hiddenTeasers.velocity( 'transition.slideRightBigIn', {
-                        display: '', // remove the property altogether and return to previous display value from CSS
-                        duration: slidingDuration,
-                        stagger: 50
-                    });
-                }
-            });
+            duration: slidingDuration,
+            stagger: 50,
+            complete: function() {
+                $visibleTeasers.remove();
+                $hiddenTeasers.velocity( 'transition.slideRightBigIn', {
+                    display: '', // remove the property altogether and return to previous display value from CSS
+                    duration: slidingDuration,
+                    stagger: 50
+                });
+            }
+        });
     }
 
     /**

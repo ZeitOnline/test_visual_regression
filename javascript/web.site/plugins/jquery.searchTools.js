@@ -12,7 +12,7 @@
 * @version 1.0
 *
 */
-(function( $ ) {
+( function( $ ) {
 
     function toggleOptions() {
         $( this ).closest( '.search-options' )

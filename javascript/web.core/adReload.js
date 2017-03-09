@@ -4,12 +4,12 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
+define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
     var configUrl = Zeit.jsconfHost + '/config_adreload.json',
-    config = false,
-    timer = {},
-    clickCounter = [],
+        config = false,
+        timer = {},
+        clickCounter = [];
 
     /**
      * logging helper - wraps if debug --> console.log
@@ -46,7 +46,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
 
         // consecutive events
-        if ( clickCounter[ myconfig.name ] ) {
+        if ( clickCounter[ myconfig.name ]) {
             // gained configured interval
             if ( ++clickCounter[ myconfig.name ] % myconfig.interval === 0 ) {
                 log( 'max click' );
@@ -115,7 +115,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         if (
             window.location.pathname.indexOf( myconfig.slug ) < 0 ||
             $.inArray( Zeit.view.type, myconfig.pagetypes ) < 0
-        ) { return; }
+        ) {
+            return;
+        }
+
         if ( checkClickCount( myconfig ) ) {
             // reload Ads
             if ( typeof window.IQD_ReloadHandle === 'function' ) {
@@ -162,8 +165,8 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
 
         if ( typeof messageData.name !== 'string' ||
-                typeof config[messageData.name] === 'undefined' ||
-                !isValidOrigin( config[messageData.name].origin, event ) ) {
+                typeof config[ messageData.name ] === 'undefined' ||
+                !isValidOrigin( config[ messageData.name ].origin, event ) ) {
             log( 'error', 'messageData not correctly set' );
             return;
         }

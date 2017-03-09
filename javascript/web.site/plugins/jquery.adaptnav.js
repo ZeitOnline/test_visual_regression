@@ -5,7 +5,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.2
  */
-(function( $ ) {
+( function( $ ) {
 
     /**
     * See (http://jquery.com/)
@@ -72,7 +72,7 @@
                 // trigger adaption on resize
                 $( window ).on( 'resize', $.debounce( function() {
                     self.adapt();
-                }, 100 ));
+                }, 100 ) );
                 // BUG-549
                 // safari gets the width of pseudo elements wrong
                 // found no better fix than measuring again late in process

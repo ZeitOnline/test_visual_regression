@@ -34,12 +34,13 @@ define([ 'jquery' ], function( $ ) {
          */
         init: function() {
             var track = {
-                event: 'dataLayerEvent',
-                dataLayerEventCategory: 'AdBlockerDetection',
-                dataLayerEventAction: false
-            },
-            debug = window.location.search.indexOf( 'ablocktestdebug' ) !== -1;
-            $( window ).on( 'load', function( evt ) {
+                    event: 'dataLayerEvent',
+                    dataLayerEventCategory: 'AdBlockerDetection',
+                    dataLayerEventAction: false
+                },
+                debug = window.location.search.indexOf( 'ablocktestdebug' ) !== -1;
+
+            $( window ).on( 'load', function() {
                 var $elem = $( '#ad3999' );
                 if ( $elem.length > 0 ) {
                     if ( oldadblocktest( $elem ) ) {

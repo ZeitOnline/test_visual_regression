@@ -14,7 +14,7 @@
 * @author Nico Bruenjes
 */
 
-(function( $, window, document ) {
+( function( $, window, document ) {
 
     /**
     * See (http://jquery.com/)
@@ -86,7 +86,7 @@
             getData: function( name ) {
                 var data = JSON.parse( localStorage.getItem( defaults.storageName ) );
                 if ( typeof name !== 'undefined' ) {
-                    return data !== null ? data[name] : 0;
+                    return data !== null ? data[ name ] : 0;
                 } else {
                     return data !== null ? data : {};
                 }
@@ -153,7 +153,7 @@
 
     $.fn.referrerCount = function( arg ) {
         if ( hasLocalstorage() ) {
-            if ( methods[ arg ] ) {
+            if ( methods[ arg ]) {
                 return methods[ arg ].apply( this, Array.prototype.slice.call( arguments, 1 ) );
             } else if ( typeof method === 'object' || !arg ) {
                 return methods.init.apply( this, arguments );

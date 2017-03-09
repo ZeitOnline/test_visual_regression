@@ -15,7 +15,7 @@
  * @requires ZEIT-Lib
  */
 
-(function( $, window, document, Zeit ) {
+( function( $, window, document, Zeit ) {
     'use strict';
 
     var Overlay = function() {
@@ -110,7 +110,7 @@
         var that = this;
         $( document ).on( 'keypress.modal scroll.modal click.modal mousemove.modal', $.debounce( function() {
             that.setTimeout();
-        }, that.options.resetInterval ));
+        }, that.options.resetInterval ) );
     };
 
     // reset event unbinding
@@ -130,7 +130,9 @@
 
         // start new timer
         if ( !this.visible ) {
-            this.timer = window.setTimeout( function() { that.fetchData(); }, interval  );
+            this.timer = window.setTimeout( function() {
+                that.fetchData();
+            }, interval );
             this.log( 'New timer started for ' + interval / 1000 / 60 + ' minutes' );
         }
     };
@@ -147,7 +149,7 @@
         // data is only fetched if document is visible
         if ( !document.hidden ) {
             var that = this;
-            $.ajax( that.options.endpoint, { dataType: 'json' } ).done( function( data ) {
+            $.ajax( that.options.endpoint, { dataType: 'json' }).done( function( data ) {
                 that.log( 'Done: old timestamp: ' + that.timestamp + ', new timestamp: ' + data.last_published_semantic );
                 if ( !that.timestamp ) {
                     that.timestamp = data.last_published_semantic;
@@ -207,24 +209,24 @@
         $( document ).on( 'click.hpoverlay', '.overlay__text-button', function( event ) {
             event.preventDefault();
             that.cancel();
-        } );
+        });
         // reload
         $( document ).on( 'click.hpoverlay', '.overlay, .overlay__button', function( event ) {
             event.preventDefault();
             that.reload();
-        } );
+        });
         // escape key
         $( window ).on( 'keyup.hpoverlay', function( event ) {
             if ( event.which === 27 ) {
                 that.cancel();
             }
-        } );
+        });
         // focus
         $( document ).on( 'focus.hpoverlay', 'body', function( event ) {
             if ( that.visible && that.wrapper.find( event.target ).length === 0 ) {
                 that.wrapper.find( '.overlay__button' ).focus();
             }
-        } );
+        });
         this.initialized = true;
     };
 

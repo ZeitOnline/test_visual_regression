@@ -3,7 +3,7 @@
  * @author thomas.puppe@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
 
     /**
     * See (http://jquery.com/)

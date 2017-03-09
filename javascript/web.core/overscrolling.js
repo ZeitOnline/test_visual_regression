@@ -3,14 +3,14 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.2
  */
-define( [
-       'modernizr',
-       'jquery',
-       'velocity.ui',
-       'web.core/zeit',
-       'web.core/clicktracking',
-       'jquery.throttle',
-       'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
+define([
+    'modernizr',
+    'jquery',
+    'velocity.ui',
+    'web.core/zeit',
+    'web.core/clicktracking',
+    'jquery.throttle',
+    'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
     var defaults = {
         documentMinHeight: 800,
         jumpHash: '#overscroll-article',
@@ -82,8 +82,11 @@ define( [
         var r = $element.attr( 'r' ),
             c = Math.PI * ( r * 2 ),
             pct;
-        if ( p > 100 ) { p = 100; }
-        if ( p < 0 ) { p = 0; }
+        if ( p > 100 ) {
+            p = 100;
+        } else if ( p < 0 ) {
+            p = 0;
+        }
         pct = ( ( 100 - p ) / 100 ) * c;
         $element.css({ strokeDashoffset: pct });
     },
@@ -120,21 +123,19 @@ define( [
         if ( !config.livePreview ) {
             var img = $( '<img alt="">' ).attr( 'src', config.previewPath );
             $target.css({
-                    height: config.previewHeight,
-                    opacity: config.previewOpacity,
-                    overflow: 'hidden'
-                })
-                .append( img );
+                height: config.previewHeight,
+                opacity: config.previewOpacity,
+                overflow: 'hidden'
+            }).append( img );
             // insert the shite
             $element.insertBefore( $template );
         } else {
             // load first teaser on homepage
             $target.css({
-                    height: config.previewHeight,
-                    opacity: config.previewOpacity,
-                    overflow: 'hidden'
-                })
-                .addClass( 'overscrolling__target--with-header-image' );
+                height: config.previewHeight,
+                opacity: config.previewOpacity,
+                overflow: 'hidden'
+            }).addClass( 'overscrolling__target--with-header-image' );
             $element.insertBefore( $template );
             $target.load( config.previewAreaAdress, function() {
                 var $noscript = $target.find( 'noscript[data-src]' ),
@@ -181,8 +182,8 @@ define( [
                     window.location.href = config.jumpTo + config.jumpHash;
                 }
             }
-        }, 25 ));
-    };
+        }, 25 ) );
+    }
 
     return {
         init: function( options ) {
@@ -199,9 +200,12 @@ define( [
                         mobileHA: false,
                         complete: function() {
                             history.pushState( '', document.title, window.location.pathname + window.location.search );
-                        } } );
+                        }
+                    });
                 } else {
-                    if ( debug ) { console.debug( 'exiting to prevent reload hell' ); }
+                    if ( debug ) {
+                        console.debug( 'exiting to prevent reload hell' );
+                    }
                     return;
                 }
             }

@@ -55,7 +55,7 @@ What does this script do?
    tracking. This could be generalized in the future, if/as needed.
 
 ----------------------------------------------------------------------------- */
-define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
+define([ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
     var EXPECTED_NAME = 'zonTriggeredEventTracking',
         debugMode = document.location.hash.indexOf( 'debug-clicktracking' ) > -1,
@@ -164,8 +164,8 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
         // replace leading dot for current values in meine.zeit.de, may be removed soon
         var trackingData = messageDataObject.slug.replace( /^\./, '' ).split( '|' ),
             data = [
-                trackingData[0],
-                trackingData[1] // url
+                trackingData[ 0 ],
+                trackingData[ 1 ] // url
             ];
 
         _functions.sendTracking.sendDataToWebrekk( data );
@@ -210,9 +210,8 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
         // filter every event which is irrelevant to this script.
 
         if ( typeof messageDataObject.name !== 'string' ||
-            typeof messageDataObject.sender !== 'string'  ||
-            typeof messageDataObject.event !== 'string' )
-            {
+            typeof messageDataObject.sender !== 'string' ||
+            typeof messageDataObject.event !== 'string' ) {
             return;
         }
 
@@ -239,7 +238,7 @@ define( [ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
 
         $( window ).on( 'message', function( event ) {
             _functions.dispatch.dispatchAllMessages( event );
-        } );
+        });
 
     };
 

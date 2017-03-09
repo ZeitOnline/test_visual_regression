@@ -22,7 +22,7 @@ define( function() {
                 }
 
                 for ( var i = 0, l = this.queue.length; i < l; i++ ) {
-                    require.apply( window, this.queue[i] );
+                    require.apply( window, this.queue[ i ]);
                 }
 
                 this.queue = [];
@@ -43,7 +43,7 @@ define( function() {
                 document.cookie = name + '=' + value + expires + '; path=/; domain=' + domain;
             },
             cookieRead: function( name ) {
-                return ( document.cookie.match( '(?:^|;) ?' + name + '\\s*=\\s*([^;]*)' ) || 0 )[1];
+                return ( document.cookie.match( '(?:^|;) ?' + name + '\\s*=\\s*([^;]*)' ) || 0 )[ 1 ];
             }
         },
         key;

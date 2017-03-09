@@ -1,4 +1,4 @@
-(function( vjs ) {
+( function( vjs ) {
 
     /*
      * This file is stored in vivi (http://vivi.zeit.de/repository/static/js/brightcove-plugins/)

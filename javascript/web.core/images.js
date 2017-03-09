@@ -108,7 +108,7 @@ define([ 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], func
                     if ( leaf.is( ':visible' ) ) {
                         break;
                     }
-                } while ( leaf[0].nodeName !== 'BODY' );
+                } while ( leaf[ 0 ].nodeName !== 'BODY' );
             }
 
             // ie workarround to detect auto width
@@ -365,7 +365,7 @@ define([ 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], func
      * @param  {object} options jQuery styled preferences object
      */
     function init( options ) {
-        options = $.extend( {
+        options = $.extend({
             triggerRegionNumber: 3,
             lazy: $( 'body[data-page-type="centerpage"]' ).length > 0,
             lazyElementsSelector: '.cp-region'

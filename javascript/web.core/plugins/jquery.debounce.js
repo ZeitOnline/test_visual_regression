@@ -3,7 +3,7 @@
  * @version  0.1
  */
 
-(function( $ ) {
+( function( $ ) {
 
     'use strict';
 
@@ -32,7 +32,7 @@
                     func.apply( context, args );
                 }
 
-                timeout = setTimeout(function() {
+                timeout = setTimeout( function() {
                     timeout = null;
                     if ( !immediate ) {
                         func.apply( context, args );

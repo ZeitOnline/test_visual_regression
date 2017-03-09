@@ -11,7 +11,7 @@
  * 2015-10-05: pixelperfection, optimize performance
  */
 
-(function( $, Zeit ) {
+( function( $, Zeit ) {
     function FixPosition( element ) {
 
         this.node = element;
@@ -92,7 +92,9 @@
             // calculate/select more things that will remain unchanged
             this.bypass = this.$articleBody.find( this.fullwidthElements.join() );
 
-            $( window ).on( 'scroll', $.throttle( function() { that.handleScrolling(); }, 100 ) );
+            $( window ).on( 'scroll', $.throttle( function() {
+                that.handleScrolling();
+            }, 100 ) );
         },
 
         /*
