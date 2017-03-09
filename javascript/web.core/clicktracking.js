@@ -383,8 +383,9 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             ];
             return data;
         }
-    },
-    clickTrack = function( event ) {
+    };
+
+    function clickTrack( event ) {
         var data = trackElement[ event.data.funcName ]( $( this ), event ),
             trackingData;
 
@@ -401,7 +402,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 send( data );
             }
         }
-    };
+    }
 
     return {
         string: string,

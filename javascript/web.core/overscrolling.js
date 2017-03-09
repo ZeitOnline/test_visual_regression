@@ -12,25 +12,26 @@ define([
     'jquery.throttle',
     'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
     var defaults = {
-        documentMinHeight: 800,
-        jumpHash: '#overscroll-article',
-        jumpTo: Zeit.actualHost + 'index' || 'http://www.zeit.de/index',
-        livePreview: false,
-        overscrollElement: '#overscrolling',
-        previewAreaAdress: '/index/area/no-1',
-        previewHeight: 600,
-        previewOpacity: 0.4,
-        previewPath: '/exampleimages/sitepreview/sitepreview.jpg',
-        progressElement: '#circle_progress',
-        progressElementBar: '#circle_progress_bar',
-        progressText: 'Zurück zur Startseite',
-        trackingBase: 'overscroll....',
-        triggerElement: '.footer',
-        scrollToTrigger: true
-    },
-    config,
-    debug = location.href.indexOf( 'debug-overscrolling' ) !== -1,
-    isActive = function() {
+            documentMinHeight: 800,
+            jumpHash: '#overscroll-article',
+            jumpTo: Zeit.actualHost + 'index' || 'http://www.zeit.de/index',
+            livePreview: false,
+            overscrollElement: '#overscrolling',
+            previewAreaAdress: '/index/area/no-1',
+            previewHeight: 600,
+            previewOpacity: 0.4,
+            previewPath: '/exampleimages/sitepreview/sitepreview.jpg',
+            progressElement: '#circle_progress',
+            progressElementBar: '#circle_progress_bar',
+            progressText: 'Zurück zur Startseite',
+            trackingBase: 'overscroll....',
+            triggerElement: '.footer',
+            scrollToTrigger: true
+        },
+        config,
+        debug = location.href.indexOf( 'debug-overscrolling' ) !== -1;
+
+    function isActive() {
         var isActivated = true,
             message,
             index,
@@ -71,14 +72,16 @@ define([
         }
 
         return isActivated;
-    },
-    clickTrack = function( type ) {
+    }
+
+    function clickTrack( type ) {
         var data = [ config.trackingBase + type, config.jumpTo ];
 
         Clicktracking.send( data );
-        $( window ).trigger( 'overscroll', { 'action': type } );
-    },
-    animateCircle = function( $element, p ) {
+        $( window ).trigger( 'overscroll', { 'action': type });
+    }
+
+    function animateCircle( $element, p ) {
         var r = $element.attr( 'r' ),
             c = Math.PI * ( r * 2 ),
             pct;
@@ -89,8 +92,9 @@ define([
         }
         pct = ( ( 100 - p ) / 100 ) * c;
         $element.css({ strokeDashoffset: pct });
-    },
-    animateCircleByScroll = function() {
+    }
+
+    function animateCircleByScroll() {
         var windowBottom = $( window ).scrollTop() + $( window ).height(),
             elementOffset = $( config.overscrollElement ).offset().top,
             elementHeight = $( config.overscrollElement ).height(),
@@ -107,8 +111,9 @@ define([
         } else {
             $( config.overscrollElement + '_indicator' ).removeClass( 'overscrolling__indicator--fixed' );
         }
-    },
-    loadElements = function( options ) {
+    }
+
+    function loadElements() {
         // first untie the trigger event
         $( config.triggerElement ).off( 'inview' );
         // attach stuff

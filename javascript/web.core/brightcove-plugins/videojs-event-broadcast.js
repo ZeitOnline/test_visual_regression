@@ -6,16 +6,17 @@
      * But we keep a copy inside the repository to have it greppable and to keep a file history.
      *
      */
-    var videojsEventBroadcastPlugin = function( options ) {
-        var player = this,
-        postEventToWindow = function( eventString ) {
+    var videojsEventBroadcastPlugin = function() {
+        var player = this;
+
+        function postEventToWindow( eventString ) {
             var messageData = {
                 'name': 'zonTriggeredEventTracking',
                 'sender': 'videojs',
                 'event': eventString
             };
             window.parent.postMessage( JSON.stringify( messageData ), '*' );
-        };
+        }
 
         // the play event is triggered on several occasions:
         // - two(!) times on start (with currentTime undefined and currentTime 0)

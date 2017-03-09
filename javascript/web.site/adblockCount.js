@@ -7,25 +7,26 @@
 define([ 'jquery' ], function( $ ) {
 
     /**
-     * Oldadblocktest
+     * oldAdBlockTest
      * checks if the old adblocker honeypotdiv is blocked
      * @return {bool}
      */
-    var oldadblocktest = function( $elem ) {
+    function oldAdBlockTest( $elem ) {
         return $elem.length > 0 && $elem.is( ':hidden' );
-    },
+    }
 
     /**
-     * Adcoltrollerblocked
+     * adControllerBlocked
      * checks if the adcontroller is linked, but blocked by user
      * @return {bool}
      */
-    adcontrollerblocked = function() {
+    function adControllerBlocked() {
         if ( $( 'head script[src*="iqadcontroller"]' ).length > 0 ) {
             return typeof window.AdController === 'undefined';
         }
         return false;
-    };
+    }
+
     return {
 
         /**
@@ -43,10 +44,10 @@ define([ 'jquery' ], function( $ ) {
             $( window ).on( 'load', function() {
                 var $elem = $( '#ad3999' );
                 if ( $elem.length > 0 ) {
-                    if ( oldadblocktest( $elem ) ) {
+                    if ( oldAdBlockTest( $elem ) ) {
                         track.dataLayerEventAction = true;
                         track.dataLayerEventLabel = 'adblockdesktop';
-                    } else if ( adcontrollerblocked() ) {
+                    } else if ( adControllerBlocked() ) {
                         track.dataLayerEventAction = true;
                         track.dataLayerEventLabel = 'adcontrollerblocked';
                     }

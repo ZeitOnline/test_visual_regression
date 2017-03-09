@@ -17,7 +17,7 @@
 ( function( $, window, document, Zeit ) {
     'use strict';
 
-    var Overlay = function() {
+    function Overlay() {
         this.activeElement = null;
         this.cookieValue = Zeit.cookieRead( 'overlaycanceled' );
         this.initialized = false;

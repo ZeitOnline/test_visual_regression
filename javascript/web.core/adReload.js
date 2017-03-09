@@ -15,11 +15,11 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      * logging helper - wraps if debug --> console.log
      * @return {void}
      */
-    log = function() {
+    function log() {
         if ( window.location.search.indexOf( 'debug-adreload' ) !== -1 ) {
             console.log.apply( console, arguments );
         }
-    },
+    }
 
     /**
      * test if a supplied origin fits into the configured list of origins
@@ -28,17 +28,17 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      * @param  {object}  event  message event object
      * @return {Boolean}
      */
-    isValidOrigin = function( configuredOrigin, event ) {
+    function isValidOrigin( configuredOrigin, event ) {
         configuredOrigin  = typeof configuredOrigin === 'string' ? [ configuredOrigin ] : configuredOrigin;
         return $.inArray( event.originalEvent.origin, configuredOrigin ) > -1;
-    },
+    }
 
     /**
      * check against the interaction interval
      * @param  {object} myconfig configuration section read from json before
      * @return {bool}
      */
-    clickCount = function( myconfig ) {
+    function clickCount( myconfig ) {
         // load on every click
         if ( myconfig.interval < 2 ) {
             log( 'direct click' );
@@ -60,14 +60,14 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
 
         return false;
-    },
+    }
 
     /**
      * check timer and click interval
      * @param  {object} myconfig configuration section read from json before
      * @return {bool}
      */
-    checkClickCount = function( myconfig ) {
+    function checkClickCount( myconfig ) {
         // do we need a timer?
         if ( typeof myconfig.time !== 'undefined' && myconfig.time > 0 ) {
             var now = $.now();
@@ -84,15 +84,15 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         } else {
             return clickCount( myconfig );
         }
-    },
+    }
 
     /**
      * load configuration from json file
      * @return {object} ajax promise
      */
-    loadConfig = function() {
-        return $.ajax( configUrl, { dataType: 'json' } );
-    },
+    function loadConfig() {
+        return $.ajax( configUrl, { dataType: 'json' });
+    }
 
     /**
      * interaction event
@@ -144,7 +144,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      * @param  {object} event DOM event
      * @return {void}
      */
-    message = function( event ) {
+    function message( event ) {
         var messageData;
 
         if ( typeof event.originalEvent.data  !== 'string' ) {
@@ -170,8 +170,8 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             return;
         }
 
-        $( window ).trigger( 'interaction.adreload.z', [ messageData.name, messageData.message ] );
-    };
+        $( window ).trigger( 'interaction.adreload.z', [ messageData.name, messageData.message ]);
+    }
 
     return {
         init: function() {
