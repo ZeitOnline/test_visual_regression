@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - MAINT: Add notification for changed account settings, change registration wording
 
+- MAINT: Include sourcemaps for original SASS files
+
 
 3.42.1 (2017-03-06)
 -------------------
