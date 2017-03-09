@@ -110,15 +110,6 @@
 	text-shadow: 0 0 20px rgba($color, 0.25);
 }
 
-@mixin no-user-select {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-}
-
 // if you change this, please change =unpadded accordingly
 @mixin padded {
 	padding-left: $page-padding--small;
@@ -238,13 +229,6 @@
 		transition: transform .5s;
 		transform-origin: 50% 55%;
 	}
-}
-
-@mixin transform-origin($value...) {
-	-webkit-transform-origin: $value;
-	   -moz-transform-origin: $value;
-	    -ms-transform-origin: $value;
-	        transform-origin: $value;
 }
 
 @mixin zon-button($background-color,

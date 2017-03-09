@@ -1,6 +1,6 @@
 {
   "name": "zeit.web",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "zeit web component",
   "license": "UNLICENSED",
   "private": true,
@@ -10,7 +10,7 @@
     "bower": "^1.8.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.5.3",
+    "autoprefixer": "^6.7.6",
     "grunt-auto-install": "^0.3.1",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "~1.0.0",
@@ -22,7 +22,7 @@
     "grunt-modernizr-builder": "^0.1.9",
     "grunt-newer": "^1.2.0",
     "grunt-postcss": "^0.8.0",
-    "grunt-sass": "^1.2.1",
+    "grunt-sass": "^2.0.0",
     "grunt-sftp-deploy": "~0.2.5",
     "grunt-svgmin": "^4.0.0",
     "grunt-svgstore": "^1.0.0",
