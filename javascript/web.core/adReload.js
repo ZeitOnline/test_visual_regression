@@ -98,10 +98,9 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      * interaction event
      * @param  {object} event   DOM event object
      * @param  {string} name  interaction emmitter name
-     * @param  {string} message message field of the request
      * @return {void}
      */
-    interaction = function( event, name, message ) {
+    function interaction( event, name ) {
         // check config if name is registered
         var myconfig;
         try {
@@ -138,7 +137,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 }
             }
         }
-    },
+    }
 
     /**
      * channel filtered window.messages to interaction api
@@ -190,7 +189,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 log( 'error', errorThrown );
             });
             // on page unload unbind all at unload to prevent memory leaks
-            $( window ).on( 'unload', function( event ) {
+            $( window ).on( 'unload', function() {
                 $( window ).off( 'adreload' );
             });
         }

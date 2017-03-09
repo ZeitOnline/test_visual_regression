@@ -83,9 +83,7 @@ define([ 'jquery', 'web.core/clicktracking' ], function( $, Clicktracking ) {
     };
 
     _functions.sendTracking.sendVideoEventToWebtrekk = function( eventString ) {
-        var messageData,
-            messageSender,
-            $container,
+        var $container,
             videoSize = '',
             videoSeries = '',
             videoProvider = '',

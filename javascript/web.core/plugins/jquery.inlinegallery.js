@@ -1,5 +1,3 @@
-/* global $blocked, WebKitCSSMatrix */
-
 /**
  * @fileOverview jQuery Plugin for Inline-Gallery
  * @author nico.bruenjes@zeit.de
@@ -117,7 +115,7 @@
 
             $( window ).on( 'keydown', handleKeydown );
 
-            figures.on( 'scaling_ready', function( e ) {
+            figures.on( 'scaling_ready', function() {
                 var currentSlide;
 
                 // if the slider loaded before the image

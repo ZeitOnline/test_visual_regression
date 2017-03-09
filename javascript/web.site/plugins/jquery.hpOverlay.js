@@ -1,5 +1,4 @@
 // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-/* global overlayConf */
 /**
  * Zeit Online HP Overlay
  *

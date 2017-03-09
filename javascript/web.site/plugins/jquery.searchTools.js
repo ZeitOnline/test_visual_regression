@@ -1,4 +1,3 @@
-/* global GWPLine, GWPLine3, nsIqd_setBg */
 /**
 * ZON Search Tools
 * adds funky functionality to otherwise obvious search features

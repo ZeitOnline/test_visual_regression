@@ -23,23 +23,23 @@
         // - on jumping to another position in the video
         // That's why we choose one() for registering the event. (Another solution
         // would be to check for that one event which has currentTime===0.)
-        player.one( 'play', function( e ) {
+        player.one( 'play', function() {
             postEventToWindow( 'playerStarted' );
         });
 
         // contentplayback is triggered when the real video content begins.
         // It does not matter if an ad was played before or not.
         // But: it is triggered again at the end of a video. Hence, "one()".
-        player.one( 'contentplayback', function( e ) {
+        player.one( 'contentplayback', function() {
             postEventToWindow( 'contentStarted' );
         });
 
         // one() just to be sure (see above)
-        player.one( 'ended', function( e ) {
+        player.one( 'ended', function() {
             postEventToWindow( 'contentCompleted' );
         });
 
-        player.on( 'ads-ad-started', function( e ) {
+        player.on( 'ads-ad-started', function() {
             postEventToWindow( 'adStarted' );
         });
 

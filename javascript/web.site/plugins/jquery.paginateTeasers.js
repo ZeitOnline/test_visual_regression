@@ -5,8 +5,7 @@
  */
 define([ 'jquery', 'web.core/images' ], function( $, images ) {
 
-    var test = 'dummy',
-        $this,
+    var $this,
         $galleryArea,
         $allTeasers,
         $hiddenTeasers,

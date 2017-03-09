@@ -16,7 +16,7 @@ define([ 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], func
             width: $w.width()
         },
         devicePixelRatio = window.devicePixelRatio || 1,
-        isMobile, isDesktop, $triggerRegion;
+        isMobile, isDesktop;
 
     /**
      * images.js: mimic ECMAScript 6 String.prototype.endsWith()
@@ -75,7 +75,7 @@ define([ 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], func
             useMobileVariant = isMobile && imageData.mobileRatio && imageData.mobileSrc,
             ratio = useMobileVariant ? imageData.mobileRatio : imageData.ratio,
             msieWidth = false,
-            subject, width, height, origWidth, origHeight, leaf, styles, minHeight, maxHeight, source, token;
+            subject, width, height, origWidth, origHeight, leaf, styles, minHeight, maxHeight, source;
 
         if ( $parent.hasClass( 'is-pixelperfect' ) ) {
             // use explicit width and height from parent
@@ -214,7 +214,7 @@ define([ 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], func
             return $( this ).attr( 'src' ) || 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
         });
         // add event triggering to tell the world
-        $img.on( 'load', function( e ) {
+        $img.on( 'load', function() {
             $img.trigger( 'scaling_ready' );
         });
         if ( markLazyImages && $img.closest( '.cp-region' ).data( 'lazy' ) === true ) {
@@ -296,8 +296,7 @@ define([ 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], func
         $( '.scaled-image noscript', container ).each( function() {
             var $noscript = $( this ),
                 $parent = $noscript.parent(),
-                markup = $noscript.text(),
-                imgData;
+                markup = $noscript.text();
 
             if ( markup.trim() !== '' ) {
                 // get rid of src attribute
