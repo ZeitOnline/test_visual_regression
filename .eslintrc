@@ -28,10 +28,6 @@
                 "SwitchCase": 1
             }
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
         "lines-around-comment": [
             "error",
             {
@@ -48,10 +44,6 @@
         "quotes": [
             "error",
             "single"
-        ],
-        "semi": [
-            "error",
-            "always"
         ],
         "space-in-parens": [
             "error",
