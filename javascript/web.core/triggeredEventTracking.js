@@ -1,4 +1,3 @@
-// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
  * @fileOverview Module and API for track events and clicks via webtrekk
  * @author thomas.puppe@zeit.de

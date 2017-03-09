@@ -1,4 +1,3 @@
-// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
  * @fileOverview ZEIT ONLINE core javascript module [Zeit]
  * @author moritz.stoltenburg@zeit.de

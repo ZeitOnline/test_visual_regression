@@ -1,4 +1,3 @@
-// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
  * @fileOverview API for asynchronely reload ads on webpages
  * @author nico.bruenjes@zeit.de

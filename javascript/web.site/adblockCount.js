@@ -1,4 +1,3 @@
-// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
  * @fileOverview Module for losely counting adblocker user (just trends; not excact counts)
  * @author nico.bruenjes@zeit.de
