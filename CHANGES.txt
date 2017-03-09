@@ -7,7 +7,13 @@ POSTDEPLOY
 - für FEM-28 in den Vivis `overscrolling` aus `feature-toggle.xml` entfernen
 
 
-3.43 (unreleased)
+3.44 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.43 (2017-03-09)
 -----------------
 
 - ZON-3755: Update registration success notification wording
@@ -29,6 +35,12 @@ POSTDEPLOY
 - MAINT: Add notification for changed account settings, change registration wording
 
 - MAINT: Include sourcemaps for original SASS files
+
+
+3.42.2 (2017-03-09)
+-------------------
+
+- BUG-676: Fix ZMO script
 
 
 3.42.1 (2017-03-06)
