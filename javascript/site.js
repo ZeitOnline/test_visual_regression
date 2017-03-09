@@ -88,7 +88,7 @@ require([
     'web.site/plugins/jquery.togglesearch',
     'web.site/plugins/jquery.updateSignals',
     'web.site/plugins/jquery.partnerDropdown'
-], function( $, Velocity ) {
+], function( $ ) {
     var pageType = document.body.getAttribute( 'data-page-type' ),
         isHp = document.body.getAttribute( 'data-is-hp' ),
         article = $( '#js-article' );

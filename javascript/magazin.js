@@ -66,7 +66,7 @@ require([
     'web.core/plugins/jquery.imageCopyrightFooter',
     'web.core/plugins/jquery.notifications',
     'web.magazin/plugins/jquery.backgroundvideo'
-], function( $, Velocity ) {
+], function( $ ) {
     // remove jQuery from global scope
     $.noConflict( true );
 
