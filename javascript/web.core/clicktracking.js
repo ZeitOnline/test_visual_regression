@@ -359,14 +359,13 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 current = '',
                 data;
 
-            // navigation arrows
             if ( /-(prev|next)/.test( className ) ) {
+                // navigation arrows
                 row = className.indexOf( 'overlay' ) < 0 ? 1 : 2;
                 column = className.indexOf( 'prev' ) < 0 ? 2 : 1;
                 current = parseInt( pager.text().split( ' / ' ).shift(), 10 );
-            }
-            // navigation bullets for touch devices
-            else if ( className.indexOf( 'bx-pager-link' ) !== -1 ) {
+            } else if ( className.indexOf( 'bx-pager-link' ) !== -1 ) {
+                // navigation bullets for touch devices
                 row = 1;
                 current = pager.find( '.bx-pager-link' ).index( $element ) + 1;
             }
