@@ -3,7 +3,7 @@
         notifications: function() {
             var $header = $( 'header' ).first(),
                 msgRegistrationSuccess = '<div class="notification notification--success" tabindex="0">' +
-                    'Herzlich willkommen! Mit Ihrer Anmeldung können Sie nun unsere Artikel lesen.</div>',
+                    'Herzlich willkommen – viel Spaß beim Lesen!</div>',
                 msgRegistrationErrorWrongSubscription = '<div class="notification notification--error" tabindex="0">' +
                     'Leider haben Sie kein gültiges Abonnement für diesen Artikel. Bitte wählen Sie unten das gewünschte Abo.</div>',
                 msgAccountConfirmSuccess = '<div class="notification notification--success" tabindex="0">' +

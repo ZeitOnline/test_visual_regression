@@ -930,8 +930,7 @@ def test_webtrekk_content_id_should_handle_nonascii(
 
 def test_notification_after_paywall_registration_renders_correctly(
         testserver, selenium_driver):
-    message_txt = u'Herzlich willkommen! Mit Ihrer Anmeldung k\xf6nnen' \
-        u' Sie nun unsere Artikel lesen.'
+    message_txt = u'Herzlich willkommen \u2013 viel Spa\xdf beim Lesen!'
     message_txt_error = u'Leider haben Sie kein g\xfcltiges Abonnement ' \
         u'f\xfcr diesen Artikel. Bitte w\xe4hlen Sie unten das ' \
         u'gew\xfcnschte Abo.'
