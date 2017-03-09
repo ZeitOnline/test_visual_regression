@@ -8,6 +8,14 @@ POSTDEPLOY
 3.43 (unreleased)
 -----------------
 
+- ZON-3755: Update registration success notification wording
+
+- ZON-3754: Update wording
+
+- ZON-3348: Add liveblogs for AMP
+
+- ZON-3572: Polish payment gate button and link
+
 - FEM-25: Refactor HP overlay
 
 - FEM-34: Remove gzip test from AdController
@@ -15,6 +23,8 @@ POSTDEPLOY
 - FEM-32: Reactivate live reload
 
 - MAINT: Add notification for changed account settings, change registration wording
+
+- MAINT: Include sourcemaps for original SASS files
 
 
 3.42.1 (2017-03-06)
@@ -170,7 +180,7 @@ POSTDEPLOY
 
 - ZON-3664: Add zplus logo to register paywall
 
-- ZON-3687: Show account confirm message after successful registration
+- ZON-3678: Show account confirm message after successful registration
 
 - BUG-618: Reapply font-family for form elements (e.g. buttons)
 

@@ -2299,3 +2299,14 @@ def test_nextread_shows_zmo_kicker_logo_and_styles(testbrowser):
     nextread = browser.cssselect('article.nextread')[0]
     assert nextread.cssselect('.nextread__kicker--zmo')
     assert nextread.cssselect('.nextread__kicker-logo--zmo')
+
+
+@pytest.mark.skipif(True,
+                    reason="We need a way to mock liveblog in tests")
+def test_liveblog_article_uses_esi(selenium_driver, testserver):
+    selenium_driver.get(
+        '{}/zeit-online/cp-content/liveblog-offline'.format(testserver.url))
+    blog = WebDriverWait(selenium_driver, 15).until(
+        expected_conditions.presence_of_element_located(
+            (By.ID, "livedesk-root")))
+    assert blog.is_displayed(), 'ESI Liveblog not displayed'
