@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3755: Update registration success notification wording
 
+- ZON-3754: Update wording
+
 - FEM-25: Refactor HP overlay
 
 - FEM-34: Remove gzip test from AdController
