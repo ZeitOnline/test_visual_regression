@@ -7,7 +7,7 @@ POSTDEPLOY
 - für FEM-28 in den Vivis `overscrolling` aus `feature-toggle.xml` entfernen
 
 
-3.43 (unreleased)
+3.43 (2017-03-09)
 -----------------
 
 - ZON-3755: Update registration success notification wording
