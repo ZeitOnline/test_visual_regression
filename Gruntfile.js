@@ -42,11 +42,6 @@ module.exports = function(grunt) {
         ]
     });
 
-    // PostCSS normalize charset. RubySass and Libsass fail at preserving
-    // '@charset "UTF-8"' at the beginning of CSS files, so we need to
-    // add it later. https://github.com/ZeitOnline/zeit.web/pull/1870
-    var postcssNormalizeCharset = require('postcss-normalize-charset');
-
     // configuration
     grunt.initConfig({
 
@@ -160,7 +155,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 options: {
-                    processors: [autoprefixer, postcssNormalizeCharset]
+                    processors: [autoprefixer]
                 },
                 src: [
                     '<%= project.codeDir %>css/**/*.css',
@@ -169,7 +164,7 @@ module.exports = function(grunt) {
             },
             'old-ie': {
                 options: {
-                    processors: [autoprefixerOldIe, postcssNormalizeCharset]
+                    processors: [autoprefixerOldIe]
                 },
                 src: [
                     '<%= project.codeDir %>css/**/all-old-ie.css'

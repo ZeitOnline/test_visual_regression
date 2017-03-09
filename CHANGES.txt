@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3754: Update wording
 
+- ZON-3348: Add liveblogs for AMP
+
 - FEM-25: Refactor HP overlay
 
 - FEM-34: Remove gzip test from AdController
