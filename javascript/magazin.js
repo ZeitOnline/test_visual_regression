@@ -26,6 +26,7 @@ require([
     zeit,
     images,
     clicktracking,
+    triggeredEventTracking,
     adReload,
     menu,
     comments,
@@ -38,6 +39,7 @@ require([
     images.init();
     menu.init();
     clicktracking.init();
+    triggeredEventTracking.init();
     adReload.init();
     errors.init();
     cards.init();
