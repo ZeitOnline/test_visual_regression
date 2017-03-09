@@ -15,6 +15,7 @@
 */
 
 (function( $, window, document ) {
+
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -54,6 +55,7 @@
             }
         },
         methods = {
+
             /**
              * checks the referrer against the list of sites
              * usage: $(window).referrerCount('getData', 'twitter'), $(window).referrerCount('getData')
@@ -72,6 +74,7 @@
                 });
                 return ret;
             },
+
             /**
              * checks if there is and if its an external referrer
              * @memberOf referrerCount
@@ -88,6 +91,7 @@
                     return data !== null ? data : {};
                 }
             },
+
             /**
              * checks if there is and if its an external referrer
              * @memberOf referrerCount
@@ -98,6 +102,7 @@
             hasExternalReferrer: function() {
                 return document.referrer && document.referrer.indexOf( location.protocol + '//' + location.host ) !== 0;
             },
+
             /**
              * checks lookup the count for name and increment it
              * @memberOf referrerCount
@@ -116,6 +121,7 @@
                 }
                 localStorage.setItem( defaults.storageName, JSON.stringify( data ) );
             },
+
             /**
              * checks lookup the count for name and increment it
              * @memberOf referrerCount
@@ -133,6 +139,7 @@
                     }
                 }
             },
+
             /**
              * reset the storage
              * @memberOf referrerCount

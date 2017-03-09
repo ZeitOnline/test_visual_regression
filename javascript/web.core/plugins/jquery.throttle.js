@@ -8,6 +8,7 @@
     'use strict';
 
     $.extend({
+
         /**
          * Returns a function, that, when invoked, will only be triggered at most once
          * during a given window of time. Normally, the throttled function will run

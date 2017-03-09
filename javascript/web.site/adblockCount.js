@@ -5,6 +5,7 @@
  * @version  0.1
  */
 define([ 'jquery' ], function( $ ) {
+
     /**
      * Oldadblocktest
      * checks if the old adblocker honeypotdiv is blocked
@@ -13,6 +14,7 @@ define([ 'jquery' ], function( $ ) {
     var oldadblocktest = function( $elem ) {
         return $elem.length > 0 && $elem.is( ':hidden' );
     },
+
     /**
      * Adcoltrollerblocked
      * checks if the adcontroller is linked, but blocked by user
@@ -25,6 +27,7 @@ define([ 'jquery' ], function( $ ) {
         return false;
     };
     return {
+
         /**
          * Init
          * prepare Adblockertest and start them on load

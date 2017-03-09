@@ -4,6 +4,7 @@
  * @version  0.1
  */
 (function( $ ) {
+
     /**
     * See (http://jquery.com/)
     * @name jQuery

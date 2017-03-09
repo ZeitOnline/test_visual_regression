@@ -15,6 +15,7 @@
         factory( jQuery );
     }
 }(function( $ ) {
+
     /**
      * @see https://github.com/yckart/jquery.base64.js
      * Based upon: https://gist.github.com/Yaffle/1284012

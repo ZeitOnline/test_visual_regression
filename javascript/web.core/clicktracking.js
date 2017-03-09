@@ -108,6 +108,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      * @type {Object}
      */
     var trackElement = {
+
         /**
          * track elements in the main section
          * @param  {Object} $element jQuery Element with the link that was clicked
@@ -173,6 +174,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                         column = $area.index() + 1; // the area number
                         break;
                     }
+
                     /* falls through */
 
                 default:
@@ -192,6 +194,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             return data;
         },
+
         /**
          * track links with data-id attribute that contains the complete webtrekk id without href
          * @param  {object} $element jQuery collection with the link that was clicked
@@ -204,6 +207,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             ];
             return data;
         },
+
         /**
          * track links inside parents with appropriate data attributes
          * @param  {object} $element jQuery collection with the link that was clicked
@@ -276,6 +280,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             ];
             return data;
         },
+
         /**
          * track links with data-tracking attribute that contains the complete webtrekk id plus href
          * @param  {object} $element jQuery collection with the link that was clicked
@@ -289,6 +294,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 ];
             return data;
         },
+
         /**
          * track elements in the parquet-meta section
          * definition: https://docs.google.com/spreadsheets/d/1uY8XXULPq7zUre9prBWiKDaBQercLmAEENCVF8LQk4Q/edit#gid=1056411343
@@ -313,6 +319,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             return data;
         },
+
         /**
          * track links which are inside an article text
          * @param  {object} $element jQuery collection with the link that was clicked
@@ -403,6 +410,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             if ( typeof Zeit === 'undefined' || ( typeof window.wt === 'undefined' && !debugMode ) ) {
                 return;
             }
+
             /**
              * trackingLinks - a collection of jQuery-Objects to add trackElement to.
              *

@@ -10,6 +10,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     config = false,
     timer = {},
     clickCounter = [],
+
     /**
      * logging helper - wraps if debug --> console.log
      * @return {void}
@@ -19,6 +20,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             console.log.apply( console, arguments );
         }
     },
+
     /**
      * test if a supplied origin fits into the configured list of origins
      * be backward compatible to older form of string
@@ -30,6 +32,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         configuredOrigin  = typeof configuredOrigin === 'string' ? [ configuredOrigin ] : configuredOrigin;
         return $.inArray( event.originalEvent.origin, configuredOrigin ) > -1;
     },
+
     /**
      * check against the interaction interval
      * @param  {object} myconfig configuration section read from json before
@@ -58,6 +61,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
         return false;
     },
+
     /**
      * check timer and click interval
      * @param  {object} myconfig configuration section read from json before
@@ -81,6 +85,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             return clickCount( myconfig );
         }
     },
+
     /**
      * load configuration from json file
      * @return {object} ajax promise
@@ -88,6 +93,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     loadConfig = function() {
         return $.ajax( configUrl, { dataType: 'json' } );
     },
+
     /**
      * interaction event
      * @param  {object} event   DOM event object
@@ -130,6 +136,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             }
         }
     },
+
     /**
      * channel filtered window.messages to interaction api
      * @param  {object} event DOM event

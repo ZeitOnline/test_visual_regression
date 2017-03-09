@@ -8,6 +8,7 @@
     'use strict';
 
     $.extend({
+
         /**
          * Creates a function that delays the invocation of `func` until after `wait`
          * milliseconds have elapsed since the last time it was invoked. If `immediate`

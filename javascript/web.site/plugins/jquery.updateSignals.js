@@ -42,6 +42,7 @@
                 $.ajax({
                     url: endpoint + options.uniqueId,
                     dataType: 'json',
+
                     /**
                      * on successful request emit events
                      * @param {object} data the objectified json pulled from endpoint
@@ -60,6 +61,7 @@
                             }
                         }
                     },
+
                     /**
                      * on completion go recursive
                      */
@@ -90,6 +92,7 @@
     }
 
     $.extend({
+
         /**
          * Polls JSON Endpoint for text updates, and animates them into the dom
          * @memberOf jQuery

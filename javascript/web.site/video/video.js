@@ -9,6 +9,7 @@
 define([ 'jquery' ],
     function( $ ) {
         return {
+
             /**
              * Replaces a given list of dom nodes with video or return video html code
              * @function displayVideo
@@ -16,6 +17,7 @@ define([ 'jquery' ],
              * @param {object} config configuration object
              */
             displayVideo: function( videoId, config ) {
+
                 /**
                  * configuration object, extends config
                  * @type {object}
@@ -34,6 +36,7 @@ define([ 'jquery' ],
                         players: {},
                         type: 'html5'
                     }, config ),
+
                     /**
                      * html templates for player code
                      * @type {Object}

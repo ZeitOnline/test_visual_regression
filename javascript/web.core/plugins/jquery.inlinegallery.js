@@ -6,6 +6,7 @@
  * @version  0.1
  */
 (function( $, Modernizr, Zeit ) {
+
     /**
      * See (http://jquery.com/).
      * @name jQuery
@@ -174,6 +175,7 @@
                 sliderViewport = gallery.parent();
 
                 if ( !hasTouch ) {
+
                     /* additional buttons on image */
                     nextButton.insertAfter( gallery ).on( 'click', function() { slider.goToNextSlide(); } );
                     backButton.insertAfter( gallery ).on( 'click', function() { slider.goToPrevSlide(); } );

@@ -9,6 +9,7 @@ define([ 'jquery' ], function( $ ) {
             var dates = $( '.encoded-date' );
 
             if ( dates.length ) {
+
                 /**
                  * require jquery.clarify
                  */
