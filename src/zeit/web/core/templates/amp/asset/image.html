@@ -5,7 +5,7 @@
     {%- set image_width = image.fallback_width | default(default_width, True) %}
     {%- set image_height = image.fallback_height | default(default_height, True) %}
     {%- block image %}
-        <figure class="{% block media_block %}{{ 'figure' | with_mods(block.display_mode if block) }}{% endblock %}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
+        <figure class="{% block media_block %}{{ 'figure' | with_mods(block.display_mode if block, image_modifier) }}{% endblock %}"{% block itemprop %}{% endblock %} itemscope itemtype="http://schema.org/ImageObject">
             {% block media -%}
             <amp-img
                 src="{{ request.image_host + image.fallback_path }}"

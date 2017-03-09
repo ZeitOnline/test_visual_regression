@@ -29,6 +29,7 @@ import zeit.web.core.metrics
 
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
+LONG_TERM_CACHE = zeit.web.core.cache.get_region('long_term')
 
 
 class Block(object):
@@ -256,6 +257,29 @@ class Liveblog(Block):
                     url, timeout=conf.get('liveblog_timeout', 1)).json()
         except (requests.exceptions.RequestException, ValueError):
             pass
+
+    @LONG_TERM_CACHE.cache_on_arguments()
+    def get_amp_themed_id(self, blog_id):
+        url = '{}/Blog/{}/Seo'
+        content = self.get_restful(url.format(self.status_url, blog_id))
+
+        if content and 'SeoList' in content:
+            for item in content['SeoList']:
+                blog_theme_id = None
+                if 'href' in item:
+                    seo = self.get_restful(self.prepare_ref(item['href']))
+                    if seo and 'BlogTheme' in seo:
+                        try:
+                            blog_theme_id = int(seo['BlogTheme']['Id'])
+                        except (KeyError, ValueError):
+                            pass
+
+                        # return SEO ID using AMP theme
+                        # 23 = zeit
+                        # 24 = zeit-solo
+                        # 27 = zeit-amp
+                        if blog_theme_id == 27:
+                            return '{}-{}'.format(blog_id, seo['Id'])
 
 
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IQuiz)
@@ -540,7 +564,7 @@ class NewsletterAdvertisement(Block):
     def image(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return self.context.image.uniqueId.replace(
-                'http://xml.zeit.de', conf['image_prefix'], 1)
+            'http://xml.zeit.de', conf['image_prefix'], 1)
 
 
 def _raw_html(xml):
