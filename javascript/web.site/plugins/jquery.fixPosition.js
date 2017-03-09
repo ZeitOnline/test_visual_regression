@@ -150,9 +150,11 @@
             this.calculateArticlePositions();
             // In 2015, we need multiple lines of code to detect the scrolling position
             // (https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
-            this.currentPosition = this.supportPageOffset ?
-                window.pageYOffset : this.isCSS1Compat ?
-                    document.documentElement.scrollTop : document.body.scrollTop;
+            if ( this.supportPageOffset ) {
+                this.currentPosition = window.pageYOffset;
+            } else {
+                this.currentPosition = this.isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+            }
 
             this.absolute = this.currentPosition > this.maxFixedPos;
             this.fixed = this.currentPosition >= this.minFixedPos && !this.absolute;
