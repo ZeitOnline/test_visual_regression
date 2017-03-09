@@ -14,7 +14,7 @@
         // Browser globals
         factory( jQuery );
     }
-}(function( $ ) {
+})( function( $ ) {
 
     /**
      * @see https://github.com/yckart/jquery.base64.js
@@ -98,4 +98,4 @@
         });
     };
 
-}));
+});

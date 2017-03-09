@@ -54,4 +54,4 @@
 
     vjs.plugin( 'videojsEventBroadcast', videojsEventBroadcastPlugin );
 
-}( window.videojs ));
+})( window.videojs );
