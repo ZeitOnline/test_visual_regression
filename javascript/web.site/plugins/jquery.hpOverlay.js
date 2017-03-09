@@ -36,10 +36,11 @@
         this.timestamp = null;
         this.visible = false;
         this.wrapper = $( '#overlay-wrapper' );
-        this.visibility_listener = null;
+        this.visibilityListener = null;
         this.init();
-    },
-    visibility_listener = function() {
+    }
+
+    var visibilityListener = function() {
         if ( document.hidden ) {
             this.log( 'document is hidden' );
             this.unbindResetEvents();
@@ -66,8 +67,8 @@
             this.bindResetEvents();
         }
         // bind this on runtime to make it revokable
-        this.visibility_listener = visibility_listener.bind( this );
-        document.addEventListener( 'visibilitychange', this.visibility_listener );
+        this.visibilityListener = visibilityListener.bind( this );
+        document.addEventListener( 'visibilitychange', this.visibilityListener );
         // fetchData initially
         this.fetchData();
     };
@@ -233,7 +234,7 @@
     Overlay.prototype.unbindEvents = function() {
         $( window ).off( '.hpoverlay' );
         $( document ).off( '.hpoverlay' );
-        document.removeEventListener( 'visibilitychange', this.visibility_listener );
+        document.removeEventListener( 'visibilitychange', this.visibilityListener );
     };
 
     // jquery plugin
