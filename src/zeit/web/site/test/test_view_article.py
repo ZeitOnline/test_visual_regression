@@ -2174,10 +2174,9 @@ def test_paywall_get_param_works_like_http_header(testbrowser):
     assert browser_with_getparam.contents == browser_with_header.contents
 
 
-def test_overscrolling_is_active(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+def test_overscrolling_is_active(selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(1200, 900)
     driver.get(
@@ -2191,10 +2190,9 @@ def test_overscrolling_is_active(
         selenium_driver, 1).until(condition)
 
 
-def test_overscrolling_is_not_active_on_paywalls(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+def test_overscrolling_is_not_active_on_paywalls(selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(1200, 900)
     path = 'zeit-online/article/01'
@@ -2210,9 +2208,9 @@ def test_overscrolling_is_not_active_on_paywalls(
 
 
 def test_overscrolling_is_not_active_on_non_destop_environment(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+        selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(760, 900)
     path = 'zeit-online/article/01'
@@ -2227,10 +2225,9 @@ def test_overscrolling_is_not_active_on_non_destop_environment(
         selenium_driver, 1).until(condition)
 
 
-def test_overscrolling_is_working_as_expected(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+def test_overscrolling_is_working_as_expected(selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(1200, 900)
     driver.get(
@@ -2260,9 +2257,9 @@ def test_overscrolling_is_working_as_expected(
 
 
 def test_overscrolling_is_turned_off_by_configuration(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+        selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(1200, 900)
     driver.get(
@@ -2302,3 +2299,14 @@ def test_nextread_shows_zmo_kicker_logo_and_styles(testbrowser):
     nextread = browser.cssselect('article.nextread')[0]
     assert nextread.cssselect('.nextread__kicker--zmo')
     assert nextread.cssselect('.nextread__kicker-logo--zmo')
+
+
+@pytest.mark.skipif(True,
+                    reason="We need a way to mock liveblog in tests")
+def test_liveblog_article_uses_esi(selenium_driver, testserver):
+    selenium_driver.get(
+        '{}/zeit-online/cp-content/liveblog-offline'.format(testserver.url))
+    blog = WebDriverWait(selenium_driver, 15).until(
+        expected_conditions.presence_of_element_located(
+            (By.ID, "livedesk-root")))
+    assert blog.is_displayed(), 'ESI Liveblog not displayed'

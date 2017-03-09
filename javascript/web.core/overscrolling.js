@@ -14,7 +14,7 @@ define( [
     var defaults = {
         documentMinHeight: 800,
         jumpHash: '#overscroll-article',
-        jumpTo: 'http://www.zeit.de/index',
+        jumpTo: Zeit.actualHost + 'index' || 'http://www.zeit.de/index',
         livePreview: false,
         overscrollElement: '#overscrolling',
         previewAreaAdress: '/index/area/no-1',
@@ -29,14 +29,14 @@ define( [
         scrollToTrigger: true
     },
     config,
-    debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
+    debug = location.href.indexOf( 'debug-overscrolling' ) !== -1,
     isActive = function() {
         var isActivated = true,
             message,
             index,
             status = [{
-                isActive: Zeit.toggles.get( 'overscrolling' ),
-                message: 'feature toggle is off or missing'
+                isActive: Zeit.overscrollingActive,
+                message: 'active setting is off or missing'
             }, {
                 isActive: $( document ).height() >= config.documentMinHeight,
                 message: 'documentMinHeight not matched'

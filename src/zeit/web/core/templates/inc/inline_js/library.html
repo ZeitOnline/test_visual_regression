@@ -10,6 +10,8 @@
             active: {{ 'true' if settings('hp_overlay_active', False) else 'false' }},
             interval: '{{ settings('hp_overlay_interval') }}'
         },
+        overscrollingActive: {{ 'true' if settings('overscrolling_active', False) else 'false' }},
+        actualHost: '{{ request.route_url('home') }}',
         view: {
             {% for key, value in view.js_vars -%}
                 '{{ key }}': {{ value | tojson | safe }},

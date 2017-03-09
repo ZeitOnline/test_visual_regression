@@ -6,7 +6,6 @@
 		<span class="liveblog-status__meta-date">
 			{{- (view.liveblog.last_modified or view.date_last_modified) | format_date('short') -}}
 		</span>
-		<span class="liveblog-status__meta-divider"></span>
 		<span class="liveblog-status__meta-updated">
 		{%- if view.liveblog.is_live or view.liveblog.is_slow -%}
 			{{ (view.liveblog.last_modified or view.date_last_modified) | format_date('timedelta') }} aktualisiert
