@@ -1,0 +1,61 @@
+{
+    "env": {
+        "amd": true,
+        "browser": true,
+        "commonjs": true,
+        "jquery": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "jquery"
+    ],
+    "rules": {
+        "array-bracket-spacing": [
+            "error",
+            "always",
+            {
+                "objectsInArrays": false
+            }
+        ],
+        "camelcase": "error",
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "lines-around-comment": [
+            "error",
+            {
+                "beforeLineComment": false
+            }
+        ],
+        "max-len": [
+            "error",
+            {
+                "code": 140
+            }
+        ],
+        "no-console": "off",
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "space-in-parens": [
+            "error",
+            "always",
+            {
+                "exceptions": ["{}", "[]"]
+            }
+        ]
+    }
+}
