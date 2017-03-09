@@ -41,6 +41,8 @@
   <setting name="caching_time_videostill" xsi:type="xsd:int">35</setting>
   <setting name="caching_time_external" xsi:type="xsd:int">15</setting>
 
+  <!-- overscrolling settings -->
+  <setting name="overscrolling_active" xsi:type="xsd:boolean">true</setting>
   <!-- homepage hp overlay settings -->
   <setting name="hp_overlay_active" xsi:type="xsd:boolean">true</setting>
   <!-- homepage hp overlay interval, in seconds -->
