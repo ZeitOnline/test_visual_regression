@@ -31,6 +31,12 @@ POSTDEPLOY
 - MAINT: Include sourcemaps for original SASS files
 
 
+3.42.2 (2017-03-09)
+-------------------
+
+- BUG-676: Fix ZMO script
+
+
 3.42.1 (2017-03-06)
 -------------------
 
