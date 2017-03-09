@@ -57,7 +57,12 @@ def test_login_and_logout(config):
     b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
     b.getControl(
         name='email').value = config['MEMBER_USERNAME']
-    b.getControl(name='password').value = config['MEMBER_PASSWORD']
+
+    if config['ENV'] == 'PRODUCTION':
+        b.getControl(name='password').value = config['MEMBER_PASSWORD']
+    else:
+        b.getControl(name='pass').value = config['MEMBER_PASSWORD']
+
     b.getControl('Anmelden').click()
 
     # Until meinezeit Relaunch:
@@ -80,7 +85,12 @@ def test_infographic(config):
     b = zope.testbrowser.browser.Browser()
     b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
     b.getControl(name='email').value = config['MEMBER_USERNAME']
-    b.getControl(name='password').value = config['MEMBER_PASSWORD']
+
+    if config['ENV'] == 'PRODUCTION':
+        b.getControl(name='password').value = config['MEMBER_PASSWORD']
+    else:
+        b.getControl(name='pass').value = config['MEMBER_PASSWORD']
+
     b.getControl('Anmelden').click()
 
     # Until meinezeit Relaunch:
@@ -111,7 +121,7 @@ def test_commenting(config):
         b = zope.testbrowser.browser.Browser()
         b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
         b.getControl(name='email').value = config['MEMBER_USERNAME']
-        b.getControl(name='password').value = config['MEMBER_PASSWORD']
+        b.getControl(name='pass').value = config['MEMBER_PASSWORD']
         b.getControl('Anmelden').click()
 
         # Until meinezeit Relaunch:
