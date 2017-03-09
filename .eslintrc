@@ -19,7 +19,9 @@
         ],
         "camelcase": [
             "error",
-            { "properties": "always" }
+            {
+                "properties": "always"
+            }
         ],
         "indent": [
             "error",
