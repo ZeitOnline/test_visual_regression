@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         rubyVersion: '1.9.3',
         tasks: {
             production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-all', 'postcss:dist', 'postcss:old-ie', 'copy:css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-all', 'postcss:dev', 'postcss:old-ie', 'copy:css', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
             css: [ 'sass:dist', 'postcss:dist', 'postcss:old-ie', 'copy:css' ],
@@ -72,8 +72,10 @@ module.exports = function(grunt) {
         // compile sass code
         sass: {
             options: {
-                sourceComments: true,
+                sourceMapEmbed: true,
+                sourceMapRoot: 'file://' + project.sourceDir,
                 outputStyle: 'expanded',
+                precision: 5, // default of node-sass
                 includePaths: [
                     path.resolve(project.sourceDir + 'sass'),
                     path.resolve(project.sourceDir + 'bower_components')
@@ -114,7 +116,7 @@ module.exports = function(grunt) {
             // this seems to be fixed now
             'amp': {
                 options: {
-                    sourceComments: false,
+                    sourceMapEmbed: false,
                     outputStyle: 'compact'
                 },
                 files: [{
@@ -127,7 +129,7 @@ module.exports = function(grunt) {
             },
             'dist': {
                 options: {
-                    sourceComments: false,
+                    sourceMapEmbed: false,
                     outputStyle: 'compressed'
                 },
                 files: [{
@@ -142,6 +144,15 @@ module.exports = function(grunt) {
 
         // PostCSS
         postcss: {
+            dev: {
+                options: {
+                    map: true,
+                    processors: [autoprefixer]
+                },
+                src: [
+                    '<%= project.codeDir %>css/**/!(all-old-ie).css'
+                ]
+            },
             dist: {
                 options: {
                     processors: [autoprefixer]
@@ -392,7 +403,7 @@ module.exports = function(grunt) {
             },
             sass: {
                 files: [ 'sass/**/*.s{a,c}ss' ],
-                tasks: [ 'sass:dev-basic', 'newer:postcss:dist' ],
+                tasks: [ 'sass:dev-basic', 'newer:postcss:dev' ],
                 options: {
                     interrupt: true,
                     // needed to call `grunt watch` from outside zeit.web
@@ -480,7 +491,7 @@ module.exports = function(grunt) {
 
         if ( target in config.sass ) {
             grunt.log.writeln('Using task sass:' + target);
-            config.watch.sass.tasks = [ 'sass:' + target, 'newer:postcss:dist' ];
+            config.watch.sass.tasks = [ 'sass:' + target, 'newer:postcss:dev' ];
         }
 
         // grunt.log.writeflags(config);
