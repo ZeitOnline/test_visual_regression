@@ -4,14 +4,14 @@
  */
 /**
  * Module for displaying brightcove video
- * @module displayVideo
+ * @module video
  */
 define([ 'jquery' ],
     function( $ ) {
         return {
 
             /**
-             * Replaces a given list of dom nodes with video or return video html code
+             * Replaces a given list of dom nodes with video
              * @function displayVideo
              * @param {string} videoId id of the video to show
              * @param {object} config configuration object
@@ -21,7 +21,7 @@ define([ 'jquery' ],
                 /**
                  * configuration object, extends config
                  * @type {object}
-                 * @property {array} elem list of dom nodes to replace by video
+                 * @property {object} elem jQuery collection to replace by video
                  * @property {object} playerData standard data about the bc player
                  * @property {object} players save require config here
                  * @property {string} html5 use 'html5' player (not available yet) or 'iframe'
@@ -64,9 +64,9 @@ define([ 'jquery' ],
                             .replace( /\{{playerId}}/g, defaults.playerData.playerId )
                             .replace( /\{{videoId}}/g, videoId )
                             .replace( /\{{embed}}/g, 'default' );
-                    $.each( defaults.elem, function( index, value ) {
-                        $( defaults.elem[index] ).empty().html( snippet );
-                    });
+
+                    defaults.elem.html( snippet );
+
                     // in case of html5 player we have to load a script from brightcove
                     // if your site uses require.js, this same script needs to be required
                     // but for each player individually, so we need n local requires
