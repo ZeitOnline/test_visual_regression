@@ -96,5 +96,7 @@
 {% endblock %}
 
 {% block veeseo %}
-    <script src="http://rce.veeseo.com/widgets/zeit/widget.js"></script>
+    {% if not view.paywall %}
+        <script src="http://rce.veeseo.com/widgets/zeit/widget.js"></script>
+    {% endif %}
 {% endblock %}
