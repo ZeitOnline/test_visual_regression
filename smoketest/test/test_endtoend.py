@@ -194,3 +194,18 @@ def test_centerpages_contain_teasers(config, testbrowser):
 
     browser = testbrowser('{}/campus/index'.format(config['BASE_URL']))
     assert len(browser.cssselect('article[class*=teaser]')) > 20
+
+
+def test_topicpage_contains_teasers(config, testbrowser):
+    browser = testbrowser('{}/thema/europa'.format(config['BASE_URL']))
+    assert len(browser.cssselect('article[class*=teaser]')) == 25
+
+
+def test_search_results_page_contains_teasers(config, testbrowser):
+    # OPTIMIZE: fix search on staging (provide content to solr)
+    if config['ENV'] == 'STAGING':
+        assert True
+    else:
+        browser = testbrowser(
+            '{}/suche/index?q=europa'.format(config['BASE_URL']))
+        assert len(browser.cssselect('article[class*=teaser]')) == 10
