@@ -10,10 +10,10 @@ module.exports = function(grunt) {
         rubyVersion: '1.9.3',
         tasks: {
             production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-all', 'postcss:dev', 'postcss:old-ie', 'copy:css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-all', 'postcss:dev', 'postcss:old-ie', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
-            css: [ 'sass:dist', 'postcss:dist', 'postcss:old-ie', 'copy:css' ],
+            css: [ 'sass:dist', 'postcss:dist', 'postcss:old-ie' ],
             lint: [ 'jshint', 'jscs' ]
         }
     };
@@ -174,13 +174,6 @@ module.exports = function(grunt) {
 
         // copy files
         copy: {
-            // copy plain CSS files
-            css: {
-                expand: true,
-                cwd: project.sourceDir + 'sass',
-                src: 'vendor/*.css',
-                dest: project.codeDir + 'css/'
-            },
             svg_campus: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.campus/svg/_minified',
@@ -303,7 +296,6 @@ module.exports = function(grunt) {
             svg: [ project.sourceDir + 'sass/web.*/**/_minified' ],
             // delete old vendor scripts
             scripts: [ project.sourceDir + 'javascript/vendor' ],
-            sass: [ project.sourceDir + 'sass/vendor' ],
             // delete unused directories
             legacy: [
                 project.sourceDir + 'sass/web.*/icons',
