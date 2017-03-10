@@ -72,8 +72,8 @@ module.exports = function(grunt) {
         // compile sass code
         sass: {
             options: {
-                sourceMapEmbed: true,
-                sourceMapRoot: 'file://' + project.sourceDir,
+                sourceMap: true,
+                sourceMapRoot: 'file://' + project.codeDir + 'css/web',
                 outputStyle: 'expanded',
                 precision: 5, // default of node-sass
                 includePaths: [
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
             // this seems to be fixed now
             'amp': {
                 options: {
-                    sourceMapEmbed: false,
+                    sourceMap: false,
                     outputStyle: 'compact'
                 },
                 files: [{
@@ -129,7 +129,7 @@ module.exports = function(grunt) {
             },
             'dist': {
                 options: {
-                    sourceMapEmbed: false,
+                    sourceMap: false,
                     outputStyle: 'compressed'
                 },
                 files: [{
@@ -297,6 +297,8 @@ module.exports = function(grunt) {
                 // needed for grunt_runner to delete outside current working dir
                 force: true
             },
+            // delete generated CSS files and source maps
+            css: [ project.codeDir + 'css/web.*' ],
             // cleanup minified SVGs, remove orphaned files
             svg: [ project.sourceDir + 'sass/web.*/**/_minified' ],
             // delete old vendor scripts
