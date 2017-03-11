@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    {
+      "removeAttrs": {
+        "attrs": "(fill|fill-opacity|stroke|stroke-width)"
+      }
+    }
+  ]
+}
