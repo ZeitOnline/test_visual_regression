@@ -10,7 +10,7 @@ POSTDEPLOY
 3.44 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Fix path in css sourcemaps if you grunt from outside the project dir
 
 
 3.43 (2017-03-09)
