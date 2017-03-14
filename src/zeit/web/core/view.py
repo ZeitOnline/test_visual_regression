@@ -653,7 +653,8 @@ class Base(object):
             ('cp27', ';'.join(self.webtrekk_assets)),  # Asset
             ('cp28', access),  #
             ('cp29', first_click_free),  # First click free
-            ('cp30', self.paywall or 'open')  # Paywall Schranke
+            ('cp30', self.paywall or 'open'),  # Paywall Schranke
+            ('cp32', self.request.scheme)  # Protokoll
         ])
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
