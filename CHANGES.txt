@@ -4,8 +4,6 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- für FEM-28 in den Vivis `overscrolling` aus `feature-toggle.xml` entfernen
-
 
 3.44 (unreleased)
 -----------------
@@ -30,7 +28,7 @@ POSTDEPLOY
 
 - FEM-32: Reactivate live reload
 
-- FEM-28: Overscrolling small fixes
+- FEM-26: Overscrolling small fixes
 
 - MAINT: Add notification for changed account settings, change registration wording
 
