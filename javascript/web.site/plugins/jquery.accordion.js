@@ -3,18 +3,18 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
     var defaults = {
-            classname: 'buzz-accordion',
-            multiselectable: false,
-            duration: 300
-        };
+        classname: 'buzz-accordion',
+        multiselectable: false,
+        duration: 300
+    };
 
     function Accordion( element, options ) {
         this.tabs = [];
         this.parentNode = element.parentNode;
 
-        this.options = $.extend( {}, defaults, options );
+        this.options = $.extend({}, defaults, options );
         this.accordion = $( '<div/>' ).addClass( this.options.classname ).attr({
             'role': 'tablist',
             'aria-multiselectable': true
@@ -111,7 +111,7 @@
 
             panel
                 .attr( 'aria-hidden', !expand )
-                .velocity( animation, { duration: ( duration !== undefined ) ? duration : this.options.duration } );
+                .velocity( animation, { duration: ( duration !== undefined ) ? duration : this.options.duration });
         },
 
         showItem: function( tab ) {

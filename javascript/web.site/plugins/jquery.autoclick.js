@@ -3,7 +3,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
-(function( $, Modernizr ) {
+( function( $, Modernizr ) {
     function autoclick( event ) {
         var insideLink = $( event.target ).closest( 'a' ).length,
             firstLink = $( this ).find( 'a' ).first();

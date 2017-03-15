@@ -6,6 +6,7 @@
 define([ 'jquery' ], function( $ ) {
 
     $.extend({
+
         /**
          * Require picturefill asynchronous on request
          * @memberOf jQuery

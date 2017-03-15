@@ -14,7 +14,8 @@
 * @author Nico Bruenjes
 */
 
-(function( $, window, document ) {
+( function( $, window, document ) {
+
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -54,6 +55,7 @@
             }
         },
         methods = {
+
             /**
              * checks the referrer against the list of sites
              * usage: $(window).referrerCount('getData', 'twitter'), $(window).referrerCount('getData')
@@ -72,6 +74,7 @@
                 });
                 return ret;
             },
+
             /**
              * checks if there is and if its an external referrer
              * @memberOf referrerCount
@@ -83,11 +86,12 @@
             getData: function( name ) {
                 var data = JSON.parse( localStorage.getItem( defaults.storageName ) );
                 if ( typeof name !== 'undefined' ) {
-                    return data !== null ? data[name] : 0;
+                    return data !== null ? data[ name ] : 0;
                 } else {
                     return data !== null ? data : {};
                 }
             },
+
             /**
              * checks if there is and if its an external referrer
              * @memberOf referrerCount
@@ -98,6 +102,7 @@
             hasExternalReferrer: function() {
                 return document.referrer && document.referrer.indexOf( location.protocol + '//' + location.host ) !== 0;
             },
+
             /**
              * checks lookup the count for name and increment it
              * @memberOf referrerCount
@@ -116,6 +121,7 @@
                 }
                 localStorage.setItem( defaults.storageName, JSON.stringify( data ) );
             },
+
             /**
              * checks lookup the count for name and increment it
              * @memberOf referrerCount
@@ -133,6 +139,7 @@
                     }
                 }
             },
+
             /**
              * reset the storage
              * @memberOf referrerCount
@@ -146,7 +153,7 @@
 
     $.fn.referrerCount = function( arg ) {
         if ( hasLocalstorage() ) {
-            if ( methods[ arg ] ) {
+            if ( methods[ arg ]) {
                 return methods[ arg ].apply( this, Array.prototype.slice.call( arguments, 1 ) );
             } else if ( typeof method === 'object' || !arg ) {
                 return methods.init.apply( this, arguments );
