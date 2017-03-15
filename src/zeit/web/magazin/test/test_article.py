@@ -194,7 +194,8 @@ def test_article03_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small'}
+        'cp31': 'share_buttons_small',
+        'cp32': ''}
 
 
 def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
@@ -251,7 +252,8 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small'}
+        'cp31': 'share_buttons_small',
+        'cp32': ''}
 
 
 def test_cp_has_correct_webtrekk_values(httpbrowser):
@@ -334,7 +336,8 @@ def test_cp_has_correct_webtrekk_values(httpbrowser):
         'cp27': '',
         'cp28': 'free',
         'cp29': 'unfeasible',
-        'cp30': 'open'}
+        'cp30': 'open',
+        'cp32': ''}
 
 
 def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
