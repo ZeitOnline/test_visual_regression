@@ -14,7 +14,7 @@ module.exports = function(grunt) {
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
             css: [ 'sass:dist', 'postcss:dist', 'postcss:old-ie' ],
-            lint: [ 'jshint', 'jscs' ]
+            lint: [ 'jshint', 'eslint' ]
         }
     };
 
@@ -208,15 +208,15 @@ module.exports = function(grunt) {
             }
         },
 
-        jscs: {
+        eslint: {
             dist: {
-                src: [ project.sourceDir + 'javascript/**/*.js' ]
+                src: [ project.sourceDir + 'javascript' ]
             },
             options: {
-                config: project.sourceDir + '.jscsrc',
-                excludeFiles: [
-                    project.sourceDir + 'javascript/libs/**/*',
-                    project.sourceDir + 'javascript/vendor/**/*'
+                fix: true,
+                configFile: project.sourceDir + '.eslintrc',
+                ignorePattern: [
+                    '**/javascript/vendor/*.js',
                 ]
             }
         },
@@ -432,7 +432,7 @@ module.exports = function(grunt) {
             },
             config: {
                 files: [
-                    project.sourceDir + '.jscsrc',
+                    project.sourceDir + '.eslintrc',
                     project.sourceDir + '.jshintrc',
                     project.sourceDir + 'bower.json',
                     project.sourceDir + 'Gruntfile.js'
@@ -456,7 +456,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-jscs');
+    grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-modernizr-builder');
     grunt.loadNpmTasks('grunt-newer');

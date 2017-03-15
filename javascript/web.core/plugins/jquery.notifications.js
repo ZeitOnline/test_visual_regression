@@ -1,4 +1,4 @@
-(function( $, location, document ) {
+( function( $, location, document ) {
     $.extend({
         notifications: function() {
             var $header = $( 'header' ).first(),

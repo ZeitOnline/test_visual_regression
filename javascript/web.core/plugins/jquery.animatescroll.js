@@ -3,7 +3,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.2
  */
-(function( $ ) {
+( function( $ ) {
 
     'use strict';
 
@@ -37,7 +37,7 @@
      */
     $.fn.animateScroll = function( options ) {
 
-        options = $.extend( {}, defaults, options );
+        options = $.extend({}, defaults, options );
 
         //run through links that jump to anchors
         return this.each( function() {
@@ -47,7 +47,7 @@
                     attribute;
 
                 if ( anchor ) {
-                    target = document.getElementById( anchor ) || document.getElementsByName( anchor )[0];
+                    target = document.getElementById( anchor ) || document.getElementsByName( anchor )[ 0 ];
                 }
 
                 if ( !target ) {
@@ -61,9 +61,9 @@
 
                 // change location hash without page jump
                 attribute = ( target.id === anchor ) ? 'id' : 'name';
-                target[attribute] = '';
+                target[ attribute ] = '';
                 location.hash = this.hash;
-                target[attribute] = anchor;
+                target[ attribute ] = anchor;
             });
         });
 

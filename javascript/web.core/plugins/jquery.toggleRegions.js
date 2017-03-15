@@ -5,7 +5,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version 0.1
  */
-(function( $, Zeit ) {
+( function( $, Zeit ) {
 
     'use strict';
 
@@ -103,7 +103,7 @@
     }
 
     $.fn.toggleRegions = function( options ) {
-        settings = $.extend( {}, defaults, options );
+        settings = $.extend({}, defaults, options );
 
         return this.each( function() {
             initRegion( this );

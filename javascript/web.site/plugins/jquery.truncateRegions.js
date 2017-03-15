@@ -3,7 +3,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
 
     var maxTeasers = 3;
 
@@ -31,7 +31,7 @@
             link = this.element.children( '[aria-controls]' );
             link.children().first().text( '+' + hidden );
             link.on( 'click', function() {
-                link.velocity( 'slideUp', { duration: 100 } );
+                link.velocity( 'slideUp', { duration: 100 });
             });
 
             container = $( '#' + link.attr( 'aria-controls' ) );

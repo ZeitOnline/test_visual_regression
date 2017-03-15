@@ -3,10 +3,10 @@
  * @author moritz.stoltenburg@zeit.de
  * @version 0.1
  */
-(function( factory ) {
+( function( factory ) {
     if ( typeof define === 'function' && define.amd ) {
         // AMD
-        define( [ 'jquery' ], factory );
+        define([ 'jquery' ], factory );
     } else if ( typeof exports === 'object' ) {
         // Node, CommonJS
         module.exports = factory( require( 'jquery' ) );
@@ -14,7 +14,8 @@
         // Browser globals
         factory( jQuery );
     }
-}(function( $ ) {
+})( function( $ ) {
+
     /**
      * @see https://github.com/yckart/jquery.base64.js
      * Based upon: https://gist.github.com/Yaffle/1284012
@@ -30,8 +31,8 @@
     while ( i < 256 ) {
         var c = String.fromCharCode( i );
         a256 += c;
-        r256[i] = i;
-        r64[i] = b64.indexOf( c );
+        r256[ i ] = i;
+        r64[ i ] = b64.indexOf( c );
         ++i;
     }
 
@@ -45,7 +46,7 @@
 
         while ( i < length ) {
             var c = s.charCodeAt( i );
-            c = c < 256 ? alpha[c] : -1;
+            c = c < 256 ? alpha[ c ] : -1;
 
             buffer = ( buffer << w1 ) + c;
             bitsInBuffer += w1;
@@ -69,22 +70,27 @@
     var base64 = {
         encode: function( plain ) {
             plain = code( plain, false, r256, b64, 8, 6 );
-            return plain + '===='.slice(( plain.length % 4 ) || 4 );
+            return plain + '===='.slice( ( plain.length % 4 ) || 4 );
         },
 
         decode: function( coded ) {
             coded = coded.replace( /[^A-Za-z0-9\+\/\=]/g, '' );
             coded = String( coded ).split( '=' );
             var i = coded.length;
-            do {--i;
-                coded[i] = code( coded[i], true, r64, a256, 6, 8 );
+            do {
+                --i;
+                coded[ i ] = code( coded[ i ], true, r64, a256, 6, 8 );
             } while ( i > 0 );
             return coded.join( '' );
         }
     };
 
-    if ( !window.btoa ) { window.btoa = base64.encode; }
-    if ( !window.atob ) { window.atob = base64.decode; }
+    if ( !window.btoa ) {
+        window.btoa = base64.encode;
+    }
+    if ( !window.atob ) {
+        window.atob = base64.decode;
+    }
 
     $.fn.clarify = function() {
         return this.each( function() {
@@ -92,4 +98,4 @@
         });
     };
 
-}));
+});

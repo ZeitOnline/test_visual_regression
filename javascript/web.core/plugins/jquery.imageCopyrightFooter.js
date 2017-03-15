@@ -3,7 +3,8 @@
  * @author thomas.puppe@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
+
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -116,7 +117,7 @@
                     $( '.js-image-copyright-footer-close' ).on( 'click', function( e ) {
                         e.preventDefault();
                         copyrights.hide();
-                    } );
+                    });
 
                     this.container = $( '#bildrechte' );
                     this.initialized = true;
