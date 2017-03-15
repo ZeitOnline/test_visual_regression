@@ -1,6 +1,6 @@
-// ignore jshint/jscs errors and warnings as this is a vendor file
+// ignore linting errors and warnings as this is a vendor file
 // jshint ignore: start
-// jscs:disable
+/* eslint-disable */
 
 
 /***

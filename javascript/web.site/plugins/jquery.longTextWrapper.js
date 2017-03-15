@@ -4,7 +4,7 @@
  * @author thomas.puppe@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
     function TextWrapper( element, options ) {
         this.node = element;
         this.element = $( element );
@@ -13,7 +13,7 @@
     }
 
     TextWrapper.prototype.init = function() {
-        var height = Math.ceil( this.element.height()),
+        var height = Math.ceil( this.element.height() ),
             className = this.node.className.split( /\s+/ ).shift() + '--wrapped',
             wrapper = this.element;
 
@@ -35,7 +35,7 @@
         var defaults = {
                 minHeight: 150
             },
-            options = $.extend( {}, defaults, settings );
+            options = $.extend({}, defaults, settings );
 
         return this.each( function() {
             new TextWrapper( this, options );

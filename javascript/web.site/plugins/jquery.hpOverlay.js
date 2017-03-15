@@ -1,5 +1,3 @@
-// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
-/* global overlayConf */
 /**
  * Zeit Online HP Overlay
  *
@@ -15,10 +13,10 @@
  * @requires ZEIT-Lib
  */
 
-(function( $, window, document, Zeit ) {
+( function( $, window, document, Zeit ) {
     'use strict';
 
-    var Overlay = function() {
+    function Overlay() {
         this.activeElement = null;
         this.cookieValue = Zeit.cookieRead( 'overlaycanceled' );
         this.initialized = false;
@@ -37,10 +35,11 @@
         this.timestamp = null;
         this.visible = false;
         this.wrapper = $( '#overlay-wrapper' );
-        this.visibility_listener = null;
+        this.visibilityListener = null;
         this.init();
-    },
-    visibility_listener = function() {
+    }
+
+    var visibilityListener = function() {
         if ( document.hidden ) {
             this.log( 'document is hidden' );
             this.unbindResetEvents();
@@ -67,8 +66,8 @@
             this.bindResetEvents();
         }
         // bind this on runtime to make it revokable
-        this.visibility_listener = visibility_listener.bind( this );
-        document.addEventListener( 'visibilitychange', this.visibility_listener );
+        this.visibilityListener = visibilityListener.bind( this );
+        document.addEventListener( 'visibilitychange', this.visibilityListener );
         // fetchData initially
         this.fetchData();
     };
@@ -110,7 +109,7 @@
         var that = this;
         $( document ).on( 'keypress.modal scroll.modal click.modal mousemove.modal', $.debounce( function() {
             that.setTimeout();
-        }, that.options.resetInterval ));
+        }, that.options.resetInterval ) );
     };
 
     // reset event unbinding
@@ -130,7 +129,9 @@
 
         // start new timer
         if ( !this.visible ) {
-            this.timer = window.setTimeout( function() { that.fetchData(); }, interval  );
+            this.timer = window.setTimeout( function() {
+                that.fetchData();
+            }, interval );
             this.log( 'New timer started for ' + interval / 1000 / 60 + ' minutes' );
         }
     };
@@ -147,7 +148,7 @@
         // data is only fetched if document is visible
         if ( !document.hidden ) {
             var that = this;
-            $.ajax( that.options.endpoint, { dataType: 'json' } ).done( function( data ) {
+            $.ajax( that.options.endpoint, { dataType: 'json' }).done( function( data ) {
                 that.log( 'Done: old timestamp: ' + that.timestamp + ', new timestamp: ' + data.last_published_semantic );
                 if ( !that.timestamp ) {
                     that.timestamp = data.last_published_semantic;
@@ -207,24 +208,24 @@
         $( document ).on( 'click.hpoverlay', '.overlay__text-button', function( event ) {
             event.preventDefault();
             that.cancel();
-        } );
+        });
         // reload
         $( document ).on( 'click.hpoverlay', '.overlay, .overlay__button', function( event ) {
             event.preventDefault();
             that.reload();
-        } );
+        });
         // escape key
         $( window ).on( 'keyup.hpoverlay', function( event ) {
             if ( event.which === 27 ) {
                 that.cancel();
             }
-        } );
+        });
         // focus
         $( document ).on( 'focus.hpoverlay', 'body', function( event ) {
             if ( that.visible && that.wrapper.find( event.target ).length === 0 ) {
                 that.wrapper.find( '.overlay__button' ).focus();
             }
-        } );
+        });
         this.initialized = true;
     };
 
@@ -232,7 +233,7 @@
     Overlay.prototype.unbindEvents = function() {
         $( window ).off( '.hpoverlay' );
         $( document ).off( '.hpoverlay' );
-        document.removeEventListener( 'visibilitychange', this.visibility_listener );
+        document.removeEventListener( 'visibilitychange', this.visibilityListener );
     };
 
     // jquery plugin

@@ -3,7 +3,8 @@
  * @author anika.szuppa@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
+
     /**
     * See (http://jquery.com/)
     * @name jQuery

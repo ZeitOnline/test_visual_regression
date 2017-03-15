@@ -11,7 +11,7 @@
  * 2015-10-05: pixelperfection, optimize performance
  */
 
-(function( $, Zeit ) {
+( function( $, Zeit ) {
     function FixPosition( element ) {
 
         this.node = element;
@@ -92,7 +92,9 @@
             // calculate/select more things that will remain unchanged
             this.bypass = this.$articleBody.find( this.fullwidthElements.join() );
 
-            $( window ).on( 'scroll', $.throttle( function() { that.handleScrolling(); }, 100 ) );
+            $( window ).on( 'scroll', $.throttle( function() {
+                that.handleScrolling();
+            }, 100 ) );
         },
 
         /*
@@ -148,9 +150,11 @@
             this.calculateArticlePositions();
             // In 2015, we need multiple lines of code to detect the scrolling position
             // (https://developer.mozilla.org/de/docs/Web/API/Window/scrollY)
-            this.currentPosition = this.supportPageOffset ?
-                window.pageYOffset : this.isCSS1Compat ?
-                    document.documentElement.scrollTop : document.body.scrollTop;
+            if ( this.supportPageOffset ) {
+                this.currentPosition = window.pageYOffset;
+            } else {
+                this.currentPosition = this.isCSS1Compat ? document.documentElement.scrollTop : document.body.scrollTop;
+            }
 
             this.absolute = this.currentPosition > this.maxFixedPos;
             this.fixed = this.currentPosition >= this.minFixedPos && !this.absolute;

@@ -3,7 +3,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
-(function( $, window, document ) {
+( function( $, window, document ) {
     function Liveblog( element ) {
         this.node = element;
         this.element = $( element );
@@ -27,7 +27,7 @@
                 container = document.createElement( 'div' );
                 container.className = 'liveblog-text-wrapper liveblog-text-wrapper--wrapped';
 
-                while (( firstChild = this.node.parentNode.firstChild ) !== this.node ) {
+                while ( ( firstChild = this.node.parentNode.firstChild ) !== this.node ) {
                     container.appendChild( this.node.parentNode.removeChild( firstChild ) );
                 }
 

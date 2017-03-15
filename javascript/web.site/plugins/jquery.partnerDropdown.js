@@ -3,7 +3,8 @@
  * @author anika.szuppa@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
+
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -28,25 +29,21 @@
     */
     $.fn.boxDropdown = function() {
 
-        var el = {
-            bindDropboxEvents: function( that ) {
+        function bindDropboxEvents( $element ) {
+            var $dropdown = $element.find( '.partner__dropdown' ),
+                $button = $element.find( '.partner__button-text' ),
+                tracking = $dropdown.data( 'tracklink' );
 
-                var $dropdown = $( that ).find( '.partner__dropdown' ),
-                    $button = $( that ).find( '.partner__button-text' ),
-                    tracking = $dropdown.data( 'tracklink' );
-
-                $dropdown.on( 'change', function( event ) {
-                    var link = $dropdown.find( '.partner__dropdown-option:selected' ).attr( 'value' );
-                    if ( link ) {
-                        $button.attr( 'href', link + tracking );
-                    }
-                });
-
-            }
-        };
+            $dropdown.on( 'change', function() {
+                var link = $dropdown.find( '.partner__dropdown-option:selected' ).attr( 'value' );
+                if ( link ) {
+                    $button.attr( 'href', link + tracking );
+                }
+            });
+        }
 
         return this.each( function() {
-            el.bindDropboxEvents( this );
+            bindDropboxEvents( $( this ) );
         });
     };
 })( jQuery );

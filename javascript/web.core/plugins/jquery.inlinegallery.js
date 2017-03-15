@@ -1,11 +1,10 @@
-/* global $blocked, WebKitCSSMatrix */
-
 /**
  * @fileOverview jQuery Plugin for Inline-Gallery
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-(function( $, Modernizr, Zeit ) {
+( function( $, Modernizr, Zeit ) {
+
     /**
      * See (http://jquery.com/).
      * @name jQuery
@@ -36,7 +35,7 @@
                 onSlideAfter: function() {
                     // add ad-reloading capability
                     var prefix = Zeit.view.ressort === 'zeit-magazin' ? 'zmo-' : '';
-                    $( window ).trigger( 'interaction.adreload.z', [ prefix + 'gallery', 'interaction' ] );
+                    $( window ).trigger( 'interaction.adreload.z', [ prefix + 'gallery', 'interaction' ]);
                 },
                 slideSelector: '.slide',
                 controls: !hasTouch,
@@ -53,7 +52,7 @@
 
             // special bonus for those using jQuery
             if ( el instanceof $ ) {
-                el = el[0];
+                el = el[ 0 ];
             }
 
             if ( !el.getBoundingClientRect ) {
@@ -88,7 +87,9 @@
                 handleKeydown = function( e ) {
                     // enable keyboard navigation
                     // do nothing if there is another key involved
-                    if ( e.altKey || e.shiftKey || e.ctrlKey || e.metaKey ) { return; }
+                    if ( e.altKey || e.shiftKey || e.ctrlKey || e.metaKey ) {
+                        return;
+                    }
 
                     switch ( e.keyCode ) {
                         case DOM_VK_RIGHT:
@@ -105,7 +106,7 @@
                 },
                 setFigCaptionWidth = function( slide ) {
                     var caption = slide.find( '.figure__caption' ),
-                    imageWidth = slide.find( 'img' ).width();
+                        imageWidth = slide.find( 'img' ).width();
 
                     if ( caption.length && imageWidth > 300 && imageWidth < galleryWidth ) {
                         caption.css( 'max-width', imageWidth + 'px' );
@@ -114,7 +115,7 @@
 
             $( window ).on( 'keydown', handleKeydown );
 
-            figures.on( 'scaling_ready', function( e ) {
+            figures.on( 'scaling_ready', function() {
                 var currentSlide;
 
                 // if the slider loaded before the image
@@ -174,9 +175,14 @@
                 sliderViewport = gallery.parent();
 
                 if ( !hasTouch ) {
+
                     /* additional buttons on image */
-                    nextButton.insertAfter( gallery ).on( 'click', function() { slider.goToNextSlide(); } );
-                    backButton.insertAfter( gallery ).on( 'click', function() { slider.goToPrevSlide(); } );
+                    nextButton.insertAfter( gallery ).on( 'click', function() {
+                        slider.goToNextSlide();
+                    });
+                    backButton.insertAfter( gallery ).on( 'click', function() {
+                        slider.goToPrevSlide();
+                    });
 
                     /* add icons to existing gallery buttons */
                     $( '.bx-next' )
@@ -192,7 +198,7 @@
                 }
 
                 // fix ad columns
-                $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css( { height: document.body.offsetHeight + 'px' } );
+                $( '#iqdBackgroundLeft, #iqdBackgroundRight' ).css({ height: document.body.offsetHeight + 'px' });
 
                 setFigCaptionWidth( figures.first() );
             };

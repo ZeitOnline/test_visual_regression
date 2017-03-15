@@ -13,7 +13,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $commentForm = $( '#comment-form' ),
         uid = $commentForm.attr( 'data-uid' ),
         slideDuration = 300,
-        inputEvent = ( 'oninput' in document.createElement( 'input' )) ? 'input' : 'keypress',
+        inputEvent = ( 'oninput' in document.createElement( 'input' ) ) ? 'input' : 'keypress',
         sendurl = window.location.href;
 
     /**
@@ -24,7 +24,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     function toggleRecommendationLink( link ) {
         var label;
 
-        if ( link.hasClass( 'comment__reaction--active' )) {
+        if ( link.hasClass( 'comment__reaction--active' ) ) {
             label = 'Empfehlen';
         } else {
             label = 'Empfohlen';
@@ -49,9 +49,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
      * comments.js: show form
      * @function showForm
      * @param  {object} form    jQuery object
-     * @param  {object} comment jQuery object
      */
-    function showForm( form, comment ) {
+    function showForm( form ) {
         var animation = 'slideUp';
 
         if ( form.is( ':hidden' ) ) {
@@ -150,7 +149,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             form.find( '.js-count-formchars' ).text( '' );
         }
 
-        showForm( form, comment );
+        showForm( form );
     }
 
     /**
@@ -188,7 +187,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             form.find( 'input[name="pid"]' ).val( cid );
         }
 
-        showForm( form, comment );
+        showForm( form );
     }
 
     /**
@@ -217,7 +216,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                     .appendTo( comment );
             }
 
-            showForm( form, comment );
+            showForm( form );
             return false;
         }
 
@@ -231,9 +230,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $.ajax({
             url: sendurl,
             data: {
-                'ajax':     'true',
-                'action':   'recommend',
-                'pid':      cid
+                'ajax': 'true',
+                'action': 'recommend',
+                'pid': cid
             },
             dataType: 'json',
             method: 'POST',
@@ -260,7 +259,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         var link = $( this ),
             action = link.data( 'action' ),
             cid  = link.data( 'cid' ),
-            comment = link.closest( '.comment__container' ),
             failText = 'Empfehlung fehlgeschlagen, bitte Seite neu laden.';
 
         e.preventDefault();
@@ -275,9 +273,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $.ajax({
             url: sendurl,
             data: {
-                'ajax':     'true',
-                'action':   action,
-                'pid':      cid
+                'ajax': 'true',
+                'action': action,
+                'pid': cid
             },
             dataType: 'json',
             method: 'POST'
@@ -333,10 +331,10 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $.ajax({
             url: sendurl,
             data: {
-                'ajax':     'true',
-                'action':   'report',
-                'pid':      input.pid.value,
-                'comment':  input.comment.value
+                'ajax': 'true',
+                'action': 'report',
+                'pid': input.pid.value,
+                'comment': input.comment.value
             },
             dataType: 'json',
             method: 'POST',
@@ -390,10 +388,10 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
         $form.find( '.button' ).prop( 'disabled', true );
 
         var data = {
-            'ajax':      'true',
-            'action':    'comment',
-            'pid':       input.pid.value,
-            'comment':   input.comment.value
+            'ajax': 'true',
+            'action': 'comment',
+            'pid': input.pid.value,
+            'comment': input.comment.value
         };
 
         if ( input.username ) {
@@ -451,8 +449,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     }
 
     function putRewrapperOnReplies( $firstReply ) {
-        var $rootComment = $firstReply.prev( '.comment' ),
-            rewrapperId = $firstReply.data( 'rewrapper-id' ),
+        var rewrapperId = $firstReply.data( 'rewrapper-id' ),
             rewrapper = '' +
             '<a id="' + rewrapperId + '" href="#" data-ct-label="antworten_verbergen" ' +
             'class="comment__rewrapper comment__rewrapper--loading js-hide-replies">' +
@@ -475,14 +472,8 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
     }
 
     function wrapReplies() {
-        // TODO: Target + Deeplinks testen
-        var $rootComments = $commentsBody.find( '.js-comment-toplevel' ),
-            $target;
-
-        // TODO: wird das $target noch benötigt?
-        if ( window.location.hash.indexOf( '#cid-' ) === 0 ) {
-            $target = $( window.location.hash );
-        }
+        // TODO: Deeplinks testen
+        var $rootComments = $commentsBody.find( '.js-comment-toplevel' );
 
         $rootComments.each( function() {
             var $root = $( this ),
@@ -491,7 +482,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 id,
                 replyLoadLink,
                 replyLoadUrl,
-                replyLoadFallbackUrl,
                 replyCountElement,
                 replyCountString,
                 replyCountInteger,
@@ -505,7 +495,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             id = 'hide-replies-' + this.id;
             replyLoadLink = $replyLinkContainer.find( 'a' );
             replyLoadUrl = replyLoadLink.data( 'url' );
-            replyLoadFallbackUrl = replyLoadLink.attr( 'href' );
             replyCountElement = $replyLinkContainer.find( '.comment-overlay__count' );
             replyCountString = replyCountElement.eq( 0 ).text().replace( '+ ', '' );
             replyCountInteger = parseInt( replyCountString, 10 );
@@ -529,20 +518,6 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
 
             $replyLinkContainer.remove();
         });
-    }
-
-    function coverReply( $firstReply, replyCount ) {
-        var overlayHTML = '' +
-            '<div class="comment-overlay">\n' +
-                '<div class="comment-overlay__wrap">\n' +
-                    '<span class="comment-overlay__count">+ ' + replyCount + '</span>\n' +
-                    '<span class="comment-overlay__cta">Weitere Antworten anzeigen</span>\n' +
-                '</div>\n' +
-            '</div>\n';
-
-        $firstReply.addClass( 'comment--wrapped' )
-            .find( '.comment__body' )
-            .append( overlayHTML );
     }
 
     function loadReplies( e ) {
@@ -616,7 +591,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             'complete': function() {
                 $repliesToShow.slice( 5 ).show();
             }
-        } );
+        });
 
     }
 
@@ -631,7 +606,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             'complete': function() {
                 $answers.slice( 5 ).hide();
             }
-        } );
+        });
     }
 
     function jumpToComment() {
