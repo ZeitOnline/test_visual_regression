@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3778: Remove veeseo from paywalled articles
 
+- ZON-3778: Use ZEIT Campus startpage topiclinks on all pages in ZEIT Campus
+
 - MAINT: Fix path in css sourcemaps if you grunt from outside the project dir
 
 
