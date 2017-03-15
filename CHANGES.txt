@@ -8,6 +8,8 @@ POSTDEPLOY
 3.44 (unreleased)
 -----------------
 
+- ZON-3778: Remove veeseo from paywalled articles
+
 - MAINT: Fix path in css sourcemaps if you grunt from outside the project dir
 
 
