@@ -65,7 +65,7 @@ define([ 'jquery' ],
                             .replace( /\{{videoId}}/g, videoId )
                             .replace( /\{{embed}}/g, 'default' );
 
-                    defaults.elem.html( snippet );
+                    defaults.elem.empty().html( snippet );
 
                     // in case of html5 player we have to load a script from brightcove
                     // if your site uses require.js, this same script needs to be required

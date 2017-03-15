@@ -18,7 +18,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
     * paginateTeasers.js: load and inject teasers
     * @function loadGalleryTeasers
     */
-    function loadGalleryTeasers( ) {
+    function loadGalleryTeasers() {
 
         var lastTeaserUniqueId = $visibleTeasers.last().data( 'unique-id' );
 
@@ -54,7 +54,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
                     });
                 }
             });
-        }).fail( function( ) {
+        }).fail( function() {
             fallbackUrl = $this.attr( 'href' );
             if ( fallbackUrl ) {
                 window.location.href = fallbackUrl;
@@ -67,7 +67,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
     * invisible until now.
     * @function slideGalleryTeasers
     */
-    function slideGalleryTeasers( ) {
+    function slideGalleryTeasers() {
 
         // We just throw away the vivible items. The remaining are used to fill
         // the space. Due to the CSS rules, the correct number of teasers for
@@ -109,9 +109,9 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
         $hiddenTeasers =  $allTeasers.filter( ':hidden' );
 
         if ( $hiddenTeasers.length >= $visibleTeasers.length ) {
-            slideGalleryTeasers( );
+            slideGalleryTeasers();
         } else {
-            loadGalleryTeasers( );
+            loadGalleryTeasers();
         }
     }
 

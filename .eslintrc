@@ -51,7 +51,7 @@
             "error",
             "always",
             {
-                "exceptions": ["{}", "[]"]
+                "exceptions": ["{}", "[]", "empty"]
             }
         ]
     }
