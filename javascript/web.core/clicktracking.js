@@ -3,7 +3,7 @@
  * @author moritz.stoltenburg@zeit.de, thomas.puppe@zeit.de
  * @version  0.1
  */
-define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
+define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
     var location = document.location,
         debugMode = location.hash.indexOf( 'debug-clicktracking' ) > -1;
@@ -23,13 +23,13 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             // For some links, we want to preserve the GET parameters.
             // Otherwise, remove them!
-            if ( data.length > 2 && data[1] === 'social' && data[2] > 0 ) {
+            if ( data.length > 2 && data[ 1 ] === 'social' && data[ 2 ] > 0 ) {
                 url = $( 'meta[property="og:url"]' );
                 url = url.length ?
                     url.attr( 'content' ).replace( /http(s)?:\/\//, '' ) :
                     location.host + location.pathname;
             } else if ( slug.indexOf( '.studiumbox.' ) === -1 ) {
-                url = url.split( '?' )[0];
+                url = url.split( '?' )[ 0 ];
             }
         }
 
@@ -92,7 +92,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 'ß': 'ss'
             },
             transliterate = function( m ) {
-                return map[m] || '_';
+                return map[ m ] || '_';
             };
 
         return str
@@ -108,6 +108,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      * @type {Object}
      */
     var trackElement = {
+
         /**
          * track elements in the main section
          * @param  {Object} $element jQuery Element with the link that was clicked
@@ -173,6 +174,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                         column = $area.index() + 1; // the area number
                         break;
                     }
+
                     /* falls through */
 
                 default:
@@ -192,6 +194,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             return data;
         },
+
         /**
          * track links with data-id attribute that contains the complete webtrekk id without href
          * @param  {object} $element jQuery collection with the link that was clicked
@@ -204,6 +207,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             ];
             return data;
         },
+
         /**
          * track links inside parents with appropriate data attributes
          * @param  {object} $element jQuery collection with the link that was clicked
@@ -276,6 +280,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             ];
             return data;
         },
+
         /**
          * track links with data-tracking attribute that contains the complete webtrekk id plus href
          * @param  {object} $element jQuery collection with the link that was clicked
@@ -284,11 +289,12 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         useDataTracking: function( $element ) {
             var trackingData = $element.data( 'tracking' ).split( '|' ),
                 data = [
-                    trackingData[0],
-                    trackingData[1] // url
+                    trackingData[ 0 ],
+                    trackingData[ 1 ] // url
                 ];
             return data;
         },
+
         /**
          * track elements in the parquet-meta section
          * definition: https://docs.google.com/spreadsheets/d/1uY8XXULPq7zUre9prBWiKDaBQercLmAEENCVF8LQk4Q/edit#gid=1056411343
@@ -297,7 +303,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         parquetMeta: function( $element, event ) {
 
-            var linkClassName = $element.get( 0 ).className.split( ' ' )[0],
+            var linkClassName = $element.get( 0 ).className.split( ' ' )[ 0 ],
                 linkType = linkClassName.split( '__' ).pop().replace( '-', '' ),
                 $column = $( event.delegateTarget ),
                 data;
@@ -313,6 +319,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
             return data;
         },
+
         /**
          * track links which are inside an article text
          * @param  {object} $element jQuery collection with the link that was clicked
@@ -321,10 +328,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         linkInArticleContent: function( $element, $page ) {
             var $blocks = $page.children( '[class]' ).not([ // exclude some blocks
-                        '[data-ct-area="article-toc"]', // table of contents
-                        '.article__subheading', // page title and intertitle
-                        '.article__subpage-head' // page title in longform
-                    ].join() ),
+                    '[data-ct-area="article-toc"]', // table of contents
+                    '.article__subheading', // page title and intertitle
+                    '.article__subpage-head' // page title in longform
+                ].join() ),
                 $block = $element.closest( $blocks ),
                 pageNumber = $page.data( 'page-number' ) || 0,
                 blockNumber = $blocks.index( $block ) + 1,
@@ -352,14 +359,13 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 current = '',
                 data;
 
-            // navigation arrows
             if ( /-(prev|next)/.test( className ) ) {
+                // navigation arrows
                 row = className.indexOf( 'overlay' ) < 0 ? 1 : 2;
                 column = className.indexOf( 'prev' ) < 0 ? 2 : 1;
                 current = parseInt( pager.text().split( ' / ' ).shift(), 10 );
-            }
-            // navigation bullets for touch devices
-            else if ( className.indexOf( 'bx-pager-link' ) !== -1 ) {
+            } else if ( className.indexOf( 'bx-pager-link' ) !== -1 ) {
+                // navigation bullets for touch devices
                 row = 1;
                 current = pager.find( '.bx-pager-link' ).index( $element ) + 1;
             }
@@ -376,8 +382,9 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             ];
             return data;
         }
-    },
-    clickTrack = function( event ) {
+    };
+
+    function clickTrack( event ) {
         var data = trackElement[ event.data.funcName ]( $( this ), event ),
             trackingData;
 
@@ -394,7 +401,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 send( data );
             }
         }
-    };
+    }
 
     return {
         string: string,
@@ -403,6 +410,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
             if ( typeof Zeit === 'undefined' || ( typeof window.wt === 'undefined' && !debugMode ) ) {
                 return;
             }
+
             /**
              * trackingLinks - a collection of jQuery-Objects to add trackElement to.
              *
@@ -412,39 +420,39 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
              * to filter the descendants of the selected elements that trigger the event.
              */
             var trackingLinks = {
-                    main: [
-                        '.main',
-                        [
-                         'article a:not([data-wt-click])',
-                         'aside a:not([data-wt-click])',
-                         'aside input[type="submit"]'
-                        ].join()
-                    ],
-                    useDataId: [
-                        [
-                         '.section-heading',
-                         '.section-footer',
-                         '.snapshot__media',
-                         '#servicebox',
-                         '.teaser-topic-variant__media',
-                         '.breaking-news-banner',
-                         '.article-lineage',
-                         '.js-truncate-region'
-                        ].join(),
-                        'a[data-id]:not([data-wt-click])'
-                    ],
-                    useDataArea: [
-                        '[data-ct-area]',
-                        [
+                main: [
+                    '.main',
+                    [
+                        'article a:not([data-wt-click])',
+                        'aside a:not([data-wt-click])',
+                        'aside input[type="submit"]'
+                    ].join()
+                ],
+                useDataId: [
+                    [
+                        '.section-heading',
+                        '.section-footer',
+                        '.snapshot__media',
+                        '#servicebox',
+                        '.teaser-topic-variant__media',
+                        '.breaking-news-banner',
+                        '.article-lineage',
+                        '.js-truncate-region'
+                    ].join(),
+                    'a[data-id]:not([data-wt-click])'
+                ],
+                useDataArea: [
+                    '[data-ct-area]',
+                    [
                         'a:not([data-wt-click])',
                         'input[type="submit"]'
-                        ].join()
-                    ],
-                    parquetMeta: [
-                        '.parquet-meta',
-                        'a:not([data-wt-click])'
-                    ]
-                };
+                    ].join()
+                ],
+                parquetMeta: [
+                    '.parquet-meta',
+                    'a:not([data-wt-click])'
+                ]
+            };
 
             // The key name is used for calling the corresponding function in trackElement
             for ( var key in trackingLinks ) {

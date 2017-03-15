@@ -3,14 +3,14 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
-(function( window, document ) {
+( function( window, document ) {
     var property,
         vendorPrefixes = [ 'ms', 'o', 'moz', 'webkit', '' ],
         support = {},
         eventName,
         prefix;
 
-    while (( prefix = vendorPrefixes.pop() ) !== undefined ) {
+    while ( ( prefix = vendorPrefixes.pop() ) !== undefined ) {
         property = ( prefix ? prefix + 'H' : 'h' ) + 'idden';
         support.pageVisibility = document[ property ] !== undefined;
 

@@ -10,11 +10,11 @@ module.exports = function(grunt) {
         rubyVersion: '1.9.3',
         tasks: {
             production: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dist', 'css', 'svg' ],
-            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-all', 'postcss:dev', 'postcss:old-ie', 'copy:css', 'svg' ],
+            development: [ 'clean', 'auto_install', 'bower', 'modernizr_builder', 'lint', 'requirejs:dev', 'sass:dev-all', 'postcss:dev', 'postcss:old-ie', 'svg' ],
             docs: [ 'jsdoc', 'sftp-deploy' ],
             svg: [ 'clean:svg', 'svgmin', 'svgstore', 'copy:svg_campus', 'copy:svg_magazin', 'copy:svg_site' ],
-            css: [ 'sass:dist', 'postcss:dist', 'postcss:old-ie', 'copy:css' ],
-            lint: [ 'jshint', 'jscs' ]
+            css: [ 'sass:dist', 'postcss:dist', 'postcss:old-ie' ],
+            lint: [ 'jshint', 'eslint' ]
         }
     };
 
@@ -72,8 +72,8 @@ module.exports = function(grunt) {
         // compile sass code
         sass: {
             options: {
-                sourceMapEmbed: true,
-                sourceMapRoot: 'file://' + project.sourceDir,
+                sourceMap: true,
+                sourceMapRoot: 'file://' + project.codeDir + 'css/web',
                 outputStyle: 'expanded',
                 precision: 5, // default of node-sass
                 includePaths: [
@@ -116,7 +116,7 @@ module.exports = function(grunt) {
             // this seems to be fixed now
             'amp': {
                 options: {
-                    sourceMapEmbed: false,
+                    sourceMap: false,
                     outputStyle: 'compact'
                 },
                 files: [{
@@ -129,7 +129,7 @@ module.exports = function(grunt) {
             },
             'dist': {
                 options: {
-                    sourceMapEmbed: false,
+                    sourceMap: false,
                     outputStyle: 'compressed'
                 },
                 files: [{
@@ -174,13 +174,6 @@ module.exports = function(grunt) {
 
         // copy files
         copy: {
-            // copy plain CSS files
-            css: {
-                expand: true,
-                cwd: project.sourceDir + 'sass',
-                src: 'vendor/*.css',
-                dest: project.codeDir + 'css/'
-            },
             svg_campus: {
                 expand: true,
                 cwd: project.sourceDir + 'sass/web.campus/svg/_minified',
@@ -215,15 +208,15 @@ module.exports = function(grunt) {
             }
         },
 
-        jscs: {
+        eslint: {
             dist: {
-                src: [ project.sourceDir + 'javascript/**/*.js' ]
+                src: [ project.sourceDir + 'javascript' ]
             },
             options: {
-                config: project.sourceDir + '.jscsrc',
-                excludeFiles: [
-                    project.sourceDir + 'javascript/libs/**/*',
-                    project.sourceDir + 'javascript/vendor/**/*'
+                fix: true,
+                configFile: project.sourceDir + '.eslintrc',
+                ignorePattern: [
+                    '**/javascript/vendor/*.js',
                 ]
             }
         },
@@ -297,11 +290,12 @@ module.exports = function(grunt) {
                 // needed for grunt_runner to delete outside current working dir
                 force: true
             },
+            // delete generated CSS files and source maps
+            css: [ project.codeDir + 'css/web.*' ],
             // cleanup minified SVGs, remove orphaned files
             svg: [ project.sourceDir + 'sass/web.*/**/_minified' ],
             // delete old vendor scripts
             scripts: [ project.sourceDir + 'javascript/vendor' ],
-            sass: [ project.sourceDir + 'sass/vendor' ],
             // delete unused directories
             legacy: [
                 project.sourceDir + 'sass/web.*/icons',
@@ -438,7 +432,7 @@ module.exports = function(grunt) {
             },
             config: {
                 files: [
-                    project.sourceDir + '.jscsrc',
+                    project.sourceDir + '.eslintrc',
                     project.sourceDir + '.jshintrc',
                     project.sourceDir + 'bower.json',
                     project.sourceDir + 'Gruntfile.js'
@@ -462,7 +456,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-requirejs');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-jscs');
+    grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-modernizr-builder');
     grunt.loadNpmTasks('grunt-newer');

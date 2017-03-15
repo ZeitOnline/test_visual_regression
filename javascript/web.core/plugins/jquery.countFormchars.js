@@ -3,7 +3,8 @@
  * @author thomas.puppe@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
+
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -27,7 +28,7 @@
     * @return {object} jQuery-Object for chaining
     */
     $.fn.countFormchars = function() {
-        return this.on( 'change keyup paste', '.comment-form__textarea', function( e ) {
+        return this.on( 'change keyup paste', '.comment-form__textarea', function() {
             $( this.form )
                 .find( '.js-count-formchars' )
                 .text( this.value.length + ' / ' );

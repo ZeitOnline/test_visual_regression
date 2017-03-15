@@ -21,7 +21,7 @@ define([ 'jquery' ], function( $ ) {
             /**
              * require photocluster library
              */
-            require( [
+            require([
                 'masonry'
             ], function( Masonry ) {
 

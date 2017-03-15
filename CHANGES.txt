@@ -4,13 +4,15 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- für FEM-28 in den Vivis `overscrolling` aus `feature-toggle.xml` entfernen
-
 
 3.44 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3778: Remove veeseo from paywalled articles
+
+- ZON-3778: Use ZEIT Campus startpage topiclinks on all pages in ZEIT Campus
+
+- MAINT: Fix path in css sourcemaps if you grunt from outside the project dir
 
 
 3.43 (2017-03-09)
@@ -22,7 +24,7 @@ POSTDEPLOY
 
 - ZON-3348: Add liveblogs for AMP
 
-- ZON-3572: Polish payment gate button and link
+- ZON-3752: Polish payment gate button and link
 
 - FEM-25: Refactor HP overlay
 
@@ -30,7 +32,7 @@ POSTDEPLOY
 
 - FEM-32: Reactivate live reload
 
-- FEM-28: Overscrolling small fixes
+- FEM-26: Overscrolling small fixes
 
 - MAINT: Add notification for changed account settings, change registration wording
 

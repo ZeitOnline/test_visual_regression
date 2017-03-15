@@ -1,24 +1,25 @@
-// jscs:disable requireCamelCaseOrUpperCaseIdentifiers
 /**
  * @fileOverview API for asynchronely reload ads on webpages
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
+define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
     var configUrl = Zeit.jsconfHost + '/config_adreload.json',
-    config = false,
-    timer = {},
-    clickCounter = [],
+        config = false,
+        timer = {},
+        clickCounter = [];
+
     /**
      * logging helper - wraps if debug --> console.log
      * @return {void}
      */
-    log = function() {
+    function log() {
         if ( window.location.search.indexOf( 'debug-adreload' ) !== -1 ) {
             console.log.apply( console, arguments );
         }
-    },
+    }
+
     /**
      * test if a supplied origin fits into the configured list of origins
      * be backward compatible to older form of string
@@ -26,16 +27,17 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      * @param  {object}  event  message event object
      * @return {Boolean}
      */
-    isValidOrigin = function( configuredOrigin, event ) {
+    function isValidOrigin( configuredOrigin, event ) {
         configuredOrigin  = typeof configuredOrigin === 'string' ? [ configuredOrigin ] : configuredOrigin;
         return $.inArray( event.originalEvent.origin, configuredOrigin ) > -1;
-    },
+    }
+
     /**
      * check against the interaction interval
      * @param  {object} myconfig configuration section read from json before
      * @return {bool}
      */
-    clickCount = function( myconfig ) {
+    function clickCount( myconfig ) {
         // load on every click
         if ( myconfig.interval < 2 ) {
             log( 'direct click' );
@@ -43,7 +45,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
 
         // consecutive events
-        if ( clickCounter[ myconfig.name ] ) {
+        if ( clickCounter[ myconfig.name ]) {
             // gained configured interval
             if ( ++clickCounter[ myconfig.name ] % myconfig.interval === 0 ) {
                 log( 'max click' );
@@ -57,13 +59,14 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
 
         return false;
-    },
+    }
+
     /**
      * check timer and click interval
      * @param  {object} myconfig configuration section read from json before
      * @return {bool}
      */
-    checkClickCount = function( myconfig ) {
+    function checkClickCount( myconfig ) {
         // do we need a timer?
         if ( typeof myconfig.time !== 'undefined' && myconfig.time > 0 ) {
             var now = $.now();
@@ -80,22 +83,23 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         } else {
             return clickCount( myconfig );
         }
-    },
+    }
+
     /**
      * load configuration from json file
      * @return {object} ajax promise
      */
-    loadConfig = function() {
-        return $.ajax( configUrl, { dataType: 'json' } );
-    },
+    function loadConfig() {
+        return $.ajax( configUrl, { dataType: 'json' });
+    }
+
     /**
      * interaction event
      * @param  {object} event   DOM event object
      * @param  {string} name  interaction emmitter name
-     * @param  {string} message message field of the request
      * @return {void}
      */
-    interaction = function( event, name, message ) {
+    function interaction( event, name ) {
         // check config if name is registered
         var myconfig;
         try {
@@ -109,7 +113,10 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         if (
             window.location.pathname.indexOf( myconfig.slug ) < 0 ||
             $.inArray( Zeit.view.type, myconfig.pagetypes ) < 0
-        ) { return; }
+        ) {
+            return;
+        }
+
         if ( checkClickCount( myconfig ) ) {
             // reload Ads
             if ( typeof window.IQD_ReloadHandle === 'function' ) {
@@ -129,13 +136,14 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 }
             }
         }
-    },
+    }
+
     /**
      * channel filtered window.messages to interaction api
      * @param  {object} event DOM event
      * @return {void}
      */
-    message = function( event ) {
+    function message( event ) {
         var messageData;
 
         if ( typeof event.originalEvent.data  !== 'string' ) {
@@ -155,14 +163,14 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         }
 
         if ( typeof messageData.name !== 'string' ||
-                typeof config[messageData.name] === 'undefined' ||
-                !isValidOrigin( config[messageData.name].origin, event ) ) {
+                typeof config[ messageData.name ] === 'undefined' ||
+                !isValidOrigin( config[ messageData.name ].origin, event ) ) {
             log( 'error', 'messageData not correctly set' );
             return;
         }
 
-        $( window ).trigger( 'interaction.adreload.z', [ messageData.name, messageData.message ] );
-    };
+        $( window ).trigger( 'interaction.adreload.z', [ messageData.name, messageData.message ]);
+    }
 
     return {
         init: function() {
@@ -180,7 +188,7 @@ define( [ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 log( 'error', errorThrown );
             });
             // on page unload unbind all at unload to prevent memory leaks
-            $( window ).on( 'unload', function( event ) {
+            $( window ).on( 'unload', function() {
                 $( window ).off( 'adreload' );
             });
         }

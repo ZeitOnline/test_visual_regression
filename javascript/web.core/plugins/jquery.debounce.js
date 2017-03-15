@@ -3,11 +3,12 @@
  * @version  0.1
  */
 
-(function( $ ) {
+( function( $ ) {
 
     'use strict';
 
     $.extend({
+
         /**
          * Creates a function that delays the invocation of `func` until after `wait`
          * milliseconds have elapsed since the last time it was invoked. If `immediate`
@@ -31,7 +32,7 @@
                     func.apply( context, args );
                 }
 
-                timeout = setTimeout(function() {
+                timeout = setTimeout( function() {
                     timeout = null;
                     if ( !immediate ) {
                         func.apply( context, args );
