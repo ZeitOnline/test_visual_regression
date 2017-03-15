@@ -654,7 +654,7 @@ class Base(object):
             ('cp28', access),  #
             ('cp29', first_click_free),  # First click free
             ('cp30', self.paywall or 'open'),  # Paywall Schranke
-            ('cp32', self.request.scheme)  # Protokoll
+            ('cp32', '')  # Protokoll (wird per JS gesetzt in webtrekk.html)
         ])
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(

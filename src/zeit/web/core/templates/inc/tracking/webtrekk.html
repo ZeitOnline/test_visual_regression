@@ -33,6 +33,8 @@
                     12: window.Zeit.getSiteParam()
                 {%- elif key == 'cp13' -%}
                     13: window.Zeit.breakpoint.getTrackingBreakpoint()
+                {%- elif key == 'cp32' -%}
+                    32: window.location.protocol.replace(':', '')
                 {%- else -%}
                     {{ key | replace('cp', '') | int }}: "{{ view.webtrekk.customParameter[key] }}"
                 {%- endif %}
