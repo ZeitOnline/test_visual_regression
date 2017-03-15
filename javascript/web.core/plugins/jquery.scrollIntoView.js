@@ -3,7 +3,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
 
     var defaults = {
         duration: 500
@@ -34,7 +34,7 @@
      */
     $.fn.scrollIntoView = function( options ) {
 
-        options = $.extend( {}, defaults, options );
+        options = $.extend({}, defaults, options );
 
         this.eq( 0 ).velocity( 'scroll', options );
 

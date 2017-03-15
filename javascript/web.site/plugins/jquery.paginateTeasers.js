@@ -5,8 +5,7 @@
  */
 define([ 'jquery', 'web.core/images' ], function( $, images ) {
 
-    var test = 'dummy',
-        $this,
+    var $this,
         $galleryArea,
         $allTeasers,
         $hiddenTeasers,
@@ -19,7 +18,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
     * paginateTeasers.js: load and inject teasers
     * @function loadGalleryTeasers
     */
-    function loadGalleryTeasers( ) {
+    function loadGalleryTeasers() {
 
         var lastTeaserUniqueId = $visibleTeasers.last().data( 'unique-id' );
 
@@ -43,19 +42,19 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
             //}
 
             $galleryArea.find( selector ).velocity( 'transition.slideLeftBigOut', {
-                    duration: slidingDuration,
-                    stagger: 50,
-                    complete: function( elements ) {
-                        $( elements ).parent().replaceWith( $teasers.parent() );
-                        images.scale( $teasers );
-                        $teasers.velocity( 'transition.slideRightBigIn', {
-                            display: '', // remove the property altogether and return to previous display value from CSS
-                            duration: slidingDuration,
-                            stagger: 50
-                        });
-                    }
-                });
-        }).fail(function( ) {
+                duration: slidingDuration,
+                stagger: 50,
+                complete: function( elements ) {
+                    $( elements ).parent().replaceWith( $teasers.parent() );
+                    images.scale( $teasers );
+                    $teasers.velocity( 'transition.slideRightBigIn', {
+                        display: '', // remove the property altogether and return to previous display value from CSS
+                        duration: slidingDuration,
+                        stagger: 50
+                    });
+                }
+            });
+        }).fail( function() {
             fallbackUrl = $this.attr( 'href' );
             if ( fallbackUrl ) {
                 window.location.href = fallbackUrl;
@@ -68,7 +67,7 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
     * invisible until now.
     * @function slideGalleryTeasers
     */
-    function slideGalleryTeasers( ) {
+    function slideGalleryTeasers() {
 
         // We just throw away the vivible items. The remaining are used to fill
         // the space. Due to the CSS rules, the correct number of teasers for
@@ -78,17 +77,17 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
         // new items) we use velocity.
 
         $visibleTeasers.velocity( 'transition.slideLeftBigOut', {
-                duration: slidingDuration,
-                stagger: 50,
-                complete: function( elements ) {
-                    $visibleTeasers.remove();
-                    $hiddenTeasers.velocity( 'transition.slideRightBigIn', {
-                        display: '', // remove the property altogether and return to previous display value from CSS
-                        duration: slidingDuration,
-                        stagger: 50
-                    });
-                }
-            });
+            duration: slidingDuration,
+            stagger: 50,
+            complete: function() {
+                $visibleTeasers.remove();
+                $hiddenTeasers.velocity( 'transition.slideRightBigIn', {
+                    display: '', // remove the property altogether and return to previous display value from CSS
+                    duration: slidingDuration,
+                    stagger: 50
+                });
+            }
+        });
     }
 
     /**
@@ -110,9 +109,9 @@ define([ 'jquery', 'web.core/images' ], function( $, images ) {
         $hiddenTeasers =  $allTeasers.filter( ':hidden' );
 
         if ( $hiddenTeasers.length >= $visibleTeasers.length ) {
-            slideGalleryTeasers( );
+            slideGalleryTeasers();
         } else {
-            loadGalleryTeasers( );
+            loadGalleryTeasers();
         }
     }
 

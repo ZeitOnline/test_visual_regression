@@ -51,26 +51,25 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 defaults = {
                     followMobile: 'default'
                 },
-                settings = $.extend( {}, defaults, options );
+                settings = $.extend({}, defaults, options );
 
             menu.on( 'click', '*[aria-controls]', function( event, triggered ) {
                 var control = $( this ),
                     expanded = control.attr( 'aria-expanded' ) === 'true',
                     followMobile = control.data( 'follow-mobile' );
 
-                // in mobile view we sometimes want to follow the link
                 if ( followMobile && Zeit.isMobileView() ) {
-                    // if the event was only triggered by jQuery, raise a native event now
+                    // in mobile view we sometimes want to follow the link
                     if ( triggered ) {
+                        // if the event was only triggered by jQuery, raise a native event now
                         event.stopImmediatePropagation();
                         this.click();
                     }
-                }
-                // in desktop view we sometimes want to follow the link, too
-                // but only if this is not a keyboard event
-                else if ( followMobile && settings.followMobile === 'always' && !triggered ) {
-                    // never follow anchor links
+                } else if ( followMobile && settings.followMobile === 'always' && !triggered ) {
+                    // in desktop view we sometimes want to follow the link, too
+                    // but only if this is not a keyboard event
                     if ( this.hash && this.hash.charAt( 0 ) === '#' ) {
+                        // never follow anchor links
                         event.preventDefault();
                     }
                 } else {
@@ -84,7 +83,9 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 if ( visibleSubmenu ) {
                     setTimeout( function() {
                         // make sure it's still there - may have been changed by another click event
-                        if ( !visibleSubmenu ) { return; }
+                        if ( !visibleSubmenu ) {
+                            return;
+                        }
 
                         var submenu = document.getElementById( visibleSubmenu.attr( 'aria-controls' ) ),
                             focused = visibleSubmenu.get( 0 ) === document.activeElement || $.contains( submenu, document.activeElement );

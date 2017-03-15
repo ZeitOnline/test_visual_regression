@@ -3,24 +3,24 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
-(function( $ ) {
+( function( $ ) {
     var defaults = {
-            tab: '.studiumbox__headline',
-            link: '.studiumbox__headline a',
-            page: '.studiumbox__content',
-            input: '.studiumbox__input',
-            preventEmpty: 'studiumbox__headline--prevent_empty',
-            mainPage: 'http://ranking.zeit.de/che2016/de/faecher',
-            //seperate tracking string for fallback as it varies from form inputs
-            tracking: '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.che.teaser.button_ohne_fach.x' +
-                        '&utm_medium=fix' +
-                        '&utm_source=zeitde_zonpmr_int' +
-                        '&utm_campaign=funktionsbox_studium' +
-                        '&utm_content=che_teaser_button_ohne_fach_x'
-        };
+        tab: '.studiumbox__headline',
+        link: '.studiumbox__headline a',
+        page: '.studiumbox__content',
+        input: '.studiumbox__input',
+        preventEmpty: 'studiumbox__headline--prevent_empty',
+        mainPage: 'http://ranking.zeit.de/che2016/de/faecher',
+        //seperate tracking string for fallback as it varies from form inputs
+        tracking: '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.che.teaser.button_ohne_fach.x' +
+                    '&utm_medium=fix' +
+                    '&utm_source=zeitde_zonpmr_int' +
+                    '&utm_campaign=funktionsbox_studium' +
+                    '&utm_content=che_teaser_button_ohne_fach_x'
+    };
 
     $.fn.tabs = function( settings ) {
-        var options = $.extend( {}, defaults, settings );
+        var options = $.extend({}, defaults, settings );
 
         // leads to main page if empty form is submitted
         function preventEmptySubmit() {

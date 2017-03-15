@@ -3,7 +3,7 @@
  * @author nico.bruenjes@zeit.de, valentin.vonguttenberg@zeit.de
  * @version  0.2
  */
-(function( $, window, location ) {
+( function( $, window, location ) {
 
     /**
      * Initializes instance variables.

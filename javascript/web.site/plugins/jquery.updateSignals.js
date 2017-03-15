@@ -3,19 +3,19 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-(function( $, window, document, Zeit ) {
+( function( $, window, document, Zeit ) {
 
     var options = {
-            inEffect: { opacity: 0 },
-            inVelocity: 500,
-            outEffect: { opacity: 1 },
-            outVelocity: 500,
-            uniqueId: $( document.body ).data( 'uniqueId' ),
-            timeEndpoint: '/json/delta_time?unique_id=',
-            commentsEndpoint: '/json/comment_count?unique_id=',
-            timeInterval: parseInt( Zeit.view.get( 'update_signals_time_interval' ), 10 ) || 60,
-            commentsInterval: parseInt( Zeit.view.get( 'update_signals_comments_interval' ), 10 ) || 60
-        };
+        inEffect: { opacity: 0 },
+        inVelocity: 500,
+        outEffect: { opacity: 1 },
+        outVelocity: 500,
+        uniqueId: $( document.body ).data( 'uniqueId' ),
+        timeEndpoint: '/json/delta_time?unique_id=',
+        commentsEndpoint: '/json/comment_count?unique_id=',
+        timeInterval: parseInt( Zeit.view.get( 'update_signals_time_interval' ), 10 ) || 60,
+        commentsInterval: parseInt( Zeit.view.get( 'update_signals_comments_interval' ), 10 ) || 60
+    };
 
     /**
      * recursive polling function
@@ -34,7 +34,7 @@
             return;
         }
 
-        setTimeout(function() {
+        setTimeout( function() {
             // Use page visibility API to skip request if page is hidden
             if ( document.hidden ) {
                 poll( endpoint, interval, selector );
@@ -42,6 +42,7 @@
                 $.ajax({
                     url: endpoint + options.uniqueId,
                     dataType: 'json',
+
                     /**
                      * on successful request emit events
                      * @param {object} data the objectified json pulled from endpoint
@@ -50,16 +51,17 @@
                     success: function( data ) {
                         for ( var key in data ) {
                             if ( data.hasOwnProperty( key ) ) {
-                                for ( var id in data[ key ] ) {
+                                for ( var id in data[ key ]) {
                                     if ( data[ key ].hasOwnProperty( id ) ) {
                                         $( '[data-unique-id="' + id + '"]' )
                                             .find( selector )
-                                            .trigger( 'signals.update', data[ key ][ id ] );
+                                            .trigger( 'signals.update', data[ key ][ id ]);
                                     }
                                 }
                             }
                         }
                     },
+
                     /**
                      * on completion go recursive
                      */
@@ -90,6 +92,7 @@
     }
 
     $.extend({
+
         /**
          * Polls JSON Endpoint for text updates, and animates them into the dom
          * @memberOf jQuery

@@ -1,4 +1,3 @@
-/* global GWPLine, GWPLine3, nsIqd_setBg */
 /**
 * ZON Search Tools
 * adds funky functionality to otherwise obvious search features
@@ -12,7 +11,7 @@
 * @version 1.0
 *
 */
-(function( $ ) {
+( function( $ ) {
 
     function toggleOptions() {
         $( this ).closest( '.search-options' )
