@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - MAINT: Fix path in css sourcemaps if you grunt from outside the project dir
 
+- MAINT: add brightcove plugin for autoplay (iOS bug workaround)
+
 
 3.43 (2017-03-09)
 -----------------
