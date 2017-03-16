@@ -115,7 +115,7 @@ def test_buttons_should_be_visible_on_tap_mobile(selenium_driver, testserver):
 
 def test_gallery_with_supertitle_has_html_title(testbrowser):
     browser = testbrowser('/galerien/fs-desktop-schreibtisch-computer')
-    assert ('<title>Desktop-Bilder: Das hab ich auf dem Schirm |'
+    assert ('<title>Desktop-Bilder: Das hab ich auf dem Magazin-Schirm |'
             ' ZEITmagazin</title>'
             in browser.contents)
 

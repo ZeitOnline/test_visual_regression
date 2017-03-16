@@ -113,14 +113,15 @@ def test_gallery_provides_expected_webtrekk_string(
     # prevent testfail on consecutive run
     try:
         WebDriverWait(driver, 3).until(
-            expected_conditions.title_contains('Das hab ich auf dem Schirm'))
+            expected_conditions.title_contains(
+                'Das hab ich auf dem Magazin-Schirm'))
     except TimeoutException:
         assert False, 'page must be loaded'
 
     try:
         WebDriverWait(driver, 3).until(
             expected_conditions.presence_of_element_located(
-                (By.CLASS_NAME, 'bx-wrapper')))
+                (By.CLASS_NAME, 'bx-next')))
     except TimeoutException:
         assert False, 'gallery must be present'
 
