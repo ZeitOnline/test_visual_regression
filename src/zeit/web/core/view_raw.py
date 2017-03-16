@@ -25,16 +25,16 @@ import zeit.web
     context=zeit.content.cp.interfaces.IFeed)
 @zeit.web.view_config(
     context=zeit.cms.repository.interfaces.IUnknownResource,
-    host_restriction=('xml', 'static', 'scripts', 'zeus'))
+    host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
     context=zeit.content.text.interfaces.IText,
-    host_restriction=('xml', 'static', 'scripts', 'zeus'))
+    host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
     context=zeit.content.rawxml.interfaces.IRawXML,
-    host_restriction=('xml', 'static', 'scripts', 'zeus'))
+    host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.IFeed,
-    host_restriction=('xml', 'static', 'scripts', 'zeus'))
+    host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
     context=zeit.content.image.interfaces.IImage,
     host_restriction='xml')
@@ -75,7 +75,7 @@ class RawContent(zeit.web.core.view.Base):
     context=zeit.cms.repository.interfaces.IFile)
 @zeit.web.view_config(
     context=zeit.cms.repository.interfaces.IFile,
-    host_restriction=('xml', 'static', 'scripts', 'zeus'))
+    host_restriction=('xml', 'static', 'scripts'))
 class RawFile(zeit.web.core.view.Base):
 
     def __call__(self):
