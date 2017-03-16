@@ -1,0 +1,13 @@
+{% if toggles('amp_new_advertising') -%}
+{% set slot = '/183/iqdzeit_amp/{}'.format(view.banner_channel.replace('article', 'artikel')) %}
+
+<div class="advertising advertising--place-{{ tile_number }}">
+    <amp-ad width="{{ width | default('320') }}" height="{{ height | default('320') }}"
+        type="{{ type | default('doubleclick') }}"
+        data-slot="{{ slot }}"
+        json="{{ targeting }}"
+        data-multi-size="{{ multisize }}"
+        data-multi-size-validation="{{ multisize_validation | default(false) }}">
+    </amp-ad>
+</div>
+{% endif %}
