@@ -26,17 +26,17 @@
             <input class="gate__option" id="gate-option-2" type="radio" name="angebot" value="{{ settings('paywall_premium_product_digitalandprint', 'https://premium.zeit.de') }}"
                 onchange="this.form.action=this.value; this.form.setAttribute('data-ct-column', 'digital+print');">
             <label for="gate-option-2" class="gate__label">
-                Gratis Digital-Zugang + <span class="nowrap">DIE ZEIT</span> testen
+                Gratis Digital-Zugang für <span class="nowrap">ZEIT-Abonnenten</span>
             </label>
             <ul class="gate__list">
                 <li class="gate__list-item">Alle Artikel auf ZEIT ONLINE frei</li>
-                <li class="gate__list-item">DIE ZEIT digital als App, E-Paper und für E-Reader</li>
-                <li class="gate__list-item">DIE ZEIT gedruckt frei Haus</li>
+                <li class="gate__list-item">DIE ZEIT als App, E-Paper und auf dem E-Reader</li>
+                <li class="gate__list-item">Ergänzend zu Ihrem Print-Abonnement</li>
                 <li class="gate__list-item"><strong>4 Wochen kostenlos testen</strong></li>
             </ul>
         </div>
         <div class="gate__actions">
-            <input type="hidden" name="entry_service" value="schranke_paid">
+            <input type="hidden" name="entry_service" value="schranke-paid">
             <input type="hidden" name="url" value="{{ view.content_url }}#success-registration">
             <input type="hidden" name="wt_zmc" value="fix.int.zonaudev.diezeit.wall_abo.premium.bar_{{ view.paywall }}.link.x">
             <input type="hidden" name="utm_medium" value="fix">
@@ -50,7 +50,7 @@
     {% block gate_link -%}
         <p class="gate__note">
             Sie sind bereits Digital-Abonnent?
-            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration&entry_service=schranke_paid" class="gate__link">
+            <a href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}%23success-registration&entry_service=schranke-paid" class="gate__link">
                 Hier anmelden
             </a>
         </p>

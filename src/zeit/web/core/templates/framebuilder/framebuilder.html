@@ -9,3 +9,5 @@
 {% else %}
     {%- include "{}:templates/framebuilder/{}/{}.tpl".format(view.package, framebuilder_variant, view.page_slice) ignore missing %}
 {% endif %}
+
+<!-- Generated via framebuilder. ZON Version {{ request.registry.settings.version }}. Params: {{ request.query_string }} -->

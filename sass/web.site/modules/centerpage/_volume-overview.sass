@@ -1,5 +1,15 @@
 .volume-overview
+	+clearfix // needed for no flexbox fallback
 	display: flex
 	flex-flow: row wrap
+	margin: auto
+	max-width: remify(340px)
+
 	+respond-min($break-phablet-min)
-		margin-right: remify(-24px)
+		max-width: remify(470px) // 2 * 195px teaser + 20px margin left and right
+
+	+respond-min($break-tablet-min)
+		max-width: remify(705px) // 3 * 195px teaser + 20px margin left and right
+
+	+respond-min($break-desktop-min + 1em) // Add 16px buffer for possible scrollbar
+		max-width: remify(940px) // 4 * 195px teaser + 20px margin left and right

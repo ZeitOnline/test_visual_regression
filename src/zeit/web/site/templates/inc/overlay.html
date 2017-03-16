@@ -1,4 +1,4 @@
-{% if toggles('hp_overlay') -%}
+{% if settings('hp_overlay_active') -%}
     {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
     <!-- config template -->
     <div id="overlay-wrapper" aria-hidden="true">

@@ -115,6 +115,7 @@ def test_article03_has_correct_webtrekk_values(httpbrowser):
     browser = httpbrowser('/zeit-magazin/article/03')
     source = browser.cssselect(
         'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+    query = urlparse.parse_qs(urlparse.urlparse(source).query, True)
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
@@ -155,21 +156,45 @@ def test_article03_has_correct_webtrekk_values(httpbrowser):
     assert '30: "open"' in webtrekk_config
 
     # noscript string
-    assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
-            'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
-            '{}/zeit-magazin/article/03,0,0,0,0,0,0,0,0&'
-            'cg1=redaktion&cg2=article&'
-            'cg3=lebensart&cg4=zede&cg5=essen-trinken&cg6=weinkolumne&cg7=03&'
-            'cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
-            'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&cp3=1/7'
-            '&cp4=wein%3Bitalien%3Btoskana%3Bbologna%3Bbozen%3Bflorenz%3B'
-            't%C3%BCbingen&cp5=2013-07-30+17%3A20%3A50.176115%2B02%3A00&'
-            'cp6=4952&cp7=&cp8=zede&cp9=zeitmz/essenundtrinken/article&'
-            'cp10=yes&cp11=&cp12=desktop.site&cp13=stationaer&cp14=friedbert&'
-            'cp15=&cp25=original&cp26=article.column&cp27=&cp30=open&cp28=free'
-            '&cp29=unfeasible&cp31=share_buttons_small'
-            '&cp23=nicht_angemeldet'.format(
-                urllib.quote(browser.host.replace('http://', '')))) in source
+
+    page = ('3,redaktion.lebensart.essen-trinken.weinkolumne.article.zede|{}'
+            '/zeit-magazin/article/03,0,0,0,0,0,0,0,0').format(
+                browser.host.replace('http://', ''))
+    assert {k: v[0] for k, v in query.items()} == {
+        'p': page,
+        'cd': '',
+        'cg1': 'redaktion',
+        'cg2': 'article',
+        'cg3': 'lebensart',
+        'cg4': 'zede',
+        'cg5': 'essen-trinken',
+        'cg6': 'weinkolumne',
+        'cg7': '03',
+        'cg8': 'zeitmz/essenundtrinken/article',
+        'cg9': '2013-07-30',
+        'cp1': 'anne mustermann',
+        'cp2': 'lebensart/essen-trinken/bild-text',
+        'cp3': '1/7',
+        'cp4': 'wein;italien;toskana;bologna;bozen;florenz;tübingen',
+        'cp5': '2013-07-30 17:20:50.176115+02:00',
+        'cp6': '4952',
+        'cp7': '',
+        'cp8': 'zede',
+        'cp9': 'zeitmz/essenundtrinken/article',
+        'cp10': 'yes',
+        'cp11': '',
+        'cp12': 'desktop.site',
+        'cp13': 'stationaer',
+        'cp14': 'friedbert',
+        'cp15': '',
+        'cp23': 'nicht_angemeldet',
+        'cp25': 'original',
+        'cp26': 'article.column',
+        'cp27': '',
+        'cp28': 'free',
+        'cp29': 'unfeasible',
+        'cp30': 'open',
+        'cp31': 'share_buttons_small'}
 
 
 def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
@@ -179,6 +204,7 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
         'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+    query = urlparse.parse_qs(urlparse.urlparse(source).query, True)
 
     # content group
     assert '7: "seite-2",' in webtrekk_config
@@ -187,15 +213,45 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
     assert '3: "2/7",' in webtrekk_config
 
     # noscript
-    assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
-            'redaktion.lebensart.essen-trinken.weinkolumne.article.zede%7C'
-            '{}/zeit-magazin/article/03,0,0,0,0,0,0,0,0&'
-            'cg1=redaktion&cg2=article&cg3=lebensart&cg4=zede&'
-            'cg5=essen-trinken&cg6=weinkolumne&cg7=seite-2&'
-            'cg8=zeitmz/essenundtrinken/article&cg9=2013-07-30&'
-            'cp1=anne+mustermann&cp2=lebensart/essen-trinken/bild-text&'
-            'cp3=2/7'.format(
-                urllib.quote(browser.host.replace('http://', '')))) in source
+    page = ('3,redaktion.lebensart.essen-trinken.weinkolumne.article.zede|{}'
+            '/zeit-magazin/article/03,0,0,0,0,0,0,0,0').format(
+                browser.host.replace('http://', ''))
+
+    assert {k: v[0] for k, v in query.items()} == {
+        'p': page,
+        'cd': '',
+        'cg1': 'redaktion',
+        'cg2': 'article',
+        'cg3': 'lebensart',
+        'cg4': 'zede',
+        'cg5': 'essen-trinken',
+        'cg6': 'weinkolumne',
+        'cg7': 'seite-2',
+        'cg8': 'zeitmz/essenundtrinken/article',
+        'cg9': '2013-07-30',
+        'cp1': 'anne mustermann',
+        'cp2': 'lebensart/essen-trinken/bild-text',
+        'cp3': '2/7',
+        'cp4': 'wein;italien;toskana;bologna;bozen;florenz;tübingen',
+        'cp5': '2013-07-30 17:20:50.176115+02:00',
+        'cp6': '4952',
+        'cp7': '',
+        'cp8': 'zede',
+        'cp9': 'zeitmz/essenundtrinken/article',
+        'cp10': 'yes',
+        'cp11': '',
+        'cp12': 'desktop.site',
+        'cp13': 'stationaer',
+        'cp14': 'friedbert',
+        'cp15': '',
+        'cp23': 'nicht_angemeldet',
+        'cp25': 'original',
+        'cp26': 'article.column',
+        'cp27': '',
+        'cp28': 'free',
+        'cp29': 'unfeasible',
+        'cp30': 'open',
+        'cp31': 'share_buttons_small'}
 
 
 def test_cp_has_correct_webtrekk_values(httpbrowser):
@@ -205,6 +261,7 @@ def test_cp_has_correct_webtrekk_values(httpbrowser):
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
         'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+    query = urlparse.parse_qs(urlparse.urlparse(source).query, True)
 
     # content group
     assert '1: "redaktion",' in webtrekk_config
@@ -241,18 +298,43 @@ def test_cp_has_correct_webtrekk_values(httpbrowser):
     assert '28: "free"' in webtrekk_config
     assert '29: "unfeasible"' in webtrekk_config
 
-    assert ('http://zeit01.webtrekk.net/674229970930653/wt.pl?p=3,'
-            'redaktion.zeit-magazin...centerpage.zmlb%7C'
-            '{}/zeit-magazin/index,0,0,0,0,0,0,0,0&cg1=redaktion&'
-            'cg2=centerpage&cg3=zeit-magazin&cg4=zmlb&cg5=&cg6=&cg7=index&'
-            'cg8=zeitmz/centerpage&cg9=2016-04-12&cp1=&'
-            'cp2=zeit-magazin/bild-text&cp3=1/1&cp4=zeit-magazin&'
-            'cp5=2016-05-23+12%3A14%3A06.113344%2B02%3A00&cp6=&cp7=&cp8=zmlb&'
-            'cp9=zeitmz/centerpage&cp10=yes&cp11=&cp12=desktop.site&'
-            'cp13=stationaer&cp14=friedbert&cp15=&cp25=original&'
-            'cp26=centerpage.ZMO&cp27=&cp30=open&cp28=free&cp29=unfeasible&'
-            'cp23=nicht_angemeldet'.format(
-                urllib.quote(browser.host.replace('http://', '')))) in source
+    page = ('3,redaktion.zeit-magazin...centerpage.zmlb|{}/zeit-magazin/'
+            'index,0,0,0,0,0,0,0,0').format(
+                browser.host.replace('http://', ''))
+    assert {k: v[0] for k, v in query.items()} == {
+        'p': page,
+        'cd': '',
+        'cg1': 'redaktion',
+        'cg2': 'centerpage',
+        'cg3': 'zeit-magazin',
+        'cg4': 'zmlb',
+        'cg5': '',
+        'cg6': '',
+        'cg7': 'index',
+        'cg8': 'zeitmz/centerpage',
+        'cg9': '2016-04-12',
+        'cp1': '',
+        'cp2': 'zeit-magazin/bild-text',
+        'cp3': '1/1',
+        'cp4': 'zeit-magazin',
+        'cp5': '2016-05-23 12:14:06.113344+02:00',
+        'cp6': '',
+        'cp7': '',
+        'cp8': 'zmlb',
+        'cp9': 'zeitmz/centerpage',
+        'cp10': 'yes',
+        'cp11': '',
+        'cp12': 'desktop.site',
+        'cp13': 'stationaer',
+        'cp14': 'friedbert',
+        'cp15': '',
+        'cp23': 'nicht_angemeldet',
+        'cp25': 'original',
+        'cp26': 'centerpage.ZMO',
+        'cp27': '',
+        'cp28': 'free',
+        'cp29': 'unfeasible',
+        'cp30': 'open'}
 
 
 def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
@@ -653,19 +735,9 @@ def test_article_has_linked_image(testbrowser):
     assert browser.xpath('//a[@href="http://www.test.de"]/img')
 
 
-@pytest.mark.skipif(True,
-                    reason="We need a way to mock liveblog in tests")
-def test_article02_uses_esi(selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/article/02')
-    blog = WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.ID, "livedesk-root")))
-    assert blog.is_displayed(), 'ESI Liveblog not displayed'
-
-
 def test_article02_should_have_esi_include(testbrowser):
     browser = testbrowser('/zeit-magazin/article/02')
-    assert len(browser.cssselect('main include')) == 3
+    assert len(browser.cssselect('main include')) == 2
 
 
 @pytest.mark.parametrize('path, selector', [

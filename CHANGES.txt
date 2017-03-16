@@ -5,10 +5,128 @@ POSTDEPLOY
 ----------
 
 
-3.40 (unreleased)
+3.44 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3778: Remove veeseo from paywalled articles
+
+- ZON-3778: Use ZEIT Campus startpage topiclinks on all pages in ZEIT Campus
+
+- MAINT: Fix path in css sourcemaps if you grunt from outside the project dir
+
+- MAINT: add brightcove plugin for autoplay (iOS bug workaround)
+
+
+3.43 (2017-03-09)
+-----------------
+
+- ZON-3755: Update registration success notification wording
+
+- ZON-3754: Update wording
+
+- ZON-3348: Add liveblogs for AMP
+
+- ZON-3752: Polish payment gate button and link
+
+- FEM-25: Refactor HP overlay
+
+- FEM-34: Remove gzip test from AdController
+
+- FEM-32: Reactivate live reload
+
+- FEM-26: Overscrolling small fixes
+
+- MAINT: Add notification for changed account settings, change registration wording
+
+- MAINT: Include sourcemaps for original SASS files
+
+
+3.42.2 (2017-03-09)
+-------------------
+
+- BUG-676: Fix ZMO script
+
+
+3.42.1 (2017-03-06)
+-------------------
+
+- ZON-3485: Rollback, the feature is broken
+
+
+3.42 (2017-03-02)
+-----------------
+
+- ZON-3321: Add a new and shiny videoplayer button
+
+- ZON-3485: Inline portrait boxes
+
+- ZON-3603: Extend ZEIT Campus Navigation
+
+- ZON-3728: Limit packshot size for volume teaser in ZMO
+
+- ZON-3731: Update entry_service value
+
+- BUG-637: Consider hidden images for gallery image counter
+
+- BUG-641: Use ZON videoplayer in ZMO
+
+- FIX: Fight the specificity war with brightcove on IE11
+
+- FIX: Render content-type rss feed
+
+- MAINT: Polish z+logo for ZMO teasers
+
+- MAINT: Tweak volume overview design
+
+- FEM-23: Add comment to framebuilder HTML
+
+
+3.41 (2017-02-27)
+-----------------
+
+- ZON-3688: Polish storystream-teaser
+
+- ZON-3705: Track volume packshot links with product id
+
+- ZON-3584: Cleanup webtrekk property and add nextread url
+
+- ZON-3703: Disintegrate print-ressort areas
+
+- ZON-3669: Polish volume teaser on archive pages
+
+- BUG-664: Change link url for exclusive page
+
+- BUG-665: Add settting for newsletter content and image host
+
+- BUG-656: Consider teaser kicker in Solr results
+
+- BUG-667: Make rawxml rendering work again
+
+
+3.40 (2017-02-20)
+-----------------
+
+- ZON-3707: Change wording and link on paywall
+
+- ZON-3670: Polish volume badge
+
+- BUG-659: Prevent sso urls from encoding in rawr config
+
+- BUG-661: Add a filename-based mime detection in addition to content-based; support vivi content-type 'file'
+
+- PERF: Don't load further tag properties from the whitelist
+
+
+3.39.1 (2017-02-16)
+-------------------
+
+- HOTFIX: Add general premoderation attribute for overlay
+
+- BUG-658: Let C1-Fake-Param trump C1 Header in Staging
+
+- FIX: Make cover images on volume overview page work again by fixing solr/lazyproxy
+
+- MAINT: Add ident property to rawrConfig
 
 
 3.39 (2017-02-15)
@@ -82,7 +200,7 @@ POSTDEPLOY
 
 - ZON-3664: Add zplus logo to register paywall
 
-- ZON-3687: Show account confirm message after successful registration
+- ZON-3678: Show account confirm message after successful registration
 
 - BUG-618: Reapply font-family for form elements (e.g. buttons)
 

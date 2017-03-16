@@ -29,6 +29,7 @@ import zeit.web.core.metrics
 
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
+LONG_TERM_CACHE = zeit.web.core.cache.get_region('long_term')
 
 
 class Block(object):
@@ -95,10 +96,10 @@ class Portraitbox(Block):
             self.text = self._author_text(pbox.text)
             self.name = pbox.name
 
-    def _author_text(self, pbox):
+    def _author_text(self, text):
         # not the most elegant solution, but it gets sh*t done
         parts = []
-        for element in lxml.html.fragments_fromstring(pbox):
+        for element in lxml.html.fragments_fromstring(text):
             if isinstance(element, lxml.etree.ElementBase):
                 if element.tag == 'raw':
                     continue
@@ -256,6 +257,29 @@ class Liveblog(Block):
                     url, timeout=conf.get('liveblog_timeout', 1)).json()
         except (requests.exceptions.RequestException, ValueError):
             pass
+
+    @LONG_TERM_CACHE.cache_on_arguments()
+    def get_amp_themed_id(self, blog_id):
+        url = '{}/Blog/{}/Seo'
+        content = self.get_restful(url.format(self.status_url, blog_id))
+
+        if content and 'SeoList' in content:
+            for item in content['SeoList']:
+                blog_theme_id = None
+                if 'href' in item:
+                    seo = self.get_restful(self.prepare_ref(item['href']))
+                    if seo and 'BlogTheme' in seo:
+                        try:
+                            blog_theme_id = int(seo['BlogTheme']['Id'])
+                        except (KeyError, ValueError):
+                            pass
+
+                        # return SEO ID using AMP theme
+                        # 23 = zeit
+                        # 24 = zeit-solo
+                        # 27 = zeit-amp
+                        if blog_theme_id == 27:
+                            return '{}-{}'.format(blog_id, seo['Id'])
 
 
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IQuiz)
@@ -491,12 +515,13 @@ class NewsletterTeaser(Block):
     def image(self):
         image = zeit.web.core.template.get_image(
             self.context.reference, variant_id='wide', fallback=False)
-        # XXX We should not hardcode the host, but newsletter is rendered on
-        # friedbert-preview, which can't use `image_host`. Should we introduce
-        # a separate setting?
-        host = 'http://www.zeit.de'
+        # The newsletter is rendered on friedbert-preview, so we cannot use
+        # `image_host`, since that would be friedbert-preview itself.
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        image_host = conf.get('newsletter_image_host', '').strip('/')
         if image:
-            return host + image.group.variant_url(image.variant_id, 148, 84)
+            return urlparse.urljoin(image_host, image.group.variant_url(
+                image.variant_id, 148, 84))
 
     @property
     def videos(self):
@@ -511,8 +536,10 @@ class NewsletterTeaser(Block):
 
     @property
     def url(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        content_host = conf.get('newsletter_content_host', '').strip('/')
         url = self.uniqueId.replace(
-            'http://xml.zeit.de/', 'http://www.zeit.de/', 1)
+            'http://xml.zeit.de', content_host, 1)
         if self.autoplay:
             url += '#autoplay'
         return url

@@ -28,6 +28,7 @@
     <script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    {% block scripts %}{% endblock %}
 </head>
 
 <body>
@@ -62,17 +63,19 @@
         {% block breaking_news %}
             {% include "zeit.web.site:templates/inc/breaking_news.tpl" %}
         {% endblock breaking_news %}
+        {% block liveblog_status %}{% endblock %}
 
         {% include "zeit.web.core:templates/amp/ads/tile_1.html" %}
 
         <main itemprop="mainContentOfPage">
         {% block main %}
             {% block content %}
-            <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article">
+            <article class="article" itemprop="mainEntity" itemscope itemtype="{% block itemtype %}http://schema.org/Article{% endblock %}">
                 {% include [
                     "{}:templates/amp/article/publisher.html".format(view.package),
                     "zeit.web.core:templates/amp/article/publisher.html"] %}
                 <meta itemprop="mainEntityOfPage" content="{{ view.content_url }}">
+                {% block article_head -%}
                 <header class="{{ 'article__header' | with_mods('has-volume' if view.zplus_label) }}">
                     <h1 class="headline article__item" itemprop="headline">
                         <span class="headline__kicker">
@@ -108,8 +111,9 @@
                         </div>
                     </div>
                 </header>
+                {%- endblock %}
 
-                {% block article_body %}
+                {% block article_body -%}
                 <div class="article__body" itemprop="articleBody">
                     {% block article_main_image %}
                         {% set block = view.header_module %}
@@ -134,7 +138,7 @@
                         {% endfor %}
                     {% endblock article_pages %}
                 </div>
-                {% endblock article_body %}
+                {%- endblock article_body %}
 
                 <div class="article__item">
                     <a href="{{ request.route_url('home') }}index">

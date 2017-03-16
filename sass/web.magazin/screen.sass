@@ -1,3 +1,8 @@
+// Sass will always encode its output as UTF-8. It will include a @charset declaration
+// if and only if the output file contains non-ASCII characters. In compressed mode,
+// a UTF-8 byte order mark is used in place of a @charset declaration.
+// @charset "UTF-8"
+
 @import "normalize.css/normalize"
 
 @import "utils"
@@ -25,7 +30,7 @@
 @import "modules/infografix"
 @import "modules/infographic"
 @import "modules/breadcrumbs"
-@import "modules/video"
+@import "web.core/modules/video/video-player"
 @import "modules/gallery"
 @import "modules/inline-gallery"
 @import "modules/footer"
@@ -53,6 +58,7 @@
 @import "modules/longform"
 @import "web.core/modules/zplus-logo"
 @import "modules/article/zplus-badge"
+@import "modules/article/volume-teaser"
 
 // comments
 @import "modules/comments/comment"
@@ -78,7 +84,7 @@
 @import "modules/teaser/teaser-card"
 
 // ads
-@import "modules/iqd_adcode"
+@import "web.core/modules/iqd_adcode"
 @import "modules/adplaces"
 
 // centerpage

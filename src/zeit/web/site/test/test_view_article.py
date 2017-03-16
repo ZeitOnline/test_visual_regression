@@ -1264,6 +1264,13 @@ def test_article_should_contain_veeseo_widget(testbrowser):
     assert select('.RA2VW2')
 
 
+def test_paywalled_article_should_not_contain_veeseo_widget(testbrowser):
+    select = testbrowser(
+        '/zeit-online/article/01?C1-Meter-Status=always_paid').cssselect
+    assert not select(
+        'script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
+
+
 def test_article_should_render_quiz_in_iframe(testbrowser):
     browser = testbrowser('/zeit-online/article/quiz')
     iframe = browser.cssselect('iframe')
@@ -1803,7 +1810,8 @@ def test_zplus_zon_article_has_correct_markup(testbrowser):
     assert len(zplus_icon) == 1
     assert len(zplus_text) == 1
     assert len(zplus_link) == 1
-    assert 'exklusiv' in zplus_box[0].cssselect('a')[0].attrib['href']
+    assert ('exklusive-zeit-artikel' in
+            zplus_box[0].cssselect('a')[0].attrib['href'])
     assert 'Exklusiv' in zplus_link[0].text.strip()
     assert not zplus_box[0].cssselect('.zplus-badge__media')
 
@@ -1834,7 +1842,7 @@ def test_zplus_coverless_print_article_has_fallback_image(testbrowser):
     assert 'default_packshot_diezeit' in zplus_media[0].attrib['src']
 
     link = zplus_box[0].cssselect('a.zplus-badge__link')[0]
-    assert link.attrib['href'] == 'http://localhost/2016/03'
+    assert link.attrib['href'].startswith('http://localhost/2016/03')
     assert 'ZEIT Nr. 03/2016' in link.text_content()
 
 
@@ -1917,7 +1925,7 @@ def test_free_print_article_has_volume_badge(testbrowser):
     link = badge.cssselect('.zplus-badge__link')[0]
 
     assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 01/2016'
-    assert link.attrib['href'] == 'http://localhost/2016/01'
+    assert link.attrib['href'].startswith('http://localhost/2016/01')
     assert badge.cssselect('.zplus-badge__media')
 
     # test volume badge is in single page view too
@@ -1950,6 +1958,16 @@ def test_free_article_has_no_zplus_badge(testbrowser):
     assert len(zplus_modifier) == 0
 
 
+def test_zplus_volume_cover_should_track_link_with_product_id(testbrowser):
+    browser = testbrowser('/zeit-online/article/zplus-zeit')
+    assert browser.cssselect('.zplus-badge__link')
+    href = browser.cssselect('.zplus-badge__link')[0].attrib['href']
+    assert href == ('http://localhost/2014/49?wt_zmc=fix.int.zonpme.zeitde.'
+                    'wall_abo.premium.packshot.cover.zei&utm_medium=fix&utm'
+                    '_source=zeitde_zonpme_int&utm_campaign=wall_abo&'
+                    'utm_content=premium_packshot_cover_zei')
+
+
 def test_volume_teaser_is_rendered_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/volumeteaser')
     volume_teaser = browser.cssselect('.volume-teaser')
@@ -1966,7 +1984,7 @@ def test_volume_teaser_display_correct_image_on_desktop(
         '{}/zeit-online/article/volumeteaser'.format(testserver.url))
     img_src = selenium_driver.find_element_by_css_selector(
         '[data-src*="test-printcover"]').get_attribute('src')
-    assert u'2016-09/test-printcover/original__220x158__desktop' in img_src
+    assert u'2016-09/test-printcover/original__220x157__desktop' in img_src
 
 
 def test_share_buttons_are_present(testbrowser):
@@ -2163,10 +2181,9 @@ def test_paywall_get_param_works_like_http_header(testbrowser):
     assert browser_with_getparam.contents == browser_with_header.contents
 
 
-def test_overscrolling_is_active(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+def test_overscrolling_is_active(selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(1200, 900)
     driver.get(
@@ -2180,10 +2197,9 @@ def test_overscrolling_is_active(
         selenium_driver, 1).until(condition)
 
 
-def test_overscrolling_is_not_active_on_paywalls(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+def test_overscrolling_is_not_active_on_paywalls(selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(1200, 900)
     path = 'zeit-online/article/01'
@@ -2199,9 +2215,9 @@ def test_overscrolling_is_not_active_on_paywalls(
 
 
 def test_overscrolling_is_not_active_on_non_destop_environment(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+        selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(760, 900)
     path = 'zeit-online/article/01'
@@ -2216,10 +2232,9 @@ def test_overscrolling_is_not_active_on_non_destop_environment(
         selenium_driver, 1).until(condition)
 
 
-def test_overscrolling_is_working_as_expected(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+def test_overscrolling_is_working_as_expected(selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(1200, 900)
     driver.get(
@@ -2249,9 +2264,9 @@ def test_overscrolling_is_working_as_expected(
 
 
 def test_overscrolling_is_turned_off_by_configuration(
-        monkeypatch, selenium_driver, testserver):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'overscrolling': True}.get)
+        selenium_driver, testserver):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['overscrolling_active'] = True
     driver = selenium_driver
     driver.set_window_size(1200, 900)
     driver.get(
@@ -2291,3 +2306,14 @@ def test_nextread_shows_zmo_kicker_logo_and_styles(testbrowser):
     nextread = browser.cssselect('article.nextread')[0]
     assert nextread.cssselect('.nextread__kicker--zmo')
     assert nextread.cssselect('.nextread__kicker-logo--zmo')
+
+
+@pytest.mark.skipif(True,
+                    reason="We need a way to mock liveblog in tests")
+def test_liveblog_article_uses_esi(selenium_driver, testserver):
+    selenium_driver.get(
+        '{}/zeit-online/cp-content/liveblog-offline'.format(testserver.url))
+    blog = WebDriverWait(selenium_driver, 15).until(
+        expected_conditions.presence_of_element_located(
+            (By.ID, "livedesk-root")))
+    assert blog.is_displayed(), 'ESI Liveblog not displayed'

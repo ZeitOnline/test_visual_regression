@@ -464,17 +464,11 @@ class LazyProxy(object):
     @property
     def keywords(self):
         tags = []
-        try:
-            whitelist = zope.component.getUtility(
-                zeit.cms.tagging.interfaces.IWhitelist)
-            keywords = zip(self.__proxy__.get('keyword'),
-                           self.__proxy__.get('keyword_id'))
-            for label, url_value in keywords:
-                taglist = whitelist.search(label)
-                tag = filter(lambda x: x.url_value == url_value, taglist)
-                tags.append(tag[0])
-        except:
-            pass
+        keywords = zip(self.__proxy__.get('keyword', ()),
+                       self.__proxy__.get('keyword_id', ()))
+        for label, url_value in keywords:
+            tags.append(zeit.intrafind.tag.Tag(
+                label, label, url_value=url_value))
         return tags
 
     # Proxy zeit.content.image.interfaces.IImages. Since we bypass ZCA
@@ -522,14 +516,14 @@ class LazyProxy(object):
         # We ignore product_id, since it's only relevant for content talking
         # about its volume, not for a teaser of the volume itself (which is all
         # LazyProxy is concerned with).
-        result = {}
         for key, value in self.__proxy__.items():
             if key.startswith('cover_'):
                 name = key.replace('cover_', '', 1)
-                result[name] = zeit.cms.interfaces.ICMSContent(value, None)
-        if not result:
-            raise AttributeError('covers')
-        return result
+                if cover_id == name:
+                    return zeit.cms.interfaces.ICMSContent(value, None)
+        log.debug(
+            u"ProxyExposed: '{}' could not emulate 'get_cover'".format(self))
+        return self.__origin__.get_cover(cover_id)
 
 
 CONTENT_TYPE_SOURCE = zeit.cms.content.sources.CMSContentTypeSource()
@@ -603,6 +597,7 @@ class DataSolr(RandomContent):
                         'image/filmstill-hobbit-schlacht-fuenf-hee/'],
                     u'product_id': content.product.id,
                     u'supertitle': content.supertitle,
+                    u'teaser_supertitle': content.teaserSupertitle,
                     u'teaser_text': content.teaserText,
                     u'teaser_title': content.teaserTitle,
                     u'title': content.title,

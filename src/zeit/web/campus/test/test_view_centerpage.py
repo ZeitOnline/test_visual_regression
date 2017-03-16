@@ -30,13 +30,13 @@ def test_campus_navigation_should_present_flyout(selenium_driver, testserver):
         assert False, 'Navigation flyout not visible within 5 seconds'
     else:
         flyout = driver.find_elements_by_css_selector(
-            '.nav-flyout__item')
+            '#tools-menu .nav-flyout__item')
         assert len(flyout) == 3
         link.click()
         try:
             WebDriverWait(driver, 5).until(
                 expected_conditions.invisibility_of_element_located(
-                    (By.CLASS_NAME, 'nav-flyout')))
+                    (By.ID, 'tools-menu')))
         except TimeoutException:
             assert False, 'Navigation flyout not hidden within 5 seconds'
         else:
@@ -157,6 +157,17 @@ def test_campus_toolbox_exists(testbrowser):
     assert len(select('.toolbox')) == 1
     assert len(select('.toolbox__headline')) == 1
     assert len(select('.toolbox__item')) == 3
+
+
+def test_campus_navigation_contains_jobmarket(testbrowser):
+    browser = testbrowser('/campus/article/simple')
+    jobmarket = browser.cssselect('.nav__tools')[1]
+    assert len(jobmarket.cssselect('.nav__tools-title')) == 1
+    assert len(jobmarket.cssselect('.nav__tools-list a')) == 2
+    control = jobmarket.cssselect('a[aria-controls]')[0]
+    flyout = browser.cssselect('#%s' % control.get('aria-controls'))[0]
+    assert len(flyout.cssselect('.nav-flyout__link')) == 2
+    assert len(flyout.cssselect('.nav-flyout__footer-link')) == 1
 
 
 def test_headerimage_has_appropriate_html_structure(testbrowser):

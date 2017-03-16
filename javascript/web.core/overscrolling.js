@@ -3,40 +3,41 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.2
  */
-define( [
-       'modernizr',
-       'jquery',
-       'velocity.ui',
-       'web.core/zeit',
-       'web.core/clicktracking',
-       'jquery.throttle',
-       'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
+define([
+    'modernizr',
+    'jquery',
+    'velocity.ui',
+    'web.core/zeit',
+    'web.core/clicktracking',
+    'jquery.throttle',
+    'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
     var defaults = {
-        documentMinHeight: 800,
-        jumpHash: '#overscroll-article',
-        jumpTo: 'http://www.zeit.de/index',
-        livePreview: false,
-        overscrollElement: '#overscrolling',
-        previewAreaAdress: '/index/area/no-1',
-        previewHeight: 600,
-        previewOpacity: 0.4,
-        previewPath: '/exampleimages/sitepreview/sitepreview.jpg',
-        progressElement: '#circle_progress',
-        progressElementBar: '#circle_progress_bar',
-        progressText: 'Zurück zur Startseite',
-        trackingBase: 'overscroll....',
-        triggerElement: '.footer',
-        scrollToTrigger: true
-    },
-    config,
-    debug = location.search.indexOf( 'debug-overscrolling' ) !== -1,
-    isActive = function() {
+            documentMinHeight: 800,
+            jumpHash: '#overscroll-article',
+            jumpTo: Zeit.actualHost + 'index' || 'http://www.zeit.de/index',
+            livePreview: false,
+            overscrollElement: '#overscrolling',
+            previewAreaAdress: '/index/area/no-1',
+            previewHeight: 600,
+            previewOpacity: 0.4,
+            previewPath: '/exampleimages/sitepreview/sitepreview.jpg',
+            progressElement: '#circle_progress',
+            progressElementBar: '#circle_progress_bar',
+            progressText: 'Zurück zur Startseite',
+            trackingBase: 'overscroll....',
+            triggerElement: '.footer',
+            scrollToTrigger: true
+        },
+        config,
+        debug = location.href.indexOf( 'debug-overscrolling' ) !== -1;
+
+    function isActive() {
         var isActivated = true,
             message,
             index,
             status = [{
-                isActive: Zeit.toggles.get( 'overscrolling' ),
-                message: 'feature toggle is off or missing'
+                isActive: Zeit.overscrollingActive,
+                message: 'active setting is off or missing'
             }, {
                 isActive: $( document ).height() >= config.documentMinHeight,
                 message: 'documentMinHeight not matched'
@@ -71,23 +72,29 @@ define( [
         }
 
         return isActivated;
-    },
-    clickTrack = function( type ) {
+    }
+
+    function clickTrack( type ) {
         var data = [ config.trackingBase + type, config.jumpTo ];
 
         Clicktracking.send( data );
-        $( window ).trigger( 'overscroll', { 'action': type } );
-    },
-    animateCircle = function( $element, p ) {
+        $( window ).trigger( 'overscroll', { 'action': type });
+    }
+
+    function animateCircle( $element, p ) {
         var r = $element.attr( 'r' ),
             c = Math.PI * ( r * 2 ),
             pct;
-        if ( p > 100 ) { p = 100; }
-        if ( p < 0 ) { p = 0; }
+        if ( p > 100 ) {
+            p = 100;
+        } else if ( p < 0 ) {
+            p = 0;
+        }
         pct = ( ( 100 - p ) / 100 ) * c;
         $element.css({ strokeDashoffset: pct });
-    },
-    animateCircleByScroll = function() {
+    }
+
+    function animateCircleByScroll() {
         var windowBottom = $( window ).scrollTop() + $( window ).height(),
             elementOffset = $( config.overscrollElement ).offset().top,
             elementHeight = $( config.overscrollElement ).height(),
@@ -104,8 +111,9 @@ define( [
         } else {
             $( config.overscrollElement + '_indicator' ).removeClass( 'overscrolling__indicator--fixed' );
         }
-    },
-    loadElements = function( options ) {
+    }
+
+    function loadElements() {
         // first untie the trigger event
         $( config.triggerElement ).off( 'inview' );
         // attach stuff
@@ -120,21 +128,19 @@ define( [
         if ( !config.livePreview ) {
             var img = $( '<img alt="">' ).attr( 'src', config.previewPath );
             $target.css({
-                    height: config.previewHeight,
-                    opacity: config.previewOpacity,
-                    overflow: 'hidden'
-                })
-                .append( img );
+                height: config.previewHeight,
+                opacity: config.previewOpacity,
+                overflow: 'hidden'
+            }).append( img );
             // insert the shite
             $element.insertBefore( $template );
         } else {
             // load first teaser on homepage
             $target.css({
-                    height: config.previewHeight,
-                    opacity: config.previewOpacity,
-                    overflow: 'hidden'
-                })
-                .addClass( 'overscrolling__target--with-header-image' );
+                height: config.previewHeight,
+                opacity: config.previewOpacity,
+                overflow: 'hidden'
+            }).addClass( 'overscrolling__target--with-header-image' );
             $element.insertBefore( $template );
             $target.load( config.previewAreaAdress, function() {
                 var $noscript = $target.find( 'noscript[data-src]' ),
@@ -181,8 +187,8 @@ define( [
                     window.location.href = config.jumpTo + config.jumpHash;
                 }
             }
-        }, 25 ));
-    };
+        }, 25 ) );
+    }
 
     return {
         init: function( options ) {
@@ -199,9 +205,12 @@ define( [
                         mobileHA: false,
                         complete: function() {
                             history.pushState( '', document.title, window.location.pathname + window.location.search );
-                        } } );
+                        }
+                    });
                 } else {
-                    if ( debug ) { console.debug( 'exiting to prevent reload hell' ); }
+                    if ( debug ) {
+                        console.debug( 'exiting to prevent reload hell' );
+                    }
                     return;
                 }
             }

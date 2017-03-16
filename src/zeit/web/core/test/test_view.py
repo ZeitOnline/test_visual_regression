@@ -775,6 +775,8 @@ def test_rawr_config_should_exist_on_article_page(selenium_driver, testserver):
 
     assert '/campus/article/simple_date_changed' == driver.execute_script(
         "return rawrConfig.locationMetaData.article_id")
+    assert '/campus/article/simple_date_changed' == driver.execute_script(
+        "return rawrConfig.locationMetaData.ident")
     assert '2016-02-10T10:39:16+01:00' == driver.execute_script(
         "return rawrConfig.locationMetaData.published")
     assert 'Hier gibt es Hilfe' == driver.execute_script(
@@ -904,6 +906,19 @@ def test_webtrekk_tracking_id_is_defined(testbrowser):
         browser.contents)
 
 
+def test_webtrekk_parameters_may_include_nextread_url(dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-verlagsnextread')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp33'] == (
+        'shop.zeit.de/sortiment/kinderwelt/spielzeug-und-accessoires/2178/'
+        'zookids-stiftemaeppchen-tom-tiger')
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert 'cp33' not in view.webtrekk['customParameter']
+
+
 def test_webtrekk_content_id_should_handle_nonascii(
         application, dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
@@ -915,8 +930,7 @@ def test_webtrekk_content_id_should_handle_nonascii(
 
 def test_notification_after_paywall_registration_renders_correctly(
         testserver, selenium_driver):
-    message_txt = u'Herzlich willkommen! Mit Ihrer Anmeldung k\xf6nnen' \
-        u' Sie nun unsere Artikel lesen.'
+    message_txt = u'Herzlich willkommen \u2013 viel Spa\xdf beim Lesen!'
     message_txt_error = u'Leider haben Sie kein g\xfcltiges Abonnement ' \
         u'f\xfcr diesen Artikel. Bitte w\xe4hlen Sie unten das ' \
         u'gew\xfcnschte Abo.'
@@ -984,7 +998,7 @@ def test_notification_after_account_confirmation_renders_correctly(
         testserver, selenium_driver):
     driver = selenium_driver
     url_hash = '#success-confirm-account'
-    text = u'Ihr Konto wurde best\xe4tigt. Sie sind jetzt angemeldet.'
+    text = u'Herzlich willkommen! Ihr Konto ist nun aktiviert.'
     # request some arbitrary article page
     driver.get('%s/zeit-online/article/01' % testserver.url)
     driver.add_cookie({
@@ -1013,6 +1027,39 @@ def test_notification_after_account_confirmation_renders_correctly(
             assert url_hash not in driver.current_url
 
 
+def test_notification_after_account_change_renders_correctly(
+        testserver, selenium_driver):
+    driver = selenium_driver
+    url_hash = '#success-confirm-change'
+    text = u'Ihre Einstellungen wurden gespeichert. Viel Spaß!'
+    # request some arbitrary article page
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    driver.add_cookie({
+        'name': 'my_sso_cookie',
+        'value': 'just be present',
+    })
+    with mock.patch('zeit.web.core.security.get_user_info') as get_user:
+        get_user.return_value = {
+            'ssoid': '123',
+            'mail': 'test@example.org',
+            'name': 'jrandom',
+        }
+        # request the actual dashboard page
+        driver.get('%s/konto#success-confirm-change' % testserver.url)
+        try:
+            # check for notification element
+            WebDriverWait(driver, 1).until(
+                expected_conditions.presence_of_element_located((
+                    By.CLASS_NAME, 'notification--success')))
+        except TimeoutException:
+            assert False, 'Timeout notification %s' % driver.current_url
+        else:
+            notification = driver.find_element_by_class_name(
+                'notification--success')
+            assert text == notification.text
+            assert url_hash not in driver.current_url
+
+
 def test_http_header_should_contain_c1_debug_echoes(testserver):
     response = requests.get(
         '%s/zeit-online/article/simple' % testserver.url,
@@ -1024,25 +1071,34 @@ def test_http_header_should_contain_c1_debug_echoes(testserver):
     assert response.headers.get('x-debug-c1-meter-user-status') == 'anonymous'
 
 
+def test_c1_get_param_should_trump_http_header(testserver):
+    response = requests.get(
+        '{}/zeit-online/article/simple?{}'.format(
+            testserver.url,
+            'C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous'),
+        headers={
+            'C1-Meter-Status': 'always_paid',
+            'C1-Meter-User-Status': 'anonymous',
+        })
+    assert 'gate--register' in response.content
+
+
 def test_js_toggles_are_correctly_returned(
         application, dummy_request, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': True, 'update_signals': False}.get)
+        'update_signals': False}.get)
     view = zeit.web.core.view.Base(None, None)
-    assert ('hp_overlay', True) in view.js_toggles
     assert ('update_signals', False) in view.js_toggles
 
 
 def test_js_toggles_are_correctly_displayed(
         monkeypatch, selenium_driver, testserver):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'hp_overlay': True, 'update_signals': False}.get)
+        'update_signals': False}.get)
     driver = selenium_driver
     driver.get('%s/zeit-online/index' % testserver.url)
-    hpo = driver.execute_script('return Zeit.toggles.hp_overlay')
     uds = driver.execute_script('return Zeit.toggles.update_signals')
 
-    assert hpo
     assert not uds
 
 

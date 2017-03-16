@@ -64,16 +64,37 @@
             <a class="nav__topics-link" href="{{ request.route_url('home') }}campus/themen">Alle Themen</a>
         </nav>
         <nav class="nav__tools">
-            <p class="nav__tools-title"><a href="http://studiengaenge.zeit.de/artikel/was-soll-ich-studieren.html" role="button" aria-controls="tools-menu" data-follow-mobile="true"><span class="nav__dropdown">Was soll ich studieren?</span></a></p>
+            <p class="nav__tools-title"><a href="{{ view.toolbox.footer_link }}" role="button" aria-controls="tools-menu" data-follow-mobile="true"
+                {%- if toggles('campus_jobs_flyout_menu') -%} data-offside="true"{% endif %}><span class="nav__dropdown">
+                {{- view.toolbox.header_text | replace(' soll ich', '<span class="nav__tools-extra"> soll ich</span>' | safe) -}}
+            </span></a></p>
             <ul class="nav__tools-list" data-ct-column>
-                <li><a href="http://studiengaenge.zeit.de/sit">Studium-Interessentest</a></li>
-                <li><a href="http://studiengaenge.zeit.de/">Suchmaschine für Studiengänge</a></li>
-                <li><a href="http://ranking.zeit.de/che2016/de/">CHE Hochschulranking</a></li>
+                {% for link in view.toolbox -%}
+                <li><a href="{{ link.href }}">{{ link.title_flyout }}</a></li>
+                {% endfor -%}
             </ul>
         </nav>
+        {% if toggles('campus_jobs_flyout_menu') -%}
+        <nav class="nav__tools">
+            <p class="nav__tools-title"><a href="{{ view.jobmarket.footer_link }}" role="button" aria-controls="jobs-menu" data-follow-mobile="true"><span class="nav__dropdown">
+                {{- view.jobmarket.header_text | replace(' passt zu mir', '<span class="nav__tools-extra"> passt zu mir</span>' | safe) -}}
+            </span></a></p>
+            <ul class="nav__tools-list" data-ct-column>
+                {% for link in view.jobmarket -%}
+                <li><a href="{{ link.href }}">{{ link.title_flyout }}</a></li>
+                {% endfor -%}
+            </ul>
+        </nav>
+        {% endif -%}
     </div>
 </div>
 
 <div class="header__flyout" id="tools-menu" aria-hidden="true">
     {%- include "zeit.web.campus:templates/inc/navigation/flyout.html" -%}
 </div>
+
+{% if toggles('campus_jobs_flyout_menu') %}
+<div class="header__flyout" id="jobs-menu" aria-hidden="true">
+    {%- include "zeit.web.campus:templates/inc/navigation/flyout-jobs.html" -%}
+</div>
+{% endif %}

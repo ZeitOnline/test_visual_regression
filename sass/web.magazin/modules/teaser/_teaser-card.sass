@@ -4,12 +4,21 @@ $card-rotate-y: -180deg
 .teaser-card
 	margin-bottom: $compact
 	width: 100%
-	+respond-min($break-2)
-		.cp-area--trio > &
-			width: remify(270px)
+
+	.cp-area--trio &
+		max-width: remify(320px)
+		min-width: remify(270px)
+		+respond-min($break-0)
+			margin-left: remify(14px)
+			margin-right: remify(14px)
+		+respond-min($break-1)
+			float: left // no-flexbox fallback
+			width: 45%
+		+respond-min($break-desktop-min)
+			width: 30%
 
 .card__wrap
-	max-width: 320px
+	max-width: remify(320px)
 	margin: 0 auto
 
 .card__deck
@@ -42,16 +51,10 @@ $card-rotate-y: -180deg
 		outline: none
 
 .card
-	color: $black
 	background-color: #c3e76d
-	// this is good for light text on dark background
-	// color: #fff
-	// text-rendering: optimizeLegibility
-	// -webkit-font-smoothing: antialiased
-	// -moz-osx-font-smoothing: grayscale
-
-	z-index: 1
+	color: $black
 	padding: 12% 0
+	z-index: 1
 
 .card--front,
 .card--back

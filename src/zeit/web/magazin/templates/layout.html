@@ -56,7 +56,6 @@
 
         {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
 
-        {# Modernizr -#}
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
 
         {% if toggles('third_party_modules') -%}
@@ -166,8 +165,6 @@
         {% endblock adplace_floor %}
 
         </div>
-
-        <script src="//admin.brightcove.com/js/BrightcoveExperiences.js"></script>
 
         {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
         {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}

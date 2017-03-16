@@ -1,3 +1,4 @@
+import grokcore.component
 import pyramid.httpexceptions
 
 import zeit.campus.interfaces
@@ -5,9 +6,29 @@ import zeit.cms.interfaces
 
 import zeit.web
 import zeit.web.core.application
+import zeit.web.core.cache
+import zeit.web.core.interfaces
 import zeit.web.core.security
 import zeit.web.core.view
-import zeit.web.campus.module.toolbox
+import zeit.web.campus.navigation
+
+
+DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
+@grokcore.component.adapter(zeit.campus.interfaces.IZCOContent)
+def campus_topiclink(context):
+
+    def get_default_topics():
+        context = zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/campus/index', None)
+        return zeit.web.core.centerpage.TopicLink(context)
+
+    return DEFAULT_TERM_CACHE.get_or_create(
+        'campus-default-topics',
+        get_default_topics,
+        should_cache_fn=bool)
 
 
 def is_zco_content(context, request):
@@ -19,8 +40,11 @@ class Base(zeit.web.core.view.Base):
     seo_title_default = u'ZEIT Campus ONLINE | studieren. arbeiten. leben.'
     pagetitle_suffix = u' | ZEIT Campus'
 
+    # make job market links available in view
+    jobmarket = zeit.web.campus.navigation.JOB_MARKET_SOURCE
+
     # make toolbox links available in view
-    toolbox = zeit.web.campus.module.toolbox.TOOL_SOURCE
+    toolbox = zeit.web.campus.navigation.TOOL_SOURCE
 
     @zeit.web.reify
     def adwords(self):

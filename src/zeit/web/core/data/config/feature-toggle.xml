@@ -4,13 +4,12 @@
   <access_status_webtrekk>true</access_status_webtrekk>
   <amp_advertising>true</amp_advertising>
   <article_lineage>true</article_lineage>
+  <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <dummy>false</dummy>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
-  <hp_overlay>true</hp_overlay>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
-  <overscrolling>true</overscrolling>
   <rawr_iframe>true</rawr_iframe>
   <reader_revenue>true</reader_revenue>
   <tag_logos>true</tag_logos>

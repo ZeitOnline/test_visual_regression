@@ -15,6 +15,7 @@ require([
     'web.core/zeit',
     'web.core/images',
     'web.core/clicktracking',
+    'web.core/triggeredEventTracking',
     'web.core/adReload',
     'web.core/menu',
     'web.core/comments',
@@ -25,6 +26,7 @@ require([
     zeit,
     images,
     clicktracking,
+    triggeredEventTracking,
     adReload,
     menu,
     comments,
@@ -37,6 +39,7 @@ require([
     images.init();
     menu.init();
     clicktracking.init();
+    triggeredEventTracking.init();
     adReload.init();
     errors.init();
     cards.init();
@@ -62,16 +65,14 @@ require([
     'web.core/plugins/jquery.countFormchars',
     'web.core/plugins/jquery.imageCopyrightFooter',
     'web.core/plugins/jquery.notifications',
-    'web.magazin/plugins/jquery.backgroundvideo',
-    'web.magazin/plugins/jquery.switchvideo'
-], function( $, Velocity ) {
+    'web.magazin/plugins/jquery.backgroundvideo'
+], function( $ ) {
     // remove jQuery from global scope
     $.noConflict( true );
 
     $( window ).referrerCount();
     $.notifications();
     $( '.js-gallery' ).inlinegallery();
-    $( 'figure[data-video]' ).switchVideo();
     $( 'div[data-backgroundvideo]' ).backgroundVideo();
     $.picturefill();
     $( 'main' ).animateScroll({ selector: '.js-scroll' });

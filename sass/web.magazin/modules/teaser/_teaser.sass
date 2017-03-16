@@ -1,20 +1,21 @@
 // basic classes for default teaser
 
 %teaser
+	margin-bottom: $compact
 	min-height: remify(220px) // fallback for expired images
 	position: relative
-	display: inline-block
 	width: 100%
-	margin-bottom: $compact
 
 %teaser__media
 	margin: 0 0 remify(18px)
 
 %teaser__text
+	color: inherit
 	display: block
+	+on-interaction
+		color: inherit
 
 %teaser__kicker
-	color: $black
 	display: block
 	font-size: $font-s
 	letter-spacing: $hair
@@ -25,19 +26,17 @@
 	flex-flow: row wrap
 
 %teaser__title
-	color: $black
 	display: block
 	font-size: $font-ml
 	font-weight: bold
 	line-height: 1.25
-	margin: remify(4px) 0 $thin 0
+	margin: remify(4px 0 0)
 	width: 100%
 
 %teaser__subtitle
-	color: $black
 	font-size: $font-s
 	line-height: 1.5
-	margin: 0
+	margin: remify(9px 0 0)
 
 // standart teaser shadows
 %teaser--dark

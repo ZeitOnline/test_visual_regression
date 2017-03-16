@@ -1,13 +1,15 @@
-(function( $, location, document ) {
+( function( $, location, document ) {
     $.extend({
         notifications: function() {
             var $header = $( 'header' ).first(),
                 msgRegistrationSuccess = '<div class="notification notification--success" tabindex="0">' +
-                    'Herzlich willkommen! Mit Ihrer Anmeldung können Sie nun unsere Artikel lesen.</div>',
+                    'Herzlich willkommen – viel Spaß beim Lesen!</div>',
                 msgRegistrationErrorWrongSubscription = '<div class="notification notification--error" tabindex="0">' +
                     'Leider haben Sie kein gültiges Abonnement für diesen Artikel. Bitte wählen Sie unten das gewünschte Abo.</div>',
                 msgAccountConfirmSuccess = '<div class="notification notification--success" tabindex="0">' +
-                    'Ihr Konto wurde bestätigt. Sie sind jetzt angemeldet.</div>',
+                    'Herzlich willkommen! Ihr Konto ist nun aktiviert.</div>',
+                msgChangeConfirmSuccess = '<div class="notification notification--success" tabindex="0">' +
+                    'Ihre Einstellungen wurden gespeichert. Viel Spaß!</div>',
                 removeHash = function() {
                     if ( 'replaceState' in history ) {
                         history.replaceState( null, document.title, location.pathname + location.search );
@@ -29,6 +31,10 @@
                     break;
                 case 'success-confirm-account':
                     $( msgAccountConfirmSuccess ).insertAfter( $header );
+                    removeHash();
+                    break;
+                case 'success-confirm-change':
+                    $( msgChangeConfirmSuccess ).insertAfter( $header );
                     removeHash();
                     break;
             }

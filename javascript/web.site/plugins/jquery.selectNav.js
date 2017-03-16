@@ -3,7 +3,8 @@
  * @author nico.bruenjes@zeit.de
  * @version  0.1
  */
-(function( $, win ) {
+( function( $, win ) {
+
     /**
     * See (http://jquery.com/)
     * @name jQuery
@@ -37,7 +38,7 @@
                     win.location.href = win.location.protocol +
                         '//' + win.location.host + '/serie/' + value;
                 }
-            } );
+            });
         });
     };
 })( jQuery, window );
