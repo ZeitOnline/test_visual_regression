@@ -559,6 +559,33 @@ def pop_from_dotted_name(string, index=-1):
         return
 
 
+@zeit.web.register_filter
+def adplaces(pages, adplaces):
+    """ Template filter to put adplaces in article content, primarily used
+    for amp-ads. Selects real paragraphs, ignores other blocks, respects the
+    configured sufficient character length of a paragraph.
+    Returns a list of tuples with the page number, the 0-index of the block
+    and the tile number of the ad that should be shown.
+    :param pages:       pages object of an article
+    :param adplaces:    list of tuples with the paragraph 0-index where the
+                        ad should be displayed and the tile number of that ad
+    :rtype: list of tuples
+    """
+    paragraphs = []
+    positions = []
+    previous_length = 0
+    sufficient_length = settings('sufficient_paragraph_length', 10)
+    for page in pages:
+        for i, block in enumerate(page.blocks):
+            if paragraph(block):
+                if len(block) + previous_length <= sufficient_length:
+                    previous_length = len(block) + previous_length
+                else:
+                    paragraphs.append((page.number, i))
+    positions = [paragraphs[p] + (i,) for p, i in adplaces]
+    return positions
+
+
 @zeit.web.register_ctxfilter
 def macro(context, macro_name, *args, **kwargs):
     """Call a macro extracted from the context by its name."""
