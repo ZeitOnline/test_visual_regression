@@ -16,7 +16,7 @@ POSTDEPLOY
 
 - ZON-3778: Remove veeseo from paywalled articles
 
-- ZON-3778: Use ZEIT Campus startpage topiclinks on all pages in ZEIT Campus
+- ZON-3748: Use ZEIT Campus startpage topiclinks on all pages in ZEIT Campus
 
 - ZON-3747: Remove zeus fragments from friedbert
 
@@ -24,7 +24,9 @@ POSTDEPLOY
 
 - ZON-3668: New AMP Adtags
 
-- FEM-35: Enable ads in framebuilder with SSL
+- FEM-4: Replace deprecated JavaScript linter JSCS with ESLint
+
+- MAINT: Enable ads in framebuilder with SSL
 
 - MAINT: Fix path in css sourcemaps if you grunt from outside the project dir
 
