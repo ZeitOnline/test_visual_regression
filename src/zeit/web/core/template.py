@@ -582,7 +582,10 @@ def adplaces(pages, adplaces):
                     previous_length = len(block) + previous_length
                 else:
                     paragraphs.append((page.number, i))
-    positions = [paragraphs[p] + (i,) for p, i in adplaces]
+    try:
+        positions = [paragraphs[p] + (i,) for p, i in adplaces]
+    except IndexError:
+        pass
     return positions
 
 
