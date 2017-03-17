@@ -10,6 +10,7 @@ import zeit.cms.interfaces
 import zeit.content.cp.blocks.teaser
 
 import zeit.web.core.template
+import zeit.web.site.view_article
 
 
 def test_filter_strftime_works_as_expected():
@@ -535,3 +536,19 @@ def test_webtrekk_should_get_no_login_path_when_entrypoint_is_empty(
 
     assert zeit.web.core.template.webtrekk_sso_parameter(
         dummy_request) == 'angemeldet'
+
+
+def test_adplaces_are_correctly_returned(dummy_request):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/amp')
+    view = zeit.web.site.view_article.AcceleratedMobilePageArticle(
+        article, dummy_request)
+    adplaces = zeit.web.core.template.adplaces(view.pages, [(0, 3), (3, 4)])
+    assert adplaces == [(0, 0, 3), (0, 6, 4)]
+
+    short_article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/simple-verlagsnextread')
+    view = zeit.web.site.view_article.AcceleratedMobilePageArticle(
+        short_article, dummy_request)
+    adplaces = zeit.web.core.template.adplaces(view.pages, [(0, 3), (3, 4)])
+    assert adplaces == []

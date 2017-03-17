@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3795: Track http(s) protocol in webtrekk
 
+- ZON-3668: New AMP Adtags
+
 - FEM-35: Enable ads in framebuilder with SSL
 
 - MAINT: Fix path in css sourcemaps if you grunt from outside the project dir
