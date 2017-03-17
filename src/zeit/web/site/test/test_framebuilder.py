@@ -339,14 +339,6 @@ def test_framebuilder_should_require_ssl(application, dummy_request):
     assert view.framebuilder_requires_ssl is True
 
 
-def test_framebuilder_should_not_enable_ads_on_ssl(application, dummy_request):
-    dummy_request.GET['banner_channel'] = 'digital/centerpage'
-    dummy_request.GET['useSSL'] = 'true'
-    view = zeit.web.site.view.FrameBuilder(None, dummy_request)
-
-    assert view.advertising_enabled is False
-
-
 def test_framebuilder_uses_ssl_assets(testbrowser):
     browser = testbrowser('/framebuilder?useSSL')
     ssl_str = 'https://ssl.zeit.de/www.zeit.de/static/latest/'
