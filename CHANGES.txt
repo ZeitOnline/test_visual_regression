@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.44 (unreleased)
+3.44 (2017-03-17)
 -----------------
 
 - ZON-3778: Remove veeseo from paywalled articles
