@@ -71,6 +71,19 @@
 .article-header
 	margin-bottom: remify(40px)
 
+// Reserve space for the article header image in order to prevent jumping content
+.article-header .article__media
+	position: relative
+	&::before
+		content: ''
+		display: block
+		height: 0
+		overflow: hidden
+		padding-bottom: 100% / 16 * 9 // image variant 'wide'
+	& .article__media-container
+		position: absolute
+		top: 0
+
 .article__subheading
 	font-size: remify(20px)
 	line-height: 1.25
