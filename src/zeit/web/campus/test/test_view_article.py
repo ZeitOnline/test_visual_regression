@@ -205,7 +205,7 @@ def test_campus_article_has_sharing_menu(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
-    assert len(sharing_menu.cssselect('.sharing-menu__item')) == 3
+    assert len(sharing_menu.cssselect('.sharing-menu__item')) == 4
     assert labels[0].text == 'Auf Facebook teilen'
     assert labels[1].text == 'Twittern'
     assert 'via=zeitcampus' in links[1].attrib['href']
