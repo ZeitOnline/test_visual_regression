@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - FEM-7: Reserve space for article headerimage while loading
 
+- ZON-3802: Use default Z+ logo size for square teaser
+
 - MAINT: Change wording on paywall
 
 
