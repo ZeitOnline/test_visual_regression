@@ -8,6 +8,8 @@ POSTDEPLOY
 3.45 (unreleased)
 -----------------
 
+- FEM-7: Reserve space for article headerimage while loading
+
 - MAINT: Change wording on paywall
 
 
