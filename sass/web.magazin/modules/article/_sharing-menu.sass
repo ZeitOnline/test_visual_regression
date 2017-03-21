@@ -33,6 +33,10 @@
 			background-color: $color-whatsapp
 			+on-interaction
 				background-color: $color-whatsapp-hover
+		&--messenger
+			background-color: $color-messenger
+			+on-interaction
+				background-color: $color-messenger-hover
 		&--mail
 			background-color: $color-mail
 			+on-interaction
@@ -56,7 +60,8 @@
 		&--twitter
 			height: remify(16px)
 			width: remify(21px)
-		&--whatsapp
+		&--whatsapp,
+		&--messenger
 			height: remify(22px)
 			width: remify(22px)
 		&--mail
@@ -69,7 +74,8 @@
 		margin-bottom: remify(72px)
 
 		&__link
-			&--whatsapp
+			&--whatsapp,
+			&--messenger
 				display: none
 
 		// big share buttons

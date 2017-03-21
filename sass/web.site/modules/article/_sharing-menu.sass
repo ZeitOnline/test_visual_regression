@@ -43,6 +43,9 @@
 		&--whatsapp
 			+link
 				color: $color-whatsapp
+		&--messenger
+			+link
+				color: $color-messenger
 		&--mail
 			+link
 				color: $zon-grey
@@ -52,6 +55,7 @@
 
 	+respond-min($break-tablet-min)
 		&__item
-			&--whatsapp
+			&--whatsapp,
+			&--messenger
 				display: none
 

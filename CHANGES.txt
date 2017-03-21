@@ -8,9 +8,11 @@ POSTDEPLOY
 3.45 (unreleased)
 -----------------
 
-- FEM-7: Reserve space for article headerimage while loading
-
 - ZON-3802: Use default Z+ logo size for square teaser
+
+- ZON-3583: Add share button for Facebook Messenger
+
+- FEM-7: Reserve space for article headerimage while loading
 
 - MAINT: Change wording on paywall
 
