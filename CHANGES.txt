@@ -8,7 +8,9 @@ POSTDEPLOY
 3.46 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Set fallback value for webtrekk param 32
+
+- MAINT: Update meinezeit in production smoke tests
 
 
 3.45 (2017-03-22)
