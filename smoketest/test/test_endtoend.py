@@ -36,49 +36,23 @@ def test_newsfeeds(config):
 def test_login_and_logout(config):
     b = zope.testbrowser.browser.Browser()
     b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
-    b.getControl(
-        name='email').value = config['MEMBER_USERNAME']
-
-    if config['ENV'] == 'PRODUCTION':
-        b.getControl(name='password').value = config['MEMBER_PASSWORD']
-    else:
-        b.getControl(name='pass').value = config['MEMBER_PASSWORD']
-
+    b.getControl(name='email').value = config['MEMBER_USERNAME']
+    b.getControl(name='pass').value = config['MEMBER_PASSWORD']
     b.getControl('Anmelden').click()
-
-    # Until meinezeit Relaunch:
-    if config['ENV'] == 'PRODUCTION':
-        assert 'https://meine.zeit.de/?notification=login_success' in b.url
-    else:
-        assert '{}/konto'.format(config['BASE_URL']) in b.url
+    assert '{}/konto'.format(config['BASE_URL']) in b.url
 
     # logout
     b.open('{}/abmelden'.format(config['MEMBER_BASE_URL']))
-
-    # Until meinezeit Relaunch:
-    if config['ENV'] == 'PRODUCTION':
-        assert 'Ihr Logout war erfolgreich.' in b.contents
-    else:
-        assert 'Logout erfolgreich' in b.contents
+    assert 'Logout erfolgreich' in b.contents
 
 
 def test_infographic(config):
     b = zope.testbrowser.browser.Browser()
     b.open('{}/anmelden'.format(config['MEMBER_BASE_URL']))
     b.getControl(name='email').value = config['MEMBER_USERNAME']
-
-    if config['ENV'] == 'PRODUCTION':
-        b.getControl(name='password').value = config['MEMBER_PASSWORD']
-    else:
-        b.getControl(name='pass').value = config['MEMBER_PASSWORD']
-
+    b.getControl(name='pass').value = config['MEMBER_PASSWORD']
     b.getControl('Anmelden').click()
-
-    # Until meinezeit Relaunch:
-    if config['ENV'] == 'PRODUCTION':
-        assert 'https://meine.zeit.de/?notification=login_success' in b.url
-    else:
-        assert '{}/konto'.format(config['BASE_URL']) in b.url
+    assert '{}/konto'.format(config['BASE_URL']) in b.url
 
     b.open(
         '{}/2016/40/globalisierung-arm-reich-entwicklung-'
@@ -87,12 +61,7 @@ def test_infographic(config):
 
     # logout
     b.open('{}/abmelden'.format(config['MEMBER_BASE_URL']))
-
-    # Until meinezeit Relaunch:
-    if config['ENV'] == 'PRODUCTION':
-        assert 'Ihr Logout war erfolgreich.' in b.contents
-    else:
-        assert 'Logout erfolgreich' in b.contents
+    assert 'Logout erfolgreich' in b.contents
 
 
 def test_commenting(config):
@@ -104,12 +73,7 @@ def test_commenting(config):
         b.getControl(name='email').value = config['MEMBER_USERNAME']
         b.getControl(name='pass').value = config['MEMBER_PASSWORD']
         b.getControl('Anmelden').click()
-
-        # Until meinezeit Relaunch:
-        if config['ENV'] == 'PRODUCTION':
-            assert 'https://meine.zeit.de/?notification=login_success' in b.url
-        else:
-            assert '{}/konto'.format(config['BASE_URL']) in b.url
+        assert '{}/konto'.format(config['BASE_URL']) in b.url
 
         b.open('{}/sport/fussball/2010-04/kaiserslautern-marcel-reif'.format(
             config['BASE_URL']))
@@ -125,12 +89,7 @@ def test_commenting(config):
 
         # logout
         b.open('{}/abmelden'.format(config['MEMBER_BASE_URL']))
-
-        # Until meinezeit Relaunch:
-        if config['ENV'] == 'PRODUCTION':
-            assert 'Ihr Logout war erfolgreich.' in b.contents
-        else:
-            assert 'Logout erfolgreich' in b.contents
+        assert 'Logout erfolgreich' in b.contents
 
 
 def test_videostage_thumbnail_should_be_replaced(config, selenium_driver):
