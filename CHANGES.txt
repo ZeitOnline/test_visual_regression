@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - MAINT: Update meinezeit in production smoke tests
 
+- MAINT: Change wording on paywall
+
 
 3.45 (2017-03-22)
 -----------------
