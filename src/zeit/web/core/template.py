@@ -860,3 +860,8 @@ def expired(content):
 @zeit.web.register_global
 def get_current_year():
     return datetime.datetime.now().year
+
+
+@zeit.web.register_filter
+def urlquote_plus(text):
+    return urllib.quote_plus(text)
