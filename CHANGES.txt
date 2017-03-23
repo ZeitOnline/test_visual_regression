@@ -8,6 +8,8 @@ POSTDEPLOY
 3.46 (unreleased)
 -----------------
 
+- ZON-3815: Count error situation: user is logged in, but C1 does not think so
+
 - MAINT: Set fallback value for webtrekk param 32
 
 - MAINT: Update meinezeit in production smoke tests
