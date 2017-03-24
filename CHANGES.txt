@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.46 (unreleased)
+3.46 (2017-03-24)
 -----------------
 
 - ZON-3788: Add redirect step through premium for gated articles
