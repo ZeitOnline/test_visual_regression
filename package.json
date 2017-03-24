@@ -62,7 +62,7 @@
     "postsass:dev": "npm run postcss",
     "postsass:dist": "npm run postcss -- --no-map",
     "watch:svg": "nodemon --watch sass --ext svg -C --exec 'npm run svg'",
-    "watch:js": "nodemon --watch javascript --ext js --ignore javascript/vendor/ -C --exec 'npm run js:dev'",
+    "watch:js": "nodemon --watch javascript --ext js --ignore javascript/vendor/ -C --exec 'npm run lint && npm run js:dev'",
     "watch:sass": "npm run sass:dev -- -w",
     "xatch:postcss": "npm run postcss -- -w",
     "watch": "npm-run-all --parallel --silent watch:*",
