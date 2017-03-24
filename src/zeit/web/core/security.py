@@ -1,6 +1,7 @@
 import hashlib
 import hmac
 import json
+import logging
 import time
 
 import jwt
@@ -11,7 +12,7 @@ import pyramid.authentication
 
 import zeit.web.core.comments
 import zeit.web.core.metrics
-import logging
+import zeit.web.core.paywall
 
 
 log = logging.getLogger(__name__)
@@ -195,6 +196,12 @@ def get_login_state(request):
         info['user'] = request.user
         info['profile'] = "{}konto".format(request.route_url('home'))
     info['rawr_authentication'] = ', '.join(_rawr_authentication(request))
+
+    c1_user_status = zeit.web.core.paywall.Paywall.c1requestheader_or_get(
+        request, 'C1-Meter-User-Status')
+    if request.authenticated_userid and c1_user_status == 'anonymous':
+        metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+        metrics.increment('zeit.web.core.paywall.error.c1-no-session')
 
     return info
 

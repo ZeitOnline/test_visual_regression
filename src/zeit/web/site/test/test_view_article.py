@@ -2138,6 +2138,17 @@ def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
             '.gate--register')) == int('anonymous' in c1_parameter)
 
 
+def test_paywall_adds_premium_redirect_target(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/zeit?C1-Meter-Status=always_paid')
+    input = browser.cssselect('form.gate__form input[name="url"]')[0]
+    premium_url = input.get('value')
+    assert (
+        premium_url == 'https://premium.zeit.de/abo/paywall?url='
+        'http%3A%2F%2Flocalhost%2Fzeit-online%2Farticle%2Fzeit'
+        '%23success-registration')
+
+
 def test_free_article_has_correct_ivw_code(dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')

@@ -5,8 +5,20 @@ POSTDEPLOY
 ----------
 
 
-3.46 (unreleased)
+3.47 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.46 (2017-03-24)
+-----------------
+
+- ZON-3788: Add redirect step through premium for gated articles
+
+- ZON-3815: Count error situation: user is logged in, but C1 does not think so
+
+- ZON-3805: Override normalize.css form element style
 
 - MAINT: Set fallback value for webtrekk param 32
 
