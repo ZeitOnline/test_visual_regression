@@ -1037,7 +1037,7 @@ def test_notification_renders_correctly_in_wrapper(
                    % testserver.url)
         try:
             # check for notification element
-            WebDriverWait(driver, 1).until(
+            WebDriverWait(driver, 3).until(
                 expected_conditions.presence_of_element_located((
                     By.CLASS_NAME, 'notification--success')))
         except TimeoutException:
