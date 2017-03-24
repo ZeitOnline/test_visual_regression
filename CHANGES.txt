@@ -8,6 +8,8 @@ POSTDEPLOY
 3.46 (unreleased)
 -----------------
 
+- ZON-3788: Add redirect step through premium for gated articles
+
 - ZON-3815: Count error situation: user is logged in, but C1 does not think so
 
 - MAINT: Set fallback value for webtrekk param 32
@@ -15,8 +17,6 @@ POSTDEPLOY
 - MAINT: Update meinezeit in production smoke tests
 
 - MAINT: Change wording on paywall
-
-- ZON-3788: Add redirect step through premium for gated articles
 
 
 3.45 (2017-03-22)
