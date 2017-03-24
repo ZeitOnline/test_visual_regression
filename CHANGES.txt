@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - MAINT: Change wording on paywall
 
+- ZON-3788: Add redirect step through premium for gated articles
+
 
 3.45 (2017-03-22)
 -----------------
