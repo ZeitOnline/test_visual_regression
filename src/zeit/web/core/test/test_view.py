@@ -1021,31 +1021,22 @@ def test_notification_after_account_confirmation_renders_correctly(
         except TimeoutException:
             assert False, 'Timeout notification %s' % driver.current_url
         else:
-            notification = driver.find_element_by_class_name(
-                'notification--success')
+            notification = (driver.find_elements_by_css_selector(
+                            '.page__content > *')[1])
             assert text == notification.text
             assert url_hash not in driver.current_url
 
 
-def test_notification_after_account_change_renders_correctly(
+def test_notification_renders_correctly_in_wrapper(
         testserver, selenium_driver):
     driver = selenium_driver
-    url_hash = '#success-confirm-change'
-    text = u'Ihre Einstellungen wurden gespeichert. Viel Spaß!'
-    # request some arbitrary article page
-    driver.get('%s/zeit-online/article/01' % testserver.url)
-    driver.add_cookie({
-        'name': 'my_sso_cookie',
-        'value': 'just be present',
-    })
-    with mock.patch('zeit.web.core.security.get_user_info') as get_user:
-        get_user.return_value = {
-            'ssoid': '123',
-            'mail': 'test@example.org',
-            'name': 'jrandom',
-        }
-        # request the actual dashboard page
-        driver.get('%s/konto#success-confirm-change' % testserver.url)
+
+    with mock.patch('zeit.web.core.view.Base.is_wrapped') as is_wrapped:
+        is_wrapped.return_value = True
+
+        driver.get('%s/zeit-online/article/zeit#success-confirm-change'
+                   % testserver.url)
+
         try:
             # check for notification element
             WebDriverWait(driver, 1).until(
@@ -1054,10 +1045,10 @@ def test_notification_after_account_change_renders_correctly(
         except TimeoutException:
             assert False, 'Timeout notification %s' % driver.current_url
         else:
-            notification = driver.find_element_by_class_name(
-                'notification--success')
-            assert text == notification.text
-            assert url_hash not in driver.current_url
+            notification = (driver.find_element_by_css_selector(
+                            '.page__content > *'))
+            assert ('notification--success' in
+                    notification.get_attribute('class'))
 
 
 def test_http_header_should_contain_c1_debug_echoes(testserver):
