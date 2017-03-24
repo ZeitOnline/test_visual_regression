@@ -1033,10 +1033,8 @@ def test_notification_renders_correctly_in_wrapper(
 
     with mock.patch('zeit.web.core.view.Base.is_wrapped') as is_wrapped:
         is_wrapped.return_value = True
-
         driver.get('%s/zeit-online/article/zeit#success-confirm-change'
                    % testserver.url)
-
         try:
             # check for notification element
             WebDriverWait(driver, 1).until(
