@@ -7,7 +7,10 @@
       <tag url_value="johann-sebastian-bach" uuid="d022420f-cab4-48ae-8fc0-e0362066622c" score="5" type="Person">Johann Sebastian Bach</tag>
       <tag url_value="oper" uuid="749dab40-072f-4ace-a9e9-cb76c8c8e0d8" score="4" type="free">Oper</tag>
       <tag url_value="opernhaus" uuid="6b35fc6a-6ec5-49bb-a4c7-101770ced015" score="4" type="free">Opernhaus</tag>
+      <tag url_value="italien" uuid="fb4f1490-b187-4073-a51f-02bf101ablah" score="3" type="Location">10Sülze-42-foo</tag>
       <tag url_value="italien" uuid="fb4f1490-b187-4073-a51f-02bf101a354d" score="3" type="Location">Italien</tag>
+      <tag url_value="italien" uuid="fb4f1490-b187-4073-a51f-02bf101ablubb" score="3" type="Location">Kotelett</tag>
+      <tag url_value="italien" uuid="fb4f1490-b187-4073-a51f-02bf101ablunn" score="3" type="Location">Mustache</tag>
     </rankedTags>
     <author href="http://xml.zeit.de/autoren/S/Julia_Spinola/index" publication-date="" expires="">
       <display_name>Julia Spinola</display_name>
