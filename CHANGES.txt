@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3808: Remove obsolete kicker-logos from print-ressort teasers
 
+- ZON-3825: Change first entry of Video Dropdown to "Videoserien"
+
 
 3.46 (2017-03-24)
 -----------------
