@@ -2620,6 +2620,12 @@ def test_zplus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
     assert not teaser.cssselect('.teaser-large__kicker-logo--zplus')
 
 
+def test_campus_teaser_has_no_badge_in_ressort_area(testbrowser, datasolr):
+    browser = testbrowser('/zeit-online/centerpage/print-ressort-with-campus')
+    assert not browser.cssselect('.teaser-small__kicker-logo--zco')
+    assert not browser.cssselect('.teaser-large__kicker-logo--zco')
+
+
 def test_ressort_areas_have_ressort_title(testbrowser, datasolr):
     browser = testbrowser('/zeit-online/centerpage/print-ressort')
     areas = browser.cssselect('.cp-area--print-ressort')
