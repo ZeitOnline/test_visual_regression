@@ -1,12 +1,9 @@
 {%- extends "zeit.web.site:templates/inc/teaser/zon-large.tpl" -%}
 
+{%- block kicker_class -%}{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind ) }}{% endblock %}
+
 {% block zplus_data %}{% endblock %}
 
-{% block content_kicker_logo %}
-    {% set logo_layout = self.layout() %}
-    {% for template in teaser | logo_icon(area.kind, zplus='skip') %}
-        {% include "zeit.web.core:templates/inc/badges/{}.tpl".format(template) %}
-    {% endfor %}
-{% endblock %}
+{% block content_kicker_logo %}{% endblock %}
 
 {% block teaser_datetime %}{% endblock %}

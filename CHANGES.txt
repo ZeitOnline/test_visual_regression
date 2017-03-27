@@ -8,7 +8,7 @@ POSTDEPLOY
 3.47 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3808: Remove obsolete kicker-logos from print-ressort teasers
 
 
 3.46 (2017-03-24)
