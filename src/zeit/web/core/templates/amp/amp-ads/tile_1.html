@@ -1,0 +1,8 @@
+{% extends "zeit.web.core:templates/amp/amp-ads/ad.html" %}
+{% set tile_number = 1 %}
+{% set width = '320' %}
+{% set height = '160' %}
+{% set keywords = ['nospa', 'enozqi', 'iqdzeit_amp'] %}
+{% set additional_keywords = ['iqadtile1', 'iqadtest'] if settings('environment') != 'production' else  ['iqadtile1'] %}
+{% set targeting = {'targeting': {'kw': keywords + additional_keywords, 'tile': ['1'], 'doc': ['artikel'], 'iqadtype': ['amp'] }} | tojson %}
+{% set multisize = '320x53,320x80,320x106,300x50,300x75,300x100,300x150' %}

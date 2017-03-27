@@ -26,6 +26,12 @@
 				background-color: $color-twitter-hover
 		&--whatsapp
 			background-color: $color-whatsapp
+			+on-interaction
+				background-color: $color-whatsapp-hover
+		&--messenger
+			background-color: $color-messenger
+			+on-interaction
+				background-color: $color-messenger-hover
 
 	&__text
 		@extend %font-beckett
@@ -48,7 +54,8 @@
 
 		&__item
 			margin-right: remify(10px)
-			&--whatsapp
+			&--whatsapp,
+			&--messenger
 				display: none
 
 		&__icon

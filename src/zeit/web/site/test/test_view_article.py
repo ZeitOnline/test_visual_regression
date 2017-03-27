@@ -378,7 +378,7 @@ def test_article_sharing_menu_should_open_and_close(
             'sharing menu should hide again on click')
 
 
-def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
+def test_article_sharing_menu_should_hide_app_links_tablet_upwards(
         testserver, selenium_driver):
     selenium_driver.set_window_size(768, 800)
     selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
@@ -387,10 +387,15 @@ def test_article_sharing_menu_should_hide_whatsapp_link_tablet_upwards(
         '.sharing-menu > a[aria-controls]')
     whatsapp_item = selenium_driver.find_element_by_css_selector(
         '.sharing-menu__item--whatsapp')
+    messenger_item = selenium_driver.find_element_by_css_selector(
+        '.sharing-menu__item--messenger')
 
     sharing_menu_target.click()
-    assert not(whatsapp_item.is_displayed()), (
+    assert not whatsapp_item.is_displayed(), (
         'Sharing link to WhatsApp should be hidden on tablet & desktop')
+    assert not messenger_item.is_displayed(), (
+        'Sharing link for Facebook Messenger '
+        'must be invisible on tablet & desktop')
 
 
 def test_article_sharing_links_should_be_url_encoded(testbrowser):
@@ -1989,6 +1994,7 @@ def test_volume_teaser_display_correct_image_on_desktop(
 
 def test_share_buttons_are_present(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
+    canonical = browser.cssselect('link[rel="canonical"]')[0].get('href')
     sharing_menu = browser.cssselect('.sharing-menu')[0]
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
@@ -2019,8 +2025,14 @@ def test_share_buttons_are_present(testbrowser):
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE: ') in query.get('text').pop(0)
 
-    #  mail
+    #  facebook messenger
     parts = urlparse.urlparse(links[3].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert query.get('link').pop(0).startswith(canonical)
+    assert query.get('app_id').pop(0) == '638028906281625'
+
+    #  mail
+    parts = urlparse.urlparse(links[4].attrib['href'])
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
@@ -2029,7 +2041,8 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[0].text == 'Facebook'
     assert labels[1].text == 'Twitter'
     assert labels[2].text == 'WhatsApp'
-    assert labels[3].text == 'Mail'
+    assert labels[3].text == 'Facebook Messenger'
+    assert labels[4].text == 'Mail'
 
 
 def test_share_buttons_are_big(testbrowser):
@@ -2039,7 +2052,7 @@ def test_share_buttons_are_big(testbrowser):
     labels = sharing_menu.cssselect('.sharing-menu2__text')
 
     assert 'sharing-menu2--big' in sharing_menu.attrib['class']
-    assert len(links) == 4
+    assert len(links) == 5
 
     for link in links:
         assert '.ref.zeitde.share_big.' in link.attrib['href']
@@ -2047,7 +2060,8 @@ def test_share_buttons_are_big(testbrowser):
     assert labels[0].text == 'Auf Facebook teilen'
     assert labels[1].text == 'Twittern'
     assert labels[2].text == 'WhatsApp'
-    assert labels[3].text == 'Mailen'
+    assert labels[3].text == 'Facebook Messenger'
+    assert labels[4].text == 'Mailen'
 
 
 def test_article_view_has_share_buttons_set_correctly(
@@ -2122,6 +2136,17 @@ def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
         assert len(browser.cssselect('.gate')) == 1
         assert len(browser.cssselect(
             '.gate--register')) == int('anonymous' in c1_parameter)
+
+
+def test_paywall_adds_premium_redirect_target(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/zeit?C1-Meter-Status=always_paid')
+    input = browser.cssselect('form.gate__form input[name="url"]')[0]
+    premium_url = input.get('value')
+    assert (
+        premium_url == 'https://premium.zeit.de/abo/paywall?url='
+        'http%3A%2F%2Flocalhost%2Fzeit-online%2Farticle%2Fzeit'
+        '%23success-registration')
 
 
 def test_free_article_has_correct_ivw_code(dummy_request):

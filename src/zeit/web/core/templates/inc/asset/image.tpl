@@ -3,7 +3,7 @@
     {%- set default_height = (default_width / image.ratio) | int %}
     {%- set image_width = image.fallback_width | default(default_width, True) %}
     {%- set image_height = image.fallback_height | default(default_height, True) %}
-    <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image"
+    <figure class="{% block media_block %}{{ module_layout }}__media{% endblock %} {{ media_block_additional_class }} scaled-image {% if not image.mobile_ratio and image.variant_id %}{{ 'variant' | with_mods(image.variant_id) }}{% endif %}"
         {%- block image_additional_data_attributes %}{% endblock %}
         {%- if image_itemprop %} itemprop="{{ image_itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
         {% block media_caption_above %}{% endblock %}

@@ -194,7 +194,8 @@ def test_article03_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small'}
+        'cp31': 'share_buttons_small',
+        'cp32': 'unfeasible'}
 
 
 def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
@@ -251,7 +252,8 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small'}
+        'cp31': 'share_buttons_small',
+        'cp32': 'unfeasible'}
 
 
 def test_cp_has_correct_webtrekk_values(httpbrowser):
@@ -334,7 +336,8 @@ def test_cp_has_correct_webtrekk_values(httpbrowser):
         'cp27': '',
         'cp28': 'free',
         'cp29': 'unfeasible',
-        'cp30': 'open'}
+        'cp30': 'open',
+        'cp32': 'unfeasible'}
 
 
 def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
@@ -907,6 +910,7 @@ def test_infographics_should_display_header_above_image(testbrowser):
 
 def test_share_buttons_are_present(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03')
+    canonical = browser.cssselect('link[rel="canonical"]')[0].get('href')
     sharing_menu = browser.cssselect('.sharing-menu')[0]
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
@@ -937,8 +941,14 @@ def test_share_buttons_are_present(testbrowser):
     assert ('Der Chianti hat eine zweite Chance verdient - '
             'Artikel auf ZEITmagazin ONLINE: ') in query.get('text').pop(0)
 
-    #  mail
+    #  facebook messenger
     parts = urlparse.urlparse(links[3].attrib['href'])
+    query = urlparse.parse_qs(parts.query)
+    assert query.get('link').pop(0).startswith(canonical)
+    assert query.get('app_id').pop(0) == '638028906281625'
+
+    #  mail
+    parts = urlparse.urlparse(links[4].attrib['href'])
     query = urlparse.parse_qs(parts.query)
     assert ('Der Chianti hat eine zweite Chance verdient - '
             'Artikel auf ZEITmagazin ONLINE') in query.get('subject').pop(0)
@@ -947,7 +957,8 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[0].text == 'Auf Facebook teilen'
     assert labels[1].text == 'Twittern'
     assert labels[2].text == 'WhatsApp'
-    assert labels[3].text == 'Mailen'
+    assert labels[3].text == 'Facebook Messenger'
+    assert labels[4].text == 'Mailen'
 
 
 def test_share_buttons_are_big(testbrowser):
@@ -956,7 +967,7 @@ def test_share_buttons_are_big(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
 
     assert 'sharing-menu--big' in sharing_menu.attrib['class']
-    assert len(links) == 4
+    assert len(links) == 5
 
     for link in links:
         assert 'share_big' in link.attrib['href']
