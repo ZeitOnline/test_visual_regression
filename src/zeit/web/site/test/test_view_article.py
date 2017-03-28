@@ -547,7 +547,8 @@ def test_adcontroller_values_return_values_on_article(application):
         ('level3', 'umwelt'),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,affe,aggression,geschlechtsverkehr,'
+            'schimpanse,sozialverhalten,studie'),
         ('tma', '')]
     view = view = zeit.web.site.view_article.Article(
         content, pyramid.testing.DummyRequest())
