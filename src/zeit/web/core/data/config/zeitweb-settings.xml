@@ -79,4 +79,10 @@
   <setting name="brightcove_videoplayer_hp_cp_single" xsi:type="xsd:string">B1l1tOGXYe</setting>
   <!-- videoplayer_article production: c09a3b98-8829-47a5-b93b-c3cca8a4b5e9 -->
   <setting name="brightcove_videoplayer_article" xsi:type="xsd:string">rJzskUVKx</setting>
+
+  <!-- Use empty string. Do NOT use "false". -->
+  <setting name="optimizely_on_zon_homepage" xsi:type="xsd:string"></setting>
+  <setting name="optimizely_on_zon_centerpage" xsi:type="xsd:string"></setting>
+  <setting name="optimizely_on_zon_article" xsi:type="xsd:string"></setting>
+
 </settings>
