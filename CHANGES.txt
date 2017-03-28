@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.47 (unreleased)
+3.47 (2017-03-28)
 -----------------
 
 - ZON-3806: Load Optimizely in HTML
