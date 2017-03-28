@@ -25,9 +25,11 @@ def test_article_tags_template_renders_rel_attribute(
     for tag in tags:
         assert tag.get('rel') == 'tag'
 
-def test_adc_keywords_are_sanitized_correctly(selenium_driver, testserver):
+def test_adc_keywords_are_sanitized_correctly(
+    selenium_driver, testserver, monkeypatch):
     driver = selenium_driver
-    driver.set_window_size(1280, 720)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'iqd': True}.get)
     driver.get('%s/zeit-online/article/tags' % testserver.url)
     assert ('zeitonline,mailand,claudio-abbado,johann-sebastian-bach,oper,'
             'opernhaus,10slze-42-foo'
