@@ -426,8 +426,9 @@ class Base(object):
 
     @zeit.web.reify
     def adc_keywords(self):
-        lower_no_space = [x.label.lower().replace(' ', '-')
-                     for x in self.ranked_tags if x.label]
+        lower_no_space = [
+            x.label.lower().replace(' ', '-')
+            for x in self.ranked_tags if x.label]
         return ["".join(re.findall(r"[A-Za-z0-9-]*", item))
                 for item in lower_no_space]
 
