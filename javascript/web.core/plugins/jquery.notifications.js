@@ -1,7 +1,7 @@
 ( function( $, location, document ) {
     $.extend({
         notifications: function() {
-            var prepend = $( '.header' ).length > 0 ? false : true,
+            var prepend = $( '.page__content > .header' ).length > 0 ? false : true,
                 msgRegistrationSuccess = '<div class="notification notification--success" tabindex="0">' +
                     'Herzlich willkommen – viel Spaß beim Lesen!</div>',
                 msgRegistrationErrorWrongSubscription = '<div class="notification notification--error" tabindex="0">' +
