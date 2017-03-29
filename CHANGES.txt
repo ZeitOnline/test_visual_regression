@@ -8,7 +8,9 @@ POSTDEPLOY
 3.48 (unreleased)
 -----------------
 
-ZON-3814: Display notifications correctly in app-wrapper
+- ZON-3814: Display notifications correctly in app-wrapper
+
+- ZON-3721: Add ranked tags to adController keywords
 
 
 3.47 (2017-03-28)
