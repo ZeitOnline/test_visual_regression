@@ -316,3 +316,11 @@ def test_loggedin_status_hides_register_link_on_gate(
     gate_elem = select('.gate__note')
     assert len(gate_elem) == 1
     assert not gate_elem[0].is_displayed()
+
+
+def test_url_encoding_in_login_state(testbrowser):
+    path = '/zeit-online/article/simple?a=foo&b=<b>&c=u + i'
+    browser = testbrowser(path)
+    assert browser.document.xpath('body//header//include/@src')[0] == (
+        'http://localhost/login-state?for=site&context-uri={}'.format(
+            urllib.quote_plus('http://localhost' + path)))
