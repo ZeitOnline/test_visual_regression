@@ -1,81 +1,54 @@
-/**
- * @fileOverview zeit.web.magazin module
- * @version  0.1
- */
 
-// A hack for Modernizr and AMD.
-// This lets Modernizr be in the <head> and also compatible with other modules.
-define( 'modernizr', [], window.Modernizr );
+var $ = require( 'jquery' ),
+    zeit = require( 'web.core/zeit' ),
+    images = require( 'web.core/images' ),
+    clicktracking = require( 'web.core/clicktracking' ),
+    triggeredEventTracking = require( 'web.core/triggeredEventTracking' ),
+    adReload = require( 'web.core/adReload' ),
+    menu = require( 'web.core/menu' ),
+    comments = require( 'web.core/comments' ),
+    errors = require( 'web.magazin/errors' ),
+    cards = require( 'web.magazin/cards' ),
+    photocluster = require( 'web.magazin/photocluster' ),
+    article = document.getElementById( 'js-article' );
 
-// include requirejs and config first, including path and shim config
-require([ 'vendor/require', 'config' ], function() {});
+// initialize modules
+images.init();
+menu.init();
+clicktracking.init();
+triggeredEventTracking.init();
+adReload.init();
+errors.init();
+cards.init();
+zeit.clearQueue();
 
-// require anonymous AMD modules here
-require([
-    'web.core/zeit',
-    'web.core/images',
-    'web.core/clicktracking',
-    'web.core/triggeredEventTracking',
-    'web.core/adReload',
-    'web.core/menu',
-    'web.core/comments',
-    'web.magazin/errors',
-    'web.magazin/cards',
-    'web.magazin/photocluster'
-], function(
-    zeit,
-    images,
-    clicktracking,
-    triggeredEventTracking,
-    adReload,
-    menu,
-    comments,
-    errors,
-    cards,
-    photocluster
-) {
-    var article = document.getElementById( 'js-article' );
-
-    images.init();
-    menu.init();
-    clicktracking.init();
-    triggeredEventTracking.init();
-    adReload.init();
-    errors.init();
-    cards.init();
-    zeit.clearQueue();
-
-    if ( article ) {
-        comments.init();
-        photocluster.init();
-    }
-});
+if ( article ) {
+    comments.init();
+    photocluster.init();
+}
 
 // add required jQuery plugins
-// require jQuery first, so we don't have to shim simple plugins
-// plugins that require other plugins or libraries must use the shim config
-require([
-    'jquery',
-    'velocity.ui',
-    'web.core/plugins/jquery.animatescroll',
-    'web.core/plugins/jquery.inlinegallery',
-    'web.core/plugins/jquery.picturefill',
-    'web.core/plugins/jquery.referrerCount',
-    'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
-    'web.core/plugins/jquery.countFormchars',
-    'web.core/plugins/jquery.imageCopyrightFooter',
-    'web.core/plugins/jquery.notifications',
-    'web.magazin/plugins/jquery.backgroundvideo'
-], function( $ ) {
-    // remove jQuery from global scope
-    $.noConflict( true );
+import 'velocity.ui';
+import 'web.core/plugins/jquery.scrollIntoView'; // plugin used by other plugins
+import 'web.core/plugins/jquery.animatescroll';
+import 'web.core/plugins/jquery.inlinegallery';
+import 'web.core/plugins/jquery.picturefill';
+import 'web.core/plugins/jquery.referrerCount';
+import 'web.core/plugins/jquery.countFormchars';
+import 'web.core/plugins/jquery.imageCopyrightFooter';
+import 'web.core/plugins/jquery.notifications';
+import 'web.magazin/plugins/jquery.backgroundvideo';
 
-    $( window ).referrerCount();
-    $.notifications();
-    $( '.js-gallery' ).inlinegallery();
-    $( 'div[data-backgroundvideo]' ).backgroundVideo();
-    $.picturefill();
-    $( 'main' ).animateScroll({ selector: '.js-scroll' });
-    $( '.comment-section' ).countFormchars();
-    $( '.js-image-copyright-footer' ).imageCopyrightFooter();
-});
+// remove jQuery from global scope (omit for external jQuery Plugins (e.g. Datenjornalismus))
+if ( !zeit.queue.length ) {
+    $.noConflict( true );
+}
+
+$( window ).referrerCount();
+$.notifications();
+$( '.js-gallery' ).inlinegallery();
+$( 'div[data-backgroundvideo]' ).backgroundVideo();
+$.picturefill();
+$( 'main' ).animateScroll({ selector: '.js-scroll' });
+$( '.comment-section' ).countFormchars();
+$( '.js-image-copyright-footer' ).imageCopyrightFooter();
