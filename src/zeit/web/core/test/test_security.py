@@ -1,4 +1,5 @@
 import json
+import urllib
 
 import jwt
 import mock
@@ -276,25 +277,25 @@ def test_no_user_rawr_authentication_is_empty(dummy_request):
 
 def test_sso_url_contains_default_params(dummy_request):
     state = zeit.web.core.security.get_login_state(dummy_request)
-    assert (
-        state['register'] == 'http://sso.example.org/registrieren?url='
-                             'http://example.com&entry_service=sonstige')
-    assert (
-        state['register_rawr'] == 'http://sso.example.org/registrieren_email'
-                                  '?template=rawr&url=http://example.com'
-                                  '&entry_service=rawr')
-    assert (
-        state['logout'] == 'http://sso.example.org/abmelden'
-                           '?url=http://example.com&entry_service=sonstige')
-    assert (
-        state['login'] == 'http://sso.example.org/anmelden'
-                          '?url=http://example.com&entry_service=sonstige')
+    assert state['register'] == (
+        'http://sso.example.org/registrieren?url={}&entry_service={}'.format(
+            urllib.quote_plus('http://example.com'), 'sonstige'))
+    assert state['register_rawr'] == (
+        'http://sso.example.org/registrieren_email?template=rawr&url={}&'
+        'entry_service=rawr'.format(
+            urllib.quote_plus('http://example.com')))
+    assert state['logout'] == (
+        'http://sso.example.org/abmelden?url={}&entry_service=sonstige'.format(
+            urllib.quote_plus('http://example.com')))
+    assert state['login'] == (
+        'http://sso.example.org/anmelden?url={}&entry_service=sonstige'.format(
+            urllib.quote_plus('http://example.com')))
 
 
 def test_sso_url_contains_custom_params(dummy_request):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     conf['entry_service'] = 'custom'
     state = zeit.web.core.security.get_login_state(dummy_request)
-    assert (
-        state['register'] == 'http://sso.example.org/registrieren?url='
-                             'http://example.com&entry_service=custom')
+    assert state['register'] == (
+        'http://sso.example.org/registrieren?url={}&entry_service={}'.format(
+            urllib.quote_plus('http://example.com'), 'custom'))

@@ -547,7 +547,8 @@ def test_adcontroller_values_return_values_on_article(application):
         ('level3', 'umwelt'),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,affe,aggression,geschlechtsverkehr,'
+            'schimpanse,sozialverhalten,studie'),
         ('tma', '')]
     view = view = zeit.web.site.view_article.Article(
         content, pyramid.testing.DummyRequest())
@@ -2138,6 +2139,17 @@ def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
             '.gate--register')) == int('anonymous' in c1_parameter)
 
 
+def test_paywall_adds_premium_redirect_target(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/zeit?C1-Meter-Status=always_paid')
+    input = browser.cssselect('form.gate__form input[name="url"]')[0]
+    premium_url = input.get('value')
+    assert (
+        premium_url == 'https://premium.zeit.de/abo/paywall?url='
+        'http%3A%2F%2Flocalhost%2Fzeit-online%2Farticle%2Fzeit'
+        '%23success-registration')
+
+
 def test_free_article_has_correct_ivw_code(dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -2331,3 +2343,14 @@ def test_liveblog_article_uses_esi(selenium_driver, testserver):
         expected_conditions.presence_of_element_located(
             (By.ID, "livedesk-root")))
     assert blog.is_displayed(), 'ESI Liveblog not displayed'
+
+
+def test_article_can_include_optimizely(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    assert 'optimizely' not in browser.contents
+
+    optimizely_url = '//cdn.optimizely.com/js/281825380.js'
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['optimizely_on_zon_article'] = optimizely_url
+    browser = testbrowser('/zeit-online/article/simple')
+    assert optimizely_url in browser.contents

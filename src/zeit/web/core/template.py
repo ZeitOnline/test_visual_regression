@@ -261,6 +261,16 @@ def paragraph(block):
 
 
 @zeit.web.register_filter
+def vertical_prefix(content):
+    verticals = [('zco', 'zco_content'), ('zmo', 'zmo_content'), (
+        'zett', 'zett_content')]
+    for code, testname in verticals:
+        if globals()[testname](content):
+            return code
+    return ''
+
+
+@zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block
     elements.
@@ -860,3 +870,8 @@ def expired(content):
 @zeit.web.register_global
 def get_current_year():
     return datetime.datetime.now().year
+
+
+@zeit.web.register_filter
+def urlquote_plus(text):
+    return urllib.quote_plus(text)
