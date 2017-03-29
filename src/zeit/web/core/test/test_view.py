@@ -42,6 +42,7 @@ def mock_ad_view(application):
             context.banner_id = banner_id
             context.advertisement_title = adv_title
             context.product_text = product_text
+            context.keywords = []
             request = pyramid.testing.DummyRequest()
             request.path_info = path_info
             self.request = request

@@ -716,7 +716,7 @@ def test_adcontroller_values_return_values_on_cp(application):
         ('level3', ''),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,sasha-waltz,interpol'),
         ('tma', '')]
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, pyramid.testing.DummyRequest())

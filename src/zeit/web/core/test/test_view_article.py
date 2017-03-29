@@ -26,6 +26,19 @@ def test_article_tags_template_renders_rel_attribute(
         assert tag.get('rel') == 'tag'
 
 
+def test_adc_keywords_are_sanitized_correctly(selenium_driver,
+                                              testserver, monkeypatch):
+    driver = selenium_driver
+    # avoid "diuquilon", which is added by JS for specific screen sizes
+    driver.set_window_size(1200, 800)
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True, 'iqd': True}.get)
+    driver.get('%s/zeit-online/article/tags' % testserver.url)
+    assert ('zeitonline,mailand,claudio-abbado,johann-sebastian-bach,oper,'
+            'opernhaus,10slze-42-foo' == driver.execute_script(
+                'return adcSiteInfo.keywords'))
+
+
 def test_advertorial_marker_is_returned_correctly():
     content = mock.Mock()
     content.advertisement_title = 'YYY'
