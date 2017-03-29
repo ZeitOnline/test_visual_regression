@@ -286,7 +286,7 @@ class Base(object):
             levels) > 1 else ''
         level4 = "".join(re.findall(r"[A-Za-z0-9_]*", levels[2])) if len(
             levels) > 2 else ''
-        keywords = ','.join(self.adwords) if (
+        keywords = ','.join(self.adwords + self.adc_keywords[:6]) if (
             level2 != 'angebote') else '{},{}'.format(level2, level3)
         return [('$handle', self.adcontroller_handle),
                 ('level2', level2),
@@ -423,6 +423,14 @@ class Base(object):
         else:
             result = [self.ressort.title(), self.sub_ressort.title()]
         return [x for x in result if x]
+
+    @zeit.web.reify
+    def adc_keywords(self):
+        lower_no_space = [
+            x.label.lower().replace(' ', '-')
+            for x in self.ranked_tags if x.label]
+        return ["".join(re.findall(r"[A-Za-z0-9-]*", item))
+                for item in lower_no_space]
 
     @zeit.web.reify
     def is_hp(self):
@@ -653,7 +661,8 @@ class Base(object):
             ('cp27', ';'.join(self.webtrekk_assets)),  # Asset
             ('cp28', access),  #
             ('cp29', first_click_free),  # First click free
-            ('cp30', self.paywall or 'open')  # Paywall Schranke
+            ('cp30', self.paywall or 'open'),  # Paywall Schranke
+            ('cp32', 'unfeasible')  # Protokoll (set via JS in webtrekk.html)
         ])
 
         if not zeit.web.core.application.FEATURE_TOGGLES.find(
@@ -1181,8 +1190,7 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
     @zeit.web.reify
     def advertising_enabled(self):
-        return self.banner_channel is not None and (
-            self.framebuilder_requires_ssl is False)
+        return self.banner_channel is not None
 
     @zeit.web.reify
     def banner_channel(self):

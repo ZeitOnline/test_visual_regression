@@ -14,11 +14,11 @@
             <input class="gate__option" id="gate-option-1" type="radio" name="angebot" value="{{ settings('paywall_premium_product_digitalonly', 'https://premium.zeit.de') }}" checked="checked"
                 onchange="this.form.action=this.value; this.form.setAttribute('data-ct-column', 'digital');">
             <label for="gate-option-1" class="gate__label">
-                Gratis Digital-Zugang testen
+                Gratis Digital-Zugang
             </label>
             <ul class="gate__list">
                 <li class="gate__list-item">Alle Artikel auf ZEIT ONLINE frei</li>
-                <li class="gate__list-item">DIE ZEIT digital als App, E-Paper und für E-Reader</li>
+                <li class="gate__list-item">DIE ZEIT als App, E-Paper und auf dem E-Reader</li>
                 <li class="gate__list-item"><strong>4 Wochen kostenlos testen</strong></li>
             </ul>
         </div>
@@ -37,7 +37,7 @@
         </div>
         <div class="gate__actions">
             <input type="hidden" name="entry_service" value="schranke-paid">
-            <input type="hidden" name="url" value="{{ view.content_url }}#success-registration">
+            <input type="hidden" name="url" value="{{ '%s?url=%s' | format(settings('paywall_premium_redirect'), '%s#success-registration' | format(view.content_url) | urlquote_plus) }}">
             <input type="hidden" name="wt_zmc" value="fix.int.zonaudev.diezeit.wall_abo.premium.bar_{{ view.paywall }}.link.x">
             <input type="hidden" name="utm_medium" value="fix">
             <input type="hidden" name="utm_source" value="diezeit_zonaudev_int">

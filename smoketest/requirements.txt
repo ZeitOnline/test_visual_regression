@@ -12,3 +12,5 @@ pytz==2012c
 zope.event==3.5.2
 zope.interface==4.0.5
 zope.schema==3.7.1
+cssselect==1.0.1
+lxml==3.7.3

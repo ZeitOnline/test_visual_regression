@@ -2,7 +2,8 @@
 <features>
   <access_status_ivw>true</access_status_ivw>
   <access_status_webtrekk>true</access_status_webtrekk>
-  <amp_advertising>true</amp_advertising>
+  <amp_advertising>false</amp_advertising>
+  <amp_new_advertising>true</amp_new_advertising>
   <article_lineage>true</article_lineage>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <dummy>false</dummy>

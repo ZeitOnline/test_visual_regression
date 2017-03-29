@@ -5,12 +5,72 @@ POSTDEPLOY
 ----------
 
 
-3.44 (unreleased)
+3.48 (unreleased)
+-----------------
+
+- ZON-3814: Display notifications correctly in app-wrapper
+
+- ZON-3721: Add ranked tags to adController keywords
+
+- BUG-696: Quote URL to be used in rawr config
+
+- BUG-697: Encode query string parameter for ESI source
+
+
+3.47 (2017-03-28)
+-----------------
+
+- ZON-3806: Load Optimizely in HTML
+
+- ZON-3808: Remove obsolete kicker-logos from print-ressort teasers
+
+- ZON-3825: Change first entry of Video Dropdown to "Videoserien"
+
+
+3.46 (2017-03-24)
+-----------------
+
+- ZON-3788: Add redirect step through premium for gated articles
+
+- ZON-3815: Count error situation: user is logged in, but C1 does not think so
+
+- ZON-3805: Override normalize.css form element style
+
+- MAINT: Set fallback value for webtrekk param 32
+
+- MAINT: Update meinezeit in production smoke tests
+
+- MAINT: Change wording on paywall
+
+
+3.45 (2017-03-22)
+-----------------
+
+- ZON-3802: Use default Z+ logo size for square teaser
+
+- ZON-3583: Add share button for Facebook Messenger
+
+- FEM-7: Reserve space for article headerimage while loading
+
+- MAINT: Change wording on paywall
+
+
+3.44 (2017-03-17)
 -----------------
 
 - ZON-3778: Remove veeseo from paywalled articles
 
-- ZON-3778: Use ZEIT Campus startpage topiclinks on all pages in ZEIT Campus
+- ZON-3748: Use ZEIT Campus startpage topiclinks on all pages in ZEIT Campus
+
+- ZON-3747: Remove zeus fragments from friedbert
+
+- ZON-3795: Track http(s) protocol in webtrekk
+
+- ZON-3668: New AMP Adtags
+
+- FEM-4: Replace deprecated JavaScript linter JSCS with ESLint
+
+- MAINT: Enable ads in framebuilder with SSL
 
 - MAINT: Fix path in css sourcemaps if you grunt from outside the project dir
 

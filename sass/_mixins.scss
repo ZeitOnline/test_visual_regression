@@ -570,3 +570,17 @@ $inline-block-alignment: none !default;
 @mixin background-svg($svg){
     background-image: svg-url($svg);
 }
+
+// Avoid jumping while the image gets lazy-loaded
+@mixin reserve-space-for-article-media($ratio) {
+	position: relative;
+	&:before {
+		content: '';
+		display: block;
+		padding-bottom: $ratio;
+	}
+	& .article__media-container {
+		position: absolute;
+		top: 0;
+	}
+}

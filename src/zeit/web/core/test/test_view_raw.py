@@ -2,7 +2,7 @@ import pytest
 import requests
 
 
-@pytest.fixture(params=['www', 'scripts', 'static', 'zeus'])
+@pytest.fixture(params=['www', 'scripts', 'static'])
 def hostname(request):
     yield request.param
 
@@ -73,7 +73,7 @@ def test_renders_meta_files(testserver, hostname):
     assert 'robots.txt' in r.content
 
 
-@pytest.mark.parametrize('statichost', ['static', 'scripts', 'zeus'])
+@pytest.mark.parametrize('statichost', ['static', 'scripts'])
 def test_cannot_access_content_on_static_hosts(testserver, statichost):
     r = requests.get('%s/zeit-online/index' % testserver.url,
                      headers={'Host': statichost + '.zeit.de'},

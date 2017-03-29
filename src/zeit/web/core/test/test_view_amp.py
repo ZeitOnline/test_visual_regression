@@ -152,10 +152,11 @@ def test_amp_article_contains_sharing_links(testbrowser):
     canonical = browser.cssselect('link[rel="canonical"]')[0].get('href')
     sharing = browser.cssselect('.article-sharing')[0]
     links = sharing.cssselect('.article-sharing__link')
-    assert sharing.cssselect('.article-sharing__title')[0].text == 'Teilen'
-    assert len(links) == 4
+    assert len(links) == 5
     assert ('?u=' + urllib.quote(canonical)) in links[0].get('href')
     assert ('url=' + urllib.quote(canonical)) in links[1].get('href')
+    assert ('fb-messenger://share/?link=' + urllib.quote(canonical)
+            ) in links[3].get('href')
 
 
 def test_amp_article_shows_tags_correctly(testbrowser):
@@ -169,10 +170,18 @@ def test_amp_article_shows_tags_correctly(testbrowser):
         u'Arbeitsmarkt, Migration, Europäische Union')
 
 
-def test_amp_article_shows_ads_correctly(testbrowser):
+def test_amp_article_shows_ads_correctly(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'amp_advertising': True}.get)
     browser = testbrowser('/amp/zeit-online/article/amp')
     ads = browser.cssselect('.advertising')
     assert len(ads) == 3
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'amp_new_advertising': True, 'amp_advertising': False}.get)
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    ads = browser.cssselect('.advertising')
+    assert len(ads) == 4
 
 
 def test_amp_article_should_have_ivw_tracking(testbrowser, monkeypatch):
