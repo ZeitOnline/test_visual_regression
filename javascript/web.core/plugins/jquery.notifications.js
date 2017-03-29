@@ -1,7 +1,7 @@
 ( function( $, location, document ) {
     $.extend({
         notifications: function() {
-            var $header = $( 'header' ).first(),
+            var prepend = $( '.page__content > .header' ).length > 0 ? false : true,
                 msgRegistrationSuccess = '<div class="notification notification--success" tabindex="0">' +
                     'Herzlich willkommen – viel Spaß beim Lesen!</div>',
                 msgRegistrationErrorWrongSubscription = '<div class="notification notification--error" tabindex="0">' +
@@ -16,29 +16,33 @@
                     } else {
                         location.hash = null;
                     }
+                },
+                insertNotification = function( $message, prepend ) {
+                    if ( prepend ) {
+                    // we have to prepend if there is no header (eg. wrapper app)
+                        $message.prependTo( $( '.page__content' ) );
+                    } else {
+                    // otherwise we insert after header element
+                        $message.insertAfter( $( '.header' ) );
+                    }
+                    removeHash();
                 };
-
-            // display hash only when loading page from email-link
 
             switch ( location.hash.substr( 1 ) ) {
                 case 'success-registration':
                     if ( window.Zeit.view.hasOwnProperty( 'paywall' ) && window.Zeit.view.paywall === 'paid' ) {
-                        $( msgRegistrationErrorWrongSubscription ).insertAfter( $header );
+                        insertNotification( $( msgRegistrationErrorWrongSubscription ), prepend );
                     } else {
-                        $( msgRegistrationSuccess ).insertAfter( $header );
+                        insertNotification( $( msgRegistrationSuccess ), prepend );
                     }
-                    removeHash();
                     break;
                 case 'success-confirm-account':
-                    $( msgAccountConfirmSuccess ).insertAfter( $header );
-                    removeHash();
+                    insertNotification( $( msgAccountConfirmSuccess ), prepend );
                     break;
                 case 'success-confirm-change':
-                    $( msgChangeConfirmSuccess ).insertAfter( $header );
-                    removeHash();
+                    insertNotification( $( msgChangeConfirmSuccess ), prepend );
                     break;
             }
-
         }
     });
 })( jQuery, location, document );
