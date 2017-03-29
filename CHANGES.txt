@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3721: Add ranked tags to adController keywords
 
+- BUG-696: Quote URL to be used in rawr config
+
 
 3.47 (2017-03-28)
 -----------------

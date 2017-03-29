@@ -1,4 +1,5 @@
 # coding: utf-8
+import urllib
 import urllib2
 
 import jwt
@@ -17,15 +18,15 @@ from selenium.webdriver.support.ui import WebDriverWait
 def test_login_state_view_should_deliver_correct_sso_urls(dummy_request):
     dummy_request.route_url = lambda *args, **kw: 'http://destination_sso/'
     r = zeit.web.site.view.login_state(dummy_request)
-    assert ('http://sso.example.org/registrieren?url=http://destination_sso'
-            '&entry_service=sonstige' == r['register'])
+    url = urllib.quote_plus('http://destination_sso')
+    assert ('http://sso.example.org/registrieren?url={}'
+            '&entry_service=sonstige'.format(url) == r['register'])
     assert ('http://sso.example.org/registrieren_email?template=rawr'
-            '&url=http://destination_sso&entry_service=rawr' ==
-            r['register_rawr'])
-    assert ('http://sso.example.org/anmelden?url=http://destination_sso'
-            '&entry_service=sonstige' == r['login'])
-    assert ('http://sso.example.org/abmelden?url=http://destination_sso'
-            '&entry_service=sonstige' == r['logout'])
+            '&url={}&entry_service=rawr'.format(url) == r['register_rawr'])
+    assert ('http://sso.example.org/anmelden?url={}'
+            '&entry_service=sonstige'.format(url) == r['login'])
+    assert ('http://sso.example.org/abmelden?url={}'
+            '&entry_service=sonstige'.format(url) == r['logout'])
 
 
 def test_article_should_have_breadcrumbs(testbrowser):

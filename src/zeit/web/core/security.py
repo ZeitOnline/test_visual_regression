@@ -3,6 +3,7 @@ import hmac
 import json
 import logging
 import time
+import urllib
 
 import jwt
 import requests
@@ -171,6 +172,8 @@ def get_login_state(request):
     if not request.authenticated_userid and request.cookies.get(
             settings.get('sso_cookie')):
         log.warn('SSO Cookie present, but not authenticated')
+
+    destination = urllib.quote_plus(destination)
 
     info['login'] = u'{}/anmelden?url={}&entry_service={}'.format(
         settings['sso_url'], destination, entry_service)
