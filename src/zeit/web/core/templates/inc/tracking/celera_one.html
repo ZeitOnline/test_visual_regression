@@ -24,7 +24,7 @@
                                     notification.className = 'notification notification--error';
                                     notification.innerHTML = message;
                                 } else {
-                                    if ( header === null || header === undefined ) {
+                                    if ( header === null ) {
                                         document.querySelector( '.page__content' ).insertAdjacentHTML( 'afterbegin', htmlString );
                                     } else {
                                         header.insertAdjacentHTML( 'afterend', htmlString );
