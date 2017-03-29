@@ -8,7 +8,7 @@ POSTDEPLOY
 3.48 (unreleased)
 -----------------
 
-- Nothing changed yet.
+ZON-3814: Display notifications correctly in app-wrapper
 
 
 3.47 (2017-03-28)
