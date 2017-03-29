@@ -3,7 +3,7 @@
  * @author anika.szuppa@zeit.de
  * @version  0.1
  */
-( function( $ ) {
+( function( $, Zeit ) {
 
     /**
     * See (http://jquery.com/)
@@ -66,7 +66,7 @@
                 });
 
                 // event to reset clickable state when resized
-                $( window ).on( 'resize', $.debounce( resetInput, 300 ) );
+                $( window ).on( 'resize', Zeit.debounce( resetInput, 300 ) );
             }
         };
 
@@ -75,4 +75,4 @@
             el.bindSearchFormEvents( this );
         });
     };
-})( jQuery );
+})( jQuery, window.Zeit );
