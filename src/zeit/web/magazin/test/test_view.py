@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import pkg_resources
+import urllib
 import urllib2
 
 import lxml.html
@@ -741,3 +742,11 @@ def test_schema_org_publisher_mark_up(testbrowser):
         'structured-data-publisher-logo-zmo.png')
     assert logo.cssselect('[itemprop="width"]')[0].get('content') == '600'
     assert logo.cssselect('[itemprop="height"]')[0].get('content') == '56'
+
+
+def test_url_encoding_in_login_state(testbrowser):
+    path = '/zeit-magazin/article/03?a=foo&b=<b>&c=u + i'
+    browser = testbrowser(path)
+    assert browser.document.xpath('body//header//include/@src')[0] == (
+        'http://localhost/login-state?for=magazin&context-uri={}'.format(
+            urllib.quote_plus('http://localhost' + path)))
