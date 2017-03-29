@@ -152,9 +152,6 @@
         {%- include "zeit.web.core:templates/inc/tracking/adblocker_count.html" -%}
     {% endblock %}
 
-    <script>
-        var require = { baseUrl: '{{ request.asset_host }}/js/' };
-    </script>
     <script src="{{ request.asset_host }}/js/site.js"></script>
 
     {% if view.vgwort_url %}

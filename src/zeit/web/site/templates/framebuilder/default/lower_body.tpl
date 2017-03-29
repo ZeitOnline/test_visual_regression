@@ -14,10 +14,6 @@
     {% endif %}
     {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
 
-    <script>
-        var require = { baseUrl: '{{ request.asset_host }}/js/' };
-    </script>
-
     <script src="{{ request.asset_host }}/js/web.site/frame.js"></script>
 
 </body>
