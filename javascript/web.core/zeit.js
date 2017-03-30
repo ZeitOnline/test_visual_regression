@@ -3,6 +3,11 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.1
  */
+
+// ES6 Promise polyfill
+// @see https://webpack.js.org/guides/code-splitting-import/#promise-polyfill
+require( 'es6-promise/auto' );
+
 var Zeit = window.Zeit || {},
     extension = {
         clearQueue: function() {
