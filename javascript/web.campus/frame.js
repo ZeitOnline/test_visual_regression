@@ -1,6 +1,5 @@
 
-var $ = require( 'jquery' ),
-    menu = require( 'web.core/menu' ),
+var menu = require( 'web.core/menu' ),
     clicktracking = require( 'web.core/clicktracking' ),
     adReload = require( 'web.core/adReload' );
 
