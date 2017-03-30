@@ -35,6 +35,7 @@
     "webpack": "^2.2.1"
   },
   "scripts": {
+    "clean:legacy": "rm -rf javascript/vendor",
     "clean:css": "rm -rf src/zeit/web/static/css",
     "clean:js": "rm -rf src/zeit/web/static/js",
     "clean": "npm-run-all --parallel clean:*",
