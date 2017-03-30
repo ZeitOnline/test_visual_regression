@@ -21,7 +21,7 @@
     "jshint": "^2.9.4",
     "masonry-layout": "^4.1.1",
     "modernizr": "^3.4.0",
-    "node-sass": "^4.5.1",
+    "node-sass": "^4.5.2",
     "nodemon": "^1.11.0",
     "normalize.css": "^6.0.0",
     "npm-run-all": "^4.0.2",
