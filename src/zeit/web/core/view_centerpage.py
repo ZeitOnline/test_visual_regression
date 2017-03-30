@@ -215,17 +215,6 @@ class Centerpage(AreaProvidingPaginationMixin,
         return self.context.type == 'homepage'
 
     @zeit.web.reify
-    def is_ressortpage(self):
-        if self.context.type == 'centerpage':
-            try:
-                if zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
-                        self.ressort]:
-                    return True
-            except KeyError:
-                pass
-        return False
-
-    @zeit.web.reify
     def has_solo_leader(self):
         try:
             return self.regions[0].values()[0].kind == 'solo'

@@ -381,20 +381,3 @@ def test_hp_topics_should_only_be_rendered_as_needed(application,
     config = zeit.web.core.view_centerpage.json_topic_config(
         dummy_request)
     assert len(config['topics']) == 2
-
-
-def test_ressortpage_returns_is_ressortpage_correctly(
-        application, dummy_request):
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
-    view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
-    assert not view.is_ressortpage
-
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/centerpage/centerpage')
-    view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
-    assert view.is_ressortpage
-
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/angebote/leseperlen')
-    view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
-    assert not view.is_ressortpage
