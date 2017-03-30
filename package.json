@@ -83,7 +83,7 @@
     "js:dev": "npm run js -- useSourceUrl=true optimize=none",
     "js": "r.js -o javascript/build.json",
     "prebuild": "npm run clean",
-    "build": "NODE_ENV=production npm-run-all bower modernizr sass:dist js svg",
+    "build": "NODE_ENV=production npm-run-all --parallel bower modernizr sass:dist js svg",
     "postinstall": "npm prune"
   },
   "browserslist": [
