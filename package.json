@@ -41,7 +41,7 @@
     "modernizr": "modernizr -c modernizr-config.json -d src/zeit/web/static/js/vendor/modernizr-custom.js",
     "jshint": "jshint javascript",
     "eslint": "eslint javascript --fix",
-    "lint": "npm run --silent jshint & npm run --silent eslint",
+    "lint": "npm run jshint --silent & npm run eslint --silent",
     "lint:silent": "npm run lint || exit 0",
     "postcss": "postcss -u autoprefixer -r 'src/zeit/web/static/css/**/!(all-old-ie).css'",
     "sass": "node-sass --include-path sass --include-path node_modules sass/ -o src/zeit/web/static/css/",
