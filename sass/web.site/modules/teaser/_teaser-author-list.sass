@@ -25,7 +25,6 @@
 		white-space: nowrap
 		text-overflow: ellipsis
 		width: 100%
-		overflow: hidden
 		&:after
 			content: "\203A" // › = single right-pointing angle quotation mark
 			font-size: em(16px)
@@ -47,9 +46,8 @@
 	&__image
 		position: absolute
 		bottom: 0
+		height: remify(90px)
 		width: remify(90px)
-	&__media
-		@extend %square-item
 	&__text
 		padding: remify(0 10px 0 100px)
 		&:before
