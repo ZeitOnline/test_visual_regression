@@ -41,6 +41,7 @@ module.exports = {
             { test: /jquery.clarify/, loader: 'imports-loader?define=>false' },
             { test: /jquery.inview/, loader: 'imports-loader?define=>false' },
             { test: /requirejs/, loader: 'script-loader' },
+            { test: require.resolve('masonry-layout'), loader: 'imports-loader?define=>false' },
         ]
     },
     externals: {
