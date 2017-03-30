@@ -5,8 +5,28 @@ POSTDEPLOY
 ----------
 
 
-3.47 (unreleased)
+3.49 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.48 (2017-03-29)
+-----------------
+
+- ZON-3814: Display notifications correctly in app-wrapper
+
+- ZON-3721: Add ranked tags to adController keywords
+
+- BUG-696: Quote URL to be used in rawr config
+
+- BUG-697: Encode query string parameter for ESI source
+
+
+3.47 (2017-03-28)
+-----------------
+
+- ZON-3806: Load Optimizely in HTML
 
 - ZON-3808: Remove obsolete kicker-logos from print-ressort teasers
 

@@ -46,7 +46,7 @@
 
     <div class="nav__login" data-ct-row="usermenu">
         {% block login %}
-            {% set esi_source = '{}login-state?for=site&context-uri={}'.format(request.route_url('home'), request.url) %}
+            {% set esi_source = '{}login-state?for=site&context-uri={}'.format(request.route_url('home'), request.url | urlquote_plus) %}
             {{ lama.insert_esi(esi_source, 'Anmeldung nicht möglich') }}
         {% endblock login %}
     </div>

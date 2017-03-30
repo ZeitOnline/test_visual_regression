@@ -108,6 +108,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             conf.get('series_prefix', ''), self.context.serie.url)
         return zeit.cms.interfaces.ICMSContent(uid, None)
 
+    @zeit.web.reify
+    def include_optimizely(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('optimizely_on_zon_article', None)
+
 
 @zeit.web.view_config(
     name='seite',
