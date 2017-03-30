@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - BUG-697: Encode query string parameter for ESI source
 
+- MAINT: Do not hardcode the protocol into our CSS
+
 
 3.47 (2017-03-28)
 -----------------
