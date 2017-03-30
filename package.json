@@ -36,7 +36,7 @@
     "livereload": "^0.6.2",
     "main-bower-files": "^2.13.1",
     "modernizr": "^3.4.0",
-    "node-sass": "^4.5.1",
+    "node-sass": "^4.5.2",
     "nodemon": "^1.11.0",
     "npm-run-all": "^4.0.2",
     "postcss-cli": "^3.0.0",
