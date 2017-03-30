@@ -6,6 +6,9 @@ var $ = require( 'jquery' ),
     adblockCount = require( 'web.site/adblockCount.js' ),
     adReload = require( 'web.core/adReload' );
 
+// remove jQuery from global scope (needles with node/webpack)
+// $.noConflict( true );
+
 // initialize modules
 menu.init({ followMobile: 'always' });
 clicktracking.init();
@@ -18,9 +21,6 @@ import 'web.core/plugins/jquery.scrollIntoView'; // plugin used by other plugins
 import 'web.site/plugins/jquery.adaptnav';
 import 'web.site/plugins/jquery.extendfooter';
 import 'web.site/plugins/jquery.togglesearch';
-
-// remove jQuery from global scope
-$.noConflict( true );
 
 // global and "above the fold"
 $( '.nav__search' ).toggleSearch();

@@ -12,6 +12,9 @@ var $ = require( 'jquery' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     main = $( '#main' );
 
+// remove jQuery from global scope (needles with node/webpack)
+// $.noConflict( true );
+
 // initialize modules
 images.init();
 menu.init();
@@ -36,11 +39,6 @@ import 'web.core/plugins/jquery.imageCopyrightFooter';
 import 'web.core/plugins/jquery.referrerCount';
 import 'web.core/plugins/jquery.countFormchars';
 import 'web.core/plugins/jquery.notifications';
-
-// remove jQuery from global scope (omit for external jQuery Plugins (e.g. Datenjornalismus))
-if ( !zeit.queue.length ) {
-    $.noConflict( true );
-}
 
 $( window ).referrerCount();
 $.notifications();

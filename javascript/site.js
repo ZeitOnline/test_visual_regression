@@ -14,6 +14,9 @@ var $ = require( 'jquery' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     isHp = document.body.getAttribute( 'data-is-hp' );
 
+// remove jQuery from global scope (needles with node/webpack)
+// $.noConflict( true );
+
 // initialize modules
 images.init();
 menu.init({ followMobile: 'always' });
@@ -60,11 +63,6 @@ import 'web.site/plugins/jquery.tabs';
 import 'web.site/plugins/jquery.togglesearch';
 import 'web.site/plugins/jquery.updateSignals';
 import 'web.site/plugins/jquery.partnerDropdown';
-
-// remove jQuery from global scope (omit for external jQuery Plugins (e.g. Datenjornalismus))
-if ( !zeit.queue.length ) {
-    $.noConflict( true );
-}
 
 $( window ).referrerCount();
 // global and "above the fold"

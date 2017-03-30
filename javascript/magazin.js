@@ -12,6 +12,9 @@ var $ = require( 'jquery' ),
     photocluster = require( 'web.magazin/photocluster' ),
     article = document.getElementById( 'js-article' );
 
+// remove jQuery from global scope (needles with node/webpack)
+// $.noConflict( true );
+
 // initialize modules
 images.init();
 menu.init();
@@ -38,11 +41,6 @@ import 'web.core/plugins/jquery.countFormchars';
 import 'web.core/plugins/jquery.imageCopyrightFooter';
 import 'web.core/plugins/jquery.notifications';
 import 'web.magazin/plugins/jquery.backgroundvideo';
-
-// remove jQuery from global scope (omit for external jQuery Plugins (e.g. Datenjornalismus))
-if ( !zeit.queue.length ) {
-    $.noConflict( true );
-}
 
 $( window ).referrerCount();
 $.notifications();
