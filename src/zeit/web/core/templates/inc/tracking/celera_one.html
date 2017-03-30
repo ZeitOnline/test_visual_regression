@@ -24,10 +24,12 @@
                                     notification.className = 'notification notification--error';
                                     notification.innerHTML = message;
                                 } else {
-                                    if ( header === null ) {
+                                    if ( header && typeof( header ) === 'object' ) {
+                                        header.insertAdjacentHTML( 'afterend', htmlString );
+                                    } else if ( !header ) {
                                         document.querySelector( '.page__content' ).insertAdjacentHTML( 'afterbegin', htmlString );
                                     } else {
-                                        header.insertAdjacentHTML( 'afterend', htmlString );
+                                        return false;
                                     }
                                 }
                             }
