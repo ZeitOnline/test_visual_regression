@@ -20,7 +20,7 @@ var Zeit = window.Zeit || {},
                 var queue = this.queue;
 
                 require([ 'web.core/zeit.require' ], function( amd ) {
-                    amd.clear( queue );
+                    amd( queue );
                 });
 
                 this.queue = [];

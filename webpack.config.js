@@ -39,8 +39,8 @@ module.exports = {
             { test: /jquery.inlinegallery/, loader: 'imports-loader?bxSlider' },
             { test: /jquery.clarify/, loader: 'imports-loader?define=>false' },
             { test: /jquery.inview/, loader: 'imports-loader?define=>false' },
-            { test: /requirejs/, loader: 'script-loader' },
             { test: require.resolve('masonry-layout'), loader: 'imports-loader?define=>false' },
+            { test: require.resolve('requirejs/require'), loader: 'exports-loader?requirejs,require,define' },
         ]
     },
     externals: {
@@ -51,7 +51,6 @@ module.exports = {
         alias: {
             'bxSlider': path.resolve(__dirname, 'javascript/web.core/plugins/jquery.bxslider.js'),
             'masonry': 'masonry-layout',
-            'requirejs': 'requirejs/require',
             'velocity': 'velocity-animate',
             'velocity.ui': 'velocity-animate/velocity.ui',
             'jquery.clarify': path.resolve(__dirname, 'javascript/web.core/plugins/jquery.clarify.js'),
