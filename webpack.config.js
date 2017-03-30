@@ -5,8 +5,7 @@ const production = process.env.NODE_ENV === 'production';
 let plugins = [
     new webpack.ProvidePlugin({
         $: 'jquery',
-        jQuery: 'jquery',
-        'window.jQuery': 'jquery'
+        jQuery: 'jquery'
     })
 ];
 
