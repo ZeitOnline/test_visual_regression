@@ -17,10 +17,10 @@ adReload.init();
 zeit.clearQueue();
 
 // add required jQuery plugins
-import 'web.core/plugins/jquery.scrollIntoView'; // plugin used by other plugins
-import 'web.site/plugins/jquery.adaptnav';
-import 'web.site/plugins/jquery.extendfooter';
-import 'web.site/plugins/jquery.togglesearch';
+require( 'web.core/plugins/jquery.scrollIntoView' ); // plugin used by other plugins
+require( 'web.site/plugins/jquery.adaptnav' );
+require( 'web.site/plugins/jquery.extendfooter' );
+require( 'web.site/plugins/jquery.togglesearch' );
 
 // global and "above the fold"
 $( '.nav__search' ).toggleSearch();

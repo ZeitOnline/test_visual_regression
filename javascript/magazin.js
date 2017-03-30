@@ -31,16 +31,16 @@ if ( article ) {
 }
 
 // add required jQuery plugins
-import 'velocity.ui';
-import 'web.core/plugins/jquery.scrollIntoView'; // plugin used by other plugins
-import 'web.core/plugins/jquery.animatescroll';
-import 'web.core/plugins/jquery.inlinegallery';
-import 'web.core/plugins/jquery.picturefill';
-import 'web.core/plugins/jquery.referrerCount';
-import 'web.core/plugins/jquery.countFormchars';
-import 'web.core/plugins/jquery.imageCopyrightFooter';
-import 'web.core/plugins/jquery.notifications';
-import 'web.magazin/plugins/jquery.backgroundvideo';
+require( 'velocity.ui' );
+require( 'web.core/plugins/jquery.scrollIntoView' ); // plugin used by other plugins
+require( 'web.core/plugins/jquery.animatescroll' );
+require( 'web.core/plugins/jquery.inlinegallery' );
+require( 'web.core/plugins/jquery.picturefill' );
+require( 'web.core/plugins/jquery.referrerCount' );
+require( 'web.core/plugins/jquery.countFormchars' );
+require( 'web.core/plugins/jquery.imageCopyrightFooter' );
+require( 'web.core/plugins/jquery.notifications' );
+require( 'web.magazin/plugins/jquery.backgroundvideo' );
 
 $( window ).referrerCount();
 $.notifications();

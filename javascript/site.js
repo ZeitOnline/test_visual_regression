@@ -35,34 +35,34 @@ adblockCount.init();
 zeit.clearQueue();
 
 // add required jQuery plugins
-import 'velocity.ui';
-import 'web.core/plugins/jquery.scrollIntoView'; // plugin used by other plugins
-import 'web.core/plugins/jquery.animatescroll';
-import 'web.core/plugins/jquery.infobox';
-import 'web.core/plugins/jquery.inlinegallery';
-import 'web.core/plugins/jquery.picturefill';
-import 'web.core/plugins/jquery.referrerCount';
-import 'web.core/plugins/jquery.toggleRegions';
-import 'web.core/plugins/jquery.countFormchars';
-import 'web.core/plugins/jquery.imageCopyrightFooter';
-import 'web.core/plugins/jquery.notifications';
-import 'web.site/plugins/jquery.accordion';
-import 'web.site/plugins/jquery.adaptnav';
-import 'web.site/plugins/jquery.animateJobs';
-import 'web.site/plugins/jquery.autoclick';
-import 'web.site/plugins/jquery.extendfooter';
-import 'web.site/plugins/jquery.fixPosition';
-import 'web.site/plugins/jquery.hpOverlay';
-import 'web.site/plugins/jquery.liveblog';
-import 'web.site/plugins/jquery.searchTools';
-import 'web.site/plugins/jquery.selectNav';
-import 'web.site/plugins/jquery.paginateTeasers';
-import 'web.site/plugins/jquery.longTextWrapper';
-import 'web.site/plugins/jquery.truncateRegions';
-import 'web.site/plugins/jquery.tabs';
-import 'web.site/plugins/jquery.togglesearch';
-import 'web.site/plugins/jquery.updateSignals';
-import 'web.site/plugins/jquery.partnerDropdown';
+require( 'velocity.ui' );
+require( 'web.core/plugins/jquery.scrollIntoView' ); // plugin used by other plugins
+require( 'web.core/plugins/jquery.animatescroll' );
+require( 'web.core/plugins/jquery.infobox' );
+require( 'web.core/plugins/jquery.inlinegallery' );
+require( 'web.core/plugins/jquery.picturefill' );
+require( 'web.core/plugins/jquery.referrerCount' );
+require( 'web.core/plugins/jquery.toggleRegions' );
+require( 'web.core/plugins/jquery.countFormchars' );
+require( 'web.core/plugins/jquery.imageCopyrightFooter' );
+require( 'web.core/plugins/jquery.notifications' );
+require( 'web.site/plugins/jquery.accordion' );
+require( 'web.site/plugins/jquery.adaptnav' );
+require( 'web.site/plugins/jquery.animateJobs' );
+require( 'web.site/plugins/jquery.autoclick' );
+require( 'web.site/plugins/jquery.extendfooter' );
+require( 'web.site/plugins/jquery.fixPosition' );
+require( 'web.site/plugins/jquery.hpOverlay' );
+require( 'web.site/plugins/jquery.liveblog' );
+require( 'web.site/plugins/jquery.searchTools' );
+require( 'web.site/plugins/jquery.selectNav' );
+require( 'web.site/plugins/jquery.paginateTeasers' );
+require( 'web.site/plugins/jquery.longTextWrapper' );
+require( 'web.site/plugins/jquery.truncateRegions' );
+require( 'web.site/plugins/jquery.tabs' );
+require( 'web.site/plugins/jquery.togglesearch' );
+require( 'web.site/plugins/jquery.updateSignals' );
+require( 'web.site/plugins/jquery.partnerDropdown' );
 
 $( window ).referrerCount();
 // global and "above the fold"
