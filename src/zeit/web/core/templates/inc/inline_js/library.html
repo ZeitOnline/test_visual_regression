@@ -3,7 +3,7 @@
     document.createElement( 'picture' );
 
     window.Zeit = {
-        baseUrl: '{{ request.asset_host }}/js/',
+        publicPath: '{{ request.asset_host }}/js/',
         jsconfHost: '{{ request.jsconf_host }}',
         communityHost: '{{ request.registry.settings.community_host }}',
         cpVideoPlayerId: '{{ settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') }}',
