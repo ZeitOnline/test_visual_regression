@@ -2851,3 +2851,20 @@ def test_centerpage_can_include_optimizely(testbrowser):
     settings['optimizely_on_zon_centerpage'] = optimizely_url
     browser = testbrowser('/zeit-online/slenderized-centerpage')
     assert optimizely_url in browser.contents
+
+
+def test_ressortpage_returns_is_ressortpage_correctly(
+        application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert not view.is_ressortpage
+
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/centerpage/centerpage')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.is_ressortpage
+
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/angebote/leseperlen')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert not view.is_ressortpage
