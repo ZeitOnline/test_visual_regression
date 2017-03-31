@@ -14,6 +14,7 @@
   <iqd_mobile_transition_zon_cp>true</iqd_mobile_transition_zon_cp>
   <rawr_iframe>true</rawr_iframe>
   <reader_revenue>true</reader_revenue>
+  <reader_revenue_handle_celeraone_login_inconsistency>true</reader_revenue_handle_celeraone_login_inconsistency>
   <tag_logos>true</tag_logos>
   <third_party_modules>false</third_party_modules>
   <tracking>false</tracking>

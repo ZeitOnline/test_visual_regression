@@ -8,6 +8,7 @@
                This uses our jquery.notification styles. Because we dont want
                to expose the plugin to the world, we build the HTML manually here.
             #}
+            {% if toggles('reader_revenue_handle_celeraone_login_inconsistency') %}
             if ( window.Zeit.view.hasOwnProperty( 'paywall' ) && window.Zeit.view.paywall ) {
                 var ls = document.getElementById( 'login-state' ),
                     ssoId;
@@ -37,6 +38,7 @@
                     }
                 }
             }
+            {% endif %}
 
             cre_client.set_page_view();
             {% for func, value in view.c1_client -%}
