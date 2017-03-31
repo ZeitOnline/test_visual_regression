@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - MAINT: Change wording on paywall
 
+- FIX: Be defensive when reading keywords from context
+
 
 3.48 (2017-03-29)
 -----------------
