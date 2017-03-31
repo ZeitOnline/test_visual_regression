@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3756: Add new adtile to ZON centerpage
 
+- MAINT: Add feature toggle as safety net for C1 Login notification
+
 
 3.49 (2017-03-31)
 -----------------
