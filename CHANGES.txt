@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.50 (unreleased)
+3.50 (2017-03-31)
 -----------------
 
 - ZON-3756: Add new adtile to ZON centerpage
