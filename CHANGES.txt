@@ -8,7 +8,9 @@ POSTDEPLOY
 3.49 (unreleased)
 -----------------
 
-ZON-3816: Show error notification if user is loggedin, but C1 claims otherwise
+- ZON-3816: Show error notification if user is loggedin, but C1 claims otherwise
+
+- MAINT: Change wording on paywall
 
 
 3.48 (2017-03-29)
