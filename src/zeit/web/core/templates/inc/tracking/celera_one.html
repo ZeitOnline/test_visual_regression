@@ -3,6 +3,41 @@
 (function() {
     var sendClientRequest = function() {
         if ( typeof cre_client !== "undefined" ) {
+
+            {# Error handling for #ZON-3807. C1 might see loggedin users as anonymous.
+               This uses our jquery.notification styles. Because we dont want
+               to expose the plugin to the world, we build the HTML manually here.
+            #}
+            if ( window.Zeit.view.hasOwnProperty( 'paywall' ) && window.Zeit.view.paywall ) {
+                var ls = document.getElementById( 'login-state' ),
+                    ssoId;
+                if ( ls ) {
+                    ssoId = ls.getAttribute( 'data-sso-id' );
+                    if ( ssoId ) {
+                        cre_client.addListener( function( e ) {
+                            if ( e.data && e.data.user_status && e.data.user_status === 'anonymous' ) {
+                                var header = document.querySelector( '.page__content > .header' ),
+                                    notification = document.querySelector( 'div.notification' ),
+                                    message = 'Es ist ein Fehler aufgetreten. Bitte melden Sie sich ab und versuchen Sie die Anmeldung danach erneut.',
+                                    htmlString = '<div class="notification notification--error" tabindex="0">' + message + '</div>';
+                                if ( notification ) {
+                                    notification.className = 'notification notification--error';
+                                    notification.innerHTML = message;
+                                } else {
+                                    if ( header && typeof( header ) === 'object' ) {
+                                        header.insertAdjacentHTML( 'afterend', htmlString );
+                                    } else if ( !header ) {
+                                        document.querySelector( '.page__content' ).insertAdjacentHTML( 'afterbegin', htmlString );
+                                    } else {
+                                        return false;
+                                    }
+                                }
+                            }
+                        } );
+                    }
+                }
+            }
+
             cre_client.set_page_view();
             {% for func, value in view.c1_client -%}
                 cre_client.{{ func }}( {{ value | safe }} );
