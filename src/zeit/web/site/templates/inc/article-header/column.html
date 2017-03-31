@@ -32,7 +32,7 @@
                         </div>
                     {% endif %}
                 </div>
-                {% require image = get_image(view.context, name='author', fallback=False) -%}
+                {% require image = get_image(view.context, variant_id='square', name='author', fallback=False) -%}
                 <div class="column-heading__author">
                     {% include "zeit.web.site:templates/inc/article/column_author_image.tpl" %}
                 </div>
