@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.49 (unreleased)
+3.49 (2017-03-31)
 -----------------
 
 - ZON-3816: Show error notification if user is loggedin, but C1 claims otherwise
