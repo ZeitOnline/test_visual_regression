@@ -6,7 +6,7 @@
 {% set media_caption_additional_class = 'figcaption--hidden' %}
 
 {% if teaser is column %}
-    {% set image = get_image(teaser, name='author', fallback=False) %}
+    {% set image = get_image(teaser, variant_id='square', name='author', fallback=False) %}
     {% set modifier = 'column' %}
 {% endif %}
 
