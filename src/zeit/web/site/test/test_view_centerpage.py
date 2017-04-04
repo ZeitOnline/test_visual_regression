@@ -2291,7 +2291,7 @@ def test_author_list_should_show_authors(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'http://xml.zeit.de/autoren/j_random'}]
     browser = testbrowser('/autoren/register_A')
-    assert len(browser.cssselect('.teaser-small')) == 1
+    assert len(browser.cssselect('.author-list__item')) == 1
 
 
 def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
