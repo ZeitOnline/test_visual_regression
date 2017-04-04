@@ -6,7 +6,6 @@
     "jquery": "1.12.4",
     "jquery.inview": "1.1.2",
     "masonry": "^4.1.1",
-    "normalize.css": "5.0.0",
     "picturefill": "3.0.2",
     "requirejs": "2.3.2",
     "svg4everybody": "2.1.2",

@@ -78,7 +78,7 @@ module.exports = function(grunt) {
                 precision: 5, // default of node-sass
                 includePaths: [
                     path.resolve(project.sourceDir + 'sass'),
-                    path.resolve(project.sourceDir + 'bower_components')
+                    path.resolve(project.sourceDir + 'node_modules')
                 ]
             },
             'dev-minimal': {
