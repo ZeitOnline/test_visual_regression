@@ -6,10 +6,6 @@
 
 {% block media_caption_content %}
     <a class="{{ module_layout }}__link" href="{{ href }}">
-    {% if block.teaser_text %}
         {{ block.teaser_text }}
-    {% else %}
-        Dieser Artikel stammt aus der ZEIT Nr. {{ block.issue }}/{{ block.year }}. Hier können Sie die gesamte Ausgabe lesen.
-    {% endif %}
     </a>
 {% endblock %}
