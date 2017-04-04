@@ -13,6 +13,8 @@
 		padding: 0 0 (100% / 7 * 3) 0 // image variant 'cinema'
 		position: relative
 	&__media
+		+old-ie
+			display: block // IE8
 		background-color: $zon-lighter-grey // placeholder for image
 		height: 0
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
