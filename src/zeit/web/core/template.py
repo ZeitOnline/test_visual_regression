@@ -3,6 +3,7 @@ import collections
 import datetime
 import json
 import logging
+import pdb
 import pkg_resources
 import random
 import re
@@ -13,7 +14,7 @@ import urlparse
 
 import babel.dates
 import lxml.etree
-import pyramid.threadlocal
+import pyramid.path
 import zope.component
 
 import zeit.campus.interfaces
@@ -27,9 +28,9 @@ import zeit.magazin.interfaces
 import zeit.web
 import zeit.web.core.application
 import zeit.web.core.centerpage
-import zeit.web.core.image
 import zeit.web.core.interfaces
 import zeit.web.core.utils
+
 
 log = logging.getLogger(__name__)
 
@@ -875,3 +876,8 @@ def get_current_year():
 @zeit.web.register_filter
 def urlquote_plus(text):
     return urllib.quote_plus(text)
+
+
+@zeit.web.register_global
+def debugger():
+    pdb.set_trace()
