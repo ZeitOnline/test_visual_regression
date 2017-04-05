@@ -8,6 +8,8 @@ POSTDEPLOY
 3.51 (unreleased)
 -----------------
 
+- ZON-3687: Move volume default teaser text to zeit.content.volume
+
 - BUG-589: Improve column teaser for IE8
 
 - MAINT: Use square image variant for square author images
