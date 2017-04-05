@@ -27,8 +27,7 @@
     "grunt-sftp-deploy": "~0.2.5",
     "grunt-svgmin": "^4.0.0",
     "grunt-svgstore": "^1.0.0",
-    "main-bower-files": "^2.13.1",
-    "normalize.css": "^6.0.0"
+    "main-bower-files": "^2.13.1"
   },
   "repository": {
     "type": "git",
