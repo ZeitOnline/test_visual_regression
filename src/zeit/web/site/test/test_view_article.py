@@ -1978,9 +1978,15 @@ def test_volume_teaser_is_rendered_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/volumeteaser')
     volume_teaser = browser.cssselect('.volume-teaser')
     volume_teaser_link = browser.cssselect(
-        '.volume-teaser__link')[0].get('href')
+        '.volume-teaser__link')[0]
     assert len(volume_teaser) == 1
-    assert volume_teaser_link == 'https://premium.zeit.de/abo/diezeit/2016/01'
+    assert (
+        volume_teaser_link.get('href') ==
+        'https://premium.zeit.de/abo/diezeit/2016/01')
+    assert (
+        u'Dieser Artikel stammt aus der ZEIT Nr. 01/2016. '
+        u'Hier können Sie die gesamte Ausgabe lesen.'
+        in volume_teaser_link.text)
 
 
 def test_volume_teaser_display_correct_image_on_desktop(
