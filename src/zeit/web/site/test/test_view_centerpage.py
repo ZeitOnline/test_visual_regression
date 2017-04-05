@@ -202,6 +202,7 @@ def test_fullwidth_teaser_image_should_use_mobile_variant_on_mobile(
         'wide image variant should be used on mobile devices'
     assert 1.7 < ratio < 1.8, 'mobile ratio should be 16:9-ish'
 
+
 @pytest.mark.xfail(reason='not testable this way with selenium3/geckodriver')
 def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
         selenium_driver, testserver, screen_size):
@@ -433,7 +434,7 @@ def test_small_teaser_without_image_has_no_padding_left(
     driver.get('%s/zeit-online/teaser-serie-setup' % testserver.url)
     teaser = driver.find_element_by_css_selector(
         '*[data-unique-id*="/article-ohne-bild"] .teaser-small__container')
-    assert teaser.location.get('x') is 20
+    assert int(teaser.location.get('x')) == 20
 
 
 def test_parquet_region_list_should_have_regions(application):

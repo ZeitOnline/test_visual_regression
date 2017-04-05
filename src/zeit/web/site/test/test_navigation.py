@@ -498,7 +498,7 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
         WebDriverWait(driver, 2).until(
             expected_conditions.invisibility_of_element_located(
                 (By.CSS_SELECTOR,
-                '.nav__ressorts-item--more > .nav__dropdown-list')))
+                 '.nav__ressorts-item--more > .nav__dropdown-list')))
         # assert not chosen_nav_item.is_displayed(), (
         #     '[on tablet] chosen nav item should be hidden')
         # assert more_dropdown.is_displayed(), (

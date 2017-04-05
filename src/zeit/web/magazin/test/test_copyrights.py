@@ -11,8 +11,8 @@ def test_copyright_entries_are_rendered_correcly(selenium_driver, testserver):
     assert len(driver.find_elements_by_css_selector(
         '.image-copyright-footer__item')) == 3
     # copyright text itself
-    copyright_label = driver.find_element_by_css_selector(
-        '.image-copyright-footer__item > span').text
+    copyright_label = driver.find_elements_by_css_selector(
+        '.image-copyright-footer__item > span')[0].text
     assert copyright_label.startswith(u'©')
     assert copyright_label.endswith(u'Karl Lagerfeld')
     # linked copyrights
