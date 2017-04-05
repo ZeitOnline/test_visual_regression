@@ -10,9 +10,7 @@ import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
-from selenium.webdriver.support.ui import WebDriverWait
 import cryptography.hazmat.backends
 import cssselect
 import gocept.httpserverlayer.wsgi
@@ -197,8 +195,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/feature-toggle.xml'),
         'vivi_zeit.web_blacklist-url': (
             'egg://zeit.web.core/data/config/blacklist.xml'),
-        'vivi_zeit.imp_scale-source':
-            'egg://zeit.web.core/data/config/scales.xml',
+        'vivi_zeit.imp_scale-source': (
+            'egg://zeit.web.core/data/config/scales.xml'),
         'vivi_zeit.content.link_source-blogs': (
             'egg://zeit.web.core/data/config/blogs_meta.xml'),
         'vivi_zeit.push_facebook-accounts': (
@@ -224,8 +222,8 @@ def app_settings(mockserver):
         'vivi_zeit.solr_solr-url': 'http://mock.solr',
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
-        'vivi_zeit.content.author_biography-questions':
-            'egg://zeit.web.core/data/config/author-biography-questions.xml',
+        'vivi_zeit.content.author_biography-questions': (
+            'egg://zeit.web.core/data/config/author-biography-questions.xml'),
         'vivi_zeit.cms_celery-config': '/dev/null',
         'sso_activate': '',
         'sso_url': 'http://sso.example.org',
@@ -245,12 +243,13 @@ def app_settings(mockserver):
         'webtrekk_version': '3',
     }
 
+# 'firefox': selenium.webdriver.Firefox
 # 'chrome': selenium.webdriver.Chrome
-# "phantomjs": selenium.webdriver.PhantomJS
+# 'phantomjs': selenium.webdriver.PhantomJS
 # now on: geckodriver, install via brew install geckodriver
 # or from here: https://github.com/mozilla/geckodriver/releases
 browsers = {
-    'firefox': selenium.webdriver.Firefox
+    'chrome': selenium.webdriver.Chrome
 }
 
 
