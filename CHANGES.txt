@@ -15,6 +15,9 @@ POSTDEPLOY
 - MAINT: Use square image variant for square author images
  (author register, author page, column article, column teaser)
 
+- MAINT: Update vendor components
+  (normalize, picturefill, requirejs, velocity, jshint)
+
 
 3.50 (2017-03-31)
 -----------------
