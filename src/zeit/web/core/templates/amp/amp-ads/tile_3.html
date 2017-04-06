@@ -3,3 +3,9 @@
 {% set width = '320' %}
 {% set height = '320' %}
 {% set multisize = '320x53,320x80,320x106,320x160,300x50,300x75,300x100,300x150,300x250' %}
+
+{% block adplace %}
+<div class="article__item--large">
+    {{ super() }}
+</div>
+{% endblock %}
