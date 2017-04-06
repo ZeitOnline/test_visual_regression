@@ -1,4 +1,8 @@
 {% if toggles('amp_new_advertising') -%}
+{% set keywords = ['nospa', 'enozqi', 'iqdzeit_amp'] %}
+{% set additional_keywords = ['iqadtile%s' | format(tile_number)] %}
+{% set iqadtest_keyword = ['iqadtest'] if settings('environment') != 'production' else [] %}
+{% set targeting = {'targeting': {'kw': keywords + additional_keywords + iqadtest_keyword, 'tile': [ tile_number | string ], 'doc': ['artikel'], 'iqadtype': ['amp'] }} | tojson %}
 {% set slot = '/183/iqdzeit_amp/{}'.format(view.banner_channel.replace('article', 'artikel')) %}
 
 <div class="advertising advertising--place-{{ tile_number }}">
