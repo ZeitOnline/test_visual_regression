@@ -28,23 +28,17 @@ $teaser-column-small-image-size-desktop: 200px
 			border-top-width: 0
 
 %teaser-column__media
-	overflow: hidden
-	position: absolute
+	+old-ie
+		display: block // IE8
 	bottom: 0
+	height: $teaser-column-image-size-mobile
+	position: absolute
 	right: remify(10px)
 	width: $teaser-column-image-size-mobile
-	height: $teaser-column-image-size-mobile
-	margin: 0
 
 %teaser-column__media-item
 	@extend %teaser-media-item !optional
-	+old-ie
-		background: $white
-		margin-left: 20px
-		margin-top: 30px
-		position: static
 
 %teaser-column__media-space
-	padding-right: remify($teaser-column-image-size-mobile + 20px)
-	// min-height: $teaser-column-image-size-mobile - ownMarginBottom
 	min-height: remify($teaser-column-image-size-mobile - 20px)
+	padding-right: remify($teaser-column-image-size-mobile + 20px)

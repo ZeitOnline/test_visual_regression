@@ -22,6 +22,12 @@ window.cre_client = function() {
         this.set_doc_type = function( value ) {
             this.params['doc_type'] = value;
         }
+        this.set_entitlement = function( value ) {
+            this.params['entitlement'] = value;
+        }
+        this.set_entitlement_id = function( value ) {
+            this.params['entitlement_id'] = value;
+        }
         this.set_heading = function( value ) {
             this.params['heading'] = value;
         }

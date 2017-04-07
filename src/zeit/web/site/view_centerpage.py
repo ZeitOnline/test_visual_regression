@@ -50,6 +50,17 @@ class Centerpage(
     def ressort(self):
         return 'homepage' if self.is_hp else super(Centerpage, self).ressort
 
+    @zeit.web.reify
+    def is_ressortpage(self):
+        if self.context.type == 'centerpage':
+            try:
+                if zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
+                        self.ressort]:
+                    return True
+            except KeyError:
+                pass
+        return False
+
     def buzzboard_images(self, image=None):
         # The list we return shall not include the current image but still be
         # added to the registered images.

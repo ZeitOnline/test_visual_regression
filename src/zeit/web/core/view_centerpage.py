@@ -86,9 +86,9 @@ class Centerpage(AreaProvidingPaginationMixin,
     def volume_navigation(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return {'link': conf['volume_navigation_base'] % (
-                    self.volume.year,
-                    self.volume.volume),
-                'cover': self.volume.get_cover('printcover')}
+            self.volume.year,
+            self.volume.volume),
+            'cover': self.volume.get_cover('printcover')}
 
     @zeit.web.reify
     def volume_next(self):

@@ -5,11 +5,13 @@
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
 		&--column
 			background-color: $zon-warm-grey
-			overflow: hidden
+			position: relative
 		&--duplicate
 			opacity: 0.4
 	&__media-container--column
-		margin: remify(8px 16px 0)
+		bottom: 0
+		left: 8%
+		position: absolute
 		width: 50%
 	&__media-item
 		@extend %teaser-media-item !optional

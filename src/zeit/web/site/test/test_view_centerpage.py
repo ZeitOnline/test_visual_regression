@@ -338,13 +338,12 @@ def test_column_teaser_should_render_series_element(testbrowser):
     assert col_element.text == u'Fünf vor acht'
 
 
-def test_teaser_for_column_should_render_original_image_variant(testbrowser):
+def test_teaser_for_column_should_render_square_image_variant(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats')
 
-    teaser_img = browser.cssselect(
-        '.teaser-small-column__media-item')[0]
+    teaser_img = browser.cssselect('.teaser-small-column__media-item')[0]
     assert teaser_img.attrib['src'] == (
-        'http://localhost/zeit-online/cp-content/ig-3/original')
+        'http://localhost/zeit-online/cp-content/ig-3/square__460x460')
 
 
 def test_series_teaser_should_render_series_element(testbrowser):
@@ -2292,7 +2291,7 @@ def test_author_list_should_show_authors(testbrowser):
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{'uniqueId': 'http://xml.zeit.de/autoren/j_random'}]
     browser = testbrowser('/autoren/register_A')
-    assert len(browser.cssselect('.teaser-small')) == 1
+    assert len(browser.cssselect('.author-list__item')) == 1
 
 
 def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
@@ -2851,3 +2850,20 @@ def test_centerpage_can_include_optimizely(testbrowser):
     settings['optimizely_on_zon_centerpage'] = optimizely_url
     browser = testbrowser('/zeit-online/slenderized-centerpage')
     assert optimizely_url in browser.contents
+
+
+def test_ressortpage_returns_is_ressortpage_correctly(
+        application, dummy_request):
+    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert not view.is_ressortpage
+
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/centerpage/centerpage')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.is_ressortpage
+
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/angebote/leseperlen')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert not view.is_ressortpage
