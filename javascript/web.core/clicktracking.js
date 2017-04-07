@@ -328,6 +328,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
          */
         linkInArticleContent: function( $element, $page ) {
             var $blocks = $page.children( '[class]' ).not([ // exclude some blocks
+                    '.ad-container', // advertising
                     '[data-ct-area="article-toc"]', // table of contents
                     '.article__subheading', // page title and intertitle
                     '.article__subpage-head' // page title in longform
