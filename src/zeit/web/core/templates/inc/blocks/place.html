@@ -1,17 +1,20 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {# On "komplettansicht", we do not want to have duplicate banner IDs.
 That's why we set Banners 7+8+9 only on the first three pages and do
 not display ads on other pages. #}
 {% if view.is_all_pages_view %}
     {% if block.on_page_nr == 1 %}
-        {{ lama.adplace(banner(7), view) }}
-        {{ lama.adplace(banner(4), view, mobile=True) }}
-    {% elif block.on_page_nr == 2 %}
-        {{ lama.adplace(banner(9), view) }}
+        {% include
+            ["{0}:templates/inc/ads/places/{1}/place{2}.html".format(view.package, block.type, block.tile),
+             "{0}:templates/inc/ads/places/{1}/ad.html".format(view.package, block.type),
+             "zeit.web.core:templates/inc/ads/places/{0}/place{1}.html".format(block.type, block.tile),
+             "zeit.web.core:templates/inc/ads/places/{0}/ad.html".format(block.type)] %}
+    {% elif block.on_page_nr == 2 and block.type == 'desktop' %}
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place9.html" %}
     {% endif %}
 {% else %}
-    {{ lama.adplace(block, view) }}
-    {% if block.tile == 7 %}
-        {{ lama.adplace(banner(4), view, mobile=True) }}
-    {% endif %}
+    {% include
+        ["{0}:templates/inc/ads/places/{1}/place{2}.html".format(view.package, block.type, block.tile),
+         "{0}:templates/inc/ads/places/{1}/ad.html".format(view.package, block.type),
+         "zeit.web.core:templates/inc/ads/places/{0}/place{1}.html".format(block.type, block.tile),
+         "zeit.web.core:templates/inc/ads/places/{0}/ad.html".format(block.type)] %}
 {% endif %}
