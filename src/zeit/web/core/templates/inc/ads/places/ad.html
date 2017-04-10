@@ -1,0 +1,21 @@
+{% if view.advertising_enabled %}
+{% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
+<div>
+    <script type="text/javascript" id="ad-{% block type %}{{ block.type }}{% endblock %}-{% block tile %}{{ block.tile }}{% endblock %}">
+        if ( typeof AdController !== 'undefined' {% block adminwidth %}{% endblock %} {% block mobileview %}{% endblock %}) {
+            if ( !document.getElementById( 'iqadtile{{ self.tile() }}' ) ) {
+                var elem = document.createElement( 'div' );
+                elem.id = 'iqadtile{{ self.tile() }}';
+                elem.className = "ad ad-{{ self.type() }} ad-{{ self.type() }}--{{ self.tile() }} ad-{{ self.type() }}--{{ self.tile() }}-on-{{ pagetype }}";
+                elem.setAttribute('data-banner-type', '{{ self.type() }}');
+                elem.setAttribute('data-banner-label', 'Anzeige');
+                document.getElementById('ad-{{ self.type() }}-{{ self.tile() }}').parentNode.appendChild(elem);
+                AdController.render('iqadtile{{ self.tile() }}');
+                if ( window.console && typeof window.console.info === 'function' ) {
+                    window.console.info('AdController ' + AdController.VERSION + ' tile {{ self.tile() }} {{ self.type() }}')
+                }
+            }
+        }
+    </script>
+</div>
+{% endif %}
