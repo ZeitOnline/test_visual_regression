@@ -86,7 +86,7 @@
         {% if (loop.length < view.comments.ad_place and loop.last ) or loop.index == view.comments.ad_place -%}
             {% if view.advertising_enabled -%}
             <div class="comment__ad">
-                {{ lama.adplace(banner(8), view) }}
+                {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
             </div>
             {%- endif %}
         {% endif %}
@@ -123,7 +123,7 @@
 {% else %}
     {% if view.advertising_enabled -%}
         <div class="comment__ad">
-            {{ lama.adplace(banner(8), view) }}
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
         </div>
     {% endif %}
 {% endif %}

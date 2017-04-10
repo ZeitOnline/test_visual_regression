@@ -99,9 +99,9 @@
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
-                        {{ lama.adplace(banner(1), view) }}
+                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place1.html" %}
                         <div id="iqd_rightAd">
-                            {{ lama.adplace(banner(2), view) }}
+                            {% include "zeit.web.core:templates/inc/ads/places/desktop/place2.html" %}
                         </div>
                     </div>
                 </div>
@@ -123,13 +123,13 @@
             {% endprofile %}
             {% block adplace_billboard %}
                 {# desktop ad place 3 #}
-                {{ lama.adplace(banner(3), view) }}
+                {% include "zeit.web.core:templates/inc/ads/places/desktop/place3.html" %}
                 {# mobile ad place 1 #}
-                {{ lama.adplace(banner(1), view, mobile=True) }}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place1.html" %}
             {% endblock adplace_billboard %}
             <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
                 {% block main %}{% endblock main %}
-                {{ lama.adplace(banner(8), view, mobile=True) }}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
             </main>
             {% profile %}
             {% block footer %}
