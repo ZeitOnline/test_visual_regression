@@ -8,15 +8,6 @@ import zeit.web.core.template
 import zeit.web.magazin
 
 
-def test_banner_global_should_return_place_if_tile_present(application):
-    assert isinstance(
-        zeit.web.core.template.banner(1), zeit.web.core.banner.Place)
-
-
-def test_banner_global_should_return_none_if_tile_is_not_present(application):
-    assert zeit.web.core.template.banner(999) is None
-
-
 def test_banner_toggles_viewport_zoom(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/02')
