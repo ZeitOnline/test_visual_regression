@@ -40,7 +40,6 @@ def test_adcontroller_head_code_is_present(
 
 def test_adcontroller_adtags_are_present(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
-
     assert 'AdController.render(\'iqadtile1\');' in browser.contents
     assert 'AdController.render(\'iqadtile2\');' in browser.contents
     assert 'AdController.render(\'iqadtile3\');' in browser.contents
@@ -88,6 +87,23 @@ def test_adplaces_present_on_home_page(testbrowser):
     assert len(browser.cssselect('#ad-desktop-12')) == 1
 
 
+def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'iqd_mobile_transition_zon_cp': True
+        }.get)
+    browser = testbrowser('/zeit-magazin/centerpage/zplus')
+    assert len(browser.cssselect('#iqadtileOOP')) == 1
+    assert len(browser.cssselect('#ad-desktop-1')) == 1
+    assert len(browser.cssselect('#ad-desktop-2')) == 1
+    assert len(browser.cssselect('#ad-desktop-3')) == 1
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
+    assert len(browser.cssselect('#ad-mobile-1')) == 1
+    assert len(browser.cssselect('#ad-mobile-3')) == 1
+    assert len(browser.cssselect('#ad-mobile-8')) == 1
+
+
 def test_iqd_sitebar_should_be_hidden_on_mobile(
         selenium_driver, testserver, monkeypatch):
     driver = selenium_driver
@@ -109,6 +125,9 @@ def test_iqd_sitebar_should_be_hidden_on_mobile(
 def test_mobile_ad_place_right_behind_the_first_teaser(
         testbrowser, monkeypatch):
     browser = testbrowser('/zeit-online/slenderized-index')
+    assert browser.cssselect(
+        '.main > div > div > article:nth-child(1) + div > script#ad-mobile-3 ')
+    browser = testbrowser('/zeit-magazin/centerpage/zplus')
     assert browser.cssselect(
         '.main > div > div > article:nth-child(1) + div > script#ad-mobile-3 ')
     browser = testbrowser('/zeit-online/index-with-raw-on-top')
