@@ -218,6 +218,9 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/video-serie.xml'),
         'vivi_zeit.content.volume_volume-cover-source': (
             'egg://zeit.web.core/data/config/volume-covers.xml'),
+        'vivi_zeit.content.volume_default-teaser-text': (
+            'Dieser Artikel stammt aus der ZEIT Nr. {name}/{year}. '
+            'Hier können Sie die gesamte Ausgabe lesen.'),
         'vivi_zeit.cms_source-storystreams': (
             'egg://zeit.web.core/data/config/storystreams.xml'),
         'vivi_zeit.newsletter_renderer-host': 'file:///dev/null',

@@ -12,44 +12,36 @@
 		padding-top: 1px
 
 .zon-author-list
-	list-style: none
-	margin: remify(0 10px)
-	padding: 0
 
 	&__textitem
-		padding: remify(0 10px)
-		line-height: remify(48px)
-	&__textitem-link
 		color: #444
+		display: block
 		font-size: em(15px)
-		white-space: nowrap
-		text-overflow: ellipsis
-		width: 100%
+		line-height: remify(48px)
 		overflow: hidden
+		padding: remify(0 10px)
+		text-overflow: ellipsis
+		white-space: nowrap
 		&:after
+			color: $zon-grey
 			content: "\203A" // › = single right-pointing angle quotation mark
-			font-size: em(16px)
+			font-size: 16px
 			font-weight: bold
 			margin-left: remify(5px)
 
 	&__imageitem
 		background-color: #FAFAFA
-		bottom: 0
 		box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.1)
 		margin: remify(23px 0)
 		height: remify(100px) // 90px squareImg + 10px
 		padding: remify(10px 10px 0 0)
-		position: relative
 		+on-interaction
 			box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2)
 			.zon-author-list__text:before
 				color: #000
-	&__image
-		position: absolute
-		bottom: 0
-		width: remify(90px)
 	&__media
-		@extend %square-item
+		float: left
+		width: remify(90px)
 	&__text
 		padding: remify(0 10px 0 100px)
 		&:before
@@ -64,8 +56,8 @@
 		color: #313131
 		font-size: em(15px)
 		font-weight: bold
-		line-height: remify(18px)
-		margin: 0.5rem 0
+		line-height: 1.2
+		margin: remify(8px 0)
 		&--without-summary
 			padding-top: remify(25px)
 	&__summary
@@ -73,7 +65,7 @@
 		font-size: em(14px)
 		height: remify(52px) // 3 lines for overflow:hidden
 		letter-spacing: $zon-letter-spacing-s
-		line-height: remify(17px)
+		line-height: 1.2
 		margin: 0
 		overflow: hidden
 		// multiline ellipsis for webkit browsers:

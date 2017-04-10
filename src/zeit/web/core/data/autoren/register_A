@@ -51,12 +51,21 @@
     <topiclinks/>
   </head>
   <body>
+    <title>Autorenverzeichnis</title>
     <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True" visible_mobile="True">
+      <region area="id-c21510dc-1b9e-4cf0-9b1b-e6ece567c38e" kind="solo" visible="True">
+        <container cp:__name__="id-5860ae76-cdff-4625-b69c-dddd08b86526" cp:type="cpextra" module="centerpage-header">
+          <cp_extra id="centerpage-header"/>
+        </container>
+        <container cp:__name__="id-477e3b1e-0549-4941-bea6-c808ced78a41" cp:type="cpextra" module="authorlist-alphabet-pager">
+          <cp_extra id="authorlist-alphabet-pager"/>
+        </container>
+      </region>
       <region area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="query" count="4" hide-dupes="True" kind="author-list" visible="True" visible_mobile="True">
-        <module cp:__name__="id-4a960096-2165-4f32-bdf9-c38a34655c43" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <module cp:__name__="id-aa3d66b6-5a83-4c28-89de-78686d074a62" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <module cp:__name__="id-13b34132-500d-414b-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-small" visible="True"/>
-        <module cp:__name__="id-097121c4-65ca-4171-950d-54989b5ed453" cp:type="auto-teaser" module="zon-small" visible="True"/>
+        <container cp:__name__="id-6df9075a-e7dc-4d7c-9cd6-72f1f3bcb4e1" cp:type="auto-teaser" module="zon-authorlist"/>
+        <container cp:__name__="id-aa3d66b6-5a83-4c28-89de-78686d074a62" cp:type="auto-teaser" module="zon-authorlist"/>
+        <container cp:__name__="id-13b34132-500d-414b-b565-2e29f7f9840f" cp:type="auto-teaser" module="zon-authorlist"/>
+        <container cp:__name__="id-097121c4-65ca-4171-950d-54989b5ed453" cp:type="auto-teaser" module="zon-authorlist"/>
         <raw_query>+published:&quot;published&quot; +lastname_alpha:&quot;A&quot; +type:author</raw_query>
         <page>1</page>
       </region>

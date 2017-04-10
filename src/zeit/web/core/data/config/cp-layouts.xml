@@ -516,4 +516,11 @@
         areas="ranking"
         available="zeit.content.cp.interfaces.ISitemap"/>
 
+    <layout
+        id="zon-authorlist"
+        title="Autorenregister"
+        image_pattern="zon-column"
+        areas="author-list"
+        available="zeit.content.dynamicfolder.interfaces.IVirtualContent"
+        type="!storystream"/>
 </layouts>

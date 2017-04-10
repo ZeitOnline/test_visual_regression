@@ -5,182 +5,185 @@ $print-media-margin: 14pt 0
 // in opposition to designs
 $print-zoom: 1.263157895
 
-@media print
+// IE < 9 does not support media queries
+@if not $old-ie
 
-    @page
-        margin: 15mm 25mm
-        size: auto
+	@media print
 
-    body,
-    .page__content
-        background: white !important
-        box-shadow: none !important
+		@page
+			margin: 15mm 25mm
+			size: auto
 
-    p
-        orphans: 2
-        widows: 3
+		body,
+		.page__content
+			background: white !important
+			box-shadow: none !important
 
-    h1, h2, h3, h4, h5, h6
-        break-after: avoid
-        page-break-after: avoid
-        page-break-inside: avoid
+		p
+			orphans: 2
+			widows: 3
 
-    acronym[title]:after,
-    abbr[title]:after
-        content: " (" attr(title) ")"
+		h1, h2, h3, h4, h5, h6
+			break-after: avoid
+			page-break-after: avoid
+			page-break-inside: avoid
 
-    a[href^="http"]
-        color: $zon-print-grey
-        page-break-inside: avoid
-        &:after
-            border-bottom: 1px solid white // To visibly hide grey border of <a>
-            content: " [" attr(href) "]"
-            font-family: $font-tabletgothic
-            font-size: inherit
-            word-wrap: break-word
+		acronym[title]:after,
+		abbr[title]:after
+			content: " (" attr(title) ")"
 
-    a[href^="#"]:after
-        content: ""
+		a[href^="http"]
+			color: $zon-print-grey
+			page-break-inside: avoid
+			&:after
+				border-bottom: 1px solid white // To visibly hide grey border of <a>
+				content: " [" attr(href) "]"
+				font-family: $font-tabletgothic
+				font-size: inherit
+				word-wrap: break-word
 
-    #ads,
-    #adunit,
-    #comments,
-    #iqadtileOOP,
-    #iqd_mainAd,
-    #iqdLastNode,
-    #nextread,
-    #pDebug,
-    .ad,
-    .ads,
-    .article-footer,
-    .article-lineage,
-    .article-pagination,
-    .article-toc,
-    .column-heading__author,
-    .comment-section,
-    .footer,
-    .header__brand,
-    .newsletter-teaser-box, // raw-code in articles comes with own stylesheets
-    .nextread,
-    .nextread-advertisement,
-    .veeseoWidget,
-    .video-figure__caption,
-    .video-player,
-    .visually-hidden,
-    iframe[id^="google_ads"]
-        display: none !important
+		a[href^="#"]:after
+			content: ""
 
-    #main
-        padding: 0
-        margin: 0
+		#ads,
+		#adunit,
+		#comments,
+		#iqadtileOOP,
+		#iqd_mainAd,
+		#iqdLastNode,
+		#nextread,
+		#pDebug,
+		.ad,
+		.ads,
+		.article-footer,
+		.article-lineage,
+		.article-pagination,
+		.article-toc,
+		.column-heading__author,
+		.comment-section,
+		.footer,
+		.header__brand,
+		.newsletter-teaser-box, // raw-code in articles comes with own stylesheets
+		.nextread,
+		.nextread-advertisement,
+		.veeseoWidget,
+		.video-figure__caption,
+		.video-player,
+		.visually-hidden,
+		iframe[id^="google_ads"]
+			display: none !important
 
-    .header:after
-        border-bottom: 1pt solid $zon-print-grey
-        content: url("../../images/logo-zon-print.svg")
-        display: block
+		#main
+			padding: 0
+			margin: 0
 
-    .article-heading
-        margin: 6mm 0 0
+		.header:after
+			border-bottom: 1pt solid $zon-print-grey
+			content: url("../../images/logo-zon-print.svg")
+			display: block
 
-        &__kicker
-            color: $zon-print-grey
-            font-size: 7pt * $print-zoom
-            line-height: 9pt * $print-zoom
-            margin-bottom: 1pt * $print-zoom
-            padding: 0
+		.article-heading
+			margin: 6mm 0 0
 
-        &__title
-            font-size: 18pt * $print-zoom
-            line-height: 21pt * $print-zoom
-            margin-bottom: 14pt * $print-zoom
+			&__kicker
+				color: $zon-print-grey
+				font-size: 7pt * $print-zoom
+				line-height: 9pt * $print-zoom
+				margin-bottom: 1pt * $print-zoom
+				padding: 0
 
-    .summary,
-    .byline
-        font-size: 10.5pt * $print-zoom
-        line-height: 15pt * $print-zoom
-        margin-bottom: 7pt * $print-zoom
+			&__title
+				font-size: 18pt * $print-zoom
+				line-height: 21pt * $print-zoom
+				margin-bottom: 14pt * $print-zoom
 
-    .byline a:after
-        content: ""
+		.summary,
+		.byline
+			font-size: 10.5pt * $print-zoom
+			line-height: 15pt * $print-zoom
+			margin-bottom: 7pt * $print-zoom
 
-    .metadata
-        font-size: 7pt * $print-zoom
-        line-height: 9pt * $print-zoom
-        margin-bottom: 14pt * $print-zoom
+		.byline a:after
+			content: ""
 
-    .article
-        &__media
-            max-width: $print-media-width
-            margin: $print-media-margin
+		.metadata
+			font-size: 7pt * $print-zoom
+			line-height: 9pt * $print-zoom
+			margin-bottom: 14pt * $print-zoom
 
-        &__media-item[src*='kreuzwortgitter']
-            width: 15cm
+		.article
+			&__media
+				max-width: $print-media-width
+				margin: $print-media-margin
 
-        &__item
-            &--marginalia
-                clear: left
-                float: left
-                page-break-inside: avoid
-                max-width: 40mm
-                margin: 0 (20pt * $print-zoom) (14pt * $print-zoom) 0
-                a
-                    font-size: 7pt * $print-zoom
+			&__media-item[src*='kreuzwortgitter']
+				width: 15cm
 
-    .figure
-        &__caption
-            margin-left: 0
-            font-size: 7pt * $print-zoom
+			&__item
+				&--marginalia
+					clear: left
+					float: left
+					page-break-inside: avoid
+					max-width: 40mm
+					margin: 0 (20pt * $print-zoom) (14pt * $print-zoom) 0
+					a
+						font-size: 7pt * $print-zoom
 
-    .article__subheading
-        font-size: 11pt * $print-zoom
-        line-height: 14pt * $print-zoom
-        margin-bottom: 7pt * $print-zoom
-        margin-top: 14pt * $print-zoom
-        page-break-inside: avoid
-        page-break-after: avoid
+		.figure
+			&__caption
+				margin-left: 0
+				font-size: 7pt * $print-zoom
 
-    .paragraph,
-    .raw
-        font-size: 9.5pt * $print-zoom
-        line-height: 14pt * $print-zoom
-        margin-bottom: 7pt * $print-zoom
+		.article__subheading
+			font-size: 11pt * $print-zoom
+			line-height: 14pt * $print-zoom
+			margin-bottom: 7pt * $print-zoom
+			margin-top: 14pt * $print-zoom
+			page-break-inside: avoid
+			page-break-after: avoid
 
-    .portraitbox
+		.paragraph,
+		.raw
+			font-size: 9.5pt * $print-zoom
+			line-height: 14pt * $print-zoom
+			margin-bottom: 7pt * $print-zoom
 
-        &__heading,
-        &__body
-            font-size: 7pt * $print-zoom
-            line-height: 11pt * $print-zoom
-            margin-bottom: 6pt * $print-zoom
-        a,
-        a:after
-            color: $zon-print-grey
-            font-size: 7pt * $print-zoom
+		.portraitbox
 
-    .infobox
-        background-color: transparent
-        border: 1pt solid $zon-print-grey
-        margin: $print-media-margin
-        padding: 0
-        page-break-inside: avoid
-        max-width: $print-media-width
+			&__heading,
+			&__body
+				font-size: 7pt * $print-zoom
+				line-height: 11pt * $print-zoom
+				margin-bottom: 6pt * $print-zoom
+			a,
+			a:after
+				color: $zon-print-grey
+				font-size: 7pt * $print-zoom
 
-    .infobox-tab
-        border-bottom: 1pt solid $zon-print-grey
-        padding: 9pt * $print-zoom
+		.infobox
+			background-color: transparent
+			border: 1pt solid $zon-print-grey
+			margin: $print-media-margin
+			padding: 0
+			page-break-inside: avoid
+			max-width: $print-media-width
 
-        &__link,
-        &__title,
-        &__content p
-            font-size: 7pt * $print-zoom
-            line-height: 11pt * $print-zoom
-            margin-bottom: 6pt * $print-zoom
+		.infobox-tab
+			border-bottom: 1pt solid $zon-print-grey
+			padding: 9pt * $print-zoom
 
-        &__title
-            padding: 0
+			&__link,
+			&__title,
+			&__content p
+				font-size: 7pt * $print-zoom
+				line-height: 11pt * $print-zoom
+				margin-bottom: 6pt * $print-zoom
 
-        &__link
-            font-weight: bold
+			&__title
+				padding: 0
 
-        &__content[aria-hidden='true']
-            max-height: none // always show all infobox content (ignore script)
+			&__link
+				font-weight: bold
+
+			&__content[aria-hidden='true']
+				max-height: none // always show all infobox content (ignore script)

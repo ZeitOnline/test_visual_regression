@@ -403,6 +403,9 @@ class Base(object):
 
     @zeit.web.reify
     def ranked_tags(self):
+        if not hasattr(self.context, 'keywords'):
+            return []
+
         tags = []
         for keyword in self.context.keywords:
             if not keyword.label:
