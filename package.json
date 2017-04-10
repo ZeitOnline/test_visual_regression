@@ -14,9 +14,11 @@
     "bower-files": "^3.14.1",
     "eslint": "^3.18.0",
     "eslint-config-jquery": "^1.0.1",
-    "eslint-config-standard": "^7.1.0",
+    "eslint-config-standard": "^10.2.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.1.1",
+    "eslint-plugin-standard": "^3.0.1",
     "grunt-auto-install": "^0.3.1",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-copy": "~1.0.0",
@@ -84,7 +86,7 @@
     "js": "r.js -o javascript/build.json",
     "prebuild": "npm run clean",
     "build": "NODE_ENV=production npm-run-all bower --parallel modernizr sass:dist js svg",
-    "postinstall": "npm prune"
+    "preinstall": "npm prune"
   },
   "browserslist": [
     "Chrome >= 35",
