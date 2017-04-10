@@ -3,7 +3,7 @@
     "mainConfigFile": "config.js",
     "dir": "../src/zeit/web/static/js",
     "preserveLicenseComments": false,
-    "logLevel": 1,
+    "logLevel": 2,
     "useSourceUrl": false,
     "generateSourceMaps": false,
     "optimize": "uglify2",
