@@ -96,7 +96,8 @@ def _inject_banner_code(pages, pubtype):
                         else:
                             adplace = zeit.web.core.banner.Place(
                                 ad['tile'], ad['type'], on_page_nr=page_number)
-                        if len(page.blocks) > i:
+                        # do not place ad after last paragraph
+                        if i < len(page.blocks) - 1:
                             page.blocks.insert(i, adplace)
 
     return pages
