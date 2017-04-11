@@ -93,7 +93,7 @@ def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
         'iqd': True,
         'iqd_mobile_transition_zon_cp': True
         }.get)
-    browser = testbrowser('/zeit-magazin/centerpage/zplus')
+    browser = testbrowser('/zeit-magazin/centerpage/lebensart')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
     assert len(browser.cssselect('#ad-desktop-1')) == 1
     assert len(browser.cssselect('#ad-desktop-2')) == 1
@@ -125,9 +125,6 @@ def test_iqd_sitebar_should_be_hidden_on_mobile(
 def test_mobile_ad_place_right_behind_the_first_teaser(
         testbrowser, monkeypatch):
     browser = testbrowser('/zeit-online/slenderized-index')
-    assert browser.cssselect(
-        '.main > div > div > article:nth-child(1) + div > script#ad-mobile-3 ')
-    browser = testbrowser('/zeit-magazin/centerpage/zplus')
     assert browser.cssselect(
         '.main > div > div > article:nth-child(1) + div > script#ad-mobile-3 ')
     browser = testbrowser('/zeit-online/index-with-raw-on-top')
