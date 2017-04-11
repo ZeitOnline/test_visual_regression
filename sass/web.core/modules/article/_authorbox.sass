@@ -2,10 +2,9 @@
 
 	&__container
 		align-items: center
-		justify-content: center
 		display: flex
-		max-width: remify(360px)
 		margin: auto
+		max-width: remify(360px)
 
 	&__media
 		flex: 0 0 auto
@@ -15,6 +14,11 @@
 
 	&__media-item
 		border-radius: 50%
+
+	// center up author without image
+	&__text:only-child
+		margin: auto
+		text-align: center
 
 	&__name
 		color: $color-text
