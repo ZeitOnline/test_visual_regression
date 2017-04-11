@@ -1,8 +1,8 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 {% block after_module_include %}
     {% if toggles('iqd_mobile_transition_zon_cp') %}
-        {# new adplace, only on zmo cps, second region, first area, after first module #}
-            {% if region_loop.index == 2 and area_loop.index == 1 and module_loop.index == 1 %}
+        {# new adplace, on zmo cps, second region, first area, after second module #}
+            {% if region_loop.index == 1 and area_loop.index == 1 and module_loop.index == 2 %}
                 {{ lama.adplace(banner(3), view, mobile=True) }}
             {% endif %}
     {% endif %}
