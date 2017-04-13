@@ -91,8 +91,8 @@ def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
         'iqd': True,
-        'iqd_mobile_transition_zon_cp': True
-        }.get)
+        'iqd_mobile_transition_zmo_cp': True
+    }.get)
     browser = testbrowser('/zeit-magazin/centerpage/lebensart')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
     assert len(browser.cssselect('#ad-desktop-1')) == 1
