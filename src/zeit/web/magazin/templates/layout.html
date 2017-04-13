@@ -121,6 +121,11 @@
                     {% block main %}{% endblock main %}
                 </main>
 
+                {% block adplace_floor %}
+                    <!-- mobile ad at bottom above footer-->
+                    {{ lama.adplace(banner(8), view, True) }}
+                {% endblock adplace_floor %}
+
                 {% profile %}
                 {% block footer %}
                     <footer class="main-footer" data-ct-area="zmo-footernav">
@@ -158,11 +163,6 @@
                 {% endprofile %}
 
             </div>
-
-        {% block adplace_floor %}
-            <!-- mobile ad at bottom -->
-            {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
-        {% endblock adplace_floor %}
 
         </div>
 

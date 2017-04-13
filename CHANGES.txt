@@ -8,7 +8,9 @@ POSTDEPLOY
 3.52 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3782: Add new mobile AdPlace to ZMO CPs
+
+- BUG-706: Center up authorbox content for authors without image
 
 
 3.51 (2017-04-11)
