@@ -40,7 +40,6 @@ def test_adcontroller_head_code_is_present(
 
 def test_adcontroller_adtags_are_present(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
-
     assert 'AdController.render(\'iqadtile1\');' in browser.contents
     assert 'AdController.render(\'iqadtile2\');' in browser.contents
     assert 'AdController.render(\'iqadtile3\');' in browser.contents
@@ -86,6 +85,23 @@ def test_adplaces_present_on_pages(testbrowser, monkeypatch):
 def test_adplaces_present_on_home_page(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     assert len(browser.cssselect('#ad-desktop-12')) == 1
+
+
+def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'iqd_mobile_transition_zmo_cp': True
+    }.get)
+    browser = testbrowser('/zeit-magazin/centerpage/lebensart')
+    assert len(browser.cssselect('#iqadtileOOP')) == 1
+    assert len(browser.cssselect('#ad-desktop-1')) == 1
+    assert len(browser.cssselect('#ad-desktop-2')) == 1
+    assert len(browser.cssselect('#ad-desktop-3')) == 1
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
+    assert len(browser.cssselect('#ad-mobile-1')) == 1
+    assert len(browser.cssselect('#ad-mobile-3')) == 1
+    assert len(browser.cssselect('#ad-mobile-8')) == 1
 
 
 def test_iqd_sitebar_should_be_hidden_on_mobile(
