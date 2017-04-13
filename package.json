@@ -79,7 +79,7 @@
     "svg:sprite:amp:site": "npm run svg:sprite -- --symbol-sprite 'web.site/amp.svg' 'sass/web.site/svg-amp/*.svg'",
     "svg:sprite:framebuilder:campus": "npm run svg:sprite -- --symbol-sprite 'web.campus/framebuilder.svg' 'sass/web.campus/svg-framebuilder/*.svg'",
     "svg:sprite:framebuilder:site": "npm run svg:sprite -- --symbol-sprite 'web.site/framebuilder.svg' 'sass/web.site/svg-framebuilder/*.svg'",
-    "svg:sprite": "svg-sprite --svg-doctype false --dest src/zeit/web/static/css --shape-id-generator 'svg-%s' --shape-transform-svgo svgo.json --symbol --symbol-dest ''",
+    "svg:sprite": "svg-sprite --config svg-sprite.json --shape-transform-svgo svgo.json",
     "svg": "npm-run-all --parallel svgo:* svg:sprite:*:*",
     "prejs": "npm run lint",
     "js:dev": "npm run js -- logLevel=1 useSourceUrl=true optimize=none",
