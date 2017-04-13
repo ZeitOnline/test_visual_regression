@@ -6,16 +6,6 @@ import zope.component
 import zeit.web.core.interfaces
 
 
-def test_adplace_doesnt_produce_output_if_advertising_disabled(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.core:templates/macros/layout_macro.tpl')
-    view = mock.Mock()
-    view.advertising_enabled = False
-    banner = mock.Mock()
-    output = tpl.module.adplace(banner, view)
-    assert output.strip() == ''
-
-
 def test_esi_macro_should_produce_directive_depending_on_environment(
         jinja2_env):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)

@@ -15,22 +15,6 @@ def test_banner_toggles_viewport_zoom(application):
     assert view.banner_toggles('viewport_zoom') == 'tablet-landscape'
 
 
-def test_banner_should_fallback_on_not_registered_banner_types(application):
-    class Moep(zeit.web.magazin.view_article.Article):
-
-        @property
-        def type(self):
-            return 'moep'
-
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/02')
-    moep_view = Moep(context, mock.MagicMock(return_value=''))
-    expected = getattr(
-        zeit.web.core.banner.IQD_MOBILE_IDS_SOURCE.ids[context.sub_ressort],
-        'default')
-    assert moep_view.iqd_mobile_settings == expected
-
-
 def test_banner_should_not_be_displayed_on_short_pages(testbrowser):
     browser = testbrowser('/zeit-magazin/article/header-traum')
     assert not browser.cssselect('#iqadtile4')

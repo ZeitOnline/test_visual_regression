@@ -544,7 +544,7 @@ def test_adplaces_are_correctly_returned(dummy_request):
     view = zeit.web.site.view_article.AcceleratedMobilePageArticle(
         article, dummy_request)
     adplaces = zeit.web.core.template.adplaces(view.pages, [(0, 3), (3, 4)])
-    assert adplaces == [(0, 0, 3), (0, 6, 4)]
+    assert adplaces == [(0, 0, 3), (0, 7, 4)]
 
     short_article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/simple-verlagsnextread')
