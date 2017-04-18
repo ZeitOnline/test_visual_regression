@@ -24,7 +24,7 @@ module.exports = {
     entry: {
         'web.campus/frame': 'web.campus/frame.js',
         'web.site/frame': 'web.site/frame.js',
-        campus: './campus.js',
+        campus: ['./web.core/scriptPath', './campus.js'],
         magazin: ['./web.core/scriptPath', './magazin.js'],
         site: ['./web.core/scriptPath', './site.js'],
     },
