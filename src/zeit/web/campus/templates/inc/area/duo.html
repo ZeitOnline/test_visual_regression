@@ -1,0 +1,9 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+{% block after_module_include %}
+    {% if toggles('iqd_mobile_transition_zco_cp') %}
+        {# new adplace on zco cps after second teaser #}
+            {% if  (view.is_hp and region_loop.index == 2 and area_loop.index == 1) or ( not view.is_hp and region_loop.index == 2 and area_loop.index == 2)  %}
+                {{ lama.adplace(banner(3), view, mobile=True) }}
+            {% endif %}
+    {% endif %}
+{% endblock %}
