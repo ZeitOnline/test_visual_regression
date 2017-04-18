@@ -11,7 +11,6 @@ require( 'jquery.inview' );
 // expose to global scope, because some (external) scripts depend on this
 window.define = define;
 window.require = rjs.require;
-window.jQuery = window.$ = $;
 
 // define *all* dependencies that external scripts will ever happen to have
 define( 'jquery', [], function() {

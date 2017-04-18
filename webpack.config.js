@@ -5,7 +5,8 @@ const production = process.env.NODE_ENV === 'production';
 let plugins = [
     new webpack.ProvidePlugin({
         $: 'jquery',
-        jQuery: 'jquery'
+        jQuery: 'jquery',
+        'window.jQuery': 'jquery' // needed only for Velocity
     })
 ];
 
@@ -35,7 +36,7 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /velocity.ui/, loader: 'imports-loader?Velocity=velocity' },
+            { test: require.resolve('velocity-animate/velocity.ui'), loader: 'imports-loader?Velocity=velocity' },
             { test: /jquery.inlinegallery/, loader: 'imports-loader?bxSlider' },
             { test: /jquery.clarify/, loader: 'imports-loader?define=>false' },
             { test: /jquery.inview/, loader: 'imports-loader?define=>false' },
