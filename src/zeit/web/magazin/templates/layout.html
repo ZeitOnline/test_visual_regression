@@ -122,8 +122,7 @@
                 </main>
 
                 {% block adplace_floor %}
-                    <!-- mobile ad at bottom above footer-->
-                    {{ lama.adplace(banner(8), view, True) }}
+                    {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
                 {% endblock adplace_floor %}
 
                 {% profile %}
