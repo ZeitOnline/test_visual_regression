@@ -104,6 +104,23 @@ def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-mobile-8')) == 1
 
 
+def test_adplaces_present_on_zco_cp(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True,
+        'iqd_mobile_transition_zco_cp': True
+    }.get)
+    browser = testbrowser('/campus/index')
+    assert len(browser.cssselect('#iqadtileOOP')) == 1
+    assert len(browser.cssselect('#ad-desktop-1')) == 1
+    assert len(browser.cssselect('#ad-desktop-2')) == 1
+    assert len(browser.cssselect('#ad-desktop-3')) == 1
+    assert len(browser.cssselect('#ad-mobile-1')) == 1
+    assert len(browser.cssselect('#ad-mobile-3')) == 1
+    assert len(browser.cssselect('#ad-mobile-8')) == 1
+
+
+
 def test_iqd_sitebar_should_be_hidden_on_mobile(
         selenium_driver, testserver, monkeypatch):
     driver = selenium_driver
