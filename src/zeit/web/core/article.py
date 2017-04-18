@@ -66,7 +66,7 @@ def _inject_banner_code(pages, pubtype):
         },
         'longform': {
             'pages': [2],
-            'ads': [{'tile': 3, 'paragraph': 5, 'type': 'desktop'}]
+            'ads': [{'tile': 7, 'paragraph': 5, 'type': 'desktop'}]
         }
     }
 
