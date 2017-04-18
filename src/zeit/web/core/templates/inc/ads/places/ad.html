@@ -2,7 +2,7 @@
 {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
 <div>
     <script type="text/javascript" id="ad-{% block type %}{{ block.type }}{% endblock %}-{% block tile %}{{ block.tile }}{% endblock %}">
-        if ( typeof AdController !== 'undefined' {% block adminwidth %}{% endblock %} {% block mobileview %}{% endblock %}) {
+        if ( typeof AdController !== 'undefined' {% block adtile_minimal_width %}{% endblock %} {% block mobileview %}{% endblock %}) {
             if ( !document.getElementById( 'iqadtile{{ self.tile() }}' ) ) {
                 var elem = document.createElement( 'div' );
                 elem.id = 'iqadtile{{ self.tile() }}';
