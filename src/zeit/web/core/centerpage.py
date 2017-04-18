@@ -93,7 +93,7 @@ def get_video(context):
         asset = zeit.content.video.interfaces.IVideoAsset(context)
         primary = asset.video
         secondary = asset.video_2
-    except TypeError:
+    except (TypeError, AttributeError):
         return
 
     if primary is not None:
