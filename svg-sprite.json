@@ -1,0 +1,17 @@
+{
+  "dest": "src/zeit/web/static/css",
+  "shape": {
+    "id": {
+      "generator": "svg-%s"
+    }
+  },
+  "svg": {
+    "xmlDeclaration": true,
+    "doctypeDeclaration": false
+  },
+  "mode": {
+    "symbol": {
+      "dest": ""
+    }
+  }
+}
