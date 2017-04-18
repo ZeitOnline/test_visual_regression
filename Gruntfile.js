@@ -278,6 +278,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 options: {
+                    logLevel: 2,
                     useSourceUrl: false,
                     generateSourceMaps: false,
                     optimize: 'uglify2'
