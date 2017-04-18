@@ -836,6 +836,10 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
     svg = xml.getroot()
     svg.set('class', 'svg-symbol {}'.format(class_name))
     svg.set('preserveAspectRatio', 'xMinYMin meet')
+    # Our SVGs get actually cleaned by
+    # https://github.com/ZeitOnline/zeit.web/blob/master/svgo.json, but we
+    # preserve this in case we use uncleaned SVGs that have not been processed
+    # by out build task.
     if cleanup:
         lxml.etree.strip_attributes(
             xml, 'fill', 'fill-opacity', 'stroke', 'stroke-width')
