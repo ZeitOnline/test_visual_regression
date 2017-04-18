@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.52 (unreleased)
+3.52 (2017-04-18)
 -----------------
 
 - ZON-3782: Add new mobile AdPlace to ZMO CPs
