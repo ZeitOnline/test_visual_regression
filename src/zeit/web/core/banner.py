@@ -1,7 +1,5 @@
 import zope.interface
 
-import zc.sourcefactory.source
-
 import zeit.web.core.interfaces
 import zeit.web.core.cache
 

@@ -7,7 +7,6 @@ import zeit.web.core.article
 
 import mock
 import lxml
-import pytest
 
 
 def test_banner_id_mappings_source_should_be_parsed(application):
