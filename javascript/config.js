@@ -23,7 +23,6 @@ require.config({
     // add the name or path and an array of required scripts
     shim: {
         'bxSlider': [ 'jquery' ],
-        'jquery.clarify': [ 'jquery' ],
         'jquery.debounce': [ 'jquery' ],
         'jquery.throttle': [ 'jquery' ],
         'web.core/plugins/jquery.inlinegallery': [ 'bxSlider', 'jquery', 'modernizr', 'web.core/zeit' ],
