@@ -120,7 +120,6 @@ def test_adplaces_present_on_zco_cp(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-mobile-8')) == 1
 
 
-
 def test_iqd_sitebar_should_be_hidden_on_mobile(
         selenium_driver, testserver, monkeypatch):
     driver = selenium_driver
