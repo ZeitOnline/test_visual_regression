@@ -84,12 +84,14 @@
     {% for comment in view.comments.comments %}
 
         {% if (loop.length < view.comments.ad_place and loop.last ) or loop.index == view.comments.ad_place -%}
-            {% if view.advertising_enabled -%}
-            <div class="comment__ad">
-                {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
-                {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
-            </div>
-            {%- endif %}
+            {% block comment_ad -%}
+                {% if view.advertising_enabled -%}
+                    <div class="comment__ad">
+                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
+                        {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
+                    </div>
+                {%- endif %}
+            {%- endblock comment_ad %}
         {% endif %}
 
         {% include "zeit.web.core:templates/inc/comments/comment.html" %}
@@ -122,9 +124,5 @@
 {% include "zeit.web.core:templates/inc/comments/pagination.html" %}
 
 {% else %}
-    {% if view.advertising_enabled -%}
-        <div class="comment__ad">
-            {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
-        </div>
-    {% endif %}
+    {{ self.comment_ad() }}
 {% endif %}
