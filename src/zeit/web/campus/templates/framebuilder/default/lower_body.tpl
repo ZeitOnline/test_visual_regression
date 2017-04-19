@@ -1,5 +1,7 @@
-                {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
             </main>
+            {% block adplace_floor %}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
+            {% endblock adplace_floor %}
             {% block footer %}
                 {%- include "zeit.web.campus:templates/inc/footer.html" -%}
             {% endblock footer %}
