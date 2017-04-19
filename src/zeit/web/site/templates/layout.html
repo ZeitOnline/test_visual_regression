@@ -129,7 +129,9 @@
             {% endblock adplace_billboard %}
             <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
                 {% block main %}{% endblock main %}
-                {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
+                {% if view is not article %}
+                    {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
+                {% endif %}
             </main>
             {% profile %}
             {% block footer %}

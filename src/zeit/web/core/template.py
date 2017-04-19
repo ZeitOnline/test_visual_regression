@@ -257,6 +257,11 @@ def framebuilder(view):
 
 
 @zeit.web.register_test
+def article(view):
+    return isinstance(view, zeit.web.core.view_article.Article)
+
+
+@zeit.web.register_test
 def paragraph(block):
     return block_type(block) == 'paragraph'
 
