@@ -3,7 +3,7 @@
     {% if toggles('iqd_mobile_transition_zco_cp') %}
         {# new adplace on zco cps after second teaser #}
         {% if (region_loop.index == 2) %}
-            {% if  (view.is_hp and area_loop.first) or (not view.is_hp and area_loop.last)  %}
+            {% if  (view.is_hp and area_loop.first) or (not view.is_hp and (area_loop.index == 2 or area_loop.last))  %}
                 {{ lama.adplace(banner(3), view, mobile=True) }}
             {% endif %}
         {% endif %}
