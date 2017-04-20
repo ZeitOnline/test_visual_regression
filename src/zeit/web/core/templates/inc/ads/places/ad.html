@@ -8,7 +8,7 @@
                 elem.id = 'iqadtile{{ self.tile() }}';
                 elem.className = "ad ad-{{ self.type() }} ad-{{ self.type() }}--{{ self.tile() }} ad-{{ self.type() }}--{{ self.tile() }}-on-{{ pagetype }}";
                 elem.setAttribute('data-banner-type', '{{ self.type() }}');
-                elem.setAttribute('data-banner-label', 'Anzeige');
+                {% block adtile_label %}{% endblock %}
                 document.getElementById('ad-{{ self.type() }}-{{ self.tile() }}').parentNode.appendChild(elem);
                 AdController.render('iqadtile{{ self.tile() }}');
                 if ( window.console && typeof window.console.info === 'function' ) {
