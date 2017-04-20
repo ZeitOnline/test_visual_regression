@@ -12,6 +12,10 @@ POSTDEPLOY
 
 - ZON-3873: Change wording on paywall
 
+- ZON-3757: Refactor Adtile placement
+
+- ZON-3757: Introduce adtile3 inside articles
+
 
 3.52 (2017-04-18)
 -----------------
