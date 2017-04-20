@@ -70,6 +70,11 @@
 	// LOGIN
 	&__login-link
 		text-align: right
+	&__login-title
+		position: relative
+		padding-right: $page-padding--small
+		overflow: hidden
+		text-overflow: ellipsis
 	&__login-icon
 		height: remify(18px)
 		width: remify(18px)
@@ -341,6 +346,9 @@
 			display: none
 		&__user-name
 			text-align: right
+		&__login-title
+			padding-right: 0
+			max-width: remify(250px)
 
 		li.nav__ressorts-item--featured
 			float: right

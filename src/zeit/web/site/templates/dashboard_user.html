@@ -18,7 +18,7 @@
                     <img src="{{request.user.picture}}" class="dashboard__user-image" />
                 {% endif %}
                 <span class="dashboard__user-name">
-                    {{request.user.name}}
+                    {{request.user.name or request.user.mail }}
                 </span>
             </div>
             <!-- header -->
