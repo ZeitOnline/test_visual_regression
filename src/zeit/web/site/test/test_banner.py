@@ -110,7 +110,19 @@ def test_adplaces_present_on_zco_cp(testbrowser, monkeypatch):
         'iqd': True,
         'iqd_mobile_transition_zco_cp': True
     }.get)
+
+    # test homepage
     browser = testbrowser('/campus/index')
+    assert len(browser.cssselect('#iqadtileOOP')) == 1
+    assert len(browser.cssselect('#ad-desktop-1')) == 1
+    assert len(browser.cssselect('#ad-desktop-2')) == 1
+    assert len(browser.cssselect('#ad-desktop-3')) == 1
+    assert len(browser.cssselect('#ad-mobile-1')) == 1
+    assert len(browser.cssselect('#ad-mobile-3')) == 1
+    assert len(browser.cssselect('#ad-mobile-8')) == 1
+
+    # test topic page with lead cinema teaser
+    browser = testbrowser('/campus/centerpage/thema')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
     assert len(browser.cssselect('#ad-desktop-1')) == 1
     assert len(browser.cssselect('#ad-desktop-2')) == 1
