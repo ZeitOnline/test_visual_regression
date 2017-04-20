@@ -86,9 +86,9 @@
             <div id="iqd_mainAd" >
                 <div id="iqd_align_Ad">
                     <div id="iqd_topAd">
-                        {{ lama.adplace(banner(1), view) }}
+                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place1.html" %}
                         <div id="iqd_rightAd">
-                            {{ lama.adplace(banner(2), view) }}
+                            {% include "zeit.web.core:templates/inc/ads/places/desktop/place2.html" %}
                         </div>
                     </div>
                 </div>
@@ -108,8 +108,8 @@
                 {%- endif %}
 
                 {% block adplace_billboard %}
-                    {{ lama.adplace(banner(3), view) }}
-                    {{ lama.adplace(banner(1), view, True) }}
+                    {% include "zeit.web.core:templates/inc/ads/places/desktop/place3.html" %}
+                    {% include "zeit.web.core:templates/inc/ads/places/mobile/place1.html" %}
                 {% endblock adplace_billboard %}
 
                 {% block page_title %}
@@ -122,8 +122,7 @@
                 </main>
 
                 {% block adplace_floor %}
-                    <!-- mobile ad at bottom above footer-->
-                    {{ lama.adplace(banner(8), view, True) }}
+                    {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
                 {% endblock adplace_floor %}
 
                 {% profile %}

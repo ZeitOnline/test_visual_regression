@@ -19,10 +19,9 @@ div[id*="__container__"]
 		display: none // generally hidden on desktop
 	&--1
 		padding-bottom: remify(10px) // BUG-366
+	&--3-on-article,
 	&--4-on-article
 		margin: remify(40px) (-$page-padding)
-	&--8-on-article
-		margin: remify(56px) (-$page-padding) 0
 	&:empty
 		display: none
 
@@ -79,22 +78,9 @@ div[id*="__container__"]
 	// fuck you iqd: centering of content of unknowable width
 	// and positioning of adlabel
 	&--5-on-article
-		display: table
-		margin: remify(48px 0)
-		vertical-align: middle
-		width: 100%
-		// uses code by iqd, may break tomorrow
-		div[id*="__container__"]
-			display: table-cell
-			padding-top: remify(15px)
-			position: relative
-			text-align: center
-			& > iframe[id^="google_ads_iframe"]
-				display: inline-block
-				margin: 0 auto
-				max-width: 100%
-			&:before
-				max-width: remify(660px)
+		+respond_min($break-mobile-ad-width)
+			display: table
+			margin: remify(48px auto)
 	&--7-on-article
 		clear: both
 		float: right

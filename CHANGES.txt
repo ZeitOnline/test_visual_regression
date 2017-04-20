@@ -8,7 +8,13 @@ POSTDEPLOY
 3.53 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3784: Add new mobile AdPlace 3 to ZCO CPs
+
+- ZON-3873: Change wording on paywall
+
+- ZON-3757: Refactor Adtile placement
+
+- ZON-3757: Introduce adtile3 inside articles
 
 
 3.52 (2017-04-18)

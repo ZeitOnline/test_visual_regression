@@ -1,5 +1,7 @@
-                {{ lama.adplace(banner(8), view, mobile=True) }}
             </main>
+            {% block adplace_floor %}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
+            {% endblock adplace_floor %}
             {% block footer %}
                 {%- include "zeit.web.site:templates/inc/footer.html" -%}
             {% endblock footer %}
