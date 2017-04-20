@@ -4,7 +4,7 @@
         {# new adplace, only on ressortpages, first region, first area, after second module #}
         {% if view.is_ressortpage and module_loop.length > 1 %}
             {% if region_loop.index == 1 and area_loop.index == 1 and module_loop.index == 2 %}
-                {{ lama.adplace(banner(3), view, mobile=True) }}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place3.html" %}
             {% endif %}
         {% endif %}
     {% endif %}

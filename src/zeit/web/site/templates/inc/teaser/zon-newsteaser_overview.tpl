@@ -4,12 +4,12 @@
 {% if view.advertising_enabled %}
     {% if loop.index == 10 %}
         <div class="newsteaser__ad">
-            {{ lama.adplace(banner(7), view) }}
-            {{ lama.adplace(banner(4), view, mobile=True) }}
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place7.html" %}
+            {% include "zeit.web.core:templates/inc/ads/places/mobile/place4.html" %}
         </div>
     {% elif loop.index == 30 %}
         <div class="newsteaser__ad">
-            {{ lama.adplace(banner(8), view) }}
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
         </div>
     {% endif %}
 {% endif %}
