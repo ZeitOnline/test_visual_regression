@@ -8,6 +8,8 @@ POSTDEPLOY
 3.53 (unreleased)
 -----------------
 
+- ZON-3784: Add new mobile AdPlace 3 to ZCO CPs
+
 - ZON-3873: Change wording on paywall
 
 

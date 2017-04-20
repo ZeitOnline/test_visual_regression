@@ -11,6 +11,7 @@
   <fbia_advertising>true</fbia_advertising>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
+  <iqd_mobile_transition_zco_cp>true</iqd_mobile_transition_zco_cp>
   <iqd_mobile_transition_zon_cp>true</iqd_mobile_transition_zon_cp>
   <iqd_mobile_transition_zmo_cp>true</iqd_mobile_transition_zmo_cp>
   <rawr_iframe>true</rawr_iframe>
