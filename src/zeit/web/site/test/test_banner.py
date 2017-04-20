@@ -194,3 +194,26 @@ def test_adplace8_has_banner_label_data_attribute(
 
     assert labelstring in browser.cssselect('#ad-desktop-8')[0].text
     assert labelstring not in browser.cssselect('#ad-mobile-8')[0].text
+
+
+def test_iqd_adtile2_should_not_be_inserted_on_small_screens(
+        selenium_driver, testserver, monkeypatch):
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True,
+        'iqd': True
+    }.get)
+
+    driver = selenium_driver
+
+    driver.set_window_size(920, 800)
+    driver.get('%s/zeit-online/article/zeit/seite-2' % testserver.url)
+    try:
+        driver.find_element_by_css_selector('.ad-desktop--2')
+        assert False
+    except:
+        assert True
+
+    driver.set_window_size(1080, 800)
+    driver.get('%s/zeit-online/article/zeit/seite-3' % testserver.url)
+    assert driver.find_element_by_css_selector('.ad-desktop--2')
