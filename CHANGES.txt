@@ -5,8 +5,8 @@ POSTDEPLOY
 ----------
 
 
-3.54 (unreleased)
------------------
+3.53.1 (2017-04-21)
+-------------------
 
 - FIX: ZON-3784: Override global styling for ZCO .ad-mobile-3
 
