@@ -6,8 +6,10 @@
  * Module for displaying brightcove video
  * @module video
  */
-define([ 'jquery' ],
-    function( $ ) {
+var video = {
+    init: function() {
+        var $ = require( 'jquery' );
+
         return {
 
             /**
@@ -76,11 +78,24 @@ define([ 'jquery' ],
                             .replace( /\{{embed}}/g, 'default' );
 
                         // add script with callback to create a player instance and play the video
-                        var script = document.createElement( 'script' );
+                        var script = document.createElement( 'script' ),
+                            _define = window.define, // be nice, keep a reference
+                            done = false;
+
+                        // prevent clash of brightcove script with third party scripts using require.
+                        // brighcove checks for global define to recognize RequireJS
+                        // This is ill. It will break the internet.
+                        window.define = undefined;
+
                         script.src = scriptSrc;
-                        script.onload = function() {
-                            /*global videojs*/
-                            videojs( 'player-' + videoId ).play();
+                        script.onload = script.onreadystatechange = function() {
+                            if ( !done && ( !this.readyState || this.readyState === 'loaded' || this.readyState === 'complete' ) ) {
+                                done = true;
+                                /*global videojs*/
+                                videojs( 'player-' + videoId ).play();
+                                window.define = _define; // reset previous state
+                                script.onload = script.onreadystatechange = null;
+                            }
                         };
                         document.body.appendChild( script );
                     }
@@ -90,4 +105,6 @@ define([ 'jquery' ],
             }
         };
     }
-);
+};
+
+module.exports = video.init();
