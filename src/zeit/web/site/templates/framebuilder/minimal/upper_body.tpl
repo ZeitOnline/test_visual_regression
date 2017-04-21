@@ -40,8 +40,8 @@
             </header>
             {% block adplace_billboard %}
                 {# desktop ad place 3 #}
-                {{ lama.adplace(banner(3), view) }}
+                {% include "zeit.web.core:templates/inc/ads/places/desktop/place3.html" %}
                 {# mobile ad place 1 #}
-                {{ lama.adplace(banner(1), view, mobile=True) }}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place1.html" %}
             {% endblock adplace_billboard %}
             <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">

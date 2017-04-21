@@ -4,7 +4,7 @@
         {# new adplace on zco cps after second teaser #}
         {% if (region_loop.index == 2) %}
             {% if  (view.is_hp and area_loop.first) or (not view.is_hp and (area_loop.index == 2 or area_loop.last))  %}
-                {{ lama.adplace(banner(3), view, mobile=True) }}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place3.html" %}
             {% endif %}
         {% endif %}
     {% endif %}
