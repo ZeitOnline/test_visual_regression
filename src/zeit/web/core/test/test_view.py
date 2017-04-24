@@ -996,7 +996,7 @@ def test_notification_script_does_not_edit_unknown_hashes(
 
 
 def test_user_name_and_email_are_displayed_correctly(
-    testserver, selenium_driver):
+        testserver, selenium_driver):
     driver = selenium_driver
     # request some arbitrary article page and set loggedin-cookie
     driver.get('%s/zeit-online/article/01' % testserver.url)
