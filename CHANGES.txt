@@ -5,7 +5,19 @@ POSTDEPLOY
 ----------
 
 
-3.53 (unreleased)
+3.54 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.53.1 (2017-04-21)
+-------------------
+
+- FIX: ZON-3784: Override global styling for ZCO .ad-mobile-3
+
+
+3.53 (2017-04-21)
 -----------------
 
 - ZON-3784: Add new mobile AdPlace 3 to ZCO CPs
