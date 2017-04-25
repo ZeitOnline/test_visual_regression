@@ -428,19 +428,6 @@ class InstantArticle(Article):
         if date:
             return date.astimezone(self.timezone)
 
-    @zeit.web.reify
-    def fbia_first_ad_paragraph(self, words=100):
-        """Returns tuple with page/block coordinates of first p where an
-        fbia ad is possible. Take this Zuckerberg!"""
-        for p, page in enumerate(self.pages):
-            for b, block in enumerate(page.blocks):
-                if type(block) is zeit.web.core.block.Paragraph:
-                    words = words - len(
-                        re.findall(r'\S+', block.model_block.text))
-                    if words < 0:
-                        return (p, b)
-        return None
-
 
 @zeit.web.view_config(
     context=zeit.content.article.interfaces.IArticle,
