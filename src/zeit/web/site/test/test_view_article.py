@@ -1601,7 +1601,7 @@ def test_article_should_not_render_expired_video(testbrowser):
     browser = testbrowser('/zeit-online/article/video-expired')
     articlepage = browser.cssselect('.article-page')
     articleitems = articlepage[0].getchildren()
-    assert len(articleitems) == 3
+    assert len(articleitems) == 4
 
 
 def test_comment_count_in_metadata_not_shown_when_comments_disabled(
