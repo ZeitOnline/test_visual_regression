@@ -8,7 +8,7 @@ POSTDEPLOY
 3.54 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-712/713: Fix certain banner placement bugs
 
 
 3.53.1 (2017-04-21)
