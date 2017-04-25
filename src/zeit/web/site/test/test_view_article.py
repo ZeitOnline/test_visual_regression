@@ -11,7 +11,6 @@ import lxml.etree
 import mock
 import pyramid.testing
 import pytest
-import re
 import requests
 import zope.component
 
@@ -1348,30 +1347,23 @@ def test_instantarticle_should_render_empty_page_on_interrupt(testserver):
     assert len(resp.text) == 0
 
 
-def test_instantarticle_should_render_ads(testbrowser):
+def test_instantarticle_should_render_ads(testbrowser, monkeypatch):
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'fbia_advertising': True,
+        'iqd_mobile_transition_article': True
+    }.get)
+
     browser = testbrowser(
         '/instantarticle/zeit-online/article/simple-multipage')
+    assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-3.html"]')) == 1
     assert len(browser.cssselect(
         'iframe[src$="/static/latest/html/fbia-ads/tile-4.html"]')) == 1
     assert len(browser.cssselect(
         'iframe[src$="/static/latest/html/fbia-ads/tile-5.html"]')) == 1
     assert len(browser.cssselect(
         'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
-
-
-def test_instantarticle_shows_ad_after_100_words(testbrowser):
-    word_count = 0
-    bro = testbrowser('/instantarticle/zeit-online/article/simple-multipage')
-    blocks = bro.xpath('body/article/*')
-    blocks = blocks[1:]
-    for block in blocks:
-        if block.tag == 'p':
-            words = len(re.findall(r'\S+', block.text_content()))
-            word_count = word_count + words
-        if block.tag == 'figure':
-            assert block.cssselect('iframe[src*="tile-4"]')
-            break
-    assert word_count > 100
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
