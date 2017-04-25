@@ -1361,8 +1361,6 @@ def test_instantarticle_should_render_ads(testbrowser, monkeypatch):
     assert len(browser.cssselect(
         'iframe[src$="/static/latest/html/fbia-ads/tile-4.html"]')) == 1
     assert len(browser.cssselect(
-        'iframe[src$="/static/latest/html/fbia-ads/tile-5.html"]')) == 1
-    assert len(browser.cssselect(
         'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
 
 

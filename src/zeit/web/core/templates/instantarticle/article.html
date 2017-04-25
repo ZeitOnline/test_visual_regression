@@ -70,14 +70,6 @@
             {%- for block in page -%}
                 {% set block_loop = loop %}
                 {% include "zeit.web.core:templates/instantarticle/blocks/{}.html".format(block | block_type) ignore missing %}
-                {# middle ad if more pages #}
-                {% if page.number > 0 %}
-                    {% if page.number == view.pages | length // 2 %}
-                        {% if page | length // 2 == loop.index %}
-                            {% include "zeit.web.core:templates/instantarticle/ads/tile_5.html" %}
-                        {% endif %}
-                    {% endif %}
-                {% endif %}
             {%- endfor -%}
         {% endfor %}
 
