@@ -2867,3 +2867,14 @@ def test_ressortpage_returns_is_ressortpage_correctly(
         'http://xml.zeit.de/angebote/leseperlen')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
     assert not view.is_ressortpage
+
+
+def test_special_ressortpage_returns_is_ressortpage_correctly(
+        application, monkeypatch, dummy_request):
+
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/main-teaser-setup')
+    monkeypatch.setattr(
+        zeit.web.site.view_centerpage.Centerpage, u'ressort', u'mobilitaet')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.is_ressortpage
