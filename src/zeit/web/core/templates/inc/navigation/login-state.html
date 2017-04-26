@@ -10,7 +10,7 @@
             </span>
         {%- endif %}
 
-        <span class="nav__user-name">{{ user.name or user.mail | replace('@', '<span class="no-tt">@</span>' | safe) }}</span>
+        <span class="nav__user-name">{{ user.name or user.mail | replace('@', '<span class="at-char">@</span>' | safe) }}</span>
     </a>
     <ul class="nav__login-list" id="user-menu" aria-hidden="true" data-ct-column>
         <li><a href="{{ profile }}">Konto</a></li>
