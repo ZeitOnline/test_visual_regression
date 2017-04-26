@@ -324,14 +324,20 @@ def append_campaign_params(context, url):
 
         if kind == 'zett':
             campaign_params = {
-                'utm_campaign': 'zonparkett',
-                'utm_medium': 'parkett',
-                'utm_source': 'zon'}
+                'utm_content': 'zett_zon_parkett_teaser_x',
+                'utm_campaign': 'ref',
+                'utm_medium': 'fix',
+                'utm_source': 'zon_zettaudev_int',
+                'wt_zmc': 'fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x'
+            }
         else:
             campaign_params = {
-                'utm_campaign': 'zonteaser',
-                'utm_medium': 'teaser',
-                'utm_source': 'zon'}
+                'utm_campaign': 'ref',
+                'utm_content': 'zett_zon_teaser_teaser_x',
+                'utm_medium': 'fix',
+                'utm_source': 'zon_zettaudev_int',
+                'wt_zmc': 'fix.int.zettaudev.zon.ref.zett.zon_teaser.teaser.x'
+            }
 
         scheme, netloc, path, query, fragment = urlparse.urlsplit(url)
         query_params = urlparse.parse_qs(query)
