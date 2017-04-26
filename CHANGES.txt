@@ -8,6 +8,8 @@ POSTDEPLOY
 3.54 (unreleased)
 -----------------
 
+- ZON-3861: Use ZEIT packshot for volume badge of print
+
 - ZON-3799: Change campaign tracking for zett teasers
 
 - ZON-3786: Redesign mobile ad slots
