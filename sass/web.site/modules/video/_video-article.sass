@@ -49,16 +49,11 @@
 	// TODO: ad-div should have ".ad-desktop--7-on-video" and then we could
 	// apply the styles to this class.
 	.ad-desktop--7
-		background-color: $color-dark-background
-		margin: remify(40px 0 20px 40px) // 'top' should be not less than .article-heading, 'left' makes room for the fake border
+		border-left: 1px solid $zon-grey
+		margin-left: remify(20px)
+		margin-top: remify(40px) // 'top' should be not less than .article-heading
+		padding-left: remify(20px)
 		position: relative
-
-		&:before
-			border-left: 1px solid $zon-grey
-			content: ""
-			height: 100%
-			left: remify(-20px)
-			position: absolute
 
 		// sometimes, ads have transparency and rely on a white background
 		iframe
