@@ -1,54 +1,47 @@
-div[id*="__container__"]
-	&:before
-		@extend %label
-		content: "Anzeige"
-		display: none
-		margin-left: auto
-		margin-right: auto
-
 // mobile ads
 .ad-mobile
-	background-color: $color-advertising-bg
-	border-bottom: 1px solid $color-border
-	border-top: 1px solid $color-border
-	display: block // generally visible on mobile
-	margin: -1px 0 // prevent border overlapping
-	.cp-area &
-		margin: -1px (-$page-padding)
+	display: table
+	margin: remify(59px auto 40px)
+	position: relative
 	+respond_min($break-mobile-ad-width)
 		display: none // generally hidden on desktop
 	&--1
-		padding-bottom: remify(10px) // BUG-366
-	&--3-on-article,
-	&--4-on-article
-		margin: remify(40px) (-$page-padding)
+		margin: remify(29px auto 10px)
 	&:empty
 		display: none
+	&:before
+		@extend %label
+		content: "Anzeige"
+		position: absolute
+		right: 0
+		top: -19px
+		+respond-max(em(320px), false)
+			padding-right: remify(10px)
 
 // desktop ads
 .ad-desktop
 	display: none // generally hidden on mobile
+	&[data-banner-label]:before
+		@extend %label
+		content: "Anzeige"
 	+respond_min($break-mobile-ad-width)
-		display: block // generally visible on desktop
+		display: table // generally visible on desktop
+		margin: remify(40px auto)
+		&--1,
+		&--2
+			display: block
+			margin: 0 auto
 		&:empty
 			display: none
-	// shows Anzeige-Label before every Ad
-	&[data-banner-label]
-		div[id*="__container__"]:before
-			display: block
 	&--3,
 	&--12
-		margin: 0 auto
+		margin: remify(14px auto)
 		max-width: remify(940px)
-		padding: remify(14px 0)
 	&--7,
 	&--8,
 	&--9,
 	&--10,
 	&--11
-		background-color: $color-page-bg
-		color: $color-text
-		margin: remify(40px) auto
 		width: remify(300px)
 	&--7-on-centerpage,
 	&--8-on-centerpage,
@@ -57,44 +50,55 @@ div[id*="__container__"]
 	&--11-on-centerpage
 		&:first-of-type
 			margin-top: remify(15px)
-	&--12-on-centerpage
-		display: table
-		max-width: none
-		vertical-align: middle
-		width: 100%
-		div[id*="__container__"]
-			display: table-cell
-			position: relative
-			text-align: center
-			& > iframe[id^="google_ads_iframe"]
-				display: inline-block
-				margin: 0 auto
-				max-width: 100%
-			&:before
-				max-width: remify(980px)
-				padding-right: remify(20px)
 	&--13-on-centerpage
 		margin-bottom: remify(20px)
-	// fuck you iqd: centering of content of unknowable width
-	// and positioning of adlabel
-	&--5-on-article
-		+respond_min($break-mobile-ad-width)
-			display: table
-			margin: remify(48px auto)
+		margin-top: remify(20px)
 	&--7-on-article
 		clear: both
 		float: right
-		margin: remify(0 0 28px 36px)
-		padding: 0
+		margin: remify(0 $page-padding 28px 36px)
 		width: auto
 		+respond-min($break-desktop-min)
-			margin-right: remify(60px)
-	&--8-on-article
-		background-color: $color-advertising-bg
-		margin: 0 auto
-		padding: remify(30px 0)
+			margin-right: remify(80px)
 
 // Fix hillarious unusable ad extras by iqd
 +respond-max($break-mobile-ad-width)
 	body > #iqdSitebar
 		display: none
+
+/**
+ * reset IQD inline styles
+ */
+div.smartClipAnzeige:before
+	content: none !important
+
+#scVideoWrap
+	top: 0 !important
+
++respond-max($break-mobile-ad-width)
+	div#iqadtile1::before,
+	div#iqadtile3::before,
+	div#iqadtile4::before,
+	div#iqadtile5::before,
+	div#iqadtile8::before
+		content: 'Anzeige' !important
+		color: $dusty-gray !important
+		position: absolute !important
+		font-size: em(9px) !important
+		background-color: transparent !important
+		width: auto !important
+		margin-top: auto !important
+		height: auto !important
+		line-height: 1 !important
+		top: -19px !important
+		left: auto !important
+		right: 0 !important
+
+	div#iqadtile1
+		margin-top: remify(29px) !important
+
+	div#iqadtile3,
+	div#iqadtile4,
+	div#iqadtile5,
+	div#iqadtile8
+		margin-top: remify(59px) !important

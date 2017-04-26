@@ -8,6 +8,8 @@ POSTDEPLOY
 3.54 (unreleased)
 -----------------
 
+- ZON-3786: Redesign mobile ad slots
+
 - BUG-712/713: Fix certain banner placement bugs
 
 
