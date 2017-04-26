@@ -8,6 +8,8 @@ POSTDEPLOY
 3.54 (unreleased)
 -----------------
 
+- ZON-3864: Display email address for users without username
+
 - ZON-3861: Use ZEIT packshot for volume badge of print
 
 - ZON-3799: Change campaign tracking for zett teasers
