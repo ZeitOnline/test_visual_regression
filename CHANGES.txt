@@ -5,10 +5,28 @@ POSTDEPLOY
 ----------
 
 
-3.54 (unreleased)
+3.55 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+3.54 (2017-04-26)
+-----------------
+
+- ZON-3864: Display email address for users without username
+
+- ZON-3861: Use ZEIT packshot for volume badge of print
+
+- ZON-3799: Change campaign tracking for zett teasers
+
+- ZON-3786: Redesign mobile ad slots
+
+- BUG-712/713: Fix certain banner placement bugs
+
+- BUG-701: Fix article header with badge in Safari 9
+
+- MAINT: Remove obsolete ad delivery type
 
 
 3.53.1 (2017-04-21)
