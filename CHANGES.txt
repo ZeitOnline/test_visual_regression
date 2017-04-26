@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - BUG-701: Fix article header with badge in Safari 9
 
+- MAINT: Remove obsolete ad delivery type
+
 
 3.53.1 (2017-04-21)
 -------------------

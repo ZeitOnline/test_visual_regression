@@ -13,11 +13,6 @@ def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
     driver = selenium_driver
     driver.set_window_size(768, 1024)
     driver.get('%s/zeit-magazin/article/01' % testserver.url)
-    try:
-        selector = 'body[data-ad-delivery-type="oldschool"]'
-        driver.find_element_by_css_selector(selector)
-    except:
-        pytest.skip("not applicable due to new ad configuration")
 
     diuqilon = driver.execute_script("return window.diuqilon")
     # ipad
@@ -58,22 +53,6 @@ def test_viewport_is_not_resized_in_other_browser(
     if orientation is not 90:
         # all other
         assert 'width=device-width' in content
-
-
-@pytest.mark.xfail(reason='ad scripts may timeout')
-def test_var_iqd_var_pack_isset(selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True}.get)
-    driver = selenium_driver
-    driver.get('%s/zeit-magazin/article/01' % testserver.url)
-    try:
-        selector = 'body[data-ad-delivery-type="oldschool"]'
-        driver.find_element_by_css_selector(selector)
-    except:
-        pytest.skip("not applicable due to new ad configuration")
-
-    varpack = driver.execute_script("return typeof window.IQD_varPack")
-    assert varpack == "object"
 
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
