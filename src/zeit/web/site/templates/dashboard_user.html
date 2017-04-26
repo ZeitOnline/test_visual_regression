@@ -1,6 +1,6 @@
 {% extends "zeit.web.site:templates/layout.html" %}
 {% block main %}
-<div class="dashboard">
+<div class="dashboard" data-ct-area="user-dashboard" data-ct-column="false">
     <div class="dashboard__upper">
         <div class="dashboard__item">
             <h1 class="dashboard__header" itemprop="headline">
@@ -18,12 +18,12 @@
                     <img src="{{request.user.picture}}" class="dashboard__user-image" />
                 {% endif %}
                 <span class="dashboard__user-name">
-                    {{request.user.name}}
+                    {{request.user.name or request.user.mail }}
                 </span>
             </div>
             <!-- header -->
             {% for section in view.dashboard_sections('header') %}
-            <div class="dashboard__box dashboard__box--is-header" data-ct-area="user-dashboard" data-ct-column="false">
+            <div class="dashboard__box dashboard__box--is-header">
                 <h2 class="dashboard__box-title">{{section.name}}</h2>
                 <ul class="dashboard__box-list">
                     {% for link in section.links %}
@@ -42,7 +42,7 @@
     <div class="dashboard__content">
         <div class="dashboard__item">
               {% for section in view.dashboard_sections('body') %}
-                <div class="dashboard__box" data-ct-area="user-dashboard" data-ct-column="false">
+                <div class="dashboard__box">
                 <h2 class="dashboard__box-title">{{section.name}}</h2>
                   <ul class="dashboard__box-list">
                     {% for link in section.links %}
