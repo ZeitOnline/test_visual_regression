@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.54 (unreleased)
+3.54 (2017-04-26)
 -----------------
 
 - ZON-3864: Display email address for users without username
