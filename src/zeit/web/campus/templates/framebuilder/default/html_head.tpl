@@ -5,7 +5,8 @@
     <title>ZEIT ONLINE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
+    {# XXX: One of the things to clean up once we have SSL/https #}
+    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ 'https://ssl.zeit.de/www.zeit.de/' if view.framebuilder_requires_ssl else request.route_url('home') }}favicon.ico">
     {% block css_link -%}
         <link href="{{ request.asset_host }}/css/web.campus/framebuilder.css" media="all" rel="stylesheet" type="text/css">
     {%- endblock css_link %}

@@ -9,7 +9,8 @@
     <title>ZEIT ONLINE</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
+    {# XXX: One of the things to clean up once we have SSL/https #}
+    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ 'https://ssl.zeit.de/www.zeit.de/' if view.framebuilder_requires_ssl else request.route_url('home') }}favicon.ico">
     {# The charset attribute is obsolete in HTML5, but needed for jobs.zeit.de in march 2017. That iso-encoded page does not respect our CSS charset HTTP-header in older browsers, so we need to enforce it here. This should be removed when jobs.zeit.de is modernized or IE9 is dumped. #}
     <!--[if lte IE 8]>
         <link href="{{ request.asset_host }}/css/web.site/all-old-ie.css" media="screen" rel="stylesheet" type="text/css"{% if view.desktop_only %} charset="utf-8"{% endif %}>
