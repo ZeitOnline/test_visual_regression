@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - BUG-712/713: Fix certain banner placement bugs
 
+- BUG-701: Fix article header with badge in Safari 9
+
 
 3.53.1 (2017-04-21)
 -------------------
