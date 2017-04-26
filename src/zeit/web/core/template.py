@@ -883,3 +883,11 @@ def urlquote_plus(text):
 @zeit.web.register_global
 def debugger():
     pdb.set_trace()
+
+
+@zeit.web.register_filter
+def rewrite_for_ssl_if_required(url, rewrite_required=False):
+    if rewrite_required:
+        return url.replace(
+            'http://www.zeit.de/', 'https://ssl.zeit.de/www.zeit.de/')
+    return url
