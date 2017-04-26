@@ -1,0 +1,9 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+{% block after_module_include %}
+    {% if toggles('iqd_mobile_transition_zmo_cp') %}
+        {# new adplace, on zmo cps, first region, first area, after second module #}
+            {% if region_loop.index == 1 and area_loop.index == 1 and module_loop.index == 2 %}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place3.html" %}
+            {% endif %}
+    {% endif %}
+{% endblock %}

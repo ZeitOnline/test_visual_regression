@@ -1609,7 +1609,7 @@ def test_article_should_not_render_expired_video(testbrowser):
     browser = testbrowser('/zeit-online/article/video-expired')
     articlepage = browser.cssselect('.article-page')
     articleitems = articlepage[0].getchildren()
-    assert len(articleitems) == 2
+    assert len(articleitems) == 3
 
 
 def test_comment_count_in_metadata_not_shown_when_comments_disabled(
@@ -1742,9 +1742,6 @@ def test_infographics_mobile_should_have_proper_asset_source(
 
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):
     selector = '#iq-artikelanker'
-
-    browser = testbrowser('/zeit-online/article/infoboxartikel')
-    assert len(browser.cssselect(selector)) == 1
 
     browser = testbrowser('/zeit-online/article/fischer')
     assert len(browser.cssselect(selector)) == 1

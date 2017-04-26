@@ -1,39 +1,3 @@
-{% macro adplace(banner, view, mobile=False) -%}
-  {% if view.advertising_enabled %}
-    <!-- tile: {{ banner.tile }} {{ 'mobile' if mobile else 'desktop'}} adctrl -->
-    {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
-    {% set operator = '' if mobile else '!' %}
-    {% set type = 'mobile' if mobile else 'desktop' %}
-    {% set scriptname = 'ad-%s-%s' | format(type, banner.tile) %}
-    <div>
-        <script type="text/javascript" id="{{ scriptname }}">
-            if (
-                typeof AdController !== 'undefined'
-                {% if type == 'desktop' and banner.tile == 2 -%}
-                && window.Zeit.getClientWidth() > window.Zeit.sideAdMinWidth
-                {% endif -%}
-                && {{ operator | safe }}window.Zeit.isMobileView()
-                ) {
-                if( ! document.getElementById( "iqadtile{{ banner.tile }}" ) ) {
-                    var elem = document.createElement('div');
-                    elem.id = "iqadtile{{ banner.tile }}";
-                    elem.className = "ad ad-{{ type }} ad-{{type}}--{{ banner.tile }} ad-{{type}}--{{ banner.tile }}-on-{{ pagetype }}";
-                    elem.setAttribute('data-banner-type', '{{ type }}');
-                    {% if banner.label and not(mobile) -%}
-                        elem.setAttribute('data-banner-label', '{{ banner.label | lower }}');
-                    {% endif -%}
-                    document.getElementById('{{ scriptname }}').parentNode.appendChild(elem);
-                    AdController.render('iqadtile{{ banner.tile }}');
-                    if (window.console && typeof window.console.info === 'function') {
-                        window.console.info('AdController ' + AdController.VERSION + ' tile {{ banner.tile }} {{ type }}')
-                    }
-                }
-            }
-        </script>
-    </div>
-  {% endif %}
-{% endmacro %}
-
 {% macro use_svg_icon(name, className, package, cleanup=True, a11y=True) -%}
     {#
         Generates in SVG, from minified svg file on disk, cleaned and a11y'd

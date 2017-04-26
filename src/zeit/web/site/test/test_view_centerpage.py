@@ -1731,8 +1731,10 @@ def test_zett_parquet_is_rendering(testbrowser):
 
     # test campaign parameters
     for link in links:
-        assert ('?utm_campaign=zonparkett&utm_medium=parkett'
-                '&utm_source=zon') in link.get('href')
+        assert ('?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
+                '&utm_medium=fix&utm_source=zon_zettaudev_int'
+                '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x'
+                ) in link.get('href')
 
 
 def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
@@ -1750,10 +1752,14 @@ def test_zett_parquet_should_link_to_zett(testbrowser):
     link_logo = browser.cssselect('.parquet-meta__title--zett')[0]
     link_more = browser.cssselect('.parquet-meta__more-link--zett')[0]
 
-    assert ('http://ze.tt/?utm_campaign=zonparkett&utm_medium=parkett'
-            '&utm_source=zon') == link_logo.attrib['href']
-    assert ('http://ze.tt/?utm_campaign=zonparkett&utm_medium=parkett'
-            '&utm_source=zon') == link_more.attrib['href']
+    assert link_logo.attrib['href'] == (
+        'http://ze.tt/?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
+        '&utm_medium=fix&utm_source=zon_zettaudev_int'
+        '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x')
+    assert link_more.attrib['href'] == (
+        'http://ze.tt/?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
+        '&utm_medium=fix&utm_source=zon_zettaudev_int'
+        '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x')
 
 
 def test_zett_parquet_should_have_ads(testbrowser):
@@ -1941,12 +1947,16 @@ def test_zett_teaser_should_contain_campaign_parameter(testbrowser):
     assert len(zett_parquet_links)
 
     for link in links:
-        assert ('?utm_campaign=zonteaser&utm_medium=teaser'
-                '&utm_source=zon') in link.get('href')
+        assert ('?utm_campaign=ref&utm_content=zett_zon_teaser_teaser_x'
+                '&utm_medium=fix&utm_source=zon_zettaudev_int'
+                '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_teaser.teaser.x'
+                ) in link.get('href')
 
     for link in zett_parquet_links:
-        assert ('?utm_campaign=zonparkett&utm_medium=parkett'
-                '&utm_source=zon') in link.get('href')
+        assert ('?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
+                '&utm_medium=fix&utm_source=zon_zettaudev_int'
+                '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x'
+                ) in link.get('href')
 
 
 def test_printkiosk_is_structured_correctly(testbrowser):
@@ -2867,3 +2877,14 @@ def test_ressortpage_returns_is_ressortpage_correctly(
         'http://xml.zeit.de/angebote/leseperlen')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
     assert not view.is_ressortpage
+
+
+def test_special_ressortpage_returns_is_ressortpage_correctly(
+        application, monkeypatch, dummy_request):
+
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/main-teaser-setup')
+    monkeypatch.setattr(
+        zeit.web.site.view_centerpage.Centerpage, u'ressort', u'mobilitaet')
+    view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
+    assert view.is_ressortpage

@@ -5,10 +5,42 @@ POSTDEPLOY
 ----------
 
 
-3.52 (unreleased)
+3.54 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3799: Change campaign tracking for zett teasers
+
+- ZON-3786: Redesign mobile ad slots
+
+- BUG-712/713: Fix certain banner placement bugs
+
+
+3.53.1 (2017-04-21)
+-------------------
+
+- FIX: ZON-3784: Override global styling for ZCO .ad-mobile-3
+
+
+3.53 (2017-04-21)
+-----------------
+
+- ZON-3784: Add new mobile AdPlace 3 to ZCO CPs
+
+- ZON-3873: Change wording on paywall
+
+- ZON-3757: Refactor Adtile placement
+
+- ZON-3757: Introduce adtile3 inside articles
+
+
+3.52 (2017-04-18)
+-----------------
+
+- ZON-3782: Add new mobile AdPlace to ZMO CPs
+
+- BUG-706: Center up authorbox content for authors without image
+
+- FEM-37: Replace grunt taskrunner with npm
 
 
 3.51 (2017-04-11)

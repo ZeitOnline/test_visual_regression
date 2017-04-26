@@ -396,17 +396,6 @@ def test_get_svg_from_file_should_return_no_a11y_svg(application):
     assert 'aria-label="Neu laden"' not in svg
 
 
-def test_get_svg_from_file_should_return_unclean_svg(application):
-    name = 'reload'
-    class_name = 'reload-test'
-    package = 'zeit.web.site'
-    a11y = False
-    cleanup = False
-    svg = zeit.web.core.template.get_svg_from_file(
-        name, class_name, package, cleanup, a11y)
-    assert 'fill="#444' in svg
-
-
 def test_get_svg_without_package_should_be_empty_str(application):
     name = 'reload'
     class_name = 'reload-test'
@@ -544,7 +533,7 @@ def test_adplaces_are_correctly_returned(dummy_request):
     view = zeit.web.site.view_article.AcceleratedMobilePageArticle(
         article, dummy_request)
     adplaces = zeit.web.core.template.adplaces(view.pages, [(0, 3), (3, 4)])
-    assert adplaces == [(0, 0, 3), (0, 6, 4)]
+    assert adplaces == [(0, 0, 3), (0, 7, 4)]
 
     short_article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/simple-verlagsnextread')

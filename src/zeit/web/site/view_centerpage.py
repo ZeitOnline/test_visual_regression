@@ -52,14 +52,8 @@ class Centerpage(
 
     @zeit.web.reify
     def is_ressortpage(self):
-        if self.context.type == 'centerpage':
-            try:
-                if zeit.web.core.navigation.NAVIGATION_SOURCE.by_name[
-                        self.ressort]:
-                    return True
-            except KeyError:
-                pass
-        return False
+        navi = zeit.web.core.navigation.NAVIGATION_SOURCE.navigation
+        return any([self.ressort in n for n in navi])
 
     def buzzboard_images(self, image=None):
         # The list we return shall not include the current image but still be
