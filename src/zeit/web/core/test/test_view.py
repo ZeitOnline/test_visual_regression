@@ -1011,7 +1011,7 @@ def test_user_name_and_email_are_displayed_correctly(
             'mail': 'test@example.org',
         }
         driver.get('%s/zeit-online/slenderized-index' % testserver.url)
-        assert (u'test@example.org' in driver.find_element_by_class_name(
+        assert (u'TEST@EXAMPLE.ORG' in driver.find_element_by_class_name(
             'nav__user-name').text)
     with mock.patch('zeit.web.core.security.get_user_info') as get_user:
         get_user.return_value = {
@@ -1021,7 +1021,7 @@ def test_user_name_and_email_are_displayed_correctly(
         }
         # check if user name is displayed
         driver.get('%s/zeit-online/slenderized-index' % testserver.url)
-        assert (u'jrandom' in driver.find_element_by_class_name(
+        assert (u'JRANDOM' in driver.find_element_by_class_name(
             'nav__user-name').text)
 
 
