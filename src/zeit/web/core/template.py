@@ -885,6 +885,9 @@ def debugger():
     pdb.set_trace()
 
 
+# XXX: Remove ASAP
+# Temporary hack, needed until we deliver www.zeit.de via SSL.
+# We use this mainly for framebuilder?useSSL context.
 @zeit.web.register_filter
 def rewrite_for_ssl_if_required(url, rewrite_required=False):
     if rewrite_required:
