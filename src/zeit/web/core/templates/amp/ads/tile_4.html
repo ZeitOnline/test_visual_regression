@@ -2,3 +2,9 @@
 {% set tile_number = 4 %}
 {% set width = '320' %}
 {% set height = '320' %}
+
+{% block adplace %}
+<div class="article__item--large">
+    {{ super() }}
+</div>
+{% endblock %}

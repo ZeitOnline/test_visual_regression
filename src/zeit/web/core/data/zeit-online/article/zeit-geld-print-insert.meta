@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/zeit-online/article/zeit-geld-print-insert</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Wirtschaft;Geld</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schwarze</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">4774</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2017-04-13T09:34:34.125924+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Wirtschaft</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2017-04-13T09:34:36.022873+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2017-04-03T05:56:09+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEB-2017-14</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-04-13T09:33:40.208211+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2017-03-30T06:00:00+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">GM1 Kontowechsel</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">W16</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">online_46886787</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-04-13T09:34:34.228526+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="disabled"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="overscrolling">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.default</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:3acfcc80-2085-4a6a-9c6a-dfd2a893626c}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Geldanlage</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">GM1 Kontowechsel</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZBGE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2017-04-03T05:56:10.973617+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-04-13T09:34:34.305286+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEB-2017-14-GM1-Kontowechsel</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">zon-article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments_premoderate">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">30.03.2017</attribute>
+  <rankedTags>
+    <tag uuid="eeab42d7-2d83-4634-ab9c-86ec1cd4f378" url_value="bank" type="free">Bank</tag>
+    <tag uuid="69b5f7bb-7108-4887-9ce0-ae4ce4fef92e" url_value="gebuehr" type="free">Geb&#xFC;hr</tag>
+    <tag uuid="bfa36b75-05f4-4865-b4db-29efccbba61f" url_value="geldanlage" type="free">Geldanlage</tag>
+    <tag uuid="4a227269-80e8-480a-9e81-fc9793fa73fe" url_value="kundenservice" type="free">Kundenservice</tag>
+    <tag uuid="ecd510fd-ac64-451a-a95a-552448b3e8ac" url_value="verbraucherzentrale" type="free">Verbraucherzentrale</tag>
+    <tag uuid="abec5957-d705-4e04-9602-dbefc3fa853b" url_value="waffenhandel" type="free">Waffenhandel</tag>
+    <tag uuid="35412dac-1753-47db-aba2-7c86ba4368d3" url_value="hamburg" type="Location">Hamburg</tag>
+    <tag uuid="90e688ef-af90-4b73-962d-087836eb274d" url_value="atomkraft" type="free">Atomkraft</tag>
+  </rankedTags>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2017-04-13T09:34:34.595496+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1149797094</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned">eeab42d7-2d83-4634-ab9c-86ec1cd4f378 69b5f7bb-7108-4887-9ce0-ae4ce4fef92e bfa36b75-05f4-4865-b4db-29efccbba61f</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">ea1819f209da4bfea0738d8ee72a1511</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Laura Cwiertnia</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">14</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;unicode&gt;Wer sein Girokonto bei einer ethisch korrekten Bank er&#xF6;ffnen will, hat wenig Auswahl. &lt;/unicode&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitmagazin&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitcampus&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;unicode&gt;zeitonline_wir&lt;/unicode&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="channels"&gt; &lt;string&gt;channel-news&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;mobile&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Das #Girokonto zu wechseln, soll ganz leicht sein. Wirklich? @LauraCwiertnia hat's ausprobiert + schreibt @ZEITGeld </attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Wirtschaft</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">a57006da664c453d8393180f2abc9a8c</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Zeit Geld</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2017</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2017-04-13T09:34:34Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">24987</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Thu, 13 Apr 2017 09:34:34 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"fb1c14-619b-54d090868c816"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>

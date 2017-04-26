@@ -1,25 +1,9 @@
 .advertising
-	+unpadded
-	background-color: $color-advertising-bg
-	border-bottom: 1px solid $color-border
-	border-top: 1px solid $color-border
-	text-align: center
-	amp-iframe
-		display: block
-		margin: 0 auto
+	display: table
+	margin: remify(40px auto 34px)
 	&:before
 		@extend %label
-		+padded
-		content: '\2003 Anzeige'
-		margin-left: auto
-		margin-right: auto
-		max-width: remify(660px)
-		padding-top: em(5px)
-		padding-bottom: em(5px)
-		text-align: left
-	&--place-3,
-	&--place-4
-		margin-bottom: remify(40px)
-		margin-top: remify(40px)
-		&:before
-			padding: em(5px 0)
+		content: "Anzeige"
+		+respond-max(em(320px), false)
+			padding: remify(0 10px)
+

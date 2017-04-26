@@ -282,8 +282,7 @@ class Article(zeit.web.core.view.Content):
 
             if self.volume:
                 badge.update({
-                    'cover': self.volume.get_cover(
-                        'printcover', self.product_id),
+                    'cover': self.volume.get_cover('printcover'),
                     'link': self.volume.fill_template(
                         'http://%s/{year}/{name}' % self.request.host),
                     'volume_exists': True
