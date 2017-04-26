@@ -8,6 +8,8 @@ POSTDEPLOY
 3.54 (unreleased)
 -----------------
 
+- ZON-3799: Change campaign tracking for zett teasers
+
 - ZON-3786: Redesign mobile ad slots
 
 - BUG-712/713: Fix certain banner placement bugs
