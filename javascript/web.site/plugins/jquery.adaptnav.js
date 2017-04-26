@@ -5,7 +5,7 @@
  * @author moritz.stoltenburg@zeit.de
  * @version  0.2
  */
-( function( $ ) {
+( function( $, Zeit ) {
 
     /**
     * See (http://jquery.com/)
@@ -70,7 +70,7 @@
                 this.adapt();
 
                 // trigger adaption on resize
-                $( window ).on( 'resize', $.debounce( function() {
+                $( window ).on( 'resize', Zeit.debounce( function() {
                     self.adapt();
                 }, 100 ) );
                 // BUG-549
@@ -120,4 +120,4 @@
         });
 
     };
-})( jQuery );
+})( jQuery, window.Zeit );

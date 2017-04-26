@@ -1,52 +1,30 @@
-/**
- * @fileOverview zeit.web.site framebuilder module
- * @version  0.1
- */
 
-// A hack for Modernizr and AMD.
-// This lets Modernizr be in the <head> and also compatible with other modules.
-define( 'modernizr', [], window.Modernizr );
+var $ = require( 'jquery' ),
+    zeit = require( 'web.core/zeit' ),
+    menu = require( 'web.core/menu' ),
+    clicktracking = require( 'web.core/clicktracking' ),
+    adblockCount = require( 'web.site/adblockCount.js' ),
+    adReload = require( 'web.core/adReload' );
 
-// include requirejs
-require([ 'vendor/require' ], function() {});
+// remove jQuery from global scope (needles with node/webpack)
+// $.noConflict( true );
 
-// require anonymous AMD modules here
-require([
-    'web.core/zeit',
-    'web.core/menu',
-    'web.core/clicktracking',
-    'web.site/adblockCount.js',
-    'web.core/adReload'
-], function(
-    zeit,
-    menu,
-    clicktracking,
-    adblockCount,
-    adReload
-) {
-    menu.init({ followMobile: 'always' });
-    clicktracking.init();
-    adblockCount.init();
-    adReload.init();
-    zeit.clearQueue();
-});
+// initialize modules
+menu.init({ followMobile: 'always' });
+clicktracking.init();
+adblockCount.init();
+adReload.init();
+zeit.clearQueue();
 
 // add required jQuery plugins
-// require jQuery first, so we don't have to shim simple plugins
-// plugins that require other plugins or libraries must use the shim config
-require([
-    'jquery',
-    'web.site/plugins/jquery.adaptnav',
-    'web.site/plugins/jquery.extendfooter',
-    'web.site/plugins/jquery.togglesearch'
-], function( $ ) {
-    // remove jQuery from global scope
-    $.noConflict( true );
+require( 'web.core/plugins/jquery.scrollIntoView' ); // plugin used by other plugins
+require( 'web.site/plugins/jquery.adaptnav' );
+require( 'web.site/plugins/jquery.extendfooter' );
+require( 'web.site/plugins/jquery.togglesearch' );
 
-    // global and "above the fold"
-    $( '.nav__search' ).toggleSearch();
-    $( '.nav__ressorts-list' ).adaptToSpace();
+// global and "above the fold"
+$( '.nav__search' ).toggleSearch();
+$( '.nav__ressorts-list' ).adaptToSpace();
 
-    // more ("non critical") global stuff
-    $( '.footer-publisher__more' ).extendFooter();
-});
+// more ("non critical") global stuff
+$( '.footer-publisher__more' ).extendFooter();

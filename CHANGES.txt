@@ -8,7 +8,7 @@ POSTDEPLOY
 3.55 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FEM-39: Use webpack for javascript bundling
 
 
 3.54 (2017-04-26)
