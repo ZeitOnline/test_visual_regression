@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - FEM-39: Use webpack for javascript bundling
 
+- FIX: Remove unwanted page padding for adslots on CPs
+
 
 3.54 (2017-04-26)
 -----------------
