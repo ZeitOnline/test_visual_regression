@@ -6,7 +6,7 @@
  * images.js: module for images
  * @module images
  */
-define([ 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], function( $, Zeit ) {
+define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
 
     var images = [],
         $w = $( window ),
@@ -375,9 +375,9 @@ define([ 'jquery', 'web.core/zeit', 'jquery.debounce', 'jquery.throttle' ], func
         }
         images = prepareImages();
         showImages();
-        $w.on( 'scroll.lazy', $.throttle( showLazyImages, 50 ) );
+        $w.on( 'scroll.lazy', Zeit.throttle( showLazyImages, 50 ) );
         showLazyImages();
-        $w.on( 'resize.rescale', $.debounce( rescaleAll, 1000 ) );
+        $w.on( 'resize.rescale', Zeit.debounce( rescaleAll, 1000 ) );
     }
 
     return {
