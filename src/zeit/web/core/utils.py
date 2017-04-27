@@ -512,6 +512,7 @@ class LazyProxy(object):
         return zeit.content.video.video.Video.seo_slug.__get__(self)
 
     # Proxy zeit.content.volume.interfaces.IVolume.get_cover
+    # Returns main product_id by default as a fallback
     def get_cover(self, cover_id, product_id=None):
         # We ignore product_id, since it's only relevant for content talking
         # about its volume, not for a teaser of the volume itself (which is all

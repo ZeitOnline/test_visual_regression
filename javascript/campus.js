@@ -1,87 +1,58 @@
-/**
- * @fileOverview zeit.web.campus module
- * @version  0.1
- */
 
-// A hack for Modernizr and AMD.
-// This lets Modernizr be in the <head> and also compatible with other modules.
-define( 'modernizr', [], window.Modernizr );
+var $ = require( 'jquery' ),
+    zeit = require( 'web.core/zeit' ),
+    images = require( 'web.core/images' ),
+    clicktracking = require( 'web.core/clicktracking' ),
+    triggeredEventTracking = require( 'web.core/triggeredEventTracking' ),
+    adReload = require( 'web.core/adReload' ),
+    menu = require( 'web.core/menu' ),
+    comments = require( 'web.core/comments' ),
+    articledate = require( 'web.core/articledate' ),
+    article = document.getElementById( 'js-article' ),
+    pageType = document.body.getAttribute( 'data-page-type' ),
+    main = $( '#main' );
 
-// include requirejs and config first, including path and shim config
-require([ 'vendor/require', 'config' ], function() {});
+// remove jQuery from global scope (needles with node/webpack)
+// $.noConflict( true );
 
-// require anonymous AMD modules here
-require([
-    'web.core/zeit',
-    'web.core/images',
-    'web.core/clicktracking',
-    'web.core/triggeredEventTracking',
-    'web.core/adReload',
-    'web.core/menu',
-    'web.core/comments',
-    'web.core/articledate'
-], function(
-    zeit,
-    images,
-    clicktracking,
-    triggeredEventTracking,
-    adReload,
-    menu,
-    comments,
-    articledate
-) {
-    var article = document.getElementById( 'js-article' );
+// initialize modules
+images.init();
+menu.init();
+clicktracking.init();
+triggeredEventTracking.init();
+adReload.init();
+zeit.clearQueue();
 
-    images.init();
-    menu.init();
-    clicktracking.init();
-    triggeredEventTracking.init();
-    adReload.init();
-    zeit.clearQueue();
-
-    if ( article ) {
-        comments.init();
-        articledate.init();
-    }
-});
+if ( article ) {
+    comments.init();
+    articledate.init();
+}
 
 // add required jQuery plugins
-// require jQuery first, so we don't have to shim simple plugins
-// plugins that require other plugins or libraries must use the shim config
-require([
-    'jquery',
-    'velocity.ui',
-    'web.core/plugins/jquery.scrollIntoView', // plugin used by other plugins
-    'web.core/plugins/jquery.animatescroll',
-    'web.core/plugins/jquery.toggleRegions',
-    'web.core/plugins/jquery.infobox',
-    'web.core/plugins/jquery.inlinegallery',
-    'web.core/plugins/jquery.imageCopyrightFooter',
-    'web.core/plugins/jquery.referrerCount',
-    'web.core/plugins/jquery.countFormchars',
-    'web.core/plugins/jquery.notifications'
-], function( $ ) {
-    var pageType = document.body.getAttribute( 'data-page-type' ),
-        main = $( '#main' );
+require( 'velocity.ui' );
+require( 'web.core/plugins/jquery.scrollIntoView' ); // plugin used by other plugins
+require( 'web.core/plugins/jquery.animatescroll' );
+require( 'web.core/plugins/jquery.toggleRegions' );
+require( 'web.core/plugins/jquery.infobox' );
+require( 'web.core/plugins/jquery.inlinegallery' );
+require( 'web.core/plugins/jquery.imageCopyrightFooter' );
+require( 'web.core/plugins/jquery.referrerCount' );
+require( 'web.core/plugins/jquery.countFormchars' );
+require( 'web.core/plugins/jquery.notifications' );
 
-    // remove jQuery from global scope
-    $.noConflict( true );
+$( window ).referrerCount();
+$.notifications();
+$( '.js-scroll' ).animateScroll();
 
-    $( window ).referrerCount();
-    $.notifications();
-    $( '.js-scroll' ).animateScroll();
+switch ( pageType ) {
+    case 'article':
+        main.find( '.js-infobox' ).infobox();
+        main.find( '.article-toc' ).toggleRegions();
+        main.find( '.comment-section' ).countFormchars();
 
-    switch ( pageType ) {
-        case 'article':
-            main.find( '.js-infobox' ).infobox();
-            main.find( '.article-toc' ).toggleRegions();
-            main.find( '.comment-section' ).countFormchars();
+    /* falls through */
+    case 'gallery':
+        main.find( '.js-gallery' ).inlinegallery();
+}
 
-        /* falls through */
-        case 'gallery':
-            main.find( '.js-gallery' ).inlinegallery();
-    }
-
-    $( '.js-image-copyright-footer' ).imageCopyrightFooter();
-
-});
+$( '.js-image-copyright-footer' ).imageCopyrightFooter();
