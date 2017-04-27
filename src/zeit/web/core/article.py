@@ -80,11 +80,16 @@ def _inject_banner_code(pages, pubtype):
     p_length = conf.get('sufficient_paragraph_length', 10)
 
     for page_number, page in enumerate(pages, start=1):
+
+        # (1) find everything which is a text-paragraph
         paragraphs = filter(lambda b: isinstance(
             b, zeit.web.core.block.Paragraph), page.blocks)
+
+        # (2) get a list of those paragraphs, after which we can insert ads
         paragraphs = _paragraphs_by_length(
             paragraphs, sufficient_length=p_length)
 
+        # (3a) Match ads to the cloned list of long paragraphs
         for index, paragraph in enumerate(paragraphs, start=1):
             try:
                 ad = [ad for ad in adconfig[pubtype]['ads'] if ad[
@@ -93,6 +98,7 @@ def _inject_banner_code(pages, pubtype):
             except IndexError:
                 continue
             if ad is not None:
+                # (3b) Insert the ad into the real page blocks
                 for i, block in enumerate(page.blocks, start=1):
                     if paragraph == block:
                         if ad['tile'] == 'content_ad':
