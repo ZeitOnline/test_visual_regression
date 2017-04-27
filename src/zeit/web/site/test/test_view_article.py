@@ -2357,3 +2357,11 @@ def test_article_can_include_optimizely(testbrowser):
     settings['optimizely_on_zon_article'] = optimizely_url
     browser = testbrowser('/zeit-online/article/simple')
     assert optimizely_url in browser.contents
+
+
+def test_zplus_badge_is_zeit_on_print_insert(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit-geld-print-insert')
+    assert len(browser.cssselect(
+        '.zplus-badge__media-item[src$="/printcover/original"]')) == 1
+    assert len(browser.cssselect('.volume-teaser__media-item'
+               '[src$="/printcover-beilage-geld/original"]')) == 1

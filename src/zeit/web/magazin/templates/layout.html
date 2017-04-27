@@ -70,7 +70,7 @@
             <script src="//localhost:35729/livereload.js"></script>
         {% endif %}
     </head>
-    <body data-ad-delivery-type="{{ view.ad_delivery_type }}"{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
+    <body{% if view.is_wrapped %} data-is-wrapped="true"{% endif %}{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
         {% include "zeit.web.core:templates/inc/tag-manager.html" %}
         {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
@@ -174,9 +174,6 @@
         {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
         {% include "zeit.web.core:templates/inc/tracking/meetrics.html" %}
 
-        <script>
-            var require = { baseUrl: '{{ request.asset_host }}/js/' };
-        </script>
         <script src="{{ request.asset_host }}/js/magazin.js"></script>
 
         {% if view.vgwort_url %}
