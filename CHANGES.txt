@@ -8,6 +8,8 @@ POSTDEPLOY
 3.55 (unreleased)
 -----------------
 
+- BUG-707: Framebuilder useSSL includes SSL favicon
+
 - BUG-709: Load adreload_config via SSL in framebuilder?useSSL
 
 - FEM-39: Use webpack for javascript bundling
