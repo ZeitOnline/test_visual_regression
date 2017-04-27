@@ -348,4 +348,3 @@ def test_framebuilder_uses_ssl_assets(testbrowser):
     assert '{}js/vendor/modernizr-custom.js'.format(
         ssl_str) in browser.contents
     assert '{}js/web.site/frame.js'.format(ssl_str) in browser.contents
-    assert 'https://ssl.zeit.de/www.zeit.de/favicon.ico' in browser.contents
