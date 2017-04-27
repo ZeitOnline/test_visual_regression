@@ -1,6 +1,6 @@
 .author-header
     background-color: $cararra
-    margin: 0 (-$page-padding) remify(40px)
+    margin: remify(0 0 40px)
 
     &__inner
         +respond-min($break-tablet-min)
@@ -45,9 +45,7 @@
         margin: 0
         +respond-min($break-tablet-min)
             font-size: em(32px)
-            line-height: 1.2
             max-height: remify(32px) * 1.2 * 2 // allow 2 lines maximum
-            max-width: none
             overflow: hidden
 
     &__summary
