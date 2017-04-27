@@ -52,7 +52,7 @@
             if ( constrained.length ) {
                 // set resize event listener on initial call
                 if ( !update ) {
-                    $( window ).on( 'resize', $.debounce( function() {
+                    $( window ).on( 'resize', Zeit.debounce( function() {
                         if ( breakpoint !== Zeit.breakpoint.get() ) {
                             controls.off( 'click.region' );
                             initRegion( element, true );

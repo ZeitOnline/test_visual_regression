@@ -13,6 +13,7 @@
 	<product id="ZECH" label="DIE ZEIT" show="issue">Zeit Schweiz</product>
 	<product id="ZEOE" label="DIE ZEIT" show="issue">Zeit Oesterreich</product>
 	<product id="ZESA" label="DIE ZEIT" show="issue">Zeit im Osten</product>
+	<product id="ZBGE" relates_to="ZEI" label="ZEIT Geld" autochannel="false" counter="print">Zeit Geld</product>
 	<product id="ZSF">Zeit Studienführer</product>
 	<product id="KINZ">Kinderzeit Magazin</product>
 	<product id="ADV">Advertorial</product>

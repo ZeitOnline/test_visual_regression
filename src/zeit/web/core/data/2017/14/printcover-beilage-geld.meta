@@ -1,0 +1,41 @@
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+<attribute ns="DAV:" name="href">/cms/work/2017/14/printcover-beilage-geld/</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-03-30T07:20:35.284635+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">
+<pickle> <tuple> <tuple> <unicode>Die aktuelle ZEIT können Sie am Kiosk oder hier erwerben.</unicode> <string>http://premium.zeit.de/aktuelle-zeit?wt_zmc=fix.int.zonpme.zeitde.artikelbox.ausgseite.bildtext.text.text&amp;amp;utm_medium=fix&amp;amp;utm_source=zeitde_zonpme_int&amp;amp;utm_campaign=artikelbox&amp;amp;utm_content=ausgseite_bildtext_text_text</string> <false/> </tuple> </tuple> </pickle>
+</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/image" name="links_to">
+http://premium.zeit.de/aktuelle-zeit?wt_zmc=fix.int.zonpme.zeitde.artikelbox.ausgseite.bildtext.cover.cover&amp;utm_medium=fix&amp;utm_source=zeitde_zonpme_int&amp;utm_campaign=artikelbox&amp;utm_content=ausgseite_bildtext_cover_cover
+</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.Manthe</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-03-29T08:09:15.328119+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="title">ZEIT Geld 14/2017</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">ZEIT Geld 14/2017</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2017-03-29T08:09:21.345114+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:86f71214-12cb-4199-a685-9ec18e27ca56}</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/image" name="master_images">
+<pickle> <tuple> <tuple> <unicode>desktop</unicode> <unicode>Tabloid-Ausgabenseite-Ohne-Schatten.jpg</unicode> </tuple> </tuple> </pickle>
+</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">
+Dieser Artikel stammt aus ZEIT GELD Nr. 14 vom 30.3.2017.
+</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2017-03-29T08:09:21.381322+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-03-30T07:20:35.326219+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">
+<pickle> <initialized_object> <klass> <global name="Provides" module="zope.interface.declarations"/> </klass> <arguments> <tuple> <global name="LocalImageGroup" module="zeit.content.image.imagegroup"/> <global name="IZONContent" module="zeit.cms.section.interfaces"/> </tuple> </arguments> </initialized_object> </pickle>
+</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2017-03-29T08:09:22.912061+00:00</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/image" name="nofollow">no</attribute>
+<attribute ns="DAV:" name="resourcetype"/>
+<attribute ns="DAV:" name="creationdate">2017-03-30T07:20:35Z</attribute>
+<attribute ns="DAV:" name="getlastmodified">Thu, 30 Mar 2017 07:20:35 GMT</attribute>
+<attribute ns="DAV:" name="getetag">"fba0ed-1000-54bed87778c38"</attribute>
+<attribute ns="DAV:" name="supportedlock"></attribute>
+<attribute ns="DAV:" name="lockdiscovery">
+0 ldap.MantheSecond-238 opaquelocktoken:dabdee95-5538-4e85-88ee-a09bf74babff
+</attribute>
+<attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>

@@ -9,7 +9,6 @@ define([
     'velocity.ui',
     'web.core/zeit',
     'web.core/clicktracking',
-    'jquery.throttle',
     'jquery.inview' ], function( Modernizr, $, Velocity, Zeit, Clicktracking ) {
     var defaults = {
             documentMinHeight: 800,
@@ -174,7 +173,7 @@ define([
             }
         });
 
-        $( window ).on( 'scroll.over', $.throttle( function() {
+        $( window ).on( 'scroll.over', Zeit.throttle( function() {
             animateCircleByScroll();
             if ( $( window ).scrollTop() >= $( document ).height() - $( window ).height() ) {
                 if ( debug ) {
