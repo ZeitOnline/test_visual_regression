@@ -217,7 +217,7 @@ class LegacyCenterpage(Centerpage):
             region_fullwidth = Region([self.area_solo])
             regions.append(region_fullwidth)
 
-        region_multi = Region([self.area_major, self.area_minor], kind='multi')
+        region_multi = Region([self.area_major, self.area_minor], kind='duo')
         regions.append(region_multi)
 
         regions += self.region_list_parquet
