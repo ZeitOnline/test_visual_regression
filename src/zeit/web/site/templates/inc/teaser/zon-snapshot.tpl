@@ -4,6 +4,8 @@
 {% set module_layout = 'snapshot' %}
 
 <div class="{{ module_layout }}">
-    {{ cp.section_heading(module.title, module.read_more, module.read_more_url, None, tracking_slug ~ module.read_more | format_webtrekk) }}
+    <div class="{{ module_layout }}__title">
+        {{ cp.section_heading(module.title, module.read_more, module.read_more_url, None, tracking_slug ~ module.read_more | format_webtrekk) }}
+    </div>
     {% include "zeit.web.site:templates/inc/asset/image_snapshot.tpl" %}
 </div>
