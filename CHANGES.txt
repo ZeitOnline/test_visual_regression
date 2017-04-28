@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.55 (unreleased)
+3.55 (2017-04-28)
 -----------------
 
 - BUG-707: Framebuilder useSSL includes SSL favicon
