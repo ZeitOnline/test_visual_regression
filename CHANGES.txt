@@ -8,7 +8,9 @@ POSTDEPLOY
 3.56 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3822: Implement AdTile3+4 on FBIA analogous to core logic
+
+- ZON-3822: Remove AdTile5 from FBIA
 
 
 3.55 (2017-04-28)
