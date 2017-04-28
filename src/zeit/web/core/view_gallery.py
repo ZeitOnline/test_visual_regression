@@ -2,7 +2,7 @@ import grokcore.component
 import lxml.objectify
 import zope.component
 import zope.interface
-
+import pyramid.httpexceptions
 import zeit.content.gallery.interfaces
 import zeit.content.article.edit.reference
 import zeit.content.article.interfaces
@@ -33,6 +33,15 @@ class Gallery(zeit.web.core.view.Content):
     def webtrekk_assets(self):
         return ['gallery.0/seite-1']
 
+
+@zeit.web.view_config(
+    name = 'seite',
+    path_info='.*seite-(.*)')
+class GalleryPage(Gallery):
+
+    def __call__(self):
+        raise pyramid.httpexceptions.HTTPMovedPermanently(
+            location=self.og_url)
 
 @zope.component.adapter(zeit.content.image.interfaces.IImage)
 @zope.interface.implementer(zeit.content.image.interfaces.IPersistentThumbnail)

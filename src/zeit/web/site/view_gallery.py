@@ -9,3 +9,6 @@ import zeit.web.site.view
     custom_predicates=(zeit.web.site.view.is_zon_content,))
 class Gallery(zeit.web.core.view_gallery.Gallery, zeit.web.site.view.Base):
     pass
+
+class GalleryPage(zeit.web.core.view_gallery.GalleryPage, Gallery):
+    pass
