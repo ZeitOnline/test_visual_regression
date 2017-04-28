@@ -13,11 +13,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 def test_responsecode(config):
-    resp = requests.get('{}/index'.format(config['BASE_URL']))
+    resp = requests.get('{}/index'.format(config['BASE_URL']), timeout=10)
     assert resp.status_code == 200
-    resp = requests.get('{}/zeit-magazin/index'.format(config['BASE_URL']))
+    resp = requests.get(
+        '{}/zeit-magazin/index'.format(config['BASE_URL']), timeout=10)
     assert resp.status_code == 200
-    resp = requests.get('{}/campus/index'.format(config['BASE_URL']))
+    resp = requests.get(
+        '{}/campus/index'.format(config['BASE_URL']), timeout=10)
     assert resp.status_code == 200
 
 

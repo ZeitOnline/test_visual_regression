@@ -995,6 +995,36 @@ def test_notification_script_does_not_edit_unknown_hashes(
         assert url_hash in driver.current_url
 
 
+def test_user_name_and_email_are_displayed_correctly(
+        testserver, selenium_driver):
+    driver = selenium_driver
+    # request some arbitrary article page and set loggedin-cookie
+    driver.get('%s/zeit-online/article/01' % testserver.url)
+    driver.add_cookie({
+        'name': 'my_sso_cookie',
+        'value': 'just be present',
+    })
+    # check if user email is displayed if no name provided
+    with mock.patch('zeit.web.core.security.get_user_info') as get_user:
+        get_user.return_value = {
+            'ssoid': '123',
+            'mail': 'test@example.org',
+        }
+        driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+        assert (u'TEST@EXAMPLE.ORG' in driver.find_element_by_class_name(
+            'nav__user-name').text)
+    with mock.patch('zeit.web.core.security.get_user_info') as get_user:
+        get_user.return_value = {
+            'ssoid': '123',
+            'mail': 'test@example.org',
+            'name': 'jrandom',
+        }
+        # check if user name is displayed
+        driver.get('%s/zeit-online/slenderized-index' % testserver.url)
+        assert (u'JRANDOM' in driver.find_element_by_class_name(
+            'nav__user-name').text)
+
+
 def test_notification_after_account_confirmation_renders_correctly(
         testserver, selenium_driver):
     driver = selenium_driver

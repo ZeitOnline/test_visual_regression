@@ -92,7 +92,7 @@
             // calculate/select more things that will remain unchanged
             this.bypass = this.$articleBody.find( this.fullwidthElements.join() );
 
-            $( window ).on( 'scroll', $.throttle( function() {
+            $( window ).on( 'scroll', Zeit.throttle( function() {
                 that.handleScrolling();
             }, 100 ) );
         },

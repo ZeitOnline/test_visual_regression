@@ -618,18 +618,6 @@ def test_gallery_should_have_correct_js_view(testbrowser):
     assert "'paywall': null," in bc
 
 
-def test_iqd_mobile_settings_are_filled(application):
-    # tested just as examlpe for an article here, all possible combinations
-    # are tested in test_banner.py integration tests
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/01')
-    view = zeit.web.magazin.view_article.Article(
-        article, mock.MagicMock(return_value=''))
-    assert view.iqd_mobile_settings.get('top') == '445612'
-    assert view.iqd_mobile_settings.get('middle') == '445612'
-    assert view.iqd_mobile_settings.get('bottom') == '445612'
-
-
 def test_http_header_should_contain_version(testserver):
     pkg = pkg_resources.get_distribution('zeit.web')
     pkg_version = pkg.version

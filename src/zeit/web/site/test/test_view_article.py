@@ -11,7 +11,6 @@ import lxml.etree
 import mock
 import pyramid.testing
 import pytest
-import re
 import requests
 import zope.component
 
@@ -1348,30 +1347,21 @@ def test_instantarticle_should_render_empty_page_on_interrupt(testserver):
     assert len(resp.text) == 0
 
 
-def test_instantarticle_should_render_ads(testbrowser):
+def test_instantarticle_should_render_ads(testbrowser, monkeypatch):
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'fbia_advertising': True,
+        'iqd_mobile_transition_article': True
+    }.get)
+
     browser = testbrowser(
         '/instantarticle/zeit-online/article/simple-multipage')
     assert len(browser.cssselect(
+        'iframe[src$="/static/latest/html/fbia-ads/tile-3.html"]')) == 1
+    assert len(browser.cssselect(
         'iframe[src$="/static/latest/html/fbia-ads/tile-4.html"]')) == 1
     assert len(browser.cssselect(
-        'iframe[src$="/static/latest/html/fbia-ads/tile-5.html"]')) == 1
-    assert len(browser.cssselect(
         'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
-
-
-def test_instantarticle_shows_ad_after_100_words(testbrowser):
-    word_count = 0
-    bro = testbrowser('/instantarticle/zeit-online/article/simple-multipage')
-    blocks = bro.xpath('body/article/*')
-    blocks = blocks[1:]
-    for block in blocks:
-        if block.tag == 'p':
-            words = len(re.findall(r'\S+', block.text_content()))
-            word_count = word_count + words
-        if block.tag == 'figure':
-            assert block.cssselect('iframe[src*="tile-4"]')
-            break
-    assert word_count > 100
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
@@ -1609,7 +1599,7 @@ def test_article_should_not_render_expired_video(testbrowser):
     browser = testbrowser('/zeit-online/article/video-expired')
     articlepage = browser.cssselect('.article-page')
     articleitems = articlepage[0].getchildren()
-    assert len(articleitems) == 2
+    assert len(articleitems) == 4
 
 
 def test_comment_count_in_metadata_not_shown_when_comments_disabled(
@@ -1742,9 +1732,6 @@ def test_infographics_mobile_should_have_proper_asset_source(
 
 def test_contentad_is_rendered_once_on_article_pages(testbrowser):
     selector = '#iq-artikelanker'
-
-    browser = testbrowser('/zeit-online/article/infoboxartikel')
-    assert len(browser.cssselect(selector)) == 1
 
     browser = testbrowser('/zeit-online/article/fischer')
     assert len(browser.cssselect(selector)) == 1
@@ -1978,9 +1965,15 @@ def test_volume_teaser_is_rendered_correctly(testbrowser):
     browser = testbrowser('/zeit-online/article/volumeteaser')
     volume_teaser = browser.cssselect('.volume-teaser')
     volume_teaser_link = browser.cssselect(
-        '.volume-teaser__link')[0].get('href')
+        '.volume-teaser__link')[0]
     assert len(volume_teaser) == 1
-    assert volume_teaser_link == 'https://premium.zeit.de/abo/diezeit/2016/01'
+    assert (
+        volume_teaser_link.get('href') ==
+        'https://premium.zeit.de/abo/diezeit/2016/01')
+    assert (
+        u'Dieser Artikel stammt aus der ZEIT Nr. 01/2016. '
+        u'Hier können Sie die gesamte Ausgabe lesen.'
+        in volume_teaser_link.text)
 
 
 def test_volume_teaser_display_correct_image_on_desktop(
@@ -2354,3 +2347,11 @@ def test_article_can_include_optimizely(testbrowser):
     settings['optimizely_on_zon_article'] = optimizely_url
     browser = testbrowser('/zeit-online/article/simple')
     assert optimizely_url in browser.contents
+
+
+def test_zplus_badge_is_zeit_on_print_insert(testbrowser):
+    browser = testbrowser('/zeit-online/article/zeit-geld-print-insert')
+    assert len(browser.cssselect(
+        '.zplus-badge__media-item[src$="/printcover/original"]')) == 1
+    assert len(browser.cssselect('.volume-teaser__media-item'
+               '[src$="/printcover-beilage-geld/original"]')) == 1

@@ -3,8 +3,10 @@
     {% if toggles('iqd_mobile_transition_zon_cp') %}
         {# new adplace, only on ressortpages, first region, first area, after second module #}
         {% if view.is_ressortpage and module_loop.length > 1 %}
-            {% if region_loop.index == 1 and area_loop.index == 1 and module_loop.index == 2 %}
-                {{ lama.adplace(banner(3), view, mobile=True) }}
+            {#  show after module 1 if solo region present else after module 2  #}
+            {% set after_module = 2 if region_loop.first else 1 %}
+            {% if area_loop.index == 1 and module_loop.index == after_module %}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place3.html" %}
             {% endif %}
         {% endif %}
     {% endif %}

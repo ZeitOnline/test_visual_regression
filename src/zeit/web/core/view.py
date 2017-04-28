@@ -476,10 +476,6 @@ class Base(object):
         return zeit.web.core.interfaces.IDetailedContentType(self.context)
 
     @zeit.web.reify
-    def ad_delivery_type(self):
-        return 'adcontroller'
-
-    @zeit.web.reify
     def breaking_news(self):
         return zeit.web.core.block.BreakingNews()
 

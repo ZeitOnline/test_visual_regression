@@ -324,14 +324,20 @@ def append_campaign_params(context, url):
 
         if kind == 'zett':
             campaign_params = {
-                'utm_campaign': 'zonparkett',
-                'utm_medium': 'parkett',
-                'utm_source': 'zon'}
+                'utm_content': 'zett_zon_parkett_teaser_x',
+                'utm_campaign': 'ref',
+                'utm_medium': 'fix',
+                'utm_source': 'zon_zettaudev_int',
+                'wt_zmc': 'fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x'
+            }
         else:
             campaign_params = {
-                'utm_campaign': 'zonteaser',
-                'utm_medium': 'teaser',
-                'utm_source': 'zon'}
+                'utm_campaign': 'ref',
+                'utm_content': 'zett_zon_teaser_teaser_x',
+                'utm_medium': 'fix',
+                'utm_source': 'zon_zettaudev_int',
+                'wt_zmc': 'fix.int.zettaudev.zon.ref.zett.zon_teaser.teaser.x'
+            }
 
         scheme, netloc, path, query, fragment = urlparse.urlsplit(url)
         query_params = urlparse.parse_qs(query)
@@ -677,14 +683,6 @@ def toggles(*keys):
 
 
 @zeit.web.register_global
-def banner(tile):
-    try:
-        return list(zeit.web.core.banner.BANNER_SOURCE)[tile - 1]
-    except IndexError:
-        return
-
-
-@zeit.web.register_global
 def interrupt(reason=None):
     if toggles('instantarticle_interrupts'):
         raise zeit.web.core.jinja.Interrupt(reason)
@@ -844,6 +842,10 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
     svg = xml.getroot()
     svg.set('class', 'svg-symbol {}'.format(class_name))
     svg.set('preserveAspectRatio', 'xMinYMin meet')
+    # Our SVGs get actually cleaned by
+    # https://github.com/ZeitOnline/zeit.web/blob/master/svgo.json, but we
+    # preserve this in case we use uncleaned SVGs that have not been processed
+    # by out build task.
     if cleanup:
         lxml.etree.strip_attributes(
             xml, 'fill', 'fill-opacity', 'stroke', 'stroke-width')
@@ -881,3 +883,14 @@ def urlquote_plus(text):
 @zeit.web.register_global
 def debugger():
     pdb.set_trace()
+
+
+# XXX: Remove ASAP
+# Temporary hack, needed until we deliver www.zeit.de via SSL.
+# We use this mainly for framebuilder?useSSL context.
+@zeit.web.register_filter
+def rewrite_for_ssl_if_required(url, rewrite_required=False):
+    if rewrite_required:
+        return url.replace(
+            'http://www.zeit.de/', 'https://ssl.zeit.de/www.zeit.de/')
+    return url

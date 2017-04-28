@@ -5,13 +5,84 @@ POSTDEPLOY
 ----------
 
 
-3.51 (unreleased)
+3.56 (unreleased)
 -----------------
+
+- ZON-3822: Implement AdTile3+4 on FBIA analogous to core logic
+
+- ZON-3822: Remove AdTile5 from FBIA
+
+
+3.55 (2017-04-28)
+-----------------
+
+- BUG-707: Framebuilder useSSL includes SSL favicon
+
+- BUG-709: Load adreload_config via SSL in framebuilder?useSSL
+
+- FEM-39: Use webpack for javascript bundling
+
+- FIX: Remove unwanted page padding for adslots on CPs
+
+
+3.54 (2017-04-26)
+-----------------
+
+- ZON-3864: Display email address for users without username
+
+- ZON-3861: Use ZEIT packshot for volume badge of print
+
+- ZON-3799: Change campaign tracking for zett teasers
+
+- ZON-3786: Redesign mobile ad slots
+
+- BUG-712/713: Fix certain banner placement bugs
+
+- BUG-701: Fix article header with badge in Safari 9
+
+- MAINT: Remove obsolete ad delivery type
+
+
+3.53.1 (2017-04-21)
+-------------------
+
+- FIX: ZON-3784: Override global styling for ZCO .ad-mobile-3
+
+
+3.53 (2017-04-21)
+-----------------
+
+- ZON-3784: Add new mobile AdPlace 3 to ZCO CPs
+
+- ZON-3873: Change wording on paywall
+
+- ZON-3757: Refactor Adtile placement
+
+- ZON-3757: Introduce adtile3 inside articles
+
+
+3.52 (2017-04-18)
+-----------------
+
+- ZON-3782: Add new mobile AdPlace to ZMO CPs
+
+- BUG-706: Center up authorbox content for authors without image
+
+- FEM-37: Replace grunt taskrunner with npm
+
+
+3.51 (2017-04-11)
+-----------------
+
+- ZON-3687: Move volume default teaser text to zeit.content.volume
 
 - BUG-589: Improve column teaser for IE8
 
 - MAINT: Use square image variant for square author images
  (author register, author page, column article, column teaser)
+
+- MAINT: Update vendor components
+  (normalize, picturefill, requirejs, velocity, jshint)
 
 
 3.50 (2017-03-31)

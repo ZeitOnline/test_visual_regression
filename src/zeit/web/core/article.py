@@ -1,4 +1,3 @@
-import copy
 import logging
 
 import gocept.lxml.objectify
@@ -57,33 +56,61 @@ class Page(object):
 
 
 def _inject_banner_code(pages, pubtype):
-    """Injecting banner code in page.blocks counts and injects only after
-    paragraphs, configured for zon, zmo, longforms... for now"""
-
-    banner_conf = {
+    adconfig = {
         'zon': {
-            'tiles': [7],  # banner tiles in articles
-            'ad_paras': [2],  # paragraph(s) to insert ad after
-            'content_ad_para': [4],  # paragraph/s to insert content ad after
-            'possible_pages': range(1, len(pages) + 1)
+            'pages': range(1, len(pages) + 1),
+            'ads': [{'tile': 7, 'paragraph': 2, 'type': 'desktop'},
+                    {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
+                    {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
         },
         'longform': {
-            'tiles': [7],
-            'ad_paras': [5],
-            'content_ad_para': [],  # no content ads for longforms
-            'possible_pages': [2]  # page 1 is somehow the "intro text"
+            'pages': [2],
+            'ads': [{'tile': 7, 'paragraph': 5, 'type': 'desktop'}]
         }
     }
 
-    for index, page in enumerate(pages, start=1):
-        if index in banner_conf[pubtype]['possible_pages']:
-            _place_adtag_by_paragraph(
-                page,
-                banner_conf[pubtype]['tiles'],
-                banner_conf[pubtype]['ad_paras'])
-            _place_content_ad_by_paragraph(
-                page,
-                banner_conf[pubtype]['content_ad_para'])
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('iqd_mobile_transition_article'):
+        # temporary append ad tile here
+        # put into config if toggle is deleted
+        place = {'tile': 3, 'paragraph': 1, 'type': 'mobile'}
+        adconfig['zon']['ads'].append(place)
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    p_length = conf.get('sufficient_paragraph_length', 10)
+
+    for page_number, page in enumerate(pages, start=1):
+
+        # (1) find everything which is a text-paragraph
+        paragraphs = filter(lambda b: isinstance(
+            b, zeit.web.core.block.Paragraph), page.blocks)
+
+        # (2) get a list of those paragraphs, after which we can insert ads
+        paragraphs = _paragraphs_by_length(
+            paragraphs, sufficient_length=p_length)
+
+        # (3a) Match ads to the cloned list of long paragraphs
+        for index, paragraph in enumerate(paragraphs, start=1):
+            try:
+                ad = [ad for ad in adconfig[pubtype]['ads'] if ad[
+                    'paragraph'] == index and page_number in adconfig[
+                    pubtype]['pages']][0]
+            except IndexError:
+                continue
+            if ad is not None:
+                # (3b) Insert the ad into the real page blocks
+                for i, block in enumerate(page.blocks, start=1):
+                    if paragraph == block:
+                        if ad['tile'] == 'content_ad':
+                            adplace = zeit.web.core.banner.ContentAdBlock(
+                                "iq-artikelanker")
+                        else:
+                            adplace = zeit.web.core.banner.Place(
+                                ad['tile'], ad['type'], on_page_nr=page_number)
+                        # do not place ad after last paragraph
+                        if i < len(page.blocks):
+                            page.blocks.insert(i, adplace)
+
     return pages
 
 
@@ -97,52 +124,6 @@ def _paragraphs_by_length(paragraphs, sufficient_length=10):
             filtered_paragraphs.append(p)
             previous_length = 0
     return filtered_paragraphs
-
-
-def _place_adtag_by_paragraph(page, tile_list, possible_paragraphs):
-    paragraphs = filter(
-        lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
-
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    if conf.get('sufficient_paragraph_length'):
-        p_length = conf.get('sufficient_paragraph_length', 10)
-        paragraphs = _paragraphs_by_length(
-            paragraphs, sufficient_length=p_length)
-
-    banner_list = list(zeit.web.core.banner.BANNER_SOURCE)
-
-    for index, pp in enumerate(possible_paragraphs):
-        if len(paragraphs) > pp + 1:
-            try:
-                _para = paragraphs[pp]
-                for i, block in enumerate(page.blocks):
-                    if _para == block:
-                        t = tile_list[index] - 1
-                        # save the (virtual) page nr on (copies) of the banner,
-                        # to be able to handle banner display inside the macro.
-                        banner = copy.copy(banner_list[t])
-                        setattr(banner, 'on_page_nr', int(page.number + 1))
-                        page.blocks.insert(i, banner)
-                        break
-            except IndexError:
-                pass
-
-
-def _place_content_ad_by_paragraph(page, possible_paragraphs):
-    paragraphs = filter(
-        lambda b: isinstance(b, zeit.web.core.block.Paragraph), page.blocks)
-    content_ad = zeit.web.core.banner.ContentAdBlock("iq-artikelanker")
-
-    for index, pp in enumerate(possible_paragraphs):
-        if len(paragraphs) > pp + 1:
-            try:
-                _para = paragraphs[pp]
-                for i, block in enumerate(page.blocks):
-                    if _para == block:
-                        page.blocks.insert(i, content_ad)
-                        break
-            except IndexError:
-                pass
 
 
 @zope.component.adapter(zeit.content.article.interfaces.IArticle)

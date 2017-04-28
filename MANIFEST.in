@@ -1,3 +1,7 @@
 graft src/zeit/web/static
 exclude .gitignore
+prune javascript
+prune sass
+prune smoketest
 prune src/zeit/web/core/data
+prune tools
