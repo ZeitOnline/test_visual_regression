@@ -117,6 +117,12 @@
 		margin: remify(60px 0 8px)
 		text-transform: uppercase
 
+	// remove in FEM-55
+	&--major,
+	&--minor
+		.ad-container
+			margin: 0 (-$page-padding)
+
 	+respond-min($break-areas)
 		float: left
 		&--author-list,
@@ -159,6 +165,12 @@
 			width: 25%
 		&--print-ressort
 			max-width: remify(620px)
+
+		// remove in FEM-55
+		&--major,
+		&--minor
+			.ad-container
+				margin: 0
 
 		&__headline
 			border-bottom: 1px solid $color-border

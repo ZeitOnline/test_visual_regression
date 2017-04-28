@@ -5,10 +5,22 @@ POSTDEPLOY
 ----------
 
 
-3.55 (unreleased)
+3.56 (unreleased)
 -----------------
 
+- Nothing changed yet.
+
+
+3.55 (2017-04-28)
+-----------------
+
+- BUG-707: Framebuilder useSSL includes SSL favicon
+
+- BUG-709: Load adreload_config via SSL in framebuilder?useSSL
+
 - FEM-39: Use webpack for javascript bundling
+
+- FIX: Remove unwanted page padding for adslots on CPs
 
 
 3.54 (2017-04-26)
