@@ -3,17 +3,15 @@ $additional-margin: $page-padding * 2
 .frame
 	background-color: $zon-mid-grey
 	color: $white
-	margin: $vertical-space (-$page-padding)
+	margin: $vertical-space 0
 	padding-bottom: rem(460px)
 	position: relative
-	
+
 	// fix scrolling for iOS, inspired by https://davidwalsh.name/scroll-iframes-ios
 	-webkit-overflow-scrolling: touch
 	overflow-y: auto
-	
+
 	+respond-min($break-tablet-min)
-		margin-left: 0
-		margin-right: 0
 		padding-bottom: 100%
 	&__iframe
 		border: none

@@ -4,6 +4,10 @@
 .buzz-box
 	// overflow: hidden // needed for animation using max-height
 
+	padding: 0 $page-padding--small
+	+respond-min($break-areas)
+		padding: 0
+
 	&__heading
 		background-color: $zon-lighter-grey
 		color: $zon-dark-grey
