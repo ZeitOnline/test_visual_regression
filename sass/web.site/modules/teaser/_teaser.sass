@@ -242,9 +242,12 @@
 %teaser-cp-area-fullwidth
 	+clearfix
 	+font-smoothing
-	padding: remify(24px $page-padding 32px)
+	padding: remify(24px $page-padding--small 32px)
 	position: relative
 	text-align: center
+	+respond-min($break-areas)
+		padding: remify(40px 0)
+		text-align: inherit
 	&__media
 		bottom: 0
 		left: 0
