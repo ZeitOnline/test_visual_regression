@@ -5,10 +5,24 @@ POSTDEPLOY
 ----------
 
 
-3.55 (unreleased)
+3.56 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3822: Implement AdTile3+4 on FBIA analogous to core logic
+
+- ZON-3822: Remove AdTile5 from FBIA
+
+
+3.55 (2017-04-28)
+-----------------
+
+- BUG-707: Framebuilder useSSL includes SSL favicon
+
+- BUG-709: Load adreload_config via SSL in framebuilder?useSSL
+
+- FEM-39: Use webpack for javascript bundling
+
+- FIX: Remove unwanted page padding for adslots on CPs
 
 
 3.54 (2017-04-26)

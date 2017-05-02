@@ -107,7 +107,7 @@
     Overlay.prototype.bindResetEvents = function() {
         // bind events to reset timer, need to debounce at least scroll and mousemove event
         var that = this;
-        $( document ).on( 'keypress.modal scroll.modal click.modal mousemove.modal', $.debounce( function() {
+        $( document ).on( 'keypress.modal scroll.modal click.modal mousemove.modal', Zeit.debounce( function() {
             that.setTimeout();
         }, that.options.resetInterval ) );
     };
