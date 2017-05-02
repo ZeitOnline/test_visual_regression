@@ -284,7 +284,7 @@ def test_responsive_image_should_have_noscript(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     noscript = browser.cssselect(
-        '#main .cp-region--multi .scaled-image noscript')
+        '#main .cp-region--duo .scaled-image noscript')
     assert len(noscript) == 3
 
 
