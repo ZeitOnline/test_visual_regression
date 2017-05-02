@@ -80,6 +80,7 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
                 return cls.invoke(**tdict)
         return tdict
 
+
 @traverser(zeit.content.gallery.interfaces.IGallery)
 class Gallery(Traversable):
 
