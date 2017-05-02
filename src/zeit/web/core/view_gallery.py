@@ -34,15 +34,6 @@ class Gallery(zeit.web.core.view.Content):
         return ['gallery.0/seite-1']
 
 
-@zeit.web.view_config(
-    name = 'seite',
-    path_info='.*seite-(.*)')
-class GalleryPage(Gallery):
-
-    def __call__(self):
-        raise pyramid.httpexceptions.HTTPMovedPermanently(
-            location=self.og_url)
-
 @zope.component.adapter(zeit.content.image.interfaces.IImage)
 @zope.interface.implementer(zeit.content.image.interfaces.IPersistentThumbnail)
 def persistent_thumbnail_factory(context):

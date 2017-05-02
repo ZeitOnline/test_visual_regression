@@ -85,7 +85,8 @@ class Gallery(Traversable):
 
     def __call__(self, tdict):
         if tdict['view_name'].startswith('seite') and not tdict['subpath']:
-            tdict['view_name'] = 'seite'
+            raise pyramid.httpexceptions.HTTPMovedPermanently(
+                location=urlparse.urlparse(self.context.uniqueId).path)
 
 
 @traverser(zeit.content.article.interfaces.IArticle)
