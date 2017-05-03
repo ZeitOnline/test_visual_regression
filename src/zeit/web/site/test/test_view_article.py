@@ -2357,7 +2357,7 @@ def test_zplus_badge_is_zeit_on_print_insert(testbrowser):
                '[src$="/printcover-beilage-geld/original"]')) == 1
 
 
-def test_article_should_include_itunes_smart_app_banner(testbrowser):
+def test_article_should_not_include_itunes_smart_app_banner(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
     assert len(app_banner_id) == 0

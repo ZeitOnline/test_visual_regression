@@ -2897,7 +2897,7 @@ def test_hp_should_include_itunes_smart_app_banner(testbrowser):
     assert app_banner_id[0].attrib['content'] == 'app-id=828889166'
 
 
-def test_cp_should_include_itunes_smart_app_banner(testbrowser):
+def test_cp_should_not_include_itunes_smart_app_banner(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/centerpage')
     app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
     assert len(app_banner_id) == 0
