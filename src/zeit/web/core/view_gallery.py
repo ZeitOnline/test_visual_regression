@@ -2,7 +2,7 @@ import grokcore.component
 import lxml.objectify
 import zope.component
 import zope.interface
-import pyramid.httpexceptions
+
 import zeit.content.gallery.interfaces
 import zeit.content.article.edit.reference
 import zeit.content.article.interfaces
