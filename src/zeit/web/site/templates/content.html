@@ -34,15 +34,6 @@
         </div>
         {% endblock article_body %}
     {% endprofile %}
-    </article>
-
-    {% block lineage %}
-        {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
-    {% endblock %}
-
-    {% endblock content %}
-
-
     {% block article_footer %}
     <div class="article-footer article__item" data-ct-area="articlebottom">
         {% block article_sharing %}
@@ -57,6 +48,13 @@
         {% endblock %}
     </div>
     {% endblock %}
+    </article>
+
+    {% block lineage %}
+        {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
+    {% endblock %}
+
+    {% endblock content %}
 
     {% block nextread %}
         {% set module = view.nextread %}
