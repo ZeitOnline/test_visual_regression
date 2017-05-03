@@ -12,6 +12,13 @@
 .article
 	width: auto
 
+
+	&--padded
+		+padded
+		// unwrap advertising
+		.ad-container
+			+unpadded
+
 	&__item
 
 		width: 100%
