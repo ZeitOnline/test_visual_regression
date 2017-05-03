@@ -24,8 +24,7 @@
 		width: 100%
 
 		&--rimless
-			margin-left: -$page-padding
-			margin-right: -$page-padding
+			+unpadded
 			width: auto
 
 		&--apart
@@ -136,8 +135,8 @@
 			margin-top: remify(12px)
 
 		.article__item--rimless &
-			padding-left: $page-padding
-			padding-right: $page-padding
+			padding-left: $page-padding--small
+			padding-right: $page-padding--small
 			+respond-min($break-tablet-min)
 				padding-left: 0
 				padding-right: 0

@@ -1,19 +1,13 @@
 .video-figure
 	&__caption
 		color: $zon-dark-grey
-		line-height: 1.5
-		padding-left: $page-padding
-		padding-right: $page-padding
-		padding-top: remify(20px)
-		+respond-min($break-tablet-min)
-			margin-left: auto
-			margin-right: auto
+		margin: remify(20px auto 0)
+		padding: remify(0 $page-padding--small)
+		+respond-min($break-page-padding)
 			max-width: remify(660px)
-			padding-left: 0
-			padding-right: 0
+			padding: 0
 	&__pagetitle
 		@extend %teaser-title
-		display: block
 		font-size: remify(17px)
 		margin-bottom: remify(16px)
 	&__description

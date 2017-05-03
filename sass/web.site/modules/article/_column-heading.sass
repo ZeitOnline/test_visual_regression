@@ -1,25 +1,18 @@
 .column-heading
-	margin-left: -$page-padding
-	margin-right: -$page-padding
+	+unpadded
 	padding-bottom: remify(40px)
 
 	// general colour and positioning
 	&__upper
+		+padded
 		background-color: $trout
-		padding: 0 $page-padding
-
-	&__lower
-		background-color: $cararra
-		padding: remify(36px) $page-padding
-
-	&__inner
 		position: relative
 
-	// author and title
-	&__author,
-	&__information
-		+respond-min($break-phablet-min)
-			display: table-cell
+	&__lower
+		+padded
+		background-color: $cararra
+		padding-bottom: remify(36px)
+		padding-top: remify(36px)
 
 	&__information
 		+font-smoothing
@@ -29,6 +22,7 @@
 			position: relative
 			z-index: 1
 		+respond-min($break-phablet-min)
+			display: table-cell
 			padding: remify(40px 0)
 			width: 65%
 		+respond-min($break-tablet-min)
@@ -38,12 +32,13 @@
 
 	&__author
 		+respond-max($break-phablet-min)
-			position: absolute
 			bottom: 0
-			right: -$page-padding
+			position: absolute
+			right: 0
 			width: 33%
 			z-index: 0
 		+respond-min($break-phablet-min)
+			display: table-cell
 			text-align: right
 			vertical-align: bottom
 			width: 35%
