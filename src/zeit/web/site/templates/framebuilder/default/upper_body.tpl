@@ -39,7 +39,7 @@
             <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
 
             {%- if view.is_advertorial and view.cap_title %}
-                <div class="advertorial-marker advertorial-marker--single">
-                    <div class="advertorial-marker__label advertorial-marker__label--single">{{ view.cap_title }}</div>
+                <div class="advertorial-marker">
+                    <div class="advertorial-marker__label">{{ view.cap_title }}</div>
                 </div>
             {% endif %}
