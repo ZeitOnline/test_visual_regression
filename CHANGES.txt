@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3822: Remove AdTile5 from FBIA
 
+- ZON-3872: Output smart banner id only on HP, change value
+
 
 3.55 (2017-04-28)
 -----------------
