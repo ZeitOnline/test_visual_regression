@@ -12,6 +12,7 @@ import zope.component
 import zope.interface
 
 import zeit.cms.repository.interfaces
+import zeit.content.gallery.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.dynamicfolder.interfaces
@@ -78,6 +79,15 @@ class RepositoryTraverser(pyramid.traversal.ResourceTreeTraverser):
             except Retraverse:
                 return cls.invoke(**tdict)
         return tdict
+
+
+@traverser(zeit.content.gallery.interfaces.IGallery)
+class Gallery(Traversable):
+
+    def __call__(self, tdict):
+        if tdict['view_name'].startswith('seite') and not tdict['subpath']:
+            raise pyramid.httpexceptions.HTTPMovedPermanently(
+                location=urlparse.urlparse(self.context.uniqueId).path)
 
 
 @traverser(zeit.content.article.interfaces.IArticle)
