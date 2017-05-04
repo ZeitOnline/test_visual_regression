@@ -15,7 +15,9 @@
     <meta name="robots" content="{{ view.meta_robots }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="apple-itunes-app" content="app-id=448633376">
+    {% if view.is_hp -%}
+        <meta name="apple-itunes-app" content="app-id=828889166">
+    {% endif -%}
     <meta name="application-name" content="ZEIT ONLINE">
     <meta name="msapplication-config" content="none">
     <meta name="msapplication-TileImage" content="{{ request.image_host }}/static/img/zo-icon-win8-144x144.png">
