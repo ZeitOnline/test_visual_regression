@@ -539,3 +539,12 @@ def test_paragraph_should_have_expected_length():
         u'<p><strong><em>foo</em></strong></p>')
     p = zeit.web.core.block.Paragraph(model_block)
     assert len(p) == 3
+
+
+def test_volume_should_ignore_invalid_references(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/volumeteaser')
+    article.xml.xpath('//volume')[0].set('href', 'http://xml.zeit.de/invalid')
+    body = zeit.content.article.edit.interfaces.IEditableBody(article)
+    module = body.values()[1]
+    assert zeit.web.core.interfaces.IFrontendBlock(module, None) is None
