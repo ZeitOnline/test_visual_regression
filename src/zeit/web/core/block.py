@@ -113,6 +113,11 @@ class Portraitbox(Block):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IVolume)
 class Volume(Block):
 
+    def __new__(cls, context):
+        if context.references.target is None:
+            return None
+        return super(Volume, cls).__new__(cls, context)
+
     def __init__(self, model_block):
         result = model_block.references
         volume_obj = result.target
