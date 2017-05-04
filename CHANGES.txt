@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3872: Output smart banner id only on HP, change value
 
+- FIX: Be defensive about invalid volume references in article body
+
 
 3.55 (2017-04-28)
 -----------------
