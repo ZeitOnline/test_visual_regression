@@ -2,7 +2,12 @@
 	margin: $vertical-space 0
 
 .buzz-box
-	// overflow: hidden // needed for animation using max-height
+	margin-top: $vertical-space
+	padding: 0 $page-padding--small
+	& + &
+		margin-top: 0
+	+respond-min($break-areas)
+		padding: 0
 
 	&__heading
 		background-color: $zon-lighter-grey

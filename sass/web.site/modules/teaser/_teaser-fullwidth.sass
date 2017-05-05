@@ -1,8 +1,5 @@
 .teaser-fullwidth
-	@extend %teaser
 	border-bottom: 1px solid $color-border
-	margin: 0
-	padding: 0 0 $vertical-space
 	+respond-min($break-tablet-min)
 		+font-smoothing
 		+teaser-image-text-shadow
@@ -26,7 +23,7 @@
 			+teaser-image-dark-overlay
 			color: #fff
 	&__container
-		padding: $vertical-space $page-padding 0
+		padding: $vertical-space $page-padding--small
 		+respond-min($break-tablet-min)
 			bottom: 0
 			display: flex

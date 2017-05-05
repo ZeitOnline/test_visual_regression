@@ -1,7 +1,7 @@
 .video-stage-footer
-	padding: 0 $page-padding
+	+clearfix
+	+padded
+	padding-bottom: $vertical-space
 	+respond-min($break-phablet-min)
 		background-color: #232328
-		padding: $page-padding $page-padding 0 $page-padding
-		height: remify(76px)
-		position: relative
+		padding-top: $vertical-space

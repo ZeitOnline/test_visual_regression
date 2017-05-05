@@ -18,7 +18,10 @@ POSTDEPLOY
 
 - ZON-3870: Redirect paginated image galleries
 
+- FEM-55: Reduce page padding for ZON mobile index pages (CPs)
+
 - FIX: Be defensive about invalid volume references in article body
+
 
 3.55 (2017-04-28)
 -----------------

@@ -7,7 +7,7 @@
 
 {% block before_module_list %}
     {% set tracking_slug = '{}.{}..newsteaser.alle_schlagzeilen'.format(area.kind, region_loop.index) %}
-    {{ cp.section_heading(area.title, 'Alle Schlagzeilen', '' if cp_type in ['keywordpage', 'topicpage'] else 'news/index' , view, tracking_slug, unpadded=True) }}
+    {{ cp.section_heading(area.title, 'Alle Schlagzeilen', '' if cp_type in ['keywordpage', 'topicpage'] else 'news/index' , view, tracking_slug) }}
 {% endblock %}
 
 {% block module_list %}

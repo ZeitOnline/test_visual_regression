@@ -1,4 +1,7 @@
 .print-box
+	padding: 0 $page-padding--small
+	+respond-min($break-areas)
+		padding: 0
 	&__heading
 		border-bottom: 1px solid $color-border
 		color: $zon-charcoal
