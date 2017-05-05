@@ -6,7 +6,6 @@
     }
   },
   "svg": {
-    "xmlDeclaration": true,
     "doctypeDeclaration": false
   },
   "mode": {
