@@ -63,8 +63,6 @@
         {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
     {% endblock %}
 
-    {% block veeseo_div %}{% endblock %}
-
     {% block nextread_ad %}
         {% set module = view.nextread_ad %}
         {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
@@ -95,8 +93,4 @@
         </div>
     </div>
 </script>
-{% endblock %}
-
-{% block veeseo %}
-    <script src="http://rce.veeseo.com/widgets/zeit/widget.js"></script>
 {% endblock %}
