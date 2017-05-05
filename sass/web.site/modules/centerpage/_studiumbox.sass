@@ -1,5 +1,6 @@
 .studiumbox
-	margin: $vertical-space 0
+	@extend %teaser
+	border-width: 0
 
 	&__label
 		@extend %label
@@ -9,7 +10,6 @@
 	&__container
 		+clearfix
 		background-color: #f9f9f9
-		margin: 0 (-$page-padding)
 
 	&__headline
 		background-color: $zon-lighter-grey
@@ -17,7 +17,7 @@
 		letter-spacing: $zon-letter-spacing-m
 		line-height: 1.22
 		margin: 0
-		padding: remify(16px) $page-padding
+		padding: remify(16px 20px)
 		position: relative
 		text-transform: uppercase
 		// fake border, hopefully a simple solution for the "border-margin"
@@ -136,7 +136,6 @@
 
 +respond-min($break-phablet-min)
 	.studiumbox__container
-		margin: 0
 		padding: remify(0 20px)
 
 	.studiumbox__headline

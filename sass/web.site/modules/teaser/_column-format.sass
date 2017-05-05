@@ -11,7 +11,6 @@ $teaser-column-small-image-size-desktop: 200px
 	@extend %teaser
 	background-color: $color-column-background
 	border-top-width: 0
-	padding: $page-padding
 	position: relative
 
 	& + article // remove border on successive teaser
@@ -21,8 +20,10 @@ $teaser-column-small-image-size-desktop: 200px
 		border-top-width: 1px
 
 	+respond-min($break-areas)
-		margin-top: $vertical-space
 		margin-bottom: $vertical-space
+		margin-top: $vertical-space
+		padding-left: $page-padding
+		padding-right: $page-padding
 
 		& + &
 			border-top-width: 0

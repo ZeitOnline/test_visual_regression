@@ -221,12 +221,6 @@ def test_article_teaser_should_not_be_identified_as_video(application):
     assert not zeit.web.core.template.is_video(article)
 
 
-def test_video_should_contain_veeseo_widget(testbrowser):
-    select = testbrowser('/zeit-online/video/3537342483001').cssselect
-    assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
-    assert select('.RV2VW2')
-
-
 def test_video_should_not_break_on_missing_still_image(
         testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.content.video.video.Video, 'video_still', None)

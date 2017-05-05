@@ -1,9 +1,11 @@
 $dropdown-width: remify(160px)
 
 .search-form
+	+padded
 	background: $zon-warm-grey
 	margin: 0
-	padding: remify(25px $page-padding 15px)
+	padding-bottom: remify(15px)
+	padding-top: remify(25px)
 	&__fieldset
 		+respond-min($break-tablet-min)
 			margin: 0 auto

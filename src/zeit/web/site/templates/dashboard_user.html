@@ -23,7 +23,7 @@
             </div>
             <!-- header -->
             {% for section in view.dashboard_sections('header') %}
-            <div class="dashboard__box dashboard__box--is-header">
+            <div class="dashboard__box">
                 <h2 class="dashboard__box-title">{{section.name}}</h2>
                 <ul class="dashboard__box-list">
                     {% for link in section.links %}
@@ -59,7 +59,9 @@
                 </div>
               {% endfor %}
         </div>
-        {% include "zeit.web.core:templates/inc/article/pagination.html" %}
+        <div class="dashboard__item">
+            {% include "zeit.web.core:templates/inc/article/pagination.html" %}
+        </div>
     </div>
 </div>
 {% endblock main %}
