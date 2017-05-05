@@ -8,10 +8,17 @@ POSTDEPLOY
 3.56 (unreleased)
 -----------------
 
+- ZON-3889: Remove veeseo widget
+
 - ZON-3822: Implement AdTile3+4 on FBIA analogous to core logic
 
 - ZON-3822: Remove AdTile5 from FBIA
 
+- ZON-3872: Output smart banner id only on HP, change value
+
+- ZON-3870: Redirect paginated image galleries
+
+- FIX: Be defensive about invalid volume references in article body
 
 3.55 (2017-04-28)
 -----------------

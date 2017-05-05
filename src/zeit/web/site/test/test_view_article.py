@@ -1255,27 +1255,6 @@ def test_article_lineage_should_not_render_on_administratives(testbrowser):
     assert len(browser.cssselect('.article-lineage')) == 0
 
 
-def test_advertisement_nextread_should_render_after_veeseo(testbrowser):
-    browser = testbrowser('/zeit-online/article/simple-verlagsnextread')
-    nextread = browser.cssselect('article.nextread')[0]
-    siblings = nextread.xpath('following-sibling::*')
-    assert siblings[0].get('class') == 'RA2VW2'
-    assert siblings[1].get('class') == 'nextread-advertisement'
-
-
-def test_article_should_contain_veeseo_widget(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-    assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
-    assert select('.RA2VW2')
-
-
-def test_paywalled_article_should_not_contain_veeseo_widget(testbrowser):
-    select = testbrowser(
-        '/zeit-online/article/01?C1-Meter-Status=always_paid').cssselect
-    assert not select(
-        'script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
-
-
 def test_article_should_render_quiz_in_iframe(testbrowser):
     browser = testbrowser('/zeit-online/article/quiz')
     iframe = browser.cssselect('iframe')
@@ -2355,3 +2334,9 @@ def test_zplus_badge_is_zeit_on_print_insert(testbrowser):
         '.zplus-badge__media-item[src$="/printcover/original"]')) == 1
     assert len(browser.cssselect('.volume-teaser__media-item'
                '[src$="/printcover-beilage-geld/original"]')) == 1
+
+
+def test_article_should_not_include_itunes_smart_app_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
+    assert len(app_banner_id) == 0
