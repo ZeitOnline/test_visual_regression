@@ -5,6 +5,14 @@ import urllib
 import zeit.web.core.application
 
 
+def test_amp_inline_svg_sprite_contains_no_xml_declaration(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    sprite = browser.cssselect('.symbols')[0]
+    assert '<?xml' not in lxml.etree.tostring(sprite)
+    # redundant, but stresses what this test is all about
+    assert '<?xml' not in browser.contents
+
+
 def test_amp_paragraph_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser('zeit.web.core:templates/amp/blocks/paragraph.html',
                          block=u'Wie lässt sich diese Floskel übersetzen? ')
