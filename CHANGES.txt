@@ -8,7 +8,9 @@ POSTDEPLOY
 3.57 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3863: Add required scripts for liveblogs in AMP
+
+- ZON-3863: Remove XML declaration for inline AMP SVGs
 
 
 3.56 (2017-05-05)
