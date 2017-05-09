@@ -120,7 +120,7 @@ class Newsfeed(Base):
             E.generator('zeit.web {}'.format(
                 self.request.registry.settings.version)),
             E.managingEditor(
-                'online-cr.zeit.de (Chefredaktion ZEIT ONLINE)'),
+                'online-cr@zeit.de (Chefredaktion ZEIT ONLINE)'),
             E.webMaster('webmaster@zeit.de (Technik ZEIT ONLINE)'),
             E.image(
                 E.url((self.request.image_host +
