@@ -894,3 +894,17 @@ def rewrite_for_ssl_if_required(url, rewrite_required=False):
         return url.replace(
             'http://www.zeit.de/', 'https://ssl.zeit.de/www.zeit.de/')
     return url
+
+
+# Use case: The view.adcontroller_values are a list of tuples,
+# which is looped for regular output in our templates.
+# But for Instant Articles, we need access to specific ones.
+@zeit.web.register_filter
+def get_key_from_tuplelist(list, key):
+    try:
+        for name, value in list:
+            if name == key:
+                return value
+    except AttributeError:
+        pass
+    return False
