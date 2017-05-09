@@ -8,7 +8,7 @@ POSTDEPLOY
 3.58 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Repair main navigation dropdowns for advertorials
 
 
 3.57 (2017-05-08)
