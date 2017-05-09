@@ -251,7 +251,9 @@
 			height: remify(86px)
 
 		&__ressorts
-			border-bottom: 1px solid $color-border
+			// omit border for advertorials
+			@if not $is-advertorial
+				border-bottom: 1px solid $color-border
 			font-size: remify(14px)
 			line-height: remify(36px)
 			a
