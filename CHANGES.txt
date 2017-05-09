@@ -8,6 +8,8 @@ POSTDEPLOY
 3.58 (unreleased)
 -----------------
 
+- BUG-723: Add liveblog kicker logo styles for nextread
+
 - FIX: Repair main navigation dropdowns for advertorials
 
 - MAINT: Fix jobbox margin
