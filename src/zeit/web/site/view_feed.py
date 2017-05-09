@@ -453,3 +453,56 @@ class RoostFeed(SocialFeed):
 
     def social_value(self, content):
         return zeit.push.interfaces.IAccountData(content).mobile_text
+
+
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-yahoo',
+    host_restriction='newsfeed')
+class YahooFeed(SocialFeed):
+
+    def make_title(self, content):
+        return content.supertitle
+
+    def social_value(self, content):
+        return zeit.push.interfaces.IAccountData(content).mobile_text
+
+    def build_feed(self):
+        E = ELEMENT_MAKER
+        root = E.rss(version='2.0')
+        channel = E.channel(
+            E.title('ZEIT ONLINE Newsfeed for Yahoo'),
+            E.link(self.request.route_url('home')),
+            E.description(),
+            E.language('de-de'),
+            E.copyright(
+                'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+            ATOM_MAKER(href=self.request.url,
+                       type=self.request.response.content_type)
+        )
+        root.append(channel)
+
+        for content in self.items:
+            try:
+                content_url = zeit.web.core.template.create_url(
+                    None, content, self.request)
+                content_url = create_public_url(content_url)
+                item = E.item(
+                    E.title(self.make_title(content)),
+                    E.link(content_url),
+                    E.description(content.teaserText),
+                    E.pubDate(
+                        format_rfc822_date(last_published_semantic(content))),
+                    E.guid(content.uniqueId, isPermaLink='false'),
+                    E.category(content.ressort)
+                )
+                social_value = self.social_value(content)
+                if social_value:
+                    item.append(CONTENT_MAKER(social_value))
+                channel.append(item)
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
+                continue
+        return root
