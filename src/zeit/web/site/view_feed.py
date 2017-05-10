@@ -7,6 +7,7 @@ import pytz
 import types
 import urllib
 import urlparse
+import pyramid
 
 import lxml.builder
 import lxml.etree
@@ -515,6 +516,10 @@ class YahooFeed(SocialFeed):
                 author = self.make_author_string(content)
                 if author:
                     item.append(E.author(author))
+
+                content_body = pyramid.renderers.render(
+                    'templates/yahoofeed/item.html', {})
+                item.append(CONTENT_MAKER(content_body))
 
                 channel.append(item)
             except:
