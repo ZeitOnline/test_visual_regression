@@ -517,8 +517,15 @@ class YahooFeed(SocialFeed):
                 if author:
                     item.append(E.author(author))
 
+                # This needs _any_ request object. It works even though
+                # it is not a request to an article URL
+                content_view = zeit.web.core.view_article.Article(
+                    content, self.request)
                 content_body = pyramid.renderers.render(
-                    'templates/yahoofeed/item.html', {})
+                    'templates/yahoofeed/item.html', {
+                        'view': content_view,
+                        'request': self.request
+                    })
                 item.append(CONTENT_MAKER(content_body))
 
                 channel.append(item)
