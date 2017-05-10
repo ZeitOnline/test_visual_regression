@@ -902,9 +902,7 @@ def rewrite_for_ssl_if_required(url, rewrite_required=False):
 @zeit.web.register_filter
 def get_key_from_tuplelist(list, key):
     try:
-        for name, value in list:
-            if name == key:
-                return value
-    except AttributeError:
+        return [item[1] for item in list if item[0] == key].pop()
+    except IndexError:
         pass
-    return False
+    return ''

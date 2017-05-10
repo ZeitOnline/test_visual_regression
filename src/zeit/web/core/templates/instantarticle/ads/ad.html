@@ -1,8 +1,8 @@
 {% if toggles('fbia_advertising') -%}
 
-{% set adcontroller_level2 = view.adcontroller_values | get_key_from_tuplelist('level2') or '' %}
-{% set adcontroller_level3 = view.adcontroller_values | get_key_from_tuplelist('level3') or '' %}
-{% set adcontroller_level4 = view.adcontroller_values | get_key_from_tuplelist('level4') or '' %}
+{% set adcontroller_level2 = view.adcontroller_values | get_key_from_tuplelist('level2') %}
+{% set adcontroller_level3 = view.adcontroller_values | get_key_from_tuplelist('level3') %}
+{% set adcontroller_level4 = view.adcontroller_values | get_key_from_tuplelist('level4') %}
 {% set adcontroller_keywords = view.adcontroller_values | get_key_from_tuplelist('keywords') %}
 
 <figure class="op-ad">
