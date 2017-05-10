@@ -462,14 +462,24 @@ class RoostFeed(SocialFeed):
 class YahooFeed(SocialFeed):
 
     def make_title(self, content):
-        return content.supertitle
+        if content.supertitle:
+            return u'{}: {}'.format(content.supertitle, content.title)
+        else:
+            return content.title
 
-    def social_value(self, content):
-        return zeit.push.interfaces.IAccountData(content).mobile_text
+    def make_author_string(self, content):
+        authors = []
+        if getattr(content, 'authorships', None):
+            for author in content.authorships:
+                name = getattr(author.target, 'display_name', None)
+                if name:
+                    authors.append(name)
+        return u', '.join(authors)
 
     def build_feed(self):
         E = ELEMENT_MAKER
         root = E.rss(version='2.0')
+        build_date = format_rfc822_date(datetime.datetime.today())
         channel = E.channel(
             E.title('ZEIT ONLINE Newsfeed for Yahoo'),
             E.link(self.request.route_url('home')),
@@ -477,8 +487,12 @@ class YahooFeed(SocialFeed):
             E.language('de-de'),
             E.copyright(
                 'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+            E.generator('zeit.web {}'.format(
+                self.request.registry.settings.version)),
             ATOM_MAKER(href=self.request.url,
-                       type=self.request.response.content_type)
+                       type=self.request.response.content_type),
+            E.language('de-de'),
+            E.date(build_date)
         )
         root.append(channel)
 
@@ -487,6 +501,7 @@ class YahooFeed(SocialFeed):
                 content_url = zeit.web.core.template.create_url(
                     None, content, self.request)
                 content_url = create_public_url(content_url)
+
                 item = E.item(
                     E.title(self.make_title(content)),
                     E.link(content_url),
@@ -496,9 +511,11 @@ class YahooFeed(SocialFeed):
                     E.guid(content.uniqueId, isPermaLink='false'),
                     E.category(content.ressort)
                 )
-                social_value = self.social_value(content)
-                if social_value:
-                    item.append(CONTENT_MAKER(social_value))
+
+                author = self.make_author_string(content)
+                if author:
+                    item.append(E.author(author))
+
                 channel.append(item)
             except:
                 log.warning(
