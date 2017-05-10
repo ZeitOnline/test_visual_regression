@@ -25,6 +25,7 @@ import zeit.web
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
+import zeit.web.core.template
 
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
@@ -741,6 +742,12 @@ class ZONNextread(Nextread):
         rel = zeit.cms.related.interfaces.IRelatedContent(context, None)
         args = rel.related if rel and rel.related else ()
         super(ZONNextread, self).__init__(context, args)
+
+    @property
+    def liveblog(self):
+        context = zeit.web.core.template.first_child(self)
+        if zeit.web.core.template.liveblog(context):
+            return zeit.web.core.interfaces.ILiveblogInfo(context)
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.INextread)

@@ -5,10 +5,22 @@ POSTDEPLOY
 ----------
 
 
-3.57 (unreleased)
+3.58 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-723: Add liveblog kicker logo styles for nextread
+
+- FIX: Repair main navigation dropdowns for advertorials
+
+- MAINT: Fix jobbox margin
+
+
+3.57 (2017-05-08)
+-----------------
+
+- ZON-3863: Add required scripts for liveblogs in AMP
+
+- ZON-3863: Remove XML declaration for inline AMP SVGs
 
 
 3.56 (2017-05-05)

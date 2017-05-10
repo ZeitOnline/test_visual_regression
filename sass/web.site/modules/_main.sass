@@ -6,5 +6,7 @@
 		// dirty trick to hide the main navigation border
 		// for pages with colored backgroud/header (columns, videopage, konto etc.)
 		// hopefully harmless
-		position: relative
-		top: -1px
+		// advertorials omit the navigation border, so skip that
+		@if not $is-advertorial
+			position: relative
+			top: -1px
