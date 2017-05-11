@@ -138,13 +138,13 @@ class CeleraOneMixin(object):
         pattern = r'[^ %s]' % ''.join(werkzeug.http._token_chars)
         return re.sub(pattern, '', string.encode('utf-8', 'ignore'))
 
-    def _get_c1_heading(self, prep=unicode):
+    def _get_c1_heading(self):
         if getattr(self.context, 'title', None) is not None:
-            return prep(self.context.title.strip())
+            return self.context.title.strip()
 
-    def _get_c1_kicker(self, prep=unicode):
+    def _get_c1_kicker(self):
         if getattr(self.context, 'supertitle', None) is not None:
-            return prep(self.context.supertitle.strip())
+            return self.context.supertitle.strip()
 
     @zeit.web.reify
     def c1_client(self):
@@ -164,7 +164,7 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def c1_header(self):
-        return [(k, v.encode('utf-8', 'ignore')) for k, v in {
+        return [(k, self._headersafe(v)) for k, v in {
             'C1-Track-Channel': self._c1_channel,
             'C1-Track-Sub-Channel': self._c1_sub_channel,
             'C1-Track-CMS-ID': self._c1_cms_id,
@@ -172,8 +172,8 @@ class CeleraOneMixin(object):
             'C1-Track-Doc-Type': self._c1_doc_type,
             'C1-Track-Entitlement': self._c1_entitlement,
             'C1-Track-Entitlement-ID': self._c1_entitlement_id,
-            'C1-Track-Heading': self._get_c1_heading(self._headersafe),
-            'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
+            'C1-Track-Heading': self._get_c1_heading(),
+            'C1-Track-Kicker': self._get_c1_kicker(),
             'C1-Track-Service-ID': 'zon'
         }.items() if v is not None]
 

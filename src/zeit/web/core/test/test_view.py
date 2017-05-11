@@ -211,6 +211,16 @@ def test_c1_heading_and_kicker_should_be_properly_escaped(
     assert dict(view.c1_client).get('set_kicker') == '"Szene-Stadt"'
 
 
+def test_c1_headers_should_be_properly_escaped(application, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/04')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    with mock.patch('zeit.web.core.paywall.CeleraOneMixin._c1_channel',
+                    mock.PropertyMock()) as channel:
+        channel.return_value = 'foo\nbar'
+        assert dict(view.c1_header).get('C1-Track-Channel') == 'foobar'
+
+
 def test_c1_service_id_should_be_included_in_tracking_parameters(
         application, dummy_request):
 
