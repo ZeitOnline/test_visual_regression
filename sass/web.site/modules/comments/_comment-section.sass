@@ -8,9 +8,9 @@ $comment-color-notice:          $zon-grey
 // own styles, which differ from core
 .comment-section
 
-	// adjust mobile page padding as long as ZON is not using $page-padding--small on .main
-	margin-left: -$page-padding;
-	margin-right: -$page-padding;
+	// adjust for missing page padding because ZON is not using $page-padding on .main but on .article--padded
+	margin-left: 0
+	margin-right: 0
 
 	&__head + &__message
 		background-color: $comment-color-head-background

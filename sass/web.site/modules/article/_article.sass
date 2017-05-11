@@ -12,13 +12,19 @@
 .article
 	width: auto
 
+
+	&--padded
+		+padded
+		// unwrap advertising
+		.ad-container
+			+unpadded
+
 	&__item
 
 		width: 100%
 
 		&--rimless
-			margin-left: -$page-padding
-			margin-right: -$page-padding
+			+unpadded
 			width: auto
 
 		&--apart
@@ -121,6 +127,13 @@
 
 .figure
 
+	&__title
+		@extend %teaser-title
+		font-family: $font-tabletgothic
+		font-size: remify(17px)
+		font-style: normal
+		margin: remify(20px 0 16px)
+
 	&__caption
 		@extend %figure-caption
 		margin: remify(8px auto 0)
@@ -129,8 +142,8 @@
 			margin-top: remify(12px)
 
 		.article__item--rimless &
-			padding-left: $page-padding
-			padding-right: $page-padding
+			padding-left: $page-padding--small
+			padding-right: $page-padding--small
 			+respond-min($break-tablet-min)
 				padding-left: 0
 				padding-right: 0

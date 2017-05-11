@@ -1773,10 +1773,10 @@ def test_article_byline_is_displayed_completely(testbrowser):
 
 def test_video_in_article_has_poster_copyright(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
-    figure_copyright_elem = browser.cssselect('.video-figure__copyright')
-    assert len(figure_copyright_elem) == 1
-    figure_copyright = figure_copyright_elem[0]
-    copyright_person = figure_copyright.cssselect('[itemprop="name"]')[0]
+    video = browser.cssselect('figure[data-video-size]')[0]
+    figure_copyright = video.cssselect('.figure__copyright')
+    assert len(figure_copyright) == 1
+    copyright_person = figure_copyright[0].cssselect('[itemprop="name"]')[0]
     assert copyright_person.text == u'© Foto: Alaa Al-Marjani/Reuters'
 
 

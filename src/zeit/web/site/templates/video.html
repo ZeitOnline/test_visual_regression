@@ -2,7 +2,7 @@
 {% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
-    <article class="article article--video" id="js-article"
+    <article class="article article--padded article--video" id="js-article"
         {% if view.serie %} data-video-series="{{ view.serie | format_webtrekk }}"{% endif %}
         data-video-provider="brightcove"
         data-video-size="large"
@@ -58,7 +58,4 @@
         </div>
         {% endprofile %}
     </article>
-{% endblock %}
-
-{% block article_footer %}
 {% endblock %}
