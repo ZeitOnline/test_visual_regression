@@ -3,6 +3,5 @@
    We only show AdTiles on page 1, to avoid multiple IDs on multi-page articles.
 #}
 {% if block.type == 'mobile' and page.number == 0 %}
-    {% extends "zeit.web.core:templates/instantarticle/ads/ad.html" %}
-    {% set tile_number = block.tile %}
+    {% include "zeit.web.core:templates/instantarticle/ads/tile_{}.html".format(block.tile) %}
 {% endif %}

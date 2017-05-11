@@ -8,9 +8,13 @@ POSTDEPLOY
 3.58 (unreleased)
 -----------------
 
+- ZON-3822: Update AdTile code for FBIA
+
 - BUG-723: Add liveblog kicker logo styles for nextread
 
 - FIX: Repair main navigation dropdowns for advertorials
+
+- FIX: Fix headline appearance in navigation flyout for ZEIT Campus advertorials
 
 - MAINT: Fix jobbox margin
 
