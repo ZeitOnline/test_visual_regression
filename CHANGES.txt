@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - FIX: Fix headline appearance in navigation flyout for ZEIT Campus advertorials
 
+- FEM-54: Reduce page padding for ZON mobile content
+
 - MAINT: Fix jobbox margin
 
 
