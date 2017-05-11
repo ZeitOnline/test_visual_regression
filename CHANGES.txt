@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - FIX: Repair main navigation dropdowns for advertorials
 
+- FIX: Fix headline appearance in navigation flyout for ZEIT Campus advertorials
+
 - MAINT: Fix jobbox margin
 
 
