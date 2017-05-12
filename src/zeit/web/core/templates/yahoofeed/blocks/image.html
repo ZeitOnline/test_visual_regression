@@ -6,5 +6,8 @@
 {% require image = get_image(block, variant_id='wide', fallback=False) %}
     {% set image_width = 1440 %}
     {% set image_height = (image_width / image.ratio) | round | int %}
-    <img href="https://img.zeit.de/{{ image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.alt }}"/>
+    <p>
+        <img href="https://img.zeit.de/{{ image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.alt }}" title="{{ image.caption }}"/>
+        {{ image.caption }}
+    </p>
 {% endrequire %}
