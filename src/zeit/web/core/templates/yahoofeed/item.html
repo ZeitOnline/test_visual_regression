@@ -5,7 +5,10 @@
 {% require image = get_image(view.header_module, variant_id='wide', fallback=False) %}
     {% set image_width = 1440 %}
     {% set image_height = (image_width / image.ratio) | round | int %}
-    <img href="https://img.zeit.de/{{ image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.caption }}" title="{{ image.caption }}"/>
+    <p>
+        <img href="https://img.zeit.de/{{ image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.alt }}" title="{{ image.caption }}"/>
+        {{ image.caption }}
+    </p>
 {% endrequire %}
 
 {% for page in view.pages %}
