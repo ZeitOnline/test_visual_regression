@@ -491,9 +491,7 @@ class YahooFeed(SocialFeed):
             E.generator('zeit.web {}'.format(
                 self.request.registry.settings.version)),
             ATOM_MAKER(href=self.request.url,
-                       type=self.request.response.content_type),
-            E.language('de-de'),
-            E.date(build_date)
+                       type=self.request.response.content_type)
         )
         root.append(channel)
 
