@@ -1335,12 +1335,27 @@ def test_instantarticle_should_render_ads(testbrowser, monkeypatch):
 
     browser = testbrowser(
         '/instantarticle/zeit-online/article/simple-multipage')
-    assert len(browser.cssselect(
-        'iframe[src$="/static/latest/html/fbia-ads/tile-3.html"]')) == 1
-    assert len(browser.cssselect(
-        'iframe[src$="/static/latest/html/fbia-ads/tile-4.html"]')) == 1
-    assert len(browser.cssselect(
-        'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
+    assert len(browser.cssselect('iframe #iqadtile3')) == 1
+    assert len(browser.cssselect('iframe #iqadtile4')) == 1
+    assert len(browser.cssselect('iframe #iqadtile8')) == 1
+
+
+def test_instantarticle_ads_should_include_adcontroller_values(
+        testbrowser, monkeypatch):
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'fbia_advertising': True,
+        'iqd_mobile_transition_article': True
+    }.get)
+
+    browser = testbrowser(
+        '/instantarticle/campus/article/01-countdown-studium')
+
+    assert 'mitte1' in browser.contents
+    assert 'zeitonline,fachhochschulen,bafg,' in browser.contents
+    assert '"studium",' in browser.contents
+    assert '"hochschule",' in browser.contents
+    assert '\'iqdzeit_fbia\'' in browser.contents
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
@@ -1758,10 +1773,10 @@ def test_article_byline_is_displayed_completely(testbrowser):
 
 def test_video_in_article_has_poster_copyright(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
-    figure_copyright_elem = browser.cssselect('.video-figure__copyright')
-    assert len(figure_copyright_elem) == 1
-    figure_copyright = figure_copyright_elem[0]
-    copyright_person = figure_copyright.cssselect('[itemprop="name"]')[0]
+    video = browser.cssselect('figure[data-video-size]')[0]
+    figure_copyright = video.cssselect('.figure__copyright')
+    assert len(figure_copyright) == 1
+    copyright_person = figure_copyright[0].cssselect('[itemprop="name"]')[0]
     assert copyright_person.text == u'© Foto: Alaa Al-Marjani/Reuters'
 
 

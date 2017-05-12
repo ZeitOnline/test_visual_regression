@@ -10,7 +10,6 @@ $article-lineage-transition-duration: .4s
 .article-lineage
 	transition: opacity .5s
 	display: none
-	margin: 0 (-$page-padding)
 	max-width: remify(980px)
 	opacity: 0
 	position: fixed
@@ -35,14 +34,15 @@ $article-lineage-transition-duration: .4s
 		top: auto
 
 .al-link
-	transition: max-width $article-lineage-transition-duration ease-out, box-shadow .1s ($article-lineage-transition-duration - 0.1s) // remove box-shadow at transition end
 	background: $zon-lighter-grey
+	bottom: remify(48px)
 	box-shadow: none
 	color: $zon-charcoal
 	height: remify(100px)
 	max-width: remify(60px)
 	padding: remify(0 20px)
 	position: absolute
+	transition: max-width $article-lineage-transition-duration ease-out, box-shadow .1s ($article-lineage-transition-duration - 0.1s) // remove box-shadow at transition end
 	&--prev
 		left: 0
 	&--next
@@ -69,15 +69,16 @@ $article-lineage-transition-duration: .4s
 .al-text
 	transition: opacity $article-lineage-transition-duration
 	display: block
+	line-height: 1.5
 	opacity: 0
 	overflow: hidden
-	padding-top: remify(28px)
+	padding-top: remify(26px)
 	&--prev
 		margin: remify(0 5px 0 45px)
 	&--next
 		margin: remify(0 45px 0 5px)
 	&--has-supertitle
-		padding-top: remify(18px)
+		padding-top: remify(16px)
 	&__kicker
 		color: $zon-dark-grey
 		display: block
@@ -85,18 +86,15 @@ $article-lineage-transition-duration: .4s
 		font-size: remify(14px)
 		font-style: italic
 		white-space: nowrap
-		line-height: remify(17px)
-		margin-bottom: remify(5px)
+		margin-bottom: remify(3px)
 	&__title
 		@extend %al-dynamic-texts
 		font-size: remify(16px)
-		line-height: remify(23px)
 		font-weight: bold
 		letter-spacing: $zon-letter-spacing-s
 	&__supertitle
 		@extend %al-dynamic-texts
 		font-size: remify(12px)
-		line-height: remify(21px)
 		color: $zon-red
 		letter-spacing: $zon-letter-spacing-m
 

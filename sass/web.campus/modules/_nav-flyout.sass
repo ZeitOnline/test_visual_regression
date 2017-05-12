@@ -3,11 +3,14 @@
 	margin-bottom: 1em
 
 	&__headline
-		@extend %font-beckett
+		font-family: $font-beckett
 		font-size: remify(28px)
-		min-height: 2em // 2 lines
+		font-weight: normal
+		letter-spacing: 1.5px
 		line-height: 1
 		margin: remify(0 0 9px)
+		min-height: 2em // 2 lines
+		text-transform: uppercase
 		+respond-min($break-desktop-min)
 			font-size: remify(42px)
 			margin-bottom: remify(14px)
