@@ -515,7 +515,7 @@ class YahooFeed(SocialFeed):
 
                 author = self.make_author_string(content)
                 if author:
-                    item.append(E.author(author))
+                    item.append(DC_MAKER(author))
 
                 # This needs _any_ request object. It works even though
                 # it is not a request to an article URL
