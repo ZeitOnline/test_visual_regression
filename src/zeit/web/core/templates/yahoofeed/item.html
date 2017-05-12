@@ -11,6 +11,8 @@
     </p>
 {% endrequire %}
 
+{# Videos are explicitly excluded, because they are not part of the deal with Yahoo! #}
+
 {% for page in view.pages %}
     {% set page_loop = loop %}
     {%- for block in page -%}

@@ -1,9 +1,0 @@
-{% if block.video and not block.video is expired %}
-<p>
-    <iframe src='https://players.brightcove.net/18140073001/c09a3b98-8829-47a5-b93b-c3cca8a4b5e9_default/index.html?videoId={{ block.id }}' allowfullscreen webkitallowfullscreen mozallowfullscreen></iframe>
-    {{ block.description }}
-    {% if block.video_still_copyright and block.video_still_copyright | trim %}
-        <em>© Foto: {{ block.video_still_copyright | trim }}</em>
-    {% endif %}
-</p>
-{% endif %}
