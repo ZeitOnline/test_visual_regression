@@ -1,0 +1,3 @@
+[submodule "PhantomCSS"]
+	path = PhantomCSS
+	url = git@github.com:Huddle/PhantomCSS.git
