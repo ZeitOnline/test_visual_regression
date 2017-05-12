@@ -15,7 +15,10 @@
         <script>
             googletag.cmd.push(function() {
                 googletag.defineSlot(
-                    '/183/iqdzeit_fbia/{{ adcontroller_level2 }}/{{ adcontroller_level3 }}/{{ adcontroller_level4 }}/artikel',
+                    "/183/iqdzeit_fbia
+                        {{- '/{}'.format(adcontroller_level2) if adcontroller_level2 }}
+                        {{- '/{}'.format(adcontroller_level3) if adcontroller_level3 }}
+                        {{- '/{}'.format(adcontroller_level4) if adcontroller_level4 }}/artikel",
                     [[300,50],[300,75],[300,100],[300,150],[300,250],[320,50],[320,53],[320,80],[320,106],[320,160],[320,180],[320,320],[320,416]],
                     'iqadtile{{ fbia_adtile_number }}'
                 ).setTargeting(
@@ -33,10 +36,10 @@
                         '{{ fbia_adtile_position }}',
                         'nospa',
                         'enozqi',
-                        'iqdzeit_fbia',
-                        "{{ adcontroller_level2 }}",
-                        "{{ adcontroller_level3 }}",
-                        "{{ adcontroller_level4 }}"
+                        'iqdzeit_fbia'
+                        {{- ( ',\n"{}"'.format(adcontroller_level2) | safe ) if adcontroller_level2 }}
+                        {{- ( ',\n"{}"'.format(adcontroller_level3) | safe ) if adcontroller_level3 }}
+                        {{- ( ',\n"{}"'.format(adcontroller_level4) | safe ) if adcontroller_level4 }}
                         {{- ( ',\n"{}"'.format(adcontroller_keywords) | safe ) if adcontroller_keywords }}
                     ]
                 ).addService(
