@@ -204,7 +204,7 @@ def test_c1_heading_and_kicker_should_be_properly_escaped(
         'http://xml.zeit.de/zeit-magazin/article/04')
     view = zeit.web.core.view.Content(context, dummy_request)
     assert dict(view.c1_header).get('C1-Track-Heading') == (
-        u'Kann Leipzig Hypezig berleben')
+        u'Kann Leipzig Hypezig überleben?'.encode('utf-8'))
     assert dict(view.c1_client).get('set_heading') == (
         u'"Kann Leipzig Hypezig überleben?"')
     assert dict(view.c1_header).get('C1-Track-Kicker') == 'Szene-Stadt'

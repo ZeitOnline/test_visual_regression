@@ -87,6 +87,14 @@ def access_for_cps(context):
     return context.access
 
 
+# According to <https://tools.ietf.org/html/rfc7230#section-3.2>
+# HTTP header values may consist of VCHAR, visible ASCII characters. However,
+# our titles and such of course contain spaces (which strictly count as
+# "invisible"), so we allow it, since it does not seem to cause any trouble in
+# our stack.
+ASCII_INVISIBLE_CHARACTERS = ''.join([chr(x) for x in range(32)] + [chr(127)])
+
+
 class CeleraOneMixin(object):
 
     def __call__(self):
@@ -135,7 +143,7 @@ class CeleraOneMixin(object):
 
     @classmethod
     def _headersafe(cls, string):
-        pattern = r'[^ %s]' % ''.join(werkzeug.http._token_chars)
+        pattern = r'[%s]' % ASCII_INVISIBLE_CHARACTERS
         return re.sub(pattern, '', string.encode('utf-8', 'ignore'))
 
     def _get_c1_heading(self):
