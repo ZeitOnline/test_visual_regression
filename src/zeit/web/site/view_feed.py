@@ -462,6 +462,18 @@ class RoostFeed(SocialFeed):
     host_restriction='newsfeed')
 class YahooFeed(SocialFeed):
 
+    def __call__(self):
+
+        if self.context.uniqueId != 'http://xml.zeit.de/'\
+                'administratives/yahoofeed':
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+        super(YahooFeed, self).__call__()
+        self.request.response.content_type = 'application/rss+xml'
+        return lxml.etree.tostring(
+            self.build_feed(), pretty_print=True, xml_declaration=True,
+            encoding='UTF-8')
+
     def make_title(self, content):
         if content.supertitle:
             return u'{}: {}'.format(content.supertitle, content.title)
