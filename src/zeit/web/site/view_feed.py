@@ -492,7 +492,6 @@ class YahooFeed(SocialFeed):
     def build_feed(self):
         E = ELEMENT_MAKER
         root = E.rss(version='2.0')
-        build_date = format_rfc822_date(datetime.datetime.today())
         channel = E.channel(
             E.title('ZEIT ONLINE Newsfeed for Yahoo'),
             E.link(self.request.route_url('home')),
