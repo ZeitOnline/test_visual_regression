@@ -212,5 +212,18 @@ def test_yahoo_feed_is_only_available_for_specific_page(testserver):
 # def test_yahoo_feed_contains_expected_fields(testserver):
 
 
-# def test_yahoo_feed_contains_limited_numer_of_fulltext_artciles(testserver):
+def test_yahoo_feed_contains_limited_numer_of_fulltext_articles(testserver):
 
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': ('http://xml.zeit.de/zeit-online/article/{:0>2d}'
+                      .format(i % 10 + 1))}
+        for i in range(16)]
+
+    res = requests.get(
+        testserver.url + '/administratives/yahoofeed/rss-yahoo',
+        headers={'Host': 'newsfeed.zeit.de'})
+    print(res.content)
+    xml = lxml.etree.fromstring(res.content)
+    assert len(xml.find('item')) == 16
+    assert len(xml.find('content:encoded')) == 8
