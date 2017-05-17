@@ -112,11 +112,6 @@ class LongformArticle(Article):
     def show_date_format(self):
         return 'short'
 
-    @zeit.web.reify
-    def share_buttons(self):
-        return 'big'
-
-
 @zeit.web.view_config(
     context=zeit.web.core.article.IFeatureLongform,
     renderer='templates/feature_longform.html')

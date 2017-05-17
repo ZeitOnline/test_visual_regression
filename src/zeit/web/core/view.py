@@ -709,11 +709,6 @@ class Base(object):
         return '/'.join([x for x in code if x])
 
     @zeit.web.reify
-    def share_buttons(self):
-        if getattr(self.context, 'bigshare_buttons', None):
-            return 'big'
-
-    @zeit.web.reify
     def no_overscrolling(self):
         if not getattr(self.context, 'overscrolling', None):
             return True
@@ -1087,9 +1082,6 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
     def webtrekk(self):
         webtrekk = super(Content, self).webtrekk
         custom_parameter = webtrekk['customParameter']
-
-        style = 'share_buttons_{}'.format(self.share_buttons or 'small')
-        custom_parameter['cp31'] = style
 
         if self.nextread_ad:
             parsed = urlparse.urlparse(self.nextread_ad[0].url)
