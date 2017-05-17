@@ -2024,13 +2024,18 @@ def test_share_buttons_are_present(testbrowser):
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
     assert 'Artikel auf ZEIT ONLINE lesen:' in query.get('body').pop(0)
 
+    assert labels[0].text == 'Auf Facebook teilen'
+    assert labels[1].text == 'Twittern'
+    assert labels[2].text == 'WhatsApp'
+    assert labels[3].text == 'Facebook Messenger'
+    assert labels[4].text == 'Mailen'
+
 def test_article_view_has_share_buttons_set_correctly(
         application, dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/simple')
     view = zeit.web.site.view_article.Article(article, dummy_request)
     assert not view.share_buttons
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_small'
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/tags')

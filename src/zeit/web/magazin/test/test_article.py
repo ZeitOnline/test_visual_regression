@@ -194,7 +194,6 @@ def test_article03_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small',
         'cp32': 'unfeasible'}
 
 
@@ -252,7 +251,6 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small',
         'cp32': 'unfeasible'}
 
 
@@ -965,13 +963,11 @@ def test_article_view_has_share_buttons_set_correctly(
         'http://xml.zeit.de/zeit-magazin/article/03')
     view = zeit.web.magazin.view_article.Article(article, dummy_request)
     assert not view.share_buttons
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_small'
 
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/04')
     view = zeit.web.magazin.view_article.Article(article, dummy_request)
     assert view.share_buttons == 'big'
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
 
 
 def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
