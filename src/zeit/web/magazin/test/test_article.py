@@ -915,8 +915,6 @@ def test_share_buttons_are_present(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
-    assert 'sharing-menu--big' not in sharing_menu.attrib['class']
-
     #  facebook
     parts = urlparse.urlparse(links[0].attrib['href'])
     query = urlparse.parse_qs(parts.query)
@@ -959,18 +957,6 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[2].text == 'WhatsApp'
     assert labels[3].text == 'Facebook Messenger'
     assert labels[4].text == 'Mailen'
-
-
-def test_share_buttons_are_big(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/04')
-    sharing_menu = browser.cssselect('.sharing-menu')[0]
-    links = sharing_menu.cssselect('.sharing-menu__link')
-
-    assert 'sharing-menu--big' in sharing_menu.attrib['class']
-    assert len(links) == 5
-
-    for link in links:
-        assert 'share_big' in link.attrib['href']
 
 
 def test_article_view_has_share_buttons_set_correctly(

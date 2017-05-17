@@ -1987,8 +1987,6 @@ def test_share_buttons_are_present(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
-    assert 'sharing-menu--big' not in sharing_menu.attrib['class']
-
     #  facebook
     parts = urlparse.urlparse(links[0].attrib['href'])
     query = urlparse.parse_qs(parts.query)
@@ -2026,32 +2024,6 @@ def test_share_buttons_are_present(testbrowser):
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
     assert 'Artikel auf ZEIT ONLINE lesen:' in query.get('body').pop(0)
 
-    assert labels[0].text == 'Facebook'
-    assert labels[1].text == 'Twitter'
-    assert labels[2].text == 'WhatsApp'
-    assert labels[3].text == 'Facebook Messenger'
-    assert labels[4].text == 'Mail'
-
-
-def test_share_buttons_are_big(testbrowser):
-    browser = testbrowser('/zeit-online/article/tags')
-    sharing_menu = browser.cssselect('.sharing-menu2')[0]
-    links = sharing_menu.cssselect('.sharing-menu2__link')
-    labels = sharing_menu.cssselect('.sharing-menu2__text')
-
-    assert 'sharing-menu2--big' in sharing_menu.attrib['class']
-    assert len(links) == 5
-
-    for link in links:
-        assert '.ref.zeitde.share_big.' in link.attrib['href']
-
-    assert labels[0].text == 'Auf Facebook teilen'
-    assert labels[1].text == 'Twittern'
-    assert labels[2].text == 'WhatsApp'
-    assert labels[3].text == 'Facebook Messenger'
-    assert labels[4].text == 'Mailen'
-
-
 def test_article_view_has_share_buttons_set_correctly(
         application, dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
@@ -2063,9 +2035,6 @@ def test_article_view_has_share_buttons_set_correctly(
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/tags')
     view = zeit.web.site.view_article.Article(article, dummy_request)
-    assert view.share_buttons == 'big'
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
-
 
 def test_merian_link_has_nofollow(testbrowser, dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
