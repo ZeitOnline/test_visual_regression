@@ -53,7 +53,7 @@
     </head>
     <body>
         <title>Yahoo RSS Feed</title>
-<cluster area="feature" visible="True" visible_mobile="True">
+    <cluster area="feature" visible="True" visible_mobile="True">
       <region area="lead" visible="True" visible_mobile="True" hide-dupes="True" count="16" automatic="True" automatic_type="query">
         <raw_query>type:article product_id:ZEDE published:published access:free -breaking_news date-first-released:[* TO NOW/DAY+8HOURS]</raw_query>
         <raw_order>date-first-released desc</raw_order>

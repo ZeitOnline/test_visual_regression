@@ -225,5 +225,7 @@ def test_yahoo_feed_contains_limited_numer_of_fulltext_articles(testserver):
         headers={'Host': 'newsfeed.zeit.de'})
     print(res.content)
     xml = lxml.etree.fromstring(res.content)
-    assert len(xml.find('item')) == 16
-    assert len(xml.find('content:encoded')) == 8
+    items = xml.find('item')
+    assert len(items) == 16
+    assert len(items.find('title')) == 16
+    assert len(items.find('content:encoded')) == 8

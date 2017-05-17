@@ -1,4 +1,4 @@
-<h2>{{ view.subtitle}}</h2>
+<p>{{ view.subtitle}}</p>
 
 {% require image = get_image(view.header_module, variant_id='wide', fallback=False) %}
     {% set image_width = 1440 %}
@@ -14,6 +14,6 @@
 {% for page in view.pages %}
     {% set page_loop = loop %}
     {%- for block in page -%}
-        {% include "zeit.web.core:templates/yahoofeed/blocks/{}.html".format(block | block_type) ignore missing %}
+        {% include "zeit.web.site:templates/yahoofeed/blocks/{}.html".format(block | block_type) ignore missing %}
     {%- endfor -%}
 {% endfor %}
