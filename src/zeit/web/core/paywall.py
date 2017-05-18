@@ -144,7 +144,7 @@ class CeleraOneMixin(object):
     @classmethod
     def _headersafe(cls, string):
         pattern = r'[%s]' % ASCII_INVISIBLE_CHARACTERS
-        return re.sub(pattern, '', string.encode('utf-8', 'ignore'))
+        return re.sub(pattern, '', string.encode('ascii', 'ignore'))
 
     def _get_c1_heading(self):
         if getattr(self.context, 'title', None) is not None:
