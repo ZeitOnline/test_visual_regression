@@ -6,6 +6,8 @@ import zeit.solr.interfaces
 
 import zeit.web.site.view_feed
 
+import zeit.content.article.testing
+
 
 def test_newsfeed_should_only_render_cp2015(testserver):
     res = requests.get(
@@ -209,23 +211,57 @@ def test_yahoo_feed_is_only_available_for_specific_page(testserver):
         headers={'Host': 'newsfeed.zeit.de'})
     assert res.status_code == 404
 
-# def test_yahoo_feed_contains_expected_fields(testserver):
 
-
-def test_yahoo_feed_contains_limited_numer_of_fulltext_articles(testserver):
+def test_yahoo_feed_contains_expected_fields(testserver):
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [
-        {'uniqueId': ('http://xml.zeit.de/zeit-online/article/{:0>2d}'
-                      .format(i % 10 + 1))}
-        for i in range(16)]
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/simple',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/tags',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/fischer',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/simple',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/tags',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/fischer',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/simple',
+         'type': 'article'},
+    ]
 
     res = requests.get(
         testserver.url + '/administratives/yahoofeed/rss-yahoo',
         headers={'Host': 'newsfeed.zeit.de'})
-    print(res.content)
+
     xml = lxml.etree.fromstring(res.content)
-    items = xml.find('item')
-    assert len(items) == 16
-    assert len(items.find('title')) == 16
-    assert len(items.find('content:encoded')) == 8
+    assert len(xml.xpath('//item')) == 16
+    assert len(xml.xpath('//title')) == 17
+
+    assert len(xml.xpath('//item//description')) == 16
+    assert len(xml.xpath('//item//pubDate')) == 16
+    assert len(xml.xpath('//item//guid')) == 16
+    assert len(xml.xpath('//item//category')) == 16
+
+    # There should only be 8 fulltext articles in the feed!
+    assert len(xml.xpath('//*[name()="content:encoded"]')) == 8
