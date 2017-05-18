@@ -468,11 +468,7 @@ class YahooFeed(SocialFeed):
                 'administratives/yahoofeed':
             raise pyramid.httpexceptions.HTTPNotFound()
 
-        super(YahooFeed, self).__call__()
-        self.request.response.content_type = 'application/rss+xml'
-        return lxml.etree.tostring(
-            self.build_feed(), pretty_print=True, xml_declaration=True,
-            encoding='UTF-8')
+        return super(YahooFeed, self).__call__()
 
     def make_title(self, content):
         if content.supertitle:
@@ -515,9 +511,9 @@ class YahooFeed(SocialFeed):
                 item = E.item(
                     E.title(self.make_title(content)),
                     E.link(content_url),
-                    E.description(content.teaserText),
-                    E.pubDate(
-                        format_rfc822_date(last_published_semantic(content))),
+                    E.description(content.teaserText or content.subtitle),
+                    E.pubDate(format_rfc822_date(
+                        last_published_semantic(content))),
                     E.guid(content.uniqueId, isPermaLink='false'),
                     E.category(content.ressort)
                 )
@@ -545,4 +541,5 @@ class YahooFeed(SocialFeed):
                     'Error adding %s to %s',
                     content, self.__class__.__name__, exc_info=True)
                 continue
+
         return root
