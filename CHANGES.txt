@@ -8,7 +8,7 @@ POSTDEPLOY
 3.59 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FEM-57: Use `amp-accordion` element for infobox
 
 
 3.58 (2017-05-11)
