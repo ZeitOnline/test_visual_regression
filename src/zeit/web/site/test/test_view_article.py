@@ -344,52 +344,16 @@ def test_article_obfuscated_source_without_date_print_published():
     assert view.obfuscated_source == base64.b64encode(source.encode('latin-1'))
 
 
-def test_article_sharing_menu_should_open_and_close(
-        testserver, selenium_driver):
-    selenium_driver.set_window_size(320, 480)
-    selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
-
-    sharing_menu_selector = '.sharing-menu > .sharing-menu__items'
-    sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > a[aria-controls]')
-    sharing_menu_items = selenium_driver.find_element_by_css_selector(
-        sharing_menu_selector)
-
-    assert sharing_menu_items.is_displayed() is False, (
-        'sharing menu should be hidden by default')
-
-    sharing_menu_target.click()
-    # we need to wait for the CSS animation to finish
-    # so the sharing menu is actually visible
-    condition = expected_conditions.visibility_of_element_located((
-        By.CSS_SELECTOR, sharing_menu_selector))
-    assert WebDriverWait(
-        selenium_driver, 1).until(condition), (
-            'sharing menu should be visible after interaction')
-
-    sharing_menu_target.click()
-    # we need to wait for the CSS animation to finish
-    # so the sharing menu is actually hidden
-    condition = expected_conditions.invisibility_of_element_located((
-        By.CSS_SELECTOR, sharing_menu_selector))
-    assert WebDriverWait(
-        selenium_driver, 1).until(condition), (
-            'sharing menu should hide again on click')
-
-
 def test_article_sharing_menu_should_hide_app_links_tablet_upwards(
         testserver, selenium_driver):
     selenium_driver.set_window_size(768, 800)
     selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
 
-    sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > a[aria-controls]')
     whatsapp_item = selenium_driver.find_element_by_css_selector(
         '.sharing-menu__item--whatsapp')
     messenger_item = selenium_driver.find_element_by_css_selector(
         '.sharing-menu__item--messenger')
 
-    sharing_menu_target.click()
     assert not whatsapp_item.is_displayed(), (
         'Sharing link to WhatsApp should be hidden on tablet & desktop')
     assert not messenger_item.is_displayed(), (
