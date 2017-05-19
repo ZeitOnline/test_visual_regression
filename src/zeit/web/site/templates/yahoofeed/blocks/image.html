@@ -7,7 +7,8 @@
     {% set image_width = 1440 %}
     {% set image_height = (image_width / image.ratio) | round | int %}
     <p>
-        <img src="https://img.zeit.de/{{ image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.alt }}" title="{{ image.caption }}"/>
+        {# XXX: Remove as soon as we have SSL #}
+        <img src="{{ (request.image_host | replace('http://', 'https://')) + image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.alt }}" title="{{ image.caption }}"/>
         {{ image.caption }}
     </p>
 {% endrequire %}
