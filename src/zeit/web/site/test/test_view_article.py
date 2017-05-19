@@ -1955,11 +1955,11 @@ def test_share_buttons_are_present(testbrowser):
     parts = urlparse.urlparse(links[0].attrib['href'])
     query = urlparse.parse_qs(parts.query)
     url = query.get('u').pop(0)
-    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share_small.link' in url
+    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share.link' in url
     assert 'utm_medium=sm' in url
     assert 'utm_source=facebook_zonaudev_ext' in url
     assert 'utm_campaign=ref' in url
-    assert 'utm_content=zeitde_share_small_link_x' in url
+    assert 'utm_content=zeitde_share_link_x' in url
 
     #  twitter
     parts = urlparse.urlparse(links[1].attrib['href'])
@@ -1967,7 +1967,7 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('text').pop(0) == (
         'Williams wackelt weiter, steht aber im Viertelfinale')
     assert query.get('via').pop(0) == 'zeitonline'
-    assert 'share_small' in query.get('url').pop(0)
+    assert 'share' in query.get('url').pop(0)
 
     #  whatsapp
     parts = urlparse.urlparse(links[2].attrib['href'])
