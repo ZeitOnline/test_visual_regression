@@ -463,18 +463,11 @@ class RoostFeed(SocialFeed):
 class YahooFeed(SocialFeed):
 
     def __call__(self):
-
         if self.context.uniqueId != 'http://xml.zeit.de/'\
                 'administratives/yahoofeed':
             raise pyramid.httpexceptions.HTTPNotFound()
 
         return super(YahooFeed, self).__call__()
-
-    def make_title(self, content):
-        if content.supertitle:
-            return u'{}: {}'.format(content.supertitle, content.title)
-        else:
-            return content.title
 
     def make_author_string(self, content):
         authors = []
