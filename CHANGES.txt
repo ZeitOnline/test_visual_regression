@@ -5,8 +5,16 @@ POSTDEPLOY
 ----------
 
 
-3.59 (unreleased)
+3.60 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.59 (2017-05-19)
+-----------------
+
+- ZON-3822: Clean up AdController values for FBIAs
 
 - FEM-57: Use `amp-accordion` element for infobox
 
