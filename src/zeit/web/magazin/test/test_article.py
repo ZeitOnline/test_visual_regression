@@ -194,7 +194,6 @@ def test_article03_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small',
         'cp32': 'unfeasible'}
 
 
@@ -252,7 +251,6 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small',
         'cp32': 'unfeasible'}
 
 
@@ -915,17 +913,15 @@ def test_share_buttons_are_present(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
-    assert 'sharing-menu--big' not in sharing_menu.attrib['class']
-
     #  facebook
     parts = urlparse.urlparse(links[0].attrib['href'])
     query = urlparse.parse_qs(parts.query)
     url = query.get('u').pop(0)
-    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share_small.link' in url
+    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share.link' in url
     assert 'utm_medium=sm' in url
     assert 'utm_source=facebook_zonaudev_ext' in url
     assert 'utm_campaign=ref' in url
-    assert 'utm_content=zeitde_share_small_link_x' in url
+    assert 'utm_content=zeitde_share_link_x' in url
 
     #  twitter
     parts = urlparse.urlparse(links[1].attrib['href'])
@@ -933,7 +929,7 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('text').pop(0) == (
         'Der Chianti hat eine zweite Chance verdient')
     assert query.get('via').pop(0) == 'ZEITmagazin'
-    assert 'share_small' in query.get('url').pop(0)
+    assert 'share' in query.get('url').pop(0)
 
     #  whatsapp
     parts = urlparse.urlparse(links[2].attrib['href'])
@@ -959,33 +955,6 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[2].text == 'WhatsApp'
     assert labels[3].text == 'Facebook Messenger'
     assert labels[4].text == 'Mailen'
-
-
-def test_share_buttons_are_big(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/04')
-    sharing_menu = browser.cssselect('.sharing-menu')[0]
-    links = sharing_menu.cssselect('.sharing-menu__link')
-
-    assert 'sharing-menu--big' in sharing_menu.attrib['class']
-    assert len(links) == 5
-
-    for link in links:
-        assert 'share_big' in link.attrib['href']
-
-
-def test_article_view_has_share_buttons_set_correctly(
-        application, dummy_request):
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    view = zeit.web.magazin.view_article.Article(article, dummy_request)
-    assert not view.share_buttons
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_small'
-
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/04')
-    view = zeit.web.magazin.view_article.Article(article, dummy_request)
-    assert view.share_buttons == 'big'
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
 
 
 def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
