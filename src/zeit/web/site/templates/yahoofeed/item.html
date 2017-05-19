@@ -4,7 +4,7 @@
     {% set image_width = 1440 %}
     {% set image_height = (image_width / image.ratio) | round | int %}
     <p>
-        <img href="https://img.zeit.de/{{ image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.alt }}" title="{{ image.caption }}"/>
+        <img src="https://img.zeit.de/{{ image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.alt }}" title="{{ image.caption }}"/>
         {{ image.caption }}
     </p>
 {% endrequire %}
