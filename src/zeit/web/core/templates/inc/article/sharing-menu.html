@@ -1,5 +1,5 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
-{% set tracking_id = 'share_%s' | format(view.share_buttons or 'small') %}
+{% set tracking_id = 'share' %}
 {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_%s_link_x' | format(tracking_id) -%}
 {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.%s.link.x' | format(tracking_id) %}
 <div class="{{ self.layout() | with_mods(view.share_buttons) }}">
