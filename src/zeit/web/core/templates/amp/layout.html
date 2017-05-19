@@ -28,10 +28,17 @@
     {% if toggles('amp_new_advertising') -%}
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     {% endif -%}
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
     <script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-    {% block scripts %}{% endblock %}
+    {% if view.liveblog and view.liveblog.liveblog -%}
+    <script async custom-element="amp-live-list" src="https://cdn.ampproject.org/v0/amp-live-list-0.1.js"></script>
+    <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+    <script async custom-element="amp-soundcloud" src="https://cdn.ampproject.org/v0/amp-soundcloud-0.1.js"></script>
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    {% endif -%}
 </head>
 
 <body>
@@ -78,7 +85,12 @@
         <main itemprop="mainContentOfPage">
         {% block main %}
             {% block content %}
-            <article class="article" itemprop="mainEntity" itemscope itemtype="{% block itemtype %}http://schema.org/Article{% endblock %}">
+            <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/
+                {%- if view.liveblog and view.liveblog.liveblog -%}
+                    LiveBlogPosting
+                {%- else -%}
+                    Article
+                {%- endif -%}">
                 {% include [
                     "{}:templates/amp/article/publisher.html".format(view.package),
                     "zeit.web.core:templates/amp/article/publisher.html"] %}
@@ -165,8 +177,8 @@
                     </a>
                 </div>
 
-                {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_small_link_x' -%}
-                {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share_small.link.x' -%}
+                {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_link_x' -%}
+                {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share.link.x' -%}
                 <footer class="article__footer article__item">
                     <nav class="article-sharing">
                         <ul class="article-sharing__list">

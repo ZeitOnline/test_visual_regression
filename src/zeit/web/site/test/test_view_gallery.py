@@ -52,12 +52,6 @@ def test_zon_gallery_uses_svg_icons(selenium_driver, testserver):
         assert len(svg_icons) == 4, "svg arrow icons are missing"
 
 
-def test_gallery_should_contain_veeseo_widget(testbrowser):
-    select = testbrowser('/zeit-online/gallery/biga_1').cssselect
-    assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
-    assert select('.RA2VW2')
-
-
 def test_zon_gallery_image_max_widths(selenium_driver, testserver):
     driver = selenium_driver
     query = 'document.querySelectorAll(".gallery__media-item")'

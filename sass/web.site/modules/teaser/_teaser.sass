@@ -9,14 +9,11 @@
 	border-color: $color-border
 	border-style: solid
 	border-width: 1px 0 0
-	margin: 0 (-$page-padding)
-	padding: $vertical-space $page-padding
+	padding: $vertical-space $page-padding--small
 	&:nth-of-type(1)
 		border-top-width: 0
 	+respond-min($break-areas)
 		border-top-width: 0
-		margin-left: 0
-		margin-right: 0
 		padding: $vertical-space 0
 
 %teaser-small-media
@@ -242,9 +239,12 @@
 %teaser-cp-area-fullwidth
 	+clearfix
 	+font-smoothing
-	padding: remify(24px $page-padding 32px)
+	padding: remify(24px $page-padding--small 32px)
 	position: relative
 	text-align: center
+	+respond-min($break-areas)
+		padding: remify(40px 0)
+		text-align: inherit
 	&__media
 		bottom: 0
 		left: 0

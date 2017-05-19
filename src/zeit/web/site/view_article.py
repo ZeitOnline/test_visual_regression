@@ -208,9 +208,9 @@ class LiveblogArticle(Article):
 
     header_layout = 'liveblog'
 
-    def __init__(self, context, request):
-        super(LiveblogArticle, self).__init__(context, request)
-        self.liveblog = zeit.web.core.interfaces.ILiveblogInfo(self.context)
+    @zeit.web.reify
+    def liveblog(self):
+        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 
 
 @zeit.web.view_config(
@@ -218,7 +218,10 @@ class LiveblogArticle(Article):
     renderer='templates/amp/article.html')
 class AcceleratedMobilePageArticle(
         zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
-    pass
+
+    @zeit.web.reify
+    def liveblog(self):
+        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 
 
 @zeit.web.view_config(

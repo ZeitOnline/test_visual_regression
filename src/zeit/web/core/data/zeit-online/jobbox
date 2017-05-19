@@ -79,9 +79,6 @@
                 <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c" cp:type="cpextra" module="jobbox">
                     <cp_extra id="jobbox"/>
                 </container>
-                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11d" cp:type="cpextra" module="jobbox">
-                    <cp_extra id="jobbox"/>
-                </container>
             </region>
             <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" kind="minor">
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" module="zon-small">
@@ -99,7 +96,7 @@
                 </container>
             </region>
             <region area="id-00161f57-a6f8-4da8-80a8-6bce967e03ac" kind="duo">
-                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c" cp:type="cpextra" module="jobbox">
+                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11e" cp:type="cpextra" module="jobbox">
                     <cp_extra id="jobbox"/>
                 </container>
             </region>
@@ -107,7 +104,7 @@
         <cluster area="id-9e096c63-ca17-45f8-832c-867a6ad78505" kind="parquet">
             <region area="id-d1ac1fc9-8640-4f32-96d8-8f956f04a7fb" kind="parquet" title="Parkett">
                 <referenced_cp>http://xml.zeit.de/zeit-online/parquet</referenced_cp>
-                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11c" cp:type="cpextra" module="jobbox">
+                <container cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a558f11f" cp:type="cpextra" module="jobbox">
                    <cp_extra id="jobbox"/>
                 </container>
                 <container cp:__name__="id-9644ea40-0b1a-415f-9be9-38310b9bbdd2" cp:type="teaser" module="zon-small">

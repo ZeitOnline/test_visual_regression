@@ -5,12 +5,62 @@ POSTDEPLOY
 ----------
 
 
-3.56 (unreleased)
+3.60 (unreleased)
 -----------------
+
+- ZON-3917: Only show big sharing-buttons
+
+
+3.59 (2017-05-19)
+-----------------
+
+- ZON-3822: Clean up AdController values for FBIAs
+
+- FEM-57: Use `amp-accordion` element for infobox
+
+
+3.58 (2017-05-11)
+-----------------
+
+- ZON-3822: Update AdTile code for FBIA
+
+- BUG-723: Add liveblog kicker logo styles for nextread
+
+- FIX: Repair main navigation dropdowns for advertorials
+
+- FIX: Fix headline appearance in navigation flyout for ZEIT Campus advertorials
+
+- FEM-54: Reduce page padding for ZON mobile content
+
+- MAINT: Fix jobbox margin
+
+
+3.57 (2017-05-08)
+-----------------
+
+- ZON-3863: Add required scripts for liveblogs in AMP
+
+- ZON-3863: Remove XML declaration for inline AMP SVGs
+
+
+3.56 (2017-05-05)
+-----------------
+
+- ZON-3889: Remove veeseo widget
 
 - ZON-3822: Implement AdTile3+4 on FBIA analogous to core logic
 
 - ZON-3822: Remove AdTile5 from FBIA
+
+- ZON-3872: Output smart banner id only on HP, change value
+
+- ZON-3870: Redirect paginated image galleries
+
+- BUG-679: Prevent SSO cookie attack vector
+
+- FEM-55: Reduce page padding for ZON mobile index pages (CPs)
+
+- FIX: Be defensive about invalid volume references in article body
 
 
 3.55 (2017-04-28)

@@ -5,6 +5,14 @@ import urllib
 import zeit.web.core.application
 
 
+def test_amp_inline_svg_sprite_contains_no_xml_declaration(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    sprite = browser.cssselect('.symbols')[0]
+    assert '<?xml' not in lxml.etree.tostring(sprite)
+    # redundant, but stresses what this test is all about
+    assert '<?xml' not in browser.contents
+
+
 def test_amp_paragraph_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser('zeit.web.core:templates/amp/blocks/paragraph.html',
                          block=u'Wie lässt sich diese Floskel übersetzen? ')
@@ -263,3 +271,20 @@ def test_amp_article_contains_authorbox(testbrowser):
     assert name.text.strip() == 'Jochen Wegner'
     assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+
+
+def test_amp_article_shows_amp_accordion_for_infobox(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/infoboxartikel')
+    infobox = browser.cssselect('.infobox')[0]
+    accordion = infobox.cssselect('amp-accordion')[0]
+    # required script
+    assert browser.cssselect('script[custom-element="amp-accordion"]')
+    # amp-accordion can contain one or more <section>s as its direct children
+    assert len(infobox.cssselect('amp-accordion > section')) == 6
+    assert len(infobox.cssselect('amp-accordion > *')) == 6
+    # each <section> must contain exactly two direct children
+    assert len(accordion.cssselect('section > *')) == 12
+    # the first child (of the section) must be a heading
+    assert len(accordion.cssselect('section > h3:first-child')) == 6
+    # the second child (of the section) can be any tag allowed in AMP HTML
+    assert len(accordion.cssselect('section > h3 + div')) == 6

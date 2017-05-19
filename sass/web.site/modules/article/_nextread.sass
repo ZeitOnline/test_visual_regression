@@ -1,18 +1,21 @@
 .nextread
-	margin: 0 (-$page-padding)
 	&__link
 		display: block
+	&__lead,
+	&__container
+		+padded
 	&__lead
 		color: $color-text
 		font-size: em(15px)
 		font-weight: 700
 		letter-spacing: $zon-letter-spacing-m
+		padding-bottom: remify(15px)
+		padding-top: remify(24px)
 		text-transform: uppercase
-		padding: remify(24px $page-padding 15px)
 	&__container
-		padding: remify(12px $page-padding 32px)
+		padding-bottom: remify(32px)
+		padding-top: remify(12px)
 	&__media
-		margin: 0
 		height: 0
 		padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 		background-color: $black
@@ -24,6 +27,10 @@
 		&--zmo
 			@extend %teaser-kicker--zmo
 	&__kicker-logo
+		&--liveblog
+			@extend %teaser-kicker-logo--liveblog
+		&--liveblog-closed
+			@extend %teaser-kicker-logo--liveblog-closed
 		&--zplus
 			@extend %teaser-kicker-logo--zplus
 		&--zplus-register

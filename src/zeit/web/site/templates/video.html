@@ -2,7 +2,7 @@
 {% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 
 {% block content %}
-    <article class="article article--video" id="js-article"
+    <article class="article article--padded article--video" id="js-article"
         {% if view.serie %} data-video-series="{{ view.serie | format_webtrekk }}"{% endif %}
         data-video-provider="brightcove"
         data-video-size="large"
@@ -51,18 +51,11 @@
             {% endif -%}
             <div class="metadata">
                 {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
-                {% include "zeit.web.site:templates/inc/article/sharing-menu.html" %}
             </div>
+            {% include "zeit.web.site:templates/inc/article/sharing-menu.html" %}
             {% set tag_modifier = "video" %}
             {% include "zeit.web.core:templates/inc/article/tags.html" %}
         </div>
         {% endprofile %}
     </article>
-{% endblock %}
-
-{% block article_footer %}
-{% endblock %}
-
-{% block veeseo_div %}
-    <div class="RV2VW2"></div>
 {% endblock %}

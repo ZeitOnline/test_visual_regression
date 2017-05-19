@@ -254,7 +254,7 @@ def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
     assert (browser.cssselect('.dashboard__user-name')[0].text.strip() ==
             'test-user')
     assert len(browser.cssselect('.dashboard__user-image')) == 1
-    assert len(browser.cssselect('.dashboard__box--is-header')) == 1
+    assert len(browser.cssselect('.dashboard__user + .dashboard__box')) == 1
 
     # body
     assert len(browser.cssselect('.dashboard__box')) == 6

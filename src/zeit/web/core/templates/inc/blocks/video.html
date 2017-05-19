@@ -14,11 +14,11 @@
     {% endif %}
 
     {% block video_caption -%}
-    <figcaption class="video-figure__caption">
-        <span class="video-figure__pagetitle">{{ [block.supertitle, block.title] | join_if_exists(' - ') }}</span>
-        <span class="video-figure__description">{{ block.description }}</span>
+    <figcaption class="figure__caption">
+        <span class="figure__title">{{ [block.supertitle, block.title] | join_if_exists(' - ') }}</span>
+        <span class="figure__text">{{ block.description }}</span>
         {% if block.video_still_copyright and block.video_still_copyright | trim %}
-            <span class="video-figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
+            <span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
                 <span itemprop="name">© Foto: {{ block.video_still_copyright | trim }}</span>
             </span>
         {% endif %}

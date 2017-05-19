@@ -7,7 +7,7 @@
 {% block main %}
     {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
-    <article class="article article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
+    <article class="article article--padded article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
     {% profile %}
         {% block article_head %}
@@ -34,19 +34,10 @@
         </div>
         {% endblock article_body %}
     {% endprofile %}
-    </article>
-
-    {% block lineage %}
-        {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
-    {% endblock %}
-
-    {% endblock content %}
-
-
     {% block article_footer %}
     <div class="article-footer article__item" data-ct-area="articlebottom">
         {% block article_sharing %}
-            {% include "zeit.web.site:templates/inc/article/sharing-menu{}.html".format('-big' if view.share_buttons == 'big' else '') %}
+            {% include "zeit.web.site:templates/inc/article/sharing-menu.html" %}
         {% endblock %}
 
         {% block print %}
@@ -57,13 +48,18 @@
         {% endblock %}
     </div>
     {% endblock %}
+    </article>
+
+    {% block lineage %}
+        {% include "zeit.web.site:templates/inc/article/lineage.tpl" %}
+    {% endblock %}
+
+    {% endblock content %}
 
     {% block nextread %}
         {% set module = view.nextread %}
         {% include "zeit.web.site:templates/inc/article/nextread.tpl" %}
     {% endblock %}
-
-    {% block veeseo_div %}{% endblock %}
 
     {% block nextread_ad %}
         {% set module = view.nextread_ad %}
@@ -95,8 +91,4 @@
         </div>
     </div>
 </script>
-{% endblock %}
-
-{% block veeseo %}
-    <script src="http://rce.veeseo.com/widgets/zeit/widget.js"></script>
 {% endblock %}

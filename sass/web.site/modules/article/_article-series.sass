@@ -1,8 +1,7 @@
 .article-series
+	+unpadded
 	background: $color-dark-background
 	height: remify(80px)
-	margin-left: -$page-padding
-	margin-right: -$page-padding
 	position: relative
 
 .article-series__media
@@ -27,8 +26,7 @@
 	top: 0
 
 .article-series__inner-heading
-	padding-left: $page-padding
-	padding-right: $page-padding
+	+padded
 	position: absolute
 	top: 50%
 	transform: translateY(-50%)

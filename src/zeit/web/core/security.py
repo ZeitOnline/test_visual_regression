@@ -141,7 +141,7 @@ def get_user_info(request):
 
 def get_user_info_from_sso_cookie(cookie, key):
     try:
-        return jwt.decode(cookie, key, 'RS256')
+        return jwt.decode(cookie, key, algorithms='RS256')
     except Exception:
         return
 

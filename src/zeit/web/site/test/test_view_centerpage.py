@@ -285,7 +285,7 @@ def test_responsive_image_should_have_noscript(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     noscript = browser.cssselect(
-        '#main .cp-region--multi .scaled-image noscript')
+        '#main .cp-region--duo .scaled-image noscript')
     assert len(noscript) == 3
 
 
@@ -1680,7 +1680,7 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
     dropdown.find_element_by_xpath(
         "//option[text()='BWL']").click()
     form.submit()
-    assert ('http://ranking.zeit.de/che2016/de/rankingunion/show?'
+    assert ('https://ranking.zeit.de/che/de/rankingunion/show?'
             'esb=24&ab=3&hstyp=1&subfach=&wt_zmc=fix.int.zonpmr.zeitde'
             '.funktionsbox_studium.che.teaser.button.'
             '&utm_medium=fix&utm_source=zeitde_zonpmr_int'
@@ -1699,7 +1699,7 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
     button = (box.find_element_by_class_name('studiumbox__content--clone')
               .find_element_by_class_name('studiumbox__button'))
     button.click()
-    assert ('http://ranking.zeit.de/che2016/de/faecher'
+    assert ('https://ranking.zeit.de/che/de/faecher'
             '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.che.teaser'
             '.button_ohne_fach.x&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
@@ -2889,3 +2889,16 @@ def test_special_ressortpage_returns_is_ressortpage_correctly(
         zeit.web.site.view_centerpage.Centerpage, u'ressort', u'mobilitaet')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
     assert view.is_ressortpage
+
+
+def test_hp_should_include_itunes_smart_app_banner(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
+    assert len(app_banner_id) == 1
+    assert app_banner_id[0].attrib['content'] == 'app-id=828889166'
+
+
+def test_cp_should_not_include_itunes_smart_app_banner(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/centerpage')
+    app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
+    assert len(app_banner_id) == 0

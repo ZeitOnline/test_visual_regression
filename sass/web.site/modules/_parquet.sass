@@ -50,7 +50,7 @@
 		font-weight: bold
 		letter-spacing: $zon-letter-spacing-s
 		line-height: 1
-		padding: remify(14px) $page-padding
+		padding: remify(14px) $page-padding--small
 		position: relative
 		@at-root a#{&}
 			+on-interaction
@@ -61,11 +61,10 @@
 			float: right
 			font-size: remify(32px)
 			line-height: 0.375 // IE fix (http://caniuse.com/#feat=rem)
-		+respond-min($break-tablet-min)
+		+respond-min($break-areas)
 			line-height: normal
 			overflow: hidden
-			padding-bottom: 0
-			padding-top: remify(20px)
+			padding: remify(20px $page-padding 0)
 			text-overflow: ellipsis
 			&:after
 				content: none
@@ -112,9 +111,9 @@
 
 	&__links
 		display: none
-		padding: remify(20px) $page-padding
-		+respond-min($break-tablet-min)
+		+respond-min($break-areas)
 			display: block
+			padding: remify(20px) $page-padding
 
 	&__topic-links
 		margin: 0 0 1em
@@ -164,5 +163,5 @@
 	vertical-align: top
 	margin: 0
 	max-width: 100vw // suppress overflowing content, e.g. jobbox bylines
-	padding: 0 $page-padding
-
+	+respond-min($break-areas)
+		padding: 0 $page-padding

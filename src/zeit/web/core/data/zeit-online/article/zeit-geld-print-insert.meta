@@ -14,7 +14,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="bigshare_buttons">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">default</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2017-04-03T05:56:09+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEB-2017-14</attribute>
