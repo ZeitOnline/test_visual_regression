@@ -957,19 +957,6 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[4].text == 'Mailen'
 
 
-def test_article_view_has_share_buttons_set_correctly(
-        application, dummy_request):
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    view = zeit.web.magazin.view_article.Article(article, dummy_request)
-    assert not view.share_buttons
-
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/04')
-    view = zeit.web.magazin.view_article.Article(article, dummy_request)
-    assert view.share_buttons == 'big'
-
-
 def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
     url = ('/zeit-online/article/zplus-zeit'
            '?C1-Meter-Status=always_paid')

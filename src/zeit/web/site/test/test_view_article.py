@@ -2030,16 +2030,6 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[3].text == 'Facebook Messenger'
     assert labels[4].text == 'Mailen'
 
-def test_article_view_has_share_buttons_set_correctly(
-        application, dummy_request):
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/simple')
-    view = zeit.web.site.view_article.Article(article, dummy_request)
-    assert not view.share_buttons
-
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/tags')
-    view = zeit.web.site.view_article.Article(article, dummy_request)
 
 def test_merian_link_has_nofollow(testbrowser, dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
