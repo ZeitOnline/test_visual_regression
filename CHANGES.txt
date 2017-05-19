@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-3822: Clean up AdController values for FBIAs
 
+- ZON-3917: Only show big sharing-buttons
+
 - FEM-57: Use `amp-accordion` element for infobox
 
 
