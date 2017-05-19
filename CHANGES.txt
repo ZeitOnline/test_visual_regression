@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.59 (unreleased)
+3.59 (2017-05-19)
 -----------------
 
 - ZON-3822: Clean up AdController values for FBIAs
