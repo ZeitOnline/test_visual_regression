@@ -8,7 +8,7 @@ POSTDEPLOY
 3.60 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3917: Only show big sharing-buttons
 
 
 3.59 (2017-05-19)

@@ -261,9 +261,6 @@ def test_navi_provides_expected_webtrekk_strings(
         # tags
         ('.article-tags a',
          'articlebottom.article-tag.1..arbeitgeber'),
-        # sharing
-        ('.sharing-menu__title',
-         'articlebottom.social.0.1.teilen|#sharing-menu-list'),
         # nextread
         ('.nextread a',
          'articlebottom.editorial-nextread...area-zplus'),

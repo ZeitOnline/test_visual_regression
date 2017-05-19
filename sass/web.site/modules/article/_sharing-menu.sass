@@ -1,61 +1,89 @@
 .sharing-menu
-	margin: remify(20px 0 32px)
+	margin: remify(20px -7px 56px 0)
 
-	&__title
-		color: $zon-grey
-		font-size: em(14px)
-		letter-spacing: $letter-spacing-s
-		+on-interaction
-			color: $zon-dark-grey
-		&:after
-			+drop_icon()
-		// js-induced state modifications
-		&[aria-expanded="true"]
-			color: $zon-dark-grey
-			&:after
-				+drop_icon($open: true)
 	&__items
 		+clearfix
 		list-style-type: none
-		margin: remify(14px 0 0)
+		margin: 0
 		padding: 0
-		&[aria-hidden="true"]
-			display: none
 
 	&__item
 		float: left
-		&:not(:last-child):after
-			content: "/"
-			color: $color-separator
-			margin: remify(0 8px)
+		margin-right: remify(7px)
+
 	&__link
-		font-size: em(14px)
-		font-weight: bold
-		line-height: 2.0
+		border-radius: 4px
+		color: $white
+		display: block
+		line-height: remify(35px)
+		min-height: remify(40px)
+		min-width: remify(40px)
+		text-align: center
 		+on-interaction
-			border-bottom: 1px solid currentColor
+			color: $white
 		&--facebook
-			+link
-				color: $color-facebook
+			background-color: $color-facebook
+			+on-interaction
+				background-color: $color-facebook-hover
 		&--twitter
-			+link
-				color: $color-twitter
+			background-color: $color-twitter
+			+on-interaction
+				background-color: $color-twitter-hover
 		&--whatsapp
-			+link
-				color: $color-whatsapp
+			background-color: $color-whatsapp
+			+on-interaction
+				background-color: $color-whatsapp-hover
 		&--messenger
-			+link
-				color: $color-messenger
+			background-color: $color-messenger
+			+on-interaction
+				background-color: $color-messenger-hover
 		&--mail
-			+link
-				color: $zon-grey
+			background-color: $color-mail
+			+on-interaction
+				background-color: $color-mail-hover
+
+	&__text
+		+font-smoothing
+		display: none
+		font-size: em(13px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-l
+		padding-right: remify(22px)
+		text-transform: uppercase
 
 	&__icon
-		display: none
+		display: inline-block
+		vertical-align: middle
+		&--facebook
+			height: remify(20px)
+			width: remify(10px)
+		&--twitter
+			height: remify(16px)
+			width: remify(21px)
+		&--whatsapp,
+		&--messenger
+			height: remify(22px)
+			width: remify(22px)
+		&--mail
+			height: remify(14px)
+			width: remify(20px)
 
+
+	// TABLET
 	+respond-min($break-tablet-min)
+		margin-bottom: remify(72px)
+
 		&__item
 			&--whatsapp,
 			&--messenger
 				display: none
 
+		&__link
+			line-height: remify(34px)
+			min-height: 0
+		&__icon
+			margin: remify(0 8px 0 12px)
+			&--facebook
+				margin: remify(0 11px 0 15px)
+		&__text
+			display: inline
