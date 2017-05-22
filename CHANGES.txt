@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3917: Only show big sharing-buttons
 
+- ZON-3881: Provide RSS feed to Yahoo!
+
 
 3.59 (2017-05-19)
 -----------------
