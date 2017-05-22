@@ -97,6 +97,12 @@ class Base(zeit.web.core.view.Base):
                     authors.append(name)
         return authors
 
+    def make_title(self, content):
+        if content.supertitle:
+            return u'{}: {}'.format(content.supertitle, content.title)
+        else:
+            return content.title
+
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
@@ -154,9 +160,6 @@ class Newsfeed(Base):
 
                 description = metadata.teaserText
 
-                title = ': '.join(t for t in (
-                    metadata.supertitle, metadata.title) if t)
-
                 variant = None
                 teaser_image = None
                 images = zeit.content.image.interfaces.IImages(content, None)
@@ -179,7 +182,7 @@ class Newsfeed(Base):
                             metadata.teaserText)
 
                 item = E.item(
-                    E.title(title),
+                    E.title(self.make_title(metadata)),
                     E.link(content_url),
                     E.description(description),
                     E.category(metadata.sub_ressort or metadata.ressort),
@@ -397,12 +400,6 @@ class SocialFeed(Base):
                     content, self.__class__.__name__, exc_info=True)
                 continue
         return root
-
-    def make_title(self, content):
-        if content.supertitle:
-            return u'{}: {}'.format(content.supertitle, content.title)
-        else:
-            return content.title
 
 
 @zeit.web.view_config(
