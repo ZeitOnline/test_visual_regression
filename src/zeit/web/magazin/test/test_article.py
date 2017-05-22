@@ -528,23 +528,23 @@ def test_article08_has_correct_print_source(testbrowser):
 
 def test_article_1_10_produce_no_error(testbrowser):
     assert testbrowser('/zeit-magazin/article/01').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/02').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/03').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/04').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/05').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/06').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/08').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/09').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/10').cssselect(
-        'div.article__wrap')
+        'div.article__body')
 
 
 def test_article_1_10_have_correct_h1(testbrowser):
@@ -577,17 +577,17 @@ def test_article_1_10_have_correct_h1(testbrowser):
 
 def test_header_articles_produce_no_error(testbrowser):
     assert testbrowser('/zeit-magazin/article/header-default').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-traum').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-text-only').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-briefmarke').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-leinwand').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-mode').cssselect(
-        'div.article__wrap')
+        'div.article__body')
 
 
 def test_header_articles_have_correct_h1(testbrowser):
