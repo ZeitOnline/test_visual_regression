@@ -88,6 +88,15 @@ class Base(zeit.web.core.view.Base):
     def items(self):
         return zeit.content.cp.interfaces.ITeaseredContent(self.context)
 
+    def make_author_list(self, content):
+        authors = []
+        if getattr(content, 'authorships', None):
+            for author in content.authorships:
+                name = getattr(author.target, 'display_name', None)
+                if name:
+                    authors.append(name)
+        return authors
+
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
@@ -143,13 +152,6 @@ class Newsfeed(Base):
                     None, content, self.request)
                 content_url = create_public_url(content_url)
 
-                authors = []
-                if getattr(content, 'authorships', None):
-                    for author in content.authorships:
-                        name = getattr(author.target, 'display_name', None)
-                        if name:
-                            authors.append(name)
-
                 description = metadata.teaserText
 
                 title = ': '.join(t for t in (
@@ -183,7 +185,7 @@ class Newsfeed(Base):
                     E.category(metadata.sub_ressort or metadata.ressort),
                     DC_MAKER(u'ZEIT ONLINE: {} - {}'.format(
                         (metadata.sub_ressort or metadata.ressort),
-                        u', '.join(authors))),
+                        u', '.join(self.make_author_list(metadata)))),
                     E.pubDate(format_rfc822_date(
                         last_published_semantic(content))),
                     E.guid(content_url, isPermaLink='false'),
@@ -469,15 +471,6 @@ class YahooFeed(SocialFeed):
 
         return super(YahooFeed, self).__call__()
 
-    def make_author_string(self, content):
-        authors = []
-        if getattr(content, 'authorships', None):
-            for author in content.authorships:
-                name = getattr(author.target, 'display_name', None)
-                if name:
-                    authors.append(name)
-        return u', '.join(authors)
-
     def build_feed(self):
         E = ELEMENT_MAKER
         root = E.rss(version='2.0')
@@ -511,7 +504,7 @@ class YahooFeed(SocialFeed):
                     E.category(content.ressort)
                 )
 
-                author = self.make_author_string(content)
+                author = u', '.join(self.make_author_list(content))
                 if author:
                     item.append(DC_MAKER(author))
 
