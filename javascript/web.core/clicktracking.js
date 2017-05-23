@@ -46,18 +46,24 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     function send( trackingData ) {
         var data = formatTrackingData( trackingData );
 
-        window.wt.sendinfo({
-            linkId: data.pop(),
-            customClickParameter: {
-                4: data.shift(),
-                5: data.shift(),
-                6: data.shift(),
-                7: data.shift(),
-                8: data.shift(),
-                9: data.shift()
-            },
-            sendOnUnload: 1
-        });
+        try {
+            window.wt.sendinfo({
+                linkId: data.pop(),
+                customClickParameter: {
+                    4: data.shift(),
+                    5: data.shift(),
+                    6: data.shift(),
+                    7: data.shift(),
+                    8: data.shift(),
+                    9: data.shift()
+                },
+                sendOnUnload: 1
+            });
+        } catch( error ) {
+            if ( debugMode ) {
+                console.error( error );
+            }
+        }
     }
 
     /**
