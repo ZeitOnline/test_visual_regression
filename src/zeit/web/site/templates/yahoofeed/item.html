@@ -18,3 +18,7 @@
         {% include "zeit.web.site:templates/yahoofeed/blocks/{}.html".format(block | block_type) ignore missing %}
     {%- endfor -%}
 {% endfor %}
+
+{% if view.truncated %}
+    <p><a href="{{ view.content_url }}">Lesen Sie hier weiter!</a></p>
+{% endif %}

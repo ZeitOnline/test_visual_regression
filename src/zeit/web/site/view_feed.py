@@ -505,18 +505,23 @@ class YahooFeed(SocialFeed):
                 if author:
                     item.append(DC_MAKER(author))
 
-                # Yahoofeed provides 8 fulltext articles and 8 teasers
-                if index < 8:
-                    # This needs _any_ request object. It works even though
-                    # it is not a request to an article URL
-                    content_view = zeit.web.core.view_article.Article(
-                        content, self.request)
-                    content_body = pyramid.renderers.render(
-                        'zeit.web.site:templates/yahoofeed/item.html', {
-                            'view': content_view,
-                            'request': self.request
-                        })
-                    item.append(CONTENT_MAKER(content_body))
+                # This needs _any_ request object. It works even though
+                # it is not a request to an article URL
+                content_view = zeit.web.site.view_article.YahoofeedArticle(
+                    content, self.request)
+
+                content_view.content_url = content_url
+
+                # Yahoofeed provides 8 fulltext articles and 8 "half-page"
+                if index > 7:
+                    content_view.truncate()
+
+                content_body = pyramid.renderers.render(
+                    'zeit.web.site:templates/yahoofeed/item.html', {
+                        'view': content_view,
+                        'request': self.request
+                    })
+                item.append(CONTENT_MAKER(content_body))
 
                 channel.append(item)
             except:
