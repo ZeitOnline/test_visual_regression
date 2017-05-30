@@ -5,7 +5,7 @@
     {% set image_height = (image_width / image.ratio) | round | int %}
     <figure>
         {# XXX: Remove as soon as we have SSL #}
-        <img src="{{ (request.image_host | replace('http://', 'https://')) + image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.caption }}" title="{{ image.caption }}"/>
+        <img src="{{ (request.image_host | replace('http://', 'https://')) + image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.caption }} {% for name, url, nofollow in image.copyrights %}{{ name }}{% endfor %}" title="{{ image.caption }} {% for name, url, nofollow in image.copyrights %}{{ name }}{% endfor %}"/>
     </figure>
 {% endrequire %}
 
