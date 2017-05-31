@@ -76,7 +76,7 @@
     "webpack:dev": "webpack -d --debug --display-modules",
     "prebuild": "npm run clean",
     "build": "NODE_ENV=production npm-run-all --parallel modernizr sass:dist js svg",
-    "preinstall": "npm prune"
+    "postinstall": "npm prune"
   },
   "browserslist": [
     "Chrome >= 35",
