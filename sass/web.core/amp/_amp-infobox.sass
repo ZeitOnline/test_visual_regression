@@ -4,10 +4,16 @@
 	background: $zon-lighter-grey
 	margin-bottom: remify(40px)
 	margin-top: remify(40px)
-	section
+	&__tab
+		+clearfix // show coloured background for margin of last panel too
 		border-bottom: 1px solid #ccc
 		&:last-of-type
 			border: none
+		// hide minus sign for single open tabs (visible by default)
+		&:only-child [aria-expanded="true"]
+			&:after
+				// keep icon, but make it invisible to keep the line height consistent while toggling
+				background-color: inherit
 	&__title
 		border: 0
 		color: $zon-grey
