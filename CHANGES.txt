@@ -8,7 +8,7 @@ POSTDEPLOY
 3.61 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Show single infobox tab open by default
 
 
 3.60 (2017-05-22)
