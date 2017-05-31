@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.61 (unreleased)
+3.61 (2017-05-31)
 -----------------
 
 - ZON-3881: Tweak Yahoo! RSS feed
