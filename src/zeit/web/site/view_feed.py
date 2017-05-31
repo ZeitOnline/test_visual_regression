@@ -7,6 +7,7 @@ import pytz
 import types
 import urllib
 import urlparse
+import pyramid
 
 import lxml.builder
 import lxml.etree
@@ -87,6 +88,21 @@ class Base(zeit.web.core.view.Base):
     def items(self):
         return zeit.content.cp.interfaces.ITeaseredContent(self.context)
 
+    def make_author_list(self, content):
+        authors = []
+        if getattr(content, 'authorships', None):
+            for author in content.authorships:
+                name = getattr(author.target, 'display_name', None)
+                if name:
+                    authors.append(name)
+        return authors
+
+    def make_title(self, content):
+        if content.supertitle:
+            return u'{}: {}'.format(content.supertitle, content.title)
+        else:
+            return content.title
+
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
@@ -120,7 +136,7 @@ class Newsfeed(Base):
             E.generator('zeit.web {}'.format(
                 self.request.registry.settings.version)),
             E.managingEditor(
-                'online-cr.zeit.de (Chefredaktion ZEIT ONLINE)'),
+                'online-cr@zeit.de (Chefredaktion ZEIT ONLINE)'),
             E.webMaster('webmaster@zeit.de (Technik ZEIT ONLINE)'),
             E.image(
                 E.url((self.request.image_host +
@@ -142,17 +158,7 @@ class Newsfeed(Base):
                     None, content, self.request)
                 content_url = create_public_url(content_url)
 
-                authors = []
-                if getattr(content, 'authorships', None):
-                    for author in content.authorships:
-                        name = getattr(author.target, 'display_name', None)
-                        if name:
-                            authors.append(name)
-
                 description = metadata.teaserText
-
-                title = ': '.join(t for t in (
-                    metadata.supertitle, metadata.title) if t)
 
                 variant = None
                 teaser_image = None
@@ -176,13 +182,13 @@ class Newsfeed(Base):
                             metadata.teaserText)
 
                 item = E.item(
-                    E.title(title),
+                    E.title(self.make_title(metadata)),
                     E.link(content_url),
                     E.description(description),
                     E.category(metadata.sub_ressort or metadata.ressort),
                     DC_MAKER(u'ZEIT ONLINE: {} - {}'.format(
                         (metadata.sub_ressort or metadata.ressort),
-                        u', '.join(authors))),
+                        u', '.join(self.make_author_list(metadata)))),
                     E.pubDate(format_rfc822_date(
                         last_published_semantic(content))),
                     E.guid(content_url, isPermaLink='false'),
@@ -395,12 +401,6 @@ class SocialFeed(Base):
                 continue
         return root
 
-    def make_title(self, content):
-        if content.supertitle:
-            return u'{}: {}'.format(content.supertitle, content.title)
-        else:
-            return content.title
-
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
@@ -453,3 +453,76 @@ class RoostFeed(SocialFeed):
 
     def social_value(self, content):
         return zeit.push.interfaces.IAccountData(content).mobile_text
+
+
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-yahoo',
+    host_restriction='newsfeed')
+class YahooFeed(SocialFeed):
+
+    def __call__(self):
+        if self.context.uniqueId != 'http://xml.zeit.de/'\
+                'administratives/yahoofeed':
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+        return super(YahooFeed, self).__call__()
+
+    def build_feed(self):
+        E = ELEMENT_MAKER
+        root = E.rss(version='2.0')
+        channel = E.channel(
+            E.title('ZEIT ONLINE Newsfeed for Yahoo'),
+            E.link(self.request.route_url('home')),
+            E.description(),
+            E.language('de-de'),
+            E.copyright(
+                'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+            E.generator('zeit.web {}'.format(
+                self.request.registry.settings.version)),
+            ATOM_MAKER(href=self.request.url,
+                       type=self.request.response.content_type)
+        )
+        root.append(channel)
+
+        for index, content in enumerate(self.items):
+            try:
+                content_url = zeit.web.core.template.create_url(
+                    None, content, self.request)
+                content_url = create_public_url(content_url)
+
+                item = E.item(
+                    E.title(self.make_title(content)),
+                    E.link(content_url),
+                    E.description(content.teaserText or content.subtitle),
+                    E.pubDate(format_rfc822_date(
+                        last_published_semantic(content))),
+                    E.guid(content.uniqueId, isPermaLink='false'),
+                    E.category(content.ressort)
+                )
+
+                author = u', '.join(self.make_author_list(content))
+                if author:
+                    item.append(DC_MAKER(author))
+
+                # Yahoofeed provides 8 fulltext articles and 8 teasers
+                if index < 8:
+                    # This needs _any_ request object. It works even though
+                    # it is not a request to an article URL
+                    content_view = zeit.web.core.view_article.Article(
+                        content, self.request)
+                    content_body = pyramid.renderers.render(
+                        'zeit.web.site:templates/yahoofeed/item.html', {
+                            'view': content_view,
+                            'request': self.request
+                        })
+                    item.append(CONTENT_MAKER(content_body))
+
+                channel.append(item)
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
+                continue
+
+        return root

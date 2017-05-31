@@ -37,6 +37,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2013-05-28T13:32:47.834320+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.szuppa</attribute>

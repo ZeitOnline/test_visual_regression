@@ -5,10 +5,26 @@ POSTDEPLOY
 ----------
 
 
-3.59 (unreleased)
+3.61 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- MAINT: Show single infobox tab open by default
+
+
+3.60 (2017-05-22)
+-----------------
+
+- ZON-3917: Only show big sharing-buttons
+
+- ZON-3881: Provide RSS feed to Yahoo!
+
+
+3.59 (2017-05-19)
+-----------------
+
+- ZON-3822: Clean up AdController values for FBIAs
+
+- FEM-57: Use `amp-accordion` element for infobox
 
 
 3.58 (2017-05-11)
