@@ -543,11 +543,11 @@ def test_adplaces_are_correctly_returned(dummy_request):
     assert adplaces == []
 
 
-def test_remove_tags_from_html():
+def test_remove_tags_from_xml():
     model_block = mock.Mock()
     xml = '<p>Ich esse <em>ein</em> leckeres <a href="#">Wurstbrot</a>.</p>'
     model_block.xml = lxml.etree.fromstring(xml)
     block = zeit.web.core.block.Paragraph(model_block)
-    filtered_block = zeit.web.core.template.remove_tags_from_html(block, 'a')
+    filtered_block = zeit.web.core.template.remove_tags_from_xml(block, 'a')
     assert unicode(
         filtered_block) == 'Ich esse <em>ein</em> leckeres Wurstbrot.\n'
