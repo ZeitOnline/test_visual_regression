@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3881: Tweak Yahoo! RSS feed
 
+- BUG-727: Prevent flashing body background-color for app content
+
 - MAINT: Show single infobox tab open by default
 
 
