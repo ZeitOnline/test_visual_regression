@@ -238,7 +238,6 @@ class YahoofeedArticle(Article):
     truncated = False
 
     def truncate(self):
-        self.truncated = True
 
         allowed_article_length = 2000
         character_counter = 0
@@ -246,6 +245,7 @@ class YahoofeedArticle(Article):
         for page in self.pages:
             for block in page:
                 if character_counter > allowed_article_length:
+                    self.truncated = True
                     page.blocks.remove(block)
 
                 if isinstance(block, zeit.web.core.block.Paragraph):
