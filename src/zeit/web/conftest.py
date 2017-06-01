@@ -103,6 +103,8 @@ def app_settings(mockserver):
         'breaking_news_fallback_image': (
             'http://xml.zeit.de/administratives/eilmeldung-share-image'),
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
+        'vivi_zeit.cms_checkout-lock-timeout': '3600',
+        'vivi_zeit.cms_checkout-lock-timeout-temporary': '30',
         'vivi_zeit.cms_keyword-configuration': (
             'egg://zeit.cms.tagging.tests/keywords_config.xml'),
         'vivi_zeit.cms_source-access': (
