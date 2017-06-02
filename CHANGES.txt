@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - BUG-729: Fix overscrolling for missing webtrekk object
 
+- BUG-728: fix the sharing-buttons on the advertorialpage
+
 - MAINT: BEMify portraitbox in ZMO
 
 
