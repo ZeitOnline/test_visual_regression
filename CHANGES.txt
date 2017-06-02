@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3485: Support inline portrait boxes
 
+- MAINT: BEMify portraitbox in ZMO
+
 
 3.61 (2017-05-31)
 -----------------
