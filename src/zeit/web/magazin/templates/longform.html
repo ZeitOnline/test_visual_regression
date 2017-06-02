@@ -42,71 +42,69 @@
 {% block main %}
     <article class="article article--longform" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
-        <div class="article__wrap">
-            <div class="article__head-wrap">
+        <div class="article__head-wrap">
 
-                {% require block = view.header_module %}
-                    {% set type = block | block_type %}
-                    {% include [
-                        "zeit.web.magazin:templates/inc/blocks/header{0}-longform.html".format(type),
-                        "zeit.web.magazin:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
-                {% endrequire %}
+            {% require block = view.header_module %}
+                {% set type = block | block_type %}
+                {% include [
+                    "zeit.web.magazin:templates/inc/blocks/header{0}-longform.html".format(type),
+                    "zeit.web.magazin:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
+            {% endrequire %}
 
-                {% include "zeit.web.magazin:templates/inc/header/header_longform.html" %}
-            </div>
+            {% include "zeit.web.magazin:templates/inc/header/header_longform.html" %}
+        </div>
 
-            <div class="article__body">
-                <!-- block for Teaser -->
-                <section class="article-page" data-page-number="0">
-                    <div class="article__head__subtitle">
-                        {{- view.subtitle -}}
-                    </div>
-                </section>
+        <div class="article__body">
+            <!-- block for Teaser -->
+            <section class="article-page" data-page-number="0">
+                <div class="article__head__subtitle">
+                    {{- view.subtitle -}}
+                </div>
+            </section>
 
-                {% include "zeit.web.core:templates/inc/ads/places/desktop/place3.html" %}
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place3.html" %}
 
-                {% block article_pages %}
-                {% for page in view.pages %}
-                <section class="article-page" data-page-number="{{ page.number }}">
-                    {% if page.teaser -%}
-                        <h2 class="article__subpage-head is-centered is-constrained" id="kapitel{{ page.number }}">
-                            {{- page.number }} &mdash; {{ page.teaser -}}
-                        </h2>
-                        <aside class="article__subpage-index figure-stamp" data-ct-area="article-toc" data-ct-row="
-                            {{- 'page_%s_of_%s' | format(page.number, loop.length - 1) }}" data-ct-column="false">
-                            <h3 class="article__subpage-index__title">&Uuml;bersicht</h3>
-                            <ol>
-                                {% for item in view.pages if item.teaser %}
-                                <li class="article__subpage-index__item">
-                                    <span class="article__subpage-index__item__count">{{ item.number }} &mdash; </span>
-                                    {% if loop.index == page.number %}
-                                        <span class="article__subpage-index__item__title article__subpage-active">{{ item.teaser }}</span>
-                                    {% else %}
-                                        <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll" data-ct-label="{{ loop.index }}">{{ item.teaser }}</a>
-                                    {% endif %}
-                                </li>
-                                {% endfor %}
-                            </ol>
-                        </aside>
-                    {% endif -%}
+            {% block article_pages %}
+            {% for page in view.pages %}
+            <section class="article-page" data-page-number="{{ page.number }}">
+                {% if page.teaser -%}
+                    <h2 class="article__subpage-head is-centered is-constrained" id="kapitel{{ page.number }}">
+                        {{- page.number }} &mdash; {{ page.teaser -}}
+                    </h2>
+                    <aside class="article__subpage-index figure-stamp" data-ct-area="article-toc" data-ct-row="
+                        {{- 'page_%s_of_%s' | format(page.number, loop.length - 1) }}" data-ct-column="false">
+                        <h3 class="article__subpage-index__title">&Uuml;bersicht</h3>
+                        <ol>
+                            {% for item in view.pages if item.teaser %}
+                            <li class="article__subpage-index__item">
+                                <span class="article__subpage-index__item__count">{{ item.number }} &mdash; </span>
+                                {% if loop.index == page.number %}
+                                    <span class="article__subpage-index__item__title article__subpage-active">{{ item.teaser }}</span>
+                                {% else %}
+                                    <a href="#kapitel{{ loop.index }}" class="article__subpage-index__item__title js-scroll" data-ct-label="{{ loop.index }}">{{ item.teaser }}</a>
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ol>
+                    </aside>
+                {% endif -%}
 
-                    {% include "zeit.web.magazin:templates/inc/article/page.html" %}
-                </section>
-                {% endfor %}
-                {% endblock article_pages %}
-            </div>
+                {% include "zeit.web.magazin:templates/inc/article/page.html" %}
+            </section>
+            {% endfor %}
+            {% endblock article_pages %}
+        </div>
 
-            {% block article_footer %}
-            <div class="article__footer article__item" data-ct-area="articlebottom">
-                {% block article_sharing %}
-                    {% include "zeit.web.core:templates/inc/article/sharing-menu.html" %}
-                {% endblock %}
-                {% block article_tags %}
-                    {% include "zeit.web.core:templates/inc/article/tags.html" %}
-                {% endblock %}
-            </div>
+        {% block article_footer %}
+        <div class="article__footer article__item" data-ct-area="articlebottom">
+            {% block article_sharing %}
+                {% include "zeit.web.core:templates/inc/article/sharing-menu.html" %}
+            {% endblock %}
+            {% block article_tags %}
+                {% include "zeit.web.core:templates/inc/article/tags.html" %}
             {% endblock %}
         </div>
+        {% endblock %}
     </article>
 {% endblock main %}
 
