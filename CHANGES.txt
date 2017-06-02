@@ -5,8 +5,22 @@ POSTDEPLOY
 ----------
 
 
-3.61 (unreleased)
+3.62 (unreleased)
 -----------------
+
+- ZON-3485: Support inline portrait boxes
+
+- BUG-729: Fix overscrolling for missing webtrekk object
+
+- MAINT: BEMify portraitbox in ZMO
+
+
+3.61 (2017-05-31)
+-----------------
+
+- ZON-3881: Tweak Yahoo! RSS feed
+
+- BUG-727: Prevent flashing body background-color for app content
 
 - MAINT: Show single infobox tab open by default
 

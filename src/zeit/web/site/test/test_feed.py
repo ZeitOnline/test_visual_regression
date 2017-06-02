@@ -262,6 +262,3 @@ def test_yahoo_feed_contains_expected_fields(testserver):
     assert len(xml.xpath('//item//pubDate')) == 16
     assert len(xml.xpath('//item//guid')) == 16
     assert len(xml.xpath('//item//category')) == 16
-
-    # There should only be 8 fulltext articles in the feed!
-    assert len(xml.xpath('//*[name()="content:encoded"]')) == 8

@@ -3,41 +3,37 @@
 {% block main %}
     <article class="article" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
-        <div class="article__wrap{% if view.is_wrapped %} article__wrap--is-wrapped{% endif %}">
-            {% block article_header %}
-                {% if view.current_page.number == 0 %}
-                    {% include "zeit.web.magazin:templates/inc/header/header_{}.html".format(view.header_layout) ignore missing %}
-                {% else %}
-                    {% include "zeit.web.magazin:templates/inc/header/header_sequelpages.html" %}
-                {% endif %}
-            {% endblock article_header %}
-            <div class="article__body-wrap">
-                <div class="article__body" itemprop="articleBody">
-                    {% block comments_balloon %}{% endblock %}
+        {% block article_header %}
+            {% if view.current_page.number == 0 %}
+                {% include "zeit.web.magazin:templates/inc/header/header_{}.html".format(view.header_layout) ignore missing %}
+            {% else %}
+                {% include "zeit.web.magazin:templates/inc/header/header_sequelpages.html" %}
+            {% endif %}
+        {% endblock article_header %}
+        <div class="article__body" itemprop="articleBody">
+            {% block comments_balloon %}{% endblock %}
 
-                    {% block article_pages %}{% endblock %}
+            {% block article_pages %}{% endblock %}
 
-                    {% block article_pagination %}{% endblock %}
-                </div>
-
-                {% block article_footer %}
-                <div class="article__footer article__item" data-ct-area="articlebottom">
-                    {% block article_sharing %}
-                        {% include "zeit.web.magazin:templates/inc/article/sharing-menu.html" %}
-                    {% endblock %}
-                    {% block article_tags %}
-                        {% include "zeit.web.core:templates/inc/article/tags.html" %}
-                    {% endblock %}
-                </div>
-                {% endblock %}
-
-                {% block nextread %}
-                {% if view.nextread %}
-                    {%- include "zeit.web.magazin:templates/inc/article/nextread.html" -%}
-                {% endif %}
-                {% endblock nextread %}
-            </div>
+            {% block article_pagination %}{% endblock %}
         </div>
+
+        {% block article_footer %}
+        <div class="article__footer article__item" data-ct-area="articlebottom">
+            {% block article_sharing %}
+                {% include "zeit.web.magazin:templates/inc/article/sharing-menu.html" %}
+            {% endblock %}
+            {% block article_tags %}
+                {% include "zeit.web.core:templates/inc/article/tags.html" %}
+            {% endblock %}
+        </div>
+        {% endblock %}
+
+        {% block nextread %}
+            {% if view.nextread %}
+                {%- include "zeit.web.magazin:templates/inc/article/nextread.html" -%}
+            {% endif %}
+        {% endblock nextread %}
     </article>
 
     {% if view.product_id not in ('TGS', 'ZEI', 'ZMLB') and view.date_last_published_semantic %}

@@ -231,3 +231,22 @@ class AcceleratedMobilePageArticle(
 class AcceleratedMobilePageLiveblogArticle(
         LiveblogArticle, AcceleratedMobilePageArticle):
     pass
+
+
+class YahoofeedArticle(Article):
+
+    truncated = False
+
+    def truncate(self):
+
+        allowed_article_length = 2000
+        character_counter = 0
+
+        for page in self.pages:
+            for block in page:
+                if character_counter > allowed_article_length:
+                    self.truncated = True
+                    page.blocks.remove(block)
+
+                if isinstance(block, zeit.web.core.block.Paragraph):
+                    character_counter += len(block)
