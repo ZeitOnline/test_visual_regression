@@ -59,7 +59,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 },
                 sendOnUnload: 1
             });
-        } catch( error ) {
+        } catch ( error ) {
             if ( debugMode ) {
                 console.error( error );
             }
