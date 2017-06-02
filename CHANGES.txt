@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3485: Support inline portrait boxes
 
+- ZON-3954: Add Google Tagmanager to AMP
+
 - BUG-731: Fix "unclickable" video teaser icon
 
 - BUG-729: Fix overscrolling for missing webtrekk object
