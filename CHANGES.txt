@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-3485: Support inline portrait boxes
 
+- BUG-729: Fix overscrolling for missing webtrekk object
+
 - MAINT: BEMify portraitbox in ZMO
 
 
