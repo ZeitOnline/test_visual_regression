@@ -3,7 +3,7 @@
 <aside class="infobox">
     <amp-accordion class="article__item" disable-session-states>
     {% for title, text in block.contents %}
-        <section class="infobox__tab">
+        <section class="infobox__tab"{% if loop.length == 1 %} expanded{% endif %}>
             <h3 class="infobox__title">
                 {{- title -}}
             </h3>

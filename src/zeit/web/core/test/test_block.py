@@ -4,7 +4,6 @@ import copy
 import dogpile.cache
 import lxml.etree
 import mock
-import pytest
 
 import pyramid_dogpile_cache2
 import pyramid.testing
@@ -424,7 +423,6 @@ def test_block_portraitbox_should_contain_expected_structure(tplbrowser):
         '.portraitbox.article__item.article__item--marginalia')
 
 
-@pytest.mark.skip(reason='Hotfix rollback, the feature is broken')
 def test_block_portraitbox_should_render_without_reference(testbrowser):
     browser = testbrowser('/zeit-online/article/portraitbox_inline')
     assert browser.cssselect('.portraitbox__heading')[0].text == 'Kai Biermann'

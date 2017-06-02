@@ -906,3 +906,10 @@ def get_key_from_tuplelist(list, key):
     except IndexError:
         pass
     return ''
+
+
+@zeit.web.register_filter
+def remove_tags_from_xml(block, *tagnames):
+    xml = block.model_block.xml
+    lxml.etree.strip_tags(xml, *tagnames)
+    return zeit.web.core.block._inline_html(xml)
