@@ -33,6 +33,13 @@
 	border-bottom: 1px solid $zon-light-grey
 	&:last-of-type
 		border: none
+	// show single tabs (also does not hurt on desktop)
+	&:only-child
+		[aria-expanded]
+			&:after
+				content: none
+		[aria-hidden="true"]
+			display: block
 	.js &
 		+respond-min($break-tablet-min)
 			border: none
