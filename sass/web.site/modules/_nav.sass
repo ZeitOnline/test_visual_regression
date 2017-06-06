@@ -32,18 +32,30 @@
 		> li:nth-child(n+6)
 			display: none
 
+	%ressort-feature-background
+		border-radius: 3px
+		color: #fff
+		display: inline-block
+		line-height: 2
+		padding: remify(0 8px)
+		transition: background-color .15s linear
+
 	&__ressorts-item--featured
 		a
 			background-color: $zon-dark-grey
-			border-radius: 3px
-			color: #fff
-			display: inline-block
-			line-height: 2
-			padding: remify(0 8px)
-			transition: background-color .15s linear
+			@extend %ressort-feature-background
 			+on-interaction
 				background-color: $zon-grey
 				color: #fff
+
+	&__ressorts-item--featured-d17
+		a
+			background-color: #ffbb00
+			@extend %ressort-feature-background
+			+on-interaction
+				background-color: #ffc933
+				color: #fff
+				box-shadow: none !important
 
 	// hide advertorial links in 1st level navigation, enable for mobile view only
 	&__ressorts-item--has-label,
