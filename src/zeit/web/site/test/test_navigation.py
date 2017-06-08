@@ -461,7 +461,7 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     cloned_nav_item = more_dropdown.find_elements_by_css_selector(
         '.nav__dropdown-list > li > a')[9]
     featured_nav_item = ressorts.find_element_by_class_name(
-        'nav__ressorts-item--featured')
+        'nav__ressorts-item--featured-d17')
     menu_link = driver.find_element_by_class_name('header__menu-link')
 
     assert chosen_nav_item.get_attribute('textContent') == 'Sport'
@@ -510,24 +510,24 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
         '[on desktop] chosen nav item should be visible')
 
 
-def test_zmo_link_exists_and_is_clickable(selenium_driver, testserver):
+def test_d17_link_exists_and_is_clickable(selenium_driver, testserver):
 
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/zeit-online/zeitonline' % testserver.url)
 
-    zmo_button = driver.find_element_by_class_name(
-        'nav__ressorts-item--featured')
-    zmo_link = zmo_button.find_element_by_tag_name('a')
+    d17_button = driver.find_element_by_class_name(
+        'nav__ressorts-item--featured-d17')
+    d17_link = d17_button.find_element_by_tag_name('a')
 
-    assert zmo_link.get_attribute('href') == '{}/zeit-magazin/index'.format(
+    assert d17_link.get_attribute('href') == '{}/thema/d17'.format(
         testserver.url
-    ), 'zmo link is not set correctly'
+    ), 'd17 link is not set correctly'
 
-    zmo_link.click()
+    d17_link.click()
 
     assert driver.current_url == '{}/zeit-magazin/index'.format(
-        testserver.url), 'zmo hp wasnt called correctly'
+        testserver.url), 'd17 hp wasnt called correctly'
 
 
 def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
