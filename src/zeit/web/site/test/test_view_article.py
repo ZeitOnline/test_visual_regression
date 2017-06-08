@@ -668,7 +668,7 @@ def test_breaking_news_article_shows_date_first_released(jinja2_env):
 
 def test_breaking_news_banner_shows_date_first_released(jinja2_env):
     tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/breaking_news.tpl')
+        'zeit.web.site:templates/inc/breaking_news.html')
     view = mock.Mock()
     view.breaking_news.published = True
     view.breaking_news.date_first_released = datetime.time(11, 55, 0)
