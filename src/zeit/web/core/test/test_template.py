@@ -5,6 +5,8 @@ import time
 import lxml.objectify
 import mock
 import pyramid.threadlocal
+import pytest
+import selenium.common.exceptions
 
 import zeit.cms.interfaces
 import zeit.content.cp.blocks.teaser
@@ -224,14 +226,22 @@ def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
     assert layout == 'zmo-square-large'
 
 
-def test_debug_breaking_news_request(testbrowser):
-    browser = testbrowser('/zeit-online/slenderized-index?debug=eilmeldung')
-    assert browser.cssselect('.breaking-news-banner')
+# Needs selenium because of esi include.
+def test_debug_breaking_news_request(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get(
+        '{}/zeit-online/slenderized-index?debug=eilmeldung'.format(
+            testserver.url))
+    assert driver.find_element_by_class_name('breaking-news-banner')
 
 
-def test_debug_breaking_news_default(testbrowser):
-    browser = testbrowser('/zeit-online/slenderized-index')
-    assert not browser.cssselect('.breaking-news-banner')
+# Needs selenium because of esi include.
+def test_debug_breaking_news_default(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get(
+        '{}/zeit-online/slenderized-index'.format(testserver.url))
+    with pytest.raises(selenium.common.exceptions.NoSuchElementException):
+        driver.find_element_by_class_name('breaking-news-banner')
 
 
 def test_format_webtrekk_returns_safe_text(application):
