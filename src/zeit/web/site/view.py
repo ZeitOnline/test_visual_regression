@@ -203,3 +203,16 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
                 'http://xml.zeit.de/index')
         except TypeError:
             raise pyramid.httpexceptions.HTTPNotFound()
+
+
+@zeit.web.view_config(
+    route_name='breaking_news',
+    renderer='templates/inc/breaking_news.html',
+    http_cache=3)
+class BreakingNewsBanner(zeit.web.core.block.BreakingNews):
+
+    def __init__(self, context, request):
+        super(BreakingNewsBanner, self).__init__()
+
+    def __call__(self):
+        return {}
