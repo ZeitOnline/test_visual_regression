@@ -526,7 +526,7 @@ def test_d17_link_exists_and_is_clickable(selenium_driver, testserver):
 
     d17_link.click()
 
-    assert driver.current_url == '{}/zeit-magazin/index'.format(
+    assert driver.current_url == '{}/thema/d17'.format(
         testserver.url), 'd17 hp wasnt called correctly'
 
 
