@@ -1,0 +1,12 @@
+{% if view.regions %}
+<aside class="ressortnav js-toggle-region">
+    <h2 class="ressortnav__headline" aria-controls="ressortnavigation" data-constrained="mobile,phablet">Ressorts</h2>
+    <ul id="ressortnavigation" class="ressortnav__list">
+        {% for region in view.regions %}
+            {% if region[0].title %}
+                <li class="ressortnav__item"><a href="#{{ region[0].title | urlencode }}">{{ region[0].title }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</aside>
+{% endif %}
