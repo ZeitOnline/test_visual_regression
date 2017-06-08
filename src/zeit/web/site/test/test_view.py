@@ -324,3 +324,14 @@ def test_url_encoding_in_login_state(testbrowser):
     assert browser.document.xpath('body//header//include/@src')[0] == (
         'http://localhost/login-state?for=site&context-uri={}'.format(
             urllib.quote_plus('http://localhost' + path)))
+
+
+def test_breaking_news_banner_should_be_routed(testbrowser):
+    browser = testbrowser('/breaking_news?debug=eilmeldung')
+    assert browser.cssselect('.breaking-news-banner')
+
+
+def test_breaking_news_banner_shows_date_first_released(testbrowser):
+    browser = testbrowser('/breaking_news?debug=eilmeldung')
+    assert browser.cssselect('.breaking-news-banner__time')[0].text == (
+        '19:11 Uhr')
