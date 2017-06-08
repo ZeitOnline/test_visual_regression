@@ -86,6 +86,7 @@ if ( pageType === 'centerpage' ) {
     $( '.js-tabs' ).tabs();
     $( '.partner__action' ).boxDropdown();
     $( '.js-truncate-region' ).truncateRegions();
+    $( '.js-toggle-region' ).toggleRegions();
 
 } else if ( article.length ) {
     // article, gallery etc.
