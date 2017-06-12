@@ -39,7 +39,7 @@
 		&--tag-d17
 			color: #ffbb00
 			height: remify(40px)
-			width: 100%
+			width: 90%
 
 	&__badge
 		display: none
@@ -114,11 +114,14 @@
 				color: $white
 		&--d17
 			padding-bottom: remify(5px) // fix inline bottom gap
-			padding-top: remify(11px)
+			padding-top: remify(8px)
 			background-color: $primary-color-zmo
 			color: $white
 			&:after
-				color: $zon-light-grey
+				color: $white
+				padding-top: remify(10px)
+			+respond-min($break-desktop-min)
+				padding-top: remify(12px)
 
 	&__links
 		display: none
