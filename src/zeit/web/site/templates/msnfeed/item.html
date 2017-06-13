@@ -1,0 +1,8 @@
+<h1>{{ view.title}}</h1>
+
+{% for page in view.pages %}
+    {% set page_loop = loop %}
+    {%- for block in page -%}
+        {% include "zeit.web.site:templates/msnfeed/blocks/{}.html".format(block | block_type) ignore missing %}
+    {%- endfor -%}
+{% endfor %}

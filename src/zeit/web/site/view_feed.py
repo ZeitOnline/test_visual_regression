@@ -535,6 +535,7 @@ class YahooFeed(SocialFeed):
 
 # TODO:
 # - diese Klasse hier aufräumen
+# - ESI Namespace ist im Feed drin, obwohl wir den (hier) nicht brauchen
 # - Was macht der name-Parameter in der ViewConfig?
 # - kann man die URL kürzen? administratives/msnfeed (ohne rss-msn)?
 @zeit.web.view_config(
@@ -566,5 +567,48 @@ class MsnFeed(SocialFeed):
                        type=self.request.response.content_type)
         )
         root.append(channel)
+
+        for index, content in enumerate(self.items):
+            try:
+                content_url = zeit.web.core.template.create_url(
+                    None, content, self.request)
+                content_url = create_public_url(content_url)
+
+                # TODO: how to enforce the 150 char limit from MSN?
+                item_title = self.make_title(content)[0:150]
+
+                # TODO: format according to MSN standard
+                item_published_date = format_iso8601_date(
+                    last_published_semantic(content))
+
+                item = E.item(
+                    E.title(item_title),
+                    E.webUrl(content_url),
+                    E.abstract(content.teaserText or content.subtitle),
+                    E.publishedDate(item_published_date),
+                    E.guid(content_url, isPermaLink='false')
+                )
+
+                author = u', '.join(self.make_author_list(content))
+                if author:
+                    item.append(DC_MAKER(author))
+
+                # This needs _any_ request object. It works even though
+                # it is not a request to an article URL
+                content_view = zeit.web.site.view_article.Article(
+                    content, self.request)
+                content_body = pyramid.renderers.render(
+                    'zeit.web.site:templates/msnfeed/item.html', {
+                        'view': content_view,
+                        'request': self.request
+                    })
+                item.append(CONTENT_MAKER(content_body))
+
+                channel.append(item)
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
+                continue
 
         return root
