@@ -407,7 +407,7 @@ class Base(object):
         if not hasattr(self.context, 'keywords'):
             return []
 
-        tags = []
+        result = []
         for keyword in self.context.keywords:
             if not keyword.label:
                 continue
@@ -417,8 +417,8 @@ class Base(object):
                     zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
                 if keyword is None:
                     continue
-            tags.append(keyword)
-        return tags
+            result.append(keyword)
+        return result
 
     @zeit.web.reify
     def meta_keywords(self):

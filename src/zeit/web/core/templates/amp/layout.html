@@ -231,17 +231,17 @@
                     <nav class="article-tags">
                         <h4 class="article-tags__title">Schlagwörter</h4>
                         <ul class="article-tags__list" itemprop="keywords">
-                        {% for tag in view.keywords[:6] -%}
-                            {% if tag.url_value %}
-                                <li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link"
+                        {% for keyword in view.keywords[:6] -%}
+                            {% if keyword.url_value %}
+                                <li><a href="{{ request.route_url('home') }}thema/{{ keyword.url_value }}" class="article-tags__link"
                                     data-vars-number="{{ loop.index }}"
-                                    data-vars-link-text="{{ tag.label }}"
-                                    data-vars-url="{{ request.route_url('home')  | substring_from('://') }}thema/{{ tag.url_value }}"
-                                >{{ tag.label }}</a>
+                                    data-vars-link-text="{{ keyword.label }}"
+                                    data-vars-url="{{ request.route_url('home')  | substring_from('://') }}thema/{{ keyword.url_value }}"
+                                >{{ keyword.label }}</a>
                                 {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
                                 </li>
                             {% else %}
-                                <li><span class="article-tags__link">{{ tag.label }}</span>
+                                <li><span class="article-tags__link">{{ keyword.label }}</span>
                                 {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
                                 </li>
                             {% endif %}
