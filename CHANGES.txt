@@ -5,12 +5,20 @@ POSTDEPLOY
 ----------
 
 
-3.62 (unreleased)
+3.63 (unreleased)
+-----------------
+
+- ZON-3991: Change wording from "Schlagworte" to "Schlagwörter"
+
+
+3.62 (2017-06-09)
 -----------------
 
 - ZON-3485: Support inline portrait boxes
 
 - ZON-3954: Add Google Tagmanager to AMP
+
+- BUG-733: Fix cinema ad for desktop
 
 - BUG-731: Fix "unclickable" video teaser icon
 
