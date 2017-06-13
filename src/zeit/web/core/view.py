@@ -403,7 +403,7 @@ class Base(object):
         return desc or self.seo_title_default
 
     @zeit.web.reify
-    def ranked_tags(self):
+    def keywords(self):
         if not hasattr(self.context, 'keywords'):
             return []
 
@@ -422,15 +422,15 @@ class Base(object):
 
     @zeit.web.reify
     def meta_keywords(self):
-        if self.ranked_tags:
-            result = [x.label for x in self.ranked_tags]
+        if self.keywords:
+            result = [x.label for x in self.keywords]
         else:
             result = [self.ressort.title(), self.sub_ressort.title()]
         return [x for x in result if x]
 
     @zeit.web.reify
     def adc_keywords(self):
-        lowercase = [x.label.lower() for x in self.ranked_tags if x.label]
+        lowercase = [x.label.lower() for x in self.keywords if x.label]
         return ["".join(re.findall(r"\w", item)) for item in lowercase]
 
     @zeit.web.reify

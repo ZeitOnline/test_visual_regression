@@ -227,11 +227,11 @@
                         </ul>
                     </nav>
 
-                {% if view.ranked_tags | length %}
+                {% if view.keywords %}
                     <nav class="article-tags">
                         <h4 class="article-tags__title">Schlagwörter</h4>
                         <ul class="article-tags__list" itemprop="keywords">
-                        {% for tag in view.ranked_tags[:6] -%}
+                        {% for tag in view.keywords[:6] -%}
                             {% if tag.url_value %}
                                 <li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link"
                                     data-vars-number="{{ loop.index }}"

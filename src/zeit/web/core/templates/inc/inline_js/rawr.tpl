@@ -13,8 +13,8 @@ window.rawrConfig = {
             '{{ view.context.channels[0] | map('trim') | join(string_joiner) }}'
             {%- endif %}],
         'ressorts': [{% if view.ressort %}'{{ view.ressort }}'{% if view.sub_ressort %}, '{{ view.sub_ressort }}'{% endif %}{% endif %}],
-        'tags': [{% if view.ranked_tags | length > 0 -%}
-            '{{ view.ranked_tags | join(string_joiner, attribute='label') }}'
+        'tags': [{% if view.keywords -%}
+            '{{ view.keywords | join(string_joiner, attribute='label') }}'
             {%- endif %}],
         'meta': {
             'description': '{{ view.title | replace("\'", "\\\'") | safe }}'
