@@ -411,12 +411,16 @@ class Base(object):
         for keyword in self.context.keywords:
             if not keyword.label:
                 continue
-            elif not keyword.url_value:
+            if not keyword.url_value:
                 uuid = keyword.uniqueId.replace('tag://', '')
                 keyword = zope.component.getUtility(
                     zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
                 if keyword is None:
                     continue
+            if keyword.url_value:
+                keyword.link = u'thema/{}'.format(keyword.url_value)
+            else:
+                keyword.link = None
             result.append(keyword)
         return result
 

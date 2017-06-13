@@ -4,8 +4,8 @@
     <ul class="article-tags__list" itemprop="keywords" data-ct-row="article-tag">
     {%- for keyword in view.keywords[:6] -%}
         <li>
-        {%- if keyword.url_value -%}
-            <a href="{{ request.route_url('home') }}thema/{{ keyword.url_value }}" class="{{ 'article-tags__link' | with_mods(tag_modifier) }}" rel="tag">
+        {%- if keyword.link -%}
+            <a href="{{ request.route_url('home') }}{{ keyword.link }}" class="{{ 'article-tags__link' | with_mods(tag_modifier) }}" rel="tag">
                 {{- keyword.label -}}
             </a>
         {%- else -%}

@@ -232,11 +232,11 @@
                         <h4 class="article-tags__title">Schlagwörter</h4>
                         <ul class="article-tags__list" itemprop="keywords">
                         {% for keyword in view.keywords[:6] -%}
-                            {% if keyword.url_value %}
-                                <li><a href="{{ request.route_url('home') }}thema/{{ keyword.url_value }}" class="article-tags__link"
+                            {% if keyword.link %}
+                                <li><a href="{{ request.route_url('home', keyword.link) }}" class="article-tags__link"
                                     data-vars-number="{{ loop.index }}"
                                     data-vars-link-text="{{ keyword.label }}"
-                                    data-vars-url="{{ request.route_url('home')  | substring_from('://') }}thema/{{ keyword.url_value }}"
+                                    data-vars-url="{{ request.route_url('home')  | substring_from('://') }}{{ keyword.link }}"
                                 >{{ keyword.label }}</a>
                                 {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
                                 </li>
