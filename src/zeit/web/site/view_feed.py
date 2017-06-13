@@ -531,3 +531,40 @@ class YahooFeed(SocialFeed):
                 continue
 
         return root
+
+
+# TODO:
+# - diese Klasse hier aufräumen
+# - Was macht der name-Parameter in der ViewConfig?
+# - kann man die URL kürzen? administratives/msnfeed (ohne rss-msn)?
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-msn',
+    host_restriction='newsfeed')
+class MsnFeed(SocialFeed):
+
+    def __call__(self):
+        if self.context.uniqueId != 'http://xml.zeit.de/'\
+                'administratives/msnfeed':
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+        return super(MsnFeed, self).__call__()
+
+    def build_feed(self):
+        E = ELEMENT_MAKER
+        root = E.rss(version='2.0')
+        channel = E.channel(
+            E.title('ZEIT ONLINE Newsfeed for MSN'),
+            E.link(self.request.route_url('home')),
+            E.description(),
+            E.language('de-de'),
+            E.copyright(
+                'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+            E.generator('zeit.web {}'.format(
+                self.request.registry.settings.version)),
+            ATOM_MAKER(href=self.request.url,
+                       type=self.request.response.content_type)
+        )
+        root.append(channel)
+
+        return root
