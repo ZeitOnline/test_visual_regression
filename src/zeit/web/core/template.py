@@ -210,7 +210,8 @@ def logo_icon(teaser, kind=None, zplus=None):
         return templates
 
     # inclusive icons may appear both
-    if tag_with_logo_content(teaser) and not zplus_icon:
+    if tag_with_logo_content(teaser) and kind != 'd17-parquet' \
+            and not zplus_icon:
         templates.append('taglogo')
     if zco_content(teaser) and kind != 'zco-parquet':
         templates.append('logo-zco')
