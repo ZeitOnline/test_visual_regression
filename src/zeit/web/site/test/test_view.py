@@ -327,11 +327,11 @@ def test_url_encoding_in_login_state(testbrowser):
 
 
 def test_breaking_news_banner_should_be_routed(testbrowser):
-    browser = testbrowser('/breaking_news?debug=eilmeldung')
+    browser = testbrowser('/breaking-news?debug=eilmeldung')
     assert browser.cssselect('.breaking-news-banner')
 
 
 def test_breaking_news_banner_shows_date_first_released(testbrowser):
-    browser = testbrowser('/breaking_news?debug=eilmeldung')
+    browser = testbrowser('/breaking-news?debug=eilmeldung')
     assert browser.cssselect('.breaking-news-banner__time')[0].text == (
         '19:11 Uhr')
