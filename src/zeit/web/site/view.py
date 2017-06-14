@@ -205,6 +205,8 @@ class FrameBuilder(zeit.web.core.view.FrameBuilder, Base):
             raise pyramid.httpexceptions.HTTPNotFound()
 
 
+# http_cache time is determined approximately in order to provide some caching
+# but don't interrupt the CvD's work by rendering dated content.
 @zeit.web.view_config(
     route_name='breaking_news',
     renderer='templates/inc/breaking_news.html',
