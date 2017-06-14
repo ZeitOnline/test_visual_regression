@@ -224,6 +224,14 @@ def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
     assert layout == 'zmo-square-large'
 
 
+def test_breaking_news_should_be_displayed_when_published(
+        testserver, httpbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.content.article.article.ArticleWorkflow, 'published', True)
+    browser = httpbrowser('/zeit-online/index')
+    assert len(browser.cssselect('.breaking-news-banner')) == 1
+
+
 def test_breaking_news_should_be_hidden_by_default(testserver, httpbrowser):
     browser = httpbrowser('/zeit-online/index')
     assert len(browser.cssselect('.breaking-news-banner')) == 0
