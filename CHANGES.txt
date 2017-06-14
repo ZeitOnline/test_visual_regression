@@ -5,8 +5,8 @@ POSTDEPLOY
 ----------
 
 
-3.62.1 (unreleased)
------------------
+3.62.1 (2017-06-14)
+-------------------
 
 - ZON-3991: Change wording from "Schlagworte" to "Schlagwörter"
 
