@@ -50,9 +50,14 @@ class Page(object):
         del self.blocks[key]
 
     def append(self, block):
-        block = zeit.web.core.interfaces.IFrontendBlock(block, None)
-        if block is not None:
-            self.blocks.append(block)
+        wrapped = None
+        try:
+            wrapped = zeit.web.core.interfaces.IFrontendBlock(block, None)
+        except:
+            log.warn('Ignoring %s', block, exc_info=True)
+            return
+        if wrapped is not None:
+            self.blocks.append(wrapped)
 
 
 def _inject_banner_code(pages, pubtype):
