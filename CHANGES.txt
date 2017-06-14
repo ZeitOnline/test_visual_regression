@@ -8,7 +8,15 @@ POSTDEPLOY
 3.63 (unreleased)
 -----------------
 
+- Nothing changed yet.
+
+
+3.62.1 (2017-06-14)
+-------------------
+
 - ZON-3991: Change wording from "Schlagworte" to "Schlagwörter"
+
+- HOTFIX: Be defensive about invalid references in portraitbox module
 
 
 3.62 (2017-06-09)
