@@ -456,7 +456,6 @@ def test_wrapped_features_are_triggered(testbrowser):
 
     browser = testbrowser('/zeit-magazin/index?app-content')
     assert not browser.cssselect('header.header')
-    assert browser.cssselect('body[data-is-wrapped="true"]')
 
 
 def test_teaser_image_link_titles(testbrowser):

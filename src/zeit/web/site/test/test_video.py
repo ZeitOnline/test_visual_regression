@@ -111,7 +111,6 @@ def test_video_report_form_should_be_rendered(testbrowser):
 
 def test_video_page_should_embed_sharing_menu(testbrowser):
     browser = testbrowser('/zeit-online/video/3537342483001')
-    assert len(browser.cssselect('.sharing-menu .sharing-menu__title')) > 0
     assert len(browser.cssselect('.sharing-menu a.sharing-menu__link')) > 0
 
 

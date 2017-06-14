@@ -171,7 +171,7 @@ def test_amp_article_shows_tags_correctly(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     tags = browser.cssselect('.article-tags')[0]
     keywords = tags.cssselect('[itemprop="keywords"]')[0]
-    assert tags.cssselect('.article-tags__title')[0].text == 'Schlagworte'
+    assert tags.cssselect('.article-tags__title')[0].text == u'Schlagwörter'
     assert len(tags.cssselect('.article-tags__link')) == 5
     assert ' '.join(keywords.text_content().strip().split()) == (
         u'Flüchtling, Weltwirtschaftsforum Davos, '
@@ -271,3 +271,20 @@ def test_amp_article_contains_authorbox(testbrowser):
     assert name.text.strip() == 'Jochen Wegner'
     assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+
+
+def test_amp_article_shows_amp_accordion_for_infobox(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/infoboxartikel')
+    infobox = browser.cssselect('.infobox')[0]
+    accordion = infobox.cssselect('amp-accordion')[0]
+    # required script
+    assert browser.cssselect('script[custom-element="amp-accordion"]')
+    # amp-accordion can contain one or more <section>s as its direct children
+    assert len(infobox.cssselect('amp-accordion > section')) == 6
+    assert len(infobox.cssselect('amp-accordion > *')) == 6
+    # each <section> must contain exactly two direct children
+    assert len(accordion.cssselect('section > *')) == 12
+    # the first child (of the section) must be a heading
+    assert len(accordion.cssselect('section > h3:first-child')) == 6
+    # the second child (of the section) can be any tag allowed in AMP HTML
+    assert len(accordion.cssselect('section > h3 + div')) == 6

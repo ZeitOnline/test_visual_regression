@@ -6,6 +6,8 @@ import zeit.solr.interfaces
 
 import zeit.web.site.view_feed
 
+import zeit.content.article.testing
+
 
 def test_newsfeed_should_only_render_cp2015(testserver):
     res = requests.get(
@@ -185,3 +187,78 @@ def test_queries_should_be_joined():
     query = [('foo', 'baa'), ('batz', 'badumm')]
     assert zeit.web.site.view_feed.join_queries(url, query) == (
         'http://www.zeit.de/mypath?foo=baa&batz=badumm')
+
+
+def test_yahoo_feed_is_only_available_from_newsfeed_host(testserver):
+    feed_path = '/administratives/yahoofeed/rss-yahoo'
+    res_newsfeed = requests.get(
+        testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
+    assert res_newsfeed.status_code == 200
+
+    res_www = requests.get(
+        testserver.url + feed_path, headers={'Host': 'www.zeit.de'})
+    assert res_www.status_code == 404
+
+
+def test_yahoo_feed_is_only_available_for_specific_page(testserver):
+    res = requests.get(
+        testserver.url + '/administratives/yahoofeed/rss-yahoo',
+        headers={'Host': 'newsfeed.zeit.de'})
+    assert res.status_code == 200
+
+    res = requests.get(
+        testserver.url + '/index/rss-yahoo',
+        headers={'Host': 'newsfeed.zeit.de'})
+    assert res.status_code == 404
+
+
+def test_yahoo_feed_contains_expected_fields(testserver):
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/simple',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/tags',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/fischer',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/simple',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/tags',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/fischer',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/simple',
+         'type': 'article'},
+    ]
+
+    res = requests.get(
+        testserver.url + '/administratives/yahoofeed/rss-yahoo',
+        headers={'Host': 'newsfeed.zeit.de'})
+
+    xml = lxml.etree.fromstring(res.content)
+    assert len(xml.xpath('//item')) == 16
+    assert len(xml.xpath('//title')) == 17
+
+    assert len(xml.xpath('//item//description')) == 16
+    assert len(xml.xpath('//item//pubDate')) == 16
+    assert len(xml.xpath('//item//guid')) == 16
+    assert len(xml.xpath('//item//category')) == 16
