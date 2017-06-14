@@ -23,13 +23,13 @@ import zeit.web.core.view_comment
 
 def test_comment_count_should_handle_missing_uid_param(testbrowser):
     with pytest.raises(urllib2.HTTPError) as info:
-        testbrowser('/json/comment_count')
+        testbrowser('/json/comment-count')
     assert info.value.getcode() == 412
 
 
 def test_comment_count_should_handle_invalid_uid_param(testbrowser):
     with pytest.raises(urllib2.HTTPError) as info:
-        testbrowser('/json/comment_count?unique_id=foo')
+        testbrowser('/json/comment-count?unique_id=foo')
     assert info.value.getcode() == 412
 
 
@@ -45,7 +45,7 @@ def test_comment_count_should_return_expected_json_structure_for_cp_id(
         <node comment_count="291" url="/zeit-online/cp-content/article-02"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id=' +
+    browser = testbrowser('/json/comment-count?unique_id=' +
                           NS + 'zeit-online/main-teaser-setup')
 
     assert 'comment_count' in browser.json
@@ -65,7 +65,7 @@ def test_comment_count_should_return_expected_json_structure_for_article_id(
         <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count'
+    browser = testbrowser('/json/comment-count'
                           '?unique_id=' + NS + 'zeit-magazin/article/01')
 
     assert 'comment_count' in browser.json
@@ -82,7 +82,7 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
         <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id=' +
+    browser = testbrowser('/json/comment-count?unique_id=' +
                           NS + 'zeit-magazin/misc')
 
     assert 'comment_count' in browser.json
@@ -100,7 +100,7 @@ def test_comment_count_should_be_empty_for_link_object(
         <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id=' +
+    browser = testbrowser('/json/comment-count?unique_id=' +
                           NS + 'zeit-online/cp-content/link_teaser')
 
     assert 'comment_count' in browser.json
@@ -297,7 +297,7 @@ def test_dict_with_article_paths_and_comment_counts_should_be_created(
          url="/zeit-magazin/centerpage/article_image_asset"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id=' +
+    browser = testbrowser('/json/comment-count?unique_id=' +
                           NS + 'zeit-magazin/centerpage/article_image_asset')
 
     assert 'comment_count' in browser.json

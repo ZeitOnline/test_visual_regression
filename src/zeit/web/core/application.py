@@ -133,9 +133,9 @@ class Application(object):
             'instantarticle-item', '/instantarticle-item/*traverse')
         config.add_route('fbia', '/fbia/*traverse')
         config.add_route('amp', '/amp/*traverse')
-        config.add_route('json_delta_time', '/json/delta_time')
-        config.add_route('json_update_time', '/json_update_time/{path:.*}')
-        config.add_route('json_comment_count', '/json/comment_count')
+        config.add_route('json_delta_time', '/json/delta-time')
+        config.add_route('json_update_time', '/json-update-time/{path:.*}')
+        config.add_route('json_comment_count', '/json/comment-count')
 
         # XXX: This route was introduced, because we needed a smaller and
         # better interface than the whole Centerpage in XML to communicate
@@ -150,6 +150,7 @@ class Application(object):
             'invalidate_community_maintenance',
             '/-comments/invalidate_maintenance')
         config.add_route('home', '/')
+        config.add_route('breaking_news', '/breaking-news')
         config.add_route('login_state', '/login-state')
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-image', '/spektrum-image/*path')
