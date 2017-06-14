@@ -29,6 +29,7 @@ log = logging.getLogger(__name__)
 ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
 CONTENT_NAMESPACE = 'http://purl.org/rss/1.0/modules/content/'
 DC_NAMESPACE = 'http://purl.org/dc/elements/1.1/'
+MI_NAMESPACE = 'http://schemas.ingestion.microsoft.com/common/'
 ESI_NAMESPACE = 'http://www.edge-delivery.org/esi/1.0'
 ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
     'atom': ATOM_NAMESPACE, 'content': CONTENT_NAMESPACE, 'dc': DC_NAMESPACE,
@@ -54,6 +55,11 @@ DATE_MIN = datetime.datetime(datetime.MINYEAR, 1, 1, tzinfo=pytz.UTC)
 def last_published_semantic(context):
     info = zeit.cms.workflow.interfaces.IPublishInfo(context, None)
     return getattr(info, 'date_last_published_semantic', None) or DATE_MIN
+
+
+def first_released(context):
+    info = zeit.cms.workflow.interfaces.IPublishInfo(context, None)
+    return getattr(info, 'date_first_released', None) or DATE_MIN
 
 
 def filter_and_sort_entries(items):
@@ -579,19 +585,30 @@ class MsnFeed(SocialFeed):
 
                 # TODO: format according to MSN standard
                 item_published_date = format_iso8601_date(
-                    last_published_semantic(content))
+                    first_released(content))
 
                 item = E.item(
                     E.title(item_title),
                     E.webUrl(content_url),
                     E.abstract(content.teaserText or content.subtitle),
                     E.publishedDate(item_published_date),
-                    E.guid(content_url, isPermaLink='false')
+                    E.guid(content_url),
+                    E.publisher('ZEIT Online')
                 )
 
                 author = u', '.join(self.make_author_list(content))
                 if author:
                     item.append(DC_MAKER(author))
+
+                # TODO: hier an das Artikel/Teaser-Bild rankommen
+
+                item_modified_date = format_iso8601_date(
+                    last_published_semantic(content))
+                item_modified_maker = getattr(
+                    ELEMENT_MAKER, '{%s}modified' % DC_NAMESPACE)
+                item.append(item_modified_maker(item_modified_date))
+
+                # TODO: mi:dateTimeWritten
 
                 # This needs _any_ request object. It works even though
                 # it is not a request to an article URL
