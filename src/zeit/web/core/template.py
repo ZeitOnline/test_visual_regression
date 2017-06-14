@@ -160,13 +160,13 @@ def zplus_content(content):
 
 
 @zeit.web.register_filter
-def tag_with_logo_content(content):
+def tag_with_logo_content(content, kind=None):
     if toggles('tag_logos'):
         logotags = [('D17', 'tag-d17')]
         try:
             for keyword in content.keywords:
                 for label, logo in logotags:
-                    if keyword.label == label:
+                    if keyword.label is label and kind is not kind:
                         return logo
         except AttributeError:
             pass
@@ -210,8 +210,7 @@ def logo_icon(teaser, kind=None, zplus=None):
         return templates
 
     # inclusive icons may appear both
-    if tag_with_logo_content(teaser) and kind != 'd17-parquet' \
-            and not zplus_icon:
+    if tag_with_logo_content(teaser) and not zplus_icon:
         templates.append('taglogo')
     if zco_content(teaser) and kind != 'zco-parquet':
         templates.append('logo-zco')
