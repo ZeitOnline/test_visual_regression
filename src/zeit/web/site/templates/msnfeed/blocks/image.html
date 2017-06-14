@@ -1,9 +1,10 @@
-<h1>{{ view.supertitle }}: {{ view.title}}</h1>
+{# Image size is defined explicitly, because
+   (1) we want to crop it with our focus point ... and not hope for Yahoo to do good cropping.
+   (2) we do not want to provide the large original image
+   #}
 
-<p>{{ view.subtitle}}</p>
-
-{% require image = get_image(view.header_module, variant_id='wide', fallback=False) %}
-    {% set image_width = 1200 %}
+{% require image = get_image(block, variant_id='wide', fallback=False) %}
+    {% set image_width = 1440 %}
     {% set image_height = (image_width / image.ratio) | round | int %}
     <figure>
         {# XXX: Remove as soon as we have SSL #}
@@ -17,10 +18,3 @@
         </figcaption>
     </figure>
 {% endrequire %}
-
-{% for page in view.pages %}
-    {% set page_loop = loop %}
-    {%- for block in page -%}
-        {% include "zeit.web.site:templates/msnfeed/blocks/{}.html".format(block | block_type) ignore missing %}
-    {%- endfor -%}
-{% endfor %}
