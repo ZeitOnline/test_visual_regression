@@ -160,24 +160,29 @@ def zplus_content(content):
 
 
 @zeit.web.register_filter
-def tag_with_logo_content(content, kind=None):
+def tag_with_logo_content(content, area_kind=None):
     if toggles('tag_logos'):
-        logotags = [('D17', 'tag-d17')]
+        # each tupel consists of:
+        # - Tag String (keyword on the article)
+        # - File name of the SVG logo (returned here and used in template)
+        # - Area where the taglogo should not be shown
+        logotags = [('D17', 'tag-d17', 'd17-parquet')]
         try:
             for keyword in content.keywords:
-                for label, logo in logotags:
-                    if keyword.label is label and kind is not kind:
-                        return logo
+                for label, logo, exclude_logo_from_area in logotags:
+                    if keyword.label == label:
+                        if area_kind != exclude_logo_from_area:
+                            return logo
         except AttributeError:
             pass
     return False
 
 
 @zeit.web.register_filter
-def logo_icon(teaser, kind=None, zplus=None):
+def logo_icon(teaser, area_kind=None, zplus=None):
     """Function to add a list of icon templates to a teaser
     :param teaser:      Teaser to which the icons are added
-    :param kind:        kind of the area the teaser is in
+    :param area_kind:   kind of the area the teaser is in
     :param zplus:       chose to show or show not the z+ section
                             None:   Show both z* and rest of icons
                             'skip': skip z+ icons
@@ -199,7 +204,7 @@ def logo_icon(teaser, kind=None, zplus=None):
             return templates
 
     # exclusive icons, set and return
-    if zmo_content(teaser) and kind != 'zmo-parquet':
+    if zmo_content(teaser) and area_kind != 'zmo-parquet':
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
@@ -210,9 +215,9 @@ def logo_icon(teaser, kind=None, zplus=None):
         return templates
 
     # inclusive icons may appear both
-    if tag_with_logo_content(teaser) and not zplus_icon:
+    if tag_with_logo_content(teaser, area_kind) and not zplus_icon:
         templates.append('taglogo')
-    if zco_content(teaser) and kind != 'zco-parquet':
+    if zco_content(teaser) and area_kind != 'zco-parquet':
         templates.append('logo-zco')
 
     return templates
