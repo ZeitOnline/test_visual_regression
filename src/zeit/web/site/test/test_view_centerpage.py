@@ -2810,6 +2810,16 @@ def test_d17_icon_is_not_display_on_zett_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zett')
 
 
+def test_d17_icon_is_not_display_on_d17_teaser(monkeypatch, testbrowser):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'tag_logos': True, 'reader_revenue': True}.get)
+    browser = testbrowser('/zeit-online/parquet')
+    assert not browser.cssselect(
+        'teaser-large__kicker--d17-parquet')
+    assert not browser.cssselect(
+        'teaser-small__kicker--d17-parquet')
+
+
 def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'tag_logos': True, 'reader_revenue': True}.get)
