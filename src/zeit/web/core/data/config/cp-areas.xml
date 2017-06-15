@@ -9,6 +9,7 @@
     <area kind="major" title="Major-Fläche">major</area>
     <area kind="minor" title="Minor-Fläche">minor</area>
     <area kind="parquet" title="Parkett-Fläche">parquet</area>
+    <area kind="d17-parquet" title="D17 Parkett" available="zeit.web.core.interfaces.IInternalUse">d17-parquet</area>
     <area kind="zmo-parquet" title="ZEITmagazin Parkett" available="zeit.web.core.interfaces.IInternalUse">zmo-parquet</area>
     <area kind="zco-parquet" title="ZEIT Campus Parkett" available="zeit.web.core.interfaces.IInternalUse">zco-parquet</area>
     <area kind="zplus-parquet" title="Z+ Parkett" available="zeit.web.core.interfaces.IInternalUse">zplus-parquet</area>
