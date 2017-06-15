@@ -171,7 +171,7 @@ def test_amp_article_shows_tags_correctly(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     tags = browser.cssselect('.article-tags')[0]
     keywords = tags.cssselect('[itemprop="keywords"]')[0]
-    assert tags.cssselect('.article-tags__title')[0].text == 'Schlagworte'
+    assert tags.cssselect('.article-tags__title')[0].text == u'Schlagwörter'
     assert len(tags.cssselect('.article-tags__link')) == 5
     assert ' '.join(keywords.text_content().strip().split()) == (
         u'Flüchtling, Weltwirtschaftsforum Davos, '
