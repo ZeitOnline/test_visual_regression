@@ -1107,6 +1107,7 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
 
 
 @zeit.web.view_config(route_name='health_check')
+@zeit.web.view_config(route_name='health_check_XXX')  # XXX remove
 def health_check(request):
     """ View callable to perform a health a check by checking,
         if the configured repository path exists.
