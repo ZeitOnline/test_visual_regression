@@ -820,8 +820,9 @@ def test_health_check_should_response_and_have_status_200(testbrowser):
     assert resp.status_code == 200
 
 
-# XXX Ensure downward compatibility until corresponding varnish changes have
-# been deployed. Remove afterwards!
+# XXX align-route-config-uris: Ensure downward compatibility until
+# corresponding varnish changes have been deployed.
+# Remove this test afterwards!
 def test_health_check_should_response_and_have_status_200_XXX(testbrowser):
     browser = testbrowser('/health_check')
     assert browser.headers['Content-Length'] == '2'

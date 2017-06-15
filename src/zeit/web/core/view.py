@@ -1106,6 +1106,8 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             *[t.uniqueId for t in self.nextread])
 
 
+# XXX align-route-config-uris: Ensure downward compatibility until
+# corresponding varnish changes have been deployed. Remove afterwards.
 @zeit.web.view_config(route_name='health_check')
 @zeit.web.view_config(route_name='health_check_XXX')  # XXX remove
 def health_check(request):
