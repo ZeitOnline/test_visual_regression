@@ -4,11 +4,15 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- cp-areas/regions/layouts anpassen für D17 Parkett (https://github.com/ZeitOnline/zeit.web/pull/2337/commits/8a4be46d9f29511398487eed2ad0e0e696b17766)
+
 
 3.62.2 (unreleased)
 -----------------
 
 - ZON-3496: Render "Eilmeldung" through ESI
+
+- ZON-3955: Add D17 parquet
 
 - BUG-720: Be defensive about possible CMS values and escape all C1 headers
 
