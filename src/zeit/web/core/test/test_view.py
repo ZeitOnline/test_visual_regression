@@ -814,6 +814,15 @@ def test_rawr_config_should_have_series_tag(selenium_driver, testserver):
 
 
 def test_health_check_should_response_and_have_status_200(testbrowser):
+    browser = testbrowser('/health-check')
+    assert browser.headers['Content-Length'] == '2'
+    resp = zeit.web.core.view.health_check('request')
+    assert resp.status_code == 200
+
+
+# XXX Ensure downward compatibility until corresponding varnish changes have
+# been deployed. Remove afterwards!
+def test_health_check_should_response_and_have_status_200_XXX(testbrowser):
     browser = testbrowser('/health_check')
     assert browser.headers['Content-Length'] == '2'
     resp = zeit.web.core.view.health_check('request')

@@ -152,6 +152,9 @@ class Application(object):
         config.add_route('home', '/')
         config.add_route('breaking_news', '/breaking-news')
         config.add_route('login_state', '/login-state')
+        config.add_route('health_check', '/health-check')
+        # XXX Ensure downward compatibility until corresponding varnish changes
+        # have been deployed. Remove afterwards.
         config.add_route('health_check', '/health_check')
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')
