@@ -5,10 +5,12 @@ POSTDEPLOY
 ----------
 
 
-3.63 (unreleased)
+3.62.2 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3496: Render "Eilmeldung" through ESI
+
+- BUG-720: Be defensive about possible CMS values and escape all C1 headers
 
 
 3.62.1 (2017-06-14)
