@@ -4,13 +4,35 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- cp-areas/regions/layouts anpassen für D17 Parkett (https://github.com/ZeitOnline/zeit.web/pull/2337/commits/8a4be46d9f29511398487eed2ad0e0e696b17766)
 
-3.62 (unreleased)
+
+3.62.2 (unreleased)
+-----------------
+
+- ZON-3496: Render "Eilmeldung" through ESI
+
+- ZON-3955: Add D17 parquet
+
+- BUG-720: Be defensive about possible CMS values and escape all C1 headers
+
+
+3.62.1 (2017-06-14)
+-------------------
+
+- ZON-3991: Change wording from "Schlagworte" to "Schlagwörter"
+
+- HOTFIX: Be defensive about invalid references in portraitbox module
+
+
+3.62 (2017-06-09)
 -----------------
 
 - ZON-3485: Support inline portrait boxes
 
 - ZON-3954: Add Google Tagmanager to AMP
+
+- BUG-733: Fix cinema ad for desktop
 
 - BUG-731: Fix "unclickable" video teaser icon
 

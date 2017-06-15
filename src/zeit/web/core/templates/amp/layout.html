@@ -73,7 +73,7 @@
         </header>
 
         {% block breaking_news %}
-            {% include "zeit.web.site:templates/inc/breaking_news.tpl" %}
+            {% include "zeit.web.site:templates/inc/breaking-news-esi.html" %}
         {% endblock breaking_news %}
         {% block liveblog_status %}{% endblock %}
 
@@ -229,7 +229,7 @@
 
                 {% if view.ranked_tags | length %}
                     <nav class="article-tags">
-                        <h4 class="article-tags__title">Schlagworte</h4>
+                        <h4 class="article-tags__title">Schlagwörter</h4>
                         <ul class="article-tags__list" itemprop="keywords">
                         {% for tag in view.ranked_tags[:6] -%}
                             {% if tag.url_value %}

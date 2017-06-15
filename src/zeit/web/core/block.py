@@ -91,9 +91,9 @@ class Authorbox(Block):
 class Portraitbox(Block):
 
     def __init__(self, model_block):
-        if getattr(model_block, 'text'):
+        if getattr(model_block, 'text', None):
             self.text = self._author_text(model_block.text)
-        if getattr(model_block, 'name'):
+        if getattr(model_block, 'name', None):
             self.name = model_block.name
 
     def _author_text(self, text):

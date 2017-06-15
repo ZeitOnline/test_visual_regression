@@ -10,4 +10,8 @@
 		// special case for app wrapper
 		// sometimes the gray body background-color shines through at the top of the page
 		// or behind the advertorial marker of the first ad on the page
-		overflow: hidden
+		// we need to prevent the collapsing margin of any child element here
+		// this clearfix hack solves this - somehow mimics `display: flow-root` due to low browser support
+		&:before
+			content: " "
+			display: table
