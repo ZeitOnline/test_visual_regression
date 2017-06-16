@@ -3,12 +3,12 @@
 <!-- Achtung:
      Die Wartungseinstellungen werden gecached. Wird die Konfiguration kurzfristig
      veröffentlicht muss der Cache invalidiert werden.
-     Hierzu `http://friedbert01.zeit.de:8080/-comments/invalidate_maintenance` aufrufen. -->
+     Hierzu `http://friedbert01.zeit.de:8080/-comments/invalidate-maintenance` aufrufen. -->
 <community_maintenance>
             <!-- Überschreibt, wenn `true` den aus der Planung abgeleiteten Wartungszustand -->
             <active>false</active>
 
-            <!-- Wartungszustand planen: 
+            <!-- Wartungszustand planen:
                  - Warnhinwies wird ausgespielt, solange die Wartung noch nicht aktiv ist
                  - Im Wartungszeitraum wird die Wartung automatisch aktiviert -->
             <scheduled>false</scheduled>

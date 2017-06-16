@@ -148,7 +148,7 @@ class Application(object):
         config.add_route('invalidate_comment_thread', '/-comments/invalidate')
         config.add_route(
             'invalidate_community_maintenance',
-            '/-comments/invalidate_maintenance')
+            '/-comments/invalidate-maintenance')
         config.add_route('home', '/')
         config.add_route('breaking_news', '/breaking-news')
         config.add_route('login_state', '/login-state')
