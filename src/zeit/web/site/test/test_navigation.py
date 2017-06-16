@@ -538,8 +538,7 @@ def test_d17_link_is_on_the_right(selenium_driver, testserver):
     d17tag = driver.find_element_by_class_name(
         'nav__ressorts-item--featured-d17')
     location = d17tag.location.get("x")
-    if location != 926:
-        assert False
+    assert location == int(926)
 
 
 def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
