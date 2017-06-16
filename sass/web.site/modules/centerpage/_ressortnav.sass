@@ -36,7 +36,6 @@
 			display: block
 			padding-top: 4px
 	&__item
-		border-bottom: 1px solid $zon-light-grey
 		line-height: 2.85
 		margin: 0
 		max-width: 145px
@@ -47,7 +46,12 @@
 		a
 			font-size: em(14px)
 		+respond-min($break-tablet-min)
-			line-height: 2.05
+			border-bottom: 1px solid $zon-light-grey
+			line-height: 2.85
+			padding: 0
+			a
+				display: block
+				margin-bottom: -1px
 
 	+respond-min($break-areas)
 		clear: both
