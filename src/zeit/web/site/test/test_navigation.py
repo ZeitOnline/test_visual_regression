@@ -535,10 +535,12 @@ def test_d17_link_is_on_the_right(selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(1024, 768)
     driver.get('%s/zeit-online/zeitonline' % testserver.url)
+
     d17tag = driver.find_element_by_class_name(
         'nav__ressorts-item--featured-d17')
-    location = d17tag.location.get("x")
-    assert location == int(926)
+    location = int(d17tag.location.get("x"))
+
+    assert 924 <= location <= 928
 
 
 def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
