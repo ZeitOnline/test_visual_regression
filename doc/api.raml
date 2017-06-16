@@ -3,7 +3,7 @@
 title: Friedbert JSON API
 baseUri: https://www.zeit.de/api
 version: v1
-mediaType: application/json
+mediaType: [application/json, application/javascript]
 protocols:
   - http
 traits:
@@ -56,6 +56,81 @@ types:
       200:
         body: Article
 
+/comment-count{?unique_id}:
+  get:
+    description: >
+      Endpoint to retrieve a map of article uniqueIds to human readable comment
+      counts, for all commentable articles placed on a given centerpage.
+    queryParameters:
+      unique_id:
+        description: UniqueId of centerpage
+        type: string
+    responses:
+      200:
+        body:
+          properties:
+            comment_count:
+              properties:
+                //: string # Article uniqueId -> comment count
+          example:
+            comment_count:
+              "http://xml.zeit.de/ausland/trump": "523 Kommentare"
+              "http://xml.zeit.de/musik/country": "Keine Kommentare"
+      412:
+        description: Missing value for parameters
+
+/delta-time{?date}:
+  get:
+    description: >
+      Endpoint to generate a human readable time delta from date to basedate
+    queryParameters:
+        date:
+          description: Past date for delta calculation
+          type: datetime
+        base_date?:
+          description: Base date for delta calculation, defaults to now
+          type: datetime
+    responses:
+      200:
+        body:
+          properties:
+            delta_time:
+              properties:
+                time: string
+          example:
+            delta_time:
+              time: "vor 1 Stunde"
+      412:
+        description: Missing or bad arguments
+
+/delta-time{?unique_id}:
+  get:
+    description: >
+      Endpoint to which you supply a centerpage uniqueId and get a map of
+      uniqueIds of articles (that are currently placed on that CP) to human
+      readable time deltas expressing how long ago the last modification to each
+      article was made.
+    queryParameters:
+      unique_id:
+        description: UniqueId of centerpage
+        type: string
+      base_date?:
+        description: Base date for delta calculation, defaults to now
+        type: datetime
+    responses:
+      200:
+        body:
+          properties:
+            delta_time:
+              properties:
+                //: string # Article uniqueId -> time delta
+          example:
+            delta_time:
+              "http://xml.zeit.de/politik/merkel-g20": "Vor 2 Stunden"
+              "http://xml.zeit.de/wissen/photosynthese": "Vor 1 Stunde"
+      400:
+        description: Invalid resource
+
 /ressort:
   get:
     is: [paged]
@@ -69,3 +144,22 @@ types:
       responses:
         200:
           body: Ressort
+
+/update-time/{+path}:
+  get:
+    description: >
+      Endpoint that expects the unique path segment of a centerpage and
+      responds with the dates that centerpage was last published.
+    queryParameters:
+      callback?:
+        description: Optionally supply a name for JSONP callback function
+        type: string
+        minLength: 3
+    responses:
+      200:
+        body:
+          properties:
+            last_published_semantic: datetime
+            last_published: datetime
+      400:
+        description: Invalid JSONP callback function name
