@@ -4,7 +4,13 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- cp-areas/regions/layouts anpassen für D17 Parkett (https://github.com/ZeitOnline/zeit.web/pull/2337/commits/8a4be46d9f29511398487eed2ad0e0e696b17766)
+3.64 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.63 (2017-06-16)
 
 
 3.62.2 (unreleased)
@@ -15,6 +21,8 @@ POSTDEPLOY
 - ZON-3955: Add D17 parquet
 
 - BUG-720: Be defensive about possible CMS values and escape all C1 headers
+
+- MAINT: Align route config uris
 
 
 3.62.1 (2017-06-14)
