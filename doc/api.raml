@@ -1,0 +1,71 @@
+#%RAML 1.0
+
+title: Friedbert JSON API
+baseUri: https://www.zeit.de/api
+version: v1
+mediaType: application/json
+protocols:
+  - http
+traits:
+  paged:
+    description: Page through a collection of items
+    queryParameters:
+      size?:
+        description: Limit the result size
+        type: integer
+        minimum: 1
+        maximum: 1000
+        default: 100
+      offset?:
+        description: Offset for pagination
+        type: integer
+        minimum: 0
+        default: 0
+types:
+  Ressort:
+    properties:
+      name: string
+      title: string
+      unique_id: string
+      sub_ressorts?: Ressort[]
+  Article:
+    properties:
+      uuid: string
+      unique_id: string
+      url: string
+      supertitle: string
+      title: string
+      teaser_text: string
+      ressort: Ressort
+      sub_ressort: Ressort
+      date_first_released: datetime
+      date_last_published_semantic: datetime
+      keywords: string[]
+      lead_article: boolean
+
+/article:
+  get:
+    is: [paged]
+    responses:
+      200:
+        body: Article[]
+
+/article/{uuid}:
+  get:
+    responses:
+      200:
+        body: Article
+
+/ressort:
+  get:
+    is: [paged]
+    responses:
+      200:
+        body: Ressort[]
+
+  /ressort/{name}:
+    get:
+      is: [paged]
+      responses:
+        200:
+          body: Ressort
