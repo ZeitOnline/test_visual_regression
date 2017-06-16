@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - BUG-720: Be defensive about possible CMS values and escape all C1 headers
 
+- MAINT: Align route config uris
+
 
 3.62.1 (2017-06-14)
 -------------------
