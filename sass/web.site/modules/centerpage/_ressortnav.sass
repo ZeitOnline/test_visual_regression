@@ -35,20 +35,23 @@
 			+respond-min($break-tablet-min)
 				display: block
 		+respond-min($break-tablet-min)
-			columns: 4
-			display: block
+			display: grid
+			grid-column-gap: 15px
+			grid-template-columns: 25% 25% 25% 25%
 			padding-top: 4px
 	&__item
+		float: left
+		min-width: 50%
 		line-height: 2.85
 		margin: 0
-		overflow: hidden
-		text-overflow: ellipsis
-		white-space: nowrap
 		a
 			border-bottom: 1px solid $zon-lighter-grey
 			display: block
 			font-size: em(14px)
 			margin-top: -1px
+			overflow: hidden
+			text-overflow: ellipsis
+			white-space: nowrap
 		+respond-min($break-tablet-min)
 			line-height: 2.85
 			a
