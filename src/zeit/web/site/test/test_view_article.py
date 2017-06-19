@@ -666,18 +666,6 @@ def test_breaking_news_article_shows_date_first_released(jinja2_env):
     assert time[0].text == '11:55 Uhr'
 
 
-def test_breaking_news_banner_shows_date_first_released(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/breaking_news.tpl')
-    view = mock.Mock()
-    view.breaking_news.published = True
-    view.breaking_news.date_first_released = datetime.time(11, 55, 0)
-    html_str = tpl.render(view=view)
-    html = lxml.html.fromstring(html_str)
-    time = html.cssselect('.breaking-news-banner__time')
-    assert time[0].text == '11:55 Uhr'
-
-
 def test_tile7_is_rendered_on_articles_with_multiple_pages(testbrowser):
     selector = ('#ad-desktop-7', '#ad-mobile-4')
 

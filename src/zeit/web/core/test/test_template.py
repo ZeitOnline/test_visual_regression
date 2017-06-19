@@ -224,14 +224,22 @@ def test_teaser_layout_for_series_on_zmo_cps_should_remain_untouched(
     assert layout == 'zmo-square-large'
 
 
-def test_debug_breaking_news_request(testbrowser):
-    browser = testbrowser('/zeit-online/slenderized-index?debug=eilmeldung')
-    assert browser.cssselect('.breaking-news-banner')
+def test_breaking_news_should_be_displayed_when_published(
+        testserver, httpbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.content.article.article.ArticleWorkflow, 'published', True)
+    browser = httpbrowser('/zeit-online/index')
+    assert len(browser.cssselect('.breaking-news-banner')) == 1
 
 
-def test_debug_breaking_news_default(testbrowser):
-    browser = testbrowser('/zeit-online/slenderized-index')
-    assert not browser.cssselect('.breaking-news-banner')
+def test_breaking_news_should_be_hidden_by_default(testserver, httpbrowser):
+    browser = httpbrowser('/zeit-online/index')
+    assert len(browser.cssselect('.breaking-news-banner')) == 0
+
+
+def test_debug_breaking_news_should_force_banner(testserver, httpbrowser):
+    browser = httpbrowser('/zeit-online/index?debug=eilmeldung')
+    assert len(browser.cssselect('.breaking-news-banner')) == 1
 
 
 def test_format_webtrekk_returns_safe_text(application):

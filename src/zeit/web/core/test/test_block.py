@@ -430,6 +430,14 @@ def test_block_portraitbox_should_render_without_reference(testbrowser):
             u'Studierter Psychologe, längst aber Journalist')
 
 
+def test_block_portraitbox_should_render_nothing_for_invalid_reference(
+        testbrowser):
+    browser = testbrowser('/zeit-online/article/portraitbox_invalid')
+    assert 'Portraitbox' in browser.cssselect(
+        '.article-heading__title')[0].text
+    assert not browser.cssselect('.portraitbox__heading')
+
+
 def test_block_quiz_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     browser = tplbrowser(

@@ -11,8 +11,8 @@
         outEffect: { opacity: 1 },
         outVelocity: 500,
         uniqueId: $( document.body ).data( 'uniqueId' ),
-        timeEndpoint: '/json/delta_time?unique_id=',
-        commentsEndpoint: '/json/comment_count?unique_id=',
+        timeEndpoint: '/json/delta-time?unique_id=',
+        commentsEndpoint: '/json/comment-count?unique_id=',
         timeInterval: parseInt( Zeit.view.get( 'update_signals_time_interval' ), 10 ) || 60,
         commentsInterval: parseInt( Zeit.view.get( 'update_signals_comments_interval' ), 10 ) || 60
     };
