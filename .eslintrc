@@ -5,6 +5,7 @@
         "promise"
     ],
     "globals": {
-        "casper": true
+        "casper": "true",
+        "__utils__": "true"
     }
 }
