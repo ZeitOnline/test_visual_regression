@@ -77,7 +77,8 @@
                 // safari gets the width of pseudo elements wrong
                 // found no better fix than measuring again late in process
                 $( window ).on( 'load', function( event ) {
-                    if ( self.isDesktop() && self.node.scrollWidth > self.maxWidth ) {
+                    if ( self.isDesktop() && self.node.scrollWidth > self.maxWidth
+                        || self.items.filter(':visible').length < ( self.items.length / 2 ) ) {
                         self.adapt();
                     }
                     $( this ).off( event );
