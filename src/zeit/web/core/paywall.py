@@ -87,6 +87,14 @@ def access_for_cps(context):
     return context.access
 
 
+# According to <https://tools.ietf.org/html/rfc7230#section-3.2>
+# HTTP header values may consist of VCHAR, visible ASCII characters. However,
+# our titles and such of course contain spaces (which strictly count as
+# "invisible"), so we allow it, since it does not seem to cause any trouble in
+# our stack.
+ASCII_INVISIBLE_CHARACTERS = ''.join([chr(x) for x in range(32)] + [chr(127)])
+
+
 class CeleraOneMixin(object):
 
     def __call__(self):
@@ -135,16 +143,16 @@ class CeleraOneMixin(object):
 
     @classmethod
     def _headersafe(cls, string):
-        pattern = r'[^ %s]' % ''.join(werkzeug.http._token_chars)
-        return re.sub(pattern, '', string.encode('utf-8', 'ignore'))
+        pattern = r'[%s]' % ASCII_INVISIBLE_CHARACTERS
+        return re.sub(pattern, '', string.encode('ascii', 'ignore'))
 
-    def _get_c1_heading(self, prep=unicode):
+    def _get_c1_heading(self):
         if getattr(self.context, 'title', None) is not None:
-            return prep(self.context.title.strip())
+            return self.context.title.strip()
 
-    def _get_c1_kicker(self, prep=unicode):
+    def _get_c1_kicker(self):
         if getattr(self.context, 'supertitle', None) is not None:
-            return prep(self.context.supertitle.strip())
+            return self.context.supertitle.strip()
 
     @zeit.web.reify
     def c1_client(self):
@@ -164,7 +172,7 @@ class CeleraOneMixin(object):
 
     @zeit.web.reify
     def c1_header(self):
-        return [(k, v.encode('utf-8', 'ignore')) for k, v in {
+        return [(k, self._headersafe(v)) for k, v in {
             'C1-Track-Channel': self._c1_channel,
             'C1-Track-Sub-Channel': self._c1_sub_channel,
             'C1-Track-CMS-ID': self._c1_cms_id,
@@ -172,8 +180,8 @@ class CeleraOneMixin(object):
             'C1-Track-Doc-Type': self._c1_doc_type,
             'C1-Track-Entitlement': self._c1_entitlement,
             'C1-Track-Entitlement-ID': self._c1_entitlement_id,
-            'C1-Track-Heading': self._get_c1_heading(self._headersafe),
-            'C1-Track-Kicker': self._get_c1_kicker(self._headersafe),
+            'C1-Track-Heading': self._get_c1_heading(),
+            'C1-Track-Kicker': self._get_c1_kicker(),
             'C1-Track-Service-ID': 'zon'
         }.items() if v is not None]
 
