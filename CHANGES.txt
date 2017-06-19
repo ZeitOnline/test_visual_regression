@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - BUG-736: Trying to guess if the safari bug applies
 
+- FIX: Fix padding for D17 parquet icon
+
 
 3.63 (2017-06-16)
 -----------------
