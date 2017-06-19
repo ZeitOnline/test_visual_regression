@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.64 (unreleased)
+3.64 (2017-06-19)
 -----------------
 
 - ZON-3953: Edit navigation and feature #D-17
