@@ -32,17 +32,28 @@
 		> li:nth-child(n+6)
 			display: none
 
+	%ressort-feature-background
+		border-radius: 3px
+		color: #fff
+		display: inline-block
+		line-height: 2
+		padding: remify(0 8px)
+		transition: background-color .15s linear
+
 	&__ressorts-item--featured
 		a
 			background-color: $zon-dark-grey
-			border-radius: 3px
-			color: #fff
-			display: inline-block
-			line-height: 2
-			padding: remify(0 8px)
-			transition: background-color .15s linear
+			@extend %ressort-feature-background
 			+on-interaction
 				background-color: $zon-grey
+				color: #fff
+
+	&__ressorts-item--featured-d17
+		a
+			background-color: #ffbb00
+			@extend %ressort-feature-background
+			+on-interaction
+				background-color: #ffc933
 				color: #fff
 
 	// hide advertorial links in 1st level navigation, enable for mobile view only
@@ -282,6 +293,9 @@
 			display: list-item
 		.js &__ressorts-item--featured
 			margin-left: auto // align right @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
+		.js &__ressorts-item--featured-d17
+			padding: 0
+			margin-left: auto
 
 		&__dropdown-item--has-label
 			background-color: #FAFAF3
@@ -294,7 +308,8 @@
 		&__ressorts-link--current
 			font-weight: bold
 
-		&__ressorts-item--featured
+		&__ressorts-item--featured,
+		&__ressorts-item--featured-d17
 			a
 				+on-interaction
 					box-shadow: none

@@ -65,7 +65,7 @@
     <link href="http://xml.zeit.de/sport/index" id="topnav.mainnav.10..sport">Sport</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/spiele/index" id="topnav.mainnav.11..spiele">Spiele</link>
+    <link href="http://xml.zeit.de/zeit-magazin/index" id="topnav.mainnav.11..zeitmagazin">ZEITmagazin</link>
   </section>
   <section>
     <link href="http://xml.zeit.de/mobilitaet/index" id="topnav.mainnav.12..mobilitaet">Mobilität</link>
@@ -74,9 +74,12 @@
     <link href="http://xml.zeit.de/hamburg/index" id="topnav.mainnav.13..hamburg">Hamburg</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/angebote/250-jahre-hennessy/index" id="topnav.mainnav.14..hennessy" label="Anzeigen">250 Jahre Hennessy</link>
+    <link href="http://xml.zeit.de/spiele/index" id="topnav.mainnav.14..spiele">Spiele</link>
   </section>
   <section>
-    <link href="http://xml.zeit.de/angebote/axa/index" id="topnav.mainnav.15..axa" label="Anzeige">Axa born to protect</link>
+    <link href="http://xml.zeit.de/angebote/250-jahre-hennessy/index" id="topnav.mainnav.15..hennessy" label="Anzeigen">250 Jahre Hennessy</link>
+  </section>
+  <section>
+    <link href="http://xml.zeit.de/angebote/axa/index" id="topnav.mainnav.16..axa" label="Anzeige">Axa born to protect</link>
   </section>
 </navigation>
