@@ -11,9 +11,6 @@ POSTDEPLOY
 
 
 3.63 (2017-06-16)
-
-
-3.62.2 (unreleased)
 -----------------
 
 - ZON-3496: Render "Eilmeldung" through ESI
