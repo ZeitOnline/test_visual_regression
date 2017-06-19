@@ -7,7 +7,7 @@ POSTDEPLOY
 3.64 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-736: Trying to guess if the safari bug applies
 
 
 3.63 (2017-06-16)
