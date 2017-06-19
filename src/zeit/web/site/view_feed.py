@@ -33,9 +33,10 @@ CONTENT_NAMESPACE = 'http://purl.org/rss/1.0/modules/content/'
 DC_NAMESPACE = 'http://purl.org/dc/elements/1.1/'
 MI_NAMESPACE = 'http://schemas.ingestion.microsoft.com/common/'
 ESI_NAMESPACE = 'http://www.edge-delivery.org/esi/1.0'
+MEDIA_NAMESPACE = 'http://search.yahoo.com/mrss/'
 ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
     'atom': ATOM_NAMESPACE, 'content': CONTENT_NAMESPACE, 'dc': DC_NAMESPACE,
-    'esi': ESI_NAMESPACE, 'mi': MI_NAMESPACE},
+    'esi': ESI_NAMESPACE, 'mi': MI_NAMESPACE, 'media': MEDIA_NAMESPACE},
     typemap={types.NoneType: lambda elem, txt: setattr(elem, 'text', ''),
              lxml.etree.CDATA: lambda elem, txt: setattr(elem, 'text', txt)})
 ATOM_MAKER = getattr(ELEMENT_MAKER, '{%s}link' % ATOM_NAMESPACE)
@@ -616,13 +617,63 @@ class MsnFeed(SocialFeed):
                 # TODO: do not define makers inside the loop
                 item.append(MI_WRITTEN_MAKER(item_written_date))
 
-
                 image_maker = getattr(
-                    ELEMENT_MAKER, '{%s}image' % DC_NAMESPACE)
+                    ELEMENT_MAKER, '{%s}content' % MEDIA_NAMESPACE)
+
                 image = zeit.web.core.template.get_image(
                     content, variant_id='wide', fallback=False)
                 if image:
-                    item.append(image_maker(image.path))
+                    image_width = 1200
+                    image_height = int(image_width / image.ratio)
+                    # XXX: remove as soon as we have SSL
+                    image_host = self.request.image_host.replace(
+                        'http://', 'https://')
+                    image_url = '{}{}__{}x{}__desktop'.format(
+                        image_host,
+                        image.path, image_width, image_height)
+
+                    image_thumbnail_maker = getattr(
+                        ELEMENT_MAKER, '{%s}thumbnail' % MEDIA_NAMESPACE)
+
+                    image_credit_maker = getattr(
+                        ELEMENT_MAKER, '{%s}credit' % MEDIA_NAMESPACE)
+
+                    image_title_maker = getattr(
+                        ELEMENT_MAKER, '{%s}title' % MEDIA_NAMESPACE)
+
+                    image_text_maker = getattr(
+                        ELEMENT_MAKER, '{%s}text' % MEDIA_NAMESPACE)
+
+                    image_syndication_maker = getattr(
+                        ELEMENT_MAKER,
+                        '{%s}hasSyndicationRights' % MI_NAMESPACE)
+                    image_licensor_name_maker = getattr(
+                        ELEMENT_MAKER,
+                        '{%s}licensorName' % MI_NAMESPACE)
+
+                    imageitem = image_maker(url=image_url, type='image/jpeg')
+
+                    imageitem.append(image_thumbnail_maker(
+                        url=image_url, type='image/jpeg'))
+                    imageitem.append(image_syndication_maker('0'))
+                    imageitem.append(image_title_maker(image.caption))
+                    imageitem.append(image_text_maker(image.caption))
+
+                    if image.copyrights:
+                        copyright_names = []
+                        for name, url, nofollow in image.copyrights:
+                            copyright_names.append(name)
+                        copyright_names_string = ', '.join(copyright_names)
+
+                        image_licensor_name = image_licensor_name_maker(
+                            copyright_names_string)
+                        imageitem.append(image_licensor_name)
+
+                        image_credit = image_credit_maker(
+                            copyright_names_string)
+                        imageitem.append(image_credit)
+
+                    item.append(imageitem)
 
                 # This needs _any_ request object. It works even though
                 # it is not a request to an article URL
