@@ -7,6 +7,8 @@ POSTDEPLOY
 3.64 (unreleased)
 -----------------
 
+- ZON-3953: Edit navigation and feature #D-17
+
 - BUG-736: Trying to guess if the safari bug applies
 
 

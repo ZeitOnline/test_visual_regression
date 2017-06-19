@@ -43,8 +43,8 @@ def test_navigation_should_be_registered(application):
 
 def test_navigation_source_should_be_parsed(application):
     navigation = zeit.web.core.navigation.NAVIGATION_SOURCE
-    assert len(navigation.navigation) == 15
-    assert len(navigation.by_name) == 15
+    assert len(navigation.navigation) == 16
+    assert len(navigation.by_name) == 16
 
 
 def test_navigation_classifieds_source_should_be_parsed(application):
