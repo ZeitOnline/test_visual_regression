@@ -25,7 +25,7 @@
 	&__list
 		display: grid
 		grid-column-gap: 15px
-		grid-template-columns: 50% 50%
+		grid-template-columns: repeat(2, 50%)
 		list-style: none
 		margin-top: 5px
 		overflow: hidden
@@ -35,15 +35,13 @@
 			+respond-min($break-tablet-min)
 				display: block
 		+respond-min($break-tablet-min)
-			display: grid
-			grid-column-gap: 15px
-			grid-template-columns: 25% 25% 25% 25%
+			grid-template-columns: repeat(4, 25%)
 			padding-top: 4px
 	&__item
 		float: left
-		min-width: 50%
 		line-height: 2.85
 		margin: 0
+		min-width: 50%
 		a
 			border-bottom: 1px solid $zon-lighter-grey
 			display: block
@@ -54,6 +52,7 @@
 			white-space: nowrap
 		+respond-min($break-tablet-min)
 			line-height: 2.85
+			min-width: 25%
 			a
 				border: 0
 
