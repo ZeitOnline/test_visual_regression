@@ -13,7 +13,7 @@ def test_centerpage_should_return_jsonp_with_timestamp_if_released(
         testbrowser):
     # published page returns its pubdate
     browser = testbrowser(
-        '/json_update_time/zeit-online/main-teaser-setup?callback=foo123')
+        '/json-update-time/zeit-online/main-teaser-setup?callback=foo123')
     pubstring = (
         '/**/foo123({"last_published_semantic": '
         '"2014-11-18T12:18:27.293179+00:00", '
@@ -26,7 +26,7 @@ def test_centerpage_should_return_jsonp_with_timestamp_if_not_released(
         testbrowser):
     # published page returns empty string
     browser = testbrowser(
-        '/json_update_time/zeit-online/teaser-serie-setup?callback=foo123')
+        '/json-update-time/zeit-online/teaser-serie-setup?callback=foo123')
     pubstring = (
         '/**/foo123({"last_published_semantic": null, '
         '"last_published": null});')
@@ -36,7 +36,7 @@ def test_centerpage_should_return_jsonp_with_timestamp_if_not_released(
 
 def test_json_update_time_handler_should_set_exipration_header(testbrowser):
     browser = testbrowser(
-        '/json_update_time/zeit-online/main-teaser-setup?cb=123')
+        '/json-update-time/zeit-online/main-teaser-setup?cb=123')
     assert browser.headers.get('cache-control') == 'max-age=5'
 
 
