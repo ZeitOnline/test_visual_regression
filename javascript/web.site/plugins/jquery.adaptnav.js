@@ -35,7 +35,7 @@
             this.maxWidth = 0;
             this.node = element;
             this.element = $( element );
-            this.featured = this.element.find( '.nav__ressorts-item--featured' );
+            this.featured = this.element.find( '.nav__ressorts-item--featured, .nav__ressorts-item--featured-d17' );
             this.labeled = this.element.find( '.nav__ressorts-item--has-label' );
             this.secondary = this.element.find( '.nav__dropdown-item--has-label' );
             this.moreList = $( '#more-ressorts' );
@@ -77,8 +77,8 @@
                 // safari gets the width of pseudo elements wrong
                 // found no better fix than measuring again late in process
                 $( window ).on( 'load', function( event ) {
-                    if ( self.isDesktop() && self.node.scrollWidth > self.maxWidth
-                        || self.items.filter(':visible').length < ( self.items.length / 2 ) ) {
+                    if ( self.isDesktop() && self.node.scrollWidth > self.maxWidth ||
+                        self.items.filter( ':visible' ).length < ( self.items.length / 2 ) ) {
                         self.adapt();
                     }
                     $( this ).off( event );
