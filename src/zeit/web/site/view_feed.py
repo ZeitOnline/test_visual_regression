@@ -26,6 +26,8 @@ import zeit.web.core.template
 
 log = logging.getLogger(__name__)
 
+# TODO: nochmal gut hinschauen, dass du durch Änderungen hier nicht
+# andere Feeds kaputtspielst.
 ATOM_NAMESPACE = 'http://www.w3.org/2005/Atom'
 CONTENT_NAMESPACE = 'http://purl.org/rss/1.0/modules/content/'
 DC_NAMESPACE = 'http://purl.org/dc/elements/1.1/'
@@ -33,12 +35,13 @@ MI_NAMESPACE = 'http://schemas.ingestion.microsoft.com/common/'
 ESI_NAMESPACE = 'http://www.edge-delivery.org/esi/1.0'
 ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
     'atom': ATOM_NAMESPACE, 'content': CONTENT_NAMESPACE, 'dc': DC_NAMESPACE,
-    'esi': ESI_NAMESPACE},
+    'esi': ESI_NAMESPACE, 'mi': MI_NAMESPACE},
     typemap={types.NoneType: lambda elem, txt: setattr(elem, 'text', ''),
              lxml.etree.CDATA: lambda elem, txt: setattr(elem, 'text', txt)})
 ATOM_MAKER = getattr(ELEMENT_MAKER, '{%s}link' % ATOM_NAMESPACE)
 CONTENT_MAKER = getattr(ELEMENT_MAKER, '{%s}encoded' % CONTENT_NAMESPACE)
 DC_MAKER = getattr(ELEMENT_MAKER, '{%s}creator' % DC_NAMESPACE)
+MI_WRITTEN_MAKER = getattr(ELEMENT_MAKER, '{%s}dateTimeWritten' % MI_NAMESPACE)
 
 
 def format_rfc822_date(date):
@@ -583,8 +586,9 @@ class MsnFeed(SocialFeed):
                 # TODO: how to enforce the 150 char limit from MSN?
                 item_title = self.make_title(content)[0:150]
 
-                # TODO: format according to MSN standard
                 item_published_date = format_iso8601_date(
+                    first_released(content))
+                item_written_date = format_iso8601_date(
                     first_released(content))
 
                 item = E.item(
@@ -608,7 +612,17 @@ class MsnFeed(SocialFeed):
                     ELEMENT_MAKER, '{%s}modified' % DC_NAMESPACE)
                 item.append(item_modified_maker(item_modified_date))
 
-                # TODO: mi:dateTimeWritten
+                # TODO: clean up these makers/formatters
+                # TODO: do not define makers inside the loop
+                item.append(MI_WRITTEN_MAKER(item_written_date))
+
+
+                image_maker = getattr(
+                    ELEMENT_MAKER, '{%s}image' % DC_NAMESPACE)
+                image = zeit.web.core.template.get_image(
+                    content, variant_id='wide', fallback=False)
+                if image:
+                    item.append(image_maker(image.path))
 
                 # This needs _any_ request object. It works even though
                 # it is not a request to an article URL
