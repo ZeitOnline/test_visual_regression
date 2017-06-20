@@ -7,7 +7,7 @@ POSTDEPLOY
 3.65 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3955: Hotfix D17 logo padding
 
 
 3.64 (2017-06-19)
