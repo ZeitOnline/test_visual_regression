@@ -42,7 +42,6 @@ ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
 ATOM_MAKER = getattr(ELEMENT_MAKER, '{%s}link' % ATOM_NAMESPACE)
 CONTENT_MAKER = getattr(ELEMENT_MAKER, '{%s}encoded' % CONTENT_NAMESPACE)
 DC_MAKER = getattr(ELEMENT_MAKER, '{%s}creator' % DC_NAMESPACE)
-MI_WRITTEN_MAKER = getattr(ELEMENT_MAKER, '{%s}dateTimeWritten' % MI_NAMESPACE)
 
 
 def format_rfc822_date(date):
@@ -561,6 +560,11 @@ class MsnFeed(SocialFeed):
 
         return super(MsnFeed, self).__call__()
 
+    def make_element(self, namespace, tag, content, attributes=None):
+        element_maker = getattr(ELEMENT_MAKER, '{%s}%s' % (namespace, tag))
+        element = element_maker(content)
+        return element
+
     def build_feed(self):
         E = ELEMENT_MAKER
         root = E.rss(version='2.0')
@@ -580,17 +584,19 @@ class MsnFeed(SocialFeed):
 
         for index, content in enumerate(self.items):
             try:
-                content_url = zeit.web.core.template.create_url(
-                    None, content, self.request)
-                content_url = create_public_url(content_url)
+                content_url = create_public_url(
+                    zeit.web.core.template.create_url(
+                        None, content, self.request))
 
-                # TODO: how to enforce the 150 char limit from MSN?
+                # TODO: how to enforce the 150 char limit(and others) from MSN?
                 item_title = self.make_title(content)[0:150]
 
                 item_published_date = format_iso8601_date(
                     first_released(content))
                 item_written_date = format_iso8601_date(
                     first_released(content))
+                item_modified_date = format_iso8601_date(
+                    last_published_semantic(content))
 
                 item = E.item(
                     E.title(item_title),
@@ -605,17 +611,11 @@ class MsnFeed(SocialFeed):
                 if author:
                     item.append(DC_MAKER(author))
 
-                # TODO: hier an das Artikel/Teaser-Bild rankommen
+                item.append(self.make_element(
+                    DC_NAMESPACE, 'modified', item_modified_date))
 
-                item_modified_date = format_iso8601_date(
-                    last_published_semantic(content))
-                item_modified_maker = getattr(
-                    ELEMENT_MAKER, '{%s}modified' % DC_NAMESPACE)
-                item.append(item_modified_maker(item_modified_date))
-
-                # TODO: clean up these makers/formatters
-                # TODO: do not define makers inside the loop
-                item.append(MI_WRITTEN_MAKER(item_written_date))
+                item.append(self.make_element(
+                    MI_NAMESPACE, 'dateTimeWritten', item_written_date))
 
                 image_maker = getattr(
                     ELEMENT_MAKER, '{%s}content' % MEDIA_NAMESPACE)
@@ -629,35 +629,22 @@ class MsnFeed(SocialFeed):
                     image_host = self.request.image_host.replace(
                         'http://', 'https://')
                     image_url = '{}{}__{}x{}__desktop'.format(
-                        image_host,
-                        image.path, image_width, image_height)
+                        image_host, image.path, image_width, image_height)
 
                     image_thumbnail_maker = getattr(
                         ELEMENT_MAKER, '{%s}thumbnail' % MEDIA_NAMESPACE)
 
-                    image_credit_maker = getattr(
-                        ELEMENT_MAKER, '{%s}credit' % MEDIA_NAMESPACE)
-
-                    image_title_maker = getattr(
-                        ELEMENT_MAKER, '{%s}title' % MEDIA_NAMESPACE)
-
-                    image_text_maker = getattr(
-                        ELEMENT_MAKER, '{%s}text' % MEDIA_NAMESPACE)
-
-                    image_syndication_maker = getattr(
-                        ELEMENT_MAKER,
-                        '{%s}hasSyndicationRights' % MI_NAMESPACE)
-                    image_licensor_name_maker = getattr(
-                        ELEMENT_MAKER,
-                        '{%s}licensorName' % MI_NAMESPACE)
-
                     imageitem = image_maker(url=image_url, type='image/jpeg')
+
+                    imageitem.append(self.make_element(
+                        MI_NAMESPACE, 'hasSyndicationRights', '0'))
+                    imageitem.append(self.make_element(
+                        MEDIA_NAMESPACE, 'title', image.caption))
+                    imageitem.append(self.make_element(
+                        MEDIA_NAMESPACE, 'text', image.caption))
 
                     imageitem.append(image_thumbnail_maker(
                         url=image_url, type='image/jpeg'))
-                    imageitem.append(image_syndication_maker('0'))
-                    imageitem.append(image_title_maker(image.caption))
-                    imageitem.append(image_text_maker(image.caption))
 
                     if image.copyrights:
                         copyright_names = []
@@ -665,13 +652,11 @@ class MsnFeed(SocialFeed):
                             copyright_names.append(name)
                         copyright_names_string = ', '.join(copyright_names)
 
-                        image_licensor_name = image_licensor_name_maker(
-                            copyright_names_string)
-                        imageitem.append(image_licensor_name)
-
-                        image_credit = image_credit_maker(
-                            copyright_names_string)
-                        imageitem.append(image_credit)
+                        imageitem.append(self.make_element(
+                            MI_NAMESPACE, 'licensorName',
+                            copyright_names_string))
+                        imageitem.append(self.make_element(
+                            MI_NAMESPACE, 'credit', copyright_names_string))
 
                     item.append(imageitem)
 
