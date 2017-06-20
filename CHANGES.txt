@@ -4,12 +4,26 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.64 (unreleased)
+3.65 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.64.1 (2017-06-20)
+-------------------
+
+- ZON-3955: Hotfix D17 logo padding
+
+
+3.64 (2017-06-19)
 -----------------
 
 - ZON-3953: Edit navigation and feature #D-17
 
 - BUG-736: Trying to guess if the safari bug applies
+
+- FIX: Fix padding for D17 parquet icon
 
 
 3.63 (2017-06-16)
