@@ -82,13 +82,21 @@ class Image(object):
     def copyrights(self):
         copyrights = []
         if self._meta and self._meta.copyrights:
-            for text, url, nf in self._meta.copyrights:
+            for item in self._meta.copyrights:
+                fotographer, company, company_text, url, nf = item
                 text = zeit.web.core.utils.fix_misrepresented_latin(
-                    text).replace(u'© ', u'© ').strip()
+                    fotographer).replace(u'© ', u'© ').strip()
                 if text == u'©':
                     continue
+                if company_text:
+                    company = company_text
+                if company:
+                    text += u'/' + company
                 copyrights.append({
                     'text': text,
+                    'fotographer': fotographer,
+                    'company': company,
+                    'external_id': self._meta.external_id,
                     'url': url,
                     'nofollow': nf,
                 })
