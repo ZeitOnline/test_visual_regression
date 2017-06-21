@@ -4,11 +4,74 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-
-3.61 (unreleased)
+3.65 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+3.64.1 (2017-06-20)
+-------------------
+
+- ZON-3955: Hotfix D17 logo padding
+
+
+3.64 (2017-06-19)
+-----------------
+
+- ZON-3953: Edit navigation and feature #D-17
+
+- BUG-736: Trying to guess if the safari bug applies
+
+- FIX: Fix padding for D17 parquet icon
+
+
+3.63 (2017-06-16)
+-----------------
+
+- ZON-3496: Render "Eilmeldung" through ESI
+
+- ZON-3955: Add D17 parquet
+
+- BUG-720: Be defensive about possible CMS values and escape all C1 headers
+
+- MAINT: Align route config uris
+
+
+3.62.1 (2017-06-14)
+-------------------
+
+- ZON-3991: Change wording from "Schlagworte" to "Schlagwörter"
+
+- HOTFIX: Be defensive about invalid references in portraitbox module
+
+
+3.62 (2017-06-09)
+-----------------
+
+- ZON-3485: Support inline portrait boxes
+
+- ZON-3954: Add Google Tagmanager to AMP
+
+- BUG-733: Fix cinema ad for desktop
+
+- BUG-731: Fix "unclickable" video teaser icon
+
+- BUG-729: Fix overscrolling for missing webtrekk object
+
+- BUG-728: fix the sharing-buttons on the advertorialpage
+
+- MAINT: BEMify portraitbox in ZMO
+
+
+3.61 (2017-05-31)
+-----------------
+
+- ZON-3881: Tweak Yahoo! RSS feed
+
+- BUG-727: Prevent flashing body background-color for app content
+
+- MAINT: Show single infobox tab open by default
 
 
 3.60 (2017-05-22)

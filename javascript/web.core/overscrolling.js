@@ -77,7 +77,6 @@ define([
         var data = [ config.trackingBase + type, config.jumpTo ];
 
         Clicktracking.send( data );
-        $( window ).trigger( 'overscroll', { 'action': type });
     }
 
     function animateCircle( $element, p ) {

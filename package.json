@@ -24,7 +24,7 @@
     "livereload": "0.6.2",
     "masonry-layout": "4.2.0",
     "modernizr": "3.5.0",
-    "node-sass": "4.5.2",
+    "node-sass": "4.5.3",
     "nodemon": "1.11.0",
     "normalize.css": "6.0.0",
     "npm-run-all": "4.0.2",
@@ -76,7 +76,7 @@
     "webpack:dev": "webpack -d --debug --display-modules",
     "prebuild": "npm run clean",
     "build": "NODE_ENV=production npm-run-all --parallel modernizr sass:dist js svg",
-    "preinstall": "npm prune"
+    "postinstall": "npm prune"
   },
   "browserslist": [
     "Chrome >= 35",

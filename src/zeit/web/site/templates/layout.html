@@ -87,7 +87,7 @@
     {% endif %}
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
 </head>
-<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}" {% if view.is_wrapped %} data-is-wrapped="true"{% endif %}{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
+<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
@@ -119,7 +119,7 @@
             </header>
             {% endif %}
             {% block breaking_news %}
-                {%- include "zeit.web.site:templates/inc/breaking_news.tpl" -%}
+                {%- include "zeit.web.site:templates/inc/breaking-news-esi.html" -%}
             {% endblock breaking_news %}
             {% block liveblog_status %}{% endblock %}
             {% endprofile %}
