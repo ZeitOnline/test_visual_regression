@@ -564,19 +564,22 @@ class MsnFeed(SocialFeed):
 
         return super(MsnFeed, self).__call__()
 
+    def make_image_url(self, image, image_width):
+        # TODO: ab Zeile 174 machen wir sowas auch schon!
+        image_height = int(image_width / image.ratio)
+        # XXX: remove as soon as we have SSL
+        image_host = self.request.image_host.replace(
+            'http://', 'https://')
+        image_url = '{}{}__{}x{}__desktop'.format(
+            image_host, image.path, image_width, image_height)
+        return image_url
+
     def get_image_item(self, content):
         EN = ELEMENT_NS_MAKER
         image = zeit.web.core.template.get_image(
             content, variant_id='wide', fallback=False)
         if image:
-            image_width = 1200
-            image_height = int(image_width / image.ratio)
-            # XXX: remove as soon as we have SSL
-            image_host = self.request.image_host.replace(
-                'http://', 'https://')
-            image_url = '{}{}__{}x{}__desktop'.format(
-                image_host, image.path, image_width, image_height)
-
+            image_url = self.make_image_url(image, 1200)
             imageitem = EN(
                 'media', 'content', url=image_url, type='image/jpeg')
             imageitem.append(EN('mi', 'hasSyndicationRights', '0'))
@@ -612,19 +615,11 @@ class MsnFeed(SocialFeed):
                             href=related_url,
                             title=related_title)
 
-            # TODO: ab Zeile 174 machen wir sowas auch schon!
             image = zeit.web.core.template.get_image(
                 nextread, variant_id='wide', fallback=False)
             if image:
                 # TODO: which size to use?
-                image_width = 1200
-                image_height = int(image_width / image.ratio)
-                # XXX: remove as soon as we have SSL
-                image_host = self.request.image_host.replace(
-                    'http://', 'https://')
-                image_url = '{}{}__{}x{}__desktop'.format(
-                    image_host, image.path, image_width, image_height)
-
+                image_url = self.make_image_url(image, 600)
                 relateditem.append(EN('media', 'thumbnail', url=image_url))
                 # TODO: Pflichtfelder?
                 relateditem.append(EN('media', 'title', image.caption))
