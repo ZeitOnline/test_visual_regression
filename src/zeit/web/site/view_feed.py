@@ -564,6 +564,40 @@ class MsnFeed(SocialFeed):
 
         return super(MsnFeed, self).__call__()
 
+    def get_image_item(self, content):
+        EN = ELEMENT_NS_MAKER
+        image = zeit.web.core.template.get_image(
+            content, variant_id='wide', fallback=False)
+        if image:
+            image_width = 1200
+            image_height = int(image_width / image.ratio)
+            # XXX: remove as soon as we have SSL
+            image_host = self.request.image_host.replace(
+                'http://', 'https://')
+            image_url = '{}{}__{}x{}__desktop'.format(
+                image_host, image.path, image_width, image_height)
+
+            imageitem = EN(
+                'media', 'content', url=image_url, type='image/jpeg')
+            imageitem.append(EN('mi', 'hasSyndicationRights', '0'))
+            imageitem.append(EN('media', 'title', image.caption))
+            imageitem.append(EN('media', 'text', image.caption))
+            imageitem.append(EN('media', 'thumbnail',
+                                url=image_url, type='image/jpeg'))
+
+            if image.copyrights:
+                copyright_names = []
+                for name, url, nofollow in image.copyrights:
+                    copyright_names.append(name)
+                copyright_names_string = ', '.join(copyright_names)
+
+                imageitem.append(EN(
+                    'mi', 'licensorName', copyright_names_string))
+                imageitem.append(EN(
+                    'mi', 'credit', copyright_names_string))
+
+            return imageitem
+
     def build_feed(self):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
@@ -614,36 +648,8 @@ class MsnFeed(SocialFeed):
                 item.append(EN('dc', 'modified', item_modified_date))
                 item.append(EN('mi', 'dateTimeWritten', item_written_date))
 
-                image = zeit.web.core.template.get_image(
-                    content, variant_id='wide', fallback=False)
-                if image:
-                    image_width = 1200
-                    image_height = int(image_width / image.ratio)
-                    # XXX: remove as soon as we have SSL
-                    image_host = self.request.image_host.replace(
-                        'http://', 'https://')
-                    image_url = '{}{}__{}x{}__desktop'.format(
-                        image_host, image.path, image_width, image_height)
-
-                    imageitem = EN(
-                        'media', 'content', url=image_url, type='image/jpeg')
-                    imageitem.append(EN('mi', 'hasSyndicationRights', '0'))
-                    imageitem.append(EN('media', 'title', image.caption))
-                    imageitem.append(EN('media', 'text', image.caption))
-                    imageitem.append(EN('media', 'thumbnail',
-                                        url=image_url, type='image/jpeg'))
-
-                    if image.copyrights:
-                        copyright_names = []
-                        for name, url, nofollow in image.copyrights:
-                            copyright_names.append(name)
-                        copyright_names_string = ', '.join(copyright_names)
-
-                        imageitem.append(EN(
-                            'mi', 'licensorName', copyright_names_string))
-                        imageitem.append(EN(
-                            'mi', 'credit', copyright_names_string))
-
+                imageitem = self.get_image_item(content)
+                if imageitem:
                     item.append(imageitem)
 
                 # This needs _any_ request object. It works even though
