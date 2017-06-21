@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - BUG-724: Fix advertorial nextread in AMP
 
+- FIX: Skip broken article modules, instead of breaking the whole article
+
 - MAINT: Tooling: Log eslint errors on watch task
 
 
