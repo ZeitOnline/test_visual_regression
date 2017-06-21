@@ -300,7 +300,7 @@ def test_campus_toolbox_has_correct_links(testbrowser):
             select('.toolbox__link')[0].attrib['href'])
     assert ('http://studiengaenge.zeit.de' in
             select('.toolbox__link')[1].attrib['href'])
-    assert ('http://ranking.zeit.de/che2016/de/' in
+    assert ('https://ranking.zeit.de/che/de/' in
             select('.toolbox__link')[2].attrib['href'])
 
 
@@ -324,7 +324,7 @@ def test_campus_flyout_has_correct_links(selenium_driver, testserver):
                 in links[0].get_attribute('href'))
         assert ('http://studiengaenge.zeit.de'
                 in links[1].get_attribute('href'))
-        assert ('http://ranking.zeit.de/che2016/de/'
+        assert ('https://ranking.zeit.de/che/de/'
                 in links[2].get_attribute('href'))
 
 
