@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - BUG-724: Fix advertorial nextread in AMP
 
+- FIX: Skip broken article modules, instead of breaking the whole article
+
 
 3.64.1 (2017-06-20)
 -------------------
