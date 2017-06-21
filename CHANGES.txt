@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - BUG-724: Fix advertorial nextread in AMP
 
+- MAINT: Tooling: Log eslint errors on watch task
+
 
 3.64.1 (2017-06-20)
 -------------------
