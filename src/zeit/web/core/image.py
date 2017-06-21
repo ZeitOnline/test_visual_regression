@@ -80,16 +80,18 @@ class Image(object):
 
     @zeit.web.reify
     def copyrights(self):
-        # Copyrights always come as a sanitized touple of touples
-        # containing a copyright text, URL and a nofollow flag.
         copyrights = []
         if self._meta and self._meta.copyrights:
-            for text, uri, nf in self._meta.copyrights:
+            for text, url, nf in self._meta.copyrights:
                 text = zeit.web.core.utils.fix_misrepresented_latin(
                     text).replace(u'© ', u'© ').strip()
                 if text == u'©':
                     continue
-                copyrights.append((text, uri, nf))
+                copyrights.append({
+                    'text': text,
+                    'url': url,
+                    'nofollow': nf,
+                })
         return tuple(copyrights)
 
     @zeit.web.reify

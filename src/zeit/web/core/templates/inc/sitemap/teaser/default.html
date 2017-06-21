@@ -3,7 +3,7 @@
     <lastmod>{{ teaser | mod_date | format_date('iso8601') }}</lastmod>
     {% require image = get_image(module, variant_id='wide', fallback=False) %}
         {%- set source = request.image_host + image.path + '__1300x731' -%}
-        {%- set copyright = image.copyrights | map('first') | join(', ') -%}
+        {%- set copyright = image.copyrights | map(attribute='text') | join(', ') -%}
         {%- if copyright -%}
             {%- set copyright = '(' ~ copyright ~ ')' -%}
         {%- endif -%}

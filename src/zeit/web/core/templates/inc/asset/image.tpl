@@ -32,11 +32,11 @@
         {% block media_caption -%}
         <figcaption class="{% block media_caption_class %}figure{% endblock %}__caption {{ media_caption_additional_class }}">
             {%- block media_caption_content %}
-                {%- for name, url, nofollow in image.copyrights %}
+                {%- for item in image.copyrights %}
                     <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
-                        {%- if url and not omit_image_links %}<a itemprop="url"{% if nofollow %} rel="nofollow"{% endif %} href="{{ url }}" target="_blank">{% endif -%}
-                        <span itemprop="name">{{ name }}</span>
-                        {%- if url and not omit_image_links %}</a>{% endif -%}
+                        {%- if item.url and not omit_image_links %}<a itemprop="url"{% if item.nofollow %} rel="nofollow"{% endif %} href="{{ item.url }}" target="_blank">{% endif -%}
+                        <span itemprop="name">{{ item.text }}</span>
+                        {%- if item.url and not omit_image_links %}</a>{% endif -%}
                     </span>
                 {%- endfor %}
             {%- endblock media_caption_content -%}
