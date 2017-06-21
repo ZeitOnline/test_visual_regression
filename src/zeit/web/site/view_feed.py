@@ -598,6 +598,40 @@ class MsnFeed(SocialFeed):
 
             return imageitem
 
+    def get_related_item(self, content):
+        E = ELEMENT_MAKER
+        EN = ELEMENT_NS_MAKER
+
+        nextread = zeit.web.core.interfaces.INextread(content, [])
+        if nextread:
+
+            related_url = nextread.uniqueId
+            related_title = self.make_title(nextread)[0:150]
+
+            relateditem = E('link', type='text/html',
+                            href=related_url,
+                            title=related_title)
+
+            # TODO: ab Zeile 174 machen wir sowas auch schon!
+            image = zeit.web.core.template.get_image(
+                nextread, variant_id='wide', fallback=False)
+            if image:
+                # TODO: which size to use?
+                image_width = 1200
+                image_height = int(image_width / image.ratio)
+                # XXX: remove as soon as we have SSL
+                image_host = self.request.image_host.replace(
+                    'http://', 'https://')
+                image_url = '{}{}__{}x{}__desktop'.format(
+                    image_host, image.path, image_width, image_height)
+
+                relateditem.append(EN('media', 'thumbnail', url=image_url))
+                # TODO: Pflichtfelder?
+                relateditem.append(EN('media', 'title', image.caption))
+                relateditem.append(EN('media', 'text', image.caption))
+
+            return relateditem
+
     def build_feed(self):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
@@ -648,10 +682,6 @@ class MsnFeed(SocialFeed):
                 item.append(EN('dc', 'modified', item_modified_date))
                 item.append(EN('mi', 'dateTimeWritten', item_written_date))
 
-                imageitem = self.get_image_item(content)
-                if imageitem:
-                    item.append(imageitem)
-
                 # This needs _any_ request object. It works even though
                 # it is not a request to an article URL
                 content_view = zeit.web.site.view_article.Article(
@@ -662,6 +692,14 @@ class MsnFeed(SocialFeed):
                         'request': self.request
                     })
                 item.append(EN('content', 'encoded', content_body))
+
+                imageitem = self.get_image_item(content)
+                if imageitem is not None:
+                    item.append(imageitem)
+
+                relateditem = self.get_related_item(content)
+                if relateditem is not None:
+                    item.append(relateditem)
 
                 channel.append(item)
             except:
