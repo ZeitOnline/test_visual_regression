@@ -31,11 +31,14 @@
 			background-color: $primary-color-zett
 			color: $white
 			height: remify(63px)
-			left: remify($page-padding)
 			position: absolute
 			text-align: center
 			top: 0
 			width: remify(86px)
+		&--tag-d17
+			color: #ffbb00
+			height: remify(40px)
+			width: remify(64px)
 
 	&__badge
 		display: none
@@ -104,10 +107,20 @@
 			height: remify(50px)
 			margin-bottom: remify(13px)
 			overflow: visible // show the extending logo
-			padding: remify(14px) $page-padding
+			padding-bottom: remify(14px)
+			padding-top: remify(14px)
 			position: relative
 			&:after
 				color: $white
+		&--d17
+			background-color: $primary-color-zmo
+			color: $white
+			line-height: 1
+			padding-bottom: remify(10px) // fix inline bottom gap
+			padding-top: remify(13px)
+			&:after
+				color: $white
+				line-height: inherit
 
 	&__links
 		display: none
