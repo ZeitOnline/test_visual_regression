@@ -703,4 +703,5 @@ class MsnFeed(SocialFeed):
                     content, self.__class__.__name__, exc_info=True)
                 continue
 
+        lxml.etree.cleanup_namespaces(root)
         return root
