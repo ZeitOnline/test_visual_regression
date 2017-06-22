@@ -6,6 +6,7 @@ import pytest
 import zeit.cms.interfaces
 import zeit.cms.checkout.helper
 
+import zeit.web.core.navigation
 import zeit.web.core.view_json
 
 
@@ -137,3 +138,24 @@ def test_json_delta_time_from_unique_id_should_use_custom_base_time(
     a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
     assert content['delta_time'][a1] == 'Vor 1 Stunde'
     assert content['delta_time'][a2] == 'Vor 12 Minuten'
+
+
+def test_json_ressort_list_should_produce_list_of_ressorts(testbrowser):
+    browser = testbrowser('/json/ressort-list')
+    assert len(browser.json)
+    assert browser.json[0] == {
+        'name': 'Politik',
+        'uniqueId': 'http://xml.zeit.de/politik/index'}
+
+
+def test_json_ressort_list_should_exclude_advertorials(
+        monkeypatch, testbrowser):
+    navigation = lambda: [
+        zeit.web.core.navigation.NavigationItem(
+            'Ad.0.0.0/index', 'ad', 'http://zeit.to/advertorial', 'Anzeige'),
+        zeit.web.core.navigation.NavigationItem(
+            'Politik.0.1/ressort', 'Politik', 'http://zeit.to/politik')]
+    monkeypatch.setattr(zeit.web.core.navigation.NAVIGATION_SOURCE.navigation,
+                        'values', navigation)
+    browser = testbrowser('/json/ressort-list')
+    assert len(browser.json) == 1

@@ -134,3 +134,18 @@ def json_topic_config(request):
         config = {}
     request.response.cache_expires(5)
     return config
+
+
+@zeit.web.view_config(
+    route_name='json_ressort_list',
+    renderer='jsonp')
+def json_ressort_list(request):
+    ressort_list = []
+    for item in zeit.web.core.navigation.NAVIGATION_SOURCE.navigation.values():
+        if item.label and 'Anzeige' in item.label:
+            continue
+        ressort_list.append({
+            'name': zeit.cms.content.sources.unicode_or_none(item.text),
+            'uniqueId': zeit.cms.content.sources.unicode_or_none(item.href)
+        })
+    return ressort_list
