@@ -7,6 +7,8 @@ POSTDEPLOY
 3.65 (unreleased)
 -----------------
 
+- BUG-739: Add margin to sharing button
+
 - BUG-724: Fix advertorial nextread in AMP
 
 - FIX: Skip broken article modules, instead of breaking the whole article
