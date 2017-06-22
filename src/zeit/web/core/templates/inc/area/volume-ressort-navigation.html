@@ -1,12 +1,11 @@
-{% if view.regions %}
 <aside class="ressortnav js-toggle-region">
     <h2 class="ressortnav__headline" aria-controls="ressortnavigation" data-constrained="mobile,phablet">Ressorts</h2>
     <ul id="ressortnavigation" class="ressortnav__list">
-        {% for region in view.regions[:-1] %}
-            {% if region[0].title and region[0].kind == 'print-ressort' and region[0].count != 0 %}
-                <li class="ressortnav__item"><a href="#{{ region[0].title | urlencode }}" class="js-scroll">{{ region[0].title }}</a></li>
+        {% for region in view.regions %}
+            {% if region[0].title and region[0].kind == 'print-ressort' and region[0].values() %}
+                {# XXX: Remove the replacement hack (simply `{{ region[0].title  }}`) , after ZON-4008 is done. #}
+                <li class="ressortnav__item"><a href="#{{ region[0].title | urlencode }}" class="js-scroll">{{ region[0].title | replace ('zeitmagazin', 'ZEITmagazin') }}</a></li>
             {% endif %}
         {% endfor %}
     </ul>
 </aside>
-{% endif %}
