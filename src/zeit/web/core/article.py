@@ -1,5 +1,9 @@
-import logging
+from __future__ import absolute_import
 
+import logging
+import sys
+
+import bugsnag
 import gocept.lxml.objectify
 import grokcore.component
 import xml.sax.saxutils
@@ -9,9 +13,6 @@ import zope.security.proxy
 
 import zeit.cms.content.sources
 import zeit.cms.interfaces
-import zeit.connector.cache
-import zeit.content.article.article
-import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.retresco.interfaces
@@ -20,7 +21,7 @@ import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.interfaces
-import zeit.web.core.template
+import zeit.web.core.jinja
 
 
 log = logging.getLogger(__name__)
@@ -50,9 +51,17 @@ class Page(object):
         del self.blocks[key]
 
     def append(self, block):
-        block = zeit.web.core.interfaces.IFrontendBlock(block, None)
-        if block is not None:
-            self.blocks.append(block)
+        wrapped = None
+        try:
+            wrapped = zeit.web.core.interfaces.IFrontendBlock(block, None)
+        except:
+            log.warn('Ignoring %s', block, exc_info=True)
+            exc_info = sys.exc_info()
+            path = zeit.web.core.jinja.get_current_request_path()
+            bugsnag.notify(exc_info[1], traceback=exc_info[2], context=path)
+            return
+        if wrapped is not None:
+            self.blocks.append(wrapped)
 
 
 def _inject_banner_code(pages, pubtype):

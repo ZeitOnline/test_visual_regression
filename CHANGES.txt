@@ -7,7 +7,11 @@ POSTDEPLOY
 3.65 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-724: Fix advertorial nextread in AMP
+
+- FIX: Skip broken article modules, instead of breaking the whole article
+
+- MAINT: Tooling: Log eslint errors on watch task
 
 
 3.64.1 (2017-06-20)
