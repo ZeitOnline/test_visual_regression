@@ -133,6 +133,9 @@ class Application(object):
             'instantarticle-item', '/instantarticle-item/*traverse')
         config.add_route('fbia', '/fbia/*traverse')
         config.add_route('amp', '/amp/*traverse')
+
+        config.add_renderer('jsonp', pyramid.renderers.JSONP(
+            param_name='callback', indent=2))
         config.add_route('json_delta_time', '/json/delta-time')
         config.add_route('json_update_time', '/json/update-time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment-count')
@@ -177,9 +180,6 @@ class Application(object):
                 name=self.settings.get('asset_prefix', '/static/latest'),
                 path='zeit.web.static:', cache_max_age=ast.literal_eval(
                     self.settings['assets_max_age']))
-
-        config.add_renderer('jsonp', pyramid.renderers.JSONP(
-            param_name='callback'))
 
         config.add_request_method(configure_host('asset'), reify=True)
         config.add_request_method(configure_host('image'), reify=True)
