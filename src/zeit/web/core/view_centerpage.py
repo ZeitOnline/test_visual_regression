@@ -292,47 +292,6 @@ class CenterpagePage(object):
 
 
 @zeit.web.view_config(
-    route_name='json_update_time',
-    renderer='jsonp')
-def json_update_time(request):
-    try:
-        resource = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/{}'.format(
-                request.matchdict['path']), None)
-        if resource is None:
-            resource = zeit.cms.interfaces.ICMSContent(
-                'http://xml.zeit.de/{}'.format(request.matchdict['path']))
-
-        info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
-        dlps = info.date_last_published_semantic.isoformat()
-        dlp = info.date_last_published.isoformat()
-
-    except (AttributeError, KeyError, TypeError):
-        dlps = dlp = None
-    request.response.cache_expires(5)
-    return {'last_published': dlp, 'last_published_semantic': dlps}
-
-
-@zeit.web.view_config(
-    route_name='json_topic_config',
-    renderer='jsonp')
-def json_topic_config(request):
-    try:
-        resource = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
-        cp = zeit.content.cp.interfaces.ICenterPage(resource)
-        config = {'topics': []}
-        for x in xrange(1, 4):
-            label = getattr(cp, 'topiclink_label_{}'.format(x))
-            url = getattr(cp, 'topiclink_url_{}'.format(x))
-            if url and label:
-                config['topics'].append({'topic': label, 'url': url})
-    except (AttributeError, KeyError, TypeError):
-        config = {}
-    request.response.cache_expires(5)
-    return config
-
-
-@zeit.web.view_config(
     context=zeit.content.cp.interfaces.ISitemap,
     renderer='templates/sitemap.html')
 class Sitemap(Centerpage):
