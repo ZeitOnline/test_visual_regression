@@ -137,6 +137,50 @@ def json_topic_config(request):
 
 
 @zeit.web.view_config(
+    route_name='json_article_query',
+    request_method='POST',
+    renderer='jsonp')
+def json_article_query(request):
+    try:
+        unique_ids = request.json_body['uniqueIds']
+        assert isinstance(unique_ids, list)
+        assert 0 < len(unique_ids) <= 1000
+    except:
+        raise pyramid.httpexceptions.HTTPBadRequest()
+
+    homepage = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
+    lead = zeit.content.cp.interfaces.ITeaseredContent(homepage).next()
+    lead_unique_id = lead.uniqueId
+
+    Q = zeit.solr.query
+    main_query = Q.or_(*[('uniqueId:"%s"' % u) for u in set(unique_ids)])
+    filter_query = Q.field_raw('type', 'article')
+    fields = ','.join((
+        'uuid',
+        'uniqueId',
+        'supertitle',
+        'title',
+        'teaser_text',
+        'ressort',
+        'sub_ressort',
+        'date_first_released',
+        'date_last_published',
+        'keywords'))
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    response = solr.search(
+        main_query,
+        rows=1000,
+        fl=fields,
+        sort='date_first_released desc',
+        fq=filter_query)
+    for item in response:
+        item['lead_article'] = item['uniqueId'] == lead_unique_id
+        item['url'] = item['uniqueId'].replace(
+            zeit.cms.interfaces.ID_NAMESPACE, request.route_url('home'))
+    return list(response)
+
+
+@zeit.web.view_config(
     route_name='json_ressort_list',
     renderer='jsonp')
 def json_ressort_list(request):

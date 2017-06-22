@@ -1,7 +1,10 @@
 import json
 import urllib2
 
+import mock
 import pytest
+import requests
+import zope.component
 
 import zeit.cms.interfaces
 import zeit.cms.checkout.helper
@@ -150,12 +153,73 @@ def test_json_ressort_list_should_produce_list_of_ressorts(testbrowser):
 
 def test_json_ressort_list_should_exclude_advertorials(
         monkeypatch, testbrowser):
-    navigation = lambda: [
-        zeit.web.core.navigation.NavigationItem(
-            'Ad.0.0.0/index', 'ad', 'http://zeit.to/advertorial', 'Anzeige'),
-        zeit.web.core.navigation.NavigationItem(
-            'Politik.0.1/ressort', 'Politik', 'http://zeit.to/politik')]
+    def navigation():
+        return [
+            zeit.web.core.navigation.NavigationItem(
+                'Ad.0.0.0/adv', 'ad', 'http://zeit.to/advertorial', 'Anzeige'),
+            zeit.web.core.navigation.NavigationItem(
+                'Politik.0.1/pol', 'Politik', 'http://zeit.to/politik')]
     monkeypatch.setattr(zeit.web.core.navigation.NAVIGATION_SOURCE.navigation,
                         'values', navigation)
     browser = testbrowser('/json/ressort-list')
     assert len(browser.json) == 1
+
+
+@pytest.mark.parametrize('json', [None, {'uniqueIds': 2}, {'uniqueIds': []}])
+def test_json_article_query_should_do_sanity_checks_on_post(json, testserver):
+    resp = requests.post('%s/json/article-query' % testserver.url, json=json)
+    assert resp.status_code == 400
+
+
+def test_json_article_query_should_respond_to_good_request(testserver):
+    json = {'uniqueIds': ['http://xml.zeit.de/zeit-online/article/zeit']}
+    resp = requests.post('%s/json/article-query' % testserver.url, json=json)
+    assert resp.ok
+
+
+def test_json_article_query_should_construct_correct_solr_queries(
+        application, monkeypatch):
+    request = mock.MagicMock()
+    request.json_body = {'uniqueIds': ['foo://1', 'bar://2']}
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    search = mock.MagicMock(return_value=[])
+    monkeypatch.setattr(solr, 'search', search)
+    zeit.web.core.view_json.json_article_query(request)
+    args, kw = search.call_args
+    assert args[0] == '(uniqueId:"foo://1" OR uniqueId:"bar://2")'
+    assert kw['fq'] == 'type:(article)'
+
+
+def test_json_article_query_should_transform_solr_fields(application):
+    request = mock.Mock()
+    request.route_url = mock.MagicMock(return_value='//zeit.to/')
+    request.json_body = {'uniqueIds': [
+        'http://xml.zeit.de/zeit-online/cp-content/article-01']}
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'date_first_released': '2017-05-03T15:01:26.098814+00:00',
+        'date_last_published': '2017-05-03T15:01:26.098814+00:00',
+        'keywords': ['kw-1', 'kw-3', 'kw-8'],
+        'ressort': 'my-ressort',
+        'sub_ressort': 'my-sub-ressort',
+        'supertitle': 'my-super-title',
+        'teaser_text': 'my-teaser-text',
+        'title': 'my-title',
+        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
+        'uuid': 'my-uuid'
+    }]
+    response = zeit.web.core.view_json.json_article_query(request)
+    assert response == [{
+        'date_first_released': '2017-05-03T15:01:26.098814+00:00',
+        'date_last_published': '2017-05-03T15:01:26.098814+00:00',
+        'keywords': ['kw-1', 'kw-3', 'kw-8'],
+        'lead_article': True,
+        'ressort': 'my-ressort',
+        'sub_ressort': 'my-sub-ressort',
+        'supertitle': 'my-super-title',
+        'teaser_text': 'my-teaser-text',
+        'title': 'my-title',
+        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
+        'url': '//zeit.to/zeit-online/cp-content/article-01',
+        'uuid': 'my-uuid'
+    }]

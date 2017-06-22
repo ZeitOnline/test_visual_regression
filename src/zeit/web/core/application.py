@@ -139,6 +139,7 @@ class Application(object):
         config.add_route('json_delta_time', '/json/delta-time')
         config.add_route('json_update_time', '/json/update-time/{path:.*}')
         config.add_route('json_comment_count', '/json/comment-count')
+        config.add_route('json_article_query', '/json/article-query')
         config.add_route('json_ressort_list', '/json/ressort-list')
 
         # XXX: This route was introduced, because we needed a smaller and
