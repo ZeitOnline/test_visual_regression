@@ -560,7 +560,6 @@ class MsnFeed(SocialFeed):
         return super(MsnFeed, self).__call__()
 
     def make_image_url(self, image, image_width):
-        # TODO: ab Zeile 174 machen wir sowas auch schon!
         image_height = int(image_width / image.ratio)
         # XXX: remove as soon as we have SSL
         image_host = self.request.image_host.replace(
@@ -644,7 +643,6 @@ class MsnFeed(SocialFeed):
                     zeit.web.core.template.create_url(
                         None, content, self.request))
 
-                # TODO: how to enforce the 150 char limit(and others) from MSN?
                 item_title = self.make_title(content)[0:150]
 
                 item_published_date = format_iso8601_date(
