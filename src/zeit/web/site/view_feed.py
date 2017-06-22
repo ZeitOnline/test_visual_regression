@@ -546,11 +546,6 @@ class YahooFeed(SocialFeed):
         return root
 
 
-# TODO:
-# - diese Klasse hier aufräumen
-# - ESI Namespace ist im Feed drin, obwohl wir den (hier) nicht brauchen
-# - Was macht der name-Parameter in der ViewConfig?
-# - kann man die URL kürzen? administratives/msnfeed (ohne rss-msn)?
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-msn',
@@ -618,10 +613,8 @@ class MsnFeed(SocialFeed):
             image = zeit.web.core.template.get_image(
                 nextread, variant_id='wide', fallback=False)
             if image:
-                # TODO: which size to use?
                 image_url = self.make_image_url(image, 600)
                 relateditem.append(EN('media', 'thumbnail', url=image_url))
-                # TODO: Pflichtfelder?
                 relateditem.append(EN('media', 'title', image.caption))
                 relateditem.append(EN('media', 'text', image.caption))
 
