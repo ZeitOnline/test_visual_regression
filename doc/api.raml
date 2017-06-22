@@ -7,31 +7,25 @@ mediaType: [application/json, application/javascript]
 protocols:
   - http
 traits:
-  paged:
-    description: Page through a collection of items
+  jsonp:
+    description: This endpoint is also available as JSON with padding
     queryParameters:
-      size?:
-        description: Limit the result size
-        type: integer
-        minimum: 1
-        maximum: 1000
-        default: 100
-      offset?:
-        description: Offset for pagination
-        type: integer
-        minimum: 0
-        default: 0
+      callback?:
+        description: Optional name for JSONP callback function
+        type: string
+        minLength: 3
+    responses:
+      400:
+        description: Invalid JSONP callback function name
 types:
   Ressort:
     properties:
       name: string
-      title: string
-      unique_id: string
-      sub_ressorts?: Ressort[]
+      uniqueIds: string
   Article:
     properties:
       uuid: string
-      unique_id: string
+      uniqueId: string
       url: string
       supertitle: string
       title: string
@@ -39,25 +33,26 @@ types:
       ressort: Ressort
       sub_ressort: Ressort
       date_first_released: datetime
-      date_last_published_semantic: datetime
+      date_last_published: datetime
       keywords: string[]
       lead_article: boolean
 
-/article:
-  get:
-    is: [paged]
+/article-query:
+  post:
+    is: [jsonp]
+    body:
+      properties:
+        unique_ids:
+          type: string[]
+          minItems: 1
+          maxItems: 1000
     responses:
       200:
         body: Article[]
 
-/article/{uuid}:
-  get:
-    responses:
-      200:
-        body: Article
-
 /comment-count{?unique_id}:
   get:
+    is: [jsonp]
     description: >
       Endpoint to retrieve a map of article uniqueIds to human readable comment
       counts, for all commentable articles placed on a given centerpage.
@@ -81,6 +76,7 @@ types:
 
 /delta-time{?date}:
   get:
+    is: [jsonp]
     description: >
       Endpoint to generate a human readable time delta from date to basedate
     queryParameters:
@@ -105,6 +101,7 @@ types:
 
 /delta-time{?unique_id}:
   get:
+    is: [jsonp]
     description: >
       Endpoint to which you supply a centerpage uniqueId and get a map of
       uniqueIds of articles (that are currently placed on that CP) to human
@@ -131,35 +128,22 @@ types:
       400:
         description: Invalid resource
 
-/ressort:
+/ressort-list:
   get:
-    is: [paged]
+    is: [jsonp]
     responses:
       200:
         body: Ressort[]
 
-  /ressort/{name}:
-    get:
-      is: [paged]
-      responses:
-        200:
-          body: Ressort
-
 /update-time/{+path}:
   get:
+    is: [jsonp]
     description: >
       Endpoint that expects the unique path segment of a centerpage and
       responds with the dates that centerpage was last published.
-    queryParameters:
-      callback?:
-        description: Optionally supply a name for JSONP callback function
-        type: string
-        minLength: 3
     responses:
       200:
         body:
           properties:
             last_published_semantic: datetime
             last_published: datetime
-      400:
-        description: Invalid JSONP callback function name
