@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 import requests
 
-import zeit.web.core
-
 
 def test_gallery_seite_path_should_redirect_to_gallery_start(testserver):
     resp = requests.get('%s/zeit-online/gallery/biga_1/seite-3'

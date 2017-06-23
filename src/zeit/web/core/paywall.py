@@ -1,6 +1,5 @@
 import re  # wb
 import grokcore
-import werkzeug.http
 import zope.component
 
 import zeit.web

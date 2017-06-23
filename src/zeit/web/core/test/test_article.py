@@ -84,3 +84,12 @@ def test_retresco_body_should_replace_xml_body(application, monkeypatch):
         ('{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}',),
         {'timeout': 0.42}]
     assert body.xml.find('a') == 'topicpage'
+
+
+def test_skips_blocks_with_errors(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/portraitbox_invalid')
+    with mock.patch('zeit.web.core.block.Portraitbox.__init__') as pbox:
+        pbox.side_effect = RuntimeError('provoked')
+        pages = zeit.web.core.article.pages_of_article(article)
+    assert len(pages) == 1

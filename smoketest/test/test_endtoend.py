@@ -170,3 +170,15 @@ def test_search_results_page_contains_teasers(config, testbrowser):
         browser = testbrowser(
             '{}/suche/index?q=europa'.format(config['BASE_URL']))
         assert len(browser.cssselect('article[class*=teaser]')) == 10
+
+
+def test_configured_redirects(config):
+    resp = requests.head('{}/archiv'.format(config['BASE_URL']),
+                         allow_redirects=False)
+    assert resp.headers['Location'] == 'http://www.zeit.de/2017/index'
+    resp = requests.head('{}/ZEITmagazin/'.format(config['BASE_URL']),
+                         allow_redirects=False)
+    assert resp.headers['Location'] == 'http://www.zeit.de/zeit-magazin/index'
+    resp = requests.head('{}/archiv/2000/foo'.format(config['BASE_URL']),
+                         allow_redirects=False)
+    assert resp.headers['Location'] == 'http://www.zeit.de/2000/foo'
