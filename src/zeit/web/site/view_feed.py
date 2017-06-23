@@ -97,8 +97,10 @@ class Base(zeit.web.core.view.Base):
             self.context, zeit.web.core.interfaces.INewsfeed)
         super(Base, self).__call__()
         self.request.response.content_type = 'application/rss+xml'
+        feed = self.build_feed()
+        lxml.etree.cleanup_namespaces(feed)
         return lxml.etree.tostring(
-            self.build_feed(), pretty_print=True, xml_declaration=True,
+            feed, pretty_print=True, xml_declaration=True,
             encoding='UTF-8')
 
     def build_feed(self):
@@ -683,5 +685,4 @@ class MsnFeed(Base):
                     content, self.__class__.__name__, exc_info=True)
                 continue
 
-        lxml.etree.cleanup_namespaces(root)
         return root
