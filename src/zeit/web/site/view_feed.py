@@ -135,28 +135,29 @@ class Newsfeed(Base):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
         year = datetime.datetime.today().year
-        root = E.rss(version='2.0')
-        channel = E.channel(
-            E.title(self.pagetitle),
-            E.link('http://www.zeit.de%s' % self.request.path),
-            E.description(self.pagedescription),
-            E.language('de-de'),
-            E.copyright(
-                u'Copyright © {}, ZEIT ONLINE GmbH'.format(year)),
+        root = E('rss', version='2.0')
+        channel = E(
+            'channel',
+            E('title', self.pagetitle),
+            E('link', 'http://www.zeit.de%s' % self.request.path),
+            E('description', self.pagedescription),
+            E('language', 'de-de'),
+            E('copyright', u'Copyright © {}, ZEIT ONLINE GmbH'.format(year)),
             EN('atom', 'link',
                href=self.request.url.decode('utf-8'),
                type=self.request.response.content_type),
-            E.docs('http://www.zeit.de/hilfe/rss'),
-            E.generator('zeit.web {}'.format(
+            E('docs', 'http://www.zeit.de/hilfe/rss'),
+            E('generator', 'zeit.web {}'.format(
                 self.request.registry.settings.version)),
-            E.managingEditor(
-                'online-cr@zeit.de (Chefredaktion ZEIT ONLINE)'),
-            E.webMaster('webmaster@zeit.de (Technik ZEIT ONLINE)'),
-            E.image(
-                E.url((self.request.image_host +
-                       '/bilder/elemente_01_06/logos/homepage_top.gif')),
-                E.title(self.pagetitle),
-                E.link('http://www.zeit.de%s' % self.request.path)
+            E('managingEditor',
+              'online-cr@zeit.de (Chefredaktion ZEIT ONLINE)'),
+            E('webMaster', 'webmaster@zeit.de (Technik ZEIT ONLINE)'),
+            E(
+                'image',
+                E('url', (self.request.image_host +
+                          '/bilder/elemente_01_06/logos/homepage_top.gif')),
+                E('title', self.pagetitle),
+                E('link', 'http://www.zeit.de%s' % self.request.path)
             )
         )
         root.append(channel)
@@ -195,17 +196,18 @@ class Newsfeed(Base):
                                 self.request.image_host, variant.lstrip('/')),
                             metadata.teaserText)
 
-                item = E.item(
-                    E.title(self.make_title(metadata)),
-                    E.link(content_url),
-                    E.description(description),
-                    E.category(metadata.sub_ressort or metadata.ressort),
+                item = E(
+                    'item',
+                    E('title', self.make_title(metadata)),
+                    E('link', content_url),
+                    E('description', description),
+                    E('category', metadata.sub_ressort or metadata.ressort),
                     EN('dc', 'creator', u'ZEIT ONLINE: {} - {}'.format(
                         (metadata.sub_ressort or metadata.ressort),
                         u', '.join(self.make_author_list(metadata)))),
-                    E.pubDate(format_rfc822_date(
+                    E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
-                    E.guid(content_url, isPermaLink='false'),
+                    E('guid', content_url, isPermaLink='false'),
                 )
                 channel.append(item)
             except:
@@ -261,12 +263,13 @@ class InstantArticleFeed(Base):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
         build_date = format_iso8601_date(datetime.datetime.today())
-        root = E.rss(version='2.0')
-        channel = E.channel(
-            E.title(self.pagetitle),
-            E.link(self.request.route_url('home')),
-            E.description(self.pagedescription),
-            E.language('de-de'),
+        root = E('rss', version='2.0')
+        channel = E(
+            'channel',
+            E('title', self.pagetitle),
+            E('link', self.request.route_url('home')),
+            E('description', self.pagedescription),
+            E('language', 'de-de'),
             build_date
         )
         root.append(channel)
@@ -302,14 +305,15 @@ class SpektrumFeed(Base):
     def build_feed(self):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
-        root = E.rss(version='2.0')
-        channel = E.channel(
-            E.title('Spektrum Kooperationsfeed'),
-            E.link(self.request.route_url('home')),
-            E.description(),
-            E.language('de-de'),
-            E.copyright(
-                'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+        root = E('rss', version='2.0')
+        channel = E(
+            'channel',
+            E('title', 'Spektrum Kooperationsfeed'),
+            E('link', self.request.route_url('home')),
+            E('description'),
+            E('language', 'de-de'),
+            E('copyright',
+              'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
             EN('atom', 'link',
                href=self.request.url, type=self.request.response.content_type)
         )
@@ -332,13 +336,14 @@ class SpektrumFeed(Base):
                     None, content, self.request)
                 content_url = create_public_url(content_url)
                 link = join_queries(content_url, tracking)
-                item = E.item(
-                    E.title(content.title),
-                    E.link(link),
-                    E.description(content.teaserText),
-                    E.pubDate(format_rfc822_date(
+                item = E(
+                    'item',
+                    E('title', content.title),
+                    E('link', link),
+                    E('description', content.teaserText),
+                    E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
-                    E.guid(content.uniqueId, isPermaLink='false'),
+                    E('guid', content.uniqueId, isPermaLink='false'),
                 )
                 image = zeit.web.core.template.get_image(content,
                                                          fallback=False)
@@ -367,14 +372,15 @@ class SocialFeed(Base):
     def build_feed(self):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
-        root = E.rss(version='2.0')
-        channel = E.channel(
-            E.title('ZEIT ONLINE SocialFlow'),
-            E.link(self.request.route_url('home')),
-            E.description(),
-            E.language('de-de'),
-            E.copyright(
-                'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+        root = E('rss', version='2.0')
+        channel = E(
+            'channel',
+            E('title', 'ZEIT ONLINE SocialFlow'),
+            E('link', self.request.route_url('home')),
+            E('description'),
+            E('language', 'de-de'),
+            E('copyright',
+              'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
             EN('atom', 'link',
                href=self.request.url, type=self.request.response.content_type)
         )
@@ -385,13 +391,14 @@ class SocialFeed(Base):
                 content_url = zeit.web.core.template.create_url(
                     None, content, self.request)
                 content_url = create_public_url(content_url)
-                item = E.item(
-                    E.title(self.make_title(content)),
-                    E.link(content_url),
-                    E.description(content.teaserText),
-                    E.pubDate(
-                        format_rfc822_date(last_published_semantic(content))),
-                    E.guid(content.uniqueId, isPermaLink='false'),
+                item = E(
+                    'item',
+                    E('title', self.make_title(content)),
+                    E('link', content_url),
+                    E('description', content.teaserText),
+                    E('pubDate',
+                      format_rfc822_date(last_published_semantic(content))),
+                    E('guid', content.uniqueId, isPermaLink='false'),
                 )
                 social_value = self.social_value(content)
                 if social_value:
@@ -474,15 +481,16 @@ class YahooFeed(Base):
     def build_feed(self):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
-        root = E.rss(version='2.0')
-        channel = E.channel(
-            E.title('ZEIT ONLINE Newsfeed for Yahoo'),
-            E.link(self.request.route_url('home')),
-            E.description(),
-            E.language('de-de'),
-            E.copyright(
-                'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
-            E.generator('zeit.web {}'.format(
+        root = E('rss', version='2.0')
+        channel = E(
+            'channel',
+            E('title', 'ZEIT ONLINE Newsfeed for Yahoo'),
+            E('link', self.request.route_url('home')),
+            E('description'),
+            E('language', 'de-de'),
+            E('copyright',
+              'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+            E('generator', 'zeit.web {}'.format(
                 self.request.registry.settings.version)),
             EN('atom', 'link',
                href=self.request.url, type=self.request.response.content_type)
@@ -495,14 +503,15 @@ class YahooFeed(Base):
                     None, content, self.request)
                 content_url = create_public_url(content_url)
 
-                item = E.item(
-                    E.title(self.make_title(content)),
-                    E.link(content_url),
-                    E.description(content.teaserText or content.subtitle),
-                    E.pubDate(format_rfc822_date(
+                item = E(
+                    'item',
+                    E('title', self.make_title(content)),
+                    E('link', content_url),
+                    E('description', content.teaserText or content.subtitle),
+                    E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
-                    E.guid(content.uniqueId, isPermaLink='false'),
-                    E.category(content.ressort)
+                    E('guid', content.uniqueId, isPermaLink='false'),
+                    E('category', content.ressort)
                 )
 
                 author = u', '.join(self.make_author_list(content))
@@ -596,9 +605,12 @@ class MsnFeed(Base):
             related_url = nextread.uniqueId
             related_title = self.make_title(nextread)[0:150]
 
-            relateditem = E('link', type='text/html',
-                            href=related_url,
-                            title=related_title)
+            relateditem = E(
+                'link',
+                rel='related',
+                type='text/html',
+                href=related_url,
+                title=related_title)
 
             image = zeit.web.core.template.get_image(
                 nextread, variant_id='wide', fallback=False)
@@ -613,15 +625,17 @@ class MsnFeed(Base):
     def build_feed(self):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
-        root = E.rss(version='2.0')
-        channel = E.channel(
-            E.title('ZEIT ONLINE Newsfeed for MSN'),
-            E.link(self.request.route_url('home')),
-            E.description(),
-            E.language('de-de'),
-            E.copyright(
+        root = E('rss', version='2.0')
+        channel = E(
+            'channel',
+            E('title', 'ZEIT ONLINE Newsfeed for MSN'),
+            E('link', self.request.route_url('home')),
+            E('description'),
+            E('language', 'de-de'),
+            E(
+                'copyright',
                 'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
-            E.generator('zeit.web {}'.format(
+            E('generator', 'zeit.web {}'.format(
                 self.request.registry.settings.version)),
             EN('atom', 'link',
                href=self.request.url, type=self.request.response.content_type)
@@ -643,13 +657,14 @@ class MsnFeed(Base):
                 item_modified_date = format_iso8601_date(
                     last_published_semantic(content))
 
-                item = E.item(
-                    E.title(item_title),
-                    E.webUrl(content_url),
-                    E.abstract(content.teaserText or content.subtitle),
-                    E.publishedDate(item_published_date),
-                    E.guid(content_url),
-                    E.publisher('ZEIT Online')
+                item = E(
+                    'item',
+                    E('title', item_title),
+                    E('webUrl', content_url),
+                    E('abstract', content.teaserText or content.subtitle),
+                    E('publishedDate', item_published_date),
+                    E('guid', content_url),
+                    E('publisher', 'ZEIT Online')
                 )
 
                 author = u', '.join(self.make_author_list(content))
