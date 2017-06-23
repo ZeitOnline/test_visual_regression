@@ -29,10 +29,10 @@ import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.core.cache
 import zeit.web.core.comments
-import zeit.web.core.date
-import zeit.web.core.template
+import zeit.web.core.interfaces
 import zeit.web.core.navigation
 import zeit.web.core.paywall
+import zeit.web.core.template
 
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
@@ -1286,85 +1286,6 @@ def blacklist(context, request):
     return pyramid.httpexceptions.HTTPNotImplemented(
         headers=[('X-Render-With', 'default'),
                  ('Content-Type', 'text/plain; charset=utf-8')])
-
-
-@zeit.web.view_config(
-    route_name='json_delta_time',
-    renderer='json')
-def json_delta_time(request):
-    unique_id = request.GET.get('unique_id', None)
-    date = request.GET.get('date', None)
-    base_date = request.GET.get('base_date', None)
-    parsed_base_date = zeit.web.core.date.parse_date(base_date)
-    if unique_id is not None:
-        return json_delta_time_from_unique_id(
-            request, unique_id, parsed_base_date)
-    elif date is not None:
-        return json_delta_time_from_date(date, parsed_base_date)
-    else:
-        return pyramid.response.Response(
-            'Missing parameter: unique_id or date', 412)
-
-
-def json_delta_time_from_date(date, parsed_base_date):
-    parsed_date = zeit.web.core.date.parse_date(date)
-    if parsed_date is None:
-        return pyramid.response.Response(
-            'Invalid parameter: date', 412)
-    dt = zeit.web.core.date.DeltaTime(parsed_date, parsed_base_date)
-    return {'delta_time': {'time': dt.get_time_since_modification()}}
-
-
-def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
-    try:
-        content = zeit.cms.interfaces.ICMSContent(unique_id)
-        assert zeit.content.cp.interfaces.ICenterPage.providedBy(content)
-    except (TypeError, AssertionError):
-        return pyramid.response.Response('Invalid resource', 400)
-    delta_time = {}
-    for article in zeit.web.site.view_centerpage.Centerpage(content, request):
-        time = zeit.web.core.date.get_delta_time_from_article(
-            article, base_date=parsed_base_date)
-        if time:
-            delta_time[article.uniqueId] = time
-    return {'delta_time': delta_time}
-
-
-@zeit.web.view_config(
-    route_name='json_comment_count',
-    renderer='json')
-def json_comment_count(request):
-    try:
-        unique_id = request.GET.get('unique_id', None)
-    except UnicodeDecodeError:
-        unique_id = None
-    if unique_id is None:
-        return pyramid.response.Response(
-            'Missing value for parameter: unique_id', 412)
-
-    try:
-        context = zeit.cms.interfaces.ICMSContent(unique_id)
-    except TypeError:
-        return pyramid.response.Response(
-            'Invalid value for parameter: unique_id', 412)
-
-    if zeit.content.cp.interfaces.ICenterPage.providedBy(context):
-        articles = list(
-            zeit.web.site.view_centerpage.Centerpage(context, request))
-    else:
-        article = zeit.content.article.interfaces.IArticle(context, None)
-        articles = [article] if article is not None else []
-
-    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    counts = community.get_comment_counts(*[a.uniqueId for a in articles])
-    comment_count = {}
-
-    for article in articles:
-        count = counts.get(article.uniqueId, 0)
-        comment_count[article.uniqueId] = '%s Kommentar%s' % (
-            count == 0 and 'Keine' or count, count != '1' and 'e' or '')
-
-    return {'comment_count': comment_count}
 
 
 @zeit.web.view_config(
