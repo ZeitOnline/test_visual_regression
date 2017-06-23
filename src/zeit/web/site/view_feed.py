@@ -91,6 +91,19 @@ def join_queries(url, join_query):
 @zeit.web.view_defaults(renderer='string')
 class Base(zeit.web.core.view.Base):
 
+    def __call__(self):
+        # Make newsfeed cachingtime configurable.
+        zope.interface.alsoProvides(
+            self.context, zeit.web.core.interfaces.INewsfeed)
+        super(Base, self).__call__()
+        self.request.response.content_type = 'application/rss+xml'
+        return lxml.etree.tostring(
+            self.build_feed(), pretty_print=True, xml_declaration=True,
+            encoding='UTF-8')
+
+    def build_feed(self):
+        raise NotImplementedError()
+
     @property
     def items(self):
         return zeit.content.cp.interfaces.ITeaseredContent(self.context)
@@ -115,16 +128,6 @@ class Base(zeit.web.core.view.Base):
     context=zeit.content.cp.interfaces.ICP2015,
     host_restriction='newsfeed')
 class Newsfeed(Base):
-
-    def __call__(self):
-        # Make newsfeed cachingtime configurable.
-        zope.interface.alsoProvides(
-            self.context, zeit.web.core.interfaces.INewsfeed)
-        super(Newsfeed, self).__call__()
-        self.request.response.content_type = 'application/rss+xml'
-        return lxml.etree.tostring(
-            self.build_feed(), pretty_print=True, xml_declaration=True,
-            encoding='UTF-8')
 
     def build_feed(self):
         E = ELEMENT_MAKER
@@ -235,7 +238,7 @@ class AuthorFeed(Newsfeed):
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-instantarticle',
     host_restriction='newsfeed')
-class InstantArticleFeed(Newsfeed):
+class InstantArticleFeed(Base):
 
     @zeit.web.reify
     def pagetitle(self):
@@ -293,13 +296,6 @@ class InstantArticleFeed(Newsfeed):
     name='rss-spektrum-flavoured',
     host_restriction='newsfeed')
 class SpektrumFeed(Base):
-
-    def __call__(self):
-        super(SpektrumFeed, self).__call__()
-        self.request.response.content_type = 'application/rss+xml'
-        return lxml.etree.tostring(
-            self.build_feed(), pretty_print=True, xml_declaration=True,
-            encoding='UTF-8')
 
     def build_feed(self):
         E = ELEMENT_MAKER
@@ -365,13 +361,6 @@ class SpektrumFeed(Base):
 class SocialFeed(Base):
 
     social_field = NotImplemented
-
-    def __call__(self):
-        super(SocialFeed, self).__call__()
-        self.request.response.content_type = 'application/rss+xml'
-        return lxml.etree.tostring(
-            self.build_feed(), pretty_print=True, xml_declaration=True,
-            encoding='UTF-8')
 
     def build_feed(self):
         E = ELEMENT_MAKER
@@ -471,7 +460,7 @@ class RoostFeed(SocialFeed):
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-yahoo',
     host_restriction='newsfeed')
-class YahooFeed(SocialFeed):
+class YahooFeed(Base):
 
     def __call__(self):
         if self.context.uniqueId != 'http://xml.zeit.de/'\
@@ -550,7 +539,7 @@ class YahooFeed(SocialFeed):
     context=zeit.content.cp.interfaces.ICenterPage,
     name='rss-msn',
     host_restriction='newsfeed')
-class MsnFeed(SocialFeed):
+class MsnFeed(Base):
 
     def __call__(self):
         if self.context.uniqueId != 'http://xml.zeit.de/'\
