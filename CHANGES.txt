@@ -4,12 +4,17 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- Redirect bw-compat /json-update-time->/json/update-time eintragen
+
+
 3.65 (unreleased)
 -----------------
 
 - BUG-739: Add margin to sharing button
 
 - BUG-724: Fix advertorial nextread in AMP
+
+- ZOCA-21: Implement article and ressort endpoint
 
 - FIX: Skip broken article modules, instead of breaking the whole article
 
