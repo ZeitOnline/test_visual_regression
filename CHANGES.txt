@@ -10,15 +10,15 @@ POSTDEPLOY
 3.65 (unreleased)
 -----------------
 
+- ZOCA-21: Implement article and ressort endpoint
+
 - BUG-739: Add margin to sharing button
 
 - BUG-724: Fix advertorial nextread in AMP
 
-- ZOCA-21: Implement article and ressort endpoint
-
 - FIX: Skip broken article modules, instead of breaking the whole article
 
-- MAINT: Tooling: Log eslint errors on watch task
+- FEM-60: Add eslint and jshint to webpack
 
 
 3.64.1 (2017-06-20)
