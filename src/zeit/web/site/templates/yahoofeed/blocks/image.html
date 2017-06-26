@@ -10,9 +10,9 @@
         {# XXX: Remove as soon as we have SSL #}
         <img src="{{ (request.image_host | replace('http://', 'https://')) + image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.caption }} {{ image.copyrights | map(attribute='text') | join(' ') }}" title="{{ image.caption }} {{ image.copyrights | map(attribute='text') | join(' ') }}"/>
         <figcaption>{{ image.caption }}
-            {% for name, url, nofollow in image.copyrights %}
+            {% for item in image.copyrights %}
                 <span itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
-                    <span itemprop="name">{{ name }}</span>
+                    <span itemprop="name">{{ item.text }}</span>
                 </span>
             {% endfor %}
         </figcaption>
