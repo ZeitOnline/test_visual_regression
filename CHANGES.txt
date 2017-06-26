@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-2921: Provide RSS feed to MSN
 
+- ZON-3174: Provide new image copyright fields
+
 - ZOCA-21: Implement article and ressort endpoint
 
 - BUG-739: Add margin to sharing button
