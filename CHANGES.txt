@@ -7,7 +7,7 @@ POSTDEPLOY
 - Redirect bw-compat /json-update-time->/json/update-time eintragen
 
 
-3.65 (unreleased)
+3.65 (2017-06-26)
 -----------------
 
 - ZON-3898: Add comments on regwalled articles
