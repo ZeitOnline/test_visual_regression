@@ -20,10 +20,11 @@ import zeit.web.core.navigation
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
-import zeit.web.core.view_centerpage
 import zeit.web.core.centerpage
+import zeit.web.core.view_centerpage
 import zeit.web.site.module.buzzbox
 import zeit.web.site.module.printbox
+import zeit.web.site.view
 
 
 log = logging.getLogger(__name__)

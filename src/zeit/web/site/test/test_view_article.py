@@ -1857,6 +1857,26 @@ def test_zplus_print_article_has_correct_markup_if_reader_revenue_off(
     assert article_metadata_source.__len__() == 1
 
 
+def test_zplus_comments_under_register_article(testbrowser):
+    c1_param = '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous'
+    path = '/zeit-online/article/zplus-zeit-register'
+    url = '{}{}'.format(path, c1_param)
+    browser = testbrowser(url)
+
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+    assert len(browser.cssselect('.gate')) == 1
+    assert len(browser.cssselect('.comment-section')) == 1
+
+
+def test_zplus_comments_not_under_abo_article(testbrowser):
+    c1_param = '?C1-Meter-Status=always_paid'
+    path = '/zeit-online/article/zplus-zeit'
+    url = '{}{}'.format(path, c1_param)
+    browser = testbrowser(url)
+
+    assert len(browser.cssselect('.comment-section')) == 0
+
+
 def test_free_print_article_has_volume_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free')
     badge = browser.cssselect('main article .zplus-badge')[0]
@@ -2263,8 +2283,9 @@ def test_zplus_badge_is_zeit_on_print_insert(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit-geld-print-insert')
     assert len(browser.cssselect(
         '.zplus-badge__media-item[src$="/printcover/original"]')) == 1
-    assert len(browser.cssselect('.volume-teaser__media-item'
-               '[src$="/printcover-beilage-geld/original"]')) == 1
+    assert len(
+        browser.cssselect('.volume-teaser__media-item'
+                          '[src$="/printcover-beilage-geld/original"]')) == 1
 
 
 def test_article_should_not_include_itunes_smart_app_banner(testbrowser):

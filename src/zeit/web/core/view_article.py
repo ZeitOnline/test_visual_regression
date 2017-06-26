@@ -12,7 +12,7 @@ import zeit.content.article.interfaces
 import zeit.content.volume.interfaces
 
 from zeit.web.site.view_feed import (
-    CONTENT_MAKER, ELEMENT_MAKER,
+    ELEMENT_MAKER, ELEMENT_NS_MAKER,
     create_public_url, last_published_semantic, format_iso8601_date)
 import zeit.web
 import zeit.web.core.article
@@ -462,6 +462,7 @@ class InstantArticleItem(Article):
         body = lxml.etree.CDATA(self.request.wrapped_response.text)
 
         E = ELEMENT_MAKER  # NOQA
+        EN = ELEMENT_NS_MAKER  # NOQA
         item = E.item(
             E.title(title),
             E.link(content_url),
@@ -470,7 +471,7 @@ class InstantArticleItem(Article):
             E.author(authors),
             E.pubDate(pub_date),
             E.guid(content_url, isPermaLink='false'),
-            CONTENT_MAKER(body))
+            EN('content', 'encoded', body))
 
         return lxml.etree.tostring(item)
 

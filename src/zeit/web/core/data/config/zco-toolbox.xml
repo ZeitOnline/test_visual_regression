@@ -20,7 +20,7 @@
     <link
         title="Welche Uni ist die Beste für mich?"
         title_flyout="CHE Hochschulranking"
-        href="http://ranking.zeit.de/che2016/de/"
+        href="https://ranking.zeit.de/che/de/"
         cta="Zum Ranking"
         cta_flyout="Alle Ergebnisse"
         tracking="campus-topnav.2.5.3.che-hochschulranking"
