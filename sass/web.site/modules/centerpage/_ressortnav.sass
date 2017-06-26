@@ -38,24 +38,16 @@
 			grid-template-columns: repeat(4, 25%)
 			padding-top: 4px
 	&__item
+		border-bottom: 1px solid $zon-lighter-grey
 		float: left
-		height: 45px
-		line-height: 2.85
-		margin: 0
 		min-width: 50%
-		a
-			border-bottom: 1px solid $zon-lighter-grey
-			display: block
-			font-size: em(14px)
-			overflow: hidden
-			text-overflow: ellipsis
-			white-space: nowrap
+		overflow: hidden
+		padding: 10px 0 10px
+		text-overflow: ellipsis
 		+respond-min($break-tablet-min)
-			line-height: 2.85
+			border-bottom: none
+			display: block
 			min-width: 25%
-			a
-				border: 0
-
 	+respond-min($break-areas)
 		clear: both
 		margin: 0 auto
