@@ -4,12 +4,25 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- Redirect bw-compat /json-update-time->/json/update-time eintragen
+
+
 3.65 (unreleased)
 -----------------
 
+- ZON-3898: Add comments on regwalled articles
+
+- ZON-2921: Provide RSS feed to MSN
+
+- ZOCA-21: Implement article and ressort endpoint
+
+- BUG-739: Add margin to sharing button
+
 - BUG-724: Fix advertorial nextread in AMP
 
-- MAINT: Tooling: Log eslint errors on watch task
+- FIX: Skip broken article modules, instead of breaking the whole article
+
+- FEM-60: Add eslint and jshint to webpack
 
 
 3.64.1 (2017-06-20)

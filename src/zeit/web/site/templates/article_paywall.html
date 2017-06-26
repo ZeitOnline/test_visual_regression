@@ -9,4 +9,8 @@
 {% block nextread %}{% endblock %}
 {% block nextread_ad %}{% endblock %}
 {% block article_google_ad %}{% endblock %}
-{% block comments %}{% endblock %}
+{% block comments %}
+    {% if view.paywall == 'register' and toggles('reader_revenue_registered_with_comments') %}
+        {% include "zeit.web.core:templates/inc/article/comments.html" %}
+    {% endif %}
+{% endblock %}

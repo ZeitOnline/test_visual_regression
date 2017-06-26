@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
 import mock
 import pytest
 import requests
@@ -54,80 +53,6 @@ def mock_ad_view(application):
                 self.adwords = ['zeitonline', 'zeitmz']
 
     return MockAdView
-
-
-def test_json_delta_time_from_date_should_return_null(testbrowser):
-    browser = testbrowser(
-        '/json/delta-time?'
-        'date=2014-10-14T09%3A06%3A45.950590%2B00%3A00'
-        '&base_date=2014-10-15T10%3A06%3A45.950590%2B00%3A00')
-    assert browser.contents == (
-        '{"delta_time": {"time": null}}')
-
-
-def test_json_delta_time_from_date_should_return_delta_time(testbrowser):
-    browser = testbrowser(
-        '/json/delta-time?'
-        'date=2014-10-14T09%3A06%3A45.950590%2B00%3A00'
-        '&base_date=2014-10-14T10%3A36%3A45.950590%2B00%3A00')
-    assert browser.contents == (
-        '{"delta_time": {"time": "vor 1 Stunde"}}')
-
-
-def test_json_delta_time_from_date_should_fallback_to_now_for_base_date(
-        testbrowser):
-    browser = testbrowser(
-        '/json/delta-time?'
-        'date=2014-10-15T10%3A06%3A45.950590%2B00%3A00')
-    assert browser.contents is not None
-    assert browser.contents != ''
-
-
-def test_json_delta_time_from_date_should_return_http_error_on_missing_params(
-        testbrowser):
-    with pytest.raises(urllib2.HTTPError):
-        testbrowser('/json/delta-time')
-
-
-def test_json_delta_time_from_unique_id_should_return_delta_time(
-        testbrowser, clock):
-    clock.freeze(zeit.web.core.date.parse_date(
-        '2014-10-15T16:23:59.780412+00:00'))
-
-    browser = testbrowser(
-        '/json/delta-time?'
-        'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup')
-    content = json.loads(browser.contents)
-    a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
-    a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
-    assert content['delta_time'][a1] == 'Vor 1 Stunde'
-    assert content['delta_time'][a2] == 'Vor 30 Minuten'
-
-
-def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
-        testbrowser):
-    with pytest.raises(urllib2.HTTPError):
-        testbrowser('/json/delta-time?unique_id=foo')
-
-
-def test_json_delta_time_from_unique_id_should_return_http_error_on_article(
-        testbrowser):
-    with pytest.raises(urllib2.HTTPError) as error:
-        testbrowser('/json/delta-time?unique_id='
-                    'http://xml.zeit.de/zeit-magazin/article/01')
-    assert error.value.getcode() == 400
-
-
-def test_json_delta_time_from_unique_id_should_use_custom_base_time(
-        testbrowser):
-    browser = testbrowser(
-        '/json/delta-time?base_date=2014-10-15T16%3A06%3A45.95%2B00%3A00&'
-        'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup')
-    content = json.loads(browser.contents)
-    a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
-    a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
-    assert content['delta_time'][a1] == 'Vor 1 Stunde'
-    assert content['delta_time'][a2] == 'Vor 12 Minuten'
 
 
 def test_http_header_should_contain_c1_header_fields(testserver):
