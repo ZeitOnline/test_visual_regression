@@ -6,7 +6,7 @@
 
     {% block before_module_list %}
         {% if area.title -%}
-            <h2 class="cp-area__headline">{{ area.title }}</h2>
+            <h2 class="cp-area__headline" id="{{ area.title | urlencode }}">{{ area.title }}</h2>
         {% endif -%}
     {% endblock %}
 
