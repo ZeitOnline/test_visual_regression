@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3898: Add comments on regwalled articles
 
+- ZON-2921: Provide RSS feed to MSN
+
 - ZOCA-21: Implement article and ressort endpoint
 
 - BUG-739: Add margin to sharing button

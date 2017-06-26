@@ -262,3 +262,64 @@ def test_yahoo_feed_contains_expected_fields(testserver):
     assert len(xml.xpath('//item//pubDate')) == 16
     assert len(xml.xpath('//item//guid')) == 16
     assert len(xml.xpath('//item//category')) == 16
+
+
+def test_msn_feed_contains_expected_fields(testserver):
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/01',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/02',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/zeit',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/simple',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/tags',
+         'type': 'article'},
+        {'uniqueId': 'http://xml.zeit.de/zeit-online/article/fischer',
+         'type': 'article'}
+    ]
+
+    res = requests.get(
+        testserver.url + '/administratives/msnfeed/rss-msn',
+        headers={'Host': 'newsfeed.zeit.de'})
+
+    xml = lxml.etree.fromstring(res.content)
+    assert len(xml.xpath('//item')) > 0
+    assert len(xml.xpath('//title')) > 0
+
+    assert len(xml.xpath('//item//title')) > 0
+    assert len(xml.xpath('//item//publishedDate')) > 0
+    assert len(xml.xpath('//item//guid')) > 0
+    assert len(xml.xpath('//item//webUrl')) > 0
+    assert len(xml.xpath('//item//mi:dateTimeWritten', namespaces={
+        'mi': 'http://schemas.ingestion.microsoft.com/common/'
+    })) > 0
+    assert len(xml.xpath('//item//content:encoded', namespaces={
+        'content': 'http://purl.org/rss/1.0/modules/content/'
+    })) > 0
+    assert len(xml.xpath('//item//media:content', namespaces={
+        'media': 'http://search.yahoo.com/mrss/'
+    })) > 0
+    assert len(xml.xpath(
+        '//item//media:content//mi:hasSyndicationRights',
+        namespaces={
+            'media': 'http://search.yahoo.com/mrss/',
+            'mi': 'http://schemas.ingestion.microsoft.com/common/'
+        }
+    )) > 0
+    assert len(xml.xpath(
+        '//item//media:content//mi:licensorName',
+        namespaces={
+            'media': 'http://search.yahoo.com/mrss/',
+            'mi': 'http://schemas.ingestion.microsoft.com/common/'
+        }
+    )) > 0
+    assert len(xml.xpath(
+        '//item//media:content//media:thumbnail',
+        namespaces={
+            'media': 'http://search.yahoo.com/mrss/'
+        }
+    )) > 0
