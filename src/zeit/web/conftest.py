@@ -169,6 +169,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants.xml'),
         'vivi_zeit.content.image_legacy-variant-source': (
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
+        'vivi_zeit.content.image_copyright-company-source': (
+            'egg://zeit.content.image/tests/fixtures/copyright-company.xml'),
         'vivi_zeit.web_banner-source': (
             'egg://zeit.web.core/data/config/banner.xml'),
         'vivi_zeit.web_banner-id-mappings-source': (

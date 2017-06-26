@@ -584,8 +584,8 @@ class MsnFeed(Base):
 
             if image.copyrights:
                 copyright_names = []
-                for name, url, nofollow in image.copyrights:
-                    copyright_names.append(name)
+                for item in image.copyrights:
+                    copyright_names.append(item.get('text'))
                 copyright_names_string = ', '.join(copyright_names)
 
                 imageitem.append(EN(

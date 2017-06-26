@@ -1622,7 +1622,7 @@ def test_infographics_should_render_html_correctly(
 
     # all border styles present
     image.origin = True
-    image.copyrights = ('FOO', 'BAR', 'BAZ')
+    image.copyrights = {'text': 'FOO'}
     image.caption = True
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.infographic__text')
@@ -1636,17 +1636,17 @@ def test_infographics_should_render_html_correctly(
 
     # footer has border
     image.origin = True
-    image.copyrights = ()
+    image.copyrights = {}
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.infographic__caption')
 
     image.origin = False
-    image.copyrights = ('FOO', 'BAR', 'BAZ')
+    image.copyrights = {'text': 'FOO'}
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.infographic__caption')
 
     # no border styles present
-    image.copyrights = ()
+    image.copyrights = {}
     image.origin = False
     image.caption = False
     browser = tplbrowser(template, block=image, request=dummy_request)
