@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - BUG-724: Fix advertorial nextread in AMP
 
+- BUG-722: Update CHE links
+
 - FIX: Skip broken article modules, instead of breaking the whole article
 
 - FEM-60: Add eslint and jshint to webpack
