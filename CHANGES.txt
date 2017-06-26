@@ -10,6 +10,8 @@ POSTDEPLOY
 3.65 (unreleased)
 -----------------
 
+- ZON-3898: Add comments on regwalled articles
+
 - ZOCA-21: Implement article and ressort endpoint
 
 - BUG-739: Add margin to sharing button

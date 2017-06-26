@@ -1,4 +1,5 @@
 {% set pid = view.request.GET['pid'] | d(None) %}
+{% set entry_service = view.request.GET['entry-service'] | d('kommentare') %}
 {%- if pid -%}
     {% set comment = view.get_comment(pid|int) | d(None) %}
 {%- endif %}
@@ -110,10 +111,10 @@
         <p>
             Bitte melden Sie sich an, um zu kommentieren.
         </p>
-        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}&entry_service=kommentare">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}&entry_service={{ entry_service }}">
             Anmelden
         </a>
-        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}&entry_service=kommentare">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}&entry_service={{ entry_service }}">
             Registrieren
         </a>
     </form>
@@ -128,10 +129,10 @@
         <p>
             Bitte melden Sie sich an, um diesen Kommentar zu melden.
         </p>
-        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}&entry_service=kommentare">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/anmelden?url={{ view.content_url | e }}&entry_service={{ entry_service }}">
             Anmelden
         </a>
-        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}&entry_service=kommentare">
+        <a class="comment-login__button button" href="{{ request.registry.settings.sso_url }}/registrieren?url={{ view.content_url | e }}&entry_service={{ entry_service }}">
             Registrieren
         </a>
     </form>
