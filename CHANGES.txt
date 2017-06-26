@@ -7,12 +7,20 @@ POSTDEPLOY
 - Redirect bw-compat /json-update-time->/json/update-time eintragen
 
 
-3.65 (unreleased)
+3.66 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.65 (2017-06-26)
 -----------------
 
 - ZON-3898: Add comments on regwalled articles
 
 - ZON-2921: Provide RSS feed to MSN
+
+- ZON-3174: Provide new image copyright fields
 
 - ZOCA-21: Implement article and ressort endpoint
 

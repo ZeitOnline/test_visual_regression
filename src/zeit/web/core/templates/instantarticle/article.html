@@ -57,7 +57,7 @@
                     {% if image.caption or image.copyrights %}
                     <figcaption>
                         {{ image.caption }}
-                        <cite>{{ image.copyrights | map('first') | join(', ') }}</cite>
+                        <cite>{{ image.copyrights | map(attribute='text') | join(', ') }}</cite>
                     </figcaption>
                     {% endif %}
                 </figure>

@@ -5,7 +5,7 @@
     {% set image_height = (image_width / image.ratio) | round | int %}
     <figure>
         {# XXX: Remove as soon as we have SSL #}
-        <img src="{{ (request.image_host | replace('http://', 'https://')) + image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.caption }} {% for name, url, nofollow in image.copyrights %}{{ name }}{% endfor %}" title="{{ image.caption }} {% for name, url, nofollow in image.copyrights %}{{ name }}{% endfor %}"/>
+        <img src="{{ (request.image_host | replace('http://', 'https://')) + image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.caption }} {{ image.copyrights | map(attribute='text') | join(' ') }}" title="{{ image.caption }} {{ image.copyrights | map(attribute='text') | join(' ') }}"/>
     </figure>
 {% endrequire %}
 
@@ -14,7 +14,7 @@
 {% for page in view.pages %}
     {% set page_loop = loop %}
     {%- for block in page -%}
-        {% include "zeit.web.site:templates/yahoofeed/blocks/{}.html".format(block | block_type) ignore missing %}
+       {% include "zeit.web.site:templates/yahoofeed/blocks/{}.html".format(block | block_type) ignore missing %}
     {%- endfor -%}
 {% endfor %}
 
