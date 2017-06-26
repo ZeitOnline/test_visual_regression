@@ -52,10 +52,10 @@
         <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
     </head>
     <body>
-        <title>Yahoo RSS Feed</title>
+        <title>MSN RSS Feed</title>
     <cluster area="feature" visible="True" visible_mobile="True">
-      <region area="lead" visible="True" visible_mobile="True" hide-dupes="True" count="16" automatic="True" automatic_type="query">
-        <raw_query>type:article product_id:ZEDE published:published -access:abo -access:registration -breaking_news -ressort:(Administratives OR News OR Aktuelles OR zeit-magazin OR Campus) -serie:("Fünf vor acht") date-first-released:[* TO NOW/DAY+8HOURS]</raw_query>
+      <region area="lead" visible="True" visible_mobile="True" hide-dupes="True" count="20" automatic="True" automatic_type="query">
+        <raw_query>type:article product_id:ZEDE published:published -access:abo -access:registration -breaking_news -ressort:(Administratives OR News OR Aktuelles OR zeit-magazin OR Campus) -serie:("Fünf vor acht") </raw_query>
         <raw_order>date-first-released desc</raw_order>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-2aa426fe-d0cd-4b37-a928-b828b7dd84d9"/>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-04371432-230d-4cab-bb64-73e82ee1c473"/>
@@ -73,6 +73,10 @@
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-a7f9703d-0c20-41e3-aac2-137d4d56a5bb"/>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-34ea22a8-bf67-4d25-b428-cc8cb59be1ae"/>
         <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e15"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e16"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e17"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e18"/>
+        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e19"/>
       </region>
       <region area="informatives" visible="True" visible_mobile="True" hide-dupes="True"/>
     </cluster>
@@ -80,6 +84,6 @@
     </body>
     <feed/>
     <teaser>
-        <title>Tube CP</title>
+        <title>MSN RSS Feed</title>
     </teaser>
 </centerpage>
