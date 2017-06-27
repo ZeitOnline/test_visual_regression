@@ -570,33 +570,6 @@ class MsnFeed(Base):
             image_host, image.path, image_width, image_height)
         return image_url
 
-    def get_image_item(self, content):
-        EN = ELEMENT_NS_MAKER
-        image = zeit.web.core.template.get_image(
-            content, variant_id='wide', fallback=False)
-        if image:
-            image_url = self.make_image_url(image, 1200)
-            imageitem = EN(
-                'media', 'content', url=image_url, type='image/jpeg')
-            imageitem.append(EN('mi', 'hasSyndicationRights', '0'))
-            imageitem.append(EN('media', 'title', image.caption))
-            imageitem.append(EN('media', 'text', image.caption))
-            imageitem.append(EN('media', 'thumbnail',
-                                url=image_url, type='image/jpeg'))
-
-            if image.copyrights:
-                copyright_names = []
-                for item in image.copyrights:
-                    copyright_names.append(item.get('text'))
-                copyright_names_string = ', '.join(copyright_names)
-
-                imageitem.append(EN(
-                    'mi', 'licensorName', copyright_names_string))
-                imageitem.append(EN(
-                    'mi', 'credit', copyright_names_string))
-
-            return imageitem
-
     def get_related_item(self, content):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
@@ -686,10 +659,6 @@ class MsnFeed(Base):
                         'request': self.request
                     })
                 item.append(EN('content', 'encoded', content_body))
-
-                imageitem = self.get_image_item(content)
-                if imageitem is not None:
-                    item.append(imageitem)
 
                 relateditem = self.get_related_item(content)
                 if relateditem is not None:
