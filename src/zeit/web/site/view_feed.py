@@ -660,9 +660,14 @@ class MsnFeed(Base):
                     })
                 item.append(EN('content', 'encoded', content_body))
 
-                relateditem = self.get_related_item(content)
-                if relateditem is not None:
-                    item.append(relateditem)
+                try:
+                    relateditem = self.get_related_item(content)
+                    if relateditem is not None:
+                        item.append(relateditem)
+                except:
+                    log.warning(
+                        'Error adding related on %s at %s',
+                        content, self.__class__.__name__, exc_info=True)
 
                 channel.append(item)
             except:
