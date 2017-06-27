@@ -120,10 +120,12 @@ class Base(zeit.web.core.view.Base):
         return authors
 
     def make_title(self, content):
-        if content.supertitle:
-            return u'{}: {}'.format(content.supertitle, content.title)
-        else:
-            return content.title
+        if hasattr(content, 'title'):
+            if hasattr(content, 'supertitle'):
+                return u'{}: {}'.format(content.supertitle, content.title)
+            else:
+                return content.title
+        return ''
 
 
 @zeit.web.view_config(
@@ -600,8 +602,8 @@ class MsnFeed(Base):
         EN = ELEMENT_NS_MAKER
 
         nextread = zeit.web.core.interfaces.INextread(content, [])
+        nextread = nextread.context
         if nextread:
-
             related_url = nextread.uniqueId
             related_title = self.make_title(nextread)[0:150]
 
