@@ -1,7 +1,9 @@
+import mock
 import pytest
 import requests
 import zope.component
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.centerpage
 import zeit.cms.interfaces
 
@@ -73,6 +75,30 @@ def test_centerpage_should_collect_teaser_counts_from_community(
     path, count = view.comment_counts.items()[0]
     assert '/zeit-magazin/article/essen-geniessen-spargel-lamm' in path
     assert count == '129'
+
+
+def test_centerpage_should_not_request_teaser_counts_for_disabled_content(
+        application, dummy_request, workingcopy):
+    article = 'http://xml.zeit.de/zeit-online/article/simple'
+    with checked_out(zeit.cms.interfaces.ICMSContent(article)) as co:
+        co.commentsAllowed = False
+
+    cp = zeit.content.cp.centerpage.CenterPage()
+    cp.uniqueId = 'http://xml.zeit.de/testcp'
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'
+    area.automatic_type = 'query'
+    area.count = 1
+    area.automatic = True
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': article, 'type': 'article'}]
+
+    view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
+    with mock.patch(
+            'zeit.web.core.comments.Community.get_comment_counts') as count:
+        assert view.comment_counts == {}
+        assert not count.called
 
 
 def test_centerpage_should_have_xmaxage(testserver, testbrowser):
