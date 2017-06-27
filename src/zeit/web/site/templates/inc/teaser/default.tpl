@@ -86,7 +86,7 @@
                     {% set comments = view.comment_counts[teaser.uniqueId] %}
                     {% if comments and teaser.commentSectionEnable %}
                         {% set comments_string = comments | pluralize('Keine Kommentare', '{} Kommentar', '{} Kommentare') %}
-                        <a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser | create_url }}#comments" data-ct-label="comments" title="Kommentare anzeigen">{{ comments_string }}</a>
+                        {% if teaser is not zplus_content %}<a class="{{ self.layout() }}__commentcount js-update-commentcount" href="{{ teaser | create_url }}#comments" data-ct-label="comments" title="Kommentare anzeigen">{{ comments_string }}</a>{% endif %}
                     {% endif %}
                 {% endblock teaser_commentcount %}
             </div>
