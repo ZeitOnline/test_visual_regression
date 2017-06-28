@@ -108,7 +108,13 @@ class Base(zeit.web.core.view.Base):
 
     @property
     def items(self):
-        return zeit.content.cp.interfaces.ITeaseredContent(self.context)
+        for item in zeit.content.cp.interfaces.ITeaseredContent(self.context):
+            metadata = zeit.cms.content.interfaces.ICommonMetadata(item, None)
+            if metadata is None:
+                log.info('%s ignoring %s, no ICommonMetadata',
+                         item, self.__class__.__name__)
+                continue
+            yield item
 
     def make_author_list(self, content):
         authors = []
@@ -164,16 +170,11 @@ class Newsfeed(Base):
 
         for content in filter_and_sort_entries(self.items)[:15]:
             try:
-                metadata = zeit.cms.content.interfaces.ICommonMetadata(
-                    content, None)
-                if metadata is None:
-                    continue
-
                 content_url = zeit.web.core.template.create_url(
                     None, content, self.request)
                 content_url = create_public_url(content_url)
 
-                description = metadata.teaserText
+                description = content.teaserText
 
                 variant = None
                 teaser_image = None
@@ -194,17 +195,17 @@ class Newsfeed(Base):
                             content_url,
                             '{}/{}'.format(
                                 self.request.image_host, variant.lstrip('/')),
-                            metadata.teaserText)
+                            content.teaserText)
 
                 item = E(
                     'item',
-                    E('title', self.make_title(metadata)),
+                    E('title', self.make_title(content)),
                     E('link', content_url),
                     E('description', description),
-                    E('category', metadata.sub_ressort or metadata.ressort),
+                    E('category', content.sub_ressort or content.ressort),
                     EN('dc', 'creator', u'ZEIT ONLINE: {} - {}'.format(
-                        (metadata.sub_ressort or metadata.ressort),
-                        u', '.join(self.make_author_list(metadata)))),
+                        (content.sub_ressort or content.ressort),
+                        u', '.join(self.make_author_list(content)))),
                     E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
                     E('guid', content_url, isPermaLink='false'),
@@ -233,9 +234,16 @@ class AuthorFeed(Newsfeed):
 
     @zeit.web.reify
     def items(self):
-        return zeit.content.cp.interfaces.ITeaseredContent(
+        # XXX Filtering metadata is duplicated from Base.items.
+        for item in zeit.content.cp.interfaces.ITeaseredContent(
             zeit.web.site.view_author.create_author_article_area(
-                self.context, count=8, dedupe_favourite_content=False))
+                self.context, count=8, dedupe_favourite_content=False)):
+            metadata = zeit.cms.content.interfaces.ICommonMetadata(item, None)
+            if metadata is None:
+                log.warning('%s ignoring %s, no ICommonMetadata',
+                            item, self.__class__.__name__)
+                continue
+            yield item
 
 
 @zeit.web.view_config(
@@ -579,8 +587,8 @@ class MsnFeed(Base):
             nextread, None)
         if metadata is None:
             log.warning(
-                'Error adding nextread because of metadata on %s at %s',
-                content, self.__class__.__name__, exc_info=True)
+                '%s ignoring nextread %s for %s, no ICommonMetadata',
+                nextread, content, self.__class__.__name__)
             return None
 
         if nextread:
@@ -626,19 +634,11 @@ class MsnFeed(Base):
 
         for index, content in enumerate(self.items):
             try:
-                metadata = zeit.cms.content.interfaces.ICommonMetadata(
-                    content, None)
-                if metadata is None:
-                    log.warning(
-                        'Error adding item because of metadata on %s at %s',
-                        content, self.__class__.__name__, exc_info=True)
-                    continue
-
                 content_url = create_public_url(
                     zeit.web.core.template.create_url(
                         None, content, self.request))
 
-                item_title = self.make_title(metadata)[0:150]
+                item_title = self.make_title(content)[0:150]
 
                 item_published_date = format_iso8601_date(
                     first_released(content))
