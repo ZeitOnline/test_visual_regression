@@ -225,7 +225,13 @@ class Centerpage(AreaProvidingPaginationMixin,
     def comment_counts(self):
         community = zope.component.getUtility(
             zeit.web.core.interfaces.ICommunity)
-        return community.get_comment_counts(*[t.uniqueId for t in self])
+        ids = []
+        for teaser in self:
+            if getattr(teaser, 'commentsAllowed', False):
+                ids.append(teaser.uniqueId)
+        if not ids:
+            return {}
+        return community.get_comment_counts(*ids)
 
     @zeit.web.reify
     def has_cardstack(self):

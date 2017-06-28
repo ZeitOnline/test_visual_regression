@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3956: Add ressort navigation to volume pages
 
+- PERF: Don't request comment counts for content that has commenting disabled
+
 - ZON-4030: Adjust webtrekk noscript url to audev.zeit.de
 
 
