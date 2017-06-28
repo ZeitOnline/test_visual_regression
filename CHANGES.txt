@@ -7,7 +7,7 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.66 (unreleased)
+3.66 (2017-06-28)
 -----------------
 
 - ZON-3956: Add ressort navigation to volume pages
