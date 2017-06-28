@@ -7,6 +7,12 @@ POSTDEPLOY
 (nothing yet)
 
 
+3.67 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
 3.66 (2017-06-28)
 -----------------
 
