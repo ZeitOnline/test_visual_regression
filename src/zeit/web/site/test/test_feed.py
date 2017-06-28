@@ -300,26 +300,3 @@ def test_msn_feed_contains_expected_fields(testserver):
     assert len(xml.xpath('//item//content:encoded', namespaces={
         'content': 'http://purl.org/rss/1.0/modules/content/'
     })) > 0
-    assert len(xml.xpath('//item//media:content', namespaces={
-        'media': 'http://search.yahoo.com/mrss/'
-    })) > 0
-    assert len(xml.xpath(
-        '//item//media:content//mi:hasSyndicationRights',
-        namespaces={
-            'media': 'http://search.yahoo.com/mrss/',
-            'mi': 'http://schemas.ingestion.microsoft.com/common/'
-        }
-    )) > 0
-    assert len(xml.xpath(
-        '//item//media:content//mi:licensorName',
-        namespaces={
-            'media': 'http://search.yahoo.com/mrss/',
-            'mi': 'http://schemas.ingestion.microsoft.com/common/'
-        }
-    )) > 0
-    assert len(xml.xpath(
-        '//item//media:content//media:thumbnail',
-        namespaces={
-            'media': 'http://search.yahoo.com/mrss/'
-        }
-    )) > 0

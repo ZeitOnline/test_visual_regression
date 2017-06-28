@@ -581,6 +581,7 @@ class DataSolr(RandomContent):
                     content)
                 data = {
                     u'authors': content.authors,
+                    u'comments': content.commentsAllowed,
                     u'date-last-modified': (
                         modified.date_last_modified.isoformat()),
                     u'date_first_released': (
