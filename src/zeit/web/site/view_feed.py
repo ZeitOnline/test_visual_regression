@@ -120,12 +120,10 @@ class Base(zeit.web.core.view.Base):
         return authors
 
     def make_title(self, content):
-        if hasattr(content, 'title'):
-            if hasattr(content, 'supertitle'):
-                return u'{}: {}'.format(content.supertitle, content.title)
-            else:
-                return content.title
-        return ''
+        if content.supertitle:
+            return u'{}: {}'.format(content.supertitle, content.title)
+        else:
+            return content.title
 
 
 @zeit.web.view_config(
@@ -576,9 +574,18 @@ class MsnFeed(Base):
 
         nextread = zeit.web.core.interfaces.INextread(content, [])
         nextread = nextread.context
+
+        metadata = zeit.cms.content.interfaces.ICommonMetadata(
+            nextread, None)
+        if metadata is None:
+            log.warning(
+                'Error adding nextread because of metadata on %s at %s',
+                content, self.__class__.__name__, exc_info=True)
+            return None
+
         if nextread:
             related_url = nextread.uniqueId
-            related_title = self.make_title(nextread)[0:150]
+            related_title = self.make_title(metadata)[0:150]
 
             relateditem = E(
                 'link',
@@ -619,11 +626,19 @@ class MsnFeed(Base):
 
         for index, content in enumerate(self.items):
             try:
+                metadata = zeit.cms.content.interfaces.ICommonMetadata(
+                    content, None)
+                if metadata is None:
+                    log.warning(
+                        'Error adding item because of metadata on %s at %s',
+                        content, self.__class__.__name__, exc_info=True)
+                    continue
+
                 content_url = create_public_url(
                     zeit.web.core.template.create_url(
                         None, content, self.request))
 
-                item_title = self.make_title(content)[0:150]
+                item_title = self.make_title(metadata)[0:150]
 
                 item_published_date = format_iso8601_date(
                     first_released(content))
