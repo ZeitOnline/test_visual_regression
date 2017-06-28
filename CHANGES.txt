@@ -10,7 +10,7 @@ POSTDEPLOY
 3.67 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4019: Dont show commentcount on zplus teaser
 
 
 3.66 (2017-06-28)
@@ -22,7 +22,7 @@ POSTDEPLOY
 
 - ZON-4042: Remove redundant image from MSN feed
 
-- ZON-4043: Render copyright information on MSN feed images 
+- ZON-4043: Render copyright information on MSN feed images
 
 - PERF: Don't request comment counts for content that has commenting disabled
 
