@@ -12,11 +12,13 @@ POSTDEPLOY
 
 - ZON-3956: Add ressort navigation to volume pages
 
-- PERF: Don't request comment counts for content that has commenting disabled
-
 - ZON-4030: Adjust webtrekk noscript url to audev.zeit.de
 
 - ZON-4042: Remove redundant image from MSN feed
+
+- ZON-4043: Render copyright information on MSN feed images 
+
+- PERF: Don't request comment counts for content that has commenting disabled
 
 
 3.65 (2017-06-26)
