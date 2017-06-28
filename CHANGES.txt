@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3956: Add ressort navigation to volume pages
 
+- BUG: Readd processing of state
+
 
 3.65 (2017-06-26)
 -----------------
