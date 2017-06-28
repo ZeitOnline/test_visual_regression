@@ -114,7 +114,7 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
 def test_article03_has_correct_webtrekk_values(httpbrowser):
     browser = httpbrowser('/zeit-magazin/article/03')
     source = browser.cssselect(
-        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+        'img[src^="https://audev.zeit.de/"]')[0].get('src')
     query = urlparse.parse_qs(urlparse.urlparse(source).query, True)
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -203,7 +203,7 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
-        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+        'img[src^="https://audev.zeit.de/"]')[0].get('src')
     query = urlparse.parse_qs(urlparse.urlparse(source).query, True)
 
     # content group
@@ -260,7 +260,7 @@ def test_cp_has_correct_webtrekk_values(httpbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
-        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+        'img[src^="https://audev.zeit.de/"]')[0].get('src')
     query = urlparse.parse_qs(urlparse.urlparse(source).query, True)
 
     # content group
@@ -344,7 +344,7 @@ def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
-        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+        'img[src^="https://audev.zeit.de/"]')[0].get('src')
 
     host = browser.host.replace('http://', '')
     assert ('wt.contentId = "redaktion.zeit-magazin..toedlichekeime'
@@ -376,7 +376,7 @@ def test_webtrekk_noscript_contains_user_info(httpbrowser):
         browser = httpbrowser('/zeit-magazin/article/03',
                               cookies={'my_sso_cookie': 'just_be_present'})
         webtrekk = browser.cssselect(
-            'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+            'img[src^="https://audev.zeit.de/"]')[0].get('src')
         assert 'cd=123' in webtrekk
 
 
