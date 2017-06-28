@@ -632,7 +632,7 @@ class MsnFeed(Base):
         )
         root.append(channel)
 
-        for index, content in enumerate(self.items):
+        for content in self.items:
             try:
                 content_url = create_public_url(
                     zeit.web.core.template.create_url(
