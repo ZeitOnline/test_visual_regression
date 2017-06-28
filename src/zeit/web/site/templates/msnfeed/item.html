@@ -7,14 +7,15 @@
     {% set image_height = (image_width / image.ratio) | round | int %}
     <figure>
         {# XXX: Remove as soon as we have SSL #}
-        <img src="{{ (request.image_host | replace('http://', 'https://')) + image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.caption }} {% for item in image.copyrights %}{{ item.text }}{% endfor %}" title="{{ image.caption }} {% for item in image.copyrights %}{{ item.text }}{% endfor %}"/>
-        <figcaption>{{ image.caption }}
-            {% for item in image.copyrights %}
-                <span itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
-                    <span itemprop="name">{{ item.text }}</span>
-                </span>
-            {% endfor %}
-        </figcaption>
+        <img
+            src="{{ (request.image_host | replace('http://', 'https://')) + image.path }}__{{ image_width }}x{{ image_height }}"
+            alt="{{ image.caption }}"
+            title="{{ image.caption }}"
+            data-portal-copyright="{{ image.copyrights[0].photographer }}"
+            data-has-syndication-rights="0"
+            data-license-id="{{ image.copyrights[0].external_id }}"
+            data-licensor-name="{{ image.copyrights[0].company }}"/>
+        <figcaption>{{ image.caption }}</figcaption>
     </figure>
 {% endrequire %}
 
