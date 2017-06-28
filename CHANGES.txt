@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4030: Adjust webtrekk noscript url to audev.zeit.de
 
+- ZON-4042: Remove redundant image from MSN feed
+
 
 3.65 (2017-06-26)
 -----------------
