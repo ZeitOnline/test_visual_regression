@@ -36,7 +36,6 @@
 			top: 0
 			width: remify(86px)
 		&--tag-d17
-			color: #ffbb00
 			height: remify(40px)
 			width: remify(64px)
 
@@ -113,14 +112,12 @@
 			&:after
 				color: $white
 		&--d17
-			background-color: $primary-color-zmo
 			color: $white
-			line-height: 1
-			padding-bottom: remify(10px) // fix inline bottom gap
-			padding-top: remify(13px)
 			&:after
-				color: $white
 				line-height: inherit
+			+respond-max($break-areas)
+				padding-bottom: remify(10px) // fix inline bottom gap
+				padding-top: remify(13px)
 
 	&__links
 		display: none
