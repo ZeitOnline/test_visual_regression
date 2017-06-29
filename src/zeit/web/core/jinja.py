@@ -5,6 +5,7 @@ import StringIO
 import cProfile
 import datetime
 import email.utils
+import functools
 import inspect
 import logging
 import os
@@ -54,6 +55,16 @@ class Environment(jinja2.environment.Environment):
         self.filters = zeit.web.core.utils.defaultdict(Undefined, self.filters)
         self.globals = zeit.web.core.utils.defaultdict(Undefined, self.globals)
         self.tests = zeit.web.core.utils.defaultdict(Undefined, self.tests)
+        self._wrap_in_safeguard(self.filters)
+        self._wrap_in_safeguard(self.tests)
+
+    def _wrap_in_safeguard(self, registry):
+        """Wraps jinja built-in filters and tests in an exception-catching
+        safeguard. User-defined filters/tests (@zeit.web.register_filter etc.)
+        are added afterwards, therefore the decorators will wrap those.
+        """
+        for key, value in registry.items():
+            registry[key] = wrap_in_safeguard(value)
 
     def handle_exception(
             self, exc_info=None, rendered=False, source_hint=None):
@@ -199,6 +210,29 @@ def finalize(expr):
     if expr is None:
         return u''
     return expr
+
+
+def wrap_in_safeguard(fn):
+    @functools.wraps(fn)
+    def safeguard(*args, **kw):
+        """Try to execute jinja environment modifier code and
+        intercept potential exceptions. If execution is intercepted,
+        return a jinja.Undefined object.
+
+        :internal:
+        """
+        try:
+            return fn(*args, **kw)
+        except Exception:
+            log.error(
+                'Error in %s.%s while rendering %s',
+                fn.__module__, fn.__name__, get_current_request_path(),
+                exc_info=True)
+            return zeit.web.core.jinja.Undefined()
+    # Unfortunately, functools.wraps() doesn't preserve argument defaults.
+    if hasattr(fn, 'func_defaults'):
+        safeguard.func_defaults = fn.func_defaults
+    return safeguard
 
 
 class HTTPLoader(jinja2.loaders.BaseLoader):
