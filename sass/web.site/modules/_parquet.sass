@@ -112,11 +112,12 @@
 			&:after
 				color: $white
 		&--d17
-			padding-bottom: remify(10px) // fix inline bottom gap
-			padding-top: remify(13px)
 			color: $white
 			&:after
 				line-height: inherit
+			+respond-max($break-areas)
+				padding-bottom: remify(10px) // fix inline bottom gap
+				padding-top: remify(13px)
 
 	&__links
 		display: none
