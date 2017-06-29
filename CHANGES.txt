@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4019: Dont show commentcount on zplus teaser
 
+- ZON-3956: Hotfix for ressort navigation
+
 
 3.66 (2017-06-28)
 -----------------
