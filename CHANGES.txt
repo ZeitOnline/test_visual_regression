@@ -10,7 +10,7 @@ POSTDEPLOY
 3.68 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3986: Remove hyphens from AdController keywords
 
 
 3.67.1 (2017-06-29)
