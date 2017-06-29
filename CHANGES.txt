@@ -10,6 +10,8 @@ POSTDEPLOY
 3.68 (unreleased)
 -----------------
 
+- ZON-3986: Remove hyphens from AdController keywords
+
 - ZON-4033: Change the color of background and logo
 
 
