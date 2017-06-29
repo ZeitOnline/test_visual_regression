@@ -7,7 +7,7 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.67 (unreleased)
+3.67 (2017-06-29)
 -----------------
 
 - ZON-4019: Dont show commentcount on zplus teaser
