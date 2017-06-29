@@ -429,11 +429,8 @@ class Base(object):
 
     @zeit.web.reify
     def adc_keywords(self):
-        lower_no_space = [
-            x.label.lower().replace(' ', '-')
-            for x in self.ranked_tags if x.label]
-        return ["".join(re.findall(r"[A-Za-z0-9-]*", item))
-                for item in lower_no_space]
+        lowercase = [x.label.lower() for x in self.ranked_tags if x.label]
+        return ["".join(re.findall(r"\w", item)) for item in lowercase]
 
     @zeit.web.reify
     def is_hp(self):
