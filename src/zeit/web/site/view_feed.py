@@ -108,7 +108,13 @@ class Base(zeit.web.core.view.Base):
 
     @property
     def items(self):
-        return zeit.content.cp.interfaces.ITeaseredContent(self.context)
+        for item in zeit.content.cp.interfaces.ITeaseredContent(self.context):
+            metadata = zeit.cms.content.interfaces.ICommonMetadata(item, None)
+            if metadata is None:
+                log.info('%s ignoring %s, no ICommonMetadata',
+                         item, self.__class__.__name__)
+                continue
+            yield item
 
     def make_author_list(self, content):
         authors = []
@@ -164,16 +170,11 @@ class Newsfeed(Base):
 
         for content in filter_and_sort_entries(self.items)[:15]:
             try:
-                metadata = zeit.cms.content.interfaces.ICommonMetadata(
-                    content, None)
-                if metadata is None:
-                    continue
-
                 content_url = zeit.web.core.template.create_url(
                     None, content, self.request)
                 content_url = create_public_url(content_url)
 
-                description = metadata.teaserText
+                description = content.teaserText
 
                 variant = None
                 teaser_image = None
@@ -194,17 +195,17 @@ class Newsfeed(Base):
                             content_url,
                             '{}/{}'.format(
                                 self.request.image_host, variant.lstrip('/')),
-                            metadata.teaserText)
+                            content.teaserText)
 
                 item = E(
                     'item',
-                    E('title', self.make_title(metadata)),
+                    E('title', self.make_title(content)),
                     E('link', content_url),
                     E('description', description),
-                    E('category', metadata.sub_ressort or metadata.ressort),
+                    E('category', content.sub_ressort or content.ressort),
                     EN('dc', 'creator', u'ZEIT ONLINE: {} - {}'.format(
-                        (metadata.sub_ressort or metadata.ressort),
-                        u', '.join(self.make_author_list(metadata)))),
+                        (content.sub_ressort or content.ressort),
+                        u', '.join(self.make_author_list(content)))),
                     E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
                     E('guid', content_url, isPermaLink='false'),
@@ -233,9 +234,16 @@ class AuthorFeed(Newsfeed):
 
     @zeit.web.reify
     def items(self):
-        return zeit.content.cp.interfaces.ITeaseredContent(
+        # XXX Filtering metadata is duplicated from Base.items.
+        for item in zeit.content.cp.interfaces.ITeaseredContent(
             zeit.web.site.view_author.create_author_article_area(
-                self.context, count=8, dedupe_favourite_content=False))
+                self.context, count=8, dedupe_favourite_content=False)):
+            metadata = zeit.cms.content.interfaces.ICommonMetadata(item, None)
+            if metadata is None:
+                log.warning('%s ignoring %s, no ICommonMetadata',
+                            item, self.__class__.__name__)
+                continue
+            yield item
 
 
 @zeit.web.view_config(
@@ -568,42 +576,24 @@ class MsnFeed(Base):
             image_host, image.path, image_width, image_height)
         return image_url
 
-    def get_image_item(self, content):
-        EN = ELEMENT_NS_MAKER
-        image = zeit.web.core.template.get_image(
-            content, variant_id='wide', fallback=False)
-        if image:
-            image_url = self.make_image_url(image, 1200)
-            imageitem = EN(
-                'media', 'content', url=image_url, type='image/jpeg')
-            imageitem.append(EN('mi', 'hasSyndicationRights', '0'))
-            imageitem.append(EN('media', 'title', image.caption))
-            imageitem.append(EN('media', 'text', image.caption))
-            imageitem.append(EN('media', 'thumbnail',
-                                url=image_url, type='image/jpeg'))
-
-            if image.copyrights:
-                copyright_names = []
-                for item in image.copyrights:
-                    copyright_names.append(item.get('text'))
-                copyright_names_string = ', '.join(copyright_names)
-
-                imageitem.append(EN(
-                    'mi', 'licensorName', copyright_names_string))
-                imageitem.append(EN(
-                    'mi', 'credit', copyright_names_string))
-
-            return imageitem
-
     def get_related_item(self, content):
         E = ELEMENT_MAKER
         EN = ELEMENT_NS_MAKER
 
         nextread = zeit.web.core.interfaces.INextread(content, [])
-        if nextread:
+        nextread = nextread.context
 
+        metadata = zeit.cms.content.interfaces.ICommonMetadata(
+            nextread, None)
+        if metadata is None:
+            log.warning(
+                '%s ignoring nextread %s for %s, no ICommonMetadata',
+                nextread, content, self.__class__.__name__)
+            return None
+
+        if nextread:
             related_url = nextread.uniqueId
-            related_title = self.make_title(nextread)[0:150]
+            related_title = self.make_title(metadata)[0:150]
 
             relateditem = E(
                 'link',
@@ -642,7 +632,7 @@ class MsnFeed(Base):
         )
         root.append(channel)
 
-        for index, content in enumerate(self.items):
+        for content in self.items:
             try:
                 content_url = create_public_url(
                     zeit.web.core.template.create_url(
@@ -685,13 +675,14 @@ class MsnFeed(Base):
                     })
                 item.append(EN('content', 'encoded', content_body))
 
-                imageitem = self.get_image_item(content)
-                if imageitem is not None:
-                    item.append(imageitem)
-
-                relateditem = self.get_related_item(content)
-                if relateditem is not None:
-                    item.append(relateditem)
+                try:
+                    relateditem = self.get_related_item(content)
+                    if relateditem is not None:
+                        item.append(relateditem)
+                except:
+                    log.warning(
+                        'Error adding related on %s at %s',
+                        content, self.__class__.__name__, exc_info=True)
 
                 channel.append(item)
             except:

@@ -70,6 +70,11 @@
 					<block href="http://xml.zeit.de/zeit-online/article/02"/>
 				</container>
 			</region>
+			<region hide-dupes="True" area="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" kind="solo" count="1">
+				<container cp:type="teaser" module="zon-classic" cp:__name__="id-b0eaa5e2-807b-4fed-9a09-886eafda5b21">
+					<block href="http://xml.zeit.de/zeit-online/article/01"/>
+				</container>
+			</region>
 		</cluster>
         <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f">
             <region area="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" kind="major">
@@ -129,6 +134,9 @@
 				<referenced_cp>http://xml.zeit.de/zeit-online/news-teaser</referenced_cp>
 				<container cp:type="teaser" module="zon-large" cp:__name__="id-b2f737ac-eb65-4dc3-b31c-fbd8986270e9">
 					<block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
+				</container>
+				<container cp:type="teaser" module="zon-large" cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a">
+					<block href="http://xml.zeit.de/zeit-online/article/01"/>
 				</container>
 				<container cp:type="teaser" module="zon-small" cp:__name__="id-9fb0b54d-94cf-44bb-8b38-37a22ab150fa">
 					<block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik"/>

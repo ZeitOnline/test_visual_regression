@@ -25,7 +25,7 @@ from selenium.webdriver.support.ui import WebDriverWait
         ('.teaser-classic .teaser-classic__combined-link',
          'solo.1.1.teaser-classic-zplus.text'),
         ('.teaser-classic .teaser-classic__commentcount',
-         'solo.1.1.teaser-classic-zplus.comments'),
+         'solo.1.1.teaser-classic.comments'),
         # teaser-square minor
         # ('.cp-area--minor .teaser-square__media-item',
         #  'minor.2.1.teaser-square.image'),
@@ -45,7 +45,7 @@ from selenium.webdriver.support.ui import WebDriverWait
          'parquet-titel.3.1.teaser-small.text'),
         # teaser-large parquet
         ('.parquet-teasers .teaser-large .teaser-large__commentcount',
-         'parquet-titel.4.1.teaser-large-zplus.comments'),
+         'parquet-titel.4.2.teaser-large.comments'),
         ('.parquet-teasers .teaser-large .teaser-large__combined-link',
          'parquet-titel.4.1.teaser-large-zplus.text')
     ])

@@ -86,9 +86,10 @@ def test_amp_shows_nextread_advertising(testbrowser):
     assert nextad.cssselect('.nextad__label')[0].text == 'Verlagsangebot'
     assert len(nextad.cssselect('.nextad__title'))
     assert len(nextad.cssselect('.nextad__text'))
-    # check for assigned background-color class
-    assert nextad.cssselect('.nextad__button')[0].get('class') == (
-        'nextad__button nextad__button--d11c08')
+    # check for assigned background-color class. selected randomly out of two.
+    button_class = nextad.cssselect('.nextad__button')[0].get('class')
+    assert button_class in ['nextad__button nextad__button--d11c08',
+                            'nextad__button nextad__button--42661f']
 
 
 def test_amp_shows_breaking_news_banner(testserver, httpbrowser):

@@ -17,6 +17,7 @@ import requests.exceptions
 import zope.component
 
 from zeit.cms.interfaces import ID_NAMESPACE as NS
+from zeit.cms.checkout.helper import checked_out
 
 import zeit.web.core.view_comment
 
@@ -105,6 +106,34 @@ def test_comment_count_should_be_empty_for_link_object(
 
     assert 'comment_count' in browser.json
     assert not browser.json['comment_count']
+
+
+def test_comment_count_should_not_request_counts_for_disabled_content(
+        application, dummy_request, workingcopy):
+    article = 'http://xml.zeit.de/zeit-online/article/simple'
+    with checked_out(zeit.cms.interfaces.ICMSContent(article)) as co:
+        co.commentsAllowed = False
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': article, 'type': 'article'}]
+
+    cp = zeit.content.cp.centerpage.CenterPage()
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'
+    area.automatic_type = 'query'
+    area.count = 1
+    area.automatic = True
+    repository = zope.component.getUtility(
+        zeit.cms.repository.interfaces.IRepository)
+    repository['testcp'] = cp
+
+    dummy_request.GET['unique_id'] = 'http://xml.zeit.de/testcp'
+    result = zeit.web.core.view_json.json_comment_count(dummy_request)
+    with mock.patch(
+            'zeit.web.core.comments.Community.get_comment_counts') as count:
+        assert 'Keine Kommentare' == result['comment_count'][
+            'http://xml.zeit.de/zeit-online/article/simple']
+        assert not count.called
 
 
 def test_request_thread_should_respond(application, mockserver):

@@ -84,7 +84,9 @@ def json_comment_count(request):
         articles = [article] if article is not None else []
 
     community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    counts = community.get_comment_counts(*[a.uniqueId for a in articles])
+    ids = [a.uniqueId for a in articles
+           if getattr(a, 'commentsAllowed', False)]
+    counts = community.get_comment_counts(*ids) if ids else {}
     comment_count = {}
 
     for article in articles:
