@@ -7,10 +7,10 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.68 (unreleased)
+3.67.1 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4041: Remove headline from MSN feed body
 
 
 3.67 (2017-06-29)
