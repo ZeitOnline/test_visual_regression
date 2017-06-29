@@ -36,8 +36,8 @@
 			top: 0
 			width: remify(86px)
 		&--tag-d17
-			height: remify(45px)
-			width: remify(69px)
+			height: remify(40px)
+			width: remify(64px)
 
 	&__badge
 		display: none
@@ -111,8 +111,12 @@
 			position: relative
 			&:after
 				color: $white
-		&--d17:after
-			line-height: inherit
+		&--d17
+			padding-bottom: remify(10px) // fix inline bottom gap
+			padding-top: remify(13px)
+			color: $white
+			&:after
+				line-height: inherit
 
 	&__links
 		display: none
