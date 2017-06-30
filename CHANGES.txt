@@ -28,6 +28,8 @@ POSTDEPLOY
 
 - ZON-3956: Hotfix for ressort navigation
 
+- BUG-745: Fix cursor on hidden nextread arrow
+
 
 3.66 (2017-06-28)
 -----------------
