@@ -21,6 +21,7 @@ $article-lineage-transition-duration: .4s
 	z-index: 4
 	+respond-min($break-desktop-min)
 		display: block
+		z-index: -1
 	+old-ie
 		display: none
 	&--hidden
@@ -29,6 +30,7 @@ $article-lineage-transition-duration: .4s
 	&--absolute,
 	&--fixed
 		opacity: 1
+		z-index: auto
 	&--absolute
 		position: absolute
 		top: auto
@@ -97,4 +99,3 @@ $article-lineage-transition-duration: .4s
 		font-size: remify(12px)
 		color: $zon-red
 		letter-spacing: $zon-letter-spacing-m
-

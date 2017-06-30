@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4033: Change the color of background and logo
 
+- BUG-745: Fix cursor on hidden nextread arrow
+
 
 3.67.1 (2017-06-29)
 -------------------
