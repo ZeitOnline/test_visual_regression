@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4033: Change the color of background and logo
 
+- BUG-745: Fix cursor on hidden nextread arrow
+
 
 3.67.1 (2017-06-29)
 -------------------
@@ -27,8 +29,6 @@ POSTDEPLOY
 - ZON-4019: Dont show commentcount on zplus teaser
 
 - ZON-3956: Hotfix for ressort navigation
-
-- BUG-745: Fix cursor on hidden nextread arrow
 
 
 3.66 (2017-06-28)
