@@ -1263,11 +1263,14 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
-    body = 'Status 404: Dokument nicht gefunden.'
+    # TODO: host needed, because port is missing with localhost. Solve!
+    subrequest = pyramid.request.Request.blank(
+        '/error/404',
+        headers={'Host': 'www.zeit.de'})
+    subresponse = request.invoke_subrequest(subrequest, use_tweens=True)
+    # TODO: Cachen
     return pyramid.response.Response(
-        body, 404,
-        [('X-Render-With', 'default'),
-         ('Content-Type', 'text/plain; charset=utf-8')])
+        subresponse.body, 404)
 
 
 @zeit.web.view_config(context=pyramid.exceptions.URLDecodeError)
