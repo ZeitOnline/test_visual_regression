@@ -10,6 +10,8 @@ POSTDEPLOY
 3.68 (unreleased)
 -----------------
 
+- HOTFIX: copyright/photographer can be None since ZON-3174
+
 - ZON-3986: Remove hyphens from AdController keywords
 
 - ZON-4033: Change the color of background and logo
