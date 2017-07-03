@@ -7,7 +7,7 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.68 (unreleased)
+3.68 (2017-07-03)
 -----------------
 
 - HOTFIX: copyright/photographer can be None since ZON-3174
