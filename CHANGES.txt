@@ -7,10 +7,20 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.68 (unreleased)
+3.69 (unreleased)
 -----------------
 
+- Nothing changed yet.
+
+
+3.68 (2017-07-03)
+-----------------
+
+- HOTFIX: copyright/photographer can be None since ZON-3174
+
 - ZON-3986: Remove hyphens from AdController keywords
+
+- ZON-4061: Replace newline with space in MSN feed
 
 - ZON-4033: Change the color of background and logo
 
