@@ -1,3 +1,4 @@
+{# If two words are separated by a line break (which happens often in Vivi), MSN merges them into one word. That's why we need to replace line breaks (not br, but newlines which are invisible in HTML) with spaces. #}
 <p>
-    {{- block | safe -}}
+    {{- block | replace("\n", " ") | safe -}}
 </p>

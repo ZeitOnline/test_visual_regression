@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3986: Remove hyphens from AdController keywords
 
+- ZON-4061: Replace newline with space in MSN feed
+
 - ZON-4033: Change the color of background and logo
 
 - BUG-745: Fix cursor on hidden nextread arrow
