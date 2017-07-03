@@ -314,6 +314,6 @@ def test_msn_feed_item_contains_copyright_information(testserver):
         headers={'Host': 'newsfeed.zeit.de'})
 
     assert 'data-license-id="12345678"' in res.content
-    assert 'data-portal-copyright="' in res.content
+    assert 'data-portal-copyright="\xc2' in res.content
     assert ' Warner Bros."' in res.content
     assert 'data-licensor-name="dpa"' in res.content

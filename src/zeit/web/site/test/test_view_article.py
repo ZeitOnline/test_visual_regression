@@ -292,7 +292,7 @@ def test_schema_org_article_mark_up(testbrowser):
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros.'
+    assert person.text == u'© Warner Bros./dpa'
 
     assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
 
@@ -1229,7 +1229,7 @@ def test_instantarticle_representation_should_have_correct_content(
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
     assert 'Bernie Sanders' in bro.cssselect('figcaption')[0].text
-    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
+    assert u'© Warner Bros./dpa' == bro.cssselect('figcaption > cite')[0].text
 
 
 def test_instantarticle_item_should_wrap_correct_article_in_cdata(testbrowser):
