@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/error/404</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner_id">fehlerseite</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">0</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2009-09-05T19:12:41.192928+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-07-29T14:04:37.036051+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-07-29T14:04:37.806590+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">404 Fehler - Seite nicht gefunden | ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="imagecount">0</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.schnerring</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-07-29T14:04:21.995343+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="memo">Die "manuellen" Bulletpoints sind nur deshalb, damit die Werbung funktioniert.</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">-</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="pagelabel">Online</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">20</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Administratives</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="revision">12</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="supertitle">Spitzmarke hierher</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">1020</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Seite nicht gefunden</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:1b52bdbb-8b4f-417e-b7f4-70f16e2d5777}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">34</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2006</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="first_count">2009-09-05</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="last_count">2014-01-03</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/lifetimecounter" name="total_hits">1095999</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="Article" module="zeit.content.article.article"/&gt; &lt;global name="Interface" module="zope.interface"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <rankedTags>
+    <tag uuid="bf5897f7-2435-4764-b12a-a4c5bf02b691" url_value="boxen" type="free">Boxen</tag>
+    <tag uuid="eb5bfcf0-1c1e-409c-bd55-e902bd37269a" url_value="sucht" type="free">Sucht</tag>
+    <tag uuid="1c236538-3464-4005-bb46-b560de681764" url_value="twitter" type="free">Twitter</tag>
+    <tag uuid="7cd0c175-071f-41e3-95e3-e046dac738c8" url_value="archiv" type="free">Archiv</tag>
+  </rankedTags>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">daa9a495d33745868fd4cd5539963e55</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">ed6d84877d5b4344b74fc2c6e85efb8a</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error">No author or product with code.</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-07-29T14:05:36.278533+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-07-29T14:04:44.978148+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2015-07-29T14:04:45.052321+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">dehne</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Zeit Online</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="was_automatically_syndicated_into"/>
+  <attribute ns="http://namespaces.zeit.de/QPS/attributes" name="page">-</attribute>
+  <attribute ns="http://namespaces.zeit.de/QPS/attributes" name="ressort">Fehler</attribute>
+  <attribute ns="http://namespaces.zeit.de/QPS/attributes" name="volume">04</attribute>
+  <attribute ns="http://namespaces.zeit.de/QPS/attributes" name="year">2006</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2017-05-10T15:35:25Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">14754</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Wed, 29 Jul 2015 14:04:37 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"39a2-51c04112a8740"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>
