@@ -5,7 +5,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil "Die Schlacht der f&#xFC;nf Heere"</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:50215503-d534-4f82-a88a-0fc17ccfb5ca}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">HTBOTFA-FP-0011.jpg</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Warner Bros.&lt;/unicode&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt; &lt;unicode&gt;&#xA9; Warner Bros.&lt;/unicode&gt; &lt;unicode&gt;dpa&lt;/unicode&gt; &lt;none/&gt; &lt;none/&gt; &lt;false/&gt; &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
@@ -17,6 +17,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-12-03T12:44:37.205256+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-12-03T12:43:37.275436+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-12-03T12:43:46.106328+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="external_id">12345678</attribute>
   <attribute ns="DAV:" name="resourcetype"/>
   <attribute ns="DAV:" name="creationdate">2014-12-03T12:43:39Z</attribute>
   <attribute ns="DAV:" name="getlastmodified">Wed, 03 Dec 2014 12:43:39 GMT</attribute>
