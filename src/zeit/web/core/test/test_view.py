@@ -1129,8 +1129,9 @@ def test_url_path_not_found_should_render_404(testserver):
     resp = requests.get('%s/zeit-magazin/centerpage/lifestyle'
                         % testserver.url)
     assert u'Dokument nicht gefunden' in resp.text
+    assert resp.status_code == 404
 
 
-def test_not_renderable_content_object_should_trigger_restart(testserver):
+def test_not_renderable_content_object_should_render_404(testserver):
     resp = requests.get('%s/zeit-online/quiz/quiz-workaholic' % testserver.url)
-    assert resp.headers['x-render-with'] == 'default'
+    assert resp.status_code == 404
