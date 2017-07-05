@@ -1,5 +1,3 @@
-<h1>{{ view.supertitle }}: {{ view.title}}</h1>
-
 <p>{{ view.subtitle}}</p>
 
 {% require image = get_image(view.header_module, variant_id='wide', fallback=False) %}
@@ -18,7 +16,6 @@
                 data-licensor-name="{{ image.copyrights[0].company }}"
             {% endif %}
             />
-        <figcaption>{{ image.caption }}</figcaption>
     </figure>
 {% endrequire %}
 

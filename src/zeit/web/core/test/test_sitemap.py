@@ -61,7 +61,7 @@ def test_gsitemap_page_with_image_copyright(testbrowser):
             '//image:image/image:caption', namespaces={'image': ns})[0].text ==
         u'Handlung, wohin man auch schaut in dieser Szene aus dem letzten '
         u'Hobbit-Teil "Die Schlacht der fünf Heere" '
-        u'(©\xa0Warner Bros.)')
+        u'(©\xa0Warner Bros./dpa)')
 
 
 def test_gsitemap_page_without_image(testbrowser, monkeypatch):
@@ -92,7 +92,7 @@ def test_gsitemap_page_does_not_break_without_image_caption(
     assert (
         xml.xpath(
             '//image:image/image:caption', namespaces={'image': ns})[0].text ==
-        u'(©\xa0Warner Bros.)')
+        u'(©\xa0Warner Bros./dpa)')
 
 
 def test_gsitemap_newssite(testbrowser):

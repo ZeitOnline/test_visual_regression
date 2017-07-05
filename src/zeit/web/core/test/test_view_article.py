@@ -34,8 +34,8 @@ def test_adc_keywords_are_sanitized_correctly(selenium_driver,
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True, 'iqd': True}.get)
     driver.get('%s/zeit-online/article/tags' % testserver.url)
-    assert ('zeitonline,mailand,claudio-abbado,johann-sebastian-bach,oper,'
-            'opernhaus,10slze-42-foo' == driver.execute_script(
+    assert ('zeitonline,mailand,claudioabbado,johannsebastianbach,oper,'
+            'opernhaus,10slze42foo' == driver.execute_script(
                 'return adcSiteInfo.keywords'))
 
 

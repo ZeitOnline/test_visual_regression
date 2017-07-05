@@ -84,8 +84,9 @@ class Image(object):
         if self._meta and self._meta.copyrights:
             for item in self._meta.copyrights:
                 photographer, company, company_text, url, nf = item
+                text = photographer or ''
                 text = zeit.web.core.utils.fix_misrepresented_latin(
-                    photographer).replace(u'© ', u'© ').strip()
+                    text).replace(u'© ', u'© ').strip()
                 if text == u'©':
                     continue
                 if company_text:
