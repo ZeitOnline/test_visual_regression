@@ -1163,3 +1163,12 @@ def test_404_page_should_use_www_for_non_content_hosts(testserver):
                         headers={'Host': 'img.staging.zeit.de'})
     assert 'http://www.staging.zeit.de/index' in resp.text
     assert resp.status_code == 404
+
+
+def test_404_page_should_have_fallback_for_errors(testbrowser):
+    folder = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/error/')
+    del folder['404']
+    browser = testbrowser()
+    browser.raiseHttpErrors = False
+    browser.open('/wurstbrot')
+    assert 'Status 404: Dokument nicht gefunden.' in browser.contents

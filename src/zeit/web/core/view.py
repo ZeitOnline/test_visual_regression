@@ -1260,7 +1260,8 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 def not_found(request):
     if request.path.startswith('/error/404'):  # Safetybelt
         log.warn('404 for /error/404, returning synthetic response instead')
-        pyramid.response.Response('Status 404: Dokument nicht gefunden.', 404)
+        return pyramid.response.Response(
+            'Status 404: Dokument nicht gefunden.', 404)
     host = request.headers.get('Host', 'www.zeit.de')
     www_host = host
     if not host.startswith('localhost') and not host.startswith('www'):
@@ -1275,7 +1276,7 @@ def render_not_found_body(hostname):
         '/error/404', headers={'Host': hostname})
     request = pyramid.threadlocal.get_current_request()
     response = request.invoke_subrequest(subrequest, use_tweens=True)
-    if response.status_int != 200:
+    if response.status_int not in (200, 404):
         return None
     return response.body
 
