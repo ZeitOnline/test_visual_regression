@@ -10,7 +10,7 @@ POSTDEPLOY
 3.69 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4054: Render 404 page via friedbert
 
 
 3.68 (2017-07-03)
