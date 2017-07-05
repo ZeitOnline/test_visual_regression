@@ -1135,3 +1135,18 @@ def test_url_path_not_found_should_render_404(testserver):
 def test_not_renderable_content_object_should_render_404(testserver):
     resp = requests.get('%s/zeit-online/quiz/quiz-workaholic' % testserver.url)
     assert resp.status_code == 404
+
+
+def test_404_page_should_not_render_meta_and_share(testbrowser):
+
+    browser = testbrowser()
+    browser.raiseHttpErrors = False
+    browser.open('/wurstbrot')
+
+    assert len(browser.cssselect('.byline')) == 0
+    assert len(browser.cssselect('.metadata')) == 0
+    assert len(browser.cssselect('.sharing-menu')) == 0
+    assert len(browser.cssselect('.article-tags')) == 0
+    assert len(browser.cssselect('.comment-section')) == 0
+    assert len(browser.cssselect(
+        '.article-pagination__link[data-ct-label="Startseite"]')) == 1
