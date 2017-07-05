@@ -1264,14 +1264,14 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
-    return pyramid.response.Response(render_not_found_body(), 404)
+    return pyramid.response.Response(
+        render_not_found_body(request.headers.get('Host')), 404)
 
 
 @DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=bool)
-def render_not_found_body():
-    # TODO: host needed, because port is missing with localhost. Solve???
+def render_not_found_body(hostname):
     subrequest = pyramid.request.Request.blank(
-        '/error/404', headers={'Host': 'www.zeit.de'})
+        '/error/404', headers={'Host': hostname})
     request = pyramid.threadlocal.get_current_request()
     response = request.invoke_subrequest(subrequest, use_tweens=True)
     if response.status_int != 200:

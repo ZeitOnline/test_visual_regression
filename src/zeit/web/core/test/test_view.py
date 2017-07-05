@@ -1150,3 +1150,9 @@ def test_404_page_should_not_render_meta_and_share(testbrowser):
     assert len(browser.cssselect('.comment-section')) == 0
     assert len(browser.cssselect(
         '.article-pagination__link[data-ct-label="Startseite"]')) == 1
+
+
+def test_404_page_should_render_appropriate_links(testserver):
+    resp = requests.get('%s/nonexistent' % testserver.url,
+                        headers={'Host': 'www.staging.zeit.de'})
+    assert 'http://www.staging.zeit.de/index' in resp.text
