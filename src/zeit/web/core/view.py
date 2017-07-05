@@ -50,10 +50,6 @@ def is_advertorial(context, request):
     return getattr(context, 'product_text', None) == 'Advertorial'
 
 
-def is_errorpage(context, request):
-    return context.uniqueId == 'http://xml.zeit.de/error/404'
-
-
 def is_paginated(context, request):
     # XXX: We need some form of IPagination to evaluate wheter or not a context
     # is paginated. This is, however, not possible at the moment, because the

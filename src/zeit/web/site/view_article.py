@@ -40,7 +40,7 @@ log = logging.getLogger(__name__)
                        zeit.web.core.view.is_advertorial),
     renderer='templates/article_advertorial.html')
 @zeit.web.view_config(
-    custom_predicates=(zeit.web.core.view.is_errorpage,),
+    context=zeit.content.article.interfaces.IErrorPage,
     renderer='templates/article_error.html')
 @zeit.web.view_config(
     name='komplettansicht',
