@@ -1156,3 +1156,10 @@ def test_404_page_should_render_appropriate_links(testserver):
     resp = requests.get('%s/nonexistent' % testserver.url,
                         headers={'Host': 'www.staging.zeit.de'})
     assert 'http://www.staging.zeit.de/index' in resp.text
+
+
+def test_404_page_should_use_www_for_non_content_hosts(testserver):
+    resp = requests.get('%s/nonexistent' % testserver.url,
+                        headers={'Host': 'img.staging.zeit.de'})
+    assert 'http://www.staging.zeit.de/index' in resp.text
+    assert resp.status_code == 404

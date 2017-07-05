@@ -1264,8 +1264,13 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
-    return pyramid.response.Response(
-        render_not_found_body(request.headers.get('Host')), 404)
+    host = request.headers.get('Host', 'www.zeit.de')
+    if host.startswith('localhost'):
+        www_host = host
+    elif not host.startswith('www'):
+        parts = host.split('.')
+        www_host = '.'.join(['www'] + parts[1:])
+    return pyramid.response.Response(render_not_found_body(www_host), 404)
 
 
 @DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=bool)
