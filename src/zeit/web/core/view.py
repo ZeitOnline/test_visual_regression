@@ -1266,9 +1266,8 @@ def not_found(request):
         log.warn('404 for /error/404, returning synthetic response instead')
         pyramid.response.Response('Status 404: Dokument nicht gefunden.', 404)
     host = request.headers.get('Host', 'www.zeit.de')
-    if host.startswith('localhost'):
-        www_host = host
-    elif not host.startswith('www'):
+    www_host = host
+    if not host.startswith('localhost') and not host.startswith('www'):
         parts = host.split('.')
         www_host = '.'.join(['www'] + parts[1:])
     return pyramid.response.Response(render_not_found_body(www_host), 404)
