@@ -1264,6 +1264,9 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
+    if request.path.startswith('/error/404'):  # Safetybelt
+        log.warn('404 for /error/404, returning synthetic response instead')
+        pyramid.response.Response('Status 404: Dokument nicht gefunden.', 404)
     host = request.headers.get('Host', 'www.zeit.de')
     if host.startswith('localhost'):
         www_host = host
