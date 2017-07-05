@@ -1274,6 +1274,8 @@ def render_not_found_body():
         '/error/404', headers={'Host': 'www.zeit.de'})
     request = pyramid.threadlocal.get_current_request()
     response = request.invoke_subrequest(subrequest, use_tweens=True)
+    if response.status_int != 200:
+        return None
     return response.body
 
 
