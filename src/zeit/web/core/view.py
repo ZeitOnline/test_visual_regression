@@ -36,6 +36,7 @@ import zeit.web.core.template
 
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
+DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 log = logging.getLogger(__name__)
 
 
@@ -1263,22 +1264,17 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
+    return pyramid.response.Response(render_not_found_body(), 404)
 
-    def render_not_found_body():
-        # TODO: host needed, because port is missing with localhost. Solve???
-        subrequest = pyramid.request.Request.blank(
-            '/error/404',
-            headers={'Host': 'www.zeit.de'})
-        subresponse = request.invoke_subrequest(subrequest, use_tweens=True)
-        return subresponse.body
 
-    cache = zeit.web.core.cache.get_region('default_term')
-    not_found_body = cache.get_or_create(
-        'rendered-404-page-body',
-        render_not_found_body,
-        should_cache_fn=bool)
-
-    return pyramid.response.Response(not_found_body, 404)
+@DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=bool)
+def render_not_found_body():
+    # TODO: host needed, because port is missing with localhost. Solve???
+    subrequest = pyramid.request.Request.blank(
+        '/error/404', headers={'Host': 'www.zeit.de'})
+    request = pyramid.threadlocal.get_current_request()
+    response = request.invoke_subrequest(subrequest, use_tweens=True)
+    return response.body
 
 
 @zeit.web.view_config(context=pyramid.exceptions.URLDecodeError)
