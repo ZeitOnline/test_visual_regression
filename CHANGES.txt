@@ -10,7 +10,9 @@ POSTDEPLOY
 3.69 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4054: Render 404 page via friedbert
+
+- ZON-3956: Polish CSS and remove hack on print ressort headlines
 
 
 3.68 (2017-07-03)

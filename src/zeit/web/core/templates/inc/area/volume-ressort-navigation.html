@@ -4,8 +4,7 @@
         {% for region in view.regions %}
             {% for area in region.values() %}
                 {% if area.title and area.kind == 'print-ressort' and area.values() %}
-                    {# XXX: Remove the replacement hack (simply `{{ area.title  }}`) , after ZON-4008 is done. #}
-                    <li class="ressortnav__item"><a href="#{{ area.title | urlencode }}" class="js-scroll">{{ area.title | replace ('zeitmagazin', 'ZEITmagazin') }}</a></li>
+                    <li class="ressortnav__item"><a href="#{{ area.title | urlencode }}" class="js-scroll">{{ area.title }}</a></li>
                 {% endif %}
             {% endfor %}
         {% endfor %}
