@@ -43,16 +43,7 @@
     {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
 
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-    <script>
-        // trigger print dialog after "Artikel drucken" was clicked
-        if ( location.search.indexOf( 'print' ) !== -1 ) {
-            if ( window.addEventListener ) {
-                window.addEventListener( 'load', window.print, false );
-            } else if ( window.attachEvent ) {
-                window.attachEvent( 'onload', window.print );
-            }
-        }
-    </script>
+    {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
     {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif -%}

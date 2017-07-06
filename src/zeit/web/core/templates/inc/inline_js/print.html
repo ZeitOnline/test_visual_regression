@@ -1,0 +1,10 @@
+<script>
+    {# trigger print dialog after "Artikel drucken" was clicked #}
+    if ( location.search.indexOf( 'print' ) !== -1 ) {
+        if ( window.addEventListener ) {
+            window.addEventListener( 'load', window.print, false );
+        } else if ( window.attachEvent ) {
+            window.attachEvent( 'onload', window.print );
+        }
+    }
+</script>
