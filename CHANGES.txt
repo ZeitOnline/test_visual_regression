@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3956: Polish CSS and remove hack on print ressort headlines
 
+- ZON-3952: Bootstrap ZON Arbeit vertical
+
 - FIX: Apply ZON-like margin-right to ZCO marginalia items
 
 
