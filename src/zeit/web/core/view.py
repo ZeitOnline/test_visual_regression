@@ -1258,6 +1258,13 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
+    # BBB: Remove this once we're satisfied with rendering it ourselves.
+    if not zeit.web.core.application.FEATURE_TOGGLES.find('render_404'):
+        return pyramid.response.Response(
+            'Status 404: Dokument nicht gefunden.', 404,
+            [('X-Render-With', 'default'),
+             ('Content-Type', 'text/plain; charset=utf-8')])
+
     if request.path.startswith('/error/404'):  # Safetybelt
         log.warn('404 for /error/404, returning synthetic response instead')
         return pyramid.response.Response(
