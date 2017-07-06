@@ -1,7 +1,144 @@
-<html>
-    <head>
-    </head>
-    <body>
-        Hello Arbeit!
-    </body>
+{% import "zeit.web.core:templates/macros/layout_macro.tpl" as lama %}
+<!DOCTYPE html>
+<html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
+<head>
+    {# TODO: head-basics vllt in den Core umziehen? #}
+    <meta charset="utf-8">
+    <title>{{ view.pagetitle }}</title>
+    <meta name="description" content="{{ view.pagedescription }}">
+    {% if view.meta_keywords -%}
+        <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
+    {% endif -%}
+    <meta name="robots" content="{{ view.meta_robots }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="msapplication-config" content="none">
+    {% if view.is_amp -%}
+        <link rel="amphtml" href="{{ view.amp_url }}">
+    {% endif -%}
+    {% if view.canonical_url -%}
+        <link rel="canonical" href="{{ view.canonical_url | safe }}">
+    {% endif -%}
+    {% if view.prev_page_url -%}
+        <link rel="prev" href="{{ view.prev_page_url | safe }}">
+    {% endif -%}
+    {% if view.next_page_url -%}
+        <link rel="next" href="{{ view.next_page_url | safe }}">
+    {% endif -%}
+    {% if view.syndication_source -%}
+        <link rel="syndication-source" href="{{ view.syndication_source }}">
+    {% endif -%}
+
+    {# TODO: prüfen ob gebraucht #}
+    {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
+
+    {# TODO: eigene? #}
+    <link rel="shortcut icon" sizes="16x16 32x32" href="{{ request.route_url('home') }}favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
+
+    {% block css_link %}
+        <link href="{{ request.asset_host }}/css/web.arbeit/screen.css" media="all" rel="stylesheet" type="text/css">
+    {% endblock css_link %}
+
+    {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
+    {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
+    {%- include "zeit.web.arbeit:templates/inc/meta/sharing.html" -%}
+    {# TODO: prüfen ob gebraucht #}
+    {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
+
+    <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
+    {# TODO: prüfen ob gebraucht. Außerdem: Core-Subtemplate für alle Verticals? #}
+    <script>
+        // trigger print dialog after "Artikel drucken" was clicked
+        if ( location.search.indexOf( 'print' ) !== -1 ) {
+            if ( window.addEventListener ) {
+                window.addEventListener( 'load', window.print, false );
+            } else if ( window.attachEvent ) {
+                window.attachEvent( 'onload', window.print );
+            }
+        }
+    </script>
+    {% if toggles('third_party_modules') -%}
+        <script src="https://script.ioam.de/iam.js"></script>
+    {% endif -%}
+    {% if toggles('third_party_modules', 'iqd') %}
+        {% include "zeit.web.core:templates/inc/ads/head.html" %}
+        {%- block content_ad_script -%}{%- endblock -%}
+    {% endif %}
+    {# TODO: prüfen ob gebraucht #}
+    {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
+    {% if settings('livereload') %}
+        <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+
+    {# TODO: prüfen ob gebraucht #}
+    {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
+</head>
+{# TODO: Overscrolling in Campus und Arbeit ??? #}
+<body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
+
+    {% include "zeit.web.core:templates/inc/tag-manager.html" %}
+    {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/ivw_ver2.html" %}
+
+    {% block skiplink %}
+    <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
+    {% endblock skiplink %}
+    <div class="page">
+
+        {# TODO: wird der Block überschrieben? (alle Verticals checken!) #}
+        {% block adplace_top %}
+        <div id="iqd_mainAd" >
+            <div id="iqd_align_Ad">
+                <div id="iqd_topAd">
+                    {% include "zeit.web.core:templates/inc/ads/places/desktop/place1.html" %}
+                    <div id="iqd_rightAd">
+                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place2.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock adplace_top %}
+
+        <div class="page__content">
+            {% if not view.is_wrapped %}
+            <header class="header" data-ct-area="arbeit-topnav">
+                {%- block navigation -%}
+                    {%- include "zeit.web.arbeit:templates/inc/navigation/navigation.html" -%}
+                {%- endblock navigation -%}
+            </header>
+            {% endif %}
+            {% block adplace_billboard %}
+                {# desktop ad place 3 #}
+                {% include "zeit.web.core:templates/inc/ads/places/desktop/place3.html" %}
+                {# mobile ad place 1 #}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place1.html" %}
+            {% endblock adplace_billboard %}
+            <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
+                {% block main %}{% endblock main %}
+            </main>
+            {% block adplace_floor %}
+                {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
+            {% endblock adplace_floor %}
+            {% block footer %}
+                {%- include "zeit.web.arbeit:templates/inc/footer.html" -%}
+            {% endblock footer %}
+        </div>
+    </div>
+    {% include "zeit.web.core:templates/inc/ads/finalize.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/zeit.html" %}
+    {# Include login-state ESI before webtrekk! It contains the customer SSO ID. #}
+    {% include "zeit.web.core:templates/inc/login-state-footer-esi.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/webtrekk.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/celera_one.html" %}
+    {% include "zeit.web.core:templates/inc/inline_js/app_wrapper.html" %}
+    {% include "zeit.web.core:templates/inc/tracking/meetrics.html" %}
+
+    <script src="{{ request.asset_host }}/js/arbeit.js"></script>
+
+    {% if view.vgwort_url -%}
+    <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
+    {% endif -%}
+    {% include "zeit.web.core:templates/inc/cardstack/footer.tpl" %}
+</body>
 </html>
