@@ -6,37 +6,14 @@
 <html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
 <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <title>{{ view.pagetitle }}</title>
-    <meta name="description" content="{{ view.pagedescription }}">
-    {% if view.meta_keywords -%}
-        <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
-    {% endif -%}
-    <meta name="robots" content="{{ view.meta_robots }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    {% include "zeit.web.core:templates/inc/meta/basics.html" %}
+
     {% if view.is_hp -%}
         <meta name="apple-itunes-app" content="app-id=828889166">
     {% endif -%}
     <meta name="application-name" content="ZEIT ONLINE">
-    <meta name="msapplication-config" content="none">
     <meta name="msapplication-TileImage" content="{{ request.image_host }}/static/img/zo-icon-win8-144x144.png">
     <meta name="msapplication-TileColor" content="#e6e6e6">
-    {% if view.is_amp -%}
-        <link rel="amphtml" href="{{ view.amp_url }}">
-    {% endif -%}
-    {% if view.canonical_url -%}
-        <link rel="canonical" href="{{ view.canonical_url | safe }}">
-    {% endif -%}
-    {% if view.prev_page_url -%}
-        <link rel="prev" href="{{ view.prev_page_url | safe }}">
-    {% endif -%}
-    {% if view.next_page_url -%}
-        <link rel="next" href="{{ view.next_page_url | safe }}">
-    {% endif -%}
-    {% if view.syndication_source -%}
-        <link rel="syndication-source" href="{{ view.syndication_source }}">
-    {% endif -%}
 
     {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
 
