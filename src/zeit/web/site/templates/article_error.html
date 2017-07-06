@@ -1,0 +1,20 @@
+{% extends "zeit.web.site:templates/article.html" %}
+
+{% block article_head %}
+    <div class="article__item">
+        <h1 class="article-heading" itemprop="headline">
+            <span class="article-heading__title">
+                {{- view.title -}}
+            </span>
+        </h1>
+        <div class="summary" itemprop="description">
+            {{ view.subtitle }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block lineage %}{% endblock %}
+{% block article_footer %}{% endblock %}
+{% block nextread %}{% endblock %}
+{% block nextread_ad %}{% endblock %}
+{% block comments %}{% endblock %}
