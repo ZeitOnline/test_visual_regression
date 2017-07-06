@@ -10,7 +10,7 @@ POSTDEPLOY
 3.70 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4071: Bootstrap CSS for ZEIT Arbeit
 
 
 3.69 (2017-07-06)
@@ -20,7 +20,7 @@ POSTDEPLOY
 
 - ZON-3956: Polish CSS and remove hack on print ressort headlines
 
-- ZON-3952: Bootstrap ZON Arbeit vertical
+- ZON-3952: Bootstrap ZEIT Arbeit vertical
 
 - FIX: Apply ZON-like margin-right to ZCO marginalia items
 

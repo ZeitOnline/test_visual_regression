@@ -1,7 +1,12 @@
 <html>
     <head>
+        {% block css_link %}
+            <link href="{{ request.asset_host }}/css/web.arbeit/screen.css" media="all" rel="stylesheet" type="text/css">
+        {% endblock css_link %}
     </head>
     <body>
-        Hello Arbeit!
+        <main>
+            <h1>Hello Arbeit!</h1>
+        </main>
     </body>
 </html>
