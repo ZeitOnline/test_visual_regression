@@ -1129,8 +1129,46 @@ def test_url_path_not_found_should_render_404(testserver):
     resp = requests.get('%s/zeit-magazin/centerpage/lifestyle'
                         % testserver.url)
     assert u'Dokument nicht gefunden' in resp.text
+    assert resp.status_code == 404
 
 
-def test_not_renderable_content_object_should_trigger_restart(testserver):
+def test_not_renderable_content_object_should_render_404(testserver):
     resp = requests.get('%s/zeit-online/quiz/quiz-workaholic' % testserver.url)
-    assert resp.headers['x-render-with'] == 'default'
+    assert resp.status_code == 404
+
+
+def test_404_page_should_not_render_meta_and_share(testbrowser):
+
+    browser = testbrowser()
+    browser.raiseHttpErrors = False
+    browser.open('/wurstbrot')
+
+    assert len(browser.cssselect('.byline')) == 0
+    assert len(browser.cssselect('.metadata')) == 0
+    assert len(browser.cssselect('.sharing-menu')) == 0
+    assert len(browser.cssselect('.article-tags')) == 0
+    assert len(browser.cssselect('.comment-section')) == 0
+    assert len(browser.cssselect(
+        '.article-pagination__link[data-ct-label="Startseite"]')) == 1
+
+
+def test_404_page_should_render_appropriate_links(testserver):
+    resp = requests.get('%s/nonexistent' % testserver.url,
+                        headers={'Host': 'www.staging.zeit.de'})
+    assert 'http://www.staging.zeit.de/index' in resp.text
+
+
+def test_404_page_should_use_www_for_non_content_hosts(testserver):
+    resp = requests.get('%s/nonexistent' % testserver.url,
+                        headers={'Host': 'img.staging.zeit.de'})
+    assert 'http://www.staging.zeit.de/index' in resp.text
+    assert resp.status_code == 404
+
+
+def test_404_page_should_have_fallback_for_errors(testbrowser):
+    folder = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/error/')
+    del folder['404']
+    browser = testbrowser()
+    browser.raiseHttpErrors = False
+    browser.open('/wurstbrot')
+    assert 'Status 404: Dokument nicht gefunden.' in browser.contents

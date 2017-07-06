@@ -36,6 +36,7 @@ import zeit.web.core.template
 
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
+DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 log = logging.getLogger(__name__)
 
 
@@ -1257,11 +1258,34 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
-    body = 'Status 404: Dokument nicht gefunden.'
-    return pyramid.response.Response(
-        body, 404,
-        [('X-Render-With', 'default'),
-         ('Content-Type', 'text/plain; charset=utf-8')])
+    # BBB: Remove this once we're satisfied with rendering it ourselves.
+    if not zeit.web.core.application.FEATURE_TOGGLES.find('render_404'):
+        return pyramid.response.Response(
+            'Status 404: Dokument nicht gefunden.', 404,
+            [('X-Render-With', 'default'),
+             ('Content-Type', 'text/plain; charset=utf-8')])
+
+    if request.path.startswith('/error/404'):  # Safetybelt
+        log.warn('404 for /error/404, returning synthetic response instead')
+        return pyramid.response.Response(
+            'Status 404: Dokument nicht gefunden.', 404)
+    host = request.headers.get('Host', 'www.zeit.de')
+    www_host = host
+    if not host.startswith('localhost') and not host.startswith('www'):
+        parts = host.split('.')
+        www_host = '.'.join(['www'] + parts[1:])
+    return pyramid.response.Response(render_not_found_body(www_host), 404)
+
+
+@DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=bool)
+def render_not_found_body(hostname):
+    subrequest = pyramid.request.Request.blank(
+        '/error/404', headers={'Host': hostname})
+    request = pyramid.threadlocal.get_current_request()
+    response = request.invoke_subrequest(subrequest, use_tweens=True)
+    if response.status_int not in (200, 404):
+        return None
+    return response.body
 
 
 @zeit.web.view_config(context=pyramid.exceptions.URLDecodeError)
