@@ -52,7 +52,6 @@
         {% include "zeit.web.core:templates/inc/ads/head.html" %}
         {%- block content_ad_script -%}{%- endblock -%}
     {% endif %}
-    {# TODO: prüfen ob gebraucht #}
     {% include "zeit.web.core:templates/inc/inline_js/rawr.tpl" %}
     {% if settings('livereload') %}
         <script src="//localhost:35729/livereload.js"></script>
@@ -60,7 +59,6 @@
 
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
 </head>
-{# TODO: Overscrolling in Campus und Arbeit ??? #}
 <body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
@@ -71,21 +69,9 @@
     <a class="skiplink" href="#main" id="top" title="Direkt zum Inhalt springen">Inhalt</a>
     {% endblock skiplink %}
     <div class="page">
-
-        {# TODO: wird der Block überschrieben? (alle Verticals checken!). Außerdem: in den Core! #}
         {% block adplace_top %}
-        <div id="iqd_mainAd" >
-            <div id="iqd_align_Ad">
-                <div id="iqd_topAd">
-                    {% include "zeit.web.core:templates/inc/ads/places/desktop/place1.html" %}
-                    <div id="iqd_rightAd">
-                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place2.html" %}
-                    </div>
-                </div>
-            </div>
-        </div>
+            {% include "zeit.web.core:templates/inc/ads/mainad.html" %}
         {% endblock adplace_top %}
-
         <div class="page__content">
             {% if not view.is_wrapped %}
             <header class="header" data-ct-area="arbeit-topnav">
