@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-4072: Bootstrap JS for ZEIT Arbeit
 
+- ZON-4074: Define responsive layout for ZEIT Arbeit
+
 
 3.69 (2017-07-06)
 -----------------
