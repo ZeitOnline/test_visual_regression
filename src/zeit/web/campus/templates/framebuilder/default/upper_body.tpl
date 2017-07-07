@@ -13,18 +13,8 @@
     {% endblock skiplink %}
     <div class="page">
         {% block adplace_top %}
-        <div id="iqd_mainAd" >
-            <div id="iqd_align_Ad">
-                <div id="iqd_topAd">
-                    {% include "zeit.web.core:templates/inc/ads/places/desktop/place1.html" %}
-                    <div id="iqd_rightAd">
-                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place2.html" %}
-                    </div>
-                </div>
-            </div>
-        </div>
+            {% include "zeit.web.core:templates/inc/ads/mainad.html" %}
         {% endblock adplace_top %}
-
         <div class="page__content">
             <header class="header" data-ct-area="campus-topnav">
                 {%- block navigation -%}

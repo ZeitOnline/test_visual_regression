@@ -7,10 +7,26 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.69 (unreleased)
+3.70 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4077: Bootstrap HTML for ZEIT Arbeit
+
+- ZON-4071: Bootstrap CSS for ZEIT Arbeit
+
+- ZON-4072: Bootstrap JS for ZEIT Arbeit
+
+
+3.69 (2017-07-06)
+-----------------
+
+- ZON-4054: Render 404 page via friedbert
+
+- ZON-3956: Polish CSS and remove hack on print ressort headlines
+
+- ZON-3952: Bootstrap ZEIT Arbeit vertical
+
+- FIX: Apply ZON-like margin-right to ZCO marginalia items
 
 
 3.68 (2017-07-03)
