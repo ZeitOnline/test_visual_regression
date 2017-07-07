@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4071: Bootstrap CSS for ZEIT Arbeit
 
+- ZON-4072: Bootstrap JS for ZEIT Arbeit
+
 
 3.69 (2017-07-06)
 -----------------
