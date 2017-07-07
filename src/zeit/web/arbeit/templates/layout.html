@@ -1,5 +1,7 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
+        {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}
         {% block css_link %}
             <link href="{{ request.asset_host }}/css/web.arbeit/screen.css" media="all" rel="stylesheet" type="text/css">
         {% endblock css_link %}
@@ -8,5 +10,6 @@
         <main>
             <h1>Hello Arbeit!</h1>
         </main>
+        <script src="{{ request.asset_host }}/js/arbeit.js"></script>
     </body>
 </html>
