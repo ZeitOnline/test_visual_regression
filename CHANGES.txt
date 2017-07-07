@@ -10,6 +10,8 @@ POSTDEPLOY
 3.70 (unreleased)
 -----------------
 
+- ZON-4077: Bootstrap HTML for ZEIT Arbeit
+
 - ZON-4071: Bootstrap CSS for ZEIT Arbeit
 
 - ZON-4072: Bootstrap JS for ZEIT Arbeit
