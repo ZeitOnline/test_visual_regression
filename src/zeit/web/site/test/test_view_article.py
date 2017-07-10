@@ -26,7 +26,7 @@ import zeit.web.site.view_article
 
 
 screen_sizes = ((320, 480, True), (520, 960, True),
-                (768, 1024, False), (980, 1024, False))
+                (768, 1024, False), (1000, 1024, False))
 
 
 @pytest.fixture(scope='session', params=screen_sizes)
@@ -567,7 +567,7 @@ def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
     if screen_size[0] == 768:
         assert nextread.size.get('height') < 350
 
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert nextread.size.get('height') < 450
 
 
@@ -1135,13 +1135,13 @@ def test_article_lineage_should_be_hidden_on_small_screens(
     lineage_linktexts = driver.find_elements_by_css_selector(
         '.al-text')
 
-    if screen_size[0] < 980:
+    if screen_size[0] < 1000:
         assert not lineage_links[0].is_displayed()
         assert not lineage_links[1].is_displayed()
         assert not lineage_linktexts[0].is_displayed()
         assert not lineage_linktexts[1].is_displayed()
 
-    if screen_size[0] >= 980:
+    if screen_size[0] >= 1000:
         assert lineage_links[0].is_displayed()
         assert lineage_links[1].is_displayed()
         assert not lineage_linktexts[0].is_displayed()
@@ -1152,7 +1152,7 @@ def test_article_lineage_should_be_hidden_on_small_screens(
 def test_article_lineage_should_be_fixed_after_scrolling(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     driver.get('%s/zeit-online/article/zeit' % testserver.url)
     driver.execute_script("window.scrollTo(0, 1200)")
     try:
