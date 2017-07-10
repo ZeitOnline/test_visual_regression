@@ -1,1 +1,49 @@
 {% extends 'zeit.web.arbeit:templates/layout.html' %}
+
+{% block main %}
+    {% block advertorial_marker %}{% endblock advertorial_marker %}
+    {% block content %}
+    <article class="{{ 'article' | with_mods(view.article_layout, view | block_type) }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
+        <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
+        {% block article_heading -%}
+            {% include ["zeit.web.arbeit:templates/inc/article-header/{}.html".format(view.article_layout),
+                        "zeit.web.site:templates/inc/article-header/default.html"] %}
+        {% endblock article_heading -%}
+        {% block article_body %}
+        <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
+            {% block article_pages %}
+                <!-- Here goes the content for a page -->
+            {% endblock article_pages %}
+            {% block article_pagination %}
+            {% endblock article_pagination %}
+        </div>
+        {% endblock article_body %}
+        {% block article_footer %}
+        <footer class="article-footer article__item" data-ct-area="articlebottom">
+            {% block article_sharing %}
+                {% include "zeit.web.core:templates/inc/article/sharing-menu.html" %}
+            {% endblock %}
+
+            {% block print %}
+            {% endblock %}
+
+            {% block article_tags %}
+                {% include "zeit.web.core:templates/inc/article/tags.html" %}
+            {% endblock %}
+        </footer>
+        {% endblock %}
+    </article>
+    {% endblock content %}
+        {% if view.nextread %}
+            {% include "zeit.web.arbeit:templates/inc/article/nextread.html" %}
+        {% endif %}
+
+    {% block comments %}
+        {% profile %}
+            {% include "zeit.web.core:templates/inc/article/comments.html" %}
+        {% endprofile %}
+    {% endblock comments %}
+
+{% endblock main %}
+
+{% block adplace_floor %}{% endblock %}
