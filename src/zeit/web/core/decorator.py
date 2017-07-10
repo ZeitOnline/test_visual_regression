@@ -1,4 +1,3 @@
-import functools
 import hashlib
 import logging
 import sys
@@ -52,24 +51,7 @@ def JinjaEnvRegistrator(env_attr, marker=None, category='jinja'):  # NOQA
 
             if isinstance(scanner.env, zeit.web.core.jinja.Environment):
                 fn = obj
-
-                @functools.wraps(fn)
-                def safeguard(*args, **kw):
-                    """Try to execute jinja environment modifier code and
-                    intercept potential exceptions. If execution is intercept,
-                    return a jinja.Undefined object.
-
-                    :internal:
-                    """
-                    try:
-                        return fn(*args, **kw)
-                    except Exception:
-                        log.error('Error in jinja modifier %s', func.__name__,
-                                  exc_info=True)
-                        return zeit.web.core.jinja.Undefined()
-                # Unfortunately, wraps doesn't preserve argument defaults
-                safeguard.func_defaults = fn.func_defaults
-
+                safeguard = zeit.web.core.jinja.wrap_in_safeguard(fn)
                 setattr(sys.modules[fn.__module__], fn.__name__, safeguard)
                 obj = safeguard
 

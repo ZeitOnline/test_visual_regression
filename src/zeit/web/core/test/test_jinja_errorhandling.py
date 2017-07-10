@@ -169,6 +169,13 @@ def test_faulty_jinja_filter_should_not_bother_friedbert():
     assert tpl.render().strip() == 'foo'
 
 
+def test_exception_in_builtin_filter_should_not_bother_friedbert():
+    env = zeit.web.core.jinja.Environment()
+    venusian.Scanner(env=env).scan(sys.modules[__name__], categories=('_c2',))
+    tpl = env.from_string(u'foo {{ "%02d" | format(None) }}')
+    assert tpl.render().strip() == 'foo'
+
+
 @zeit.web.core.decorator.JinjaEnvRegistrator('globals', category='_c3')
 def faulty_global(*args):
     1 / 0
