@@ -1,3 +1,4 @@
+import zeit.arbeit.interfaces
 import zeit.web
 import zeit.web.core.application
 import zeit.web.core.view
@@ -5,7 +6,7 @@ import zeit.web.core.view
 
 def is_zar_content(context, request):
     return zeit.web.core.application.FEATURE_TOGGLES.find(
-        'arbeit') and request.path.startswith('/arbeit/')
+        'arbeit') and zeit.arbeit.interfaces.IZARContent.providedBy(context)
 
 
 class Base(zeit.web.core.view.Base):
