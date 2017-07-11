@@ -1,11 +1,5 @@
-import zeit.campus.interfaces
-import zeit.cms.interfaces
-
 import zeit.web
 import zeit.web.core.application
-import zeit.web.core.cache
-import zeit.web.core.interfaces
-import zeit.web.core.security
 import zeit.web.core.view
 
 
