@@ -6,5 +6,6 @@ menu.init();
 
 // add required jQuery plugins
 require( 'web.core/plugins/jquery.notifications' );
+require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 
 $.notifications();
