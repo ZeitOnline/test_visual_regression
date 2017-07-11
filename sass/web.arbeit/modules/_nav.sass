@@ -1,0 +1,436 @@
+$nav-color-topics: #ffa500
+$nav-color-button: #1cdcb5
+$nav-color-border: #444
+
+$logo-height-mobile: 30px
+
+=nav-font-xs()
+	font-size: remify(11px)
+	letter-spacing: $letter-spacing-l
+
+=nav-font-s()
+	font-size: remify(12px)
+	letter-spacing: .16em
+
+=nav-font-m()
+	font-size: remify(14px)
+	letter-spacing: .08em
+
+=nav-font-l()
+	font-size: remify(16px)
+	letter-spacing: .05em
+
+=nav-link-arrow()
+	&:before
+		content: "\203A"
+		font-size: 1.5em
+		line-height: normal
+		margin-right: .2em
+
+%nav-font-xs
+	+nav-font-xs
+
+%nav-font-s
+	+nav-font-s
+
+%nav-font-m
+	+nav-font-m
+
+%nav-font-l
+	+nav-font-l
+
+%nav-link-arrow
+	+nav-link-arrow
+
+.header
+	background-color: $primary-color
+	color: $zar-white
+	position: relative
+
+	&__brand
+		+clearfix
+		color: #fff
+		line-height: remify(50px)
+		padding: remify(0 $page-padding--small)
+		a
+			color: inherit
+
+	&__publisher
+		float: left
+		margin-top: remify(-2px) // pixel-perfect optical alignment
+
+	&__logo
+		height: remify($logo-height-mobile)
+		width: remify(122px)
+		vertical-align: middle
+
+	&__menu-icon
+		&--menu
+			height: remify(14px)
+			width: remify(20px)
+		&--close
+			height: remify(16px)
+			width: remify(20px) // add 4px to align with burger menu
+			padding: remify(0 2px)
+			display: none
+
+	&__menu-link
+		float: right
+		&[aria-expanded="true"]
+			.header__menu-icon--close
+				display: inline
+			.header__menu-icon--menu
+				display: none
+
+.nav
+	@extend %nav-font-l
+	+font-smoothing
+	display: none
+	flex-flow: column nowrap
+	line-height: remify(50px)
+
+	&:target,
+	&[aria-hidden="false"]
+		display: block // IE no-flexbox fallback
+		display: flex
+
+	a
+		color: inherit
+		display: block
+		+on-interaction
+			color: #fff
+
+	ul
+		list-style: none
+		padding: 0
+
+	li
+		display: block
+		margin: 0
+		padding: 0
+
+	// ZEIT ONLINE
+	&__home-title
+		font-size: inherit
+		font-weight: normal
+		margin: 0
+		a
+			@extend %nav-link-arrow
+
+	// LOGIN
+	&__login-link
+		text-align: right
+	&__login-icon
+		height: remify(18px)
+		width: remify(18px)
+		vertical-align: remify(-3px)
+	&__user-picture
+		background-color: #eee
+		background-position: center
+		background-repeat: no-repeat
+		background-size: contain
+		border-radius: 50%
+		display: block
+		height: remify(30px)
+		margin: remify(10px 0)
+		width: remify(30px)
+	&__user-avatar
+		color: #ababab
+		height: 100%
+		width: 100%
+	&__user-name
+		@extend %nav-font-l
+		display: block
+		font-weight: bold
+		overflow: hidden
+		text-overflow: ellipsis
+		white-space: nowrap
+
+	// THEMEN
+	&__topics
+		text-align: center
+	&__topics-title
+		@extend %nav-font-xs
+		text-transform: uppercase
+	&__topics-list
+		color: #fff
+		line-height: remify(26px)
+		a
+			+on-interaction
+				color: $zar-sun-yellow
+
+	&__button
+		span
+			border: 1px solid $nav-color-button
+			color: $nav-color-button
+			display: inline-block
+			line-height: 1
+			padding: 0.3em 0.5em
+			border-radius: 4px // TODO: den vereinheitlichen global?
+			text-transform: uppercase
+		+on-interaction
+			span
+				border-color: $zar-sun-yellow
+				color: $zar-sun-yellow
+
++respond-max($break-tablet-min)
+	%nav-mobile-link-arrow
+		+nav-link-arrow
+
+	.nav
+		// item order
+		&__login
+			order: 1
+		&__primary
+			order: 2
+		&__home
+			order: 3
+		&__sales
+			order: 4
+		&__more
+			order: 5
+		&__button
+			order: 6
+
+		// style für mobile menu item
+		&__login,
+		&__topics,
+		&__home a,
+		&__sales a,
+		&__more,
+		&__button
+			border-top: 1px solid $nav-color-border
+			padding: 0 $page-padding--small
+
+		&__topics-list
+			// TODO: clearfix?
+			font-family: $font-patronbold
+			font-size: remify(18px)
+			font-weight: bold
+			margin: remify(-12px 0 12px) // TODO: why -12px needed?
+			// TODO: BEMIFY
+			a
+				padding: remify(6px) $page-padding--small
+
+		// MORE
+		&__more-list
+			+clearfix
+			display: none
+			&[aria-hidden="false"]
+				display: block
+			li
+				float: left
+				width: 50%
+
+		&__login-title
+			overflow: hidden
+			text-overflow: ellipsis
+			white-space: nowrap
+		&__user-picture
+			float: left
+			height: remify(40px)
+			margin-right: remify(8px)
+			width: remify(40px)
+			&--default
+				display: none
+
+		&__login-list
+			li
+				float: left
+				padding-right: $page-padding--small
+				width: 33.33%
+			a
+				overflow: hidden
+				text-overflow: ellipsis
+				white-space: nowrap
+
++respond-max($break-phablet-min)
+	.nav
+		&__login-list
+			li
+				width: 50%
+
+
+
++respond-min($break-tablet-min)
+	%nav-tablet-font-xs
+		+nav-font-xs
+
+	%nav-tablet-font-s
+		+nav-font-s
+
+	%nav-tablet-font-m
+		+nav-font-m
+
+	%nav-tablet-font-l
+		+nav-font-l
+
+	%nav-tablet-down-arrow
+		&:after
+			transform: rotate(90deg) scale(2)
+			transform-origin: 40% 60%
+			transition: transform .1s ease-out
+			content: "\203A"
+			display: inline-block
+			line-height: 1
+			margin-left: remify(16px)
+
+	.header
+		&__brand
+			padding: remify(0 $page-padding)
+			position: absolute
+
+		&__menu-link
+			display: none
+
+	.nav
+		@extend %nav-tablet-font-m
+		display: table // IE no-flexbox fallback
+		width: 100% // needed for IE no-flexbox fallback
+		display: flex
+		flex-flow: row wrap
+
+		// ZEIT ONLINE
+		&__home
+			flex: 1 1 50%
+			text-align: right
+			border-width: 0 1px 1px 0
+			border-style: solid
+			border-color: $nav-color-border
+		&__home-title
+			a
+				display: inline-block
+				padding: remify(0 24px)
+
+		// ABO + MORE
+		&__sales,
+		&__more
+			flex: 0 1 auto
+			border-width: 0 1px 1px 0
+			border-style: solid
+			border-color: $nav-color-border
+
+		// dropdown menues
+		&__more-list,
+		&__login-list
+			background-color: $primary-color
+			border-color: $nav-color-border
+			border-style: solid
+			border-width: 0 1px 1px
+			display: none
+			line-height: remify(39px)
+			margin: 0
+			position: absolute
+			z-index: 2 // fix visible arrow and lead-teaser headline
+			&[aria-hidden="false"]
+				display: block
+			a
+				border-top: 1px solid $nav-color-border
+				min-width: remify(150px)
+				padding: remify(0 16px)
+		&__login-list
+			right: 0
+
+		&__sales a
+			padding: remify(0 20px)
+
+		&__login-title,
+		&__more-title
+			padding: remify(0 16px)
+			&[aria-expanded="true"]
+				.nav__dropdown:after
+					transform: rotate(-90deg) scale(2)
+
+		// LOGIN
+		&__login
+			flex: 0 1 auto
+			border-bottom: 1px solid $nav-color-border
+			padding: remify(0 16px) // needed here for "Anmeldung nicht möglich"
+		&__login-title
+			padding: 0 // override dropdown standard for "Anmeldung nicht möglich" case
+		&__login-link
+			display: block
+			padding: remify(0 4px)
+		&__login-register,
+		&__login-icon,
+		&__user-name
+			display: none
+
+		&__primary
+			flex: 1 1 50%
+
+		// THEMEN
+		&__topics-title
+			@extend %nav-tablet-font-s
+			float: left
+			padding: remify(0 15px 0 $page-padding)
+		&__topics-list
+			@extend %nav-tablet-font-s
+			float: left
+			white-space: nowrap
+			text-transform: uppercase
+			li
+				display: inline-block
+				padding: remify(0 8px)
+				&:nth-child(n+3)
+					display: none
+			a
+				border-bottom: 1px solid #999
+				color: #ccc
+				line-height: 1.6
+				+on-interaction
+					color: $zar-sun-yellow
+					border-color: currentColor
+		@at-root a#{&}__topics-link
+			display: none
+
+		&__dropdown
+			@extend %nav-tablet-down-arrow
+
+		&__button
+			padding: remify(0 $page-padding)
+
++respond-min($break-desktop-min)
+	.nav
+		&__topics-list
+			li
+				&:nth-child(n+3)
+					display: inline-block
+				&:nth-child(n+4)
+					display: none
+
+//*************
+// NO FLEXBOX *
+//*************
+
++respond-min($break-tablet-min)
+	// no JS variant
+	// These styles must not harm the default styles!
+	// Note that float, clear and vertical-align have no effect on a flex item.
+	.no-js
+		.nav
+			&__home,
+			&__sales,
+			&__more,
+			&__login
+				float: right
+
+			&__primary
+				clear: right
+
+	.no-flexbox
+		.nav
+			&__home,
+			&__sales,
+			&__more,
+			&__login
+				display: table-cell
+
+			&__home
+				width: 90%
+
+			&__primary
+				display: table-row
+
+			&__dropdown
+				white-space: nowrap
