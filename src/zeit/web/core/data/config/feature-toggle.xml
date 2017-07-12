@@ -12,7 +12,7 @@
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
   <instantarticle_interrupts>true</instantarticle_interrupts>
-  <iqd>false</iqd>
+  <iqd>true</iqd>
   <iqd_mobile_transition_article>true</iqd_mobile_transition_article>
   <iqd_mobile_transition_zco_cp>true</iqd_mobile_transition_zco_cp>
   <iqd_mobile_transition_zon_cp>true</iqd_mobile_transition_zon_cp>
@@ -23,7 +23,7 @@
   <reader_revenue_registered_with_comments>true</reader_revenue_registered_with_comments>
   <render_404>true</render_404>
   <tag_logos>true</tag_logos>
-  <third_party_modules>false</third_party_modules>
+  <third_party_modules>true</third_party_modules>
   <tracking>false</tracking>
   <update_signals>true</update_signals>
   <volume_teaser>true</volume_teaser>
