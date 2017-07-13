@@ -188,8 +188,6 @@ $nav-color-border: #444
 			order: 3
 		&__sales
 			order: 4
-		&__more
-			order: 5
 		&__button
 			order: 6
 
@@ -206,12 +204,10 @@ $nav-color-border: #444
 			padding: 0 $page-padding--small
 
 		&__topics-list
-			// TODO: clearfix?
 			font-family: $font-patronbold
 			font-size: remify(18px)
 			font-weight: bold
-			margin: remify(-12px 0 12px) // TODO: why -12px needed?
-			// TODO: BEMIFY
+			margin: remify(-12px 0 12px)
 			a
 				padding: remify(6px) $page-padding--small
 
@@ -242,7 +238,6 @@ $nav-color-border: #444
 		&__login-list
 			li
 				width: 50%
-
 
 
 +respond-min($break-tablet-min)
