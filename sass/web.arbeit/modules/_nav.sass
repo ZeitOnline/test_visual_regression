@@ -1,8 +1,6 @@
 $nav-color-topics: #ffa500
-$nav-color-button: #1cdcb5
+$nav-color-button: #36ca84
 $nav-color-border: #444
-
-$logo-height-mobile: 30px
 
 =nav-font-xs()
 	font-size: remify(11px)
@@ -55,14 +53,16 @@ $logo-height-mobile: 30px
 		a
 			color: inherit
 
+	&__logo
+		height: remify(30px)
+		width: remify(122px)
+		vertical-align: middle
+		.logo-zar-large
+			display: none
+
 	&__publisher
 		float: left
 		margin-top: remify(-2px) // pixel-perfect optical alignment
-
-	&__logo
-		height: remify($logo-height-mobile)
-		width: remify(122px)
-		vertical-align: middle
 
 	&__menu-icon
 		&--menu
@@ -161,16 +161,17 @@ $logo-height-mobile: 30px
 
 	&__button
 		span
-			border: 1px solid $nav-color-button
+			@extend %nav-font-s
+			border: 1px solid currentColor
 			color: $nav-color-button
 			display: inline-block
 			line-height: 1
 			padding: 0.3em 0.5em
-			border-radius: 4px // TODO: den vereinheitlichen global?
+			border-radius: 3px
 			text-transform: uppercase
 		+on-interaction
 			span
-				border-color: $zar-sun-yellow
+				border-color: currentColor
 				color: $zar-sun-yellow
 
 +respond-max($break-tablet-min)
@@ -192,12 +193,14 @@ $logo-height-mobile: 30px
 		&__button
 			order: 6
 
+		&__more
+			display: none
+
 		// style für mobile menu item
 		&__login,
 		&__topics,
 		&__home a,
 		&__sales a,
-		&__more,
 		&__button
 			border-top: 1px solid $nav-color-border
 			padding: 0 $page-padding--small
@@ -211,16 +214,6 @@ $logo-height-mobile: 30px
 			// TODO: BEMIFY
 			a
 				padding: remify(6px) $page-padding--small
-
-		// MORE
-		&__more-list
-			+clearfix
-			display: none
-			&[aria-hidden="false"]
-				display: block
-			li
-				float: left
-				width: 50%
 
 		&__login-title
 			overflow: hidden
@@ -280,6 +273,14 @@ $logo-height-mobile: 30px
 			padding: remify(0 $page-padding)
 			position: absolute
 
+		&__logo
+			height: remify(27px)
+			width: remify(330px)
+			.logo-zar-large
+				display: block
+			.logo-zar-small
+				display: none
+
 		&__menu-link
 			display: none
 
@@ -309,6 +310,9 @@ $logo-height-mobile: 30px
 			border-width: 0 1px 1px 0
 			border-style: solid
 			border-color: $nav-color-border
+
+		&__sales--mobile
+			display: none
 
 		// dropdown menues
 		&__more-list,
@@ -372,7 +376,7 @@ $logo-height-mobile: 30px
 			li
 				display: inline-block
 				padding: remify(0 8px)
-				&:nth-child(n+3)
+				&:nth-child(n+4)
 					display: none
 			a
 				border-bottom: 1px solid #999
@@ -389,15 +393,6 @@ $logo-height-mobile: 30px
 
 		&__button
 			padding: remify(0 $page-padding)
-
-+respond-min($break-desktop-min)
-	.nav
-		&__topics-list
-			li
-				&:nth-child(n+3)
-					display: inline-block
-				&:nth-child(n+4)
-					display: none
 
 //*************
 // NO FLEXBOX *

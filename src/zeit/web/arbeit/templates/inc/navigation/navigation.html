@@ -4,11 +4,11 @@
         <a itemprop="url" href="{{ request.route_url('home') }}arbeit/index" data-ct-label="logo">
             <meta itemprop="name" content="ZEIT Online Arbeit">
             <span itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-                {{ lama.use_svg_icon('logo-zar-small', 'header__logo', view.package) }}
+                {{ lama.use_svg_icon('logo-zar-combined', 'header__logo', view.package) }}
                 {# The "logo" dimensions must not exceed 600x60 -#}
-                <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zco.png">
-                <meta itemprop="width" content="347">
-                <meta itemprop="height" content="60">
+                <meta itemprop="url" content="{{ request.asset_host }}/images/structured-data-publisher-logo-zar.png">
+                <meta itemprop="width" content="600">
+                <meta itemprop="height" content="49">
             </span>
         </a>
     </div>
@@ -22,12 +22,18 @@
 </div>
 
 <div class="nav" id="navigation" data-ct-row="1">
+    <nav class="nav__sales nav__sales--mobile">
+        <a href="http://www.zeitabo.de/">Abo</a>
+    </nav>
+    <nav class="nav__sales nav__sales--mobile">
+        <a href="http://shop.zeit.de/">Shop</a>
+    </nav>
+    <nav class="nav__sales nav__sales--mobile">
+        <a href="https://premium.zeit.de/?wt_zmc=fix.int.zonpme.zar.dach.premium.text.epaper.epaper&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_epaper_epaper">ePaper</a>
+    </nav>
     <div class="nav__home">
         <h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
     </div>
-    <nav class="nav__sales">
-        <a href="http://www.zeitabo.de/">Abo</a>
-    </nav>
     <nav class="nav__more">
         <a class="nav__more-title" href="#more-menu" role="button" aria-controls="more-menu"><span class="nav__dropdown">Mehr</span></a>
         <ul class="nav__more-list" id="more-menu" aria-hidden="true" data-ct-column>
@@ -74,8 +80,8 @@
             #}
         </nav>
     </div>
-    <a class="nav__button" href="#jobs">
-        <span>Jobs</span>
+    <a class="nav__button" href="#TODO">
+        <span>ZEIT Stellenmarkt</span>
     </a>
 
 </div>
