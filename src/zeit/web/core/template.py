@@ -838,7 +838,8 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
         'zeit.web.static', 'css/svg/{}/{}.svg'.format(subpath, name))
     try:
         xml = lxml.etree.parse(url)
-    except (IOError, lxml.etree.XMLSyntaxError):
+    except (IOError, lxml.etree.XMLSyntaxError) as e:
+        log.debug('Error while reading Icon {}: {}'.format(name, e.message))
         return ''
     try:
         title = xml.find('{http://www.w3.org/2000/svg}title').text
@@ -850,7 +851,7 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
     # Our SVGs get actually cleaned by
     # https://github.com/ZeitOnline/zeit.web/blob/master/svgo.json, but we
     # preserve this in case we use uncleaned SVGs that have not been processed
-    # by out build task.
+    # by our build task.
     if cleanup:
         lxml.etree.strip_attributes(
             xml, 'fill', 'fill-opacity', 'stroke', 'stroke-width')
