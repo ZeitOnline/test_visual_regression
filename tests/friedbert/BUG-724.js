@@ -40,27 +40,24 @@ casper.test.begin('Friedbert visual tests', function (test) {
 
   casper.start()
 
-  casper.thenOpen('http://localhost:9070/anmelden', function () {
-    casper.then(function login () {
-      this.fill('form', {
-        'email': 'foo@bar.de',
-        'pass': '123456'
-      }, true)
-    })
-  })
-
   casper.each(links, function (self, link) {
     self.thenOpen(link, function () {
       var filename = urlToFilename(this.getCurrentUrl())
       casper.viewport(1920, 1080).then(function () {
-        phantomcss.screenshot('main', filename + '_main_desktop')
+        casper.wait(3000, function () {
+          phantomcss.screenshot('main', filename + '_main_desktop')
+          phantomcss.screenshot('.nextad', filename + '_nextad_desktop')
+        })
       })
     })
 
     self.thenOpen(link, function () {
       var filename = urlToFilename(this.getCurrentUrl())
       casper.viewport(360, 600).then(function () {
-        phantomcss.screenshot('main', filename + '_main_mobile')
+        casper.wait(3000, function () {
+          phantomcss.screenshot('main', filename + '_main_mobile')
+          phantomcss.screenshot('.nextad', filename + '_nextad_mobile')
+        })
       })
     })
   })
