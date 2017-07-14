@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - ARBEIT-34: Implement footer for ZEIT Arbeit
 
+- BUG-732: Storystreams "last updated" showing wrong date
+
 - BUG-742: Wrap built-in jinja filters in exception-catching safeguard
 
 - FIX: Show commentcount on teasers - all but red zplus
