@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
+    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
+      <display_name>Heike Jahberg</display_name>
+    </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
