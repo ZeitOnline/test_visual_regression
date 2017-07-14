@@ -133,8 +133,8 @@ def test_storystream_atom_should_show_no_fallback_image(testbrowser):
 
 def test_storystream_update_date_in_header(testbrowser):
     browser = testbrowser('zeit-online/storystream/dummy')
-    updatedate = browser.cssselect('.storystream-headerimage__date')[0].text
-    modifieddate = browser.cssselect('.storystream-scope__link')[1].text
-
-    if updatedate is modifieddate:
-        pass
+    updateddate = browser.cssselect(
+        '.storystream-headerimage__date')[0].text.strip()
+    modifieddate = browser.cssselect(
+        '.storystream-scope__link')[1].text.strip()
+    assert updateddate == modifieddate
