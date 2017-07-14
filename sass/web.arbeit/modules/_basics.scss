@@ -12,7 +12,8 @@ $color-exclamation-background: $color-text--light;
 	$visited-color: $white,
 	$letter-spacing: $letter-spacing-s,
 	$font-size: remify(16px),
-	$border-color: $primary-color
+	$border-color: $primary-color,
+	$margin: remify(14px 6px 14px 0)
 	);
 @include font-smoothing;
 font-family: $font-patron;
