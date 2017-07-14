@@ -2,8 +2,6 @@ import zeit.content.article.interfaces
 
 import zeit.web
 import zeit.web.arbeit.view
-import zeit.web.core.template
-import zeit.web.core.view
 import zeit.web.core.view_article
 
 

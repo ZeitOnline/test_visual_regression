@@ -53,8 +53,9 @@
     &lt;arguments&gt;
       &lt;tuple&gt;
         &lt;global name="Article" module="zeit.content.article.article"/&gt;
-        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
-        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZARContent" module="zeit.arbeit.interfaces"/&gt;
+        &lt;global name="IZARArticle" module="zeit.arbeit.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
