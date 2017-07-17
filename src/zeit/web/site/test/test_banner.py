@@ -90,8 +90,7 @@ def test_adplaces_present_on_home_page(testbrowser):
 def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
-        'iqd': True,
-        'iqd_mobile_transition_zmo_cp': True
+        'iqd': True
     }.get)
     browser = testbrowser('/zeit-magazin/centerpage/lebensart')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
