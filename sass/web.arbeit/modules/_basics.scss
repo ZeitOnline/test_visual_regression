@@ -1,0 +1,21 @@
+$color-exclamation-background: $color-text--light;
+
+@import "web.core/modules/basics";
+
+%zar-button-hollow {
+@include zon-button(
+	$color: $primary-color,
+	$background-color: transparent,
+	$hover-background-color: $primary-color,
+	$hover-color: $white,
+	$hover-border-color: $primary-color,
+	$visited-color: $white,
+	$letter-spacing: $letter-spacing-s,
+	$font-size: remify(16px),
+	$border-color: $primary-color,
+	$margin: remify(14px 6px 14px 0)
+	);
+@include font-smoothing;
+font-family: $font-patronbold;
+text-transform: none;
+}
