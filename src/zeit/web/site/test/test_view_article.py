@@ -1281,8 +1281,7 @@ def test_instantarticle_should_render_empty_page_on_interrupt(testserver):
 def test_instantarticle_should_render_ads(testbrowser, monkeypatch):
 
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'fbia_advertising': True,
-        'iqd_mobile_transition_article': True
+        'fbia_advertising': True
     }.get)
 
     browser = testbrowser(
@@ -1296,8 +1295,7 @@ def test_instantarticle_ads_should_include_adcontroller_values(
         testbrowser, monkeypatch):
 
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'fbia_advertising': True,
-        'iqd_mobile_transition_article': True
+        'fbia_advertising': True
     }.get)
 
     browser = testbrowser(
