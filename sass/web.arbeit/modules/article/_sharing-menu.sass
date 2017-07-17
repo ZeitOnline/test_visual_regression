@@ -1,0 +1,14 @@
+@import "web.core/modules/article/sharing-menu"
+
+.sharing-menu
+	&__text
+		font-family: $font-patronbold
+		font-size: remify(16px)
+		text-transform: none
+		letter-spacing: $letter-spacing-s
+	// TABLET
+	+respond-min($break-tablet-min)
+		&__icon
+			margin: remify(-3px 8px 0 12px)
+			&--facebook
+				margin: remify(-2px 11px 0 15px)
