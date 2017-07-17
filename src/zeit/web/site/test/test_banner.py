@@ -107,8 +107,7 @@ def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
 def test_adplaces_present_on_zco_cp(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
-        'iqd': True,
-        'iqd_mobile_transition_zco_cp': True
+        'iqd': True
     }.get)
 
     # test homepage
