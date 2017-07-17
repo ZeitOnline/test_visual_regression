@@ -7,7 +7,7 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.70 (unreleased)
+3.70 (2017-07-17)
 -----------------
 
 - ZON-4077: Bootstrap HTML for ZEIT Arbeit
