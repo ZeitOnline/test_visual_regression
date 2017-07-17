@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - ZON-4074: Define responsive layout for ZEIT Arbeit
 
+- ARBEIT-40: Implement Header and Navi for ZEIT Arbeit
+
 - ARBEIT-1: Use marker interfaces for zar content
 
 - ARBEIT-34: Implement footer for ZEIT Arbeit
