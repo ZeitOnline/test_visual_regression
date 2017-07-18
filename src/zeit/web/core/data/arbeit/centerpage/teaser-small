@@ -66,7 +66,7 @@
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a63f" kind="trio">
         <container cp:type="teaser" module="zar-small" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe2b">
-          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/short-noimage"></block>
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/short"></block>
         </container>
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a62f" kind="trio">

@@ -1,0 +1,280 @@
+<?xml version='1.0' encoding='utf-8'?>
+<article>
+  <head>
+
+    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://xml.zeit.de/autoren/C/Karin_Ceballos_Betancur/index" publication-date="" expires="">
+      <image base-id="http://xml.zeit.de/autoren/C/Karin_Ceballos_Betancur/karin-ceballos-betancur/" type="" publication-date="" expires="">
+        <bu xsi:nil="true"/>
+        <copyright py:pytype="str">© Michael Heck</copyright>
+      </image>
+      <display_name py:pytype="str">Karin Ceballos Betancur</display_name>
+    </author>
+    <references>
+      <reference xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/2016/02/zukunft-arbeit-arena-analyse" year="2016" issue="2" ressort="Karriere" contenttype="article" publication-date="2016-01-11T08:57:34+00:00" expires="" author="Walter Osztovics;Bettina Fernsebner-Kokert">
+        <supertitle py:pytype="str">Zukunft der Arbeit</supertitle>
+        <title py:pytype="str">Hilfe, mein Chef ist ein Roboter</title>
+        <text py:pytype="str">Die Zukunft der Arbeitswelt ist flexibel, die Beschäftigten leben in prekären Verhältnissen, die Vorgesetzten sind digitale Autoritäten. Eine Umfrage unter Experten</text>
+        <description py:pytype="str">Die Zukunft der Arbeitswelt ist flexibel, die Beschäftigten leben in prekären Verhältnissen, die Vorgesetzten sind digitale Autoritäten. Eine Umfrage unter Experten</description>
+        <byline py:pytype="str">von Walter Osztovics,  Bettina Fernsebner-Kokert</byline>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/karriere/2016-01/zukunft-arbeit-mensch-robotoer-hand/" type="jpg" title="Mensch Maschine Roboter Arbeit" alt="Zukunft der Arbeit: Hilfe mein Chef ist ein Roboter" publication-date="" expires="">
+          <bu py:pytype="str">In der neuen Home-Office-Welt arbeiten Mensch und Maschine Seite an Seite.</bu>
+          <copyright py:pytype="str">© Gerard Julien/AFP/Getty Images</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/O/Walter_Osztovics/index" publication-date="" expires="">
+          <display_name py:pytype="str">Walter Osztovics</display_name>
+        </author>
+        <author href="http://xml.zeit.de/autoren/F/Bettina_Fernsebner-Kokert/index" publication-date="" expires="">
+          <display_name py:pytype="str">Bettina Fernsebner-Kokert</display_name>
+        </author>
+      </reference>
+    </references>
+    <header/>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/arbeit/image/05-hammock-cottage-woods/" type="jpg" title="monarch-boat1" publication-date="" expires="">
+      <bu py:pytype="str">Freiheit ist die Einsicht in die Notwendigkeit. Das scheint heute nicht mehr zu gelten.</bu>
+      <copyright py:pytype="str">© Karin Ceballos Betancur</copyright>
+    </image>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="article_id">36208113</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="author">Karin Ceballos Betancur</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="channels">Entdecken Reisen</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-09-05T08:07:38.611947+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-07-07T02:10:03.350752+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-09-05T08:08:20.946739+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-09-05T08:08:20.792736+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-08-10T15:59:59.269942+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-09-05T08:07:50.890928+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="erscheint">23.06.2016</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2016-27-06-Digitale-Nomaden</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.default</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="jobname">06_Digitale Nomaden</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-08-10T15:59:54.393640+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.Krex</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="origname">06_Digitale Nomaden</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="page">57</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/2016/27/06-Digitale-Nomaden</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2016-06-23T06:00:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">29fd31330e294681b7c16c4ffb19cb1c</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2016-07-07T02:10:00+00:00</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="ressort">Arbeit</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/print" name="ressort">Arbeit</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2016-27</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">#livingthedream #lovetheworld #enjoylife #epic – seid ihr sicher?</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort"></attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="text-length">17710</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:4869973a-25cf-4ff2-b434-9e60edfe90f6}</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="volume">27</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+    <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZARContent" module="zeit.arbeit.interfaces"/&gt;
+        &lt;global name="IZARArticle" module="zeit.arbeit.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  <rankedTags><tag url_value="jamie-cullum" uuid="93d220a4-0f8d-4aa1-ba6d-c08867e1e295" score="4" type="Person">Jamie Cullum</tag><tag url_value="jennifer-lopez" uuid="d2e86318-7b78-4b3d-b6c0-0ff19d011e3d" score="4" type="Person">Jennifer Lopez</tag><tag url_value="kambodscha" uuid="b887f2b8-79ff-4624-8e49-70497d65a448" score="4" type="Location">Kambodscha</tag><tag url_value="monarch" uuid="3a361d23-a943-48c9-adcd-f5227e0cdc44" score="4" type="free">Monarch</tag><tag url_value="chile" uuid="472cc75a-6889-4707-bc28-0de678d92ae4" score="3" type="Location">Chile</tag><tag url_value="indien" uuid="64679390-1eec-48e8-a704-f47f9429a8d8" score="3" type="Location">Indien</tag><tag url_value="niederlande" uuid="5dab644d-7955-47eb-90c9-cb21c3b44abd" score="3" type="Location">Niederlande</tag><tag url_value="uganda" uuid="735392cd-00fd-4905-8456-c2f70edd16fc" score="3" type="Location">Uganda</tag><tag url_value="lissabon" uuid="f0991100-4bec-47af-a353-65b190542411" score="2" type="Location">Lissabon</tag><tag url_value="karibik" uuid="d331c1fd-08cf-4502-8fe2-ef2d98444951" score="1" type="Location">Karibik</tag><tag url_value="london" uuid="f887047f-c2a3-4fa9-8ba9-05d5d2ea7976" score="1" type="Location">London</tag><tag url_value="suedamerika" uuid="26e35ebc-1480-4698-bf4b-1e50990b2b72" score="1" type="Location">Südamerika</tag></rankedTags><attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute></head><body>
+    <title>Sie nennen es Arbeit</title>
+    <subtitle>Geld verdienen in der Hängematte – davon träumen doch alle. Es gibt Leute, die machen es vor: Ihr Laptop ist ihr Büro, und damit reisen sie um die Welt. Sind sie zu beneiden? Auf Kreuzfahrt mit 197 Digitalen Nomaden.</subtitle>
+    <byline>von Karin Ceballos Betancur</byline>
+    <division type="page">
+      <image base-id="http://xml.zeit.de/arbeit/image/05-hammock-cottage-woods/" type="jpg" title="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." publication-date="" expires="" layout="large" is_empty="False" caption_local="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." display_mode="large" variant_name="wide" title_local="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." alt_local="Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." alt="Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken.">
+        <bu>Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken.</bu>
+        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">© Karin Ceballos Betancur</copyright>
+      </image>
+      <p>
+        Papageien schreien im Hafen von Cartagena. Das Meer ist nah, aber man kann
+      es noch nicht riechen. Ein Affe springt durchs Unterholz, Flamingos stehen sich in einem Teich
+      die Beine in ihre rosaroten Bäuche, und irgendwo dazwischen winden sich Schlangen, stehen
+      schwitzende Menschen an zur Passkontrolle, am Check-in-Schalter, an der Rampe zum Zoll. <a class="" href="http://www.zeit.de/2016/13/des-tauchers-leere-kleider-vendela-vida-roman" target="_blank">Koffer
+      und Rucksäcke</a> parken unter Palmen. Männer mit Klemmbrettern unterm Arm bemühen sich, mehr als
+      2.000 Passagiere zügig an Bord der
+        Monarch
+        zu lotsen, vergeblich. Die Einschiffung
+      dauert Stunden. #livingthedream #lovetheworld #enjoylife
+      </p>
+      <p>Früher schickte die Reederei Pullmantur ihre Kreuzfahrtschiffe zu Beginn des Sommers leer über den Atlantik, von der <entity idref="Karibik" entity_type="Location" url_value="orte/karibik">Karibik</entity> ins Mittelmeer und im Herbst retour. Die zwölftägige Überfahrt nutzte man für Instandsetzungsarbeiten. Mittlerweile wird die "Relocation Cruise" zwar vermarktet, aber die Tickets sind extrem günstig. Passagiere mit Innenkabine zahlen für die Reise weniger als 300 Dollar. Rund 20 Euro pro Tag. All inclusive. Johannes Völkner hat das vor ein paar Monaten auf eine Idee gebracht – <a class="" href="http://www.nomadcruise.com/" target="_blank">die "Nomad Cruise"</a>.</p>
+      <p>
+        Der 33-Jährige lebt seit sechs Jahren ohne festen Wohnsitz. Er ist
+        "digital nomad"<em>,</em>
+        grob gesagt: jemand, der zum Geldverdienen kaum mehr als seinen Laptop und eine stabile Internetverbindung
+        <em>("</em>digital<em>")</em>
+        braucht und die damit einhergehende Autonomie zum Reisen
+        <em>(</em>"nomad"<em>)</em>
+        nutzt. Völkner <a class="" href="http://www.zeit.de/2016/06/digitale-nomaden-arbeit-arbeitszeit-home-office-schiff" target="_blank">verkauft über einen Online-Shop Therapiematerial für Psychologen</a>, das geht von überall aus. Schätzungen zufolge sind weltweit mittlerweile rund 5.000 Menschen
+        <em>location independent</em>
+        unterwegs, genaue Zahlen gibt es nicht, vielleicht sind es auch doppelt so viele. Und sie bloggen, posten, twittern darüber. #digitalnomad #workisnolongeraplace #instatravel <br/></p>
+      <intertitle>Im Internet sieht das alles super aus<br/></intertitle>
+      <p>Im Internet sieht dieses Leben im Grunde immer super aus: Junge Menschen liegen mit ihren Rechnern in Hängematten, arbeiten ein bisschen, nuckeln an Strohhalmen, die in Kokosnüssen stecken, und stürzen sich zum Feierabend, wenn andere im Stau stehen, in malerische Brandungen.</p>
+      <p>
+        Wie machen die das? Sind
+        "digital nomads"
+        einfach smarte Checker, die begriffen haben, wie das gute Leben geht? Postmoderne Hippies, die den Globus als Trampolin benutzen? Und wenn ja: Was hat der Globus davon? Kommt man überhaupt jemals an, wenn man ständig unterwegs ist? Und ist das nur eine neue Job-Beschreibung oder ein Lebensgefühl?
+      </p>
+      <p>
+        Johannes Völkner sagt, er reise vor allem, um kitesurfen zu können, dem Wetter hinterher.
+        Endless summer 2.0<em>.</em>
+        Am meisten Spaß macht das mit Gleichgesinnten. In Tarifa, Spanien, hat er eine Art Nomaden-Hub aufgebaut: Menschen reisen für ein paar Wochen an, leben zusammen, arbeiten zusammen, surfen zusammen und feiern zusammen, bis sich das Karussell weiterdreht. Sie nennen es
+        "workation"<em>,</em>
+<a class="" href="http://www.zeit.de/reisen/2015-01/tokio-japan-weltreise-aussteigen" target="_blank">eine Mischung aus Arbeit und Urlaub</a>.
+      </p>
+      <image base-id="http://xml.zeit.de/arbeit/image/01-more-nasa-less-guns/" type="jpg"></image>
+      <p>
+        Und was, wenn man sich dabei auch noch fortbewegen könnte?
+        "Traworkation"
+        quasi? Im Netz stieß Völkner auf die Pullmantur Cruise und postete seine Idee bei Facebook an die Community: Bucht euch Kabinen, und lasst uns zusammen nach <entity idref="S%C3%BCdamerika" entity_type="Location" url_value="orte/suedamerika">Südamerika</entity> fahren! Die erste Nomad Cruise verließ Las Palmas im vergangenen Oktober in Richtung Rio de Janeiro.
+      </p>
+      <p>Heute, ein halbes Jahr später, treten in Cartagena auch ein paar Pioniere die Rückreise nach Europa an. Man erkennt sie an der sehr braunen Haut und den blassblauen Armbändern am Handgelenk; Sonne, Salz und Sand haben die Schrift vom Gummi gefressen. Für die neue Tour gibt es am ersten Abend beim Meet-up in der Bord-Disco T-Shirts mit Logo und blaue Bändchen aus Stoff. Damit wir einander erkennen, eine Art Generalschlüssel, sagt Völkner, zum Networken auf dem Schiff.</p>
+      <p>
+        Die Gruppe zählt 197 Menschen aus 33 Nationen,
+"digital nomads"
+        und Leute, die vielleicht selbst gerne Nomaden würden, sich das Ganze aber erst aus der Nähe anschauen wollen. Einstweilen, sagt Völkner, verdiene er noch nicht viel an der Nomad Cruise, Testphase, ziemlich anstrengend, das alles. Sein freundliches Sesamstraßengesicht wirkt ein bisschen abgekämpft. Es trubelt um ihn herum.
+      </p>
+      <p>
+        Gelächter und Gesprächsfetzen wogen in Wellen durch die Disco. Männer mit Bärten stecken in Sitzgruppen die Köpfe zusammen. Am Tresen fällt eine Tussi einer anderen jauchzend um den Hals. Ein Mann mit Hemd und sehr heller Haut lehnt allein an einer Säule. Eine Blonde erzählt einer anderen Blonden, sie sei <a class="" href="http://www.zeit.de/2014/31/lesezeichen-guru-roadtrip" target="_blank">in Indien im Aschram</a> gewesen und meditiere nun jeden Tag. Ein Typ trägt seine Procam mit Stativ wie ein Zepter durch die Menge, und jemand will wissen, ob man an Bord Kondome kaufen kann. Während draußen die Lichter von Cartagena vorübergleiten und die
+        Monarch
+        Kurs auf Nachtschwarz nimmt.
+      </p>
+    </division>
+    <caption>Von Cartagena in Kolumbien nach Lissabon: Auf der "Monarch" haben Digitale Nomaden und
+      Sympathisanten aus 33 Nationen eingecheckt. Nach den Workshops im Schiffsbauch ist Zeit für
+      Yoga und Rumhängen an Deck. Für das Foto mit den Laptops haben wir vier Nomaden in die Sonne
+      gebeten. Weil’s halt schon gut aussieht</caption>
+    <image-credits>Fotos: Karin Ceballos Betancur für DIE ZEIT</image-credits>
+    <supertitle>Digitale Nomaden</supertitle>
+    <division type="page" teaser="&quot;Insecurity is a bitch&quot;">
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/entdecken/reisen/2016-07/monarch-boat2/" type="jpg" title="monarch-boat2" publication-date="" expires="" set-manually="True" layout="large" is_empty="False" display_mode="large" variant_name="wide">
+        <bu py:pytype="str">Zwischendurch mal was anderes als nur die Fingerspitzen bewegen.</bu>
+        <copyright py:pytype="str">© Karin Ceballos Betancur</copyright>
+      </image>
+      <p>Auf dem Bett in der Kabine weist ein Kärtchen darauf hin, dass die Uhren heute Nacht eine Stunde vorgestellt werden. Wir werden das jetzt regelmäßig tun, alle zwei Tage, sechs Mal bis <entity idref="Lissabon" entity_type="Location" url_value="orte/lissabon">Lissabon</entity>, 3980 Seemeilen, 7371 Kilometer.</p>
+      <p>Dass der Nomaden-Morgen früh um neun Uhr und gleich mit Arbeit beginnt, ist ein wenig ernüchternd. Während oben am Frühstücksbuffet der Filterkaffee in Strömen fließt und am Pool eine dralle Animateurin Senioren den Cha-Cha-Cha nahebringt, schlappen auf Deck 7 im Schiffsbauch Flipflops über Auslegeware in den Konferenzraum. Jeden Tag finden an Bord vier Workshops statt, in englischer Sprache, von Nomaden für Nomaden. Die Referenten bekommen kein Geld dafür. Es geht ums Sharing. Wissen miteinander zu teilen gehört zum Selbstverständnis der Community.</p>
+      <p>
+        Das Themenspektrum ist breit:
+        <em>Write Your How-To-E-Book in Two Days, How to Run Your Business From Anywhere in the World, Podcasting Like a Pro, Building Websites and Managing Your Code.</em>
+        Es gibt auch Beziehungsrat:
+        <em>Be in Control of Your Relationship, Cool Concepts to Design Relationships,</em>
+        Kontrolle und Design, und zum Abschluss der Kreuzfahrt
+        <em>How to Stop Attracting Wrong Men.</em>
+        Auch wenn es bis dahin für manche zu spät sein wird.
+      </p>
+      <p>
+        Lodi Planting, der belgische Referent mit kahlem Kopf und rotblondem Bart, weiß, wie man <a class="" href="http://www.zeit.de/karriere/beruf/2015-08/gehalt-honorar-vergleichen-medienbranche-skjlls-interview" target="_blank">als Freelancer erfolgreich sein</a> kann, selbst wenn man, wie er über sich sagt, Kaffeetrinken als persönliche Kernkompetenz ausgemacht hat. Lodi kann gut mit Leuten. Und er kennt Leute, die für Leute, mit denen er Kaffee trinkt, Webseiten bauen. Lodi bringt diese Leute zusammen und koordiniert das Ganze. Damit verdient er Geld, mal mehr, mal weniger.
+        "Insecurity is a bitch"<em>,</em>
+        sagt Lodi. Wer mit Unsicherheit nicht umgehen kann, sollte die Finger vom Freelancen lassen. Auf der Beamerleinwand zittert ein Bild, das ihn mit Telefon am Strand zeigt. Nur für das Foto, sagt Lodi. Er hasst telefonieren.
+      </p>
+      <p>
+        Praktische Tipps gibt Lodi auch: wie man als Freier seine Nische findet, wie man Strukturen schafft, die unterwegs helfen, trotz <a class="" href="http://www.zeit.de/entdecken/reisen/2015-11/kambodscha-backpacker-party-tourismus-siem-reap" target="_blank">Strand und Party</a> Dinge geregelt zu kriegen. Formuliere Jahresziele und bilde einen "Mastermind", einen Arbeitskreis von Leuten, die deine Fortschritte kontrollieren. Teile deine Zeit nach dem bekannten Pomodoro-Prinzip ein: 25 Minuten arbeiten, 5 Minuten Pause. Ganz wichtig: das
+        "About<em>",</em>
+
+        die Selbstdarstellung auf deiner Webseite. All das ist nicht bahnbrechend neu, aber Lodi wirkt dabei so sympathisch, dass man direkt mit ihm einen Kaffee ... – verdammt. <br/></p>
+      <intertitle>Millionäre sind wohl auch dabei<br/></intertitle>
+      <p>
+        Die Teilnehmerzahl für die Workshops ist begrenzt. An Bord der
+        Monarch
+        bilden sich Grüppchen aus der Gruppe. Die Traveller-Nomaden liegen am Pool auf Deck 11 in der Sonne, Blogger und Freelancer, beschallt von Bruno Mars und <entity idref="Jamie+Cullum" entity_type="Person" url_value="personen/jamie-cullum">Jamie Cullum</entity> in Dauerschleife. Tattoos, Batik und Bikinis, wir haben immer noch Karibik. Die Entrepreneur-Nomaden, die Entwickler und Unternehmer – darunter dem Vernehmen nach auch ein paar Millionäre –, versammeln sich auf Deck 12 im klimatisierten Waves-Club. Für Passagiere mit Juniorsuite gibt es hier eine WLAN-Flat, auf dem Rest der
+        Monarch
+        wird der Zugang im teuren Minutentakt abgerechnet. Pool und Club verhalten sich zueinander wie Mallorca und Ibiza.
+      </p>
+      <p>Der Mann mit dem Kamerazepter sitzt am Club-Tresen und arbeitet an seinem Rechner. Er wird später in einem Workshop sagen, er vertraue keinen Finanzberatern, die weniger verdienen als er selbst. Unten auf Deck 7 laufen Nomaden auf dem Joggingtrack im Kreis, den Rentner aus Argentinien und Venezuela zum Flanieren nutzen. Ihr Blick fällt ins Blaue.</p>
+      <p>
+        Ehe sich an dieser Aussicht neun Tage lang nichts mehr ändert, macht die
+        Monarch
+        noch einmal halt. Über der Antilleninsel St. Maarten – halb niederländisch, halb französisch – geht am Morgen ein tropischer Wolkenbruch nieder. Warmer Regen prasselt auf die Sonnenschirme am Strand von Philipsburg, gesäumt von Bars und <a class="" href="http://www.zeit.de/2015/45/duty-free-gebrueder-heinemann-europa-marktfuerer" target="_blank">Duty-free-Shops</a>. Ein paar Leute sind zum Schnorcheln gefahren, andere nach Maho Beach, weil direkt hinter dem Strand die Landebahn des Flughafens liegt und die Maschinen  sehr dicht über den Badenden einschweben. Super Selfie-Spot. #mahobeach #stmaarten #planespotting
+      </p>
+      <p>In einer Kneipe an der Promenade hängen zwei Leute auf Barhockern wie Gruppenstrandgut, der Mann mit dem Hemd und der sehr hellen Haut und Vincent, der auf sein Smartphone starrt. Es gibt WLAN. Vincent, ein 25-jähriger Franzose, war zweieinhalb Monate lang in Südamerika unterwegs. Er hat die Atacama-Wüste gemacht, Machu Picchu und die Galapagosinseln. Der Mann mit dem Hemd und der sehr hellen Haut ist extra für die Cruise nach Kolumbien geflogen. Sein Job, erzählt er, langweilt ihn zu Tode, und weil ihn diese Bemerkung nicht seine Festanstellung kosten soll, nennen wir ihn hier sicherheitshalber Andreas. Er hat was mit Computern zu tun. Andreas <a class="" href="http://www.zeit.de/gesellschaft/zeitgeschehen/2015-06/fluechtlinge-syrien-arbeitserlaubnis" target="_blank">würde sich gerne selbstständig machen</a>. Er ist Anfang 40 und zum ersten Mal in der Karibik.</p>
+      <p>Wir beschließen, gemeinsam einen Ausflug zu machen. Vincent schaut auf seinem Smartphone, was bei TripAdvisor am beliebtesten ist (#mahobeach). Wir fahren dann doch zusammen nach Marigot im französischen Teil der Insel. Vincent handelt den Taxifahrer von 8 auf 7 Dollar runter. Später, beim Mittagessen in einer Hinterhofküche, erzählt er, er habe vor, den Pariser Nahverkehr zu revolutionieren. Mit Tretrollern. Problem: Tretroller gelten als brutal uncool. Aber wenn <entity idref="Jennifer+Lopez" entity_type="Person" url_value="personen/jennifer-lopez">Jennifer Lopez</entity> mal auf so einem Teil fahren würde, wollten alle eins haben. Vincent will seine Idee mit den Berater-Nomaden besprechen, mit denen, die was von Unternehmensgründungen verstehen.</p>
+    </division>
+    <division type="page" teaser="Unabhängigkeit um jeden Preis">
+      <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/entdecken/reisen/2016-07/monarch-boat3/" type="jpg" title="monarch-boat3" publication-date="" expires="" set-manually="True" layout="large" is_empty="False" display_mode="large" variant_name="wide">
+        <bu py:pytype="str">Aufnäher auf dem Rucksack waren gestern.</bu>
+        <copyright py:pytype="str">© Karin Ceballos Betancur</copyright>
+      </image>
+      <p>Wir fahren mit dem Bus zurück nach Philipsburg. Vincent hat keinen Bock, noch mal 7 Dollar für ein Taxi zu bezahlen. Andreas sitzt neben einer üppigen Mama auf durchgesessenen Sitzpolstern und lächelt zum verschmierten Fenster hinaus, hinter dem die Karibik leuchtet. Später, am Strand, sagt Andreas, die Busfahrt sei für ihn das schönste Erlebnis auf St. Maarten gewesen.</p>
+      <p>
+        Die
+        Monarch
+        verlässt den Hafen am späten Nachmittag. Ein paar Inseln noch, dann ist wieder alles blau. Ed übrigens auch. Der Rentner aus Kalifornien ist kein Nomade, aber er sucht Abend für Abend Gesprächspartner unter den Nomaden am Pool und findet täglich neue, weil er sich später nicht an sie erinnern kann. Kostenlose Cocktails auf einer Cruise, das sei schon phänomenal, sagt Ed, während ihm sein Gebiss immer wieder ins Wort fällt. Er selbst reise bis – "Moment, wohin fahren wir?" – "Lissabon." – "Genau, und dann fahre ich noch weiter, Berlin, Russland, <entity idref="Niederlande" entity_type="Location" url_value="orte/niederlande">Niederlande</entity> eben." Dann verabschiedet er sich. Ed sagt, er wolle noch schwimmen gehen.
+      </p>
+      <p>Vielleicht liegt es an der Pausenlosigkeit einer Atlantiküberquerung, dem Flow der Rituale, dass sich die folgende Zeit später wie ein einziger langer Tag anfühlt. Es gibt Nomaden, die im Laufe der Reise abhandenkommen, die erkältet sind, seekrank werden oder beides. Vielleicht arbeiten sie auch nur, irgendwo im Schiffsbauch. Wo die Sonne nicht auf dem Monitor spiegelt. Wo es eine Steckdose gibt. Wo man seine Ruhe hat.</p>
+      <p>
+        Am Pool wippt der Horizont an manchen Tagen wild, im <a class="" href="http://www.zeit.de/karriere/2015-03/raumduft-buero" target="_blank">Konferenzraum</a> knarzen die holzgetäfelten Wände. Die
+        Monarch
+        stampft und rollt und schlingert. Es gibt den Abend in der Disco, an dem Johannes Völkner beim Meet-up bittet, von Partys in den Juniorsuiten abzusehen. Und dass sich ein paar Leute ins Bord-WLAN gehackt hätten, das sei irgendwie auch nicht okay. <br/></p>
+      <intertitle>Früher wollte sie schnell viel Geld machen<br/></intertitle>
+      <p>
+        Wir lernen einander kennen, so ist das auf Gruppenreisen, wenn niemand ins Flugzeug steigen und abhauen kann. Man kommt miteinander ins Gespräch, auch wenn man sich das gar nicht vorgenommen hat. Mit dem Unternehmer, der noch keine 30 ist und im Internet weit mehr verdient, als seine Reisen kosten. Mit dem Paar aus Kanada, das auf der Suche nach einem Standort <a class="" href="http://www.zeit.de/hamburg/politik-wirtschaft/2015-08/faltbare-elektro-roller-markteinfuehrung-hamburg-buerokratie-huerden" target="_blank">für sein Bed and Breakfast</a> um die Welt reist. Mit der Sex-Bloggerin. Mit der Frau, die Schmuck aus Papierperlen von Bürgerkriegsopfern in <entity idref="Uganda" entity_type="Location" url_value="orte/uganda">Uganda</entity> im Internet verkauft. Mit dem Doktoranden aus Litauen, der über
+        "digital nomads"
+        forscht und dabei selbst einer geworden ist. Mit der Englischlehrerin, die ihren Job liebt, aber nicht möchte, dass der Rest ihres Lebens direkt nach dem Staatsexamen beginnt.
+      </p>
+      <p>
+        Es sind zahllose Lebensentwürfe, die unter dem Branding
+        "digital nomad"
+        laufen, das den meisten von ihnen noch nicht mal besonders gut gefällt. Aber es zieht halt. Was sie eint, ist das Streben nach Unabhängigkeit. Um jeden Preis.
+      </p>
+      <p>An einem Abend erzählt einem die jauchzende Tussi ihre eigene Version. Und man merkt, dass Elena Lombardo, Italienerin, 26, gar keine Tussi ist. Vielleicht war sie das mal, damals, als sie nach ihrem BWL-Studium in <entity idref="London" entity_type="Location" url_value="orte/london">London</entity> bei einer PR-Firma anfing. Möglichst schnell möglichst viel Geld zu machen, das sei ihr damals wichtig gewesen. Bis sie mit Freunden <a class="" href="http://www.zeit.de/reisen/2015-06/oekotourismus-nachhaltigkeit-reise" target="_blank">in den Urlaub nach Kambodscha</a> fuhr. Für Elena wird der Abend noch länger dauern. Sie hat sich geschminkt, die braunen, langen Haare geföhnt und trägt einen engen, geschlitzten Rock.</p>
+      <p>Elena sagt, sie könne sich noch genau an diesen Nachmittag am Strand erinnern. Um sie herum spielten Kinder, die nichts, so gar nichts hatten. Und auf einmal, sagt Elena, hätten ihre Freunde auf sie gewirkt wie Fremde. Elena fuhr nach Hause, kündigte ihren Job, verkaufte ihre Schuhe, "all die Sachen, von denen ich mal glaubte, dass ich sie brauche". Sie hat in unzähligen Projekten gearbeitet, für NGOs, in Panama, in <entity idref="Chile" entity_type="Location" url_value="orte/chile">Chile</entity>, in <entity idref="Kambodscha" entity_type="Location" url_value="orte/kambodscha">Kambodscha</entity>, mit <a class="" href="http://www.zeit.de/hamburg/stadtleben/2014-04/hh-leben-mit-hiv" target="_blank">HIV-positiven Kindern</a>. Elena steht auf und lächelt sich am Tresen der Poolbar vor bis zum Kellner, um noch eine Runde Wein für uns klarzumachen. Es geht schnell, wenn Elena das tut.</p>
+      <intertitle>"Deshalb bin ich Single"<br/></intertitle>
+      <p>"Ich liebe meine Freiheit, ich muss mich frei fühlen. Ich möchte mich nicht binden, deshalb bin ich meistens Single. Mir gefällt die Idee von Romantik, aber dann denke ich immer: Ach nein, lass mich, geh weg, aaaaaarrrgh." Auf einen Freund, sagt Elena, könne sie verzichten. Aber ihren kleinen Bruder nicht aufwachsen zu sehen, das breche ihr das Herz. "Das sind die Opfer, die man bringt."</p>
+      <p>
+        Sie hat es später noch mal versucht mit der Sesshaftigkeit, bei einem Start-up in London,
+        "but I was bored as fuck"<em>,</em>
+        sagt sie. Sie habe sich sehr gelangweilt. Elena will jetzt ihr eigenes Ding machen. Mit einem Freund hat sie das Projekt "Wifi-Tribe" gestartet – auch eine Art
+        "workation"
+        für
+        "digital nomads"<em>,</em>
+        aber enger verzahnt mit Einheimischen. "Wir alle reisen dauernd durch die Gegend, und oft genug kommen wir mit den Leuten vor Ort nicht mal in Kontakt." Sie will in Kambodscha eine Wifi-Tribe-Niederlassung aufbauen, Arbeitsplätze schaffen, für ihre NGO-Kinder von früher. Das Unterwegssein, sagt Elena, habe sie verändert. Dann fällt sie wieder einer Freundin um den Hals, die an den Tisch tritt. Jauchzend.
+      </p>
+      <p>Es ist noch Nacht, als am Donnerstagmorgen um vier Uhr früh die Lichter von Lissabon am Horizont auftauchen. Applaus brandet auf, als wir unter der Ponte 25 de Abril hindurch den Tejo entlang in Richtung Hafen fahren und im Osten die Sonne aufgeht.</p>
+      <p>Der Mann mit dem Kamerazepter <a class="" href="http://www.zeit.de/digital/mobil/2016-06/drohnen-multicopter-regeln-flugsicherung" target="_blank">lässt eine Drohne fliegen</a>. Er filmt von oben und schaut ernst in den Himmel. Man kann sein Video später bei YouTube ansehen. Er strahlt darin und plaudert und redet und erzählt, was für eine fantastische Zeit wir an Bord hatten. Es wird Menschen geben, die uns darum beneiden. #awesome #epic #superexciting</p>
+    </division>
+  </body>
+
+  <teaser>
+    <title>Sie nennen es Arbeit</title>
+    <text>Geld verdienen in der Hängematte: davon träumen doch alle. Es gibt Leute, die machen es vor. Ihr Laptop ist ihr Büro, und damit reisen sie um die Welt.</text>
+    <supertitle>Digitale Nomaden</supertitle>
+  </teaser>
+</article>
