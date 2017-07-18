@@ -10,7 +10,7 @@ POSTDEPLOY
 3.71 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT-48: Provide multi-page dummy data for ZEIT Arbeit
 
 
 3.70 (2017-07-17)
