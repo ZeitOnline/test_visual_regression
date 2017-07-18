@@ -1,0 +1,26 @@
+.article-heading
+	margin-top: remify(16px)
+	margin-bottom: remify(16px)
+	&__kicker
+		display: block
+		font-weight: normal
+		color: $zar-darkish-pink
+		font-size: remify(16px)
+		letter-spacing: $letter-spacing-l
+		margin-bottom: remify(16px)
+	&__title
+		font-family: $font-patronbold
+		color: $primary-color
+		display: block
+		font-size: remify(32px)
+		line-height: 1.3
+
++respond-min($break-tablet-min)
+	.article-heading
+		margin-top: remify(60px)
+		margin-bottom: remify(40px)
+		&__kicker
+			margin-bottom: remify(40px)
+			font-size: remify(20px)
+		&__title
+			font-size: remify(60px)
