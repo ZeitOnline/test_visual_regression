@@ -3,6 +3,10 @@
 {% set module_layout = 'buzzboard' %}
 
 {% block before_module_list %}
+    {% if toggles('iqd_digital_transformation') -%}
+        <!-- P5 -->
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
+    {% endif -%}
     <section class="buzzboard">
         <h3 class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</h3>
 {% endblock %}
