@@ -1,7 +1,9 @@
 .metadata
+	display: inline
 	letter-spacing: $letter-spacing-s
+	word-break: break-word
 	color: $color-text--light
-	font-size: remify(14px)
+	font-size: em(15px)
 	margin-bottom: remify(40px)
 	> *:not(:last-child):not(:empty):after
 		color: $color-separator
@@ -17,3 +19,7 @@
 		+on-interaction
 			color: inherit
 			border-bottom-color: rgba($zon-grey, .8)
+	&:after
+		margin-bottom: remify(40px)
+		content: ''
+		display: block

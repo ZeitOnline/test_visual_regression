@@ -4,8 +4,13 @@
 		margin-left: auto
 		margin-right: auto
 
-.byline,
+.byline
+	font-size: em(15px)
+	color: $color-text--light
 	letter-spacing: $letter-spacing-s
+	display: inline-block
+	&:after
+		content: "\002c\00a0"
 
 .summary
 	font-size: em(18px)
