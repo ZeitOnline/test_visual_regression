@@ -1,12 +1,8 @@
 // Tablet Gothic
 @font-face {
     font-family: "TabletGothic";
-    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.eot');
-    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.eot?#iefix') format('embedded-opentype'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.woff2') format('woff2'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.woff') format('woff'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.ttf') format('truetype'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.svg#TabletGothic') format('svg');
+    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.woff2') format('woff2'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
@@ -14,12 +10,9 @@
 // Tablet Gothic Italic
 @font-face {
     font-family: "TabletGothic";
-    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.eot');
-    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.eot?#iefix') format('embedded-opentype'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.woff2') format('woff2'),
+    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.woff2') format('woff2'),
          url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.woff') format('woff'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.ttf') format('truetype'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.svg#TabletGothic-Italic') format('svg');
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Italic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }
@@ -27,12 +20,8 @@
 // Tablet Gothic Bold
 @font-face {
     font-family: "TabletGothic";
-    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.eot');
-    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.eot?#iefix') format('embedded-opentype'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.woff2') format('woff2'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.woff') format('woff'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.ttf') format('truetype'),
-         url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.svg#TabletGothic-Bold') format('svg');
+    src: url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.woff2') format('woff2'),
+         url('../../../latest/fonts/tabletgothic/TabletGothic-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
 }
