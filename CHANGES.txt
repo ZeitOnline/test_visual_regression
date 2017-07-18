@@ -7,7 +7,13 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.70 (unreleased)
+3.71 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.70 (2017-07-17)
 -----------------
 
 - ZON-4077: Bootstrap HTML for ZEIT Arbeit
@@ -18,7 +24,19 @@ POSTDEPLOY
 
 - ZON-4074: Define responsive layout for ZEIT Arbeit
 
+- ARBEIT-40: Implement Header and Navi for ZEIT Arbeit
+
+- ARBEIT-1: Use marker interfaces for zar content
+
+- ARBEIT-34: Implement footer for ZEIT Arbeit
+
+- ARBEIT-43: Bootstrap default article with basic styling for ZEIT Arbeit
+
+- BUG-732: Storystreams "last updated" showing wrong date
+
 - BUG-742: Wrap built-in jinja filters in exception-catching safeguard
+
+- FIX: Show commentcount on teasers - all but red zplus
 
 
 3.69 (2017-07-06)

@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
+    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
+      <display_name>Heike Jahberg</display_name>
+    </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
@@ -53,8 +56,9 @@
     &lt;arguments&gt;
       &lt;tuple&gt;
         &lt;global name="Article" module="zeit.content.article.article"/&gt;
-        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
-        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZARContent" module="zeit.arbeit.interfaces"/&gt;
+        &lt;global name="IZARArticle" module="zeit.arbeit.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
