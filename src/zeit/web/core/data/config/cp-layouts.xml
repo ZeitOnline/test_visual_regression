@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
 <layouts>
+    <!-- ZAR only -->
+    <layout
+        id="zar-small"
+        title="kleiner Teaser"
+        image_pattern="cinema"
+        areas="trio"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"
