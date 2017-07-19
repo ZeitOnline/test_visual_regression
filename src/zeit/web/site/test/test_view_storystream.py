@@ -117,7 +117,7 @@ def test_storystream_in_article_should_show_no_teaser_on_mobile(
     assert not small_teaser.is_displayed(), (
         'Small teaser for storystream teaser should be hidden on mobile.')
 
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     assert small_teaser.is_displayed(), (
         'Small teaser for storystream teaser should be visible on desktop.')
 
