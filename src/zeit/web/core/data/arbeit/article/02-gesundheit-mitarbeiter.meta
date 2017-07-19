@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
+  <attribute ns="DAV:" name="href">/cms/work/2016/14/gesundheit-mitarbeiter-vegetarier-rauchen-arbeitsplatz-fitness-unternehmen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Jens Jessen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Karriere</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-04-11T09:01:37.107490+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-04-11T12:49:58.425406+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-04-11T12:49:58.638174+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">23.03.2016</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">C-Aufmacher-Jessen-Rauchen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.dschmidt</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-04-11T09:01:30.402079+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">C-Aufmacher-Jessen-Rauchen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">63</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2016-03-23T06:00:00+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Arbeit</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort"></attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">9359</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:c91b8a50-aae5-4229-bc2b-eca3724e6bcc}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">14</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2016</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZARContent" module="zeit.arbeit.interfaces"/&gt;
+        &lt;global name="IZARArticle" module="zeit.arbeit.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">32609139</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1367938747371</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">Chancen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="disabled">1e55c281-bbd2-47d6-9796-6189073198b0 3539eb8d-532a-45da-8b8d-d559ea0994b6 82b20445-0613-4464-8455-8b3d8a63706a 2f40d876-7916-4333-9c52-466572096969 f0c02270-9bb3-47da-9fa2-a33f919f75d4</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="pinned">f49f7b05-17ee-40c0-a570-270d0de2daae ce21bc33-57e5-4cb6-918a-d142482e2520 b4d5a073-6060-4979-8759-89cfb3c7dfa7 e3ec9f2c-b8c0-4b52-b44c-35dfc6b1efe9 298c85a7-1802-40bc-be02-2f5262cd690a 17511b87-583f-4029-b3ac-5cbf5e71a5c6</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/tagging" name="rankedTags"/>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">2ec29f3324c24189b6a6d95bbcb4ff5e</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">183b93cfa8a3406c8412422f3c5046e9</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_error">(detail){ newMessageFault = (newMessageFault){ errorcode = "3" errormsg = "Privater Identifikationscode: Die Erstmeldung zu dieser Z&#xE4;hlmarke wurde bereits durchgef&#xFC;hrt." } }</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="reported_on">2016-04-18T22:02:31.723285+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-04-11T12:49:58.288101+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-04-11T09:01:36.157987+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-04-11T12:50:05.128917+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZEI-2016-14-gesundheit-mitarbeiter-vegetarier-rauchen-arbeitsplatz-fitness-unternehmen</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template">artikel.aufmacher</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt; &lt;list&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;unicode&gt;"Vielleicht sollten wir aufh&#xF6;ren, in der Angestelltenexistenz den Endzweck unseres Lebens zu sehen." (tgr)&lt;/unicode&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitmagazin&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;facebook&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;string&gt;zeitonline&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="account"&gt; &lt;unicode&gt;zeitonline_kar&lt;/unicode&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;twitter&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;dictionary&gt; &lt;item key="channels"&gt; &lt;string&gt;parse-channel-news&lt;/string&gt; &lt;/item&gt; &lt;item key="enabled"&gt; &lt;false/&gt; &lt;/item&gt; &lt;item key="override_text"&gt; &lt;none/&gt; &lt;/item&gt; &lt;item key="type"&gt; &lt;string&gt;parse&lt;/string&gt; &lt;/item&gt; &lt;/dictionary&gt; &lt;/list&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEI</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">DIE ZEIT</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZEI-2016-14</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Das Verh&#xE4;ltnis von Gesundheit und Intellektualit&#xE4;t, auch Gesundheit und T&#xFC;chtigkeit hat sich umgekehrt. (tgr)</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2017-05-10T15:35:22Z</attribute>
+  <attribute ns="DAV:" name="getcontentlength">28564</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Fri, 31 Mar 2017 07:51:54 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"6f94-54c0215445a80"</attribute>
+  <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+</head>

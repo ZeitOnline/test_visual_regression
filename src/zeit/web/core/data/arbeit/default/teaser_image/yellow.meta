@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<head xmlns:D="DAV:">
+  <attribute ns="DAV:" name="href">/cms/work/arbeit/default/teaser_image/yellow/</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">teaser-fallback.png</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-07-17T08:23:18.838431+00:00</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">image-group</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt; &lt;initialized_object&gt; &lt;klass&gt; &lt;global name="Provides" module="zope.interface.declarations"/&gt; &lt;/klass&gt; &lt;arguments&gt; &lt;tuple&gt; &lt;global name="LocalImageGroup" module="zeit.content.image.imagegroup"/&gt; &lt;global name="IZARContent" module="zeit.arbeit.interfaces"/&gt; &lt;/tuple&gt; &lt;/arguments&gt; &lt;/initialized_object&gt; &lt;/pickle&gt;</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:fe0f4d26-5c16-4664-bd84-b40d2e900134}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">ZEIT ONLINE</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alignment">left</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="links_to">http://links.to</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">zope.manager</attribute>
+  <attribute ns="DAV:" name="resourcetype"/>
+  <attribute ns="DAV:" name="creationdate">2017-07-17T08:27:08Z</attribute>
+  <attribute ns="DAV:" name="getlastmodified">Mon, 17 Jul 2017 08:27:08 GMT</attribute>
+  <attribute ns="DAV:" name="getetag">"5c579b-1000-4f7b17f8d34df"</attribute>
+  <attribute ns="DAV:" name="supportedlock"> </attribute>
+  <attribute ns="DAV:" name="lockdiscovery"/>
+  <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
+</head>
