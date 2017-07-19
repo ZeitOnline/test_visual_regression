@@ -7,7 +7,7 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.71 (unreleased)
+3.71 (2017-07-19)
 -----------------
 
 - ZON-4049: Adjust pagewidth to 1000px
