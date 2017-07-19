@@ -100,7 +100,7 @@ def test_adplaces_present_before_video_stage(testbrowser):
 
 
 def test_adplaces_present_before_buzzboard(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.view, 'is_hp', True)
+    monkeypatch.setattr(zeit.web.core.view.Base, 'is_hp', True)
     browser = testbrowser('/zeit-online/buzz-box')
     assert len(browser.cssselect('#ad-desktop-5')) == 1
 
