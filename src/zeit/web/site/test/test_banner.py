@@ -82,9 +82,15 @@ def test_adplaces_present_on_pages(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-mobile-8')) == 1
 
 
-def test_adplaces_present_on_home_page(testbrowser):
+def test_adplaces_present_before_video_stage(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
-    assert len(browser.cssselect('#ad-desktop-12')) == 1
+    assert len(browser.cssselect('#ad-desktop-4')) == 1
+
+
+def test_adplaces_present_before_buzzboard(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.view, 'is_hp', True)
+    browser = testbrowser('/zeit-online/buzz-box')
+    assert len(browser.cssselect('#ad-desktop-5')) == 1
 
 
 def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
