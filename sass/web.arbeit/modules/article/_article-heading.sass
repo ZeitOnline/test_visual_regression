@@ -2,25 +2,32 @@
 	margin-top: remify(16px)
 	margin-bottom: remify(16px)
 	&__kicker
-		display: block
-		font-weight: normal
 		color: $zar-darkish-pink
+		display: block
 		font-size: remify(16px)
+		font-weight: normal
 		letter-spacing: $letter-spacing-l
 		margin-bottom: remify(16px)
+
 	&__title
-		font-family: $font-patronbold
 		color: $primary-color
 		display: block
+		font-family: $font-patronbold
 		font-size: remify(32px)
 		line-height: 1.3
+		margin-left: auto
+		margin-right: auto
+		max-width: $wide-content-width
 
 +respond-min($break-tablet-min)
 	.article-heading
-		margin-top: remify(60px)
 		margin-bottom: remify(40px)
+		margin-top: remify(60px)
 		&__kicker
-			margin-bottom: remify(40px)
 			font-size: remify(20px)
+			margin-bottom: remify(40px)
+			margin-left: auto
+			margin-right: auto
+			max-width: $medium-content-width
 		&__title
 			font-size: remify(60px)
