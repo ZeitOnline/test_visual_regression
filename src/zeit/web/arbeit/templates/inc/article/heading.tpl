@@ -9,6 +9,6 @@
     </span>
     {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
     <span class="article-heading__title">
-        {{- view.title -}}
+        <span class="article-heading__title--underlined">{{- view.title -}}</span>
     </span>
 </{{ headertag }}>
