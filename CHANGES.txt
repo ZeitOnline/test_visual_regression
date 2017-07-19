@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4049: Adjust pagewidth to 1000px
 
+- ZON-3994: Retrieve keywords from TMS
+
 - ARBEIT-48: Provide multi-page dummy data for ZEIT Arbeit
 
 - ARBEIT-54: Style Article Header
