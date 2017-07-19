@@ -10,7 +10,10 @@ POSTDEPLOY
 3.71 (unreleased)
 -----------------
 
+- ZON-4049: Adjust pagewidth to 1000px
+
 - ARBEIT-48: Provide multi-page dummy data for ZEIT Arbeit
+
 
 
 3.70 (2017-07-17)

@@ -182,7 +182,7 @@
           <h2 class="x-headline">Freie Wohnungen</h2>
           <div class="x-spacing x-picturefill">
             <picture>
-              <source srcset="http://placehold.it/980x420" media="(min-width: 980px)" />
+              <source srcset="http://placehold.it/1000x420" media="(min-width: 1000px)" />
               <source srcset="http://placehold.it/768x330" media="(min-width: 768px)" />
               <img srcset="http://placehold.it/480x320" alt="…" />
             </picture>
