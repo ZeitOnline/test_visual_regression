@@ -1172,7 +1172,6 @@ def test_404_page_should_have_fallback_for_errors(testbrowser):
     browser.raiseHttpErrors = False
     browser.open('/wurstbrot')
     assert 'Status 404: Dokument nicht gefunden.' in browser.contents
-    assert resp.headers['x-render-with'] == 'default'
 
 
 def test_retrieve_keywords_from_tms(application, monkeypatch):
