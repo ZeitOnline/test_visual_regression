@@ -7,8 +7,8 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.72 (unreleased)
------------------
+3.71.1 (2017-07-19)
+-------------------
 
 - HOTFIX: Make AMP keyword links work again
 
