@@ -28,6 +28,7 @@
   <tracking>false</tracking>
   <update_signals>true</update_signals>
   <volume_teaser>true</volume_teaser>
+  <zon_1000px>true</zon_1000px>
   <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
   <zon_videosinglepage_via_html5>true</zon_videosinglepage_via_html5>
   <zplus_badge_gray>true</zplus_badge_gray>

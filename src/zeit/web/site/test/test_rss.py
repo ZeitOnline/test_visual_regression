@@ -126,7 +126,7 @@ def test_spektrum_parquet_should_display_meta_more(
     assert not more_link.is_displayed(), (
         'Parquet more-link should not be displayed on mobile.')
 
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     assert more_link.is_displayed(), (
         'Parquet more-link must be displayed on desktop.')
 

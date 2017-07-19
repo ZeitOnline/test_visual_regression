@@ -7,7 +7,18 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.70 (unreleased)
+3.71 (unreleased)
+-----------------
+
+- ZON-4049: Adjust pagewidth to 1000px
+
+- ARBEIT-48: Provide multi-page dummy data for ZEIT Arbeit
+
+- ARBEIT-54: Style Article Header
+
+
+
+3.70 (2017-07-17)
 -----------------
 
 - ZON-4077: Bootstrap HTML for ZEIT Arbeit
@@ -23,6 +34,8 @@ POSTDEPLOY
 - ARBEIT-1: Use marker interfaces for zar content
 
 - ARBEIT-34: Implement footer for ZEIT Arbeit
+
+- ARBEIT-43: Bootstrap default article with basic styling for ZEIT Arbeit
 
 - BUG-732: Storystreams "last updated" showing wrong date
 
