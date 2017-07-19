@@ -1,0 +1,81 @@
+%teaser
+	color: $color-text
+
+%teaser-media
+	background-color: $greyish-white
+	color: $color-text // force alt text being readable
+
+%teaser-combined-link
+	color: inherit
+
+// TODO: Padding klug (und korrekt) hinkriegen
+
+// ------------------------------------------------------
+// TEASER-KICKER
+
+%teaser-kicker
+	display: block
+	font-weight: normal
+	line-height: 1.2
+	+respond-min($break-tablet-min)
+		line-height: 1.3
+
+%teaser-kicker--l
+	@extend %teaser-kicker
+	font-size: remify(16px)
+	letter-spacing: $letter-spacing-l
+	+respond-min($break-tablet-min)
+		font-size: remify(20px)
+		letter-spacing: $letter-spacing-xl
+
+%teaser-kicker--s
+	@extend %teaser-kicker
+	color: $zar-battleship-grey
+	font-size: remify(14px)
+	letter-spacing: $letter-spacing-s
+	+respond-min($break-tablet-min)
+		letter-spacing: $letter-spacing-m
+
+// ------------------------------------------------------
+// TEASER-TITLE
+
+%teaser-title
+	display: block
+	font-family: $font-patronbold
+
+%teaser-title--xs
+	@extend %teaser-title
+	font-size: remify(20px)
+	line-height: 1.3
+
+// ------------------------------------------------------
+// TEASER-TEXT
+
+%teaser-text
+	color: $zar-battleship-grey
+	font-size: remify(16px)
+	line-height: 1.5
+	+respond-min($break-tablet-min)
+		font-size: remify(15px)
+		line-height: 1.4
+
+// ------------------------------------------------------
+// TEASER-METADATA
+
+%teaser-metadata
+	color: $zar-cool-grey
+	letter-spacing: $letter-spacing-s
+	> *:not(:last-child):not(:empty):after
+		content: " \2014 " // — = em dash
+		margin: 0 .2em
+		opacity: $color-separator-opacity
+	time
+		white-space: nowrap
+
+%teaser-commentcount
+	@extend %commentcount
+
+.series-label
+	&:after
+		content: " / "
+		margin: 0 .25em
