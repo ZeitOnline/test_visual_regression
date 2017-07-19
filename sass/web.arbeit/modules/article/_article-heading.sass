@@ -23,7 +23,9 @@
 			background-image: linear-gradient(90deg, $zar-sun-yellow, $zar-sun-yellow)
 			background-size: auto 4px
 			background-repeat: repeat-x
-			background-position-y: 2.4rem
+			// use em here deliberately to match underline's position with
+			// parent's font-size across viewports
+			background-position-y: 1.15em
 			text-shadow: -2px 3px $white, 2px 3px $white
 
 +respond-min($break-tablet-min)
@@ -40,5 +42,4 @@
 			font-size: remify(60px)
 			&--underlined
 				background-size: auto 7px
-				background-position-y: 4.35rem
 				text-shadow: -4px 6px $white, 4px 6px $white
