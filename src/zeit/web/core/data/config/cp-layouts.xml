@@ -7,6 +7,18 @@
         image_pattern="wide"
         areas="trio"
         />
+    <layout
+        id="zar-duo-bright"
+        title="Duo-Teaser Hell mit dunkler Schrift"
+        image_pattern="wide"
+        areas="duo"
+        />
+    <layout
+        id="zar-duo-dark"
+        title="Duo-Teaser Dunkel mit heller Schrift"
+        image_pattern="wide"
+        areas="duo"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"
