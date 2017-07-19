@@ -10,7 +10,7 @@ POSTDEPLOY
 3.72 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Make AMP keyword links work again
 
 
 3.71 (2017-07-19)

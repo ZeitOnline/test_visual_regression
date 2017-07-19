@@ -233,7 +233,7 @@
                         <ul class="article-tags__list" itemprop="keywords">
                         {% for keyword in view.keywords[:6] -%}
                             {% if keyword.link %}
-                                <li><a href="{{ request.route_url('home', keyword.link) }}" class="article-tags__link"
+                                <li><a href="{{ request.route_url('home') }}{{ keyword.link }}" class="article-tags__link"
                                     data-vars-number="{{ loop.index }}"
                                     data-vars-link-text="{{ keyword.label }}"
                                     data-vars-url="{{ request.route_url('home')  | substring_from('://') }}{{ keyword.link }}"
