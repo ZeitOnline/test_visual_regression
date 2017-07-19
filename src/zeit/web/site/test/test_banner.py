@@ -38,12 +38,24 @@ def test_adcontroller_head_code_is_present(
     assert '<!-- mandanten object -->' in browser.contents
 
 
-def test_adcontroller_adtags_are_present(testbrowser):
+def test_adcontroller_adtags_are_present(testbrowser, monkeypatch):
     browser = testbrowser('/zeit-online/slenderized-index')
-    assert 'AdController.render(\'iqadtile1\');' in browser.contents
-    assert 'AdController.render(\'iqadtile2\');' in browser.contents
-    assert 'AdController.render(\'iqadtile3\');' in browser.contents
-    assert 'AdController.render(\'iqadtile7\');' in browser.contents
+    assert 'ad-desktop-1' in browser.contents
+    assert 'ad-desktop-2' in browser.contents
+    assert 'ad-desktop-3' in browser.contents
+    assert 'ad-mobile-1' in browser.contents
+    assert 'ad-mobile-3' in browser.contents
+    assert 'ad-mobile-4' in browser.contents
+    assert 'ad-mobile-8' in browser.contents
+    # adtile 7 will be renumbered to… 8
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': False}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert 'ad-desktop-7' in browser.contents
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert 'ad-desktop-8' in browser.contents
 
 
 def test_adcontroller_finanlizer_is_present(
