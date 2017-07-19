@@ -4,7 +4,7 @@
     <layout
         id="zar-small"
         title="kleiner Teaser"
-        image_pattern="cinema"
+        image_pattern="wide"
         areas="trio"
         />
     <!-- ZCO only -->

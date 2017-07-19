@@ -14,12 +14,6 @@
 
     <div class="{{ self.layout() }}__container">
 
-        {% block teaser_journalistic_format %}
-            {% if teaser.serie and not teaser.serie.column %}
-                <div class="{{ self.layout() }}__series-label">Serie: {{ teaser.serie.serienname }}</div>
-            {% endif %}
-        {% endblock teaser_journalistic_format %}
-
         {% block teaser_heading %}
             <h2 class="{{ self.layout() }}__heading {% block teaser_heading_modifier %}{% endblock %}">
                 {% block teaser_link %}
@@ -27,20 +21,18 @@
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
-                        <span class="{%- block kicker_class -%}{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, teaser | vertical_prefix ) }}{%- endblock -%}">
-                            {% block kicker_logo scoped %}
-                                {% block content_kicker_logo %}
-                                    {% set logo_layout = self.layout() %}
-                                    {% for template in teaser | logo_icon(area.kind) %}
-                                        {% include "zeit.web.core:templates/inc/badges/{}.tpl".format(template) %}
-                                    {% endfor %}
-                                {% endblock content_kicker_logo %}
-                            {% endblock kicker_logo %}
-                            {{ teaser.teaserSupertitle or teaser.supertitle -}}
-                        </span>
-                        {%- if teaser.teaserSupertitle or teaser.supertitle -%}
-                            <span class="visually-hidden">:</span>
-                        {% endif %}
+                        {% if teaser.teaserSupertitle or teaser.supertitle %}
+                            <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
+                                {% block teaser_journalistic_format -%}
+                                    {% if teaser.serie -%}
+                                        <span class="series-label">{{ teaser.serie.serienname }}</span>
+                                    {% elif teaser.blog -%}
+                                        <span class="blog-label">{{ teaser.blog.name }}</span>
+                                    {%- endif %}
+                                {%- endblock teaser_journalistic_format %}
+                                {# There must be no whitespace between kicker and : (for Google(News) representation) #}
+                                <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span></span><span class="visually-hidden">: </span>
+                        {%- endif %}
                     {% endblock %}
                     {% block teaser_title %}
                         <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>

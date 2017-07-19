@@ -71,7 +71,24 @@
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a62f" kind="trio">
         <container cp:type="teaser" module="zar-small" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be3b">
-          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/serie-noimage"></block>
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/serie"></block>
+        </container>
+      </region>
+    </cluster>
+    <cluster area="id-41a2899d-b569-4c42-c713-d5bdbd86a64f" kind="trio">
+      <region area="id-41a2899d-b569-4c42-c713-bd5dbd68a64f" kind="trio">
+        <container cp:type="teaser" module="zar-small" cp:__name__="id-d4e51b5a-215d-4c6f-b57a-e357dbf3be1b" force_mobile_image="True">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/article/01-digitale-nomaden"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-c713-bd5dbd68a63f" kind="trio">
+        <container cp:type="teaser" module="zar-small" cp:__name__="id-4de7b1a5-245d-4c6f-b57a-e357db3fbe2b">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/article/02-gesundheit-mitarbeiter"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-c713-bd5dbd68a62f" kind="trio">
+        <container cp:type="teaser" module="zar-small" cp:__name__="id-d4e51b5b-245d-4c6f-5c7a-e35d7bf3be3b">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/serie"></block>
         </container>
       </region>
     </cluster>
