@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ARBEIT-48: Provide multi-page dummy data for ZEIT Arbeit
 
+- ARBEIT-48.1: Introduce trio region and small teaser to ZEIT Arbeit
+
 - ARBEIT-54: Style Article Header
 
 - ARBEIT-32: Underline article title
