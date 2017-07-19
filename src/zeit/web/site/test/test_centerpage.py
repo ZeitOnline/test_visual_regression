@@ -192,10 +192,10 @@ def test_dynamic_centerpage_collection_should_output_teasers(
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
     counter = 0
     for region in view.regions:
-            for area in region.values():
-                for teaser in zeit.content.cp.interfaces.ITeaseredContent(
-                        area):
-                    counter = counter + 1
+        for area in region.values():
+            for teaser in zeit.content.cp.interfaces.ITeaseredContent(
+                    area):
+                counter = counter + 1
     assert counter == 8
 
 
