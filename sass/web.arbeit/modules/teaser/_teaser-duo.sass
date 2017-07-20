@@ -1,21 +1,16 @@
 .teaser-duo
 	@extend %teaser
-	border-bottom: 1px $color-border-on-bright solid
-	margin: $vertical-space--small $page-padding--small
-	&--bright
-		background-color: #EEEEF0
-	&--dark
-		background-color: #252525
-		color: #FFFFFF
+	margin: remify(14px) $page-padding--small
 	+respond-min($break-tablet-min)
-		border: none
 		margin: $vertical-space $cp-padding
 
 	&__media
 		@extend %teaser-media
+		+reserve-space-for-teaser-media(100% / 16 * 9) // image variant 'wide' (16:9)
 		margin-bottom: remify(12px)
-		+respond-max($break-tablet-min)
-			display: none
+
+	&__container
+		padding: remify(5px 20px 20px)
 
 	&__heading
 		margin: 0
@@ -31,7 +26,7 @@
 		margin-bottom: remify(8px)
 
 	&__title
-		@extend %teaser-title--xs
+		@extend %teaser-title--s
 		margin-bottom: remify(8px)
 
 	&__text
@@ -45,3 +40,29 @@
 
 	&__commentcount
 		@extend %teaser-commentcount
+
+
+	&--bright
+		background-color: #EEEEF0
+	&--dark
+		+font-smoothing
+		background-color: #252525
+		.teaser-duo__title
+			color: #FFFFFF
+		.teaser-duo__kicker,
+		.teaser-duo__text,
+		.teaser-duo__metadata
+			color: $zar-french-grey
+
+// same height on desktop for "modern" browsers
+// TODO: to be discussed. Should we apply the margin to the region in all cases?
++respond-min($break-tablet-min)
+	html.flexbox
+		.cp-region--duo
+			display: flex
+			margin-bottom: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
+			margin-top: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
+		.teaser-duo
+			height: 100%
+			margin-bottom: 0
+			margin-top: 0
