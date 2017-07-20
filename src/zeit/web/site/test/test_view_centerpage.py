@@ -1347,11 +1347,11 @@ def test_adtile12_from_cp_extra_is_there(testbrowser):
     assert browser.cssselect('#ad-desktop-12')
 
 
-def test_adtile13_from_cp_extra_is_there(testbrowser, monkeypatch):
+def test_adtile4_from_cp_extra_is_there(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-online/parquet')
-    assert browser.cssselect('#ad-desktop-13')
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/centerpage')
+    assert browser.cssselect('#ad-desktop-4')
 
 
 def test_adtile9_from_cp_extra_is_there(testbrowser, monkeypatch):
