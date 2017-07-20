@@ -1,15 +1,15 @@
-{% if view.ranked_tags | length %}
+{% if view.keywords %}
 <nav class="{{ 'article-tags' | with_mods(tag_modifier) }}">
     <h4 class="{{ 'article-tags__title' | with_mods(tag_modifier) }}">Schlagwörter</h4>
     <ul class="article-tags__list" itemprop="keywords" data-ct-row="article-tag">
-    {%- for tag in view.ranked_tags[:6] -%}
+    {%- for keyword in view.keywords[:6] -%}
         <li>
-        {%- if tag.url_value -%}
-            <a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="{{ 'article-tags__link' | with_mods(tag_modifier) }}" rel="tag">
-                {{- tag.label -}}
+        {%- if keyword.link -%}
+            <a href="{{ request.route_url('home') }}{{ keyword.link }}" class="{{ 'article-tags__link' | with_mods(tag_modifier) }}" rel="tag">
+                {{- keyword.label -}}
             </a>
         {%- else -%}
-            <span class="{{ 'article-tags__link' | with_mods(tag_modifier) }}">{{ tag.label }}</span>
+            <span class="{{ 'article-tags__link' | with_mods(tag_modifier) }}">{{ keyword.label }}</span>
         {%- endif -%}
         {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
         </li>

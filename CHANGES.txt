@@ -7,13 +7,32 @@ POSTDEPLOY
 (nothing yet)
 
 
-3.71 (unreleased)
+3.72 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.71.1 (2017-07-19)
+-------------------
+
+- HOTFIX: Make AMP keyword links work again
+
+
+3.71 (2017-07-19)
 -----------------
 
 - ZON-4049: Adjust pagewidth to 1000px
 
+- ZON-3994: Retrieve keywords from TMS
+
 - ARBEIT-48: Provide multi-page dummy data for ZEIT Arbeit
 
+- ARBEIT-48.1: Introduce trio region and small teaser to ZEIT Arbeit
+
+- ARBEIT-54: Style Article Header
+
+- ARBEIT-32: Underline article title
 
 
 3.70 (2017-07-17)

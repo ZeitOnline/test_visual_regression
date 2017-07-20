@@ -1,8 +1,10 @@
 .metadata
-	letter-spacing: $letter-spacing-s
 	color: $color-text--light
-	font-size: remify(14px)
+	display: inline
+	font-size: remify(15px)
+	letter-spacing: $letter-spacing-s
 	margin-bottom: remify(40px)
+	word-break: break-word
 	> *:not(:last-child):not(:empty):after
 		color: $color-separator
 		content: " / "
@@ -12,8 +14,12 @@
 	&__commentcount
 		@extend %commentcount
 	&__source a
-		color: inherit
 		border-bottom: 1px solid rgba($zon-grey, .4)
+		color: inherit
 		+on-interaction
-			color: inherit
 			border-bottom-color: rgba($zon-grey, .8)
+			color: inherit
+	&:after
+		content: ''
+		display: block
+		margin-bottom: remify(40px)

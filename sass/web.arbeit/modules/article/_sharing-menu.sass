@@ -1,22 +1,15 @@
 @import "web.core/modules/article/sharing-menu"
 
 .sharing-menu
-	&__item
-		margin-right: remify(1px)
 	&__link
-		border-radius: 0
+		transition: all 0.15s ease-in-out
 	&__text
 		font-family: $font-patronbold
 		font-size: remify(16px)
-		text-transform: none
 		letter-spacing: $letter-spacing-s
-
+		text-transform: none
 	// TABLET
 	+respond-min($break-tablet-min)
-		&__item
-			margin-right: remify(7px)
-		&__link
-			border-radius: remify(4px)
 		&__icon
 			margin: remify(-3px 8px 0 12px)
 			&--facebook

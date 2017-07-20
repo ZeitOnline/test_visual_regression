@@ -1172,3 +1172,24 @@ def test_404_page_should_have_fallback_for_errors(testbrowser):
     browser.raiseHttpErrors = False
     browser.open('/wurstbrot')
     assert 'Status 404: Dokument nicht gefunden.' in browser.contents
+
+
+def test_retrieve_keywords_from_tms(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'keywords_from_tms': True}.get)
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['retresco_timeout'] = 0.42
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.core.view.Content(article, None)
+    with mock.patch(
+            'zeit.retresco.connection.TMS.get_article_keywords') as tms:
+        with mock.patch('zeit.content.article.article.Article.keywords',
+                        mock.PropertyMock()) as kw:
+            tms.return_value = [mock.sentinel.tag]
+            assert view.keywords == [mock.sentinel.tag]
+            assert not kw.called
+            tms.assert_called_with(
+                '{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}',
+                timeout=0.42)
