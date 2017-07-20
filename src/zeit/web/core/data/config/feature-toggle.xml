@@ -13,6 +13,7 @@
   <fbia_advertising>true</fbia_advertising>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
+  <iqd_digital_transformation>true</iqd_digital_transformation>
   <iqd_mobile_transition_article>true</iqd_mobile_transition_article>
   <iqd_mobile_transition_zco_cp>true</iqd_mobile_transition_zco_cp>
   <iqd_mobile_transition_zon_cp>true</iqd_mobile_transition_zon_cp>
