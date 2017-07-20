@@ -1,12 +1,7 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
-
-{% if view.is_hp %}
-    {% if toggles('iqd_digital_transformation') -%}
-        <!-- P4 -->
-        {% include "zeit.web.core:templates/inc/ads/places/desktop/place4.html" %}
-    {% else %}
-        {% include "zeit.web.core:templates/inc/ads/places/desktop/place12.html" %}
-    {% endif -%}
+{% if toggles('iqd_digital_transformation') -%}
+    <!-- P4 -->
+    {% include "zeit.web.core:templates/inc/ads/places/desktop/place4.html" %}
 {% endif %}
 
 <aside class="toolbox">
