@@ -586,3 +586,11 @@ $inline-block-alignment: none !default;
 		top: 0;
 	}
 }
+
+// Avoid jumping while the image gets lazy-loaded
+@mixin reserve-space-for-teaser-media($ratio) {
+	height: 0;
+	position: relative;
+	overflow: hidden;
+	padding-bottom: $ratio;
+}
