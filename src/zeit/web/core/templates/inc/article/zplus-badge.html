@@ -1,9 +1,4 @@
-{#
-    zplus badge for zmo article
-    one badge to rule them all, w/ some different alignments per template
-    and two different link targets
-#}
-{%- import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
+{%- import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama with context %}
 <aside class="zplus-badge" data-ct-row="zplus-badge" data-ct-column="false">
     <a href="{{ view.zplus_label.link }}" class="zplus-badge__link" data-ct-label="Exklusiv für Abonnenten">
         {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--s svg-symbol--hide-ie zplus-badge__logo', view.package, a11y=False) }}
