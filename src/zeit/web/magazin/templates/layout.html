@@ -85,7 +85,11 @@
                 </main>
 
                 {% block adplace_floor %}
-                    {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
+                    {% if toggles('iqd_digital_transformation') -%}
+                        <!-- P7 -->
+                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place16.html" %}
+                    {% endif -%}
+                        {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
                 {% endblock adplace_floor %}
 
                 {% profile %}

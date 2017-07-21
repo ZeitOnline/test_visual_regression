@@ -1,0 +1,11 @@
+{% extends "zeit.web.core:templates/inc/area/buzzboard.html" %}
+
+{% block before_module_list %}
+    {% if toggles('iqd_digital_transformation') and view.is_hp -%}
+        {# ad before buzzboard, only on HP #}
+        <!-- P4 -->
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place4.html" %}
+    {% endif -%}
+    <section class="buzzboard">
+        <h3 class="buzzboard__headline">{{ area.title | default('Beliebte Artikel', true) }}</h3>
+{% endblock %}
