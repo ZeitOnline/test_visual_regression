@@ -7,11 +7,12 @@ $font-franziska: "FranziskaWebPro", $serif-fallbacks !default
 $font-tabletgothic: "TabletGothic", $sans-fallbacks !default
 $font-beckett: "BeckettLight", "Impact", "Arial Black", "Arial Bold", Gadget, sans-serif !default
 $font-tiemann: "TiemannLight", $serif-fallbacks !default
+$font-patronbold: "PatronBold", $sans-fallbacks !default
 
 // basic styles
-$base-font-size: 16px // do not use '!default' here, because compass is defining $base-font-size and $base-line-height
+$base-font-size: 16px !default
 $base-font-family: $font-tabletgothic !default
-$base-line-height: 1.5 // do not use '!default' here, because compass is defining $base-font-size and $base-line-height
+$base-line-height: 1.5 !default
 $is-advertorial: false !default
 
 // margins/paddings in px
@@ -89,6 +90,7 @@ $font-xxxl:  em($font-xxxl--px)
 $font-xxxxl: em($font-xxxxl--px)
 
 // letter-spacing
+$letter-spacing-xl: 0.125em // 2px
 $letter-spacing-l: 0.08em // 1.28px
 $letter-spacing-m: 0.05em // 0.8px
 $letter-spacing-s: 0.03em // a half of a pixel

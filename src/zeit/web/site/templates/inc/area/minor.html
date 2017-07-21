@@ -15,7 +15,12 @@
 
     {# Case A: First Region after a Solo Leader: BANNER 7 before the First Module. #}
     {% if view.has_solo_leader and region_loop.index == 2 and module_loop.index == 1 %}
-        {% include "zeit.web.core:templates/inc/ads/places/desktop/place7.html" %}
+        {% if toggles('iqd_digital_transformation') -%}
+            <!-- P8 -->
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
+        {% else %}
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place7.html" %}
+        {% endif -%}
     {% endif %}
 
     {# Case C: Every other Region: BANNER 8 before the First Module. #}
@@ -26,14 +31,23 @@
         )
         and module_loop.index == 1
         %}
-        {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
+        {% if toggles('iqd_digital_transformation') -%}
+        <!-- P3a -->
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place81.html" %}
+        {% endif -%}
+
     {% endif %}
 {% endblock %}
 
 {% block after_module_include %}
     {# Case B: First Region on page Solo Leader: BANNER 7 after the First Module. #}
     {% if not(view.has_solo_leader) and region_loop.index == 1 and module_loop.index == 1 %}
-        {% include "zeit.web.core:templates/inc/ads/places/desktop/place7.html" %}
+        {% if toggles('iqd_digital_transformation') -%}
+            <!-- P8 -->
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
+        {% else %}
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place7.html" %}
+        {% endif -%}
     {% endif %}
 {% endblock %}
 

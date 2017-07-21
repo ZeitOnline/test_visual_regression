@@ -1,4 +1,4 @@
-{% import "zeit.web.core:templates/macros/layout_macro.tpl" as lama %}
+{% import "zeit.web.arbeit:templates/macros/layout_macro.tpl" as lama %}
 <!DOCTYPE html>
 <html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
 <head>
@@ -33,7 +33,7 @@
 
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
 </head>
-<body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
+<body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %} {% if toggles('zon_1000px') %}id="zon1000"{% endif -%}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}

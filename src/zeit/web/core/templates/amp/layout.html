@@ -23,9 +23,6 @@
     {% endblock style %}
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     {% if toggles('amp_advertising') -%}
-    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
-    {% endif -%}
-    {% if toggles('amp_new_advertising') -%}
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     {% endif -%}
     <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
@@ -78,9 +75,6 @@
         {% block liveblog_status %}{% endblock %}
 
         {% if toggles('amp_advertising') %}
-            {% include "zeit.web.core:templates/amp/ads/tile_1.html" %}
-        {% endif %}
-        {% if toggles('amp_new_advertising') %}
             {% include "zeit.web.core:templates/amp/amp-ads/tile_1.html" %}
         {% endif %}
 
@@ -153,13 +147,7 @@
                             {% for block in page %}
                                 {% set block_loop = loop %}
                                 {% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
-                                {% if toggles('amp_advertising') %}
-                                    {% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False %}
-                                        {% set ad_displayed = True %}
-                                        {% include "zeit.web.core:templates/amp/ads/tile_4.html" %}
-                                    {% endif %}
-                                {% endif %}
-                                {% if toggles('amp_new_advertising') -%}
+                                {% if toggles('amp_advertising') -%}
                                     {% for page_number, block_number, adtile in adplaces %}
                                         {% if page.number == page_number and block_loop.index0 == block_number %}
                                             {% include "zeit.web.core:templates/amp/amp-ads/tile_{}.html".format(adtile) %}
@@ -227,21 +215,21 @@
                         </ul>
                     </nav>
 
-                {% if view.ranked_tags | length %}
+                {% if view.keywords %}
                     <nav class="article-tags">
                         <h4 class="article-tags__title">Schlagwörter</h4>
                         <ul class="article-tags__list" itemprop="keywords">
-                        {% for tag in view.ranked_tags[:6] -%}
-                            {% if tag.url_value %}
-                                <li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link"
+                        {% for keyword in view.keywords[:6] -%}
+                            {% if keyword.link %}
+                                <li><a href="{{ request.route_url('home') }}{{ keyword.link }}" class="article-tags__link"
                                     data-vars-number="{{ loop.index }}"
-                                    data-vars-link-text="{{ tag.label }}"
-                                    data-vars-url="{{ request.route_url('home')  | substring_from('://') }}thema/{{ tag.url_value }}"
-                                >{{ tag.label }}</a>
+                                    data-vars-link-text="{{ keyword.label }}"
+                                    data-vars-url="{{ request.route_url('home')  | substring_from('://') }}{{ keyword.link }}"
+                                >{{ keyword.label }}</a>
                                 {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
                                 </li>
                             {% else %}
-                                <li><span class="article-tags__link">{{ tag.label }}</span>
+                                <li><span class="article-tags__link">{{ keyword.label }}</span>
                                 {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
                                 </li>
                             {% endif %}
@@ -267,9 +255,6 @@
 
             {% block footer_ad %}
                 {% if toggles('amp_advertising') %}
-                    {% include "zeit.web.core:templates/amp/ads/tile_8.html" %}
-                {% endif %}
-                {% if toggles('amp_new_advertising') %}
                     {% include "zeit.web.core:templates/amp/amp-ads/tile_8.html" %}
                 {% endif %}
             {% endblock footer_ad %}

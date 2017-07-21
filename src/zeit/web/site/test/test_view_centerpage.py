@@ -27,7 +27,7 @@ import zeit.web.site.view_centerpage
 
 
 screen_sizes = ((320, 480, True), (520, 960, True),
-                (768, 1024, False), (980, 1024, False))
+                (768, 1024, False), (1000, 1024, False))
 
 
 @pytest.fixture(scope='session', params=screen_sizes)
@@ -219,7 +219,7 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
         width = driver.execute_script(script)
         assert helper.size.get('width') == int('%.0f' % (width * 0.72))
 
-    elif screen_size[0] == 980:
+    elif screen_size[0] == 1000:
         width = driver.execute_script(script)
         assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
 
@@ -479,7 +479,7 @@ def test_parquet_should_display_meta_links_only_on_desktop(
     assert not more_link.is_displayed(), (
         'Parquet more-link should not be displayed on mobile.')
 
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     assert topic_links.is_displayed(), (
         'Parquet topic-links must be displayed on desktop.')
     assert more_link.is_displayed(), (
@@ -497,7 +497,7 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
     assert not small_teaser.is_displayed(), (
         'Small parquet teaser should hide it‘s image on mobile.')
 
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     assert small_teaser.is_displayed(), (
         'Small parquet teaser must show it‘s image on desktop.')
 
@@ -685,7 +685,7 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 768:
         assert teaser.size.get('width') == (int(
             round((main_width - gutter_width) / 3.0) - gutter_width))
-    elif screen_size[0] == 980:
+    elif screen_size[0] == 1000:
         assert teaser.size.get('width') == (int(
             round((main_width - gutter_width) / 3.0) - gutter_width))
 
@@ -903,7 +903,7 @@ def test_servicebox_present_in_wide_breakpoints(
         assert servicebox.is_displayed() is False, 'Servicebox displayed'
     if screen_size[0] == 768:
         assert servicebox.is_displayed() is True, 'Servicebox not displayed'
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert servicebox.is_displayed() is True, 'Servicebox not displayed'
 
 
@@ -1051,7 +1051,7 @@ def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
     assert gallery_text.is_displayed(), (
         'Gallery description text must be displayed on tablet.')
 
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     assert ressort_linktext.is_displayed(), (
         'Gallery Ressort linktext must be displayed on desktop.')
     assert gallery_counter.is_displayed(), (
@@ -1173,7 +1173,7 @@ def test_breakpoint_sniffer_script(
     if screen_size[0] == 768:
         assert "tablet" == driver.execute_script(
             "return window.Zeit.breakpoint.get()")
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert "desktop" == driver.execute_script(
             "return window.Zeit.breakpoint.get()")
 
@@ -1252,7 +1252,7 @@ def test_quiz_frame_dimensions(selenium_driver, testserver, screen_size):
     if screen_size[0] == 768:
         assert frame1.size.get('height') == 450
 
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert frame1.size.get('height') == 450
 
 
@@ -1347,9 +1347,18 @@ def test_adtile12_from_cp_extra_is_there(testbrowser):
     assert browser.cssselect('#ad-desktop-12')
 
 
-def test_adtile13_from_cp_extra_is_there(testbrowser):
+def test_adtile4_from_cp_extra_is_there(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/centerpage')
+    assert browser.cssselect('#ad-desktop-4')
+
+
+def test_adtile9_from_cp_extra_is_there(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
     browser = testbrowser('/zeit-online/parquet')
-    assert browser.cssselect('#ad-desktop-13')
+    assert browser.cssselect('#ad-desktop-9')
 
 
 def test_news_teaser_date_and_reference(jinja2_env):
@@ -1989,7 +1998,7 @@ def test_printkiosk_displays_items_according_to_breakpoint(
         assert teasers[1].is_displayed() is True
         assert teasers[2].is_displayed() is True
         assert teasers[3].is_displayed() is False
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert teasers[0].is_displayed() is True
         assert teasers[1].is_displayed() is True
         assert teasers[2].is_displayed() is True
@@ -2401,7 +2410,7 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
         width = teaser.size.get('width')
         assert helper.size.get('width') == int('%.0f' % (width * 0.72))
 
-    elif screen_size[0] == 980:
+    elif screen_size[0] == 1000:
         width = teaser.size.get('width')
         assert helper.size.get('width') == int('%.0f' % (width * 0.6666))
 

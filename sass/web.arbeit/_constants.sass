@@ -1,10 +1,17 @@
+// margins and paddings
+$gutter:				remify(20px)
+$page-padding:			remify(20px)
+$page-padding--small:	remify(14px)
+$cp-padding:			$gutter / 2
+$vertical-space:		remify(25px) // to be applied top+bottom. we want a 50px gap.
+$vertical-space--small:	remify(10px) // to be applied top+bottom. we want a 20px gap.
+
 @import "../constants"
 
 // ZAR-Specific colors, see https://app.zeplin.io/project/593a8568a97d09fb314fc3f3/styleguide
 $zar-sun-yellow: #ffe52c
 $zar-battleship-grey: #77777c
 $zar-marigold: #ffc800
-$zar-black: #252525
 $zar-white: #d8d8d8
 $zar-ocean-green: #3c9d6f
 $zar-faded-red: #cc3a46
@@ -12,10 +19,18 @@ $zar-charcoal-grey: #44444c
 $zar-darkish-pink: #e15561
 $zar-cool-grey: #99999c
 
-// assign colors
+// semantic color names
+$primary-color: $grey--mid-dark
+$color-text: $primary-color
+$color-body-text: $color-text
 $color-body-bg: #dfdfdf
-$color-body-text: $zar-black
 $color-page-bg: $white
-$color-text: $zar-black
 
-// TODO: define semantic names? $primary-color / $border-on-dark ?
+$color-border-on-bright: #cccccf
+
+// content lengths ... for ZON1000.
+// This can partly(!) be removed from ZAR when the
+// global constants are updated to ZON1000.
+$medium-content-width: remify(680px)
+$wide-content-width: remify(840px)
+$max-page-width: remify(1000px)

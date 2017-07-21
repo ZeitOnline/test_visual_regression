@@ -23,7 +23,7 @@
 	display: none // generally hidden on mobile
 	&[data-banner-label]:before
 		@extend %label
-		content: "Anzeige"
+		content: attr(data-banner-label)
 	+respond_min($break-mobile-ad-width)
 		display: table // generally visible on desktop
 		margin: remify(40px auto)
@@ -34,17 +34,28 @@
 		&:empty
 			display: none
 	&--3,
-	&--12
+	&--4,
+	&--5,
+	&--12,
+	&--16
 		margin: remify(14px auto)
 		max-width: remify(940px)
+		#zon1000 &
+			max-width: none
+			&[data-banner-label]:before
+				max-width: 1000px - 40px // if ad is maxpage wide, ad label should stay in grid
+				margin-left: auto
+				margin-right: auto
 	&--7,
 	&--8,
+	&--81,
 	&--9,
 	&--10,
 	&--11
 		width: remify(300px)
 	&--7-on-centerpage,
 	&--8-on-centerpage,
+	&--81-on-centerpage,
 	&--9-on-centerpage,
 	&--10-on-centerpage,
 	&--11-on-centerpage

@@ -403,34 +403,51 @@ class Base(object):
         return desc or self.seo_title_default
 
     @zeit.web.reify
-    def ranked_tags(self):
-        if not hasattr(self.context, 'keywords'):
-            return []
-
-        tags = []
-        for keyword in self.context.keywords:
-            if not keyword.label:
-                continue
-            elif not keyword.url_value:
-                uuid = keyword.uniqueId.replace('tag://', '')
-                keyword = zope.component.getUtility(
-                    zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
-                if keyword is None:
+    def keywords(self):
+        if zeit.web.core.application.FEATURE_TOGGLES.find('keywords_from_tms'):
+            conf = zope.component.getUtility(
+                zeit.web.core.interfaces.ISettings)
+            tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+            try:
+                uuid = zeit.cms.content.interfaces.IUUID(self.context).id
+                timeout = conf.get('retresco_timeout', 0.1)
+                return tms.get_article_keywords(uuid, timeout=timeout)
+            except:
+                log.warning(
+                    'Retresco keywords failed for %s', self.context.uniqueId,
+                    exc_info=True)
+                return []
+        else:
+            if not hasattr(self.context, 'keywords'):
+                return []
+            result = []
+            for keyword in self.context.keywords:
+                if not keyword.label:
                     continue
-            tags.append(keyword)
-        return tags
+                if not keyword.url_value:
+                    uuid = keyword.uniqueId.replace('tag://', '')
+                    keyword = zope.component.getUtility(
+                        zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
+                    if keyword is None:
+                        continue
+                if keyword.url_value:
+                    keyword.link = u'thema/{}'.format(keyword.url_value)
+                else:
+                    keyword.link = None
+                result.append(keyword)
+            return result
 
     @zeit.web.reify
     def meta_keywords(self):
-        if self.ranked_tags:
-            result = [x.label for x in self.ranked_tags]
+        if self.keywords:
+            result = [x.label for x in self.keywords]
         else:
             result = [self.ressort.title(), self.sub_ressort.title()]
         return [x for x in result if x]
 
     @zeit.web.reify
     def adc_keywords(self):
-        lowercase = [x.label.lower() for x in self.ranked_tags if x.label]
+        lowercase = [x.label.lower() for x in self.keywords if x.label]
         return ["".join(re.findall(r"\w", item)) for item in lowercase]
 
     @zeit.web.reify

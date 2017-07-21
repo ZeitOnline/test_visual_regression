@@ -223,7 +223,7 @@ def test_cp_has_valid_search_structure(testbrowser):
 
 
 @pytest.fixture(scope='session', params=(
-    (320, 480, 1), (520, 960, 1), (768, 1024, 0), (980, 1024, 0)))
+    (320, 480, 1), (520, 960, 1), (768, 1024, 0), (1000, 1024, 0)))
 def screen_size(request):
     """Run selenium test with multiple screen sizes."""
     return request.param
@@ -498,7 +498,7 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
         ' in more-dropdown on :hover')
 
     # desktop
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     # wait for animation
     try:
         WebDriverWait(driver, 1).until(

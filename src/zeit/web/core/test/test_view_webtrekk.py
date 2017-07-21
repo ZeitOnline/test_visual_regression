@@ -92,7 +92,7 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     assert('tablet.' + teaser[1] in track_str)
 
     # desktop
-    driver.set_window_size(980, 800)
+    driver.set_window_size(1000, 800)
 
     teaser_el = driver.find_element_by_css_selector(teaser[0])
     teaser_el.click()
@@ -137,7 +137,7 @@ def test_parquet_meta_provides_expected_webtrekk_strings(
     driver = selenium_driver
     driver.get('%s/zeit-online/webtrekk-test-setup'
                '#debug-clicktracking' % testserver.url)
-    driver.set_window_size(980, 800)
+    driver.set_window_size(1000, 800)
 
     title = driver.find_element_by_css_selector('.parquet-meta__title')
     title.click()
@@ -183,7 +183,7 @@ def test_buzzboard_provides_expected_webtrekk_strings(
     assert track_str.endswith('/zeit-online/article/01')
 
     # desktop
-    driver.set_window_size(980, 800)
+    driver.set_window_size(1000, 800)
     link.click()
     track_str = driver.execute_script("return window.trackingData")
     assert track_str.startswith('stationaer.minor.2.4.teaser-buzz.text|')
@@ -214,7 +214,7 @@ def test_navi_provides_expected_webtrekk_strings(
     driver = selenium_driver
     driver.get('%s/zeit-online/webtrekk-test-setup'
                '#debug-clicktracking' % testserver.url)
-    driver.set_window_size(980, 800)
+    driver.set_window_size(1000, 800)
 
     nav_el = driver.find_element_by_css_selector(navi[0])
     nav_el.click()
@@ -293,7 +293,7 @@ def test_article_elements_provide_expected_id_for_webtrekk(
     assert('tablet.' + article[1] in track_str)
 
     # desktop
-    driver.set_window_size(980, 800)
+    driver.set_window_size(1000, 800)
 
     article_el = driver.find_element_by_css_selector(article[0])
     article_el.click()
@@ -306,7 +306,7 @@ def test_video_stage_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     url = testserver.url + '{}#debug-clicktracking'
     driver = selenium_driver
-    driver.set_window_size(980, 800)
+    driver.set_window_size(1000, 800)
     driver.get(url.format('/zeit-online/video-stage'))
 
     link = driver.find_element_by_class_name('video-large__combined-link')
@@ -333,7 +333,7 @@ def test_video_block_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     url = testserver.url + '{}#debug-clicktracking'
     driver = selenium_driver
-    driver.set_window_size(980, 800)
+    driver.set_window_size(1000, 800)
 
     # test ZON article
     driver.get(url.format('/zeit-online/article/zeit'))
@@ -395,7 +395,7 @@ def test_video_page_provides_expected_webtrekk_string(
         selenium_driver, testserver):
     url = testserver.url + '{}#debug-clicktracking'
     driver = selenium_driver
-    driver.set_window_size(980, 800)
+    driver.set_window_size(1000, 800)
     driver.get(url.format(('/video/2014-01/1953013471001/motorraeder-foto-'
                            'momente-die-stille-schoenheit-der-polarlichter')))
 
