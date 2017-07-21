@@ -2,8 +2,7 @@
 <features>
   <access_status_ivw>true</access_status_ivw>
   <access_status_webtrekk>true</access_status_webtrekk>
-  <amp_advertising>false</amp_advertising>
-  <amp_new_advertising>true</amp_new_advertising>
+  <amp_advertising>true</amp_advertising>
   <arbeit>true</arbeit>
   <article_lineage>true</article_lineage>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
@@ -14,10 +13,6 @@
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
   <iqd_digital_transformation>true</iqd_digital_transformation>
-  <iqd_mobile_transition_article>true</iqd_mobile_transition_article>
-  <iqd_mobile_transition_zco_cp>true</iqd_mobile_transition_zco_cp>
-  <iqd_mobile_transition_zon_cp>true</iqd_mobile_transition_zon_cp>
-  <iqd_mobile_transition_zmo_cp>true</iqd_mobile_transition_zmo_cp>
   <keywords_from_tms>false</keywords_from_tms>
   <rawr_iframe>true</rawr_iframe>
   <reader_revenue>true</reader_revenue>
