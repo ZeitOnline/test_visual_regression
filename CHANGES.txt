@@ -4,13 +4,13 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-(nothing yet)
+For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggle.xml) and Prod: remove `iqd_mobile_transition_*` feature toggles AFTER deployment.
 
 
 3.72 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4045: New ad tags for ZON HP/CP
 
 
 3.71.1 (2017-07-19)
