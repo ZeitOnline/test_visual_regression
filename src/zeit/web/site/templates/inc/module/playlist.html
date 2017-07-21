@@ -1,7 +1,12 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% if view.is_hp %}
-{% include "zeit.web.core:templates/inc/ads/places/desktop/place12.html" %}
+    {% if toggles('iqd_digital_transformation') -%}
+        <!-- P4 -->
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place4.html" %}
+    {% else %}
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place12.html" %}
+    {% endif -%}
 {% endif %}
 
 <section class="video-stage" id="video-stage">

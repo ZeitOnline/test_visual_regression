@@ -184,12 +184,6 @@ def test_amp_article_shows_ads_correctly(testbrowser, monkeypatch):
         'amp_advertising': True}.get)
     browser = testbrowser('/amp/zeit-online/article/amp')
     ads = browser.cssselect('.advertising')
-    assert len(ads) == 3
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'amp_new_advertising': True, 'amp_advertising': False}.get)
-    browser = testbrowser('/amp/zeit-online/article/amp')
-    ads = browser.cssselect('.advertising')
     assert len(ads) == 4
 
 
