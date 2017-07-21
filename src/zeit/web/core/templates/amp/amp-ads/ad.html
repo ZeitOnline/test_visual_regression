@@ -1,4 +1,4 @@
-{% if toggles('amp_new_advertising') -%}
+{% if toggles('amp_advertising') -%}
 {% set keywords = ['nospa', 'enozqi', 'iqdzeit_amp'] %}
 {% set additional_keywords = ['iqadtile%s' | format(tile_number)] %}
 {% set iqadtest_keyword = ['iqadtest'] if settings('environment') != 'production' else [] %}
