@@ -10,6 +10,8 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 3.72 (unreleased)
 -----------------
 
+- ZON-4018: Add zplus badge to ZCO articles
+
 - ZON-4045: New ad tags for ZON HP/CP
 
 - ZON-4046: New ad tags for ZMO HP/CP
