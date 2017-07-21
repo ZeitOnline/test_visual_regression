@@ -1,0 +1,100 @@
+.article-toc
+	max-width: remify($max-overview-width)
+	&__container
+		padding-top: remify(8px)
+		font-size: remify(15px)
+		margin-bottom: remify(20px)
+		position: relative
+		+respond-min($break-tablet-min)
+			float: left
+			margin-right: remify(20px)
+			width: remify(240px)
+		+respond-min($break-desktop-min)
+			margin-left: remify(-50px)
+
+	&__headline
+		display: block
+		font-family: $font-patronbold
+		display: inline-block
+		font-size: remify(18px)
+		letter-spacing: $letter-spacing-l
+		margin: remify(0 0 8px)
+		+respond-min($break-tablet-min)
+			display: none
+		&[role="button"]
+			cursor: pointer
+			&:after
+				+build-mobile-plus-minus-button()
+				background: $primary-color
+			+respond-min($break-tablet-min)
+				cursor: default
+		&[aria-expanded="true"]
+			&:after
+				content: "\2212" // U+2212 = − (minus sign)
+
+	&__list
+		letter-spacing: $letter-spacing-s
+		list-style: none
+		margin: 0
+		padding: 0
+		&[aria-hidden="true"]
+			display: none
+			+respond-min($break-tablet-min)
+				display: block
+
+	&__item
+		margin: 0
+		padding: remify(16px 0)
+		strong
+			line-height: 1
+			font-family: $font-patronbold
+			font-size: remify(18px)
+			float: left
+			+respond-min($break-tablet-min)
+				color: $zar-marigold
+		span
+			display: block
+			margin-left: remify(40px)
+			position: relative
+			&:before
+				content: "\2014" // — = em dash
+				font-weight: normal
+				left: -1.3em
+				position: absolute
+				+respond-min($break-tablet-min)
+					color: $zar-marigold
+		+respond-min($break-tablet-min)
+			padding: remify(0 0 16px)
+
+	&__link
+		color: $primary-color
+		+on-interaction
+			color: $color-link--default
+
+	&__onesie
+		color: $primary-color
+		letter-spacing: $letter-spacing-m
+		position: absolute
+		right: 0
+		top: remify(10px)
+		+respond-min($break-tablet-min)
+			border-bottom: 1px solid $primary-color
+			color: $color-text
+			font-weight: bold
+			position: static
+			margin-left: remify(40px)
+		+on-interaction
+			+respond-min($break-tablet-min)
+				border-bottom: 1px solid $color-link--default
+			color: $color-link--default
+
+	+respond-max($break-tablet-min)
+		background-color: $color-bgr-toc
+		margin: 0 (-$page-padding--small)
+		padding: 0 $page-padding--small
+		&__item
+			&:not(:first-child)
+				border-top: 1px solid $dusty-gray
+		&__onesie
+			&:after
+				content: " \203A" // › = single right-pointing angle quotation mark
