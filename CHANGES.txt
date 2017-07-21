@@ -14,6 +14,8 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 
 - ZON-4046: New ad tags for ZMO HP/CP
 
+- ZON-4047: New ad tags for ZCO HP/CP
+
 
 3.71.1 (2017-07-19)
 -------------------
