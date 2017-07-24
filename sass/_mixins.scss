@@ -438,7 +438,7 @@
 	font-size: remify(17px);
 	font-weight: normal;
 	line-height: remify(17px);
-	margin-left: remify(8px);
+	margin-left: remify(8.6px);
 	text-align: center;
 	width: remify(17px);
 	display: inline-block;
@@ -585,4 +585,12 @@ $inline-block-alignment: none !default;
 		position: absolute;
 		top: 0;
 	}
+}
+
+// Avoid jumping while the image gets lazy-loaded
+@mixin reserve-space-for-teaser-media($ratio) {
+	height: 0;
+	position: relative;
+	overflow: hidden;
+	padding-bottom: $ratio;
 }

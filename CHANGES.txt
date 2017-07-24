@@ -10,7 +10,11 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 3.73 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-700: Jump to paywall form from metadata commentlink
+
+- ARBEIT-26: Add article toc to ZEIT Arbeit
+
+- ARBEIT-33: Introduce duo region and duo teaser to ZEIT Arbeit
 
 
 3.72 (2017-07-24)

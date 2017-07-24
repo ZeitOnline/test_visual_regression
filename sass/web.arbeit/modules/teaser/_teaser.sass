@@ -8,8 +8,6 @@
 %teaser-combined-link
 	color: inherit
 
-// TODO: Padding klug (und korrekt) hinkriegen
-
 // ------------------------------------------------------
 // TEASER-KICKER
 
@@ -48,6 +46,14 @@
 	font-size: remify(20px)
 	line-height: 1.3
 
+%teaser-title--s
+	@extend %teaser-title
+	font-size: remify(22px)
+	line-height: 1.2
+	+respond-min($break-tablet-min)
+		font-size: remify(28px)
+		line-height: 1.3
+
 %teaser-title--xl
 	@extend %teaser-title
 	font-size: remify(28px)
@@ -59,19 +65,23 @@
 // ------------------------------------------------------
 // TEASER-TEXT
 
-%teaser-text
-	color: $zar-battleship-grey
+%teaser-text-fontsize
 	font-size: remify(16px)
 	line-height: 1.5
 	+respond-min($break-tablet-min)
 		font-size: remify(15px)
 		line-height: 1.4
 
+%teaser-text
+	@extend %teaser-text-fontsize
+	color: $zar-battleship-grey
+
 // ------------------------------------------------------
 // TEASER-METADATA
 
 %teaser-metadata
 	color: $zar-cool-grey
+	@extend %teaser-text-fontsize
 	letter-spacing: $letter-spacing-s
 	> *:not(:last-child):not(:empty):after
 		content: " \2014 " // — = em dash
