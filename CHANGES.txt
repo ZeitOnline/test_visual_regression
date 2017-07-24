@@ -7,7 +7,7 @@ POSTDEPLOY
 For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggle.xml) and Prod: remove `iqd_mobile_transition_*` feature toggles AFTER deployment.
 
 
-3.72 (unreleased)
+3.72 (2017-07-24)
 -----------------
 
 - ZON-4018: Add zplus badge to ZCO articles
