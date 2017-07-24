@@ -1,7 +1,7 @@
 .article-toc
 	max-width: remify($max-overview-width)
 	&__container
-		padding-top: remify(8px)
+		padding: remify(8px 0)
 		font-size: remify(15px)
 		margin-bottom: remify(20px)
 		position: relative
@@ -13,12 +13,10 @@
 			margin-left: remify(-50px)
 
 	&__headline
-		display: block
 		font-family: $font-patronbold
-		display: inline-block
 		font-size: remify(18px)
 		letter-spacing: $letter-spacing-l
-		margin: remify(0 0 8px)
+		margin: 0
 		+respond-min($break-tablet-min)
 			display: none
 		&[role="button"]
@@ -45,6 +43,8 @@
 	&__item
 		margin: 0
 		padding: remify(16px 0)
+		&--current
+			font-weight: bold
 		strong
 			line-height: 1
 			font-family: $font-patronbold
@@ -72,26 +72,23 @@
 			color: $color-link--default
 
 	&__onesie
-		color: $primary-color
+		color: $color-text
 		letter-spacing: $letter-spacing-m
 		position: absolute
 		right: 0
 		top: remify(10px)
 		+respond-min($break-tablet-min)
-			border-bottom: 1px solid $primary-color
-			color: $color-text
+			border-bottom: 1px solid currentColor
 			font-weight: bold
-			position: static
 			margin-left: remify(40px)
+			position: static
 		+on-interaction
-			+respond-min($break-tablet-min)
-				border-bottom: 1px solid $color-link--default
 			color: $color-link--default
 
 	+respond-max($break-tablet-min)
-		background-color: $color-bgr-toc
-		margin: 0 (-$page-padding--small)
-		padding: 0 $page-padding--small
+		background-color: $color-bg-toc
+		+padded
+		+unpadded
 		&__item
 			&:not(:first-child)
 				border-top: 1px solid $silver
