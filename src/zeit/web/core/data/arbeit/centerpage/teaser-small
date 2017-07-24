@@ -78,7 +78,7 @@
     <cluster area="id-41a2899d-b569-4c42-c713-d5bdbd86a64f" kind="trio">
       <region area="id-41a2899d-b569-4c42-c713-bd5dbd68a64f" kind="trio">
         <container cp:type="teaser" module="zar-small" cp:__name__="id-d4e51b5a-215d-4c6f-b57a-e357dbf3be1b" force_mobile_image="True">
-          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/article/01-digitale-nomaden"></block>
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/article/paginated"></block>
         </container>
       </region>
       <region area="id-41a2899d-b569-4c42-c713-bd5dbd68a63f" kind="trio">
