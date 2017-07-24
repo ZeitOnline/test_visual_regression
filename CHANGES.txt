@@ -12,6 +12,8 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 
 - BUG-700: Jump to paywall form from metadata commentlink
 
+- ARBEIT-26: Add article toc to ZEIT Arbeit
+
 
 3.72 (2017-07-24)
 -----------------

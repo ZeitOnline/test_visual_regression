@@ -3,7 +3,7 @@
         <div class="article__page-teaser">
             Seite {{ view.pagination.current }}/{{ view.pagination.total }}
             {%- if view.current_page.teaser -%}
-                : <h1>{{ view.current_page.teaser }}</h1>
+                : <h1 class="article__page-teaser-title">{{ view.current_page.teaser }}</h1>
             {% endif %}
         </div>
     {% else %}
