@@ -7,12 +7,22 @@ POSTDEPLOY
 For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggle.xml) and Prod: remove `iqd_mobile_transition_*` feature toggles AFTER deployment.
 
 
-3.72 (unreleased)
+3.73 (unreleased)
 -----------------
+
+- BUG-700: Jump to paywall form from metadata commentlink
+
+
+3.72 (2017-07-24)
+-----------------
+
+- ZON-4018: Add zplus badge to ZCO articles
 
 - ZON-4045: New ad tags for ZON HP/CP
 
 - ZON-4046: New ad tags for ZMO HP/CP
+
+- ZON-4047: New ad tags for ZCO HP/CP
 
 
 3.71.1 (2017-07-19)
