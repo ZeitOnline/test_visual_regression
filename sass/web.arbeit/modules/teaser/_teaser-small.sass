@@ -1,0 +1,42 @@
+.teaser-small
+	@extend %teaser
+	border-bottom: 1px $color-border-on-bright solid
+	padding: $vertical-space--small $page-padding--small
+	+respond-min($break-tablet-min)
+		border: none
+		padding: $vertical-space $cp-padding
+
+	&__media
+		@extend %teaser-media
+		margin-bottom: remify(12px)
+		+respond-max($break-tablet-min)
+			display: none
+
+	&__heading
+		margin: 0
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__series-label
+		@extend %teaser-kicker--s
+
+	&__kicker
+		@extend %teaser-kicker--s
+		margin-bottom: remify(8px)
+
+	&__title
+		@extend %teaser-title--xs
+		margin-bottom: remify(8px)
+
+	&__text
+		@extend %teaser-text
+		margin: remify(0 0 8px)
+
+	&__metadata
+		@extend %teaser-metadata
+		font-family: $font-franziska
+		font-style: italic
+
+	&__commentcount
+		@extend %teaser-commentcount

@@ -1,13 +1,9 @@
 .teaser-dossier
-	@extend %teaser
 	border-bottom: 1px solid $color-border
-	margin: 0
-	padding: 0 0 $vertical-space
 	+respond-min($break-areas)
 		border-bottom: none
-		overflow: hidden
 		margin: 0 $page-padding
-		padding: 0
+		overflow: hidden
 		position: relative
 		+font-smoothing
 		+teaser-image-text-shadow
@@ -15,15 +11,13 @@
 		height: 0
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
 		background-color: $zon-lighter-grey // placeholder for image
-		margin: 0 0 $petite
 		+respond-min($break-tablet-min)
 			background-color: rgb(0, 15, 20) // placeholder for image; same as default for +teaser-image-dark-overlay
-			margin: 0
 			padding-bottom: 100% / 7 * 3 // image variant 'cinema'
 	&__media-link
 		+teaser-image-dark-overlay
 	&__container
-		padding: 0 $page-padding
+		padding: $vertical-space $page-padding--small
 		+respond-min($break-tablet-min)
 			bottom: 0
 			left: 0
@@ -89,12 +83,12 @@
 		color: $grey--light
 		font-size: em(14px)
 		font-weight: 700
-		text-transform: uppercase
-		margin: remify(-64px) 0 0 $page-padding
+		margin: remify(-44px) 0 0 $page-padding--small
 		padding-bottom: remify(6px)
 		position: absolute
+		text-transform: uppercase
 		+respond-min($break-areas)
-			left: remify(40px)
+			left: remify(36px)
 			margin: 0
 			top: remify(22px)
 

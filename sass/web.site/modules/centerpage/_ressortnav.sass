@@ -1,0 +1,55 @@
+.ressortnav
+	padding: 0 $page-padding--small
+	&__headline
+		border-bottom: 1px solid $zon-light-grey
+		color: $zon-dark-grey
+		font-size: em(16px)
+		letter-spacing: $letter-spacing-m
+		line-height: 1.2
+		margin: 0
+		padding: 0 0 remify(16px)
+		text-transform: uppercase
+		width: 100%
+		&[role="button"]
+			cursor: pointer
+			&:after
+				+build-mobile-plus-minus-button()
+			+respond-min($break-tablet-min)
+				cursor: default
+		&[aria-expanded="true"]
+			&:after
+				content: "\2212"
+		+respond-min($break-tablet-min)
+			margin: 0 auto
+			max-width: 41.25rem
+	&__list
+		display: grid
+		grid-column-gap: remify(15px)
+		grid-template-columns: repeat(2, 1fr)
+		list-style: none
+		margin-top: remify(5px)
+		overflow: hidden
+		padding: 0
+		&[aria-hidden="true"]
+			display: none
+			+respond-min($break-tablet-min)
+				display: block
+		+respond-min($break-tablet-min)
+			grid-template-columns: repeat(4, 1fr)
+	&__item
+		border-bottom: 1px solid $zon-lighter-grey
+		float: left
+		min-width: 50%
+		overflow: hidden
+		padding: remify(10px) 0 remify(10px)
+		text-overflow: ellipsis
+		white-space: nowrap
+		+respond-min($break-tablet-min)
+			border-bottom: none
+			display: block
+			min-width: 25%
+	+respond-min($break-areas)
+		clear: both
+		margin: 0 auto
+		max-width: remify(620px) + 2 * $page-padding
+		padding: 0 $page-padding

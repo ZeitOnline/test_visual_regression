@@ -20,10 +20,11 @@ import zeit.web.core.navigation
 import zeit.web.core.template
 import zeit.web.core.utils
 import zeit.web.core.view
-import zeit.web.core.view_centerpage
 import zeit.web.core.centerpage
+import zeit.web.core.view_centerpage
 import zeit.web.site.module.buzzbox
 import zeit.web.site.module.printbox
+import zeit.web.site.view
 
 
 log = logging.getLogger(__name__)
@@ -217,7 +218,7 @@ class LegacyCenterpage(Centerpage):
             region_fullwidth = Region([self.area_solo])
             regions.append(region_fullwidth)
 
-        region_multi = Region([self.area_major, self.area_minor], kind='multi')
+        region_multi = Region([self.area_major, self.area_minor], kind='duo')
         regions.append(region_multi)
 
         regions += self.region_list_parquet

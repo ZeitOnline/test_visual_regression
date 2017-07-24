@@ -4,7 +4,6 @@ import copy
 import dogpile.cache
 import lxml.etree
 import mock
-import pytest
 
 import pyramid_dogpile_cache2
 import pyramid.testing
@@ -424,12 +423,19 @@ def test_block_portraitbox_should_contain_expected_structure(tplbrowser):
         '.portraitbox.article__item.article__item--marginalia')
 
 
-@pytest.mark.skip(reason='Hotfix rollback, the feature is broken')
 def test_block_portraitbox_should_render_without_reference(testbrowser):
     browser = testbrowser('/zeit-online/article/portraitbox_inline')
     assert browser.cssselect('.portraitbox__heading')[0].text == 'Kai Biermann'
     assert (browser.cssselect('.portraitbox__body')[0].text ==
             u'Studierter Psychologe, längst aber Journalist')
+
+
+def test_block_portraitbox_should_render_nothing_for_invalid_reference(
+        testbrowser):
+    browser = testbrowser('/zeit-online/article/portraitbox_invalid')
+    assert 'Portraitbox' in browser.cssselect(
+        '.article-heading__title')[0].text
+    assert not browser.cssselect('.portraitbox__heading')
 
 
 def test_block_quiz_should_contain_expected_structure(tplbrowser):
@@ -539,3 +545,12 @@ def test_paragraph_should_have_expected_length():
         u'<p><strong><em>foo</em></strong></p>')
     p = zeit.web.core.block.Paragraph(model_block)
     assert len(p) == 3
+
+
+def test_volume_should_ignore_invalid_references(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/volumeteaser')
+    article.xml.xpath('//volume')[0].set('href', 'http://xml.zeit.de/invalid')
+    body = zeit.content.article.edit.interfaces.IEditableBody(article)
+    module = body.values()[1]
+    assert zeit.web.core.interfaces.IFrontendBlock(module, None) is None

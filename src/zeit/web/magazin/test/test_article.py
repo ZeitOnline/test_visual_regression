@@ -114,7 +114,7 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
 def test_article03_has_correct_webtrekk_values(httpbrowser):
     browser = httpbrowser('/zeit-magazin/article/03')
     source = browser.cssselect(
-        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+        'img[src^="https://audev.zeit.de/"]')[0].get('src')
     query = urlparse.parse_qs(urlparse.urlparse(source).query, True)
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -194,7 +194,6 @@ def test_article03_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small',
         'cp32': 'unfeasible'}
 
 
@@ -204,7 +203,7 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
-        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+        'img[src^="https://audev.zeit.de/"]')[0].get('src')
     query = urlparse.parse_qs(urlparse.urlparse(source).query, True)
 
     # content group
@@ -252,7 +251,6 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
         'cp28': 'free',
         'cp29': 'unfeasible',
         'cp30': 'open',
-        'cp31': 'share_buttons_small',
         'cp32': 'unfeasible'}
 
 
@@ -262,7 +260,7 @@ def test_cp_has_correct_webtrekk_values(httpbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
-        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+        'img[src^="https://audev.zeit.de/"]')[0].get('src')
     query = urlparse.parse_qs(urlparse.urlparse(source).query, True)
 
     # content group
@@ -346,7 +344,7 @@ def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
     webtrekk_config = script.text_content().strip()
     source = browser.cssselect(
-        'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+        'img[src^="https://audev.zeit.de/"]')[0].get('src')
 
     host = browser.host.replace('http://', '')
     assert ('wt.contentId = "redaktion.zeit-magazin..toedlichekeime'
@@ -378,7 +376,7 @@ def test_webtrekk_noscript_contains_user_info(httpbrowser):
         browser = httpbrowser('/zeit-magazin/article/03',
                               cookies={'my_sso_cookie': 'just_be_present'})
         webtrekk = browser.cssselect(
-            'img[src^="http://zeit01.webtrekk.net/"]')[0].get('src')
+            'img[src^="https://audev.zeit.de/"]')[0].get('src')
         assert 'cd=123' in webtrekk
 
 
@@ -530,23 +528,23 @@ def test_article08_has_correct_print_source(testbrowser):
 
 def test_article_1_10_produce_no_error(testbrowser):
     assert testbrowser('/zeit-magazin/article/01').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/02').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/03').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/04').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/05').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/06').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/08').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/09').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/10').cssselect(
-        'div.article__wrap')
+        'div.article__body')
 
 
 def test_article_1_10_have_correct_h1(testbrowser):
@@ -579,17 +577,17 @@ def test_article_1_10_have_correct_h1(testbrowser):
 
 def test_header_articles_produce_no_error(testbrowser):
     assert testbrowser('/zeit-magazin/article/header-default').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-traum').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-text-only').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-briefmarke').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-leinwand').cssselect(
-        'div.article__wrap')
+        'div.article__body')
     assert testbrowser('/zeit-magazin/article/header-mode').cssselect(
-        'div.article__wrap')
+        'div.article__body')
 
 
 def test_header_articles_have_correct_h1(testbrowser):
@@ -915,17 +913,15 @@ def test_share_buttons_are_present(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
-    assert 'sharing-menu--big' not in sharing_menu.attrib['class']
-
     #  facebook
     parts = urlparse.urlparse(links[0].attrib['href'])
     query = urlparse.parse_qs(parts.query)
     url = query.get('u').pop(0)
-    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share_small.link' in url
+    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share.link' in url
     assert 'utm_medium=sm' in url
     assert 'utm_source=facebook_zonaudev_ext' in url
     assert 'utm_campaign=ref' in url
-    assert 'utm_content=zeitde_share_small_link_x' in url
+    assert 'utm_content=zeitde_share_link_x' in url
 
     #  twitter
     parts = urlparse.urlparse(links[1].attrib['href'])
@@ -933,7 +929,7 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('text').pop(0) == (
         'Der Chianti hat eine zweite Chance verdient')
     assert query.get('via').pop(0) == 'ZEITmagazin'
-    assert 'share_small' in query.get('url').pop(0)
+    assert 'share' in query.get('url').pop(0)
 
     #  whatsapp
     parts = urlparse.urlparse(links[2].attrib['href'])
@@ -959,33 +955,6 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[2].text == 'WhatsApp'
     assert labels[3].text == 'Facebook Messenger'
     assert labels[4].text == 'Mailen'
-
-
-def test_share_buttons_are_big(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/04')
-    sharing_menu = browser.cssselect('.sharing-menu')[0]
-    links = sharing_menu.cssselect('.sharing-menu__link')
-
-    assert 'sharing-menu--big' in sharing_menu.attrib['class']
-    assert len(links) == 5
-
-    for link in links:
-        assert 'share_big' in link.attrib['href']
-
-
-def test_article_view_has_share_buttons_set_correctly(
-        application, dummy_request):
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/03')
-    view = zeit.web.magazin.view_article.Article(article, dummy_request)
-    assert not view.share_buttons
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_small'
-
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/04')
-    view = zeit.web.magazin.view_article.Article(article, dummy_request)
-    assert view.share_buttons == 'big'
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
 
 
 def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):

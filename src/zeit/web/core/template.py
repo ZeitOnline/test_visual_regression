@@ -160,24 +160,29 @@ def zplus_content(content):
 
 
 @zeit.web.register_filter
-def tag_with_logo_content(content):
+def tag_with_logo_content(content, area_kind=None):
     if toggles('tag_logos'):
-        logotags = [('D17', 'tag-d17')]
+        # each tupel consists of:
+        # - Tag String (keyword on the article)
+        # - File name of the SVG logo (returned here and used in template)
+        # - Area where the taglogo should not be shown
+        logotags = [('D17', 'tag-d17', 'd17-parquet')]
         try:
             for keyword in content.keywords:
-                for label, logo in logotags:
+                for label, logo, exclude_logo_from_area in logotags:
                     if keyword.label == label:
-                        return logo
+                        if area_kind != exclude_logo_from_area:
+                            return logo
         except AttributeError:
             pass
     return False
 
 
 @zeit.web.register_filter
-def logo_icon(teaser, kind=None, zplus=None):
+def logo_icon(teaser, area_kind=None, zplus=None):
     """Function to add a list of icon templates to a teaser
     :param teaser:      Teaser to which the icons are added
-    :param kind:        kind of the area the teaser is in
+    :param area_kind:   kind of the area the teaser is in
     :param zplus:       chose to show or show not the z+ section
                             None:   Show both z* and rest of icons
                             'skip': skip z+ icons
@@ -199,7 +204,7 @@ def logo_icon(teaser, kind=None, zplus=None):
             return templates
 
     # exclusive icons, set and return
-    if zmo_content(teaser) and kind != 'zmo-parquet':
+    if zmo_content(teaser) and area_kind != 'zmo-parquet':
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
@@ -210,9 +215,9 @@ def logo_icon(teaser, kind=None, zplus=None):
         return templates
 
     # inclusive icons may appear both
-    if tag_with_logo_content(teaser) and not zplus_icon:
+    if tag_with_logo_content(teaser, area_kind) and not zplus_icon:
         templates.append('taglogo')
-    if zco_content(teaser) and kind != 'zco-parquet':
+    if zco_content(teaser) and area_kind != 'zco-parquet':
         templates.append('logo-zco')
 
     return templates
@@ -833,7 +838,8 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
         'zeit.web.static', 'css/svg/{}/{}.svg'.format(subpath, name))
     try:
         xml = lxml.etree.parse(url)
-    except (IOError, lxml.etree.XMLSyntaxError):
+    except (IOError, lxml.etree.XMLSyntaxError) as e:
+        log.debug('Error while reading Icon {}: {}'.format(name, e.message))
         return ''
     try:
         title = xml.find('{http://www.w3.org/2000/svg}title').text
@@ -845,7 +851,7 @@ def get_svg_from_file_cached(name, class_name, package, cleanup, a11y):
     # Our SVGs get actually cleaned by
     # https://github.com/ZeitOnline/zeit.web/blob/master/svgo.json, but we
     # preserve this in case we use uncleaned SVGs that have not been processed
-    # by out build task.
+    # by our build task.
     if cleanup:
         lxml.etree.strip_attributes(
             xml, 'fill', 'fill-opacity', 'stroke', 'stroke-width')
@@ -894,3 +900,22 @@ def rewrite_for_ssl_if_required(url, rewrite_required=False):
         return url.replace(
             'http://www.zeit.de/', 'https://ssl.zeit.de/www.zeit.de/')
     return url
+
+
+# Use case: The view.adcontroller_values are a list of tuples,
+# which is looped for regular output in our templates.
+# But for Instant Articles, we need access to specific ones.
+@zeit.web.register_filter
+def get_key_from_tuplelist(list, key):
+    try:
+        return [item[1] for item in list if item[0] == key].pop()
+    except IndexError:
+        pass
+    return ''
+
+
+@zeit.web.register_filter
+def remove_tags_from_xml(block, *tagnames):
+    xml = block.model_block.xml
+    lxml.etree.strip_tags(xml, *tagnames)
+    return zeit.web.core.block._inline_html(xml)

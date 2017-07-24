@@ -7,11 +7,13 @@ $font-franziska: "FranziskaWebPro", $serif-fallbacks !default
 $font-tabletgothic: "TabletGothic", $sans-fallbacks !default
 $font-beckett: "BeckettLight", "Impact", "Arial Black", "Arial Bold", Gadget, sans-serif !default
 $font-tiemann: "TiemannLight", $serif-fallbacks !default
+$font-patronbold: "PatronBold", $sans-fallbacks !default
 
 // basic styles
-$base-font-size: 16px // do not use '!default' here, because compass is defining $base-font-size and $base-line-height
+$base-font-size: 16px !default
 $base-font-family: $font-tabletgothic !default
-$base-line-height: 1.5 // do not use '!default' here, because compass is defining $base-font-size and $base-line-height
+$base-line-height: 1.5 !default
+$is-advertorial: false !default
 
 // margins/paddings in px
 $hair--px:         1px !default
@@ -88,6 +90,7 @@ $font-xxxl:  em($font-xxxl--px)
 $font-xxxxl: em($font-xxxxl--px)
 
 // letter-spacing
+$letter-spacing-xl: 0.125em // 2px
 $letter-spacing-l: 0.08em // 1.28px
 $letter-spacing-m: 0.05em // 0.8px
 $letter-spacing-s: 0.03em // a half of a pixel
@@ -157,8 +160,8 @@ $color-overlay:             #26262C
 $medium-content-width:  remify(660px) !default
 $max-page-width:        remify(980px) !default
 $max-longform-width:    remify(1364px) !default
-$max-overview-width:	remify(820px) !default
-$max-author-list-width:	remify(760px) !default
+$max-overview-width:    remify(820px) !default
+$max-author-list-width: remify(760px) !default
 
 // layout
 $gutter: remify(20px) !default
@@ -174,10 +177,6 @@ $break-page-padding: $break-tablet-min !default
 
 // *ad* breakpoint
 $break-mobile-ad-width: em(768px) !default
-
-// for comments
-$comments__break-overlap:  em(768px)
-$comments__break-outside: em(1360px) // 1280px | 1360px | 1440px
 
 // element sizes
 $stamp-width: em(240px)

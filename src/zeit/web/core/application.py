@@ -133,9 +133,14 @@ class Application(object):
             'instantarticle-item', '/instantarticle-item/*traverse')
         config.add_route('fbia', '/fbia/*traverse')
         config.add_route('amp', '/amp/*traverse')
-        config.add_route('json_delta_time', '/json/delta_time')
-        config.add_route('json_update_time', '/json_update_time/{path:.*}')
-        config.add_route('json_comment_count', '/json/comment_count')
+
+        config.add_renderer('jsonp', pyramid.renderers.JSONP(
+            param_name='callback', indent=2))
+        config.add_route('json_delta_time', '/json/delta-time')
+        config.add_route('json_update_time', '/json/update-time/{path:.*}')
+        config.add_route('json_comment_count', '/json/comment-count')
+        config.add_route('json_article_query', '/json/article-query')
+        config.add_route('json_ressort_list', '/json/ressort-list')
 
         # XXX: This route was introduced, because we needed a smaller and
         # better interface than the whole Centerpage in XML to communicate
@@ -148,10 +153,14 @@ class Application(object):
         config.add_route('invalidate_comment_thread', '/-comments/invalidate')
         config.add_route(
             'invalidate_community_maintenance',
-            '/-comments/invalidate_maintenance')
+            '/-comments/invalidate-maintenance')
         config.add_route('home', '/')
+        config.add_route('breaking_news', '/breaking-news')
         config.add_route('login_state', '/login-state')
-        config.add_route('health_check', '/health_check')
+        config.add_route('health_check', '/health-check')
+        # XXX align-route-config-uris: Ensure downward compatibility until
+        # corresponding varnish changes have been deployed. Remove afterwards.
+        config.add_route('health_check_XXX', '/health_check')  # XXX remove
         config.add_route('spektrum-image', '/spektrum-image/*path')
         config.add_route('zett-image', '/zett-image/*path')
         config.add_route('blacklist', '/-blacklist', factory=lambda x: None)
@@ -173,9 +182,6 @@ class Application(object):
                 name=self.settings.get('asset_prefix', '/static/latest'),
                 path='zeit.web.static:', cache_max_age=ast.literal_eval(
                     self.settings['assets_max_age']))
-
-        config.add_renderer('jsonp', pyramid.renderers.JSONP(
-            param_name='callback'))
 
         config.add_request_method(configure_host('asset'), reify=True)
         config.add_request_method(configure_host('image'), reify=True)

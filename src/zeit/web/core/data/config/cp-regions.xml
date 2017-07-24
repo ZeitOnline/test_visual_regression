@@ -12,6 +12,11 @@
         <area kind="trio"/>
         <area kind="trio"/>
     </region>
+    <region kind="trio" title="Trio-Region" type="!storystream" available="zeit.arbeit.interfaces.IZARContent">
+        <area kind="trio"/>
+        <area kind="trio"/>
+        <area kind="trio"/>
+    </region>
     <region kind="trio" title="Trio-Region" type="!storystream" available="zeit.magazin.interfaces.IZMOContent">
         <area kind="trio"/>
     </region>
@@ -21,6 +26,9 @@
     </region>
     <region kind="parquet" title="Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="parquet"/>
+    </region>
+    <region kind="parquet" title="D17 Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
+        <area kind="d17-parquet"/>
     </region>
     <region kind="parquet" title="ZEITmagazin Parkett-Region" type="!storystream" available="zeit.cms.section.interfaces.IZONContent">
         <area kind="zmo-parquet"/>

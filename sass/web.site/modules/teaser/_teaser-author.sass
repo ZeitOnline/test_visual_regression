@@ -1,19 +1,11 @@
-$additional-margin: $page-padding * 2
-
 .teaser-author
 	+font-smoothing
 	background-color: $zon-trout
 	color: $white
-	margin: $vertical-space (-$page-padding)
+	margin: $vertical-space 0
 	overflow: hidden
 	padding-bottom: 100%
-	// calc() needed to compensate the negative margin
-	padding-bottom: calc(100% + #{$additional-margin})
 	position: relative
-	+respond-min($break-areas)
-		margin-left: 0
-		margin-right: 0
-		padding-bottom: 100%
 	&__overall-link
 		color: inherit
 		+on-interaction

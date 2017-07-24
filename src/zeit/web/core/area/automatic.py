@@ -77,6 +77,7 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
     FIELD_MAP = {
         'access': '',
         'authors': '',
+        'comments': 'commentsAllowed',
         'date-last-modified': 'date_last_modified',
         'date_first_released': '',
         'date_last_published': '',

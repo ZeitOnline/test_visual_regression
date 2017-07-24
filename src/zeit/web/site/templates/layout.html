@@ -6,35 +6,14 @@
 <html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
 <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
-    <title>{{ view.pagetitle }}</title>
-    <meta name="description" content="{{ view.pagedescription }}">
-    {% if view.meta_keywords -%}
-        <meta name="keywords" content="{{ view.meta_keywords | join(', ') }}">
+    {% include "zeit.web.core:templates/inc/meta/basics.html" %}
+
+    {% if view.is_hp -%}
+        <meta name="apple-itunes-app" content="app-id=828889166">
     {% endif -%}
-    <meta name="robots" content="{{ view.meta_robots }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" id="viewport-meta">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="apple-itunes-app" content="app-id=448633376">
     <meta name="application-name" content="ZEIT ONLINE">
-    <meta name="msapplication-config" content="none">
     <meta name="msapplication-TileImage" content="{{ request.image_host }}/static/img/zo-icon-win8-144x144.png">
     <meta name="msapplication-TileColor" content="#e6e6e6">
-    {% if view.is_amp -%}
-        <link rel="amphtml" href="{{ view.amp_url }}">
-    {% endif -%}
-    {% if view.canonical_url -%}
-        <link rel="canonical" href="{{ view.canonical_url | safe }}">
-    {% endif -%}
-    {% if view.prev_page_url -%}
-        <link rel="prev" href="{{ view.prev_page_url | safe }}">
-    {% endif -%}
-    {% if view.next_page_url -%}
-        <link rel="next" href="{{ view.next_page_url | safe }}">
-    {% endif -%}
-    {% if view.syndication_source -%}
-        <link rel="syndication-source" href="{{ view.syndication_source }}">
-    {% endif -%}
 
     {% include "zeit.web.core:templates/inc/meta/dns-prefetch.html" %}
 
@@ -57,16 +36,7 @@
     {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
 
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
-    <script>
-        // trigger print dialog after "Artikel drucken" was clicked
-        if ( location.search.indexOf( 'print' ) !== -1 ) {
-            if ( window.addEventListener ) {
-                window.addEventListener( 'load', window.print, false );
-            } else if ( window.attachEvent ) {
-                window.attachEvent( 'onload', window.print );
-            }
-        }
-    </script>
+    {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
     {% if toggles('third_party_modules') -%}
         <script src="https://script.ioam.de/iam.js"></script>
     {% endif -%}
@@ -85,7 +55,7 @@
     {% endif %}
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
 </head>
-<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}" {% if view.is_wrapped %} data-is-wrapped="true"{% endif %}{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
+<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %} {% if toggles('zon_1000px') %}id="zon1000"{% endif -%}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
@@ -96,16 +66,7 @@
     {% endblock skiplink %}
     <div class="page">
         {% block adplace_top %}
-            <div id="iqd_mainAd" >
-                <div id="iqd_align_Ad">
-                    <div id="iqd_topAd">
-                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place1.html" %}
-                        <div id="iqd_rightAd">
-                            {% include "zeit.web.core:templates/inc/ads/places/desktop/place2.html" %}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% include "zeit.web.core:templates/inc/ads/mainad.html" %}
         {% endblock adplace_top %}
         <div class="page__content">
             {% profile %}
@@ -117,7 +78,7 @@
             </header>
             {% endif %}
             {% block breaking_news %}
-                {%- include "zeit.web.site:templates/inc/breaking_news.tpl" -%}
+                {%- include "zeit.web.site:templates/inc/breaking-news-esi.html" -%}
             {% endblock breaking_news %}
             {% block liveblog_status %}{% endblock %}
             {% endprofile %}
@@ -131,6 +92,10 @@
                 {% block main %}{% endblock main %}
             </main>
             {% block adplace_floor %}
+                {% if toggles('iqd_digital_transformation') and not view.is_hp -%}
+                <!-- P7 -->
+                {% include "zeit.web.core:templates/inc/ads/places/desktop/place16.html" %}
+                {% endif -%}
                 {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
             {% endblock adplace_floor %}
             {% profile %}
@@ -167,7 +132,5 @@
     <!--end: vgwort-->
     {% endif %}
     {% include "zeit.web.core:templates/inc/cardstack/footer.tpl" %}
-    {% block veeseo %}
-    {% endblock %}
 </body>
 </html>

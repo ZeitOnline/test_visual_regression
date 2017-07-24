@@ -25,7 +25,7 @@
         this.options = {
             cookieTimeInDays: 1.5,
             debug: location.href.indexOf( 'debug-popover' ) !== -1,
-            endpoint: location.protocol + '//' + location.host + '/json_update_time/index',
+            endpoint: location.protocol + '//' + location.host + '/json/update-time/index',
             force: location.href.indexOf( 'force-popover' ) !== -1,
             prevent: location.href.indexOf( 'prevent-popover' ) !== -1,
             resetInterval: 1000

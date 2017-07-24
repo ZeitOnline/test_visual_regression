@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
 <layouts>
+    <!-- ZAR only -->
+    <layout
+        id="zar-small"
+        title="kleiner Teaser"
+        image_pattern="wide"
+        areas="trio"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"
@@ -74,13 +81,13 @@
         id="zon-large"
         title="Großer Teaser"
         image_pattern="wide"
-        areas="duo major ranking tube print-ressort parquet zco-parquet"
+        areas="duo major ranking tube print-ressort parquet zco-parquet d17-parquet"
         />
     <layout
         id="zon-small"
         title="Kleiner Teaser"
         image_pattern="wide"
-        areas="duo major minor ranking tube print-ressort exclusive-ressort parquet spektrum zett zmo-parquet zplus-parquet zco-parquet author-favourite-content author-articles author-list"
+        areas="duo major minor ranking tube print-ressort exclusive-ressort parquet spektrum zett zmo-parquet d17-parquet zplus-parquet zco-parquet author-favourite-content author-articles author-list"
         default="major minor parquet zmo-parquet zplus-parquet zco-parquet ranking tube print-ressort exclusive-ressort spektrum zett author-favourite-content author-articles author-list"
         available="zeit.cms.section.interfaces.IZONContent"
         />

@@ -1,0 +1,12 @@
+<aside class="ressortnav js-toggle-region">
+    <h2 class="ressortnav__headline" aria-controls="ressortnavigation" data-constrained="mobile,phablet">Ressorts</h2>
+    <ul id="ressortnavigation" class="ressortnav__list">
+        {% for region in view.regions %}
+            {% for area in region.values() %}
+                {% if area.title and area.kind == 'print-ressort' and area.values() %}
+                    <li class="ressortnav__item"><a href="#{{ area.title | urlencode }}" class="js-scroll">{{ area.title }}</a></li>
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+</aside>

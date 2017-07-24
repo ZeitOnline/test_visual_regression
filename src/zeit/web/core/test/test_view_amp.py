@@ -5,6 +5,14 @@ import urllib
 import zeit.web.core.application
 
 
+def test_amp_inline_svg_sprite_contains_no_xml_declaration(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/amp')
+    sprite = browser.cssselect('.symbols')[0]
+    assert '<?xml' not in lxml.etree.tostring(sprite)
+    # redundant, but stresses what this test is all about
+    assert '<?xml' not in browser.contents
+
+
 def test_amp_paragraph_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser('zeit.web.core:templates/amp/blocks/paragraph.html',
                          block=u'Wie lässt sich diese Floskel übersetzen? ')
@@ -61,7 +69,7 @@ def test_amp_contains_required_microdata(testbrowser):
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros.'
+    assert person.text == u'© Warner Bros./dpa'
 
     assert date_published.get('datetime') == '2016-01-22T11:55:46+01:00'
     assert date_modified.get('datetime') == '2016-01-22T11:55:46+01:00'
@@ -78,14 +86,15 @@ def test_amp_shows_nextread_advertising(testbrowser):
     assert nextad.cssselect('.nextad__label')[0].text == 'Verlagsangebot'
     assert len(nextad.cssselect('.nextad__title'))
     assert len(nextad.cssselect('.nextad__text'))
-    # check for assigned background-color class
-    assert nextad.cssselect('.nextad__button')[0].get('class') == (
-        'nextad__button nextad__button--d11c08')
+    # check for assigned background-color class. selected randomly out of two.
+    button_class = nextad.cssselect('.nextad__button')[0].get('class')
+    assert button_class in ['nextad__button nextad__button--d11c08',
+                            'nextad__button nextad__button--42661f']
 
 
-def test_amp_shows_breaking_news_banner(testbrowser):
-    browser = testbrowser('/amp/zeit-online/article/amp?debug=eilmeldung')
-    assert browser.cssselect('.breaking-news-banner')
+def test_amp_shows_breaking_news_banner(testserver, httpbrowser):
+    browser = httpbrowser('/amp/zeit-online/article/amp?debug=eilmeldung')
+    assert len(browser.cssselect('.breaking-news-banner')) == 1
 
 
 def test_amp_has_correct_canonical_url(testbrowser):
@@ -163,7 +172,7 @@ def test_amp_article_shows_tags_correctly(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     tags = browser.cssselect('.article-tags')[0]
     keywords = tags.cssselect('[itemprop="keywords"]')[0]
-    assert tags.cssselect('.article-tags__title')[0].text == 'Schlagworte'
+    assert tags.cssselect('.article-tags__title')[0].text == u'Schlagwörter'
     assert len(tags.cssselect('.article-tags__link')) == 5
     assert ' '.join(keywords.text_content().strip().split()) == (
         u'Flüchtling, Weltwirtschaftsforum Davos, '
@@ -173,12 +182,6 @@ def test_amp_article_shows_tags_correctly(testbrowser):
 def test_amp_article_shows_ads_correctly(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'amp_advertising': True}.get)
-    browser = testbrowser('/amp/zeit-online/article/amp')
-    ads = browser.cssselect('.advertising')
-    assert len(ads) == 3
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'amp_new_advertising': True, 'amp_advertising': False}.get)
     browser = testbrowser('/amp/zeit-online/article/amp')
     ads = browser.cssselect('.advertising')
     assert len(ads) == 4
@@ -263,3 +266,20 @@ def test_amp_article_contains_authorbox(testbrowser):
     assert name.text.strip() == 'Jochen Wegner'
     assert description.text.strip() == 'Chefredakteur, ZEIT ONLINE.'
     assert url.get('href') == 'http://localhost/autoren/W/Jochen_Wegner/index'
+
+
+def test_amp_article_shows_amp_accordion_for_infobox(testbrowser):
+    browser = testbrowser('/amp/zeit-online/article/infoboxartikel')
+    infobox = browser.cssselect('.infobox')[0]
+    accordion = infobox.cssselect('amp-accordion')[0]
+    # required script
+    assert browser.cssselect('script[custom-element="amp-accordion"]')
+    # amp-accordion can contain one or more <section>s as its direct children
+    assert len(infobox.cssselect('amp-accordion > section')) == 6
+    assert len(infobox.cssselect('amp-accordion > *')) == 6
+    # each <section> must contain exactly two direct children
+    assert len(accordion.cssselect('section > *')) == 12
+    # the first child (of the section) must be a heading
+    assert len(accordion.cssselect('section > h3:first-child')) == 6
+    # the second child (of the section) can be any tag allowed in AMP HTML
+    assert len(accordion.cssselect('section > h3 + div')) == 6

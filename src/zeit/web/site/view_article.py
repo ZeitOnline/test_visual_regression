@@ -40,6 +40,9 @@ log = logging.getLogger(__name__)
                        zeit.web.core.view.is_advertorial),
     renderer='templates/article_advertorial.html')
 @zeit.web.view_config(
+    context=zeit.content.article.interfaces.IErrorPage,
+    renderer='templates/article_error.html')
+@zeit.web.view_config(
     name='komplettansicht',
     renderer='templates/komplettansicht.html')
 @zeit.web.view_config(
@@ -208,9 +211,9 @@ class LiveblogArticle(Article):
 
     header_layout = 'liveblog'
 
-    def __init__(self, context, request):
-        super(LiveblogArticle, self).__init__(context, request)
-        self.liveblog = zeit.web.core.interfaces.ILiveblogInfo(self.context)
+    @zeit.web.reify
+    def liveblog(self):
+        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 
 
 @zeit.web.view_config(
@@ -218,7 +221,10 @@ class LiveblogArticle(Article):
     renderer='templates/amp/article.html')
 class AcceleratedMobilePageArticle(
         zeit.web.core.view_article.AcceleratedMobilePageArticle, Article):
-    pass
+
+    @zeit.web.reify
+    def liveblog(self):
+        return zeit.web.core.interfaces.ILiveblogInfo(self.context)
 
 
 @zeit.web.view_config(
@@ -228,3 +234,22 @@ class AcceleratedMobilePageArticle(
 class AcceleratedMobilePageLiveblogArticle(
         LiveblogArticle, AcceleratedMobilePageArticle):
     pass
+
+
+class YahoofeedArticle(Article):
+
+    truncated = False
+
+    def truncate(self):
+
+        allowed_article_length = 2000
+        character_counter = 0
+
+        for page in self.pages:
+            for block in page:
+                if character_counter > allowed_article_length:
+                    self.truncated = True
+                    page.blocks.remove(block)
+
+                if isinstance(block, zeit.web.core.block.Paragraph):
+                    character_counter += len(block)

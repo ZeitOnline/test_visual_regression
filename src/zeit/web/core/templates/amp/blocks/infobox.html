@@ -1,32 +1,19 @@
 {% if block.contents -%}
 {% set base_id = block.identifier %}
-<aside class="infobox" id="{{ base_id }}">
-    <div class="infobox__container article__item">
+<aside class="infobox">
+    <amp-accordion class="article__item" disable-session-states>
     {% for title, text in block.contents %}
-        {% set tab_id = '%s-%s' | format(base_id, loop.index) %}
-        <section>
-            <h3 class="infobox__title" role="presentation">
-                <a
-                    class="infobox__link"
-                    id="{{ tab_id }}-tab"
-                    role="tab"
-                    href="#{{ tab_id }}-tab"
-                    data-id="{{ tab_id }}-tab"
-                    aria-controls="{{ tab_id }}-article">
-                    {{- title -}}
-                </a>
+        <section class="infobox__tab"{% if loop.length == 1 %} expanded{% endif %}>
+            <h3 class="infobox__title">
+                {{- title -}}
             </h3>
-            <div
-                class="infobox__panel"
-                id="{{ tab_id }}-article"
-                role="tabpanel"
-                aria-labelledby="{{ tab_id }}-tab">
+            <div class="infobox__panel">
                 {% for block in text %}
                     {% include "zeit.web.core:templates/amp/blocks/{}.html".format( block | block_type ) ignore missing %}
                 {% endfor %}
             </div>
         </section>
     {% endfor %}
-    </div>
+    </amp-accordion>
 </aside>
 {%- endif %}

@@ -1,19 +1,12 @@
-$additional-margin: $page-padding * 2
 $layout: ".teaser-square"
 
 .teaser-square
 	+font-smoothing
 	background-color: $zon-mid-grey
 	color: $white
-	margin: $vertical-space (-$page-padding)
+	margin: $vertical-space 0
 	padding-bottom: 100%
-	// calc() needed to compensate the negative margin
-	padding-bottom: calc(100% + #{$additional-margin})
 	position: relative
-	+respond-min($break-areas)
-		margin-left: 0
-		margin-right: 0
-		padding-bottom: 100%
 
 	& + article // remove border on successive teaser
 		border-top-width: 0
@@ -154,8 +147,7 @@ $layout: ".teaser-square"
 
 	&--graphic
 		#{$layout}__container
-			padding-left: $page-padding
-			padding-right: $page-padding
+			+padded
 			text-align: center
 
 		#{$layout}__media-link

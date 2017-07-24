@@ -6,17 +6,13 @@
 // $vertical-space * 2 is the vertical gutter between two elements (rule of thumb)
 
 .cp-region
-	padding: 0 $cp-padding
-	border-color: $color-border
-	border-style: solid
-	border-width: 0
 	+pie-clearfix
+	border: 0 solid $color-border
 	&:empty
 		display: none
-	&--parquet
-		margin-bottom: 0
-		padding: 0
-		+respond-min($break-tablet-min)
+
+	+respond-min($break-areas)
+		&--parquet
 			border-top-width: 1px
 			&:last-child
 				border-bottom-width: 1px
@@ -27,51 +23,23 @@
 				// visual bottom of the preceding .cp-region--parquet
 				margin-top: 0
 				padding-top: $vertical-space
-
-	// we want a border if grey meets grey
-	&--gallery + &--parquet
-		border-top-width: 1px
-
-	// EXPERIMENT: We're trying to get rid of the 'padding/margin breakout kerfuffle'.
-	// 			   Seems like we started with the desktop and retrofitted.
-	// 			   This is an atempt to do it *mobile first*.
-	&--solo,
-	&--topic,
-	&--gallery
-		padding: 0
-	&--duo
-		+respond-min($break-tablet-min)
+		&--duo
+			padding: 0 $cp-padding
 			margin-bottom: $vertical-space
 			margin-top: $vertical-space
 			&:first-child
 				margin-top: 0
 
+	// we want a border if grey meets grey
+	&--gallery + &--parquet
+		border-top-width: 1px
+
 .cp-area
-	padding: 0 $cp-padding
-	width: 100%
-	// EXPERIMENT: We're trying to get rid of the 'padding/margin breakout kerfuffle'.
-	// 			   Seems like we started with the desktop and retrofitted.
-	// 			   This is an atempt to do it *mobile first*.
-	&--buzzboard,
-	&--parquet,
-	&--solo,
-	&--spektrum,
-	&--topic,
-	&--zett,
-	&--zplus-parquet,
-	&--zmo-parquet,
-	&--zco-parquet,
-	&--volume-header
-		padding: 0
-		position: relative
+	position: relative
+
 	&--author-list,
 	&--newsticker,
-	&--overview,
-	&--volume-overview,
-	&--print-ressort,
-	&--exclusive-ressort,
-	&--ranking,
-	&--tube
+	&--overview
 		padding: 0 $page-padding--small
 
 	&--ranking,
@@ -82,25 +50,19 @@
 		display: none
 		+respond-min($break-tablet-min)
 			display: block
-	&--spektrum
-		+respond-min($break-tablet-min)
-			border-color: $primary-color-spektrum
-			border-style: solid
-			border-width: 1px 0
-			margin-bottom: -1px
-			margin-top: -1px
 
 	&--newsticker-on-keywordpage,
 	&--newsticker-on-topicpage
 		+pie-clearfix
-		border-bottom: 1px solid $color-border
-		border-top: 1px solid $color-border
-		padding-bottom: $page-padding
+		border-color: $color-border
+		border-style: solid
+		border-width: 1px 0
+		padding-bottom: $vertical-space
 
 	&--gallery,
 	&--shop
 		background-color: $zon-lighter-grey
-		padding: 0 $page-padding remify(40px)
+		padding: 0 $page-padding--small remify(40px)
 	// Printbanderole
 	&--printkiosk
 		background-color: $color-dark-background
@@ -114,27 +76,19 @@
 		font-size: em(16px)
 		letter-spacing: $letter-spacing-m
 		line-height: 1.2
-		margin: remify(60px 0 8px)
+		margin: remify(40px 0 8px)
+		padding: remify(20px) $page-padding--small
 		text-transform: uppercase
 
-	// remove in FEM-55
-	&--major,
-	&--minor
-		.ad-container
-			margin: 0 (-$page-padding)
-
 	+respond-min($break-areas)
-		float: left
 		&--author-list,
 		&--newsticker,
 		&--overview,
-		&--volume-overview,
 		&--print-ressort,
 		&--exclusive-ressort,
 		&--ranking,
 		&--tube
 			clear: both
-			float: none
 			margin: 0 auto
 			padding: 0 $page-padding
 		&--newsticker-on-keywordpage,
@@ -155,27 +109,36 @@
 			max-width: $max-ranking-width
 			padding-top: remify(20px)
 			position: relative // give stacking context to align above header-image
+		&--gallery,
+		&--shop
+			padding-left: $page-padding
+			padding-right: $page-padding
+
+		&--major,
+		&--duo,
+		&--minor
+			float: left
+			padding: 0 $cp-padding
+
 		&--major
 			width: 66.66%
 		&--duo
 			width: 50%
 		&--minor
 			width: 33.33%
-		&--quartet
-			width: 25%
 		&--print-ressort
-			max-width: remify(620px)
-
-		// remove in FEM-55
-		&--major,
-		&--minor
-			.ad-container
-				margin: 0
+			max-width: remify(620px) + 2 * $page-padding
+		&--spektrum
+			border-color: $primary-color-spektrum
+			border-style: solid
+			border-width: 1px 0
+			margin-bottom: -1px
+			margin-top: -1px
 
 		&__headline
 			border-bottom: 1px solid $color-border
 			font-size: em(18px)
-			padding-bottom: remify(12px)
+			padding: remify(20px 0 12px)
 
 	+respond-min($break-desktop-min)
 		&--ranking,

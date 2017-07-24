@@ -1,5 +1,9 @@
-import logging
+from __future__ import absolute_import
 
+import logging
+import sys
+
+import bugsnag
 import gocept.lxml.objectify
 import grokcore.component
 import xml.sax.saxutils
@@ -9,9 +13,6 @@ import zope.security.proxy
 
 import zeit.cms.content.sources
 import zeit.cms.interfaces
-import zeit.connector.cache
-import zeit.content.article.article
-import zeit.content.article.edit.body
 import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 import zeit.retresco.interfaces
@@ -20,7 +21,7 @@ import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.interfaces
-import zeit.web.core.template
+import zeit.web.core.jinja
 
 
 log = logging.getLogger(__name__)
@@ -50,16 +51,25 @@ class Page(object):
         del self.blocks[key]
 
     def append(self, block):
-        block = zeit.web.core.interfaces.IFrontendBlock(block, None)
-        if block is not None:
-            self.blocks.append(block)
+        wrapped = None
+        try:
+            wrapped = zeit.web.core.interfaces.IFrontendBlock(block, None)
+        except:
+            log.warn('Ignoring %s', block, exc_info=True)
+            exc_info = sys.exc_info()
+            path = zeit.web.core.jinja.get_current_request_path()
+            bugsnag.notify(exc_info[1], traceback=exc_info[2], context=path)
+            return
+        if wrapped is not None:
+            self.blocks.append(wrapped)
 
 
 def _inject_banner_code(pages, pubtype):
     adconfig = {
         'zon': {
             'pages': range(1, len(pages) + 1),
-            'ads': [{'tile': 7, 'paragraph': 2, 'type': 'desktop'},
+            'ads': [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
+                    {'tile': 7, 'paragraph': 2, 'type': 'desktop'},
                     {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
                     {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
         },
@@ -68,13 +78,6 @@ def _inject_banner_code(pages, pubtype):
             'ads': [{'tile': 7, 'paragraph': 5, 'type': 'desktop'}]
         }
     }
-
-    toggles = zeit.web.core.application.FEATURE_TOGGLES
-    if toggles.find('iqd_mobile_transition_article'):
-        # temporary append ad tile here
-        # put into config if toggle is deleted
-        place = {'tile': 3, 'paragraph': 1, 'type': 'mobile'}
-        adconfig['zon']['ads'].append(place)
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)

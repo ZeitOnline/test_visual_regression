@@ -1,6 +1,7 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
 <aside class="gate article__item article__item--rimless" data-ct-area="gate" data-ct-row="{{ view.paywall }}"  data-ct-column="false">
+    <a id="comments"></a> {# fake target for missing comments anchor #}
     {% block gate_icon -%}
         {{ lama.use_svg_icon('zplus', 'gate__icon', 'zeit.web.site', a11y=False) }}
     {% endblock -%}

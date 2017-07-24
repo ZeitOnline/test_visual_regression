@@ -117,7 +117,7 @@ def test_storystream_in_article_should_show_no_teaser_on_mobile(
     assert not small_teaser.is_displayed(), (
         'Small teaser for storystream teaser should be hidden on mobile.')
 
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     assert small_teaser.is_displayed(), (
         'Small teaser for storystream teaser should be visible on desktop.')
 
@@ -129,3 +129,12 @@ def test_storystream_atom_should_show_no_fallback_image(testbrowser):
 
     assert len(teaser) == 4
     assert len(images) == 1
+
+
+def test_storystream_update_date_in_header(testbrowser):
+    browser = testbrowser('zeit-online/storystream/dummy')
+    updateddate = browser.cssselect(
+        '.storystream-headerimage__date')[0].text.strip()
+    modifieddate = browser.cssselect(
+        '.storystream-scope__link')[1].text.strip()
+    assert updateddate == modifieddate

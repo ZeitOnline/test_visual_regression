@@ -1,0 +1,25 @@
+.metadata
+	color: $color-text--light
+	display: inline
+	font-size: remify(15px)
+	letter-spacing: $letter-spacing-s
+	margin-bottom: remify(40px)
+	word-break: break-word
+	> *:not(:last-child):not(:empty):after
+		color: $color-separator
+		content: " / "
+		margin: 0 .25em
+	&--column
+		margin-bottom: 0
+	&__commentcount
+		@extend %commentcount
+	&__source a
+		border-bottom: 1px solid rgba($zon-grey, .4)
+		color: inherit
+		+on-interaction
+			border-bottom-color: rgba($zon-grey, .8)
+			color: inherit
+	&:after
+		content: ''
+		display: block
+		margin-bottom: remify(40px)

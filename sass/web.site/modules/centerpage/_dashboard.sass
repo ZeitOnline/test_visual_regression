@@ -1,49 +1,45 @@
 .dashboard
-	border-bottom: 2px solid $zon-alto
-	margin: 0 (-$page-padding)
+	border-bottom: 2px solid $color-border
 
 	&__upper
 		background-color: $trout
-		padding: 0 $page-padding
 
 	&__lower
 		background-color: $cararra
-		padding: 0 $page-padding
 
 	&__header
 		+font-smoothing
-		padding: $page-padding 0
 		margin: 0
+		padding: remify(17px 0 20px)
 
 	&__item
 		@extend .article__item
+		padding: 0 $page-padding--small
 
 	&__kicker
 		color: $charcoal
 		display: block
-		font-size: remify(16px)
+		font-size: em(16px)
 		letter-spacing: $zon-letter-spacing-m
 		margin-bottom: remify(4px)
 
 	&__title
 		color: $white
 		display: block
-		font-size: remify(24px)
+		font-size: em(24px)
 		letter-spacing: 0.008em
 		line-height: 1.25
-		margin-bottom: remify(4px)
 
 	&__user
-		border-bottom: 2px solid $zon-alto
-		padding: remify(30px 0)
+		align-items: center
+		border-bottom: 2px solid $color-border
 		display: flex
+		padding: remify(32px 0)
 
 	&__user-name
-		font-size: remify(18px)
+		font-size: em(18px)
 		font-weight: bold
 		letter-spacing: $letter-spacing-s
-		color: $grey--mid-dark
-		align-self: center
 		overflow: hidden
 		text-overflow: ellipsis
 
@@ -52,23 +48,18 @@
 		width: remify(80px)
 		border-radius: 50%
 		border: 2px solid $zon-light-grey
-		margin-right: $page-padding
+		margin: remify(-10px 20px -10px 0)
 
 	&__box
+		font-size: em(15px)
 		letter-spacing: $letter-spacing-s
-		color: $grey--mid-dark
-		padding: remify(30px 0)
+		padding: remify(32px 0)
 		&:not(:last-child)
-			border-bottom: 2px solid $zon-alto
-		&:last-child
-			margin-bottom: $page-padding
-
-		&--is-header
-			border-bottom: none
+			border-bottom: 2px solid $color-border
 
 	&__box-title
 		text-transform: uppercase
-		margin: remify(0 0 $cp-padding 0)
+		margin: remify(0 0 6px 0)
 
 	&__box-list
 		list-style: none
@@ -78,43 +69,37 @@
 			+animated-interaction()
 			color: $grey
 			border-bottom: 2px solid $zon-light-grey
-			line-height: remify(40px)
-
-	&__content
-		padding: 0 $page-padding
+			line-height: 2.4
 
 	+respond-min($break-tablet-min)
 
+		&__item
+			padding: 0
+
 		&__header
-			padding: remify($page-padding*2 0)
+			padding: remify(40px 0)
 
 		&__title
-			font-size: remify(32px)
+			font-size: em(34px)
 
 		&__lower
 			.dashboard__item
 				display: flex
+			.dashboard__box-list
+				width: auto
 
 		&__user
 			border-bottom: none
-			align-self: center
+			padding-right: remify(20px)
 			width: 50%
-			padding-right: $page-padding
 
 		&__box
 			display: flex
 			flex-wrap: wrap
-
-			&--is-header
-				display: block
-				.dashboard__box-list
-					width: auto
+			padding: remify(40px 0)
 
 		&__box-title
 			width: 100%
 
 		&__box-list
 			width: 50%
-
-
-

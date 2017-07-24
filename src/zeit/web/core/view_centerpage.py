@@ -225,7 +225,13 @@ class Centerpage(AreaProvidingPaginationMixin,
     def comment_counts(self):
         community = zope.component.getUtility(
             zeit.web.core.interfaces.ICommunity)
-        return community.get_comment_counts(*[t.uniqueId for t in self])
+        ids = []
+        for teaser in self:
+            if getattr(teaser, 'commentsAllowed', False):
+                ids.append(teaser.uniqueId)
+        if not ids:
+            return {}
+        return community.get_comment_counts(*ids)
 
     @zeit.web.reify
     def has_cardstack(self):
@@ -289,47 +295,6 @@ class CenterpagePage(object):
                 if zeit.web.core.interfaces.IPagination.providedBy(area):
                     return area
         return None
-
-
-@zeit.web.view_config(
-    route_name='json_update_time',
-    renderer='jsonp')
-def json_update_time(request):
-    try:
-        resource = zeit.cms.interfaces.ICMSContent(
-            'http://xml.zeit.de/{}'.format(
-                request.matchdict['path']), None)
-        if resource is None:
-            resource = zeit.cms.interfaces.ICMSContent(
-                'http://xml.zeit.de/{}'.format(request.matchdict['path']))
-
-        info = zeit.cms.workflow.interfaces.IPublishInfo(resource)
-        dlps = info.date_last_published_semantic.isoformat()
-        dlp = info.date_last_published.isoformat()
-
-    except (AttributeError, KeyError, TypeError):
-        dlps = dlp = None
-    request.response.cache_expires(5)
-    return {'last_published': dlp, 'last_published_semantic': dlps}
-
-
-@zeit.web.view_config(
-    route_name='json_topic_config',
-    renderer='jsonp')
-def json_topic_config(request):
-    try:
-        resource = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
-        cp = zeit.content.cp.interfaces.ICenterPage(resource)
-        config = {'topics': []}
-        for x in xrange(1, 4):
-            label = getattr(cp, 'topiclink_label_{}'.format(x))
-            url = getattr(cp, 'topiclink_url_{}'.format(x))
-            if url and label:
-                config['topics'].append({'topic': label, 'url': url})
-    except (AttributeError, KeyError, TypeError):
-        config = {}
-    request.response.cache_expires(5)
-    return config
 
 
 @zeit.web.view_config(

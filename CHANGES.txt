@@ -4,13 +4,273 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggle.xml) and Prod: remove `iqd_mobile_transition_*` feature toggles AFTER deployment.
 
-3.56 (unreleased)
+
+3.73 (unreleased)
 -----------------
+
+- BUG-700: Jump to paywall form from metadata commentlink
+
+
+3.72 (2017-07-24)
+-----------------
+
+- ZON-4018: Add zplus badge to ZCO articles
+
+- ZON-4045: New ad tags for ZON HP/CP
+
+- ZON-4046: New ad tags for ZMO HP/CP
+
+- ZON-4047: New ad tags for ZCO HP/CP
+
+
+3.71.1 (2017-07-19)
+-------------------
+
+- HOTFIX: Make AMP keyword links work again
+
+
+3.71 (2017-07-19)
+-----------------
+
+- ZON-4049: Adjust pagewidth to 1000px
+
+- ZON-3994: Retrieve keywords from TMS
+
+- ARBEIT-48: Provide multi-page dummy data for ZEIT Arbeit
+
+- ARBEIT-48.1: Introduce trio region and small teaser to ZEIT Arbeit
+
+- ARBEIT-54: Style Article Header
+
+- ARBEIT-32: Underline article title
+
+
+3.70 (2017-07-17)
+-----------------
+
+- ZON-4077: Bootstrap HTML for ZEIT Arbeit
+
+- ZON-4071: Bootstrap CSS for ZEIT Arbeit
+
+- ZON-4072: Bootstrap JS for ZEIT Arbeit
+
+- ZON-4074: Define responsive layout for ZEIT Arbeit
+
+- ARBEIT-40: Implement Header and Navi for ZEIT Arbeit
+
+- ARBEIT-1: Use marker interfaces for zar content
+
+- ARBEIT-34: Implement footer for ZEIT Arbeit
+
+- ARBEIT-43: Bootstrap default article with basic styling for ZEIT Arbeit
+
+- BUG-732: Storystreams "last updated" showing wrong date
+
+- BUG-742: Wrap built-in jinja filters in exception-catching safeguard
+
+- FIX: Show commentcount on teasers - all but red zplus
+
+
+3.69 (2017-07-06)
+-----------------
+
+- ZON-4054: Render 404 page via friedbert
+
+- ZON-3956: Polish CSS and remove hack on print ressort headlines
+
+- ZON-3952: Bootstrap ZEIT Arbeit vertical
+
+- FIX: Apply ZON-like margin-right to ZCO marginalia items
+
+
+3.68 (2017-07-03)
+-----------------
+
+- HOTFIX: copyright/photographer can be None since ZON-3174
+
+- ZON-3986: Remove hyphens from AdController keywords
+
+- ZON-4061: Replace newline with space in MSN feed
+
+- ZON-4033: Change the color of background and logo
+
+- BUG-745: Fix cursor on hidden nextread arrow
+
+
+3.67.1 (2017-06-29)
+-------------------
+
+- ZON-4041: Remove headline from MSN feed body
+
+
+3.67 (2017-06-29)
+-----------------
+
+- ZON-4019: Dont show commentcount on zplus teaser
+
+- ZON-3956: Hotfix for ressort navigation
+
+
+3.66 (2017-06-28)
+-----------------
+
+- ZON-3956: Add ressort navigation to volume pages
+
+- ZON-4030: Adjust webtrekk noscript url to audev.zeit.de
+
+- ZON-4042: Remove redundant image from MSN feed
+
+- ZON-4043: Render copyright information on MSN feed images
+
+- PERF: Don't request comment counts for content that has commenting disabled
+
+
+3.65 (2017-06-26)
+-----------------
+
+- ZON-3898: Add comments on regwalled articles
+
+- ZON-2921: Provide RSS feed to MSN
+
+- ZON-3174: Provide new image copyright fields
+
+- ZOCA-21: Implement article and ressort endpoint
+
+- BUG-739: Add margin to sharing button
+
+- BUG-724: Fix advertorial nextread in AMP
+
+- BUG-722: Update CHE links
+
+- FIX: Skip broken article modules, instead of breaking the whole article
+
+- FEM-60: Add eslint and jshint to webpack
+
+
+3.64.1 (2017-06-20)
+-------------------
+
+- ZON-3955: Hotfix D17 logo padding
+
+
+3.64 (2017-06-19)
+-----------------
+
+- ZON-3953: Edit navigation and feature #D-17
+
+- BUG-736: Trying to guess if the safari bug applies
+
+- FIX: Fix padding for D17 parquet icon
+
+
+3.63 (2017-06-16)
+-----------------
+
+- ZON-3496: Render "Eilmeldung" through ESI
+
+- ZON-3955: Add D17 parquet
+
+- BUG-720: Be defensive about possible CMS values and escape all C1 headers
+
+- MAINT: Align route config uris
+
+
+3.62.1 (2017-06-14)
+-------------------
+
+- ZON-3991: Change wording from "Schlagworte" to "Schlagwörter"
+
+- HOTFIX: Be defensive about invalid references in portraitbox module
+
+
+3.62 (2017-06-09)
+-----------------
+
+- ZON-3485: Support inline portrait boxes
+
+- ZON-3954: Add Google Tagmanager to AMP
+
+- BUG-733: Fix cinema ad for desktop
+
+- BUG-731: Fix "unclickable" video teaser icon
+
+- BUG-729: Fix overscrolling for missing webtrekk object
+
+- BUG-728: fix the sharing-buttons on the advertorialpage
+
+- MAINT: BEMify portraitbox in ZMO
+
+
+3.61 (2017-05-31)
+-----------------
+
+- ZON-3881: Tweak Yahoo! RSS feed
+
+- BUG-727: Prevent flashing body background-color for app content
+
+- MAINT: Show single infobox tab open by default
+
+
+3.60 (2017-05-22)
+-----------------
+
+- ZON-3917: Only show big sharing-buttons
+
+- ZON-3881: Provide RSS feed to Yahoo!
+
+
+3.59 (2017-05-19)
+-----------------
+
+- ZON-3822: Clean up AdController values for FBIAs
+
+- FEM-57: Use `amp-accordion` element for infobox
+
+
+3.58 (2017-05-11)
+-----------------
+
+- ZON-3822: Update AdTile code for FBIA
+
+- BUG-723: Add liveblog kicker logo styles for nextread
+
+- FIX: Repair main navigation dropdowns for advertorials
+
+- FIX: Fix headline appearance in navigation flyout for ZEIT Campus advertorials
+
+- FEM-54: Reduce page padding for ZON mobile content
+
+- MAINT: Fix jobbox margin
+
+
+3.57 (2017-05-08)
+-----------------
+
+- ZON-3863: Add required scripts for liveblogs in AMP
+
+- ZON-3863: Remove XML declaration for inline AMP SVGs
+
+
+3.56 (2017-05-05)
+-----------------
+
+- ZON-3889: Remove veeseo widget
 
 - ZON-3822: Implement AdTile3+4 on FBIA analogous to core logic
 
 - ZON-3822: Remove AdTile5 from FBIA
+
+- ZON-3872: Output smart banner id only on HP, change value
+
+- ZON-3870: Redirect paginated image galleries
+
+- BUG-679: Prevent SSO cookie attack vector
+
+- FEM-55: Reduce page padding for ZON mobile index pages (CPs)
+
+- FIX: Be defensive about invalid volume references in article body
 
 
 3.55 (2017-04-28)

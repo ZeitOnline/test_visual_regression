@@ -101,6 +101,8 @@ def app_settings(mockserver):
         'breaking_news_fallback_image': (
             'http://xml.zeit.de/administratives/eilmeldung-share-image'),
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
+        'vivi_zeit.cms_checkout-lock-timeout': '3600',
+        'vivi_zeit.cms_checkout-lock-timeout-temporary': '30',
         'vivi_zeit.cms_keyword-configuration': (
             'egg://zeit.cms.tagging.tests/keywords_config.xml'),
         'vivi_zeit.cms_source-access': (
@@ -165,6 +167,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants.xml'),
         'vivi_zeit.content.image_legacy-variant-source': (
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
+        'vivi_zeit.content.image_copyright-company-source': (
+            'egg://zeit.content.image/tests/fixtures/copyright-company.xml'),
         'vivi_zeit.web_banner-source': (
             'egg://zeit.web.core/data/config/banner.xml'),
         'vivi_zeit.web_banner-id-mappings-source': (

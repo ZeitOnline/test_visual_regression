@@ -1,16 +1,21 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% if view.is_hp %}
-{% include "zeit.web.core:templates/inc/ads/places/desktop/place12.html" %}
+    {% if toggles('iqd_digital_transformation') -%}
+        <!-- P4 -->
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place4.html" %}
+    {% else %}
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place12.html" %}
+    {% endif -%}
 {% endif %}
 
 <section class="video-stage" id="video-stage">
-    {# html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen (NB) #}
-    <header>
-        <h6 class="video-stage-heading">Videos auf {{ lama.use_svg_icon('logo-zon-white', 'video-stage-heading__logo', view.package) }}</h6>
-    </header>
-    {# We heard you like modules, so we put some modules in your module (ND) #}
     <div class="video-stage-main">
+        {# html5, eine section braucht eine headline, falls das seomäßig nicht geht, können wir auch nicht section nehmen (NB) -#}
+        <header>
+            <h6 class="video-stage-heading">Videos auf {{ lama.use_svg_icon('logo-zon-white', 'video-stage-heading__logo', view.package) }}</h6>
+        </header>
+        {# We heard you like modules, so we put some modules in your module (ND) #}
         {% with %}
             {% set teaser = module.videos[0] %}
             {% include "zeit.web.site:templates/inc/teaser/video-large.tpl" %}

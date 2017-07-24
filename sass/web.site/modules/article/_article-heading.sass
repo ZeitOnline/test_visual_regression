@@ -53,9 +53,11 @@
 
 .breaking-news-heading
 	background: #fffee8
-	margin: 0 (-$page-padding) em(24px)
-	padding: em(24px) $page-padding
+	margin: 0 (-$page-padding--small) remify(24px)
+	padding: remify(24px) $page-padding--small
 	+respond-min($break-tablet-min)
-		padding: em(40px) $page-padding
+		margin-left: -$page-padding
+		margin-right: -$page-padding
+		padding: remify(40px) $page-padding
 	.article-heading
 		margin: 0

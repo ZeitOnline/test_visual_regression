@@ -29,13 +29,14 @@ import zeit.web.core.application
 import zeit.web.core.banner
 import zeit.web.core.cache
 import zeit.web.core.comments
-import zeit.web.core.date
-import zeit.web.core.template
+import zeit.web.core.interfaces
 import zeit.web.core.navigation
 import zeit.web.core.paywall
+import zeit.web.core.template
 
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
+DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 log = logging.getLogger(__name__)
 
 
@@ -402,38 +403,52 @@ class Base(object):
         return desc or self.seo_title_default
 
     @zeit.web.reify
-    def ranked_tags(self):
-        if not hasattr(self.context, 'keywords'):
-            return []
-
-        tags = []
-        for keyword in self.context.keywords:
-            if not keyword.label:
-                continue
-            elif not keyword.url_value:
-                uuid = keyword.uniqueId.replace('tag://', '')
-                keyword = zope.component.getUtility(
-                    zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
-                if keyword is None:
+    def keywords(self):
+        if zeit.web.core.application.FEATURE_TOGGLES.find('keywords_from_tms'):
+            conf = zope.component.getUtility(
+                zeit.web.core.interfaces.ISettings)
+            tms = zope.component.getUtility(zeit.retresco.interfaces.ITMS)
+            try:
+                uuid = zeit.cms.content.interfaces.IUUID(self.context).id
+                timeout = conf.get('retresco_timeout', 0.1)
+                return tms.get_article_keywords(uuid, timeout=timeout)
+            except:
+                log.warning(
+                    'Retresco keywords failed for %s', self.context.uniqueId,
+                    exc_info=True)
+                return []
+        else:
+            if not hasattr(self.context, 'keywords'):
+                return []
+            result = []
+            for keyword in self.context.keywords:
+                if not keyword.label:
                     continue
-            tags.append(keyword)
-        return tags
+                if not keyword.url_value:
+                    uuid = keyword.uniqueId.replace('tag://', '')
+                    keyword = zope.component.getUtility(
+                        zeit.cms.tagging.interfaces.IWhitelist).get(uuid)
+                    if keyword is None:
+                        continue
+                if keyword.url_value:
+                    keyword.link = u'thema/{}'.format(keyword.url_value)
+                else:
+                    keyword.link = None
+                result.append(keyword)
+            return result
 
     @zeit.web.reify
     def meta_keywords(self):
-        if self.ranked_tags:
-            result = [x.label for x in self.ranked_tags]
+        if self.keywords:
+            result = [x.label for x in self.keywords]
         else:
             result = [self.ressort.title(), self.sub_ressort.title()]
         return [x for x in result if x]
 
     @zeit.web.reify
     def adc_keywords(self):
-        lower_no_space = [
-            x.label.lower().replace(' ', '-')
-            for x in self.ranked_tags if x.label]
-        return ["".join(re.findall(r"[A-Za-z0-9-]*", item))
-                for item in lower_no_space]
+        lowercase = [x.label.lower() for x in self.keywords if x.label]
+        return ["".join(re.findall(r"\w", item)) for item in lowercase]
 
     @zeit.web.reify
     def is_hp(self):
@@ -707,11 +722,6 @@ class Base(object):
                 not self.paywall):
             code.append('paid')
         return '/'.join([x for x in code if x])
-
-    @zeit.web.reify
-    def share_buttons(self):
-        if getattr(self.context, 'bigshare_buttons', None):
-            return 'big'
 
     @zeit.web.reify
     def no_overscrolling(self):
@@ -1088,9 +1098,6 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
         webtrekk = super(Content, self).webtrekk
         custom_parameter = webtrekk['customParameter']
 
-        style = 'share_buttons_{}'.format(self.share_buttons or 'small')
-        custom_parameter['cp31'] = style
-
         if self.nextread_ad:
             parsed = urlparse.urlparse(self.nextread_ad[0].url)
             custom_parameter['cp33'] = ''.join(parsed[1:3])
@@ -1114,7 +1121,10 @@ class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
             *[t.uniqueId for t in self.nextread])
 
 
+# XXX align-route-config-uris: Ensure downward compatibility until
+# corresponding varnish changes have been deployed. Remove afterwards.
 @zeit.web.view_config(route_name='health_check')
+@zeit.web.view_config(route_name='health_check_XXX')  # XXX remove
 def health_check(request):
     """ View callable to perform a health a check by checking,
         if the configured repository path exists.
@@ -1265,11 +1275,34 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
 
 @pyramid.view.notfound_view_config()
 def not_found(request):
-    body = 'Status 404: Dokument nicht gefunden.'
-    return pyramid.response.Response(
-        body, 404,
-        [('X-Render-With', 'default'),
-         ('Content-Type', 'text/plain; charset=utf-8')])
+    # BBB: Remove this once we're satisfied with rendering it ourselves.
+    if not zeit.web.core.application.FEATURE_TOGGLES.find('render_404'):
+        return pyramid.response.Response(
+            'Status 404: Dokument nicht gefunden.', 404,
+            [('X-Render-With', 'default'),
+             ('Content-Type', 'text/plain; charset=utf-8')])
+
+    if request.path.startswith('/error/404'):  # Safetybelt
+        log.warn('404 for /error/404, returning synthetic response instead')
+        return pyramid.response.Response(
+            'Status 404: Dokument nicht gefunden.', 404)
+    host = request.headers.get('Host', 'www.zeit.de')
+    www_host = host
+    if not host.startswith('localhost') and not host.startswith('www'):
+        parts = host.split('.')
+        www_host = '.'.join(['www'] + parts[1:])
+    return pyramid.response.Response(render_not_found_body(www_host), 404)
+
+
+@DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=bool)
+def render_not_found_body(hostname):
+    subrequest = pyramid.request.Request.blank(
+        '/error/404', headers={'Host': hostname})
+    request = pyramid.threadlocal.get_current_request()
+    response = request.invoke_subrequest(subrequest, use_tweens=True)
+    if response.status_int not in (200, 404):
+        return None
+    return response.body
 
 
 @zeit.web.view_config(context=pyramid.exceptions.URLDecodeError)
@@ -1291,85 +1324,6 @@ def blacklist(context, request):
     return pyramid.httpexceptions.HTTPNotImplemented(
         headers=[('X-Render-With', 'default'),
                  ('Content-Type', 'text/plain; charset=utf-8')])
-
-
-@zeit.web.view_config(
-    route_name='json_delta_time',
-    renderer='json')
-def json_delta_time(request):
-    unique_id = request.GET.get('unique_id', None)
-    date = request.GET.get('date', None)
-    base_date = request.GET.get('base_date', None)
-    parsed_base_date = zeit.web.core.date.parse_date(base_date)
-    if unique_id is not None:
-        return json_delta_time_from_unique_id(
-            request, unique_id, parsed_base_date)
-    elif date is not None:
-        return json_delta_time_from_date(date, parsed_base_date)
-    else:
-        return pyramid.response.Response(
-            'Missing parameter: unique_id or date', 412)
-
-
-def json_delta_time_from_date(date, parsed_base_date):
-    parsed_date = zeit.web.core.date.parse_date(date)
-    if parsed_date is None:
-        return pyramid.response.Response(
-            'Invalid parameter: date', 412)
-    dt = zeit.web.core.date.DeltaTime(parsed_date, parsed_base_date)
-    return {'delta_time': {'time': dt.get_time_since_modification()}}
-
-
-def json_delta_time_from_unique_id(request, unique_id, parsed_base_date):
-    try:
-        content = zeit.cms.interfaces.ICMSContent(unique_id)
-        assert zeit.content.cp.interfaces.ICenterPage.providedBy(content)
-    except (TypeError, AssertionError):
-        return pyramid.response.Response('Invalid resource', 400)
-    delta_time = {}
-    for article in zeit.web.site.view_centerpage.Centerpage(content, request):
-        time = zeit.web.core.date.get_delta_time_from_article(
-            article, base_date=parsed_base_date)
-        if time:
-            delta_time[article.uniqueId] = time
-    return {'delta_time': delta_time}
-
-
-@zeit.web.view_config(
-    route_name='json_comment_count',
-    renderer='json')
-def json_comment_count(request):
-    try:
-        unique_id = request.GET.get('unique_id', None)
-    except UnicodeDecodeError:
-        unique_id = None
-    if unique_id is None:
-        return pyramid.response.Response(
-            'Missing value for parameter: unique_id', 412)
-
-    try:
-        context = zeit.cms.interfaces.ICMSContent(unique_id)
-    except TypeError:
-        return pyramid.response.Response(
-            'Invalid value for parameter: unique_id', 412)
-
-    if zeit.content.cp.interfaces.ICenterPage.providedBy(context):
-        articles = list(
-            zeit.web.site.view_centerpage.Centerpage(context, request))
-    else:
-        article = zeit.content.article.interfaces.IArticle(context, None)
-        articles = [article] if article is not None else []
-
-    community = zope.component.getUtility(zeit.web.core.interfaces.ICommunity)
-    counts = community.get_comment_counts(*[a.uniqueId for a in articles])
-    comment_count = {}
-
-    for article in articles:
-        count = counts.get(article.uniqueId, 0)
-        comment_count[article.uniqueId] = '%s Kommentar%s' % (
-            count == 0 and 'Keine' or count, count != '1' and 'e' or '')
-
-    return {'comment_count': comment_count}
 
 
 @zeit.web.view_config(

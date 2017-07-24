@@ -1,9 +1,11 @@
 .infobox
+	+unpadded
+	+padded
 	background: $zon-lighter-grey
 	clear: both
-	margin: remify(40px (-$page-padding))
+	margin-bottom: remify(40px)
+	margin-top: remify(40px)
 	overflow: hidden // needed to prevent collapsing margins of .infobox-tab__link and .infobox-tab__panel
-	padding: 0 $page-padding
 	&__title
 		+visuallyhidden
 	.js &__container
@@ -31,6 +33,13 @@
 	border-bottom: 1px solid $zon-light-grey
 	&:last-of-type
 		border: none
+	// show single tabs (also does not hurt on desktop)
+	&:only-child
+		[aria-expanded]
+			&:after
+				content: none
+		[aria-hidden="true"]
+			display: block
 	.js &
 		+respond-min($break-tablet-min)
 			border: none

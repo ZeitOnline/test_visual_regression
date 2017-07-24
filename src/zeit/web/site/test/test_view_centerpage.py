@@ -27,7 +27,7 @@ import zeit.web.site.view_centerpage
 
 
 screen_sizes = ((320, 480, True), (520, 960, True),
-                (768, 1024, False), (980, 1024, False))
+                (768, 1024, False), (1000, 1024, False))
 
 
 @pytest.fixture(scope='session', params=screen_sizes)
@@ -220,7 +220,7 @@ def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
         width = driver.execute_script(script)
         assert int(helper.size.get('width')) == int(width * 0.72)
 
-    elif screen_size[0] == 980:
+    elif screen_size[0] == 1000:
         width = driver.execute_script(script)
         assert int(helper.size.get('width')) == int(width * 0.6666)
 
@@ -285,7 +285,7 @@ def test_responsive_image_should_have_noscript(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
 
     noscript = browser.cssselect(
-        '#main .cp-region--multi .scaled-image noscript')
+        '#main .cp-region--duo .scaled-image noscript')
     assert len(noscript) == 3
 
 
@@ -480,7 +480,7 @@ def test_parquet_should_display_meta_links_only_on_desktop(
     assert not more_link.is_displayed(), (
         'Parquet more-link should not be displayed on mobile.')
 
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     assert topic_links.is_displayed(), (
         'Parquet topic-links must be displayed on desktop.')
     assert more_link.is_displayed(), (
@@ -498,7 +498,7 @@ def test_parquet_teaser_small_should_show_no_image_on_mobile(
     assert not small_teaser.is_displayed(), (
         'Small parquet teaser should hide it‘s image on mobile.')
 
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     assert small_teaser.is_displayed(), (
         'Small parquet teaser must show it‘s image on desktop.')
 
@@ -686,7 +686,7 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 768:
         assert int(round(teaser.size.get('width'))) == (int(
             round((main_width - gutter_width) / 3.0) - gutter_width))
-    elif screen_size[0] == 980:
+    elif screen_size[0] == 1000:
         assert int(round(teaser.size.get('width'))) == (int(
             round((main_width - gutter_width) / 3.0) - gutter_width))
 
@@ -716,7 +716,7 @@ def test_adcontroller_values_return_values_on_cp(application):
         ('level3', ''),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline,sasha-waltz,interpol'),
+        ('keywords', 'zeitonline,sashawaltz,interpol'),
         ('tma', '')]
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, pyramid.testing.DummyRequest())
@@ -904,7 +904,7 @@ def test_servicebox_present_in_wide_breakpoints(
         assert servicebox.is_displayed() is False, 'Servicebox displayed'
     if screen_size[0] == 768:
         assert servicebox.is_displayed() is True, 'Servicebox not displayed'
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert servicebox.is_displayed() is True, 'Servicebox not displayed'
 
 
@@ -1052,7 +1052,7 @@ def test_gallery_teaser_hides_elements_on_mobile(selenium_driver, testserver):
     assert gallery_text.is_displayed(), (
         'Gallery description text must be displayed on tablet.')
 
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     assert ressort_linktext.is_displayed(), (
         'Gallery Ressort linktext must be displayed on desktop.')
     assert gallery_counter.is_displayed(), (
@@ -1174,7 +1174,7 @@ def test_breakpoint_sniffer_script(
     if screen_size[0] == 768:
         assert "tablet" == driver.execute_script(
             "return window.Zeit.breakpoint.get()")
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert "desktop" == driver.execute_script(
             "return window.Zeit.breakpoint.get()")
 
@@ -1253,7 +1253,7 @@ def test_quiz_frame_dimensions(selenium_driver, testserver, screen_size):
     if screen_size[0] == 768:
         assert frame1.size.get('height') == 450
 
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert frame1.size.get('height') == 450
 
 
@@ -1274,7 +1274,6 @@ def test_wrapped_features_are_triggered(testbrowser):
 
     browser = testbrowser('/zeit-online/slenderized-index?app-content')
     assert not browser.cssselect('header.header')
-    assert browser.cssselect('body[data-is-wrapped="true"]')
     assert 'window.wrapper' in browser.contents
     assert 'isWrapped: true,' in browser.cssselect('head')[0].text_content()
 
@@ -1349,9 +1348,18 @@ def test_adtile12_from_cp_extra_is_there(testbrowser):
     assert browser.cssselect('#ad-desktop-12')
 
 
-def test_adtile13_from_cp_extra_is_there(testbrowser):
+def test_adtile4_from_cp_extra_is_there(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-online/centerpage/centerpage')
+    assert browser.cssselect('#ad-desktop-4')
+
+
+def test_adtile9_from_cp_extra_is_there(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
     browser = testbrowser('/zeit-online/parquet')
-    assert browser.cssselect('#ad-desktop-13')
+    assert browser.cssselect('#ad-desktop-9')
 
 
 def test_news_teaser_date_and_reference(jinja2_env):
@@ -1680,7 +1688,7 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
     dropdown.find_element_by_xpath(
         "//option[text()='BWL']").click()
     form.submit()
-    assert ('http://ranking.zeit.de/che2016/de/rankingunion/show?'
+    assert ('https://ranking.zeit.de/che/de/rankingunion/show?'
             'esb=24&ab=3&hstyp=1&subfach=&wt_zmc=fix.int.zonpmr.zeitde'
             '.funktionsbox_studium.che.teaser.button.'
             '&utm_medium=fix&utm_source=zeitde_zonpmr_int'
@@ -1699,7 +1707,7 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
     button = (box.find_element_by_class_name('studiumbox__content--clone')
               .find_element_by_class_name('studiumbox__button'))
     button.click()
-    assert ('http://ranking.zeit.de/che2016/de/faecher'
+    assert ('https://ranking.zeit.de/che/de/faecher'
             '?wt_zmc=fix.int.zonpmr.zeitde.funktionsbox_studium.che.teaser'
             '.button_ohne_fach.x&utm_medium=fix&utm_source=zeitde_zonpmr_int'
             '&utm_campaign=funktionsbox_studium'
@@ -1991,7 +1999,7 @@ def test_printkiosk_displays_items_according_to_breakpoint(
         assert teasers[1].is_displayed() is True
         assert teasers[2].is_displayed() is True
         assert teasers[3].is_displayed() is False
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert teasers[0].is_displayed() is True
         assert teasers[1].is_displayed() is True
         assert teasers[2].is_displayed() is True
@@ -2403,7 +2411,7 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
         width = teaser.size.get('width')
         assert int(helper.size.get('width')) == int(width * 0.72)
 
-    elif screen_size[0] == 980:
+    elif screen_size[0] == 1000:
         width = teaser.size.get('width')
         assert int(helper.size.get('width')) == int(width * 0.6666)
 
@@ -2802,14 +2810,12 @@ def test_d17_icon_is_not_display_on_zmo_teaser(monkeypatch, testbrowser):
         '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zmo')
 
 
-def test_d17_icon_is_not_display_on_zett_teaser(monkeypatch, testbrowser):
+def test_d17_icon_is_not_display_on_d17_teaser(monkeypatch, testbrowser):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'tag_logos': True, 'reader_revenue': True}.get)
-    browser = testbrowser('/zeit-online/centerpage/taglogo')
+    browser = testbrowser('/zeit-online/parquet')
     assert not browser.cssselect(
-        'teaser-small__kicker-logo--zett + .teaser-small__kicker-logo--tag')
-    assert not browser.cssselect(
-        '.teaser-small__kicker-logo--tag + .teaser-small__kicker-logo--zett')
+        '.cp-area--d17-parquet .teaser-large__kicker-logo--tag')
 
 
 def test_d17_icon_is_display_on_auto_area(monkeypatch, testbrowser):
@@ -2889,3 +2895,16 @@ def test_special_ressortpage_returns_is_ressortpage_correctly(
         zeit.web.site.view_centerpage.Centerpage, u'ressort', u'mobilitaet')
     view = zeit.web.site.view_centerpage.Centerpage(cp, dummy_request)
     assert view.is_ressortpage
+
+
+def test_hp_should_include_itunes_smart_app_banner(testbrowser):
+    browser = testbrowser('/zeit-online/slenderized-index')
+    app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
+    assert len(app_banner_id) == 1
+    assert app_banner_id[0].attrib['content'] == 'app-id=828889166'
+
+
+def test_cp_should_not_include_itunes_smart_app_banner(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/centerpage')
+    app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
+    assert len(app_banner_id) == 0

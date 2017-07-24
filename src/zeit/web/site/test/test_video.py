@@ -111,7 +111,6 @@ def test_video_report_form_should_be_rendered(testbrowser):
 
 def test_video_page_should_embed_sharing_menu(testbrowser):
     browser = testbrowser('/zeit-online/video/3537342483001')
-    assert len(browser.cssselect('.sharing-menu .sharing-menu__title')) > 0
     assert len(browser.cssselect('.sharing-menu a.sharing-menu__link')) > 0
 
 
@@ -219,12 +218,6 @@ def test_article_teaser_should_not_be_identified_as_video(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/image/crystal-meth-nancy-schmidt')
     assert not zeit.web.core.template.is_video(article)
-
-
-def test_video_should_contain_veeseo_widget(testbrowser):
-    select = testbrowser('/zeit-online/video/3537342483001').cssselect
-    assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
-    assert select('.RV2VW2')
 
 
 def test_video_should_not_break_on_missing_still_image(

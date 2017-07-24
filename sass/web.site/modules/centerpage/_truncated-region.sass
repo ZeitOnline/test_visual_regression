@@ -11,7 +11,10 @@
 
 	&__control
 		display: none
-		padding: remify(16px 0)
+		padding: remify(16px $page-padding--small)
+		+respond-min($break-areas)
+			padding-left: 0
+			padding-right: 0
 		+on-interaction
 			.cp-area__badge-icon
 				background-color: $zon-charcoal

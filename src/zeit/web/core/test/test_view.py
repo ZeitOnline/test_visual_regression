@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
 import mock
 import pytest
 import requests
@@ -54,80 +53,6 @@ def mock_ad_view(application):
                 self.adwords = ['zeitonline', 'zeitmz']
 
     return MockAdView
-
-
-def test_json_delta_time_from_date_should_return_null(testbrowser):
-    browser = testbrowser(
-        '/json/delta_time?'
-        'date=2014-10-14T09%3A06%3A45.950590%2B00%3A00'
-        '&base_date=2014-10-15T10%3A06%3A45.950590%2B00%3A00')
-    assert browser.contents == (
-        '{"delta_time": {"time": null}}')
-
-
-def test_json_delta_time_from_date_should_return_delta_time(testbrowser):
-    browser = testbrowser(
-        '/json/delta_time?'
-        'date=2014-10-14T09%3A06%3A45.950590%2B00%3A00'
-        '&base_date=2014-10-14T10%3A36%3A45.950590%2B00%3A00')
-    assert browser.contents == (
-        '{"delta_time": {"time": "vor 1 Stunde"}}')
-
-
-def test_json_delta_time_from_date_should_fallback_to_now_for_base_date(
-        testbrowser):
-    browser = testbrowser(
-        '/json/delta_time?'
-        'date=2014-10-15T10%3A06%3A45.950590%2B00%3A00')
-    assert browser.contents is not None
-    assert browser.contents != ''
-
-
-def test_json_delta_time_from_date_should_return_http_error_on_missing_params(
-        testbrowser):
-    with pytest.raises(urllib2.HTTPError):
-        testbrowser('/json/delta_time')
-
-
-def test_json_delta_time_from_unique_id_should_return_delta_time(
-        testbrowser, clock):
-    clock.freeze(zeit.web.core.date.parse_date(
-        '2014-10-15T16:23:59.780412+00:00'))
-
-    browser = testbrowser(
-        '/json/delta_time?'
-        'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup')
-    content = json.loads(browser.contents)
-    a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
-    a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
-    assert content['delta_time'][a1] == 'Vor 1 Stunde'
-    assert content['delta_time'][a2] == 'Vor 30 Minuten'
-
-
-def test_json_delta_time_from_unique_id_should_return_http_error_on_false_uid(
-        testbrowser):
-    with pytest.raises(urllib2.HTTPError):
-        testbrowser('/json/delta_time?unique_id=foo')
-
-
-def test_json_delta_time_from_unique_id_should_return_http_error_on_article(
-        testbrowser):
-    with pytest.raises(urllib2.HTTPError) as error:
-        testbrowser('/json/delta_time?unique_id='
-                    'http://xml.zeit.de/zeit-magazin/article/01')
-    assert error.value.getcode() == 400
-
-
-def test_json_delta_time_from_unique_id_should_use_custom_base_time(
-        testbrowser):
-    browser = testbrowser(
-        '/json/delta_time?base_date=2014-10-15T16%3A06%3A45.95%2B00%3A00&'
-        'unique_id=http://xml.zeit.de/zeit-online/main-teaser-setup')
-    content = json.loads(browser.contents)
-    a1 = 'http://xml.zeit.de/zeit-online/cp-content/article-01'
-    a2 = 'http://xml.zeit.de/zeit-online/cp-content/article-02'
-    assert content['delta_time'][a1] == 'Vor 1 Stunde'
-    assert content['delta_time'][a2] == 'Vor 12 Minuten'
 
 
 def test_http_header_should_contain_c1_header_fields(testserver):
@@ -204,11 +129,21 @@ def test_c1_heading_and_kicker_should_be_properly_escaped(
         'http://xml.zeit.de/zeit-magazin/article/04')
     view = zeit.web.core.view.Content(context, dummy_request)
     assert dict(view.c1_header).get('C1-Track-Heading') == (
-        u'Kann Leipzig Hypezig berleben')
+        u'Kann Leipzig Hypezig berleben?')
     assert dict(view.c1_client).get('set_heading') == (
         u'"Kann Leipzig Hypezig überleben?"')
     assert dict(view.c1_header).get('C1-Track-Kicker') == 'Szene-Stadt'
     assert dict(view.c1_client).get('set_kicker') == '"Szene-Stadt"'
+
+
+def test_c1_headers_should_be_properly_escaped(application, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/04')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    with mock.patch('zeit.web.core.paywall.CeleraOneMixin._c1_channel',
+                    mock.PropertyMock()) as channel:
+        channel.return_value = 'foo\nbar'
+        assert dict(view.c1_header).get('C1-Track-Channel') == 'foobar'
 
 
 def test_c1_service_id_should_be_included_in_tracking_parameters(
@@ -804,6 +739,16 @@ def test_rawr_config_should_have_series_tag(selenium_driver, testserver):
 
 
 def test_health_check_should_response_and_have_status_200(testbrowser):
+    browser = testbrowser('/health-check')
+    assert browser.headers['Content-Length'] == '2'
+    resp = zeit.web.core.view.health_check('request')
+    assert resp.status_code == 200
+
+
+# XXX align-route-config-uris: Ensure downward compatibility until
+# corresponding varnish changes have been deployed.
+# Remove this test afterwards!
+def test_health_check_should_response_and_have_status_200_XXX(testbrowser):
     browser = testbrowser('/health_check')
     assert browser.headers['Content-Length'] == '2'
     resp = zeit.web.core.view.health_check('request')
@@ -911,9 +856,7 @@ def test_webtrekk_parameters_may_include_nextread_url(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/simple-verlagsnextread')
     view = zeit.web.core.view.Content(context, dummy_request)
-    assert view.webtrekk['customParameter']['cp33'] == (
-        'shop.zeit.de/sortiment/kinderwelt/spielzeug-und-accessoires/2178/'
-        'zookids-stiftemaeppchen-tom-tiger')
+    assert view.webtrekk['customParameter']['cp33']
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     view = zeit.web.core.view.Content(context, dummy_request)
@@ -1186,8 +1129,67 @@ def test_url_path_not_found_should_render_404(testserver):
     resp = requests.get('%s/zeit-magazin/centerpage/lifestyle'
                         % testserver.url)
     assert u'Dokument nicht gefunden' in resp.text
+    assert resp.status_code == 404
 
 
-def test_not_renderable_content_object_should_trigger_restart(testserver):
+def test_not_renderable_content_object_should_render_404(testserver):
     resp = requests.get('%s/zeit-online/quiz/quiz-workaholic' % testserver.url)
-    assert resp.headers['x-render-with'] == 'default'
+    assert resp.status_code == 404
+
+
+def test_404_page_should_not_render_meta_and_share(testbrowser):
+
+    browser = testbrowser()
+    browser.raiseHttpErrors = False
+    browser.open('/wurstbrot')
+
+    assert len(browser.cssselect('.byline')) == 0
+    assert len(browser.cssselect('.metadata')) == 0
+    assert len(browser.cssselect('.sharing-menu')) == 0
+    assert len(browser.cssselect('.article-tags')) == 0
+    assert len(browser.cssselect('.comment-section')) == 0
+    assert len(browser.cssselect(
+        '.article-pagination__link[data-ct-label="Startseite"]')) == 1
+
+
+def test_404_page_should_render_appropriate_links(testserver):
+    resp = requests.get('%s/nonexistent' % testserver.url,
+                        headers={'Host': 'www.staging.zeit.de'})
+    assert 'http://www.staging.zeit.de/index' in resp.text
+
+
+def test_404_page_should_use_www_for_non_content_hosts(testserver):
+    resp = requests.get('%s/nonexistent' % testserver.url,
+                        headers={'Host': 'img.staging.zeit.de'})
+    assert 'http://www.staging.zeit.de/index' in resp.text
+    assert resp.status_code == 404
+
+
+def test_404_page_should_have_fallback_for_errors(testbrowser):
+    folder = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/error/')
+    del folder['404']
+    browser = testbrowser()
+    browser.raiseHttpErrors = False
+    browser.open('/wurstbrot')
+    assert 'Status 404: Dokument nicht gefunden.' in browser.contents
+
+
+def test_retrieve_keywords_from_tms(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'keywords_from_tms': True}.get)
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['retresco_timeout'] = 0.42
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.core.view.Content(article, None)
+    with mock.patch(
+            'zeit.retresco.connection.TMS.get_article_keywords') as tms:
+        with mock.patch('zeit.content.article.article.Article.keywords',
+                        mock.PropertyMock()) as kw:
+            tms.return_value = [mock.sentinel.tag]
+            assert view.keywords == [mock.sentinel.tag]
+            assert not kw.called
+            tms.assert_called_with(
+                '{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}',
+                timeout=0.42)

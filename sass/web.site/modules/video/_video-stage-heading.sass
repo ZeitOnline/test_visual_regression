@@ -1,21 +1,12 @@
 .video-stage-heading
 	color: #eee
-	display: block
-	font-size: remify(18px)
-	font-weight: bold
+	font-size: em(18px)
 	letter-spacing: $zon-letter-spacing-m
-	line-height: 1.125
-	margin: 0 auto
-	padding: remify($small--px)
-	width: 100% // for IE8, to display the logo correctly
-	+font-smoothing()
+	line-height: 3.5
+	margin: 0
 	+respond-min($break-phablet-min)
-		font-size: remify(24px)
-	+respond-min($break-desktop-min)
-		padding: 0
-		position: absolute
-		left: $page-padding
-		top: remify($small--px)
+		font-size: em(24px)
+		line-height: remify(70px)
 
 	&__logo
 		height: remify(18px)

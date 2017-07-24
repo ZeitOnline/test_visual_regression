@@ -156,6 +156,14 @@
       </region>
     </cluster>
 
+    <cluster area="id-ce33b4ec-f212-497e-b201-6045478b7e95" kind="solo">
+        <region area="id-13ae5250-58f2-4d47-8fe9-5c24164389e6" kind="solo" visible="True">
+            <container cp:__name__="id-d976a64d-1589-4b49-a765-12bdcdf94d1f" cp:type="cpextra" module="adplace4" visible="True">
+                <cp_extra for="zeit.content.cp.interfaces.IArea" id="adplace4" />
+            </container>
+        </region>
+    </cluster>
+
     <cluster area="id-6a3c9692-f2bd-4234-8890-a84f1924dfgdef8g3" visible="True" kind="trio">
       <region area="id-74baeca3-7dbb-437d-8e70fdfd-3a3gfhd0796d9d49" visible="True" kind="trio" title="Wo die schönen Dinge Wohnen" teaserText="Wie es kam, dass in München eine goldene Generation von Industriedesignern heranwuchs.">
         <container cp:type="teaser" module="zmo-mtb-square" visible="True" cp:__name__="id-d27dc53f-24a1-44ae-8899-b0b42ce03fdf">

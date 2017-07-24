@@ -1,43 +1,14 @@
+import mock
 import pytest
 import requests
 import zope.component
 
+from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.centerpage
 import zeit.cms.interfaces
 
 import zeit.web.core.centerpage
 import zeit.web.core.view_centerpage
-
-
-def test_centerpage_should_return_jsonp_with_timestamp_if_released(
-        testbrowser):
-    # published page returns its pubdate
-    browser = testbrowser(
-        '/json_update_time/zeit-online/main-teaser-setup?callback=foo123')
-    pubstring = (
-        '/**/foo123({"last_published_semantic": '
-        '"2014-11-18T12:18:27.293179+00:00", '
-        '"last_published": "2014-11-18T12:18:27.293179+00:00"});')
-    assert browser.headers.type == 'application/javascript'
-    assert pubstring == browser.contents
-
-
-def test_centerpage_should_return_jsonp_with_timestamp_if_not_released(
-        testbrowser):
-    # published page returns empty string
-    browser = testbrowser(
-        '/json_update_time/zeit-online/teaser-serie-setup?callback=foo123')
-    pubstring = (
-        '/**/foo123({"last_published_semantic": null, '
-        '"last_published": null});')
-    assert browser.headers.type == 'application/javascript'
-    assert pubstring == browser.contents
-
-
-def test_json_update_time_handler_should_set_exipration_header(testbrowser):
-    browser = testbrowser(
-        '/json_update_time/zeit-online/main-teaser-setup?cb=123')
-    assert browser.headers.get('cache-control') == 'max-age=5'
 
 
 def test_centerpage_should_aggregate_all_teasers_correctly(
@@ -104,6 +75,30 @@ def test_centerpage_should_collect_teaser_counts_from_community(
     path, count = view.comment_counts.items()[0]
     assert '/zeit-magazin/article/essen-geniessen-spargel-lamm' in path
     assert count == '129'
+
+
+def test_centerpage_should_not_request_teaser_counts_for_disabled_content(
+        application, dummy_request, workingcopy):
+    article = 'http://xml.zeit.de/zeit-online/article/simple'
+    with checked_out(zeit.cms.interfaces.ICMSContent(article)) as co:
+        co.commentsAllowed = False
+
+    cp = zeit.content.cp.centerpage.CenterPage()
+    cp.uniqueId = 'http://xml.zeit.de/testcp'
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'
+    area.automatic_type = 'query'
+    area.count = 1
+    area.automatic = True
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': article, 'type': 'article'}]
+
+    view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
+    with mock.patch(
+            'zeit.web.core.comments.Community.get_comment_counts') as count:
+        assert view.comment_counts == {}
+        assert not count.called
 
 
 def test_centerpage_should_have_xmaxage(testserver, testbrowser):
@@ -354,30 +349,3 @@ def test_centerpage_should_update_webtrekk_content_id_for_search_results(
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
     view.content_path = u'/suche/index'
     assert view.webtrekk_content_id.endswith('/suche/treffer')
-
-
-def test_hp_topics_should_be_rendered(application, dummy_request):
-    config = zeit.web.core.view_centerpage.json_topic_config(dummy_request)
-
-    assert config['topics'][0]['topic'] == 'Islamischer Staat'
-    assert config['topics'][0]['url'] == ('http://www.zeit.de/schlagworte/'
-                                          'organisationen/islamischer-staat/'
-                                          'index')
-    assert config['topics'][1]['topic'] == 'Bundeswehr'
-    assert config['topics'][1]['url'] == ('http://www.zeit.de/schlagworte/'
-                                          'themen/bundeswehr/index')
-    assert config['topics'][2]['topic'] == 'Hongkong'
-    assert config['topics'][2]['url'] == ('http://www.zeit.de/schlagworte/'
-                                          'orte/hongkong/index')
-
-
-def test_hp_topics_should_only_be_rendered_as_needed(application,
-                                                     dummy_request,
-                                                     workingcopy):
-    cp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
-    with zeit.cms.checkout.helper.checked_out(cp) as co:
-        co.topiclink_url_3 = ''
-        co.topiclink_label_3 = ''
-    config = zeit.web.core.view_centerpage.json_topic_config(
-        dummy_request)
-    assert len(config['topics']) == 2

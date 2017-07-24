@@ -1,5 +1,5 @@
 </head>
-<body>
+<body {% if toggles('zon_1000px') %}id="zon1000"{% endif -%}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 
@@ -15,16 +15,7 @@
 
     <div class="page">
         {% block adplace_top %}
-            <div id="iqd_mainAd" >
-                <div id="iqd_align_Ad">
-                    <div id="iqd_topAd">
-                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place1.html" %}
-                        <div id="iqd_rightAd">
-                            {% include "zeit.web.core:templates/inc/ads/places/desktop/place2.html" %}
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% include "zeit.web.core:templates/inc/ads/mainad.html" %}
         {% endblock adplace_top %}
         <div class="page__content">
             <header class="header" data-ct-area="topnav">
@@ -39,7 +30,7 @@
             <main class="{{ 'main' | with_mods(view.type) }}" id="main" itemprop="mainContentOfPage">
 
             {%- if view.is_advertorial and view.cap_title %}
-                <div class="advertorial-marker advertorial-marker--single">
-                    <div class="advertorial-marker__label advertorial-marker__label--single">{{ view.cap_title }}</div>
+                <div class="advertorial-marker">
+                    <div class="advertorial-marker__label">{{ view.cap_title }}</div>
                 </div>
             {% endif %}

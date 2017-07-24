@@ -11,25 +11,20 @@
 
 // responsive fullwidth
 .x-fullwidth
-	margin-left: -$page-padding
-	margin-right: -$page-padding
+	+unpadded
 	+respond-max(em(480px), false)
 		&--mobile
-			margin-left: -$page-padding
-			margin-right: -$page-padding
+			+unpadded
 	+respond-max($break-phablet-min, false)
 		&--phablet
-			margin-left: -$page-padding
-			margin-right: -$page-padding
+			+unpadded
 	+respond-max($break-tablet-min, false)
 		&--tablet
-			margin-left: -$page-padding
-			margin-right: -$page-padding
+			+unpadded
 
 // page padding
 .x-page-padding
-	padding-left: $page-padding
-	padding-right: $page-padding
+	+padded
 
 // text styles
 .x-headline,

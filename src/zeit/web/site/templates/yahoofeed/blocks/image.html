@@ -1,0 +1,20 @@
+{# Image size is defined explicitly, because
+   (1) we want to crop it with our focus point ... and not hope for Yahoo to do good cropping.
+   (2) we do not want to provide the large original image
+   #}
+
+{% require image = get_image(block, variant_id='wide', fallback=False) %}
+    {% set image_width = 1440 %}
+    {% set image_height = (image_width / image.ratio) | round | int %}
+    <figure>
+        {# XXX: Remove as soon as we have SSL #}
+        <img src="{{ (request.image_host | replace('http://', 'https://')) + image.path }}__{{ image_width }}x{{ image_height }}" alt="{{ image.caption }} {{ image.copyrights | map(attribute='text') | join(' ') }}" title="{{ image.caption }} {{ image.copyrights | map(attribute='text') | join(' ') }}"/>
+        <figcaption>{{ image.caption }}
+            {% for item in image.copyrights %}
+                <span itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
+                    <span itemprop="name">{{ item.text }}</span>
+                </span>
+            {% endfor %}
+        </figcaption>
+    </figure>
+{% endrequire %}

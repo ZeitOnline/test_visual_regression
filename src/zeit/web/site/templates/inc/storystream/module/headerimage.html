@@ -23,7 +23,11 @@
                         {{ lama.use_svg_icon('storystream-updated', 'storystream-headerimage__updateicon', view.package) }}
                         Zuletzt aktualisiert am
                         <time class="{{ blockname }}__date" itemprop="dateModified" datetime="{{ view.date_last_modified | format_date('iso8601') }}">
-                            {{- view.date_last_modified | format_date('short') -}}
+                            {% if view.atom_meta.latest_date %}
+                                {{- view.atom_meta.latest_date | format_date('short') -}}
+                            {% else %}
+                                {{- view.date_last_modified | format_date('short') -}}
+                            {% endif %}
                         </time>
                     </span>
                 {% endif %}

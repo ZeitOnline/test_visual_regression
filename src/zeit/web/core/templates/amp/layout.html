@@ -23,18 +23,24 @@
     {% endblock style %}
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     {% if toggles('amp_advertising') -%}
-    <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
-    {% endif -%}
-    {% if toggles('amp_new_advertising') -%}
     <script async custom-element="amp-ad" src="https://cdn.ampproject.org/v0/amp-ad-0.1.js"></script>
     {% endif -%}
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
     <script async custom-element="amp-brightcove" src="https://cdn.ampproject.org/v0/amp-brightcove-0.1.js"></script>
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.1.js"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
-    {% block scripts %}{% endblock %}
+    {% if view.liveblog and view.liveblog.liveblog -%}
+    <script async custom-element="amp-live-list" src="https://cdn.ampproject.org/v0/amp-live-list-0.1.js"></script>
+    <script async custom-element="amp-twitter" src="https://cdn.ampproject.org/v0/amp-twitter-0.1.js"></script>
+    <script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
+    <script async custom-element="amp-soundcloud" src="https://cdn.ampproject.org/v0/amp-soundcloud-0.1.js"></script>
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    {% endif -%}
 </head>
 
 <body>
+    <amp-analytics config="https://www.googletagmanager.com/amp.json?id=GTM-TXP6CDT&gtm.url=SOURCE_URL" data-credentials="include"></amp-analytics>
+
     <div class="symbols">
         {% block symbols %}
             {%- include "zeit.web.static:css/web.site/amp.svg" -%}
@@ -64,21 +70,23 @@
         </header>
 
         {% block breaking_news %}
-            {% include "zeit.web.site:templates/inc/breaking_news.tpl" %}
+            {% include "zeit.web.site:templates/inc/breaking-news-esi.html" %}
         {% endblock breaking_news %}
         {% block liveblog_status %}{% endblock %}
 
         {% if toggles('amp_advertising') %}
-            {% include "zeit.web.core:templates/amp/ads/tile_1.html" %}
-        {% endif %}
-        {% if toggles('amp_new_advertising') %}
             {% include "zeit.web.core:templates/amp/amp-ads/tile_1.html" %}
         {% endif %}
 
         <main itemprop="mainContentOfPage">
         {% block main %}
             {% block content %}
-            <article class="article" itemprop="mainEntity" itemscope itemtype="{% block itemtype %}http://schema.org/Article{% endblock %}">
+            <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/
+                {%- if view.liveblog and view.liveblog.liveblog -%}
+                    LiveBlogPosting
+                {%- else -%}
+                    Article
+                {%- endif -%}">
                 {% include [
                     "{}:templates/amp/article/publisher.html".format(view.package),
                     "zeit.web.core:templates/amp/article/publisher.html"] %}
@@ -139,13 +147,7 @@
                             {% for block in page %}
                                 {% set block_loop = loop %}
                                 {% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}
-                                {% if toggles('amp_advertising') %}
-                                    {% if page.number == 0 and block | block_type == 'paragraph' and ad_displayed == False %}
-                                        {% set ad_displayed = True %}
-                                        {% include "zeit.web.core:templates/amp/ads/tile_4.html" %}
-                                    {% endif %}
-                                {% endif %}
-                                {% if toggles('amp_new_advertising') -%}
+                                {% if toggles('amp_advertising') -%}
                                     {% for page_number, block_number, adtile in adplaces %}
                                         {% if page.number == page_number and block_loop.index0 == block_number %}
                                             {% include "zeit.web.core:templates/amp/amp-ads/tile_{}.html".format(adtile) %}
@@ -165,8 +167,8 @@
                     </a>
                 </div>
 
-                {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_small_link_x' -%}
-                {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share_small.link.x' -%}
+                {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_link_x' -%}
+                {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share.link.x' -%}
                 <footer class="article__footer article__item">
                     <nav class="article-sharing">
                         <ul class="article-sharing__list">
@@ -213,21 +215,21 @@
                         </ul>
                     </nav>
 
-                {% if view.ranked_tags | length %}
+                {% if view.keywords %}
                     <nav class="article-tags">
-                        <h4 class="article-tags__title">Schlagworte</h4>
+                        <h4 class="article-tags__title">Schlagwörter</h4>
                         <ul class="article-tags__list" itemprop="keywords">
-                        {% for tag in view.ranked_tags[:6] -%}
-                            {% if tag.url_value %}
-                                <li><a href="{{ request.route_url('home') }}thema/{{ tag.url_value }}" class="article-tags__link"
+                        {% for keyword in view.keywords[:6] -%}
+                            {% if keyword.link %}
+                                <li><a href="{{ request.route_url('home') }}{{ keyword.link }}" class="article-tags__link"
                                     data-vars-number="{{ loop.index }}"
-                                    data-vars-link-text="{{ tag.label }}"
-                                    data-vars-url="{{ request.route_url('home')  | substring_from('://') }}thema/{{ tag.url_value }}"
-                                >{{ tag.label }}</a>
+                                    data-vars-link-text="{{ keyword.label }}"
+                                    data-vars-url="{{ request.route_url('home')  | substring_from('://') }}{{ keyword.link }}"
+                                >{{ keyword.label }}</a>
                                 {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
                                 </li>
                             {% else %}
-                                <li><span class="article-tags__link">{{ tag.label }}</span>
+                                <li><span class="article-tags__link">{{ keyword.label }}</span>
                                 {%- if not loop.last %}<span class="visually-hidden">, </span>{% endif -%}
                                 </li>
                             {% endif %}
@@ -253,9 +255,6 @@
 
             {% block footer_ad %}
                 {% if toggles('amp_advertising') %}
-                    {% include "zeit.web.core:templates/amp/ads/tile_8.html" %}
-                {% endif %}
-                {% if toggles('amp_new_advertising') %}
                     {% include "zeit.web.core:templates/amp/amp-ads/tile_8.html" %}
                 {% endif %}
             {% endblock footer_ad %}

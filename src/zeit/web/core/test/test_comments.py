@@ -17,19 +17,20 @@ import requests.exceptions
 import zope.component
 
 from zeit.cms.interfaces import ID_NAMESPACE as NS
+from zeit.cms.checkout.helper import checked_out
 
 import zeit.web.core.view_comment
 
 
 def test_comment_count_should_handle_missing_uid_param(testbrowser):
     with pytest.raises(urllib2.HTTPError) as info:
-        testbrowser('/json/comment_count')
+        testbrowser('/json/comment-count')
     assert info.value.getcode() == 412
 
 
 def test_comment_count_should_handle_invalid_uid_param(testbrowser):
     with pytest.raises(urllib2.HTTPError) as info:
-        testbrowser('/json/comment_count?unique_id=foo')
+        testbrowser('/json/comment-count?unique_id=foo')
     assert info.value.getcode() == 412
 
 
@@ -45,7 +46,7 @@ def test_comment_count_should_return_expected_json_structure_for_cp_id(
         <node comment_count="291" url="/zeit-online/cp-content/article-02"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id=' +
+    browser = testbrowser('/json/comment-count?unique_id=' +
                           NS + 'zeit-online/main-teaser-setup')
 
     assert 'comment_count' in browser.json
@@ -65,7 +66,7 @@ def test_comment_count_should_return_expected_json_structure_for_article_id(
         <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count'
+    browser = testbrowser('/json/comment-count'
                           '?unique_id=' + NS + 'zeit-magazin/article/01')
 
     assert 'comment_count' in browser.json
@@ -82,7 +83,7 @@ def test_comment_count_should_fallback_to_zero_if_count_unavailable(
         <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id=' +
+    browser = testbrowser('/json/comment-count?unique_id=' +
                           NS + 'zeit-magazin/misc')
 
     assert 'comment_count' in browser.json
@@ -100,11 +101,39 @@ def test_comment_count_should_be_empty_for_link_object(
         <node comment_count="129" url="/zeit-magazin/article/01"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id=' +
+    browser = testbrowser('/json/comment-count?unique_id=' +
                           NS + 'zeit-online/cp-content/link_teaser')
 
     assert 'comment_count' in browser.json
     assert not browser.json['comment_count']
+
+
+def test_comment_count_should_not_request_counts_for_disabled_content(
+        application, dummy_request, workingcopy):
+    article = 'http://xml.zeit.de/zeit-online/article/simple'
+    with checked_out(zeit.cms.interfaces.ICMSContent(article)) as co:
+        co.commentsAllowed = False
+
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{'uniqueId': article, 'type': 'article'}]
+
+    cp = zeit.content.cp.centerpage.CenterPage()
+    area = cp.body.create_item('region').create_item('area')
+    area.kind = 'duo'
+    area.automatic_type = 'query'
+    area.count = 1
+    area.automatic = True
+    repository = zope.component.getUtility(
+        zeit.cms.repository.interfaces.IRepository)
+    repository['testcp'] = cp
+
+    dummy_request.GET['unique_id'] = 'http://xml.zeit.de/testcp'
+    result = zeit.web.core.view_json.json_comment_count(dummy_request)
+    with mock.patch(
+            'zeit.web.core.comments.Community.get_comment_counts') as count:
+        assert 'Keine Kommentare' == result['comment_count'][
+            'http://xml.zeit.de/zeit-online/article/simple']
+        assert not count.called
 
 
 def test_request_thread_should_respond(application, mockserver):
@@ -297,7 +326,7 @@ def test_dict_with_article_paths_and_comment_counts_should_be_created(
          url="/zeit-magazin/centerpage/article_image_asset"/>
     </nodes>""")
 
-    browser = testbrowser('/json/comment_count?unique_id=' +
+    browser = testbrowser('/json/comment-count?unique_id=' +
                           NS + 'zeit-magazin/centerpage/article_image_asset')
 
     assert 'comment_count' in browser.json

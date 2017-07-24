@@ -40,10 +40,9 @@ $timeline-padding: remify(24px)
 
 
 .storystream-in-article
-	margin: remify(50px) (-$page-padding)
-	+respond-min($break-tablet-min)
-		margin-bottom: remify(60px)
-		margin-top: remify(60px)
+	margin: remify(50px) (-$page-padding--small)
+	+respond-min($break-page-padding)
+		margin: remify(60px) (-$page-padding)
 
 	&__container
 		padding: 0 $page-padding--small

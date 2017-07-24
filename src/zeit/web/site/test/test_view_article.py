@@ -26,7 +26,7 @@ import zeit.web.site.view_article
 
 
 screen_sizes = ((320, 480, True), (520, 960, True),
-                (768, 1024, False), (980, 1024, False))
+                (768, 1024, False), (1000, 1024, False))
 
 
 @pytest.fixture(scope='session', params=screen_sizes)
@@ -292,7 +292,7 @@ def test_schema_org_article_mark_up(testbrowser):
     assert len(image.cssselect('[itemprop="caption"]')) == 1
     assert copyright_holder.get('itemtype') == 'http://schema.org/Person'
     person = copyright_holder.cssselect('[itemprop="name"]')[0]
-    assert person.text == u'© Warner Bros.'
+    assert person.text == u'© Warner Bros./dpa'
 
     assert date_published.get('datetime') == '2015-05-27T19:11:30+02:00'
 
@@ -344,52 +344,16 @@ def test_article_obfuscated_source_without_date_print_published():
     assert view.obfuscated_source == base64.b64encode(source.encode('latin-1'))
 
 
-def test_article_sharing_menu_should_open_and_close(
-        testserver, selenium_driver):
-    selenium_driver.set_window_size(320, 480)
-    selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
-
-    sharing_menu_selector = '.sharing-menu > .sharing-menu__items'
-    sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > a[aria-controls]')
-    sharing_menu_items = selenium_driver.find_element_by_css_selector(
-        sharing_menu_selector)
-
-    assert sharing_menu_items.is_displayed() is False, (
-        'sharing menu should be hidden by default')
-
-    sharing_menu_target.click()
-    # we need to wait for the CSS animation to finish
-    # so the sharing menu is actually visible
-    condition = expected_conditions.visibility_of_element_located((
-        By.CSS_SELECTOR, sharing_menu_selector))
-    assert WebDriverWait(
-        selenium_driver, 1).until(condition), (
-            'sharing menu should be visible after interaction')
-
-    sharing_menu_target.click()
-    # we need to wait for the CSS animation to finish
-    # so the sharing menu is actually hidden
-    condition = expected_conditions.invisibility_of_element_located((
-        By.CSS_SELECTOR, sharing_menu_selector))
-    assert WebDriverWait(
-        selenium_driver, 1).until(condition), (
-            'sharing menu should hide again on click')
-
-
 def test_article_sharing_menu_should_hide_app_links_tablet_upwards(
         testserver, selenium_driver):
     selenium_driver.set_window_size(768, 800)
     selenium_driver.get('{}/zeit-online/article/01'.format(testserver.url))
 
-    sharing_menu_target = selenium_driver.find_element_by_css_selector(
-        '.sharing-menu > a[aria-controls]')
     whatsapp_item = selenium_driver.find_element_by_css_selector(
         '.sharing-menu__item--whatsapp')
     messenger_item = selenium_driver.find_element_by_css_selector(
         '.sharing-menu__item--messenger')
 
-    sharing_menu_target.click()
     assert not whatsapp_item.is_displayed(), (
         'Sharing link to WhatsApp should be hidden on tablet & desktop')
     assert not messenger_item.is_displayed(), (
@@ -603,7 +567,7 @@ def test_nextread_is_responsive(testserver, selenium_driver, screen_size):
     if screen_size[0] == 768:
         assert nextread.size.get('height') < 350
 
-    if screen_size[0] == 980:
+    if screen_size[0] == 1000:
         assert nextread.size.get('height') < 450
 
 
@@ -697,18 +661,6 @@ def test_breaking_news_article_shows_date_first_released(jinja2_env):
     view.date_first_released = datetime.time(11, 55, 0)
     lines = tpl.blocks['breaking_news'](tpl.new_context({'view': view}))
     html_str = ' '.join(lines).strip()
-    html = lxml.html.fromstring(html_str)
-    time = html.cssselect('.breaking-news-banner__time')
-    assert time[0].text == '11:55 Uhr'
-
-
-def test_breaking_news_banner_shows_date_first_released(jinja2_env):
-    tpl = jinja2_env.get_template(
-        'zeit.web.site:templates/inc/breaking_news.tpl')
-    view = mock.Mock()
-    view.breaking_news.published = True
-    view.breaking_news.date_first_released = datetime.time(11, 55, 0)
-    html_str = tpl.render(view=view)
     html = lxml.html.fromstring(html_str)
     time = html.cssselect('.breaking-news-banner__time')
     assert time[0].text == '11:55 Uhr'
@@ -1183,13 +1135,13 @@ def test_article_lineage_should_be_hidden_on_small_screens(
     lineage_linktexts = driver.find_elements_by_css_selector(
         '.al-text')
 
-    if screen_size[0] < 980:
+    if screen_size[0] < 1000:
         assert not lineage_links[0].is_displayed()
         assert not lineage_links[1].is_displayed()
         assert not lineage_linktexts[0].is_displayed()
         assert not lineage_linktexts[1].is_displayed()
 
-    if screen_size[0] >= 980:
+    if screen_size[0] >= 1000:
         assert lineage_links[0].is_displayed()
         assert lineage_links[1].is_displayed()
         assert not lineage_linktexts[0].is_displayed()
@@ -1200,7 +1152,7 @@ def test_article_lineage_should_be_hidden_on_small_screens(
 def test_article_lineage_should_be_fixed_after_scrolling(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.set_window_size(980, 1024)
+    driver.set_window_size(1000, 1024)
     driver.get('%s/zeit-online/article/zeit' % testserver.url)
     driver.execute_script("window.scrollTo(0, 1200)")
     try:
@@ -1255,27 +1207,6 @@ def test_article_lineage_should_not_render_on_administratives(testbrowser):
     assert len(browser.cssselect('.article-lineage')) == 0
 
 
-def test_advertisement_nextread_should_render_after_veeseo(testbrowser):
-    browser = testbrowser('/zeit-online/article/simple-verlagsnextread')
-    nextread = browser.cssselect('article.nextread')[0]
-    siblings = nextread.xpath('following-sibling::*')
-    assert siblings[0].get('class') == 'RA2VW2'
-    assert siblings[1].get('class') == 'nextread-advertisement'
-
-
-def test_article_should_contain_veeseo_widget(testbrowser):
-    select = testbrowser('/zeit-online/article/01').cssselect
-    assert select('script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
-    assert select('.RA2VW2')
-
-
-def test_paywalled_article_should_not_contain_veeseo_widget(testbrowser):
-    select = testbrowser(
-        '/zeit-online/article/01?C1-Meter-Status=always_paid').cssselect
-    assert not select(
-        'script[src="http://rce.veeseo.com/widgets/zeit/widget.js"]')
-
-
 def test_article_should_render_quiz_in_iframe(testbrowser):
     browser = testbrowser('/zeit-online/article/quiz')
     iframe = browser.cssselect('iframe')
@@ -1298,7 +1229,7 @@ def test_instantarticle_representation_should_have_correct_content(
     assert bro.cssselect('figure > img[src$="square__2048x2048"]')
     assert len(bro.cssselect('aside')) == 3
     assert 'Bernie Sanders' in bro.cssselect('figcaption')[0].text
-    assert u'© Warner Bros.' == bro.cssselect('figcaption > cite')[0].text
+    assert u'© Warner Bros./dpa' == bro.cssselect('figcaption > cite')[0].text
 
 
 def test_instantarticle_item_should_wrap_correct_article_in_cdata(testbrowser):
@@ -1350,18 +1281,31 @@ def test_instantarticle_should_render_empty_page_on_interrupt(testserver):
 def test_instantarticle_should_render_ads(testbrowser, monkeypatch):
 
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'fbia_advertising': True,
-        'iqd_mobile_transition_article': True
+        'fbia_advertising': True
     }.get)
 
     browser = testbrowser(
         '/instantarticle/zeit-online/article/simple-multipage')
-    assert len(browser.cssselect(
-        'iframe[src$="/static/latest/html/fbia-ads/tile-3.html"]')) == 1
-    assert len(browser.cssselect(
-        'iframe[src$="/static/latest/html/fbia-ads/tile-4.html"]')) == 1
-    assert len(browser.cssselect(
-        'iframe[src$="/static/latest/html/fbia-ads/tile-8.html"]')) == 1
+    assert len(browser.cssselect('iframe #iqadtile3')) == 1
+    assert len(browser.cssselect('iframe #iqadtile4')) == 1
+    assert len(browser.cssselect('iframe #iqadtile8')) == 1
+
+
+def test_instantarticle_ads_should_include_adcontroller_values(
+        testbrowser, monkeypatch):
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'fbia_advertising': True
+    }.get)
+
+    browser = testbrowser(
+        '/instantarticle/campus/article/01-countdown-studium')
+
+    assert 'mitte1' in browser.contents
+    assert 'zeitonline,fachhochschulen,bafg,' in browser.contents
+    assert '"studium",' in browser.contents
+    assert '"hochschule",' in browser.contents
+    assert '\'iqdzeit_fbia\'' in browser.contents
 
 
 def test_zon_nextread_teaser_must_not_show_expired_image(testbrowser):
@@ -1676,7 +1620,7 @@ def test_infographics_should_render_html_correctly(
 
     # all border styles present
     image.origin = True
-    image.copyrights = ('FOO', 'BAR', 'BAZ')
+    image.copyrights = {'text': 'FOO'}
     image.caption = True
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.infographic__text')
@@ -1690,17 +1634,17 @@ def test_infographics_should_render_html_correctly(
 
     # footer has border
     image.origin = True
-    image.copyrights = ()
+    image.copyrights = {}
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.infographic__caption')
 
     image.origin = False
-    image.copyrights = ('FOO', 'BAR', 'BAZ')
+    image.copyrights = {'text': 'FOO'}
     browser = tplbrowser(template, block=image, request=dummy_request)
     assert browser.cssselect('.infographic__caption')
 
     # no border styles present
-    image.copyrights = ()
+    image.copyrights = {}
     image.origin = False
     image.caption = False
     browser = tplbrowser(template, block=image, request=dummy_request)
@@ -1779,10 +1723,10 @@ def test_article_byline_is_displayed_completely(testbrowser):
 
 def test_video_in_article_has_poster_copyright(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
-    figure_copyright_elem = browser.cssselect('.video-figure__copyright')
-    assert len(figure_copyright_elem) == 1
-    figure_copyright = figure_copyright_elem[0]
-    copyright_person = figure_copyright.cssselect('[itemprop="name"]')[0]
+    video = browser.cssselect('figure[data-video-size]')[0]
+    figure_copyright = video.cssselect('.figure__copyright')
+    assert len(figure_copyright) == 1
+    copyright_person = figure_copyright[0].cssselect('[itemprop="name"]')[0]
     assert copyright_person.text == u'© Foto: Alaa Al-Marjani/Reuters'
 
 
@@ -1911,6 +1855,26 @@ def test_zplus_print_article_has_correct_markup_if_reader_revenue_off(
     assert article_metadata_source.__len__() == 1
 
 
+def test_zplus_comments_under_register_article(testbrowser):
+    c1_param = '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous'
+    path = '/zeit-online/article/zplus-zeit-register'
+    url = '{}{}'.format(path, c1_param)
+    browser = testbrowser(url)
+
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+    assert len(browser.cssselect('.gate')) == 1
+    assert len(browser.cssselect('.comment-section')) == 1
+
+
+def test_zplus_comments_not_under_abo_article(testbrowser):
+    c1_param = '?C1-Meter-Status=always_paid'
+    path = '/zeit-online/article/zplus-zeit'
+    url = '{}{}'.format(path, c1_param)
+    browser = testbrowser(url)
+
+    assert len(browser.cssselect('.comment-section')) == 0
+
+
 def test_free_print_article_has_volume_badge(testbrowser):
     browser = testbrowser('/zeit-online/article/zplus-zeit-free')
     badge = browser.cssselect('main article .zplus-badge')[0]
@@ -1993,17 +1957,15 @@ def test_share_buttons_are_present(testbrowser):
     links = sharing_menu.cssselect('.sharing-menu__link')
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
-    assert 'sharing-menu--big' not in sharing_menu.attrib['class']
-
     #  facebook
     parts = urlparse.urlparse(links[0].attrib['href'])
     query = urlparse.parse_qs(parts.query)
     url = query.get('u').pop(0)
-    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share_small.link' in url
+    assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share.link' in url
     assert 'utm_medium=sm' in url
     assert 'utm_source=facebook_zonaudev_ext' in url
     assert 'utm_campaign=ref' in url
-    assert 'utm_content=zeitde_share_small_link_x' in url
+    assert 'utm_content=zeitde_share_link_x' in url
 
     #  twitter
     parts = urlparse.urlparse(links[1].attrib['href'])
@@ -2011,7 +1973,7 @@ def test_share_buttons_are_present(testbrowser):
     assert query.get('text').pop(0) == (
         'Williams wackelt weiter, steht aber im Viertelfinale')
     assert query.get('via').pop(0) == 'zeitonline'
-    assert 'share_small' in query.get('url').pop(0)
+    assert 'share' in query.get('url').pop(0)
 
     #  whatsapp
     parts = urlparse.urlparse(links[2].attrib['href'])
@@ -2032,45 +1994,11 @@ def test_share_buttons_are_present(testbrowser):
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
     assert 'Artikel auf ZEIT ONLINE lesen:' in query.get('body').pop(0)
 
-    assert labels[0].text == 'Facebook'
-    assert labels[1].text == 'Twitter'
-    assert labels[2].text == 'WhatsApp'
-    assert labels[3].text == 'Facebook Messenger'
-    assert labels[4].text == 'Mail'
-
-
-def test_share_buttons_are_big(testbrowser):
-    browser = testbrowser('/zeit-online/article/tags')
-    sharing_menu = browser.cssselect('.sharing-menu2')[0]
-    links = sharing_menu.cssselect('.sharing-menu2__link')
-    labels = sharing_menu.cssselect('.sharing-menu2__text')
-
-    assert 'sharing-menu2--big' in sharing_menu.attrib['class']
-    assert len(links) == 5
-
-    for link in links:
-        assert '.ref.zeitde.share_big.' in link.attrib['href']
-
     assert labels[0].text == 'Auf Facebook teilen'
     assert labels[1].text == 'Twittern'
     assert labels[2].text == 'WhatsApp'
     assert labels[3].text == 'Facebook Messenger'
     assert labels[4].text == 'Mailen'
-
-
-def test_article_view_has_share_buttons_set_correctly(
-        application, dummy_request):
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/simple')
-    view = zeit.web.site.view_article.Article(article, dummy_request)
-    assert not view.share_buttons
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_small'
-
-    article = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/tags')
-    view = zeit.web.site.view_article.Article(article, dummy_request)
-    assert view.share_buttons == 'big'
-    assert view.webtrekk['customParameter']['cp31'] == 'share_buttons_big'
 
 
 def test_merian_link_has_nofollow(testbrowser, dummy_request):
@@ -2353,5 +2281,12 @@ def test_zplus_badge_is_zeit_on_print_insert(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit-geld-print-insert')
     assert len(browser.cssselect(
         '.zplus-badge__media-item[src$="/printcover/original"]')) == 1
-    assert len(browser.cssselect('.volume-teaser__media-item'
-               '[src$="/printcover-beilage-geld/original"]')) == 1
+    assert len(
+        browser.cssselect('.volume-teaser__media-item'
+                          '[src$="/printcover-beilage-geld/original"]')) == 1
+
+
+def test_article_should_not_include_itunes_smart_app_banner(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
+    assert len(app_banner_id) == 0
