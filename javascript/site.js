@@ -46,6 +46,7 @@ require( 'web.core/plugins/jquery.toggleRegions' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.notifications' );
+require( 'web.core/plugins/jquery.partnerDropdown' );
 require( 'web.site/plugins/jquery.accordion' );
 require( 'web.site/plugins/jquery.adaptnav' );
 require( 'web.site/plugins/jquery.animateJobs' );
@@ -62,7 +63,6 @@ require( 'web.site/plugins/jquery.truncateRegions' );
 require( 'web.site/plugins/jquery.tabs' );
 require( 'web.site/plugins/jquery.togglesearch' );
 require( 'web.site/plugins/jquery.updateSignals' );
-require( 'web.site/plugins/jquery.partnerDropdown' );
 
 $( window ).referrerCount();
 // global and "above the fold"

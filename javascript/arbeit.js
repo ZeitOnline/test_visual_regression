@@ -1,7 +1,9 @@
 var $ = require( 'jquery' ),
     images = require( 'web.core/images' ),
     menu = require( 'web.core/menu' ),
-    main = $( '#main' );
+    main = $( '#main' ),
+    article = $( '#js-article' ),
+    pageType = document.body.getAttribute( 'data-page-type' );
 
 // initialize modules
 images.init();
@@ -11,7 +13,14 @@ menu.init();
 require( 'web.core/plugins/jquery.notifications' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.toggleRegions' );
+require( 'web.core/plugins/jquery.partnerDropdown' );
 
 $.notifications();
 
-main.find( '.article-toc' ).toggleRegions();
+
+if ( pageType === 'centerpage' ) {
+    // TODO: use generic js-prefixed classnames
+    $( '.partner__action' ).boxDropdown();
+} else if ( article.length ) {
+    main.find( '.article-toc' ).toggleRegions();
+}
