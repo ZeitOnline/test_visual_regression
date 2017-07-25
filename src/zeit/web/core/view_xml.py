@@ -69,10 +69,6 @@ class XMLContent(zeit.web.core.view.Base):
             self.meta_robots)
 
     @property
-    def ressort(self):
-        return None
-
-    @property
     def xml(self):
         return self.context.xml
 
