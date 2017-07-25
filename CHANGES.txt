@@ -16,6 +16,8 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 
 - ARBEIT-33: Introduce duo region and duo teaser to ZEIT Arbeit
 
+- ARBEIT-4: Implement and style solo/lead teaser for ZEIT
+
 
 3.72 (2017-07-24)
 -----------------
