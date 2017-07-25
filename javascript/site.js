@@ -46,7 +46,7 @@ require( 'web.core/plugins/jquery.toggleRegions' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.notifications' );
-require( 'web.core/plugins/jquery.partnerDropdown' );
+require( 'web.core/plugins/jquery.dropdownLink' );
 require( 'web.site/plugins/jquery.accordion' );
 require( 'web.site/plugins/jquery.adaptnav' );
 require( 'web.site/plugins/jquery.animateJobs' );
@@ -84,7 +84,7 @@ if ( pageType === 'centerpage' ) {
     $( '.storystream-markup__content--first' ).longTextWrapper();
     $( '.jobbox--animate' ).animateJobs();
     $( '.js-tabs' ).tabs();
-    $( '.partner__action' ).boxDropdown();
+    $( '.js-dropdownlink' ).dropdownLink();
     $( '.js-truncate-region' ).truncateRegions();
     $( '.js-toggle-region' ).toggleRegions();
 

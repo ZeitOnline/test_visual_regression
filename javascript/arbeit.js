@@ -13,14 +13,13 @@ menu.init();
 require( 'web.core/plugins/jquery.notifications' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.toggleRegions' );
-require( 'web.core/plugins/jquery.partnerDropdown' );
+require( 'web.core/plugins/jquery.dropdownLink' );
 
 $.notifications();
 
 
 if ( pageType === 'centerpage' ) {
-    // TODO: use generic js-prefixed classnames
-    $( '.partner__action' ).boxDropdown();
+    $( '.js-dropdownlink' ).dropdownLink();
 } else if ( article.length ) {
     main.find( '.article-toc' ).toggleRegions();
 }
