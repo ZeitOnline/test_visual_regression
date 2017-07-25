@@ -25,8 +25,6 @@ log = logging.getLogger(__name__)
 #       convultion that is pyramid view predicate discrimination.
 
 @zeit.web.view_defaults(renderer='string')
-@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
-                      host_restriction='xml')
 @zeit.web.view_config(context=zeit.content.author.interfaces.IAuthor,
                       host_restriction='xml')
 @zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery,
@@ -35,16 +33,6 @@ log = logging.getLogger(__name__)
                       host_restriction='xml')
 @zeit.web.view_config(context=zeit.content.video.interfaces.IVideo,
                       host_restriction='xml')
-@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
-                      host_restriction='xml')
-@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle,
-                      host_restriction='xml')
-@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle,
-                      host_restriction='xml')
-@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle,
-                      host_restriction='xml')
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle,
-                      host_restriction='xml')
 class XMLContent(zeit.web.core.view.Base):
 
     def __call__(self):
@@ -52,8 +40,6 @@ class XMLContent(zeit.web.core.view.Base):
         self.request.response.content_type = 'application/xml'
         self.request.response.charset = 'iso-8859-1'
         self.request.response.headers['Access-Control-Allow-Origin'] = '*'
-        self._include_infoboxes()
-        self._include_liveblogs()
         self._set_meta_robots()
         self._set_mobile_alternative()
         lxml.objectify.deannotate(
@@ -62,31 +48,6 @@ class XMLContent(zeit.web.core.view.Base):
             self.xml, pretty_print=True, xml_declaration=True,
             # XXX A sin we inherited from XSLT.
             encoding='iso-8859-1')
-
-    def _include_infoboxes(self):
-        for infobox in self.xml.xpath('/article/body/division/infobox'):
-            box = zeit.cms.interfaces.ICMSContent(infobox.get('href'), None)
-            if not zeit.content.infobox.interfaces.IInfobox.providedBy(box):
-                log.info(
-                    'Cannot resolve infobox %s, ignored.', infobox.get('href'))
-                continue
-            lxml.objectify.SubElement(infobox, 'container')
-            infobox.container = box.xml
-            infobox.set(
-                'publication-date', infobox.get('publication-date', ''))
-            infobox.set('expires', infobox.get('expires', ''))
-
-    def _include_liveblogs(self):
-        for liveblog in self.xml.xpath('/article/body/division/liveblog'):
-            el = lxml.objectify.SubElement(
-                liveblog, '{http://www.edge-delivery.org/esi/1.0}include',
-                nsmap={'esi': 'http://www.edge-delivery.org/esi/1.0'})
-            url = 'http://www.zeit.de/liveblog-backend/{}.html'.format(
-                liveblog.get('blogID', ''))
-            el.set('src', url)
-            liveblog.set('data-type', 'esi-content')
-            liveblog.attrib.pop('blogID')
-            liveblog.tag = 'div'
 
     def _set_mobile_alternative(self):
         metadata = zeit.cms.content.interfaces.ICommonMetadata(
@@ -114,6 +75,53 @@ class XMLContent(zeit.web.core.view.Base):
     @property
     def xml(self):
         return self.context.xml
+
+
+@zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle,
+                      host_restriction='xml')
+class XMLArticle(XMLContent):
+
+    @property
+    def xml(self):
+        xml = self.context.xml
+        self._include_infoboxes(xml)
+        self._include_liveblogs(xml)
+        return xml
+
+    def _include_infoboxes(self, xml):
+        for infobox in xml.xpath('/article/body/division/infobox'):
+            box = zeit.cms.interfaces.ICMSContent(infobox.get('href'), None)
+            if not zeit.content.infobox.interfaces.IInfobox.providedBy(box):
+                log.info(
+                    'Cannot resolve infobox %s, ignored.', infobox.get('href'))
+                continue
+            lxml.objectify.SubElement(infobox, 'container')
+            infobox.container = box.xml
+            infobox.set(
+                'publication-date', infobox.get('publication-date', ''))
+            infobox.set('expires', infobox.get('expires', ''))
+
+    def _include_liveblogs(self, xml):
+        for liveblog in xml.xpath('/article/body/division/liveblog'):
+            el = lxml.objectify.SubElement(
+                liveblog, '{http://www.edge-delivery.org/esi/1.0}include',
+                nsmap={'esi': 'http://www.edge-delivery.org/esi/1.0'})
+            url = 'http://www.zeit.de/liveblog-backend/{}.html'.format(
+                liveblog.get('blogID', ''))
+            el.set('src', url)
+            liveblog.set('data-type', 'esi-content')
+            liveblog.attrib.pop('blogID')
+            liveblog.tag = 'div'
 
 
 @zeit.web.view_config(context=zeit.content.cp.interfaces.ICenterPage,
