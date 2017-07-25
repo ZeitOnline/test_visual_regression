@@ -1812,7 +1812,7 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     link = driver.find_element_by_css_selector('.js-image-copyright-footer')
-    link.click()
+    driver.execute_script('arguments[0].click()', link)
     try:
         WebDriverWait(driver, 5).until(
             expected_conditions.presence_of_element_located(

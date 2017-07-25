@@ -80,7 +80,7 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     driver.set_window_size(520, 800)
 
     teaser_el = driver.find_element_by_css_selector(teaser[0])
-    teaser_el.click()
+    driver.execute_script('arguments[0].click();', teaser_el)
     track_str = driver.execute_script("return window.trackingData")
     assert('phablet.' + teaser[1] in track_str)
 
@@ -88,7 +88,7 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     driver.set_window_size(800, 600)
 
     teaser_el = driver.find_element_by_css_selector(teaser[0])
-    teaser_el.send_keys(Keys.RETURN)
+    driver.execute_script('arguments[0].click();', teaser_el)
     track_str = driver.execute_script("return window.trackingData")
     assert('tablet.' + teaser[1] in track_str)
 
@@ -96,7 +96,7 @@ def test_cp_elements_provide_expected_id_for_webtrekk(
     driver.set_window_size(1000, 800)
 
     teaser_el = driver.find_element_by_css_selector(teaser[0])
-    teaser_el.click()
+    driver.execute_script('arguments[0].click();', teaser_el)
     track_str = driver.execute_script("return window.trackingData")
     assert('stationaer.' + teaser[1] in track_str)
 
@@ -289,7 +289,7 @@ def test_article_elements_provide_expected_id_for_webtrekk(
     driver.set_window_size(768, 800)
 
     article_el = driver.find_element_by_css_selector(article[0])
-    article_el.click()
+    driver.execute_script('arguments[0].click();', article_el)
     track_str = driver.execute_script("return window.trackingData")
     assert('tablet.' + article[1] in track_str)
 
@@ -297,7 +297,7 @@ def test_article_elements_provide_expected_id_for_webtrekk(
     driver.set_window_size(1000, 800)
 
     article_el = driver.find_element_by_css_selector(article[0])
-    article_el.click()
+    driver.execute_script('arguments[0].click();', article_el)
     track_str = driver.execute_script("return window.trackingData")
     assert('stationaer.' + article[1] in track_str)
 
@@ -481,8 +481,8 @@ def test_zplus_registration_provides_expected_webtrekk_strings(
         assert False, 'Element not locateable in 5 sec.'
     else:
         teaser_el = driver.find_element_by_css_selector(teasers[0])
-        teaser_el.click()
-        track_str = driver.execute_script("return window.trackingData")
+        driver.execute_script('arguments[0].click();', teaser_el)
+        track_str = driver.execute_script("return window.trackingData;")
         assert('tablet.' + teasers[1] in track_str)
 
 
@@ -913,6 +913,6 @@ def test_buzz_box_provides_expected_webtrekk_string(
 
     for header in driver.find_elements_by_class_name('buzz-box__heading'):
         key = zeit.web.core.template.format_webtrekk(header.text)
-        header.click()
+        driver.execute_script('arguments[0].click();', header)
         tracking_data = driver.execute_script("return window.trackingData")
         assert tracking_data == pattern.format(key)

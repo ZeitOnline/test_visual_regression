@@ -52,7 +52,7 @@ def test_article_elements_provide_expected_id_for_webtrekk(
     driver.set_window_size(768, 800)
 
     article_el = driver.find_element_by_css_selector(article[0])
-    article_el.send_keys(Keys.RETURN)
+    driver.execute_script('arguments[0].click();', article_el)
     track_str = driver.execute_script("return window.trackingData")
     assert('tablet.' + article[1] in track_str)
 
@@ -60,6 +60,6 @@ def test_article_elements_provide_expected_id_for_webtrekk(
     driver.set_window_size(980, 800)
 
     article_el = driver.find_element_by_css_selector(article[0])
-    article_el.send_keys(Keys.RETURN)
+    driver.execute_script('arguments[0].click();', article_el)
     track_str = driver.execute_script("return window.trackingData")
     assert('stationaer.' + article[1] in track_str)
