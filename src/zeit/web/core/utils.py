@@ -18,6 +18,7 @@ import pysolr
 import pytz
 import zope.component
 
+from zeit.cms.testcontenttype.testcontenttype import ExampleContentType
 import zeit.cms.content.interfaces
 import zeit.cms.content.sources
 import zeit.cms.interfaces
@@ -331,16 +332,20 @@ class LazyProxy(object):
 
     def __init__(self, context, istack=[zeit.cms.interfaces.ICMSContent]):
         def callback():
-            factory = context.get('uniqueId', None)
-            istack = iter(self.__istack__)
-            while True:
+            object.__setattr__(self, '__exposed__', True)
+
+            uniqueId = context.get('uniqueId', None)
+            result = zeit.cms.interfaces.ICMSContent(uniqueId, None)
+            if result is None:
+                result = ExampleContentType()
+                result.uniqueId = uniqueId
+
+            for iface in self.__istack__[1:]:
                 try:
-                    iface = next(istack)
-                    factory = iface(factory)
-                except (StopIteration, TypeError,
-                        zope.component.ComponentLookupError):
-                    object.__setattr__(self, '__exposed__', True)
-                    return factory
+                    result = iface(result)
+                except (TypeError, zope.component.ComponentLookupError):
+                    break
+            return result
 
         origin = peak.util.proxies.LazyProxy(callback)
         object.__setattr__(self, '__exposed__', False)

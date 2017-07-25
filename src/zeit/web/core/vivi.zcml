@@ -47,6 +47,8 @@
     <include package="zeit.arbeit" />
     <include package="zeit.newsletter" />
     <include package="zeit.push" />
+    <exclude package="zeit.cms.testcontenttype.browser" />
+    <include package="zeit.cms.testcontenttype" />
 
     <!-- XXX Temporary workaround: We load parts of retresco,
          but use ITagger and IWhitelist from intrafind. -->

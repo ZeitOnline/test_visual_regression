@@ -18,6 +18,8 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 
 - ARBEIT-4: Implement and style solo/lead teaser for ZEIT
 
+- FIX: Return a dummy ICMSContent object from LazyProxy for unresolveable uniqueIds
+
 
 3.72 (2017-07-24)
 -----------------
