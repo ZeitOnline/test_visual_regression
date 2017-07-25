@@ -19,3 +19,21 @@ $color-exclamation-background: $color-text--light;
 font-family: $font-patronbold;
 text-transform: none;
 }
+
+%zar-button-hollow--jobs {
+	@include zon-button(
+		$color: $color-jobs-elements,
+		$background-color: transparent,
+		$hover-background-color: $color-jobs-elements,
+		$hover-color: $white,
+		$hover-border-color: $color-jobs-elements,
+		$visited-color: $white,
+		$letter-spacing: $letter-spacing-s,
+		$font-size: remify(16px),
+		$border-color: $color-jobs-elements,
+		$margin: remify(14px 6px 14px 0)
+		);
+	@include font-smoothing;
+	font-family: $font-patronbold;
+	text-transform: none;
+}
