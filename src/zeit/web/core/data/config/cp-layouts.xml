@@ -7,6 +7,8 @@
         image_pattern="wide"
         areas="trio"
         />
+    <layout id="zar-lead" title="Aufmacher" image_pattern="portrait" areas="solo" />
+
     <layout
         id="zar-duo-bright"
         title="Duo-Teaser Hell mit dunkler Schrift"
