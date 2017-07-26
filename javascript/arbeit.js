@@ -1,5 +1,6 @@
 var $ = require( 'jquery' ),
     images = require( 'web.core/images' ),
+    clicktracking = require( 'web.core/clicktracking' ),
     menu = require( 'web.core/menu' ),
     main = $( '#main' ),
     article = $( '#js-article' ),
@@ -8,6 +9,7 @@ var $ = require( 'jquery' ),
 // initialize modules
 images.init();
 menu.init();
+clicktracking.init();
 
 // add required jQuery plugins
 require( 'web.core/plugins/jquery.notifications' );
