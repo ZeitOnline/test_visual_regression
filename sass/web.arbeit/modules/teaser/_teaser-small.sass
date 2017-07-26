@@ -8,6 +8,7 @@
 
 	&__media
 		@extend %teaser-media
+		+reserve-space-for-teaser-media(100% / 16 * 9) // image variant 'wide' (16:9)
 		margin-bottom: remify(12px)
 		+respond-max($break-tablet-min)
 			display: none

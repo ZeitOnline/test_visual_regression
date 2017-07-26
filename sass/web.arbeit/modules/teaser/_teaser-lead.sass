@@ -1,0 +1,88 @@
+.teaser-lead
+	@extend %teaser
+	padding: $vertical-space--small $page-padding--small remify(40px)
+	text-align: center
+	+respond-min($break-tablet-min)
+		padding: $vertical-space $cp-padding
+
+	&__media
+		@extend %teaser-media
+		margin-bottom: remify(20px)
+		+respond-min($break-tablet-min)
+			margin-bottom: 0
+
+	&__heading
+		margin: remify(10px 0 10px)
+		+respond-min($break-tablet-min)
+			margin: remify(0 0 30px)
+		&:after
+			background-color: $zar-battleship-grey
+			content: ""
+			display: block
+			height: remify(30px)
+			margin: 0 auto
+			width: 1px
+			+respond-min($break-tablet-min)
+				height: remify(80px)
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__series-label
+		@extend %teaser-kicker--l
+
+	&__kicker
+		@extend %teaser-kicker--l
+		margin-bottom: remify(10px)
+		+respond-min($break-tablet-min)
+			margin-bottom: remify(30px)
+
+	&__title
+		@extend %teaser-title--xl
+		margin-bottom: remify(10px)
+		+respond-min($break-tablet-min)
+			margin-bottom: remify(30px)
+
+	&__text
+		@extend %teaser-text
+		margin: 0
+		+respond-min($break-tablet-min)
+			font-size: remify(18px)
+			line-height: 1.5
+			margin-bottom: remify(12px)
+
+	&__metadata
+		@extend %teaser-metadata
+		font-family: $font-franziska
+		font-style: italic
+
+	&__commentcount
+		@extend %teaser-commentcount
+
+
++respond-min($break-tablet-min)
+	.teaser-lead
+		&__media,
+		&__container
+			float: left
+			width: 50%
+
+		&__media
+			background: transparent
+			padding: $cp-padding
+
+		&__container
+			padding: $cp-padding remify(20px)
+
+
+// horizontal alignment for "modern" browsers
++respond-min($break-tablet-min)
+	html.flexbox
+		// same height for teaser childs (media+container)
+		.teaser-lead
+			display: flex
+		// alignment inside container
+		.teaser-lead__container
+			display: flex
+			flex-direction: column
+			justify-content: center

@@ -12,6 +12,16 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 
 - BUG-700: Jump to paywall form from metadata commentlink
 
+- ARBEIT-26: Add article toc to ZEIT Arbeit
+
+- ARBEIT-33: Introduce duo region and duo teaser to ZEIT Arbeit
+
+- ARBEIT-4: Implement and style solo/lead teaser for ZEIT Arbeit
+
+- ARBEIT-63: Style article pagination for ZEIT Arbeit
+
+- FIX: Return a dummy ICMSContent object from LazyProxy for unresolveable uniqueIds
+
 
 3.72 (2017-07-24)
 -----------------
@@ -42,9 +52,9 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 
 - ARBEIT-48.1: Introduce trio region and small teaser to ZEIT Arbeit
 
-- ARBEIT-54: Style Article Header
+- ARBEIT-54: Style Article Header for ZEIT Arbeit
 
-- ARBEIT-32: Underline article title
+- ARBEIT-32: Underline article title for ZEIT Arbeit
 
 
 3.70 (2017-07-17)
