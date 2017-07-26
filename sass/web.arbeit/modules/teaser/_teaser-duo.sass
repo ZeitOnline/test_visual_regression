@@ -5,7 +5,7 @@
 		margin: $vertical-space $cp-padding
 
 	&__media
-		@extend %teaser-media
+		// do not extend teaser-media, because we want the duo-teaser background color
 		+reserve-space-for-teaser-media(100% / 16 * 9) // image variant 'wide' (16:9)
 		margin-bottom: remify(12px)
 
