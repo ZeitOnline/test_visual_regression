@@ -27,9 +27,19 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
         return tree.get('footer')
 
     @property
+    def footer_text2(self):
+        tree = self._get_tree()
+        return tree.get('footer2')
+
+    @property
     def footer_link(self):
         tree = self._get_tree()
-        return tree.get('href')
+        return tree.get('link1')
+
+    @property
+    def footer_link2(self):
+        tree = self._get_tree()
+        return tree.get('link2')
 
 TOOL_SOURCE = ToolSource()
 
