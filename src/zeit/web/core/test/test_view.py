@@ -1037,6 +1037,7 @@ def test_notification_after_account_change_renders_correctly(
             assert url_hash not in driver.current_url
 
 
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
 def test_notification_renders_correctly_in_wrapper(
         testserver, selenium_driver):
     driver = selenium_driver

@@ -765,6 +765,7 @@ def test_volume_header_provides_expected_webtrekk_string(
         'stationaer.volume-header.teaser.1..sommer_in_berlin')
 
 
+@pytest.mark.xfail(reason='Random loading issues in Selenium.')
 def test_comment_form_provides_expected_webtrekk_string(
         selenium_driver, testserver, application):
     extensions = application.zeit_app.config.registry.getUtility(
