@@ -22,6 +22,8 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 
 - ARBEIT-31: Style article quotes for ZEIT Arbeit
 
+- ARBEIT-60: Implement jobbox (dropdown version) for ZEIT Arbeit
+
 - FIX: Return a dummy ICMSContent object from LazyProxy for unresolveable uniqueIds
 
 
