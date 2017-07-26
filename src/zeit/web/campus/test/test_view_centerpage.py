@@ -31,7 +31,7 @@ def test_campus_navigation_should_present_flyout(selenium_driver, testserver):
     else:
         flyout = driver.find_elements_by_css_selector(
             '#tools-menu .nav-flyout__item')
-        assert len(flyout) == 3
+        assert len(flyout) == 2
         link.click()
         try:
             WebDriverWait(driver, 5).until(
