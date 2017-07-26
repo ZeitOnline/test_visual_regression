@@ -25,9 +25,10 @@ def test_article_paginated_has_toc(testbrowser):
     toc = browser.cssselect('.article-toc')
     assert len(toc) == 1
 
+
 def test_article_renders_quotes_correctly(testbrowser):
     browser = testbrowser('/arbeit/article/quotes')
     quotes = browser.cssselect('.quote')
-    arrows = browser.cssselect('.arrow-right-bk')
-    assert len(quotes) == 3
+    arrows = browser.cssselect('.quote__source-arrow')
+    assert len(quotes) == 4
     assert len(arrows) == 2
