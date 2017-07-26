@@ -49,6 +49,11 @@
 		margin: 0
 		padding: remify(20px)
 
+	&__footer
+		background-color: $color-tools-primary
+		display: table
+		width: 100%
+
 	&__footer-link
 		+font-smoothing
 		background-color: rgba(0, 0, 0, .1)
@@ -58,6 +63,23 @@
 		font-weight: bold
 		padding: remify(12px) 0
 		text-align: center
+		&--multiple
+			display: table-cell
+			position: relative
+			text-align: left
+			text-indent: remify(25px)
+			width: 50%
+			&:first-child
+				text-indent: remify(37px)
+				&:after
+					background-color: rgba(255,255,255,0.2)
+					content: ""
+					display: block
+					height: 30px
+					position: absolute
+					right: 0
+					top: 9px
+					width: 2px
 		+on-interaction
 			color: $zco-charcoal
 

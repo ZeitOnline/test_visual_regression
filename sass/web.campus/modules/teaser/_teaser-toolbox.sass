@@ -54,7 +54,8 @@
 		display: block
 		font-weight: bold
 		padding: remify(15px 0)
-		text-align: center
+		text-align: left
+		text-indent: remify(15px)
 		+on-interaction
 			color: $zco-charcoal
 
@@ -72,19 +73,21 @@
 			+scaled-font(42px, $title-factor)
 
 		&__title
-			min-height: 1.9em // = 2 lines
+			min-height: none
 
 		&__list
 			display: flex
 			justify-content: space-between
-			padding: remify(40px) $page-padding/2
 
 		&__item
 			margin: 0
-			padding: 0 $page-padding/2
-			width: 33.33%
+			padding: 0
+			width: 50%
 
 		&__link
+			height: auto
+			margin: remify(0 20px 40px)
+			min-height: 12em
 			padding-left: remify(10px)
 			padding-right: remify(10px)
 			+on-interaction
@@ -100,7 +103,19 @@
 			display: inline
 
 		&__footer-link
+			line-height: 5px
 			padding: remify(25px 0)
+			position: relative
+			text-indent: remify(27px)
+			&--first:after
+				background-color: rgba(255,255,255,0.2)
+				content: ""
+				display: block
+				height: 43px
+				position: absolute
+				right: 0
+				top: 11px
+				width: 2px
 
 +respond-min($break-desktop-min)
 	.toolbox
@@ -111,8 +126,9 @@
 			padding-top: remify(60px)
 
 		&__link
+			min-height: auto
 			padding-left: remify(20px)
-			padding-right: remify(20px)
+			padding-right: 0
 
 		&__title
 			+scaled-font(42px, $title-factor)
@@ -120,3 +136,6 @@
 		&__text
 			+scaled-font(16px)
 			margin-bottom: remify(20px)
+
+		&__footer-link
+			text-indent: remify(37px)
