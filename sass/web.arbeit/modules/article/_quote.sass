@@ -1,0 +1,37 @@
+.quote
+	margin: remify(40px) auto
+	width: 90%
+	+respond-min($break-tablet-min)
+		max-width: remify(600px)
+	+respond-min($break-desktop-min)
+		max-width: remify(820px)
+		width: 100%
+
+	&__text
+		color: $color-text
+		font-family: $font-patronbold
+		font-size: remify(22px)
+		letter-spacing: $letter-spacing-s
+		line-height: 1.3
+		margin: 0
+		+respond-min($break-desktop-min)
+			font-size: remify(28px)
+			line-height: 1.4
+
+	&__source
+		display: inline-block
+		color: $color-text
+		font-family: $font-tabletgothic
+		font-size: remify(15px)
+		margin-top: remify(14px)
+		margin-left: remify(8px)
+		+respond-min($break-tablet-min)
+			font-size: remify(16px)
+			line-height: 1.2
+		+respond-min($break-desktop-min)
+			font-size: remify(17px)
+
+	&__link
+		color: inherit
+		+on-interaction
+			color: $zar-marigold
