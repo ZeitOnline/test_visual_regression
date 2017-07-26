@@ -3,6 +3,7 @@
         {{- block.text -}}
     </blockquote>
     {% if block.attribution and (block.attribution | trim) -%}
+    {% block before_source %}{% endblock %}
     <figcaption class="quote__source">
         {%- if block.url -%}
             <a class="quote__link" href="{{ block.url }}">
