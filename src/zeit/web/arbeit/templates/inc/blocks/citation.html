@@ -2,5 +2,5 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
 {% block before_source %}
-    {{ lama.use_svg_icon('arrow-right-bk', 'arrow-right-bk', view.package) }}
+    {{ lama.use_svg_icon('arrow-right', 'arrow-right', view.package, a11y=False) }}
 {% endblock %}
