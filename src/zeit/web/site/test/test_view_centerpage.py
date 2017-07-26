@@ -1830,7 +1830,7 @@ def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
 
         closelink = driver.find_element_by_class_name(
             'js-image-copyright-footer-close')
-        closelink.click()
+        driver.execute_script('arguments[0].click()', closelink)
         try:
             WebDriverWait(driver, 5).until(
                 expected_conditions.invisibility_of_element_located(
