@@ -4,7 +4,7 @@
     <ul class="toolbox__list">
     {% for link in module.toolbox %}
         <li class="toolbox__item">
-            <a href="{{ link.href }}" class="toolbox__link" title="{{ link.title_flyout }}" data-id="{{ 'toolbox.%s.1.%s.text' | format(region_loop.index, loop.index) }}">
+            <a href="{{ link.href }}" class="toolbox__link" title="{{ link.title_flyout }}" data-id="{{ 'toolbox.%s.1.%s.%s' | format(region_loop.index, loop.index, link.cta|format_webtrekk) }}">
                 <h3 class="toolbox__title">{{ link.title }}</h3>
                 <p class="toolbox__text">
                     {{ link.text }}
@@ -12,7 +12,7 @@
                 <strong class="toolbox__cta">{{ link.cta }}</strong>
                 {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
             </a>
-            <a href="{% if loop.index == 1 %}{{ module.toolbox.footer_link }}{% else %}{{ module.toolbox.footer_link2 }}{% endif %}" class="toolbox__footer-link {% if loop.index == 1 %}toolbox__footer-link--first{% endif %}" data-id="{{ 'toolbox.{}.2.1.text'.format(region_loop.index) }}">{% if loop.index == 1 %}{{ module.toolbox.footer_text }}{% else %}{{ module.toolbox.footer_text2 }}{% endif %} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
+            <a href="{% if loop.index == 1 %}{{ module.toolbox.footer_link }}{% else %}{{ module.toolbox.footer_link2 }}{% endif %}" class="toolbox__footer-link {% if loop.index == 1 %}toolbox__footer-link--first{% endif %}" {% if loop.index == 1 %}data-id="{{ 'toolbox.%s.2.1.%s' | format(region_loop.index, module.toolbox.footer_text|format_webtrekk) }}"{% else %}data-id="{{ 'toolbox.%s.2.1.%s' | format(region_loop.index, module.toolbox.footer_text2|format_webtrekk) }}"{% endif %}>{% if loop.index == 1 %}{{ module.toolbox.footer_text }}{% else %}{{ module.toolbox.footer_text2 }}{% endif %} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
         </li>
     {% endfor %}
     </ul>

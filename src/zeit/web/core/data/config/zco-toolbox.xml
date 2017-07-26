@@ -5,7 +5,7 @@
         href="http://studiengaenge.zeit.de/sit"
         cta="Zum Test"
         cta_flyout="Test starten"
-        tracking="campus-topnav.2.5.1.studium-interessentest"
+        tracking="campus-topnav.2.5.1.zum_test"
         text="Mit dem Studium-Interessentest erfährst du mehr über dich.">
     </link>
     <link
@@ -14,7 +14,7 @@
         href="https://jobs.zeit.de/campus/berufstest"
         cta="Zum Test"
         cta_flyout="Alle Ergebnisse"
-        tracking="campus-topnav.2.5.3.che-hochschulranking"
+        tracking="campus-topnav.2.5.2.zum_test"
         text="Entdecke deine beruflichen Stärken im Berufstest">
     </link>
 </toolbox_links>
