@@ -509,7 +509,7 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     try:
         WebDriverWait(driver, 2).until(
             expected_conditions.visibility_of(more_dropdown))
-        more_dropdown.send_keys(Keys.SPACE)
+        more_dropdown.click()
         assert cloned_nav_item.is_displayed(), (
             '[on tablet] chosen nav item should be visible'
             ' in more-dropdown on :hover')
