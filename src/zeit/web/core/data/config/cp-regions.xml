@@ -17,6 +17,9 @@
         <area kind="trio"/>
         <area kind="trio"/>
     </region>
+    <region kind="duo" title="Duo-Region" type="!storystream" available="zeit.arbeit.interfaces.IZARContent">
+        <area kind="trio"/>
+    </region>
     <region kind="trio" title="Trio-Region" type="!storystream" available="zeit.magazin.interfaces.IZMOContent">
         <area kind="trio"/>
     </region>

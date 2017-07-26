@@ -38,12 +38,24 @@ def test_adcontroller_head_code_is_present(
     assert '<!-- mandanten object -->' in browser.contents
 
 
-def test_adcontroller_adtags_are_present(testbrowser):
+def test_adcontroller_adtags_are_present(testbrowser, monkeypatch):
     browser = testbrowser('/zeit-online/slenderized-index')
-    assert 'AdController.render(\'iqadtile1\');' in browser.contents
-    assert 'AdController.render(\'iqadtile2\');' in browser.contents
-    assert 'AdController.render(\'iqadtile3\');' in browser.contents
-    assert 'AdController.render(\'iqadtile7\');' in browser.contents
+    assert 'ad-desktop-1' in browser.contents
+    assert 'ad-desktop-2' in browser.contents
+    assert 'ad-desktop-3' in browser.contents
+    assert 'ad-mobile-1' in browser.contents
+    assert 'ad-mobile-3' in browser.contents
+    assert 'ad-mobile-4' in browser.contents
+    assert 'ad-mobile-8' in browser.contents
+    # adtile 7 will be renumbered to… 8
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': False}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert 'ad-desktop-7' in browser.contents
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-online/slenderized-index')
+    assert 'ad-desktop-8' in browser.contents
 
 
 def test_adcontroller_finanlizer_is_present(
@@ -82,16 +94,21 @@ def test_adplaces_present_on_pages(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-mobile-8')) == 1
 
 
-def test_adplaces_present_on_home_page(testbrowser):
+def test_adplaces_present_before_video_stage(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
-    assert len(browser.cssselect('#ad-desktop-12')) == 1
+    assert len(browser.cssselect('#ad-desktop-4')) == 1
+
+
+def test_adplaces_present_before_buzzboard(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.view.Base, 'is_hp', True)
+    browser = testbrowser('/zeit-online/buzz-box')
+    assert len(browser.cssselect('#ad-desktop-5')) == 1
 
 
 def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
-        'iqd': True,
-        'iqd_mobile_transition_zmo_cp': True
+        'iqd': True
     }.get)
     browser = testbrowser('/zeit-magazin/centerpage/lebensart')
     assert len(browser.cssselect('#iqadtileOOP')) == 1
@@ -107,8 +124,7 @@ def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
 def test_adplaces_present_on_zco_cp(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
-        'iqd': True,
-        'iqd_mobile_transition_zco_cp': True
+        'iqd': True
     }.get)
 
     # test homepage
@@ -163,8 +179,7 @@ def test_mobile_ad_place_right_behind_the_first_teaser(
 def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'third_party_modules': True,
-        'iqd': True,
-        'iqd_mobile_transition_article': True
+        'iqd': True
     }.get)
 
     browser = testbrowser('/zeit-online/article/zeit')

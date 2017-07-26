@@ -13,6 +13,7 @@
 	letter-spacing: $letter-spacing-s
 	&:after
 		content: "\002c\00a0"
+		margin-left: remify(-3px)
 
 .summary
 	font-size: remify(18px)
@@ -20,3 +21,9 @@
 
 	+respond-min($break-desktop-min)
 		font-size: remify(22px)
+
+.article__page-teaser
+	margin-bottom: remify(40px)
+
+.article__page-teaser-title
+	display: inline

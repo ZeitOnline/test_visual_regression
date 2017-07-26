@@ -3,3 +3,52 @@
 	margin-bottom: remify(20px)
 	&__button
 		@extend %zar-button-hollow
+	&__nexttitle
+		display: none
+
+.article-pager
+	letter-spacing: $letter-spacing-m
+	padding: 0
+	&__label
+		display: none
+		font-weight: bold
+	&__number
+		display: none
+		color: $color-separator
+		&:after
+			content: "/"
+		a, span
+			padding: 0 remify(16px)
+			display: inline-block
+		&--current
+			span
+				color: $color-text
+				font-weight: bold
+	&__all
+		display: inline-block
+
++respond-min($break-tablet-min)
+	.article-pagination
+		&__nexttitle
+			display: inline-flex
+			max-width: 70%
+			margin-left: remify(16px)
+			font-family: $font-patronbold
+			font-size: remify(16px)
+			color: $color-text
+			letter-spacing: $letter-spacing-s
+			+on-interaction
+				color: $color-link--default
+	.article-pager
+		line-height: 2
+		&__label,
+		&__number
+			display: inline-block
+		&__all
+			padding-left: remify(16px)
+		&__who
+			display: none
+		&__what
+			display: inline-block // needed for text-transform to work
+			&:first-letter
+				text-transform: uppercase
