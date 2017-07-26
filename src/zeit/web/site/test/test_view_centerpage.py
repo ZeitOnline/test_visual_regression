@@ -2413,7 +2413,7 @@ def test_dossier_teaser_has_correct_width_in_all_screen_sizes(
 
     elif screen_size[0] == 1000:
         width = teaser.size.get('width')
-        assert int(helper.size.get('width')) == int(width * 0.6666)
+        assert int(helper.size.get('width')) == int(round(width * 0.6666))
 
 
 def test_cp_teaser_should_display_three_authors_max(testbrowser):
