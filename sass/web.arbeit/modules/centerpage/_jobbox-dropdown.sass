@@ -1,8 +1,17 @@
+$jobbox-border-width: 6px
+
 .jobbox-dropdown
-	border: remify(6px) $color-jobs-areas solid
-	margin: remify(14px) $page-padding--small
+	border: remify($jobbox-border-width) $color-jobs-areas solid
+	margin: remify(32px) $page-padding--small remify(14px)
+	position: relative
 	+respond-min($break-tablet-min)
 		margin: 0 $cp-padding
+
+	&__label
+		@extend %teaser-adlabel
+		position: absolute
+		top: remify(-20px)
+		right: remify(-$jobbox-border-width)
 
 	&__media
 		// we do not load an image, but want to preserve the 16:9 space
@@ -24,14 +33,14 @@
 
 	&__button
 		@extend %zar-button-hollow--jobs
-		margin: 0
+		margin: remify(8px) 0
 		vertical-align: middle
 
 	&__dropdown
 		border-radius: 4px
 		font-size: remify(16px)
 		height: remify(38px)
-		margin-right: $page-padding--small
+		margin: remify(8px) $page-padding--small remify(8px) 0
 		max-width: remify(250px)
 		padding: remify(8px 16px)
 		vertical-align: middle
