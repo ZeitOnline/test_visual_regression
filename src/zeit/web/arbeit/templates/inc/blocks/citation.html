@@ -1,0 +1,6 @@
+{% extends "zeit.web.core:templates/inc/blocks/citation.html" %}
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+
+{% block before_source %}
+    {{ lama.use_svg_icon('arrow-right', 'quote__source-arrow', view.package, a11y=False) }}
+{% endblock %}

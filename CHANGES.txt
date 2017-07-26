@@ -20,6 +20,10 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 
 - ARBEIT-63: Style article pagination for ZEIT Arbeit
 
+- ARBEIT-31: Style article quotes for ZEIT Arbeit
+
+- ARBEIT-60: Implement jobbox (dropdown version) for ZEIT Arbeit
+
 - FIX: Return a dummy ICMSContent object from LazyProxy for unresolveable uniqueIds
 
 
