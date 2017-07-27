@@ -26,13 +26,14 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
         tree = self._get_tree()
         return tree.get('footer')
 
+    # for the feature-toggle campus_toolbox
     @property
     def footer_text2(self):
         tree = self._get_tree()
         return tree.get('footer2')
 
     @property
-    def footer_link(self):
+    def footer_link1(self):
         tree = self._get_tree()
         return tree.get('link1')
 
@@ -40,6 +41,12 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
     def footer_link2(self):
         tree = self._get_tree()
         return tree.get('link2')
+    # for the feature-toggle campus_toolbox
+
+    @property
+    def footer_link(self):
+        tree = self._get_tree()
+        return tree.get('href')
 
 TOOL_SOURCE = ToolSource()
 
