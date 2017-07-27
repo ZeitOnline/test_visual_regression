@@ -17,8 +17,9 @@
                 {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
             </div>
             {% endif -%}
-            <div class="metadata">
+            <div class="{{ 'metadata' | with_mods('zplus') if self.zplus_badge() else 'metadata' }}">
                 {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
+                {% block zplus_badge %}{% endblock %}
             </div>
         {% endblock %}
     {% endif %}
