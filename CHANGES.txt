@@ -4,8 +4,6 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggle.xml) and Prod: remove `iqd_mobile_transition_*` feature toggles AFTER deployment.
-
 
 3.73 (unreleased)
 -----------------
