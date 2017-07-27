@@ -6,7 +6,6 @@
         {% if area.values() | length > 0 %}
             {% set module = area.values()[0] %}
 
-            {# TODO: verstehen: was macht das? #}
             {% if area.referenced_cp is not none and not is_topic_variant %}
                 {% set teaser = area.referenced_cp %}
             {% else %}
