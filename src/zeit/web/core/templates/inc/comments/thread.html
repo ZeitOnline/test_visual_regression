@@ -87,7 +87,8 @@
             {% block comment_ad -%}
                 {% if view.advertising_enabled -%}
                     <div class="comment__ad">
-                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
+                        {% set adnumber = 9 if toggles('iqd_digital_transformation') else 8 %}
+                        {% include "zeit.web.core:templates/inc/ads/places/desktop/place{}.html".format(adnumber) %}
                         {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
                     </div>
                 {%- endif %}
