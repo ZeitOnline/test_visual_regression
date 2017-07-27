@@ -14,7 +14,7 @@
 
 	&__title
 		@extend %teaser-title--s
-		// Schade. Design hält sich nicht aneigenen Styleguide.
+		// Schade. Design hält sich nicht an eigenen Styleguide. TODO: Brauchen wir andere abstrakte Klassen? Tweaken beim Polishen, wenn alle Teaser fertig sind.
 		+respond-min($break-tablet-min)
 			font-size: remify(18px)
 			line-height: 1.4
@@ -34,14 +34,22 @@
 +respond-min($break-tablet-min)
 	.teaser-topic-sub
 		clear: both
-		margin-bottom: $vertical-space
+		margin: 0
+		&__media,
+		&__container
+			display: table-cell
 		&__media
+			width: remify(170px)
+		&__media-container
 			display: block
-			// we cannot "@extend %teaser-media" inside media query
+			// we cannot "@extend %teaser-media" inside media query, so we set colors here
 			background-color: $greyish-white
 			color: $color-text // force alt text being readable
 			+reserve-space-for-teaser-media(100% / 16 * 9) // image variant 'wide' (16:9)
-			float: left
-			width: remify(180px)
 		&__container
-			margin-left: remify(200px)
+			padding-left: $page-padding--small
+			vertical-align: middle
+		&__heading
+			margin: 0
+	.teaser-topic-sub + .teaser-topic-sub // only between teasers
+		margin-top: remify($vertical-space)
