@@ -111,24 +111,26 @@ def _inject_banner_code(pages, pubtype):
         # (3a) Match ads to the cloned list of long paragraphs
         for index, paragraph in enumerate(paragraphs, start=1):
             try:
-                ad = [ad for ad in adconfig[pubtype]['ads'] if ad[
+                ads = [ad for ad in adconfig[pubtype]['ads'] if ad[
                     'paragraph'] == index and page_number in adconfig[
-                    pubtype]['pages']][0]
+                    pubtype]['pages']]
             except IndexError:
                 continue
-            if ad is not None:
+            if ads is not None:
                 # (3b) Insert the ad into the real page blocks
                 for i, block in enumerate(page.blocks, start=1):
                     if paragraph == block:
-                        if ad['tile'] == 'content_ad':
-                            adplace = zeit.web.core.banner.ContentAdBlock(
-                                "iq-artikelanker")
-                        else:
-                            adplace = zeit.web.core.banner.Place(
-                                ad['tile'], ad['type'], on_page_nr=page_number)
-                        # do not place ad after last paragraph
-                        if i < len(page.blocks):
-                            page.blocks.insert(i, adplace)
+                        for ad in ads:
+                            if ad['tile'] == 'content_ad':
+                                adplace = zeit.web.core.banner.ContentAdBlock(
+                                    "iq-artikelanker")
+                            else:
+                                adplace = zeit.web.core.banner.Place(
+                                    ad['tile'], ad[
+                                        'type'], on_page_nr=page_number)
+                            # do not place ad after last paragraph
+                            if i < len(page.blocks):
+                                page.blocks.insert(i, adplace)
 
     return pages
 
