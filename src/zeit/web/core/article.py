@@ -97,6 +97,13 @@ def _inject_banner_code(pages, pubtype):
         paragraphs = filter(lambda b: isinstance(
             b, zeit.web.core.block.Paragraph), page.blocks)
 
+        # (1a) check if there is an editorial aside after paragraph 1
+        if toggles.find(
+                'iqd_digital_transformation') and not isinstance(
+                page.blocks[1], zeit.web.core.block.Paragraph):
+            adconfig['zon']['ads'][1] = {
+                'tile': 8, 'paragraph': 2, 'type': 'desktop'}
+
         # (2) get a list of those paragraphs, after which we can insert ads
         paragraphs = _paragraphs_by_length(
             paragraphs, sufficient_length=p_length)
