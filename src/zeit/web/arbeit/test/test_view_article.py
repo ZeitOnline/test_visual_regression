@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# import pytest
+import pytest
 
 
 def test_article_single_page_has_no_pagination(testbrowser):
@@ -32,3 +32,24 @@ def test_article_renders_quotes_correctly(testbrowser):
     arrows = browser.cssselect('.quote__source-arrow')
     assert len(quotes) == 4
     assert len(arrows) == 2
+
+
+@pytest.mark.parametrize('c1_parameter', [
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous',
+    '?C1-Meter-Status=paywall&C1-Meter-User-Status=registered',
+    '?C1-Meter-Status=always_paid'])
+def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
+    urls = [
+        'arbeit/article/paginated',
+        'arbeit/article/paginated/seite-2',
+        'arbeit/article/paginated/komplettansicht',
+        'arbeit/article/simple'
+    ]
+
+    for url in urls:
+        browser = testbrowser(
+            '{}{}'.format(url, c1_parameter))
+        assert len(browser.cssselect('.paragraph--faded')) == 1
+        assert len(browser.cssselect('.gate')) == 1
+        assert len(browser.cssselect(
+            '.gate--register')) == int('anonymous' in c1_parameter)
