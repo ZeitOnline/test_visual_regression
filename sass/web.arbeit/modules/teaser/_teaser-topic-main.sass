@@ -1,0 +1,24 @@
+.teaser-topic-main
+	text-align: center
+	&__heading
+		&:after
+			content: url('data:image/svg+xml; utf8, <svg width="40px" height="9px" viewBox="0 0 40 9" xmlns="http://www.w3.org/2000/svg"><path d="M37.794 5H-.053V4H37.89L34.453.563l.707-.707 4.597 4.596L35 9.207l-.707-.707L37.794 5z"></path></svg>')
+			display: block
+			margin: remify(35px) auto remify(20px)
+			transform: rotate(90deg)
+	&__combined-link
+		@extend %teaser-combined-link
+	&__kicker
+		@extend %teaser-kicker--s
+		margin-bottom: remify(8px)
+		// Schade. Design hält sich nicht aneigenen Styleguide.
+		+respond-min($break-tablet-min)
+			color: $color-text
+			font-size: remify(20px)
+			letter-spacing: $letter-spacing-xl
+			margin-bottom: remify(18px)
+
+	&__title
+		@extend %teaser-title--xl
+	&__button
+		@extend %zar-button-hollow

@@ -1,0 +1,25 @@
+{% extends "zeit.web.core:templates/inc/area/default.html" %}
+
+{% block module_list %}
+    <section class="teaser-topic">
+
+        {% if area.values() | length > 0 %}
+            {% set module = area.values()[0] %}
+
+            {# TODO: verstehen: was macht das? #}
+            {% if area.referenced_cp is not none and not is_topic_variant %}
+                {% set teaser = area.referenced_cp %}
+            {% else %}
+                {% set teaser = module | first_child %}
+            {% endif %}
+
+            {% include "zeit.web.arbeit:templates/inc/teaser/topic-main.tpl" %}
+
+            <div class="teaser-topic__list">
+                {% for module in area.values()[0:3] -%}
+                    {% include 'zeit.web.arbeit:templates/inc/teaser/topic-sub.tpl' %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    </section>
+{% endblock %}

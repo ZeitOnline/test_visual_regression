@@ -1,0 +1,15 @@
+.teaser-topic
+	@extend %teaser
+	border: remify(6px) $zar-sun-yellow solid
+	margin: remify(14px) $page-padding--small
+	padding: $page-padding--small
+
++respond-min($break-tablet-min)
+	.teaser-topic
+		display: flex
+		margin: $vertical-space $cp-padding
+		padding: $cp-padding
+	.teaser-topic-main,
+	.teaser-topic_list
+		width: 50%
+		padding: $page-padding--small
