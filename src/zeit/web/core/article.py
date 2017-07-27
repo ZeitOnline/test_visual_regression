@@ -79,6 +79,15 @@ def _inject_banner_code(pages, pubtype):
         }
     }
 
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('iqd_digital_transformation'):
+        idt_ads = [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
+                   {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
+                   {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
+                   {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
+                   {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
+        adconfig['zon']['ads'] = idt_ads
+
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
 
