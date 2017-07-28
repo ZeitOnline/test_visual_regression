@@ -2,7 +2,7 @@
 import pytest
 
 
-def test_article_single_page_has_no_pagination(testbrowser):
+def test_zar_article_single_page_has_no_pagination(testbrowser):
     select = testbrowser('/arbeit/article/simple').cssselect
 
     assert len(select('.summary, .byline, .metadata')) == 3
@@ -11,7 +11,7 @@ def test_article_single_page_has_no_pagination(testbrowser):
     assert len(select('.article-toc')) == 0
 
 
-def test_article_full_view_has_no_pagination(testbrowser):
+def test_zar_article_full_view_has_no_pagination(testbrowser):
     select = testbrowser('/arbeit/article/paginated/komplettansicht').cssselect
 
     assert len(select('.summary, .byline, .metadata')) == 2
@@ -20,13 +20,13 @@ def test_article_full_view_has_no_pagination(testbrowser):
     assert len(select('.article-toc')) == 0
 
 
-def test_article_paginated_has_toc(testbrowser):
+def test_zar_article_paginated_has_toc(testbrowser):
     browser = testbrowser('/arbeit/article/paginated/')
     toc = browser.cssselect('.article-toc')
     assert len(toc) == 1
 
 
-def test_article_renders_quotes_correctly(testbrowser):
+def test_zar_article_renders_quotes_correctly(testbrowser):
     browser = testbrowser('/arbeit/article/quotes')
     quotes = browser.cssselect('.quote')
     arrows = browser.cssselect('.quote__source-arrow')
@@ -38,7 +38,7 @@ def test_article_renders_quotes_correctly(testbrowser):
     '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous',
     '?C1-Meter-Status=paywall&C1-Meter-User-Status=registered',
     '?C1-Meter-Status=always_paid'])
-def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
+def test_zar_paywall_switch_showing_forms(c1_parameter, testbrowser):
     urls = [
         'arbeit/article/paginated',
         'arbeit/article/paginated/seite-2',
