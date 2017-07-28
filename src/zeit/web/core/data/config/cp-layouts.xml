@@ -21,6 +21,12 @@
         image_pattern="wide"
         areas="duo"
         />
+    <layout
+        id="zar-quote"
+        title="Quote-Teaser"
+        image_pattern="original"
+        areas="duo"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"
