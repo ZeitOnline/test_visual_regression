@@ -68,4 +68,9 @@
 
 {% endblock main %}
 
-{% block adplace_floor %}{% endblock %}
+{% block adplace_floor %}
+    {% if toggles('iqd_digital_transformation') -%}
+        <!-- P7 -->
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place16.html" %}
+    {% endif -%}
+{% endblock adplace_floor %}
