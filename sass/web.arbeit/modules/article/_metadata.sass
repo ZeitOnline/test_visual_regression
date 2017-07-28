@@ -9,9 +9,6 @@
 		color: $color-separator
 		content: " / "
 		margin: 0 .25em
-	&--zplus
-		> *:nth-last-child(2):after
-			display: none
 	&--column
 		margin-bottom: 0
 	&__commentcount
@@ -22,7 +19,3 @@
 		+on-interaction
 			border-bottom-color: rgba($zon-grey, .8)
 			color: inherit
-	&:after
-		content: ''
-		display: block
-		margin-bottom: remify(40px)

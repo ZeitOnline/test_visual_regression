@@ -17,10 +17,13 @@
                 {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
             </div>
             {% endif -%}
-            <div class="{{ 'metadata' | with_mods('zplus') if self.zplus_badge() else 'metadata' }}">
+            <div class="metadata">
                 {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
-                {% block zplus_badge %}{% endblock %}
             </div>
+
+            {% if view.zplus_label and view.zplus_label.zplus %}
+                {% include "zeit.web.core:templates/inc/article/zplus-badge.html" %}
+            {% endif %}
         {% endblock %}
     {% endif %}
 </div>
