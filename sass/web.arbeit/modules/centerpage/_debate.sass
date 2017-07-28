@@ -1,7 +1,7 @@
 .debatebox
-	background-color: #252525
+	background-color: $primary-color
 	font-family: $font-tabletgothic
-	padding: remify(40px 14px 30px)
+	padding: remify(40px) $page-padding--small remify(30px)
 	text-align: center
 
 	&__button
@@ -26,6 +26,7 @@
 		@extend %teaser-kicker--s
 
 	&__media
+		// TODO: Bild muss vmtl vom Teaser (Pseudo-Artikel??) kommen
 		background-image: url('/static/latest/images/arbeit/debate/paper.png')
 		background-position: center
 		background-repeat: no-repeat
