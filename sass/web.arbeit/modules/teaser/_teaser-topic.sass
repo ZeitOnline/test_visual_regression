@@ -6,11 +6,12 @@
 
 +respond-min($break-tablet-min)
 	.teaser-topic
-		display: flex
 		margin: $vertical-space $cp-padding
 		padding: $cp-padding
+		+pie-clearfix
 
 	.teaser-topic-main,
 	.teaser-topic__list
 		width: 50%
 		padding: $page-padding--small
+		float: left
