@@ -23,9 +23,7 @@
 			position: absolute
 
 	&__kicker
-		color: $zar-battleship-grey
-		font-size: remify(14px)
-		letter-spacing: 0.1rem
+		@extend %teaser-kicker--s
 
 	&__media
 		background-image: url('/static/latest/images/arbeit/debate/paper.png')
@@ -47,8 +45,7 @@
 			text-decoration: underline
 
 	&__title
-		font-family: $font-patronbold
-		font-size: remify(22px)
+		@extend %teaser-title--s
 		margin: remify(10px 0)
 
 	&--yellow
@@ -66,7 +63,8 @@
 			grid-template-columns: 30% 70%
 			padding: remify(49px 27px)
 
-		&__label
+		&__kicker
+			// TODO: Polisihing mit abstrakt kicker--l??
 			font-size: remify(20px)
 
 		&__link
@@ -79,6 +77,7 @@
 			width: remify(150px)
 
 		&__title
+			// TODO: Polisihing mit abstrakt title--m??
 			font-size: remify(36px)
 			line-height: remify(43px)
 
