@@ -82,9 +82,9 @@ def _inject_banner_code(pages, pubtype):
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     if toggles.find('iqd_digital_transformation'):
         idt_ads = [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
-                   {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
+                   {'tile': 8, 'paragraph': 1, 'type': 'desktop', 'place': 3},
                    {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
-                   {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
+                   {'tile': 4, 'paragraph': 4, 'type': 'desktop', 'place': 4},
                    {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
         adconfig['zon']['ads'] = idt_ads
 
@@ -102,7 +102,7 @@ def _inject_banner_code(pages, pubtype):
                 'iqd_digital_transformation') and not isinstance(
                 page.blocks[1], zeit.web.core.block.Paragraph):
             adconfig['zon']['ads'][1] = {
-                'tile': 8, 'paragraph': 2, 'type': 'desktop'}
+                'tile': 8, 'paragraph': 2, 'type': 'desktop', 'place': '3 alt'}
 
         # (2) get a list of those paragraphs, after which we can insert ads
         paragraphs = _paragraphs_by_length(
