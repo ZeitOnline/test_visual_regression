@@ -1,0 +1,90 @@
+.debatebox
+	background-color: #252525
+	font-family: $font-tabletgothic
+	padding: remify(40px 14px 30px)
+	text-align: center
+
+	&__button
+		@extend %zar-button-hollow--debate
+
+	&__container
+		background-color: #ffffff
+		margin-bottom: 30px
+		padding: remify(19px 17px)
+		position: relative
+		&:after
+			content: ""
+			display: block
+			position: absolute
+			bottom: remify(-26px)
+			left: 50%
+			margin-left: remify(-13px)
+			width: 0
+			height: 0
+			border-top: 27px solid #ffffff
+			border-right: 27px solid transparent
+
+	&__label
+		color: $zar-battleship-grey
+		font-size: remify(14px)
+		letter-spacing: 0.1rem
+
+	&__media
+		background-image: url('/static/latest/images/arbeit/debate/paper.png')
+		background-position: center
+		background-repeat: no-repeat
+		height: remify(131px)
+		margin-bottom: remify(15px)
+		vertical-align: middle
+		width: 100%
+
+	&--pink
+		background-color: $zar-darkish-pink
+
+	&__text
+		font-size: remify(15px)
+		line-height: remify(21px)
+		a
+			color: #252525
+			text-decoration: underline
+
+	&__title
+		font-family: $font-patronbold
+		font-size: remify(22px)
+		margin: remify(10px 0)
+
+	&--yellow
+		background-color: $zar-sun-yellow
+		.debatebox__button
+			@extend %zar-button-hollow
+
++respond-min($break-tablet-min)
+	.debatebox
+		padding: remify(50px 100px)
+		text-align: left
+
+		&__container
+			display: grid
+			grid-template-columns: 30% 70%
+			padding: remify(49px 27px)
+
+		&__label
+			font-size: remify(20px)
+
+		&__link
+			display: block
+			text-align: center
+
+		&__media
+			background-position: center
+			margin: 25% 0 0 5%
+			width: remify(150px)
+
+		&__title
+			font-size: remify(36px)
+			line-height: remify(43px)
+
++respond-min($break-desktop-min)
+	.debatebox
+		&__media
+			margin: 22% 0 0 10%
