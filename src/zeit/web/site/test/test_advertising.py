@@ -431,3 +431,17 @@ def test_tile8_for_fullwidth_is_rendered_on_correct_position(
         '.cp-area--minor > div:first-child > script[id="ad-desktop-8"]')
     assert tile7_on_first_position, (
         'Ad tile 8 is not present on first position.')
+
+
+def test_adplace4_on_articles(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect('#ad-desktop-4')) == 1
+
+
+def test_adplace16_on_articles(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect('#ad-desktop-16')) == 1

@@ -138,3 +138,31 @@ def test_overridden_adcontroller_values(
         ('tma', '')]
     view = zeit.web.campus.view_centerpage.Centerpage(cp, dummy_request)
     assert adcv == view.adcontroller_values
+
+
+def test_adplace7_on_articles(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': False}.get)
+    browser = testbrowser('/campus/article/01-countdown-studium')
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
+
+
+def test_adplace8_on_articles(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/campus/article/01-countdown-studium')
+    assert len(browser.cssselect('#ad-desktop-8')) == 1
+
+
+def test_adplace4_on_articles(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/campus/article/01-countdown-studium')
+    assert len(browser.cssselect('#ad-desktop-4')) == 1
+
+
+def test_adplace16_on_articles(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/campus/article/01-countdown-studium')
+    assert len(browser.cssselect('#ad-desktop-16')) == 1

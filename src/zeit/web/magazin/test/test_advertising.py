@@ -146,3 +146,17 @@ def test_ad_tile2_not_ommitted_in_landscape(
 def test_ad_content_ad_in_article(testbrowser):
     browser = testbrowser('/zeit-magazin/article/01')
     assert browser.cssselect('#iq-artikelanker')
+
+
+def test_adplace4_on_articles(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-magazin/article/01')
+    assert len(browser.cssselect('#ad-desktop-4')) == 1
+
+
+def test_adplace16_on_articles(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-magazin/article/01')
+    assert len(browser.cssselect('#ad-desktop-16')) == 1
