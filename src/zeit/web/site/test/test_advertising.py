@@ -278,7 +278,7 @@ def test_tile7_is_rendered_on_articles_with_multiple_pages(
 def test_adplace_P4_is_rendered_on_articles_with_multiple_pages(
         testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': Truee}.get)
+        'iqd_digital_transformation': True}.get)
     selector = ('#ad-desktop-8', '#ad-mobile-4')
 
     browser = testbrowser('/zeit-online/article/zeit')
@@ -307,11 +307,10 @@ def test_tiles7_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
 def test_tiles8_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
         testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
+        'iqd_digital_transformation': True}.get)
     browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
     assert len(browser.cssselect('#ad-desktop-8')) == 1
     assert len(browser.cssselect('#ad-mobile-4')) == 1
-    assert len(browser.cssselect('#ad-desktop-9')) == 1
 
 
 def test_article_ad7_should_have_pagetype_modifier(testbrowser, monkeypatch):
