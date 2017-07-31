@@ -198,7 +198,9 @@ def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
 
 
 def test_adplace8_has_banner_label_data_attribute(
-        application, dummy_request, tplbrowser):
+        application, dummy_request, tplbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': False}.get)
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
     view = zeit.web.site.view_article.Article(context, dummy_request)
@@ -232,3 +234,133 @@ def test_iqd_adtile2_should_not_be_inserted_on_small_screens(
     driver.set_window_size(1080, 800)
     driver.get('%s/zeit-online/article/zeit/seite-3' % testserver.url)
     assert driver.find_element_by_css_selector('.ad-desktop--2')
+
+
+def test_adcontroller_values_return_values_on_article(
+        application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/infoboxartikel')
+    adcv = [
+        ('$handle', 'artikel_trsf'),
+        ('level2', u'wissen'),
+        ('level3', 'umwelt'),
+        ('level4', ''),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,affe,aggression,geschlechtsverkehr,'
+            'schimpanse,sozialverhalten,studie'),
+        ('tma', '')]
+    view = view = zeit.web.site.view_article.Article(
+        content, pyramid.testing.DummyRequest())
+    assert adcv == view.adcontroller_values
+
+
+def test_tile7_is_rendered_on_articles_with_multiple_pages(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': False}.get)
+    selector = ('#ad-desktop-7', '#ad-mobile-4')
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect(selector[0])) == 1
+    assert len(browser.cssselect(selector[1])) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-2')
+    assert len(browser.cssselect(selector[0])) == 1
+    assert len(browser.cssselect(selector[1])) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-5')
+    assert len(browser.cssselect(selector[0])) == 1
+    assert len(browser.cssselect(selector[1])) == 1
+
+
+def test_adplace_P4_is_rendered_on_articles_with_multiple_pages(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': Truee}.get)
+    selector = ('#ad-desktop-8', '#ad-mobile-4')
+
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert len(browser.cssselect(selector[0])) == 1
+    assert len(browser.cssselect(selector[1])) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-2')
+    assert len(browser.cssselect(selector[0])) == 1
+    assert len(browser.cssselect(selector[1])) == 1
+
+    browser = testbrowser('/zeit-online/article/zeit/seite-5')
+    assert len(browser.cssselect(selector[0])) == 1
+    assert len(browser.cssselect(selector[1])) == 1
+
+
+def test_tiles7_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': False}.get)
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
+    assert len(browser.cssselect('#ad-mobile-4')) == 1
+    assert len(browser.cssselect('#ad-desktop-9')) == 1
+
+
+def test_tiles8_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': False}.get)
+    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
+    assert len(browser.cssselect('#ad-desktop-8')) == 1
+    assert len(browser.cssselect('#ad-mobile-4')) == 1
+    assert len(browser.cssselect('#ad-desktop-9')) == 1
+
+
+def test_article_ad7_should_have_pagetype_modifier(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': False}.get)
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
+    assert 'ad-desktop--7-on-article' in browser.contents
+
+
+def test_article_ad8_should_have_pagetype_modifier(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-online/article/01')
+    assert len(browser.cssselect('#ad-desktop-8')) == 1
+    assert 'ad-desktop--8-on-article' in browser.contents
+
+
+def test_adcontroller_values_return_values_on_hp(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/index')
+    adcv = [
+        ('$handle', 'homepage_trsf'),
+        ('level2', 'homepage'),
+        ('level3', ''),
+        ('level4', ''),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline'),
+        ('tma', '')]
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        cp, pyramid.testing.DummyRequest())
+    assert adcv == view.adcontroller_values
+
+
+def test_adcontroller_values_return_values_on_cp(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/main-teaser-setup')
+    adcv = [
+        ('$handle', 'index_trsf'),
+        ('level2', 'politik'),
+        ('level3', ''),
+        ('level4', ''),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,sashawaltz,interpol'),
+        ('tma', '')]
+    view = zeit.web.site.view_centerpage.LegacyCenterpage(
+        cp, pyramid.testing.DummyRequest())
+    assert adcv == view.adcontroller_values
