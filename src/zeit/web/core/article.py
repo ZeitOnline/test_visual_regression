@@ -98,8 +98,9 @@ def _inject_banner_code(pages, pubtype):
             b, zeit.web.core.block.Paragraph), page.blocks)
 
         # (1a) check if there is an editorial aside after paragraph 1
-        if toggles.find(
-                'iqd_digital_transformation') and not isinstance(
+
+        if toggles.find('iqd_digital_transformation') and (
+                len(page.blocks) > 1) and not isinstance(
                 page.blocks[1], zeit.web.core.block.Paragraph):
             adconfig['zon']['ads'][1] = {
                 'tile': 8, 'paragraph': 2, 'type': 'desktop'}
