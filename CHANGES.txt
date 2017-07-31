@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ARBEIT-80: Implement topic teaser for ZEIT Arbeit
 
+- ARBEIT-90: Style debate teaser for ZEIT Arbeit
+
 
 3.73 (2017-07-27)
 -----------------
