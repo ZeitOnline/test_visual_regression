@@ -364,3 +364,11 @@ def test_adcontroller_values_return_values_on_cp(application, monkeypatch):
     view = zeit.web.site.view_centerpage.LegacyCenterpage(
         cp, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
+
+
+def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
+
+    browser = testbrowser('/zeit-online/video/3537342483001')
+    assert len(browser.cssselect('#ad-desktop-7')) == 1
