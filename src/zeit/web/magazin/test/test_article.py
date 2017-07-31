@@ -770,6 +770,11 @@ def test_feature_longform_should_have_zon_logo_footer(testbrowser):
     assert browser.cssselect('.main-footer__logo--zon-small')
 
 
+def test_feature_longform_should_have_longform_class(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/05')
+    assert browser.cssselect('.page__content--longform')
+
+
 def test_feature_longform_should_have_zonish_title(testbrowser):
     browser = testbrowser('/feature/feature_longform')
     title = browser.cssselect('head > title')
