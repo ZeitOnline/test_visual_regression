@@ -104,6 +104,8 @@ def _inject_banner_code(pages, pubtype):
                 page.blocks[1], zeit.web.core.block.Paragraph):
             adconfig['zon']['ads'][1] = {
                 'tile': 8, 'paragraph': 2, 'type': 'desktop'}
+            adconfig['longform']['ads'][0] = {
+                'tile': 8, 'paragraph': 5, 'type': 'desktop'}
 
         # (2) get a list of those paragraphs, after which we can insert ads
         paragraphs = _paragraphs_by_length(
