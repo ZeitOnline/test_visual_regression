@@ -5,7 +5,13 @@ POSTDEPLOY
 ----------
 
 
-3.74 (unreleased)
+3.75 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.74 (2017-07-31)
 -----------------
 
 - ARBEIT-22: Show paywall on ZEIT Arbeit articles
