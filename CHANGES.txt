@@ -8,7 +8,9 @@ POSTDEPLOY
 3.74 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT-22: Show paywall on ZEIT Arbeit articles
+
+- ARBEIT-80: Implement topic teaser for ZEIT Arbeit
 
 
 3.73 (2017-07-27)
