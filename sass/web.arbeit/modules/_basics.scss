@@ -37,3 +37,21 @@ text-transform: none;
 	font-family: $font-patronbold;
 	text-transform: none;
 }
+
+%zar-button-hollow--debate {
+	@include zon-button(
+		$color: $white,
+		$background-color: transparent,
+		$hover-background-color: $white,
+		$hover-color: $black,
+		$hover-border-color: $white,
+		$visited-color: $color-jobs-elements,
+		$letter-spacing: $letter-spacing-s,
+		$font-size: remify(16px),
+		$border-color: $white,
+		$margin: remify(14px 6px 14px 0)
+		);
+	@include font-smoothing;
+	font-family: $font-patronbold;
+	text-transform: none;
+}
