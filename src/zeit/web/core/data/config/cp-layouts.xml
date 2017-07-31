@@ -7,8 +7,11 @@
         image_pattern="wide"
         areas="trio"
         />
-    <layout id="zar-lead" title="Aufmacher" image_pattern="portrait" areas="solo" />
-
+    <layout
+        id="zar-lead"
+        title="Aufmacher"
+        image_pattern="portrait"
+        areas="solo" />
     <layout
         id="zar-duo-bright"
         title="Duo-Teaser Hell mit dunkler Schrift"
@@ -20,6 +23,12 @@
         title="Duo-Teaser Dunkel mit heller Schrift"
         image_pattern="wide"
         areas="duo"
+        />
+    <layout
+        id="zar-topic-small"
+        title="kleiner Teaser Topic"
+        image_pattern="wide"
+        areas="topic"
         />
     <layout
         id="zar-quote"

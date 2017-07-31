@@ -42,6 +42,8 @@
             </h2>
         {% endblock teaser_heading %}
 
+        {% block teaser_media_position_after_title %}{% endblock %}
+
         {% block teaser_container %}
             {% block teaser_text %}
                 <p class="{{ self.layout() }}__text">{{ teaser.teaserText }}</p>
