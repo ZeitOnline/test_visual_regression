@@ -61,8 +61,7 @@
 		padding: remify(50px 100px)
 
 		&__container
-			display: grid
-			grid-template-columns: 30% 70%
+			+pie-clearfix
 			padding: remify(49px 27px)
 			text-align: left
 
@@ -71,11 +70,12 @@
 			font-size: remify(20px)
 
 		&__media
-			margin: 25% 0 0 5%
-			// TODO: passt bei kleinen tablets noch nicht.
-			// Lieber Container und Padding ... ergibt sich dann bei
-			// der Verwendung von Teaser-Media.
-			width: remify(150px)
+			width: remify(153px)
+			height: remify(131px)
+			float: left
+
+		&__right
+			padding-left: remify(173px)
 
 		&__title
 			// TODO: Polishing mit abstrakt title--m??
@@ -84,5 +84,7 @@
 
 +respond-min($break-desktop-min)
 	.debatebox
-		&__media
-			margin: 22% 0 0 10%
+		&__container
+			padding: remify(49px 40px)
+		&__right
+			padding-left: remify(193px)
