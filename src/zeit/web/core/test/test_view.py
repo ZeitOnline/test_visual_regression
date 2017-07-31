@@ -459,26 +459,6 @@ def test_ivw_uses_hyprid_method_for_apps(jinja2_env):
     assert 'iom.c' not in html
 
 
-def test_iqd_ads_should_utilize_feature_toggles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd': True, 'third_party_modules': True}.get)
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert 'AdController.initialize();' in (
-        browser.cssselect('head')[0].text_content())
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd': False, 'third_party_modules': False}.get)
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert 'AdController.initialize();' not in (
-        browser.cssselect('head')[0].text_content())
-
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd': True, 'third_party_modules': False}.get)
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert 'AdController.initialize();' not in (
-        browser.cssselect('head')[0].text_content())
-
-
 def test_amp_article_should_have_amp_link(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/zeit')

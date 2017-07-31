@@ -40,6 +40,26 @@ def mock_ad_view(application):
     return MockAdView
 
 
+def test_iqd_ads_should_utilize_feature_toggles(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd': True, 'third_party_modules': True}.get)
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert 'AdController.initialize();' in (
+        browser.cssselect('head')[0].text_content())
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd': False, 'third_party_modules': False}.get)
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert 'AdController.initialize();' not in (
+        browser.cssselect('head')[0].text_content())
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd': True, 'third_party_modules': False}.get)
+    browser = testbrowser('/zeit-online/article/zeit')
+    assert 'AdController.initialize();' not in (
+        browser.cssselect('head')[0].text_content())
+
+
 def test_adcontroller_handles_for_entdecken_und_reisen(mock_ad_view):
     assert mock_ad_view(
         'centerpage', 'entdecken', ''
