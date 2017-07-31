@@ -3,11 +3,13 @@ import zeit.web.core.interfaces
 
 
 def test_campus_adcontroller_values_return_values_on_hp(
-        application, dummy_request):
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/index')
     adcv = [
-        ('$handle', 'homepage'),
+        ('$handle', 'homepage_trsf'),
         ('level2', 'campus'),
         ('level3', ''),
         ('level4', ''),
@@ -26,11 +28,13 @@ def test_campus_hp_banner_channel_is_correct(application, dummy_request):
 
 
 def test_campus_adcontroller_values_return_values_on_cp(
-        application, dummy_request):
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/index')
     adcv = [
-        ('$handle', 'index'),
+        ('$handle', 'index_trsf'),
         ('level2', 'campus'),
         ('level3', ''),
         ('level4', ''),
@@ -42,11 +46,13 @@ def test_campus_adcontroller_values_return_values_on_cp(
 
 
 def test_campus_adcontroller_values_return_values_on_article(
-        application, dummy_request):
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/adcontroller')
     adcv = [
-        ('$handle', 'artikel'),
+        ('$handle', 'artikel_trsf'),
         ('level2', 'campus'),
         ('level3', 'thema'),
         ('level4', 'bafoeg_antraege_fuer_ue_50'),
@@ -58,11 +64,13 @@ def test_campus_adcontroller_values_return_values_on_article(
 
 
 def test_campus_adcontroller_values_return_values_on_advertorial_article(
-        application, dummy_request):
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/advertorial')
     adcv = [
-        ('$handle', 'adv_artikel'),
+        ('$handle', 'adv_artikel_trsf'),
         ('level2', u'adv'),
         ('level3', u'iwcschaffhausen'),
         ('level4', ''),
@@ -74,11 +82,13 @@ def test_campus_adcontroller_values_return_values_on_advertorial_article(
 
 
 def test_campus_adcontroller_values_return_values_on_advertorial_cp(
-        application, dummy_request):
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/advertorial')
     adcv = [
-        ('$handle', 'adv_index'),
+        ('$handle', 'adv_index_trsf'),
         ('level2', u'adv'),
         ('level3', u'buchtipp'),
         ('level4', ''),
@@ -95,11 +105,13 @@ def test_campus_adplace7_should_be_placeable_via_cpextra(testbrowser):
 
 
 def test_campus_adcontroller_values_return_values_on_topic_cp(
-        application, dummy_request):
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/thema')
     adcv = [
-        ('$handle', 'index'),
+        ('$handle', 'index_trsf'),
         ('level2', 'campus'),
         ('level3', 'thema'),
         ('level4', 'jurastudium'),
@@ -107,4 +119,22 @@ def test_campus_adcontroller_values_return_values_on_topic_cp(
         ('keywords', 'zeitonline,zeitcampus'),
         ('tma', '')]
     view = zeit.web.campus.view_centerpage.Centerpage(content, dummy_request)
+    assert adcv == view.adcontroller_values
+
+
+def test_overridden_adcontroller_values(
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/campus/centerpage/advertorial-with-banner-id')
+    adcv = [
+        ('$handle', 'adv_index_trsf'),
+        ('level2', 'campus'),
+        ('level3', 'angebote'),
+        ('level4', '100tage'),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,zeitcampus'),
+        ('tma', '')]
+    view = zeit.web.campus.view_centerpage.Centerpage(cp, dummy_request)
     assert adcv == view.adcontroller_values
