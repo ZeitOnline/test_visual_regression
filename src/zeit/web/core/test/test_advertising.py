@@ -237,12 +237,14 @@ def test_adcontroller_values_for_stimmts_series(mock_ad_view, monkeypatch):
     assert adv_test == adv_code
 
 
-def test_banner_advertorial_extrarulez(mock_ad_view):
+def test_banner_advertorial_extrarulez(mock_ad_view, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
     adv_test = mock_ad_view(
         'centerpage', 'angebote',
         '', banner_id='angebote/ingdiba',
         adv_title='ingdiba', product_text='Advertorial').adcontroller_values
-    adv_code = [('$handle', 'adv_index'), ('level2', u'angebote'),
+    adv_code = [('$handle', 'adv_index_trsf'), ('level2', u'angebote'),
                 ('level3', u'ingdiba'), ('level4', ''),
                 ('$autoSizeFrames', True), ('keywords', 'angebote,ingdiba'),
                 ('tma', '')]
