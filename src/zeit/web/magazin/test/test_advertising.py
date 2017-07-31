@@ -1,0 +1,148 @@
+# -*- coding: utf-8 -*-
+import pytest
+import mock
+
+import zeit.cms.interfaces
+
+import zeit.web.core.application
+import zeit.web.core.banner
+import zeit.web.core.template
+import zeit.web.core.view
+import zeit.web.magazin
+
+
+def test_banner_toggles_viewport_zoom(application):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-magazin/article/02')
+    view = zeit.web.magazin.view_article.Article(context, mock.Mock())
+    assert view.banner_toggles('viewport_zoom') == 'tablet-landscape'
+
+
+def test_banner_should_not_be_displayed_on_short_pages(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/header-traum')
+    assert not browser.cssselect('#iqadtile4')
+
+
+def test_banner_should_not_be_displayed_on_disabled_article(testbrowser):
+    # test article with xml banner = no
+    browser = testbrowser('/zeit-magazin/article/nobanner')
+    # no desktop ads
+    assert not browser.cssselect('div[class*="ad-tile_"]')
+
+
+def test_banner_should_not_be_displayed_on_disabled_cp(testbrowser):
+    # centerpage without ads
+    browser = testbrowser('/zeit-magazin/centerpage/index-without-ads')
+    # no desktop ads
+    assert not browser.cssselect('div[class*="ad-tile_"]')
+
+
+def test_banner_tile7_should_appear_on_article_pages(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': False}.get)
+    browser = testbrowser('/zeit-magazin/article/03')
+    assert browser.cssselect('#ad-desktop-7')
+    browser = testbrowser('/zeit-magazin/article/03/seite-3')
+    assert browser.cssselect('#ad-desktop-7')
+    browser = testbrowser('/zeit-magazin/article/03/seite-4')
+    assert browser.cssselect('#ad-desktop-7')
+    browser = testbrowser('/zeit-magazin/article/03/seite-7')
+    assert browser.cssselect('#ad-desktop-7')
+
+
+def test_banner_tile8_should_appear_on_article_pages(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    browser = testbrowser('/zeit-magazin/article/03')
+    assert browser.cssselect('#ad-desktop-8')
+    browser = testbrowser('/zeit-magazin/article/03/seite-3')
+    assert browser.cssselect('#ad-desktop-8')
+    browser = testbrowser('/zeit-magazin/article/03/seite-4')
+    assert browser.cssselect('#ad-desktop-8')
+    browser = testbrowser('/zeit-magazin/article/03/seite-7')
+    assert browser.cssselect('#ad-desktop-8')
+
+
+def test_banner_tile3_should_be_displayed_on_pages(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/01')
+    assert browser.cssselect('#ad-desktop-3')
+    browser = testbrowser('/zeit-magazin/centerpage/lebensart')
+    assert browser.cssselect('#ad-desktop-3')
+
+
+def test_banner_tile7_should_not_appear_on_short_pages(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/03/seite-2')
+    assert not browser.cssselect('#ad-desktop-7')
+    browser = testbrowser('/zeit-magazin/article/03/seite-5')
+    assert not browser.cssselect('#ad-desktop-7')
+    browser = testbrowser('/zeit-magazin/article/03/seite-6')
+    assert not browser.cssselect('#ad-desktop-7')
+
+
+@pytest.mark.xfail(reason='ad scripts may timeout')
+def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
+
+    driver = selenium_driver
+    driver.set_window_size(768, 1024)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
+
+    diuqilon = driver.execute_script("return window.diuqilon")
+    # ipad
+    assert diuqilon == ',diuqilon'
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
+    diuqilon = driver.execute_script("return window.diuqilon")
+    # not ipad
+    assert diuqilon == ''
+
+
+@pytest.mark.xfail(reason='ad scripts may timeout')
+def test_viewport_is_resized_in_ipad_landscape(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
+
+    content = driver.execute_script("return document.getElementById('viewport"
+                                    "-meta').getAttribute('content')")
+    orientation = driver.execute_script("return Math.abs(window.orientation)")
+    if orientation is 90:
+        # ipad landscape
+        assert 'width=1280' in content
+
+
+@pytest.mark.xfail(reason='ad scripts may timeout')
+def test_viewport_is_not_resized_in_other_browser(
+        selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
+
+    content = driver.execute_script("return document.getElementById('viewport"
+                                    "-meta').getAttribute('content')")
+    orientation = driver.execute_script("return Math.abs(window.orientation)")
+    if orientation is not 90:
+        # all other
+        assert 'width=device-width' in content
+
+
+@pytest.mark.xfail(reason='ad scripts may timeout')
+def test_ad_tile2_not_ommitted_in_landscape(
+        selenium_driver, testserver, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'third_party_modules': True}.get)
+    driver = selenium_driver
+    driver.set_window_size(1024, 768)
+    driver.get('%s/zeit-magazin/article/01' % testserver.url)
+    script = 'return document.querySelectorAll(".ad-tile_2 script").length'
+    scripts = driver.execute_script(script)
+    assert scripts > 1
+
+
+@pytest.mark.xfail(reason='ad scripts may timeout')
+def test_ad_content_ad_in_article(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/01')
+    assert browser.cssselect('#iq-artikelanker')
