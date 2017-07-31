@@ -57,6 +57,7 @@
 +respond-min($break-tablet-min)
 	.debatebox
 		margin: $vertical-space 0
+		// TODO: Lieber mit max-width arbeiten, wie überall?
 		padding: remify(50px 100px)
 
 		&__container
@@ -66,15 +67,18 @@
 			text-align: left
 
 		&__kicker
-			// TODO: Polisihing mit abstrakt kicker--l??
+			// TODO: Polishing mit abstrakt kicker--l??
 			font-size: remify(20px)
 
 		&__media
 			margin: 25% 0 0 5%
+			// TODO: passt bei kleinen tablets noch nicht.
+			// Lieber Container und Padding ... ergibt sich dann bei
+			// der Verwendung von Teaser-Media.
 			width: remify(150px)
 
 		&__title
-			// TODO: Polisihing mit abstrakt title--m??
+			// TODO: Polishing mit abstrakt title--m??
 			font-size: remify(36px)
 			line-height: remify(43px)
 
