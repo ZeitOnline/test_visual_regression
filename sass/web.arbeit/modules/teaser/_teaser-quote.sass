@@ -1,0 +1,69 @@
+.teaser-quote
+	@extend %teaser
+	background-color: $zar-sun-yellow
+	margin: remify(14px) $page-padding--small
+	padding: remify(20px 16px)
+	position: relative
+
+	// text on top and bottom of the teaser
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+
+	+respond-min($break-tablet-min)
+		margin: $vertical-space $cp-padding
+		padding: remify(40px)
+
+	&__text
+		@extend %teaser-title--s
+		margin-top: 0
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__headingwrapper
+
+	&__heading,
+	&__byline
+		@extend %teaser-text-fontsize
+		font-family: $font-franziska
+		font-weight: normal
+
+	&__headingwrapper
+		width: 80%
+
+	&__byline-arrow
+		fill: currentColor
+
+	&__heading
+		margin: remify(20px 0 0)
+
+	&__kicker
+		display: block
+		font-style: italic
+
+	&--red
+		+font-smoothing
+		background-color: $zar-darkish-pink
+		color: #fff
+
+	&__media
+		bottom: 0
+		position: absolute
+		right: remify(6px)
+		width: 25%
+		filter: grayscale(100%) contrast(150%)
+
+// same height as other duo teasers on desktop for "modern" browsers
+// TODO: bei noJS ists doof.
++respond-min($break-tablet-min)
+	html.flexbox
+		.teaser-quote
+			height: 100%
+			margin-bottom: 0
+			margin-top: 0
+
+// TODO: Hover-Stil für die Links
+// TODO: ganzen Teaser klickbar machen (und die Quote bzw alles bei NoJS??)
+// TODO: auch den unteren Teaser-Text überschreibbar machen?
+// TODO: Pfeil als CSS after Ding ... zieht er dann das letzte Wort auf die neue Zeile?
