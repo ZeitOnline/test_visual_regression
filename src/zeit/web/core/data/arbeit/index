@@ -125,5 +125,18 @@
       </region>
     </cluster>
 
+    <cluster area="id-41a2899d-b569-4c42-b713-d5bdbd86a61f" kind="duo">
+      <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a61f" kind="duo">
+        <container cp:type="teaser" module="zar-quote-red" layout="raspberry" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe1b">
+          <block uniqueId="http://xml.zeit.de/arbeit/teaser/serie"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a12f" kind="duo">
+        <container cp:type="teaser" module="zar-quote-yellow" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d71f3be3b">
+          <block uniqueId="http://xml.zeit.de/arbeit/teaser/quote"></block>
+        </container>
+      </region>
+    </cluster>
+
   </body>
 </centerpage>
