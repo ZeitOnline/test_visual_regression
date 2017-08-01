@@ -206,7 +206,18 @@ def test_json_article_query_should_transform_solr_fields(application):
         'teaser_text': 'my-teaser-text',
         'title': 'my-title',
         'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
-        'uuid': 'my-uuid'
+        'uuid': 'my-uuid-article-01'
+    }, {
+        'date_first_released': '2017-05-07T15:01:26.098814+00:00',
+        'date_last_published': '2017-05-07T15:01:26.098814+00:00',
+        'keywords': ['kw-4', 'kw-8'],
+        'ressort': 'my-ressort',
+        'sub_ressort': 'my-sub-ressort',
+        'supertitle': 'my-super-title',
+        'teaser_text': 'my-teaser-text',
+        'title': 'my-title',
+        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-05',
+        'uuid': 'my-uuid-article-05'
     }]
     response = zeit.web.core.view_json.json_article_query(request)
     assert response == [{
@@ -214,6 +225,7 @@ def test_json_article_query_should_transform_solr_fields(application):
         'date_last_published': '2017-05-03T15:01:26.098814+00:00',
         'keywords': ['kw-1', 'kw-3', 'kw-8'],
         'lead_article': True,
+        'on_homepage': True,
         'ressort': 'my-ressort',
         'sub_ressort': 'my-sub-ressort',
         'supertitle': 'my-super-title',
@@ -221,5 +233,19 @@ def test_json_article_query_should_transform_solr_fields(application):
         'title': 'my-title',
         'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
         'url': '//zeit.to/zeit-online/cp-content/article-01',
-        'uuid': 'my-uuid'
+        'uuid': 'my-uuid-article-01'
+    }, {
+        'date_first_released': '2017-05-07T15:01:26.098814+00:00',
+        'date_last_published': '2017-05-07T15:01:26.098814+00:00',
+        'keywords': ['kw-4', 'kw-8'],
+        'lead_article': False,
+        'on_homepage': True,
+        'ressort': 'my-ressort',
+        'sub_ressort': 'my-sub-ressort',
+        'supertitle': 'my-super-title',
+        'teaser_text': 'my-teaser-text',
+        'title': 'my-title',
+        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-05',
+        'url': '//zeit.to/zeit-online/cp-content/article-05',
+        'uuid': 'my-uuid-article-05'
     }]
