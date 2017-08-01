@@ -1,0 +1,97 @@
+.follow-us
+	+respond-min($break-tablet-min)
+		padding-left: $page-padding
+		padding-right: $page-padding
+	&__container
+		border-top: 1px solid #ccc
+		border-bottom: 1px solid #ccc
+		padding: remify(20px 0 40px)
+		margin: remify(40px 0)
+	&__divider
+		height: remify(40px)
+		position: absolute
+		left: 35%
+		top: 19%
+		bottom: 10%
+		border-left: 1px solid $white
+		opacity: 0
+		+respond-min($break-tablet-min)
+			opacity: 0.5
+	&__follow-icon
+		color: $white
+	&__follow-icon
+		height: remify(30px)
+		width: remify(30px)
+		vertical-align: middle
+		+respond-min($break-tablet-min)
+			float: left
+			height: remify(24px)
+			margin-left: 12%
+			margin-right: (15px)
+			width: remify(24px)
+	&__link
+		color: $white
+		display: block
+		font-size: remify(16px)
+		height: remify(60px)
+		min-width: remify(60px)
+		padding: remify(17px 0)
+		text-align: center
+		width: 100%
+		+respond-min($break-tablet-min)
+			text-indent: 2.5%
+			text-align: left
+		+respond-min($break-desktop-min)
+			text-indent: 5%
+		&:hover
+			color: $white
+		&--facebook
+			background: $color-facebook
+			.svg-symbol
+				margin-left: remify(12px)
+				+respond-min($break-tablet-min)
+					margin-left: 14%
+			&:hover
+				background: $color-facebook-hover
+		&--instagram
+			background: $color-instagram
+			&:hover
+				background: $color-instagram-hover
+		&--newsletter
+			background: $color-newsletter
+			&:hover
+				background: $color-newsletter-hover
+			svg
+				margin-top: remify(5px)
+		&--twitter
+			background: $color-twitter
+			.svg-symbol
+				+respond-min($break-tablet-min)
+					margin-top: 3px
+			&:hover
+				background: $color-twitter-hover
+		&--xing
+			background: $color-xing
+			&:hover
+				background: $color-xing-hover
+	&__linktext
+		display: none
+		+respond-min($break-tablet-min)
+			display: inline-block
+	&__title
+		font-size: remify(18px)
+	ul
+		display: flex
+		list-style: none
+		margin: 0
+		padding: 0
+		width: 100%
+		li
+			flex: 1 auto
+			margin-right: remify(2px)
+			position: relative
+			width: 100%
+			+respond-min($break-tablet-min)
+				margin-right: remify(7px)
+		li:last-child
+			margin: 0
