@@ -25,3 +25,6 @@ if ( pageType === 'centerpage' ) {
 } else if ( article.length ) {
     main.find( '.article-toc' ).toggleRegions();
 }
+
+// more ("non critical") global stuff
+$( '.js-image-copyright-footer' ).imageCopyrightFooter();
