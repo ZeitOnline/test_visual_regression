@@ -778,7 +778,8 @@ def test_feature_longform_is_fullwidth(
     driver.maximize_window()
     width = driver.execute_script(
         'return document.querySelector(".page").offsetWidth')
-    window_width = driver.get_window_size()['width']
+    window_width = driver.execute_script(
+        'return document.documentElement.clientWidth')
     assert width == window_width
 
 
