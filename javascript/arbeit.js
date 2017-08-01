@@ -16,6 +16,7 @@ require( 'web.core/plugins/jquery.notifications' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.toggleRegions' );
 require( 'web.core/plugins/jquery.dropdownLink' );
+require( 'web.core/plugins/jquery.infobox' );
 
 $.notifications();
 
@@ -24,6 +25,7 @@ if ( pageType === 'centerpage' ) {
     $( '.js-dropdownlink' ).dropdownLink();
 } else if ( article.length ) {
     main.find( '.article-toc' ).toggleRegions();
+    main.find( '.js-infobox' ).infobox();
 }
 
 // more ("non critical") global stuff
