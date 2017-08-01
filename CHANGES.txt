@@ -8,7 +8,7 @@ POSTDEPLOY
 3.75 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT-27: Customize article infobox for ZEIT Arbeit
 
 
 3.74 (2017-07-31)
