@@ -8,7 +8,7 @@ POSTDEPLOY
 3.75 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4126: Add property fb:pages to sharing meta
 
 
 3.74 (2017-07-31)
