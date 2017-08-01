@@ -5,7 +5,11 @@
 {# The quote teaser has another order of content (text, heading, image) #}
 
 {% block teaser_allcontent %}
-    {% block teaser_text %}{{ super() }}{% endblock %}
+    {% block teaser_text %}
+        <a class="{{ self.layout() }}__quotelink"
+                   title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
+                   href="{{ teaser | create_url | append_campaign_params }}">
+            {{- super() }}</a>{% endblock %}
 
     <div class="{{ self.layout() }}__headingwrapper">
         {% block teaser_heading %}{{ super() }}{% endblock %}

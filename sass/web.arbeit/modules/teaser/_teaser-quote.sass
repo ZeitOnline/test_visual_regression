@@ -18,8 +18,11 @@
 		@extend %teaser-title--s
 		margin-top: 0
 
-	&__combined-link
+	&__combined-link,
+	&__quotelink
 		@extend %teaser-combined-link
+		+on-interaction
+			color: currentColor
 
 	&__headingwrapper
 
@@ -63,7 +66,6 @@
 			margin-bottom: 0
 			margin-top: 0
 
-// TODO: Hover-Stil für die Links
 // TODO: ganzen Teaser klickbar machen (und die Quote bzw alles bei NoJS??)
 // TODO: auch den unteren Teaser-Text überschreibbar machen?
 // TODO: Pfeil als CSS after Ding ... zieht er dann das letzte Wort auf die neue Zeile?
