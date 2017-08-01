@@ -8,7 +8,11 @@ POSTDEPLOY
 3.75 (unreleased)
 -----------------
 
+- ZON-4126: Add property fb:pages to sharing meta
+
 - ARBEIT-27: Customize article infobox for ZEIT Arbeit
+
+- BUG-761: Fix longform (wider than 1000px)
 
 
 3.74 (2017-07-31)
