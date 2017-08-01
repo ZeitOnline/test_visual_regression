@@ -770,9 +770,16 @@ def test_feature_longform_should_have_zon_logo_footer(testbrowser):
     assert browser.cssselect('.main-footer__logo--zon-small')
 
 
-def test_feature_longform_should_have_longform_class(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/05')
-    assert browser.cssselect('.page__content--longform')
+def test_feature_longform_is_fullwidth(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('{}/zeit-magazin/article/05'.format(
+        testserver.url))
+    driver.maximize_window()
+    width = driver.execute_script(
+        'return document.querySelector(".page").offsetWidth')
+    window_width = driver.get_window_size()['width']
+    assert width == window_width
 
 
 def test_feature_longform_should_have_zonish_title(testbrowser):
