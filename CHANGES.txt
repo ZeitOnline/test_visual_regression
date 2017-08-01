@@ -8,6 +8,8 @@ POSTDEPLOY
 3.75 (unreleased)
 -----------------
 
+- ZON-4126: Add property fb:pages to sharing meta
+
 - BUG-761: Fix longform (wider than 1000px)
 
 
