@@ -47,9 +47,7 @@
 		font-size: 1em
 		margin: 0
 		+respond-min($break-tablet-min)
-			border-bottom: 1px solid $zar-french-grey
-			&:last-of-type
-				border: none
+			border: none
 			.js .infobox-tab &
 				display: none
 	&__link
@@ -64,6 +62,7 @@
 		position: relative
 		+respond-min($break-tablet-min)
 			color: $zar-battleship-grey
+			margin: remify(28px 0)
 			&:hover:not([aria-selected="true"])
 				color: $zar-darkish-pink
 				.infobox-tab__link--text
@@ -95,7 +94,7 @@
 		td
 			color: $zar-charcoal-grey
 			font-family: $font-tabletgothic
-			font-size: rmeify(16px)
+			font-size: remify(16px)
 			line-height: 1.4
 			margin-bottom: remify(10px)
 			+respond-min($break-tablet-min)
