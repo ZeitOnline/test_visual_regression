@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <head xmlns:D="DAV:" xmlns:nsx="http://namespaces.zeit.de/CMS/tagging">
   <attribute ns="DAV:" name="href">/cms/work/2016/27/digitale-nomaden-arbeiten-reisen</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="access">registration</attribute>
+  <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">abo</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="acquisition">free</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Karin Ceballos Betancur</attribute>

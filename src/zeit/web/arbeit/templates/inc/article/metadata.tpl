@@ -20,6 +20,10 @@
             <div class="metadata">
                 {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
             </div>
+
+            {% if view.zplus_label and view.zplus_label.zplus %}
+                {% include "zeit.web.core:templates/inc/article/zplus-badge.html" %}
+            {% endif %}
         {% endblock %}
     {% endif %}
 </div>

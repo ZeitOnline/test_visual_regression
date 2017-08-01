@@ -4,10 +4,24 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggle.xml) and Prod: remove `iqd_mobile_transition_*` feature toggles AFTER deployment.
+
+3.75 (unreleased)
+-----------------
+
+- Nothing changed yet.
 
 
-3.73 (unreleased)
+3.74 (2017-07-31)
+-----------------
+
+- ARBEIT-22: Show paywall on ZEIT Arbeit articles
+
+- ARBEIT-80: Implement topic teaser for ZEIT Arbeit
+
+- ARBEIT-90: Style debate teaser for ZEIT Arbeit
+
+
+3.73 (2017-07-27)
 -----------------
 
 - BUG-700: Jump to paywall form from metadata commentlink
@@ -19,6 +33,12 @@ For Staging (http://vivi.zeit.de/repository/data/friedbert-staging/feature-toggl
 - ARBEIT-4: Implement and style solo/lead teaser for ZEIT Arbeit
 
 - ARBEIT-63: Style article pagination for ZEIT Arbeit
+
+- ARBEIT-31: Style article quotes for ZEIT Arbeit
+
+- ARBEIT-60: Implement jobbox (dropdown version) for ZEIT Arbeit
+
+- ARBEIT: A little polishing
 
 - FIX: Return a dummy ICMSContent object from LazyProxy for unresolveable uniqueIds
 

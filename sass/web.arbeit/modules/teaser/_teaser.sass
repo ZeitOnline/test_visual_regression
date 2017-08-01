@@ -41,6 +41,11 @@
 	display: block
 	font-family: $font-patronbold
 
+%teaser-title--xxs
+	@extend %teaser-title
+	font-size: remify(18px)
+	line-height: 1.4
+
 %teaser-title--xs
 	@extend %teaser-title
 	font-size: remify(20px)
@@ -97,3 +102,13 @@
 	&:after
 		content: " / "
 		margin: 0 .25em
+
+// ------------------------------------------------------
+// TEASER-ADLABEL
+
+%teaser-adlabel
+	font-size: remify(9px)
+	line-height: remify(11px)
+	letter-spacing: $letter-spacing-l
+	text-transform: uppercase
+	color: $zar-cool-grey
