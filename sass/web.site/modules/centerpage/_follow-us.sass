@@ -2,6 +2,8 @@
 	+respond-min($break-tablet-min)
 		padding-left: $page-padding
 		padding-right: $page-padding
+	&__clear
+		clear: both
 	&__container
 		border-top: 1px solid #ccc
 		border-bottom: 1px solid #ccc
@@ -87,10 +89,12 @@
 		padding: 0
 		width: 100%
 		li
+			float: left
+			width: 19.3%
 			flex: 1 auto
 			margin-right: remify(2px)
+			min-height: 60px
 			position: relative
-			width: 100%
 			+respond-min($break-tablet-min)
 				margin-right: remify(7px)
 		li:last-child
