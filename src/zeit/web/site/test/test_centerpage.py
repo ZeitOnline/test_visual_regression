@@ -462,3 +462,10 @@ def test_newsbox_renders_correctly_on_topicpage(testbrowser, datasolr):
     assert len(newsbox) == 1
     assert len(linktext) == 8
     assert len(section_heading_link) == 0
+
+
+def test_if_all_followbox_elements_present(testbrowser):
+    select = testbrowser('zeit-online/centerpage/follow-us').cssselect
+    buttons = select('.follow-us__link')
+
+    assert len(buttons) == 5
