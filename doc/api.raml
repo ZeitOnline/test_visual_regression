@@ -42,9 +42,11 @@ types:
     is: [jsonp]
     body:
       properties:
-        unique_ids:
+        uuids?:
           type: string[]
-          minItems: 1
+          maxItems: 1000
+        uniqueIds?:
+          type: string[]
           maxItems: 1000
     responses:
       200:

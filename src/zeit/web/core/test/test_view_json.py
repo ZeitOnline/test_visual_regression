@@ -165,7 +165,12 @@ def test_json_ressort_list_should_exclude_advertorials(
     assert len(browser.json) == 1
 
 
-@pytest.mark.parametrize('json', [None, {'uniqueIds': 2}, {'uniqueIds': []}])
+@pytest.mark.parametrize('json', [
+    ['uniqueId'],
+    {'uniqueIds': 2},
+    {'uniqueIds': ["clearly_not_a_unique_id"]},
+    {'uuids': [False]},
+    {'uuids': ["clearly-not-a-uuid"]}])
 def test_json_article_query_should_do_sanity_checks_on_post(json, testserver):
     resp = requests.post('%s/json/article-query' % testserver.url, json=json)
     assert resp.status_code == 400
@@ -179,14 +184,19 @@ def test_json_article_query_should_respond_to_good_request(testserver):
 
 def test_json_article_query_should_construct_correct_solr_queries(
         application, monkeypatch):
+    monkeypatch.setattr(zeit.cms.interfaces, 'ID_NAMESPACE', 'foo')
     request = mock.MagicMock()
-    request.json_body = {'uniqueIds': ['foo://1', 'bar://2']}
+    request.json_body = {
+        'uniqueIds': ['foo://1', 'foo://2'],
+        'uuids': ['30d678d7-d8d7-4eaf-a5c8-f99fa137d69e']
+    }
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     search = mock.MagicMock(return_value=[])
     monkeypatch.setattr(solr, 'search', search)
     zeit.web.core.view_json.json_article_query(request)
     args, kw = search.call_args
-    assert args[0] == '(uniqueId:"foo://1" OR uniqueId:"bar://2")'
+    assert args[0] == ('(uniqueId:"foo://1" OR uniqueId:"foo://2" OR uuid:'
+                       '"{urn:uuid:30d678d7-d8d7-4eaf-a5c8-f99fa137d69e}")')
     assert kw['fq'] == 'type:(article)'
 
 
