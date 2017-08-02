@@ -1,14 +1,12 @@
 .follow-us
-	+respond-min($break-tablet-min)
-		padding-left: $page-padding
-		padding-right: $page-padding
+	border-top: 1px solid #ccc
+	border-bottom: 1px solid #ccc
+	padding: remify(20px 0 40px)
+	margin: remify(40px 0)
+	padding-left: $page-padding
+	padding-right: $page-padding
 	&__clear
 		clear: both
-	&__container
-		border-top: 1px solid #ccc
-		border-bottom: 1px solid #ccc
-		padding: remify(20px 0 40px)
-		margin: remify(40px 0)
 	&__divider
 		height: remify(40px)
 		position: absolute
@@ -45,7 +43,7 @@
 			text-align: left
 		+respond-min($break-desktop-min)
 			text-indent: 5%
-		&:hover
+		&:hover,&:focus,&:active
 			color: $white
 		&--facebook
 			background: $color-facebook
