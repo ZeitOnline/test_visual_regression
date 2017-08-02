@@ -152,10 +152,10 @@ def json_article_query(request):
 
     lead_unique_id = None
     hp_unique_ids = []
-    homepage = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
-    if homepage:
+    hp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index', None)
+    if hp:
         # For performance, we only check against the first five regions (ND)
-        for region in homepage.values()[:5]:
+        for region in hp.values()[:5]:
             for area in region.values():
                 teasered = list(
                     zeit.content.cp.interfaces.ITeaseredContent(area))
