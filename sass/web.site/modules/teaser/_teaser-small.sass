@@ -68,6 +68,9 @@
 			text-align: left
 	&--inhouse &__media
 		@extend %teaser-small-media-inhouse !optional
+	&--exclusive
+		display: table
+		width: 100%
 	&--exclusive &__media
 		@extend %teaser-small-media-exclusive
 	&--exclusive &__media + &__container

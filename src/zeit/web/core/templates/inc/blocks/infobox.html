@@ -16,7 +16,9 @@
                         href="#{{ tab_id }}-tab"
                         data-link-id="{{ tab_id }}-tab"
                         aria-controls="{{ tab_id }}-article">
-                        {{- title -}}
+                        {% block link_text scoped %}
+                            {{- title -}}
+                        {% endblock link_text %}
                     </a>
                 </h3>
                 <div
