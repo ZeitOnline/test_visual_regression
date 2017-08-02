@@ -18,7 +18,7 @@
                 <strong class="toolbox__cta">{{ link.cta }}</strong>
                 {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
             </a>
-            <a href=" {{ link.href_footer }}" class="toolbox__footer-link zco-toolbox__footer-link {% if loop.first %}zco-toolbox__footer-link--first{% endif %}" data-id="{{ 'toolbox.%s.2.%s.text' | format(region_loop.index, loop.index) }}">{{ link.href_footer_text }} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
+            <a href="{{ link.href_footer }}" class="toolbox__footer-link zco-toolbox__footer-link {% if loop.first %}zco-toolbox__footer-link--first{% endif %}" data-id="{{ 'toolbox.%s.2.%s.text' | format(region_loop.index, loop.index) }}">{{ link.href_footer_text }} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
         </li>
     {% endfor %}
     </ul>
