@@ -445,3 +445,28 @@ def test_adplace16_on_articles(testbrowser, monkeypatch):
         'iqd_digital_transformation': True}.get)
     browser = testbrowser('/zeit-online/article/01')
     assert len(browser.cssselect('#ad-desktop-16')) == 1
+
+
+def test_iqd_adtile8_on_article_new_placement(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True,
+    }.get)
+    ps = '.article-page[data-page-number="1"] p'
+    divs = '.article-page[data-page-number="1"] script[id^="ad-desktop"]'
+    # article with original placement after p1
+    browser = testbrowser('/zeit-online/article/01')
+    body = browser.cssselect('{},{}'.format(ps, divs))
+    assert body[1].cssselect('script')[0].attrib['id'] == 'ad-desktop-8'
+
+
+def test_iqd_adtile8_on_article_new_placement_alternative(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True,
+    }.get)
+    ps = '.article-page[data-page-number="1"] p'
+    divs = '.article-page[data-page-number="1"] script[id^="ad-desktop"]'
+    # article with alternate placement after p2
+    browser = testbrowser('/zeit-magazin/article/01')
+    body = browser.cssselect('{},{}'.format(ps, divs))
+    assert body[2].cssselect('script')[0].attrib['id'] == 'ad-desktop-8'
