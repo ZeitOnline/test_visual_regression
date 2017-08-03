@@ -410,14 +410,14 @@ def test_tile8_is_rendered_on_correct_position(testbrowser, monkeypatch):
         zeit.web.core.application.FEATURE_TOGGLES, 'find', {
             'iqd_digital_transformation': True}.get)
     browser = testbrowser('/zeit-online/main-teaser-setup')
-    tile7_on_first_position = browser.cssselect(
+    tile8_on_first_position = browser.cssselect(
         '.cp-area--minor > div:first-child > script[id="ad-desktop-8"]')
-    tile7_is_present = browser.cssselect(
+    tile8_is_present = browser.cssselect(
         '.cp-area--minor > div > script[id="ad-desktop-8"]')
 
-    assert not tile7_on_first_position, (
+    assert not tile8_on_first_position, (
         'There should be no ad tile 8 on the first position.')
-    assert tile7_is_present, (
+    assert tile8_is_present, (
         'Ad tile 8 is not present.')
 
 
@@ -427,9 +427,9 @@ def test_tile8_for_fullwidth_is_rendered_on_correct_position(
         zeit.web.core.application.FEATURE_TOGGLES, 'find', {
             'iqd_digital_transformation': True}.get)
     browser = testbrowser('/zeit-online/index')
-    tile7_on_first_position = browser.cssselect(
+    tile8_on_first_position = browser.cssselect(
         '.cp-area--minor > div:first-child > script[id="ad-desktop-8"]')
-    assert tile7_on_first_position, (
+    assert tile8_on_first_position, (
         'Ad tile 8 is not present on first position.')
 
 
