@@ -254,6 +254,8 @@ class Base(object):
 
     @zeit.web.reify
     def adcontroller_handle(self):
+        suffix = '_trsf' if zeit.web.core.application.FEATURE_TOGGLES.find(
+            'iqd_digital_transformation') else ''
         replacements = {
             'article': 'artikel',
             'author': 'centerpage',
@@ -262,17 +264,18 @@ class Base(object):
             'quiz': 'quiz',
             'video': 'video_artikel'}
         if self.is_hp:
-            return 'homepage'
+            return 'homepage{}'.format(suffix)
         if self.is_advertorial:
-            return '{}_{}'.format(
+            return '{}_{}{}'.format(
                 'mcs' if 'mcs/' in self.banner_channel else 'adv',
-                'index' if self.type == 'centerpage' else 'artikel')
+                'index' if self.type == 'centerpage' else 'artikel',
+                suffix)
         if self.type == 'centerpage' and (
                 self.sub_ressort == '' or self.ressort == 'zeit-magazin'):
-            return 'index'
+            return 'index{}'.format(suffix)
         if self.type in replacements:
-            return replacements[self.type]
-        return 'centerpage'
+            return '{}{}'.format(replacements[self.type], suffix)
+        return 'centerpage{}'.format(suffix)
 
     @zeit.web.reify
     def adcontroller_values(self):

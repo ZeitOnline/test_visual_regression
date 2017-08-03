@@ -16,9 +16,13 @@ POSTDEPLOY
 
 - ZON-4126: Add property fb:pages to sharing meta
 
+- ZON-4048: New adtags on ZON/ZMO/ZCO
+
 - ARBEIT-27: Customize article infobox for ZEIT Arbeit
 
 - ARBEIT-84: Implement blocks (images, gallery, intertitle) for ZEIT Arbeit
+
+- ARBEIT-77: Use arbeit-cp topiclinks for all content in ZEIT Arbeit
 
 - ZOCA-28: Set flag whether article is on homepage
 
