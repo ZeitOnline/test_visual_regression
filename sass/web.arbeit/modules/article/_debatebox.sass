@@ -8,20 +8,11 @@
 
 	&__wrapper
 		+font-smoothing
+		+debatebox-speechbubble-arrow($primary-color)
 		background-color: $primary-color
 		color: #ffffff
 		margin-bottom: 30px
 		padding: remify(30px) $page-padding--small
-		position: relative
-		&:after
-			border-right: 27px solid transparent
-			border-top: 27px solid $primary-color
-			bottom: remify(-26px)
-			content: ""
-			display: block
-			left: 50%
-			margin-left: remify(-13px)
-			position: absolute
 
 	&__container
 		margin: 0 auto

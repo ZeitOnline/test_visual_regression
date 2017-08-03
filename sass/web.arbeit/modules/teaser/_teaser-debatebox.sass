@@ -10,19 +10,10 @@
 		@extend %zar-button-hollow--debate
 
 	&__wrapper
+		+debatebox-speechbubble-arrow(#ffffff)
 		background-color: #ffffff
 		margin-bottom: 30px
 		padding: remify(19px 17px)
-		position: relative
-		&:after
-			border-right: 27px solid transparent
-			border-top: 27px solid #ffffff
-			bottom: remify(-26px)
-			content: ""
-			display: block
-			left: 50%
-			margin-left: remify(-13px)
-			position: absolute
 
 	&__kicker
 		@extend %teaser-kicker--s

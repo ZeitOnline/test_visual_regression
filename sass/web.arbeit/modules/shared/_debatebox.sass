@@ -1,3 +1,11 @@
-.debatebox-on-cp,
-.debatebox-on-article
-	border: 1px pink solid
+=debatebox-speechbubble-arrow($color: #000)
+	position: relative
+	&:after
+		border-right: 27px solid transparent
+		border-top: 27px solid $color
+		bottom: remify(-26px)
+		content: ""
+		display: block
+		left: 50%
+		margin-left: remify(-13px)
+		position: absolute
