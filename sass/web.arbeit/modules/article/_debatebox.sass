@@ -1,24 +1,21 @@
 // debatebox on article (same HTML as teaser, different styles)
 // debatebox on CP (same HTML as articleblock, different styles)
 .debatebox-on-article
-	background-color: $primary-color
 	font-family: $font-tabletgothic
-	margin-bottom: remify(14px)
-	margin-top: remify(14px)
-	padding: remify(40px) $page-padding--small remify(30px)
+	margin-bottom: remify(40px)
+	margin-top: remify(40px)
 	text-align: center
 
-	&__button
-		@extend %zar-button-hollow
-
-	&__container
-		background-color: #ffffff
+	&__wrapper
+		+font-smoothing
+		background-color: $primary-color
+		color: #ffffff
 		margin-bottom: 30px
-		padding: remify(19px 17px)
+		padding: remify(30px) $page-padding--small
 		position: relative
 		&:after
 			border-right: 27px solid transparent
-			border-top: 27px solid #ffffff
+			border-top: 27px solid $primary-color
 			bottom: remify(-26px)
 			content: ""
 			display: block
@@ -26,40 +23,31 @@
 			margin-left: remify(-13px)
 			position: absolute
 
-	&__kicker
-		@extend %teaser-kicker--s
+	&__container
+		margin: 0 auto
+		max-width: remify(520px)
 
-	&__text
-		font-size: remify(15px)
-		line-height: remify(21px)
-		a
-			color: currentColor
-			text-decoration: underline
-			white-space: nowrap
+	&__kicker
+		// TODO: Can we make this better?
+		// Important is needed to override teaser-kicker--s color
+		// which comes earlier in the sass (and CSS) file.
+		@extend %teaser-kicker--s
+		color: $zar-french-grey !important
 
 	&__title
 		@extend %teaser-title--s
 		margin: remify(10px 0)
 
+	&__text
+		color: $zar-french-grey
+		font-size: remify(15px)
+		line-height: 1.4
+		a
+			color: currentColor
+			text-decoration: underline
+			white-space: nowrap
 
-+respond-min($break-tablet-min)
-	.debatebox-on-article
-		// TODO: Lieber mit max-width arbeiten, wie überall?
-		padding: remify(50px 100px)
+	&__button
+		@extend %zar-button-hollow
+		margin-bottom: 0 // the debatebox has its own margin
 
-		&__container
-			padding: remify(49px 27px)
-
-		&__kicker
-			// TODO: Polishing mit abstrakt kicker--l??
-			font-size: remify(20px)
-
-		&__title
-			// TODO: Polishing mit abstrakt title--m??
-			font-size: remify(36px)
-			line-height: remify(43px)
-
-+respond-min($break-desktop-min)
-	.debatebox-on-article
-		&__container
-			padding: remify(49px 40px)

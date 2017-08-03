@@ -9,7 +9,7 @@
 	&__button
 		@extend %zar-button-hollow--debate
 
-	&__container
+	&__wrapper
 		background-color: #ffffff
 		margin-bottom: 30px
 		padding: remify(19px 17px)
@@ -60,7 +60,7 @@
 		// TODO: Lieber mit max-width arbeiten, wie überall?
 		padding: remify(50px 100px)
 
-		&__container
+		&__wrapper
 			+pie-clearfix
 			padding: remify(49px 27px)
 			text-align: left
@@ -74,7 +74,7 @@
 			height: remify(131px)
 			float: left
 
-		&__right
+		&__container
 			padding-left: remify(173px)
 
 		&__title
@@ -84,7 +84,7 @@
 
 +respond-min($break-desktop-min)
 	.debatebox-on-cp
-		&__container
+		&__wrapper
 			padding: remify(49px 40px)
-		&__right
+		&__container
 			padding-left: remify(193px)

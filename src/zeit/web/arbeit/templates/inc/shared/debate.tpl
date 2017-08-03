@@ -4,9 +4,9 @@
 <aside class="article__item {{ self.layout() }}">
 {% endblock %}
 
-    <div class="{{ self.layout() }}__container">
+    <div class="{{ self.layout() }}__wrapper">
         {% block debatebox_media %}{% endblock %}
-        <div class="{{ self.layout() }}__right">
+        <div class="{{ self.layout() }}__container">
             <span class="{{ self.layout() }}__kicker">Debattenaufruf</span>
             <h2 class="{{ self.layout() }}__title">Müssen wir mehr über Geld sprechen?</h2>
             <p class="{{ self.layout() }}__text">
