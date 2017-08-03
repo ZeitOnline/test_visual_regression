@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ARBEIT-27: Customize article infobox for ZEIT Arbeit
 
+- ARBEIT-84: Implement blocks (images, gallery, intertitle) for ZEIT Arbeit
+
 - ZOCA-28: Set flag whether article is on homepage
 
 - ZOCA-28: Accept uniqueIds as well as uuids for article query
