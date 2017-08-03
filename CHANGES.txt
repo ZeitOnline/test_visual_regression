@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ARBEIT-84: Implement blocks (images, gallery, intertitle) for ZEIT Arbeit
 
+- ARBEIT-77: Use arbeit-cp topiclinks for all content in ZEIT Arbeit
+
 - ZOCA-28: Set flag whether article is on homepage
 
 - ZOCA-28: Accept uniqueIds as well as uuids for article query
