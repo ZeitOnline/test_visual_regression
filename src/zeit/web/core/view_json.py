@@ -1,4 +1,5 @@
 import pyramid.response
+import uuid as uuidlib
 import zope.component
 
 import zeit.cms.content.sources
@@ -144,11 +145,15 @@ def json_topic_config(request):
     renderer='jsonp')
 def json_article_query(request):
     try:
-        unique_ids = request.json_body['uniqueIds']
-        assert isinstance(unique_ids, list)
-        assert 0 < len(unique_ids) <= 1000
-    except:
-        raise pyramid.httpexceptions.HTTPBadRequest()
+        assert isinstance(request.json_body, dict), 'body must be an object'
+        uuids = request.json_body.get('uuids', [])
+        unique_ids = request.json_body.get('uniqueIds', [])
+        assert isinstance(uuids, list), 'uuids must be a list'
+        assert isinstance(unique_ids, list), 'uniqueIds must be a list'
+        assert len(uuids) <= 1000, "can't handle more than 1000 uuids"
+        assert len(unique_ids) <= 1000, "can't handle more than 1000 uniqueIds"
+    except AssertionError, e:
+        raise pyramid.httpexceptions.HTTPBadRequest(e.message)
 
     lead_unique_id = None
     hp_unique_ids = []
@@ -163,8 +168,25 @@ def json_article_query(request):
                     lead_unique_id = teasered[0].uniqueId
                 hp_unique_ids.extend(t.uniqueId for t in teasered)
 
+    identifiers = []
+    try:
+        for unique_id in unique_ids:
+            assert isinstance(
+                unique_id, basestring), 'unique_id must be string'
+            assert unique_id.startswith(zeit.cms.interfaces.ID_NAMESPACE), (
+                'invalid uniqueId: %s' % unique_id)
+            identifiers.append('uniqueId:"%s"' % unique_id)
+        for uuid in uuids:
+            try:
+                uuid = uuidlib.UUID(uuid).urn
+            except:
+                raise AssertionError('invalid uuid: %s' % uuid)
+            identifiers.append('uuid:"{%s}"' % uuid)
+    except AssertionError, e:
+        raise pyramid.httpexceptions.HTTPBadRequest(e.message)
+
     Q = zeit.solr.query
-    main_query = Q.or_(*[('uniqueId:"%s"' % u) for u in set(unique_ids)])
+    main_query = Q.or_(*identifiers)
     filter_query = Q.field_raw('type', 'article')
     fields = ','.join((
         'uuid',
