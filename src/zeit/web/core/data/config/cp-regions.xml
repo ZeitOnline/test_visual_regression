@@ -20,6 +20,9 @@
     <region kind="duo" title="Duo-Region" type="!storystream" available="zeit.arbeit.interfaces.IZARContent">
         <area kind="trio"/>
     </region>
+    <region kind="topic" title="Thema-Region (Artikel)" available="zeit.arbeit.interfaces.IZARContent">
+        <area kind="topic" apply_teaser_layouts_automatically="true" first_teaser_layout="zar-topic-small"/>
+    </region>
     <region kind="trio" title="Trio-Region" type="!storystream" available="zeit.magazin.interfaces.IZMOContent">
         <area kind="trio"/>
     </region>

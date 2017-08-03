@@ -1,0 +1,90 @@
+.debatebox
+	background-color: $primary-color
+	font-family: $font-tabletgothic
+	margin: remify(14px) 0
+	padding: remify(40px) $page-padding--small remify(30px)
+	text-align: center
+
+	&__button
+		@extend %zar-button-hollow--debate
+
+	&__container
+		background-color: #ffffff
+		margin-bottom: 30px
+		padding: remify(19px 17px)
+		position: relative
+		&:after
+			border-right: 27px solid transparent
+			border-top: 27px solid #ffffff
+			bottom: remify(-26px)
+			content: ""
+			display: block
+			left: 50%
+			margin-left: remify(-13px)
+			position: absolute
+
+	&__kicker
+		@extend %teaser-kicker--s
+
+	&__media
+		// TODO: Bild muss vmtl vom Teaser (Pseudo-Artikel??) kommen
+		background-image: url('/static/latest/images/arbeit/debate/paper.png')
+		background-position: center
+		background-repeat: no-repeat
+		height: remify(131px)
+		margin-bottom: remify(15px)
+
+	&--pink
+		background-color: $zar-darkish-pink
+
+	&__text
+		font-size: remify(15px)
+		line-height: remify(21px)
+		a
+			color: currentColor
+			text-decoration: underline
+			white-space: nowrap
+
+	&__title
+		@extend %teaser-title--s
+		margin: remify(10px 0)
+
+	&--yellow
+		background-color: $zar-sun-yellow
+		.debatebox__button
+			@extend %zar-button-hollow
+
++respond-min($break-tablet-min)
+	.debatebox
+		margin: $vertical-space 0
+		// TODO: Lieber mit max-width arbeiten, wie überall?
+		padding: remify(50px 100px)
+
+		&__container
+			+pie-clearfix
+			padding: remify(49px 27px)
+			text-align: left
+
+		&__kicker
+			// TODO: Polishing mit abstrakt kicker--l??
+			font-size: remify(20px)
+
+		&__media
+			width: remify(153px)
+			height: remify(131px)
+			float: left
+
+		&__right
+			padding-left: remify(173px)
+
+		&__title
+			// TODO: Polishing mit abstrakt title--m??
+			font-size: remify(36px)
+			line-height: remify(43px)
+
++respond-min($break-desktop-min)
+	.debatebox
+		&__container
+			padding: remify(49px 40px)
+		&__right
+			padding-left: remify(193px)

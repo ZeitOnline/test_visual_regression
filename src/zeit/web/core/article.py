@@ -79,6 +79,15 @@ def _inject_banner_code(pages, pubtype):
         }
     }
 
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('iqd_digital_transformation'):
+        idt_ads = [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
+                   {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
+                   {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
+                   {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
+                   {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
+        adconfig['zon']['ads'] = idt_ads
+
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
 
@@ -88,6 +97,15 @@ def _inject_banner_code(pages, pubtype):
         paragraphs = filter(lambda b: isinstance(
             b, zeit.web.core.block.Paragraph), page.blocks)
 
+        # (1a) check if there is an editorial aside after paragraph 1
+        if toggles.find('iqd_digital_transformation') and (
+                len(page.blocks) > 1) and not isinstance(
+                page.blocks[1], zeit.web.core.block.Paragraph):
+            adconfig['zon']['ads'][1] = {
+                'tile': 8, 'paragraph': 2, 'type': 'desktop'}
+            adconfig['longform']['ads'][0] = {
+                'tile': 8, 'paragraph': 5, 'type': 'desktop'}
+
         # (2) get a list of those paragraphs, after which we can insert ads
         paragraphs = _paragraphs_by_length(
             paragraphs, sufficient_length=p_length)
@@ -95,24 +113,26 @@ def _inject_banner_code(pages, pubtype):
         # (3a) Match ads to the cloned list of long paragraphs
         for index, paragraph in enumerate(paragraphs, start=1):
             try:
-                ad = [ad for ad in adconfig[pubtype]['ads'] if ad[
+                ads = [ad for ad in adconfig[pubtype]['ads'] if ad[
                     'paragraph'] == index and page_number in adconfig[
-                    pubtype]['pages']][0]
+                    pubtype]['pages']]
             except IndexError:
                 continue
-            if ad is not None:
+            if ads is not None:
                 # (3b) Insert the ad into the real page blocks
                 for i, block in enumerate(page.blocks, start=1):
                     if paragraph == block:
-                        if ad['tile'] == 'content_ad':
-                            adplace = zeit.web.core.banner.ContentAdBlock(
-                                "iq-artikelanker")
-                        else:
-                            adplace = zeit.web.core.banner.Place(
-                                ad['tile'], ad['type'], on_page_nr=page_number)
-                        # do not place ad after last paragraph
-                        if i < len(page.blocks):
-                            page.blocks.insert(i, adplace)
+                        for ad in ads:
+                            if ad['tile'] == 'content_ad':
+                                adplace = zeit.web.core.banner.ContentAdBlock(
+                                    "iq-artikelanker")
+                            else:
+                                adplace = zeit.web.core.banner.Place(
+                                    ad['tile'], ad[
+                                        'type'], on_page_nr=page_number)
+                            # do not place ad after last paragraph
+                            if i < len(page.blocks):
+                                page.blocks.insert(i, adplace)
 
     return pages
 
