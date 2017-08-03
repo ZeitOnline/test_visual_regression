@@ -19,6 +19,7 @@ import zope.component
 
 import zeit.campus.interfaces
 import zeit.cms.interfaces
+import zeit.content.article.edit.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
 import zeit.content.gallery.interfaces
@@ -919,3 +920,14 @@ def remove_tags_from_xml(block, *tagnames):
     xml = block.model_block.xml
     lxml.etree.strip_tags(xml, *tagnames)
     return zeit.web.core.block._inline_html(xml)
+
+
+@zeit.web.register_global
+def get_first_citation(uniqueId):
+    article = zeit.cms.interfaces.ICMSContent(uniqueId, None)
+    body = zeit.content.article.edit.interfaces.IEditableBody(article, None)
+    if not body:
+        return None
+    for element in body.values():
+        if zeit.content.article.edit.interfaces.ICitation.providedBy(element):
+            return zeit.content.article.edit.interfaces.ICitation(element)
