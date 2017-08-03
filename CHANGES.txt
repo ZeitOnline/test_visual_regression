@@ -8,7 +8,7 @@ POSTDEPLOY
 3.77 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT-84: Style video block for ZEIT Arbeit
 
 
 3.76 (2017-08-03)
