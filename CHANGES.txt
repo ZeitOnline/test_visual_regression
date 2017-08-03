@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ARBEIT-84: Style video block for ZEIT Arbeit
 
+- ARBEIT-84: Style quiz block for ZEIT Arbeit
+
 
 3.76 (2017-08-03)
 -----------------
