@@ -690,38 +690,6 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
             round((main_width - gutter_width) / 3.0) - gutter_width))
 
 
-def test_adcontroller_values_return_values_on_hp(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
-    adcv = [
-        ('$handle', 'homepage'),
-        ('level2', 'homepage'),
-        ('level3', ''),
-        ('level4', ''),
-        ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
-        ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        cp, pyramid.testing.DummyRequest())
-    assert adcv == view.adcontroller_values
-
-
-def test_adcontroller_values_return_values_on_cp(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/main-teaser-setup')
-    adcv = [
-        ('$handle', 'index'),
-        ('level2', 'politik'),
-        ('level3', ''),
-        ('level4', ''),
-        ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline,sashawaltz,interpol'),
-        ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        cp, pyramid.testing.DummyRequest())
-    assert adcv == view.adcontroller_values
-
-
 def test_canonical_ruleset_on_cps(testbrowser, datasolr):
     browser = testbrowser('/dynamic/ukraine')
 

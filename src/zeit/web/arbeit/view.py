@@ -1,7 +1,27 @@
+import grokcore.component
 import zeit.arbeit.interfaces
 import zeit.web
+import zeit.web.core.cache
 import zeit.web.core.application
+import zeit.web.core.interfaces
 import zeit.web.core.view
+
+DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ITopicLink)
+@grokcore.component.adapter(zeit.arbeit.interfaces.IZARContent)
+def arbeit_topiclink(context):
+
+    def get_topics_from_cp():
+        context = zeit.cms.interfaces.ICMSContent(
+            'http://xml.zeit.de/arbeit/index', None)
+        return zeit.web.core.centerpage.TopicLink(context)
+
+    return DEFAULT_TERM_CACHE.get_or_create(
+        'arbeit-default-topics',
+        get_topics_from_cp,
+        should_cache_fn=bool)
 
 
 def is_zar_content(context, request):
