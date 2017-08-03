@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZOCA-28: Set flag whether article is on homepage
 
+- ZOCA-28: Accept uniqueIds as well as uuids for article query
+
 - BUG-760: Fix short table-cells in exclusive teaser
 
 - BUG-761: Fix longform (wider than 1000px)
