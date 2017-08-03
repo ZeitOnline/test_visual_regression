@@ -8,7 +8,7 @@ POSTDEPLOY
 3.76 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT-77: Use arbeit-cp topiclinks for all content in ZEIT Arbeit
 
 
 3.75 (2017-08-03)
@@ -21,8 +21,6 @@ POSTDEPLOY
 - ARBEIT-27: Customize article infobox for ZEIT Arbeit
 
 - ARBEIT-84: Implement blocks (images, gallery, intertitle) for ZEIT Arbeit
-
-- ARBEIT-77: Use arbeit-cp topiclinks for all content in ZEIT Arbeit
 
 - ZOCA-28: Set flag whether article is on homepage
 
