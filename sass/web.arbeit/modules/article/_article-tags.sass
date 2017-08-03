@@ -1,0 +1,68 @@
+$article-tags-margin-right-small: 7px
+$article-tags-margin-right-large: 16px
+
+.article-tags
+	clear: both
+	font-size: remify(14px)
+	letter-spacing: $letter-spacing-s
+	margin: $vertical-space auto remify(32px)
+	&--video
+		margin: remify(50px) auto remify(50px)
+	&__title
+		font-family: $font-patronbold
+		color: $color-text
+		font-size: remify(16px)
+		margin: remify(0 0 4px)
+		&--video
+			color: $zar-cool-grey
+	&__list
+		+pie-clearfix
+		list-style-type: none
+		margin: 0 remify(-$article-tags-margin-right-small) 0 0
+		padding: 0
+		li
+			float: left
+	&__link
+		+link
+			color: $zar-battleship-grey
+			+respond-min($break-tablet-min)
+				color: $color-text
+				box-shadow: 0 1px 0 $color-text
+
+		+on-interaction
+			color: $color-link--hover
+			+respond-min($break-tablet-min)
+				color: $zar-darkish-pink
+				box-shadow: 0 1px 0 $zar-darkish-pink
+		background-color: $zar-whitesmoke
+		border-radius: .36em
+		display: block
+		margin: remify(7px $article-tags-margin-right-small 0 0)
+		padding: remify(4px 12px 5px)
+		&--video
+			background-color: #FFF
+			background-color: rgba(255, 255, 255, 0.1)
+			+link
+				color: $zar-cool-grey
+			+on-interaction
+				color: $zar-french-grey
+
++respond-min($break-tablet-min)
+	.article-tags
+		font-size: remify(16px)
+		&__title
+			display: inline
+			float: left
+			margin-bottom: 0
+			margin-right: remify($article-tags-margin-right-large)
+			&:after
+				content: "\003a"
+				clear: both
+		&__list
+			font-family: $font-patronbold
+		&__link
+			display: inline
+			background-color: transparent
+			border-radius: 0
+			margin: remify(6px $article-tags-margin-right-large 0 0)
+			padding: 0
