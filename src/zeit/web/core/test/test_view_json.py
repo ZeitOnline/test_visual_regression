@@ -206,7 +206,8 @@ def test_json_article_query_should_work_even_when_homepage_is_unreachable(
                         lambda _, default: default)
     request = mock.MagicMock()
     request.route_url = mock.MagicMock(return_value='/')
-    request.json_body = {'uniqueIds': ['foo://article-01']}
+    request.json_body = {'uniqueIds': [
+        'http://xml.zeit.de/zeit-online/article/zeit']}
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     solr.results = [{
         'date_first_released': '2016-05-03T15:01:26.098814+00:00',
