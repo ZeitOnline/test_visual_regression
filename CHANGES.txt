@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.76 (unreleased)
+3.76 (2017-08-03)
 -----------------
 
 - ARBEIT-77: Use arbeit-cp topiclinks for all content in ZEIT Arbeit
