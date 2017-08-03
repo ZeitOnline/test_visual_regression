@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ARBEIT-27: Customize article infobox for ZEIT Arbeit
 
+- ZOCA-28: Set flag whether article is on homepage
+
 - BUG-760: Fix short table-cells in exclusive teaser
 
 - BUG-761: Fix longform (wider than 1000px)

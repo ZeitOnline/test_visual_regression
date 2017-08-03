@@ -200,6 +200,44 @@ def test_json_article_query_should_construct_correct_solr_queries(
     assert kw['fq'] == 'type:(article)'
 
 
+def test_json_article_query_should_work_even_when_homepage_is_unreachable(
+        application, monkeypatch):
+    monkeypatch.setattr(zeit.cms.interfaces, 'ICMSContent',
+                        lambda _, default: default)
+    request = mock.MagicMock()
+    request.route_url = mock.MagicMock(return_value='/')
+    request.json_body = {'uniqueIds': ['foo://article-01']}
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'date_first_released': '2016-05-03T15:01:26.098814+00:00',
+        'date_last_published': '2016-05-03T15:01:26.098814+00:00',
+        'keywords': ['kw-1', 'kw-8'],
+        'ressort': 'my-ressort',
+        'sub_ressort': 'my-sub-ressort',
+        'supertitle': 'my-super-title',
+        'teaser_text': 'my-teaser-text',
+        'title': 'my-title',
+        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
+        'uuid': 'my-uuid'
+    }]
+    response = zeit.web.core.view_json.json_article_query(request)
+    assert response == [{
+        'date_first_released': '2016-05-03T15:01:26.098814+00:00',
+        'date_last_published': '2016-05-03T15:01:26.098814+00:00',
+        'keywords': ['kw-1', 'kw-8'],
+        'lead_article': False,
+        'on_homepage': False,
+        'ressort': 'my-ressort',
+        'sub_ressort': 'my-sub-ressort',
+        'supertitle': 'my-super-title',
+        'teaser_text': 'my-teaser-text',
+        'title': 'my-title',
+        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
+        'url': '/zeit-online/cp-content/article-01',
+        'uuid': 'my-uuid'
+    }]
+
+
 def test_json_article_query_should_transform_solr_fields(application):
     request = mock.Mock()
     request.route_url = mock.MagicMock(return_value='//zeit.to/')
@@ -216,7 +254,18 @@ def test_json_article_query_should_transform_solr_fields(application):
         'teaser_text': 'my-teaser-text',
         'title': 'my-title',
         'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
-        'uuid': 'my-uuid'
+        'uuid': 'my-uuid-article-01'
+    }, {
+        'date_first_released': '2017-05-07T15:01:26.098814+00:00',
+        'date_last_published': '2017-05-07T15:01:26.098814+00:00',
+        'keywords': ['kw-4', 'kw-8'],
+        'ressort': 'my-ressort',
+        'sub_ressort': 'my-sub-ressort',
+        'supertitle': 'my-super-title',
+        'teaser_text': 'my-teaser-text',
+        'title': 'my-title',
+        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-05',
+        'uuid': 'my-uuid-article-05'
     }]
     response = zeit.web.core.view_json.json_article_query(request)
     assert response == [{
@@ -224,6 +273,7 @@ def test_json_article_query_should_transform_solr_fields(application):
         'date_last_published': '2017-05-03T15:01:26.098814+00:00',
         'keywords': ['kw-1', 'kw-3', 'kw-8'],
         'lead_article': True,
+        'on_homepage': True,
         'ressort': 'my-ressort',
         'sub_ressort': 'my-sub-ressort',
         'supertitle': 'my-super-title',
@@ -231,5 +281,19 @@ def test_json_article_query_should_transform_solr_fields(application):
         'title': 'my-title',
         'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-01',
         'url': '//zeit.to/zeit-online/cp-content/article-01',
-        'uuid': 'my-uuid'
+        'uuid': 'my-uuid-article-01'
+    }, {
+        'date_first_released': '2017-05-07T15:01:26.098814+00:00',
+        'date_last_published': '2017-05-07T15:01:26.098814+00:00',
+        'keywords': ['kw-4', 'kw-8'],
+        'lead_article': False,
+        'on_homepage': True,
+        'ressort': 'my-ressort',
+        'sub_ressort': 'my-sub-ressort',
+        'supertitle': 'my-super-title',
+        'teaser_text': 'my-teaser-text',
+        'title': 'my-title',
+        'uniqueId': 'http://xml.zeit.de/zeit-online/cp-content/article-05',
+        'url': '//zeit.to/zeit-online/cp-content/article-05',
+        'uuid': 'my-uuid-article-05'
     }]

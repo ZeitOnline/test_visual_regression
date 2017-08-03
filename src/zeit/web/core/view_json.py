@@ -155,9 +155,18 @@ def json_article_query(request):
     except AssertionError, e:
         raise pyramid.httpexceptions.HTTPBadRequest(e.message)
 
-    homepage = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index')
-    lead = zeit.content.cp.interfaces.ITeaseredContent(homepage).next()
-    lead_unique_id = lead.uniqueId
+    lead_unique_id = None
+    hp_unique_ids = []
+    hp = zeit.cms.interfaces.ICMSContent('http://xml.zeit.de/index', None)
+    if hp:
+        # For performance, we only check against the first five regions (ND)
+        for region in hp.values()[:5]:
+            for area in region.values():
+                teasered = list(
+                    zeit.content.cp.interfaces.ITeaseredContent(area))
+                if not lead_unique_id and len(teasered):
+                    lead_unique_id = teasered[0].uniqueId
+                hp_unique_ids.extend(t.uniqueId for t in teasered)
 
     identifiers = []
     try:
@@ -199,6 +208,7 @@ def json_article_query(request):
         fq=filter_query)
     for item in response:
         item['lead_article'] = item['uniqueId'] == lead_unique_id
+        item['on_homepage'] = item['uniqueId'] in hp_unique_ids
         item['url'] = item['uniqueId'].replace(
             zeit.cms.interfaces.ID_NAMESPACE, request.route_url('home'))
     return list(response)
