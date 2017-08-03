@@ -5,12 +5,28 @@ POSTDEPLOY
 ----------
 
 
-3.75 (unreleased)
+3.77 (unreleased)
+-----------------
+
+- ARBEIT-84: Style video block for ZEIT Arbeit
+
+
+3.76 (2017-08-03)
+-----------------
+
+- ARBEIT-77: Use arbeit-cp topiclinks for all content in ZEIT Arbeit
+
+
+3.75 (2017-08-03)
 -----------------
 
 - ZON-4126: Add property fb:pages to sharing meta
 
+- ZON-4048: New adtags on ZON/ZMO/ZCO
+
 - ARBEIT-27: Customize article infobox for ZEIT Arbeit
+
+- ARBEIT-84: Implement blocks (images, gallery, intertitle) for ZEIT Arbeit
 
 - ZOCA-28: Set flag whether article is on homepage
 

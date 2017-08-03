@@ -34,6 +34,13 @@
                 {%- include "zeit.web.magazin:templates/inc/article/nextread.html" -%}
             {% endif %}
         {% endblock nextread %}
+
+        {% block article_google_ad %}
+            {% if toggles('iqd_digital_transformation') -%}
+            <!-- P5 -->
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
+            {% endif %}
+        {% endblock article_google_ad %}
     </article>
 
     {% if view.product_id not in ('TGS', 'ZEI', 'ZMLB') and view.date_last_published_semantic %}
@@ -61,4 +68,9 @@
 
 {% endblock main %}
 
-{% block adplace_floor %}{% endblock %}
+{% block adplace_floor %}
+    {% if toggles('iqd_digital_transformation') -%}
+        <!-- P7 -->
+        {% include "zeit.web.core:templates/inc/ads/places/desktop/place16.html" %}
+    {% endif -%}
+{% endblock adplace_floor %}
