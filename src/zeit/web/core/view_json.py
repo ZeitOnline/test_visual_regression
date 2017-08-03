@@ -162,7 +162,8 @@ def json_article_query(request):
     identifiers = []
     try:
         for unique_id in unique_ids:
-            assert isinstance(unique_id, basestring), 'unique_id must be string'
+            assert isinstance(
+                unique_id, basestring), 'unique_id must be string'
             assert unique_id.startswith(zeit.cms.interfaces.ID_NAMESPACE), (
                 'invalid uniqueId: %s' % unique_id)
             identifiers.append('uniqueId:"%s"' % unique_id)
