@@ -67,7 +67,7 @@
 		+respond-min($break-tablet-min)
 			max-width: $medium-content-width
 			padding: 0
-	
+
 
 		&--marginalia
 			margin-top: remify(12px)
@@ -88,9 +88,5 @@
 				color: $color-link--hover
 
 // Reserve space for the article (header) image in order to prevent jumping content
-.article__media.variant--portrait
-	+reserve-space-for-article-media(100% / 3 * 4)
-.article__media.variant--square
-	+reserve-space-for-article-media(100%)
 .article__media.variant--wide
 	+reserve-space-for-article-media(100% / 16 * 9)
