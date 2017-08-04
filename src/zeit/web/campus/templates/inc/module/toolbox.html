@@ -4,6 +4,26 @@
     {% include "zeit.web.core:templates/inc/ads/places/desktop/place4.html" %}
 {% endif %}
 
+{% if toggles('campus_toolbox') -%}
+<aside class="toolbox zco-toolbox">
+    <h2 class="toolbox__headline">{{ module.toolbox.header_text }}</h2>
+    <ul class="toolbox__list zco-toolbox__list">
+    {% for link in module.toolbox %}
+        <li class="toolbox__item zco-toolbox__item">
+            <a href="{{ link.href }}" class="toolbox__link zco-toolbox__link" title="{{ link.title_flyout }}" data-id="{{ 'toolbox.%s.1.%s.%s' | format(region_loop.index, loop.index, link.cta|format_webtrekk) }}">
+                <h3 class="toolbox__title zco-toolbox__title">{{ link.title }}</h3>
+                <p class="toolbox__text">
+                    {{ link.text }}
+                </p>
+                <strong class="toolbox__cta">{{ link.cta }}</strong>
+                {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}
+            </a>
+            <a href="{{ link.href_footer }}" class="toolbox__footer-link zco-toolbox__footer-link {% if loop.first %}zco-toolbox__footer-link--first{% endif %}" data-id="{{ 'toolbox.%s.2.%s.text' | format(region_loop.index, loop.index) }}">{{ link.href_footer_text }} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</aside>
+{% else %}
 <aside class="toolbox">
     <h2 class="toolbox__headline">{{ module.toolbox.header_text }}</h2>
     <ul class="toolbox__list">
@@ -24,3 +44,4 @@
         <a href="{{ module.toolbox.footer_link }}" class="toolbox__footer-link" data-id="{{ 'toolbox.{}.2.1.text'.format(region_loop.index) }}">{{ module.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'toolbox__arrow', view.package) }}</a>
     </div>
 </aside>
+{% endif %}
