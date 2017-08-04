@@ -1,9 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <centerpage type="centerpage" xmlns:esi="http://www.edge-delivery.org/esi/1.0" xmlns:xt="http://namespaces.zeit.de/xtransform/">
   <head xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <topiclinks>
+      <topiclink_title>Thematatara</topiclink_title>
+        <topiclink>
+        <topiclink_label_1>Vereinbarkeit 2.0</topiclink_label_1>
+        <topiclink_url_1>http://www.zeit.de/thema/konsum</topiclink_url_1>
+        <topiclink_label_2>Familie und Beruf</topiclink_label_2>
+        <topiclink_url_2>http://www.zeit.de/thema/konsum</topiclink_url_2>
+        <topiclink_label_3>Freude schöner Götterfunken</topiclink_label_3>
+        <topiclink_url_3>http://www.zeit.de/thema/konsum</topiclink_url_3>
+        <topiclink_label_4>Rhabarber</topiclink_label_4>
+        <topiclink_url_4>http://www.zeit.de/thema/konsum</topiclink_url_4>
+        <topiclink_label_5>Berber</topiclink_label_5>
+        <topiclink_url_5>http://www.zeit.de/thema/konsum</topiclink_url_5>
+        <topiclink_label_6>Itzen</topiclink_label_6>
+        <topiclink_url_6>http://www.zeit.de/thema/konsum</topiclink_url_6>
+      </topiclink>
+    </topiclinks>
     <header_image/>
     <snapshot/>
-    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+     <attribute name="DailyNL" ns="http://namespaces.zeit
+     .de/CMS/document">no</attribute>
     <attribute name="author" ns="http://namespaces.zeit.de/CMS/document"/>
     <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
     <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
