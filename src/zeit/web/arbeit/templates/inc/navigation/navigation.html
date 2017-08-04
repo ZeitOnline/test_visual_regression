@@ -59,25 +59,14 @@
     </div>
     <div class="nav__primary" data-ct-row="2">
         <nav class="nav__topics">
-            <span class="nav__topics-title">Themen</span>
-            <ul class="nav__topics-list">
-                <li><a href="#TODO">Vereinbarkeit 2.0</a></li>
-                <li><a href="#TODO">Familie und Beruf</a></li>
-                <li><a href="#TODO">Freude schöner Götterfunken</a></li>
-                <li><a href="#TODO">Vereinbarkeit 2.0</a></li>
-                <li><a href="#TODO">Familie und Beruf</a></li>
-                <li><a href="#TODO">Themenbutton Headline</a></li>
-            </ul>
-            {#
             {% require topics = view.context | topic_links -%}
-            <span class="nav__topics-title">Themen</span>
+            <span class="nav__topics-title">{{ topics.title }}</span>
             <ul class="nav__topics-list">
             {% for label, link in topics %}
                 <li><a href="{{ link }}">{{ label }}</a></li>
             {% endfor %}
             </ul>
             {% endrequire -%}
-            #}
         </nav>
     </div>
     <a class="nav__button" href="#TODO">
