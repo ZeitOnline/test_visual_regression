@@ -53,3 +53,15 @@ def test_zar_paywall_switch_showing_forms(c1_parameter, testbrowser):
         assert len(browser.cssselect('.gate')) == 1
         assert len(browser.cssselect(
             '.gate--register')) == int('anonymous' in c1_parameter)
+
+
+def test_zar_article_paginated_has_headerimage_only_on_first_page(testbrowser):
+    browser = testbrowser('/arbeit/article/01-digitale-nomaden/')
+    assert len(browser.cssselect('article__media--header-image')) == 1
+
+    browser = testbrowser('/arbeit/article/01-digitale-nomaden/seite-2')
+    assert not browser.cssselect('article__media--header-image')
+
+    browser = testbrowser(
+        '/arbeit/article/01-digitale-nomaden/komplettansicht')
+    assert not browser.cssselect('article__media--header-image')
