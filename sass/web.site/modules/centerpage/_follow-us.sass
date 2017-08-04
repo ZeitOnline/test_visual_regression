@@ -34,11 +34,11 @@
 		display: block
 		font-size: remify(16px)
 		height: remify(60px)
-		min-width: remify(60px)
+		width: remify(60px)
 		padding: remify(17px 0)
 		text-align: center
-		width: 100%
 		+respond-min($break-tablet-min)
+			width: 100%
 			text-indent: 2.5%
 			text-align: left
 		+respond-min($break-desktop-min)
@@ -80,20 +80,29 @@
 			display: inline-block
 	&__title
 		font-size: remify(18px)
+		letter-spacing: remify(0.08px)
+		margin: 0 auto
+		width: remify(322px)
+		+respond-min($break-tablet-min)
+			margin: 0
+			width: 100%
 	ul
-		display: flex
 		list-style: none
 		margin: 0
 		padding: 0
+		text-align: center
 		width: 100%
+		+respond-min($break-tablet-min)
+			display: flex
 		li
-			float: left
-			width: 19.3%
-			flex: 1 auto
+			display: inline-block
+			vertical-align: top
 			margin-right: remify(2px)
 			min-height: 60px
 			position: relative
 			+respond-min($break-tablet-min)
+				float: left
+				flex: 1 auto
 				margin-right: remify(7px)
 		li:last-child
 			margin: 0
