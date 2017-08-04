@@ -1,8 +1,10 @@
-<toolbox_links link1="http://studiengaenge.zeit.de/artikel/was-soll-ich-studieren.html" link2="https://jobs.zeit.de/campus/welcher-beruf-passt-zu-mir" header="Studium und Beruf" footer="Studienorientierung im Überblick" footer2="Berufsorientierung im Überblick" tracking="campus-topnav.2.5..was soll ich studieren">
+<toolbox_links href="http://studiengaenge.zeit.de/artikel/was-soll-ich-studieren.html" header="Studium und Beruf" tracking="campus-topnav.2.5..was soll ich studieren">
     <link
         title="Welches Studium passt zu mir?"
         title_flyout="Studium-Interessentest"
         href="http://studiengaenge.zeit.de/sit"
+        href_footer="http://studiengaenge.zeit.de/artikel/was-soll-ich-studieren.html"
+        href_footer_text="Studienorientierung im Überblick"
         cta="Zum Test"
         cta_flyout="Test starten"
         tracking="campus-topnav.2.5.1.zum_test"
@@ -12,6 +14,8 @@
         title="Welcher Beruf passt zu mir?"
         title_flyout="Berufsorientierungsangebote"
         href="https://jobs.zeit.de/campus/berufstest"
+        href_footer="https://jobs.zeit.de/campus/welcher-beruf-passt-zu-mir"
+        href_footer_text="Berufsorientierung im Überblick"
         cta="Zum Test"
         cta_flyout="Alle Ergebnisse"
         tracking="campus-topnav.2.5.2.zum_test"

@@ -14,7 +14,9 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
                        text=unicode(node.get('text')),
                        cta=unicode(node.get('cta')),
                        cta_flyout=unicode(node.get('cta_flyout')),
-                       href=unicode(node.get('href')))
+                       href=unicode(node.get('href')),
+                       href_footer=unicode(node.get('href_footer')),
+                       href_footer_text=unicode(node.get('href_footer_text')))
 
     @property
     def header_text(self):
@@ -25,23 +27,6 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
     def footer_text(self):
         tree = self._get_tree()
         return tree.get('footer')
-
-    # for the feature-toggle campus_toolbox
-    @property
-    def footer_text2(self):
-        tree = self._get_tree()
-        return tree.get('footer2')
-
-    @property
-    def footer_link1(self):
-        tree = self._get_tree()
-        return tree.get('link1')
-
-    @property
-    def footer_link2(self):
-        tree = self._get_tree()
-        return tree.get('link2')
-    # for the feature-toggle campus_toolbox
 
     @property
     def footer_link(self):
