@@ -14,7 +14,7 @@ $article-tags-margin-right-large: 16px
 	&__list
 		+pie-clearfix
 		list-style-type: none
-		margin: 0 remify(-$article-tags-margin-right-small) 0 0
+		margin: 0
 		padding: 0
 		li
 			float: left
@@ -24,7 +24,6 @@ $article-tags-margin-right-large: 16px
 			+respond-min($break-tablet-min)
 				color: $color-text
 				box-shadow: 0 1px 0 $color-text
-
 		+on-interaction
 			color: $color-link--hover
 			+respond-min($break-tablet-min)
@@ -40,9 +39,10 @@ $article-tags-margin-right-large: 16px
 	.article-tags
 		font-size: remify(16px)
 		&__title
-			display: inline
+			display: inline-block
 			float: left
 			margin-bottom: 0
+			margin-top: remify(8px)
 			margin-right: remify($article-tags-margin-right-large)
 			&:after
 				content: "\003a"
@@ -50,8 +50,8 @@ $article-tags-margin-right-large: 16px
 		&__list
 			font-family: $font-patronbold
 		&__link
-			display: inline
+			display: inline-block
 			background-color: transparent
 			border-radius: 0
-			margin: remify(6px $article-tags-margin-right-large 0 0)
+			margin: remify(8px $article-tags-margin-right-large 0 0)
 			padding: 0
