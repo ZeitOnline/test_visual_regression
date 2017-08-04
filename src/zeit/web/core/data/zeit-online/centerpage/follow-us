@@ -60,7 +60,7 @@
     <title>Modul Follow us</title>
     <cluster area="id-a2dff7f3-9042-4a6f-b22d-143fdfc5cff3" kind="solo">
         <region area="id-122f9c43-8a0e-4551-9636-8126ed4ea33d" kind="solo">
-            <container cp:type="cpextra" module="follow-us" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f11c673478">
+            <container cp:type="cpextra" module="follow_us" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f11c673478">
                 <cp_extra for="zeit.content.cp.interfaces.IArea" />
             </container>
         </region>
