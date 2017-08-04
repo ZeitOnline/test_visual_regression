@@ -12,12 +12,11 @@ $article-tags-margin-right-large: 16px
 		font-size: remify(16px)
 		margin: remify(0 0 4px)
 	&__list
-		+pie-clearfix
 		list-style-type: none
 		margin: 0
 		padding: 0
 		li
-			float: left
+			display: inline
 	&__link
 		+link
 			color: $color-link-on-grey
@@ -31,26 +30,22 @@ $article-tags-margin-right-large: 16px
 				box-shadow: 0 1px 0 $zar-darkish-pink
 		background-color: $zar-whitesmoke
 		border-radius: .36em
-		display: block
 		margin: remify(7px $article-tags-margin-right-small 0 0)
 		padding: remify(4px 12px 5px)
+		display: inline-block
 
 +respond-min($break-tablet-min)
 	.article-tags
 		font-size: remify(16px)
 		&__title
 			display: inline-block
-			float: left
-			margin-bottom: 0
-			margin-top: remify(8px)
 			margin-right: remify($article-tags-margin-right-large)
 			&:after
 				content: "\003a"
-				clear: both
 		&__list
 			font-family: $font-patronbold
+			display: inline
 		&__link
-			display: inline-block
 			background-color: transparent
 			border-radius: 0
 			margin: remify(8px $article-tags-margin-right-large 0 0)
