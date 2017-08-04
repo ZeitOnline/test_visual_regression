@@ -20,6 +20,12 @@ def test_zar_teaser_duo_has_modifier(testbrowser):
 def test_zar_teaser_small_has_correct_structure(testbrowser):
     select = testbrowser('/arbeit/centerpage/teaser-small').cssselect
     assert len(select('.teaser-small')) == 6
+    assert len(select('.teaser-small__kicker')) == 6
+    assert len(select('.teaser-small__title')) == 6
+    assert len(select('.teaser-small__byline')) == 5
+    assert len(select('.series-label')) == 2
+    assert 2 == len(select(
+        '.teaser-small img[src*="/zeit-magazin/default/teaser_image/"]'))
 
 
 def test_zar_small_teaser_should_display_no_image_on_mobile(
