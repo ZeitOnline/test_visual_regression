@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ARBEIT-84: Style quiz block for ZEIT Arbeit
 
+- ARBEIT-83: Style article tags for ZEIT Arbeit
+
 
 3.76 (2017-08-03)
 -----------------
