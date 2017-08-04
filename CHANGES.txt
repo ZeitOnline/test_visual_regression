@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.77 (unreleased)
+3.77 (2017-08-04)
 -----------------
 
 - ZON-4117: Edit STOA toolbox
