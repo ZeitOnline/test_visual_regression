@@ -24,11 +24,12 @@ def test_zar_teaser_small_has_correct_structure(testbrowser):
     assert len(select('.teaser-small__title')) == 6
     assert len(select('.teaser-small__byline')) == 5
     assert len(select('.series-label')) == 2
+    # Fallback image if article/teaser has none
     assert 2 == len(select(
         '.teaser-small img[src*="/zeit-magazin/default/teaser_image/"]'))
 
 
-def test_zar_small_teaser_should_display_no_image_on_mobile(
+def test_zar_teaser_small_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
@@ -58,3 +59,28 @@ def test_zar_jobbox_dropdown_changes_link_on_select(
     button_url = button.get_attribute('href')
     assert 'stellenmarkt/kultur_kunst' in button_url
     assert 'stellenmarkt.funktionsbox.streifen' in button_url
+
+
+def test_zar_teaser_topic_has_correct_structure(testbrowser):
+    select = testbrowser('/arbeit/centerpage/teaser-topic').cssselect
+    assert len(select('.teaser-topic')) == 1
+    assert len(select('.teaser-topic-main')) == 1
+    assert len(select('.teaser-topic-sub')) == 3
+
+    assert len(select('.teaser-topic-main__button[href*="/thema/"]')) == 1
+
+    # Fallback image if article/teaser has none
+    assert 1 == len(select(
+        '.teaser-topic img[src*="/zeit-magazin/default/teaser_image/"]'))
+
+
+def test_zar_steaser_topic_should_display_no_image_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/arbeit/centerpage/teaser-topic' % testserver.url)
+    teaser_images = driver.find_elements_by_class_name(
+        'teaser-topic-sub__media')
+    assert len(teaser_images) == 3
+    for teaser_image in teaser_images:
+        assert teaser_image.is_displayed() is False
