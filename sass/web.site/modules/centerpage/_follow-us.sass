@@ -6,7 +6,6 @@
 	padding-left: $page-padding
 	padding-right: $page-padding
 	&__clear
-		clear: both
 	&__divider
 		height: remify(40px)
 		position: absolute
@@ -89,6 +88,7 @@
 		list-style: none
 		margin: 0
 		padding: 0
+		+clearfix
 		text-align: center
 		width: 100%
 		+respond-min($break-tablet-min)
