@@ -113,7 +113,7 @@ def app_settings(mockserver):
         'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
         'vivi_zeit.cms_source-keyword': (
             'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
-        'vivi_zeit.cms_source-navigation': (
+        'vivi_zeit.cms_source-ressorts': (
             'egg://zeit.web.core/data/config/ressorts.xml'),
         'vivi_zeit.cms_source-channels': (
             'egg://zeit.web.core/data/config/ressorts.xml'),
