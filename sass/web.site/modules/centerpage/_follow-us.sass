@@ -1,55 +1,57 @@
+// local variables used in this module
+$followus-icon-mobile: remify(60px)
+$followus-icon-tablet: remify(50px)
+$followus-icon-padding: remify(13px)
 .follow-us
-	border-top: 1px solid #ccc
 	border-bottom: 1px solid #ccc
-	padding: remify(20px 0 40px)
+	border-top: 1px solid #ccc
 	margin: remify(40px 0)
 	padding-left: $page-padding
 	padding-right: $page-padding
-	&__clear
-	&__divider
-		height: remify(40px)
-		position: absolute
-		left: 35%
-		top: 19%
-		bottom: 10%
-		border-left: 1px solid $white
-		opacity: 0
+	&__title
+		font-size: remify(18px)
+		letter-spacing: remify(0.08px)
+		margin: remify(28px) auto remify(14px) auto
+		width: 308px // centering above mobile
 		+respond-min($break-tablet-min)
-			opacity: 0.5
-	&__follow-icon
-		color: $white
-	&__follow-icon
-		height: remify(30px)
-		width: remify(30px)
-		vertical-align: middle
-		+respond-min($break-tablet-min)
-			float: left
-			height: remify(24px)
-			margin-left: 12%
-			margin-right: (15px)
-			width: remify(24px)
-	&__link
-		color: $white
-		display: block
-		font-size: remify(16px)
-		height: remify(60px)
-		width: remify(60px)
-		padding: remify(17px 0)
+			width: 100%
+	&__list
+		display: flex
+		justify-content: center
+		list-style: none
+		margin: 0 0 remify(40px) 0
+		min-width: 308px
+		padding: 0
 		text-align: center
 		+respond-min($break-tablet-min)
 			width: 100%
-			text-indent: 2.5%
-			text-align: left
+			min-width: none
+	&__item
+		margin-left: 2px
+		&:first-child
+			margin-left: 0
+		+respond-min($break-tablet-min)
+			float: left // fallback
+			min-width: 140px
+			margin-left: 4px
+			width: 100%
 		+respond-min($break-desktop-min)
-			text-indent: 5%
-		&:hover,&:focus,&:active
+			min-width: 184px
+			margin-left: 5px
+	&__link
+		background: #ccc
+		color: $white
+		display: block
+		font-size: remify(14px)
+		height: $followus-icon-mobile
+		+respond-min($break-desktop-min)
+			font-size: remify(16px)
+		&:hover,
+		&:focus,
+		&:active
 			color: $white
 		&--facebook
 			background: $color-facebook
-			.svg-symbol
-				margin-left: remify(12px)
-				+respond-min($break-tablet-min)
-					margin-left: 14%
 			&:hover
 				background: $color-facebook-hover
 		&--instagram
@@ -60,49 +62,48 @@
 			background: $color-newsletter
 			&:hover
 				background: $color-newsletter-hover
-			.svg-symbol
-				margin-top: remify(5px)
 		&--twitter
 			background: $color-twitter
-			.svg-symbol
-				+respond-min($break-tablet-min)
-					margin-top: 3px
 			&:hover
 				background: $color-twitter-hover
 		&--xing
 			background: $color-xing
 			&:hover
 				background: $color-xing-hover
-	&__linktext
-		display: none
-		+respond-min($break-tablet-min)
-			display: inline-block
-	&__title
-		font-size: remify(18px)
-		letter-spacing: remify(0.08px)
-		margin: remify(10px auto 15px auto)
-		width: remify(322px)
-		+respond-min($break-tablet-min)
-			width: 100%
-	ul
-		list-style: none
-		margin: 0
-		padding: 0
-		+clearfix
+	&__logo
+		float: left
+		height: $followus-icon-mobile
+		line-height: $followus-icon-mobile / 2  // half the icon size
+		padding: $followus-icon-padding
 		text-align: center
-		width: 100%
+		width: $followus-icon-mobile
 		+respond-min($break-tablet-min)
-			display: flex
-		li
-			display: inline-block
-			vertical-align: top
-			margin-right: remify(2px)
-			min-height: 60px
-			position: relative
+			height: $followus-icon-tablet
+			line-height: ($followus-icon-tablet / 2) * 0.85 // 85% of the half icon size
+			margin-bottom: 5px
+			margin-top: 5px
+			width: $followus-icon-tablet
+	&__icon
+		display: inline-block
+		height: auto
+		vertical-align: middle
+		width: $followus-icon-mobile - (2 * $followus-icon-padding)
+		+respond-min($break-tablet-min)
+			width: $followus-icon-tablet - (2 * $followus-icon-padding)
+		&--facebook
+			// Icon higher than wide
+			height: $followus-icon-mobile - (2 * $followus-icon-padding)
+			width: auto
 			+respond-min($break-tablet-min)
-				float: left
-				flex: 1 auto
-				margin-right: remify(7px)
-				width: 19.3%
-		li:last-child
-			margin: 0
+				height: $followus-icon-tablet - (2 * $followus-icon-padding)
+	&__linktext
+		border-left: 1px solid #fff
+		display: none // hidden when mobile, a11y???
+		float: left
+		height: $followus-icon-mobile - remify(20px) // size - 2 * margin
+		line-height: $followus-icon-mobile - remify(20px)
+		margin: 10px 0
+		padding-left: 11px
+		+respond-min($break-tablet-min)
+			display: block
+
