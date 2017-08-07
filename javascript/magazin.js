@@ -34,6 +34,7 @@ if ( article ) {
 require( 'velocity.ui' );
 require( 'web.core/plugins/jquery.scrollIntoView' ); // plugin used by other plugins
 require( 'web.core/plugins/jquery.animatescroll' );
+require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.inlinegallery' );
 require( 'web.core/plugins/jquery.picturefill' );
 require( 'web.core/plugins/jquery.referrerCount' );
@@ -46,6 +47,7 @@ $( window ).referrerCount();
 $.notifications();
 $( '.js-gallery' ).inlinegallery();
 $( 'div[data-backgroundvideo]' ).backgroundVideo();
+$( '.js-infobox' ).infobox();
 $.picturefill();
 $( 'main' ).animateScroll({ selector: '.js-scroll' });
 $( '.comment-section' ).countFormchars();
