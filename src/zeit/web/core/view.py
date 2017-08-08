@@ -619,15 +619,10 @@ class Base(object):
                 page = self.pagination.get('current')
             pagination = '{}/{}'.format(page, self.pagination.get('total'))
 
-        push = ''
-        try:
-            push_message = zeit.push.interfaces.IPushMessages(self.context,
-                                                              None)
-            push = push_message.get(type='mobile').get('payload_template', '')
-        except:
-            pass
-        # bw-compat
-        push = push.replace('.json', '.push')
+        push = zeit.push.interfaces.IPushMessages(self.context, '')
+        if push:
+            push = (push.get(type='mobile') or {}).get('payload_template', '')
+            push = push.replace('.json', '.push')
 
         if getattr(self, 'framebuilder_requires_webtrekk', False):
             pagetype = 'centerpage.framebuilder'
