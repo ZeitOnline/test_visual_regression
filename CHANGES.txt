@@ -5,8 +5,8 @@ POSTDEPLOY
 ----------
 
 
-3.78 (unreleased)
------------------
+3.77.1 (2017-08-08)
+-------------------
 
 - BUG-768: Fix placement of adplace8 (old style)
 
