@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 import pytest
 
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 def test_zar_article_single_page_has_no_pagination(testbrowser):
     select = testbrowser('/arbeit/article/simple').cssselect
@@ -82,3 +87,24 @@ def test_zar_article_renders_nextread_correctly(testbrowser):
 def test_zar_article_renders_nextread_without_fallback_image(testbrowser):
     browser = testbrowser('/arbeit/article/simple-nextread-noimage')
     assert len(browser.cssselect('.nextread__media')) == 0
+
+
+def test_zar_article_nextread_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}#debug-clicktracking'
+    driver = selenium_driver
+    driver.set_window_size(1000, 800)
+    driver.get(url.format(('/arbeit/article/simple-nextread')))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.nextread')))
+    except TimeoutException:
+        assert False, 'nextread must be present'
+
+    link = driver.find_element_by_css_selector('.nextread__combined-link')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.articlebottom.editorial-nextread...text')
