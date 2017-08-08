@@ -32,9 +32,10 @@
         {% endblock %}
     </article>
     {% endblock content %}
-        {% if view.nextread %}
-            {% include "zeit.web.arbeit:templates/inc/article/nextread.html" %}
-        {% endif %}
+
+    {% if view.nextread %}
+        {% include "zeit.web.arbeit:templates/inc/article/nextread.tpl" %}
+    {% endif %}
 
     {% block comments %}
         {% profile %}
