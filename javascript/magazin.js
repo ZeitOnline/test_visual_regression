@@ -10,6 +10,7 @@ var $ = require( 'jquery' ),
     errors = require( 'web.magazin/errors' ),
     cards = require( 'web.magazin/cards' ),
     photocluster = require( 'web.magazin/photocluster' ),
+    pageType = document.body.getAttribute( 'data-page-type' ),
     article = document.getElementById( 'js-article' );
 
 // remove jQuery from global scope (needles with node/webpack)
@@ -43,11 +44,14 @@ require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.notifications' );
 require( 'web.magazin/plugins/jquery.backgroundvideo' );
 
+if ( pageType === 'article' ) {
+    $( '.js-infobox' ).infobox();
+}
+
 $( window ).referrerCount();
 $.notifications();
 $( '.js-gallery' ).inlinegallery();
 $( 'div[data-backgroundvideo]' ).backgroundVideo();
-$( '.js-infobox' ).infobox();
 $.picturefill();
 $( 'main' ).animateScroll({ selector: '.js-scroll' });
 $( '.comment-section' ).countFormchars();
