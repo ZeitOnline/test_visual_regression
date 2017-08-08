@@ -9,11 +9,14 @@
 {% block teaser_datetime %}{% endblock%}
 {% block meetrics %}{% endblock%}
 
+{%- block teaser_additional_attribute_for_textlink %} data-id="articlebottom.editorial-nextread...text"{% endblock %}
+
 {% block teaser_media %}
     {% require image = get_image(module, fallback=False, variant_id="wide") -%}
         {% set module_layout = self.layout() %}
         {% set href = teaser | create_url %}
         {% set media_caption_additional_class = 'figcaption--hidden' %}
+        {% set tracking_slug = "articlebottom.editorial-nextread..." %}
         {% include "zeit.web.core:templates/inc/asset/image_linked.tpl" %}
     {% endrequire %}
 {% endblock %}
