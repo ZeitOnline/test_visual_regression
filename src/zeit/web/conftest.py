@@ -316,7 +316,9 @@ def application_session(app_settings, request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
-    zope.component.provideUtility(MockSolr())
+    zope.component.provideUtility(MockSolr(),)
+    zope.component.provideUtility(mock.Mock(),
+                                  zeit.objectlog.interfaces.IObjectLog)
     # ZODB needs to come after ZCML is set up by the Application.
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
