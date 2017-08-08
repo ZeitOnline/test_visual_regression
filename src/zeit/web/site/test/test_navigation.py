@@ -540,9 +540,8 @@ def test_d17_link_is_on_the_right(selenium_driver, testserver):
         'nav__ressorts-item--featured-d17')
 
     assert abs(
-               int(navigation.location.get("x") + navigation.size.get("width"))
-               - int(d17tag.location.get("x") + d17tag.size.get("width"))
-           ) <= 1
+        int(navigation.location.get("x") + navigation.size.get("width")) -
+        int(d17tag.location.get("x") + d17tag.size.get("width"))) <= 1
 
 
 def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
