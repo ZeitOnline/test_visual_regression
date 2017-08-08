@@ -9,6 +9,7 @@ def test_nav_dropdowns_are_working_as_expected(
         selenium_driver, testserver):
 
     driver = selenium_driver
+    driver.set_window_size(1200, 980)
     driver.get('%s/campus/centerpage/teaser-topic-variant' % testserver.url)
 
     more = driver.find_element_by_class_name('nav__more-title')

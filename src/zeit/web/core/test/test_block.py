@@ -186,7 +186,7 @@ def test_image_should_use_variant_given_on_layout(application):
 def test_image_should_use_variant_original_if_infographic(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/infographic')
-    block = zeit.web.core.article.pages_of_article(article)[0][2]
+    block = zeit.web.core.article.pages_of_article(article)[0][3]
     assert block.block_type == 'infographic'
     image = zeit.web.core.interfaces.IImage(block)
     assert image.variant_id == 'original'
@@ -204,7 +204,7 @@ def test_image_should_be_none_if_expired(application):
 def test_image_should_pass_through_ratio(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/all-blocks')
-    block = zeit.web.core.article.pages_of_article(article)[0][5]
+    block = zeit.web.core.article.pages_of_article(article)[0][4]
     image = zeit.web.core.interfaces.IImage(block)
     assert round(1.77 - image.ratio, 1) == 0
     assert not image.mobile_ratio
@@ -213,7 +213,7 @@ def test_image_should_pass_through_ratio(application):
 def test_image_should_set_mobile_ratio_for_variant_original(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/infographic')
-    block = zeit.web.core.article.pages_of_article(article)[0][2]
+    block = zeit.web.core.article.pages_of_article(article)[0][1]
     image = zeit.web.core.interfaces.IImage(block)
     assert round(0.80 - image.mobile_ratio, 1) == 0
     assert round(1.62 - image.ratio, 1) == 0

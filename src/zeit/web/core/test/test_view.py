@@ -634,6 +634,16 @@ def test_webtrekk_content_id_should_handle_nonascii(
     assert view.webtrekk_content_id.endswith(u'umläut')
 
 
+def test_webtrekk_should_include_push_payload_template(
+        application, dummy_request):
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    push = zeit.push.interfaces.IPushMessages(context)
+    push.set(dict(type='mobile'), payload_template='eilmeldung.json')
+    view = zeit.web.core.view.Content(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp15'] == 'eilmeldung.push'
+
+
 def test_notification_after_paywall_registration_renders_correctly(
         testserver, selenium_driver):
     message_txt = u'Herzlich willkommen \u2013 viel Spa\xdf beim Lesen!'

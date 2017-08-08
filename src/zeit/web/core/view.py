@@ -22,6 +22,7 @@ import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
+import zeit.push.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
@@ -618,12 +619,10 @@ class Base(object):
                 page = self.pagination.get('current')
             pagination = '{}/{}'.format(page, self.pagination.get('total'))
 
-        if getattr(self, 'is_push_news', False):
-            push = 'wichtigenachrichten.push'
-        elif getattr(self, 'is_breaking', False):
-            push = 'eilmeldung.push'
-        else:
-            push = ''
+        push = zeit.push.interfaces.IPushMessages(self.context, '')
+        if push:
+            push = (push.get(type='mobile') or {}).get('payload_template', '')
+            push = push.replace('.json', '.push')
 
         if getattr(self, 'framebuilder_requires_webtrekk', False):
             pagetype = 'centerpage.framebuilder'
