@@ -17,6 +17,7 @@
       <copyright>© Warner Bros.</copyright>
     </image>
     <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/arbeit/teaser/serie" contenttype="article" />
     </references>
     <topic type="intern" href="http://xml.zeit.de/thema/test">
         <label>Science</label>

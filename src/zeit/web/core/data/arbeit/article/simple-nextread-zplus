@@ -1,18 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <image base-id="http://xml.zeit.de/arbeit/image/02-bike-handle/" type="jpg" publication-date="" expires="">
-    </image>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/arbeit/teaser/simple-zplus" contenttype="article" />
+    </references>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">free</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-	<attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Laura Cwiertnia;Esther G&#xF6;bel;Benedikt Peters;Amadeus Ulrich</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">sid</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT Online</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-01T15:12:07+00:00</attribute>
@@ -41,7 +43,6 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Arbeit</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Das anonyme Gehaltsprotokoll</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
@@ -66,14 +67,10 @@
   </head>
   <body>
     <supertitle>Dummy Content</supertitle>
-    <title>Teaser Content</title>
+    <title>Artikel mit Z+ Nextread</title>
+    <subtitle>Dieser Artikel hat einen Nextread. Der Nextread-Artikel ist abopflichtig.</subtitle>
     <division type="page">
-      <p>Dieser Artikel dient nur als Teaser-Material. Alle Artikel in diesem Verzeichnis sollen möglichst vielfältige Teaser ergeben, und auch nur für Teaser-Features genutzt werden.</p>
+      <p>A blend of lambic beers brewed at 3 Fonteinen, with an addition of 30% whole fresh raspberries from the fabled Payottenland and 5% sour cherries. This unfiltered beer will enjoy a spontaneous refermentation in the bottle. No artificial colors or flavor enhancers are added. Lambic is brewed only from 60% barley malt, 40% unmalted wheat, hops and water.</p>
     </division>
   </body>
-  <teaser>
-    <supertitle>Ingenieur</supertitle>
-    <title>»Ich bin mit knapp 27 jetzt schon der superreiche Onkel«</title>
-    <text>Mit dem Jobwechsel kamen knapp 5.000 Euro Brutto – und die Sprüche der anderen. Ein Ingenieur erzählt, warum er sein Gehalt lieber verschweigt.</text>
-  </teaser>
 </article>

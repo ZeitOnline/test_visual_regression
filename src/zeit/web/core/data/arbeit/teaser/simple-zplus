@@ -1,11 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <image base-id="http://xml.zeit.de/arbeit/image/02-bike-handle/" type="jpg" publication-date="" expires="">
+    <image base-id="http://xml.zeit.de/arbeit/image/01-more-nasa-less-guns/" type="jpg" align="left" publication-date="" expires="">
     </image>
+  	<attribute name="access" ns="http://namespaces.zeit.de/CMS/document">abo</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-	<attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Laura Cwiertnia;Esther G&#xF6;bel;Benedikt Peters;Amadeus Ulrich</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
@@ -41,7 +42,6 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Arbeit</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Das anonyme Gehaltsprotokoll</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
@@ -72,8 +72,8 @@
     </division>
   </body>
   <teaser>
-    <supertitle>Ingenieur</supertitle>
-    <title>»Ich bin mit knapp 27 jetzt schon der superreiche Onkel«</title>
-    <text>Mit dem Jobwechsel kamen knapp 5.000 Euro Brutto – und die Sprüche der anderen. Ein Ingenieur erzählt, warum er sein Gehalt lieber verschweigt.</text>
+    <supertitle>Anonymisierte Bewerbung</supertitle>
+    <title>Lieber anonym als mit Kopftuch</title>
+    <text>Kopftuchträgerinnen haben es schwerer, einen Job zu finden, zeigt eine Studie. Bessere Chancen haben sie mit anonymen Bewerbungen.</text>
   </teaser>
 </article>
