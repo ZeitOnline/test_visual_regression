@@ -65,3 +65,20 @@ def test_zar_article_paginated_has_headerimage_only_on_first_page(testbrowser):
     browser = testbrowser(
         '/arbeit/article/01-digitale-nomaden/komplettansicht')
     assert len(browser.cssselect('.article__media--header-image')) == 1
+
+
+def test_zar_article_renders_nextread_correctly(testbrowser):
+    browser = testbrowser('/arbeit/article/simple-nextread')
+    assert len(browser.cssselect('.nextread')) == 1
+    assert len(browser.cssselect('.nextread__lead')) == 1
+    assert len(browser.cssselect('.nextread__media')) == 1
+    assert len(browser.cssselect('.nextread .series-label')) == 1
+    assert len(browser.cssselect('.nextread__kicker')) == 1
+    assert len(browser.cssselect('.nextread__title')) == 1
+    assert len(browser.cssselect('.nextread__byline')) == 1
+    assert len(browser.cssselect('.nextread__text')) == 0
+
+
+def test_zar_article_renders_nextread_without_fallback_image(testbrowser):
+    browser = testbrowser('/arbeit/article/simple-nextread-noimage')
+    assert len(browser.cssselect('.nextread__media')) == 0
