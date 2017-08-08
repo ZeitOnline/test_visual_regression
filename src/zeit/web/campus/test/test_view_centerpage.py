@@ -31,7 +31,7 @@ def test_campus_navigation_should_present_flyout(selenium_driver, testserver):
     else:
         flyout = driver.find_elements_by_css_selector(
             '#tools-menu .nav-flyout__item')
-        assert len(flyout) == 2
+        assert len(flyout) == 3
         link.click()
         try:
             WebDriverWait(driver, 5).until(
@@ -320,8 +320,10 @@ def test_campus_flyout_has_correct_links(selenium_driver, testserver):
         links = driver.find_elements_by_class_name('nav-flyout__link')
         assert ('http://studiengaenge.zeit.de/sit'
                 in links[0].get_attribute('href'))
-        assert ('https://jobs.zeit.de/campus/berufstest'
+        assert ('http://studiengaenge.zeit.de'
                 in links[1].get_attribute('href'))
+        assert ('https://jobs.zeit.de/campus/berufstest'
+                in links[2].get_attribute('href'))
 
 
 def test_breadcrumbs_for_homepage(dummy_request):
