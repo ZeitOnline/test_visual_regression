@@ -1,6 +1,7 @@
 <nav class="{% block pagination_class %}article-pagination{% endblock %} article__item" aria-labelledby="article-pagination-title" data-ct-area="article-pager" data-ct-row="{% if view.pagination %}{{ 'page_%s_of_%s' | format(view.pagination.current, view.pagination.total) }}{% endif %}" data-ct-column="false">
     <h3 class="visually-hidden" id="article-pagination-title">Seitennavigation</h3>
 
+    {% block article_pagination %}
     {% if view.pagination and view.pagination.next_page_url -%}
         <a class="article-pagination__link" href="{{ view.pagination.next_page_url }}" data-ct-label="Nächste Seite">
             <span class="article-pagination__button article-pagination__button--next">Nächste Seite
@@ -10,7 +11,6 @@
             <span class="article-pagination__nexttitle">{{ view.pagination.next_page_title }}</span>
             {%- endif %}
         </a>
-    {% elif view.is_advertorial %}
     {% else %}
         <a class="article-pagination__link" href="{%- block pagination_link -%}{{ request.route_url('home') }}index{%- endblock -%}" data-ct-label="Startseite">
             <span class="article-pagination__button article-pagination__button--next">
@@ -19,6 +19,7 @@
             </span>
         </a>
     {%- endif %}
+    {% endblock article_pagination %}
 
     {% if view.pagination and view.pagination.total > 1 and not view.is_all_pages_view %}
     <ul class="{% block pager_class %}article-pager{% endblock %}">
