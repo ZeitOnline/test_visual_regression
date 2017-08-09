@@ -2,7 +2,7 @@
 
 {% block layout %}teaser-quote{% endblock %}
 
-{# The quote teaser has another order of content (text, heading, image) #}
+{# The quote teaser has another order of content (text, heading, image) than default #}
 
 {% block teaser_allcontent %}
     {% block teaser_text %}
@@ -17,7 +17,9 @@
     </div>
 
     {% block teaser_media %}
-        {% set module_layout = self.layout() %}
-        {% include "zeit.web.arbeit:templates/inc/teaser/asset/image_teaser_zar-quote.tpl" %}
+        {% if teaser is column %}
+            {% set module_layout = self.layout() %}
+            {% include "zeit.web.arbeit:templates/inc/teaser/asset/image_teaser_zar-quote.tpl" %}
+        {% endif %}
     {% endblock %}
 {% endblock %}

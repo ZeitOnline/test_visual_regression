@@ -41,3 +41,32 @@ class Article(zeit.web.core.view_article.Article,
     renderer='zeit.web.core:templates/paywall.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
+
+
+def is_column_article(context, request):
+    return getattr(context, 'serie', None) and context.serie.column
+
+
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.arbeit.view.is_zar_content,
+                       is_column_article),
+    renderer='templates/article.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.arbeit.view.is_zar_content,
+                       is_column_article,
+                       zeit.web.core.view.is_paywalled),
+    renderer='zeit.web.core:templates/paywall.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.arbeit.view.is_zar_content,
+                       is_column_article),
+    name='komplettansicht',
+    renderer='templates/komplettansicht.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.arbeit.view.is_zar_content,
+                       is_column_article,
+                       zeit.web.core.view.is_paywalled),
+    name='komplettansicht',
+    renderer='zeit.web.core:templates/paywall.html')
+class ColumnArticle(Article):
+
+    header_layout = 'column'
