@@ -1,21 +1,21 @@
 $comment-color-head-background: $zar-whitesmoke
 $comment-color-head-color:      $color-text
 $comment-color-head-small:      $zar-cool-grey
-$comment-color-notice:          $zar-battleship-grey
+$comment-color-notice:          $zar-darkslate-grey
 
 @import "web.core/modules/comments/comment-section"
 
 // own styles, which differ from core
 
 .comment-section
-		
+
 	&__item
 		padding: 0
+		max-width: $medium-content-width
+		margin-left: auto
+		margin-right: auto
 		+respond-max($break-tablet-min)
 			+padded
-			max-width: $medium-content-width
-			margin-left: auto
-			margin-right: auto
 	&__head,
 	&__head + &__message
 		font-family: $font-patronbold
@@ -26,8 +26,6 @@ $comment-color-notice:          $zar-battleship-grey
 		border: none // reset core styles
 		+respond-min($break-tablet-min)
 			border-top: 1px solid $color-border
-	&__note
-		width: 100%
-.comment-login
-	+respond-max($break-phablet-min)
-		text-align: center
+	&__notice
+		color: $comment-color-notice
+		+default-article-textlink($comment-color-notice)
