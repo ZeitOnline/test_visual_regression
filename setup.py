@@ -52,7 +52,6 @@ setup(
         'zc.iso8601',
         'zc.sourcefactory',
         'zeit.arbeit',
-        'zeit.brightcove',
         'zeit.cms>=2.95.0.dev0',
         'zeit.campus>=1.6.0.dev0',
         'zeit.connector>=2.9.0.dev0',
