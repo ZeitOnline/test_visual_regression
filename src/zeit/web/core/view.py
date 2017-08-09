@@ -22,6 +22,7 @@ import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
+import zeit.push.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
@@ -254,6 +255,8 @@ class Base(object):
 
     @zeit.web.reify
     def adcontroller_handle(self):
+        suffix = '_trsf' if zeit.web.core.application.FEATURE_TOGGLES.find(
+            'iqd_digital_transformation') else ''
         replacements = {
             'article': 'artikel',
             'author': 'centerpage',
@@ -262,17 +265,18 @@ class Base(object):
             'quiz': 'quiz',
             'video': 'video_artikel'}
         if self.is_hp:
-            return 'homepage'
+            return 'homepage{}'.format(suffix)
         if self.is_advertorial:
-            return '{}_{}'.format(
+            return '{}_{}{}'.format(
                 'mcs' if 'mcs/' in self.banner_channel else 'adv',
-                'index' if self.type == 'centerpage' else 'artikel')
+                'index' if self.type == 'centerpage' else 'artikel',
+                suffix)
         if self.type == 'centerpage' and (
                 self.sub_ressort == '' or self.ressort == 'zeit-magazin'):
-            return 'index'
+            return 'index{}'.format(suffix)
         if self.type in replacements:
-            return replacements[self.type]
-        return 'centerpage'
+            return '{}{}'.format(replacements[self.type], suffix)
+        return 'centerpage{}'.format(suffix)
 
     @zeit.web.reify
     def adcontroller_values(self):
@@ -615,12 +619,10 @@ class Base(object):
                 page = self.pagination.get('current')
             pagination = '{}/{}'.format(page, self.pagination.get('total'))
 
-        if getattr(self, 'is_push_news', False):
-            push = 'wichtigenachrichten.push'
-        elif getattr(self, 'is_breaking', False):
-            push = 'eilmeldung.push'
-        else:
-            push = ''
+        push = zeit.push.interfaces.IPushMessages(self.context, '')
+        if push:
+            push = (push.get(type='mobile') or {}).get('payload_template', '')
+            push = push.replace('.json', '.push')
 
         if getattr(self, 'framebuilder_requires_webtrekk', False):
             pagetype = 'centerpage.framebuilder'

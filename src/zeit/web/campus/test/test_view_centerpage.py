@@ -31,7 +31,7 @@ def test_campus_navigation_should_present_flyout(selenium_driver, testserver):
     else:
         flyout = driver.find_elements_by_css_selector(
             '#tools-menu .nav-flyout__item')
-        assert len(flyout) == 3
+        assert len(flyout) == 2
         link.click()
         try:
             WebDriverWait(driver, 5).until(
@@ -156,7 +156,7 @@ def test_campus_toolbox_exists(testbrowser):
     select = testbrowser('/campus/centerpage/cp-extra-tool-box').cssselect
     assert len(select('.toolbox')) == 1
     assert len(select('.toolbox__headline')) == 1
-    assert len(select('.toolbox__item')) == 3
+    assert len(select('.toolbox__item')) == 2
 
 
 def test_campus_navigation_contains_jobmarket(testbrowser):
@@ -298,10 +298,8 @@ def test_campus_toolbox_has_correct_links(testbrowser):
     select = testbrowser('/campus/centerpage/cp-extra-tool-box').cssselect
     assert ('http://studiengaenge.zeit.de/sit' in
             select('.toolbox__link')[0].attrib['href'])
-    assert ('http://studiengaenge.zeit.de' in
+    assert ('https://jobs.zeit.de/campus/berufstest' in
             select('.toolbox__link')[1].attrib['href'])
-    assert ('https://ranking.zeit.de/che/de/' in
-            select('.toolbox__link')[2].attrib['href'])
 
 
 def test_campus_flyout_has_correct_links(selenium_driver, testserver):
@@ -322,10 +320,8 @@ def test_campus_flyout_has_correct_links(selenium_driver, testserver):
         links = driver.find_elements_by_class_name('nav-flyout__link')
         assert ('http://studiengaenge.zeit.de/sit'
                 in links[0].get_attribute('href'))
-        assert ('http://studiengaenge.zeit.de'
+        assert ('https://jobs.zeit.de/campus/berufstest'
                 in links[1].get_attribute('href'))
-        assert ('https://ranking.zeit.de/che/de/'
-                in links[2].get_attribute('href'))
 
 
 def test_breadcrumbs_for_homepage(dummy_request):
@@ -367,21 +363,6 @@ def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
 
     assert '27: "cardstack.1.2.1"' in script.text_content().strip()
-
-
-def test_overridden_adcontroller_values(application, dummy_request):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/campus/centerpage/advertorial-with-banner-id')
-    adcv = [
-        ('$handle', 'adv_index'),
-        ('level2', 'campus'),
-        ('level3', 'angebote'),
-        ('level4', '100tage'),
-        ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline,zeitcampus'),
-        ('tma', '')]
-    view = zeit.web.campus.view_centerpage.Centerpage(cp, dummy_request)
-    assert adcv == view.adcontroller_values
 
 
 def test_teaser_topic_link_title_should_match_kicker_and_headline(testbrowser):

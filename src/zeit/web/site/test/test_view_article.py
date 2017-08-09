@@ -501,23 +501,6 @@ def test_article_news_source_should_not_break_without_product():
     assert view.news_source == ''
 
 
-def test_adcontroller_values_return_values_on_article(application):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/infoboxartikel')
-    adcv = [
-        ('$handle', 'artikel'),
-        ('level2', u'wissen'),
-        ('level3', 'umwelt'),
-        ('level4', ''),
-        ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline,affe,aggression,geschlechtsverkehr,'
-            'schimpanse,sozialverhalten,studie'),
-        ('tma', '')]
-    view = view = zeit.web.site.view_article.Article(
-        content, pyramid.testing.DummyRequest())
-    assert adcv == view.adcontroller_values
-
-
 def test_article_view_renders_alldevices_raw_box(testbrowser):
     browser = testbrowser('/zeit-online/article/raw-box')
     assert 'fVwQok9xnLGOA' in browser.contents
@@ -664,36 +647,6 @@ def test_breaking_news_article_shows_date_first_released(jinja2_env):
     html = lxml.html.fromstring(html_str)
     time = html.cssselect('.breaking-news-banner__time')
     assert time[0].text == '11:55 Uhr'
-
-
-def test_tile7_is_rendered_on_articles_with_multiple_pages(testbrowser):
-    selector = ('#ad-desktop-7', '#ad-mobile-4')
-
-    browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect(selector[0])) == 1
-    assert len(browser.cssselect(selector[1])) == 1
-
-    browser = testbrowser('/zeit-online/article/zeit/seite-2')
-    assert len(browser.cssselect(selector[0])) == 1
-    assert len(browser.cssselect(selector[1])) == 1
-
-    browser = testbrowser('/zeit-online/article/zeit/seite-5')
-    assert len(browser.cssselect(selector[0])) == 1
-    assert len(browser.cssselect(selector[1])) == 1
-
-
-def test_tiles7_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
-        testbrowser):
-    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
-    assert len(browser.cssselect('#ad-desktop-7')) == 1
-    assert len(browser.cssselect('#ad-mobile-4')) == 1
-    assert len(browser.cssselect('#ad-desktop-9')) == 1
-
-
-def test_article_ads_should_have_pagetype_modifier(testbrowser):
-    browser = testbrowser('/zeit-online/article/01')
-    assert len(browser.cssselect('#ad-desktop-7')) == 1
-    assert 'ad-desktop--7-on-article' in browser.contents
 
 
 def test_does_not_break_when_author_has_no_display_name(testbrowser):
@@ -1543,7 +1496,7 @@ def test_article_should_not_render_expired_video(testbrowser):
     browser = testbrowser('/zeit-online/article/video-expired')
     articlepage = browser.cssselect('.article-page')
     articleitems = articlepage[0].getchildren()
-    assert len(articleitems) == 4
+    assert len(articleitems) == 2
 
 
 def test_comment_count_in_metadata_not_shown_when_comments_disabled(
