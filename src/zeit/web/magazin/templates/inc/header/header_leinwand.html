@@ -6,8 +6,6 @@
     {{ self.headline() }}
     {{ self.zplusbadge() }}
     {{ self.subtitle() }}
-    {% if not view.is_advertorial %}
-        {{ self.article_date() }}
-    {% endif %}
+    {{ self.article_date() }}
 </div>
 {% endblock %}
