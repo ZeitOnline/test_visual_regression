@@ -74,7 +74,7 @@ def test_zar_teaser_topic_has_correct_structure(testbrowser):
         '.teaser-topic img[src*="/zeit-magazin/default/teaser_image/"]'))
 
 
-def test_zar_steaser_topic_should_display_no_image_on_mobile(
+def test_zar_teaser_topic_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
@@ -84,3 +84,47 @@ def test_zar_steaser_topic_should_display_no_image_on_mobile(
     assert len(teaser_images) == 3
     for teaser_image in teaser_images:
         assert teaser_image.is_displayed() is False
+
+
+def test_zar_teaser_quote_has_correct_structure(testbrowser):
+    select = testbrowser('/arbeit/centerpage/teaser-quote').cssselect
+
+    assert len(select('.teaser-quote')) == 4
+    assert len(select('.teaser-quote--red')) == 2
+    assert len(select('.teaser-quote--yellow')) == 2
+
+    assert len(select('.teaser-quote__quotelink')) == 4
+    assert len(select('.teaser-quote__text')) == 4
+    assert len(select('.series-label')) == 3
+    assert len(select('.teaser-quote__headingwrapper')) == 4
+    assert len(select('.teaser-quote__heading')) == 4
+    assert len(select('.teaser-quote__byline')) == 4
+    assert len(select('.teaser-quote__kicker')) == 4
+    assert len(select('.teaser-quote__kicker--leserartikel')) == 1
+    assert len(select('.teaser-quote__title')) == 4
+
+    def teaser(unique_id):
+        return select('.teaser-quote[data-unique-id="{}"]'.format(unique_id))
+
+    # Regular teaser has certain elements
+    quote = teaser('http://xml.zeit.de/arbeit/teaser/quote')
+    assert len(quote) == 1
+    quote_linktitle = quote[0].cssselect(
+        '.teaser-quote__quotelink')[0].attrib['title']
+    assert quote_linktitle == 'Quoteteaser - Diese E-Mail sagt: Antworte!'
+
+    # Images appear only for columns with an authorimage
+    assert len(select('.teaser-quote__media')) == 1
+    assert len(select('.teaser-quote__media.variant--square')) == 1
+    column_quote = teaser('http://xml.zeit.de/arbeit/teaser/quote-column')
+    assert len(column_quote) == 1
+    column_quote_byline = column_quote[0].cssselect(
+        '.teaser-quote__byline')[0].text
+    assert 'Eine Kolumne von ' in column_quote_byline
+
+    # Teasers to articles without a quote show the teaserText
+    teaser_without_quote = teaser('http://xml.zeit.de/arbeit/teaser/serie')
+    assert len(teaser_without_quote) == 1
+    teaser_without_quote_text = teaser_without_quote[0].cssselect(
+        '.teaser-quote__text')[0].text.strip()
+    assert teaser_without_quote_text.startswith('Mit dem Jobwechsel')
