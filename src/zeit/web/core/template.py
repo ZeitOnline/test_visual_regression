@@ -219,6 +219,8 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         templates.append('taglogo')
     if zco_content(teaser) and area_kind != 'zco-parquet':
         templates.append('logo-zco')
+    if zar_content(teaser) and area_kind != 'zar-parquet':
+        templates.append('logo-zar')
 
     return templates
 
@@ -232,6 +234,11 @@ def zett_content(content):
 @zeit.web.register_test
 def zco_content(content):
     return zeit.campus.interfaces.IZCOContent.providedBy(content)
+
+
+@zeit.web.register_test
+def zar_content(content):
+    return zeit.arbeit.interfaces.IZARContent.providedBy(content)
 
 
 @zeit.web.register_test
@@ -269,7 +276,7 @@ def paragraph(block):
 @zeit.web.register_filter
 def vertical_prefix(content):
     verticals = [('zco', 'zco_content'), ('zmo', 'zmo_content'), (
-        'zett', 'zett_content')]
+        'zett', 'zett_content'), ('zar', 'zar_content')]
     for code, testname in verticals:
         if globals()[testname](content):
             return code
