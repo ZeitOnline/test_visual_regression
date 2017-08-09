@@ -19,8 +19,7 @@ $comment-color-notice:          $zar-darkslate-grey
 	&__head,
 	&__head + &__message
 		font-family: $font-patronbold
-		+respond-min($break-tablet-min)
-			background-color: transparent
+		background-color: transparent
 	&__head
 	&__form
 		border: none // reset core styles
@@ -29,3 +28,8 @@ $comment-color-notice:          $zar-darkslate-grey
 	&__notice
 		color: $comment-color-notice
 		+default-article-textlink($comment-color-notice)
+
+	&__headline
+		small
+			font-family: $font-tabletgothic
+			font-size: remify(14px)
