@@ -64,14 +64,11 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <title>Teaser Content: Kolumne</title>
+    <title>Teaser Content: Quote Kolumne</title>
     <supertitle>Kommunikation</supertitle>
     <division type="page">
-      <p>Dieser Artikel dient nur als Teaser-Material. Alle Artikel in diesem Verzeichnis sollen möglichst vielfältige Teaser ergeben, und auch nur für Teaser-Features genutzt werden.</p>
+        <p>Dieser Artikel dient nur als Teaser-Material. Alle Artikel in diesem Verzeichnis sollen möglichst vielfältige Teaser ergeben, und auch nur für Teaser-Features genutzt werden.</p>
+        <citation text="»Wie sehr ich mich über gut geschriebene E-Mails freue! Das Problem ist, dass heutzutage jeder schnell etwas tippen und versenden kann. Da leidet die Qualität.«"/>
     </division>
   </body>
-  <teaser>
-    <title>Titel</title>
-    <text>»Nukular! Das Wort heißt Nukular!«</text>
-  </teaser>
 </article>

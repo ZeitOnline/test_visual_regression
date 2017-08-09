@@ -151,7 +151,7 @@
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a12f" kind="duo">
         <container cp:type="teaser" module="zar-quote-yellow" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d71f3be3b">
-          <block uniqueId="http://xml.zeit.de/arbeit/teaser/quote"></block>
+          <block uniqueId="http://xml.zeit.de/arbeit/teaser/quote-column"></block>
         </container>
       </region>
     </cluster>

@@ -1,10 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <author href="http://xml.zeit.de/autoren/julia_zange" publication-date="" expires="">
-      <display_name>Julia Zange</display_name>
-      <location>Berlin</location>
-    </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Tobias van Scheider</attribute>
@@ -47,7 +43,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
-    <attribute name="genre" ns="http://namespaces.zeit.de/CMS/document">leserartikel</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Schneiders Weisheit</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:85c42592-3840-41c6-b039-83cc16de66d6}</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">1900</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
@@ -67,16 +63,11 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <supertitle>Dummy Content</supertitle>
-    <title>Teaser Content: Quote</title>
+    <title>Teaser Content: Quote Kolumne ohne Bild</title>
+    <supertitle>Kommunikation</supertitle>
     <division type="page">
-      <p>Dieser Artikel dient nur als Teaser-Material. Alle Artikel in diesem Verzeichnis sollen möglichst vielfältige Teaser ergeben, und auch nur für Teaser-Features genutzt werden.</p>
-      <citation text="»Wie sehr ich mich über gut geschriebene E-Mails freue! Das Problem ist, dass heutzutage jeder schnell etwas tippen und versenden kann. Da leidet die Qualität.«"/>
+        <p>Dieser Artikel dient nur als Teaser-Material. Alle Artikel in diesem Verzeichnis sollen möglichst vielfältige Teaser ergeben, und auch nur für Teaser-Features genutzt werden.</p>
+        <citation text="»Nukular! Das Wort heißt Nukular!«"/>
     </division>
   </body>
-  <teaser>
-    <supertitle>Quoteteaser</supertitle>
-    <title>Diese E-Mail sagt: Antworte!</title>
-    <text>Witrd ignoriert, solange der Artikel ein Zitat beinhaltet.</text>
-  </teaser>
 </article>

@@ -66,8 +66,21 @@
         </container>
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a62f" kind="duo">
-        <container cp:type="teaser" module="zar-quote-red" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be3b" text="Nukular! Das Wort heißt Nukular!">
+        <container cp:type="teaser" module="zar-quote-red" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be3b">
           <block uniqueId="http://xml.zeit.de/arbeit/teaser/quote-column"></block>
+        </container>
+      </region>
+    </cluster>
+
+    <cluster area="id-41a2899d-b569-4c42-b714-d5bdbd86a64f" kind="duo">
+      <region area="id-41a2899d-b569-4c42-b714-bd5dbd68a63f" kind="duo">
+        <container cp:type="teaser" module="zar-quote-red" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe8b">
+          <block uniqueId="http://xml.zeit.de/arbeit/teaser/quote-column-noimage"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-b714-bd5dbd68a62f" kind="duo">
+        <container cp:type="teaser" module="zar-quote-yellow" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be1b">
+          <block uniqueId="http://xml.zeit.de/arbeit/teaser/serie"></block>
         </container>
       </region>
     </cluster>
