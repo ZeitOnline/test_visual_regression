@@ -14,6 +14,10 @@ POSTDEPLOY
 
 - ZON-3602: Add social elements
 
+- ZON-4162: Update zeit.content.video
+
+- BUG-767: Hide P5 if no comments are displayed
+
 
 3.77.1 (2017-08-08)
 -------------------
