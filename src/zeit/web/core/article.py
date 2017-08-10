@@ -22,9 +22,18 @@ import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
+import zeit.web.magazin.article
 
 
 log = logging.getLogger(__name__)
+
+
+class IColumnArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that belong to a "column" series."""
+
+
+class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a liveblog."""
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -219,7 +228,7 @@ def pages_of_article(article, advertising_enabled=True):
     if advertising_enabled is False:
         return pages
 
-    if zeit.web.core.article.ILongformArticle.providedBy(article):
+    if zeit.web.magazin.article.ILongformArticle.providedBy(article):
         pubtype = 'longform'
     else:
         pubtype = 'zon'
@@ -228,7 +237,7 @@ def pages_of_article(article, advertising_enabled=True):
 
 
 def convert_authors(article):
-    is_longform = zeit.web.core.article.ILongformArticle.providedBy(article)
+    is_longform = zeit.web.magazin.article.ILongformArticle.providedBy(article)
     author_list = []
     try:
         author_ref = article.authorships
@@ -257,31 +266,6 @@ def convert_authors(article):
         return author_list
     except (IndexError, OSError):
         return []
-
-
-class ILongformArticle(zeit.content.article.interfaces.IArticle):
-    # TODO: Please remove when we have Longforms for ICMSContent
-    pass
-
-
-class IFeatureLongform(ILongformArticle):
-    pass
-
-
-class IShortformArticle(zeit.content.article.interfaces.IArticle):
-    pass
-
-
-class IColumnArticle(zeit.content.article.interfaces.IArticle):
-    pass
-
-
-class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
-    pass
-
-
-class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
-    pass
 
 
 @grokcore.component.adapter(zeit.web.core.interfaces.INextread)

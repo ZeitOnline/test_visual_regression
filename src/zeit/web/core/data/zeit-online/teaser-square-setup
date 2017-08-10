@@ -90,6 +90,9 @@
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
                 </container>
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60599" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/arbeit/article/02-gesundheit-mitarbeiter" />
+                </container>
             </region>
         </cluster>
         <cluster area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
@@ -113,6 +116,18 @@
             <region area="id-a1856af5-0ad1-4849-b2f3-43fb635f4fc6" kind="duo">
                 <container cp:__name__="id-a1c15e19-b931-4441-8d40-7ed4eb76f35e" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/campus/article/common" />
+                </container>
+            </region>
+        </cluster>
+        <cluster area="id-a102845f-8aa2-4305-a731-81afaf03919f" kind="duo">
+            <region area="id-a1a4bedc-5721-412f-994f-a55fb03955d2" kind="duo">
+                <container cp:__name__="id-a160c834-fa2e-4d35-a540-d20dff18f95a" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/arbeit/teaser/serie" />
+                </container>
+            </region>
+            <region area="id-a1856af5-0ad1-4849-b2f3-43fb635f4fa6" kind="duo">
+                <container cp:__name__="id-a1c15e19-b931-4441-8d40-7ed4eb76f35a" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/arbeit/article/01-digitale-nomaden" />
                 </container>
             </region>
         </cluster>
