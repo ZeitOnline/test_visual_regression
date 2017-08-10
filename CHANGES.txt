@@ -20,6 +20,9 @@ POSTDEPLOY
 
 - BUG-767: Hide P5 if no comments are displayed
 
+- MAINT: Introduce IVertical adapter, replace is_*_content view custom
+  predicates with a dedicated predicate
+
 
 3.77.1 (2017-08-08)
 -------------------
