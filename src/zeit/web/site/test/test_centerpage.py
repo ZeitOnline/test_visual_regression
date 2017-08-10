@@ -422,18 +422,20 @@ def test_zon_arbeit_teaser_large_has_arbeit_signet(testbrowser):
     select = testbrowser('zeit-online/centerpage/teasers-to-arbeit').cssselect
     teaser = select('.teaser-large')
     svg = select('.teaser-large .teaser-large__kicker-logo--zar')
-    assert len(teaser) == 3
-    # 3 because there is an empty teaser for column ... until we have a
-    # ZAR column, which currentliy is pull requested
+    assert len(teaser) == 2
     assert len(svg) == 2
 
 
 def test_zon_arbeit_teaser_small_has_arbeit_signet(testbrowser):
     select = testbrowser('zeit-online/centerpage/teasers-to-arbeit').cssselect
     teaser = select('.teaser-small')
-    svg = select('.teaser-small .teaser-small__kicker-logo--zar')
-    assert len(teaser) == 4
-    assert len(svg) == 4
+    svg = select('.teaser-small__kicker-logo--zar')
+    teaser_in_minor = select('.teaser-small-minor')
+    svg_in_minor = select('.teaser-small-minor__kicker-logo--zar')
+    assert len(teaser) == 3
+    assert len(svg) == 3
+    assert len(teaser_in_minor) == 2
+    assert len(svg_in_minor) == 2
 
 
 def test_zon_arbeit_teaser_small_minor_has_arbeit_signet(testbrowser):
