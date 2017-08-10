@@ -30,7 +30,7 @@
         id="zar-square"
         title="quadratischer Teaser"
         image_pattern="square"
-        areas="duo"
+        areas="duo minor"
         />
     <!-- ZCO only -->
     <layout
