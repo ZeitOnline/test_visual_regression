@@ -5,7 +5,6 @@ import zeit.campus.interfaces
 import zeit.cms.interfaces
 
 import zeit.web
-import zeit.web.core.application
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.security
@@ -29,10 +28,6 @@ def campus_topiclink(context):
         'campus-default-topics',
         get_default_topics,
         should_cache_fn=bool)
-
-
-def is_zco_content(context, request):
-    return zeit.campus.interfaces.IZCOContent.providedBy(context)
 
 
 class Base(zeit.web.core.view.Base):

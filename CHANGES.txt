@@ -22,6 +22,9 @@ POSTDEPLOY
 
 - FIX: STOA toolbox fix and add flyout nav as module
 
+- MAINT: Introduce IVertical adapter, replace is_*_content view custom
+  predicates with a dedicated predicate
+
 
 3.77.1 (2017-08-08)
 -------------------
