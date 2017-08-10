@@ -1,0 +1,16 @@
+{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+<aside class="{% block layout %}follow-us{% endblock %}">
+    <h2 class="{{ self.layout() }}__title">Folgen Sie uns</h2>
+    <ul class="{{ self.layout() }}__list">
+        {% for name, url, text, title in module.buttons -%}
+        <li class="{{ self.layout() }}__item">
+            <a href="{{ url }}" target="_blank" class="{{ self.layout() }}__link {{ self.layout() }}__link--{{ name }}" title="{{ title }}" data-ct-label="{{ name }}">
+                <div class="{{ self.layout() }}__logo">
+                    {{ lama.use_svg_icon('follow-' ~ name, 'follow-us__icon follow-us__icon--' ~ name, view.package) }}
+                </div>
+                <div class="{{ self.layout() }}__linktext">{{ text }}</div>
+            </a>
+        </li>
+        {% endfor -%}
+    </ul>
+</aside>

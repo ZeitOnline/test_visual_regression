@@ -25,7 +25,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Digital Mobil</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-09-11T14:31:27.757177+00:00</attribute>
