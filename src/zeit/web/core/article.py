@@ -297,13 +297,13 @@ def images_from_nextread(context):
 class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
 
     product_configuration = (
-        zeit.cms.content.sources.SubNavigationSource.product_configuration)
-    config_url = zeit.cms.content.sources.SubNavigationSource.config_url
+        zeit.cms.content.sources.SubRessortSource.product_configuration)
+    config_url = zeit.cms.content.sources.SubRessortSource.config_url
 
     master_node_xpath = (
-        zeit.cms.content.sources.SubNavigationSource.master_node_xpath)
-    slave_tag = zeit.cms.content.sources.SubNavigationSource.slave_tag
-    attribute = zeit.cms.content.sources.SubNavigationSource.attribute
+        zeit.cms.content.sources.SubRessortSource.master_node_xpath)
+    slave_tag = zeit.cms.content.sources.SubRessortSource.slave_tag
+    attribute = zeit.cms.content.sources.SubRessortSource.attribute
 
     # Same idea as zeit.cms.content.sources.MasterSlavesource.getTitle()
     def find(self, ressort, subressort):
