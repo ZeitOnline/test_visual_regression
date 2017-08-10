@@ -8,7 +8,9 @@ POSTDEPLOY
 3.78 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3677: Transmit push payload template to webtrekk
+
+- ZON-4141: Set IVW parameter "sv" to "ke" for FBIA
 
 
 3.77.1 (2017-08-08)
