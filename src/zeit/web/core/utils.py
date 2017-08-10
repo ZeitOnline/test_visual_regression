@@ -464,7 +464,7 @@ class LazyProxy(object):
     def serie(self):
         source = zeit.cms.content.interfaces.ICommonMetadata[
             'serie'].source(self)
-        return source.factory.values.get(self.__proxy__.get('serie'))
+        return source.find(self.__proxy__.get('serie'))
 
     @property
     def keywords(self):
