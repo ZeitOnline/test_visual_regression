@@ -1,0 +1,39 @@
+.nextread-advertisement
+	+font-smoothing
+	+padded
+	+unpadded
+	background-color: $color-jobs-areas
+	color: #fff
+	position: relative
+	&__label
+		@extend %teaser-adlabel
+		color: #fff !important // TODO: order of sass files, again!
+		position: absolute
+		top: remify(6px)
+		right: $cp-padding
+
+	&__media
+		background-image: url('/static/latest/images/arbeit/jobbox/rocket.png')
+		background-position: center
+		background-repeat: no-repeat
+		width: remify(180px)
+		height: remify(180px)
+		margin: remify(0 auto 24px)
+		background-size: 100%
+
+	&__container
+		margin: 0 auto
+		max-width: $medium-content-width
+		padding: $vertical-space 0
+
+	&__title
+		@extend %teaser-title--m
+		margin-top: remify(10px)
+
+	&__text
+		@extend %teaser-text-fontsize
+
+	&__button
+		@extend %zar-button-hollow--debate
+		margin: remify(8px) 0
+		vertical-align: middle
