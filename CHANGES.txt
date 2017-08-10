@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4141: Set IVW parameter "sv" to "ke" for FBIA
 
+- BUG-767: Hide P5 if no comments are displayed
+
 
 3.77.1 (2017-08-08)
 -------------------
