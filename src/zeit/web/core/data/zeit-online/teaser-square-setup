@@ -116,6 +116,18 @@
                 </container>
             </region>
         </cluster>
+        <cluster area="id-a102845f-8aa2-4305-a731-81afaf03919f" kind="duo">
+            <region area="id-a1a4bedc-5721-412f-994f-a55fb03955d2" kind="duo">
+                <container cp:__name__="id-a160c834-fa2e-4d35-a540-d20dff18f95a" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/arbeit/teaser/serie" />
+                </container>
+            </region>
+            <region area="id-a1856af5-0ad1-4849-b2f3-43fb635f4fa6" kind="duo">
+                <container cp:__name__="id-a1c15e19-b931-4441-8d40-7ed4eb76f35a" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/arbeit/article/01-digitale-nomaden" />
+                </container>
+            </region>
+        </cluster>
         <cluster area="id-7e329214-665f-457d-a624-94c47850f95d" kind="duo">
             <region area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb7" kind="duo">
                 <container cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7" cp:type="teaser" module="zon-square">
