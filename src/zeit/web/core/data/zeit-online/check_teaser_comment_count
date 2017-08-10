@@ -69,6 +69,11 @@
 					<block href="http://xml.zeit.de/zeit-online/article/02"/>
 				</container>
 			</region>
+			<region hide-dupes="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf22" kind="solo" count="1">
+				<container cp:type="teaser" module="zon-classic" cp:__name__="id-b0eaa5e2-807b-4fed-9a09-886eafda5b21">
+					<block href="http://xml.zeit.de/zeit-online/article/zplus-zeit-register"/>
+				</container>
+			</region>
 			<region hide-dupes="True" area="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" kind="solo" count="1">
 				<container cp:type="teaser" module="zon-classic" cp:__name__="id-b0eaa5e2-807b-4fed-9a09-886eafda5b21">
 					<block href="http://xml.zeit.de/zeit-online/article/01"/>

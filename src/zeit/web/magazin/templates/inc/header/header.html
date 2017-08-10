@@ -1,6 +1,6 @@
 {% block article_header %}
 <header class="header-article header-article--{% block layout %}{{ view.header_layout }}{% endblock %}
-    {%- if view.zplus_label and view.zplus_label.zplus and view.page_nr == 1 %} header-article--zplusbadge{% endif %}" data-ct-area="articleheader">
+    {%- if view.zplus_label and view.zplus_label.zplus and view.page_nr == 1 %} header-article--zplusbadge{% endif %} {% if view.is_advertorial %}header-article--advertorial{% endif %}" data-ct-area="articleheader">
     {% block header_content %}
     {% block headline -%}
     <h1 class="headline" itemprop="headline">
@@ -56,9 +56,11 @@
     {% endblock -%}
 
     {% block article_date -%}
-    <div class="meta">
-        {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
-    </div>
+        {% if not view.is_advertorial %}
+        <div class="meta">
+            {% include "zeit.web.magazin:templates/inc/article_area_date.html" %}
+        </div>
+        {% endif %}
     {% endblock -%}
     {% endblock header_content %}
 </header>
