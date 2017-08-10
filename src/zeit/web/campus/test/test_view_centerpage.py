@@ -322,7 +322,7 @@ def test_campus_flyout_has_correct_links(selenium_driver, testserver):
                 in links[0].get_attribute('href'))
         assert ('http://studiengaenge.zeit.de'
                 in links[1].get_attribute('href'))
-        assert ('https://jobs.zeit.de/campus/berufstest'
+        assert ('https://ranking.zeit.de/che/de/'
                 in links[2].get_attribute('href'))
 
 
