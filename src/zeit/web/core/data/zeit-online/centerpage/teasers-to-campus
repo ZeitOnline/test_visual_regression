@@ -76,7 +76,7 @@
 		</region>
 	</cluster>
 
-    <cluster area="feature" visible="True">
+    <cluster area="id-7e329214-665f-447d-a624-94b47850f95d" kind="duo">
         <region area="lead" block_max="5" overflow_into="id-74baeca3-7dbb-437d-8e70-3a3d07969d49" title="Knöpfe Teil 1" visible="True">
             <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
                 <block href="http://xml.zeit.de/campus/article/paginated" />

@@ -18,7 +18,7 @@
 
         {% block teaser_journalistic_format %}
             {% if teaser.serie and not teaser.serie.column %}
-                <div class="{{ self.layout() }}__series-label">Serie: {{ teaser.serie.serienname }}</div>
+                <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical_prefix ) }}">Serie: {{ teaser.serie.serienname }}</div>
             {% elif teaser.blog %}
                 <div class="blog-format">
                     <span class="blog-format__marker">Blog</span>

@@ -470,3 +470,11 @@ def test_iqd_adtile8_on_article_new_placement_alternative(
     browser = testbrowser('/zeit-magazin/article/01')
     body = browser.cssselect('{},{}'.format(ps, divs))
     assert body[2].cssselect('script')[0].attrib['id'] == 'ad-desktop-8'
+
+
+def test_p5_not_displayed_when_there_are_no_comments(testbrowser, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True,
+    }.get)
+    browser = testbrowser('/zeit-online/article/quiz')
+    assert not browser.cssselect('#ad-desktop-5')
