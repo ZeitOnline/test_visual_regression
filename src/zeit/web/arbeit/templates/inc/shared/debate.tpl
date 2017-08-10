@@ -26,7 +26,7 @@
             </p>
         </div>
     </div>
-    <a href="{{ adapt(block.context, 'zeit.arbeit.interfaces.IDebate').action_url }}" class="{{ self.layout() }}__button" data-ct-label="button">Schreiben Sie uns</a>
+    <a href="{{ adapt(block.context, 'zeit.content.infobox.interfaces.IDebate').action_url }}" class="{{ self.layout() }}__button" data-ct-label="button">Schreiben Sie uns</a>
 </aside>
 
 {% block wrapper_end %}
