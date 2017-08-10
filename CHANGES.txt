@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-4162: Update zeit.content.video
 
+- ARBEIT-101: Add ZAR badge to articles in ZON
+
 - BUG-767: Hide P5 if no comments are displayed
 
 
