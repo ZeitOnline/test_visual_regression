@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.78 (unreleased)
+3.78 (2017-08-10)
 -----------------
 
 - ZON-3677: Transmit push payload template to webtrekk
