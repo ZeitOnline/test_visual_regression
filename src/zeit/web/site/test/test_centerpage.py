@@ -450,3 +450,10 @@ def test_zon_arbeit_teaser_topic_has_arbeit_signet(testbrowser):
     svg = select('.teaser-topic-item__kicker-logo--zar')
     assert len(teaser) == 3
     assert len(svg) == 3
+
+    
+def test_if_all_followbox_elements_present(testbrowser):
+    select = testbrowser('zeit-online/centerpage/follow-us').cssselect
+    buttons = select('.follow-us__link')
+
+    assert len(buttons) == 5
