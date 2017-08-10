@@ -238,7 +238,8 @@ def zco_content(content):
 
 @zeit.web.register_test
 def zar_content(content):
-    return zeit.arbeit.interfaces.IZARContent.providedBy(content)
+    return zeit.web.core.application.FEATURE_TOGGLES.find(
+        'arbeit') and zeit.arbeit.interfaces.IZARContent.providedBy(content)
 
 
 @zeit.web.register_test
