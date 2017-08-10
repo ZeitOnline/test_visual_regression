@@ -25,3 +25,8 @@ $comment-color-placeholder-background: $zar-whitesmoke
 $comment-color-placeholder-font: $zar-white
 
 @import "web.core/modules/comments/comment"
+
+.comment
+	&__container
+		+respond-min($break-tablet-min)
+			max-width: $medium-content-width
