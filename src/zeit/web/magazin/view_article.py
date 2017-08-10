@@ -18,39 +18,33 @@ log = logging.getLogger(__name__)
 
 @zeit.web.view_defaults(
     context=zeit.content.article.interfaces.IArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,))
+    vertical='zmo')
 @zeit.web.view_config(
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_advertorial),
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
     renderer='templates/advertorial.html')
 @zeit.web.view_config(
     renderer='templates/article.html')
 @zeit.web.view_config(
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
     name='komplettansicht',
     renderer='templates/komplettansicht.html')
 @zeit.web.view_config(
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     name='komplettansicht',
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IColumnArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    context=zeit.web.core.article.IZMOColumnArticle,
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
     context=zeit.web.core.article.IShortformArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
     context=zeit.web.core.article.IPhotoclusterArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
 
@@ -64,27 +58,27 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
             return prefix + ' ' + self.context.genre.title()
 
 
+@zeit.web.view_defaults(vertical='zmo')
 @zeit.web.view_config(
     name='seite',
     path_info='.*seite-(.*)',
     renderer='templates/article.html')
 @zeit.web.view_config(
     name='seite',
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     path_info='.*seite-(.*)',
     renderer='zeit.web.core:templates/paywall.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
-@zeit.web.view_config(
+@zeit.web.view_defaults(
     context=zeit.web.core.article.ILongformArticle,
+    vertical='zmo')
+@zeit.web.view_config(
     renderer='templates/longform.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.ILongformArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 class LongformArticle(Article):
 
@@ -113,11 +107,12 @@ class LongformArticle(Article):
         return 'short'
 
 
+@zeit.web.view_defaults(
+    context=zeit.web.core.article.ILongformArticle,
+    vertical='zon')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IFeatureLongform,
     renderer='templates/feature_longform.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IFeatureLongform,
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 class FeatureLongform(LongformArticle):
@@ -149,7 +144,7 @@ class ShortformArticle(Article):
 
 
 @zeit.web.view_config(
-    context=zeit.web.core.article.IColumnArticle,
+    context=zeit.web.core.article.IZMOColumnArticle,
     renderer='templates/column.html')
 class ColumnArticle(Article):
     pass

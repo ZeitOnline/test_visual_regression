@@ -260,15 +260,14 @@ def convert_authors(article):
 
 
 class ILongformArticle(zeit.content.article.interfaces.IArticle):
-    # TODO: Please remove when we have Longforms for ICMSContent
-    pass
-
-
-class IFeatureLongform(ILongformArticle):
     pass
 
 
 class IShortformArticle(zeit.content.article.interfaces.IArticle):
+    pass
+
+
+class IZMOColumnArticle(zeit.content.article.interfaces.IArticle):
     pass
 
 

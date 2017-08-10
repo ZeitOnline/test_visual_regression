@@ -120,8 +120,11 @@ class Application(object):
             self.config.include('pyramid_zodbconn')
 
         config.add_view_predicate(
-            'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
+            'vertical', zeit.web.core.routing.VerticalPredicate,
             weighs_more_than=('custom',))
+        config.add_view_predicate(
+            'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
+            weighs_more_than=('vertical',))
         config.add_route_predicate(
             'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
             weighs_more_than=('traverse',))

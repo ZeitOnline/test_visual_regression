@@ -387,9 +387,11 @@ class PostCommentAdmin(PostComment):
                       request_method='POST')
 @zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle,
                       request_method='POST')
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
+                      request_method='POST')
 @zeit.web.view_config(context=zeit.web.core.article.IShortformArticle,
                       request_method='POST')
-@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
+@zeit.web.view_config(context=zeit.web.core.article.IZMOColumnArticle,
                       request_method='POST')
 @zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle,
                       request_method='POST')
@@ -461,8 +463,9 @@ class PostCommentResource(PostComment):
 @zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
 @zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
 @zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IZMOColumnArticle)
 @zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
@@ -510,8 +513,9 @@ class CommentForm(zeit.web.core.view.CommentMixin,
 @zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
 @zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
 @zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
+@zeit.web.view_config(context=zeit.web.core.article.IZMOColumnArticle)
 @zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
 class CommentReplies(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
 

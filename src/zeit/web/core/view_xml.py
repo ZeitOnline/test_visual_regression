@@ -85,6 +85,8 @@ class XMLContent(zeit.web.core.view.Base):
                       host_restriction='xml')
 @zeit.web.view_config(context=zeit.web.core.article.IShortformArticle,
                       host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.core.article.IZMOColumnArticle,
+                      host_restriction='xml')
 class XMLArticle(XMLContent):
 
     @property
