@@ -26,6 +26,12 @@
         image_pattern="wide"
         areas="topic"
         />
+    <layout
+        id="zar-square"
+        title="quadratischer Teaser"
+        image_pattern="square"
+        areas="duo"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"

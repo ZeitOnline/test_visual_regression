@@ -90,6 +90,9 @@
                 <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" module="zon-square">
                     <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
                 </container>
+                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60599" cp:type="teaser" module="zon-square">
+                    <block href="http://xml.zeit.de/arbeit/article/02-gesundheit-mitarbeiter" />
+                </container>
             </region>
         </cluster>
         <cluster area="id-d102845f-8aa2-4305-a731-81efaf03919f" kind="duo">
