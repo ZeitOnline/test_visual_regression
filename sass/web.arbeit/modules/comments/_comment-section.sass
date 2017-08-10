@@ -20,11 +20,6 @@ $comment-color-notice:          $zar-darkslate-grey
 	&__head + &__message
 		font-family: $font-patronbold
 		background-color: transparent
-	&__head
-	&__form
-		border: none // reset core styles
-		+respond-min($break-tablet-min)
-			border-top: 1px solid $color-border
 	&__notice
 		color: $comment-color-notice
 		+default-article-textlink($comment-color-notice)
