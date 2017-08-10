@@ -212,14 +212,6 @@ def app_settings(mockserver):
         'vivi_zeit.push_facebook-main-account': 'fb-test',
         'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
         'vivi_zeit.push_facebook-campus-account': 'fb-campus',
-        'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
-        'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
-        'vivi_zeit.brightcove_read-token': 'foo',
-        'vivi_zeit.brightcove_write-token': 'bar',
-        'vivi_zeit.brightcove_index-principal': 'zope.brightcove',
-        'vivi_zeit.brightcove_timeout': '300',
-        'vivi_zeit.brightcove_video-folder': 'video',
-        'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
         'vivi_zeit.content.video_source-serie': (
             'egg://zeit.web.core/data/config/video-serie.xml'),
         'vivi_zeit.content.volume_volume-cover-source': (
