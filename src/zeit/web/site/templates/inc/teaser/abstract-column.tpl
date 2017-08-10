@@ -10,5 +10,5 @@
 {% endblock %}
 
 {% block teaser_journalistic_format %}
-   <div class="{{ self.layout() }}__series-label">{{ teaser.serie.serienname }}</div>
+   <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical_prefix ) }}">{{ teaser.serie.serienname }}</div>
 {% endblock %}
