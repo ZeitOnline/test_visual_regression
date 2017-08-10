@@ -28,7 +28,6 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-03-17T11:53:59.780412+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Twitter-Text</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Facebook-Text</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="message_config">&lt;pickle&gt;
   &lt;list&gt;
     &lt;dictionary&gt;
@@ -54,6 +53,20 @@
       &lt;/item&gt;
       &lt;item key="account"&gt;
           &lt;string&gt;fb-magazin&lt;/string&gt;
+      &lt;/item&gt;
+      &lt;item key="type"&gt;
+          &lt;string&gt;facebook&lt;/string&gt;
+      &lt;/item&gt;
+    &lt;/dictionary&gt;
+    &lt;dictionary&gt;
+      &lt;item key="enabled"&gt;
+          &lt;true/&gt;
+      &lt;/item&gt;
+      &lt;item key="override_text"&gt;
+          &lt;unicode&gt;Facebook-Text&lt;/unicode&gt;
+      &lt;/item&gt;
+      &lt;item key="account"&gt;
+          &lt;string&gt;fb-test&lt;/string&gt;
       &lt;/item&gt;
       &lt;item key="type"&gt;
           &lt;string&gt;facebook&lt;/string&gt;

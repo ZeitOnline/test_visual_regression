@@ -25,16 +25,18 @@ def test_check_comment_count(
     # check explicitly for absecnce of comments on non-zplus teasers
     # and vice versa
     classic_teasers = driver.find_elements_by_css_selector('.teaser-classic')
-    assert len(classic_teasers) == 2
+    assert len(classic_teasers) == 3
     try:
         classic_teasers[0].find_element_by_css_selector(
+            '.teaser-classic__commentcount')
+        classic_teasers[1].find_element_by_css_selector(
             '.teaser-classic__commentcount')
         assert False
     except NoSuchElementException:
         assert True
 
     try:
-        classic_teasers[1].find_element_by_css_selector(
+        classic_teasers[2].find_element_by_css_selector(
             '.teaser-classic__commentcount')
     except:
         assert False, 'Non zplus-teasers should have comment-count'

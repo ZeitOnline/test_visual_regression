@@ -1,0 +1,24 @@
+.teaser-topic-main
+	text-align: center
+	&__heading
+		&:after
+			content: url('/static/latest/css/svg/web.arbeit/arrow-right.svg')
+			display: block
+			margin: remify(35px) auto remify(20px)
+			transform: rotate(90deg)
+	&__combined-link
+		@extend %teaser-combined-link
+	&__kicker
+		@extend %teaser-kicker--s
+		margin-bottom: remify(8px)
+		// Schade. Design hält sich nicht an eigenen Styleguide. TODO: Brauchen wir andere abstrakte Klassen? Tweaken beim Polishen, wenn alle Teaser fertig sind.
+		+respond-min($break-tablet-min)
+			color: $color-text
+			font-size: remify(20px)
+			letter-spacing: $letter-spacing-xl
+			margin-bottom: remify(18px)
+
+	&__title
+		@extend %teaser-title--xl
+	&__button
+		@extend %zar-button-hollow

@@ -14,7 +14,9 @@ class ToolSource(zeit.cms.content.sources.SimpleXMLSourceBase):
                        text=unicode(node.get('text')),
                        cta=unicode(node.get('cta')),
                        cta_flyout=unicode(node.get('cta_flyout')),
-                       href=unicode(node.get('href')))
+                       href=unicode(node.get('href')),
+                       href_footer=unicode(node.get('href_footer')),
+                       href_footer_text=unicode(node.get('href_footer_text')))
 
     @property
     def header_text(self):

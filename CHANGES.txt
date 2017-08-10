@@ -5,10 +5,66 @@ POSTDEPLOY
 ----------
 
 
-3.74 (unreleased)
+3.78 (unreleased)
+-----------------
+
+- ZON-3677: Transmit push payload template to webtrekk
+
+- ZON-4141: Set IVW parameter "sv" to "ke" for FBIA
+
+
+3.77.1 (2017-08-08)
+-------------------
+
+- BUG-768: Fix placement of adplace8 (old style)
+
+
+3.77 (2017-08-04)
+-----------------
+
+- ZON-4117: Edit STOA toolbox
+
+- ARBEIT-84: Style video block for ZEIT Arbeit
+
+- ARBEIT-84: Style quiz block for ZEIT Arbeit
+
+- ARBEIT-83: Style article tags for ZEIT Arbeit
+
+
+3.76 (2017-08-03)
+-----------------
+
+- ARBEIT-77: Use arbeit-cp topiclinks for all content in ZEIT Arbeit
+
+
+3.75 (2017-08-03)
+-----------------
+
+- ZON-4126: Add property fb:pages to sharing meta
+
+- ZON-4048: New adtags on ZON/ZMO/ZCO
+
+- ARBEIT-27: Customize article infobox for ZEIT Arbeit
+
+- ARBEIT-84: Implement blocks (images, gallery, intertitle) for ZEIT Arbeit
+
+- ZOCA-28: Set flag whether article is on homepage
+
+- ZOCA-28: Accept uniqueIds as well as uuids for article query
+
+- BUG-760: Fix short table-cells in exclusive teaser
+
+- BUG-761: Fix longform (wider than 1000px)
+
+
+3.74 (2017-07-31)
 -----------------
 
 - ARBEIT-22: Show paywall on ZEIT Arbeit articles
+
+- ARBEIT-80: Implement topic teaser for ZEIT Arbeit
+
+- ARBEIT-90: Style debate teaser for ZEIT Arbeit
 
 
 3.73 (2017-07-27)
