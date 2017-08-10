@@ -46,6 +46,9 @@ class Base(zeit.web.core.view.Base):
     # make toolbox links available in view
     toolbox = zeit.web.campus.navigation.TOOL_SOURCE
 
+    # make flyout links available in view
+    flyoutnavi = zeit.web.campus.navigation.TOOL_FLYOUT_SOURCE
+
     @zeit.web.reify
     def adwords(self):
         return ['zeitonline', 'zeitcampus']

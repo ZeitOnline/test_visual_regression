@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - BUG-767: Hide P5 if no comments are displayed
 
+- FIX: STOA toolbox fix and add flyout nav as module
+
 
 3.77.1 (2017-08-08)
 -------------------
