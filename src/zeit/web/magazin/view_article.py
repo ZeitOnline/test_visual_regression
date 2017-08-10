@@ -1,19 +1,12 @@
 # -*- coding: utf-8 -*-
-import logging
-
-import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 
 import zeit.web
 import zeit.web.core.article
-import zeit.web.core.comments
-import zeit.web.core.interfaces
 import zeit.web.core.view
 import zeit.web.core.view_article
+import zeit.web.magazin.article
 import zeit.web.magazin.view
-
-
-log = logging.getLogger(__name__)
 
 
 @zeit.web.view_defaults(
@@ -35,15 +28,15 @@ log = logging.getLogger(__name__)
     name='komplettansicht',
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IZMOColumnArticle,
+    context=zeit.web.magazin.article.IColumnArticle,
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IShortformArticle,
+    context=zeit.web.magazin.article.IShortformArticle,
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IPhotoclusterArticle,
+    context=zeit.web.magazin.article.IPhotoclusterArticle,
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
@@ -73,7 +66,7 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
 
 
 @zeit.web.view_defaults(
-    context=zeit.web.core.article.ILongformArticle,
+    context=zeit.web.magazin.article.ILongformArticle,
     vertical='zmo')
 @zeit.web.view_config(
     renderer='templates/longform.html')
@@ -108,7 +101,7 @@ class LongformArticle(Article):
 
 
 @zeit.web.view_defaults(
-    context=zeit.web.core.article.ILongformArticle,
+    context=zeit.web.magazin.article.ILongformArticle,
     vertical='zon')
 @zeit.web.view_config(
     renderer='templates/feature_longform.html')
@@ -137,21 +130,21 @@ class FeatureLongform(LongformArticle):
 
 
 @zeit.web.view_config(
-    context=zeit.web.core.article.IShortformArticle,
+    context=zeit.web.magazin.article.IShortformArticle,
     renderer='templates/shortform.html')
 class ShortformArticle(Article):
     pass
 
 
 @zeit.web.view_config(
-    context=zeit.web.core.article.IZMOColumnArticle,
+    context=zeit.web.magazin.article.IColumnArticle,
     renderer='templates/column.html')
 class ColumnArticle(Article):
     pass
 
 
 @zeit.web.view_config(
-    context=zeit.web.core.article.IPhotoclusterArticle,
+    context=zeit.web.magazin.article.IPhotoclusterArticle,
     renderer='templates/photocluster.html')
 class PhotoclusterArticle(Article):
 

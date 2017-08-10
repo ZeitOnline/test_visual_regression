@@ -19,10 +19,10 @@ import zeit.content.dynamicfolder.interfaces
 import zeit.content.video.interfaces
 
 import zeit.web.core.article
-import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.utils
+import zeit.web.magazin.article
 
 
 log = logging.getLogger(__name__)
@@ -94,22 +94,24 @@ class Gallery(Traversable):
 class Article(Traversable):
 
     def __call__(self, tdict):
+        # Should we check that these provide IZMOContent? Because those
+        # templates are only available there.
         if self.context.template == 'longform':
             zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.ILongformArticle)
+                self.context, zeit.web.magazin.article.ILongformArticle)
         elif self.context.template == 'short':
             zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.IShortformArticle)
+                self.context, zeit.web.magazin.article.IShortformArticle)
         elif self.context.template == 'column':
             zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.IZMOColumnArticle)
+                self.context, zeit.web.magazin.article.IColumnArticle)
+        elif self.context.template == 'photocluster':
+            zope.interface.alsoProvides(
+                self.context, zeit.web.magazin.article.IPhotoclusterArticle)
+
         elif zeit.web.core.template.liveblog(self.context):
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.ILiveblogArticle)
-        elif self.context.template == 'photocluster':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.IPhotoclusterArticle)
-
         elif zeit.web.core.template.column(self.context):
             zope.interface.alsoProvides(
                 self.context, zeit.web.core.article.IColumnArticle)
