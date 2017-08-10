@@ -4,6 +4,7 @@ var $ = require( 'jquery' ),
     menu = require( 'web.core/menu' ),
     main = $( '#main' ),
     article = $( '#js-article' ),
+    comments = require( 'web.core/comments' ),
     pageType = document.body.getAttribute( 'data-page-type' );
 
 // initialize modules
@@ -21,6 +22,9 @@ require( 'web.core/plugins/jquery.infobox' );
 
 $.notifications();
 
+if ( article.length ) {
+    comments.init();
+}
 
 if ( pageType === 'centerpage' ) {
     $( '.js-dropdownlink' ).dropdownLink();
