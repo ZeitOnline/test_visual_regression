@@ -1,4 +1,4 @@
-$comment-color-head-background: $zar-whitesmoke
+$comment-color-head-background: transparent
 $comment-color-head-color:      $color-text
 $comment-color-head-small:      $zar-grey
 $comment-color-notice:          $zar-darkslate-grey
@@ -12,15 +12,12 @@ $comment-color-notice:          $zar-darkslate-grey
 	&__item
 		padding: 0
 		max-width: $medium-content-width
-		margin-left: auto
-		margin-right: auto
 		+respond-max($break-tablet-min)
 			+padded
 
 	&__head,
 	&__head + &__message
 		font-family: $font-patronbold
-		background-color: transparent
 
 	&__notice
 		color: $comment-color-notice
