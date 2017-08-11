@@ -17,7 +17,6 @@ log = logging.getLogger(__name__)
 
 @zeit.web.view_config(
     context=zeit.content.video.interfaces.IVideo,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/video.html')
 class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 

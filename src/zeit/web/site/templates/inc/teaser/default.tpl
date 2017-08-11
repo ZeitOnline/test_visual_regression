@@ -18,7 +18,7 @@
 
         {% block teaser_journalistic_format %}
             {% if teaser.serie and not teaser.serie.column %}
-                <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical_prefix ) }}">Serie: {{ teaser.serie.serienname }}</div>
+                <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Serie: {{ teaser.serie.serienname }}</div>
             {% elif teaser.blog %}
                 <div class="blog-format">
                     <span class="blog-format__marker">Blog</span>
@@ -34,7 +34,7 @@
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url | append_campaign_params }}">
                     {% block teaser_kicker %}
-                        <span class="{%- block kicker_class -%}{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, teaser | vertical_prefix ) }}{%- endblock -%}">
+                        <span class="{%- block kicker_class -%}{{ '%s__kicker' | format(self.layout()) | with_mods(journalistic_format, area.kind, teaser | vertical) }}{%- endblock -%}">
                             {% block kicker_logo scoped %}
                                 {% block content_kicker_logo %}
                                     {% set logo_layout = self.layout() %}

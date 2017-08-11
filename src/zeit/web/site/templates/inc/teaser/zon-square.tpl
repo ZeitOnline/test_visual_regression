@@ -6,13 +6,13 @@
 {% block teaser_media_position_before_title %}
     {% set module_layout = self.layout() %}
     {% include "zeit.web.site:templates/inc/asset/image_zon-square.tpl" %}
-    {% if teaser is zett_content %}
+    {% if teaser | vertical == 'zett' %}
         {{ lama.use_svg_icon('logo-zett-small', 'teaser-square__kicker-logo--zett svg-symbol--hide-ie', view.package) }}
     {% endif %}
 {% endblock %}
 
 {% block kicker_logo %}
-    {% if teaser is not zett_content %}
+    {% if teaser | vertical != 'zett' %}
         {{ super() }}
     {% endif %}
 {% endblock %}
@@ -20,12 +20,12 @@
 {% block teaser_journalistic_format %}
     {%- if teaser.serie %}
         {%- if teaser.serie.column %}
-           <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical_prefix ) }}">{{ teaser.serie.serienname }}</span>
+           <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">{{ teaser.serie.serienname }}</span>
         {%- else %}
-            <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical_prefix ) }}">Serie: {{ teaser.serie.serienname }}</span>
+            <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Serie: {{ teaser.serie.serienname }}</span>
         {%- endif %}
     {%- elif teaser.blog %}
-        <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical_prefix ) }}">Blog: {{ teaser.blog.name }}</span>
+        <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Blog: {{ teaser.blog.name }}</span>
     {%- endif %}
 {% endblock teaser_journalistic_format %}
 
