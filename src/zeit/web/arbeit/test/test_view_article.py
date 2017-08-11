@@ -108,3 +108,25 @@ def test_zar_article_nextread_provides_expected_webtrekk_string(
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
         'stationaer.articlebottom.editorial-nextread...text')
+
+
+def test_zar_article_advertising_nextread_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}#debug-clicktracking'
+    driver = selenium_driver
+    driver.set_window_size(1000, 800)
+    driver.get(url.format(('/arbeit/article/simple-verlagsnextread')))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.nextread-advertisement')))
+    except TimeoutException:
+        assert False, 'nextread-advertisement must be present'
+
+    link = driver.find_element_by_css_selector(
+        '.nextread-advertisement__button')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.articlebottom.publisher-nextread.button.1.jobs_finden')
