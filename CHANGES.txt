@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ARBEIT-24: Style article comments for ZEIT Arbeit
 
+- ARBEIT-94: Debatebox uses infobox as content source on ZEIT Arbeit
+
 
 3.78 (2017-08-10)
 -----------------
