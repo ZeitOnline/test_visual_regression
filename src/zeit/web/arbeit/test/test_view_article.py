@@ -120,7 +120,7 @@ def test_zar_article_advertising_nextread_provides_expected_webtrekk_string(
     try:
         WebDriverWait(driver, 3).until(
             expected_conditions.presence_of_element_located(
-                (By.CSS_SELECTOR, '.nextread-advertisement')))
+                (By.CSS_SELECTOR, '.nextread-advertisement__button')))
     except TimeoutException:
         assert False, 'nextread-advertisement must be present'
 

@@ -23,6 +23,6 @@
     <text>Entdecken Sie Jobs mit Perspektive im ZEIT Stellenmarkt.</text>
     <button_text>Jobs finden</button_text>
     <button_color>d11c08</button_color>
-    <url>http://jobs.zeit.de/?wt_zmc=cross.int.zonpmr.zeitde.next.stellenmarkt_startseite.bildtext.karriere.x&utm_medium=cross&utm_source=zeitde_zonpmr_int&utm_campaign=next&utm_content=stellenmarkt_startseite_bildtext_karriere_x</url>
+    <url>http://jobs.zeit.de/?wt_zmc=cross.int.zonpmr.zeitde.next.stellenmarkt_startseite.bildtext.karriere.x&amp;utm_medium=cross&amp;utm_source=zeitde_zonpmr_int&amp;utm_campaign=next&amp;utm_content=stellenmarkt_startseite_bildtext_karriere_x</url>
   </body>
 </advertisement>
