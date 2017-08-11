@@ -7,7 +7,7 @@
 	position: relative
 	&__label
 		@extend %teaser-adlabel
-		color: #fff !important // TODO: order of sass files, again!
+		color: #fff !important // TODO: order of sass files, again! (Oder einfach die Farbe rausnehmen aus der abstrakten Klasse.)
 		position: absolute
 		top: remify(6px)
 		right: $cp-padding
@@ -25,15 +25,26 @@
 		margin: 0 auto
 		max-width: $medium-content-width
 		padding: $vertical-space 0
+		text-align: center
 
 	&__title
 		@extend %teaser-title--m
 		margin-top: remify(10px)
 
 	&__text
-		@extend %teaser-text-fontsize
+		font-size: remify(18px)
+		line-height: 1.5
 
 	&__button
 		@extend %zar-button-hollow--debate
 		margin: remify(8px) 0
 		vertical-align: middle
+
++respond-min($break-phablet-min)
+	.nextread-advertisement
+		&__media
+			float: right
+			margin: remify(10px) 0 0 $cp-padding
+		&__container
+			+pie-clearfix
+			text-align: left
