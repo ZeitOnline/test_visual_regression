@@ -16,17 +16,13 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-08-10T09:14:20.672560+00:00</attribute>
-    <image xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/angebote/verlagsnextread/images/shop_unser-geheimnisvolles-ich/" type="jpg" title="ZEIT-Edition: Unser geheimnisvolles Ich" alt="ZEIT-Edition: Unser geheimnisvolles Ich" align="left" publication-date="" expires="">
-      <bu>ZEIT-Edition: Unser geheimnisvolles Ich</bu>
-      <copyright>©ZEIT Shop</copyright>
-    </image>
   </head>
   <body>
     <supertitle>publisher</supertitle>
-    <title>ZEIT-Edition »Unser geheimnisvolles Ich«</title>
-    <text>Aktuelles Wissen zu Gehirn, Bewusstsein und Persönlichkeit</text>
-    <button_text>Jetzt Bestellen</button_text>
+    <title>Stellenangebote in Wirtschaft und Lehre</title>
+    <text>Entdecken Sie Jobs mit Perspektive im ZEIT Stellenmarkt.</text>
+    <button_text>Jobs finden</button_text>
     <button_color>d11c08</button_color>
-    <url>http://shop.zeit.de/sortiment/kinderwelt/spielzeug-und-accessoires/2178/zookids-stiftemaeppchen-tom-tiger?c=2853</url>
+    <url>http://jobs.zeit.de/?wt_zmc=cross.int.zonpmr.zeitde.next.stellenmarkt_startseite.bildtext.karriere.x&utm_medium=cross&utm_source=zeitde_zonpmr_int&utm_campaign=next&utm_content=stellenmarkt_startseite_bildtext_karriere_x</url>
   </body>
 </advertisement>
