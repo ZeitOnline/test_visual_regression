@@ -78,8 +78,10 @@
   <!-- Videoplayer Settings, use different players on dev, staging and production -->
   <!-- videoplayer_hp production: 65fa926a-0fe0-4031-8cbf-9db35cecf64a -->
   <setting name="brightcove_videoplayer_hp_cp_single" xsi:type="xsd:string">B1l1tOGXYe</setting>
-  <!-- videoplayer_article production: c09a3b98-8829-47a5-b93b-c3cca8a4b5e9 -->
+  <!-- videoplayer_article production: c09a3b98-8829-47a5-b93b-c3cca8a4b5e9  -->
   <setting name="brightcove_videoplayer_article" xsi:type="xsd:string">rJzskUVKx</setting>
+  <!-- videoplayer_article_wo_ads production: NykzeyfYg  -->
+  <setting name="brightcove_videoplayer_article_wo_ads" xsi:type="xsd:string">SJENxUNKe</setting>
 
   <!-- To enable, insert path to optimizely Script (//cdn.optimizely.com/js/281825380.js).
   To disable, use empty string. Do NOT use "false". -->
