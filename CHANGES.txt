@@ -8,7 +8,7 @@ POSTDEPLOY
 3.79 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT-24: Style article comments for ZEIT Arbeit
 
 
 3.78 (2017-08-10)
