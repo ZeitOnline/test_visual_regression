@@ -1,0 +1,32 @@
+$comment-color-head-background: transparent
+$comment-color-head-color:      $color-text
+$comment-color-head-small:      $zar-grey
+$comment-color-notice:          $zar-darkslate-grey
+
+@import "web.core/modules/comments/comment-section"
+
+// own styles, which differ from core
+
+.comment-section
+
+	&__item
+		padding: 0
+		max-width: $medium-content-width
+		+respond-max($break-tablet-min)
+			+padded
+
+	&__head,
+	&__head + &__message
+		font-family: $font-patronbold
+
+	&__notice
+		color: $comment-color-notice
+		+default-article-textlink($comment-color-notice)
+
+	&__headline
+		small
+			font-family: $font-tabletgothic
+			font-size: remify(14px)
+
+	&__button
+		margin-right: 0
