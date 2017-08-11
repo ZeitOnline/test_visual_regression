@@ -5,12 +5,12 @@
 {% block teaser_journalistic_format %}
 	{%- if teaser.serie %}
 		{%- if teaser.serie.column %}
-		   <span class="{{ self.layout() }}__series-label">{{ teaser.serie.serienname }}</span>
+		   <span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">{{ teaser.serie.serienname }}</span>
 		{%- else %}
-			<span class="{{ self.layout() }}__series-label">Serie: {{ teaser.serie.serienname }}</span>
+			<span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Serie: {{ teaser.serie.serienname }}</span>
 		{%- endif %}
 	{%- elif teaser.blog %}
-		<span class="{{ self.layout() }}__series-label">Blog: {{ teaser.blog.name }}</span>
+		<span class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Blog: {{ teaser.blog.name }}</span>
 	{%- endif %}
 {% endblock teaser_journalistic_format %}
 

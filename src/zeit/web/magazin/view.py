@@ -8,10 +8,6 @@ import zeit.web.core.security
 import zeit.web.core.view
 
 
-def is_zmo_content(context, request):
-    return zeit.magazin.interfaces.IZMOContent.providedBy(context)
-
-
 class Base(zeit.web.core.view.Base):
 
     seo_title_default = (

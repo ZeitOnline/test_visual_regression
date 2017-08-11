@@ -29,9 +29,9 @@
         </author>
       </reference>
     </references>
-    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/karriere/2016-04/gesundheit-mitarbeiter-vegetarier-rauchen-arbeitsplatz-fitness-yoga/" type="jpg" title="gesundheit-mitarbeiter-vegetarier-rauchen-arbeitsplatz-fitness-yoga" alt="gesundheit-mitarbeiter-vegetarier-rauchen-arbeitsplatz-fitness-yoga" publication-date="" expires="">
-      <bu py:pytype="str">Yoga im Büro - im Jahr 1964</bu>
-      <copyright py:pytype="str">© Keystone/Hulton Archive/Getty Images</copyright>
+    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/arbeit/image/03-outdoor-lake-jumping/" type="jpg" title="monarch-boat1" publication-date="" expires="">
+      <bu py:pytype="str">Freiheit ist die Einsicht in die Notwendigkeit. Das scheint heute nicht mehr zu gelten.</bu>
+      <copyright py:pytype="str">© Karin Ceballos Betancur</copyright>
     </image>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str" ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>

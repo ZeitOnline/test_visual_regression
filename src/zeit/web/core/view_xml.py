@@ -75,15 +75,17 @@ class XMLContent(zeit.web.core.view.Base):
 
 @zeit.web.view_config(context=zeit.content.article.interfaces.IArticle,
                       host_restriction='xml')
-@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
-                      host_restriction='xml')
 @zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle,
                       host_restriction='xml')
-@zeit.web.view_config(context=zeit.web.core.article.ILongformArticle,
+@zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
                       host_restriction='xml')
-@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle,
+@zeit.web.view_config(context=zeit.web.magazin.article.ILongformArticle,
                       host_restriction='xml')
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle,
+@zeit.web.view_config(context=zeit.web.magazin.article.IPhotoclusterArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.magazin.article.IShortformArticle,
+                      host_restriction='xml')
+@zeit.web.view_config(context=zeit.web.magazin.article.IColumnArticle,
                       host_restriction='xml')
 class XMLArticle(XMLContent):
 
