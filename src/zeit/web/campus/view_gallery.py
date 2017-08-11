@@ -6,9 +6,9 @@ import zeit.web.core.view_gallery
 
 
 @zeit.web.view_config(
-    renderer='templates/gallery.html',
     context=zeit.content.gallery.interfaces.IGallery,
-    custom_predicates=(zeit.web.campus.view.is_zco_content,))
+    vertical='zco',
+    renderer='templates/gallery.html')
 class Gallery(zeit.web.core.view_gallery.Gallery,
               zeit.web.campus.view.Content):
     pass

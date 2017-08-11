@@ -42,6 +42,18 @@
         image_pattern="original"
         areas="duo"
         />
+    <layout
+        id="zar-debate"
+        title="Debatte"
+        image_pattern=""
+        areas="solo"
+        />
+    <layout
+        id="zar-square"
+        title="quadratischer Teaser"
+        image_pattern="square"
+        areas="duo minor"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"

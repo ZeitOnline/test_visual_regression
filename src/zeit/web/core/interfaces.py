@@ -294,3 +294,12 @@ class IExternalTemporaryImage(zope.interface.Interface):
 
 class IPaywallAccess(zope.interface.Interface):
     """ Get access state of a resource"""
+
+
+class IVertical(zope.interface.Interface):
+    """Returns short identifier string (zon/zmo/zco/zar/zett) to signify which
+    vertical an ICMSContent belongs to.
+
+    This is not quite the same as which zeit.cms.section.ISectionMarker the
+    content has, since we have to handle some additional special cases.
+    """

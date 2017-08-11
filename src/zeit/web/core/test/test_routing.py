@@ -10,7 +10,6 @@ import zeit.content.cp.interfaces
 import zeit.cms.interfaces
 
 import zeit.web
-import zeit.web.core.article
 import zeit.web.core.routing
 
 
@@ -28,12 +27,6 @@ def test_rendered_xml_view_should_not_use_parallel_cp(my_traverser):
     tdict = my_traverser(req)
     assert tdict['context'].uniqueId == (
         'http://xml.zeit.de/parallel_cps/index')
-
-
-def test_feature_longform_should_be_discovered_during_traversal(my_traverser):
-    req = pyramid.request.Request.blank('/feature/feature_longform')
-    tdict = my_traverser(req)
-    assert zeit.web.core.article.IFeatureLongform.providedBy(tdict['context'])
 
 
 def test_parallel_cps_should_be_discovered_during_traversal(my_traverser):

@@ -115,14 +115,6 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
 
 
 @zeit.web.register_test
-def zmo_content(content):
-    # XXX Stopgap until longforms are not IZMOContent anymore (ZON-2411).
-    return not getattr(content, 'uniqueId', '').replace(
-        zeit.cms.interfaces.ID_NAMESPACE, '', 1).startswith('feature') and (
-            zeit.magazin.interfaces.IZMOContent.providedBy(content))
-
-
-@zeit.web.register_test
 def zplus_abo_content(content):
     if not toggles('reader_revenue'):
         return False
@@ -204,35 +196,27 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         if zplus == 'only':
             return templates
 
+    vertical = zeit.web.core.interfaces.IVertical(teaser)
     # exclusive icons, set and return
-    if zmo_content(teaser) and area_kind != 'zmo-parquet':
+    if vertical == 'zmo' and area_kind != 'zmo-parquet':
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
         templates.append('liveblog')
         return templates
-    if zett_content(teaser):
+    if vertical == 'zett':
         templates.append('logo-zett-small')
         return templates
 
     # inclusive icons may appear both
     if tag_with_logo_content(teaser, area_kind) and not zplus_icon:
         templates.append('taglogo')
-    if zco_content(teaser) and area_kind != 'zco-parquet':
+    if vertical == 'zco' and area_kind != 'zco-parquet':
         templates.append('logo-zco')
+    if vertical == 'zar' and area_kind != 'zar-parquet':
+        templates.append('logo-zar')
 
     return templates
-
-
-@zeit.web.register_test
-def zett_content(content):
-    return zeit.content.link.interfaces.ILink.providedBy(
-        content) and content.url.startswith('http://ze.tt')
-
-
-@zeit.web.register_test
-def zco_content(content):
-    return zeit.campus.interfaces.IZCOContent.providedBy(content)
 
 
 @zeit.web.register_test
@@ -268,13 +252,8 @@ def paragraph(block):
 
 
 @zeit.web.register_filter
-def vertical_prefix(content):
-    verticals = [('zco', 'zco_content'), ('zmo', 'zmo_content'), (
-        'zett', 'zett_content')]
-    for code, testname in verticals:
-        if globals()[testname](content):
-            return code
-    return ''
+def vertical(content):
+    return zeit.web.core.interfaces.IVertical(content)
 
 
 @zeit.web.register_filter

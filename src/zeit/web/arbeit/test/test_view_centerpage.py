@@ -25,7 +25,7 @@ def test_zar_teaser_small_has_correct_structure(testbrowser):
     assert len(select('.teaser-small__byline')) == 5
     assert len(select('.series-label')) == 2
     # Fallback image if article/teaser has none
-    assert 2 == len(select(
+    assert 1 == len(select(
         '.teaser-small img[src*="/zeit-magazin/default/teaser_image/"]'))
 
 

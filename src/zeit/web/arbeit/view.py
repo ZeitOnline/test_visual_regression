@@ -24,11 +24,6 @@ def arbeit_topiclink(context):
         should_cache_fn=bool)
 
 
-def is_zar_content(context, request):
-    return zeit.web.core.application.FEATURE_TOGGLES.find(
-        'arbeit') and zeit.arbeit.interfaces.IZARContent.providedBy(context)
-
-
 class Base(zeit.web.core.view.Base):
 
     seo_title_default = u'ZEIT Arbeit ONLINE | arbeiten. leben.'
