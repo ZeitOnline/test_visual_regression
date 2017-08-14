@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
+
+
 def test_zar_teaser_lead_has_correct_structure(testbrowser):
     select = testbrowser('/arbeit/centerpage/teaser-lead').cssselect
     assert len(select('.teaser-lead')) == 4
@@ -74,7 +81,7 @@ def test_zar_teaser_topic_has_correct_structure(testbrowser):
         '.teaser-topic img[src*="/zeit-magazin/default/teaser_image/"]'))
 
 
-def test_zar_steaser_topic_should_display_no_image_on_mobile(
+def test_zar_teaser_topic_should_display_no_image_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(320, 480)
@@ -84,3 +91,25 @@ def test_zar_steaser_topic_should_display_no_image_on_mobile(
     assert len(teaser_images) == 3
     for teaser_image in teaser_images:
         assert teaser_image.is_displayed() is False
+
+
+def test_zar_teasers_zo_zplus_provide_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}#debug-clicktracking'
+    driver = selenium_driver
+    driver.set_window_size(600, 320)
+    driver.get(url.format('/arbeit/centerpage/teasers-to-zplus-registration'))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.teaser-duo[data-zplus="zplus-register"]')))
+    except TimeoutException:
+        assert False, 'teaser with zplus must be present'
+
+    link = driver.find_element_by_css_selector(
+        '.teaser-duo--dark .teaser-duo__combined-link')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'phablet.duo.2.2.teaser-duo-zplus-register.text|')
