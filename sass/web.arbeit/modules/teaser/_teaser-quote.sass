@@ -24,6 +24,13 @@
 		+on-interaction
 			color: currentColor
 
+	&__quotelink
+		position: relative
+		z-index: 2
+		text-shadow: 1px 1px $zar-sun-yellow, -1px 1px $zar-sun-yellow, -1px -1px $zar-sun-yellow, 1px -1px $zar-sun-yellow
+		&--on-red
+			text-shadow: 1px 1px $zar-darkish-pink, -1px 1px $zar-darkish-pink, -1px -1px $zar-darkish-pink, 1px -1px $zar-darkish-pink
+
 	&__headingwrapper
 
 	&__heading,
@@ -56,6 +63,7 @@
 		right: remify(6px)
 		width: 25%
 		filter: grayscale(100%) contrast(150%)
+		z-index: 1
 
 // same height as other duo teasers on desktop for "modern" browsers
 // TODO: bei noJS ists doof.

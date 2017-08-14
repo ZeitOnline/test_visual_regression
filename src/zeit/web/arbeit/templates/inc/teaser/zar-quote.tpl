@@ -6,7 +6,7 @@
 
 {% block teaser_allcontent %}
     {% block teaser_text %}
-        <a class="{{ self.layout() }}__quotelink"
+        <a class="{% block quotelink_class %}{{ self.layout() }}__quotelink{% endblock %}"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url | append_campaign_params }}">
             <p class="{{ self.layout() }}__text">
