@@ -1,4 +1,5 @@
-.debatebox
+// debatebox on CP (same HTML as articleblock, different styles)
+.debatebox-on-cp
 	background-color: $primary-color
 	font-family: $font-tabletgothic
 	margin: remify(14px) 0
@@ -7,27 +8,18 @@
 
 	&__button
 		@extend %zar-button-hollow--debate
+		margin-bottom: 0 // the debatebox has its own margin
 
-	&__container
+	&__wrapper
+		+debatebox-speechbubble-arrow(#ffffff)
 		background-color: #ffffff
 		margin-bottom: 30px
 		padding: remify(19px 17px)
-		position: relative
-		&:after
-			border-right: 27px solid transparent
-			border-top: 27px solid #ffffff
-			bottom: remify(-26px)
-			content: ""
-			display: block
-			left: 50%
-			margin-left: remify(-13px)
-			position: absolute
 
 	&__kicker
 		@extend %teaser-kicker--s
 
 	&__media
-		// TODO: Bild muss vmtl vom Teaser (Pseudo-Artikel??) kommen
 		background-image: url('/static/latest/images/arbeit/debate/paper.png')
 		background-position: center
 		background-repeat: no-repeat
@@ -55,12 +47,11 @@
 			@extend %zar-button-hollow
 
 +respond-min($break-tablet-min)
-	.debatebox
+	.debatebox-on-cp
 		margin: $vertical-space 0
-		// TODO: Lieber mit max-width arbeiten, wie überall?
 		padding: remify(50px 100px)
 
-		&__container
+		&__wrapper
 			+pie-clearfix
 			padding: remify(49px 27px)
 			text-align: left
@@ -74,7 +65,7 @@
 			height: remify(131px)
 			float: left
 
-		&__right
+		&__container
 			padding-left: remify(173px)
 
 		&__title
@@ -83,8 +74,8 @@
 			line-height: remify(43px)
 
 +respond-min($break-desktop-min)
-	.debatebox
-		&__container
+	.debatebox-on-cp
+		&__wrapper
 			padding: remify(49px 40px)
-		&__right
+		&__container
 			padding-left: remify(193px)

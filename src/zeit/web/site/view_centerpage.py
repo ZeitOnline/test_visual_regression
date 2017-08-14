@@ -30,14 +30,13 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
-@zeit.web.view_config(
+@zeit.web.view_defaults(
     context=zeit.content.cp.interfaces.ICP2015,
-    custom_predicates=(zeit.web.site.view.is_zon_content,
-                       zeit.web.core.view.is_advertorial),
+    vertical='zon')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
     renderer='templates/centerpage_advertorial.html')
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICP2015,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
 class Centerpage(
         zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
@@ -75,8 +74,8 @@ class Centerpage(
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
-    custom_predicates=(zeit.web.site.view.is_zon_content,
-                       zeit.web.core.view.is_paginated),
+    vertical='zon',
+    custom_predicates=(zeit.web.core.view.is_paginated,),
     renderer='templates/centerpage.html')
 class CenterpagePage(zeit.web.core.view_centerpage.CenterpagePage, Centerpage):
     pass
@@ -84,8 +83,8 @@ class CenterpagePage(zeit.web.core.view_centerpage.CenterpagePage, Centerpage):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
-    custom_predicates=(zeit.web.site.view.is_zon_content,
-                       zeit.web.core.view.is_paywalled))
+    vertical='zon',
+    custom_predicates=(zeit.web.core.view.is_paywalled,))
 def temporary_redirect_paywalled_centerpage(context, request):
     """ Centerpages with a paywall actually don't really exist.
     However, a Centerpage which is based on the newest volume object
@@ -149,7 +148,7 @@ class CenterpageArea(Centerpage):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.IStoryStream,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
+    vertical='zon',
     renderer='templates/storystream.html')
 class Storystream(Centerpage):
     """Main view class for ZEIT ONLINE storystreams."""
@@ -198,14 +197,13 @@ class Storystream(Centerpage):
         self.atom_meta['latest_date'] = latest_atom
 
 
-@zeit.web.view_config(
+@zeit.web.view_defaults(
     context=zeit.content.cp.interfaces.ICenterPage,
-    custom_predicates=(zeit.web.site.view.is_zon_content,
-                       zeit.web.core.view.is_advertorial),
+    vertical='zon')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
     renderer='templates/centerpage_advertorial.html')
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICenterPage,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
 class LegacyCenterpage(Centerpage):
     """Legacy view for centerpages built with the old cp-editor."""

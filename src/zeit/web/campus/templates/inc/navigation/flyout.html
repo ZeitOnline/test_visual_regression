@@ -1,34 +1,15 @@
 {% import 'zeit.web.campus:templates/macros/layout_macro.tpl' as lama %}
-{% if toggles('campus_toolbox') -%}
-<aside class="nav-flyout" data-ct-row="2" data-ct-column="5">
+
+<aside class="nav-flyout" data-ct-row="2" data-ct-column="6">
     <ul class="nav-flyout__list">
-        {% for link in view.toolbox %}
-            <li class="nav-flyout__item">
-                <a href="{{ link.href }}" class="nav-flyout__link">
-                    <p class="nav-flyout__headline">{{ link.title_flyout }}</p>
-                    <p class="nav-flyout__text">{{ link.cta_flyout }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</p>
-                </a>
-            </li>
-        {% endfor %}
+        {% for link in view.flyoutnavi -%}
+        <li class="nav-flyout__item">
+            <a href="{{ link.href }}" class="nav-flyout__link">
+                <p class="nav-flyout__headline">{{ link.title_flyout }}</p>
+                <p class="nav-flyout__text">{{ link.cta_flyout }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</p>
+            </a>
+        </li>
+        {% endfor -%}
     </ul>
-    <div class="nav-flyout__footer">
-        {% for link in view.toolbox %}
-            <a href="{{ link.href_footer }}" class="nav-flyout__footer-link nav-flyout__footer-link--multiple">{{ link.href_footer_text }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</a>
-        {% endfor %}
-    </div>
+    <a href="{{ view.flyoutnavi.footer_link }}" class="nav-flyout__footer-link">{{ view.flyoutnavi.footer_text }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</a>
 </aside>
-{% else %}
-<aside class="nav-flyout" data-ct-row="2" data-ct-column="5">
-    <ul class="nav-flyout__list">
-        {% for link in view.toolbox %}
-            <li class="nav-flyout__item">
-                <a href="{{ link.href }}" class="nav-flyout__link">
-                    <p class="nav-flyout__headline">{{ link.title_flyout }}</p>
-                    <p class="nav-flyout__text">{{ link.cta_flyout }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</p>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{{ view.toolbox.footer_link }}" class="nav-flyout__footer-link">{{ view.toolbox.footer_text }} {{ lama.use_svg_icon('arrow-right', 'nav-flyout__arrow', view.package) }}</a>
-</aside>
-{% endif %}

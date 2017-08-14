@@ -5,7 +5,21 @@ POSTDEPLOY
 ----------
 
 
-3.78 (unreleased)
+3.80 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.79 (2017-08-14)
+-----------------
+
+- ARBEIT-24: Style article comments for ZEIT Arbeit
+
+- ARBEIT-94: Debatebox uses infobox as content source on ZEIT Arbeit
+
+
+3.78 (2017-08-10)
 -----------------
 
 - ZON-3677: Transmit push payload template to webtrekk
@@ -16,7 +30,14 @@ POSTDEPLOY
 
 - ZON-4162: Update zeit.content.video
 
+- ARBEIT-101: Add ZAR badge to articles in ZON
+
 - BUG-767: Hide P5 if no comments are displayed
+
+- FIX: STOA toolbox fix and add flyout nav as module
+
+- MAINT: Introduce IVertical adapter, replace is_*_content view custom
+  predicates with a dedicated predicate
 
 
 3.77.1 (2017-08-08)

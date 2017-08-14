@@ -57,13 +57,33 @@
   </head>
   <body xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <supertitle>ZEIT Arbeit</supertitle>
-	<title>Modul Debatte</title>
-	<cluster area="id-a2dff7f3-9042-4a6f-b22d-143fdfc5cff3" kind="solo">
-		<region area="id-122f9c43-8a0e-4551-9636-8126ed4ea33d" kind="solo">
-			<container cp:type="cpextra" module="debate" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f11c673478">
-				<cp_extra for="zeit.content.cp.interfaces.IArea" />
-			</container>
-		</region>
-	</cluster>
+    <title>teaser quote</title>
+
+    <cluster area="id-41a2899d-b569-4c42-b713-d5bdbd86a64f" kind="duo">
+      <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a63f" kind="duo">
+        <container cp:type="teaser" module="zar-quote-yellow" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe2b">
+          <block uniqueId="http://xml.zeit.de/arbeit/teaser/quote"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a62f" kind="duo">
+        <container cp:type="teaser" module="zar-quote-red" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be3b">
+          <block uniqueId="http://xml.zeit.de/arbeit/teaser/quote-column"></block>
+        </container>
+      </region>
+    </cluster>
+
+    <cluster area="id-41a2899d-b569-4c42-b714-d5bdbd86a64f" kind="duo">
+      <region area="id-41a2899d-b569-4c42-b714-bd5dbd68a63f" kind="duo">
+        <container cp:type="teaser" module="zar-quote-red" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe8b">
+          <block uniqueId="http://xml.zeit.de/arbeit/teaser/quote-column-noimage"></block>
+        </container>
+      </region>
+      <region area="id-41a2899d-b569-4c42-b714-bd5dbd68a62f" kind="duo">
+        <container cp:type="teaser" module="zar-quote-yellow" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be1b">
+          <block uniqueId="http://xml.zeit.de/arbeit/teaser/serie"></block>
+        </container>
+      </region>
+    </cluster>
+
   </body>
 </centerpage>

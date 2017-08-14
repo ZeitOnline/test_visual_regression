@@ -453,7 +453,7 @@ def sharing_image_for_article(context):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         image.group = zeit.cms.interfaces.ICMSContent(
             conf['breaking_news_fallback_image'], None)
-    elif zeit.web.site.view_article.is_column_article(context, None):
+    elif zeit.web.core.article.IColumnArticle.providedBy(context):
         image = zope.component.queryAdapter(
             context, zeit.web.core.interfaces.IImage, 'author')
 

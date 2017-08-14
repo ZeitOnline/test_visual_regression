@@ -48,6 +48,9 @@ $layout: ".teaser-square"
 		&--zco
 			@extend %teaser-kicker--zco
 			color: #fff
+		&--zar
+			@extend %teaser-kicker--zar
+			color: #fff
 	article[data-zplus] &__kicker,
 	article[data-taglogo] &__kicker
 		align-items: center
@@ -70,8 +73,13 @@ $layout: ".teaser-square"
 		&--tag
 			@extend %teaser-kicker-logo--tag
 			color: inherit
+		&--zar
+			@extend %teaser-kicker-logo--zar
+			color: inherit
 	&__series-label
 		margin-bottom: 0
+		&--zar
+			text-transform: none
 		&:after
 			content: " –" // attention: mdash
 	&__title
@@ -138,6 +146,13 @@ $layout: ".teaser-square"
 		margin-top: remify(26px)
 		vertical-align: middle
 		width: remify(146px)
+
+	&__zar-logo
+		$logo_format: (122/30)
+		height: remify(122px/$logo_format)
+		margin-top: remify(26px)
+		vertical-align: middle
+		width: remify(122px)
 
 	&--zmo
 		#{$layout}__series-label,
