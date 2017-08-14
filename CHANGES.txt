@@ -5,7 +5,13 @@ POSTDEPLOY
 ----------
 
 
-3.79 (unreleased)
+3.80 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.79 (2017-08-14)
 -----------------
 
 - ARBEIT-24: Style article comments for ZEIT Arbeit
