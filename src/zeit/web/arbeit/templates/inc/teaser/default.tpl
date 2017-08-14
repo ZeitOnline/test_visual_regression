@@ -20,6 +20,13 @@
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url | append_campaign_params }}">
+                    {% block zplus_kicker_logo %}
+                        {% if teaser is zplus_abo_content %}
+                            {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--s svg-symbol--hide-ie', view.package, a11y=False) }}
+                        {% elif teaser is zplus_registration_content and toggles('zplus_badge_gray') %}
+                            {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo-register zplus-logo--s svg-symbol--hide-ie', view.package, a11y=False) }}
+                        {% endif %}
+                    {% endblock %}
                     {% block teaser_kicker %}
                         {% if teaser.teaserSupertitle or teaser.supertitle %}
                             <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
