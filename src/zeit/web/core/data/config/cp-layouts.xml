@@ -42,6 +42,11 @@
         image_pattern="square"
         areas="duo minor"
         />
+    <layout
+        id="zar-topiccluster"
+        title="Teaser in Themen-Cluster"
+        areas="solo"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"
