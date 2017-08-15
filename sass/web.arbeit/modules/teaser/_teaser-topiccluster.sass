@@ -1,20 +1,14 @@
 $teaser-topiccluster-bordercolor: red // $zar-white
 
 .cp-area--topiccluster
+	+padded
 	background: #eeeef0
 	color: $color-text
 	text-align: center
 
 .teaser-topiccluster
 	margin: 0
-
-	&__container
-		margin: 0 $page-padding--small
-		border-bottom: 1px $teaser-topiccluster-bordercolor solid
-
-	// TODO: DRY
-	&:last-child > .teaser-topiccluster__container
-		border-bottom: none
+	border-bottom: 1px $teaser-topiccluster-bordercolor solid
 
 	&__heading
 		margin: 0
@@ -31,14 +25,33 @@ $teaser-topiccluster-bordercolor: red // $zar-white
 		font-size: 18px
 		line-height: 1.4
 
++respond-max($break-phablet-min)
+	.teaser-topiccluster:last-of-type
+		border-bottom: none
+
 +respond-min($break-phablet-min)
+	+respond-max($break-tablet-min)
+		.cp-area--topiccluster
+			display: grid
+			grid-template-columns: 1fr 1fr
+
+		.teaser-topiccluster:nth-of-type(2n)
+			border-left: 1px $teaser-topiccluster-bordercolor solid
+
+		// odd number of items: last one spans two columns
+		.teaser-topiccluster:nth-of-type(2n+1):last-of-type
+			border-bottom: none
+			grid-column-start: 1
+			grid-column-end: 3
+
++respond-min($break-tablet-min)
 	.cp-area--topiccluster
 		display: grid
-		grid-template-columns: 1fr 1fr
-	.teaser-topiccluster
+		grid-template-columns: 1fr 1fr 1fr
 
-		&__heading
-			margin: remify(($page-padding--small) (-$page-padding--small))
+	.teaser-topiccluster:not(:nth-of-type(3n+1))
+		border-left: 1px $teaser-topiccluster-bordercolor solid
+
 
 +respond-min($break-phablet-min)
 	+respond-max($break-tablet-min)
