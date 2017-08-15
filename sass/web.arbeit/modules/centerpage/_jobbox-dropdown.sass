@@ -57,6 +57,8 @@ $jobbox-border-width: 6px
 +respond-min($break-tablet-min)
 	html.flexbox
 		.jobbox-dropdown
-			height: 100%
-			margin-bottom: 0
-			margin-top: 0
+			+teaser-duo-equal-height
+	html.no-js
+		@supports (display: flex)
+			.jobbox-dropdown
+				+teaser-duo-equal-height

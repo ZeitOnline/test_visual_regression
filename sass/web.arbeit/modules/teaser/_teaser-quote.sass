@@ -67,16 +67,12 @@
 +respond-min($break-tablet-min)
 	html.flexbox
 		.teaser-quote
-			height: 100%
-			margin-bottom: 0
-			margin-top: 0
+			+teaser-duo-equal-height
 
 	// noJS fallback flexbox for capable browsers
 	html.no-js
 		@supports(display: flex)
 			.teaser-quote
-				height: 100%
-				margin-bottom: 0
-				margin-top: 0
+				+teaser-duo-equal-height
 
 // TODO: Pfeil als CSS after Ding ... zieht er dann das letzte Wort auf die neue Zeile?
