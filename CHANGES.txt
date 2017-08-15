@@ -5,10 +5,24 @@ POSTDEPLOY
 ----------
 
 
-3.79 (unreleased)
+3.80 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT-7: Implement quote teaser for ZEIT Arbeit
+
+
+3.79.1 (2017-08-15)
+-------------------
+
+- HOTFIX: Disable INFOnline surveys on FBIA
+
+
+3.79 (2017-08-14)
+-----------------
+
+- ARBEIT-24: Style article comments for ZEIT Arbeit
+
+- ARBEIT-94: Debatebox uses infobox as content source on ZEIT Arbeit
 
 
 3.78 (2017-08-10)

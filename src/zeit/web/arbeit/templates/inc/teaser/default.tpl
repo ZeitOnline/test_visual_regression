@@ -9,6 +9,8 @@
     {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
     {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %} itemscope itemtype="http://schema.org/Article" itemref="publisher">
 
+    {% block teaser_allcontent %}
+
     {% block teaser_label %}{% endblock %}
     {% block teaser_media %}{% endblock %}
 
@@ -77,6 +79,8 @@
             {% endblock teaser_metadata_default %}
         {% endblock %}
     </div>
+
+    {% endblock teaser_allcontent %}
 
 </article>
 {% endblock %}

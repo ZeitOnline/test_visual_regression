@@ -60,6 +60,26 @@ def test_zar_paywall_switch_showing_forms(c1_parameter, testbrowser):
             '.gate--register')) == int('anonymous' in c1_parameter)
 
 
+def test_zar_article_zplus_comments_under_register_article(testbrowser):
+    c1_param = '?C1-Meter-Status=paywall&C1-Meter-User-Status=anonymous'
+    path = '/arbeit/article/comments'
+    url = '{}{}'.format(path, c1_param)
+    browser = testbrowser(url)
+
+    assert len(browser.cssselect('.paragraph--faded')) == 1
+    assert len(browser.cssselect('.gate')) == 1
+    assert len(browser.cssselect('.comment-section')) == 1
+
+
+def test_zar_article_zplus_comments_not_under_abo_article(testbrowser):
+    c1_param = '?C1-Meter-Status=always_paid'
+    path = '/arbeit/article/comments'
+    url = '{}{}'.format(path, c1_param)
+    browser = testbrowser(url)
+
+    assert len(browser.cssselect('.comment-section')) == 0
+
+
 def test_zar_article_paginated_has_headerimage_only_on_first_page(testbrowser):
     browser = testbrowser('/arbeit/article/01-digitale-nomaden/')
     assert len(browser.cssselect('.article__media--header-image')) == 1
