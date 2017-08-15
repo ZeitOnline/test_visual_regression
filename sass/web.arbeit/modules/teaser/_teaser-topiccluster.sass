@@ -1,18 +1,23 @@
 $teaser-topiccluster-bordercolor: red // $zar-white
 
-.teaser-topiccluster
+.cp-area--topiccluster
 	background: #eeeef0
 	color: $color-text
-	margin: 0
 	text-align: center
 
+.teaser-topiccluster
+	margin: 0
+
 	&__container
-		margin: $page-padding--small
+		margin: 0 $page-padding--small
 		border-bottom: 1px $teaser-topiccluster-bordercolor solid
 
 	// TODO: DRY
 	&:last-child > .teaser-topiccluster__container
 		border-bottom: none
+
+	&__heading
+		margin: 0
 
 	&__combined-link
 		@extend %teaser-combined-link
@@ -21,35 +26,39 @@ $teaser-topiccluster-bordercolor: red // $zar-white
 		+on-interaction
 			color: $zar-darkish-pink
 
-	&__heading
-		margin: remify(($page-padding--small) (-$page-padding--small))
-
 	&__title
 		@extend %teaser-title
 		font-size: 18px
 		line-height: 1.4
 
 +respond-min($break-phablet-min)
+	.cp-area--topiccluster
+		display: grid
+		grid-template-columns: 1fr 1fr
+	.teaser-topiccluster
+
+		&__heading
+			margin: remify(($page-padding--small) (-$page-padding--small))
+
++respond-min($break-phablet-min)
 	+respond-max($break-tablet-min)
-		.teaser-topiccluster
-			float: left
+		.teaser-topiccluster__bla
 			width: 50%
-		.teaser-topiccluster:nth-of-type(2n) > .teaser-topiccluster__container > .teaser-topiccluster__heading
-			border-left: 1px $teaser-topiccluster-bordercolor solid
-		.teaser-topiccluster:nth-of-type(n+3) > .teaser-topiccluster__container,
-		.teaser-topiccluster:nth-of-type(n+3) > .teaser-topiccluster__container > .teaser-topiccluster__heading
-			margin-top: 0
-		.teaser-topiccluster:nth-last-child(-n+2) > .teaser-topiccluster__container
-			border-bottom: none
+			&:nth-of-type(2n) > .teaser-topiccluster__container > .teaser-topiccluster__heading
+				border-left: 1px $teaser-topiccluster-bordercolor solid
+			&:nth-of-type(n+3) > .teaser-topiccluster__container,
+			&:nth-of-type(n+3) > .teaser-topiccluster__container > .teaser-topiccluster__heading
+				margin-top: 0
+			&:nth-last-child(-n+2) > .teaser-topiccluster__container
+				border-bottom: none
 
 +respond-min($break-tablet-min)
-	.teaser-topiccluster
-		float: left
+	.teaser-topiccluster__bla
 		width: 33.3%
-	.teaser-topiccluster:not(:nth-of-type(3n+1)) > .teaser-topiccluster__container > .teaser-topiccluster__heading
-		border-left: 1px $teaser-topiccluster-bordercolor solid
-	.teaser-topiccluster:nth-of-type(n+4) > .teaser-topiccluster__container,
-	.teaser-topiccluster:nth-of-type(n+4) > .teaser-topiccluster__container > .teaser-topiccluster__heading
-		margin-top: 0
-	.teaser-topiccluster:nth-last-child(-n+3) > .teaser-topiccluster__container
-		border-bottom: none
+		&:not(:nth-of-type(3n+1)) > .teaser-topiccluster__container > .teaser-topiccluster__heading
+			border-left: 1px $teaser-topiccluster-bordercolor solid
+		&:nth-of-type(n+4) > .teaser-topiccluster__container,
+		&:nth-of-type(n+4) > .teaser-topiccluster__container > .teaser-topiccluster__heading
+			margin-top: 0
+		&:nth-last-child(-n+3) > .teaser-topiccluster__container
+			border-bottom: none

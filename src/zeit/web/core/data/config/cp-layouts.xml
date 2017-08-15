@@ -45,7 +45,7 @@
     <layout
         id="zar-topiccluster"
         title="Teaser in Themen-Cluster"
-        areas="solo"
+        areas="topiccluster"
         />
     <!-- ZCO only -->
     <layout

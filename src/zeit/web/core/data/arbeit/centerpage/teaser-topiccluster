@@ -59,12 +59,10 @@
     <supertitle>ZEIT Arbeit</supertitle>
     <title>teaser topiccluster (to topic CPs)</title>
     <cluster area="id-41a2899d-b569-4c42-b713-d5bdbd86a64f" kind="solo">
-      <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a64f" kind="solo">
-        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e357dbf3be1b" force_mobile_image="True">
+      <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a64f" kind="topiccluster">
+        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-d4e51b5a-245d-4c6f-b57a-e357dbf3be1b">
           <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/centerpage/teaser-debate">
-
           </block>
-          <teaser><supertitle>TEST</supertitle></teaser>
         </container>
         <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe2b">
           <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/centerpage/teaser-duo"></block>
@@ -72,7 +70,10 @@
         <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be3b">
           <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/serie"></block>
         </container>
-        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-d4e51b5a-215d-4c6f-b57a-e357dbf3be1b" force_mobile_image="True">
+        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-d4e51b5b-245d-4c6f-5c7b-e35d7bf3be3b">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/long"></block>
+        </container>
+        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-d4e51b5a-215d-4c6f-b57a-e357dbf3be1b">
           <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/article/01-digitale-nomaden"></block>
         </container>
         <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-4de7b1a5-245d-4c6f-b57a-e357db3fbe2b">
