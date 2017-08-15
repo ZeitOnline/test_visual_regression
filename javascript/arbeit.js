@@ -4,6 +4,7 @@ var $ = require( 'jquery' ),
     menu = require( 'web.core/menu' ),
     main = $( '#main' ),
     article = $( '#js-article' ),
+    comments = require( 'web.core/comments' ),
     pageType = document.body.getAttribute( 'data-page-type' );
 
 // initialize modules
@@ -18,9 +19,14 @@ require( 'web.core/plugins/jquery.toggleRegions' );
 require( 'web.core/plugins/jquery.dropdownLink' );
 require( 'web.core/plugins/jquery.inlinegallery' );
 require( 'web.core/plugins/jquery.infobox' );
+require( 'web.core/plugins/jquery.countFormchars' );
 
 $.notifications();
 
+if ( article.length ) {
+    comments.init();
+    $( '.comment-section' ).countFormchars();
+}
 
 if ( pageType === 'centerpage' ) {
     $( '.js-dropdownlink' ).dropdownLink();
