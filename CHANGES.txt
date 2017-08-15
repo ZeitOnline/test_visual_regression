@@ -5,8 +5,8 @@ POSTDEPLOY
 ----------
 
 
-3.79.1 (unreleased)
------------------
+3.79.1 (2017-08-15)
+-------------------
 
 - HOTFIX: Disable INFOnline surveys on FBIA
 
