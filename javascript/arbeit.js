@@ -35,3 +35,5 @@ if ( pageType === 'centerpage' ) {
     main.find( '.js-gallery' ).inlinegallery();
     main.find( '.js-infobox' ).infobox();
 }
+
+$( '.js-image-copyright-footer' ).imageCopyrightFooter();
