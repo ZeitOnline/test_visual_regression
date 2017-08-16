@@ -1,18 +1,20 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
-    <image base-id="http://xml.zeit.de/arbeit/image/03-outdoor-lake-jumping/" type="jpg" align="left" publication-date="" expires="">
-    </image>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/arbeit/teaser/simple-zplus" contenttype="article" />
+    </references>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">free</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Christina Felschen, Karin Geil, Tobias Dorfer, Mounia Meiborg und Matthias Breitinger, Berlin und Oliver Hollenstein, Christoph Twickel, Alexander Tieg und Steffen Richter, Hamburg</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">sid</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT Online</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-01T15:12:07+00:00</attribute>
@@ -64,11 +66,11 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <supertitle>Unser Sohn wurde geboren und ich ersehnte den Moment, an dem ich endlich die Arbeitswelt hinter mir lassen konnte.</supertitle>
-    <title>Ich bin Papa und habe 10 Monate Elternzeit genommen – es war die beste und lehrreichste Zeit meines Lebens</title>
-    <subtitle>Immer mehr Väter bleiben viele Monate mit ihren Kindern zu Hause. Sie verändern die Welt, denn sie schaffen Vorbilder für ihre Kinder, entlasten ihre Partnerinnen und werden zugänglich für Gefühle. Aber leider sind sie weiterhin eine Minderheit.</subtitle>
+    <supertitle>Dummy Content</supertitle>
+    <title>Artikel mit Z+ Nextread</title>
+    <subtitle>Dieser Artikel hat einen Nextread. Der Nextread-Artikel ist abopflichtig.</subtitle>
     <division type="page">
-      <p>Esse franzen iceland irure mixtape adaptogen veniam before they sold out in yr biodiesel listicle. Lyft aliqua sustainable literally, put a bird on it dolor mollit. YOLO kickstarter organic synth echo park hoodie est. Mollit four dollar toast aliqua, godard raclette bushwick selfies man braid. Proident craft beer austin health goth pinterest celiac cray laboris tacos keytar gochujang. Asymmetrical shabby chic post-ironic occupy. Normcore butcher vape hoodie, shoreditch dolore raw denim scenester slow-carb sed yuccie tempor twee. Laborum keytar lo-fi next level. Fam slow-carb kitsch scenester chia lomo.</p>
+      <p>A blend of lambic beers brewed at 3 Fonteinen, with an addition of 30% whole fresh raspberries from the fabled Payottenland and 5% sour cherries. This unfiltered beer will enjoy a spontaneous refermentation in the bottle. No artificial colors or flavor enhancers are added. Lambic is brewed only from 60% barley malt, 40% unmalted wheat, hops and water.</p>
     </division>
   </body>
 </article>
