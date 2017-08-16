@@ -8,7 +8,15 @@ POSTDEPLOY
 3.80 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT-7: Implement quote teaser for ZEIT Arbeit
+
+- ARBEIT-70: Implement editorial+advertising nextread for ZEIT Arbeit
+
+
+3.79.1 (2017-08-15)
+-------------------
+
+- HOTFIX: Disable INFOnline surveys on FBIA
 
 
 3.79 (2017-08-14)

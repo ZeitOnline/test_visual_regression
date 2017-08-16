@@ -1,0 +1,78 @@
+.teaser-quote
+	@extend %teaser
+	background-color: $zar-sun-yellow
+	margin: remify(14px) $page-padding--small
+	padding: remify(20px 16px)
+	position: relative
+
+	// text on top and bottom of the teaser
+	display: flex
+	flex-direction: column
+	justify-content: space-between
+
+	+respond-min($break-tablet-min)
+		margin: $vertical-space $cp-padding
+		padding: remify(40px)
+
+	&__text
+		@extend %teaser-title--s
+		margin-top: 0
+
+	&__combined-link,
+	&__quotelink
+		@extend %teaser-combined-link
+		+on-interaction
+			color: currentColor
+
+	&__quotelink
+		position: relative
+		z-index: 2
+		text-shadow: 1px 1px $zar-sun-yellow, -1px 1px $zar-sun-yellow, -1px -1px $zar-sun-yellow, 1px -1px $zar-sun-yellow
+		&--on-red
+			text-shadow: 1px 1px $zar-darkish-pink, -1px 1px $zar-darkish-pink, -1px -1px $zar-darkish-pink, 1px -1px $zar-darkish-pink
+
+	&__heading,
+	&__byline
+		@extend %teaser-text-fontsize
+		font-family: $font-franziska
+		font-weight: normal
+
+	&__headingwrapper
+		width: 80%
+
+	&__byline-arrow
+		fill: currentColor
+
+	&__heading
+		margin: remify(20px 0 0)
+
+	&__kicker
+		display: block
+		font-style: italic
+
+	&--red
+		+font-smoothing
+		background-color: $zar-darkish-pink
+		color: #fff
+
+	&__media
+		bottom: 0
+		position: absolute
+		right: remify(6px)
+		width: 25%
+		filter: grayscale(100%) contrast(150%)
+		z-index: 1
+
+// same height as other duo teasers on desktop for "modern" browsers
++respond-min($break-tablet-min)
+	html.flexbox
+		.teaser-quote
+			+teaser-duo-equal-height
+
+	// noJS fallback flexbox for capable browsers
+	html.no-js
+		@supports(display: flex)
+			.teaser-quote
+				+teaser-duo-equal-height
+
+// TODO: Pfeil als CSS after Ding ... zieht er dann das letzte Wort auf die neue Zeile?
