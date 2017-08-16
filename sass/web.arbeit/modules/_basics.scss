@@ -2,6 +2,13 @@ $color-exclamation-background: $color-text--light;
 
 @import "web.core/modules/basics";
 
+@mixin zar-button-hollow-defaults {
+	@include font-smoothing;
+	font-family: $font-patronbold;
+	text-transform: none;
+	font-variant-ligatures: none;
+}
+
 %zar-button-hollow {
 @include zon-button(
 	$color: $primary-color,
@@ -15,9 +22,7 @@ $color-exclamation-background: $color-text--light;
 	$border-color: $primary-color,
 	$margin: remify(14px 6px 14px 0)
 	);
-@include font-smoothing;
-font-family: $font-patronbold;
-text-transform: none;
+@include zar-button-hollow-defaults;
 }
 
 %zar-button-hollow--jobs {
@@ -33,9 +38,7 @@ text-transform: none;
 		$border-color: $color-jobs-elements,
 		$margin: remify(14px 6px 14px 0)
 		);
-	@include font-smoothing;
-	font-family: $font-patronbold;
-	text-transform: none;
+	@include zar-button-hollow-defaults;
 }
 
 %zar-button-hollow--debate {
@@ -51,7 +54,21 @@ text-transform: none;
 		$border-color: $white,
 		$margin: remify(14px 6px 14px 0)
 		);
-	@include font-smoothing;
-	font-family: $font-patronbold;
-	text-transform: none;
+	@include zar-button-hollow-defaults;
+}
+
+%zar-button-hollow--nextread-ad {
+	@include zon-button(
+		$color: $white,
+		$background-color: transparent,
+		$hover-background-color: $white,
+		$hover-color: $color-jobs-elements,
+		$hover-border-color: $white,
+		$visited-color: $white,
+		$letter-spacing: $letter-spacing-s,
+		$font-size: remify(16px),
+		$border-color: $white,
+		$margin: remify(14px 6px 14px 0)
+		);
+	@include zar-button-hollow-defaults;
 }
