@@ -31,6 +31,18 @@
         areas="topic"
         />
     <layout
+        id="zar-quote-yellow"
+        title="Quote-Teaser Gelb"
+        image_pattern="original"
+        areas="duo"
+        />
+    <layout
+        id="zar-quote-red"
+        title="Quote-Teaser Rot"
+        image_pattern="original"
+        areas="duo"
+        />
+    <layout
         id="zar-debate"
         title="Debatte"
         image_pattern=""

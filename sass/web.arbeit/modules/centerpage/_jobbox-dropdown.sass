@@ -9,6 +9,7 @@ $jobbox-border-width: 6px
 
 	&__label
 		@extend %teaser-adlabel
+		color: $zar-cool-grey
 		position: absolute
 		top: remify(-20px)
 		right: remify(-$jobbox-border-width)
@@ -57,6 +58,8 @@ $jobbox-border-width: 6px
 +respond-min($break-tablet-min)
 	html.flexbox
 		.jobbox-dropdown
-			height: 100%
-			margin-bottom: 0
-			margin-top: 0
+			+teaser-duo-equal-height
+	html.no-js
+		@supports (display: flex)
+			.jobbox-dropdown
+				+teaser-duo-equal-height

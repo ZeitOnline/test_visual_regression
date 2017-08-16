@@ -9,6 +9,8 @@
     {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}
     {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %} itemscope itemtype="http://schema.org/Article" itemref="publisher">
 
+    {% block teaser_allcontent %}
+
     {% block teaser_label %}{% endblock %}
     {% block teaser_media %}{% endblock %}
 
@@ -19,7 +21,8 @@
                 {% block teaser_link %}
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
-                   href="{{ teaser | create_url | append_campaign_params }}">
+                   href="{{ teaser | create_url | append_campaign_params }}"
+                   {%- block teaser_additional_attribute_for_textlink %}{% endblock %}>
                     {% block teaser_kicker %}
                         {% if teaser.teaserSupertitle or teaser.supertitle %}
                             <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
@@ -76,6 +79,8 @@
             {% endblock teaser_metadata_default %}
         {% endblock %}
     </div>
+
+    {% endblock teaser_allcontent %}
 
 </article>
 {% endblock %}
