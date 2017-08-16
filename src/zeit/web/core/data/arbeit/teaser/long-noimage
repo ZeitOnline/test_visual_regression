@@ -3,7 +3,7 @@
   <head>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Von Christina Felschen, Karin Geil, Tobias Dorfer, Mounia Meiborg und Matthias Breitinger, Berlin und Oliver Hollenstein, Christoph Twickel, Alexander Tieg und Steffen Richter, Hamburg</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Christina Felschen, Karin Geil, Tobias Dorfer, Mounia Meiborg und Matthias Breitinger, Berlin und Oliver Hollenstein, Christoph Twickel, Alexander Tieg und Steffen Richter, Hamburg</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
