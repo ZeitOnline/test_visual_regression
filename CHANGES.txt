@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ARBEIT-7: Implement quote teaser for ZEIT Arbeit
 
+- ARBEIT-70: Implement editorial+advertising nextread for ZEIT Arbeit
+
 
 3.79.1 (2017-08-15)
 -------------------
