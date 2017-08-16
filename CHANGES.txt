@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.80 (unreleased)
+3.80 (2017-08-16)
 -----------------
 
 - ARBEIT-7: Implement quote teaser for ZEIT Arbeit
