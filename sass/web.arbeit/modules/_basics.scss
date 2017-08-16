@@ -10,19 +10,19 @@ $color-exclamation-background: $color-text--light;
 }
 
 %zar-button-hollow {
-@include zon-button(
-	$color: $primary-color,
-	$background-color: transparent,
-	$hover-background-color: $primary-color,
-	$hover-color: $white,
-	$hover-border-color: $primary-color,
-	$visited-color: $primary-color,
-	$letter-spacing: $letter-spacing-s,
-	$font-size: remify(16px),
-	$border-color: $primary-color,
-	$margin: remify(14px 6px 14px 0)
-	);
-@include zar-button-hollow-defaults;
+	@include zon-button(
+		$color: $primary-color,
+		$background-color: transparent,
+		$hover-background-color: $primary-color,
+		$hover-color: $white,
+		$hover-border-color: $primary-color,
+		$visited-color: $primary-color,
+		$letter-spacing: $letter-spacing-s,
+		$font-size: remify(16px),
+		$border-color: $primary-color,
+		$margin: remify(14px 6px 14px 0)
+		);
+	@include zar-button-hollow-defaults;
 }
 
 %zar-button-hollow--jobs {
