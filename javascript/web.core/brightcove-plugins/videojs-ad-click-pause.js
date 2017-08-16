@@ -1,9 +1,9 @@
-(function( vjs ) {
+( function( vjs ) {
     // pause when clicking on ads
-    vjs.plugin('adClickPause', function(){
+    vjs.plugin( 'adClickPause', function() {
         var player = this;
-        player.on('ads-click',function( evt ){
+        player.on( 'ads-click', function() {
             player.ima3.adsManager.pause();
         });
     });
-}( window.videojs ));
+})( window.videojs );
