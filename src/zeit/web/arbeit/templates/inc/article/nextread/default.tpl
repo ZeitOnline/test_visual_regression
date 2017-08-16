@@ -22,7 +22,7 @@
 {% endblock %}
 
 {% block teaser_label -%}
-    <div class="{{ self.layout() }}__lead">{{ module.lead or 'Lesen Sie jetzt' }}</div>
+    <div class="{{ self.layout() }}__lead">{{ module.lead or 'Lesen Sie jetzt:' }}</div>
 {%- endblock %}
 
 {% block teaser_title %}
