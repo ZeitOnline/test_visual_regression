@@ -1,7 +1,9 @@
 @import "web.core/modules/article/sharing-menu"
 
 .sharing-menu
-	margin-bottom: $vertical-space
+	margin: remify($vertical-space 0)
+	&__item
+		margin-bottom: 0
 	&__link
 		transition: all 0.15s ease-in-out
 	&__text

@@ -21,7 +21,8 @@
                 {% block teaser_link %}
                 <a class="{{ self.layout() }}__combined-link"
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
-                   href="{{ teaser | create_url | append_campaign_params }}">
+                   href="{{ teaser | create_url | append_campaign_params }}"
+                   {%- block teaser_additional_attribute_for_textlink %}{% endblock %}>
                     {% block teaser_kicker %}
                         {% if teaser.teaserSupertitle or teaser.supertitle %}
                             <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
