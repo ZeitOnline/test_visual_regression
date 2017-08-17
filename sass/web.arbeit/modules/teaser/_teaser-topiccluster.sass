@@ -1,11 +1,10 @@
 .cp-area--topiccluster
-	background: #eeeef0
+	background: $zar-whitesmoke
 	color: $color-text
 	text-align: center
 
 .teaser-topiccluster
 	margin: 0
-	border: 1px $color-page-bg solid
 
 	&__heading
 		margin: 0
@@ -22,24 +21,19 @@
 		font-size: 18px
 		line-height: 1.4
 
-+respond-min($break-phablet-min)
-	+respond-max($break-tablet-min)
-		.cp-area--topiccluster
-			display: grid
-			grid-template-columns: 1fr 1fr
-		// odd number of items: last one spans two columns
-		.teaser-topiccluster:nth-of-type(2n+1):last-of-type
-			grid-column-start: 1
-			grid-column-end: 3
++respond-max($break-phablet-min)
+	.cp-area--topiccluster
+		+padded
+	.teaser-topiccluster
+		&:not(:last-child)
+			border-bottom: 1px $color-page-bg solid
 
-+respond-min($break-tablet-min)
++respond-min($break-phablet-min)
 	.cp-area--topiccluster
 		display: grid
-		grid-template-columns: 1fr 1fr 1fr
-	// TODO: muss das denn so umständlich sein ???
-	// odd number of items: last one spans two columns
-	.teaser-topiccluster:nth-of-type(3n+1):last-of-type
-		grid-column-start: 1
-		grid-column-end: 4
-	// TODO: das für 2-auf-letzter-Reihe
-	// TODO: Kommen wir nicht mit auto-width Zeugs weiter?
+		grid-template-columns: repeat(auto-fit, minmax(330px,1fr))
+	.teaser-topiccluster
+		border: 1px $color-page-bg solid
+		display: flex
+		flex-direction: column
+		justify-content: center

@@ -79,9 +79,6 @@
         <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-4de7b1a5-245d-4c6f-b57a-e357db3fbe2b">
           <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/article/02-gesundheit-mitarbeiter"></block>
         </container>
-        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-d4e51b5b-245d-4c6f-5c7a-e35d7bf3be3b">
-          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/serie"></block>
-        </container>
       </region>
     </cluster>
   </body>
