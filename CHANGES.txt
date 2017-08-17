@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - FIX: Fix image paths used in CSS
 
+- ARBEIT-53: Implement dark header layout for articles on ZEIT Arbeit
+
 
 3.80 (2017-08-16)
 -----------------
