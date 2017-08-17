@@ -1,14 +1,11 @@
-$teaser-topiccluster-bordercolor: red // $zar-white
-
 .cp-area--topiccluster
-	+padded
 	background: #eeeef0
 	color: $color-text
 	text-align: center
 
 .teaser-topiccluster
 	margin: 0
-	border-bottom: 1px $teaser-topiccluster-bordercolor solid
+	border: 1px $color-page-bg solid
 
 	&__heading
 		margin: 0
@@ -25,22 +22,13 @@ $teaser-topiccluster-bordercolor: red // $zar-white
 		font-size: 18px
 		line-height: 1.4
 
-+respond-max($break-phablet-min)
-	.teaser-topiccluster:last-of-type
-		border-bottom: none
-
 +respond-min($break-phablet-min)
 	+respond-max($break-tablet-min)
 		.cp-area--topiccluster
 			display: grid
 			grid-template-columns: 1fr 1fr
-
-		.teaser-topiccluster:nth-of-type(2n)
-			border-left: 1px $teaser-topiccluster-bordercolor solid
-
 		// odd number of items: last one spans two columns
 		.teaser-topiccluster:nth-of-type(2n+1):last-of-type
-			border-bottom: none
 			grid-column-start: 1
 			grid-column-end: 3
 
@@ -48,30 +36,10 @@ $teaser-topiccluster-bordercolor: red // $zar-white
 	.cp-area--topiccluster
 		display: grid
 		grid-template-columns: 1fr 1fr 1fr
-
-	.teaser-topiccluster:not(:nth-of-type(3n+1))
-		border-left: 1px $teaser-topiccluster-bordercolor solid
-
-
-+respond-min($break-phablet-min)
-	+respond-max($break-tablet-min)
-		.teaser-topiccluster__bla
-			width: 50%
-			&:nth-of-type(2n) > .teaser-topiccluster__container > .teaser-topiccluster__heading
-				border-left: 1px $teaser-topiccluster-bordercolor solid
-			&:nth-of-type(n+3) > .teaser-topiccluster__container,
-			&:nth-of-type(n+3) > .teaser-topiccluster__container > .teaser-topiccluster__heading
-				margin-top: 0
-			&:nth-last-child(-n+2) > .teaser-topiccluster__container
-				border-bottom: none
-
-+respond-min($break-tablet-min)
-	.teaser-topiccluster__bla
-		width: 33.3%
-		&:not(:nth-of-type(3n+1)) > .teaser-topiccluster__container > .teaser-topiccluster__heading
-			border-left: 1px $teaser-topiccluster-bordercolor solid
-		&:nth-of-type(n+4) > .teaser-topiccluster__container,
-		&:nth-of-type(n+4) > .teaser-topiccluster__container > .teaser-topiccluster__heading
-			margin-top: 0
-		&:nth-last-child(-n+3) > .teaser-topiccluster__container
-			border-bottom: none
+	// TODO: muss das denn so umständlich sein ???
+	// odd number of items: last one spans two columns
+	.teaser-topiccluster:nth-of-type(3n+1):last-of-type
+		grid-column-start: 1
+		grid-column-end: 4
+	// TODO: das für 2-auf-letzter-Reihe
+	// TODO: Kommen wir nicht mit auto-width Zeugs weiter?
