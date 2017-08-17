@@ -14,6 +14,8 @@ POSTDEPLOY
 3.80 (2017-08-16)
 -----------------
 
+- ZON-4126: Show fb:pages meta on hp as well
+
 - ARBEIT-7: Implement quote teaser for ZEIT Arbeit
 
 - ARBEIT-70: Implement editorial+advertising nextread for ZEIT Arbeit
