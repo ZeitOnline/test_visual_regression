@@ -10,6 +10,7 @@
 		@extend %teaser-combined-link
 	&__kicker
 		@extend %teaser-kicker--s
+		display: block // override flexbox from default teaser
 		margin-bottom: remify(8px)
 		// Schade. Design hält sich nicht an eigenen Styleguide. TODO: Brauchen wir andere abstrakte Klassen? Tweaken beim Polishen, wenn alle Teaser fertig sind.
 		+respond-min($break-tablet-min)

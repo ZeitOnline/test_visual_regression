@@ -24,19 +24,29 @@
                    href="{{ teaser | create_url | append_campaign_params }}"
                    {%- block teaser_additional_attribute_for_textlink %}{% endblock %}>
                     {% block teaser_kicker %}
-                        {% if teaser.teaserSupertitle or teaser.supertitle %}
+                        {#- We need to strip all the template whitespeces within this block, hence all the whitespace control chars.
+                        Whitespace control even needs to be applied for template commments. -#}
+                        {%- if teaser.teaserSupertitle or teaser.supertitle  or teaser is zplus_abo_content or (teaser is zplus_registration_content and toggles('zplus_badge_gray')) -%}
                             <span class="{{ '%s__kicker' | format(self.layout()) | with_mods('leserartikel' if teaser is leserartikel) }}">
-                                {% block teaser_journalistic_format -%}
-                                    {% if teaser.serie -%}
+                                {%- block zplus_kicker_logo -%}
+                                    {%- if teaser is zplus_abo_content -%}
+                                        {{- lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--s svg-symbol--hide-ie', view.package, a11y=False) -}}
+                                    {%- elif teaser is zplus_registration_content and toggles('zplus_badge_gray') -%}
+                                        {{- lama.use_svg_icon('zplus', 'zplus-logo zplus-logo-register zplus-logo--s svg-symbol--hide-ie', view.package, a11y=False) -}}
+                                    {%- endif -%}
+                                {%- endblock -%}
+                                {%- if teaser.serie or teaser.blog -%}<span>{# needed for flexbox #}{%- endif -%}
+                                {%- block teaser_journalistic_format -%}
+                                    {%- if teaser.serie -%}
                                         <span class="series-label">{{ teaser.serie.serienname }}</span>
-                                    {% elif teaser.blog -%}
+                                    {%- elif teaser.blog -%}
                                         <span class="blog-label">{{ teaser.blog.name }}</span>
-                                    {%- endif %}
-                                {%- endblock teaser_journalistic_format %}
-                                {# There must be no whitespace between kicker and : (for Google(News) representation) #}
-                                <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span></span><span class="visually-hidden">: </span>
-                        {%- endif %}
-                    {% endblock %}
+                                    {%- endif -%}
+                                {%- endblock teaser_journalistic_format -%}
+                                {#- There must be no whitespace between kicker and : (for Google(News) representation) -#}
+                                <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span>{%- if teaser.serie or teaser.blog -%}</span>{# needed for flexbox #}{%- endif -%}</span><span class="visually-hidden">: </span>
+                        {%- endif -%}
+                    {%- endblock -%}
                     {% block teaser_title %}
                         <span class="{{ self.layout() }}__title">{{ teaser.teaserTitle or teaser.title }}</span>
                     {% endblock %}

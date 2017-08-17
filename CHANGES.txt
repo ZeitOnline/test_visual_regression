@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ARBEIT-53: Implement dark header layout for articles on ZEIT Arbeit
 
+- ARBEIT-21: Render Z+ badge on abo/registration teasers in ZEIT Arbeit
+
 
 3.80 (2017-08-16)
 -----------------
