@@ -33,6 +33,7 @@
                                         {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo-register zplus-logo--s svg-symbol--hide-ie', view.package, a11y=False) }}
                                     {% endif %}
                                 {% endblock %}
+                                {% if teaser.serie or teaser.blog %}<span>{# needed for flexbox #}{% endif %}
                                 {% block teaser_journalistic_format -%}
                                     {% if teaser.serie -%}
                                         <span class="series-label">{{ teaser.serie.serienname }}</span>
@@ -41,7 +42,7 @@
                                     {%- endif %}
                                 {%- endblock teaser_journalistic_format %}
                                 {# There must be no whitespace between kicker and : (for Google(News) representation) #}
-                                <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span></span><span class="visually-hidden">: </span>
+                                <span>{{ teaser.teaserSupertitle or teaser.supertitle }}</span>{% if teaser.serie or teaser.blog %}</span>{# needed for flexbox #}{% endif %}</span><span class="visually-hidden">: </span>
                         {%- endif %}
                     {% endblock %}
                     {% block teaser_title %}
