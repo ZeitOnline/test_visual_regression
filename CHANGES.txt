@@ -8,7 +8,7 @@ POSTDEPLOY
 3.81 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix image paths used in CSS
 
 
 3.80 (2017-08-16)
