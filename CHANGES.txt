@@ -8,6 +8,8 @@ POSTDEPLOY
 3.80 (unreleased)
 -----------------
 
+- ZON-4126: Show fb:pages meta on hp as well
+
 - ARBEIT-7: Implement quote teaser for ZEIT Arbeit
 
 
