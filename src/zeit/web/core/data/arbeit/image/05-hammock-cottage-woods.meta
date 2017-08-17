@@ -24,16 +24,16 @@
   <attribute ns="DAV:" name="getcontenttype">httpd/unix-directory</attribute>
 
   <!-- local dummy data: you need to edit the attributes below -->
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">TODOProtest: More NASA Less Guns</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">TODOEin Wissenschaftler demonstriert in New York City</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">TODOMarch for Science: Aufstehen für die Wissenschaft</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="title">Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit.</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="alt">Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit.</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/image" name="caption">Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit.</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="master_image">cara-fuller-307535.jpg</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/image" name="external_id">307535</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">&lt;pickle&gt; &lt;tuple&gt; &lt;tuple&gt;
-      &lt;unicode&gt;&#xA9; TODOAndrew Robles&lt;/unicode&gt;
+      &lt;unicode&gt;&#xA9; Cara Fuller&lt;/unicode&gt;
       &lt;unicode&gt;Unsplash&lt;/unicode&gt;
       &lt;none/&gt;
-      &lt;unicode&gt;http://unsplash.com/@andrewroblesphoto&lt;/unicode&gt;
+      &lt;unicode&gt;http://unsplash.com/@caraventurera&lt;/unicode&gt;
       &lt;false/&gt;
     &lt;/tuple&gt; &lt;/tuple&gt; &lt;/pickle&gt;</attribute>
 </head>
