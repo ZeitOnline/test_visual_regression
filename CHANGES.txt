@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.81 (unreleased)
+3.81 (2017-08-18)
 -----------------
 
 - FIX: Fix image paths used in CSS
