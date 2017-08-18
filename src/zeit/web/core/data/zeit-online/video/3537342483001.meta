@@ -18,6 +18,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-01-22T09:35:16.103266+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2015-01-22T09:27:01.865619+00:00</attribute>
   <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_advertisement">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="flv_url">http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319165001_thegreatrabbit-1280-720-h264.mp4</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/brightcove" name="id">3537342483001</attribute>

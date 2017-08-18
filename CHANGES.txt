@@ -8,7 +8,7 @@ POSTDEPLOY
 3.82 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4163: Switch videoplayer on articles by has_advertisement variable
 
 
 3.81 (2017-08-18)
