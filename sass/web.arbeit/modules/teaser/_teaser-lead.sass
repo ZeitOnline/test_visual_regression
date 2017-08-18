@@ -33,6 +33,7 @@
 
 	&__kicker
 		@extend %teaser-kicker--l
+		display: block // override flexbox from default teaser
 		margin-bottom: remify(10px)
 		+respond-min($break-tablet-min)
 			margin-bottom: remify(30px)
