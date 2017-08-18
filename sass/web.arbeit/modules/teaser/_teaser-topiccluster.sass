@@ -30,10 +30,11 @@
 
 +respond-min($break-phablet-min)
 	.cp-area--topiccluster
-		display: grid
-		grid-template-columns: repeat(auto-fit, minmax(330px,1fr))
+		display: flex
+		flex-wrap: wrap
 	.teaser-topiccluster
 		border: 1px $color-page-bg solid
 		display: flex
 		flex-direction: column
 		justify-content: center
+		flex-basis: 33.3%
