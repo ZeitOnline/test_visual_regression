@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<advertisement>
+  <head>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-08-10T09:14:14.467753+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Advertisement" module="zeit.content.advertisement.advertisement"/&gt;
+        &lt;global name="IZARContent" module="zeit.cms.section.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-08-10T09:14:20.672560+00:00</attribute>
+  </head>
+  <body>
+    <supertitle>publisher</supertitle>
+    <title>Stellenangebote in Wirtschaft und Lehre</title>
+    <text>Entdecken Sie Jobs mit Perspektive im ZEIT Stellenmarkt.</text>
+    <button_text>Jobs finden</button_text>
+    <button_color>d11c08</button_color>
+    <url>http://jobs.zeit.de/?wt_zmc=cross.int.zonpmr.zeitde.next.stellenmarkt_startseite.bildtext.karriere.x&amp;utm_medium=cross&amp;utm_source=zeitde_zonpmr_int&amp;utm_campaign=next&amp;utm_content=stellenmarkt_startseite_bildtext_karriere_x</url>
+  </body>
+</advertisement>

@@ -23,6 +23,18 @@
       <title>Offline</title>
     </header>
   </template>
+  <!--
+    ZAR-Templates
+  -->
+  <template name="article" available="zeit.cms.section.interfaces.IZARContent">
+    <title>Artikel</title>
+    <header name="default">
+      <title>Standard</title>
+    </header>
+    <header name="dark">
+      <title>Weiße Schrift auf schwarzem Hintergrund</title>
+    </header>
+  </template>
   <!-- not yet in use
   <template name="zon-debate" available="zeit.cms.section.interfaces.IZONContent">
     <title>Pro und Kontra</title>

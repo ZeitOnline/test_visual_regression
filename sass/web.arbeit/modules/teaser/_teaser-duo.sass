@@ -1,3 +1,11 @@
+=teaser-duo-equal-height
+	// equal height for teasers in flexboxed duo regions
+	// duo-teaser and vertical-specific mixin, hence declared here instead in
+	// global mixins.scss for now
+	height: 100%
+	margin-bottom: 0
+	margin-top: 0
+
 .teaser-duo
 	@extend %teaser
 	margin: remify(14px) $page-padding--small
@@ -63,6 +71,14 @@
 			margin-bottom: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
 			margin-top: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
 		.teaser-duo
-			height: 100%
-			margin-bottom: 0
-			margin-top: 0
+			+teaser-duo-equal-height
+
+	// noJS fallback for flexbox capable browsers
+	html.no-js
+		@supports (display: flex)
+			.cp-region--duo
+				display: flex
+				margin-bottom: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
+				margin-top: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
+			.teaser-duo
+				+teaser-duo-equal-height

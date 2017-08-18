@@ -13,10 +13,16 @@
 
 %teaser-kicker
 	display: block
+	display: flex
+	align-items: center
+	font-variant-ligatures: none
 	font-weight: normal
 	line-height: 1.2
 	+respond-min($break-tablet-min)
 		line-height: 1.3
+	// especially for the Z+ badge
+	& > *
+		vertical-align: middle
 
 %teaser-kicker--l
 	@extend %teaser-kicker
@@ -58,6 +64,13 @@
 	+respond-min($break-tablet-min)
 		font-size: remify(28px)
 		line-height: 1.3
+
+%teaser-title--m
+	@extend %teaser-title
+	font-size: remify(24px)
+	line-height: 1.2
+	+respond-min($break-tablet-min)
+		font-size: remify(36px)
 
 %teaser-title--xl
 	@extend %teaser-title
@@ -111,4 +124,3 @@
 	line-height: remify(11px)
 	letter-spacing: $letter-spacing-l
 	text-transform: uppercase
-	color: $zar-cool-grey
