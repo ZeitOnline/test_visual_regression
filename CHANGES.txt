@@ -5,10 +5,30 @@ POSTDEPLOY
 ----------
 
 
-3.80 (unreleased)
+3.81 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix image paths used in CSS
+
+- ARBEIT-53: Implement dark header layout for articles on ZEIT Arbeit
+
+- ARBEIT-21: Render Z+ badge on abo/registration teasers in ZEIT Arbeit
+
+
+3.80 (2017-08-16)
+-----------------
+
+- ZON-4126: Show fb:pages meta on hp as well
+
+- ARBEIT-7: Implement quote teaser for ZEIT Arbeit
+
+- ARBEIT-70: Implement editorial+advertising nextread for ZEIT Arbeit
+
+
+3.79.1 (2017-08-15)
+-------------------
+
+- HOTFIX: Disable INFOnline surveys on FBIA
 
 
 3.79 (2017-08-14)
