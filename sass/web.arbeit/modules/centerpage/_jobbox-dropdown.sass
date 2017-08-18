@@ -53,8 +53,12 @@ $jobbox-border-width: 6px
 	&__link
 		border-bottom: 1px solid currentColor
 
++respond-min($break-tablet-min)
+	+respond-max(em(960px))
+		.jobbox-dropdown__dropdown
+			max-width: remify(150px)
+
 // same height as other duo teasers on desktop for "modern" browsers
-// TODO: bei noJS ists doof.
 +respond-min($break-tablet-min)
 	html.flexbox
 		.jobbox-dropdown
