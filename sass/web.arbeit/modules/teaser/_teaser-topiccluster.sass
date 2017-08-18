@@ -1,0 +1,40 @@
+.cp-area--topiccluster
+	background: $zar-whitesmoke
+	color: $color-text
+	text-align: center
+
+.teaser-topiccluster
+	margin: 0
+
+	&__heading
+		margin: 0
+
+	&__combined-link
+		@extend %teaser-combined-link
+		display: block
+		padding: remify(13px $page-padding--small)
+		+on-interaction
+			color: $zar-darkish-pink
+
+	&__title
+		@extend %teaser-title
+		font-size: 18px
+		line-height: 1.4
+
++respond-max($break-phablet-min)
+	.cp-area--topiccluster
+		+padded
+	.teaser-topiccluster
+		&:not(:last-child)
+			border-bottom: 1px $color-page-bg solid
+
++respond-min($break-phablet-min)
+	.cp-area--topiccluster
+		display: flex
+		flex-wrap: wrap
+	.teaser-topiccluster
+		border: 1px $color-page-bg solid
+		display: flex
+		flex-direction: column
+		justify-content: center
+		flex-basis: 33.3%

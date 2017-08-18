@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ARBEIT-21: Render Z+ badge on abo/registration teasers in ZEIT Arbeit
 
+- ARBEIT-12: Implement topic cluster on CP
+
 
 3.80 (2017-08-16)
 -----------------
