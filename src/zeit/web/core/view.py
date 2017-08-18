@@ -473,17 +473,6 @@ class Base(object):
             return False
 
     @zeit.web.reify
-    def iqd_mobile_settings(self):
-        iqd_ids = zeit.web.core.banner.IQD_MOBILE_IDS_SOURCE.ids
-        if self.is_hp:
-            return getattr(iqd_ids['hp'], 'centerpage')
-        try:
-            return getattr(iqd_ids[self.sub_ressort], self.type,
-                           getattr(iqd_ids[self.sub_ressort], 'default'))
-        except KeyError:
-            return {}
-
-    @zeit.web.reify
     def product_id(self):
         try:
             return self.context.product.id
