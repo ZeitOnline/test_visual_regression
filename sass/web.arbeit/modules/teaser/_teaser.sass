@@ -13,11 +13,16 @@
 
 %teaser-kicker
 	display: block
+	display: flex
+	align-items: center
 	font-variant-ligatures: none
 	font-weight: normal
 	line-height: 1.2
 	+respond-min($break-tablet-min)
 		line-height: 1.3
+	// especially for the Z+ badge
+	& > *
+		vertical-align: middle
 
 %teaser-kicker--l
 	@extend %teaser-kicker

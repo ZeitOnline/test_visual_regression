@@ -11,6 +11,8 @@
 	&__kicker
 		@extend %teaser-kicker--s
 		margin-bottom: remify(8px)
+		+respond-max($break-tablet-min)
+			display: block // override flexbox from default teaser
 
 	&__title
 		@extend %teaser-title--s

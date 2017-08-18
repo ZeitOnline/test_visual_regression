@@ -92,6 +92,49 @@ def test_zar_article_paginated_has_headerimage_only_on_first_page(testbrowser):
     assert len(browser.cssselect('.article__media--header-image')) == 1
 
 
+def test_zar_article_image_has_caption(testbrowser):
+    browser = testbrowser('/arbeit/article/01-digitale-nomaden')
+    headerimage = browser.cssselect('figure.article__media--header-image')
+    assert len(headerimage) == 1
+    headerimage_caption = headerimage[0].cssselect('.figure__text')
+    assert len(headerimage_caption) == 1
+    assert headerimage_caption[0].text.strip().startswith('Freiheit')
+
+
+def test_zar_article_toc_has_fallback_title(testbrowser):
+    browser = testbrowser('/arbeit/article/paginated-nopagetitle/seite-2')
+
+    toc_items = browser.cssselect('.article-toc__item')
+    assert len(toc_items) == 4
+
+    toc_item_1 = toc_items[0].cssselect('span')[0]
+    assert toc_item_1.text.strip() == 'Mehrseitiger Artikel ohne Seiten-Titel'
+
+    toc_item_2 = toc_items[1].cssselect('span')[0]
+    assert toc_item_2.text.strip() == 'Seite 2'
+
+
+def test_zar_article_with_dark_header_has_correct_structure(testbrowser):
+    browser = testbrowser('/arbeit/article/header-dark')
+    # we want to see one header, which has a modifier
+    assert len(browser.cssselect('.article-header--dark')) == 1
+    # the article heading items are inside the header-container
+    assert len(browser.cssselect(
+        '.article-header--dark > .article-heading')) == 1
+    # image should be outside/behind the header (because the figure caption
+    # has a bright background)
+    assert len(browser.cssselect(
+        '.article-header--dark + .article__media--header-image')) == 1
+
+
+def test_zar_article_header_on_second_page_has_correct_structure(testbrowser):
+    browser = testbrowser('/arbeit/article/header-dark/seite-2')
+    assert len(browser.cssselect('.article-header--dark')) == 1
+    assert len(browser.cssselect(
+        '.article-header--dark .article__page-teaser')) == 1
+    assert len(browser.cssselect('.article__media--header-image')) == 0
+
+
 def test_zar_article_renders_nextread_correctly(testbrowser):
     browser = testbrowser('/arbeit/article/simple-nextread')
     assert len(browser.cssselect('.nextread')) == 1

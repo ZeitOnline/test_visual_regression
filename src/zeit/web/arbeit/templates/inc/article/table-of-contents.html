@@ -2,6 +2,9 @@
 
 {% block toc_item scoped %}
     <strong>{{ pagenr }}</strong>
-    {%- if view.pagination.pages_titles[pagenr - 1] %}<span>{{ view.pagination.pages_titles[pagenr - 1] }}</span>
+    {%- if view.pagination.pages_titles[pagenr - 1] %}
+        <span>{{ view.pagination.pages_titles[pagenr - 1] }}</span>
+    {%- else -%}
+        <span>Seite {{ pagenr }}</span>
     {%- endif %}
 {% endblock toc_item %}
