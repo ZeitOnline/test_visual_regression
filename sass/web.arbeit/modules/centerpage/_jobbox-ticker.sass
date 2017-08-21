@@ -1,0 +1,79 @@
+$jobbox-border-width: 6px
+
+.jobbox-ticker
+	@extend %teaser
+	border: remify($jobbox-border-width) $color-jobs-areas solid
+	margin: remify(32px) $page-padding--small remify(14px)
+	position: relative
+
+	&__label
+		@extend %teaser-adlabel
+		color: $zar-cool-grey
+		position: absolute
+		top: remify(-20px)
+		right: remify(-$jobbox-border-width)
+
+	&__heading
+		+font-smoothing
+		background-color: $color-jobs-areas
+		color: #fff
+		padding: remify(10px 20px 20px)
+		text-align: center
+	&__kicker
+		@extend %teaser-kicker--s
+		color: #fff
+		display: block
+	&__title
+		@extend %teaser-title--xs
+		margin: remify(8px 0)
+	&__link
+		@extend %teaser-text
+		border-bottom: 1px solid currentColor
+		color: #fff
+		+on-interaction
+			color: $zar-whitesmoke
+
+.jobbox-ticker-item
+	&__container
+		padding: remify(10px 20px 20px)
+	&__kicker
+		@extend %teaser-kicker--s
+	&__title
+		@extend %teaser-title--xxs
+		margin: .5em 0
+	&__text
+		@extend %teaser-metadata
+		font-family: $font-franziska
+		font-style: italic
+	&__link
+		@extend %zar-button-hollow--jobs
+		display: block
+		margin: remify(16px 0 8px)
+		vertical-align: middle
+
+.cp-area--solo .jobbox-ticker
+	margin: $vertical-space--small $page-padding--small
+	+respond-min($break-tablet-min)
+		margin: $vertical-space $cp-padding*2
+
+.cp-area--duo .jobbox-ticker
+	+respond-min($break-tablet-min)
+		margin: 0 $cp-padding
+
+.cp-area--trio .jobbox-ticker
+	margin: $vertical-space--small $page-padding--small
+	+respond-min($break-tablet-min)
+		margin: $vertical-space $cp-padding
+
+
+// same height as other duo teasers on desktop for "modern" browsers
++respond-min($break-tablet-min)
+	html.flexbox
+		.cp-area--duo .jobbox-ticker
+			+teaser-duo-equal-height
+
+	// noJS fallback flexbox for capable browsers
+	html.no-js
+		@supports(display: flex)
+			.cp-area--duo .jobbox-ticker
+				+teaser-duo-equal-height
