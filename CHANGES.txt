@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4163: Switch videoplayer on articles by has_advertisement variable
 
+- BUG-772: Add correct linktitle to ZCO-Flyout
+
 
 3.81 (2017-08-18)
 -----------------
