@@ -20,6 +20,4 @@ class FollowUs(zeit.web.core.centerpage.Module):
             ('instagram', 'https://www.instagram.com/zeit/', 'Instagram',
                 'Folgen Sie uns bei Instagram'),
             ('xing', 'https://www.xing.com/news/pages/zeit-online-165', 'Xing',
-                'Abonnieren Sie uns bei Xing'),
-            ('newsletter', 'http://community.zeit.de/newsletter', 'Newsletter',
-                'Abonnieren Sie unseren Newsletter')]
+                'Abonnieren Sie uns bei Xing')]
