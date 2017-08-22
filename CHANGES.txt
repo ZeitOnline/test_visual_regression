@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - BUG-775: Add adplace16 to framebuilder
 
+- MAINT: Use z.c.article function to get the first citation of an article
+
 
 3.83 (2017-08-22)
 -----------------
