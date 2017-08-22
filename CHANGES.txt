@@ -5,10 +5,18 @@ POSTDEPLOY
 ----------
 
 
-3.82 (unreleased)
+3.83 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.82 (2017-08-22)
 -----------------
 
 - ZON-4163: Switch videoplayer on articles by has_advertisement variable
+
+- BUG-772: Add correct linktitle to ZCO-Flyout
 
 - FIX: Socialmedia icons for safari in mobile view
 
@@ -23,6 +31,8 @@ POSTDEPLOY
 - ARBEIT-21: Render Z+ badge on abo/registration teasers in ZEIT Arbeit
 
 - ARBEIT-12: Implement topic cluster on CP
+
+- ARBEIT: Some more polishing
 
 
 3.80 (2017-08-16)
