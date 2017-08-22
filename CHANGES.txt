@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ARBEIT-12: Implement topic cluster on CP
 
+- ARBEIT: Some more polishing
+
 
 3.80 (2017-08-16)
 -----------------
