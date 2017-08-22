@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.82 (unreleased)
+3.82 (2017-08-22)
 -----------------
 
 - ZON-4163: Switch videoplayer on articles by has_advertisement variable
