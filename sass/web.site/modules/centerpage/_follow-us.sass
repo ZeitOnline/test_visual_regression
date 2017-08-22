@@ -93,9 +93,12 @@ $followus-icon-padding: remify(13px)
 		&--facebook
 			// Icon higher than wide
 			height: $followus-icon-mobile - (2 * $followus-icon-padding)
+			margin-left: remify(5px)
 			width: auto
 			+respond-min($break-tablet-min)
 				height: $followus-icon-tablet - (2 * $followus-icon-padding)
+		&--twitter
+			margin-top: remify(3px)
 	&__linktext
 		border-left: 1px solid rgba(#fff, 0.5)
 		display: none // hidden when mobile, a11y???
