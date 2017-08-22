@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - BUG-772: Add correct linktitle to ZCO-Flyout
 
+- FIX: Socialmedia icons for safari in mobile view
+
 
 3.81 (2017-08-18)
 -----------------
