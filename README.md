@@ -10,6 +10,8 @@
 
 `git clone git@github.com:ZeitOnline/test_visual_regression.git && cd test_visual_regression && npm install && cd PhantomCSS && git submodule init && git submodule update && npm install`
 
+If your submodule rmains in detached HEAD state, you need to [set up tracking for it's master branch]((https://stackoverflow.com/questions/18770545/why-is-my-git-submodule-head-detached-from-master)) in the parent repo.
+
 Resulting in the following directory tree:
 
 ```
@@ -86,4 +88,4 @@ failedComparisonsRoot: fs.absolute(fs.workingDirectory + '/failures/sso')
 
 ## Further reading
 - [CasperJS Docs](http://docs.casperjs.org/en/latest/) (scripting user interaction)
-- [ PhantomJS API](http://phantomjs.org/api/)
+- [PhantomJS API](http://phantomjs.org/api/)
