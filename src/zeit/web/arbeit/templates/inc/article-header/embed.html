@@ -1,0 +1,12 @@
+{#- TODO: Specify header_layout 'podcast' -#}
+{% extends "zeit.web.arbeit:templates/inc/article-header/default.html" %}
+{% block heading %}
+    <h1 class="{{ 'article-heading' | with_mods('podcast') }}" itemprop="headline">
+        <span class="{{ 'article-heading__kicker' | with_mods('podcast') }}">
+            {{- view.supertitle -}}
+        </span>
+        {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
+        <span class="{{ 'article-heading__title' | with_mods('podcast') }}">{{- view.title -}}</span>
+        {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
+    </h1>
+{% endblock %}
