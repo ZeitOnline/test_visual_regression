@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - ZON-4163: Switch videoplayer on articles by has_advertisement variable
 
+- FIX: Socialmedia icons for safari in mobile view
+
 
 3.81 (2017-08-18)
 -----------------
