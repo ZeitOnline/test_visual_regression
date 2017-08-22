@@ -8,7 +8,9 @@ POSTDEPLOY
 3.83 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Socialmedia icons for safari in mobile view
+
+- ARBEIT: Some more polishing
 
 
 3.82 (2017-08-22)
@@ -17,8 +19,6 @@ POSTDEPLOY
 - ZON-4163: Switch videoplayer on articles by has_advertisement variable
 
 - BUG-772: Add correct linktitle to ZCO-Flyout
-
-- FIX: Socialmedia icons for safari in mobile view
 
 
 3.81 (2017-08-18)
@@ -31,8 +31,6 @@ POSTDEPLOY
 - ARBEIT-21: Render Z+ badge on abo/registration teasers in ZEIT Arbeit
 
 - ARBEIT-12: Implement topic cluster on CP
-
-- ARBEIT: Some more polishing
 
 
 3.80 (2017-08-16)
