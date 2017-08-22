@@ -18,15 +18,16 @@
 			font-size: remify(28px)
 			line-height: 1.4
 
-	&__source-arrow
-		fill: currentColor
-
 	&__source
 		display: inline-block
 		font-family: $font-tabletgothic
 		font-size: remify(15px)
 		margin-top: remify(14px)
-		margin-left: remify(8px)
+		&:before
+			content: $svg-arrow-right-40px
+			display: inline-block
+			fill: currentColor
+			margin-right: remify(8px)
 		+respond-min($break-tablet-min)
 			font-size: remify(16px)
 			line-height: 1.2

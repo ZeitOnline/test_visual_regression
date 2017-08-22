@@ -4,9 +4,9 @@
     <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
       <display_name>Heike Jahberg</display_name>
     </author>
-    <image xmlns:py="http://codespeak.net/lxml/objectify/pytype" base-id="http://xml.zeit.de/arbeit/image/05-hammock-cottage-woods/" type="jpg" title="monarch-boat1" publication-date="" expires="">
-      <bu py:pytype="str">Freiheit ist die Einsicht in die Notwendigkeit. Das scheint heute nicht mehr zu gelten.</bu>
-      <copyright py:pytype="str">© Karin Ceballos Betancur</copyright>
+    <image base-id="http://xml.zeit.de/arbeit/image/05-hammock-cottage-woods/" type="jpg" title="monarch-boat1" publication-date="" expires="">
+      <bu>Freiheit ist die Einsicht in die Notwendigkeit. Das scheint heute nicht mehr zu gelten.</bu>
+      <copyright>© Karin Ceballos Betancur</copyright>
     </image>
     <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">free</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">dark</attribute>
@@ -77,7 +77,7 @@
     <division type="page">
       <image base-id="http://xml.zeit.de/arbeit/image/05-hammock-cottage-woods/" type="jpg" title="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." publication-date="" expires="" layout="large" is_empty="False" caption_local="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." display_mode="large" variant_name="wide" title_local="Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." alt_local="Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken." alt="Digitale Nomaden: Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken.">
         <bu>Freiheit ist die Einsicht in die Notwendigkeit: klingt irgendwie altbacken.</bu>
-        <copyright xmlns:py="http://codespeak.net/lxml/objectify/pytype" py:pytype="str">© Karin Ceballos Betancur</copyright>
+        <copyright>© Karin Ceballos Betancur</copyright>
       </image>
       <p>A blend of lambic beers brewed at 3 Fonteinen, with an addition of 30% whole fresh raspberries from the fabled Payottenland and 5% sour cherries. This unfiltered beer will enjoy a spontaneous refermentation in the bottle. No artificial colors or flavor enhancers are added. Lambic is brewed only from 60% barley malt, 40% unmalted wheat, hops and water.</p>
     </division>
