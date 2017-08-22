@@ -5,10 +5,26 @@ POSTDEPLOY
 ----------
 
 
-3.82 (unreleased)
+3.84 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.83 (2017-08-22)
+-----------------
+
+- FIX: Socialmedia icons for safari in mobile view
+
+- ARBEIT: Some more polishing
+
+
+3.82 (2017-08-22)
 -----------------
 
 - ZON-4163: Switch videoplayer on articles by has_advertisement variable
+
+- BUG-772: Add correct linktitle to ZCO-Flyout
 
 
 3.81 (2017-08-18)

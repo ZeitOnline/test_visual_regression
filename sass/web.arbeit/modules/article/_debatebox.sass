@@ -19,11 +19,9 @@
 		max-width: remify(520px)
 
 	&__kicker
-		// TODO: Can we make this better?
-		// Important is needed to override teaser-kicker--s color
-		// which comes earlier in the sass (and CSS) file.
 		@extend %teaser-kicker--s
-		color: $zar-french-grey !important
+		color: $zar-french-grey
+		display: block // override flexbox from default teaser
 
 	&__title
 		@extend %teaser-title--s
@@ -41,4 +39,3 @@
 	&__button
 		@extend %zar-button-hollow
 		margin-bottom: 0 // the debatebox has its own margin
-
