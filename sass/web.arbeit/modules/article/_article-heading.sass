@@ -26,6 +26,7 @@
 			-webkit-text-fill-color: $zar-sun-yellow
 			-webkit-text-stroke-width: remify(1.5px)
 			-webkit-text-stroke-color: #000
+			margin-bottom: 0
 
 	&__title
 		color: $primary-color
@@ -46,6 +47,19 @@
 		&--podcast
 			margin-bottom: $vertical-space
 
+	&__image
+		&--podcast
+			left: 0
+			top: 0
+
+	&__series
+		&--podcast
+			display: block
+			font-family: $font-tabletgothic
+			font-weight: normal
+			font-size: remify(18px)
+			margin: $vertical-space--small 0
+
 +respond-min($break-tablet-min)
 	.article-heading
 		padding-bottom: remify(40px)
@@ -58,6 +72,7 @@
 			max-width: $medium-content-width
 			&--podcast
 				font-size: remify(60px)
+				margin-bottom: 0
 		&__title
 			font-size: remify(60px)
 			&--underlined
