@@ -34,9 +34,9 @@ def test_zar_article_paginated_has_toc(testbrowser):
 def test_zar_article_renders_quotes_correctly(testbrowser):
     browser = testbrowser('/arbeit/article/quotes')
     quotes = browser.cssselect('.quote')
-    arrows = browser.cssselect('.quote__source-arrow')
+    sources = browser.cssselect('.quote__source')
     assert len(quotes) == 4
-    assert len(arrows) == 2
+    assert len(sources) == 2
 
 
 @pytest.mark.parametrize('c1_parameter', [

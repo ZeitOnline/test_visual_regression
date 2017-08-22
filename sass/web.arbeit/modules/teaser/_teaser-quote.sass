@@ -37,11 +37,14 @@
 		font-family: $font-franziska
 		font-weight: normal
 
+	&__byline:after
+			content: $svg-arrow-right-40px
+			display: inline-block
+			margin-left: remify(8px)
+			margin-right: -48px // to prevent line-breaking of only the arrow
+
 	&__headingwrapper
 		width: 80%
-
-	&__byline-arrow
-		fill: currentColor
 
 	&__heading
 		margin: remify(20px 0 0)
@@ -54,6 +57,8 @@
 		+font-smoothing
 		background-color: $zar-darkish-pink
 		color: #fff
+		.teaser-quote__byline:after
+			content: $svg-arrow-right-40px-white
 
 	&__media
 		bottom: 0
@@ -74,5 +79,3 @@
 		@supports(display: flex)
 			.teaser-quote
 				+teaser-duo-equal-height
-
-// TODO: Pfeil als CSS after Ding ... zieht er dann das letzte Wort auf die neue Zeile?
