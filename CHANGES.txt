@@ -5,7 +5,7 @@ POSTDEPLOY
 ----------
 
 
-3.83 (unreleased)
+3.83 (2017-08-22)
 -----------------
 
 - FIX: Socialmedia icons for safari in mobile view
