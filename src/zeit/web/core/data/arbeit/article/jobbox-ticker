@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
+      <display_name>Heike Jahberg</display_name>
+    </author>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">sid</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2017-08-22T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2017-08-22T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-08-22T15:12:09.866518+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-08-22T15:13:09.811283+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-08-22T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.newspublish</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn:newsml:afp.com:20150601:doc-2n64x</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1159bddc254242769fbbe1fa1c0e380d</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Arbeit</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:85c42592-3840-41c6-b039-83cc16de66d6}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">1900</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZARContent" module="zeit.arbeit.interfaces"/&gt;
+        &lt;global name="IZARArticle" module="zeit.arbeit.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Dummy Content</supertitle>
+    <title>Jobbox Ticker (mit konkreten Stellenanzeigen)</title>
+    <subtitle>+++ TODO +++ TODO +++ TODO +++ Der Debattenaufruf ist technisch eine Infobox mit dem Layout "debate". Dieselbe Debatten-Infobox kann sowohl in Teasern auf CPs als auch in Artikelblöcken genutzt werden.</subtitle>
+    <division type="page">
+      <p>This Russian Imperial Stout is dedicated to Georgy Zhukov, arguably one of the finest generals of World War II. Opaque black in color, with notes of espresso, chocolate, dark toffee and hints of backstrap molasses. The English hop varietals provide a subtle herbal dryness, and finishes with a hearty slap of roasty espresso. Pair Marshal Zhukov’s with Mushroom Solyanka, dark chocolate, cherries and ground wars in Russia. We brew and release Zhukov's in the summer knowing that a beer of this heft reaches its full potential a few months after release. So save a bottle for the cold winter!</p>
+
+      <jobbox layout="ticker" id="wurstbrot" />
+
+      <raw alldevices="true">
+
+<aside class="jobbox-ticker js-jobbox-animation jobbox-ticker--article-marginalia">
+    <span class="jobbox-ticker__label">Verlagsangebot</span>
+
+    <div class="jobbox-ticker__heading">
+        <span class="jobbox-ticker__kicker">ZEIT Stellenmarkt</span>
+        <h2 class="jobbox-ticker__title">Aktuelle Stellen im Bereich Wissenschaft / Lehre / Forschung</h2>
+        <a class="jobbox-ticker__link">Zur Stellenliste.</a>
+    </div>
+
+    <div class="jobbox-ticker-item__container js-jobbox-animation__container" style="min-height: 212px;">
+        <span class="jobbox-ticker-item__kicker">Aktuelle Jobs</span>
+
+        <ul class="jobbox-ticker-item__list">
+            <li class="jobbox-ticker-item js-jobbox-animation__jobitem" style="opacity: 0; transform: translateY(-20px); display: none;">
+                <h3 class="jobbox-ticker-item__title">Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
+                <span class="jobbox-ticker-item__text">Aarhus University</span>
+                <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
+            </li>
+            <li class="jobbox-ticker-item js-jobbox-animation__jobitem velocity-animating" style="opacity: 1; display: block; transform: translateY(0px) translateZ(0px);">
+                <h3 class="jobbox-ticker-item__title">22 Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
+                <span class="jobbox-ticker-item__text">Aarhus University</span>
+                <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
+            </li>
+            <li class="jobbox-ticker-item js-jobbox-animation__jobitem">
+                <h3 class="jobbox-ticker-item__title">33 Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
+                <span class="jobbox-ticker-item__text">Aarhus University</span>
+                <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
+      </raw>
+
+		<p>Flipping the tab on the 500 ml can issues a crack and a hiss, and an immediate scent of steel, mustiness and toasted malts. We pour the beer into a nonic glass, noting its deep (but clear) brown and copper hued, topped with a short-lived white head that drops to a thin ringed lace. The aroma is a bit gummy, with some mustiness and a good dose of toasty caramel beneath, and notes of biscuits and cellared apples. Silky-smooth on the palate, with a full, even and rounded body. Up-front sugary sweetness paves the way for more complex flavors of toasted malts and toffee; and subtle notes of chocolate, roots, chicory and jam-like forest fruits. Dots of honey here and there, with some watery molasses. Hops are soft, with light floral and herbal flavors, and complement the malty sweet backbone of this beer quite nicely. Sweet and toasted bread lingers in the finish, with herbal tea notes and a touch of dry biscuit and underlying nuttiness.</p>
+		<p>Lammin Sahtia pours a very hazy, dirty peach color with tons of remaining sediment in the bottle. The head is vigorous but quickly snaps down to a thin, wispy lace. There isn't much head retention, but you can see the tight bubbles surface. Aroma is uniquely pungent, with plenty of pine tones, hints of menthol, herbs and a vaguely medicinal undercurrent. Oddly, there are also bizarre tones of cooked greens, freshly cut grass, animal feed, fruit zest and generic bullion cube (no, really!). Lingering fruit characters bring to mind the essence of tart orange juice, with dominant berry tones and skin-like tannins. The 7.7 percent abv is hardly noticeable.</p>
+    </division>
+  </body>
+</article>
