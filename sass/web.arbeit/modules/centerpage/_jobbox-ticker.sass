@@ -1,8 +1,18 @@
 $jobbox-border-width: 6px
 
+// We need two seperate boxes to avoid rendering glitches (which appear if
+// the outer container has a border, and the inner top has a background)
+
+.jobbox-ticker__heading
+	background-color: $color-jobs-areas
+
+.jobbox-ticker-item__container
+	border: remify($jobbox-border-width) $color-jobs-areas solid
+	border-top: none
+	margin-top: -1px
+
 .jobbox-ticker
 	@extend %teaser
-	border: remify($jobbox-border-width) $color-jobs-areas solid
 	margin: remify(32px) $page-padding--small remify(14px)
 	position: relative
 
@@ -11,11 +21,10 @@ $jobbox-border-width: 6px
 		color: $zar-cool-grey
 		position: absolute
 		top: remify(-20px)
-		right: remify(-$jobbox-border-width)
+		right: 0
 
 	&__heading
 		+font-smoothing
-		background-color: $color-jobs-areas
 		color: #fff
 		padding: remify(10px 20px 20px)
 		text-align: center
@@ -34,8 +43,11 @@ $jobbox-border-width: 6px
 			color: $zar-whitesmoke
 
 .jobbox-ticker-item
+	&__list
+		padding: 0
+		list-style: none
 	&__container
-		padding: remify(10px 20px 20px)
+		padding: remify(10px 20px)
 	&__kicker
 		@extend %teaser-kicker--s
 	&__title
@@ -65,15 +77,53 @@ $jobbox-border-width: 6px
 	+respond-min($break-tablet-min)
 		margin: $vertical-space $cp-padding
 
+.jobbox-ticker-item:not(:first-child)
+	display: none
 
-// same height as other duo teasers on desktop for "modern" browsers
-+respond-min($break-tablet-min)
-	html.flexbox
-		.cp-area--duo .jobbox-ticker
-			+teaser-duo-equal-height
+.jobbox-ticker-item__kicker
+	display: block
+	position: relative
 
-	// noJS fallback flexbox for capable browsers
-	html.no-js
-		@supports(display: flex)
-			.cp-area--duo .jobbox-ticker
-				+teaser-duo-equal-height
+.jobbox-ticker-item__kicker:after
+	content: ''
+	box-sizing: border-box
+	position: absolute
+	top: 40%
+	right: 0
+	width: 18px
+	height: 18px
+	margin-top: -10px
+	margin-left: -10px
+	border-radius: 50%
+	border: 3px solid $zar-whitesmoke
+	border-top-color: $color-jobs-areas
+	transform: rotate(-45deg)
+	animation: show 9s linear infinite // 9s = duration+delay in jquery.animateJobs.js
+
+// @keyframes spinner
+// 	to
+// 		transform: rotate(360deg)
+
+@keyframes show
+	0%
+		border-color: $zar-whitesmoke
+	25%
+		border-right-color: $color-jobs-areas
+		border-bottom-color: $zar-whitesmoke
+		border-left-color: $zar-whitesmoke
+		border-top-color: $zar-whitesmoke
+	50%
+		border-right-color: $color-jobs-areas
+		border-bottom-color: $color-jobs-areas
+		border-left-color: $zar-whitesmoke
+		border-top-color: $zar-whitesmoke
+	75%
+		border-right-color: $color-jobs-areas
+		border-bottom-color: $color-jobs-areas
+		border-left-color: $color-jobs-areas
+		border-top-color: $zar-whitesmoke
+	100%
+		border-right-color: $color-jobs-areas
+		border-bottom-color: $color-jobs-areas
+		border-left-color: $color-jobs-areas
+		border-top-color: $color-jobs-areas

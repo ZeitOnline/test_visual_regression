@@ -1,4 +1,4 @@
-<aside class="{% block layout %}jobbox-ticker{% endblock %} js-jobbox-ticker">
+<aside class="{% block layout %}jobbox-ticker{% endblock %} js-jobbox-animation">
     <span class="{{ self.layout() }}__label">Verlagsangebot</span>
 
     <div class="{{ self.layout() }}__heading">
@@ -7,10 +7,25 @@
         <a class="{{ self.layout() }}__link">Zur Stellenliste.</a>
     </div>
 
-    <div class="{{ self.layout() }}-item__container">
+    <div class="{{ self.layout() }}-item__container js-jobbox-animation__container">
         <span class="{{ self.layout() }}-item__kicker">Aktuelle Jobs</span>
-        <h3 class="{{ self.layout() }}-item__title">Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
-        <span class="{{ self.layout() }}-item__text">Aarhus University</span>
-        <a class="{{ self.layout() }}-item__link" href="#">Zum Jobangebot</a>
+
+        <ul class="{{ self.layout() }}-item__list">
+            <li class="{{ self.layout() }}-item js-jobbox-animation__jobitem">
+                <h3 class="{{ self.layout() }}-item__title">Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
+                <span class="{{ self.layout() }}-item__text">Aarhus University</span>
+                <a class="{{ self.layout() }}-item__link" href="#">Zum Jobangebot</a>
+            </li>
+            <li class="{{ self.layout() }}-item js-jobbox-animation__jobitem">
+                <h3 class="{{ self.layout() }}-item__title">22 Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
+                <span class="{{ self.layout() }}-item__text">Aarhus University</span>
+                <a class="{{ self.layout() }}-item__link" href="#">Zum Jobangebot</a>
+            </li>
+            <li class="{{ self.layout() }}-item js-jobbox-animation__jobitem">
+                <h3 class="{{ self.layout() }}-item__title">33 Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
+                <span class="{{ self.layout() }}-item__text">Aarhus University</span>
+                <a class="{{ self.layout() }}-item__link" href="#">Zum Jobangebot</a>
+            </li>
+        </ul>
     </div>
 </aside>
