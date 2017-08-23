@@ -14,6 +14,8 @@
         {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
         <span class="{{ 'article-heading__title' | with_mods('podcast') }}">{{- view.title -}}</span>
         {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
-        {% include "zeit.web.core:templates/inc/article/sharing-menu.html" %}
+        <div class="article-heading__sharing--podcast">
+            {% include "zeit.web.arbeit:templates/inc/article/sharing-podcast.html" %}
+        </div>
     </header>
 {% endblock %}

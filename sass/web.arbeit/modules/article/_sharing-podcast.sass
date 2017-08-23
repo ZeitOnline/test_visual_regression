@@ -1,0 +1,19 @@
+.sharing-podcast
+	&__items
+		list-style-type: none
+		text-align: right
+		padding: remify(16px) 0
+		border-top: 1px solid #000
+	&__item
+		display: inline
+		margin-left: remify(16px)
+	&__icon
+		color: #000
+		+on-interaction
+			color: $color-link--default
+
+	+respond-min($break-tablet-min)
+		&__item
+			&--whatsapp,
+			&--messenger
+				display: none
