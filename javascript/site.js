@@ -49,7 +49,7 @@ require( 'web.core/plugins/jquery.notifications' );
 require( 'web.core/plugins/jquery.dropdownLink' );
 require( 'web.site/plugins/jquery.accordion' );
 require( 'web.site/plugins/jquery.adaptnav' );
-require( 'web.site/plugins/jquery.animateJobs' );
+require( 'web.core/plugins/jquery.animateJobs' );
 require( 'web.site/plugins/jquery.autoclick' );
 require( 'web.site/plugins/jquery.extendfooter' );
 require( 'web.site/plugins/jquery.fixPosition' );
