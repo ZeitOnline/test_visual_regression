@@ -9,8 +9,8 @@
         var box = $( element );
 
         this.current = 0;
-        this.jobs = box.find( '.jobbox__job' );
-        this.button = box.find( '.jobbox__button' );
+        this.jobs = box.find( '.js-jobbox-animation__jobitem' );
+        this.button = box.find( '.js-jobbox-animation__button' );
 
         if ( this.jobs.length ) {
             this.showJob( true );
@@ -27,7 +27,9 @@
             job = this.jobs.eq( this.current ),
             link = job.attr( 'href' );
 
-        this.button.attr( 'href', link );
+        if ( this.button.length ) {
+            this.button.attr( 'href', link );
+        }
 
         if ( !initial ) {
             job.velocity( 'transition.slideUpIn', { duration: 500, display: 'block' });

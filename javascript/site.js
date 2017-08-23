@@ -82,7 +82,7 @@ if ( pageType === 'centerpage' ) {
     $( '.js-bar-teaser-paginate' ).paginateTeasers();
     $( '.js-accordion' ).accordion();
     $( '.storystream-markup__content--first' ).longTextWrapper();
-    $( '.jobbox--animate' ).animateJobs();
+    $( '.js-jobbox-animation' ).animateJobs();
     $( '.js-tabs' ).tabs();
     $( '.js-dropdownlink' ).dropdownLink();
     $( '.js-truncate-region' ).truncateRegions();
