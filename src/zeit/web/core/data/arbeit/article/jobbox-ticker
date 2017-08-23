@@ -89,19 +89,19 @@
         <span class="jobbox-ticker-item__kicker">Aktuelle Jobs</span>
 
         <ul class="jobbox-ticker-item__list">
-            <li class="jobbox-ticker-item js-jobbox-animation__jobitem" style="opacity: 0; transform: translateY(-20px); display: none;">
-                <h3 class="jobbox-ticker-item__title">Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
-                <span class="jobbox-ticker-item__text">Aarhus University</span>
-                <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
-            </li>
-            <li class="jobbox-ticker-item js-jobbox-animation__jobitem velocity-animating" style="opacity: 1; display: block; transform: translateY(0px) translateZ(0px);">
-                <h3 class="jobbox-ticker-item__title">22 Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
-                <span class="jobbox-ticker-item__text">Aarhus University</span>
+            <li class="jobbox-ticker-item js-jobbox-animation__jobitem">
+                <h3 class="jobbox-ticker-item__title">Associate/Assistant Professor (f/m) in Organischer Chemie, Chemischer Organik, oder verwandten Fachgebieten</h3>
+                <span class="jobbox-ticker-item__text">Hyper Global MegaCorp Enterprises -- eine Ausgründung der Aarhus University of Aarhus</span>
                 <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
             </li>
             <li class="jobbox-ticker-item js-jobbox-animation__jobitem">
-                <h3 class="jobbox-ticker-item__title">33 Associate/Assistant Professor (f/m) in Organischer Chemie</h3>
-                <span class="jobbox-ticker-item__text">Aarhus University</span>
+                <h3 class="jobbox-ticker-item__title">Boss</h3>
+                <span class="jobbox-ticker-item__text">Firma</span>
+                <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
+            </li>
+            <li class="jobbox-ticker-item js-jobbox-animation__jobitem">
+                <h3 class="jobbox-ticker-item__title">Assistant Professor (f/m) Physik</h3>
+                <span class="jobbox-ticker-item__text">Wageningen University</span>
                 <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
             </li>
         </ul>
