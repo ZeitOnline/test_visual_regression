@@ -1,9 +1,13 @@
+from collections import namedtuple
+
 import grokcore.component
 import logging
 import zope.component
 
+
 import zeit.content.image.interfaces
 
+import zeit.web
 import zeit.web.core.image
 import zeit.web.site.area.rss
 import zeit.web.core.centerpage
@@ -33,7 +37,30 @@ class Link(zeit.web.site.area.rss.RSSLink):
 class Jobbox(zeit.web.core.centerpage.Module, list):
 
     def __init__(self, context):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        url = conf.get('academics_hp_feed')
-        list.__init__(self, zeit.web.site.area.rss.parse_feed(url, 'jobbox'))
+        # BW-Compat for old Jobboxes which are cp-extras and dont have a jobbox
+        # object associated with the CP-Extra module
+        try:
+            self.source_obj = context.jobbox
+        except AttributeError:
+            # BW-Compat for old Jobboxes which are cp-extras and dont have a jobbox
+            # object associated with the CP-Extra block
+            # Create a named-Tuple as a fallback
+            conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+            JobboxSourceObject = namedtuple('Jobbox', ['feed_url', 'teaser',
+                                           'landing_url'])
+            self.source_obj = JobboxSourceObject(
+                feed_url=conf.get('academics_hp_feed'),
+                teaser="Aktuelle Jobs im ZEIT Stellenmarkt",
+                landing_url="http://jobs.zeit.de/"
+            )
+        list.__init__(self, zeit.web.site.area.rss.parse_feed(
+            self.source_obj.feed_url, 'jobbox'))
         zeit.web.core.centerpage.Module.__init__(self, context)
+
+    @zeit.web.reify
+    def teaser_text(self):
+        return self.source_obj.teaser
+
+    @zeit.web.reify
+    def landing_page_url(self):
+        return self.source_obj.landing_url

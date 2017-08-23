@@ -160,6 +160,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/cp-areas.xml'),
         'vivi_zeit.content.cp_region-config-source': (
             'egg://zeit.web.core/data/config/cp-regions.xml'),
+        'vivi_zeit.content.cp_jobbox-source': (
+            'egg://zeit.web.core/data/config/jobboxes.xml'),
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.cp_cp-feed-max-items': '30',
