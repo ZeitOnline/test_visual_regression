@@ -85,7 +85,7 @@
         <a class="jobbox-ticker__link">Zur Stellenliste.</a>
     </div>
 
-    <div class="jobbox-ticker-item__container js-jobbox-animation__container" style="min-height: 212px;">
+    <div class="jobbox-ticker-item__container js-jobbox-animation__container">
         <span class="jobbox-ticker-item__kicker">Aktuelle Jobs</span>
 
         <ul class="jobbox-ticker-item__list">
