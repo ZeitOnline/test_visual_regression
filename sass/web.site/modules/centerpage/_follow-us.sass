@@ -8,6 +8,11 @@ $followus-icon-padding: remify(13px)
 	margin: remify(40px 0)
 	padding-left: $page-padding
 	padding-right: $page-padding
+	.cp-area--minor &,
+	.cp-area--major &
+		border: none
+		margin: remify(20px 0)
+		padding: 0
 	&__title
 		font-size: remify(18px)
 		letter-spacing: remify(0.08px)
@@ -15,6 +20,9 @@ $followus-icon-padding: remify(13px)
 		width: 308px // centering above mobile
 		+respond-min($break-tablet-min)
 			width: 100%
+			.cp-area--minor &,
+			.cp-area--major &
+				margin: remify(0 0 10px)
 	&__list
 		display: flex
 		justify-content: center
@@ -25,19 +33,29 @@ $followus-icon-padding: remify(13px)
 		text-align: center
 		+respond-min($break-tablet-min)
 			width: 100%
-			min-width: none
+			.cp-area--minor &,
+			.cp-area--major &
+				margin: 0 0 remify(20px) 0
+				min-width: auto
 	&__item
-		margin-left: 2px
+		margin-left: remify(2px)
 		&:first-child
 			margin-left: 0
 		+respond-min($break-tablet-min)
 			float: left // fallback
 			min-width: 140px
-			margin-left: 4px
+			margin-left: remify(4px)
 			width: 100%
+			.cp-area--minor &,
+			.cp-area--major &
+				min-width: auto
+				width: 25%
+				margin-left: remify(4px)
+				&:first-child
+					margin-left: 0
 		+respond-min($break-desktop-min)
 			min-width: 184px
-			margin-left: 5px
+			margin-left: remify(5px)
 	&__link
 		background: #ccc
 		color: $white
@@ -80,9 +98,15 @@ $followus-icon-padding: remify(13px)
 		+respond-min($break-tablet-min)
 			height: $followus-icon-tablet
 			line-height: ($followus-icon-tablet / 2) * 0.85 // 85% of the half icon size
-			margin-bottom: 5px
-			margin-top: 5px
+			margin-bottom: remify(5px)
+			margin-top: remify(5px)
 			width: $followus-icon-tablet
+			.cp-area--minor &,
+			.cp-area--major &
+				float: none
+				margin: 0 auto
+				padding: remify(13px) 0
+				width: auto
 	&__icon
 		display: inline-block
 		height: auto
@@ -90,6 +114,9 @@ $followus-icon-padding: remify(13px)
 		width: $followus-icon-mobile - (2 * $followus-icon-padding)
 		+respond-min($break-tablet-min)
 			width: $followus-icon-tablet - (2 * $followus-icon-padding)
+			.cp-area--minor &,
+			.cp-area--major &
+				width: auto
 		&--facebook
 			// Icon higher than wide
 			height: $followus-icon-mobile - (2 * $followus-icon-padding)
@@ -97,15 +124,26 @@ $followus-icon-padding: remify(13px)
 			width: auto
 			+respond-min($break-tablet-min)
 				height: $followus-icon-tablet - (2 * $followus-icon-padding)
+				.cp-area--minor &,
+				.cp-area--major &
+					display: block
+					height: auto
+					margin: remify(2px) auto
 		&--twitter
 			margin-top: remify(3px)
+			.cp-area--minor &,
+			.cp-area--major &
+				margin-top: remify(5px)
 	&__linktext
 		border-left: 1px solid rgba(#fff, 0.5)
 		display: none // hidden when mobile, a11y???
 		float: left
 		line-height: $followus-icon-mobile - remify(20px) // size - 2 * margin
-		margin: 10px 0
-		padding-left: 11px
+		margin: remify(10px 0)
+		padding-left: remify(11px)
 		+respond-min($break-tablet-min)
 			display: block
+			.cp-area--minor &,
+			.cp-area--major &
+				display: none
 
