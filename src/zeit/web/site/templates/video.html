@@ -25,7 +25,7 @@
         {% endrequire %}
 
         <div class="article__item article__item--wide article__item--rimless">
-            {% if block.video.has_advertisement %}
+            {% if view.has_advertisement %}
                 {% set player = settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') %}
             {% else %}
                 {% set player = settings('brightcove_videoplayer_hp_cp_single_wo_ads', 'r1xb937iwZ') %}
