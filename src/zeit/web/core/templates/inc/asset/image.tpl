@@ -30,19 +30,17 @@
         <meta itemprop="width" content="{{ image_width }}">
         <meta itemprop="height" content="{{ image_height }}">
         {% block media_caption -%}
-        {% if image.caption %}
-            <figcaption class="{% block media_caption_class %}figure{% endblock %}__caption {{ media_caption_additional_class }}">
-                {%- block media_caption_content %}
-                    {%- for item in image.copyrights %}
-                        <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
-                            {%- if item.url and not omit_image_links %}<a itemprop="url"{% if item.nofollow %} rel="nofollow"{% endif %} href="{{ item.url }}" target="_blank">{% endif -%}
-                            <span itemprop="name">{{ item.text }}</span>
-                            {%- if item.url and not omit_image_links %}</a>{% endif -%}
-                        </span>
-                    {%- endfor %}
-                {%- endblock media_caption_content -%}
-            </figcaption>
-        {% endif %}
+        <figcaption class="{% block media_caption_class %}figure{% endblock %}__caption {{ media_caption_additional_class }} {% if not image.caption %}hiddenbg{% endif %}">
+            {%- block media_caption_content %}
+                {%- for item in image.copyrights %}
+                    <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
+                        {%- if item.url and not omit_image_links %}<a itemprop="url"{% if item.nofollow %} rel="nofollow"{% endif %} href="{{ item.url }}" target="_blank">{% endif -%}
+                        <span itemprop="name">{{ item.text }}</span>
+                        {%- if item.url and not omit_image_links %}</a>{% endif -%}
+                    </span>
+                {%- endfor %}
+            {%- endblock media_caption_content -%}
+        </figcaption>
         {%- endblock media_caption -%}
     </figure>
 {% endif %}
