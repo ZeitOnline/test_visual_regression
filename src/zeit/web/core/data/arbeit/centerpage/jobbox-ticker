@@ -65,16 +65,12 @@
 			</container>
 		</region>
 		<region area="id-122f9c43-8a0e-4551-9636-8126ed4ea33d" kind="duo">
-			<container cp:type="cpextra" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f11c673478">
-				<cp_extra for="zeit.content.cp.interfaces.IArea" id="jobbox_ticker" />
-			</container>
+			<container cp:type="jobbox_ticker" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-909682ba-5b0d-4e11-a88a-4b30847c52c9" jobbox_ticker_id="medien"/>
 		</region>
 	</cluster>
     <cluster area="id-41a2899d-b569-4c42-b713-d5bdbd86a64f" kind="trio">
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a64f" kind="trio">
-		<container cp:type="cpextra" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f11c123478">
-			<cp_extra for="zeit.content.cp.interfaces.IArea" id="jobbox_ticker" />
-		</container>
+		<container cp:type="jobbox_ticker" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-909682ba-5b0d-4e11-a88a-4b30847c52c9" jobbox_ticker_id="hp"/>
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a63f" kind="trio">
         <container cp:type="teaser" module="zar-small" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe2b">
@@ -89,9 +85,7 @@
     </cluster>
     <cluster area="id-41a2899d-b589-4c42-b713-d5bdbd86a64f" kind="solo">
       <region area="id-41a2899d-b589-4c42-b713-bd5dbd68a64f" kind="solo">
-		<container cp:type="cpextra" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f33c123478">
-			<cp_extra for="zeit.content.cp.interfaces.IArea" id="jobbox_ticker" />
-		</container>
+		<container cp:type="jobbox_ticker" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-909682ba-5b0d-4e11-a88a-4b30847c52c9" jobbox_ticker_id="hp"/>
       </region>
     </cluster>
   </body>
