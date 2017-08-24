@@ -104,7 +104,7 @@
     </cluster>
 
     <cluster area="id-4cb09a25-12f5-4d90-bc9b-3b116277660d" kind="solo" visible="True" visible_mobile="True">
-      <region area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="query" count="10" hide-dupes="True" kind="zar-ranking" visible="True" visible_mobile="True">
+      <region area="id-31b34132-500d-41b4-b565-2e29f7f9840f" automatic="True" automatic_type="query" count="10" hide-dupes="False" kind="zar-ranking" visible="True" visible_mobile="True">
         <container cp:__name__="id-167b003d-0199-4cc5-831e-c1eaac5f925c" cp:type="auto-teaser" module="zar-ranking" visible="True"/>
         <container cp:__name__="id-4a960096-2165-4f23-bdf9-c38a34655c43" cp:type="auto-teaser" module="zar-ranking" visible="True"/>
         <container cp:__name__="id-aa3d66b6-5a83-4c28-98de-78686d074a62" cp:type="auto-teaser" module="zar-ranking" visible="True"/>
