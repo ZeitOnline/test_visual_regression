@@ -1,0 +1,55 @@
+.teaser-ranking
+	@extend %teaser
+	border-bottom: 1px $color-border-on-bright solid
+	padding: $vertical-space--small $page-padding--small
+	margin-left: auto
+	margin-right: auto
+	max-width: $medium-content-width
+	+respond-min($break-tablet-min)
+		border: none
+		padding: $vertical-space $cp-padding
+
+	&__media
+		// do not extend %teaser-media, because we do not want a bgcolor here
+		display: none
+		+respond-min($break-tablet-min)
+			//+reserve-space-for-teaser-media(100% / 16 * 9) // image variant 'wide' (16:9)
+			display: table-cell
+			margin: 0
+			padding-right: remify(20px)
+			vertical-align: top
+			width: remify(240px)
+
+	&__container
+		+respond-min($break-tablet-min)
+			vertical-align: top
+			display: table-cell
+
+	&__heading
+		margin: 0
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__series-label
+		@extend %teaser-kicker--s
+
+	&__kicker
+		@extend %teaser-kicker--s
+		margin-bottom: remify(8px)
+
+	&__title
+		@extend %teaser-title--xs
+		margin-bottom: remify(8px)
+
+	&__text
+		@extend %teaser-text
+		margin: remify(0 0 8px)
+
+	&__metadata
+		@extend %teaser-metadata
+		font-family: $font-franziska
+		font-style: italic
+
+	&__commentcount
+		@extend %teaser-commentcount
