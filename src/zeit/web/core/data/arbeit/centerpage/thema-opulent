@@ -65,8 +65,7 @@
         </container>
         <container cp:type="markup" module="markup" cp:__name__="id-7c959f63-b6db-40f1-a124-56eae525588f" align="center">
           <text>
-            <p>Das Hochstapler-Syndrom, teilweise auch Impostor-Phänomen, Impostor-Syndrom, Mogelpackungs-Syndrom oder Betrüger-Phänomen genannt, ist ein psychologisches Phänomen, bei dem Betroffene unfähig sind, ihre Erfolge zu internalisieren.</p>
-            <p>Trotz offensichtlicher Beweise für ihre Fähigkeiten sind Betroffene davon überzeugt, dass sie sich ihren Erfolg erschlichen und diesen nicht verdient haben. Von anderen als Erfolge angesehene Leistungen werden von den Betroffenen mit Glück, Zufall oder mit der Überschätzung der eigenen Fähigkeiten durch andere erklärt.</p>
+            <p>Noch immer wird ein absurdes Gewese um die Vereinbarkeit von Familie und Beruf gemacht, obwohl hier schon längst vereinbart ist, was vereinbar ist: Nichts. Schließlich ist der Beruf der Nabel der Gesellschaft.</p>
           </text>
         </container>
       </region>
@@ -79,8 +78,8 @@
         </container>
       </region>
       <region area="id-41a2899d-b569-4c42-b713-bd5dbd68a62f" kind="duo">
-        <container cp:type="teaser" module="zar-duo-bright" cp:__name__="id-d4e51b5a-245d-4c6f-5c7a-e35d7bf3be3b">
-          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/article/01-digitale-nomaden"></block>
+        <container cp:type="cpextra" module="jobbox_dropdown" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f11c673478">
+          <cp_extra for="zeit.content.cp.interfaces.IArea" id="jobbox_dropdown" />
         </container>
       </region>
     </cluster>
@@ -99,6 +98,14 @@
       <region area="id-41a2899d-b569-4c42-c713-bd5dbd68a62f" kind="trio">
         <container cp:type="teaser" module="zar-small" cp:__name__="id-d4e51b5b-245d-4c6f-5c7a-e35d7bf3be3b">
           <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/serie"></block>
+        </container>
+      </region>
+    </cluster>
+
+    <cluster area="id-41a2899d-b769-4c42-b713-d5bdbd86a64f" kind="solo">
+      <region area="id-41a2899d-b769-4c42-b713-bd5dbd68a64f" kind="solo">
+        <container cp:type="teaser" module="zar-debate" cp:__name__="id-d4e81b8a-245d-4c6f-b77a-e357dbf3be1b" force_mobile_image="True">
+          <block contenttype="infobox" uniqueId="http://xml.zeit.de/arbeit/sharedcontent/infobox-debate"></block>
         </container>
       </region>
     </cluster>
