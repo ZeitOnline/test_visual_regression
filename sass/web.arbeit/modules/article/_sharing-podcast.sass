@@ -2,17 +2,20 @@
 	&__items
 		list-style-type: none
 		text-align: right
-		padding: remify(16px) 0
-		border-top: 1px solid #000
+		margin: 0 // override user-agent styles
+		padding-top: remify(10px)
 	&__item
 		display: inline
-		margin-left: remify(16px)
+		margin-left: remify(20px)
 	&__icon
-		color: #000
-		+on-interaction
-			color: $color-link--default
+		color: inherit
+		vertical-align: middle
+	&__link
+		color: $zar-darkslate-grey
 
 	+respond-min($break-tablet-min)
+		max-width: $medium-content-width
+		margin: 0 auto
 		&__item
 			&--whatsapp,
 			&--messenger
