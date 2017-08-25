@@ -2,6 +2,9 @@
 	@extend %teaser
 	border-bottom: 1px $color-border-on-bright solid
 	padding: $vertical-space--small $page-padding--small
+	+respond-max($break-tablet-min)
+		&:first-child
+			border-top: 1px $color-border-on-bright solid
 	+respond-min($break-tablet-min)
 		border: none
 		padding: $vertical-space $cp-padding

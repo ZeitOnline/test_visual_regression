@@ -7,6 +7,9 @@
 	&__heading
 		font-size: remify(60px)
 		line-height: 1.3
+		margin: remify(30px) auto (20px)
+		+respond-min($break-tablet-min)
+			margin-top: remify(60px)
 
 	&__kicker
 		// TODO: unify into an abstract "stencil" class with the podcast header.
@@ -24,9 +27,23 @@
 	&__text
 		color: red
 
-// TODO: style explicitly? own class for _that_ markup?
 .topicpage-header + .markup
 	+padded
 	margin: 0 auto
 	max-width: $medium-content-width
 	text-align: center
+
+.topicpage-header:last-child,
+.topicpage-header + .markup:last-child
+	&:after
+		content: ''
+		background-color: $zar-sun-yellow
+		display: block
+		height: remify(30px)
+		margin: remify(20px) auto
+		width: remify(2px)
+		+respond-min($break-tablet-min)
+			height: remify(60px)
+			width: remify(1px)
+
+
