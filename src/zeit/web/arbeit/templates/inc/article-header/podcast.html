@@ -2,17 +2,23 @@
 {% extends "zeit.web.arbeit:templates/inc/article-header/default.html" %}
 {% block heading %}
     <header class="{{ 'article-heading' | with_mods('podcast') }}" itemprop="headline">
-        <img class="article-heading__image--podcast" src="http://img.zeit.de/zeit-magazin/2017-08/harald-martenstein-thermomix-zeitschriften-verantwortung/wide__400x200" alt="">
-        <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
-            {%- if view.serie -%}
-                Podcast: {{ view.serie -}}
-            {%- endif -%}
-        </span>
-        <span class="{{ 'article-heading__kicker' | with_mods('podcast') }}">
-            {{- view.supertitle -}}
-        </span>
-        {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
-        <span class="{{ 'article-heading__title' | with_mods('podcast') }}">{{- view.title -}}</span>
+        <div class="article-heading__container">
+            <figure class="article-heading__media--podcast">
+                <img src="http://img.zeit.de/zeit-magazin/2017-08/harald-martenstein-thermomix-zeitschriften-verantwortung/wide__400x200" alt="">
+            </figure>
+            <h1 class="article-heading__headline--podcast">
+                <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
+                    {%- if view.serie -%}
+                        Podcast: {{ view.serie -}}
+                    {%- endif -%}
+                </span>
+                <span class="{{ 'article-heading__kicker' | with_mods('podcast') }}">
+                    {{- view.supertitle -}}
+                </span>
+                {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
+                <span class="{{ 'article-heading__title' | with_mods('podcast') }}">{{- view.title -}}</span>
+            </h1>
+        </div>
         {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
         <hr class="article-heading__separator--podcast">
         <div class="article-heading__sharing--podcast">

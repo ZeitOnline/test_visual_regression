@@ -48,11 +48,6 @@
 			margin-bottom: $vertical-space
 			line-height: 1.12
 
-	&__image
-		&--podcast
-			left: 0
-			top: 0
-
 	&__series
 		&--podcast
 			display: block
@@ -70,12 +65,19 @@
 			border: 1px solid $zar-darkslate-grey
 			opacity: 0.5
 
+	&__media
+		&--podcast
+			img
+				margin-left: auto
+				margin-right: auto
+
 +respond-min($break-tablet-min)
 	.article-heading
 		padding-bottom: remify(40px)
 		padding-top: remify(60px)
 		&--podcast
 			padding-bottom: remify(16px)
+			text-align: left
 		&__kicker
 			font-size: remify(20px)
 			margin-bottom: remify(40px)
@@ -86,8 +88,14 @@
 			&--podcast
 				font-size: remify(60px)
 				margin-bottom: 0
+				max-width: $wide-content-width
 		&__title
 			font-size: remify(60px)
 			&--underlined
 				background-size: auto 7px
 				text-shadow: -4px 6px $white, 4px 6px $white
+		&__series
+			&--podcast
+				max-width: $wide-content-width
+				margin-left: auto
+				margin-right: auto
