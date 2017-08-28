@@ -52,7 +52,7 @@
         */
 
     };
-
-    vjs.plugin( 'videojsEventBroadcast', videojsEventBroadcastPlugin );
+    var registerPlugin = videojs.registerPlugin || videojs.plugin;
+    registerPlugin( 'videojsEventBroadcast', videojsEventBroadcastPlugin );
 
 })( window.videojs );
