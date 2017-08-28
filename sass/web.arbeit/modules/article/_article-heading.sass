@@ -2,15 +2,6 @@
 	margin: 0
 	padding-top: remify(16px)
 	padding-bottom: remify(16px)
-	&--podcast
-		+unpadded
-		+padded
-		background-color: $zar-sun-yellow
-		text-align: center
-		font-family: $font-patronbold
-		padding-bottom: remify(10px)
-		margin-bottom: $vertical-space
-
 	&__kicker
 		color: $zar-darkish-pink
 		display: block
@@ -19,16 +10,6 @@
 		font-weight: normal
 		letter-spacing: $letter-spacing-l
 		margin-bottom: remify(16px)
-		&--podcast
-			+font-smoothing
-			color: $color-text
-			font-size: remify(32px)
-			letter-spacing: normal
-			-webkit-text-fill-color: $zar-sun-yellow
-			-webkit-text-stroke-width: remify(1.25px)
-			-webkit-text-stroke-color: $color-text
-			line-height: 1.12
-
 	&__title
 		color: $primary-color
 		display: block
@@ -45,47 +26,13 @@
 			// parent's font-size across viewports
 			background-position: 0 1.18em
 			text-shadow: -2px 3px $white, 2px 3px $white
-		&--podcast
-			margin-bottom: $vertical-space
-			line-height: 1.12
-
-	&__series
-		&--podcast
-			display: block
-			font-family: $font-tabletgothic
-			font-weight: normal
-			font-size: remify(18px)
-			letter-spacing: $letter-spacing-l
-			margin: $vertical-space--small 0
-
-	&__separator
-		&--podcast
-			+unpadded
-			margin-top: 0
-			margin-bottom: 0
-			border: 1px solid $zar-darkslate-grey
-			opacity: 0.5
-
-	&__media
-		&--podcast
-			img
-				margin-left: auto
-				margin-right: auto
 
 +respond-min($break-tablet-min)
 	.article-heading
 		padding-bottom: remify(40px)
 		padding-top: remify(60px)
-		&--podcast
-			padding-top: remify(40px)
-			padding-bottom: remify(16px)
-			text-align: left
 		&__container
 			display: flex
-		&__media
-			&--podcast
-				margin-top: auto
-				margin-bottom: auto
 		&__kicker
 			font-size: remify(20px)
 			margin-bottom: remify(40px)
@@ -93,18 +40,8 @@
 			margin-right: auto
 			max-width: $medium-content-width
 			-webkit-text-stroke-width: remify(1.5px)
-			&--podcast
-				font-size: remify(60px)
-				margin-bottom: 0
-				max-width: $wide-content-width
-
 		&__title
 			font-size: remify(60px)
 			&--underlined
 				background-size: auto 7px
 				text-shadow: -4px 6px $white, 4px 6px $white
-		&__series
-			&--podcast
-				max-width: $wide-content-width
-				margin-left: auto
-				margin-right: auto
