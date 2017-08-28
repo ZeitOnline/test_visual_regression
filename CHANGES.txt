@@ -10,6 +10,8 @@ POSTDEPLOY
 
 - BUG-775: Add adplace16 to framebuilder
 
+- BUG-779: Add special adcontroller handle to campus homepage
+
 - MAINT: Use z.c.article function to get the first citation of an article
 
 
