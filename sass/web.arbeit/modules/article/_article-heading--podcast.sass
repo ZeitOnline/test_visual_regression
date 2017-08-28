@@ -44,6 +44,11 @@
 	&__podcast-player
 		max-height: remify(56px) // prevent jumping layout
 		overflow: hidden
+	&__headline
+		&--podcast
+			> span
+				overflow: hidden
+				text-overflow: ellipsis
 
 +respond-min($break-tablet-min)
 	.article-heading
@@ -55,13 +60,24 @@
 			&--podcast
 				margin-top: auto
 				margin-bottom: auto
+		&__headline
+			&--podcast
+				> span
+					max-width: remify(350px)
 		&__kicker
 			&--podcast
 				font-size: remify(60px)
 				margin-bottom: 0
-				max-width: $wide-content-width
+				overflow: hidden
+				text-overflow: ellipsis
 		&__series
 			&--podcast
-				max-width: $wide-content-width
 				margin-left: auto
 				margin-right: auto
+
++respond-min($break-desktop-min)
+	.article-heading
+		&__headline
+			&--podcast
+				> span
+					max-width: remify(570px)
