@@ -1,0 +1,67 @@
+.article-heading
+	&--podcast
+		+unpadded
+		+padded
+		background-color: $zar-sun-yellow
+		text-align: center
+		font-family: $font-patronbold
+		padding-bottom: remify(10px)
+		margin-bottom: $vertical-space
+	&__kicker
+		&--podcast
+			+font-smoothing
+			color: $color-text
+			font-size: remify(32px)
+			letter-spacing: normal
+			-webkit-text-fill-color: $zar-sun-yellow
+			-webkit-text-stroke-width: remify(1.25px)
+			-webkit-text-stroke-color: $color-text
+			line-height: 1.12
+	&__title
+		&--podcast
+			margin-bottom: $vertical-space
+			line-height: 1.12
+	&__series
+		&--podcast
+			display: block
+			font-family: $font-tabletgothic
+			font-weight: normal
+			font-size: remify(18px)
+			letter-spacing: $letter-spacing-l
+			margin: $vertical-space--small 0
+	&__separator
+		&--podcast
+			+unpadded
+			margin-top: 0
+			margin-bottom: 0
+			border: 1px solid $zar-darkslate-grey
+			opacity: 0.5
+	&__media
+		&--podcast
+			img
+				margin-left: auto
+				margin-right: auto
+	&__podcast-player
+		max-height: remify(56px) // prevent jumping layout
+		overflow: hidden
+
++respond-min($break-tablet-min)
+	.article-heading
+		&--podcast
+			padding-top: remify(40px)
+			padding-bottom: remify(16px)
+			text-align: left
+		&__media
+			&--podcast
+				margin-top: auto
+				margin-bottom: auto
+		&__kicker
+			&--podcast
+				font-size: remify(60px)
+				margin-bottom: 0
+				max-width: $wide-content-width
+		&__series
+			&--podcast
+				max-width: $wide-content-width
+				margin-left: auto
+				margin-right: auto
