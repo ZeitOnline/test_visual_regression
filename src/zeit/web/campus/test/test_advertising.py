@@ -9,7 +9,7 @@ def test_campus_adcontroller_values_return_values_on_hp(
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/index')
     adcv = [
-        ('$handle', 'homepage_trsf'),
+        ('$handle', 'campus_homepage_trsf'),
         ('level2', 'campus'),
         ('level3', ''),
         ('level4', ''),
