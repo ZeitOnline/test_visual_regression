@@ -5,10 +5,22 @@ POSTDEPLOY
 ----------
 
 
-3.83 (unreleased)
+3.84 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- BUG-775: Add adplace16 to framebuilder
+
+- BUG-779: Add special adcontroller handle to campus homepage
+
+- MAINT: Use z.c.article function to get the first citation of an article
+
+
+3.83 (2017-08-22)
+-----------------
+
+- FIX: Socialmedia icons for safari in mobile view
+
+- ARBEIT: Some more polishing
 
 
 3.82 (2017-08-22)
@@ -29,8 +41,6 @@ POSTDEPLOY
 - ARBEIT-21: Render Z+ badge on abo/registration teasers in ZEIT Arbeit
 
 - ARBEIT-12: Implement topic cluster on CP
-
-- ARBEIT: Some more polishing
 
 
 3.80 (2017-08-16)
