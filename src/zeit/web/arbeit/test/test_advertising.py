@@ -9,19 +9,16 @@ import zeit.web.site
 
 
 def test_zar_homepage_should_have_proper_ivw_script_integration(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
-
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True, 'iqd': True})
     browser = testbrowser('/arbeit/slenderized-index')
     ivw = browser.cssselect('script[src="https://script.ioam.de/iam.js"]')
     assert len(ivw) == 1
 
 
 def test_zar_adcontroller_head_code_is_present(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+        testbrowser,togglepatch):
+    togglepatch({'third_party_modules': True, 'iqd': True})
 
     browser = testbrowser('/arbeit/slenderized-index')
 
@@ -51,17 +48,15 @@ def test_zar_adcontroller_adtags_are_present(testbrowser, monkeypatch):
 
 
 def test_zar_adcontroller_finalizer_is_present(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True, 'iqd': True})
     browser = testbrowser('/arbeit/slenderized-index')
     assert 'AdController.finalize();' in browser.contents
 
 
 def test_zar_adcontroller_js_var_isset(
-        selenium_driver, testserver, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True}.get)
+        selenium_driver, testserver, togglepatch):
+    togglepatch({'third_party_modules': True, 'iqd': True})
     driver = selenium_driver
     driver.get('%s/arbeit/slenderized-index' % testserver.url)
 
@@ -166,10 +161,14 @@ def test_zar_tile8_is_rendered_on_cp(
 
 
 def test_zar_desktop_ads_are_rendered_on_cp(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True, 'iqd': True,
-        'iqd_digital_transformation': True}.get)
+        testbrowser, togglepatch):
+
+    togglepatch({
+        'third_party_modules': True,
+        'iqd': True,
+        'iqd_digital_transformation': True
+    })
+
     browser = testbrowser('/arbeit/index')
 
     assert len(browser.cssselect('#ad-desktop-3')) == 1
