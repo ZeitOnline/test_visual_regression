@@ -1,12 +1,15 @@
 {% extends "zeit.web.arbeit:templates/inc/article-header/default.html" %}
 {% block heading %}
     <header class="{{ 'article-heading' | with_mods('podcast') }}" itemprop="headline" data-ct-area="articleheader">
-        <div class="article-heading__container">
-            <figure class="article-heading__media--podcast">
-                <img src="http://img.zeit.de/zeit-magazin/2017-08/harald-martenstein-thermomix-zeitschriften-verantwortung/wide__400x200" alt="">
+        <div class="{{ 'article-heading__container' | with_mods('podcast') }}">
+            <figure class="{{ 'article-heading__media' | with_mods('podcast') }}">
+                <img src="/arbeit/image/podcast-illustration/original" alt="Dummy">
             </figure>
+            {% block header_image %}
+                {% include "zeit.web.arbeit:templates/inc/article-header/image.html" %}
+            {% endblock %}
             <div>
-                <h1 class="article-heading__headline--podcast">
+                <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}">
                     {%- if view.serie -%}
                     <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
                         Podcast: {{ view.serie -}}
@@ -23,8 +26,7 @@
                 </div>
             </div>
         </div>
-        <hr class="article-heading__separator--podcast">
-        <div class="article-heading__sharing--podcast">
+        <div class="{{ 'article-heading__sharing' | with_mods('podcast') }}">
             {% include "zeit.web.arbeit:templates/inc/article/sharing-podcast.html" %}
         </div>
     </header>
