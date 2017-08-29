@@ -1,6 +1,5 @@
 {% extends "zeit.web.core:templates/inc/region/default.html" %}
 {%- block before_region %}
-    <pre class="testdebug" style="background:#EEB200;color:#502F7E;">DEBUGtpuppe: {{ region_loop.index }}</pre>
     {% if toggles('iqd_digital_transformation') -%}
         {% if region_loop.index == 4 -%}
             {% include "zeit.web.core:templates/inc/ads/places/desktop/place4.html" %}
