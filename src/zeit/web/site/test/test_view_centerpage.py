@@ -1696,7 +1696,7 @@ def test_zett_parquet_is_rendering(testbrowser):
     zett_parquet = browser.cssselect('.cp-area--zett')[0]
     title = zett_parquet.cssselect('.parquet-meta__title')
     logo = zett_parquet.cssselect('.parquet-meta__logo')
-    teaser = zett_parquet.cssselect('.teaser-small')
+    teaser = zett_parquet.cssselect('article')
     more_link = zett_parquet.cssselect('.parquet-meta__more-link--zett')
     links = zett_parquet.cssselect('a')
 
