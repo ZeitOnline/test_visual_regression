@@ -1,0 +1,9 @@
+{% extends 'zeit.web.core:templates/inc/asset/image.tpl' %}
+{% set image = get_image(view.context, variant_id='original', fallback=False) -%}
+
+{% set image_itemprop = 'image' %}
+{% set module_layout = 'article-heading' %}
+
+{% block media_block %}article-heading__media article-heading__media--podcast{% endblock %}
+
+{% block media_caption_content %}{% endblock %}

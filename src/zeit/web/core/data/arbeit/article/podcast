@@ -1,14 +1,11 @@
 <article xmlns:cp="http://namespaces.zeit.de/CMS/cp">
 <head>
 <header>
-<rawtext>
-<text_reference type="intern" href="http://xml.zeit.de/arbeit/sharedcontent/embed-header-raw-embed-podcast" publication-date="" expires=""/>
-</rawtext>
+	<rawtext>
+		<text_reference type="intern" href="http://xml.zeit.de/arbeit/sharedcontent/embed-header-raw-embed-podcast" publication-date="" expires=""/>
+	</rawtext>
 </header>
-<image xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" base-id="http://xml.zeit.de/zeit-magazin/leben/2016-02/tobias-rehberger-afrika-cluster-teaser-2/" type="jpg" title="Rehberger Teaser" publication-date="" expires="">
-<bu/>
-<copyright>© Tobias Rehberger</copyright>
-</image>
+<image base-id="http://xml.zeit.de/arbeit/image/podcast-illustration/" type="png"  fill_color="ffe52c"/>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
