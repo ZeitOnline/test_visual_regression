@@ -8,6 +8,6 @@
             });
         }
     };
-    var registerPlugin = videojs.registerPlugin || videojs.plugin;
+    var registerPlugin = vjs.registerPlugin || vjs.plugin;
     registerPlugin( 'videojsAutostartForNonIOS', videojsAutostartForNonIOSPlugin );
 })( window.videojs );

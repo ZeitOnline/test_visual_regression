@@ -1,6 +1,6 @@
 ( function( vjs ) {
     // pause when clicking on ads
-    var registerPlugin = videojs.registerPlugin || videojs.plugin;
+    var registerPlugin = vjs.registerPlugin || vjs.plugin;
     registerPlugin( 'adClickPause', function() {
         var player = this;
         player.on( 'ads-click', function() {
