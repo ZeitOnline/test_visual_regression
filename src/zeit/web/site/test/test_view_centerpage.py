@@ -1713,6 +1713,13 @@ def test_zett_parquet_is_rendering(testbrowser):
                 ) in link.get('href')
 
 
+def test_zett_large_teaser_is_displayed_in_parquet(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+    zett_parquet = browser.cssselect('.cp-area--zett')[0]
+    teaser = zett_parquet.cssselect('.teaser-large')
+    assert len(teaser) == 1
+
+
 def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
     browser = testbrowser('/zeit-online/parquet-feeds')
 
