@@ -1,19 +1,22 @@
 .article-heading
 	&--podcast
 		+unpadded
-		+padded
 		background-color: $zar-sun-yellow
 		text-align: center
 		font-family: $font-patronbold
 		padding-bottom: remify(10px)
 		margin-bottom: $vertical-space
+	&__container--podcast
+		+padded
 	&__kicker
 		&--podcast
 			+font-smoothing
 			color: $color-text
 			font-size: remify(32px)
 			letter-spacing: normal
-			-webkit-text-fill-color: $zar-sun-yellow
+			// TODO: abstrakt (auch für Themenseite)
+			// TODO: unprefixed + Autoprefixer?
+			-webkit-text-fill-color: transparent
 			-webkit-text-stroke-width: remify(1.25px)
 			-webkit-text-stroke-color: $color-text
 			line-height: 1.12
@@ -29,19 +32,14 @@
 			font-size: remify(18px)
 			letter-spacing: $letter-spacing-l
 			margin: $vertical-space--small 0
-	&__separator
-		&--podcast
-			+unpadded
-			margin-top: 0
-			margin-bottom: 0
-			border: 1px solid $zar-darkslate-grey
-			opacity: 0.5
 	&__media
 		&--podcast
 			img
 				margin-left: auto
 				margin-right: auto
+				max-height: 200px
 	&__podcast-player
+		margin-bottom: remify(30px)
 		max-height: remify(56px) // prevent jumping layout
 		overflow: hidden
 	&__headline
@@ -49,6 +47,9 @@
 			> span
 				overflow: hidden
 				text-overflow: ellipsis
+	&__sharing--podcast
+		+padded
+		border-top: 1px rgba($color-text, 0.2) solid
 
 +respond-min($break-tablet-min)
 	.article-heading
@@ -56,28 +57,48 @@
 			padding-top: remify(40px)
 			padding-bottom: remify(16px)
 			text-align: left
+		&__container--podcast
+			display: flex
+			justify-content: space-around
+			// TODO: +padded, um dann wieder wegzunehmen ... das ist noch zu holprig!
+			padding: 0
+			margin: 0 auto
+			max-width: $wide-content-width
 		&__media
 			&--podcast
 				margin-top: auto
 				margin-bottom: auto
+				margin-right: remify(60px)
+				img
+					max-height: none
+					width: remify(220px)
 		&__headline
 			&--podcast
 				> span
 					max-width: remify(350px)
+					// TODO: den brauchts für ellipsis. Aber das ist so unfluide.
 		&__kicker
 			&--podcast
 				font-size: remify(60px)
 				margin-bottom: 0
 				overflow: hidden
 				text-overflow: ellipsis
-		&__series
-			&--podcast
-				margin-left: auto
-				margin-right: auto
+		&__podcast-player
+			margin-bottom: remify(60px)
 
 +respond-min($break-desktop-min)
 	.article-heading
 		&__headline
 			&--podcast
 				> span
-					max-width: remify(570px)
+					max-width: remify(560px)
+		&__podcast-player
+			margin-bottom: remify(80px)
+
+// Unbemmy: The first article item (which should be summary and metadata)
+// needs more margin, according to the design.
++respond-min($break-tablet-min)
+	.article-heading--podcast + .article__item > .summary
+		margin-top: remify(60px)
+	.article-heading--podcast + .article__item + .article-body
+		margin-top: remify(60px)
