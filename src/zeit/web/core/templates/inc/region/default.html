@@ -1,3 +1,4 @@
+{% block before_region %}{% endblock %}
 <div class="{{ 'cp-region' | with_mods(region.kind) }}{% if region.visible_mobile == False %} mobile-hidden{% endif %}">
     {%- block before_area_list %}{% endblock %}
     {%- for area in region.values() %}
