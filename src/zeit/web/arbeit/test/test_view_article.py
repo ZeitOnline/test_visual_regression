@@ -196,7 +196,7 @@ def test_zar_article_advertising_nextread_provides_expected_webtrekk_string(
 
 
 def test_zar_article_podcast_raw_embed_header_renders_correctly(testbrowser):
-    browser = testbrowser('/arbeit/article/embed-header-raw')
+    browser = testbrowser('/arbeit/article/podcast')
     assert len(browser.cssselect('.article-heading--podcast')) == 1
     assert len(browser.cssselect('.article-heading__container')) == 1
     assert len(browser.cssselect('.article-heading__headline--podcast')) == 1
