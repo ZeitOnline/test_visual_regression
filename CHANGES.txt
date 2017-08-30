@@ -10,11 +10,16 @@ POSTDEPLOY
 
 - ZON-2106: Disallow AGOF survey on homepage
 
+- ARBEIT-114: Put ads on ZEIT Arbeit
+
 - BUG-775: Add adplace16 to framebuilder
 
 - BUG-779: Add special adcontroller handle to campus homepage
 
 - MAINT: Use z.c.article function to get the first citation of an article
+
+- MAINT: Add new pytest fixture togglepatch for better toggle
+monkeypatching
 
 
 3.83 (2017-08-22)
