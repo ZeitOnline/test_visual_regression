@@ -8,6 +8,8 @@ POSTDEPLOY
 3.84 (unreleased)
 -----------------
 
+- ZON-2106: Disallow AGOF survey on homepage
+
 - BUG-775: Add adplace16 to framebuilder
 
 - BUG-779: Add special adcontroller handle to campus homepage

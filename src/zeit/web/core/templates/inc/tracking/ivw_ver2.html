@@ -17,7 +17,7 @@
     {# in our Wrapper-Apps: always use the 'Angebotskennung' for the 'MEW' (mobile enabled website) -#}
     if ( window.Zeit.isMobileView() || window.Zeit.isWrapped ) {
         iam_data.st = "mobzeit";
-        iam_data.sv = "mo";
+        iam_data.sv = "{% if view.is_hp %}ke{% else %}mo{% endif %}";
     }
 
     if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {
