@@ -5,7 +5,6 @@
 		<text_reference type="intern" href="http://xml.zeit.de/arbeit/sharedcontent/embed-header-raw-embed-podcast" publication-date="" expires=""/>
 	</rawtext>
 </header>
-<image base-id="http://xml.zeit.de/arbeit/image/podcast-illustration/" type="png"  fill_color="ffe52c"/>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
