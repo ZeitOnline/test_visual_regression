@@ -74,6 +74,8 @@
 
       <jobbox layout="ticker" id="wurstbrot" />
 
+      <jobboxticker id="umwelt"/>
+
       <raw alldevices="true">
 
 <aside class="jobbox-ticker js-jobbox-animation jobbox-ticker--article-marginalia">
