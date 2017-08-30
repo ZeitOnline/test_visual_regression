@@ -21,6 +21,8 @@ POSTDEPLOY
 - MAINT: Add new pytest fixture togglepatch for better toggle
 monkeypatching
 
+- MAINT: Remove old unused iqd_mobile configuration
+
 
 3.83 (2017-08-22)
 -----------------
