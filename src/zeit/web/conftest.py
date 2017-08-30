@@ -161,7 +161,9 @@ def app_settings(mockserver):
         'vivi_zeit.content.cp_region-config-source': (
             'egg://zeit.web.core/data/config/cp-regions.xml'),
         'vivi_zeit.content.cp_jobbox-ticker-source': (
-            'egg://zeit.web.core/data/config/cp-jobboxticker.xml'),
+            'egg://zeit.web.core/data/config/jobboxticker.xml'),
+        'vivi_zeit.arbeit_article-jobbox-ticker-source': (
+            'egg://zeit.web.core/data/config/jobboxticker.xml'),
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.cp_cp-feed-max-items': '30',
@@ -267,6 +269,10 @@ def test_asset(path):
     """Return file-object for given test asset path."""
     return open(pkg_resources.resource_filename(
         'zeit.web.core', 'data' + path), 'rb')
+
+@pytest.fixture(scope='session')
+def file_from_data():
+    return test_asset
 
 
 @pytest.fixture

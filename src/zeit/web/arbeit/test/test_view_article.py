@@ -5,6 +5,12 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
+import zeit.edit.interfaces
+import zeit.content.article.edit
+import zeit.cms.interfaces
+import lxml.etree
+import requests
+import mock
 
 
 def test_zar_article_single_page_has_no_pagination(testbrowser):
@@ -193,3 +199,25 @@ def test_zar_article_advertising_nextread_provides_expected_webtrekk_string(
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
         'stationaer.articlebottom.publisher-nextread.button.1.jobs_finden')
+
+
+def test_zar_article_should_provide_jobboxticker(
+        testserver, monkeypatch, file_from_data):
+
+    def myget(url, timeout=1):
+        xml = lxml.etree.parse(file_from_data('/jobboxticker/feed.rss'))
+        mymock = mock.Mock()
+        mymock.content = lxml.etree.tostring(xml)
+        return mymock
+
+    monkeypatch.setattr(requests, 'get', myget)
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/arbeit/article/jobbox-ticker')
+    body = zeit.content.article.edit.interfaces.IEditableBody(article)
+    jobbox_ticker = zeit.web.core.interfaces.IFrontendBlock(body[2])
+    ticker_item = next(jobbox_ticker.items)
+
+    assert 'my_title' == ticker_item.title
+    assert 'my_text' == ticker_item.text
+    assert 'http://my_landing_page' == jobbox_ticker.landing_page_url
