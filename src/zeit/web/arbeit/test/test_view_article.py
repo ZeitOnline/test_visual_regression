@@ -221,3 +221,14 @@ def test_zar_article_should_provide_jobboxticker(
     assert 'my_title' == ticker_item.title
     assert 'my_text' == ticker_item.text
     assert 'http://my_landing_page' == jobbox_ticker.landing_page_url
+
+
+def test_zar_article_podcast_raw_embed_header_renders_correctly(testbrowser):
+    browser = testbrowser('/arbeit/article/podcast')
+    assert len(browser.cssselect('.article-heading--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__container')) == 1
+    assert len(browser.cssselect('.article-heading__headline--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__series--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__kicker--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__title--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__podcast-player')) == 1
