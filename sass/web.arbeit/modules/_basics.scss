@@ -20,7 +20,7 @@ $color-exclamation-background: $color-text--light;
 		$letter-spacing: $letter-spacing-s,
 		$font-size: remify(16px),
 		$border-color: $primary-color,
-		$margin: remify(14px 6px 14px 0)
+		$margin: remify(14px 0)
 		);
 	@include zar-button-hollow-defaults;
 }
@@ -36,7 +36,7 @@ $color-exclamation-background: $color-text--light;
 		$letter-spacing: $letter-spacing-s,
 		$font-size: remify(16px),
 		$border-color: $color-jobs-elements,
-		$margin: remify(14px 6px 14px 0)
+		$margin: remify(14px 0)
 		);
 	@include zar-button-hollow-defaults;
 }
@@ -52,7 +52,7 @@ $color-exclamation-background: $color-text--light;
 		$letter-spacing: $letter-spacing-s,
 		$font-size: remify(16px),
 		$border-color: $white,
-		$margin: remify(14px 6px 14px 0)
+		$margin: remify(14px 0)
 		);
 	@include zar-button-hollow-defaults;
 }
@@ -68,7 +68,7 @@ $color-exclamation-background: $color-text--light;
 		$letter-spacing: $letter-spacing-s,
 		$font-size: remify(16px),
 		$border-color: $white,
-		$margin: remify(14px 6px 14px 0)
+		$margin: remify(14px 0)
 		);
 	@include zar-button-hollow-defaults;
 }

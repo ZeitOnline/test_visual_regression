@@ -904,9 +904,4 @@ def remove_tags_from_xml(block, *tagnames):
 @zeit.web.register_global
 def get_first_citation(uniqueId):
     article = zeit.cms.interfaces.ICMSContent(uniqueId, None)
-    body = zeit.content.article.edit.interfaces.IEditableBody(article, None)
-    if not body:
-        return None
-    for element in body.values():
-        if zeit.content.article.edit.interfaces.ICitation.providedBy(element):
-            return zeit.content.article.edit.interfaces.ICitation(element)
+    return zeit.content.article.edit.citation.find_first_citation(article)

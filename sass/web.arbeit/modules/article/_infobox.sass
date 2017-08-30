@@ -67,6 +67,8 @@
 				color: $zar-darkish-pink
 				.infobox-tab__link--text
 					border-bottom: 1px solid $zar-darkish-pink
+			.infobox-tab__title:first-of-type &
+				margin-top: remify(14px) // same as the __panel
 		.js &:after
 			+build-mobile-plus-minus-button()
 			position: absolute

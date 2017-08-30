@@ -156,5 +156,29 @@
       </region>
     </cluster>
 
+    <cluster area="id-21a2899d-b569-4c42-b713-d5bdbd86a64f" kind="solo">
+      <region area="id-21a2899d-b569-4c42-b713-bd5dbd68a64f" kind="topiccluster">
+        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-24e51b5a-245d-4c6f-b57a-e357dbf3be1b">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/centerpage/teaser-debate">
+          </block>
+        </container>
+        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-2de5b1a5-245d-4c6f-b57a-e357db3fbe2b">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/centerpage/teaser-duo"></block>
+        </container>
+        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-24e51b5a-245d-4c6f-5c7a-e35d7bf3be3b">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/serie"></block>
+        </container>
+        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-24e51b5b-245d-4c6f-5c7b-e35d7bf3be3b">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/teaser/long"></block>
+        </container>
+        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-24e51b5a-215d-4c6f-b57a-e357dbf3be1b">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/article/01-digitale-nomaden"></block>
+        </container>
+        <container cp:type="teaser" module="zar-topiccluster" cp:__name__="id-2de7b1a5-245d-4c6f-b57a-e357db3fbe2b">
+          <block contenttype="article" uniqueId="http://xml.zeit.de/arbeit/article/02-gesundheit-mitarbeiter"></block>
+        </container>
+      </region>
+    </cluster>
+
   </body>
 </centerpage>

@@ -5,7 +5,40 @@ POSTDEPLOY
 ----------
 
 
-3.81 (unreleased)
+3.84 (unreleased)
+-----------------
+
+- ZON-2106: Disallow AGOF survey on homepage
+
+- ARBEIT-114: Put ads on ZEIT Arbeit
+
+- BUG-775: Add adplace16 to framebuilder
+
+- BUG-779: Add special adcontroller handle to campus homepage
+
+- MAINT: Use z.c.article function to get the first citation of an article
+
+- MAINT: Add new pytest fixture togglepatch for better toggle
+monkeypatching
+
+
+3.83 (2017-08-22)
+-----------------
+
+- FIX: Socialmedia icons for safari in mobile view
+
+- ARBEIT: Some more polishing
+
+
+3.82 (2017-08-22)
+-----------------
+
+- ZON-4163: Switch videoplayer on articles by has_advertisement variable
+
+- BUG-772: Add correct linktitle to ZCO-Flyout
+
+
+3.81 (2017-08-18)
 -----------------
 
 - FIX: Fix image paths used in CSS
@@ -13,6 +46,8 @@ POSTDEPLOY
 - ARBEIT-53: Implement dark header layout for articles on ZEIT Arbeit
 
 - ARBEIT-21: Render Z+ badge on abo/registration teasers in ZEIT Arbeit
+
+- ARBEIT-12: Implement topic cluster on CP
 
 
 3.80 (2017-08-16)

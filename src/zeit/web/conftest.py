@@ -144,6 +144,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
         'vivi_zeit.content.article_template-source': (
             'egg://zeit.web.core/data/config/article-templates.xml'),
+        'vivi_zeit.content.article_citation-layout-source': (
+            'egg://zeit.web.core/data/config/article-citation-layouts.xml'),
         'vivi_zeit.campus_article-stoa-source': (
             'egg://zeit.web.core/data/config/article-stoa.xml'),
         'vivi_zeit.magazin_article-related-layout-source': (
@@ -662,6 +664,32 @@ def mock_metrics(monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.metrics, 'timer',
         zeit.web.core.metrics.mock_contextmanager)
+
+
+@pytest.fixture
+def togglepatch(monkeypatch):
+
+    class ToggleOverride(object):
+        def __init__(self, toggles):
+            self.original_find = zeit.web.core.application.FEATURE_TOGGLES.find
+            self.toggles = toggles
+
+        def find(self, arg):
+            try:
+                return self.toggles[arg]
+            except KeyError:
+                return self.original_find(arg)
+
+    def patch(patched_toggles):
+        # We alter the "find" method of the original FEATURE_TOGGLE Source.
+        # As a result, Friedbert will use our "find" method to determine
+        # the value of a toggle. And our "find" method looks into the
+        # patched dict first, and then into the original Source.
+        monkeypatch.setattr(
+            zeit.web.core.application.FEATURE_TOGGLES,
+            'find', ToggleOverride(patched_toggles).find)
+
+    return patch
 
 
 @pytest.fixture

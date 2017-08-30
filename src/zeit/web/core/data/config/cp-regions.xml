@@ -23,6 +23,9 @@
     <region kind="topic" title="Thema-Region (Artikel)" available="zeit.arbeit.interfaces.IZARContent">
         <area kind="topic" apply_teaser_layouts_automatically="true" first_teaser_layout="zar-topic-small"/>
     </region>
+    <region kind="solo" title="Topiccluster Fläche" type="!storystream" available="zeit.cms.section.interfaces.IZARContent">
+        <area kind="topiccluster"/>
+    </region>
     <region kind="trio" title="Trio-Region" type="!storystream" available="zeit.magazin.interfaces.IZMOContent">
         <area kind="trio"/>
     </region>

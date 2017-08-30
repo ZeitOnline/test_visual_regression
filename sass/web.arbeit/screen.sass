@@ -8,10 +8,12 @@
 @import "constants"
 @import "mixins"
 
+// declare silent selectors in this block to avoid issues regarding source-order
 @import "modules/fonts"
 @import "web.core/modules/defaults"
 @import "modules/basics"
 @import "modules/forms"
+@import "modules/teaser/teaser"
 @import "modules/main"
 @import "web.core/modules/breakpoints-to-js"
 @import "web.core/modules/page"
@@ -55,7 +57,7 @@
 @import "modules/comments/comment-meta"
 
 // teaser
-@import "modules/teaser/teaser"
+
 @import "modules/teaser/teaser-small"
 @import "modules/teaser/teaser-duo"
 @import "modules/teaser/teaser-lead"
@@ -64,6 +66,7 @@
 @import "modules/teaser/teaser-topic-sub"
 @import "modules/teaser/teaser-quote"
 @import "modules/teaser/teaser-debatebox"
+@import "modules/teaser/teaser-topiccluster"
 
 // centerpage
 @import "modules/centerpage/centerpage"

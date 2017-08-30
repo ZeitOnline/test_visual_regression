@@ -255,3 +255,10 @@ def test_video_comment_pagination_should_contain_seo_slug(
     assert link == (
         'http://example.com/zeit-online/video/3537342483001/kuenstliche-'
         'intelligenz-roboter-myon-uebernimmt-opernrolle?page=2#comments')
+
+
+def test_video_has_no_ads(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/video-ads')
+    playerdata = browser.cssselect('video')[0].attrib['data-player']
+    assert playerdata == ("SJENxUNKe")
