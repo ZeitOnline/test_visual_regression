@@ -8,6 +8,8 @@ POSTDEPLOY
 3.84 (unreleased)
 -----------------
 
+- ZON-4172: Switch videoplayer on HP/CP/VSP when 'has_advertisement' is 'no'
+
 - ZON-2106: Disallow AGOF survey on homepage
 
 - ARBEIT-114: Put ads on ZEIT Arbeit
