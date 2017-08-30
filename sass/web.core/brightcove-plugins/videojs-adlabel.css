@@ -1,9 +1,6 @@
 /*
- * Special CSS for brightcove player inline text "Anzeige".
  *
- * This file is stored in vivi (http://vivi.zeit.de/repository/static/css/brightcove-plugins/)
- * and included into the players via http://scripts.zeit.de/static/css/brightcove-plugins/videojs-adlabel.css .
- * But we keep a copy inside the repository to have it greppable and to keep a file history.
+ * Special CSS for brightcove player inline text "Anzeige"
  *
 */
 .vjs-ad-playing.vjs-user-inactive .vjs-current-time {
@@ -23,7 +20,20 @@
 .vjs-ad-playing.vjs-user-active .vjs-current-time {
 	width: 120px !important;
 }
-.vjs-ad-playing .vjs-current-time-display::before {
+
+.vjs-ad-playing .vjs-current-time-display::before, .vjs-ad-control-bar .vjs-volume-panel::before{
 	content: 'Anzeige';
-	padding-right: 15px;
+	margin: 13px -6px 0 -6px;
+}
+
+.vjs-ad-playing .vjs-control:hover::before, .vjs-ad-playing .vjs-control:focus::before{
+	text-shadow: none;
+}
+
+.vjs-ad-playing .vjs-volume-panel {
+	margin-right:  20px;
+}
+
+.vjs-ad-playing .vjs-volume-panel .vjs-volume-control {
+	margin-left:  -18px;
 }
