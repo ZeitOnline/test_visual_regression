@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ARBEIT-114: Put ads on ZEIT Arbeit
 
+- ARBEIT-18: Add podcast as raw-embed header to ZEIT Arbeit
+
 - BUG-775: Add adplace16 to framebuilder
 
 - BUG-779: Add special adcontroller handle to campus homepage
