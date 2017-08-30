@@ -53,10 +53,14 @@ $jobbox-border-width: 6px
 	&__title
 		@extend %teaser-title--xxs
 		margin: .5em 0
+		max-height: 1.4em * 4 // multiply line-height for a max 3 lines height
+		overflow: hidden
 	&__text
 		@extend %teaser-metadata
 		font-family: $font-franziska
 		font-style: italic
+		max-height: 1.4em * 2 // multiply line-height for a max 2 lines height
+		overflow: hidden
 	&__link
 		@extend %zar-button-hollow--jobs
 		display: block
@@ -137,3 +141,13 @@ $jobbox-border-width: 6px
 		float: left
 		margin-right: remify(50px)
 		width: remify(300px)
+	// to avoid re-arranging the floating text inside articles, we have to
+	// set a fixed height on the items, regardless of their content
+	.jobbox-ticker-item__title
+		height: 1.4em * 3 // multiply line-height for a 3 lines height
+		overflow: hidden
+	.jobbox-ticker-item__text
+		display: block
+		height: 1.4em // only allow 1 line-height
+		overflow: hidden
+

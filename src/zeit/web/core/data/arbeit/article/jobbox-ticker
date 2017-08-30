@@ -68,52 +68,14 @@
   <body>
     <supertitle>Dummy Content</supertitle>
     <title>Jobbox Ticker (mit konkreten Stellenanzeigen)</title>
-    <subtitle>+++ TODO +++ TODO +++ TODO +++ Der Debattenaufruf ist technisch eine Infobox mit dem Layout "debate". Dieselbe Debatten-Infobox kann sowohl in Teasern auf CPs als auch in Artikelblöcken genutzt werden.</subtitle>
+    <subtitle>Die Jobbox kann auf Centerpages und in Artikeln eingebunden werden.</subtitle>
     <division type="page">
-      <p>This Russian Imperial Stout is dedicated to Georgy Zhukov, arguably one of the finest generals of World War II. Opaque black in color, with notes of espresso, chocolate, dark toffee and hints of backstrap molasses. The English hop varietals provide a subtle herbal dryness, and finishes with a hearty slap of roasty espresso. Pair Marshal Zhukov’s with Mushroom Solyanka, dark chocolate, cherries and ground wars in Russia. We brew and release Zhukov's in the summer knowing that a beer of this heft reaches its full potential a few months after release. So save a bottle for the cold winter!</p>
+        <p>This Russian Imperial Stout is dedicated to Georgy Zhukov, arguably one of the finest generals of World War II. Opaque black in color, with notes of espresso, chocolate, dark toffee and hints of backstrap molasses. The English hop varietals provide a subtle herbal dryness, and finishes with a hearty slap of roasty espresso. Pair Marshal Zhukov’s with Mushroom Solyanka, dark chocolate, cherries and ground wars in Russia. We brew and release Zhukov's in the summer knowing that a beer of this heft reaches its full potential a few months after release. So save a bottle for the cold winter!</p>
 
-      <jobbox layout="ticker" id="wurstbrot" />
+        <jobboxticker id="umwelt"/>
 
-      <jobboxticker id="umwelt"/>
-
-      <raw alldevices="true">
-
-<aside class="jobbox-ticker js-jobbox-animation jobbox-ticker--article-marginalia">
-    <span class="jobbox-ticker__label">Verlagsangebot</span>
-
-    <div class="jobbox-ticker__heading">
-        <span class="jobbox-ticker__kicker">ZEIT Stellenmarkt</span>
-        <h2 class="jobbox-ticker__title">Aktuelle Stellen im Bereich Wissenschaft / Lehre / Forschung</h2>
-        <a class="jobbox-ticker__link">Zur Stellenliste.</a>
-    </div>
-
-    <div class="jobbox-ticker-item__container js-jobbox-animation__container">
-        <span class="jobbox-ticker-item__kicker">Aktuelle Jobs</span>
-
-        <ul class="jobbox-ticker-item__list">
-            <li class="jobbox-ticker-item js-jobbox-animation__jobitem">
-                <h3 class="jobbox-ticker-item__title">Associate/Assistant Professor (f/m) in Organischer Chemie, Chemischer Organik, oder verwandten Fachgebieten</h3>
-                <span class="jobbox-ticker-item__text">Hyper Global MegaCorp Enterprises -- eine Ausgründung der Aarhus University of Aarhus</span>
-                <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
-            </li>
-            <li class="jobbox-ticker-item js-jobbox-animation__jobitem">
-                <h3 class="jobbox-ticker-item__title">Boss</h3>
-                <span class="jobbox-ticker-item__text">Firma</span>
-                <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
-            </li>
-            <li class="jobbox-ticker-item js-jobbox-animation__jobitem">
-                <h3 class="jobbox-ticker-item__title">Assistant Professor (f/m) Physik</h3>
-                <span class="jobbox-ticker-item__text">Wageningen University</span>
-                <a class="jobbox-ticker-item__link" href="#">Zum Jobangebot</a>
-            </li>
-        </ul>
-    </div>
-</aside>
-
-      </raw>
-
-		<p>Flipping the tab on the 500 ml can issues a crack and a hiss, and an immediate scent of steel, mustiness and toasted malts. We pour the beer into a nonic glass, noting its deep (but clear) brown and copper hued, topped with a short-lived white head that drops to a thin ringed lace. The aroma is a bit gummy, with some mustiness and a good dose of toasty caramel beneath, and notes of biscuits and cellared apples. Silky-smooth on the palate, with a full, even and rounded body. Up-front sugary sweetness paves the way for more complex flavors of toasted malts and toffee; and subtle notes of chocolate, roots, chicory and jam-like forest fruits. Dots of honey here and there, with some watery molasses. Hops are soft, with light floral and herbal flavors, and complement the malty sweet backbone of this beer quite nicely. Sweet and toasted bread lingers in the finish, with herbal tea notes and a touch of dry biscuit and underlying nuttiness.</p>
-		<p>Lammin Sahtia pours a very hazy, dirty peach color with tons of remaining sediment in the bottle. The head is vigorous but quickly snaps down to a thin, wispy lace. There isn't much head retention, but you can see the tight bubbles surface. Aroma is uniquely pungent, with plenty of pine tones, hints of menthol, herbs and a vaguely medicinal undercurrent. Oddly, there are also bizarre tones of cooked greens, freshly cut grass, animal feed, fruit zest and generic bullion cube (no, really!). Lingering fruit characters bring to mind the essence of tart orange juice, with dominant berry tones and skin-like tannins. The 7.7 percent abv is hardly noticeable.</p>
+        <p>Flipping the tab on the 500 ml can issues a crack and a hiss, and an immediate scent of steel, mustiness and toasted malts. We pour the beer into a nonic glass, noting its deep (but clear) brown and copper hued, topped with a short-lived white head that drops to a thin ringed lace. The aroma is a bit gummy, with some mustiness and a good dose of toasty caramel beneath, and notes of biscuits and cellared apples. Silky-smooth on the palate, with a full, even and rounded body. Up-front sugary sweetness paves the way for more complex flavors of toasted malts and toffee; and subtle notes of chocolate, roots, chicory and jam-like forest fruits. Dots of honey here and there, with some watery molasses. Hops are soft, with light floral and herbal flavors, and complement the malty sweet backbone of this beer quite nicely. Sweet and toasted bread lingers in the finish, with herbal tea notes and a touch of dry biscuit and underlying nuttiness.</p>
+        <p>Lammin Sahtia pours a very hazy, dirty peach color with tons of remaining sediment in the bottle. The head is vigorous but quickly snaps down to a thin, wispy lace. There isn't much head retention, but you can see the tight bubbles surface. Aroma is uniquely pungent, with plenty of pine tones, hints of menthol, herbs and a vaguely medicinal undercurrent. Oddly, there are also bizarre tones of cooked greens, freshly cut grass, animal feed, fruit zest and generic bullion cube (no, really!). Lingering fruit characters bring to mind the essence of tart orange juice, with dominant berry tones and skin-like tannins. The 7.7 percent abv is hardly noticeable.</p>
     </division>
   </body>
 </article>

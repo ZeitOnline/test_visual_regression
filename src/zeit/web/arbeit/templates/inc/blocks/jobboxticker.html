@@ -1,0 +1,6 @@
+{%- extends "zeit.web.arbeit:templates/inc/shared/jobbox_ticker.tpl" -%}
+
+{% block layout_modifier %}jobbox-ticker--article-marginalia{% endblock %}
+
+{% set jobbox = block %} {# this is the container element #}
+{% set jobitems = block.items %} {# these are the items that get iterated #}
