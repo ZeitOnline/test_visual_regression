@@ -12,12 +12,7 @@
 			margin-top: remify(60px)
 
 	&__kicker
-		// TODO: unify into an abstract "stencil" class with the podcast header.
-		color: $color-page-bg
-		webkit-text-fill-color: $color-page-bg
-		-webkit-text-stroke-width: 1px
-		-webkit-text-stroke-color: $color-text
-		// TODO: Außerdem: browser- und backwards-Kompatibilität
+		+outlined-font($color-text)
 
 	&__title
 		color: $color-text
@@ -45,5 +40,3 @@
 		+respond-min($break-tablet-min)
 			height: remify(60px)
 			width: remify(1px)
-
-
