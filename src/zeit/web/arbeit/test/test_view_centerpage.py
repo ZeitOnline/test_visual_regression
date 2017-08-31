@@ -93,7 +93,7 @@ def test_zar_teaser_topic_should_display_no_image_on_mobile(
         assert teaser_image.is_displayed() is False
 
 
-def test_zar_teasers_zo_zplus_provide_expected_webtrekk_string(
+def test_zar_teasers_to_zplus_provide_expected_webtrekk_string(
         selenium_driver, testserver):
     url = testserver.url + '{}#debug-clicktracking'
     driver = selenium_driver
@@ -157,3 +157,24 @@ def test_zar_teaser_quote_has_correct_structure(testbrowser):
     teaser_without_quote_text = teaser_without_quote[0].cssselect(
         '.teaser-quote__text')[0].text.strip()
     assert teaser_without_quote_text.startswith('Mit dem Jobwechsel')
+
+
+def test_zar_topicpage_has_correct_structure(testbrowser, datasolr):
+    # first page with handmade teasers
+    select = testbrowser('/arbeit/centerpage/thema-opulent').cssselect
+    assert 1 == len(select(
+        '.cp-region--solo > .cp-area--solo > .topicpage-header + .markup'))
+    assert len(select('.cp-area--duo')) == 2
+    assert len(select('.teaser-duo')) == 1
+    assert len(select('.jobbox-dropdown')) == 1
+    assert len(select('.teaser-small')) == 3
+    assert len(select('.cp-area--zar-ranking article.teaser-ranking')) == 10
+
+    # second page without the handmade teasers
+    select = testbrowser('/arbeit/centerpage/thema-opulent?p=2').cssselect
+    assert len(select('.cp-region')) == 2
+    assert len(select('.topicpage-header + .markup')) == 1
+    assert len(select('.pager.pager--zar-ranking')) == 1
+    # second page should be the current one
+    assert len(select(
+        '.pager__pages > .pager__page--current:nth-child(2)')) == 1

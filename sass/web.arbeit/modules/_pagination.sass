@@ -65,6 +65,11 @@
 		a, span
 			+inline-block
 			padding: 0 .7em
+	&--zar-ranking
+		// like teaser-ranking
+		padding: $vertical-space--small $page-padding--small
+		+respond-min($break-tablet-min)
+			padding: $vertical-space $cp-padding
 
 +respond-min($break-tablet-min)
 	.article-pagination
