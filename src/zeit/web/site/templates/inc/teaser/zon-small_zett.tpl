@@ -20,10 +20,6 @@
 {% block teaser_media_position_after_title %}
     {% if loop.index == 1 %}
         {% set module_layout = self.layout() %}
-        {# forces mobile image for first zett teaser #}
-        {% if module[0].is_ad == False %}
-            {% set force_mobile_image = True %}
-        {% endif %}
         {% include "zeit.web.core:templates/inc/asset/image_teaser.tpl" %}
     {% endif %}
 {% endblock %}
