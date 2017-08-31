@@ -594,3 +594,15 @@ $inline-block-alignment: none !default;
 	overflow: hidden;
 	padding-bottom: $ratio;
 }
+
+
+@mixin outlined-font($color) {
+	@include font-smoothing()
+	color: $color; // fallback
+	text-fill-color: transparent;
+	text-stroke-width: remify(1.25px);
+	text-stroke-color: $color;
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke-width: remify(1.25px);
+	-webkit-text-stroke-color: $color;
+}
