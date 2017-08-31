@@ -2,6 +2,7 @@
 {% set tracking_id = 'share' %}
 {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_%s_link_x' | format(tracking_id) -%}
 {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.%s.link.x' | format(tracking_id) %}
+{% block sharing_menu -%}
 <div class="{{ self.layout() | with_mods(view.share_buttons) }}">
     <ul class="{% block layout %}sharing-menu{% endblock %}__items" id="sharing-menu-list" data-ct-row="social">
         <li class="{{ self.layout() }}__item">
@@ -38,3 +39,4 @@
         {%- endblock %}
     </ul>
 </div>
+{%- endblock sharing_menu %}

@@ -30,7 +30,7 @@
         <meta itemprop="width" content="{{ image_width }}">
         <meta itemprop="height" content="{{ image_height }}">
         {% block media_caption -%}
-        <figcaption class="{% block media_caption_class %}figure{% endblock %}__caption {{ media_caption_additional_class }}">
+        <figcaption class="{% block media_caption_class %}figure{% endblock %}__caption {{ media_caption_additional_class }} {% if not image.caption %}hiddenbg{% endif %}">
             {%- block media_caption_content %}
                 {%- for item in image.copyrights %}
                     <span class="{{ self.media_caption_class() }}__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">

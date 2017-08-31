@@ -34,9 +34,9 @@ def test_zar_article_paginated_has_toc(testbrowser):
 def test_zar_article_renders_quotes_correctly(testbrowser):
     browser = testbrowser('/arbeit/article/quotes')
     quotes = browser.cssselect('.quote')
-    arrows = browser.cssselect('.quote__source-arrow')
+    sources = browser.cssselect('.quote__source')
     assert len(quotes) == 4
-    assert len(arrows) == 2
+    assert len(sources) == 2
 
 
 @pytest.mark.parametrize('c1_parameter', [
@@ -193,3 +193,14 @@ def test_zar_article_advertising_nextread_provides_expected_webtrekk_string(
     tracking_data = driver.execute_script("return window.trackingData")
     assert tracking_data.startswith(
         'stationaer.articlebottom.publisher-nextread.button.1.jobs_finden')
+
+
+def test_zar_article_podcast_raw_embed_header_renders_correctly(testbrowser):
+    browser = testbrowser('/arbeit/article/podcast')
+    assert len(browser.cssselect('.article-heading--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__container')) == 1
+    assert len(browser.cssselect('.article-heading__headline--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__series--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__kicker--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__title--podcast')) == 1
+    assert len(browser.cssselect('.article-heading__podcast-player')) == 1
