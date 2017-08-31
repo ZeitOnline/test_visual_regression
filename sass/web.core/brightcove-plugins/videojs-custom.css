@@ -1,0 +1,17 @@
+/*
+ *
+ * Special CSS for brightcove video-player 
+ *
+*/
+.vjs-social-overlay .vjs-social-share-link {
+	color:  #ffffff;
+}
+
+.video-js .vjs-control:focus {
+  outline: none;
+}
+
+body.user-tabbing .vjs-control:focus {
+  outline: 2px solid #7AACFE !important; /* for non-webkit browsers */
+  outline: 5px auto -webkit-focus-ring-color !important;
+}
