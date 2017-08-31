@@ -8,6 +8,8 @@ POSTDEPLOY
 3.85 (unreleased)
 -----------------
 
+- ZON-4002: No wt-parameter cp27 if video is expired
+
 - FIX: Fix ad placement on video page
 
 

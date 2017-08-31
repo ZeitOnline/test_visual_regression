@@ -1380,6 +1380,11 @@ def test_article_contains_webtrekk_parameter_asset(dummy_request):
     view = zeit.web.site.view_article.Article(context, dummy_request)
     assert view.webtrekk['customParameter']['cp27'] == 'raw.header/seite-1'
 
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/video-expired')
+    view = zeit.web.site.view_article.Article(context, dummy_request)
+    assert view.webtrekk['customParameter']['cp27'] == ''
+
 
 def test_advertorial_article_contains_correct_webtrekk_param(dummy_request):
     context = zeit.cms.interfaces.ICMSContent(
