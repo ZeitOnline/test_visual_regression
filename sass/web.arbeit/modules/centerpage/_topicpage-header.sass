@@ -5,10 +5,13 @@
 	text-align: center
 
 	&__heading
-		font-size: remify(60px)
+		font-size: remify(40px)
 		line-height: 1.3
 		margin: remify(30px) auto (20px)
+		font-family: $font-patronbold
+		word-wrap: break-word
 		+respond-min($break-tablet-min)
+			font-size: remify(60px)
 			margin-top: remify(60px)
 
 	&__kicker
@@ -17,7 +20,6 @@
 	&__title
 		color: $color-text
 		display: block
-		font-family: $font-patronbold
 
 	&__text
 		color: red
