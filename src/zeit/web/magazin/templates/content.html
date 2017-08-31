@@ -1,6 +1,7 @@
 {% extends "zeit.web.magazin:templates/layout.html" %}
 
 {% block main %}
+    {% block advertorial_marker %}{% endblock advertorial_marker %}
     <article class="article" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         {% block article_header %}
