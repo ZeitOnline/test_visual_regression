@@ -5,14 +5,35 @@ POSTDEPLOY
 ----------
 
 
-3.84 (unreleased)
+3.85 (unreleased)
 -----------------
+
+- FIX: Fix ad placement on video page
+
+
+3.84 (2017-08-30)
+-----------------
+
+- ZON-4172: Switch videoplayer on HP/CP/VSP when 'has_advertisement' is 'no'
+
+- ZON-4165: Advertorial polishing Pt. 2
+
+- ZON-2106: Disallow AGOF survey on homepage
+
+- ARBEIT-114: Put ads on ZEIT Arbeit
+
+- ARBEIT-18: Add podcast as raw-embed header to ZEIT Arbeit
 
 - BUG-775: Add adplace16 to framebuilder
 
 - BUG-779: Add special adcontroller handle to campus homepage
 
 - MAINT: Use z.c.article function to get the first citation of an article
+
+- MAINT: Add new pytest fixture togglepatch for better toggle
+monkeypatching
+
+- MAINT: Remove old unused iqd_mobile configuration
 
 
 3.83 (2017-08-22)

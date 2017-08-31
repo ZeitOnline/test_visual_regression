@@ -4,6 +4,7 @@
     {% for region_prev, region, region_next in view.regions | neighborhood %}
         {% set region_loop = loop %}
         {%- include ["zeit.web.core:templates/inc/region/{}.html".format(region.kind),
+                     "{}:templates/inc/region/default.html".format(view.package),
                      "zeit.web.core:templates/inc/region/default.html"] -%}
     {% endfor %}
 {% endblock main %}

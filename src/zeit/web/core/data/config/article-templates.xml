@@ -34,6 +34,12 @@
     <header name="dark">
       <title>Weiße Schrift auf schwarzem Hintergrund</title>
     </header>
+    <header name="protocol">
+      <title>Protokoll</title>
+    </header>
+    <header name="podcast" allow_header_module="true">
+      <title>Podcast</title>
+    </header>
   </template>
   <!-- not yet in use
   <template name="zon-debate" available="zeit.cms.section.interfaces.IZONContent">
