@@ -7,8 +7,8 @@ POSTDEPLOY
 - ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
 
 
-3.86 (unreleased)
------------------
+3.85.1 (2017-09-04)
+-------------------
 
 - FIX: Be defensive about missing/empty push payload configuration
 
