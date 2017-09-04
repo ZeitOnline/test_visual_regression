@@ -4,9 +4,25 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
 
-3.85 (unreleased)
+
+3.86 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.85.1 (2017-09-04)
+-------------------
+
+- FIX: Be defensive about missing/empty push payload configuration
+
+
+3.85 (2017-08-31)
+-----------------
+
+- ARBEIT-110: Implement topic pages with header, ranking areas and teaser for ZEIT Arbeit
 
 - ZON-4187: Follow us polishing
 

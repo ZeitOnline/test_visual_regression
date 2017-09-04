@@ -59,6 +59,12 @@
         title="Teaser in Themen-Cluster"
         areas="topiccluster"
         />
+    <layout
+        id="zar-ranking"
+        title="kleiner Teaser Suchergebnis und Themenseite"
+        image_pattern="wide"
+        areas="zar-ranking"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"
