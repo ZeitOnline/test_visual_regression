@@ -67,6 +67,11 @@
 		&__podcast-player
 			margin-bottom: remify(60px)
 
++respond-max(em(400px))
+	.article-heading__kicker--podcast,
+	.article-heading__title--podcast
+		font-size: remify(24px)
+
 +respond-min($break-desktop-min)
 	.article-heading
 		&__podcast-player
@@ -96,6 +101,4 @@
 // needs more margin, according to the design.
 +respond-min($break-tablet-min)
 	.article-heading--podcast + .article__item > .summary
-		margin-top: remify(60px)
-	.article-heading--podcast + .article__item + .article-body
 		margin-top: remify(60px)
