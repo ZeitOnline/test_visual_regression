@@ -126,7 +126,7 @@
 
     <script src="{{ request.asset_host }}/js/site.js"></script>
 
-    {% if view.vgwort_url %}
+    {% if toggles('third_party_modules') and view.vgwort_url -%}
     <!--start: vgwort-->
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">
     <!--end: vgwort-->
