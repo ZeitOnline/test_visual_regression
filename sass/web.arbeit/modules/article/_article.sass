@@ -21,6 +21,10 @@
 		&--rimless
 			+unpadded
 
+		&--marginalia
+			margin: remify(40px) auto
+			width: 90%
+
 +respond-min($break-tablet-min)
 	.article
 		&__item
@@ -29,11 +33,30 @@
 			max-width: $medium-content-width
 			&--wide
 				max-width: $wide-content-width
+			&--marginalia
+				float: left
+				margin: remify(25px)
+				margin-left: 0
+				width: remify(240px)
+				img
+					width: remify(180px)
+				& + *
+					+pie-clearfix
+				// mitigate jumping marginalia image between tablet and desktop breakpoint
+				@media screen and (min-width: 880px) and (max-width: $break-desktop-min)
+					margin-left: 4vw
 		&__media
 			max-width: $wide-content-width
 		&__subheading
 			font-size: remify(28px)
 			line-height: 1.4
+
++respond-min($break-desktop-min)
+	.article
+		&__item
+			&--marginalia
+				// (1000px - $wide-content-width) / 2
+				margin-left: remify(80px)-$page-padding
 
 .article-page
 	&:last-of-type
@@ -72,14 +95,14 @@
 		@extend %figure-caption
 		margin: remify(8px auto)
 		padding: 0 $page-padding--small
+		&--marginalia
+			padding: 0
 		+respond-min($break-tablet-min)
 			max-width: $medium-content-width
 			padding: 0
-
 		&--marginalia
 			margin-top: remify(12px)
 
-		//@TODO: Check if necessary for quiz etc.
 		.article__item--rimless &
 			padding-left: $page-padding--small
 			padding-right: $page-padding--small
