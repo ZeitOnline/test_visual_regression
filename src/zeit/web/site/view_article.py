@@ -78,8 +78,7 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         storystream_cp = self.storystream
         if not storystream_cp:
             return ()
-        atoms = list(zeit.content.cp.interfaces.ICMSContentIterable(
-            storystream_cp))
+        atoms = list(zeit.edit.interfaces.IElementReferences(storystream_cp))
         if self.context not in atoms:
             return atoms[:3]
         pos = atoms.index(self.context)

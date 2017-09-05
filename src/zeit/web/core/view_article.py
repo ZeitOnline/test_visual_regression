@@ -353,8 +353,9 @@ class Article(zeit.web.core.view.Content):
         for nr, page in enumerate(self.pages, start=1):
             for block in page:
                 block_type = zeit.web.core.template.block_type(block)
-                if block_type == 'video' and zeit.web.core.template.expired(
-                        block.video):
+                if block_type == 'video' and (
+                    block.video is None or zeit.web.core.template.expired(
+                        block.video)):
                             continue
                 if block_type == 'paragraph':
                     p += 1
