@@ -50,6 +50,10 @@
 	&--81-on-centerpage
 		margin: 0 auto remify(40px)
 
+	// in trio regions on "arbeit" we have 5px more padding on top
+	@at-root .cp-area--trio .ad--on-arbeit
+		margin-top: remify(5px)
+
 	// if the ad is not the first child but has an ancestor
 	// uses nth-of-type instead of nth-child due to bug in iOS8
 	@at-root .cp-area--minor .ad-container:nth-of-type(2)
