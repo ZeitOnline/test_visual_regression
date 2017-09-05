@@ -51,7 +51,7 @@ setup(
         'wsgiproxy',
         'zc.iso8601',
         'zc.sourcefactory',
-        'zeit.arbeit>=1.2.0.dev0',
+        'zeit.arbeit>=1.2.2.dev0',
         'zeit.brightcove',
         'zeit.cms>=2.109.0.dev0',
         'zeit.campus>=1.6.0.dev0',

@@ -32,18 +32,10 @@ class Link(zeit.web.site.area.rss.RSSLink):
 
 
 @zeit.web.register_module('jobbox_ticker')
-class JobboxTicker(zeit.web.core.centerpage.Module, list):
+class JobboxTicker(
+        zeit.web.arbeit.block.JobboxTicker,
+        zeit.web.core.centerpage.Module):
 
     def __init__(self, context):
-        self.source_obj = context.jobbox_ticker
-        list.__init__(self, zeit.web.site.area.rss.parse_feed(
-            self.source_obj.feed_url, 'jobbox_ticker'))
+        zeit.web.arbeit.block.JobboxTicker.__init__(self, context)
         zeit.web.core.centerpage.Module.__init__(self, context)
-
-    @zeit.web.reify
-    def teaser_text(self):
-        return self.source_obj.teaser
-
-    @zeit.web.reify
-    def landing_page_url(self):
-        return self.source_obj.landing_url
