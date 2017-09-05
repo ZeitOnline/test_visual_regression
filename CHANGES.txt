@@ -7,7 +7,7 @@ POSTDEPLOY
 - ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
 
 
-3.86 (unreleased)
+3.86 (2017-09-05)
 -----------------
 
 - ARBEIT: Add styles for infographics to ZEIT Arbeit
