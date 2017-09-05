@@ -98,6 +98,10 @@
         <code>x-content-column</code>
         <p><em>Immer</em> Textspaltenbreite</p>
       </div>
+      <div class="x-content-column x-content-column--wide x-spacing" style="background-color:#edf;">
+        <code>x-content-column x-content-column--wide</code>
+        <p><em>Immer</em> so breit wie ZAR Artikelbilder (840px)</p>
+      </div>
       <div class="x-fullwidth x-spacing" style="background-color:#ded;">
         <code>x-fullwidth</code>
         <p><em>Immer</em> bis zum Rand</p>
