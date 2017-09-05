@@ -610,7 +610,8 @@ class Base(object):
 
         push = zeit.push.interfaces.IPushMessages(self.context, '')
         if push:
-            push = (push.get(type='mobile') or {}).get('payload_template', '')
+            push = push.get(type='mobile') or {}
+            push = push.get('payload_template') or ''
             push = push.replace('.json', '.push')
 
         if getattr(self, 'framebuilder_requires_webtrekk', False):
