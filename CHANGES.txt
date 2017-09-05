@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - FIX: Do not track empty video blocks on webtrekk param 27
 
+- FIX: If follow-us in parquet dont show borders
+
 
 3.85.1 (2017-09-04)
 -------------------
