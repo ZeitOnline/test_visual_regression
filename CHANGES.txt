@@ -7,10 +7,22 @@ POSTDEPLOY
 - ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
 
 
-3.86 (unreleased)
+3.87 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+3.86 (2017-09-05)
+-----------------
+
+- ARBEIT: Add styles for infographics to ZEIT Arbeit
+
+- ARBEIT-115: Style marginalia picture
+
+- FIX: Do not track empty video blocks on webtrekk param 27
+
+- FIX: If follow-us in parquet dont show borders
 
 
 3.85.1 (2017-09-04)

@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='3.86.dev0',
+    version='3.87.dev0',
     author=(
         'Thomas Baumann, Nico Bruenjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -71,7 +71,7 @@ setup(
         'zeit.content.rawxml>=0.5.0.dev0',
         'zeit.content.video >= 2.8.1.dev0',
         'zeit.content.volume >= 1.6.0.dev0',
-        'zeit.edit',
+        'zeit.edit >= 2.15.0.dev0',
         'zeit.find',
         'zeit.intrafind',
         'zeit.magazin',
