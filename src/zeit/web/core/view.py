@@ -473,17 +473,6 @@ class Base(object):
             return False
 
     @zeit.web.reify
-    def iqd_mobile_settings(self):
-        iqd_ids = zeit.web.core.banner.IQD_MOBILE_IDS_SOURCE.ids
-        if self.is_hp:
-            return getattr(iqd_ids['hp'], 'centerpage')
-        try:
-            return getattr(iqd_ids[self.sub_ressort], self.type,
-                           getattr(iqd_ids[self.sub_ressort], 'default'))
-        except KeyError:
-            return {}
-
-    @zeit.web.reify
     def product_id(self):
         try:
             return self.context.product.id
@@ -621,7 +610,8 @@ class Base(object):
 
         push = zeit.push.interfaces.IPushMessages(self.context, '')
         if push:
-            push = (push.get(type='mobile') or {}).get('payload_template', '')
+            push = push.get(type='mobile') or {}
+            push = push.get('payload_template') or ''
             push = push.replace('.json', '.push')
 
         if getattr(self, 'framebuilder_requires_webtrekk', False):

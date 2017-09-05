@@ -4,15 +4,58 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
 
-3.84 (unreleased)
+
+3.86 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.85.1 (2017-09-04)
+-------------------
+
+- FIX: Be defensive about missing/empty push payload configuration
+
+
+3.85 (2017-08-31)
+-----------------
+
+- ARBEIT-110: Implement topic pages with header, ranking areas and teaser for ZEIT Arbeit
+
+- ZON-4187: Follow us polishing
+
+- ZON-4131: BrightCove update 5.24.5 to 6.5.2
+
+- ZON-4002: No wt-parameter cp27 if video is expired
+
+- FIX: Fix ad placement on video page
+
+
+3.84 (2017-08-30)
+-----------------
+
+- ZON-4172: Switch videoplayer on HP/CP/VSP when 'has_advertisement' is 'no'
+
+- ZON-4165: Advertorial polishing Pt. 2
+
+- ZON-2106: Disallow AGOF survey on homepage
+
+- ARBEIT-114: Put ads on ZEIT Arbeit
+
+- ARBEIT-18: Add podcast as raw-embed header to ZEIT Arbeit
 
 - BUG-775: Add adplace16 to framebuilder
 
 - BUG-779: Add special adcontroller handle to campus homepage
 
 - MAINT: Use z.c.article function to get the first citation of an article
+
+- MAINT: Add new pytest fixture togglepatch for better toggle
+monkeypatching
+
+- MAINT: Remove old unused iqd_mobile configuration
 
 
 3.83 (2017-08-22)
