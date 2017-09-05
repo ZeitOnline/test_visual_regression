@@ -14,7 +14,8 @@ def test_campus_framebuilder_accepts_banner_channel_parameter(
 
     driver.get('{}/campus/framebuilder?banner_channel={}'.format(
         testserver.url, 'one/two/three/homepage'))
-    assert 'homepage' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'homepage_trsf' == driver.execute_script(
+        'return adcSiteInfo.$handle')
     assert 'one' == driver.execute_script('return adcSiteInfo.level2')
     assert 'two' == driver.execute_script('return adcSiteInfo.level3')
     assert 'three' == driver.execute_script('return adcSiteInfo.level4')
