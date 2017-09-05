@@ -10,6 +10,8 @@ POSTDEPLOY
 3.86 (unreleased)
 -----------------
 
+- ARBEIT-115: Style marginalia picture
+
 - FIX: Do not track empty video blocks on webtrekk param 27
 
 
