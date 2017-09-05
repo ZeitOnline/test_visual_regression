@@ -266,6 +266,7 @@ def test_asset(path):
     return open(pkg_resources.resource_filename(
         'zeit.web.core', 'data' + path), 'rb')
 
+
 @pytest.fixture(scope='session')
 def file_from_data():
     return test_asset
@@ -298,6 +299,7 @@ class ZODBLayer(plone.testing.zodb.EmptyZODB):
         # The name never ever changes, so there's no real need to import it
         # from zope.app.publication.
         return self['zodbRoot']['Application']
+
 
 ZODB_LAYER = ZODBLayer()
 
