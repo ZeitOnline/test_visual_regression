@@ -1,4 +1,4 @@
 {%- extends "zeit.web.arbeit:templates/inc/shared/jobbox_ticker.tpl" -%}
 
 {% set jobbox = module %} {# this is the container element #}
-{% set jobitems = module %} {# these are the items that get iterated #}
+{% set jobitems = module.items %} {# these are the items that get iterated #}
