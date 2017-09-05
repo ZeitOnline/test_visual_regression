@@ -1,0 +1,10 @@
+{# This module/template is called "headerimage" vor hysterical raisins
+   (because it is already used in core and campus). But in the ARBEIT vertical,
+   we do not display an image here. -#}
+<header class="topicpage-header">
+    <h1 class="topicpage-header__heading">
+        <span class="topicpage-header__kicker">{{ module.supertitle or 'Thema' }}</span>
+        {%- if module.supertitle and module.title %}<span class="visually-hidden">: </span>{% endif -%}
+        <span class="topicpage-header__title">{{ module.title }}</span>
+    </h1>
+</header>

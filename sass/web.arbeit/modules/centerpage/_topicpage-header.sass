@@ -1,0 +1,44 @@
+.topicpage-header
+	+padded
+	margin: 0 auto
+	max-width: $medium-content-width
+	text-align: center
+
+	&__heading
+		font-size: remify(40px)
+		line-height: 1.3
+		margin: remify(30px) auto (20px)
+		font-family: $font-patronbold
+		word-wrap: break-word
+		+respond-min($break-tablet-min)
+			font-size: remify(60px)
+			margin-top: remify(60px)
+
+	&__kicker
+		+outlined-font($color-text)
+
+	&__title
+		color: $color-text
+		display: block
+
+	&__text
+		color: red
+
+.topicpage-header + .markup
+	+padded
+	margin: 0 auto
+	max-width: $medium-content-width
+	text-align: center
+
+.topicpage-header:last-child,
+.topicpage-header + .markup:last-child
+	&:after
+		content: ''
+		background-color: $zar-sun-yellow
+		display: block
+		height: remify(30px)
+		margin: remify(20px) auto
+		width: remify(2px)
+		+respond-min($break-tablet-min)
+			height: remify(60px)
+			width: remify(1px)

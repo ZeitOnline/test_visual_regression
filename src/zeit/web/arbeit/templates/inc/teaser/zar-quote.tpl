@@ -21,7 +21,7 @@
 
     <div class="{{ self.layout() }}__headingwrapper">
         {% block teaser_heading %}{{ super() }}{% endblock %}
-        {% block teaser_byline %}{{ super() }} {{ lama.use_svg_icon('arrow-right', 'teaser-quote__byline-arrow', view.package, a11y=False) }}{% endblock %}
+        {% block teaser_byline %}{{ super() }}{% endblock %}
     </div>
 
     {% block teaser_media %}

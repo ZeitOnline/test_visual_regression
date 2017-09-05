@@ -67,6 +67,9 @@
 	&--4-on-article
 		margin-bottom: remify(28px)
 	&--7-on-article,
+	// fix new adplace8 in opposite of oldschool adplace8
+	// actually in use in the comment section
+	// TODO: remove after zon1000 launch
 	*:not(.comment__ad) > .ad-container > &--8-on-article
 		clear: both
 		float: right
@@ -74,6 +77,10 @@
 		width: auto
 		+respond-min($break-desktop-min)
 			margin-right: remify(80px)
+	// fix the fix on video pages
+	// TODO: remove after zon1000 launch
+	.article--video > .ad-container > &--8-on-article
+		margin-top: remify(40px)
 
 // Fix hillarious unusable ad extras by iqd
 +respond-max($break-mobile-ad-width)

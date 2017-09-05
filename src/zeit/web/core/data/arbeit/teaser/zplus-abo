@@ -5,12 +5,12 @@
     </image>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-	    <author xmlns:py="http://codespeak.net/lxml/objectify/pytype" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://xml.zeit.de/autoren/C/Karin_Ceballos_Betancur/index" publication-date="" expires="">
+	    <author xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" href="http://xml.zeit.de/autoren/C/Karin_Ceballos_Betancur/index" publication-date="" expires="">
       <image base-id="http://xml.zeit.de/autoren/C/Karin_Ceballos_Betancur/karin-ceballos-betancur/" type="" publication-date="" expires="">
         <bu xsi:nil="true"/>
-        <copyright py:pytype="str">© Michael Heck</copyright>
+        <copyright>© Michael Heck</copyright>
       </image>
-      <display_name py:pytype="str">Karin Ceballos Betancur</display_name>
+      <display_name>Karin Ceballos Betancur</display_name>
     </author>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>

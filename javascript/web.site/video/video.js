@@ -52,7 +52,7 @@ var video = {
                         html5: '<div class="video-player">' +
                                 '<video id="player-{{videoId}}" data-account="{{accountId}}" ' +
                                 'data-player="{{playerId}}" data-embed="{{embed}}" data-video-id="{{videoId}}" ' +
-                                'class="video-js video-player__videotag" preload="none"></video></div>'
+                                'class="video-js video-player__videotag" preload="none" controls></video></div>'
                     },
                     snippet,
                     scriptSrc = '//players.brightcove.net/{{accountId}}/{{playerId}}_{{embed}}/index.min.js';

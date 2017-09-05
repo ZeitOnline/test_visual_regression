@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<citation-layouts>
+  <layout id="default">Standard</layout>
+  <layout id="zar-yellow" available="zeit.arbeit.interfaces.IZARContent">Gelb</layout>
+  <layout id="short" available="zeit.magazin.interfaces.IZMOContent">breit/klein</layout>
+  <layout id="wide" available="zeit.magazin.interfaces.IZMOContent">groß/lang</layout>
+</citation-layouts>
