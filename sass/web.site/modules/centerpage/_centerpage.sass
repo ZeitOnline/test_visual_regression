@@ -10,9 +10,6 @@
 	border: 0 solid $color-border
 	&:empty
 		display: none
-	&--parquet
-		+ .cp-region > .cp-area > .follow-us
-			border-bottom: 0
 
 	+respond-min($break-areas)
 		&--parquet
@@ -26,9 +23,6 @@
 				// visual bottom of the preceding .cp-region--parquet
 				margin-top: 0
 				padding-top: $vertical-space
-			+ .cp-region > .cp-area > .follow-us
-				border: 0
-				margin: 0
 		&--duo
 			padding: 0 $cp-padding
 			margin-bottom: $vertical-space
