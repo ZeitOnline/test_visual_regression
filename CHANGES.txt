@@ -10,7 +10,11 @@ POSTDEPLOY
 3.86 (unreleased)
 -----------------
 
-- ZON-4172: Switch videoplayer on HP/CP/VSP when 'has_advertisement' is 'no'
+- ARBEIT: Add styles for infographics to ZEIT Arbeit
+
+- ARBEIT-115: Style marginalia picture
+
+- FIX: Do not track empty video blocks on webtrekk param 27
 
 
 3.85.1 (2017-09-04)
