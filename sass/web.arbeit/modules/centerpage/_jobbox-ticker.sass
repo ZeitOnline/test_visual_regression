@@ -104,33 +104,34 @@ $jobbox-border-width: 6px
 	transform: rotate(-45deg)
 	animation: show 9s linear infinite // 9s = duration+delay in jquery.animateJobs.js
 
-// @keyframes spinner
-// 	to
-// 		transform: rotate(360deg)
-
 @keyframes show
 	0%
 		border-color: $zar-whitesmoke
+		transform: rotate(0deg)
 	25%
 		border-right-color: $color-jobs-areas
 		border-bottom-color: $zar-whitesmoke
 		border-left-color: $zar-whitesmoke
 		border-top-color: $zar-whitesmoke
+
 	50%
 		border-right-color: $color-jobs-areas
 		border-bottom-color: $color-jobs-areas
 		border-left-color: $zar-whitesmoke
 		border-top-color: $zar-whitesmoke
+
 	75%
 		border-right-color: $color-jobs-areas
 		border-bottom-color: $color-jobs-areas
 		border-left-color: $color-jobs-areas
 		border-top-color: $zar-whitesmoke
+
 	100%
 		border-right-color: $color-jobs-areas
 		border-bottom-color: $color-jobs-areas
 		border-left-color: $color-jobs-areas
 		border-top-color: $color-jobs-areas
+		transform: rotate(360deg)
 
 
 
