@@ -630,7 +630,9 @@ def test_article_should_show_main_image_from_imagegroup(testbrowser):
     assert 'filmstill-hobbit-schlacht-fuenf-hee' in images[0].get('src')
 
 
-def test_article_should_have_proper_meetrics_integration(testbrowser):
+def test_article_should_have_proper_meetrics_integration(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/article/01')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -1283,7 +1285,8 @@ def test_nextread_should_display_date_last_published_semantic(testbrowser):
     assert nextread_date.text.strip() == '15. Februar 2015'
 
 
-def test_article_contains_zeit_clickcounter(testbrowser):
+def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/article/simple')
     counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
     assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
@@ -1337,7 +1340,9 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     assert amp_url.endswith('amp/zeit-online/article/zeit')
 
 
-def test_newsletter_optin_page_has_webtrekk_ecommerce(testbrowser):
+def test_newsletter_optin_page_has_webtrekk_ecommerce(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser(
         '/zeit-online/article/simple?newsletter-optin=elbVertiefung-_!1:2')
     assert '8: \'elbvertiefung-_1_2\'' in browser.contents

@@ -42,14 +42,17 @@ def test_framebuilder_contains_no_webtrekk(testbrowser):
     assert 'webtrekk' not in browser.contents
 
 
-def test_framebuilder_can_contain_webtrekk(testbrowser):
+def test_framebuilder_can_contain_webtrekk(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?webtrekk')
     webtrekk_script = browser.cssselect(
         'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 
-def test_framebuilder_sets_webtrekk_values_differently(testbrowser):
+def test_framebuilder_sets_webtrekk_values_differently(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?webtrekk')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -83,7 +86,8 @@ def test_framebuilder_contains_no_meetrics(testbrowser):
     assert len(meetrics_script) == 0
 
 
-def test_framebuilder_can_contain_meetrics(testbrowser):
+def test_framebuilder_can_contain_meetrics(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?meetrics')
     meetrics_script = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -219,14 +223,17 @@ def test_framebuilder_minimal_contains_no_webtrekk(testbrowser):
     assert 'webtrekk' not in browser.contents
 
 
-def test_framebuilder_minimal_can_contain_webtrekk(testbrowser):
+def test_framebuilder_minimal_can_contain_webtrekk(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?minimal&webtrekk')
     webtrekk_script = browser.cssselect(
         'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 
-def test_framebuilder_minimal_sets_webtrekk_values_differently(testbrowser):
+def test_framebuilder_minimal_sets_webtrekk_values_differently(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?minimal&webtrekk')
     assert ('wt.contentId = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
