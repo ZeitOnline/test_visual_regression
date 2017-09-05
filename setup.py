@@ -71,7 +71,7 @@ setup(
         'zeit.content.rawxml>=0.5.0.dev0',
         'zeit.content.video >= 2.8.1.dev0',
         'zeit.content.volume >= 1.6.0.dev0',
-        'zeit.edit',
+        'zeit.edit >= 2.15.0.dev0',
         'zeit.find',
         'zeit.intrafind',
         'zeit.magazin',
