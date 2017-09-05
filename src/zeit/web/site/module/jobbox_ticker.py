@@ -37,7 +37,7 @@ class JobboxTicker(zeit.web.core.centerpage.Module, list):
     def __init__(self, context):
         self.source_obj = context.jobbox_ticker
         list.__init__(self, zeit.web.site.area.rss.parse_feed(
-        self.source_obj.feed_url, 'jobbox_ticker'))
+            self.source_obj.feed_url, 'jobbox_ticker'))
         zeit.web.core.centerpage.Module.__init__(self, context)
 
     @zeit.web.reify
