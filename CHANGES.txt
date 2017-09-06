@@ -7,10 +7,22 @@ POSTDEPLOY
 - ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
 
 
-3.87 (unreleased)
+3.88 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+3.87 (2017-09-06)
+-----------------
+
+- ZON-4120: First teaser in ze.tt-parquet should be large
+
+- BUG-786: Remove adPlace9 from campus homepage
+
+- BUG-787: Add trsf suffix to framebuilder
+
+- FIX: Some small bugfixes on Ads
 
 
 3.86 (2017-09-05)

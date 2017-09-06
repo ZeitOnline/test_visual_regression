@@ -123,6 +123,19 @@
       </region>
     </cluster>
 
+    <cluster area="id-7910e12f-0ac9-40fd-9032-e47c7f8b6893" kind="topic">
+      <region hide-dupes="True" area="id-d2b7846d-31c8-45b4-b2fc-ffdd88723a07" kind="topic-graphical" count="4" automatic="True" automatic_type="centerpage" read_more_url="http://xml.zeit.de/thema/index" read_more="Alle Themen">
+        <referenced_cp>http://xml.zeit.de/campus/centerpage/teaser-graphical</referenced_cp>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-688cf852-e709-432e-a756-edef34a62072" visible_mobile="False"/>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-56eec4bf-a0ce-4831-b349-866b8aa02b3a"/>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-4da54148-b028-40c7-b416-30e9e1e6b710"/>
+        <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-a1145c07-85c0-4c92-aced-f63235d0abe8"/>
+        <container cp:type="teaser" module="zco-wide-large" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
+          <block href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
+      </region>
+    </cluster>
+
   </body>
   <feed xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"></feed>
 </centerpage>

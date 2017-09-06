@@ -1,12 +1,13 @@
 {% if view.advertising_enabled %}
 {% set pagetype = 'centerpage' if 'centerpage' in view.banner_channel else 'article' -%}
+{% set package_banner = ' ad--on-arbeit' if view.package == 'zeit.web.arbeit' else '' %}
 <div class="ad-container">
     <script type="text/javascript" id="ad-{% block type %}{{ block.type }}{% endblock %}-{% block tile %}{{ block.tile }}{% endblock %}">
         if ( typeof AdController !== 'undefined' {% block adtile_minimal_width %}{% endblock %} {% block mobileview %}{% endblock %}) {
             if ( !document.getElementById( 'iqadtile{{ self.tile() }}' ) ) {
                 var elem = document.createElement( 'div' );
                 elem.id = 'iqadtile{{ self.tile() }}';
-                elem.className = "ad ad-{{ self.type() }} ad-{{ self.type() }}--{{ self.tile() }} ad-{{ self.type() }}--{{ self.tile() }}-on-{{ pagetype }}";
+                elem.className = "ad ad-{{ self.type() }} ad-{{ self.type() }}--{{ self.tile() }} ad-{{ self.type() }}--{{ self.tile() }}-on-{{ pagetype }}{{ package_banner }}";
                 elem.setAttribute('data-banner-type', '{{ self.type() }}');
                 {% block adtile_label %}{% endblock %}
                 document.getElementById('ad-{{ self.type() }}-{{ self.tile() }}').parentNode.appendChild(elem);

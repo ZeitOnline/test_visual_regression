@@ -148,24 +148,6 @@ def test_adplaces_present_on_zco_cp(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-mobile-8')) == 1
 
 
-def test_iqd_sitebar_should_be_hidden_on_mobile(
-        selenium_driver, testserver, monkeypatch):
-    driver = selenium_driver
-    driver.get('%s/zeit-online/slenderized-index' % testserver.url)
-
-    script = """
-        var el = document.createElement('div');
-        el.id = 'iqdSitebar';
-        el.textContent = 'NUR ZUM TESTEN';
-        document.body.appendChild(el);"""
-    driver.execute_script(script)
-    elem = driver.find_element_by_css_selector('#iqdSitebar')
-    driver.set_window_size(520, 800)
-    assert not elem.is_displayed()
-    driver.set_window_size(768, 800)
-    assert elem.is_displayed()
-
-
 def test_mobile_ad_place_right_behind_the_first_teaser(
         testbrowser, monkeypatch):
     browser = testbrowser('/zeit-online/slenderized-index')

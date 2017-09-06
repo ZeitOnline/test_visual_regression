@@ -1696,7 +1696,7 @@ def test_zett_parquet_is_rendering(testbrowser):
     zett_parquet = browser.cssselect('.cp-area--zett')[0]
     title = zett_parquet.cssselect('.parquet-meta__title')
     logo = zett_parquet.cssselect('.parquet-meta__logo')
-    teaser = zett_parquet.cssselect('.teaser-small')
+    teaser = zett_parquet.cssselect('article')
     more_link = zett_parquet.cssselect('.parquet-meta__more-link--zett')
     links = zett_parquet.cssselect('a')
 
@@ -1711,6 +1711,13 @@ def test_zett_parquet_is_rendering(testbrowser):
                 '&utm_medium=fix&utm_source=zon_zettaudev_int'
                 '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x'
                 ) in link.get('href')
+
+
+def test_zett_large_teaser_is_displayed_in_parquet(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+    zett_parquet = browser.cssselect('.cp-area--zett')[0]
+    teaser = zett_parquet.cssselect('.teaser-large')
+    assert len(teaser) == 1
 
 
 def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
