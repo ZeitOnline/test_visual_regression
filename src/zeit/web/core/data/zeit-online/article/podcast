@@ -1,84 +1,101 @@
-<article xmlns:cp="http://namespaces.zeit.de/CMS/cp">
-<head>
-<header>
-	<rawtext>
-		<text_reference type="intern" href="http://xml.zeit.de/arbeit/sharedcontent/embed-header-raw-embed-podcast" publication-date="" expires=""/>
-	</rawtext>
-</header>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">Digital Games</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2016-06-03T08:47:46.448463+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2016-06-01T14:50:33.130329+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2016-06-03T08:47:52.077667+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2016-06-03T08:47:52.022330+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-06-01T14:50:29.927270+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2016-06-03T08:42:07.522603+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
-<attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">podcast</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2016-06-01T14:47:14.055411+00:00</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.strothjohann</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">
-http://xml.zeit.de/digital/games/2016-06/8768dfd0-a93e-43c3-a942-b4cdd9d6e163.tmp
-</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">public-32</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Gesellschaft</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Games</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">129</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:9f77d4bc-0df3-466e-bcdd-faf8c27d399c}</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">26</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2008</attribute>
-<attribute name="serie" ns="http://namespaces.zeit.de/CMS/document">Geschafft!</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
-&lt;initialized_object&gt;
-&lt;klass&gt;
-  &lt;global name="Provides" module="zope.interface.declarations"/&gt;
-&lt;/klass&gt;
-&lt;arguments&gt;
-  &lt;tuple&gt;
-    &lt;global name="Article" module="zeit.content.article.article"/&gt;
-    &lt;global name="Interface" module="zope.interface"/&gt;
-    &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
-    &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
-  &lt;/tuple&gt;
-&lt;/arguments&gt;
-&lt;/initialized_object&gt;
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author expires="" href="http://xml.zeit.de/autoren/H/Wenke_Husmann/index.xml" publication-date="">
+      <display_name>Wenke Husmann</display_name>
+    </author>
+    <image align="left" base-id="http://xml.zeit.de/zeit-online/image/filmstill-hobbit-schlacht-fuenf-hee/" expires="2015-03-03T12:43:31+00:00" publication-date="" type="jpg">
+      <bu>Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;</bu>
+      <copyright>© Warner Bros.</copyright>
+    </image>
+    <rankedTags>
+      <tag score="5" type="topic" url_value="film" uuid="3b2d448a-00a7-4b1b-9235-8503207e01d9">Film</tag>
+      <tag score="6" type="Person" url_value="peter-jackson" uuid="ddca42b6-dc03-48ce-9c80-26678846b591">Peter Jackson</tag>
+      <tag score="3" type="Location" url_value="neuseeland" uuid="423373fa-835a-49a0-96e0-c94318a5b0ad">Neuseeland</tag>
+      <tag score="5" type="Person" url_value="steven-spielberg" uuid="47df43f9-b803-43dc-b2e1-475886cddeb7">Steven Spielberg</tag>
+      <tag score="4" type="Person" url_value="christopher-nolan" uuid="4bee0550-8a49-4070-add5-a7069f5df2c6">Christopher Nolan</tag>
+      <tag score="4" type="Person" url_value="ridley-scott" uuid="096c6141-d20c-4b14-9ee1-3824560be7d0">Ridley Scott</tag>
+    </rankedTags>
+    <references>
+      <reference author="Wenke Husmann" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-online/article/01" contenttype="article" publication-date="" expires=""></reference>
+    </references>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Wenke Husmann</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="channels" ns="http://namespaces.zeit.de/CMS/document">Kultur Film</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2014-12-09T09:23:57.105802+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2014-12-05T17:12:24.668544+00:00</attribute>
+    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2014-12-09T09:32:11.073684+00:00</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2014-12-09T09:24:56.823418+00:00</attribute>
+    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2014-12-05T17:11:30.179510+00:00</attribute>
+    <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="genre" ns="http://namespaces.zeit.de/CMS/document">glosse</attribute>
+    <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2014-12-05T17:11:22.109311+00:00</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.lavrov</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/kultur/film/2014-12/15a48f2c-82b0-4136-b4aa-ad3f57ff2fa0.tmp</attribute>
+    <attribute name="product-id" ns="http://namespaces.zeit.de/CMS/workflow">ZEDE</attribute>
+    <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">980d578641cd444aa69700ed11b21d63</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Kultur</attribute>
+    <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">Film</attribute>
+    <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document">5010</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">article</attribute>
+    <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:5ac556cf-1d0a-43f9-90b9-1bd26f1db999}</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">49</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2014</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name=&quot;Provides&quot; module=&quot;zope.interface.declarations&quot;/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name=&quot;Article&quot; module=&quot;zeit.content.article.article&quot;/&gt;
+        &lt;global name=&quot;Interface&quot; module=&quot;zope.interface&quot;/&gt;
+        &lt;global name=&quot;IZONContent&quot; module=&quot;zeit.cms.section.interfaces&quot;/&gt;
+        &lt;global name=&quot;IZONArticle&quot; module=&quot;zeit.content.article.interfaces&quot;/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">index,follow,noodp,noydir,noarchive</attribute>
-</head>
-<body>
-<title>Monogamie: Paar dich lieber paleo</title>
-<subtitle>
-Like you, I used to think the world was this great place where everybody lived by the same standards I did, then some kid with a nail showed me I was living in his world, a world where chaos rules not order...
-</subtitle>
-<division type="page">
-  <p>Esse franzen iceland irure mixtape adaptogen veniam before they sold out in yr biodiesel listicle. Lyft aliqua sustainable literally, put a bird on it dolor mollit. YOLO kickstarter organic synth echo park hoodie est. Mollit four dollar toast aliqua, godard raclette bushwick selfies man braid. Proident craft beer austin health goth pinterest celiac cray laboris tacos keytar gochujang. Asymmetrical shabby chic post-ironic occupy. Normcore butcher vape hoodie, shoreditch dolore raw denim scenester slow-carb sed yuccie tempor twee. Laborum keytar lo-fi next level. Fam slow-carb kitsch scenester chia lomo.</p>
-</division>
-</body>
+  </head>
+  <body>
+    <title>Zwei Baguettes und ein Zimmer bitte</title>
+    <subtitle>Die spanische Budgetkette Praktik hat zwei Themenhotels in Barcelona eröffnet. Das Bakery überlässt die Lobby einer stadtbekannten Bäckerei.</subtitle>
+    <byline>von Barbara Baumgartner</byline>
+    <division type="page">
+      <image align="left" alt="Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott" alt_local="Neuseeland, Steven Spielberg, Christopher Nolan, Ridley Scott" expires="2015-03-03T12:43:31+00:00" is_empty="False" layout="large" publication-date="" src="http://xml.zeit.de/exampleimages/artikel/advertorial-01/wochenmarkt-43.jpg" title="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" title_local="Handlung, wohin man auch schaut in dieser Szene aus dem letzten Hobbit-Teil &quot;Die Schlacht der fünf Heere&quot;" type="jpg">
+        <bu>Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung.</bu>
+        <copyright>© Warner Bros.</copyright>
+      </image>
+      <p>Es fällt auf, dass in Barcelona das Dribbling ein wichtiges Stilmittel ist (189 erfolgreiche). Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung (71). Seine Alleingänge schaffen Raum für die Mitspieler. Weil sie trotzdem oft den Ball besitzen, zeigt das: Sie passen öfter, spielen lieber ab.</p>
+      <podcast id="6853" />
+      <p>Es fällt auf, dass in Barcelona das Dribbling ein wichtiges Stilmittel ist (189 erfolgreiche). Mit großem Abstand gewinnt übrigens Lionel Messi diese Einzelwertung (71). Seine Alleingänge schaffen Raum für die Mitspieler. Weil sie trotzdem oft den Ball besitzen, zeigt das: Sie passen öfter, spielen lieber ab.</p>
+    </division>
+  </body>
+  <teaser>
+    <title>Zwei Baguettes und ein Zimmer bitte</title>
+    <text>Die spanische Budgetkette Praktik hat zwei Themenhotels in Barcelona eröffnet. Das Bakery überlässt die Lobby einer stadtbekannten Bäckerei.</text>
+    <supertitle>Praktik Bakery Barcelona</supertitle>
+  </teaser>
 </article>
