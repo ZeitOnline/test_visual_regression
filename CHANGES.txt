@@ -10,7 +10,7 @@ POSTDEPLOY
 3.87 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4120: First teaser in ze.tt-parquet should be large
 
 
 3.86 (2017-09-05)
