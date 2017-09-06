@@ -499,6 +499,11 @@ class Podcast(Block):
         podigee = zope.component.getUtility(zeit.web.core.interfaces.IPodigee)
         return podigee.get_episode(self.context.episode_id)
 
+    @zeit.web.reify
+    def podcast(self):
+        podigee = zope.component.getUtility(zeit.web.core.interfaces.IPodigee)
+        return podigee.get_podcast(self.episode['podcast_id'])
+
     def player_configuration(self, theme):
         # Available themes: zon-standalone, zon-minimal
         url = self.episode.get('permalink')
@@ -508,6 +513,21 @@ class Podcast(Block):
         #  /podigee-podcast-player#remote-configuration>
         return u'{url}/embed?context=external&theme={theme}'.format(
             url=url, theme=theme)
+
+    @zeit.web.reify
+    def podlove_configuration(self):
+        # https://github.com/podlove/podlove-subscribe-button#podcast-data-api
+        return {
+            'title': self.podcast.get('title'),
+            'subtitle': self.podcast.get('subtitle'),
+            'description': self.podcast.get('description'),
+            'cover': self.podcast.get('cover_image'),
+            'feeds': [{
+                'type': 'audio',
+                'format': feed['format'],
+                'url': feed['url'],
+            } for feed in self.podcast.get('feeds', [])]
+        }
 
 
 @grokcore.component.adapter(

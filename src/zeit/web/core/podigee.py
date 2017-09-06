@@ -11,13 +11,17 @@ log = logging.getLogger(__name__)
 
 
 class Podigee(object):
+    """API Documentation: https://app.podigee.com/api-docs"""
 
     zope.interface.implements(zeit.web.core.interfaces.IPodigee)
 
     def get_episode(self, id):
         result = self._request('/episodes/{}'.format(id))
+        result.setdefault('podcast_id', 'null')
         return result
 
+    def get_podcast(self, id):
+        return self._request('/podcasts/{}'.format(id))
 
     def _request(self, path):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
