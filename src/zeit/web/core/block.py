@@ -487,6 +487,29 @@ class Gallery(Block):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
 
 
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IPodcast)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+class Podcast(Block):
+
+    def __init__(self, context):
+        self.context = context
+
+    @zeit.web.reify
+    def episode(self):
+        podigee = zope.component.getUtility(zeit.web.core.interfaces.IPodigee)
+        return podigee.get_episode(self.context.episode_id)
+
+    def player_configuration(self, theme):
+        # Available themes: zon-standalone, zon-minimal
+        url = self.episode.get('permalink')
+        if not url:
+            return None
+        # <https://github.com/podigee
+        #  /podigee-podcast-player#remote-configuration>
+        return u'{url}/embed?context=external&theme={theme}'.format(
+            url=url, theme=theme)
+
+
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.newsletter.interfaces.IGroup)
 class NewsletterGroup(Block):

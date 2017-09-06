@@ -554,3 +554,11 @@ def test_volume_should_ignore_invalid_references(application):
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
     module = body.values()[1]
     assert zeit.web.core.interfaces.IFrontendBlock(module, None) is None
+
+
+def test_podcast_should_render_script_tag_for_player(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast')
+    player = browser.cssselect('script.podigee-podcast-player')[0]
+    assert player.get('data-configuration') == (
+        'http://zon-test.podigee.io/2-folge-zwei-test'
+        '/embed?context=external&theme=zon-standalone')

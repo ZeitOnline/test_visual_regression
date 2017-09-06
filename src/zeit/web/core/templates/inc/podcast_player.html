@@ -1,0 +1,8 @@
+{% if podcast_player_theme is undefined %}
+{% set podcast_player_theme = 'zon-standalone' %}
+{% endif %}
+
+<script
+ class="podigee-podcast-player"
+ src="https://cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js"
+ data-configuration="{{ module.player_configuration(podcast_player_theme) }}"></script>
