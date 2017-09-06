@@ -12,8 +12,8 @@ class JobboxTicker(zeit.web.core.block.Block):
 
     def __init__(self, model_block):
         self.model_block = model_block.jobbox_ticker
-        self.items = zeit.web.site.area.rss.parse_feed(
-            self.model_block.feed_url, 'jobbox_ticker')
+        self.items = list(zeit.web.site.area.rss.parse_feed(
+            self.model_block.feed_url, 'jobbox_ticker'))
 
     @zeit.web.reify
     def teaser_text(self):

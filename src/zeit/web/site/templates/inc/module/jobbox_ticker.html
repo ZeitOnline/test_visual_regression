@@ -1,4 +1,3 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% if module.items | length > 0 %}
 <aside class="{{ 'jobbox' | with_mods(area.kind) }}{% block jobbox_modifier %} js-jobbox-animation{% endblock %}"
     {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
