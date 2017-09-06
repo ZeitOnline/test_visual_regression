@@ -12,6 +12,12 @@ POSTDEPLOY
 
 - ZON-4120: First teaser in ze.tt-parquet should be large
 
+- BUG-786: Remove adPlace9 from campus homepage
+
+- BUG-787: Add trsf suffix to framebuilder
+
+- FIX: Some small bugfixes on Ads
+
 
 3.86 (2017-09-05)
 -----------------

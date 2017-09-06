@@ -1255,8 +1255,12 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
             return []
 
         adc_levels = self.banner_channel.split('/')
+        handle = adc_levels[3] if len(adc_levels) > 3 else ''
 
-        return [('$handle', adc_levels[3] if len(adc_levels) > 3 else ''),
+        if handle != '' and not handle.endswith('_trsf'):
+            handle = '{}_trsf'.format(handle)
+
+        return [('$handle', handle),
                 ('level2', adc_levels[0] if len(adc_levels) > 0 else ''),
                 ('level3', adc_levels[1] if len(adc_levels) > 1 else ''),
                 ('level4', adc_levels[2] if len(adc_levels) > 2 else ''),
