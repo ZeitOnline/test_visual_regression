@@ -85,6 +85,7 @@ def app_settings(mockserver):
             'http://xml.zeit.de/config/community_maintenance.xml'),
         'agatho_host': mockserver.url + '/comments',
         'linkreach_host': mockserver.url + '/linkreach/api',
+        'podigee_url': mockserver.url + '/podigee',
         'app_servers': '',
         'health_check_with_fs': True,
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',

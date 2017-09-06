@@ -10,7 +10,7 @@ POSTDEPLOY
 3.88 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4190: Podcast module for CP, article body, article header
 
 
 3.87 (2017-09-06)
