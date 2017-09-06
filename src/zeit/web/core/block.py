@@ -510,6 +510,17 @@ class Podcast(Block):
             url=url, theme=theme)
 
 
+@grokcore.component.adapter(
+    zeit.content.article.edit.interfaces.IPodcast,
+    zeit.content.article.edit.interfaces.IHeaderArea
+)
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+class HeaderPodcast(Podcast):
+
+    def __init__(self, model_block, header):
+        super(HeaderPodcast, self).__init__(model_block)
+
+
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.newsletter.interfaces.IGroup)
 class NewsletterGroup(Block):
