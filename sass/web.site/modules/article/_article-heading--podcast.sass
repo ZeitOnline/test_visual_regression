@@ -41,9 +41,11 @@
 		max-height: remify(66px) // prevent jumping layout
 		overflow: hidden
 	&__subs-series
-		margin: 0 auto
+		border-top: 1px rgba($color-text, 0.2) solid
 		padding: remify(18px 0 12px)
 		text-align: left
+	&__subs-series-inner
+		margin: 0 auto
 	&__link-series
 		font-family: $font-tabletgothic
 		font-weight: normal
@@ -54,9 +56,6 @@
 			content: "\203A"
 			margin-left: remify(4px)
 			position: absolute
-	&__sharing--podcast
-		+padded
-		border-top: 1px rgba($color-text, 0.2) solid
 
 +respond-min($break-tablet-min)
 	.article-heading
@@ -79,6 +78,7 @@
 			margin-bottom: remify(60px)
 		&__subs-series
 			padding-left: 0
+		&__subs-series-inner
 			width: $medium-content-width
 +respond-min($break-desktop-min)
 	.article-heading
