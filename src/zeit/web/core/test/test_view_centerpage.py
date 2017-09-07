@@ -349,3 +349,19 @@ def test_centerpage_should_update_webtrekk_content_id_for_search_results(
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
     view.content_path = u'/suche/index'
     assert view.webtrekk_content_id.endswith('/suche/treffer')
+
+
+def test_podcast_module_should_render_script_tag_for_player(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/podcast')
+    player = browser.cssselect('script.podigee-podcast-player')[0]
+    assert player.get('data-configuration') == (
+        'http://zon-test.podigee.io/2-folge-zwei-test'
+        '/embed?context=external&theme=zon-standalone')
+
+
+def test_podcast_teaserlayout_should_render_script_tag_for_player(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/podcast-teaser')
+    player = browser.cssselect('script.podigee-podcast-player')[0]
+    assert player.get('data-configuration') == (
+        'http://zon-test.podigee.io/2-folge-zwei-test'
+        '/embed?context=external&theme=zon-standalone')

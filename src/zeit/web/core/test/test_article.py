@@ -12,8 +12,7 @@ import zeit.web.core.interfaces
 
 def test_video_should_be_removed_from_body_if_layout_is_header(application):
     article = zeit.content.article.article.Article()
-    body = zeit.content.article.edit.interfaces.IEditableBody(article)
-    block = body.create_item('video')
+    block = article.body.create_item('video')
     block.video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/video/3537342483001')
 
