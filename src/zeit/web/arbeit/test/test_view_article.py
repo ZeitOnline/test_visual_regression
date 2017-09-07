@@ -227,8 +227,7 @@ def test_zar_article_should_provide_jobboxticker(
         'http://xml.zeit.de/arbeit/article/jobbox-ticker')
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
     jobbox_ticker = zeit.web.core.interfaces.IFrontendBlock(body[1])
-    ticker_item = next(jobbox_ticker.items)
-
+    ticker_item = list(jobbox_ticker.items)[0]
     assert 'my_title' == ticker_item.title
     assert 'my_text' == ticker_item.text
     assert 'http://my_landing_page' == jobbox_ticker.landing_page_url

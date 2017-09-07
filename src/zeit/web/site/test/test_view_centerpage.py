@@ -1412,36 +1412,36 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     box = browser.cssselect('.jobbox--major')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
     # in minor area
     box = browser.cssselect('.jobbox--minor')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
     # in duo area
     box = browser.cssselect('.jobbox--duo')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__header'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
     # in parquet area
     box = browser.cssselect('.jobbox--parquet')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
 
