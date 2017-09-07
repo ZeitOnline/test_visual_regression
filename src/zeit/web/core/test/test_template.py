@@ -559,10 +559,3 @@ def test_remove_tags_from_xml():
     filtered_block = zeit.web.core.template.remove_tags_from_xml(block, 'a')
     assert unicode(
         filtered_block) == 'Ich esse <em>ein</em> leckeres Wurstbrot.\n'
-
-
-def test_get_first_citation_returns_first_citation_of_article_body(
-        application):
-    citation = zeit.web.core.template.get_first_citation(
-        'http://xml.zeit.de/zeit-online/article/quotes')
-    assert citation.attribution == "Jules Winnfield"
