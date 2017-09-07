@@ -273,7 +273,7 @@
         id="zon-podcast"
         title="Podcast"
         image_pattern="original"
-        areas="solo"
+        areas="solo major minor duo"
         />
 
     <!--   Teaser formats for Storystreams   -->
