@@ -5,18 +5,11 @@
 		background-color: #CCE8E9
 		text-align: center
 		font-family: $font-patronbold
-		padding-bottom: remify(10px)
 		margin-bottom: $vertical-space
 	&__container--podcast
 		+padded
 	&__headline
 		width: auto
-	&__kicker
-		&--podcast
-			+outlined-font($color-text)
-			font-size: remify(32px)
-			letter-spacing: normal
-			line-height: 1.12
 	&__media
 		&--podcast
 			height: auto
@@ -26,9 +19,11 @@
 		&--podcast
 			margin-bottom: $vertical-space
 			line-height: 1.12
-	&__series
+	&__series,
+	&__kicker
 		&--podcast
-			display: block
+			color: $zon-charcoal
+			display: inline-block
 			font-family: $font-tabletgothic
 			font-weight: normal
 			font-size: remify(16px)
@@ -43,8 +38,19 @@
 				max-height: 200px
 	&__podcast-player
 		margin-bottom: remify(30px)
-		max-height: remify(56px) // prevent jumping layout
+		max-height: remify(66px) // prevent jumping layout
 		overflow: hidden
+	&__all-series
+		font-family: $font-tabletgothic
+		font-weight: normal
+		margin: 0 auto
+		padding: 15px
+		text-align: left
+		text-decoration: underline
+		a:after
+			content: "\203A"
+			margin-left: remify(4px)
+			position: absolute
 	&__sharing--podcast
 		+padded
 		border-top: 1px rgba($color-text, 0.2) solid
@@ -53,7 +59,6 @@
 	.article-heading
 		&--podcast
 			padding-top: remify(60px)
-			padding-bottom: remify(16px)
 			text-align: left
 		&__container--podcast
 			display: flex
@@ -67,15 +72,11 @@
 				img
 					max-height: none
 					width: remify(220px)
-		&__kicker
-			&--podcast
-				font-size: remify(60px)
-				margin-bottom: 0
-				overflow: hidden
-				text-overflow: ellipsis
 		&__podcast-player
 			margin-bottom: remify(60px)
-
+		&__all-series
+			padding-left: 0
+			width: $medium-content-width
 +respond-min($break-desktop-min)
 	.article-heading
 		&__podcast-player

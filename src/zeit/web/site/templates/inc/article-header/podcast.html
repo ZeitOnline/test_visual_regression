@@ -7,11 +7,12 @@
             </figure>
             <div>
                 <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}">
-                    {%- if view.serie -%}
                     <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
-                        Podcast: {{ view.serie -}}
+                        {%- if view.serie -%}
+                            Podcast: {{ view.serie -}} &nbsp / &nbsp
+                        {%- endif -%}
+                        {{- view.supertitle -}}
                     </span>
-                    {%- endif -%}
                     {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
                     <span class="{{ 'article-heading__title' | with_mods('podcast') }}">{{- view.title -}}</span>
                 </h1>
@@ -22,6 +23,9 @@
         </div>
         <div class="{{ 'article-heading__sharing' | with_mods('podcast') }}">
             {% include "zeit.web.arbeit:templates/inc/article/sharing-podcast.html" %}
+        </div>
+        <div class="{{ 'article-heading__all-series' | with_mods('podcast') }}">
+            <a href="{{ view.series | create_url }}">Alle folgen</a>
         </div>
     </header>
 {% endblock %}
