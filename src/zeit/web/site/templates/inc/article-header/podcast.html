@@ -2,9 +2,7 @@
 {% block heading %}
     <header class="{{ 'article-heading' | with_mods('podcast') }}" itemprop="headline" data-ct-area="articleheader">
         <div class="{{ 'article-heading__container' | with_mods('podcast') }}">
-            <figure class="{{ 'article-heading__media' | with_mods('podcast') }}">
-                <img src="/static/latest/images/arbeit/podcast/header-illustration-dummy.png" alt="Podcast: {{ view.serie if view.serie else view.title }}">
-            </figure>
+            {% include "zeit.web.site:templates/inc/asset/image_article-header-podcast.html" %}
             <div>
                 <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}">
                     <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
