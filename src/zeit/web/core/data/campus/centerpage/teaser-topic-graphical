@@ -87,6 +87,9 @@
         <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-56eec4bf-a0ce-4831-b349-866b8aa02b3a"/>
         <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-4da54148-b028-40c7-b416-30e9e1e6b710"/>
         <container cp:type="auto-teaser" module="zco-graphical" cp:__name__="id-a1145c07-85c0-4c92-aced-f63235d0abe8"/>
+        <container cp:type="teaser" module="zco-wide-large" cp:__name__="id-4de5b1a5-245d-4c6f-b57a-e357db3fbe4b">
+          <block href="http://xml.zeit.de/campus/article/01-countdown-studium"></block>
+        </container>
       </region>
     </cluster>
 
