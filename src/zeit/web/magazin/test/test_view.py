@@ -123,10 +123,7 @@ def test_header_module_should_be_first_image_of_content_blocks(application):
 def test_article_should_have_author_box(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/autorenbox')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    body = zeit.content.article.edit.interfaces.IEditableBody(
-        article_view.context)
-    assert isinstance(body.values()[2], (
+    assert isinstance(context.body.values()[2], (
         zeit.content.article.edit.reference.Portraitbox))
 
 
@@ -159,8 +156,7 @@ def test_header_video_should_be_none_if_we_have_a_wrong_layout(
     id = 'http://xml.zeit.de/zeit-magazin/article/header_video'
     context = zeit.cms.interfaces.ICMSContent(id)
     with checked_out(context) as co:
-        body = zeit.content.article.edit.interfaces.IEditableBody(co)
-        body.values()[0].layout = u'large'
+        co.body.values()[0].layout = u'large'
     context = zeit.cms.interfaces.ICMSContent(id)
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.header_module is None
