@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4190: Podcast module for CP, article body, article header
 
+- ARBEIT-113: Insert Podlove button to ZEIT Arbeit podcast headers
+
 
 3.87 (2017-09-06)
 -----------------
