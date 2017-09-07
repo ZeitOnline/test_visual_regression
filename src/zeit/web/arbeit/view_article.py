@@ -1,5 +1,7 @@
 import zeit.content.article.interfaces
 
+import zope.component
+
 import zeit.web
 import zeit.web.arbeit.view
 import zeit.web.core.view_article
@@ -25,6 +27,14 @@ class Article(zeit.web.core.view_article.Article,
     @zeit.web.reify
     def article_layout(self):
         return 'default'
+
+    # TODO: Move to core
+    @zeit.web.reify
+    def series(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        uid = u'{}/{}'.format(
+            conf.get('series_prefix', ''), self.context.serie.url)
+        return zeit.cms.interfaces.ICMSContent(uid, None)
 
 
 @zeit.web.view_defaults(vertical='zar')
