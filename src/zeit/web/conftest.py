@@ -111,7 +111,6 @@ def app_settings(mockserver):
         'vivi_zeit.cms_source-access': (
             'egg://zeit.cms.content/access.xml'),
         'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
-        'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
         'vivi_zeit.cms_source-keyword': (
             'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
         'vivi_zeit.cms_source-ressorts': (
@@ -159,6 +158,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/cp-areas.xml'),
         'vivi_zeit.content.cp_region-config-source': (
             'egg://zeit.web.core/data/config/cp-regions.xml'),
+        'vivi_zeit.cms_source-jobbox-ticker': (
+            'egg://zeit.web.core/data/config/jobboxticker.xml'),
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.cp_cp-feed-max-items': '30',
@@ -172,8 +173,6 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
         'vivi_zeit.content.image_copyright-company-source': (
             'egg://zeit.content.image/tests/fixtures/copyright-company.xml'),
-        'vivi_zeit.web_banner-source': (
-            'egg://zeit.web.core/data/config/banner.xml'),
         'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
         'vivi_zeit.web_navigation-source': (
@@ -266,6 +265,11 @@ def test_asset(path):
         'zeit.web.core', 'data' + path), 'rb')
 
 
+@pytest.fixture(scope='session')
+def file_from_data():
+    return test_asset
+
+
 @pytest.fixture
 def jinja2_env(application):
     return application.zeit_app.jinja_env
@@ -293,6 +297,7 @@ class ZODBLayer(plone.testing.zodb.EmptyZODB):
         # The name never ever changes, so there's no real need to import it
         # from zope.app.publication.
         return self['zodbRoot']['Application']
+
 
 ZODB_LAYER = ZODBLayer()
 

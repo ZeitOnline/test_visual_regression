@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:g="http://base.google.com/ns/1.0" version="2.0">
+  <channel>
+    <title>jobs.zeit.de - Stellenmarkt</title>
+    <link>http://jobs.zeit.de</link>
+    <description>jobs.zeit.de</description>
+    <pubDate>Wed, 30 Aug 2017 11:48:42 GMT</pubDate>
+    <dc:date>2017-08-30T11:48:42Z</dc:date>
+    <image>
+      <title>jobs.zeit.de - Stellenmarkt</title>
+      <url>http://jobs.zeit.de/images/zeit_logo.gif</url>
+      <link>http://jobs.zeit.de</link>
+    </image>
+    <item>
+      <title>my_title</title>
+      <link>http://jobs.zeit.de/jobs/zuerich_schweiz_professur_fuer_literaturen_in_englischer_sprache_der_fruehen_neuzeit_146174.html</link>
+      <description>my_text</description>
+      <enclosure url="https://www.academics.de/image-upload/zuerich_uni_94.png" type="image/png" />
+      <pubDate>Thu, 10 Aug 2017 10:00:00 GMT</pubDate>
+      <guid>http://jobs.zeit.de/jobs/zuerich_schweiz_professur_fuer_literaturen_in_englischer_sprache_der_fruehen_neuzeit_146174.html</guid>
+      <dc:creator>Universität Zürich</dc:creator>
+      <dc:date>2017-08-10T10:00:00Z</dc:date>
+      <g:condition>new</g:condition>
+      <g:image_link>https://www.academics.de/image-upload/zuerich_uni_94.png</g:image_link>
+      <g:availability>in stock</g:availability>
+      <g:price>0.0</g:price>
+    </item>
+    <item>
+      <title>Projektentwickler und -koordinator (m/w)</title>
+      <link>http://jobs.zeit.de/jobs/wiesbaden_projektentwickler_und_-koordinator_m_w_145895.html</link>
+      <description>Volkshochschule Wiesbaden e.V.</description>
+      <enclosure url="https://www.academics.de/image-upload/100x50_578.png" type="image/png" />
+      <pubDate>Thu, 03 Aug 2017 10:00:00 GMT</pubDate>
+      <guid>http://jobs.zeit.de/jobs/wiesbaden_projektentwickler_und_-koordinator_m_w_145895.html</guid>
+      <dc:creator>Volkshochschule Wiesbaden e.V.</dc:creator>
+      <dc:date>2017-08-03T10:00:00Z</dc:date>
+      <g:condition>new</g:condition>
+      <g:image_link>https://www.academics.de/image-upload/100x50_578.png</g:image_link>
+      <g:availability>in stock</g:availability>
+      <g:price>0.0</g:price>
+    </item>
+  </channel>
+</rss>
