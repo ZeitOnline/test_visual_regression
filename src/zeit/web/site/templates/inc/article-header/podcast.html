@@ -31,7 +31,7 @@
                         <script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="de" data-color="#000" data-size="small" data-style="outline" data-json-data="podcastData" async defer></script>
                     </span>
                 {% endif %}
-                <a href="{{ view.series | create_url }}" class="{{ 'article-heading__link-series' }}">Alle Folgen</a>
+                <a href="{{ context | find_series_cp | create_url }}" class="{{ 'article-heading__link-series' }}">Alle Folgen</a>
             </div>
         </div>
     </header>

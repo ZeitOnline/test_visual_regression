@@ -257,6 +257,15 @@ def vertical(content):
 
 
 @zeit.web.register_filter
+def find_series_cp(content):
+    if not getattr(content.serie, 'url', None):
+        return None
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    uid = u'{}/{}'.format(conf.get('series_prefix', ''), content.serie.url)
+    return zeit.cms.interfaces.ICMSContent(uid, None)
+
+
+@zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block
     elements.

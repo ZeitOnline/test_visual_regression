@@ -4,5 +4,5 @@
             <script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="de" data-color="#000" data-size="small" data-style="outline" data-json-data="podcastData" async defer></script>
         </div>
     {% endif %}
-    <a class="podcast-sharing__link" href="{{ view.series | create_url }}">Alle Folgen</a>
+    <a class="podcast-sharing__link" href="{{ context | find_series_cp | create_url }}">Alle Folgen</a>
 </div>
