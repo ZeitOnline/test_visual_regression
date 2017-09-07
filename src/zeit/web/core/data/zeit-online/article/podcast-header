@@ -3,7 +3,7 @@
 <header>
 	<podcast id="6853" />
 </header>
-<image base-id="http://xml.zeit.de/zeit-online/image/podcast-illustration/" type="png" fill_color="CCE8E9"/>
+<image base-id="http://xml.zeit.de/zeit-online/image/podcast-illustration/" type="png" fill_color="EEB200"/>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">yes</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
 <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
