@@ -14,12 +14,14 @@ import zeit.content.image.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
+import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.centerpage
 import zeit.web.core.metrics
 
 
 log = logging.getLogger(__name__)
+SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 
 
 class IRSSLink(zeit.content.link.interfaces.ILink):
@@ -110,11 +112,16 @@ class RSSImages(zeit.web.core.image.RemoteImages):
     pass
 
 
+@SHORT_TERM_CACHE.cache_on_arguments()
+def _cache_feed(url, timeout):
+    with zeit.web.core.metrics.timer('feed.rss.reponse_time'):
+        resp = requests.get(url, timeout=timeout)
+    return resp.content
+
+
 def parse_feed(url, kind, timeout=2):
     try:
-        with zeit.web.core.metrics.timer('feed.rss.reponse_time'):
-            resp = requests.get(url, timeout=timeout)
-        xml = lxml.etree.fromstring(resp.content)
+        xml = lxml.etree.fromstring(_cache_feed(url, timeout))
     except (requests.exceptions.RequestException,
             lxml.etree.XMLSyntaxError), e:
         log.debug('Could not collect {}: {}'.format(url, e))

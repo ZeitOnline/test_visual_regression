@@ -1,24 +1,20 @@
-.sharing-podcast
-	&__items
-		list-style-type: none
-		text-align: right
-		margin: 0 // override user-agent styles
-		padding-top: remify(10px)
-	&__item
-		display: inline
-		margin-left: remify(20px)
-	&__icon
-		color: inherit
-		vertical-align: middle
-	&__link
-		color: $zar-darkslate-grey
-	&__text
-		+visuallyhidden
+.podcast-sharing
+	padding-bottom: remify(16px)
+	padding-top: remify(16px)
 
-	+respond-min($break-tablet-min)
-		max-width: $medium-content-width
-		margin: 0 auto
-		&__item
-			&--whatsapp,
-			&--messenger
-				display: none
+	&__podlove
+		float: left
+		margin-right: remify(12px)
+		// avoid jumping while the JS loads
+		max-height: remify(30px)
+		max-width: remify(110px)
+		overflow: hidden
+
+	&__link
+		border-bottom: 1px $color-link--default solid
+		font-size: remify(14px)
+		+on-interaction
+			color: $color-text
+			border-bottom: 1px $color-text solid
+		&:after
+			content: " \203A"

@@ -1,0 +1,160 @@
+$jobbox-border-width: 6px
+
+// We need two seperate boxes to avoid rendering glitches (which appear if
+// the outer container has a border, and the inner top has a background)
+
+.jobbox-ticker__heading
+	background-color: $color-jobs-areas
+
+.jobbox-ticker-item__container
+	border: remify($jobbox-border-width) $color-jobs-areas solid
+	border-top: none
+	margin-top: -1px
+
+.jobbox-ticker
+	@extend %teaser
+	margin: remify(32px) $page-padding--small remify(14px)
+	position: relative
+
+	&__label
+		@extend %teaser-adlabel
+		color: $zar-cool-grey
+		position: absolute
+		top: remify(-20px)
+		right: 0
+
+	&__heading
+		+font-smoothing
+		color: #fff
+		padding: remify(10px 20px 20px)
+		text-align: center
+	&__kicker
+		@extend %teaser-kicker--s
+		color: #fff
+		display: block
+	&__title
+		@extend %teaser-title--xs
+		margin: remify(8px 0)
+	&__link
+		@extend %teaser-text
+		border-bottom: 1px solid currentColor
+		color: #fff
+		+on-interaction
+			color: $zar-whitesmoke
+
+.jobbox-ticker-item
+	&__list
+		padding: 0
+		list-style: none
+	&__container
+		padding: remify(10px 20px)
+	&__kicker
+		@extend %teaser-kicker--s
+	&__title
+		@extend %teaser-title--xxs
+		margin: .5em 0
+		height: 1.4em * 3 // multiply line-height for a min 3 lines height
+		overflow: hidden
+		text-overflow: ellipsis
+	&__text
+		@extend %teaser-metadata
+		display: inline-block
+		font-family: $font-franziska
+		font-style: italic
+		overflow: hidden
+		width: 100%
+		white-space: nowrap
+		text-overflow: ellipsis
+	&__link
+		@extend %zar-button-hollow--jobs
+		display: block
+		margin: remify(16px 0 8px)
+		vertical-align: middle
+
+.cp-area--solo .jobbox-ticker
+	margin: $vertical-space--small $page-padding--small
+	+respond-min($break-tablet-min)
+		margin: $vertical-space $cp-padding*2
+		.jobbox-ticker-item__title
+			height: 1.4em * 2 // multiply line-height for a max 2 lines height
+
+.cp-area--duo .jobbox-ticker
+	+respond-min($break-tablet-min)
+		margin: 0 $cp-padding
+
+.cp-area--trio .jobbox-ticker
+	margin: $vertical-space--small $page-padding--small
+	+respond-min($break-tablet-min)
+		margin: $vertical-space $cp-padding
+		.jobbox-ticker-item__title
+			height: 1.4em * 4 // multiply line-height for a max 4 lines height
+
+.jobbox-ticker-item:not(:first-child)
+	display: none
+
+.jobbox-ticker-item__kicker
+	display: block
+	position: relative
+
+.js
+	.jobbox-ticker-item__kicker:after
+		content: ''
+		box-sizing: border-box
+		position: absolute
+		top: 40%
+		right: 0
+		width: 18px
+		height: 18px
+		margin-top: -10px
+		margin-left: -10px
+		border-radius: 50%
+		border: 3px solid $zar-whitesmoke
+		border-top-color: $color-jobs-areas
+		transform: rotate(-45deg)
+		animation: show 9s linear infinite // 9s = duration+delay in jquery.animateJobs.js
+
+@keyframes show
+	0%
+		border-color: $zar-whitesmoke
+		transform: rotate(0deg)
+	25%
+		border-right-color: $color-jobs-areas
+		border-bottom-color: $zar-whitesmoke
+		border-left-color: $zar-whitesmoke
+		border-top-color: $zar-whitesmoke
+
+	50%
+		border-right-color: $color-jobs-areas
+		border-bottom-color: $color-jobs-areas
+		border-left-color: $zar-whitesmoke
+		border-top-color: $zar-whitesmoke
+
+	75%
+		border-right-color: $color-jobs-areas
+		border-bottom-color: $color-jobs-areas
+		border-left-color: $color-jobs-areas
+		border-top-color: $zar-whitesmoke
+
+	100%
+		border-right-color: $color-jobs-areas
+		border-bottom-color: $color-jobs-areas
+		border-left-color: $color-jobs-areas
+		border-top-color: $color-jobs-areas
+		transform: rotate(360deg)
+
+.jobbox-ticker--article-marginalia
+	margin: $vertical-space*2 0
+	+respond-min($break-tablet-min)
+		clear: left
+		float: left
+		margin-right: remify(50px)
+		width: remify(300px)
+	// to avoid re-arranging the floating text inside articles, we have to
+	// set a fixed height on the items, regardless of their content
+	.jobbox-ticker-item__title
+		height: 1.4em * 3 // multiply line-height for a 3 lines height
+		overflow: hidden
+	.jobbox-ticker-item__text
+		display: block
+		height: 1.4em // only allow 1 line-height
+		overflow: hidden

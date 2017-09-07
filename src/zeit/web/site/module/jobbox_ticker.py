@@ -1,9 +1,10 @@
+
 import grokcore.component
 import logging
-import zope.component
 
 import zeit.content.image.interfaces
 
+import zeit.web
 import zeit.web.core.image
 import zeit.web.site.area.rss
 import zeit.web.core.centerpage
@@ -13,7 +14,8 @@ log = logging.getLogger(__name__)
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImageGroup)
-@grokcore.component.adapter(zeit.web.site.area.rss.IRSSLink, name='jobbox')
+@grokcore.component.adapter(zeit.web.site.area.rss.IRSSLink,
+                            name='jobbox_ticker')
 class ImageGroup(zeit.web.core.image.RemoteImageGroup):
 
     @zeit.web.reify
@@ -23,17 +25,17 @@ class ImageGroup(zeit.web.core.image.RemoteImageGroup):
 
 
 @grokcore.component.implementer(zeit.web.site.area.rss.IRSSLink)
-@grokcore.component.adapter(None, name='jobbox')
+@grokcore.component.adapter(None, name='jobbox_ticker')
 class Link(zeit.web.site.area.rss.RSSLink):
 
     pass
 
 
-@zeit.web.register_module('jobbox')
-class Jobbox(zeit.web.core.centerpage.Module, list):
+@zeit.web.register_module('jobbox_ticker')
+class JobboxTicker(
+        zeit.web.core.centerpage.Module,
+        zeit.web.arbeit.block.JobboxTicker):
 
     def __init__(self, context):
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        url = conf.get('academics_hp_feed')
-        list.__init__(self, zeit.web.site.area.rss.parse_feed(url, 'jobbox'))
+        zeit.web.arbeit.block.JobboxTicker.__init__(self, context)
         zeit.web.core.centerpage.Module.__init__(self, context)

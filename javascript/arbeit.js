@@ -20,13 +20,9 @@ require( 'web.core/plugins/jquery.dropdownLink' );
 require( 'web.core/plugins/jquery.inlinegallery' );
 require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.countFormchars' );
+require( 'web.core/plugins/jquery.animateJobs' );
 
 $.notifications();
-
-if ( article.length ) {
-    comments.init();
-    $( '.comment-section' ).countFormchars();
-}
 
 if ( pageType === 'centerpage' ) {
     $( '.js-dropdownlink' ).dropdownLink();
@@ -34,7 +30,10 @@ if ( pageType === 'centerpage' ) {
     main.find( '.article-toc' ).toggleRegions();
     main.find( '.js-gallery' ).inlinegallery();
     main.find( '.js-infobox' ).infobox();
+    comments.init();
+    $( '.comment-section' ).countFormchars();
 }
 
 // more ("non critical") global stuff
 $( '.js-image-copyright-footer' ).imageCopyrightFooter();
+$( '.js-jobbox-animation' ).animateJobs();
