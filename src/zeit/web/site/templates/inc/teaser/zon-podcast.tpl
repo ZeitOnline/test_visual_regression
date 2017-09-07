@@ -13,16 +13,18 @@
   {% include "zeit.web.core:templates/inc/podcast_player.html" %}
 
 
-    <div class="teaser-podcast__sharing">
+    <div class="teaser-podcast-footer">
         {% if module.podlove_configuration %}
             <script type="text/javascript">
                 window.podcastData_{{ teaser_jsonname }} = {{ module.podlove_configuration | tojson | safe }};
             </script>
-            <div class="teaser-podcast__sharing-podlove">
+            <div class="teaser-podcast-footer__podlove">
                 <script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="de" data-color="#000" data-size="small" data-style="outline" data-json-data="podcastData_{{ teaser_jsonname }}" async defer></script>
             </div>
         {% endif %}
-        <a class="teaser-podcast__sharing-link" href="{{ context | find_series_cp | create_url }}">Alle Folgen</a>
+        <span>
+            <a class="teaser-podcast-footer__link" href="{{ context | find_series_cp | create_url }}">Alle Folgen</a>
+        </span>
     </div>
 
 </div>
