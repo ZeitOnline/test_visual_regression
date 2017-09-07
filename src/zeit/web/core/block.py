@@ -517,7 +517,7 @@ class Podcast(Block):
     @zeit.web.reify
     def podlove_configuration(self):
         # https://github.com/podlove/podlove-subscribe-button#podcast-data-api
-        return {
+        result = {
             'title': self.podcast.get('title'),
             'subtitle': self.podcast.get('subtitle'),
             'description': self.podcast.get('description'),
@@ -528,6 +528,11 @@ class Podcast(Block):
                 'url': feed['url'],
             } for feed in self.podcast.get('feeds', [])]
         }
+        # <https://github.com/podlove/podlove-subscribe-button/blob
+        #  /6be9607cf5ce486ff6b28d7df4d6f8a61c14e563/src/coffee/app.coffee#L88>
+        if not result['feeds']:
+            return {}
+        return result
 
 
 @grokcore.component.adapter(

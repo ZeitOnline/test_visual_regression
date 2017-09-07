@@ -217,6 +217,13 @@ def test_zar_article_podcast_header_renders_correctly(testbrowser):
         '/embed?context=external&theme=zon-minimal')
 
 
+def test_podcast_header_should_omit_podlove_button_if_no_feeds(testbrowser):
+    with mock.patch('zeit.web.core.podigee.Podigee.get_podcast') as podcast:
+        podcast.return_value = {}
+        browser = testbrowser('/arbeit/article/podcast')
+    assert not browser.cssselect('script.podlove-subscribe-button')
+
+
 def test_zar_article_should_provide_jobboxticker(
         testserver, monkeypatch, file_from_data):
 
