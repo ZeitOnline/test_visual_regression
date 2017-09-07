@@ -40,14 +40,16 @@
 		margin-bottom: remify(30px)
 		max-height: remify(66px) // prevent jumping layout
 		overflow: hidden
-	&__all-series
+	&__subs-series
+		margin: 0 auto
+		padding: remify(18px 0 12px)
+		text-align: left
+	&__link-series
 		font-family: $font-tabletgothic
 		font-weight: normal
-		margin: 0 auto
-		padding: 15px
-		text-align: left
+		margin-left: remify(10px)
 		text-decoration: underline
-		a:after
+		&:after
 			content: "\203A"
 			margin-left: remify(4px)
 			position: absolute
@@ -74,7 +76,7 @@
 					width: remify(220px)
 		&__podcast-player
 			margin-bottom: remify(60px)
-		&__all-series
+		&__subs-series
 			padding-left: 0
 			width: $medium-content-width
 +respond-min($break-desktop-min)
