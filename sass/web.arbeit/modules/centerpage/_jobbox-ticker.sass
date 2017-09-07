@@ -53,14 +53,18 @@ $jobbox-border-width: 6px
 	&__title
 		@extend %teaser-title--xxs
 		margin: .5em 0
-		max-height: 1.4em * 4 // multiply line-height for a max 3 lines height
+		height: 1.4em * 3 // multiply line-height for a min 3 lines height
 		overflow: hidden
+		text-overflow: ellipsis
 	&__text
 		@extend %teaser-metadata
+		display: inline-block
 		font-family: $font-franziska
 		font-style: italic
-		max-height: 1.4em * 2 // multiply line-height for a max 2 lines height
 		overflow: hidden
+		width: 100%
+		white-space: nowrap
+		text-overflow: ellipsis
 	&__link
 		@extend %zar-button-hollow--jobs
 		display: block
@@ -71,6 +75,8 @@ $jobbox-border-width: 6px
 	margin: $vertical-space--small $page-padding--small
 	+respond-min($break-tablet-min)
 		margin: $vertical-space $cp-padding*2
+		.jobbox-ticker-item__title
+			height: 1.4em * 2 // multiply line-height for a max 2 lines height
 
 .cp-area--duo .jobbox-ticker
 	+respond-min($break-tablet-min)
@@ -80,6 +86,8 @@ $jobbox-border-width: 6px
 	margin: $vertical-space--small $page-padding--small
 	+respond-min($break-tablet-min)
 		margin: $vertical-space $cp-padding
+		.jobbox-ticker-item__title
+			height: 1.4em * 4 // multiply line-height for a max 4 lines height
 
 .jobbox-ticker-item:not(:first-child)
 	display: none
@@ -88,21 +96,22 @@ $jobbox-border-width: 6px
 	display: block
 	position: relative
 
-.jobbox-ticker-item__kicker:after
-	content: ''
-	box-sizing: border-box
-	position: absolute
-	top: 40%
-	right: 0
-	width: 18px
-	height: 18px
-	margin-top: -10px
-	margin-left: -10px
-	border-radius: 50%
-	border: 3px solid $zar-whitesmoke
-	border-top-color: $color-jobs-areas
-	transform: rotate(-45deg)
-	animation: show 9s linear infinite // 9s = duration+delay in jquery.animateJobs.js
+.js
+	.jobbox-ticker-item__kicker:after
+		content: ''
+		box-sizing: border-box
+		position: absolute
+		top: 40%
+		right: 0
+		width: 18px
+		height: 18px
+		margin-top: -10px
+		margin-left: -10px
+		border-radius: 50%
+		border: 3px solid $zar-whitesmoke
+		border-top-color: $color-jobs-areas
+		transform: rotate(-45deg)
+		animation: show 9s linear infinite // 9s = duration+delay in jquery.animateJobs.js
 
 @keyframes show
 	0%
@@ -133,8 +142,6 @@ $jobbox-border-width: 6px
 		border-top-color: $color-jobs-areas
 		transform: rotate(360deg)
 
-
-
 .jobbox-ticker--article-marginalia
 	margin: $vertical-space*2 0
 	+respond-min($break-tablet-min)
@@ -151,4 +158,3 @@ $jobbox-border-width: 6px
 		display: block
 		height: 1.4em // only allow 1 line-height
 		overflow: hidden
-
