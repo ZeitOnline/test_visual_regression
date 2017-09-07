@@ -10,7 +10,7 @@
                    title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}"
                    href="{{ teaser | create_url | append_campaign_params }}">
             <p class="{{ self.layout() }}__text">
-                {% set citation = get_first_citation(teaser.uniqueId) %}
+                {% set citation = adapt(teaser, 'zeit.content.article.edit.interfaces.IEditableBody').find_first(resolve('zeit.content.article.edit.interfaces.ICitation')) %}
                 {% if citation %}
                     {{- citation.text -}}
                 {% else %}

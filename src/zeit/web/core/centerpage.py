@@ -64,7 +64,7 @@ class Area(collections.OrderedDict):
     # so a full re-implementation is just plain impossible.
     # So we hard-code the only use-case that this should ever be called for,
     # which is ITeaseredContent.
-    def select_modules(self, *interfaces):
+    def filter_values(self, *interfaces):
         for module in zeit.content.cp.interfaces.IRenderedArea(self).values():
             if getattr(module, 'type', None) == 'teaser':
                 yield module

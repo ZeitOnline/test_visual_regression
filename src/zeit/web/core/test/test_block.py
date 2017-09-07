@@ -551,8 +551,7 @@ def test_volume_should_ignore_invalid_references(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/volumeteaser')
     article.xml.xpath('//volume')[0].set('href', 'http://xml.zeit.de/invalid')
-    body = zeit.content.article.edit.interfaces.IEditableBody(article)
-    module = body.values()[1]
+    module = article.body.values()[1]
     assert zeit.web.core.interfaces.IFrontendBlock(module, None) is None
 
 
@@ -567,7 +566,7 @@ def test_podcast_should_render_script_tag_for_player(testbrowser):
 def test_podcast_header_should_provide_podlove_data(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/arbeit/article/podcast')
-    header = zeit.content.article.edit.interfaces.IHeaderArea(article)
+    header = article.header
     block = header.values()[0]
     module = zope.component.getMultiAdapter(
         (block, header),

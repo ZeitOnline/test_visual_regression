@@ -175,7 +175,7 @@ class Storystream(Centerpage):
         for region in regions:
             areas = region.values()
             for area in areas:
-                for module in area.select_modules(*self.countable_atom_types):
+                for module in area.filter_values(*self.countable_atom_types):
                     atom_counter += 1
 
                     # OPTIMIZE: this traversal is redundant (also done inside

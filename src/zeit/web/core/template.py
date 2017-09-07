@@ -799,8 +799,13 @@ def get_random_number(length):
 
 
 @zeit.web.register_global
+def resolve(identifier):
+    return pyramid.path.DottedNameResolver().resolve(identifier)
+
+
+@zeit.web.register_global
 def adapt(obj, iface, name=u'', multi=False):
-    iface = pyramid.path.DottedNameResolver().resolve(iface)
+    iface = resolve(iface)
     if multi:
         return zope.component.queryMultiAdapter(obj, iface, name)
     else:
@@ -899,9 +904,3 @@ def remove_tags_from_xml(block, *tagnames):
     xml = block.model_block.xml
     lxml.etree.strip_tags(xml, *tagnames)
     return zeit.web.core.block._inline_html(xml)
-
-
-@zeit.web.register_global
-def get_first_citation(uniqueId):
-    article = zeit.cms.interfaces.ICMSContent(uniqueId, None)
-    return zeit.content.article.edit.citation.find_first_citation(article)
