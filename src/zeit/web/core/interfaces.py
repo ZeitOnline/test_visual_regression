@@ -202,6 +202,19 @@ class IReach(zope.interface.Interface):
         """Collect a buzz summary for an article by uniqueId"""
 
 
+class IPodigee(zope.interface.Interface):
+
+    def get_episode(episode_id):
+        """Returns a dict with episode metadata. If an error occurs, returns an
+        empty dict, but will always contain a key `podcast_id` for use with
+        `get_podcast`.
+        """
+
+    def get_podcast(podcast_id):
+        """Returns a dict with podcast metadata. If an error occurs, returns an
+        empty dict."""
+
+
 class IMetrics(zope.interface.Interface):
 
     def time(identifier):

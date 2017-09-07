@@ -1,0 +1,113 @@
+// styles for "external" content
+// intended for Datenjournalismus & Co.
+// prefixed with "x"
+
+// standard content width
+.x-content-column
+	+respond-min($break-tablet-min)
+		max-width: $medium-content-width
+		margin-left: auto
+		margin-right: auto
+		// wide content, e.g. ZAR article pics
+		&--wide
+			max-width: $wide-content-width
+
+// responsive fullwidth
+.x-fullwidth
+	+unpadded
+	+respond-max(em(480px), false)
+		&--mobile
+			+unpadded
+	+respond-max($break-phablet-min, false)
+		&--phablet
+			+unpadded
+	+respond-max($break-tablet-min, false)
+		&--tablet
+			+unpadded
+
+// page padding
+.x-page-padding
+	+padded
+
+// text styles
+.x-headline,
+.x-subheadline,
+.x-copytext,
+.x-footer,
+.x-footer--borderless
+	font-family: $font-tabletgothic
+	letter-spacing: $letter-spacing-s
+	line-height: 1.4
+
+.x-headline
+	font-size: remify(20px)
+	line-height: 1.25
+	margin-bottom: .5em
+	margin-top: 1.4em
+	+respond-min($break-desktop-min)
+		font-size: remify(24px)
+
+.x-subheadline,
+.x-subheadline--borderless
+	font-size: remify(18px)
+	margin-bottom: .5rem
+	margin-top: .5rem
+	+respond-min($break-desktop-min)
+		font-size: remify(20px)
+
+.x-subheadline
+	border-bottom: 1px solid $color-border-on-bright
+	padding-bottom: .5rem
+
+.x-copytext,
+.x-copytext--size
+	font-size: remify(15px)
+	+respond-min($break-desktop-min)
+		font-size: remify(16px)
+		line-height: 1.5
+
+.x-caption
+	&,
+	&--sans,
+	&--serif
+		+clearfix
+		font-size: remify(15px)
+		line-height: 1.5
+		+respond-min($break-desktop-min)
+			font-size: remify(16px)
+	&--sans
+		color: $zar-battleship-grey
+		font-family: $font-tabletgothic
+	&--serif
+		color: $zar-charcoal-grey
+		font-family: $font-franziska
+		font-style: italic
+
+.x-footer,
+.x-footer--borderless
+	+clearfix
+	color: $zar-battleship-grey
+	font-size: remify(14px)
+	margin-bottom: .5rem
+	margin-top: .5rem
+
+.x-footer
+	border-top: 1px solid $color-border-on-bright
+	padding-top: .5rem
+
+.x-copyright
+	float: right
+
+// vertical space
+.x-spacing
+	margin-top: $vertical-space
+	margin-bottom: $vertical-space
+	&--paragraph
+		margin-top: .6em
+		margin-bottom: .6em
+	&--large
+		margin-top: $vertical-space * 2
+		margin-bottom: $vertical-space * 2
+
+.x-picturefill img
+	max-width: 100%

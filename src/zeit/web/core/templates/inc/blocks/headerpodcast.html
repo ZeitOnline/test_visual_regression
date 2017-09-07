@@ -1,0 +1,7 @@
+{% set module = block %}
+<script type="text/javascript">
+window.podcastData = {{ module.podlove_configuration | tojson | safe }};
+</script>
+
+{% set podcast_player_theme = settings('podcast_theme_article_header') %}
+{% include "zeit.web.core:templates/inc/podcast_player.html" %}

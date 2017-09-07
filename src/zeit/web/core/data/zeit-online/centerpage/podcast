@@ -31,7 +31,7 @@
         <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">centerpage-2009</attribute>
         <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">centerpage</attribute>
-        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:a30c6a88-b488-428c-b132-323214141545}</attribute>
+        <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:cfecfd06-2afe-421e-894b-065af8dfdc80}</attribute>
         <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">26</attribute>
         <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2008</attribute>
         <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
@@ -50,64 +50,34 @@
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
         <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
-        <topiclinks>
-            <topiclink_title>Schwerpunkte</topiclink_title>
-            <topiclink>
-                <topiclink_label_1>Islamischer Staat</topiclink_label_1>
-                <topiclink_url_1>http://www.zeit.de/schlagworte/organisationen/islamischer-staat/index</topiclink_url_1>
-                <topiclink_label_2>Bundeswehr</topiclink_label_2>
-                <topiclink_url_2>http://www.zeit.de/schlagworte/themen/bundeswehr/index</topiclink_url_2>
-                <topiclink_label_3>Hongkong</topiclink_label_3>
-                <topiclink_url_3>http://www.zeit.de/schlagworte/orte/hongkong/index</topiclink_url_3>
-            </topiclink>
-        </topiclinks>
     </head>
     <body>
-        <title>Jobbox</title>
-        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" kind="solo">
-            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" kind="solo">
-                <container cp:__name__="id-622112b4-de48-4198-aac9-fa71dbde397a" cp:type="teaser" module="zon-fullwidth">
-                    <block href="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
-                </container>
-            </region>
-        </cluster>
-        <cluster area="id-7c3bcdd2-7c8a-4bd1-9905-ce93fbce867f" kind="duo">
-            <region area="id-178f9c43-8a0e-4551-9636-8126ed4ea33d" kind="major">
-                <container cp:__name__="id-accc3eb3-1b3c-419f-914b-7c560de63d5a" cp:type="teaser" module="zon-small">
-                    <block href="http://xml.zeit.de/zeit-online/article/01"/>
-                </container>
-                <container cp:type="jobbox_ticker" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-909682ba-5b0d-4e11-a88a-4b30847c52c9" jobbox_ticker_id="hp"/>
-            </region>
-            <region area="id-da65a250-0482-4ce8-b662-5ca24af05061" kind="minor">
-                <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60598" cp:type="teaser" module="zon-small">
-                    <block href="http://xml.zeit.de/zeit-online/article/01"/>
-                </container>
-                <container cp:type="jobbox_ticker" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-909682ba-5b0d-4e11-a88a-4b30847c52c9" jobbox_ticker_id="hp"/>
+        <title>Podcast auf CPs</title>
 
-            </region>
-        </cluster>
-        <cluster area="id-c159958c-b496-4ccf-8b8f-8cefd57e630e" kind="duo">
-            <region area="id-aa58b55f-c74b-48b3-b0cb-aa1cdfc3014f" kind="duo">
-                <container cp:__name__="id-a560c834-fa2e-4d35-a540-d20dff18f95a" cp:type="teaser" module="zon-square">
-                    <block href="http://xml.zeit.de/zeit-magazin/leben/2015-02/magdalena-ruecken-fs" />
+        <cluster area="id-7e329214-665f-457d-a624-94c47850f95d" kind="duo">
+            <region hide-dupes="True" area="id-40b51a45-a5d2-4040-8da7-112f9d5d6cb7" kind="duo">
+                <container cp:type="teaser" module="zon-square" cp:__name__="id-dc85b64b-2644-4f24-8fb9-6698b8ffe1b7">
+                    <block contenttype="article" href="http://xml.zeit.de/feature/feature_longform" uniqueId="http://xml.zeit.de/feature/feature_longform"/>
                 </container>
             </region>
-            <region area="id-00161f57-a6f8-4da8-80a8-6bce967e03ac" kind="duo">
-                <container cp:type="jobbox_ticker" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-909682ba-5b0d-4e11-a88a-4b30847c52c9" jobbox_ticker_id="hp"/>
-            </region>
-        </cluster>
-        <cluster area="id-9e096c63-ca17-45f8-832c-867a6ad78505" kind="parquet">
-            <region area="id-d1ac1fc9-8640-4f32-96d8-8f956f04a7fb" kind="parquet" title="Parkett">
-                <referenced_cp>http://xml.zeit.de/zeit-online/parquet</referenced_cp>
-                <container cp:type="jobbox_ticker" module="jobbox_ticker" visible="True" visible_mobile="True" cp:__name__="id-909682ba-5b0d-4e11-a88a-4b30847c52c9" jobbox_ticker_id="hp"/>
-                <container cp:__name__="id-9644ea40-0b1a-415f-9be9-38310b9bbdd2" cp:type="teaser" module="zon-small">
-                    <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier"/>
+            <region hide-dupes="True" area="id-c1a352a2-5e54-4ab1-86f3-bbf565666083" kind="duo">
+                <container cp:type="teaser" module="zon-square" cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60551">
+                    <block contenttype="article" href="http://xml.zeit.de/zeit-online/cp-content/article-01" uniqueId="http://xml.zeit.de/zeit-online/cp-content/article-01"/>
                 </container>
             </region>
         </cluster>
+
+	    <cluster visible="True" visible_mobile="True" area="id-78dbe1c1-e240-4f49-a0c6-1d2f189576aa" kind="solo" kind_title="Solo-Region">
+	      <region visible="True" visible_mobile="True" hide-dupes="True" area="id-987b0c46-6967-417b-895e-de0eb14d64f4" kind="solo">
+
+	        <container cp:type="podcast" module="podcast" visible="True" visible_mobile="True" cp:__name__="id-97cd491c-c56f-4ef3-96d0-76bde8a80671">
+                  <id>6853</id>
+                </container>
+	      </region>
+	    </cluster>
     </body>
     <feed/>
     <teaser>
-        <title>Jobbox</title>
+        <title>Z+ Teaser</title>
     </teaser>
 </centerpage>

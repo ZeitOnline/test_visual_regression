@@ -1,0 +1,8 @@
+{% if not podcast_player_theme %}
+{% set podcast_player_theme = 'default' %}
+{% endif %}
+
+<script
+ class="podigee-podcast-player"
+ src="https://cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js"
+ data-configuration="{{ module.player_configuration(podcast_player_theme) }}"></script>

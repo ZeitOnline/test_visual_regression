@@ -1416,36 +1416,36 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     box = browser.cssselect('.jobbox--major')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
     # in minor area
     box = browser.cssselect('.jobbox--minor')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
     # in duo area
     box = browser.cssselect('.jobbox--duo')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__header'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
     # in parquet area
     box = browser.cssselect('.jobbox--parquet')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
 
@@ -1453,7 +1453,7 @@ def test_jobbox_is_not_displayed_whith_empty_feed(tplbrowser):
     module = mock.Mock()
     module = ()
     browser = tplbrowser(
-        'zeit.web.site:templates/inc/module/jobbox.html',
+        'zeit.web.site:templates/inc/module/jobbox_ticker.html',
         module=module)
     assert len(browser.xpath('//html/body/*')) == 0
 
@@ -1700,7 +1700,7 @@ def test_zett_parquet_is_rendering(testbrowser):
     zett_parquet = browser.cssselect('.cp-area--zett')[0]
     title = zett_parquet.cssselect('.parquet-meta__title')
     logo = zett_parquet.cssselect('.parquet-meta__logo')
-    teaser = zett_parquet.cssselect('.teaser-small')
+    teaser = zett_parquet.cssselect('article')
     more_link = zett_parquet.cssselect('.parquet-meta__more-link--zett')
     links = zett_parquet.cssselect('a')
 
@@ -1715,6 +1715,13 @@ def test_zett_parquet_is_rendering(testbrowser):
                 '&utm_medium=fix&utm_source=zon_zettaudev_int'
                 '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x'
                 ) in link.get('href')
+
+
+def test_zett_large_teaser_is_displayed_in_parquet(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+    zett_parquet = browser.cssselect('.cp-area--zett')[0]
+    teaser = zett_parquet.cssselect('.teaser-large')
+    assert len(teaser) == 1
 
 
 def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):

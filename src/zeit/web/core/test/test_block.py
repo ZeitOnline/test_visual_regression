@@ -554,3 +554,32 @@ def test_volume_should_ignore_invalid_references(application):
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
     module = body.values()[1]
     assert zeit.web.core.interfaces.IFrontendBlock(module, None) is None
+
+
+def test_podcast_should_render_script_tag_for_player(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast')
+    player = browser.cssselect('script.podigee-podcast-player')[0]
+    assert player.get('data-configuration') == (
+        'http://zon-test.podigee.io/2-folge-zwei-test'
+        '/embed?context=external&theme=zon-standalone')
+
+
+def test_podcast_header_should_provide_podlove_data(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/arbeit/article/podcast')
+    header = zeit.content.article.edit.interfaces.IHeaderArea(article)
+    block = header.values()[0]
+    module = zope.component.getMultiAdapter(
+        (block, header),
+        zeit.web.core.interfaces.IFrontendBlock)
+    podlove = module.podlove_configuration
+    assert podlove['title'] == 'Test'
+    assert podlove['cover'].startswith('https://cdn.podigee.com')
+    assert len(podlove['feeds']) == 4
+
+
+def test_podcast_header_should_add_podlove_data_to_window(testbrowser):
+    browser = testbrowser('/arbeit/article/podcast')
+    assert 'window.podcastData =' in browser.contents
+    assert (
+        '"subtitle": "Ein Test Podcast von ZEIT ONLINE.",' in browser.contents)

@@ -28,6 +28,8 @@
   <setting name="comment_page_size" xsi:type="xsd:int">4</setting>
   <setting name="community_host_timeout_secs" xsi:type="xsd:int">10</setting>
 
+  <setting name="podigee_timeout" xsi:type="xsd:int">1</setting>
+
   <setting name="retresco_timeout" xsi:type="xsd:double">0.2</setting>
 
   <setting name="reach_timeout" xsi:type="xsd:double">0.2</setting>
@@ -84,6 +86,11 @@
   <setting name="brightcove_videoplayer_article" xsi:type="xsd:string">rJzskUVKx</setting>
   <!-- videoplayer_article_wo_ads production: NykzeyfYg  -->
   <setting name="brightcove_videoplayer_article_wo_ads" xsi:type="xsd:string">SJENxUNKe</setting>
+
+  <!-- podcast player -->
+  <setting name="podcast_theme_cp" xsi:type="xsd:string">zon-standalone</setting>
+  <setting name="podcast_theme_article_body" xsi:type="xsd:string">zon-standalone</setting>
+  <setting name="podcast_theme_article_header" xsi:type="xsd:string">zon-minimal</setting>
 
   <!-- To enable, insert path to optimizely Script (//cdn.optimizely.com/js/281825380.js).
   To disable, use empty string. Do NOT use "false". -->

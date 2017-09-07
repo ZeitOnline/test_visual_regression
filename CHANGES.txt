@@ -7,10 +7,38 @@ POSTDEPLOY
 - ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
 
 
-3.86 (unreleased)
+3.88 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4190: Podcast module for CP, article body, article header
+
+- ARBEIT-113: Insert Podlove button to ZEIT Arbeit podcast headers
+
+- ARBEIT-105: Implement Jobbox Ticker for CP and article on ZEIT Arbeit
+
+
+3.87 (2017-09-06)
+-----------------
+
+- ZON-4120: First teaser in ze.tt-parquet should be large
+
+- BUG-786: Remove adPlace9 from campus homepage
+
+- BUG-787: Add trsf suffix to framebuilder
+
+- FIX: Some small bugfixes on Ads
+
+
+3.86 (2017-09-05)
+-----------------
+
+- ARBEIT: Add styles for infographics to ZEIT Arbeit
+
+- ARBEIT-115: Style marginalia picture
+
+- FIX: Do not track empty video blocks on webtrekk param 27
+
+- FIX: If follow-us in parquet dont show borders
 
 
 3.85.1 (2017-09-04)
