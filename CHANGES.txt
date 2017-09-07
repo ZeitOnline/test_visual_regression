@@ -7,7 +7,7 @@ POSTDEPLOY
 - ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
 
 
-3.88 (unreleased)
+3.88 (2017-09-07)
 -----------------
 
 - ZON-4190: Podcast module for CP, article body, article header
