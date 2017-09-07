@@ -3,12 +3,11 @@
 	&--podcast
 		+unpadded
 		background-color: #CCE8E9
-		text-align: center
-		font-family: $font-patronbold
 		margin-bottom: $vertical-space
 	&__container--podcast
 		+padded
 	&__headline
+		text-align: center
 		width: auto
 	&__media
 		&--podcast
@@ -17,8 +16,9 @@
 			padding: 0
 	&__title
 		&--podcast
-			margin-bottom: $vertical-space
+			font-family: $font-patronbold
 			line-height: 1.12
+			margin-bottom: $vertical-space
 	&__series,
 	&__kicker
 		&--podcast
@@ -28,7 +28,7 @@
 			font-weight: normal
 			font-size: remify(16px)
 			letter-spacing: $letter-spacing-l
-			margin: $vertical-space--small 0
+			margin: $vertical-space 0
 			text-transform: uppercase
 	&__media
 		&--podcast
@@ -36,17 +36,16 @@
 				margin-left: auto
 				margin-right: auto
 				max-height: 200px
+				width: auto
 	&__podcast-player
 		margin-bottom: remify(30px)
 		max-height: remify(66px) // prevent jumping layout
 		overflow: hidden
 	&__subs-series
+		+padded
 		border-top: 1px rgba($color-text, 0.2) solid
-		padding: remify(18px 0 12px)
-		text-align: left
-	&__subs-series-inner
-		margin: 0 auto
-		padding-left: 15px
+		padding-bottom: remify(12px)
+		padding-top: remify(18px)
 	&__link-series
 		font-family: $font-tabletgothic
 		font-weight: normal
@@ -62,7 +61,6 @@
 	.article-heading
 		&--podcast
 			padding-top: remify(60px)
-			text-align: left
 		&__container--podcast
 			display: flex
 			justify-content: center
@@ -77,11 +75,8 @@
 					width: remify(220px)
 		&__podcast-player
 			margin-bottom: remify(60px)
-		&__subs-series
-			padding-left: 0
-		&__subs-series-inner
-			padding: 0
-			width: $medium-content-width
+		&__headline
+			text-align: left
 +respond-min($break-desktop-min)
 	.article-heading
 		&__podcast-player
