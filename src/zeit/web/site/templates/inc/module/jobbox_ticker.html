@@ -1,6 +1,5 @@
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
-{% if module | length > 0 %}
-<aside class="{{ 'jobbox' | with_mods(area.kind) }}{% block jobbox_modifier %} jobbox--animate{% endblock %}"
+{% if module.items | length > 0 %}
+<aside class="{{ 'jobbox' | with_mods(area.kind) }}{% block jobbox_modifier %} js-jobbox-animation{% endblock %}"
     {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
 	{% block jobbox_toplabel %}<span class="jobbox__label">Verlagsangebot</span>{% endblock %}
 	<div class="jobbox__container">
@@ -13,8 +12,8 @@
 
 		<div class="jobbox__jobs">
         {# Sometimes, the RSS feed provides >100 items. We only want to show 10 max. #}
-		{% for teaser in module[:10] %}
-			<a class="jobbox__job" href="{{ teaser.url }}{% block tracking %}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_stellenanzeige_{% endblock %}">
+		{% for teaser in module.items[:10] %}
+			<a class="jobbox__job js-jobbox-animation__jobitem" href="{{ teaser.url }}{% block tracking %}?wt_zmc=fix.int.zonpmr.zeitde.stellenmarkt.jobticker1.textlink.stellenanzeige.&utm_medium=fix&utm_source=zeitde_zonpmr_int&utm_campaign=stellenmarkt&utm_content=jobticker1_textlink_stellenanzeige_{% endblock %}">
 				<div class="jobbox__title">{{ teaser.title }}</div>
 				<div class="jobbox__byline">{{ teaser.text }}</div>
 			</a>
@@ -23,7 +22,7 @@
 
 		<div class="jobbox__action">
 		{% block jobbox_button %}
-			<a class="jobbox__button" href="{% if module %}{{ module[0].url }}{{ self.tracking() }}{% endif %}">zum Jobangebot</a>
+			<a class="jobbox__button js-jobbox-animation__button" href="{% if module.items %}{{ module.items[0].url }}{{ self.tracking() }}{% endif %}">zum Jobangebot</a>
 		{% endblock %}
 
 		{% block jobbox_link %}

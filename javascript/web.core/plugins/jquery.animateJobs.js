@@ -9,8 +9,9 @@
         var box = $( element );
 
         this.current = 0;
-        this.jobs = box.find( '.jobbox__job' );
-        this.button = box.find( '.jobbox__button' );
+        this.jobs = box.find( '.js-jobbox-animation__jobitem' );
+        this.button = box.find( '.js-jobbox-animation__button' );
+        this.container = box.find( '.js-jobbox-animation__container' );
 
         if ( this.jobs.length ) {
             this.showJob( true );
@@ -30,7 +31,14 @@
         this.button.attr( 'href', link );
 
         if ( !initial ) {
-            job.velocity( 'transition.slideUpIn', { duration: 500, display: 'block' });
+            job.velocity( 'transition.slideUpIn', {
+                duration: 500,
+                display: 'block',
+                complete: function() {
+                    // Set container height to avoid jumping while all items are display:none
+                    box.container.css( 'min-height', 'auto' ).css( 'min-height', box.container.css( 'height' ) );
+                }
+            });
         }
 
         job.velocity( 'transition.slideUpOut', {

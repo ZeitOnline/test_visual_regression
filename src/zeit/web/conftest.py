@@ -158,6 +158,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/cp-areas.xml'),
         'vivi_zeit.content.cp_region-config-source': (
             'egg://zeit.web.core/data/config/cp-regions.xml'),
+        'vivi_zeit.cms_source-jobbox-ticker': (
+            'egg://zeit.web.core/data/config/jobboxticker.xml'),
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.cp_cp-feed-max-items': '30',
@@ -263,6 +265,11 @@ def test_asset(path):
         'zeit.web.core', 'data' + path), 'rb')
 
 
+@pytest.fixture(scope='session')
+def file_from_data():
+    return test_asset
+
+
 @pytest.fixture
 def jinja2_env(application):
     return application.zeit_app.jinja_env
@@ -290,6 +297,7 @@ class ZODBLayer(plone.testing.zodb.EmptyZODB):
         # The name never ever changes, so there's no real need to import it
         # from zope.app.publication.
         return self['zodbRoot']['Application']
+
 
 ZODB_LAYER = ZODBLayer()
 
