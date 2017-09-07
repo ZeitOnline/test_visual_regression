@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4190: Podcast module for CP, article body, article header
 
+- ZON-4188: Podcast header for ZON
+
 
 3.87 (2017-09-06)
 -----------------
