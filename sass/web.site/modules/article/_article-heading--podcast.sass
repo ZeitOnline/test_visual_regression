@@ -57,6 +57,13 @@
 			margin-left: remify(4px)
 			position: absolute
 
+.podcast-sharing__podlove
+	// avoid jumping while the JS loads
+	display: inline-block
+	max-height: remify(30px)
+	max-width: remify(110px)
+	overflow: hidden
+
 +respond-min($break-tablet-min)
 	.article-heading
 		&--podcast
