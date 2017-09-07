@@ -111,7 +111,6 @@ def app_settings(mockserver):
         'vivi_zeit.cms_source-access': (
             'egg://zeit.cms.content/access.xml'),
         'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
-        'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
         'vivi_zeit.cms_source-keyword': (
             'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
         'vivi_zeit.cms_source-ressorts': (
@@ -172,8 +171,6 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
         'vivi_zeit.content.image_copyright-company-source': (
             'egg://zeit.content.image/tests/fixtures/copyright-company.xml'),
-        'vivi_zeit.web_banner-source': (
-            'egg://zeit.web.core/data/config/banner.xml'),
         'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
         'vivi_zeit.web_navigation-source': (
