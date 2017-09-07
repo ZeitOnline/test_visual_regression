@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4188: Podcast header for ZON
 
+- ZON-4206: Implement teaser layout for pulling a podcast out of an article
+
 - ARBEIT-113: Insert Podlove button to ZEIT Arbeit podcast headers
 
 - ARBEIT-105: Implement Jobbox Ticker for CP and article on ZEIT Arbeit
