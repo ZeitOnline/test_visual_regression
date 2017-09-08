@@ -4,13 +4,19 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
+- Nothing
 
 
 3.89 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT: Polishing
+
+
+3.88.1 (2017-09-08)
+-------------------
+
+- HOTFIX: Bring back margin to article header
 
 
 3.88 (2017-09-07)

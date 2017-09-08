@@ -5,13 +5,14 @@
 {% block teaser_text %}{% endblock%}
 {% block teaser_commentcount %}{% endblock%}
 
-{# not needed. and, btw, uses "area" which is not available on articles #}
-{% block teaser_datetime %}{% endblock%}
+{#- not needed. and, btw, uses "area" which is not available on articles -#}
+{% block teaser_datetime %}</div>{% endblock%} {#- closes .nextread__wrapper -#}
 {% block meetrics %}{% endblock%}
 
 {%- block teaser_additional_attribute_for_textlink %} data-id="articlebottom.editorial-nextread...text"{% endblock %}
 
 {% block teaser_media %}
+    <div class="nextread__wrapper"> {#- needed to apply display: table -#}
     {% require image = get_image(module, fallback=False, variant_id="wide") -%}
         {% set module_layout = self.layout() %}
         {% set href = teaser | create_url %}

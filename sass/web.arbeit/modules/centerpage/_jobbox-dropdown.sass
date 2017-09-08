@@ -43,20 +43,21 @@ $jobbox-border-width: 6px
 		border-radius: 4px
 		font-size: remify(16px)
 		height: remify(38px)
-		margin: remify(8px) $page-padding--small remify(8px) 0
+		margin: remify(8px 10px 8px 0)
 		max-width: remify(250px)
 		padding: remify(8px 16px)
 		vertical-align: middle
 		.no-js &
 			display: none
+		+respond-min($break-tablet-min)
+			+respond-max(em(850px))
+				max-width: remify(150px)
+		+respond-min(em(850px))
+			+respond-max(em(950px))
+				max-width: remify(200px)
 
 	&__link
 		border-bottom: 1px solid currentColor
-
-+respond-min($break-tablet-min)
-	+respond-max(em(960px))
-		.jobbox-dropdown__dropdown
-			max-width: remify(150px)
 
 // same height as other duo teasers on desktop for "modern" browsers
 +respond-min($break-tablet-min)

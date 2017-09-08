@@ -1051,14 +1051,18 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
         'teaser-gallery-setup/area/id-5fe59e73-e388-42a4-a8d4-750b0bf96812?p=')
 
 
-def test_homepage_should_have_proper_meetrics_integration(testbrowser):
+def test_homepage_should_have_proper_meetrics_integration(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/slenderized-index')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
-def test_centerpage_should_have_meetrics_integration(testbrowser):
+def test_centerpage_should_have_meetrics_integration(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -2287,7 +2291,9 @@ def test_author_list_should_show_authors(testbrowser):
     assert len(browser.cssselect('.author-list__item')) == 1
 
 
-def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+def test_centerpage_contains_webtrekk_parameter_asset(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/centerpage/cardstack')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
