@@ -1,6 +1,6 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {# Teaser layout for referencing an article that contains a podcast module #}
-{% set teaser_jsonname = teaser.uniqueId | format_only_varchars %}
+{% set teaser_jsonname = '{}__{}'.format(teaser.uniqueId, area.uniqueId) | format_only_varchars %}
 <div class="teaser-podcast">
   {% set IPodcast = 'zeit.content.article.edit.interfaces.IPodcast' %}
   {% set IBlock = 'zeit.web.core.interfaces.IFrontendBlock' %}
