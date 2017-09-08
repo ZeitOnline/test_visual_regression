@@ -99,7 +99,8 @@ def test_salvageable_pagination_should_redirect_to_article_page(testserver):
     assert resp.status_code == 301
 
 
-def test_vgwort_pixel_should_be_present(testbrowser):
+def test_vgwort_pixel_should_be_present(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-magazin/article/01')
     pixel = browser.cssselect('body img[src^="http://example.com"]')
     assert len(pixel) == 1

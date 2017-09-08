@@ -359,7 +359,9 @@ def test_breadcrumbs_for_topicpage(dummy_request):
     assert view.breadcrumbs == breadcrumbs
 
 
-def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+def test_centerpage_contains_webtrekk_parameter_asset(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/campus/centerpage/cardstack')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]

@@ -1,11 +1,12 @@
 .teaser-topic
 	@extend %teaser
-	border: remify(6px) $zar-sun-yellow solid
+	border: remify(4px) $zar-sun-yellow solid
 	margin: $vertical-space--small $page-padding--small
 	padding: $vertical-space--small $page-padding--small
 
 +respond-min($break-tablet-min)
 	.teaser-topic
+		border-width: remify(6px)
 		margin: $vertical-space $cp-padding
 		padding: $vertical-space $cp-padding
 		+pie-clearfix

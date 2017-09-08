@@ -1,3 +1,4 @@
+{% if toggles('third_party_modules') -%}
 <!-- Meetrics Integration -->
 <script type="text/javascript" src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"></script>
 <script type="text/javascript">
@@ -6,3 +7,4 @@
 <script type="text/javascript">
     try { mainMWA208571(); } catch (e) {}
 </script>
+{% endif %}
