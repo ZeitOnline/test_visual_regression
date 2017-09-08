@@ -43,25 +43,20 @@
 	&__subs-series
 		+padded
 		border-top: 1px rgba($color-text, 0.2) solid
-		padding-bottom: remify(12px)
-		padding-top: remify(18px)
-	&__link-series
 		font-family: $font-tabletgothic
 		font-weight: normal
+		padding-bottom: remify(12px)
+		padding-top: remify(12px)
+	&__link-series
+		color: rgba($color-text, 0.8)
 		text-decoration: underline
-		vertical-align: top
+		+on-interaction
+			color: $color-text
+			text-decoration: none
 		&:after
 			content: "\203A"
 			margin-left: remify(4px)
-			position: absolute
-
-.podcast-sharing__podlove
-	// avoid jumping while the JS loads
-	display: inline-block
-	margin-right: remify(10px)
-	max-height: remify(30px)
-	max-width: remify(110px)
-	overflow: hidden
+			position: absolute // to prevent the underline. strange thing.
 
 +respond-min($break-tablet-min)
 	.article-heading

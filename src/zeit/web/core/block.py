@@ -527,6 +527,8 @@ class Podcast(Block):
             'subtitle': self.podcast.get('subtitle'),
             'description': self.podcast.get('description'),
             'cover': self.podcast.get('cover_image'),
+            'external_site_url': self.podcast.get('external_site_url'),
+            'podigee_subdomain': self.podcast.get('subdomain'),
             'feeds': [{
                 'type': 'audio',
                 'format': feed['format'],
