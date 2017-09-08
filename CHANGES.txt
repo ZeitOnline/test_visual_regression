@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.89 (unreleased)
+3.89 (2017-09-08)
 -----------------
 
 - ARBEIT: Polishing
