@@ -10,7 +10,7 @@ POSTDEPLOY
 3.89 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- HOTFIX: Bring back margin to article header
 
 
 3.88 (2017-09-07)
