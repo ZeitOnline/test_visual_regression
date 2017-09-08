@@ -125,8 +125,9 @@ def get_area(area):
 
 def get_module(module):
     """Wraps a zeit.edit.interfaces.IBlock into a
-    zeit.web.core.interfaces.IBlock if an adapter is available, else returns it
-    unchanged.
+    zeit.web.core.interfaces.IBlock. If no specific adapter is available, a
+    generic `Module` object (see below) is returned, with a `layout` whose `id`
+    is the IBlock.type.
     """
     if zeit.web.core.interfaces.IBlock.providedBy(module):
         return module

@@ -31,6 +31,9 @@
 			margin-left: auto
 			margin-right: auto
 			max-width: $medium-content-width
+			&--apart
+				margin-top: remify(60px)
+				margin-bottom: remify(60px)
 			&--wide
 				max-width: $wide-content-width
 			&--marginalia
@@ -82,7 +85,9 @@
 	display: inline
 
 .article-body
-	margin-top: remify(40px)
+	margin-top: remify(30px)
+	+respond-min($break-tablet-min)
+		margin-top: remify(60px)
 
 .figure
 	&__title

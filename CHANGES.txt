@@ -4,10 +4,30 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- ARBEIT-110: Update cp-areas, cp-layouts, cp-regions according to https://github.com/ZeitOnline/zeit.web/pull/2446/files
+- Nothing
 
 
-3.88 (unreleased)
+3.90 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
+3.89 (2017-09-08)
+-----------------
+
+- ARBEIT: Polishing
+
+- ARBEIT: Change illustrations, use article image in podcast
+
+
+3.88.1 (2017-09-08)
+-------------------
+
+- HOTFIX: Bring back margin to article header
+
+
+3.88 (2017-09-07)
 -----------------
 
 - ZON-4190: Podcast module for CP, article body, article header

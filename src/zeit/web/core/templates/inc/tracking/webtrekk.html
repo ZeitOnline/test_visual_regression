@@ -1,5 +1,5 @@
+{% if toggles('third_party_modules') -%}
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_script.html" %}
-
 <script>
 
     if (typeof window.webtrekkConfig === 'object') {
@@ -80,3 +80,4 @@
         wt.sendinfo();
     }
 </script>
+{% endif %}

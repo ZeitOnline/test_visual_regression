@@ -1,10 +1,13 @@
 {% extends "zeit.web.arbeit:templates/inc/article-header/default.html" %}
 {% block heading %}
-    <header class="{{ 'article-heading' | with_mods('podcast') }}" itemprop="headline" data-ct-area="articleheader">
+
+    {% set imgref = adapt(view.context, 'zeit.content.image.interfaces.IImages') %}
+    {% set fill_color = imgref.fill_color if imgref else None %}
+    {% set card_style = 'background-color: #{};'.format(fill_color) -%}
+
+    <header class="{{ 'article-heading' | with_mods('podcast') }}" itemprop="headline" data-ct-area="articleheader" {% if card_style %} style="{{ card_style }}"{% endif %}>
         <div class="{{ 'article-heading__container' | with_mods('podcast') }}">
-            <figure class="{{ 'article-heading__media' | with_mods('podcast') }}">
-                <img src="/static/latest/images/arbeit/podcast/header-illustration-dummy.png" alt="Podcast: {{ view.serie if view.serie else view.title }}">
-            </figure>
+            {% include "zeit.web.site:templates/inc/asset/image_article-header-podcast.html" %}
             <div>
                 <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}">
                     {%- if view.serie -%}
