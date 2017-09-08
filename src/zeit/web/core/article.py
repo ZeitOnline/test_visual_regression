@@ -212,9 +212,8 @@ def pages_of_article(article, advertising_enabled=True):
     pages.append(page)
     blocks = body.values()
 
-    header = zeit.content.article.edit.interfaces.IHeaderArea(article)
     try:
-        if blocks[0] == header.module:
+        if blocks[0] == article.header.module:
             del blocks[0]
     except IndexError:
         pass
@@ -347,8 +346,7 @@ class LiveblogInfo(object):
 
     @zeit.web.reify
     def liveblog(self):
-        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        for block in body.values():
+        for block in self.context.body.values():
             if zeit.content.article.edit.interfaces.ILiveblog.providedBy(
                     block):
                 return zeit.web.core.interfaces.IFrontendBlock(block)

@@ -211,16 +211,15 @@ def test_http_header_should_contain_c1_entitlement_id(testserver, monkeypatch):
 def test_inline_gallery_should_be_contained_in_body(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
-    body = zeit.content.article.edit.interfaces.IEditableBody(context)
     assert isinstance(
-        body.values()[-1], zeit.content.article.edit.reference.Gallery)
+        context.body.values()[-1], zeit.content.article.edit.reference.Gallery)
 
 
 def test_inline_gallery_should_have_images(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
-    body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    gallery = zeit.web.core.interfaces.IFrontendBlock(body.values()[-1])
+    gallery = zeit.web.core.interfaces.IFrontendBlock(
+        context.body.values()[-1])
     image = zeit.web.core.template.get_image(list(gallery)[5])
     assert image.path == (
         '/galerien/bg-automesse-detroit-2014-usa-bilder'

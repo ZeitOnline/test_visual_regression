@@ -48,7 +48,7 @@ class StoryStreamTeaserBlock(
         for region in regions:
             areas = region.values()
             for area in areas:
-                for module in area.select_modules(*teaserable_atom_types):
+                for module in area.filter_values(*teaserable_atom_types):
                     articles.append(module)
                     if (len(articles) >= article_number):
                         return articles

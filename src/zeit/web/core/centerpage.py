@@ -64,7 +64,7 @@ class Area(collections.OrderedDict):
     # so a full re-implementation is just plain impossible.
     # So we hard-code the only use-case that this should ever be called for,
     # which is ITeaseredContent.
-    def select_modules(self, *interfaces):
+    def filter_values(self, *interfaces):
         for module in zeit.content.cp.interfaces.IRenderedArea(self).values():
             if getattr(module, 'type', None) == 'teaser':
                 yield module
@@ -125,8 +125,9 @@ def get_area(area):
 
 def get_module(module):
     """Wraps a zeit.edit.interfaces.IBlock into a
-    zeit.web.core.interfaces.IBlock if an adapter is available, else returns it
-    unchanged.
+    zeit.web.core.interfaces.IBlock. If no specific adapter is available, a
+    generic `Module` object (see below) is returned, with a `layout` whose `id`
+    is the IBlock.type.
     """
     if zeit.web.core.interfaces.IBlock.providedBy(module):
         return module

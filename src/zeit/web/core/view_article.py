@@ -151,8 +151,7 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_module(self):
-        header = zeit.content.article.edit.interfaces.IHeaderArea(
-            self.context)
+        header = self.context.header
         # XXX The header image still belongs to the body,
         # so we cannot use block.__parent__
         block = header.module

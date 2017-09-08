@@ -1,0 +1,41 @@
+{% extends "zeit.web.site:templates/inc/article-header/default.html" %}
+{% block heading %}
+
+{% set imgref = adapt(view.context, 'zeit.content.image.interfaces.IImages') %}
+{% set fill_color = imgref.fill_color if imgref else None %}
+{% set card_style = 'background-color: #{};'.format(fill_color) -%}
+
+    <header class="{{ 'article-heading' | with_mods('podcast') }}" itemprop="headline" data-ct-area="articleheader" {% if card_style %} style="{{ card_style }}"{% endif %}>
+        <div class="{{ 'article-heading__container' | with_mods('podcast') }}">
+            {% include "zeit.web.site:templates/inc/asset/image_article-header-podcast.html" %}
+            <div>
+                <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}">
+                    <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
+                        {%- if view.serie -%}
+                            Podcast: {{ view.serie -}} &nbsp / &nbsp
+                        {%- endif -%}
+                        {{- view.supertitle -}}
+                    </span>
+                    {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
+                    <span class="{{ 'article-heading__title' | with_mods('podcast') }}">{{- view.title -}}</span>
+                </h1>
+                <div class="article-heading__podcast-player">
+                    {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
+                </div>
+            </div>
+        </div>
+        <div class="{{ 'article-heading__subs-series' | with_mods('podcast') }}">
+            <div class="article__item">
+                {% if view.header_module.podlove_configuration %}
+                    <span class="podcast-sharing__podlove">
+                        <script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="de" data-color="#000" data-size="small" data-style="outline" data-json-data="podcastData" async defer></script>
+                    </span>
+                {% endif %}
+                <a href="{{ view.series | create_url }}" class="{{ 'article-heading__link-series' }}">Alle Folgen</a>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+
+{% block headerseries %}{% endblock %}
+{% block headermodule %}{% endblock %}

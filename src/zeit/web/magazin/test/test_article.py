@@ -856,13 +856,11 @@ def test_longform_should_have_exact_one_h1(testbrowser):
 def test_article_first_page_must_have_no_image_as_first_block(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    body = zeit.content.article.edit.interfaces.IEditableBody(
-        context).values()[0]
-    block = zeit.web.core.article.pages_of_article(context)[0][0]
-
+    block = context.body.values()[0]
     assert zeit.content.article.edit.interfaces.IImage.providedBy(
-        body), ('Image should be present on first position in '
-                'article body.')
+        block), ('Image should be present on first position in '
+                 'article body.')
+    block = zeit.web.core.article.pages_of_article(context)[0][0]
     assert not zeit.content.article.edit.interfaces.IImage.providedBy(
         block), 'Image must not be present on first position in page.'
 
