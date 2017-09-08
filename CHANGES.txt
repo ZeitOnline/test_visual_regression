@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ARBEIT: Polishing
 
+- ARBEIT: Change illustrations, use article image in podcast
+
 
 3.88.1 (2017-09-08)
 -------------------
