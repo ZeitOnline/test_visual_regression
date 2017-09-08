@@ -26,8 +26,15 @@
                 </div>
             </div>
         </div>
-        <div class="{{ 'article-heading__sharing' | with_mods('podcast') }}">
-            {% include "zeit.web.arbeit:templates/inc/article/sharing-podcast.html" %}
+        <div class="{{ 'article-heading__subs-series' | with_mods('podcast') }}">
+            <div class="article__item">
+
+                {% set podlove_button_id = view.context.uniqueId | format_only_varchars %}
+                {% set podlove_button_configuration = view.header_module.podlove_configuration %}
+                {% include "zeit.web.core:templates/inc/shared/podlove-button.html" %}
+
+                <a href="{{ context | find_series_cp | create_url }}" class="{{ 'article-heading__link-series' }}">Alle Folgen</a>
+            </div>
         </div>
     </header>
 {% endblock %}
