@@ -1,5 +1,4 @@
 {% extends "zeit.web.site:templates/inc/article-header/default.html" %}
-{% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% block heading %}
 
     {% set imgref = adapt(view.context, 'zeit.content.image.interfaces.IImages') %}
@@ -27,21 +26,11 @@
         </div>
         <div class="{{ 'article-heading__subs-series' | with_mods('podcast') }}">
             <div class="article__item">
-                {% if view.header_module.podlove_configuration %}
-                    {% set article_jsonname = view.context.uniqueId | format_only_varchars %}
-                    {# Podlove verträgt es derzeit nicht, wenn der Button ein Link ist.
-                       Das wäre mal einen Pull Request in deren Software wert!
-                       Und dann können wir das hier nutzen:
-                        {% set external_site_url = view.header_module.podlove_configuration.external_site_url or 'http://{}.podigee.io'.format(view.header_module.podlove_configuration.podigee_subdomain) %}
-                       Und dann auch cursor:pointer sowie no-js aus dem CSS entfernen!
-                    #}
-                    <span class="podlove-button podlove-subscribe-button-{{ article_jsonname }}">
-                        {{ lama.use_svg_icon('podcast', 'podlove-button__icon', view.package, a11y=False) }}
-                        Abonnieren
-                    </span>
-                    <script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="de"data-size="small" data-hide="true" data-buttonid="{{ article_jsonname }}" data-json-data="podcastData" async defer></script>
-                    {# Attention: The data-size attribute is needed, even though we use our own button. Otherwise the podlove script fails. #}
-                {% endif %}
+
+                {% set podlove_button_id = view.context.uniqueId | format_only_varchars %}
+                {% set podlove_button_configuration = view.header_module.podlove_configuration %}
+                {% include "zeit.web.core:templates/inc/shared/podlove-button.html" %}
+
                 <a href="{{ context | find_series_cp | create_url }}" class="{{ 'article-heading__link-series' }}">Alle Folgen</a>
             </div>
         </div>
