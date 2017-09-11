@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.90 (unreleased)
+3.90 (2017-09-11)
 -----------------
 
 - ZON-4206: Provide podlove and series-link in podcast teasers
