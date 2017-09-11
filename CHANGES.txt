@@ -10,6 +10,8 @@ POSTDEPLOY
 3.90 (unreleased)
 -----------------
 
+- ZON-4206: Provide podlove and series-link in podcast teasers
+
 - PERF: Cache successful podigee API responses in memcache
 
 
