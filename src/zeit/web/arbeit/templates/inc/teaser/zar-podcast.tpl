@@ -18,9 +18,11 @@
         {% set podlove_button_configuration = module.podlove_configuration %}
         {% include "zeit.web.core:templates/inc/shared/podlove-button.html" %}
 
+        {% if teaser.serie %}
         <span>
-            <a class="teaser-podcast-footer__link" href="{{ context | find_series_cp | create_url }}">Alle Folgen</a>
+            <a class="teaser-podcast-footer__link" href="{{ teaser | find_series_cp | create_url }}">Alle Folgen</a>
         </span>
+        {% endif %}
     </div>
 
 </div>
