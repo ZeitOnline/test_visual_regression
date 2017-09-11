@@ -7,10 +7,10 @@ POSTDEPLOY
 - Nothing
 
 
-3.91 (unreleased)
+3.90.1 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Fix series-link in podcast teasers
 
 
 3.90 (2017-09-11)
