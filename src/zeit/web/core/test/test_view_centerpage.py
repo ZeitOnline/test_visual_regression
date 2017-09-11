@@ -365,3 +365,11 @@ def test_podcast_teaserlayout_should_render_script_tag_for_player(testbrowser):
     assert player.get('data-configuration') == (
         'http://zon-test.podigee.io/2-folge-zwei-test'
         '/embed?context=external&theme=zon-standalone')
+
+
+def test_podcast_module_considers_series(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/podcast-teaser')
+    assert not u'Alle Folgen' in browser.cssselect(
+        '.teaser-podcast')[0].text_content()
+    assert u'Alle Folgen' in browser.cssselect(
+        '.teaser-podcast')[1].text_content()

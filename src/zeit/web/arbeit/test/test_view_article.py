@@ -210,11 +210,14 @@ def test_zar_article_podcast_header_renders_correctly(testbrowser):
     assert len(browser.cssselect('.article-heading__kicker--podcast')) == 1
     assert len(browser.cssselect('.article-heading__title--podcast')) == 1
     assert len(browser.cssselect('.article-heading__podcast-player')) == 1
+    assert len(browser.cssselect('.article-heading__link-series')) == 1
 
     player = browser.cssselect('script.podigee-podcast-player')[0]
     assert player.get('data-configuration') == (
         'http://zon-test.podigee.io/2-folge-zwei-test'
         '/embed?context=external&theme=zon-minimal')
+    browser = testbrowser('/arbeit/article/podcast-no-series')
+    assert not browser.cssselect('.article-heading__link-series')
 
 
 def test_podcast_header_should_omit_podlove_button_if_no_feeds(testbrowser):

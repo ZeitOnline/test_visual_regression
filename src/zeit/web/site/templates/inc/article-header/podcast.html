@@ -11,9 +11,9 @@
             <div>
                 <h1 class="{{ 'article-heading__headline' | with_mods('podcast') }}">
                     <span class="{{ 'article-heading__series' | with_mods('podcast') }}">
-                        {%- if view.serie -%}
-                            Podcast: {{ view.serie -}} &nbsp / &nbsp
-                        {%- endif -%}
+                        {% if view.serie %}
+                            Podcast: {{ view.serie }} /
+                        {% endif %}
                         {{- view.supertitle -}}
                     </span>
                     {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
@@ -31,7 +31,10 @@
                 {% set podlove_button_configuration = view.header_module.podlove_configuration %}
                 {% include "zeit.web.core:templates/inc/shared/podlove-button.html" %}
 
-                <a href="{{ context | find_series_cp | create_url }}" class="{{ 'article-heading__link-series' }}">Alle Folgen</a>
+                {%- if view.serie -%}
+                <a href="{{ context | find_series_cp | create_url }}" class="article-heading__link-series">Alle Folgen</a>
+                {%- endif -%}
+
             </div>
         </div>
     </header>
