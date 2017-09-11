@@ -5,7 +5,7 @@
         id="zar-small"
         title="kleiner Teaser"
         image_pattern="wide"
-        areas="trio"
+        areas="tube trio"
         />
     <layout
         id="zar-lead"
@@ -63,7 +63,7 @@
         id="zar-ranking"
         title="kleiner Teaser Suchergebnis und Themenseite"
         image_pattern="wide"
-        areas="zar-ranking"
+        areas="zar-ranking tube"
         />
     <!-- ZCO only -->
     <layout
@@ -76,7 +76,7 @@
         id="zco-wide-large"
         title="großer Teaser"
         image_pattern="cinema"
-        areas="duo"
+        areas="duo tube"
         />
     <layout
         id="zco-topic-wide"
@@ -131,7 +131,7 @@
         id="zco-small"
         title="kleiner Teaser Suchergebnis"
         image_pattern="wide"
-        areas="zco-ranking"
+        areas="zco-ranking tube"
         />
 
     <!-- Teaser formats for new ZON-Centerpages -->
