@@ -516,12 +516,19 @@ class Podcast(Block):
 
     @zeit.web.reify
     def podlove_configuration(self):
+
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        if not toggles.find('podlove_button'):
+            return {}
+
         # https://github.com/podlove/podlove-subscribe-button#podcast-data-api
         result = {
             'title': self.podcast.get('title'),
             'subtitle': self.podcast.get('subtitle'),
             'description': self.podcast.get('description'),
             'cover': self.podcast.get('cover_image'),
+            'external_site_url': self.podcast.get('external_site_url'),
+            'podigee_subdomain': self.podcast.get('subdomain'),
             'feeds': [{
                 'type': 'audio',
                 'format': feed['format'],

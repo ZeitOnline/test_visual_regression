@@ -1,0 +1,22 @@
+// the button is used on CPs and articles, with different background colors and in different surroundings.
+.podlove-button
+	border: 1px rgba($color-text, 0.5) solid
+	border-radius: remify(4px)
+	color: $color-text
+	font-size: remify(12px)
+	font-weight: normal
+	letter-spacing: $letter-spacing-s
+	margin-right: remify(10px)
+	padding: remify(3px 5px)
+	text-transform: uppercase
+	+on-interaction
+		background-color: $color-text
+		border-color: transparent
+		color: #f1f1f1 // not totally hard white
+		cursor: pointer
+	&__icon
+		margin: remify(1px 3px 0 1px)
+		vertical-align: text-top
+
+	.no-js &
+		display: none

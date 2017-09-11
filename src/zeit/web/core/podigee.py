@@ -3,10 +3,12 @@ import logging
 import requests
 import zope.interface
 
+import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
 
 
+DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 log = logging.getLogger(__name__)
 
 
@@ -23,6 +25,7 @@ class Podigee(object):
     def get_podcast(self, id):
         return self._request('/podcasts/{}'.format(id))
 
+    @DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=lambda x: x)
     def _request(self, path):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = '{}/{}'.format(conf.get('podigee_url'), path)

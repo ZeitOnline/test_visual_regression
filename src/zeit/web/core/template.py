@@ -257,6 +257,15 @@ def vertical(content):
 
 
 @zeit.web.register_filter
+def find_series_cp(content):
+    if not getattr(content.serie, 'url', None):
+        return None
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    uid = u'{}/{}'.format(conf.get('series_prefix', ''), content.serie.url)
+    return zeit.cms.interfaces.ICMSContent(uid, None)
+
+
+@zeit.web.register_filter
 def block_type(obj):
     """Outputs the class name in lower case format of one or multiple block
     elements.
@@ -636,6 +645,25 @@ def format_iqd(string):
         u'è', 'e').replace(
         u'ß', 'ss')
     string = re.sub(u'[^a-zA-Z0-9]', '_', string)
+    string = re.sub(u'_+', '_', string)
+    string = re.sub(u'^_|_$', '', string)
+    return string
+
+
+@zeit.web.register_filter
+def format_only_varchars(string):
+    """Returns a string that has only latin characters and arabic numbers
+    """
+    string = string.lower().replace(
+        u'ä', 'ae').replace(
+        u'ö', 'oe').replace(
+        u'ü', 'ue').replace(
+        u'á', 'a').replace(
+        u'à', 'a').replace(
+        u'é', 'e').replace(
+        u'è', 'e').replace(
+        u'ß', 'ss')
+    string = re.sub(u'[^a-zA-Z0-9]', '', string)
     string = re.sub(u'_+', '_', string)
     string = re.sub(u'^_|_$', '', string)
     return string
