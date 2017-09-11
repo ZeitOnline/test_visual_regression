@@ -10,7 +10,7 @@ POSTDEPLOY
 3.90 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- PERF: Cache successful podigee API responses in memcache
 
 
 3.89 (2017-09-08)
