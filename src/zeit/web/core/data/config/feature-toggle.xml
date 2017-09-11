@@ -15,6 +15,7 @@
   <iqd>false</iqd>
   <iqd_digital_transformation>true</iqd_digital_transformation>
   <keywords_from_tms>false</keywords_from_tms>
+  <podlove_button>true</podlove_button>
   <rawr_iframe>true</rawr_iframe>
   <reader_revenue>true</reader_revenue>
   <reader_revenue_handle_celeraone_login_inconsistency>true</reader_revenue_handle_celeraone_login_inconsistency>
