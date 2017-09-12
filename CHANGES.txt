@@ -10,6 +10,8 @@ POSTDEPLOY
 3.91 (unreleased)
 -----------------
 
+- ZON: Highlight the new Arbeit ressort inside ressortnav
+
 - ARBEIT: Polish article-podcast-header image
 
 - ARBEIT: Polish same height duo teaser in Safari
