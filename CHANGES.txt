@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - ZON: Highlight the new Arbeit ressort inside ressortnav
 
+- ARBEIT: Polishing underlined headline, fix marginalia clearfix
+
 - ARBEIT: Polish article-podcast-header image
 
 - ARBEIT: Polish same height duo teaser in Safari
