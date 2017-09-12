@@ -10,15 +10,13 @@ POSTDEPLOY
 3.92 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ARBEIT: Polishing underlined headline, fix marginalia clearfix
 
 
 3.91 (2017-09-12)
 -----------------
 
 - ZON: Highlight the new Arbeit ressort inside ressortnav
-
-- ARBEIT: Polishing underlined headline, fix marginalia clearfix
 
 - ARBEIT: Polish article-podcast-header image
 
