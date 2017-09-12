@@ -69,8 +69,8 @@
 	html.flexbox
 		.cp-region--duo
 			display: flex
-			margin-bottom: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
-			margin-top: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
+			margin-bottom: $vertical-space
+			margin-top: $vertical-space
 		.teaser-duo
 			+teaser-duo-equal-height
 
@@ -79,7 +79,7 @@
 		@supports (display: flex)
 			.cp-region--duo
 				display: flex
-				margin-bottom: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
-				margin-top: $vertical-space*2 // vertical-space is designed to be used as padding which adds up. But here, margins collapse.
+				margin-bottom: $vertical-space
+				margin-top: $vertical-space
 			.teaser-duo
 				+teaser-duo-equal-height
