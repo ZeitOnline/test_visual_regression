@@ -10,11 +10,15 @@ POSTDEPLOY
 3.91 (unreleased)
 -----------------
 
+- ARBEIT: Polish article-podcast-header image
+
+- ARBEIT: Polish same height duo teaser in Safari
+
+- ARBEIT: Polishing: Tweak nextread advertising spacing
+
 - ARBEIT: Polish vertical space
 
 - BUG-789: Add scriptPath to framebuilder scripts
-
-- ARBEIT: Polish article-podcast-header image
 
 - FIX: Add missing JS modules for ZEIT Arbeit
 

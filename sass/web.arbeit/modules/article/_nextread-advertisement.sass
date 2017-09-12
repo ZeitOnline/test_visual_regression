@@ -25,27 +25,31 @@
 	&__container
 		margin: 0 auto
 		max-width: $medium-content-width
-		padding: $vertical-space 0
+		padding: $vertical-space--large 0
 		text-align: center
 
 	&__title
 		@extend %teaser-title--m
-		margin-top: remify(10px)
+		font-size: remify(28px)
+		margin-top: 0
+		margin-bottom: remify(12px)
 
 	&__text
 		font-size: remify(18px)
 		line-height: 1.5
+		margin-top: 0
+		margin-bottom: remify(20px)
 
 	&__button
 		@extend %zar-button-hollow--nextread-ad
-		margin: remify(8px) 0
+		margin: 0
 		vertical-align: middle
 
 +respond-min($break-phablet-min)
 	.nextread-advertisement
 		&__media
 			float: right
-			margin: remify(10px) 0 0 $cp-padding
+			margin: remify(10px) 0 0 remify(30px)
 		&__container
 			+pie-clearfix
 			text-align: left
