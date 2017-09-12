@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - BUG-789: Add scriptPath to framebuilder scripts
 
+- ARBEIT: Polish article-podcast-header image
+
 - FIX: Add missing JS modules for ZEIT Arbeit
 
 
