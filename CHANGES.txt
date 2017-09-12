@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ARBEIT: Polishing underlined headline, fix marginalia clearfix
 
+- Revert "Merge pull request #2478 from paulbauer/ARBEIT_polishing_safari"
+
 
 3.91 (2017-09-12)
 -----------------
