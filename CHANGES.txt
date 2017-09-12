@@ -7,8 +7,16 @@ POSTDEPLOY
 - Nothing
 
 
-3.91 (unreleased)
+3.92 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.91 (2017-09-12)
+-----------------
+
+- ZON: Highlight the new Arbeit ressort inside ressortnav
 
 - ARBEIT: Polish article-podcast-header image
 
