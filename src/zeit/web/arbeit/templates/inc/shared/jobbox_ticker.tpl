@@ -1,13 +1,13 @@
-{% if jobitems | length %}
-    <aside class="{% block layout %}jobbox-ticker{% endblock %} js-jobbox-animation {% block layout_modifier %}{% endblock %}">
-        <span class="{{ self.layout() }}__label">Verlagsangebot</span>
+<aside class="{% block layout %}jobbox-ticker{% endblock %} js-jobbox-animation {% block layout_modifier %}{% endblock %}">
+    <span class="{{ self.layout() }}__label">Verlagsangebot</span>
 
-        <div class="{{ self.layout() }}__heading">
-            <span class="{{ self.layout() }}__kicker">ZEIT Stellenmarkt</span>
-            <h2 class="{{ self.layout() }}__title">{{ jobbox.teaser_text }}</h2>
-            <a class="{{ self.layout() }}__link" href="{{ jobbox.landing_page_url }}">Zur Stellenliste.</a>
-        </div>
+    <div class="{{ self.layout() }}__heading">
+        <span class="{{ self.layout() }}__kicker">ZEIT Stellenmarkt</span>
+        <h2 class="{{ self.layout() }}__title">{{ jobbox.teaser_text }}</h2>
+        <a class="{{ self.layout() }}__link" href="{{ jobbox.landing_page_url }}">Zur Stellenliste.</a>
+    </div>
 
+    {% if jobitems %}
         <div class="{{ self.layout() }}-item__container js-jobbox-animation__container">
             <span class="{{ self.layout() }}-item__kicker">Aktuelle Jobs</span>
             <ul class="{{ self.layout() }}-item__list">
@@ -20,7 +20,5 @@
                 {% endfor %}
             </ul>
         </div>
-    </aside>
-{% else %}
-    <!-- jobbox-ticker was included, but has no items -->
-{% endif %}
+    {% endif %}
+</aside>

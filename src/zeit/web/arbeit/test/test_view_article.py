@@ -257,4 +257,5 @@ def test_zar_article_should_show_jobboxticker(testbrowser):
 def test_zar_article_should_hide_empty_jobboxticker(testbrowser, monkeypatch):
     monkeypatch.setattr(requests, 'get', '')
     browser = testbrowser('/arbeit/article/jobbox-ticker')
-    assert not browser.cssselect('.jobbox-ticker')
+    assert browser.cssselect('.jobbox-ticker__heading')
+    assert not browser.cssselect('.jobbox-ticker-item__container')
