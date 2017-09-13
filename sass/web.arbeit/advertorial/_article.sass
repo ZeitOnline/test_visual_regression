@@ -1,0 +1,34 @@
+.advertorial-marker
+	border-bottom: 1px solid #ccc
+	padding: remify(10px) $page-padding--small
+	&__label
+		font-size: em(13px)
+		text-align: right
+		text-transform: uppercase
+	&__title
+		color: #999
+		font-size: em(14px)
+		font-weight: 700
+		margin-bottom: remify(5px)
+		text-transform: uppercase
+	&__text
+		color: #999
+		font-size: em(12px)
+		padding-bottom: remify(20px)
+
+	+respond-min($break-tablet-min)
+		border-bottom: 0
+		margin: 0 auto
+		max-width: remify(660px)
+		padding: 0
+
+		&__title
+			margin-top: remify(40px)
+		&__label
+			display: none
+
+.metadata
+	&:empty
+		display: none
+	&__date
+		display: none
