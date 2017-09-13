@@ -18,6 +18,7 @@ import pyramid.httpexceptions
 import zope.component
 
 from zeit.solr import query as lq
+import zeit.cms.content.interfaces
 import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
@@ -892,6 +893,19 @@ class CommentMixin(object):
         # should we split up access in the templates instead?
         result.update(self.comment_form)
         return result
+
+    @zeit.web.reify
+    def moderation_url(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        if not toggles.find('zoca_moderation_launch'):
+            uuid = zeit.cms.content.interfaces.IUUID(
+                self.context).id.strip('{}').replace('urn:uuid:', '')
+            return u'{}/{}/thread/%cid%'.format(
+                conf.get('community_admin_host').rstrip('/'), uuid)
+        else:
+            return u'{}/comment/edit/%cid%'.format(
+                conf.get('community_host').rstrip('/'))
 
 
 class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
