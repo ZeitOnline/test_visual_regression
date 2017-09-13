@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4208: Add CSS to ZAR and ZCO tube area
 
+- ZON-4216: Change image-variant to square in podcast header
+
 - FIX: Add clearing to wide article-image in ZON
 
 
