@@ -10,7 +10,9 @@ POSTDEPLOY
 3.92 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4208: Add CSS to ZAR and ZCO tube area
+
+- FIX: Add clearing to wide article-image in ZON
 
 
 3.91.1 (2017-09-12)
