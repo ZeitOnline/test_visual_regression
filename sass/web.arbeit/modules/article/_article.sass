@@ -43,8 +43,6 @@
 				width: remify(240px)
 				img
 					width: remify(180px)
-				& + *
-					+pie-clearfix
 				// mitigate jumping marginalia image between tablet and desktop breakpoint
 				@media screen and (min-width: 880px) and (max-width: $break-desktop-min)
 					margin-left: 4vw
@@ -62,6 +60,7 @@
 				margin-left: remify(80px)-$page-padding
 
 .article-page
+	+pie-clearfix // ensure clearing marginalia floats, apply correct vertical spacing
 	&:last-of-type
 		margin-bottom: remify(40px)
 

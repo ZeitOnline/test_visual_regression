@@ -65,6 +65,12 @@
         image_pattern="wide"
         areas="zar-ranking tube"
         />
+    <layout
+        id="zar-podcast"
+        title="Podcast"
+        image_pattern="original"
+        areas="solo duo trio"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"

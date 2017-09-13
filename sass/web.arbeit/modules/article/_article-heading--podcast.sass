@@ -33,15 +33,32 @@
 			img
 				margin-left: auto
 				margin-right: auto
-				max-height: 200px
+				max-height: 220px
 				width: auto // override .scaled-image to avoid stretching
+				+respond-max($break-phablet-min)
+					width: 200px
 	&__podcast-player
 		margin-bottom: remify(30px)
 		max-height: remify(65px) // prevent jumping layout
 		overflow: hidden
-	&__sharing--podcast
+	&__subs-series
 		+padded
 		border-top: 1px rgba($color-text, 0.2) solid
+		font-family: $font-tabletgothic
+		font-weight: normal
+		padding-bottom: remify(12px)
+		padding-top: remify(12px)
+	&__link-series
+		color: rgba($color-text, 0.8)
+		text-decoration: underline
+		+on-interaction
+			color: $color-text
+			text-decoration: none
+		&:after
+			content: "\203A"
+			margin-left: remify(4px)
+			position: absolute // to prevent the underline. strange thing.
+
 
 +respond-min($break-tablet-min)
 	.article-heading

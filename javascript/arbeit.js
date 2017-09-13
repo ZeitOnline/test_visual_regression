@@ -1,6 +1,9 @@
 var $ = require( 'jquery' ),
+    zeit = require( 'web.core/zeit' ),
     images = require( 'web.core/images' ),
     clicktracking = require( 'web.core/clicktracking' ),
+    triggeredEventTracking = require( 'web.core/triggeredEventTracking' ),
+    adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     main = $( '#main' ),
     article = $( '#js-article' ),
@@ -11,6 +14,9 @@ var $ = require( 'jquery' ),
 images.init();
 menu.init();
 clicktracking.init();
+triggeredEventTracking.init();
+adReload.init();
+zeit.clearQueue();
 
 // add required jQuery plugins
 require( 'web.core/plugins/jquery.notifications' );

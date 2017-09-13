@@ -4,6 +4,7 @@
   <access_status_webtrekk>true</access_status_webtrekk>
   <amp_advertising>true</amp_advertising>
   <arbeit>true</arbeit>
+  <arbeit_hightlight_ressortnav>true</arbeit_hightlight_ressortnav>
   <article_lineage>true</article_lineage>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <campus_toolbox>true</campus_toolbox>
@@ -15,6 +16,7 @@
   <iqd>false</iqd>
   <iqd_digital_transformation>true</iqd_digital_transformation>
   <keywords_from_tms>false</keywords_from_tms>
+  <podlove_button>true</podlove_button>
   <rawr_iframe>true</rawr_iframe>
   <reader_revenue>true</reader_revenue>
   <reader_revenue_handle_celeraone_login_inconsistency>true</reader_revenue_handle_celeraone_login_inconsistency>
