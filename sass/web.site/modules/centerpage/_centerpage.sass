@@ -42,8 +42,7 @@
 	&--overview
 		padding: 0 $page-padding--small
 
-	&--ranking,
-	&--tube
+	&--ranking
 		padding-top: remify(14px)
 
 	&--buzzboard
@@ -86,8 +85,7 @@
 		&--overview,
 		&--print-ressort,
 		&--exclusive-ressort,
-		&--ranking,
-		&--tube
+		&--ranking
 			clear: both
 			margin: 0 auto
 			padding: 0 $page-padding
@@ -99,7 +97,6 @@
 		&--overview
 			max-width: $max-overview-width + 2 * $page-padding
 		&--ranking,
-		&--tube,
 		&--newsticker-on-keywordpage,
 		&--newsticker-on-topicpage
 			$max-ranking-width: $medium-content-width + 2 * $page-padding
@@ -141,6 +138,5 @@
 			padding: remify(20px 0 12px)
 
 	+respond-min($break-desktop-min)
-		&--ranking,
-		&--tube
+		&--ranking
 			padding-top: remify(30px)
