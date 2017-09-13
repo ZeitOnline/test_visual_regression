@@ -255,7 +255,13 @@ def test_zar_article_should_show_jobboxticker(testbrowser):
 
 
 def test_zar_article_should_hide_empty_jobboxticker(testbrowser, monkeypatch):
-    monkeypatch.setattr(requests, 'get', '')
+
+    def myget(url, timeout=1):
+        mymock = mock.Mock()
+        mymock.content = ''
+        return mymock
+
+    monkeypatch.setattr(requests, 'get', myget)
     browser = testbrowser('/arbeit/article/jobbox-ticker')
     assert browser.cssselect('.jobbox-ticker__heading')
     assert not browser.cssselect('.jobbox-ticker-item__container')
