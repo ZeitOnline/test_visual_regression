@@ -246,3 +246,15 @@ def test_zar_article_should_provide_jobboxticker(
     assert 'my_title' == ticker_item.title
     assert 'my_text' == ticker_item.text
     assert 'http://my_landing_page' == jobbox_ticker.landing_page_url
+
+
+def test_zar_article_should_show_jobboxticker(testbrowser):
+    browser = testbrowser('/arbeit/article/jobbox-ticker')
+    assert browser.cssselect('.jobbox-ticker')
+    assert browser.cssselect('.jobbox-ticker-item__title')
+
+
+def test_zar_article_should_hide_empty_jobboxticker(testbrowser, monkeypatch):
+    monkeypatch.setattr(requests, 'get', '')
+    browser = testbrowser('/arbeit/article/jobbox-ticker')
+    assert not browser.cssselect('.jobbox-ticker')
