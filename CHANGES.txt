@@ -7,10 +7,36 @@ POSTDEPLOY
 - Nothing
 
 
-3.91 (unreleased)
+3.92 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4208: Add CSS to ZAR and ZCO tube area
+
+
+3.91.1 (2017-09-12)
+-------------------
+
+- ARBEIT: Polishing underlined headline, fix marginalia clearfix
+
+- Revert "Merge pull request #2478 from paulbauer/ARBEIT_polishing_safari"
+
+
+3.91 (2017-09-12)
+-----------------
+
+- ZON: Highlight the new Arbeit ressort inside ressortnav
+
+- ARBEIT: Polish article-podcast-header image
+
+- ARBEIT: Polish same height duo teaser in Safari
+
+- ARBEIT: Polishing: Tweak nextread advertising spacing
+
+- ARBEIT: Polish vertical space
+
+- BUG-789: Add scriptPath to framebuilder scripts
+
+- FIX: Add missing JS modules for ZEIT Arbeit
 
 
 3.90.1 (2017-09-11)
