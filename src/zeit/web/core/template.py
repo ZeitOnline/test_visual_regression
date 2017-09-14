@@ -489,7 +489,7 @@ def startswith(string, value):
 @zeit.web.register_filter
 def remove_break(string):
     if isinstance(string, basestring):
-        return re.sub('\n', '', string)
+        return string.replace('\n', '')
     return string
 
 
