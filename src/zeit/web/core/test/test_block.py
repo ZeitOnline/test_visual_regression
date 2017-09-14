@@ -558,9 +558,8 @@ def test_volume_should_ignore_invalid_references(application):
 def test_podcast_should_render_script_tag_for_player(testbrowser):
     browser = testbrowser('/zeit-online/article/podcast')
     player = browser.cssselect('script.podigee-podcast-player')[0]
-    assert player.get('data-configuration') == (
-        'http://zon-test.podigee.io/2-folge-zwei-test'
-        '/embed?context=external&theme=zon-standalone')
+    assert player.get('data-configuration') == 'podigee_player_6853'
+    assert '"theme": "zon-standalone"' in browser.contents
 
 
 def test_podcast_header_should_provide_podlove_data(application):

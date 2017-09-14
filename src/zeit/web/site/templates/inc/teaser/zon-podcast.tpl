@@ -9,6 +9,7 @@
     {% set module = adapt(teaser.body.find_first(resolve(IPodcast)), IBlock) %}
   {% endif %}
 
+  {% set podcast_player_id = module_id %}
   {% set podcast_player_theme = settings('podcast_theme_cp') %}
   {% include "zeit.web.core:templates/inc/podcast_player.html" %}
 
