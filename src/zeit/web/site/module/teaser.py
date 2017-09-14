@@ -76,3 +76,7 @@ class InfoboxTeaserBlock(
     @property
     def layout(self):
         return self.module.layout
+
+    @zeit.web.reify
+    def __name__(self):
+        return self.module.__name__

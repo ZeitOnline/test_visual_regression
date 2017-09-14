@@ -213,9 +213,8 @@ def test_zar_article_podcast_header_renders_correctly(testbrowser):
     assert len(browser.cssselect('.article-heading__link-series')) == 1
 
     player = browser.cssselect('script.podigee-podcast-player')[0]
-    assert player.get('data-configuration') == (
-        'http://zon-test.podigee.io/2-folge-zwei-test'
-        '/embed?context=external&theme=zon-minimal')
+    assert player.get('data-configuration') == 'podigee_player_6853'
+    assert '"theme": "zon-minimal"' in browser.contents
     browser = testbrowser('/arbeit/article/podcast-no-series')
     assert not browser.cssselect('.article-heading__link-series')
 

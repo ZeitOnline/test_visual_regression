@@ -197,7 +197,7 @@ def test_json_article_query_should_construct_correct_solr_queries(
     args, kw = search.call_args
     assert args[0] == ('(uniqueId:"foo://1" OR uniqueId:"foo://2" OR uuid:'
                        '"{urn:uuid:30d678d7-d8d7-4eaf-a5c8-f99fa137d69e}")')
-    assert kw['fq'] == 'type:(article)'
+    assert kw['fq'] == 'comments:(true)'
 
 
 def test_json_article_query_should_work_even_when_homepage_is_unreachable(

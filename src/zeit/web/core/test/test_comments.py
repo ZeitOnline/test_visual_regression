@@ -16,9 +16,11 @@ import requests
 import requests.exceptions
 import zope.component
 
-from zeit.cms.interfaces import ID_NAMESPACE as NS
 from zeit.cms.checkout.helper import checked_out
+from zeit.cms.interfaces import ID_NAMESPACE as NS
+import zeit.cms.interfaces
 
+import zeit.web.core.view
 import zeit.web.core.view_comment
 
 
@@ -339,8 +341,8 @@ def test_rewrite_comments_url_should_rewrite_to_static_host(application):
     import zeit.web.core.comments
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     url = zeit.web.core.comments.rewrite_picture_url(
-        conf['community_host'] + '/baaa')
-    assert url == 'http://static_community/foo/baaa'
+        conf['community_host'] + '/foo.jpg')
+    assert url == 'http://static_community/foo.jpg'
 
 
 def test_post_comment_should_throw_exception_if_no_user_is_present():
@@ -1036,3 +1038,19 @@ def test_smoke_post_on_article(testserver, application):
             '{}/zeit-online/article/01'.format(testserver.url),
             allow_redirects=False)
         assert resp.status_code == 303
+
+
+@pytest.mark.parametrize('toggle, host, path', [
+    (True, 'community_host', '/comment/edit/%cid%'),
+    (False, 'community_admin_host',
+     '/9e7bf051-2299-43e4-b5e6-1fa81d097dbd/thread/%cid%')])
+def test_moderation_url_should_be_set_according_to_toggle(
+        application, togglepatch, toggle, host, path):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    context = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    mixin = zeit.web.core.view.CommentMixin()
+    mixin.context = context
+
+    togglepatch({'zoca_moderation_launch': toggle})
+    assert mixin.moderation_url == conf.get(host) + path
