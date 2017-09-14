@@ -355,16 +355,16 @@ def test_podcast_module_should_render_script_tag_for_player(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/podcast')
     player = browser.cssselect('script.podigee-podcast-player')[0]
     assert player.get('data-configuration') == (
-        'http://zon-test.podigee.io/2-folge-zwei-test'
-        '/embed?context=external&theme=zon-standalone')
+        'podigee_player_id_97cd491c_c56f_4ef3_96d0_76bde8a80671')
+    assert '"theme": "zon-standalone"' in browser.contents
 
 
 def test_podcast_teaserlayout_should_render_script_tag_for_player(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/podcast-teaser')
     player = browser.cssselect('script.podigee-podcast-player')[0]
     assert player.get('data-configuration') == (
-        'http://zon-test.podigee.io/2-folge-zwei-test'
-        '/embed?context=external&theme=zon-standalone')
+        'podigee_player_id_97cd491c_c56f_4ef3_96d0_76bde8a80671')
+    assert '"theme": "zon-standalone"' in browser.contents
 
 
 def test_podcast_module_considers_series(testbrowser):
