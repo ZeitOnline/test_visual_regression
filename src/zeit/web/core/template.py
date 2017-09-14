@@ -489,7 +489,7 @@ def startswith(string, value):
 @zeit.web.register_filter
 def remove_break(string):
     if isinstance(string, basestring):
-        return re.sub('\n', '', string)
+        return string.replace('\n', '')
     return string
 
 
@@ -651,25 +651,6 @@ def format_iqd(string):
 
 
 @zeit.web.register_filter
-def format_only_varchars(string):
-    """Returns a string that has only latin characters and arabic numbers
-    """
-    string = string.lower().replace(
-        u'ä', 'ae').replace(
-        u'ö', 'oe').replace(
-        u'ü', 'ue').replace(
-        u'á', 'a').replace(
-        u'à', 'a').replace(
-        u'é', 'e').replace(
-        u'è', 'e').replace(
-        u'ß', 'ss')
-    string = re.sub(u'[^a-zA-Z0-9]', '', string)
-    string = re.sub(u'_+', '_', string)
-    string = re.sub(u'^_|_$', '', string)
-    return string
-
-
-@zeit.web.register_filter
 def get_clicktracking_identifier(area):
     if area.kind == 'parquet' and area.title:
         return 'parquet-{}'.format(format_webtrekk(area.title))
@@ -798,7 +779,12 @@ def webtrekk_sso_parameter(request):
 
 @zeit.web.register_filter
 def tojson(value):
-    return json.dumps(remove_break(value))
+    result = json.dumps(remove_break(value))
+    # <https://html.spec.whatwg.org/multipage
+    #  /scripting.html#restrictions-for-contents-of-script-elements>
+    result = result.replace('<script', r'<\script')
+    result = result.replace('</script', r'<\/script')
+    return result
 
 
 @zeit.web.register_global

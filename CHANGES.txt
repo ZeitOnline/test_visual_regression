@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - FIX: Add clearing to wide article-image in ZON
 
+- PERF: Load podigee player configuration on server side instead of client
+
 
 3.91.1 (2017-09-12)
 -------------------
