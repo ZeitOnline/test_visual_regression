@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4216: Change image-variant to square in podcast header
 
+- ZOCA-112: Configure moderation url to point to zoca
+
 - FIX: Add clearing to wide article-image in ZON
 
 - FIX: Filter query by comments flag not type
