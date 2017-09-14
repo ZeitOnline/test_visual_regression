@@ -12,7 +12,13 @@ POSTDEPLOY
 
 - ZON-4208: Add CSS to ZAR and ZCO tube area
 
+- ZON-4216: Change image-variant to square in podcast header
+
 - FIX: Add clearing to wide article-image in ZON
+
+- FIX: Filter query by comments flag not type
+
+- PERF: Load podigee player configuration on server side instead of client
 
 
 3.91.1 (2017-09-12)
