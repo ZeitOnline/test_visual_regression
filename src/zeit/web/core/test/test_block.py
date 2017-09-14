@@ -575,10 +575,3 @@ def test_podcast_header_should_provide_podlove_data(application):
     assert podlove['title'] == 'Test'
     assert podlove['cover'].startswith('https://cdn.podigee.com')
     assert len(podlove['feeds']) == 4
-
-
-def test_podcast_header_should_add_podlove_data_to_window(testbrowser):
-    browser = testbrowser('/arbeit/article/podcast')
-    assert 'window.podcastData =' in browser.contents
-    assert (
-        '"subtitle": "Ein Test Podcast von ZEIT ONLINE.",' in browser.contents)
