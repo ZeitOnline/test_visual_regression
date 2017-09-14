@@ -184,6 +184,7 @@ $nav-color-border: #444
 			order: 1
 		&__primary
 			order: 2
+			flex-wrap: wrap
 		&__home
 			order: 3
 		&__sales
@@ -202,6 +203,10 @@ $nav-color-border: #444
 		&__button
 			border-top: 1px solid $nav-color-border
 			padding: 0 $page-padding--small
+
+		&__topics
+			display: flex
+			flex-wrap: nowrap
 
 		&__topics-list
 			font-family: $font-patronbold
