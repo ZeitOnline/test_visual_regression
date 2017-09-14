@@ -509,10 +509,12 @@ class Podcast(Block):
         url = self.episode.get('permalink')
         if not url:
             return None
-        # <https://github.com/podigee
-        #  /podigee-podcast-player#remote-configuration>
-        return u'{url}/embed?context=external&theme={theme}'.format(
-            url=url, theme=theme)
+        podigee = zope.component.getUtility(zeit.web.core.interfaces.IPodigee)
+        config = podigee.get_player_configuration(url)
+        if not config:
+            return None
+        config['options']['theme'] = theme
+        return config
 
     @zeit.web.reify
     def podlove_configuration(self):
