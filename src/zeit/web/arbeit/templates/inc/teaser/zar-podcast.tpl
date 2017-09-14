@@ -14,7 +14,7 @@
 
     <div class="teaser-podcast-footer">
 
-        {% set podlove_button_id = '{}__{}'.format(teaser.uniqueId, area.uniqueId) | format_only_varchars %}
+        {% set podlove_button_id = module.__name__ %}
         {% set podlove_button_configuration = module.podlove_configuration %}
         {% include "zeit.web.core:templates/inc/shared/podlove-button.html" %}
 
