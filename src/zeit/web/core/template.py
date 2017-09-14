@@ -779,7 +779,12 @@ def webtrekk_sso_parameter(request):
 
 @zeit.web.register_filter
 def tojson(value):
-    return json.dumps(remove_break(value))
+    result = json.dumps(remove_break(value))
+    # <https://html.spec.whatwg.org/multipage
+    #  /scripting.html#restrictions-for-contents-of-script-elements>
+    result = result.replace('<script', r'<\script')
+    result = result.replace('</script', r'<\/script')
+    return result
 
 
 @zeit.web.register_global
