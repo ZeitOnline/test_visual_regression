@@ -1,6 +1,6 @@
 {# Teaser layout for referencing an article that contains a podcast module #}
 <div class="teaser-podcast">
-  {% set module_id = module.__name__ %}
+  {% set module_id = module.__name__ | format_iqd %}
   {% set IPodcast = 'zeit.content.article.edit.interfaces.IPodcast' %}
   {% set IBlock = 'zeit.web.core.interfaces.IFrontendBlock' %}
   {% if provides(teaser.header.module, IPodcast) %}
