@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - FIX: Add clearing to wide article-image in ZON
 
+- FIX: Filter query by comments flag not type
+
 - PERF: Load podigee player configuration on server side instead of client
 
 

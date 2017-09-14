@@ -187,7 +187,7 @@ def json_article_query(request):
 
     Q = zeit.solr.query
     main_query = Q.or_(*identifiers)
-    filter_query = Q.field_raw('type', 'article')
+    filter_query = Q.field_raw('comments', 'true')
     fields = ','.join((
         'uuid',
         'uniqueId',
