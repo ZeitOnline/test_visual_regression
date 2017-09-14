@@ -7,10 +7,28 @@ POSTDEPLOY
 - Nothing
 
 
-3.92 (unreleased)
+3.93 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Show only jobbox-ticker header if its feed has no items
+
+
+3.92 (2017-09-14)
+-----------------
+
+- ZON-4208: Add CSS to ZAR and ZCO tube area
+
+- ZON-4216: Change image-variant to square in podcast header
+
+- ARBEIT: Change logo SVGs
+
+- ZOCA-112: Configure moderation url to point to zoca
+
+- FIX: Add clearing to wide article-image in ZON
+
+- FIX: Filter query by comments flag not type
+
+- PERF: Load podigee player configuration on server side instead of client
 
 
 3.91.1 (2017-09-12)

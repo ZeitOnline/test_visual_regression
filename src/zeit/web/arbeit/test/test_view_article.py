@@ -213,9 +213,8 @@ def test_zar_article_podcast_header_renders_correctly(testbrowser):
     assert len(browser.cssselect('.article-heading__link-series')) == 1
 
     player = browser.cssselect('script.podigee-podcast-player')[0]
-    assert player.get('data-configuration') == (
-        'http://zon-test.podigee.io/2-folge-zwei-test'
-        '/embed?context=external&theme=zon-minimal')
+    assert player.get('data-configuration') == 'podigee_player_6853'
+    assert '"theme": "zon-minimal"' in browser.contents
     browser = testbrowser('/arbeit/article/podcast-no-series')
     assert not browser.cssselect('.article-heading__link-series')
 
@@ -246,3 +245,22 @@ def test_zar_article_should_provide_jobboxticker(
     assert 'my_title' == ticker_item.title
     assert 'my_text' == ticker_item.text
     assert 'http://my_landing_page' == jobbox_ticker.landing_page_url
+
+
+def test_zar_article_should_show_jobboxticker(testbrowser):
+    browser = testbrowser('/arbeit/article/jobbox-ticker')
+    assert browser.cssselect('.jobbox-ticker')
+    assert browser.cssselect('.jobbox-ticker-item__title')
+
+
+def test_zar_article_should_hide_empty_jobboxticker(testbrowser, monkeypatch):
+
+    def myget(url, timeout=1):
+        mymock = mock.Mock()
+        mymock.content = ''
+        return mymock
+
+    monkeypatch.setattr(requests, 'get', myget)
+    browser = testbrowser('/arbeit/article/jobbox-ticker')
+    assert browser.cssselect('.jobbox-ticker__heading')
+    assert not browser.cssselect('.jobbox-ticker-item__container')

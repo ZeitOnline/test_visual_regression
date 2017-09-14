@@ -83,7 +83,7 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
             modHTML = '' +
             '<ul class="comment__moderations">' +
                 '<li>' +
-                    '<a class="comment__moderation" href="%ch%/comment/edit/%cid%">' +
+                    '<a class="comment__moderation" href="%modURL%">' +
                         'Kommentar bearbeiten' +
                     '</a>' +
                 '</li>' +
@@ -94,9 +94,10 @@ define([ 'jquery', 'velocity.ui', 'web.core/zeit' ], function( $, Velocity, Zeit
                 '</li>' +
             '</ul>';
 
-        modHTML = modHTML.replace( /%cid%/g, cid )
-            .replace( '%action%', action )
-            .replace( '%ch%', Zeit.communityHost );
+        modHTML = modHTML
+            .replace( '%modURL%', Zeit.moderationURL )
+            .replace( /%cid%/g, cid )
+            .replace( '%action%', action );
         $comment.find( '.comment__reactions' )
             .append( modHTML );
     }
