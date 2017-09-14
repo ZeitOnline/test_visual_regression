@@ -29,6 +29,10 @@ class LayoutOverrideTeaserBlock(grokcore.component.MultiAdapter):
     def __iter__(self):
         return iter(self.module)
 
+    @zeit.web.reify
+    def __name__(self):
+        return self.module.__name__
+
     @property
     def layout(self):
         if self.override_layout_id:

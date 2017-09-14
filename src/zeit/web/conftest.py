@@ -80,7 +80,8 @@ def app_settings(mockserver):
         'assets_max_age': '1',
         'comment_page_size': '4',
         'community_host': mockserver.url + '/comments',
-        'community_static_host': 'http://static_community/foo',
+        'community_admin_host': 'http://community_admin',
+        'community_static_host': 'http://static_community',
         'community_maintenance': (
             'http://xml.zeit.de/config/community_maintenance.xml'),
         'agatho_host': mockserver.url + '/comments',
