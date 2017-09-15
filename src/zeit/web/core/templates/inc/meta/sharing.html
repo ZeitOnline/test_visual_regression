@@ -1,7 +1,6 @@
     <meta property="og:site_name" content="{% block og_site_name %}ZEIT ONLINE{% endblock %}">
     <meta property="fb:app_id" content="{% block facebook_app_id %}638028906281625{% endblock %}">
-    <meta property="fb:profile_id" content="{% block facebook_profile_id %}37816894428{% endblock %}">
-    <meta property="fb:pages" content="{{ self.facebook_profile_id() }}" />
+    <meta property="fb:pages" content="{% block facebook_profile_id %}37816894428{% endblock %}" />
 {%- for author in view.authors -%}
     {%- if author.href %}
 
