@@ -26,8 +26,15 @@ class Metrics(object):
         self.prefix = prefix
         self.statsd = statsd.Connection(hostname, port)
 
+    @contextlib.contextmanager
     def time(self, identifier):
-        return self.timer().time(self.prefix + identifier)
+        # statsd.timer.Timer.time() does not have try/finally, unfortunately.
+        timer = self.timer(self.prefix + identifier)
+        timer.start()
+        try:
+            yield
+        finally:
+            timer.stop('')
 
     def increment(self, identifier, delta=1):
         self.counter().increment(self.prefix + identifier, delta)
