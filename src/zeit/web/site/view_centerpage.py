@@ -129,6 +129,8 @@ class CenterpageArea(Centerpage):
             condition = uid_cond
         elif name.startswith('no-'):
             condition = index_cond
+        else:
+            raise pyramid.httpexceptions.HTTPNotFound('Area not found')
 
         index = 1
         for region in context.values():

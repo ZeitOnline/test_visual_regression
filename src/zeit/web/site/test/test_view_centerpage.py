@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import re
+import urllib2
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -898,6 +899,12 @@ def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
                           'bg-automesse-detroit-2014-usa')
     teaser_second_page = browser.cssselect('.teaser-gallery__title')[0]
     assert teaser_second_page.text == 'Immer nur das Meer sehen'
+
+
+def test_centerpage_invalid_area_id_should_404(testbrowser):
+    with pytest.raises(urllib2.HTTPError) as info:
+        testbrowser('/index/area/not-an-id')
+    assert info.value.getcode() == 404
 
 
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
