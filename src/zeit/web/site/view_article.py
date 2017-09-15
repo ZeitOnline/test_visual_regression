@@ -98,6 +98,12 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('optimizely_on_zon_article', None)
 
+    @zeit.web.reify
+    def volume_cp(self):
+        cp = zeit.content.cp.interfaces.ICenterPage(self.volume, None)
+        pubinfo = zeit.cms.workflow.interfaces.IPublishInfo(cp, None)
+        return getattr(pubinfo, 'published', False)
+
 
 @zeit.web.view_defaults(vertical='zon')
 @zeit.web.view_config(
