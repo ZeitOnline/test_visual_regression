@@ -29,6 +29,10 @@ class Base(zeit.web.core.view.Base):
     seo_title_default = u'ZEIT Arbeit ONLINE | arbeiten. leben.'
     pagetitle_suffix = u' | ZEIT Arbeit'
 
+    @zeit.web.reify
+    def ressort_literally(self):
+        return 'Arbeit'
+
 
 class Content(Base):
 

@@ -233,6 +233,10 @@ class Module(object):
     def __repr__(self):
         return object.__repr__(self)
 
+    @zeit.web.reify
+    def __name__(self):
+        return self.context.__name__
+
     @property
     def layout(self):
         return getattr(self, '_layout', None)
