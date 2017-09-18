@@ -671,6 +671,8 @@ def mock_metrics(monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.metrics, 'timer',
         zeit.web.core.metrics.mock_contextmanager)
+    monkeypatch.setattr(
+        zeit.web.core.metrics, 'increment', lambda *args: None)
 
 
 @pytest.fixture

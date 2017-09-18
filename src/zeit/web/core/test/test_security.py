@@ -14,14 +14,15 @@ import zeit.web.core.security
 
 def test_reload_community_should_produce_result(mock_metrics, monkeypatch):
     request = mock.Mock()
+    response = mock.Mock()
 
     def call(self, request, **kwargs):
-        return 'result'
+        return response
 
     monkeypatch.setattr(requests.Session, 'send', call)
 
     res = zeit.web.core.security._retry_request(request, 2)
-    assert res == 'result'
+    assert res is response
 
 
 def test_reload_community_should_be_recalled(mock_metrics, monkeypatch):
@@ -43,17 +44,18 @@ def test_reload_community_should_suceed_after_one_call(
         mock_metrics, monkeypatch):
     request = mock.Mock()
     request.called = 0
+    response = mock.Mock()
 
     def call(self, request, **kwargs):
         request.called = request.called + 1
         if request.called == 1:
             raise Exception('provoked')
-        return 'result'
+        return response
 
     monkeypatch.setattr(requests.Session, 'send', call)
 
     res = zeit.web.core.security._retry_request(request, 2)
-    assert res == 'result'
+    assert res is response
     assert request.called == 2
 
 
