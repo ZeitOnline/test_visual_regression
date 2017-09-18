@@ -102,7 +102,13 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
     def volume_cp(self):
         cp = zeit.content.cp.interfaces.ICenterPage(self.volume, None)
         pubinfo = zeit.cms.workflow.interfaces.IPublishInfo(cp, None)
-        return getattr(pubinfo, 'published', False)
+        published = getattr(pubinfo, 'published', False)
+        if published and '/zeit-online/' not in self.resource_url:
+            return published
+        elif '/zeit-online/' in self.resource_url:
+            return 'localurl'
+        else:
+            return None
 
 
 @zeit.web.view_defaults(vertical='zon')

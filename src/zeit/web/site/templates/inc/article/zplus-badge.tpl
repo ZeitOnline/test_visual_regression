@@ -4,12 +4,12 @@
     {%- if not view.zplus_label.volume_exists %} {{ self.layout() }}--coverless{% endif %}" data-ct-row="zplus-badge
     {%- if not view.zplus_label.cover %}_coverless{% endif %}" data-ct-column="false">
     <div class="{{ self.layout() }}__banner article__item article__item--rimless">
-        {%  if view.volume_cp %}
+        {% if view.volume_cp or view.volume_cp == 'localurl' %}
             <a class="{{ self.layout() }}__link" href="{{ view.zplus_label.link }}">
         {% endif %}
                 <span class="{{ self.layout() }}__text">
                     <span class="{{ self.layout() }}__intro">{{ view.zplus_label.intro }}</span>
-                    <span {%  if view.volume_cp %}class="{{ self.layout() }}__link-text"{% endif %}>{{ view.zplus_label.link_text }}</span>
+                    <span {% if view.volume_cp or view.volume_cp == 'localurl' %}class="{{ self.layout() }}__link-text"{% endif %}>{{ view.zplus_label.link_text }}</span>
                 </span>
                 {%  if view.context is zplus_abo_content %}
                     {{ lama.use_svg_icon('zplus', self.layout() ~ '__icon svg-symbol--hide-ie', view.package, a11y=False) }}
@@ -19,7 +19,7 @@
                     {% set module_layout = self.layout() %}
                     {% include "zeit.web.core:templates/inc/asset/image_packshot.tpl" %}
                 {% endif %}
-        {%  if view.volume_cp %}
+        {% if view.volume_cp or view.volume_cp == 'localurl' %}
             </a>
         {% endif %}
     </div>
