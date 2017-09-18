@@ -1,0 +1,52 @@
+.article-header-column
+	margin-bottom: remify(40px)
+	&__box
+		border: remify(6px) $zar-sun-yellow solid
+		margin: $vertical-space--small 0 remify(30px) 0
+		padding: $vertical-space--small $page-padding--small
+		position: relative
+
+	&__heading
+		font-family: $font-patronbold
+		font-size: remify(28px)
+		line-height: remify(36px)
+		margin: 0 0 $vertical-space--small 0
+		width: 75%
+
+	&__kicker
+		color: $zar-sun-yellow
+		display: block
+
+	&__byline
+		font-size: remify(16px)
+		letter-spacing: $letter-spacing-l
+		line-height: remify(20px)
+		width: 75%
+		a
+			color: inherit
+			+on-interaction
+				border-bottom: 1px currentColor solid
+
++respond-min($break-tablet-min)
+	.article-header-column
+		margin-bottom: remify(60px)
+		&__box
+			margin: $vertical-space auto
+			max-width: $wide-content-width
+			padding: $vertical-space $page-padding
+		&__heading
+			font-size: remify(60px)
+			line-height: remify(72px)
+			margin-bottom: $vertical-space
+		&__byline
+			font-size: remify(20px)
+			letter-spacing: $letter-spacing-xl
+			line-height: remify(26px)
+
+.article-header__media--column
+	bottom: 0
+	position: absolute
+	right: remify(6px)
+	width: 25%
+	filter: grayscale(100%) contrast(150%)
+	z-index: 1
