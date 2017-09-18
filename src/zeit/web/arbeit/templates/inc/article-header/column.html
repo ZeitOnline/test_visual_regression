@@ -1,18 +1,6 @@
 <div class="{% block layout %}article-header-column{% endblock %}">
     <div class="{{ self.layout() }}__box">
 
-    {#
-    TODO: entscheiden was wir erben und überschreiben ... und was nicht.
-
-    PRO gemeinsame Templates
-     - Diese headertag-Logik und den Doppelpunkt will man nicht doppelt haben
-
-    CONTRA gemeinsame Templates
-     - keine Underline, also müsste man einen Container entfernen
-     - diese Herausrück-Styles usw müsste man zurücksetzen
-
-    #}
-
         {% set headertag = 'div' if view.pagination and view.pagination.current > 1 and view.current_page.teaser else 'h1' %}
         <{{ headertag }} class="{{ self.layout() }}__heading" itemprop="headline">
             <span class="{{ self.layout() }}__kicker">
@@ -37,8 +25,7 @@
 
 {# TODO: hide the intro ("Eine Kolumne von XY") #}
 
-{% block metadata %}
-    {% include "zeit.web.arbeit:templates/inc/article/metadata.tpl" %}
-{% endblock %}
+{% set byline_already_rendered = True %}
+{% include "zeit.web.arbeit:templates/inc/article/metadata.tpl" %}
 
 </div>

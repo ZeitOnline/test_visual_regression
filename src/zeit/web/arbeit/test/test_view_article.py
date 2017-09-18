@@ -303,6 +303,8 @@ def test_zar_column_article_has_correct_structure_on_page2(testbrowser):
     assert len(select('.summary')) == 0
     assert len(select('.metadata')) == 0
 
+    assert len(select('.article__page-teaser')) == 1
+
     # We set our own byline on unusual position, and suppress the default one
     assert len(select('.article-header-column__byline')) == 1
     assert len(select('.byline')) == 0
