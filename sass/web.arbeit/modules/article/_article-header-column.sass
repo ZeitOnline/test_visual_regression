@@ -27,6 +27,14 @@
 			+on-interaction
 				border-bottom: 1px currentColor solid
 
+	&__media
+		bottom: 0
+		position: absolute
+		right: remify(6px)
+		width: 25%
+		filter: grayscale(100%) contrast(150%)
+		z-index: 1
+
 +respond-min($break-tablet-min)
 	.article-header-column
 		margin-bottom: remify(60px)
@@ -42,11 +50,3 @@
 			font-size: remify(20px)
 			letter-spacing: $letter-spacing-xl
 			line-height: remify(26px)
-
-.article-header__media--column
-	bottom: 0
-	position: absolute
-	right: remify(6px)
-	width: 25%
-	filter: grayscale(100%) contrast(150%)
-	z-index: 1

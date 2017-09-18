@@ -275,9 +275,9 @@ def test_zar_column_article_has_correct_structure(testbrowser):
     assert len(select('.article-header-column__kicker')) == 1
     assert len(select('.article-header-column__title')) == 1
 
-    assert len(select('.article-header__media--column')) == 1
+    assert len(select('.article-header-column__media')) == 1
     assert len(select(
-        '.article-header-column figcaption.figcaption--hidden')) == 1
+        '.article-header-column__media figcaption.figcaption--hidden')) == 1
 
     assert len(select('.summary')) == 1
     assert len(select('.metadata')) == 1
@@ -296,9 +296,9 @@ def test_zar_column_article_has_correct_structure_on_page2(testbrowser):
     assert len(select('.article-header-column__kicker')) == 1
     assert len(select('.article-header-column__title')) == 1
 
-    assert len(select('.article-header__media--column')) == 1
+    assert len(select('.article-header-column__media')) == 1
     assert len(select(
-        '.article-header-column figcaption.figcaption--hidden')) == 1
+        '.article-header-column__media figcaption.figcaption--hidden')) == 1
 
     assert len(select('.summary')) == 0
     assert len(select('.metadata')) == 0

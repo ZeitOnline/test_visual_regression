@@ -31,11 +31,7 @@
         </div>
         {% endif -%}
 
-        {% require image = get_image(view.context, name='author', variant_id='square', fallback=False) -%}
-            {% set media_caption_additional_class = 'figcaption--hidden' %}
-            {# TODO: was unterscheidet das vom anderen articleheaderimage bei ZCO? Wrarum funzt unser ZAR Artikelheader nicht? #}
-            {%- include "zeit.web.campus:templates/inc/article/header-image.html" -%}
-        {% endrequire -%}
+        {%- include "zeit.web.arbeit:templates/inc/asset/image_article-header-column.html" -%}
 
     </div>
 
