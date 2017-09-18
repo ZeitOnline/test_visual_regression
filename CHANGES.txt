@@ -10,6 +10,8 @@ POSTDEPLOY
 3.93 (unreleased)
 -----------------
 
+- ARBEIT: Some polishing
+
 - ARBEIT: Tweak ZOA badge in main nav
 
 - FIX: Show only jobbox-ticker header if its feed has no items
