@@ -2265,7 +2265,7 @@ def test_article_should_not_include_itunes_smart_app_banner(testbrowser):
     assert len(app_banner_id) == 0
 
 
-def test_zplus_badge_has_no_link_if_volumes_unplublished(
+def test_zplus_badge_has_no_link_if_volumes_unpublished(
         testbrowser, monkeypatch):
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, 'volumepage_is_published', False)
