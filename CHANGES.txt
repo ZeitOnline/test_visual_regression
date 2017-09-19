@@ -10,7 +10,7 @@ POSTDEPLOY
 3.94 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-3992: Dont show packshotlink when volume isn't published
 
 
 3.93 (2017-09-19)
