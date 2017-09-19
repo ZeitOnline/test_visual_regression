@@ -8,7 +8,7 @@ import zeit.web.core.interfaces
 import zeit.web.core.metrics
 
 
-DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
+MEDIUM_TERM_CACHE = zeit.web.core.cache.get_region('medium_term')
 log = logging.getLogger(__name__)
 
 
@@ -25,7 +25,7 @@ class Podigee(object):
     def get_podcast(self, id):
         return self._api_request('/podcasts/{}'.format(id))
 
-    @DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=lambda x: x)
+    @MEDIUM_TERM_CACHE.cache_on_arguments(should_cache_fn=lambda x: x)
     def _api_request(self, path):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         url = '{}/{}'.format(conf.get('podigee_url'), path)
@@ -43,7 +43,7 @@ class Podigee(object):
             status = response.status_code if response else 599
             zeit.web.core.metrics.increment('api.http.status.%s' % status)
 
-    @DEFAULT_TERM_CACHE.cache_on_arguments(should_cache_fn=lambda x: x)
+    @MEDIUM_TERM_CACHE.cache_on_arguments(should_cache_fn=lambda x: x)
     def get_player_configuration(self, url):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         response = None
