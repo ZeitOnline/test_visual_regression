@@ -92,6 +92,14 @@ def timer(identifier):
     return metrics.time(identifier)
 
 
+def increment(identifier):
+    if not identifier.startswith('zeit.'):
+        module = sys._getframe(1).f_globals['__name__']
+        identifier = '%s.%s' % (module, identifier)
+    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+    metrics.increment(identifier)
+
+
 @pyramid.events.subscriber(pyramid.events.NewRequest)
 def view_timer_start(event):
     event.request.view_timer_start = time.time()

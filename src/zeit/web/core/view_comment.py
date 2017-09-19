@@ -189,6 +189,7 @@ class PostComment(zeit.web.core.view.Base):
 
         # GET/POST the request to the community
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        response = None
         with zeit.web.core.metrics.timer(
                 'post_comment.community.reponse_time'):
             try:
@@ -227,6 +228,10 @@ class PostComment(zeit.web.core.view.Base):
                 log.warning(message + u' ' + detail)
                 raise pyramid.httpexceptions.HTTPInternalServerError(
                     title=message, explanation=detail)
+            finally:
+                status = response.status_code if response else 599
+                zeit.web.core.metrics.increment(
+                    'post_comment.community.status.%s' % status)
 
         self.status.append('Action {} was performed for {}'
                            ' (with pid {})'.format(method, unique_id, pid))
@@ -331,6 +336,7 @@ class PostComment(zeit.web.core.view.Base):
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         error = None
+        response = None
         with zeit.web.core.metrics.timer(
                 'create_thread.community.reponse_time'):
             try:
@@ -345,6 +351,10 @@ class PostComment(zeit.web.core.view.Base):
                         response.status_code)
             except requests.exceptions.RequestException, err:
                 error = type(err).__name__
+            finally:
+                status = response.status_code if response else 599
+                zeit.web.core.metrics.increment(
+                    'create_thread.community.status.%s' % status)
         if error:
             log.warning(
                 'Could not create commentsection for %s: %s', unique_id, error)
