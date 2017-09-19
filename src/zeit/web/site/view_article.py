@@ -99,16 +99,10 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
         return conf.get('optimizely_on_zon_article', None)
 
     @zeit.web.reify
-    def volume_cp(self):
+    def volumepage_is_published(self):
         cp = zeit.content.cp.interfaces.ICenterPage(self.volume, None)
         pubinfo = zeit.cms.workflow.interfaces.IPublishInfo(cp, None)
-        published = getattr(pubinfo, 'published', False)
-        if published and '/zeit-online/' not in self.resource_url:
-            return published
-        elif '/zeit-online/' in self.resource_url:
-            return 'localurl'
-        else:
-            return None
+        return getattr(pubinfo, 'published', False)
 
 
 @zeit.web.view_defaults(vertical='zon')
