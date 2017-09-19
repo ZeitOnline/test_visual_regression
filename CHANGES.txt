@@ -10,11 +10,15 @@ POSTDEPLOY
 3.93 (unreleased)
 -----------------
 
+- ARBEIT: Some polishing
+
 - ARBEIT: Tweak ZOA badge in main nav
 
 - FIX: Show only jobbox-ticker header if its feed has no items
 
 - FIX: Change navigation abo links for campus and magazin
+
+- FIX: Change the color of D17 badge back to white
 
 - MAINT: Record metrics for status codes of external HTTP requests
 
