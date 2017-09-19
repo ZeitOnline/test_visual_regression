@@ -2263,3 +2263,12 @@ def test_article_should_not_include_itunes_smart_app_banner(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
     assert len(app_banner_id) == 0
+
+
+def test_zplus_badge_has_no_link_if_volumes_unplublished(
+        testbrowser, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.site.view_article.Article, 'volumepage_is_published', False)
+    browser = testbrowser('/zeit-online/article/zplus-zeit')
+    assert len(browser.cssselect(
+        '.zplus-badge__link-text')) == 0
