@@ -114,9 +114,14 @@ class RSSImages(zeit.web.core.image.RemoteImages):
 
 @SHORT_TERM_CACHE.cache_on_arguments()
 def _cache_feed(url, timeout):
-    with zeit.web.core.metrics.timer('feed.rss.reponse_time'):
-        resp = requests.get(url, timeout=timeout)
-    return resp.content
+    response = None
+    try:
+        with zeit.web.core.metrics.timer('feed.rss.reponse_time'):
+            response = requests.get(url, timeout=timeout)
+        return response.content
+    finally:
+        status = response.status_code if response else 599
+        zeit.web.core.metrics.increment('feed.rss.status.%s' % status)
 
 
 def parse_feed(url, kind, timeout=2):
