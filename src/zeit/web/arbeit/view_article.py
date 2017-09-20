@@ -24,7 +24,18 @@ class Article(zeit.web.core.view_article.Article,
 
     @zeit.web.reify
     def article_layout(self):
-        return 'default'
+        if zeit.web.core.template.column(self.context):
+            return 'column'
+        elif self.header_layout != 'default':
+            return self.header_layout
+        else:
+            return 'default'
+
+    @zeit.web.reify
+    def header_layout(self):
+        if zeit.web.core.template.column(self.context):
+            return 'column'
+        return self.context.header_layout or 'default'
 
 
 @zeit.web.view_defaults(vertical='zar')
