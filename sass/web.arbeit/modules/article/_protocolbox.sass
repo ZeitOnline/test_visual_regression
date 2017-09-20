@@ -3,6 +3,9 @@
 	margin-top: remify(40px)
 	background-color: $primary-color
 
+	&__media--tablet-desktop
+		display: none
+
 	&__container
 		+font-smoothing
 		padding: remify(0 30px 30px 30px)
@@ -39,3 +42,33 @@
 		margin-bottom: remify(60px)
 		&__text:before
 			height: remify(60px)
+
+// Gibts überhaupt Browser die flex können, aber kein @supports?
+// ja, leider. Also: `html.flexbox` noch dazu, ohne Code-Doppelung
+//
+// Now we need a 60-40-Design which has a covering image,
+// regardless the text length.
+@supports (display: flex)
+	+respond-min($break-tablet-min)
+		.protocolbox
+			display: flex
+			&__media
+				display: none
+			// background (instead of img) is needed for full-covering the box
+			&__media--tablet-desktop
+				display: block
+				background-repeat: no-repeat
+				background-position: center
+				background-size: cover
+				min-height: remify(350px)
+				width: 60%
+			&__container
+				display: flex
+				flex-direction: column
+				justify-content: center
+				width: 40%
+
+	+respond-min($break-desktop-min)
+		.protocolbox
+			&__media--tablet-desktop
+				min-height: remify(450px)

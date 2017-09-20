@@ -69,16 +69,17 @@
 		<raw alldevices="true">
 
 			<div class="protocolbox">
+				<div class="protocolbox__media--tablet-desktop" style="background-image:url(http://localhost:9090/campus/image/01-junge-vor-unscharfem-hintergrund/wide)"></div>
 
-				<figure class="protocolbox__media scaled-image variant variant--wide">
-					<div class="protocolbox__media-container ">
-						<img class="protocolbox__media-item" alt="Countdown: Countdown zum Studium" src="http://localhost:9090/campus/image/01-junge-vor-unscharfem-hintergrund/wide__820x461" data-src="http://localhost:9090/campus/image/01-junge-vor-unscharfem-hintergrund/wide" data-ratio="1.77777777778" />
-					</div>
-					<figcaption class="figure__caption figcaption--hidden">
-						<span class="figure__text" itemprop="caption">Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.</span>
-						<span class="figure__copyright" itemprop="copyrightHolder"><a itemprop="url" href="http://www.photocase.de/fotos/207896" target="_blank"><span itemprop="name">© &lt;&lt;bananarama&gt;&gt;/photocase.de</span></a></span>
-					</figcaption>
-				</figure>
+                <figure class="protocolbox__media scaled-image variant variant--wide">
+                    <div class="protocolbox__media-container ">
+                        <img class="protocolbox__media-item" alt="Countdown: Countdown zum Studium" src="http://localhost:9090/campus/image/01-junge-vor-unscharfem-hintergrund/wide__820x461" data-src="http://localhost:9090/campus/image/01-junge-vor-unscharfem-hintergrund/wide" data-ratio="1.77777777778" />
+                    </div>
+                    <figcaption class="figure__caption figcaption--hidden">
+                        <span class="figure__text" itemprop="caption">Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.</span>
+                        <span class="figure__copyright" itemprop="copyrightHolder"><a itemprop="url" href="http://www.photocase.de/fotos/207896" target="_blank"><span itemprop="name">© &lt;&lt;bananarama&gt;&gt;/photocase.de</span></a></span>
+                    </figcaption>
+                </figure>
 
 				<div class="protocolbox__container">
 					<h3 class="protocolbox__title">Der Ingenieur</h3>
