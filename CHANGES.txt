@@ -10,6 +10,8 @@ POSTDEPLOY
 3.94 (unreleased)
 -----------------
 
+- ARBEIT-16: Implement article header for column articles
+
 - ZON-3992: Dont show packshotlink when volume isn't published
 
 
