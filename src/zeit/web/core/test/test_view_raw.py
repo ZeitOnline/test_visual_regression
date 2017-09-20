@@ -98,4 +98,4 @@ def test_adds_cache_headers_to_raw_files(testserver):
     r = requests.get(
         '%s/text/dummy' % testserver.url,
         headers={'Host': 'www.zeit.de'})
-    assert r.headers['Cache-control'] == 'max-age=5'
+    assert r.headers['Cache-control'] == 'max-age=3600'
