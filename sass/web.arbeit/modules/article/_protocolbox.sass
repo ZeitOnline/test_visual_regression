@@ -37,6 +37,9 @@
 			margin: remify(20px) auto
 			width: remify(1px)
 
+	&__text-switch
+		display: none
+
 +respond-min($break-tablet-min)
 	.protocolbox
 		margin-bottom: remify(60px)
@@ -72,3 +75,23 @@
 		.protocolbox
 			&__media--tablet-desktop
 				min-height: remify(450px)
+
+// toggle-button on mobile
++respond-max($break-tablet-min)
+	.js .protocolbox
+		&__text-switch
+			border-bottom: 1px $zar-battleship-grey solid
+			color: $zar-cool-grey
+			display: inline
+			letter-spacing: $letter-spacing-s
+			&[role="button"]
+				cursor: pointer
+			&[aria-expanded="true"]
+				display: none
+			&:before
+				content: '+'
+		&__text-content
+			display: none
+			&[aria-hidden="false"]
+				display: block
+

@@ -84,7 +84,14 @@
 				<div class="protocolbox__container">
 					<h3 class="protocolbox__title">Der Ingenieur</h3>
 					<h4 class="protocolbox__subtitle">Hier die optimale Subheadline</h4>
-					<p class="protocolbox__text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.</p>
+					<p class="protocolbox__text js-toggle-region">
+						<span class="protocolbox__text-switch" id="protocolbox-toggle-switch" aria-controls="protocolbox-toggle-container" data-constrained="mobile,phablet">
+							Mehr anzeigen
+						</span>
+						<span class="protocolbox__text-content" id="protocolbox-toggle-container">
+							Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.
+						</span>
+					</p>
 				</div>
 			</div>
 
