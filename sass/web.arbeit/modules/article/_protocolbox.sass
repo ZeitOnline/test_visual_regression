@@ -2,6 +2,8 @@
 	+unpadded
 	margin-top: remify(40px)
 	background-color: $primary-color
+	+respond-min($break-tablet-min)
+		margin-bottom: remify(60px)
 
 	&__container
 		+font-smoothing
@@ -16,7 +18,7 @@
 
 	&__subtitle
 		font-family: $font-franziska
-		color: #99999c
+		color: $zar-cool-grey
 		font-size: remify(18px)
 		line-height: 1.22
 
@@ -26,3 +28,12 @@
 		font-size: remify(15px)
 		line-height: 1.47
 		margin: 0
+		&:before
+			content: ''
+			background-color: $zar-cool-grey
+			display: block
+			height: remify(30px)
+			margin: remify(20px) auto
+			width: remify(1px)
+			+respond-min($break-tablet-min)
+				height: remify(60px)
