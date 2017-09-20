@@ -264,3 +264,47 @@ def test_zar_article_should_hide_empty_jobboxticker(testbrowser, monkeypatch):
     browser = testbrowser('/arbeit/article/jobbox-ticker')
     assert browser.cssselect('.jobbox-ticker__heading')
     assert not browser.cssselect('.jobbox-ticker-item__container')
+
+
+def test_zar_column_article_has_correct_structure(testbrowser):
+    browser = testbrowser('/arbeit/article/column')
+    select = browser.cssselect
+    assert len(select('.article-header-column')) == 1
+    assert len(select('.article-header-column__box')) == 1
+    assert len(select('.article-header-column__heading')) == 1
+    assert len(select('.article-header-column__kicker')) == 1
+    assert len(select('.article-header-column__title')) == 1
+
+    assert len(select('.article-header-column__media')) == 1
+    assert len(select(
+        '.article-header-column__media figcaption.figcaption--hidden')) == 1
+
+    assert len(select('.summary')) == 1
+    assert len(select('.metadata')) == 1
+
+    # We set our own byline on unusual position, and suppress the default one
+    assert len(select('.article-header-column__byline')) == 1
+    assert len(select('.byline')) == 0
+
+
+def test_zar_column_article_has_correct_structure_on_page2(testbrowser):
+    browser = testbrowser('/arbeit/article/column/seite-2')
+    select = browser.cssselect
+    assert len(select('.article-header-column')) == 1
+    assert len(select('.article-header-column__box')) == 1
+    assert len(select('.article-header-column__heading')) == 1
+    assert len(select('.article-header-column__kicker')) == 1
+    assert len(select('.article-header-column__title')) == 1
+
+    assert len(select('.article-header-column__media')) == 1
+    assert len(select(
+        '.article-header-column__media figcaption.figcaption--hidden')) == 1
+
+    assert len(select('.summary')) == 0
+    assert len(select('.metadata')) == 0
+
+    assert len(select('.article__page-teaser')) == 1
+
+    # We set our own byline on unusual position, and suppress the default one
+    assert len(select('.article-header-column__byline')) == 1
+    assert len(select('.byline')) == 0
