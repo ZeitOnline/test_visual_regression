@@ -64,11 +64,10 @@ class RawContent(zeit.web.core.view.Base):
         if not file_type:
             raise pyramid.httpexceptions.HTTPNotFound()
 
-        response = Response(
-            app_iter=FileIter(resource.data),
-            content_type=file_type)
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        return response
+        self.request.response.app_iter = FileIter(resource.data)
+        self.request.response.content_type = file_type
+        self.request.response.headers.add('Access-Control-Allow-Origin', '*')
+        return self.request.response
 
 
 @zeit.web.view_config(

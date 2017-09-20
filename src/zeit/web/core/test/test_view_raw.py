@@ -92,3 +92,10 @@ def test_renders_raw_files_with_their_contenttype(testserver):
     assert r.headers['content-type'] == 'text/css; charset=UTF-8'
     assert r.headers['Access-Control-Allow-Origin'] == '*'
     assert 'koennseMalEbenWrapper' in r.content
+
+
+def test_adds_cache_headers_to_raw_files(testserver):
+    r = requests.get(
+        '%s/text/dummy' % testserver.url,
+        headers={'Host': 'www.zeit.de'})
+    assert r.headers['Cache-control'] == 'max-age=5'
