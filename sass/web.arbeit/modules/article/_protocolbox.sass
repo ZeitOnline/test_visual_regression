@@ -2,8 +2,6 @@
 	+unpadded
 	margin-top: remify(40px)
 	background-color: $primary-color
-	+respond-min($break-tablet-min)
-		margin-bottom: remify(60px)
 
 	&__container
 		+font-smoothing
@@ -35,5 +33,9 @@
 			height: remify(30px)
 			margin: remify(20px) auto
 			width: remify(1px)
-			+respond-min($break-tablet-min)
-				height: remify(60px)
+
++respond-min($break-tablet-min)
+	.protocolbox
+		margin-bottom: remify(60px)
+		&__text:before
+			height: remify(60px)
