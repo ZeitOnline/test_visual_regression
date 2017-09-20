@@ -1,6 +1,9 @@
 <aside class="authorbox article__item article__item--marginalia" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <div class="authorbox__container">
-        {%- include "zeit.web.core:templates/inc/asset/image_authorbox.tpl" -%}
+        {%- include [
+            "{}:templates/inc/asset/image_authorbox.tpl".format(view.package),
+            "zeit.web.core:templates/inc/asset/image_authorbox.tpl"]
+        -%}
         <div class="authorbox__text">
             <strong class="authorbox__name" itemprop="name">{{ block.author.display_name }}</strong>
             <em class="authorbox__summary" itemprop="description">{{ block.text | default(block.author.summary, True) }}</em>
@@ -8,7 +11,7 @@
     </div>
 
     {% if block.author.uniqueId -%}
-        <a href="{{ block.author.uniqueId | create_url }}" itemprop="url" class="authorbox__button button">zur Autorenseite</a>
+        <a href="{{ block.author.uniqueId | create_url }}" itemprop="url" class="{% block authorbox_button_class %}authorbox__button button{% endblock %}">zur Autorenseite</a>
     {%- endif %}
 
 </aside>
