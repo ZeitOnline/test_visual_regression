@@ -149,6 +149,7 @@ def get_user_info_from_sso_cookie(cookie, key):
 def _retry_request(request, tries):
     if not tries:
         return
+    response = None
     try:
         with zeit.web.core.metrics.timer(
                 'community_user_info.community.reponse_time'):
@@ -159,6 +160,10 @@ def _retry_request(request, tries):
             return response
     except Exception:
         return _retry_request(request, tries - 1)
+    finally:
+        status = response.status_code if response else 599
+        zeit.web.core.metrics.increment(
+            'community_user_info.community.status.%s' % status)
 
 
 def get_login_state(request):

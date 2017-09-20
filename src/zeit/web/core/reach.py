@@ -28,11 +28,16 @@ class Reach(object):
         url = u'{}/{}'.format(
             conf.get('linkreach_host'), location.encode('utf-8'))
         timeout = conf.get('reach_timeout', 0.2)
+        response = None
         try:
             with zeit.web.core.metrics.timer('http.reponse_time'):
-                return self.session.get(url, params=kw, timeout=timeout).json()
+                response = self.session.get(url, params=kw, timeout=timeout)
+                return response.json()
         except (requests.exceptions.RequestException, ValueError), err:
             log.debug('Reach connection failed: {}'.format(err))
+        finally:
+            status = response.status_code if response else 599
+            zeit.web.core.metrics.increment('http.status.%s' % status)
 
     def _get_ranking(self, location, facet=None, **kw):
         location = '.'.join(filter(bool, (location, facet)))

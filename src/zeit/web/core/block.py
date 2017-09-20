@@ -256,12 +256,17 @@ class Liveblog(Block):
 
     def get_restful(self, url):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        response = None
         try:
             with zeit.web.core.metrics.timer('liveblog.reponse_time'):
-                return requests.get(
-                    url, timeout=conf.get('liveblog_timeout', 1)).json()
+                response = requests.get(
+                    url, timeout=conf.get('liveblog_timeout', 1))
+                return response.json()
         except (requests.exceptions.RequestException, ValueError):
             pass
+        finally:
+            status = response.status_code if response else 599
+            zeit.web.core.metrics.increment('liveblog.status.%s' % status)
 
     @LONG_TERM_CACHE.cache_on_arguments()
     def get_amp_themed_id(self, blog_id):
