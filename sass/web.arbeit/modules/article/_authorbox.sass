@@ -1,0 +1,38 @@
+$authorbox-image-gutter: 40px
+.authorbox
+	background-color: $zar-sun-yellow
+	clear: both // prevent staircase effect with other marginalia
+	color: $color-text
+	margin-left: remify($authorbox-image-gutter)
+	padding: remify(24px 20px 33px $authorbox-image-gutter+5px)
+	position: relative
+	+respond-max($break-tablet-min)
+		width: auto
+
+	&__media
+		position: absolute
+		width: remify(2*$authorbox-image-gutter)
+		left: remify(-$authorbox-image-gutter)
+		bottom: 0
+		// fight `@tablet+ .article__item--marginalia img` in article.sass
+		img
+			width: 100%
+
+	&__name
+		display: block
+		font-family: $font-patronbold
+		font-size: remify(18px)
+		line-height: 1.4
+		margin-bottom: remify(4px)
+
+	&__summary
+		font-family: $font-tabletgothic
+		font-size: remify(15px)
+		font-style: normal
+		line-height: 1.4
+
+	&__button
+		color: $color-text
+		border-bottom: 1px currentColor solid
+		+on-interaction
+			color: $zar-faded-red
