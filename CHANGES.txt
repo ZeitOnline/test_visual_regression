@@ -10,6 +10,8 @@ POSTDEPLOY
 3.94 (unreleased)
 -----------------
 
+- FIX: Fix topics navigation in ZAR for long topics
+
 - ARBEIT-16: Implement article header for column articles
 
 - ARBEIT-87: Style authorbox for ZEIT Arbeit
