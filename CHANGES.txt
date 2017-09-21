@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ARBEIT-16: Implement article header for column articles
 
+- ARBEIT-87: Style authorbox for ZEIT Arbeit
+
 - ZON-3992: Dont show packshotlink when volume isn't published
 
 
