@@ -8,6 +8,8 @@ $authorbox-image-gutter: 40px
 	position: relative
 	+respond-max($break-tablet-min)
 		width: auto
+	+respond-min($break-tablet-min)
+		margin-top: remify(10px)
 
 	&__media
 		position: absolute
@@ -23,7 +25,6 @@ $authorbox-image-gutter: 40px
 		font-family: $font-patronbold
 		font-size: remify(18px)
 		line-height: 1.4
-		margin-bottom: remify(4px)
 
 	&__summary
 		font-family: $font-tabletgothic
@@ -34,5 +35,6 @@ $authorbox-image-gutter: 40px
 	&__button
 		color: $color-text
 		border-bottom: 1px currentColor solid
+		font-size: remify(15px)
 		+on-interaction
 			color: $zar-faded-red

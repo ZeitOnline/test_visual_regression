@@ -7,10 +7,10 @@ POSTDEPLOY
 - Nothing
 
 
-3.95 (unreleased)
+3.94.1 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Polish autor box on ZAR
 
 
 3.94 (2017-09-21)
