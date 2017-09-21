@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - ZON-3992: Dont show packshotlink when volume isn't published
 
+- ZON-4217: Cleanup facebook metatags
+
 
 3.93 (2017-09-19)
 -----------------
