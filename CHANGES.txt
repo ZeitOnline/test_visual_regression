@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.94 (unreleased)
+3.94 (2017-09-21)
 -----------------
 
 - FIX: Fix topics navigation in ZAR for long topics
