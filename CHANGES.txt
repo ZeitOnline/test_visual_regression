@@ -10,7 +10,7 @@ POSTDEPLOY
 3.95 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Remove hiding of empty adplaces
 
 
 3.94.1 (2017-09-21)
