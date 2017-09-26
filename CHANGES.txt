@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - FIX: Fix badge styling for ZAR columns on ZON parquet
 
+- FIX: Make advertorial styles work in ZMO for paginated articles
+
 
 3.94.1 (2017-09-21)
 -------------------
