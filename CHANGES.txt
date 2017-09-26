@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - FIX: Remove hiding of empty adplaces
 
+- FIX: Default value in FB metatags
+
 
 3.94.1 (2017-09-21)
 -------------------
