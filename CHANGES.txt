@@ -10,6 +10,8 @@ POSTDEPLOY
 3.95 (unreleased)
 -----------------
 
+- ARBEIT-17: Implement centered article header for Zeit ARBEIT
+
 - FIX: Remove hiding of empty adplaces
 
 - FIX: Default value in FB metatags

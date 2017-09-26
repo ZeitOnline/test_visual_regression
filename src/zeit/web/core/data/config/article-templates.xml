@@ -31,6 +31,9 @@
     <header name="default">
       <title>Standard</title>
     </header>
+    <header name="centered">
+      <title>Standard, aber mit zentriertem Text</title>
+    </header>
     <header name="dark">
       <title>Weiße Schrift auf schwarzem Hintergrund</title>
     </header>
