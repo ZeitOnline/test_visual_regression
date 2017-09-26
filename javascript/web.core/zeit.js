@@ -55,5 +55,6 @@ for ( key in extension ) {
 
 Zeit.debounce = require( 'web.core/debounce' );
 Zeit.throttle = require( 'web.core/throttle' );
+Zeit.appUserIsBack = require( 'web.core/appUserIsBack' );
 
 module.exports = Zeit;
