@@ -1,26 +1,14 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 {% set image = get_image(block, variant_id='wide', fallback=False) -%}
-{% set module_layout = 'profilebox' %}
+
 
 <div class="profilebox">
     <div class="profilebox__media--tablet-desktop"
          style="background-image:url({{ request.image_host + image.path }}"></div>
-    <!--Do your magic here mighty Puppe -->
-    <figure class="profilebox__media scaled-image variant variant--wide">
-        <div class="profilebox__media-container ">
-            <img class="profilebox__media-item"
-                 alt="Countdown: Countdown zum Studium"
-                 src="http://localhost:9090/campus/image/01-junge-vor-unscharfem-hintergrund/wide__820x461"
-                 data-src="http://localhost:9090/campus/image/01-junge-vor-unscharfem-hintergrund/wide"
-                 data-ratio="1.77777777778"/>
-        </div>
-        <figcaption class="figure__caption figcaption--hidden">
-            <span class="figure__text" itemprop="caption">Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.</span>
-            <span class="figure__copyright" itemprop="copyrightHolder"><a
-                    itemprop="url" href="http://www.photocase.de/fotos/207896"
-                    target="_blank"><span itemprop="name">© &lt;&lt;bananarama&gt;&gt;/photocase.de</span></a></span>
-        </figcaption>
-    </figure>
+
+    {% set module_layout = 'profilebox' %}
+    {% set media_caption_additional_class = 'figcaption--hidden' %}
+    {% include 'zeit.web.core:templates/inc/asset/image.tpl' %}
 
     <div class="profilebox__container">
         <h3 class="profilebox__title">{{ block.supertitle }} </h3>
