@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.95 (unreleased)
+3.95 (2017-09-27)
 -----------------
 
 - ARBEIT-17: Implement centered article header for Zeit ARBEIT
