@@ -1,9 +1,11 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
+{% set image = get_image(block, variant_id='wide', fallback=False) -%}
+{% set module_layout = 'profilebox' %}
 
 <div class="profilebox">
     <div class="profilebox__media--tablet-desktop"
-         style="background-image:url(http://localhost:9090/campus/image/01-junge-vor-unscharfem-hintergrund/wide)"></div>
-
+         style="background-image:url({{ request.image_host + image.path }}"></div>
+    <!--Do your magic here mighty Puppe -->
     <figure class="profilebox__media scaled-image variant variant--wide">
         <div class="profilebox__media-container ">
             <img class="profilebox__media-item"
