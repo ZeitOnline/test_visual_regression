@@ -1,0 +1,152 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <author href="http://xml.zeit.de/autoren/J/Heike_Jahberg/index" publication-date="" expires="">
+    </author>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-01T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-01T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-01T15:12:09.866518+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-01T15:13:09.811283+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2015-06-01T15:12:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.newspublish</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn:newsml:afp.com:20150601:doc-2n64x</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1159bddc254242769fbbe1fa1c0e380d</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Arbeit</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:85c42592-3840-41c6-b039-83cc16de66d6}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">1900</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZARContent" module="zeit.arbeit.interfaces"/&gt;
+        &lt;global name="IZARArticle" module="zeit.arbeit.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Viertagewoche</supertitle>
+    <title>Für immer langes Wochenende</title>
+    <subtitle>Die Hälfte aller Millenials will die Viertagewoche. Aber sind sie bereit, dafür auf Wochenendtrips und Restaurants zu verzichten? Unsere Autorin machte den Selbstversuch.</subtitle>
+    <division type="page">
+      <p>Es war nicht Felix mit dem Firmenwagen. Nicht Cloe, die von ihrem Arbeitgeber um die Welt geschickt wird. Und auch nicht Alex, der das Doppelte von uns allen verdient und das Dreifache schuftet. Sondern Tim. Ich beneidete ihn um seine <a class="" href="http://www.zeit.de/karriere/beruf/2016-09/vier-tage-woche-test-unternehmen-bericht-flexibilitaet" target="_blank">Viertagewoche</a>. Darum, dass Tim einen Roman pro Woche liest und, sobald das Wetter über 15 Grad klettert, dreitägige Campingtrips macht.</p>
+      <p>Auch meine Freunde sind viel neidischer auf die Viertagewoche als auf ein riesiges Einzelbüro oder eine Bahncard100 vom Unternehmen. Die Mehrheit der Deutschen ist zwar für eine Fünftagewoche, wie <u><a href="https://yougov.de/news/2015/10/17/mehrheit-funf-tage-woche-ist-ideal/" target="_blank">YouGov</a> herausfand</u>. Aber fast die Hälfte der befragten 25- bis 34-Jährigen hätte gern ein Wochenende, das drei Tage lang dauert und nicht bloß zwei. Amazon und Google &#8211; letzteres angeblich der <a href="http://www.businessinsider.com/millennials-want-to-work-at-google-2015-5?IR=T" target="_blank">Traumarbeitgeber von einem Fünftel der Millenials</a> &#8211; experimentieren bereits mit der Viertagewoche. Ein Extratag für Sachen, die durch Broterwerb immer, immer, immer zu kurz kommen: Freunde, Arzttermine, endlich mal <em>Auf der Suche nach der verlorenen Zeit</em> lesen und den Kühlschrank abtauen &#8211; für mich klang das wie ein Traum.<br/></p>
+      <p>Nachdem ich als Freelancerin angefangen hatte, musste ich für diesen Traum nichts weiter machen. Um genau zu sein, musste ich sogar weniger tun: einfach von Montag bis Donnerstag arbeiten statt bis Freitag. So zumindest die Theorie. Jeder, der sich nach einer Festanstellung selbstständig macht, weiß, dass man in den ersten Monaten und Jahren eher sechs bis sieben Tage die Woche schuftet als vier. Man muss sich etablieren. Geld beiseitelegen für Krankheitsfälle und Zeiten ohne Aufträge. Die Zukunft, in der ich irgendwann so viel verdienen würde, dass ich mich gelegentlich zurücklehnen könnte, schien unerreichbar wie die Rente. Die, wie ich befürchte, für mich so mit 85 kommt und von der ich mir wahrscheinlich eine Packung Taschentücher kaufen können werde.</p>
+
+      <citation text="Wenn eine Viertagewoche, dann jetzt." layout="zar-yellow" attribution="Wlada Kolosowa mit einer langen Quellenangabe die sich locker mal über zwei Zeilen erstreckt" url="http://www.zeit.de/arbeit/2017-09/viertagewoche-arbeitszeiten-freizeit-einkommen-verzicht"/>
+
+      <p>Ich dachte also: Wenn eine Viertagewoche, dann jetzt. Ich hatte keine Kinder zum Durchfüttern und Fahrrad statt Auto. Ich war in der Luxussituation: Auch mit weniger Arbeit verdiente ich genug Geld zum Überleben. Zumindest sofern ich bereit war, seltener bis gar nicht auswärts Kaffee zu trinken, mit Freunden zu kochen, statt mich in Restaurants zu verabreden, keine neuen Klamotten zu kaufen und nicht mehr so weit wegzufahren.</p>
+
+      <citation text="&quot;Nach allen Abzügen hatte ich zwar nur ein paar Hundert Euro mehr als zu Studentenzeiten. Aber wenn ich an einem Montagmittag am Spreeufer saß, war ich da, wo ich mich nach Jahren erfolgreicher Karriere vorgestellt hatte.&quot; " layout="zar-yellow"/>
+
+      <p>In Deutschland arbeitet etwa jeder Vierte in Teilzeit, die meisten davon sind Frauen. Aber mit meiner Viertagewoche hat dieses Modell wenig zu tun:<a href="http://dipbt.bundestag.de/dip21/btd/18/042/1804266.pdf" target="_blank"> Die typische Teilzeitlerin</a> arbeitet knapp 20 Stunden &#8211; entweder weil sie keine ganze Stelle findet, oder weil sie sich um ihre Kinder kümmert oder ihre Eltern pflegt. Ich hingegen wollte die arbeitsfreie Zeit nicht für andere nutzen, sondern für mich.</p>
+
+      <p>Mit vier Tagen Arbeit hatte ich nach allen Abzügen zwar nur ein paar Hundert Euro mehr als zu Studentenzeiten. Aber wenn ich an einem Montagmittag am Spreeufer saß und in die Sonne blinzelte, war ich schon da, wo ich mich erst nach Jahren einigermaßen erfolgreicher beruflicher Laufbahn vorgestellt hatte. Oder nach Burn-out und beruflicher Neuorientierung als Meditationstrainerin. Und ich war etwas näher an der Vision des Ökonomen Keynes: 1930 sagte er voraus, dass unsere Einkommen in 100 Jahren um ein Vierfaches steigen würden. Alle unsere Bedürfnisse würden dann gedeckt sein, und niemand würde länger arbeiten müssen als 15 Stunden die Woche.</p>
+    </division>
+    <division type="page" teaser="Shoppen als Betäubung">
+      <p>Die
+Einkommen entsprechen heute schon Keynes' Vorhersage. Aber bei den Arbeitszeiten
+lag er ziemlich daneben. Erwerbstätige kamen in Deutschland 2015 auf<a href="https://www.destatis.de/DE/PresseService/Presse/Pressemitteilungen/2017/01/PD17_024_133pdf.pdf?__blob=publicationFile" target="_blank"> durchschnittlich 35,6 Arbeitsstunden pro Woche</a> laut dem Statistischem
+Bundesamt (Destatis) &#8211; wenn man Teil- und Vollzeitstellen mitberechnet und alle
+bezahlten Nebentätigkeiten. Dabei arbeiten die Deutschen im Vergleich zu
+anderen Industrienationen <a href="http://www.zeit.de/karriere/2014-05/arbeitszeit-oecd-infografik" target="_blank">schon ziemlich
+wenig</a>. Aber anders als Keynes sich das vorgestellt hatte, sind die Wünsche der
+Menschen mit ihren Einkommen gewachsen.</p>
+      <p>Nicht,
+dass die Viertagewoche mich davon geheilt hätte, schöne Boots im Schaufenster
+anzusabbern. Ich wollte sie jetzt! Sofort! Sie würden mein Leben so viel besser
+machen! Aber weil ich jetzt bis zum Ende des Monats warten musste, bis ich mir neue
+Schuhe kaufen konnte, stellte ich spätestens nach einer Woche fest, dass die
+alten es auch taten. Und meinen freien Extratag dafür zu opfern, Geld für
+Extraschuhe zu verdienen &#8211; dazu war ich nicht bereit.</p>
+      <p>Mir fiel auf, wie viel Geld ich früher ausgegeben habe, um Zeit zu
+sparen. Lieferservice. Taxifahrten. Teure Flüge, um sich keinen Urlaubstag zu
+verschwenden. Und was habe ich mit dieser gesparten Zeit gemacht? Ich habe mehr
+gearbeitet, um mir all diese Dinge kaufen zu können.</p>
+      <p>Seit
+ich mehr Zeit als Geld hatte, lief ich auch weniger Gefahr, mit Shoppen das Gefühl
+der Überarbeitung zu betäuben. Das hatte sowieso so gut wie nie geklappt.
+Meistens sah es so aus: Nach zu vielen
+Stunden vor dem Computer im Büro saß ich zu Hause wieder vor dem Laptop und
+suchte mit brummendem Kopf eine schöne Lampe im Onlineshop. Die hatte ich mir
+ja jetzt verdient! Als die Lampe drei Tage später geliefert wurde &#8211; natürlich
+während ich im Büro war &#8211;, ärgerte ich mich, sie bei einer Postfiliale drei
+Kilometer weiter abholen zu müssen. Oft war die Lampe nicht mal schön, ich
+behielt sie dann aber doch, weil ich ja keine Zeit hatte, sie zur Post zurückzubringen.</p>
+      <citation text="&quot;Mir fiel auf, wie viel Geld ich früher ausgegeben habe, um Zeit zu sparen. Lieferservice. Taxifahrten. Teure Flüge. Und was habe ich mit dieser Zeit gemacht? Ich habe mehr gearbeitet, um mir all diese Dinge kaufen zu können.&quot;"/>
+      <p>Klar
+&#8211; selber kochen und Zelte beim Campen aufbauen ist auch Arbeit. Genauso
+wie es Arbeit ist, mit weniger Geld zu jonglieren. Plötzlich musste ich an der
+Supermarktkasse nachrechnen, ob das Geld auf dem Konto noch für den Einkauf
+reicht (als Freelancer durfte ich es bei meiner Bank nicht mehr überziehen).
+Und ja, es brauchte Überwindung, zu Freunden zu sagen: Dieser Wochenendtrip ist
+finanziell jetzt nicht drin. Aber warum eigentlich? Warum ist es in unserer
+Gesellschaft peinlicher, wenig Geld als wenig Zeit zu haben? Dabei beschwerten
+sich ständig alle um mich herum darüber, dass sie nicht genug schliefen und
+seit drei Wochen nicht dazu kämen, die Oma anzurufen.</p>
+    </division>
+    <division type="page" teaser="Eine Million Deutsche will weniger arbeiten">
+      <p>Ich
+weiß: Längst nicht alle können es sich leisten, weniger zu arbeiten. Und viele,
+bei denen es finanziell kein Problem wäre, haben nicht die Möglichkeit dazu
+&#8211; weil Jobs wie Schulleiterin oder Manager eben schwerer zu teilen sind. Aber
+ist es wirklich unmöglich? Oder sind nur die Arbeitgeber zu unflexibel? <br/></p>
+      <p>Zwar
+gibt es Plattformen für Jobsharing, und auf der Seiten wie<a href="http://www.feelgood-at-work.de/" target="_blank"> feelgood-at-work</a> kann man gezielt nach
+Arbeitsplätzen suchen, wo man nur vier Tage pro Woche arbeitet. Momentan sind Unternehmen,
+die Viertagestellen anbieten, eher die Ausnahme als die Regel.</p>
+      <p>Das
+ist schade, wenn man bedenkt, dass in Deutschland eine Million Menschen gern <a href="http://www.zeit.de/wirtschaft/2016-09/arbeitskraeftepotenzial-deutschland-ungenutzt-arbeit-wille" target="_blank">die
+Arbeitszeit reduzieren würde.</a> Ihnen stehen
+übrigens 2,7 Millionen Unterbeschäftigte gegenüber, die gerne mehr arbeiten würden.
+Natürlich heißt das nicht, dass das zu große Arbeitspensum der einen durch die
+anderen erledigt werden kann. Aber es lohnt sich trotzdem darüber nachzudenken,
+ob die Arbeit in Deutschland nicht besser verteilt werden könnte.</p>
+      <p>Die
+Viertagewoche wäre sicher nicht die Antwort für alle. Für mich war sie es schon. Seit
+ich einen freien Tag mehr hatte, war das Wochenende nicht mehr nur dazu da,
+Haushaltsdinge zu erledigen und die Akkus für die Arbeit aufzuladen. Die Zeit reichte,
+um Kurzgeschichten zu schreiben, Portugiesisch zu üben und beim Geschirrspülen
+vor sich hin zu träumen &#8211; statt sich eine Spülmaschine zu kaufen.</p>
+    </division>
+  </body>
+</article>

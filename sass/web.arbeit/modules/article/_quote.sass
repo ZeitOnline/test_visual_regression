@@ -38,3 +38,17 @@
 		color: currentColor
 		+on-interaction
 			color: $zar-marigold
+
+.quote--share
+	background-color: $zar-sun-yellow
+	width: 100%
+	padding: remify($page-padding--small)
+	+respond-min($break-tablet-min)
+		padding: remify($page-padding)
+
+	.quote
+		&__link
+		line-height: 1.4
+		+on-interaction
+			border-bottom: 1px currentColor solid
+			color: currentColor
