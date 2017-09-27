@@ -23,17 +23,17 @@
     <div class="profilebox__container">
         <h3 class="profilebox__title">{{ block.supertitle }} </h3>
         <h4 class="profilebox__subtitle">{{ block.title }}</h4>
-        <p class="profilebox__text js-toggle-region">
+        <div class="profilebox__text js-toggle-region">
 						<span class="profilebox__text-switch"
                               id="profilebox-toggle-switch"
                               aria-controls="profilebox-toggle-container"
                               data-constrained="mobile,phablet">
 							Mehr anzeigen
                         </span>
-            <span class="profilebox__text-content"
+            <div class="profilebox__text-content"
                   id="profilebox-toggle-container">
                     {{ block.text | safe }}
-            </span>
-        </p>
+            </div>
+        </div>
     </div>
 </div>
