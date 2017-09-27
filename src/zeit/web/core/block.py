@@ -111,6 +111,25 @@ class Portraitbox(Block):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IBox)
+class Box(Block):
+
+    def __init__(self, model_block):
+        if getattr(model_block, 'teaserSupertitle', None):
+            self.supertitle = model_block.teaserSupertitle
+        if getattr(model_block, 'teaserTitle', None):
+            self.title = model_block.teaserTitle
+        # This is markdown text, which is errorprone
+        # ThomasS mad an interessting remark aboud problems with emails
+        # Seems like email-adresses destroy our markup solution
+        if getattr(model_block, 'teaserText', None):
+            self.text = model_block.teaserText
+        if getattr(model_block, 'layout', None):
+            self.layout = model_block.layout
+        # Ah good old Images
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IVolume)
 class Volume(Block):
 

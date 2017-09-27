@@ -1,4 +1,4 @@
-.protocolbox
+.profilebox
 	+unpadded
 	margin-top: remify(40px)
 	background-color: $primary-color
@@ -41,7 +41,7 @@
 		display: none
 
 +respond-min($break-tablet-min)
-	.protocolbox
+	.profilebox
 		margin-bottom: remify(60px)
 		&__text:before
 			height: remify(60px)
@@ -53,7 +53,7 @@
 // regardless the text length.
 @supports (display: flex)
 	+respond-min($break-tablet-min)
-		.protocolbox
+		.profilebox
 			display: flex
 			&__media
 				display: none
@@ -72,13 +72,13 @@
 				width: 40%
 
 	+respond-min($break-desktop-min)
-		.protocolbox
+		.profilebox
 			&__media--tablet-desktop
 				min-height: remify(450px)
 
 // toggle-button on mobile
 +respond-max($break-tablet-min)
-	.js .protocolbox
+	.js .profilebox
 		&__text-switch
 			border-bottom: 1px $zar-battleship-grey solid
 			color: $zar-cool-grey
