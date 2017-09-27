@@ -3,6 +3,9 @@
 	margin-top: remify(40px)
 	background-color: $primary-color
 
+	&__media
+		+reserve-space-for-teaser-media(100% / 16 * 9)
+
 	&__media--tablet-desktop
 		display: none
 
@@ -39,6 +42,18 @@
 
 	&__text-switch
 		display: none
+
+	// content is a markup field in Vivi. We need to handle that.
+	&__text-content
+		> p:first-child
+			margin-top: 0
+		> p:last-child
+			margin-bottom: 0
+		a
+			color: currentColor
+			border-bottom: 1px $zar-cool-grey solid
+			+on-interaction
+				color: $zar-cool-grey
 
 +respond-min($break-tablet-min)
 	.profilebox
