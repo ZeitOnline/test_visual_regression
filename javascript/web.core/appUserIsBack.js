@@ -96,12 +96,12 @@ function appUserIsBack( timestamp, options ) {
 
     AppUserIsBack.prototype.showUpdateWindow = function() {
         this.log( 'show update window' );
-        var button = '<div class="user-is-back__button">' + this.options.buttontext + '</div>',
-            text = '<div class="user-is-back__text">' + this.options.text + '</div>',
-            container = document.createElement( 'div' );
-        container.className = 'user-is-back';
-        container.innerHTML = text + button;
-        document.body.appendChild( container );
+        var template = require( 'web.core/templates/appUserIsBack.html' ),
+            html = template({
+                text: this.options.text,
+                buttontext: this.options.buttontext
+            });
+        document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', html );
     };
 
     AppUserIsBack.prototype.init = function() {

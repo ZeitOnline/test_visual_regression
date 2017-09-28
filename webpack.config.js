@@ -43,6 +43,7 @@ module.exports = {
             { test: /jquery.inview/, loader: 'imports-loader?define=>false' },
             { test: require.resolve('masonry-layout'), loader: 'imports-loader?define=>false' },
             { test: require.resolve('requirejs/require'), loader: 'exports-loader?requirejs,require,define' },
+            { test: /\.html$/, exclude: /node_modules/, loader: "mustache-loader" },
             { test: /\.js$/, exclude: /node_modules/, loader: "eslint-loader", options: { failOnError: true } },
             { test: /\.js$/, exclude: /node_modules/, loader: "jshint-loader", options: { emitErrors: true, failOnHint: true } }
         ]
