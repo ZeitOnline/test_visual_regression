@@ -4,23 +4,43 @@
  * @author  nico.bruenjes@zeit.de
  */
 
+/**
+ * check if a page is old in cache and show an unobstruvie info with reload button
+ * @param  {int} timestamp unix timestamp of the last cache
+ * @param  {object} options   override defaults by passing an object with new values
+ * @return void
+ */
 function appUserIsBack( timestamp, options ) {
     'use strict';
 
     options = options || {};
 
     function AppUserIsBack( timestamp, options ) {
-        this.defaults = {
+
+        /**
+         * default options
+         * @type {Object}
+         * @property {string} buttontext    text for the reload button 'Neu laden'
+         * @property {boolean} debug        activate debugging (normally url(?|#)debug-userisback)
+         * @property {int} delta            minimum time delta between cache and page semantic update time
+         * @property {string} endpoint      api endpoint for checking update time
+         * @property {boolean} force        activate debugging and forcing info message to show
+         *                                  even on new page (normally url(?|#)force-userisback)
+         * @property {string} link          link where the reload link is directed (in nojs mode)
+         * @property {string} slug          pathname of the file to test for update time
+         * @property {string} text          text of the info 'Die Seite wurde aktualisiert'
+         */
+        var defaults = {
             buttontext: 'Neu laden',
-            delta: 5 * 60 * 1000, // 5 minutes
             debug: window.location.href.indexOf( 'debug-userisback' ) !== -1,
+            delta: 5 * 60 * 1000, // 5 minutes
             endpoint: window.location.protocol + '//' + window.location.host + '/json/update-time',
-            link: window.location.href,
-            text: 'Die Seite wurde aktualisiert',
             force: window.location.href.indexOf( 'force-userisback' ) !== -1,
-            slug: window.location.pathname
+            link: window.location.href,
+            slug: window.location.pathname,
+            text: 'Die Seite wurde aktualisiert'
         };
-        this.options = this.mixit( options, this.defaults );
+        this.options = this.mixit( options,     defaults );
         this.init();
     }
 
@@ -81,6 +101,10 @@ function appUserIsBack( timestamp, options ) {
         });
     };
 
+    /**
+     * logging function - log to console only if debug or force mode aktivated
+     * @return void
+     */
     AppUserIsBack.prototype.log = function() {
         if ( this.options.debug || this.options.force ) {
             var args = [];
@@ -95,7 +119,11 @@ function appUserIsBack( timestamp, options ) {
         }
     };
 
-    AppUserIsBack.prototype.showUpdateWindow = function() {
+    /**
+     * show the update message at window bottom
+     * @return void
+     */
+    AppUserIsBack.prototype.showUpdateMessage = function() {
         this.log( 'show update window' );
         var template = require( 'web.core/templates/appUserIsBack.html' ),
             html = template({
@@ -123,7 +151,7 @@ function appUserIsBack( timestamp, options ) {
                 ( now - Date.parse( response.last_published_semantic ) ) >= that.options.delta )
             ) {
                 that.log( 'info', 'lps: ' + response.last_published_semantic, 'now: ' + now  );
-                that.showUpdateWindow();
+                that.showUpdateMessage();
             }
         }, function( error ) {
             that.log( 'error', error );
