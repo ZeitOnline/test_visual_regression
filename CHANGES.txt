@@ -10,7 +10,7 @@ POSTDEPLOY
 3.96 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4202: Remove entry_url from webtrekk
 
 
 3.95 (2017-09-27)
