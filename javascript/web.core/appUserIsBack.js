@@ -11,9 +11,11 @@ function appUserIsBack( timestamp, options ) {
 
     function AppUserIsBack( timestamp, options ) {
         this.defaults = {
+            buttontext: 'Neu laden',
             delta: 5 * 60 * 1000, // 5 minutes
             debug: window.location.href.indexOf( 'debug-userisback' ) !== -1,
             endpoint: window.location.protocol + '//' + window.location.host + '/json/update-time',
+            text: 'Die Seite wurde aktualisiert',
             force: window.location.href.indexOf( 'force-userisback' ) !== -1,
             slug: window.location.pathname
         };
@@ -112,7 +114,13 @@ function appUserIsBack( timestamp, options ) {
     };
 
     AppUserIsBack.prototype.showUpdateWindow = function() {
-        console.debug( 'show update window' );
+        this.log( 'show update window' );
+        var button = '<div class="user-is-back__button">' + this.options.buttontext + '</div>',
+            text = '<div class="user-is-back__text">' + this.options.text + '</div>',
+            container = document.createElement( 'div' );
+        container.className = 'user-is-back';
+        container.innerHTML = text + button;
+        document.body.appendChild( container );
     };
 
     AppUserIsBack.prototype.init = function() {

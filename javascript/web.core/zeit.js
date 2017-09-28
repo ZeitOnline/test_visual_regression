@@ -43,7 +43,8 @@ var Zeit = window.Zeit || {},
         },
         cookieRead: function( name ) {
             return ( document.cookie.match( '(?:^|;) ?' + name + '\\s*=\\s*([^;]*)' ) || 0 )[ 1 ];
-        }
+        },
+        isWrapped: navigator.userAgent.indexOf( 'ZONApp' ) > -1
     },
     key;
 
@@ -55,6 +56,9 @@ for ( key in extension ) {
 
 Zeit.debounce = require( 'web.core/debounce' );
 Zeit.throttle = require( 'web.core/throttle' );
+// speciak app functionality
+//if ( Zeit.isWrapped ) {
 Zeit.appUserIsBack = require( 'web.core/appUserIsBack' );
+//}
 
 module.exports = Zeit;
