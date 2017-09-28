@@ -772,7 +772,7 @@ def join_if_exists(iterable, string=''):
 @zeit.web.register_filter
 def webtrekk_sso_parameter(request):
     if request.user and request.user.get('ssoid'):
-        info = ['angemeldet', request.user.get('entry_url')]
+        info = 'angemeldet'
         return '|'.join([item for item in info if item])
     return 'nicht_angemeldet'
 
