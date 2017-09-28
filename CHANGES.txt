@@ -7,12 +7,24 @@ POSTDEPLOY
 - Nothing
 
 
-3.95 (unreleased)
+3.96 (unreleased)
 -----------------
+
+- Nothing changed yet.
+
+
+3.95 (2017-09-27)
+-----------------
+
+- ARBEIT-17: Implement centered article header for Zeit ARBEIT
 
 - FIX: Remove hiding of empty adplaces
 
 - FIX: Default value in FB metatags
+
+- FIX: Fix badge styling for ZAR columns on ZON parquet
+
+- FIX: Make advertorial styles work in ZMO for paginated articles
 
 
 3.94.1 (2017-09-21)

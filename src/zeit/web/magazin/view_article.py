@@ -58,6 +58,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
     renderer='templates/article.html')
 @zeit.web.view_config(
     name='seite',
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
+    path_info='.*seite-(.*)',
+    renderer='templates/advertorial.html')
+@zeit.web.view_config(
+    name='seite',
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     path_info='.*seite-(.*)',
     renderer='zeit.web.core:templates/paywall.html')

@@ -432,8 +432,8 @@ def test_zon_arbeit_teaser_small_has_arbeit_signet(testbrowser):
     svg = select('.teaser-small__kicker-logo--zar')
     teaser_in_minor = select('.teaser-small-minor')
     svg_in_minor = select('.teaser-small-minor__kicker-logo--zar')
-    assert len(teaser) == 3
-    assert len(svg) == 3
+    assert len(teaser) == 4
+    assert len(svg) == 4
     assert len(teaser_in_minor) == 2
     assert len(svg_in_minor) == 2
 
