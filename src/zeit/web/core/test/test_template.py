@@ -515,11 +515,10 @@ def test_webtrekk_should_get_full_login_info_for_logged_in_users(
     dummy_request.user = {
         'ssoid': '123',
         'name': 'my_name',
-        'email': 'my_email@example.com',
-        'entry_url': 'http://xml.zeit.de/entrypoint'}
+        'email': 'my_email@example.com'}
 
     assert zeit.web.core.template.webtrekk_sso_parameter(
-        dummy_request) == 'angemeldet|http://xml.zeit.de/entrypoint'
+        dummy_request) == 'angemeldet'
 
 
 def test_webtrekk_should_get_no_login_path_when_entrypoint_is_empty(
