@@ -87,6 +87,9 @@
   <!-- videoplayer_article_wo_ads production: NykzeyfYg  -->
   <setting name="brightcove_videoplayer_article_wo_ads" xsi:type="xsd:string">SJENxUNKe</setting>
 
+  <!-- Standard Facebook Page IDs  -->
+  <setting name="facebook_app_id_list" xsi:type="xsd:string">37816894428, 63948163305, 327602816926, 114803848589834</setting>
+
   <!-- podcast player -->
   <setting name="podcast_theme_cp" xsi:type="xsd:string">zon-standalone</setting>
   <setting name="podcast_theme_article_body" xsi:type="xsd:string">zon-standalone</setting>
