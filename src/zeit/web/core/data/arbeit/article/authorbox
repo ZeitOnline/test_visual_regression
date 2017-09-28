@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <attribute name="access" ns="http://namespaces.zeit.de/CMS/document">free</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_instant_article">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights">ZEIT Online</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2017-09-20T16:32:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2017-09-20T16:32:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2017-09-20T16:32:09.866518+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2017-09-20T16:33:09.811283+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="images_added">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2017-09-20T16:32:07+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">system.newspublish</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-id">urn:newsml:afp.com:20170920:doc-2n64x</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ZEDE</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">1159bddc254242769fbbe1fa1c0e380d</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="refined">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Arbeit</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:85c42592-3840-41c6-b039-83cc16de66d6}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2017</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZARContent" module="zeit.arbeit.interfaces"/&gt;
+        &lt;global name="IZARArticle" module="zeit.arbeit.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Dummy Content</supertitle>
+    <title>Artikel mit Autorenboxen</title>
+    <subtitle>Dieser Artikel hat mehrere Autorenboxen. Mit und ohne Bild, mit und ohne Transparenz, Referenzierte und lokale. You name it.</subtitle>
+    <division type="page">
+
+<p>In den Diskussionen über etwaige Schäden am Zentralnervensystem werden gewöhnlich als einziger Maßstab für die Gefährlichkeit des Boxens die Zwischenfälle im Ring mit schweren Gesundheitsschäden und Todesfolge gewertet. Immer wieder machen die Befürworter des Boxens geltend, hier sei die Unfallquote geringer als selbst beim Fußball, Handball oder in der Schwerathletik. Diese Anschauung läßt die folgenschwersten Schädigungsmöglichkeiten unberücksichtigt: Die Unfallquote erfaßt nämlich nur die vergleichsweise noch harmlosen Verletzungen, wie Prellungen, Blutergüsse, Verrenkungen, Knochenbrüche. Über Spät- und Dauerschäden am Zentralnervensystem gibt die Unfallquote keine Auskunft. Diese Schäden sind aber, das sei vorweggenommen, sehr bedeutend.</p>
+
+<portraitbox layout="short" href="http://xml.zeit.de/portraitboxen/patrick"/>
+
+<p>Was geschieht, wenn der Boxhieb den Schädel trifft? Die physikalischen Vorgänge und ihre medizinischen Auswirkungen wurden von dem Physiker und Mediziner K. Sellier (Bonn) und mir gemeinsam analysiert. Beim Stoß übt die Faust auf den Schädel eine Kraft aus: dadurch wird der Schädel beschleunigt, der Stoßkörper – die Faust – aber verzögert. Die Beschleunigung des Schädels hängt ab vom der Geschwindigkeit der Faust mit der dahinterliegenden Masse, von... Arm und Körper sowie von der Masse des getroffenen Schädels und von der Beschaffenheit der reagierenden Oberflächen, also Boxhandschuh, Kopf und eventuell Kopfschutz. Die Kraft deformiert die sich berührenden Oberflächen. Je härter die Oberflächen im Berührungspunkt, desto größer ist die Kraft und desto kürzer ist die Berührungszeit. Diese Faktoren bestimmen unter anderem also die Wirksamkeit des Boxschlags.</p>
+
+<author href="http://xml.zeit.de/autoren/Z/Zacharias_Zacharakis/index.xml">
+	<biography>Text im Feld Kurzbio</biography>
+</author>
+
+<p>Für den Stoßablauf und die Folgen des Schlages ist weiter von Bedeutung, ob es sich um einen zentralen oder um einen schiefen Stoß handelt. Beim zentralen Stoß, der einem „Geraden“ entspricht, zielt die Schlagrichtung etwa durch die Kopfmitte; es tritt dann eine Translationsbeschleunigung auf, das heißt, der Schädel wird in Richtung der Stoßachse bewegt. Beim schiefen Stoß, der dem Haken oder Schwinger entspricht, faßt die Stoßrichtung den Schädel tangential; es tritt dann zusätzlich eine Rotationsbeschleunigung auf.</p>
+
+<author href="http://xml.zeit.de/autoren/julia_zange">
+    <biography></biography>
+</author>
+
+<p>Trifft ein Gerader den Schädel, wird zunächst nur die Schädelhülle in Bewegung gesetzt, während das Gehirn wegen seiner Trägheit anfänglich zurückbleibt. Daraus folgt, daß an der Stoßstelle, der Auftreffstelle der Faust, Schädelknochen und Gehirnoberfläche zusammenrücken, so daß an dieser Stelle ein Überdruck auftritt. Dagegen rücken auf der Gegenseite der Schädelhülle an symmetrisch entsprechender Stelle Schädelknochen und Gehirnoberfläche etwas auseinander, so daß Unterdruck entsteht. Der Druckverlauf im Gehirn ist etwa linear, das heißt der Überdruck am Stoßpol nimmt gegen die Gehirnmitte hin ständig ab, erreicht dort Null und geht in negative Werte über, so daß an dem der Stoßstelle entsprechenden Punkt auf der Gegenseite Unterdruck gemessen wird.</p>
+
+<author href="http://xml.zeit.de/autoren/B/Jochen_Bittner/index.xml">
+    <biography/>
+</author>
+
+<p>Trifft den Kopf ein Haken oder Schwinger, so kommt es zwischen der knöchernen Schädelhülle und dem Gehirn zu einer Verdrehung. Das Gehirn bleibt auch in diesem Fall auf Grund seiner Trägheit zurück, ehe es selbst der Drehbewegung folgt. Dieser Mechanismus setzt kleine Venen, die zwischen der Schädelkapsel und den Hirnhäuten sowie dem Gehirn verlaufen, unter eine derartige Zugspannung, daß diese Brückenvenen reißen können. Das führt zu den häufigsten Zwischenfällen im Ring, zu den subduralen, also unter der harten Hirnhaut gelegenen Blutungen. Sie erfordern einen neurochirurgischen Eingriff, der durch Absaugen des geronnenen Blutes und sorgfältige Versorgung der blutenden Gefäße lebensrettend sein kann.</p>
+
+<author>
+	<biography>Text im Feld Kurzbio</biography>
+</author>
+
+<p>Beim Boxen treffen die Schläge den Schädel direkt von vorn oder etwas schräg von unten oder schräg von der Seite. Schläge in das Gesicht haben infolge der „Polsterwirkung“ der Gesichtsweichteile eine etwas geringere Beschleunigung als Schläge auf die Kinnspitze oder das Jochbein. In einem ähnlichen Sinn ist der Einfluß der Boxhandschuhe auf die Beschleunigung des Schädels zu verstehen. Der Handschuh ist um so weicher, je größer seine Unzenzahl. „8-Unzen-Handschuh“ bedeutet ein Gewicht von 228 Gramm, das je zur Hälfte auf Handschuhleder und Polsterung entfällt. Die Beziehung zwischen Beschleunigung und Unzenzahl haben wir am Modell gemessen. Mit einem 6-Unzen-Handschuh wurde der Kopf auf etwa 100 g beschleunigt, mit einem 12-Unzen-Handschuh noch auf etwa 50 g und mit einem 16-Unzen-Handschuh auf „nur“ noch 35 bis 40 g. (g = Beschleunigung, gemessen in Einheiten der Erdbeschleunigung; 9,81 m/sec² = 1 g.) Die mit dem 6-Unzen-Handschuh erzielte Beschleunigung liegt also um 2,7mal höher als jene bei Gebrauch des 16-Unzen-Handschuhs. Diese Werte gelten für einen vollkommen frei beweglichen Kopf. Er ist in Wirklichkeit durch die Wirbelsäule und den Tonus der Halsmuskulatur mit dem Rumpf verbunden, also beschränkt frei, so daß die tatsächlich entstehenden Beschleunigungen geringer sind.</p>
+
+<portraitbox layout="short" is_empty="True" name_local="Kai Biermann">
+	<text>Studierter Psychologe, längst aber Journalist</text>
+</portraitbox>
+
+<p>Die Messungen zeigten, daß die letzten Schläge aus einer Reihe von drei bis vier höhere Beschleunigungen erzeugten. Das bedeutet, daß eine frühzeitige Ermüdung des Materials eingetreten war. Dieser Effekt ist bei der Benutzung der Handschuhe im Boxkampf ebenfalls zu beobachten.</p>
+
+<author href="http://xml.zeit.de/autoren/author3">
+    <biography>Beispiel für einen Autoren ohne freigestelltes Bild – ja das soll so. Außerdem machen wir hier mal eine schöne lange Kurzbiografie rein. Also mit mehr als drei Sätzen. Bla blubb.</biography>
+</author>
+
+<p>Die Auswirkungen, die das Gehirn nach Gewalteinwirkung auf den Schädel zeigt, sowie ihre klinischen Folgen konnten wir in tierexperimentellen Untersuchungen deutlich machen. So ist heute unter anderem die Intensität der Gewalt bekannt, die eine Hirnerschütterung, eine Commotio cerebri erzeugt. Sie entsteht bei der Katze nach einem Schlag, der mit einer Geschwindigkeit von 30 bis 34 km/h geführt wird, wobei dem Schädel eine Beschleunigung von 280 bis 400 g erteilt wird. Die Folge ist unter anderem Bewußtlosigkeit von einigen Minuten Dauer. Bei mikroskopischer Untersuchung des Nervensystems wurden nach dem einzelnen Schlag keine Dauerschäden festgestellt. Dagegen waren nach wiederholter Gewalteinwirkung von gleicher Intensität in ein- bis zweitägigen Abständen schwere Dauerschäden nachweisbar. Im Großhirn waren Nervenzellen untergegangen, an deren Stelle Gliawucherungen getreten waren. Sie decken zwar den Defekt, sind aber nicht in der Lage, die hochspezialisierten Funktionen der Nervenzellen zu übernehmen. Nervenzellen können jedoch keinesfalls neugebildet werden; ihr Verlust ist endgültig. Starker Nervenzelluntergang lag auch im Kleinhirn vor. Hier waren vor allem die von dem Prager Forscher Purkinje beschriebenen Nervenzellen reihenweise zerstört. In dem Zusammenhang ist die Feststellung äußerst wichtig, daß diese Versuchstiere keine Blutungen oder sogenannte Rindenprellungsherde aufwiesen, die eine unmittelbare Folge der mechanischen Gewalt sind, sondern daß die mikroskopisch erwiesenen Hirnschäden erst nach einem mehrtägigen Intervall als Folge der reaktiv nach jedem Einzelschlag entstehenden Kreislaufstörung beziehungsweise Hirnschwellung auftraten. Es hätte also eine sofortige mikroskopische Untersuchung des Nervensystems den Schaden nicht aufdecken können, der seine sichtbare Entwicklung erst nach einer bestimmten Latenzzeit beginnt.</p>
+
+<author href="http://xml.zeit.de/autoren/D/Tobias_Dorfer/index">
+    <biography>x</biography>
+</author>
+
+<p>Ein überraschendes Ergebnis hatten Versuche mit Intensitäten, die unter den sogenannten Commotionsdosen lagen. Sie führen bei einmaliger Anwendung weder zu Auffälligkeiten im Verhalten des Tieres – es trat keine Bewußtlosigkeit auf – noch entstehen mikroskopisch nachweisbare Hirnschäden. Hingegen entwickeln sich nach gehäuften, unmittelbar aufeinanderfolgenden Schlägen gleicher Intensität außerordentlich schwere Hirndauerschäden. Das Ausmaß des Nervenzelluntergangs hat uns selbst überrascht. Schon nach zehn bis fünfzehn Schlägen, die einzeln angewandt völlig wirkungslos geblieben waren, traten infolge der summierten Wirkung schwerste Schäden am Nervensystem auf. Wiederum bestand im Kleinhirn ausgeprägter Nervenzelluntergang; im Großhirn war der Nervenzellausfall in allen Rindenschichten sicher nachweisbar.</p>
+
+<p>Beim Menschen sehen wir klinische Befunde und Schäden am Nervensystem schon nach Gewalteinwirkungen von bedeutend geringerer Intensität als bei den Versuchstieren Katze und Kaninchen; denn je größer der Schädel, desto geringere Beschleunigung genügt, um Gewebsschäden zu verursachen. Der lichte sagittäle Durchmesser des menschlichen Schädels beträgt etwa 18 bis 20 cm, der der Katze etwa 5 cm. Dementsprechend genügt beim Menschen nur ein Viertel der Beschleunigung, um den gleichen Hirnschaden zu bewirken wie bei der Katze.</p>
+
+<p>Die klinische Analyse unterscheidet akute und chronische Boxschäden. Zu den akuten Schäden gehören Fälle, in denen der Boxhieb dem Schädel eine derartige Beschleunigung erteilte, daß die sofortige Bewußtlosigkeit Folge der Gehirnerschütterung ist, die ihrerseits durch die Schlagwirkung verursacht wurde. Die Bewußtlosigkeit hält gewöhnlich einige Sekunden bis Minuten, in einzelnen Fällen länger an. Dazu zählen auch abrupte Stürze, in denen die Faust den Kontrahenten weit oberhalb des Körperschwerpunkts trifft, so daß ihm die Beine weggerissen werden und er auf den Hinterkopf stürzt. Dabei wird der Schädel in 2 bis 4 msec (= Tausendstel Sekunde) auf Null abgebremst. Das Ergebnis, ist ein sogenanntes Verzögerungstrauma: Am Stoßpol, in diesem Fall der Hinterkopf, entsteht Überdruck, an der gegenüberliegenden Seite, im Stirnbereich, Unterdruck. Der Unterdruck kann an den Dächern der Augenhöhlen Impressionsbrüche verursachen. Die Untersuchungen zeigten, daß bei einem 180 cm großen Menschen, der rücklings auf harten Boden stürzt, eine Verzögerung von 180 g wirksam wird. Die Höhe der Beschleunigung verdeutlicht ein Vergleich mit den Versuchsbedingungen eines Astronauten: Er wird in Position „eyeball-in“ beziehungsweise „eyeball-out“ mit „nur“ etwa 8 bis 11 g beschleunigt, allerdings für die ungleich längere Dauer von etwa 10 Minuten. In unserem Beispiel ist die Verzögerung (= negative Beschleunigung) cirka 20mal größer. Bei derartig hohen Grammzahlen kann an der dem Stoß gegenüberliegenden Stelle unter der Kavitationswirkung des dort herrschenden negativen Druckes die Gefäßwandung der Kapillaren reißen, wodurch feine punktförmige Blutungen im Hirngewebe entstehen. Sie werden als Rindenprellungsherde bezeichnet, müßten aber unseres Erachtens nach ihrer Ursache richtiger corticale Kavitationsherde heißen, da sie ja nicht durch einen vorgestellten Anprall des Gehirns an den Knochen zustande kommen.</p>
+
+<p>Weitere akute Schädigungsgefahren durch Schlagwirkung liegen in der Drosselung von Blutgefäßen, die zum Gehirn ziehen, besonders der Arteria carotis, die an der linken und rechten Halsseite ziemlich oberflächlich verläuft. Damit kann infolge mechanischer Reizung des Carotissinus, eines Reflexzentrums, ein Syndrom mit Herzverlangsamung, Herzstillstand, abruptem Blutdruckabfall, Ohnmacht, oder zentral ausgelöster Bewußtseinsverlust verbunden sein. Breitflächige Schläge auf Bauch und Brust erzeugen einen starken Reiz des Vagusnerven, der ebenfalls eine Verlangsamung der Herzfrequenz bewirkt. Auch Schläge auf den Solarplexus (das Sonnengeflecht) am Oberbauch lösen starke Kreislaufreaktionen aus. Eine Verlangsamung und sogar den Stillstand der Herzaktionen sieht man selbst nach Treffern in der Augengegend.</p>
+
+<p>Gelegentlich sieht man nach Serien von Kopf- und Körpertreffern einen Boxer groggy, er ist „angeschlagen“. Seine Bewegungen und Reaktionen sind verlangsamt, unsicher, das Sensorium ist eingeschränkt. Der Tonus der Muskulatur – hier interessiert besonders die Halsmuskulatur – ist herabgesetzt. Der Kopf „pendelt“ unter den Treffern. Die Folgen sind für den Schädel höhere Beschleunigungen und damit schwerere Wirkungen. Der Kampf endet mit einem Verhämmerungs-K. o., oder weil der Boxer schließlich nicht mehr imstande ist, seine Willkürmotorik zu gebrauchen, wenn nicht ein einsichtiger Ringrichter den Kampf abbricht. Daß diese Dämmerzustände nicht selten sind, zeigen die Schilderungen von Boxern, die sich nachträglich an längere Zeiträume des Kampfgeschehens überhaupt nicht erinnern konnten, während sie der Umwelt sinnvoll zu handeln schienen. Am bekanntesten ist die Schilderung eines Dämmerzustandes, den Gene Tunney in einem Sparringskampf erlitt und der für ihn zum Anlaß wurde, das Boxen ganz aufzugeben. Das Ende des 24jährigen Benny „Kid“ Paret gibt ein trauriges Beispiel. Ehe er zum Weltmeisterschaftskampf im Weltergewicht mit dem 23jährigen Emile Griffith antrat, hatte Paret bereits Anfang Dezember 1961 in einem 10-Rundden-Kampf gegen Gene Fulmer in las Vegas „erhebliche Schläge einstecken müssen“, wie Sportjournalisten übereinstimmend berichteten. Im folgenden Kampf gegen Griffith mußte Paret erneut schwere Schlagserien gegen Kopf und Körper voll nehmen. In der 12. Runde stark groggy, konnte er seine Halsmuskeln nicht mehr anspannen, so daß sein Schädel nach jedem der mindestens 25 (!) Hiebe, die wie Hammerschläge trafen, hin- und herpendelte. Schließlich sackte Paret bewußtlos zusammen, ohne daß der erfahrene Ringrichter Ruby Goldstein eingegriffen hatte. Der neürochirurgische Eingriff konnte nicht mehr helfen, neun Tage später starb Kid Paret. Dem verteidigungsunfähig geschlagenen Paret, dessen herabgesetzter Halsmuskeltonus den Kopf nicht mehr festhielt, setzten größere Beschleunigungen zu, als eine normotone Muskulatur zugelassen hätte. Gleichzeitig erhöhte sich das Drehmoment, und die Schädel und Gehirn verbindenden Brückenvenen rissen. Hätte Paret überlebt, er würde jene schweren Dauerschäden davongetragen haben, die solche unmittelbar aufeinander gehäuften Schläge unausweichlich nach sich ziehen. Das hat die Übertragung der tierexperimentellen Ergebnisse auf den Menschen mit Sicherheit bewiesen.</p>
+
+<p>Die progredienten klinischen Erscheinungen werden erst nach einer Reihe von Jahren sichtbar. Ihr Auftreten fällt gewöhnlich mit dem Ende der aktiven Laufbahn zusammen, oder wenig später. Klinisch handelt es sich um Kombinationen von Störungen des extrapyramidalen Systems und von Kleinhirnschädigungen, wie Gang- und Gleichgewichtsstörungen, Zittern der Hände und des Körpers, verwaschene Sprache. Unter 11 Boxern, an denen die englischen Ärzte Mawdsley und Ferguson wegen schwerer klinischer Erscheinungen eine Luftfüllung der Hirninnenräume vornahmen, fand sich neunmal eine gewaltige Vergrößerung der normalerweise kleinen, abgeschlossenen Höhlung in der Mittellinie des Gehirns, die aber in diesen Fällen eine breitflächige Verbindung zu den Hirninnenräumen aufwies. Den gleichen Befund erhob Spillane an zwei von fünf Boxern. Der Befund einer kommunizierenden Verbindung zum Ventrikelsystem wurde bei den Boxern in 90 beziehungsweise 40 Prozent angetroffen, während er sonst in nur 0,2 bis 1,2 Prozent aller Luftfüllungen erhoben wird.</p>
+
+<p>Die chronischen Hirnschäden von Boxern werden als Punch-drunkness (Martland), als chronische progressive traumatische Encephalopathie des Boxers (McDonald Critchley) und vielfach als Dementia pugilistica bezeichnet. Der Jargon hat ungemein treffende Bezeichnungen gefunden: goofy, slugnutty, cuckoo, stumble-bum, slaphappy, cutting paper dolls, die das Zustandsbild der „weichen Birne“ kräftig umreißen.</p>
+
+<p>Mikroskopisch untersuchte Boxergehirne zeigen schwere Dauerschäden, die nach Qualität und Ausbreitung denen vergleichbar sind, die wir nach gehäufter Gewalteinwirkung im Tierversuch beschrieben haben.</p>
+
+<p>Die Schilderungen der psychischen Abbauprozesse in den Boxer-Krankengeschichten sind erschütternd. Kennzeichnend ist das mangelnde Reaktionsvermögen, Kritikschwäche, falsche Einschätzung der eigenen Leistungsfähigkeit, unadäquate euphorische, vereinzelt auch dysphorische Grundstimmung, Depravierung, das allgemeine Nachlassen der geistigen Leistungen und die erhebliche Verblödung.</p>
+
+<p>Die Gefährlichkeit des Boxens wird m. E. zu sehr im Hinblick auf den K. o. betrachtet. Es darf jedoch keineswegs als alleiniges Kriterium für die Schwere der erlittenen Schädigung gelten. Ein Boxer, der zu Beginn der ersten Runden’K. o. geschlagen wurde, kann weniger Schäden davontragen als einer, der Runde für Runde Serien von Schlägen ausgesetzt ist, die einzeln zwar nicht die Intensität besetzen, mit der ein Knockout erzielt wird, die aber wegen der Summation der Schlagwirkung im Endeffekt zu-schwereren Hirndauerschaden führen – vor allem, weil in dem Fall alle Schonfristen entfallen. Hier, in der Übertragung auf den Menschen, finden die entsprechenden tierexperimentellen Ergebnisse ihre Bestätigung.</p>
+
+<p>Ohne Zweifel haben viele das Boxen in gutem Glauben für unschädlich gehalten. Die vorgetragenen Befunde widerlegen diese Annahme. Auf die Dauer entsteht ein Hirnschaden, der um so schwerer ist, je früher mit Boxen begonnen wurde, und je mehr und je länger geboxt wurde. Der verheerende Nervenzelluntergang vollzieht sich ohne Rücksicht auf den Amateur- oder Professionalstatus. Die geltenden Bestimmungen schützen gerade vor den erbärmlichen Folgen der Kopftreffer in ganz ungenügender Weise, weil sie von der falschen Voraussetzung ausgehen, die im K. o. die Hauptgefahr sieht. Die Regel, die Boxhiebe unterhalb der Gürtellinie untersagt, um Verletzungen zu vermeiden, bedingt, daß sich die Schläge auf den gleichermaßen gefährdeten Kopf und Oberkörper konzentrieren. Das ist ein Widersinn. Die medizinischen Tatsachen sprechen für sich. Sie sind dem Laien verständlich und können durch Anschauung und sportliche Erfahrung von jedem bestätigt werden. Wer mit voller Kenntnis der wissenschaftlichen Ergebnisse weiter boxt, weiß, was er sich und seinem Kontrahenten antut. Auch der Zuschauer weiß, für welches makabre Schauspiel er bezahlt. „Vom ethischen Standpunkt ist das Boxen nicht zu verteidigen. Logisch ist das Argument gegen das Boxen nicht zu erschüttern. Juristisch ist Boxen nicht länger tragbar. In der Erziehung ist für diesen Sport kein Platz“ (Jokl).</p>
+
+<p>In Frankfurt wurde gefragt, ob die Ärzte den Boxkampf boykottieren wollten, indem sie sich nicht mehr als Ringärzte zur Verfügung stellten. Meiner Auffassung nach ist der verletzte Boxer ein Patient geworden, dem geholfen werden muß. Ob ich für ein Boxverbot sei? Es müßte meines Erachtens die Entscheidung des einzelnen genügen; jedoch darf niemand, in der Schule und beim Militär beispielsweise, zum Boxen gezwungen werden.</p>
+
+<p>Schließlich erkläre ich den Zweiflern an akademischer Zuständigkeit für praktische Fragen des Alltags, was ein Telefonjournalist für sich behalten hat: Ich trage keinen professoralen Bart und kenne von Boxern mehr als nur einige hirnverletzte Schädel. Vor etwa 20 Jahren gehörte ich zu den Gymnasiasten, denen das Boxen als wehrhafte Form der Körperertüchtigung verordnet war. Seither sah ich Boxer in Europa und USA, am Ring und am Fernsehschirm; und endlich sah ich auch ihre Gehirne. Das Ergebnis ist bekannt.</p>
+
+    </division>
+  </body>
+</article>

@@ -65,9 +65,9 @@
 
 
 <body>
-	<title>ZON-CP mit Teasern auf ZEIT Campus-Artikel</title>
+	<title>ZON-CP mit Teasern auf ZEIT Arbeit-Artikel</title>
 
-	<!-- Campus Aufmacher -->
+	<!-- Arbeit Aufmacher -->
 	<cluster visible="True" area="id-7c243c08-55d4-41eb-ad08-25f5469e082c" kind="solo">
 		<region visible="True" area="id-49b33be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
 			<container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-fullwidth" visible="True">
@@ -84,6 +84,12 @@
             <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d8">
                 <block href="http://xml.zeit.de/arbeit/article/quotes" />
             </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d9">
+                <block href="http://xml.zeit.de/arbeit/teaser/quote-column" />
+            </container>
+            <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652149-57f7-4f6a-bbdd-738e4a05e5d9">
+                <block href="http://xml.zeit.de/arbeit/teaser/quote-column" />
+            </container>
         </region>
         <region area="id-da65a250-0482-4ce8-b662-5ca24af05062" visible="True" kind="minor">
             <container cp:__name__="id-93123f71-7e23-44e0-a12c-9a9f63c60594" cp:type="teaser" hide-dupes="True" module="zon-small" visible="True">
@@ -91,6 +97,9 @@
             </container>
             <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d7">
                 <block href="http://xml.zeit.de/arbeit/teaser/simple-noimage" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f7a-bbdd-738e4a05e6d7">
+                <block href="http://xml.zeit.de/arbeit/article/column" />
             </container>
         </region>
     </cluster>
@@ -133,12 +142,48 @@
 			<container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a05e5d3">
 				<block href="http://xml.zeit.de/arbeit/article/01-digitale-nomaden" />
 			</container>
-			<container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a02e5d3">
-				<block href="http://xml.zeit.de/arbeit/teaser/short" />
-			</container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a02e5d3">
+                <block href="http://xml.zeit.de/arbeit/teaser/short" />
+            </container>
 		</region>
 	</cluster>
 
+
+    <!-- Normales Parkett mit Arbeit Teasern -->
+    <cluster visible="True" area="id-bdfb0759-4df4-4cbd-bf1e-86809ef1a019" kind="parquet">
+        <region visible="True" area="id-1ca0a1c0-fe49-6291-baac-453cc2a213dd" kind="parquet" title="Normales Parkett mit Arbeit Kolumnen-Teasern">
+            <container cp:type="teaser" module="zon-large" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4c25e5d1">
+                <block href="http://xml.zeit.de/arbeit/teaser/quote-column" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-ddbb-738e4a05e5d3">
+                <block href="http://xml.zeit.de/arbeit/article/01-digitale-nomaden" />
+            </container>
+            <container cp:type="teaser" module="zon-small" visible="True" cp:__name__="id-bda652159-57f7-4f6a-bbdd-738e4a02e5b7">
+                <block href="http://xml.zeit.de/arbeit/article/column" />
+            </container>
+        </region>
+    </cluster>
+
+    <cluster area="id-7e328214-665f-457d-a624-94c47850f95d" kind="duo">
+        <region area="id-40b51a45-a5d2-4042-8da7-112f9d5d6cb7" kind="duo">
+            <container cp:__name__="id-dc25b64b-2644-4f24-8fb9-6698b8ffe1b7" cp:type="teaser" module="zon-square">
+                <block href="http://xml.zeit.de/arbeit/article/column" />
+            </container>
+        </region>
+        <region area="id-0e98c5c2-2b95-42b7-9ccc-83e684fa87ba" kind="duo">
+            <container cp:__name__="id-908960fb-7e9f-4e5f-bb94-ad0893e6fcf0" cp:type="teaser" module="zon-square">
+                <block href="http://xml.zeit.de/arbeit/article/quotes" />
+            </container>
+        </region>
+    </cluster>
+
+    <cluster visible="True" area="id-7c243c08-66d4-41eb-ad08-25f5469e082c" kind="solo">
+        <region visible="True" area="id-49b66be0-ac8a-484e-b681-0cee9933a5cf" kind="solo">
+            <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd66ff37e12" cp:type="teaser" module="zon-fullwidth" visible="True">
+                <block href="http://xml.zeit.de/arbeit/article/column" />
+        </container>
+        </region>
+    </cluster>
 
 	<!-- Arbeit Parkett -->
 	<!-- TODO cluster area="id-db3160e7-782c-494a-81f4-ba9d4e4f9f7c" kind="parquet">
