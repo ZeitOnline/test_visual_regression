@@ -15,6 +15,7 @@ function appUserIsBack( timestamp, options ) {
             delta: 5 * 60 * 1000, // 5 minutes
             debug: window.location.href.indexOf( 'debug-userisback' ) !== -1,
             endpoint: window.location.protocol + '//' + window.location.host + '/json/update-time',
+            link: window.location.href,
             text: 'Die Seite wurde aktualisiert',
             force: window.location.href.indexOf( 'force-userisback' ) !== -1,
             slug: window.location.pathname
@@ -99,9 +100,14 @@ function appUserIsBack( timestamp, options ) {
         var template = require( 'web.core/templates/appUserIsBack.html' ),
             html = template({
                 text: this.options.text,
-                buttontext: this.options.buttontext
+                buttontext: this.options.buttontext,
+                link: this.options.link
             });
         document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', html );
+        document.getElementById( 'app-user-is-back' ).addEventListener( 'touchstart', function( event ) {
+            event.preventDefault();
+            window.location.reload();
+        }, false );
     };
 
     AppUserIsBack.prototype.init = function() {
