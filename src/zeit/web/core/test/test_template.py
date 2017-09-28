@@ -500,40 +500,6 @@ def test_zplus_badge_should_be_rendered(testbrowser):
     assert len(browser.cssselect('.teaser-fullwidth__kicker-logo--zplus')) == 1
 
 
-def test_webtrekk_should_get_logged_off_info_if_user_info_is_empty(
-        dummy_request):
-
-    dummy_request.user = {}
-
-    assert zeit.web.core.template.webtrekk_sso_parameter(
-        dummy_request) == 'nicht_angemeldet'
-
-
-def test_webtrekk_should_get_full_login_info_for_logged_in_users(
-        dummy_request):
-
-    dummy_request.user = {
-        'ssoid': '123',
-        'name': 'my_name',
-        'email': 'my_email@example.com'}
-
-    assert zeit.web.core.template.webtrekk_sso_parameter(
-        dummy_request) == 'angemeldet'
-
-
-def test_webtrekk_should_get_no_login_path_when_entrypoint_is_empty(
-        dummy_request):
-
-    dummy_request.user = {
-        'ssoid': '123',
-        'name': 'my_name',
-        'email': 'my_email@example.com',
-        'entry_url': ''}
-
-    assert zeit.web.core.template.webtrekk_sso_parameter(
-        dummy_request) == 'angemeldet'
-
-
 def test_adplaces_are_correctly_returned(dummy_request):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/amp')

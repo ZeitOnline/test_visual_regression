@@ -7,9 +7,7 @@
         ) }}&amp;
         {{- request.GET.get('content_group') -}}&amp;
         {{- request.GET.get('custom_parameter') -}}&amp;
-        {#- Add login parameter -#}
-        cp23={{ request | webtrekk_sso_parameter }}&amp;
-        {#- Add SSO user ID -#}
+        cp23={{ 'angemeldet' if request.user.ssoid else 'nicht_angemeldet' }}&amp;
         cd={{ request.user.ssoid }}" />
     </div>
 </noscript>
