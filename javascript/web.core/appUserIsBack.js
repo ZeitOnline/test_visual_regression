@@ -49,6 +49,11 @@ function appUserIsBack( timestamp, options ) {
         return obj;
     };
 
+    /**
+     * plain vanilla get json with promis return
+     * @param  {string} url        endpoint url
+     * @return {promise}
+     */
     AppUserIsBack.prototype.get = function( url ) {
         // Promises working since iOS Safari8, Android Browser 4.4.4
         return new window.Promise( function( resolve, reject ) {
@@ -87,30 +92,6 @@ function appUserIsBack( timestamp, options ) {
                 console[ args.shift() ].apply( console, args );
             }
         }
-    };
-
-    AppUserIsBack.prototype.getJSON = function( url, successHandler, errorHandler ) {
-        var xhr = typeof XMLHttpRequest !== 'undefined' ? new XMLHttpRequest() : new window.ActiveXObject( 'Microsoft.XMLHTTP' );
-        xhr.open( 'get', url, true );
-        xhr.onreadystatechange = function() {
-            var status;
-            var data;
-            // https://xhr.spec.whatwg.org/#dom-xmlhttprequest-readystate
-            if ( xhr.readyState === 4 ) { // `DONE`
-                status = xhr.status;
-                if ( status === 200 ) {
-                    data = JSON.parse( xhr.responseText );
-                    if ( successHandler ) {
-                        successHandler( data );
-                    }
-                } else {
-                    if ( errorHandler ) {
-                        errorHandler( status );
-                    }
-                }
-            }
-        };
-        xhr.send();
     };
 
     AppUserIsBack.prototype.showUpdateWindow = function() {
