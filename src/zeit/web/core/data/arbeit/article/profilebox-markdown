@@ -68,11 +68,16 @@
 	<division type="page">
 	   <box layout="zar-profile">
         <text>
-        &lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod &lt;a href="#"&gt;tempor invidunt ut labore&lt;/a&gt; et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.
+        &lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod &lt;a href="#"&gt;tempor invidunt ut labore&lt;/a&gt; et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren. Lorem ipsum &lt;a href="mailto:test@test.de"&gt;dolor sit amet&lt;/a&gt;, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt.
         &lt;/p&gt;
+        &lt;ul&gt;
+        	&lt;li&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod.&lt;/li&gt;
+        	&lt;li&gt;Lorem ipsum&lt;/li&gt;
+        &lt;/ul&gt;
+        &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
         </text>
         <supertitle>Der Ingenieur</supertitle>
-        <title>Hier die optimale Subheadline</title>
+        <title>Hier die optimale Subheadline, die auch gern etwas länger sein darf.</title>
         <image base-id="http://xml.zeit.de/campus/image/01-junge-vor-unscharfem-hintergrund" type="jpg" title="Countdown: Countdown zum Studium" alt="Countdown" publication-date="" expires="" title_local="Surfer in München" caption_local="Ein Suerfer auf dem Wildbach in München." alt_local="Surfer">
           <bu pytype="str">Unis sind bürokratische Apparate, deshalb lieber alles pünktlich abgeben.</bu>
           <copyright pytype="str">© Thomas Strothjohann</copyright>

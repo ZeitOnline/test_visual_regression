@@ -37,7 +37,7 @@
 			background-color: $zar-cool-grey
 			display: block
 			height: remify(30px)
-			margin: remify(20px) auto
+			margin: 0 auto remify(20px) auto
 			width: remify(1px)
 
 	&__text-switch
@@ -53,7 +53,12 @@
 			color: currentColor
 			border-bottom: 1px $zar-cool-grey solid
 			+on-interaction
-				color: $zar-cool-grey
+				color: $zar-whitesmoke
+				border-color: currentColor
+		ul
+			display: inline-block
+			max-width: remify(400px)
+			text-align: left
 
 +respond-min($break-tablet-min)
 	.profilebox
