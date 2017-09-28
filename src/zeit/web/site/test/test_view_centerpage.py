@@ -1256,6 +1256,23 @@ def test_wrapped_features_are_triggered(testbrowser):
     assert 'isWrapped: true,' in browser.cssselect('head')[0].text_content()
 
 
+def test_app_user_is_back_is_working(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(375, 667)
+    script = 'return window.Zeit.appUserIsBack(123456789)'
+    driver.get(
+        '{}/zeit-online/slenderized-index?app-content&force-userisback'.format(
+            testserver.url))
+    driver.execute_script(script)
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.app-user-is-back')))
+        assert True
+    except TimeoutException:
+        assert False, 'Fullsize Image not loaded within 2 seconds'
+
+
 def test_advertorial_page_has_advertorial_label(testbrowser):
     browser = testbrowser('/zeit-online/advertorial-index')
     assert browser.cssselect('.header__ad-label')
