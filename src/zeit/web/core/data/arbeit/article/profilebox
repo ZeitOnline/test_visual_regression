@@ -68,10 +68,10 @@
 	<subtitle>Cottbus? Eine braungraue Plattenbaustadt nahe der Mongolei, wie jeder glaubt, der nie da war. Aber die Stadt ist eine Reise wert. Schon Fürst Pücklers Pyramiden wegen.</subtitle>
 	<division type="page">
 	   <box layout="zar-profile">
-        <text>
+        <subtitle>
         &lt;p&gt;Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
         &lt;/p&gt;
-        </text>
+        </subtitle>
         <supertitle>Der Ingenieur</supertitle>
         <title>Hier die optimale Subheadline</title>
         <image base-id="http://xml.zeit.de/campus/image/01-junge-vor-unscharfem-hintergrund" type="jpg" title="Countdown: Countdown zum Studium" alt="Countdown" publication-date="" expires="" title_local="Surfer in München" caption_local="Ein Suerfer auf dem Wildbach in München." alt_local="Surfer">

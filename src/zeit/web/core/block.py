@@ -116,18 +116,18 @@ class Box(Block):
 
     def __init__(self, model_block):
         self.model_block = model_block
-        if getattr(model_block, 'teaserSupertitle', None):
-            self.supertitle = model_block.teaserSupertitle
-        if getattr(model_block, 'teaserTitle', None):
-            self.title = model_block.teaserTitle
-        if getattr(model_block, 'teaserText', None):
-            self.text = model_block.teaserText
+        if getattr(model_block, 'supertitle', None):
+            self.supertitle = model_block.supertitle
+        if getattr(model_block, 'title', None):
+            self.title = model_block.title
+        if getattr(model_block, 'subtitle', None):
+            self.subtitle = model_block.subtitle
         if getattr(model_block, 'layout', None):
             self.layout = model_block.layout
 
 
-@grokcore.component.adapter(Box)
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(Box)
 def box_images(context):
     return zeit.content.image.interfaces.IImages(context.model_block)
 
