@@ -33,6 +33,26 @@ class Base(zeit.web.core.view.Base):
     def ressort_literally(self):
         return 'Arbeit'
 
+    @zeit.web.reify
+    def adcontroller_handle(self):
+        suffix = '_trsf' if zeit.web.core.application.FEATURE_TOGGLES.find(
+            'iqd_digital_transformation') else ''
+        replacements = {
+            'article': 'artikel',
+            'gallery': 'galerie'}
+        if self.is_hp:
+            return 'arbeit_homepage{}'.format(suffix)
+        if self.is_advertorial:
+            return '{}_{}{}'.format(
+                'mcs' if 'mcs/' in self.banner_channel else 'adv',
+                'index' if self.type == 'centerpage' else 'artikel',
+                suffix)
+        if self.type == 'centerpage':
+            return 'index{}'.format(suffix)
+        if self.type in replacements:
+            return '{}{}'.format(replacements[self.type], suffix)
+        return 'centerpage{}'.format(suffix)
+
 
 class Content(Base):
 
