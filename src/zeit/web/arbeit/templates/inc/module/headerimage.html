@@ -1,7 +1,7 @@
 {# This module/template is called "headerimage" vor hysterical raisins
    (because it is already used in core and campus). But in the ARBEIT vertical,
    we display an image here only in an advertorial.-#}
-<header class="topicpage-header">
+<header class="{% if view.is_advertorial%}header-image{% else %}topicpage-header{% endif %}">
     {% if view.is_advertorial %}
     {%- require image = get_image(module, fallback=False, variant_id='wide' if module.animate else 'cinema') -%}
         {%- include "zeit.web.campus:templates/inc/asset/image_header.tpl" -%}
@@ -10,9 +10,6 @@
         <span class="header-advertorial__title">{{ module.title }}</span>
         <span class="header-advertorial__kicker">{{ module.supertitle }}</span>
     </div>
-    <h1 class="{{ 'header-image__heading' | with_mods('overlay' if image) }}">
-        <span class="header-image__kicker">{{ module.supertitle }}</span>
-    </h1>
     {% else %}
     <h1 class="topicpage-header__heading">
         <span class="topicpage-header__kicker">{{ module.supertitle or 'Thema' }}</span>

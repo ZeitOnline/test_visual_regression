@@ -1,18 +1,40 @@
-.header-image
-	padding-top: 10px
-	background-color: $white
-	&__kicker
-		letter-spacing: 0
-		margin: 0 auto
-		max-width: remify(580px)
-		text-transform: none
-	&__adlabel
-		color: $white
-		font-size: remify(10px)
-		letter-spacing: remify(1px)
-		right: remify(20px)
+.header-advertorial
+	&__heading
+		transform: translateY(-50%)
 		position: absolute
+		text-align: center
+		top: 50%
+		width: 100%
+
+	&__kicker
+		+font-smoothing
+		color: $zar-white
+		font-size: em(10px)
 		text-transform: uppercase
-		top: remify(10px)
-		+respond-min($break-tablet-min)
-			display: none
+		font-weight: bold
+		letter-spacing: 0.175em
+		display: block
+
+	&__title
+		+font-smoothing
+		font-size: remify(28px)
+		font-weight: bold
+		color: $zar-white
+		letter-spacing: $letter-spacing-m
+		text-transform: uppercase
+		line-height: 1.2em
+
+.header-image
+	position: relative
+	&:after
+		content: ''
+		background-color: $zar-sun-yellow
+		position: absolute
+		bottom: 0
+		transform: translateY(50%)
+		left: 50%
+		display: block
+		height: remify(30px)
+		width: remify(2px)
+	&__media-container
+		+teaser-image-dark-overlay($color: rgba(0, 0, 0, 0.5))
