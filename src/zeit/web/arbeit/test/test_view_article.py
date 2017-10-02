@@ -349,7 +349,7 @@ def test_zar_profilebox_should_show_correct_images_per_viewport(
 def test_zar_profilebox_should_toggle_text_on_mobile(
         selenium_driver, testserver):
     driver = selenium_driver
-    driver.set_window_size(1200, 800)
+    driver.set_window_size(320, 480)
     driver.get('%s/arbeit/article/profilebox' % testserver.url)
 
     text_switch = driver.find_element_by_class_name(
@@ -357,16 +357,16 @@ def test_zar_profilebox_should_toggle_text_on_mobile(
     text_content = driver.find_element_by_class_name(
         'profilebox__text-content')
 
-    # on desktop, we see the text (and no switch)
-    assert text_switch.is_displayed() is False
-    assert text_content.is_displayed() is True
-
     # on mobile, we see a switch which reveals the text on click.
     # after that, the switch disappears and you cannot hide the text.
-    driver.set_window_size(320, 480)
     assert text_content.is_displayed() is False
     assert text_switch.is_displayed() is True
 
     text_switch.click()
+    assert text_switch.is_displayed() is False
+    assert text_content.is_displayed() is True
+
+    # on desktop, we see the text (and no switch)
+    driver.set_window_size(1200, 800)
     assert text_switch.is_displayed() is False
     assert text_content.is_displayed() is True
