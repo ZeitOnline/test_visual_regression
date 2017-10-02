@@ -26,8 +26,15 @@ class Metrics(object):
         self.prefix = prefix
         self.statsd = statsd.Connection(hostname, port)
 
+    @contextlib.contextmanager
     def time(self, identifier):
-        return self.timer().time(self.prefix + identifier)
+        # statsd.timer.Timer.time() does not have try/finally, unfortunately.
+        timer = self.timer(self.prefix + identifier)
+        timer.start()
+        try:
+            yield
+        finally:
+            timer.stop('')
 
     def increment(self, identifier, delta=1):
         self.counter().increment(self.prefix + identifier, delta)
@@ -83,6 +90,14 @@ def timer(identifier):
         identifier = '%s.%s' % (module, identifier)
     metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
     return metrics.time(identifier)
+
+
+def increment(identifier):
+    if not identifier.startswith('zeit.'):
+        module = sys._getframe(1).f_globals['__name__']
+        identifier = '%s.%s' % (module, identifier)
+    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+    metrics.increment(identifier)
 
 
 @pyramid.events.subscriber(pyramid.events.NewRequest)

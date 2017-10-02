@@ -264,3 +264,109 @@ def test_zar_article_should_hide_empty_jobboxticker(testbrowser, monkeypatch):
     browser = testbrowser('/arbeit/article/jobbox-ticker')
     assert browser.cssselect('.jobbox-ticker__heading')
     assert not browser.cssselect('.jobbox-ticker-item__container')
+
+
+def test_zar_column_article_has_correct_structure(testbrowser):
+    browser = testbrowser('/arbeit/article/column')
+    select = browser.cssselect
+    assert len(select('.article-header-column')) == 1
+    assert len(select('.article-header-column__box')) == 1
+    assert len(select('.article-header-column__heading')) == 1
+    assert len(select('.article-header-column__kicker')) == 1
+    assert len(select('.article-header-column__title')) == 1
+
+    assert len(select('.article-header-column__media')) == 1
+    assert len(select(
+        '.article-header-column__media figcaption.figcaption--hidden')) == 1
+
+    assert len(select('.summary')) == 1
+    assert len(select('.metadata')) == 1
+
+    # We set our own byline on unusual position, and suppress the default one
+    assert len(select('.article-header-column__byline')) == 1
+    assert len(select('.byline')) == 0
+
+
+def test_zar_column_article_has_correct_structure_on_page2(testbrowser):
+    browser = testbrowser('/arbeit/article/column/seite-2')
+    select = browser.cssselect
+    assert len(select('.article-header-column')) == 1
+    assert len(select('.article-header-column__box')) == 1
+    assert len(select('.article-header-column__heading')) == 1
+    assert len(select('.article-header-column__kicker')) == 1
+    assert len(select('.article-header-column__title')) == 1
+
+    assert len(select('.article-header-column__media')) == 1
+    assert len(select(
+        '.article-header-column__media figcaption.figcaption--hidden')) == 1
+
+    assert len(select('.summary')) == 0
+    assert len(select('.metadata')) == 0
+
+    assert len(select('.article__page-teaser')) == 1
+
+    # We set our own byline on unusual position, and suppress the default one
+    assert len(select('.article-header-column__byline')) == 1
+    assert len(select('.byline')) == 0
+
+
+def test_zar_profilebox_has_correct_structure(testbrowser):
+    browser = testbrowser('/arbeit/article/profilebox')
+    select = browser.cssselect
+    assert len(select('.profilebox')) == 1
+    assert len(select('.profilebox__container')) == 1
+    assert len(select('.profilebox__title')) == 1
+    assert len(select('.profilebox__subtitle')) == 1
+    assert len(select('.profilebox__text')) == 1
+
+    assert len(select('.profilebox__media--tablet-desktop')) == 1
+    assert len(select('.profilebox__media')) == 1
+
+    # TOC should be behint profilebox
+    assert len(select('.profilebox + .article-toc')) == 1
+
+
+def test_zar_profilebox_should_show_correct_images_per_viewport(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/arbeit/article/profilebox' % testserver.url)
+
+    teaser_image_mobile = driver.find_element_by_class_name(
+        'profilebox__media')
+    teaser_image_desktop = driver.find_element_by_class_name(
+        'profilebox__media--tablet-desktop')
+
+    assert teaser_image_mobile.is_displayed() is True
+    assert teaser_image_desktop.is_displayed() is False
+
+    driver.set_window_size(1000, 480)
+
+    assert teaser_image_mobile.is_displayed() is False
+    assert teaser_image_desktop.is_displayed() is True
+
+
+def test_zar_profilebox_should_toggle_text_on_mobile(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(320, 480)
+    driver.get('%s/arbeit/article/profilebox' % testserver.url)
+
+    text_switch = driver.find_element_by_class_name(
+        'profilebox__text-switch')
+    text_content = driver.find_element_by_class_name(
+        'profilebox__text-content')
+
+    # on mobile, we see a switch which reveals the text on click.
+    # after that, the switch disappears and you cannot hide the text.
+    assert text_content.is_displayed() is False
+    assert text_switch.is_displayed() is True
+
+    text_switch.click()
+    assert text_switch.is_displayed() is False
+    assert text_content.is_displayed() is True
+
+    # on desktop, we see the text (and no switch)
+    driver.set_window_size(1200, 800)
+    assert text_switch.is_displayed() is False
+    assert text_content.is_displayed() is True

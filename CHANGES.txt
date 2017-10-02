@@ -7,10 +7,66 @@ POSTDEPLOY
 - Nothing
 
 
-3.93 (unreleased)
+3.96 (unreleased)
 -----------------
 
+- ZON-4202: Remove entry_url from webtrekk
+
+- ARBEIT-64: Implement portraitbox protocol for ZEIT Arbeit
+
+
+3.95 (2017-09-27)
+-----------------
+
+- ARBEIT-17: Implement centered article header for Zeit ARBEIT
+
+- FIX: Remove hiding of empty adplaces
+
+- FIX: Default value in FB metatags
+
+- FIX: Fix badge styling for ZAR columns on ZON parquet
+
+- FIX: Make advertorial styles work in ZMO for paginated articles
+
+
+3.94.1 (2017-09-21)
+-------------------
+
+- FIX: Polish autor box on ZAR
+
+
+3.94 (2017-09-21)
+-----------------
+
+- FIX: Fix topics navigation in ZAR for long topics
+
+- ARBEIT-16: Implement article header for column articles
+
+- ARBEIT-87: Style authorbox for ZEIT Arbeit
+
+- ZON-3992: Dont show packshotlink when volume isn't published
+
+- ZON-4217: Cleanup facebook metatags
+
+
+3.93 (2017-09-19)
+-----------------
+
+- ARBEIT: Some polishing
+
+- ARBEIT: Tweak ZOA badge in main nav
+
 - FIX: Show only jobbox-ticker header if its feed has no items
+
+- FIX: Change navigation abo links for campus and magazin
+
+- FIX: Change the color of D17 badge back to white
+
+- MAINT: Record metrics for status codes of external HTTP requests
+
+- MAINT: Change link to ZEIT Abo in ZAR nav and dummy data
+
+- PERF: Cache Podigee API responses for 10 instead of 1 minute
 
 
 3.92 (2017-09-14)

@@ -111,6 +111,28 @@ class Portraitbox(Block):
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IBox)
+class Box(Block):
+
+    def __init__(self, model_block):
+        self.model_block = model_block
+        if getattr(model_block, 'supertitle', None):
+            self.supertitle = model_block.supertitle
+        if getattr(model_block, 'title', None):
+            self.title = model_block.title
+        if getattr(model_block, 'subtitle', None):
+            self.subtitle = model_block.subtitle
+        if getattr(model_block, 'layout', None):
+            self.layout = model_block.layout
+
+
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+@grokcore.component.adapter(Box)
+def box_images(context):
+    return zeit.content.image.interfaces.IImages(context.model_block)
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IVolume)
 class Volume(Block):
 
@@ -256,12 +278,17 @@ class Liveblog(Block):
 
     def get_restful(self, url):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        response = None
         try:
             with zeit.web.core.metrics.timer('liveblog.reponse_time'):
-                return requests.get(
-                    url, timeout=conf.get('liveblog_timeout', 1)).json()
+                response = requests.get(
+                    url, timeout=conf.get('liveblog_timeout', 1))
+                return response.json()
         except (requests.exceptions.RequestException, ValueError):
             pass
+        finally:
+            status = response.status_code if response else 599
+            zeit.web.core.metrics.increment('liveblog.status.%s' % status)
 
     @LONG_TERM_CACHE.cache_on_arguments()
     def get_amp_themed_id(self, blog_id):

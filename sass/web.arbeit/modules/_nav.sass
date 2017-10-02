@@ -358,10 +358,15 @@ $nav-color-border: #444
 		&__primary
 			flex: 1 1 50%
 			display: flex
+			flex-wrap: wrap
 			align-items: flex-end
 			justify-content: space-between
 
 		// THEMEN
+		&__topics
+			display: flex
+			flex-wrap: nowrap
+
 		&__topics-title
 			@extend %nav-tablet-font-s
 			float: left
