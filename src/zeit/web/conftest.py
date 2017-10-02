@@ -149,6 +149,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/article-templates.xml'),
         'vivi_zeit.content.article_citation-layout-source': (
             'egg://zeit.web.core/data/config/article-citation-layouts.xml'),
+        'vivi_zeit.content.article_box-layout-source': (
+            'egg://zeit.web.core/data/config/article-box-layouts.xml'),
         'vivi_zeit.campus_article-stoa-source': (
             'egg://zeit.web.core/data/config/article-stoa.xml'),
         'vivi_zeit.magazin_article-related-layout-source': (
