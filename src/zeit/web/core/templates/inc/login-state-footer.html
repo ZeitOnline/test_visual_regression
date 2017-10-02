@@ -1,5 +1,5 @@
 {# include customer ID for script enabled webtrekk requests #}
-<div id="login-state" data-sso-id="{{ request.user.ssoid }}" data-sso-url="{{ request.user.entry_url }}"></div>
+<div id="login-state" data-sso-id="{{ request.user.ssoid }}"></div>
 {# Make Login-Status available for CSS styling. Works because this is loaded via ESI. #}
 {% if request.user %}
 <script type="text/javascript">document.documentElement.className += ' is-loggedin';</script>
