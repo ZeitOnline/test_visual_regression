@@ -1,3 +1,5 @@
+$underline-spacing: 0 1.18em !default
+
 .article-heading
 	margin: 0
 	padding-top: remify(16px)
@@ -20,13 +22,7 @@
 		margin-right: auto
 		max-width: $wide-content-width
 		&--underlined
-			background-image: linear-gradient(90deg, $zar-sun-yellow, $zar-sun-yellow)
-			background-size: auto 4px
-			background-repeat: repeat-x
-			// use em here deliberately to match underline's position with
-			// parent's font-size across viewports
-			background-position: 0 1.18em
-			text-shadow: -2px 3px $white, 2px 3px $white, 0 3px $white, -3px -2px $white, -1.5px 1.5px $white
+			border-bottom: 4px solid $color-underline
 
 +respond-min($break-tablet-min)
 	.article-heading
@@ -41,8 +37,7 @@
 		&__title
 			font-size: remify(60px)
 			&--underlined
-				background-size: auto 7px
-				text-shadow: -4px 6px $white, 4px 6px $white, 0 6px $white, 1px 6px $white, -3px -2px $white
+				border-bottom: 7px solid $color-underline
 
 +respond-max(em(400px))
 		&__title
