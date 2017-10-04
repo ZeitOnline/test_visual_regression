@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4202: Remove entry_url from webtrekk
 
+- ARBEIT-64: Implement portraitbox protocol for ZEIT Arbeit
+
 
 3.95 (2017-09-27)
 -----------------

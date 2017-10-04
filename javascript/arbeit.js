@@ -27,6 +27,7 @@ require( 'web.core/plugins/jquery.inlinegallery' );
 require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.animateJobs' );
+require( 'web.core/plugins/jquery.toggleRegions' );
 
 $.notifications();
 
@@ -34,6 +35,7 @@ if ( pageType === 'centerpage' ) {
     $( '.js-dropdownlink' ).dropdownLink();
 } else if ( article.length ) {
     main.find( '.article-toc' ).toggleRegions();
+    main.find( '.js-toggle-region' ).toggleRegions();
     main.find( '.js-gallery' ).inlinegallery();
     main.find( '.js-infobox' ).infobox();
     comments.init();
