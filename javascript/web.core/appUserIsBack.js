@@ -142,7 +142,7 @@ function appUserIsBack( timestamp, options ) {
     };
 
     AppUserIsBack.prototype.init = function() {
-        if ( !window.Promise ) {
+        if ( !window.Promise || document.querySelector( '#app-user-is-back' ) ) {
             return;
         }
         var that = this,
