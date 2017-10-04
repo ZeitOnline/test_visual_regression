@@ -125,6 +125,9 @@ function appUserIsBack( timestamp, options ) {
      */
     AppUserIsBack.prototype.showUpdateMessage = function() {
         this.log( 'show update window' );
+        if ( this.options.force ) {
+            this.log( 'Forced display of message' );
+        }
         var template = require( 'web.core/templates/appUserIsBack.html' ),
             html = template({
                 text: this.options.text,
@@ -150,7 +153,9 @@ function appUserIsBack( timestamp, options ) {
                 ( response.last_published_semantic &&
                 ( now - Date.parse( response.last_published_semantic ) ) >= that.options.delta )
             ) {
-                that.log( 'info', 'lps: ' + response.last_published_semantic, 'now: ' + now  );
+                that.log( 'info', 'lps: ' + Date.parse( response.last_published_semantic ),
+                    'now: ' + now, 'diff: ',
+                    now - Date.parse( response.last_published_semantic ) );
                 that.showUpdateMessage();
             }
         }, function( error ) {
