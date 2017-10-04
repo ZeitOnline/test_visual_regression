@@ -6,7 +6,7 @@
 
 /**
  * check if a page is old in cache and show an unobstruvie info with reload button
- * @param  {int} timestamp unix timestamp of the last cache
+ * @param  {int} timestamp unix timestamp of the last cache, fallbacks to 'now'
  * @param  {object} options   override defaults by passing an object with new values
  * @return void
  */
@@ -40,7 +40,9 @@ function appUserIsBack( timestamp, options ) {
             slug: window.location.pathname,
             text: 'Die Seite wurde aktualisiert'
         };
-        this.options = this.mixit( options,     defaults );
+
+        this.options = this.mixit( options, defaults );
+        this.timestamp = timestamp || Date.now();
         this.init();
     }
 
@@ -145,17 +147,16 @@ function appUserIsBack( timestamp, options ) {
         if ( !window.Promise || document.querySelector( '#app-user-is-back' ) ) {
             return;
         }
-        var that = this,
-            now = Date.now();
+        var that = this;
         this.get( options.endpoint + options.slug ).then( function( response ) {
             if (
                 that.options.force ||
                 ( response.last_published_semantic &&
-                ( now - Date.parse( response.last_published_semantic ) ) >= that.options.delta )
+                ( that.timestamp - Date.parse( response.last_published_semantic ) ) >= that.options.delta )
             ) {
                 that.log( 'info', 'lps: ' + Date.parse( response.last_published_semantic ),
-                    'now: ' + now, 'diff: ',
-                    now - Date.parse( response.last_published_semantic ) );
+                    'now: ' + that.timestamp, 'diff: ',
+                    that.timestamp - Date.parse( response.last_published_semantic ) );
                 that.showUpdateMessage();
             }
         }, function( error ) {
