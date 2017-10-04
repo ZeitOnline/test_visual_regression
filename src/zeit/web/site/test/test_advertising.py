@@ -233,7 +233,7 @@ def test_adcontroller_values_return_values_on_article(
         ('keywords', 'zeitonline,affe,aggression,geschlechtsverkehr,'
             'schimpanse,sozialverhalten,studie'),
         ('tma', '')]
-    view = view = zeit.web.site.view_article.Article(
+    view = zeit.web.site.view_article.Article(
         content, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 

@@ -100,7 +100,7 @@ def test_zar_adcontroller_values_return_values_on_article(
         ('keywords', 'zeitonline,student,hochschule,auslandssemester,'
             'bafgantrag,praktikum,geschftfrmaanzge'),
         ('tma', '')]
-    view = view = zeit.web.arbeit.view_article.Article(
+    view = zeit.web.arbeit.view_article.Article(
         content, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
