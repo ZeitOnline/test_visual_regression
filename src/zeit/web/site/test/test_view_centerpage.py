@@ -1270,7 +1270,7 @@ def test_app_user_is_back_is_working(selenium_driver, testserver):
                 (By.CSS_SELECTOR, '.app-user-is-back')))
         assert True
     except TimeoutException:
-        assert False, 'Fullsize Image not loaded within 2 seconds'
+        assert False, 'appUserIsBack message not shown within 2 seconds'
 
 
 def test_advertorial_page_has_advertorial_label(testbrowser):

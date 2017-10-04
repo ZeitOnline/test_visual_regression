@@ -71,7 +71,7 @@ function appUserIsBack( timestamp, options ) {
     };
 
     /**
-     * plain vanilla get json with promis return
+     * plain vanilla get json with promise return
      * @param  {string} url        endpoint url
      * @return {promise}
      */
