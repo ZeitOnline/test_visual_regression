@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<centerpage type="centerpage" xmlns:esi="http://www.edge-delivery.org/esi/1.0" xmlns:xt="http://namespaces.zeit.de/xtransform/">
+<centerpage type="homepage" xmlns:esi="http://www.edge-delivery.org/esi/1.0" xmlns:xt="http://namespaces.zeit.de/xtransform/">
   <head xmlns:cp="http://namespaces.zeit.de/CMS/cp" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <topiclinks>
       <topiclink_title>Thematatara</topiclink_title>
@@ -47,7 +47,7 @@
     <attribute name="product-name" ns="http://namespaces.zeit.de/CMS/workflow">ZEIT ONLINE</attribute>
     <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
     <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
-    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Studium</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Arbeit</attribute>
     <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">n/a</attribute>
     <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
