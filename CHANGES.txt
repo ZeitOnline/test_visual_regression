@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ARBEIT-64: Implement portraitbox protocol for ZEIT Arbeit
 
+- FIX: Fix ZARs homepage iqd $handle
+
 
 3.95 (2017-09-27)
 -----------------
