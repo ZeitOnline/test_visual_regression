@@ -45,10 +45,39 @@
 	padding: remify($page-padding--small)
 	+respond-min($break-tablet-min)
 		padding: remify($page-padding)
+	// TODO: Warum ist das überhaupt ein article__item? Und die Buttons nicht?
+	// Und muss das so kompliziert sein???
+	&.article__item
+		margin-bottom: 0
 
-	.quote
-		&__link
+	.quote__link
 		line-height: 1.4
 		+on-interaction
 			border-bottom: 1px currentColor solid
 			color: currentColor
+
+.quote--share + .quote--share
+	margin-top: 0
+	border-top: 1px #fff solid
+
+// TODO: Breite lieber abstrakt oder simpel halten? Oder Container?
+// Warum ist das so ruckelig hier?
+
+.quote-sharing
+	text-align: right
+
+.quote-sharing__label
+	display: inline
+
+.quote-sharing__items
+	display: inline
+	list-style: none
+	margin: 0
+	padding: 0
+	text-align: right
+
+.quote-sharing__item
+	display: inline-block
+
+.quote-sharing__text
+	display: none // TODO: lieber visuallyhidden
