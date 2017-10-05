@@ -7,6 +7,12 @@ POSTDEPLOY
 - Nothing
 
 
+3.98 (unreleased)
+-----------------
+
+- Nothing changed yet.
+
+
 3.97 (2017-10-05)
 -----------------
 
