@@ -33,13 +33,18 @@
 		+respond-min($break-tablet-min)
 			font-size: 28px
 		&--underlined
+			text-decoration: underline
+			text-decoration-color: $zar-sun-yellow
+			text-decoration-skip: ink
+		&--underlined-skip
+			text-decoration: none
 			background-image: linear-gradient(90deg, $zar-sun-yellow, $zar-sun-yellow)
 			background-size: auto 4px
 			background-repeat: repeat-x
 			// use em here deliberately to match underline's position with
 			// parent's font-size across viewports
 			background-position: 0 1.18em
-			text-shadow: -2px 3px $white, 2px 3px $white, 0 3px $white, -2px -2px $white, -1.25px 1.5px $white
+			text-shadow: -2px 2px $white, 2px 2px $white, 0 3px $white, -2px -2px $white, -1.25px 1.5px $white
 
 	&__metadata
 		@extend %teaser-metadata

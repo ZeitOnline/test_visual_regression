@@ -1,5 +1,3 @@
-$underline-spacing: 0 1.18em !default
-
 .article-heading
 	margin: 0
 	padding-top: remify(16px)
@@ -22,7 +20,19 @@ $underline-spacing: 0 1.18em !default
 		margin-right: auto
 		max-width: $wide-content-width
 		&--underlined
-			border-bottom: 4px solid $color-underline
+			text-decoration: underline
+			text-decoration-color: $zar-sun-yellow
+			text-decoration-skip: ink
+		// deliberately use unbemmy enhancement
+		&--underlined-skip
+			text-decoration: none
+			background-image: linear-gradient(90deg, $zar-sun-yellow, $zar-sun-yellow)
+			background-size: auto 4px
+			background-repeat: repeat-x
+			// use em here deliberately to match underline's position with
+			// parent's font-size across viewports
+			background-position: 0 1.18em
+			text-shadow: -2px 3px $white, 2px 3px $white, 0 3px $white, -3px -2px $white, -1.5px 1.5px $white
 
 +respond-min($break-tablet-min)
 	.article-heading
@@ -36,8 +46,9 @@ $underline-spacing: 0 1.18em !default
 			max-width: $medium-content-width
 		&__title
 			font-size: remify(60px)
-			&--underlined
-				border-bottom: 7px solid $color-underline
+			&--underlined-skip
+				background-size: auto 7px
+				text-shadow: -4px 6px $white, 4px 6px $white, 0 6px $white, 1px 6px $white, -3px -2px $white
 
 +respond-max(em(400px))
 		&__title
