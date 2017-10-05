@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.97 (unreleased)
+3.97 (2017-10-05)
 -----------------
 
 - ZON-4201: Show an update hint when cached app page is old
