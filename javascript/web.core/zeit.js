@@ -43,8 +43,7 @@ var Zeit = window.Zeit || {},
         },
         cookieRead: function( name ) {
             return ( document.cookie.match( '(?:^|;) ?' + name + '\\s*=\\s*([^;]*)' ) || 0 )[ 1 ];
-        },
-        isWrapped: navigator.userAgent.indexOf( 'ZONApp' ) > -1
+        }
     },
     key;
 
