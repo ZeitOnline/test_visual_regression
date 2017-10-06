@@ -169,3 +169,45 @@ def caching_time_external_image(context):
 def varnish_caching_time_external_image(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return int(conf.get('varnish_caching_time_external', '600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
+@grokcore.component.adapter(zeit.content.text.interfaces.IText)
+def caching_time_text(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_text', '3600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
+@grokcore.component.adapter(zeit.content.text.interfaces.IText)
+def varnish_caching_time_text(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('varnish_caching_time_text', '3600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
+@grokcore.component.adapter(zeit.content.rawxml.interfaces.IRawXML)
+def caching_time_rawxml(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_rawxml', '3600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
+@grokcore.component.adapter(zeit.content.rawxml.interfaces.IRawXML)
+def varnish_caching_time_rawxml(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('varnish_caching_time_rawxml', '3600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
+@grokcore.component.adapter(zeit.cms.repository.interfaces.IUnknownResource)
+def caching_time_unknown(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_unknown', '3600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
+@grokcore.component.adapter(zeit.cms.repository.interfaces.IUnknownResource)
+def varnish_caching_time_unknown(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('varnish_caching_time_unknown', '3600'))
