@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Nothing
+- FIX: Support caching headers for text, rawxml and unknown content types 
 
 
 3.98 (unreleased)
