@@ -60,6 +60,7 @@
 				border-color: currentColor
 		ul
 			display: inline-block
+			margin-left: remify(-40px)
 			max-width: remify(400px)
 			text-align: left
 
@@ -118,3 +119,6 @@
 			&[aria-hidden="false"]
 				display: block
 
+	// on mobile, we need a marging to the next element, except it is a table of content.
+	.profilebox + *:not(.article-toc)
+		margin-top: remify(40px)
