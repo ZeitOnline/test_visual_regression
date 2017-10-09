@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.common.exceptions import NoSuchElementException
 import zeit.edit.interfaces
 import zeit.content.article.edit
 import zeit.cms.interfaces
@@ -370,3 +371,31 @@ def test_zar_profilebox_should_toggle_text_on_mobile(
     driver.set_window_size(1200, 800)
     assert text_switch.is_displayed() is False
     assert text_content.is_displayed() is True
+
+
+def test_zar_advertorial_marker_is_present(testbrowser):
+    browser = testbrowser('/arbeit/article/advertorial')
+    assert len(browser.cssselect('.advertorial-marker')) == 1
+    assert len(browser.cssselect('.advertorial-marker__title')) == 1
+    assert len(browser.cssselect('.advertorial-marker__text')) == 1
+
+
+def test_zar_article_underline_font_detection_works(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('%s/arbeit/article/simple' % testserver.url)
+    try:
+        driver.find_element_by_css_selector(
+            '.article-heading__title--underlined-skip')
+    except NoSuchElementException:
+        assert False, """Article titles should leverage janky background-image
+                         hack working w/ font PatronBold only"""
+
+    driver.get('%s/arbeit/article/advertorial' % testserver.url)
+    try:
+        driver.find_element_by_css_selector(
+            '.article-heading__title--underlined-skip')
+        assert False, """Advertorial articles should use just --underlined,
+                         hence no font PatronBold should be present"""
+    except NoSuchElementException:
+        assert True
