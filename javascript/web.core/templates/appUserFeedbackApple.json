@@ -1,0 +1,17 @@
+{
+"quest1"      :   "Gefällt Ihnen die ZEIT ONLINE App?",
+"answ1Yes"    :   "ja",
+"link1Yes"    :   "quest2",
+"answ1No"     :   "nein",
+"link1No"     :   "quest3",
+"quest2"      :   "Wollen Sie die App bewerten?",
+"answ2Yes"    :   "ja",
+"link2Yes"    :   "quest1",
+"answ2No"     :   "nein, danke",
+"link2No"     :   "quest3",
+"quest3"      :   "Wollen Sie uns Feedback geben?",
+"answ3Yes"    :   "ja",
+"link3Yes"    :   "http://www.zeit.de/feedback",
+"answ3No"     :   "nein",
+"link3No"     :   "close"
+}
