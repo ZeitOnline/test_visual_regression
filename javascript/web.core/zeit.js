@@ -55,5 +55,9 @@ for ( key in extension ) {
 
 Zeit.debounce = require( 'web.core/debounce' );
 Zeit.throttle = require( 'web.core/throttle' );
+// special app functionality
+if ( Zeit.isWrapped || window.location.href.indexOf( 'force-userisback' ) !== -1 ) {
+    Zeit.appUserIsBack = require( 'web.core/appUserIsBack' );
+}
 
 module.exports = Zeit;

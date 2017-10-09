@@ -1256,6 +1256,23 @@ def test_wrapped_features_are_triggered(testbrowser):
     assert 'isWrapped: true,' in browser.cssselect('head')[0].text_content()
 
 
+def test_app_user_is_back_is_working(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(375, 667)
+    script = 'return window.Zeit.appUserIsBack(123456789)'
+    driver.get(
+        '{}/zeit-online/slenderized-index?app-content&force-userisback'.format(
+            testserver.url))
+    driver.execute_script(script)
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.app-user-is-back')))
+        assert True
+    except TimeoutException:
+        assert False, 'appUserIsBack message not shown within 2 seconds'
+
+
 def test_advertorial_page_has_advertorial_label(testbrowser):
     browser = testbrowser('/zeit-online/advertorial-index')
     assert browser.cssselect('.header__ad-label')
@@ -1613,6 +1630,7 @@ def test_studiumbox_changes_tabs(selenium_driver, testserver):
 
 def test_studiumbox_interessentest_works(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     box.find_elements_by_tag_name('h2')
@@ -1630,6 +1648,7 @@ def test_studiumbox_interessentest_works(selenium_driver, testserver):
 
 def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1652,6 +1671,7 @@ def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_works(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1676,6 +1696,7 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     link = box.find_elements_by_tag_name('h2')[2].find_element_by_tag_name('a')
@@ -1795,6 +1816,7 @@ def test_imagecopyright_link_is_present_on_articles(testbrowser):
 
 def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     link = driver.find_element_by_css_selector('.js-image-copyright-footer')
     link.click()

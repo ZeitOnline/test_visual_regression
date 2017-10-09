@@ -100,7 +100,25 @@ def test_zar_adcontroller_values_return_values_on_article(
         ('keywords', 'zeitonline,student,hochschule,auslandssemester,'
             'bafgantrag,praktikum,geschftfrmaanzge'),
         ('tma', '')]
-    view = view = zeit.web.site.view_article.Article(
+    view = zeit.web.arbeit.view_article.Article(
+        content, pyramid.testing.DummyRequest())
+    assert adcv == view.adcontroller_values
+
+
+def test_zar_adcontroller_values_return_values_on_homepage(
+        application, togglepatch):
+    togglepatch({'iqd_digital_transformation': True})
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/arbeit/index')
+    adcv = [
+        ('$handle', 'arbeit_homepage_trsf'),
+        ('level2', u'arbeit'),
+        ('level3', ''),
+        ('level4', ''),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline'),
+        ('tma', '')]
+    view = zeit.web.arbeit.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest())
     assert adcv == view.adcontroller_values
 
