@@ -32,6 +32,11 @@
 		font-size: remify(15px)
 		line-height: 1.47
 		margin: 0
+
+	&__text-switch
+		display: none
+
+	&__text-content
 		&:before
 			content: ''
 			background-color: $zar-cool-grey
@@ -39,12 +44,7 @@
 			height: remify(30px)
 			margin: 0 auto remify(20px) auto
 			width: remify(1px)
-
-	&__text-switch
-		display: none
-
-	// content is a markup field in Vivi. We need to handle that.
-	&__text-content
+		// content is a markup field in Vivi. We need to handle that.
 		> p:first-child
 			margin-top: 0
 		> p:last-child
@@ -63,7 +63,7 @@
 +respond-min($break-tablet-min)
 	.profilebox
 		margin-bottom: remify(60px)
-		&__text:before
+		&__text-content:before
 			height: remify(60px)
 
 // Gibts überhaupt Browser die flex können, aber kein @supports?
