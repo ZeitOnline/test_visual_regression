@@ -159,3 +159,39 @@ def test_zar_desktop_ads_are_rendered_on_cp(testbrowser, togglepatch):
     assert len(browser.cssselect('#ad-desktop-4')) == 1
     assert len(browser.cssselect('#ad-desktop-5')) == 1
     assert len(browser.cssselect('#ad-desktop-16')) == 1
+
+
+def test_zar_adcontroller_values_return_values_on_advertorial_cp(
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/arbeit/centerpage/advertorial')
+    adcv = [
+        ('$handle', 'adv_index_trsf'),
+        ('level2', u'adv'),
+        ('level3', u'studium'),
+        ('level4', ''),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,zeitarbeit'),
+        ('tma', '')]
+    view = zeit.web.arbeit.view_article.Article(content, dummy_request)
+    assert adcv == view.adcontroller_values
+
+
+def test_zar_adcontroller_values_return_values_on_advertorial_article(
+        application, dummy_request, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'iqd_digital_transformation': True}.get)
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/arbeit/article/advertorial')
+    adcv = [
+        ('$handle', 'adv_artikel_trsf'),
+        ('level2', u'adv'),
+        ('level3', u'iwcschaffhausen'),
+        ('level4', ''),
+        ('$autoSizeFrames', True),
+        ('keywords', 'zeitonline,zeitarbeit'),
+        ('tma', '')]
+    view = zeit.web.arbeit.view_article.Article(content, dummy_request)
+    assert adcv == view.adcontroller_values
