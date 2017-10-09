@@ -97,7 +97,8 @@ def test_zar_adcontroller_values_return_values_on_article(
         ('level3', ''),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline,student,hochschule,auslandssemester,'
+        ('keywords',
+            'zeitonline,zeitarbeit,student,hochschule,auslandssemester,'
             'bafgantrag,praktikum,geschftfrmaanzge'),
         ('tma', '')]
     view = zeit.web.arbeit.view_article.Article(
@@ -116,7 +117,7 @@ def test_zar_adcontroller_values_return_values_on_homepage(
         ('level3', ''),
         ('level4', ''),
         ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
+        ('keywords', 'zeitonline,zeitarbeit'),
         ('tma', '')]
     view = zeit.web.arbeit.view_centerpage.Centerpage(
         content, pyramid.testing.DummyRequest())
