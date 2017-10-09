@@ -33,6 +33,10 @@ class Base(zeit.web.core.view.Base):
     def ressort_literally(self):
         return 'Arbeit'
 
+    @zeit.web.reify
+    def adwords(self):
+        return ['zeitonline', 'zeitarbeit']
+
 
 class Content(Base):
 
