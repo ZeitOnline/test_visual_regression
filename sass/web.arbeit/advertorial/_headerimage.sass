@@ -38,3 +38,14 @@
 		width: remify(2px)
 	&__media-container
 		+teaser-image-dark-overlay($color: rgba(0, 0, 0, 0.5))
+
+	&__adlabel
+		@extend %ad-label
+		font-size: remify(9px)
+		position: absolute
+		right: $page-padding--small
+		top: remify(10px)
+		color: $white
+		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			display: none
