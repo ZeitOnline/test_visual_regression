@@ -1,31 +1,33 @@
 .header-advertorial
 	&__heading
-		transform: translateY(-50%)
 		position: absolute
-		text-align: center
 		top: 50%
+		transform: translateY(-50%)
+		text-align: center
 		width: 100%
+		color: $white
+		padding: 0 $page-padding--small
+		+respond-min($break-tablet-min)
+			padding: $vertical-space $page-padding
 
 	&__kicker
 		+font-smoothing
-		color: $zar-white
-		font-size: em(10px)
-		text-transform: uppercase
-		font-weight: bold
-		letter-spacing: 0.175em
+		font-size: remify(15px)
+		letter-spacing: $letter-spacing-s
 		display: block
 
 	&__title
 		+font-smoothing
 		font-size: remify(28px)
 		font-weight: bold
-		color: $zar-white
 		letter-spacing: $letter-spacing-m
-		text-transform: uppercase
 		line-height: 1.2em
+		+respond-min($break-tablet-min)
+			font-size: remify(60px)
 
 .header-image
 	position: relative
+	margin-bottom: $vertical-space--small
 	&:after
 		content: ''
 		background-color: $zar-sun-yellow
@@ -36,6 +38,9 @@
 		display: block
 		height: remify(30px)
 		width: remify(2px)
+		+respond-min($break-tablet-min)
+			height: remify(60px)
+
 	&__media-container
 		+teaser-image-dark-overlay($color: rgba(0, 0, 0, 0.5))
 
