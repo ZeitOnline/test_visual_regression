@@ -16,13 +16,13 @@
 
         <ul class="quote-sharing__items" data-ct-row="social">
             <li class="quote-sharing__item">
-                <a class="{{ 'quote-sharing__link' | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}&quote={{ block.text | urlencode }}" target="_blank" data-ct-label="facebook">
+                <a class="{{ 'quote-sharing__link' | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}&quote={{ block.text | urlencode }}" target="_blank" data-ct-label="facebook" title="Auf Facebook teilen">
                     {{ lama.use_svg_icon('sharing-facebook', 'quote-sharing__icon' | with_mods('facebook'), view.package) }}
                     <span class="quote-sharing__text">Auf Facebook teilen</span>
                 </a>
             </li>
             <li class="quote-sharing__item">
-                <a class="{{ 'quote-sharing__link' | with_mods('twitter') }}" href="#" target="_blank" data-ct-label="twitter">
+                <a class="{{ 'quote-sharing__link' | with_mods('twitter') }}" href="#" target="_blank" data-ct-label="twitter" title="Auf Twitter teilen">
                     {{ lama.use_svg_icon('sharing-twitter', 'quote-sharing__icon' | with_mods('twitter'), view.package) }}
                     <span class="quote-sharing__text">Auf Twitter teilen</span>
                 </a>
