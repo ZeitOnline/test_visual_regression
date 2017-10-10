@@ -19,12 +19,15 @@
 		color: #fff
 		font-size: remify(20px)
 		line-height: 1.3
+		margin: remify(20px 0 5px 0)
 
 	&__subtitle
 		font-family: $font-franziska
 		color: $zar-cool-grey
 		font-size: remify(18px)
+		font-weight: normal
 		line-height: 1.22
+		margin: remify(5px 0 20px 0)
 
 	&__text
 		font-family: $font-tabletgothic
@@ -32,6 +35,11 @@
 		font-size: remify(15px)
 		line-height: 1.47
 		margin: 0
+
+	&__text-switch
+		display: none
+
+	&__text-content
 		&:before
 			content: ''
 			background-color: $zar-cool-grey
@@ -39,12 +47,7 @@
 			height: remify(30px)
 			margin: 0 auto remify(20px) auto
 			width: remify(1px)
-
-	&__text-switch
-		display: none
-
-	// content is a markup field in Vivi. We need to handle that.
-	&__text-content
+		// content is a markup field in Vivi. We need to handle that.
 		> p:first-child
 			margin-top: 0
 		> p:last-child
@@ -57,13 +60,14 @@
 				border-color: currentColor
 		ul
 			display: inline-block
+			margin-left: remify(-40px)
 			max-width: remify(400px)
 			text-align: left
 
 +respond-min($break-tablet-min)
 	.profilebox
 		margin-bottom: remify(60px)
-		&__text:before
+		&__text-content:before
 			height: remify(60px)
 
 // Gibts überhaupt Browser die flex können, aber kein @supports?
@@ -115,3 +119,6 @@
 			&[aria-hidden="false"]
 				display: block
 
+	// on mobile, we need a marging to the next element, except it is a table of content.
+	.profilebox + *:not(.article-toc)
+		margin-top: remify(40px)
