@@ -28,6 +28,7 @@ require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.animateJobs' );
 require( 'web.core/plugins/jquery.toggleRegions' );
+require( 'web.arbeit/plugins/jquery.shareBlocks' );
 
 $.notifications();
 
