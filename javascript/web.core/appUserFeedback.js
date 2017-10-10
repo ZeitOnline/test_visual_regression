@@ -47,7 +47,7 @@ function appUserFeedback() {
     }
 
     // get json
-    let options = require( 'web.core/templates/appUserFeedback' + mobileConf + '.json' );
+    var options = require( 'web.core/templates/appUserFeedback' + mobileConf + '.json' );
 
     var extend = function( defaults, options ) {
     // merge defaults with user options
