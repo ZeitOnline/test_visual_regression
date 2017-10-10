@@ -186,4 +186,4 @@ def test_article_shows_no_zplus_badge_for_metered_article(testbrowser):
 
 def test_zmo_advertorial_has_no_home_button_as_pagination(testbrowser):
     browser = testbrowser('/zeit-magazin/article/advertorial-onepage')
-    assert len(browser.cssselect('.article-pagination')) == 0
+    assert len(browser.cssselect('.article-pagination__link')) == 0

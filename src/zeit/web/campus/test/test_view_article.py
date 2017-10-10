@@ -368,4 +368,4 @@ def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
 
 def test_campus_advertorial_has_no_home_button_as_pagination(testbrowser):
     browser = testbrowser('/campus/article/advertorial-onepage')
-    assert len(browser.cssselect('.article-pagination')) == 0
+    assert len(browser.cssselect('.article-pagination__link')) == 0
