@@ -400,3 +400,8 @@ def test_zar_article_underline_applied_according_to_font_detection(
                        "be present")
     except NoSuchElementException:
         assert True
+
+
+def test_zar_advertorial_has_no_home_button_as_pagination(testbrowser):
+    browser = testbrowser('/arbeit/article/advertorial-onepage')
+    assert len(browser.cssselect('.article-pagination')) == 0

@@ -364,3 +364,8 @@ def test_paywall_switch_showing_forms(c1_parameter, testbrowser):
         assert len(browser.cssselect('.gate')) == 1
         assert len(browser.cssselect(
             '.gate--register')) == int('anonymous' in c1_parameter)
+
+
+def test_campus_advertorial_has_no_home_button_as_pagination(testbrowser):
+    browser = testbrowser('/campus/article/advertorial-onepage')
+    assert len(browser.cssselect('.article-pagination')) == 0
