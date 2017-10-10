@@ -380,7 +380,7 @@ def test_zar_advertorial_marker_is_present(testbrowser):
     assert len(browser.cssselect('.advertorial-marker__text')) == 1
 
 
-def test_zar_article_underline_font_detection_works(
+def test_zar_article_underline_applied_according_to_font_detection(
         selenium_driver, testserver):
     driver = selenium_driver
     driver.get('%s/arbeit/article/simple' % testserver.url)
@@ -388,14 +388,15 @@ def test_zar_article_underline_font_detection_works(
         driver.find_element_by_css_selector(
             '.article-heading__title--underlined-skip')
     except NoSuchElementException:
-        assert False, """Article titles should leverage janky background-image
-                         hack working w/ font PatronBold only"""
+        assert False, ("Article titles should leverage janky background-image "
+                       "hack for underline working w/ font PatronBold only")
 
     driver.get('%s/arbeit/article/advertorial' % testserver.url)
     try:
         driver.find_element_by_css_selector(
             '.article-heading__title--underlined-skip')
-        assert False, """Advertorial articles should use just --underlined,
-                         hence no font PatronBold should be present"""
+        assert False, ("Advertorial articles should just use mod "
+                       "'--underlined', hence no font PatronBold should "
+                       "be present")
     except NoSuchElementException:
         assert True
