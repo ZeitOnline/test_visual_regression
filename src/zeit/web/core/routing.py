@@ -119,6 +119,28 @@ class Article(Traversable):
         if tdict['view_name'].startswith('seite') and not tdict['subpath']:
             tdict['view_name'] = 'seite'
 
+        if tdict['view_name'] == 'module':
+            tdict['context'] = self.context.body
+            tdict['traversed'] += (tdict['view_name'],)
+            tdict['view_name'] = ''
+            raise Retraverse(tdict['request'])
+
+
+@traverser(zeit.content.article.edit.interfaces.IEditableBody)
+class ArticleBody(Traversable):
+
+    def __call__(self, tdict):
+        try:
+            tdict['context'] = self.context[tdict['subpath'][0]]
+        except (IndexError, KeyError, TypeError):
+            pass
+        else:
+            tdict['traversed'] += (tdict['subpath'][0],)
+            tdict['subpath'] = tdict['subpath'][1:]
+            if len(tdict['subpath']) == 1:
+                tdict['view_name'] = tdict['subpath'][0]
+                tdict['subpath'] = ()
+
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
 class CenterPage2015(Traversable):
