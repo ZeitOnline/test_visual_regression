@@ -437,6 +437,7 @@ def RawText(context):  # NOQA
 class Citation(Block):
 
     def __init__(self, model_block):
+        self.model_block = model_block
         self.url = model_block.url
         self.attribution = model_block.attribution
         self.text = model_block.text

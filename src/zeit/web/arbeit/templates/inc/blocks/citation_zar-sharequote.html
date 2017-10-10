@@ -1,0 +1,6 @@
+{% extends "zeit.web.arbeit:templates/inc/blocks/citation_zar-yellow.html" %}
+
+{% block citation_after_block %}
+{{super()}}
+<a href="{{ context | create_url}}/module/{{ block.model_block.__parent__.index(block.model_block) }}/sharequote">XXX share me</a>
+{% endblock %}
