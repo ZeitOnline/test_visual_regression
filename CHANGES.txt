@@ -4,13 +4,13 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- FIX: Support caching headers for text, rawxml and unknown content types 
+- FIX: Support caching headers for text, rawxml and unknown content types
 
 
 3.98 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4253: Polish portraitbox
 
 
 3.97 (2017-10-05)
