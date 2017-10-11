@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-
 import grokcore.component
+import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.site.area.rss
@@ -10,15 +9,19 @@ import zeit.web.site.area.rss
 @grokcore.component.adapter(zeit.arbeit.interfaces.IJobboxTicker)
 class JobboxTicker(zeit.web.core.block.Block):
 
-    def __init__(self, model_block):
-        self.model_block = model_block.jobbox_ticker
-        self.items = list(zeit.web.site.area.rss.parse_feed(
-            self.model_block.feed_url, 'jobbox_ticker'))
+    @zeit.web.reify
+    def content(self):
+        return self.context.jobbox_ticker
+
+    @zeit.web.reify
+    def items(self):
+        return list(zeit.web.site.area.rss.parse_feed(
+            self.content.feed_url, 'jobbox_ticker'))
 
     @zeit.web.reify
     def teaser_text(self):
-        return self.model_block.teaser
+        return self.content.teaser
 
     @zeit.web.reify
     def landing_page_url(self):
-        return self.model_block.landing_url
+        return self.content.landing_url

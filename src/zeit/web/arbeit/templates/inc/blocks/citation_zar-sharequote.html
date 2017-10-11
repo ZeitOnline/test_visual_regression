@@ -2,5 +2,5 @@
 
 {% block citation_after_block %}
 {{super()}}
-<a href="{{ context | create_url}}/module/{{ block.model_block.__parent__.index(block.model_block) }}/sharequote">XXX share me</a>
+<a href="{{ context | create_url}}/module/{{ block.position }}/sharequote">XXX share me</a>
 {% endblock %}

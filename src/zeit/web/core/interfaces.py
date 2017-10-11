@@ -16,6 +16,8 @@ class IFrontendBlock(zope.interface.Interface):
     layout = zope.interface.Attribute(
         'String that modifies how this block is to be displayed')
 
+    context = zope.interface.Attribute('The vivi-side module object')
+
 
 class IDeltaTime(zope.interface.Interface):
     """A date that has been processed through babel which is actually used
