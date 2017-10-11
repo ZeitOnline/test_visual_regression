@@ -284,21 +284,21 @@ class AuthorImage(Image):
     fill_color = None
 
 
-@grokcore.component.adapter(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
-class FrontendBlockImage(Image):
+class ArticleModuleImage(Image):
 
     @zeit.web.reify
     def variant_id(self):
         if self.context.variant_id:
             return self.context.variant_id
         else:
-            return super(FrontendBlockImage, self).variant_id
+            return super(ArticleModuleImage, self).variant_id
 
 
 @grokcore.component.adapter(zeit.web.core.interfaces.INextread)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
-class NextreadImage(FrontendBlockImage):
+class NextreadImage(ArticleModuleImage):
 
     @zeit.web.reify
     def layout(self):

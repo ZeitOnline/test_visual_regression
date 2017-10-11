@@ -10,7 +10,7 @@ def test_image_template_should_produce_figure_markup(
         tplbrowser, dummy_request):
     block = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01').main_image_block
-    image = zeit.web.core.interfaces.IFrontendBlock(block)
+    image = zeit.web.core.interfaces.IArticleModule(block)
     browser = tplbrowser(
         'zeit.web.magazin:templates/inc/asset/image_article.tpl',
         block=image, request=dummy_request)
@@ -24,7 +24,7 @@ def test_image_template_should_produce_copyright_caption(
         tplbrowser, dummy_request):
     block = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01').main_image_block
-    image = zeit.web.core.interfaces.IFrontendBlock(block)
+    image = zeit.web.core.interfaces.IArticleModule(block)
     browser = tplbrowser(
         'zeit.web.magazin:templates/inc/asset/image_article.tpl',
         block=image, request=dummy_request)

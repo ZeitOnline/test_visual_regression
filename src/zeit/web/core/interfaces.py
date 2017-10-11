@@ -1,16 +1,15 @@
 import pyramid.interfaces
 import zope.interface
-import zope.interface.common.sequence
 
 import zeit.edit.interfaces
 
 
-class IFrontendBlock(zope.interface.Interface):
-    """An item that provides data from an article-body block to a Jinja macro.
+class IArticleModule(zope.interface.Interface):
+    """An item that provides data from an article-body module to a Jinja macro.
 
     This interface is both a marker for identifying front-end objects
-    representing blocks, and a mechanical detail of using the ZCA to construct
-    such a front-end representation of a given vivi article-body block.
+    representing modules, and a mechanical detail of using the ZCA to construct
+    such a front-end representation of a given vivi article-body modules.
     """
 
     layout = zope.interface.Attribute(
@@ -136,7 +135,7 @@ class IBannerlist(zope.interface.Interface):
     """A list of ad places"""
 
 
-class INextread(IFrontendBlock):
+class INextread(IArticleModule):
     """Nextread teaser block must be similar to zeit.content.cp.TeaserBlock"""
 
 

@@ -91,5 +91,5 @@ class Citation(Article):
             # pyramid's rendering is independent of view class instantiation,
             # and thus is unaffected by our change of self.context.
             'context': self.context,
-            'module': zeit.web.core.interfaces.IFrontendBlock(self.module),
+            'module': zeit.web.core.interfaces.IArticleModule(self.module),
         }

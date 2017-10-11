@@ -5,9 +5,9 @@ import zeit.web.core.interfaces
 import zeit.web.site.area.rss
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.arbeit.interfaces.IJobboxTicker)
-class JobboxTicker(zeit.web.core.block.Block):
+class JobboxTicker(zeit.web.core.block.Module):
 
     @zeit.web.reify
     def content(self):

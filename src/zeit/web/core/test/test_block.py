@@ -552,7 +552,7 @@ def test_volume_should_ignore_invalid_references(application):
         'http://xml.zeit.de/zeit-online/article/volumeteaser')
     article.xml.xpath('//volume')[0].set('href', 'http://xml.zeit.de/invalid')
     module = article.body.values()[1]
-    assert zeit.web.core.interfaces.IFrontendBlock(module, None) is None
+    assert zeit.web.core.interfaces.IArticleModule(module, None) is None
 
 
 def test_podcast_should_render_script_tag_for_player(testbrowser):
@@ -569,7 +569,7 @@ def test_podcast_header_should_provide_podlove_data(application):
     block = header.values()[0]
     module = zope.component.getMultiAdapter(
         (block, header),
-        zeit.web.core.interfaces.IFrontendBlock)
+        zeit.web.core.interfaces.IArticleModule)
     podlove = module.podlove_configuration
     assert podlove['title'] == 'Test'
     assert podlove['cover'].startswith('https://cdn.podigee.com')

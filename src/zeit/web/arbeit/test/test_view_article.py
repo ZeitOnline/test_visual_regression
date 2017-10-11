@@ -240,7 +240,7 @@ def test_zar_article_should_provide_jobboxticker(
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/arbeit/article/jobbox-ticker')
     body = zeit.content.article.edit.interfaces.IEditableBody(article)
-    jobbox_ticker = zeit.web.core.interfaces.IFrontendBlock(body[1])
+    jobbox_ticker = zeit.web.core.interfaces.IArticleModule(body[1])
     ticker_item = list(jobbox_ticker.items)[0]
     assert 'my_title' == ticker_item.title
     assert 'my_text' == ticker_item.text

@@ -5,9 +5,9 @@ import zeit.web.core.block
 import zeit.web.core.interfaces
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.campus.interfaces.IStudyCourse)
-class StudyCourse(zeit.web.core.block.Block):
+class StudyCourse(zeit.web.core.block.Module):
 
     def __new__(cls, context):
         if context.course is None:

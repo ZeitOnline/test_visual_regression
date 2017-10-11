@@ -32,8 +32,8 @@ DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
 LONG_TERM_CACHE = zeit.web.core.cache.get_region('long_term')
 
 
-@zope.interface.implementer(zeit.web.core.interfaces.IFrontendBlock)
-class Block(object):
+@zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)
+class Module(object):
 
     layout = ''
 
@@ -45,9 +45,9 @@ class Block(object):
         return self.context.__parent__.index(self.context)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IParagraph)
-class Paragraph(Block):
+class Paragraph(Module):
 
     @zeit.web.reify
     def html(self):
@@ -69,7 +69,7 @@ class Paragraph(Block):
         return unicode(self.html)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(
     zeit.content.article.edit.interfaces.IUnorderedList)
 class UnorderedList(Paragraph):
@@ -81,15 +81,15 @@ class UnorderedList(Paragraph):
         return _inline_html(self.context.xml, additional_elements)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IOrderedList)
 class OrderedList(UnorderedList):
     pass
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IAuthor)
-class Authorbox(Block):
+class Authorbox(Module):
 
     @zeit.web.reify
     def author(self):
@@ -100,9 +100,9 @@ class Authorbox(Block):
         return self.context.references.biography
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPortraitbox)
-class Portraitbox(Block):
+class Portraitbox(Module):
 
     @zeit.web.reify
     def text(self):
@@ -128,9 +128,9 @@ class Portraitbox(Block):
         return ''.join(parts)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IBox)
-class Box(Block):
+class Box(Module):
 
     @zeit.web.reify
     def supertitle(self):
@@ -155,9 +155,9 @@ def box_images(context):
     return zeit.content.image.interfaces.IImages(context.context)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IVolume)
-class Volume(Block):
+class Volume(Module):
 
     def __new__(cls, context):
         if context.references.target is None:
@@ -210,9 +210,9 @@ def make_article_blocks_work_with_infobox_content(context):
     return context.__parent__
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IInfobox)
-class Infobox(Block):
+class Infobox(Module):
 
     @zeit.web.reify
     def content(self):
@@ -247,14 +247,14 @@ class Infobox(Block):
             title = block.find('title')
             division = InfoboxDivision(self.content, text)
             result.append(
-                (title, [zeit.web.core.interfaces.IFrontendBlock(
+                (title, [zeit.web.core.interfaces.IArticleModule(
                     b, None) for b in division.values()]))
         return result
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ILiveblog)
-class Liveblog(Block):
+class Liveblog(Module):
 
     def __init__(self, context):
         super(Liveblog, self).__init__(context)
@@ -344,8 +344,8 @@ class Liveblog(Block):
 
 
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IQuiz)
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
-class Quiz(Block):
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
+class Quiz(Module):
 
     @zeit.web.reify
     def url(self):
@@ -357,9 +357,9 @@ class Quiz(Block):
         return '&adcontrol' if self.context.adreload_enabled else ''
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IImage)
-class Image(Block):
+class Image(Module):
 
     def __init__(self, context):
         super(Image, self).__init__(context)
@@ -394,7 +394,7 @@ class Image(Block):
     zeit.content.article.edit.interfaces.IImage,
     zeit.content.article.edit.interfaces.IHeaderArea
 )
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 class HeaderImage(Image):
 
     block_type = 'image'
@@ -432,17 +432,17 @@ def images_from_block(context):
         context.context, zeit.content.image.interfaces.IImages)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IIntertitle)
-class Intertitle(Block):
+class Intertitle(Module):
 
     def __str__(self):
         return unicode(self.context.text)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawXML)
-class Raw(Block):
+class Raw(Module):
 
     @zeit.web.reify
     def alldevices(self):
@@ -453,18 +453,18 @@ class Raw(Block):
         return _raw_html(self.context.xml)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
-class RawText(Block):
+class RawText(Module):
 
     @zeit.web.reify
     def raw_code(self):
         return self.context.raw_code
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ICitation)
-class Citation(Block):
+class Citation(Module):
 
     @zeit.web.reify
     def url(self):
@@ -483,9 +483,9 @@ class Citation(Block):
         return self.context.layout
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
-class Video(Block):
+class Video(Module):
 
     def __init__(self, context):
         super(Video, self).__init__(context)
@@ -515,7 +515,7 @@ class Video(Block):
     zeit.content.article.edit.interfaces.IVideo,
     zeit.content.article.edit.interfaces.IHeaderArea
 )
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 class HeaderVideo(Video):
 
     block_type = 'video'
@@ -524,9 +524,9 @@ class HeaderVideo(Video):
         super(HeaderVideo, self).__init__(context)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IGallery)
-class Gallery(Block):
+class Gallery(Module):
 
     def __new__(cls, context):
         if context.references is None:
@@ -557,8 +557,8 @@ class Gallery(Block):
 
 
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPodcast)
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
-class Podcast(Block):
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
+class Podcast(Module):
 
     @zeit.web.reify
     def episode(self):
@@ -614,16 +614,16 @@ class Podcast(Block):
     zeit.content.article.edit.interfaces.IPodcast,
     zeit.content.article.edit.interfaces.IHeaderArea
 )
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 class HeaderPodcast(Podcast):
 
     def __init__(self, context, header):
         super(HeaderPodcast, self).__init__(context)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.newsletter.interfaces.IGroup)
-class NewsletterGroup(Block):
+class NewsletterGroup(Module):
 
     type = 'group'
 
@@ -634,13 +634,13 @@ class NewsletterGroup(Block):
         return self.context.title
 
     def values(self):
-        return [zeit.web.core.interfaces.IFrontendBlock(x)
+        return [zeit.web.core.interfaces.IArticleModule(x)
                 for x in self.context.values()]
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.newsletter.interfaces.ITeaser)
-class NewsletterTeaser(Block):
+class NewsletterTeaser(Module):
 
     autoplay = None
 
@@ -671,7 +671,7 @@ class NewsletterTeaser(Block):
             self.context.reference, None)
         if body is None:
             return []
-        return [zeit.web.core.interfaces.IFrontendBlock(element)
+        return [zeit.web.core.interfaces.IArticleModule(element)
                 for element in body.values()
                 if zeit.content.article.edit.interfaces.IVideo.providedBy(
                     element)]
@@ -690,9 +690,9 @@ class NewsletterTeaser(Block):
         return getattr(self.context.reference, name)
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.newsletter.interfaces.IAdvertisement)
-class NewsletterAdvertisement(Block):
+class NewsletterAdvertisement(Module):
 
     type = 'advertisement'
 
