@@ -25,10 +25,12 @@
 			text-decoration: underline
 			text-decoration-color: $color-underline
 			text-decoration-skip: ink
-		// enhanced via font-detection, see javascript/arbeit.js:53
+		// janky underline hack - works only w/ font PatronBold
 		&--underlined-skip
+			// consider underline for multiline headings
+			display: inline
 			text-decoration: none
-			background-image: linear-gradient(90deg, $zar-sun-yellow, $zar-sun-yellow)
+			background-image: linear-gradient(90deg, $color-underline, $color-underline)
 			background-size: auto 4px
 			background-repeat: repeat-x
 			// use em here deliberately to match underline's position with
