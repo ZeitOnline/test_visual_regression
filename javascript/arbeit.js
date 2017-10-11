@@ -41,6 +41,7 @@ if ( pageType === 'centerpage' ) {
     main.find( '.js-infobox' ).infobox();
     comments.init();
     $( '.comment-section' ).countFormchars();
+    main.find( '.js-shareblock' ).shareBlocks();
 }
 
 // more ("non critical") global stuff

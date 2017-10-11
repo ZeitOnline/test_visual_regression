@@ -28,7 +28,7 @@
                     {% set article_url = context | create_url %}
                     {% set sharebert_screenshot_target = '%s/module/%s/sharequote' | format(article_url, block.position) %}
 
-                    <a class="{{ 'quote-sharing__link' | with_mods('twitter') }} js-shareblock" href="#" target="_blank" data-ct-label="twitter" title="Auf Twitter teilen">
+                    <a class="{{ 'quote-sharing__link' | with_mods('twitter') }} js-shareblock" href="#" target="_blank" data-ct-label="twitter" title="Auf Twitter teilen" data-sharebert-screenshot-target="{{ sharebert_screenshot_target }}" data-sharebert-redirect-url="{{ article_url }}">
                         {{ lama.use_svg_icon('sharing-twitter', 'quote-sharing__icon' | with_mods('twitter'), view.package) }}
                         <span class="quote-sharing__text">Auf Twitter teilen</span>
                     </a>
