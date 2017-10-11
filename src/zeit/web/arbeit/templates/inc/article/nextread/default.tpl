@@ -28,6 +28,6 @@
 
 {% block teaser_title %}
     <span class="{{ self.layout() }}__title">
-        <span class="{{ self.layout() }}__title--underlined">{{ teaser.teaserTitle or teaser.title }}</span>
+        <span class="{{ '%s' | format (self.layout() ~ '__title') | with_mods('underlined' if view.is_advertorial else 'underlined-skip') }}">{{ teaser.teaserTitle or teaser.title }}</span>
     </span>
 {% endblock %}
