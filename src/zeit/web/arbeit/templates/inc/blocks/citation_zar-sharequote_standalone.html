@@ -1,11 +1,59 @@
-<html>
-    <head></head>
-<body>
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{{ context.title }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noindex,nofollow">
 
-<h1>{{ context.title }} ({{ view.ressort }})</h1>
+        <style>
+        @font-face {
+                font-family: 'TabletGothic';
+                  src:  url('http://www.zeit.de/static/latest/fonts/tabletgothic/TabletGothic-Bold.woff2') format('woff2');
+              }
+        @font-face {
+                font-family: 'PatronBold';
+                  src:  url('http://www.zeit.de/static/latest/fonts/patron_bold/PatronWEB-Bold.woff2') format('woff2');
+              }
 
-<p>{{ module.text }}</p>
-<p>-- {{ module.attribution }}</p>
+        body {
+          background-color: #ffe52c;
+          color: #252525;;
+          margin: 0;
+          padding: .875rem;
+          // text-align: center;
+        }
 
-</body>
+        .quote__text {
+          font-family: "PatronBold","Helvetica Neue",Helvetica,Arial,FreeSans,sans-serif;
+            font-size: 1.375rem;
+            letter-spacing: .03em;
+            line-height: 1.3;
+            margin: 0;
+        }
+
+        .quote__source {
+          display: inline-block;
+            font-family: "TabletGothic","Helvetica Neue",Helvetica,Arial,FreeSans,sans-serif;
+            font-size: .9375rem;
+            margin-top: .875rem;
+        }
+
+        .quote__source:before {
+          content: url('data:image/svg+xml; utf8, <svg width="40px" height="9px" viewBox="0 0 40 9" xmlns="http://www.w3.org/2000/svg"><path d="M37.794 5H-.053V4H37.89L34.453.563l.707-.707 4.597 4.596L35 9.207l-.707-.707L37.794 5z"></path></svg>');
+            display: inline-block;
+            fill: currentColor;
+            margin-right: .5rem;
+        }
+        </style>
+    </head>
+    <body>
+        <figure class="quote">
+            <blockquote class="quote__text">{{ module.text }}</blockquote>
+            {% if module.attribution %}
+                <figcaption class="quote__source">{{ module.attribution }}</figcaption>
+            {% endif %}
+        </figure>
+    </body>
 </html>
