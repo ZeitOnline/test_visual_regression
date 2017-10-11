@@ -208,16 +208,16 @@ def test_adcontroller_values_return_values_on_article(application):
 
 def test_tile7_is_rendered_on_articles_with_multiple_pages(
         testbrowser):
-    selector = ('#ad-desktop-7', '#ad-mobile-4')
+    ad = '#ad-mobile-4'
 
     browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect(selector[1])) == 1
+    assert len(browser.cssselect(ad)) == 1
 
     browser = testbrowser('/zeit-online/article/zeit/seite-2')
-    assert len(browser.cssselect(selector[1])) == 1
+    assert len(browser.cssselect(ad)) == 1
 
     browser = testbrowser('/zeit-online/article/zeit/seite-5')
-    assert len(browser.cssselect(selector[1])) == 1
+    assert len(browser.cssselect(ad)) == 1
 
 
 def test_adplace_P4_is_rendered_on_articles_with_multiple_pages(
