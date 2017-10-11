@@ -3,9 +3,7 @@ import zeit.web.core.interfaces
 
 
 def test_campus_adcontroller_values_return_values_on_hp(
-        application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/index')
     adcv = [
@@ -28,9 +26,7 @@ def test_campus_hp_banner_channel_is_correct(application, dummy_request):
 
 
 def test_campus_adcontroller_values_return_values_on_cp(
-        application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/index')
     adcv = [
@@ -46,9 +42,7 @@ def test_campus_adcontroller_values_return_values_on_cp(
 
 
 def test_campus_adcontroller_values_return_values_on_article(
-        application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/adcontroller')
     adcv = [
@@ -64,9 +58,7 @@ def test_campus_adcontroller_values_return_values_on_article(
 
 
 def test_campus_adcontroller_values_return_values_on_advertorial_article(
-        application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/advertorial')
     adcv = [
@@ -82,9 +74,7 @@ def test_campus_adcontroller_values_return_values_on_advertorial_article(
 
 
 def test_campus_adcontroller_values_return_values_on_advertorial_cp(
-        application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/advertorial')
     adcv = [
@@ -105,9 +95,7 @@ def test_campus_adplace7_should_be_placeable_via_cpextra(testbrowser):
 
 
 def test_campus_adcontroller_values_return_values_on_topic_cp(
-        application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+        application, dummy_request):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/thema')
     adcv = [
@@ -123,9 +111,7 @@ def test_campus_adcontroller_values_return_values_on_topic_cp(
 
 
 def test_overridden_adcontroller_values(
-        application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+        application, dummy_request):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/centerpage/advertorial-with-banner-id')
     adcv = [
@@ -140,29 +126,16 @@ def test_overridden_adcontroller_values(
     assert adcv == view.adcontroller_values
 
 
-def test_adplace7_on_articles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/campus/article/01-countdown-studium')
-    assert len(browser.cssselect('#ad-desktop-7')) == 1
-
-
-def test_adplace8_on_articles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adplace8_on_articles(testbrowser):
     browser = testbrowser('/campus/article/01-countdown-studium')
     assert len(browser.cssselect('#ad-desktop-8')) == 1
 
 
-def test_adplace4_on_articles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adplace4_on_articles(testbrowser):
     browser = testbrowser('/campus/article/01-countdown-studium')
     assert len(browser.cssselect('#ad-desktop-4')) == 1
 
 
-def test_adplace16_on_articles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adplace16_on_articles(testbrowser):
     browser = testbrowser('/campus/article/01-countdown-studium')
     assert len(browser.cssselect('#ad-desktop-16')) == 1
