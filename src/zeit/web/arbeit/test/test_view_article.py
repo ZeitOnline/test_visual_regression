@@ -5,7 +5,6 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.common.exceptions import NoSuchElementException
 import zeit.edit.interfaces
 import zeit.content.article.edit
 import zeit.cms.interfaces
@@ -380,26 +379,17 @@ def test_zar_advertorial_marker_is_present(testbrowser):
     assert len(browser.cssselect('.advertorial-marker__text')) == 1
 
 
-def test_zar_article_underline_applied_according_to_font_detection(
-        selenium_driver, testserver):
-    driver = selenium_driver
-    driver.get('%s/arbeit/article/simple' % testserver.url)
-    try:
-        driver.find_element_by_css_selector(
-            '.article-heading__title--underlined-skip')
-    except NoSuchElementException:
-        assert False, ("Article titles should leverage janky background-image "
-                       "hack for underline working w/ font PatronBold only")
+def test_zar_article_underline_is_applied_correctly(testbrowser):
+    browser = testbrowser('/arbeit/article/simple')
+    select = browser.cssselect
+    assert len(select('.article-heading__title--underlined-skip')) == 1
+    assert len(select('.article-heading__title--underlined')) == 0
 
-    driver.get('%s/arbeit/article/advertorial' % testserver.url)
-    try:
-        driver.find_element_by_css_selector(
-            '.article-heading__title--underlined-skip')
-        assert False, ("Advertorial articles should just use mod "
-                       "'--underlined', hence no font PatronBold should "
-                       "be present")
-    except NoSuchElementException:
-        assert True
+    # article-headlines in advertorials should not use the underline-hack
+    # like usual ZAR aricles do
+    browser = testbrowser('/arbeit/article/advertorial')
+    assert len(select('.article-heading__title--underlined-skip')) == 0
+    assert len(select('.article-heading__title--underlined')) == 1
 
 
 def test_zar_advertorial_has_no_home_button_as_pagination(testbrowser):
