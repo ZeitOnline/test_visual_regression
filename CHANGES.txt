@@ -4,10 +4,22 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Nothing
+- FIX: Support caching headers for text, rawxml and unknown content types
 
 
-3.96 (unreleased)
+3.98 (unreleased)
+-----------------
+
+- ZON-4253: Polish portraitbox
+
+
+3.97 (2017-10-05)
+-----------------
+
+- ZON-4201: Show an update hint when cached app page is old
+
+
+3.96 (2017-10-04)
 -----------------
 
 - ZON-4202: Remove entry_url from webtrekk
