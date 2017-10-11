@@ -8,9 +8,7 @@ var $ = require( 'jquery' ),
     main = $( '#main' ),
     article = $( '#js-article' ),
     comments = require( 'web.core/comments' ),
-    pageType = document.body.getAttribute( 'data-page-type' ),
-    underlined = $( '[class$="--underlined"]' ),
-    font = '';
+    pageType = document.body.getAttribute( 'data-page-type' );
 
 // initialize modules
 images.init();
@@ -47,14 +45,3 @@ if ( pageType === 'centerpage' ) {
 // more ("non critical") global stuff
 $( '.js-image-copyright-footer' ).imageCopyrightFooter();
 $( '.js-jobbox-animation' ).animateJobs();
-
-// apply janky hack for foo yellow underline only if font PatronBold is present
-// else apply text-decoration: underline as a more semantic and solid fallback
-if ( underlined.length > 0 ) {
-    font = window.getComputedStyle( underlined[ 0 ], null ).getPropertyValue( 'font-family' );
-    if ( font.indexOf( 'PatronBold' ) > -1 ) {
-        for ( var i = 0; i < underlined.length; i++ ) {
-            underlined[ i ].className = underlined[ i ].className.replace( /\-\-underlined$/, '--underlined-skip' );
-        }
-    }
-}
