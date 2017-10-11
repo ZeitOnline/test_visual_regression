@@ -11,7 +11,7 @@
             <span class="article-pagination__nexttitle">{{ view.pagination.next_page_title }}</span>
             {%- endif %}
         </a>
-    {% else %}
+    {% elif not view.is_advertorial %}
         <a class="article-pagination__link" href="{%- block pagination_link -%}{{ request.route_url('home') }}index{%- endblock -%}" data-ct-label="Startseite">
             <span class="article-pagination__button article-pagination__button--next">
                 {%- block pagination_button %}Startseite{% endblock -%}

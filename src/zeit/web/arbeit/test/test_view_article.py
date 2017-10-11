@@ -370,3 +370,28 @@ def test_zar_profilebox_should_toggle_text_on_mobile(
     driver.set_window_size(1200, 800)
     assert text_switch.is_displayed() is False
     assert text_content.is_displayed() is True
+
+
+def test_zar_advertorial_marker_is_present(testbrowser):
+    browser = testbrowser('/arbeit/article/advertorial')
+    assert len(browser.cssselect('.advertorial-marker')) == 1
+    assert len(browser.cssselect('.advertorial-marker__title')) == 1
+    assert len(browser.cssselect('.advertorial-marker__text')) == 1
+
+
+def test_zar_article_underline_is_applied_correctly(testbrowser):
+    browser = testbrowser('/arbeit/article/simple')
+    select = browser.cssselect
+    assert len(select('.article-heading__title--underlined-skip')) == 1
+    assert len(select('.article-heading__title--underlined')) == 0
+
+    # article-headlines in advertorials should not use the underline-hack
+    # like usual ZAR aricles do
+    browser = testbrowser('/arbeit/article/advertorial')
+    assert len(select('.article-heading__title--underlined-skip')) == 0
+    assert len(select('.article-heading__title--underlined')) == 1
+
+
+def test_zar_advertorial_has_no_home_button_as_pagination(testbrowser):
+    browser = testbrowser('/arbeit/article/advertorial-onepage')
+    assert len(browser.cssselect('.article-pagination__link')) == 0

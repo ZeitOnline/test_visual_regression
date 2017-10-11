@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="article_id" ns="http://namespaces.zeit.de/CMS/print">556168</attribute>
+    <attribute name="author" ns="http://namespaces.zeit.de/CMS/document">Anna Bordel</attribute>
+    <attribute name="banner" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="breaking_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="channels" ns="http://namespaces.zeit.de/CMS/document">Studium Uni-Leben</attribute>
+    <attribute name="color_scheme" ns="http://namespaces.zeit.de/CMS/document">Redaktion</attribute>
+    <attribute name="comments" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="corrected" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="countings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="date-last-modified" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:14.233424+00:00</attribute>
+    <attribute name="date_first_released" ns="http://namespaces.zeit.de/CMS/document">2016-01-10T09:39:17.773713+00:00</attribute>
+    <attribute name="date_last_checkout" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:18.167553+00:00</attribute>
+    <attribute name="date_last_published" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:17.773713+00:00</attribute>
+    <attribute name="date_last_published_semantic" ns="http://namespaces.zeit.de/CMS/workflow">2016-02-10T09:39:16.922711+00:00</attribute>
+    <attribute name="edited" ns="http://namespaces.zeit.de/CMS/workflow">no</attribute>
+    <attribute name="erscheint" ns="http://namespaces.zeit.de/CMS/document">05.05.2015</attribute>
+    <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
+    <attribute name="export_cds" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="foldable" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="has_recensions" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="id" ns="http://namespaces.zeit.de/CMS/workflow">simple</attribute>
+    <attribute name="importsource" ns="http://namespaces.zeit.de/CMS/workflow">k4</attribute>
+    <attribute name="in_rankings" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="ipad_template" ns="http://namespaces.zeit.de/CMS/workflow"/>
+    <attribute name="is_amp" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="is_content" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="is_instant_article" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="jobname" ns="http://namespaces.zeit.de/CMS/document">Bachelor_HILFE</attribute>
+    <attribute name="last-modified-by" ns="http://namespaces.zeit.de/CMS/workflow">import</attribute>
+    <attribute name="last-semantic-change" ns="http://namespaces.zeit.de/CMS/document">2016-02-10T09:39:10.319064+00:00</attribute>
+    <attribute name="last_modified_by" ns="http://namespaces.zeit.de/CMS/document">ldap.schwabe</attribute>
+    <attribute name="lead_candidate" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="long_text" ns="http://namespaces.zeit.de/CMS/workflow">Sogar nachts bekommen Studenten Hilfe. (akg)</attribute>
+    <attribute name="minimal_header" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="mostread" ns="http://namespaces.zeit.de/CMS/document">yes</attribute>
+    <attribute name="origname" ns="http://namespaces.zeit.de/CMS/document">Bachelor_HILFE</attribute>
+    <attribute name="page" ns="http://namespaces.zeit.de/CMS/document">100</attribute>
+    <attribute name="previous_uniqueIds" ns="http://namespaces.zeit.de/CMS/document">http://xml.zeit.de/campus/article/simple</attribute>
+    <attribute name="print-publish" ns="http://namespaces.zeit.de/CMS/document">2015-05-05T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ADV</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
+    <attribute name="public_token" ns="http://namespaces.zeit.de/CMS/vgwort">c709ca95afcf4b3e9b68a8aab56db53e</attribute>
+    <attribute name="publication-id" ns="http://namespaces.zeit.de/CMS/print">1367935288499</attribute>
+    <attribute name="published" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="push_news" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="rebrush_website_content" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/document">Angebote</attribute>
+    <attribute name="ressort" ns="http://namespaces.zeit.de/CMS/print">ZEIT Studienführer</attribute>
+    <attribute name="running-volume" ns="http://namespaces.zeit.de/CMS/workflow">ZSF-2015-01</attribute>
+    <attribute name="seo_optimized" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute name="short_text" ns="http://namespaces.zeit.de/CMS/workflow">Landschaftsarchitektur im Apfelhain für Studenten: Wir haben die wichtigsten Anlaufstellen gesammelt. (akg)</attribute>
+    <attribute name="show_commentthread" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="status" ns="http://namespaces.zeit.de/CMS/workflow">OK</attribute>
+    <attribute name="sub_ressort" ns="http://namespaces.zeit.de/CMS/document">Uni-Leben</attribute>
+    <attribute name="text-length" ns="http://namespaces.zeit.de/CMS/document">5098</attribute>
+    <attribute name="tldr_milestone" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/document">article</attribute>
+    <attribute name="type" ns="http://namespaces.zeit.de/CMS/meta">article</attribute>
+    <attribute name="urgent" ns="http://namespaces.zeit.de/CMS/workflow">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="advertisement_title">IWC Schaffhausen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="advertisement_text">Dies ist ein Angebot der Verlagsgruppe Random House GmbH. Für den Inhalt ist die Verlagsgruppe Random House GmbH verantwortlich.</attribute>
+    <attribute name="uuid" ns="http://namespaces.zeit.de/CMS/document">{urn:uuid:446a4dc8-e536-4c7f-8187-45e443a524be}</attribute>
+    <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">01</attribute>
+    <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
+    <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="IZONArticle" module="zeit.content.article.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+  <body>
+    <supertitle>Tennis</supertitle>
+    <title>Williams wackelt weiter, steht aber im Viertelfinale</title>
+    <byline>SID</byline>
+    <division type="page">
+      <p>Paris (SID) - Top-Favoritin Serena Williams aus den USA quält sich weiter durch die French Open in Paris. Im Achtelfinale gewann sie gegen ihre Landsfrau Sloane Stephens nach einer erneut durchwachsenen Vorstellung auch das dritte Match nacheinander nur in drei Sätzen. Nach genau zwei Stunden verwandelte Williams ihren ersten Matchball zum 1:6, 7:5, 6:3.</p>
+      <p>Im Viertelfinale am Mittwoch trifft die 19-malige Grand-Slam-Siegerin auf die Italienerin Sara Errani, die Julia Görges (Bad Oldesloe) mit 6:2, 6:2 als letzte Deutsche aus dem Turnier geworfen hatte. Die Weltranglistenerste Williams hat das zweite Grand-Slam-Turnier des Jahres im Stade Roland Garros zweimal (2002 und 2013) gewonnen.</p>
+    </division>
+  </body>
+  <teaser>
+    <title>Selfiestick trifft DJ-Kabel</title>
+    <text>Früher war das Handy ein Statussymbol. Heute sind es Gadgets, die auch bei der Arbeit den Unterschied machen. Zehn Geräte, die unseren Zeitgeist bestimmen</text>
+    <supertitle>Gadgets</supertitle>
+  </teaser>
+</article>

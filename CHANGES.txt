@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4253: Polish portraitbox
 
+- Arbeit-99: Implement advertorial for ZEIT Arbeit
+
 
 3.97 (2017-10-05)
 -----------------

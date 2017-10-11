@@ -178,3 +178,18 @@ def test_zar_topicpage_has_correct_structure(testbrowser, datasolr):
     # second page should be the current one
     assert len(select(
         '.pager__pages > .pager__page--current:nth-child(2)')) == 1
+
+
+def test_zar_advertorial_cp_header_renders_correctly(testbrowser):
+    select = testbrowser('/arbeit/centerpage/advertorial').cssselect
+    assert len(select('.header-image')) == 1
+    assert len(select('.header-advertorial__heading')) == 1
+    assert len(select('.header-advertorial__kicker')) == 1
+    assert len(select('.header-advertorial__title')) == 1
+    assert len(select('.header__ad-label')) == 1
+    assert len(select('.header-image__adlabel')) == 1
+
+
+def test_zar_advertorial_has_markup_module(testbrowser):
+    select = testbrowser('/arbeit/centerpage/advertorial').cssselect
+    assert len(select('.markup')) == 1
