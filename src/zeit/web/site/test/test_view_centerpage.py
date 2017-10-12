@@ -353,6 +353,16 @@ def test_series_teaser_should_render_series_element(testbrowser):
     assert series_element[0].text == 'Serie: App-Kritik'
 
 
+def test_podcast_series_fallback_teaser_image_is_used(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/podcast-teaser-fallback')
+    teaser_image_one = browser.cssselect('.teaser-square__media-item')[0]
+    teaser_image_two = browser.cssselect('.teaser-square__media-item')[1]
+    assert teaser_image_one.attrib['src'].endswith(
+        "podcast-illustration-fallback/square__460x460__EEB200")
+    assert teaser_image_two.attrib['src'].endswith(
+        "podcast-illustration/square__460x460__EEB200")
+
+
 def test_small_teaser_should_have_responsive_layout(
         selenium_driver, testserver, screen_size):
 

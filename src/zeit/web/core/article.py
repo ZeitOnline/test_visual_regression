@@ -36,6 +36,12 @@ class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that contain a liveblog."""
 
 
+class ISeriesArticleWithFallbackImage(
+        zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that are part of a series with a
+    fallback image."""
+
+
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
 class Page(object):
 
@@ -397,5 +403,9 @@ def mark_according_to_template(context):
 def mark_according_to_series(context):
     if not context.serie:
         return None
+    result = []
     if context.serie.column:
-        return (IColumnArticle,)
+        result.append(IColumnArticle)
+    if context.serie.fallback_image:
+        result.append(ISeriesArticleWithFallbackImage)
+    return result
