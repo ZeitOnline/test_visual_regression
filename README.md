@@ -87,6 +87,7 @@ failedComparisonsRoot: fs.absolute(fs.workingDirectory + '/failures/sso')
 ...
 ```
 
+
 ## Further reading
 - [CasperJS Docs](http://docs.casperjs.org/en/latest/) (scripting user interaction)
 - [PhantomJS API](http://phantomjs.org/api/)
