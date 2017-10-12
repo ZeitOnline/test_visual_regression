@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/ZeitOnline/test_visual_regression#readme",
   "devDependencies": {
+    "backdrop": "0.0.3",
     "eslint": "^3.17.1",
     "eslint-config-standard": "^7.0.1",
     "eslint-plugin-promise": "^3.5.0",
