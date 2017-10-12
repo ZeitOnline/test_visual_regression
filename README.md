@@ -4,7 +4,8 @@
 
 #### 1. Install [CasperJS](http://docs.casperjs.org/en/latest/installation.html)
 
-- homebrew: `brew install casperjs`
+- Using homebrew: `brew install casperjs`
+- Using npm: `npm install -g casperjs`
 
 #### 2. Clone this repo and install dependencies
 
@@ -50,7 +51,7 @@ cd PhantomCSS
 casperjs test ../tests/sso/sso_test.js
 ```
 
-If you run a particular test for the first you'll be notified by a console output that you've just created a new baseline of screenshots.
+If you run a particular test for the first time you'll be notified by a console output that you've just created a new baseline of screenshots.
 
 Now run the tests a second time in whatever checked out state of your application you want to verify against the previously established baseline. A new set of screenshots with the suffix `.diff` is put into the specified output directory and compared against the baseline of screenshots (if none is found, a new one will be created).
 
