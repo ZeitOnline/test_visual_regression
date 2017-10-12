@@ -3,10 +3,10 @@
   Paths are relative to CasperJs directory
 */
 
-var urlToFilename = require('../../utils/url_to_filename');
-var fs = require('fs');
-var path = fs.absolute(fs.workingDirectory + '/phantomcss.js');
-var phantomcss = require(path);
+var urlToFilename = require('../../utils/url_to_filename')
+var fs = require('fs')
+var path = fs.absolute(fs.workingDirectory + '/phantomcss.js')
+var phantomcss = require(path)
 
 casper.test.begin('Friedbert visual tests for vertical ARBEIT', function (test) {
   phantomcss.init({
@@ -16,19 +16,19 @@ casper.test.begin('Friedbert visual tests for vertical ARBEIT', function (test) 
     screenshotRoot: fs.absolute(fs.workingDirectory + '/../screenshots/arbeit'),
     failedComparisonsRoot: fs.absolute(fs.workingDirectory + '/../failures/arbeit'),
     addLabelToFailedImage: false
-  });
+  })
 
   casper.on('remote.message', function (msg) {
-    this.echo(msg);
-  });
+    this.echo(msg)
+  })
 
   casper.on('error', function (err) {
-    this.die('PhantomJS has errored: ' + err);
-  });
+    this.die('PhantomJS has errored: ' + err)
+  })
 
   casper.on('resource.error', function (err) {
-    casper.log('Resource load error: ' + err, 'warning');
-  });
+    casper.log('Resource load error: ' + err, 'warning')
+  })
 
   /*
     The test scenario
@@ -65,41 +65,41 @@ casper.test.begin('Friedbert visual tests for vertical ARBEIT', function (test) 
     'http://localhost:9090/arbeit/centerpage/teaser-to-zplus-registration',
     'http://localhost:9090/arbeit/centerpage/thema-opulent',
     'http://localhost:9090/arbeit/centerpage/tube'
-  ];
+  ]
 
     // wait einführen fürs Laden der Bilder.
 
   casper.start().each(links, function (self, link) {
     self.thenOpen(link, function () {
-      var filename = urlToFilename(this.getCurrentUrl());
+      var filename = urlToFilename(this.getCurrentUrl())
       casper.viewport(1920, 1080).then(function () {
         this.wait(1000, function () {
-          phantomcss.screenshot('body', filename + '_fullscreen_desktop');
-        });
-      });
-    });
+          phantomcss.screenshot('body', filename + '_fullscreen_desktop')
+        })
+      })
+    })
 
     self.thenOpen(link, function () {
-      var filename = urlToFilename(this.getCurrentUrl());
+      var filename = urlToFilename(this.getCurrentUrl())
       casper.viewport(360, 600).then(function () {
         this.wait(1000, function () {
-          phantomcss.screenshot('body', filename + '_fullscreen_mobile');
-        });
-      });
-    });
-  });
+          phantomcss.screenshot('body', filename + '_fullscreen_mobile')
+        })
+      })
+    })
+  })
 
   casper.then(function nowCheckTheScreenshots () {
   // compare screenshots
-    phantomcss.compareAll();
-  });
+    phantomcss.compareAll()
+  })
 
   /*
   Casper runs tests
   */
   casper.run(function () {
-    console.log('\nTHE END.');
+    console.log('\nTHE END.')
   // phantomcss.getExitStatus() // pass or fail?
-    casper.test.done();
-  });
-});
+    casper.test.done()
+  })
+})
