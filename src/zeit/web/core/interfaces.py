@@ -318,3 +318,9 @@ class IVertical(zope.interface.Interface):
     This is not quite the same as which zeit.cms.section.ISectionMarker the
     content has, since we have to handle some additional special cases.
     """
+
+
+class IContentMarkerInterfaces(zope.interface.Interface):
+    """Returns a list of marker interfaces that are added to ICMSContent
+    objects.
+    """

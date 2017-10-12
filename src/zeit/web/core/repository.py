@@ -57,10 +57,18 @@ def _add_marker_interfaces(content):
     if zeit.cms.repository.interfaces.IUnknownResource.providedBy(content):
         zope.interface.directlyProvides(content, *UNKNOWN_RESOURCE_INTERFACES)
     else:
+        # required so that DAV properties work. XXX Can we get around this?
+        # calling alsoProvides twice is supposed to be somewhat expensive.
         zope.interface.alsoProvides(
-            content,
-            zeit.cms.repository.interfaces.IRepositoryContent,
-            zeit.web.core.interfaces.IInternalUse)
+            content, zeit.cms.repository.interfaces.IRepositoryContent)
+        ifaces = []
+        for _, result in zope.component.getAdapters(
+                (content,),
+                zeit.web.core.interfaces.IContentMarkerInterfaces):
+            if result:
+                ifaces.extend(result)
+        ifaces.append(zeit.web.core.interfaces.IInternalUse)
+        zope.interface.alsoProvides(content, *ifaces)
 
 
 # Determine __parent__ folder on access, instead of having Repository write it.

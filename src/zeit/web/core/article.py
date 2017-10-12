@@ -368,3 +368,34 @@ class LiveblogInfo(object):
     def last_modified(self):
         if self.liveblog:
             return self.liveblog.last_modified
+
+
+TEMPLATE_INTERFACES = {
+    'zon-liveblog': (ILiveblogArticle,),
+    # Should we check that the article provides IZMOContent? Because those
+    # templates are only available there.
+    'longform': (zeit.web.magazin.article.ILongformArticle,),
+    'short': (zeit.web.magazin.article.IShortformArticle,),
+    # XXX Somewhat confusing compared to core.IColumnArticle
+    'column': (zeit.web.magazin.article.IColumnArticle,),
+    'photocluster': (zeit.web.magazin.article.IPhotoclusterArticle,),
+}
+
+
+@grokcore.component.adapter(
+    zeit.content.article.interfaces.IArticle, name='template')
+@grokcore.component.implementer(
+    zeit.web.core.interfaces.IContentMarkerInterfaces)
+def mark_according_to_template(context):
+    return TEMPLATE_INTERFACES.get(context.template)
+
+
+@grokcore.component.adapter(
+    zeit.content.article.interfaces.IArticle, name='serie')
+@grokcore.component.implementer(
+    zeit.web.core.interfaces.IContentMarkerInterfaces)
+def mark_according_to_series(context):
+    if not context.serie:
+        return None
+    if context.serie.column:
+        return (IColumnArticle,)
