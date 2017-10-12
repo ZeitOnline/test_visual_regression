@@ -177,8 +177,6 @@ def test_zar_desktop_ads_are_rendered_on_cp(testbrowser, togglepatch):
 
 def test_zar_adcontroller_values_return_values_on_advertorial_cp(
         application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/arbeit/centerpage/advertorial')
     adcv = [
@@ -195,8 +193,6 @@ def test_zar_adcontroller_values_return_values_on_advertorial_cp(
 
 def test_zar_adcontroller_values_return_values_on_advertorial_article(
         application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/arbeit/article/advertorial')
     adcv = [
