@@ -78,10 +78,10 @@ def _inject_banner_code(pages, pubtype):
         'zon': {
             'pages': range(1, len(pages) + 1),
             'ads': [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
-                   {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
-                   {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
-                   {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
-                   {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
+                    {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
+                    {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
+                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
+                    {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
         },
         'longform': {
             'pages': [2],
@@ -301,6 +301,7 @@ class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
             return {}
         return zeit.cms.interfaces.ICMSContent(
             nodes[0].get('uniqueId'), {})
+
 
 RESSORTFOLDER_SOURCE = RessortFolderSource()
 
