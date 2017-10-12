@@ -148,7 +148,7 @@
     <cluster area="teaser-mosaic">
       <region cp:type="teaser-bar" module="parquet" area="teaser-row-full" cp:__name__="id-495cc770-6752-4dd0-b3a2-add506de398a">
         <container cp:type="teaser" module="parquet-large" hide-dupes="False" visible="True" cp:__name__="id-b0ce34da-bf9c-4203-8fc4-d4eb42f3e5b9" title="ZEIT ONLINE Startseite" read_more="mehr ZEIT ONLINE Startseite" read_more_url="http://www.zeit.de/index" display-amount="3" suppress-image-positions="3,4,5,6">
-          <referenced_cp>http://xml.zeit.de/zeit-online/parquet-teaser-setup</referenced_cp>
+          <referenced_cp>http://xml.zeit.de/zeit-online/index</referenced_cp>
           <autopilot>true</autopilot>
           <xi:include xmlns:xi="http://www.w3.org/2003/XInclude" href="/var/cms/work/index.lead" parse="xml" xpointer="xpointer(/channel/container/block)">
             <xi:fallback>Ziel http://xml.zeit.de/index.lead nicht erreichbar.</xi:fallback>
