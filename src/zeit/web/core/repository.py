@@ -9,8 +9,7 @@ import zeit.cms.repository.folder
 import zeit.cms.repository.unknown
 
 
-# Monkey-patch so our content provides a marker interface,
-# thus Source entries can be ``available`` only for zeit.web, but not vivi.
+# Monkey-patch so our content can provide additional marker interfaces
 def getitem_with_marker_interface(self, key):
     unique_id = self._get_id_for_name(key)
 
@@ -18,10 +17,7 @@ def getitem_with_marker_interface(self, key):
     content = self.repository.getUncontainedContent(unique_id)
     # We copied the original method wholesale since calling alsoProvides only
     # once proved to be a significant performance gain,...
-    zope.interface.alsoProvides(
-        content,
-        zeit.cms.repository.interfaces.IRepositoryContent,
-        zeit.web.core.interfaces.IInternalUse)
+    _add_marker_interfaces(content)
     _remove_misleading_interfaces(content)
     # ...and we don't want to locate content here, due to resolve_parent below.
     return content
@@ -40,14 +36,19 @@ def getcontent_try_without_traversal(self, unique_id):
         content = self.getUncontainedContent(unique_id)
     except KeyError:
         content = original_getcontent(self, unique_id)
-    zope.interface.alsoProvides(
-        content, zeit.cms.repository.interfaces.IRepositoryContent,
-        zeit.web.core.interfaces.IInternalUse)
+    _add_marker_interfaces(content)
     _remove_misleading_interfaces(content)
     return content
 original_getcontent = zeit.cms.repository.repository.Repository.getContent
 zeit.cms.repository.repository.Repository.getContent = (
     getcontent_try_without_traversal)
+
+
+def _add_marker_interfaces(content):
+    zope.interface.alsoProvides(
+        content,
+        zeit.cms.repository.interfaces.IRepositoryContent,
+        zeit.web.core.interfaces.IInternalUse)
 
 
 UNKNOWN_RESOURCE_INTERFACES = set(zope.interface.providedBy(

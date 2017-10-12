@@ -156,7 +156,9 @@ class ITopicLink(zope.interface.Interface):
 
 
 class IInternalUse(zope.interface.Interface):
-    """Marks internally used source entries"""
+    """Marker interface for ICMSContent, so Source entries can be ``available``
+    only for zeit.web, but not vivi.
+    """
 
 
 class IBreakingNews(zope.interface.Interface):
