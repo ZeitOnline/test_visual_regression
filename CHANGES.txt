@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - Arbeit-99: Implement advertorial for ZEIT Arbeit
 
+-FIX: Fix in-app link-injection for page-refresh user-notification
+
 
 3.97 (2017-10-05)
 -----------------
