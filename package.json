@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint tests/**/*.js",
-    "lint-fix": "eslint --fix tests/**/*.js"
+    "lint-fix": "eslint --fix tests/**/*.js",
+    "reference:zar": "backstop --config ./backstop_tests/test_zar.js reference",
+    "test:zar": "backstop --config ./backstop_tests/test_zar.js test"
   },
   "repository": {
     "type": "git",
