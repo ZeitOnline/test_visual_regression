@@ -7,7 +7,7 @@ POSTDEPLOY
 - FIX: Support caching headers for text, rawxml and unknown content types
 
 
-3.98 (unreleased)
+3.98 (2017-10-12)
 -----------------
 
 - ZON-4253: Polish portraitbox
