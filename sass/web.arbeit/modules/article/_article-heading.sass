@@ -2,6 +2,7 @@
 	margin: 0
 	padding-top: remify(16px)
 	padding-bottom: remify(16px)
+	font-weight: bold
 	&__kicker
 		color: $zar-darkish-pink
 		display: block
@@ -19,8 +20,15 @@
 		margin-left: auto
 		margin-right: auto
 		max-width: $wide-content-width
+		// default
 		&--underlined
-			background-image: linear-gradient(90deg, $zar-sun-yellow, $zar-sun-yellow)
+			text-decoration: underline
+			text-decoration-color: $color-underline
+			text-decoration-skip: ink
+		// janky underline hack - works only w/ font PatronBold. needs to be display:inline.
+		&--underlined-skip
+			text-decoration: none
+			background-image: linear-gradient(90deg, $color-underline, $color-underline)
 			background-size: auto 4px
 			background-repeat: repeat-x
 			// use em here deliberately to match underline's position with
@@ -40,7 +48,7 @@
 			max-width: $medium-content-width
 		&__title
 			font-size: remify(60px)
-			&--underlined
+			&--underlined-skip
 				background-size: auto 7px
 				text-shadow: -4px 6px $white, 4px 6px $white, 0 6px $white, 1px 6px $white, -3px -2px $white
 

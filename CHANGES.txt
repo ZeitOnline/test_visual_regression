@@ -4,13 +4,23 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- FIX: Support caching headers for text, rawxml and unknown content types 
+- FIX: Support caching headers for text, rawxml and unknown content types
 
 
-3.98 (unreleased)
+3.99 (unreleased)
 -----------------
 
 - Nothing changed yet.
+
+
+3.98 (2017-10-12)
+-----------------
+
+- ZON-4253: Polish portraitbox
+
+- Arbeit-99: Implement advertorial for ZEIT Arbeit
+
+-FIX: Fix in-app link-injection for page-refresh user-notification
 
 
 3.97 (2017-10-05)
