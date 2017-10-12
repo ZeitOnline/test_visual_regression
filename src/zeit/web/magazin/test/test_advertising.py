@@ -55,15 +55,6 @@ def test_banner_tile3_should_be_displayed_on_pages(testbrowser):
     assert browser.cssselect('#ad-desktop-3')
 
 
-def test_banner_tile7_should_not_appear_on_short_pages(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/03/seite-2')
-    assert not browser.cssselect('#ad-desktop-7')
-    browser = testbrowser('/zeit-magazin/article/03/seite-5')
-    assert not browser.cssselect('#ad-desktop-7')
-    browser = testbrowser('/zeit-magazin/article/03/seite-6')
-    assert not browser.cssselect('#ad-desktop-7')
-
-
 @pytest.mark.xfail(reason='ad scripts may timeout')
 def test_ad_keyword_diuqilon(selenium_driver, testserver, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
