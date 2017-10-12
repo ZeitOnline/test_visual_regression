@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 import ast
 import logging
-import os.path
 import re
 import urlparse
 
@@ -15,8 +14,6 @@ import pyramid.config
 import pyramid.renderers
 import pyramid_jinja2
 import pyramid_zodbconn
-import pysolr
-import requests.sessions
 import venusian
 import zc.sourcefactory.source
 import zope.app.appsetup.appsetup
@@ -26,12 +23,8 @@ import zope.configuration.xmlconfig
 import zope.interface
 
 import zeit.cms.content.sources
-import zeit.cms.content.xmlsupport
-import zeit.cms.repository.file
-import zeit.cms.repository.folder
 import zeit.cms.repository.interfaces
 import zeit.cms.repository.repository
-import zeit.cms.repository.unknown
 import zeit.connector
 
 import zeit.web
@@ -39,7 +32,9 @@ import zeit.web.core.bugsnag
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
+import zeit.web.core.repository  # activate monkeypatches
 import zeit.web.core.security
+import zeit.web.core.solr  # activate monkeypatches
 
 
 log = logging.getLogger(__name__)
@@ -443,124 +438,3 @@ class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
             return False
 
 FEATURE_TOGGLES = FeatureToggleSource()(None)
-
-
-# Monkey-patch so our content provides a marker interface,
-# thus Source entries can be ``available`` only for zeit.web, but not vivi.
-def getitem_with_marker_interface(self, key):
-    unique_id = self._get_id_for_name(key)
-
-    __traceback_info__ = (key, unique_id)
-    content = self.repository.getUncontainedContent(unique_id)
-    # We copied the original method wholesale since calling alsoProvides only
-    # once proved to be a significant performance gain,...
-    zope.interface.alsoProvides(
-        content,
-        zeit.cms.repository.interfaces.IRepositoryContent,
-        zeit.web.core.interfaces.IInternalUse)
-    _remove_misleading_interfaces(content)
-    # ...and we don't want to locate content here, due to resolve_parent below.
-    return content
-zeit.cms.repository.repository.Container.__getitem__ = (
-    getitem_with_marker_interface)
-
-
-# Performance optimization: Instead of traversing to the target object (and
-# thus instantiating all the folders in between), resolve it directly via the
-# connector, if possible. Notable exceptions include variant images and dynamic
-# folders, those are retried the traditional way.
-# NOTE: We cannot locate the content object here, since not materializing the
-# __parent__ folder is kind of the point. Thus, ``resolve_parent`` below.
-def getcontent_try_without_traversal(self, unique_id):
-    try:
-        content = self.getUncontainedContent(unique_id)
-    except KeyError:
-        content = original_getcontent(self, unique_id)
-    zope.interface.alsoProvides(
-        content, zeit.cms.repository.interfaces.IRepositoryContent,
-        zeit.web.core.interfaces.IInternalUse)
-    _remove_misleading_interfaces(content)
-    return content
-original_getcontent = zeit.cms.repository.repository.Repository.getContent
-zeit.cms.repository.repository.Repository.getContent = (
-    getcontent_try_without_traversal)
-
-
-UNKNOWN_RESOURCE_INTERFACES = set(zope.interface.providedBy(
-    zeit.cms.repository.unknown.PersistentUnknownResource(u'')))
-
-
-def _remove_misleading_interfaces(content):
-    """If the meta file is missing, content objects still might provide
-    interfaces like ICommonMetadata or IArticle, while having no content-type,
-    thereby making any interface-based checks useless. Thus we remove any
-    further interfaces from type-less content objects.
-    """
-    if zeit.cms.repository.interfaces.IUnknownResource.providedBy(content):
-        zope.interface.directlyProvides(content, *UNKNOWN_RESOURCE_INTERFACES)
-
-
-# Determine __parent__ folder on access, instead of having Repository write it.
-def resolve_parent(self):
-    workingcopy_parent = getattr(self, '_v_workingcopy_parent', None)
-    if workingcopy_parent is not None:
-        return workingcopy_parent
-
-    unique_id = self.uniqueId
-    trailing_slash = unique_id.endswith('/')
-    if trailing_slash:
-        unique_id = unique_id[:-1]
-    parent_id = os.path.dirname(unique_id)
-    parent_id = parent_id.rstrip('/') + '/'
-    repository = zope.component.getUtility(
-        zeit.cms.repository.interfaces.IRepository)
-    return original_getcontent(repository, parent_id)
-
-
-# For checkout (which we use in tests) the parent must be settable.
-def set_workingcopy_parent(self, value):
-    self._v_workingcopy_parent = value
-
-# XXX Patching all possible content base-classes is a bit of guesswork.
-zeit.cms.content.xmlsupport.XMLContentBase.__parent__ = property(
-    resolve_parent, set_workingcopy_parent)
-zeit.cms.repository.file.RepositoryFile.__parent__ = property(
-    resolve_parent, set_workingcopy_parent)
-zeit.cms.repository.folder.Folder.__parent__ = property(
-    resolve_parent, set_workingcopy_parent)
-
-
-# Skip superfluous disk accesses, since we never use netrc for authentication.
-requests.sessions.get_netrc_auth = lambda *args, **kw: None
-
-
-# Allow pysolr error handling to deal with non-ascii HTML error pages,
-# see <https://bugs.python.org/issue11033>.
-def scrape_response_nonascii(self, headers, response):
-    if isinstance(response, str):
-        response = response.decode('utf-8')
-    if isinstance(response, unicode):
-        response = response.encode('ascii', errors='ignore')
-    return original_scrape_response(self, headers, response)
-original_scrape_response = pysolr.Solr._scrape_response
-pysolr.Solr._scrape_response = scrape_response_nonascii
-
-
-# Make solr timeout runtime configurable
-def solr_timeout_from_settings(self):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    return conf.get('solr_timeout', 5)
-pysolr.Solr.timeout = property(
-    solr_timeout_from_settings, lambda self, value: None)
-
-
-def solr_send_request_with_referrer(self, *args, **kw):
-    headers = kw.setdefault('headers', {})
-    request = pyramid.threadlocal.get_current_request()
-    headers['Referer'] = request.url
-    headers['User-Agent'] = requests.utils.default_user_agent(
-        'zeit.web-%s/pysolr/python-requests' % request.registry.settings.get(
-            'version', 'unknown'))
-    return original_send_request(self, *args, **kw)
-original_send_request = pysolr.Solr._send_request
-pysolr.Solr._send_request = solr_send_request_with_referrer
