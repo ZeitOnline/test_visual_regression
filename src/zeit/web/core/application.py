@@ -1,10 +1,14 @@
 from __future__ import absolute_import
+
 import ast
+import logging
+import os.path
+import re
+import urlparse
+
 import bugsnag
 import jinja2
 import jinja2.ext
-import logging
-import os.path
 import pkg_resources
 import pyramid.authorization
 import pyramid.config
@@ -12,11 +16,15 @@ import pyramid.renderers
 import pyramid_jinja2
 import pyramid_zodbconn
 import pysolr
-import re
 import requests.sessions
-import urlparse
 import venusian
 import zc.sourcefactory.source
+import zope.app.appsetup.appsetup
+import zope.app.appsetup.product
+import zope.component
+import zope.configuration.xmlconfig
+import zope.interface
+
 import zeit.cms.content.sources
 import zeit.cms.content.xmlsupport
 import zeit.cms.repository.file
@@ -25,17 +33,13 @@ import zeit.cms.repository.interfaces
 import zeit.cms.repository.repository
 import zeit.cms.repository.unknown
 import zeit.connector
+
 import zeit.web
 import zeit.web.core.bugsnag
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.security
-import zope.app.appsetup.appsetup
-import zope.app.appsetup.product
-import zope.component
-import zope.configuration.xmlconfig
-import zope.interface
 
 
 log = logging.getLogger(__name__)
