@@ -18,7 +18,6 @@ def getitem_with_marker_interface(self, key):
     # We copied the original method wholesale since calling alsoProvides only
     # once proved to be a significant performance gain,...
     _add_marker_interfaces(content)
-    _remove_misleading_interfaces(content)
     # ...and we don't want to locate content here, due to resolve_parent below.
     return content
 zeit.cms.repository.repository.Container.__getitem__ = (
@@ -37,32 +36,31 @@ def getcontent_try_without_traversal(self, unique_id):
     except KeyError:
         content = original_getcontent(self, unique_id)
     _add_marker_interfaces(content)
-    _remove_misleading_interfaces(content)
     return content
 original_getcontent = zeit.cms.repository.repository.Repository.getContent
 zeit.cms.repository.repository.Repository.getContent = (
     getcontent_try_without_traversal)
 
 
-def _add_marker_interfaces(content):
-    zope.interface.alsoProvides(
-        content,
-        zeit.cms.repository.interfaces.IRepositoryContent,
-        zeit.web.core.interfaces.IInternalUse)
-
-
 UNKNOWN_RESOURCE_INTERFACES = set(zope.interface.providedBy(
     zeit.cms.repository.unknown.PersistentUnknownResource(u'')))
 
 
-def _remove_misleading_interfaces(content):
-    """If the meta file is missing, content objects still might provide
-    interfaces like ICommonMetadata or IArticle, while having no content-type,
-    thereby making any interface-based checks useless. Thus we remove any
-    further interfaces from type-less content objects.
-    """
+def _add_marker_interfaces(content):
+    # If the meta file is missing, content objects still might provide
+    # interfaces like ICommonMetadata or IArticle, while having no contenttype,
+    # thereby making any interface-based checks useless. Thus we remove any
+    # further interfaces from type-less content objects.
+    #
+    # Doing this in here instead of a separate step is a performance
+    # optimization; the interface provides functions are surprisingly expensive
     if zeit.cms.repository.interfaces.IUnknownResource.providedBy(content):
         zope.interface.directlyProvides(content, *UNKNOWN_RESOURCE_INTERFACES)
+    else:
+        zope.interface.alsoProvides(
+            content,
+            zeit.cms.repository.interfaces.IRepositoryContent,
+            zeit.web.core.interfaces.IInternalUse)
 
 
 # Determine __parent__ folder on access, instead of having Repository write it.
