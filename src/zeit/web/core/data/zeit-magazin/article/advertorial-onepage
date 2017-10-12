@@ -1,0 +1,162 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<article>
+  <head>
+    <rankedTags xmlns:ns10="http://codespeak.net/lxml/objectify/pytype">
+      <tag ns10:pytype="str" uuid="d449b21b-9101-4cfd-9af9-5abc460d7af7" url_value="gemuese" type="free">Gemüse</tag>
+      <tag ns10:pytype="str" uuid="d7701afc-a69c-4d8f-9aed-423278121c13" url_value="kochrezept" type="free">Kochrezept</tag>
+      <tag ns10:pytype="str" uuid="ed546578-e0a4-4388-abd6-53d590dbf664" url_value="kochen" type="free">Kochen</tag>
+      <tag ns10:pytype="str" uuid="1f92f4fd-0b89-4afa-8fb8-9e1aa6522f14" url_value="essen" type="free">Essen</tag>
+      <tag type="free" score="4" uuid="4550eda4-243c-446e-a2bb-cc0f1ae77040" url_value="lebensmittelindustrie">Lebensmittelindustrie</tag>
+    </rankedTags>
+    <image base-id="http://xml.zeit.de/exampleimages/artikel/advertorial-01/" type="jpg" alt="Kichererbsen: Eine Suppe fürs Volk" align="left" publication-date="">
+      <bu>Kichererbsensuppe</bu>
+      <copyright>© Silvio Knezevic</copyright>
+    </image>
+    <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+      <display_name>Elisabeth Raether</display_name>
+    </author>
+    <references>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2014/42/blutwurst-birne-wochenmarkt" year="2014" issue="42" ressort="zeit-magazin" serie="Wochenmarkt" contenttype="article" publication-date="2014-10-29T23:09:21+00:00" expires="" author="Elisabeth Raether">
+        <supertitle>Wochenmarkt</supertitle>
+        <title>Blut und Birne</title>
+        <text>Der Mensch ist hochkultiviert, aber sein Appetit ist der eines Raubtiers. Wie sonst ließe sich der Genuss von Blutwurst erklären? Mit Birne schmeckt sie besonders gut.</text>
+        <description>Der Mensch ist hochkultiviert, aber sein Appetit ist der eines Raubtiers. Wie sonst ließe sich der Genuss von Blutwurst erklären? Mit Birne schmeckt sie besonders gut.</description>
+        <byline>von Elisabeth Raether</byline>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/zeit-magazin/2014/42/blustwurst-birnen/" type="jpg" alt="Wochenmarkt: Für einen kühlen Sonntag" align="left" publication-date="" expires="2015-01-16T15:22:06+00:00">
+          <bu>Blutwurst mit Birnen</bu>
+          <copyright>© Silvio Knezevic</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+          <display_name>Elisabeth Raether</display_name>
+        </author>
+      </reference>
+    </references>
+    <nextread>
+      <reference xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="intern" href="http://xml.zeit.de/zeit-magazin/2014/42/blutwurst-birne-wochenmarkt" year="2014" issue="42" ressort="zeit-magazin" serie="Wochenmarkt" contenttype="article" publication-date="2014-10-29T23:09:21+00:00" expires="" author="Elisabeth Raether">
+        <supertitle>Wochenmarkt</supertitle>
+        <title>Blut und Birne</title>
+        <text>Der Mensch ist hochkultiviert, aber sein Appetit ist der eines Raubtiers. Wie sonst ließe sich der Genuss von Blutwurst erklären? Mit Birne schmeckt sie besonders gut.</text>
+        <description>Der Mensch ist hochkultiviert, aber sein Appetit ist der eines Raubtiers. Wie sonst ließe sich der Genuss von Blutwurst erklären? Mit Birne schmeckt sie besonders gut.</description>
+        <byline>von Elisabeth Raether</byline>
+        <breadcrumb_title xsi:nil="true"/>
+        <image base-id="http://xml.zeit.de/zeit-magazin/2014/42/blustwurst-birnen/" type="jpg" alt="Wochenmarkt: Für einen kühlen Sonntag" align="left" publication-date="" expires="2015-01-16T15:22:06+00:00">
+          <bu>Blutwurst mit Birnen</bu>
+          <copyright>© Silvio Knezevic</copyright>
+        </image>
+        <author href="http://xml.zeit.de/autoren/R/Elisabeth_Raether" publication-date="" expires="">
+          <display_name>Elisabeth Raether</display_name>
+        </author>
+      </reference>
+    </nextread>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="DailyNL">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="artbox_thema">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="article_id">3099892</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="author">Elisabeth Raether</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="breaking_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="channels">zeit-magazin essen-trinken</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="color_scheme">Redaktion</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2014-11-01T15:05:07.181348+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2014-11-01T15:06:06.781277+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2014-11-05T23:13:40.006363+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2014-11-05T23:14:39.691577+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2014-11-01T15:05:38.700665+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_pushed">2014-11-01T15:05:51.520006+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="enabled">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="erscheint">16.10.2014</attribute>
+    <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="has_recensions">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="header_layout">leinwand</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="id">ZMLB-2014-43-Wochenmarkt-43</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="importsource">k4</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="ipad_template"></attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="jobname">Wochenmarkt 43</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="last-modified-by">import</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last-semantic-change">2014-11-01T15:04:57.781581+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="last_modified_by">ldap.bischoff</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="lead_candidate">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="long_text">Eine Kichererbsensuppe muss zwar länger köcheln, als eine Tiefkühlpizza backt – aber dafür hat man ein Erfolgserlebnis. </attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="minimal_header">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="mostread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="origname">Wochenmarkt 43</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="page">98</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="previous_uniqueIds">http://xml.zeit.de/zeit-magazin/2014/43/Wochenmarkt-43</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="print-publish">2014-10-16T06:00:00+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-id">ADV</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="product-name">Advertorial</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="public_token">766e67f92f834c86ab10271ed2cd6f87</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="publication-id">1378993011928</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="publish_job_id">1226956970</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="released_from">2014-11-05T23:13:38+00:00</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">zeit-magazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/print" name="ressort">zeitmagazin</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="running-volume">ZMLB-2014-43</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Wochenmarkt</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">In westlichen Ländern wird so wenig gekocht wie möglich. Diese Kichererbsensuppe wäre ein guter Wiedereinstieg. </attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">hennessy</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="template">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">2307</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">yes</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:21ceafcf-5e0d-40fc-91b2-c421aea086e6}</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="volume">43</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="year">2014</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="provides">&lt;pickle&gt;
+  &lt;initialized_object&gt;
+    &lt;klass&gt;
+      &lt;global name="Provides" module="zope.interface.declarations"/&gt;
+    &lt;/klass&gt;
+    &lt;arguments&gt;
+      &lt;tuple&gt;
+        &lt;global name="Article" module="zeit.content.article.article"/&gt;
+        &lt;global name="Interface" module="zope.interface"/&gt;
+        &lt;global name="IZMOContent" module="zeit.magazin.interfaces"/&gt;
+        &lt;global name="IZMOArticle" module="zeit.magazin.interfaces"/&gt;
+      &lt;/tuple&gt;
+    &lt;/arguments&gt;
+  &lt;/initialized_object&gt;
+&lt;/pickle&gt;</attribute>
+  </head>
+    <body>
+        <supertitle>default</supertitle>
+        <title>Standard</title>
+        <subtitle>Leipzig bietet Wohnen, Kunst und Kultur für Menschen mit wenig Geld. Das zieht Zuzügler an und ängstigt die Eingesessenen – aber noch ist Zeit, um Freiräume zu erhalten.</subtitle>
+        <division type="page">
+            <image align="left" alt="Die ist der Alttest" expires="" href="http://links.to" is_empty="False" layout="zmo-xl-header" publication-date="" src="http://xml.zeit.de/zeit-magazin/images/local/01.jpg" title="Katze!" type="jpg">
+                <bu>Die ist der image sub text</bu>
+                <copyright link="http://foo.de">©foo</copyright>
+            </image>
+            <p>Leipzig hat in den letzten Jahren viele neue Spitznamen bekommen.
+
+                <a class="" href="http://www.faz.net/aktuell/politik/inland/leipzig-dieser-ort-ist-kein-traum-11525236.html" target="_blank">
+                    &quot;Disneyland des Unperfekten&quot;</a> wurde die Stadt in einem Artikel der 
+
+                <em>
+                    FAZ</em>getauft, für ihre illegalen Klubs, die Raves im Wald, die Altbauwohnungen für 300 Euro Warmmiete. Dann wurde die klassische bürgerliche Kultur in Oper, Theatern und Konzerthäusern dazugerechnet und die Universität, die jährlich 28.000 Studenten anzieht, und Leipzig wurde zum neuen Berlin. Tolerant und offen sei die Stadt zudem, auch ein 
+
+                <a class="" href="http://www.zeit.de/2012/12/S-Homosexualitaet-Leipzig" target="_blank">
+                    &quot;Biotop der Schwulenszene&quot;</a>, wie die ZEIT berichtete. Als Sammelbegriff für die anhaltende mediale Aufmerksamkeit für Sachsens zweitgrößte Stadt hat sich schließlich &quot;Hypezig&quot; etabliert.</p>
+        </division>
+    </body>
+  <teaser>
+    <title>Eine Suppe fürs Volk</title>
+    <supertitle>Wochenmarkt</supertitle>
+    <text>In westlichen Ländern wird so selten wie möglich gekocht. Wer es mal wieder probieren will, könnte eine Kichererbsensuppe zubereiten. Man darf sogar eine Konserve nehmen.</text>
+  </teaser>
+</article>

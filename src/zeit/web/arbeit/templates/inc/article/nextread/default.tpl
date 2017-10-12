@@ -28,6 +28,6 @@
 
 {% block teaser_title %}
     <span class="{{ self.layout() }}__title">
-        <span class="{{ self.layout() }}__title--underlined">{{ teaser.teaserTitle or teaser.title }}</span>
+        <span class="{{ 'nextread__title--underlined' if view.is_advertorial else 'nextread__title--underlined-skip' }}">{{ teaser.teaserTitle or teaser.title }}</span>
     </span>
 {% endblock %}
