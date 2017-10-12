@@ -137,10 +137,6 @@ function appUserIsBack( timestamp, options ) {
                 link: this.options.link
             });
         document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', html );
-        document.getElementById( 'app-user-is-back' ).addEventListener( 'touchstart', function( event ) {
-            event.preventDefault();
-            window.location.reload();
-        }, false );
     };
 
     AppUserIsBack.prototype.init = function() {
