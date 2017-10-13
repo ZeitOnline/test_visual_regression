@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - FIX: Center ZAR advertorial-CP heading (minor)
 
+- ZON-4120: Add image fallback for series articles
+
 
 3.98 (2017-10-12)
 -----------------
