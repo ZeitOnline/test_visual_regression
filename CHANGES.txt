@@ -6,6 +6,8 @@ POSTDEPLOY
 
 - FIX: Support caching headers for text, rawxml and unknown content types
 
+- FEM-66: Remove iqd_digital_transformation feature toggle
+
 
 3.99 (unreleased)
 -----------------
