@@ -10,7 +10,7 @@ POSTDEPLOY
 3.99 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- FIX: Center ZAR advertorial-CP heading (minor)
 
 
 3.98 (2017-10-12)
