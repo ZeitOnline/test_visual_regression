@@ -221,13 +221,12 @@ def logo_icon(teaser, area_kind=None, zplus=None):
 
 @zeit.web.register_test
 def liveblog(context):
-    return zeit.content.article.interfaces.IArticle.providedBy(
-        context) and context.template == 'zon-liveblog'
+    return zeit.web.core.article.ILiveblogArticle.providedBy(context)
 
 
 @zeit.web.register_test
 def column(context):
-    return context.serie and context.serie.column
+    return zeit.web.core.article.IColumnArticle.providedBy(context)
 
 
 @zeit.web.register_test
