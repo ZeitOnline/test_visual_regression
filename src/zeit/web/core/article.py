@@ -78,8 +78,9 @@ def _inject_banner_code(pages, pubtype):
         'zon': {
             'pages': range(1, len(pages) + 1),
             'ads': [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
-                    {'tile': 7, 'paragraph': 2, 'type': 'desktop'},
+                    {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
                     {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
+                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
                     {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
         },
         'longform': {
@@ -87,15 +88,6 @@ def _inject_banner_code(pages, pubtype):
             'ads': [{'tile': 7, 'paragraph': 5, 'type': 'desktop'}]
         }
     }
-
-    toggles = zeit.web.core.application.FEATURE_TOGGLES
-    if toggles.find('iqd_digital_transformation'):
-        idt_ads = [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
-                   {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
-                   {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
-                   {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
-                   {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
-        adconfig['zon']['ads'] = idt_ads
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
@@ -107,8 +99,7 @@ def _inject_banner_code(pages, pubtype):
             b, zeit.web.core.block.Paragraph), page.blocks)
 
         # (1a) check if there is an editorial aside after paragraph 1
-        if toggles.find('iqd_digital_transformation') and (
-                len(page.blocks) > 1) and not isinstance(
+        if len(page.blocks) > 1 and not isinstance(
                 page.blocks[1], zeit.web.core.block.Paragraph):
             adconfig['zon']['ads'][1] = {
                 'tile': 8, 'paragraph': 2, 'type': 'desktop'}
@@ -310,6 +301,7 @@ class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
             return {}
         return zeit.cms.interfaces.ICMSContent(
             nodes[0].get('uniqueId'), {})
+
 
 RESSORTFOLDER_SOURCE = RessortFolderSource()
 
