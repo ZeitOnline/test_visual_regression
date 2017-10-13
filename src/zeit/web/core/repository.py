@@ -1,5 +1,6 @@
 import os.path
 
+import grokcore.component
 import zope.component
 import zope.interface
 
@@ -67,8 +68,15 @@ def _add_marker_interfaces(content):
                 zeit.web.core.interfaces.IContentMarkerInterfaces):
             if result:
                 ifaces.extend(result)
-        ifaces.append(zeit.web.core.interfaces.IInternalUse)
         zope.interface.alsoProvides(content, *ifaces)
+
+
+@grokcore.component.adapter(
+    zeit.cms.interfaces.ICMSContent, name='internaluse')
+@grokcore.component.implementer(
+    zeit.web.core.interfaces.IContentMarkerInterfaces)
+def mark_everything_interaluse(context):
+    return (zeit.web.core.interfaces.IInternalUse,)
 
 
 # Determine __parent__ folder on access, instead of having Repository write it.
