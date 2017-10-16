@@ -148,7 +148,7 @@ function appUserIsBack( timestamp, options ) {
             if (
                 that.options.force ||
                 ( response.last_published_semantic &&
-                ( that.timestamp - Date.parse( response.last_published_semantic ) ) >= that.options.delta )
+                ( Date.parse( response.last_published_semantic ) - that.timestamp ) >= that.options.delta )
             ) {
                 that.log( 'info', 'lps: ' + Date.parse( response.last_published_semantic ),
                     'now: ' + that.timestamp, 'diff: ',
