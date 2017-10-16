@@ -199,9 +199,7 @@ def test_banner_channel_mapping_should_apply_last_rule(mock_ad_view):
         'centerpage', '', '').banner_channel == 'vermischtes/centerpage'
 
 
-def test_adcontroller_values_are_correctly_returned(mock_ad_view, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adcontroller_values_are_correctly_returned(mock_ad_view):
     zw_code = [('$handle', 'centerpage_trsf'), ('level2', 'wissen'),
                ('level3', 'zeit_wissen'), ('level4', ''),
                ('$autoSizeFrames', True), ('keywords', 'zeitonline'),
@@ -225,9 +223,7 @@ def test_adcontroller_values_are_correctly_returned(mock_ad_view, monkeypatch):
     assert zw_code == zw_test
 
 
-def test_adcontroller_values_for_stimmts_series(mock_ad_view, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adcontroller_values_for_stimmts_series(mock_ad_view):
     adv_test = mock_ad_view(
         'article', 'wissen', '', serienname='Stimmt\'s').adcontroller_values
     adv_code = [('$handle', 'artikel_trsf'), ('level2', u'wissen'),
@@ -237,9 +233,7 @@ def test_adcontroller_values_for_stimmts_series(mock_ad_view, monkeypatch):
     assert adv_test == adv_code
 
 
-def test_banner_advertorial_extrarulez(mock_ad_view, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_banner_advertorial_extrarulez(mock_ad_view):
     adv_test = mock_ad_view(
         'centerpage', 'angebote',
         '', banner_id='angebote/ingdiba',

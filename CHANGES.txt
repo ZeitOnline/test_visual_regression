@@ -4,13 +4,19 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- FIX: Support caching headers for text, rawxml and unknown content types
+- (nothing)
 
 
 3.99 (unreleased)
 -----------------
 
-- Nothing changed yet.
+- ZON-4120: Add image fallback for series articles
+
+- FIX: Center ZAR advertorial-CP heading (minor)
+
+- FIX: Support caching headers for text, rawxml and unknown content types
+
+- FEM-66: Remove iqd_digital_transformation feature toggle
 
 
 3.98 (2017-10-12)
