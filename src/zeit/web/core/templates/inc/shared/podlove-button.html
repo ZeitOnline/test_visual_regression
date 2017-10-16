@@ -13,6 +13,6 @@
         {{ lama.use_svg_icon('podcast', 'podlove-button__icon', view.package, a11y=False) }}
         Abonnieren
     </span>
-    <script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="de"data-size="small" data-hide="true" data-buttonid="{{ podlove_button_id }}" data-json-data="podcastData_{{ podlove_button_id }}" async defer></script>
+    <script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="de" data-size="small" data-hide="true" data-buttonid="{{ podlove_button_id }}" data-json-data="podcastData_{{ podlove_button_id }}" async defer></script>
     {# Attention: The data-size attribute is needed, even though we use our own button. Otherwise the podlove script fails. #}
 {% endif %}
