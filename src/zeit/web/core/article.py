@@ -36,6 +36,12 @@ class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
     """Marker interface for articles that contain a liveblog."""
 
 
+class ISeriesArticleWithFallbackImage(
+        zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that are part of a series with a
+    fallback image."""
+
+
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
 class Page(object):
 
@@ -78,8 +84,9 @@ def _inject_banner_code(pages, pubtype):
         'zon': {
             'pages': range(1, len(pages) + 1),
             'ads': [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
-                    {'tile': 7, 'paragraph': 2, 'type': 'desktop'},
+                    {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
                     {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
+                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
                     {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
         },
         'longform': {
@@ -87,15 +94,6 @@ def _inject_banner_code(pages, pubtype):
             'ads': [{'tile': 7, 'paragraph': 5, 'type': 'desktop'}]
         }
     }
-
-    toggles = zeit.web.core.application.FEATURE_TOGGLES
-    if toggles.find('iqd_digital_transformation'):
-        idt_ads = [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
-                   {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
-                   {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
-                   {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
-                   {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
-        adconfig['zon']['ads'] = idt_ads
 
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     p_length = conf.get('sufficient_paragraph_length', 10)
@@ -107,8 +105,7 @@ def _inject_banner_code(pages, pubtype):
             b, zeit.web.core.block.Paragraph), page.blocks)
 
         # (1a) check if there is an editorial aside after paragraph 1
-        if toggles.find('iqd_digital_transformation') and (
-                len(page.blocks) > 1) and not isinstance(
+        if len(page.blocks) > 1 and not isinstance(
                 page.blocks[1], zeit.web.core.block.Paragraph):
             adconfig['zon']['ads'][1] = {
                 'tile': 8, 'paragraph': 2, 'type': 'desktop'}
@@ -311,6 +308,7 @@ class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
         return zeit.cms.interfaces.ICMSContent(
             nodes[0].get('uniqueId'), {})
 
+
 RESSORTFOLDER_SOURCE = RessortFolderSource()
 
 
@@ -368,3 +366,38 @@ class LiveblogInfo(object):
     def last_modified(self):
         if self.liveblog:
             return self.liveblog.last_modified
+
+
+TEMPLATE_INTERFACES = {
+    'zon-liveblog': (ILiveblogArticle,),
+    # Should we check that the article provides IZMOContent? Because those
+    # templates are only available there.
+    'longform': (zeit.web.magazin.article.ILongformArticle,),
+    'short': (zeit.web.magazin.article.IShortformArticle,),
+    # XXX Somewhat confusing compared to core.IColumnArticle
+    'column': (zeit.web.magazin.article.IColumnArticle,),
+    'photocluster': (zeit.web.magazin.article.IPhotoclusterArticle,),
+}
+
+
+@grokcore.component.adapter(
+    zeit.content.article.interfaces.IArticle, name='template')
+@grokcore.component.implementer(
+    zeit.web.core.interfaces.IContentMarkerInterfaces)
+def mark_according_to_template(context):
+    return TEMPLATE_INTERFACES.get(context.template)
+
+
+@grokcore.component.adapter(
+    zeit.content.article.interfaces.IArticle, name='serie')
+@grokcore.component.implementer(
+    zeit.web.core.interfaces.IContentMarkerInterfaces)
+def mark_according_to_series(context):
+    if not context.serie:
+        return None
+    result = []
+    if context.serie.column:
+        result.append(IColumnArticle)
+    if context.serie.fallback_image:
+        result.append(ISeriesArticleWithFallbackImage)
+    return result

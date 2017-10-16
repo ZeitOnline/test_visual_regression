@@ -15,7 +15,7 @@
     <series title="Afrika - 50 Jahre Unabhängigkeit" serienname="Afrika 50" url="afrika-50" encoded="Afrika%2050" />
     <series title="Amuse Buch" serienname="Amuse Buch" url="amuse-buch" encoded="Amuse%20Buch" />
     <series title="Anti-Mono-Stereo" serienname="Anti-Mono-Stereo" url="anti-mono-stereo" />
-    <series title="App-Kritik" serienname="App-Kritik" url="app-kritik" />
+    <series title="App-Kritik" serienname="App-Kritik" url="app-kritik" fallback_image="yes"/>
     <series title="Auch das ist Sport" serienname="Auch das ist Sport" url="auch-das-ist-sport" encoded="Auch%20das%20ist%20Sport" />
     <series title="Aussteigen für Anfänger" serienname="Aussteigen für Anfänger" url="aussteigen-fuer-anfaenger" encoded="Aussteigen%20f%C3%BCr%20Anf%C3%A4nger" />
     <series title="Autogeschichte" serienname="Autogeschichte" url="autogeschichte" />

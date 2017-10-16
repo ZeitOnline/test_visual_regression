@@ -353,6 +353,16 @@ def test_series_teaser_should_render_series_element(testbrowser):
     assert series_element[0].text == 'Serie: App-Kritik'
 
 
+def test_podcast_series_fallback_teaser_image_is_used(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/podcast-teaser-fallback')
+    teaser_image_one = browser.cssselect('.teaser-square__media-item')[0]
+    teaser_image_two = browser.cssselect('.teaser-square__media-item')[1]
+    assert teaser_image_one.attrib['src'].endswith(
+        "podcast-illustration-fallback/square__460x460__EEB200")
+    assert teaser_image_two.attrib['src'].endswith(
+        "podcast-illustration/square__460x460__EEB200")
+
+
 def test_small_teaser_should_have_responsive_layout(
         selenium_driver, testserver, screen_size):
 
@@ -1343,16 +1353,12 @@ def test_adtile12_from_cp_extra_is_there(testbrowser):
     assert browser.cssselect('#ad-desktop-12')
 
 
-def test_adtile4_from_cp_extra_is_there(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adtile4_from_cp_extra_is_there(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/centerpage')
     assert browser.cssselect('#ad-desktop-4')
 
 
-def test_adtile9_from_cp_extra_is_there(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adtile9_from_cp_extra_is_there(testbrowser):
     browser = testbrowser('/zeit-online/parquet')
     assert browser.cssselect('#ad-desktop-9')
 

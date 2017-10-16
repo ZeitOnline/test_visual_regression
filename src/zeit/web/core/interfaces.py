@@ -156,7 +156,9 @@ class ITopicLink(zope.interface.Interface):
 
 
 class IInternalUse(zope.interface.Interface):
-    """Marks internally used source entries"""
+    """Marker interface for ICMSContent, so Source entries can be ``available``
+    only for zeit.web, but not vivi.
+    """
 
 
 class IBreakingNews(zope.interface.Interface):
@@ -315,4 +317,10 @@ class IVertical(zope.interface.Interface):
 
     This is not quite the same as which zeit.cms.section.ISectionMarker the
     content has, since we have to handle some additional special cases.
+    """
+
+
+class IContentMarkerInterfaces(zope.interface.Interface):
+    """Returns a list of marker interfaces that are added to ICMSContent
+    objects.
     """

@@ -8,8 +8,6 @@ not display ads on other pages. #}
              "{0}:templates/inc/ads/places/{1}/ad.html".format(view.package, block.type),
              "zeit.web.core:templates/inc/ads/places/{0}/place{1}.html".format(block.type, block.tile),
              "zeit.web.core:templates/inc/ads/places/{0}/ad.html".format(block.type)] %}
-    {% elif block.on_page_nr == 2 and block.type == 'desktop' and not toggles('iqd_digital_transformation') %}
-        {% include "zeit.web.core:templates/inc/ads/places/desktop/place9.html" %}
     {% endif %}
 {% else %}
     {% include

@@ -201,6 +201,27 @@ def test_zar_article_advertising_nextread_provides_expected_webtrekk_string(
         'stationaer.articlebottom.publisher-nextread.button.1.jobs_finden')
 
 
+def test_zar_article_series_header_provides_expected_webtrekk_string(
+        selenium_driver, testserver):
+    url = testserver.url + '{}#debug-clicktracking'
+    driver = selenium_driver
+    driver.set_window_size(1000, 800)
+    driver.get(url.format(('/arbeit/article/series')))
+
+    try:
+        WebDriverWait(driver, 3).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.article-series__heading')))
+    except TimeoutException:
+        assert False, 'Series ZAR article shoul render series header'
+    link = driver.find_element_by_css_selector(
+        '.article-series__heading')
+    link.click()
+    tracking_data = driver.execute_script("return window.trackingData")
+    assert tracking_data.startswith(
+        'stationaer.articleheader.series...70_jahre_die_zeit')
+
+
 def test_zar_article_podcast_header_renders_correctly(testbrowser):
     browser = testbrowser('/arbeit/article/podcast')
     assert len(browser.cssselect('.article-heading--podcast')) == 1

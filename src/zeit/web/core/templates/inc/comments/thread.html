@@ -86,8 +86,7 @@
         {% if (loop.length < view.comments.ad_place and loop.last ) or loop.index == view.comments.ad_place -%}
             {% if view.advertising_enabled -%}
                 <div class="comment__ad">
-                    {% set adnumber = 9 if toggles('iqd_digital_transformation') else 8 %}
-                    {% include "zeit.web.core:templates/inc/ads/places/desktop/place{}.html".format(adnumber) %}
+                    {% include "zeit.web.core:templates/inc/ads/places/desktop/place9.html" %}
                     {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
                 </div>
             {%- endif %}

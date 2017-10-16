@@ -1484,6 +1484,21 @@ def test_article_in_series_with_embed_header_has_no_banner(testbrowser):
     assert len(browser.cssselect('.article-series')) == 0
 
 
+def test_podcast_article_in_series_without_image_uses_fallback_image(
+        testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast-header-serie')
+    teaser_image = browser.cssselect(".article-heading__media-item")[0]
+    assert (
+        'zeit-online/image/podcast-illustration-fallback/'
+        in teaser_image.get('src'))
+
+
+def test_podcast_article_in_series_with_image_uses_own_image(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast-header')
+    teaser_image = browser.cssselect(".article-heading__media-item")[0]
+    assert 'zeit-online/image/podcast-illustration/' in teaser_image.get('src')
+
+
 def test_liveblog_in_series_has_no_banner(testbrowser):
     browser = testbrowser('/zeit-online/article/serie-liveblog')
 

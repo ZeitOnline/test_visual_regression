@@ -1,6 +1,6 @@
             </main>
             {% block adplace_floor %}
-                {% if toggles('iqd_digital_transformation') and not view.is_hp -%}
+                {% if not view.is_hp -%}
                     <!-- P7 -->
                     {% include "zeit.web.core:templates/inc/ads/places/desktop/place16.html" %}
                 {% endif -%}
