@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - FEM-66: Remove iqd_digital_transformation feature toggle
 
+- MAINT: Mark header elements in longform for external styling
+
 
 3.98 (2017-10-12)
 -----------------
