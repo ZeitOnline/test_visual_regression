@@ -395,3 +395,39 @@ def test_zar_article_underline_is_applied_correctly(testbrowser):
 def test_zar_advertorial_has_no_home_button_as_pagination(testbrowser):
     browser = testbrowser('/arbeit/article/advertorial-onepage')
     assert len(browser.cssselect('.article-pagination__link')) == 0
+
+
+def test_zar_sharequote_is_hidden_if_toggle_is_false(testbrowser, togglepatch):
+    togglepatch({'arbeit_quote_sharing': False})
+    browser = testbrowser('/arbeit/article/sharequote')
+    assert len(browser.cssselect('.quote-sharing')) == 0
+
+
+def test_zar_sharequote_is_shown_if_toggle_is_true(testbrowser, togglepatch):
+    togglepatch({'arbeit_quote_sharing': True})
+    browser = testbrowser('/arbeit/article/sharequote')
+    assert len(browser.cssselect('.quote-sharing')) == 2
+
+
+def test_zar_sharebert_toggle_works(testbrowser, togglepatch):
+    togglepatch({'share_blocks_via_screenshot': False})
+    browser = testbrowser('/arbeit/article/sharequote')
+    assert len(browser.cssselect('.js-shareblock')) == 0
+
+    togglepatch({'share_blocks_via_screenshot': True})
+    browser = testbrowser('/arbeit/article/sharequote')
+    assert len(browser.cssselect('.js-shareblock')) == 2
+
+
+def test_zar_sharebert_has_correct_attributes(testbrowser):
+    browser = testbrowser('/arbeit/article/sharequote/komplettansicht')
+    shareblock_links = browser.cssselect('.js-shareblock')
+    assert len(shareblock_links) == 3
+
+    sharelink = shareblock_links[2]
+    assert sharelink.attrib['data-sharebert-screenshot-target'].endswith(
+        '/arbeit/article/sharequote/module/17/sharequote')
+    assert sharelink.attrib['data-sharebert-redirect-url'].endswith(
+        '/arbeit/article/sharequote?wt_zmc=sm.ext.zonaudev.twitter.ref.'
+        'zeitde.share.link.x&utm_medium=sm&utm_source=twitter_zonaudev'
+        '_ext&utm_campaign=ref&utm_content=zeitde_share_link_x')
