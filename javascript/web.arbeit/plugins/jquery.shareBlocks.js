@@ -99,6 +99,8 @@
         var $elem = $( event.target ).closest( '.js-shareblock' );
         var sharebertRedirectUrl = $elem.data( 'sharebert-redirect-url' );
         var sharebertShotUrl = $elem.data( 'sharebert-screenshot-target' );
+        // for testing locally (Sharebert cannot reach your localhost), use nginx or:
+        // sharebertShotUrl = 'http://live0.zeit.de/twitter-quote/?quote=Das%20hat%20alles%20keinen%20Gin.';
         log( 'sharebertRedirectUrl: ' + sharebertRedirectUrl );
         log( 'sharebertShotUrl: ' + sharebertShotUrl );
 
