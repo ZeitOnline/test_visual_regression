@@ -6,6 +6,7 @@
   <arbeit>true</arbeit>
   <arbeit_hightlight_ressortnav>true</arbeit_hightlight_ressortnav>
   <arbeit_quote_sharing>true</arbeit_quote_sharing>
+  <share_blocks_via_screenshot>true</share_blocks_via_screenshot>
   <article_lineage>true</article_lineage>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <campus_toolbox>true</campus_toolbox>
