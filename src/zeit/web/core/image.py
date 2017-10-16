@@ -19,6 +19,7 @@ import zeit.cms.workflow.interfaces
 import zeit.content.author.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.image.imagegroup
+import zeit.content.image.imagereference
 import zeit.content.image.interfaces
 import zeit.content.image.variant
 
@@ -328,6 +329,19 @@ def image_from_block_content(context):
     if image is not None:
         image.variant_id = context.layout.image_pattern
     return image
+
+
+@grokcore.component.adapter(
+    zeit.web.core.article.ISeriesArticleWithFallbackImage)
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+def images_from_series_with_fallback_image(context):
+    # ZCA does not support "fall back to the next less specific adapter",
+    # so we hardcode it.
+    articleimg = zeit.content.image.imagereference.ImagesAdapter(context)
+    if articleimg.image:
+        return articleimg
+    serie_cp = zeit.web.core.template.find_series_cp(context)
+    return zeit.content.image.interfaces.IImages(serie_cp)
 
 
 @grokcore.component.adapter(zeit.web.core.interfaces.IBlock,

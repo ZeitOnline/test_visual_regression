@@ -94,28 +94,6 @@ class Gallery(Traversable):
 class Article(Traversable):
 
     def __call__(self, tdict):
-        # Should we check that these provide IZMOContent? Because those
-        # templates are only available there.
-        if self.context.template == 'longform':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.magazin.article.ILongformArticle)
-        elif self.context.template == 'short':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.magazin.article.IShortformArticle)
-        elif self.context.template == 'column':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.magazin.article.IColumnArticle)
-        elif self.context.template == 'photocluster':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.magazin.article.IPhotoclusterArticle)
-
-        elif zeit.web.core.template.liveblog(self.context):
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.ILiveblogArticle)
-        elif zeit.web.core.template.column(self.context):
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.IColumnArticle)
-
         if tdict['view_name'].startswith('seite') and not tdict['subpath']:
             tdict['view_name'] = 'seite'
 

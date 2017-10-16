@@ -30,7 +30,6 @@ import zeit.retresco.convert
 import zeit.retresco.interfaces
 import zeit.retresco.search
 
-
 log = logging.getLogger(__name__)
 unset = object()
 
@@ -331,6 +330,8 @@ class LazyProxy(object):
         return object.__new__(cls)
 
     def __init__(self, context, istack=[zeit.cms.interfaces.ICMSContent]):
+        import zeit.web.core.article  # Prevent circular imports
+
         def callback():
             object.__setattr__(self, '__exposed__', True)
 
@@ -367,6 +368,18 @@ class LazyProxy(object):
             type_iface = CONTENT_TYPE_SOURCE.factory.find(type_id)
             if type_iface is not None:
                 zope.interface.alsoProvides(self, type_iface)
+
+        # XXX To be consistent with normal content, we should call
+        # `zeit.web.core.repository.add_marker_interfaces(self)` here. However,
+        # those adapters might access fields that are missing from solr/reach/
+        # etc., because they are irrelevant for rendering teasers, thereby
+        # unnecessarily exposing the proxy. (Also, reach currently does not
+        # return the doc_type, so most adapters would not even apply.)
+        # Thus, we hard-code yet another special case here, which normally is
+        # handled by z.w.c.article.mark_according_to_series().
+        if self.serie and self.serie.column:
+            zope.interface.alsoProvides(
+                self, zeit.web.core.article.IColumnArticle)
 
     def __getattr__(self, key):
         if not self.__exposed__ or not hasattr(self.__origin__, key):

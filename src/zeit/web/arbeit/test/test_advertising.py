@@ -87,8 +87,7 @@ def test_zar_adplaces_present_on_cp(testbrowser, togglepatch):
 
 
 def test_zar_adcontroller_values_return_values_on_article(
-        application, togglepatch):
-    togglepatch({'iqd_digital_transformation': True})
+        application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/arbeit/article/keywords')
     adcv = [
@@ -107,8 +106,7 @@ def test_zar_adcontroller_values_return_values_on_article(
 
 
 def test_zar_adcontroller_values_return_values_on_homepage(
-        application, togglepatch):
-    togglepatch({'iqd_digital_transformation': True})
+        application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/arbeit/index')
     adcv = [
@@ -125,8 +123,7 @@ def test_zar_adcontroller_values_return_values_on_homepage(
 
 
 def test_zar_ads_are_rendered_on_articles_with_multiple_pages(
-        testbrowser, togglepatch):
-    togglepatch({'iqd_digital_transformation': True})
+        testbrowser):
     selector = (
         '#ad-desktop-8', '#ad-desktop-4', '#ad-mobile-3', '#ad-mobile-4')
 
@@ -159,8 +156,7 @@ def test_zar_ads_are_rendered_on_articles_with_multiple_pages(
 def test_zar_tile8_is_rendered_on_cp(testbrowser, togglepatch):
     togglepatch({
         'third_party_modules': True,
-        'iqd': True,
-        'iqd_digital_transformation': True
+        'iqd': True
     })
     browser = testbrowser('/arbeit/centerpage/adplace8')
     assert len(browser.cssselect('#ad-desktop-8')) == 1
@@ -169,8 +165,7 @@ def test_zar_tile8_is_rendered_on_cp(testbrowser, togglepatch):
 def test_zar_desktop_ads_are_rendered_on_cp(testbrowser, togglepatch):
     togglepatch({
         'third_party_modules': True,
-        'iqd': True,
-        'iqd_digital_transformation': True
+        'iqd': True
     })
     browser = testbrowser('/arbeit/index')
 
@@ -182,8 +177,6 @@ def test_zar_desktop_ads_are_rendered_on_cp(testbrowser, togglepatch):
 
 def test_zar_adcontroller_values_return_values_on_advertorial_cp(
         application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/arbeit/centerpage/advertorial')
     adcv = [
@@ -200,8 +193,6 @@ def test_zar_adcontroller_values_return_values_on_advertorial_cp(
 
 def test_zar_adcontroller_values_return_values_on_advertorial_article(
         application, dummy_request, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/arbeit/article/advertorial')
     adcv = [
