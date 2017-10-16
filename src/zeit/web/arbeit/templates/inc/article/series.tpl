@@ -2,7 +2,7 @@
     {% set series_cp = context | find_series_cp %}
     {% set image = get_image(series_cp, variant_id='stripe', fallback=False) %}
 
-    <div class="{{ 'article-series' | with_mods('has-image' if image) }}" data-ct-row="series" data-ct-column="false">
+    <div class="{{ 'article-series' | with_mods('has-image' if image) }}" data-ct-area="articleheader" data-ct-row="series" data-ct-column="false">
         {% if image -%}
             {% set module_layout = "article-series" %}
             {% set media_caption_additional_class = 'figcaption--hidden' %}
