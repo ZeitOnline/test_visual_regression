@@ -145,6 +145,7 @@ function appUserIsBack( timestamp, options ) {
         }
         var that = this;
         this.get( options.endpoint + options.slug ).then( function( response ) {
+            // check if the website was updated after the page was cached by the app
             if (
                 that.options.force ||
                 ( response.last_published_semantic &&
