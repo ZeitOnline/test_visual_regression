@@ -33,7 +33,7 @@ function appUserIsBack( timestamp, options ) {
         var defaults = {
             buttontext: 'Neu laden',
             debug: window.location.href.indexOf( 'debug-userisback' ) !== -1,
-            delta: 5 * 60 * 1000, // 5 minutes
+            delta: 0, // give higher deltas to show lesser messages
             endpoint: window.location.protocol + '//' + window.location.host + '/json/update-time',
             force: window.location.href.indexOf( 'force-userisback' ) !== -1,
             link: window.location.href,
