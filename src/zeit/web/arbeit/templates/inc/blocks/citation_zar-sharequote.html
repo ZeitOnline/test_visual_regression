@@ -6,17 +6,17 @@
 
 {% block citation_after_block %}
     {% if toggles('arbeit_quote_sharing') -%}
+
+        {% import 'zeit.web.arbeit:templates/macros/layout_macro.tpl' as lama %}
+        {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_link_x' %}
+        {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share.link.x' %}
+
         <aside class="quote quote--share quote-sharing">
-            {# TODO: Hwhat? #}
-            <h1 class="quote-sharing__label">Teilen:</h1>
-            {% import 'zeit.web.arbeit:templates/macros/layout_macro.tpl' as lama %}
-            {% set tracking_id = 'share' %}
-            {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_%s_link_x' | format(tracking_id) -%}
-            {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.%s.link.x' | format(tracking_id) %}
+            <h3 class="quote-sharing__label">Teilen:</h3>
 
             <ul class="quote-sharing__items" data-ct-row="social">
                 <li class="quote-sharing__item">
-                    <a class="{{ 'quote-sharing__link' | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}&quote={{ block.text | urlencode }}" target="_blank" data-ct-label="facebook" title="Auf Facebook teilen">
+                    <a class="{{ 'quote-sharing__link' | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}&quote={{ block.text | urlencode }}" target="_blank" data-ct-label="facebook" title="Auf Facebook teilen" data-id="{{ 'shareblock.%s...facebook' | format(block.position) }}">
                         {{ lama.use_svg_icon('sharing-facebook', 'quote-sharing__icon' | with_mods('facebook'), view.package) }}
                         <span class="quote-sharing__text">Auf Facebook teilen</span>
                     </a>
@@ -24,17 +24,16 @@
                 <li class="quote-sharing__item">
                     {# TODO: Sharebert seperat togglen?#}
 
-                    {# TODO: URL mit Kampagnenparametern wie oben verwenden #}
                     {% set article_url = context | create_url %}
                     {% set sharebert_screenshot_target = '%s/module/%s/sharequote' | format(article_url, block.position) %}
+                    {% set sharebert_share_url = (content_url ~ ga_campaign).format('twitter') %}
 
-                    <a class="{{ 'quote-sharing__link' | with_mods('twitter') }} js-shareblock" href="#" target="_blank" data-ct-label="twitter" title="Auf Twitter teilen" data-sharebert-screenshot-target="{{ sharebert_screenshot_target }}" data-sharebert-redirect-url="{{ article_url }}">
+                    <a class="{{ 'quote-sharing__link' | with_mods('twitter') }} js-shareblock" href="https://twitter.com/intent/tweet?text={{ sharebert_share_url | urlencode }}" target="_blank" data-ct-label="twitter" title="Auf Twitter teilen" data-sharebert-screenshot-target="{{ sharebert_screenshot_target }}" data-sharebert-redirect-url="{{ sharebert_share_url }}" data-id="{{ 'shareblock.%s...twitter' | format(block.position) }}">
                         {{ lama.use_svg_icon('sharing-twitter', 'quote-sharing__icon' | with_mods('twitter'), view.package) }}
                         <span class="quote-sharing__text">Auf Twitter teilen</span>
                     </a>
                 </li>
             </ul>
         </aside>
-
     {% endif -%}
 {% endblock %}

@@ -8,31 +8,112 @@
 
     'use strict';
 
-    // TODO: check the object vs prototype thing
-
-    var settings = {
-            sharebertUrl: 'http://share.zeit.de/-/apps/island/shots'
-        },
+    var settings,
         defaults = {
+            sharebertUrl: 'http://share.zeit.de/-/apps/twitter-quote/shots',
             duration: 200
         },
-        sharebertRedirectUrl,
-        sharebertShotUrl;
+        debugMode = location.hash.indexOf( 'debug-shareblocks' ) > -1;
 
-    function log( message ) {
-        window.console.debug( message );
+    function log() {
+        if ( debugMode ) {
+            var args = Array.prototype.slice.call( arguments );
+            console.log.apply( console, args );
+        }
     }
 
-    function share( event ) {
+    function openShareWindow( url ) {
+        // TODO: PopUp ist halt doof.
+        // Alternative, bzw auf jeden Fall tun: Link umschreiben, Clickhandler entfernen.
+        // Kann man feststellen ob das Fenster öffnet? Und, falls nicht, den Link öffnen?
+        // Ginge ein iFrame?
+        log( 'OPEN share window ' + url );
+        window.open( url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600' );
+    }
+
+    var getSharebertData = function( sharebertShotUrl, sharebertRedirectUrl ) {
+        return new window.Promise( function( resolve, reject ) {
+
+            var metaData = {
+                'title': document.title,
+                'description': document.querySelector( 'meta[name=description]' ).getAttribute( 'content' )
+            };
+            var myData = {
+                'target_url': sharebertShotUrl,
+                'meta_data': metaData,
+                'redirect_to': sharebertRedirectUrl
+            };
+
+            // The jQuery approach sends two requests: OPTIONS + POST.
+            $.ajax({
+                url: settings.sharebertUrl,
+                type: 'POST',
+                data: JSON.stringify( myData ),
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json'
+            }).done( function( data ) {
+                log( 'SUCCESS', data );
+                resolve( data );
+            }).fail( function( jqXHR, textStatus, errorThrown ) {
+                var errorMessage = 'Leider ist ein Fehler aufgetreten, bitte versuchen Sie es später noch einmal.';
+                log( 'ERROR', errorMessage, textStatus, errorThrown );
+                reject( Error( errorMessage ) );
+            });
+
+            // The native approach does not work, because I dont get the POST data formatted correctly.
+            // Server responds with Error 400
+            // {"status": "error", "errors": [{"location": "body",
+            // "description": "\"b'[object Object]'\" is not a mapping type: Does not implement dict-like functionality.", "name": ""}]}
+            /*
+            var xhr = new XMLHttpRequest();
+            xhr.open( 'POST', 'http://share.zeit.de/-/apps/twitter-quote/shots' );
+            xhr.onload = function() {
+                // This is called even on 404 etc
+                // so check the status
+                if ( xhr.status === 200 ) {
+                    // Resolve the promise with the response text
+                    resolve( JSON.parse( xhr.response ) );
+                } else {
+                    // Otherwise reject with the status text
+                    // which will hopefully be a meaningful error
+                    reject( Error( xhr.statusText ) );
+                }
+            };
+            // Handle network errors
+            xhr.onerror = function() {
+                reject( Error( 'Network Error' ) );
+            };
+            // Make the request
+            xhr.setRequestHeader( 'Content-Type', myData.contentType );
+            xhr.send( myData );
+            */
+        });
+    };
+
+    var share = function( event ) {
+
+        event.preventDefault();
+
+        // Lösung: innerhalb von init() oder share() die Daten halten. Nicht im Plugin.
         var $elem = $( event.target ).closest( '.js-shareblock' );
-        console.debug( event );
-        console.debug( $elem );
-        sharebertRedirectUrl = $elem.data( 'sharebert-redirect-url' ); // TODO: without params usw
-        sharebertShotUrl = $elem.data( 'sharebert-screenshot-target' );
+        var sharebertRedirectUrl = $elem.data( 'sharebert-redirect-url' );
+        var sharebertShotUrl = $elem.data( 'sharebert-screenshot-target' );
         log( 'sharebertRedirectUrl: ' + sharebertRedirectUrl );
         log( 'sharebertShotUrl: ' + sharebertShotUrl );
-        event.preventDefault(); // TODO: optimize via passive-thing
-    }
+
+        getSharebertData( sharebertShotUrl, sharebertRedirectUrl )
+            .then( function( response ) {
+                log( 'SUCCESS, got URL:' + response.src_url );
+                var shareLink = 'https://twitter.com/intent/tweet?text=' +
+                    encodeURIComponent( response.src_url );
+                openShareWindow( shareLink );
+            }, function( error ) {
+                log( 'error', error );
+            });
+
+        $elem.blur();
+    };
 
     function initShareBlocks( element ) {
         log( 'initialize click event on ' + element );
@@ -40,117 +121,21 @@
     }
 
     $.fn.shareBlocks = function( options ) {
+
+        // Promises working since iOS Safari8, Android Browser 4.4.4, Chrome+FF+Opera+Edge.
+        // Promise not working in IE 11.
+        // Fallback is the regular share URL
+        // That way, we can also use XMLHttpRequest with a JSON response.
+        if ( !window.Promise ) {
+            return;
+        }
+
         settings = $.extend({}, defaults, options );
 
-        log( 'setup with ' + Zeit + ' and ' + settings );
+        log( 'setup shareBlocks with ' + Zeit + ' and ' + settings );
 
         return this.each( function() {
             initShareBlocks( this );
         });
     };
 })( jQuery, window.Zeit );
-
-/*
-
-<script type="text/javascript">
-var sharebertUrl = "http://share.zeit.de/-/apps/island/shots",
-redirectURL = window.location.href;
-window.Zeit.require(['jquery'], function(jqr){
-  function addBigShareButtons(url) {
-      var campaignCode = {
-          wt_zmc: null,
-          utm_medium: 'sm',
-          utm_source: null,
-          utm_campaign: 'ref',
-          utm_content: 'zeitde_dskshare_link_x',
-          t: document.title
-      };
-      function shareUrl(url) {
-          window.open(url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');
-      }
-      jqr('.tb-newShareBox').css( "display", "inline-block");
-      jqr('#facebook-share').on('click', function() {
-          if (wt) {
-              wt.sendinfo({ linkId: 'stationaer.articlebottom.1.1.social.facebook|https://www.facebook.com/sharer/sharer.php?u=' + url });
-          }
-          campaignCode.wt_zmc = 'sm.ext.zonaudev.facebook.ref.zeitde.dskshare.link.x';
-          campaignCode.utm_source = 'facebook_zonaudev_ext';
-          shareUrl('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent( url + '?' + jqr.param(campaignCode) ));
-      });
-      jqr('#twitter-share').on('click', function(){
-          if (wt) {
-              wt.sendinfo({ linkId: 'stationaer.articlebottom.1.2.social.twitter|https://twitter.com/intent/tweet?url=' + url });
-          }
-          campaignCode.wt_zmc = 'sm.ext.zonaudev.twitter.ref.zeitde.dskshare.link.x';
-          campaignCode.utm_source = 'twitter_zonaudev_ext';
-          shareUrl('https://twitter.com/intent/tweet?text=%23generatorsson&url=' +
-            encodeURIComponent( url + '?' + jqr.param(campaignCode) ));
-      });
-  }
-  var info = {};
-
-  jqr('button.submit-name').on('click', function(event){
-    var loadingImage = '<div class="loadingImage pulse"></div>'
-
-    event.preventDefault();
-
-    if (jqr('p.errorMessage').length > 0) {
-      jqr('p.errorMessage').remove();
-    }
-    info['vorname'] = jqr('input.vorname').val();
-    info['vatername'] = jqr('input.vatername').val();
-    info['geschlecht'] = jqr('select.geschlecht').val();
-    jqr('div.generatorson').append(loadingImage);
-    var targetURL = "http://live0.zeit.de/em-2016/islandtrikot.html?" + jqr.param( info );
-    console.log(info);
-    var metaData = {
-      "title": "So würde ich für Island auflaufen",
-      "description": "Und Sie? Generieren Sie sich Ihren isländischen Namen auf ZEIT ONLINE. #generatorsson",
-      "vorname": info.vorname,
-      "vatername": info.vatername,
-      "geschlecht": info.geschlecht
-    };
-    var myData = {
-      "target_url": targetURL,
-      "meta_data": metaData,
-      "redirect_to": redirectURL
-    };
-    jqr.ajax({
-      url: sharebertUrl,
-      type: "POST",
-      data: JSON.stringify( myData ),
-      processData: false,
-      contentType: "application/json; charset=utf-8",
-      dataType: "json"
-    }).done(
-      function( data ) {
-        console.log( 'success', data );
-        var imgMarkup = '<img class="generatorson__img" src="' + data.src_url + '/1200x628.png">';
-        var shareImgHght = jqr('.generatorson__img').height();
-        if(jqr('img.generatorson__img').length > 0){
-          jqr('img.generatorson__img').remove();
-        }
-        jqr('div.generatorson').append(imgMarkup);
-        jqr('.generatorson__img').on('load', function() {
-          jqr('div.loadingImage').remove();
-          jqr('.generatorson__img').show();
-          addBigShareButtons(data.src_url);
-          jqr('div.tb-newShareBox').show();
-        });
-      }
-    ).fail(
-      function( jqXHR, textStatus, errorThrown ) {
-        var errorMessage = '<p class="errorMessage paragraph">😱 Generatorsson kommt ins Schwitzen!' +
-        '<br>Leider ist ein Fehler aufgetreten, bitte versuchen Sie es später noch einmal.</p>';
-        jqr('div.loadingImage').remove();
-        if (jqr('p.errorMessage').length > 0) {} else {
-          jqr('div.generatorson').append(errorMessage);
-        }
-        console.log( 'error', jqXHR );
-      }
-    );
-  });
-})
-</script>
-
-*/

@@ -3,18 +3,19 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>{{ context.title }}</title>
+        <title>{{ context.supertitle }}: {{ context.title }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noindex,nofollow">
 
         <style>
+        /* PhantomJS only supports woff(1).*/
         @font-face {
                 font-family: 'TabletGothic';
-                  src:  url('http://www.zeit.de/static/latest/fonts/tabletgothic/TabletGothic-Bold.woff2') format('woff2');
+                  src:  url('http://www.zeit.de/static/latest/fonts/tabletgothic/TabletGothic-Bold.woff') format('woff');
               }
         @font-face {
                 font-family: 'PatronBold';
-                  src:  url('http://www.zeit.de/static/latest/fonts/patron_bold/PatronWEB-Bold.woff2') format('woff2');
+                  src:  url('http://www.zeit.de/static/latest/fonts/patron_bold/PatronWEB-Bold.woff') format('woff');
               }
 
         body {
@@ -22,7 +23,6 @@
           color: #252525;;
           margin: 0;
           padding: .875rem;
-          // text-align: center;
         }
 
         .quote__text {
@@ -56,4 +56,11 @@
             {% endif %}
         </figure>
     </body>
+    <script type="text/javascript">
+        if (typeof window.callPhantom === 'function') {
+            window.addEventListener( 'load', function() {
+                window.callPhantom({ action: 'render' });
+            } );
+        }
+    </script>
 </html>
