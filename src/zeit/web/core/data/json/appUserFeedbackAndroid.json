@@ -1,0 +1,28 @@
+{
+  "questions": [
+    {
+      "question": "Gefällt Ihnen die ZEIT ONLINE App?",
+      "antwortPos": "ja",
+      "linkPos": "quest2",
+      "antwortNeg": "nein",
+      "linkNeg": "quest3",
+      "identifier": "quest1"
+    }, {
+      "question": "Wollen Sie die App bewerten?",
+      "antwortPos": "ja",
+      "linkPos": "quest3",
+      "antwortNeg": "nein, danke",
+      "linkNeg": "close",
+      "identifier": "quest2",
+      "visibility": " hidden"
+    }, {
+      "question": "Wollen Sie uns Feedback geben?",
+      "antwortPos": "ja",
+      "linkPos": "quest1",
+      "antwortNeg": "nein",
+      "linkNeg": "close",
+      "identifier": "quest3",
+      "visibility": " hidden"
+    }
+  ]
+}
