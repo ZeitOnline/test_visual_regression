@@ -21,11 +21,6 @@ function appUserFeedback() {
         mobileConf = 'Apple';
     }
 
-    // get json
-    //var settings = require( 'web.core/templates/appUserFeedback' + mobileConf + '.json' );
-
-    var endpoint = window.location.protocol + '//' + window.location.host + '/json/appUserFeedback' + mobileConf + '.json';
-
     /**
      * check cookie and initial functions
      */
@@ -34,6 +29,11 @@ function appUserFeedback() {
             this.showQuestions();
         }
     }
+
+    // get json
+    //var settings = require( 'web.core/templates/appUserFeedback' + mobileConf + '.json' );
+
+    var endpoint = window.location.protocol + '//' + window.location.host + '/json/appUserFeedback' + mobileConf + '.json';
 
     var jsonValues = ( function() {
         var json;
@@ -59,6 +59,7 @@ function appUserFeedback() {
 
         return { getData: function() {
             if ( json ) {
+                console.log( endpoint );
                 return json;
             } else {
                 console.log( endpoint );
