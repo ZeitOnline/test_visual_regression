@@ -127,6 +127,13 @@ function appUserIsBack( timestamp, options ) {
      */
     AppUserIsBack.prototype.track = function( action ) {
         this.log( 'Track: ' + action );
+        var that = this;
+        require([ 'web.core/clicktracking' ], function( Clicktracking ) {
+            var data = [ 'appuserisback....' + action, that.options.link.replace( 'http://', '' ) ];
+            Clicktracking.send( data );
+        });
+
+
     };
 
     /**
