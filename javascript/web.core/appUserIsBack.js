@@ -137,6 +137,28 @@ function appUserIsBack( timestamp, options ) {
                 link: this.options.link
             });
         document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', html );
+
+        // enable user to to swipe the message off from the screen
+        require([
+            'jquery',
+            'web.core/plugins/jquery.onSwipe'
+        ], function( $ ) {
+            $( '#app-user-is-back' ).onSwipe(
+                function( element, swipeDirection ) {
+                    if ( swipeDirection === 'left' || swipeDirection === 'right' ) {
+                        // uppercase the first letter, to use it as velocity transition name
+                        swipeDirection = swipeDirection.charAt( 0 ).toUpperCase() + swipeDirection.slice( 1 );
+                        $( element ).velocity( 'transition.slide' + swipeDirection + 'Out', {
+                            duration: 500,
+                            complete: function() {
+                                element.parentNode.removeChild( element );
+                            }
+                        });
+                    }
+                }
+            );
+        });
+
     };
 
     AppUserIsBack.prototype.init = function() {
