@@ -11,9 +11,6 @@ POSTDEPLOY
 
 
 3.99 (2017-10-17)
-
-
-3.99 (unreleased)
 -----------------
 
 - ZON-4243: Add series banner to ZAR articles
