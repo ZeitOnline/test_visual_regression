@@ -4,10 +4,13 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- (nothing)
+3.100 (unreleased)
+------------------
+
+- Nothing changed yet.
 
 
-3.99 (unreleased)
+3.99 (2017-10-17)
 -----------------
 
 - ZON-4243: Add series banner to ZAR articles
