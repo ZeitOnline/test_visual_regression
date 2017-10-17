@@ -44,28 +44,6 @@
                 'redirect_to': sharebertRedirectUrl
             };
 
-            // The jQuery approach sends two requests: OPTIONS + POST.
-            $.ajax({
-                url: settings.sharebertUrl,
-                type: 'POST',
-                data: JSON.stringify( myData ),
-                processData: false,
-                contentType: 'application/json; charset=utf-8',
-                dataType: 'json'
-            }).done( function( data ) {
-                log( 'SUCCESS', data );
-                resolve( data );
-            }).fail( function( jqXHR, textStatus, errorThrown ) {
-                var errorMessage = 'Leider ist ein Fehler aufgetreten, bitte versuchen Sie es später noch einmal.';
-                log( 'ERROR', errorMessage, textStatus, errorThrown );
-                reject( Error( errorMessage ) );
-            });
-
-            // The native approach does not work, because I dont get the POST data formatted correctly.
-            // Server responds with Error 400
-            // {"status": "error", "errors": [{"location": "body",
-            // "description": "\"b'[object Object]'\" is not a mapping type: Does not implement dict-like functionality.", "name": ""}]}
-            /*
             var xhr = new XMLHttpRequest();
             xhr.open( 'POST', 'http://share.zeit.de/-/apps/twitter-quote/shots' );
             xhr.onload = function() {
@@ -85,9 +63,9 @@
                 reject( Error( 'Network Error' ) );
             };
             // Make the request
-            xhr.setRequestHeader( 'Content-Type', myData.contentType );
-            xhr.send( myData );
-            */
+            xhr.setRequestHeader( 'Content-Type', 'application/json; charset=utf-8' );
+            xhr.send( JSON.stringify( myData ) );
+
         });
     };
 
