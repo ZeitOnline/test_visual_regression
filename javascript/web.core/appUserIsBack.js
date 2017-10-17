@@ -122,6 +122,14 @@ function appUserIsBack( timestamp, options ) {
     };
 
     /**
+     * tracking function - send events (load, click) to webtrekk
+     * @return void
+     */
+    AppUserIsBack.prototype.track = function( action ) {
+        this.log( 'Track: ' + action );
+    };
+
+    /**
      * show the update message at window bottom
      * @return void
      */
@@ -134,9 +142,20 @@ function appUserIsBack( timestamp, options ) {
             html = template({
                 text: this.options.text,
                 buttontext: this.options.buttontext,
-                link: this.options.link
+                link: this.options.link,
+                linkForTracking: this.options.link.replace( 'http://', '' )
             });
         document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', html );
+        this.track( 'appear' );
+
+        var that = this; // to use inside the callbacks for that.track()
+
+        document.querySelector( '#app-user-is-back' ).addEventListener( 'click', function() {
+            that.track( 'refreshButton' );
+        });
+        document.querySelector( '#app-user-is-back' ).addEventListener( 'touch', function() {
+            that.track( 'refreshButton' );
+        });
 
         // enable user to to swipe the message off from the screen
         require([
@@ -154,6 +173,7 @@ function appUserIsBack( timestamp, options ) {
                                 element.parentNode.removeChild( element );
                             }
                         });
+                        that.track( 'remove' );
                     }
                 }
             );
