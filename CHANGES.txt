@@ -4,11 +4,16 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- (nothing)
+3.100 (unreleased)
+------------------
+
+- Nothing changed yet.
 
 
-3.99 (unreleased)
+3.99 (2017-10-17)
 -----------------
+
+- ZON-4243: Add series banner to ZAR articles
 
 - ZON-4120: Add image fallback for series articles
 
@@ -18,6 +23,8 @@ POSTDEPLOY
 
 - FEM-66: Remove iqd_digital_transformation feature toggle
 
+- MAINT: Mark header elements in longform for external styling
+
 
 3.98 (2017-10-12)
 -----------------
@@ -26,7 +33,7 @@ POSTDEPLOY
 
 - Arbeit-99: Implement advertorial for ZEIT Arbeit
 
--FIX: Fix in-app link-injection for page-refresh user-notification
+- FIX: Fix in-app link-injection for page-refresh user-notification
 
 
 3.97 (2017-10-05)

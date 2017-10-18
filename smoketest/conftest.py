@@ -15,6 +15,7 @@ import selenium.webdriver.firefox.firefox_binary
 TESTCONFIG_STAGING = {
     'ENV': 'STAGING',
     'BASE_URL': 'http://www.staging.zeit.de',
+    'TIMEOUT': 20,
     'NEWSFEED_BASE_URL': 'http://newsfeed.staging.zeit.de',
     'MEMBER_BASE_URL': 'https://meine.staging.zeit.de',
     'MEMBER_USERNAME': 'thomas.strothjohann+unmoderiert1@apps.zeit.de',
@@ -24,6 +25,7 @@ TESTCONFIG_STAGING = {
 TESTCONFIG_PRODUCTION = {
     'ENV': 'PRODUCTION',
     'BASE_URL': 'http://www.zeit.de',
+    'TIMEOUT': 10,
     'NEWSFEED_BASE_URL': 'http://newsfeed.zeit.de',
     'MEMBER_BASE_URL': 'https://meine.zeit.de',
     'MEMBER_USERNAME': 'leser-moderiert@example.com',
