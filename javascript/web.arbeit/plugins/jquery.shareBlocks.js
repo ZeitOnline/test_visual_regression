@@ -4,16 +4,14 @@
  * @author thomas.puppe@zeit.de
  * @version 0.1
  */
-( function( $, Zeit ) {
+( function( $ ) {
 
     'use strict';
 
-    var settings,
-        defaults = {
-            sharebertUrl: 'http://share.zeit.de/-/apps/twitter-quote/shots',
-            duration: 200
-        },
-        debugMode = location.hash.indexOf( 'debug-shareblocks' ) > -1;
+    var debugMode = location.hash.indexOf( 'debug-shareblocks' ) > -1,
+        rootElement,
+        labelElement,
+        itemsElement;
 
     function log() {
         if ( debugMode ) {
@@ -22,14 +20,36 @@
         }
     }
 
-    function openShareWindow( url ) {
-        // TODO: PopUp ist halt doof.
-        // Alternative, bzw auf jeden Fall tun: Link umschreiben, Clickhandler entfernen.
-        // Kann man feststellen ob das Fenster öffnet? Und, falls nicht, den Link öffnen?
-        // Ginge ein iFrame?
-        log( 'OPEN share window ' + url );
-        window.open( url, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600' );
+    /**
+     * Initializes instance variables.
+     *
+     * @constructor
+     */
+    function ShareBlock( rootElement ) {
+        log( 'ShareBlock()' ); // REMOVE
+        this.rootElement = rootElement;
+        this.init();
     }
+
+    ShareBlock.prototype.init = function() {
+        this.labelElement = this.rootElement.querySelector( '.js-shareblock__label' );
+        this.itemsElement = this.rootElement.querySelector( '.js-shareblock__items' );
+
+        this.itemsElement.style.display = 'none';
+        this.labelElement.addEventListener( 'click', this.clickEvent );
+    };
+
+    ShareBlock.prototype.clickEvent = function( event ) {
+        event.preventDefault();
+
+        // getSharebertData().then(exchangeLink())
+        // slideInTheButtons();
+
+        window.console.debug( this.rootElement );
+
+        this.itemsElement.style.display = 'inline-block'; // TODO: use classes/aria
+    };
+
 
     var getSharebertData = function( sharebertShotUrl, sharebertRedirectUrl ) {
         return new window.Promise( function( resolve, reject ) {
@@ -73,6 +93,14 @@
 
         event.preventDefault();
 
+        // getSharebertData().then(exchangeLink())
+        // slideInTheButtons();
+
+        itemsElement.style.display = 'inline-block'; // TODO: use classes/aria
+
+        getSharebertData();
+
+        /*
         // Lösung: innerhalb von init() oder share() die Daten halten. Nicht im Plugin.
         var $elem = $( event.target ).closest( '.js-shareblock' );
         var sharebertRedirectUrl = $elem.data( 'sharebert-redirect-url' );
@@ -87,20 +115,33 @@
                 log( 'SUCCESS, got URL:' + response.src_url );
                 var shareLink = 'https://twitter.com/intent/tweet?text=' +
                     encodeURIComponent( response.src_url );
-                openShareWindow( shareLink );
+
+                // window.open() is popup-blocked, so we change the link and trigger a click
+                var elem = $elem[ 0 ];
+                elem.removeEventListener( 'click', share );
+                elem.setAttribute( 'href', shareLink );
+                elem.click();
+
             }, function( error ) {
                 log( 'error', error );
             });
 
         $elem.blur();
+        */
     };
 
-    function initShareBlocks( element ) {
-        log( 'initialize click event on ' + element );
-        element.addEventListener( 'click', share );
+    function initShareBlocks() {
+        if ( !window.fuck ) {
+            return;
+        }
+        labelElement = rootElement.querySelector( '.js-shareblock__label' );
+        itemsElement = rootElement.querySelector( '.js-shareblock__items' );
+
+        itemsElement.style.display = 'none';
+        labelElement.addEventListener( 'click', share );
     }
 
-    $.fn.shareBlocks = function( options ) {
+    $.fn.shareBlocks = function() {
 
         // Promises working since iOS Safari8, Android Browser 4.4.4, Chrome+FF+Opera+Edge.
         // Promise not working in IE 11.
@@ -110,12 +151,9 @@
             return;
         }
 
-        settings = $.extend({}, defaults, options );
-
-        log( 'setup shareBlocks with ' + Zeit + ' and ' + settings );
-
         return this.each( function() {
-            initShareBlocks( this );
+            new ShareBlock( this );
+            initShareBlocks(); // REMOVE
         });
     };
-})( jQuery, window.Zeit );
+})( jQuery );

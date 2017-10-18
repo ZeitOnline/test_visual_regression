@@ -67,7 +67,7 @@
 	text-align: right
 
 	&__label
-		display: inline
+		display: inline-block
 
 	&__items
 		display: inline
@@ -104,7 +104,7 @@
 		&__item
 			border-left: 1px #fff solid
 		&__label
-			padding: remify($page-padding--small)
+			padding-right: remify($page-padding--small)
 
 		&__item
 			padding: remify($page-padding--small)
@@ -112,7 +112,7 @@
 +respond-min($break-tablet-min)
 	.quote-sharing
 		&__label
-			padding: remify($page-padding--small 5px)
+			padding-right: remify($page-padding--small)
 		&__items
 			padding-right: remify($page-padding)
 		&__item

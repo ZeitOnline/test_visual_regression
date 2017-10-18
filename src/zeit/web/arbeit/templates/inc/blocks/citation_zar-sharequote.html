@@ -11,10 +11,10 @@
         {% set ga_campaign = '&utm_medium=sm&utm_source={0}_zonaudev_ext&utm_campaign=ref&utm_content=zeitde_share_link_x' %}
         {% set content_url = view.content_url ~ '?wt_zmc=sm.ext.zonaudev.{0}.ref.zeitde.share.link.x' %}
 
-        <aside class="quote quote--share quote-sharing" data-ct-block="sharequote">
-            <h3 class="quote-sharing__label">Teilen:</h3>
+        <aside class="quote quote--share quote-sharing{% if toggles('share_blocks_via_screenshot') %} js-shareblock{% endif %}" data-ct-block="sharequote">
+            <h3 class="quote-sharing__label js-shareblock__label">Teilen</h3>
 
-            <ul class="quote-sharing__items">
+            <ul class="quote-sharing__items js-shareblock__items">
                 <li class="quote-sharing__item">
                     <a class="{{ 'quote-sharing__link' | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}&quote={{ block.text | urlencode }}" target="_blank" title="Auf Facebook teilen">
                         {{ lama.use_svg_icon('sharing-facebook', 'quote-sharing__icon' | with_mods('facebook'), view.package) }}
@@ -27,7 +27,7 @@
                     {% set sharebert_screenshot_target = '%s/module/%s/sharequote' | format(article_url, block.position) %}
                     {% set sharebert_share_url = (content_url ~ ga_campaign).format('twitter') %}
 
-                    <a class="{{ 'quote-sharing__link' | with_mods('twitter') }}{% if toggles('share_blocks_via_screenshot') %} js-shareblock{% endif %}" href="https://twitter.com/intent/tweet?text={{ sharebert_share_url | urlencode }}" target="_blank" title="Auf Twitter teilen" data-sharebert-screenshot-target="{{ sharebert_screenshot_target }}" data-sharebert-redirect-url="{{ sharebert_share_url }}">
+                    <a class="{{ 'quote-sharing__link' | with_mods('twitter') }}" href="https://twitter.com/intent/tweet?text={{ sharebert_share_url | urlencode }}" target="_blank" title="Auf Twitter teilen" data-sharebert-screenshot-target="{{ sharebert_screenshot_target }}" data-sharebert-redirect-url="{{ sharebert_share_url }}">
                         {{ lama.use_svg_icon('sharing-twitter', 'quote-sharing__icon' | with_mods('twitter'), view.package) }}
                         <span class="quote-sharing__text">Auf Twitter teilen</span>
                     </a>
