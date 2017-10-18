@@ -452,3 +452,24 @@ def test_zar_sharebert_has_correct_attributes(testbrowser):
         '/arbeit/article/sharequote?wt_zmc=sm.ext.zonaudev.twitter.ref.'
         'zeitde.share.link.x&utm_medium=sm&utm_source=twitter_zonaudev'
         '_ext&utm_campaign=ref&utm_content=zeitde_share_link_x')
+
+
+def test_zar_series_without_series_image_have_correct_series_header_styles(
+        testbrowser):
+    browser = testbrowser('/arbeit/article/series-no-image')
+    assert len(browser.cssselect('.article-series--has-image')) == 0
+
+
+def test_zar_series_has_series_header(testbrowser):
+    browser = testbrowser('/arbeit/article/series')
+    assert len(browser.cssselect('.article-series')) == 1
+
+
+def test_zar_column_has_series_header(testbrowser):
+    browser = testbrowser('/arbeit/article/column')
+    assert len(browser.cssselect('.article-series')) == 1
+
+
+def test_zar_podcast_has_no_series_header(testbrowser):
+    browser = testbrowser('/arbeit/article/podcast')
+    assert len(browser.cssselect('.article-series')) == 0

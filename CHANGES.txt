@@ -4,10 +4,19 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- Nothing
+
+
 3.100 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+3.99.1 (2017-10-18)
+-------------------
+
+- FIX: Do not show series header on podcast articles
 
 
 3.99 (2017-10-17)
