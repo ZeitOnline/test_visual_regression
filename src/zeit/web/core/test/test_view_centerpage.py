@@ -185,9 +185,9 @@ def test_transparent_image_renders_fill_color_for_teaserlayouts(testbrowser):
     # only for special cases like zmo-card, which get their own test).
     browser = testbrowser('/zeit-online/transparent-teaserimage')
     assert 'ccddee' in (
-        browser.cssselect('.teaser-large img')[0].attrib['data-src'])
+        browser.cssselect('.teaser-large img')[0].get('data-src'))
     assert 'ccddee' in (
-        browser.cssselect('.teaser-small-minor img')[0].attrib['data-src'])
+        browser.cssselect('.teaser-small-minor img')[0].get('data-src'))
 
 
 def test_next_page_url_should_be_set_on_page_based_paginated_centerpages(

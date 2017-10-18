@@ -931,7 +931,7 @@ def test_share_buttons_are_present(testbrowser):
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
     #  facebook
-    parts = urlparse.urlparse(links[0].attrib['href'])
+    parts = urlparse.urlparse(links[0].get('href'))
     query = urlparse.parse_qs(parts.query)
     url = query.get('u').pop(0)
     assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share.link' in url
@@ -941,7 +941,7 @@ def test_share_buttons_are_present(testbrowser):
     assert 'utm_content=zeitde_share_link_x' in url
 
     #  twitter
-    parts = urlparse.urlparse(links[1].attrib['href'])
+    parts = urlparse.urlparse(links[1].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert query.get('text').pop(0) == (
         'Der Chianti hat eine zweite Chance verdient')
@@ -949,19 +949,19 @@ def test_share_buttons_are_present(testbrowser):
     assert 'share' in query.get('url').pop(0)
 
     #  whatsapp
-    parts = urlparse.urlparse(links[2].attrib['href'])
+    parts = urlparse.urlparse(links[2].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Der Chianti hat eine zweite Chance verdient - '
             'Artikel auf ZEITmagazin ONLINE: ') in query.get('text').pop(0)
 
     #  facebook messenger
-    parts = urlparse.urlparse(links[3].attrib['href'])
+    parts = urlparse.urlparse(links[3].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert query.get('link').pop(0).startswith(canonical)
     assert query.get('app_id').pop(0) == '638028906281625'
 
     #  mail
-    parts = urlparse.urlparse(links[4].attrib['href'])
+    parts = urlparse.urlparse(links[4].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Der Chianti hat eine zweite Chance verdient - '
             'Artikel auf ZEITmagazin ONLINE') in query.get('subject').pop(0)

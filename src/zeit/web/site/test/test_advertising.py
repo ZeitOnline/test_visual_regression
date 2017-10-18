@@ -325,7 +325,7 @@ def test_iqd_adtile8_on_article_new_placement(testbrowser):
     # article with original placement after p1
     browser = testbrowser('/zeit-online/article/01')
     body = browser.cssselect('{},{}'.format(ps, divs))
-    assert body[1].cssselect('script')[0].attrib['id'] == 'ad-desktop-8'
+    assert body[1].cssselect('script')[0].get('id') == 'ad-desktop-8'
 
 
 def test_iqd_adtile8_on_article_new_placement_alternative(
@@ -335,7 +335,7 @@ def test_iqd_adtile8_on_article_new_placement_alternative(
     # article with alternate placement after p2
     browser = testbrowser('/zeit-magazin/article/01')
     body = browser.cssselect('{},{}'.format(ps, divs))
-    assert body[2].cssselect('script')[0].attrib['id'] == 'ad-desktop-8'
+    assert body[2].cssselect('script')[0].get('id') == 'ad-desktop-8'
 
 
 def test_p5_not_displayed_when_there_are_no_comments(testbrowser):

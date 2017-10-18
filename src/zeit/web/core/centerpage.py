@@ -226,7 +226,7 @@ class Module(object):
             self.layout = context.type
 
     def __hash__(self):
-        return self.context.xml.attrib.get(
+        return self.context.xml.get(
             '{http://namespaces.zeit.de/CMS/cp}__name__',
             super(Module, self)).__hash__()
 

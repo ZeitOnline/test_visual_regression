@@ -72,7 +72,7 @@ def test_article_types_have_back_to_home_button(testbrowser):
     assert button[0].text == 'Startseite'
 
     # test link
-    link = select('.article-pagination__link')[0].attrib['href']
+    link = select('.article-pagination__link')[0].get('href')
     assert '/index' in link
 
 
@@ -305,17 +305,17 @@ def test_schema_org_article_mark_up(testbrowser):
 def test_multipage_article_should_designate_meta_pagination(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     assert not browser.xpath('//head/link[@rel="prev"]')
-    href = browser.xpath('//head/link[@rel="next"]')[0].attrib.get('href')
+    href = browser.xpath('//head/link[@rel="next"]')[0].get('href')
     assert href.endswith('zeit-online/article/zeit/seite-2')
 
     browser = testbrowser('/zeit-online/article/zeit/seite-2')
-    href = browser.xpath('//head/link[@rel="prev"]')[0].attrib.get('href')
+    href = browser.xpath('//head/link[@rel="prev"]')[0].get('href')
     assert href.endswith('zeit-online/article/zeit')
-    href = browser.xpath('//head/link[@rel="next"]')[0].attrib.get('href')
+    href = browser.xpath('//head/link[@rel="next"]')[0].get('href')
     assert href.endswith('zeit-online/article/zeit/seite-3')
 
     browser = testbrowser('/zeit-online/article/zeit/seite-5')
-    href = browser.xpath('//head/link[@rel="prev"]')[0].attrib.get('href')
+    href = browser.xpath('//head/link[@rel="prev"]')[0].get('href')
     assert href.endswith('zeit-online/article/zeit/seite-4')
     assert not browser.xpath('//head/link[@rel="next"]')
 
@@ -882,7 +882,7 @@ def test_advertorial_marker_is_present(testbrowser):
 
 def test_canonical_url_should_omit_queries_and_hashes(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit/seite-3?cid=123#comments')
-    canonical_url = browser.cssselect('link[rel=canonical]')[0].attrib['href']
+    canonical_url = browser.cssselect('link[rel=canonical]')[0].get('href')
     assert canonical_url.endswith('zeit-online/article/zeit/seite-3')
 
 
@@ -1007,20 +1007,20 @@ def test_article_should_evaluate_display_mode_of_image_layout(testbrowser):
 def test_missing_keyword_links_are_replaced(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     keyword = browser.cssselect('.article-tags__link')[0]
-    assert keyword.attrib['href'].endswith('/thema/wein')
+    assert keyword.get('href').endswith('/thema/wein')
 
 
 def test_article_has_print_function(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     links = browser.cssselect('.print-menu__link')
-    assert (links[0].attrib['href'].endswith(
+    assert (links[0].get('href').endswith(
         '/zeit-online/article/01?print'))
 
 
 def test_multi_page_article_has_print_link(testbrowser):
     browser = testbrowser('/zeit-online/article/tagesspiegel')
     links = browser.cssselect('.print-menu__link')
-    assert (links[0].attrib['href'].endswith(
+    assert (links[0].get('href').endswith(
         '/zeit-online/article/tagesspiegel/komplettansicht?print'))
 
 
@@ -1175,7 +1175,7 @@ def test_instantarticle_representation_should_have_correct_content(
         testbrowser):
     bro = testbrowser('/instantarticle/zeit-online/article/quotes')
 
-    canonical = bro.cssselect('link[rel=canonical]')[0].attrib['href']
+    canonical = bro.cssselect('link[rel=canonical]')[0].get('href')
     assert 'zeit-online/article/quotes' in canonical
     assert 'instantarticle' not in canonical
     assert '"Pulp Fiction"' in bro.cssselect('h1')[0].text
@@ -1205,7 +1205,7 @@ def test_instantarticle_should_have_tracking_iframe(testbrowser):
 
 def test_instantarticle_should_show_linked_author_if_available(testbrowser):
     browser = testbrowser('/instantarticle/zeit-online/article/02')
-    assert browser.cssselect('address a')[0].attrib.get('href').endswith(
+    assert browser.cssselect('address a')[0].get('href').endswith(
         '/autoren/H/Wenke_Husmann/index.xml')
     assert browser.cssselect('address a')[0].text.strip() == 'Wenke Husmann'
 
@@ -1330,13 +1330,13 @@ def test_amp_link_should_be_present_and_link_to_the_correct_amp(testbrowser):
     browser = testbrowser('/zeit-online/article/zeit')
     amp_link = browser.cssselect('link[rel=amphtml]')
     assert amp_link
-    amp_url = amp_link[0].attrib['href']
+    amp_url = amp_link[0].get('href')
     assert amp_url.endswith('amp/zeit-online/article/zeit')
 
     browser = testbrowser('/zeit-online/article/zeit/seite-2')
     amp_link = browser.cssselect('link[rel=amphtml]')
     assert amp_link
-    amp_url = amp_link[0].attrib['href']
+    amp_url = amp_link[0].get('href')
     assert amp_url.endswith('amp/zeit-online/article/zeit')
 
 
@@ -1457,12 +1457,12 @@ def test_article_in_series_has_banner_image(testbrowser):
 def test_article_in_series_has_correct_link(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
 
-    url = browser.cssselect('.article-series__heading')[0].attrib['href']
+    url = browser.cssselect('.article-series__heading')[0].get('href')
     assert url.endswith('/serie/70-jahre-zeit')
 
     browser = testbrowser('/zeit-online/article/02')
 
-    url = browser.cssselect('.article-series__heading')[0].attrib['href']
+    url = browser.cssselect('.article-series__heading')[0].get('href')
     assert url.endswith('/serie/geschafft')
 
 
@@ -1673,7 +1673,7 @@ def test_zplus_badge_should_be_rendered_on_nextread(testbrowser):
 
     link = browser.cssselect('.nextread__link')
     assert len(link) == 1
-    data_id = link[0].attrib['data-id']
+    data_id = link[0].get('data-id')
     assert data_id == 'articlebottom.editorial-nextread...area-zplus'
 
 
@@ -1685,7 +1685,7 @@ def test_zplus_badge_should_be_rendered_on_nextread_register(testbrowser):
 
     link = browser.cssselect('.nextread__link')
     assert len(link) == 1
-    data_id = link[0].attrib['data-id']
+    data_id = link[0].get('data-id')
     assert data_id == 'articlebottom.editorial-nextread...area-zplus-register'
 
 
@@ -1728,7 +1728,7 @@ def test_zplus_zon_article_has_correct_markup(testbrowser, monkeypatch):
     assert len(zplus_text) == 1
     assert len(zplus_link) == 1
     assert ('exklusive-zeit-artikel' in
-            zplus_box[0].cssselect('a')[0].attrib['href'])
+            zplus_box[0].cssselect('a')[0].get('href'))
     assert 'Exklusiv' in zplus_link[0].text.strip()
     assert not zplus_box[0].cssselect('.zplus-badge__media')
 
@@ -1756,7 +1756,7 @@ def test_zplus_coverless_print_article_has_fallback_image(testbrowser):
     assert len(zplus_box) == 1
 
     zplus_media = zplus_box[0].cssselect('.zplus-badge__media-item')
-    assert 'default_packshot_diezeit' in zplus_media[0].attrib['src']
+    assert 'default_packshot_diezeit' in zplus_media[0].get('src')
 
     text = zplus_box[0].cssselect('.zplus-badge__text')[0]
     assert 'ZEIT Nr. 03/2016' in text.text_content()
@@ -1785,10 +1785,10 @@ def test_zplus_abo_print_article_has_correct_markup(testbrowser, monkeypatch):
     assert len(zplus_cover) == 1
     assert len(zplus_media) == 1
     assert len(zplus_link) == 1
-    assert '/2014/49' in zplus_box[0].cssselect('a')[0].attrib['href']
+    assert '/2014/49' in zplus_box[0].cssselect('a')[0].get('href')
     assert 'Exklusiv' in zplus_link[0].text.strip()
     assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
-            in zplus_media[0].attrib['src'])
+            in zplus_media[0].get('src'))
 
 
 def test_zplus_print_article_has_correct_markup(
@@ -1820,11 +1820,11 @@ def test_zplus_print_article_has_correct_markup(
     assert len(zplus_media) == 1
     assert len(zplus_link) == 1
     assert len(zplus_intro) == 1
-    assert '/2014/49' in zplus_box[0].cssselect('a')[0].attrib['href']
+    assert '/2014/49' in zplus_box[0].cssselect('a')[0].get('href')
     assert 'ZEIT Nr. 49/2014' in zplus_link[0].text.strip()
     assert 'Aus der' in zplus_intro[0].text.strip()
     assert ('/angebote/printkiosk/bildergruppen/die-zeit-cover/'
-            in zplus_media[0].attrib['src'])
+            in zplus_media[0].get('src'))
     assert article_metadata_source.__len__() == 0
 
 
@@ -1867,7 +1867,7 @@ def test_free_print_article_has_volume_badge(testbrowser, monkeypatch):
     link = badge.cssselect('.zplus-badge__link')[0]
 
     assert ' '.join(label.text_content().split()) == 'Aus der ZEIT Nr. 01/2016'
-    assert link.attrib['href'].startswith('http://localhost/2016/01')
+    assert link.get('href').startswith('http://localhost/2016/01')
     assert badge.cssselect('.zplus-badge__media')
 
     # test volume badge is in single page view too
@@ -1906,7 +1906,7 @@ def test_zplus_volume_cover_should_track_link_with_product_id(
         zeit.web.site.view_article.Article, 'volumepage_is_published', True)
     browser = testbrowser('/zeit-online/article/zplus-zeit')
     assert browser.cssselect('.zplus-badge__link')
-    href = browser.cssselect('.zplus-badge__link')[0].attrib['href']
+    href = browser.cssselect('.zplus-badge__link')[0].get('href')
     assert href == ('http://localhost/2014/49?wt_zmc=fix.int.zonpme.zeitde.'
                     'wall_abo.premium.packshot.cover.zei&utm_medium=fix&utm'
                     '_source=zeitde_zonpme_int&utm_campaign=wall_abo&'
@@ -1946,7 +1946,7 @@ def test_share_buttons_are_present(testbrowser):
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
     #  facebook
-    parts = urlparse.urlparse(links[0].attrib['href'])
+    parts = urlparse.urlparse(links[0].get('href'))
     query = urlparse.parse_qs(parts.query)
     url = query.get('u').pop(0)
     assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share.link' in url
@@ -1956,7 +1956,7 @@ def test_share_buttons_are_present(testbrowser):
     assert 'utm_content=zeitde_share_link_x' in url
 
     #  twitter
-    parts = urlparse.urlparse(links[1].attrib['href'])
+    parts = urlparse.urlparse(links[1].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert query.get('text').pop(0) == (
         'Williams wackelt weiter, steht aber im Viertelfinale')
@@ -1964,19 +1964,19 @@ def test_share_buttons_are_present(testbrowser):
     assert 'share' in query.get('url').pop(0)
 
     #  whatsapp
-    parts = urlparse.urlparse(links[2].attrib['href'])
+    parts = urlparse.urlparse(links[2].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE: ') in query.get('text').pop(0)
 
     #  facebook messenger
-    parts = urlparse.urlparse(links[3].attrib['href'])
+    parts = urlparse.urlparse(links[3].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert query.get('link').pop(0).startswith(canonical)
     assert query.get('app_id').pop(0) == '638028906281625'
 
     #  mail
-    parts = urlparse.urlparse(links[4].attrib['href'])
+    parts = urlparse.urlparse(links[4].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Williams wackelt weiter, steht aber im Viertelfinale - '
             'Artikel auf ZEIT ONLINE') in query.get('subject').pop(0)
@@ -1997,7 +1997,7 @@ def test_merian_link_has_nofollow(testbrowser, dummy_request):
 
     browser = testbrowser('/zeit-online/article/simple-merian-nofollow')
     sourcelink = browser.cssselect('.metadata__source a')[0]
-    assert sourcelink.attrib['rel'] == 'nofollow'
+    assert sourcelink.get('rel') == 'nofollow'
 
 
 def test_article_contains_authorbox(testbrowser):
