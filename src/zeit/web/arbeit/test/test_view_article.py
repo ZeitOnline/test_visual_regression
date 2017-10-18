@@ -416,3 +416,24 @@ def test_zar_article_underline_is_applied_correctly(testbrowser):
 def test_zar_advertorial_has_no_home_button_as_pagination(testbrowser):
     browser = testbrowser('/arbeit/article/advertorial-onepage')
     assert len(browser.cssselect('.article-pagination__link')) == 0
+
+
+def test_zar_series_without_series_image_have_correct_series_header_styles(
+        testbrowser):
+    browser = testbrowser('/arbeit/article/series-no-image')
+    assert len(browser.cssselect('.article-series--has-image')) == 0
+
+
+def test_zar_series_has_series_header(testbrowser):
+    browser = testbrowser('/arbeit/article/series')
+    assert len(browser.cssselect('.article-series')) == 1
+
+
+def test_zar_column_has_series_header(testbrowser):
+    browser = testbrowser('/arbeit/article/column')
+    assert len(browser.cssselect('.article-series')) == 1
+
+
+def test_zar_podcast_has_no_series_header(testbrowser):
+    browser = testbrowser('/arbeit/article/podcast')
+    assert len(browser.cssselect('.article-series')) == 0
