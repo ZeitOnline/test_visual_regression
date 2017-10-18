@@ -7,37 +7,32 @@
 function appUserFeedback() {
     'use strict';
 
-    /**
-     * setup options
-     */
+    var debug = window.location.href.indexOf( 'force-userfeedback' ) > -1;
 
-    var response = {};
-
-    // check mobile devices and pick config
-    var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    var mobileConf = 'Default';
-    if ( /android/i.test( userAgent ) ) {
-        mobileConf = 'Android';
-    } else if ( /iPad|iPhone|iPod/.test( userAgent ) && !window.MSStream ) {
-        mobileConf = 'Apple';
-    }
-
-    /**
-     * check cookie and initial functions
-     */
     function AppUserFeedback() {
-        if ( document.cookie.indexOf( 'zeit_app_feedback' ) === -1 ) {
+        var userAgent = navigator.userAgent || navigator.vendor || window.opera,
+            mobileConf = 'Default',
+            feedbackForm = document.querySelector( '.app-feedback' );
+
+        if ( /android/i.test( userAgent ) ) {
+            mobileConf = 'Android';
+        } else if ( /iPad|iPhone|iPod/.test( userAgent ) && !window.MSStream ) {
+            mobileConf = 'Apple';
+        }
+
+        // path to json config
+        this.path = window.location.protocol + '//' + window.location.host + '/json/appUserFeedback' + mobileConf + '.json';
+
+        if ( !feedbackForm ) {
             this.init();
         }
     }
 
-    // get json
-    var path = window.location.protocol + '//' + window.location.host + '/json/appUserFeedback' + mobileConf + '.json';
-
     AppUserFeedback.prototype.getData = function( url ) {
         // Promises working since iOS Safari8, Android Browser 4.4.4
         return new window.Promise( function( resolve, reject ) {
-            var xhr = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest(),
+                errorURL;
             xhr.open( 'GET', url );
             xhr.onload = function() {
                 // This is called even on 404 etc
@@ -47,8 +42,9 @@ function appUserFeedback() {
                     resolve( JSON.parse( xhr.response ) );
                 } else {
                     // Otherwise reject with the status text
-                    // which will hopefully be a meaningful error
-                    reject( Error( xhr.statusText ) );
+                    // Eeror out meaningfully w/ request URL if possible
+                    errorURL = xhr.responseURL ? ': ' +  xhr.responseURL : '';
+                    reject( Error( xhr.statusText + errorURL ) );
                 }
             };
             // Handle network errors
@@ -60,113 +56,72 @@ function appUserFeedback() {
         });
     };
 
-    /**
-     * set cookie for expiring to show feedback after several time again
-     */
-    AppUserFeedback.prototype.showTime = function() {
-        var now = new Date();
-        var time = now.getTime();
-        var expireTime = time + 31 * 86400000; // one month
+    // don't bother users w/ feedback-form if they've already dealt with it
+    AppUserFeedback.prototype.setCookie = function() {
+        var now = new Date(),
+            time = now.getTime(),
+            expireTime = time + 31 * 86400000; // one month
         now.setTime( expireTime );
         document.cookie = 'zeit_app_feedback=1;expires=' + now.toGMTString() + ';path=/';
     };
 
-    /**
-     * count and get data from json and show rendered mustache template
-     */
-    AppUserFeedback.prototype.showQuestions = function() {
+    AppUserFeedback.prototype.renderForm = function( config ) {
         // mustache template-data
-        var template = require( 'web.core/templates/appUserFeedback.html' );
-        var count = 0;
-        for ( var i = 0; i < response.questions.length; i++ ) {
-            var html = template({
-                question: response.questions[ i ].question,
-                antwortPos: response.questions[ i ].antwortPos,
-                linkYes: response.questions[ i ].linkPos,
-                antwortNeg: response.questions[ i ].antwortNeg,
-                linkNo: response.questions[ i ].linkNeg,
-                identifier: response.questions[ i ].identifier,
-                visibility: response.questions[ i ].visibility
+        var template = require( 'web.core/templates/appUserFeedback.html' ),
+            article = document.querySelector( '.article-page' ),
+            currentConfig = !config ? this.responseObj.screen1 : this.responseObj[ config ],
+            form = template({
+                question: currentConfig.question,
+                feedbackPositive: currentConfig.feedback_positive,
+                feedbackNegative: currentConfig.feedback_negative
             });
+        article.insertAdjacentHTML( 'afterend', form );
+        // expose cureent data set to instance's scope
+        this.currentConfig = currentConfig;
+    };
 
-            // add template to source code
-            var siteElement = document.querySelector( '.article-page' );
-            siteElement.insertAdjacentHTML( 'afterend', html );
-            count++;
+    AppUserFeedback.prototype.next = function( evt ) {
+        var feedbackForm = document.querySelector( '.app-feedback' ),
+            nextScreen = this.currentConfig[ 'target_' + evt.target.dataset.action ];
+        feedbackForm.parentNode.removeChild( feedbackForm );
+        if ( !!nextScreen && nextScreen !== 'false' ) {
+            this.renderForm( nextScreen );
+            this.addFormListener();
         }
+    };
 
-        console.log( count + ' questions in stock.' );
-
-        // generate touch functionality for each button
-        var buttons = 0;
-        var j = 0;
-        var funcs = [];
-
-        // button logic
-        function generateButton( buttonID ) {
-            return function() {
-                // positive answer
-                document.getElementById( 'anwsyes' + buttonID.identifier ).addEventListener( 'touchstart', function( event ) {
-                    event.preventDefault();
-                    if ( !buttonID.linkYes.indexOf( 'http' ) ) {
-                        window.location = response.link1Yes;
-                        AppUserFeedback.prototype.showTime();
-                    } else if ( !buttonID.linkYes.indexOf( 'close' ) ) {
-                        document.getElementById( buttonID.identifier ).style.display = 'none';
-                        AppUserFeedback.prototype.showTime();
-                    } else {
-                        document.getElementById( buttonID.identifier ).style.display = 'none';
-                        document.getElementById( buttonID.linkYes ).style.display = 'block';
-                    }
-                }, false );
-
-                // negative answer
-                document.getElementById( 'anwsno' + buttonID.identifier ).addEventListener( 'touchstart', function( event ) {
-                    event.preventDefault();
-                    if ( !buttonID.linkNo.indexOf( 'http' ) ) {
-                        window.location = response.link1No;
-                        AppUserFeedback.prototype.showTime();
-                    } else if ( !buttonID.linkNo.indexOf( 'close' ) ) {
-                        document.getElementById( buttonID.identifier ).style.display = 'none';
-                        AppUserFeedback.prototype.showTime();
-                    } else {
-                        document.getElementById( buttonID.identifier ).style.display = 'none';
-                        document.getElementById( buttonID.linkYes ).style.display = 'block';
-                    }
-                }, false );
-            };
-        }
-
-        // iterate through needed settings
-        for ( buttons = 0; buttons < response.questions.length; buttons++ ) {
-            funcs[ buttons ] = generateButton({
-                linkYes: response.questions[ buttons ].linkPos,
-                linkNo: response.questions[ buttons ].linkNeg,
-                identifier: response.questions[ buttons ].identifier,
-                visibility: response.questions[ buttons ].visibility
+    AppUserFeedback.prototype.addFormListener = function() {
+        // establish common ground by proxying outer scope
+        var that = this,
+            formAction = document.querySelectorAll( '.app-feedback__action' );
+        for ( var j = 0; j < formAction.length; j++ ) {
+            formAction[ j ].addEventListener( 'click', function( e ) {
+                // 'this' would return e.target here
+                // js-hint is disabled, outer scoped callback assigned here on purpose
+                /* jshint ignore:start */
+                that.next( e );
+                /* jshint ignore:end */
             });
-        }
-
-        for ( j = 0; j < response.questions.length; j++ ) {
-            funcs[ j ]();
         }
     };
 
     AppUserFeedback.prototype.init = function() {
-        this.getData( path ).then( function( response ) {
-            console.log( response.questions );
-            if ( response ) {
-                this.showQuestions();
-            }
+        // establish common ground by proxying outer scope
+        var that = this;
+        that.getData( that.path ).then( function( response ) {
+            that.responseObj = response;
+        }).then( function() {
+            that.renderForm();
+        }).then( function() {
+            that.addFormListener();
+        }).then( function() {
+            that.setCookie();
         });
     };
 
-    // just start the app once
-    if ( document.querySelector( '.app-user-feedback' ) ) {
-        return;
-    } else {
+    // instantiate just once
+    if ( document.cookie.indexOf( 'zeit_app_feedback' ) === -1 || debug ) {
         new AppUserFeedback();
-        console.log( 'start feedback notification.' );
     }
 }
 

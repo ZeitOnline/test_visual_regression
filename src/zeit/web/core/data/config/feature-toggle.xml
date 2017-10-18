@@ -23,8 +23,8 @@
   <reader_revenue_registered_with_comments>true</reader_revenue_registered_with_comments>
   <render_404>true</render_404>
   <tag_logos>true</tag_logos>
-  <third_party_modules>false</third_party_modules>
-  <tracking>false</tracking>
+  <third_party_modules>true</third_party_modules>
+  <tracking>true</tracking>
   <update_signals>true</update_signals>
   <volume_teaser>true</volume_teaser>
   <zon_1000px>true</zon_1000px>

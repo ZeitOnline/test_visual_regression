@@ -1,13 +1,11 @@
-<div class="app-user-feedback{{ visibility }}" id="{{ identifier }}" >
-    <!-- Question -->
-    <div class="questions-item">
-        <div class="questions-item__text">{{ question }}</div>
-        <div id="anwsyes{{ identifier }}" class="questions-item__button" data-wt-click="{ ct : '#app_feedback' , ck:{ 4 : 'mobile', 5 : 'content', 6 : '{{ question }}' , 9 : '{{ antwortPos }}' }}">
-            {{ antwortPos }}
-        </div>
-        <div id="anwsno{{ identifier }}" class="questions-item__button" data-wt-click="{ ct : '#app_feedback' , ck:{ 4 : 'mobile', 5 : 'content', 6 : '{{ question }}' , 9 : '{{ antwortNeg }}' }}">
-            {{ antwortNeg }}
-        </div>
+<div class="app-feedback" >
+    <div class="app-feedback__questions">
+        <div class="app-feedback__question">{{ question }}</div>
+        <a class="app-feedback__action app-feedback__action--positive" data-action="positive">
+            {{ feedbackPositive }}
+        </a>
+        <a class="app-feedback__action app-feedback__action--negative" data-action="negative">
+            {{ feedbackNegative }}
+        </a>
     </div>
-    <!-- Question -->
 </div>

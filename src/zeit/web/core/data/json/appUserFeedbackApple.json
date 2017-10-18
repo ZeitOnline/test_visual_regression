@@ -1,28 +1,25 @@
-{
-  "questions": [
+{  "screen1":
     {
       "question": "Gefällt Ihnen die ZEIT ONLINE App?",
-      "antwortPos": "ja",
-      "linkPos": "quest2",
-      "antwortNeg": "nein",
-      "linkNeg": "quest3",
-      "identifier": "quest1"
-    }, {
+      "feedback_positive": "ja",
+      "target_positive": "screen2",
+      "feedback_negative": "nein",
+      "target_negative": "screen3"
+    },
+    "screen2":
+    {
       "question": "Wollen Sie die App bewerten?",
-      "antwortPos": "ja",
-      "linkPos": "quest3",
-      "antwortNeg": "nein, danke",
-      "linkNeg": "close",
-      "identifier": "quest2",
-      "visibility": " hidden"
-    }, {
+      "feedback_positive": "ja",
+      "target_positive": "screen3",
+      "feedback_negative": "nein, danke",
+      "target_negative": ""
+    },
+    "screen3":
+    {
       "question": "Wollen Sie uns Feedback geben?",
-      "antwortPos": "ja",
-      "linkPos": "quest1",
-      "antwortNeg": "nein",
-      "linkNeg": "close",
-      "identifier": "quest3",
-      "visibility": " hidden"
+      "feedback_positive": "ja",
+      "target_positive": "screen1",
+      "feedback_negative": "nein",
+      "target_negative": ""
     }
-  ]
 }
