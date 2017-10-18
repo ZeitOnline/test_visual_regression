@@ -41,6 +41,12 @@ function appUserIsBack( timestamp, options ) {
             text: 'Die Seite wurde aktualisiert'
         };
 
+        // cannot use this.log() here, because that checks options, which do not exist yet.
+        if ( defaults.debug || defaults.force ) {
+            window.console.log( 'timestamp injected: ', timestamp );
+            window.console.log( 'options injected: ', options );
+        }
+
         this.options = this.mixit( options, defaults );
         this.timestamp = timestamp || Date.now();
         this.init();
