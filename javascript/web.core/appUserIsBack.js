@@ -149,8 +149,7 @@ function appUserIsBack( timestamp, options ) {
             html = template({
                 text: this.options.text,
                 buttontext: this.options.buttontext,
-                link: this.options.link,
-                linkForTracking: this.options.link.replace( 'http://', '' )
+                link: this.options.link
             });
         document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', html );
         this.track( 'appear' );
