@@ -17,13 +17,7 @@
         }
     }
 
-    /**
-     * Initializes instance variables.
-     *
-     * @constructor
-     */
     function ShareBlock( rootElement ) {
-        log( 'ShareBlock()' ); // REMOVE
         this.rootElement = rootElement;
         this.clickEventListener = null;
         this.init();
@@ -68,16 +62,14 @@
     };
 
     var clickEventListener = function() {
-        // event.preventDefault();
 
-        // getSharebertData().then(exchangeLink())
-        // slideInTheButtons();
+        var linkElement = this.rootElement.querySelector( '.quote-sharing__link--twitter' ),
+            sharebertRedirectUrl = linkElement.getAttribute( 'data-sharebert-redirect-url' ),
+            sharebertShotUrl = linkElement.getAttribute( 'data-sharebert-screenshot-target' );
 
-        var $elem = this.rootElement.querySelector( '.quote-sharing__link--twitter' );
-        var sharebertRedirectUrl = $elem.getAttribute( 'data-sharebert-redirect-url' );
-        var sharebertShotUrl = $elem.getAttribute( 'data-sharebert-screenshot-target' );
-        // for testing locally (Sharebert cannot reach your localhost), use nginx or:
-        // sharebertShotUrl = 'http://live0.zeit.de/twitter-quote/?quote=Das%20hat%20alles%20keinen%20Gin.';
+        // for testing locally (Sharebert cannot reach your localhost), use ngrok or:
+        sharebertShotUrl = 'http://live0.zeit.de/twitter-quote/?quote=Das%20hat%20alles%20keinen%20Gin.';
+
         log( 'sharebertRedirectUrl: ' + sharebertRedirectUrl );
         log( 'sharebertShotUrl: ' + sharebertShotUrl );
 
@@ -85,12 +77,18 @@
             .then( function( response ) {
                 log( 'SUCCESS, got URL:' + response.src_url );
                 var shareLink = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent( response.src_url );
-                $elem.setAttribute( 'href', shareLink );
+                linkElement.setAttribute( 'href', shareLink );
             }, function( error ) {
                 log( 'ERROR', error );
             });
 
-        this.itemsElement.style.display = 'inline-block'; // TODO: use classes/aria
+        $( this.itemsElement ).velocity( 'transition.slideRightIn', {
+            display: 'inline-block', // remove the property altogether and return to previous display value from CSS
+            duration: 300
+        });
+
+        this.labelElement.removeEventListener( 'click', this.clickEventListener );
+        this.labelElement.classList.remove( 'js-shareblock__label' ); // this makes cursor:pointer
     };
 
     ShareBlock.prototype.init = function() {

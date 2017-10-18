@@ -19,6 +19,7 @@ adReload.init();
 zeit.clearQueue();
 
 // add required jQuery plugins
+require( 'velocity.ui' );
 require( 'web.core/plugins/jquery.notifications' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.toggleRegions' );
