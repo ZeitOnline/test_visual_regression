@@ -11,10 +11,11 @@ function appUserFeedback() {
      * setup options
      */
 
+    var response = {};
+
     // check mobile devices and pick config
     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
     var mobileConf = 'Default';
-
     if ( /android/i.test( userAgent ) ) {
         mobileConf = 'Android';
     } else if ( /iPad|iPhone|iPod/.test( userAgent ) && !window.MSStream ) {
@@ -26,50 +27,38 @@ function appUserFeedback() {
      */
     function AppUserFeedback() {
         if ( document.cookie.indexOf( 'zeit_app_feedback' ) === -1 ) {
-            this.showQuestions();
+            this.init();
         }
     }
 
     // get json
-    //var settings = require( 'web.core/templates/appUserFeedback' + mobileConf + '.json' );
+    var path = window.location.protocol + '//' + window.location.host + '/json/appUserFeedback' + mobileConf + '.json';
 
-    var endpoint = window.location.protocol + '//' + window.location.host + '/json/appUserFeedback' + mobileConf + '.json';
-
-    var jsonValues = ( function() {
-        var json;
-        function fetchJSONFile( endpoint, callback ) {
-            var httpRequest = new XMLHttpRequest();
-            httpRequest.onreadystatechange = function() {
-                if ( httpRequest.readyState === 4 ) {
-                    if ( httpRequest.status === 200 ) {
-                        var data = JSON.parse( httpRequest.responseText );
-                        if ( callback ) {
-                            callback( data );
-                        }
-                    }
+    AppUserFeedback.prototype.getData = function( url ) {
+        // Promises working since iOS Safari8, Android Browser 4.4.4
+        return new window.Promise( function( resolve, reject ) {
+            var xhr = new XMLHttpRequest();
+            xhr.open( 'GET', url );
+            xhr.onload = function() {
+                // This is called even on 404 etc
+                // so check the status
+                if ( xhr.status === 200 ) {
+                    // Resolve the promise with the settings text
+                    resolve( JSON.parse( xhr.response ) );
+                } else {
+                    // Otherwise reject with the status text
+                    // which will hopefully be a meaningful error
+                    reject( Error( xhr.statusText ) );
                 }
             };
-            httpRequest.open( 'GET', endpoint );
-            httpRequest.send();
-        }
-
-        fetchJSONFile( endpoint, function( data ) {
-            json = data;
+            // Handle network errors
+            xhr.onerror = function() {
+                reject( Error( 'Network Error' ) );
+            };
+            // Make the request
+            xhr.send();
         });
-
-        return { getData: function() {
-            if ( json ) {
-                console.log( endpoint );
-                return json;
-            } else {
-                console.log( endpoint );
-                return false;
-            }
-        } };
-
-    })();
-
-    var settings = jsonValues.getData();
+    };
 
     /**
      * set cookie for expiring to show feedback after several time again
@@ -89,15 +78,15 @@ function appUserFeedback() {
         // mustache template-data
         var template = require( 'web.core/templates/appUserFeedback.html' );
         var count = 0;
-        for ( var i = 0; i < settings.questions.length; i++ ) {
+        for ( var i = 0; i < response.questions.length; i++ ) {
             var html = template({
-                question: settings.questions[ i ].question,
-                antwortPos: settings.questions[ i ].antwortPos,
-                linkYes: settings.questions[ i ].linkPos,
-                antwortNeg: settings.questions[ i ].antwortNeg,
-                linkNo: settings.questions[ i ].linkNeg,
-                identifier: settings.questions[ i ].identifier,
-                visibility: settings.questions[ i ].visibility
+                question: response.questions[ i ].question,
+                antwortPos: response.questions[ i ].antwortPos,
+                linkYes: response.questions[ i ].linkPos,
+                antwortNeg: response.questions[ i ].antwortNeg,
+                linkNo: response.questions[ i ].linkNeg,
+                identifier: response.questions[ i ].identifier,
+                visibility: response.questions[ i ].visibility
             });
 
             // add template to source code
@@ -120,7 +109,7 @@ function appUserFeedback() {
                 document.getElementById( 'anwsyes' + buttonID.identifier ).addEventListener( 'touchstart', function( event ) {
                     event.preventDefault();
                     if ( !buttonID.linkYes.indexOf( 'http' ) ) {
-                        window.location = settings.link1Yes;
+                        window.location = response.link1Yes;
                         AppUserFeedback.prototype.showTime();
                     } else if ( !buttonID.linkYes.indexOf( 'close' ) ) {
                         document.getElementById( buttonID.identifier ).style.display = 'none';
@@ -135,7 +124,7 @@ function appUserFeedback() {
                 document.getElementById( 'anwsno' + buttonID.identifier ).addEventListener( 'touchstart', function( event ) {
                     event.preventDefault();
                     if ( !buttonID.linkNo.indexOf( 'http' ) ) {
-                        window.location = settings.link1No;
+                        window.location = response.link1No;
                         AppUserFeedback.prototype.showTime();
                     } else if ( !buttonID.linkNo.indexOf( 'close' ) ) {
                         document.getElementById( buttonID.identifier ).style.display = 'none';
@@ -149,18 +138,27 @@ function appUserFeedback() {
         }
 
         // iterate through needed settings
-        for ( buttons = 0; buttons < settings.questions.length; buttons++ ) {
+        for ( buttons = 0; buttons < response.questions.length; buttons++ ) {
             funcs[ buttons ] = generateButton({
-                linkYes: settings.questions[ buttons ].linkPos,
-                linkNo: settings.questions[ buttons ].linkNeg,
-                identifier: settings.questions[ buttons ].identifier,
-                visibility: settings.questions[ buttons ].visibility
+                linkYes: response.questions[ buttons ].linkPos,
+                linkNo: response.questions[ buttons ].linkNeg,
+                identifier: response.questions[ buttons ].identifier,
+                visibility: response.questions[ buttons ].visibility
             });
         }
 
-        for ( j = 0; j < settings.questions.length; j++ ) {
+        for ( j = 0; j < response.questions.length; j++ ) {
             funcs[ j ]();
         }
+    };
+
+    AppUserFeedback.prototype.init = function() {
+        this.getData( path ).then( function( response ) {
+            console.log( response.questions );
+            if ( response ) {
+                this.showQuestions();
+            }
+        });
     };
 
     // just start the app once
