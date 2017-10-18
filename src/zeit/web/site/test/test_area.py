@@ -133,7 +133,7 @@ def test_overview_should_render_cover_image_from_solr_result(testbrowser):
 def test_default_teaser_should_not_expose_ranking_area_proxies(
         testbrowser, datasolr, monkeypatch):
     log = mock.Mock()
-    monkeypatch.setattr(zeit.web.core.utils, 'log', log)
+    monkeypatch.setattr(zeit.web.core.solr, 'log', log)
 
     monkeypatch.setattr(
         zeit.web.core.comments.Community, 'get_comment_counts',
@@ -155,7 +155,7 @@ def test_tms_query_should_not_expose_ranking_area_proxies(
     zope.component.provideUtility(zeit.web.core.solr.DataTMS())
 
     log = mock.Mock()
-    monkeypatch.setattr(zeit.web.core.utils, 'log', log)
+    monkeypatch.setattr(zeit.web.core.solr, 'log', log)
 
     monkeypatch.setattr(
         zeit.web.core.comments.Community, 'get_comment_counts',
@@ -177,7 +177,7 @@ def test_elasticsearch_query_should_not_expose_ranking_area_proxies(
     zope.component.provideUtility(zeit.web.core.solr.DataES())
 
     log = mock.Mock()
-    monkeypatch.setattr(zeit.web.core.utils, 'log', log)
+    monkeypatch.setattr(zeit.web.core.solr, 'log', log)
 
     monkeypatch.setattr(
         zeit.web.core.comments.Community, 'get_comment_counts',

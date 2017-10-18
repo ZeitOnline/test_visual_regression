@@ -3,6 +3,8 @@ import os
 import os.path
 import pkg_resources
 import random
+import urllib
+import urlparse
 
 import grokcore.component
 import mock
