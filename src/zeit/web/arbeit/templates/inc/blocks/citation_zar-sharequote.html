@@ -16,7 +16,7 @@
 
             <ul class="quote-sharing__items js-shareblock__items">
                 <li class="quote-sharing__item">
-                    <a class="{{ 'quote-sharing__link' | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}&quote={{ block.text | urlencode }}" target="_blank" title="Auf Facebook teilen">
+                    <a class="{{ 'quote-sharing__link' | with_mods('facebook') }}" href="http://www.facebook.com/sharer/sharer.php?u={{ (content_url ~ ga_campaign).format('facebook') | urlencode }}&quote={{ block.text | urlencode }}" target="_blank" title="Auf Facebook teilen" data-id="shareblock....facebook">
                         {{ lama.use_svg_icon('sharing-facebook', 'quote-sharing__icon' | with_mods('facebook'), view.package) }}
                         <span class="quote-sharing__text">Auf Facebook teilen</span>
                     </a>
@@ -27,7 +27,7 @@
                     {% set sharebert_screenshot_target = '%s/module/%s/sharequote' | format(article_url, block.position) %}
                     {% set sharebert_share_url = (content_url ~ ga_campaign).format('twitter') %}
 
-                    <a class="{{ 'quote-sharing__link' | with_mods('twitter') }}" href="https://twitter.com/intent/tweet?text={{ sharebert_share_url | urlencode }}" target="_blank" title="Auf Twitter teilen" data-sharebert-screenshot-target="{{ sharebert_screenshot_target }}" data-sharebert-redirect-url="{{ sharebert_share_url }}">
+                    <a class="{{ 'quote-sharing__link' | with_mods('twitter') }}" href="https://twitter.com/intent/tweet?text={{ sharebert_share_url | urlencode }}" target="_blank" title="Auf Twitter teilen" data-sharebert-screenshot-target="{{ sharebert_screenshot_target }}" data-sharebert-redirect-url="{{ sharebert_share_url }}" data-id="shareblock....twitter">
                         {{ lama.use_svg_icon('sharing-twitter', 'quote-sharing__icon' | with_mods('twitter'), view.package) }}
                         <span class="quote-sharing__text">Auf Twitter teilen</span>
                     </a>

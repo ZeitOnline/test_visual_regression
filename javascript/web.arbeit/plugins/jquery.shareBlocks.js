@@ -68,7 +68,7 @@
             sharebertShotUrl = linkElement.getAttribute( 'data-sharebert-screenshot-target' );
 
         // for testing locally (Sharebert cannot reach your localhost), use ngrok or:
-        sharebertShotUrl = 'http://live0.zeit.de/twitter-quote/?quote=Das%20hat%20alles%20keinen%20Gin.';
+        // sharebertShotUrl = 'http://live0.zeit.de/twitter-quote/?quote=Das%20hat%20alles%20keinen%20Gin.';
 
         log( 'sharebertRedirectUrl: ' + sharebertRedirectUrl );
         log( 'sharebertShotUrl: ' + sharebertShotUrl );
@@ -89,6 +89,16 @@
 
         this.labelElement.removeEventListener( 'click', this.clickEventListener );
         this.labelElement.classList.remove( 'js-shareblock__label' ); // this makes cursor:pointer
+
+        this.track( 'open', sharebertShotUrl );
+    };
+
+    ShareBlock.prototype.track = function( action, url ) {
+        log( 'Track: ' + action + ': ' + url );
+        require([ 'web.core/clicktracking' ], function( Clicktracking ) {
+            var data = [ 'shareblock....' + action, url.replace( 'http://', '' ) ];
+            Clicktracking.send( data );
+        });
     };
 
     ShareBlock.prototype.init = function() {
