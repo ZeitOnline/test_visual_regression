@@ -219,11 +219,13 @@ def test_image_should_set_mobile_ratio_for_variant_original(application):
     assert round(1.62 - image.ratio, 1) == 0
 
 
-def test_module_class_should_hash_as_expected():
+def test_module_class_should_hash_from_name_attribute():
     context = mock.Mock()
-    context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}
+    context.xml = lxml.objectify.XML(
+        '<foo xmlns:cp="http://namespaces.zeit.de/CMS/cp"'
+        ' cp:__name__="foo"/>')
     mod = zeit.web.core.centerpage.Module(context)
-    assert hash(mod) == 42
+    assert hash(mod) == hash('foo')
 
 
 def test_cpextra_module_should_have_a_layout_attribute():

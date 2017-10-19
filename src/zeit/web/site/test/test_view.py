@@ -123,8 +123,8 @@ def test_main_nav_should_render_labels(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     dropdown_label = browser.cssselect('.nav__ressorts-list *[data-label]')
     assert len(dropdown_label) == 3
-    assert dropdown_label[0].attrib['data-label'] == 'Anzeige'
-    assert dropdown_label[1].attrib['data-label'] == 'Anzeigen'
+    assert dropdown_label[0].get('data-label') == 'Anzeige'
+    assert dropdown_label[1].get('data-label') == 'Anzeigen'
 
 
 def test_ressort_literally_returns_correct_ressort(application):
@@ -156,9 +156,9 @@ def test_sharing_titles_differ_from_html_title(testbrowser):
 
     pagetitle = browser.cssselect('title')[0].text
     og_title = browser.cssselect(
-        'meta[property="og:title"]')[0].attrib.get('content')
+        'meta[property="og:title"]')[0].get('content')
     twitter_title = browser.cssselect(
-        'meta[name="twitter:title"]')[0].attrib.get('content')
+        'meta[name="twitter:title"]')[0].get('content')
 
     assert og_title + u' | ZEIT ONLINE' == pagetitle
     assert twitter_title + u' | ZEIT ONLINE' == pagetitle

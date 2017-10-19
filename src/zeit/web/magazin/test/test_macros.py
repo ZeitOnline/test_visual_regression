@@ -17,7 +17,7 @@ def test_image_template_should_produce_figure_markup(
     assert browser.cssselect('figure.figure-full-width')
     assert browser.cssselect('img.figure__media')
     assert browser.cssselect('span.figure__copyright')
-    assert browser.cssselect('a')[0].attrib['href'] == 'http://links.to'
+    assert browser.cssselect('a')[0].get('href') == 'http://links.to'
 
 
 def test_image_template_should_produce_copyright_caption(
@@ -29,18 +29,18 @@ def test_image_template_should_produce_copyright_caption(
         'zeit.web.magazin:templates/inc/asset/image_article.tpl',
         block=image, request=dummy_request)
     copyright = browser.cssselect('.figure__copyright a')[0]
-    assert copyright.attrib['href'] == 'http://foo.com'
+    assert copyright.get('href') == 'http://foo.com'
     assert copyright.text_content() == u'© Andreas Gebert/dpa'
 
 
 def test_image_template_should_designate_correct_layouts(testbrowser):
     browser = testbrowser('/zeit-magazin/article/inline-imagegroup')
     header = browser.cssselect('.header-article__media-item')[0]
-    assert header.attrib['data-ratio'] == '1.77858439201'  # variant=original
+    assert header.get('data-ratio') == '1.77858439201'  # variant=original
     stamp = browser.cssselect('figure.figure-stamp--right img')[0]
-    assert stamp.attrib['data-ratio'] == '0.75'  # variant=portrait
+    assert stamp.get('data-ratio') == '0.75'  # variant=portrait
     fullwidth = browser.cssselect('figure.is-centered img')[0]
-    assert fullwidth.attrib['data-ratio'] == '1.77777777778'  # variant=wide
+    assert fullwidth.get('data-ratio') == '1.77777777778'  # variant=wide
 
 
 def test_image_template_should_hide_none(testbrowser):

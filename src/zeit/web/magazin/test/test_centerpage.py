@@ -408,7 +408,7 @@ def test_card_teaser_keeps_transparent_image_background(testbrowser):
     browser = testbrowser('/zeit-magazin/teaser-card')
     teaser_img = browser.cssselect(
         '.teaser-card[data-unique-id$=martenstein-portraitformat] img')[0]
-    assert 'ccddee' not in teaser_img.attrib['data-src']
+    assert 'ccddee' not in teaser_img.get('data-src')
 
 
 def test_card_background_setting_on_teaser_overrides_article_setting(
@@ -416,7 +416,7 @@ def test_card_background_setting_on_teaser_overrides_article_setting(
     browser = testbrowser('/zeit-magazin/teaser-card')
     card = browser.cssselect(
         '.teaser-card[data-unique-id$=martenstein-portraitformat] .card')[0]
-    assert 'a1f88c' in card.attrib['style']
+    assert 'a1f88c' in card.get('style')
 
 
 def test_centerpage_should_have_default_keywords(testbrowser):
