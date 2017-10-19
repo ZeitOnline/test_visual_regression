@@ -176,16 +176,19 @@ function appUserIsBack( timestamp, options ) {
         ], function( $ ) {
             $( '#app-user-is-back' ).onSwipe(
                 function( element, swipeDirection ) {
+                    var translateVal;
                     if ( swipeDirection === 'left' || swipeDirection === 'right' ) {
-                        // uppercase the first letter, to use it as velocity transition name
-                        swipeDirection = swipeDirection.charAt( 0 ).toUpperCase() + swipeDirection.slice( 1 );
-                        $( element ).velocity( 'transition.slide' + swipeDirection + 'Out', {
-                            duration: 500,
-                            complete: function() {
-                                element.parentNode.removeChild( element );
-                            }
+                        var viewportWidth = $( window ).width();
+                        translateVal = swipeDirection === 'left' ? -viewportWidth : viewportWidth;
+                        // Remove element after upcoming transition has ended
+                        $( element ).one( 'transitionend', function() {
+                            element.parentNode.removeChild( element );
+                            element.style.transition = 'initial';
+                            that.track( 'remove' );
                         });
-                        that.track( 'remove' );
+                        // Move element out of the screen
+                        element.style.transition = 'transform 0.15s ease-in';
+                        element.style.transform = 'translateX(' + translateVal + 'px)';
                     }
                 }
             );
