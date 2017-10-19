@@ -47,7 +47,7 @@ def test_follow_us_has_correct_source(testbrowser):
     assert kicker[0].text == 'Das aktuelle Heft /'
     assert title[0].text == 'ZEIT CAMPUS 1/2016'
     assert 'Jetzt bestellen' in cta[0].text_content()
-    assert 'portrait' in img[0].attrib['data-src']
+    assert 'portrait' in img[0].get('data-src')
 
     # check presence of the rest
     assert len(select('.abo-cta')) == 1

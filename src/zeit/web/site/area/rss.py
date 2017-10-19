@@ -82,7 +82,7 @@ class RSSLink(object):
     def image_url(self):
         enclosure = self.xml.find('enclosure')
         if enclosure is not None:
-            return enclosure.attrib.get('url')
+            return enclosure.get('url')
 
     @zeit.web.reify
     def is_ad(self):
