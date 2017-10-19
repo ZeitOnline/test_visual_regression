@@ -11,7 +11,7 @@
 		color: $zar-sun-yellow
 	.article-heading__title
 		color: #fff
-	.article-heading__title--underlined
+	.article-heading__title--underlined-skip
 		text-shadow: -2px 3px $primary-color, 2px 3px $primary-color
 	.byline,
 	.metadata
@@ -37,11 +37,17 @@
 		+unpadded
 	.article-header--dark
 		border-top: 1px $zar-battleship-grey solid
+		&.article-header--has-series
+			border-top-color: $zar-charcoal-grey
+
+	.article-header--has-series
+		.article-heading
+			padding-top: $vertical-space
 
 +respond-min($break-tablet-min)
 	.article-header--dark
 		margin-top: $vertical-space
-		.article-heading__title--underlined
+		.article-heading__title--underlined-skip
 			text-shadow: -4px 6px $primary-color, 4px 6px $primary-color
 
 

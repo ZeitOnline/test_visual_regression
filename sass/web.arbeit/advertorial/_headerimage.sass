@@ -1,0 +1,59 @@
+.header-advertorial
+	&__heading
+		position: absolute
+		top: 50%
+		transform: translateY(-50%)
+		left: 0
+		text-align: center
+		width: 100%
+		color: $white
+		padding: 0 $page-padding--small
+		+respond-min($break-tablet-min)
+			padding: $vertical-space $page-padding
+
+	&__kicker
+		+font-smoothing
+		font-size: remify(15px)
+		letter-spacing: $letter-spacing-s
+		display: block
+
+	&__title
+		+font-smoothing
+		font-size: remify(28px)
+		font-weight: bold
+		letter-spacing: $letter-spacing-m
+		line-height: 1.2em
+		+respond-min($break-tablet-min)
+			font-size: remify(60px)
+
+.header-image
+	position: relative
+	margin-bottom: $vertical-space--small
+	&:after
+		content: ''
+		background-color: $zar-sun-yellow
+		position: absolute
+		bottom: 0
+		transform: translateY(50%)
+		left: 50%
+		display: block
+		height: remify(30px)
+		width: remify(2px)
+		+respond-min($break-tablet-min)
+			height: remify(60px)
+	+respond-min($break-tablet-min)
+		padding: $vertical-space--small $page-padding 0 $page-padding
+
+	&__media-container
+		+teaser-image-dark-overlay($color: rgba(0, 0, 0, 0.5))
+
+	&__adlabel
+		@extend %ad-label
+		font-size: remify(9px)
+		position: absolute
+		right: $page-padding--small
+		top: remify(10px)
+		color: $white
+		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			display: none

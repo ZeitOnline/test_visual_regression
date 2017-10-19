@@ -12,6 +12,7 @@
   <dummy>false</dummy>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
+  <https>false</https>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
   <keywords_from_tms>false</keywords_from_tms>

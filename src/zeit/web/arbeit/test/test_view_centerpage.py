@@ -139,7 +139,7 @@ def test_zar_teaser_quote_has_correct_structure(testbrowser):
     quote = teaser('http://xml.zeit.de/arbeit/teaser/quote')
     assert len(quote) == 1
     quote_linktitle = quote[0].cssselect(
-        '.teaser-quote__quotelink')[0].attrib['title']
+        '.teaser-quote__quotelink')[0].get('title')
     assert quote_linktitle == 'Quoteteaser - Diese E-Mail sagt: Antworte!'
 
     # Images appear only for columns with an authorimage
@@ -178,3 +178,18 @@ def test_zar_topicpage_has_correct_structure(testbrowser, datasolr):
     # second page should be the current one
     assert len(select(
         '.pager__pages > .pager__page--current:nth-child(2)')) == 1
+
+
+def test_zar_advertorial_cp_header_renders_correctly(testbrowser):
+    select = testbrowser('/arbeit/centerpage/advertorial').cssselect
+    assert len(select('.header-image')) == 1
+    assert len(select('.header-advertorial__heading')) == 1
+    assert len(select('.header-advertorial__kicker')) == 1
+    assert len(select('.header-advertorial__title')) == 1
+    assert len(select('.header__ad-label')) == 1
+    assert len(select('.header-image__adlabel')) == 1
+
+
+def test_zar_advertorial_has_markup_module(testbrowser):
+    select = testbrowser('/arbeit/centerpage/advertorial').cssselect
+    assert len(select('.markup')) == 1

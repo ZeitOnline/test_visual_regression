@@ -4,13 +4,53 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- FIX: Support caching headers for text, rawxml and unknown content types 
+- Nothing
 
 
-3.98 (unreleased)
------------------
+3.100.1 (unreleased)
+--------------------
 
 - Nothing changed yet.
+
+
+3.100 (2017-10-19)
+------------------
+
+- MAINT: Use `node.get()` to access XML attributes
+
+- MAINT: Update to API changes after zeit.content.modules introduction
+
+
+3.99.1 (2017-10-18)
+-------------------
+
+- FIX: Do not show series header on podcast articles
+
+
+3.99 (2017-10-17)
+-----------------
+
+- ZON-4243: Add series banner to ZAR articles
+
+- ZON-4120: Add image fallback for series articles
+
+- FIX: Center ZAR advertorial-CP heading (minor)
+
+- FIX: Support caching headers for text, rawxml and unknown content types
+
+- FEM-66: Remove iqd_digital_transformation feature toggle
+
+- MAINT: Mark header elements in longform for external styling
+
+
+3.98 (2017-10-12)
+-----------------
+
+- ZON-4253: Polish portraitbox
+
+- Arbeit-99: Implement advertorial for ZEIT Arbeit
+
+- FIX: Fix in-app link-injection for page-refresh user-notification
 
 
 3.97 (2017-10-05)

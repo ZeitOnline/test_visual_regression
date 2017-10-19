@@ -38,24 +38,16 @@ def test_adcontroller_head_code_is_present(
     assert '<!-- mandanten object -->' in browser.contents
 
 
-def test_adcontroller_adtags_are_present(testbrowser, monkeypatch):
+def test_adcontroller_adtags_are_present(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     assert 'ad-desktop-1' in browser.contents
     assert 'ad-desktop-2' in browser.contents
     assert 'ad-desktop-3' in browser.contents
+    assert 'ad-desktop-8' in browser.contents
     assert 'ad-mobile-1' in browser.contents
     assert 'ad-mobile-3' in browser.contents
     assert 'ad-mobile-4' in browser.contents
     assert 'ad-mobile-8' in browser.contents
-    # adtile 7 will be renumbered to… 8
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-online/slenderized-index')
-    assert 'ad-desktop-7' in browser.contents
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
-    browser = testbrowser('/zeit-online/slenderized-index')
-    assert 'ad-desktop-8' in browser.contents
 
 
 def test_adcontroller_finanlizer_is_present(
@@ -86,8 +78,6 @@ def test_adplaces_present_on_pages(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-desktop-1')) == 1
     assert len(browser.cssselect('#ad-desktop-2')) == 1
     assert len(browser.cssselect('#ad-desktop-3')) == 1
-    assert len(browser.cssselect('#ad-desktop-7')) == 1
-
     assert len(browser.cssselect('#ad-mobile-1')) == 1
     assert len(browser.cssselect('#ad-mobile-3')) == 1
     assert len(browser.cssselect('#ad-mobile-4')) == 1
@@ -115,7 +105,6 @@ def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-desktop-1')) == 1
     assert len(browser.cssselect('#ad-desktop-2')) == 1
     assert len(browser.cssselect('#ad-desktop-3')) == 1
-    assert len(browser.cssselect('#ad-desktop-7')) == 1
     assert len(browser.cssselect('#ad-mobile-1')) == 1
     assert len(browser.cssselect('#ad-mobile-3')) == 1
     assert len(browser.cssselect('#ad-mobile-8')) == 1
@@ -172,27 +161,9 @@ def test_adplaces_have_banner_label_data_attribute(testbrowser, monkeypatch):
     assert labelstring not in browser.cssselect('#ad-desktop-2')[0].text
     assert labelstring in browser.cssselect('#ad-desktop-3')[0].text
     assert labelstring in browser.cssselect('#ad-desktop-5')[0].text
-    assert labelstring in browser.cssselect('#ad-desktop-7')[0].text
-
     assert labelstring not in browser.cssselect('#ad-mobile-1')[0].text
     assert labelstring not in browser.cssselect('#ad-mobile-3')[0].text
     assert labelstring not in browser.cssselect('#ad-mobile-4')[0].text
-
-
-def test_adplace8_has_banner_label_data_attribute(
-        application, dummy_request, tplbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/01')
-    view = zeit.web.site.view_article.Article(context, dummy_request)
-    browser = tplbrowser(
-        'zeit.web.core:templates/inc/comments/thread.html', view=view)
-
-    labelstring = "elem.setAttribute('data-banner-label', 'Anzeige');"
-
-    assert labelstring in browser.cssselect('#ad-desktop-8')[0].text
-    assert labelstring not in browser.cssselect('#ad-mobile-8')[0].text
 
 
 def test_iqd_adtile2_should_not_be_inserted_on_small_screens(
@@ -218,10 +189,7 @@ def test_iqd_adtile2_should_not_be_inserted_on_small_screens(
     assert driver.find_element_by_css_selector('.ad-desktop--2')
 
 
-def test_adcontroller_values_return_values_on_article(
-        application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adcontroller_values_return_values_on_article(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/infoboxartikel')
     adcv = [
@@ -239,28 +207,21 @@ def test_adcontroller_values_return_values_on_article(
 
 
 def test_tile7_is_rendered_on_articles_with_multiple_pages(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    selector = ('#ad-desktop-7', '#ad-mobile-4')
+        testbrowser):
+    ad = '#ad-mobile-4'
 
     browser = testbrowser('/zeit-online/article/zeit')
-    assert len(browser.cssselect(selector[0])) == 1
-    assert len(browser.cssselect(selector[1])) == 1
+    assert len(browser.cssselect(ad)) == 1
 
     browser = testbrowser('/zeit-online/article/zeit/seite-2')
-    assert len(browser.cssselect(selector[0])) == 1
-    assert len(browser.cssselect(selector[1])) == 1
+    assert len(browser.cssselect(ad)) == 1
 
     browser = testbrowser('/zeit-online/article/zeit/seite-5')
-    assert len(browser.cssselect(selector[0])) == 1
-    assert len(browser.cssselect(selector[1])) == 1
+    assert len(browser.cssselect(ad)) == 1
 
 
 def test_adplace_P4_is_rendered_on_articles_with_multiple_pages(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+        testbrowser):
     selector = ('#ad-desktop-8', '#ad-mobile-4')
 
     browser = testbrowser('/zeit-online/article/zeit')
@@ -276,44 +237,20 @@ def test_adplace_P4_is_rendered_on_articles_with_multiple_pages(
     assert len(browser.cssselect(selector[1])) == 1
 
 
-def test_tiles7_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
-    assert len(browser.cssselect('#ad-desktop-7')) == 1
-    assert len(browser.cssselect('#ad-mobile-4')) == 1
-    assert len(browser.cssselect('#ad-desktop-9')) == 1
-
-
 def test_tiles8_9_are_rendered_on_articles_with_multiple_pages_on_onepage_view(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+        testbrowser):
     browser = testbrowser('/zeit-online/article/zeit/komplettansicht')
     assert len(browser.cssselect('#ad-desktop-8')) == 1
     assert len(browser.cssselect('#ad-mobile-4')) == 1
 
 
-def test_article_ad7_should_have_pagetype_modifier(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-online/article/01')
-    assert len(browser.cssselect('#ad-desktop-7')) == 1
-    assert 'ad-desktop--7-on-article' in browser.contents
-
-
-def test_article_ad8_should_have_pagetype_modifier(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_article_ad8_should_have_pagetype_modifier(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     assert len(browser.cssselect('#ad-desktop-8')) == 1
     assert 'ad-desktop--8-on-article' in browser.contents
 
 
-def test_adcontroller_values_return_values_on_hp(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adcontroller_values_return_values_on_hp(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/index')
     adcv = [
@@ -329,9 +266,7 @@ def test_adcontroller_values_return_values_on_hp(application, monkeypatch):
     assert adcv == view.adcontroller_values
 
 
-def test_adcontroller_values_return_values_on_cp(application, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adcontroller_values_return_values_on_cp(application):
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/main-teaser-setup')
     adcv = [
@@ -347,50 +282,12 @@ def test_adcontroller_values_return_values_on_cp(application, monkeypatch):
     assert adcv == view.adcontroller_values
 
 
-def test_video_page_adcontroller7_code_is_embedded(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-online/video/3537342483001')
-    assert len(browser.cssselect('#ad-desktop-7')) == 1
-
-
-def test_video_page_adcontroller8_code_is_embedded(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_video_page_adcontroller8_code_is_embedded(testbrowser):
     browser = testbrowser('/zeit-online/video/3537342483001')
     assert len(browser.cssselect('#ad-desktop-8')) == 1
 
 
-def test_tile7_is_rendered_on_correct_position(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-online/main-teaser-setup')
-    tile7_on_first_position = browser.cssselect(
-        '.cp-area--minor > div:first-child > script[id="ad-desktop-7"]')
-    tile7_is_present = browser.cssselect(
-        '.cp-area--minor > div > script[id="ad-desktop-7"]')
-
-    assert not tile7_on_first_position, (
-        'There should be no ad tile 7 on the first position.')
-    assert tile7_is_present, (
-        'Ad tile 7 is not present.')
-
-
-def test_tile7_for_fullwidth_is_rendered_on_correct_position(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-online/index')
-    tile7_on_first_position = browser.cssselect(
-        '.cp-area--minor > div:first-child > script[id="ad-desktop-7"]')
-    assert tile7_on_first_position, (
-        'Ad tile 7 is not present on first position.')
-
-
-def test_tile8_is_rendered_on_correct_position(testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-            'iqd_digital_transformation': True}.get)
+def test_tile8_is_rendered_on_correct_position(testbrowser):
     browser = testbrowser('/zeit-online/main-teaser-setup')
     tile8_on_first_position = browser.cssselect(
         '.cp-area--minor > div:first-child > script[id="ad-desktop-8"]')
@@ -404,10 +301,7 @@ def test_tile8_is_rendered_on_correct_position(testbrowser, monkeypatch):
 
 
 def test_tile8_for_fullwidth_is_rendered_on_correct_position(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(
-        zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-            'iqd_digital_transformation': True}.get)
+        testbrowser):
     browser = testbrowser('/zeit-online/index')
     tile8_on_first_position = browser.cssselect(
         '.cp-area--minor > div:first-child > script[id="ad-desktop-8"]')
@@ -415,48 +309,35 @@ def test_tile8_for_fullwidth_is_rendered_on_correct_position(
         'Ad tile 8 is not present on first position.')
 
 
-def test_adplace4_on_articles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adplace4_on_articles(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     assert len(browser.cssselect('#ad-desktop-4')) == 1
 
 
-def test_adplace16_on_articles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adplace16_on_articles(testbrowser):
     browser = testbrowser('/zeit-online/article/01')
     assert len(browser.cssselect('#ad-desktop-16')) == 1
 
 
-def test_iqd_adtile8_on_article_new_placement(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True,
-    }.get)
+def test_iqd_adtile8_on_article_new_placement(testbrowser):
     ps = '.article-page[data-page-number="1"] p'
     divs = '.article-page[data-page-number="1"] script[id^="ad-desktop"]'
     # article with original placement after p1
     browser = testbrowser('/zeit-online/article/01')
     body = browser.cssselect('{},{}'.format(ps, divs))
-    assert body[1].cssselect('script')[0].attrib['id'] == 'ad-desktop-8'
+    assert body[1].cssselect('script')[0].get('id') == 'ad-desktop-8'
 
 
 def test_iqd_adtile8_on_article_new_placement_alternative(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True,
-    }.get)
+        testbrowser):
     ps = '.article-page[data-page-number="1"] p'
     divs = '.article-page[data-page-number="1"] script[id^="ad-desktop"]'
     # article with alternate placement after p2
     browser = testbrowser('/zeit-magazin/article/01')
     body = browser.cssselect('{},{}'.format(ps, divs))
-    assert body[2].cssselect('script')[0].attrib['id'] == 'ad-desktop-8'
+    assert body[2].cssselect('script')[0].get('id') == 'ad-desktop-8'
 
 
-def test_p5_not_displayed_when_there_are_no_comments(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True,
-    }.get)
+def test_p5_not_displayed_when_there_are_no_comments(testbrowser):
     browser = testbrowser('/zeit-online/article/quiz')
     assert not browser.cssselect('#ad-desktop-5')

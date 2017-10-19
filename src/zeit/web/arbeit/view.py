@@ -34,9 +34,12 @@ class Base(zeit.web.core.view.Base):
         return 'Arbeit'
 
     @zeit.web.reify
+    def adwords(self):
+        return ['zeitonline', 'zeitarbeit']
+
+    @zeit.web.reify
     def adcontroller_handle(self):
-        suffix = '_trsf' if zeit.web.core.application.FEATURE_TOGGLES.find(
-            'iqd_digital_transformation') else ''
+        suffix = '_trsf'
         replacements = {
             'article': 'artikel',
             'gallery': 'galerie'}

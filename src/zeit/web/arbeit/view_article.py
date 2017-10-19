@@ -13,8 +13,15 @@ import zeit.web.core.view_article
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
+    renderer='templates/article_advertorial.html')
+@zeit.web.view_config(
     name='komplettansicht',
     renderer='templates/komplettansicht.html')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
+    name='komplettansicht',
+    renderer='templates/article_advertorial_komplett.html')
 @zeit.web.view_config(
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     name='komplettansicht',
@@ -37,12 +44,21 @@ class Article(zeit.web.core.view_article.Article,
             return 'column'
         return self.context.header_layout or 'default'
 
+    @zeit.web.reify
+    def has_series_attached(self):
+        return getattr(self.context, 'serie', None)
+
 
 @zeit.web.view_defaults(vertical='zar')
 @zeit.web.view_config(
     name='seite',
     path_info='.*seite-(.*)',
     renderer='templates/article.html')
+@zeit.web.view_config(
+    name='seite',
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
+    path_info='.*seite-(.*)',
+    renderer='templates/article_advertorial.html')
 @zeit.web.view_config(
     name='seite',
     custom_predicates=(zeit.web.core.view.is_paywalled,),

@@ -1,4 +1,8 @@
-<div class="article-header--dark">
+{% block headerseries %}
+    {% include "zeit.web.arbeit:templates/inc/article/series.tpl" %}
+{% endblock %}
+
+<div class="{{ 'article-header' | with_mods('dark', 'has-series' if view.has_series_attached) }}">
     {% block heading %}
         {% include "zeit.web.arbeit:templates/inc/article/heading.tpl" %}
     {% endblock %}

@@ -37,22 +37,7 @@ def test_banner_should_not_be_displayed_on_disabled_cp(testbrowser):
     assert not browser.cssselect('div[class*="ad-tile_"]')
 
 
-def test_banner_tile7_should_appear_on_article_pages(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-magazin/article/03')
-    assert browser.cssselect('#ad-desktop-7')
-    browser = testbrowser('/zeit-magazin/article/03/seite-3')
-    assert browser.cssselect('#ad-desktop-7')
-    browser = testbrowser('/zeit-magazin/article/03/seite-4')
-    assert browser.cssselect('#ad-desktop-7')
-    browser = testbrowser('/zeit-magazin/article/03/seite-7')
-    assert browser.cssselect('#ad-desktop-7')
-
-
-def test_banner_tile8_should_appear_on_article_pages(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_banner_tile8_should_appear_on_article_pages(testbrowser):
     browser = testbrowser('/zeit-magazin/article/03')
     assert browser.cssselect('#ad-desktop-8')
     browser = testbrowser('/zeit-magazin/article/03/seite-3')
@@ -68,15 +53,6 @@ def test_banner_tile3_should_be_displayed_on_pages(testbrowser):
     assert browser.cssselect('#ad-desktop-3')
     browser = testbrowser('/zeit-magazin/centerpage/lebensart')
     assert browser.cssselect('#ad-desktop-3')
-
-
-def test_banner_tile7_should_not_appear_on_short_pages(testbrowser):
-    browser = testbrowser('/zeit-magazin/article/03/seite-2')
-    assert not browser.cssselect('#ad-desktop-7')
-    browser = testbrowser('/zeit-magazin/article/03/seite-5')
-    assert not browser.cssselect('#ad-desktop-7')
-    browser = testbrowser('/zeit-magazin/article/03/seite-6')
-    assert not browser.cssselect('#ad-desktop-7')
 
 
 @pytest.mark.xfail(reason='ad scripts may timeout')
@@ -148,15 +124,11 @@ def test_ad_content_ad_in_article(testbrowser):
     assert browser.cssselect('#iq-artikelanker')
 
 
-def test_adplace4_on_articles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adplace4_on_articles(testbrowser):
     browser = testbrowser('/zeit-magazin/article/01')
     assert len(browser.cssselect('#ad-desktop-4')) == 1
 
 
-def test_adplace16_on_articles(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adplace16_on_articles(testbrowser):
     browser = testbrowser('/zeit-magazin/article/01')
     assert len(browser.cssselect('#ad-desktop-16')) == 1

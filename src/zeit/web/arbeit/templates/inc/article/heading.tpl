@@ -5,6 +5,6 @@
     </span>
     {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
     <span class="article-heading__title">
-        <span class="article-heading__title--underlined">{{- view.title -}}</span>
+        <span class="{{ 'article-heading__title--underlined' if view.is_advertorial else 'article-heading__title--underlined-skip' }}">{{- view.title -}}</span>
     </span>
 </{{ headertag }}>
