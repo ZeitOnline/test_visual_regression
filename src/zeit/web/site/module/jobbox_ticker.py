@@ -32,10 +32,10 @@ class Link(zeit.web.site.area.rss.RSSLink):
 
 
 @zeit.web.register_module('jobbox_ticker')
-class JobboxTicker(
+class JobTicker(
         zeit.web.core.centerpage.Module,
-        zeit.web.arbeit.block.JobboxTicker):
+        zeit.web.core.block.JobTicker):
 
     def __init__(self, context):
-        zeit.web.arbeit.block.JobboxTicker.__init__(self, context)
+        zeit.web.core.block.JobTicker.__init__(self, context)
         zeit.web.core.centerpage.Module.__init__(self, context)

@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - MAINT: Use `node.get()` to access XML attributes
 
+- MAINT: Update to API changes after zeit.content.modules introduction
+
 
 3.99.1 (2017-10-18)
 -------------------
