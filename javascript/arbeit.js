@@ -5,6 +5,7 @@ var $ = require( 'jquery' ),
     triggeredEventTracking = require( 'web.core/triggeredEventTracking' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
+    saveGetToCookie = require( 'web.core/saveGetToCookie' ),
     main = $( '#main' ),
     article = $( '#js-article' ),
     comments = require( 'web.core/comments' ),
@@ -16,6 +17,7 @@ menu.init();
 clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
+saveGetToCookie.init();
 zeit.clearQueue();
 
 // add required jQuery plugins
