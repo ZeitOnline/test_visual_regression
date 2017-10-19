@@ -22,8 +22,6 @@ import zeit.web
 @zeit.web.view_config(
     context=zeit.content.rawxml.interfaces.IRawXML)
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.IFeed)
-@zeit.web.view_config(
     context=zeit.cms.repository.interfaces.IUnknownResource,
     host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
@@ -31,9 +29,6 @@ import zeit.web
     host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
     context=zeit.content.rawxml.interfaces.IRawXML,
-    host_restriction=('xml', 'static', 'scripts'))
-@zeit.web.view_config(
-    context=zeit.content.cp.interfaces.IFeed,
     host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
     context=zeit.content.image.interfaces.IImage,
