@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.100 (unreleased)
+3.100 (2017-10-19)
 ------------------
 
 - MAINT: Use `node.get()` to access XML attributes
