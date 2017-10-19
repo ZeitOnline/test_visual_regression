@@ -1,4 +1,4 @@
-.app-user-feedback
+.app-feedback
 	background: #289562
 	color: #fff
 	padding: remify(30px 10px)
@@ -7,13 +7,12 @@
 	width: calc(100% + 40px)
 	+font-smoothing
 
-.questions-item
-	&__text
+	&__question
 		font-size: remify(20px)
 		font-weight: bolder
 		margin-bottom: remify(30px)
 
-	&__button
+	&__action
 		border-radius: remify(4px)
 		background-color: #ffffff
 		color: $zon-dark-grey
@@ -28,9 +27,3 @@
 		text-transform: uppercase
 		&:last-child
 			margin-bottom: 0
-
-.hidden
-	display: none
-
-.visible
-	display: block
