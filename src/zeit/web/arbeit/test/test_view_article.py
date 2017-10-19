@@ -442,7 +442,8 @@ def test_zar_sharebert_toggle_works(testbrowser, togglepatch):
 
 def test_zar_sharebert_has_correct_attributes(testbrowser):
     browser = testbrowser('/arbeit/article/sharequote/komplettansicht')
-    shareblock_links = browser.cssselect('.js-shareblock')
+    shareblock_links = browser.cssselect(
+        '.js-shareblock .quote-sharing__link--twitter')
     assert len(shareblock_links) == 3
 
     sharelink = shareblock_links[2]
