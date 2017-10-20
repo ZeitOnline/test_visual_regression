@@ -539,6 +539,25 @@ class JobTicker(Block):
         return self.content.landing_url
 
 
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IMail)
+class MailForm(Block):
+
+    def __init__(self, context):
+        self.context = context
+
+    def __getattr__(self, name):
+        return getattr(self.context, name)
+
+    @zeit.web.reify
+    def subjects(self):
+        source = zeit.content.article.edit.interfaces.IMail['subject'].source
+        result = []
+        for value in source(self.context):
+            result.append(source.factory.getTitle(self.context, value))
+        return result
+
+
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPodcast)
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class Podcast(Block):

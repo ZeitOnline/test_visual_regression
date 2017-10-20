@@ -217,6 +217,12 @@ class IPodigee(zope.interface.Interface):
         empty dict."""
 
 
+class IMail(zope.interface.Interface):
+
+    def send(from_, to, subject, body):
+        """Sends an email."""
+
+
 class IMetrics(zope.interface.Interface):
 
     def time(identifier):

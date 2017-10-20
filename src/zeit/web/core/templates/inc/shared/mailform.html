@@ -1,0 +1,25 @@
+{% if request.headers.get('X-Mail-Success') %}
+    <p>{{ block.success_message }}</p>
+{% endif %}
+
+<form action="" method="POST">
+    <input type="hidden" name="action" value="mail"/>
+
+{% if block.subject %}
+    <input type="hidden" name="subject" value="{{ block.subject_display }}"/>
+{% else %}
+    Ich habe Feedback zum Thema
+    <select name="subject">
+    {% for subject in block.subjects %}
+    <option>{{ subject }}</option>
+    {% endfor %}
+    </select>
+{% endif %}
+
+<textarea name="body">
+</textarea>
+
+<input type="text" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)"/>
+
+<button type="submit">Abschicken</button>
+</form>
