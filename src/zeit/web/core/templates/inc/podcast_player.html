@@ -1,13 +1,8 @@
-{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% if not podcast_player_theme %}
 {% set podcast_player_theme = 'default' %}
 {% endif %}
 
 {% set player_configuration = module.player_configuration(podcast_player_theme) %}
-{% set podcast = module.podcast %}
-{% set itunes_id = podcast['itunes_id'] %}
-{% set deezer_url = podcast['deezer_url'] %}
-{% set spotify_url = podcast['spotify_url'] %}
 {% if player_configuration %}
 <script type="text/javascript">
   window.podigee_player_{{ podcast_player_id }} = {{ player_configuration | tojson | safe }};
@@ -17,15 +12,4 @@
  class="podigee-podcast-player"
  src="https://cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js"
  data-configuration="podigee_player_{{ podcast_player_id }}"></script>
-<section class="podigee-podcast__links">
-    {% if itunes_id %}
-    <a class="podigee-podcast__links--itunes" href="{{ settings('itunes_podcast_base_url') ~ itunes_id }}">{{ lama.use_svg_icon('itunes', 'itunes__icon', view.package) }}</a>
-    {% endif %}
-    {% if deezer_url %}
-    <a class="podigee-podcast__links--spotify" href="{{ spotify_url }}">{{ lama.use_svg_icon('spotify', 'spotify__icon', view.package) }}</a>
-    {% endif %}
-    {% if spotify_url %}
-    <a class="podigee-podcast__links--deezer" href="{{ deezer_url }}">{{ lama.use_svg_icon('deezer', 'deezer__icon', view.package) }}</a>
-    {% endif %}
-</section>
 {% endif %}
