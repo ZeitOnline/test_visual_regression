@@ -52,11 +52,7 @@ function appUserFeedback( question ) {
 
     // don't bother users w/ feedback-form if they've already dealt with it
     AppUserFeedback.prototype.setCookie = function() {
-        var now = new Date(),
-            time = now.getTime(),
-            expireTime = time + 31 * 86400000; // one month
-        now.setTime( expireTime );
-        document.cookie = cookieName + '=1;expires=' + now.toGMTString() + ';path=/';
+        window.Zeit.cookieCreate( cookieName, '1', 31, '' );
     };
 
     AppUserFeedback.prototype.renderView = function( config ) {
