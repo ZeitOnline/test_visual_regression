@@ -5,24 +5,17 @@
  * @author  tobias.weiss@zeit.de
  */
 
-function appUserFeedback() {
+function appUserFeedback( question ) {
     'use strict';
     // debug flag for dev purposes
-    var debug = window.location.href.indexOf( 'force-userfeedback' ) > -1;
+    var debug = window.location.href.indexOf( 'force-userfeedback' ) > -1,
+        cookieName = 'zeit_appuserfeedback_' + question;
 
     function AppUserFeedback() {
-        var userAgent = navigator.userAgent || navigator.vendor || window.opera,
-            mobileConf = 'Default',
-            feedbackForm = document.querySelector( '.app-feedback' );
-
-        if ( /android/i.test( userAgent ) ) {
-            mobileConf = 'Android';
-        } else if ( /iPad|iPhone|iPod/.test( userAgent ) && !window.MSStream ) {
-            mobileConf = 'Apple';
-        }
+        var feedbackForm = document.querySelector( '.app-feedback' );
 
         // path to json config
-        this.path = window.location.protocol + '//' + window.location.host + '/json/appUserFeedback' + mobileConf + '.json';
+        this.path = window.location.protocol + '//' + window.location.host + '/json/app_user_feedback/' + question + '.json';
 
         if ( !feedbackForm ) {
             this.init();
@@ -63,7 +56,7 @@ function appUserFeedback() {
             time = now.getTime(),
             expireTime = time + 31 * 86400000; // one month
         now.setTime( expireTime );
-        document.cookie = 'zeit_app_feedback=1;expires=' + now.toGMTString() + ';path=/';
+        document.cookie = cookieName + '=1;expires=' + now.toGMTString() + ';path=/';
     };
 
     AppUserFeedback.prototype.renderView = function( config ) {
@@ -133,7 +126,7 @@ function appUserFeedback() {
     };
 
     // instantiate just once
-    if ( document.cookie.indexOf( 'zeit_app_feedback' ) === -1 || debug ) {
+    if ( document.cookie.indexOf( cookieName ) === -1 || debug ) {
         new AppUserFeedback();
     }
 }
