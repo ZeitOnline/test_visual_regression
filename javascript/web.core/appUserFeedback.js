@@ -50,11 +50,6 @@ function appUserFeedback( question ) {
         });
     };
 
-    // don't bother users w/ feedback-form if they've already dealt with it
-    AppUserFeedback.prototype.setCookie = function() {
-        window.Zeit.cookieCreate( cookieName, '1', 31, '' );
-    };
-
     AppUserFeedback.prototype.renderView = function( config ) {
         // mustache template-data
         var template = require( 'web.core/templates/appUserFeedback.html' ),
@@ -89,6 +84,11 @@ function appUserFeedback( question ) {
                 window.location.href = nextScreen;
             }
         }
+
+        // don't show questions to users which they've already interacted with
+        if ( document.cookie.indexOf( cookieName ) === -1 ) {
+            window.Zeit.cookieCreate( cookieName, '1', 31, '' );
+        }
     };
 
     AppUserFeedback.prototype.addFormListener = function() {
@@ -115,8 +115,6 @@ function appUserFeedback( question ) {
             that.renderView();
         }).then( function() {
             that.addFormListener();
-        }).then( function() {
-            that.setCookie();
         });
     };
 
