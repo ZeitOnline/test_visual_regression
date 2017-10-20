@@ -69,14 +69,16 @@ function appUserFeedback() {
     AppUserFeedback.prototype.renderView = function( config ) {
         // mustache template-data
         var template = require( 'web.core/templates/appUserFeedback.html' ),
-            article = document.querySelector( '.article-page' ),
+            // for multipage view (komplettansicht), we have to select the last page
+            articlePages = document.querySelectorAll( '.article-page' ),
+            articleLastPage = articlePages.item( articlePages.length-1 ),
             currentConfig = !config ? this.responseObj.view_1 : this.responseObj[ config ],
             form = template({
                 question: currentConfig.question,
                 feedbackPositive: currentConfig.feedback_positive,
                 feedbackNegative: currentConfig.feedback_negative
             });
-        article.insertAdjacentHTML( 'afterend', form );
+        articleLastPage.insertAdjacentHTML( 'afterend', form );
         // expose cureent data set to instance's scope
         this.currentConfig = currentConfig;
     };
