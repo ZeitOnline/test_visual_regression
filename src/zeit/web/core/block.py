@@ -556,9 +556,9 @@ class Gallery(Module):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.content).html
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IJobTicker)
-class JobTicker(Block):
+class JobTicker(Module):
 
     def __init__(self, context):
         self.context = context
