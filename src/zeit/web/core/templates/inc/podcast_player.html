@@ -1,3 +1,4 @@
+{% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 {% if not podcast_player_theme %}
 {% set podcast_player_theme = 'default' %}
 {% endif %}
@@ -12,4 +13,9 @@
  class="podigee-podcast-player"
  src="https://cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js"
  data-configuration="podigee_player_{{ podcast_player_id }}"></script>
+<section class="podigee-podcast__links">
+    <a class="podigee-podcast__links--itunes">{{ lama.use_svg_icon('itunes', 'itunes__icon', view.package) }}</a>
+    <a class="podigee-podcast__links--spotify">{{ lama.use_svg_icon('spotify', 'spotify__icon', view.package) }}</a>
+    <a class="podigee-podcast__links--deezer">{{ lama.use_svg_icon('deezer', 'deezer__icon', view.package) }}</a>
+</section>
 {% endif %}
