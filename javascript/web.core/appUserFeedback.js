@@ -22,6 +22,19 @@ function appUserFeedback( question ) {
         }
     }
 
+    /**
+     * tracking function - send events (load, click) to webtrekk
+     * @return void
+     */
+    AppUserFeedback.prototype.track = function( action, question, answer ) {
+        require([ 'web.core/clicktracking' ], function( Clicktracking ) {
+            var data = [ action + '.' + question + '...' + answer, '#app_feedback' ];
+            Clicktracking.send( data );
+        });
+
+
+    };
+
     AppUserFeedback.prototype.getData = function( url ) {
         // Promises working since iOS Safari8, Android Browser 4.4.4
         return new window.Promise( function( resolve, reject ) {
@@ -74,6 +87,8 @@ function appUserFeedback( question ) {
         // remove current view from DOM
         feedbackForm.parentNode.removeChild( feedbackForm );
 
+        this.track( 'content', evt.target.dataset.question, evt.target.dataset.answer );
+
         if ( nextScreen ) {
             // implicit convention: views in our config json files start with "view_"
             if ( nextScreen.indexOf( 'view_' ) === 0 ) {
@@ -115,6 +130,8 @@ function appUserFeedback( question ) {
             that.renderView();
         }).then( function() {
             that.addFormListener();
+        }).then( function() {
+            that.track( 'render', question, '' );
         });
     };
 
