@@ -75,7 +75,7 @@ def test_url_of_image_groups_is_suffixed_with_desktop_on_big_browser_size(
 def test_app_user_feedback_is_working(selenium_driver, testserver):
     driver = selenium_driver
     driver.set_window_size(375, 667)
-    script = 'return window.Zeit.appUserFeedback()'
+    script = 'return window.Zeit.appUserFeedback("app-rating")'
     driver.get(
         '{}/arbeit/article/simple?app-content'.format(
             testserver.url))
