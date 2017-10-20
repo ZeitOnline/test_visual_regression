@@ -15,7 +15,7 @@ function appUserFeedback( question ) {
         var feedbackForm = document.querySelector( '.app-feedback' );
 
         // path to json config
-        this.path = window.location.protocol + '//' + window.location.host + '/json/app_user_feedback/' + question + '.json';
+        this.path = window.location.protocol + '//' + window.location.host + '/json/app-user-feedback/' + question + '.json';
 
         if ( !feedbackForm ) {
             this.init();
