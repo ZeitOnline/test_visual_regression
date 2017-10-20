@@ -19,7 +19,7 @@
  data-configuration="podigee_player_{{ podcast_player_id }}"></script>
 <section class="podigee-podcast__links">
     {% if itunes_id %}
-    <a class="podigee-podcast__links--itunes" href="{{ 'id' ~ itunes_id }}">{{ lama.use_svg_icon('itunes', 'itunes__icon', view.package) }}</a>
+    <a class="podigee-podcast__links--itunes" href="{{ settings('itunes_podcast_base_url') ~ itunes_id }}">{{ lama.use_svg_icon('itunes', 'itunes__icon', view.package) }}</a>
     {% endif %}
     {% if deezer_url %}
     <a class="podigee-podcast__links--spotify" href="{{ spotify_url }}">{{ lama.use_svg_icon('spotify', 'spotify__icon', view.package) }}</a>
