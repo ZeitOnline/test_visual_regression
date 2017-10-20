@@ -69,7 +69,7 @@ function appUserFeedback() {
         // mustache template-data
         var template = require( 'web.core/templates/appUserFeedback.html' ),
             article = document.querySelector( '.article-page' ),
-            currentConfig = !config ? this.responseObj.screen1 : this.responseObj[ config ],
+            currentConfig = !config ? this.responseObj.view_1 : this.responseObj[ config ],
             form = template({
                 question: currentConfig.question,
                 feedbackPositive: currentConfig.feedback_positive,
@@ -83,10 +83,19 @@ function appUserFeedback() {
     AppUserFeedback.prototype.next = function( evt ) {
         var feedbackForm = document.querySelector( '.app-feedback' ),
             nextScreen = this.currentConfig[ 'target_' + evt.target.dataset.action ];
+
+        // remove current view from DOM
         feedbackForm.parentNode.removeChild( feedbackForm );
-        if ( !!nextScreen && nextScreen !== 'false' ) {
-            this.renderForm( nextScreen );
-            this.addFormListener();
+
+        if ( nextScreen ) {
+            // is nextScreen a URL?
+            if ( nextScreen.indexOf( 'http' ) === 0 ) {
+                window.location.href = nextScreen;
+            // if not so, render the next view
+            } else if ( nextScreen !== 'false' ) {
+                this.renderForm( nextScreen );
+                this.addFormListener();
+            }
         }
     };
 
