@@ -15,7 +15,7 @@
 	&__action
 		border-radius: remify(4px)
 		background-color: #ffffff
-		color: $zon-dark-grey
+		color: $grey--mid
 		display: block
 		font-size: remify(15px)
 		font-weight: bolder
@@ -28,3 +28,6 @@
 		text-transform: uppercase
 		&:last-child
 			margin-bottom: 0
+		+on-interaction
+			background-color: $grey--light
+			color: $grey--mid-dark
