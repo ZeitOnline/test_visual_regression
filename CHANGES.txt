@@ -7,10 +7,10 @@ POSTDEPLOY
 - Nothing
 
 
-3.100.1 (unreleased)
+3.101 (unreleased)
 --------------------
 
-- Nothing changed yet.
+- ZON-4257: App update hint: clicktracking, swipe-away, fix condition
 
 
 3.100 (2017-10-19)
