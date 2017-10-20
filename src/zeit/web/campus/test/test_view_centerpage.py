@@ -120,9 +120,9 @@ def test_campus_teaser_topic_has_correct_structure(testbrowser):
     assert len(teaser.cssselect('.teaser-topic-list')) == 1
     assert len(teaser.cssselect('.teaser-topic-item')) == 3
 
-    assert image.attrib['data-src'].endswith(
+    assert image.get('data-src').endswith(
         '/zeit-online/cp-content/ig-1/cinema')
-    assert image.attrib['data-mobile-src'].endswith(
+    assert image.get('data-mobile-src').endswith(
         '/zeit-online/cp-content/ig-1/portrait')
 
 
@@ -137,7 +137,7 @@ def test_campus_teaser_topic_variant_has_correct_structure(testbrowser):
     assert len(select('.teaser-topic-small')) == 2
     assert (
         'cp-content/ig-2/portrait__612x816' in
-        select('.teaser-topic-variant__media-item').pop().attrib['src'])
+        select('.teaser-topic-variant__media-item').pop().get('src'))
 
 
 def test_campus_teaser_debate_has_correct_structure(testbrowser):
@@ -223,58 +223,58 @@ def test_campus_teaser_no_image_fallback_works_as_expected(testbrowser):
     select = testbrowser('/campus/centerpage/index-noimage').cssselect
     assert (
         '/default/teaser_image/' in
-        select('.teaser-lead-portrait__media-item')[0].attrib['src'])
+        select('.teaser-lead-portrait__media-item')[0].get('src'))
     assert (
         '/campus/image/01-junge-vor-unscharfem-hintergrund/' in
-        select('.teaser-lead-portrait__media-item')[1].attrib['src'])
+        select('.teaser-lead-portrait__media-item')[1].get('src'))
     assert (
         '/default/teaser_image/' in
-        select('.teaser-lead-cinema__media-item')[0].attrib['src'])
+        select('.teaser-lead-cinema__media-item')[0].get('src'))
     assert (
         '/campus/image/02-maedchen-koffer-zug/' in
-        select('.teaser-lead-cinema__media-item')[1].attrib['src'])
+        select('.teaser-lead-cinema__media-item')[1].get('src'))
     assert (
         '/default/teaser_image/' in
-        select('.teaser-lead-cinema__media-item')[2].attrib['src'])
+        select('.teaser-lead-cinema__media-item')[2].get('src'))
     assert (
         '/default/teaser_image/' in
-        select('.teaser-wide-large__media-item')[0].attrib['src'])
+        select('.teaser-wide-large__media-item')[0].get('src'))
     assert (
         '/campus/image/02-maedchen-koffer-zug/' in
-        select('.teaser-wide-large__media-item')[1].attrib['src'])
+        select('.teaser-wide-large__media-item')[1].get('src'))
     assert (
         '/default/teaser_image/' in
-        select('.teaser-wide-small__media-item')[0].attrib['src'])
+        select('.teaser-wide-small__media-item')[0].get('src'))
     assert (
         '/campus/image/02-maedchen-koffer-zug/' in
-        select('.teaser-wide-small__media-item')[1].attrib['src'])
+        select('.teaser-wide-small__media-item')[1].get('src'))
     assert (
         '/default/teaser_image/' in
-        select('.teaser-square__media-item')[0].attrib['src'])
+        select('.teaser-square__media-item')[0].get('src'))
     assert (
         '/campus/image/01-junge-vor-unscharfem-hintergrund/' in
-        select('.teaser-square__media-item')[1].attrib['src'])
+        select('.teaser-square__media-item')[1].get('src'))
     assert (
         '/default/teaser_image/' in
-        select('.teaser-graphical__media-item')[0].attrib['src'])
+        select('.teaser-graphical__media-item')[0].get('src'))
     assert (
         '/campus/image/01-junge-vor-unscharfem-hintergrund/' in
-        select('.teaser-graphical__media-item')[1].attrib['src'])
+        select('.teaser-graphical__media-item')[1].get('src'))
     assert (
         '/default/teaser_image/' in
-        select('.teaser-topic-variant__media-item')[0].attrib['src'])
+        select('.teaser-topic-variant__media-item')[0].get('src'))
     assert (
         '/default/teaser_image/' in
-        select('.teaser-topic-small__media-item')[0].attrib['src'])
+        select('.teaser-topic-small__media-item')[0].get('src'))
     assert (
         '/campus/image/02-maedchen-koffer-zug/' in
-        select('.teaser-topic-small__media-item')[1].attrib['src'])
+        select('.teaser-topic-small__media-item')[1].get('src'))
     assert (
         '/default/teaser_image/' in
-        select('.packshot__media-item')[0].attrib['src'])
+        select('.packshot__media-item')[0].get('src'))
     assert (
         '/campus/image/cover/' in
-        select('.packshot__media-item')[1].attrib['src'])
+        select('.packshot__media-item')[1].get('src'))
 
 
 def test_campus_advertorial_teaser(testbrowser):
@@ -297,9 +297,9 @@ def test_paginated_cp_has_correct_teaser_structure(testbrowser):
 def test_campus_toolbox_has_correct_links(testbrowser):
     select = testbrowser('/campus/centerpage/cp-extra-tool-box').cssselect
     assert ('http://studiengaenge.zeit.de/sit' in
-            select('.toolbox__link')[0].attrib['href'])
+            select('.toolbox__link')[0].get('href'))
     assert ('https://jobs.zeit.de/campus/berufstest' in
-            select('.toolbox__link')[1].attrib['href'])
+            select('.toolbox__link')[1].get('href'))
 
 
 def test_campus_flyout_has_correct_links(selenium_driver, testserver):

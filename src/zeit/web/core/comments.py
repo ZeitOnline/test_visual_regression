@@ -346,8 +346,8 @@ class Community(grokcore.component.GlobalUtility):
             ascii = raw.encode('ascii', 'xmlcharrefreplace').strip()
             nodes = lxml.etree.fromstring(ascii).xpath('/nodes/node')
             return {
-                zeit.cms.interfaces.ID_NAMESPACE.rstrip('/') + n.attrib['url']:
-                n.attrib['comment_count'] for n in nodes
+                zeit.cms.interfaces.ID_NAMESPACE.rstrip('/') + n.get('url'):
+                n.get('comment_count') for n in nodes
             }
         except:
             log.warning(

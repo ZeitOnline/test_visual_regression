@@ -42,7 +42,7 @@
 {% block main %}
     <article class="article article--longform" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
-        <div class="article__head-wrap">
+        <div class="article__head-wrap" data-x-marker="header-wrapper">
 
             {% require block = view.header_module %}
                 {% set type = block | block_type %}

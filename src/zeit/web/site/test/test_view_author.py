@@ -225,7 +225,7 @@ def test_author_should_have_user_comments(testbrowser, clock):
         '.user-comment__date')[0].text
 
     assert '?cid=5572182#cid-5572182' in comments[0].cssselect(
-        '.user-comment__article-link')[0].attrib['href']
+        '.user-comment__article-link')[0].get('href')
 
 
 def test_author_biography_should_be_fully_rendered(testbrowser):

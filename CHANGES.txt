@@ -7,10 +7,18 @@ POSTDEPLOY
 - Nothing
 
 
-3.100 (unreleased)
+3.101 (unreleased)
+--------------------
+
+- ZON-4257: App update hint: clicktracking, swipe-away, fix condition
+
+
+3.100 (2017-10-19)
 ------------------
 
-- Nothing changed yet.
+- MAINT: Use `node.get()` to access XML attributes
+
+- MAINT: Update to API changes after zeit.content.modules introduction
 
 
 3.99.1 (2017-10-18)

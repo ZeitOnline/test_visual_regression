@@ -33,13 +33,19 @@ function appUserIsBack( timestamp, options ) {
         var defaults = {
             buttontext: 'Neu laden',
             debug: window.location.href.indexOf( 'debug-userisback' ) !== -1,
-            delta: 5 * 60 * 1000, // 5 minutes
+            delta: 0, // give higher deltas to show lesser messages
             endpoint: window.location.protocol + '//' + window.location.host + '/json/update-time',
             force: window.location.href.indexOf( 'force-userisback' ) !== -1,
             link: window.location.href,
             slug: window.location.pathname,
             text: 'Die Seite wurde aktualisiert'
         };
+
+        // cannot use this.log() here, because that checks options, which do not exist yet.
+        if ( defaults.debug || defaults.force ) {
+            window.console.log( 'timestamp injected: ', timestamp );
+            window.console.log( 'options injected: ', options );
+        }
 
         this.options = this.mixit( options, defaults );
         this.timestamp = timestamp || Date.now();
@@ -122,6 +128,21 @@ function appUserIsBack( timestamp, options ) {
     };
 
     /**
+     * tracking function - send events (load, click) to webtrekk
+     * @return void
+     */
+    AppUserIsBack.prototype.track = function( action ) {
+        this.log( 'Track: ' + action );
+        var that = this;
+        require([ 'web.core/clicktracking' ], function( Clicktracking ) {
+            var data = [ 'appuserisback....' + action, that.options.link.replace( 'http://', '' ) ];
+            Clicktracking.send( data );
+        });
+
+
+    };
+
+    /**
      * show the update message at window bottom
      * @return void
      */
@@ -137,6 +158,42 @@ function appUserIsBack( timestamp, options ) {
                 link: this.options.link
             });
         document.querySelector( 'body' ).insertAdjacentHTML( 'beforeend', html );
+        this.track( 'appear' );
+
+        var that = this; // to use inside the callbacks for that.track()
+
+        document.querySelector( '#app-user-is-back' ).addEventListener( 'click', function() {
+            that.track( 'refreshButton' );
+        });
+        document.querySelector( '#app-user-is-back' ).addEventListener( 'touch', function() {
+            that.track( 'refreshButton' );
+        });
+
+        // enable user to to swipe the message off from the screen
+        require([
+            'jquery',
+            'web.core/plugins/jquery.onSwipe'
+        ], function( $ ) {
+            $( '#app-user-is-back' ).onSwipe(
+                function( element, swipeDirection ) {
+                    var translateVal;
+                    if ( swipeDirection === 'left' || swipeDirection === 'right' ) {
+                        var viewportWidth = $( window ).width();
+                        translateVal = swipeDirection === 'left' ? -viewportWidth : viewportWidth;
+                        // Remove element after upcoming transition has ended
+                        $( element ).one( 'transitionend', function() {
+                            element.parentNode.removeChild( element );
+                            element.style.transition = 'initial';
+                            that.track( 'remove' );
+                        });
+                        // Move element out of the screen
+                        element.style.transition = 'transform 0.15s ease-in';
+                        element.style.transform = 'translateX(' + translateVal + 'px)';
+                    }
+                }
+            );
+        });
+
     };
 
     AppUserIsBack.prototype.init = function() {
@@ -145,10 +202,11 @@ function appUserIsBack( timestamp, options ) {
         }
         var that = this;
         this.get( options.endpoint + options.slug ).then( function( response ) {
+            // check if the website was updated after the page was cached by the app
             if (
                 that.options.force ||
                 ( response.last_published_semantic &&
-                ( that.timestamp - Date.parse( response.last_published_semantic ) ) >= that.options.delta )
+                ( Date.parse( response.last_published_semantic ) - that.timestamp ) >= that.options.delta )
             ) {
                 that.log( 'info', 'lps: ' + Date.parse( response.last_published_semantic ),
                     'now: ' + that.timestamp, 'diff: ',

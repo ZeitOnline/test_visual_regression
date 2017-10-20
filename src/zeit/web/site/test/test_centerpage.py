@@ -221,9 +221,9 @@ def test_centerpage_teaser_topic_has_correct_structure(testbrowser):
     assert len(teaser.cssselect('.teaser-topic-list')) == 1
     assert len(teaser.cssselect('.teaser-topic-item')) == 3
 
-    assert image.attrib['data-src'].endswith(
+    assert image.get('data-src').endswith(
         '/zeit-online/cp-content/ig-1/cinema')
-    assert image.attrib['data-mobile-src'].endswith(
+    assert image.get('data-mobile-src').endswith(
         '/zeit-online/cp-content/ig-1/portrait')
 
 
@@ -248,8 +248,8 @@ def test_link_rel_should_be_set_according_to_pagination(testbrowser, datasolr):
     rel_prev = select('link[rel="prev"]')
     assert len(rel_next) == 1
     assert len(rel_prev) == 1
-    assert '/dynamic/angela-merkel?p=4' in rel_next[0].attrib['href']
-    assert '/dynamic/angela-merkel?p=2' in rel_prev[0].attrib['href']
+    assert '/dynamic/angela-merkel?p=4' in rel_next[0].get('href')
+    assert '/dynamic/angela-merkel?p=2' in rel_prev[0].get('href')
 
 
 def test_link_rel_to_prev_page_should_not_exist_on_first_page(
@@ -259,7 +259,7 @@ def test_link_rel_to_prev_page_should_not_exist_on_first_page(
     rel_prev = select('link[rel="prev"]')
     assert len(rel_next) == 1
     assert len(rel_prev) == 0
-    assert '/dynamic/angela-merkel?p=2' in rel_next[0].attrib['href']
+    assert '/dynamic/angela-merkel?p=2' in rel_next[0].get('href')
 
 
 def test_hp_hides_popover_per_default(selenium_driver, testserver):
