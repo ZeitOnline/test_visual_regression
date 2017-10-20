@@ -2,6 +2,7 @@
  * @fileOverview function for a feedback notification
  * @version  0.1
  * @author  jan-paul.bauer@zeit.de
+ * @author  tobias.weiss@zeit.de
  */
 
 function appUserFeedback() {
