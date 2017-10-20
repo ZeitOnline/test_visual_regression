@@ -71,7 +71,7 @@ function appUserFeedback() {
         var template = require( 'web.core/templates/appUserFeedback.html' ),
             // for multipage view (komplettansicht), we have to select the last page
             articlePages = document.querySelectorAll( '.article-page' ),
-            articleLastPage = articlePages.item( articlePages.length-1 ),
+            articleLastPage = articlePages.item( articlePages.length - 1 ),
             currentConfig = !config ? this.responseObj.view_1 : this.responseObj[ config ],
             form = template({
                 question: currentConfig.question,

@@ -1,11 +1,15 @@
 <div class="app-feedback" >
     <div class="app-feedback__questions">
         <div class="app-feedback__question">{{ question }}</div>
+        {{#feedbackPositive}}
         <a class="app-feedback__action app-feedback__action--positive" data-action="positive" data-wt-link="{ ct : '#app_feedback' , ck:{ 4 : 'mobile', 5 : 'content', 6 : '{{ question }}' , 9 : '{{ feedbackPositive }}'}">
             {{ feedbackPositive }}
         </a>
+        {{/feedbackPositive}}
+        {{#feedbackNegative}}
         <a class="app-feedback__action app-feedback__action--negative" data-action="negative" data-wt-link="{ ct : '#app_feedback' , ck:{ 4 : 'mobile', 5 : 'content', 6 : '{{ question }}' , 9 : '{{ feedbackNegative }}'}">
             {{ feedbackNegative }}
         </a>
+        {{/feedbackNegative}}
     </div>
 </div>
