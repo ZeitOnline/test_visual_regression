@@ -6,7 +6,7 @@
 
 function appUserFeedback() {
     'use strict';
-
+    // debug flag for dev purposes
     var debug = window.location.href.indexOf( 'force-userfeedback' ) > -1;
 
     function AppUserFeedback() {
@@ -65,7 +65,7 @@ function appUserFeedback() {
         document.cookie = 'zeit_app_feedback=1;expires=' + now.toGMTString() + ';path=/';
     };
 
-    AppUserFeedback.prototype.renderForm = function( config ) {
+    AppUserFeedback.prototype.renderView = function( config ) {
         // mustache template-data
         var template = require( 'web.core/templates/appUserFeedback.html' ),
             article = document.querySelector( '.article-page' ),
@@ -89,11 +89,12 @@ function appUserFeedback() {
 
         if ( nextScreen ) {
             // is nextScreen a URL?
-            if ( nextScreen.indexOf( 'http' ) === 0 ) {
+            // it's also possible to specify a zeitapp link (e.g. zeitapp://settings)
+            if ( nextScreen.indexOf( 'http' ) === 0 || nextScreen.indexOf( 'zeitapp' ) === 0 ) {
                 window.location.href = nextScreen;
             // if not so, render the next view
             } else if ( nextScreen !== 'false' ) {
-                this.renderForm( nextScreen );
+                this.renderView( nextScreen );
                 this.addFormListener();
             }
         }
@@ -120,7 +121,7 @@ function appUserFeedback() {
         that.getData( that.path ).then( function( response ) {
             that.responseObj = response;
         }).then( function() {
-            that.renderForm();
+            that.renderView();
         }).then( function() {
             that.addFormListener();
         }).then( function() {
