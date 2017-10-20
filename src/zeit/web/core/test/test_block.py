@@ -576,3 +576,13 @@ def test_podcast_header_should_provide_podlove_data(application):
     assert podlove['title'] == 'Test'
     assert podlove['cover'].startswith('https://cdn.podigee.com')
     assert len(podlove['feeds']) == 4
+
+
+def test_podcast_should_provied_podcast_links(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast')
+    deezer_link = browser.cssselect('.podigee-podcast__links--deezer')[0]
+    assert deezer_link.get('href') == 'http://xml.zeit.de/deezer_url'
+    itunes_link = browser.cssselect('.podigee-podcast__links--itunes')[0]
+    assert itunes_link.get('href') == 'id1656'
+    spotify_link = browser.cssselect('.podigee-podcast__links--spotify')[0]
+    assert spotify_link.get('href') == 'http://xml.zeit.de/spotify_url'
