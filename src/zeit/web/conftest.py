@@ -511,8 +511,7 @@ def mockserver(request):
 
 @pytest.fixture(scope='session')
 def testserver(application_session, request):
-    wsgi_app = wesgi.MiddleWare(
-        application_session, forward_headers=True)
+    wsgi_app = wesgi.MiddleWare(application_session)
     server = waitress.server.create_server(wsgi_app, host='localhost', port=0)
     server.url = 'http://{host}:{port}'.format(
         host=server.effective_host, port=server.effective_port)
