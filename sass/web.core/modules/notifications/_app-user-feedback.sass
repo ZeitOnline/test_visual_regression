@@ -10,7 +10,6 @@
 	&__question
 		font-size: remify(20px)
 		font-weight: bolder
-		margin-bottom: remify(30px)
 
 	&__action
 		border-radius: remify(4px)
@@ -20,14 +19,14 @@
 		font-size: remify(15px)
 		font-weight: bolder
 		line-height: remify(20px)
-		margin: remify(20px) 20%
+		margin: remify(30px) 20% 0
 		min-height: remify(40px)
 		min-width: remify(40px)
 		padding: remify(10px)
 		text-align: center
 		text-transform: uppercase
-		&:last-child
-			margin-bottom: 0
 		+on-interaction
 			background-color: $grey--light
 			color: $grey--mid-dark
+		& + &
+			margin-top: remify(20px)
