@@ -4,6 +4,11 @@ import requests
 import zeit.cms.interfaces
 import zeit.web.core.view_article
 
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
+
 
 def test_amp_disabled_articles_should_redirect_accordingly(testserver):
     resp = requests.get(testserver.url + '/amp/zeit-online/article/01?foo=42',
@@ -65,3 +70,20 @@ def test_url_of_image_groups_is_suffixed_with_desktop_on_big_browser_size(
     driver.get('%s/zeit-online/article/01' % testserver.url)
     body_image = driver.find_element_by_css_selector('.article__media img')
     assert body_image.get_attribute('src').endswith('desktop')
+
+
+def test_app_user_feedback_is_working(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(375, 667)
+    script = 'return window.Zeit.appUserFeedback("app-rating")'
+    driver.get(
+        '{}/arbeit/article/simple?app-content'.format(
+            testserver.url))
+    driver.execute_script(script)
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.app-feedback')))
+        assert True
+    except TimeoutException:
+        assert False, 'appUserFeedback message not shown within 2 seconds'

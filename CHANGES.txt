@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-4257: App update hint: clicktracking, swipe-away, fix condition
 
+- ZON-4200: Implement user feedback survey
+
 
 3.100 (2017-10-19)
 ------------------
