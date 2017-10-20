@@ -84,14 +84,13 @@ function appUserFeedback( question ) {
         feedbackForm.parentNode.removeChild( feedbackForm );
 
         if ( nextScreen ) {
-            // is nextScreen a URL?
-            // it's also possible to specify a zeitapp link (e.g. zeitapp://settings)
-            if ( nextScreen.indexOf( 'http' ) === 0 || nextScreen.indexOf( 'zeitapp' ) === 0 ) {
-                window.location.href = nextScreen;
-            // if not so, render the next view
-            } else if ( nextScreen !== 'false' ) {
+            // implicit convention: views in our config json files start with "view_"
+            if ( nextScreen.indexOf( 'view_' ) === 0 ) {
                 this.renderView( nextScreen );
                 this.addFormListener();
+            } else if ( nextScreen !== 'false' ) {
+                // we trust everything else to be some kind of URL (e.g. zeitapp://settings, http..., mailto:)
+                window.location.href = nextScreen;
             }
         }
     };
