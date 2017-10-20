@@ -139,7 +139,7 @@ def test_zar_teaser_quote_has_correct_structure(testbrowser):
     quote = teaser('http://xml.zeit.de/arbeit/teaser/quote')
     assert len(quote) == 1
     quote_linktitle = quote[0].cssselect(
-        '.teaser-quote__quotelink')[0].attrib['title']
+        '.teaser-quote__quotelink')[0].get('title')
     assert quote_linktitle == 'Quoteteaser - Diese E-Mail sagt: Antworte!'
 
     # Images appear only for columns with an authorimage

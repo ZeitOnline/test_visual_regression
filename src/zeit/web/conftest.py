@@ -163,7 +163,7 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/cp-areas.xml'),
         'vivi_zeit.content.cp_region-config-source': (
             'egg://zeit.web.core/data/config/cp-regions.xml'),
-        'vivi_zeit.cms_source-jobbox-ticker': (
+        'vivi_zeit.content.modules_jobticker-source': (
             'egg://zeit.web.core/data/config/jobboxticker.xml'),
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),

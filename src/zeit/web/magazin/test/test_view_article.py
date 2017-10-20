@@ -33,7 +33,7 @@ def test_longform_contains_subpage_head(testbrowser):
     assert len(headlines) == 4
 
     for i, headline in enumerate(headlines):
-        assert headline.attrib['id'] == 'kapitel{}'.format(i + 1)
+        assert headline.get('id') == 'kapitel{}'.format(i + 1)
 
 
 def test_article_page_should_contain_blocks(httpbrowser):

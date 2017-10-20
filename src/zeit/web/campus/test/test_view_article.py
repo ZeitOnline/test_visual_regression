@@ -23,7 +23,7 @@ def test_article_pagination_on_single_page(testbrowser):
     assert len(select('.article-pager')) == 0
     # assert len(select('.article-toc')) == 0
     button = select('.article-pagination__button')[0]
-    link = select('.article-pagination__link')[0].attrib['href']
+    link = select('.article-pagination__link')[0].get('href')
     assert button.text.strip() == 'Mehr ZEIT Campus'
     assert 'campus/index' in link
 
@@ -208,7 +208,7 @@ def test_campus_article_has_sharing_menu(testbrowser):
     assert len(sharing_menu.cssselect('.sharing-menu__item')) == 4
     assert labels[0].text == 'Auf Facebook teilen'
     assert labels[1].text == 'Twittern'
-    assert 'via=zeitcampus' in links[1].attrib['href']
+    assert 'via=zeitcampus' in links[1].get('href')
 
 
 def test_article_header_default_considers_image_layout(testbrowser):
@@ -241,14 +241,14 @@ def test_article_header_default_considers_image_layout(testbrowser):
 def test_article_has_print_function(testbrowser):
     browser = testbrowser('/campus/article/debate')
     links = browser.cssselect('.print-menu__link')
-    assert (links[0].attrib['href'].endswith(
+    assert (links[0].get('href').endswith(
         '/campus/article/debate?print'))
 
 
 def test_multi_page_article_has_print_link(testbrowser):
     browser = testbrowser('/campus/article/paginated')
     links = browser.cssselect('.print-menu__link')
-    assert (links[0].attrib['href'].endswith(
+    assert (links[0].get('href').endswith(
         '/campus/article/paginated/komplettansicht?print'))
 
 

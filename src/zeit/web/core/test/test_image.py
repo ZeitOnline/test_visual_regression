@@ -293,7 +293,7 @@ def test_variant_source_should_honor_configured_availability(
         application, monkeypatch):
 
     def isAvailable(self, node, context):  # NOQA
-        return 'cinema' not in node.attrib['name']
+        return 'cinema' not in node.get('name')
 
     monkeypatch.setattr(
         zeit.content.image.variant.VariantSource, 'isAvailable', isAvailable)
@@ -359,10 +359,10 @@ def test_image_should_handle_ampersand_captions(testbrowser):
 def test_link_nofollow_should_be_set_in_amp_linked_image(testbrowser):
     browser = testbrowser('/amp/zeit-online/article/amp')
     image_link = browser.cssselect('.figure__link')[0]
-    assert 'nofollow' in image_link.attrib.values()
+    assert image_link.get('rel') == 'nofollow'
 
 
 def test_link_nofollow_should_be_set_in_core_image_template(testbrowser):
     browser = testbrowser('/zeit-online/cp-content/article-03')
     image_link = browser.cssselect('.header-article__media-container a')[0]
-    assert 'nofollow' in image_link.attrib.values()
+    assert image_link.get('rel') == 'nofollow'
