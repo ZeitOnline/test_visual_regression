@@ -560,9 +560,6 @@ class Gallery(Module):
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IJobTicker)
 class JobTicker(Module):
 
-    def __init__(self, context):
-        self.context = context
-
     @zeit.web.reify
     def content(self):
         return self.context.feed
