@@ -498,7 +498,10 @@ class Video(Module):
         self.has_advertisement = self.video.has_advertisement
         self.video_still_copyright = self.video.video_still_copyright
         self.id = self.video.uniqueId.split('/')[-1]  # XXX ugly
-        self.format = self.context.layout
+
+    @zeit.web.reify
+    def layout(self):
+        return self.context.layout
 
     @property
     def highest_rendition(self):
