@@ -47,7 +47,7 @@ def test_video_source_should_be_highest_rendition_url(application):
 )
 def test_video_block_should_produce_markup(layout, klass, tplbrowser):
     block = {'id': 42, 'video_still': 'pic.jpg', 'video': 'fake',
-             'description': 'test', 'layout': layout, 'title': 'title'}
+             'subtitle': 'test', 'layout': layout, 'title': 'title'}
     view = {'package': 'zeit.web.magazin'}
 
     browser = tplbrowser(
