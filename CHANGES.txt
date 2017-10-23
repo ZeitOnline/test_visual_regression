@@ -52,7 +52,7 @@ POSTDEPLOY
 
 - ZON-4243: Add series banner to ZAR articles
 
-- ZON-4120: Add image fallback for series articles
+- ZON-4210: Add image fallback for series articles
 
 - FIX: Center ZAR advertorial-CP heading (minor)
 
