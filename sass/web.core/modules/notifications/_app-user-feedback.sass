@@ -1,0 +1,32 @@
+.app-feedback
+	background: #289562
+	color: #fff
+	padding: remify(30px 10px)
+	margin: 0 0 remify(50px) remify(-20px)
+	text-align: center
+	width: calc(100% + 40px)
+	+font-smoothing
+
+	&__question
+		font-size: remify(20px)
+		font-weight: bolder
+
+	&__action
+		border-radius: remify(4px)
+		background-color: #ffffff
+		color: $grey--mid
+		display: block
+		font-size: remify(15px)
+		font-weight: bolder
+		line-height: remify(20px)
+		margin: remify(30px) 20% 0
+		min-height: remify(40px)
+		min-width: remify(40px)
+		padding: remify(10px)
+		text-align: center
+		text-transform: uppercase
+		+on-interaction
+			background-color: $grey--light
+			color: $grey--mid-dark
+		& + &
+			margin-top: remify(20px)
