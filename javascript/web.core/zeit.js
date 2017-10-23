@@ -30,7 +30,13 @@ var Zeit = window.Zeit || {},
             var expires = '';
 
             if ( arguments.length < 4 ) {
-                domain = 'zeit.de';
+                if ( window.location.hostname === 'localhost' ) {
+                    domain = 'localhost'; // local development
+                } else if ( window.location.hostname === '127.0.0.1' ) {
+                    domain = '127.0.0.1'; // tests
+                } else {
+                    domain = 'zeit.de';
+                }
             }
 
             if ( days ) {
