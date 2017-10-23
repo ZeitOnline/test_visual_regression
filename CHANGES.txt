@@ -10,7 +10,7 @@ POSTDEPLOY
 3.102 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: Make series image fallback fill color work with solr results
 
 
 3.101.1 (2017-10-20)
