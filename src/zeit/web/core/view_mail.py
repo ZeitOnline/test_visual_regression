@@ -46,9 +46,12 @@ class SendMail(zeit.web.core.view.Base):
     def send(self):
         mail = zope.component.getUtility(zeit.web.core.interfaces.IMail)
         post = self.request.POST
-        mail.send(post['from'], self.recipient, post['subject'], post['body'])
+        body = post['body'] + u'\n\n-- \nGesendet von %s' % self.request.url
+        log.info(
+            'Sending email to %s at %s', self.recipient, self.request.path)
+        mail.send(post['from'], self.recipient, post['subject'], body)
 
-    @property
+    @zeit.web.reify
     def recipient(self):
         module = self.context.body.find_first(
             zeit.content.modules.interfaces.IMail)

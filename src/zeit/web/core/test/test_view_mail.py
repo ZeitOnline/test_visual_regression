@@ -10,7 +10,9 @@ def test_post_should_trigger_mail_then_render_content_again(testbrowser):
     b.getForm(index=1).submit()  # 0=searchform
 
     mail = zope.component.getUtility(zeit.web.core.interfaces.IMail)
-    mail.send.assert_called_with('', 'test@example.com', 'Apps', 'Emailbody')
+    mail.send.assert_called_with(
+        '', 'test@example.com', 'Apps', 'Emailbody\n\n-- \nGesendet von '
+        'http://localhost/zeit-online/article/feedback')
 
     assert 'Haben Sie Feedback?' in b.contents
     assert 'Ihr Feedback wurde versendet' in b.contents
