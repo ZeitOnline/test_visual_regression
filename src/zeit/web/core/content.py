@@ -225,6 +225,11 @@ class LazyProxy(object):
         fill_color = self.__proxy__.get('teaser_image_fill_color')
         if fill_color:
             return fill_color
+        # Since most images don't have a fill color, it's not worth exposing
+        # the proxy just for this. But in some cases, we'll be exposed anyway,
+        # e.g. for ISeriesArticleWithFallbackImage, and then we make use of it.
+        elif self.__exposed__:
+            return self.__origin__.fill_color
 
     # Proxy zeit.web.core.interfaces.IExpiration
     @property
