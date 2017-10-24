@@ -1,0 +1,119 @@
+.feedback-section
+	&__headline
+		font-size: remify(40px)
+		text-align: center
+		+respond-min($break-tablet-min)
+			padding: 0
+			margin: 0
+			text-align: left
+		&:before
+			background-color: #269661
+			border-radius: 50%
+			box-shadow: remify(1px 1px 2px 0px) rgba(0, 0, 0, 0.25)
+			content: url('data:image/svg+xml; utf8, <svg width="80px" height= "80px" viewBox="0 0 65 65" fill="white" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M19.4803371,33.7297297 L14.1973684,39 L14.1973684,33.7297297 L13.4868421,33.7297297 C12.1133971,33.7297297 11,32.6285922 11,31.2702703 L11,15.4594595 C11,14.1011375 12.1133971,13 13.4868421,13 L35.5131579,13 C36.8866029,13 38,14.1011375 38,15.4594595 L38,31.2702703 C38,32.6285922 36.8866029,33.7297297 35.5131579,33.7297297 L19.4803371,33.7297297 Z M23.9060484,26.9595238 C23.5125455,26.9595238 23.1935484,27.2785209 23.1935484,27.6720238 L23.1935484,28.8470238 C23.1935484,29.2405267 23.5125455,29.5595238 23.9060484,29.5595238 L25.0939516,29.5595238 C25.4874545,29.5595238 25.8064516,29.2405267 25.8064516,28.8470238 L25.8064516,27.6720238 C25.8064516,27.2785209 25.4874545,26.9595238 25.0939516,26.9595238 L23.9060484,26.9595238 Z M23.9060484,17.3333333 C23.5125455,17.3333333 23.1935484,17.6523304 23.1935484,18.0458333 L23.1935484,24.4208333 C23.1935484,24.8143362 23.5125455,25.1333333 23.9060484,25.1333333 L23.9060484,25.1333333 L25.0939516,25.1333333 C25.4874545,25.1333333 25.8064516,24.8143362 25.8064516,24.4208333 L25.8064516,18.0458333 C25.8064516,17.6523304 25.4874545,17.3333333 25.0939516,17.3333333 L23.9060484,17.3333333 Z"></path></svg>')
+			display: block
+			height: remify(64px)
+			overflow: hidden
+			margin: 0 auto remify(10px)
+			padding: remify(6px) 0 0 remify(5px)
+			width: remify(65px)
+			+respond-min($break-tablet-min)
+				float: left
+				margin-right: 15px
+
+	&__paragraph
+		color: $grey--mid-dark
+		padding-bottom: remify(10px)
+		+respond-min($break-tablet-min)
+			display: flex
+			margin-top: remify(5px)
+
+	&__response--success
+		background-color: #d4e8d4
+		color: #278d27
+		padding: .75em
+		text-align: center
+
+.feedback-form
+	&__inner,
+	&__error,
+	&__success
+		background-color: $grey--light
+		margin: 0 0 remify(20px) remify(-20px)
+		padding: remify(15px 20px)
+		width: calc(100% + 40px)
+
+	&__button
+		+clearfix
+		+zon-button-inky
+		border: none
+		display: block
+		font-size: 0.9rem
+		margin: 0 auto
+		min-height: remify(40px)
+		min-width: remify(180px)
+
+	&__error
+		background-color: #E1C2C4
+		color: #940009
+		display: none
+		padding: remify(25px)
+		text-align: center
+
+	&__errortextarea
+		color: #940009
+		font-size: 0.85rem
+		margin: remify(10px) 0
+
+	&__success
+		background-color: #cfeac7
+		color: #005600
+		padding: remify(25px)
+		text-align: center
+
+	&__input,
+	&__select select,
+	&__textarea,
+	&__bgerror
+		background-color: $white
+		border: remify(1px) solid #cecece
+		border-radius: remify(4px)
+		color: $grey
+		margin: remify(8px) 0
+		min-height: remify(40px)
+		width: 100%
+
+	&__bgerror
+		background-color: #E1C2C4 !important
+		border: 2px solid #940009
+
+	&__captcha,
+	&__recaptcha-response,
+	&__recaptcha-frame
+		height: remify(424px)
+		width: remify(302px)
+		margin: 0 auto
+
+	&__captcha
+		height: auto
+
+	&__select
+		position: relative
+		&:after
+			color: $grey
+			content: "\203A"
+			font-size: 1.5rem
+			position: absolute
+			right: remify(15px)
+			transform: rotate(90deg)
+			top: remify(12px)
+
+		select
+			-moz-appearance: none
+			-webkit-appearance: none
+			color: $grey
+			height: remify(18px)
+			padding-left: remify(13px)
+
+	&__label
+		color: $grey
