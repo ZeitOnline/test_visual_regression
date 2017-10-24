@@ -8,6 +8,7 @@ import zeit.content.article.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
+import zeit.web.core.content
 
 
 class IByline(zope.interface.Interface):
@@ -203,7 +204,7 @@ class StructuredDataByline(Byline):
 @grokcore.component.adapter(
     # XXX We'd rather use the class `LaxyProxy`, but that seems to have not
     # enough specificity.
-    zeit.web.core.utils.ILazyProxy)
+    zeit.web.core.content.ILazyProxy)
 @grokcore.component.implementer(IByline)
 class ProxyByline(Byline):
 
@@ -222,7 +223,7 @@ class ProxyByline(Byline):
 
 
 @grokcore.component.adapter(
-    zeit.web.core.utils.ILazyProxy, name='author')
+    zeit.web.core.content.ILazyProxy, name='author')
 @grokcore.component.implementer(IByline)
 class ProxyAuthorByline(ProxyByline, StructuredDataByline):
     pass

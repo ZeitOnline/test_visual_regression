@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4184: Introduce `narrow` header for games articles that displays the image with column-width instead of large
 
+- MAINT: Move stuff out of the utils grabbag into their own modules
+
 
 3.101.3 (2017-10-23)
 --------------------
