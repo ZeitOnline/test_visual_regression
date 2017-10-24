@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3934: Store DPV icode value from GET in cookie
 
+- ZON-4184: Introduce `narrow` header for games articles that displays the image with column-width instead of large
+
 
 3.101.3 (2017-10-23)
 --------------------
