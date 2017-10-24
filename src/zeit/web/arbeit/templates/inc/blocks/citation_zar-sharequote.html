@@ -3,7 +3,7 @@
 {% block citation_class %}quote quote--share{% endblock%}
 
 {# w3c says: "Element aside not allowed as child of element figure." #}
-
+{% block article_item %}{% endblock %}
 {% block citation_after_block %}
     {% if toggles('arbeit_quote_sharing') -%}
 

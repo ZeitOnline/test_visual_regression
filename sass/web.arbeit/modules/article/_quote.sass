@@ -42,10 +42,7 @@
 .quote--share
 	background-color: $zar-sun-yellow
 	width: 100%
-
-	// TODO: Warum ist das überhaupt ein article__item? Und die Buttons nicht?
-	// Und muss das so kompliziert sein???
-	&.article__item
+	&:not(.quote-sharing)
 		margin-bottom: 0
 		padding: remify($page-padding--small)
 		+respond-min($break-tablet-min)
