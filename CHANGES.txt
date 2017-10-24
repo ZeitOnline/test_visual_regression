@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3934: Store DPV icode value from GET in cookie
 
+- MAINT: Move stuff out of the utils grabbag into their own modules
+
 
 3.101.3 (2017-10-23)
 --------------------
