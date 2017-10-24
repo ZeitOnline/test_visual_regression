@@ -1,0 +1,13 @@
+<div class="app-feedback">
+    <div class="app-feedback__question">{{ question }}</div>
+    {{#feedbackPositive}}
+    <a class="app-feedback__action app-feedback__action--positive" data-action="positive" data-question="{{ question }}" data-answer="{{ feedbackPositive }}">
+        {{ feedbackPositive }}
+    </a>
+    {{/feedbackPositive}}
+    {{#feedbackNegative}}
+    <a class="app-feedback__action app-feedback__action--negative" data-action="negative" data-question="{{ question }}" data-answer="{{ feedbackNegative }}">
+        {{ feedbackNegative }}
+    </a>
+    {{/feedbackNegative}}
+</div>
