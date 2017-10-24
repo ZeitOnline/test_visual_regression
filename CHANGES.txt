@@ -7,7 +7,7 @@ POSTDEPLOY
 - Header "narrow" in http://vivi.zeit.de/repository/data/article-templates.xml eintragen
 
 
-3.102 (unreleased)
+3.102 (2017-10-24)
 ------------------
 
 - ZON-3934: Store DPV icode value from GET in cookie
