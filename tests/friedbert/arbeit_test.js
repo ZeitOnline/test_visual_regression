@@ -49,6 +49,7 @@ casper.test.begin('Friedbert visual tests for vertical ARBEIT', function (test) 
     'http://localhost:9090/arbeit/article/paginated',
     'http://localhost:9090/arbeit/article/podcast',
     'http://localhost:9090/arbeit/article/quotes',
+    'http://localhost:9090/arbeit/article/sharequote',
     'http://localhost:9090/arbeit/article/simple-long-title',
     'http://localhost:9090/arbeit/article/simple-nextread',
     'http://localhost:9090/arbeit/centerpage/jobbox-dropdown',
