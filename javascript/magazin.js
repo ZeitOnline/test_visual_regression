@@ -10,6 +10,7 @@ var $ = require( 'jquery' ),
     errors = require( 'web.magazin/errors' ),
     cards = require( 'web.magazin/cards' ),
     photocluster = require( 'web.magazin/photocluster' ),
+    saveGetToCookie = require( 'web.core/saveGetToCookie' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     article = document.getElementById( 'js-article' );
 
@@ -24,6 +25,7 @@ triggeredEventTracking.init();
 adReload.init();
 errors.init();
 cards.init();
+saveGetToCookie.init();
 zeit.clearQueue();
 
 if ( article ) {
