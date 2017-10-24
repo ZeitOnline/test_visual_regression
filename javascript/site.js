@@ -36,6 +36,7 @@ zeit.clearQueue();
 
 // add required jQuery plugins
 require( 'velocity.ui' );
+require( 'web.core/formValidation' );
 require( 'web.core/plugins/jquery.scrollIntoView' ); // plugin used by other plugins
 require( 'web.core/plugins/jquery.animatescroll' );
 require( 'web.core/plugins/jquery.infobox' );
