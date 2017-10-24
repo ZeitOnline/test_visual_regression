@@ -8,6 +8,7 @@ var $ = require( 'jquery' ),
     menu = require( 'web.core/menu' ),
     comments = require( 'web.core/comments' ),
     articledate = require( 'web.core/articledate' ),
+    saveGetToCookie = require( 'web.core/saveGetToCookie' ),
     article = document.getElementById( 'js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     main = $( '#main' );
@@ -21,6 +22,7 @@ menu.init();
 clicktracking.init();
 triggeredEventTracking.init();
 adReload.init();
+saveGetToCookie.init();
 zeit.clearQueue();
 
 if ( article ) {

@@ -30,7 +30,7 @@ var Zeit = window.Zeit || {},
             var expires = '';
 
             if ( arguments.length < 4 ) {
-                domain = 'zeit.de';
+                domain = window.Zeit.cookieFallbackDomain;
             }
 
             if ( days ) {
@@ -58,6 +58,10 @@ Zeit.throttle = require( 'web.core/throttle' );
 // special app functionality
 if ( Zeit.isWrapped || window.location.href.indexOf( 'force-userisback' ) !== -1 ) {
     Zeit.appUserIsBack = require( 'web.core/appUserIsBack' );
+}
+
+if ( Zeit.isWrapped || window.location.href.indexOf( 'force-userfeedback' ) !== -1 ) {
+    Zeit.appUserFeedback = require( 'web.core/appUserFeedback' );
 }
 
 module.exports = Zeit;

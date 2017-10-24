@@ -80,6 +80,7 @@ def app_settings(mockserver):
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
+        'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
         'community_host': mockserver.url + '/comments',
         'community_admin_host': 'http://community_admin',
@@ -163,7 +164,7 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/cp-areas.xml'),
         'vivi_zeit.content.cp_region-config-source': (
             'egg://zeit.web.core/data/config/cp-regions.xml'),
-        'vivi_zeit.cms_source-jobbox-ticker': (
+        'vivi_zeit.content.modules_jobticker-source': (
             'egg://zeit.web.core/data/config/jobboxticker.xml'),
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
@@ -511,11 +512,9 @@ def mockserver(request):
 
 @pytest.fixture(scope='session')
 def testserver(application_session, request):
-    wsgi_app = wesgi.MiddleWare(
-        application_session, forward_headers=True)
+    wsgi_app = wesgi.MiddleWare(application_session)
     server = waitress.server.create_server(wsgi_app, host='localhost', port=0)
-    server.url = 'http://{host}:{port}'.format(
-        host=server.effective_host, port=server.effective_port)
+    server.url = 'http://localhost:{port}'.format(port=server.effective_port)
     thread = threading.Thread(target=server.run)
     thread.daemon = True
     thread.start()

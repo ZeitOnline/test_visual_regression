@@ -514,6 +514,31 @@ class Gallery(Block):
         return zeit.wysiwyg.interfaces.IHTMLContent(self.context).html
 
 
+@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IJobTicker)
+class JobTicker(Block):
+
+    def __init__(self, context):
+        self.context = context
+
+    @zeit.web.reify
+    def content(self):
+        return self.context.feed
+
+    @zeit.web.reify
+    def items(self):
+        return list(zeit.web.site.area.rss.parse_feed(
+            self.content.feed_url, 'jobbox_ticker'))
+
+    @zeit.web.reify
+    def teaser_text(self):
+        return self.content.teaser
+
+    @zeit.web.reify
+    def landing_page_url(self):
+        return self.content.landing_url
+
+
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPodcast)
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class Podcast(Block):
