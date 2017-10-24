@@ -338,7 +338,6 @@ class Image(Block):
     def __init__(self, context):
         self.context = context
         self.display_mode = context.display_mode
-        self.block_type = 'image'
         self.variant_name = context.variant_name
         try:
             image = zeit.content.image.interfaces.IImages(self).image
@@ -371,15 +370,14 @@ class Image(Block):
 @grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
 class HeaderImage(Image):
 
-    block_type = 'image'
-
     def __init__(self, model_block, header):
         super(HeaderImage, self).__init__(model_block)
-        # XXX Header images should not use `display_mode` at all, they should
-        # depend on article.header_layout instead. But since we mostly reuse
-        # the normal image templates for the header image, we pretend a fixed
-        # display_mode accordingly.
-        self.display_mode = 'large'
+        if getattr(self, 'block_type', None) == 'infographic':
+            # XXX Annoying special case, header images don't usually use
+            # display_mode but rather handle their display in the respective
+            # header template, but infographics have their own template that
+            # does not distinguish between header and body (at the moment).
+            self.display_mode = 'large'
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)

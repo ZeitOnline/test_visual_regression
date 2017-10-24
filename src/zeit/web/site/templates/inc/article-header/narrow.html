@@ -1,0 +1,7 @@
+{%- extends "zeit.web.site:templates/inc/article-header/default.html" -%}
+
+{% block headermodule %}
+    {% set article_header_image_figure_modifiers = 'article__item' | with_mods('apart') %}
+
+    {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
+{% endblock %}
