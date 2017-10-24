@@ -45,8 +45,8 @@ import zeit.solr.interfaces
 
 import zeit.web.core.application
 import zeit.web.core.routing
+import zeit.web.core.solr
 import zeit.web.core.utils
-import zeit.web.core.view
 
 
 log = logging.getLogger(__name__)
@@ -873,7 +873,7 @@ def datasolr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.utils.DataSolr())
+    zope.component.provideUtility(zeit.web.core.solr.DataSolr())
 
 
 @pytest.fixture(scope='session')

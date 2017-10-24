@@ -1,0 +1,16 @@
+{%- extends "zeit.web.core:templates/inc/asset/image_linked.tpl" -%}
+
+{% set image = get_image(block, fallback=False) %}
+{% set module_layout = 'article' %}
+{% set href = image.href %}
+{% set image_itemprop = 'image' %}
+{# Set by the respective article header template #}
+{% set media_block_additional_class = article_header_image_figure_modifiers %}
+
+{% block image_additional_data_attributes %} data-ct-block="image"{% endblock %}
+{% block image_link_additional_data_attributes %} data-ct-label="image"{% endblock %}
+
+{% block media_caption_content %}
+    <span class="figure__text" itemprop="caption">{{ image.caption }}</span>
+    {{ super() }}
+{% endblock %}

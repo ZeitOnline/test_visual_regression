@@ -4,13 +4,29 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Nothing
+- Header "narrow" in http://vivi.zeit.de/repository/data/article-templates.xml eintragen
 
 
-3.102 (unreleased)
+3.102.2 (unreleased)
+--------------------
+
+- Nothing changed yet.
+
+
+3.102.1 (2017-10-24)
+--------------------
+
+- FIX: Fix merge mistake, reapply 26b21d2 which was lost in b86dc31
+
+
+3.102 (2017-10-24)
 ------------------
 
 - ZON-3934: Store DPV icode value from GET in cookie
+
+- ZON-4184: Introduce `narrow` header for games articles that displays the image with column-width instead of large
+
+- MAINT: Move stuff out of the utils grabbag into their own modules
 
 
 3.101.3 (2017-10-23)
