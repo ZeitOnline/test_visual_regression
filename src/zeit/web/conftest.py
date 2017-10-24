@@ -513,8 +513,7 @@ def mockserver(request):
 def testserver(application_session, request):
     wsgi_app = wesgi.MiddleWare(application_session)
     server = waitress.server.create_server(wsgi_app, host='localhost', port=0)
-    server.url = 'http://{host}:{port}'.format(
-        host=server.effective_host, port=server.effective_port)
+    server.url = 'http://localhost:{port}'.format(port=server.effective_port)
     thread = threading.Thread(target=server.run)
     thread.daemon = True
     thread.start()
