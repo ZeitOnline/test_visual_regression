@@ -7,10 +7,10 @@ POSTDEPLOY
 - Header "narrow" in http://vivi.zeit.de/repository/data/article-templates.xml eintragen
 
 
-3.103 (unreleased)
+3.102.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: Fix merge mistake, reapply 26b21d2 which was lost in b86dc31
 
 
 3.102 (2017-10-24)
