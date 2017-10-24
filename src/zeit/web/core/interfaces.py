@@ -223,6 +223,12 @@ class IMail(zope.interface.Interface):
         """Sends an email."""
 
 
+class ICaptcha(zope.interface.Interface):
+
+    def verify(captcha_response):
+        """Returns True if captcha is valid."""
+
+
 class IMetrics(zope.interface.Interface):
 
     def time(identifier):

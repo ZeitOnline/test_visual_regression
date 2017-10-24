@@ -40,6 +40,9 @@ class SendMail(zeit.web.core.view.Base):
 
     def __call__(self):
         super(SendMail, self).__call__()
+        captcha = zope.component.getUtility(zeit.web.core.interfaces.ICaptcha)
+        if not captcha.verify(self.request.POST.get('g-recaptcha-response')):
+            raise pyramid.httpexceptions.HTTPBadRequest('captcha invalid')
         self.send()
         return self.render_original_view()
 

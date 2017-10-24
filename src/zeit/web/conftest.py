@@ -328,6 +328,9 @@ def application_session(app_settings, request):
     zope.component.provideUtility(mock.Mock(),
                                   zeit.objectlog.interfaces.IObjectLog)
     zope.component.provideUtility(mock.Mock(), zeit.web.core.interfaces.IMail)
+    captcha = mock.Mock()
+    captcha.verify.return_value = True
+    zope.component.provideUtility(captcha, zeit.web.core.interfaces.ICaptcha)
     # ZODB needs to come after ZCML is set up by the Application.
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
