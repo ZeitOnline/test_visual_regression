@@ -10,7 +10,7 @@ POSTDEPLOY
 3.102 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-3934: Store DPV icode value from GET in cookie
 
 
 3.101.3 (2017-10-23)
