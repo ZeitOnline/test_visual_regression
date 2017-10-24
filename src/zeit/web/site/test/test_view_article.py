@@ -2292,3 +2292,10 @@ def test_zplus_badge_has_no_link_if_volumes_unpublished(
 def test_advertorial_has_no_home_button_as_pagination(testbrowser):
     browser = testbrowser('/zeit-online/article/advertorial-onepage')
     assert len(browser.cssselect('.article-pagination__link')) == 0
+
+
+def test_narrow_header_should_render_image_column_width(testbrowser):
+    browser = testbrowser('/zeit-online/article/narrow')
+    figure = browser.cssselect('.article-header figure')[0]
+    assert 'article__item--wide' not in figure.get('class')
+    assert 'article__item--apart' in figure.get('class')
