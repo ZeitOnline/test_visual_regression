@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import zeit.web.site.view
 
+import jwt
+import zope.component
+
 
 def test_framebuilder_should_set_ressort(application, dummy_request):
     dummy_request.GET['ressort'] = 'kultur'
@@ -361,3 +364,25 @@ def test_framebuilder_uses_ssl_assets(testbrowser):
     assert '{}js/vendor/modernizr-custom.js'.format(
         ssl_str) in browser.contents
     assert '{}js/web.site/frame.js'.format(ssl_str) in browser.contents
+
+
+# needs selenium because of esi include
+def test_framebuilder_does_not_render_login_data(
+        selenium_driver, testserver, sso_keypair):
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+
+    # add_cookie() only works for the domain of the last get(), sigh.
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    driver.add_cookie({'name': 'my_sso_cookie', 'value': sso_cookie})
+
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    assert len(select('.nav__user-name')) == 1
+
+    driver.get('{}/framebuilder'.format(testserver.url))
+    assert len(select('.nav__user-name')) == 0
