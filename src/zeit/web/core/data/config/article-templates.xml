@@ -13,6 +13,9 @@
     <header name="embed">
       <title>Embed-Header</title>
     </header>
+    <header name="narrow">
+      <title>Spiele</title>
+    </header>
   </template>
   <template name="zon-liveblog" available="zeit.cms.section.interfaces.IZONContent">
     <title>Liveblog</title>
