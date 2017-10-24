@@ -30,11 +30,7 @@ var Zeit = window.Zeit || {},
             var expires = '';
 
             if ( arguments.length < 4 ) {
-                domain = window.location.hostname;
-                if ( domain.indexOf( 'zeit.de' ) > -1 ) {
-                    // strip possible subdomains, preserving "zeit.de"
-                    domain = domain.split('.').slice(-2).join('.');
-                }
+                domain = window.Zeit.cookieFallbackDomain;
             }
 
             if ( days ) {

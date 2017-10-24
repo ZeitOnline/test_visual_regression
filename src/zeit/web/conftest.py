@@ -80,6 +80,7 @@ def app_settings(mockserver):
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
+        'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
         'community_host': mockserver.url + '/comments',
         'community_admin_host': 'http://community_admin',
