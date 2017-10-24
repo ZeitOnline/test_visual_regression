@@ -7,6 +7,12 @@ POSTDEPLOY
 - Header "narrow" in http://vivi.zeit.de/repository/data/article-templates.xml eintragen
 
 
+3.103 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 3.102 (2017-10-24)
 ------------------
 
