@@ -47,7 +47,7 @@
             {% require block = view.header_module %}
                 {% set type = block | block_type %}
                 {% include [
-                    "zeit.web.magazin:templates/inc/blocks/header{0}-longform.html".format(type),
+                    "zeit.web.magazin:templates/inc/blocks/{0}_longform.html".format(type),
                     "zeit.web.magazin:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
             {% endrequire %}
 

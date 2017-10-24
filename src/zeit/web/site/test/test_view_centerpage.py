@@ -2380,6 +2380,21 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
     assert not image2.get('data-src').endswith('__')
 
 
+def test_dynamic_cps_should_use_actual_fill_color_if_exposed_anyway(
+        testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'uniqueId': ('http://xml.zeit.de/zeit-online/article'
+                     '/podcast-header-serie'),
+        'teaserText': 'text',
+        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
+        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
+
+    browser = testbrowser('/serie/app-kritik')
+    image = browser.cssselect('.cp-area--ranking article img')[0]
+    assert image.get('data-src').endswith('__EEB200')
+
+
 def test_dossier_teaser_should_be_rendered(testbrowser):
     browser = testbrowser('/zeit-online/dossier-teaser')
     teaser = browser.cssselect('.cp-area.cp-area--solo .teaser-dossier')

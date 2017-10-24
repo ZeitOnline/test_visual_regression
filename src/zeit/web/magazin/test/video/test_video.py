@@ -72,7 +72,7 @@ def test_headervideo_block_should_produce_markup(tplbrowser):
              'video_still': 'pic.jpg'}
 
     browser = tplbrowser(
-        'zeit.web.magazin:templates/inc/blocks/headervideo-longform.html',
+        'zeit.web.magazin:templates/inc/blocks/video_longform.html',
         block=block)
 
     assert browser.cssselect('div')[0].get('data-backgroundvideo') == '42'
@@ -85,7 +85,7 @@ def test_headervideo_block_should_produce_markup(tplbrowser):
 
 
 def test_headervideo_block_should_handle_video_id_correctly(tplbrowser):
-    tpl = 'zeit.web.magazin:templates/inc/blocks/headervideo-longform.html'
+    tpl = 'zeit.web.magazin:templates/inc/blocks/video_longform.html'
     block = mock.Mock()
 
     # assert empty template

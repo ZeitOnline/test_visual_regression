@@ -1,0 +1,25 @@
+{  "view_1":
+    {
+      "question": "Gefällt Ihnen die ZEIT ONLINE App?",
+      "feedback_positive": "ja",
+      "target_positive": "view_2",
+      "feedback_negative": "nein",
+      "target_negative": "view_3"
+    },
+    "view_2":
+    {
+      "question": "Wollen Sie die App bewerten?",
+      "feedback_positive": "ja",
+      "target_positive": "view_3",
+      "feedback_negative": "nein, danke",
+      "target_negative": ""
+    },
+    "view_3":
+    {
+      "question": "Wollen Sie uns Feedback geben?",
+      "feedback_positive": "ja",
+      "target_positive": "https://example.com",
+      "feedback_negative": "nein",
+      "target_negative": ""
+    }
+}

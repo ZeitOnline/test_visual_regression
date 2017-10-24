@@ -14,7 +14,7 @@
     <utility factory=".reach.Reach" />
 
     <adapter
-      factory=".utils.LazyProxy"
+      factory=".content.LazyProxy"
       provides="zeit.cms.interfaces.ICMSContent"
       />
 

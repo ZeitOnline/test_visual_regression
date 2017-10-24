@@ -4,8 +4,7 @@ import zope.component
 
 import zeit.content.cp.interfaces
 
-import zeit.web.core.area.ranking
-import zeit.web.core.utils
+import zeit.web.core.solr
 import zeit.web.site.area.overview
 
 
@@ -134,7 +133,7 @@ def test_overview_should_render_cover_image_from_solr_result(testbrowser):
 def test_default_teaser_should_not_expose_ranking_area_proxies(
         testbrowser, datasolr, monkeypatch):
     log = mock.Mock()
-    monkeypatch.setattr(zeit.web.core.utils, 'log', log)
+    monkeypatch.setattr(zeit.web.core.solr, 'log', log)
 
     monkeypatch.setattr(
         zeit.web.core.comments.Community, 'get_comment_counts',
@@ -153,10 +152,10 @@ def test_tms_query_should_not_expose_ranking_area_proxies(
     previous = zope.component.queryUtility(zeit.retresco.interfaces.ITMS)
     if previous:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.utils.DataTMS())
+    zope.component.provideUtility(zeit.web.core.solr.DataTMS())
 
     log = mock.Mock()
-    monkeypatch.setattr(zeit.web.core.utils, 'log', log)
+    monkeypatch.setattr(zeit.web.core.solr, 'log', log)
 
     monkeypatch.setattr(
         zeit.web.core.comments.Community, 'get_comment_counts',
@@ -175,10 +174,10 @@ def test_elasticsearch_query_should_not_expose_ranking_area_proxies(
         zeit.retresco.interfaces.IElasticsearch)
     if previous:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.utils.DataES())
+    zope.component.provideUtility(zeit.web.core.solr.DataES())
 
     log = mock.Mock()
-    monkeypatch.setattr(zeit.web.core.utils, 'log', log)
+    monkeypatch.setattr(zeit.web.core.solr, 'log', log)
 
     monkeypatch.setattr(
         zeit.web.core.comments.Community, 'get_comment_counts',

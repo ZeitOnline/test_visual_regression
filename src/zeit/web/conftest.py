@@ -45,8 +45,8 @@ import zeit.solr.interfaces
 
 import zeit.web.core.application
 import zeit.web.core.routing
+import zeit.web.core.solr
 import zeit.web.core.utils
-import zeit.web.core.view
 
 
 log = logging.getLogger(__name__)
@@ -80,6 +80,7 @@ def app_settings(mockserver):
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
+        'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
         'community_host': mockserver.url + '/comments',
         'community_admin_host': 'http://community_admin',
@@ -516,8 +517,7 @@ def mockserver(request):
 def testserver(application_session, request):
     wsgi_app = wesgi.MiddleWare(application_session)
     server = waitress.server.create_server(wsgi_app, host='localhost', port=0)
-    server.url = 'http://{host}:{port}'.format(
-        host=server.effective_host, port=server.effective_port)
+    server.url = 'http://localhost:{port}'.format(port=server.effective_port)
     thread = threading.Thread(target=server.run)
     thread.daemon = True
     thread.start()
@@ -876,7 +876,7 @@ def datasolr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.utils.DataSolr())
+    zope.component.provideUtility(zeit.web.core.solr.DataSolr())
 
 
 @pytest.fixture(scope='session')

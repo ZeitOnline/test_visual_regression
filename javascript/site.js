@@ -10,6 +10,7 @@ var $ = require( 'jquery' ),
     articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
     adblockCount = require( 'web.site/adblockCount' ),
+    saveGetToCookie = require( 'web.core/saveGetToCookie' ),
     article = $( '#js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     isHp = document.body.getAttribute( 'data-is-hp' );
@@ -32,6 +33,7 @@ if ( article.length ) {
 }
 
 adblockCount.init();
+saveGetToCookie.init();
 zeit.clearQueue();
 
 // add required jQuery plugins
