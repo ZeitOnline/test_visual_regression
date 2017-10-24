@@ -1,25 +1,46 @@
-{% if request.headers.get('X-Mail-Success') %}
-    <p>{{ block.success_message }}</p>
-{% endif %}
 
-<form action="" method="POST">
-    <input type="hidden" name="action" value="mail"/>
+<div class="feedback-section" data-ct-area="feedback_form" id="feedback-form">
+    <div class="feedback-section__header">
+        <h1 class="feedback-section__headline">Haben Sie Feedback?</h1>
+        <p class="feedback-section__paragraph">
+            Haben Sie einen Fehler gefunden? Sind Sie begeistert? Wir sind für jedes Feedback dankbar.
+        </p>
+    </div>
+    {% if request.headers.get('X-Mail-Success') %}
+        <div class="feedback-form__success">{{ block.success_message }}</div>
+    {% else %}
+    <div role="form" aria-label="Haben Sie Feedback?">
+        <form action="" class="feedback-form" id="feedbackform" name="feedbackform" aria-label="Haben Sie Feedback?" method="POST">
+            <input type="hidden" name="action" value="mail"/>
+            <div id="feedbackerror" class="feedback-form__error"></div>
+            <div class="feedback-form__inner">
+            {% if block.subject %}
+                <input type="hidden" name="subject" value="{{ block.subject_display }}"/>
+            {% else %}
+                <label for="feedbackselect" class="feedback-form__label" aria-labelledby="feedbackselect">Ich habe Feedback zum Thema</label>
+                <div class="feedback-form__select" aria-label="Select-Box">
+                    <select name="subject">
+                    {% for subject in block.subjects %}
+                        <option>{{ subject }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+            {% endif %}
+                <div id="feedbackerrortextarea" class="feedback-form__errortextarea"></div>
+                <textarea id="feedbacktext" name="body" class="feedback-form__textarea" rows="10" aria-label="Text-Area" required></textarea>
+                <input id="feedbackmail" type="email" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)" class="feedback-form__input" aria-label="E-Mail-Address" />
+                <div class="feedback-form__captcha g-recaptcha" data-sitekey="6LePDDUUAAAAADV2R0DaGNWyMEEcJuKSoahA3BH8" data-callback="enableButton"></div>
+                <noscript>
+                    <div class="feedback-form__recaptcha-response">
+                        <iframe src="https://www.google.com/recaptcha/api/fallback?k=6LePDDUUAAAAADV2R0DaGNWyMEEcJuKSoahA3BH8" frameborder="0" scrolling="no" class="feedback-form__recaptcha-frame"></iframe>
+                    </div>
+                    <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response feedback-form__textarea" aria-label="Text-Area"></textarea>
+                </noscript>
+            </div>
+            <button type="submit" name="feedbacksubmit" class="feedback-form__button g-recaptcha" id="formsubmit" aria-describedby="Submit-Button">abschicken</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
 
-{% if block.subject %}
-    <input type="hidden" name="subject" value="{{ block.subject_display }}"/>
-{% else %}
-    Ich habe Feedback zum Thema
-    <select name="subject">
-    {% for subject in block.subjects %}
-    <option>{{ subject }}</option>
-    {% endfor %}
-    </select>
-{% endif %}
-
-<textarea name="body">
-</textarea>
-
-<input type="text" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)"/>
-
-<button type="submit">Abschicken</button>
-</form>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>

@@ -12,10 +12,6 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="comments">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="corrected">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date-last-modified">2015-06-01T15:12:07+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_first_released">2015-06-01T15:12:07+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="date_last_checkout">2015-06-01T15:12:09.866518+00:00</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published">2015-06-01T15:13:09.811283+00:00</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="edited">yes</attribute>
     <attribute ns="http://apache.org/dav/props/" name="executable">F</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="export_cds">no</attribute>
@@ -58,13 +54,9 @@
 &lt;/pickle&gt;</attribute>
   </head>
   <body>
-    <title>Haben Sie Feedback?</title>
-    <subtitle>Haben Sie einen Fehler gefunden? Sind Sie begeistert? Wir sind für jedes Feedback dankbar.</subtitle>
     <division type="page">
       <mail>
         <to>test@example.com</to>
-        <title>Haben Sie Feedback?</title>
-        <subtitle>Haben Sie einen Fehler gefunden? Sind Sie begeistert?</subtitle>
         <success_message>Ihr Feedback wurde versendet - vielen Dank!</success_message>
       </mail>
     </division>
