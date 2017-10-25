@@ -8,6 +8,7 @@ import zeit.cms.content.xmlsupport
 import zeit.cms.repository.file
 import zeit.cms.repository.folder
 import zeit.cms.repository.unknown
+import zeit.cms.workingcopy.workingcopy
 
 
 # Monkey-patch so our content can provide additional marker interfaces
@@ -47,7 +48,7 @@ UNKNOWN_RESOURCE_INTERFACES = set(zope.interface.providedBy(
     zeit.cms.repository.unknown.PersistentUnknownResource(u'')))
 
 
-def add_marker_interfaces(content):
+def add_marker_interfaces(content, in_repository=True):
     # If the meta file is missing, content objects still might provide
     # interfaces like ICommonMetadata or IArticle, while having no contenttype,
     # thereby making any interface-based checks useless. Thus we remove any
@@ -60,8 +61,9 @@ def add_marker_interfaces(content):
     else:
         # required so that DAV properties work. XXX Can we get around this?
         # calling alsoProvides twice is supposed to be somewhat expensive.
-        zope.interface.alsoProvides(
-            content, zeit.cms.repository.interfaces.IRepositoryContent)
+        if in_repository:
+            zope.interface.alsoProvides(
+                content, zeit.cms.repository.interfaces.IRepositoryContent)
         ifaces = []
         for _, result in zope.component.getAdapters(
                 (content,),
@@ -107,3 +109,12 @@ zeit.cms.repository.file.RepositoryFile.__parent__ = property(
     resolve_parent, set_workingcopy_parent)
 zeit.cms.repository.folder.Folder.__parent__ = property(
     resolve_parent, set_workingcopy_parent)
+
+
+def wc_getitem_with_marker_interface(self, key):
+    content = original_wc_getitem(self, key)
+    add_marker_interfaces(content, in_repository=False)
+    return content
+original_wc_getitem = zeit.cms.workingcopy.workingcopy.Workingcopy.__getitem__
+zeit.cms.workingcopy.workingcopy.Workingcopy.__getitem__ = (
+    wc_getitem_with_marker_interface)
