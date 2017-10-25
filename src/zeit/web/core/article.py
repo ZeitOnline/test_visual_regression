@@ -68,7 +68,7 @@ class Page(object):
     def append(self, block):
         wrapped = None
         try:
-            wrapped = zeit.web.core.interfaces.IFrontendBlock(block, None)
+            wrapped = zeit.web.core.interfaces.IArticleModule(block, None)
         except:
             log.warn('Ignoring %s', block, exc_info=True)
             exc_info = sys.exc_info()
@@ -347,7 +347,7 @@ class LiveblogInfo(object):
         for block in self.context.body.values():
             if zeit.content.article.edit.interfaces.ILiveblog.providedBy(
                     block):
-                return zeit.web.core.interfaces.IFrontendBlock(block)
+                return zeit.web.core.interfaces.IArticleModule(block)
 
     @property
     def is_live(self):

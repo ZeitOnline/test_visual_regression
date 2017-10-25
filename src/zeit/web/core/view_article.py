@@ -158,9 +158,9 @@ class Article(zeit.web.core.view.Content):
         try:
             return zope.component.getMultiAdapter(
                 (block, header),
-                zeit.web.core.interfaces.IFrontendBlock)
+                zeit.web.core.interfaces.IArticleModule)
         except LookupError:
-            return zeit.web.core.interfaces.IFrontendBlock(block, None)
+            return zeit.web.core.interfaces.IArticleModule(block, None)
 
     @zeit.web.reify
     def resource_url(self):

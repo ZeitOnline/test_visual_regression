@@ -1,5 +1,6 @@
 import grokcore.component
 import zope.component
+import zope.interface
 
 import zeit.cms.interfaces
 import zeit.content.article.interfaces
@@ -8,6 +9,20 @@ import zeit.content.gallery.interfaces
 import zeit.content.image.image
 import zeit.content.image.interfaces
 import zeit.content.video.interfaces
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)
+@grokcore.component.adapter(zope.interface.Interface)
+def caching_time_default(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('caching_time_default', '600'))
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IVarnishCachingTime)
+@grokcore.component.adapter(zope.interface.Interface)
+def varnish_caching_time_default(context):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    return int(conf.get('varnish_caching_time_default', '600'))
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.ICachingTime)

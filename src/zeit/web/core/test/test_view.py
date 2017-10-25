@@ -218,7 +218,7 @@ def test_inline_gallery_should_be_contained_in_body(application):
 def test_inline_gallery_should_have_images(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
-    gallery = zeit.web.core.interfaces.IFrontendBlock(
+    gallery = zeit.web.core.interfaces.IArticleModule(
         context.body.values()[-1])
     image = zeit.web.core.template.get_image(list(gallery)[5])
     assert image.path == (

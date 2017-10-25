@@ -21,6 +21,7 @@ saveGetToCookie.init();
 zeit.clearQueue();
 
 // add required jQuery plugins
+require( 'velocity.ui' );
 require( 'web.core/plugins/jquery.notifications' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.toggleRegions' );
@@ -30,6 +31,7 @@ require( 'web.core/plugins/jquery.infobox' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.animateJobs' );
 require( 'web.core/plugins/jquery.toggleRegions' );
+require( 'web.arbeit/plugins/jquery.shareBlocks' );
 
 $.notifications();
 
@@ -42,6 +44,7 @@ if ( pageType === 'centerpage' ) {
     main.find( '.js-infobox' ).infobox();
     comments.init();
     $( '.comment-section' ).countFormchars();
+    main.find( '.js-shareblock' ).shareBlocks();
 }
 
 // more ("non critical") global stuff

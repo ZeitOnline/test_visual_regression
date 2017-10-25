@@ -38,3 +38,83 @@
 		color: currentColor
 		+on-interaction
 			color: $zar-marigold
+
+.quote--share
+	background-color: $zar-sun-yellow
+	width: 100%
+	&:not(.quote-sharing)
+		margin-bottom: 0
+		padding: remify($page-padding--small)
+		+respond-min($break-tablet-min)
+			padding: remify($page-padding)
+
+	.quote__link
+		line-height: 1.4
+		+on-interaction
+			border-bottom: 1px currentColor solid
+			color: currentColor
+
+.quote--share + .quote--share
+	margin-top: 0
+
+// TODO: Breite lieber abstrakt oder simpel halten? Oder Container?
+// Warum ist das so ruckelig hier?
+
+.quote-sharing
+	text-align: right
+
+	&__label
+		display: inline-block
+		line-height: remify(54px) // like the icons
+		margin: 0
+		vertical-align: top
+
+	&__items
+		display: inline
+		list-style: none
+		margin: 0
+		padding: 0
+		text-align: right
+
+	&__item
+		display: inline-block
+
+	&__text
+		display: none // TODO: lieber visuallyhidden
+
+	&__link
+		color: $color-text
+		+on-interaction
+			color: $zar-grey
+		&--facebook
+			+on-interaction
+				color: $color-facebook
+		&--twitter
+			+on-interaction
+				color: $color-twitter
+
++respond-max($break-tablet-min)
+	.quote--share + .quote--share
+		border-top: 1px #fff solid
+
+	.quote-sharing
+		&__item
+			border-left: 1px #fff solid
+		&__label
+			padding-right: remify($page-padding--small)
+
+		&__item
+			padding: remify($page-padding--small)
+
++respond-min($break-tablet-min)
+	.quote-sharing
+		&__label
+			padding-right: remify($page-padding--small)
+		&__items
+			padding-right: remify($page-padding)
+		&__item
+			padding: remify($page-padding--small 5px)
+
+// JS handling
+.js-shareblock__label
+	cursor: pointer
