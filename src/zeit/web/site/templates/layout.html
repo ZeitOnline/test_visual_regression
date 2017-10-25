@@ -126,6 +126,10 @@
 
     <script src="{{ request.asset_host }}/js/site.js"></script>
 
+    {% if request.path == '/zeit-online/article/feedback' %}
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    {% endif %}
+
     {% if toggles('third_party_modules') and view.vgwort_url -%}
     <!--start: vgwort-->
     <img src="{{ view.vgwort_url }}" width="1" height="1" alt="" class="visually-hidden">

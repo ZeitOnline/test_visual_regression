@@ -2,15 +2,14 @@
 function enableButton() {
     document.getElementById( 'formsubmit' ).disabled = false;
 }
-
 window.enableButton = enableButton;
+document.getElementById( 'formsubmit' ).disabled = true;
 
 // validate inputfields
 function formValidation() {
     var feedbackError = document.getElementById( 'feedbackerror' ); // error msg
     var feedbackErrorTextarea = document.getElementById( 'feedbackerrortextarea' ); // error msg
     var feedbacktext = document.getElementById( 'feedbacktext' ); // textarea
-    document.getElementById( 'formsubmit' ).disabled = true;
 
     // configure inputfields
     var validationInfo = {
