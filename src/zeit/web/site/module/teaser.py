@@ -70,8 +70,11 @@ class InfoboxTeaserBlock(
     grokcore.component.provides(zeit.web.core.interfaces.IBlock)
 
     def __init__(self, module, content):
+        # z.w.core TeaserModule API
         self.module = module
-        self.context = content
+        # z.w.core.block Infobox API
+        self.context = module
+        self.content = content
 
     @property
     def layout(self):

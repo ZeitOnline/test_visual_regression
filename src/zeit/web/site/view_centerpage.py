@@ -97,53 +97,27 @@ def temporary_redirect_paywalled_centerpage(context, request):
 
 
 @zeit.web.view_config(
-    name='area',
-    context=zeit.content.cp.interfaces.ICP2015,
+    context=zeit.content.cp.interfaces.IArea,
+    vertical='*',  # only works if context provides ICMSContent
     renderer='templates/inc/area/includer.html')
 class CenterpageArea(Centerpage):
 
+    has_solo_leader = False
+
     def __init__(self, context, request):
-        if not request.subpath:
-            raise pyramid.httpexceptions.HTTPNotFound()
-
-        self.context = None
-        self.request = request
-
-        self.request.response.headers.add('X-Robots-Tag', 'noindex')
-
-        self.comment_counts = {}
-        self.has_solo_leader = False
-
-        name = request.subpath[-1]
-
-        def uid_cond(index, area):
-            return area.uniqueId.rsplit('/', 1)[-1] == name
-
-        def index_cond(index, area):
-            try:
-                return index == int(name.lstrip(u'no-'))
-            except ValueError:
-                raise pyramid.httpexceptions.HTTPNotFound('Area not found')
-
-        if name.startswith('id-'):
-            condition = uid_cond
-        elif name.startswith('no-'):
-            condition = index_cond
-        else:
-            raise pyramid.httpexceptions.HTTPNotFound('Area not found')
-
-        index = 1
-        for region in context.values():
-            for area in region.values():
-                if condition(index, area):
-                    self.context = zeit.web.core.centerpage.get_area(area)
-                    return
-                else:
-                    index += 1
+        # Change context to the CP, so the superclass view properties work.
+        super(CenterpageArea, self).__init__(
+            zeit.content.cp.interfaces.ICenterPage(context), request)
+        self.area = context
 
     def __call__(self):
+        super(CenterpageArea, self).__call__()
+        self.request.response.headers.add('X-Robots-Tag', 'noindex')
         return {
-            'area': self.context,
+            # pyramid's rendering is independent of view class instantiation,
+            # and thus is unaffected by our change of self.context.
+            'context': self.context,
+            'area': self.area,
             'region_loop': {'index': 1}
         }
 
