@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Header "narrow" in http://vivi.zeit.de/repository/data/article-templates.xml eintragen
+- (nothing)
 
 
 3.103 (unreleased)
