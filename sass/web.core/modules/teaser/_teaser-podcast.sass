@@ -23,3 +23,17 @@
 			margin-left: 0.5em
 		+on-interaction
 			border-bottom: 1px currentColor solid
+
+.podcast-links
+	+respond-min($break-tablet-min)
+		margin-left: remify(12px)
+
+.podcast-links__list
+	margin: 0
+	padding: 0
+
+.podcast-links__item
+	display: inline
+	letter-spacing: remify(20px)
+	+respond-min($break-tablet-min)
+		letter-spacing: remify(12px)
