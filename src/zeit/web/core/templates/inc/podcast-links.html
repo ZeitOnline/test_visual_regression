@@ -10,12 +10,12 @@
             <a class="podcast-links__link" href="{{ settings('itunes_podcast_base_url') ~ itunes_id }}">{{ lama.use_svg_icon('itunes', 'itunes__icon', view.package) }}</a>
         </li>
         {% endif %}
-        {% if deezer_url %}
+        {% if spotify_url %}
         <li class="podcast-links__item">
             <a class="podcast-links__link" href="{{ spotify_url }}">{{ lama.use_svg_icon('spotify', 'spotify__icon', view.package) }}</a>
         </li>
         {% endif %}
-        {% if spotify_url %}
+        {% if deezer_url %}
         <li class="podcast-links__item">
             <a class="podcast-links__link" href="{{ deezer_url }}">{{ lama.use_svg_icon('deezer', 'deezer__icon', view.package) }}</a>
         </li>
