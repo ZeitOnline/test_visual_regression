@@ -1,3 +1,4 @@
+{% set success = request.headers.get('X-Mail-Success') %}
 <div class="feedback-section" data-ct-area="feedback_form" id="feedback-form">
     <div class="feedback-section__header">
         <h1 class="feedback-section__headline">Haben Sie Feedback?</h1>
@@ -5,7 +6,7 @@
             Haben Sie einen Fehler gefunden? Sind Sie begeistert? Wir sind für jedes Feedback dankbar.
         </p>
     </div>
-    {% if request.headers.get('X-Mail-Success') %}
+    {% if success == 'True' %}
         <div class="feedback-form__success">{{ block.success_message }}</div>
     {% else %}
     <div role="form" aria-label="Haben Sie Feedback?">
@@ -26,11 +27,11 @@
                 </div>
             {% endif %}
                 <div id="feedbackerrortextarea" class="feedback-form__errortextarea"></div>
-                <textarea id="feedbacktext" name="body" class="feedback-form__textarea" rows="10" aria-label="Text-Area" required>{% if request.headers.get('Textarea') %}{{ request.headers.get('Textarea') }}{% endif %}</textarea>
+                <textarea id="feedbacktext" name="body" class="feedback-form__textarea" rows="10" aria-label="Text-Area" required>{% if success == 'False' %}{{ request.headers.get('X-POST-body') }}{% endif %}</textarea>
                 <input id="feedbackmail" type="email" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)" class="feedback-form__input" aria-label="E-Mail-Address" />
                 <div class="feedback-form__captcha g-recaptcha" data-sitekey="6LePDDUUAAAAADV2R0DaGNWyMEEcJuKSoahA3BH8" data-callback="enableButton"></div>
                 <noscript>
-                    {% if request.headers.get('X-Mail-Failure') %}
+                    {% if success == 'False' %}
                         <div class="feedback-form__failure">Sie haben das Captcha nicht richtig ausgefüllt. Bitte versuchen Sie es nochmal.</div>
                     {% endif %}
                     <div class="feedback-form__recaptcha-response">

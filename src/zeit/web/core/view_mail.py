@@ -41,11 +41,10 @@ class SendMail(zeit.web.core.view.Base):
     def __call__(self):
         super(SendMail, self).__call__()
         captcha = zope.component.getUtility(zeit.web.core.interfaces.ICaptcha)
-        if not captcha.verify(self.request.POST.get('g-recaptcha-response')):
-            return self.render_failure_view()
-        else:
+        success = captcha.verify(self.request.POST.get('g-recaptcha-response'))
+        if success:
             self.send()
-            return self.render_original_view()
+        return self.render_original_view(success)
 
     def send(self):
         mail = zope.component.getUtility(zeit.web.core.interfaces.IMail)
@@ -65,11 +64,15 @@ class SendMail(zeit.web.core.view.Base):
             raise RuntimeError(message)
         return module.to
 
-    def render_original_view(self):
+    def render_original_view(self, success):
         subrequest = pyramid.request.Request.blank(
             self.request.path, headers=dict(self.request.headers))
         # So the `mail` module template knows to render a success message
-        subrequest.headers['X-Mail-Success'] = 'True'
+        subrequest.headers['X-Mail-Success'] = str(success)
+        # We cannot simply copy POST into subrequest.POST because webob is too
+        # strict and would require method to be POST as well -- but we want GET
+        for key, value in self.request.POST.items():
+            subrequest.headers['X-POST-%s' % key] = value
 
         response = self.request.invoke_subrequest(subrequest, use_tweens=True)
         if response.status_int != 200:
@@ -77,17 +80,4 @@ class SendMail(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPInternalServerError()
 
         response.cache_expires(0)
-        return response
-
-    def render_failure_view(self):
-        subrequest = pyramid.request.Request.blank(
-            self.request.path, headers=dict(self.request.headers))
-        # So the `mail` module template knows to render a failure message
-        subrequest.headers['X-Mail-Failure'] = 'True'
-
-        post = self.request.POST
-        body = post['body']
-        subrequest.headers['Textarea'] = body
-
-        response = self.request.invoke_subrequest(subrequest, use_tweens=True)
         return response
