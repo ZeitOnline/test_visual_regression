@@ -2,11 +2,11 @@
 <div class="teaser-podcast">
   {% set module_id = module.__name__ | format_iqd %}
   {% set IPodcast = 'zeit.content.article.edit.interfaces.IPodcast' %}
-  {% set IBlock = 'zeit.web.core.interfaces.IFrontendBlock' %}
+  {% set IModule = 'zeit.web.core.interfaces.IArticleModule' %}
   {% if provides(teaser.header.module, IPodcast) %}
-    {% set module = adapt(teaser.header.module, IBlock) %}
+    {% set module = adapt(teaser.header.module, IModule) %}
   {% else %}
-    {% set module = adapt(teaser.body.find_first(resolve(IPodcast)), IBlock) %}
+    {% set module = adapt(teaser.body.find_first(resolve(IPodcast)), IModule) %}
   {% endif %}
 
   {% set podcast_player_id = module_id %}

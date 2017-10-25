@@ -30,7 +30,7 @@ var Zeit = window.Zeit || {},
             var expires = '';
 
             if ( arguments.length < 4 ) {
-                domain = 'zeit.de';
+                domain = window.Zeit.cookieFallbackDomain;
             }
 
             if ( days ) {

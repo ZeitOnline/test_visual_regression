@@ -218,7 +218,7 @@ def test_inline_gallery_should_be_contained_in_body(application):
 def test_inline_gallery_should_have_images(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/01')
-    gallery = zeit.web.core.interfaces.IFrontendBlock(
+    gallery = zeit.web.core.interfaces.IArticleModule(
         context.body.values()[-1])
     image = zeit.web.core.template.get_image(list(gallery)[5])
     assert image.path == (
@@ -965,3 +965,12 @@ def test_retrieve_keywords_from_tms(application, monkeypatch):
             tms.assert_called_with(
                 '{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}',
                 timeout=0.42)
+
+
+def test_icode_cookie_is_set_when_get_parameter_is_detected(
+        testserver, selenium_driver):
+    driver = selenium_driver
+    driver.get(
+        '%s/zeit-online/article/simple?wt_cc1=Wurstbrot' % testserver.url)
+    cookie = driver.get_cookie('icode')
+    assert cookie['value'] == 'Wurstbrot'

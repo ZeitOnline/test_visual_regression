@@ -86,3 +86,26 @@ class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
 class ColumnArticle(Article):
 
     header_layout = 'column'
+
+
+@zeit.web.view_config(
+    context=zeit.content.article.edit.interfaces.ICitation,
+    vertical='*',  # only works if context provides ICMSContent
+    name='sharequote',
+    renderer='templates/inc/blocks/citation_zar-sharequote_standalone.html')
+class Citation(Article):
+
+    def __init__(self, context, request):
+        # Change context to the article, so the superclass view properties work
+        super(Citation, self).__init__(
+            zeit.content.article.interfaces.IArticle(context), request)
+        self.module = context
+
+    def __call__(self):
+        super(Citation, self).__call__()
+        return {
+            # pyramid's rendering is independent of view class instantiation,
+            # and thus is unaffected by our change of self.context.
+            'context': self.context,
+            'module': zeit.web.core.interfaces.IArticleModule(self.module),
+        }
