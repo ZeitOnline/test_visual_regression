@@ -42,9 +42,10 @@ class SendMail(zeit.web.core.view.Base):
         super(SendMail, self).__call__()
         captcha = zope.component.getUtility(zeit.web.core.interfaces.ICaptcha)
         if not captcha.verify(self.request.POST.get('g-recaptcha-response')):
-            raise pyramid.httpexceptions.HTTPBadRequest('captcha invalid')
-        self.send()
-        return self.render_original_view()
+            return self.render_failure_view()
+        else:
+            self.send()
+            return self.render_original_view()
 
     def send(self):
         mail = zope.component.getUtility(zeit.web.core.interfaces.IMail)
@@ -76,4 +77,17 @@ class SendMail(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPInternalServerError()
 
         response.cache_expires(0)
+        return response
+
+    def render_failure_view(self):
+        subrequest = pyramid.request.Request.blank(
+            self.request.path, headers=dict(self.request.headers))
+        # So the `mail` module template knows to render a failure message
+        subrequest.headers['X-Mail-Failure'] = 'True'
+
+        post = self.request.POST
+        body = post['body']
+        subrequest.headers['Textarea'] = body
+
+        response = self.request.invoke_subrequest(subrequest, use_tweens=True)
         return response

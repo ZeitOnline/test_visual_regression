@@ -1,8 +1,9 @@
 .feedback-section
 	&__headline
-		font-size: remify(40px)
+		font-size: remify(24px)
 		text-align: center
 		+respond-min($break-tablet-min)
+			font-size: remify(40px)
 			padding: 0
 			margin: 0
 			text-align: left
@@ -53,12 +54,17 @@
 		min-height: remify(40px)
 		min-width: remify(180px)
 
-	&__error
+	&__error,
+	&__failure
 		background-color: #E1C2C4
 		color: #940009
 		display: none
 		padding: remify(25px)
 		text-align: center
+
+	&__failure
+		display: block
+		margin: remify(10px 0 20px)
 
 	&__errortextarea
 		color: #940009

@@ -1,4 +1,3 @@
-
 <div class="feedback-section" data-ct-area="feedback_form" id="feedback-form">
     <div class="feedback-section__header">
         <h1 class="feedback-section__headline">Haben Sie Feedback?</h1>
@@ -27,14 +26,17 @@
                 </div>
             {% endif %}
                 <div id="feedbackerrortextarea" class="feedback-form__errortextarea"></div>
-                <textarea id="feedbacktext" name="body" class="feedback-form__textarea" rows="10" aria-label="Text-Area" required></textarea>
+                <textarea id="feedbacktext" name="body" class="feedback-form__textarea" rows="10" aria-label="Text-Area" required>{% if request.headers.get('Textarea') %}{{ request.headers.get('Textarea') }}{% endif %}</textarea>
                 <input id="feedbackmail" type="email" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)" class="feedback-form__input" aria-label="E-Mail-Address" />
                 <div class="feedback-form__captcha g-recaptcha" data-sitekey="6LePDDUUAAAAADV2R0DaGNWyMEEcJuKSoahA3BH8" data-callback="enableButton"></div>
                 <noscript>
+                    {% if request.headers.get('X-Mail-Failure') %}
+                        <div class="feedback-form__failure">Sie haben das Captcha nicht richtig ausgefüllt. Bitte versuchen Sie es nochmal.</div>
+                    {% endif %}
                     <div class="feedback-form__recaptcha-response">
                         <iframe src="https://www.google.com/recaptcha/api/fallback?k=6LePDDUUAAAAADV2R0DaGNWyMEEcJuKSoahA3BH8" frameborder="0" scrolling="no" class="feedback-form__recaptcha-frame"></iframe>
                     </div>
-                    <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response feedback-form__textarea" aria-label="Text-Area"></textarea>
+                    <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response feedback-form__textarea" aria-label="Text-Area" required></textarea>
                 </noscript>
             </div>
             <button type="submit" name="feedbacksubmit" class="feedback-form__button g-recaptcha" id="formsubmit" aria-describedby="Submit-Button">abschicken</button>
