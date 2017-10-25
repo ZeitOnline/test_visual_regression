@@ -11,10 +11,7 @@ POSTDEPLOY
 
 
 3.103 (2017-10-25)
-
-
-3.103 (unreleased)
---------------------
+------------------
 
 - ARBEIT-20: Implement yellow share quotes (with Sharebert binding) for ZEIT Arbeit
 
