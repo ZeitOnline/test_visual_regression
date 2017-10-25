@@ -25,20 +25,34 @@ define([], function() {
         userObject = parseJwt( cookieValue );
         log( 'userObject: ', userObject );
 
+        var userName = 'Konto';
+        if ( userObject.name ) {
+            userName = userObject.name;
+            log( 'Label set to name: ' + userObject.name );
+        } else if ( userObject.email ) {
+            userName = userObject.email;
+            log( 'Label set to email: ' + userObject.email );
+        }
+
+        // first step: very simple
+
         var loginLink = document.querySelector( '.nav__login-link' );
         if ( loginLink ) {
             loginLink.setAttribute( 'href', window.Zeit.actualHost + '/konto' );
-            if ( userObject.name ) {
-                loginLink.innerText = userObject.name;
-                log( 'Label set to name: ' + userObject.name );
-            } else if ( userObject.email ) {
-                loginLink.innerText = userObject.email;
-                log( 'Label set to email: ' + userObject.email );
-            } else {
-                loginLink.innerText = 'Konto';
-                log( 'Label set to default: Konto' );
-            }
+            loginLink.innerText = userName;
         }
+
+        // second step: complex layout update
+        var template = require( 'web.core/templates/framebuilderLoginStatus.html' ),
+            // for multipage view (komplettansicht), we have to select the last page
+            navLoginArea = document.querySelector( '.nav__login' ),
+            newDom = template({
+                username: userName
+            });
+
+        // TODO: ist das gut?
+        navLoginArea.innerHTML = newDom;
+
     }
 
     return {
