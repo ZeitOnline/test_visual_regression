@@ -1,21 +1,19 @@
 // the button is used on CPs and articles, with different background colors and in different surroundings.
 .podlove-button
-	border: 1px rgba($color-text, 0.5) solid
 	border-radius: remify(4px)
+	border: 1px rgba($color-text, 0.5) solid
 	bottom: remify(68px)
 	color: $color-text
 	font-size: remify(12px)
 	font-weight: normal
+	left: 50%
 	letter-spacing: $letter-spacing-s
 	margin-right: remify(10px)
 	padding: remify(3px 5px)
 	position: absolute
 	text-transform: uppercase
-	+respond-min($break-phablet-min)
-		position: static
+	transform: translateX(-50%)
 	+respond-min($break-tablet-min)
-		position: absolute
-	+respond-min($break-desktop-min)
 		position: static
 	+on-interaction
 		background-color: $color-text
