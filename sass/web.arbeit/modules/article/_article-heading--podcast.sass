@@ -2,12 +2,15 @@
 	&--podcast
 		+unpadded
 		background-color: $zar-sun-yellow
-		padding-bottom: 0
 		margin-bottom: $vertical-space
+		padding-bottom: 0
+		position: relative
 	&__container
 		&--podcast
 			+padded
 			text-align: center
+	&__item
+		display: flex
 	&__kicker
 		&--podcast
 			+outlined-font($color-text)
@@ -46,11 +49,14 @@
 		border-top: 1px rgba($color-text, 0.2) solid
 		font-family: $font-tabletgothic
 		font-weight: normal
+		margin-top: remify(60px)
 		padding-bottom: remify(12px)
 		padding-top: remify(12px)
 	&__link-series
 		color: rgba($color-text, 0.8)
 		text-decoration: underline
+		position: absolute
+		right: remify(20px)
 		+on-interaction
 			color: $color-text
 			text-decoration: none
@@ -71,6 +77,11 @@
 				margin: 0 auto
 				max-width: $wide-content-width
 				text-align: left
+		&__item
+			margin-left: auto
+			margin-right: auto
+			max-width: $medium-content-width
+			position: relative
 		&__media
 			&--podcast
 				align-self: center
@@ -86,6 +97,9 @@
 				text-overflow: ellipsis
 		&__podcast-player
 			margin-bottom: remify(60px)
+		&__subs-series
+			margin-top: 0
+			padding: $page-padding
 
 +respond-max(em(400px))
 	.article-heading__kicker--podcast,
