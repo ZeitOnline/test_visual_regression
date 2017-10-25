@@ -6,7 +6,6 @@
 .teaser-podcast-footer
 	border-top: 1px $zon-light-grey solid
 	display: flex
-	justify-content: space-between
 	margin-top: remify(35px)
 	padding: remify(12px 15px 12px 20px)
 	+respond-min($break-tablet-min)
@@ -17,11 +16,17 @@
 		color: $zon-dark-grey
 		font-size: remify(14px)
 		letter-spacing: $letter-spacing-s
+		position: absolute
+		right: remify(12px)
 		&:after
 			content: "\203A"
 			margin-left: 0.5em
 		+on-interaction
 			border-bottom: 1px currentColor solid
+
+.podcast-links
+	+respond-min($break-tablet-min)
+		margin-left: remify(12px)
 
 .podcast-links__list
 	margin: 0
@@ -30,3 +35,5 @@
 .podcast-links__item
 	display: inline
 	letter-spacing: remify(20px)
+	+respond-min($break-tablet-min)
+		letter-spacing: remify(12px)
