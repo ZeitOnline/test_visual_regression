@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="{{ 'article-heading__subs-series' | with_mods('podcast') }}">
-            <div class="article__item">
+            <div class="{{ 'article-heading__item' | with_mods('podcast') }}">
 
                 {% set podlove_button_id = view.header_module.context.episode_id %}
                 {% set podlove_button_configuration = view.header_module.podlove_configuration %}
