@@ -42,8 +42,10 @@
 
 // Neither nice nor BEM, but as demanded in ZON-4235
 // we have to hide podcast links from the minor section.
-.cp-area--minor .podcast-links
+.cp-area--minor .podcast-links, // ZON CP
+.cp-area--trio .podcast-links // ZAR CP
 	margin-left: 0
 
-.cp-area--minor .teaser-podcast-footer
+.cp-area--minor .teaser-podcast-footer, // ZON CP
+.cp-area--trio .teaser-podcast-footer // ZAR CP
 	margin-top: remify(30px) // additional space for podlove-button
