@@ -226,7 +226,7 @@ class IMail(zope.interface.Interface):
 
 class ICaptcha(zope.interface.Interface):
 
-    def verify(captcha_response):
+    def verify(captcha_response, nojs):
         """Returns True if captcha is valid."""
 
 

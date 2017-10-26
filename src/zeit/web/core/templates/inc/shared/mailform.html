@@ -9,6 +9,45 @@
     {% if success == 'True' %}
         <div class="feedback-form__success">{{ block.success_message }}</div>
     {% else %}
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+    <script>
+        function onSubmit( token ) {
+            document.getElementById( 'feedbackform' ).submit();
+        }
+
+        function validate( event ) {
+            event.preventDefault();
+
+            var feedbackError = document.getElementById( 'feedbackerror' ); // error msg
+            var feedbackErrorTextarea = document.getElementById( 'feedbackerrortextarea' ); // error msg
+            var feedbacktext = document.getElementById( 'feedbacktext' ); // textarea
+
+            // remove errormsg when user filling in the textarea
+            feedbacktext.addEventListener( 'keyup', function() {
+                feedbackError.style.display = 'none';
+                feedbackErrorTextarea.style.display = 'none';
+                feedbacktext.className = 'feedback-form__textarea';
+            });
+
+            if (!document.getElementById( 'feedbacktext' ).value) {
+                // if value for textfield isn't set
+                feedbackError.innerHTML = 'Bitte überprüfen Sie Ihre Eingaben.';
+                feedbackErrorTextarea.innerHTML = 'Bitte geben Sie eine Nachricht ein.';
+                feedbackError.style.display = 'block';
+                feedbackErrorTextarea.style.display  = 'block';
+                feedbacktext.className = 'feedback-form__bgerror';
+            } else {
+                grecaptcha.execute();
+            }
+        }
+
+        function onload() {
+            var element = document.getElementById( 'formsubmit' );
+            element.onclick = validate;
+        }
+    </script>
+
     <div role="form" aria-label="Haben Sie Feedback?">
         <form action="" class="feedback-form" id="feedbackform" name="feedbackform" aria-label="Haben Sie Feedback?" method="POST">
             <input type="hidden" name="action" value="mail"/>
@@ -29,18 +68,18 @@
                 <div id="feedbackerrortextarea" class="feedback-form__errortextarea"></div>
                 <textarea id="feedbacktext" name="body" class="feedback-form__textarea" rows="10" aria-label="Text-Area" required>{% if success == 'False' %}{{ request.headers.get('X-POST-body') }}{% endif %}</textarea>
                 <input id="feedbackmail" type="email" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)" class="feedback-form__input" aria-label="E-Mail-Address" />
-                <div class="feedback-form__captcha g-recaptcha" data-sitekey="6LePDDUUAAAAADV2R0DaGNWyMEEcJuKSoahA3BH8" data-callback="enableButton"></div>
                 <noscript>
+                    <input type="hidden" name="nojs" value="True">
                     <div class="feedback-form__recaptcha-response">
                         <iframe src="https://www.google.com/recaptcha/api/fallback?k=6LePDDUUAAAAADV2R0DaGNWyMEEcJuKSoahA3BH8" frameborder="0" scrolling="no" class="feedback-form__recaptcha-frame"></iframe>
                     </div>
                     <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response feedback-form__textarea" aria-label="Text-Area" required></textarea>
                 </noscript>
             </div>
-            <button type="submit" name="feedbacksubmit" class="feedback-form__button g-recaptcha" id="formsubmit" aria-describedby="Submit-Button">abschicken</button>
+            <div id='recaptcha' class="g-recaptcha" data-sitekey="6Ld00TUUAAAAANAca0kAaZPfp5XPYW69ss_YhaC4" data-callback="onSubmit" data-size="invisible"></div>
+            <button name="feedbacksubmit" class="feedback-form__button" id="formsubmit" aria-describedby="Submit-Button">abschicken</button>
         </form>
     </div>
+    <script>onload();</script>
     {% endif %}
 </div>
-
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>

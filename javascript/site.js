@@ -110,7 +110,3 @@ $( '.js-scroll' ).animateScroll();
 $( '.js-image-copyright-footer' ).imageCopyrightFooter();
 // search
 $( '.search-form' ).searchTools();
-
-if ( document.getElementById( 'feedbackform' ) ) {
-    require( 'web.core/formValidation' );
-}

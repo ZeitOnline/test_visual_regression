@@ -16,13 +16,14 @@ class Recaptcha(object):
 
     RECAPTCHA_URL = 'https://www.google.com/recaptcha/api/siteverify'
 
-    def verify(self, captcha_response):
+    def verify(self, captcha_response, nojs):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         response = None
         try:
             with zeit.web.core.metrics.timer('http.reponse_time'):
                 response = requests.post(self.RECAPTCHA_URL, timeout=1, data={
-                    'secret': conf.get('recaptcha_secret_key'),
+                    'secret': conf.get(
+                        'recaptcha_secret_key' + ('_nojs' if nojs else '')),
                     'response': captcha_response,
                 })
             response.raise_for_status()
