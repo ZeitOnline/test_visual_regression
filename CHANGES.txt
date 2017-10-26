@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-4235: Extend podcast player with Deezer / Spotify / iTunes links
 
+- SSL-37: Move image source to local repo
+
 
 3.103 (2017-10-25)
 ------------------
