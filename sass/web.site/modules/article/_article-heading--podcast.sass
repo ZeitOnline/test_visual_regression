@@ -4,11 +4,14 @@
 		background-color: #CCE8E9
 		margin-top: 0
 		padding-top: remify(24px)
+		position: relative
 	&__container--podcast
 		+padded
 	&__headline
 		text-align: center
 		width: auto
+	&__item
+		display: flex
 	&__media
 		&--podcast
 			height: auto
@@ -46,10 +49,14 @@
 		border-top: 1px rgba($color-text, 0.2) solid
 		font-family: $font-tabletgothic
 		font-weight: normal
+		margin-top: remify(60px)
 		padding-bottom: remify(12px)
 		padding-top: remify(12px)
 	&__link-series
 		color: rgba($color-text, 0.8)
+		min-height: remify(48px)
+		position: absolute
+		right: remify(20px)
 		text-decoration: underline
 		+on-interaction
 			color: $color-text
@@ -68,6 +75,11 @@
 			justify-content: center
 			margin: 0 auto
 			max-width: remify(840px)
+		&__item
+			margin-left: auto
+			margin-right: auto
+			max-width: $medium-content-width
+			position: relative
 		&__media
 			&--podcast
 				align-self: center
@@ -77,6 +89,9 @@
 					width: remify(220px)
 		&__podcast-player
 			margin-bottom: remify(60px)
+		&__subs-series
+			margin-top: 0
+			padding: $page-padding
 		&__headline
 			text-align: left
 +respond-min($break-desktop-min)
@@ -107,7 +122,7 @@
 // Unbemmy: The first article item (which should be summary and metadata)
 // needs more margin, according to the design.
 +respond-min($break-tablet-min)
-	.article-heading--podcast + .article__item > .summary
+	.article-heading--podcast + .article-heading__item > .summary
 		margin-top: remify(60px)
-	.article-heading--podcast + .article__item + .article-body
+	.article-heading--podcast + .article-heading__item + .article-body
 		margin-top: remify(60px)

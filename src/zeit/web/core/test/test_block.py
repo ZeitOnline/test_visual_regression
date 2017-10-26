@@ -560,7 +560,7 @@ def test_volume_should_ignore_invalid_references(application):
 def test_podcast_should_render_script_tag_for_player(testbrowser):
     browser = testbrowser('/zeit-online/article/podcast')
     player = browser.cssselect('script.podigee-podcast-player')[0]
-    assert player.get('data-configuration') == 'podigee_player_6853'
+    assert player.get('data-configuration') == 'podigee_player_8111'
     assert '"theme": "zon-standalone"' in browser.contents
 
 
@@ -576,3 +576,12 @@ def test_podcast_header_should_provide_podlove_data(application):
     assert podlove['title'] == 'Test'
     assert podlove['cover'].startswith('https://cdn.podigee.com')
     assert len(podlove['feeds']) == 4
+
+
+def test_podcast_should_show_podcast_links(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast-header')
+    podcast_links = browser.cssselect('.podcast-links__link')
+    assert podcast_links[0].get('href') == 'http://xml.zeit.de/podcast/id1656'
+    assert podcast_links[1].get('href') == 'http://xml.zeit.de/spotify_url'
+    # There's only two links, since no deezer url has been provided.
+    assert len(podcast_links) == 2
