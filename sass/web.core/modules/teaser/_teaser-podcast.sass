@@ -28,6 +28,11 @@
 	+respond-min($break-tablet-min)
 		margin-left: remify(12px)
 
+// Neither nice nor BEM, but as demanded in ZON-4235
+// we have to hide podcast links from the minor section.
+.cp-area--minor .podcast-links
+	display: none
+
 .podcast-links__list
 	margin: 0
 	padding: 0
