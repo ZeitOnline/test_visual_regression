@@ -97,6 +97,28 @@ class Article(Traversable):
         if tdict['view_name'].startswith('seite') and not tdict['subpath']:
             tdict['view_name'] = 'seite'
 
+        if tdict['view_name'] == 'module':
+            tdict['context'] = self.context.body
+            tdict['traversed'] += (tdict['view_name'],)
+            tdict['view_name'] = ''
+            raise Retraverse(tdict['request'])
+
+
+@traverser(zeit.content.article.edit.interfaces.IEditableBody)
+class ArticleBody(Traversable):
+
+    def __call__(self, tdict):
+        try:
+            tdict['context'] = self.context[tdict['subpath'][0]]
+        except (IndexError, KeyError, TypeError):
+            pass
+        else:
+            tdict['traversed'] += (tdict['subpath'][0],)
+            tdict['subpath'] = tdict['subpath'][1:]
+            if len(tdict['subpath']) == 1:
+                tdict['view_name'] = tdict['subpath'][0]
+                tdict['subpath'] = ()
+
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
 class CenterPage2015(Traversable):
@@ -117,6 +139,55 @@ class CenterPage2015(Traversable):
             travd = tdict['traversed']
             tdict['traversed'] = travd[:pos] + (name,) + travd[pos + 1:]
             raise Retraverse(tdict['request'])
+
+
+@traverser(zeit.content.cp.interfaces.ICenterPage)
+class CenterpageArea(Traversable):
+
+    def __call__(self, tdict):
+        if tdict['view_name'] != 'area':
+            return
+
+        name = tdict['subpath'][0]
+
+        def uid_cond(index, area):
+            return area.uniqueId.rsplit('/', 1)[-1] == name
+
+        def index_cond(index, area):
+            try:
+                return index == int(name.lstrip(u'no-'))
+            except ValueError:
+                raise pyramid.httpexceptions.HTTPNotFound('Area not found')
+
+        if name.startswith('id-'):
+            condition = uid_cond
+        elif name.startswith('no-'):
+            condition = index_cond
+        else:
+            raise pyramid.httpexceptions.HTTPNotFound('Area not found')
+
+        index = 1
+        found = None
+        for region in self.context.values():
+            for area in region.values():
+                if condition(index, area):
+                    found = area
+                    break
+                else:
+                    index += 1
+            if found is not None:
+                break
+        if found is None:
+            raise pyramid.httpexceptions.HTTPNotFound('Area not found')
+
+        tdict['context'] = zeit.web.core.centerpage.get_area(found)
+        tdict['traversed'] += (tdict['view_name'], tdict['subpath'][0])
+        tdict['subpath'] = tdict['subpath'][1:]
+        if len(tdict['subpath']) == 1:
+            tdict['view_name'] = tdict['subpath'][0]
+            tdict['subpath'] = ()
+        else:
+            tdict['view_name'] = ''
 
 
 @traverser(zeit.cms.repository.interfaces.IFolder)

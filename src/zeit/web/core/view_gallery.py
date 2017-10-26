@@ -20,7 +20,7 @@ class Gallery(zeit.web.core.view.Content):
         # We synthesize a gallery reference block to reuse the block template
         block = zeit.content.article.edit.reference.Gallery(
             self.context, lxml.objectify.E.gallery(href=self.context.uniqueId))
-        return zeit.web.core.interfaces.IFrontendBlock(block)
+        return zeit.web.core.interfaces.IArticleModule(block)
 
     @zeit.web.reify
     def breadcrumbs(self):

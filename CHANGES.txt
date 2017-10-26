@@ -4,13 +4,60 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- Nothing
-
-
-3.100.1 (unreleased)
---------------------
+3.104 (unreleased)
+------------------
 
 - Nothing changed yet.
+
+
+3.103 (2017-10-25)
+------------------
+
+- ARBEIT-20: Implement yellow share quotes (with Sharebert binding) for ZEIT Arbeit
+
+- FIX: Apply marker interfaces to workingcopy content as well
+
+
+3.102.1 (2017-10-24)
+--------------------
+
+- FIX: Fix "solr fill color" merge mistake, reapply 26b21d2 which was lost in b86dc31
+
+
+3.102 (2017-10-24)
+------------------
+
+- ZON-3934: Store DPV icode value from GET in cookie
+
+- ZON-4184: Introduce `narrow` header for games articles that displays the image with column-width instead of large
+
+- MAINT: Move stuff out of the utils grabbag into their own modules
+
+
+3.101.3 (2017-10-23)
+--------------------
+
+- FIX: Prefer solr fill color if present
+
+
+3.101.2 (2017-10-23)
+--------------------
+
+- FIX: Make series image fallback fill color work with solr results
+
+
+3.101.1 (2017-10-20)
+--------------------
+
+- FIX: Rename folder because vivi cant handle underscore
+
+
+3.101 (2017-10-20)
+------------------
+
+- ZON-4257: App update hint: clicktracking, swipe-away, fix condition
+
+- ZON-4200: Implement user feedback survey
 
 
 3.100 (2017-10-19)
@@ -32,7 +79,7 @@ POSTDEPLOY
 
 - ZON-4243: Add series banner to ZAR articles
 
-- ZON-4120: Add image fallback for series articles
+- ZON-4210: Add image fallback for series articles
 
 - FIX: Center ZAR advertorial-CP heading (minor)
 
