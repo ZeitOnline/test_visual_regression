@@ -28,11 +28,6 @@
 	+respond-min($break-tablet-min)
 		margin-left: remify(12px)
 
-// Neither nice nor BEM, but as demanded in ZON-4235
-// we have to hide podcast links from the minor section.
-.cp-area--minor .podcast-links
-	display: none
-
 .podcast-links__list
 	margin: 0
 	padding: 0
@@ -42,3 +37,11 @@
 	letter-spacing: remify(20px)
 	+respond-min($break-tablet-min)
 		letter-spacing: remify(12px)
+
+// Neither nice nor BEM, but as demanded in ZON-4235
+// we have to hide podcast links from the minor section.
+.cp-area--minor .podcast-links
+	margin-left: 0
+
+.cp-area--minor .teaser-podcast-footer
+	margin-top: remify(30px) // additional space for podlove-button

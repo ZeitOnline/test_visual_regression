@@ -26,3 +26,10 @@
 
 	.no-js &
 		display: none
+
+// Neither nice nor BEM, but as demanded in ZON-4235
+// we have to hide podcast links from the minor section.
+.cp-area--minor .podlove-button
+	left: 50%
+	position: absolute
+	transform: translateX(-50%)
