@@ -7,7 +7,7 @@ POSTDEPLOY
 3.104 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4235: Extend podcast player with Deezer / Spotify / iTunes links
 
 
 3.103 (2017-10-25)
