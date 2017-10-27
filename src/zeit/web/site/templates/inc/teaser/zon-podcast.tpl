@@ -18,8 +18,10 @@
 
         {% set podlove_button_id = module_id %}
         {% set podlove_button_configuration = module.podlove_configuration %}
-        {% include "zeit.web.core:templates/inc/shared/podlove-button.html" %}
-        {% include "zeit.web.core:templates/inc/teaser/podcast-links.tpl" %}
+        {% include "zeit.web.core:templates/inc/shared/podlove-button.tpl" %}
+
+        {% set podcast = module.podcast %}
+        {% include "zeit.web.core:templates/inc/shared/podcast-links.tpl" %}
 
         {% if teaser.serie %}
         <span>
