@@ -10,8 +10,8 @@
 	&__headline
 		text-align: center
 		width: auto
-	&__item
-		display: flex
+	// &__item
+	// 	display: flex
 	&__media
 		&--podcast
 			height: auto
@@ -54,9 +54,9 @@
 		padding-top: remify(12px)
 	&__link-series
 		color: rgba($color-text, 0.8)
-		min-height: remify(48px)
-		position: absolute
-		right: remify(20px)
+		// min-height: remify(48px)
+		// position: absolute
+		// right: remify(20px)
 		text-decoration: underline
 		+on-interaction
 			color: $color-text
@@ -126,3 +126,15 @@
 		margin-top: remify(60px)
 	.article-heading--podcast + .article-heading__item + .article-body
 		margin-top: remify(60px)
+
+// TODO: subs-series löschen, das hier oben einhängen
+.article-heading__footer
+	+padded
+	border-top: 1px rgba($color-text, 0.2) solid
+	font-family: $font-tabletgothic
+	padding-bottom: remify(12px)
+	padding-top: remify(12px)
+
++respond-min($break-tablet-min)
+	.article-heading__footer
+		padding: $page-padding

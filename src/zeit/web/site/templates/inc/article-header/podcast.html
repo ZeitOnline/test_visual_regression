@@ -24,19 +24,21 @@
                 </div>
             </div>
         </div>
-        <div class="{{ 'article-heading__subs-series' | with_mods('podcast') }}">
-            <div class="{{ 'article-heading__item' | with_mods('podcast') }}">
+        <div class="{{ 'article-heading__footer' | with_mods('podcast') }}">
+
+            <div class="article-heading__item podcastfooter">
 
                 {% set podlove_button_id = view.header_module.context.episode_id %}
                 {% set podlove_button_configuration = view.header_module.podlove_configuration %}
                 {% include "zeit.web.core:templates/inc/shared/podlove-button.html" %}
+
                 {% include "zeit.web.core:templates/inc/article-header/podcast-links.tpl" %}
 
                 {%- if view.serie -%}
-                <a href="{{ context | find_series_cp | create_url }}" class="article-heading__link-series">Alle Folgen</a>
+                    <a href="{{ context | find_series_cp | create_url }}" class="podcastfooter__serieslink article-heading__link-series">Alle Folgen</a>
                 {%- endif -%}
-
             </div>
+
         </div>
     </header>
 {% endblock %}

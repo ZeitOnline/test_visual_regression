@@ -9,7 +9,7 @@
         {% set external_site_url = view.header_module.podlove_configuration.external_site_url or 'http://{}.podigee.io'.format(view.header_module.podlove_configuration.podigee_subdomain) %}
        Und dann auch cursor:pointer sowie no-js aus dem CSS entfernen!
     #}
-    <span tabindex="0" class="podlove-button podlove-subscribe-button-{{ podlove_button_id }}">
+    <span tabindex="0" class="podcastfooter__podlove podlove-button podlove-subscribe-button-{{ podlove_button_id }}">
         {{ lama.use_svg_icon('podcast', 'podlove-button__icon', view.package, a11y=False) }}
         Abonnieren
     </span>

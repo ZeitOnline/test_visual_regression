@@ -9,12 +9,12 @@
 	left: 50%
 	letter-spacing: $letter-spacing-m
 	padding: remify(3px 8px)
-	position: absolute
+	// position: absolute
 	text-transform: uppercase
-	transform: translateX(-50%)
-	+respond-min($break-tablet-min)
-		position: static
-		transform: none
+	// transform: translateX(-50%)
+	// +respond-min($break-tablet-min)
+	// 	position: static
+	// 	transform: none
 	+on-interaction
 		background-color: $color-text
 		border-color: transparent
@@ -29,8 +29,8 @@
 
 // Neither nice nor BEM, but as demanded in ZON-4235
 // minor area styles have to align to mobile.
-.cp-area--minor .podlove-button, // ZON CP
-.cp-area--trio .podlove-button // ZAR CP
-	left: 50%
-	position: absolute
-	transform: translateX(-50%)
+// .cp-area--minor .podlove-button, // ZON CP
+// .cp-area--trio .podlove-button // ZAR CP
+// 	left: 50%
+// 	position: absolute
+// 	transform: translateX(-50%)

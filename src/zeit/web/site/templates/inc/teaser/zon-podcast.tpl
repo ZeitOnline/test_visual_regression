@@ -14,7 +14,7 @@
   {% include "zeit.web.core:templates/inc/podcast_player.html" %}
 
 
-    <div class="teaser-podcast-footer">
+    <div class="teaser-podcast-footer podcastfooter">
 
         {% set podlove_button_id = module_id %}
         {% set podlove_button_configuration = module.podlove_configuration %}
@@ -23,7 +23,7 @@
 
         {% if teaser.serie %}
         <span>
-            <a class="teaser-podcast-footer__link" href="{{ teaser | find_series_cp | create_url }}">Alle Folgen</a>
+            <a class="teaser-podcast-footer__link podcastfooter__serieslink" href="{{ teaser | find_series_cp | create_url }}">Alle Folgen</a>
         </span>
         {% endif %}
     </div>
