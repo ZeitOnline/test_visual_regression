@@ -7,7 +7,4 @@ import grokcore.component
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ICardstack)
 class CardStack(zeit.web.core.centerpage.Module):
-
-    @zeit.web.reify
-    def id(self):
-        return self.context.card_id
+    pass

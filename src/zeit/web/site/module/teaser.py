@@ -38,6 +38,9 @@ class StoryStreamTeaserBlock(
         self.article_modules = self.get_articles(
             3, zeit.content.cp.interfaces.ITeaserBlock)
 
+    def __len__(self):
+        return len(self.context)
+
     def __iter__(self):
         return iter(self.context)
 
@@ -63,15 +66,14 @@ class StoryStreamTeaserBlock(
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.content.infobox.interfaces.IInfobox)
 class InfoboxTeaserBlock(
-        zeit.web.core.centerpage.Module,
+        zeit.web.core.module.teaser.TeaserBlock,
         zeit.web.core.block.Infobox,
         grokcore.component.MultiAdapter):
 
     grokcore.component.provides(zeit.web.core.interfaces.IBlock)
 
     def __init__(self, module, content):
-        # z.w.core TeaserModule API
-        self.module = module
+        zeit.web.core.module.teaser.TeaserBlock.__init__(self, module, content)
         # z.w.core.block Infobox API
         self.context = module
         self.content = content
@@ -79,7 +81,3 @@ class InfoboxTeaserBlock(
     @property
     def layout(self):
         return self.module.layout
-
-    @zeit.web.reify
-    def __name__(self):
-        return self.module.__name__
