@@ -1,0 +1,22 @@
+// Neither nice nor BEM, but as demanded in ZON-4235
+// minor area styles have to align to mobile. Which means
+// placing the podlove button above the podcastfooter.
++respond-min($break-tablet-min)
+	.cp-area--minor, // ZON CP
+	.cp-area--trio // ZAR CP
+		.podcastfooter__podlove
+			left: 50%
+			position: absolute
+			transform: translateX(-50%)
+		// and we need to make space for the button
+		.podcastfooter
+			margin-top: remify(35px)
+
++respond-max($break-phablet-min)
+	.podcastfooter__podlove
+		left: 50%
+		position: absolute
+		transform: translateX(-50%)
+	// and we need to make space for the button (only assuming that it exists)
+	.article-heading__footer--podcast
+		margin-top: remify(50px)

@@ -9,8 +9,6 @@
 		&--podcast
 			+padded
 			text-align: center
-	&__item
-		display: flex
 	&__kicker
 		&--podcast
 			+outlined-font($color-text)
@@ -44,14 +42,6 @@
 		margin-bottom: remify(30px)
 		max-height: remify(65px) // prevent jumping layout
 		overflow: hidden
-	&__subs-series
-		+padded
-		border-top: 1px rgba($color-text, 0.2) solid
-		font-family: $font-tabletgothic
-		font-weight: normal
-		margin-top: remify(60px)
-		padding-bottom: remify(12px)
-		padding-top: remify(12px)
 
 +respond-min($break-tablet-min)
 	.article-heading
@@ -85,9 +75,6 @@
 				text-overflow: ellipsis
 		&__podcast-player
 			margin-bottom: remify(60px)
-		&__subs-series
-			margin-top: 0
-			padding: $page-padding
 
 +respond-max(em(400px))
 	.article-heading__kicker--podcast,
@@ -98,26 +85,6 @@
 	.article-heading
 		&__podcast-player
 			margin-bottom: remify(80px)
-
-// We need a fixed max-width to enable "text-overflow: ellipsis".
-// And we need it gradually, to look good.
-// Optimize: It would be cool to have it more fluid. But calc() and percentages
-// do not seem to work.
-.article-heading__headline--podcast > span
-	+respond-min($break-tablet-min)
-		max-width: remify(400px)
-		overflow: hidden
-		text-overflow: ellipsis
-	+respond-min(800px)
-		max-width: remify(425px)
-	+respond-min(850px)
-		max-width: remify(450px)
-	+respond-min(900px)
-		max-width: remify(500px)
-	+respond-min(1000px)
-		max-width: remify(550px)
-	+respond-min($break-desktop-min)
-		max-width: remify(560px)
 
 // Unbemmy: The first article item (which should be summary and metadata)
 // needs more margin, according to the design.
