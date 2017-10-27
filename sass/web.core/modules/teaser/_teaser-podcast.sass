@@ -28,6 +28,10 @@
 		+on-interaction
 			color: $color-text
 
+.podcastfooter
+	display: flex
+	flex-wrap: wrap // avoid wrapping inside single element (button eg)
+
 .podcastfooter__podlove,
 .podcastfooter__platforms,
 .podcastfooter__serieslink
@@ -38,6 +42,7 @@
 	color: $color-text
 	font-size: remify(14px)
 	letter-spacing: $letter-spacing-s
+	margin-left: auto // pull it to the right inside flexbox container
 	text-decoration: none
 	&:after
 		content: "\203A"
