@@ -81,9 +81,11 @@
         <main itemprop="mainContentOfPage">
         {% block main %}
             {% block content %}
-            <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/
+            <article class="article{% if view.paywall -%} paywall{% endif -%}" itemprop="mainEntity" itemscope itemtype="http://schema.org/
                 {%- if view.liveblog and view.liveblog.liveblog -%}
                     LiveBlogPosting
+                {%- elif view.paywall -%}
+                    NewsArticle
                 {%- else -%}
                     Article
                 {%- endif -%}">
