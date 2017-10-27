@@ -52,19 +52,6 @@
 		margin-top: remify(60px)
 		padding-bottom: remify(12px)
 		padding-top: remify(12px)
-	&__link-series
-		color: rgba($color-text, 0.8)
-		// min-height: remify(48px)
-		// position: absolute
-		// right: remify(20px)
-		text-decoration: underline
-		+on-interaction
-			color: $color-text
-			text-decoration: none
-		&:after
-			content: "\203A"
-			margin-left: remify(4px)
-			position: absolute // to prevent the underline. strange thing.
 
 +respond-min($break-tablet-min)
 	.article-heading

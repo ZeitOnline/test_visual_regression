@@ -11,19 +11,6 @@
 	+respond-min($break-tablet-min)
 		margin-top: 0
 
-	&__link
-		border-bottom: 1px rgba($color-text, 0.2) solid
-		color: $color-text
-		font-size: remify(14px)
-		letter-spacing: $letter-spacing-s
-		// position: absolute
-		// right: remify(12px)
-		&:after
-			content: "\203A"
-			margin-left: 0.5em
-		+on-interaction
-			border-bottom: 1px currentColor solid
-
 .podcast-links
 	margin: 0
 	padding: 0 remify(12px)
@@ -45,6 +32,20 @@
 .podcastfooter__platforms,
 .podcastfooter__serieslink
 	display: inline-block
+
+.podcastfooter__serieslink
+	border-bottom: 1px rgba($color-text, 0.2) solid
+	color: $color-text
+	//font-size: remify(14px)
+	letter-spacing: $letter-spacing-s
+	text-decoration: none
+	&:after
+		content: "\203A"
+		margin-left: 0.5em
+	+on-interaction
+		color: $color-text
+		border-bottom-color: currentColor
+
 
 // Neither nice nor BEM, but as demanded in ZON-4235
 // minor area styles have to align to mobile.

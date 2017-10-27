@@ -8,6 +8,6 @@
     {% include "zeit.web.core:templates/inc/shared/podcast-links.tpl" %}
 
     {%- if view.serie -%}
-        <a href="{{ context | find_series_cp | create_url }}" class="podcastfooter__serieslink article-heading__link-series">Alle Folgen</a>
+        <a href="{{ context | find_series_cp | create_url }}" class="podcastfooter__serieslink">Alle Folgen</a>
     {%- endif -%}
 </div>
