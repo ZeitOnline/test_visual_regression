@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.104 (unreleased)
+3.104 (2017-10-30)
 ------------------
 
 - ZON-4235: Extend podcast player with Deezer / Spotify / iTunes links
