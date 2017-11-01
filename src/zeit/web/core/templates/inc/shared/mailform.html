@@ -56,9 +56,9 @@
             {% if block.subject %}
                 <input type="hidden" name="subject" value="{{ block.subject_display }}"/>
             {% else %}
-                <label for="feedbackselect" class="feedback-form__label" aria-labelledby="feedbackselect">Ich habe Feedback zum Thema</label>
-                <div class="feedback-form__select" aria-label="Select-Box">
-                    <select name="subject">
+                <label for="subject" class="feedback-form__label">Ich habe Feedback zum Thema</label>
+                <div class="feedback-form__select">
+                    <select name="subject" id="subject">
                     {% for subject in block.subjects %}
                         <option>{{ subject }}</option>
                     {% endfor %}
@@ -66,14 +66,14 @@
                 </div>
             {% endif %}
                 <div id="feedbackerrortextarea" class="feedback-form__errortextarea"></div>
-                <textarea id="feedbacktext" name="body" class="feedback-form__textarea" rows="10" aria-label="Text-Area" required>{% if success == 'False' %}{{ request.headers.get('X-POST-body') }}{% endif %}</textarea>
-                <input id="feedbackmail" type="email" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)" class="feedback-form__input" aria-label="E-Mail-Address" />
+                <textarea id="feedbacktext" name="body" class="feedback-form__textarea" rows="10" aria-label="Textfeld für Ihr Feedback" required>{% if success == 'False' %}{{ request.headers.get('X-POST-body') }}{% endif %}</textarea>
+                <input id="feedbackmail" type="email" name="from" placeholder="Ihre E-Mail-Adresse (freiwillig)" class="feedback-form__input" aria-label="Ihre E-Mail-Adresse (freiwillig)" />
                 <noscript>
                     <input type="hidden" name="nojs" value="True">
                     <div class="feedback-form__recaptcha-response">
                         <iframe src="https://www.google.com/recaptcha/api/fallback?k=6LePDDUUAAAAADV2R0DaGNWyMEEcJuKSoahA3BH8" class="feedback-form__recaptcha-frame"></iframe>
                     </div>
-                    <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response feedback-form__textarea" aria-label="Text-Area" required></textarea>
+                    <textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response feedback-form__textarea" aria-label="Text-Area für Captcha" required></textarea>
                 </noscript>
             </div>
             <div id='recaptcha' class="g-recaptcha" data-sitekey="6Ld00TUUAAAAANAca0kAaZPfp5XPYW69ss_YhaC4" data-callback="onSubmit" data-size="invisible"></div>
