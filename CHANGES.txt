@@ -4,6 +4,12 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+3.106 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 3.105 (2017-11-01)
 ------------------
 
