@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - PERF: Remove unneeded `episodes` from podcast player config
 
+- MAINT: Simplify module spelling by proxying through to the vivi module
+
 
 3.104 (2017-10-30)
 ------------------
