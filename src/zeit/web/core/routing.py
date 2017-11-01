@@ -270,9 +270,12 @@ class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
     @CONFIG_CACHE.cache_on_arguments()
     def compile(self):
         matchers = []
-        for pattern in self.getValues(None):
-            matcher, _ = pyramid.urldispatch._compile_route(pattern)
-            matchers.append(matcher)
+        try:
+            for pattern in self.getValues(None):
+                matcher, _ = pyramid.urldispatch._compile_route(pattern)
+                matchers.append(matcher)
+        except Exception:
+            log.warning('Error reading blacklist', exc_info=True)
         return matchers
 
 
