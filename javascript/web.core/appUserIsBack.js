@@ -20,21 +20,23 @@ function appUserIsBack( timestamp, options ) {
         /**
          * default options
          * @type {Object}
-         * @property {string} buttontext    text for the reload button 'Neu laden'
-         * @property {boolean} debug        activate debugging (normally url(?|#)debug-userisback)
-         * @property {int} delta            minimum time delta between cache and page semantic update time
-         * @property {string} endpoint      api endpoint for checking update time
-         * @property {boolean} force        activate debugging and forcing info message to show
-         *                                  even on new page (normally url(?|#)force-userisback)
-         * @property {string} link          link where the reload link is directed (in nojs mode)
-         * @property {string} slug          pathname of the file to test for update time
-         * @property {string} text          text of the info 'Die Seite wurde aktualisiert'
+         * @property {string} buttontext            text for the reload button 'Neu laden'
+         * @property {boolean} debug                activate debugging (normally url(?|#)debug-userisback)
+         * @property {int} delta                    minimum time delta between cache and page semantic update time
+         * @property {string} configuredProtocol    use https protocol configured by system toogle
+         * @property {string} endpoint              api endpoint for checking update time
+         * @property {boolean} force                activate debugging and forcing info message to show
+         *                                          even on new page (normally url(?|#)force-userisback)
+         * @property {string} link                  link where the reload link is directed (in nojs mode)
+         * @property {string} slug                  pathname of the file to test for update time
+         * @property {string} text                  text of the info 'Die Seite wurde aktualisiert'
          */
         var defaults = {
             buttontext: 'Neu laden',
             debug: window.location.href.indexOf( 'debug-userisback' ) !== -1,
             delta: 0, // give higher deltas to show lesser messages
-            endpoint: window.location.protocol + '//' + window.location.host + '/json/update-time',
+            configuredProtocol: window.Zeit.toggles.https ? 'https:' : window.location.protocol,
+            endpoint: '//' + window.location.host + '/json/update-time',
             force: window.location.href.indexOf( 'force-userisback' ) !== -1,
             link: window.location.href,
             slug: window.location.pathname,
@@ -199,7 +201,7 @@ function appUserIsBack( timestamp, options ) {
             return;
         }
         var that = this;
-        this.get( options.endpoint + options.slug ).then( function( response ) {
+        this.get( options.configuredProtocal + options.endpoint + options.slug ).then( function( response ) {
             // check if the website was updated after the page was cached by the app
             if (
                 that.options.force ||
