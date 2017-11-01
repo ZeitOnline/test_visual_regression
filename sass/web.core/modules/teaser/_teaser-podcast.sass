@@ -17,9 +17,12 @@
 	&__item
 		display: inline
 		&:not(:first-child)
-			margin-left: remify(6px)
+			margin-left: remify(12px)
 		svg
+			color: $trout
 			vertical-align: middle
+			+on-interaction
+				color: $color-text
 
 	&__link
 		color: rgba($color-text, 0.8)
@@ -37,7 +40,7 @@
 
 .podcastfooter__serieslink
 	border-bottom: 1px rgba($color-text, 0.2) solid
-	color: $color-text
+	color: #44444c
 	font-size: remify(14px)
 	letter-spacing: $letter-spacing-s
 	margin-left: auto // pull it to the right inside flexbox container
@@ -47,4 +50,4 @@
 		margin-left: 0.5em
 	+on-interaction
 		color: $color-text
-		border-bottom-color: currentColor
+		border-bottom-color: rgba($color-text, 0.8)
