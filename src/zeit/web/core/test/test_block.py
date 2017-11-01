@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import copy
+import json
 
 import dogpile.cache
 import lxml.etree
@@ -560,7 +561,7 @@ def test_volume_should_ignore_invalid_references(application):
 def test_podcast_should_render_script_tag_for_player(testbrowser):
     browser = testbrowser('/zeit-online/article/podcast')
     player = browser.cssselect('script.podigee-podcast-player')[0]
-    assert player.get('data-configuration') == 'podigee_player_6853'
+    assert player.get('data-configuration') == 'podigee_player_8111'
     assert '"theme": "zon-standalone"' in browser.contents
 
 
@@ -576,3 +577,23 @@ def test_podcast_header_should_provide_podlove_data(application):
     assert podlove['title'] == 'Test'
     assert podlove['cover'].startswith('https://cdn.podigee.com')
     assert len(podlove['feeds']) == 4
+
+
+def test_podcast_should_show_podcast_links(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast-header')
+    podcast_links = browser.cssselect('.podcast-links__link')
+    assert podcast_links[0].get('href') == 'http://xml.zeit.de/podcast/id1656'
+    assert podcast_links[1].get('href') == 'http://xml.zeit.de/spotify_url'
+    # There's only two links, since no deezer url has been provided.
+    assert len(podcast_links) == 2
+
+
+def test_podcast_should_remove_episodes_from_player_config(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast')
+    script = browser.cssselect('.podcast.article__item script')[0]
+    # poor man's kludgy JS-eval()
+    data = script.text.replace(
+        'window.podigee_player_8111 = ', '').strip()[:-1]
+    data = data.replace(r'\script', 'script')
+    data = json.loads(data)
+    assert 'episodes' not in data['podcast']
