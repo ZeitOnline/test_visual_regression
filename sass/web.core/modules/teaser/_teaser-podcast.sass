@@ -5,47 +5,26 @@
 
 .teaser-podcast-footer
 	border-top: 1px $zon-light-grey solid
-	display: flex
 	margin-top: remify(35px)
 	padding: remify(12px 15px 12px 20px)
 	+respond-min($break-tablet-min)
 		margin-top: 0
 
-	&__link
-		border-bottom: 1px rgba($zon-charcoal, 0.2) solid
-		color: $zon-dark-grey
-		font-size: remify(14px)
-		letter-spacing: $letter-spacing-s
-		position: absolute
-		right: remify(12px)
-		&:after
-			content: "\203A"
-			margin-left: 0.5em
-		+on-interaction
-			border-bottom: 1px currentColor solid
-
 .podcast-links
-	+respond-min($break-tablet-min)
-		margin-left: remify(12px)
+	margin-top: 0
+	margin-bottom: 0
+	padding-left: 0
+	&__item
+		display: inline
+		&:not(:first-child)
+			margin-left: remify(12px)
+		svg
+			color: $trout
+			vertical-align: middle
+			+on-interaction
+				color: $color-text
 
-.podcast-links__list
-	margin: 0
-	padding: 0
-
-.podcast-links__item
-	display: inline
-	letter-spacing: remify(20px)
-	+respond-min($break-tablet-min)
-		letter-spacing: remify(12px)
-	svg
-		vertical-align: middle
-
-// Neither nice nor BEM, but as demanded in ZON-4235
-// minor area styles have to align to mobile.
-.cp-area--minor .podcast-links, // ZON CP
-.cp-area--trio .podcast-links // ZAR CP
-	margin-left: 0
-
-.cp-area--minor .teaser-podcast-footer, // ZON CP
-.cp-area--trio .teaser-podcast-footer // ZAR CP
-	margin-top: remify(30px) // additional space for podlove-button
+	&__link
+		color: rgba($color-text, 0.8)
+		+on-interaction
+			color: $color-text
