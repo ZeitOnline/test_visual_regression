@@ -36,7 +36,7 @@ def test_video_source_should_be_highest_rendition_url(application):
     assert video.highest_rendition is None
 
 
-@pytest.mark.parametrize('format, klass', [
+@pytest.mark.parametrize('layout, klass', [
     ('', 'figure is-constrained is-centered'),
     ('zmo-small-left', 'figure-stamp'),
     ('zmo-small-right', 'figure-stamp--right'),
@@ -45,9 +45,9 @@ def test_video_source_should_be_highest_rendition_url(application):
     ('zmo-small-left', 'figure-stamp'),
     ('small', 'figure-stamp')]
 )
-def test_video_block_should_produce_markup(format, klass, tplbrowser):
+def test_video_block_should_produce_markup(layout, klass, tplbrowser):
     block = {'id': 42, 'video_still': 'pic.jpg', 'video': 'fake',
-             'description': 'test', 'format': format, 'title': 'title'}
+             'subtitle': 'test', 'layout': layout, 'title': 'title'}
     view = {'package': 'zeit.web.magazin'}
 
     browser = tplbrowser(

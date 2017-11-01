@@ -2,6 +2,11 @@
 <div id="login-state" data-sso-id="{{ request.user.ssoid }}"></div>
 {# Make Login-Status available for CSS styling. Works because this is loaded via ESI. #}
 {% if request.user %}
-<script type="text/javascript">document.documentElement.className += ' is-loggedin';</script>
+<script type="text/javascript">
+    document.documentElement.className += ' is-loggedin';
+    {% if toggles('iqd_touchpoint') %}
+        window.Zeit.iq_ehash = '{{ request.user['mail']  | iqd_mail_hash }}';
+    {% endif %}
+</script>
 {% endif %}
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_noscript.html" %}
