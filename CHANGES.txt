@@ -7,6 +7,8 @@ POSTDEPLOY
 3.104 (unreleased)
 ------------------
 
+- ZON-4281: Consolidate and clean up podcast footer
+
 - ZON-4235: Extend podcast player with Deezer / Spotify / iTunes links
 
 - SSL-37: Move image source to local repo
