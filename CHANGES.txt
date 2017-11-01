@@ -7,6 +7,8 @@ POSTDEPLOY
 3.105 (unreleased)
 ------------------
 
+- ZON-4281: Consolidate and clean up podcast footer
+
 - ZON-4220: Make hashed user-email available to iqd
 
 - PERF: Remove unneeded `episodes` from podcast player config
@@ -16,8 +18,6 @@ POSTDEPLOY
 
 3.104 (2017-10-30)
 ------------------
-
-- ZON-4281: Consolidate and clean up podcast footer
 
 - ZON-4235: Extend podcast player with Deezer / Spotify / iTunes links
 
