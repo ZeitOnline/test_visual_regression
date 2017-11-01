@@ -7,7 +7,9 @@ POSTDEPLOY
 3.105 (unreleased)
 ------------------
 
-- ZON-4220: Make hashed user-email available to iqd 
+- ZON-4220: Make hashed user-email available to iqd
+
+- PERF: Remove unneeded `episodes` from podcast player config
 
 
 3.104 (2017-10-30)
