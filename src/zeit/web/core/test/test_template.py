@@ -326,6 +326,13 @@ def test_filter_append_get_params_should_accept_unicode():
         zeit.web.core.template.append_get_params(request))
 
 
+def test_filter_iqd_email_hash_produces_expected_string():
+    email = 'foo2342@bar.de'
+    assert '102-b0ab3182d9cfe79fd9e66fa060d320345efcd3661f20a30e'\
+           '4b3f38a845a101ce' == (
+            zeit.web.core.template.iqd_mail_hash(email))
+
+
 def test_pagination_calculation_should_deliver_valid_output():
     pager = zeit.web.core.template.calculate_pagination
     assert pager(1, 1) is None

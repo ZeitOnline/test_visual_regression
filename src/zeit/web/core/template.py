@@ -11,6 +11,7 @@ import time
 import types
 import urllib
 import urlparse
+import hashlib
 
 import babel.dates
 import lxml.etree
@@ -217,6 +218,16 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         templates.append('logo-zar')
 
     return templates
+
+
+@zeit.web.register_filter
+def iqd_mail_hash(mail_address):
+    mail_hash = hashlib.sha256()
+    normalized = mail_address.lower().replace(" ", "")
+    # add some iqd-required strings to the email before it's sha256ed
+    mail_hash.update('{}_{}_{}'.format('AxMp', normalized, len(normalized)))
+    # '102' is some arbitrary (ZON-?) iqd-id
+    return '{}-{}'.format('102', mail_hash.hexdigest())
 
 
 @zeit.web.register_test

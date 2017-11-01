@@ -1,14 +1,20 @@
 // the button is used on CPs and articles, with different background colors and in different surroundings.
 .podlove-button
-	border: 1px rgba($color-text, 0.5) solid
 	border-radius: remify(4px)
+	border: 1px rgba($color-text, 0.5) solid
+	bottom: remify(68px)
 	color: $color-text
 	font-size: remify(12px)
 	font-weight: normal
-	letter-spacing: $letter-spacing-s
-	margin-right: remify(10px)
-	padding: remify(3px 5px)
+	left: 50%
+	letter-spacing: $letter-spacing-m
+	padding: remify(3px 8px)
+	position: absolute
 	text-transform: uppercase
+	transform: translateX(-50%)
+	+respond-min($break-tablet-min)
+		position: static
+		transform: none
 	+on-interaction
 		background-color: $color-text
 		border-color: transparent
@@ -20,3 +26,11 @@
 
 	.no-js &
 		display: none
+
+// Neither nice nor BEM, but as demanded in ZON-4235
+// minor area styles have to align to mobile.
+.cp-area--minor .podlove-button, // ZON CP
+.cp-area--trio .podlove-button // ZAR CP
+	left: 50%
+	position: absolute
+	transform: translateX(-50%)
