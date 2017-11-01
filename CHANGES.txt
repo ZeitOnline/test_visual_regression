@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.105 (unreleased)
+3.105 (2017-11-01)
 ------------------
 
 - ZON-4281: Consolidate and clean up podcast footer
