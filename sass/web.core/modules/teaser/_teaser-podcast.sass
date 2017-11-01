@@ -11,14 +11,13 @@
 		margin-top: 0
 
 .podcast-links
-	margin: 0
-	padding: 0 remify(12px)
-	&:first-child
-		padding-left: 0
-
+	margin-top: 0
+	margin-bottom: 0
+	padding-left: 0
 	&__item
 		display: inline
-		padding: 0 remify(6px)
+		&:not(:first-child)
+			margin-left: remify(6px)
 		svg
 			vertical-align: middle
 
