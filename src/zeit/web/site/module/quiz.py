@@ -13,10 +13,6 @@ log = logging.getLogger(__name__)
 class Quiz(zeit.web.core.centerpage.Module):
 
     @zeit.web.reify
-    def title(self):
-        return self.context.title
-
-    @zeit.web.reify
     def url(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('quiz_url', '').format(quiz_id=self.context.quiz_id)

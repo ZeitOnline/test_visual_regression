@@ -1,12 +1,12 @@
 {% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 
-{% if block.id and 'header' not in block.format | default('') -%}
+{% if block.id and 'header' not in block.layout | default('') -%}
 <figure class="
-    {% if block.format == 'zmo-small-left' or block.format == 'small' %}
+    {% if block.layout == 'zmo-small-left' or block.layout == 'small' %}
         figure-stamp
-    {% elif block.format == 'large' or block.format == 'zmo-large-left' or block.format == 'zmo-large-center' or block.format == 'zmo-large-right' %}
+    {% elif block.layout == 'large' or block.layout == 'zmo-large-left' or block.layout == 'zmo-large-center' or block.layout == 'zmo-large-right' %}
         figure-full-width
-    {% elif block.format == 'zmo-small-right' %}
+    {% elif block.layout == 'zmo-small-right' %}
          figure-stamp--right
     {% else %}
          figure is-constrained is-centered
@@ -24,7 +24,7 @@
 
     {% block video_caption -%}
     <figcaption class="figure__caption">
-        {{ block.description }}
+        {{ block.subtitle }}
     </figcaption>
     {%- endblock %}
 

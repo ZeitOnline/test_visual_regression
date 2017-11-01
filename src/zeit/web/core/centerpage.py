@@ -225,6 +225,9 @@ class Module(object):
         elif zeit.edit.interfaces.IBlock.providedBy(context):
             self.layout = context.type
 
+    def __getattr__(self, name):
+        return getattr(self.context, name)
+
     def __hash__(self):
         return self.context.xml.get(
             '{http://namespaces.zeit.de/CMS/cp}__name__',
@@ -263,8 +266,9 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
 
     visible = True
 
-    def __init__(self, arg, **kw):
-        zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
+    def __init__(self, context, **kw):
+        Module.__init__(self, context)
+        zeit.web.core.utils.nslist.__init__(self, [v for v in context if v])
         self._layout = kw.pop('layout', 'default')
         self.type = kw.pop('type', 'teaser')
         self.__parent__ = kw.pop('parent', None)
