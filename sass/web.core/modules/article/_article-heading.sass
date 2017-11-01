@@ -1,0 +1,28 @@
+.article-heading__footer
+	+padded
+	border-top: 1px rgba($color-text, 0.2) solid
+	font-family: $font-tabletgothic
+	padding-bottom: remify(12px)
+	padding-top: remify(12px)
+	+respond-min($break-tablet-min)
+		padding: $page-padding
+
+// We need a fixed max-width to enable "text-overflow: ellipsis".
+// And we need it gradually, to look good.
+// Optimize: It would be cool to have it more fluid. But calc() and percentages
+// do not seem to work.
+.article-heading__headline--podcast > span
+	+respond-min($break-tablet-min)
+		max-width: remify(400px)
+		overflow: hidden
+		text-overflow: ellipsis
+	+respond-min(800px)
+		max-width: remify(425px)
+	+respond-min(850px)
+		max-width: remify(450px)
+	+respond-min(900px)
+		max-width: remify(500px)
+	+respond-min(1000px)
+		max-width: remify(550px)
+	+respond-min($break-desktop-min)
+		max-width: remify(560px)
