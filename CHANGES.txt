@@ -4,10 +4,20 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.104 (unreleased)
+3.105 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4220: Make hashed user-email available to iqd
+
+- PERF: Remove unneeded `episodes` from podcast player config
+
+
+3.104 (2017-10-30)
+------------------
+
+- ZON-4235: Extend podcast player with Deezer / Spotify / iTunes links
+
+- SSL-37: Move image source to local repo
 
 
 3.103 (2017-10-25)
