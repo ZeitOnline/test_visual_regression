@@ -35,7 +35,6 @@ define([], function() {
         }
 
         // first step: very simple
-
         var loginLink = document.querySelector( '.nav__login-link' );
         if ( loginLink ) {
             loginLink.setAttribute( 'href', window.Zeit.actualHost + '/konto' );
@@ -44,10 +43,10 @@ define([], function() {
 
         // second step: complex layout update
         var template = require( 'web.core/templates/framebuilderLoginStatus.html' ),
-            // for multipage view (komplettansicht), we have to select the last page
             navLoginArea = document.querySelector( '.nav__login' ),
             newDom = template({
-                username: userName
+                username: userName,
+                returnurl: encodeURIComponent( window.location.href )
             });
 
         // TODO: ist das gut?
