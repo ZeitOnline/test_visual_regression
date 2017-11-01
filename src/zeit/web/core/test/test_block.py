@@ -593,7 +593,7 @@ def test_podcast_should_remove_episodes_from_player_config(testbrowser):
     script = browser.cssselect('.podcast.article__item script')[0]
     # poor man's kludgy JS-eval()
     data = script.text.replace(
-        'window.podigee_player_6853 = ', '').strip()[:-1]
+        'window.podigee_player_8111 = ', '').strip()[:-1]
     data = data.replace(r'\script', 'script')
     data = json.loads(data)
     assert 'episodes' not in data['podcast']
