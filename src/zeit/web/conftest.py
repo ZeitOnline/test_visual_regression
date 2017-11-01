@@ -90,6 +90,7 @@ def app_settings(mockserver):
         'agatho_host': mockserver.url + '/comments',
         'linkreach_host': mockserver.url + '/linkreach/api',
         'podigee_url': mockserver.url + '/podigee',
+        'itunes_podcast_base_url': 'http://xml.zeit.de/podcast/id',
         'app_servers': '',
         'health_check_with_fs': True,
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
@@ -468,14 +469,14 @@ def sleep_tween(handler, registry):
 class StaticViewMaybeReplaceHostURL(pyramid.static.static_view):
 
     def __call__(self, context, request):
-        # XXX Should we make the query string behaviour configurable and use
-        # a separate mockserver fixture for agatho instead?
-        if (request.environ['PATH_INFO'].startswith('/comments') and
-                request.query_string):
+        # XXX Should we make the query string behaviour configurable?
+        if (request.query_string and (
+                request.environ['PATH_INFO'].startswith('/comments') or
+                request.environ['PATH_INFO'].startswith('/podigee'))):
             request.environ['PATH_INFO'] += u'?' + request.query_string
         response = super(StaticViewMaybeReplaceHostURL, self).__call__(
             context, request)
-        if response.content_type in ['application/xml']:
+        if not response.content_type.startswith('image'):
             # Dear pyramid.response.FileResponse, would it kill you to
             # *remember* the path you are passed? Now we have to copy&paste
             # from the superclass and determine the path again.

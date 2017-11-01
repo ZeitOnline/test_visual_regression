@@ -53,7 +53,14 @@ class Podigee(object):
                     url + u'/embed?context=external',
                     headers={'Accept': 'application/json'},
                     timeout=conf.get('podigee_config_timeout', 2))
-                return response.json()
+            data = response.json()
+            try:
+                # By disabling the "playlist" feature of the podigee player
+                # (which we're not using), we can drastically shrink the JSON.
+                del data['podcast']['episodes']
+            except KeyError:
+                pass
+            return data
         except Exception:
             log.warning('config GET %s failed', url, exc_info=True)
             return {}

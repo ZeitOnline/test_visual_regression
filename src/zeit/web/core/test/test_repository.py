@@ -1,3 +1,6 @@
+import pyramid.request
+
+from zeit.cms.checkout.helper import checked_out
 import zeit.content.article.interfaces
 import zeit.cms.interfaces
 import zeit.cms.repository.unknown
@@ -21,3 +24,14 @@ def test_content_without_type_should_have_no_content_interfaces(application):
     assert isinstance(
         content, zeit.cms.repository.unknown.PersistentUnknownResource)
     assert not zeit.content.article.interfaces.IArticle.providedBy(content)
+
+
+def test_workingcopy_content_should_have_marker_interface(
+        my_traverser, workingcopy):
+    content = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/fischer')
+    with checked_out(content, temporary=False):
+        req = pyramid.request.Request.blank('/wcpreview/zope.user/fischer')
+        tdict = my_traverser(req)
+        assert zeit.web.core.interfaces.IInternalUse.providedBy(
+            tdict['context'])
