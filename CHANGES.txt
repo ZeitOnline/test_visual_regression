@@ -7,7 +7,7 @@ POSTDEPLOY
 3.105 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4220: Make hashed user-email available to iqd 
 
 
 3.104 (2017-10-30)
