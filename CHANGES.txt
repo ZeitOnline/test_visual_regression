@@ -13,6 +13,8 @@ POSTDEPLOY
 
 - MAINT: Simplify module spelling by proxying through to the vivi module
 
+- MAINT: Ignore errors in blacklist configuration
+
 
 3.104 (2017-10-30)
 ------------------
