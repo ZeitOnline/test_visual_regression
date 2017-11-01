@@ -90,6 +90,7 @@ def app_settings(mockserver):
         'agatho_host': mockserver.url + '/comments',
         'linkreach_host': mockserver.url + '/linkreach/api',
         'podigee_url': mockserver.url + '/podigee',
+        'itunes_podcast_base_url': 'http://xml.zeit.de/podcast/id',
         'app_servers': '',
         'health_check_with_fs': True,
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
