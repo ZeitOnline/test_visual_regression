@@ -2299,3 +2299,9 @@ def test_narrow_header_should_render_image_column_width(testbrowser):
     figure = browser.cssselect('.article-header figure')[0]
     assert 'article__item--wide' not in figure.get('class')
     assert 'article__item--apart' in figure.get('class')
+
+
+def test_abo_paywall_schema_attr(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/zeit?C1-Meter-Status=always_paid')
+    assert len(browser.cssselect('.paywall')) == 1
