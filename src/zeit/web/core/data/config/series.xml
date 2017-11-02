@@ -15,7 +15,7 @@
     <series title="Afrika - 50 Jahre Unabhängigkeit" serienname="Afrika 50" url="afrika-50" encoded="Afrika%2050" />
     <series title="Amuse Buch" serienname="Amuse Buch" url="amuse-buch" encoded="Amuse%20Buch" />
     <series title="Anti-Mono-Stereo" serienname="Anti-Mono-Stereo" url="anti-mono-stereo" />
-    <series title="App-Kritik" serienname="App-Kritik" url="app-kritik" />
+    <series title="App-Kritik" serienname="App-Kritik" url="app-kritik" fallback_image="yes"/>
     <series title="Auch das ist Sport" serienname="Auch das ist Sport" url="auch-das-ist-sport" encoded="Auch%20das%20ist%20Sport" />
     <series title="Aussteigen für Anfänger" serienname="Aussteigen für Anfänger" url="aussteigen-fuer-anfaenger" encoded="Aussteigen%20f%C3%BCr%20Anf%C3%A4nger" />
     <series title="Autogeschichte" serienname="Autogeschichte" url="autogeschichte" />
@@ -33,7 +33,7 @@
     <series title="Carsharing" serienname="Carsharing" url="carsharing" />
     <series title="Chefsache" serienname="Chefsache" url="chefsache" />
     <series title="City Guide" serienname="City Guide" url="city-guide" encoded="City%20Guide" />
-    <series title="Das anonyme Gehaltsprotokoll" serienname="Das anonyme Gehaltsprotokoll" url="das-anonyme-gehaltsprotokoll" encoded="Das%20anonyme%20Gehaltsprotokoll" />
+    <series title="Das anonyme Gehaltsprotokoll" serienname="Das anonyme Gehaltsprotokoll" url="das-anonyme-gehaltsprotokoll" encoded="Das%20anonyme%20Gehaltsprotokoll" format-label="Kolumne" />
     <series title="Das demografische Experiment" serienname="Das demografische Experiment" url="das-demografische-experiment" encoded="Das%20demografische%20Experiment" />
     <series title="Das erste Mal" serienname="Das erste Mal" url="das-erste-mal" encoded="Das%20erste%20Mal" />
     <series title="Das ist mir heilig" serienname="Das ist mir heilig" url="das-ist-mir-heilig" encoded="Das%20ist%20mir%20heilig" />
@@ -181,6 +181,7 @@
     <series title="Roger Willemsen fragt" serienname="Roger Willemsen fragt" url="willemsen" encoded="Roger%20Willemsen%20fragt" />
     <series title="Sarko oder der andere" serienname="Sarko oder der andere" url="sarko-oder-der-andere" encoded="Sarko%20oder%20der%20andere" />
     <series title="Schlaue Weihnachten" serienname="Schlaue Weihnachten" url="schlaue-weihnachten" encoded="Schlaue%20Weihnachten" />
+    <series title="Schneiders Weisheit" serienname="Schneiders Weisheit" url="schneiders-weisheit" encoded="Schneiders%20Weisheit" format-label="Kolumne" />
     <series title="Schönheit in jedem Alter" serienname="Schönheit in jedem Alter" url="schoenheit-in-jedem-alter" encoded="Sch%C3%B6nheit%20in%20jedem%20Alter" />
     <series title="Schulfrage" serienname="Schulfrage" url="schulfrage" />
     <series title="Schwanger im Studium" serienname="Schwanger im Studium" url="schwanger-im-studium" encoded="Schwanger%20im%20Studium" format-label="Kolumne" />

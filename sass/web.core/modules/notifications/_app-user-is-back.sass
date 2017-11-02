@@ -1,0 +1,30 @@
+.app-user-is-back
+	background: rgba(darken(#78777d, 5), .95)
+	bottom: 0
+	color: #fff
+	display: flex
+	font-size: remify(14px)
+	justify-content: space-between
+	left: 0
+	padding: 15px 10px
+	position: fixed
+	right: 0
+	z-index: 2 // to beat teaser title in ZCO
+	+font-smoothing
+	&__icon
+		display: inline-block
+		height: remify(18px)
+		margin-right: remify(5px)
+		vertical-align: bottom
+		width: remify(20px)
+		svg
+			fill: currentColor
+			height: 100%
+			width: 100%
+	&__button
+		align-self: flex-end
+		font-size: 90%
+		text-transform: uppercase
+	&:link,
+	&:visited
+		color: #fff

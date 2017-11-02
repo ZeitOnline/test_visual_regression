@@ -15,6 +15,9 @@ import zeit.web.core.interfaces
         ('http://xml.zeit.de/autoren/anne_mustermann', 5),
         ('http://xml.zeit.de/zeit-magazin/centerpage/index', 20),
         ('http://xml.zeit.de/galerien/fs-desktop-schreibtisch-computer', 40),
+        ('http://xml.zeit.de/text/dummy', 3600),
+        ('http://xml.zeit.de/config/community_maintenance.xml', 3600),
+        ('http://xml.zeit.de/davcontent/raw.css', 3600),
     ])
 def test_caching_time_should_be_set_per_content_object(application, content):
     obj = zeit.cms.interfaces.ICMSContent(content[0])

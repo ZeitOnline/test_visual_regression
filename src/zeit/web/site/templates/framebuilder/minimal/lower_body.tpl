@@ -1,5 +1,9 @@
             </main>
             {% block adplace_floor %}
+                {% if not view.is_hp -%}
+                    <!-- P7 -->
+                    {% include "zeit.web.core:templates/inc/ads/places/desktop/place16.html" %}
+                {% endif -%}
                 {% include "zeit.web.core:templates/inc/ads/places/mobile/place8.html" %}
             {% endblock adplace_floor %}
             {% block footer -%}

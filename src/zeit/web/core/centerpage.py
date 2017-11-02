@@ -64,7 +64,7 @@ class Area(collections.OrderedDict):
     # so a full re-implementation is just plain impossible.
     # So we hard-code the only use-case that this should ever be called for,
     # which is ITeaseredContent.
-    def select_modules(self, *interfaces):
+    def filter_values(self, *interfaces):
         for module in zeit.content.cp.interfaces.IRenderedArea(self).values():
             if getattr(module, 'type', None) == 'teaser':
                 yield module
@@ -125,8 +125,9 @@ def get_area(area):
 
 def get_module(module):
     """Wraps a zeit.edit.interfaces.IBlock into a
-    zeit.web.core.interfaces.IBlock if an adapter is available, else returns it
-    unchanged.
+    zeit.web.core.interfaces.IBlock. If no specific adapter is available, a
+    generic `Module` object (see below) is returned, with a `layout` whose `id`
+    is the IBlock.type.
     """
     if zeit.web.core.interfaces.IBlock.providedBy(module):
         return module
@@ -224,13 +225,20 @@ class Module(object):
         elif zeit.edit.interfaces.IBlock.providedBy(context):
             self.layout = context.type
 
+    def __getattr__(self, name):
+        return getattr(self.context, name)
+
     def __hash__(self):
-        return self.context.xml.attrib.get(
+        return self.context.xml.get(
             '{http://namespaces.zeit.de/CMS/cp}__name__',
             super(Module, self)).__hash__()
 
     def __repr__(self):
         return object.__repr__(self)
+
+    @zeit.web.reify
+    def __name__(self):
+        return self.context.__name__
 
     @property
     def layout(self):
@@ -258,8 +266,9 @@ class TeaserModule(Module, zeit.web.core.utils.nslist):
 
     visible = True
 
-    def __init__(self, arg, **kw):
-        zeit.web.core.utils.nslist.__init__(self, [v for v in arg if v])
+    def __init__(self, context, **kw):
+        Module.__init__(self, context)
+        zeit.web.core.utils.nslist.__init__(self, [v for v in context if v])
         self._layout = kw.pop('layout', 'default')
         self.type = kw.pop('type', 'teaser')
         self.__parent__ = kw.pop('parent', None)

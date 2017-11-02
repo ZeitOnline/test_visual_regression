@@ -17,7 +17,6 @@ log = logging.getLogger(__name__)
 
 @zeit.web.view_config(
     context=zeit.content.video.interfaces.IVideo,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/video.html')
 class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 
@@ -71,3 +70,7 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
     @zeit.web.reify
     def product_id(self):
         return super(Video, self).product_id or 'zede'
+
+    @zeit.web.reify
+    def has_advertisement(self):
+        return self.context.has_advertisement

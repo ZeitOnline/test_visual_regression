@@ -38,6 +38,9 @@ class StoryStreamTeaserBlock(
         self.article_modules = self.get_articles(
             3, zeit.content.cp.interfaces.ITeaserBlock)
 
+    def __len__(self):
+        return len(self.context)
+
     def __iter__(self):
         return iter(self.context)
 
@@ -48,7 +51,7 @@ class StoryStreamTeaserBlock(
         for region in regions:
             areas = region.values()
             for area in areas:
-                for module in area.select_modules(*teaserable_atom_types):
+                for module in area.filter_values(*teaserable_atom_types):
                     articles.append(module)
                     if (len(articles) >= article_number):
                         return articles
@@ -63,15 +66,17 @@ class StoryStreamTeaserBlock(
     zeit.content.cp.interfaces.ITeaserBlock,
     zeit.content.infobox.interfaces.IInfobox)
 class InfoboxTeaserBlock(
-        zeit.web.core.centerpage.Module,
+        zeit.web.core.module.teaser.TeaserBlock,
         zeit.web.core.block.Infobox,
         grokcore.component.MultiAdapter):
 
     grokcore.component.provides(zeit.web.core.interfaces.IBlock)
 
     def __init__(self, module, content):
-        self.module = module
-        self.context = content
+        zeit.web.core.module.teaser.TeaserBlock.__init__(self, module, content)
+        # z.w.core.block Infobox API
+        self.context = module
+        self.content = content
 
     @property
     def layout(self):

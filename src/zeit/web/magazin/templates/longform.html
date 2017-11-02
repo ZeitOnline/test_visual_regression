@@ -42,12 +42,12 @@
 {% block main %}
     <article class="article article--longform" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
-        <div class="article__head-wrap">
+        <div class="article__head-wrap" data-x-marker="header-wrapper">
 
             {% require block = view.header_module %}
                 {% set type = block | block_type %}
                 {% include [
-                    "zeit.web.magazin:templates/inc/blocks/header{0}-longform.html".format(type),
+                    "zeit.web.magazin:templates/inc/blocks/{0}_longform.html".format(type),
                     "zeit.web.magazin:templates/inc/blocks/{0}.html".format(type)] ignore missing %}
             {% endrequire %}
 
@@ -56,8 +56,8 @@
 
         <div class="article__body">
             <!-- block for Teaser -->
-            <section class="article-page" data-page-number="0">
-                <div class="article__head__subtitle">
+            <section class="article-page" data-page-number="0" data-x-marker="subtitle-container">
+                <div class="article__head__subtitle" data-x-marker="subtitle">
                     {{- view.subtitle -}}
                 </div>
             </section>

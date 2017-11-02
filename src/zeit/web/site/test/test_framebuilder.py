@@ -42,14 +42,17 @@ def test_framebuilder_contains_no_webtrekk(testbrowser):
     assert 'webtrekk' not in browser.contents
 
 
-def test_framebuilder_can_contain_webtrekk(testbrowser):
+def test_framebuilder_can_contain_webtrekk(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?webtrekk')
     webtrekk_script = browser.cssselect(
         'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 
-def test_framebuilder_sets_webtrekk_values_differently(testbrowser):
+def test_framebuilder_sets_webtrekk_values_differently(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?webtrekk')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -83,7 +86,8 @@ def test_framebuilder_contains_no_meetrics(testbrowser):
     assert len(meetrics_script) == 0
 
 
-def test_framebuilder_can_contain_meetrics(testbrowser):
+def test_framebuilder_can_contain_meetrics(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?meetrics')
     meetrics_script = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -146,7 +150,8 @@ def test_framebuilder_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?banner_channel={}'.format(
         testserver.url, 'one/two/three/homepage'))
-    assert 'homepage' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'homepage_trsf' == driver.execute_script(
+        'return adcSiteInfo.$handle')
     assert 'one' == driver.execute_script('return adcSiteInfo.level2')
     assert 'two' == driver.execute_script('return adcSiteInfo.level3')
     assert 'three' == driver.execute_script('return adcSiteInfo.level4')
@@ -154,7 +159,7 @@ def test_framebuilder_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?banner_channel={}'.format(
         testserver.url, 'oans/zwoa//index'))
-    assert 'index' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'index_trsf' == driver.execute_script('return adcSiteInfo.$handle')
     assert 'oans' == driver.execute_script('return adcSiteInfo.level2')
     assert 'zwoa' == driver.execute_script('return adcSiteInfo.level3')
     assert '' == driver.execute_script('return adcSiteInfo.level4')
@@ -170,7 +175,8 @@ def test_framebuilder_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?banner_channel={}'.format(
         testserver.url, '///artikel'))
-    assert 'artikel' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'artikel_trsf' == driver.execute_script(
+        'return adcSiteInfo.$handle')
     assert '' == driver.execute_script('return adcSiteInfo.level2')
     assert '' == driver.execute_script('return adcSiteInfo.level3')
     assert '' == driver.execute_script('return adcSiteInfo.level4')
@@ -181,7 +187,7 @@ def test_framebuilder_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?banner_channel={}'.format(
         testserver.url, 'one/two/three/four/my,keywords,in,channel'))
-    assert 'four' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'four_trsf' == driver.execute_script('return adcSiteInfo.$handle')
     assert 'one' == driver.execute_script('return adcSiteInfo.level2')
     assert 'two' == driver.execute_script('return adcSiteInfo.level3')
     assert 'three' == driver.execute_script('return adcSiteInfo.level4')
@@ -190,7 +196,8 @@ def test_framebuilder_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?banner_channel={}'.format(
         testserver.url, '///homepage/my,keywords'))
-    assert 'homepage' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'homepage_trsf' == driver.execute_script(
+        'return adcSiteInfo.$handle')
     assert '' == driver.execute_script('return adcSiteInfo.level2')
     assert '' == driver.execute_script('return adcSiteInfo.level3')
     assert '' == driver.execute_script('return adcSiteInfo.level4')
@@ -219,14 +226,17 @@ def test_framebuilder_minimal_contains_no_webtrekk(testbrowser):
     assert 'webtrekk' not in browser.contents
 
 
-def test_framebuilder_minimal_can_contain_webtrekk(testbrowser):
+def test_framebuilder_minimal_can_contain_webtrekk(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?minimal&webtrekk')
     webtrekk_script = browser.cssselect(
         'script[src^="http://scripts.zeit.de/static/js/webtrekk/"]')
     assert len(webtrekk_script) == 1
 
 
-def test_framebuilder_minimal_sets_webtrekk_values_differently(testbrowser):
+def test_framebuilder_minimal_sets_webtrekk_values_differently(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/framebuilder?minimal&webtrekk')
     assert ('wt.contentId = "redaktion....centerpage.zede|" + '
             'window.location.hostname + '
@@ -274,7 +284,8 @@ def test_framebuilder_minimal_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
         testserver.url, 'one/two/three/homepage'))
-    assert 'homepage' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'homepage_trsf' == driver.execute_script(
+        'return adcSiteInfo.$handle')
     assert 'one' == driver.execute_script('return adcSiteInfo.level2')
     assert 'two' == driver.execute_script('return adcSiteInfo.level3')
     assert 'three' == driver.execute_script('return adcSiteInfo.level4')
@@ -282,7 +293,7 @@ def test_framebuilder_minimal_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
         testserver.url, 'oans/zwoa//index'))
-    assert 'index' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'index_trsf' == driver.execute_script('return adcSiteInfo.$handle')
     assert 'oans' == driver.execute_script('return adcSiteInfo.level2')
     assert 'zwoa' == driver.execute_script('return adcSiteInfo.level3')
     assert '' == driver.execute_script('return adcSiteInfo.level4')
@@ -298,7 +309,8 @@ def test_framebuilder_minimal_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
         testserver.url, '///artikel'))
-    assert 'artikel' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'artikel_trsf' == driver.execute_script(
+        'return adcSiteInfo.$handle')
     assert '' == driver.execute_script('return adcSiteInfo.level2')
     assert '' == driver.execute_script('return adcSiteInfo.level3')
     assert '' == driver.execute_script('return adcSiteInfo.level4')
@@ -309,7 +321,7 @@ def test_framebuilder_minimal_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
         testserver.url, 'one/two/three/four/my,keywords,in,channel'))
-    assert 'four' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'four_trsf' == driver.execute_script('return adcSiteInfo.$handle')
     assert 'one' == driver.execute_script('return adcSiteInfo.level2')
     assert 'two' == driver.execute_script('return adcSiteInfo.level3')
     assert 'three' == driver.execute_script('return adcSiteInfo.level4')
@@ -318,7 +330,8 @@ def test_framebuilder_minimal_accepts_banner_channel_parameter(
 
     driver.get('{}/framebuilder?minimal&banner_channel={}'.format(
         testserver.url, '///homepage/my,keywords'))
-    assert 'homepage' == driver.execute_script('return adcSiteInfo.$handle')
+    assert 'homepage_trsf' == driver.execute_script(
+        'return adcSiteInfo.$handle')
     assert '' == driver.execute_script('return adcSiteInfo.level2')
     assert '' == driver.execute_script('return adcSiteInfo.level3')
     assert '' == driver.execute_script('return adcSiteInfo.level4')

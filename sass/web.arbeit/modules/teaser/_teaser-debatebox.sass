@@ -1,0 +1,82 @@
+// debatebox on CP (same HTML as articleblock, different styles)
+.debatebox-on-cp
+	background-color: $primary-color
+	font-family: $font-tabletgothic
+	margin: remify(14px) 0
+	padding: remify(40px) $page-padding--small remify(30px)
+	text-align: center
+
+	&__button
+		@extend %zar-button-hollow--debate
+		margin-bottom: 0 // the debatebox has its own margin
+
+	&__wrapper
+		+debatebox-speechbubble-arrow(#ffffff)
+		background-color: #ffffff
+		margin-bottom: 30px
+		padding: remify(19px 17px)
+
+	&__kicker
+		@extend %teaser-kicker--s
+		display: block // override flexbox from default teaser
+
+	&__media
+		background-image: url('/static/latest/images/arbeit/debate/mic.png')
+		background-position: center
+		background-repeat: no-repeat
+		height: remify(131px)
+		margin-bottom: remify(15px)
+
+	&--pink
+		background-color: $zar-darkish-pink
+
+	&__text
+		font-size: remify(15px)
+		line-height: remify(21px)
+		a
+			color: currentColor
+			text-decoration: underline
+			white-space: nowrap
+
+	&__title
+		@extend %teaser-title--s
+		margin: remify(10px 0)
+
+	&--yellow
+		background-color: $zar-sun-yellow
+		.debatebox__button
+			@extend %zar-button-hollow
+
++respond-min($break-tablet-min)
+	.debatebox-on-cp
+		margin: $vertical-space 0
+		padding: remify(50px 100px)
+
+		&__wrapper
+			+pie-clearfix
+			padding: remify(49px 27px)
+			text-align: left
+
+		&__kicker
+			// TODO: Polishing mit abstrakt kicker--l??
+			font-size: remify(20px)
+
+		&__media
+			width: remify(153px)
+			height: remify(131px)
+			float: left
+
+		&__container
+			padding-left: remify(173px)
+
+		&__title
+			// TODO: Polishing mit abstrakt title--m??
+			font-size: remify(36px)
+			line-height: remify(43px)
+
++respond-min($break-desktop-min)
+	.debatebox-on-cp
+		&__wrapper
+			padding: remify(49px 40px)
+		&__container
+			padding-left: remify(193px)

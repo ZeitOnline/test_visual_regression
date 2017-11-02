@@ -1,29 +1,31 @@
 import grokcore.component
 import zeit.campus.interfaces
+import zeit.web
 import zeit.web.core.block
 import zeit.web.core.interfaces
 
 
-@grokcore.component.implementer(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.campus.interfaces.IStudyCourse)
-class StudyCourse(zeit.web.core.block.Block):
+class StudyCourse(zeit.web.core.block.Module):
 
     def __new__(cls, context):
         if context.course is None:
             return None
         return super(StudyCourse, cls).__new__(cls, context)
 
-    def __init__(self, model_block):
-        self.model_block = model_block
+    @zeit.web.reify
+    def content(self):
+        return self.context.course
 
-    @property
+    @zeit.web.reify
     def text(self):
-        return self.model_block.course.text
+        return self.content.text
 
-    @property
+    @zeit.web.reify
     def href(self):
-        return self.model_block.course.href
+        return self.content.href
 
-    @property
+    @zeit.web.reify
     def button_text(self):
-        return self.model_block.course.button_text
+        return self.content.button_text

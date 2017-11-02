@@ -10,6 +10,7 @@ var $ = require( 'jquery' ),
     articledate = require( 'web.core/articledate' ),
     comments = require( 'web.core/comments' ),
     adblockCount = require( 'web.site/adblockCount' ),
+    saveGetToCookie = require( 'web.core/saveGetToCookie' ),
     article = $( '#js-article' ),
     pageType = document.body.getAttribute( 'data-page-type' ),
     isHp = document.body.getAttribute( 'data-is-hp' );
@@ -32,6 +33,7 @@ if ( article.length ) {
 }
 
 adblockCount.init();
+saveGetToCookie.init();
 zeit.clearQueue();
 
 // add required jQuery plugins
@@ -46,9 +48,10 @@ require( 'web.core/plugins/jquery.toggleRegions' );
 require( 'web.core/plugins/jquery.countFormchars' );
 require( 'web.core/plugins/jquery.imageCopyrightFooter' );
 require( 'web.core/plugins/jquery.notifications' );
+require( 'web.core/plugins/jquery.dropdownLink' );
 require( 'web.site/plugins/jquery.accordion' );
 require( 'web.site/plugins/jquery.adaptnav' );
-require( 'web.site/plugins/jquery.animateJobs' );
+require( 'web.core/plugins/jquery.animateJobs' );
 require( 'web.site/plugins/jquery.autoclick' );
 require( 'web.site/plugins/jquery.extendfooter' );
 require( 'web.site/plugins/jquery.fixPosition' );
@@ -62,7 +65,6 @@ require( 'web.site/plugins/jquery.truncateRegions' );
 require( 'web.site/plugins/jquery.tabs' );
 require( 'web.site/plugins/jquery.togglesearch' );
 require( 'web.site/plugins/jquery.updateSignals' );
-require( 'web.site/plugins/jquery.partnerDropdown' );
 
 $( window ).referrerCount();
 // global and "above the fold"
@@ -82,9 +84,9 @@ if ( pageType === 'centerpage' ) {
     $( '.js-bar-teaser-paginate' ).paginateTeasers();
     $( '.js-accordion' ).accordion();
     $( '.storystream-markup__content--first' ).longTextWrapper();
-    $( '.jobbox--animate' ).animateJobs();
+    $( '.js-jobbox-animation' ).animateJobs();
     $( '.js-tabs' ).tabs();
-    $( '.partner__action' ).boxDropdown();
+    $( '.js-dropdownlink' ).dropdownLink();
     $( '.js-truncate-region' ).truncateRegions();
     $( '.js-toggle-region' ).toggleRegions();
 

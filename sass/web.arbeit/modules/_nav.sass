@@ -270,7 +270,7 @@ $nav-color-border: #444
 
 		&__logo
 			height: remify(27px)
-			width: remify(330px)
+			width: remify(333px)
 			.logo-zar-large
 				display: block
 			.logo-zar-small
@@ -357,8 +357,16 @@ $nav-color-border: #444
 
 		&__primary
 			flex: 1 1 50%
+			display: flex
+			flex-wrap: wrap
+			align-items: flex-end
+			justify-content: space-between
 
 		// THEMEN
+		&__topics
+			display: flex
+			flex-wrap: nowrap
+
 		&__topics-title
 			@extend %nav-tablet-font-s
 			float: left
@@ -422,5 +430,13 @@ $nav-color-border: #444
 			&__primary
 				display: table-row
 
+			&__button
+				position: absolute
+				right: 0
+
 			&__dropdown
 				white-space: nowrap
+
+			// specificity war olé
+			&__sales--mobile
+				display: none

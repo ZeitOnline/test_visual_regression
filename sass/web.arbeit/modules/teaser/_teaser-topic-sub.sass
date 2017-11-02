@@ -1,0 +1,57 @@
+.teaser-topic-sub
+
+	margin: remify(30px) 0
+
+	&__media
+		display: none
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__kicker
+		@extend %teaser-kicker--s
+		margin-bottom: remify(8px)
+		+respond-max($break-tablet-min)
+			display: block // override flexbox from default teaser
+
+	&__title
+		@extend %teaser-title--s
+		// Schade. Design hält sich nicht an eigenen Styleguide. TODO: Brauchen wir andere abstrakte Klassen? Tweaken beim Polishen, wenn alle Teaser fertig sind.
+		+respond-min($break-tablet-min)
+			font-size: remify(18px)
+			line-height: 1.4
+
++respond-max($break-tablet-min)
+	.teaser-topic-sub
+		text-align: center
+	.teaser-topic-sub + .teaser-topic-sub // only between teasers
+		&:before
+			background-color: $zar-white
+			content: ""
+			display: block
+			height: 1px
+			margin: remify(30px) auto
+			width: remify(20px)
+
++respond-min($break-tablet-min)
+	.teaser-topic-sub
+		clear: both
+		margin: 0
+		&__media,
+		&__container
+			display: table-cell
+		&__media
+			width: remify(170px)
+		&__media-container
+			display: block
+			// we cannot "@extend %teaser-media" inside media query, so we set colors here
+			background-color: $greyish-white
+			color: $color-text // force alt text being readable
+			+reserve-space-for-teaser-media(100% / 16 * 9) // image variant 'wide' (16:9)
+		&__container
+			padding-left: $page-padding--small
+			vertical-align: middle
+		&__heading
+			margin: 0
+	.teaser-topic-sub + .teaser-topic-sub // only between teasers
+		margin-top: remify($vertical-space)

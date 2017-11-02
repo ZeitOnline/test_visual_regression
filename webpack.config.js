@@ -23,8 +23,8 @@ if ( false ) {
 module.exports = {
     context: path.resolve(__dirname, 'javascript'),
     entry: {
-        'web.campus/frame': 'web.campus/frame.js',
-        'web.site/frame': 'web.site/frame.js',
+        'web.campus/frame': ['./web.core/scriptPath', 'web.campus/frame.js'],
+        'web.site/frame': ['./web.core/scriptPath', 'web.site/frame.js'],
         arbeit: ['./web.core/scriptPath', './arbeit.js'],
         campus: ['./web.core/scriptPath', './campus.js'],
         magazin: ['./web.core/scriptPath', './magazin.js'],
@@ -43,6 +43,7 @@ module.exports = {
             { test: /jquery.inview/, loader: 'imports-loader?define=>false' },
             { test: require.resolve('masonry-layout'), loader: 'imports-loader?define=>false' },
             { test: require.resolve('requirejs/require'), loader: 'exports-loader?requirejs,require,define' },
+            { test: /\.html$/, exclude: /node_modules/, loader: "mustache-loader" },
             { test: /\.js$/, exclude: /node_modules/, loader: "eslint-loader", options: { failOnError: true } },
             { test: /\.js$/, exclude: /node_modules/, loader: "jshint-loader", options: { emitErrors: true, failOnHint: true } }
         ]

@@ -1,36 +1,44 @@
 .article-heading
-	margin-top: remify(16px)
-	margin-bottom: remify(16px)
+	margin: 0
+	padding-top: remify(16px)
+	padding-bottom: remify(16px)
 	&__kicker
 		color: $zar-darkish-pink
 		display: block
+		font-variant-ligatures: none
 		font-size: remify(16px)
-		font-weight: normal
 		letter-spacing: $letter-spacing-l
 		margin-bottom: remify(16px)
-
 	&__title
 		color: $primary-color
 		display: block
 		font-family: $font-patronbold
 		font-size: remify(32px)
+		font-weight: bold
 		line-height: 1.3
 		margin-left: auto
 		margin-right: auto
 		max-width: $wide-content-width
+		// default
 		&--underlined
-			background-image: linear-gradient(90deg, $zar-sun-yellow, $zar-sun-yellow)
+			text-decoration: underline
+			text-decoration-color: $color-underline
+			text-decoration-skip: ink
+		// janky underline hack - works only w/ font PatronBold. needs to be display:inline.
+		&--underlined-skip
+			text-decoration: none
+			background-image: linear-gradient(90deg, $color-underline, $color-underline)
 			background-size: auto 4px
 			background-repeat: repeat-x
 			// use em here deliberately to match underline's position with
 			// parent's font-size across viewports
-			background-position-y: 1.15em
-			text-shadow: -2px 3px $white, 2px 3px $white
+			background-position: 0 1.18em
+			text-shadow: -2px 3px $white, 2px 3px $white, 0 3px $white, -3px -2px $white, -1.5px 1.5px $white
 
 +respond-min($break-tablet-min)
 	.article-heading
-		margin-bottom: remify(40px)
-		margin-top: remify(60px)
+		padding-bottom: remify(40px)
+		padding-top: remify(60px)
 		&__kicker
 			font-size: remify(20px)
 			margin-bottom: remify(40px)
@@ -39,6 +47,10 @@
 			max-width: $medium-content-width
 		&__title
 			font-size: remify(60px)
-			&--underlined
+			&--underlined-skip
 				background-size: auto 7px
-				text-shadow: -4px 6px $white, 4px 6px $white
+				text-shadow: -4px 6px $white, 4px 6px $white, 0 6px $white, 1px 6px $white, -3px -2px $white
+
++respond-max(em(400px))
+		&__title
+			font-size: remify(24px)

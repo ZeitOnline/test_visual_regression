@@ -23,7 +23,7 @@
 
 <div class="nav" id="navigation" data-ct-row="1">
     <nav class="nav__sales nav__sales--mobile">
-        <a href="http://www.zeitabo.de/">Abo</a>
+        <a href="https://abo.zeit.de/?utm_medium=referral&utm_source=zarbeit&utm_campaign=keine&utm_content=keine__stand__x&icode=01w0050k0000keirefall1709">Abo</a>
     </nav>
     <nav class="nav__sales nav__sales--mobile">
         <a href="http://shop.zeit.de/">Shop</a>
@@ -59,29 +59,18 @@
     </div>
     <div class="nav__primary" data-ct-row="2">
         <nav class="nav__topics">
-            <span class="nav__topics-title">Themen</span>
-            <ul class="nav__topics-list">
-                <li><a href="#TODO">Vereinbarkeit 2.0</a></li>
-                <li><a href="#TODO">Familie und Beruf</a></li>
-                <li><a href="#TODO">Freude schöner Götterfunken</a></li>
-                <li><a href="#TODO">Vereinbarkeit 2.0</a></li>
-                <li><a href="#TODO">Familie und Beruf</a></li>
-                <li><a href="#TODO">Themenbutton Headline</a></li>
-            </ul>
-            {#
             {% require topics = view.context | topic_links -%}
-            <span class="nav__topics-title">Themen</span>
+            <span class="nav__topics-title">{{ topics.title }}</span>
             <ul class="nav__topics-list">
             {% for label, link in topics %}
                 <li><a href="{{ link }}">{{ label }}</a></li>
             {% endfor %}
             </ul>
             {% endrequire -%}
-            #}
         </nav>
+        <a class="nav__button" href="http://jobs.zeit.de">
+            <span>ZEIT Stellenmarkt</span>
+        </a>
     </div>
-    <a class="nav__button" href="#TODO">
-        <span>ZEIT Stellenmarkt</span>
-    </a>
 
 </div>

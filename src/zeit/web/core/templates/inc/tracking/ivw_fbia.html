@@ -2,14 +2,13 @@
     var iam_data = {
             "st" : "zeitonl", // 'mobzeit' on mobile
             "cp" : "{{ view.ivw_code }}",
-            "sv" : "i2", // 'mo' on mobile, see below
+            "sv" : "ke",
             "fb": "1", // marker for facebook instant articles
             "co" : "URL: {{ view.content_path }}"
         };
 
     if ( window.FBIA.isMobileView() ) {
         iam_data.st = "mobzeit";
-        iam_data.sv = "mo";
     }
 
     if ( typeof iom !== "undefined" && typeof iam_data !== "undefined" ) {

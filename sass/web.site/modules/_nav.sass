@@ -34,7 +34,6 @@
 
 	%ressort-feature-background
 		border-radius: 3px
-		color: #fff
 		display: inline-block
 		line-height: 2
 		padding: remify(0 8px)
@@ -51,6 +50,7 @@
 	&__ressorts-item--featured-d17
 		a
 			background-color: #ffbb00
+			color: #fff
 			@extend %ressort-feature-background
 			+on-interaction
 				background-color: #ffc933
@@ -465,3 +465,13 @@
 			// hide advertorial links in 1st level navigation
 			li.nav__ressorts-item--has-label
 				display: none
+
+// must be written explicitly and down here to win the specificity wars
+a.nav__ressorts-link--arbeit-highlighted
+	border: 2px solid $color-zar-accent
+	@extend %ressort-feature-background
+	+respond-max($break-tablet-min)
+		display: inline !important // this is a temporary element, so I dont care
+	+on-interaction
+		background-color: $color-zar-accent
+		box-shadow: none

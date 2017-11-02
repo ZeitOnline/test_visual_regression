@@ -9,10 +9,11 @@
     <grok:grok exclude="test" package="." />
 
     <utility factory=".reach.Reach" />
+    <utility factory=".podigee.Podigee" />
     <utility factory=".metrics.from_settings" />
 
     <adapter
-      factory=".utils.LazyProxy"
+      factory=".content.LazyProxy"
       provides="zeit.cms.interfaces.ICMSContent"
       />
 

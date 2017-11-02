@@ -124,58 +124,6 @@ def test_buzzboard_should_avoid_same_teaser_image_twice(
     assert len(area.cssselect('.teaser-buzzboard__media--duplicate')) == 2
 
 
-def test_tile7_is_rendered_on_correct_position(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-online/main-teaser-setup')
-    tile7_on_first_position = browser.cssselect(
-        '.cp-area--minor > div:first-child > script[id="ad-desktop-7"]')
-    tile7_is_present = browser.cssselect(
-        '.cp-area--minor > div > script[id="ad-desktop-7"]')
-
-    assert not tile7_on_first_position, (
-        'There should be no ad tile 7 on the first position.')
-    assert tile7_is_present, (
-        'Ad tile 7 is not present.')
-
-
-def test_tile7_for_fullwidth_is_rendered_on_correct_position(
-        testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': False}.get)
-    browser = testbrowser('/zeit-online/index')
-    tile7_on_first_position = browser.cssselect(
-        '.cp-area--minor > div:first-child > script[id="ad-desktop-7"]')
-    assert tile7_on_first_position, (
-        'Ad tile 7 is not present on first position.')
-
-    def test_tile8_is_rendered_on_correct_position(testbrowser, monkeypatch):
-        monkeypatch.setattr(
-            zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-                'iqd_digital_transformation': True}.get)
-        browser = testbrowser('/zeit-online/main-teaser-setup')
-        tile7_on_first_position = browser.cssselect(
-            '.cp-area--minor > div:first-child > script[id="ad-desktop-8"]')
-        tile7_is_present = browser.cssselect(
-            '.cp-area--minor > div > script[id="ad-desktop-8"]')
-
-        assert not tile7_on_first_position, (
-            'There should be no ad tile 8 on the first position.')
-        assert tile7_is_present, (
-            'Ad tile 8 is not present.')
-
-    def test_tile8_for_fullwidth_is_rendered_on_correct_position(
-            testbrowser, monkeypatch):
-        monkeypatch.setattr(
-            zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-                'iqd_digital_transformation': True}.get)
-        browser = testbrowser('/zeit-online/index')
-        tile7_on_first_position = browser.cssselect(
-            '.cp-area--minor > div:first-child > script[id="ad-desktop-8"]')
-        assert tile7_on_first_position, (
-            'Ad tile 8 is not present on first position.')
-
-
 def test_printbox_is_present_and_has_digital_offerings(
         testbrowser, workingcopy):
     uri = 'http://xml.zeit.de/angebote/print-box'
@@ -273,9 +221,9 @@ def test_centerpage_teaser_topic_has_correct_structure(testbrowser):
     assert len(teaser.cssselect('.teaser-topic-list')) == 1
     assert len(teaser.cssselect('.teaser-topic-item')) == 3
 
-    assert image.attrib['data-src'].endswith(
+    assert image.get('data-src').endswith(
         '/zeit-online/cp-content/ig-1/cinema')
-    assert image.attrib['data-mobile-src'].endswith(
+    assert image.get('data-mobile-src').endswith(
         '/zeit-online/cp-content/ig-1/portrait')
 
 
@@ -300,8 +248,8 @@ def test_link_rel_should_be_set_according_to_pagination(testbrowser, datasolr):
     rel_prev = select('link[rel="prev"]')
     assert len(rel_next) == 1
     assert len(rel_prev) == 1
-    assert '/dynamic/angela-merkel?p=4' in rel_next[0].attrib['href']
-    assert '/dynamic/angela-merkel?p=2' in rel_prev[0].attrib['href']
+    assert '/dynamic/angela-merkel?p=4' in rel_next[0].get('href')
+    assert '/dynamic/angela-merkel?p=2' in rel_prev[0].get('href')
 
 
 def test_link_rel_to_prev_page_should_not_exist_on_first_page(
@@ -311,7 +259,7 @@ def test_link_rel_to_prev_page_should_not_exist_on_first_page(
     rel_prev = select('link[rel="prev"]')
     assert len(rel_next) == 1
     assert len(rel_prev) == 0
-    assert '/dynamic/angela-merkel?p=2' in rel_next[0].attrib['href']
+    assert '/dynamic/angela-merkel?p=2' in rel_next[0].get('href')
 
 
 def test_hp_hides_popover_per_default(selenium_driver, testserver):
@@ -462,3 +410,52 @@ def test_newsbox_renders_correctly_on_topicpage(testbrowser, datasolr):
     assert len(newsbox) == 1
     assert len(linktext) == 8
     assert len(section_heading_link) == 0
+
+
+def test_zon_arbeit_teaser_fullwidth_has_arbeit_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-arbeit').cssselect
+    svg = select('.teaser-fullwidth .teaser-fullwidth__kicker-logo--zar')
+    assert len(svg) == 1
+
+
+def test_zon_arbeit_teaser_large_has_arbeit_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-arbeit').cssselect
+    teaser = select('.teaser-large')
+    svg = select('.teaser-large .teaser-large__kicker-logo--zar')
+    assert len(teaser) == 2
+    assert len(svg) == 2
+
+
+def test_zon_arbeit_teaser_small_has_arbeit_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-arbeit').cssselect
+    teaser = select('.teaser-small')
+    svg = select('.teaser-small__kicker-logo--zar')
+    teaser_in_minor = select('.teaser-small-minor')
+    svg_in_minor = select('.teaser-small-minor__kicker-logo--zar')
+    assert len(teaser) == 4
+    assert len(svg) == 4
+    assert len(teaser_in_minor) == 2
+    assert len(svg_in_minor) == 2
+
+
+def test_zon_arbeit_teaser_small_minor_has_arbeit_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-arbeit').cssselect
+    teaser = select('.teaser-small-minor')
+    svg = select('.teaser-small-minor .teaser-small-minor__kicker-logo--zar')
+    assert len(teaser) == 2
+    assert len(svg) == 2
+
+
+def test_zon_arbeit_teaser_topic_has_arbeit_signet(testbrowser):
+    select = testbrowser('zeit-online/centerpage/teasers-to-arbeit').cssselect
+    teaser = select('.teaser-topic-item')
+    svg = select('.teaser-topic-item__kicker-logo--zar')
+    assert len(teaser) == 3
+    assert len(svg) == 3
+
+
+def test_if_all_followbox_elements_present(testbrowser):
+    select = testbrowser('zeit-online/centerpage/follow-us').cssselect
+    buttons = select('.follow-us__link')
+
+    assert len(buttons) == 4

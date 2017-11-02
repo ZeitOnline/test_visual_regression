@@ -1,20 +1,21 @@
 import pyramid.interfaces
 import zope.interface
-import zope.interface.common.sequence
 
 import zeit.edit.interfaces
 
 
-class IFrontendBlock(zope.interface.Interface):
-    """An item that provides data from an article-body block to a Jinja macro.
+class IArticleModule(zope.interface.Interface):
+    """An item that provides data from an article-body module to a Jinja macro.
 
     This interface is both a marker for identifying front-end objects
-    representing blocks, and a mechanical detail of using the ZCA to construct
-    such a front-end representation of a given vivi article-body block.
+    representing modules, and a mechanical detail of using the ZCA to construct
+    such a front-end representation of a given vivi article-body modules.
     """
 
     layout = zope.interface.Attribute(
         'String that modifies how this block is to be displayed')
+
+    context = zope.interface.Attribute('The vivi-side module object')
 
 
 class IDeltaTime(zope.interface.Interface):
@@ -134,7 +135,7 @@ class IBannerlist(zope.interface.Interface):
     """A list of ad places"""
 
 
-class INextread(IFrontendBlock):
+class INextread(IArticleModule):
     """Nextread teaser block must be similar to zeit.content.cp.TeaserBlock"""
 
 
@@ -156,7 +157,9 @@ class ITopicLink(zope.interface.Interface):
 
 
 class IInternalUse(zope.interface.Interface):
-    """Marks internally used source entries"""
+    """Marker interface for ICMSContent, so Source entries can be ``available``
+    only for zeit.web, but not vivi.
+    """
 
 
 class IBreakingNews(zope.interface.Interface):
@@ -200,6 +203,19 @@ class IReach(zope.interface.Interface):
 
     def get_buzz():
         """Collect a buzz summary for an article by uniqueId"""
+
+
+class IPodigee(zope.interface.Interface):
+
+    def get_episode(episode_id):
+        """Returns a dict with episode metadata. If an error occurs, returns an
+        empty dict, but will always contain a key `podcast_id` for use with
+        `get_podcast`.
+        """
+
+    def get_podcast(podcast_id):
+        """Returns a dict with podcast metadata. If an error occurs, returns an
+        empty dict."""
 
 
 class IMetrics(zope.interface.Interface):
@@ -294,3 +310,18 @@ class IExternalTemporaryImage(zope.interface.Interface):
 
 class IPaywallAccess(zope.interface.Interface):
     """ Get access state of a resource"""
+
+
+class IVertical(zope.interface.Interface):
+    """Returns short identifier string (zon/zmo/zco/zar/zett) to signify which
+    vertical an ICMSContent belongs to.
+
+    This is not quite the same as which zeit.cms.section.ISectionMarker the
+    content has, since we have to handle some additional special cases.
+    """
+
+
+class IContentMarkerInterfaces(zope.interface.Interface):
+    """Returns a list of marker interfaces that are added to ICMSContent
+    objects.
+    """

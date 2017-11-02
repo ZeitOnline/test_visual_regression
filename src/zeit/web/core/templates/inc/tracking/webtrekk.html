@@ -1,5 +1,5 @@
+{% if toggles('third_party_modules') -%}
 {% include "zeit.web.core:templates/inc/tracking/webtrekk_script.html" %}
-
 <script>
 
     if (typeof window.webtrekkConfig === 'object') {
@@ -57,17 +57,13 @@
 
         var ls = document.getElementById('login-state'),
             ssoCp = 'nicht_angemeldet',
-            ssoId, ssoUrl;
+            ssoId;
 
         if (ls) {
             ssoId = ls.getAttribute('data-sso-id');
-            ssoUrl = ls.getAttribute('data-sso-url');
             if (ssoId) {
                 wt.customerId = ssoId;
                 ssoCp = 'angemeldet';
-                if (ssoUrl) {
-                    ssoCp = ssoCp + '|' + ssoUrl;
-                }
             }
             wt.customParameter[23] = ssoCp;
         }
@@ -80,3 +76,4 @@
         wt.sendinfo();
     }
 </script>
+{% endif %}

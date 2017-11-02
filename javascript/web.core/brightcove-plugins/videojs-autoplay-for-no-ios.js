@@ -8,5 +8,6 @@
             });
         }
     };
-    vjs.plugin( 'videojsAutostartForNonIOS', videojsAutostartForNonIOSPlugin );
+    var registerPlugin = vjs.registerPlugin || vjs.plugin;
+    registerPlugin( 'videojsAutostartForNonIOS', videojsAutostartForNonIOSPlugin );
 })( window.videojs );

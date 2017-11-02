@@ -1,0 +1,35 @@
+{% block headerseries %}
+    {% include "zeit.web.arbeit:templates/inc/article/series.tpl" %}
+{% endblock %}
+
+<div class="{% block layout %}article-header-column{% endblock %}">
+    <div class="{{ self.layout() }}__box">
+
+        {% set headertag = 'div' if view.pagination and view.pagination.current > 1 and view.current_page.teaser else 'h1' %}
+        <{{ headertag }} class="{{ self.layout() }}__heading" itemprop="headline">
+            <span class="{{ self.layout() }}__kicker">
+                {{- view.supertitle -}}
+            </span>
+            {%- if view.title %}<span class="visually-hidden">: </span>{% endif -%}
+            <span class="{{ self.layout() }}__title">
+                {{- view.title -}}
+            </span>
+        </{{ headertag }}>
+
+        {%- set byline = view.context | get_byline('main') %}
+        {% if byline | length -%}
+        <div class="{{ self.layout() }}__byline" data-ct-row="author">
+            {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
+        </div>
+        {% endif -%}
+
+        {%- include "zeit.web.arbeit:templates/inc/asset/image_article-header-column.html" -%}
+
+    </div>
+
+{# TODO: hide the intro ("Eine Kolumne von XY") #}
+
+{% set byline_already_rendered = True %}
+{% include "zeit.web.arbeit:templates/inc/article/metadata.tpl" %}
+
+</div>

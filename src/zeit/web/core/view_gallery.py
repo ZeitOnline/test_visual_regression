@@ -20,7 +20,7 @@ class Gallery(zeit.web.core.view.Content):
         # We synthesize a gallery reference block to reuse the block template
         block = zeit.content.article.edit.reference.Gallery(
             self.context, lxml.objectify.E.gallery(href=self.context.uniqueId))
-        return zeit.web.core.interfaces.IFrontendBlock(block)
+        return zeit.web.core.interfaces.IArticleModule(block)
 
     @zeit.web.reify
     def breadcrumbs(self):
@@ -47,8 +47,7 @@ def persistent_thumbnail_factory(context):
 @grokcore.component.implementer(
     zeit.content.gallery.interfaces.IVisibleEntryCount)
 def article_gallery_image_count(context):
-    body = zeit.content.article.edit.interfaces.IEditableBody(context)
-    for block in body.values():
+    for block in context.body.values():
         if zeit.content.article.edit.interfaces.IGallery.providedBy(block):
             return zeit.content.gallery.interfaces.IVisibleEntryCount(
                 block.references, 0)

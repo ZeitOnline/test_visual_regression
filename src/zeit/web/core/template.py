@@ -11,6 +11,7 @@ import time
 import types
 import urllib
 import urlparse
+import hashlib
 
 import babel.dates
 import lxml.etree
@@ -19,6 +20,7 @@ import zope.component
 
 import zeit.campus.interfaces
 import zeit.cms.interfaces
+import zeit.content.article.edit.interfaces
 import zeit.content.cp.interfaces
 import zeit.content.cp.layout
 import zeit.content.gallery.interfaces
@@ -114,14 +116,6 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
 
 
 @zeit.web.register_test
-def zmo_content(content):
-    # XXX Stopgap until longforms are not IZMOContent anymore (ZON-2411).
-    return not getattr(content, 'uniqueId', '').replace(
-        zeit.cms.interfaces.ID_NAMESPACE, '', 1).startswith('feature') and (
-            zeit.magazin.interfaces.IZMOContent.providedBy(content))
-
-
-@zeit.web.register_test
 def zplus_abo_content(content):
     if not toggles('reader_revenue'):
         return False
@@ -203,46 +197,47 @@ def logo_icon(teaser, area_kind=None, zplus=None):
         if zplus == 'only':
             return templates
 
+    vertical = zeit.web.core.interfaces.IVertical(teaser)
     # exclusive icons, set and return
-    if zmo_content(teaser) and area_kind != 'zmo-parquet':
+    if vertical == 'zmo' and area_kind != 'zmo-parquet':
         templates.append('logo-zmo-zm')
         return templates
     if liveblog(teaser):
         templates.append('liveblog')
         return templates
-    if zett_content(teaser):
+    if vertical == 'zett':
         templates.append('logo-zett-small')
         return templates
 
     # inclusive icons may appear both
     if tag_with_logo_content(teaser, area_kind) and not zplus_icon:
         templates.append('taglogo')
-    if zco_content(teaser) and area_kind != 'zco-parquet':
+    if vertical == 'zco' and area_kind != 'zco-parquet':
         templates.append('logo-zco')
+    if vertical == 'zar' and area_kind != 'zar-parquet':
+        templates.append('logo-zar')
 
     return templates
 
 
-@zeit.web.register_test
-def zett_content(content):
-    return zeit.content.link.interfaces.ILink.providedBy(
-        content) and content.url.startswith('http://ze.tt')
-
-
-@zeit.web.register_test
-def zco_content(content):
-    return zeit.campus.interfaces.IZCOContent.providedBy(content)
+@zeit.web.register_filter
+def iqd_mail_hash(mail_address):
+    mail_hash = hashlib.sha256()
+    normalized = mail_address.lower().replace(" ", "")
+    # add some iqd-required strings to the email before it's sha256ed
+    mail_hash.update('{}_{}_{}'.format('AxMp', normalized, len(normalized)))
+    # '102' is some arbitrary (ZON-?) iqd-id
+    return '{}-{}'.format('102', mail_hash.hexdigest())
 
 
 @zeit.web.register_test
 def liveblog(context):
-    return zeit.content.article.interfaces.IArticle.providedBy(
-        context) and context.template == 'zon-liveblog'
+    return zeit.web.core.article.ILiveblogArticle.providedBy(context)
 
 
 @zeit.web.register_test
 def column(context):
-    return context.serie and context.serie.column
+    return zeit.web.core.article.IColumnArticle.providedBy(context)
 
 
 @zeit.web.register_test
@@ -267,13 +262,17 @@ def paragraph(block):
 
 
 @zeit.web.register_filter
-def vertical_prefix(content):
-    verticals = [('zco', 'zco_content'), ('zmo', 'zmo_content'), (
-        'zett', 'zett_content')]
-    for code, testname in verticals:
-        if globals()[testname](content):
-            return code
-    return ''
+def vertical(content):
+    return zeit.web.core.interfaces.IVertical(content)
+
+
+@zeit.web.register_filter
+def find_series_cp(content):
+    if not getattr(content.serie, 'url', None):
+        return None
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    uid = u'{}/{}'.format(conf.get('series_prefix', ''), content.serie.url)
+    return zeit.cms.interfaces.ICMSContent(uid, None)
 
 
 @zeit.web.register_filter
@@ -500,7 +499,7 @@ def startswith(string, value):
 @zeit.web.register_filter
 def remove_break(string):
     if isinstance(string, basestring):
-        return re.sub('\n', '', string)
+        return string.replace('\n', '')
     return string
 
 
@@ -781,16 +780,13 @@ def join_if_exists(iterable, string=''):
 
 
 @zeit.web.register_filter
-def webtrekk_sso_parameter(request):
-    if request.user and request.user.get('ssoid'):
-        info = ['angemeldet', request.user.get('entry_url')]
-        return '|'.join([item for item in info if item])
-    return 'nicht_angemeldet'
-
-
-@zeit.web.register_filter
 def tojson(value):
-    return json.dumps(remove_break(value))
+    result = json.dumps(remove_break(value))
+    # <https://html.spec.whatwg.org/multipage
+    #  /scripting.html#restrictions-for-contents-of-script-elements>
+    result = result.replace('<script', r'<\script')
+    result = result.replace('</script', r'<\/script')
+    return result
 
 
 @zeit.web.register_global
@@ -819,8 +815,13 @@ def get_random_number(length):
 
 
 @zeit.web.register_global
+def resolve(identifier):
+    return pyramid.path.DottedNameResolver().resolve(identifier)
+
+
+@zeit.web.register_global
 def adapt(obj, iface, name=u'', multi=False):
-    iface = pyramid.path.DottedNameResolver().resolve(iface)
+    iface = resolve(iface)
     if multi:
         return zope.component.queryMultiAdapter(obj, iface, name)
     else:
@@ -916,6 +917,6 @@ def get_key_from_tuplelist(list, key):
 
 @zeit.web.register_filter
 def remove_tags_from_xml(block, *tagnames):
-    xml = block.model_block.xml
+    xml = block.context.xml
     lxml.etree.strip_tags(xml, *tagnames)
     return zeit.web.core.block._inline_html(xml)

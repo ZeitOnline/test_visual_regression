@@ -1,7 +1,7 @@
 {% import 'zeit.web.site:templates/macros/partnerbox_macro.tpl' as partner_macro %}
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 
-<aside class="partnerbox">
+<aside class="partnerbox js-dropdownlink">
     <span class="partnerbox__label">Verlagsangebot</span>
     <div class="partner partner--{% block modifier %}{% endblock %}">
         {% block kicker %}{% endblock %}
@@ -15,7 +15,7 @@
             </span>
             {% block dropdown %}{% endblock %}
             <span class="partner__button">
-                <a class="partner__button-text" href="{% block link_button %}{% endblock %}">{% block button %}{% endblock %}</a>
+                <a class="partner__button-text js-dropdownlink-submit" href="{% block link_button %}{% endblock %}">{% block button %}{% endblock %}</a>
             </span>
             <span class="partner__link">
                 {% block link_bottom %}{% endblock %}

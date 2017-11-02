@@ -1,0 +1,154 @@
+// local variables used in this module
+$followus-icon-mobile: remify(60px)
+$followus-icon-tablet: remify(50px)
+$followus-icon-padding: remify(13px)
+.follow-us
+	border-bottom: 1px solid #ccc
+	border-top: 1px solid #ccc
+	margin: remify(40px 0)
+	padding-left: $page-padding
+	padding-right: $page-padding
+	.cp-area--minor &,
+	.cp-area--major &
+		border: none
+		margin: remify(20px 0)
+		padding: 0
+	.cp-region--parquet + .cp-region > .cp-area > &
+		border-bottom: 0
+		+respond-min($break-areas)
+			border: 0
+			margin: 0
+	&__title
+		font-size: remify(18px)
+		letter-spacing: remify(0.08px)
+		margin: remify(28px) auto remify(14px) auto
+		width: 247px // centering above mobile
+		+respond-min($break-tablet-min)
+			width: 100%
+			.cp-area--minor &,
+			.cp-area--major &
+				margin: remify(0 0 10px)
+	&__list
+		display: flex
+		justify-content: center
+		list-style: none
+		margin: 0 0 remify(40px) 0
+		min-width: 308px
+		padding: 0
+		text-align: center
+		+respond-min($break-tablet-min)
+			width: 100%
+			.cp-area--minor &,
+			.cp-area--major &
+				margin: 0 0 remify(20px) 0
+				min-width: auto
+	&__item
+		margin-left: remify(2px)
+		&:first-child
+			margin-left: 0
+		+respond-min($break-tablet-min)
+			float: left // fallback
+			min-width: 140px
+			margin-left: remify(4px)
+			width: 100%
+			.cp-area--minor &,
+			.cp-area--major &
+				min-width: auto
+				width: 25%
+				margin-left: remify(4px)
+				&:first-child
+					margin-left: 0
+		+respond-min($break-desktop-min)
+			min-width: 184px
+			margin-left: remify(5px)
+	&__link
+		background: #ccc
+		color: $white
+		display: block
+		font-size: remify(14px)
+		height: $followus-icon-mobile
+		+respond-min($break-desktop-min)
+			font-size: remify(16px)
+		&:hover,
+		&:focus,
+		&:active
+			color: $white
+		&--facebook
+			background: $color-facebook
+			&:hover
+				background: $color-facebook-hover
+		&--instagram
+			background: $color-instagram
+			&:hover
+				background: $color-instagram-hover
+		&--newsletter
+			background: $color-newsletter
+			&:hover
+				background: $color-newsletter-hover
+		&--twitter
+			background: $color-twitter
+			&:hover
+				background: $color-twitter-hover
+		&--xing
+			background: $color-xing
+			&:hover
+				background: $color-xing-hover
+	&__logo
+		float: left
+		height: $followus-icon-mobile
+		line-height: $followus-icon-mobile / 2  // half the icon size
+		padding: $followus-icon-padding
+		text-align: center
+		width: $followus-icon-mobile
+		+respond-min($break-tablet-min)
+			height: $followus-icon-tablet
+			line-height: ($followus-icon-tablet / 2) * 0.85 // 85% of the half icon size
+			margin-bottom: remify(5px)
+			margin-top: remify(5px)
+			width: $followus-icon-tablet
+			.cp-area--minor &,
+			.cp-area--major &
+				float: none
+				margin: 0 auto
+				padding: remify(13px) 0
+				width: auto
+	&__icon
+		display: inline-block
+		height: auto
+		vertical-align: middle
+		width: $followus-icon-mobile - (2 * $followus-icon-padding)
+		+respond-min($break-tablet-min)
+			width: $followus-icon-tablet - (2 * $followus-icon-padding)
+			.cp-area--minor &,
+			.cp-area--major &
+				width: auto
+		&--facebook
+			// Icon higher than wide
+			height: $followus-icon-mobile - (2 * $followus-icon-padding)
+			margin-left: remify(5px)
+			width: auto
+			+respond-min($break-tablet-min)
+				height: $followus-icon-tablet - (2 * $followus-icon-padding)
+				.cp-area--minor &,
+				.cp-area--major &
+					display: block
+					height: auto
+					margin: remify(2px) auto
+		&--twitter
+			margin-top: remify(3px)
+			.cp-area--minor &,
+			.cp-area--major &
+				margin-top: remify(5px)
+	&__linktext
+		border-left: 1px solid rgba(#fff, 0.5)
+		display: none // hidden when mobile, a11y???
+		float: left
+		line-height: $followus-icon-mobile - remify(20px) // size - 2 * margin
+		margin: remify(10px 0)
+		padding-left: remify(11px)
+		+respond-min($break-tablet-min)
+			display: block
+			.cp-area--minor &,
+			.cp-area--major &
+				display: none
+

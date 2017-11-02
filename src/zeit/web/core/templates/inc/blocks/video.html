@@ -6,17 +6,20 @@
     data-video-size="large"
     data-video-provider="brightcove"
     data-video-page-url="{{ block.video | create_url }}">
-    {% set player = settings('brightcove_videoplayer_article', 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9') %}
+    {% if block.video.has_advertisement %}
+        {% set player = settings('brightcove_videoplayer_article', 'c09a3b98-8829-47a5-b93b-c3cca8a4b5e9') %}
+    {% else %}
+        {% set player = settings('brightcove_videoplayer_article_wo_ads', 'NykzeyfYg') %}
+    {% endif %}
     {% if toggles('zon_inline_video_via_html5') %}
         {{ vima.brightcove_video_tag(block.id, iframe=False, brightcove_player=player) }}
     {% else %}
         {{ vima.brightcove_video_tag(block.id, iframe=True, brightcove_player=player) }}
     {% endif %}
-
     {% block video_caption -%}
     <figcaption class="figure__caption">
         <span class="figure__title">{{ [block.supertitle, block.title] | join_if_exists(' - ') }}</span>
-        <span class="figure__text">{{ block.description }}</span>
+        <span class="figure__text">{{ block.subtitle }}</span>
         {% if block.video_still_copyright and block.video_still_copyright | trim %}
             <span class="figure__copyright" itemprop="copyrightHolder" itemscope itemtype="http://schema.org/Person">
                 <span itemprop="name">© Foto: {{ block.video_still_copyright | trim }}</span>
@@ -24,6 +27,5 @@
         {% endif %}
     </figcaption>
     {%- endblock %}
-
 </figure>
 {% endif %}

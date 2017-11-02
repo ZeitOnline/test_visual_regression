@@ -25,7 +25,11 @@
         {% endrequire %}
 
         <div class="article__item article__item--wide article__item--rimless">
-            {% set player = settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') %}
+            {% if view.has_advertisement %}
+                {% set player = settings('brightcove_videoplayer_hp_cp_single', '65fa926a-0fe0-4031-8cbf-9db35cecf64a') %}
+            {% else %}
+                {% set player = settings('brightcove_videoplayer_hp_cp_single_wo_ads', 'r1xb937iwZ') %}
+            {% endif %}
             {% if toggles('zon_videosinglepage_via_html5') %}
                 {{ vima.brightcove_video_tag(view.context.__name__, iframe=False, brightcove_player=player) }}
             {% else %}
@@ -34,7 +38,7 @@
         </div>
 
         {% if view.advertising_enabled %}
-            {% include "zeit.web.core:templates/inc/ads/places/desktop/place7.html" %}
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place8.html" %}
         {% endif %}
 
         {% include "zeit.web.site:templates/inc/article/heading.tpl" %}

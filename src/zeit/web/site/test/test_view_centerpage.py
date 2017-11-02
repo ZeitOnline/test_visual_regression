@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import datetime
 import re
+import urllib2
 
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
@@ -136,8 +137,8 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
     assert len(html('article.teaser h2.teaser__heading')) == 1
 
     link = html('a.teaser__combined-link')[0]
-    assert link.attrib['href'] == '/zeit-magazin/article/01'
-    assert link.attrib['title'] == 'teaserSupertitle - teaserTitle'
+    assert link.get('href') == '/zeit-magazin/article/01'
+    assert link.get('title') == 'teaserSupertitle - teaserTitle'
 
     link_kicker = html('a.teaser__combined-link span.teaser__kicker')[0]
     assert 'teaserSupertitle' in link_kicker.text_content()
@@ -156,9 +157,9 @@ def test_default_teaser_should_match_css_selectors(application, jinja2_env):
 
     teaser_co = html('div.teaser__metadata > a.teaser__commentcount')[0]
 
-    assert teaser_co.attrib['href'] == teaser.uniqueId.replace(
+    assert teaser_co.get('href') == teaser.uniqueId.replace(
         'http://xml.zeit.de', '') + '#comments'
-    assert teaser_co.attrib['title'] == 'Kommentare anzeigen'
+    assert teaser_co.get('title') == 'Kommentare anzeigen'
     assert teaser_co.text == '129 Kommentare'
 
 
@@ -186,8 +187,8 @@ def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
         testbrowser):
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     img = browser.cssselect('.teaser-fullwidth__media-item')[0]
-    assert img.attrib['data-mobile-ratio'].startswith('1.77')
-    assert 'cp-content/ig-1/wide' in img.attrib['data-mobile-src']
+    assert img.get('data-mobile-ratio').startswith('1.77')
+    assert 'cp-content/ig-1/wide' in img.get('data-mobile-src')
 
 
 def test_fullwidth_teaser_image_should_use_mobile_variant_on_mobile(
@@ -343,7 +344,7 @@ def test_teaser_for_column_should_render_square_image_variant(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats')
 
     teaser_img = browser.cssselect('.teaser-small-column__media-item')[0]
-    assert teaser_img.attrib['src'] == (
+    assert teaser_img.get('src') == (
         'http://localhost/zeit-online/cp-content/ig-3/square__460x460')
 
 
@@ -351,6 +352,16 @@ def test_series_teaser_should_render_series_element(testbrowser):
     browser = testbrowser('/zeit-online/journalistic-formats')
     series_element = browser.cssselect('.teaser-large__series-label')
     assert series_element[0].text == 'Serie: App-Kritik'
+
+
+def test_podcast_series_fallback_teaser_image_is_used(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/podcast-teaser-fallback')
+    teaser_image_one = browser.cssselect('.teaser-square__media-item')[0]
+    teaser_image_two = browser.cssselect('.teaser-square__media-item')[1]
+    assert teaser_image_one.get('src').endswith(
+        "podcast-illustration-fallback/square__460x460__EEB200")
+    assert teaser_image_two.get('src').endswith(
+        "podcast-illustration/square__460x460__EEB200")
 
 
 def test_small_teaser_should_have_responsive_layout(
@@ -395,7 +406,7 @@ def test_snapshot_morelink_text_icon_switch(
 def test_snapshot_should_show_first_gallery_image(testbrowser):
     browser = testbrowser('/zeit-online/teaser-gallery-setup')
     image = browser.cssselect('.snapshot__media-item')[0]
-    assert '462507429-540x304.jpg' in image.attrib['src']
+    assert '462507429-540x304.jpg' in image.get('src')
 
 
 def test_snapshot_media_link_should_have_title(testbrowser):
@@ -520,13 +531,13 @@ def test_videostage_should_have_correct_images(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     video_images = browser.cssselect('#video-stage img')
     assert len(video_images) == 4
-    vi0 = video_images[0].attrib.get('src')
+    vi0 = video_images[0].get('src')
     assert '/video/2014-01/1953013471001/imagegroup/' in vi0
-    vi1 = video_images[1].attrib.get('src')
+    vi1 = video_images[1].get('src')
     assert '/video/2014-01/3035864892001/imagegroup/' in vi1
-    vi2 = video_images[2].attrib.get('src')
+    vi2 = video_images[2].get('src')
     assert '/zeit-online/video/3537342483001/imagegroup/' in vi2
-    vi3 = video_images[3].attrib.get('src')
+    vi3 = video_images[3].get('src')
     assert '/video/2014-01/3089721834001/imagegroup/' in vi3
 
 
@@ -534,9 +545,7 @@ def test_videostage_videos_should_have_video_ids(testbrowser):
     browser = testbrowser('/zeit-online/video-stage')
     videos = browser.cssselect('#video-stage article')
     for video in videos:
-        attr = video.attrib
-        videoid = attr.get('data-video-id')
-        assert videoid is not ''
+        assert video.get('data-video-id')
 
 
 def test_videostage_series_select_should_navigate_away(
@@ -689,38 +698,6 @@ def test_minor_teaser_has_correct_width_in_all_screen_sizes(
     elif screen_size[0] == 1000:
         assert int(round(teaser.size.get('width'))) == (int(
             round((main_width - gutter_width) / 3.0) - gutter_width))
-
-
-def test_adcontroller_values_return_values_on_hp(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/index')
-    adcv = [
-        ('$handle', 'homepage'),
-        ('level2', 'homepage'),
-        ('level3', ''),
-        ('level4', ''),
-        ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline'),
-        ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        cp, pyramid.testing.DummyRequest())
-    assert adcv == view.adcontroller_values
-
-
-def test_adcontroller_values_return_values_on_cp(application):
-    cp = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/main-teaser-setup')
-    adcv = [
-        ('$handle', 'index'),
-        ('level2', 'politik'),
-        ('level3', ''),
-        ('level4', ''),
-        ('$autoSizeFrames', True),
-        ('keywords', 'zeitonline,sashawaltz,interpol'),
-        ('tma', '')]
-    view = zeit.web.site.view_centerpage.LegacyCenterpage(
-        cp, pyramid.testing.DummyRequest())
-    assert adcv == view.adcontroller_values
 
 
 def test_canonical_ruleset_on_cps(testbrowser, datasolr):
@@ -933,6 +910,12 @@ def test_centerpage_biga_area_should_render_in_isolation_with_page_param(
     assert teaser_second_page.text == 'Immer nur das Meer sehen'
 
 
+def test_centerpage_invalid_area_id_should_404(testbrowser):
+    with pytest.raises(urllib2.HTTPError) as info:
+        testbrowser('/index/area/not-an-id')
+    assert info.value.getcode() == 404
+
+
 def test_centerpage_should_render_bam_style_buzzboxes(testbrowser):
     browser = testbrowser('/zeit-online/zeitonline')
     assert browser.cssselect('.buzz-box')
@@ -998,7 +981,7 @@ def test_gallery_teaser_should_hide_duplicates(testbrowser):
     first = zeit.content.cp.interfaces.ITeaseredContent(refcp).next()
 
     assert first.uniqueId != browser.cssselect(
-        '.cp-area--gallery article')[0].attrib['data-unique-id']
+        '.cp-area--gallery article')[0].get('data-unique-id')
 
 
 def test_gallery_teaser_has_correct_elements(testbrowser):
@@ -1084,14 +1067,18 @@ def test_gallery_teaser_loads_next_page_on_click(selenium_driver, testserver):
         'teaser-gallery-setup/area/id-5fe59e73-e388-42a4-a8d4-750b0bf96812?p=')
 
 
-def test_homepage_should_have_proper_meetrics_integration(testbrowser):
+def test_homepage_should_have_proper_meetrics_integration(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/slenderized-index')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
     assert len(meetrics) == 1
 
 
-def test_centerpage_should_have_meetrics_integration(testbrowser):
+def test_centerpage_should_have_meetrics_integration(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/main-teaser-setup')
     meetrics = browser.cssselect(
         'script[src="//s62.mxcdn.net/bb-serve/mtrcs_225560.js"]')
@@ -1278,6 +1265,23 @@ def test_wrapped_features_are_triggered(testbrowser):
     assert 'isWrapped: true,' in browser.cssselect('head')[0].text_content()
 
 
+def test_app_user_is_back_is_working(selenium_driver, testserver):
+    driver = selenium_driver
+    driver.set_window_size(375, 667)
+    script = 'return window.Zeit.appUserIsBack(123456789)'
+    driver.get(
+        '{}/zeit-online/slenderized-index?app-content&force-userisback'.format(
+            testserver.url))
+    driver.execute_script(script)
+    try:
+        WebDriverWait(driver, 2).until(
+            expected_conditions.presence_of_element_located(
+                (By.CSS_SELECTOR, '.app-user-is-back')))
+        assert True
+    except TimeoutException:
+        assert False, 'appUserIsBack message not shown within 2 seconds'
+
+
 def test_advertorial_page_has_advertorial_label(testbrowser):
     browser = testbrowser('/zeit-online/advertorial-index')
     assert browser.cssselect('.header__ad-label')
@@ -1292,13 +1296,13 @@ def test_standard_teasers_have_meetrics_attribute(testbrowser):
     square = browser.cssselect('.teaser-square')
     buzz = browser.cssselect('.teaser-buzz')
 
-    assert fullwidth[0].attrib['data-meetrics'] == 'solo'
-    assert large[0].attrib['data-meetrics'] == 'major'
-    assert large[1].attrib['data-meetrics'] == 'parquet'
-    assert small[0].attrib['data-meetrics'] == 'major'
-    assert small[4].attrib['data-meetrics'] == 'parquet'
-    assert square[0].attrib['data-meetrics'] == 'minor'
-    assert square[1].attrib['data-meetrics'] == 'duo'
+    assert fullwidth[0].get('data-meetrics') == 'solo'
+    assert large[0].get('data-meetrics') == 'major'
+    assert large[1].get('data-meetrics') == 'parquet'
+    assert small[0].get('data-meetrics') == 'major'
+    assert small[4].get('data-meetrics') == 'parquet'
+    assert square[0].get('data-meetrics') == 'minor'
+    assert square[1].get('data-meetrics') == 'duo'
     assert not buzz[0].get('data-meetrics')
 
 
@@ -1308,8 +1312,8 @@ def test_video_teasers_have_meetrics_attribute(testbrowser):
     large = browser.cssselect('.video-large')
     small = browser.cssselect('.video-small')
 
-    assert large[0].attrib['data-meetrics'] == 'solo'
-    assert small[0].attrib['data-meetrics'] == 'solo'
+    assert large[0].get('data-meetrics') == 'solo'
+    assert small[0].get('data-meetrics') == 'solo'
 
 
 def test_topic_teasers_have_meetrics_attribute(testbrowser):
@@ -1318,8 +1322,8 @@ def test_topic_teasers_have_meetrics_attribute(testbrowser):
     large = browser.cssselect('.teaser-topic-main')
     small = browser.cssselect('.teaser-topic-item')
 
-    assert large[0].attrib['data-meetrics'] == 'topic'
-    assert small[0].attrib['data-meetrics'] == 'topic'
+    assert large[0].get('data-meetrics') == 'topic'
+    assert small[0].get('data-meetrics') == 'topic'
 
 
 def test_author_teaser_is_rendered_in_minor_and_duo(testbrowser):
@@ -1340,7 +1344,7 @@ def test_all_areas_have_clicktrack_attribute(testbrowser):
     assert len(areas)
 
     for area in areas:
-        assert area.attrib['data-ct-context'] != ''
+        assert area.get('data-ct-context') != ''
 
 
 def test_adtile12_from_cp_extra_is_there(testbrowser):
@@ -1348,16 +1352,12 @@ def test_adtile12_from_cp_extra_is_there(testbrowser):
     assert browser.cssselect('#ad-desktop-12')
 
 
-def test_adtile4_from_cp_extra_is_there(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adtile4_from_cp_extra_is_there(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/centerpage')
     assert browser.cssselect('#ad-desktop-4')
 
 
-def test_adtile9_from_cp_extra_is_there(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'iqd_digital_transformation': True}.get)
+def test_adtile9_from_cp_extra_is_there(testbrowser):
     browser = testbrowser('/zeit-online/parquet')
     assert browser.cssselect('#ad-desktop-9')
 
@@ -1445,36 +1445,36 @@ def test_jobbox_is_displayed_correctly(testbrowser):
     box = browser.cssselect('.jobbox--major')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
     # in minor area
     box = browser.cssselect('.jobbox--minor')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
     # in duo area
     box = browser.cssselect('.jobbox--duo')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__header'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
     # in parquet area
     box = browser.cssselect('.jobbox--parquet')[0]
     assert len(box.cssselect('.jobbox__label'))
     assert len(box.cssselect('.jobbox__kicker'))
-    assert len(box.cssselect('.jobbox__job')) == 3
-    assert len(box.cssselect('.jobbox__title')) == 3
-    assert len(box.cssselect('.jobbox__byline')) == 3
+    assert len(box.cssselect('.jobbox__job')) == 10
+    assert len(box.cssselect('.jobbox__title')) == 10
+    assert len(box.cssselect('.jobbox__byline')) == 10
     assert len(box.cssselect('.jobbox__action'))
 
 
@@ -1482,7 +1482,7 @@ def test_jobbox_is_not_displayed_whith_empty_feed(tplbrowser):
     module = mock.Mock()
     module = ()
     browser = tplbrowser(
-        'zeit.web.site:templates/inc/module/jobbox.html',
+        'zeit.web.site:templates/inc/module/jobbox_ticker.html',
         module=module)
     assert len(browser.xpath('//html/body/*')) == 0
 
@@ -1544,7 +1544,7 @@ def test_partnerbox_reisen_is_displayed_correctly(testbrowser):
     assert len(box.cssselect('.partner__dropdown-option')) == 18
     media = box.cssselect('.partner__media-item')
     assert len(media)
-    assert media[0].attrib['src'].endswith('/reisebox-image/wide__820x461')
+    assert media[0].get('src').endswith('/reisebox-image/wide__820x461')
 
 
 @pytest.mark.xfail(reason='Last test fails on jenkins for unknown reason')
@@ -1635,6 +1635,7 @@ def test_studiumbox_changes_tabs(selenium_driver, testserver):
 
 def test_studiumbox_interessentest_works(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     box.find_elements_by_tag_name('h2')
@@ -1652,6 +1653,7 @@ def test_studiumbox_interessentest_works(selenium_driver, testserver):
 
 def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1674,6 +1676,7 @@ def test_studiumbox_suchmaschine_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_works(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     links = box.find_elements_by_tag_name('h2')
@@ -1698,6 +1701,7 @@ def test_studiumbox_ranking_works(selenium_driver, testserver):
 
 def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/studiumbox' % testserver.url)
     box = driver.find_element_by_class_name('studiumbox')
     link = box.find_elements_by_tag_name('h2')[2].find_element_by_tag_name('a')
@@ -1729,7 +1733,7 @@ def test_zett_parquet_is_rendering(testbrowser):
     zett_parquet = browser.cssselect('.cp-area--zett')[0]
     title = zett_parquet.cssselect('.parquet-meta__title')
     logo = zett_parquet.cssselect('.parquet-meta__logo')
-    teaser = zett_parquet.cssselect('.teaser-small')
+    teaser = zett_parquet.cssselect('article')
     more_link = zett_parquet.cssselect('.parquet-meta__more-link--zett')
     links = zett_parquet.cssselect('a')
 
@@ -1744,6 +1748,13 @@ def test_zett_parquet_is_rendering(testbrowser):
                 '&utm_medium=fix&utm_source=zon_zettaudev_int'
                 '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x'
                 ) in link.get('href')
+
+
+def test_zett_large_teaser_is_displayed_in_parquet(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+    zett_parquet = browser.cssselect('.cp-area--zett')[0]
+    teaser = zett_parquet.cssselect('.teaser-large')
+    assert len(teaser) == 1
 
 
 def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
@@ -1761,11 +1772,11 @@ def test_zett_parquet_should_link_to_zett(testbrowser):
     link_logo = browser.cssselect('.parquet-meta__title--zett')[0]
     link_more = browser.cssselect('.parquet-meta__more-link--zett')[0]
 
-    assert link_logo.attrib['href'] == (
+    assert link_logo.get('href') == (
         'http://ze.tt/?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
         '&utm_medium=fix&utm_source=zon_zettaudev_int'
         '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x')
-    assert link_more.attrib['href'] == (
+    assert link_more.get('href') == (
         'http://ze.tt/?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
         '&utm_medium=fix&utm_source=zon_zettaudev_int'
         '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x')
@@ -1810,6 +1821,7 @@ def test_imagecopyright_link_is_present_on_articles(testbrowser):
 
 def test_imagecopyright_is_shown_on_click(selenium_driver, testserver):
     driver = selenium_driver
+    driver.maximize_window()
     driver.get('%s/zeit-online/slenderized-index' % testserver.url)
     link = driver.find_element_by_css_selector('.js-image-copyright-footer')
     driver.execute_script('arguments[0].click()', link)
@@ -1974,7 +1986,7 @@ def test_printkiosk_is_structured_correctly(testbrowser):
     assert len(teasers) == 4
     paginationbutton = browser.cssselect('.js-bar-teaser-paginate')
     assert len(paginationbutton) == 1
-    assert paginationbutton[0].attrib['data-sourceurl'].endswith('?p=')
+    assert paginationbutton[0].get('data-sourceurl').endswith('?p=')
 
 
 def test_printkiosk_displays_items_according_to_breakpoint(
@@ -2313,7 +2325,9 @@ def test_author_list_should_show_authors(testbrowser):
     assert len(browser.cssselect('.author-list__item')) == 1
 
 
-def test_centerpage_contains_webtrekk_parameter_asset(testbrowser):
+def test_centerpage_contains_webtrekk_parameter_asset(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/centerpage/cardstack')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -2363,8 +2377,23 @@ def test_dynamic_cps_should_consider_teaser_image_fill_color(testbrowser):
     image1 = browser.cssselect('.cp-area--ranking article img')[0]
     image2 = browser.cssselect('.cp-area--ranking article img')[1]
 
-    assert image1.attrib['data-src'].endswith('__A3E6BB')
-    assert not image2.attrib['data-src'].endswith('__')
+    assert image1.get('data-src').endswith('__A3E6BB')
+    assert not image2.get('data-src').endswith('__')
+
+
+def test_dynamic_cps_should_use_actual_fill_color_if_exposed_anyway(
+        testbrowser):
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    solr.results = [{
+        'uniqueId': ('http://xml.zeit.de/zeit-online/article'
+                     '/podcast-header-serie'),
+        'teaserText': 'text',
+        'teaserSupertitle': 'supertitle', 'teaserTitle': 'title',
+        'date_first_released': '2012-02-22T14:36:32.452398+00:00'}]
+
+    browser = testbrowser('/serie/app-kritik')
+    image = browser.cssselect('.cp-area--ranking article img')[0]
+    assert image.get('data-src').endswith('__EEB200')
 
 
 def test_dossier_teaser_should_be_rendered(testbrowser):
@@ -2378,9 +2407,9 @@ def test_dossier_teaser_image_should_have_attributes_for_mobile_variant(
         testbrowser):
     browser = testbrowser('/zeit-online/dossier-teaser')
     img = browser.cssselect('.teaser-dossier__media-item')[0]
-    assert img.attrib['data-mobile-ratio'].startswith('1.77')
-    assert 'image/crystal-meth-nancy-schmidt/wide' in img.attrib[
-        'data-mobile-src']
+    assert img.get('data-mobile-ratio').startswith('1.77')
+    assert 'image/crystal-meth-nancy-schmidt/wide' in img.get(
+        'data-mobile-src')
 
 
 def test_dossier_teaser_image_should_use_mobile_variant_on_mobile(
@@ -2453,9 +2482,9 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
     assert len(prev) == 1
     assert len(next) == 1
     assert len(modifier) == 1
-    assert '2015/52' in prev[0].attrib['href']
+    assert '2015/52' in prev[0].get('href')
     assert '52/2015' in prev[0].text.strip()
-    assert '2016/02' in next[0].attrib['href']
+    assert '2016/02' in next[0].get('href')
     assert '02/2016' in next[0].text.strip()
 
     packshot = current[0].cssselect('.teaser-volumeteaser__packshot')
@@ -2470,7 +2499,7 @@ def test_volume_centerpage_has_volume_navigation(testbrowser, monkeypatch):
 def test_volume_centerpage_volume_fallback_for_missing_packshot(testbrowser):
     browser = testbrowser('/2016/02/index')
     packshot = browser.cssselect('.teaser-volumeteaser__packshot noscript')
-    assert 'default_packshot_diezeit' in packshot[0].attrib['data-src']
+    assert 'default_packshot_diezeit' in packshot[0].get('data-src')
 
 
 def test_volume_centerpage_navi_dont_show_invalid_links(testbrowser):
@@ -2671,7 +2700,7 @@ def test_headerimage_should_overlay_onto_tube_area(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/tube')
     assert browser.cssselect('.cp-area--tube')
     header_image = browser.cssselect('.cp-area--solo .header-image')[0]
-    assert '--overlain' in header_image.attrib['class']
+    assert '--overlain' in header_image.get('class')
 
 
 def test_volume_teaser_on_cp_has_correct_elements(testbrowser):
@@ -2686,9 +2715,9 @@ def test_volume_teaser_on_cp_has_correct_elements(testbrowser):
         'Lesen Sie diese Ausgabe als E-Paper, App und auf dem E-Reader.')
 
     teaser_images = browser.cssselect('.teaser-volumeteaser__media-item')
-    assert teaser_images[0].attrib['src'].endswith(
+    assert teaser_images[0].get('src').endswith(
         '/2016-09/test-printcover/original')
-    assert teaser_images[1].attrib['src'].endswith(
+    assert teaser_images[1].get('src').endswith(
         '/ausgabe/default_packshot_diezeit/original')
 
 
@@ -2901,7 +2930,7 @@ def test_hp_should_include_itunes_smart_app_banner(testbrowser):
     browser = testbrowser('/zeit-online/slenderized-index')
     app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
     assert len(app_banner_id) == 1
-    assert app_banner_id[0].attrib['content'] == 'app-id=828889166'
+    assert app_banner_id[0].get('content') == 'app-id=828889166'
 
 
 def test_cp_should_not_include_itunes_smart_app_banner(testbrowser):

@@ -1,0 +1,4 @@
+{% set module = block %}
+{% set podcast_player_id = module.context.episode_id %}
+{% set podcast_player_theme = settings('podcast_theme_article_header') %}
+{% include "zeit.web.core:templates/inc/podcast_player.html" %}

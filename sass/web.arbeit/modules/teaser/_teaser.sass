@@ -13,10 +13,16 @@
 
 %teaser-kicker
 	display: block
+	display: flex
+	align-items: center
+	font-variant-ligatures: none
 	font-weight: normal
 	line-height: 1.2
 	+respond-min($break-tablet-min)
 		line-height: 1.3
+	// especially for the Z+ badge
+	& > *
+		vertical-align: middle
 
 %teaser-kicker--l
 	@extend %teaser-kicker
@@ -41,6 +47,11 @@
 	display: block
 	font-family: $font-patronbold
 
+%teaser-title--xxs
+	@extend %teaser-title
+	font-size: remify(18px)
+	line-height: 1.4
+
 %teaser-title--xs
 	@extend %teaser-title
 	font-size: remify(20px)
@@ -53,6 +64,13 @@
 	+respond-min($break-tablet-min)
 		font-size: remify(28px)
 		line-height: 1.3
+
+%teaser-title--m
+	@extend %teaser-title
+	font-size: remify(24px)
+	line-height: 1.2
+	+respond-min($break-tablet-min)
+		font-size: remify(36px)
 
 %teaser-title--xl
 	@extend %teaser-title
@@ -93,7 +111,16 @@
 %teaser-commentcount
 	@extend %commentcount
 
-.series-label
-	&:after
+.blog-label:after,
+.series-label:after
 		content: " / "
 		margin: 0 .25em
+
+// ------------------------------------------------------
+// TEASER-ADLABEL
+
+%teaser-adlabel
+	font-size: remify(9px)
+	line-height: remify(11px)
+	letter-spacing: $letter-spacing-l
+	text-transform: uppercase

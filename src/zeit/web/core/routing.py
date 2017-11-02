@@ -19,10 +19,10 @@ import zeit.content.dynamicfolder.interfaces
 import zeit.content.video.interfaces
 
 import zeit.web.core.article
-import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.utils
+import zeit.web.magazin.article
 
 
 log = logging.getLogger(__name__)
@@ -94,31 +94,30 @@ class Gallery(Traversable):
 class Article(Traversable):
 
     def __call__(self, tdict):
-        if urlparse.urlparse(
-                self.context.uniqueId).path.startswith('/feature/'):
-            # ToDo: Remove when Longform will be generally used on
-            # www.zeit.de. By then do not forget to remove marker
-            # interfaces from uniqueID http://xml.zeit.de/feature (RD)
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.IFeatureLongform)
-        elif self.context.template == 'longform':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.ILongformArticle)
-        elif self.context.template == 'short':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.IShortformArticle)
-        elif self.context.template == 'column':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.IColumnArticle)
-        elif zeit.web.core.template.liveblog(self.context):
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.ILiveblogArticle)
-        elif self.context.template == 'photocluster':
-            zope.interface.alsoProvides(
-                self.context, zeit.web.core.article.IPhotoclusterArticle)
-
         if tdict['view_name'].startswith('seite') and not tdict['subpath']:
             tdict['view_name'] = 'seite'
+
+        if tdict['view_name'] == 'module':
+            tdict['context'] = self.context.body
+            tdict['traversed'] += (tdict['view_name'],)
+            tdict['view_name'] = ''
+            raise Retraverse(tdict['request'])
+
+
+@traverser(zeit.content.article.edit.interfaces.IEditableBody)
+class ArticleBody(Traversable):
+
+    def __call__(self, tdict):
+        try:
+            tdict['context'] = self.context[tdict['subpath'][0]]
+        except (IndexError, KeyError, TypeError):
+            pass
+        else:
+            tdict['traversed'] += (tdict['subpath'][0],)
+            tdict['subpath'] = tdict['subpath'][1:]
+            if len(tdict['subpath']) == 1:
+                tdict['view_name'] = tdict['subpath'][0]
+                tdict['subpath'] = ()
 
 
 @traverser(zeit.content.cp.interfaces.ICenterPage)
@@ -140,6 +139,55 @@ class CenterPage2015(Traversable):
             travd = tdict['traversed']
             tdict['traversed'] = travd[:pos] + (name,) + travd[pos + 1:]
             raise Retraverse(tdict['request'])
+
+
+@traverser(zeit.content.cp.interfaces.ICenterPage)
+class CenterpageArea(Traversable):
+
+    def __call__(self, tdict):
+        if tdict['view_name'] != 'area':
+            return
+
+        name = tdict['subpath'][0]
+
+        def uid_cond(index, area):
+            return area.uniqueId.rsplit('/', 1)[-1] == name
+
+        def index_cond(index, area):
+            try:
+                return index == int(name.lstrip(u'no-'))
+            except ValueError:
+                raise pyramid.httpexceptions.HTTPNotFound('Area not found')
+
+        if name.startswith('id-'):
+            condition = uid_cond
+        elif name.startswith('no-'):
+            condition = index_cond
+        else:
+            raise pyramid.httpexceptions.HTTPNotFound('Area not found')
+
+        index = 1
+        found = None
+        for region in self.context.values():
+            for area in region.values():
+                if condition(index, area):
+                    found = area
+                    break
+                else:
+                    index += 1
+            if found is not None:
+                break
+        if found is None:
+            raise pyramid.httpexceptions.HTTPNotFound('Area not found')
+
+        tdict['context'] = zeit.web.core.centerpage.get_area(found)
+        tdict['traversed'] += (tdict['view_name'], tdict['subpath'][0])
+        tdict['subpath'] = tdict['subpath'][1:]
+        if len(tdict['subpath']) == 1:
+            tdict['view_name'] = tdict['subpath'][0]
+            tdict['subpath'] = ()
+        else:
+            tdict['view_name'] = ''
 
 
 @traverser(zeit.cms.repository.interfaces.IFolder)
@@ -222,9 +270,12 @@ class BlacklistSource(zeit.cms.content.sources.SimpleContextualXMLSource):
     @CONFIG_CACHE.cache_on_arguments()
     def compile(self):
         matchers = []
-        for pattern in self.getValues(None):
-            matcher, _ = pyramid.urldispatch._compile_route(pattern)
-            matchers.append(matcher)
+        try:
+            for pattern in self.getValues(None):
+                matcher, _ = pyramid.urldispatch._compile_route(pattern)
+                matchers.append(matcher)
+        except Exception:
+            log.warning('Error reading blacklist', exc_info=True)
         return matchers
 
 
@@ -339,3 +390,45 @@ class HostRestrictionPredicate(object):
                 return True
 
         return False
+
+
+class VerticalPredicate(object):
+    """Restricts requests to content that belongs to a specified vertical.
+
+    See zeit.web.core.interfaces.IVertical for possible values; but note that
+    'zett' is not applicable here. A value of '*' means allow all verticals.
+
+    This is also the place to disable newly introduced verticals via feature
+    toggles.
+
+    Example usage:
+
+        @zeit.web.view_config(
+            context=zeit.content.article.interfaces.IArticle,
+            vertical='zco')
+        class ZCOArticleView(...):
+
+    """
+
+    def __init__(self, value, config):
+        self.value = value
+
+    def text(self):
+        return u'vertical = {}'.format(self.value)
+
+    phash = text
+
+    def __call__(self, context, request):
+        if self.value == '*':
+            return True
+
+        vertical = zeit.web.core.interfaces.IVertical(context)
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        if vertical == 'zett':
+            # zett is not a vertical in the sense of this predicate.
+            vertical = 'zon'
+        # XXX Maybe think of a more generic way to handle feature toggles?
+        if vertical == 'zar' and not toggles.find('arbeit'):
+            vertical = 'zon'
+
+        return vertical == self.value

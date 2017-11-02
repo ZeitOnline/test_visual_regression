@@ -119,14 +119,6 @@ def test_video_page_video_player_should_exist(testserver, testbrowser):
     assert len(browser.cssselect('.video-player video')) == 1
 
 
-def test_video_page_adcontroller_code_is_embedded(testbrowser, monkeypatch):
-    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
-        'third_party_modules': True}.get)
-
-    browser = testbrowser('/zeit-online/video/3537342483001')
-    assert len(browser.cssselect('#ad-desktop-7')) == 1
-
-
 def test_create_url_filter_should_append_seo_slug_to_all_video_links(
         application, dummy_request):
     video = zeit.cms.interfaces.ICMSContent(
@@ -259,7 +251,14 @@ def test_video_comment_pagination_should_contain_seo_slug(
     view.request = dummy_request
     browser = tplbrowser(
         'zeit.web.core:templates/inc/comments/pagination.html', view=view)
-    link = browser.cssselect('.pager__button')[0].attrib['href']
+    link = browser.cssselect('.pager__button')[0].get('href')
     assert link == (
         'http://example.com/zeit-online/video/3537342483001/kuenstliche-'
         'intelligenz-roboter-myon-uebernimmt-opernrolle?page=2#comments')
+
+
+def test_video_has_no_ads(testbrowser):
+    browser = testbrowser(
+        '/zeit-online/article/video-ads')
+    playerdata = browser.cssselect('video')[0].get('data-player')
+    assert playerdata == ("SJENxUNKe")

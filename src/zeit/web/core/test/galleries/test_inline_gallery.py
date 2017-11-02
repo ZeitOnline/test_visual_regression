@@ -80,10 +80,10 @@ def test_photocluster_has_expected_content(testbrowser):
     browser = testbrowser('/zeit-magazin/article/cluster-beispiel')
     images = browser.cssselect(".photocluster__media-item")
 
-    assert images[0].attrib['src'].endswith(
+    assert images[0].get('src').endswith(
         '/galerien/bg-automesse-detroit-2014-usa-bilder/'
         '462507429-540x304.jpg/imagegroup/original')
-    assert images[5].attrib['src'].endswith(
+    assert images[5].get('src').endswith(
         '/galerien/bg-automesse-detroit-2014-usa-bilder/'
         'VW_Dune-540x304.jpg/imagegroup/original')
 

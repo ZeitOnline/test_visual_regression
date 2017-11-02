@@ -19,6 +19,7 @@ import zeit.cms.workflow.interfaces
 import zeit.content.author.interfaces
 import zeit.content.gallery.interfaces
 import zeit.content.image.imagegroup
+import zeit.content.image.imagereference
 import zeit.content.image.interfaces
 import zeit.content.image.variant
 
@@ -284,21 +285,21 @@ class AuthorImage(Image):
     fill_color = None
 
 
-@grokcore.component.adapter(zeit.web.core.interfaces.IFrontendBlock)
+@grokcore.component.adapter(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
-class FrontendBlockImage(Image):
+class ArticleModuleImage(Image):
 
     @zeit.web.reify
     def variant_id(self):
         if self.context.variant_id:
             return self.context.variant_id
         else:
-            return super(FrontendBlockImage, self).variant_id
+            return super(ArticleModuleImage, self).variant_id
 
 
 @grokcore.component.adapter(zeit.web.core.interfaces.INextread)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
-class NextreadImage(FrontendBlockImage):
+class NextreadImage(ArticleModuleImage):
 
     @zeit.web.reify
     def layout(self):
@@ -328,6 +329,19 @@ def image_from_block_content(context):
     if image is not None:
         image.variant_id = context.layout.image_pattern
     return image
+
+
+@grokcore.component.adapter(
+    zeit.web.core.article.ISeriesArticleWithFallbackImage)
+@grokcore.component.implementer(zeit.content.image.interfaces.IImages)
+def images_from_series_with_fallback_image(context):
+    # ZCA does not support "fall back to the next less specific adapter",
+    # so we hardcode it.
+    articleimg = zeit.content.image.imagereference.ImagesAdapter(context)
+    if articleimg.image:
+        return articleimg
+    serie_cp = zeit.web.core.template.find_series_cp(context)
+    return zeit.content.image.interfaces.IImages(serie_cp)
 
 
 @grokcore.component.adapter(zeit.web.core.interfaces.IBlock,
@@ -453,7 +467,7 @@ def sharing_image_for_article(context):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         image.group = zeit.cms.interfaces.ICMSContent(
             conf['breaking_news_fallback_image'], None)
-    elif zeit.web.site.view_article.is_column_article(context, None):
+    elif zeit.web.core.article.IColumnArticle.providedBy(context):
         image = zope.component.queryAdapter(
             context, zeit.web.core.interfaces.IImage, 'author')
 
@@ -540,6 +554,7 @@ class RemoteImage(object):
         session = requests.Session()
         session.mount('file://', requests_file.FileAdapter())
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        response = None
         try:
             with zeit.web.core.metrics.timer(
                     'zeit.web.core.video.thumbnail.brightcove.response_time'):
@@ -561,6 +576,10 @@ class RemoteImage(object):
             log.debug('Remote image {} could not be downloaded to {}.'.format(
                       self.url, self.__name__))
             raise TypeError('Could not adapt {}'.format(self.url))
+        finally:
+            status = response.status_code if response else 599
+            zeit.web.core.metrics.increment(
+                'zeit.web.core.video.thumbnail.brightcove.status.%s' % status)
 
     def open(self, mode='r'):
         return open(self.__name__, mode)

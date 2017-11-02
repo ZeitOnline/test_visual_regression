@@ -3,10 +3,6 @@ import mock
 import requests
 import zope.component
 
-import zeit.content.article.interfaces
-import zeit.cms.interfaces
-import zeit.cms.repository.unknown
-
 import zeit.web.core.application
 import zeit.web.core.interfaces
 
@@ -99,7 +95,8 @@ def test_salvageable_pagination_should_redirect_to_article_page(testserver):
     assert resp.status_code == 301
 
 
-def test_vgwort_pixel_should_be_present(testbrowser):
+def test_vgwort_pixel_should_be_present(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-magazin/article/01')
     pixel = browser.cssselect('body img[src^="http://example.com"]')
     assert len(pixel) == 1
@@ -115,26 +112,6 @@ def test_vgwort_pixel_should_be_present(testbrowser):
     browser = testbrowser('/zeit-online/index')
     pixel = browser.cssselect('body img[src^="http://example.com"]')
     assert len(pixel) == 0
-
-
-def test_content_should_have_marker_interface(application):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/01')
-    assert zeit.web.core.interfaces.IInternalUse.providedBy(content)
-
-
-def test_dynamic_content_should_have_marker_interface(application):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/dynamic/angela-merkel')
-    assert zeit.web.core.interfaces.IInternalUse.providedBy(content)
-
-
-def test_content_without_type_should_have_no_content_interfaces(application):
-    content = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/article/missing-contenttype')
-    assert isinstance(
-        content, zeit.cms.repository.unknown.PersistentUnknownResource)
-    assert not zeit.content.article.interfaces.IArticle.providedBy(content)
 
 
 def test_transaction_aborts_after_request(testbrowser):

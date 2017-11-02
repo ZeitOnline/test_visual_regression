@@ -7,7 +7,7 @@
 {% block main %}
     {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
-    <article class="article article--padded article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="{{ view.basename }}" itemref="publisher">
+    <article class="article article--padded article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/{% if view.paywall -%}News{% endif -%}Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
     {% profile %}
         {% block article_head %}
@@ -67,7 +67,10 @@
     {% endblock %}
 
     {% block article_google_ad %}
-        {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
+        {% if view.has_comment_area -%}
+            <!-- P5 -->
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
+        {% endif %}
     {% endblock article_google_ad %}
     {% block comments %}
     {% profile %}
@@ -77,7 +80,6 @@
 
 {% endblock main %}
 
-{% block adplace_floor %}{% endblock %}
 
 {% block progress_circle %}
 <script id="circle_progress_script" type="text/template">

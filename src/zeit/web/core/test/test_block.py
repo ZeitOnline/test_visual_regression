@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import copy
+import json
 
 import dogpile.cache
 import lxml.etree
@@ -186,7 +187,7 @@ def test_image_should_use_variant_given_on_layout(application):
 def test_image_should_use_variant_original_if_infographic(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/infographic')
-    block = zeit.web.core.article.pages_of_article(article)[0][2]
+    block = zeit.web.core.article.pages_of_article(article)[0][3]
     assert block.block_type == 'infographic'
     image = zeit.web.core.interfaces.IImage(block)
     assert image.variant_id == 'original'
@@ -204,7 +205,7 @@ def test_image_should_be_none_if_expired(application):
 def test_image_should_pass_through_ratio(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/all-blocks')
-    block = zeit.web.core.article.pages_of_article(article)[0][5]
+    block = zeit.web.core.article.pages_of_article(article)[0][4]
     image = zeit.web.core.interfaces.IImage(block)
     assert round(1.77 - image.ratio, 1) == 0
     assert not image.mobile_ratio
@@ -213,17 +214,19 @@ def test_image_should_pass_through_ratio(application):
 def test_image_should_set_mobile_ratio_for_variant_original(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/campus/article/infographic')
-    block = zeit.web.core.article.pages_of_article(article)[0][2]
+    block = zeit.web.core.article.pages_of_article(article)[0][1]
     image = zeit.web.core.interfaces.IImage(block)
     assert round(0.80 - image.mobile_ratio, 1) == 0
     assert round(1.62 - image.ratio, 1) == 0
 
 
-def test_module_class_should_hash_as_expected():
+def test_module_class_should_hash_from_name_attribute():
     context = mock.Mock()
-    context.xml.attrib = {'{http://namespaces.zeit.de/CMS/cp}__name__': 42}
+    context.xml = lxml.objectify.XML(
+        '<foo xmlns:cp="http://namespaces.zeit.de/CMS/cp"'
+        ' cp:__name__="foo"/>')
     mod = zeit.web.core.centerpage.Module(context)
-    assert hash(mod) == 42
+    assert hash(mod) == hash('foo')
 
 
 def test_cpextra_module_should_have_a_layout_attribute():
@@ -551,6 +554,46 @@ def test_volume_should_ignore_invalid_references(application):
     article = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/volumeteaser')
     article.xml.xpath('//volume')[0].set('href', 'http://xml.zeit.de/invalid')
-    body = zeit.content.article.edit.interfaces.IEditableBody(article)
-    module = body.values()[1]
-    assert zeit.web.core.interfaces.IFrontendBlock(module, None) is None
+    module = article.body.values()[1]
+    assert zeit.web.core.interfaces.IArticleModule(module, None) is None
+
+
+def test_podcast_should_render_script_tag_for_player(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast')
+    player = browser.cssselect('script.podigee-podcast-player')[0]
+    assert player.get('data-configuration') == 'podigee_player_8111'
+    assert '"theme": "zon-standalone"' in browser.contents
+
+
+def test_podcast_header_should_provide_podlove_data(application):
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/arbeit/article/podcast')
+    header = article.header
+    block = header.values()[0]
+    module = zope.component.getMultiAdapter(
+        (block, header),
+        zeit.web.core.interfaces.IArticleModule)
+    podlove = module.podlove_configuration
+    assert podlove['title'] == 'Test'
+    assert podlove['cover'].startswith('https://cdn.podigee.com')
+    assert len(podlove['feeds']) == 4
+
+
+def test_podcast_should_show_podcast_links(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast-header')
+    podcast_links = browser.cssselect('.podcast-links__link')
+    assert podcast_links[0].get('href') == 'http://xml.zeit.de/podcast/id1656'
+    assert podcast_links[1].get('href') == 'http://xml.zeit.de/spotify_url'
+    # There's only two links, since no deezer url has been provided.
+    assert len(podcast_links) == 2
+
+
+def test_podcast_should_remove_episodes_from_player_config(testbrowser):
+    browser = testbrowser('/zeit-online/article/podcast')
+    script = browser.cssselect('.podcast.article__item script')[0]
+    # poor man's kludgy JS-eval()
+    data = script.text.replace(
+        'window.podigee_player_8111 = ', '').strip()[:-1]
+    data = data.replace(r'\script', 'script')
+    data = json.loads(data)
+    assert 'episodes' not in data['podcast']

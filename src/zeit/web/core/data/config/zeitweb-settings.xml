@@ -23,10 +23,12 @@
   <!-- Use this setting to determine wheter or not an paragraph should be
        considered for ad places. The number represents the number of
        characters in the paragraph. -->
-  <setting name="sufficient_paragraph_length" xsi:type="xsd:int">30</setting>
+  <setting name="sufficient_paragraph_length" xsi:type="xsd:int">200</setting>
 
   <setting name="comment_page_size" xsi:type="xsd:int">4</setting>
   <setting name="community_host_timeout_secs" xsi:type="xsd:int">10</setting>
+
+  <setting name="podigee_timeout" xsi:type="xsd:int">1</setting>
 
   <setting name="retresco_timeout" xsi:type="xsd:double">0.2</setting>
 
@@ -78,8 +80,20 @@
   <!-- Videoplayer Settings, use different players on dev, staging and production -->
   <!-- videoplayer_hp production: 65fa926a-0fe0-4031-8cbf-9db35cecf64a -->
   <setting name="brightcove_videoplayer_hp_cp_single" xsi:type="xsd:string">B1l1tOGXYe</setting>
+  <!-- videoplayer_hp_wo_ads production: r1xb937iwZ -->
+  <setting name="brightcove_videoplayer_hp_cp_single_wo_ads" xsi:type="xsd:string">HklODaQiwb</setting>
   <!-- videoplayer_article production: c09a3b98-8829-47a5-b93b-c3cca8a4b5e9 -->
   <setting name="brightcove_videoplayer_article" xsi:type="xsd:string">rJzskUVKx</setting>
+  <!-- videoplayer_article_wo_ads production: NykzeyfYg  -->
+  <setting name="brightcove_videoplayer_article_wo_ads" xsi:type="xsd:string">SJENxUNKe</setting>
+
+  <!-- Standard Facebook Page IDs  -->
+  <setting name="facebook_app_id_list" xsi:type="xsd:string">37816894428, 63948163305, 327602816926, 114803848589834</setting>
+
+  <!-- podcast player -->
+  <setting name="podcast_theme_cp" xsi:type="xsd:string">zon-standalone</setting>
+  <setting name="podcast_theme_article_body" xsi:type="xsd:string">zon-standalone</setting>
+  <setting name="podcast_theme_article_header" xsi:type="xsd:string">zon-minimal</setting>
 
   <!-- To enable, insert path to optimizely Script (//cdn.optimizely.com/js/281825380.js).
   To disable, use empty string. Do NOT use "false". -->

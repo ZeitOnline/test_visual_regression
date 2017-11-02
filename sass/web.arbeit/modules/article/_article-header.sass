@@ -1,0 +1,58 @@
+.article-header
+	padding-bottom: remify(40px)
+
+.article-header--dark
+	+font-smoothing
+	+padded
+	background-color: $primary-color
+	color: #fff
+	padding-bottom: remify(40px)
+	.article-heading__kicker
+		color: $zar-sun-yellow
+	.article-heading__title
+		color: #fff
+	.article-heading__title--underlined-skip
+		text-shadow: -2px 3px $primary-color, 2px 3px $primary-color
+	.byline,
+	.metadata
+		color: $zar-french-grey
+		a
+			color: $zar-french-grey
+			+on-interaction
+				color: $zar-whitesmoke
+	.zplus-badge__link
+		color: $zar-french-grey
+		+on-interaction
+			color: $zar-whitesmoke
+
+.article-header--dark + .article__media
+	margin-top: 0
+	max-width: none
+	.article__media-container
+		background-color: $primary-color
+
++respond-max($break-tablet-min)
+	.article-header--dark,
+	.article-header--dark + .article__media
+		+unpadded
+	.article-header--dark
+		border-top: 1px $zar-battleship-grey solid
+		&.article-header--has-series
+			border-top-color: $zar-charcoal-grey
+
+	.article-header--has-series
+		.article-heading
+			padding-top: $vertical-space
+
++respond-min($break-tablet-min)
+	.article-header--dark
+		margin-top: $vertical-space
+		.article-heading__title--underlined-skip
+			text-shadow: -4px 6px $primary-color, 4px 6px $primary-color
+
+
+
+.article-header--centered
+	.article-heading,
+	.article__item
+		text-align: center

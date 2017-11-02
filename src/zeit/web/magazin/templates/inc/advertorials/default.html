@@ -6,13 +6,11 @@
 <!--<![endif]-->
 {% endblock css_link %}
 
-{% block page_title %}
-    {% if view.is_hp == False -%}
-        <div class="advertorial-title">
-            <a href="./index" title="zurück zur Übersicht">
-            	<div class="advertorial-title__headline">{% block advertorial_headline %}{% endblock advertorial_headline %}</div>
-            </a>
-            <div class="advertorial-title__text">{% block advertorial_text %}{% endblock advertorial_text %}</div>
-        </div>
-    {%- endif %}
-{% endblock page_title %}
+{% block advertorial_marker %}
+    {% if view.advertorial_marker %}
+    <div class="advertorial-marker">
+        <div class="advertorial-marker__title">{{ view.advertorial_marker[0] }}</div>
+        <div class="advertorial-marker__text">{{ view.advertorial_marker[1] }}</div>
+    </div>
+    {% endif %}
+{% endblock advertorial_marker %}

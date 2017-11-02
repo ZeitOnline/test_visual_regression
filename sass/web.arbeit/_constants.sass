@@ -3,8 +3,9 @@ $gutter:				remify(20px)
 $page-padding:			remify(20px)
 $page-padding--small:	remify(14px)
 $cp-padding:			$gutter / 2
-$vertical-space:		remify(25px) // to be applied top+bottom. we want a 50px gap.
-$vertical-space--small:	remify(10px) // to be applied top+bottom. we want a 20px gap.
+$vertical-space:		remify(30px) // to be applied top+bottom. we want a 60px gap.
+$vertical-space--small:	remify(20px) // to be applied top+bottom. we want a 40px gap.
+$vertical-space--large:	remify(50px)
 
 @import "../constants"
 
@@ -13,12 +14,16 @@ $zar-sun-yellow: #ffe52c
 $zar-battleship-grey: #77777c
 $zar-marigold: #ffc800
 $zar-white: #d8d8d8
-$zar-ocean-green: #3c9d6f
+$zar-ocean-green: #3c9d6f // jobs area background color
+$zar-jewel-green: #1a884e // jobs font/button color
 $zar-faded-red: #cc3a46
 $zar-charcoal-grey: #44444c
 $zar-darkish-pink: #e15561
+$zar-grey: #76767b
 $zar-cool-grey: #99999c
 $zar-french-grey: #cccccf
+$zar-whitesmoke: #eeeef0
+$zar-darkslate-grey: #4f4f57
 
 // semantic color names
 $primary-color: $grey--mid-dark
@@ -26,10 +31,29 @@ $color-text: $primary-color
 $color-body-text: $color-text
 $color-body-bg: #dfdfdf
 $color-page-bg: $white
-$color-bg-toc: #eeeef0
+$color-bg-toc: $zar-whitesmoke
+$color-bg-infobox: $zar-whitesmoke
+$color-bg-series-banner: $grey--mid-dark
+$color-link--default: $zar-grey
 $color-link--hover: $color-text
 
 $color-border-on-bright: $zar-french-grey
+$color-link-on-grey: $zar-darkslate-grey
+
+$color-jobs-areas: $zar-ocean-green
+$color-jobs-elements: $zar-jewel-green
+
+$color-input:               $color-text
+$color-input-bg:            $zar-whitesmoke
+$color-input-border:        $color-border-on-bright
+$color-input--focus:        $color-text
+$color-input-bg--focus:     $zar-whitesmoke
+$color-input-border--focus: $zar-cool-grey
+$color-input--error:        $red
+$color-input-bg--error:     #ffe9ed
+$color-input-border--error: $red
+$color-underline: $zar-sun-yellow !default
+$color-toc-index: $zar-marigold !default
 
 // content lengths ... for ZON1000.
 // This can partly(!) be removed from ZAR when the
@@ -37,3 +61,7 @@ $color-border-on-bright: $zar-french-grey
 $medium-content-width: remify(680px)
 $wide-content-width: remify(840px)
 $max-page-width: remify(1000px)
+
+// arrows are injected as pseudo-elements, see https://github.com/ZeitOnline/zeit.web/pull/2438/commits/73e6766feccfb47ea94776e973ca96502c92fa9a#r134201887
+$svg-arrow-right-40px: url('data:image/svg+xml; utf8, <svg width="40px" height="9px" viewBox="0 0 40 9" xmlns="http://www.w3.org/2000/svg"><path d="M37.794 5H-.053V4H37.89L34.453.563l.707-.707 4.597 4.596L35 9.207l-.707-.707L37.794 5z"></path></svg>')
+$svg-arrow-right-40px-white: url('data:image/svg+xml; utf8, <svg fill="#fff" width="40px" height="9px" viewBox="0 0 40 9" xmlns="http://www.w3.org/2000/svg"><path d="M37.794 5H-.053V4H37.89L34.453.563l.707-.707 4.597 4.596L35 9.207l-.707-.707L37.794 5z"></path></svg>')

@@ -1,4 +1,7 @@
-{% include "zeit.web.site:templates/inc/article/series.tpl" %}
+{% block headerseries %}
+    {% include "zeit.web.site:templates/inc/article/series.tpl" %}
+{% endblock %}
+
 {% set template_suffix = '-zplus' if view.zplus_label and view.page_nr == 1 else '' %}
 
 {% block heading %}
@@ -9,4 +12,11 @@
     {% include "zeit.web.site:templates/inc/article/metadata{}.tpl".format(template_suffix) %}
 {% endblock %}
 
-{% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
+{% block headermodule %}
+    {# This only applies to core:templates/inc/block/headerimage.html, but the
+       requirement is that the header determines the image layout, so we have
+       to do it here. #}
+    {% set article_header_image_figure_modifiers = 'article__item' | with_mods('wide', 'rimless', 'apart') %}
+
+    {% include "zeit.web.core:templates/inc/article/header-module.tpl" %}
+{% endblock %}

@@ -14,12 +14,14 @@ import zeit.content.image.interfaces
 import zeit.content.link.interfaces
 
 import zeit.web
+import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.centerpage
 import zeit.web.core.metrics
 
 
 log = logging.getLogger(__name__)
+SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 
 
 class IRSSLink(zeit.content.link.interfaces.ILink):
@@ -80,7 +82,7 @@ class RSSLink(object):
     def image_url(self):
         enclosure = self.xml.find('enclosure')
         if enclosure is not None:
-            return enclosure.attrib.get('url')
+            return enclosure.get('url')
 
     @zeit.web.reify
     def is_ad(self):
@@ -110,11 +112,21 @@ class RSSImages(zeit.web.core.image.RemoteImages):
     pass
 
 
-def parse_feed(url, kind, timeout=2):
+@SHORT_TERM_CACHE.cache_on_arguments()
+def _cache_feed(url, timeout):
+    response = None
     try:
         with zeit.web.core.metrics.timer('feed.rss.reponse_time'):
-            resp = requests.get(url, timeout=timeout)
-        xml = lxml.etree.fromstring(resp.content)
+            response = requests.get(url, timeout=timeout)
+        return response.content
+    finally:
+        status = response.status_code if response else 599
+        zeit.web.core.metrics.increment('feed.rss.status.%s' % status)
+
+
+def parse_feed(url, kind, timeout=2):
+    try:
+        xml = lxml.etree.fromstring(_cache_feed(url, timeout))
     except (requests.exceptions.RequestException,
             lxml.etree.XMLSyntaxError), e:
         log.debug('Could not collect {}: {}'.format(url, e))

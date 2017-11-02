@@ -11,15 +11,21 @@
             <div class="summary" itemprop="description">
                 {{ view.subtitle }}
             </div>
-            {%- set byline = view.context | get_byline('main') %}
-            {% if byline | length -%}
-            <div class="byline" data-ct-row="author">
-                {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
-            </div>
-            {% endif -%}
+            {% if not byline_already_rendered %}
+                {%- set byline = view.context | get_byline('main') %}
+                {% if byline | length -%}
+                    <div class="byline" data-ct-row="author">
+                        {% include 'zeit.web.core:templates/inc/meta/byline.html' %}
+                    </div>
+                {% endif -%}
+            {% endif %}
             <div class="metadata">
                 {% include "zeit.web.core:templates/inc/article/metadata.tpl" %}
             </div>
+
+            {% if view.zplus_label and view.zplus_label.zplus %}
+                {% include "zeit.web.core:templates/inc/article/zplus-badge.html" %}
+            {% endif %}
         {% endblock %}
     {% endif %}
 </div>

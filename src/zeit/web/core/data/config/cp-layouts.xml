@@ -5,10 +5,13 @@
         id="zar-small"
         title="kleiner Teaser"
         image_pattern="wide"
-        areas="trio"
+        areas="tube trio"
         />
-    <layout id="zar-lead" title="Aufmacher" image_pattern="portrait" areas="solo" />
-
+    <layout
+        id="zar-lead"
+        title="Aufmacher"
+        image_pattern="portrait"
+        areas="solo" />
     <layout
         id="zar-duo-bright"
         title="Duo-Teaser Hell mit dunkler Schrift"
@@ -21,6 +24,53 @@
         image_pattern="wide"
         areas="duo"
         />
+    <layout
+        id="zar-topic-small"
+        title="kleiner Teaser Topic"
+        image_pattern="wide"
+        areas="topic"
+        />
+    <layout
+        id="zar-quote-yellow"
+        title="Quote-Teaser Gelb"
+        image_pattern="original"
+        areas="duo"
+        />
+    <layout
+        id="zar-quote-red"
+        title="Quote-Teaser Rot"
+        image_pattern="original"
+        areas="duo"
+        />
+    <layout
+        id="zar-debate"
+        title="Debatte"
+        image_pattern=""
+        areas="solo"
+        />
+    <layout
+        id="zar-square"
+        title="quadratischer Teaser"
+        image_pattern="square"
+        areas="duo minor"
+        />
+    <layout
+        id="zar-topiccluster"
+        title="Teaser in Themen-Cluster"
+        areas="topiccluster"
+        />
+    <layout
+        id="zar-ranking"
+        title="kleiner Teaser Suchergebnis und Themenseite"
+        image_pattern="wide"
+        areas="zar-ranking tube"
+        />
+    <layout
+        id="zar-podcast"
+        title="Podcast"
+        image_pattern="original"
+        areas="solo duo trio"
+        />
     <!-- ZCO only -->
     <layout
         id="zco-wide-small"
@@ -32,7 +82,7 @@
         id="zco-wide-large"
         title="großer Teaser"
         image_pattern="cinema"
-        areas="duo"
+        areas="duo tube"
         />
     <layout
         id="zco-topic-wide"
@@ -87,7 +137,7 @@
         id="zco-small"
         title="kleiner Teaser Suchergebnis"
         image_pattern="wide"
-        areas="zco-ranking"
+        areas="zco-ranking tube"
         />
 
     <!-- Teaser formats for new ZON-Centerpages -->
@@ -223,6 +273,13 @@
         title="Ausgabenteaser"
         image_pattern="original"
         areas="solo"
+        />
+
+    <layout
+        id="zon-podcast"
+        title="Podcast"
+        image_pattern="original"
+        areas="solo major minor duo"
         />
 
     <!--   Teaser formats for Storystreams   -->

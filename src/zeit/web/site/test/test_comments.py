@@ -190,8 +190,8 @@ def test_comment_author_roles_should_be_displayed(testbrowser):
     assert 'comment--author' in comment_author.get('class')
     assert len(icon_author) == 1
     assert len(icon_freelancer) == 1
-    assert icon_author[0].attrib['title'] == 'Redaktion'
-    assert icon_freelancer[0].attrib['title'] == 'Freie Autorin'
+    assert icon_author[0].get('title') == 'Redaktion'
+    assert icon_freelancer[0].get('title') == 'Freie Autorin'
 
 
 def test_comments_zon_template_respects_metadata(tplbrowser, monkeypatch):

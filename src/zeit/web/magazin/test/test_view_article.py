@@ -33,7 +33,7 @@ def test_longform_contains_subpage_head(testbrowser):
     assert len(headlines) == 4
 
     for i, headline in enumerate(headlines):
-        assert headline.attrib['id'] == 'kapitel{}'.format(i + 1)
+        assert headline.get('id') == 'kapitel{}'.format(i + 1)
 
 
 def test_article_page_should_contain_blocks(httpbrowser):
@@ -182,3 +182,8 @@ def test_article_shows_zplus_badge_for_paid_article(testbrowser):
 def test_article_shows_no_zplus_badge_for_metered_article(testbrowser):
     browser = testbrowser('/zeit-magazin/article/zplus-zmo-register')
     assert not browser.cssselect('.zplus-badge')
+
+
+def test_zmo_advertorial_has_no_home_button_as_pagination(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/advertorial-onepage')
+    assert len(browser.cssselect('.article-pagination__link')) == 0

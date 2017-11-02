@@ -111,7 +111,8 @@ def test_all_tracking_snippets_are_loaded(selenium_driver, testserver):
         'pixel for IVW not in DOM')
 
 
-def test_article03_has_correct_webtrekk_values(httpbrowser):
+def test_article03_has_correct_webtrekk_values(httpbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = httpbrowser('/zeit-magazin/article/03')
     source = browser.cssselect(
         'img[src^="https://audev.zeit.de/"]')[0].get('src')
@@ -197,7 +198,8 @@ def test_article03_has_correct_webtrekk_values(httpbrowser):
         'cp32': 'unfeasible'}
 
 
-def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
+def test_article03_page2_has_correct_webtrekk_values(httpbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = httpbrowser('/zeit-magazin/article/03/seite-2')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -254,7 +256,8 @@ def test_article03_page2_has_correct_webtrekk_values(httpbrowser):
         'cp32': 'unfeasible'}
 
 
-def test_cp_has_correct_webtrekk_values(httpbrowser):
+def test_cp_has_correct_webtrekk_values(httpbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = httpbrowser('/zeit-magazin/index')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -338,7 +341,8 @@ def test_cp_has_correct_webtrekk_values(httpbrowser):
         'cp32': 'unfeasible'}
 
 
-def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
+def test_webtrekk_series_tag_is_set_corectly(httpbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = httpbrowser('/zeit-magazin/article/06')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -357,7 +361,8 @@ def test_webtrekk_series_tag_is_set_corectly(httpbrowser):
             .format(urllib.quote(host))) in source
 
 
-def test_webtrekk_has_session_parameter(testbrowser):
+def test_webtrekk_has_session_parameter(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/slenderized-index?app-content')
     script = browser.cssselect(
         'script[src*="/static/js/webtrekk/webtrekk"] + script')[0]
@@ -770,6 +775,19 @@ def test_feature_longform_should_have_zon_logo_footer(testbrowser):
     assert browser.cssselect('.main-footer__logo--zon-small')
 
 
+def test_feature_longform_is_fullwidth(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get('{}/zeit-magazin/article/05'.format(
+        testserver.url))
+    driver.maximize_window()
+    width = driver.execute_script(
+        'return document.querySelector(".page").offsetWidth')
+    window_width = driver.execute_script(
+        'return document.documentElement.clientWidth')
+    assert width == window_width
+
+
 def test_feature_longform_should_have_zonish_title(testbrowser):
     browser = testbrowser('/feature/feature_longform')
     title = browser.cssselect('head > title')
@@ -838,13 +856,11 @@ def test_longform_should_have_exact_one_h1(testbrowser):
 def test_article_first_page_must_have_no_image_as_first_block(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
-    body = zeit.content.article.edit.interfaces.IEditableBody(
-        context).values()[0]
-    block = zeit.web.core.article.pages_of_article(context)[0][0]
-
+    block = context.body.values()[0]
     assert zeit.content.article.edit.interfaces.IImage.providedBy(
-        body), ('Image should be present on first position in '
-                'article body.')
+        block), ('Image should be present on first position in '
+                 'article body.')
+    block = zeit.web.core.article.pages_of_article(context)[0][0]
     assert not zeit.content.article.edit.interfaces.IImage.providedBy(
         block), 'Image must not be present on first position in page.'
 
@@ -857,7 +873,8 @@ def test_zmo_should_not_render_advertisement_nextread(
     assert len(browser.cssselect('.nextread-advertisement')) == 0
 
 
-def test_article_contains_zeit_clickcounter(testbrowser):
+def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-magazin/article/03')
     counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
     assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
@@ -914,7 +931,7 @@ def test_share_buttons_are_present(testbrowser):
     labels = sharing_menu.cssselect('.sharing-menu__text')
 
     #  facebook
-    parts = urlparse.urlparse(links[0].attrib['href'])
+    parts = urlparse.urlparse(links[0].get('href'))
     query = urlparse.parse_qs(parts.query)
     url = query.get('u').pop(0)
     assert 'wt_zmc=sm.ext.zonaudev.facebook.ref.zeitde.share.link' in url
@@ -924,7 +941,7 @@ def test_share_buttons_are_present(testbrowser):
     assert 'utm_content=zeitde_share_link_x' in url
 
     #  twitter
-    parts = urlparse.urlparse(links[1].attrib['href'])
+    parts = urlparse.urlparse(links[1].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert query.get('text').pop(0) == (
         'Der Chianti hat eine zweite Chance verdient')
@@ -932,19 +949,19 @@ def test_share_buttons_are_present(testbrowser):
     assert 'share' in query.get('url').pop(0)
 
     #  whatsapp
-    parts = urlparse.urlparse(links[2].attrib['href'])
+    parts = urlparse.urlparse(links[2].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Der Chianti hat eine zweite Chance verdient - '
             'Artikel auf ZEITmagazin ONLINE: ') in query.get('text').pop(0)
 
     #  facebook messenger
-    parts = urlparse.urlparse(links[3].attrib['href'])
+    parts = urlparse.urlparse(links[3].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert query.get('link').pop(0).startswith(canonical)
     assert query.get('app_id').pop(0) == '638028906281625'
 
     #  mail
-    parts = urlparse.urlparse(links[4].attrib['href'])
+    parts = urlparse.urlparse(links[4].get('href'))
     query = urlparse.parse_qs(parts.query)
     assert ('Der Chianti hat eine zweite Chance verdient - '
             'Artikel auf ZEITmagazin ONLINE') in query.get('subject').pop(0)
@@ -957,7 +974,9 @@ def test_share_buttons_are_present(testbrowser):
     assert labels[4].text == 'Mailen'
 
 
-def test_webtrekk_paywall_status_is_set_on_paid_article(testbrowser):
+def test_webtrekk_paywall_status_is_set_on_paid_article(
+        testbrowser, togglepatch):
+    togglepatch({'third_party_modules': True})
     url = ('/zeit-online/article/zplus-zeit'
            '?C1-Meter-Status=always_paid')
     browser = testbrowser(url)

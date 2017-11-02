@@ -30,14 +30,13 @@ import zeit.web.site.view
 log = logging.getLogger(__name__)
 
 
-@zeit.web.view_config(
+@zeit.web.view_defaults(
     context=zeit.content.cp.interfaces.ICP2015,
-    custom_predicates=(zeit.web.site.view.is_zon_content,
-                       zeit.web.core.view.is_advertorial),
+    vertical='zon')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
     renderer='templates/centerpage_advertorial.html')
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICP2015,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
 class Centerpage(
         zeit.web.core.view_centerpage.Centerpage, zeit.web.site.view.Base):
@@ -75,8 +74,8 @@ class Centerpage(
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
-    custom_predicates=(zeit.web.site.view.is_zon_content,
-                       zeit.web.core.view.is_paginated),
+    vertical='zon',
+    custom_predicates=(zeit.web.core.view.is_paginated,),
     renderer='templates/centerpage.html')
 class CenterpagePage(zeit.web.core.view_centerpage.CenterpagePage, Centerpage):
     pass
@@ -84,8 +83,8 @@ class CenterpagePage(zeit.web.core.view_centerpage.CenterpagePage, Centerpage):
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
-    custom_predicates=(zeit.web.site.view.is_zon_content,
-                       zeit.web.core.view.is_paywalled))
+    vertical='zon',
+    custom_predicates=(zeit.web.core.view.is_paywalled,))
 def temporary_redirect_paywalled_centerpage(context, request):
     """ Centerpages with a paywall actually don't really exist.
     However, a Centerpage which is based on the newest volume object
@@ -98,58 +97,34 @@ def temporary_redirect_paywalled_centerpage(context, request):
 
 
 @zeit.web.view_config(
-    name='area',
-    context=zeit.content.cp.interfaces.ICP2015,
+    context=zeit.content.cp.interfaces.IArea,
+    vertical='*',  # only works if context provides ICMSContent
     renderer='templates/inc/area/includer.html')
 class CenterpageArea(Centerpage):
 
+    has_solo_leader = False
+
     def __init__(self, context, request):
-        if not request.subpath:
-            raise pyramid.httpexceptions.HTTPNotFound()
-
-        self.context = None
-        self.request = request
-
-        self.request.response.headers.add('X-Robots-Tag', 'noindex')
-
-        self.comment_counts = {}
-        self.has_solo_leader = False
-
-        name = request.subpath[-1]
-
-        def uid_cond(index, area):
-            return area.uniqueId.rsplit('/', 1)[-1] == name
-
-        def index_cond(index, area):
-            try:
-                return index == int(name.lstrip(u'no-'))
-            except ValueError:
-                raise pyramid.httpexceptions.HTTPNotFound('Area not found')
-
-        if name.startswith('id-'):
-            condition = uid_cond
-        elif name.startswith('no-'):
-            condition = index_cond
-
-        index = 1
-        for region in context.values():
-            for area in region.values():
-                if condition(index, area):
-                    self.context = zeit.web.core.centerpage.get_area(area)
-                    return
-                else:
-                    index += 1
+        # Change context to the CP, so the superclass view properties work.
+        super(CenterpageArea, self).__init__(
+            zeit.content.cp.interfaces.ICenterPage(context), request)
+        self.area = context
 
     def __call__(self):
+        super(CenterpageArea, self).__call__()
+        self.request.response.headers.add('X-Robots-Tag', 'noindex')
         return {
-            'area': self.context,
+            # pyramid's rendering is independent of view class instantiation,
+            # and thus is unaffected by our change of self.context.
+            'context': self.context,
+            'area': self.area,
             'region_loop': {'index': 1}
         }
 
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.IStoryStream,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
+    vertical='zon',
     renderer='templates/storystream.html')
 class Storystream(Centerpage):
     """Main view class for ZEIT ONLINE storystreams."""
@@ -176,7 +151,7 @@ class Storystream(Centerpage):
         for region in regions:
             areas = region.values()
             for area in areas:
-                for module in area.select_modules(*self.countable_atom_types):
+                for module in area.filter_values(*self.countable_atom_types):
                     atom_counter += 1
 
                     # OPTIMIZE: this traversal is redundant (also done inside
@@ -198,14 +173,13 @@ class Storystream(Centerpage):
         self.atom_meta['latest_date'] = latest_atom
 
 
-@zeit.web.view_config(
+@zeit.web.view_defaults(
     context=zeit.content.cp.interfaces.ICenterPage,
-    custom_predicates=(zeit.web.site.view.is_zon_content,
-                       zeit.web.core.view.is_advertorial),
+    vertical='zon')
+@zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
     renderer='templates/centerpage_advertorial.html')
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.ICenterPage,
-    custom_predicates=(zeit.web.site.view.is_zon_content,),
     renderer='templates/centerpage.html')
 class LegacyCenterpage(Centerpage):
     """Legacy view for centerpages built with the old cp-editor."""

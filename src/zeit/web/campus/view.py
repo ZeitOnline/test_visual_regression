@@ -5,7 +5,6 @@ import zeit.campus.interfaces
 import zeit.cms.interfaces
 
 import zeit.web
-import zeit.web.core.application
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.security
@@ -31,10 +30,6 @@ def campus_topiclink(context):
         should_cache_fn=bool)
 
 
-def is_zco_content(context, request):
-    return zeit.campus.interfaces.IZCOContent.providedBy(context)
-
-
 class Base(zeit.web.core.view.Base):
 
     seo_title_default = u'ZEIT Campus ONLINE | studieren. arbeiten. leben.'
@@ -46,9 +41,31 @@ class Base(zeit.web.core.view.Base):
     # make toolbox links available in view
     toolbox = zeit.web.campus.navigation.TOOL_SOURCE
 
+    # make flyout links available in view
+    flyoutnavi = zeit.web.campus.navigation.TOOL_FLYOUT_SOURCE
+
     @zeit.web.reify
     def adwords(self):
         return ['zeitonline', 'zeitcampus']
+
+    @zeit.web.reify
+    def adcontroller_handle(self):
+        suffix = '_trsf'
+        replacements = {
+            'article': 'artikel',
+            'gallery': 'galerie'}
+        if self.is_hp:
+            return 'campus_homepage{}'.format(suffix)
+        if self.is_advertorial:
+            return '{}_{}{}'.format(
+                'mcs' if 'mcs/' in self.banner_channel else 'adv',
+                'index' if self.type == 'centerpage' else 'artikel',
+                suffix)
+        if self.type == 'centerpage':
+            return 'index{}'.format(suffix)
+        if self.type in replacements:
+            return '{}{}'.format(replacements[self.type], suffix)
+        return 'centerpage{}'.format(suffix)
 
     @zeit.web.reify
     def publisher_name(self):

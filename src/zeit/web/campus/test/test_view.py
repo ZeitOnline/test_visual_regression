@@ -12,9 +12,9 @@ def test_sharing_titles_differ_from_html_title(testbrowser):
 
     pagetitle = browser.cssselect('title')[0].text
     og_title = browser.cssselect(
-        'meta[property="og:title"]')[0].attrib.get('content')
+        'meta[property="og:title"]')[0].get('content')
     twitter_title = browser.cssselect(
-        'meta[name="twitter:title"]')[0].attrib.get('content')
+        'meta[name="twitter:title"]')[0].get('content')
 
     assert pagetitle.endswith(view.pagetitle_suffix)
     assert og_title + view.pagetitle_suffix == pagetitle

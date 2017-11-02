@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<container xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="artbox" label="info">
+  <supertitle>Debattenaufruf</supertitle>
+  <block>
+    <title>Müssen wir mehr über Geld sprechen?</title>
+    <text>
+        <p>Unbedingt! Oder doch keine gute Idee? Schicken Sie uns Ihre Texte und Erfahrungen an <a href="mailto:leser-arbeit@zeit.de">leser-arbeit@zeit.de</a>. Alle Beiträge gibt's auf unserer Serienseite zum anonymen Gehaltsprotokoll.</p>
+    </text>
+  </block>
+</container>

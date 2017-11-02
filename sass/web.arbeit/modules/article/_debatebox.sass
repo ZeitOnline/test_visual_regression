@@ -1,0 +1,41 @@
+// debatebox on article (same HTML as teaser, different styles)
+// debatebox on CP (same HTML as articleblock, different styles)
+.debatebox-on-article
+	font-family: $font-tabletgothic
+	margin-bottom: remify(40px)
+	margin-top: remify(40px)
+	text-align: center
+
+	&__wrapper
+		+font-smoothing
+		+debatebox-speechbubble-arrow($primary-color)
+		background-color: $primary-color
+		color: #ffffff
+		margin-bottom: 30px
+		padding: remify(30px) $page-padding--small
+
+	&__container
+		margin: 0 auto
+		max-width: remify(520px)
+
+	&__kicker
+		@extend %teaser-kicker--s
+		color: $zar-french-grey
+		display: block // override flexbox from default teaser
+
+	&__title
+		@extend %teaser-title--s
+		margin: remify(10px 0)
+
+	&__text
+		color: $zar-french-grey
+		font-size: remify(15px)
+		line-height: 1.4
+		a
+			color: currentColor
+			text-decoration: underline
+			white-space: nowrap
+
+	&__button
+		@extend %zar-button-hollow
+		margin-bottom: 0 // the debatebox has its own margin

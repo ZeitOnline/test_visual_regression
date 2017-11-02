@@ -1,56 +1,43 @@
 # -*- coding: utf-8 -*-
-import logging
-
-import zeit.content.article.edit.interfaces
 import zeit.content.article.interfaces
 
 import zeit.web
 import zeit.web.core.article
-import zeit.web.core.comments
-import zeit.web.core.interfaces
 import zeit.web.core.view
 import zeit.web.core.view_article
+import zeit.web.magazin.article
 import zeit.web.magazin.view
-
-
-log = logging.getLogger(__name__)
 
 
 @zeit.web.view_defaults(
     context=zeit.content.article.interfaces.IArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,))
+    vertical='zmo')
 @zeit.web.view_config(
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_advertorial),
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
     renderer='templates/advertorial.html')
 @zeit.web.view_config(
     renderer='templates/article.html')
 @zeit.web.view_config(
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
     name='komplettansicht',
     renderer='templates/komplettansicht.html')
 @zeit.web.view_config(
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     name='komplettansicht',
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IColumnArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    context=zeit.web.magazin.article.IColumnArticle,
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IShortformArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    context=zeit.web.magazin.article.IShortformArticle,
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IPhotoclusterArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    context=zeit.web.magazin.article.IPhotoclusterArticle,
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
 
@@ -64,27 +51,32 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
             return prefix + ' ' + self.context.genre.title()
 
 
+@zeit.web.view_defaults(vertical='zmo')
 @zeit.web.view_config(
     name='seite',
     path_info='.*seite-(.*)',
     renderer='templates/article.html')
 @zeit.web.view_config(
     name='seite',
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_advertorial,),
+    path_info='.*seite-(.*)',
+    renderer='templates/advertorial.html')
+@zeit.web.view_config(
+    name='seite',
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     path_info='.*seite-(.*)',
     renderer='zeit.web.core:templates/paywall.html')
 class ArticlePage(zeit.web.core.view_article.ArticlePage, Article):
     pass
 
 
+@zeit.web.view_defaults(
+    context=zeit.web.magazin.article.ILongformArticle,
+    vertical='zmo')
 @zeit.web.view_config(
-    context=zeit.web.core.article.ILongformArticle,
     renderer='templates/longform.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.ILongformArticle,
-    custom_predicates=(zeit.web.magazin.view.is_zmo_content,
-                       zeit.web.core.view.is_paywalled),
+    custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 class LongformArticle(Article):
 
@@ -113,11 +105,12 @@ class LongformArticle(Article):
         return 'short'
 
 
+@zeit.web.view_defaults(
+    context=zeit.web.magazin.article.ILongformArticle,
+    vertical='zon')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IFeatureLongform,
     renderer='templates/feature_longform.html')
 @zeit.web.view_config(
-    context=zeit.web.core.article.IFeatureLongform,
     custom_predicates=(zeit.web.core.view.is_paywalled,),
     renderer='zeit.web.core:templates/paywall.html')
 class FeatureLongform(LongformArticle):
@@ -142,21 +135,21 @@ class FeatureLongform(LongformArticle):
 
 
 @zeit.web.view_config(
-    context=zeit.web.core.article.IShortformArticle,
+    context=zeit.web.magazin.article.IShortformArticle,
     renderer='templates/shortform.html')
 class ShortformArticle(Article):
     pass
 
 
 @zeit.web.view_config(
-    context=zeit.web.core.article.IColumnArticle,
+    context=zeit.web.magazin.article.IColumnArticle,
     renderer='templates/column.html')
 class ColumnArticle(Article):
     pass
 
 
 @zeit.web.view_config(
-    context=zeit.web.core.article.IPhotoclusterArticle,
+    context=zeit.web.magazin.article.IPhotoclusterArticle,
     renderer='templates/photocluster.html')
 class PhotoclusterArticle(Article):
 

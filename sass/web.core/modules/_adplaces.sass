@@ -1,4 +1,3 @@
-// mobile ads
 .ad-mobile
 	display: table
 	margin: remify(59px auto 40px)
@@ -7,8 +6,6 @@
 		display: none // generally hidden on desktop
 	&--1
 		margin: remify(29px auto 10px)
-	&:empty
-		display: none
 	&:before
 		@extend %label
 		content: "Anzeige"
@@ -18,25 +15,22 @@
 		+respond-max(em(320px), false)
 			padding-right: remify(10px)
 
-// desktop ads
 .ad-desktop
+	$name: '.ad-desktop'
 	display: none // generally hidden on mobile
 	&[data-banner-label]:before
 		@extend %label
 		content: attr(data-banner-label)
 	+respond_min($break-mobile-ad-width)
 		display: table // generally visible on desktop
-		margin: remify(40px auto)
 		&--1,
 		&--2
 			display: block
 			margin: 0 auto
-		&:empty
-			display: none
+	// big superbanner on several locatiion
 	&--3,
 	&--4,
 	&--5,
-	&--12,
 	&--16
 		margin: remify(14px auto)
 		max-width: remify(940px)
@@ -46,25 +40,34 @@
 				max-width: 1000px - 40px // if ad is maxpage wide, ad label should stay in grid
 				margin-left: auto
 				margin-right: auto
-	&--7,
-	&--8,
-	&--81,
-	&--9,
-	&--10,
-	&--11
-		width: remify(300px)
-	&--7-on-centerpage,
+
+	// MR in minor regions
 	&--8-on-centerpage,
-	&--81-on-centerpage,
-	&--9-on-centerpage,
-	&--10-on-centerpage,
-	&--11-on-centerpage
-		&:first-of-type
-			margin-top: remify(15px)
-	&--13-on-centerpage
-		margin-bottom: remify(20px)
-		margin-top: remify(20px)
-	&--7-on-article
+	&--81-on-centerpage
+		margin: 0 auto remify(40px)
+
+	// in trio regions on "arbeit" we have 5px more padding on top
+	@at-root .cp-area--trio .ad--on-arbeit
+		margin-top: remify(5px)
+
+	// if the ad is not the first child but has an ancestor
+	// uses nth-of-type instead of nth-child due to bug in iOS8
+	@at-root .cp-area--minor .ad-container:nth-of-type(2)
+		#{$name}--8-on-centerpage,
+		#{$name}--81-on-centerpage
+			margin-top: remify(40px)
+
+	// ad in parquet
+	&--9-on-centerpage
+		margin: remify(15px) auto remify(25px)
+
+	// large fullwidth ads n article
+	&--4-on-article
+		margin-bottom: remify(35px)
+
+	// standard article floating ad
+	%floating-ad,
+	&--8-on-article
 		clear: both
 		float: right
 		margin: remify(0 $page-padding 28px 36px)
@@ -72,9 +75,17 @@
 		+respond-min($break-desktop-min)
 			margin-right: remify(80px)
 
-// Fix hillarious unusable ad extras by iqd
-+respond-max($break-mobile-ad-width)
-	body > #iqdSitebar
+	// ad in comment area
+	&--9-on-article
+		margin: remify(14px auto)
+
+	// deprecated ads, still found on frame pages sometimes
+	&--7-on-article
+		@extend %floating-ad
+
+	// deprecated ads, prevent reintroduction
+	&--12-on-centerpage,
+	&--13-on-centerpage
 		display: none
 
 /**

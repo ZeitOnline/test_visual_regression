@@ -1,0 +1,49 @@
+{
+    "authors": "Thomas",
+    "chapter_marks": [
+        {
+            "created_at": "2017-09-04T10:52:00Z",
+            "id": 8719,
+            "start_time": "00:00:00",
+            "title": "Kapitel Nummer Eins",
+            "updated_at": "2017-09-04T10:53:27Z",
+            "url": "http://www.zeit.de/digital"
+        },
+        {
+            "created_at": "2017-09-04T10:53:28Z",
+            "id": 8720,
+            "start_time": "00:15:00",
+            "title": "Kapitel Nummer Zwei",
+            "updated_at": "2017-09-04T10:53:46Z",
+            "url": "http://www.zeit.de/kultur"
+        },
+        {
+            "created_at": "2017-09-04T10:53:46Z",
+            "id": 8721,
+            "start_time": "00:45:00",
+            "title": "Kapitel Nummer Drei",
+            "updated_at": "2017-09-04T10:54:21Z",
+            "url": "http://www.spiegel.de"
+        }
+    ],
+    "contributor_ids": [],
+    "cover_image": "https://cdn.podigee.com/uploads/u1307/8d596bea-6be9-4e42-833a-73ebd31e18ad.png?v=0&source=unknown",
+    "created_at": "2017-09-04T10:42:28Z",
+    "description": "Hello Beschreibungstext! Das sollte jeder gelesen haben.",
+    "explicit": false,
+    "external_url": null,
+    "guid": "01deccbdc5ad4dce08c54fccfa6cdbf8",
+    "id": 8111,
+    "keywords": [],
+    "number": 2,
+    "permalink": "%HOST%podigee/config/6853",
+    "podcast_id": 1656,
+    "production_id": 8111,
+    "published_at": "2017-09-04T10:56:02Z",
+    "show_notes": null,
+    "slug": "folge-zwei-test",
+    "subtitle": "Mein Untertitel kann auch was.",
+    "title": "Folge Zwei",
+    "transcription": [],
+    "updated_at": "2017-09-04T10:56:05Z"
+}

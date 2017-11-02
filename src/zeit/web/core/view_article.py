@@ -151,17 +151,16 @@ class Article(zeit.web.core.view.Content):
 
     @zeit.web.reify
     def header_module(self):
-        header = zeit.content.article.edit.interfaces.IHeaderArea(
-            self.context)
+        header = self.context.header
         # XXX The header image still belongs to the body,
         # so we cannot use block.__parent__
         block = header.module
         try:
             return zope.component.getMultiAdapter(
                 (block, header),
-                zeit.web.core.interfaces.IFrontendBlock)
+                zeit.web.core.interfaces.IArticleModule)
         except LookupError:
-            return zeit.web.core.interfaces.IFrontendBlock(block, None)
+            return zeit.web.core.interfaces.IArticleModule(block, None)
 
     @zeit.web.reify
     def resource_url(self):
@@ -208,10 +207,6 @@ class Article(zeit.web.core.view.Content):
                 self.context).is_breaking
         except:
             return False
-
-    @zeit.web.reify
-    def is_push_news(self):
-        return self.context.push_news
 
     @zeit.web.reify
     def amp_url(self):
@@ -357,6 +352,10 @@ class Article(zeit.web.core.view.Content):
         for nr, page in enumerate(self.pages, start=1):
             for block in page:
                 block_type = zeit.web.core.template.block_type(block)
+                if block_type == 'video' and (
+                    block.video is None or zeit.web.core.template.expired(
+                        block.video)):
+                            continue
                 if block_type == 'paragraph':
                     p += 1
                 if block_type in self.WEBTREKK_ASSETS:
@@ -391,6 +390,7 @@ class AcceleratedMobilePageArticle(Article):
 @zeit.web.view_config(
     route_name='amp',
     context=zeit.content.article.interfaces.IArticle,
+    vertical='*',
     custom_predicates=(lambda context, _: not context.is_amp,))
 def redirect_amp_disabled(context, request):
     url = request.url.replace('/amp/', '/', 1)

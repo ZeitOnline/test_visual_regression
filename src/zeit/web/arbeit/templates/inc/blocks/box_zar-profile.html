@@ -1,0 +1,27 @@
+{% set image = get_image(block, variant_id='wide', fallback=False) -%}
+
+<div class="profilebox">
+    <div class="profilebox__media--tablet-desktop"
+         style="background-image:url({{ request.image_host + image.path }}"></div>
+
+    {% set module_layout = 'profilebox' %}
+    {% set media_caption_additional_class = 'figcaption--hidden' %}
+    {% include 'zeit.web.core:templates/inc/asset/image.tpl' %}
+
+    <div class="profilebox__container">
+        <h3 class="profilebox__title">{{ block.supertitle }} </h3>
+        <h4 class="profilebox__subtitle">{{ block.title }}</h4>
+        <div class="profilebox__text js-toggle-region">
+						<span class="profilebox__text-switch"
+                              id="profilebox-toggle-switch"
+                              aria-controls="profilebox-toggle-container"
+                              data-constrained="mobile,phablet">
+							Mehr anzeigen
+                        </span>
+            <div class="profilebox__text-content"
+                  id="profilebox-toggle-container">
+                    {{ block.subtitle | safe }}
+            </div>
+        </div>
+    </div>
+</div>

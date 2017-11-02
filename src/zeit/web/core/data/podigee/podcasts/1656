@@ -1,0 +1,47 @@
+{
+    "authors": "Max Mustermann",
+    "category_id": 1,
+    "copyright_text": "ZEIT ONLINE",
+    "cover_image": "https://cdn.podigee.com/uploads/u1307/b931c9a5-3eaf-464b-aba3-36e80111d72d.png?v=0&source=unknown",
+    "created_at": "2017-09-01T11:12:09Z",
+    "description": "Hier gibt es wöchentlich was auf die Ohren.",
+    "domain": null,
+    "explicit": null,
+    "external_site_url": null,
+    "facebook": null,
+    "feed_items": 999999,
+    "feeds": [
+        {
+            "format": "mp3",
+            "url": "http://zon-test.podigee.io/feed/mp3"
+        },
+        {
+            "format": "aac",
+            "url": "http://zon-test.podigee.io/feed/aac"
+        },
+        {
+            "format": "opus",
+            "url": "http://zon-test.podigee.io/feed/opus"
+        },
+        {
+            "format": "vorbis",
+            "url": "http://zon-test.podigee.io/feed/vorbis"
+        }
+    ],
+    "flattr_id": null,
+    "id": 1656,
+    "intro_outro_files": [],
+    "itunes_id": 1656,
+    "spotify_url": "http://xml.zeit.de/spotify_url",
+    "keywords": [],
+    "language": "en",
+    "published_at": "2017-09-04T10:56:04Z",
+    "quality": "low",
+    "subdomain": "zon-test",
+    "subtitle": "Ein Test Podcast von ZEIT ONLINE.",
+    "title": "Test",
+    "transcription_language": null,
+    "transcriptions_enabled": false,
+    "twitter": null,
+    "updated_at": "2017-09-04T10:56:05Z"
+}

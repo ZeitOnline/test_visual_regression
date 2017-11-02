@@ -40,6 +40,7 @@
     </ressort>
     <ressort name="Studium" uniqueId="http://xml.zeit.de/studium"><title>Studium</title></ressort>
     <ressort name="Campus" uniqueId="http://xml.zeit.de/campus"><title>Campus</title></ressort>
+    <ressort name="Arbeit" uniqueId="http://xml.zeit.de/arbeit"><title>Arbeit</title></ressort>
     <ressort name="Zeit für die Schule" uniqueId="http://xml.zeit.de/schule"><title>Zeit für die Schule</title></ressort>
 
     <ressort name="Kultur" uniqueId="http://xml.zeit.de/kultur">

@@ -35,7 +35,7 @@
                 {% endblock %}
             {%- endif %}
         </div>
-        <a class="debate__label" href="{{ adapt(block.context, 'zeit.campus.interfaces.IDebate').action_url }}">
+        <a class="debate__label" href="{{ adapt(block.context, 'zeit.content.infobox.interfaces.IDebate').action_url }}">
             Mitdiskutieren
         </a>
     </div>
@@ -43,5 +43,3 @@
 {% block wrapper_end %}
 </aside>
 {% endblock %}
-
-

@@ -22,8 +22,6 @@ import zeit.web
 @zeit.web.view_config(
     context=zeit.content.rawxml.interfaces.IRawXML)
 @zeit.web.view_config(
-    context=zeit.content.cp.interfaces.IFeed)
-@zeit.web.view_config(
     context=zeit.cms.repository.interfaces.IUnknownResource,
     host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
@@ -31,9 +29,6 @@ import zeit.web
     host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
     context=zeit.content.rawxml.interfaces.IRawXML,
-    host_restriction=('xml', 'static', 'scripts'))
-@zeit.web.view_config(
-    context=zeit.content.cp.interfaces.IFeed,
     host_restriction=('xml', 'static', 'scripts'))
 @zeit.web.view_config(
     context=zeit.content.image.interfaces.IImage,
@@ -64,11 +59,10 @@ class RawContent(zeit.web.core.view.Base):
         if not file_type:
             raise pyramid.httpexceptions.HTTPNotFound()
 
-        response = Response(
-            app_iter=FileIter(resource.data),
-            content_type=file_type)
-        response.headers['Access-Control-Allow-Origin'] = '*'
-        return response
+        self.request.response.app_iter = FileIter(resource.data)
+        self.request.response.content_type = file_type
+        self.request.response.headers.add('Access-Control-Allow-Origin', '*')
+        return self.request.response
 
 
 @zeit.web.view_config(

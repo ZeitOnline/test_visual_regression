@@ -8,10 +8,6 @@ import zeit.web.core.security
 import zeit.web.core.view
 
 
-def is_zmo_content(context, request):
-    return zeit.magazin.interfaces.IZMOContent.providedBy(context)
-
-
 class Base(zeit.web.core.view.Base):
 
     seo_title_default = (
@@ -70,13 +66,14 @@ class Base(zeit.web.core.view.Base):
 
     @zeit.web.reify
     def adcontroller_handle(self):
+        suffix = '_trsf'
         if self.is_hp:
-            return 'zm_index'
+            return 'zm_index{}'.format(suffix)
         if self.type == 'centerpage':
-            return 'zm_centerpage'
+            return 'zm_centerpage{}'.format(suffix)
         if self.type == 'gallery':
-            return 'zm_galerie'
-        return 'zm_artikel'
+            return 'zm_galerie{}'.format(suffix)
+        return 'zm_artikel{}'.format(suffix)
 
     @zeit.web.reify
     def adcontroller_values(self):

@@ -88,13 +88,13 @@
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="published">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="push_news">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="rebrush_website_content">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Gesellschaft</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">Deutschland</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="seo_optimized">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="serie">Fischer im Recht</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="short_text">Wer definiert, was die wahre Wirklichkeit ist? Die Fischer-im-Recht-Kolumne über nichts als die Wahrheit (sd)</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="status">OK</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Zeitgeschehen</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/document" name="sub_ressort">Meinung</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="text-length">10633</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="tldr_milestone">no</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/meta" name="type">article</attribute>

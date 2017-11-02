@@ -18,10 +18,12 @@ import pyramid.httpexceptions
 import zope.component
 
 from zeit.solr import query as lq
+import zeit.cms.content.interfaces
 import zeit.cms.tagging.interfaces
 import zeit.cms.workflow.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
+import zeit.push.interfaces
 import zeit.solr.interfaces
 
 import zeit.web
@@ -254,6 +256,7 @@ class Base(object):
 
     @zeit.web.reify
     def adcontroller_handle(self):
+        suffix = '_trsf'
         replacements = {
             'article': 'artikel',
             'author': 'centerpage',
@@ -262,17 +265,18 @@ class Base(object):
             'quiz': 'quiz',
             'video': 'video_artikel'}
         if self.is_hp:
-            return 'homepage'
+            return 'homepage{}'.format(suffix)
         if self.is_advertorial:
-            return '{}_{}'.format(
+            return '{}_{}{}'.format(
                 'mcs' if 'mcs/' in self.banner_channel else 'adv',
-                'index' if self.type == 'centerpage' else 'artikel')
+                'index' if self.type == 'centerpage' else 'artikel',
+                suffix)
         if self.type == 'centerpage' and (
                 self.sub_ressort == '' or self.ressort == 'zeit-magazin'):
-            return 'index'
+            return 'index{}'.format(suffix)
         if self.type in replacements:
-            return replacements[self.type]
-        return 'centerpage'
+            return '{}{}'.format(replacements[self.type], suffix)
+        return 'centerpage{}'.format(suffix)
 
     @zeit.web.reify
     def adcontroller_values(self):
@@ -469,17 +473,6 @@ class Base(object):
             return False
 
     @zeit.web.reify
-    def iqd_mobile_settings(self):
-        iqd_ids = zeit.web.core.banner.IQD_MOBILE_IDS_SOURCE.ids
-        if self.is_hp:
-            return getattr(iqd_ids['hp'], 'centerpage')
-        try:
-            return getattr(iqd_ids[self.sub_ressort], self.type,
-                           getattr(iqd_ids[self.sub_ressort], 'default'))
-        except KeyError:
-            return {}
-
-    @zeit.web.reify
     def product_id(self):
         try:
             return self.context.product.id
@@ -615,12 +608,11 @@ class Base(object):
                 page = self.pagination.get('current')
             pagination = '{}/{}'.format(page, self.pagination.get('total'))
 
-        if getattr(self, 'is_push_news', False):
-            push = 'wichtigenachrichten.push'
-        elif getattr(self, 'is_breaking', False):
-            push = 'eilmeldung.push'
-        else:
-            push = ''
+        push = zeit.push.interfaces.IPushMessages(self.context, '')
+        if push:
+            push = push.get(type='mobile') or {}
+            push = push.get('payload_template') or ''
+            push = push.replace('.json', '.push')
 
         if getattr(self, 'framebuilder_requires_webtrekk', False):
             pagetype = 'centerpage.framebuilder'
@@ -900,6 +892,19 @@ class CommentMixin(object):
         # should we split up access in the templates instead?
         result.update(self.comment_form)
         return result
+
+    @zeit.web.reify
+    def moderation_url(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        if not toggles.find('zoca_moderation_launch'):
+            uuid = zeit.cms.content.interfaces.IUUID(
+                self.context).id.strip('{}').replace('urn:uuid:', '')
+            return u'{}/{}/thread/%cid%'.format(
+                conf.get('community_admin_host').rstrip('/'), uuid)
+        else:
+            return u'{}/comment/edit/%cid%'.format(
+                conf.get('community_host').rstrip('/'))
 
 
 class Content(zeit.web.core.paywall.CeleraOneMixin, CommentMixin, Base):
@@ -1263,8 +1268,12 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
             return []
 
         adc_levels = self.banner_channel.split('/')
+        handle = adc_levels[3] if len(adc_levels) > 3 else ''
 
-        return [('$handle', adc_levels[3] if len(adc_levels) > 3 else ''),
+        if handle != '' and not handle.endswith('_trsf'):
+            handle = '{}_trsf'.format(handle)
+
+        return [('$handle', handle),
                 ('level2', adc_levels[0] if len(adc_levels) > 0 else ''),
                 ('level3', adc_levels[1] if len(adc_levels) > 1 else ''),
                 ('level4', adc_levels[2] if len(adc_levels) > 2 else ''),

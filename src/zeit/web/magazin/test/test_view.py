@@ -123,10 +123,7 @@ def test_header_module_should_be_first_image_of_content_blocks(application):
 def test_article_should_have_author_box(application):
     context = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-magazin/article/autorenbox')
-    article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    body = zeit.content.article.edit.interfaces.IEditableBody(
-        article_view.context)
-    assert isinstance(body.values()[2], (
+    assert isinstance(context.body.values()[2], (
         zeit.content.article.edit.reference.Portraitbox))
 
 
@@ -159,8 +156,7 @@ def test_header_video_should_be_none_if_we_have_a_wrong_layout(
     id = 'http://xml.zeit.de/zeit-magazin/article/header_video'
     context = zeit.cms.interfaces.ICMSContent(id)
     with checked_out(context) as co:
-        body = zeit.content.article.edit.interfaces.IEditableBody(co)
-        body.values()[0].layout = u'large'
+        co.body.values()[0].layout = u'large'
     context = zeit.cms.interfaces.ICMSContent(id)
     article_view = zeit.web.magazin.view_article.Article(context, mock.Mock())
     assert article_view.header_module is None
@@ -209,8 +205,8 @@ def test_column_should_have_header_image(testbrowser):
     figure = browser.cssselect('figure.header-article__media')[0]
     link = figure.cssselect('a')[0]
     image = figure.cssselect('img')[0]
-    assert image.attrib['alt'] == 'Dies ist der lokale alt Text'
-    assert link.attrib['title'] == 'Dies ist die lokale Katze!'
+    assert image.get('alt') == 'Dies ist der lokale alt Text'
+    assert link.get('title') == 'Dies ist die lokale Katze!'
 
 
 def test_column_should_not_have_header_image(testbrowser):
@@ -682,19 +678,19 @@ def test_navigation_should_show_logged_in_user_correctly(
     # no pic
     css = lxml.html.fromstring(
         tpl.render(request=dummy_request, **info)).cssselect
-    assert 'nav__user-avatar' in css('svg')[0].attrib['class']
+    assert 'nav__user-avatar' in css('svg')[0].get('class')
 
     # pic
     info['user']['picture'] = '/picture.jpg'
 
     css = lxml.html.fromstring(
         tpl.render(request=dummy_request, **info)).cssselect
-    assert css('.nav__user-picture')[0].attrib['style'] == (
+    assert css('.nav__user-picture')[0].get('style') == (
         'background-image: url(/picture.jpg)')
     links = css('#user-menu a')
-    assert links[0].attrib['href'] == '/profile'
-    assert '/abo' in links[1].attrib['href']
-    assert links[3].attrib['href'] == '/logout'
+    assert links[0].get('href') == '/profile'
+    assert '/abo' in links[1].get('href')
+    assert links[3].get('href') == '/logout'
 
 
 def test_navigation_should_handle_logged_out_user_correctly(
@@ -708,7 +704,7 @@ def test_navigation_should_handle_logged_out_user_correctly(
         'zeit.web.magazin:templates/inc/navigation/login-state.html',
         request=dummy_request, **info)
 
-    assert browser.cssselect('a')[0].attrib['href'] == '/login'
+    assert browser.cssselect('a')[0].get('href') == '/login'
 
 
 def test_schema_org_publisher_mark_up(testbrowser):

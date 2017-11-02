@@ -438,7 +438,7 @@
 	font-size: remify(17px);
 	font-weight: normal;
 	line-height: remify(17px);
-	margin-left: remify(8.6px);
+	margin-left: remify(8px);
 	text-align: center;
 	width: remify(17px);
 	display: inline-block;
@@ -593,4 +593,16 @@ $inline-block-alignment: none !default;
 	position: relative;
 	overflow: hidden;
 	padding-bottom: $ratio;
+}
+
+
+@mixin outlined-font($color) {
+	@include font-smoothing()
+	color: $color; // fallback
+	text-fill-color: transparent;
+	text-stroke-width: remify(1.25px);
+	text-stroke-color: $color;
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke-width: remify(1.25px);
+	-webkit-text-stroke-color: $color;
 }

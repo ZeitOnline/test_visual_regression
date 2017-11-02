@@ -1,4 +1,4 @@
-<figure class="{% block citation_class %}quote{% endblock %} article__item">
+<figure class="{% block citation_class %}quote{% endblock %} {% block article_item %}article__item{% endblock %}">
     <blockquote class="quote__text">
         {{- block.text -}}
     </blockquote>
@@ -14,3 +14,4 @@
     </figcaption>
     {%- endif %}
 </figure>
+{% block citation_after_block %}{% endblock %}

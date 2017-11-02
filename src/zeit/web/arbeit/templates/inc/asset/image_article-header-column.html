@@ -1,0 +1,8 @@
+{% extends 'zeit.web.core:templates/inc/asset/image.tpl' %}
+
+{% set image = get_image(view.context, name='author', variant_id='square', fallback=False) -%}
+
+{% set media_caption_additional_class = 'figcaption--hidden' %}
+
+{% set module_layout = 'article-header-column' %}
+{% set image_itemprop = 'image' %}

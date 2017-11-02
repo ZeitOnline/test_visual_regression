@@ -1,0 +1,37 @@
+.advertorial-marker
+	color: $zar-cool-grey
+	border-bottom: 1px solid #ccc
+	padding: remify(10px) 0
+	&__label
+		@extend %ad-label
+		font-size: remify(9px)
+	&__title
+		color: $color-text
+		font-size: remify(14px)
+		font-weight: 700
+		margin-bottom: remify(5px)
+		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			font-size: remify(18px)
+	&__text
+		font-size: remify(12px)
+		padding-bottom: remify(20px)
+		+respond-min($break-tablet-min)
+			font-size: remify(15px)
+
+	+respond-min($break-tablet-min)
+		border-bottom: 0
+		margin: 0 auto
+		max-width: remify(660px)
+		padding: 0
+
+		&__title
+			margin-top: remify(40px)
+		&__label
+			display: none
+
+.metadata
+	&:empty
+		display: none
+	&__date
+		display: none

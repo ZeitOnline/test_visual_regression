@@ -27,6 +27,50 @@
 	&__all
 		display: inline-block
 
+.pager
+	margin: remify(16px auto 32px)
+	&__button
+		@extend %zar-button-hollow
+		margin-right: remify(6px)
+		&--previous
+			&:before
+				content: "\2039" // ‹ = single left-pointing angle quotation mark
+				padding-right: .5em
+				font-size: 1rem
+				line-height: 1
+		&--next
+			&:after
+				content: "\203A" // › = single right-pointing angle quotation mark
+				padding-left: .5em
+				font-size: 1rem
+				line-height: 1
+	&__pages
+		+inline-block
+		font-size: remify(14px)
+		letter-spacing: $letter-spacing-m
+		line-height: 2
+		margin: remify(20px) 0 0 0
+		padding: 0
+	&__page
+		+inline-block
+		color: $color-separator
+		&:before
+			content: "/"
+		&:first-child:before
+			content: none
+		&--current
+			span
+				color: $zon-charcoal
+				font-weight: bold
+		a, span
+			+inline-block
+			padding: 0 .7em
+	&--zar-ranking
+		// like teaser-ranking
+		padding: $vertical-space--small $page-padding--small
+		+respond-min($break-tablet-min)
+			padding: $vertical-space $cp-padding
+
 +respond-min($break-tablet-min)
 	.article-pagination
 		&__nexttitle

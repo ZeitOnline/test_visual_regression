@@ -1,0 +1,74 @@
+.nextread
+	@extend %teaser
+	margin-bottom: remify(30px)
+
+	&__lead
+		@extend %teaser-kicker--s
+		// border and padding is on lead (instead of nextread), because it is narrow ($wide-content-width)
+		border-top: 1px $color-border-on-bright solid
+		padding-top: $vertical-space
+		margin-bottom: remify(20px) // TODO: em_en? Oder std-Wert? Vllt in der abstrakten Klasse schon?  Das ist doch Mist so. (POLISHING)
+
+	&__media
+		margin-bottom: remify(20px) // TODO: em_en? Oder std-Wert? Vllt in der abstrakten Klasse schon?  Das ist doch Mist so. (POLISHING)
+
+	&__heading
+		margin: 0
+
+	&__combined-link
+		@extend %teaser-combined-link
+
+	&__series-label
+		@extend %teaser-kicker--s
+
+	&__kicker
+		@extend %teaser-kicker--s
+		margin-bottom: remify(15px) // TODO: em_en? Oder std-Wert? Vllt in der abstrakten Klasse schon?  Das ist doch Mist so. (POLISHING)
+
+	&__title
+		@extend %teaser-title
+		font-size: 20px
+		line-height: 1.4
+		margin-bottom: remify(15px) // TODO: em_en? Oder std-Wert? Vllt in der abstrakten Klasse schon? Das ist doch Mist so. (POLISHING)
+		+respond-min($break-tablet-min)
+			font-size: 28px
+		&--underlined
+			text-decoration: underline
+			text-decoration-color: $color-underline
+			text-decoration-skip: ink
+		&--underlined-skip
+			display: inline
+			text-decoration: none
+			background-image: linear-gradient(90deg, $color-underline, $color-underline)
+			background-size: auto 4px
+			background-repeat: repeat-x
+			// use em here deliberately to match underline's position with
+			// parent's font-size across viewports
+			background-position: 0 1.18em
+			text-shadow: -2px 2px $white, 2px 2px $white, 0 3px $white, -2px -2px $white, -1.25px 1.5px $white
+
+	&__metadata
+		@extend %teaser-metadata
+		font-family: $font-franziska
+		font-style: italic
+
++respond-min($break-tablet-min)
+	.nextread
+		margin: 0 auto remify(50px) auto
+		max-width: $wide-content-width
+		&__wrapper
+			display: table
+			width: 100%
+		&__lead,
+		&__container
+			margin-left: auto
+			margin-right: auto
+			max-width: $medium-content-width
+		&__media
+			display: table-cell
+			width: 50%
+		&__media + &__container
+			display: table-cell
+			padding-left: $gutter
+			vertical-align: middle
+			width: 50%

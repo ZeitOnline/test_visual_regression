@@ -1,5 +1,5 @@
 .article-toc
-	max-width: remify($max-overview-width)
+	max-width: $max-overview-width
 	&__container
 		padding: remify(8px 0)
 		font-size: remify(15px)
@@ -13,6 +13,7 @@
 			margin-left: remify(-50px)
 
 	&__headline
+		color: $color-text
 		font-family: $font-patronbold
 		font-size: remify(18px)
 		letter-spacing: $letter-spacing-l
@@ -23,6 +24,7 @@
 			cursor: pointer
 			&:after
 				+build-mobile-plus-minus-button()
+				padding-left: remify(1px)
 				background: $primary-color
 			+respond-min($break-tablet-min)
 				cursor: default
@@ -51,7 +53,7 @@
 			font-size: remify(18px)
 			float: left
 			+respond-min($break-tablet-min)
-				color: $zar-marigold
+				color: $color-toc-index
 		span
 			display: block
 			margin-left: remify(40px)
@@ -62,7 +64,7 @@
 				left: -1.3em
 				position: absolute
 				+respond-min($break-tablet-min)
-					color: $zar-marigold
+					color: $color-toc-index
 		+respond-min($break-tablet-min)
 			padding: remify(0 0 16px)
 

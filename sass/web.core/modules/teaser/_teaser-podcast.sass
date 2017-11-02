@@ -1,0 +1,30 @@
+.teaser-podcast
+	background-color: #eeeef0 // same as the podigee player skin
+	margin: $vertical-space 0
+	position: relative
+
+.teaser-podcast-footer
+	border-top: 1px $zon-light-grey solid
+	margin-top: remify(35px)
+	padding: remify(12px 15px 12px 20px)
+	+respond-min($break-tablet-min)
+		margin-top: 0
+
+.podcast-links
+	margin-top: 0
+	margin-bottom: 0
+	padding-left: 0
+	&__item
+		display: inline
+		&:not(:first-child)
+			margin-left: remify(12px)
+		svg
+			color: $trout
+			vertical-align: middle
+			+on-interaction
+				color: $color-text
+
+	&__link
+		color: rgba($color-text, 0.8)
+		+on-interaction
+			color: $color-text

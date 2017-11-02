@@ -1,0 +1,21 @@
+{# This module/template is called "headerimage" vor hysterical raisins
+   (because it is already used in core and campus). But in the ARBEIT vertical,
+   we display an image here only on an advertorial cp.-#}
+<header class="{% if view.is_advertorial%}header-image{% else %}topicpage-header{% endif %}">
+    {% if view.is_advertorial %}
+    {%- require image = get_image(module, fallback=False, variant_id='cinema') -%}
+        {%- include "zeit.web.arbeit:templates/inc/asset/image_header.tpl" -%}
+    {%- endrequire -%}
+    <div class="header-advertorial__heading">
+        <span class="header-advertorial__title">{{ module.title }}</span>
+        <span class="header-advertorial__kicker">{{ module.supertitle }}</span>
+    </div>
+    <div class="header-image__adlabel">{{ view.cap_title | default('Anzeige') }}</div>
+    {% else %}
+    <h1 class="topicpage-header__heading">
+        <span class="topicpage-header__kicker">{{ module.supertitle or 'Thema' }}</span>
+        {%- if module.supertitle and module.title %}<span class="visually-hidden">: </span>{% endif -%}
+        <span class="topicpage-header__title">{{ module.title }}</span>
+    </h1>
+    {% endif %}
+</header>

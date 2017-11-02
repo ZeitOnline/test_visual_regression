@@ -1,11 +1,13 @@
 {% extends 'zeit.web.arbeit:templates/layout.html' %}
 
 {% block main %}
+    {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
     <article class="article article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
         {% block article_heading -%}
-            {% include ["zeit.web.arbeit:templates/inc/article-header/default.html"] %}
+            {% include ["zeit.web.arbeit:templates/inc/article-header/{}.html".format(view.header_layout),
+                        "zeit.web.arbeit:templates/inc/article-header/default.html"] %}
         {% endblock article_heading -%}
         {% block article_body %}
         <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
@@ -32,9 +34,23 @@
         {% endblock %}
     </article>
     {% endblock content %}
-        {% if view.nextread %}
-            {% include "zeit.web.arbeit:templates/inc/article/nextread.html" %}
+
+    {% block nextread %}
+        {% set module = view.nextread %}
+        {% include "zeit.web.arbeit:templates/inc/article/nextread.tpl" %}
+    {% endblock %}
+
+    {% block nextread_ad %}
+        {% set module = view.nextread_ad %}
+        {% include "zeit.web.arbeit:templates/inc/article/nextread.tpl" %}
+    {% endblock %}
+
+    {% block article_google_ad %}
+        {% if view.has_comment_area -%}
+            <!-- P5 -->
+            {% include "zeit.web.core:templates/inc/ads/places/desktop/place5.html" %}
         {% endif %}
+    {% endblock article_google_ad %}
 
     {% block comments %}
         {% profile %}
@@ -43,5 +59,3 @@
     {% endblock comments %}
 
 {% endblock main %}
-
-{% block adplace_floor %}{% endblock %}

@@ -13,6 +13,9 @@
     <header name="embed">
       <title>Embed-Header</title>
     </header>
+    <header name="narrow">
+      <title>Spiele</title>
+    </header>
   </template>
   <template name="zon-liveblog" available="zeit.cms.section.interfaces.IZONContent">
     <title>Liveblog</title>
@@ -21,6 +24,27 @@
     </header>
     <header name="liveblog-closed">
       <title>Offline</title>
+    </header>
+  </template>
+  <!--
+    ZAR-Templates
+  -->
+  <template name="article" available="zeit.cms.section.interfaces.IZARContent">
+    <title>Artikel</title>
+    <header name="default">
+      <title>Standard</title>
+    </header>
+    <header name="centered">
+      <title>Standard, aber mit zentriertem Text</title>
+    </header>
+    <header name="dark">
+      <title>Weiße Schrift auf schwarzem Hintergrund</title>
+    </header>
+    <header name="protocol">
+      <title>Protokoll</title>
+    </header>
+    <header name="podcast" allow_header_module="true">
+      <title>Podcast</title>
     </header>
   </template>
   <!-- not yet in use

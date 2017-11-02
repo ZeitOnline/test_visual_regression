@@ -1,0 +1,13 @@
+{% extends "zeit.web.arbeit:templates/content.html" %}
+
+{% block article_pages %}
+    {% include "zeit.web.core:templates/inc/article/paywall/page.html" %}
+{% endblock article_pages %}
+
+{% block article_footer %}{% endblock %}
+{% block nextread %}{% endblock %}
+{% block comments %}
+    {% if view.paywall == 'register' and toggles('reader_revenue_registered_with_comments') %}
+        {% include "zeit.web.core:templates/inc/article/comments.html" %}
+    {% endif %}
+{% endblock %}

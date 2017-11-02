@@ -22,9 +22,24 @@ import zeit.web.core.banner
 import zeit.web.core.block
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
+import zeit.web.magazin.article
 
 
 log = logging.getLogger(__name__)
+
+
+class IColumnArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that belong to a "column" series."""
+
+
+class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that contain a liveblog."""
+
+
+class ISeriesArticleWithFallbackImage(
+        zeit.content.article.interfaces.IArticle):
+    """Marker interface for articles that are part of a series with a
+    fallback image."""
 
 
 @zope.interface.implementer(zeit.web.core.interfaces.IPage)
@@ -53,7 +68,7 @@ class Page(object):
     def append(self, block):
         wrapped = None
         try:
-            wrapped = zeit.web.core.interfaces.IFrontendBlock(block, None)
+            wrapped = zeit.web.core.interfaces.IArticleModule(block, None)
         except:
             log.warn('Ignoring %s', block, exc_info=True)
             exc_info = sys.exc_info()
@@ -69,8 +84,9 @@ def _inject_banner_code(pages, pubtype):
         'zon': {
             'pages': range(1, len(pages) + 1),
             'ads': [{'tile': 3, 'paragraph': 1, 'type': 'mobile'},
-                    {'tile': 7, 'paragraph': 2, 'type': 'desktop'},
+                    {'tile': 8, 'paragraph': 1, 'type': 'desktop'},
                     {'tile': 4, 'paragraph': 4, 'type': 'mobile'},
+                    {'tile': 4, 'paragraph': 4, 'type': 'desktop'},
                     {'tile': 'content_ad', 'paragraph': 6, 'type': ''}]
         },
         'longform': {
@@ -88,6 +104,14 @@ def _inject_banner_code(pages, pubtype):
         paragraphs = filter(lambda b: isinstance(
             b, zeit.web.core.block.Paragraph), page.blocks)
 
+        # (1a) check if there is an editorial aside after paragraph 1
+        if len(page.blocks) > 1 and not isinstance(
+                page.blocks[1], zeit.web.core.block.Paragraph):
+            adconfig['zon']['ads'][1] = {
+                'tile': 8, 'paragraph': 2, 'type': 'desktop'}
+            adconfig['longform']['ads'][0] = {
+                'tile': 8, 'paragraph': 5, 'type': 'desktop'}
+
         # (2) get a list of those paragraphs, after which we can insert ads
         paragraphs = _paragraphs_by_length(
             paragraphs, sufficient_length=p_length)
@@ -95,24 +119,26 @@ def _inject_banner_code(pages, pubtype):
         # (3a) Match ads to the cloned list of long paragraphs
         for index, paragraph in enumerate(paragraphs, start=1):
             try:
-                ad = [ad for ad in adconfig[pubtype]['ads'] if ad[
+                ads = [ad for ad in adconfig[pubtype]['ads'] if ad[
                     'paragraph'] == index and page_number in adconfig[
-                    pubtype]['pages']][0]
+                    pubtype]['pages']]
             except IndexError:
                 continue
-            if ad is not None:
+            if ads is not None:
                 # (3b) Insert the ad into the real page blocks
                 for i, block in enumerate(page.blocks, start=1):
                     if paragraph == block:
-                        if ad['tile'] == 'content_ad':
-                            adplace = zeit.web.core.banner.ContentAdBlock(
-                                "iq-artikelanker")
-                        else:
-                            adplace = zeit.web.core.banner.Place(
-                                ad['tile'], ad['type'], on_page_nr=page_number)
-                        # do not place ad after last paragraph
-                        if i < len(page.blocks):
-                            page.blocks.insert(i, adplace)
+                        for ad in ads:
+                            if ad['tile'] == 'content_ad':
+                                adplace = zeit.web.core.banner.ContentAdBlock(
+                                    "iq-artikelanker")
+                            else:
+                                adplace = zeit.web.core.banner.Place(
+                                    ad['tile'], ad[
+                                        'type'], on_page_nr=page_number)
+                            # do not place ad after last paragraph
+                            if i < len(page.blocks):
+                                page.blocks.insert(i, adplace)
 
     return pages
 
@@ -183,9 +209,8 @@ def pages_of_article(article, advertising_enabled=True):
     pages.append(page)
     blocks = body.values()
 
-    header = zeit.content.article.edit.interfaces.IHeaderArea(article)
     try:
-        if blocks[0] == header.module:
+        if blocks[0] == article.header.module:
             del blocks[0]
     except IndexError:
         pass
@@ -199,7 +224,7 @@ def pages_of_article(article, advertising_enabled=True):
     if advertising_enabled is False:
         return pages
 
-    if zeit.web.core.article.ILongformArticle.providedBy(article):
+    if zeit.web.magazin.article.ILongformArticle.providedBy(article):
         pubtype = 'longform'
     else:
         pubtype = 'zon'
@@ -208,7 +233,7 @@ def pages_of_article(article, advertising_enabled=True):
 
 
 def convert_authors(article):
-    is_longform = zeit.web.core.article.ILongformArticle.providedBy(article)
+    is_longform = zeit.web.magazin.article.ILongformArticle.providedBy(article)
     author_list = []
     try:
         author_ref = article.authorships
@@ -239,31 +264,6 @@ def convert_authors(article):
         return []
 
 
-class ILongformArticle(zeit.content.article.interfaces.IArticle):
-    # TODO: Please remove when we have Longforms for ICMSContent
-    pass
-
-
-class IFeatureLongform(ILongformArticle):
-    pass
-
-
-class IShortformArticle(zeit.content.article.interfaces.IArticle):
-    pass
-
-
-class IColumnArticle(zeit.content.article.interfaces.IArticle):
-    pass
-
-
-class ILiveblogArticle(zeit.content.article.interfaces.IArticle):
-    pass
-
-
-class IPhotoclusterArticle(zeit.content.article.interfaces.IArticle):
-    pass
-
-
 @grokcore.component.adapter(zeit.web.core.interfaces.INextread)
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
 def images_from_nextread(context):
@@ -277,13 +277,13 @@ def images_from_nextread(context):
 class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
 
     product_configuration = (
-        zeit.cms.content.sources.SubNavigationSource.product_configuration)
-    config_url = zeit.cms.content.sources.SubNavigationSource.config_url
+        zeit.cms.content.sources.SubRessortSource.product_configuration)
+    config_url = zeit.cms.content.sources.SubRessortSource.config_url
 
     master_node_xpath = (
-        zeit.cms.content.sources.SubNavigationSource.master_node_xpath)
-    slave_tag = zeit.cms.content.sources.SubNavigationSource.slave_tag
-    attribute = zeit.cms.content.sources.SubNavigationSource.attribute
+        zeit.cms.content.sources.SubRessortSource.master_node_xpath)
+    slave_tag = zeit.cms.content.sources.SubRessortSource.slave_tag
+    attribute = zeit.cms.content.sources.SubRessortSource.attribute
 
     # Same idea as zeit.cms.content.sources.MasterSlavesource.getTitle()
     def find(self, ressort, subressort):
@@ -307,6 +307,7 @@ class RessortFolderSource(zeit.cms.content.sources.SimpleXMLSourceBase):
             return {}
         return zeit.cms.interfaces.ICMSContent(
             nodes[0].get('uniqueId'), {})
+
 
 RESSORTFOLDER_SOURCE = RessortFolderSource()
 
@@ -343,11 +344,10 @@ class LiveblogInfo(object):
 
     @zeit.web.reify
     def liveblog(self):
-        body = zeit.content.article.edit.interfaces.IEditableBody(self.context)
-        for block in body.values():
+        for block in self.context.body.values():
             if zeit.content.article.edit.interfaces.ILiveblog.providedBy(
                     block):
-                return zeit.web.core.interfaces.IFrontendBlock(block)
+                return zeit.web.core.interfaces.IArticleModule(block)
 
     @property
     def is_live(self):
@@ -366,3 +366,38 @@ class LiveblogInfo(object):
     def last_modified(self):
         if self.liveblog:
             return self.liveblog.last_modified
+
+
+TEMPLATE_INTERFACES = {
+    'zon-liveblog': (ILiveblogArticle,),
+    # Should we check that the article provides IZMOContent? Because those
+    # templates are only available there.
+    'longform': (zeit.web.magazin.article.ILongformArticle,),
+    'short': (zeit.web.magazin.article.IShortformArticle,),
+    # XXX Somewhat confusing compared to core.IColumnArticle
+    'column': (zeit.web.magazin.article.IColumnArticle,),
+    'photocluster': (zeit.web.magazin.article.IPhotoclusterArticle,),
+}
+
+
+@grokcore.component.adapter(
+    zeit.content.article.interfaces.IArticle, name='template')
+@grokcore.component.implementer(
+    zeit.web.core.interfaces.IContentMarkerInterfaces)
+def mark_according_to_template(context):
+    return TEMPLATE_INTERFACES.get(context.template)
+
+
+@grokcore.component.adapter(
+    zeit.content.article.interfaces.IArticle, name='serie')
+@grokcore.component.implementer(
+    zeit.web.core.interfaces.IContentMarkerInterfaces)
+def mark_according_to_series(context):
+    if not context.serie:
+        return None
+    result = []
+    if context.serie.column:
+        result.append(IColumnArticle)
+    if context.serie.fallback_image:
+        result.append(ISeriesArticleWithFallbackImage)
+    return result

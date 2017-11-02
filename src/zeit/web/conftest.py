@@ -43,8 +43,8 @@ import zeit.solr.interfaces
 
 import zeit.web.core.application
 import zeit.web.core.routing
+import zeit.web.core.solr
 import zeit.web.core.utils
-import zeit.web.core.view
 
 
 log = logging.getLogger(__name__)
@@ -60,9 +60,11 @@ def app_settings(mockserver):
         'pyramid.debug_templates': False,
         'dogpile_cache.backend': 'dogpile.cache.memory',
         'dogpile_cache.regions': (
-            'default_term, short_term, long_term, session, config'),
+            'default_term, short_term, medium_term, long_term, '
+            'session, config'),
         'dogpile_cache.short_term.expiration_time': '60',
         'dogpile_cache.default_term.expiration_time': '300',
+        'dogpile_cache.medium_term.expiration_time': '600',
         'dogpile_cache.long_term.expiration_time': '3600',
         'dogpile_cache.session.expiration_time': '2',
         'dogpile_cache.config.expiration_time': '600',
@@ -76,13 +78,17 @@ def app_settings(mockserver):
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
         'assets_max_age': '1',
+        'cookie_fallback_domain': 'localhost',
         'comment_page_size': '4',
         'community_host': mockserver.url + '/comments',
-        'community_static_host': 'http://static_community/foo',
+        'community_admin_host': 'http://community_admin',
+        'community_static_host': 'http://static_community',
         'community_maintenance': (
             'http://xml.zeit.de/config/community_maintenance.xml'),
         'agatho_host': mockserver.url + '/comments',
         'linkreach_host': mockserver.url + '/linkreach/api',
+        'podigee_url': mockserver.url + '/podigee',
+        'itunes_podcast_base_url': 'http://xml.zeit.de/podcast/id',
         'app_servers': '',
         'health_check_with_fs': True,
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
@@ -108,10 +114,9 @@ def app_settings(mockserver):
         'vivi_zeit.cms_source-access': (
             'egg://zeit.cms.content/access.xml'),
         'vivi_zeit.cms_source-badges': 'egg://zeit.cms.asset/badges.xml',
-        'vivi_zeit.cms_source-banners': 'egg://zeit.cms.content/banners.xml',
         'vivi_zeit.cms_source-keyword': (
             'egg://zeit.cms.content/zeit-ontologie-prism.xml'),
-        'vivi_zeit.cms_source-navigation': (
+        'vivi_zeit.cms_source-ressorts': (
             'egg://zeit.web.core/data/config/ressorts.xml'),
         'vivi_zeit.cms_source-channels': (
             'egg://zeit.web.core/data/config/ressorts.xml'),
@@ -122,8 +127,6 @@ def app_settings(mockserver):
         'vivi_zeit.cms_task-queue-async': 'not-applicable',
         'vivi_zeit.cms_whitelist-url': (
             'egg://zeit.web.core/data/config/whitelist.xml'),
-        'vivi_zeit.web_iqd-mobile-ids-source': (
-            'egg://zeit.web.core/data/config/iqd-mobile-ids.xml'),
         'vivi_zeit.web_image-scales': (
             'egg://zeit.web.core/data/config/scales.xml'),
         'vivi_zeit.content.article_genre-url': (
@@ -144,6 +147,10 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/article-htmlblock-layouts.xml'),
         'vivi_zeit.content.article_template-source': (
             'egg://zeit.web.core/data/config/article-templates.xml'),
+        'vivi_zeit.content.article_citation-layout-source': (
+            'egg://zeit.web.core/data/config/article-citation-layouts.xml'),
+        'vivi_zeit.content.article_box-layout-source': (
+            'egg://zeit.web.core/data/config/article-box-layouts.xml'),
         'vivi_zeit.campus_article-stoa-source': (
             'egg://zeit.web.core/data/config/article-stoa.xml'),
         'vivi_zeit.magazin_article-related-layout-source': (
@@ -156,6 +163,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/cp-areas.xml'),
         'vivi_zeit.content.cp_region-config-source': (
             'egg://zeit.web.core/data/config/cp-regions.xml'),
+        'vivi_zeit.content.modules_jobticker-source': (
+            'egg://zeit.web.core/data/config/jobboxticker.xml'),
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.cp_cp-feed-max-items': '30',
@@ -169,8 +178,6 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/image-variants-legacy.xml'),
         'vivi_zeit.content.image_copyright-company-source': (
             'egg://zeit.content.image/tests/fixtures/copyright-company.xml'),
-        'vivi_zeit.web_banner-source': (
-            'egg://zeit.web.core/data/config/banner.xml'),
         'vivi_zeit.web_banner-id-mappings-source': (
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
         'vivi_zeit.web_navigation-source': (
@@ -189,6 +196,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/servicelinks-zco.xml'),
         'vivi_zeit.web_zco-toolbox-source': (
             'egg://zeit.web.core/data/config/zco-toolbox.xml'),
+        'vivi_zeit.web_zco-flyoutnavi-source': (
+            'egg://zeit.web.core/data/config/zco-flyoutnavi.xml'),
         'vivi_zeit.web_zco-jobmarket-source': (
             'egg://zeit.web.core/data/config/zco-jobmarket.xml'),
         'vivi_zeit.content.gallery_gallery-types-url': (
@@ -208,14 +217,6 @@ def app_settings(mockserver):
         'vivi_zeit.push_facebook-main-account': 'fb-test',
         'vivi_zeit.push_facebook-magazin-account': 'fb-magazin',
         'vivi_zeit.push_facebook-campus-account': 'fb-campus',
-        'vivi_zeit.brightcove_read-url': mockserver.url + '/video/bc.json',
-        'vivi_zeit.brightcove_write-url': mockserver.url + '/video/bc.json',
-        'vivi_zeit.brightcove_read-token': 'foo',
-        'vivi_zeit.brightcove_write-token': 'bar',
-        'vivi_zeit.brightcove_index-principal': 'zope.brightcove',
-        'vivi_zeit.brightcove_timeout': '300',
-        'vivi_zeit.brightcove_video-folder': 'video',
-        'vivi_zeit.brightcove_playlist-folder': 'video/playlist',
         'vivi_zeit.content.video_source-serie': (
             'egg://zeit.web.core/data/config/video-serie.xml'),
         'vivi_zeit.content.volume_volume-cover-source': (
@@ -288,6 +289,11 @@ def test_asset(path):
         'zeit.web.core', 'data' + path), 'rb')
 
 
+@pytest.fixture(scope='session')
+def file_from_data():
+    return test_asset
+
+
 @pytest.fixture
 def jinja2_env(application):
     return application.zeit_app.jinja_env
@@ -316,6 +322,7 @@ class ZODBLayer(plone.testing.zodb.EmptyZODB):
         # from zope.app.publication.
         return self['zodbRoot']['Application']
 
+
 ZODB_LAYER = ZODBLayer()
 
 
@@ -333,7 +340,9 @@ def application_session(app_settings, request):
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
-    zope.component.provideUtility(MockSolr())
+    zope.component.provideUtility(MockSolr(),)
+    zope.component.provideUtility(mock.Mock(),
+                                  zeit.objectlog.interfaces.IObjectLog)
     # ZODB needs to come after ZCML is set up by the Application.
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
@@ -471,14 +480,14 @@ def sleep_tween(handler, registry):
 class StaticViewMaybeReplaceHostURL(pyramid.static.static_view):
 
     def __call__(self, context, request):
-        # XXX Should we make the query string behaviour configurable and use
-        # a separate mockserver fixture for agatho instead?
-        if (request.environ['PATH_INFO'].startswith('/comments') and
-                request.query_string):
+        # XXX Should we make the query string behaviour configurable?
+        if (request.query_string and (
+                request.environ['PATH_INFO'].startswith('/comments') or
+                request.environ['PATH_INFO'].startswith('/podigee'))):
             request.environ['PATH_INFO'] += u'?' + request.query_string
         response = super(StaticViewMaybeReplaceHostURL, self).__call__(
             context, request)
-        if response.content_type in ['application/xml']:
+        if not response.content_type.startswith('image'):
             # Dear pyramid.response.FileResponse, would it kill you to
             # *remember* the path you are passed? Now we have to copy&paste
             # from the superclass and determine the path again.
@@ -521,11 +530,9 @@ def mockserver(request):
 
 @pytest.fixture(scope='session')
 def testserver(application_session, request):
-    wsgi_app = wesgi.MiddleWare(
-        application_session, forward_headers=True)
+    wsgi_app = wesgi.MiddleWare(application_session)
     server = waitress.server.create_server(wsgi_app, host='localhost', port=0)
-    server.url = 'http://{host}:{port}'.format(
-        host=server.effective_host, port=server.effective_port)
+    server.url = 'http://localhost:{port}'.format(port=server.effective_port)
     thread = threading.Thread(target=server.run)
     thread.daemon = True
     thread.start()
@@ -669,6 +676,34 @@ def mock_metrics(monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.metrics, 'timer',
         zeit.web.core.metrics.mock_contextmanager)
+    monkeypatch.setattr(
+        zeit.web.core.metrics, 'increment', lambda *args: None)
+
+
+@pytest.fixture
+def togglepatch(monkeypatch):
+
+    class ToggleOverride(object):
+        def __init__(self, toggles):
+            self.original_find = zeit.web.core.application.FEATURE_TOGGLES.find
+            self.toggles = toggles
+
+        def find(self, arg):
+            try:
+                return self.toggles[arg]
+            except KeyError:
+                return self.original_find(arg)
+
+    def patch(patched_toggles):
+        # We alter the "find" method of the original FEATURE_TOGGLE Source.
+        # As a result, Friedbert will use our "find" method to determine
+        # the value of a toggle. And our "find" method looks into the
+        # patched dict first, and then into the original Source.
+        monkeypatch.setattr(
+            zeit.web.core.application.FEATURE_TOGGLES,
+            'find', ToggleOverride(patched_toggles).find)
+
+    return patch
 
 
 @pytest.fixture
@@ -840,7 +875,7 @@ def datasolr(request):
     previous = zope.component.queryUtility(zeit.solr.interfaces.ISolr)
     if previous is not None:
         request.addfinalizer(lambda: zope.component.provideUtility(previous))
-    zope.component.provideUtility(zeit.web.core.utils.DataSolr())
+    zope.component.provideUtility(zeit.web.core.solr.DataSolr())
 
 
 @pytest.fixture(scope='session')

@@ -20,6 +20,7 @@ import zeit.web.core.metrics
 import zeit.web.core.security
 import zeit.web.core.template
 import zeit.web.core.view
+import zeit.web.magazin.article
 
 
 log = logging.getLogger(__name__)
@@ -188,6 +189,7 @@ class PostComment(zeit.web.core.view.Base):
 
         # GET/POST the request to the community
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        response = None
         with zeit.web.core.metrics.timer(
                 'post_comment.community.reponse_time'):
             try:
@@ -226,6 +228,10 @@ class PostComment(zeit.web.core.view.Base):
                 log.warning(message + u' ' + detail)
                 raise pyramid.httpexceptions.HTTPInternalServerError(
                     title=message, explanation=detail)
+            finally:
+                status = response.status_code if response else 599
+                zeit.web.core.metrics.increment(
+                    'post_comment.community.status.%s' % status)
 
         self.status.append('Action {} was performed for {}'
                            ' (with pid {})'.format(method, unique_id, pid))
@@ -330,6 +336,7 @@ class PostComment(zeit.web.core.view.Base):
 
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         error = None
+        response = None
         with zeit.web.core.metrics.timer(
                 'create_thread.community.reponse_time'):
             try:
@@ -344,6 +351,10 @@ class PostComment(zeit.web.core.view.Base):
                         response.status_code)
             except requests.exceptions.RequestException, err:
                 error = type(err).__name__
+            finally:
+                status = response.status_code if response else 599
+                zeit.web.core.metrics.increment(
+                    'create_thread.community.status.%s' % status)
         if error:
             log.warning(
                 'Could not create commentsection for %s: %s', unique_id, error)
@@ -387,11 +398,13 @@ class PostCommentAdmin(PostComment):
                       request_method='POST')
 @zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle,
                       request_method='POST')
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle,
-                      request_method='POST')
 @zeit.web.view_config(context=zeit.web.core.article.IColumnArticle,
                       request_method='POST')
-@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle,
+@zeit.web.view_config(context=zeit.web.magazin.article.IShortformArticle,
+                      request_method='POST')
+@zeit.web.view_config(context=zeit.web.magazin.article.IColumnArticle,
+                      request_method='POST')
+@zeit.web.view_config(context=zeit.web.magazin.article.IPhotoclusterArticle,
                       request_method='POST')
 class PostCommentResource(PostComment):
 
@@ -461,9 +474,10 @@ class PostCommentResource(PostComment):
 @zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
 @zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
 @zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@zeit.web.view_config(context=zeit.web.magazin.article.IShortformArticle)
+@zeit.web.view_config(context=zeit.web.magazin.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.magazin.article.IPhotoclusterArticle)
 class RecommendCommentResource(PostCommentResource):
     def __init__(self, context, request):
         # redirect unauthorized recommendation request
@@ -510,9 +524,10 @@ class CommentForm(zeit.web.core.view.CommentMixin,
 @zeit.web.view_config(context=zeit.content.gallery.interfaces.IGallery)
 @zeit.web.view_config(context=zeit.content.video.interfaces.IVideo)
 @zeit.web.view_config(context=zeit.web.core.article.ILiveblogArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IShortformArticle)
 @zeit.web.view_config(context=zeit.web.core.article.IColumnArticle)
-@zeit.web.view_config(context=zeit.web.core.article.IPhotoclusterArticle)
+@zeit.web.view_config(context=zeit.web.magazin.article.IShortformArticle)
+@zeit.web.view_config(context=zeit.web.magazin.article.IColumnArticle)
+@zeit.web.view_config(context=zeit.web.magazin.article.IPhotoclusterArticle)
 class CommentReplies(zeit.web.core.view.CommentMixin, zeit.web.core.view.Base):
 
     @zeit.web.reify

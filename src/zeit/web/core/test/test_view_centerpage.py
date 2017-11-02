@@ -185,9 +185,9 @@ def test_transparent_image_renders_fill_color_for_teaserlayouts(testbrowser):
     # only for special cases like zmo-card, which get their own test).
     browser = testbrowser('/zeit-online/transparent-teaserimage')
     assert 'ccddee' in (
-        browser.cssselect('.teaser-large img')[0].attrib['data-src'])
+        browser.cssselect('.teaser-large img')[0].get('data-src'))
     assert 'ccddee' in (
-        browser.cssselect('.teaser-small-minor img')[0].attrib['data-src'])
+        browser.cssselect('.teaser-small-minor img')[0].get('data-src'))
 
 
 def test_next_page_url_should_be_set_on_page_based_paginated_centerpages(
@@ -349,3 +349,27 @@ def test_centerpage_should_update_webtrekk_content_id_for_search_results(
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
     view.content_path = u'/suche/index'
     assert view.webtrekk_content_id.endswith('/suche/treffer')
+
+
+def test_podcast_module_should_render_script_tag_for_player(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/podcast')
+    player = browser.cssselect('script.podigee-podcast-player')[0]
+    assert player.get('data-configuration') == (
+        'podigee_player_id_97cd491c_c56f_4ef3_96d0_76bde8a80671')
+    assert '"theme": "zon-standalone"' in browser.contents
+
+
+def test_podcast_teaserlayout_should_render_script_tag_for_player(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/podcast-teaser')
+    player = browser.cssselect('script.podigee-podcast-player')[0]
+    assert player.get('data-configuration') == (
+        'podigee_player_id_97cd491c_c56f_4ef3_96d0_76bde8a80671')
+    assert '"theme": "zon-standalone"' in browser.contents
+
+
+def test_podcast_module_considers_series(testbrowser):
+    browser = testbrowser('/zeit-online/centerpage/podcast-teaser')
+    assert u'Alle Folgen' not in browser.cssselect(
+        '.teaser-podcast')[0].text_content()
+    assert u'Alle Folgen' in browser.cssselect(
+        '.teaser-podcast')[1].text_content()

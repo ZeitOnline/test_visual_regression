@@ -13,13 +13,16 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 def test_responsecode(config):
-    resp = requests.get('{}/index'.format(config['BASE_URL']), timeout=10)
+    resp = requests.get(
+        '{}/index'.format(config['BASE_URL']), timeout=config['TIMEOUT'])
     assert resp.status_code == 200
     resp = requests.get(
-        '{}/zeit-magazin/index'.format(config['BASE_URL']), timeout=10)
+        '{}/zeit-magazin/index'.format(config['BASE_URL']),
+        timeout=config['TIMEOUT'])
     assert resp.status_code == 200
     resp = requests.get(
-        '{}/campus/index'.format(config['BASE_URL']), timeout=10)
+        '{}/campus/index'.format(config['BASE_URL']),
+        timeout=config['TIMEOUT'])
     assert resp.status_code == 200
 
 
@@ -105,7 +108,7 @@ def test_videostage_thumbnail_should_be_replaced(config, selenium_driver):
         '.video-thumbnail__media-item')
     videolink.click()
     try:
-        WebDriverWait(driver, 10).until(
+        WebDriverWait(driver, config['TIMEOUT']).until(
             expected_conditions.staleness_of(thumbnail))
         assert True
     except TimeoutException:
@@ -122,7 +125,7 @@ def test_video_should_load_on_video_single_page(config, selenium_driver):
         (By.CLASS_NAME, 'vjs-control-bar'))
 
     try:
-        WebDriverWait(driver, 10).until(video_visible_ec)
+        WebDriverWait(driver, config['TIMEOUT']).until(video_visible_ec)
         assert True
     except TimeoutException:
         assert False, 'Video player not loaded'

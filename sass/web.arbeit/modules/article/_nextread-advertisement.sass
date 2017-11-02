@@ -1,0 +1,57 @@
+.nextread-advertisement
+	+font-smoothing
+	+padded
+	+unpadded
+	background-color: $color-jobs-areas
+	color: #fff
+	position: relative
+	&__label
+		@extend %teaser-adlabel
+		color: #fff
+		position: absolute
+		top: remify(6px)
+		right: $page-padding--small
+
+	&__media
+		background-image: url('/static/latest/images/arbeit/jobbox/cans.png')
+		background-position: center
+		background-repeat: no-repeat
+		width: remify(198px)
+		height: remify(150px)
+		margin: remify(0 auto 24px)
+		background-size: 100%
+		opacity: 0.92
+
+	&__container
+		margin: 0 auto
+		max-width: $medium-content-width
+		padding: $vertical-space--large 0
+		text-align: center
+
+	&__title
+		@extend %teaser-title--m
+		font-size: remify(28px)
+		margin-top: 0
+		margin-bottom: remify(12px)
+
+	&__text
+		font-size: remify(18px)
+		line-height: 1.5
+		margin-top: 0
+		margin-bottom: remify(20px)
+
+	&__button
+		@extend %zar-button-hollow--nextread-ad
+		margin: 0
+		vertical-align: middle
+
++respond-min($break-phablet-min)
+	.nextread-advertisement
+		&__media
+			float: right
+			margin: remify(10px) 0 0 remify(30px)
+		&__container
+			+pie-clearfix
+			text-align: left
+		&__label
+			right: $page-padding
