@@ -78,6 +78,8 @@
       <mail>
         <to>test@example.com</to>
         <success_message>Ihr Feedback wurde versendet - vielen Dank!</success_message>
+        <title>Titel des Mailformulars</title>
+        <subtitle>Wenn ein Title und Subtitle im Modul eingetragen ist, dann wird er über dem Formular angezeigt. Feine Sache!</subtitle>
       </mail>
       <p>Im Viertelfinale am Mittwoch trifft die 19-malige Grand-Slam-Siegerin auf die Italienerin Sara Errani, die Julia Görges (Bad Oldesloe) mit 6:2, 6:2 als letzte Deutsche aus dem Turnier geworfen hatte. Die Weltranglistenerste Williams hat das zweite Grand-Slam-Turnier des Jahres im Stade Roland Garros zweimal (2002 und 2013) gewonnen.</p>
     </division>
