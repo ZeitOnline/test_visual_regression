@@ -14,8 +14,9 @@ def test_post_should_trigger_mail_then_render_content_again(testbrowser):
         '', 'test@example.com', 'Apps', 'Emailbody\n\n-- \nGesendet von '
         'http://localhost/zeit-online/article/feedback')
 
-    assert 'Haben Sie Feedback?' in b.contents
+    assert 'Williams wackelt weiter' in b.contents
     assert 'Ihr Feedback wurde versendet' in b.contents
+    assert 'Ich habe Feedback zum Thema' not in b.contents
 
 
 def test_missing_captcha_should_render_error_and_preserve_body(
