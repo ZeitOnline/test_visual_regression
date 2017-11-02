@@ -59,6 +59,14 @@ define([], function() {
             log( 'cookieValue: ' + cookieValue );
 
             if ( cookieValue ) {
+
+                // Some Campus pages like https://jobs.zeit.de/campus/absolventen-jobs
+                // do already have this implemented on their own. As long as we find
+                // their solution on the page, we do not run ours.
+                if ( document.querySelector( '.login-wrapper' ) ) {
+                    return;
+                }
+
                 navLoginArea = document.querySelector( '.nav__login' );
                 // this is double-negative, so we can remove everything as soon
                 // as we do not need the safety net any longer
