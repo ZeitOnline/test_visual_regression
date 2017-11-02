@@ -82,3 +82,25 @@ $opacity-comment-count--hover: 0.8 !default
 		color: $color-comment-count--hover
 		&:after
 			opacity: $opacity-comment-count--hover
+
+%cta-button
+	a
+		color: inherit
+		+on-interaction
+			color: $color-text
+
+%cta-button-link
+	background-color: currentColor
+	display: block
+	font-weight: bold
+	letter-spacing: .01em
+	margin: 0 (-$page-padding--small)
+	text-transform: uppercase
+
+%cta-button-box
+	padding: remify(14px)
+
+%cta-button-icon
+	height: remify(10px)
+	margin-left: .5em
+	width: remify(14px)
