@@ -6,6 +6,7 @@
 define([], function() {
 
     var cookieValue,
+        navLoginArea,
         userObject,
         debug = window.location.hash.indexOf( 'debug-framebuilderlogin' ) !== -1;
 
@@ -43,15 +44,12 @@ define([], function() {
 
         // second step: complex layout update
         var template = require( 'web.core/templates/framebuilderLoginStatus.html' ),
-            navLoginArea = document.querySelector( '.nav__login' ),
             newDom = template({
                 username: userName,
                 returnurl: encodeURIComponent( window.location.href )
             });
 
-        // TODO: ist das gut?
         navLoginArea.innerHTML = newDom;
-
     }
 
     return {
@@ -60,7 +58,12 @@ define([], function() {
             log( 'cookieValue: ' + cookieValue );
 
             if ( cookieValue ) {
-                updateNavLoginArea();
+                navLoginArea = document.querySelector( '.nav__login' );
+                // this is double-negative, so we can remove everything as soon
+                // as we do not need the safety net any longer
+                if ( navLoginArea && navLoginArea.getAttribute( 'data-featuretoggle' ) !== 'disable-loginstatus' ) {
+                    updateNavLoginArea();
+                }
             }
         }
     };

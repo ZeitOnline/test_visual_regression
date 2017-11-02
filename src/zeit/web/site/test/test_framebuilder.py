@@ -386,3 +386,10 @@ def test_framebuilder_does_not_render_login_data(
 
     driver.get('{}/framebuilder'.format(testserver.url))
     assert len(select('.nav__user-name')) == 0
+
+    # ... and test if the featuretoggle is set if requested
+    assert len(select('.nav__login')) == 1
+    assert not select('.nav__login')[0].get_attribute('data-featuretoggle')
+    driver.get('{}/framebuilder?loginstatus_disabled'.format(testserver.url))
+    assert select('.nav__login')[0].get_attribute(
+        'data-featuretoggle') == 'disable-loginstatus'
