@@ -167,6 +167,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/cp-regions.xml'),
         'vivi_zeit.content.modules_jobticker-source': (
             'egg://zeit.web.core/data/config/jobboxticker.xml'),
+        'vivi_zeit.content.modules_subject-source': (
+            'egg://zeit.web.core/data/config/mail-subjects.xml'),
         'vivi_zeit.content.cp_cp-types-url': (
             'egg://zeit.web.core/data/config/cp-types.xml'),
         'vivi_zeit.content.cp_cp-feed-max-items': '30',
@@ -326,6 +328,10 @@ def application_session(app_settings, request):
     zope.component.provideUtility(MockSolr(),)
     zope.component.provideUtility(mock.Mock(),
                                   zeit.objectlog.interfaces.IObjectLog)
+    zope.component.provideUtility(mock.Mock(), zeit.web.core.interfaces.IMail)
+    captcha = mock.Mock()
+    captcha.verify.return_value = True
+    zope.component.provideUtility(captcha, zeit.web.core.interfaces.ICaptcha)
     # ZODB needs to come after ZCML is set up by the Application.
     # Putting it in here is simpler than adding yet another fixture.
     ZODB_LAYER.setUp()
