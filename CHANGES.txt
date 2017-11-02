@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-4265: Integrate mail module for articles, implement sending via mailjet
 
+- ZON-4178: Remove `heatmap` from webtrekk configuration
+
 
 3.106 (2017-11-02)
 ------------------
