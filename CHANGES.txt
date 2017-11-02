@@ -4,12 +4,24 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.105 (unreleased)
+3.106 (unreleased)
 ------------------
+
+- ZON-4234: Add new markup for abo content
+
+
+3.105 (2017-11-01)
+------------------
+
+- ZON-4281: Consolidate and clean up podcast footer
 
 - ZON-4220: Make hashed user-email available to iqd
 
 - PERF: Remove unneeded `episodes` from podcast player config
+
+- MAINT: Simplify module spelling by proxying through to the vivi module
+
+- MAINT: Ignore errors in blacklist configuration
 
 
 3.104 (2017-10-30)

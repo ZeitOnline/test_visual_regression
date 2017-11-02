@@ -1,0 +1,45 @@
+.podcastfooter
+	display: flex
+	flex-wrap: wrap // avoid wrapping inside single element (button eg)
+
+.podcastfooter__podlove,
+.podcastfooter__platforms,
+.podcastfooter__serieslink
+	display: inline-block
+
+.podcastfooter__serieslink
+	border-bottom: 1px rgba($color-text, 0.2) solid
+	color: #44444c
+	font-size: remify(14px)
+	letter-spacing: $letter-spacing-s
+	margin-left: auto // pull it to the right inside flexbox container
+	text-decoration: none
+	&:after
+		content: "\203A"
+		margin-left: 0.5em
+	+on-interaction
+		color: $color-text
+		border-bottom-color: rgba($color-text, 0.8)
+
+// Neither nice nor BEM, but as demanded in ZON-4235
+// minor area styles have to align to mobile. Which means
+// placing the podlove button above the podcastfooter.
++respond-min($break-tablet-min)
+	.cp-area--minor, // ZON CP
+	.cp-area--trio // ZAR CP
+		.podcastfooter__podlove
+			left: 50%
+			position: absolute
+			transform: translateX(-50%)
+		// and we need to make space for the button
+		.podcastfooter
+			margin-top: remify(35px)
+
++respond-max($break-phablet-min)
+	.podcastfooter__podlove
+		left: 50%
+		position: absolute
+		transform: translateX(-50%)
+	// and we need to make space for the button (only assuming that it exists)
+	.article-heading__footer--podcast
+		margin-top: remify(50px)
