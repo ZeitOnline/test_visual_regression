@@ -45,7 +45,7 @@
             <li><a href="https://premium.zeit.de/?wt_zmc=fix.int.zonpme.zco.dach.premium.text.epaper.epaper&utm_medium=fix&utm_source=zeitde_zonpme_int&utm_campaign=dach&utm_content=premium_text_epaper_epaper">ePaper</a></li>
         </ul>
     </nav>
-    <div class="nav__login">
+    <div class="nav__login" {% if view.framebuilder_loginstatus_disabled %} data-featuretoggle="disable-loginstatus"{% endif %}>
         {% block login %}
             {%- set esi_source = '{}login-state?for=campus&context-uri={}'.format(request.route_url('home'), request.url | urlquote_plus) -%}
             {{- lama.insert_esi(esi_source, 'Anmeldung nicht möglich') -}}
