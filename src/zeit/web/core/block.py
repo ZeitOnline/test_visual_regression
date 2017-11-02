@@ -35,10 +35,16 @@ LONG_TERM_CACHE = zeit.web.core.cache.get_region('long_term')
 @zope.interface.implementer(zeit.web.core.interfaces.IArticleModule)
 class Module(object):
 
-    layout = ''
-
     def __init__(self, context):
         self.context = context
+
+    def __getattr__(self, name):
+        if name == 'layout':
+            # `layout` is part of our interface, but we don't want to implement
+            # it ourselves, since it is often taken from our context as well.
+            return getattr(self.context, name, '')
+        else:
+            return getattr(self.context, name)
 
     @zeit.web.reify
     def position(self):
@@ -131,22 +137,7 @@ class Portraitbox(Module):
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IBox)
 class Box(Module):
-
-    @zeit.web.reify
-    def supertitle(self):
-        return self.context.supertitle
-
-    @zeit.web.reify
-    def title(self):
-        return self.context.title
-
-    @zeit.web.reify
-    def subtitle(self):
-        return self.context.subtitle
-
-    @zeit.web.reify
-    def layout(self):
-        return self.context.layout
+    pass
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)
@@ -217,10 +208,6 @@ class Infobox(Module):
     @zeit.web.reify
     def content(self):
         return self.context.references
-
-    @zeit.web.reify
-    def layout(self):
-        return self.context.layout
 
     @zeit.web.reify
     def identifier(self):
@@ -454,53 +441,39 @@ class Raw(Module):
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IRawText)
 class RawText(Module):
-
-    @zeit.web.reify
-    def raw_code(self):
-        return self.context.raw_code
+    pass
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.ICitation)
 class Citation(Module):
-
-    @zeit.web.reify
-    def url(self):
-        return self.context.url
-
-    @zeit.web.reify
-    def attribution(self):
-        return self.context.attribution
-
-    @zeit.web.reify
-    def text(self):
-        return self.context.text
-
-    @zeit.web.reify
-    def layout(self):
-        return self.context.layout
+    pass
 
 
 @grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IVideo)
 class Video(Module):
 
-    def __init__(self, context):
-        super(Video, self).__init__(context)
-        self.video = getattr(self.context, 'video', None)
-        if not zeit.content.video.interfaces.IVideo.providedBy(self.video):
-            return
-        self.renditions = self.video.renditions
-        self.video_still = self.video.video_still
-        self.title = self.video.title
-        self.supertitle = self.video.supertitle
-        self.description = self.video.subtitle
-        self.has_advertisement = self.video.has_advertisement
-        self.video_still_copyright = self.video.video_still_copyright
-        self.id = self.video.uniqueId.split('/')[-1]  # XXX ugly
-        self.format = self.context.layout
+    # zeit.web.reify would cause infloop with our getattr.
+    @pyramid.decorator.reify
+    def video(self):
+        video = getattr(self.context, 'video', None)
+        if not zeit.content.video.interfaces.IVideo.providedBy(video):
+            return None
+        return video
 
-    @property
+    def __getattr__(self, name):
+        return getattr(self.video, name)
+
+    @zeit.web.reify
+    def id(self):
+        return self.video.uniqueId.split('/')[-1]  # XXX ugly
+
+    @zeit.web.reify
+    def layout(self):
+        return self.context.layout
+
+    @zeit.web.reify
     def highest_rendition(self):
         if self.renditions:
             high = sorted(self.renditions, key=lambda r: r.frame_width).pop()
@@ -663,12 +636,6 @@ class NewsletterGroup(Module):
 
     type = 'group'
 
-    # Using reify would be consistent, but newsletter blocks don't guarantee
-    # a working uniqueId, which reify needs to build the cache key.
-    @property
-    def title(self):
-        return self.context.title
-
     def values(self):
         return [zeit.web.core.interfaces.IArticleModule(x)
                 for x in self.context.values()]
@@ -731,18 +698,6 @@ class NewsletterTeaser(Module):
 class NewsletterAdvertisement(Module):
 
     type = 'advertisement'
-
-    @property
-    def title(self):
-        return self.context.title
-
-    @property
-    def text(self):
-        return self.context.text
-
-    @property
-    def url(self):
-        return self.context.url
 
     @property
     def image(self):

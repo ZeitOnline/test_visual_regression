@@ -1,5 +1,5 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
-{% set esi_source = (view.cardstack_body | replace('__STACK__', '{}')).format(module.id, module.id | urlencode) %}
+{% set esi_source = (view.cardstack_body | replace('__STACK__', '{}')).format(module.card_id, module.card_id | urlencode) %}
 {% if esi_source -%}
     {% block cardstack -%}
         {{- lama.insert_esi(esi_source, 'Cardstack konnte nicht geladen werden') -}}

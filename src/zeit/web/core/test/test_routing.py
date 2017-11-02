@@ -119,6 +119,15 @@ def test_blacklist_entry_should_match_everything_but_image_urls(testbrowser):
     assert info.value.getcode() == 404
 
 
+def test_errors_on_blacklist_configuration_should_be_ignored(
+        testserver, monkeypatch):
+    monkeypatch.setattr(
+        zeit.web.core.routing.BlacklistSource, 'getValues', None)
+    zeit.web.core.routing.BlacklistSource()(None)
+    # Just make sure blacklist compilation failures won't breaking anything.
+    assert requests.get(testserver.url + '/index').ok is True
+
+
 @pytest.mark.parametrize('path, moved', [
     ('', '/index'),
     ('/', '/index'),
