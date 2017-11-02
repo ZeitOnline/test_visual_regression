@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.106 (unreleased)
+3.106 (2017-11-02)
 ------------------
 
 - ZON-4234: Add new markup for abo content
