@@ -201,7 +201,7 @@ function appUserIsBack( timestamp, options ) {
             return;
         }
         var that = this;
-        this.get( options.configuredProtocal + options.endpoint + options.slug ).then( function( response ) {
+        this.get( options.configuredProtocol + options.endpoint + options.slug ).then( function( response ) {
             // check if the website was updated after the page was cached by the app
             if (
                 that.options.force ||
