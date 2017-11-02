@@ -32,6 +32,7 @@ define([], function() {
             log( 'Label set to name: ' + userObject.name );
         } else if ( userObject.email ) {
             userName = userObject.email;
+            userName = userName.replace( '@', '<span class="at-char">@</span>' );
             log( 'Label set to email: ' + userObject.email );
         }
 
