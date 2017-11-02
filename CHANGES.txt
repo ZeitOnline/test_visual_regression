@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-4234: Add new markup for abo content
 
+- FIX: Tweak appearance of podcast footer
+
 
 3.105 (2017-11-01)
 ------------------
