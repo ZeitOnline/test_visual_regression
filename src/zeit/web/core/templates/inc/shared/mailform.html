@@ -1,11 +1,17 @@
 {% set success = request.headers.get('X-Mail-Success') %}
 <div class="feedback-section" data-ct-area="feedback_form" id="feedback-form">
-    <div class="feedback-section__header">
-        <h1 class="feedback-section__headline">Haben Sie Feedback?</h1>
-        <p class="feedback-section__paragraph">
-            Haben Sie einen Fehler gefunden? Sind Sie begeistert? Wir sind für jedes Feedback dankbar.
-        </p>
-    </div>
+
+    {% if block.title or block.subtitle %}
+        <div class="feedback-section__header">
+            {% if block.title %}
+                <h2 class="feedback-section__headline">{{ block.title }}</h2>
+            {% endif %}
+            {% if block.subtitle %}
+                <p class="feedback-section__paragraph">{{ block.subtitle }}</p>
+            {% endif %}
+        </div>
+    {% endif %}
+
     {% if success == 'True' %}
         <div class="feedback-form__success">{{ block.success_message }}</div>
     {% else %}
