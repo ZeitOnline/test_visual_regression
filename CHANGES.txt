@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - ZON-4178: Remove `heatmap` from webtrekk configuration
 
+- BUG-762: Update adblockertest script
+
 
 3.106 (2017-11-02)
 ------------------
