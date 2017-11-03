@@ -5,14 +5,17 @@
  */
 define( function() {
 
-
+    /**
+     * check if the adcontroller is included
+     * @return {bool}
+     */
     function adsActive() {
         return document.querySelectorAll( 'head script[src*="iqadcontroller"]' ).length > 0;
     }
 
     /**
      * the old trick of the block ad div
-     * @return {void}
+     * @return {bool}
      */
     function testAdblockDiv() {
         var elem = document.querySelector( '#ad3999' ) || [];
@@ -21,7 +24,7 @@ define( function() {
 
     /**
      * check if adcontroller is blocked from download
-     * @return {void}
+     * @return {bool}
      */
     function testAdcontroller() {
         return typeof window.AdController === 'undefined';
