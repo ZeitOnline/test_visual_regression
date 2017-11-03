@@ -1,3 +1,15 @@
+/**
+ * @fileOverview Track visibility of elements to webtrekk
+ * @author thomas.puppe@zeit.de
+ * @version  0.1
+ */
+/**
+ * Version 0.1 only serves one purpose: tracking the visibility of the "gate"
+ * on paywalled articles to webtrekk. Visibility means: this thing is in
+ * the users viewport. As soon as we want to track more elements, we need
+ * to add some abstraction and initialize every element->tracking
+ * configuration from outside or from a config object or something.
+ */
 define([ 'web.core/clicktracking' ], function( Clicktracking ) {
 
     var observer;
