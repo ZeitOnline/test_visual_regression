@@ -368,8 +368,8 @@ def test_nav_search_is_working_as_expected(
     # test if search form gets submitted
     old_page = driver.find_element_by_tag_name('html')
     stale = expected_conditions.staleness_of(old_page)
-    search__input.send_keys('test')
-    search__button.send_keys(Keys.RETURN)
+    driver.execute_script('arguments[0].value="test"', search__input)
+    driver.execute_script('arguments[0].click()', search__button)
     try:
         WebDriverWait(driver, 20).until(stale)
         assert driver.current_url.endswith('/zeit-online/zeitonline?q=test')
