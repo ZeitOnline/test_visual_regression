@@ -4,10 +4,22 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.106 (unreleased)
+3.107 (unreleased)
+------------------
+
+- ZON-4265: Integrate mail module for articles, implement sending via mailjet
+
+- ZON-4178: Remove `heatmap` from webtrekk configuration
+
+- BUG-762: Update adblockertest script
+
+
+3.106 (2017-11-02)
 ------------------
 
 - ZON-4234: Add new markup for abo content
+
+- FIX: Tweak appearance of podcast footer
 
 
 3.105 (2017-11-01)

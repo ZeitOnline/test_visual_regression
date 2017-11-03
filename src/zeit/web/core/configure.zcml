@@ -8,9 +8,11 @@
     <include file="vivi.zcml" />
     <grok:grok exclude="test" package="." />
 
-    <utility factory=".reach.Reach" />
-    <utility factory=".podigee.Podigee" />
+    <utility factory=".captcha.Recaptcha" />
+    <utility factory=".mail.MailJet" />
     <utility factory=".metrics.from_settings" />
+    <utility factory=".podigee.Podigee" />
+    <utility factory=".reach.Reach" />
 
     <adapter
       factory=".content.LazyProxy"

@@ -8,18 +8,35 @@
 	display: inline-block
 
 .podcastfooter__serieslink
-	border-bottom: 1px rgba($color-text, 0.2) solid
+	border-bottom: 1px rgba(#252525, 0.2) solid
 	color: #44444c
 	font-size: remify(14px)
 	letter-spacing: $letter-spacing-s
 	margin-left: auto // pull it to the right inside flexbox container
 	text-decoration: none
+	// move border-bottom closer to link-text
+	margin-bottom: remify(4px)
 	&:after
 		content: "\203A"
 		margin-left: 0.5em
 	+on-interaction
-		color: $color-text
-		border-bottom-color: rgba($color-text, 0.8)
+		color: #252525
+		border-bottom-color: rgba(#252525, 0.8)
+
+.podcast-links
+	margin-top: 0
+	margin-bottom: 0
+	padding-left: 0
+	&__item
+		display: inline
+		&:not(:first-child)
+			margin-left: remify(16px)
+		svg
+			color: #535560
+			vertical-align: middle
+		+on-interaction
+			svg
+				color: #252525
 
 // Neither nice nor BEM, but as demanded in ZON-4235
 // minor area styles have to align to mobile. Which means
