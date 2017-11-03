@@ -4,7 +4,37 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.104 (unreleased)
+3.107 (unreleased)
+------------------
+
+- ZON-4265: Integrate mail module for articles, implement sending via mailjet
+
+- ZON-4178: Remove `heatmap` from webtrekk configuration
+
+
+3.106 (2017-11-02)
+------------------
+
+- ZON-4234: Add new markup for abo content
+
+- FIX: Tweak appearance of podcast footer
+
+
+3.105 (2017-11-01)
+------------------
+
+- ZON-4281: Consolidate and clean up podcast footer
+
+- ZON-4220: Make hashed user-email available to iqd
+
+- PERF: Remove unneeded `episodes` from podcast player config
+
+- MAINT: Simplify module spelling by proxying through to the vivi module
+
+- MAINT: Ignore errors in blacklist configuration
+
+
+3.104 (2017-10-30)
 ------------------
 
 - ZON-4235: Extend podcast player with Deezer / Spotify / iTunes links

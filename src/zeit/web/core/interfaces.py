@@ -218,6 +218,18 @@ class IPodigee(zope.interface.Interface):
         empty dict."""
 
 
+class IMail(zope.interface.Interface):
+
+    def send(from_, to, subject, body):
+        """Sends an email."""
+
+
+class ICaptcha(zope.interface.Interface):
+
+    def verify(captcha_response, nojs):
+        """Returns True if captcha is valid."""
+
+
 class IMetrics(zope.interface.Interface):
 
     def time(identifier):
