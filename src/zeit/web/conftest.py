@@ -10,6 +10,8 @@ import threading
 
 from cryptography.hazmat.primitives import serialization as cryptoserialization
 from cryptography.hazmat.primitives.asymmetric.rsa import generate_private_key
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support import expected_conditions as EC  # NOQA
 import cryptography.hazmat.backends
 import cssselect
@@ -252,21 +254,18 @@ def app_settings(mockserver):
     }
 
 # 'chrome': selenium.webdriver.Chrome
-# needs Chromedriver, , install via brew install chromedriver
-# or frome https://sites.google.com/a/chromium.org/chromedriver/downloads
-#
-# 'firefox': selenium.webdriver.Firefox
-# now on: geckodriver, install via brew install geckodriver
-# or from here: https://github.com/mozilla/geckodriver/releases
+# needs Chromedriver, install via brew install chromedriver
+# or from https://sites.google.com/a/chromium.org/chromedriver/downloads
+# Also needs Chrome or Chromium, if you use chromium,
+# set path to Chromium in envorinment variable `ZEIT_WEB_CHROMIUM_BINARY`
 browsers = {
     'chrome': selenium.webdriver.Chrome
 }
 
 
-# mark all selenium tests by use of fixture selenium_driver
-# to run only selenium test by invoking
-# pytest -m selenium
-def pytest_collection_modifyitems(items):
+def pytest_collection_modifyitems(config, items):
+    """Mark all selenium tests by use of fixture selenium_driver
+    to run only selenium test by invoking pytest -m selenium"""
     for item in items:
         try:
             fixtures = item.fixturenames
@@ -569,19 +568,17 @@ def http_testserver(request):
 
 @pytest.fixture(scope='session', params=browsers.keys())
 def selenium_driver(request):
-    if request.param == 'firefox':
-        parameters = {}
-        profile = selenium.webdriver.FirefoxProfile(
-            os.environ.get('ZEIT_WEB_FF_PROFILE'))
-        profile.default_preferences.update({
-            'network.http.use-cache': False,
-            'browser.startup.page': 0,
-            'browser.startup.homepage_override.mstone': 'ignore'})
-        profile.update_preferences()
-        parameters['firefox_profile'] = profile
-        browser = browsers[request.param](**parameters)
-    else:
-        browser = browsers[request.param]()
+    parameters = {}
+    if request.param == 'chrome':
+        opts = Options()
+        opts.add_argument('headless')
+        opts.add_argument('disable-gpu')
+        opts.add_argument('window-size=1200x800')
+        chromium_binary = os.environ.get('ZEIT_WEB_CHROMIUM_BINARY')
+        if chromium_binary:
+            opts.binary_location = chromium_binary
+        parameters['chrome_options'] = opts
+    browser = browsers[request.param](**parameters)
     request.addfinalizer(lambda *args: browser.quit())
     return browser
 
@@ -684,6 +681,7 @@ def mock_metrics(monkeypatch):
 def togglepatch(monkeypatch):
 
     class ToggleOverride(object):
+
         def __init__(self, toggles):
             self.original_find = zeit.web.core.application.FEATURE_TOGGLES.find
             self.toggles = toggles
