@@ -11,6 +11,8 @@ POSTDEPLOY
 
 - ZON-4178: Remove `heatmap` from webtrekk configuration
 
+- SSL-37: Prepare javascript for use with https toggle
+
 - BUG-762: Update adblockertest script
 
 

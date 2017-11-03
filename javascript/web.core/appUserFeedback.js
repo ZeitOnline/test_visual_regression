@@ -9,13 +9,14 @@ function appUserFeedback( question ) {
     'use strict';
     // debug flag for dev purposes
     var debug = window.location.href.indexOf( 'force-userfeedback' ) > -1,
-        cookieName = 'zeit_appuserfeedback_' + question;
+        cookieName = 'zeit_appuserfeedback_' + question,
+        configuredProtocol = window.Zeit.toggles.https ? 'https:' : window.location.protocol;
 
     function AppUserFeedback() {
         var feedbackForm = document.querySelector( '.app-feedback' );
 
         // path to json config
-        this.path = window.location.protocol + '//' + window.location.host + '/json/app-user-feedback/' + question + '.json';
+        this.path = configuredProtocol + '//' + window.location.host + '/json/app-user-feedback/' + question + '.json';
 
         if ( !feedbackForm ) {
             this.init();
