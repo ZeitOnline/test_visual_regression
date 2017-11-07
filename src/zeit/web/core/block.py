@@ -475,6 +475,8 @@ class Video(Module):
 
     @zeit.web.reify
     def layout(self):
+        if self.video is None:
+            return None
         return self.context.layout
 
     @zeit.web.reify
