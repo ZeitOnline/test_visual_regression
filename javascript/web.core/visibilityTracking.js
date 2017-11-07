@@ -50,7 +50,9 @@ define([ 'web.core/clicktracking' ], function( Clicktracking ) {
                 { threshold: 0.5 }
             );
             observer.observe( document.querySelector( '.gate' ) );
-
+            Clicktracking.send([ 'article.schranke...init', '#schranke-' + window.Zeit.view.paywall ]);
+        } else {
+            Clicktracking.send([ 'article.schranke...oldbrowser', '#schranke-' + window.Zeit.view.paywall ]);
         }
     };
 
