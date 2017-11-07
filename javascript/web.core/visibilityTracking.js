@@ -27,6 +27,10 @@ define([ 'web.core/clicktracking' ], function( Clicktracking ) {
 
     var init = function() {
 
+        if ( !document.querySelector( '.gate' ) || !window.Zeit.toggles.get( 'track_gate_visibility' ) ) {
+            return;
+        }
+
         // Checks via https://github.com/w3c/IntersectionObserver/tree/gh-pages/polyfill
         // Exits early if all IntersectionObserver and IntersectionObserverEntry
         // features are natively supported.
