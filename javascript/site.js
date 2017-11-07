@@ -24,6 +24,7 @@ images.init();
 menu.init({ followMobile: 'always' });
 clicktracking.init();
 triggeredEventTracking.init();
+visibilityTracking.init();
 adReload.init();
 videoStage.init();
 
@@ -109,8 +110,6 @@ if ( pageType === 'centerpage' ) {
 $( '.footer-publisher__more' ).extendFooter();
 $( '.js-scroll' ).animateScroll();
 $( '.js-image-copyright-footer' ).imageCopyrightFooter();
-
-visibilityTracking.init();
 
 // search
 $( '.search-form' ).searchTools();
