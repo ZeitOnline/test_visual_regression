@@ -474,3 +474,12 @@ def test_zar_column_has_series_header(testbrowser):
 def test_zar_podcast_has_no_series_header(testbrowser):
     browser = testbrowser('/arbeit/article/podcast')
     assert len(browser.cssselect('.article-series')) == 0
+
+
+def test_zar_article_debate_block_renders_expected_structure(testbrowser):
+    select = testbrowser('/arbeit/article/debate').cssselect
+    assert len(select('.debatebox-on-article')) == 1
+    assert len(select('.debatebox-on-article__kicker')) == 1
+    assert len(select('.debatebox-on-article__title')) == 1
+    assert len(select('.debatebox-on-article__text')) == 1
+    assert len(select('.debatebox-on-article__button')) == 1
