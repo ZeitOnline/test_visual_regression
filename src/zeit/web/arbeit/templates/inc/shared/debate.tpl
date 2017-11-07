@@ -26,7 +26,12 @@
             </p>
         </div>
     </div>
-    <a href="{{ adapt(block.context, 'zeit.content.infobox.interfaces.IDebate').action_url }}" class="{{ self.layout() }}__button" data-ct-label="button">Schreiben Sie uns</a>
+
+    {% set url = adapt(block.context, 'zeit.content.infobox.interfaces.IDebate').action_url %}
+    {% if url %}
+        <a href="{{ url }}" class="{{ self.layout() }}__button" data-ct-label="button">Schreiben Sie uns</a>
+    {% endif %}
+
 </aside>
 
 {% block wrapper_end %}
