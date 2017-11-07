@@ -9,6 +9,8 @@
  * the users viewport. As soon as we want to track more elements, we need
  * to add some abstraction and initialize every element->tracking
  * configuration from outside or from a config object or something.
+ * Hint: We could even use one IntersectionObserver for different actions,
+ * but need to coordinate triggers and handlers.
  */
 define([ 'web.core/clicktracking' ], function( Clicktracking ) {
 
@@ -24,8 +26,6 @@ define([ 'web.core/clicktracking' ], function( Clicktracking ) {
     };
 
     var init = function() {
-
-        // TODO: Use the whole polyfill?
 
         // Checks via https://github.com/w3c/IntersectionObserver/tree/gh-pages/polyfill
         // Exits early if all IntersectionObserver and IntersectionObserverEntry
@@ -52,11 +52,6 @@ define([ 'web.core/clicktracking' ], function( Clicktracking ) {
             observer.observe( document.querySelector( '.gate' ) );
 
         }
-
-        // Die API unseres Plugins muss das Observen beliebiger
-        // Dinge entgegennhmen. Und diese Targets muss man alle
-        // hinzufügen und löschen können. Das kann ein einziger Observer
-        // erledigen ... wenn wir die Actions koordiniert kriegen.
     };
 
     return {
