@@ -22,7 +22,6 @@ images.init();
 menu.init();
 clicktracking.init();
 triggeredEventTracking.init();
-visibilityTracking.init();
 adReload.init();
 saveGetToCookie.init();
 zeit.clearQueue();
@@ -53,6 +52,7 @@ switch ( pageType ) {
         main.find( '.js-infobox' ).infobox();
         main.find( '.article-toc' ).toggleRegions();
         main.find( '.comment-section' ).countFormchars();
+        visibilityTracking.init();
 
     /* falls through */
     case 'gallery':

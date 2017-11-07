@@ -24,7 +24,6 @@ images.init();
 menu.init({ followMobile: 'always' });
 clicktracking.init();
 triggeredEventTracking.init();
-visibilityTracking.init();
 adReload.init();
 videoStage.init();
 
@@ -32,6 +31,7 @@ if ( article.length ) {
     articledate.init();
     comments.init();
     overscrolling.init({ livePreview: true });
+    visibilityTracking.init();
 }
 
 adblockCount.init();

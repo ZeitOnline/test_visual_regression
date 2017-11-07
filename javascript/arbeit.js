@@ -17,7 +17,6 @@ images.init();
 menu.init();
 clicktracking.init();
 triggeredEventTracking.init();
-visibilityTracking.init();
 adReload.init();
 saveGetToCookie.init();
 zeit.clearQueue();
@@ -47,6 +46,7 @@ if ( pageType === 'centerpage' ) {
     comments.init();
     $( '.comment-section' ).countFormchars();
     main.find( '.js-shareblock' ).shareBlocks();
+    visibilityTracking.init();
 }
 
 // more ("non critical") global stuff

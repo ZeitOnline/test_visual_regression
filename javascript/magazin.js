@@ -23,7 +23,6 @@ images.init();
 menu.init();
 clicktracking.init();
 triggeredEventTracking.init();
-visibilityTracking.init();
 adReload.init();
 errors.init();
 cards.init();
@@ -33,6 +32,7 @@ zeit.clearQueue();
 if ( article ) {
     comments.init();
     photocluster.init();
+    visibilityTracking.init();
 }
 
 // add required jQuery plugins
