@@ -4,7 +4,13 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.107 (unreleased)
+3.108 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.107 (2017-11-07)
 ------------------
 
 - ZON-4265: Integrate mail module for articles, implement sending via mailjet
@@ -14,6 +20,8 @@ POSTDEPLOY
 - SSL-37: Prepare javascript for use with https toggle
 
 - BUG-762: Update adblockertest script
+
+- FIX: Be defensive about missing videos in articles
 
 
 3.106 (2017-11-02)
