@@ -724,7 +724,20 @@ def _raw_html(xml):
 def _inline_html(xml, elements=None):
 
     home_url = "http://www.zeit.de/"
-
+    # Replace 'http' with 'https' for inline links.
+    # If all content is migrated, we can delete this code
+    additional_xslt = ""
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('https'):
+        additional_xslt = """
+        <xsl:template match="//a/@href[contains(., 'http://www.zeit.de') or
+        contains(., 'http://zeit.de')]">
+            <xsl:attribute name="href">
+                <xsl:value-of select="concat('https:',
+                substring-after(., 'http:'))" />
+            </xsl:attribute>
+        </xsl:template>
+        """
     try:
         request = pyramid.threadlocal.get_current_request()
         home_url = request.route_url('home')
@@ -813,7 +826,8 @@ def _inline_html(xml, elements=None):
                     <xsl:apply-templates />
                 </a>
           </xsl:template>
-        </xsl:stylesheet>""" % (allowed_elements, home_url))
+          %s
+        </xsl:stylesheet>""" % (allowed_elements, home_url, additional_xslt))
     try:
         transform = lxml.etree.XSLT(filter_xslt)
         return transform(xml)
