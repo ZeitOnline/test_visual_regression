@@ -47,6 +47,7 @@
         &lt;global name="Interface" module="zope.interface"/&gt;
         &lt;global name="ICP2015" module="zeit.content.cp.interfaces"/&gt;
         &lt;global name="IZONContent" module="zeit.cms.section.interfaces"/&gt;
+        &lt;global name="ISearchpage" module="zeit.content.cp.interfaces"/&gt;
       &lt;/tuple&gt;
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
