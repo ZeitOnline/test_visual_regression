@@ -7,6 +7,12 @@ POSTDEPLOY
 3.108 (unreleased)
 ------------------
 
+- Nothing changed yet.
+
+
+3.107.1 (2017-11-08)
+--------------------
+
 - BUG-801: Debatebox template has no action_url
 
 - BUG-802: Only search for a search area on actual search CPs
