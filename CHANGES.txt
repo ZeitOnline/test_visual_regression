@@ -7,7 +7,7 @@ POSTDEPLOY
 3.108 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- MAINT: Ignore missing XML source files
 
 
 3.107 (2017-11-07)
