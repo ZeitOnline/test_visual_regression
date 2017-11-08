@@ -4,8 +4,8 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.108 (unreleased)
-------------------
+3.107.1 (2017-11-08)
+--------------------
 
 - BUG-801: Debatebox template has no action_url
 
