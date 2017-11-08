@@ -96,7 +96,7 @@
     ShareBlock.prototype.track = function( action, url ) {
         log( 'Track: ' + action + ': ' + url );
         require([ 'web.core/clicktracking' ], function( Clicktracking ) {
-            var data = [ 'shareblock....' + action, url.replace( 'http://', '' ) ];
+            var data = [ 'shareblock....' + action, url.replace( /http(s)?:\/\//, '' ) ];
             Clicktracking.send( data );
         });
     };

@@ -35,6 +35,7 @@ import zeit.web.core.jinja
 import zeit.web.core.repository  # activate monkeypatches
 import zeit.web.core.security
 import zeit.web.core.solr  # activate monkeypatches
+import zeit.web.core.source  # activate monkeypatches
 
 
 log = logging.getLogger(__name__)

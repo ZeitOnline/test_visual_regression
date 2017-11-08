@@ -22,10 +22,11 @@
         this.initialized = false;
         this.interval = ( parseInt( Zeit.hpOverlay.interval, 10 ) || 120 ) * 1000;
         this.isLiveServer = /^(www\.)?zeit\.de$/.test( window.location.hostname );
+        this.configuredProtocol = window.Zeit.toggles.https ? 'https:' : window.location.protocol;
         this.options = {
             cookieTimeInDays: 1.5,
             debug: location.href.indexOf( 'debug-popover' ) !== -1,
-            endpoint: location.protocol + '//' + location.host + '/json/update-time/index',
+            endpoint: '//' + location.host + '/json/update-time/index',
             force: location.href.indexOf( 'force-popover' ) !== -1,
             prevent: location.href.indexOf( 'prevent-popover' ) !== -1,
             resetInterval: 1000
@@ -148,7 +149,7 @@
         // data is only fetched if document is visible
         if ( !document.hidden ) {
             var that = this;
-            $.ajax( that.options.endpoint, { dataType: 'json' }).done( function( data ) {
+            $.ajax( that.configuredProtocol + that.options.endpoint, { dataType: 'json' }).done( function( data ) {
                 that.log( 'Done: old timestamp: ' + that.timestamp + ', new timestamp: ' + data.last_published_semantic );
                 if ( !that.timestamp ) {
                     that.timestamp = data.last_published_semantic;

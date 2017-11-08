@@ -463,14 +463,20 @@ class Video(Module):
         return video
 
     def __getattr__(self, name):
+        if self.video is None:
+            return None
         return getattr(self.video, name)
 
     @zeit.web.reify
     def id(self):
+        if self.video is None:
+            return None
         return self.video.uniqueId.split('/')[-1]  # XXX ugly
 
     @zeit.web.reify
     def layout(self):
+        if self.video is None:
+            return None
         return self.context.layout
 
     @zeit.web.reify
@@ -479,7 +485,7 @@ class Video(Module):
             high = sorted(self.renditions, key=lambda r: r.frame_width).pop()
             return getattr(high, 'url', '')
         else:
-            logging.exception('No video renditions set.')
+            logging.warning('No video renditions found in %s', self.video)
 
 
 @grokcore.component.adapter(
@@ -547,6 +553,22 @@ class JobTicker(Module):
     @zeit.web.reify
     def landing_page_url(self):
         return self.content.landing_url
+
+
+@grokcore.component.implementer(zeit.web.core.interfaces.IArticleModule)
+@grokcore.component.adapter(zeit.content.article.edit.interfaces.IMail)
+class MailForm(Module):
+
+    def __getattr__(self, name):
+        return getattr(self.context, name)
+
+    @zeit.web.reify
+    def subjects(self):
+        source = zeit.content.article.edit.interfaces.IMail['subject'].source
+        result = []
+        for value in source(self.context):
+            result.append(source.factory.getTitle(self.context, value))
+        return result
 
 
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IPodcast)

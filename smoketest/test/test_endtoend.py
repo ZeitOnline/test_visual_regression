@@ -185,3 +185,29 @@ def test_configured_redirects(config):
     resp = requests.head('{}/archiv/2000/foo'.format(config['BASE_URL']),
                          allow_redirects=False)
     assert resp.headers['Location'] == 'http://www.zeit.de/2000/foo'
+
+
+def test_iq_ehash_returns_expected_string(
+        config, selenium_driver):
+    driver = selenium_driver
+    script = 'return window.Zeit.iq_ehash'
+    # request some arbitrary article page and set loggedin-cookie
+    driver.get('{}/news/index'.format(config['BASE_URL']))
+    loginlink = driver.find_element_by_css_selector('.nav__login a')
+    loginlink.click()
+    # enter credentials
+    email = driver.find_element_by_id('login_email')
+    password = driver.find_element_by_id('login_pass')
+    submitbtn = driver.find_element_by_css_selector('input.submit-button.log')
+    email.send_keys(config['MEMBER_USERNAME'])
+    password.send_keys(config['MEMBER_PASSWORD'])
+    submitbtn.click()
+    iq_ehash = driver.execute_script(script)
+    # presence of hash depends on toggle 'iqd_touchpoint'
+    if iq_ehash:
+        if config['ENV'] == 'PRODUCTION':
+            assert u'102-9fecd066a29d28ff481de0b82664d53a11c04aafc2400be00' \
+                'ff77a8a2c6c3dbe' == iq_ehash
+        else:
+            assert u'102-2d0d19d7f9d0e5e5e889f3d68922bf54f57f494a2a75daea' \
+                '18c03f5386cbf467' == iq_ehash
