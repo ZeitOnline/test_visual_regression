@@ -29,13 +29,15 @@
     */
     $.fn.selectNav = function() {
 
+        var configuredProtocol = window.Zeit.toggles.https ? 'https:' : window.location.protocol;
+
         //run through search element and return object
         return this.each( function() {
             $( this ).on( 'change', function( e ) {
                 e.preventDefault();
                 var value = $( this ).find( 'option:selected' ).val();
                 if ( value ) {
-                    win.location.href = win.location.protocol +
+                    win.location.href = configuredProtocol +
                         '//' + win.location.host + '/serie/' + value;
                 }
             });

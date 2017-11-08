@@ -4,12 +4,38 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.107 (unreleased)
+3.108 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.107.2 (2017-11-08)
+--------------------
+
+- BUG-802: Only search for a search area on actual search CPs
+
+
+3.107.1 (2017-11-08)
+--------------------
+
+- BUG-801: Debatebox template has no action_url
+
+- MAINT: Ignore missing XML source files
+
+
+3.107 (2017-11-07)
 ------------------
 
 - ZON-4265: Integrate mail module for articles, implement sending via mailjet
 
 - ZON-4178: Remove `heatmap` from webtrekk configuration
+
+- SSL-37: Prepare javascript for use with https toggle
+
+- BUG-762: Update adblockertest script
+
+- FIX: Be defensive about missing videos in articles
 
 
 3.106 (2017-11-02)
