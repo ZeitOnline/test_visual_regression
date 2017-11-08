@@ -7,6 +7,8 @@ POSTDEPLOY
 3.108 (unreleased)
 ------------------
 
+- BUG-801: Debatebox template has no action_url
+
 - MAINT: Ignore missing XML source files
 
 
