@@ -36,7 +36,7 @@
             {%- endif %}
         </div>
 
-        {% set url = adapt(block.context, 'zeit.content.infobox.interfaces.IDebate').action_url %}
+        {% set url = adapt(block.content, 'zeit.content.infobox.interfaces.IDebate').action_url %}
         {% if url %}
             <a class="debate__label" href="{{ url }}">Mitdiskutieren</a>
         {% endif %}

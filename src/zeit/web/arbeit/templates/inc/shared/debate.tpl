@@ -1,9 +1,9 @@
 {# this template is shared between articles and centerpages #}
 
-{% set url = adapt(block.context, 'zeit.content.infobox.interfaces.IDebate').action_url %}
+{% set url = adapt(block.content, 'zeit.content.infobox.interfaces.IDebate').action_url %}
 
 {% block wrapper_start %}
-<aside class="article__item {{ self.layout() | with_mods('without-button') if not url }}">
+<aside class="article__item {{ self.layout() | with_mods('without-button' if not url else '') }}">
 {% endblock %}
 
     <div class="{{ self.layout() }}__wrapper">
