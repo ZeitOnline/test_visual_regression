@@ -205,5 +205,9 @@ def test_iq_ehash_returns_expected_string(
     iq_ehash = driver.execute_script(script)
     # presence of hash depends on toggle 'iqd_touchpoint'
     if iq_ehash:
-        assert u'102-2d0d19d7f9d0e5e5e889f3d68922bf54f57f494a2a75daea' \
-            '18c03f5386cbf467' == iq_ehash
+        if config['ENV'] == 'PRODUCTION':
+            assert u'102-9fecd066a29d28ff481de0b82664d53a11c04aafc2400be00' \
+                'ff77a8a2c6c3dbe' == iq_ehash
+        else:
+            assert u'102-2d0d19d7f9d0e5e5e889f3d68922bf54f57f494a2a75daea' \
+                '18c03f5386cbf467' == iq_ehash
