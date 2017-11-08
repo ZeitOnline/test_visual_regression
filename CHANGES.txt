@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - BUG-801: Debatebox template has no action_url
 
+- BUG-802: Only search for a search area on actual search CPs
+
 - MAINT: Ignore missing XML source files
 
 
