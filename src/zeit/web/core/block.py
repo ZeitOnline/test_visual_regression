@@ -2,6 +2,7 @@
 import datetime
 import logging
 import random
+import re
 
 import babel.dates
 import grokcore.component
@@ -721,6 +722,18 @@ def _raw_html(xml):
     return transform(xml)
 
 
+def convert_protocol_of_https_domains(url):
+    # TODO Get this from config
+    https_ready_subdomains = ['blog', 'www']
+    regex = "^http://({domains})?(\.)?zeit.de".format(
+        domains="|".join(https_ready_subdomains))
+    if not re.match(regex, url):
+        return url
+    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+    metrics.increment('protocol_converted')
+    return url.replace("http:", "https:")
+
+
 def _inline_html(xml, elements=None):
 
     home_url = "http://www.zeit.de/"
@@ -729,15 +742,16 @@ def _inline_html(xml, elements=None):
     additional_xslt = ""
     toggles = zeit.web.core.application.FEATURE_TOGGLES
     if toggles.find('https'):
+        ns = lxml.etree.FunctionNamespace(None)
+        ns['convert-url'] = lambda x, y: convert_protocol_of_https_domains(y)
         additional_xslt = """
-        <xsl:template match="//a/@href[contains(., 'http://www.zeit.de') or
-        contains(., 'http://zeit.de')]">
+        <xsl:template match="//a/@href">
             <xsl:attribute name="href">
-                <xsl:value-of select="concat('https:',
-                substring-after(., 'http:'))" />
+                <xsl:value-of select="convert-url(.)" />
             </xsl:attribute>
-        </xsl:template>
+            </xsl:template>
         """
+
     try:
         request = pyramid.threadlocal.get_current_request()
         home_url = request.route_url('home')
@@ -829,6 +843,7 @@ def _inline_html(xml, elements=None):
           %s
         </xsl:stylesheet>""" % (allowed_elements, home_url, additional_xslt))
     try:
+        import pdb; pdb.set_trace()
         transform = lxml.etree.XSLT(filter_xslt)
         return transform(xml)
     except TypeError:
