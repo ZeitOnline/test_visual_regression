@@ -3,10 +3,10 @@
     {
         "@context": "http://schema.org",
         "@type": "NewsArticle",
-        // TODO: same as `itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="sutherland-springs-donald-trump-waffengesetze"`
+        "@id": "{{ view.content_url }}",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https://example.org/article"
+            "@id": "{{ view.content_url }}"
         },
         "isAccessibleForFree": "False",
         "hasPart": {
