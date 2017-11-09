@@ -2302,6 +2302,5 @@ def test_narrow_header_should_render_image_column_width(testbrowser):
 
 
 def test_abo_paywall_schema_attr(testbrowser):
-    browser = testbrowser(
-        '/zeit-online/article/zplus-zon')
-    assert len(browser.cssselect('.schemaorg-marker-paywall')) == 1
+    browser = testbrowser('/zeit-online/article/zplus-zon')
+    assert len(browser.cssselect('script[type="application/ld+json"]')) == 1
