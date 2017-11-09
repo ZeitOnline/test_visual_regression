@@ -408,4 +408,4 @@ class RequireExtension(jinja2.ext.Extension):
             assignments.append(assign)
 
         body = parser.parse_statements(('name:endrequire',), drop_needle=True)
-        return assignments + [jinja2.nodes.If(condition, body, [])]
+        return assignments + [jinja2.nodes.If(condition, body, [], [])]
