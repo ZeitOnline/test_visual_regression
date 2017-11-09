@@ -1,6 +1,19 @@
-<script type="application/ld+json">
-  {
-   "@context": "http://schema.org",
-   "@type": "Thing"
-  }
-</script>
+{% if view.context.access == 'abo' %}
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        // TODO: same as `itemprop="mainEntity" itemscope itemtype="http://schema.org/Article" itemid="sutherland-springs-donald-trump-waffengesetze"`
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://example.org/article"
+        },
+        "isAccessibleForFree": "False",
+        "hasPart": {
+            "@type": "WebPageElement",
+            "isAccessibleForFree": "False",
+            "cssSelector" : ".schemaorg-marker-paywall"
+        }
+    }
+    </script>
+{% endif %}

@@ -2303,5 +2303,5 @@ def test_narrow_header_should_render_image_column_width(testbrowser):
 
 def test_abo_paywall_schema_attr(testbrowser):
     browser = testbrowser(
-        '/zeit-online/article/zeit?C1-Meter-Status=always_paid')
-    assert len(browser.cssselect('.paywall')) == 1
+        '/zeit-online/article/zplus-zon')
+    assert len(browser.cssselect('.schemaorg-marker-paywall')) == 1

@@ -11,7 +11,7 @@
 {% block main %}
     {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}
-    <article class="article article--padded article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/{% if view.paywall -%}News{% endif -%}Article" itemid="{{ view.basename }}" itemref="publisher">
+    <article class="article article--padded article--{{ view | block_type }}" id="js-article" itemprop="mainEntity" itemscope itemtype="http://schema.org/{% if view.context.access == 'abo' -%}News{% endif -%}Article" itemid="{{ view.basename }}" itemref="publisher">
         <link itemprop="mainEntityOfPage" href="{{ view.canonical_url }}">
     {% profile %}
         {% block article_head %}
@@ -23,7 +23,7 @@
     {% endprofile %}
     {% profile %}
         {% block article_body %}
-        <div class="article-body article-body--{{ view | block_type }}" itemprop="articleBody">
+        <div class="article-body article-body--{{ view | block_type }} {% if view.context.access == 'abo' %} schemaorg-marker-paywall{% endif %}" itemprop="articleBody">
             {% block article_storystreamteaser_teaser %}{% endblock %}
 
             {% block article_pages %}
