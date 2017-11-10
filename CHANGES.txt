@@ -13,6 +13,8 @@ POSTDEPLOY
 
 - ZON-4234: Change markup for abo content to JSON-LD
 
+- BUG-804: Enable the (roughly) jinja equivalent of "import unicode_literals", so `stuff.format()` works as we expect
+
 
 3.107.2 (2017-11-08)
 --------------------
