@@ -8,7 +8,10 @@ POSTDEPLOY
 ------------------
 
 - ZON-4189: Show login status in framebuilder
+
 - ZON-4262: Track paywall visibility on scroll in webtrekk
+
+- ZON-4234: Change markup for abo content to JSON-LD
 
 
 3.107.2 (2017-11-08)
