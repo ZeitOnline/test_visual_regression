@@ -24,7 +24,7 @@ define([ 'web.core/zeit' ], function( Zeit ) {
 
             window.addEventListener( 'load', function() {
                 // param sent by DPV, stored in cookie, and consumed by premium.zeit.de
-                var icodeValue = findGetParameter( 'wt_cc1' );
+                var icodeValue = findGetParameter( 'wt_cc3' );
                 if ( icodeValue ) {
                     Zeit.cookieCreate( 'icode', icodeValue, 365 );
                 }

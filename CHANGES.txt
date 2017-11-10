@@ -15,6 +15,8 @@ POSTDEPLOY
 
 - BUG-804: Enable the (roughly) jinja equivalent of "import unicode_literals", so `stuff.format()` works as we expect
 
+- MAINT: Change GET-parameter name of DPV icode value
+
 
 3.107.2 (2017-11-08)
 --------------------
