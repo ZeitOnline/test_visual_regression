@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.108 (unreleased)
+3.108 (2017-11-10)
 ------------------
 
 - ZON-4189: Show login status in framebuilder
