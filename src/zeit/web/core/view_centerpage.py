@@ -194,19 +194,19 @@ class Centerpage(AreaProvidingPaginationMixin,
 
     @zeit.web.reify
     def webtrekk_content_id(self):
-        area = self.area_providing_pagination
-        # special case for search results
-        if area and getattr(area, 'query_string', None):
-            content_url = self.content_url.replace('http://', '')
-            if content_url.endswith('/index'):
-                content_url = content_url[:-len('/index')]
-            if area.hits:
-                basename = 'treffer'
-            else:
-                basename = 'keine_treffer'
-            content_url = '{}/{}'.format(content_url, basename)
+        if zeit.content.cp.interfaces.ISearchpage.providedBy(self.context):
+            area = self.area_providing_pagination
+            if area and getattr(area, 'query_string', None):
+                content_url = self.content_url.replace('http://', '')
+                if content_url.endswith('/index'):
+                    content_url = content_url[:-len('/index')]
+                if area.hits:
+                    basename = 'treffer'
+                else:
+                    basename = 'keine_treffer'
+                content_url = '{}/{}'.format(content_url, basename)
 
-            return '{}|{}'.format(self.webtrekk_identifier, content_url)
+                return '{}|{}'.format(self.webtrekk_identifier, content_url)
         else:
             return super(Centerpage, self).webtrekk_content_id
 

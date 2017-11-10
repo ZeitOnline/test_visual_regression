@@ -141,7 +141,7 @@
                     {% block article_pages %}
                         {% for page in view.pages %}
                             {% set adplaces = view.pages | adplaces([(0, 3),(3, 4)]) %}
-                            <section {% if view.paywall -%}class="paywall" itemprop="isAccessibleForFree" content="false"{% endif -%}>
+                            <section>
                             {% if not loop.first %}
                                 <h3 class="intertitle article__item">{{ page.teaser }}</h3>
                             {% endif %}

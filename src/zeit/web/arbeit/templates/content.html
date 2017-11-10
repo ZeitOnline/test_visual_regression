@@ -1,5 +1,9 @@
 {% extends 'zeit.web.arbeit:templates/layout.html' %}
 
+{% block schemaorg_data %}
+    {%- include "zeit.web.core:templates/inc/meta/schemaorg.html" -%}
+{% endblock %}
+
 {% block main %}
     {% block advertorial_marker %}{% endblock advertorial_marker %}
     {% block content %}

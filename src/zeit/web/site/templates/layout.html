@@ -34,6 +34,7 @@
     {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
     {%- include "zeit.web.site:templates/inc/meta/sharing.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
+    {% block schemaorg_data %}{% endblock %}
 
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
