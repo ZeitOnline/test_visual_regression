@@ -4,6 +4,7 @@ var $ = require( 'jquery' ),
     images = require( 'web.core/images' ),
     clicktracking = require( 'web.core/clicktracking' ),
     triggeredEventTracking = require( 'web.core/triggeredEventTracking' ),
+    visibilityTracking = require( 'web.core/visibilityTracking' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     comments = require( 'web.core/comments' ),
@@ -31,6 +32,7 @@ zeit.clearQueue();
 if ( article ) {
     comments.init();
     photocluster.init();
+    visibilityTracking.init();
 }
 
 // add required jQuery plugins

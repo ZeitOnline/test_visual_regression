@@ -1,6 +1,7 @@
 {% import 'zeit.web.core:templates/macros/layout_macro.tpl' as lama %}
 
-{% if user %}
+{# because this is included via ESI request, we have no "view is framebuilder", but we can see the context-uri parameter #}
+{% if user and 'framebuilder' not in request.url %}
     <a class="nav__login-title" href="{{ profile }}" role="button" aria-controls="user-menu" aria-label="Account" data-ct-label="user-menu" data-follow-mobile="true">
         {% if user.picture -%}
             <span class="nav__user-picture" style="background-image: url({{ user.picture }})"></span>
