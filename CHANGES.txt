@@ -8,6 +8,7 @@ POSTDEPLOY
 ------------------
 
 - ZON-4189: Show login status in framebuilder
+- ZON-4262: Track paywall visibility on scroll in webtrekk
 
 
 3.107.2 (2017-11-08)

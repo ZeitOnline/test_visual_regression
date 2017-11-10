@@ -3,6 +3,7 @@ var $ = require( 'jquery' ),
     images = require( 'web.core/images' ),
     clicktracking = require( 'web.core/clicktracking' ),
     triggeredEventTracking = require( 'web.core/triggeredEventTracking' ),
+    visibilityTracking = require( 'web.core/visibilityTracking' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     overscrolling = require( 'web.core/overscrolling' ),
@@ -30,6 +31,7 @@ if ( article.length ) {
     articledate.init();
     comments.init();
     overscrolling.init({ livePreview: true });
+    visibilityTracking.init();
 }
 
 adblockCount.init();
@@ -108,5 +110,6 @@ if ( pageType === 'centerpage' ) {
 $( '.footer-publisher__more' ).extendFooter();
 $( '.js-scroll' ).animateScroll();
 $( '.js-image-copyright-footer' ).imageCopyrightFooter();
+
 // search
 $( '.search-form' ).searchTools();

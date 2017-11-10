@@ -29,6 +29,7 @@
   <tag_logos>true</tag_logos>
   <third_party_modules>false</third_party_modules>
   <tracking>false</tracking>
+  <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>
   <volume_teaser>true</volume_teaser>
   <zon_1000px>true</zon_1000px>
