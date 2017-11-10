@@ -1,7 +1,6 @@
 {% extends "zeit.web.core:templates/inc/area/default.html" %}
 
 {% set module_layout = 'teaser-gallery' %}
-{% set tracking_slug = '{}.{}..{}'.format(area.kind, region_loop.index, module_layout) %}
 
 {% block before_module_list %}
     {{ cp.section_heading('Fotostrecken', 'Alle Fotostrecken', 'foto/index', view, tracking_slug ~ '.alle_fotostrecken') }}
