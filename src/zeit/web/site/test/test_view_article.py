@@ -2307,3 +2307,9 @@ def test_abo_paywall_schema_attr(testbrowser):
     assert len(jsonld) == 1
     jsonld = jsonld[0]
     assert '"isAccessibleForFree": "False"' in jsonld.text
+
+
+def test_abo_paywall_schema_attr_not_on_free_content(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    jsonld = browser.cssselect('script[type="application/ld+json"]')
+    assert len(jsonld) == 0
