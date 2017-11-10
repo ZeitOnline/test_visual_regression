@@ -419,3 +419,25 @@ def test_framebuilder_renders_login_data(
     assert select('.nav__login')[0].get_attribute(
         'data-featuretoggle') == 'disable-loginstatus'
     assert len(select('.nav__user-name')) == 0
+
+
+def test_framebuilder_renders_login_data_if_new_feature_is_requested(
+        selenium_driver, togglepatch, testserver, sso_keypair):
+    togglepatch({'framebuilder_loginstatus_disabled': True})
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+
+    # add_cookie() only works for the domain of the last get(), sigh.
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    driver.add_cookie({'name': 'zeit_sso_201501', 'value': sso_cookie})
+
+    # ... and set if it can be enforced, even if disabled in feature toggles
+    driver.get('{}/framebuilder?loginstatus_enforced'.format(testserver.url))
+    assert len(select('.nav__login')) == 1
+    assert not select('.nav__login')[0].get_attribute('data-featuretoggle')
+    assert len(select('.nav__user-name')) == 1
