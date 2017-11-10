@@ -7,7 +7,21 @@ POSTDEPLOY
 3.108 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4189: Show login status in framebuilder
+
+
+3.107.2 (2017-11-08)
+--------------------
+
+- BUG-802: Only search for a search area on actual search CPs
+
+
+3.107.1 (2017-11-08)
+--------------------
+
+- BUG-801: Debatebox template has no action_url
+
+- MAINT: Ignore missing XML source files
 
 
 3.107 (2017-11-07)
