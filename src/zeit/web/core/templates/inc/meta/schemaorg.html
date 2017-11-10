@@ -11,7 +11,15 @@
         "author": "{{ view.authors_list }}",
         "datePublished": "{{ view.date_last_modified }}",
         "headline": "{{ view.title }}",
-        "image": "TODO",
+
+        {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) %}
+            {% set image_source = request.image_host + image.path + '__1300x731' -%}
+            "image": {
+                "@type": "http://schema.org/ImageObject",
+                "url": "{{ image_source }}"
+            },
+        {% endrequire %}
+
         "publisher": {
             "@type": "http://schema.org/Organization",
             "name": "ZEIT ONLINE",
