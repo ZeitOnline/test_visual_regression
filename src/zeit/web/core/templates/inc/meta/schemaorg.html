@@ -15,18 +15,18 @@
         {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) %}
             {% set image_source = request.image_host + image.path + '__1300x731' -%}
             "image": {
-                "@type": "http://schema.org/ImageObject",
+                "@type": "ImageObject",
                 "url": "{{ image_source }}"
             },
         {% endrequire %}
 
         "publisher": {
-            "@type": "http://schema.org/Organization",
+            "@type": "Organization",
             "name": "ZEIT ONLINE",
             "url": "{{ request.route_url('home') }}index",
             "logo": {
-                "@type": "http://schema.org/ImageObject",
-                "url": "{{ request.asset_host }}/images/structured-data-publisher-logo-zar.png"
+                "@type": "ImageObject",
+                "url": "{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png"
             }
         },
         "isAccessibleForFree": "False",
