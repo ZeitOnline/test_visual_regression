@@ -15,7 +15,11 @@
         "publisher": {
             "@type": "http://schema.org/Organization",
             "name": "ZEIT ONLINE",
-            "url": "http://www.zeit.de/index"
+            "url": "{{ request.route_url('home') }}index",
+            "logo": {
+                "@type": "http://schema.org/ImageObject",
+                "url": "{{ request.asset_host }}/images/structured-data-publisher-logo-zar.png"
+            }
         },
         "isAccessibleForFree": "False",
         "hasPart": {
