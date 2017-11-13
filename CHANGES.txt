@@ -4,8 +4,8 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.109 (unreleased)
-------------------
+3.108.1 (2017-11-13)
+--------------------
 
 - FIX: Clear floating for share quotes on ZEIT Arbeit
 
