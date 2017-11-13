@@ -1,8 +1,8 @@
-{% set contents_printed = False %}
+{% set ns = namespace(contents_printed=False) %}
 {% block before_page %}{% endblock %}
 {% for block in page %}
     {% set type = block | block_type %}
-    {% if not (contents_printed or view.is_all_pages_view) and type in [
+    {% if not (ns.contents_printed or view.is_all_pages_view) and type in [
         'paragraph', 'unorderedlist', 'orderedlist', 'intertitle', 'portraitbox', 'authorbox'] %}
         {% block table_of_contents %}
             {% include [
@@ -10,7 +10,7 @@
                 "zeit.web.core:templates/inc/article/table-of-contents.html"] %}
 
         {% endblock %}
-        {% set contents_printed = True %}
+        {% set ns.contents_printed = True %}
     {% endif %}
     {% include [
         "{0}:templates/inc/blocks/{1}_{2}.html".format(view.package, type, block.layout),

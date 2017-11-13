@@ -3,6 +3,7 @@ var $ = require( 'jquery' ),
     images = require( 'web.core/images' ),
     clicktracking = require( 'web.core/clicktracking' ),
     triggeredEventTracking = require( 'web.core/triggeredEventTracking' ),
+    visibilityTracking = require( 'web.core/visibilityTracking' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     saveGetToCookie = require( 'web.core/saveGetToCookie' ),
@@ -45,6 +46,7 @@ if ( pageType === 'centerpage' ) {
     comments.init();
     $( '.comment-section' ).countFormchars();
     main.find( '.js-shareblock' ).shareBlocks();
+    visibilityTracking.init();
 }
 
 // more ("non critical") global stuff

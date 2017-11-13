@@ -4,12 +4,14 @@ var $ = require( 'jquery' ),
     menu = require( 'web.core/menu' ),
     clicktracking = require( 'web.core/clicktracking' ),
     adblockCount = require( 'web.site/adblockCount.js' ),
-    adReload = require( 'web.core/adReload' );
+    adReload = require( 'web.core/adReload' ),
+    framebuilderLoginStatus = require( 'web.core/framebuilderLoginStatus' );
 
 // remove jQuery from global scope (needles with node/webpack)
 // $.noConflict( true );
 
 // initialize modules
+framebuilderLoginStatus.init();
 menu.init({ followMobile: 'always' });
 clicktracking.init();
 adblockCount.init();

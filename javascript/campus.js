@@ -4,6 +4,7 @@ var $ = require( 'jquery' ),
     images = require( 'web.core/images' ),
     clicktracking = require( 'web.core/clicktracking' ),
     triggeredEventTracking = require( 'web.core/triggeredEventTracking' ),
+    visibilityTracking = require( 'web.core/visibilityTracking' ),
     adReload = require( 'web.core/adReload' ),
     menu = require( 'web.core/menu' ),
     comments = require( 'web.core/comments' ),
@@ -51,6 +52,7 @@ switch ( pageType ) {
         main.find( '.js-infobox' ).infobox();
         main.find( '.article-toc' ).toggleRegions();
         main.find( '.comment-section' ).countFormchars();
+        visibilityTracking.init();
 
     /* falls through */
     case 'gallery':

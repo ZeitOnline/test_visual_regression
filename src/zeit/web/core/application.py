@@ -35,6 +35,7 @@ import zeit.web.core.jinja
 import zeit.web.core.repository  # activate monkeypatches
 import zeit.web.core.security
 import zeit.web.core.solr  # activate monkeypatches
+import zeit.web.core.source  # activate monkeypatches
 
 
 log = logging.getLogger(__name__)
@@ -241,6 +242,10 @@ class Application(object):
         self.jinja_env = env = self.config.get_jinja2_environment()
         env.finalize = zeit.web.core.jinja.finalize
         env.trim_blocks = True
+        # Roughly equivalent to `from __future__ import unicode_literals`,
+        # see <https://github.com/pallets/jinja/issues/392> and
+        # <http://jinja.pocoo.org/docs/2.10/api/#policies>.
+        env.policies['compiler.ascii_str'] = False
 
         default_loader = env.loader
         env.loader = zeit.web.core.jinja.PrefixLoader({

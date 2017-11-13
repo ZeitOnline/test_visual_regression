@@ -971,6 +971,6 @@ def test_icode_cookie_is_set_when_get_parameter_is_detected(
         testserver, selenium_driver):
     driver = selenium_driver
     driver.get(
-        '%s/zeit-online/article/simple?wt_cc1=Wurstbrot' % testserver.url)
+        '%s/zeit-online/article/simple?wt_cc3=Wurstbrot' % testserver.url)
     cookie = driver.get_cookie('icode')
     assert cookie['value'] == 'Wurstbrot'

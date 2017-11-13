@@ -82,14 +82,14 @@ def test_video_block_should_be_fault_tolerant_if_video_is_none(application):
     model_block.layout = 'zmo-medium-center'
     model_block.video = None
     video = zeit.web.core.block.Video(model_block)
-    assert not hasattr(video, 'video_still')
+    assert not video.video_still
 
     model_block = mock.Mock()
     model_block.layout = 'zmo-medium-center'
     model_block.video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/video/3537342483001')
     video = zeit.web.core.block.Video(model_block)
-    assert hasattr(video, 'video_still')
+    assert video.video_still
 
 
 def test_image_should_render_supertitle_and_caption_in_alt_tag(monkeypatch):

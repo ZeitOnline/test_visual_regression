@@ -464,14 +464,20 @@ class Video(Module):
         return video
 
     def __getattr__(self, name):
+        if self.video is None:
+            return None
         return getattr(self.video, name)
 
     @zeit.web.reify
     def id(self):
+        if self.video is None:
+            return None
         return self.video.uniqueId.split('/')[-1]  # XXX ugly
 
     @zeit.web.reify
     def layout(self):
+        if self.video is None:
+            return None
         return self.context.layout
 
     @zeit.web.reify
@@ -480,7 +486,7 @@ class Video(Module):
             high = sorted(self.renditions, key=lambda r: r.frame_width).pop()
             return getattr(high, 'url', '')
         else:
-            logging.exception('No video renditions set.')
+            logging.warning('No video renditions found in %s', self.video)
 
 
 @grokcore.component.adapter(
