@@ -7,7 +7,7 @@ POSTDEPLOY
 3.109 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: Clear floating for share quotes on ZEIT Arbeit
 
 
 3.108 (2017-11-10)
