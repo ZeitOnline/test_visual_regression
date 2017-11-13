@@ -21,16 +21,21 @@ import zeit.web.site.view_article
 def test_inline_html_replaces_http_protocol_if_https_toggle_set(monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
         'https': True}.get)
-    metrics = zeit.web.core.metrics.Metrics('test', 'localhost', 0)
-    with mock.patch('zope.component.getUtility') as getUtility:
-        getUtility.return_value = metrics
-        p = ('<p>Text <a href="http://www.zeit.de/foo" class="myclass" '
-             'rel="nofollow" data-foo="bar"> ba </a> und mehr Text</p>')
-        xml = lxml.etree.fromstring(p)
-        xml_str = ('Text <a href="https://www.zeit.de/foo" class="myclass" '
-                   'rel="nofollow" data-foo="bar"> ba </a> und mehr Text')
-        assert xml_str == (
-            str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
+
+    def getUtility(utility):
+        if utility is zeit.web.core.interfaces.ISettings:
+            return {'rewrite_https_links': ['www.zeit.de']}
+        if utility is zeit.web.core.interfaces.IMetrics:
+            return zeit.web.core.metrics.Metrics('test', 'localhost', 0)
+
+    monkeypatch.setattr(zope.component, 'getUtility', getUtility)
+    p = ('<p>Text <a href="http://www.zeit.de/foo" class="myclass" '
+         'rel="nofollow" data-foo="bar"> ba </a> und mehr Text</p>')
+    xml = lxml.etree.fromstring(p)
+    xml_str = ('Text <a href="https://www.zeit.de/foo" class="myclass" '
+               'rel="nofollow" data-foo="bar"> ba </a> und mehr Text')
+    assert xml_str == (
+        str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
 
 
 def test_inline_html_should_filter_to_valid_html():

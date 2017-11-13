@@ -52,6 +52,8 @@ class Application(object):
         self.settings.update(settings)
         self.settings['app_servers'] = filter(
             None, settings['app_servers'].split(','))
+        self.settings['rewrite_https_links'] = (
+            settings.get('rewrite_ssl_links', 'www.zeit.de')).split(',')
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
         self.settings['sso_key'] = self.load_sso_key(
