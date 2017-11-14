@@ -4,7 +4,19 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.108 (unreleased)
+3.109 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.108.1 (2017-11-13)
+--------------------
+
+- FIX: Clear floating for share quotes on ZEIT Arbeit
+
+
+3.108 (2017-11-10)
 ------------------
 
 - ZON-4189: Show login status in framebuilder
