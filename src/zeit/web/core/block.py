@@ -2,7 +2,6 @@
 import datetime
 import logging
 import random
-import re
 
 import babel.dates
 import grokcore.component
@@ -728,9 +727,9 @@ def _raw_html(xml):
     return transform(xml)
 
 
-def convert_http_to_https(url):
+def maybe_convert_http_to_https(url):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    rewrite_https_links = conf['rewrite_https_links']
+    rewrite_https_links = conf['transform_to_secure_links_for']
     scheme, netloc, path, params, query, fragments = urlparse.urlparse(url)
     if scheme != 'http':
         return url
@@ -752,12 +751,12 @@ def _inline_html(xml, elements=None):
     if toggles.find('https'):
         ns = lxml.etree.FunctionNamespace(
             'http://namespaces.zeit.de/functions')
-        ns['convert-url'] = (
-            lambda x, y: convert_http_to_https(y[0]))
+        ns['maybe-convert-url'] = (
+            lambda x, y: maybe_convert_http_to_https(y[0]))
         additional_xslt = """
-        <xsl:template match="//a/@href">
+        <xsl:template match="a/@href">
             <xsl:attribute name="href">
-                <xsl:value-of select="f:convert-url(.)" />
+                <xsl:value-of select="f:maybe-convert-url(.)" />
             </xsl:attribute>
         </xsl:template>
         """
