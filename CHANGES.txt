@@ -7,7 +7,7 @@ POSTDEPLOY
 3.109 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- MAINT: Enable explicit preview of loginstatus in framebuilder
 
 
 3.108.1 (2017-11-13)
