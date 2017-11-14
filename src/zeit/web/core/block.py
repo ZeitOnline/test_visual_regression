@@ -727,9 +727,39 @@ def _raw_html(xml):
     return transform(xml)
 
 
+def maybe_convert_http_to_https(url):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    rewrite_https_links = conf['transform_to_secure_links_for']
+    scheme, netloc, path, params, query, fragments = urlparse.urlparse(url)
+    if scheme != 'http':
+        return url
+    if netloc not in rewrite_https_links:
+        return url
+    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+    metrics.increment('protocol_converted')
+    return urlparse.urlunparse(('https', netloc, path, params, query,
+                               fragments))
+
+
 def _inline_html(xml, elements=None):
 
     home_url = "http://www.zeit.de/"
+    # Replace 'http' with 'https' for inline links.
+    # If all content is migrated, we can delete this code
+    additional_xslt = ""
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('https'):
+        ns = lxml.etree.FunctionNamespace(
+            'http://namespaces.zeit.de/functions')
+        ns['maybe-convert-url'] = (
+            lambda x, y: maybe_convert_http_to_https(y[0]))
+        additional_xslt = """
+        <xsl:template match="a/@href">
+            <xsl:attribute name="href">
+                <xsl:value-of select="f:maybe-convert-url(.)" />
+            </xsl:attribute>
+        </xsl:template>
+        """
 
     try:
         request = pyramid.threadlocal.get_current_request()
@@ -743,7 +773,8 @@ def _inline_html(xml, elements=None):
         allowed_elements = '|'.join(elements)
     filter_xslt = lxml.etree.XML("""
         <xsl:stylesheet version="1.0"
-            xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+            xmlns:f="http://namespaces.zeit.de/functions">
             <xsl:output method="html"
                         omit-xml-declaration="yes" />
           <!-- Semantische HTML-ELemente übernehmen -->
@@ -819,7 +850,8 @@ def _inline_html(xml, elements=None):
                     <xsl:apply-templates />
                 </a>
           </xsl:template>
-        </xsl:stylesheet>""" % (allowed_elements, home_url))
+          %s
+        </xsl:stylesheet>""" % (allowed_elements, home_url, additional_xslt))
     try:
         transform = lxml.etree.XSLT(filter_xslt)
         return transform(xml)
