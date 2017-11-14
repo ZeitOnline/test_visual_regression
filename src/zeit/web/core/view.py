@@ -1206,9 +1206,10 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
     def framebuilder_loginstatus_disabled(self):
         # This (featuretoggle and GET param) is double-negative, so we can
         # remove everything as soon as we do not need the safety net any longer
-        return zeit.web.core.application.FEATURE_TOGGLES.find(
+        return (zeit.web.core.application.FEATURE_TOGGLES.find(
             'framebuilder_loginstatus_disabled') or (
-            'loginstatus_disabled' in self.request.GET)
+            'loginstatus_disabled' in self.request.GET)) and (
+            'loginstatus_enforced' not in self.request.GET)
 
     @zeit.web.reify
     def advertising_enabled(self):
