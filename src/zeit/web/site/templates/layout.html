@@ -56,7 +56,7 @@
     {% endif %}
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
 </head>
-<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %} {% if toggles('zon_1000px') %}id="zon1000"{% endif -%}>
+<body data-page-type="{{ view.type }}" data-is-hp="{{ view.is_hp | lower }}" data-unique-id="{{ view.context.uniqueId }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}
