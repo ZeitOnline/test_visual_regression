@@ -31,18 +31,20 @@ def test_inline_html_replaces_http_protocol_if_https_toggle_set(monkeypatch):
             return zeit.web.core.metrics.Metrics('test', 'localhost', 0)
 
     monkeypatch.setattr(zope.component, 'getUtility', getUtility)
-    p = ('<p>Text <a href="http://www.zeit.de/foo" class="myclass" '
+    p = ('<p>Text <a href="http://www.zeit.de/foo'
+         '?foo=bar#fragment" class="myclass" '
          'rel="nofollow" data-foo="bar"> ba </a> und mehr Text</p>')
     xml = lxml.etree.fromstring(p)
-    xml_str = ('Text <a href="http://www.zeit.de/foo" class="myclass" '
+    xml_str = ('Text <a href="http://www.zeit.de/foo'
+               '?foo=bar#fragment" class="myclass" '
                'rel="nofollow" data-foo="bar"> ba </a> und mehr Text')
     assert xml_str == (
         str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
 
     rewrite_links = ['www.zeit.de']
-    xml_str = ('Text <a href="https://www.zeit.de/foo" class="myclass" '
+    xml_str = ('Text <a href="https://www.zeit.de/foo'
+               '?foo=bar#fragment" class="myclass" '
                'rel="nofollow" data-foo="bar"> ba </a> und mehr Text')
-
     assert xml_str == (
         str(zeit.web.core.block._inline_html(xml)).replace('\n', ''))
 
