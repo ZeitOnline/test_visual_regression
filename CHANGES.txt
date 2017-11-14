@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - SSL-38: Rewrite http links to https links, when configured
 
+- MAINT: Enable explicit preview of loginstatus in framebuilder
+
 
 3.108.1 (2017-11-13)
 --------------------
