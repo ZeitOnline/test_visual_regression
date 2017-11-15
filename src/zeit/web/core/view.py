@@ -306,7 +306,7 @@ class Base(object):
         seo = zeit.seo.interfaces.ISEO(self.context, None)
         if seo and seo.meta_robots:
             return seo.meta_robots
-        return 'index,follow,noodp,noydir,noarchive'
+        return 'index,follow,noarchive'
 
     @zeit.web.reify
     def adwords(self):

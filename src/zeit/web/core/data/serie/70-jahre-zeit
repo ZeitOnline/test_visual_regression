@@ -24,7 +24,7 @@
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="foldable">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-description">2016 feiert DIE ZEIT ihren 70. Geburtstag. Hier finden Sie alle Informationen zu dem Jubiläum</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-hide-timestamp">no</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">noindex, follow, noodp, noydir, noarchive</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">noindex, follow, noarchive</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="html-meta-title">Serie: 70 Jahre DIE ZEIT</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="in_rankings">yes</attribute>
     <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_content">yes</attribute>

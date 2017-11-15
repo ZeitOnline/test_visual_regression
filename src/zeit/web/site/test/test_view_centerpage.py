@@ -748,11 +748,11 @@ def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
 def test_robots_rules_for_paginated_centerpages(testbrowser):
     browser = testbrowser('/dynamic/umbrien')
     assert browser.xpath('//meta[@name="robots"]/@content')[0] == (
-        'index,follow,noodp,noydir,noarchive')
+        'index,follow,noarchive')
 
     browser = testbrowser('/dynamic/umbrien?p=2')
     assert browser.xpath('//meta[@name="robots"]/@content')[0] == (
-        'noindex,follow,noodp,noydir,noarchive')
+        'noindex,follow,noarchive')
 
 
 def test_robots_rules_for_angebote_paths(application):
@@ -763,12 +763,12 @@ def test_robots_rules_for_angebote_paths(application):
     # usual angebot
     request.path = '/angebote/immobilien/test'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,nofollow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'index,nofollow,noarchive'
 
     # partnersuche
     request.path = '/angebote/partnersuche/test'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
 
 def test_robots_rules_for_diverse_paths(application):
@@ -780,27 +780,27 @@ def test_robots_rules_for_diverse_paths(application):
     # test folder
     request.path = '/test/foo'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
     # templates folder
     request.path = '/templates/article-01'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
     # banner folder
     request.path = '/banner/iqd'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
     # autoren folder
     request.path = '/autoren/register/A'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
     # any folder
     request.path = '/any/article-01'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
 
 def test_meta_rules_for_keyword_paths(application):
@@ -2769,7 +2769,7 @@ def test_volume_overview_has_correct_pagination(testbrowser):
     assert current.text_content() == '2015'
 
     meta_robots = browser.cssselect('head meta[name="robots"]')[0]
-    meta_robots.get('content') == 'index,follow,noodp,noydir,noarchive'
+    meta_robots.get('content') == 'index,follow,noarchive'
 
 
 def test_hpoverlay_settings_toggles_html_output(testbrowser):

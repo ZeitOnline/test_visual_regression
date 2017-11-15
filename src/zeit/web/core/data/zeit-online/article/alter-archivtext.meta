@@ -59,5 +59,5 @@
     <attribute name="executable" ns="http://apache.org/dav/props/">F</attribute>
     <attribute name="supportedlock" ns="DAV:"/>
     <attribute name="lockdiscovery" ns="DAV:"/>
-    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noodp,noydir,noarchive </attribute>
+    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">index,follow,noarchive </attribute>
 </head>

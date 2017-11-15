@@ -71,7 +71,7 @@ http://xml.zeit.de/digital/games/2016-06/8768dfd0-a93e-43c3-a942-b4cdd9d6e163.tm
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
-<attribute ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">index,follow,noodp,noydir,noarchive</attribute>
+<attribute ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">index,follow,noarchive</attribute>
 </head>
 <body>
 <supertitle>Embed Templates</supertitle>

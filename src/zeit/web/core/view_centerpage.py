@@ -54,7 +54,7 @@ class AreaProvidingPaginationMixin(object):
 
         # Prevent continuation pages from being indexed
         if area and area.current_page > 1:
-            return 'noindex,follow,noodp,noydir,noarchive'
+            return 'noindex,follow,noarchive'
         return super(AreaProvidingPaginationMixin, self).meta_robots
 
     @zeit.web.reify

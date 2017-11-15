@@ -67,7 +67,7 @@
         &lt;/arguments&gt;
       &lt;/initialized_object&gt;
     &lt;/pickle&gt;</attribute>
-    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">index,follow,noodp,noydir,noarchive</attribute>
+    <attribute ns="http://namespaces.zeit.de/CMS/meta" name="html-meta-robots">index,follow,noarchive</attribute>
   </head>
   <body>
     <supertitle>Embed Templates</supertitle>
