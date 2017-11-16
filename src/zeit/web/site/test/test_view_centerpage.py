@@ -2936,3 +2936,18 @@ def test_cp_should_not_include_itunes_smart_app_banner(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/centerpage')
     app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
     assert len(app_banner_id) == 0
+
+
+def test_zar_parquet_is_rendering(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+
+    zar_parquet = browser.cssselect('.cp-area--zar-parquet')[0]
+    title = zar_parquet.cssselect('.parquet-meta__title')
+    logo = zar_parquet.cssselect('.parquet-meta__logo')
+    teaser = zar_parquet.cssselect('article')
+    more_link = zar_parquet.cssselect('.parquet-meta__more-link')
+
+    assert len(title)
+    assert len(logo)
+    assert len(more_link)
+    assert len(teaser) == 3
