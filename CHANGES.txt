@@ -7,7 +7,7 @@ POSTDEPLOY
 3.110 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4245: Add ZAR-parquet to ZON
 
 
 3.109 (2017-11-15)
