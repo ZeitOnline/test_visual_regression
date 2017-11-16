@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-4245: Add ZAR-parquet to ZON
 
+- BUG-805: Fix color of ZAR badge on ZON nextread
+
 - FEM-63: Meta-Robots - noodp+noydir are obsolete
 
 
