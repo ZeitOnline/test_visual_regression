@@ -4,7 +4,13 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.109 (unreleased)
+3.110 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.109 (2017-11-15)
 ------------------
 
 - SSL-38: Rewrite http links to https links, when configured
