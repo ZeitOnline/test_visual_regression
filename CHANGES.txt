@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-4245: Add ZAR-parquet to ZON
 
+- FEM-63: Meta-Robots - noodp+noydir are obsolete
+
 
 3.109 (2017-11-15)
 ------------------
