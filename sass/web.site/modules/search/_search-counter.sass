@@ -1,5 +1,7 @@
 .search-counter
-	padding: remify(0 0 20px)
+	+padded
+	+respond-min($break-tablet-min)
+		padding: remify(0 0 20px)
 	&__hits
 		font-size: em(24px)
 		font-weight: bold
