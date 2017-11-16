@@ -54,7 +54,7 @@ class Base(zeit.web.core.view.Base):
         path = self.request.path.startswith
 
         if path('/angebote') and not path('/angebote/partnersuche'):
-            return 'index,nofollow,noodp,noydir,noarchive'
+            return 'index,nofollow,noarchive'
 
         if (self.ressort == 'Fehler' and self.product_id == 'ZEAR') or \
             path('/banner') or \
@@ -64,7 +64,7 @@ class Base(zeit.web.core.view.Base):
             self.shared_cardstack_id or \
                 self.product_id in ('TGS', 'HaBl', 'WIWO', 'GOLEM',
                                     'tonic-magazin', 'edition-f'):
-            return 'noindex,follow,noodp,noydir,noarchive'
+            return 'noindex,follow,noarchive'
 
         return super(Base, self).meta_robots
 
