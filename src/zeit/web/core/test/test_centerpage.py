@@ -66,3 +66,9 @@ def test_auto_teasers_should_be_handled_like_normal_teasers(application):
     auto = zeit.content.cp.interfaces.IRenderedArea(area).values()[0]
     module = zeit.web.core.centerpage.get_module(auto)
     assert module.layout.id == 'zco-square'
+
+
+def test_markup_module_should_produce_https_links(application):
+    cp = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/thema')
+    import pdb; pdb.set_trace()
