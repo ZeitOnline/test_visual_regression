@@ -28,7 +28,6 @@ setup(
         'ProxyTypes',
         'PyJWT',
         'Jinja2 >= 2.10.0.dev0',
-        'bugsnag',
         'colander',
         'cryptography',
         'dogpile.cache',
