@@ -1,5 +1,5 @@
 import logging
-import zeit.web.core.block
+import zeit.web.core.utils
 
 import zeit.web
 import zeit.web.core.centerpage
@@ -30,6 +30,6 @@ class Markup(zeit.web.core.centerpage.Module, list):
         for link in xml.xpath('//a'):
             if link.get('href'):
                 link.set('href',
-                         zeit.web.core.block.maybe_convert_http_to_https(
+                         zeit.web.core.utils.maybe_convert_http_to_https(
                             link.get('href')))
         return lxml.etree.tostring(xml)

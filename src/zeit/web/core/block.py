@@ -26,6 +26,7 @@ import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
 import zeit.web.core.template
+import zeit.web.core.utils
 
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
@@ -727,20 +728,6 @@ def _raw_html(xml):
     return transform(xml)
 
 
-def maybe_convert_http_to_https(url):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    rewrite_https_links = conf['transform_to_secure_links_for']
-    scheme, netloc, path, params, query, fragments = urlparse.urlparse(url)
-    if scheme != 'http':
-        return url
-    if netloc not in rewrite_https_links:
-        return url
-    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
-    metrics.increment('protocol_converted')
-    return urlparse.urlunparse(('https', netloc, path, params, query,
-                               fragments))
-
-
 def _inline_html(xml, elements=None):
 
     home_url = "http://www.zeit.de/"
@@ -752,7 +739,7 @@ def _inline_html(xml, elements=None):
         ns = lxml.etree.FunctionNamespace(
             'http://namespaces.zeit.de/functions')
         ns['maybe-convert-url'] = (
-            lambda x, y: maybe_convert_http_to_https(y[0]))
+            lambda x, y: zeit.web.core.utils.maybe_convert_http_to_https(y[0]))
         additional_xslt = """
         <xsl:template match="a/@href">
             <xsl:attribute name="href">
