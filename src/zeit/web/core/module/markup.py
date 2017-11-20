@@ -20,7 +20,7 @@ class Markup(zeit.web.core.centerpage.Module, list):
     @zeit.web.reify
     def text(self):
         if self.context.text is not None:
-            return self.maybe_convert_text(self.context.text)
+            return self.maybe_convert_text(self.context.text).strip()
 
     def maybe_convert_text(self, text):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
