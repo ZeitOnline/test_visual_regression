@@ -42,3 +42,9 @@
 		+respond-min($break-tablet-min)
 			height: remify(60px)
 			width: remify(1px)
+
+// reduce margin if there is a header image
+.topicpage-headerimage__media + .topicpage-header > .topicpage-header__heading
+	margin-top: remify(20px)
+	+respond-min($break-tablet-min)
+		margin-top: remify(40px)
