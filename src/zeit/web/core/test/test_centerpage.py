@@ -4,7 +4,7 @@ import zeit.content.cp.centerpage
 import zeit.web.core.centerpage
 import zeit.web.core.utils
 import zeit.web.site.module.search_form
-
+import lxml.etree
 
 def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     block = object()
@@ -68,7 +68,13 @@ def test_auto_teasers_should_be_handled_like_normal_teasers(application):
     assert module.layout.id == 'zco-square'
 
 
-def test_markup_module_should_produce_https_links(application):
+def test_markup_module_should_produce_https_links(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'https': True}.get)
     cp = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/thema')
-    import pdb; pdb.set_trace()
+    markup_module = cp.values()[1].values()[0].values()[0]
+    module = zeit.web.core.module.markup.Markup(markup_module)
+    assert (
+        lxml.etree.fromstring(module.text).xpath('//a')[0].get('href') == (
+            'https://www.zeit.de/transform_me/'))

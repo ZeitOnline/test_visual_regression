@@ -19,11 +19,17 @@ class Markup(zeit.web.core.centerpage.Module, list):
 
     @zeit.web.reify
     def text(self):
-
         if self.context.text is not None:
-            xml = lxml.etree.fromstring(self.context.text)
-            for link in xml.xpath('//a'):
-                import pdb; pdb.set_trace()
-                
-                zeit.web.core.block.maybe_convert_http_to_https(href)
-            return lxml.etree.tostring(xml)
+            return self.maybe_convert_text(self.context.text)
+
+    def maybe_convert_text(self, text):
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        if not toggles.find('https'):
+            return text
+        xml = lxml.etree.fromstring(self.context.text)
+        for link in xml.xpath('//a'):
+            if link.get('href'):
+                link.set('href',
+                         zeit.web.core.block.maybe_convert_http_to_https(
+                            link.get('href')))
+        return lxml.etree.tostring(xml)
