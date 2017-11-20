@@ -35,6 +35,7 @@
   <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>
   <volume_teaser>true</volume_teaser>
+  <wt_3rdparty_cookie>false</wt_3rdparty_cookie>
   <zon_inline_video_via_html5>true</zon_inline_video_via_html5>
   <zon_videosinglepage_via_html5>true</zon_videosinglepage_via_html5>
   <zplus_badge_gray>true</zplus_badge_gray>
