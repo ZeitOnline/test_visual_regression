@@ -479,14 +479,6 @@ class Video(Module):
             return None
         return self.context.layout
 
-    @zeit.web.reify
-    def highest_rendition(self):
-        if self.renditions:
-            high = sorted(self.renditions, key=lambda r: r.frame_width).pop()
-            return getattr(high, 'url', '')
-        else:
-            logging.warning('No video renditions found in %s', self.video)
-
 
 @grokcore.component.adapter(
     zeit.content.article.edit.interfaces.IVideo,
