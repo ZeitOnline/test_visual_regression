@@ -7,7 +7,7 @@ POSTDEPLOY
 3.112 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-803: Fix padding for search counter
 
 
 3.111 (2017-11-20)
