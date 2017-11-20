@@ -80,7 +80,7 @@
                 {% endif %}
             </div>
             {% endif %}
-        <textarea class="comment-form__textarea js-required" id="comment-textarea" name="comment" placeholder="{{ placeholder }}" maxlength="1500" aria-label="Schreiben Sie hier Ihren Kommentar für den Artikel {{ view.title }} hinein." >
+        <textarea class="comment-form__textarea js-required" name="comment" placeholder="{{ placeholder }}" maxlength="1500" aria-label="Schreiben Sie hier Ihren Kommentar für den Artikel {{ view.title }} hinein." >
             {%- if view.error and view.error.comment %}{{ view.error.comment }}{% endif -%}
         </textarea>
             {% if view.comment_form.show_premoderation_warning_article %}
