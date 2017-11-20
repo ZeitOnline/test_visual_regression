@@ -30,7 +30,8 @@ let testUrls = [
   'http://localhost:9090/arbeit/centerpage/teaser-to-zplus-abo',
   'http://localhost:9090/arbeit/centerpage/teaser-to-zplus-registration',
   'http://localhost:9090/arbeit/centerpage/thema-opulent',
-  'http://localhost:9090/arbeit/centerpage/tube'
+  'http://localhost:9090/arbeit/centerpage/tube',
+  'http://localhost:9090/serie/das-anonyme-gehaltsprotokoll'
 ]
 
 testUrls.forEach(url => {
