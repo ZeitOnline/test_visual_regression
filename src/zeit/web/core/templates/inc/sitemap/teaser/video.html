@@ -2,7 +2,7 @@
     <loc>{{ teaser.uniqueId | create_url }}</loc>
     <video:video>
         <video:thumbnail_loc>{{ teaser.thumbnail }}</video:thumbnail_loc>
-        <video:content_loc>{{ teaser.flv_url }}</video:content_loc>
+        <video:content_loc>{{ teaser.highest_rendition_url }}</video:content_loc>
         <video:title>{{ teaser.title }}</video:title>
         <video:description>{{ teaser.teaserText }}</video:description>
         <video:publication_date>{{ teaser | mod_date | format_date('iso8601') }}</video:publication_date>

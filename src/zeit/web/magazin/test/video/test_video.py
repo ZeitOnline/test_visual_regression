@@ -2,9 +2,11 @@
 import jinja2
 import mock
 import pytest
+import zope.component
 
 from zeit.content.video.video import VideoRendition
 import zeit.cms.interfaces
+import zeit.content.video.interfaces
 
 from zeit.web.core.block import Video
 
@@ -23,17 +25,23 @@ def test_video_source_should_be_highest_rendition_url(application):
     rend_3 = VideoRendition()
     rend_3.frame_width = 1260
     rend_3.url = "http://rend_3"
+
     model_block.video = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/video/3537342483001')
-
-    model_block.video.renditions = [rend_1, rend_2, rend_3]
     video = Video(model_block)
 
-    assert video.highest_rendition == "http://rend_2"
+    player = zope.component.getUtility(zeit.content.video.interfaces.IPlayer)
+    with mock.patch.object(player, 'get_video') as get_video:
+        get_video.return_value = {
+            'video_still': None,
+            'thumbnail': None,
+            'renditions': [rend_1, rend_2, rend_3]
+        }
 
-    model_block.video.renditions = ()
-    video = Video(model_block)
-    assert video.highest_rendition is None
+        assert video.highest_rendition_url == "http://rend_2"
+
+        get_video.return_value['renditions'] = ()
+        assert video.highest_rendition_url is None
 
 
 @pytest.mark.parametrize('layout, klass', [
@@ -68,7 +76,7 @@ def test_video_block_should_produce_markup(layout, klass, tplbrowser):
 
 
 def test_headervideo_block_should_produce_markup(tplbrowser):
-    block = {'highest_rendition': 'test.mp4', 'id': 42,
+    block = {'highest_rendition_url': 'test.mp4', 'id': 42,
              'video_still': 'pic.jpg'}
 
     browser = tplbrowser(

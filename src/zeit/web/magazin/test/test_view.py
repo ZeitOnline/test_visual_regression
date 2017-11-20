@@ -134,7 +134,7 @@ def test_header_video_should_be_first_video_of_content_blocks(application):
     url = ('http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/'
            '3809/18140073001_3094832002001_Aurora-Borealis--Northern-Lights'
            '--Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4')
-    assert article_view.header_module.highest_rendition == url
+    assert article_view.header_module.highest_rendition_url == url
 
 
 def test_header_module_should_be_image_if_there_is_an_image(application):
