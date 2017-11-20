@@ -6,6 +6,7 @@ import zeit.web.core.utils
 import zeit.web.site.module.search_form
 import lxml.etree
 
+
 def test_get_module_filter_should_correctly_extract_cpextra_id(application):
     block = object()
     assert zeit.web.core.centerpage.get_module(block) is block
