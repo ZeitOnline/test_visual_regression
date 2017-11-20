@@ -4,10 +4,26 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.110 (unreleased)
+3.112 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+3.111 (2017-11-20)
+------------------
+
+- ZON-4308: Webtrekk 3rd party cookie
+
+
+3.110 (2017-11-16)
+------------------
+
+- ZON-4245: Add ZAR-parquet to ZON
+
+- BUG-805: Fix color of ZAR badge on ZON nextread
+
+- FEM-63: Meta-Robots - noodp+noydir are obsolete
 
 
 3.109 (2017-11-15)

@@ -5,7 +5,6 @@ import logging
 import re
 import urlparse
 
-import bugsnag
 import jinja2
 import jinja2.ext
 import pkg_resources
@@ -28,7 +27,6 @@ import zeit.cms.repository.repository
 import zeit.connector
 
 import zeit.web
-import zeit.web.core.bugsnag
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
@@ -65,9 +63,7 @@ class Application(object):
         zope.component.provideUtility(
             self.settings, zeit.web.core.interfaces.ISettings)
         self.configure()
-        app = self.config.make_wsgi_app()
-        # TODO: Try to move bugsnag middleware config to web.ini
-        return zeit.web.core.bugsnag.BugsnagMiddleware(app)
+        return self.config.make_wsgi_app()
 
     def load_sso_key(self, keyfile):
         if keyfile:
@@ -77,17 +73,6 @@ class Application(object):
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
-        self.configure_bugsnag()
-
-    def configure_bugsnag(self):
-        bugsnag.configure(
-            api_key=self.settings.get('bugsnag_token'),
-            project_root=pkg_resources.get_distribution('zeit.web').location,
-            app_version=self.settings.get('version'),
-            # Bugsnag UI displays the first letter, so "preview" is unhelpful.
-            notify_release_stages=['vorschau', 'production'],
-            release_stage=self.settings.get('environment', 'dev')
-        )
 
     def configure_pyramid(self):
         log.debug('Configuring Pyramid')

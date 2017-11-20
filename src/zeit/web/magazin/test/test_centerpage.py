@@ -440,7 +440,7 @@ def test_centerpage_should_have_page_meta_robots_information(testbrowser):
     # No SEO robots information is given
     browser = testbrowser('/zeit-magazin/index')
     meta_robots = browser.document.xpath('//meta[@name="robots"]/@content')
-    assert 'index,follow,noodp,noydir,noarchive' in meta_robots
+    assert 'index,follow,noarchive' in meta_robots
 
 
 def test_get_video_should_return_video_asset(application):

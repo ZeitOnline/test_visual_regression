@@ -132,7 +132,7 @@ def test_xml_renders_article_with_meta_robots(testserver):
         headers={'Host': 'xml.zeit.de'})
 
     doc = {
-        'html_meta_robots': 'index,follow,noodp,noydir,noarchive',
+        'html_meta_robots': 'index,follow,noarchive',
         'html_meta_robots_namespace':
             'http://namespaces.zeit.de/CMS/meta',
     }

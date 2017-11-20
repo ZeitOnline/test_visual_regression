@@ -49,7 +49,7 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
-        <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
+        <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noarchive</attribute>
     </head>
     <body>
         <title>Podcast auf CPs</title>

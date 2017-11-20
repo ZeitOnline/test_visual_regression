@@ -49,7 +49,7 @@
     &lt;/arguments&gt;
   &lt;/initialized_object&gt;
 &lt;/pickle&gt;</attribute>
-    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noodp, noydir, noarchive</attribute>
+    <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noarchive</attribute>
     <attribute name="html-meta-title" ns="http://namespaces.zeit.de/CMS/document">Liebe am Arbeitsplatz - News und Infos | ZEIT ONLINE</attribute>
     <attribute name="html-meta-description" ns="http://namespaces.zeit.de/CMS/document">Hier finden Sie alle News und Hintergrund-Informationen von ZEIT ONLINE zu Liebe am Arbeitsplatz.</attribute>
     <topiclinks/>
