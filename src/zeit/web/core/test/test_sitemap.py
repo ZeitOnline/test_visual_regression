@@ -161,8 +161,9 @@ def test_gsitemap_video(testbrowser):
         '//video:thumbnail_loc', namespaces=ns)[0].text)
     assert (
         xml.xpath('//video:content_loc', namespaces=ns)[0].text ==
-        'http://brightcove.vo.llnwd.net/pd16/media/18140073001/'
-        '18140073001_1953016536001_fotomomente-nordlichter.mp4')
+        'http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/3809/'
+        '18140073001_3094832002001_Aurora-Borealis--Northern-Lights--'
+        'Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4')
     assert (
         xml.xpath('//video:title', namespaces=ns)[0].text ==
         u'Foto-Momente: Die stille Schönheit der Polarlichter')

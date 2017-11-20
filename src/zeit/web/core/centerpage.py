@@ -78,17 +78,6 @@ class Region(Area):
 
 @zeit.web.register_global
 def get_video(context):
-
-    def get_video_source(self):
-        try:
-            highest_rendition = self.renditions[0]
-            for rendition in self.renditions:
-                if highest_rendition.frame_width < rendition.frame_width:
-                    highest_rendition = rendition
-            return highest_rendition.url
-        except (AttributeError, IndexError, TypeError):
-            return self.flv_url
-
     try:
         asset = zeit.content.video.interfaces.IVideoAsset(context)
         primary = asset.video
@@ -96,14 +85,10 @@ def get_video(context):
     except (TypeError, AttributeError):
         return
 
-    if primary is not None:
-        primary.highest_rendition = get_video_source(primary)
-
     if secondary is not None and primary is not None:
-        secondary.highest_rendition = get_video_source(secondary)
         return [primary, secondary]
-
-    return primary
+    else:
+        return primary
 
 
 @grokcore.component.implementer(zeit.content.image.interfaces.IImages)

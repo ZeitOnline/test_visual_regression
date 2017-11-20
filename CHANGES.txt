@@ -4,10 +4,16 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.111 (unreleased)
+3.112 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+3.111 (2017-11-20)
+------------------
+
+- ZON-4308: Webtrekk 3rd party cookie
 
 
 3.110 (2017-11-16)
