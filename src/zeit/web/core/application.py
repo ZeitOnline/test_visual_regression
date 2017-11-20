@@ -51,7 +51,7 @@ class Application(object):
         self.settings.update(settings)
         self.settings['app_servers'] = filter(
             None, settings['app_servers'].split(','))
-        self.settings['rewrite_https_links'] = (
+        self.settings['transform_to_secure_links_for'] = (
             settings.get(
                 'transform_to_secure_links_for', 'www.zeit.de')).split(',')
         self.settings['linkreach_host'] = maybe_convert_egg_url(

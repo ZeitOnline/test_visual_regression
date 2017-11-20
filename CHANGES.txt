@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - ZON-4347: Mark all non-free content with json-ld
 
+- SSL-40: Transform https links in cp markup modules
+
 - BUG-803: Fix padding for search counter
 
 - FEM-69: Add aria-label to comment form textarea
