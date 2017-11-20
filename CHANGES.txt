@@ -9,6 +9,8 @@ POSTDEPLOY
 
 - BUG-803: Fix padding for search counter
 
+- FEM-69: Add aria-label to comment form textarea
+
 
 3.111 (2017-11-20)
 ------------------
