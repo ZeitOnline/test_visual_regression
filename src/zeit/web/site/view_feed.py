@@ -770,8 +770,8 @@ class GoogleEditorsPicksFeed(Base):
                     e('description', content.teaserText or content.subtitle),
                     # TODO: Ressort or Kicker/Category (old Feed)?
                     # E('category', content.ressort)
-                    e('category', content.supertitle)
-                    # TODO: <pubDate>datetime</pubDate> in the <item> tag
+                    e('category', content.supertitle),
+                    e('pubDate', first_released(content))
                 )
 
                 author = u', '.join(self.make_author_list(content))
