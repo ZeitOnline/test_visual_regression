@@ -102,6 +102,8 @@ def app_settings(mockserver):
         'academics_img_host': mockserver.url + '/academics',
         'cardstack_backend': mockserver.url + '/cardstack',
         'connector_type': 'mock',
+        'solr_timeout': 2,
+        'solr_sitemap_timeout': 10,
         'vgwort_url': 'http://example.com/vgwort',
         'redirect_volume_cp': 'http://redirect.example.com',
         'breaking_news_config': (
@@ -329,6 +331,8 @@ def application_session(app_settings, request):
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
     zope.component.provideUtility(MockSolr(),)
+    zope.component.provideUtility(MockSitemapSolr(),
+                                  zeit.web.core.solr.ISitemapSolrConnection)
     zope.component.provideUtility(mock.Mock(),
                                   zeit.objectlog.interfaces.IObjectLog)
     zope.component.provideUtility(mock.Mock(), zeit.web.core.interfaces.IMail)
@@ -876,6 +880,14 @@ class MockSolr(object):
     def results(self, value):
         self._hits = len(value)
         self._results = value
+
+MockSolr.timeout = property(
+    zeit.web.core.solr.solr_timeout_from_settings, lambda self, value: None)
+
+
+class MockSitemapSolr(MockSolr, zeit.web.core.solr.SitemapSolrConnection):
+
+    zope.interface.implements(zeit.web.core.solr.ISitemapSolrConnection)
 
 
 @pytest.fixture
