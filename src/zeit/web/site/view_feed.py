@@ -730,6 +730,7 @@ class GoogleEditorsPicksFeed(Base):
         publisher_logo = '{}://www.zeit.de/static/latest/images/{}'.format(
             protocol,
             'google-editors-picks-logo-zon.png')  # fuck PEP8
+        build_date = format_rfc822_date(datetime.datetime.today())
 
         e = ELEMENT_MAKER
         en = ELEMENT_NS_MAKER
@@ -746,8 +747,7 @@ class GoogleEditorsPicksFeed(Base):
               'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
             e('generator', 'zeit.web {}'.format(
                 self.request.registry.settings.version)),
-            # TODO: <lastBuildDate>Tue, 21 Nov 2017 10:00:47 GMT</>
-            e('lastBuildDate', 'TODO'),
+            e('lastBuildDate', build_date),
             e(
                 'image',
                 e('url', publisher_logo),
