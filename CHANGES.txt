@@ -4,6 +4,9 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
+- `wt_3rdparty_cookie` aus den feature-toggle.xml entfernen
+
+
 3.112 (unreleased)
 ------------------
 
@@ -16,6 +19,8 @@ POSTDEPLOY
 - BUG-803: Fix padding for search counter
 
 - FEM-69: Add aria-label to comment form textarea
+
+- MAINT: Remove `wt_3rdparty_cookie` feature toggle
 
 
 3.111 (2017-11-20)
