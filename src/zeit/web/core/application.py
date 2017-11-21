@@ -11,6 +11,7 @@ import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
+import pyramid.interfaces
 import pyramid_jinja2
 import pyramid_zodbconn
 import venusian
@@ -116,6 +117,9 @@ class Application(object):
         config.add_route_predicate(
             'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
             weighs_more_than=('traverse',))
+
+        config.add_subscriber(register_standard_site_manager,
+                              pyramid.interfaces.INewRequest)
 
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('campus_framebuilder', '/campus/framebuilder')
@@ -411,6 +415,14 @@ def configure_host(key):
         return request.route_url('home', _app_url=prefix).rstrip('/')
     wrapped.__name__ = key + '_host'
     return wrapped
+
+
+def register_standard_site_manager(event):
+    """
+    Because we might have changed zopes site manager
+    we want to reset it to the global site manager
+    """
+    zope.component.hooks.setSite()
 
 
 class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):
