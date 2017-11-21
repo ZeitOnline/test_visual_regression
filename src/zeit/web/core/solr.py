@@ -9,8 +9,6 @@ import urlparse
 import grokcore.component
 import mock
 import pyramid.threadlocal
-import pyramid.events
-
 import pysolr
 import requests.sessions
 import zope.component
