@@ -52,7 +52,7 @@
         <attribute name="html-meta-robots" ns="http://namespaces.zeit.de/CMS/meta">noindex, follow, noarchive</attribute>
     </head>
     <body>
-        <title>Gogole Editors Picks RSS Feed</title>
+        <title>Google Editors Picks RSS Feed</title>
     <cluster area="feature" visible="True" visible_mobile="True">
       <region area="lead" visible="True" visible_mobile="True" hide-dupes="True" count="16" automatic="True" automatic_type="query">
         <raw_query>type:article</raw_query>
