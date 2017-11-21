@@ -4,10 +4,22 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.111 (unreleased)
+3.112 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4347: Mark all non-free content with json-ld
+
+- SSL-40: Transform https links in cp markup modules
+
+- BUG-803: Fix padding for search counter
+
+- FEM-69: Add aria-label to comment form textarea
+
+
+3.111 (2017-11-20)
+------------------
+
+- ZON-4308: Webtrekk 3rd party cookie
 
 
 3.110 (2017-11-16)

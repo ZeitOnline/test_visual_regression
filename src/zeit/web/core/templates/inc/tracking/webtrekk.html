@@ -13,7 +13,12 @@
 
     if ( typeof webtrekkV3 === "function" ) {
         var wt = new webtrekkV3(webtrekk);
-        wt.cookie = "1";
+        {% if toggles('wt_3rdparty_cookie') -%}
+            wt.cookie = "3";
+        {% else %}
+            wt.cookie = "1";
+        {%- endif %}
+
         wt.contentGroup = {
             {% for key in view.webtrekk.contentGroup -%}
                 {% if key == 'cg7' and view is framebuilder -%}

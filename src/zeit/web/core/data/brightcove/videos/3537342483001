@@ -1,0 +1,21 @@
+{
+    "sources": [
+        {"width": 720,
+         "duration": 436118,
+         "src": "http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319236001_thegreatrabbit-1280-720-h264.mp4"},
+        {"width": 400,
+         "duration": 436118,
+         "src": "http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319165001_thegreatrabbit-1280-720-h264.mp4"},
+        {"width": 1280,
+         "duration": 436118,
+        "src": "http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319186001_thegreatrabbit-1280-720-h264.mp4"},
+        {"width": 640,
+         "duration": 436118,
+         "src": "http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319240001_thegreatrabbit-1280-720-h264.mp4"},
+        {"width": 480,
+         "duration": 436118,
+         "src": "http://brightcove.vo.llnwd.net/v1/uds/pd/18140073001/201501/3503/18140073001_4022319666001_thegreatrabbit-1280-720-h264.mp4"}
+    ],
+    "poster": "file://%DATA%/zeit-online/video/still.jpg",
+    "thumbnail": "file://%DATA%/zeit-online/video/thumbnail.jpg"
+}
