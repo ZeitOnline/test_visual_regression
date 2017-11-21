@@ -707,6 +707,20 @@ class GoogleEditorsPicksFeed(Base):
 
         return super(GoogleEditorsPicksFeed, self).__call__()
 
+    @property
+    def items(self):
+        reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+        # fetch 10, in case some get sorted out later (wrong series/product)
+        articles = reach.get_views(section=None, limit=10)
+
+        for item in articles:
+            metadata = zeit.cms.content.interfaces.ICommonMetadata(item, None)
+            if metadata is None:
+                log.info('%s ignoring %s, no ICommonMetadata',
+                         item, self.__class__.__name__)
+                continue
+            yield item
+
     def build_feed(self):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
         protocol = 'https' if toggles.find('https') else 'http'
@@ -716,7 +730,7 @@ class GoogleEditorsPicksFeed(Base):
             'structured-data-publisher-logo-zon.png')  # fuck PEP8
 
         e = ELEMENT_MAKER
-        en = ELEMENT_NS_MAKER
+        # en = ELEMENT_NS_MAKER
         root = e('rss', version='2.0')
 
         channel = e(
@@ -732,6 +746,8 @@ class GoogleEditorsPicksFeed(Base):
                 self.request.registry.settings.version)),
             # TODO: <lastBuildDate>Tue, 21 Nov 2017 10:00:47 GMT</>
             e('lastBuildDate', 'TODO'),
+            # TODO: Anforderungen ans Logo beachten (eigenes Datei ins Repo)
+            # https://support.google.com/news/publisher/answer/1407682?hl=en
             e(
                 'image',
                 e('url', publisher_logo),
@@ -755,8 +771,11 @@ class GoogleEditorsPicksFeed(Base):
                     # TODO: Ressort or Kicker/Category (old Feed)?
                     # E('category', content.ressort)
                     e('category', content.supertitle)
+                    # TODO: <pubDate>datetime</pubDate> in the <item> tag
                 )
 
+                # TODO: author according to the specs (dc:creator)
+                # https://support.google.com/news/publisher/answer/1407682?hl=en
                 author = u', '.join(self.make_author_list(content))
                 if author:
                     item.append(e('author', author))
