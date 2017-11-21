@@ -7,6 +7,8 @@ POSTDEPLOY
 3.112 (unreleased)
 ------------------
 
+- ZON-4242: Series CP for ZEIT Arbeit
+
 - ZON-4347: Mark all non-free content with json-ld
 
 - SSL-40: Transform https links in cp markup modules
