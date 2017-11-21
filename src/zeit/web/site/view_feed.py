@@ -732,7 +732,7 @@ class GoogleEditorsPicksFeed(Base):
             'google-editors-picks-logo-zon.png')  # fuck PEP8
 
         e = ELEMENT_MAKER
-        # en = ELEMENT_NS_MAKER
+        en = ELEMENT_NS_MAKER
         root = e('rss', version='2.0')
 
         channel = e(
@@ -748,8 +748,6 @@ class GoogleEditorsPicksFeed(Base):
                 self.request.registry.settings.version)),
             # TODO: <lastBuildDate>Tue, 21 Nov 2017 10:00:47 GMT</>
             e('lastBuildDate', 'TODO'),
-            # TODO: Anforderungen ans Logo beachten (eigenes Datei ins Repo)
-            # https://support.google.com/news/publisher/answer/1407682?hl=en
             e(
                 'image',
                 e('url', publisher_logo),
@@ -776,13 +774,11 @@ class GoogleEditorsPicksFeed(Base):
                     # TODO: <pubDate>datetime</pubDate> in the <item> tag
                 )
 
-                # TODO: author according to the specs (dc:creator)
-                # https://support.google.com/news/publisher/answer/1407682?hl=en
                 author = u', '.join(self.make_author_list(content))
+                if not author:
+                    author = 'ZEIT ONLINE Redaktion'
                 if author:
-                    item.append(e('author', author))
-                else:
-                    item.append(e('author', 'ZEIT ONLINE Redaktion'))
+                    item.append(en('dc', 'creator', author))
 
                 channel.append(item)
 
