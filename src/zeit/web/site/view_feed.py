@@ -692,3 +692,85 @@ class MsnFeed(Base):
                 continue
 
         return root
+
+
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-google-editors-picks',
+    host_restriction='newsfeed')
+class GoogleEditorsPicksFeed(Base):
+
+    def __call__(self):
+        if self.context.uniqueId != 'http://xml.zeit.de/'\
+                'administratives/google-editors-picks-feed':
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+        return super(GoogleEditorsPicksFeed, self).__call__()
+
+    def build_feed(self):
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        protocol = 'https' if toggles.find('https') else 'http'
+        homepage_link = '{}://www.zeit.de/index'.format(protocol)
+        publisher_logo = '{}://www.zeit.de/static/latest/images/{}'.format(
+            protocol,
+            'structured-data-publisher-logo-zon.png')  # fuck PEP8
+
+        e = ELEMENT_MAKER
+        en = ELEMENT_NS_MAKER
+        root = e('rss', version='2.0')
+
+        channel = e(
+            'channel',
+            e('title', 'ZEIT ONLINE Newsfeed for Google Editors Picks'),
+            e('link', homepage_link),
+            e('description',
+                u'Selection of original content for Googles “Editor’s Picks”'),
+            e('language', 'de'),
+            e('copyright',
+              'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+            e('generator', 'zeit.web {}'.format(
+                self.request.registry.settings.version)),
+            # TODO: <lastBuildDate>Tue, 21 Nov 2017 10:00:47 GMT</>
+            e('lastBuildDate', 'TODO'),
+            e(
+                'image',
+                e('url', publisher_logo),
+                e('title', 'ZEIT ONLINE Logo'),
+                e('link', homepage_link)
+            )
+        )
+        root.append(channel)
+
+        for index, content in enumerate(self.items):
+            try:
+                content_url = zeit.web.core.template.create_url(
+                    None, content, self.request)
+                content_url = create_public_url(content_url)
+
+                item = e(
+                    'item',
+                    e('title', self.make_title(content)),
+                    e('link', content_url),
+                    e('description', content.teaserText or content.subtitle),
+                    # TODO: Ressort or Kicker/Category (old Feed)?
+                    # E('category', content.ressort)
+                    e('category', content.supertitle)
+                )
+
+                author = u', '.join(self.make_author_list(content))
+                if author:
+                    item.append(e('author', author))
+                else:
+                    item.append(e('author', 'ZEIT ONLINE Redaktion'))
+
+                channel.append(item)
+
+                if len(channel.findall('item')) >= 5:
+                    break
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
+                continue
+
+        return root
