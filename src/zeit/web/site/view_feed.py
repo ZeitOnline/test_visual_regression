@@ -725,9 +725,11 @@ class GoogleEditorsPicksFeed(Base):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
         protocol = 'https' if toggles.find('https') else 'http'
         homepage_link = '{}://www.zeit.de/index'.format(protocol)
+        # the logo file must meet certain conditions
+        # https://support.google.com/news/publisher/answer/1407682?hl=en
         publisher_logo = '{}://www.zeit.de/static/latest/images/{}'.format(
             protocol,
-            'structured-data-publisher-logo-zon.png')  # fuck PEP8
+            'google-editors-picks-logo-zon.png')  # fuck PEP8
 
         e = ELEMENT_MAKER
         # en = ELEMENT_NS_MAKER
