@@ -9,4 +9,9 @@ import zeit.web
 class Link(zeit.web.core.view.Content):
 
     def __call__(self):
-        return pyramid.httpexceptions.HTTPMovedPermanently(self.context.url)
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        url = self.context.url
+
+        if toggles.find('https'):
+            url = zeit.web.core.utils.maybe_convert_http_to_https(url)
+        return pyramid.httpexceptions.HTTPMovedPermanently(url)

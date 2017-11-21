@@ -6,7 +6,7 @@ import zeit.cms.interfaces
 import zeit.web.core.template
 
 
-def test_link_object_should_redirect_permanently(testbrowser):
+def test_link_object_should_redirect_permanently(testbrowser, monkeypatch):
     browser = testbrowser()
     browser.mech_browser.set_handle_redirect(False)
     try:
@@ -14,6 +14,17 @@ def test_link_object_should_redirect_permanently(testbrowser):
     except urllib2.HTTPError, e:
         assert (
             'http://blog.zeit.de/nsu-prozess-blog/2015/02/25'
+            '/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/' ==
+            e.hdrs.get('location'))
+
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'https': True}.get)
+
+    try:
+        browser.open('/blogs/nsu-blog-bouffier')
+    except urllib2.HTTPError, e:
+        assert (
+            'https://blog.zeit.de/nsu-prozess-blog/2015/02/25'
             '/medienlog-zwickau-zschaepe-yozgat-verfassungsschutz-bouffier/' ==
             e.hdrs.get('location'))
 
