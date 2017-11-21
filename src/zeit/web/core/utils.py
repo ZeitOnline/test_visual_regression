@@ -7,6 +7,8 @@ import urlparse
 import jinja2
 import zope.component
 
+import zeit.web.core.interfaces
+
 
 unset = object()
 
@@ -286,3 +288,17 @@ def dump_request(response):
     headers = " -H ".join(headers)
     return command.format(
         method=method, headers=headers, data=data, uri=uri)
+
+
+def maybe_convert_http_to_https(url):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    rewrite_https_links = conf['transform_to_secure_links_for']
+    scheme, netloc, path, params, query, fragments = urlparse.urlparse(url)
+    if scheme != 'http':
+        return url
+    if netloc not in rewrite_https_links:
+        return url
+    metrics = zope.component.getUtility(zeit.web.core.interfaces.IMetrics)
+    metrics.increment('protocol_converted')
+    return urlparse.urlunparse(('https', netloc, path, params, query,
+                               fragments))
