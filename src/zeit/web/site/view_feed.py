@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import calendar
 import datetime
+import dateutil.parser
 import email
 import logging
 import pytz
@@ -44,6 +45,11 @@ def ELEMENT_NS_MAKER(namespace, tagname, *args, **kw):
 
 def format_rfc822_date(date):
     return email.utils.formatdate(calendar.timegm(date.timetuple()))
+
+
+def format_rfc822_date_gmt(date):
+    return email.utils.formatdate(calendar.timegm(
+        date.timetuple()), usegmt=True)
 
 
 def format_iso8601_date(date):
@@ -192,10 +198,10 @@ class Newsfeed(Base):
                     description = (
                         u'<a href="{}"><img style="float:left; '
                         'margin-right:5px" src="{}"></a> {}').format(
-                            content_url,
-                            '{}/{}'.format(
-                                self.request.image_host, variant.lstrip('/')),
-                            content.teaserText)
+                        content_url,
+                        '{}/{}'.format(
+                            self.request.image_host, variant.lstrip('/')),
+                        content.teaserText)
 
                 item = E(
                     'item',
@@ -685,6 +691,121 @@ class MsnFeed(Base):
                         content, self.__class__.__name__, exc_info=True)
 
                 channel.append(item)
+            except:
+                log.warning(
+                    'Error adding %s to %s',
+                    content, self.__class__.__name__, exc_info=True)
+                continue
+
+        return root
+
+
+@zeit.web.view_config(
+    context=zeit.content.cp.interfaces.ICenterPage,
+    name='rss-google-editors-picks',
+    host_restriction='newsfeed')
+class GoogleEditorsPicksFeed(Base):
+
+    def __call__(self):
+        if self.context.uniqueId != 'http://xml.zeit.de/'\
+                'administratives/google-editors-picks-feed':
+            raise pyramid.httpexceptions.HTTPNotFound()
+
+        return super(GoogleEditorsPicksFeed, self).__call__()
+
+    @property
+    def items(self):
+        reach = zope.component.getUtility(zeit.web.core.interfaces.IReach)
+        # fetch 10, in case some get sorted out later (wrong series/product)
+        articles = reach.get_views(section=None, limit=10)
+
+        for item in articles:
+            metadata = zeit.cms.content.interfaces.ICommonMetadata(item, None)
+            if metadata is None:
+                log.info('%s ignoring %s, no ICommonMetadata',
+                         item, self.__class__.__name__)
+                continue
+            yield item
+
+    def build_feed(self):
+        toggles = zeit.web.core.application.FEATURE_TOGGLES
+        protocol = 'https' if toggles.find('https') else 'http'
+        homepage_link = '{}://www.zeit.de/index'.format(protocol)
+        feed_title = 'ZEIT ONLINE Newsfeed for Google Editors Picks'
+        # the logo file must meet certain conditions
+        # https://support.google.com/news/publisher/answer/1407682?hl=en
+        publisher_logo = '{}://www.zeit.de/static/latest/images/{}'.format(
+            protocol,
+            'google-editors-picks-logo-zon.png')  # fuck PEP8
+        build_date = format_rfc822_date_gmt(datetime.datetime.today())
+
+        e = ELEMENT_MAKER
+        en = ELEMENT_NS_MAKER
+        root = e('rss', version='2.0')
+
+        channel = e(
+            'channel',
+            e('title', feed_title),
+            e('link', homepage_link),
+            e('description',
+                u'Selection of original content for Googles “Editor’s Picks”'),
+            e('language', 'de'),
+            e('copyright',
+              'Copyright ZEIT ONLINE GmbH. Alle Rechte vorbehalten'),
+            e('generator', 'zeit.web {}'.format(
+                self.request.registry.settings.version)),
+            e('lastBuildDate', build_date),
+            e(
+                'image',
+                e('url', publisher_logo),
+                e('title', feed_title),  # must match the channel title
+                e('link', homepage_link)
+            ),
+            en(
+                'atom',
+                'link',
+                rel='self',
+                href=self.request.url.decode('utf-8'),
+                type=self.request.response.content_type
+            )
+        )
+        root.append(channel)
+
+        for index, content in enumerate(self.items):
+
+            try:
+                prod = content.product.id
+                if prod != 'ZEI' and prod != 'ZEDE':
+                    continue
+
+                content_url = zeit.web.core.template.create_url(
+                    None, content, self.request)
+                content_url = create_public_url(content_url)
+
+                pubdate_string = first_released(content)
+                pubdate_object = dateutil.parser.parse(pubdate_string)
+                pubdate_output = format_rfc822_date_gmt(pubdate_object)
+
+                item = e(
+                    'item',
+                    e('title', self.make_title(content)),
+                    e('link', content_url),
+                    e('description', content.teaserText or content.subtitle),
+                    e('pubDate', pubdate_output),
+                    e('guid', content.uniqueId, isPermaLink='false'),
+                    e('category', content.ressort)
+                )
+
+                author = u', '.join(self.make_author_list(content))
+                if not author:
+                    author = 'ZEIT ONLINE Redaktion'
+                if author:
+                    item.append(en('dc', 'creator', author))
+
+                channel.append(item)
+
+                if len(channel.findall('item')) >= 5:
+                    break
             except:
                 log.warning(
                     'Error adding %s to %s',
