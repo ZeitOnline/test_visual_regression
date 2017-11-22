@@ -772,7 +772,12 @@ class GoogleEditorsPicksFeed(Base):
         root.append(channel)
 
         for index, content in enumerate(self.items):
+
             try:
+                prod = content.product.id
+                if prod != 'ZEI' and prod != 'ZEDE':
+                    continue
+
                 content_url = zeit.web.core.template.create_url(
                     None, content, self.request)
                 content_url = create_public_url(content_url)
