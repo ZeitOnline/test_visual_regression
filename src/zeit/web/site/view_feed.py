@@ -792,11 +792,9 @@ class GoogleEditorsPicksFeed(Base):
                     e('link', content_url),
                     e('description', content.teaserText or content.subtitle),
                     e('pubDate', pubdate_output),
-                    e('guid', content.uniqueId, isPermaLink='false')
+                    e('guid', content.uniqueId, isPermaLink='false'),
+                    e('category', content.ressort)
                 )
-
-                if content.ressort:
-                    item.append(e('category', content.ressort))
 
                 author = u', '.join(self.make_author_list(content))
                 if not author:
