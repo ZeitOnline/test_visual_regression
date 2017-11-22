@@ -53,28 +53,15 @@
     </head>
     <body>
         <title>Google Editors Picks RSS Feed</title>
-    <cluster area="feature" visible="True" visible_mobile="True">
-      <region area="lead" visible="True" visible_mobile="True" hide-dupes="True" count="16" automatic="True" automatic_type="query">
-        <raw_query>type:article</raw_query>
-        <raw_order>date-first-released desc</raw_order>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-2aa426fe-d0cd-4b37-a928-b828b7dd84d9"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-04371432-230d-4cab-bb64-73e82ee1c473"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-ffcc3a15-ffde-477f-960b-56d06aeb3e62"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-d467c8bf-8222-4b11-9215-efbe66de802e"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b21b2c59-c247-4b98-b744-fd787a4980cb"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-5444942d-8d65-4dad-9033-8fc282f2c41a"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-6a9b9828-6862-4f45-baf6-b259d935bafc"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-88ac0050-7767-493a-ab35-d179403633a2"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-d3e72681-02eb-47f5-8c7a-ec66c967378f"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-73b25b86-1132-45ad-a33d-1a768e49b24c"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-7bbae1ee-48bf-4d29-8967-6f23cd90aaa1"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-d23ee42d-afbc-4af2-a580-c8cfe99c2303"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-af277d38-5631-4658-8dfd-f5e324120dfe"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-a7f9703d-0c20-41e3-aac2-137d4d56a5bb"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-34ea22a8-bf67-4d25-b428-cc8cb59be1ae"/>
-        <container cp:type="auto-teaser" module="zon-small" visible="True" visible_mobile="True" cp:__name__="id-b6f6d361-6496-405b-8432-a17ea3675e15"/>
-      </region>
-    </cluster>
+        <cluster visible="True" visible_mobile="True" area="id-4b2de7e8-f2d8-4ad5-91c5-7f7f22e637dd" kind="solo" kind_title="Solo">
+          <region visible="True" visible_mobile="True" hide-dupes="True" area="id-7ad8e047-b829-48a5-9f31-dc4b09c1c71f" kind="solo">
+            <container cp:type="markup" module="markup" visible="True" visible_mobile="True" cp:__name__="id-b5154feb-de37-4e47-9dcf-dbbb49350764" align="left">
+              <text>
+                <p>Dieser Artikel funktioniert nur über die Adresse "/administratives/google-editors-picks-feed/rss-google-editors-picks". Der rss-Suffix triggert die Feed-View, welche Inhalte aus Reach zieht und als RSS Feed ausgibt. Der Artikel dient quasi als Gerüst, damit überhaupt eine URL zur Verfügung steht.</p>
+              </text>
+            </container>
+          </region>
+        </cluster>
 
     </body>
     <feed/>
