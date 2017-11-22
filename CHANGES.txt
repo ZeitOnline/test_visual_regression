@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-4347: Mark all non-free content with json-ld
 
+- ZON-4363: Unify semantic type for articles (schema.org markup)
+
 - SSL-40: Transform https links in cp markup modules
 
 - BUG-803: Fix padding for search counter
