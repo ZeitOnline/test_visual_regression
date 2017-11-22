@@ -795,10 +795,8 @@ class GoogleEditorsPicksFeed(Base):
                     e('guid', content.uniqueId, isPermaLink='false')
                 )
 
-                if content.supertitle:
-                    # TODO: Ressort or Kicker/Category (old Feed)?
-                    # E('category', content.ressort)
-                    e('category', content.supertitle),
+                if content.ressort:
+                    item.append(e('category', content.ressort))
 
                 author = u', '.join(self.make_author_list(content))
                 if not author:
