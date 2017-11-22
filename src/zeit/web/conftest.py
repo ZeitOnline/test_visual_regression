@@ -885,9 +885,22 @@ MockSolr.timeout = property(
     zeit.web.core.solr.solr_timeout_from_settings, lambda self, value: None)
 
 
-class MockSitemapSolr(MockSolr, zeit.web.core.solr.SitemapSolrConnection):
+class MockSitemapSolr(MockSolr):
 
     zope.interface.implements(zeit.web.core.solr.ISitemapSolrConnection)
+
+    def __init__(self):
+        self._sitemap_sorl = zeit.web.core.solr.SitemapSolrConnection()
+        super(MockSitemapSolr, self).__init__()
+
+    @property
+    def timeout(self):
+        # Delegate to non mocked sitemap solr object
+        return self._sitemap_sorl.timeout
+
+    @timeout.setter
+    def timeout(self, value):
+        pass
 
 
 @pytest.fixture

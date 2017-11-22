@@ -230,7 +230,9 @@ def test_gsitemap_appcon(monkeypatch, testbrowser):
         'nsu-blog-bouffier')
 
 
-def test_sitemap_solr_uses_different_timeout_then_normal_solr(testbrowser):
+def test_gsitemap_solr_uses_different_timeout_than_normal_solr(testbrowser):
+    # use global sitemanager, it might have been manipulated before
+    zope.component.hooks.setSite()
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
     old_timeout = solr.timeout
     testbrowser('/gsitemaps/appconsitemap.xml?p=1')
