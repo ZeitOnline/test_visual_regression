@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import calendar
 import datetime
+import dateutil.parser
 import email
 import logging
 import pytz
@@ -44,6 +45,11 @@ def ELEMENT_NS_MAKER(namespace, tagname, *args, **kw):
 
 def format_rfc822_date(date):
     return email.utils.formatdate(calendar.timegm(date.timetuple()))
+
+
+def format_rfc822_date_gmt(date):
+    return email.utils.formatdate(calendar.timegm(
+        date.timetuple()), usegmt=True)
 
 
 def format_iso8601_date(date):
@@ -725,12 +731,13 @@ class GoogleEditorsPicksFeed(Base):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
         protocol = 'https' if toggles.find('https') else 'http'
         homepage_link = '{}://www.zeit.de/index'.format(protocol)
+        feed_title = 'ZEIT ONLINE Newsfeed for Google Editors Picks'
         # the logo file must meet certain conditions
         # https://support.google.com/news/publisher/answer/1407682?hl=en
         publisher_logo = '{}://www.zeit.de/static/latest/images/{}'.format(
             protocol,
             'google-editors-picks-logo-zon.png')  # fuck PEP8
-        build_date = format_rfc822_date(datetime.datetime.today())
+        build_date = format_rfc822_date_gmt(datetime.datetime.today())
 
         e = ELEMENT_MAKER
         en = ELEMENT_NS_MAKER
@@ -738,7 +745,7 @@ class GoogleEditorsPicksFeed(Base):
 
         channel = e(
             'channel',
-            e('title', 'ZEIT ONLINE Newsfeed for Google Editors Picks'),
+            e('title', feed_title),
             e('link', homepage_link),
             e('description',
                 u'Selection of original content for Googles “Editor’s Picks”'),
@@ -751,8 +758,15 @@ class GoogleEditorsPicksFeed(Base):
             e(
                 'image',
                 e('url', publisher_logo),
-                e('title', 'ZEIT ONLINE Logo'),
+                e('title', feed_title),  # must match the channel title
                 e('link', homepage_link)
+            ),
+            en(
+                'atom',
+                'link',
+                rel='self',
+                href=self.request.url.decode('utf-8'),
+                type=self.request.response.content_type
             )
         )
         root.append(channel)
@@ -763,16 +777,23 @@ class GoogleEditorsPicksFeed(Base):
                     None, content, self.request)
                 content_url = create_public_url(content_url)
 
+                pubdate_string = first_released(content)
+                pubdate_object = dateutil.parser.parse(pubdate_string)
+                pubdate_output = format_rfc822_date_gmt(pubdate_object)
+
                 item = e(
                     'item',
                     e('title', self.make_title(content)),
                     e('link', content_url),
                     e('description', content.teaserText or content.subtitle),
+                    e('pubDate', pubdate_output),
+                    e('guid', content.uniqueId, isPermaLink='false')
+                )
+
+                if content.supertitle:
                     # TODO: Ressort or Kicker/Category (old Feed)?
                     # E('category', content.ressort)
                     e('category', content.supertitle),
-                    e('pubDate', first_released(content))
-                )
 
                 author = u', '.join(self.make_author_list(content))
                 if not author:
