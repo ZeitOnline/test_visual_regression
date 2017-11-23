@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - SSL-59: Use different sorl connection for gsitemaps
 
+- SSL-39: Handle link and location target of vivi link objects
+
 
 3.112 (2017-11-23)
 ------------------
