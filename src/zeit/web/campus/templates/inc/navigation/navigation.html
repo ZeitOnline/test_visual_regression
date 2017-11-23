@@ -22,6 +22,7 @@
 </div>
 
 <div class="nav" id="navigation" data-ct-row="1">
+    {% set vertical_campaign_param_long = 'zcampus' %}
     {%- include "zeit.web.core:templates/inc/navigation/navigation-vertical.html" -%}
     <div class="nav__login" {% if view.framebuilder_loginstatus_disabled %} data-featuretoggle="disable-loginstatus"{% endif %}>
         {% block login %}
