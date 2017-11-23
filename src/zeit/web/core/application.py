@@ -118,6 +118,8 @@ class Application(object):
             'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
             weighs_more_than=('traverse',))
 
+        # For every new request, the site manager is reset. It might have been
+        # modified at runtime, e.g. another solr utility was registered
         config.add_subscriber(register_standard_site_manager,
                               pyramid.interfaces.INewRequest)
 
