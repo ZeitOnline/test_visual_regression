@@ -12,6 +12,7 @@ import pyramid.threadlocal
 import pysolr
 import requests.sessions
 import zope.component
+import zope.site.site
 
 import zeit.cms.workflow.interfaces
 import zeit.solr.interfaces
@@ -42,8 +43,56 @@ pysolr.Solr._scrape_response = scrape_response_nonascii
 def solr_timeout_from_settings(self):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     return conf.get('solr_timeout', 5)
-pysolr.Solr.timeout = property(
+zeit.solr.connection.SolrConnection.timeout = property(
     solr_timeout_from_settings, lambda self, value: None)
+
+
+class ISitemapSolrConnection(zeit.solr.interfaces.ISolr):
+    """
+    Solr connection which handles requests for sitemaps.
+    """
+
+
+@zope.interface.implementer(ISitemapSolrConnection)
+class SitemapSolrConnection(zeit.solr.connection.SolrConnection):
+
+    """
+    This solr connection uses a different timeout,
+    which is necessary for generating sitemaps.
+    """
+
+    def __init__(self):
+        config = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        url = config.get('vivi_zeit.solr_solr-url')
+        self.ignore_search_errors = bool(
+            config.get('solr-ignore-search-errors'))
+        super(SitemapSolrConnection, self).__init__(url)
+
+    @property
+    def timeout(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        return conf.get('solr_sitemap_timeout', 10)
+
+    # We need this setter because psysolr.Solr wants to set the timeout
+    # in its __init__
+    @timeout.setter
+    def timeout(self, value):
+        pass
+
+
+def register_sitemap_solr_utility():
+    """
+    Register the ISitemapSolrConnection utility as ISolr utility.
+    """
+    # Dont use the gsm
+    site = zope.site.site.SiteManagerContainer()
+    registry = zope.component.globalregistry.BaseGlobalComponents(
+        name='sitemaps_manager',
+        bases=(zope.component.getSiteManager(),))
+    sitemap_solr = zope.component.getUtility(ISitemapSolrConnection)
+    site.setSiteManager(registry)
+    registry.registerUtility(sitemap_solr, zeit.solr.interfaces.ISolr)
+    zope.component.hooks.setSite(site)
 
 
 def solr_send_request_with_referrer(self, *args, **kw):
