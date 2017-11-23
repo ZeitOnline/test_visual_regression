@@ -239,6 +239,9 @@ def app_settings(mockserver):
         'vivi_zeit.content.author_biography-questions':
             'egg://zeit.web.core/data/config/author-biography-questions.xml',
         'vivi_zeit.cms_celery-config': '/dev/null',
+        'vivi_zeit.brightcove_playback-url': mockserver.url + '/brightcove',
+        'vivi_zeit.brightcove_playback-policy-key': 'None',
+        'vivi_zeit.brightcove_playback-timeout': '2',
         'sso_activate': '',
         'sso_url': 'http://sso.example.org',
         'sso_cookie': 'my_sso_cookie',
