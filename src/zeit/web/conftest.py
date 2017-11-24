@@ -189,6 +189,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
         'vivi_zeit.web_navigation-source': (
             'egg://zeit.web.core/data/config/navigation.xml'),
+        'vivi_zeit.web_navigation-more-source': (
+            'egg://zeit.web.core/data/config/navigation-more.xml'),
         'vivi_zeit.web_navigation-services-source': (
             'egg://zeit.web.core/data/config/navigation-services.xml'),
         'vivi_zeit.web_navigation-classifieds-source': (

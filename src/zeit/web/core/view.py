@@ -356,6 +356,11 @@ class Base(object):
         return src.navigation
 
     @zeit.web.reify
+    def navigation_more(self):
+        src = zeit.web.core.navigation.NAVIGATION_MORE_SOURCE
+        return src.navigation
+
+    @zeit.web.reify
     def title(self):
         if not self.context.title:
             return ''
