@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 import zeit.web.site.view
 
+import jwt
+import zope.component
+
 
 def test_framebuilder_should_set_ressort(application, dummy_request):
     dummy_request.GET['ressort'] = 'kultur'
@@ -361,3 +364,80 @@ def test_framebuilder_uses_ssl_assets(testbrowser):
     assert '{}js/vendor/modernizr-custom.js'.format(
         ssl_str) in browser.contents
     assert '{}js/web.site/frame.js'.format(ssl_str) in browser.contents
+
+
+# needs selenium because of esi include
+def test_framebuilder_does_not_render_login_data(
+        selenium_driver, testserver, sso_keypair):
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+
+    # add_cookie() only works for the domain of the last get(), sigh.
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    driver.add_cookie({'name': 'my_sso_cookie', 'value': sso_cookie})
+
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    assert len(select('.nav__user-name')) == 1
+
+    # 'my_sso_cookie' is a dummy cookie an does not trigger the JS DOM
+    # manipulation injecting the login data.
+    # We test, if user data is not exposed in actual frambuilder source HTML.
+    # We just can't do anything about it if someone copies interpreted frame
+    # HTML from DevTools - well, we could, but we won't for now.
+    driver.get('{}/framebuilder'.format(testserver.url))
+    assert len(select('.nav__user-name')) == 0
+
+
+def test_framebuilder_renders_login_data(
+        selenium_driver, testserver, sso_keypair):
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+
+    # add_cookie() only works for the domain of the last get(), sigh.
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    driver.add_cookie({'name': 'zeit_sso_201501', 'value': sso_cookie})
+
+    # 'zeit_sso_201501' is the actual real-life Cookie
+    # login-data is displayed
+    driver.get('{}/framebuilder'.format(testserver.url))
+    assert len(select('.nav__user-name')) == 1
+
+    # ... and test if the featuretoggle is set if requested
+    assert len(select('.nav__login')) == 1
+    assert not select('.nav__login')[0].get_attribute('data-featuretoggle')
+    driver.get('{}/framebuilder?loginstatus_disabled'.format(testserver.url))
+    assert select('.nav__login')[0].get_attribute(
+        'data-featuretoggle') == 'disable-loginstatus'
+    assert len(select('.nav__user-name')) == 0
+
+
+def test_framebuilder_renders_login_data_if_new_feature_is_requested(
+        selenium_driver, togglepatch, testserver, sso_keypair):
+    togglepatch({'framebuilder_loginstatus_disabled': True})
+    driver = selenium_driver
+    select = driver.find_elements_by_css_selector
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    conf['sso_key'] = sso_keypair['public']
+    sso_cookie = jwt.encode(
+        {'id': 'ssoid'}, sso_keypair['private'], 'RS256')
+
+    # add_cookie() only works for the domain of the last get(), sigh.
+    driver.get('{}/zeit-online/article/simple'.format(testserver.url))
+    driver.add_cookie({'name': 'zeit_sso_201501', 'value': sso_cookie})
+
+    # ... and set if it can be enforced, even if disabled in feature toggles
+    driver.get('{}/framebuilder?loginstatus_enforced'.format(testserver.url))
+    assert len(select('.nav__login')) == 1
+    assert not select('.nav__login')[0].get_attribute('data-featuretoggle')
+    assert len(select('.nav__user-name')) == 1

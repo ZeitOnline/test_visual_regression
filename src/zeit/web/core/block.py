@@ -26,6 +26,7 @@ import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.metrics
 import zeit.web.core.template
+import zeit.web.core.utils
 
 
 DEFAULT_TERM_CACHE = zeit.web.core.cache.get_region('default_term')
@@ -479,14 +480,6 @@ class Video(Module):
             return None
         return self.context.layout
 
-    @zeit.web.reify
-    def highest_rendition(self):
-        if self.renditions:
-            high = sorted(self.renditions, key=lambda r: r.frame_width).pop()
-            return getattr(high, 'url', '')
-        else:
-            logging.warning('No video renditions found in %s', self.video)
-
 
 @grokcore.component.adapter(
     zeit.content.article.edit.interfaces.IVideo,
@@ -730,6 +723,22 @@ def _raw_html(xml):
 def _inline_html(xml, elements=None):
 
     home_url = "http://www.zeit.de/"
+    # Replace 'http' with 'https' for inline links.
+    # If all content is migrated, we can delete this code
+    additional_xslt = ""
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('https'):
+        ns = lxml.etree.FunctionNamespace(
+            'http://namespaces.zeit.de/functions')
+        ns['maybe-convert-url'] = (
+            lambda x, y: zeit.web.core.utils.maybe_convert_http_to_https(y[0]))
+        additional_xslt = """
+        <xsl:template match="a/@href">
+            <xsl:attribute name="href">
+                <xsl:value-of select="f:maybe-convert-url(.)" />
+            </xsl:attribute>
+        </xsl:template>
+        """
 
     try:
         request = pyramid.threadlocal.get_current_request()
@@ -743,7 +752,8 @@ def _inline_html(xml, elements=None):
         allowed_elements = '|'.join(elements)
     filter_xslt = lxml.etree.XML("""
         <xsl:stylesheet version="1.0"
-            xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+            xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+            xmlns:f="http://namespaces.zeit.de/functions">
             <xsl:output method="html"
                         omit-xml-declaration="yes" />
           <!-- Semantische HTML-ELemente übernehmen -->
@@ -819,7 +829,8 @@ def _inline_html(xml, elements=None):
                     <xsl:apply-templates />
                 </a>
           </xsl:template>
-        </xsl:stylesheet>""" % (allowed_elements, home_url))
+          %s
+        </xsl:stylesheet>""" % (allowed_elements, home_url, additional_xslt))
     try:
         transform = lxml.etree.XSLT(filter_xslt)
         return transform(xml)

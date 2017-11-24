@@ -9,6 +9,7 @@ import zeit.content.cp.interfaces
 import zeit.web
 import zeit.web.core.interfaces
 import zeit.web.core.centerpage
+import zeit.web.core.solr
 import zeit.web.core.view
 import zeit.web.core.utils
 
@@ -54,7 +55,7 @@ class AreaProvidingPaginationMixin(object):
 
         # Prevent continuation pages from being indexed
         if area and area.current_page > 1:
-            return 'noindex,follow,noodp,noydir,noarchive'
+            return 'noindex,follow,noarchive'
         return super(AreaProvidingPaginationMixin, self).meta_robots
 
     @zeit.web.reify
@@ -305,3 +306,4 @@ class Sitemap(Centerpage):
     def __init__(self, context, request):
         super(Sitemap, self).__init__(context, request)
         self.request.response.content_type = 'application/xml'
+        zeit.web.core.solr.register_sitemap_solr_utility()

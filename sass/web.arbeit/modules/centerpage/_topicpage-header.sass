@@ -27,6 +27,7 @@
 .topicpage-header + .markup
 	+padded
 	margin: 0 auto
+	padding-bottom: 0 // because the first teaser has margin-top
 	max-width: $medium-content-width
 	text-align: center
 
@@ -41,4 +42,11 @@
 		width: remify(2px)
 		+respond-min($break-tablet-min)
 			height: remify(60px)
+			margin-bottom: 0 // because the first teaser has margin-top
 			width: remify(1px)
+
+// reduce margin if there is a header image
+.topicpage-headerimage__media + .topicpage-header > .topicpage-header__heading
+	margin-top: remify(20px)
+	+respond-min($break-tablet-min)
+		margin-top: remify(40px)

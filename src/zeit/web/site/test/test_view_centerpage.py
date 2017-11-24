@@ -749,11 +749,11 @@ def test_canonical_ruleset_on_ranking_pages(testbrowser, datasolr):
 def test_robots_rules_for_paginated_centerpages(testbrowser):
     browser = testbrowser('/dynamic/umbrien')
     assert browser.xpath('//meta[@name="robots"]/@content')[0] == (
-        'index,follow,noodp,noydir,noarchive')
+        'index,follow,noarchive')
 
     browser = testbrowser('/dynamic/umbrien?p=2')
     assert browser.xpath('//meta[@name="robots"]/@content')[0] == (
-        'noindex,follow,noodp,noydir,noarchive')
+        'noindex,follow,noarchive')
 
 
 def test_robots_rules_for_angebote_paths(application):
@@ -764,12 +764,12 @@ def test_robots_rules_for_angebote_paths(application):
     # usual angebot
     request.path = '/angebote/immobilien/test'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,nofollow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'index,nofollow,noarchive'
 
     # partnersuche
     request.path = '/angebote/partnersuche/test'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
 
 def test_robots_rules_for_diverse_paths(application):
@@ -781,27 +781,27 @@ def test_robots_rules_for_diverse_paths(application):
     # test folder
     request.path = '/test/foo'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
     # templates folder
     request.path = '/templates/article-01'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
     # banner folder
     request.path = '/banner/iqd'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
     # autoren folder
     request.path = '/autoren/register/A'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
     # any folder
     request.path = '/any/article-01'
     view = zeit.web.site.view_centerpage.Centerpage(cp, request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
 
 def test_meta_rules_for_keyword_paths(application):
@@ -2770,7 +2770,7 @@ def test_volume_overview_has_correct_pagination(testbrowser):
     assert current.text_content() == '2015'
 
     meta_robots = browser.cssselect('head meta[name="robots"]')[0]
-    meta_robots.get('content') == 'index,follow,noodp,noydir,noarchive'
+    meta_robots.get('content') == 'index,follow,noarchive'
 
 
 def test_hpoverlay_settings_toggles_html_output(testbrowser):
@@ -2937,3 +2937,18 @@ def test_cp_should_not_include_itunes_smart_app_banner(testbrowser):
     browser = testbrowser('/zeit-online/centerpage/centerpage')
     app_banner_id = browser.cssselect('meta[name="apple-itunes-app"]')
     assert len(app_banner_id) == 0
+
+
+def test_zar_parquet_is_rendering(testbrowser):
+    browser = testbrowser('/zeit-online/parquet')
+
+    zar_parquet = browser.cssselect('.cp-area--zar-parquet')[0]
+    title = zar_parquet.cssselect('.parquet-meta__title')
+    logo = zar_parquet.cssselect('.parquet-meta__logo')
+    teaser = zar_parquet.cssselect('article')
+    more_link = zar_parquet.cssselect('.parquet-meta__more-link')
+
+    assert len(title)
+    assert len(logo)
+    assert len(more_link)
+    assert len(teaser) == 3

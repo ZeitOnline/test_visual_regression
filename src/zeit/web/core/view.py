@@ -306,7 +306,7 @@ class Base(object):
         seo = zeit.seo.interfaces.ISEO(self.context, None)
         if seo and seo.meta_robots:
             return seo.meta_robots
-        return 'index,follow,noodp,noydir,noarchive'
+        return 'index,follow,noarchive'
 
     @zeit.web.reify
     def adwords(self):
@@ -329,7 +329,7 @@ class Base(object):
     @zeit.web.reify
     def js_toggles(self):
         toggles = zeit.web.core.application.FEATURE_TOGGLES
-        names = ('update_signals', 'https')
+        names = ('update_signals', 'https', 'track_gate_visibility')
         return [(name, toggles.find(name)) for name in names]
 
     @zeit.web.reify
@@ -1201,6 +1201,15 @@ class FrameBuilder(zeit.web.core.paywall.CeleraOneMixin):
     @zeit.web.reify
     def framebuilder_has_login(self):
         return 'login' in self.request.GET
+
+    @zeit.web.reify
+    def framebuilder_loginstatus_disabled(self):
+        # This (featuretoggle and GET param) is double-negative, so we can
+        # remove everything as soon as we do not need the safety net any longer
+        return (zeit.web.core.application.FEATURE_TOGGLES.find(
+            'framebuilder_loginstatus_disabled') or (
+            'loginstatus_disabled' in self.request.GET)) and (
+            'loginstatus_enforced' not in self.request.GET)
 
     @zeit.web.reify
     def advertising_enabled(self):

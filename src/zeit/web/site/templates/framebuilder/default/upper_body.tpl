@@ -1,5 +1,5 @@
 </head>
-<body {% if toggles('zon_1000px') %}id="zon1000"{% endif -%}>
+<body>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
 

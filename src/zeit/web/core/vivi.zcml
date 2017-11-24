@@ -39,6 +39,10 @@
     <include package="zeit.content.infobox" />
     <include package="zeit.content.portraitbox" />
     <include package="zeit.content.video" />
+    <utility
+      provides="zeit.content.video.interfaces.IPlayer"
+      factory="zeit.brightcove.connection.playback_from_product_config"
+      />
     <include package="zeit.content.rawxml" />
     <include package="zeit.content.cp" />
     <include package="zeit.content.volume" />

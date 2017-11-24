@@ -5,13 +5,13 @@ import logging
 import re
 import urlparse
 
-import bugsnag
 import jinja2
 import jinja2.ext
 import pkg_resources
 import pyramid.authorization
 import pyramid.config
 import pyramid.renderers
+import pyramid.interfaces
 import pyramid_jinja2
 import pyramid_zodbconn
 import venusian
@@ -28,7 +28,6 @@ import zeit.cms.repository.repository
 import zeit.connector
 
 import zeit.web
-import zeit.web.core.bugsnag
 import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
@@ -53,6 +52,9 @@ class Application(object):
         self.settings.update(settings)
         self.settings['app_servers'] = filter(
             None, settings['app_servers'].split(','))
+        self.settings['transform_to_secure_links_for'] = (
+            settings.get(
+                'transform_to_secure_links_for', 'www.zeit.de')).split(',')
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
         self.settings['sso_key'] = self.load_sso_key(
@@ -62,9 +64,7 @@ class Application(object):
         zope.component.provideUtility(
             self.settings, zeit.web.core.interfaces.ISettings)
         self.configure()
-        app = self.config.make_wsgi_app()
-        # TODO: Try to move bugsnag middleware config to web.ini
-        return zeit.web.core.bugsnag.BugsnagMiddleware(app)
+        return self.config.make_wsgi_app()
 
     def load_sso_key(self, keyfile):
         if keyfile:
@@ -74,17 +74,6 @@ class Application(object):
     def configure(self):
         self.configure_zca()
         self.configure_pyramid()
-        self.configure_bugsnag()
-
-    def configure_bugsnag(self):
-        bugsnag.configure(
-            api_key=self.settings.get('bugsnag_token'),
-            project_root=pkg_resources.get_distribution('zeit.web').location,
-            app_version=self.settings.get('version'),
-            # Bugsnag UI displays the first letter, so "preview" is unhelpful.
-            notify_release_stages=['vorschau', 'production'],
-            release_stage=self.settings.get('environment', 'dev')
-        )
 
     def configure_pyramid(self):
         log.debug('Configuring Pyramid')
@@ -128,6 +117,11 @@ class Application(object):
         config.add_route_predicate(
             'host_restriction', zeit.web.core.routing.HostRestrictionPredicate,
             weighs_more_than=('traverse',))
+
+        # For every new request, the site manager is reset. It might have been
+        # modified at runtime, e.g. another solr utility was registered
+        config.add_subscriber(register_standard_site_manager,
+                              pyramid.interfaces.INewRequest)
 
         config.add_route('framebuilder', '/framebuilder')
         config.add_route('campus_framebuilder', '/campus/framebuilder')
@@ -240,6 +234,10 @@ class Application(object):
         self.jinja_env = env = self.config.get_jinja2_environment()
         env.finalize = zeit.web.core.jinja.finalize
         env.trim_blocks = True
+        # Roughly equivalent to `from __future__ import unicode_literals`,
+        # see <https://github.com/pallets/jinja/issues/392> and
+        # <http://jinja.pocoo.org/docs/2.10/api/#policies>.
+        env.policies['compiler.ascii_str'] = False
 
         default_loader = env.loader
         env.loader = zeit.web.core.jinja.PrefixLoader({
@@ -419,6 +417,14 @@ def configure_host(key):
         return request.route_url('home', _app_url=prefix).rstrip('/')
     wrapped.__name__ = key + '_host'
     return wrapped
+
+
+def register_standard_site_manager(event):
+    """
+    Because we might have changed zopes site manager
+    we want to reset it to the global site manager
+    """
+    zope.component.hooks.setSite()
 
 
 class FeatureToggleSource(zeit.cms.content.sources.SimpleContextualXMLSource):

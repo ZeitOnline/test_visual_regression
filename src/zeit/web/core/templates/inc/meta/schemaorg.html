@@ -1,0 +1,40 @@
+{% if view.context is zplus_content %}
+    <script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "@id": "{{ view.content_url }}",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ view.content_url }}"
+        },
+        "author": "{{ view.authors_list }}",
+        "datePublished": "{{ view.date_last_modified }}",
+        "headline": "{{ view.title }}",
+
+        {% require image = get_image(view.context, variant_id='wide', name='sharing', fallback=False) %}
+            {% set image_source = request.image_host + image.path + '__1300x731' -%}
+            "image": {
+                "@type": "ImageObject",
+                "url": "{{ image_source }}"
+            },
+        {% endrequire %}
+
+        "publisher": {
+            "@type": "Organization",
+            "name": "ZEIT ONLINE",
+            "url": "{{ request.route_url('home') }}index",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ request.asset_host }}/images/structured-data-publisher-logo-zon.png"
+            }
+        },
+        "isAccessibleForFree": "False",
+        "hasPart": {
+            "@type": "WebPageElement",
+            "isAccessibleForFree": "False",
+            "cssSelector" : "*[itemprop='articleBody']"
+        }
+    }
+    </script>
+{% endif %}

@@ -2,47 +2,52 @@
 import lxml.etree
 import zope.component
 
+import zeit.web.core.view_centerpage
 import zeit.solr.interfaces
+import zeit.web.core.solr
+
+
+def set_sitemap_solr_results(results):
+    solr = zope.component.getUtility(zeit.web.core.solr.ISitemapSolrConnection)
+    solr.results = results
 
 
 def test_gsitemap_overview_pagination(testbrowser):
     """total_pages is 2, look at count attribute in gsitemaps/index.xml"""
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/doc1'}]
+    set_sitemap_solr_results([{'uniqueId': 'http://xml.zeit.de/doc1'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 1
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/doc1'},
-                    {'uniqueId': 'http://xml.zeit.de/doc2'},
-                    {'uniqueId': 'http://xml.zeit.de/doc3'}]
+    set_sitemap_solr_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
+                              {'uniqueId': 'http://xml.zeit.de/doc2'},
+                              {'uniqueId': 'http://xml.zeit.de/doc3'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 2
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/doc1'},
-                    {'uniqueId': 'http://xml.zeit.de/doc2'},
-                    {'uniqueId': 'http://xml.zeit.de/doc3'},
-                    {'uniqueId': 'http://xml.zeit.de/doc4'}]
+    set_sitemap_solr_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
+                              {'uniqueId': 'http://xml.zeit.de/doc2'},
+                              {'uniqueId': 'http://xml.zeit.de/doc3'},
+                              {'uniqueId': 'http://xml.zeit.de/doc4'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 2
-    solr.results = [{'uniqueId': 'http://xml.zeit.de/doc1'},
-                    {'uniqueId': 'http://xml.zeit.de/doc2'},
-                    {'uniqueId': 'http://xml.zeit.de/doc3'},
-                    {'uniqueId': 'http://xml.zeit.de/doc4'},
-                    {'uniqueId': 'http://xml.zeit.de/doc5'},
-                    {'uniqueId': 'http://xml.zeit.de/doc6'},
-                    {'uniqueId': 'http://xml.zeit.de/doc7'},
-                    {'uniqueId': 'http://xml.zeit.de/doc8'},
-                    {'uniqueId': 'http://xml.zeit.de/doc9'},
-                    {'uniqueId': 'http://xml.zeit.de/doc10'},
-                    {'uniqueId': 'http://xml.zeit.de/doc11'}]
+    set_sitemap_solr_results([{'uniqueId': 'http://xml.zeit.de/doc1'},
+                              {'uniqueId': 'http://xml.zeit.de/doc2'},
+                              {'uniqueId': 'http://xml.zeit.de/doc3'},
+                              {'uniqueId': 'http://xml.zeit.de/doc4'},
+                              {'uniqueId': 'http://xml.zeit.de/doc5'},
+                              {'uniqueId': 'http://xml.zeit.de/doc6'},
+                              {'uniqueId': 'http://xml.zeit.de/doc7'},
+                              {'uniqueId': 'http://xml.zeit.de/doc8'},
+                              {'uniqueId': 'http://xml.zeit.de/doc9'},
+                              {'uniqueId': 'http://xml.zeit.de/doc10'},
+                              {'uniqueId': 'http://xml.zeit.de/doc11'}])
     browser = testbrowser('/gsitemaps/index.xml')
     assert len(browser.document.xpath('//sitemapindex/sitemap')) == 6
 
 
 def test_gsitemap_page_with_image_copyright(testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{
+    set_sitemap_solr_results([{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'filmstill-hobbit-schlacht-fuenf-hee/'],
-        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}]
+        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
     browser = testbrowser('/gsitemaps/index.xml?p=1')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/campus/article/01-countdown-studium')
@@ -65,10 +70,9 @@ def test_gsitemap_page_with_image_copyright(testbrowser):
 
 
 def test_gsitemap_page_without_image(testbrowser, monkeypatch):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{
+    set_sitemap_solr_results([{
         'uniqueId': 'http://xml.zeit.de/zeit-online/article/'
-        'article_with_broken_image_asset'}]
+                    'article_with_broken_image_asset'}])
     browser = testbrowser('/gsitemaps/index.xml?p=1')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/zeit-online/article/'
@@ -80,11 +84,10 @@ def test_gsitemap_page_without_image(testbrowser, monkeypatch):
 
 def test_gsitemap_page_does_not_break_without_image_caption(
         testbrowser, monkeypatch):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{
+    set_sitemap_solr_results([{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'filmstill-hobbit-schlacht-fuenf-hee/'],
-        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}]
+        'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
     monkeypatch.setattr(zeit.web.core.image.Image, 'caption', None)
     browser = testbrowser('/gsitemaps/index.xml?p=1')
     xml = lxml.etree.fromstring(browser.contents)
@@ -96,14 +99,13 @@ def test_gsitemap_page_does_not_break_without_image_caption(
 
 
 def test_gsitemap_newssite(testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{
+    set_sitemap_solr_results([{
         'image-base-id': ['http://xml.zeit.de/zeit-online/image/'
                           'crystal-meth-nancy-schmidt/'],
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
         'keyword': ['Schwangerschaft', 'Konsumverhalten'],
         'keyword_id': ['schwangerschaft', 'konsumverhalten']},
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'}]
+        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'}])
     browser = testbrowser('/gsitemaps/newsitemap.xml')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/zeit-magazin/article/autorenbox')
@@ -147,10 +149,9 @@ def test_gsitemap_newssite(testbrowser):
 
 
 def test_gsitemap_video(testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{
+    set_sitemap_solr_results([{
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
-    }]
+    }])
     browser = testbrowser('/gsitemaps/video.xml?p=1')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/video/2014-01/1953013471001')
@@ -161,8 +162,9 @@ def test_gsitemap_video(testbrowser):
         '//video:thumbnail_loc', namespaces=ns)[0].text)
     assert (
         xml.xpath('//video:content_loc', namespaces=ns)[0].text ==
-        'http://brightcove.vo.llnwd.net/pd16/media/18140073001/'
-        '18140073001_1953016536001_fotomomente-nordlichter.mp4')
+        'http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/3809/'
+        '18140073001_3094832002001_Aurora-Borealis--Northern-Lights--'
+        'Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4')
     assert (
         xml.xpath('//video:title', namespaces=ns)[0].text ==
         u'Foto-Momente: Die stille Schönheit der Polarlichter')
@@ -207,10 +209,10 @@ def test_gsitemap_themen_last_page(testbrowser):
 
 
 def test_gsitemap_appcon(monkeypatch, testbrowser):
-    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [
+    set_sitemap_solr_results([
         {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
-        {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}]
+        {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}
+    ])
     monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
     browser = testbrowser('/gsitemaps/appconsitemap.xml?p=1')
     assert (
@@ -226,3 +228,17 @@ def test_gsitemap_appcon(monkeypatch, testbrowser):
         xml.xpath('//xhtml:link/@href', namespaces=ns)[1] ==
         'android-app://de.zeit.online/http/blog.zeit.de/blogs/'
         'nsu-blog-bouffier')
+
+
+def test_gsitemap_solr_uses_different_timeout_than_normal_solr(testbrowser):
+    # use global sitemanager, it might have been manipulated before
+    zope.component.hooks.setSite()
+    solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    old_timeout = solr.timeout
+    testbrowser('/gsitemaps/appconsitemap.xml?p=1')
+    sitemap_solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    assert sitemap_solr.timeout != old_timeout
+    # request some random url which is not a sitemap
+    testbrowser('/zeit-online/article/portraitbox_inline')
+    newer_solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
+    assert newer_solr.timeout == old_timeout

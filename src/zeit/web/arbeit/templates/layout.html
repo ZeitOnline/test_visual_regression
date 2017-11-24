@@ -16,6 +16,7 @@
     {%- include "zeit.web.core:templates/inc/meta/date.html" -%}
     {%- include "zeit.web.arbeit:templates/inc/meta/sharing.html" -%}
     {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
+    {% block schemaorg_data %}{% endblock %}
 
     <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
     {% include "zeit.web.core:templates/inc/inline_js/print.html" %}
@@ -33,7 +34,7 @@
 
     {% include "zeit.web.core:templates/inc/cardstack/header.tpl" %}
 </head>
-<body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %} {% if toggles('zon_1000px') %}id="zon1000"{% endif -%}>
+<body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}

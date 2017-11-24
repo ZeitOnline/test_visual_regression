@@ -44,7 +44,7 @@
         {%- include "zeit.web.site:templates/inc/navigation/navigation-list.tpl" -%}
     </nav>
 
-    <div class="nav__login" data-ct-row="usermenu">
+    <div class="nav__login" data-ct-row="usermenu" {% if view.framebuilder_loginstatus_disabled %} data-featuretoggle="disable-loginstatus"{% endif %}>
         {% block login %}
             {% set esi_source = '{}login-state?for=site&context-uri={}'.format(request.route_url('home'), request.url | urlquote_plus) %}
             {{ lama.insert_esi(esi_source, 'Anmeldung nicht möglich') }}

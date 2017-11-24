@@ -30,6 +30,7 @@
         {%- endblock sharing_meta %}
 
         {%- include "zeit.web.core:templates/inc/meta/app-indexing.html" -%}
+        {% block schemaorg_data %}{% endblock %}
 
         <script src="{{ request.asset_host }}/js/vendor/modernizr-custom.js"></script>
 
@@ -45,7 +46,7 @@
             <script src="//localhost:35729/livereload.js"></script>
         {% endif %}
     </head>
-    <body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %} {% if toggles('zon_1000px') %}id="zon1000"{% endif -%}>
+    <body data-page-type="{{ view.type }}"{% if view.no_overscrolling %} data-overscrolling="off"{% endif %}>
 
         {% include "zeit.web.core:templates/inc/tag-manager.html" %}
         {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}

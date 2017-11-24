@@ -4,10 +4,81 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-3.108 (unreleased)
+- `wt_3rdparty_cookie` aus den feature-toggle.xml entfernen
+
+
+3.113 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- SSL-59: Use different sorl connection for gsitemaps
+
+- SSL-39: Handle link and location target of vivi link objects
+
+
+3.112 (2017-11-23)
+------------------
+
+- ZON-4269: Implement Google "editors picks" feed
+
+- ZON-4242: Series CP for ZEIT Arbeit
+
+- ZON-4347: Mark all non-free content with json-ld
+
+- ZON-4363: Unify semantic type for articles (schema.org markup)
+
+- SSL-40: Transform https links in cp markup modules
+
+- BUG-803: Fix padding for search counter
+
+- FEM-69: Add aria-label to comment form textarea
+
+- MAINT: Remove `wt_3rdparty_cookie` feature toggle
+
+
+3.111 (2017-11-20)
+------------------
+
+- ZON-4308: Webtrekk 3rd party cookie
+
+
+3.110 (2017-11-16)
+------------------
+
+- ZON-4245: Add ZAR-parquet to ZON
+
+- BUG-805: Fix color of ZAR badge on ZON nextread
+
+- FEM-63: Meta-Robots - noodp+noydir are obsolete
+
+
+3.109 (2017-11-15)
+------------------
+
+- SSL-38: Rewrite http links to https links, when configured
+
+- MAINT: Enable explicit preview of loginstatus in framebuilder
+
+- MAINT: Remove feature toggle for zon_1000px
+
+
+3.108.1 (2017-11-13)
+--------------------
+
+- FIX: Clear floating for share quotes on ZEIT Arbeit
+
+
+3.108 (2017-11-10)
+------------------
+
+- ZON-4189: Show login status in framebuilder
+
+- ZON-4262: Track paywall visibility on scroll in webtrekk
+
+- ZON-4234: Change markup for abo content to JSON-LD
+
+- BUG-804: Enable the (roughly) jinja equivalent of "import unicode_literals", so `stuff.format()` works as we expect
+
+- MAINT: Change GET-parameter name of DPV icode value
 
 
 3.107.2 (2017-11-08)

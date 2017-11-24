@@ -84,8 +84,6 @@
             <article class="article" itemprop="mainEntity" itemscope itemtype="http://schema.org/
                 {%- if view.liveblog and view.liveblog.liveblog -%}
                     LiveBlogPosting
-                {%- elif view.paywall -%}
-                    NewsArticle
                 {%- else -%}
                     Article
                 {%- endif -%}">
@@ -141,11 +139,10 @@
                     {% block article_pages %}
                         {% for page in view.pages %}
                             {% set adplaces = view.pages | adplaces([(0, 3),(3, 4)]) %}
-                            <section {% if view.paywall -%}class="paywall" itemprop="isAccessibleForFree" content="false"{% endif -%}>
+                            <section>
                             {% if not loop.first %}
                                 <h3 class="intertitle article__item">{{ page.teaser }}</h3>
                             {% endif %}
-                            {% set ad_displayed = False %}
                             {% for block in page %}
                                 {% set block_loop = loop %}
                                 {% include "zeit.web.core:templates/amp/blocks/{}.html".format(block | block_type) ignore missing %}

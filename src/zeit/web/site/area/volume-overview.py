@@ -34,7 +34,7 @@ class VolumeOverview(zeit.content.cp.automatic.AutomaticArea):
 
     @zeit.web.reify
     def meta_robots(self):
-        return 'index,follow,noodp,noydir,noarchive'
+        return 'index,follow,noarchive'
 
     @zeit.web.reify
     def page(self):

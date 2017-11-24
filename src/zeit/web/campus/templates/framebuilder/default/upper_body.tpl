@@ -1,5 +1,5 @@
 </head>
-<body data-page-type="{{ view.type }}" {% if toggles('zon_1000px') %}id="zon1000"{% endif -%}>
+<body data-page-type="{{ view.type }}">
 
     {% include "zeit.web.core:templates/inc/tag-manager.html" %}
     {% include "zeit.web.core:templates/inc/ads/static_oop-tag.html" %}

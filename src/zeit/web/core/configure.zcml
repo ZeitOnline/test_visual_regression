@@ -13,6 +13,8 @@
     <utility factory=".metrics.from_settings" />
     <utility factory=".podigee.Podigee" />
     <utility factory=".reach.Reach" />
+    <utility factory=".solr.SitemapSolrConnection"
+             provides=".solr.ISitemapSolrConnection" />
 
     <adapter
       factory=".content.LazyProxy"

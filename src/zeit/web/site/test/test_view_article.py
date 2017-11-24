@@ -712,7 +712,7 @@ def test_zear_article_has_correct_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'ressort', u'Fehler')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
 
 def test_tgs_article_has_correct_meta_robots(
@@ -722,7 +722,7 @@ def test_tgs_article_has_correct_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'TGS')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
 
 def test_habl_article_has_correct_meta_robots(
@@ -732,7 +732,7 @@ def test_habl_article_has_correct_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'HaBl')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
 
 def test_wiwo_article_has_correct_meta_robots(
@@ -742,7 +742,7 @@ def test_wiwo_article_has_correct_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'WIWO')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
 
 def test_golem_article_has_correct_meta_robots(
@@ -752,7 +752,7 @@ def test_golem_article_has_correct_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'GOLEM')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
 
 def test_sharing_cardstack_article_has_correct_meta_robots(
@@ -762,7 +762,7 @@ def test_sharing_cardstack_article_has_correct_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'shared_cardstack_id', u'kekse')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'noindex,follow,noarchive'
 
 
 def test_zei_article_has_correct_meta_robots(
@@ -772,7 +772,7 @@ def test_zei_article_has_correct_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', u'ZEI')
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
 
 def test_unset_product_id_article_has_correct_meta_robots(
@@ -782,7 +782,7 @@ def test_unset_product_id_article_has_correct_meta_robots(
     monkeypatch.setattr(
         zeit.web.site.view_article.Article, u'product_id', None)
     view = zeit.web.site.view_article.Article(context, dummy_request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive'
+    assert view.meta_robots == 'index,follow,noarchive'
 
 
 def test_article_has_correct_meta_keywords(
@@ -820,13 +820,13 @@ def test_robots_rules_for_angebote_articles(application):
     # usual angebot
     request.path = '/angebote/buchtipp/ishiguro/index'
     view = zeit.web.site.view_article.Article(article, request)
-    assert view.meta_robots == 'index,nofollow,noodp,noydir,noarchive', (
+    assert view.meta_robots == 'index,nofollow,noarchive', (
         'wrong robots for usual angebot')
 
     # partnersuche
     request.path = '/angebote/partnersuche/test'
     view = zeit.web.site.view_article.Article(article, request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+    assert view.meta_robots == 'index,follow,noarchive', (
         'wrong robots for partnersuche')
 
 
@@ -839,25 +839,25 @@ def test_robots_rules_for_diverse_articles(application):
     # test folder
     request.path = '/test/article'
     view = zeit.web.site.view_article.Article(article, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+    assert view.meta_robots == 'noindex,follow,noarchive', (
         'wrong robots for test folder')
 
     # templates folder
     request.path = '/templates/article'
     view = zeit.web.site.view_article.Article(article, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+    assert view.meta_robots == 'noindex,follow,noarchive', (
         'wrong robots for templates folder')
 
     # banner folder
     request.path = '/banner/article'
     view = zeit.web.site.view_article.Article(article, request)
-    assert view.meta_robots == 'noindex,follow,noodp,noydir,noarchive', (
+    assert view.meta_robots == 'noindex,follow,noarchive', (
         'wrong robots for banner folder')
 
     # any folder
     request.path = '/any/article'
     view = zeit.web.site.view_article.Article(article, request)
-    assert view.meta_robots == 'index,follow,noodp,noydir,noarchive', (
+    assert view.meta_robots == 'index,follow,noarchive', (
         'wrong robots for any other folder')
 
 
@@ -2302,6 +2302,14 @@ def test_narrow_header_should_render_image_column_width(testbrowser):
 
 
 def test_abo_paywall_schema_attr(testbrowser):
-    browser = testbrowser(
-        '/zeit-online/article/zeit?C1-Meter-Status=always_paid')
-    assert len(browser.cssselect('.paywall')) == 1
+    browser = testbrowser('/zeit-online/article/zplus-zon')
+    jsonld = browser.cssselect('script[type="application/ld+json"]')
+    assert len(jsonld) == 1
+    jsonld = jsonld[0]
+    assert '"isAccessibleForFree": "False"' in jsonld.text
+
+
+def test_abo_paywall_schema_attr_not_on_free_content(testbrowser):
+    browser = testbrowser('/zeit-online/article/simple')
+    jsonld = browser.cssselect('script[type="application/ld+json"]')
+    assert len(jsonld) == 0
