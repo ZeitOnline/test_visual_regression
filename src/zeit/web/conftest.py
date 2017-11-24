@@ -271,7 +271,7 @@ browsers = {
 }
 
 
-def pytest_collection_modifyitems(config, items):
+def pytest_collection_modifyitems(items):
     """Mark all selenium tests by use of fixture selenium_driver
     to run only selenium test by invoking pytest -m selenium"""
     for item in items:
@@ -585,7 +585,8 @@ def selenium_driver(request):
     parameters = {}
     if request.param == 'chrome':
         opts = Options()
-        opts.add_argument('headless')
+        if not request.config.getoption('--visible'):
+            opts.add_argument('headless')
         opts.add_argument('disable-gpu')
         opts.add_argument('window-size=1200x800')
         chromium_binary = os.environ.get('ZEIT_WEB_CHROMIUM_BINARY')
