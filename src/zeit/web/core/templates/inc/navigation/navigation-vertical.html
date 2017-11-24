@@ -12,7 +12,7 @@
         <ul class="nav__more-list" id="more-menu" aria-hidden="true" data-ct-column>
             {% for item in items.values() %}
                 <li>
-                    <a href="{{ item.href | create_url }}" id="{{ item.item_id }}">
+                    <a href="{{ item.href | create_url | replace('.__vertical__.', '.' ~ vertical_campaign_param_short ~ '.') }}" id="{{ item.item_id }}">
                         {{- item.text -}}
                     </a>
                 </li>
