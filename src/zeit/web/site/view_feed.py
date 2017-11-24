@@ -29,12 +29,12 @@ import zeit.web.core.utils
 log = logging.getLogger(__name__)
 
 ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
-    'atom': 'http://www.w3.org/2005/Atom',
-    'content': 'http://purl.org/rss/1.0/modules/content/',
-    'dc': 'http://purl.org/dc/elements/1.1/',
-    'esi': 'http://www.edge-delivery.org/esi/1.0',
-    'mi': 'http://schemas.ingestion.microsoft.com/common/',
-    'media': 'http://search.yahoo.com/mrss/'},
+    'atom': 'https://www.w3.org/2005/Atom',
+    'content': 'https://purl.org/rss/1.0/modules/content/',
+    'dc': 'https://purl.org/dc/elements/1.1/',
+    'esi': 'https://www.edge-delivery.org/esi/1.0',
+    'mi': 'https://schemas.ingestion.microsoft.com/common/',
+    'media': 'https://search.yahoo.com/mrss/'},
     typemap={types.NoneType: lambda elem, txt: setattr(elem, 'text', ''),
              lxml.etree.CDATA: lambda elem, txt: setattr(elem, 'text', txt)})
 
@@ -95,6 +95,8 @@ def create_public_url(url):
     if url.startswith('http://newsfeed'):
         return maybe_convert_http_to_https(
             url.replace('http://newsfeed', 'http://www', 1))
+    if url.startswith('https://newsfeed'):
+        return url.replace('https://newsfeed', 'https://www', 1)
     else:
         return maybe_convert_http_to_https(url)
 
