@@ -429,3 +429,15 @@ class VerticalPredicate(object):
             vertical = 'zon'
 
         return vertical == self.value
+
+
+@zope.interface.implementer(pyramid.interfaces.IRoutePregenerator)
+def https_url_pregenerator(request, elements, kw):
+    """
+    Sets the scheme to https. If used for a route, all produced urls by this
+    route will have this scheme.
+    """
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('https'):
+        kw.setdefault('_scheme', 'https')
+    return elements, kw

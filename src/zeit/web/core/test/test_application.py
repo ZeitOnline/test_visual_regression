@@ -43,8 +43,8 @@ def test_malformed_view_spec_should_produce_404_page(testserver):
 def test_page_zero_should_redirect_to_article_base(testserver):
     resp = requests.get('%s/zeit-magazin/article/03/seite-0' % testserver.url,
                         allow_redirects=False)
-    assert(resp.headers['location'] ==
-           '%s/zeit-magazin/article/03' % testserver.url)
+    assert (resp.headers['location'] ==
+            '%s/zeit-magazin/article/03' % testserver.url)
     assert resp.status_code == 301
 
 
@@ -73,16 +73,16 @@ def test_malformed_paginaton_should_redirect_to_article_base(testserver):
     resp = requests.get('%s/zeit-magazin/article/03/seite-abc'
                         % testserver.url,
                         allow_redirects=False)
-    assert(resp.headers['location'] ==
-           '%s/zeit-magazin/article/03' % testserver.url)
+    assert (resp.headers['location'] ==
+            '%s/zeit-magazin/article/03' % testserver.url)
     assert resp.status_code == 301
 
 
 def test_missing_pagination_spec_should_redirect_to_article_base(testserver):
     resp = requests.get('%s/zeit-magazin/article/03/seite-' % testserver.url,
                         allow_redirects=False)
-    assert(resp.headers['location'] == '%s/zeit-magazin'
-           '/article/03' % testserver.url)
+    assert (resp.headers['location'] == '%s/zeit-magazin'
+                                        '/article/03' % testserver.url)
     assert resp.status_code == 301
 
 
@@ -90,8 +90,8 @@ def test_salvageable_pagination_should_redirect_to_article_page(testserver):
     resp = requests.get('%s/zeit-magazin/article/03/seite-7.html'
                         % testserver.url,
                         allow_redirects=False)
-    assert(resp.headers['location'] == '%s/zeit-magazin/'
-           'article/03/seite-7' % testserver.url)
+    assert (resp.headers['location'] == '%s/zeit-magazin/'
+                                        'article/03/seite-7' % testserver.url)
     assert resp.status_code == 301
 
 
@@ -159,3 +159,14 @@ def test_pyramid_settings_and_settings_utility_are_the_same(application):
     pyramid_settings = application.zeit_app.config.registry.settings
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     assert conf is pyramid_settings
+
+
+def test_scheme_for_home_route_urls_depends_on_https_feature_toggle(
+        dummy_request,
+        togglepatch):
+    togglepatch({'https': True})
+    # This has to be set for our dummy request
+    dummy_request.environ['SERVER_NAME'] = "foo"
+    assert dummy_request.route_url('home').startswith('https:')
+    togglepatch({'https': False})
+    assert not dummy_request.route_url('home').startswith('https:')
