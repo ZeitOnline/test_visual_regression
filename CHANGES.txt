@@ -7,12 +7,26 @@ POSTDEPLOY
 - `wt_3rdparty_cookie` aus den feature-toggle.xml entfernen
 
 
-3.112 (unreleased)
+3.113 (unreleased)
 ------------------
+
+- ZON-4284: Use same top-navi in verticals ZAR + ZCO + ZMO
+
+- SSL-59: Use different sorl connection for gsitemaps
+
+- SSL-39: Handle link and location target of vivi link objects
+
+
+3.112 (2017-11-23)
+------------------
+
+- ZON-4269: Implement Google "editors picks" feed
 
 - ZON-4242: Series CP for ZEIT Arbeit
 
 - ZON-4347: Mark all non-free content with json-ld
+
+- ZON-4363: Unify semantic type for articles (schema.org markup)
 
 - SSL-40: Transform https links in cp markup modules
 

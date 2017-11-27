@@ -102,10 +102,13 @@ def app_settings(mockserver):
         'academics_img_host': mockserver.url + '/academics',
         'cardstack_backend': mockserver.url + '/cardstack',
         'connector_type': 'mock',
+        'solr_timeout': 2,
+        'solr_sitemap_timeout': 10,
         'vgwort_url': 'http://example.com/vgwort',
         'redirect_volume_cp': 'http://redirect.example.com',
         'breaking_news_config': (
             'http://xml.zeit.de/eilmeldung/homepage-banner'),
+        'transform_to_secure_links_for': 'www.zeit.de,blog.zeit.de',
         'breaking_news_fallback_image': (
             'http://xml.zeit.de/administratives/eilmeldung-share-image'),
         'vivi_zeit.connector_repository-path': 'egg://zeit.web.core/data',
@@ -186,6 +189,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
         'vivi_zeit.web_navigation-source': (
             'egg://zeit.web.core/data/config/navigation.xml'),
+        'vivi_zeit.web_navigation-more-source': (
+            'egg://zeit.web.core/data/config/navigation-more.xml'),
         'vivi_zeit.web_navigation-services-source': (
             'egg://zeit.web.core/data/config/navigation-services.xml'),
         'vivi_zeit.web_navigation-classifieds-source': (
@@ -329,6 +334,8 @@ def application_session(app_settings, request):
     factory = zeit.web.core.application.Application()
     app = factory({}, **app_settings)
     zope.component.provideUtility(MockSolr(),)
+    zope.component.provideUtility(MockSitemapSolr(),
+                                  zeit.web.core.solr.ISitemapSolrConnection)
     zope.component.provideUtility(mock.Mock(),
                                   zeit.objectlog.interfaces.IObjectLog)
     zope.component.provideUtility(mock.Mock(), zeit.web.core.interfaces.IMail)
@@ -876,6 +883,27 @@ class MockSolr(object):
     def results(self, value):
         self._hits = len(value)
         self._results = value
+
+MockSolr.timeout = property(
+    zeit.web.core.solr.solr_timeout_from_settings, lambda self, value: None)
+
+
+class MockSitemapSolr(MockSolr):
+
+    zope.interface.implements(zeit.web.core.solr.ISitemapSolrConnection)
+
+    def __init__(self):
+        self._sitemap_sorl = zeit.web.core.solr.SitemapSolrConnection()
+        super(MockSitemapSolr, self).__init__()
+
+    @property
+    def timeout(self):
+        # Delegate to non mocked sitemap solr object
+        return self._sitemap_sorl.timeout
+
+    @timeout.setter
+    def timeout(self, value):
+        pass
 
 
 @pytest.fixture

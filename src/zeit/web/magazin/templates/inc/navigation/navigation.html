@@ -27,26 +27,10 @@
             {{ lama.use_svg_icon('close', 'header__menu-icon header__menu-icon--close', view.package) }}
         </a>
     </div>
-
     <div class="nav" id="navigation" data-ct-row="1">
-        <div class="nav__home">
-            <h2 class="nav__home-title"><a href="{{ request.route_url('home') }}index">ZEIT ONLINE</a></h2>
-        </div>
-        <nav class="nav__service">
-            <a class="nav__service-title" href="#service-menu" role="button" aria-controls="service-menu"><span class="nav__dropdown">Service</span></a>
-            <ul class="nav__service-list" id="service-menu" aria-hidden="true" data-ct-column>
-                <li><a href="{{ request.route_url('home') }}wissen/zeit-geschichte/index">ZEITGeschichte</a></li>
-                <li><a href="{{ request.route_url('home') }}wissen/zeit-wissen/index">ZEITWissen</a></li>
-                <li><a href="{{ request.route_url('home') }}angebote/partnersuche/index?pscode=01_100_20003_0001_0001_0005_empty_AF00ID_GV00ID">Partnersuche</a></li>
-                <li><a href="http://zeit.immowelt.de/">Immobilien</a></li>
-                <li><a href="http://automarkt.zeit.de/">Automarkt</a></li>
-                <li><a href="http://jobs.zeit.de/">Jobs</a></li>
-                <li><a href="https://premium.zeit.de/zeit-apps?wt_mc=pm.intern.fix.zmo.fix.dach.text.apps">Apps</a></li>
-                <li><a href="https://premium.zeit.de/zeit-audio?wt_mc=pm.intern.fix.zmo.fix.dach.text.audio">Audio</a></li>
-                <li><a href="{{ request.route_url('home') }}archiv">Archiv</a></li>
-                <li><a href="{{ request.route_url('home') }}spiele/index">Spiele</a></li>
-            </ul>
-        </nav>
+        {% set vertical_campaign_param_long = 'zmagazin' %}
+        {% set vertical_campaign_param_short = 'zmo' %}
+        {%- include "zeit.web.core:templates/inc/navigation/navigation-vertical.html" -%}
         <div class="nav__login">
             {% block login %}
                 {%- set esi_source = '{}login-state?for=magazin&context-uri={}'.format(request.route_url('home'), request.url | urlquote_plus) -%}
@@ -62,7 +46,6 @@
         </nav>
         <nav class="nav__sales" data-ct-row="2">
             <ul class="nav__sales-list">
-                <li><a href="https://abo.zeit.de/?utm_medium=referral&utm_source=zmagazin&utm_campaign=keine&utm_content=keine__stand__x&icode=01w0016k0000keirefall1709">Abo</a></li>
                 <li><a href="http://shop.zeit.de/?et=l6VVNm&amp;et_cid=42&amp;et_lid=175&amp;et_sub=Startseite_header">Shop</a></li>
                 <li><a href="https://premium.zeit.de/?wt_mc=pm.intern.fix.zmo.fix.dach.text.epaper">ePaper</a></li>
             </ul>
