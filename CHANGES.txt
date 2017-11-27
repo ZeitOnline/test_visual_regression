@@ -10,6 +10,8 @@ POSTDEPLOY
 3.113 (unreleased)
 ------------------
 
+- ZON-3284: Show Status 404 for expired video pages
+
 - ZON-4284: Use same top-navi in verticals ZAR + ZCO + ZMO
 
 - SSL-59: Use different sorl connection for gsitemaps
