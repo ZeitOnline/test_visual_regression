@@ -307,10 +307,10 @@ def test_msn_feed_contains_expected_fields(testserver):
     assert len(xml.xpath('//item//guid')) > 0
     assert len(xml.xpath('//item//webUrl')) > 0
     assert len(xml.xpath('//item//mi:dateTimeWritten', namespaces={
-        'mi': 'http://schemas.ingestion.microsoft.com/common/'
+        'mi': 'https://schemas.ingestion.microsoft.com/common/'
     })) > 0
     assert len(xml.xpath('//item//content:encoded', namespaces={
-        'content': 'http://purl.org/rss/1.0/modules/content/'
+        'content': 'https://purl.org/rss/1.0/modules/content/'
     })) > 0
 
 
