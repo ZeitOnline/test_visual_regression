@@ -217,7 +217,8 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         $img.on( 'load', function() {
             $img.trigger( 'scaling_ready' );
         });
-        if ( markLazyImages && $img.closest( '.cp-region' ).data( 'lazy' ) === true ) {
+        if ( markLazyImages && $img.closest(
+            '.cp-region, .nextread__media, .nextread-advertisement__media, .article__item' ).data( 'lazy' ) === true ) {
             $img.data( 'tolazyload', true );
         }
         return $img;
@@ -366,8 +367,8 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
     function init( options ) {
         options = $.extend({
             triggerRegionNumber: 3,
-            lazy: $( 'body[data-page-type="centerpage"]' ).length > 0,
-            lazyElementsSelector: '.cp-region'
+            lazy: $( 'body[data-page-type="centerpage"], body[data-page-type="article"]' ).length > 0,
+            lazyElementsSelector: '.cp-region, .nextread__media, .nextread-advertisement__media, .article__item'
         }, options );
         // if lazy, mark lazy regions
         if ( options.lazy ) {
