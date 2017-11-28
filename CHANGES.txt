@@ -7,7 +7,7 @@ POSTDEPLOY
 - `wt_3rdparty_cookie` aus den feature-toggle.xml entfernen
 
 
-3.113 (unreleased)
+3.113 (2017-11-28)
 ------------------
 
 - ZON-3284: Show Status 404 for expired video pages
