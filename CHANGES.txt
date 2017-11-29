@@ -4,10 +4,22 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- `wt_3rdparty_cookie` aus den feature-toggle.xml entfernen
+- Nothing
 
 
-3.113 (unreleased)
+3.114 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.113.1 (2017-11-29)
+--------------------
+
+- ZON-4284: Hotfix individual parameter for abolink
+
+
+3.113 (2017-11-28)
 ------------------
 
 - ZON-3284: Show Status 404 for expired video pages
@@ -18,6 +30,7 @@ POSTDEPLOY
 
 - SSL-39: Handle link and location target of vivi link objects
 
+- SSL-23: Create https URLs in feeds
 
 3.112 (2017-11-23)
 ------------------

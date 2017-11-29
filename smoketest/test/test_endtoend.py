@@ -118,8 +118,8 @@ def test_videostage_thumbnail_should_be_replaced(config, selenium_driver):
 def test_video_should_load_on_video_single_page(config, selenium_driver):
     driver = selenium_driver
     driver.get(
-        '{}/video/2017-02/5338993650001/argentinien-ringfoermige-'
-        'sonnenfinsternis-begeistert-beobachter-in-suedamerika'.format(
+        '{}/video/2017-11/5645749814001/berlinale-shorts-dissonance-'
+        'ein-kurzfilm-von-till-nowak'.format(
             config['BASE_URL']))
     video_visible_ec = expected_conditions.presence_of_element_located(
         (By.CLASS_NAME, 'vjs-control-bar'))
@@ -211,3 +211,18 @@ def test_iq_ehash_returns_expected_string(
         else:
             assert u'102-2d0d19d7f9d0e5e5e889f3d68922bf54f57f494a2a75daea' \
                 '18c03f5386cbf467' == iq_ehash
+
+
+def test_zar_hp_should_render(config, selenium_driver):
+    driver = selenium_driver
+    driver.get(
+        '{}/arbeit/index'.format(
+            config['BASE_URL']))
+    cp_visible = expected_conditions.presence_of_element_located(
+        (By.CLASS_NAME, 'main--centerpage'))
+
+    try:
+        WebDriverWait(driver, config['TIMEOUT']).until(cp_visible)
+        assert True
+    except TimeoutException:
+        assert False, 'ZAR HP not rendered'
