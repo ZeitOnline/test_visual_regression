@@ -4,7 +4,7 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- `wt_3rdparty_cookie` aus den feature-toggle.xml entfernen
+- Nothing
 
 
 3.114 (unreleased)
