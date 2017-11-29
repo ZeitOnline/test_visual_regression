@@ -7,10 +7,10 @@ POSTDEPLOY
 - `wt_3rdparty_cookie` aus den feature-toggle.xml entfernen
 
 
-3.114 (unreleased)
+3.113.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4284: Hotfix individual parameter for abolink
 
 
 3.113 (2017-11-28)
