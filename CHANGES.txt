@@ -4,13 +4,19 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- `wt_3rdparty_cookie` aus den feature-toggle.xml entfernen
+- Nothing
 
 
 3.114 (unreleased)
 ------------------
 
 - Nothing changed yet.
+
+
+3.113.1 (2017-11-29)
+--------------------
+
+- ZON-4284: Hotfix individual parameter for abolink
 
 
 3.113 (2017-11-28)
@@ -44,6 +50,8 @@ POSTDEPLOY
 - FEM-69: Add aria-label to comment form textarea
 
 - MAINT: Remove `wt_3rdparty_cookie` feature toggle
+
+- SSL-61: Make scheme of created urls runtime configurable
 
 
 3.111 (2017-11-20)
