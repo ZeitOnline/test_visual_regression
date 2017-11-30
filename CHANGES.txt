@@ -10,7 +10,7 @@ POSTDEPLOY
 3.114 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-812: Catch new zmo layout w/ another condition
 
 
 3.113.1 (2017-11-29)
