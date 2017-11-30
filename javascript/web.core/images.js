@@ -364,16 +364,21 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      * @function init
      * @param  {object} options jQuery styled preferences object
      */
-    function init( options ) {
+    function init( options, pageType ) {
+        pageType = document.querySelector( 'body' ).getAttribute( 'data-page-type' );
         options = $.extend({
-            pageType: document.querySelector( 'body' ).getAttribute( 'data-page-type' ),
             triggerRegionNumber: 3,
-            lazy: $( 'body[data-page-type="centerpage"], body[data-page-type="article"]' ).length > 0,
-            lazyElementsSelector: '.cp-region, .nextread__media, .nextread-advertisement__media, .article__item'
+            lazy: $( 'body[data-page-type="' + pageType + '"]' ).length > 0,
+            lazyElementsSelectorCP: '.cp-region',
+            lazyElementsSelectorArticle: '.nextread__media, .nextread-advertisement__media, .article__item'
         }, options );
         // if lazy, mark lazy regions
         if ( options.lazy ) {
-            $( options.lazyElementsSelector + ':gt(' + ( options.triggerRegionNumber - 1 ) + ')' ).data( 'lazy', true );
+            if ( pageType === 'centerpage' ) {
+                $( options.lazyElementsSelectorCP + ':gt(' + ( options.triggerRegionNumber - 1 ) + ')' ).data( 'lazy', true );
+            } else if ( pageType === 'article' ) {
+                $( options.lazyElementsSelectorArticle ).data( 'lazy', true );
+            }
         }
         images = prepareImages();
         showImages();
