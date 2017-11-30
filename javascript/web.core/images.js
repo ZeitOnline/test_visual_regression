@@ -366,6 +366,7 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      */
     function init( options ) {
         options = $.extend({
+            pageType: document.querySelector( 'body' ).getAttribute( 'data-page-type' ),
             triggerRegionNumber: 3,
             lazy: $( 'body[data-page-type="centerpage"], body[data-page-type="article"]' ).length > 0,
             lazyElementsSelector: '.cp-region, .nextread__media, .nextread-advertisement__media, .article__item'
