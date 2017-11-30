@@ -51,6 +51,8 @@ POSTDEPLOY
 
 - MAINT: Remove `wt_3rdparty_cookie` feature toggle
 
+- SSL-61: Make scheme of created urls runtime configurable
+
 
 3.111 (2017-11-20)
 ------------------
