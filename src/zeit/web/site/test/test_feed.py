@@ -149,7 +149,7 @@ def test_socialflow_feed_contains_social_fields(testserver):
     assert '<content:encoded>FB-ZCO' in feed
 
 
-def test_instant_article_feed_should_be_rendered(testserver):
+def test_instant_article_feed_should_be_rendered(testserver, togglepatch):
     res = requests.get(
         '{}/zeit-magazin/centerpage/index/rss-instantarticle'
         .format(testserver.url),
@@ -158,6 +158,18 @@ def test_instant_article_feed_should_be_rendered(testserver):
     xml = lxml.etree.fromstring(res.content, parser)
     source = xml.xpath('./channel/*[local-name()="include"]/@src')[0]
     assert source == ('http://www.zeit.de/'
+                      'instantarticle-item/zeit-magazin/'
+                      'centerpage/article_image_asset')
+
+    togglepatch({'https': True})
+    res = requests.get(
+        '{}/zeit-magazin/centerpage/index/rss-instantarticle'
+        .format(testserver.url),
+        headers={'Host': 'newsfeed.zeit.de'})
+    parser = lxml.etree.XMLParser(strip_cdata=False)
+    xml = lxml.etree.fromstring(res.content, parser)
+    source = xml.xpath('./channel/*[local-name()="include"]/@src')[0]
+    assert source == ('https://www.zeit.de/'
                       'instantarticle-item/zeit-magazin/'
                       'centerpage/article_image_asset')
 
@@ -295,10 +307,10 @@ def test_msn_feed_contains_expected_fields(testserver):
     assert len(xml.xpath('//item//guid')) > 0
     assert len(xml.xpath('//item//webUrl')) > 0
     assert len(xml.xpath('//item//mi:dateTimeWritten', namespaces={
-        'mi': 'http://schemas.ingestion.microsoft.com/common/'
+        'mi': 'https://schemas.ingestion.microsoft.com/common/'
     })) > 0
     assert len(xml.xpath('//item//content:encoded', namespaces={
-        'content': 'http://purl.org/rss/1.0/modules/content/'
+        'content': 'https://purl.org/rss/1.0/modules/content/'
     })) > 0
 
 

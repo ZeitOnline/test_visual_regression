@@ -22,6 +22,10 @@ class Video(zeit.web.core.view.Content, zeit.web.site.view.Base):
 
     def __init__(self, context, request):
         super(Video, self).__init__(context, request)
+
+        if zeit.web.core.template.expired(self.context):
+            raise pyramid.httpexceptions.HTTPNotFound()
+
         if self.request.headers.get('X-SEO-Slug', '') != self.seo_slug:
             location = '{}/{}'.format(self.content_url, self.seo_slug)
             if self.request.query_string:
