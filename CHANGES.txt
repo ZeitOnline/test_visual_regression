@@ -7,8 +7,8 @@ POSTDEPLOY
 - Nothing
 
 
-3.114 (unreleased)
-------------------
+3.113.2 (2017-12-04)
+--------------------
 
 - BUG-812: Catch new zmo layout w/ another condition
 
