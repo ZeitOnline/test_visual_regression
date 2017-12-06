@@ -122,7 +122,7 @@
         }
     };
 
-{% if toggles('iqd_tables_transformation') -%}
+{% if toggles('iqd_tablet_transformation') -%}
     {%- if view.advertising_enabled %}
         var ressort = window.Zeit.view.get('ressort');
         {%- if view.banner_toggles('viewport_zoom') == 'tablet' and view.is_hp %}
