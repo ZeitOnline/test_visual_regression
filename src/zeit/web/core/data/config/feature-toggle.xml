@@ -20,6 +20,7 @@
   <https>false</https>
   <instantarticle_interrupts>true</instantarticle_interrupts>
   <iqd>false</iqd>
+  <iqd_tables_transformation>false</iqd_tables_transformation>
   <iqd_touchpoint>true</iqd_touchpoint>
   <keywords_from_tms>false</keywords_from_tms>
   <podlove_button>true</podlove_button>
