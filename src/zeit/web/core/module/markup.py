@@ -23,9 +23,6 @@ class Markup(zeit.web.core.centerpage.Module, list):
             return self.maybe_convert_text(self.context.text).strip()
 
     def maybe_convert_text(self, text):
-        toggles = zeit.web.core.application.FEATURE_TOGGLES
-        if not toggles.find('https'):
-            return text
         xml = lxml.etree.fromstring(self.context.text)
         for link in xml.xpath('//a'):
             if link.get('href'):
