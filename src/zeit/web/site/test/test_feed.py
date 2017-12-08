@@ -157,25 +157,17 @@ def test_instant_article_feed_should_be_rendered(testserver, togglepatch):
     parser = lxml.etree.XMLParser(strip_cdata=False)
     xml = lxml.etree.fromstring(res.content, parser)
     source = xml.xpath('./channel/*[local-name()="include"]/@src')[0]
-    assert source == ('http://www.zeit.de/'
-                      'instantarticle-item/zeit-magazin/'
-                      'centerpage/article_image_asset')
-
-    togglepatch({'https': True})
-    res = requests.get(
-        '{}/zeit-magazin/centerpage/index/rss-instantarticle'
-        .format(testserver.url),
-        headers={'Host': 'newsfeed.zeit.de'})
-    parser = lxml.etree.XMLParser(strip_cdata=False)
-    xml = lxml.etree.fromstring(res.content, parser)
-    source = xml.xpath('./channel/*[local-name()="include"]/@src')[0]
     assert source == ('https://www.zeit.de/'
                       'instantarticle-item/zeit-magazin/'
                       'centerpage/article_image_asset')
 
 
-def test_roost_feed_contains_mobile_override_text(testserver):
+def test_roost_feed_contains_mobile_override_text(testserver,
+                                                  preserve_settings):
     feed_path = '/zeit-magazin/centerpage/index/rss-roost'
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['transform_to_secure_links_for'] = []
+
     res = requests.get(
         testserver.url + feed_path, headers={'Host': 'newsfeed.zeit.de'})
 
