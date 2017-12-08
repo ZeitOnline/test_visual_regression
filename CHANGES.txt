@@ -10,7 +10,15 @@ POSTDEPLOY
 3.114 (unreleased)
 ------------------
 
+- Nothing changed yet.
+
+
+3.113.2 (2017-12-04)
+--------------------
+
 - BUG-812: Catch new zmo layout w/ another condition
+
+- BUG-813: Go back to http namespaces in feeds (instead of https)
 
 
 3.113.1 (2017-11-29)
