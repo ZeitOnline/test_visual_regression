@@ -538,8 +538,6 @@ $inline-block-alignment: none !default;
 
 @mixin clearfix {
 	overflow: hidden;
-
-	@include has-layout;
 }
 
 @mixin pie-clearfix {
@@ -548,8 +546,6 @@ $inline-block-alignment: none !default;
 		display: block; // http://cssmojo.com/the-very-latest-clearfix-reloaded/
 		clear: both;
 	}
-
-	@include has-layout;
 }
 
 //  Background svg mixin
