@@ -193,7 +193,11 @@ def test_gsitemap_video_does_to_call_bc_api(testbrowser, monkeypatch):
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
     }])
     mocked_get_video = mock.Mock()
-    mocked_get_video.return_value = {}
+    mocked_get_video.return_value = {
+        'renditions': (),
+        'thumbnail': None,
+        'video_still': None,
+    }
     monkeypatch.setattr(
         zeit.brightcove.connection.PlaybackAPI, 'get_video', mocked_get_video)
     browser = testbrowser('/gsitemaps/video.xml?p=1')
