@@ -1,8 +1,9 @@
+{% import 'zeit.web.core:templates/macros/video_macro.tpl' as vima %}
 <url>
     <loc>{{ teaser.uniqueId | create_url }}</loc>
     <video:video>
-        <video:thumbnail_loc>{{ teaser.thumbnail }}</video:thumbnail_loc>
-        <video:content_loc>{{ teaser.highest_rendition_url }}</video:content_loc>
+        <video:thumbnail_loc>{{ teaser.uniqueId | video_thumbnail_url }}</video:thumbnail_loc>
+        <video:player_loc>{{ teaser.uniqueId | brightcove_player_url }}</video:player_loc>
         <video:title>{{ teaser.title }}</video:title>
         <video:description>{{ teaser.teaserText }}</video:description>
         <video:publication_date>{{ teaser | mod_date | format_date('iso8601') }}</video:publication_date>

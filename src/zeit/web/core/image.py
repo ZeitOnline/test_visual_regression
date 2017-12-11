@@ -594,7 +594,7 @@ class RemoteImage(object):
         if self.isfile():
             with self.open() as fh:
                 return PIL.Image.open(fh).size
-        return (0, 0)
+        return 0, 0
 
 
 class RemoteImageGroup(SyntheticImageGroup,
