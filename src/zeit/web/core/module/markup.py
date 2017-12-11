@@ -23,10 +23,10 @@ class Markup(zeit.web.core.centerpage.Module, list):
             return self.maybe_convert_text(self.context.text).strip()
 
     def maybe_convert_text(self, text):
-        xml = lxml.etree.fromstring(self.context.text)
+        xml = lxml.etree.fromstring('<root>%s</root>' % self.context.text)
         for link in xml.xpath('//a'):
             if link.get('href'):
                 link.set('href',
                          zeit.web.core.utils.maybe_convert_http_to_https(
                             link.get('href')))
-        return lxml.etree.tostring(xml)
+        return "".join([lxml.etree.tostring(elem) for elem in xml])
