@@ -141,7 +141,7 @@
             }
         {%- endif %}
         {# /* For portrait */ #}
-            if ( window.matchMedia( '(orientation: portrait)' ).matches && ressort != 'homepage' ) {
+            if ( window.matchMedia( '(orientation: portrait)' ).matches && ressort != 'homepage' && screen.width >= window.Zeit.tabletMinWidth ) {
                     window.Zeit.viewport.set( 'portrait' );
             }
     {%- endif %}
