@@ -109,6 +109,9 @@ def test_adplaces_present_on_zmo_cp(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-mobile-3')) == 1
     assert len(browser.cssselect('#ad-mobile-8')) == 1
 
+    browser = testbrowser('/zeit-magazin/index')
+    assert len(browser.cssselect('#ad-mobile-4')) == 1
+
 
 def test_adplaces_present_on_zco_cp(testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
@@ -124,6 +127,7 @@ def test_adplaces_present_on_zco_cp(testbrowser, monkeypatch):
     assert len(browser.cssselect('#ad-desktop-3')) == 1
     assert len(browser.cssselect('#ad-mobile-1')) == 1
     assert len(browser.cssselect('#ad-mobile-3')) == 1
+    assert len(browser.cssselect('#ad-mobile-4')) == 1
     assert len(browser.cssselect('#ad-mobile-8')) == 1
 
     # test topic page with lead cinema teaser
