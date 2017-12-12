@@ -187,7 +187,7 @@ def test_gsitemap_video(testbrowser):
         'yes')
 
 
-def test_gsitemap_video_does_to_call_bc_api(testbrowser, monkeypatch):
+def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
     import zeit.brightcove.connection
     set_sitemap_solr_results([{
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
