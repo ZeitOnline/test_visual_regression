@@ -145,7 +145,7 @@ def test_rss_feed_of_cp_has_requested_format(testserver):
     assert res.headers['Content-Type'].startswith('application/rss+xml')
     feed = res.text
     assert '<atom:link href="http://newsfeed.zeit.de%s"' % feed_path in feed
-    assert ('<link>http://www.zeit.de/zeit-magazin/'
+    assert ('<link>https://www.zeit.de/zeit-magazin/'
             'centerpage/article_image_asset?' in feed)
     assert ('wt_zmc=koop.ext.zonaudev.spektrumde.feed.'
             'article-image-asset.bildtext.link.x' in feed)
