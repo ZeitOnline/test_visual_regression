@@ -10,7 +10,7 @@ POSTDEPLOY
 3.114 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- SSL-74: Stop using BC PlaybackAPI for videositemap
 
 
 3.113.2 (2017-12-04)
