@@ -4,8 +4,10 @@
 
     {% extends "zeit.web.site:templates/inc/area/parquet.html" %}
 
+    {% set zett_base_url = settings('zett_img_host') ~ '/' %}
+
     {% block area_title %}
-        <a class="parquet-meta__title parquet-meta__title--zett" href="{{ 'http://ze.tt/' | append_campaign_params }}">
+        <a class="parquet-meta__title parquet-meta__title--zett" href="{{ zett_base_url | append_campaign_params }}">
             {{ lama.use_svg_icon('logo-zett', 'parquet-meta__logo parquet-meta__logo--zett', view.package) }}
         </a>
     {% endblock area_title %}
@@ -14,7 +16,7 @@
         <div class="parquet-meta__links">
             <div class="parquet-meta__more parquet-meta__more--zett">
                 Geschichten, Ideen, Gefühle:
-                <a class="parquet-meta__more-link parquet-meta__more-link--zett" href="{{ 'http://ze.tt/' | append_campaign_params }}">
+                <a class="parquet-meta__more-link parquet-meta__more-link--zett" href="{{ zett_base_url | append_campaign_params }}">
                     ze.tt
                 </a>
             </div>
