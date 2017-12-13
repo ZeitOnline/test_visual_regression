@@ -1718,12 +1718,14 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
 
 
 def test_zett_banner_is_displayed(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     browser = testbrowser('/zeit-online/zett-banner')
     box = browser.cssselect('.zett-banner')[0]
     link = box.cssselect('a')[0]
     assert len(box.cssselect('.zett-banner__wrapper'))
-    assert ('http://ze.tt/?utm_campaign=zonbanner&utm_content=1'
-            '&utm_medium=banner&utm_source=zon') == link.get('href')
+    assert ('{}/?utm_campaign=zonbanner&utm_content=1'
+            '&utm_medium=banner&utm_source=zon'.format(
+                conf.get('zett_img_host'))) == link.get('href')
 
 
 def test_zett_parquet_is_rendering(testbrowser):
@@ -1766,26 +1768,31 @@ def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
 
 
 def test_zett_parquet_should_link_to_zett(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     browser = testbrowser('/zeit-online/parquet-feeds')
 
     link_logo = browser.cssselect('.parquet-meta__title--zett')[0]
     link_more = browser.cssselect('.parquet-meta__more-link--zett')[0]
 
     assert link_logo.get('href') == (
-        'http://ze.tt/?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
+        '{}/?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
         '&utm_medium=fix&utm_source=zon_zettaudev_int'
-        '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x')
+        '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x'.format(
+            conf.get('zett_img_host')))
     assert link_more.get('href') == (
-        'http://ze.tt/?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
+        '{}/?utm_campaign=ref&utm_content=zett_zon_parkett_teaser_x'
         '&utm_medium=fix&utm_source=zon_zettaudev_int'
-        '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x')
+        '&wt_zmc=fix.int.zettaudev.zon.ref.zett.zon_parkett.teaser.x'.format(
+            conf.get('zett_img_host')))
 
 
 def test_zett_parquet_should_have_ads(testbrowser):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     browser = testbrowser('/zeit-online/parquet-feeds')
     ad = browser.cssselect(
-        'article[data-unique-id="http://ze.tt/wichtiges-vom-'
-        'wochenende-update-32/"] .teaser-small__label')[0]
+        'article[data-unique-id="{}/wichtiges-vom-'
+        'wochenende-update-32/"] .teaser-small__label'.format(
+            conf.get('zett_img_host')))[0]
 
     assert ad.text == 'Anzeige'
 
