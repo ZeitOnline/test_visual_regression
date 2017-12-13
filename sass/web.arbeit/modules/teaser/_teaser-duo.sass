@@ -82,3 +82,12 @@
 				margin-top: $vertical-space
 			.teaser-duo
 				+teaser-duo-equal-height
+
+.teaser-duo--advertorial
+	position: relative
+	.teaser-duo__heading
+		&:before
+			@extend %teaser-advertoriallabel
+			top: 0
+			right: 0
+			padding: remify(8px)

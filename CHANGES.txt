@@ -10,6 +10,8 @@ POSTDEPLOY
 3.114 (unreleased)
 ------------------
 
+- ZON-4396: Show label on teasers to advertorials
+
 - ZON-4386: Add missing adtags to mobile ZMO and ZCO hp
 
 - SSL-74: Stop using BC PlaybackAPI for videositemap
