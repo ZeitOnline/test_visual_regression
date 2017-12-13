@@ -1,6 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <article>
   <head>
+    <image base-id="http://xml.zeit.de/arbeit/image/05-hammock-cottage-woods/" type="jpg" title="monarch-boat1" publication-date="" expires="">
+      <bu>Freiheit ist die Einsicht in die Notwendigkeit. Das scheint heute nicht mehr zu gelten.</bu>
+      <copyright>© Karin Ceballos Betancur</copyright>
+    </image>
     <attribute name="DailyNL" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="artbox_thema" ns="http://namespaces.zeit.de/CMS/document">no</attribute>
     <attribute name="article_id" ns="http://namespaces.zeit.de/CMS/print">556168</attribute>

@@ -193,3 +193,9 @@ def test_zar_advertorial_cp_header_renders_correctly(testbrowser):
 def test_zar_advertorial_has_markup_module(testbrowser):
     select = testbrowser('/arbeit/centerpage/advertorial').cssselect
     assert len(select('.markup')) == 1
+
+
+def test_zar_advertorial_teaser_has_modifier(testbrowser):
+    select = testbrowser('/arbeit/centerpage/teaser-advertorial').cssselect
+    assert len(select('.teaser-small--advertorial')) == 3
+    assert len(select('.teaser-duo--advertorial')) == 2
