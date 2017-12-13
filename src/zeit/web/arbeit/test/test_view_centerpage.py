@@ -44,7 +44,10 @@ def test_zar_teaser_small_should_display_no_image_on_mobile(
     teaser_images = driver.find_elements_by_class_name('teaser-small__media')
     assert len(teaser_images) == 6
     for teaser_image in teaser_images:
-        assert teaser_image.is_displayed() is False
+        if '--force-mobile' in teaser_image.get_attribute('class'):
+            assert teaser_image.is_displayed()
+        else:
+            assert teaser_image.is_displayed() is False
 
 
 def test_zar_jobbox_dropdown_has_correct_structure(testbrowser):
