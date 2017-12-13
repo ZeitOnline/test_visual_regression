@@ -97,7 +97,7 @@ def app_settings(mockserver):
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
         'spektrum_img_host': mockserver.url + '/spektrum',
         'zett_hp_feed': mockserver.url + '/zett/feed.xml',
-        'zett_img_host': mockserver.url + '/zett',
+        'zett_img_host': 'https://ze.tt',
         'academics_hp_feed': mockserver.url + '/academics/feed.xml',
         'academics_img_host': mockserver.url + '/academics',
         'cardstack_backend': mockserver.url + '/cardstack',
