@@ -23,6 +23,7 @@ import zeit.push.interfaces
 import zeit.web
 import zeit.web.core.interfaces
 import zeit.web.core.template
+import zeit.web.core.utils
 
 
 log = logging.getLogger(__name__)
@@ -36,6 +37,15 @@ ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
     'media': 'http://search.yahoo.com/mrss/'},
     typemap={types.NoneType: lambda elem, txt: setattr(elem, 'text', ''),
              lxml.etree.CDATA: lambda elem, txt: setattr(elem, 'text', txt)})
+
+
+def maybe_convert_http_to_https(url):
+    # XXX: This is only neccessary, because the original method
+    # does not check wheter the https feature is enabled or not.
+    # The `maybe` refers to host and not to the more general if.
+    if zeit.web.core.application.FEATURE_TOGGLES.find('https'):
+        return zeit.web.core.utils.maybe_convert_http_to_https(url)
+    return url
 
 
 def ELEMENT_NS_MAKER(namespace, tagname, *args, **kw):
@@ -83,9 +93,12 @@ def create_public_url(url):
     # in both production and staging (and "localhost" type environments),
     # but at the cost of hard-coding the "newsfeed" hostname here.
     if url.startswith('http://newsfeed'):
-        return url.replace('http://newsfeed', 'http://www', 1)
+        return maybe_convert_http_to_https(
+            url.replace('http://newsfeed', 'http://www', 1))
+    if url.startswith('https://newsfeed'):
+        return url.replace('https://newsfeed', 'https://www', 1)
     else:
-        return url
+        return maybe_convert_http_to_https(url)
 
 
 def join_queries(url, join_query):
@@ -151,14 +164,16 @@ class Newsfeed(Base):
         channel = E(
             'channel',
             E('title', self.pagetitle),
-            E('link', 'http://www.zeit.de%s' % self.request.path),
+            E('link', maybe_convert_http_to_https(
+                'http://www.zeit.de%s' % self.request.path)),
             E('description', self.pagedescription),
             E('language', 'de-de'),
             E('copyright', u'Copyright © {}, ZEIT ONLINE GmbH'.format(year)),
             EN('atom', 'link',
                href=self.request.url.decode('utf-8'),
                type=self.request.response.content_type),
-            E('docs', 'http://www.zeit.de/hilfe/rss'),
+            E('docs',
+              maybe_convert_http_to_https('http://www.zeit.de/hilfe/rss')),
             E('generator', 'zeit.web {}'.format(
                 self.request.registry.settings.version)),
             E('managingEditor',
@@ -169,7 +184,8 @@ class Newsfeed(Base):
                 E('url', (self.request.image_host +
                           '/bilder/elemente_01_06/logos/homepage_top.gif')),
                 E('title', self.pagetitle),
-                E('link', 'http://www.zeit.de%s' % self.request.path)
+                E('link', maybe_convert_http_to_https(
+                    'http://www.zeit.de%s' % self.request.path))
             )
         )
         root.append(channel)
@@ -576,6 +592,9 @@ class MsnFeed(Base):
     def make_image_url(self, image, image_width):
         image_height = int(image_width / image.ratio)
         # XXX: remove as soon as we have SSL
+        # img.zeit.de is already ssl enabled and can be used here
+        # the replacement won't be neccessary, once we have a globally
+        # configured SSL.
         image_host = self.request.image_host.replace(
             'http://', 'https://')
         image_url = '{}{}__{}x{}__desktop'.format(
@@ -728,15 +747,14 @@ class GoogleEditorsPicksFeed(Base):
             yield item
 
     def build_feed(self):
-        toggles = zeit.web.core.application.FEATURE_TOGGLES
-        protocol = 'https' if toggles.find('https') else 'http'
-        homepage_link = '{}://www.zeit.de/index'.format(protocol)
+        homepage_link = maybe_convert_http_to_https(
+            'http://www.zeit.de/index')
         feed_title = 'ZEIT ONLINE Newsfeed for Google Editors Picks'
         # the logo file must meet certain conditions
         # https://support.google.com/news/publisher/answer/1407682?hl=en
-        publisher_logo = '{}://www.zeit.de/static/latest/images/{}'.format(
-            protocol,
-            'google-editors-picks-logo-zon.png')  # fuck PEP8
+        publisher_logo = maybe_convert_http_to_https(
+            'http://www.zeit.de/static/latest/images/'
+            'google-editors-picks-logo-zon.png')
         build_date = format_rfc822_date_gmt(datetime.datetime.today())
 
         e = ELEMENT_MAKER

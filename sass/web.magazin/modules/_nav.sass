@@ -151,7 +151,7 @@ $nav-color-border: #444
 			order: 3
 		&__sales
 			order: 4
-		&__service
+		&__more
 			order: 5
 
 		// style für mobile menu item
@@ -159,12 +159,12 @@ $nav-color-border: #444
 		&__ressorts,
 		&__home a,
 		&__sales a,
-		&__service
+		&__more
 			border-top: 1px solid $nav-color-border
 			padding: 0 $page-padding--small
 
 		// service
-		&__service-list
+		&__more-list
 			+clearfix
 			display: none
 			&[aria-hidden="false"]
@@ -234,14 +234,14 @@ $nav-color-border: #444
 
 		// SALES + SERVICE
 		&__sales,
-		&__service
+		&__more
 			flex: 0 1 auto
 			border-width: 0 1px 1px 0
 			border-style: solid
 			border-color: $nav-color-border
 
 		// dropdown menues
-		&__service-list,
+		&__more-list,
 		&__login-list
 			background-color: $primary-color
 			border-color: $nav-color-border
@@ -264,7 +264,7 @@ $nav-color-border: #444
 			padding: remify(0 20px)
 
 		&__login-title,
-		&__service-title
+		&__more-title
 			padding: remify(0 16px)
 			&[aria-expanded="true"]
 				.nav__dropdown:after
@@ -345,7 +345,7 @@ $nav-color-border: #444
 	.no-js
 		.nav
 			&__home,
-			&__service,
+			&__more,
 			&__login
 				float: right
 
@@ -356,7 +356,7 @@ $nav-color-border: #444
 	.no-flexbox
 		.nav
 			&__home,
-			&__service,
+			&__more,
 			&__login
 				display: table-cell
 

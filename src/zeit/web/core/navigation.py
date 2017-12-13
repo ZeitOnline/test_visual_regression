@@ -104,3 +104,9 @@ class NavigationFooterLinksSource(NavigationSource):
     config_url = 'navigation-footer-links-source'
 
 NAVIGATION_FOOTER_LINKS_SOURCE = NavigationFooterLinksSource()(None)
+
+
+class NavigationMoreLinksSource(NavigationSource):
+    product_configuration = 'zeit.web'
+    config_url = 'navigation-more-source'
+NAVIGATION_MORE_SOURCE = NavigationMoreLinksSource()(None)

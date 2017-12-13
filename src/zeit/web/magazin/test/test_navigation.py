@@ -51,10 +51,10 @@ def test_main_navigation(selenium_driver, testserver, screen_size):
     ressorts = header.find_element_by_class_name('nav__ressorts')
     ressorts_links = ressorts.find_elements_by_tag_name('a')
 
-    service = header.find_element_by_class_name('nav__service')
+    service = header.find_element_by_class_name('nav__more')
     service_button = service.find_element_by_xpath(
-        '//a[@aria-controls="service-menu"]')
-    service_list = service.find_element_by_class_name('nav__service-list')
+        '//a[@aria-controls="more-menu"]')
+    service_list = service.find_element_by_class_name('nav__more-list')
     service_links = service_list.find_elements_by_tag_name('a')
 
     # navigation is visible

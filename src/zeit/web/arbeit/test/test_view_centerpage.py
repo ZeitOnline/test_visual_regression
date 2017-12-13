@@ -44,7 +44,10 @@ def test_zar_teaser_small_should_display_no_image_on_mobile(
     teaser_images = driver.find_elements_by_class_name('teaser-small__media')
     assert len(teaser_images) == 6
     for teaser_image in teaser_images:
-        assert teaser_image.is_displayed() is False
+        if '--force-mobile' in teaser_image.get_attribute('class'):
+            assert teaser_image.is_displayed()
+        else:
+            assert teaser_image.is_displayed() is False
 
 
 def test_zar_jobbox_dropdown_has_correct_structure(testbrowser):
@@ -193,3 +196,9 @@ def test_zar_advertorial_cp_header_renders_correctly(testbrowser):
 def test_zar_advertorial_has_markup_module(testbrowser):
     select = testbrowser('/arbeit/centerpage/advertorial').cssselect
     assert len(select('.markup')) == 1
+
+
+def test_zar_advertorial_teaser_has_modifier(testbrowser):
+    select = testbrowser('/arbeit/centerpage/teaser-advertorial').cssselect
+    assert len(select('.teaser-small--advertorial')) == 3
+    assert len(select('.teaser-duo--advertorial')) == 2

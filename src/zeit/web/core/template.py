@@ -33,7 +33,6 @@ import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.utils
 
-
 log = logging.getLogger(__name__)
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
@@ -481,6 +480,28 @@ def first_child(iterable):
         return iter(iterable).next()
     except:
         return
+
+
+@zeit.web.register_filter
+def brightcove_player_url(video_unique_id):
+    player_url_template = 'https://players.brightcove.net/18140073001/' \
+                          '{player_id}_default/index.html?videoId={video_id}'
+    # I don't think we want to show google adds here
+    player_id = settings('brightcove_videoplayer_article_wo_ads',
+                         'NykzeyfYg')
+    video_id = video_unique_id.split('/')[-1]
+    return player_url_template.format(
+        player_id=player_id, video_id=video_id)
+
+
+@zeit.web.register_filter
+def video_thumbnail_url(video_unique_id):
+    img_host = settings('image_prefix', 'https://img.zeit.de')
+    video_path = urlparse.urlparse(video_unique_id).path
+    return urlparse.urljoin(
+        img_host,
+        '/'.join((video_path.strip('/'), 'image_group/thumbnail.jpg'))
+    )
 
 
 @zeit.web.register_filter

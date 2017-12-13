@@ -4,16 +4,45 @@ Change log for zeit.web
 POSTDEPLOY
 ----------
 
-- `wt_3rdparty_cookie` aus den feature-toggle.xml entfernen
+- Nothing
 
 
-3.113 (unreleased)
+3.114 (unreleased)
 ------------------
+
+- ZON-4396: Show label on teasers to advertorials
+
+- ZON-4386: Add missing adtags to mobile ZMO and ZCO hp
+
+- SSL-74: Stop using BC PlaybackAPI for videositemap
+
+
+3.113.2 (2017-12-04)
+--------------------
+
+- BUG-812: Catch new zmo layout w/ another condition
+
+- BUG-813: Go back to http namespaces in feeds (instead of https)
+
+
+3.113.1 (2017-11-29)
+--------------------
+
+- ZON-4284: Hotfix individual parameter for abolink
+
+
+3.113 (2017-11-28)
+------------------
+
+- ZON-3284: Show Status 404 for expired video pages
+
+- ZON-4284: Use same top-navi in verticals ZAR + ZCO + ZMO
 
 - SSL-59: Use different sorl connection for gsitemaps
 
 - SSL-39: Handle link and location target of vivi link objects
 
+- SSL-23: Create https URLs in feeds
 
 3.112 (2017-11-23)
 ------------------
@@ -33,6 +62,8 @@ POSTDEPLOY
 - FEM-69: Add aria-label to comment form textarea
 
 - MAINT: Remove `wt_3rdparty_cookie` feature toggle
+
+- SSL-61: Make scheme of created urls runtime configurable
 
 
 3.111 (2017-11-20)
