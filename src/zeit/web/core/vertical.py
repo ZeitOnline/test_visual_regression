@@ -52,6 +52,8 @@ def zar_vertical(context):
 @grok.implementer(zeit.web.core.interfaces.IVertical)
 def zett_vertical(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    if context.url.startswith(conf.get('zett_host')):
+    zett_host = urlparse.urlparse(conf.get('zett_host')).netloc
+    context_host = urlparse.urlparse(context.url).netloc
+    if zett_host == context_host:
         return 'zett'
     return 'zon'

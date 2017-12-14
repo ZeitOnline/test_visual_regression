@@ -323,8 +323,12 @@ def create_url(context, obj, request=None):
 @zeit.web.register_ctxfilter
 def append_campaign_params(context, url):
     # add campaign parameters for linked ze.tt content
-    zett_host = settings('zett_host', 'https://ze.tt')
-    if url is not None and url.startswith(zett_host):
+    zett_host = urlparse.urlparse(settings('zett_host')).netloc
+    try:
+        context_host = urlparse.urlparse(url).netloc
+    except AttributeError:
+        context_host = None
+    if url is not None and zett_host == context_host:
         try:
             kind = context.get('area').kind
         except:
