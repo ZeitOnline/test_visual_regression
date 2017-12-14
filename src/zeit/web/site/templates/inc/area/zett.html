@@ -4,7 +4,7 @@
 
     {% extends "zeit.web.site:templates/inc/area/parquet.html" %}
 
-    {% set zett_base_url = settings('zett_img_host') ~ '/' %}
+    {% set zett_base_url = settings('zett_host') ~ '/' %}
 
     {% block area_title %}
         <a class="parquet-meta__title parquet-meta__title--zett" href="{{ zett_base_url | append_campaign_params }}">

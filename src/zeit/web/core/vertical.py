@@ -52,6 +52,6 @@ def zar_vertical(context):
 @grok.implementer(zeit.web.core.interfaces.IVertical)
 def zett_vertical(context):
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-    if context.url.startswith(conf.get('zett_img_host')):
+    if context.url.startswith(conf.get('zett_host')):
         return 'zett'
     return 'zon'
