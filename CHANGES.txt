@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - SSL-74: Stop using BC PlaybackAPI for videositemap
 
+- MAINT: More diagnostics when image fallback is triggered
+
 
 3.113.3 (2017-12-14)
 --------------------

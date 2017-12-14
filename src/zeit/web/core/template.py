@@ -87,6 +87,8 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
         # for invalid images, we cast to boolean.
         if fallback is False:
             return None
+        if not expired(image):
+            log.warning('No image found for %s (got: %s)', context, image)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         if fallback is True:
             default_id = conf.get('default_teaser_images')
