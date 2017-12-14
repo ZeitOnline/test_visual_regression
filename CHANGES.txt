@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - MAINT: More diagnostics when image fallback is triggered
 
+- hotfix/zett_https_followup: Determine zett protocol independent
+
 
 3.113.3 (2017-12-14)
 --------------------
