@@ -322,8 +322,8 @@ def create_url(context, obj, request=None):
 @zeit.web.register_ctxfilter
 def append_campaign_params(context, url):
     # add campaign parameters for linked ze.tt content
-    zett_img_host = settings('zett_img_host', 'https://ze.tt')
-    if url is not None and url.startswith(zett_img_host):
+    zett_host = settings('zett_host', 'https://ze.tt')
+    if url is not None and url.startswith(zett_host):
         try:
             kind = context.get('area').kind
         except:
