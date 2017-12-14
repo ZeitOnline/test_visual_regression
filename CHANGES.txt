@@ -7,6 +7,12 @@ POSTDEPLOY
 - Nothing
 
 
+3.113.3 (unreleased)
+--------------------
+
+- HOTFIX: Fix links tracking links after zett went HTTPS 
+
+
 3.113.2 (2017-12-04)
 --------------------
 
