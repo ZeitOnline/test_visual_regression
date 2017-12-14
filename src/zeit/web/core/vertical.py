@@ -1,6 +1,7 @@
 import urlparse
 
 import grokcore.component as grok
+import zope.component
 import zope.interface
 
 import zeit.arbeit.interfaces
@@ -50,6 +51,7 @@ def zar_vertical(context):
 @grok.adapter(zeit.content.link.interfaces.ILink)
 @grok.implementer(zeit.web.core.interfaces.IVertical)
 def zett_vertical(context):
-    if context.url.startswith('http://ze.tt'):
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    if context.url.startswith(conf.get('zett_host')):
         return 'zett'
     return 'zon'
