@@ -96,6 +96,7 @@ def app_settings(mockserver):
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
         'spektrum_img_host': mockserver.url + '/spektrum',
+        'zett_host': 'https://ze.tt',
         'zett_hp_feed': mockserver.url + '/zett/feed.xml',
         'zett_img_host': mockserver.url + '/zett',
         'academics_hp_feed': mockserver.url + '/academics/feed.xml',

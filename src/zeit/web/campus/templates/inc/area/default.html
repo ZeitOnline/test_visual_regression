@@ -6,4 +6,7 @@
             {% include "zeit.web.core:templates/inc/ads/places/mobile/place3.html" %}
         {% endif %}
     {% endif %}
+    {% if view.is_hp and region_loop.index == 5 and area_loop.first %}
+        {% include "zeit.web.core:templates/inc/ads/places/mobile/place4.html" %}
+    {% endif %}
 {% endblock %}
