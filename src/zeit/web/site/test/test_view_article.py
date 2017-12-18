@@ -2313,3 +2313,12 @@ def test_abo_paywall_schema_attr_not_on_free_content(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     jsonld = browser.cssselect('script[type="application/ld+json"]')
     assert len(jsonld) == 0
+
+
+def test_dpa_article_should_have_correct_header(testbrowser):
+    browser = testbrowser('/zeit-online/article/dpa')
+    assert len(browser.cssselect('.dpa-header')) == 1
+
+    browser = testbrowser('/zeit-online/article/dpa-image')
+    assert len(browser.cssselect('.dpa-header')) == 1
+    assert len(browser.cssselect('.dpa-header__image')) == 1
