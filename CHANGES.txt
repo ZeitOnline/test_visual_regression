@@ -10,7 +10,7 @@ POSTDEPLOY
 3.115 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FEM-45: Drop CSS support for IE lte 8
 
 
 3.114 (2017-12-18)
