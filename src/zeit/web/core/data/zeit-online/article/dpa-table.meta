@@ -27,7 +27,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="date_last_published_semantic">2016-09-19T09:24:19.226766+00:00</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="paragraphsperpage">500</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/workflow" name="urgent">no</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">no</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="is_amp">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights"/>
   <attribute ns="http://namespaces.zeit.de/CMS/vgwort" name="private_token">98dfb798af9244ff976b25570f49e86a</attribute>
