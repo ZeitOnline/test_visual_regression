@@ -94,7 +94,7 @@ def is_paywalled(context, request):
 
 
 def is_dpa_article(context, request):
-    return context.product.id == 'News'
+    return context.product and context.product.id == 'News'
 
 
 class Base(object):
