@@ -10,7 +10,7 @@ POSTDEPLOY
 3.115 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-3762: DPA articles with images
 
 
 3.114 (2017-12-18)
