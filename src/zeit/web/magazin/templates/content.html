@@ -50,7 +50,6 @@
 
     {% if view.product_id not in ('TGS', 'ZEI', 'ZMLB') and view.date_last_published_semantic %}
         <!-- seo article date modification -->
-        <!--[if gt IE 8]><!-->
         <script type="text/javascript">
             {# Due to seo reasons, original publish date is added later #}
             var time = document.querySelector('.meta__date'),
@@ -64,7 +63,6 @@
                 time.firstChild.nodeValue = text;
             }
         </script>
-        <!--<![endif]-->
     {% endif %}
 
     {% block comments %}
