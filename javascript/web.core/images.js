@@ -307,9 +307,6 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 markup = markup.replace( 'src="', 'data-dev-null="' );
                 // hide alt from display while image is processed
                 markup = markup.replace( 'alt="', 'data-alt="' );
-                // hide remaining conditional comment fragments
-                markup = markup.replace( '<!--<![endif]-->', '' );
-                markup = markup.replace( '<!--[if gt IE 8]><!-->', '' );
 
                 $noscript.replaceWith( markup );
                 images.push( prepareImage( $parent.find( 'img' ), true ) );

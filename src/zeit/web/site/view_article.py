@@ -182,6 +182,14 @@ class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
 
 
 @zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_dpa_article,),
+    renderer='zeit.web.site:templates/article.html')
+class DPAArticle(Article):
+
+    header_layout = 'dpa'
+
+
+@zeit.web.view_config(
     context=zeit.web.core.article.ILiveblogArticle,
     renderer='templates/liveblog.html')
 class LiveblogArticle(Article):

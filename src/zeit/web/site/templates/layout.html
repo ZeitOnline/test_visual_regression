@@ -1,6 +1,5 @@
 {% import 'zeit.web.site:templates/macros/layout_macro.tpl' as lama %}
 <!DOCTYPE html>
-<!--[if lte IE 8]> <html lang="de" class="no-js lt-ie9"> <![endif]-->
 <!--[if IE 9]> <html lang="de" class="no-js lt-ie10"> <![endif]-->
 <!--[if gt IE 9]><!-->
 <html lang="de" class="no-js" itemscope itemtype="http://schema.org/WebPage">
@@ -21,13 +20,8 @@
     <link rel="apple-touch-icon-precomposed" href="{{ request.image_host }}/static/img/ZO-ipad-114x114.png">
     <link rel="alternate" type="application/rss+xml" href="http://newsfeed.zeit.de/index">
 
-    <!--[if lte IE 8]>
-        <link href="{{ request.asset_host }}/css/web.site/all-old-ie.css" media="screen" rel="stylesheet" type="text/css">
-    <![endif]-->
     {% block css_link %}
-    <!--[if gt IE 8]><!-->
         <link href="{{ request.asset_host }}/css/web.site/screen.css" media="all" rel="stylesheet" type="text/css">
-    <!--<![endif]-->
     {% endblock css_link %}
 
     {%- include "zeit.web.core:templates/inc/inline_js/library.html" -%}

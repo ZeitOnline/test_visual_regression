@@ -37,7 +37,7 @@
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="banner">yes</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="copyrights"/>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="countings">no</attribute>
-  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:716933d4-bab5-4af5-b02f-c9a7ed1953fd}</attribute>
+  <attribute ns="http://namespaces.zeit.de/CMS/document" name="uuid">{urn:uuid:716933d4-bab5-4af5-b02f-c9a7ed1953fe}</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/import" name="nitf-version">1443027055000</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="ressort">News</attribute>
   <attribute ns="http://namespaces.zeit.de/CMS/document" name="show_commentthread">yes</attribute>
