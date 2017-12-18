@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.114 (unreleased)
+3.114 (2017-12-18)
 ------------------
 
 - ZON-4396: Show label on teasers to advertorials
