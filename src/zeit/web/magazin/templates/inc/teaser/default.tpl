@@ -42,7 +42,7 @@ Default teaser template to inherit from.
 
         {% block teaser_journalistic_format %}
             {% if teaser.serie and not teaser.serie.column and not teaser.serie.serienname == 'Martenstein' %}
-                <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Serie: {{ teaser.serie.serienname }}</div>
+                <div class="{{ '%s__series-label' | format(self.layout()) }}">Serie: {{ teaser.serie.serienname }}</div>
             {% endif %}
         {% endblock teaser_journalistic_format %}
 

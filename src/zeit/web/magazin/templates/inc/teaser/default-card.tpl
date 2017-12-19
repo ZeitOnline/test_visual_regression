@@ -19,11 +19,9 @@
             {# front of card #}
             <div class="card {% block card_class %}{% endblock %}"{% if card_style %} style="{{ card_style }}"{% endif %}>
 
-                {% block teaser_journalistic_format %}
-                    {% if teaser.serie and not teaser.serie.column and not teaser.serie.serienname == 'Martenstein' %}
-                        <div class="card__series-label">Serie: {{ teaser.serie.serienname }}</div>
-                    {% endif %}
-                {% endblock teaser_journalistic_format %}
+                {% if teaser.serie and not teaser.serie.column and not teaser.serie.serienname == 'Martenstein' %}
+                    <div class="card__series-label">Serie: {{ teaser.serie.serienname }}</div>
+                {% endif %}
 
                 <h2>
                     <div class="card__title">
