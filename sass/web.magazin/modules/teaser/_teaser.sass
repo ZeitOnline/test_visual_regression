@@ -47,6 +47,13 @@
 	a
 		+fake-box-shadow-inset($white)
 
+%teaser__series-label
+	color: inherit
+	font-size: em(12px)
+	letter-spacing: $letter-spacing-l
+	margin: 0 0 remify(4px)
+	text-transform: uppercase
+
 // standart teaser if nothing else applies
 // will hopefully be never shown
 .teaser
@@ -67,3 +74,5 @@
 		@extend %teaser__title
 	&__subtitle
 		@extend %teaser__subtitle
+	&__series-label
+		@extend %teaser__series-label

@@ -36,6 +36,12 @@ Default teaser template to inherit from.
         {%- endif %}
     {% endblock %}
 
+    {% block teaser_journalistic_format %}
+        {% if teaser.serie and not teaser.serie.column %}
+            <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Serie: {{ teaser.serie.serienname }}</div>
+        {% endif %}
+    {% endblock teaser_journalistic_format %}
+
     <a href="{{ teaser | create_url }}" class="{{ self.layout() }}__text" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}">
         {% block icon %}{% endblock %}
         <h2 class="{{ self.layout() }}__title-box">
