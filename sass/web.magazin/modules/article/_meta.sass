@@ -1,11 +1,14 @@
 .meta
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
 	font-family: $sans-serif-base-font
 	font-size: $font-xs
 	font-weight: bold
 	letter-spacing: 1px
 	line-height: 1.7
 	margin-top: remify(6px)
-	max-width: remify(480px)
+	position: relative // as anchor for .meta__serie:after
 	text-align: left
 	text-transform: uppercase
 	&__source
@@ -15,3 +18,19 @@
 			color: inherit
 	&__byline
 		margin-top: remify(92px)
+
+	&__serie
+		color: $color-text
+		display: block
+		padding-bottom: 13px // TODO: besser mit line-height Sachen?
+		padding-right: remify(40px) // enforce space before texts collide
+		+on-interaction
+			text-decoration: underline
+		&:after
+			content: ''
+			display: block
+			height: 2px
+			background-color: $grey--light
+			position: absolute
+			width: 100%
+			margin-top: 5px // TODO: besser mit line-height Sachen?

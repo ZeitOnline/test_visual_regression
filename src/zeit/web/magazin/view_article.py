@@ -50,6 +50,11 @@ class Article(zeit.web.core.view_article.Article, zeit.web.magazin.view.Base):
         if self.context.genre:
             return prefix + ' ' + self.context.genre.title()
 
+    # TODO: Move to core
+    @zeit.web.reify
+    def has_series_attached(self):
+        return getattr(self.context, 'serie', None)
+
 
 @zeit.web.view_defaults(vertical='zmo')
 @zeit.web.view_config(
