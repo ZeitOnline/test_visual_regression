@@ -36,40 +36,45 @@ Default teaser template to inherit from.
         {%- endif %}
     {% endblock %}
 
-    {% block teaser_journalistic_format %}
-        {% if teaser.serie and not teaser.serie.column %}
-            <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Serie: {{ teaser.serie.serienname }}</div>
-        {% endif %}
-    {% endblock teaser_journalistic_format %}
+    <div class="{{ self.layout() }}__text">
 
-    <a href="{{ teaser | create_url }}" class="{{ self.layout() }}__text" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}">
         {% block icon %}{% endblock %}
-        <h2 class="{{ self.layout() }}__title-box">
-            {% block teaser_kicker -%}
-                {% block zplus_kicker_logo %}
-                    {% if teaser is zplus_abo_content %}
-                        {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
-                    {% elif teaser is zplus_registration_content and toggles('zplus_badge_gray') %}
-                        {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
-                    {% endif %}
-                {% endblock %}
-                <span class="{{ self.layout() }}__kicker">
-                    {{- teaser.teaserSupertitle or teaser.supertitle -}}
-                </span>
-                {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">: </span>{% endif %}
-            {%- endblock %}
 
-            {% block teaser_title -%}
-            <span class="{{ self.layout() }}__title">
-                {{- teaser.teaserTitle or teaser.title -}}
-            </span>
-            {%- endblock teaser_title %}
-        </h2>
-        {% block teaser_text %}
-        <p class="{{ self.layout() }}__subtitle">
-            {{- teaser.teaserText -}}
-        </p>
-        {% endblock %}
-    </a>
+        {% block teaser_journalistic_format %}
+            {% if teaser.serie and not teaser.serie.column %}
+                <div class="{{ '%s__series-label' | format(self.layout()) | with_mods(teaser | vertical ) }}">Serie: {{ teaser.serie.serienname }}</div>
+            {% endif %}
+        {% endblock teaser_journalistic_format %}
+
+        <a href="{{ teaser | create_url }}" class="{{ self.layout() }}__link" title="{{ teaser.teaserSupertitle or teaser.supertitle }} - {{ teaser.teaserTitle or teaser.title }}">
+            <h2 class="{{ self.layout() }}__title-box">
+                {% block teaser_kicker -%}
+                    {% block zplus_kicker_logo %}
+                        {% if teaser is zplus_abo_content %}
+                            {{ lama.use_svg_icon('zplus', 'zplus-logo zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                        {% elif teaser is zplus_registration_content and toggles('zplus_badge_gray') %}
+                            {{ lama.use_svg_icon('zplus', 'zplus-logo-register zplus-logo--xs svg-symbol--hide-ie', view.package, a11y=False) }}
+                        {% endif %}
+                    {% endblock %}
+                    <span class="{{ self.layout() }}__kicker">
+                        {{- teaser.teaserSupertitle or teaser.supertitle -}}
+                    </span>
+                    {%- if teaser.teaserSupertitle or teaser.supertitle %}<span class="visually-hidden">: </span>{% endif %}
+                {%- endblock %}
+
+                {% block teaser_title -%}
+                <span class="{{ self.layout() }}__title">
+                    {{- teaser.teaserTitle or teaser.title -}}
+                </span>
+                {%- endblock teaser_title %}
+            </h2>
+            {% block teaser_text %}
+            <p class="{{ self.layout() }}__subtitle">
+                {{- teaser.teaserText -}}
+            </p>
+            {% endblock %}
+        </a>
+
+    </div>
 
 </article>
