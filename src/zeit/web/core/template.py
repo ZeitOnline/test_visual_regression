@@ -269,6 +269,8 @@ def vertical(content):
 
 @zeit.web.register_filter
 def find_series_cp(content):
+    if not content:
+        return None
     if not getattr(content.serie, 'url', None):
         return None
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
