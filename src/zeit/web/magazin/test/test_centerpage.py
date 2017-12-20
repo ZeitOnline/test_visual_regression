@@ -198,7 +198,7 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
 
     vid_wrap = teaser.cssselect('.teaser-fullwidth__media-container')[0]
     img = teaser.cssselect('img')[0]
-    title_wrap = teaser.cssselect('a')[1]
+    link = teaser.cssselect('a')[1]
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
@@ -217,7 +217,7 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
 
     # structure
     assert img.get('class') == 'video--fallback '
-    assert 'teaser-fullwidth__text' in title_wrap.get('class')
+    assert 'teaser-fullwidth__link' in link.get('class')
     assert len(title) == 1
     assert len(subtitle) == 1
 
