@@ -18,6 +18,9 @@
 		padding: remify(6px 20px 28px)
 		position: absolute
 
+	&__link
+		@extend %teaser__link
+
 	&__kicker
 		@extend %teaser__kicker
 		letter-spacing: normal
@@ -34,3 +37,6 @@
 		stroke-width: 2px
 		stroke: $white
 		width: remify(40px)
+
+	&__series-label
+		@extend %teaser__series-label

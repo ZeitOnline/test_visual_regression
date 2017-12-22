@@ -12,6 +12,9 @@
 		padding: remify(6px 20px 28px)
 		position: absolute
 
+	&__link
+		@extend %teaser__link
+
 	&__kicker
 		@extend %teaser__kicker
 		letter-spacing: normal
@@ -20,3 +23,6 @@
 		@extend %teaser__title
 		+font-smoothing
 		text-shadow: rgba(255, 255, 255, .01) 0 -1px 1px
+
+	&__series-label
+		@extend %teaser__series-label
