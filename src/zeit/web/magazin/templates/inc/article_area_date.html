@@ -1,4 +1,4 @@
-{% if view.has_series_attached %}
+{% if view.has_series_attached and view.context is not longform %}
     {% set series_cp = context | find_series_cp %}
     <a href="{{ series_cp | create_url }}" class="meta__serie" itemprop="isPartOf" data-ct-row="series" data-ct-column="false" data-ct-label="{{ view.serie }}">
         Aus der Serie: {{ view.serie }}

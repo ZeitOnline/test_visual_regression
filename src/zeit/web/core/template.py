@@ -232,6 +232,11 @@ def iqd_mail_hash(mail_address):
 
 
 @zeit.web.register_test
+def longform(context):
+    return zeit.web.magazin.article.ILongformArticle.providedBy(context)
+
+
+@zeit.web.register_test
 def liveblog(context):
     return zeit.web.core.article.ILiveblogArticle.providedBy(context)
 
