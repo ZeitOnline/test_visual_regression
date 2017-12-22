@@ -16,7 +16,7 @@
                             Eine Kolumne von
                             {% for author in view.authors -%}
                                 <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-                                {%- if loop.length > 1 -%}
+                                {%- if loop.length > 1 and not loop.first -%}
                                     {%- if loop.last %} und {% else %}, {% endif -%}
                                 {%- endif -%}
                                 {%- if author.href -%}

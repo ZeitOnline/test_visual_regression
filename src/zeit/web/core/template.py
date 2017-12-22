@@ -232,6 +232,11 @@ def iqd_mail_hash(mail_address):
 
 
 @zeit.web.register_test
+def longform(context):
+    return zeit.web.magazin.article.ILongformArticle.providedBy(context)
+
+
+@zeit.web.register_test
 def liveblog(context):
     return zeit.web.core.article.ILiveblogArticle.providedBy(context)
 
@@ -269,6 +274,8 @@ def vertical(content):
 
 @zeit.web.register_filter
 def find_series_cp(content):
+    if not content:
+        return None
     if not getattr(content.serie, 'url', None):
         return None
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
