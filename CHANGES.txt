@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3762: DPA articles with images
 
+- SSL-65: Remove https feature toggle when producing links
+
 - FEM-45: Drop CSS support for IE lte 8
 
 - FEM-68: Lazyload nextread images
