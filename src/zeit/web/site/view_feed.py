@@ -25,6 +25,8 @@ import zeit.web.core.interfaces
 import zeit.web.core.template
 import zeit.web.core.utils
 
+from zeit.web.core.utils import maybe_convert_http_to_https
+
 
 log = logging.getLogger(__name__)
 
@@ -37,15 +39,6 @@ ELEMENT_MAKER = lxml.builder.ElementMaker(nsmap={
     'media': 'http://search.yahoo.com/mrss/'},
     typemap={types.NoneType: lambda elem, txt: setattr(elem, 'text', ''),
              lxml.etree.CDATA: lambda elem, txt: setattr(elem, 'text', txt)})
-
-
-def maybe_convert_http_to_https(url):
-    # XXX: This is only neccessary, because the original method
-    # does not check wheter the https feature is enabled or not.
-    # The `maybe` refers to host and not to the more general if.
-    if zeit.web.core.application.FEATURE_TOGGLES.find('https'):
-        return zeit.web.core.utils.maybe_convert_http_to_https(url)
-    return url
 
 
 def ELEMENT_NS_MAKER(namespace, tagname, *args, **kw):
