@@ -17,20 +17,19 @@ $article-lineage-transition-duration: .4s
 	width: 100%
 	// must outplay absolutely positioned elements futher down the DOM
 	// - share + print (abs pos. z-index=1 would be enough)
-	// - embedded videos (z-index=4 needed) e.g. http://127.0.0.1:9090/politik/deutschland/2015-10/cannabis-verkauf-kreuzberg-monika-herrmann
+	// - embedded videos (z-index=4 needed) e.g. http://localhost:9090/gesellschaft/zeitgeschehen/2017-12/usa-zugwaggon-entgleist-autobahn-seattle
 	z-index: 4
 	+respond-min($break-desktop-min)
 		display: block
 		z-index: -1
-	+old-ie
-		display: none
 	&--hidden
 		transition-duration: 90ms // used to fade it out quickly
 		pointer-events: none // it's invisible - make it unclickable too
 	&--absolute,
 	&--fixed
 		opacity: 1
-		z-index: auto
+		// must outplay videoplayer (z-index=1)
+		z-index: 4
 	&--absolute
 		position: absolute
 		top: auto

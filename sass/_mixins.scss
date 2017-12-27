@@ -534,28 +534,10 @@ $inline-block-alignment: none !default;
 	@if $alignment and $alignment != none {
 		vertical-align: $alignment;
 	}
-
-	// legacy IE support
-	@if $old-ie and $old-ie == true {
-		@if $ie-alignment and $ie-alignment != none {
-			*vertical-align: $ie-alignment;
-		}
-
-		*zoom: 1;
-		*display: inline;
-	}
-}
-
-@mixin has-layout {
-	@if $old-ie and $old-ie == true {
-		*zoom: 1;
-	}
 }
 
 @mixin clearfix {
 	overflow: hidden;
-
-	@include has-layout;
 }
 
 @mixin pie-clearfix {
@@ -564,8 +546,6 @@ $inline-block-alignment: none !default;
 		display: block; // http://cssmojo.com/the-very-latest-clearfix-reloaded/
 		clear: both;
 	}
-
-	@include has-layout;
 }
 
 //  Background svg mixin
