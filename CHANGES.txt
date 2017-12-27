@@ -20,6 +20,8 @@ POSTDEPLOY
 
 - BUG-785: Fix parquet for teasers w little content
 
+- BUG-832: Video must not cover article lineage
+
 
 3.114.1 (2017-12-21)
 --------------------
