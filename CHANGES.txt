@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - BUG-832: Video must not cover article lineage
 
+- BUG-810: Improve font contrast on imageless nextread
+
 
 3.114.1 (2017-12-21)
 --------------------
