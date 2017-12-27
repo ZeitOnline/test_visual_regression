@@ -187,6 +187,13 @@
 				</container>
 			</region>
 		</cluster>
+		<cluster area="id-db3130e7-782c-494a-81f4-ba9d4e4f9f7dfc" kind="parquet" kind_title="Special Case Parkett-Region">
+			<region hide-dupes="True" area="id-c52657e6-7494-46d9-83d4-90a88775090dfdfc" kind="parquet" title="Special">
+				<container cp:type="teaser" module="zon-small" cp:__name__="id-bda622159-57f7-4f6a-bbdd-738e4a05e5e2">
+					<block href="http://xml.zeit.de/arbeit/teaser/short-noimage" uniqueId="http://xml.zeit.de/arbeit/teaser/short-noimage" />
+				</container>
+			</region>
+		</cluster>
 	</body>
 	<feed/>
 	<teaser>

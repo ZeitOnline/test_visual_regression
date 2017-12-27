@@ -10,11 +10,17 @@ POSTDEPLOY
 3.115 (unreleased)
 ------------------
 
+- ZON-3729: Display series for ZMO teaser and article
+
 - ZON-3762: DPA articles with images
 
 - FEM-45: Drop CSS support for IE lte 8
 
 - FEM-68: Lazyload nextread images
+
+- BUG-785: Fix parquet for teasers w little content
+
+- BUG-832: Video must not cover article lineage
 
 
 3.114.1 (2017-12-21)
