@@ -10,6 +10,8 @@ POSTDEPLOY
 3.115 (unreleased)
 ------------------
 
+- ZON-3729: Display series for ZMO teaser and article
+
 - ZON-3762: DPA articles with images
 
 - FEM-45: Drop CSS support for IE lte 8

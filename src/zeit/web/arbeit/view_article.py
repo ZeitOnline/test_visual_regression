@@ -44,10 +44,6 @@ class Article(zeit.web.core.view_article.Article,
             return 'column'
         return self.context.header_layout or 'default'
 
-    @zeit.web.reify
-    def has_series_attached(self):
-        return getattr(self.context, 'serie', None)
-
 
 @zeit.web.view_defaults(vertical='zar')
 @zeit.web.view_config(
