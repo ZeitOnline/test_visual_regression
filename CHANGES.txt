@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - FEM-68: Lazyload nextread images
 
+- BUG-832: Video must not cover article lineage
+
 
 3.114.1 (2017-12-21)
 --------------------
