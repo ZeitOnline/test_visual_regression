@@ -1,11 +1,13 @@
 .meta
-	font-family: $sans-serif-base-font
+	display: flex
+	flex-wrap: wrap
+	justify-content: space-between
 	font-size: $font-xs
 	font-weight: bold
 	letter-spacing: 1px
 	line-height: 1.7
 	margin-top: remify(6px)
-	max-width: remify(480px)
+	position: relative // as anchor for .meta__serie:after
 	text-align: left
 	text-transform: uppercase
 	&__source
@@ -14,4 +16,25 @@
 		a
 			color: inherit
 	&__byline
-		margin-top: remify(92px)
+		margin-bottom: remify(8px)
+		width: 100%
+
+	&__serie
+		color: $color-text
+		display: block
+		margin-bottom: remify(13px)
+		padding-right: remify(40px) // enforce space before texts collide
+		+on-interaction
+			text-decoration: underline
+		&:after
+			content: ''
+			display: block
+			height: 2px
+			background-color: $grey--light
+			position: absolute
+			width: 100%
+			margin-top: remify(5px)
+
+// special case: JS-injected update time (http://localhost:9090/zeit-magazin/article/04) breaks the flex layout
+.meta__serie + span > br
+	display: none

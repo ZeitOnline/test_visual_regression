@@ -366,6 +366,10 @@ class Article(zeit.web.core.view.Content):
     def view_name(self):
         return self.request.view_name or 'article'
 
+    @zeit.web.reify
+    def has_series_attached(self):
+        return getattr(self.context, 'serie', None)
+
 
 class AcceleratedMobilePageArticle(Article):
 
