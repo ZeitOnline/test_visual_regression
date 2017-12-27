@@ -149,7 +149,7 @@ def test_socialflow_feed_contains_social_fields(testserver):
     assert '<content:encoded>FB-ZCO' in feed
 
 
-def test_instant_article_feed_should_be_rendered(testserver, togglepatch):
+def test_instant_article_feed_should_be_rendered(testserver):
     res = requests.get(
         '{}/zeit-magazin/centerpage/index/rss-instantarticle'
         .format(testserver.url),
