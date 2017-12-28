@@ -91,6 +91,9 @@
         <container cp:type="teaser" module="zmo-square-large" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c805MAJOR">
           <block href="http://xml.zeit.de/zeit-magazin/article/vegetarisch-kochen-fuer-gaeste" />
         </container>
+        <container cp:type="cpextra" module="zmo_follow_us" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f11c673478">
+            <cp_extra for="zeit.content.cp.interfaces.IArea" />
+        </container>
         <container cp:type="teaser" module="zmo-square-large-light" cp:__name__="id-f8f46488-75ea-46f4-aaff-7654b4e1c80f5MAJOR">
           <block href="http://xml.zeit.de/zeit-magazin/article/vegetarisch-kochen-fuer-gaeste" />
         </container>
@@ -121,6 +124,9 @@
         <container cp:type="teaser" module="zmo-card-picture" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardp">
           <block href="http://xml.zeit.de/zeit-magazin/article/kochen-wuerzen-veganer-kuchen"/>
         </container>
+        <container cp:type="cpextra" module="zmo_follow_us" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f11c673478">
+            <cp_extra for="zeit.content.cp.interfaces.IArea" />
+        </container>
         <container cp:type="teaser" module="zmo-card-flip-read" hide-dupes="True" visible="True" cp:__name__="id-bff224c9-088e-40d4-987d-9d986de804bdHHHHHcardfr">
           <block href="http://xml.zeit.de/zeit-magazin/article/kochen-wuerzen-veganer-kuchen"/>
         </container>
@@ -140,6 +146,14 @@
           <block href="http://xml.zeit.de/zeit-magazin/article/02"/>
         </container>
       </region>
+    </cluster>
+
+    <cluster area="id-a2dff7f3-9042-4a6f-b22d-143fdfc5cff3" kind="solo">
+        <region area="id-122f9c43-8a0e-4551-9636-8126ed4ea33d" kind="solo">
+            <container cp:type="cpextra" module="zmo_follow_us" visible="True" visible_mobile="True" cp:__name__="id-f7572d4c-2d8d-4432-b8db-3fb3a228f11c673478">
+                <cp_extra for="zeit.content.cp.interfaces.IArea" />
+            </container>
+        </region>
     </cluster>
 
     <cluster area="id-TRIO6a3c9692-f2bd-4234-8890-a84f1924ef83" visible="True" kind="trio">
