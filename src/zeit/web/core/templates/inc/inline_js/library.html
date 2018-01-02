@@ -132,12 +132,12 @@
 {% if toggles('iqd_tablet_transformation') -%}
     var ressort = window.Zeit.view.get('ressort');
     {%- if view.advertising_enabled %}
-        {%- if view.banner_toggles('viewport_zoom') == 'tablet' and view.is_hp %}
+        {%- if view.package == 'zeit.web.site' and view.is_hp %}
         {# /* ZON style: set viewport for tablets on HP */ #}
             if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.maxWidth ) {
                 window.Zeit.viewport.set( 'banner' );
             }
-        {%- elif view.banner_toggles('viewport_zoom') == 'tablet' %}
+        {%- elif view.package == 'zeit.web.site' %}
         {# /* ZON style: set viewport for small and big tablets */ #}
             if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.tabletSmallMinWidth ) {
                 if ( ressort === 'homepage' ) {
@@ -154,13 +154,13 @@
     {%- endif %}
 {% else %}
     {%- if view.advertising_enabled %}
-        {%- if view.banner_toggles('viewport_zoom') == 'tablet' %}
+        {%- if view.package == 'zeit.web.site' %}
         {# /* ZON style: set viewport for tablets */ #}
             if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.maxWidth ) {
                 window.Zeit.viewport.set( 'banner' );
             }
 
-        {%- elif view.banner_toggles('viewport_zoom') == 'tablet-landscape' %}
+        {%- elif view.package == 'zeit.web.magazin' %}
         {# /* ZMO style: set viewport for tablets in landscape mode */ #}
             if ( screen.width >= window.Zeit.tabletMinWidth && screen.width < window.Zeit.maxWidth && window.Zeit.viewport.isLandscape() ) {
                 window.Zeit.viewport.set( 'banner' );
