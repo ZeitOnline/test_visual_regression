@@ -6,6 +6,8 @@ import requests
 import time
 import zope.testbrowser.browser
 
+from datetime import datetime
+
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
@@ -176,9 +178,11 @@ def test_search_results_page_contains_teasers(config, testbrowser):
 
 
 def test_configured_redirects(config):
+    current_year = datetime.now().year
     resp = requests.head('{}/archiv'.format(config['BASE_URL']),
                          allow_redirects=False)
-    assert resp.headers['Location'] == 'http://www.zeit.de/2017/index'
+    assert resp.headers['Location'] == 'http://www.zeit.de/{}/index'.format(
+        current_year)
     resp = requests.head('{}/ZEITmagazin/'.format(config['BASE_URL']),
                          allow_redirects=False)
     assert resp.headers['Location'] == 'http://www.zeit.de/zeit-magazin/index'
