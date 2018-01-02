@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - ZON-3762: DPA articles with images
 
+- ZON-4252: Followbar for ZMO
+
 - SSL-65: Remove https feature toggle when producing links
 
 - FEM-45: Drop CSS support for IE lte 8
