@@ -50,17 +50,9 @@
         getClientWidth: function() {
             return Math.max( document.documentElement.clientWidth || 0, window.innerWidth || 0 );
         },
-        {% if toggles('iqd_tablet_transformation') -%}
-            {%- if view.is_hp %}
-                isMobileView: function() {
-                    return this.getClientWidth() < this.tabletMinWidth;
-                },
-           {% endif -%}
-       {% else %}
-           isMobileView: function() {
-                return this.getClientWidth() < this.tabletMinWidth;
-            },
-       {% endif -%}
+       isMobileView: function() {
+            return this.getClientWidth() < this.tabletMinWidth;
+        },
         getSiteParam: function() {
             if ( this.isMobileView() ) {
                 if ( this.isWrapped ) {
