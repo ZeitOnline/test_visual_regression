@@ -1,7 +1,5 @@
 .main
 	overflow: hidden // prevent android from wrong zooming
-	+old-ie
-		width: $max-page-width
 	+respond-min($break-tablet-min)
 		// dirty trick to hide the main navigation border
 		// for pages with colored backgroud/header (columns, videopage, konto etc.)

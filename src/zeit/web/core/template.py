@@ -33,7 +33,6 @@ import zeit.web.core.centerpage
 import zeit.web.core.interfaces
 import zeit.web.core.utils
 
-
 log = logging.getLogger(__name__)
 
 SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
@@ -88,6 +87,8 @@ def get_image(context, variant_id=None, fallback=True, fill_color=True,
         # for invalid images, we cast to boolean.
         if fallback is False:
             return None
+        if not expired(image):
+            log.warning('No image found for %s (got: %s)', context, image)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         if fallback is True:
             default_id = conf.get('default_teaser_images')
@@ -231,6 +232,11 @@ def iqd_mail_hash(mail_address):
 
 
 @zeit.web.register_test
+def longform(context):
+    return zeit.web.magazin.article.ILongformArticle.providedBy(context)
+
+
+@zeit.web.register_test
 def liveblog(context):
     return zeit.web.core.article.ILiveblogArticle.providedBy(context)
 
@@ -268,6 +274,8 @@ def vertical(content):
 
 @zeit.web.register_filter
 def find_series_cp(content):
+    if not content:
+        return None
     if not getattr(content.serie, 'url', None):
         return None
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -307,8 +315,6 @@ def create_url(context, obj, request=None):
         return obj.replace(
             zeit.cms.interfaces.ID_NAMESPACE, host, 1).replace('.cp2015', '')
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
-        if not toggles('https'):
-            return obj.url
         return zeit.web.core.utils.maybe_convert_http_to_https(obj.url)
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
         return create_url(
@@ -322,7 +328,12 @@ def create_url(context, obj, request=None):
 @zeit.web.register_ctxfilter
 def append_campaign_params(context, url):
     # add campaign parameters for linked ze.tt content
-    if url is not None and url.startswith('http://ze.tt'):
+    zett_host = urlparse.urlparse(settings('zett_host')).netloc
+    try:
+        context_host = urlparse.urlparse(url).netloc
+    except AttributeError:
+        context_host = None
+    if url is not None and zett_host == context_host:
         try:
             kind = context.get('area').kind
         except:
@@ -481,6 +492,28 @@ def first_child(iterable):
         return iter(iterable).next()
     except:
         return
+
+
+@zeit.web.register_filter
+def brightcove_player_url(video_unique_id):
+    player_url_template = 'https://players.brightcove.net/18140073001/' \
+                          '{player_id}_default/index.html?videoId={video_id}'
+    # I don't think we want to show google adds here
+    player_id = settings('brightcove_videoplayer_article_wo_ads',
+                         'NykzeyfYg')
+    video_id = video_unique_id.split('/')[-1]
+    return player_url_template.format(
+        player_id=player_id, video_id=video_id)
+
+
+@zeit.web.register_filter
+def video_thumbnail_url(video_unique_id):
+    img_host = settings('image_prefix', 'https://img.zeit.de')
+    video_path = urlparse.urlparse(video_unique_id).path
+    return urlparse.urljoin(
+        img_host,
+        '/'.join((video_path.strip('/'), 'image_group/thumbnail.jpg'))
+    )
 
 
 @zeit.web.register_filter

@@ -7,4 +7,7 @@
     {% if region_loop.index == region_number  and area_loop.index == 1 and module_loop.index == module_number %}
         {% include "zeit.web.core:templates/inc/ads/places/mobile/place3.html" %}
     {% endif %}
+    {% if view.is_hp and module_loop.index == 8 and area_loop.first %}
+        {% include "zeit.web.core:templates/inc/ads/places/mobile/place4.html" %}
+    {% endif %}
 {% endblock %}

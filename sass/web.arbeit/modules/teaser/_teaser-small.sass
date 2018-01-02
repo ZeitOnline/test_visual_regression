@@ -44,6 +44,33 @@
 	.teaser-small
 		&__media
 			display: none
+			&--force-mobile
+				display: block
+
 	// we want to seperate trio teasers from lead teasers (which we _assume_ inside the first solo region)
 	.cp-region--solo:first-of-type + .cp-region--trio > .cp-area--trio:first-child > .teaser-small
 		border-top: 1px $color-border-on-bright solid
+
+.teaser-small
+	&--advertorial
+		position: relative
+		.teaser-small__heading
+			&:before
+				@extend %teaser-advertoriallabel
+				top: $vertical-space--small
+				right: $page-padding--small
+				+respond-min($break-tablet-min)
+					padding: remify(8px)
+					top: $vertical-space
+					right: $cp-padding
+				+respond-max($break-tablet-min)
+					background: none
+					color: $primary-color
+		// Very special special case:
+		.teaser-small__media--force-mobile + .teaser-small__container
+			.teaser-small__heading
+				&:before
+					+respond-max($break-tablet-min)
+						background: rgba($primary-color, 0.6)
+						color: $white
+						padding: remify(8px)
