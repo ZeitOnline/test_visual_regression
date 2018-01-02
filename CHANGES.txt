@@ -7,7 +7,13 @@ POSTDEPLOY
 - Nothing
 
 
-3.115 (unreleased)
+3.116 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.115 (2018-01-02)
 ------------------
 
 - ZON-3729: Display series for ZMO teaser and article
