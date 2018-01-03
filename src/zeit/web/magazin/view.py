@@ -54,12 +54,6 @@ class Base(zeit.web.core.view.Base):
         }
         return ressorts.get(self.sub_ressort, self.ressort.capitalize())
 
-    def banner_toggles(self, name):
-        cases = {
-            'viewport_zoom': 'tablet-landscape',
-        }
-        return cases.get(name, None)
-
     @zeit.web.reify
     def adwords(self):
         return ['zeitonline', 'zeitmz']

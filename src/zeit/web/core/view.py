@@ -255,9 +255,6 @@ class Base(object):
         else:
             return True
 
-    def banner_toggles(self, name):
-        return None
-
     @zeit.web.reify
     def adcontroller_handle(self):
         suffix = '_trsf'
