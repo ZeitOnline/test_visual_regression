@@ -7,12 +7,26 @@ POSTDEPLOY
 - Nothing
 
 
-3.115 (unreleased)
+3.117 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+3.116 (2018-01-03)
+------------------
+
+- ZON-4237: Adtransformation for tablets
+
+
+3.115 (2018-01-02)
 ------------------
 
 - ZON-3729: Display series for ZMO teaser and article
 
 - ZON-3762: DPA articles with images
+
+- ZON-4252: Followbar for ZMO
 
 - SSL-65: Remove https feature toggle when producing links
 

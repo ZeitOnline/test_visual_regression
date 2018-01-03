@@ -8,14 +8,6 @@ import zeit.web.core.banner
 import zeit.web.site
 
 
-def test_banner_toggles_viewport_zoom(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-online/zeitonline')
-    view = zeit.web.site.view_centerpage.Centerpage(
-        context, pyramid.testing.DummyRequest())
-    assert view.banner_toggles('viewport_zoom') == 'tablet'
-
-
 def test_homepage_should_have_proper_ivw_script_integration(
         testbrowser, monkeypatch):
     monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
