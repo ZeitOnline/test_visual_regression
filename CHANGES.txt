@@ -10,15 +10,13 @@ POSTDEPLOY
 3.117 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FIX: Add margin to zmo-follow-us title in mobile view
 
 
 3.116 (2018-01-03)
 ------------------
 
 - ZON-4237: Adtransformation for tablets
-
-- FIX: Add margin to zmo-follow-us title in mobile view
 
 
 3.115 (2018-01-02)
