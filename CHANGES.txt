@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.116 (unreleased)
+3.116 (2018-01-03)
 ------------------
 
 - ZON-4237: Adtransformation for tablets
