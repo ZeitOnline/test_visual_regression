@@ -10,7 +10,7 @@ POSTDEPLOY
 3.116 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4237: Adtransformation for tablets
 
 
 3.115 (2018-01-02)
