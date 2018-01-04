@@ -149,6 +149,26 @@ def test_gsitemap_newssite(testbrowser):
         'http://www.milosdjuric.com/')
 
 
+def test_gsitemap_news_does_not_contain_none_in_keywords(
+        testbrowser, monkeypatch):
+    set_sitemap_solr_results([{
+        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
+        'keyword': ['Schwangerschaft', 'Konsumverhalten'],
+        'keyword_id': ['schwangerschaft', 'konsumverhalten']},
+    ])
+    # sub_ressort is added as keyword as well, set it to None here to check if
+    # 'None' is added keyword list
+    monkeypatch.setattr(
+        zeit.content.article.article.Article, 'sub_ressort', None
+    )
+    browser = testbrowser('/gsitemaps/newsitemap.xml')
+    xml = lxml.etree.fromstring(browser.contents)
+    ns = {'n': 'http://www.google.com/schemas/sitemap-news/0.9'}
+    assert (
+        xml.xpath('//n:news/n:keywords', namespaces=ns)[0].text ==
+        u'Schwangerschaft, Konsumverhalten, Digital')
+
+
 def test_gsitemap_video(testbrowser):
     set_sitemap_solr_results([{
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'

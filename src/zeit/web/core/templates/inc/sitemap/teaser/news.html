@@ -1,5 +1,4 @@
-{%- set keywords = teaser.keywords | map(attribute='label') -%}
-{%- set keywords_extra = [teaser.ressort, teaser.sub_ressort] -%}
+{%- set keywords = teaser.keywords | map(attribute='label') | list + [teaser.ressort, teaser.sub_ressort] | list -%}
 {%- require date = teaser | mod_date | format_date('iso8601') -%}
     <url>
         <loc>{{ teaser.uniqueId | create_url }}</loc>
@@ -11,7 +10,7 @@
             <n:title>{{ teaser.supertitle }}: {{ teaser.title }}</n:title>
             <n:publication_date>{{ date }}</n:publication_date>
             <n:keywords>
-                {%- for keyword in keywords | list + keywords_extra | list -%}
+                {%- for keyword in keywords if keyword -%}
                     {%- if loop.index > 1 -%}{{ ', ' }}{%- endif -%}{{ keyword | trim }}
                 {%- endfor -%}
             </n:keywords>
