@@ -106,7 +106,7 @@ def test_gsitemap_newssite(testbrowser):
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
         'keyword': ['Schwangerschaft', 'Konsumverhalten'],
         'keyword_id': ['schwangerschaft', 'konsumverhalten']},
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'}])
+    ])
     browser = testbrowser('/gsitemaps/newsitemap.xml')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/zeit-magazin/article/autorenbox')
