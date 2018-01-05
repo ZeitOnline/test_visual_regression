@@ -267,7 +267,36 @@ def test_gsitemap_appcon(monkeypatch, testbrowser):
         'article/01-countdown-studium')
     assert (
         xml.xpath('//xhtml:link/@href', namespaces=ns)[1] ==
-        'android-app://de.zeit.online/http/blog.zeit.de/blogs/'
+        'android-app://de.zeit.online/https/blog.zeit.de/blogs/'
+        'nsu-blog-bouffier')
+
+
+def test_gsitemap_appcon_creates_https_urls(
+        monkeypatch, testbrowser, togglepatch):
+    set_sitemap_solr_results([
+        {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
+        {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}
+    ])
+    togglepatch({'https': True})
+    monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
+    browser = testbrowser('/gsitemaps/appconsitemap.xml?p=1')
+    xml = lxml.etree.fromstring(browser.contents)
+    ns = {'xhtml': 'http://www.w3.org/1999/xhtml'}
+    assert (
+        browser.document.xpath('//url/loc')[0].text ==
+        'https://localhost/campus/article/01-countdown-studium')
+    assert (
+        xml.xpath('//xhtml:link/@href', namespaces=ns)[0] ==
+        'android-app://de.zeit.online/https/localhost/campus/'
+        'article/01-countdown-studium')
+    # Whats wrong with blogs?
+    # Well, both should be transformed
+    assert (
+        browser.document.xpath('//url/loc')[1].text ==
+        'https://blog.zeit.de/blogs/nsu-blog-bouffier')
+    assert (
+        xml.xpath('//xhtml:link/@href', namespaces=ns)[1] ==
+        'android-app://de.zeit.online/https/blog.zeit.de/blogs/'
         'nsu-blog-bouffier')
 
 
