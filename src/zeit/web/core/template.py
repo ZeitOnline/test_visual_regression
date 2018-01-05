@@ -310,7 +310,7 @@ def create_url(context, obj, request=None):
     except:
         log.debug('Could not retrieve request from context: %s' % obj)
         host = '/'
-    
+
     if isinstance(obj, basestring):
         return zeit.web.core.utils.maybe_convert_http_to_https(obj.replace(
             zeit.cms.interfaces.ID_NAMESPACE, host, 1).replace('.cp2015', ''))
