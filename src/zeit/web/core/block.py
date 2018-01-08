@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 import datetime
-import logging
 import random
 
 import babel.dates
+import base64
 import grokcore.component
+import json
 import lxml.etree
 import lxml.html
 import pyramid
+import re
 import requests
 import requests.exceptions
 import urlparse
@@ -247,36 +249,86 @@ class Liveblog(Module):
     def __init__(self, context):
         super(Liveblog, self).__init__(context)
         self.blog_id = self.context.blog_id
+        self.version = getattr(self.context, 'version', None)
         self.is_live = False
         self.last_modified = None
         self.id = None
         self.seo_id = None
 
-        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
-        self.status_url = conf.get('liveblog_status_url')
+        if self.version == '3':
+            self.set_blog_info()
+        else:
+            conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+            self.status_url = conf.get('liveblog_status_url')
 
-        try:
-            self.id, self.seo_id = self.blog_id.split('-')[:2]
-        except ValueError:
-            self.id = self.blog_id
+            try:
+                self.id, self.seo_id = self.blog_id.split('-')[:2]
+            except ValueError:
+                self.id = self.blog_id
 
-        # set last_modified
-        url = '{}/Blog/{}/Post/Published'
-        content = self.get_restful(url.format(self.status_url, self.id))
+            # set last_modified
+            url = '{}/api/{}/Post/Published'
+            content = self.get_restful(url.format(self.status_url, self.id))
 
-        if (content and 'PostList' in content and len(
-                content['PostList']) and 'href' in content['PostList'][0]):
-            href = content['PostList'][0]['href']
-            content = self.get_restful(self.prepare_ref(href))
-            if content and 'PublishedOn' in content:
-                self.last_modified = self.format_date(content['PublishedOn'])
+            if (content and 'PostList' in content and len(
+                    content['PostList']) and 'href' in content['PostList'][0]):
+                href = content['PostList'][0]['href']
+                content = self.get_restful(self.prepare_ref(href))
+                if content and 'PublishedOn' in content:
+                    self.last_modified = self.format_date(content['PublishedOn'])
 
-        # set is_live
-        url = '{}/Blog/{}'
-        content = self.get_restful(url.format(self.status_url, self.id))
+            # set is_live
+            url = '{}/api/{}'
+            content = self.get_restful(url.format(self.status_url, self.id))
+            if content and 'ClosedOn' not in content:
+                self.is_live = True
 
-        if content and 'ClosedOn' not in content:
+    def set_blog_info(self):
+        json = self.api_blog_request()
+
+        if json.get('blog_status') == u'open':
             self.is_live = True
+        if json.get('_updated'):
+            self.last_modified = json.get('_updated')
+
+    def api_auth_token(self):
+        conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+        url = conf.get('liveblog_api_auth_url_v3')
+
+        username = conf.get('liveblog_api_auth_username_v3')
+        password = conf.get('liveblog_api_auth_password_v3')
+        headers = {'Content-Type': 'application/json;charset=UTF-8'}
+        payload = {'username': username, 'password': password}
+
+        r = requests.post(url, data=json.dumps(payload), headers=headers)
+        r.raise_for_status()
+        token = r.json().get('token')
+        LONG_TERM_CACHE.set('liveblog_api_auth_token', token)
+        return token
+
+    def api_blog_request(self):
+        token = LONG_TERM_CACHE.get('liveblog_api_auth_token')
+        if not token:
+            token = self.api_auth_token()
+
+        if isinstance(token, basestring):
+            conf = zope.component.getUtility(
+                zeit.web.core.interfaces.ISettings)
+            api_url = conf.get('liveblog_api_url_v3')
+            url = '{}/{}'.format(api_url, self.blog_id)
+            headers = {
+                'Authorization': 'basic ' + base64.b64encode(token + ':')}
+            r = requests.get(url, headers=headers)
+
+            if r.status_code == 200:
+                return r.json()
+            else:
+                token = self.api_auth_token()
+                headers = {
+                    'Authorization': 'basic ' + base64.b64encode(token + ':')}
+                r = requests.get(url, headers=headers)
+                r.raise_for_status()
+                return r.json()
 
     def format_date(self, date):
         tz = babel.dates.get_timezone('Europe/Berlin')
@@ -309,26 +361,33 @@ class Liveblog(Module):
 
     @LONG_TERM_CACHE.cache_on_arguments()
     def get_amp_themed_id(self, blog_id):
-        url = '{}/Blog/{}/Seo'
-        content = self.get_restful(url.format(self.status_url, blog_id))
+        if self.version == '3':
+            json = self.api_blog_request()
+            channels = json.get('public_urls').get('output')
+            if channels:
+                s = next(v for (k, v) in channels.iteritems() if '/amp/' in v)
+                return re.search('/amp/(.*)/index.html', s).group(1)
+        else:
+            url = '{}/api/{}/Seo'
+            content = self.get_restful(url.format(self.status_url, blog_id))
 
-        if content and 'SeoList' in content:
-            for item in content['SeoList']:
-                blog_theme_id = None
-                if 'href' in item:
-                    seo = self.get_restful(self.prepare_ref(item['href']))
-                    if seo and 'BlogTheme' in seo:
-                        try:
-                            blog_theme_id = int(seo['BlogTheme']['Id'])
-                        except (KeyError, ValueError):
-                            pass
+            if content and 'SeoList' in content:
+                for item in content['SeoList']:
+                    blog_theme_id = None
+                    if 'href' in item:
+                        seo = self.get_restful(self.prepare_ref(item['href']))
+                        if seo and 'BlogTheme' in seo:
+                            try:
+                                blog_theme_id = int(seo['BlogTheme']['Id'])
+                            except (KeyError, ValueError):
+                                pass
 
-                        # return SEO ID using AMP theme
-                        # 23 = zeit
-                        # 24 = zeit-solo
-                        # 27 = zeit-amp
-                        if blog_theme_id == 27:
-                            return '{}-{}'.format(blog_id, seo['Id'])
+                            # return SEO ID using AMP theme
+                            # 23 = zeit
+                            # 24 = zeit-solo
+                            # 27 = zeit-amp
+                            if blog_theme_id == 27:
+                                return '{}-{}'.format(blog_id, seo['Id'])
 
 
 @grokcore.component.adapter(zeit.content.article.edit.interfaces.IQuiz)

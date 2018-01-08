@@ -76,6 +76,11 @@ def app_settings(mockserver):
         'session.reissue_time': '1',
         'liveblog_backend_url': mockserver.url + '/liveblog/backend',
         'liveblog_status_url': mockserver.url + '/liveblog/status',
+        'liveblog_backend_url_v3': mockserver.url + '/liveblog/v3',
+        'liveblog_api_auth_url_v3': mockserver.url + '/liveblog/v3/api/auth',
+        'liveblog_api_auth_username_v3': 'apiuser',
+        'liveblog_api_auth_password_v3': 'geheim',
+        'liveblog_api_url_v3': mockserver.url + '/liveblog/v3/api/blogs',
         # XXX I'd rather put None here and change the settings for a specific
         # test, but then I'd need to re-create an Application since
         # assets_max_age is only evaluated once during configuration.
