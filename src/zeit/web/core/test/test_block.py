@@ -457,6 +457,7 @@ def test_block_liveblog_should_contain_expected_structure(tplbrowser):
         'zeit.web.core:templates/inc/blocks/liveblog.html', block=block)
     assert browser.cssselect('div.liveblog')
 
+
 def test_block_liveblog_version3_should_contain_expected_structure(tplbrowser):
     block = mock.Mock()
     block.version = '3'

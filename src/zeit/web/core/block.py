@@ -258,7 +258,8 @@ class Liveblog(Module):
         if self.version == '3':
             self.set_blog_info()
         else:
-            conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+            conf = zope.component.getUtility(
+                zeit.web.core.interfaces.ISettings)
             self.status_url = conf.get('liveblog_status_url')
 
             try:
@@ -267,7 +268,7 @@ class Liveblog(Module):
                 self.id = self.blog_id
 
             # set last_modified
-            url = '{}/api/{}/Post/Published'
+            url = '{}/Blog/{}/Post/Published'
             content = self.get_restful(url.format(self.status_url, self.id))
 
             if (content and 'PostList' in content and len(
@@ -275,10 +276,11 @@ class Liveblog(Module):
                 href = content['PostList'][0]['href']
                 content = self.get_restful(self.prepare_ref(href))
                 if content and 'PublishedOn' in content:
-                    self.last_modified = self.format_date(content['PublishedOn'])
+                    self.last_modified = self.format_date(
+                        content['PublishedOn'])
 
             # set is_live
-            url = '{}/api/{}'
+            url = '{}/Blog/{}'
             content = self.get_restful(url.format(self.status_url, self.id))
             if content and 'ClosedOn' not in content:
                 self.is_live = True
@@ -368,7 +370,7 @@ class Liveblog(Module):
                 s = next(v for (k, v) in channels.iteritems() if '/amp/' in v)
                 return re.search('/amp/(.*)/index.html', s).group(1)
         else:
-            url = '{}/api/{}/Seo'
+            url = '{}/Blog/{}/Seo'
             content = self.get_restful(url.format(self.status_url, blog_id))
 
             if content and 'SeoList' in content:
