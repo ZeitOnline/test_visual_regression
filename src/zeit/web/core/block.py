@@ -367,8 +367,12 @@ class Liveblog(Module):
             json = self.api_blog_request()
             channels = json.get('public_urls').get('output')
             if channels:
-                s = next(v for (k, v) in channels.iteritems() if '/amp/' in v)
-                return re.search('/amp/(.*)/index.html', s).group(1)
+                conf = zope.component.getUtility(
+                    zeit.web.core.interfaces.ISettings)
+                regex = '/{}/'.format(conf.get('liveblog_amp_theme_v3'))
+                s = next(
+                    v for (k, v) in channels.iteritems() if regex in v)
+                return re.search(regex + '(.*)/index.html', s).group(1)
         else:
             url = '{}/Blog/{}/Seo'
             content = self.get_restful(url.format(self.status_url, blog_id))
