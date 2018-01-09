@@ -174,6 +174,10 @@ class Base(zeit.web.core.view.Base):
 
     def guid_is_needed(self, content):
         pubdate = first_released(content)
+        # Some articles have `zeit.cms.workflow.interfaces.IPublishInfo`,
+        # which has a unicode string as `date_first_released`.
+        # Some articles have `zeit.content.article.article.ArticleWorkflow`,
+        # which has a datetime object as `date_first_released`.
         try:
             pubdate = pubdate.isoformat()
         except AttributeError:
