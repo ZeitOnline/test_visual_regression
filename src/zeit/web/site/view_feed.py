@@ -102,12 +102,7 @@ def join_queries(url, join_query):
 
 
 def make_guid(content):
-    uuid = zeit.cms.content.interfaces.IUUID(content).id
-    # ^ gives "{urn:uuid:d4ee1903-0a1c-49ab-b1da-d0bb592f3dc7}".
-    # We want "d4ee1903-0a1c-49ab-b1da-d0bb592f3dc7".
-    uuid = re.sub("[^a-zA-Z0-9\-]", "", uuid)
-    uuid = uuid.replace("urnuuid", "")
-    return uuid
+    return zeit.cms.content.interfaces.IUUID(content).id
 
 
 @zeit.web.view_defaults(renderer='string')
