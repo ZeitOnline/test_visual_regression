@@ -182,7 +182,7 @@ class Base(zeit.web.core.view.Base):
             pubdate = pubdate.isoformat()
         except AttributeError:
             pass
-        return pubdate > '2018-01-06'
+        return pubdate > '2018-01-16'
 
     def make_guid_or_contenturl(self, content):
         if self.guid_is_needed(content):
