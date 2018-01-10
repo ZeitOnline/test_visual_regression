@@ -2146,9 +2146,9 @@ def test_ranking_ara_should_offset_resultset_on_materialized_cp(
     assert len(area.values()) == 10
     assert area.total_pages == 5
     assert area._content_query.filter_query == (
-        'NOT (uniqueId:"http://xml.zeit.de/zeit-magazin/leben/2015-02/'
-        'magdalena-ruecken-fs" OR uniqueId:"http://xml.zeit.de/zeit-magazin/'
-        'mode-design/2014-05/karl-lagerfeld-interview")')
+        'NOT (uniqueId:"http://xml.zeit.de/zeit-magazin/mode-design/2014-05'
+        '/karl-lagerfeld-interview" OR uniqueId:"http://xml.zeit.de'
+        '/zeit-magazin/leben/2015-02/magdalena-ruecken-fs")')
 
 
 def test_ranking_area_should_not_offset_resultset_on_materialized_cp(
