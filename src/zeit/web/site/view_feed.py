@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import calendar
 import datetime
-import dateutil.parser
 import email
 import logging
 import pytz
@@ -9,7 +8,6 @@ import types
 import urllib
 import urlparse
 import pyramid
-import re
 
 import lxml.builder
 import lxml.etree
@@ -24,7 +22,6 @@ import zeit.push.interfaces
 import zeit.web
 import zeit.web.core.interfaces
 import zeit.web.core.template
-import zeit.web.core.utils
 
 from zeit.web.core.utils import maybe_convert_http_to_https
 
@@ -167,17 +164,10 @@ class Base(zeit.web.core.view.Base):
     # can remove the code and serve the new guid for all articles in all feeds.
     # Then, every feed can simply use `make_guid`.
 
+    GUID_START = datetime.datetime(2018, 1, 16, tzinfo=pytz.UTC)
+
     def guid_is_needed(self, content):
-        pubdate = first_released(content)
-        # Some articles have `zeit.cms.workflow.interfaces.IPublishInfo`,
-        # which has a unicode string as `date_first_released`.
-        # Some articles have `zeit.content.article.article.ArticleWorkflow`,
-        # which has a datetime object as `date_first_released`.
-        try:
-            pubdate = pubdate.isoformat()
-        except AttributeError:
-            pass
-        return pubdate > '2018-01-16'
+        return first_released(content) > self.GUID_START
 
     def make_guid_or_contenturl(self, content):
         if self.guid_is_needed(content):
@@ -843,16 +833,13 @@ class GoogleEditorsPicksFeed(Base):
                     None, content, self.request)
                 content_url = create_public_url(content_url)
 
-                pubdate_string = first_released(content)
-                pubdate_object = dateutil.parser.parse(pubdate_string)
-                pubdate_output = format_rfc822_date_gmt(pubdate_object)
-
                 item = e(
                     'item',
                     e('title', self.make_title(content)),
                     e('link', content_url),
                     e('description', content.teaserText or content.subtitle),
-                    e('pubDate', pubdate_output),
+                    e('pubDate', format_rfc822_date_gmt(
+                        first_released(content))),
                     e('guid', self.make_guid_or_contentuid(content),
                         isPermaLink='false'),
                     e('category', content.ressort)
