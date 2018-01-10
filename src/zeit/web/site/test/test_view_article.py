@@ -1288,8 +1288,8 @@ def test_nextread_should_display_date_last_published_semantic(testbrowser):
 def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
     togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/article/simple')
-    counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
-    assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
+    counter = browser.cssselect('body noscript img[src^="https://cc.zeit.de"]')
+    assert ("img.src = 'https://cc.zeit.de/cc.gif?banner-channel="
             "sport/article") in browser.contents
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=sport/article'
