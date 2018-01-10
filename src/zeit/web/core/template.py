@@ -958,14 +958,9 @@ def remove_tags_from_xml(block, *tagnames):
 
 
 @zeit.web.register_filter
-def get_image_path(image, request, width=480, device=None):
-    # TODO: I do not want to inject the request here !!!
-    if image is None:
-        return ''
-    # TODO: Check if this is an image and has ratio and so on ...
-
+def get_image_path(image, width=480, device=None):
     height = int(width / image.ratio)
-    # So far, we ignore the device. If a device is appended (__desktop/mobile),
-    # The image server would deliver the mobile motif, if defined in Vivi.
-    path = "{}{}__{}x{}".format(request.image_host, image.path, width, height)
-    return path
+    # So far, we ignore the device, because we only serve ZON Lead teasers.
+    # If a device is appended (__desktop/mobile), the image server would
+    # deliver the mobile motif, if defined in Vivi.
+    return "{}__{}x{}".format(image.path, width, height)
