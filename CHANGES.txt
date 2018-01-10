@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - FIX: Add margin to zmo-follow-us title in mobile view
 
+- FIX: Use immutable guids for feeds
+
 - MAINT:  Record performance issues in bugsnag when teaser wants more than is available from solr
 
 
