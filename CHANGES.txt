@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - SSL-85: Video sitemap does not create empty publication_date field
 
+- SSL-79: Remove lastmod field from index sitemap, if no date is given
+
 - TMS-134: Move ICMSContent traversal monkeypatches to zeit.cms
 
 - BUG-829: Add repr for Image objects to aid debugging/log reading
