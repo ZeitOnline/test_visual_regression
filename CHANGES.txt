@@ -12,6 +12,10 @@ POSTDEPLOY
 
 - SSL-85: Video sitemap does not create empty publication_date field
 
+- TMS-134: Move ICMSContent traversal monkeypatches to zeit.cms
+
+- BUG-829: Add repr for Image objects to aid debugging/log reading
+
 - FIX: Add margin to zmo-follow-us title in mobile view
 
 

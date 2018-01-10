@@ -54,13 +54,10 @@
     <exclude package="zeit.cms.testcontenttype.browser" />
     <include package="zeit.cms.testcontenttype" />
 
-    <!-- XXX Temporary workaround: We load parts of retresco,
-         but use ITagger and IWhitelist from intrafind. -->
-    <grok:grok package="zeit.retresco.convert" />
-    <utility provides="zeit.retresco.interfaces.ITMS"
-             factory="zeit.retresco.connection.from_product_config"
-            />
-
+    <!-- XXX Transitionary period: We load "most" of retresco,
+         but use ITagger and IWhitelist from intrafind, since
+         ZCML feature `zeit.retresco.tms` is not active. -->
+    <include package="zeit.retresco" />
     <include package="zeit.intrafind" />
 
     <!-- We only want the solr connection, but not IUpdater etc, since that
