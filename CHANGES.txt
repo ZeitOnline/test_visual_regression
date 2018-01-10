@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - FIX: Add margin to zmo-follow-us title in mobile view
 
+- MAINT:  Record performance issues in bugsnag when teaser wants more than is available from solr
+
 
 3.116 (2018-01-03)
 ------------------
