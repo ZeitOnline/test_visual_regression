@@ -12,6 +12,8 @@ import zope.component
 import zope.interface
 
 import zeit.cms.repository.interfaces
+import zeit.cms.repository.folder
+import zeit.cms.repository.repository
 import zeit.content.gallery.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
@@ -194,10 +196,7 @@ class CenterpageArea(Traversable):
 class Folder(Traversable):
 
     def __call__(self, tdict):
-        """Redirect traversed folders and the repository root to a location
-        suffixed by `/index`.
-        """
-
+        """Redirect traversed folders to a location suffixed by `/index`."""
         if tdict['view_name']:
             # We're not at the end of the URL yet.
             return
@@ -206,6 +205,18 @@ class Folder(Traversable):
             url = zeit.web.core.utils.update_path(
                 tdict['request'].url, tdict['request'].path, 'index')
             raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
+
+
+@traverser(zeit.cms.repository.interfaces.IRepository)  # '/' is the repository
+class RootFolder(Traversable):
+    def __call__(self, tdict):
+        """Redirect the repository root to a location suffixed by `/index`."""
+        if tdict['view_name'] or tdict['request'].matched_route:
+            # We're not at the end of the URL yet.
+            return
+        url = zeit.web.core.utils.update_path(
+            tdict['request'].url, tdict['request'].path, 'index')
+        raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
 
 
 @traverser(zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder)
