@@ -184,7 +184,8 @@ def test_fullwidth_teaser_should_be_rendered(testbrowser):
 
 
 def test_fullwidth_teaser_image_should_have_attributes_for_mobile_variant(
-        testbrowser):
+        testbrowser, togglepatch):
+    togglepatch({'responsive_image_leadteaser': False})
     browser = testbrowser('/zeit-online/fullwidth-teaser')
     img = browser.cssselect('.teaser-fullwidth__media-item')[0]
     assert img.get('data-mobile-ratio').startswith('1.77')
@@ -199,7 +200,7 @@ def test_fullwidth_teaser_image_should_use_mobile_variant_on_mobile(
     driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
     img = driver.find_element_by_class_name('teaser-fullwidth__media-item')
     ratio = float(img.size['width']) / img.size['height']
-    assert '/wide__' in img.get_attribute('src'), \
+    assert '/wide__' in img.get_attribute('currentSrc'), \
         'wide image variant should be used on mobile devices'
     assert 1.7 < ratio < 1.8, 'mobile ratio should be 16:9-ish'
 
@@ -1718,7 +1719,6 @@ def test_studiumbox_ranking_does_fallback(selenium_driver, testserver):
 
 
 def test_zett_banner_is_displayed(testbrowser):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     browser = testbrowser('/zeit-online/zett-banner')
     box = browser.cssselect('.zett-banner')[0]
     link = box.cssselect('a')[0]
@@ -1767,7 +1767,6 @@ def test_zett_parquet_teaser_kicker_should_be_styled(testbrowser):
 
 
 def test_zett_parquet_should_link_to_zett(testbrowser):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     browser = testbrowser('/zeit-online/parquet-feeds')
 
     link_logo = browser.cssselect('.parquet-meta__title--zett')[0]
@@ -1784,7 +1783,6 @@ def test_zett_parquet_should_link_to_zett(testbrowser):
 
 
 def test_zett_parquet_should_have_ads(testbrowser):
-    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
     browser = testbrowser('/zeit-online/parquet-feeds')
     ad = browser.cssselect(
         'article[data-unique-id="https://ze.tt/wichtiges-vom-'
