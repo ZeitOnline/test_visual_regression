@@ -4,6 +4,7 @@ import logging
 import requests
 import requests.exceptions
 import requests_file
+import zc.iso8601.parse
 import zope.component
 import zope.interface
 
@@ -49,6 +50,12 @@ class Reach(object):
             doc['teaserTitle'] = doc.get('title')
             doc['teaserSupertitle'] = doc.get('supertitle')
             doc['access'] = doc.get('access', 'free')
+            if 'date_first_released' in doc:
+                try:
+                    doc['date_first_released'] = zc.iso8601.parse.datetimetz(
+                        str(doc['date_first_released']))
+                except:
+                    pass
             docs[idx] = zeit.cms.interfaces.ICMSContent(doc)
         return docs
 
