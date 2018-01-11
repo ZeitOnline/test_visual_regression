@@ -10,7 +10,7 @@ POSTDEPLOY
 3.118 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-828: Add shadow to packshot in ZAR
 
 
 3.117 (2018-01-10)
