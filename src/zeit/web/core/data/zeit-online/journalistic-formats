@@ -72,11 +72,7 @@
         <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-fullwidth" visible="True">
           <block xmlns:ns0="http://namespaces.zeit.de/CMS/link" href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
         </container>
-      </region>
-    </cluster>
-    <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff3" visible="True" kind="solo">
-      <region area="id-6280c8ee-b68e-40dd-a117-4d676e282599" visible="True" kind="solo">
-        <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e12" cp:type="teaser" module="zon-classic" visible="True">
+        <container cp:__name__="id-256307ee-ecdd-4840-860b-8fd67ff37e12" cp:type="teaser" module="zon-classic" visible="True">
           <block href="http://xml.zeit.de/blogs/nsu-blog-bouffier" />
         </container>
       </region>

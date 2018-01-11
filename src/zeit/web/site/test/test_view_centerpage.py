@@ -205,6 +205,19 @@ def test_fullwidth_teaser_image_should_use_mobile_variant_on_mobile(
     assert 1.7 < ratio < 1.8, 'mobile ratio should be 16:9-ish'
 
 
+def test_fullwidth_teaser_image_should_use_desktop_variant_on_desktop(
+        selenium_driver, testserver):
+    driver = selenium_driver
+
+    driver.set_window_size(screen_sizes[3][0], screen_sizes[3][1])
+    driver.get('%s/zeit-online/fullwidth-teaser' % testserver.url)
+    img = driver.find_element_by_class_name('teaser-fullwidth__media-item')
+    ratio = float(img.size['width']) / img.size['height']
+    assert '/cinema__' in img.get_attribute('currentSrc'), \
+        'wide image variant should be used on mobile devices'
+    assert 2.3 < ratio < 2.4, 'desktop cinema ratio should be 7:3-ish'
+
+
 def test_fullwidth_teaser_has_correct_width_in_all_screen_sizes(
         selenium_driver, testserver, screen_size):
     driver = selenium_driver
@@ -2952,3 +2965,34 @@ def test_zar_parquet_is_rendering(testbrowser):
     assert len(logo)
     assert len(more_link)
     assert len(teaser) == 3
+
+
+def test_responsive_image_fullwidth_teaser_has_correct_structure(testbrowser):
+    browser = testbrowser('/zeit-online/fullwidth-teaser')
+    sel = browser.cssselect
+
+    assert len(sel('.teaser-fullwidth__media')) == 5
+    assert len(sel('picture.teaser-fullwidth__media-container')) == 5
+
+
+def test_responsive_image_classic_teaser_has_correct_structure(testbrowser):
+    browser = testbrowser('/zeit-online/classic-teaser')
+    sel = browser.cssselect
+
+    # only the first region has the responsive-image teaser
+    assert len(sel('.teaser-classic__media')) == 4
+    assert len(sel('picture.teaser-classic__media-container')) == 3
+    assert len(sel('div.teaser-classic__media-container')) == 1
+
+
+def test_responsive_image_teaser_only_in_first_region(testbrowser):
+    browser = testbrowser('/zeit-online/journalistic-formats')
+    sel = browser.cssselect
+
+    assert len(sel('.teaser-fullwidth__media')) == 3
+    assert len(sel('picture.teaser-fullwidth__media-container')) == 1
+    assert len(sel('div.teaser-fullwidth__media-container')) == 2
+
+    assert len(sel('.teaser-classic__media')) == 3
+    assert len(sel('picture.teaser-classic__media-container')) == 1
+    assert len(sel('div.teaser-classic__media-container')) == 2
