@@ -48,6 +48,11 @@ class Image(object):
 
     __nonzero__ = __bool__
 
+    def __repr__(self):
+        return '<%s.%s %s>' % (
+            self.__class__.__module__, self.__class__.__name__,
+            self.group)
+
     @zeit.web.reify
     def _meta(self):
         # Image metadata is retrieved from the underlying group by default

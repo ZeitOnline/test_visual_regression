@@ -187,6 +187,22 @@ def test_gsitemap_video(testbrowser):
         'yes')
 
 
+def test_gsitemap_video_creates_no_publucation_date_field_if_no_date_is_set(
+        testbrowser, monkeypatch):
+    set_sitemap_solr_results([{
+        'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
+    }])
+    monkeypatch.setattr(
+       zeit.workflow.asset.AssetWorkflow, 'date_last_published_semantic', None)
+    monkeypatch.setattr(
+        zeit.workflow.asset.AssetWorkflow, 'date_first_released', None)
+    browser = testbrowser('/gsitemaps/video.xml?p=1')
+    xml = lxml.etree.fromstring(browser.contents)
+    ns = {'video': 'http://www.google.com/schemas/sitemap-video/1.1'}
+    assert xml.xpath('//video:video', namespaces=ns)[0] is not None
+    assert xml.xpath('//video:publication_date', namespaces=ns) == []
+
+
 def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
     import zeit.brightcove.connection
     set_sitemap_solr_results([{
