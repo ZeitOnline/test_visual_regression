@@ -10,7 +10,11 @@ POSTDEPLOY
 3.118 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- BUG-828: Add shadow to packshot in ZAR
+
+- ZON-3386: Add default alt-tag to teaser-pictures
+
+- ZON-4385: Adjust contact form
 
 
 3.117 (2018-01-10)
