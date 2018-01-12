@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-4385: Adjust contact form
 
+- MAINT: Send nested jinja errors to bugsnag, too, not just toplevel
+
 
 3.117 (2018-01-10)
 ------------------
