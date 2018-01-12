@@ -10,6 +10,8 @@ POSTDEPLOY
 3.118 (unreleased)
 ------------------
 
+- BUG-828: Add shadow to packshot in ZAR
+
 - ZON-3386: Add default alt-tag to teaser-pictures
 
 

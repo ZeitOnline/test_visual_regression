@@ -72,3 +72,8 @@ $color-exclamation-background: $color-text--light;
 		);
 	@include zar-button-hollow-defaults;
 }
+
+%zar-volume-packshot-shadow {
+	border-radius: 0 0 2px 2px;
+	box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.5);
+}
