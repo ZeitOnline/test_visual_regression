@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - BUG-828: Add shadow to packshot in ZAR
 
+- FIX: Iterate correctly when truncating Yahoo feed articles 
+
 - MAINT: Send nested jinja errors to bugsnag, too, not just toplevel
 
 
