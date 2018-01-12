@@ -10,7 +10,7 @@ POSTDEPLOY
 3.118 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-3386: Add default alt-tag to teaser-pictures
 
 
 3.117 (2018-01-10)
