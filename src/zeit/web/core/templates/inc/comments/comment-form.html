@@ -11,7 +11,7 @@
     {% set submit_value = 'Kommentar senden' %}
 
     {% if request.user and not request.user.name %}
-        {% set submit_value = 'Kommentar senden' %}
+        {% set submit_value = 'Absenden' %}
     {% endif %}
 
     {% set placeholder = 'Ihr Kommentar' %}
