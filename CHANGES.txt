@@ -7,10 +7,36 @@ POSTDEPLOY
 - Nothing
 
 
-3.117 (unreleased)
+3.118 (unreleased)
 ------------------
 
+- BUG-828: Add shadow to packshot in ZAR
+
+- ZON-3386: Add default alt-tag to teaser-pictures
+
+- ZON-4385: Adjust contact form
+
+- MAINT: Send nested jinja errors to bugsnag, too, not just toplevel
+
+
+3.117 (2018-01-10)
+------------------
+
+- SSL-84: Use https for cc.zeit.de
+
+- SSL-85: Video sitemap does not create empty publication_date field
+
+- SSL-79: Remove lastmod field from index sitemap, if no date is given
+
+- TMS-134: Move ICMSContent traversal monkeypatches to zeit.cms
+
+- BUG-829: Add repr for Image objects to aid debugging/log reading
+
 - FIX: Add margin to zmo-follow-us title in mobile view
+
+- FIX: Use immutable guids for feeds
+
+- MAINT:  Record performance issues in bugsnag when teaser wants more than is available from solr
 
 
 3.116 (2018-01-03)
