@@ -7,7 +7,21 @@ POSTDEPLOY
 - Nothing
 
 
-3.117 (unreleased)
+3.118 (unreleased)
+------------------
+
+- ZON-3386: Add default alt-tag to teaser-pictures
+
+- ZON-4385: Adjust contact form
+
+- SSL-66: Create https link in sitemaps
+
+- BUG-828: Add shadow to packshot in ZAR
+
+- MAINT: Send nested jinja errors to bugsnag, too, not just toplevel
+
+
+3.117 (2018-01-10)
 ------------------
 
 - SSL-84: Use https for cc.zeit.de
@@ -21,6 +35,8 @@ POSTDEPLOY
 - BUG-829: Add repr for Image objects to aid debugging/log reading
 
 - FIX: Add margin to zmo-follow-us title in mobile view
+
+- FIX: Use immutable guids for feeds
 
 - MAINT:  Record performance issues in bugsnag when teaser wants more than is available from solr
 
