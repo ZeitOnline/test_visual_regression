@@ -227,7 +227,7 @@ class YahoofeedArticle(Article):
         character_counter = 0
 
         for page in self.pages:
-            for block in page:
+            for block in page.blocks[:]:
                 if character_counter > allowed_article_length:
                     self.truncated = True
                     page.blocks.remove(block)
