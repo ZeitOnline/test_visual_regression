@@ -267,6 +267,10 @@ def test_yahoo_feed_contains_expected_fields(testserver):
     assert len(xml.xpath('//item//guid')) == 16
     assert len(xml.xpath('//item//category')) == 16
 
+    # check if long articles are cut off
+    assert res.content.count('Lesen Sie hier weiter!') == 4
+    assert res.content.count('Nancy kennt sich.') == 1
+
 
 def test_msn_feed_contains_expected_fields(testserver):
 
