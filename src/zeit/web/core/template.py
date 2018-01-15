@@ -955,3 +955,12 @@ def remove_tags_from_xml(block, *tagnames):
     xml = block.context.xml
     lxml.etree.strip_tags(xml, *tagnames)
     return zeit.web.core.block._inline_html(xml)
+
+
+@zeit.web.register_filter
+def get_image_path(image, width=480, device=None):
+    height = int(width / image.ratio)
+    # So far, we ignore the device, because we only serve ZON Lead teasers.
+    # If a device is appended (__desktop/mobile), the image server would
+    # deliver the mobile motif, if defined in Vivi.
+    return "{}__{}x{}".format(image.path, width, height)

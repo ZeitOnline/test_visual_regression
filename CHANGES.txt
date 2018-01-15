@@ -10,6 +10,8 @@ POSTDEPLOY
 3.118 (unreleased)
 ------------------
 
+- ZON-4383: Load lead teaser as responsive image
+
 - ZON-3386: Add default alt-tag to teaser-pictures
 
 - ZON-4385: Adjust contact form
