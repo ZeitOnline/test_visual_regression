@@ -289,6 +289,15 @@ class AuthorImage(Image):
     # Author images shall not be filled with color.
     fill_color = None
 
+    @zeit.web.reify
+    def alt(self):
+        author = self.context
+        author_name = getattr(author, 'display_name', None)
+        if author_name:
+            return author_name
+        else:
+            return super(Image, self).alt
+
 
 @grokcore.component.adapter(zeit.web.core.interfaces.IArticleModule)
 @grokcore.component.implementer(zeit.web.core.interfaces.IImage)
