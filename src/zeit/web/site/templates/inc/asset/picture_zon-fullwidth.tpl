@@ -14,7 +14,7 @@
 
     {# Define image sizes (widths) we want to use for this teaser.
        Maybe we move this to a more central place later. #}
-    {%- set default_and_fallback_image_size = 480 %}
+    {%- set default_and_fallback_image_size = 980 %}
     {%- set mobile_image_sizes = [360, 480, 660, 767] %}
     {%- set desktop_image_sizes = [900, 1000] %}
 
@@ -54,10 +54,10 @@
                Vorerst lassen wir das, weil nicht genutzt in den Lead-Teasern, die unser Testcase
                Für responsive images sind. #}
 
-            {# Fallback for "older" browsers is the same as for mobile, because Android 4.4 and Opera Mini cant do srcset. ... Das kann aber auch das 480er Bild kriegen. Eine Variante weniger! #}
+            {# Fallback for "older" browsers is the same as for mobile, because Android 4.4 and Opera Mini cant do srcset. #}
 
             <img class="{{ module_layout }}__media-item"
-                src="{{ image_host }}{{ mobile_image | get_image_path(default_and_fallback_image_size) }}"
+                src="{{ image_host }}{{ image | get_image_path(default_and_fallback_image_size) }}"
                 alt="{{ image.alt }}"
                 />
 
