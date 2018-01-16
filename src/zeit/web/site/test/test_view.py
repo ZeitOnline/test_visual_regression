@@ -267,10 +267,10 @@ def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
             .cssselect('a')[1].text.strip() == u'ZEIT Audio hören')
 
     # advertising
-    assert 'ad-desktop-1' in browser.contents
-    assert 'ad-desktop-2' in browser.contents
-    assert 'ad-desktop-3' in browser.contents
-    assert 'ad-mobile-1' in browser.contents
+    assert 'ad-desktop-1' not in browser.contents
+    assert 'ad-desktop-2' not in browser.contents
+    assert 'ad-desktop-3' not in browser.contents
+    assert 'ad-mobile-1' not in browser.contents
 
 
 # needs selenium because of esi include
