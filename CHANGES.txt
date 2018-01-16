@@ -10,6 +10,8 @@ POSTDEPLOY
 3.118 (unreleased)
 ------------------
 
+- BUG-831: Disable advertising for UserDashboard
+
 - ZON-4383: Load lead teaser as responsive image
 
 - ZON-3386: Add default alt-tag to teaser-pictures
