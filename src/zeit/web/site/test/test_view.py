@@ -266,6 +266,12 @@ def test_user_dashboard_has_correct_elements(testbrowser, sso_keypair):
     assert (browser.cssselect('.dashboard__box-list')[2]
             .cssselect('a')[1].text.strip() == u'ZEIT Audio hören')
 
+    # advertising
+    assert 'ad-desktop-1' in browser.contents
+    assert 'ad-desktop-2' in browser.contents
+    assert 'ad-desktop-3' in browser.contents
+    assert 'ad-mobile-1' in browser.contents
+
 
 # needs selenium because of esi include
 def test_login_status_is_set_as_class(
