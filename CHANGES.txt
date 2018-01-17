@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - BUG-828: Add shadow to packshot in ZAR
 
+- BUG-831: Disable advertising for UserDashboard
+
 - FIX: Iterate correctly when truncating Yahoo feed articles
 
 - MAINT: Send nested jinja errors to bugsnag, too, not just toplevel

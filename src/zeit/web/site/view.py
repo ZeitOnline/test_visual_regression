@@ -112,6 +112,8 @@ def login_state(request):
     renderer='templates/dashboard_user.html')
 class UserDashboard(Base):
 
+    advertising_enabled = False
+
     def __init__(self, context, request):
         super(UserDashboard, self).__init__(context, request)
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
