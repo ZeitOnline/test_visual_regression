@@ -42,12 +42,6 @@ class Base(zeit.web.core.view.Base):
             raise pyramid.httpexceptions.HTTPMovedPermanently(
                 location=target_url)
 
-    def banner_toggles(self, name):
-        cases = {
-            'viewport_zoom': 'tablet',
-        }
-        return cases.get(name, None)
-
     @zeit.web.reify
     def meta_robots(self):
         # Prevent certain paths, products and edgecases from being indexed
@@ -117,6 +111,8 @@ def login_state(request):
     context=zeit.content.rawxml.interfaces.IUserDashboard,
     renderer='templates/dashboard_user.html')
 class UserDashboard(Base):
+
+    advertising_enabled = False
 
     def __init__(self, context, request):
         super(UserDashboard, self).__init__(context, request)

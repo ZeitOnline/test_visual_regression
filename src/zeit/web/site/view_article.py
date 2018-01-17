@@ -90,10 +90,6 @@ class Article(zeit.web.core.view_article.Article, zeit.web.site.view.Base):
             return atoms[pos - 1:pos + 2]
 
     @zeit.web.reify
-    def has_series_attached(self):
-        return getattr(self.context, 'serie', None)
-
-    @zeit.web.reify
     def include_optimizely(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
         return conf.get('optimizely_on_zon_article', None)
@@ -182,6 +178,14 @@ class ColumnPage(zeit.web.core.view_article.ArticlePage, ColumnArticle):
 
 
 @zeit.web.view_config(
+    custom_predicates=(zeit.web.core.view.is_dpa_article,),
+    renderer='zeit.web.site:templates/article.html')
+class DPAArticle(Article):
+
+    header_layout = 'dpa'
+
+
+@zeit.web.view_config(
     context=zeit.web.core.article.ILiveblogArticle,
     renderer='templates/liveblog.html')
 class LiveblogArticle(Article):
@@ -223,7 +227,7 @@ class YahoofeedArticle(Article):
         character_counter = 0
 
         for page in self.pages:
-            for block in page:
+            for block in page.blocks[:]:
                 if character_counter > allowed_article_length:
                     self.truncated = True
                     page.blocks.remove(block)

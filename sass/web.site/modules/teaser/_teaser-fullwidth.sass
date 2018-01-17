@@ -10,8 +10,6 @@
 		padding: 0 0 (100% / 7 * 3) 0 // image variant 'cinema'
 		position: relative
 	&__media
-		+old-ie
-			display: block // IE8
 		background-color: $zon-lighter-grey // placeholder for image
 		height: 0
 		padding-bottom: 100% / 16 * 9 // image variant 'wide'
@@ -141,3 +139,14 @@
 		@extend %teaser-datetime !optional
 	&__commentcount
 		@extend %teaser-commentcount
+
+// in picture_zon-fullwidth.tpl (responsive images) we need this as a
+// substitute for `.scaled-image>div>a`. As a result, the absolutely
+// positioned dark overlay gradient works.
+.teaser-fullwidth__media > .teaser-fullwidth__media-link
+	display: block
+
+// needed for responsive images on old browsers where the displayed image size
+// might be larger than the image file
+.teaser-fullwidth picture .teaser-fullwidth__media-item
+	width: 100%

@@ -24,6 +24,7 @@
     <attribute name="type" ns="http://namespaces.zeit.de/CMS/zeit.content.cp">serienseite</attribute>
     <attribute name="volume" ns="http://namespaces.zeit.de/CMS/document">01</attribute>
     <attribute name="year" ns="http://namespaces.zeit.de/CMS/document">2015</attribute>
+    <attribute name="serie" ns="http://namespaces.zeit.de/CMS/document">{{serienname}}</attribute>
     <attribute name="provides" ns="http://namespaces.zeit.de/CMS/meta">&lt;pickle&gt;
   &lt;initialized_object&gt;
     &lt;klass&gt;

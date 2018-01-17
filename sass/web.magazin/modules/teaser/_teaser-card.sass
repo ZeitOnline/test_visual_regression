@@ -29,6 +29,10 @@ $card-rotate-y: -180deg
 	text-align: center
 	perspective: 1000px
 
+	h2
+		font-weight: normal
+		margin: 0
+
 	&.js-flipped .card--front
 		transform: rotateY(0deg + $card-rotate-y)
 	&.js-flipped .card--back
@@ -122,3 +126,8 @@ $card-rotate-y: -180deg
 	+link-colors(inherit, inherit, inherit, inherit, inherit)
 	+on-interaction
 		background-color: rgba(0, 0, 0, 0.3)
+
+
+
+.card__series-label
+	@extend %teaser__series-label

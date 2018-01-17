@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import pytest
-import mock
 
 import zeit.cms.interfaces
 
@@ -9,13 +8,6 @@ import zeit.web.core.banner
 import zeit.web.core.template
 import zeit.web.core.view
 import zeit.web.magazin
-
-
-def test_banner_toggles_viewport_zoom(application):
-    context = zeit.cms.interfaces.ICMSContent(
-        'http://xml.zeit.de/zeit-magazin/article/02')
-    view = zeit.web.magazin.view_article.Article(context, mock.Mock())
-    assert view.banner_toggles('viewport_zoom') == 'tablet-landscape'
 
 
 def test_banner_should_not_be_displayed_on_short_pages(testbrowser):

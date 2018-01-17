@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from StringIO import StringIO
+from contextlib import contextmanager
 import copy
 import json
 import logging
@@ -26,6 +27,7 @@ import pyramid.testing
 import pyramid_dogpile_cache2
 import pysolr
 import pytest
+import _pytest.logging
 import requests
 import selenium.webdriver
 import selenium.webdriver.firefox.firefox_binary
@@ -96,6 +98,7 @@ def app_settings(mockserver):
         'load_template_from_dav_url': 'egg://zeit.web.core/test/newsletter',
         'spektrum_hp_feed': mockserver.url + '/spektrum/feed.xml',
         'spektrum_img_host': mockserver.url + '/spektrum',
+        'zett_host': 'https://ze.tt',
         'zett_hp_feed': mockserver.url + '/zett/feed.xml',
         'zett_img_host': mockserver.url + '/zett',
         'academics_hp_feed': mockserver.url + '/academics/feed.xml',
@@ -189,6 +192,8 @@ def app_settings(mockserver):
             'egg://zeit.web.core/data/config/banner-id-mappings.xml'),
         'vivi_zeit.web_navigation-source': (
             'egg://zeit.web.core/data/config/navigation.xml'),
+        'vivi_zeit.web_navigation-more-source': (
+            'egg://zeit.web.core/data/config/navigation-more.xml'),
         'vivi_zeit.web_navigation-services-source': (
             'egg://zeit.web.core/data/config/navigation-services.xml'),
         'vivi_zeit.web_navigation-classifieds-source': (
@@ -341,7 +346,7 @@ def zodb(application_session, request):
 
 
 @pytest.fixture(scope='session')
-def application_session(app_settings, request):
+def application_session(app_settings, set_loglevel, request):
     plone.testing.zca.pushGlobalRegistry()
     zope.browserpage.metaconfigure.clear()
     request.addfinalizer(plone.testing.zca.popGlobalRegistry)
@@ -362,6 +367,37 @@ def application_session(app_settings, request):
     request.addfinalizer(ZODB_LAYER.tearDown)
     app.zeit_app = factory
     return app
+
+
+@pytest.fixture(scope='session')
+def set_loglevel():
+    logging.getLogger().setLevel(logging.INFO)
+    logging.getLogger('zeit').setLevel(logging.DEBUG)
+    logging.getLogger('zeit.cms.repository').setLevel(logging.INFO)
+
+
+# Copy&paste monkey-patch pytest to be able to globally set a loglevel, see
+# <https://github.com/pytest-dev/pytest/issues/2977>.
+@contextmanager
+def catching_logs(handler, formatter=None, level=logging.NOTSET):
+    root_logger = logging.getLogger()
+    if formatter is not None:
+        handler.setFormatter(formatter)
+    handler.setLevel(level)
+    add_new_handler = handler not in root_logger.handlers
+
+    if add_new_handler:
+        root_logger.addHandler(handler)
+    # PATCHED to remove this nonsense
+    # orig_level = root_logger.level
+    # root_logger.setLevel(min(orig_level, level))
+    try:
+        yield handler
+    finally:
+        # root_logger.setLevel(orig_level)
+        if add_new_handler:
+            root_logger.removeHandler(handler)
+_pytest.logging.catching_logs = catching_logs
 
 
 @pytest.fixture
@@ -479,8 +515,9 @@ def sleep_tween(handler, registry):
         import time
 
         time.sleep(conf['sleep'])
-        print 'For request %s, mockserver slept %s seconds.' % (request.path,
-                                                                conf['sleep'])
+        log.info(
+            'For request %s, mockserver slept %s seconds.',
+            request.path, conf['sleep'])
         response = handler(request)
 
         # For comfortability set sleep back to 0

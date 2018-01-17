@@ -187,3 +187,10 @@ def test_article_shows_no_zplus_badge_for_metered_article(testbrowser):
 def test_zmo_advertorial_has_no_home_button_as_pagination(testbrowser):
     browser = testbrowser('/zeit-magazin/article/advertorial-onepage')
     assert len(browser.cssselect('.article-pagination__link')) == 0
+
+
+def test_zmo_article_has_series_link(testbrowser):
+    browser = testbrowser('/zeit-magazin/article/03')
+    series_link = browser.cssselect('.meta__serie')
+    assert len(series_link) == 1
+    assert series_link[0].get('href').endswith('/serie/weinkolumne')

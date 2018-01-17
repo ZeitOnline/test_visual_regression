@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import calendar
 import datetime
-import dateutil.parser
 import email
 import logging
 import pytz
@@ -23,6 +22,8 @@ import zeit.push.interfaces
 import zeit.web
 import zeit.web.core.interfaces
 import zeit.web.core.template
+
+from zeit.web.core.utils import maybe_convert_http_to_https
 
 
 log = logging.getLogger(__name__)
@@ -83,15 +84,22 @@ def create_public_url(url):
     # in both production and staging (and "localhost" type environments),
     # but at the cost of hard-coding the "newsfeed" hostname here.
     if url.startswith('http://newsfeed'):
-        return url.replace('http://newsfeed', 'http://www', 1)
+        return maybe_convert_http_to_https(
+            url.replace('http://newsfeed', 'http://www', 1))
+    if url.startswith('https://newsfeed'):
+        return url.replace('https://newsfeed', 'https://www', 1)
     else:
-        return url
+        return maybe_convert_http_to_https(url)
 
 
 def join_queries(url, join_query):
     scheme, netloc, path, params, query, fragment = urlparse.urlparse(url)
     query = urllib.urlencode(urlparse.parse_qsl(query) + join_query)
     return urlparse.urlunparse([scheme, netloc, path, params, query, fragment])
+
+
+def make_guid(content):
+    return zeit.cms.content.interfaces.IUUID(content).id
 
 
 @zeit.web.view_defaults(renderer='string')
@@ -137,6 +145,42 @@ class Base(zeit.web.core.view.Base):
         else:
             return content.title
 
+    def make_content_url(self, content):
+        content_url = zeit.web.core.template.create_url(
+            None, content, self.request)
+        content_url = create_public_url(content_url)
+        return content_url
+
+    # This is a bit comlicated. We do want to use immutable guids in our feeds,
+    # which do not change if an article URI is changed. But we cannot release
+    # that new code suddenly, because that would create new guids for all items
+    # in the feed, producing duplicates in the clients. (The RSS reader stored
+    # an article yesterday, today it has another guid, so it gets stored
+    # again and the user sees two items with the same title and URI, but
+    # different guids.)
+    #
+    # So we define a cutoff-date for old vs new guid creation. And in a few
+    # weeks or so (when no old article is shown in our newsfeeds any more) we
+    # can remove the code and serve the new guid for all articles in all feeds.
+    # Then, every feed can simply use `make_guid`.
+
+    GUID_START = datetime.datetime(2018, 1, 16, tzinfo=pytz.UTC)
+
+    def guid_is_needed(self, content):
+        return first_released(content) > self.GUID_START
+
+    def make_guid_or_contenturl(self, content):
+        if self.guid_is_needed(content):
+            return make_guid(content)
+        else:
+            return self.make_content_url(content)
+
+    def make_guid_or_contentuid(self, content):
+        if self.guid_is_needed(content):
+            return make_guid(content)
+        else:
+            return content.uniqueId
+
 
 @zeit.web.view_config(
     context=zeit.content.cp.interfaces.ICP2015,
@@ -151,14 +195,16 @@ class Newsfeed(Base):
         channel = E(
             'channel',
             E('title', self.pagetitle),
-            E('link', 'http://www.zeit.de%s' % self.request.path),
+            E('link', maybe_convert_http_to_https(
+                'http://www.zeit.de%s' % self.request.path)),
             E('description', self.pagedescription),
             E('language', 'de-de'),
             E('copyright', u'Copyright © {}, ZEIT ONLINE GmbH'.format(year)),
             EN('atom', 'link',
                href=self.request.url.decode('utf-8'),
                type=self.request.response.content_type),
-            E('docs', 'http://www.zeit.de/hilfe/rss'),
+            E('docs',
+              maybe_convert_http_to_https('http://www.zeit.de/hilfe/rss')),
             E('generator', 'zeit.web {}'.format(
                 self.request.registry.settings.version)),
             E('managingEditor',
@@ -169,17 +215,15 @@ class Newsfeed(Base):
                 E('url', (self.request.image_host +
                           '/bilder/elemente_01_06/logos/homepage_top.gif')),
                 E('title', self.pagetitle),
-                E('link', 'http://www.zeit.de%s' % self.request.path)
+                E('link', maybe_convert_http_to_https(
+                    'http://www.zeit.de%s' % self.request.path))
             )
         )
         root.append(channel)
 
         for content in filter_and_sort_entries(self.items)[:15]:
             try:
-                content_url = zeit.web.core.template.create_url(
-                    None, content, self.request)
-                content_url = create_public_url(content_url)
-
+                content_url = self.make_content_url(content)
                 description = content.teaserText
 
                 variant = None
@@ -214,7 +258,8 @@ class Newsfeed(Base):
                         u', '.join(self.make_author_list(content)))),
                     E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
-                    E('guid', content_url, isPermaLink='false'),
+                    E('guid', self.make_guid_or_contenturl(content),
+                        isPermaLink='false'),
                 )
                 channel.append(item)
             except:
@@ -357,7 +402,8 @@ class SpektrumFeed(Base):
                     E('description', content.teaserText),
                     E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
-                    E('guid', content.uniqueId, isPermaLink='false'),
+                    E('guid', self.make_guid_or_contentuid(content),
+                        isPermaLink='false'),
                 )
                 image = zeit.web.core.template.get_image(content,
                                                          fallback=False)
@@ -412,7 +458,8 @@ class SocialFeed(Base):
                     E('description', content.teaserText),
                     E('pubDate',
                       format_rfc822_date(last_published_semantic(content))),
-                    E('guid', content.uniqueId, isPermaLink='false'),
+                    E('guid', self.make_guid_or_contentuid(content),
+                        isPermaLink='false'),
                 )
                 social_value = self.social_value(content)
                 if social_value:
@@ -524,7 +571,8 @@ class YahooFeed(Base):
                     E('description', content.teaserText or content.subtitle),
                     E('pubDate', format_rfc822_date(
                         last_published_semantic(content))),
-                    E('guid', content.uniqueId, isPermaLink='false'),
+                    E('guid', self.make_guid_or_contentuid(content),
+                        isPermaLink='false'),
                     E('category', content.ressort)
                 )
 
@@ -576,6 +624,9 @@ class MsnFeed(Base):
     def make_image_url(self, image, image_width):
         image_height = int(image_width / image.ratio)
         # XXX: remove as soon as we have SSL
+        # img.zeit.de is already ssl enabled and can be used here
+        # the replacement won't be neccessary, once we have a globally
+        # configured SSL.
         image_host = self.request.image_host.replace(
             'http://', 'https://')
         image_url = '{}{}__{}x{}__desktop'.format(
@@ -659,7 +710,8 @@ class MsnFeed(Base):
                     E('webUrl', content_url),
                     E('abstract', content.teaserText or content.subtitle),
                     E('publishedDate', item_published_date),
-                    E('guid', content_url),
+                    E('guid', self.make_guid_or_contenturl(content),
+                        isPermaLink='false'),
                     E('publisher', 'ZEIT Online')
                 )
 
@@ -728,15 +780,14 @@ class GoogleEditorsPicksFeed(Base):
             yield item
 
     def build_feed(self):
-        toggles = zeit.web.core.application.FEATURE_TOGGLES
-        protocol = 'https' if toggles.find('https') else 'http'
-        homepage_link = '{}://www.zeit.de/index'.format(protocol)
+        homepage_link = maybe_convert_http_to_https(
+            'http://www.zeit.de/index')
         feed_title = 'ZEIT ONLINE Newsfeed for Google Editors Picks'
         # the logo file must meet certain conditions
         # https://support.google.com/news/publisher/answer/1407682?hl=en
-        publisher_logo = '{}://www.zeit.de/static/latest/images/{}'.format(
-            protocol,
-            'google-editors-picks-logo-zon.png')  # fuck PEP8
+        publisher_logo = maybe_convert_http_to_https(
+            'http://www.zeit.de/static/latest/images/'
+            'google-editors-picks-logo-zon.png')
         build_date = format_rfc822_date_gmt(datetime.datetime.today())
 
         e = ELEMENT_MAKER
@@ -782,17 +833,15 @@ class GoogleEditorsPicksFeed(Base):
                     None, content, self.request)
                 content_url = create_public_url(content_url)
 
-                pubdate_string = first_released(content)
-                pubdate_object = dateutil.parser.parse(pubdate_string)
-                pubdate_output = format_rfc822_date_gmt(pubdate_object)
-
                 item = e(
                     'item',
                     e('title', self.make_title(content)),
                     e('link', content_url),
                     e('description', content.teaserText or content.subtitle),
-                    e('pubDate', pubdate_output),
-                    e('guid', content.uniqueId, isPermaLink='false'),
+                    e('pubDate', format_rfc822_date_gmt(
+                        first_released(content))),
+                    e('guid', self.make_guid_or_contentuid(content),
+                        isPermaLink='false'),
                     e('category', content.ressort)
                 )
 

@@ -12,6 +12,8 @@ import zope.component
 import zope.interface
 
 import zeit.cms.repository.interfaces
+import zeit.cms.repository.folder
+import zeit.cms.repository.repository
 import zeit.content.gallery.interfaces
 import zeit.content.article.interfaces
 import zeit.content.cp.interfaces
@@ -194,10 +196,7 @@ class CenterpageArea(Traversable):
 class Folder(Traversable):
 
     def __call__(self, tdict):
-        """Redirect traversed folders and the repository root to a location
-        suffixed by `/index`.
-        """
-
+        """Redirect traversed folders to a location suffixed by `/index`."""
         if tdict['view_name']:
             # We're not at the end of the URL yet.
             return
@@ -206,6 +205,18 @@ class Folder(Traversable):
             url = zeit.web.core.utils.update_path(
                 tdict['request'].url, tdict['request'].path, 'index')
             raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
+
+
+@traverser(zeit.cms.repository.interfaces.IRepository)  # '/' is the repository
+class RootFolder(Traversable):
+    def __call__(self, tdict):
+        """Redirect the repository root to a location suffixed by `/index`."""
+        if tdict['view_name'] or tdict['request'].matched_route:
+            # We're not at the end of the URL yet.
+            return
+        url = zeit.web.core.utils.update_path(
+            tdict['request'].url, tdict['request'].path, 'index')
+        raise pyramid.httpexceptions.HTTPMovedPermanently(location=url)
 
 
 @traverser(zeit.content.dynamicfolder.interfaces.IRepositoryDynamicFolder)
@@ -429,3 +440,15 @@ class VerticalPredicate(object):
             vertical = 'zon'
 
         return vertical == self.value
+
+
+@zope.interface.implementer(pyramid.interfaces.IRoutePregenerator)
+def https_url_pregenerator(request, elements, kw):
+    """
+    Sets the scheme to https. If used for a route, all produced urls by this
+    route will have this scheme.
+    """
+    toggles = zeit.web.core.application.FEATURE_TOGGLES
+    if toggles.find('https'):
+        kw.setdefault('_scheme', 'https')
+    return elements, kw

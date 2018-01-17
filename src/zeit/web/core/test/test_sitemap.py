@@ -1,4 +1,5 @@
 # coding: utf-8
+import mock
 import lxml.etree
 import zope.component
 
@@ -105,7 +106,7 @@ def test_gsitemap_newssite(testbrowser):
         'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
         'keyword': ['Schwangerschaft', 'Konsumverhalten'],
         'keyword_id': ['schwangerschaft', 'konsumverhalten']},
-        {'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox'}])
+    ])
     browser = testbrowser('/gsitemaps/newsitemap.xml')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/zeit-magazin/article/autorenbox')
@@ -148,23 +149,45 @@ def test_gsitemap_newssite(testbrowser):
         'http://www.milosdjuric.com/')
 
 
+def test_gsitemap_news_does_not_contain_none_in_keywords(
+        testbrowser, monkeypatch):
+    set_sitemap_solr_results([{
+        'uniqueId': 'http://xml.zeit.de/zeit-magazin/article/autorenbox',
+        'keyword': ['Schwangerschaft', 'Konsumverhalten'],
+        'keyword_id': ['schwangerschaft', 'konsumverhalten']},
+    ])
+    # sub_ressort is added as keyword as well, set it to None here to check if
+    # 'None' is added keyword list
+    monkeypatch.setattr(
+        zeit.content.article.article.Article, 'sub_ressort', None
+    )
+    browser = testbrowser('/gsitemaps/newsitemap.xml')
+    xml = lxml.etree.fromstring(browser.contents)
+    ns = {'n': 'http://www.google.com/schemas/sitemap-news/0.9'}
+    assert (
+        xml.xpath('//n:news/n:keywords', namespaces=ns)[0].text ==
+        u'Schwangerschaft, Konsumverhalten, Digital')
+
+
 def test_gsitemap_video(testbrowser):
     set_sitemap_solr_results([{
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
     }])
+    settings = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    settings['image_prefix'] = 'http://img.example.com'
     browser = testbrowser('/gsitemaps/video.xml?p=1')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/video/2014-01/1953013471001')
     xml = lxml.etree.fromstring(browser.contents)
     ns = {'video': 'http://www.google.com/schemas/sitemap-video/1.1'}
     assert xml.xpath('//video:video', namespaces=ns)[0] is not None
-    assert ('thumbnail.jpg' in xml.xpath(
-        '//video:thumbnail_loc', namespaces=ns)[0].text)
+    assert (u'http://img.example.com/video/2014-01/1953013471001/image_group/'
+            u'thumbnail.jpg' ==
+            xml.xpath('//video:thumbnail_loc', namespaces=ns)[0].text)
     assert (
-        xml.xpath('//video:content_loc', namespaces=ns)[0].text ==
-        'http://brightcove.vo.llnwd.net/pd15/media/18140073001/201401/3809/'
-        '18140073001_3094832002001_Aurora-Borealis--Northern-Lights--'
-        'Time-lapses-in-Norway-Polarlichter-Der-Himmel-brennt.mp4')
+        xml.xpath('//video:player_loc', namespaces=ns)[0].text ==
+        u'https://players.brightcove.net/18140073001/SJENxUNKe_default'
+        u'/index.html?videoId=1953013471001')
     assert (
         xml.xpath('//video:title', namespaces=ns)[0].text ==
         u'Foto-Momente: Die stille Schönheit der Polarlichter')
@@ -182,6 +205,40 @@ def test_gsitemap_video(testbrowser):
     assert (
         xml.xpath('//video:family_friendly', namespaces=ns)[0].text.strip() ==
         'yes')
+
+
+def test_gsitemap_video_creates_no_publucation_date_field_if_no_date_is_set(
+        testbrowser, monkeypatch):
+    set_sitemap_solr_results([{
+        'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
+    }])
+    monkeypatch.setattr(
+       zeit.workflow.asset.AssetWorkflow, 'date_last_published_semantic', None)
+    monkeypatch.setattr(
+        zeit.workflow.asset.AssetWorkflow, 'date_first_released', None)
+    browser = testbrowser('/gsitemaps/video.xml?p=1')
+    xml = lxml.etree.fromstring(browser.contents)
+    ns = {'video': 'http://www.google.com/schemas/sitemap-video/1.1'}
+    assert xml.xpath('//video:video', namespaces=ns)[0] is not None
+    assert xml.xpath('//video:publication_date', namespaces=ns) == []
+
+
+def test_gsitemap_video_does_not_call_bc_api(testbrowser, monkeypatch):
+    import zeit.brightcove.connection
+    set_sitemap_solr_results([{
+        'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
+    }])
+    mocked_get_video = mock.Mock()
+    mocked_get_video.return_value = {
+        'renditions': (),
+        'thumbnail': None,
+        'video_still': None,
+    }
+    monkeypatch.setattr(
+        zeit.brightcove.connection.PlaybackAPI, 'get_video', mocked_get_video)
+    browser = testbrowser('/gsitemaps/video.xml?p=1')
+    assert not mocked_get_video.called, \
+        'get_video from BC-API was called and should not have been'
 
 
 def test_gsitemap_themen_overview(testbrowser):
@@ -226,7 +283,36 @@ def test_gsitemap_appcon(monkeypatch, testbrowser):
         'article/01-countdown-studium')
     assert (
         xml.xpath('//xhtml:link/@href', namespaces=ns)[1] ==
-        'android-app://de.zeit.online/http/blog.zeit.de/blogs/'
+        'android-app://de.zeit.online/https/blog.zeit.de/blogs/'
+        'nsu-blog-bouffier')
+
+
+def test_gsitemap_appcon_creates_https_urls(
+        monkeypatch, testbrowser, togglepatch):
+    set_sitemap_solr_results([
+        {'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'},
+        {'uniqueId': 'http://blog.zeit.de/blogs/nsu-blog-bouffier'}
+    ])
+    togglepatch({'https': True})
+    monkeypatch.setattr(zeit.web.core.interfaces, 'IImage', None)
+    browser = testbrowser('/gsitemaps/appconsitemap.xml?p=1')
+    xml = lxml.etree.fromstring(browser.contents)
+    ns = {'xhtml': 'http://www.w3.org/1999/xhtml'}
+    assert (
+        browser.document.xpath('//url/loc')[0].text ==
+        'https://localhost/campus/article/01-countdown-studium')
+    assert (
+        xml.xpath('//xhtml:link/@href', namespaces=ns)[0] ==
+        'android-app://de.zeit.online/https/localhost/campus/'
+        'article/01-countdown-studium')
+    # Whats wrong with blogs?
+    # Well, both should be transformed
+    assert (
+        browser.document.xpath('//url/loc')[1].text ==
+        'https://blog.zeit.de/blogs/nsu-blog-bouffier')
+    assert (
+        xml.xpath('//xhtml:link/@href', namespaces=ns)[1] ==
+        'android-app://de.zeit.online/https/blog.zeit.de/blogs/'
         'nsu-blog-bouffier')
 
 

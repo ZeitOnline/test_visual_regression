@@ -7,13 +7,11 @@
         {%- block image_additional_data_attributes %}{% endblock %}
         {%- if image_itemprop %} itemprop="{{ image_itemprop }}"{% endif %} itemscope itemtype="http://schema.org/ImageObject">
         {% block media_caption_above %}{% endblock %}
-        <!--[if gt IE 8]><!-->
         <noscript data-src="{{ request.image_host + image.fallback_path }}">
-        <!--<![endif]-->
             <div class="{% block media_block_helper %}{{ module_layout }}__media-container{% endblock %} {{ media_container_additional_class }}">
                 {% block media_block_wrapper %}
                 <img class="{% block media_block_item %}{{ module_layout }}__media-item{% endblock %}"
-                     alt="{{ image.alt }}"
+                     {% block media_block_alt %}alt="{{ image.alt }}"{% endblock %}
                      src="{{ request.image_host + image.fallback_path }}"
                      data-src="{{ request.image_host + image.path }}"
                      data-ratio="{{ image.ratio }}"
@@ -23,9 +21,7 @@
                 {% endblock %}
                 {{ media_container_after }}
             </div>
-        <!--[if gt IE 8]><!-->
         </noscript>
-        <!--<![endif]-->
         <meta itemprop="url" content="{{ request.image_host + image.fallback_path }}">
         <meta itemprop="width" content="{{ image_width }}">
         <meta itemprop="height" content="{{ image_height }}">

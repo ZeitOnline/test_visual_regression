@@ -1288,8 +1288,8 @@ def test_nextread_should_display_date_last_published_semantic(testbrowser):
 def test_article_contains_zeit_clickcounter(testbrowser, togglepatch):
     togglepatch({'third_party_modules': True})
     browser = testbrowser('/zeit-online/article/simple')
-    counter = browser.cssselect('body noscript img[src^="http://cc.zeit.de"]')
-    assert ("img.src = 'http://cc.zeit.de/cc.gif?banner-channel="
+    counter = browser.cssselect('body noscript img[src^="https://cc.zeit.de"]')
+    assert ("img.src = 'https://cc.zeit.de/cc.gif?banner-channel="
             "sport/article") in browser.contents
     assert len(counter) == 1
     assert ('cc.zeit.de/cc.gif?banner-channel=sport/article'
@@ -2313,3 +2313,12 @@ def test_abo_paywall_schema_attr_not_on_free_content(testbrowser):
     browser = testbrowser('/zeit-online/article/simple')
     jsonld = browser.cssselect('script[type="application/ld+json"]')
     assert len(jsonld) == 0
+
+
+def test_dpa_article_should_have_correct_header(testbrowser):
+    browser = testbrowser('/zeit-online/article/dpa')
+    assert len(browser.cssselect('.dpa-header')) == 1
+
+    browser = testbrowser('/zeit-online/article/dpa-image')
+    assert len(browser.cssselect('.dpa-header')) == 1
+    assert len(browser.cssselect('.dpa-header__image')) == 1

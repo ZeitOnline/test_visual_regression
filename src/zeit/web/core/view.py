@@ -93,6 +93,10 @@ def is_paywalled(context, request):
     return zeit.web.core.paywall.Paywall.status(request)
 
 
+def is_dpa_article(context, request):
+    return context.product and context.product.id == 'News'
+
+
 class Base(object):
 
     """Base class for all views."""
@@ -251,9 +255,6 @@ class Base(object):
         else:
             return True
 
-    def banner_toggles(self, name):
-        return None
-
     @zeit.web.reify
     def adcontroller_handle(self):
         suffix = '_trsf'
@@ -353,6 +354,11 @@ class Base(object):
     @zeit.web.reify
     def navigation_footer_links(self):
         src = zeit.web.core.navigation.NAVIGATION_FOOTER_LINKS_SOURCE
+        return src.navigation
+
+    @zeit.web.reify
+    def navigation_more(self):
+        src = zeit.web.core.navigation.NAVIGATION_MORE_SOURCE
         return src.navigation
 
     @zeit.web.reify

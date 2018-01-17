@@ -979,3 +979,32 @@ def test_icode_cookie_is_set_when_get_parameter_is_detected(
         '%s/zeit-online/article/simple?wt_cc3=Wurstbrot' % testserver.url)
     cookie = driver.get_cookie('icode')
     assert cookie['value'] == 'Wurstbrot'
+
+
+@pytest.mark.parametrize(
+    'verticals', [
+        ('/arbeit/index', 1, 'zarbeit', 'zar'),
+        ('/campus/index', 1, 'zcampus', 'zco'),
+        ('/zeit-magazin/index', 3, 'zmagazin', 'zmo')
+    ])
+def test_more_navi_is_present_in_every_vertical_and_has_campaign_param(
+        testbrowser, verticals):
+
+    current_page = verticals[0]
+    current_number_of_sales_links = verticals[1]
+    current_vertical_long = verticals[2]
+    current_vertical_short = verticals[3]
+
+    browser = testbrowser(current_page)
+    nav_link_sales = browser.cssselect('.nav__sales a')
+    assert len(nav_link_sales) == current_number_of_sales_links
+
+    nav_link_abo = nav_link_sales[0]
+    nav_link_abo_url = nav_link_abo.attrib['href']
+    assert '&utm_source={}&'.format(current_vertical_long) in nav_link_abo_url
+
+    nav_links_more = browser.cssselect('.nav__more-list a')
+    for link in nav_links_more:
+        link_url = link.attrib['href']
+        if '?wt_zmc=' in link_url:
+            assert '.{}.'.format(current_vertical_short) in link_url

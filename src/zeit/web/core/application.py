@@ -32,6 +32,7 @@ import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.repository  # activate monkeypatches
+import zeit.web.core.routing
 import zeit.web.core.security
 import zeit.web.core.solr  # activate monkeypatches
 import zeit.web.core.source  # activate monkeypatches
@@ -54,7 +55,7 @@ class Application(object):
             None, settings['app_servers'].split(','))
         self.settings['transform_to_secure_links_for'] = (
             settings.get(
-                'transform_to_secure_links_for', 'www.zeit.de')).split(',')
+                'transform_to_secure_links_for', '')).split(',')
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
         self.settings['sso_key'] = self.load_sso_key(
@@ -151,8 +152,12 @@ class Application(object):
         config.add_route(
             'invalidate_community_maintenance',
             '/-comments/invalidate-maintenance')
-        config.add_route('home', '/')
-        config.add_route('breaking_news', '/breaking-news')
+        config.add_route(
+            'home', '/',
+            pregenerator=zeit.web.core.routing.https_url_pregenerator)
+        config.add_route(
+            'breaking_news', '/breaking-news',
+            pregenerator=zeit.web.core.routing.https_url_pregenerator)
         config.add_route('login_state', '/login-state')
         config.add_route('health_check', '/health-check')
         # XXX align-route-config-uris: Ensure downward compatibility until

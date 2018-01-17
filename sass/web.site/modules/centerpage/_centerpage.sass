@@ -131,6 +131,17 @@
 			border-width: 1px 0
 			margin-bottom: -1px
 			margin-top: -1px
+		&--parquet,
+		&--zmo-parquet,
+		&--zar-parquet,
+		&--zco-parquet,
+		&--zplus-parquet,
+		&--d17-parquet,
+		&--spektrum,
+		&--zett
+			// help table-cell children to work properly if there is only little content
+			display: table
+			width: 100%
 
 		&__headline
 			border-bottom: 1px solid $color-border
