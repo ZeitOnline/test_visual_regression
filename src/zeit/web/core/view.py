@@ -49,7 +49,8 @@ def known_content(resource):
 
 
 def is_advertorial(context, request):
-    return getattr(context, 'product_text', None) == 'Advertorial'
+    product = getattr(context, 'product', None)
+    return getattr(product, 'title', None) == 'Advertorial'
 
 
 def is_paginated(context, request):
@@ -91,6 +92,10 @@ def redirect_on_cp2015_suffix(request):
 
 def is_paywalled(context, request):
     return zeit.web.core.paywall.Paywall.status(request)
+
+
+def is_dpa_article(context, request):
+    return context.product and context.product.id == 'News'
 
 
 class Base(object):
@@ -252,9 +257,6 @@ class Base(object):
             return False
         else:
             return True
-
-    def banner_toggles(self, name):
-        return None
 
     @zeit.web.reify
     def adcontroller_handle(self):

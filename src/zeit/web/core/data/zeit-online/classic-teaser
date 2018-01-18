@@ -75,6 +75,10 @@
                 <container cp:__name__="id-953fe557-d941-47f2-af4c-c770dfba3daa" cp:type="teaser" module="zon-classic">
                     <block href="http://xml.zeit.de/zeit-online/cp-content/serie_app_kritik" />
                 </container>
+            </region>
+        </cluster>
+        <cluster area="id-a2dff7f3-9042-4a6f-b88d-143fdfc5cff1" visible="True" kind="solo">
+            <region area="id-6280c8ee-b68e-40dd-a117-4d676e282591" visible="True" kind="solo">
                 <container cp:__name__="id-256307ee-ecdd-4840-870b-8fd67ff37e43" cp:type="teaser" module="zon-classic">
                     <block href="http://xml.zeit.de/zeit-online/cp-content/kolumne" />
                 </container>

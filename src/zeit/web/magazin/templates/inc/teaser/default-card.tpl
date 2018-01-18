@@ -10,7 +10,7 @@
     {% set card_style = 'background-color: #{};'.format(fill_color) -%}
 {% endif %}
 
-<article class="{% block layout %}teaser-card{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
+<article class="{% block layout %}teaser-card{% endblock %} {{ cp.advertorial_modifier(teaser.product, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
          {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %}
          {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>
@@ -18,6 +18,11 @@
         <div class="card__deck">
             {# front of card #}
             <div class="card {% block card_class %}{% endblock %}"{% if card_style %} style="{{ card_style }}"{% endif %}>
+
+                {% if teaser.serie and not teaser.serie.column and not teaser.serie.serienname == 'Martenstein' %}
+                    <div class="card__series-label">Serie: {{ teaser.serie.serienname }}</div>
+                {% endif %}
+
                 <h2>
                     <div class="card__title">
                         {% block zplus_kicker_logo %}

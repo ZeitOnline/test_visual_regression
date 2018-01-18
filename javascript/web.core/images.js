@@ -217,7 +217,8 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
         $img.on( 'load', function() {
             $img.trigger( 'scaling_ready' );
         });
-        if ( markLazyImages && $img.closest( '.cp-region' ).data( 'lazy' ) === true ) {
+        if ( markLazyImages && $img.closest(
+            '.cp-region, .nextread__media, .nextread-advertisement__media, .article__item' ).data( 'lazy' ) === true ) {
             $img.data( 'tolazyload', true );
         }
         return $img;
@@ -306,9 +307,6 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
                 markup = markup.replace( 'src="', 'data-dev-null="' );
                 // hide alt from display while image is processed
                 markup = markup.replace( 'alt="', 'data-alt="' );
-                // hide remaining conditional comment fragments
-                markup = markup.replace( '<!--<![endif]-->', '' );
-                markup = markup.replace( '<!--[if gt IE 8]><!-->', '' );
 
                 $noscript.replaceWith( markup );
                 images.push( prepareImage( $parent.find( 'img' ), true ) );
@@ -363,15 +361,21 @@ define([ 'jquery', 'web.core/zeit' ], function( $, Zeit ) {
      * @function init
      * @param  {object} options jQuery styled preferences object
      */
-    function init( options ) {
+    function init( options, pageType ) {
+        pageType = document.querySelector( 'body' ).getAttribute( 'data-page-type' );
         options = $.extend({
             triggerRegionNumber: 3,
-            lazy: $( 'body[data-page-type="centerpage"]' ).length > 0,
-            lazyElementsSelector: '.cp-region'
+            lazy: $( 'body[data-page-type="' + pageType + '"]' ).length > 0,
+            lazyElementsSelectorCP: '.cp-region',
+            lazyElementsSelectorArticle: '.nextread__media, .nextread-advertisement__media, .article__item'
         }, options );
         // if lazy, mark lazy regions
         if ( options.lazy ) {
-            $( options.lazyElementsSelector + ':gt(' + ( options.triggerRegionNumber - 1 ) + ')' ).data( 'lazy', true );
+            if ( pageType === 'centerpage' ) {
+                $( options.lazyElementsSelectorCP + ':gt(' + ( options.triggerRegionNumber - 1 ) + ')' ).data( 'lazy', true );
+            } else if ( pageType === 'article' ) {
+                $( options.lazyElementsSelectorArticle ).data( 'lazy', true );
+            }
         }
         images = prepareImages();
         showImages();

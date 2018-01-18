@@ -198,7 +198,7 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
 
     vid_wrap = teaser.cssselect('.teaser-fullwidth__media-container')[0]
     img = teaser.cssselect('img')[0]
-    title_wrap = teaser.cssselect('a')[1]
+    link = teaser.cssselect('a')[1]
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
@@ -217,7 +217,7 @@ def test_teaser_fullwidth_with_video_has_correct_markup(
 
     # structure
     assert img.get('class') == 'video--fallback '
-    assert 'teaser-fullwidth__text' in title_wrap.get('class')
+    assert 'teaser-fullwidth__link' in link.get('class')
     assert len(title) == 1
     assert len(subtitle) == 1
 
@@ -240,7 +240,7 @@ def test_teaser_fullwidth_light_with_video_has_correct_markup(
 
     vid_wrap = teaser.cssselect('.teaser-fullwidth__media-container')[0]
     img = teaser.cssselect('img')[0]
-    title_wrap = teaser.cssselect('a')[1]
+    link = teaser.cssselect('a')[1]
     a = teaser.cssselect('a')
     title = teaser.cssselect('.teaser-fullwidth__title')
     subtitle = teaser.cssselect('.teaser-fullwidth__subtitle')
@@ -259,7 +259,7 @@ def test_teaser_fullwidth_light_with_video_has_correct_markup(
 
     # structure
     assert img.get('class') == 'video--fallback '
-    assert 'teaser-fullwidth__text' in title_wrap.get('class')
+    assert 'teaser-fullwidth__link' in link.get('class')
     assert len(title) == 1
     assert len(subtitle) == 1
 
@@ -470,3 +470,10 @@ def test_teaser_image_link_titles(testbrowser):
         if len(linked_image):
             links = article.cssselect('a:not([itemprop="url"])')
             assert links[0].get('title') == links[1].get('title')
+
+
+def test_if_all_followbox_elements_present(testbrowser):
+    select = testbrowser('/zeit-magazin/centerpage/follow-us').cssselect
+    buttons = select('.follow-us__link')
+
+    assert len(buttons) == 3

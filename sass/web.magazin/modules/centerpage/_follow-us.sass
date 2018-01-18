@@ -1,0 +1,101 @@
+// local variables used in this module
+$followus-icon-mobile: remify(37px)
+$followus-icon-tablet: remify(37px)
+$followus-icon-padding: remify(8px)
+.follow-us
+	margin: remify(50px auto)
+	+respond-min($break-areas)
+		border-bottom: 2px solid $black
+		border-top: 2px solid $black
+		margin: remify(20px 28px 60px)
+		.cp-area--minor &,
+		.cp-area--major &
+			margin: remify(0 0 50px)
+			width: 100%
+		.cp-area--minor &
+			margin-top: remify(50px)
+	&__title
+		font-size: remify(18px)
+		font-weight: bold
+		letter-spacing: remify(0.08px)
+		margin: remify(28px) auto remify(14px) auto
+		text-align: center
+		text-transform: uppercase
+		+respond-min($break-tablet-min)
+			background: $white
+			margin: 0 auto
+			position: relative
+			top: remify(-15px)
+			width: remify(200px)
+	&__list
+		display: flex
+		justify-content: center
+		list-style: none
+		margin: remify(5px) 0 remify(25px) 0
+		padding: 0
+		text-align: center
+		+respond-min($break-tablet-min)
+			width: 100%
+	&__item
+		margin-left: remify(30px)
+		&:first-child
+			margin-left: 0
+		+respond-min($break-tablet-min)
+			float: left // fallback
+			margin-left: remify(30px)
+		+respond-min($break-desktop-min)
+			margin-left: remify(30px)
+	&__link
+		color: $white
+		display: block
+		font-size: remify(14px)
+		height: $followus-icon-mobile
+		+respond-min($break-desktop-min)
+			font-size: remify(16px)
+		&:focus,
+		&:hover,
+		&:active
+			color: $white
+	&__logo
+		background: $black
+		border-radius: 50%
+		float: left
+		height: $followus-icon-mobile
+		line-height: $followus-icon-mobile / 2  // half the icon size
+		padding: $followus-icon-padding
+		text-align: center
+		width: $followus-icon-mobile
+		+respond-min($break-tablet-min)
+			height: $followus-icon-tablet
+			line-height: ($followus-icon-tablet / 2) * 0.85 // 85% of the half icon size
+			margin-bottom: remify(5px)
+			margin-top: remify(5px)
+			width: $followus-icon-tablet
+	&__icon
+		display: inline-block
+		height: auto
+		vertical-align: middle
+		width: $followus-icon-mobile - (2 * $followus-icon-padding)
+		+respond-min($break-tablet-min)
+			width: $followus-icon-tablet - (2 * $followus-icon-padding)
+		&--facebook
+			// Icon higher than wide
+			height: $followus-icon-mobile - (2 * $followus-icon-padding)
+			margin-left: remify(5px)
+			width: auto
+			+respond-min($break-tablet-min)
+				height: $followus-icon-tablet - (2 * $followus-icon-padding)
+		&--twitter
+			margin-top: remify(3px)
+	&__linktext
+		color: $black
+		display: none // hidden when mobile, a11y???
+		float: left
+		line-height: $followus-icon-mobile - remify(20px) // size - 2 * margin
+		margin: remify(14px 0)
+		padding-left: remify(16px)
+		+respond-min($break-tablet-min)
+			display: block
+			.cp-area--minor &
+				display: none
+

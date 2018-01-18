@@ -224,10 +224,14 @@ def wrap_in_safeguard(fn):
         try:
             return fn(*args, **kw)
         except Exception:
+            path = get_current_request_path()
+            exc_info = sys.exc_info()
             log.error(
                 'Error in %s.%s while rendering %s',
-                fn.__module__, fn.__name__, get_current_request_path(),
-                exc_info=True)
+                fn.__module__, fn.__name__, path,
+                exc_info=exc_info)
+            bugsnag.notify(exc_info[1], traceback=exc_info[2], context=path)
+
             return zeit.web.core.jinja.Undefined()
     # Unfortunately, functools.wraps() doesn't preserve argument defaults.
     if hasattr(fn, 'func_defaults'):

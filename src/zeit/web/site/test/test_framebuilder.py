@@ -358,7 +358,6 @@ def test_framebuilder_should_require_ssl(application, dummy_request):
 def test_framebuilder_uses_ssl_assets(testbrowser):
     browser = testbrowser('/framebuilder?useSSL')
     ssl_str = 'https://ssl.zeit.de/www.zeit.de/static/latest/'
-    assert '{}css/web.site/all-old-ie.css'.format(ssl_str) in browser.contents
     assert '{}css/web.site/framebuilder.css'.format(
         ssl_str) in browser.contents
     assert '{}js/vendor/modernizr-custom.js'.format(

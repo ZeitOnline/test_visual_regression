@@ -54,7 +54,14 @@ class Converter(object):
             for x in doc.get('authorships', ())]
         return doc
 
-    def _set_defaults(self, doc):
+    TEASER_FIELDS = {
+        'teaserSupertitle': 'supertitle',
+        'teaserTitle': 'title',
+        'teaserText': 'subtitle',
+    }
+
+    @classmethod
+    def _set_defaults(cls, doc):
         # XXX These asset badges and classification flags are not indexed
         #     in Solr, so we lie about them.
         for name in ['gallery', 'genre', 'template', 'video', 'video_2']:
@@ -62,6 +69,10 @@ class Converter(object):
         doc.setdefault('lead_candidate', False)
         doc.setdefault('commentSectionEnable', True)
         doc.setdefault('access', 'free')
+        # Imported news articles don't have a teaser section
+        for teaser, fallback in cls.TEASER_FIELDS.items():
+            if not doc.get(teaser):
+                doc[teaser] = doc.get(fallback)
         return doc
 
 
@@ -91,9 +102,11 @@ class SolrContentQuery(zeit.content.cp.automatic.SolrContentQuery,
         'product_id': '',
         'serie': '',
         'show_commentthread': 'commentSectionEnable',
+        'supertitle': '',
         'teaser_supertitle': 'teaserSupertitle',
         'teaser_text': 'teaserText',
         'teaser_title': 'teaserTitle',
+        'title': '',
         'type': 'doc_type',
         'uniqueId': '',
     }

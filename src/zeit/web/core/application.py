@@ -55,7 +55,7 @@ class Application(object):
             None, settings['app_servers'].split(','))
         self.settings['transform_to_secure_links_for'] = (
             settings.get(
-                'transform_to_secure_links_for', 'www.zeit.de')).split(',')
+                'transform_to_secure_links_for', '')).split(',')
         self.settings['linkreach_host'] = maybe_convert_egg_url(
             settings.get('linkreach_host', ''))
         self.settings['sso_key'] = self.load_sso_key(

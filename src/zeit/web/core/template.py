@@ -232,6 +232,11 @@ def iqd_mail_hash(mail_address):
 
 
 @zeit.web.register_test
+def longform(context):
+    return zeit.web.magazin.article.ILongformArticle.providedBy(context)
+
+
+@zeit.web.register_test
 def liveblog(context):
     return zeit.web.core.article.ILiveblogArticle.providedBy(context)
 
@@ -269,6 +274,8 @@ def vertical(content):
 
 @zeit.web.register_filter
 def find_series_cp(content):
+    if not content:
+        return None
     if not getattr(content.serie, 'url', None):
         return None
     conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
@@ -305,11 +312,9 @@ def create_url(context, obj, request=None):
         host = '/'
 
     if isinstance(obj, basestring):
-        return obj.replace(
-            zeit.cms.interfaces.ID_NAMESPACE, host, 1).replace('.cp2015', '')
+        return zeit.web.core.utils.maybe_convert_http_to_https(obj.replace(
+            zeit.cms.interfaces.ID_NAMESPACE, host, 1).replace('.cp2015', ''))
     elif zeit.content.link.interfaces.ILink.providedBy(obj):
-        if not toggles('https'):
-            return obj.url
         return zeit.web.core.utils.maybe_convert_http_to_https(obj.url)
     elif zeit.content.video.interfaces.IVideo.providedBy(obj):
         return create_url(
@@ -323,8 +328,12 @@ def create_url(context, obj, request=None):
 @zeit.web.register_ctxfilter
 def append_campaign_params(context, url):
     # add campaign parameters for linked ze.tt content
-    zett_host = settings('zett_host', 'https://ze.tt')
-    if url is not None and url.startswith(zett_host):
+    zett_host = urlparse.urlparse(settings('zett_host')).netloc
+    try:
+        context_host = urlparse.urlparse(url).netloc
+    except AttributeError:
+        context_host = None
+    if url is not None and zett_host == context_host:
         try:
             kind = context.get('area').kind
         except:
@@ -851,7 +860,10 @@ def adapt(obj, iface, name=u'', multi=False):
     if multi:
         return zope.component.queryMultiAdapter(obj, iface, name)
     else:
-        return zope.component.queryAdapter(obj, iface, name)
+        if not name:
+            return iface(obj, None)
+        else:
+            return zope.component.queryAdapter(obj, iface, name)
 
 
 @SHORT_TERM_CACHE.cache_on_arguments()
@@ -946,3 +958,12 @@ def remove_tags_from_xml(block, *tagnames):
     xml = block.context.xml
     lxml.etree.strip_tags(xml, *tagnames)
     return zeit.web.core.block._inline_html(xml)
+
+
+@zeit.web.register_filter
+def get_image_path(image, width=480, device=None):
+    height = int(width / image.ratio)
+    # So far, we ignore the device, because we only serve ZON Lead teasers.
+    # If a device is appended (__desktop/mobile), the image server would
+    # deliver the mobile motif, if defined in Vivi.
+    return "{}__{}x{}".format(image.path, width, height)

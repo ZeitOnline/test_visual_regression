@@ -6,6 +6,7 @@
 .ftppass
 .cache/
 .eggs/
+.vscode/
 Gemfile.lock
 /bower_components/
 /javascript/documentation/

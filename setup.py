@@ -6,7 +6,7 @@ from setuptools import setup, find_packages
 setup(
     name='zeit.web',
     url='https://github.com/ZeitOnline/zeit.web',
-    version='3.114.dev0',
+    version='3.119.dev0',
     author=(
         'Thomas Baumann, Nico Bruenjes, Nicolas Drebenstedt, Ron Drongowski, '
         'Dominik Hoppe, Marco Kaiser, Harry Keller, Tom Lazar, Thomas Lotze, '
@@ -53,7 +53,7 @@ setup(
         'zc.sourcefactory',
         'zeit.arbeit>=1.2.2.dev0',
         'zeit.brightcove>=2.12.0.dev0',
-        'zeit.cms>=3.1.0.dev0',
+        'zeit.cms>=3.2.0.dev0',
         'zeit.campus>=1.6.0.dev0',
         'zeit.connector>=2.9.0.dev0',
         'zeit.content.advertisement',
@@ -77,7 +77,7 @@ setup(
         'zeit.magazin',
         'zeit.newsletter',
         'zeit.push>=1.13.0.dev0',
-        'zeit.retresco>=1.11.0.dev0',
+        'zeit.retresco>=1.15.0.dev0',
         'zeit.seo>=1.8.0.dev0',
         'zeit.solr',
         'zeit.vgwort',
@@ -101,7 +101,7 @@ setup(
             'gocept.httpserverlayer',
             'mock',
             'plone.testing [zca,zodb]',
-            'pytest',
+            'pytest>=3.3.0.dev0',
             'pytest-pep8',
             'pytest-timeout',
             'selenium',
