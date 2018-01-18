@@ -36,6 +36,8 @@ POSTDEPLOY
 
 - MAINT: Send nested jinja errors to bugsnag, too, not just toplevel
 
+- PERF: Fill code holes that lead to unnecessary "proxy exposed" content lookups
+
 
 3.117 (2018-01-10)
 ------------------
