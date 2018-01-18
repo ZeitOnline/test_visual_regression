@@ -56,6 +56,7 @@ class Reach(object):
                         str(doc['date_first_released']))
                 except:
                     pass
+            zeit.web.core.area.automatic.Converter._set_defaults(doc)
             docs[idx] = zeit.cms.interfaces.ICMSContent(doc)
         return docs
 

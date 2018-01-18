@@ -860,7 +860,10 @@ def adapt(obj, iface, name=u'', multi=False):
     if multi:
         return zope.component.queryMultiAdapter(obj, iface, name)
     else:
-        return zope.component.queryAdapter(obj, iface, name)
+        if not name:
+            return iface(obj, None)
+        else:
+            return zope.component.queryAdapter(obj, iface, name)
 
 
 @SHORT_TERM_CACHE.cache_on_arguments()

@@ -14,7 +14,7 @@ def mock_ad_view(application):
         def __init__(
                 self, type, ressort,
                 sub_ressort, is_hp=False, banner_id=None, serienname='',
-                product_id=None, product_text=None,
+                product_id=None,
                 path_info=None, adv_title=''):
             self.type = type
             self.ressort = ressort
@@ -25,7 +25,9 @@ def mock_ad_view(application):
             context = mock.Mock()
             context.banner_id = banner_id
             context.advertisement_title = adv_title
-            context.product_text = product_text
+            product_source = zeit.cms.content.interfaces.ICommonMetadata[
+                'product'].source(None)
+            context.product = product_source.find(product_id)
             context.keywords = []
             request = pyramid.testing.DummyRequest()
             request.path_info = path_info
@@ -237,7 +239,7 @@ def test_banner_advertorial_extrarulez(mock_ad_view):
     adv_test = mock_ad_view(
         'centerpage', 'angebote',
         '', banner_id='angebote/ingdiba',
-        adv_title='ingdiba', product_text='Advertorial').adcontroller_values
+        adv_title='ingdiba', product_id='ADV').adcontroller_values
     adv_code = [('$handle', 'adv_index_trsf'), ('level2', u'angebote'),
                 ('level3', u'ingdiba'), ('level4', ''),
                 ('$autoSizeFrames', True), ('keywords', 'angebote,ingdiba'),

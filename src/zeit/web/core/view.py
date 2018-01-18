@@ -49,7 +49,8 @@ def known_content(resource):
 
 
 def is_advertorial(context, request):
-    return getattr(context, 'product_text', None) == 'Advertorial'
+    product = getattr(context, 'product', None)
+    return getattr(product, 'title', None) == 'Advertorial'
 
 
 def is_paginated(context, request):
