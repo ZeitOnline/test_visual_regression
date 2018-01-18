@@ -10,7 +10,7 @@
     {% set card_style = 'background-color: #{};'.format(fill_color) -%}
 {% endif %}
 
-<article class="{% block layout %}teaser-card{% endblock %} {{ cp.advertorial_modifier(teaser.product_text, view.is_advertorial) | default('') }}"
+<article class="{% block layout %}teaser-card{% endblock %} {{ cp.advertorial_modifier(teaser.product, view.is_advertorial) | default('') }}"
          data-unique-id="{{ teaser.uniqueId }}"
          {%- block zplus_data %}{% if teaser is zplus_content %} data-zplus="zplus{% if teaser is zplus_registration_content %}-register{% endif %}"{% endif %}{% endblock %}
          {%- block meetrics %} data-meetrics="{{ area.kind }}"{% endblock %}>

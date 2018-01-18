@@ -1,7 +1,7 @@
 {% import 'zeit.web.magazin:templates/macros/layout_macro.tpl' as lama with context %}
 
-{% macro advertorial_modifier(product_text, is_advertorial) -%}
-    {% if (product_text == 'Advertorial' and not is_advertorial) %} is-advertorial{% endif %}
+{% macro advertorial_modifier(product, is_advertorial) -%}
+    {% if (product.title == 'Advertorial' and not is_advertorial) %} is-advertorial{% endif %}
 {%- endmacro %}
 
 {% macro headervideo_linked(obj, wrap_class='article__main-video--longform', img_class='', href='') -%}

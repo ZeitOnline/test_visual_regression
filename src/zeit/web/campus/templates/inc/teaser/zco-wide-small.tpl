@@ -2,7 +2,7 @@
 
 {% block layout %}teaser-wide-small{% endblock %}
 {% block teaser_modifier %}
-    {%- if teaser.product_text == 'Advertorial' and not view.is_advertorial %}teaser-wide-small--advertorial{% endif -%}
+    {%- if teaser.product.title == 'Advertorial' and not view.is_advertorial %}teaser-wide-small--advertorial{% endif -%}
 {% endblock %}
 {% block teaser_media %}
     {% set module_layout = self.layout() %}
