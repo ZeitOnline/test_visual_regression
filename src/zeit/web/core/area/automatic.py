@@ -54,7 +54,8 @@ class Converter(object):
             for x in doc.get('authorships', ())]
         return doc
 
-    def _set_defaults(self, doc):
+    @classmethod
+    def _set_defaults(cls, doc):
         # XXX These asset badges and classification flags are not indexed
         #     in Solr, so we lie about them.
         for name in ['gallery', 'genre', 'template', 'video', 'video_2']:
