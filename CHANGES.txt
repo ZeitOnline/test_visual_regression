@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.118 (unreleased)
+3.118 (2018-01-18)
 ------------------
 
 - ZON-3200: Set author name as alt for author images
