@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - BUG-828: Add shadow to packshot in ZAR
 
+- BUG-807: Fix width of infographics on ZMO/longform
+
 - BUG-831: Disable advertising for UserDashboard
 
 - FIX: Iterate correctly when truncating Yahoo feed articles
