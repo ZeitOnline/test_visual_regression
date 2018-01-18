@@ -458,4 +458,4 @@ def test_if_all_followbox_elements_present(testbrowser):
     select = testbrowser('zeit-online/centerpage/follow-us').cssselect
     buttons = select('.follow-us__link')
 
-    assert len(buttons) == 4
+    assert len(buttons) == 5
