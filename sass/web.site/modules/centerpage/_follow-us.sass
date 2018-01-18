@@ -140,9 +140,10 @@ $followus-icon-padding: remify(13px)
 					margin: remify(2px) auto
 		&--flipboard
 			margin-top: remify(2px)
-			.cp-area--minor &,
-			.cp-area--major &
-				margin-top: remify(2px)
+			+respond-min($break-tablet-min)
+				.cp-area--minor &,
+				.cp-area--major &
+					margin-top: remify(5px)
 		&--twitter
 			margin-top: remify(3px)
 			.cp-area--minor &,
