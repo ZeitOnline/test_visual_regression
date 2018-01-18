@@ -54,6 +54,12 @@ class Converter(object):
             for x in doc.get('authorships', ())]
         return doc
 
+    TEASER_FIELDS = {
+        'teaserSupertitle': 'supertitle',
+        'teaserTitle': 'title',
+        'teaserText': 'subtitle',
+    }
+
     @classmethod
     def _set_defaults(cls, doc):
         # XXX These asset badges and classification flags are not indexed
@@ -63,6 +69,10 @@ class Converter(object):
         doc.setdefault('lead_candidate', False)
         doc.setdefault('commentSectionEnable', True)
         doc.setdefault('access', 'free')
+        # Imported news articles don't have a teaser section
+        for teaser, fallback in cls.TEASER_FIELDS.items():
+            if not doc.get(teaser):
+                doc[teaser] = doc.get(fallback)
         return doc
 
 
