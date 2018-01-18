@@ -1008,4 +1008,5 @@ def test_more_navi_is_present_in_every_vertical_and_has_campaign_param(
 def test_response_has_surrogate_key_header(testserver):
     response = requests.get(
         '%s/zeit-online/article/simple' % testserver.url)
-    assert response.headers.get('Surrogate-Key') == 'always_paid'
+    assert response.headers.get('surrogate-key') == (
+        'http://xml.zeit.de/zeit-online/article/simple')
