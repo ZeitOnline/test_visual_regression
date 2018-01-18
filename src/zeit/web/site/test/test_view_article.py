@@ -1308,6 +1308,13 @@ def test_fbia_article_contains_correct_webtrekk_platform(httpbrowser):
     assert '25: "instant article"' in browser.contents
 
 
+def test_fbia_article_contains_correct_webtrekk_contentid(httpbrowser):
+    browser = httpbrowser('/fbia/zeit-online/article/simple',
+                          headers={'Host': 'fbia.zeit.de'})
+    assert 'wt.contentId = "redaktion.sport...article.sid|www.zeit.de\
+/zeit-online/article/simple";' in browser.contents
+
+
 def test_cannot_access_content_on_fbia_host(testserver):
     r = requests.get('%s/zeit-online/index' % testserver.url,
                      headers={'Host': 'fbia.zeit.de'})

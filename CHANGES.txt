@@ -16,11 +16,15 @@ POSTDEPLOY
 
 - ZON-4385: Adjust contact form
 
+- ZON-4392: Set webtrekk contentId for FBIA to www.zeit.de
+
 - ZON-4408: Style infographics for ZEIT Arbeit
 
 - SSL-66: Create https link in sitemaps
 
 - BUG-828: Add shadow to packshot in ZAR
+
+- BUG-807: Fix width of infographics on ZMO/longform
 
 - BUG-831: Disable advertising for UserDashboard
 
