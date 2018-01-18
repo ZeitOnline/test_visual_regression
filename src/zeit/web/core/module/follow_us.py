@@ -17,6 +17,8 @@ class FollowUs(zeit.web.core.centerpage.Module):
                 'Folgen Sie uns bei Twitter'),
             ('instagram', 'https://www.instagram.com/zeit/', 'Instagram',
                 'Folgen Sie uns bei Instagram'),
+            ('flipboard', 'https://flipboard.com/@ZEITONLINE', 'Flipboard',
+                'Folgen Sie uns bei Flipboard'),
             ('xing', 'https://www.xing.com/news/pages/zeit-online-165', 'Xing',
                 'Abonnieren Sie uns bei Xing')]
 
