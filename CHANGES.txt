@@ -22,6 +22,8 @@ POSTDEPLOY
 
 - ZON-4408: Style infographics for ZEIT Arbeit
 
+- ZON-4413: Add flipboard to followbar
+
 - SSL-66: Create https link in sitemaps
 
 - BUG-828: Add shadow to packshot in ZAR
