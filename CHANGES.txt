@@ -10,7 +10,7 @@ POSTDEPLOY
 3.119 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-3994: Fall back to vivi-stored keywords on TMS failure
 
 
 3.118 (2018-01-18)
