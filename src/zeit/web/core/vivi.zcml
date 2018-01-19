@@ -1,6 +1,7 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
-  xmlns:grok="http://namespaces.zope.org/grok">
+  xmlns:grok="http://namespaces.zope.org/grok"
+  xmlns:meta="http://namespaces.zope.org/meta">
 
     <!-- include only those parts of zeit.cms:application.zcml that the vivi
          *model* code needs, thus saving us lots of zope.* includes -->
@@ -54,11 +55,8 @@
     <exclude package="zeit.cms.testcontenttype.browser" />
     <include package="zeit.cms.testcontenttype" />
 
-    <!-- XXX Transitionary period: We load "most" of retresco,
-         but use ITagger and IWhitelist from intrafind, since
-         ZCML feature `zeit.retresco.tms` is not active. -->
+    <meta:provides feature="zeit.retresco.tms" />
     <include package="zeit.retresco" />
-    <include package="zeit.intrafind" />
 
     <!-- We only want the solr connection, but not IUpdater etc, since that
          would only slow tests down that use the `workingcopy` fixture. -->
