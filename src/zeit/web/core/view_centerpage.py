@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
+import datetime
+
 import pyramid.httpexceptions
 import zope.component
+import babel.dates
 
 import zeit.cms.interfaces
 import zeit.cms.workflow
@@ -302,6 +305,10 @@ class CenterpagePage(object):
     context=zeit.content.cp.interfaces.ISitemap,
     renderer='templates/sitemap.html')
 class Sitemap(Centerpage):
+
+    # Seems like google does not accept dates < 1970 but this can be the case
+    min_date = babel.dates.get_timezone('Europe/Berlin').localize(
+        datetime.datetime(1970, 1, 1))
 
     def __init__(self, context, request):
         super(Sitemap, self).__init__(context, request)
