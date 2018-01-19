@@ -268,15 +268,15 @@ def test_gsitemap_themen_page(testbrowser):
     assert len(browser.document.xpath('//url')) == 10
     assert (
         browser.document.xpath('//url/loc')[1].text ==
-        'http://localhost/thema/abschreibung')
+        'http://localhost/thema/addis-abeba')
 
 
 def test_gsitemap_themen_last_page(testbrowser):
-    browser = testbrowser('/gsitemaps/themenindex.xml?p=1376')
-    assert len(browser.document.xpath('//url')) == 4
+    browser = testbrowser('/gsitemaps/themenindex.xml?p=495')
+    assert len(browser.document.xpath('//url')) == 7
     assert (
-        browser.document.xpath('//url/loc')[3].text ==
-        'http://localhost/thema/2.-fussball-bundesliga')
+        browser.document.xpath('//url/loc')[-1].text ==
+        'http://localhost/thema/sanliurfa')
 
 
 def test_gsitemap_appcon(monkeypatch, testbrowser):
