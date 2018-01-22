@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3994: Fall back to vivi-stored keywords on TMS failure
 
+- FIX: Don't use dates earlier than 1970 in index sitemap
+
 
 3.118 (2018-01-18)
 ------------------
