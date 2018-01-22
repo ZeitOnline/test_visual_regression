@@ -54,8 +54,6 @@
     <include package="zeit.push" />
     <exclude package="zeit.cms.testcontenttype.browser" />
     <include package="zeit.cms.testcontenttype" />
-
-    <meta:provides feature="zeit.retresco.tms" />
     <include package="zeit.retresco" />
 
     <!-- We only want the solr connection, but not IUpdater etc, since that
