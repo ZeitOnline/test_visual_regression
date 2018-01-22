@@ -1,7 +1,9 @@
 <url>
     <loc>{{ teaser.uniqueId | create_url }}</loc>
     {% require publication_date = teaser | mod_date %}
-        <lastmod>{{ publication_date  | format_date('iso8601') }}</lastmod>
+        {%- if publication_date >= view.min_date -%}
+            <lastmod>{{ publication_date  | format_date('iso8601') }}</lastmod>
+        {%- endif -%}
     {% endrequire %}
     {% require image = get_image(module, variant_id='wide', fallback=False) %}
         {%- set source = request.image_host + image.path + '__1300x731' -%}
