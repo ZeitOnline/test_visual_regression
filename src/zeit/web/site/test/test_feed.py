@@ -95,7 +95,7 @@ def test_newsfeed_should_render_an_authorfeed(testserver):
 
     xml = lxml.etree.fromstring(res.content)
     assert xml.xpath('//item/title/text()')[0].startswith(
-        'Gentrifizierung: Mei, is des traurig!')
+        'Mei, is des traurig!')
 
 
 def test_socialflow_feed_contains_social_fields(testserver):

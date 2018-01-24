@@ -66,9 +66,15 @@ class Converter(object):
         #     in Solr, so we lie about them.
         for name in ['gallery', 'genre', 'template', 'video', 'video_2']:
             doc.setdefault(name, None)
-        doc.setdefault('lead_candidate', False)
-        doc.setdefault('commentSectionEnable', True)
         doc.setdefault('access', 'free')
+        doc.setdefault('commentsAllowed', True)
+        doc.setdefault('commentSectionEnable', True)
+        doc.setdefault('date_last_published_semantic', None)
+        doc.setdefault('lead_candidate', False)
+        doc.setdefault('sub_ressort', None)
+        doc.setdefault('supertitle', None)
+        doc.setdefault('tldr_title', None)
+        doc.setdefault('tldr_date', None)
         # Imported news articles don't have a teaser section
         for teaser, fallback in cls.TEASER_FIELDS.items():
             if not doc.get(teaser):
