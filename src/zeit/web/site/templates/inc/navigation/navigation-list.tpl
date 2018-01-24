@@ -46,12 +46,6 @@
             <span itemprop="name">#D17</span>
         </a>
     </li>
-    {% else %}
-    <li class="{{ class }}-item--featured">
-        <a itemprop="url" href="{{ request.route_url('home') }}zeit-magazin/index">
-            <span itemprop="name">ZEITmagazin</span>
-        </a>
-    </li>
     {% endif %}
 {% endif %}
 </ul>
