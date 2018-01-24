@@ -10,7 +10,7 @@ POSTDEPLOY
 3.119 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- SSL-56: Set Surrogate-Key header for purging is fastly
 
 
 3.118 (2018-01-18)
