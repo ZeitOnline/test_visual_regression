@@ -8,6 +8,9 @@ import mock
 
 import pyramid_dogpile_cache2
 import pyramid.testing
+import pytest
+import requests
+import requests.exceptions
 import zope.interface.declarations
 
 import zeit.cms.interfaces
@@ -323,6 +326,51 @@ def test_block_liveblog_instance_causing_timeouts(
     assert liveblog.last_modified is None
 
 
+def test_liveblog_auth(application, mockserver):
+    model_block = mock.Mock()
+    model_block.blog_id = '59fc6d316aa4f500e80f119b'
+    model_block.version = '3'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    token = liveblog.api_auth_token()
+    assert token == u'3b4b508e-66e4-4977-910c-c8bd5b985d09'
+
+
+def test_liveblog_auth_fail(application, mockserver, monkeypatch):
+    def post(url, data, headers):
+        response = requests.Response()
+        response.status_code = 401
+        return response
+
+    monkeypatch.setattr(requests, 'post', post)
+    monkeypatch.setattr(
+        zeit.web.core.block.Liveblog, 'set_blog_info', lambda x: [])
+
+    model_block = mock.Mock()
+    model_block.blog_id = '59fc6d316aa4f500e80f119b'
+    model_block.version = '3'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    with pytest.raises(requests.exceptions.HTTPError):
+        liveblog.api_auth_token()
+
+
+def test_liveblog_get_info(application):
+    model_block = mock.Mock()
+    model_block.blog_id = '59fc6d316aa4f500e80f119b'
+    model_block.version = '3'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    assert liveblog.last_modified == u'2017-12-22T13:17:23+00:00'
+    assert liveblog.is_live is True
+
+
+def test_liveblog_get_amp_id(application):
+    model_block = mock.Mock()
+    model_block.blog_id = '59fc6d316aa4f500e80f119b'
+    model_block.version = '3'
+    liveblog = zeit.web.core.block.Liveblog(model_block)
+    amp_id = liveblog.get_amp_themed_id(liveblog.blog_id)
+    assert amp_id == u'59fc6d566aa4f500e7c68bd7'
+
+
 def test_block_breaking_news_has_correct_date(application):
     content = zeit.cms.interfaces.ICMSContent(
         'http://xml.zeit.de/zeit-online/article/01')
@@ -408,6 +456,14 @@ def test_block_liveblog_should_contain_expected_structure(tplbrowser):
     browser = tplbrowser(
         'zeit.web.core:templates/inc/blocks/liveblog.html', block=block)
     assert browser.cssselect('div.liveblog')
+
+
+def test_block_liveblog_version3_should_contain_expected_structure(tplbrowser):
+    block = mock.Mock()
+    block.version = '3'
+    browser = tplbrowser(
+        'zeit.web.core:templates/inc/blocks/liveblog.html', block=block)
+    assert 'liveblog/v3' in browser.contents
 
 
 def test_block_orderedlist_should_contain_expected_structure(tplbrowser):
