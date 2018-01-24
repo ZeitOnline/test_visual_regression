@@ -1024,3 +1024,10 @@ def test_more_navi_is_present_in_every_vertical_and_has_campaign_param(
         link_url = link.attrib['href']
         if '?wt_zmc=' in link_url:
             assert '.{}.'.format(current_vertical_short) in link_url
+
+
+def test_response_has_surrogate_key_header(testserver):
+    response = requests.get(
+        '%s/zeit-online/article/simple' % testserver.url)
+    assert response.headers.get('surrogate-key') == (
+        'http://xml.zeit.de/zeit-online/article/simple')

@@ -127,6 +127,9 @@ class Base(object):
         try:
             self.request.response.headers.add(
                 'X-Version', self.request.registry.settings.version)
+            self.request.response.headers.add(
+                'Surrogate-Key',
+                self.context.uniqueId.encode("iso-8859-1", "replace"))
         except AttributeError:
             pass
 
