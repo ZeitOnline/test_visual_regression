@@ -7,7 +7,7 @@ POSTDEPLOY
 - Nothing
 
 
-3.119 (unreleased)
+3.119 (2018-01-24)
 ------------------
 
 - SSL-56: Set Surrogate-Key header for purging is fastly
