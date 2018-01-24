@@ -1,6 +1,7 @@
 # coding: utf-8
 import datetime
 import mock
+import pytz
 import lxml.etree
 import zope.component
 
@@ -106,7 +107,7 @@ def test_gsitemap_page_does_not_contain_invalid_lastmod_date(
         'uniqueId': 'http://xml.zeit.de/campus/article/01-countdown-studium'}])
     monkeypatch.setattr(
         zeit.content.article.article.ArticleWorkflow, 'date_first_released',
-        datetime.datetime(1967, 1, 1))
+        datetime.datetime(1967, 1, 1, 12, 50, 52, 380804, tzinfo=pytz.UTC))
     browser = testbrowser('/gsitemaps/index.xml?p=1')
     assert (browser.document.xpath('//url/loc')[0].text ==
             'http://localhost/campus/article/01-countdown-studium')
@@ -227,7 +228,8 @@ def test_gsitemap_video_creates_no_publucation_date_field_if_no_date_is_set(
         'uniqueId': 'http://xml.zeit.de/video/2014-01/1953013471001'
     }])
     monkeypatch.setattr(
-       zeit.workflow.asset.AssetWorkflow, 'date_last_published_semantic', None)
+        zeit.workflow.asset.AssetWorkflow,
+        'date_last_published_semantic', None)
     monkeypatch.setattr(
         zeit.workflow.asset.AssetWorkflow, 'date_first_released', None)
     browser = testbrowser('/gsitemaps/video.xml?p=1')
