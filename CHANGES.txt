@@ -10,6 +10,8 @@ POSTDEPLOY
 3.119 (unreleased)
 ------------------
 
+- SSL-56: Set Surrogate-Key header for purging is fastly
+
 - ZON-4432: Remove ZMO navigation in D17 toggle
 
 - ZON-3994: Fall back to vivi-stored keywords on TMS failure
