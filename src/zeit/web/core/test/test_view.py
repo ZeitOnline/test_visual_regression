@@ -7,8 +7,9 @@ import urllib2
 import pyramid.request
 import zope.component
 
+import zeit.cms.tagging.testing
+
 import zeit.web.core.application
-import zeit.web.core.date
 import zeit.web.core.interfaces
 import zeit.web.magazin.view
 import zeit.web.magazin.view_article
@@ -965,6 +966,26 @@ def test_retrieve_keywords_from_tms(application, monkeypatch):
             tms.assert_called_with(
                 '{urn:uuid:9e7bf051-2299-43e4-b5e6-1fa81d097dbd}',
                 timeout=0.42)
+
+
+def test_fall_back_on_vivi_keywords_on_tms_failure(application, monkeypatch):
+    monkeypatch.setattr(zeit.web.core.application.FEATURE_TOGGLES, 'find', {
+        'keywords_from_tms': True}.get)
+
+    article = zeit.cms.interfaces.ICMSContent(
+        'http://xml.zeit.de/zeit-online/article/01')
+    view = zeit.web.core.view.Content(article, None)
+    with mock.patch(
+            'zeit.retresco.connection.TMS.get_article_keywords') as tms:
+        with mock.patch('zeit.content.article.article.Article.keywords',
+                        mock.PropertyMock()) as kw:
+            tms.side_effect = RuntimeError('provoked')
+            kw.return_value = [
+                zeit.cms.tagging.testing.FakeTag('berlin', 'Berlin')]
+            assert len(view.keywords) == 1
+            tag = view.keywords[0]
+            assert tag.label == 'Berlin'
+            assert tag.link is None
 
 
 def test_icode_cookie_is_set_when_get_parameter_is_detected(
