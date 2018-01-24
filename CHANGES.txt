@@ -12,6 +12,8 @@ POSTDEPLOY
 
 - ZON-3994: Fall back to vivi-stored keywords on TMS failure
 
+- ZON-4431: Do not let min-width grow with fontsize via rem
+
 - FEM-71: Stop comment-count when overlay is visible
 
 - FIX: Don't use dates earlier than 1970 in index sitemap
