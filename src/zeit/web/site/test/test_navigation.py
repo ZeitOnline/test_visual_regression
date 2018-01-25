@@ -510,40 +510,6 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
         '[on desktop] chosen nav item should be visible')
 
 
-def test_d17_link_exists_and_is_clickable(selenium_driver, testserver):
-
-    driver = selenium_driver
-    driver.set_window_size(1024, 768)
-    driver.get('%s/zeit-online/zeitonline' % testserver.url)
-
-    d17_button = driver.find_element_by_class_name(
-        'nav__ressorts-item--featured-d17')
-    d17_link = d17_button.find_element_by_tag_name('a')
-
-    assert d17_link.get_attribute('href') == '{}/thema/d17'.format(
-        testserver.url
-    ), 'd17 link is not set correctly'
-
-    d17_link.click()
-
-    assert driver.current_url == '{}/thema/d17'.format(
-        testserver.url), 'd17 hp wasnt called correctly'
-
-
-def test_d17_link_is_on_the_right(selenium_driver, testserver):
-
-    driver = selenium_driver
-    driver.set_window_size(1024, 768)
-    driver.get('%s/zeit-online/zeitonline' % testserver.url)
-    navigation = driver.find_element_by_class_name('nav__ressorts')
-    d17tag = driver.find_element_by_class_name(
-        'nav__ressorts-item--featured-d17')
-
-    assert abs(
-        int(navigation.location.get("x") + navigation.size.get("width")) -
-        int(d17tag.location.get("x") + d17tag.size.get("width"))) <= 1
-
-
 def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):
     def now(**kwargs):
         return datetime.datetime.now() - datetime.timedelta(**kwargs)
