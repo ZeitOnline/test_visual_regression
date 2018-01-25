@@ -121,21 +121,18 @@ def test_nav_contains_essential_elements(tplbrowser, dummy_request):
         'Search input must be present')
 
 
-def test_nav_should_contain_schema_org_markup(tplbrowser, dummy_request):
-    view = mock.MagicMock()
-    browser = tplbrowser(
-        'zeit.web.site:templates/inc/navigation/navigation.tpl',
-        view=view, request=dummy_request)
-    html = browser.cssselect
-
-    site_nav_element = html(
+def test_nav_should_contain_schema_org_markup(testbrowser):
+    browser = testbrowser('/zeit-online/zeitonline')
+    select = browser.cssselect
+    site_nav_element = select(
         '.nav__ressorts[itemtype="http://schema.org/SiteNavigationElement"]')
     assert len(site_nav_element) == 1
 
-    item_prop_url = html('.nav__ressorts a[itemprop="url"]')
-    item_prop_name = html('.nav__ressorts span[itemprop="name"]')
+    item_prop_url = select('.nav__ressorts a[itemprop="url"]')
+    item_prop_name = select('.nav__ressorts span[itemprop="name"]')
 
-    assert len(item_prop_url) > 0
+    # we expect to have plenty of links in the main navigation
+    assert len(item_prop_url) > 5
     assert len(item_prop_url) == len(item_prop_name)
 
 
