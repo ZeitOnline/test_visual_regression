@@ -2996,3 +2996,13 @@ def test_responsive_image_teaser_only_in_first_region(testbrowser):
     assert len(sel('.teaser-classic__media')) == 3
     assert len(sel('picture.teaser-classic__media-container')) == 1
     assert len(sel('div.teaser-classic__media-container')) == 2
+
+
+def test_topicpage_has_jsonld(testbrowser, datasolr):
+    sel = testbrowser('/thema/jurastudium').cssselect
+    assert len(sel('script[type="application/ld+json"]')) > 0
+
+
+def test_centerpage_has_no_jsonld(testbrowser, datasolr):
+    browser = testbrowser('/zeit-online/index')
+    assert 'ld+json' not in browser.contents
