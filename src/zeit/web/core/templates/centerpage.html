@@ -7,4 +7,10 @@
                      "{}:templates/inc/region/default.html".format(view.package),
                      "zeit.web.core:templates/inc/region/default.html"] -%}
     {% endfor %}
+
+    {# listing of articles belonging to a series/topic for google carousel #}
+    {% require jsonld_listing = view.jsonld_listing %}
+        <script type="application/ld+json">{{ jsonld_listing | tojson | safe }}</script>
+    {% endrequire %}
+
 {% endblock main %}
