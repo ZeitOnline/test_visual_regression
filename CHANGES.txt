@@ -10,6 +10,8 @@ POSTDEPLOY
 3.120 (unreleased)
 ------------------
 
+- TMS-28: Enable TMS for tagging+topicpages
+
 - FEM-73: Remove code related to D17 navigation badge
 
 
@@ -19,6 +21,7 @@ POSTDEPLOY
 - SSL-56: Set Surrogate-Key header for purging is fastly
 
 - ZON-4432: Remove ZMO navigation in D17 toggle
+
 
 - ZON-3994: Fall back to vivi-stored keywords on TMS failure
 

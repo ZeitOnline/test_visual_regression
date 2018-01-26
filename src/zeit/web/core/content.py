@@ -13,6 +13,7 @@ import zeit.cms.content.interfaces
 import zeit.cms.content.sources
 import zeit.cms.interfaces
 import zeit.content.video.video
+import zeit.retresco.tag
 
 from zeit.web.core.jinja import get_current_request_path
 
@@ -213,11 +214,8 @@ class LazyProxy(object):
     @property
     def keywords(self):
         tags = []
-        keywords = zip(self.__proxy__.get('keyword', ()),
-                       self.__proxy__.get('keyword_id', ()))
-        for label, url_value in keywords:
-            tags.append(zeit.intrafind.tag.Tag(
-                label, label, url_value=url_value))
+        for label in self.__proxy__.get('keyword', ()):
+            tags.append(zeit.retresco.tag.Tag(label, 'keyword'))
         return tags
 
     # Proxy zeit.content.image.interfaces.IImages. Since we bypass ZCA
