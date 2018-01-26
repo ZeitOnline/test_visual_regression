@@ -457,8 +457,6 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
         '.nav__ressorts-list > li > a')[9]
     cloned_nav_item = more_dropdown.find_elements_by_css_selector(
         '.nav__dropdown-list > li > a')[9]
-    featured_nav_item = ressorts.find_element_by_class_name(
-        'nav__ressorts-item--featured-d17')
     menu_link = driver.find_element_by_class_name('header__menu-link')
 
     assert chosen_nav_item.get_attribute('textContent') == 'Sport'
@@ -478,12 +476,6 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 
     # tablet
     driver.set_window_size(768, 1024)
-    # wait for script
-    try:
-        WebDriverWait(driver, 1).until(
-            expected_conditions.visibility_of(featured_nav_item))
-    except TimeoutException:
-        assert False, 'Featured item must be visible'
 
     assert not chosen_nav_item.is_displayed(), (
         '[on tablet] chosen nav item should be hidden')
