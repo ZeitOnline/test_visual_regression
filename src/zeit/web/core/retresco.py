@@ -6,6 +6,9 @@ import grokcore.component
 import lxml.etree
 import mock
 import pkg_resources
+import pyramid.threadlocal
+import requests
+import requests.utils
 import zope.interface
 
 import zeit.retresco.connection
@@ -13,10 +16,60 @@ import zeit.retresco.convert
 import zeit.retresco.interfaces
 import zeit.retresco.search
 
+import zeit.web.core.cache
+import zeit.web.core.metrics
 import zeit.web.core.solr
 
 
+SHORT_TERM_CACHE = zeit.web.core.cache.get_region('short_term')
 log = logging.getLogger(__name__)
+
+
+@SHORT_TERM_CACHE.cache_on_arguments()
+def is_healthy(self):
+    """Cached health check, so we avoid additional requests that not only
+    unecessarily take time just to return erroneous, but also add to the load
+    of an already down server."""
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    timeout = float(conf.get('tms_timeout', 0.5))
+    response = None
+    try:
+        with zeit.web.core.metrics.timer(
+                'zeit.retresco.connection.health_check.tms.reponse_time'):
+            response = requests.get(
+                self.url + '/_system/check', timeout=timeout)
+        response.raise_for_status()
+        return True
+    except Exception:
+        log.warning('Health check failed', exc_info=True)
+        return False
+    finally:
+        status = response.status_code if response else 599
+        zeit.web.core.metrics.increment(
+            'zeit.retresco.connection.health_check.tms.status.%s' % status)
+
+
+zeit.retresco.connection.TMS.is_healthy = is_healthy
+
+
+def tms_request(self, *args, **kw):
+    """Adds health check, metrics and referrer."""
+    if not self.is_healthy():
+        raise zeit.retresco.interfaces.TechnicalError('Health check failed')
+    headers = kw.setdefault('headers', {})
+    request = pyramid.threadlocal.get_current_request()
+    headers['Referer'] = request.url
+    headers['User-Agent'] = requests.utils.default_user_agent(
+        'zeit.web-%s/retresco/python-requests' % request.registry.settings.get(
+            'version', 'unknown'))
+    with zeit.web.core.metrics.timer(
+            'zeit.retresco.connection.tms.reponse_time'):
+        return original_request(self, *args, **kw)
+
+
+original_request = zeit.retresco.connection.TMS._request
+zeit.retresco.connection.TMS._request = tms_request
+
 
 # Test helpers ##############################
 
