@@ -10,7 +10,7 @@ POSTDEPLOY
 3.120 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- FEM-73: Remove code related to D17 navigation badge
 
 
 3.119 (2018-01-24)
