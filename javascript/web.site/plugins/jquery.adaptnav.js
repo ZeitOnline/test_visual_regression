@@ -35,14 +35,12 @@
             this.maxWidth = 0;
             this.node = element;
             this.element = $( element );
-            this.featured = this.element.find( '.nav__ressorts-item--featured, .nav__ressorts-item--featured-d17' );
             this.labeled = this.element.find( '.nav__ressorts-item--has-label' );
             this.secondary = this.element.find( '.nav__dropdown-item--has-label' );
             this.moreList = $( '#more-ressorts' );
             this.items = this.element.children()
                 .not( '.nav__ressorts-item--has-dropdown' )
-                .not( this.labeled )
-                .not( this.featured );
+                .not( this.labeled );
             this.clonedItems = this.items.clone();
             this.clonedLabels = this.labeled.clone()
                 .addClass( 'nav__dropdown-item--has-label' )

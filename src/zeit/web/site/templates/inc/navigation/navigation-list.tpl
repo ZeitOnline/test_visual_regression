@@ -40,12 +40,5 @@
         <ul class="nav__dropdown-list" id="more-ressorts" aria-hidden="true" data-ct-column>
         </ul>
     </li>
-    {% if toggles('d17_navigation') -%}
-    <li class="{{ class }}-item--featured-d17">
-        <a itemprop="url" href="{{ request.route_url('home') }}thema/d17">
-            <span itemprop="name">#D17</span>
-        </a>
-    </li>
-    {% endif %}
 {% endif %}
 </ul>
