@@ -14,6 +14,8 @@ POSTDEPLOY
 
 - FEM-73: Remove code related to D17 navigation badge
 
+- ZON-4296: Implement liveblog version 3
+
 
 3.119 (2018-01-24)
 ------------------
