@@ -326,16 +326,20 @@ def test_block_liveblog_instance_causing_timeouts(
     assert liveblog.last_modified is None
 
 
-def test_liveblog_auth(application, mockserver):
+@pytest.fixture
+def liveblog():
     model_block = mock.Mock()
     model_block.blog_id = '59fc6d316aa4f500e80f119b'
     model_block.version = '3'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+    return zeit.web.core.block.Liveblog(model_block)
+
+
+def test_liveblog_auth(application, liveblog):
     token = liveblog.api_auth_token()
     assert token == u'3b4b508e-66e4-4977-910c-c8bd5b985d09'
 
 
-def test_liveblog_auth_fail(application, mockserver, monkeypatch):
+def test_liveblog_auth_fail(application, liveblog, monkeypatch):
     def post(url, data, headers):
         response = requests.Response()
         response.status_code = 401
@@ -345,28 +349,16 @@ def test_liveblog_auth_fail(application, mockserver, monkeypatch):
     monkeypatch.setattr(
         zeit.web.core.block.Liveblog, 'set_blog_info', lambda x: [])
 
-    model_block = mock.Mock()
-    model_block.blog_id = '59fc6d316aa4f500e80f119b'
-    model_block.version = '3'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
     with pytest.raises(requests.exceptions.HTTPError):
         liveblog.api_auth_token()
 
 
-def test_liveblog_get_info(application):
-    model_block = mock.Mock()
-    model_block.blog_id = '59fc6d316aa4f500e80f119b'
-    model_block.version = '3'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+def test_liveblog_get_info(application, liveblog):
     assert liveblog.last_modified == u'2017-12-22T13:17:23+00:00'
     assert liveblog.is_live is True
 
 
-def test_liveblog_get_amp_id(application):
-    model_block = mock.Mock()
-    model_block.blog_id = '59fc6d316aa4f500e80f119b'
-    model_block.version = '3'
-    liveblog = zeit.web.core.block.Liveblog(model_block)
+def test_liveblog_get_amp_id(application, liveblog):
     amp_id = liveblog.get_amp_themed_id(liveblog.blog_id)
     assert amp_id == u'59fc6d566aa4f500e7c68bd7'
 
