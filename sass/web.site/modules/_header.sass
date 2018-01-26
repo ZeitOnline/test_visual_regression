@@ -18,6 +18,8 @@
 		color: $color-zon-logo
 		height: remify(26px)
 		width: remify(231px)
+		// in case of extremely high font size on small devices
+		max-width: calc(100vw - 1.7rem) // -1.7rem because of padding
 		vertical-align: middle
 
 	&__teaser

@@ -47,15 +47,6 @@
 				background-color: $zon-grey
 				color: #fff
 
-	&__ressorts-item--featured-d17
-		a
-			background-color: #ffbb00
-			color: #fff
-			@extend %ressort-feature-background
-			+on-interaction
-				background-color: #ffc933
-				color: #fff
-
 	// hide advertorial links in 1st level navigation, enable for mobile view only
 	&__ressorts-item--has-label,
 	// hide more ressorts link, enable for script enabled desktop view only
@@ -293,9 +284,6 @@
 			display: list-item
 		.js &__ressorts-item--featured
 			margin-left: auto // align right @see https://www.w3.org/TR/2012/CR-css3-flexbox-20120918/#auto-margins
-		.js &__ressorts-item--featured-d17
-			padding: 0
-			margin-left: auto
 
 		&__dropdown-item--has-label
 			background-color: #FAFAF3
@@ -308,8 +296,7 @@
 		&__ressorts-link--current
 			font-weight: bold
 
-		&__ressorts-item--featured,
-		&__ressorts-item--featured-d17
+		&__ressorts-item--featured
 			a
 				+on-interaction
 					box-shadow: none
