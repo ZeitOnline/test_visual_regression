@@ -10,6 +10,8 @@ POSTDEPLOY
 3.119 (unreleased)
 ------------------
 
+- TMS-28: Enable TMS for tagging+topicpages
+
 - ZON-3994: Fall back to vivi-stored keywords on TMS failure
 
 - FIX: Don't use dates earlier than 1970 in index sitemap

@@ -1,7 +1,6 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
-  xmlns:grok="http://namespaces.zope.org/grok"
-  xmlns:meta="http://namespaces.zope.org/meta">
+  xmlns:grok="http://namespaces.zope.org/grok">
 
     <!-- include only those parts of zeit.cms:application.zcml that the vivi
          *model* code needs, thus saving us lots of zope.* includes -->
