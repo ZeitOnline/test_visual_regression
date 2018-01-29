@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-4296: Implement liveblog version 3
 
+- MAINT: Make selenium test stable
+
 
 3.119 (2018-01-24)
 ------------------
