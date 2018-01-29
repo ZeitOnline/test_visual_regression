@@ -453,8 +453,9 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     ressorts = driver.find_element_by_class_name('nav__ressorts')
     more_dropdown = ressorts.find_element_by_css_selector(
         '.nav__ressorts-item--more')
+    nav_ressort_links = '.nav__ressorts-list > li > a'
     chosen_nav_item = ressorts.find_elements_by_css_selector(
-        '.nav__ressorts-list > li > a')[9]
+        nav_ressort_links)[9]
     cloned_nav_item = more_dropdown.find_elements_by_css_selector(
         '.nav__dropdown-list > li > a')[9]
     menu_link = driver.find_element_by_class_name('header__menu-link')
@@ -476,9 +477,16 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 
     # tablet
     driver.set_window_size(768, 1024)
-
-    assert not chosen_nav_item.is_displayed(), (
-        '[on tablet] chosen nav item should be hidden')
+    # same element like "chosen_nav_item" above
+    # By.CSS_SELECTOR requires using a specific selector
+    # instead of picking a WebElement from an iterable
+    try:
+        WebDriverWait(driver, 1).until(
+            expected_conditions.invisibility_of_element_located(
+                (By.CSS_SELECTOR,
+                 nav_ressort_links + r'[href$="\/sport\/index"]')))
+    except TimeoutException:
+        assert False, '[on tablet] chosen nav item should be hidden'
     assert more_dropdown.is_displayed(), (
         '[on tablet] more dropdown should be visible')
     actions.move_to_element(more_dropdown).perform()
