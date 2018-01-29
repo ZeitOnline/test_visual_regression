@@ -11,6 +11,7 @@ import pyramid.testing
 import pytest
 import requests
 import requests.exceptions
+import requests_mock
 import zope.interface.declarations
 
 import zeit.cms.interfaces
@@ -351,6 +352,25 @@ def test_liveblog_auth_fail(application, liveblog, monkeypatch):
 
     with pytest.raises(requests.exceptions.HTTPError):
         liveblog.api_auth_token()
+
+
+def test_liveblog_api_request_renews_expired_cache_token(
+    application, liveblog, monkeypatch):
+    new_cache = zeit.web.core.cache.get_region('long_term')
+    new_cache.set('liveblog_api_auth_token', '12345')
+    monkeypatch.setattr(zeit.web.core.block, 'LONG_TERM_CACHE', new_cache)
+
+    conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
+    api_url = conf.get('liveblog_api_url_v3')
+    api_url = '{}/{}'.format(api_url, liveblog.blog_id)
+    auth_url = conf.get('liveblog_api_auth_url_v3')
+
+    with requests_mock.Mocker() as m:
+        m.get(api_url, status_code=401)
+        m.post(auth_url, json={"token": "78901"}, status_code=200)
+        with pytest.raises(requests.exceptions.HTTPError):
+            liveblog.api_blog_request()
+        assert '78901' == new_cache.get('liveblog_api_auth_token')
 
 
 def test_liveblog_get_info(application, liveblog):

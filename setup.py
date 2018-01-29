@@ -104,6 +104,7 @@ setup(
             'pytest',
             'pytest-pep8',
             'pytest-timeout',
+            'requests-mock',
             'selenium',
             'transaction',
             'waitress',
