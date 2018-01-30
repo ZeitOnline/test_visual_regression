@@ -39,11 +39,11 @@
         <div class="gate__actions">
             <input type="hidden" name="entry_service" value="schranke-paid">
             <input type="hidden" name="url" value="{{ '%s?url=%s' | format(settings('paywall_premium_redirect'), '%s#success-registration' | format(view.content_url) | urlquote_plus) }}">
-            <input type="hidden" name="wt_zmc" value="fix.int.zonaudev.diezeit.wall_abo.premium.bar_{{ view.paywall }}.link.x">
+            <input type="hidden" name="wt_zmc" value="fix.int.zonaudev.diezeit.wall_abo.premium.bar_{{ view.paywall }}.link.{{ view.product_id | lower }}">
             <input type="hidden" name="utm_medium" value="fix">
             <input type="hidden" name="utm_source" value="diezeit_zonaudev_int">
             <input type="hidden" name="utm_campaign" value="wall_abo">
-            <input type="hidden" name="utm_content" value="premium_bar_{{ view.paywall }}_link_x">
+            <input type="hidden" name="utm_content" value="premium_bar_{{ view.paywall }}_link_{{ view.product_id | lower }}">
             <input class="gate__button" type="submit" value="zur Bestellung" data-ct-label="button">
         </div>
     </form>
