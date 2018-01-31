@@ -32,6 +32,7 @@ import zeit.web.core.cache
 import zeit.web.core.interfaces
 import zeit.web.core.jinja
 import zeit.web.core.repository  # activate monkeypatches
+import zeit.web.core.retresco  # activate monkeypatches
 import zeit.web.core.routing
 import zeit.web.core.security
 import zeit.web.core.solr  # activate monkeypatches
