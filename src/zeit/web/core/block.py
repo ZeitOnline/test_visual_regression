@@ -287,11 +287,8 @@ class Liveblog(Module):
 
     def set_blog_info(self):
         json = self.api_blog_request()
-
-        if json.get('blog_status') == u'open':
-            self.is_live = True
-        if json.get('_updated'):
-            self.last_modified = json.get('_updated')
+        self.is_live = json.get('blog_status') == u'open'
+        self.last_modified = json.get('_updated')
 
     def api_auth_token(self):
         conf = zope.component.getUtility(zeit.web.core.interfaces.ISettings)
