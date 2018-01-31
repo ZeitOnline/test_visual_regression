@@ -919,3 +919,21 @@ def test_buzz_box_provides_expected_webtrekk_string(
         header.click()
         tracking_data = driver.execute_script("return window.trackingData")
         assert tracking_data == pattern.format(key)
+
+
+def test_check_product_id_campaign_paywall_webtrekk(
+        selenium_driver, testserver):
+    driver = selenium_driver
+    driver.get(
+        '%s/zeit-online/article/01?C1-Meter-Status=paywall' % testserver.url)
+
+    wt_zmc = driver.find_element_by_name('wt_zmc').get_attribute(
+        'value')
+    wt_val = 'fix.int.zonaudev.diezeit.wall_abo.premium.bar_metered.link.zede'
+
+    utm_content = driver.find_element_by_name('utm_content').get_attribute(
+        'value')
+    utm_val = 'premium_bar_metered_link_zede'
+
+    assert wt_zmc == wt_val
+    assert utm_content == utm_val
