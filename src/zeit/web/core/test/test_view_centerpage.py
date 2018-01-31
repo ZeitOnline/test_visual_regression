@@ -3,7 +3,6 @@ import pytest
 import requests
 import zope.component
 
-from zeit.cms.checkout.helper import checked_out
 import zeit.content.cp.centerpage
 import zeit.cms.interfaces
 
@@ -80,8 +79,6 @@ def test_centerpage_should_collect_teaser_counts_from_community(
 def test_centerpage_should_not_request_teaser_counts_for_disabled_content(
         application, dummy_request, workingcopy):
     article = 'http://xml.zeit.de/zeit-online/article/simple'
-    with checked_out(zeit.cms.interfaces.ICMSContent(article)) as co:
-        co.commentsAllowed = False
 
     cp = zeit.content.cp.centerpage.CenterPage()
     cp.uniqueId = 'http://xml.zeit.de/testcp'
@@ -92,7 +89,11 @@ def test_centerpage_should_not_request_teaser_counts_for_disabled_content(
     area.automatic = True
 
     solr = zope.component.getUtility(zeit.solr.interfaces.ISolr)
-    solr.results = [{'uniqueId': article, 'type': 'article'}]
+    solr.results = [{
+        'uniqueId': article,
+        'type': 'article',
+        'commentsAllowed': False
+    }]
 
     view = zeit.web.core.view_centerpage.Centerpage(cp, dummy_request)
     with mock.patch(

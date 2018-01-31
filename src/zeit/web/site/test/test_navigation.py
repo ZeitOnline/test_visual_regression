@@ -121,21 +121,18 @@ def test_nav_contains_essential_elements(tplbrowser, dummy_request):
         'Search input must be present')
 
 
-def test_nav_should_contain_schema_org_markup(tplbrowser, dummy_request):
-    view = mock.MagicMock()
-    browser = tplbrowser(
-        'zeit.web.site:templates/inc/navigation/navigation.tpl',
-        view=view, request=dummy_request)
-    html = browser.cssselect
-
-    site_nav_element = html(
+def test_nav_should_contain_schema_org_markup(testbrowser):
+    browser = testbrowser('/zeit-online/zeitonline')
+    select = browser.cssselect
+    site_nav_element = select(
         '.nav__ressorts[itemtype="http://schema.org/SiteNavigationElement"]')
     assert len(site_nav_element) == 1
 
-    item_prop_url = html('.nav__ressorts a[itemprop="url"]')
-    item_prop_name = html('.nav__ressorts span[itemprop="name"]')
+    item_prop_url = select('.nav__ressorts a[itemprop="url"]')
+    item_prop_name = select('.nav__ressorts span[itemprop="name"]')
 
-    assert len(item_prop_url) > 0
+    # we expect to have plenty of links in the main navigation
+    assert len(item_prop_url) > 5
     assert len(item_prop_url) == len(item_prop_name)
 
 
@@ -456,12 +453,11 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
     ressorts = driver.find_element_by_class_name('nav__ressorts')
     more_dropdown = ressorts.find_element_by_css_selector(
         '.nav__ressorts-item--more')
+    nav_ressort_links = '.nav__ressorts-list > li > a'
     chosen_nav_item = ressorts.find_elements_by_css_selector(
-        '.nav__ressorts-list > li > a')[9]
+        nav_ressort_links)[9]
     cloned_nav_item = more_dropdown.find_elements_by_css_selector(
         '.nav__dropdown-list > li > a')[9]
-    featured_nav_item = ressorts.find_element_by_class_name(
-        'nav__ressorts-item--featured-d17')
     menu_link = driver.find_element_by_class_name('header__menu-link')
 
     assert chosen_nav_item.get_attribute('textContent') == 'Sport'
@@ -481,15 +477,16 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 
     # tablet
     driver.set_window_size(768, 1024)
-    # wait for script
+    # same element like "chosen_nav_item" above
+    # By.CSS_SELECTOR requires using a specific selector
+    # instead of picking a WebElement from an iterable
     try:
         WebDriverWait(driver, 1).until(
-            expected_conditions.visibility_of(featured_nav_item))
+            expected_conditions.invisibility_of_element_located(
+                (By.CSS_SELECTOR,
+                 nav_ressort_links + r'[href$="\/sport\/index"]')))
     except TimeoutException:
-        assert False, 'Featured item must be visible'
-
-    assert not chosen_nav_item.is_displayed(), (
-        '[on tablet] chosen nav item should be hidden')
+        assert False, '[on tablet] chosen nav item should be hidden'
     assert more_dropdown.is_displayed(), (
         '[on tablet] more dropdown should be visible')
     actions.move_to_element(more_dropdown).perform()
@@ -508,40 +505,6 @@ def test_primary_nav_should_resize_to_fit(selenium_driver, testserver):
 
     assert chosen_nav_item.is_displayed(), (
         '[on desktop] chosen nav item should be visible')
-
-
-def test_d17_link_exists_and_is_clickable(selenium_driver, testserver):
-
-    driver = selenium_driver
-    driver.set_window_size(1024, 768)
-    driver.get('%s/zeit-online/zeitonline' % testserver.url)
-
-    d17_button = driver.find_element_by_class_name(
-        'nav__ressorts-item--featured-d17')
-    d17_link = d17_button.find_element_by_tag_name('a')
-
-    assert d17_link.get_attribute('href') == '{}/thema/d17'.format(
-        testserver.url
-    ), 'd17 link is not set correctly'
-
-    d17_link.click()
-
-    assert driver.current_url == '{}/thema/d17'.format(
-        testserver.url), 'd17 hp wasnt called correctly'
-
-
-def test_d17_link_is_on_the_right(selenium_driver, testserver):
-
-    driver = selenium_driver
-    driver.set_window_size(1024, 768)
-    driver.get('%s/zeit-online/zeitonline' % testserver.url)
-    navigation = driver.find_element_by_class_name('nav__ressorts')
-    d17tag = driver.find_element_by_class_name(
-        'nav__ressorts-item--featured-d17')
-
-    assert abs(
-        int(navigation.location.get("x") + navigation.size.get("width")) -
-        int(d17tag.location.get("x") + d17tag.size.get("width"))) <= 1
 
 
 def test_nav_hp_contains_relative_date(tplbrowser, dummy_request):

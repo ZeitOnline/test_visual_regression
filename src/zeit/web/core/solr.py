@@ -1,3 +1,4 @@
+import collections
 import logging
 import os
 import os.path
@@ -7,6 +8,7 @@ import urllib
 import urlparse
 
 import grokcore.component
+import lxml.etree
 import mock
 import pyramid.threadlocal
 import pysolr
@@ -194,10 +196,27 @@ class DataTMS(zeit.retresco.connection.TMS, RandomContent):
     """Fake TMS implementation that is used for local development."""
 
     def __init__(self):
-        self._response = {}
+        self._response = collections.defaultdict(tuple)
 
     def _request(self, request, **kw):
         return self._response
+
+    def get_topicpages(self, start=0, rows=25):
+        xml = lxml.etree.parse(pkg_resources.resource_stream(
+            'zeit.web.core', 'data/config/topicpages.xml'))
+        topics = list(xml.getroot().iterchildren('topic'))
+        result = zeit.cms.interfaces.Result()
+        result.hits = len(topics)
+        try:
+            for topic in topics[start:start + rows]:
+                result.append({
+                    'id': topic.get('id'),
+                    'type': topic.get('type'),
+                    'title': topic.text,
+                })
+        except IndexError:
+            pass
+        return result
 
     def get_topicpage_documents(self, id, start=0, rows=25):
         log.debug(

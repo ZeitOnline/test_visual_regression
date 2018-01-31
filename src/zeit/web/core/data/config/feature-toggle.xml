@@ -9,7 +9,6 @@
   <article_lineage>true</article_lineage>
   <campus_jobs_flyout_menu>true</campus_jobs_flyout_menu>
   <campus_toolbox>true</campus_toolbox>
-  <d17_navigation>true</d17_navigation>
   <dummy>false</dummy>
   <enable_intext_links>false</enable_intext_links>
   <fbia_advertising>true</fbia_advertising>
@@ -33,6 +32,7 @@
   <share_blocks_via_screenshot>true</share_blocks_via_screenshot>
   <tag_logos>true</tag_logos>
   <third_party_modules>false</third_party_modules>
+  <topicpages_tms>true</topicpages_tms>
   <tracking>false</tracking>
   <track_gate_visibility>true</track_gate_visibility>
   <update_signals>true</update_signals>

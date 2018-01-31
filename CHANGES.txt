@@ -7,10 +7,35 @@ POSTDEPLOY
 - Nothing
 
 
-3.119 (unreleased)
+3.120 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- TMS-28: Enable TMS for tagging+topicpages
+
+- FEM-73: Remove code related to D17 navigation badge
+
+- ZON-4296: Implement liveblog version 3
+
+- MAINT: Make selenium test stable
+
+
+3.119 (2018-01-24)
+------------------
+
+- SSL-56: Set Surrogate-Key header for purging is fastly
+
+- ZON-4432: Remove ZMO navigation in D17 toggle
+
+
+- ZON-3994: Fall back to vivi-stored keywords on TMS failure
+
+- ZON-4431: Do not let min-width grow with fontsize via rem
+
+- FEM-71: Stop comment-count when overlay is visible
+
+- PERF: Set default values for fields that are optional in vivi and so may well be missing in solr
+
+- FIX: Don't use dates earlier than 1970 in index sitemap
 
 
 3.118 (2018-01-18)
