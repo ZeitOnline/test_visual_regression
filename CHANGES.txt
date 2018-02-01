@@ -18,6 +18,8 @@ POSTDEPLOY
 
 - MAINT: Make selenium test stable
 
+- FIX: Make registering different solr for sitemaps work in preview, too
+
 
 3.119 (2018-01-24)
 ------------------
