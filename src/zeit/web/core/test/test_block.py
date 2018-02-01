@@ -355,7 +355,7 @@ def test_liveblog_auth_fail(application, liveblog, monkeypatch):
 
 
 def test_liveblog_api_request_renews_expired_cache_token(
-    application, liveblog, monkeypatch):
+        application, liveblog, monkeypatch):
     new_cache = zeit.web.core.cache.get_region('long_term')
     new_cache.set('liveblog_api_auth_token', '12345')
     monkeypatch.setattr(zeit.web.core.block, 'LONG_TERM_CACHE', new_cache)
@@ -366,10 +366,12 @@ def test_liveblog_api_request_renews_expired_cache_token(
     auth_url = conf.get('liveblog_api_auth_url_v3')
 
     with requests_mock.Mocker() as m:
-        m.get(api_url, status_code=401)
+        # set up responses to have the first GET fail, the POST return a
+        # fresh token and the subsequent GET "validate" the token...
+        m.get(api_url, [dict(status_code=401), dict(json={}, status_code=200)])
         m.post(auth_url, json={"token": "78901"}, status_code=200)
-        with pytest.raises(requests.exceptions.HTTPError):
-            liveblog.api_blog_request()
+        liveblog.api_blog_request()
+        # the (new) token ends up in the cache...
         assert '78901' == new_cache.get('liveblog_api_auth_token')
 
 
