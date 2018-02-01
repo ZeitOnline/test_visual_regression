@@ -10,7 +10,7 @@ POSTDEPLOY
 3.121 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- ZON-4296: Refactor liveblog version 3 implementation.
 
 
 3.120 (2018-02-01)
