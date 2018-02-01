@@ -10,6 +10,8 @@ POSTDEPLOY
 3.120 (unreleased)
 ------------------
 
+- SSL-119: Use https for scripts.zeit.de
+
 - TMS-28: Enable TMS for tagging+topicpages
 
 - FEM-73: Remove code related to D17 navigation badge
