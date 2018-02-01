@@ -11,6 +11,8 @@ import pyramid.threadlocal
 import pysolr
 import requests.sessions
 import zope.component
+import zope.component.globalregistry
+import zope.interface.adapter
 import zope.site.site
 
 import zeit.cms.workflow.interfaces
@@ -76,13 +78,45 @@ class SitemapSolrConnection(zeit.solr.connection.SolrConnection):
         pass
 
 
+class AdapterRegistry(zope.component.globalregistry.GlobalAdapterRegistry):
+    """Accepts both Local and Global AdapterRegistry objects as bases, so it
+    works both for published and preview mode (since the latter makes use of
+    zodb-persisted local registries).
+
+    It's not entirely clear where the actual mismatch occurs between
+    zope.component/zope.interface/zope.site, and whether it would be
+    resolveable generically, but at least for our specific use case this
+    workaround turns out just fine.
+    """
+
+    def _setBases(self, bases):
+        old = self.__dict__.get('__bases__', ())
+        for r in old:
+            if r not in bases:
+                if hasattr(r, '_removeSubregistry'):
+                    r._removeSubregistry(self)
+        for r in bases:
+            if r not in old:
+                if hasattr(r, '_addSubregistry'):
+                    r._addSubregistry(self)
+        # Skip direct superclass, whose method we have copied&patched here.
+        super(zope.interface.adapter.AdapterRegistry, self)._setBases(bases)
+
+
+class SiteManager(zope.component.globalregistry.BaseGlobalComponents):
+
+    def _init_registries(self):
+        self.adapters = AdapterRegistry(self, 'adapters')
+        self.utilities = AdapterRegistry(self, 'utilities')
+
+
 def register_sitemap_solr_utility():
     """
     Register the ISitemapSolrConnection utility as ISolr utility.
     """
     # Dont use the gsm
     site = zope.site.site.SiteManagerContainer()
-    registry = zope.component.globalregistry.BaseGlobalComponents(
+    registry = SiteManager(
         name='sitemaps_manager',
         bases=(zope.component.getSiteManager(),))
     sitemap_solr = zope.component.getUtility(ISitemapSolrConnection)
