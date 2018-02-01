@@ -16,6 +16,8 @@ POSTDEPLOY
 
 - ZON-4296: Implement liveblog version 3
 
+- FIX: Be defensive about missing nextread meta files
+
 - MAINT: Make selenium test stable
 
 
